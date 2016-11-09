@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Gestión de Cruceros</title>
+    <title>RESERVA | Gestión de Cruceros</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -189,23 +189,44 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-        Blank page
-        <small>it all starts here</small>
+        Gestión de cruceros.
+        <small>Aquí se maneja la información relacionado a los cruceros.</small>
       </h1>
                 <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                    <li><a href="#">Examples</a></li>
-                    <li class="active">Blank page</li>
+                    <li><a href="../../index.html"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li class="active">Gestión de Cruceros</li>
                 </ol>
             </section>
             <!-- Main content -->
             <section class="content">
                 <!-- Default box -->
                 <div class="box">
-                    
-                    <div class="box-body"> AQUI VA SU CONTENIDO </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-xs-9">
+                                <div class="row" id="listaCruceros">
+                                    <div class="crucero">
+                                        <div class="crNombre"> <i class="fa fa-ship"></i> <b>Nombre del crucero</b></div>
+                                        <div class="crCompania"> <b>Compañia</b></div>
+                                        <div class="crCapacidad"><b>Capacidad</b></div>
+                                        <div class="crStatus"><b>Status</b></div>
+                                        <div class="crAcciones"><b>Acciones</b> </div>
+                                    </div>
+                                    <div class="crucero">
+                                        <div class="crNombre"> <i class="fa fa-ship"></i> Crucero del Caribe </div>
+                                        <div class="crCompania">Royal Caribbean</div>
+                                        <div class="crCapacidad">2000 <i class="fa fa-user"></i></div>
+                                        <div class="crStatus"><i class="fa fa-circle"></i></div>
+                                        <div class="crAcciones"> <i class="fa fa-pause"></i> <i class="fa fa-eye"></i> <i class="fa fa-trash"></i> </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <button type="button" class="btn btn-block btn-primary">Crear Crucero</button>
+                            </div>
+                        </div>
+                    </div>
                     <!-- /.box-body -->
-                    <div class="box-footer"> </div>
                     <!-- /.box-footer-->
                 </div>
                 <!-- /.box -->

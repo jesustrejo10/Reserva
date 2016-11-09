@@ -1,0 +1,38 @@
+ #listaCruceros {
+     background: red;
+     width: calc(100% - 15px);
+     min-height: 400px;
+     margin-left: 15px;
+     border-radius: 5px;
+     
+ }
+ 
+ .crNombre {
+     padding: 0 10px;
+     width: calc(100% - 402px);
+     display: inline-block;
+ }
+ 
+ .crCompania {
+     width: 200px;
+     display: inline-block;
+ }
+ 
+ .crCapacidad {
+     display: inline-block;
+     width: 80px;
+ }
+ 
+ .crStatus {
+     width: 50px;
+     display: inline-block;
+ }
+ 
+ .crAcciones {
+     width: 60px;
+     display: inline-block;
+ }
+ 
+ .crAcciones .fa {
+     cursor: pointer
+ }
