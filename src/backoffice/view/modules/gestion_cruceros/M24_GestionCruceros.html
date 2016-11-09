@@ -250,10 +250,8 @@
                                 </div>
                             </div>
                             <div class="col-xs-2">
-                                <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#createCruiser">
-                                <span ><i class="fa fa-ship" style="font-size:20px"></i></span> <br>
-                                Crear crucero
-                                </button> 
+                                <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#createCruiser"> <span><i class="fa fa-ship" style="font-size:20px"></i></span>
+                                    <br> Crear crucero </button>
                             </div>
                         </div>
                     </div>
@@ -322,7 +320,7 @@
                                             <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
                                             <div class="panel box">
                                                 <div class="box-header with-border" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" class="collapsed">
-                                                    <p style="margin:0"> <b>Cabina 1 :</b> 150$ <i class="fa fa-times" aria-hidden="true"></i></p>
+                                                    <p style="margin:0"> <b>Cabina 1 :</b> 150$ <i class="fa fa-times" aria-hidden="true"></i><i class="fa fa-pencil editCabin" on-click="openEdit($event)" aria-hidden="true"></i></p>
                                                 </div>
                                                 <div id="collapseOne" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
                                                     <div class="box-body">
@@ -358,7 +356,7 @@
                                             </div>
                                             <div class="panel box">
                                                 <div class="box-header with-border" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed" aria-expanded="false">
-                                                    <p style="margin:0"> <b> Cabina 2 :</b> 250$ <i class="fa fa-times" aria-hidden="true"></i></p>
+                                                    <p style="margin:0"> <b> Cabina 2 :</b> 250$ <i class="fa fa-times" aria-hidden="true"></i><i class="fa fa-pencil editCabin" on-click="openEdit($event)" aria-hidden="true"></i></p>
                                                 </div>
                                                 <div id="collapseThree" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
                                                     <div class="box-body">
@@ -394,7 +392,7 @@
                                             </div>
                                             <div class="panel box">
                                                 <div class="box-header with-border" data-toggle="collapse" data-parent="#accordion" href="#collapse4" class="collapsed" aria-expanded="false">
-                                                    <p style="margin:0"> <b>Cabina 3 :</b> 1500$ <i class="fa fa-times" aria-hidden="true"></i></p>
+                                                    <p style="margin:0"> <b>Cabina 3 :</b> 1500$ <i class="fa fa-times" aria-hidden="true"></i><i class="fa fa-pencil editCabin" on-click="openEdit($event)" aria-hidden="true"></i></p>
                                                 </div>
                                                 <div id="collapse4" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
                                                     <div class="box-body">
@@ -430,7 +428,7 @@
                                             </div>
                                             <div class="panel box">
                                                 <div class="box-header with-border" data-toggle="collapse" data-parent="#accordion" href="#collapse5" class="collapsed" aria-expanded="false">
-                                                    <p style="margin:0"> <b> Cabina 4 :</b> 3000$ <i class="fa fa-times" aria-hidden="true"></i></p>
+                                                    <p style="margin:0"> <b> Cabina 4 :</b> 3000$ <i class="fa fa-times" aria-hidden="true"></i><i class="fa fa-pencil editCabin" on-click="openEdit($event)" aria-hidden="true"></i></p>
                                                 </div>
                                                 <div id="collapse5" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
                                                     <div class="box-body">
@@ -553,32 +551,31 @@
                                 <div class="col-xs-6">
                                     <p><b>Lista de camarotes:</b></p>
                                     <ul id="camList">
-                                        <!--<li class="camarote"> Camarote&nbsp;&nbsp;#105 -&nbsp;&nbsp;<i class="fa fa-circle started"></i>
+                                        <li class="camarote"> Camarote&nbsp;&nbsp;#105 -&nbsp;&nbsp;<i class="fa fa-circle started"></i><i class="fa fa-times" aria-hidden="true"></i>
                                             <ul>
                                                 <li class="hab">2&nbsp;&nbsp;<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;individuales</li>
                                             </ul>
                                         </li>
-                                        <li class="camarote"> Camarote&nbsp;&nbsp;#106 -&nbsp;&nbsp;<i class="fa fa-circle started"></i>
+                                        <li class="camarote"> Camarote&nbsp;&nbsp;#106 -&nbsp;&nbsp;<i class="fa fa-circle started"></i><i class="fa fa-times" aria-hidden="true"></i>
                                             <ul>
                                                 <li class="hab">1&nbsp;&nbsp;<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;matrimonial</li>
                                             </ul>
                                         </li>
-                                        <li class="camarote"> Camarote&nbsp;&nbsp;#107 -&nbsp;&nbsp;<i class="fa fa-circle paused"></i>
+                                        <li class="camarote"> Camarote&nbsp;&nbsp;#107 -&nbsp;&nbsp;<i class="fa fa-circle paused"></i><i class="fa fa-times" aria-hidden="true"></i>
                                             <ul>
                                                 <li class="hab"> 2&nbsp;&nbsp;<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;literas</li>
                                             </ul>
                                         </li>
-                                        <li class="camarote"> Camarote&nbsp;&nbsp;#108 -&nbsp;&nbsp;<i class="fa fa-circle started"></i>
+                                        <li class="camarote"> Camarote&nbsp;&nbsp;#108 -&nbsp;&nbsp;<i class="fa fa-circle started"></i><i class="fa fa-times" aria-hidden="true"></i>
                                             <ul>
                                                 <li class="hab">1&nbsp;&nbsp;<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;matrimonial</li>
-                                                <li class="hab">1&nbsp;&nbsp;<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;individual</li>
                                             </ul>
                                         </li>
-                                        <li class="camarote"> Camarote&nbsp;&nbsp;#109 -&nbsp;&nbsp;<i class="fa fa-circle started"></i>
+                                        <li class="camarote"> Camarote&nbsp;&nbsp;#109 -&nbsp;&nbsp;<i class="fa fa-circle started"></i><i class="fa fa-times" aria-hidden="true"></i>
                                             <ul>
                                                 <li class="hab">2&nbsp;&nbsp;<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;matrimoniales</li>
                                             </ul>
-                                        </li>-->
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="col-xs-6">
@@ -603,12 +600,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row"><div class="col-xs-12" style="text-align:right">
-                                    <button type="button" class="btn btn-primary">Agregar camarote</button>
-                                </div></div>
-                                    
+                                    <div class="row">
+                                        <div class="col-xs-12" style="text-align:right">
+                                            <button type="button" class="btn btn-primary">Agregar camarote</button>
+                                        </div>
+                                    </div>
                                 </div>
-                                
                             </div>
                         </div>
                         <div class="modal-footer">
