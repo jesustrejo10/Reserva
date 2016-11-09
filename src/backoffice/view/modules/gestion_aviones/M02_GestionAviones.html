@@ -306,13 +306,13 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
                     <li class="treeview">
-                        <a href="modules/gestion_automoviles/GestionDeAutomoviles.aspx">
+                        <a href="../gestion_automoviles/GestionDeAutomoviles.aspx">
                             <i class="fa fa-car"></i> <span>Gestion de Automoviles</span> <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="modules/gestion_automoviles/GestionDeAutomoviles.aspx"><i class="fa fa-plus-square-o"></i>Crear</a></li>
+                            <li><a href="../gestion_automoviles/GestionDeAutomoviles.aspx"><i class="fa fa-plus-square-o"></i>Crear</a></li>
                             <li><a href="pages/charts/morris.html"><i class="fa fa-gear"></i>Modificar</a></li>
                             <li class="active"> <a href="pages/charts/flot.html"><i class="fa fa-eye"></i>Visualizar</a></li>
                         </ul>
@@ -324,7 +324,7 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="modules/default/default.html"><i class="fa fa-plus-square-o"></i>Crear</a></li>
+                            <li><a href="../default/default.html"><i class="fa fa-plus-square-o"></i>Crear</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
@@ -334,11 +334,11 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="modules/gestion_cruceros/M24_GestionCruceros.html"><i class="fa fa-plus-square-o"></i>Gestiónar</a></li>
+                            <li><a href="../gestion_cruceros/M24_GestionCruceros.html"><i class="fa fa-plus-square-o"></i>Gestiónar</a></li>
                         </ul>
                     </li>
                     <!-- MODULO DE AVIONES -->
-                    <li><a href="pages/GestionAviones/index.html"><i class="fa fa-plane"></i> <span>Gestión de Aviones</span></a></li>
+                    <li class="active"><a href="../gestion_aviones/M02_GestionAviones.html"><i class="fa fa-plane"></i> <span>Gestión de Aviones</span></a></li>
                     <!-- FIN MODULO DE AVIONES -->
                 </ul>
             </section>
@@ -402,12 +402,18 @@
                                             <label for="capacidadEquipaje">Capacidad de Equipaje (En Kilos):</label>
                                             <input type="Number" class="form-control" id="capacidadEquipaje">
                                         </div>
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <div class="col-xs-4">
+                                        <div class="row">
+                                            <div class="col-xs-4">
+                                                <label for="distanciaMaximaDeVuelo">Distancia Máxima de Vuelo (En Kilometros):</label>
+                                                <input type="Number" class="form-control" id="distanciaMaximaDeVuelo">
+                                            </div>
+                                            <div class="col-xs-4" style="margin-left:15px;">
+                                                <label for="velocidadMaximaDeVuelo">Velocidad Máxima de Vuelo (En Kilometros):</label>
+                                                <input type="Number" class="form-control" id="velocidadMaximaDeVuelo">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-6">
                                             <label for="potenciaMotor1">Escriba la potencia del motor 1 (en kN):</label>
                                             <input type="Number" class="form-control" id="potenciaMotor1">
                                         </div>
@@ -418,7 +424,7 @@
                                                 <option>Turbina</option>
                                             </select>
                                         </div>
-                                        <div class="col-xs-4">
+                                        <div class="col-xs-6">
                                             <label for="potenciaMotor2">Escriba la potencia del motor 2 (en kN):</label>
                                             <input type="Number" class="form-control" id="potenciaMotor2">
                                         </div>
@@ -498,7 +504,7 @@
                                             <button type="button" class="btn btn-danger">Deshabilitar</button>
                                         </div>
                                     </div>
-                                    <div class="col-md-12" style="margin-top:10px;margin-bottom">
+                                    <div class="col-md-12" style="margin-top:10px;">
                                         <div class="col-xs-6">
                                             <label for="potenciaMotorExtra">Escriba la potencia del motor extra (en kN):</label>
                                             <input type="Number" class="form-control" id="potenciaMotorExtra">
@@ -510,7 +516,7 @@
                                                 <option>Turbina</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-12" style="margin-top:10px;margin-bottom">
+                                        <div class="col-md-12" style="margin-top:10px;">
                                             <button type="button" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
                                         </div>
                                     </div>
@@ -588,7 +594,7 @@
                                             <label for="descripcionReporte">Describa el fallo encontrado:</label>
                                             <textarea class="form-control" rows="5" id="descripcionReporte"></textarea>
                                         </div>
-                                        <div class="col-md-12" style="margin-top:10px;margin-bottom">
+                                        <div class="col-md-12" style="margin-top:10px;">
                                             <button type="button" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
                                         </div>
                                     </div>
