@@ -271,6 +271,9 @@
                             <li><a href="modules/gestion_cruceros/M24_GestionCruceros.html"><i class="fa fa-plus-square-o"></i>Gestiónar</a></li>
                         </ul>
                     </li>
+                    <!-- MODULO DE AVIONES -->
+                    <li><a href="modules/gestion_aviones/M02_GestionAviones.html"><i class="fa fa-plane"></i> <span>Gestión de Aviones</span></a></li>
+                    <!-- FIN MODULO DE AVIONES -->
                 </ul>
             </section>
             <!-- /.sidebar -->
