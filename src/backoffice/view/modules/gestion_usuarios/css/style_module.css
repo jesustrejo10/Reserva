@@ -1,0 +1,152 @@
+.pv10 {
+    padding: 10px 0
+}
+
+#listaCruceros {
+    width: calc(100% - 15px);
+    min-height: 400px;
+    margin-left: 15px;
+    border-radius: 5px;
+}
+
+.crucero {
+    border-bottom: 1px solid #f4f4f4;
+
+}
+
+.crucero:hover {
+    background: #f4f4f4
+}
+
+.crTitles {
+    border: 1px solid #337ab7;
+    border-radius: 5px 5px 0 0;
+    background: #3c8dbc;
+    color: white;
+}
+
+.crTitles:hover {
+    background: #3c8dbc;
+}
+
+.crTitles .crNombre,
+.crTitles .crCompania,
+.crTitles .crCapacidad,
+.crTitles .crStatus,
+.crTitles .crFechaf,
+.crTitles .crFechai {
+    border-right: 1px solid #337ab7;
+    padding: 5px 0;
+}
+
+.crNombre,
+.crCompania,
+.crCapacidad,
+.crStatus,
+.crFechaf,
+.crFechai {
+    border-right: 1px solid #f4f4f4;
+    padding: 5px 0;
+}
+
+.crNombre {
+    padding-left: 10px!important;
+    width: calc(75% - 672px);
+    display: inline-block;
+}
+
+.crNombre .fa {
+    color: #ddd
+}
+
+.crCompania {
+    width: 173px;
+    display: inline-block;
+    padding-left: 10px !important;
+}
+
+.crCapacidad {
+    display: inline-block;
+    width: 80px;
+    text-align: center
+}
+
+.crStatus {
+    width: 50px;
+    display: inline-block;
+    text-align: center
+}
+
+.crFechaf,
+.crFechai {
+    width: 120px;
+    display: inline-block;
+    text-align: center;
+}
+
+.crAcciones {
+    width: 120px;
+    display: inline-block;
+    text-align: center
+}
+
+.listCru {
+    overflow-y: scroll;
+    height: calc(100vh - 285px);
+    margin-bottom: 20px;
+    border: 1px solid #eee;
+    border-top: 0px;
+}
+
+.listCru .crNombre {
+    width: calc(75% - 663px);
+}
+
+.listCru .crAcciones {
+    width: 100px;
+}
+
+.crAcciones .fa {
+    cursor: pointer
+}
+
+.crAcciones .fa-trash {
+    background: #dd4b39;
+    padding: 2px 5px;
+    border-radius: 2px;
+    color: white;
+}
+
+.crAcciones .fa-eye {
+    background: #337ab7;
+    padding: 2px 4px;
+    border-radius: 2px;
+    color: white;
+}
+
+.crAcciones .fa-pause {
+    background: #3c8dbc;
+    padding: 2px 5px;
+    border-radius: 2px;
+    color: white;
+}
+.crAcciones .fa-play {
+    background: #3c8dbc;
+    padding: 2px 5px;
+    border-radius: 2px;
+    color: white;
+}
+
+.crAcciones .fa-edit{
+  background: #3c8dbc;
+  padding: 2px 5px;
+  border-radius: 2px;
+  color: white;
+}
+
+.crStatus .started {
+    color: #00a65a
+}
+.crStatus .paused {
+    color: #dd4b39
+}
