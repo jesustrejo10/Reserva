@@ -131,6 +131,7 @@
     <Content Include="view\modules\gestion_automoviles\GestionDeAutomoviles.aspx" />
     <Content Include="view\modules\gestion_automoviles\GestionDeAutomoviles.html" />
     <Content Include="view\modules\gestion_automoviles\js\module.js" />
+    <Content Include="view\modules\gestion_aviones\M02_GestionAviones.html" />
     <Content Include="view\modules\gestion_aviones\placeholder.html" />
     <Content Include="view\modules\gestion_comida_vuelo\placeholder.html" />
     <Content Include="view\modules\gestion_cruceros\css\style_module.css" />
