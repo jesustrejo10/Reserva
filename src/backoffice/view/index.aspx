@@ -247,7 +247,6 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
               <span class="hidden-xs">Alexander Pierce</span>
             </a>
             <ul class="dropdown-menu">
@@ -359,7 +358,7 @@
           </a>
         </li>
         <li class="treeview">
-          <a href="GestionDeAutomoviles.aspx"">
+          <a href="modules/gestion_automoviles/GestionDeAutomoviles.aspx"">
             <i class="fa fa-car"></i>
             <span>Gestion de Automoviles</span>
             <span class="pull-right-container">
@@ -367,7 +366,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="GestionDeAutomoviles.aspx"><i class="fa fa-plus-square-o"></i>Crear</a></li>
+            <li><a href="modules/gestion_automoviles/GestionDeAutomoviles.aspx"><i class="fa fa-plus-square-o"></i>Crear</a></li>
             <li><a href="pages/charts/morris.html"><i class="fa fa-gear"></i>Modificar</a></li>
             <li><a href="pages/charts/flot.html"><i class="fa fa-eye"></i>Visualizar</a></li>   
           </ul>

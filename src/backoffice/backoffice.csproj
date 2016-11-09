@@ -123,8 +123,17 @@
     <Content Include="view\dist\js\demo.js" />
     <Content Include="view\dist\js\pages\dashboard.js" />
     <Content Include="view\dist\js\pages\dashboard2.js" />
-    <Content Include="view\GestionDeAutomoviles.aspx" />
     <Content Include="view\index.aspx" />
+    <Content Include="view\modules\default\css\style_module.css" />
+    <Content Include="view\modules\default\default.html" />
+    <Content Include="view\modules\default\js\module.js" />
+    <Content Include="view\modules\gestion_automoviles\css\style_module.css" />
+    <Content Include="view\modules\gestion_automoviles\GestionDeAutomoviles.aspx" />
+    <Content Include="view\modules\gestion_automoviles\GestionDeAutomoviles.html" />
+    <Content Include="view\modules\gestion_automoviles\js\module.js" />
+    <Content Include="view\modules\gestion_cruceros\css\style_module.css" />
+    <Content Include="view\modules\gestion_cruceros\js\module.js" />
+    <Content Include="view\modules\gestion_cruceros\M24_GestionCruceros.html" />
     <Content Include="view\plugins\bootstrap-slider\bootstrap-slider.js" />
     <Content Include="view\plugins\bootstrap-slider\slider.css" />
     <Content Include="view\plugins\bootstrap-wysihtml5\bootstrap3-wysihtml5.all.js" />
@@ -928,19 +937,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="view\GestionDeAutomoviles.aspx.cs">
-      <DependentUpon>GestionDeAutomoviles.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="view\GestionDeAutomoviles.aspx.designer.cs">
-      <DependentUpon>GestionDeAutomoviles.aspx</DependentUpon>
-    </Compile>
     <Compile Include="view\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="view\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\modules\gestion_automoviles\GestionDeAutomoviles.aspx.cs">
+      <DependentUpon>GestionDeAutomoviles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\modules\gestion_automoviles\GestionDeAutomoviles.aspx.designer.cs">
+      <DependentUpon>GestionDeAutomoviles.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
