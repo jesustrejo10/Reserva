@@ -171,7 +171,7 @@
                             <li><a href="../default/default.html"><i class="fa fa-plus-square-o"></i>Crear</a></li>
                         </ul>
                     </li>
-                    <li class="treeview">
+                    <li class="treeview active">
                         <a href="../gestion_cruceros/M24_GestionCruceros.html"> <i class="fa fa-ship"></i> <span>Cruceros</span> <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span> </a>
@@ -190,7 +190,7 @@
             <section class="content-header">
                 <h1>
         Gestión de cruceros.
-        <small>Aquí se maneja la información relacionado a los cruceros.</small>
+        <small>Aquí se maneja la información relacionada a los cruceros.</small>
       </h1>
                 <ol class="breadcrumb">
                     <li><a href="../../index.html"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -202,103 +202,54 @@
                 <!-- Default box -->
                 <div class="box">
                     <div class="box-body">
-                        <h1>Listado de Cruceros</h1>
+                        <h3>Listado de Cruceros</h3>
                         <div class="row">
                             <div class="col-xs-10">
                                 <div class="row" id="listaCruceros">
                                     <div class="crucero crTitles">
-                                        <div class="crNombre"> <b>Nombre del crucero</b></div>
+                                        <div class="crNombre"> <b>Nombre</b></div>
+                                        <div class="crFechai"> <b>Fecha de inicio</b> </div>
+                                        <div class="crFechaf"> <b>Fecha fin</b> </div>
                                         <div class="crCompania"> <b>Compañia</b></div>
                                         <div class="crCapacidad"><b>Capacidad</b></div>
                                         <div class="crStatus"><b>Status</b></div>
                                         <div class="crAcciones"><b>Acciones</b> </div>
                                     </div>
                                     <div class="listCru">
-                                        <div class="crucero pv10">
+                                        <div class="crucero ">
                                             <div class="crNombre"> <i class="fa fa-ship"></i> Crucero del Caribe </div>
+                                            <div class="crFechai"> 01/09/2016 </div>
+                                            <div class="crFechaf"> 25/09/2016 </div>
                                             <div class="crCompania">Royal Caribbean</div>
                                             <div class="crCapacidad">2000 <i class="fa fa-user"></i></div>
                                             <div class="crStatus"><i class="fa fa-circle started"></i></div>
                                             <div class="crAcciones"> <i class="fa fa-pause"></i> <i class="fa fa-eye"></i> <i class="fa fa-trash"></i> </div>
                                         </div>
-                                        <div class="crucero pv10">
-                                            <div class="crNombre"> <i class="fa fa-ship"></i> Crucero del Caribe </div>
+                                        <div class="crucero ">
+                                            <div class="crNombre"> <i class="fa fa-ship"></i> Crucero Jamaiquino </div>
+                                            <div class="crFechai"> 21/06/2016 </div>
+                                            <div class="crFechaf"> 10/07/2016 </div>
                                             <div class="crCompania">Royal Caribbean</div>
-                                            <div class="crCapacidad">2000 <i class="fa fa-user"></i></div>
+                                            <div class="crCapacidad">2500 <i class="fa fa-user"></i></div>
                                             <div class="crStatus"><i class="fa fa-circle started"></i></div>
                                             <div class="crAcciones"> <i class="fa fa-pause"></i> <i class="fa fa-eye"></i> <i class="fa fa-trash"></i> </div>
                                         </div>
-                                        <div class="crucero pv10">
-                                            <div class="crNombre"> <i class="fa fa-ship"></i> Crucero del Caribe </div>
-                                            <div class="crCompania">Royal Caribbean</div>
-                                            <div class="crCapacidad">2000 <i class="fa fa-user"></i></div>
-                                            <div class="crStatus"><i class="fa fa-circle started"></i></div>
-                                            <div class="crAcciones"> <i class="fa fa-pause"></i> <i class="fa fa-eye"></i> <i class="fa fa-trash"></i> </div>
-                                        </div>
-                                        <div class="crucero pv10">
-                                            <div class="crNombre"> <i class="fa fa-ship"></i> Crucero del Caribe </div>
-                                            <div class="crCompania">Royal Caribbean</div>
-                                            <div class="crCapacidad">2000 <i class="fa fa-user"></i></div>
-                                            <div class="crStatus"><i class="fa fa-circle started"></i></div>
-                                            <div class="crAcciones"> <i class="fa fa-pause"></i> <i class="fa fa-eye"></i> <i class="fa fa-trash"></i> </div>
-                                        </div>
-                                        <div class="crucero pv10">
-                                            <div class="crNombre"> <i class="fa fa-ship"></i> Crucero del Caribe </div>
-                                            <div class="crCompania">Royal Caribbean</div>
-                                            <div class="crCapacidad">2000 <i class="fa fa-user"></i></div>
-                                            <div class="crStatus"><i class="fa fa-circle started"></i></div>
-                                            <div class="crAcciones"> <i class="fa fa-pause"></i> <i class="fa fa-eye"></i> <i class="fa fa-trash"></i> </div>
-                                        </div>
-                                        <div class="crucero pv10">
-                                            <div class="crNombre"> <i class="fa fa-ship"></i> Crucero del Caribe </div>
-                                            <div class="crCompania">Royal Caribbean</div>
-                                            <div class="crCapacidad">2000 <i class="fa fa-user"></i></div>
-                                            <div class="crStatus"><i class="fa fa-circle started"></i></div>
-                                            <div class="crAcciones"> <i class="fa fa-pause"></i> <i class="fa fa-eye"></i> <i class="fa fa-trash"></i> </div>
-                                        </div>
-                                        <div class="crucero pv10">
-                                            <div class="crNombre"> <i class="fa fa-ship"></i> Crucero del Caribe </div>
-                                            <div class="crCompania">Royal Caribbean</div>
-                                            <div class="crCapacidad">2000 <i class="fa fa-user"></i></div>
-                                            <div class="crStatus"><i class="fa fa-circle started"></i></div>
-                                            <div class="crAcciones"> <i class="fa fa-pause"></i> <i class="fa fa-eye"></i> <i class="fa fa-trash"></i> </div>
-                                        </div>
-                                        <div class="crucero pv10">
-                                            <div class="crNombre"> <i class="fa fa-ship"></i> Crucero del Caribe </div>
-                                            <div class="crCompania">Royal Caribbean</div>
-                                            <div class="crCapacidad">2000 <i class="fa fa-user"></i></div>
-                                            <div class="crStatus"><i class="fa fa-circle started"></i></div>
-                                            <div class="crAcciones"> <i class="fa fa-pause"></i> <i class="fa fa-eye"></i> <i class="fa fa-trash"></i> </div>
-                                        </div>
-                                        <div class="crucero pv10">
-                                            <div class="crNombre"> <i class="fa fa-ship"></i> Crucero del Caribe </div>
-                                            <div class="crCompania">Royal Caribbean</div>
-                                            <div class="crCapacidad">2000 <i class="fa fa-user"></i></div>
-                                            <div class="crStatus"><i class="fa fa-circle started"></i></div>
-                                            <div class="crAcciones"> <i class="fa fa-pause"></i> <i class="fa fa-eye"></i> <i class="fa fa-trash"></i> </div>
-                                        </div>
-                                        <div class="crucero pv10">
-                                            <div class="crNombre"> <i class="fa fa-ship"></i> Crucero del Caribe </div>
-                                            <div class="crCompania">Royal Caribbean</div>
-                                            <div class="crCapacidad">2000 <i class="fa fa-user"></i></div>
-                                            <div class="crStatus"><i class="fa fa-circle started"></i></div>
-                                            <div class="crAcciones"> <i class="fa fa-pause"></i> <i class="fa fa-eye"></i> <i class="fa fa-trash"></i> </div>
-                                        </div>
-                                        <div class="crucero pv10">
-                                            <div class="crNombre"> <i class="fa fa-ship"></i> Crucero del Caribe </div>
-                                            <div class="crCompania">Royal Caribbean</div>
-                                            <div class="crCapacidad">2000 <i class="fa fa-user"></i></div>
-                                            <div class="crStatus"><i class="fa fa-circle started"></i></div>
-                                            <div class="crAcciones"> <i class="fa fa-pause"></i> <i class="fa fa-eye"></i> <i class="fa fa-trash"></i> </div>
+                                        <div class="crucero ">
+                                            <div class="crNombre"> <i class="fa fa-ship"></i> Crucero Pampatar </div>
+                                            <div class="crFechai"> 09/09/2016 </div>
+                                            <div class="crFechaf"> 31/09/2016 </div>
+                                            <div class="crCompania">Interntational</div>
+                                            <div class="crCapacidad">3500 <i class="fa fa-user"></i></div>
+                                            <div class="crStatus"><i class="fa fa-circle paused"></i></div>
+                                            <div class="crAcciones"> <i class="fa fa-play"></i> <i class="fa fa-eye"></i> <i class="fa fa-trash"></i> </div>
                                         </div>
                                     </div>
                                 </div>
-                                
                             </div>
                             <div class="col-xs-2">
-                                <button type="button" class="btn btn-block btn-primary">Crear crucero</button>
-                                 <button type="button" class="btn btn-block btn-primary">Gestionar rutas</button>
-                                  <button type="button" class="btn btn-block btn-primary">Gestionar paradas</button>
+                                <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#createCruiser">Crear crucero</button>
+                                <button type="button" class="btn btn-block btn-primary">Gestionar rutas</button>
+                                <button type="button" class="btn btn-block btn-primary">Gestionar paradas</button>
                             </div>
                         </div>
                     </div>
@@ -307,6 +258,44 @@
                 </div>
                 <!-- /.box -->
             </section>
+            <!-- Modal -->
+            <div class="modal fade" id="createCruiser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Agregar crucero</h4> </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Nombre del Crucero:</label>
+                                <input type="text" class="form-control" placeholder="Introduce el nombre del crucero"> </div>
+                            <div class="form-group">
+                                <label>Compañia:</label>
+                                <input type="text" class="form-control" placeholder="Introduce la compañia del crucero"> </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <label>Capacidad</label>
+                                        <input type="number" class="form-control" placeholder="Introduce la capacidad del crucero"> </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <select class="form-control">
+                                            <option>Inactivo</option>
+                                            <option>Activo</option> 
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary">Crear crucero</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->

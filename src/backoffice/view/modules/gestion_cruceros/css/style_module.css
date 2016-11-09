@@ -10,8 +10,8 @@
 }
 
 .crucero {
-    border: 1px solid #f4f4f4;
-    border-top: 0px
+    border-bottom: 1px solid #f4f4f4;
+     
 }
 
 .crucero:hover {
@@ -19,7 +19,7 @@
 }
 
 .crTitles {
-    border: 1px solid black;
+    border: 1px solid #337ab7;
     border-radius: 5px 5px 0 0;
     background: #3c8dbc;
     color: white;
@@ -32,14 +32,26 @@
 .crTitles .crNombre,
 .crTitles .crCompania,
 .crTitles .crCapacidad,
-.crTitles .crStatus {
-    border-right: 1px solid black;
+.crTitles .crStatus,
+.crTitles .crFechaf,
+.crTitles .crFechai {
+    border-right: 1px solid #337ab7;
+    padding: 5px 0;
+}
+
+.crNombre,
+.crCompania,
+.crCapacidad,
+.crStatus,
+.crFechaf,
+.crFechai {
+    border-right: 1px solid #f4f4f4;
     padding: 5px 0;
 }
 
 .crNombre {
     padding-left: 10px!important;
-    width: calc(100% - 462px);
+    width: calc(100% - 680px);
     display: inline-block;
 }
 
@@ -48,8 +60,9 @@
 }
 
 .crCompania {
-    width: 200px;
+    width: 173px;
     display: inline-block;
+    padding-left: 10px !important;
 }
 
 .crCapacidad {
@@ -64,6 +77,13 @@
     text-align: center
 }
 
+.crFechaf,
+.crFechai {
+    width: 120px;
+    display: inline-block;
+    text-align: center;
+}
+
 .crAcciones {
     width: 120px;
     display: inline-block;
@@ -74,10 +94,12 @@
     overflow-y: scroll;
     height: calc(100vh - 285px);
     margin-bottom: 20px;
+    border: 1px solid #eee;
+    border-top: 0px;
 }
 
 .listCru .crNombre {
-    width: calc(100% - 442px);
+    width: calc(100% - 663px);
 }
 
 .listCru .crAcciones {
@@ -108,7 +130,16 @@
     border-radius: 2px;
     color: white;
 }
+.crAcciones .fa-play {
+    background: #3c8dbc;
+    padding: 2px 5px;
+    border-radius: 2px;
+    color: white;
+}
 
 .crStatus .started {
     color: #00a65a
+}
+.crStatus .paused {
+    color: #dd4b39
 }
