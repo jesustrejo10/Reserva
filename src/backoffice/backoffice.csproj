@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -144,6 +145,7 @@
     <Content Include="view\modules\gestion_equipaje_perdido\placeholder.html" />
     <Content Include="view\modules\gestion_hoteles\placeholder.html" />
     <Content Include="view\modules\gestion_ofertas\placeholder.html" />
+    <Content Include="view\modules\gestion_restaurantes\M10_GestionRestaurantes.html" />
     <Content Include="view\modules\gestion_restaurantes\placeholder.html" />
     <Content Include="view\modules\gestion_roles\placeholder.html" />
     <Content Include="view\modules\gestion_ruta_comercial\placeholder.html" />
