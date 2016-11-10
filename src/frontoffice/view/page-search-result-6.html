@@ -33,7 +33,7 @@
 		
 		smoothscroll 			= create a browser smooth scroll
 		enable-animation		= enable WOW animations
-		
+
 		bg-grey					= grey background
 		grain-grey				= grey grain background
 		grain-blue				= blue grain background
@@ -50,7 +50,6 @@
 		data-background="assets/images/boxed_background/1.jpg"
 	-->
 	<body class="smoothscroll enable-animation">
-
 
 		<!-- SLIDE TOP -->
 		<div id="slidetop">
@@ -97,7 +96,6 @@
 		<!-- wrapper -->
 		<div id="wrapper">
 
-
 			<!-- 
 				AVAILABLE HEADER CLASSES
 
@@ -124,7 +122,7 @@
 
 				Example Usage:  class="clearfix sticky header-sm transparent noborder"
 			-->
-			<div id="header" class="clearfix sticky">
+			<div id="header" class="sticky clearfix">
 
 				<!-- TOP NAV -->
 				<header id="topNav">
@@ -213,7 +211,7 @@
 							AVAILABLE CLASSES:
 							submenu-dark = dark sub menu
 						-->
-						<div class="navbar-collapse pull-right nav-main-collapse collapse submenu-dark">
+						<div class="navbar-collapse pull-right nav-main-collapse collapse">
 							<nav class="nav-main">
 
 								<!--
@@ -352,7 +350,7 @@
 											<li><a href="index-simple-youtube.html">HOME SIMPLE - YOUTUBE</a></li>
 										</ul>
 									</li>
-									<li class="dropdown"><!-- PAGES -->
+									<li class="dropdown active"><!-- PAGES -->
 										<a class="dropdown-toggle" href="#">
 											PAGES
 										</a>
@@ -479,7 +477,7 @@
 													<li><a href="page-clients-6.html">CLIENTS 2 - FULLWIDTH</a></li>
 												</ul>
 											</li>
-											<li class="dropdown">
+											<li class="dropdown active">
 												<a class="dropdown-toggle" href="#">
 													SEARCH RESULT
 												</a>
@@ -491,7 +489,7 @@
 													<li><a href="page-search-result-4.html">LAYOUT 2 - LEFT SIDEBAR</a></li>
 													<li><a href="page-search-result-5.html">LAYOUT 2 - RIGHT SIDEBAR</a></li>
 													<li class="divider"></li>
-													<li><a href="page-search-result-6.html">LAYOUT 3 - TABLE SEARCH</a></li>
+													<li class="active"><a href="page-search-result-6.html">LAYOUT 3 - TABLE SEARCH</a></li>
 												</ul>
 											</li>
 											<li class="dropdown">
@@ -1061,7 +1059,7 @@
 											<li><a href="shop-checkout-final.html">ORDER PLACED</a></li>
 										</ul>
 									</li>
-									<li class="dropdown mega-menu active"><!-- SHORTCODES -->
+									<li class="dropdown mega-menu"><!-- SHORTCODES -->
 										<a class="dropdown-toggle" href="#">
 											SHORTCODES
 										</a>
@@ -1127,7 +1125,7 @@
 															<li><a href="shortcode-styled-icons.html">STYLED ICONS</a></li>
 															<li><a href="shortcode-tables.html">TABLES</a></li>
 															<li><a href="shortcode-tabs.html">TABS</a></li>
-															<li class="active"><a href="shortcode-testimonials.html">TESTIMONIALS</a></li>
+															<li><a href="shortcode-testimonials.html">TESTIMONIALS</a></li>
 															<li><a href="shortcode-thumbnails.html">THUMBNAILS</a></li>
 															<li><a href="shortcode-toggles.html">TOGGLES</a></li>
 														</ul>
@@ -1166,16 +1164,16 @@
 					.shadow-before-3 	= shadow 3 header top
 					.shadow-after-3 	= shadow 3 header bottom
 			-->
-			<section class="page-header page-header-xs">
+			<section class="page-header page-header-xs dark">
 				<div class="container">
 
-					<h1>TESTIMONIALS</h1>
+					<h1>SEARCH RESULT</h1>
 
 					<!-- breadcrumbs -->
 					<ol class="breadcrumb">
 						<li><a href="#">Home</a></li>
-						<li><a href="#">Shortcodes</a></li>
-						<li class="active">Testimonials</li>
+						<li><a href="#">Pages</a></li>
+						<li class="active">Search Result</li>
 					</ol><!-- /breadcrumbs -->
 
 				</div>
@@ -1183,968 +1181,368 @@
 			<!-- /PAGE HEADER -->
 
 
-
 			<!-- -->
-			<section>
+			<section class="padding-xs alternate">
 				<div class="container">
 
-					<h3>Boxed Testimonials</h3>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="testimonial testimonial-bordered padding-15">
-								<figure class="pull-left">
-									<img class="rounded" src="assets/images/demo/people/300x300/2-min.jpg" alt="" />
-								</figure>
-                                <div class="testimonial-content">
-                                    <p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero!</p>
-                                    <cite>
-                                        Felicia Doe
-                                        <span>Company Ltd.</span>
-                                    </cite>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="testimonial testimonial-bordered padding-15">
-								<figure class="pull-left">
-									<img class="rounded" src="assets/images/demo/people/300x300/1-min.jpg" alt="" />
-								</figure>
-                                <div class="testimonial-content">
-                                    <p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero!</p>
-                                    <cite>
-                                        Joana Doe
-                                        <span>Company Ltd.</span>
-                                    </cite>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="testimonial testimonial-bordered padding-15">
-								<figure class="pull-left">
-									<img class="rounded" src="assets/images/demo/people/300x300/6-min.jpg" alt="" />
-								</figure>
-                                <div class="testimonial-content">
-                                    <p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero!</p>
-                                    <cite>
-                                        Melissa Doe
-                                        <span>Company Ltd.</span>
-                                    </cite>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+					<!-- SEARCH -->
+					<form method="get" action="#" class="clearfix well well-sm search-big nomargin">
+						<div class="input-group">
 
-<!-- pre code -->
-<div class="text-left margin-top-20">
-	<a href="javascript:;" onclick="jQuery('#pre-bx').slideToggle();">Show Code</a>
-</div>
-<pre id="pre-bx" class="text-left noradius text-danger softhide">
-<span class="text-success">&lt;!-- 
-	Note: remove class="rounded" from the img for squared image!
---&gt;</span>
-&lt;div class="row"&gt;
-	&lt;div class="col-md-4"&gt;
-		&lt;div class="testimonial testimonial-bordered padding-15"&gt;
-			&lt;figure class="pull-left"&gt;
-				&lt;img class="rounded" src="assets/images/demo/people/300x300/2-min.jpg" alt="" /&gt;
-			&lt;/figure&gt;
-			&lt;div class="testimonial-content"&gt;
-				&lt;p&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero!&lt;/p&gt;
-				&lt;cite&gt;
-					Felicia Doe
-					&lt;span&gt;Company Ltd.&lt;/span&gt;
-				&lt;/cite&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-	&lt;/div&gt;
-	&lt;div class="col-md-4"&gt;
-		&lt;div class="testimonial testimonial-bordered padding-15"&gt;
-			&lt;figure class="pull-left"&gt;
-				&lt;img class="rounded" src="assets/images/demo/people/300x300/1-min.jpg" alt="" /&gt;
-			&lt;/figure&gt;
-			&lt;div class="testimonial-content"&gt;
-				&lt;p&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero!&lt;/p&gt;
-				&lt;cite&gt;
-					Joana Doe
-					&lt;span&gt;Company Ltd.&lt;/span&gt;
-				&lt;/cite&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-	&lt;/div&gt;
-	&lt;div class="col-md-4"&gt;
-		&lt;div class="testimonial testimonial-bordered padding-15"&gt;
-			&lt;figure class="pull-left"&gt;
-				&lt;img class="rounded" src="assets/images/demo/people/300x300/6-min.jpg" alt="" /&gt;
-			&lt;/figure&gt;
-			&lt;div class="testimonial-content"&gt;
-				&lt;p&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero!&lt;/p&gt;
-				&lt;cite&gt;
-					Melissa Doe
-					&lt;span&gt;Company Ltd.&lt;/span&gt;
-				&lt;/cite&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-	&lt;/div&gt;
-&lt;/div&gt;
-</pre>
-<!-- /pre code -->
+							<div class="input-group-btn">
+								<button type="button" class="btn btn-default input-lg dropdown-toggle noborder-right" data-toggle="dropdown">
+									Everything <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu">
+									<li class="active">
+										<a href="#"><i class="fa fa-check"></i> Everything</a>
+									</li>
+									<li class="divider"></li>
+									<li>
+										<a href="j#">Articles</a>
+									</li>
+									<li>
+										<a href="j#">Blog</a>
+									</li>
+									<li>
+										<a href="j#">Products</a>
+									</li>
+									<li>
+										<a href="#">Gallery</a>
+									</li>
+								</ul>
+							</div>
 
-				</div>
-			</section>
-			<!-- / -->
+							<input name="k" class="form-control input-lg" type="text" placeholder="Search...">
+							<div class="input-group-btn">
+								<button type="submit" class="btn btn-default input-lg noborder-left">
+									<i class="fa fa-search fa-lg nopadding"></i>
+								</button>
+							</div>
+						</div>
 
-
-
-
-			<!-- -->
-			<section>
-				<div class="container">
-
-					<h3>Testimonials 2 Columns</h3>
-                    <ul class="row clearfix testimonial-dotted list-unstyled">
-                        <li class="col-md-6">
-                            <div class="testimonial">
-								<figure class="pull-left">
-									<img class="rounded" src="assets/images/demo/people/300x300/2-min.jpg" alt="" />
-								</figure>
-                                <div class="testimonial-content">
-                                    <p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!</p>
-                                    <cite>
-                                        Joana Doe
-                                        <span>Company Ltd.</span>
-                                    </cite>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-md-6">
-                            <div class="testimonial">
-								<figure class="pull-left">
-									<img class="rounded" src="assets/images/demo/people/300x300/6-min.jpg" alt="" />
-								</figure>
-                                <div class="testimonial-content">
-                                    <p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!</p>
-                                    <cite>
-                                        Melissa Doe
-                                        <span>Company Ltd.</span>
-                                    </cite>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-md-6">
-                            <div class="testimonial">
-								<figure class="pull-left">
-									<img class="rounded" src="assets/images/demo/people/300x300/7-min.jpg" alt="" />
-								</figure>
-                                <div class="testimonial-content">
-                                    <p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!</p>
-                                    <cite>
-                                        Stephany Doe
-                                        <span>Company Ltd.</span>
-                                    </cite>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-md-6">
-                            <div class="testimonial">
-								<figure class="pull-left">
-									<img class="rounded" src="assets/images/demo/people/300x300/8-min.jpg" alt="" />
-								</figure>
-                                <div class="testimonial-content">
-                                    <p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!</p>
-                                    <cite>
-                                        Pamela Doe
-                                        <span>Company Ltd.</span>
-                                    </cite>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-
-<!-- pre code -->
-<div class="text-left margin-top-20">
-	<a href="javascript:;" onclick="jQuery('#pre-0').slideToggle();">Show Code</a>
-</div>
-<pre id="pre-0" class="text-left noradius text-danger softhide">
-<span class="text-success">&lt;!-- 
-	Note: remove class="rounded" from the img for squared image!
---&gt;</span>
-&lt;ul class="row clearfix testimonial-dotted list-unstyled"&gt;
-	&lt;li class="col-md-6"&gt;
-		&lt;div class="testimonial"&gt;
-			&lt;figure class="pull-left"&gt;
-				&lt;img class="rounded" src="assets/images/demo/people/300x300/2-min.jpg" alt="" /&gt;
-			&lt;/figure&gt;
-			&lt;div class="testimonial-content"&gt;
-				&lt;p&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!&lt;/p&gt;
-				&lt;cite&gt;
-					Joana Doe
-					&lt;span&gt;Company Ltd.&lt;/span&gt;
-				&lt;/cite&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-	&lt;/li&gt;
-	&lt;li class="col-md-6"&gt;
-		&lt;div class="testimonial"&gt;
-			&lt;figure class="pull-left"&gt;
-				&lt;img class="rounded" src="assets/images/demo/people/300x300/6-min.jpg" alt="" /&gt;
-			&lt;/figure&gt;
-			&lt;div class="testimonial-content"&gt;
-				&lt;p&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!&lt;/p&gt;
-				&lt;cite&gt;
-					Melissa Doe
-					&lt;span&gt;Company Ltd.&lt;/span&gt;
-				&lt;/cite&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-	&lt;/li&gt;
-	&lt;li class="col-md-6"&gt;
-		&lt;div class="testimonial"&gt;
-			&lt;figure class="pull-left"&gt;
-				&lt;img class="rounded" src="assets/images/demo/people/300x300/7-min.jpg" alt="" /&gt;
-			&lt;/figure&gt;
-			&lt;div class="testimonial-content"&gt;
-				&lt;p&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!&lt;/p&gt;
-				&lt;cite&gt;
-					Stephany Doe
-					&lt;span&gt;Company Ltd.&lt;/span&gt;
-				&lt;/cite&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-	&lt;/li&gt;
-	&lt;li class="col-md-6"&gt;
-		&lt;div class="testimonial"&gt;
-			&lt;figure class="pull-left"&gt;
-				&lt;img class="rounded" src="assets/images/demo/people/300x300/8-min.jpg" alt="" /&gt;
-			&lt;/figure&gt;
-			&lt;div class="testimonial-content"&gt;
-				&lt;p&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!&lt;/p&gt;
-				&lt;cite&gt;
-					Pamela Doe
-					&lt;span&gt;Company Ltd.&lt;/span&gt;
-				&lt;/cite&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-	&lt;/li&gt;
-&lt;/ul&gt;
-</pre>
-<!-- /pre code -->
-
-				</div>
-			</section>
-			<!-- / -->
-
-
-
-
-
-			<!-- -->
-			<section>
-				<div class="container">
-
-					<h3>Testimonials 3 Columns</h3>
-                    <ul class="row clearfix testimonial-dotted list-unstyled">
-                        <li class="col-md-4">
-                            <div class="testimonial">
-								<figure class="pull-left">
-									<img class="rounded" src="assets/images/demo/people/300x300/2-min.jpg" alt="" />
-								</figure>
-                                <div class="testimonial-content">
-                                    <p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!</p>
-                                    <cite>
-                                        Joana Doe
-                                        <span>Company Ltd.</span>
-                                    </cite>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-md-4">
-                            <div class="testimonial">
-								<figure class="pull-left">
-									<img class="rounded" src="assets/images/demo/people/300x300/6-min.jpg" alt="" />
-								</figure>
-                                <div class="testimonial-content">
-                                    <p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!</p>
-                                    <cite>
-                                        Melissa Doe
-                                        <span>Company Ltd.</span>
-                                    </cite>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-md-4">
-                            <div class="testimonial">
-								<figure class="pull-left">
-									<img class="rounded" src="assets/images/demo/people/300x300/7-min.jpg" alt="" />
-								</figure>
-                                <div class="testimonial-content">
-                                    <p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!</p>
-                                    <cite>
-                                        Stephany Doe
-                                        <span>Company Ltd.</span>
-                                    </cite>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-md-4">
-                            <div class="testimonial">
-								<figure class="pull-left">
-									<img class="rounded" src="assets/images/demo/people/300x300/8-min.jpg" alt="" />
-								</figure>
-                                <div class="testimonial-content">
-                                    <p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!</p>
-                                    <cite>
-                                        Pamela Doe
-                                        <span>Company Ltd.</span>
-                                    </cite>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-md-4">
-                            <div class="testimonial">
-								<figure class="pull-left">
-									<img class="rounded" src="assets/images/demo/people/300x300/11-min.jpg" alt="" />
-								</figure>
-                                <div class="testimonial-content">
-                                    <p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!</p>
-                                    <cite>
-                                        Simina Doe
-                                        <span>Company Ltd.</span>
-                                    </cite>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-md-4">
-                            <div class="testimonial">
-								<figure class="pull-left">
-									<img class="rounded" src="assets/images/demo/people/300x300/12-min.jpg" alt="" />
-								</figure>
-                                <div class="testimonial-content">
-                                    <p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!</p>
-                                    <cite>
-                                        Mihaela Doe
-                                        <span>Company Ltd.</span>
-                                    </cite>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-
-<!-- pre code -->
-<div class="text-left margin-top-20">
-	<a href="javascript:;" onclick="jQuery('#pre-1').slideToggle();">Show Code</a>
-</div>
-<pre id="pre-1" class="text-left noradius text-danger softhide">
-<span class="text-success">&lt;!-- 
-	Note: remove class="rounded" from the img for squared image!
---&gt;</span>
-&lt;ul class="row clearfix testimonial-dotted list-unstyled"&gt;
-	&lt;li class="col-md-4"&gt;
-		&lt;div class="testimonial"&gt;
-			&lt;figure class="pull-left"&gt;
-				&lt;img class="rounded" src="assets/images/demo/people/300x300/2-min.jpg" alt="" /&gt;
-			&lt;/figure&gt;
-			&lt;div class="testimonial-content"&gt;
-				&lt;p&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!&lt;/p&gt;
-				&lt;cite&gt;
-					Joana Doe
-					&lt;span&gt;Company Ltd.&lt;/span&gt;
-				&lt;/cite&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-	&lt;/li&gt;
-	&lt;li class="col-md-4"&gt;
-		&lt;div class="testimonial"&gt;
-			&lt;figure class="pull-left"&gt;
-				&lt;img class="rounded" src="assets/images/demo/people/300x300/6-min.jpg" alt="" /&gt;
-			&lt;/figure&gt;
-			&lt;div class="testimonial-content"&gt;
-				&lt;p&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!&lt;/p&gt;
-				&lt;cite&gt;
-					Melissa Doe
-					&lt;span&gt;Company Ltd.&lt;/span&gt;
-				&lt;/cite&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-	&lt;/li&gt;
-	&lt;li class="col-md-4"&gt;
-		&lt;div class="testimonial"&gt;
-			&lt;figure class="pull-left"&gt;
-				&lt;img class="rounded" src="assets/images/demo/people/300x300/7-min.jpg" alt="" /&gt;
-			&lt;/figure&gt;
-			&lt;div class="testimonial-content"&gt;
-				&lt;p&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!&lt;/p&gt;
-				&lt;cite&gt;
-					Stephany Doe
-					&lt;span&gt;Company Ltd.&lt;/span&gt;
-				&lt;/cite&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-	&lt;/li&gt;
-	&lt;li class="col-md-4"&gt;
-		&lt;div class="testimonial"&gt;
-			&lt;figure class="pull-left"&gt;
-				&lt;img class="rounded" src="assets/images/demo/people/300x300/8-min.jpg" alt="" /&gt;
-			&lt;/figure&gt;
-			&lt;div class="testimonial-content"&gt;
-				&lt;p&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!&lt;/p&gt;
-				&lt;cite&gt;
-					Pamela Doe
-					&lt;span&gt;Company Ltd.&lt;/span&gt;
-				&lt;/cite&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-	&lt;/li&gt;
-	&lt;li class="col-md-4"&gt;
-		&lt;div class="testimonial"&gt;
-			&lt;figure class="pull-left"&gt;
-				&lt;img class="rounded" src="assets/images/demo/people/300x300/11-min.jpg" alt="" /&gt;
-			&lt;/figure&gt;
-			&lt;div class="testimonial-content"&gt;
-				&lt;p&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!&lt;/p&gt;
-				&lt;cite&gt;
-					Simina Doe
-					&lt;span&gt;Company Ltd.&lt;/span&gt;
-				&lt;/cite&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-	&lt;/li&gt;
-	&lt;li class="col-md-4"&gt;
-		&lt;div class="testimonial"&gt;
-			&lt;figure class="pull-left"&gt;
-				&lt;img class="rounded" src="assets/images/demo/people/300x300/12-min.jpg" alt="" /&gt;
-			&lt;/figure&gt;
-			&lt;div class="testimonial-content"&gt;
-				&lt;p&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!&lt;/p&gt;
-				&lt;cite&gt;
-					Mihaela Doe
-					&lt;span&gt;Company Ltd.&lt;/span&gt;
-				&lt;/cite&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-	&lt;/li&gt;
-&lt;/ul&gt;
-</pre>
-<!-- /pre code -->
-
-				</div>
-			</section>
-			<!-- / -->
-
-
-
-
-			<!-- -->
-			<section>
-				<div class="container">
-
-					<h3>Carousel Testimonials <small>(multiple effects)</small></h3>
-					<div class="testimonial-bordered">
+					</form>
+					<!-- /SEARCH -->
 					
-						<div class="owl-carousel text-center owl-testimonial nomargin" data-plugin-options='{"singleItem": true, "autoPlay": 4000, "navigation": false, "pagination": true, "transitionStyle":"fade"}'>
-							<div class="testimonial">
-								<figure>
-									<img class="rounded" src="assets/images/demo/DV1.jpg" alt="" />
-								</figure>
-								<div class="testimonial-content nopadding">
-									<p class="lead">Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero.</p>
-									<cite>
-										Joana Doe
-										<span>Company Ltd.</span>
-									</cite>
-								</div>
-							</div>
-							<div class="testimonial">
-								<figure>
-									<img class="rounded" src="assets/images/demo/people/300x300/12-min.jpg" alt="" />
-								</figure>
-								<div class="testimonial-content nopadding">
-									<p class="lead">Quod necessitatibus quis expedita harum provident eos obcaecati id culpa.</p>
-									<cite>
-										Melissa Doe
-										<span>Company Ltd.</span>
-									</cite>
-								</div>
-							</div>
-							<div class="testimonial">
-								<figure>
-									<img class="rounded" src="assets/images/demo/people/300x300/d-min.jpg" alt="" />
-								</figure>
-								<div class="testimonial-content nopadding">
-									<p class="lead">Deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum.</p>
-									<cite>
-										John Doe
-										<span>Company Ltd.</span>
-									</cite>
-								</div>
-							</div>
-							<div class="testimonial">
-								<figure>
-									<img class="rounded" src="assets/images/demo/people/300x300/c-min.jpg" alt="" />
-								</figure>
-								<div class="testimonial-content nopadding">
-									<p class="lead">Fugit repellendus expedita excepturi iure perferendis provident quia eaque.</p>
-									<cite>
-										Simina Doe
-										<span>Company Ltd.</span>
-									</cite>
-								</div>
-							</div>
-						</div>
-
-					</div>
-
-
-<!-- pre code -->
-<div class="text-left margin-top-20">
-	<a href="javascript:;" onclick="jQuery('#pre-2').slideToggle();">Show Code</a>
-</div>
-<pre id="pre-2" class="text-left noradius text-danger softhide">
-<span class="text-success">&lt;!-- 
-	data-plugin-options:
-		"transitionStyle":"fadeUp" (fade,backSlide,goDown,fadeUp)
-
-	Note: remove class="rounded" from the img for squared image!
---&gt;</span>
-&lt;div class="testimonial-bordered"&gt;
-	&lt;div class="owl-carousel text-center owl-testimonial nomargin" data-plugin-options='{"singleItem": true, "autoPlay": 4000, "navigation": false, "pagination": true, "transitionStyle":"fade"}'&gt;
-		
-		&lt;div class="testimonial"&gt;
-			&lt;figure&gt;
-				&lt;img class="rounded" src="assets/images/demo/people/300x300/11-min.jpg" alt="" /&gt;
-			&lt;/figure&gt;
-			&lt;div class="testimonial-content nopadding"&gt;
-				&lt;p class="lead"&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero.&lt;/p&gt;
-				&lt;cite&gt;
-					Joana Doe
-					&lt;span&gt;Company Ltd.&lt;/span&gt;
-				&lt;/cite&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-
-		&lt;div class="testimonial"&gt;
-			&lt;figure&gt;
-				&lt;img class="rounded" src="assets/images/demo/people/300x300/12-min.jpg" alt="" /&gt;
-			&lt;/figure&gt;
-			&lt;div class="testimonial-content nopadding"&gt;
-				&lt;p class="lead"&gt;voluptatum enim quod necessitatibus quis expedita harum provident eos obcaecati id culpa.&lt;/p&gt;
-				&lt;cite&gt;
-					Melissa Doe
-					&lt;span&gt;Company Ltd.&lt;/span&gt;
-				&lt;/cite&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-
-	&lt;/div&gt;
-&lt;/div&gt;
-</pre>
-<!-- /pre code -->
+					<h6 class="nomargin text-muted size-11"> 
+						about 34 results <span>(0.45 seconds)</span>
+					</h6>
 
 				</div>
 			</section>
 			<!-- / -->
-
-
 
 
 			<!-- -->
 			<section>
 				<div class="container">
 
-					<h3>Mini Carousel Testimonials <small>(multiple effects)</small></h3>
-					
+							<p>
+								For more tables examples, <a href="shortcode-tables.html">click here</a>.
+								<br /> 
+								<small>(Bootdtrap, jQGrid, Footable, Datatables)</small>
+							</p>
 
-					<div class="row">
-						
-						<div class="col-md-6">
+							<div class="clearfix search-result"><!-- item -->
+								<h4>50 Results</h4>
 
-							<div class="owl-carousel text-center owl-mini-testimonial nomargin" data-plugin-options='{"singleItem": true, "autoPlay": 4000, "navigation": false, "pagination": true, "transitionStyle":"fade"}'>
-								<div class="testimonial">
-									<figure>
-										<img src="assets/images/demo/people/300x300/1-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p >Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero.</p>
-										<cite>
-											Joana Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
-								<div class="testimonial">
-									<figure>
-										<img src="assets/images/demo/people/300x300/2-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p>Quod necessitatibus quis expedita harum provident eos obcaecati id culpa.</p>
-										<cite>
-											Melissa Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
-								<div class="testimonial">
-									<figure>
-										<img src="assets/images/demo/people/300x300/3-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p>Deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum.</p>
-										<cite>
-											John Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
-								<div class="testimonial">
-									<figure>
-										<img src="assets/images/demo/people/300x300/12-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p>Fugit repellendus expedita excepturi iure perferendis provident quia eaque.</p>
-										<cite>
-											Simina Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
+								<!-- USER LIST -->
+								<table class="table table-striped table-bordered table-hover margin-top30 table-vertical-middle">
+									<thead>
+										<tr>
+											<th class="width-30">Img</th>
+											<th>F.Name</th>
+											<th>L.Name</th>
+											<th>Stars</th>
+											<th>Email / Username</th>
+											<th>City</th>
+											<th>Progress</th>
+											<th>Share</th>
+											<th>Status</th>
+										</tr>
+									</thead>
+									<tbody>
+				
+										<tr>
+											<td><img src="assets/images/male.png" alt="" width="20"></td>
+											<td>John</td>
+											<td>Doe</td>
+											<td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+											<td>john.doe@yourdomain.com</td>
+											<td>New York</td>
+											<td>
+												<div class="progress progress-xxs margin-bottom-0">
+													<div class="progress-bar progress-bar-default" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%; min-width: 2em;">
+														<span class="sr-only">80% Complete</span>
+													</div>
+												</div>
+											</td>
+											<td>
+												<ul class="list-inline nomargin size-12">
+													<li><a href="#" class="icon-facebook" data-toggle="tooltip" data-placement="top" title="Facebook"></a></li>
+													<li><a href="#" class="icon-twitter" data-toggle="tooltip" data-placement="top" title="Twitter"></a></li>
+													<li><a href="#" class="icon-gplus" data-toggle="tooltip" data-placement="top" title="Google Plus"></a></li>
+													<li><a href="#" class="icon-linkedin" data-toggle="tooltip" data-placement="top" title="Linkedin"></a></li>
+													<li><a href="#" class="icon-pinterest" data-toggle="tooltip" data-placement="top" title="Pinterest"></a></li>
+												</ul>
+											</td>
+											<td><span class="label label-success">Active</span></td>
+										</tr>
+
+										<tr>
+											<td><img src="assets/images/female.png" alt="" width="20"></td>
+											<td>John</td>
+											<td>Doe</td>
+											<td><div class="rating rating-1 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+											<td>john.doe@yourdomain.com</td>
+											<td>New York</td>
+											<td>
+												<div class="progress progress-xxs margin-bottom-0">
+													<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100" style="width: 66%; min-width: 2em;">
+														<span class="sr-only">66% Complete</span>
+													</div>
+												</div>
+											</td>
+											<td>
+												<ul class="list-inline nomargin size-12">
+													<li><a href="#" class="icon-facebook" data-toggle="tooltip" data-placement="top" title="Facebook"></a></li>
+													<li><a href="#" class="icon-twitter" data-toggle="tooltip" data-placement="top" title="Twitter"></a></li>
+													<li><a href="#" class="icon-gplus" data-toggle="tooltip" data-placement="top" title="Google Plus"></a></li>
+													<li><a href="#" class="icon-linkedin" data-toggle="tooltip" data-placement="top" title="Linkedin"></a></li>
+													<li><a href="#" class="icon-pinterest" data-toggle="tooltip" data-placement="top" title="Pinterest"></a></li>
+												</ul>
+											</td>
+											<td><span class="label label-success">Active</span></td>
+										</tr>
+
+										<tr>
+											<td><img src="assets/images/male.png" alt="" width="20"></td>
+											<td>John</td>
+											<td>Doe</td>
+											<td><div class="rating rating-2 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+											<td>john.doe@yourdomain.com</td>
+											<td>New York</td>
+											<td>
+												<div class="progress progress-xxs margin-bottom-0">
+													<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%; min-width: 2em;">
+														<span class="sr-only">45% Complete</span>
+													</div>
+												</div>
+											</td>
+											<td>
+												<ul class="list-inline nomargin size-12">
+													<li><a href="#" class="icon-facebook" data-toggle="tooltip" data-placement="top" title="Facebook"></a></li>
+													<li><a href="#" class="icon-twitter" data-toggle="tooltip" data-placement="top" title="Twitter"></a></li>
+													<li><a href="#" class="icon-gplus" data-toggle="tooltip" data-placement="top" title="Google Plus"></a></li>
+													<li><a href="#" class="icon-linkedin" data-toggle="tooltip" data-placement="top" title="Linkedin"></a></li>
+													<li><a href="#" class="icon-pinterest" data-toggle="tooltip" data-placement="top" title="Pinterest"></a></li>
+												</ul>
+											</td>
+											<td><span class="label label-danger">Disabled</span></td>
+										</tr>
+
+										<tr>
+											<td><img src="assets/images/female.png" alt="" width="20"></td>
+											<td>John</td>
+											<td>Doe</td>
+											<td><div class="rating rating-3 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+											<td>john.doe@yourdomain.com</td>
+											<td>New York</td>
+											<td>
+												<div class="progress progress-xxs margin-bottom-0">
+													<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="91" aria-valuemin="0" aria-valuemax="100" style="width: 91%; min-width: 2em;">
+														<span class="sr-only">91% Complete</span>
+													</div>
+												</div>
+											</td>
+											<td>
+												<ul class="list-inline nomargin size-12">
+													<li><a href="#" class="icon-facebook" data-toggle="tooltip" data-placement="top" title="Facebook"></a></li>
+													<li><a href="#" class="icon-twitter" data-toggle="tooltip" data-placement="top" title="Twitter"></a></li>
+													<li><a href="#" class="icon-gplus" data-toggle="tooltip" data-placement="top" title="Google Plus"></a></li>
+													<li><a href="#" class="icon-linkedin" data-toggle="tooltip" data-placement="top" title="Linkedin"></a></li>
+													<li><a href="#" class="icon-pinterest" data-toggle="tooltip" data-placement="top" title="Pinterest"></a></li>
+												</ul>
+											</td>
+											<td><span class="label label-success">Active</span></td>
+										</tr>
+
+										<tr>
+											<td><img src="assets/images/male.png" alt="" width="20"></td>
+											<td>John</td>
+											<td>Doe</td>
+											<td><div class="rating rating-4 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+											<td>john.doe@yourdomain.com</td>
+											<td>New York</td>
+											<td>
+												<div class="progress progress-xxs margin-bottom-0">
+													<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100" style="width: 77%; min-width: 2em;">
+														<span class="sr-only">77% Complete</span>
+													</div>
+												</div>
+											</td>
+											<td>
+												<ul class="list-inline nomargin size-12">
+													<li><a href="#" class="icon-facebook" data-toggle="tooltip" data-placement="top" title="Facebook"></a></li>
+													<li><a href="#" class="icon-twitter" data-toggle="tooltip" data-placement="top" title="Twitter"></a></li>
+													<li><a href="#" class="icon-gplus" data-toggle="tooltip" data-placement="top" title="Google Plus"></a></li>
+													<li><a href="#" class="icon-linkedin" data-toggle="tooltip" data-placement="top" title="Linkedin"></a></li>
+													<li><a href="#" class="icon-pinterest" data-toggle="tooltip" data-placement="top" title="Pinterest"></a></li>
+												</ul>
+											</td>
+											<td><span class="label label-primary">Admin</span></td>
+										</tr>
+
+										<tr>
+											<td><img src="assets/images/female.png" alt="" width="20"></td>
+											<td>John</td>
+											<td>Doe</td>
+											<td><div class="rating rating-5 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+											<td>john.doe@yourdomain.com</td>
+											<td>New York</td>
+											<td>
+												<div class="progress progress-xxs margin-bottom-0">
+													<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100" style="width: 66%; min-width: 2em;">
+														<span class="sr-only">66% Complete</span>
+													</div>
+												</div>
+											</td>
+											<td>
+												<ul class="list-inline nomargin size-12">
+													<li><a href="#" class="icon-facebook" data-toggle="tooltip" data-placement="top" title="Facebook"></a></li>
+													<li><a href="#" class="icon-twitter" data-toggle="tooltip" data-placement="top" title="Twitter"></a></li>
+													<li><a href="#" class="icon-gplus" data-toggle="tooltip" data-placement="top" title="Google Plus"></a></li>
+													<li><a href="#" class="icon-linkedin" data-toggle="tooltip" data-placement="top" title="Linkedin"></a></li>
+													<li><a href="#" class="icon-pinterest" data-toggle="tooltip" data-placement="top" title="Pinterest"></a></li>
+												</ul>
+											</td>
+											<td><span class="label label-success">Active</span></td>
+										</tr>
+
+										<tr>
+											<td><img src="assets/images/male.png" alt="" width="20"></td>
+											<td>John</td>
+											<td>Doe</td>
+											<td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+											<td>john.doe@yourdomain.com</td>
+											<td>New York</td>
+											<td>
+												<div class="progress progress-xxs margin-bottom-0">
+													<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%; min-width: 2em;">
+														<span class="sr-only">60% Complete</span>
+													</div>
+												</div>
+											</td>
+											<td>
+												<ul class="list-inline nomargin size-12">
+													<li><a href="#" class="icon-facebook" data-toggle="tooltip" data-placement="top" title="Facebook"></a></li>
+													<li><a href="#" class="icon-twitter" data-toggle="tooltip" data-placement="top" title="Twitter"></a></li>
+													<li><a href="#" class="icon-gplus" data-toggle="tooltip" data-placement="top" title="Google Plus"></a></li>
+													<li><a href="#" class="icon-linkedin" data-toggle="tooltip" data-placement="top" title="Linkedin"></a></li>
+													<li><a href="#" class="icon-pinterest" data-toggle="tooltip" data-placement="top" title="Pinterest"></a></li>
+												</ul>
+											</td>
+											<td><span class="label label-warning">Inactive</span></td>
+										</tr>
+
+										<tr>
+											<td><img src="assets/images/female.png" alt="" width="20"></td>
+											<td>John</td>
+											<td>Doe</td>
+											<td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+											<td>john.doe@yourdomain.com</td>
+											<td>New York</td>
+											<td>
+												<div class="progress progress-xxs margin-bottom-0">
+													<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%; min-width: 2em;">
+														<span class="sr-only">60% Complete</span>
+													</div>
+												</div>
+											</td>
+											<td>
+												<ul class="list-inline nomargin size-12">
+													<li><a href="#" class="icon-facebook" data-toggle="tooltip" data-placement="top" title="Facebook"></a></li>
+													<li><a href="#" class="icon-twitter" data-toggle="tooltip" data-placement="top" title="Twitter"></a></li>
+													<li><a href="#" class="icon-gplus" data-toggle="tooltip" data-placement="top" title="Google Plus"></a></li>
+													<li><a href="#" class="icon-linkedin" data-toggle="tooltip" data-placement="top" title="Linkedin"></a></li>
+													<li><a href="#" class="icon-pinterest" data-toggle="tooltip" data-placement="top" title="Pinterest"></a></li>
+												</ul>
+											</td>
+											<td><span class="label label-success">Active</span></td>
+										</tr>
+
+										<tr>
+											<td><img src="assets/images/male.png" alt="" width="20"></td>
+											<td>John</td>
+											<td>Doe</td>
+											<td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+											<td>john.doe@yourdomain.com</td>
+											<td>New York</td>
+											<td>
+												<div class="progress progress-xxs margin-bottom-0">
+													<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100" style="width: 78%; min-width: 2em;">
+														<span class="sr-only">78% Complete</span>
+													</div>
+												</div>
+											</td>
+											<td>
+												<ul class="list-inline nomargin size-12">
+													<li><a href="#" class="icon-facebook" data-toggle="tooltip" data-placement="top" title="Facebook"></a></li>
+													<li><a href="#" class="icon-twitter" data-toggle="tooltip" data-placement="top" title="Twitter"></a></li>
+													<li><a href="#" class="icon-gplus" data-toggle="tooltip" data-placement="top" title="Google Plus"></a></li>
+													<li><a href="#" class="icon-linkedin" data-toggle="tooltip" data-placement="top" title="Linkedin"></a></li>
+													<li><a href="#" class="icon-pinterest" data-toggle="tooltip" data-placement="top" title="Pinterest"></a></li>
+												</ul>
+											</td>
+											<td><span class="label label-info">Pending</span></td>
+										</tr>
+
+										<tr>
+											<td><img src="assets/images/female.png" alt="" width="20"></td>
+											<td>John</td>
+											<td>Doe</td>
+											<td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
+											<td>john.doe@yourdomain.com</td>
+											<td>New York</td>
+											<td>
+												<div class="progress progress-xxs margin-bottom-0">
+													<div class="progress-bar progress-bar-default" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" style="width: 88%; min-width: 2em;">
+														<span class="sr-only">88% Complete</span>
+													</div>
+												</div>
+											</td>
+											<td>
+												<ul class="list-inline nomargin size-12">
+													<li><a href="#" class="icon-facebook" data-toggle="tooltip" data-placement="top" title="Facebook"></a></li>
+													<li><a href="#" class="icon-twitter" data-toggle="tooltip" data-placement="top" title="Twitter"></a></li>
+													<li><a href="#" class="icon-gplus" data-toggle="tooltip" data-placement="top" title="Google Plus"></a></li>
+													<li><a href="#" class="icon-linkedin" data-toggle="tooltip" data-placement="top" title="Linkedin"></a></li>
+													<li><a href="#" class="icon-pinterest" data-toggle="tooltip" data-placement="top" title="Pinterest"></a></li>
+												</ul>
+											</td>
+											<td><span class="label label-success">Active</span></td>
+										</tr>
+
+									</tbody>
+								</table>
+								<!-- /USER LIST -->
+
 							</div>
 
-						</div>
 
-						<div class="col-md-6">
-
-							<div class="owl-carousel text-center owl-mini-testimonial nomargin" data-plugin-options='{"singleItem": true, "autoPlay": 4000, "navigation": false, "pagination": true, "transitionStyle":"fadeUp"}'>
-								<div class="testimonial">
-									<figure>
-										<img class="rounded" src="assets/images/demo/people/300x300/4-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero.</p>
-										<cite>
-											Joana Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
-								<div class="testimonial">
-									<figure>
-										<img class="rounded" src="assets/images/demo/people/300x300/5-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p>Quod necessitatibus quis expedita harum provident eos obcaecati id culpa.</p>
-										<cite>
-											Melissa Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
-								<div class="testimonial">
-									<figure>
-										<img class="rounded" src="assets/images/demo/people/300x300/6-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p>Deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum.</p>
-										<cite>
-											John Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
-								<div class="testimonial">
-									<figure>
-										<img class="rounded" src="assets/images/demo/people/300x300/11-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p>Fugit repellendus expedita excepturi iure perferendis provident quia eaque.</p>
-										<cite>
-											Simina Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
+							<!-- PAGINATION -->
+							<div class="text-center margin-top-20">
+								<ul class="pagination">
+									<li class="disabled"><a href="#">Previous</a></li>
+									<li class="active"><a href="#">1</a></li>
+									<li><a href="#">2</a></li>
+									<li><a href="#">3</a></li>
+									<li><a href="#">4</a></li>
+									<li><a href="#">5</a></li>
+									<li><a href="#">Next</a></li>
+								</ul>
 							</div>
-
-						</div>
-
-					</div>
-
-					<div class="divider divider-dotted hiddn-xs"><!-- divider --></div>
-
-					<div class="row">
-						
-						<div class="col-md-6">
-
-							<div class="owl-carousel text-center owl-mini-testimonial nomargin" data-plugin-options='{"singleItem": true, "autoPlay": 4000, "navigation": false, "pagination": true, "transitionStyle":"goDown"}'>
-								<div class="testimonial">
-									<figure>
-										<img class="rounded" src="assets/images/demo/people/300x300/7-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero.</p>
-										<cite>
-											Joana Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
-								<div class="testimonial">
-									<figure>
-										<img class="rounded" src="assets/images/demo/people/300x300/8-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p>Quod necessitatibus quis expedita harum provident eos obcaecati id culpa.</p>
-										<cite>
-											Melissa Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
-								<div class="testimonial">
-									<figure>
-										<img class="rounded" src="assets/images/demo/people/300x300/9-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p>Deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum.</p>
-										<cite>
-											John Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
-								<div class="testimonial">
-									<figure>
-										<img class="rounded" src="assets/images/demo/people/300x300/10-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p>Fugit repellendus expedita excepturi iure perferendis provident quia eaque.</p>
-										<cite>
-											Simina Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
-							</div>
-
-						</div>
-
-						<div class="col-md-6">
-
-							<div class="owl-carousel text-center owl-mini-testimonial nomargin" data-plugin-options='{"singleItem": true, "autoPlay": 4000, "navigation": false, "pagination": true, "transitionStyle":"backSlide"}'>
-								<div class="testimonial">
-									<figure>
-										<img src="assets/images/demo/people/300x300/10-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero.</p>
-										<cite>
-											Joana Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
-								<div class="testimonial">
-									<figure>
-										<img src="assets/images/demo/people/300x300/11-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p>Quod necessitatibus quis expedita harum provident eos obcaecati id culpa.</p>
-										<cite>
-											Melissa Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
-								<div class="testimonial">
-									<figure>
-										<img src="assets/images/demo/people/300x300/12-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p>Deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum.</p>
-										<cite>
-											John Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
-								<div class="testimonial">
-									<figure>
-										<img src="assets/images/demo/people/300x300/9-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p>Fugit repellendus expedita excepturi iure perferendis provident quia eaque.</p>
-										<cite>
-											Simina Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
-							</div>
-
-						</div>
-
-					</div>
-
-<!-- pre code -->
-<div class="text-left margin-top-20">
-	<a href="javascript:;" onclick="jQuery('#pre-2car').slideToggle();">Show Code</a>
-</div>
-<pre id="pre-2car" class="text-left noradius text-danger softhide">
-<span class="text-success">&lt;!-- 
-	data-plugin-options:
-		"transitionStyle":"fadeUp" (fade,backSlide,goDown,fadeUp)
-
-	Note: remove class="rounded" from the img for squared image!
---&gt;</span>
-&lt;div class="owl-carousel text-center owl-mini-testimonial nomargin" data-plugin-options='{"singleItem": true, "autoPlay": 4000, "navigation": false, "pagination": true, "transitionStyle":"fade"}'&gt;
-
-	&lt;div class="testimonial"&gt;
-		&lt;figure&gt;
-			&lt;img class="rounded" src="assets/images/demo/people/300x300/11-min.jpg" alt="" /&gt;
-		&lt;/figure&gt;
-		&lt;div class="testimonial-content nopadding"&gt;
-			&lt;p&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero.&lt;/p&gt;
-			&lt;cite&gt;
-				Joana Doe
-				&lt;span&gt;Company Ltd.&lt;/span&gt;
-			&lt;/cite&gt;
-		&lt;/div&gt;
-	&lt;/div&gt;
-
-	&lt;div class="testimonial"&gt;
-		&lt;figure&gt;
-			&lt;img class="rounded" src="assets/images/demo/people/300x300/12-min.jpg" alt="" /&gt;
-		&lt;/figure&gt;
-		&lt;div class="testimonial-content nopadding"&gt;
-			&lt;p&gt;Quod necessitatibus quis expedita harum provident eos obcaecati id culpa.&lt;/p&gt;
-			&lt;cite&gt;
-				Melissa Doe
-				&lt;span&gt;Company Ltd.&lt;/span&gt;
-			&lt;/cite&gt;
-		&lt;/div&gt;
-	&lt;/div&gt;
-
-&lt;/div&gt;
-</pre>
-<!-- /pre code -->
-
-				</div>
-			</section>
-			<!-- / -->
-
-
-
-
-
-			<!-- -->
-			<section class="parallax parallax-3" style="background-image:url('assets/images/demo/1200x800/20-min.jpg')">
-				<div class="overlay dark-6"><!-- dark overlay [1 to 9 opacity] --></div>
-
-				<div class="container">
-
-					<div class="owl-carousel text-center owl-testimonial nomargin" data-plugin-options='{"singleItem": true, "autoPlay": 3500, "navigation": false, "pagination": true, "transitionStyle":"fade"}'>
-						<div class="testimonial">
-							<figure>
-								<img class="rounded" src="assets/images/demo/people/300x300/11-min.jpg" alt="" />
-							</figure>
-							<div class="testimonial-content nopadding">
-								<p class="lead">Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero.</p>
-								<cite>
-									Joana Doe
-									<span>Company Ltd.</span>
-								</cite>
-							</div>
-						</div>
-						<div class="testimonial">
-							<figure>
-								<img class="rounded" src="assets/images/demo/people/300x300/12-min.jpg" alt="" />
-							</figure>
-							<div class="testimonial-content nopadding">
-								<p class="lead">Quod necessitatibus quis expedita harum provident eos obcaecati id culpa.</p>
-								<cite>
-									Melissa Doe
-									<span>Company Ltd.</span>
-								</cite>
-							</div>
-						</div>
-						<div class="testimonial">
-							<figure>
-								<img class="rounded" src="assets/images/demo/people/300x300/d-min.jpg" alt="" />
-							</figure>
-							<div class="testimonial-content nopadding">
-								<p class="lead">Deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum.</p>
-								<cite>
-									John Doe
-									<span>Company Ltd.</span>
-								</cite>
-							</div>
-						</div>
-						<div class="testimonial">
-							<figure>
-								<img class="rounded" src="assets/images/demo/people/300x300/c-min.jpg" alt="" />
-							</figure>
-							<div class="testimonial-content nopadding">
-								<p class="lead">Fugit repellendus expedita excepturi iure perferendis provident quia eaque.</p>
-								<cite>
-									Simina Doe
-									<span>Company Ltd.</span>
-								</cite>
-							</div>
-						</div>
-					</div>
-
-				</div>
-			</section>
-			<!-- / -->
-
-			<!-- -->
-			<section class="padding-xxs">
-				<div class="container">
-
-<!-- pre code -->
-<div class="text-left margin-top-20">
-	<a href="javascript:;" onclick="jQuery('#pre-3').slideToggle();">Show Code</a>
-</div>
-<pre id="pre-3" class="text-left noradius text-danger softhide">
-<span class="text-success">&lt;!-- 
-	Note: remove class="rounded" from the img for squared image!
---&gt;</span>
-&lt;section class="parallax parallax-3" style="background-image:url('assets/images/demo/1200x800/20-min.jpg')"&gt;
-	&lt;div class="overlay dark-6"&gt;&lt;!-- dark overlay [1 to 9 opacity] --&gt;&lt;/div&gt;
-
-	&lt;div class="container"&gt;
-
-		&lt;div class="owl-carousel text-center owl-testimonial nomargin" data-plugin-options='{"singleItem": true, "autoPlay": 3500, "navigation": false, "pagination": true, "transitionStyle":"fade"}'&gt;
-			&lt;div class="testimonial"&gt;
-				&lt;figure&gt;
-					&lt;img class="rounded" src="assets/images/demo/people/300x300/11-min.jpg" alt="" /&gt;
-				&lt;/figure&gt;
-				&lt;div class="testimonial-content nopadding"&gt;
-					&lt;p class="lead"&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero.&lt;/p&gt;
-					&lt;cite&gt;
-						Joana Doe
-						&lt;span&gt;Company Ltd.&lt;/span&gt;
-					&lt;/cite&gt;
-				&lt;/div&gt;
-			&lt;/div&gt;
-			&lt;div class="testimonial"&gt;
-				&lt;figure&gt;
-					&lt;img class="rounded" src="assets/images/demo/people/300x300/12-min.jpg" alt="" /&gt;
-				&lt;/figure&gt;
-				&lt;div class="testimonial-content nopadding"&gt;
-					&lt;p class="lead"&gt;Quod necessitatibus quis expedita harum provident eos obcaecati id culpa.&lt;/p&gt;
-					&lt;cite&gt;
-						Melissa Doe
-						&lt;span&gt;Company Ltd.&lt;/span&gt;
-					&lt;/cite&gt;
-				&lt;/div&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-
-	&lt;/div&gt;
-&lt;/section&gt;
-<span class="text-success">&lt;!-- / --&gt;</span>
-
-</pre>
-<!-- /pre code -->
+							<!-- /PAGINATION -->
 
 				</div>
 			</section>
@@ -2245,7 +1643,6 @@
 							<!-- Social Icons -->
 							<div class="margin-top-20">
 								<a href="#" class="social-icon social-icon-border social-facebook pull-left" data-toggle="tooltip" data-placement="top" title="Facebook">
-
 									<i class="icon-facebook"></i>
 									<i class="icon-facebook"></i>
 								</a>
