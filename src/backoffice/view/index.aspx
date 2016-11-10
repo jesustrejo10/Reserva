@@ -246,13 +246,12 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
                     <li class="treeview">
-                        <a href="modules/gestion_automoviles/GestionDeAutomoviles.aspx"> <i class="fa fa-car"></i> <span>Gestion de Automoviles</span> <span class="pull-right-container">
+                        <a href="modules/gestion_automoviles/GestionDeAutomoviles.aspx"> <i class="fa fa-car"></i> <span>Gestión de Automoviles</span> <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span> </a>
                         <ul class="treeview-menu">
-                            <li><a href="modules/gestion_automoviles/GestionDeAutomoviles.aspx"><i class="fa fa-plus-square-o"></i>Crear</a></li>
-                            <li><a href="pages/charts/morris.html"><i class="fa fa-gear"></i>Modificar</a></li>
-                            <li class="active"> <a href="pages/charts/flot.html"><i class="fa fa-eye"></i>Visualizar</a></li>
+                            <li><a href="modules/gestion_automoviles/M08_AgregarAutomovil.html"><i class="fa fa-plus-square-o"></i>Crear</a></li>
+                            <li><a href="modules/gestion_automoviles/M08_VisualizarAutomoviles.html"><i class="fa fa-eye"></i>Visualizar</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
@@ -268,7 +267,7 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </span> </a>
                         <ul class="treeview-menu">
-                            <li><a href="modules/gestion_cruceros/M24_GestionCruceros.html"><i class="fa fa-plus-square-o"></i>Gestiónar</a></li>
+                            <li><a href="modules/gestion_cruceros/M24_GestionCruceros.html"><i class="fa fa-plus-square-o"></i>Gestionar</a></li>
                         </ul>
                     </li>
                     <!-- MODULO DE AVIONES -->
