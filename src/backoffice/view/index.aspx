@@ -250,9 +250,8 @@
               <i class="fa fa-angle-left pull-right"></i>
             </span> </a>
                         <ul class="treeview-menu">
-                            <li><a href="modules/gestion_automoviles/GestionDeAutomoviles.aspx"><i class="fa fa-plus-square-o"></i>Crear</a></li>
-                            <li><a href="pages/charts/morris.html"><i class="fa fa-gear"></i>Modificar</a></li>
-                            <li class="active"> <a href="pages/charts/flot.html"><i class="fa fa-eye"></i>Visualizar</a></li>
+                            <li><a href="modules/gestion_automoviles/M08_AgregarAutomovil.html"><i class="fa fa-plus-square-o"></i>Crear</a></li>
+                            <li><a href="modules/gestion_automoviles/M08_VisualizarAutomoviles.html"><i class="fa fa-eye"></i>Visualizar</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
