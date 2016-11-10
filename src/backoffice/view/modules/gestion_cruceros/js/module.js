@@ -9,5 +9,10 @@
  $(".editCabin").click(function (event) {
      event.stopPropagation();
      event.preventDefault();
-     $('#createCabin').modal('show');
+     $('#editCabin').modal('show');
+ });
+$(".editIti").click(function (event) {
+     event.stopPropagation();
+     event.preventDefault();
+     $('#editIti').modal('show');
  });
