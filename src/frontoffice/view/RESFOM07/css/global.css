@@ -1,0 +1,16 @@
+﻿.color-azul {
+    color: rgb(25, 126, 197) !important;
+}
+
+.color-gris-oscuro {
+    color: rgb(130, 130, 130) !important;
+}
+
+
+.centrado{
+    text-align:center;
+    /* display: flex !important; */
+    align-items: center;
+    flex-direction: row;
+    align-content: center;
+}
