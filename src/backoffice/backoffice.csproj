@@ -132,6 +132,7 @@
     <Content Include="view\modules\gestion_automoviles\GestionDeAutomoviles.html" />
     <Content Include="view\modules\gestion_automoviles\js\module.js" />
     <Content Include="view\modules\gestion_automoviles\M08_AgregarAutomovil.html" />
+    <Content Include="view\modules\gestion_automoviles\M08_VisualizarAutomovil.html" />
     <Content Include="view\modules\gestion_automoviles\M08_VisualizarAutomoviles.html" />
     <Content Include="view\modules\gestion_aviones\M02_GestionAviones.html" />
     <Content Include="view\modules\gestion_aviones\placeholder.html" />
