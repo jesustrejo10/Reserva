@@ -1,0 +1,21 @@
+.container-form {
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.text-left {
+	text-align: left !important;
+}
+
+.text-right {
+	text-align: right !important;
+}
+
+.text-center {
+	text-align: center !important;
+}
+
+.black-color {
+	background-color: rgba(50, 50, 50, 1) !important;
+	color: white !important;
+}

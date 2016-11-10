@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<!--[if IE 8]>			<html class="ie ie8"> <![endif]-->
+<!--[if IE 9]>			<html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+	<head>
+		<meta charset="utf-8" />
+		<title>Reserva</title>
+		<meta name="keywords" content="HTML5,CSS3,Template" />
+		<meta name="description" content="" />
+		<meta name="Author" content="Dorin Grigoras [www.stepofweb.com]" />
+
+		<!-- mobile settings -->
+		<meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
+		<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+
+		<!-- WEB FONTS : use %7C instead of | (pipe) -->
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400%7CRaleway:300,400,500,600,700%7CLato:300,400,400italic,600,700" rel="stylesheet" type="text/css" />
+
+		<!-- CORE CSS -->
+		<link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		
+		<!-- THEME CSS -->
+		<link href="assets/css/essentials.css" rel="stylesheet" type="text/css" />
+		<link href="assets/css/layout.css" rel="stylesheet" type="text/css" />
+
+		<!-- PAGE LEVEL SCRIPTS -->
+		<link href="assets/css/header-1.css" rel="stylesheet" type="text/css" />
+		<link href="assets/css/layout-shop.css" rel="stylesheet" type="text/css" />
+		<link href="assets/css/color_scheme/green.css" rel="stylesheet" type="text/css" id="color_scheme" />
+	</head>
+
+	<body class="smoothscroll enable-animation">
+
+		<!-- SLIDE TOP -->
+		<div id="slidetop">
+
+			<div class="container">
+
+
+			</div>
+
+		</div>
+		<!-- /SLIDE TOP -->
+
+
+		<!-- wrapper -->
+		<div id="wrapper">
+
+			<!-- Top Bar -->
+			<div id="topBar" class="dark">
+				<div class="container">
+
+					<!-- right -->
+					<ul class="top-links list-inline pull-right">
+				        <!--<li class="hidden-xs"><a href="page-login-1.html">Iniciar Sesión</a></li>-->
+						<!--<li class="hidden-xs"><a href="page-register-1.html">Registrar</a></li>-->
+						<li class="text-welcome">Bienvenido, <strong>Pedro Perez</strong></li>
+                        <li>
+                            <a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href="#"><i class="fa fa-user hidden-xs"></i> Mi perfil</a>
+                            <ul class="dropdown-menu">
+                                <li><a tabindex="-1" href="m17_itinerario.html"><i class="fa fa-map-o"></i> Itinerario</a></li>                              
+                                <li class="divider"></li>
+                                <li><a tabindex="-1" href="#"><i class="glyphicon glyphicon-off"></i> Cerrar Sesion</a></li>
+                            </ul>
+                        </li>
+					</ul>
+
+				</div>
+			</div>
+			<!-- /Top Bar -->
+
+			<!-- 
+				AVAILABLE HEADER CLASSES
+
+				Default nav height: 96px
+				.header-md 		= 70px nav height
+				.header-sm 		= 60px nav height
+
+				.noborder 		= remove bottom border (only with transparent use)
+				.transparent	= transparent header
+				.translucent	= translucent header
+				.sticky			= sticky header
+				.static			= static header
+				.dark			= dark header
+				.bottom			= header on bottom
+				
+				shadow-before-1 = shadow 1 header top
+				shadow-after-1 	= shadow 1 header bottom
+				shadow-before-2 = shadow 2 header top
+				shadow-after-2 	= shadow 2 header bottom
+				shadow-before-3 = shadow 3 header top
+				shadow-after-3 	= shadow 3 header bottom
+
+				.clearfix		= required for mobile menu, do not remove!
+
+				Example Usage:  class="clearfix sticky header-sm transparent noborder"
+			-->
+			<div id="header" class="sticky clearfix">
+
+				<!-- SEARCH HEADER -->
+				<div class="search-box over-header">
+					<a id="closeSearch" href="#" class="glyphicon glyphicon-remove"></a>
+
+					<form action="page-search-result-1.html" method="get">
+						<input type="text" class="form-control" placeholder="SEARCH" />
+					</form>
+				</div> 
+				<!-- /SEARCH HEADER -->
+
+
+				<!-- TOP NAV -->
+				<header id="topNav">
+					<div class="container">
+
+						<!-- Mobile Menu Button -->
+						<button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
+							<i class="fa fa-bars"></i>
+						</button>
+
+						<!-- BUTTONS -->
+						<ul class="pull-right nav nav-pills nav-second-main">
+
+							<!-- SEARCH -->
+							<li class="search">
+								<a href="javascript:;">
+									<i class="fa fa-search"></i>
+								</a>
+							</li>
+							<!-- /SEARCH -->
+
+						</ul>
+						<!-- /BUTTONS -->
+
+						<!-- Logo -->
+						<a class="logo pull-left" href="index.html">
+							<img src="assets/images/logo_final.png" alt="" />
+						</a>
+
+						<!-- 
+							Top Nav 
+							
+							AVAILABLE CLASSES:
+							submenu-dark = dark sub menu
+						-->
+						<div class="navbar-collapse pull-right nav-main-collapse collapse">
+							<nav class="nav-main">
+
+								<!--
+									NOTE
+									
+									For a regular link, remove "dropdown" class from LI tag and "dropdown-toggle" class from the href.
+									Direct Link Example: 
+
+									<li>
+										<a href="#">HOME</a>
+									</li>
+								-->
+								<ul id="topMain" class="nav nav-pills nav-main">
+									<li class="active"><!-- HOME -->
+										<a href="index.html"> INICIO </a>
+									</li>
+                                    <li><!-- SOBRE NOSOTROS -->
+										<a href="page-about-us.html"> SOBRE NOSOTROS </a>
+									</li>
+                                    <li><!-- CONTACTO -->
+										<a href="page-contact.html"> CONTACTO </a>
+									</li>
+                                </ul>
+
+							</nav>
+						</div>
+
+					</div>
+				</header>
+				<!-- /Top Nav -->
+
+			</div>
+
+			<!-- FEATURED GRID -->
+			<section class="featured-grid">
+				<div class="container">
+
+                    <div class="row">
+
+                        <ul class="nav nav-tabs">
+                                    <li class="active"><a href="#">Vuelos</a></li>
+                                    <li><a href="#">Autos</a></li>
+                                    <li><a href="#">Hoteles</a></li>
+                                    <li><a href="#">Restaurantes</a></li>
+                                    <li><a href="#">Cruceros</a></li>
+                                </ul>
+						<div class="panel panel-default col-sm-6">
+                            <div class="panel-body">
+                                
+                                <div class="heading-title">
+                                    <h3><span>Vuelos</span></h3>
+                                </div>
+                                
+								<form class="validate" action="php/contact.php" method="post" enctype="multipart/form-data" data-success="Sent! Thank you!" data-toastr-position="top-right">
+									<fieldset>
+										<!-- required [php action request] -->
+										<input type="hidden" name="action" value="contact_send" />
+
+										<div class="row">
+											<div class="form-group">
+												<div class="col-md-6 col-sm-6">
+													<label>Origen</label>
+													<input type="text" name="contact[first_name]" value="" class="form-control required">
+												</div>
+												<div class="col-md-6 col-sm-6">
+													<label>Destino</label>
+													<input type="text" name="contact[last_name]" value="" class="form-control required">
+												</div>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="form-group">
+												<div class="col-md-6 col-sm-6">
+													<label>Fecha ida</label>
+													<input type="text" name="contact[start_date]" value="" class="form-control datepicker required" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
+												</div>
+												<div class="col-md-6 col-sm-6">
+													<label>Fecha vuelta</label>
+													<input type="text" name="contact[start_date]" value="" class="form-control datepicker required" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
+												</div>
+											</div>
+										</div>
+                                        
+                                        <div class="row">
+											<div class="form-group">
+												<div class="col-md-6 col-sm-6">
+													<label>Adulto</label>
+													<select name="contact[position]" class="form-control pointer required">
+														<option value="">--- Select ---</option>
+														<option value="Marketing">PR &amp; Marketing</option>
+														<option value="Developer">Web Developer</option>
+														<option value="php">PHP Programmer</option>
+														<option value="Javascript">Javascript Programmer</option>
+													</select>
+												</div>
+											</div>
+										</div>
+                 
+									</fieldset>
+
+									<div class="row text-center">
+										<div class="col-md-12">
+											<button type="button" class="btn btn-primary">Buscar</button>
+										</div>
+									</div>
+
+								</form>
+
+							</div>
+						</div>
+
+						<div class="col-sm-6">
+							<div class="relative">
+								<img src="assets/images/demo/shop/home/man_cat.jpg" alt="" />
+								<div class="absolute text-left">
+									<h2> - CAMBIAR -</h2>
+									<p>
+										YOU DON'T WANT TO MISS!
+									</p>
+									
+									<p class="font-lato margin-top-30 size-16 hidden-sm hidden-xs">Donec tellus massa, tristique sit amet condim vel,<br /> facilisis quis sapien. Praesent id enim sit amet.</p>
+									<a class="btn btn-primary margin-top-20" href="#">Shop Now &raquo;</a>
+								</div>
+							</div>
+
+							<div class="relative">
+								<img src="assets/images/demo/shop/home/woman_cat.jpg" alt="" />
+								<div class="absolute text-right">
+									<h2> - CAMBIAR -</h2>
+									<p>
+										YOU DON'T WANT TO MISS!
+									</p>
+
+									<p class="font-lato margin-top-30 size-16 hidden-sm hidden-xs">Donec tellus massa, tristique sit amet condim vel,<br /> facilisis quis sapien. Praesent id enim sit amet.</p>
+									<a class="btn btn-primary margin-top-20" href="#">Shop Now &raquo;</a>
+								</div>
+							</div>
+							
+						</div>
+						
+					</div>
+
+				</div>
+			</section>
+			<!-- /FEATURED GRID -->
+
+
+
+			<!-- INFO BAR -->
+            <!--
+			<section class="info-bar info-bar-clean">
+				<div class="container">
+
+					<div class="row">
+
+						<div class="col-sm-3">
+							<i class="glyphicon glyphicon-globe"></i>
+							<h3>FREE SHIPPING &amp; RETURN</h3>
+							<p>Free shipping on all orders over $99.</p>
+						</div>
+
+						<div class="col-sm-3">
+							<i class="glyphicon glyphicon-usd"></i>
+							<h3>MONEY BACK GUARANTEE</h3>
+							<p>100% money back guarantee.</p>
+						</div>
+
+						<div class="col-sm-3">
+							<i class="glyphicon glyphicon-flag"></i>
+							<h3>ONLINE SUPPORT 24/7</h3>
+							<p>Lorem ipsum dolor sit amet.</p>
+						</div>
+
+						<div class="col-sm-3">
+							<i class="glyphicon glyphicon-heart"></i>
+							<h3><span class="countTo">9845</span> HAPPY CUSTOMERS</h3>
+							<p>Lorem ipsum dolor sit amet.</p>
+						</div>
+
+					</div>
+
+				</div>
+			</section>
+            -->
+			<!-- /INFO BAR -->
+
+
+			<!-- FOOTER -->
+			<footer id="footer">
+				<div class="container">
+
+					<div class="row margin-top-10 margin-bottom-10 size-13">
+
+						<!-- col #1 -->
+						<div class="col-md-4 col-sm-4">
+
+
+							<!-- Social Icons -->
+							<div class="clearfix">
+
+								<a href="#" class="social-icon social-icon-sm social-icon-border social-facebook pull-left" data-toggle="tooltip" data-placement="top" title="Facebook">
+									<i class="icon-facebook"></i>
+									<i class="icon-facebook"></i>
+								</a>
+
+								<a href="#" class="social-icon social-icon-sm social-icon-border social-twitter pull-left" data-toggle="tooltip" data-placement="top" title="Twitter">
+									<i class="icon-twitter"></i>
+									<i class="icon-twitter"></i>
+								</a>
+
+								<a href="#" class="social-icon social-icon-sm social-icon-border social-gplus pull-left" data-toggle="tooltip" data-placement="top" title="Google plus">
+									<i class="icon-gplus"></i>
+									<i class="icon-gplus"></i>
+								</a>
+
+								<a href="#" class="social-icon social-icon-sm social-icon-border social-linkedin pull-left" data-toggle="tooltip" data-placement="top" title="Linkedin">
+									<i class="icon-linkedin"></i>
+									<i class="icon-linkedin"></i>
+								</a>
+
+								<a href="#" class="social-icon social-icon-sm social-icon-border social-rss pull-left" data-toggle="tooltip" data-placement="top" title="Rss">
+									<i class="icon-rss"></i>
+									<i class="icon-rss"></i>
+								</a>
+
+							</div>
+							<!-- /Social Icons -->
+
+						</div>
+						<!-- /col #1 -->
+
+                        <!-- col #2 -->
+						<div class="col-md-8 col-sm-8">
+
+							<div class="row text-center">
+
+								<div class="col-md-4">
+									<h4 class="letter-spacing-1">PAGOS</h4>
+									<p>	<!-- see assets/images/cc/ for more icons -->
+										<img src="assets/images/cc/Visa.png" alt="" />
+										<img src="assets/images/cc/Mastercard.png" alt="" />
+										<img src="assets/images/cc/Maestro.png" alt="" />
+										<img src="assets/images/cc/PayPal.png" alt="" />
+									</p>
+								</div>
+
+							</div>
+
+						</div>
+						<!-- /col #2 -->
+
+					</div>
+
+				</div>
+
+				<div class="copyright">
+					<div class="container">
+						<ul class="pull-right nomargin list-inline mobile-block">
+							<li><a href="#">Terms &amp; Conditions</a></li>
+							<li>&bull;</li>
+							<li><a href="#">Privacy</a></li>
+						</ul>
+
+						&copy; All Rights Reserved, Reserva
+					</div>
+				</div>
+
+			</footer>
+			<!-- /FOOTER -->
+
+
+		</div>
+		<!-- /wrapper -->
+
+
+
+
+
+
+		<!-- SCROLL TO TOP -->
+		<a href="#" id="toTop"></a>
+
+
+		<!-- PRELOADER -->
+		<div id="preloader">
+			<div class="inner">
+				<span class="loader"></span>
+			</div>
+		</div><!-- /PRELOADER -->
+
+
+		<!-- JAVASCRIPT FILES -->
+		<script type="text/javascript">var plugin_path = 'assets/plugins/';</script>
+		<script type="text/javascript" src="assets/plugins/jquery/jquery-2.1.4.min.js"></script>
+
+		<script type="text/javascript" src="assets/js/scripts.js"></script>
+		
+
+		<!-- PAGE LEVEL SCRIPTS -->
+		<script type="text/javascript" src="assets/js/view/demo.shop.js"></script>
+	</body>
+</html>
