@@ -273,6 +273,31 @@
                     <!-- MODULO DE AVIONES -->
                     <li><a href="modules/gestion_aviones/M02_GestionAviones.html"><i class="fa fa-plane"></i> <span>Gestión de Aviones</span></a></li>
                     <!-- FIN MODULO DE AVIONES -->
+                    
+                    
+                    <!-- MODULO DE BOLETOS AEREOS Y CHECK-IN -->
+                    <li class="treeview">
+                      <a href="#">
+                        <i class="fa fa-files-o"></i>
+                        <span>Vuelos</span>
+                        <span class="pull-right-container">
+                        </span>
+                      </a>
+                      <ul class="treeview-menu">
+                        <li><a href="modules/gestion_venta_boleto/crearboletosvuelos.html"><i class="fa fa-circle-o"></i>Crear boleto</a></li>
+                        <li><a href="modules/gestion_venta_boleto/consultarboleto.html"><i class="fa fa-circle-o"></i>Consultar boleto</a></li>
+                        <li><a href="modules/gestion_venta_boleto/modificarboleto.html"><i class="fa fa-circle-o"></i>Modificar boleto</a></li>
+                        <li><a href="modules/gestion_venta_boleto/eliminarboleto.html"><i class="fa fa-circle-o"></i>Eliminar boleto</a></li>
+                      </ul>
+                    </li>
+                    
+
+        <li><a href="modules/gestion_venta_boleto/checkin.html"><i class="fa fa-book"></i> <span>Check in</span></a></li>
+                    <!-- FIN MODULO DE BOLETOS AEREOS Y CHECK-IN -->
+                    
+                    
+                    
+                    
                 </ul>
             </section>
             <!-- /.sidebar -->
