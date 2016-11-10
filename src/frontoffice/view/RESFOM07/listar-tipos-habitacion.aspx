@@ -22,32 +22,32 @@
         <tbody>
             <tr>
                 <td><a href="detalle-tipo-habitacion.aspx">0</a></td>
-                <td>Hotel</td>
-                <td>H5-030A</td>
+                <td>Penthouse</td>
+                <td>Lujos sin más</td>
                 <td><span class="label label-success">Activo</span></td>
             </tr>
             <tr>
-                <td><a href="detalle-tipo-habitacion.aspx">0</a></td>
-                <td>Hotel</td>
-                <td>H5-030A</td>
+                <td><a href="detalle-tipo-habitacion.aspx">1</a></td>
+                <td>5 Estrellas</td>
+                <td>La comodidad es prioridad.</td>
                 <td><span class="label label-success">Activo</span></td>                
             </tr>
             <tr>
-                <td><a href="detalle-tipo-habitacion.aspx">0</a></td>
-                <td>Hotel</td>
-                <td>H5-030A</td>
-                <td><span class="label label-default">Inactivo</span></td>                
+                <td><a href="detalle-tipo-habitacion.aspx">2</a></td>
+                <td>3 Estrellas</td>
+                <td>Ideal.</td>
+                <td><span class="label label-success">Activo</span></td>                
             </tr>
             <tr>
-                <td><a href="detalle-tipo-habitacion.aspx">0</a></td>
-                <td>Hotel</td>
-                <td>H5-030A</td>
+                <td><a href="detalle-tipo-habitacion.aspx">3</a></td>
+                <td>1 Estrella</td>
+                <td>Economica.</td>
                 <td><span class="label label-default">Inactivo</span></td>
             </tr>
             <tr>
-                <td><a href="detalle-tipo-habitacion.aspx">0</a></td>
-                <td>Hotel</td>
-                <td>H5-030A</td>
+                <td><a href="detalle-tipo-habitacion.aspx">4</a></td>
+                <td>Gratuita</td>
+                <td>Peor es nada.</td>
                 <td><span class="label label-default">Inactivo</span></td>
             </tr>
         </tbody>
