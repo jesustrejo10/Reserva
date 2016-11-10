@@ -51,7 +51,7 @@
 
 .crNombre {
     padding-left: 10px!important;
-    width: calc(75% - 672px);
+    width: calc(20% - 4px);
     display: inline-block;
 }
 
@@ -99,7 +99,7 @@
 }
 
 .listCru .crNombre {
-    width: calc(75% - 663px);
+    width: calc(20% );
 }
 
 .listCru .crAcciones {
