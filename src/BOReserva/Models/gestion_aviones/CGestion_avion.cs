@@ -19,5 +19,9 @@ namespace BOReserva.Models.gestion_aviones
         public float _velocidadMaximaDeVueloAgregar { get; set; }
         public float _potenciaMotor1Agregar { get; set; }
         public float _potenciaMotor2Agregar { get; set; }
+        public String _matriculaConsultarEstadisticaAvion { get; set; }
+        public float _kmsRecorridosConsultarEstadistica { get; set; }
+        public float _combustibleConsumidoConsultarEstadistica { get; set; }
+        public int _pasajerosTransportadosConsultarEstadistica { get; set; }
     }
 }
