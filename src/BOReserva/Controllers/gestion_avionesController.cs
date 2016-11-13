@@ -25,11 +25,13 @@ namespace BOReserva.Controllers
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
 
+        /*Metodo para consultar la matricula de un avion para sus estadisticas*/
         [HttpPost]
         public JsonResult consultarEstadisticasAvion(CGestion_avion model)
         {
             String prueba = model._matriculaConsultarEstadisticaAvion;
             return (Json(true, JsonRequestBehavior.AllowGet));
+            
         }
 
 
