@@ -1380,7 +1380,6 @@
     <Content Include="Views\gestion_aviones\M02_GestionAviones.cshtml" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -1388,9 +1387,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-3.1.1.min.map" />
-=======
+
     <Content Include="Views\gestion_automoviles\M08_AgregarAutomovil.cshtml" />
->>>>>>> refs/remotes/origin/Develop
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
