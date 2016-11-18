@@ -1333,8 +1333,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\gestion_automoviles\M08_ModificarAutomovil.cshtml" />
-    <Content Include="Views\gestion_automoviles\M08_VisualizarAutomovil.cshtml" />
     <Content Include="Views\gestion_automoviles\M08_VisualizarAutomoviles.cshtml" />
+    <Content Include="Views\gestion_automoviles\M08_VisualizarAutomovil.cshtml" />
+    <Content Include="Views\gestion_automoviles\M08_AgregarAutomovil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1390,7 +1391,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-3.1.1.min.map" />
-    <Content Include="Views\gestion_automoviles\M08_AgregarAutomovil.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
