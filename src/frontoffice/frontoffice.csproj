@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,8 +39,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DotNetOpenAuth.Core, Version=4.3.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetOpenAuth.Core.4.3.4.13329\lib\net45-full\DotNetOpenAuth.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http">
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -54,6 +67,10 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml" />
+    <Reference Include="WebMatrix.Data, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.3.2.3\lib\net45\WebMatrix.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="view\ajax\dummy-jqtable.html" />
@@ -1236,10 +1253,99 @@
     <Content Include="view\assets\plugins\widget.jflickr\style.css" />
     <Content Include="view\assets\plugins\widget.twittie\twittie.min.js" />
     <Content Include="view\index.html" />
+    <Content Include="view\RESFOM07\css\global.css" />
+    <Content Include="view\RESFOM07\detalle-habitacion.aspx" />
+    <Content Include="view\RESFOM07\detalle-reserva.aspx" />
+    <Content Include="view\RESFOM07\detalle-tipo-habitacion.aspx" />
+    <Content Include="view\RESFOM07\guardar-habitacion.aspx" />
+    <Content Include="view\RESFOM07\guardar-reserva.aspx" />
+    <Content Include="view\RESFOM07\guardar-tipo-habitacion.aspx" />
+    <Content Include="view\RESFOM07\listar-habitaciones.aspx" />
+    <Content Include="view\RESFOM07\listar-reservas.aspx" />
+    <Content Include="view\RESFOM07\js\reserva.js" />
+    <Content Include="view\RESFOM07\listar-tipos-habitacion-por-hotel.aspx" />
+    <Content Include="view\RESFOM07\listar-tipos-habitacion.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="view\RESFOM07\detalle-habitacion.aspx.cs">
+      <DependentUpon>detalle-habitacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\RESFOM07\detalle-habitacion.aspx.designer.cs">
+      <DependentUpon>detalle-habitacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\RESFOM07\detalle-reserva.aspx.cs">
+      <DependentUpon>detalle-reserva.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\RESFOM07\detalle-reserva.aspx.designer.cs">
+      <DependentUpon>detalle-reserva.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\RESFOM07\detalle-tipo-habitacion.aspx.cs">
+      <DependentUpon>detalle-tipo-habitacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\RESFOM07\detalle-tipo-habitacion.aspx.designer.cs">
+      <DependentUpon>detalle-tipo-habitacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\RESFOM07\guardar-habitacion.aspx.cs">
+      <DependentUpon>guardar-habitacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\RESFOM07\guardar-habitacion.aspx.designer.cs">
+      <DependentUpon>guardar-habitacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\RESFOM07\guardar-reserva.aspx.cs">
+      <DependentUpon>guardar-reserva.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\RESFOM07\guardar-reserva.aspx.designer.cs">
+      <DependentUpon>guardar-reserva.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\RESFOM07\guardar-tipo-habitacion.aspx.cs">
+      <DependentUpon>guardar-tipo-habitacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\RESFOM07\guardar-tipo-habitacion.aspx.designer.cs">
+      <DependentUpon>guardar-tipo-habitacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\RESFOM07\listar-habitaciones.aspx.cs">
+      <DependentUpon>listar-habitaciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\RESFOM07\listar-habitaciones.aspx.designer.cs">
+      <DependentUpon>listar-habitaciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\RESFOM07\listar-reservas.aspx.cs">
+      <DependentUpon>listar-reservas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\RESFOM07\listar-reservas.aspx.designer.cs">
+      <DependentUpon>listar-reservas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\RESFOM07\listar-tipos-habitacion-por-hotel.aspx.cs">
+      <DependentUpon>listar-tipos-habitacion-por-hotel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\RESFOM07\listar-tipos-habitacion-por-hotel.aspx.designer.cs">
+      <DependentUpon>listar-tipos-habitacion-por-hotel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\RESFOM07\listar-tipos-habitacion.aspx.cs">
+      <DependentUpon>listar-tipos-habitacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\RESFOM07\listar-tipos-habitacion.aspx.designer.cs">
+      <DependentUpon>listar-tipos-habitacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\RESFOM07\RESFOM7.Master.cs">
+      <DependentUpon>RESFOM7.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\RESFOM07\RESFOM7.Master.designer.cs">
+      <DependentUpon>RESFOM7.Master</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="view\assets\fonts\et-line.eot" />
@@ -1368,6 +1474,8 @@
     <Content Include="view\assets\plugins\slider.swiper\dist\js\maps\swiper.jquery.min.js.map" />
     <Content Include="view\assets\plugins\slider.swiper\dist\js\maps\swiper.min.js.map" />
     <Content Include="view\assets\plugins\styleswitcher\color_schemes\color_scheme.fla" />
+    <Content Include="view\RESFOM07\RESFOM7.Master" />
+    <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
