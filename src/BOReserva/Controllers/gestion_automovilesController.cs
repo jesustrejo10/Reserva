@@ -18,6 +18,46 @@ namespace BOReserva.Controllers
             return PartialView(model);
         }
 
+        public ActionResult M08_VisualizarAutomoviles()
+        {
+            return PartialView();
+        }
+
+        public ActionResult M08_VisualizarAutomovil()
+        {
+            return PartialView();
+        }
+
+        public ActionResult M08_ModificarAutomovil()
+        {
+            return PartialView();
+        }
+
+        public static List<SelectListItem> GetDropDownListForYears()
+        {
+            List<SelectListItem> ls = new List<SelectListItem>();
+            ls.Add(new SelectListItem() { Text = "", Value = "" });
+            for (int i = 1999; i <= 2016; i++)
+            {
+                ls.Add(new SelectListItem() { Text = i.ToString(), Value = i.ToString() });
+            }
+
+            return ls;
+        }
+
+        public static List<SelectListItem> cantidadpasajeros()
+        {
+            List<SelectListItem> ls = new List<SelectListItem>();
+            ls.Add(new SelectListItem() { Text = "", Value = "" });
+
+            for (int i = 1; i <= 10; i++)
+            {
+                ls.Add(new SelectListItem() { Text = i.ToString(), Value = i.ToString() });
+            }
+
+            return ls;
+        }
+
         [HttpPost]
         public JsonResult saveVehicle(CAgregarAutomovil model)
         {
