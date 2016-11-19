@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BOReserva.Models.gestion_aviones;
+
 namespace BOReserva.Controllers
 {
     public class gestion_avionesController : Controller
@@ -17,10 +18,17 @@ namespace BOReserva.Controllers
             return PartialView(model);
         }
 
-        [HttpPost]
-        public JsonResult guardarAvion(CGestion_avion model)
+        public ActionResult M02_AgregarAvion()
         {
-            String prueba = model._matriculaAvionAgregar;
+            CAgregarAvion model = new CAgregarAvion();
+            return PartialView(model);
+        }
+
+
+        [HttpPost]
+        public JsonResult guardarAvion(CAgregarAvion model)
+        {
+            String prueba = model._matriculaAvion;
 
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
