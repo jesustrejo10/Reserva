@@ -14,5 +14,25 @@ namespace BOReserva.Controllers
             return PartialView();
         }
 
+        public ActionResult M05_VerVuelos()
+        {
+            return PartialView();
+        }
+
+        public ActionResult M05_DetalleVuelo()
+        {
+            return PartialView();
+        }
+
+        public ActionResult M05_DatosUsuario()
+        {
+            return PartialView();
+        }
+        public ActionResult M05_DetalleBoleto()
+        {
+            return PartialView();
+        }
+
+
     }
 }

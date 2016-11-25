@@ -288,6 +288,10 @@
     <Content Include="Models\gestion_venta_boleto\placeholder.html" />
     <Content Include="Models\gestion_vuelo\placeholder.html" />
     <Content Include="Scripts\cargadorMenu.js" />
+    <Content Include="Scripts\DatosUsuario.js" />
+    <Content Include="Scripts\DetalleBoleto.js" />
+    <Content Include="Scripts\DetalleVuelo.js" />
+    <Content Include="Scripts\VerVuelos.js" />
     <Content Include="Views\dist\css\AdminLTE.css" />
     <Content Include="Views\dist\css\AdminLTE.min.css" />
     <Content Include="Views\dist\css\skins\skin-black-light.css" />
@@ -387,19 +391,14 @@
     <Content Include="Views\gestion_boletos\confirmacioneliminarvuelo.html" />
     <Content Include="Views\gestion_boletos\confirmacionmodificarvuelo.html" />
     <Content Include="Views\gestion_boletos\consultarboleto.html" />
-    <Content Include="Views\gestion_boletos\crearboletosvuelos.html" />
-    <Content Include="Views\gestion_boletos\datospago.html" />
-    <Content Include="Views\gestion_boletos\datosusuario.html" />
     <Content Include="Views\gestion_check_in\detallecheckin.html" />
     <Content Include="Views\gestion_boletos\detalleconsultavuelo.html" />
     <Content Include="Views\gestion_boletos\detalleeliminarvuelo.html" />
     <Content Include="Views\gestion_boletos\detallemodificarvuelo.html" />
-    <Content Include="Views\gestion_boletos\detallevuelo.html" />
     <Content Include="Views\gestion_boletos\eliminarboleto.html" />
     <Content Include="Views\gestion_check_in\equipajecheckin.html" />
     <Content Include="Views\gestion_boletos\modificarboleto.html" />
     <Content Include="Views\gestion_boletos\placeholder.html" />
-    <Content Include="Views\gestion_boletos\resultadosboleto.html" />
     <Content Include="Views\gestion_boletos\vervuelosdisponibles.html" />
     <Content Include="Views\gestion_vuelo\placeholder.html" />
     <Content Include="Content\plugins\bootstrap-slider\bootstrap-slider.js" />
@@ -1292,6 +1291,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_boletos\M05_CrearBoleto.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\gestion_boletos\M05_VerVuelos.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\gestion_boletos\M05_DetalleVuelo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\gestion_boletos\M05_DatosUsuario.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\gestion_boletos\M05_DetalleBoleto.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
