@@ -1,0 +1,173 @@
+﻿<section class="content-header">
+    <h1>
+        Crear boleto
+    </h1>
+
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <!-- /.row -->
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+
+                        <div class="col-md-2">
+                            <label>
+                                <input type="checkbox" name="ridavuelta" class="minimal">
+                                Ida y vuelta
+                            </label>
+                        </div>
+
+                        <div class="col-md-2">
+                            <label>
+                                <input type="checkbox" name="rida" class="minimal">
+                                Solo ida
+                            </label>
+                        </div>
+
+                        <div class="col-md-2">
+                            <label>
+                                <input type="checkbox" name="rescala" class="minimal">
+                                Con escala(s)
+                            </label>
+                        </div>
+
+                        <div class="col-md-2">
+                            <label>
+                                <input type="checkbox" name="rsinescala" class="minimal">
+                                Sin escala(s)
+                            </label>
+                        </div>
+
+                    </div>
+                    <hr>
+
+
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+
+                                <label>Salir de:</label>
+                                <select class="form-control select2" style="width: 100%;">
+                                    <option selected="selected">Caracas</option>
+                                    <option>Miami</option>
+                                    <option>Barcelona</option>
+                                    <option>Milan</option>
+                                    <option>Paris</option>
+                                    <option>Munich</option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+
+                                <label>Llegar a:</label>
+                                <select class="form-control select2" style="width: 100%;">
+                                    <option selected="selected">Caracas</option>
+                                    <option>Miami</option>
+                                    <option>Barcelona</option>
+                                    <option>Milan</option>
+                                    <option>Paris</option>
+                                    <option>Munich</option>
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <!-- /.row -->
+                    </div>
+
+
+                    <hr>
+
+                    <!-- Date and time range -->
+                    <div class="row">
+
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label>Fechas:</label>
+
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                    <input type="text" class="form-control pull-right" id="reservationtime">
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Tipo de pasajero:</label>
+                                <select class="form-control select2" style="width: 100%;">
+                                    <option selected="selected">Adulto(18-64)</option>
+                                    <option>Señor(65+)</option>
+                                    <option>Niño(16-17)</option>
+                                    <option>Niño(12-15)</option>
+                                    <option>Niño(5-11)</option>
+                                    <option>Niño(2-4)</option>
+                                    <option>Niño(2-)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Tipo de boleto:</label>
+                                <select class="form-control select2" style="width: 100%;">
+                                    <option selected="selected">Turista</option>
+                                    <option>Primera clase</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-block btn-primary btn-sm" onclick="window.location.href = 'vervuelosdisponibles.html';">Ver vuelos disponibles</button>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-block btn-danger btn-sm">Resetear datos</button>
+                        </div>
+
+                    </div>
+
+
+
+
+
+                    <!-- ./box-body -->
+                    <div class="box-footer">
+
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.box-footer -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+        <!-- /.row -->
+    </div>
+</section>
