@@ -47,4 +47,27 @@
     
     });
 
+    $("#gestionUsuarios").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_usuarios/index';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+
+    });
+
 });
