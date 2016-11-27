@@ -49,7 +49,7 @@
 
     $("#gestionUsuarios").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_usuarios/index';
+        var url = '/gestion_usuarios/M12_Index';
         var method = 'GET';
         var data = '';
 
