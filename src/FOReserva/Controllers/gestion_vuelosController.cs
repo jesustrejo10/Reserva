@@ -19,11 +19,15 @@ namespace FOReserva.Controllers
             return PartialView(model);
         }
 
+        public ActionResult gestion_vuelosImagenes()
+        {
+            return PartialView();
+        }
+
         [HttpPost]
         public JsonResult buscarVuelo(Cvista_Vuelos model)
         {
             String prueba = model._prueba;
-
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
 

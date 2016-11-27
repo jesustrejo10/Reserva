@@ -2933,6 +2933,7 @@
     <Content Include="Views\Shared\assets\plugins\slider.swiper\dist\js\maps\swiper.min.js.map" />
     <Content Include="Views\Shared\assets\plugins\styleswitcher\color_schemes\color_scheme.fla" />
     <Content Include="Views\gestion_vuelos\gestion_vuelos.cshtml" />
+    <Content Include="Views\gestion_vuelos\gestion_vuelosImagenes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

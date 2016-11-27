@@ -20,6 +20,26 @@
                 alert(errorThrown);
             }
         });
+
+    $("#contenedorImagenes").empty();
+    var url = '/gestion_vuelos/gestion_vuelosImagenes';
+    var method = 'GET';
+    var data = '';
+
+    $.ajax(
+        {
+            url: url,
+            type: method,
+            data: data,
+            success: function (data, textStatus, jqXHR) {
+
+                $("#contenedorImagenes").empty();
+                $("#contenedorImagenes").append(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
     console.log("test");
 
 
