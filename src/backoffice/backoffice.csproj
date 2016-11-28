@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -131,6 +132,10 @@
     <Content Include="view\modules\gestion_automoviles\GestionDeAutomoviles.aspx" />
     <Content Include="view\modules\gestion_automoviles\GestionDeAutomoviles.html" />
     <Content Include="view\modules\gestion_automoviles\js\module.js" />
+    <Content Include="view\modules\gestion_automoviles\M08_AgregarAutomovil.html" />
+    <Content Include="view\modules\gestion_automoviles\M08_ModificarAutomovil.html" />
+    <Content Include="view\modules\gestion_automoviles\M08_VisualizarAutomovil.html" />
+    <Content Include="view\modules\gestion_automoviles\M08_VisualizarAutomoviles.html" />
     <Content Include="view\modules\gestion_aviones\M02_GestionAviones.html" />
     <Content Include="view\modules\gestion_aviones\placeholder.html" />
     <Content Include="view\modules\gestion_comida_vuelo\placeholder.html" />
@@ -140,12 +145,31 @@
     <Content Include="view\modules\gestion_equipaje_perdido\placeholder.html" />
     <Content Include="view\modules\gestion_hoteles\placeholder.html" />
     <Content Include="view\modules\gestion_ofertas\placeholder.html" />
+    <Content Include="view\modules\gestion_restaurantes\M10_GestionRestaurantes.html" />
     <Content Include="view\modules\gestion_restaurantes\placeholder.html" />
     <Content Include="view\modules\gestion_roles\placeholder.html" />
     <Content Include="view\modules\gestion_ruta_comercial\placeholder.html" />
     <Content Include="view\modules\gestion_seguridad_ingreso\placeholder.html" />
     <Content Include="view\modules\gestion_usuarios\placeholder.html" />
+    <Content Include="view\modules\gestion_venta_boleto\boardingpass.html" />
+    <Content Include="view\modules\gestion_venta_boleto\checkin.html" />
+    <Content Include="view\modules\gestion_venta_boleto\confirmacioneliminarvuelo.html" />
+    <Content Include="view\modules\gestion_venta_boleto\confirmacionmodificarvuelo.html" />
+    <Content Include="view\modules\gestion_venta_boleto\consultarboleto.html" />
+    <Content Include="view\modules\gestion_venta_boleto\crearboletosvuelos.html" />
+    <Content Include="view\modules\gestion_venta_boleto\datospago.html" />
+    <Content Include="view\modules\gestion_venta_boleto\datosusuario.html" />
+    <Content Include="view\modules\gestion_venta_boleto\detallecheckin.html" />
+    <Content Include="view\modules\gestion_venta_boleto\detalleconsultavuelo.html" />
+    <Content Include="view\modules\gestion_venta_boleto\detalleeliminarvuelo.html" />
+    <Content Include="view\modules\gestion_venta_boleto\detallemodificarvuelo.html" />
+    <Content Include="view\modules\gestion_venta_boleto\detallevuelo.html" />
+    <Content Include="view\modules\gestion_venta_boleto\eliminarboleto.html" />
+    <Content Include="view\modules\gestion_venta_boleto\equipajecheckin.html" />
+    <Content Include="view\modules\gestion_venta_boleto\modificarboleto.html" />
     <Content Include="view\modules\gestion_venta_boleto\placeholder.html" />
+    <Content Include="view\modules\gestion_venta_boleto\resultadosboleto.html" />
+    <Content Include="view\modules\gestion_venta_boleto\vervuelosdisponibles.html" />
     <Content Include="view\modules\gestion_vuelo\placeholder.html" />
     <Content Include="view\plugins\bootstrap-slider\bootstrap-slider.js" />
     <Content Include="view\plugins\bootstrap-slider\slider.css" />
@@ -1108,7 +1132,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>6916</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
