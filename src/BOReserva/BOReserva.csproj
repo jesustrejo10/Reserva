@@ -195,6 +195,8 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\gestion_automoviles\CAgregarAutomovil.cs" />
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
+    <Compile Include="Models\gestion_restaurantes\CRestauranteModeloVista.cs" />
+    <Compile Include="Models\gestion_restaurantes\CRestauranteModelo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx.cs">
       <DependentUpon>GestionDeAutomoviles.aspx</DependentUpon>
@@ -1387,7 +1389,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-3.1.1.min.map" />
-
     <Content Include="Views\gestion_automoviles\M08_AgregarAutomovil.cshtml" />
   </ItemGroup>
   <PropertyGroup>
