@@ -195,6 +195,7 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\gestion_automoviles\CAgregarAutomovil.cs" />
     <Compile Include="Models\gestion_automoviles\CModificarAutomovil.cs" />
+    <Compile Include="Models\gestion_automoviles\CVisualizarAutomovil.cs" />
     <Compile Include="Models\gestion_automoviles\CVisualizarAutomoviles.cs" />
     <Compile Include="Models\gestion_automoviles\Vehicle.cs" />
     <Compile Include="Models\gestion_automoviles\VehicleList.cs" />

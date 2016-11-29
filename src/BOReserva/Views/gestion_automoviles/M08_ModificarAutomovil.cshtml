@@ -238,8 +238,15 @@
                         </div>
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
-                            <button type="button" id="modify_vehicle" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Modificar</button>
-                        </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-2">
+                                <button type="button" id="modify_vehicle" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Modificar</button>
+                            </div>
+                            <div class="col-md-2">
+                                <button id="cancel_modification" type="button" class="btn btn-danger" style="display:block; margin-left:auto; margin-right:auto;">Cancelar</button>
+                            </div>
+                            <div class="col-md-4"></div>    
+                         </div>
                     </div>
                     <!-- /.col -->
                 </div>
@@ -265,7 +272,27 @@
             });
         });
 
+        $("#cancel_modification").click(function (e) {
+            e.preventDefault();
+            var url = '/gestion_automoviles/M08_VisualizarAutomoviles';
+            var method = 'GET';
+            var data = '';
 
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+        });
     </script>
 
 

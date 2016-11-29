@@ -95,6 +95,30 @@ namespace BOReserva.Controllers
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
 
+        [HttpPost]
+        public JsonResult viewVehicle(CModificarAutomovil model)
+        {
+            String matricula = model._matricula;
+            int anio = model._anio;
+            int cantpasajeros = model._cantpasajeros;
+            String ciudad = model._ciudad;
+            String color = model._color;
+            bool disponibilidad = model._disponibilidad;
+            String estado = model._estado;
+            String fabricante = model._fabricante;
+            DateTime fecharegistro = model._fecharegistro;
+            float kilometraje = model._kilometraje;
+            String modelo = model._modelo;
+            String pais = model._pais;
+            float penalidaddiaria = model._penalidaddiaria;
+            float precioalquiler = model._precioalquiler;
+            float preciocompra = model._preciocompra;
+            String tipovehiculo = model._tipovehiculo;
+            String transmision = model._transmision;
+            Debug.WriteLine("IMPRIMIENDO UN MENSAJE" + matricula);
+            return (Json(true, JsonRequestBehavior.AllowGet));
+        }
+
 
         public string DeleteData(int id){
             //TODO hacer el metodo
