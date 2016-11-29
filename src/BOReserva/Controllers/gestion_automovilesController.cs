@@ -20,7 +20,12 @@ namespace BOReserva.Controllers
 
         public ActionResult M08_VisualizarAutomoviles()
         {
-            return PartialView();
+            //var companies = DataRepository.GetCompanies();
+            List<Vehicle> mVehicles = new List<Vehicle>();
+            Vehicle test = new Vehicle(1, "foca", "foculia", "focasa");
+            mVehicles.Add(test);
+
+            return PartialView(mVehicles);
         }
 
         public ActionResult M08_VisualizarAutomovil()
@@ -66,5 +71,18 @@ namespace BOReserva.Controllers
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
 
+
+        public string DeleteData(int id){
+            //TODO hacer el metodo
+            return null;
+        }
+        public string UpdateData(int id, string value, int? rowId,
+               int? columnPosition, int? columnId, string columnName){
+                   return null;
+            }
+        public int AddData(string name, string address, string town, int? country){
+            return 1;
+
+        }
     }
 }

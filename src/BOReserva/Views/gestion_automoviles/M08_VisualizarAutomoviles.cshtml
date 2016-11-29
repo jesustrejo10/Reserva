@@ -1,4 +1,8 @@
-﻿<div class="row">
+﻿
+
+<div class="row">
+    <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
+
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
@@ -17,6 +21,17 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach (var item in Model)
+                        {
+                                <tr id="@item.ID">
+                                <td>@item.Name</td>
+                                <td>@item.Address</td>
+                                <td>@item.Town</td>
+                                <td>@item.Address</td>
+                                <td>@item.Town</td>
+                            </tr>
+                        }
+
                         <tr>
                             <td>Mazda / 3</td>
                             <td>
@@ -306,6 +321,8 @@
                             </td>
                         </tr>
 
+                    
+                     
                     <tfoot>
                         <tr>
                             <th>Marca / Modelo</th>
@@ -375,3 +392,28 @@
     });
 
 </script>
+
+<script src="../../Content/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="../../Content/bootstrap/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="../../Content/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="../../Content/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="../../Content/plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="../../Content/dist/js/app.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+<!-- page script -->
+
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function () {
+            
+            table = $('#example1').DataTable().makeEditable();
+
+        });
+    </script>
+

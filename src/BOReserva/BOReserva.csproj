@@ -194,6 +194,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\gestion_automoviles\CAgregarAutomovil.cs" />
+    <Compile Include="Models\gestion_automoviles\Vehicle.cs" />
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx.cs">
