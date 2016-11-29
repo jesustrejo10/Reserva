@@ -194,15 +194,9 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\gestion_automoviles\CAgregarAutomovil.cs" />
+    <Compile Include="Models\gestion_automoviles\CModificarAutomovil.cs" />
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx.cs">
-      <DependentUpon>GestionDeAutomoviles.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx.designer.cs">
-      <DependentUpon>GestionDeAutomoviles.aspx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\dist\css\AdminLTE.css" />
@@ -444,8 +438,6 @@
     <Content Include="Views\dist\js\pages\dashboard.js" />
     <Content Include="Views\dist\js\pages\dashboard2.js" />
     <Content Include="Views\gestion_automoviles\css\style_module.css" />
-    <Content Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx" />
-    <Content Include="Views\gestion_automoviles\GestionDeAutomoviles.html" />
     <Content Include="Views\gestion_automoviles\js\module.js" />
     <Content Include="Views\gestion_automoviles\M08_AgregarAutomovil.html" />
     <Content Include="Views\gestion_automoviles\M08_ModificarAutomovil.html" />
