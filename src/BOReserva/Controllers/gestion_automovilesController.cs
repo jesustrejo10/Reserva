@@ -20,7 +20,12 @@ namespace BOReserva.Controllers
 
         public ActionResult M08_VisualizarAutomoviles()
         {
-            return PartialView();
+            //var companies = DataRepository.GetCompanies();
+            List<Vehicle> mVehicles = new List<Vehicle>();
+            Vehicle test = new Vehicle(1, "foca", "foculia", "focasa");
+            mVehicles.Add(test);
+
+            return PartialView(mVehicles);
         }
 
         public ActionResult M08_VisualizarAutomovil()
@@ -61,24 +66,8 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult saveVehicle(CAgregarAutomovil model)
         {
-            String matricula = model._matricula;
-            int anio = model._anio;
-            int cantpasajeros = model._cantpasajeros;
-            String ciudad = model._ciudad;
-            String color = model._color;
-            bool disponibilidad = model._disponibilidad;
-            String estado = model._estado;
-            String fabricante = model._fabricante;
-            DateTime fecharegistro = model._fecharegistro;
-            float kilometraje = model._kilometraje;
-            String modelo = model._modelo;
-            String pais = model._pais;
-            float penalidaddiaria = model._penalidaddiaria;
-            float precioalquiler = model._precioalquiler;
-            float preciocompra = model._preciocompra;
-            String tipovehiculo = model._tipovehiculo;
-            String transmision = model._transmision;
-            Debug.WriteLine("IMPRIMIENDO UN MENSAJE"+matricula);
+            String prueba = model._matricula;
+            Debug.WriteLine("IMPRIMIENDO UN MENSAJE"+prueba);
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
 
@@ -104,6 +93,20 @@ namespace BOReserva.Controllers
             String transmision = model._transmision;
             Debug.WriteLine("IMPRIMIENDO UN MENSAJE" + matricula);
             return (Json(true, JsonRequestBehavior.AllowGet));
+        }
+
+
+        public string DeleteData(int id){
+            //TODO hacer el metodo
+            return null;
+        }
+        public string UpdateData(int id, string value, int? rowId,
+               int? columnPosition, int? columnId, string columnName){
+                   return null;
+            }
+        public int AddData(string name, string address, string town, int? country){
+            return 1;
+
         }
     }
 }
