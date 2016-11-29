@@ -25,11 +25,12 @@ namespace BOReserva.Controllers
         public ViewResult M12_AgregarUsuario(AgregarUsuario usuario )
         {   
             if (ModelState.IsValid) 
-            {        
-                return View("M12_AregarUsuario");   
+            {
+
+                return View("M12_Index", "_Layout");   
             } 
-            else {           
-                return View();    
+            else {
+                return View("M12_AgregarUsuario", "_Layout");    
             } 
  
             

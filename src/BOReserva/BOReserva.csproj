@@ -202,6 +202,8 @@
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
     <Compile Include="Models\gestion_usuarios\AgregarUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\CUsuario.cs" />
+    <Compile Include="Models\gestion_usuarios\Parametro.cs" />
+    <Compile Include="Models\gestion_usuarios\PersistenciaUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx.cs">
       <DependentUpon>GestionDeAutomoviles.aspx</DependentUpon>
@@ -1342,6 +1344,7 @@
     <Content Include="Views\gestion_usuarios\M12_Index.cshtml" />
     <Content Include="Views\gestion_usuarios\M12_AgregarUsuario.cshtml" />
     <Content Include="Views\gestion_usuarios\M12_ModificarUsuario.cshtml" />
+    <Content Include="Views\gestion_usuarios\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

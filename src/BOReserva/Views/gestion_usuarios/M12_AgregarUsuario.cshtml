@@ -1,7 +1,13 @@
-﻿@model BOReserva.Models.gestion_usuarios.AgregarUsuario
+﻿@{
+
+    Layout = "~/Views/gestion_usuarios/_Layout.cshtml";
+}
+
+@model BOReserva.Models.gestion_usuarios.AgregarUsuario
 @using (Html.BeginForm())
 {
 @Html.ValidationSummary() 
+
 <div class="row">
     <div class="col-md-12">
         <div class="box">
@@ -62,7 +68,8 @@
                             </div>   
                             <div class="col-md-12" style="margin-top:10px;">
                                <!--  <input type="button" value="Create" class="btn btn-success" onclick=" return confirm('¿Seguro que desea crear este usuario?');" /> --> 
-                                <input type="submit" class="btn btn-success" value="Registrar"></div>  
+                                <button type="submit" class="btn btn-success" value="Registrar" id="agregarUsuario"> Registrar</button>
+                            </div>
                         </div>
                     </div>
                 </div>

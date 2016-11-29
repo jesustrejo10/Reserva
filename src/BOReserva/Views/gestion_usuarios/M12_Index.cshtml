@@ -1,68 +1,68 @@
 ﻿@model IEnumerable<BOReserva.Models.gestion_usuarios.CUsuario>
 
 
-
- <!-- Main content -->
 <section class="content">
-    <!-- Default box -->
-    <div class="box">
-        <div class="box-body">
-            <h3>Listado de Usuarios</h3>
-            <div class="row">
-                <div class="col-xs-10">
-                    <div class="row">
-                        <div class="crTitles">
-                            <div class="crNombre"> <b>Nombre</b></div>
-                            <div class="crNombre"> <b>Email </b> </div>
-                            <div class="crFechaf"> <b>Fecha Creacion</b> </div>
-                            <div class="crCompania"> <b>Rol </b></div>
-
-                            <div class="crStatus"><b>Status</b></div>
-                            <div class="crAcciones"><b>Acciones</b> </div>
-                        </div>
-                        <div class="listCru">
-                            <div class="crucero ">
-                                <div class="crNombre"> <i class="fa fa-user"></i> Alfredo Peña</div>
-                                <div class="crNombre"> alfredopeña@gmail.com</div>
-                                <div class="crFechaf"> 12/09/2016 </div>
-                                <div class="crCompania">Admin</div>
-
-                                <div class="crStatus"><i class="fa fa-circle started"></i></div>
-                                <div class="crAcciones"> <button type="button" class="fa fa-edit" data-toggle="modal" data-target="#modificarUsuario"></button>  <i class="fa fa-trash"></i> </div>
-                            </div>
-                            <div class="crucero ">
-                                <div class="crNombre"> <i class="fa fa-user"></i> Ana Rojas </div>
-                                <div class="crNombre"> anarojas@gmail.com </div>
-                                <div class="crFechaf"> 09/05/2016 </div>
-                                <div class="crCompania">Cargador</div>
-
-                                <div class="crStatus"><i class="fa fa-circle started"></i></div>
-                                <div class="crAcciones"> <button type="button" class="fa fa-edit" data-toggle="modal" data-target="#modificarUsuario"></button>  <i class="fa fa-trash"></i> </div>
-                            </div>
-                            <div class="crucero ">
-                                <div class="crNombre"> <i class="fa fa-user"></i> Alexandra Perez </div>
-                                <div class="crNombre"> alexandraperez@gmail.com </div>
-                                <div class="crFechaf"> 31/07/2016 </div>
-                                <div class="crCompania">Operador</div>
-
-                                <div class="crStatus"><i class="fa fa-circle paused"></i></div>
-                                <div class="crAcciones"> <button type="button" class="fa fa-edit" data-toggle="modal" data-target="#modificarUsuario"></button> <i class="fa fa-trash"></i> </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-2">
-                    <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#crearUsuario">Crear Usuario</button>
-                    <li id="gestionUsuarioss"><a href="#"><i class="fa fa-user"></i>Gestion De Usuarios</a></li>
-
-                </div>
-            </div>
+<form role="form" name="consultar" id="consultar">
+    <script language="javascript">
+        function doSearch() {
+            var tableReg = document.getElementById('example2');
+            var searchText = document.getElementById('searchTerm').value.toLowerCase();
+            for (var i = 1; i < tableReg.rows.length; i++) {
+                var cellsOfRow = tableReg.rows[i].getElementsByTagName('td');
+                var found = false;
+                for (var j = 0; j < cellsOfRow.length && !found; j++) {
+                    var compareWith = cellsOfRow[j].innerHTML.toLowerCase();
+                    if (searchText.length == 0 || (compareWith.indexOf(searchText) > -1)) {
+                        found = true;
+                    }
+                }
+                if (found) {
+                    tableReg.rows[i].style.display = '';
+                } else {
+                    tableReg.rows[i].style.display = 'none';
+                }
+            }
+        }
+    </script>
+    <div class="table-responsive">
+        <div style="float: right; padding-top: 5px;">
+            <a style="margin-right: 10px;">Buscador</a>
+            <input id="searchTerm" type="text" onkeyup="doSearch()" />
         </div>
-        <!-- /.box-body -->
-        <!-- /.box-footer-->
+        <br />
+        <br />
+        <table id="example2" class="table">
+            <thead>
+                <tr style="font-size: 16px;">
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Fecha de Creación</th>
+                    <th>Rol</th>
+                    <th>Status</th>
+                    <th>Acciones</th>
+                    <th style="width: 150PX; text-align: center;">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+        <div style="text-align: center;">
+           
+        </div>
     </div>
-    <!-- /.box -->
+</form>
 </section>
+
+
+
+
+<button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#crearUsuario">Crear Usuario</button>
+<li id="gestionUsuarioss"><a href="#"><i class="fa fa-user"></i>Gestion De Usuarios</a></li>
+
+            
+
+
 <!-- Modal -->
 <div class="modal fade" id="crearUsuario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -115,6 +115,7 @@
         </div>
     </div>
 </div>
+
 <!-- /.content -->
 <script>
 $("#gestionUsuarioss").click(function (e) {
