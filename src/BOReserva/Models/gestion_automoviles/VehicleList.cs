@@ -7,7 +7,12 @@ namespace BOReserva.Models.gestion_automoviles
 {
     public class VehicleList
     {
-        public List<Vehicle> mVehicles { set; get; }
+        private static List<CAutomovil> mVehicles { set; get; }
+
+        public static void MAgregarvehiculo(CAutomovil carro)
+        {
+            mVehicles.Add(carro);
+        }
 
     }
 }

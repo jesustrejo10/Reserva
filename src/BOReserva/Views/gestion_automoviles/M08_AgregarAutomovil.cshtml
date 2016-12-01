@@ -21,7 +21,7 @@
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <label for="placa">Placa del vehiculo</label>
-                                @Html.TextBoxFor(m => m._matricula, null, new { @class = "form-control", @placeholder = "Placa", @id = "vehi_placa" })
+                                 @Html.TextBoxFor(m => m._matricula, null, new { @class = "form-control", @placeholder = "Placa", @id = "vehi_placa"})
                             </div>
                             <div class="col-xs-6">
                                 <label for="modelo">Fabricante</label>
@@ -55,7 +55,7 @@
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <label for="modelo">Modelo</label>
-                                @Html.TextBoxFor(m => m._modelo, null, new { @class = "form-control", @placeholder = "Marca", @id = "vehi_modelo" })
+                                @Html.TextBoxFor(m => m._modelo, null, new { @class = "form-control", @placeholder = "Modelo", @id = "vehi_modelo" })
                             </div>
                             <div class="col-xs-6">
                                 <label for="anio">Año de fabricacion</label>
@@ -283,8 +283,8 @@
                         </div>
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
-                            <button type="button" id="save_vehicle" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
-                        </div>
+                           <button type="submit" id="save_vehicle" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                         </div>
                     </div>
                     <!-- /.col -->
                 </div>
@@ -309,10 +309,7 @@
                 }
             });
         });
-
       
     </script>
-    
-    
 
 }

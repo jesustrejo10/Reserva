@@ -13,26 +13,37 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
+                            <th>Matricula</th>
                             <th>Marca / Modelo</th>
                             <th>Clase / Capacidad</th>
                             <th>Tipo / Color </th>
-                            <th>Disponibilidad / tarifa</th>
+                            <th>Disponibilidad / Tarifa</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model)
                         {
-                                <tr id="@item.ID">
-                                <td>@item.Name</td>
-                                <td>@item.Address</td>
-                                <td>@item.Town</td>
-                                <td>@item.Address</td>
-                                <td>@item.Town</td>
+                            String disponibilidad;
+                            if (item._disponibilidad == 1) { disponibilidad = "Disponible";} else { disponibilidad = "No disponible";}
+                                
+                            <tr id="@item._matricula">
+                                <td>@item._matricula</td>
+                                <td>@item._fabricante / @item._modelo</td>
+                                <td>@item._tipovehiculo / @item._cantpasajeros</td>
+                                <td>@item._transmision / @item._color</td>
+                                <td>@disponibilidad / @item._precioalquiler USD</td>
+                                <td>
+                                    <a href="#"><i class="fa fa-check"></i></a>
+                                    <a href="#"><i class="fa fa-times"></i></a>
+                                    <a id="m08_VisualizarAutomovil" href="#"><i class="fa fa-eye"></i></a>
+                                    <a id="m08_ModificarAutomovil" href="#"><i class="fa fa-gear"></i></a>
+                                </td>
                             </tr>
                         }
 
                         <tr>
+                            <td>Mazda / 3</td>
                             <td>Mazda / 3</td>
                             <td>
                                 Sedan / 5
@@ -52,23 +63,6 @@
                         </tr>
                         <tr>
                             <td>Mazda / 3</td>
-                            <td>
-                                Sedan / 5
-                            </td>
-                            <td>
-                                Automatico / Negro
-                            </td>
-                            <td>
-                                Disponible / 50 Usd
-                            </td>
-                            <td>
-                                <a href="#"><i class="fa fa-check"></i></a>
-                                <a href="#"><i class="fa fa-times"></i></a>
-                                <a href="M08_VisualizarAutomovil.html"><i class="fa fa-eye"></i></a>
-                                <a href="M08_ModificarAutomovil.html"><i class="fa fa-gear"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
                             <td>Mazda / 3</td>
                             <td>
                                 Sedan / 5
@@ -88,23 +82,6 @@
                         </tr>
                         <tr>
                             <td>Mazda / 3</td>
-                            <td>
-                                Sedan / 5
-                            </td>
-                            <td>
-                                Automatico / Negro
-                            </td>
-                            <td>
-                                Disponible / 50 Usd
-                            </td>
-                            <td>
-                                <a href="#"><i class="fa fa-check"></i></a>
-                                <a href="#"><i class="fa fa-times"></i></a>
-                                <a href="M08_VisualizarAutomovil.html"><i class="fa fa-eye"></i></a>
-                                <a href="M08_ModificarAutomovil.html"><i class="fa fa-gear"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
                             <td>Mazda / 3</td>
                             <td>
                                 Sedan / 5
@@ -124,23 +101,6 @@
                         </tr>
                         <tr>
                             <td>Mazda / 3</td>
-                            <td>
-                                Sedan / 5
-                            </td>
-                            <td>
-                                Automatico / Negro
-                            </td>
-                            <td>
-                                Disponible / 50 Usd
-                            </td>
-                            <td>
-                                <a href="#"><i class="fa fa-check"></i></a>
-                                <a href="#"><i class="fa fa-times"></i></a>
-                                <a href="M08_VisualizarAutomovil.html"><i class="fa fa-eye"></i></a>
-                                <a href="M08_ModificarAutomovil.html"><i class="fa fa-gear"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
                             <td>Mazda / 3</td>
                             <td>
                                 Sedan / 5
@@ -160,23 +120,6 @@
                         </tr>
                         <tr>
                             <td>Mazda / 3</td>
-                            <td>
-                                Sedan / 5
-                            </td>
-                            <td>
-                                Automatico / Negro
-                            </td>
-                            <td>
-                                Disponible / 50 Usd
-                            </td>
-                            <td>
-                                <a href="#"><i class="fa fa-check"></i></a>
-                                <a href="#"><i class="fa fa-times"></i></a>
-                                <a href="M08_VisualizarAutomovil.html"><i class="fa fa-eye"></i></a>
-                                <a href="M08_ModificarAutomovil.html"><i class="fa fa-gear"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
                             <td>Mazda / 3</td>
                             <td>
                                 Sedan / 5
@@ -196,23 +139,6 @@
                         </tr>
                         <tr>
                             <td>Mazda / 3</td>
-                            <td>
-                                Sedan / 5
-                            </td>
-                            <td>
-                                Automatico / Negro
-                            </td>
-                            <td>
-                                Disponible / 50 Usd
-                            </td>
-                            <td>
-                                <a href="#"><i class="fa fa-check"></i></a>
-                                <a href="#"><i class="fa fa-times"></i></a>
-                                <a href="M08_VisualizarAutomovil.html"><i class="fa fa-eye"></i></a>
-                                <a href="M08_ModificarAutomovil.html"><i class="fa fa-gear"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
                             <td>Mazda / 3</td>
                             <td>
                                 Sedan / 5
@@ -232,23 +158,6 @@
                         </tr>
                         <tr>
                             <td>Mazda / 3</td>
-                            <td>
-                                Sedan / 5
-                            </td>
-                            <td>
-                                Automatico / Negro
-                            </td>
-                            <td>
-                                Disponible / 50 Usd
-                            </td>
-                            <td>
-                                <a href="#"><i class="fa fa-check"></i></a>
-                                <a href="#"><i class="fa fa-times"></i></a>
-                                <a href="M08_VisualizarAutomovil.html"><i class="fa fa-eye"></i></a>
-                                <a href="M08_ModificarAutomovil.html"><i class="fa fa-gear"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
                             <td>Mazda / 3</td>
                             <td>
                                 Sedan / 5
@@ -268,23 +177,6 @@
                         </tr>
                         <tr>
                             <td>Mazda / 3</td>
-                            <td>
-                                Sedan / 5
-                            </td>
-                            <td>
-                                Automatico / Negro
-                            </td>
-                            <td>
-                                Disponible / 50 Usd
-                            </td>
-                            <td>
-                                <a href="#"><i class="fa fa-check"></i></a>
-                                <a href="#"><i class="fa fa-times"></i></a>
-                                <a href="M08_VisualizarAutomovil.html"><i class="fa fa-eye"></i></a>
-                                <a href="M08_ModificarAutomovil.html"><i class="fa fa-gear"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
                             <td>Mazda / 3</td>
                             <td>
                                 Sedan / 5
@@ -303,6 +195,140 @@
                             </td>
                         </tr>
                         <tr>
+                            <td>Mazda / 3</td>
+                            <td>Mazda / 3</td>
+                            <td>
+                                Sedan / 5
+                            </td>
+                            <td>
+                                Automatico / Negro
+                            </td>
+                            <td>
+                                Disponible / 50 Usd
+                            </td>
+                            <td>
+                                <a href="#"><i class="fa fa-check"></i></a>
+                                <a href="#"><i class="fa fa-times"></i></a>
+                                <a href="M08_VisualizarAutomovil.html"><i class="fa fa-eye"></i></a>
+                                <a href="M08_ModificarAutomovil.html"><i class="fa fa-gear"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mazda / 3</td>
+                            <td>Mazda / 3</td>
+                            <td>
+                                Sedan / 5
+                            </td>
+                            <td>
+                                Automatico / Negro
+                            </td>
+                            <td>
+                                Disponible / 50 Usd
+                            </td>
+                            <td>
+                                <a href="#"><i class="fa fa-check"></i></a>
+                                <a href="#"><i class="fa fa-times"></i></a>
+                                <a href="M08_VisualizarAutomovil.html"><i class="fa fa-eye"></i></a>
+                                <a href="M08_ModificarAutomovil.html"><i class="fa fa-gear"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mazda / 3</td>
+                            <td>Mazda / 3</td>
+                            <td>
+                                Sedan / 5
+                            </td>
+                            <td>
+                                Automatico / Negro
+                            </td>
+                            <td>
+                                Disponible / 50 Usd
+                            </td>
+                            <td>
+                                <a href="#"><i class="fa fa-check"></i></a>
+                                <a href="#"><i class="fa fa-times"></i></a>
+                                <a href="M08_VisualizarAutomovil.html"><i class="fa fa-eye"></i></a>
+                                <a href="M08_ModificarAutomovil.html"><i class="fa fa-gear"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mazda / 3</td>
+                            <td>Mazda / 3</td>
+                            <td>
+                                Sedan / 5
+                            </td>
+                            <td>
+                                Automatico / Negro
+                            </td>
+                            <td>
+                                Disponible / 50 Usd
+                            </td>
+                            <td>
+                                <a href="#"><i class="fa fa-check"></i></a>
+                                <a href="#"><i class="fa fa-times"></i></a>
+                                <a href="M08_VisualizarAutomovil.html"><i class="fa fa-eye"></i></a>
+                                <a href="M08_ModificarAutomovil.html"><i class="fa fa-gear"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mazda / 3</td>
+                            <td>Mazda / 3</td>
+                            <td>
+                                Sedan / 5
+                            </td>
+                            <td>
+                                Automatico / Negro
+                            </td>
+                            <td>
+                                Disponible / 50 Usd
+                            </td>
+                            <td>
+                                <a href="#"><i class="fa fa-check"></i></a>
+                                <a href="#"><i class="fa fa-times"></i></a>
+                                <a href="M08_VisualizarAutomovil.html"><i class="fa fa-eye"></i></a>
+                                <a href="M08_ModificarAutomovil.html"><i class="fa fa-gear"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mazda / 3</td>
+                            <td>Mazda / 3</td>
+                            <td>
+                                Sedan / 5
+                            </td>
+                            <td>
+                                Automatico / Negro
+                            </td>
+                            <td>
+                                Disponible / 50 Usd
+                            </td>
+                            <td>
+                                <a href="#"><i class="fa fa-check"></i></a>
+                                <a href="#"><i class="fa fa-times"></i></a>
+                                <a href="M08_VisualizarAutomovil.html"><i class="fa fa-eye"></i></a>
+                                <a href="M08_ModificarAutomovil.html"><i class="fa fa-gear"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mazda / 3</td>
+                            <td>Mazda / 3</td>
+                            <td>
+                                Sedan / 5
+                            </td>
+                            <td>
+                                Automatico / Negro
+                            </td>
+                            <td>
+                                Disponible / 50 Usd
+                            </td>
+                            <td>
+                                <a href="#"><i class="fa fa-check"></i></a>
+                                <a href="#"><i class="fa fa-times"></i></a>
+                                <a href="M08_VisualizarAutomovil.html"><i class="fa fa-eye"></i></a>
+                                <a href="M08_ModificarAutomovil.html"><i class="fa fa-gear"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mazda / 3</td>
                             <td>Mazda / 3</td>
                             <td>
                                 Sedan / 5
@@ -325,10 +351,11 @@
                      
                     <tfoot>
                         <tr>
+                            <th>Matricula</th>
                             <th>Marca / Modelo</th>
                             <th>Clase / Capacidad</th>
                             <th>Tipo / Color </th>
-                            <th>Disponibilidad / tarifa</th>
+                            <th>Disponibilidad / Tarifa</th>
                             <th>Opciones</th>
                         </tr>
                     </tfoot>
