@@ -116,5 +116,25 @@ namespace BOReserva.Models.gestion_automoviles
                 return fk_ciudad;
             }
         }
+
+        public int MBorrarvehiculo(String matricula)
+        {
+            try
+            {
+                con = new SqlConnection(connetionString);
+                con.Open();
+                String sql = "DELETE FROM Automovil WHERE aut_matricula = '"+matricula+"'";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                con.Close();
+                return 1;
+            }
+            catch (SqlException ex)
+            {
+                con.Close();
+                return 0;
+            }
+        }
     }
 }
