@@ -21,11 +21,11 @@ namespace BOReserva.Controllers
         public ActionResult M08_VisualizarAutomoviles()
         {
             //var companies = DataRepository.GetCompanies();
-            List<CAutomovil> listavehiculos = new List<CAutomovil>();
-            /*CBasededatos_vehiculo buscarvehiculos = new CBasededatos_vehiculo();
-            List<Vehicle> listavehiculos = buscarvehiculos.MListarvehiculosBD();*/  //AQUI SE BUSCA TODO LOS VEHICULOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
-            CAutomovil test = new CAutomovil("AG234FC", "3", "Mazda", 2006, "Sedan", 1589.5, 5, 7550.0, 250.6, 290.4, DateTime.Parse("11/11/2016"), "Azul", 1, "Automatico", "Venezuela", "Distrito Capital", "Caracas");
-            listavehiculos.Add(test);
+            //List<CAutomovil> listavehiculos = new List<CAutomovil>();
+            CBasededatos_vehiculo buscarvehiculos = new CBasededatos_vehiculo();
+            List<CAutomovil> listavehiculos = buscarvehiculos.MListarvehiculosBD();  //AQUI SE BUSCA TODO LOS VEHICULOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
+           /*CAutomovil test = new CAutomovil("AG234FC", "3", "Mazda", 2006, "Sedan", 1589.5, 5, 7550.0, 250.6, 290.4, DateTime.Parse("11/11/2016"), "Azul", 1, "Automatico", "Venezuela", "Distrito Capital", "Caracas");
+            listavehiculos.Add(test);*/
 
             return PartialView(listavehiculos);
         }
@@ -92,7 +92,7 @@ namespace BOReserva.Controllers
             CAutomovil carronuevo = new CAutomovil(matricula, modelo, fabricante, anio, tipovehiculo, kilometraje, 
                                              cantpasajeros, preciocompra, precioalquiler, penalidaddiaria, fecharegistro, 
                                              color, 1, transmision, pais, estado, ciudad);  //SE CREA EL VEHICULO
-            //int agrego_si_no = carronuevo.MAgregaraBD(carronuevo); //SE AGREGA A LA BD RETORNA 1 SI SE AGREGA Y 0 SINO LO LOGRA
+            int agrego_si_no = carronuevo.MAgregaraBD(carronuevo); //SE AGREGA A LA BD RETORNA 1 SI SE AGREGA Y 0 SINO LO LOGRA
             
             System.IO.File.WriteAllText(@"C:\Users\LAPGrock\Desktop\hola.txt", matricula +" "+modelo); //PRUEBA DE QUE SI SE SACAN BIEN LOS ATRIBUTOS DE LA VISTA
             return (Json(true, JsonRequestBehavior.AllowGet));
