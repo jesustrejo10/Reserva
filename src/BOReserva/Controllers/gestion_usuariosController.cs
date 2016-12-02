@@ -14,8 +14,23 @@ namespace BOReserva.Controllers
         public ActionResult M12_Index()
         {
             PersistenciaUsuario p = new PersistenciaUsuario();
-            IEnumerable<ListarUsuario> lista = p.ListaUsuarios();
-            return PartialView("M12_Index", lista);
+            try
+            {
+                IEnumerable<ListarUsuario> lista = p.ListaUsuarios();
+                return PartialView("M12_Index", lista);
+            }
+            catch (ExceptionM12Reserva ex)
+            {
+                IEnumerable<ListarUsuario> lista = new List<ListarUsuario>();
+                ModelState.AddModelError("", ex.Message);
+                return PartialView("M12_Index", lista);
+            }
+            catch (Exception ex)
+            {
+                IEnumerable<ListarUsuario> lista = new List<ListarUsuario>();
+                ModelState.AddModelError("", ex.Message);
+                return PartialView("M12_Index", lista);
+            }
         }
 
 
@@ -30,14 +45,28 @@ namespace BOReserva.Controllers
             if (ModelState.IsValid) 
             {
                 PersistenciaUsuario p = new PersistenciaUsuario();
-                p.AgregarUsuario(usuario.toClass());
-                return RedirectToAction("M12_Index");   
+                try
+                {
+                    p.AgregarUsuario(usuario.toClass());
+                    return RedirectToAction("M12_Index");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return View("M12_AgregarUsuario", "_Layout");
+                }
             } 
             else {
                 return View("M12_AgregarUsuario", "_Layout");    
             } 
  
             
+        }
+
+        public ActionResult M12_ModificarUsuario()
+        {
+
+            return PartialView();
         }
 
         public RedirectToRouteResult EliminarUsuario(int usuID)

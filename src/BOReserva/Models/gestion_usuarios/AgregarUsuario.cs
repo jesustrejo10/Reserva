@@ -31,7 +31,9 @@ namespace BOReserva.Models.gestion_usuarios
         /// <summary>
         /// TextBox nombre y apellido
         /// </summary>
-        public String _nombreApellido { get; set; }
+        public String _nombre { get; set; }
+
+        public String _apellido { get; set; }
         /// <summary>
         /// TextBox fecha de creacion
         /// </summary>
@@ -57,7 +59,7 @@ namespace BOReserva.Models.gestion_usuarios
 
 
         public CUsuario toClass(){
-            CUsuario user = new CUsuario(_nombreApellido, _nombreApellido, HashPassword(_contraseña), _correo, _activo, _fechaCreacion, _rol);
+            CUsuario user = new CUsuario(_nombre, _apellido, HashPassword(_contraseña), _correo, _activo, _fechaCreacion, _rol);
             return user;
 
         }
