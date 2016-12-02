@@ -10,7 +10,7 @@ namespace BOReserva.Controllers
     {
         //
         // GET: /gestion_comida_vuelo/
-        public ActionResult M06_AgregarEditarComida()
+        public ActionResult M06_AgregarComida()
         {
             return PartialView();
         }
