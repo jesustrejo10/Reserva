@@ -40,7 +40,7 @@ namespace BOReserva.Models.gestion_usuarios
 
             catch (Exception ex)
             {
-                throw new Exception("error en la conexion", ex);
+                throw new ExceptionBD(RecursoBD.Cod_Error_Conexion, RecursoBD.Error_Conexion, ex);
             }
 
             return conexion;
@@ -64,8 +64,8 @@ namespace BOReserva.Models.gestion_usuarios
 
             catch (Exception ex)
             {
-
-
+                throw new ExceptionBD(RecursoBD.Cod_Error_Desconexion, RecursoBD.Error_Desconexión, ex);
+            
             }
 
         }
@@ -80,14 +80,18 @@ namespace BOReserva.Models.gestion_usuarios
 
             catch (Exception ex)
             {
-
-
+                throw new ExceptionBD(RecursoBD.Cod_Error_Desconexion, RecursoBD.Error_Desconexión, ex);
             }
 
         }
         #endregion
 
 
+        /// <summary>
+        /// Metodo para ejecutar un procedimiento almacenado en la bd
+        /// </summary>
+        /// <param name="parametros">Lista de parametros que se le va a asociar</param>
+        /// <param name="query">Cadena con el query a ejecutar</param>
         public List<ResultadoBD> EjecutarStoredProcedure(string query, List<Parametro> parametros)
         {
             try
@@ -99,11 +103,7 @@ namespace BOReserva.Models.gestion_usuarios
 
                     comando = new SqlCommand(query, conexion);
                     comando.CommandType = CommandType.StoredProcedure;
-
-
                     AsignarParametros(parametros);
-
-
                     conexion.Open();
                     comando.ExecuteNonQuery();
                     if (comando.Parameters != null)
@@ -112,8 +112,7 @@ namespace BOReserva.Models.gestion_usuarios
                         {
                             if (parameter.Direction.Equals(ParameterDirection.Output))
                             {
-                                ResultadoBD resultado = new ResultadoBD(parameter.ParameterName,
-                                    parameter.Value.ToString());
+                                ResultadoBD resultado = new ResultadoBD(parameter.ParameterName, parameter.Value.ToString());
                                 resultados.Add(resultado);
                             }
                         }
@@ -123,28 +122,25 @@ namespace BOReserva.Models.gestion_usuarios
                         }
                         else
                         {
-
+                            throw new ExceptionBD(RecursoBD.Cod_Error_Parametro, RecursoBD.Error_Parametro, new ExceptionBD());
                         }
                     }
-                    return null;
+                    
+                   return null;
                 }
-
-
             }
             catch (SqlException ex)
             {
-                throw ex;
+                throw new ExceptionBD(RecursoBD.Cod_Error_General, RecursoBD.Error_General, ex);
             }
-
             catch (Exception ex)
             {
-                throw ex;
+                throw new ExceptionBD(RecursoBD.Cod_Error_General, RecursoBD.Error_General, ex); ;
             }
             finally
             {
                 Desconectar();
             }
-            return null;
         }
 
 
@@ -173,13 +169,13 @@ namespace BOReserva.Models.gestion_usuarios
                         }
                         else
                         {
-
+                            throw new ExceptionBD(RecursoBD.Cod_Error_Parametro, RecursoBD.Error_Parametro, new ExceptionBD());
                         }
                     }
                 }
                 else
                 {
-
+                    throw new ExceptionBD(RecursoBD.Cod_Error_Parametro, RecursoBD.Error_Parametro, new ExceptionBD());
                 }
 
             }
@@ -213,12 +209,12 @@ namespace BOReserva.Models.gestion_usuarios
             }
             catch (SqlException ex)
             {
-
+                throw new ExceptionBD(RecursoBD.Cod_Error_General, RecursoBD.Error_General, ex);
             }
 
             catch (Exception ex)
             {
-
+                throw new ExceptionBD(RecursoBD.Cod_Error_General, RecursoBD.Error_General, ex);
             }
             finally
             {

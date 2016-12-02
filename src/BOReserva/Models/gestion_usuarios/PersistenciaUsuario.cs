@@ -20,34 +20,38 @@ namespace BOReserva.Models.gestion_usuarios
             try
             {
                 List<Parametro> parametros = new List<Parametro>();
-                parametro = new Parametro("@nombre", SqlDbType.VarChar, ((CUsuario)usuario).nombreUsuario, false);
+                parametro = new Parametro(RecursoUsuario.ParametroNombre, SqlDbType.VarChar, ((CUsuario)usuario).nombreUsuario, false);
                 parametros.Add(parametro);
-                parametro = new Parametro("@apellido", SqlDbType.VarChar, ((CUsuario)usuario).nombreUsuario, false);
+                parametro = new Parametro(RecursoUsuario.ParametroApellido, SqlDbType.VarChar, ((CUsuario)usuario).nombreUsuario, false);
                 parametros.Add(parametro);
-                parametro = new Parametro("@correo", SqlDbType.VarChar, ((CUsuario)usuario).correoUsuario, false);
+                parametro = new Parametro(RecursoUsuario.ParametroCorreo, SqlDbType.VarChar, ((CUsuario)usuario).correoUsuario, false);
                 parametros.Add(parametro);
-                parametro = new Parametro("@contraseña", SqlDbType.VarChar, ((CUsuario)usuario).contraseñaUsuario, false);
+                parametro = new Parametro(RecursoUsuario.ParametroContraseña, SqlDbType.VarChar, ((CUsuario)usuario).contraseñaUsuario, false);
                 parametros.Add(parametro);
-                parametro = new Parametro("@rol", SqlDbType.Int, ((CUsuario)usuario).rolUsuario.ToString(), false);
+                parametro = new Parametro(RecursoUsuario.ParametroRolID, SqlDbType.Int, ((CUsuario)usuario).rolUsuario.ToString(), false);
                 parametros.Add(parametro);
-                parametro = new Parametro("@fecha", SqlDbType.Date, ((CUsuario)usuario).fechaCreacionUsuario.ToString(), false);
+                parametro = new Parametro(RecursoUsuario.ParametroFecha, SqlDbType.Date, ((CUsuario)usuario).fechaCreacionUsuario.ToString(), false);
                 parametros.Add(parametro);
-                parametro = new Parametro("@activo", SqlDbType.VarChar, ((CUsuario)usuario).activoUsuario, false);
+                parametro = new Parametro(RecursoUsuario.ParametroActivo, SqlDbType.VarChar, ((CUsuario)usuario).activoUsuario, false);
                 parametros.Add(parametro);
-                List<ResultadoBD> results = EjecutarStoredProcedure("M12_CrearUsuario", parametros);
+                List<ResultadoBD> results = EjecutarStoredProcedure(RecursoUsuario.CrearUsuario, parametros);
                 Conectar();
             }
             catch (ArgumentNullException ex)
             {
-                throw ex;
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.ArgumentoInvalido, ex);
             }
             catch (FormatException ex)
             {
-                throw ex;
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.FormatoInvalido, ex);
+            }
+            catch (SqlException ex)
+            {
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.BDError, ex);
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.OtroError, ex);
             }
                 return true;
 
@@ -56,7 +60,7 @@ namespace BOReserva.Models.gestion_usuarios
         /// <summary>
         /// Método para listar todos los usuarios del BO
         /// </summary>
-        /// <returns>Retorna un datatable con la informacion de los usuarios</returns>
+        /// <returns>Retorna una lista con los usuarios</returns>
         public List<ListarUsuario> ListaUsuarios()
         {
             DataTable resultado;
@@ -64,21 +68,21 @@ namespace BOReserva.Models.gestion_usuarios
             List<ListarUsuario> lista;
             try
             {
-                resultado = EjecutarStoredProcedureTuplas("M12_ListarUsuarios");
+                resultado = EjecutarStoredProcedureTuplas(RecursoUsuario.ListarUsuarios);
                 Conectar();
                 if (resultado != null)
                 {
                     lista = new List<ListarUsuario>();
                     foreach (DataRow row in resultado.Rows)
                     {
-                        DateTime usuFecha = DateTime.Parse(row["fecha"].ToString());
-                        string usuAct = row["activo"].ToString();
-                        string usuRol = row["rol"].ToString();
-                        string usuApe = row["apellido"].ToString();
-                        string usuNom= row["nombre"].ToString();
-                        string usuCor = row["correo"].ToString();
-                        int usuIDRol = int.Parse(row["rolID"].ToString());
-                        int usuID = int.Parse(row["usuID"].ToString());
+                        DateTime usuFecha = DateTime.Parse(row[RecursoUsuario.FechaUsuario].ToString());
+                        string usuAct = row[RecursoUsuario.ActivoUsuario].ToString();
+                        string usuRol = row[RecursoUsuario.RolUsuario].ToString();
+                        string usuApe = row[RecursoUsuario.ApellidoUsuario].ToString();
+                        string usuNom= row[RecursoUsuario.NombreUsuario].ToString();
+                        string usuCor = row[RecursoUsuario.CorreoUsuario].ToString();
+                        int usuIDRol = int.Parse(row[RecursoUsuario.RolIDUsuario].ToString());
+                        int usuID = int.Parse(row[RecursoUsuario.IDUsuario].ToString());
                         usuario = new ListarUsuario();
                         usuario._fechaCreacion = usuFecha;
                         usuario._activo = usuAct;
@@ -96,15 +100,19 @@ namespace BOReserva.Models.gestion_usuarios
             }
             catch (ArgumentNullException ex)
             {
-                throw ex;
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.ArgumentoInvalido, ex);
             }
             catch (FormatException ex)
             {
-                throw ex;
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.FormatoInvalido, ex);
+            }
+            catch (SqlException ex)
+            {
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.BDError, ex);
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.OtroError, ex);
             }
             return null;
 
@@ -131,19 +139,19 @@ namespace BOReserva.Models.gestion_usuarios
             }
             catch ( ArgumentNullException ex )
             {
-                throw ex;
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.ArgumentoInvalido, ex);
             }
             catch ( FormatException ex )
             {
-                throw ex;
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.FormatoInvalido, ex);
             }
             catch ( SqlException ex )
             {
-                throw ex;
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.BDError, ex);
             }
             catch ( Exception ex )
             {
-                throw ex;
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.OtroError, ex);
             }
 
             return true;
