@@ -46,9 +46,9 @@
             });
     
     });
-
+    //INICIO M06_Gestion_Comida
     $("#gestionComida").click(function (e) {
-        //M06_AgregarEditarComida
+        //M06_AgregarComida
         e.preventDefault();
         var url = '/gestion_comida_vuelo/M06_AgregarComida';
         var method = 'GET';
@@ -69,7 +69,28 @@
                 }
             });
     });
-    
+    $("#editarComida").click(function (e) {
+        //M06_EditarComida
+        e.preventDefault();
+        var url = '/gestion_comida_vuelo/M06_EditarComida';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
     $("#gestionComidaVuelo").click(function (e) {
         //M06_AgregarPorVuelo
         e.preventDefault();
@@ -92,4 +113,5 @@
                 }
             });
     });
+    //FIN M06_Gestion_Comida
 });

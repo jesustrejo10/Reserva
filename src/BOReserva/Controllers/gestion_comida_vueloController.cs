@@ -19,5 +19,10 @@ namespace BOReserva.Controllers
         {
            return PartialView();
         }
+
+        public ActionResult M06_EditarComida()
+        {
+            return PartialView();
+        }
 	}
 }
