@@ -48,8 +48,6 @@
     });
 
     $("#crearhotel").click(function (e) {
-        alert("HOTELES");
-
         e.preventDefault();
         var url = '/gestion_hoteles/M09_GestionHoteles_Crear';
         var method = 'GET';
@@ -83,7 +81,6 @@
                 type: method,
                 data: data,
                 success: function (data, textStatus, jqXHR) {
-
                     $("#contenido").empty();
                     $("#contenido").append(data);
                 },
