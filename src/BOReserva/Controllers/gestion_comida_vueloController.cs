@@ -14,5 +14,10 @@ namespace BOReserva.Controllers
         {
             return PartialView();
         }
+
+        public ActionResult M06_AgregarPorVuelo()
+        {
+           return PartialView();
+        }
 	}
 }
