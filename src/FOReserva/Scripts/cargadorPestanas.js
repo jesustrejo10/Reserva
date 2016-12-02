@@ -12,7 +12,7 @@
             type: method,
             data: data,
             success: function (data, textStatus, jqXHR) {
-
+                console.log('hola carlos')
                 $("#contenedor").empty();
                 $("#contenedor").append(data);
             },
@@ -134,6 +134,43 @@
         $("#LiHoteles").removeClass("active");
         $("#LiAutos").removeClass("active");
         $("#LiCruceros").removeClass("active");
+        var url = '/gestion_reserva_restaurante/gestion_reserva_restaurante';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenedor").empty();
+                    $("#contenedor").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+
+            var url = '/gestion_vuelos/gestion_vuelosImagenes';
+            var method = 'GET';
+            var data = '';
+
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenedorImagenes").empty();
+                        $("#contenedorImagenes").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                }
+            });
     });
 
 

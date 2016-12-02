@@ -47,6 +47,7 @@
     
     });
 
+<<<<<<< HEAD
     $("#crearhotel").click(function (e) {
         e.preventDefault();
         var url = '/gestion_hoteles/M09_GestionHoteles_Crear';
@@ -93,6 +94,11 @@
     $("#desactivarhotel").click(function (e) {
         e.preventDefault();
         var url = '/gestion_hoteles/M09_GestionHoteles_Desactivar';
+=======
+    $("#gestionComida").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_comida_vuelo/M06_AgregarEditarComida';
+>>>>>>> refs/remotes/origin/Develop
         var method = 'GET';
         var data = '';
 
