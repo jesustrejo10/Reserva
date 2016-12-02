@@ -13,27 +13,39 @@ namespace BOReserva.Controllers
         // GET: /gestion_usuario/
         public ActionResult M12_Index()
         {
-            return PartialView();
+            PersistenciaUsuario p = new PersistenciaUsuario();
+            IEnumerable<ListarUsuario> lista = p.ListaUsuarios();
+            return PartialView("M12_Index", lista);
         }
-        
+
+
         public ActionResult M12_AgregarUsuario()
         {
             return PartialView();
         }
 
         [HttpPost]
-        public ViewResult M12_AgregarUsuario(AgregarUsuario usuario )
+        public ActionResult M12_AgregarUsuario(AgregarUsuario usuario)
         {   
             if (ModelState.IsValid) 
             {
-
-                return View("M12_Index", "_Layout");   
+                PersistenciaUsuario p = new PersistenciaUsuario();
+                p.AgregarUsuario(usuario.toClass());
+                return RedirectToAction("M12_Index");   
             } 
             else {
                 return View("M12_AgregarUsuario", "_Layout");    
             } 
  
             
+        }
+
+        public RedirectToRouteResult EliminarUsuario(int usuID)
+        {
+            
+            PersistenciaUsuario p = new PersistenciaUsuario();
+            p.eliminarUsuario(usuID);
+            return RedirectToAction("M12_Index");
         }
     }
 }

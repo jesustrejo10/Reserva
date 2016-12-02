@@ -201,9 +201,13 @@
     <Compile Include="Models\gestion_automoviles\CAgregarAutomovil.cs" />
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
     <Compile Include="Models\gestion_usuarios\AgregarUsuario.cs" />
+    <Compile Include="Models\gestion_usuarios\ConexionBD.cs" />
     <Compile Include="Models\gestion_usuarios\CUsuario.cs" />
+    <Compile Include="Models\gestion_usuarios\Encriptar.cs" />
+    <Compile Include="Models\gestion_usuarios\ListarUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\Parametro.cs" />
     <Compile Include="Models\gestion_usuarios\PersistenciaUsuario.cs" />
+    <Compile Include="Models\gestion_usuarios\ResultadoBD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx.cs">
       <DependentUpon>GestionDeAutomoviles.aspx</DependentUpon>
@@ -1302,7 +1306,9 @@
     <Content Include="Content\plugins\timepicker\bootstrap-timepicker.js" />
     <Content Include="Content\plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="Content\plugins\timepicker\bootstrap-timepicker.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
