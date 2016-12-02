@@ -48,6 +48,7 @@
     });
 
     $("#gestionComida").click(function (e) {
+        //M06_AgregarEditarComida
         e.preventDefault();
         var url = '/gestion_comida_vuelo/M06_AgregarEditarComida';
         var method = 'GET';
