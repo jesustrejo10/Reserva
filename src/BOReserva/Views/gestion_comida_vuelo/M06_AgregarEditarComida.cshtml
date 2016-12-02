@@ -1,6 +1,16 @@
-﻿<!-- Agregar Comida  -->
+﻿<div class="row">
+    <div class="box-header with-border">
+        <h1 class="box-title"> Agregar-Modificar Comida</h1>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"></button>
+        </div>
+    </div>
+
+    <div class="col-xs-6">
+
+        <!-- Agregar Comida  -->
         <div class="box-header with-border">
-            <h1 class="box-title"> Agregar Comida</h1>
+            <h1 class="box-title"> Agregar Comida-Bebida</h1>
             <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"></button>
             </div>
@@ -9,16 +19,20 @@
         <div class="box-body">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <label for="agregarEditarComida">ID Comida:</label>
                         <input type="text" class="form-control" id="agregarEditarComida" disabled>
                         <label for="agregarEditarComida">Nombre del Plato:</label>
                         <input type="text" class="form-control" id="agregarEditarComida">
-                        <label for="matriculaAvionFallo">Tipo:</label>
-                        <select class="form-control" id="idvuelo">
-                            <option>Desayuno</option>
-                            <option>Almuerzo</option>
-                            <option>Cena</option>
+                        <label for="agregarEditarComida">Tipo:</label>
+                        <select class="form-control" id="idcomida">
+                            <option>Comida</option>
+                            <option>Bebida</option>
+                        </select>
+                        <label for="agregarEditarComidao">Estatus:</label>
+                        <select class="form-control" id="idcomida">
+                            <option>Disponible</option>
+                            <option>No Disponible</option>
                         </select>
                         <label for="agregarEditarComida">Descripcion:</label>
                         <input type="text" class="form-control" id="agregarEditarComida">
@@ -26,65 +40,21 @@
                 </div>
                 <!-- /.box-body -->
             </div>
-            <div class="col-md-12" style="margin-top:10px;">
-                <button type="button" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Aceptar</button>
-            </div>
+            
+                <div class="col-xs-6 col-md-4"></div>
+                <div class="col-xs-6 col-md-4"><div class="col-md-12" style="margin-top:10px;">
+    <button type="button" id="save_vehicle" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+</div></div>
+                <div class="col-xs-6 col-md-4"></div>
         </div>
         <!-- /.box-body -->
-<!-- Fin Agregar Comida  -->
+        <!-- Fin Agregar Comida  -->
+    </div>
 
-<!-- Agregar Bebida -->
-            <div class="box-header with-border">
-                <h1 class="box-title"> Agregar Bebida </h1>
-                <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse"></button>
-                </div>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-6">
-                            <label for="matriculaAvionFallo">ID Bebida:</label>
-                            <input type="text" class="form-control" id="matriculaAvionFallo" disabled>
-                            <label for="matriculaAvionFallo">Nombre de la Bebida:</label>
-                            <input type="text" class="form-control" id="matriculaAvionFallo">
-                            <label for="matriculaAvionFallo">Tipo:</label>
-                            <select class="form-control" id="idvuelo">
-                                <option>Agua</option>
-                                <option>Gaseosa</option>
-                                <option>Jugo</option>
-                                <option>Soda</option>
-                                <option>Vino</option>
-                            </select>
-                            <label for="matriculaAvionFallo">Descripcion:</label>
-                            <input type="text" class="form-control" id="matriculaAvionFallo">
-                        </div>
-                        <br>
-                        <br>
-                        <div class="box-body">
-                            <div class="row">
-
-                            </div>
-                            <!-- /.col -->
-
-                        </div>
-                        <!-- /.row -->
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-                <div class="col-md-12" style="margin-top:10px;">
-                    <button type="button" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Asignar</button>
-                </div>
-            </div>
-            <!-- /.box-body -->
-<!-- Fin Agregar Bebida  -->
-
-<!-- Modificar Estatus -->
-<div class="col-md-8 col-lg-4">
-    <div class="box box-danger">
+    <div class="col-xs-6">
+        <!-- Modificar Estatus -->
         <div class="box-header with-border">
-            <h1 class="box-title"> Modificar Comida </h1>
+            <h1 class="box-title"> Modificar Comida-Bebida </h1>
             <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"></button>
             </div>
@@ -93,13 +63,24 @@
         <div class="box-body">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="col-md-6">
-                        <label for="matriculaAvionFallo">ID:</label>
-                        <input type="text" class="form-control" id="matriculaAvionFallo" disabled>
-                        <label for="matriculaAvionFallo">Nombre:</label>
-                        <input type="text" class="form-control" id="matriculaAvionFallo">
-                        <label for="matriculaAvionFallo">Estatus:</label>
-                        <input type="text" class="form-control" id="matriculaAvionFallo">
+                    <div class="col-md-12">
+                        <label for="agregarEditarComida">Tipo:</label>
+                        <select class="form-control" id="idcomida">
+                            <option>Comida</option>
+                            <option>Bebida</option>
+                        </select>
+                        <label for="agregarEditarComida">Nombre:</label>
+                        <select class="form-control" id="idcomida">
+                            <option>Comida</option>
+                            <option>Bebida</option>
+                        </select>
+                        <label for="agregarEditarComida">ID:</label>
+                        <input type="text" class="form-control" id="agregarEditarComida" disabled>
+                        <label for="agregarEditarComidao">Estatus:</label>
+                        <select class="form-control" id="idcomida">
+                            <option>Disponible</option>
+                            <option>No Disponible</option>
+                        </select>
                     </div>
                     <br>
                     <br>
@@ -113,12 +94,16 @@
                 </div>
                 <!-- /.box-body -->
             </div>
-            <div class="col-md-12" style="margin-top:10px;">
-                <button type="button" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Asignar</button>
+            <div class="col-xs-6 col-md-4"></div>
+            <div class="col-xs-6 col-md-4">
+                <div class="col-md-12" style="margin-top:10px;">
+                    <button type="button" id="save_vehicle" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                </div>
             </div>
+            <div class="col-xs-6 col-md-4"></div>
         </div>
         <!-- /.box-body -->
+        <!-- Fin Estatus  --> 
     </div>
-    <!-- /.box -->
+
 </div>
-<!-- Fin Estatus  -->
