@@ -7,10 +7,34 @@ namespace FOReserva.Models.Restaurantes
 {
     public class CRestaurantModel : BaseEntity
     {
-        public string _address { get; set; }
-        private string _description { get; set; }
-        private string _open { get; set; }
-        private string _close { get; set; }
+        private string _address;
+
+        public string Addres
+        {
+            get { return _address; }
+            set { _address = value; }
+        }
+        private string _description;
+
+        public string Description
+        {
+            get { return _description; }
+            set { _description = value; }
+        }
+        private string _open;
+
+        public string Open
+        {
+            get { return _open; }
+            set { _open = value; }
+        }
+        private string _close;
+
+        public string Close
+        {
+            get { return _close; }
+            set { _close = value; }
+        }
 
         public CRestaurantModel
             (int id, string name, string address, string description,

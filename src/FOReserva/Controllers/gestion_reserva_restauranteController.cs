@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FOReserva.Models.Restaurantes;
+using FOReserva.Servicio;
 
 namespace FOReserva.Controllers
 {
@@ -27,13 +28,13 @@ namespace FOReserva.Controllers
             return View();
         }
 
-        public ActionResult restaurant_resultados()
+        public ActionResult restaurant_resultados(int search_val, string search_txt)
         {
             ReservaDBDataContext mydb = new ReservaDBDataContext();
-
-            var __restmodel = mydb.Restaurantes.ToList();
-            return View(__restmodel);
-       
+            //CRestaurantModel __restmodel = new CRestaurantModel();
+            manejadorSQL manejador = new manejadorSQL();
+            List<CRestaurantModel> lista = manejador.buscarRest();
+            return View(lista);
         }
 
         public ActionResult reservar_restaurant()
