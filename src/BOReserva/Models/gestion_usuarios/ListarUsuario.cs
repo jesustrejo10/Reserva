@@ -47,6 +47,17 @@ namespace BOReserva.Models.gestion_usuarios
         /// </summary>
         public int _id { get; set; }
 
+        /// <summary>
+        /// id del usuario almacenado en la bd a traves de una secuencia
+        /// </summary>
+        public int _contraseña { get; set; }
+
+        /// <summary>
+        /// id del usuario almacenado en la bd a traves de una secuencia
+        /// </summary>
+        public int _confirmarContraseña { get; set; }
+
+
         public String getDate()
         {
             return _fechaCreacion.ToString("dd/MM/yyyy");

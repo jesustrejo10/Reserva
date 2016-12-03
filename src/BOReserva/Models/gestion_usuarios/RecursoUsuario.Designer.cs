@@ -97,6 +97,15 @@ namespace BOReserva.Models.gestion_usuarios {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to M12_ConsultarUsuarioID.
+        /// </summary>
+        internal static string ConsultarID {
+            get {
+                return ResourceManager.GetString("ConsultarID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to correo.
         /// </summary>
         internal static string CorreoUsuario {
@@ -111,6 +120,15 @@ namespace BOReserva.Models.gestion_usuarios {
         internal static string CrearUsuario {
             get {
                 return ResourceManager.GetString("CrearUsuario", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M12_EliminarUsuario.
+        /// </summary>
+        internal static string EliminarUsuario {
+            get {
+                return ResourceManager.GetString("EliminarUsuario", resourceCulture);
             }
         }
         
@@ -219,6 +237,15 @@ namespace BOReserva.Models.gestion_usuarios {
         internal static string ParametroFecha {
             get {
                 return ResourceManager.GetString("ParametroFecha", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @id.
+        /// </summary>
+        internal static string ParametroID {
+            get {
+                return ResourceManager.GetString("ParametroID", resourceCulture);
             }
         }
         

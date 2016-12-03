@@ -133,6 +133,10 @@
     <value>Error de conexión con la base de datos</value>
     <comment>Error de conexión con la BD</comment>
   </data>
+  <data name="ConsultarID" xml:space="preserve">
+    <value>M12_ConsultarUsuarioID</value>
+    <comment>Recupera la información de un usuario a partir de su ID</comment>
+  </data>
   <data name="CorreoUsuario" xml:space="preserve">
     <value>correo</value>
     <comment>Correo del usuario</comment>
@@ -140,6 +144,10 @@
   <data name="CrearUsuario" xml:space="preserve">
     <value>M12_CrearUsuario</value>
     <comment>Stored Procedure para crear un usuario</comment>
+  </data>
+  <data name="EliminarUsuario" xml:space="preserve">
+    <value>M12_EliminarUsuario</value>
+    <comment>Elimina un usuario a partir de su ID</comment>
   </data>
   <data name="ExceptionM12" xml:space="preserve">
     <value>Reserva_M12</value>
@@ -188,6 +196,10 @@
   <data name="ParametroFecha" xml:space="preserve">
     <value>@fecha</value>
     <comment>Parametro que representa la fecha de creacion del usuario</comment>
+  </data>
+  <data name="ParametroID" xml:space="preserve">
+    <value>@id</value>
+    <comment>Parametro que representa el ID del usuario</comment>
   </data>
   <data name="ParametroNombre" xml:space="preserve">
     <value>@nombre</value>

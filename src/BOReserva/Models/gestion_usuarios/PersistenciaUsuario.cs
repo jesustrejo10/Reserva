@@ -14,7 +14,7 @@ namespace BOReserva.Models.gestion_usuarios
         /// </summary>
         /// <param name="usuario">Es el objeto que se va a agregar a la BD</param>
         /// <returns>Retorna true si se agrega en la BD</returns>
-        public bool AgregarUsuario(CUsuario usuario)
+        public  bool AgregarUsuario(CUsuario usuario)
         {
             Parametro parametro;
             try
@@ -131,10 +131,10 @@ namespace BOReserva.Models.gestion_usuarios
                 List<Parametro> parametros = new List<Parametro>();
 
 
-                parametro = new Parametro( "@id" , SqlDbType.Int , usuID.ToString() , false );
+                parametro = new Parametro( RecursoUsuario.ParametroID , SqlDbType.Int , usuID.ToString() , false );
                 parametros.Add( parametro );
 
-                List<ResultadoBD> resultado = EjecutarStoredProcedure("M12_EliminarUsuario", parametros);
+                List<ResultadoBD> resultado = EjecutarStoredProcedure(RecursoUsuario.EliminarUsuario, parametros);
 
             }
             catch ( ArgumentNullException ex )
@@ -156,6 +156,64 @@ namespace BOReserva.Models.gestion_usuarios
 
             return true;
             
+        }
+
+        /// <summary>
+        /// Consultar un usuario por su ID
+        /// </summary>
+        /// <param name="usuID">Es el ID del usuario que se va a borrar de la BD</param>
+        /// <returns>Retorna true si es elimanado exitosamente</returns>
+        public ListarUsuario consultarUsuario(int usuID)
+        {
+            DataTable resultado;
+            ListarUsuario usuario = new ListarUsuario();
+            Parametro parametro;
+            try
+            {
+                List<Parametro> parametros = new List<Parametro>();
+                parametro = new Parametro(RecursoUsuario.ParametroID, SqlDbType.Int, usuID.ToString(), false);
+                parametros.Add(parametro);
+                resultado = EjecutarStoredProcedureTuplas(RecursoUsuario.ConsultarID, parametros);
+                Conectar();
+                if (resultado != null)
+                {
+                    foreach (DataRow row in resultado.Rows)
+                    {
+                        string usuAct = row[RecursoUsuario.ActivoUsuario].ToString();
+                        string usuRol = row[RecursoUsuario.RolUsuario].ToString();
+                        string usuApe = row[RecursoUsuario.ApellidoUsuario].ToString();
+                        string usuNom = row[RecursoUsuario.NombreUsuario].ToString();
+                        string usuCor = row[RecursoUsuario.CorreoUsuario].ToString();
+                        int usuIDRol = int.Parse(row[RecursoUsuario.RolIDUsuario].ToString());
+                        usuario._activo = usuAct;
+                        usuario._nombre = usuNom;
+                        usuario._apellido = usuApe;
+                        usuario._rol = usuRol;
+                        usuario._id = usuID;
+                        usuario._correo = usuCor;
+                        return usuario;
+                    }
+                    
+                }
+
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.ArgumentoInvalido, ex);
+            }
+            catch (FormatException ex)
+            {
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.FormatoInvalido, ex);
+            }
+            catch (SqlException ex)
+            {
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.BDError, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.OtroError, ex);
+            }
+            return null;
         }
     }
 }

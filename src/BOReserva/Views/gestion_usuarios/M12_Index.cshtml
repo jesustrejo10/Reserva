@@ -56,7 +56,8 @@
                         <td>@p._rol</td>
                         <td>@p._activo</td>
                         <td>
-                            @Html.ActionLink("Delete", "EliminarUsuario", new { usuID = p._id }, new { @class = "btn btn-default btn", @role = "button" })
+                            @Html.ActionLink("Eliminar", "EliminarUsuario", new { usuID = p._id }, new { @class = "btn btn-default btn", @role = "button" })
+                            @Html.ActionLink("Modificar", "ModificarUsuario", new { usuID = p._id }, new { @class = "btn btn-default btn", @role = "button" })
                         </td>
                     </tr>
                 }

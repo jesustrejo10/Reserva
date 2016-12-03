@@ -63,10 +63,36 @@ namespace BOReserva.Controllers
             
         }
 
-        public ActionResult M12_ModificarUsuario()
+       /* [HttpPost]
+        public ActionResult M12_ModificarUsuario(ListarUsuario usuario)
         {
 
-            return PartialView();
+        }*/
+
+
+
+        public ActionResult ModificarUsuario(int? usuID)
+        {
+
+            if (usuID.HasValue)
+            {
+                PersistenciaUsuario p = new PersistenciaUsuario();
+                try
+                {
+                    ListarUsuario usuario = p.consultarUsuario(usuID.Value);
+                    return PartialView("M12_ModificarUsuario", usuario);
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return PartialView("M12_Index", "_Layout");
+                }
+            }
+            else
+                return RedirectToAction("M12_Index");
+            
+                
+
         }
 
         public RedirectToRouteResult EliminarUsuario(int usuID)

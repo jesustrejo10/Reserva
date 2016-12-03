@@ -224,5 +224,50 @@ namespace BOReserva.Models.gestion_usuarios
         }
         #endregion
 
+        /// <summary>
+        /// Metodo para ejecutar un procedimiento almacenado en la bd que devuelve un DataTable
+        /// </summary>
+        /// <param name="parametros">Lista de parametros que se le va a asociar</param>
+        /// <param name="query">Cadena con el query a ejecutar</param>
+        public DataTable EjecutarStoredProcedureTuplas(string query, List<Parametro> parametros)
+        {
+            try
+            {
+                Conectar();
+                DataTable dataTable = new DataTable();
+                using (conexion)
+                {
+
+                    comando = new SqlCommand(query, conexion);
+                    comando.CommandType = CommandType.StoredProcedure;
+                    AsignarParametros(parametros);
+                    conexion.Open();
+                    using (SqlDataAdapter dataAdapter = new SqlDataAdapter(comando))
+                    {
+                        dataAdapter.Fill(dataTable);
+                        System.Diagnostics.Debug.WriteLine(dataAdapter);
+                        System.Diagnostics.Debug.WriteLine(dataTable);
+                    }
+
+                    return dataTable;
+                }
+
+
+            }
+            catch (SqlException ex)
+            {
+               
+            }
+            catch (Exception ex)
+            {
+                
+            }
+            finally
+            {
+                Desconectar();
+            }
+            return null;
+        }
+       
     }
 }
