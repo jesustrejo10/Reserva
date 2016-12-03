@@ -6,9 +6,21 @@ namespace FOReserva.Models
     public class BaseEntity : DbContext
     {
         /*id del objeto en BD*/
-        private int _id { get; set; }
+        private int _id;
+
+        public int Id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
         /*nombre del objeto*/
-        private string _name { get; set; }
+        private string _name;
+
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
 
         public BaseEntity(string owner)
         {

@@ -8,9 +8,21 @@ namespace FOReserva.Models.Restaurantes
 {
     public class CReservation_Restaurant : ReservationModels
     {
-        private int _count { get; set; }
-        //private CRestaurante { get; set; }
+
+        private int _count;
+
+        public int Count
+        {
+            get { return _count; }
+            set { _count = value; }
+        }
         private UserProfile _user;
+
+        public UserProfile User
+        {
+            get { return _user; }
+            set { _user = value; }
+        }
 
         public CReservation_Restaurant
            (UserProfile user, string owner, DateTime date, string time, int count)
