@@ -13,18 +13,14 @@ namespace FOReserva.Controllers
         // GET: /GestionReservaRestaurant/
         public ActionResult gestion_reserva_restaurante()
         {
-            CRestaurantModel model = new CRestaurantModel();
-            return PartialView(model);
+            return PartialView();
         }
 
-
-        [HttpPost]
-        public JsonResult buscar_restaurante(CRestaurantModel model)
-        {
-            String prueba = model._nombre;
-            Console.WriteLine(prueba);
-            return (Json(true, JsonRequestBehavior.AllowGet));
-        }
+        //[HttpPost]
+        //public JsonResult buscar_restaurante(CRestaurantModel model)
+        //{
+        //    return (Json(true, JsonRequestBehavior.AllowGet));
+        //}
 
         public ActionResult Index()
         {
@@ -33,7 +29,11 @@ namespace FOReserva.Controllers
 
         public ActionResult restaurant_resultados()
         {
-            return View();
+            ReservaDBDataContext mydb = new ReservaDBDataContext();
+
+            var __restmodel = mydb.Restaurantes.ToList();
+            return View(__restmodel);
+       
         }
 
         public ActionResult reservar_restaurant()

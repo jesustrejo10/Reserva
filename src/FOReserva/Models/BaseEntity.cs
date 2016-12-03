@@ -21,5 +21,8 @@ namespace FOReserva.Models
             this._name = _owner;
         }
 
+        public BaseEntity() { }
+
+
     }
 }

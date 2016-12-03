@@ -202,9 +202,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\BaseEntity.cs" />
-    <Compile Include="Models\Restaurantes\CReservation_Restaurant.cs" />
-    <Compile Include="Models\Restaurantes\Cvista_restaurante.cs" />
+    <Compile Include="Models\Restaurantes\CRestaurantModel.cs" />
     <Compile Include="Models\Vuelos\Cvista_Vuelos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\ReservationModels.cs" />
@@ -2956,6 +2954,8 @@
     <Content Include="Views\gestion_reserva_restaurante\gestion_reserva_restaurante.cshtml" />
     <Content Include="Views\Shared\_Layout2.cshtml" />
     <Content Include="Views\gestion_reserva_restaurante\restaurant_resultados.cshtml" />
+    <Content Include="Views\gestion_reserva_restaurante\reservar_restaurant.cshtml" />
+    <Content Include="Views\gestion_reserva_restaurante\confirma_restaurant.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
