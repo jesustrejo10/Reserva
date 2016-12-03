@@ -6,6 +6,7 @@
        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         @Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")
+       
         
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>RESERVA | BackOffice</title>
@@ -563,12 +564,17 @@
                     </div>
                 </div>
             </footer>-->
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/menu")
     @Scripts.Render("~/bundles/js")
     @RenderSection("scripts", required: false)
 
     <script src="/Scripts/cargadorMenu.js"></script>
+
+    <!--SCRIPTS PARA GESTION DE AVIONES-->
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Scripts_Aviones/llamadas_generales.js")"></script>
+
     <!-- jQuery 2.2.3 -->
     <script src="/Content/plugins/jQuery/jquery-2.2.3.min.js"></script>
     <!-- Bootstrap 3.3.6 -->

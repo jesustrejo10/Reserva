@@ -1,8 +1,13 @@
 ﻿@model BOReserva.Models.gestion_aviones.CAgregarAvion
 
+<script src="~/Scripts/Scripts_Aviones/llamadas_generales.js"></script>
+
+ 
+
  <!---------------------- SECCION DE AGREGAR AVION ---------------->
 @using (Html.BeginForm("guardarAvion", "gestion_aviones", null, FormMethod.Post, new { @id = "formGuardarAvion", @class = "form-horizontal" }))
 {
+
 <div class="row">
     <div class="col-md-12">
         <div class="box">
@@ -22,7 +27,7 @@
                                 </div>
                                 <div class="col-xs-6">
                                     <label for="capacidadPasajerosTurista">Capacidad de pasajeros (Clase Turista):</label>
-                                    @Html.TextBoxFor(m => m._capacidadPasajerosTurista, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadTuristas" })
+                                    @Html.TextBoxFor(m => m._capacidadPasajerosTurista, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadTuristas", @min = 0 })
                                                                     
                                 </div>
                             </div>
@@ -38,7 +43,7 @@
                                 </div>
                                 <div class="col-xs-6">
                                    <label for="capacidadPasajerosVIP">Capacidad de pasajeros (Clase VIP):</label>
-                                    @Html.TextBoxFor(m => m._capacidadPasajerosVIP, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadVIP" })
+                                    @Html.TextBoxFor(m => m._capacidadPasajerosVIP, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadVIP", @min = 0 })
 
                                    
                                 </div>
@@ -50,12 +55,12 @@
                             <div class="col-md-12">
                                 <div class="col-xs-6">
                                      <label for="capacidadEquipaje">Capacidad de Equipaje (En Kilos) (<span style="color:red">*</span>):</label>
-                                    @Html.TextBoxFor(m => m._capacidadEquipaje, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadEquipaje" })
+                                    @Html.TextBoxFor(m => m._capacidadEquipaje, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadEquipaje", @min = 0 })
 
                                 </div>
                                 <div class="col-xs-6">
                                     <label for="capacidadPasajerosEjecutiva">Capacidad de pasajeros (Clase Ejecutiva):</label>
-                                    @Html.TextBoxFor(m => m._capacidadPasajerosEjecutiva, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadEjecutiva" })
+                                    @Html.TextBoxFor(m => m._capacidadPasajerosEjecutiva, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadEjecutiva", @min = 0 })
 
                                 </div>
                             </div>
@@ -67,13 +72,13 @@
 
                                 <div class="col-xs-6">
                                     <label for="capacidadCombustible">Capacidad de Combustible (En litros) (<span style="color:red">*</span>):</label>
-                                    @Html.TextBoxFor(m => m._capacidadMaximaCombustible, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadCombustible" })
+                                    @Html.TextBoxFor(m => m._capacidadMaximaCombustible, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadCombustible", @min = 0 })
 
                                 </div>
 
                                 <div class="col-xs-6">
                                    <label for="velocidadMaximaDeVuelo">Velocidad Máxima de Vuelo (En Kilometros) :</label>
-                                    @Html.TextBoxFor(m => m._velocidadMaximaDeVuelo, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "velocidadMaximaDeVuelo" })
+                                    @Html.TextBoxFor(m => m._velocidadMaximaDeVuelo, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "velocidadMaximaDeVuelo", @min = 0 })
 
                                 </div>
                                 <div class="col-xs-6">
@@ -88,7 +93,7 @@
 
                                 <div class="col-xs-6">
                                     <label for="distanciaMaximaDeVuelo">Distancia Máxima de Vuelo (En Kilometros) (<span style="color:red">*</span>):</label>
-                                    @Html.TextBoxFor(m => m._distanciaMaximaVuelo, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "distanciaMaximaVuelo" })
+                                    @Html.TextBoxFor(m => m._distanciaMaximaVuelo, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "distanciaMaximaVuelo", @min = 0 })
 
                                 </div>
                             </div>
@@ -96,7 +101,7 @@
 
 
                             <div class="col-md-12" style="margin-top:10px;">
-                                <button type="button" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                                <button type="button" id="aceptarAvion" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
                             </div>
                         </div>
                     <!-- /.col -->
@@ -111,7 +116,7 @@
 </div>
 <!-- /.row -->
     
-    <script>
+    @*<script>
     $("#aceptarAvion").click(function (e) {
         e.preventDefault();
         var form = $("#formGuardarAvion");
@@ -125,6 +130,6 @@
             }
         });
     });
-</script> 
+</script>*@ 
 }
 <!------------------- FIN DE SECCION DE AGREGAR AVION ---------------->
