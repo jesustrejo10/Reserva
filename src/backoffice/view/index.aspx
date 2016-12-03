@@ -246,13 +246,12 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
                     <li class="treeview">
-                        <a href="modules/gestion_automoviles/GestionDeAutomoviles.aspx"> <i class="fa fa-car"></i> <span>Gestion de Automoviles</span> <span class="pull-right-container">
+                        <a href="modules/gestion_automoviles/GestionDeAutomoviles.aspx"> <i class="fa fa-car"></i> <span>Gestión de Automoviles</span> <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span> </a>
                         <ul class="treeview-menu">
-                            <li><a href="modules/gestion_automoviles/GestionDeAutomoviles.aspx"><i class="fa fa-plus-square-o"></i>Crear</a></li>
-                            <li><a href="pages/charts/morris.html"><i class="fa fa-gear"></i>Modificar</a></li>
-                            <li class="active"> <a href="pages/charts/flot.html"><i class="fa fa-eye"></i>Visualizar</a></li>
+                            <li><a href="modules/gestion_automoviles/M08_AgregarAutomovil.html"><i class="fa fa-plus-square-o"></i>Crear</a></li>
+                            <li><a href="modules/gestion_automoviles/M08_VisualizarAutomoviles.html"><i class="fa fa-eye"></i>Visualizar</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
@@ -268,12 +267,37 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </span> </a>
                         <ul class="treeview-menu">
-                            <li><a href="modules/gestion_cruceros/M24_GestionCruceros.html"><i class="fa fa-plus-square-o"></i>Gestiónar</a></li>
+                            <li><a href="modules/gestion_cruceros/M24_GestionCruceros.html"><i class="fa fa-plus-square-o"></i>Gestionar</a></li>
                         </ul>
                     </li>
                     <!-- MODULO DE AVIONES -->
                     <li><a href="modules/gestion_aviones/M02_GestionAviones.html"><i class="fa fa-plane"></i> <span>Gestión de Aviones</span></a></li>
                     <!-- FIN MODULO DE AVIONES -->
+                    
+                    
+                    <!-- MODULO DE BOLETOS AEREOS Y CHECK-IN -->
+                    <li class="treeview">
+                      <a href="#">
+                        <i class="fa fa-files-o"></i>
+                        <span>Vuelos</span>
+                        <span class="pull-right-container">
+                        </span>
+                      </a>
+                      <ul class="treeview-menu">
+                        <li><a href="modules/gestion_venta_boleto/crearboletosvuelos.html"><i class="fa fa-circle-o"></i>Crear boleto</a></li>
+                        <li><a href="modules/gestion_venta_boleto/consultarboleto.html"><i class="fa fa-circle-o"></i>Consultar boleto</a></li>
+                        <li><a href="modules/gestion_venta_boleto/modificarboleto.html"><i class="fa fa-circle-o"></i>Modificar boleto</a></li>
+                        <li><a href="modules/gestion_venta_boleto/eliminarboleto.html"><i class="fa fa-circle-o"></i>Eliminar boleto</a></li>
+                      </ul>
+                    </li>
+                    
+
+        <li><a href="modules/gestion_venta_boleto/checkin.html"><i class="fa fa-book"></i> <span>Check in</span></a></li>
+                    <!-- FIN MODULO DE BOLETOS AEREOS Y CHECK-IN -->
+                    
+                    
+                    
+                    
                 </ul>
             </section>
             <!-- /.sidebar -->

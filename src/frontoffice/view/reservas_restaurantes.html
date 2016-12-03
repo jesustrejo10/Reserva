@@ -1,0 +1,688 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8]>			<html class="ie ie8"> <![endif]-->
+<!--[if IE 9]>			<html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html>
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <title>Reserva</title>
+    <meta name="keywords" content="HTML5,CSS3,Template" />
+    <meta name="description" content="" />
+    <meta name="Author" content="Dorin Grigoras [www.stepofweb.com]" />
+
+    <!-- mobile settings -->
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
+    <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+    <!-- WEB FONTS : use %7C instead of | (pipe) -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400%7CRaleway:300,400,500,600,700%7CLato:300,400,400italic,600,700" rel="stylesheet" type="text/css" />
+
+    <!-- CORE CSS -->
+    <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="assets/css/jquery.dataTables.min.css">
+
+    <!-- THEME CSS -->
+    <link href="assets/css/essentials.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/layout.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="assets/css/custom.css">
+
+    <!-- PAGE LEVEL STYLE -->
+    <link href="assets/css/header-1.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/color_scheme/green.css" rel="stylesheet" type="text/css" id="color_scheme" />
+
+    <!-- JQGRID TABLE -->
+    <link href="assets/plugins/jqgrid/css/ui.jqgrid.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/layout-jqgrid.css" rel="stylesheet" type="text/css" />
+</head>
+
+<!--
+        AVAILABLE BODY CLASSES:
+
+        smoothscroll 			= create a browser smooth scroll
+        enable-animation		= enable WOW animations
+
+        bg-grey					= grey background
+        grain-grey				= grey grain background
+        grain-blue				= blue grain background
+        grain-green				= green grain background
+        grain-blue				= blue grain background
+        grain-orange			= orange grain background
+        grain-yellow			= yellow grain background
+
+        boxed 					= boxed layout
+        pattern1 ... patern11	= pattern background
+        menu-vertical-hide		= hidden, open on click
+
+        BACKGROUND IMAGE [together with .boxed class]
+        data-background="assets/images/boxed_background/1.jpg"
+    -->
+<body class="smoothscroll enable-animation">
+
+
+
+    <!-- wrapper -->
+    <div id="wrapper">
+
+        <!-- Top Bar -->
+        <div id="topBar" class="dark">
+            <div class="container">
+
+                <!-- right -->
+                <ul class="top-links list-inline pull-right">
+                    <li class="hidden-xs"><a href="page-login-1.html">Iniciar Sesión</a></li>
+                    <li class="hidden-xs"><a href="page-register-1.html">Registrar</a></li>
+                </ul>
+
+            </div>
+        </div>
+        <!-- /Top Bar -->
+        <!--
+                AVAILABLE HEADER CLASSES
+
+                Default nav height: 96px
+                .header-md 		= 70px nav height
+                .header-sm 		= 60px nav height
+
+                .noborder 		= remove bottom border (only with transparent use)
+                .transparent	= transparent header
+                .translucent	= translucent header
+                .sticky			= sticky header
+                .static			= static header
+                .dark			= dark header
+                .bottom			= header on bottom
+
+                shadow-before-1 = shadow 1 header top
+                shadow-after-1 	= shadow 1 header bottom
+                shadow-before-2 = shadow 2 header top
+                shadow-after-2 	= shadow 2 header bottom
+                shadow-before-3 = shadow 3 header top
+                shadow-after-3 	= shadow 3 header bottom
+
+                .clearfix		= required for mobile menu, do not remove!
+
+                Example Usage:  class="clearfix sticky header-sm transparent noborder"
+            -->
+        <div id="header" class="sticky clearfix">
+
+            <!-- SEARCH HEADER -->
+            <div class="search-box over-header">
+                <a id="closeSearch" href="#" class="glyphicon glyphicon-remove"></a>
+
+                <form action="page-search-result-1.html" method="get">
+                    <input type="text" class="form-control" placeholder="SEARCH" />
+                </form>
+            </div>
+            <!-- /SEARCH HEADER -->
+            <!-- TOP NAV -->
+            <header id="topNav">
+                <div class="container">
+
+                    <!-- Mobile Menu Button -->
+                    <button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- BUTTONS -->
+                    <ul class="pull-right nav nav-pills nav-second-main">
+
+                        <!-- SEARCH -->
+                        <li class="search">
+                            <a href="javascript:;">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                        <!-- /SEARCH -->
+
+                    </ul>
+                    <!-- /BUTTONS -->
+                    <!-- Logo -->
+                    <a class="logo pull-left" href="index.html">
+                        <img src="assets/images/logo_final.png" alt="" />
+                    </a>
+
+                    <!--
+                        Top Nav
+
+                        AVAILABLE CLASSES:
+                        submenu-dark = dark sub menu
+                    -->
+                    <div class="navbar-collapse pull-right nav-main-collapse collapse">
+                        <nav class="nav-main">
+
+                            <!--
+                                NOTE
+
+                                For a regular link, remove "dropdown" class from LI tag and "dropdown-toggle" class from the href.
+                                Direct Link Example:
+
+                                <li>
+                                    <a href="#">HOME</a>
+                                </li>
+                            -->
+                            <ul id="topMain" class="nav nav-pills nav-main">
+                                <li class="dropdown active">
+                                    <!-- HOME -->
+                                    <a href="index.html">
+                                        HOME
+                                    </a>
+                                </li>
+                                <li class="dropdown">
+                                    <!-- PAGES -->
+                                    <a class="dropdown-toggle" href="#">
+                                        PAGES
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#">
+                                                ABOUT
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="page-about-us.html">ABOUT US</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#">
+                                                FAQ
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="page-faq.html">FAQ</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#">
+                                                CONTACT
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="page-contact.html">CONTACT</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#">
+                                                ERROR
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="page-404-1.html">ERROR 404 - LAYOUT 1</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="page-500-1.html">ERROR 500 - LAYOUT 1</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#">
+                                                SIDEBAR
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="page-sidebar-left.html">SIDEBAR LEFT</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#">
+                                                LOGIN/REGISTER
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="page-login-1.html">LOGIN - LAYOUT 1</a></li>
+                                                <li><a href="page-login-2.html">LOGIN - LAYOUT 2</a></li>
+                                                <li><a href="page-login-3.html">LOGIN - LAYOUT 3</a></li>
+                                                <li><a href="page-login-4.html">LOGIN - LAYOUT 4</a></li>
+                                                <li><a href="page-login-5.html">LOGIN - LAYOUT 5</a></li>
+                                                <li><a href="page-login-register-1.html">LOGIN + REGISTER 1</a></li>
+                                                <li><a href="page-login-register-2.html">LOGIN + REGISTER 2</a></li>
+                                                <li><a href="page-login-register-3.html">LOGIN + REGISTER 3</a></li>
+                                                <li><a href="page-register-1.html">REGISTER - LAYOUT 1</a></li>
+                                                <li><a href="page-register-2.html">REGISTER - LAYOUT 2</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#">
+                                                CLIENTS
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="page-clients-3.html">CLIENTS 1 - FULLWIDTH</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#">
+                                                SEARCH RESULT
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="page-search-result-6.html">LAYOUT 3 - TABLE SEARCH</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#">
+                                                PROFILE
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="page-profile.html">USER PROFILE</a></li>
+                                                <li><a href="page-profile-projects.html">USER PROJECTS</a></li>
+                                                <li><a href="page-profile-comments.html">USER COMMENTS</a></li>
+                                                <li><a href="page-profile-history.html">USER HISTORY</a></li>
+                                                <li><a href="page-profile-settings.html">USER SETTINGS</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#">
+                                                COMING SOON
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="page-coming-soon-1.html">COMING SOON - LAYOUT 1</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <!-- SHOP -->
+                                    <a class="dropdown-toggle" href="#">
+                                        SHOP
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#">
+                                                1 COLUMN
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="shop-1col-left.html">LEFT SIDEBAR</a></li>
+                                                <li><a href="shop-1col-right.html">RIGHT SIDEBAR</a></li>
+                                                <li><a href="shop-1col-both.html">BOTH SIDEBAR</a></li>
+                                                <li><a href="shop-1col-full.html">FULL WIDTH</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#">
+                                                2 COLUMNS
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="shop-2col-left.html">LEFT SIDEBAR</a></li>
+                                                <li><a href="shop-2col-right.html">RIGHT SIDEBAR</a></li>
+                                                <li><a href="shop-2col-both.html">BOTH SIDEBAR</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#">
+                                                3 COLUMNS
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="shop-3col-left.html">LEFT SIDEBAR</a></li>
+                                                <li><a href="shop-3col-right.html">RIGHT SIDEBAR</a></li>
+                                                <li><a href="shop-3col-full.html">FULL WIDTH</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#">
+                                                4 COLUMNS
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="shop-4col-left.html">LEFT SIDEBAR</a></li>
+                                                <li><a href="shop-4col-right.html">RIGHT SIDEBAR</a></li>
+                                                <li><a href="shop-4col-full.html">FULL WIDTH</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#">
+                                                SINGLE PRODUCT
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="shop-single-left.html">LEFT SIDEBAR</a></li>
+                                                <li><a href="shop-single-right.html">RIGHT SIDEBAR</a></li>
+                                                <li><a href="shop-single-both.html">BOTH SIDEBAR</a></li>
+                                                <li><a href="shop-single-full.html">FULL WIDTH</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="shop-compare.html">COMPARE</a></li>
+                                        <li><a href="shop-cart.html">CART</a></li>
+                                        <li><a href="shop-checkout.html">CHECKOUT</a></li>
+                                        <li><a href="shop-checkout-final.html">ORDER PLACED</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown mega-menu">
+                                    <!-- SHORTCODES -->
+                                    <a class="dropdown-toggle" href="#">
+                                        SHORTCODES
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <div class="row">
+
+                                                <div class="col-md-5th">
+                                                    <ul class="list-unstyled">
+                                                        <li><a href="shortcode-buttons.html">BUTTONS</a></li>
+                                                        <li><a href="shortcode-carousel.html">CAROUSEL</a></li>
+                                                        <li><a href="shortcode-columns.html">GRID &amp; COLUMNS</a></li>
+                                                        <li><a href="shortcode-forms.html">FORM ELEMENTS</a></li>
+                                                    </ul>
+                                                </div>
+
+                                                <div class="col-md-5th">
+                                                    <ul class="list-unstyled">
+                                                        <li><a href="shortcode-dividers.html">DIVIDERS</a></li>
+                                                        <li><a href="shortcode-icon-boxes.html">BOXES &amp; ICONS</a></li>
+                                                        <li><a href="shortcode-headings.html">HEADING STYLES</a></li>
+                                                        <li><a href="shortcode-icon-lists.html">ICON LISTS</a></li>
+                                                        <li><a href="shortcode-labels.html">LABELS &amp; BADGES</a></li>
+                                                        <li><a href="shortcode-forms-editors.html">HTML EDITORS</a></li>
+                                                    </ul>
+                                                </div>
+
+                                                <div class="col-md-5th">
+                                                    <ul class="list-unstyled">
+                                                        <li><a href="shortcode-list-pannels.html">LIST &amp; PANNELS</a></li>
+                                                        <li><a href="shortcode-modals.html">MODAL / POPOVER / NOTIF</a></li>
+                                                        <li><a href="shortcode-paginations.html">PAGINATIONS</a></li>
+                                                        <li><a href="shortcode-progress-bar.html">PROGRESS BARS</a></li>
+                                                    </ul>
+                                                </div>
+
+                                                <div class="col-md-5th">
+                                                    <ul class="list-unstyled">
+                                                        <li><a href="shortcode-pricing.html">PRICING BOXES</a></li>
+                                                        <li><a href="shortcode-process-steps.html">PROCESS STEPS</a></li>
+                                                        <li><a href="shortcode-info-bars.html">INFO BARS</a></li>
+                                                        <li><a href="shortcode-blockquotes.html">BLOCKQUOTES</a></li>
+                                                        <li><a href="shortcode-responsive.html">RESPONSIVE</a></li>
+                                                        <li><a href="shortcode-sections.html">SECTIONS</a></li>
+                                                    </ul>
+                                                </div>
+
+                                                <div class="col-md-5th">
+                                                    <ul class="list-unstyled">
+                                                        <li><a href="shortcode-alerts.html">ALERTS</a></li>
+                                                        <li><a href="shortcode-styled-icons.html">STYLED ICONS</a></li>
+                                                        <li><a href="shortcode-tables.html">TABLES</a></li>
+                                                        <li><a href="shortcode-tabs.html">TABS</a></li>
+                                                        <li><a href="shortcode-testimonials.html">TESTIMONIALS</a></li>
+                                                        <li><a href="shortcode-thumbnails.html">THUMBNAILS</a></li>
+                                                        <li><a href="shortcode-toggles.html">TOGGLES</a></li>
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                        </nav>
+                    </div>
+
+                </div>
+            </header>
+            <!-- /Top Nav -->
+
+        </div>
+
+
+        <!--
+                PAGE HEADER
+
+                CLASSES:
+                    .page-header-xs	= 20px margins
+                    .page-header-md	= 50px margins
+                    .page-header-lg	= 80px margins
+                    .page-header-xlg= 130px margins
+                    .dark			= dark page header
+
+                    .shadow-before-1 	= shadow 1 header top
+                    .shadow-after-1 	= shadow 1 header bottom
+                    .shadow-before-2 	= shadow 2 header top
+                    .shadow-after-2 	= shadow 2 header bottom
+                    .shadow-before-3 	= shadow 3 header top
+                    .shadow-after-3 	= shadow 3 header bottom
+            -->
+        <!-- FEATURED GRID -->
+        <section class="featured-grid">
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="panel panel-default col-sm-12">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">Mis Reservas - Restaurantes</h2>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-bordered table-hover" id="tablas-reservas-restaurant">
+                                <thead>
+                                    <tr>
+                                        <th>#Codigo</th>
+                                        <th>Restaurante</th>
+                                        <th>Cliente</th>
+                                        <th>Fecha</th>
+                                        <th>Hora</th>
+                                        <th>Nro personas</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                     <tr>
+                                        <td>1234</td>
+                                        <td>Restaurante de carlos V</td>
+                                        <td>Carlos Herrera</td>
+                                        <td>21/11/2016</td>
+                                        <td>15:00</td>
+                                        <td>5</td>
+                                        <td>
+                                            <a href="#"><i class="fa fa fa-pencil-square"></i></a>
+                                            <a href="#"><i class="fa fa-times-circle"></i></a>
+                                        </td>
+                                    </tr>
+                                      <tr>
+                                        <td>1234</td>
+                                        <td>Restaurante de carlos V</td>
+                                        <td>Carlos Herrera</td>
+                                        <td>21/11/2016</td>
+                                        <td>15:00</td>
+                                        <td>5</td>
+                                        <td>
+                                            <a href="#"><i class="fa fa fa-pencil-square"></i></a>
+                                            <a href="#"><i class="fa fa-times-circle"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>1234</td>
+                                        <td>Restaurante de carlos V</td>
+                                        <td>Carlos Herrera</td>
+                                        <td>21/11/2016</td>
+                                        <td>15:00</td>
+                                        <td>5</td>
+                                        <td>
+                                            <a href="#"><i class="fa fa fa-pencil-square"></i></a>
+                                            <a href="#"><i class="fa fa-times-circle"></i></a>
+                                        </td>
+                                    </tr>
+                                      <tr>
+                                        <td>1234</td>
+                                        <td>Restaurante de carlos V</td>
+                                        <td>Carlos Herrera</td>
+                                        <td>21/11/2016</td>
+                                        <td>15:00</td>
+                                        <td>5</td>
+                                        <td>
+                                            <a href="#"><i class="fa fa fa-pencil-square"></i></a>
+                                            <a href="#"><i class="fa fa-times-circle"></i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- INFO BAR -->
+        <section class="info-bar info-bar-clean">
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col-sm-3">
+                        <i class="glyphicon glyphicon-globe"></i>
+                        <h3>FREE SHIPPING &amp; RETURN</h3>
+                        <p>Free shipping on all orders over $99.</p>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <i class="glyphicon glyphicon-usd"></i>
+                        <h3>MONEY BACK GUARANTEE</h3>
+                        <p>100% money back guarantee.</p>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <i class="glyphicon glyphicon-flag"></i>
+                        <h3>ONLINE SUPPORT 24/7</h3>
+                        <p>Lorem ipsum dolor sit amet.</p>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <i class="glyphicon glyphicon-heart"></i>
+                        <h3><span class="countTo">9845</span> HAPPY CUSTOMERS</h3>
+                        <p>Lorem ipsum dolor sit amet.</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+        <!-- /INFO BAR -->
+        <!-- FOOTER -->
+        <footer id="footer">
+            <div class="container">
+
+                <div class="row margin-top-10 margin-bottom-10 size-13">
+
+                    <!-- col #1 -->
+                    <div class="col-md-4 col-sm-4">
+
+
+                        <!-- Social Icons -->
+                        <div class="clearfix">
+
+                            <a href="#" class="social-icon social-icon-sm social-icon-border social-facebook pull-left" data-toggle="tooltip" data-placement="top" title="Facebook">
+                                <i class="icon-facebook"></i>
+                                <i class="icon-facebook"></i>
+                            </a>
+
+                            <a href="#" class="social-icon social-icon-sm social-icon-border social-twitter pull-left" data-toggle="tooltip" data-placement="top" title="Twitter">
+                                <i class="icon-twitter"></i>
+                                <i class="icon-twitter"></i>
+                            </a>
+
+                            <a href="#" class="social-icon social-icon-sm social-icon-border social-gplus pull-left" data-toggle="tooltip" data-placement="top" title="Google plus">
+                                <i class="icon-gplus"></i>
+                                <i class="icon-gplus"></i>
+                            </a>
+
+                            <a href="#" class="social-icon social-icon-sm social-icon-border social-linkedin pull-left" data-toggle="tooltip" data-placement="top" title="Linkedin">
+                                <i class="icon-linkedin"></i>
+                                <i class="icon-linkedin"></i>
+                            </a>
+
+                            <a href="#" class="social-icon social-icon-sm social-icon-border social-rss pull-left" data-toggle="tooltip" data-placement="top" title="Rss">
+                                <i class="icon-rss"></i>
+                                <i class="icon-rss"></i>
+                            </a>
+
+                        </div>
+                        <!-- /Social Icons -->
+
+                    </div>
+                    <!-- /col #1 -->
+                    <!-- col #2 -->
+                    <div class="col-md-8 col-sm-8">
+
+                        <div class="row">
+
+                            <div class="col-md-5 hidden-sm hidden-xs">
+                                <h4 class="letter-spacing-1">RECENT NEWS</h4>
+                                <ul class="list-unstyled footer-list half-paddings">
+                                    <li>
+                                        <a class="block" href="#">New CSS3 Transitions this Year</a>
+                                        <small>June 29, 2015</small>
+                                    </li>
+                                    <li>
+                                        <a class="block" href="#">Inteligent Transitions In UX Design</a>
+                                        <small>June 29, 2015</small>
+                                    </li>
+                                    <li>
+                                        <a class="block" href="#">Lorem Ipsum Dolor</a>
+                                        <small>June 29, 2015</small>
+                                    </li>
+                                    <li>
+                                        <a class="block" href="#">New CSS3 Transitions this Year</a>
+                                        <small>June 29, 2015</small>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="col-md-3 hidden-sm hidden-xs">
+                                <h4 class="letter-spacing-1">EXPLORE US</h4>
+                                <ul class="list-unstyled footer-list half-paddings noborder">
+                                    <li><a class="block" href="#"><i class="fa fa-angle-right"></i> About Us</a></li>
+                                    <li><a class="block" href="#"><i class="fa fa-angle-right"></i> About Me</a></li>
+                                    <li><a class="block" href="#"><i class="fa fa-angle-right"></i> About Our Team</a></li>
+                                    <li><a class="block" href="#"><i class="fa fa-angle-right"></i> Services</a></li>
+                                    <li><a class="block" href="#"><i class="fa fa-angle-right"></i> Careers</a></li>
+                                    <li><a class="block" href="#"><i class="fa fa-angle-right"></i> Gallery</a></li>
+                                    <li><a class="block" href="#"><i class="fa fa-angle-right"></i> FAQ</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="col-md-4">
+                                <h4 class="letter-spacing-1">SECURE PAYMENT</h4>
+                                <p>Donec tellus massa, tristique sit amet condim vel, facilisis quis sapien. Praesent id enim sit amet.</p>
+                                <p>
+                                    <!-- see assets/images/cc/ for more icons -->
+                                    <img src="assets/images/cc/Visa.png" alt="" />
+                                    <img src="assets/images/cc/Mastercard.png" alt="" />
+                                    <img src="assets/images/cc/Maestro.png" alt="" />
+                                    <img src="assets/images/cc/PayPal.png" alt="" />
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- /col #2 -->
+
+                </div>
+
+            </div>
+
+            <div class="copyright">
+                <div class="container">
+                    <ul class="pull-right nomargin list-inline mobile-block">
+                        <li><a href="#">Terms &amp; Conditions</a></li>
+                        <li>&bull;</li>
+                        <li><a href="#">Privacy</a></li>
+                    </ul>
+
+                    &copy; All Rights Reserved, Reserva
+                </div>
+            </div>
+
+        </footer>
+        <!-- /FOOTER -->
+
+
+    </div>
+
+
+
+    <!-- /PRELOADER -->
+    <!-- JAVASCRIPT FILES -->
+
+    <!-- STYLESWITCHER - REMOVE -->
+    <script type="text/javascript" src="assets/js/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+           $('#tablas-reservas-restaurant').DataTable();
+        } );
+     </script>
+  
+
+
+</body>
+</html>
