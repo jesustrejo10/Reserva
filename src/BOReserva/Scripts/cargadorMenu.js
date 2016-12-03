@@ -69,8 +69,6 @@
             });
     });
 
-});
-
     $("#m02_agregaravion").click(function (e) {
         e.preventDefault();
         var url = '/gestion_aviones/M02_AgregarAvion';
@@ -92,4 +90,7 @@
                 }
             });
     });
+
 });
+
+
