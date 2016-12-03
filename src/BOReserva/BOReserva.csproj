@@ -195,11 +195,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\gestion_automovilesController.cs" />
     <Compile Include="Controllers\gestion_avionesController.cs" />
-<<<<<<< HEAD
     <Compile Include="Controllers\gestion_hotelesController.cs" />
-=======
     <Compile Include="Controllers\gestion_comida_vueloController.cs" />
->>>>>>> refs/remotes/origin/Develop
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -1344,13 +1341,10 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-<<<<<<< HEAD
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Crear.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_ModificarHotel.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Desactivar.cshtml" />
-=======
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarEditarComida.cshtml" />
->>>>>>> refs/remotes/origin/Develop
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
