@@ -4,11 +4,16 @@ using System.Web.Mvc;
 
 namespace FOReserva.Models
 {
-    public class ReservationModels : DbContext
+    public class ReservationModels : BaseEntity
     {
-        private string _owner { get; set; }
         private DateTime _date { get; set; }
-        private String _time { get; set; }
+        private string _time { get; set; }
 
+        public ReservationModels( string owner, DateTime date, string time )
+            : base( owner )
+        {
+            this._date = date;
+            this._time = time;
+        }
     }
 }
