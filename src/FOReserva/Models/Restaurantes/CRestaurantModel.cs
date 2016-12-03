@@ -5,8 +5,8 @@ using System.Web;
 
 namespace FOReserva.Models.Restaurantes
 {
-    public class Cvista_restaurante
+    public class CRestaurantModel
     {
-        public string _nombre { get; set; }
+        public string _nombre{ get; set; }
     }
 }

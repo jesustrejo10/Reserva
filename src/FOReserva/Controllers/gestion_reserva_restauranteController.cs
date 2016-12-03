@@ -13,13 +13,13 @@ namespace FOReserva.Controllers
         // GET: /GestionReservaRestaurant/
         public ActionResult gestion_reserva_restaurante()
         {
-            Cvista_restaurante model = new Cvista_restaurante();
+            CRestaurantModel model = new CRestaurantModel();
             return PartialView(model);
         }
 
 
         [HttpPost]
-        public JsonResult buscar_restaurante(Cvista_restaurante model)
+        public JsonResult buscar_restaurante(CRestaurantModel model)
         {
             String prueba = model._nombre;
             Console.WriteLine(prueba);
@@ -31,5 +31,19 @@ namespace FOReserva.Controllers
             return View();
         }
 
+        public ActionResult restaurant_resultados()
+        {
+            return View();
+        }
+
+        public ActionResult reservar_restaurant()
+        {
+            return View();
+        }
+
+        public ActionResult confirma_restaurant()
+        {
+            return View();
+        }
     }
 }
