@@ -30,8 +30,17 @@ namespace FOReserva.Controllers
 
         public ActionResult restaurant_resultados(int search_val, string search_txt)
         {
-            ManejadorSQLReserva manejador = new ManejadorSQLReserva();
-            List<CRestaurantModel> lista = manejador.buscarRest();
+            List<CRestaurantModel> lista = null;
+            if (search_val == 1)
+            {
+                ManejadorSQLReserva manejador = new ManejadorSQLReserva();
+                lista = manejador.buscarRestName();
+            }
+            else if (search_val == 2)
+            {
+                ManejadorSQLReserva manejador = new ManejadorSQLReserva();
+                lista = manejador.buscarRestName();
+            }
             return View(lista);
         }
 
