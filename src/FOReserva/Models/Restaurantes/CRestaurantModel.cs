@@ -5,37 +5,21 @@ using System.Web;
 
 namespace FOReserva.Models.Restaurantes
 {
+    /*Clase del modelo Restaurante
+      Atributos: 
+       _address: Direccion del restaurante
+       _description: Descripcion del restaurante
+       _open: Hora de apertura del restaurante
+       _clese: Hora de cierre
+         */
     public class CRestaurantModel : BaseEntity
     {
         private string _address;
-
-        public string Addres
-        {
-            get { return _address; }
-            set { _address = value; }
-        }
         private string _description;
-
-        public string Description
-        {
-            get { return _description; }
-            set { _description = value; }
-        }
         private string _open;
-
-        public string Open
-        {
-            get { return _open; }
-            set { _open = value; }
-        }
         private string _close;
-
-        public string Close
-        {
-            get { return _close; }
-            set { _close = value; }
-        }
-
+        
+        /* Constructor Completo */
         public CRestaurantModel
             (int id, string name, string address, string description,
               string open, string close)
@@ -48,9 +32,37 @@ namespace FOReserva.Models.Restaurantes
             this._close = close;
         }
 
-        public CRestaurantModel() :base (){
-        
+        /* Constructor Vacio */
+        public CRestaurantModel() :base (){ }
+
+        /*Direccion del restaurante*/
+        public string Addres
+        {
+            get { return _address; }
+            set { _address = value; }
         }
 
+        /* Descripcion del restaurante */
+        public string Description
+        {
+            get { return _description; }
+            set { _description = value; }
+        }
+
+        /* Metodos Get y Set 
+          Hora de apertura del restaurante */
+        public string Open
+        {
+            get { return _open; }
+            set { _open = value; }
+        }
+
+        /* Metodos Get y Set para la hora de cierre 
+          del restaurante */
+        public string Close
+        {
+            get { return _close; }
+            set { _close = value; }
+        }
     }
 }
