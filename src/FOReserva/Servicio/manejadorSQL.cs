@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FOReserva.Models.Restaurantes;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -20,5 +21,30 @@ namespace FOReserva.Servicio
         private SqlConnection conexion = null;
         //string que contendra la conexion a la bd
         private string stringDeConexion = null;
+
+        /*Metodo para Abrir la conexion a la DB*/
+        public void OpenConextion()
+        {
+            conexion = new SqlConnection(stringDeConexion);
+            conexion.Open();
+        }
+
+        /*Metodo para Cerrar la Conexion a la DB*/
+        public void CloseConextion()
+        {
+            if (conexion != null)
+            {
+                conexion.Close();
+                conexion = null;
+            }
+        }
+
+        /*Metodo Get de la conexion a la DB*/
+        public SqlConnection Conexion
+        {
+            get { return conexion; }
+        }
+
+
     }
 }

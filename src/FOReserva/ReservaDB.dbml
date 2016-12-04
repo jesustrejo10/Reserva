@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DB_A1380A_reserva" Class="ReservaDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;Persist Security Info=True;User ID=DB_A1380A_reserva_admin" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DB_A1380A_reservaConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Automovil" Member="Automovils">
+    <Type Name="Automovil">
+      <Column Name="aut_matricula" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="aut_modelo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="aut_fabricante" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="aut_anio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="aut_kilometraje" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" CanBeNull="false" />
+      <Column Name="aut_cantpasajeros" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="aut_tipovehiculo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="aut_preciocompra" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" CanBeNull="false" />
+      <Column Name="aut_precioalquiler" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" CanBeNull="false" />
+      <Column Name="aut_penalidaddiaria" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" CanBeNull="false" />
+      <Column Name="aut_fecharegistro" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="aut_color" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="aut_disponibilidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="aut_transmision" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="aut_fk_ciudad" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Lugar_Automovil" Member="Lugar" ThisKey="aut_fk_ciudad" OtherKey="id_lugar" Type="Lugar" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Avion" Member="Avions">
+    <Type Name="Avion">
+      <Column Name="avi_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="avi_matricula" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="avi_modelo" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="avi_pasajeros_turista" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="avi_pasajeros_ejecutiva" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="avi_pasajeros_vip" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="avi_cap_equipaje" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
+      <Column Name="avi_max_dist" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
+      <Column Name="avi_max_vel" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="avi_max_comb" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
+      <Association Name="Avion_Vuelo" Member="Vuelos" ThisKey="avi_id" OtherKey="vue_fk_avion" Type="Vuelo" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Boleto" Member="Boletos">
+    <Type Name="Boleto">
+      <Column Name="bol_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="bol_escala" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="bol_ida_vuelta" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="bol_costo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="bol_fk_lugar_origen" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="bol_fk_lugar_destino" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="bol_fk_pasajero" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Boleto_Vuelo" Member="Boleto_Vuelos">
+    <Type Name="Boleto_Vuelo">
+      <Column Name="bol_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="bol_fecha_partida" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="bol_fecha_llegada" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="bol_fk_boleto" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="bol_fk_vuelo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Cabina" Member="Cabinas">
+    <Type Name="Cabina">
+      <Column Name="id_cabina" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nombre_cabina" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="precio_camarote_cabina" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="estatus" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="fk_id_crucero" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Cabina_Camarote" Member="Camarotes" ThisKey="id_cabina" OtherKey="fk_id_cabina" Type="Camarote" />
+      <Association Name="Crucero_Cabina" Member="Crucero" ThisKey="fk_id_crucero" OtherKey="id_crucero" Type="Crucero" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Camarote" Member="Camarotes">
+    <Type Name="Camarote">
+      <Column Name="id_camarote" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="cantidad_cama" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="tipo_cama" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="estatus" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="fk_id_cabina" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Cabina_Camarote" Member="Cabina" ThisKey="fk_id_cabina" OtherKey="id_cabina" Type="Cabina" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Comida" Member="Comidas">
+    <Type Name="Comida">
+      <Column Name="com_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="com_nombre" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="com_tipo" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="com_referencia" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="com_estatus" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Comida_Vuelo" Member="Comida_Vuelos">
+    <Type Name="Comida_Vuelo">
+      <Column Name="com_vue_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="com_vue_fk_vuelo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="com_vue_fk_comida" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="com_vue_cantidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Crucero" Member="Cruceros">
+    <Type Name="Crucero">
+      <Column Name="id_crucero" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nombre_crucero" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="compañia_crucero" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="capacidad_pasajero" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="estatus" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Association Name="Crucero_Cabina" Member="Cabinas" ThisKey="id_crucero" OtherKey="fk_id_crucero" Type="Cabina" />
+      <Association Name="Crucero_Itinerario_Crucero" Member="Itinerario_Cruceros" ThisKey="id_crucero" OtherKey="fk_id_crucero" Type="Itinerario_Crucero" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Diario_Puntuacion" Member="Diario_Puntuacions">
+    <Type Name="Diario_Puntuacion">
+      <Column Name="id_dia_pun" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fk_diari_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fk_pun_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fk_usu_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Diario_Viaje_Diario_Puntuacion" Member="Diario_Viaje" ThisKey="fk_diari_id" OtherKey="id_diario" Type="Diario_Viaje" IsForeignKey="true" />
+      <Association Name="Puntuacion_Diario_Puntuacion" Member="Puntuacion" ThisKey="fk_pun_id" OtherKey="id_puntuacion" Type="Puntuacion" IsForeignKey="true" />
+      <Association Name="Usuario_Diario_Puntuacion" Member="Usuario" ThisKey="fk_usu_id" OtherKey="usu_id" Type="Usuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Diario_Viaje" Member="Diario_Viajes">
+    <Type Name="Diario_Viaje">
+      <Column Name="id_diario" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="nombre_diario" Type="System.String" DbType="VarChar(400) NOT NULL" CanBeNull="false" />
+      <Column Name="fecha_ini_diario" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="fecha_fin_diario" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="descripcion_diario" Type="System.String" DbType="VarChar(4000) NOT NULL" CanBeNull="false" />
+      <Column Name="fecha_carga_diario" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="calif_creador" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="raiting" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="num_visita" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="fk_usuario_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Diario_Viaje_Diario_Puntuacion" Member="Diario_Puntuacions" ThisKey="id_diario" OtherKey="fk_diari_id" Type="Diario_Puntuacion" />
+      <Association Name="Diario_Viaje_Foto" Member="Fotos" ThisKey="id_diario" OtherKey="fk_diario_id" Type="Foto" />
+      <Association Name="Usuario_Diario_Viaje" Member="Usuario" ThisKey="fk_usuario_id" OtherKey="usu_id" Type="Usuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Equipaje" Member="Equipajes">
+    <Type Name="Equipaje">
+      <Column Name="equ_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="equ_tipo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="equ_peso" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="equ_fk_pase_abordaje" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Equipaje_Reclamo_Equipaje" Member="Reclamo_Equipajes" ThisKey="equ_id" OtherKey="rec_fk_equipaje" Type="Reclamo_Equipaje" />
+      <Association Name="Pase_Abordaje_Equipaje" Member="Pase_Abordaje" ThisKey="equ_fk_pase_abordaje" OtherKey="pas_id" Type="Pase_Abordaje" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Foto" Member="Fotos">
+    <Type Name="Foto">
+      <Column Name="id_foto" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="nombre" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="datos" Type="System.Data.Linq.Binary" DbType="Image NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="fk_diario_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Diario_Viaje_Foto" Member="Diario_Viaje" ThisKey="fk_diario_id" OtherKey="id_diario" Type="Diario_Viaje" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Hotel" Member="Hotels">
+    <Type Name="Hotel">
+      <Column Name="hot_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="hot_nombre" Type="System.String" DbType="VarChar(60) NOT NULL" CanBeNull="false" />
+      <Column Name="hot_url_pagina" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="hot_email" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="hot_cantidad_habitaciones" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Hotel_Reserva_Habitacion" Member="Reserva_Habitacions" ThisKey="hot_id" OtherKey="rha_fk_hot_id" Type="Reserva_Habitacion" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Itinerario_Crucero" Member="Itinerario_Cruceros">
+    <Type Name="Itinerario_Crucero">
+      <Column Name="fecha_inicio_itinerario" Type="System.DateTime" DbType="Date NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fecha_fin_itinerario" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="estatus" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="fk_id_crucero" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fk_id_ruta" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Crucero_Itinerario_Crucero" Member="Crucero" ThisKey="fk_id_crucero" OtherKey="id_crucero" Type="Crucero" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Ruta_Itinerario_Crucero" Member="Ruta" ThisKey="fk_id_ruta" OtherKey="id_ruta" Type="Ruta" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Itinerario_Vac" Member="Itinerario_Vacs">
+    <Type Name="Itinerario_Vac">
+      <Column Name="itiv_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="itiv_actividad" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="itiv_fecha" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="fk_boleto" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="fk_crucero" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Lugar" Member="Lugars">
+    <Type Name="Lugar">
+      <Column Name="id_lugar" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="nombre_lugar" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="tipo_lugar" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="FK_lugar_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="abreviatura_lugar" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="zona_horaria_lugar" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="Lugar_Automovil" Member="Automovils" ThisKey="id_lugar" OtherKey="aut_fk_ciudad" Type="Automovil" />
+      <Association Name="Lugar_Lugar" Member="Lugars" ThisKey="id_lugar" OtherKey="FK_lugar_id" Type="Lugar" />
+      <Association Name="Lugar_Ruta" Member="Rutas" ThisKey="id_lugar" OtherKey="FK_lugar_destino" Type="Ruta" />
+      <Association Name="Lugar_Ruta1" Member="Rutas1" ThisKey="id_lugar" OtherKey="FK_lugar_origen" Type="Ruta" />
+      <Association Name="Lugar_Lugar" Member="Lugar1" ThisKey="FK_lugar_id" OtherKey="id_lugar" Type="Lugar" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Pasajero" Member="Pasajeros">
+    <Type Name="Pasajero">
+      <Column Name="pas_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="pas_primer_nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="pas_segundo_nombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="pas_primer_apellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="pas_segundo_apellido" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="pas_fecha_nacimiento" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="pas_sexo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Pasajero_Reclamo_Equipaje" Member="Reclamo_Equipajes" ThisKey="pas_id" OtherKey="rec_fk_pasajero" Type="Reclamo_Equipaje" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Pase_Abordaje" Member="Pase_Abordajes">
+    <Type Name="Pase_Abordaje">
+      <Column Name="pas_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="pas_hora_abordaje" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="pas_hora_despeje" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="pas_fk_boleto" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="pas_fk_asiento" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="pas_fk_lugar_origen" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="pas_fk_lugar_destino" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="pas_fk_vuelo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Pase_Abordaje_Equipaje" Member="Equipajes" ThisKey="pas_id" OtherKey="equ_fk_pase_abordaje" Type="Equipaje" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Puntuacion" Member="Puntuacions">
+    <Type Name="Puntuacion">
+      <Column Name="id_puntuacion" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="tipo" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Association Name="Puntuacion_Diario_Puntuacion" Member="Diario_Puntuacions" ThisKey="id_puntuacion" OtherKey="fk_pun_id" Type="Diario_Puntuacion" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Reclamo_Equipaje" Member="Reclamo_Equipajes">
+    <Type Name="Reclamo_Equipaje">
+      <Column Name="rec_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="rec_descripcion" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="rec_status" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="rec_fecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="rec_fk_equipaje" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="rec_fk_pasajero" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Equipaje_Reclamo_Equipaje" Member="Equipaje" ThisKey="rec_fk_equipaje" OtherKey="equ_id" Type="Equipaje" IsForeignKey="true" />
+      <Association Name="Pasajero_Reclamo_Equipaje" Member="Pasajero" ThisKey="rec_fk_pasajero" OtherKey="pas_id" Type="Pasajero" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Reserva" Member="Reservas">
+    <Type Name="Reserva">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Reserva_Nombre" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Fecha" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Hora" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="Cantidad_Personas" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FK_RESTAURANTE" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FK_USUARIO" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FK_CRUSERO" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Tipo" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Reserva_Habitacion" Member="Reserva_Habitacions">
+    <Type Name="Reserva_Habitacion">
+      <Column Name="rha_fk_hot_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="rha_fk_usu_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="rha_fecha_llegada" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="rha_estado" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="rha_fecha_reservacion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="rha_cantidad_dias" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="rha_habitacion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="rha_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Hotel_Reserva_Habitacion" Member="Hotel" ThisKey="rha_fk_hot_id" OtherKey="hot_id" Type="Hotel" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Usuario_Reserva_Habitacion" Member="Usuario" ThisKey="rha_fk_usu_id" OtherKey="usu_id" Type="Usuario" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Restaurante" Member="Restaurantes">
+    <Type Name="Restaurante">
+      <Column Name="rst_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="rst_nombre" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="rst_direccion" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Rol" Member="Rols">
+    <Type Name="Rol">
+      <Column Name="rol_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="rol_nombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Rol_Usuario" Member="Usuarios" ThisKey="rol_id" OtherKey="usu_fk_rol" Type="Usuario" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Ruta" Member="Rutas">
+    <Type Name="Ruta">
+      <Column Name="id_ruta" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="distancia_ruta" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="status_ruta" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="tipo_ruta" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="FK_lugar_origen" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FK_lugar_destino" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Ruta_Itinerario_Crucero" Member="Itinerario_Cruceros" ThisKey="id_ruta" OtherKey="fk_id_ruta" Type="Itinerario_Crucero" />
+      <Association Name="Ruta_Vuelo" Member="Vuelos" ThisKey="id_ruta" OtherKey="vue_fk_ruta" Type="Vuelo" />
+      <Association Name="Lugar_Ruta" Member="Lugar" ThisKey="FK_lugar_destino" OtherKey="id_lugar" Type="Lugar" IsForeignKey="true" />
+      <Association Name="Lugar_Ruta1" Member="Lugar1" ThisKey="FK_lugar_origen" OtherKey="id_lugar" Type="Lugar" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Telefono" Member="Telefonos">
+    <Type Name="Telefono">
+      <Column Name="tel_prefijo_pais" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="tel_codigo_area" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="tel_numero" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Usuario" Member="Usuarios">
+    <Type Name="Usuario">
+      <Column Name="usu_nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_apellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_correo" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_contraseña" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_fk_rol" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="usu_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="usu_fechaCreacion" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="usu_activo" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="Usuario_Diario_Puntuacion" Member="Diario_Puntuacions" ThisKey="usu_id" OtherKey="fk_usu_id" Type="Diario_Puntuacion" />
+      <Association Name="Usuario_Diario_Viaje" Member="Diario_Viajes" ThisKey="usu_id" OtherKey="fk_usuario_id" Type="Diario_Viaje" />
+      <Association Name="Usuario_Reserva_Habitacion" Member="Reserva_Habitacions" ThisKey="usu_id" OtherKey="rha_fk_usu_id" Type="Reserva_Habitacion" />
+      <Association Name="Rol_Usuario" Member="Rol" ThisKey="usu_fk_rol" OtherKey="rol_id" Type="Rol" IsForeignKey="true" DeleteRule="SET NULL" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Vuelo" Member="Vuelos">
+    <Type Name="Vuelo">
+      <Column Name="vue_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="vue_fk_ruta" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="vue_fecha_despegue" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="vue_fecha_aterrizaje" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="vue_fk_avion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="activo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Avion_Vuelo" Member="Avion" ThisKey="vue_fk_avion" OtherKey="avi_id" Type="Avion" IsForeignKey="true" />
+      <Association Name="Ruta_Vuelo" Member="Ruta" ThisKey="vue_fk_ruta" OtherKey="id_ruta" Type="Ruta" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
