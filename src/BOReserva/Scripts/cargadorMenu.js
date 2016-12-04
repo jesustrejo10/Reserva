@@ -113,5 +113,27 @@
                 }
             });
     });
+    $("#consultarComida").click(function (e) {
+        //M06_ConsultarComidas
+        e.preventDefault();
+        var url = '/gestion_comida_vuelo/M06_ConsultarComidas';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
     //FIN M06_Gestion_Comida
 });
