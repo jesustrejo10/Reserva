@@ -22,30 +22,29 @@ namespace FOReserva.Servicio
         //string que contendra la conexion a la bd
         private string stringDeConexion = null;
 
-
-        public List<CRestaurantModel> buscarRest()
+        /*Metodo para Abrir la conexion a la DB*/
+        public void OpenConextion()
         {
-
             conexion = new SqlConnection(stringDeConexion);
             conexion.Open();
-            SqlCommand query = conexion.CreateCommand();
-            query.CommandText = "Select * From Restaurante";
-            SqlDataReader read = query.ExecuteReader();
-            List<CRestaurantModel> lista_rest = new List<CRestaurantModel>();
-            if (read.HasRows)
-            {
-                while (read.Read())
-                {
-                    string nombre = read.GetString(1);
-                    string dir = read.GetString(2);
-                    CRestaurantModel resta = new CRestaurantModel();
-                    resta.Name = nombre;
-                    resta.Addres = dir;
-                    lista_rest.Add(resta);
-                }
-            }
-            return lista_rest;
-
         }
+
+        /*Metodo para Cerrar la Conexion a la DB*/
+        public void CloseConextion()
+        {
+            if (conexion != null)
+            {
+                conexion.Close();
+                conexion = null;
+            }
+        }
+
+        /*Metodo Get de la conexion a la DB*/
+        public SqlConnection Conexion
+        {
+            get { return conexion; }
+        }
+
+
     }
 }

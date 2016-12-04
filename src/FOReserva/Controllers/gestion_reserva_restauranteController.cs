@@ -30,9 +30,7 @@ namespace FOReserva.Controllers
 
         public ActionResult restaurant_resultados(int search_val, string search_txt)
         {
-            ReservaDBDataContext mydb = new ReservaDBDataContext();
-            //CRestaurantModel __restmodel = new CRestaurantModel();
-            manejadorSQL manejador = new manejadorSQL();
+            ManejadorSQLReserva manejador = new ManejadorSQLReserva();
             List<CRestaurantModel> lista = manejador.buscarRest();
             return View(lista);
         }
