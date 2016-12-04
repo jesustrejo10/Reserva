@@ -6,6 +6,7 @@ namespace FOReserva.Models
 {
     public class ReservationModels : BaseEntity
     {
+        /*dia de la reservacion*/
         private DateTime _date { get; set; }
         private string _time { get; set; }
 

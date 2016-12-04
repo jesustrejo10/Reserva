@@ -5,7 +5,9 @@ namespace FOReserva.Models
 {
     public class BaseEntity : DbContext
     {
+        /*id del objeto en BD*/
         private int _id { get; set; }
+        /*nombre del objeto*/
         private string _name { get; set; }
 
         public BaseEntity(string owner)
