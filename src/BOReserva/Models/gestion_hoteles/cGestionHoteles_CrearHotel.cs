@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace BOReserva.Models.gestion_hoteles
+{
+    public class cGestionHoteles_CrearHotel
+    {
+        public String _nombre { get; set; }
+        public String _direccion { get; set; }
+        public float _puntuacion { get; set; }
+        public int _estrellas { get; set; }
+        public String _paginaWeb { get; set; }
+        public string _email { get; set; }
+    }
+}

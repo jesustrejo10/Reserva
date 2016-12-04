@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BOReserva.Models.gestion_hoteles;
 
 namespace BOReserva.Controllers
 {
@@ -11,7 +12,13 @@ namespace BOReserva.Controllers
         // GET: gestion_hoteles
         public ActionResult M09_GestionHoteles_Crear()
         {
-            return PartialView();
+            cGestionHoteles_CrearHotel crear = new cGestionHoteles_CrearHotel();
+            return PartialView(crear);
+        }
+
+        [HttpPost]
+        public JsonResult crearhotel(cGestionHoteles_CrearHotel crear) {
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
 
         // GET: gestion_hoteles

@@ -1,4 +1,11 @@
-﻿    <div class="row">
+﻿@model BOReserva.Models.gestion_hoteles.cGestionHoteles_CrearHotel
+
+<script src="~/Scripts/Scripts_Aviones/llamadas_generales_hoteles.js"></script>
+
+@using (Html.BeginForm("crearhotel", "gestion_hoteles", null, FormMethod.Post, new { @id = "formCrearHotel", @class = "form-horizontal" }))
+{
+
+   <div class="row">
         <!-- left column -->
         <div class="col-md-6">
             <!-- general form elements -->
@@ -11,12 +18,12 @@
                 <form role="form">
                     <div class="box-body">
                         <div class="form-group">
-                            Nombre
-                            <input type="nombre" class="form-control" id="nombreHotel" placeholder="Introduzca nombre">
+                            Nombre                            
+                            @Html.TextBoxFor(m => m._nombre, null, new { @class = "form-control", @placeholder = "Introduzca Nombre", @id = "nombreHotel" })
                         </div>
                         <div class="form-group">
                             <label>Dirección</label>
-                            <textarea name="direccion" rows="2" class="form-control" placeholder="Introduzca dirección del inmueble"></textarea>
+                            @Html.TextBoxFor(m => m._direccion, null, new { @class = "form-control", @placeholder = "Introduzca Dirección", @id = "direccionHotel" })
                         </div>
                         <div class="box-body">
                             <div class="row">
@@ -43,11 +50,11 @@
                         </div> <!--/div box-body-->
                         <div class="form-group">
                             <label for="pagina">Página Web</label>
-                            <input type="pagina" class="form-control" id="paginaHotel" placeholder="Introduzca página web">
+                            @Html.TextBoxFor(m => m._paginaWeb, null, new { @class = "form-control", @placeholder = "Introduzca Página Web", @id = "paginaHotel" })
                         </div>
                         <div class="form-group">
                             <label for="pagina">Correo Electrónico</label>
-                            <input type="correo" class="form-control" id="correoHotel" placeholder="Introduzca correo electrónico">
+                            @Html.TextBoxFor(m => m._email, null, new { @class = "form-control", @placeholder = "Introduzca correo electrónico del hotel", @id = "correoHotel" })
                         </div>                       
                         
                     </div>
@@ -64,3 +71,4 @@
             </div>
         </div>
     </div>
+}
