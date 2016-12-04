@@ -37,12 +37,12 @@ namespace FOReserva.Controllers
             if (search_val == 1)
             {
                 ManejadorSQLReserva manejador = new ManejadorSQLReserva();
-                lista = manejador.buscarRestName();
+                lista = manejador.buscarRestCity(search_txt);
             }
             else if (search_val == 2)
             {
                 ManejadorSQLReserva manejador = new ManejadorSQLReserva();
-                lista = manejador.buscarRestName();
+                lista = manejador.buscarRestName(search_txt);
             }
             return View(lista);
         }

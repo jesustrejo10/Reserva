@@ -1580,6 +1580,7 @@
     <Content Include="Content\assets\plugins\slider.swiper\dist\js\maps\swiper.jquery.min.js.map" />
     <Content Include="Content\assets\plugins\slider.swiper\dist\js\maps\swiper.min.js.map" />
     <Content Include="Content\assets\plugins\styleswitcher\color_schemes\color_scheme.fla" />
+    <Content Include="Images\restaurant_generic.jpg" />
     <Content Include="ReservaDB.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>ReservaDB.designer.cs</LastGenOutput>
