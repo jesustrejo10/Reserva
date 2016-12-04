@@ -20,5 +20,14 @@ namespace FOReserva.Controllers
 
 
         }
+
+        public ActionResult gestion_ListRevicion()
+        {
+
+            CListRevision modelo = new CListRevision();
+            return PartialView(modelo);
+
+
+        }
     }
 }
