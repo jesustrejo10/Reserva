@@ -28,8 +28,11 @@ namespace FOReserva.Controllers
             return View();
         }
 
-        public ActionResult restaurant_resultados(int search_val, string search_txt)
+        public ActionResult restaurant_resultados( )
         {
+            int search_val = Int32.Parse(Request.QueryString["search_val"]);
+            string search_txt = Request.QueryString["search_text"];
+            
             List<CRestaurantModel> lista = null;
             if (search_val == 1)
             {
