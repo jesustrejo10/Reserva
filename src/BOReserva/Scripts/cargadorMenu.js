@@ -46,6 +46,7 @@
             });
     
     });
+
     //INICIO M06_Gestion_Comida
     $("#gestionComida").click(function (e) {
         //M06_AgregarComida
@@ -113,7 +114,7 @@
                 }
             });
     });
-    $("#consultarComida").click(function (e) {
+    $("#gestionVisualizar").click(function (e) {
         //M06_ConsultarComidas
         e.preventDefault();
         var url = '/gestion_comida_vuelo/M06_ConsultarComidas';
