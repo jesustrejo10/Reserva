@@ -216,7 +216,6 @@
     </Compile>
     <Compile Include="Servicio\manejadorSQL.cs" />
     <Compile Include="Servicio\ManejadorSQLReserva.cs" />
-    <Compile Include="TestUnit\InsertReservaTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\assets\css\color_scheme\green.css" />
