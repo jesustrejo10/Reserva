@@ -6,6 +6,7 @@
        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         @Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")
+       
         
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>RESERVA | BackOffice</title>
@@ -307,8 +308,19 @@
                         </ul>
                     </li>
                     <!-- MODULO DE AVIONES -->
-                    <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Aviones</a></li>
-                   
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-plane"></i> <span>Gestión de Aviones</span> <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="m02_agregaravion"><a href="#"> Agregar </a></li>
+                            <li id="m02_editaravion"><a href="#"> Editar </a></li>
+                            <li id="m02_consultaravion"><a href="#"> Consultar </a></li>
+                            <li id="m02_modificaravion"><a href="#"> Modificar </a></li>
+                        </ul>
+                    </li>
                     <!-- FIN MODULO DE AVIONES -->
                     <!-- MODULO DE BOLETOS AEREOS Y CHECK-IN -->
                     <li class="treeview">
@@ -552,12 +564,17 @@
                     </div>
                 </div>
             </footer>-->
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/menu")
     @Scripts.Render("~/bundles/js")
     @RenderSection("scripts", required: false)
 
     <script src="/Scripts/cargadorMenu.js"></script>
+
+    <!--SCRIPTS PARA GESTION DE AVIONES-->
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Scripts_Aviones/llamadas_generales.js")"></script>
+
     <!-- jQuery 2.2.3 -->
     <script src="/Content/plugins/jQuery/jquery-2.2.3.min.js"></script>
     <!-- Bootstrap 3.3.6 -->
