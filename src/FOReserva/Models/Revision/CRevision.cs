@@ -7,7 +7,7 @@ namespace FOReserva.Models.Revision
 {
     public class CRevision
     {
-
+        private string nombre;
 
     }
 }
