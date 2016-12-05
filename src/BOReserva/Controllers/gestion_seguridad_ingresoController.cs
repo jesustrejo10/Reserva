@@ -16,14 +16,25 @@ namespace BOReserva.Content.Controllers
         public ActionResult M01_Login(string correo, string contraseña)
         {
             Cgestion_seguridad_ingreso ingreso = new Cgestion_seguridad_ingreso();
-            if (ingreso.verificarUsuario(correo, contraseña))
+
+            try
             {
-                ingreso.correoCampoTexto = correo;
-                ingreso.claveCampoTexto = contraseña;
-                Session["Cgestion_seguridad_ingreso"] = ingreso;
-                return RedirectToAction("Index", "Home");
+                System.Diagnostics.Debug.WriteLine("Correo "+correo+" contrasena "+contraseña);
+                if (ingreso.verificarUsuario(correo, contraseña))
+                {
+                    ingreso.correoCampoTexto = correo;
+                    ingreso.nombreUsuarioTexto = "David Botello";
+                    Session["Cgestion_seguridad_ingreso"] = ingreso;
+                    return RedirectToAction("Index", "Home");
+                }
             }
-            System.Diagnostics.Debug.WriteLine("que retorno");
+            catch (Exception e)
+            {
+
+                System.Diagnostics.Debug.WriteLine(e);
+            }
+           
+          
             return RedirectToAction("M01_Login", "gestion_seguridad_ingreso");
         }
 
@@ -56,14 +67,6 @@ namespace BOReserva.Content.Controllers
 
 
 
-
-        [HttpPost]
-        public JsonResult verificarUsuario(Cgestion_seguridad_ingreso model)
-        {
-            String prueba = model._correoCampoTexto + " " + model._claveCampoTexto;
-            
-            return (Json(true, JsonRequestBehavior.AllowGet));
-        }
 
 
 

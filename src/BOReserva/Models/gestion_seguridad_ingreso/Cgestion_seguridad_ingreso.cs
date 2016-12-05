@@ -11,7 +11,17 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
        private String _claveCampoTexto;
        private String _nombreUsuarioTexto;
 
-  
+
+        public Boolean verificarUsuario(String _correoCampoTexto, String _claveCampoTexto)
+        {
+            if ("admin@admin.com".Equals(_correoCampoTexto) && "123".Equals(_claveCampoTexto))
+            {
+                return true;
+            }
+            else
+                throw new Cvalidar_texto_Exception("Usuario o contraseña incorrecto");
+        }
+
         public String correoCampoTexto
         {
             get { return this._correoCampoTexto; }
