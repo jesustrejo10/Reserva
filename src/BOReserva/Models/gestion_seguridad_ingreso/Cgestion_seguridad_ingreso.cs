@@ -11,7 +11,11 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
        private String _claveCampoTexto;
        private String _nombreUsuarioTexto;
 
-
+        /// <summary>
+        /// Funcion que verifica credenciales de usuario, se conecta con el modulo de usuario 
+        /// </summary>
+        /// <param name="_correoCampoTexto"> Longitud de la serie</param>
+        /// <param name="_claveCampoTexto"> Longitud de la serie</param>
         public Boolean verificarUsuario(String _correoCampoTexto, String _claveCampoTexto)
         {
             if ("admin@admin.com".Equals(_correoCampoTexto) && "123".Equals(_claveCampoTexto))

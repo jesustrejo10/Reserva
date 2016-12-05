@@ -52,11 +52,11 @@
 
         <!-- INICIO DE LA FORMA LOGIN-->
         <div class="login-box-body">
-            <p class="login-box-msg">Iniciar Sesión</p>
+            <p class="login-box-msg">Iniciar Sesión</p> 
 
             <form method="post">
-
-                <p class="box-title">Correo</p>
+                <p style="color:red">@TempData["Mensaje"] </p>
+                <p class="box-title">Correo    </p>
 
                 <div class="form-group has-feedback">
                     <input type="email" name="correo" class="form-control" placeholder="alex@reserva.com">
@@ -67,7 +67,7 @@
                 <p class="box-title">Contraseña</p>
                 <div class="form-group has-feedback">
 
-                    <input type="password" name="contraseña" class="form-control" placeholder="*****">
+                    <input type="password" name="contraseña" class="form-control" placeholder="**********">
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
 
@@ -85,7 +85,7 @@
            
         </div>
         <!-- /.login-box-body -->
-
+       
     </div>
 
     <!-- FIN DE LA FORMA LOGIN -->

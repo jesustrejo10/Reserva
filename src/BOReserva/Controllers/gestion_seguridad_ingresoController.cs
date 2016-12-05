@@ -12,11 +12,12 @@ namespace BOReserva.Content.Controllers
         //
         // GET: /gestion_seguridad_ingreso/
 
+            [HandleError()]
         [HttpPost]
         public ActionResult M01_Login(string correo, string contraseña)
         {
             Cgestion_seguridad_ingreso ingreso = new Cgestion_seguridad_ingreso();
-
+            
             try
             {
                 System.Diagnostics.Debug.WriteLine("Correo "+correo+" contrasena "+contraseña);
@@ -30,11 +31,23 @@ namespace BOReserva.Content.Controllers
             }
             catch (Exception e)
             {
-
-                System.Diagnostics.Debug.WriteLine(e);
+            
+                
+                //  TempData["error"] = error;
+                //  System.Diagnostics.Debug.WriteLine(e);
+                //  ViewData["errorMensaje"] = error.errorCampo;
+                return RedirectToAction("M01_Login1", "gestion_seguridad_ingreso");
+               
             }
-           
-          
+
+         
+            return RedirectToAction("M01_Login", "gestion_seguridad_ingreso");
+        }
+
+
+        public ActionResult M01_Login1()
+        {
+            TempData["Mensaje"] = "Usuario o Contrasenna incorrecta";
             return RedirectToAction("M01_Login", "gestion_seguridad_ingreso");
         }
 
