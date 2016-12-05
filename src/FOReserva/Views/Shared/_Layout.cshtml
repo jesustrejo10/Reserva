@@ -1,4 +1,5 @@
-﻿<!--<!DOCTYPE html>
+﻿
+<!--<!DOCTYPE html>
 <html lang="es">
     <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -10,8 +11,8 @@
         @Styles.Render("~/Views/assets/plugins/bootstrap/css")
         <link href="@Url.Content("~/Content/assets/plugins/bootstrap/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
         @Scripts.Render("~/bundles/modernizr")
-
-
+        
+       
     </head>
     <body>
         <header>
@@ -74,12 +75,13 @@
 
     <!-- CORE CSS -->
     <link href="@Url.Content("~/Content/assets/plugins/bootstrap/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
-
+  
     <!-- THEME CSS -->
-
+    
     <link href="@Url.Content("~/Content/assets/css/essentials.css")" rel="stylesheet" type="text/css" />
-
+    
     <link href="@Url.Content("~/Content/assets/css/layout.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/assets/css/custom.css")" rel="stylesheet" type="text/css" />
 
 
 
@@ -87,7 +89,6 @@
     <link href="@Url.Content("~/Content/assets/css/header-1.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/assets/css/layout-shop.css")" rel=" stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/assets/css/color_scheme/green.css")" rel="stylesheet" type="text/css" id="color_scheme" />
-    <link href="@Url.Content("~/Content/assets/css/global.css")" rel="stylesheet" />
 </head>
 
 <body class="smoothscroll enable-animation">
@@ -104,29 +105,7 @@
     <!-- /SLIDE TOP -->
     <!-- wrapper -->
     <div id="wrapper">
-        <!-- Top Bar -->
-        <div id="topBar">
-            <div class="container">
 
-                <!-- right -->
-                <ul class="top-links list-inline pull-right">
-                    <li class="text-welcome">Bienvenido, <strong>Usuario de Prueba</strong></li>
-                    <li>
-                        <a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href="#"><i class="fa fa-user hidden-xs"></i> Mi Cuenta</a>
-                        <ul class="dropdown-menu">
-                            <li><a tabindex="-1" href="#"><i class="fa fa-history"></i> .... </a></li>
-                            <li class="divider"></li>
-                            <li><a tabindex="-1" href="#"><i class="fa fa-bookmark"></i> ....</a></li>
-                            <li><a tabindex="-1" href="#"><i class="fa fa-edit"></i> ....</a></li>
-                            <li><a onclick="cargarContenido('#1T', 'get', '/gestion_reserva_habitaciones/mis_reservas', null)" href="#"><i class="fa fa-cog"></i> Mis Reservas </a></li>
-                            <li class="divider"></li>
-                            <li><a tabindex="-1" href="#"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- /Top Bar -->
         <div id="header" class="sticky clearfix">
 
             <!-- TOP NAV -->
@@ -139,9 +118,8 @@
                     </button>
 
                     <!-- Logo -->
-                    <button class="logo pull-left" type="button" onclick="cargarContenido('#2D', 'get', '/gestion_vuelos/gestion_vuelos', null)">
-                        <img style="max-height: 80px;" src="@Url.Content("~/Content/assets/images/logo_final.png")" alt=" " />
-                    </button>
+                    <a class="logo pull-left" href="index.html">
+                        <img src="@Url.Content("~/Content/assets/images/logo_final.png")" alt=" " /></a>
 
                     <!--
                         Top Nav
@@ -163,17 +141,17 @@
                                 </li>
                             -->
                             <ul id="topMain" class="nav nav-pills nav-main">
-                                <li>
+                                <li class="active">
                                     <!-- HOME -->
-                                    <a onclick="cargarContenido('#2D', 'get', '/gestion_vuelos/gestion_vuelos', null)" href="#"> INICIO </a>
+                                    <a href="index.html"> INICIO </a>
                                 </li>
                                 <li>
                                     <!-- SOBRE NOSOTROS -->
-                                    <a onclick="cargarContenido('#1T', 'get', '/gestion_vuelos/gestion_vuelos', null)" href="#"> INICIAR SESIÓN </a>
+                                    <a href="page-about-us.html"> INICIAR SESIÓN </a>
                                 </li>
                                 <li>
                                     <!-- CONTACTO -->
-                                    <a onclick="cargarContenido('#1T', 'get', '/gestion_vuelos/gestion_vuelos', null)" href="#"> REGISTRARSE </a>
+                                    <a href="page-contact.html"> REGISTRARSE </a>
                                 </li>
                             </ul>
 
@@ -189,23 +167,21 @@
         <!-- FEATURED GRID -->
         <section class="featured-grid">
             <div class="container">
-                <div id="1T" class="row"></div>
-                <div id="2C" class="row">
+
+                <div class="row">
                     <!-- SECCIÓN DE PESTAÑAS -->
                     <ul class="nav nav-tabs">
-                        <li class="active" id="LiVuelos">
-                            <a onclick="cargarContenido('#contenedor', 'get', '/gestion_vuelos/gestion_vuelos', null)" href="#">Vuelos</a>
-                        </li>
-                        <li id="LiAutos"><a onclick="cargarContenido('#contenedor', 'get', '/gestion_vuelos/gestion_vuelos', null)" href="#">Autos</a></li>
-                        <li id="LiHoteles"><a onclick="cargarContenido('#contenedor', 'get', '/gestion_vuelos/gestion_vuelos', null)" href="#">Hoteles</a></li>
-                        <li id="LiRestaurantes"><a onclick="cargarContenido('#contenedor', 'get', '/gestion_vuelos/gestion_vuelos', null)" href="#">Restaurantes</a></li>
-                        <li id="LiCruceros"><a onclick="cargarContenido('#contenedor', 'get', '/gestion_vuelos/gestion_vuelos', null)" href="#">Cruceros</a></li>
+                        <li class="active" id="LiVuelos"><a href="#">Vuelos</a></li>
+                        <li id="LiAutos"><a href="#">Autos</a></li>
+                        <li id="LiHoteles"><a href="#">Hoteles</a></li>
+                        <li id="LiRestaurantes"><a href="#">Restaurantes</a></li>
+                        <li id="LiCruceros"><a href="#">Cruceros</a></li>
                     </ul>
 
                     <!-- SECCIÓN A CAMBIAR POR CADA MODULO -->
                     <div class="panel panel-default col-sm-6">
                         <div class="panel-body">
-                            <div id="2D">
+                            <div id="contenedor">
                                 <div class="heading-title">
                                     <h3><span>Vuelos</span></h3>
                                 </div>
@@ -295,7 +271,7 @@
 
                     <!-- SECCIÓN DE IMAGENES. DEBEN SER DE 577 X 268 PIXELES -->
                     <div class="col-sm-6">
-                        <div id="2I">
+                        <div id="contenedorImagenes">
                             <div class="relative">
 
                                 <img src="@Url.Content("~/Content/assets/images/demo/shop/home/man_cat.jpg")" alt="" />
@@ -325,18 +301,24 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
+
             </div>
         </section>
         <!-- /FEATURED GRID -->
         <!-- FOOTER -->
         <footer id="footer">
             <div class="container">
-                <div class="row">
-                    <div class="col-xs-12">
+
+                <div class="row margin-top-10 margin-bottom-10 size-13">
+
+                    <!-- col #1 -->
+                    <div class="col-md-8 col-sm-8">
+
 
                         <!-- Social Icons -->
-                        <div id="socials" class="clearfix pull-left">
+                        <div class="clearfix">
 
                             <a href="#" class="social-icon social-icon-sm social-icon-border social-facebook pull-left" data-toggle="tooltip" data-placement="top" title="Facebook">
                                 <i class="icon-facebook"></i>
@@ -352,15 +334,30 @@
                                 <i class="icon-instagram"></i>
                                 <i class="icon-instagram"></i>
                             </a>
+
                         </div>
-                        <div id="copyright">
-                            &copy; Reserva, 2016
-                        </div>
+                        <!-- /Social Icons -->
+
                     </div>
+                    <!-- /col #1 -->
+
                 </div>
-                <!-- /Social Icons -->
 
             </div>
+
+            <div class="copyright">
+                <div class="container">
+                    <!--
+                    <ul class="pull-right nomargin list-inline mobile-block">
+                        <li><a href="#">Terms &amp; Conditions</a></li>
+                        <li>&bull;</li>
+                        <li><a href="#">Privacy</a></li>
+                    </ul>
+                    -->
+                    &copy; Reserva, 2016
+                </div>
+            </div>
+
         </footer>
         <!-- /FOOTER -->
 
@@ -375,7 +372,7 @@
     </div><!-- /PRELOADER -->
     <!-- JAVASCRIPT FILES -->
     <script type="text/javascript">var plugin_path = 'Content/assets/plugins/';</script>
-
+    
     <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/jquery/jquery-2.1.4.min.js")"></script>
 
     <script type="text/javascript" src="@Url.Content("~/Content/assets/js/scripts.js")"></script>
