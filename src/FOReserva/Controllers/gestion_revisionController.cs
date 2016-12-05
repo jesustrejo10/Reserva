@@ -30,23 +30,29 @@ namespace FOReserva.Controllers
                         //probando
         }
 
-        public ActionResult Consultar_Revision ()
+        public ActionResult Consultar_Revision (string usuario)
         {
-            int search_val = Int32.Parse(Request.QueryString["search_val"]);
+           // int search_val = Int32.Parse(Request.QueryString["search_val"]);
             string search_txt = Request.QueryString["search_text"];
 
-            List<CRestaurantModel> lista = null;
-            if (search_val == 1)
+
+
+            List<CRevision> lista ;                   // mostrar revision cuando estoy en el perfil del usuario
+            if (search_txt == usuario)
             {
-                ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
-                lista = manejador.buscarRestCity(search_txt);
+                ManejadorSQLMuestraRevision manejador = new ManejadorSQLMuestraRevision();  // crear en Servicios un manejador para listar 
+                 lista = manejador.ConsultaRevision(usuario);                               //las revisiones de ese usuario
+
+                return View(lista);
             }
-            else if (search_val == 2)
+
+            else
             {
-                ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
-                lista = manejador.buscarRestName(search_txt);
+
+                Console.Write("No se tienen revisiones");       //mostrar mensaje al usuario y no mostrar nada
+                return View(lista);
             }
-            return View(lista);
+            
         }
 
 
