@@ -29,7 +29,7 @@
             @foreach (var reserva in Model)
             {
                 <tr>
-                    <td><a href="detalle-reserva.aspx">@reserva.Hotel.Codigo</a></td>
+                    <td><a href="detalle-reserva.aspx">@reserva.Hotel.Nombre</a></td>
                     <td>@String.Format("# {0}", reserva.Habitacion)</td>
                     <td>
                         <span class="label label-@(
