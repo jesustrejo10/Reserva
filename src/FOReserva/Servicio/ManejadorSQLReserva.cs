@@ -15,7 +15,7 @@ namespace FOReserva.Servicio
         {
             OpenConextion();
             SqlCommand query = this.Conexion.CreateCommand();
-            query.CommandText = "Select rst_id, rst_nombre, rst_direccion From Restaurante where rst_nombre LIKE '%"+restName+"%'";
+            query.CommandText = "Select rst_id, rst_nombre, rst_direccion From Restaurante where LOWER(rst_nombre) LIKE LOWER('%" + restName+"%')";
             SqlDataReader read = query.ExecuteReader();
             List<CRestaurantModel> lista_rest = new List<CRestaurantModel>();
             if (read.HasRows)
@@ -40,7 +40,7 @@ namespace FOReserva.Servicio
         {
             OpenConextion();
             SqlCommand query = this.Conexion.CreateCommand();
-            query.CommandText = "SELECT res.rst_id ,res.rst_nombre ,res.rst_direccion FROM Restaurante as res, Lugar as lug where res.fk_lugar = lug.lug_id and lug.lug_tipo_lugar = 'ciudad' and lug.lug_nombre LIKE '%" + cityName + "%'"; ;
+            query.CommandText = "SELECT res.rst_id ,res.rst_nombre ,res.rst_direccion FROM Restaurante as res, Lugar as lug where res.fk_lugar = lug.lug_id and lug.lug_tipo_lugar = 'ciudad' and LOWER(lug.lug_nombre) LIKE LOWER('%" + cityName + "%')"; ;
             SqlDataReader read = query.ExecuteReader();
             List<CRestaurantModel> lista_rest = new List<CRestaurantModel>();
             if (read.HasRows)
