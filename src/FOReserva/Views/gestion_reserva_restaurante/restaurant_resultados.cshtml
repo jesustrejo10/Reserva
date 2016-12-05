@@ -6,10 +6,7 @@
 }
 
 <!-- FEATURED GRID -->
-<section class="featured-grid">
 
-
-    <div class="container">
         <div class="row">
             @foreach (var item in Model)
             {
@@ -23,12 +20,12 @@
                         <hr />
                         <p>@item.Addres <b>Madrid</b>.</p>
                         <hr />
-                        <a href="detail_restaurant_reservation.html" class="btn btn-3d btn-primary">Reservar</a>
+                        <button class="btn btn-3d btn-success" value="@item.Id">Reservar</button>
+                        <!--<a href="detail_restaurant_reservation.html" class="btn btn-3d btn-primary">Reservar</a>-->
                     </div>
                 </div>
             }
 
         </div>
 
-    </div>
-</section>
+ 
