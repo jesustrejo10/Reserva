@@ -254,7 +254,7 @@
       <DependentUpon>ReservaDB.dbml</DependentUpon>
     </Compile>
     <Compile Include="Servicio\manejadorSQL.cs" />
-    <Compile Include="Servicio\ManejadorSQLReserva.cs" />
+    <Compile Include="Servicio\ManejadorSQLReservaRestaurant.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\assets\css\color_scheme\green.css" />
@@ -2887,12 +2887,11 @@
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Shared\index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\assets\fonts\et-line.eot" />
     <Content Include="Views\Shared\assets\fonts\et-line.ttf" />
     <Content Include="Views\Shared\assets\fonts\et-line.woff" />
@@ -3024,7 +3023,6 @@
     <Content Include="Views\gestion_vuelos\gestion_vuelos.cshtml" />
     <Content Include="Views\gestion_vuelos\gestion_vuelosImagenes.cshtml" />
     <Content Include="Views\gestion_reserva_restaurante\gestion_reserva_restaurante.cshtml" />
-    <Content Include="Views\Shared\_Layout2.cshtml" />
     <Content Include="Views\gestion_reserva_restaurante\restaurant_resultados.cshtml" />
     <Content Include="Views\gestion_reserva_restaurante\reservar_restaurant.cshtml" />
     <Content Include="Views\gestion_reserva_restaurante\confirma_restaurant.cshtml" />
