@@ -10,16 +10,7 @@ namespace FOReserva.Models.Revision
         private int positivo;
         private int negativo;
 
-        public int Positivo
-        {
-            get { return positivo; }
-            set { positivo = value; }
-        }
-         public int Negativo
-        {
-            get { return negativo; }
-            set { negativo = value; }
-        }
+       
 
 
          public CRevisionValoracion(int positivo, int negativo)
@@ -29,5 +20,21 @@ namespace FOReserva.Models.Revision
              this.negativo = negativo;
 
          }
+         public CRevisionValoracion() { }
+
+         public int Positivo
+         {
+             get { return positivo; }
+             set { positivo = value; }
+         }
+         public int Negativo
+         {
+             get { return negativo; }
+             set { negativo = value; }
+         }
+
+        
+
+
     }
 }
