@@ -47,8 +47,9 @@ namespace FOReserva.Controllers
             return View(lista);
         }
 
-        public ActionResult reservar_restaurant()
+        public ActionResult reservar_restaurant(int id_rest)
         {
+
             return View();
         }
 
