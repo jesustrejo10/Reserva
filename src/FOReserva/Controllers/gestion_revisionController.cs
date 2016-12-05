@@ -27,7 +27,7 @@ namespace FOReserva.Controllers
             CListRevision modelo = new CListRevision();
             return PartialView(modelo);
 
-
+                        //probando
         }
     }
 }
