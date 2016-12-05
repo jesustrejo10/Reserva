@@ -55,21 +55,45 @@
             <p class="login-box-msg">Iniciar Sesión</p> 
 
             <form method="post">
-                <p style="color:red">@TempData["Mensaje"] </p>
-                <p class="box-title">Correo    </p>
+              
+                
+                   @if (@TempData["Mensaje"] != null)
+                    {
+                        <p style="color:red">@TempData["Mensaje"]</p>
+                        <p class="box-title">Correo</p>
+                        <div class="form-group has-feedback">
+                          <input type="email" style="border-color:red" name="correo" class="form-control" placeholder="alex@reserva.com">
+                           <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                        </div>
+                        <p class="box-title">Contraseña</p>
+                        <div class="form-group has-feedback">
 
-                <div class="form-group has-feedback">
-                    <input type="email" name="correo" class="form-control" placeholder="alex@reserva.com">
-                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                </div>
+                            <input type="password" style="border-color:red" name="contraseña" class="form-control" placeholder="**********">
+                            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                        </div>
+                   }
+                   else
+                   {
+                    <p class="box-title">Correo</p>
+                        <div class="form-group has-feedback">
+                            <input type="email" name="correo" class="form-control" placeholder="alex@reserva.com">
+                            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                        </div>
+
+                        <p class="box-title">Contraseña</p>
+                        <div class="form-group has-feedback">
+
+                            <input type="password" name="contraseña" class="form-control" placeholder="**********">
+                            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                        </div>
+                   }
 
 
-                <p class="box-title">Contraseña</p>
-                <div class="form-group has-feedback">
 
-                    <input type="password" name="contraseña" class="form-control" placeholder="**********">
-                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                </div>
+                    
+
+
+              
 
 
                 <div class="row">
