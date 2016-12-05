@@ -34,18 +34,18 @@ namespace FOReserva.Models.Revision
 
         public DateTime Fecha
         {
-            get { return fecha; }
-            set { fecha = value; }
+            get { return _fecha; }
+            set { _fecha = value; }
         }
         public string Descripcion
         {
-            get { return descripcion; }
-            set { descripcion = value; }
+            get { return _descripcion; }
+            set { _descripcion = value; }
         }
         public int Puntuacion
         {
-            get { return puntuacion; }
-            set { puntuacion = value; }
+            get { return _puntuacion; }
+            set { _puntuacion = value; }
         }
         public string Tipo
         {
