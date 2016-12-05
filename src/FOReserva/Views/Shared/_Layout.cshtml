@@ -1,60 +1,4 @@
-﻿
-<!--<!DOCTYPE html>
-<html lang="es">
-    <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <meta charset="utf-8" />
-        <title>@ViewBag.Title - Mi aplicación ASP.NET MVC</title>
-        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <meta name="viewport" content="width=device-width" />
-        @Styles.Render("~/Content/css")
-        @Styles.Render("~/Views/assets/plugins/bootstrap/css")
-        <link href="@Url.Content("~/Content/assets/plugins/bootstrap/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
-        @Scripts.Render("~/bundles/modernizr")
-        
-       
-    </head>
-    <body>
-        <header>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("su logotipo aquí", "Index", "Home")</p>
-                </div>
-                <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
-                    <nav>
-                        <ul id="menu">
-                            <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                            <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </header>
-        <div id="body">
-            @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix">
-                @RenderBody()
-            </section>
-        </div>
-        <footer>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET MVC</p>
-                </div>
-            </div>
-        </footer>
-
-        @Scripts.Render("~/bundles/jquery")
-        @RenderSection("scripts", required: false)
-    </body>
-</html>-->
-
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!--[if IE 8]>			<html class="ie ie8"> <![endif]-->
 <!--[if IE 9]>			<html class="ie ie9"> <![endif]-->
 <!--[if gt IE 9]><!-->
@@ -75,11 +19,11 @@
 
     <!-- CORE CSS -->
     <link href="@Url.Content("~/Content/assets/plugins/bootstrap/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
-  
+
     <!-- THEME CSS -->
-    
+
     <link href="@Url.Content("~/Content/assets/css/essentials.css")" rel="stylesheet" type="text/css" />
-    
+
     <link href="@Url.Content("~/Content/assets/css/layout.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/assets/css/custom.css")" rel="stylesheet" type="text/css" />
 
@@ -119,7 +63,8 @@
 
                     <!-- Logo -->
                     <a class="logo pull-left" href="index.html">
-                        <img src="@Url.Content("~/Content/assets/images/logo_final.png")" alt=" " /></a>
+                        <img src="@Url.Content("~/Content/assets/images/logo_final.png")" alt=" " />
+                    </a>
 
                     <!--
                         Top Nav
@@ -167,143 +112,7 @@
         <!-- FEATURED GRID -->
         <section class="featured-grid">
             <div class="container">
-
-                <div class="row">
-                    <!-- SECCIÓN DE PESTAÑAS -->
-                    <ul class="nav nav-tabs">
-                        <li class="active" id="LiVuelos"><a href="#">Vuelos</a></li>
-                        <li id="LiAutos"><a href="#">Autos</a></li>
-                        <li id="LiHoteles"><a href="#">Hoteles</a></li>
-                        <li id="LiRestaurantes"><a href="#">Restaurantes</a></li>
-                        <li id="LiCruceros"><a href="#">Cruceros</a></li>
-                    </ul>
-
-                    <!-- SECCIÓN A CAMBIAR POR CADA MODULO -->
-                    <div class="panel panel-default col-sm-6">
-                        <div class="panel-body">
-                            <div id="contenedor">
-                                <div class="heading-title">
-                                    <h3><span>Vuelos</span></h3>
-                                </div>
-
-                                <form class="validate" action="php/contact.php" method="post" enctype="multipart/form-data" data-success="Sent! Thank you!" data-toastr-position="top-right">
-                                    <fieldset>
-                                        <!-- required [php action request] -->
-                                        <input type="hidden" name="action" value="contact_send" />
-
-                                        <div class="row">
-                                            <div class="form-group">
-                                                <div class="col-md-6 col-sm-6">
-                                                    <label>Origen</label>
-                                                    <input type="text" name="contact[first_name]" value="" class="form-control required">
-                                                </div>
-                                                <div class="col-md-6 col-sm-6">
-                                                    <label>Destino</label>
-                                                    <input type="text" name="contact[last_name]" value="" class="form-control required">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="form-group">
-                                                <div class="col-md-6 col-sm-6">
-                                                    <label>Fecha ida</label>
-                                                    <input type="text" name="contact[start_date]" value="" class="form-control datepicker required" data-format="yyyy-mm-dd" data-lang="en" data-rtl="false">
-                                                </div>
-                                                <div class="col-md-6 col-sm-6">
-                                                    <label>Fecha vuelta</label>
-                                                    <input type="text" name="contact[start_date]" value="" class="form-control datepicker required" data-format="yyyy-mm-dd" data-lang="en" data-rtl="false">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="form-group">
-                                                <div class="col-md-4 col-sm-4">
-                                                    <label>Adultos</label>
-                                                    <select name="contact[position]" class="form-control pointer required">
-                                                        <option value="">--- Seleccionar ---</option>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                        <option value="5">5</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-4 col-sm-4">
-                                                    <label>Niños</label>
-                                                    <select name="contact[position]" class="form-control pointer required">
-                                                        <option value="">--- Seleccionar ---</option>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                        <option value="5">5</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-4 col-sm-4">
-                                                    <label>Bebes</label>
-                                                    <select name="contact[position]" class="form-control pointer required">
-                                                        <option value="">--- Seleccionar ---</option>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                        <option value="5">5</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </fieldset>
-
-                                    <div class="row text-center">
-                                        <div class="col-md-12">
-                                            <button type="button" class="btn btn-primary">Buscar</button>
-                                        </div>
-                                    </div>
-
-                                </form>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <!-- SECCIÓN DE IMAGENES. DEBEN SER DE 577 X 268 PIXELES -->
-                    <div class="col-sm-6">
-                        <div id="contenedorImagenes">
-                            <div class="relative">
-
-                                <img src="@Url.Content("~/Content/assets/images/demo/shop/home/man_cat.jpg")" alt="" />
-                                <div class="absolute text-left">
-                                    <h2> - CLASE EJECUTIVA -</h2>
-                                    <p>
-                                        SELECCIONA LA DE TU PREFERENCIA !!!
-                                    </p>
-
-                                    <p class="font-lato margin-top-30 size-16 hidden-sm hidden-xs">Donec tellus massa, tristique sit amet condim vel,<br /> facilisis quis sapien. Praesent id enim sit amet.</p>
-                                    <a class="btn btn-primary margin-top-20" href="#">Reserva ya &raquo;</a>
-                                </div>
-                            </div>
-
-                            <div class="relative">
-
-                                <img src="@Url.Content("~/Content/assets/images/demo/shop/home/woman_cat.jpg")" alt=" " />
-                                <div class="absolute text-right">
-                                    <h2> - CLASE TURISTA -</h2>
-                                    <p>
-                                        SELECCIONA LA DE TU PREFERENCIA !!!
-                                    </p>
-
-                                    <p class="font-lato margin-top-30 size-16 hidden-sm hidden-xs">Donec tellus massa, tristique sit amet condim vel,<br /> facilisis quis sapien. Praesent id enim sit amet.</p>
-                                    <a class="btn btn-primary margin-top-20" href="#">Reserva ya &raquo;</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
+                @RenderBody()
             </div>
         </section>
         <!-- /FEATURED GRID -->
@@ -372,7 +181,7 @@
     </div><!-- /PRELOADER -->
     <!-- JAVASCRIPT FILES -->
     <script type="text/javascript">var plugin_path = 'Content/assets/plugins/';</script>
-    
+
     <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/jquery/jquery-2.1.4.min.js")"></script>
 
     <script type="text/javascript" src="@Url.Content("~/Content/assets/js/scripts.js")"></script>
