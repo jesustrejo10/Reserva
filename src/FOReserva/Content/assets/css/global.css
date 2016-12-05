@@ -15,6 +15,11 @@
     align-content: center;
 }
 
+#sample_1_length > label > span {
+    overflow: hidden;
+}
+
+/*
 #footer {
     position: fixed;
     bottom: 0;
@@ -38,7 +43,7 @@
 #copyright {
     padding: 7px;
 }
-
+*/
 #wrapper {
     margin-bottom: 42px;
 }
