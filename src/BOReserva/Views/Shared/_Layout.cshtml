@@ -237,7 +237,8 @@
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left"> <a href="#" class="btn btn-default btn-flat">Profile</a> </div>
-                                    <div class="pull-right"> <a href="../../Content/Views/gestion_seguridad_ingreso/M01_Logout.cshtml" class="btn btn-default btn-flat">Cerrar Sesion</a> </div>
+                                    <div class="pull-right"> @Html.ActionLink("Cerrar Sesion", "M01_Logout", "gestion_seguridad_ingreso",null, new { @class = "btn btn-default btn-flat"})  </div>
+
                                </li>
                             </ul>
                         </li>
