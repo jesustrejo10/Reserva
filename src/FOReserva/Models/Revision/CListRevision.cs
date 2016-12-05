@@ -21,6 +21,11 @@ namespace FOReserva.Models.Revision
                  
     }
 
+        public CListRevision()
+        {
+            // TODO: Complete member initialization
+        }
+
          
 
     }

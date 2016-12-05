@@ -245,13 +245,10 @@
     <Compile Include="Models\ReservaHabitacion\TMPUsuario.cs" />
     <Compile Include="Models\Restaurantes\CReservation_Restaurant.cs" />
     <Compile Include="Models\Restaurantes\CRestaurantModel.cs" />
-<<<<<<< HEAD
     <Compile Include="Models\Revision\CListRevision.cs" />
     <Compile Include="Models\Revision\CRevision.cs" />
     <Compile Include="Models\Revision\CRevisionValoracion.cs" />
-=======
     <Compile Include="Models\Utilidad.cs" />
->>>>>>> refs/remotes/origin/Develop
     <Compile Include="Models\Vuelos\Cvista_Vuelos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\ReservationModels.cs" />
@@ -1682,6 +1679,7 @@
     <Content Include="Views\gestion_reserva_crucero\placeholder.html" />
     <Content Include="Views\gestion_reserva_hotel\placeholder.html" />
     <Content Include="Views\gestion_reserva_restaurante\placeholder.html" />
+    <Content Include="Views\gestion_revision\placeholder.html" />
     <Content Include="Views\Shared\assets\css\color_scheme\green.css" />
     <Content Include="Views\Shared\assets\css\essentials.css" />
     <Content Include="Views\Shared\assets\css\header-1.css" />
@@ -3034,14 +3032,11 @@
     <Content Include="Views\gestion_reserva_restaurante\restaurant_resultados.cshtml" />
     <Content Include="Views\gestion_reserva_restaurante\reservar_restaurant.cshtml" />
     <Content Include="Views\gestion_reserva_restaurante\confirma_restaurant.cshtml" />
-<<<<<<< HEAD
-    <Content Include="Views\gestion_revision\gestion_revision.cshtml" />
-    <Content Include="Views\gestion_revision\gestion_ListRevicion.cshtml" />
-=======
     <Content Include="Views\gestion_reserva_habitaciones\detalle_reserva.cshtml" />
     <Content Include="Views\gestion_reserva_habitaciones\editar_reserva.cshtml" />
     <Content Include="Views\gestion_reserva_habitaciones\mis_reservas.cshtml" />
->>>>>>> refs/remotes/origin/Develop
+    <Content Include="Views\gestion_revision\gestion_ListRevicion.cshtml" />
+    <Content Include="Views\gestion_revision\gestion_revision.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
