@@ -13,18 +13,28 @@ namespace BOReserva.Content.Controllers
         // GET: /gestion_seguridad_ingreso/
 
         [HttpPost]
-        public ActionResult M01_Login(string name, string password)
+        public ActionResult M01_Login(string correo, string contraseña)
         {
-            
-            if ("admin@admin.com".Equals(name) && "123".Equals(password))
+            Cgestion_seguridad_ingreso ingreso = new Cgestion_seguridad_ingreso();
+            if (ingreso.verificarUsuario(correo, contraseña))
             {
-                System.Diagnostics.Debug.WriteLine("Nombre " + name + " password " + password);
-                Session["Cgestion_seguridad_ingreso"] = new Cgestion_seguridad_ingreso() { _correoCampoTexto = name, _nombreUsuarioTexto = "David Botello" };
+                ingreso.correoCampoTexto = correo;
+                ingreso.claveCampoTexto = contraseña;
+                Session["Cgestion_seguridad_ingreso"] = ingreso;
                 return RedirectToAction("Index", "Home");
             }
             System.Diagnostics.Debug.WriteLine("que retorno");
             return RedirectToAction("M01_Login", "gestion_seguridad_ingreso");
         }
+
+        public ActionResult M01_Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Index", "Home");
+        }
+
+
+
 
         public ActionResult M01_Login()
         {
