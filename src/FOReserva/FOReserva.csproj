@@ -3037,6 +3037,7 @@
     <Content Include="Views\gestion_reserva_habitaciones\mis_reservas.cshtml" />
     <Content Include="Views\gestion_revision\gestion_ListRevicion.cshtml" />
     <Content Include="Views\gestion_revision\gestion_revision.cshtml" />
+    <Content Include="Views\gestion_revision\Consultar_Revision.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

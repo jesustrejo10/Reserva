@@ -29,5 +29,26 @@ namespace FOReserva.Controllers
 
                         //probando
         }
+
+        public ActionResult Consultar_Revision ()
+        {
+            int search_val = Int32.Parse(Request.QueryString["search_val"]);
+            string search_txt = Request.QueryString["search_text"];
+
+            List<CRestaurantModel> lista = null;
+            if (search_val == 1)
+            {
+                ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
+                lista = manejador.buscarRestCity(search_txt);
+            }
+            else if (search_val == 2)
+            {
+                ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
+                lista = manejador.buscarRestName(search_txt);
+            }
+            return View(lista);
+        }
+
+
     }
 }
