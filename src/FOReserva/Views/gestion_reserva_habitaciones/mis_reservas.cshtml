@@ -6,7 +6,12 @@
 
     <link href="@Url.Content("~/Content/assets/css/layout-datatables.css")" rel="stylesheet" type="text/css" />    
         
-    <h2 class="color-azul">Mis Reservas</h2>
+    
+    <div>
+        <div class="col-xs-12">
+            <h2 class="color-azul">Mis Reservas</h2>
+        </div>
+    </div>
     <!-- HTML DATATABLES -->
     <table class="table table-striped table-bordered table-hover" id="sample_1">
         <thead>
@@ -37,7 +42,7 @@
                     <td>@reserva.FechaLlegada.ToShortDateString()</td>
                     <td>@reserva.CantidadDias</td>
                     <td>@((reserva.FechaPartida != null) ? ((DateTime)reserva.FechaPartida).ToShortDateString() : "-")</td>
-                    <td><button class="btn btn-info" type="button" onclick="cargarContenido('#1T', 'get', '/gestion_reserva_habitaciones/detalle_reserva', @Newtonsoft.Json.JsonConvert.SerializeObject(reserva))"> Detalle </button></td>
+                    <td><button class="btn btn-info" type="button" onclick="cargarContenido('#CI', 'get', '/gestion_reserva_habitaciones/detalle_reserva', @Newtonsoft.Json.JsonConvert.SerializeObject(reserva))"> Detalle </button></td>
                 </tr>
             }
         </tbody>
