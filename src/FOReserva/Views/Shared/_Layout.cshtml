@@ -89,6 +89,7 @@
     <link href="@Url.Content("~/Content/assets/css/header-1.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/assets/css/layout-shop.css")" rel=" stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/assets/css/color_scheme/green.css")" rel="stylesheet" type="text/css" id="color_scheme" />
+    <link href="@Url.Content("~/Content/assets/css/global.css")" rel="stylesheet" />
 </head>
 
 <body class="smoothscroll enable-animation">
@@ -141,17 +142,17 @@
                                 </li>
                             -->
                             <ul id="topMain" class="nav nav-pills nav-main">
-                                <li class="active">
+                                <li>
                                     <!-- HOME -->
-                                    <a href="index.html"> INICIO </a>
+                                    <a onclick="cargarContenido('#MD', 'get', '/gestion_vuelos/gestion_vuelos', null)" href="#"> INICIO </a>
                                 </li>
                                 <li>
                                     <!-- SOBRE NOSOTROS -->
-                                    <a href="page-about-us.html"> INICIAR SESIÓN </a>
+                                    <a onclick="cargarContenido('#CI', 'get', '/gestion_reserva_habitaciones/mis_reservas', null)" href="#"> INICIAR SESIÓN </a>
                                 </li>
                                 <li>
                                     <!-- CONTACTO -->
-                                    <a href="page-contact.html"> REGISTRARSE </a>
+                                    <a onclick="cargarContenido('#MD', 'get', '/gestion_vuelos/gestion_vuelos', null)" href="#"> REGISTRARSE </a>
                                 </li>
                             </ul>
 
@@ -167,8 +168,7 @@
         <!-- FEATURED GRID -->
         <section class="featured-grid">
             <div class="container">
-
-                <div class="row">
+                <div class="row contenedor">
                     <!-- SECCIÓN DE PESTAÑAS -->
                     <ul class="nav nav-tabs">
                         <li class="active" id="LiVuelos"><a href="#">Vuelos</a></li>
@@ -273,7 +273,6 @@
                     <div class="col-sm-6">
                         <div id="contenedorImagenes">
                             <div class="relative">
-
                                 <img src="@Url.Content("~/Content/assets/images/demo/shop/home/man_cat.jpg")" alt="" />
                                 <div class="absolute text-left">
                                     <h2> - CLASE EJECUTIVA -</h2>
@@ -302,6 +301,14 @@
                         </div>
                     </div>
 
+                </div>
+                <div class="row contenedor"></div>
+                <div class="row contenedor">
+                    <div class="col-xs-2">
+                        @Html.Partial("_MenuPerfil", null)
+                    </div>
+                    <div id="CI" class="col-xs-10">
+                    </div>
                 </div>
 
             </div>
