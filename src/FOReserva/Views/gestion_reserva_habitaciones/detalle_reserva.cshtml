@@ -1,0 +1,85 @@
+﻿@model FOReserva.Models.ReservaHabitacion.Cvista_ReservaHabitacion
+@{var reserva = Model; }
+@if (Model != null)
+{
+    <div>
+        <div class="col-xs-8">
+            <h2 class="color-azul">Detalle de Reserva : @reserva.Id</h2>
+        </div>
+        <div class="col-xs-4">
+            <button type="button" class="btn btn-danger pull-right" data-toggle="modal" data-target=".bs-example-modal-sm">Eliminar</button>
+            <button type="button" class="btn btn-info pull-right" onclick="cargarContenido('#CI', 'get', '/gestion_reserva_habitaciones/editar_reserva', null, this)">Modificar</button>
+            <button type="button" class="btn btn-default pull-right" onclick="cargarContenido('#CI', 'get', '/gestion_reserva_habitaciones/mis_reservas', null, this)">Regresar</button>
+        </div>
+    </div>
+    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+                <!-- header modal -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="mySmallModalLabel">¿Esta seguro que desea eliminar la reserva?</h4>
+                </div>
+
+                <!-- body modal -->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12 centrado">
+                            <button type="button" class="btn btn-success">Seguro</button>
+                            <button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-sm">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="col-xs-10 col-xs-offset-1">
+            <h3 class="color-gris-oscuro">Datos del Hotel</h3>
+            <hr />
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-6">
+                        <label>Nombre *</label>
+                        <p>@reserva.Hotel.Nombre</p>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <label>Numero de Habitacion *</label>
+                        <p>@reserva.Habitacion</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="col-xs-10 col-xs-offset-1">
+            <h3 class="color-gris-oscuro">Datos de Reserva</h3>
+            <hr />
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-4 col-sm-4">
+                        <label>Estado *</label>
+                        <p>@reserva.Estado.ToString()</p>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <label>Fecha de Llegada *</label>
+                        <p>@reserva.FechaLlegada.ToShortDateString()</p>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <label>Fecha de Desalojo *</label>
+                        <p>@reserva.FechaPartida.Value.ToShortDateString())</p>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <label>Cantidad de Dias *</label>
+                        <p>@reserva.CantidadDias</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <p>No se pudo cargar el contenido.</p>
+}
