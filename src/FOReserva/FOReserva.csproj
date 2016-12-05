@@ -258,6 +258,7 @@
       <DependentUpon>ReservaDB.dbml</DependentUpon>
     </Compile>
     <Compile Include="Servicio\manejadorSQL.cs" />
+    <Compile Include="Servicio\ManejadorSQLMuestraRevision.cs" />
     <Compile Include="Servicio\ManejadorSQLReserva.cs" />
   </ItemGroup>
   <ItemGroup>
