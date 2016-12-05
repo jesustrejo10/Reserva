@@ -31,13 +31,7 @@ namespace BOReserva.Content.Controllers
             }
             catch (Exception e)
             {
-            
-                
-                //  TempData["error"] = error;
-                //  System.Diagnostics.Debug.WriteLine(e);
-                //  ViewData["errorMensaje"] = error.errorCampo;
-                return RedirectToAction("M01_Login1", "gestion_seguridad_ingreso");
-               
+              TempData["Mensaje"] = e.Message;
             }
 
          
@@ -45,11 +39,7 @@ namespace BOReserva.Content.Controllers
         }
 
 
-        public ActionResult M01_Login1()
-        {
-            TempData["Mensaje"] = "Usuario o Contrasenna incorrecta";
-            return RedirectToAction("M01_Login", "gestion_seguridad_ingreso");
-        }
+   
 
         public ActionResult M01_Logout()
         {

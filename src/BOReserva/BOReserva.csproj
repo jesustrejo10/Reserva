@@ -208,7 +208,6 @@
     <Compile Include="Models\gestion_automoviles\CAgregarAutomovil.cs" />
     <Compile Include="Models\gestion_aviones\CAgregarAvion.cs" />
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
-    <Compile Include="Models\gestion_seguridad_ingreso\Cerror.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cgestion_seguridad_ingreso.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cvalidar_texto_Exception.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
