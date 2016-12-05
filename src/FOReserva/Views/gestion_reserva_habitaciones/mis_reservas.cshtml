@@ -29,7 +29,7 @@
             @foreach (var reserva in Model)
             {
                 <tr>
-                    <td><a href="detalle-reserva.aspx">@reserva.Hotel.Nombre</a></td>
+                    <td>@reserva.Hotel.Nombre</td>
                     <td>@String.Format("# {0}", reserva.Habitacion)</td>
                     <td>
                         <span class="label label-@(
@@ -89,7 +89,8 @@
                 "dom": "<'row'<'col-md-4 col-sm-12'l><'col-md-4 col-sm-12 centrado'T><'col-md-4 col-sm-12'f>r><'table-scrollable't><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>", // horizobtal scrollable datatable
 
                 "tableTools": {
-                    "sSwfPath": "../assets/plugins/datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
+                    "sSwfPath": '@Url.Content("~/Content/assets/plugins/datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf")',
+                    
                     "aButtons": [{
                         "sExtends": "pdf",
                         "sButtonText": "PDF"
