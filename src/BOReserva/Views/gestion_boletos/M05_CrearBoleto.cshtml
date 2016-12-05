@@ -1,4 +1,12 @@
-﻿<section class="content-header">
+﻿@model BOReserva.Models.gestion_boletos.CBuscarVuelo
+
+<script src="/Scripts/Scripts_Boletos/BuscarVuelo.js"></script>
+
+ <!---------------------- SECCION DE AGREGAR AVION ---------------->
+@using (Html.BeginForm("buscarVuelos", "gestion_bolestos", null, FormMethod.Post, new { @id = "formBuscarVuelo", @class = "form-horizontal" }))
+{
+
+<section class="content-header">
     <h1>
         Crear boleto
     </h1>
@@ -20,29 +28,16 @@
 
                         <div class="col-md-2">
                             <label>
-                                <input type="checkbox" name="ridavuelta" class="minimal">
                                 Ida y vuelta
-                            </label>
+                                @Html.CheckBoxFor(m => m._idaVuelta)
+                                                         
+                             </label>
                         </div>
 
                         <div class="col-md-2">
                             <label>
-                                <input type="checkbox" name="rida" class="minimal">
                                 Solo ida
-                            </label>
-                        </div>
-
-                        <div class="col-md-2">
-                            <label>
-                                <input type="checkbox" name="rescala" class="minimal">
-                                Con escala(s)
-                            </label>
-                        </div>
-
-                        <div class="col-md-2">
-                            <label>
-                                <input type="checkbox" name="rsinescala" class="minimal">
-                                Sin escala(s)
+                                @Html.CheckBoxFor(m => m._ida)
                             </label>
                         </div>
 
@@ -144,7 +139,7 @@
 
                     <div class="row">
                         <div class="col-md-4">
-                            <button type="button" class="btn btn-block btn-primary btn-sm" onclick="llamarVistaVerVuelos();">Ver vuelos disponibles</button>
+                            <button type="button" id="buscarVuelos" class="btn btn-success" >Ver vuelos disponibles</button>
                         </div>
                         <div class="col-md-4">
                             <button type="button" class="btn btn-block btn-danger btn-sm">Resetear datos</button>
@@ -167,5 +162,19 @@
         <!-- /.row -->
     </div>
 </section>
-
-<script src="/Scripts/VerVuelos.js"></script>
+    @*<script>
+    $("#buscarVuelos").click(function (e) {
+        e.preventDefault();
+        var form = $("#formBuscarVuelo");
+        $.ajax({
+            url: "gestion_boletos/buscarVuelos",
+            data: form.serialize(),
+            type: 'POST',
+            success: function (data) {
+                alert("Se están buscando los vuelos");
+                $('#formBuscarVuelo')[0].reset();
+            }
+        });
+    });
+        </script>*@  
+}
