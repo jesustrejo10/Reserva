@@ -5,10 +5,10 @@ using System.Data.SqlClient;
 namespace FOReserva.Servicio
 {
     /*Clase para el manejo Reservas de restaurantes en DB*/
-    public class ManejadorSQLReserva : manejadorSQL
+    public class ManejadorSQLReservaRestaurant : manejadorSQL
     {
         /*Constructor del ManejadorSQL para Reservas*/
-        public ManejadorSQLReserva() : base() { }
+        public ManejadorSQLReservaRestaurant() : base() { }
 
         /*Buscar Restaurantes por Nombre*/
         public List<CRestaurantModel> buscarRestName(string restName)
@@ -24,6 +24,7 @@ namespace FOReserva.Servicio
                     string nombre = read.GetString(1);
                     string dir = read.GetString(2);
                     CRestaurantModel resta = new CRestaurantModel();
+                    resta.Id = id;
                     resta.Name = nombre;
                     resta.Addres = dir;
                     lista_rest.Add(resta);
@@ -47,6 +48,7 @@ namespace FOReserva.Servicio
                     string nombre = read.GetString(1);
                     string dir = read.GetString(2);
                     CRestaurantModel resta = new CRestaurantModel();
+                    resta.Id = id;
                     resta.Name = nombre;
                     resta.Addres = dir;
                     lista_rest.Add(resta);
