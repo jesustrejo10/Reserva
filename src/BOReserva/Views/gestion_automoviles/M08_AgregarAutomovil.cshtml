@@ -1,0 +1,184 @@
+﻿<!-- Indico que para esta vista, M08_AgregarAutomovil, utilizare el modelo Models/gestion_automoviles/CAgregarAutomovil-->
+@model BOReserva.Models.gestion_automoviles.CAgregarAutomovil
+
+<!--Indico que, estoy abriendo un formulario que tendra como accion del submit, el controlador gestion_automoviles"Controller", 
+    utilizara el metodo guardarAutomovil
+    le pasara la informacion mediante un POST-->
+
+@using (Html.BeginForm("saveVehicle", "gestion_automoviles", null, FormMethod.Post, new { @id = "formSaveVehicle", @class = "form-horizontal" }))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h1 class="box-title"> Agregar automóvil</h1>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-xs-4">
+                                <label for="tipoMotor2">Seleccione la marca del automóvil</label>
+                                <select class="form-control" id="tipoMotor2">
+                                    <option>Mazda</option>
+                                    <option>Jeep</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-4">
+                                <label for="tipoMotor2">Seleccione el modelo del automóvil</label>
+                                <select class="form-control" id="tipoMotor2">
+                                    <option>Allegro</option>
+                                    <option>Wagoneer</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-4">
+                                <label for="tipoMotor2">Seleccione el anio de fabricacion del automóvil</label>
+                                <select class="form-control" id="tipoMotor2">
+                                    <option>2006</option>
+                                    <option>2007</option>
+                                    <option>2008</option>
+                                    <option>2009</option>
+                                    <option>2010</option>
+                                    <option>2011</option>
+                                    <option>2012</option>
+                                    <option>2013</option>
+                                    <option>2014</option>
+                                    <option>2015</option>
+                                    <option>2016</option>
+                                    <option>2017</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12">
+                            <div class="col-xs-4">
+                                <label for="tipoMotor2">Seleccione el tipo de transmision</label>
+                                <select class="form-control" id="tipoMotor2">
+                                    <option>Sincronica</option>
+                                    <option>Automatica</option>
+                                    <option>Secuencial</option>
+
+                                </select>
+                            </div>
+                            <div class="col-xs-4">
+                                <label for="tipoMotor2">Seleccione el tipo de automóvil</label>
+                                <select class="form-control" id="tipoMotor2">
+                                    <option>Sedan</option>
+                                    <option>Coupe</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-4">
+                                <label for="tipoMotor2">Seleccione la capacidad del automóvil</label>
+                                <select class="form-control" id="tipoMotor2">
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>12</option>
+                                    <option>13</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12">
+                            <div class="col-xs-4">
+                                <label for="tipoMotor2">Seleccione el color del automóvil</label>
+                                <select class="form-control" id="tipoMotor2">
+                                    <option>Negro</option>
+                                    <option>Azul</option>
+                                    <option>Rojo</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-4">
+                                <label for="capacidadPasajerosEjecutiva">Indique el kilometraje del automóvil</label>
+                                <input type="Number" class="form-control" id="capacidadPasajerosEjecutiva">
+
+                            </div>
+                            <div class="col-xs-4">
+                                <label for="capacidadPasajerosEjecutiva">Indique la placa del automovil</label>
+                                <input type="Number" class="form-control" id="capacidadPasajerosEjecutiva">
+
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12">
+                            <div class="col-xs-4">
+                                <label for="tipoMotor2">Seleccione el Pais</label>
+                                <select class="form-control" id="tipoMotor2">
+                                    <option>Venezuela</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-4">
+                                <label for="tipoMotor2">Seleccione el Estado</label>
+                                <select class="form-control" id="tipoMotor2">
+                                    <option>Miranda</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-4">
+                                <label for="tipoMotor2">Seleccione la ciudad</label>
+                                <select class="form-control" id="tipoMotor2">
+                                    <option>San Antonio</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12">
+                            <div class="col-xs-4">
+                                <label for="capacidadPasajerosTurista">Ingrese el precio de compra:</label>
+                                @Html.TextBoxFor(m => m._matricula, null, new { @class = "form-control", @placeholder = "Placa", @id = "vehi_placa" })
+
+
+                                <input type="Number" class="form-control" id="capacidadPasajerosTurista">
+                            </div>
+                            <div class="col-xs-4">
+                                <label for="capacidadPasajerosEjecutiva">Ingrese la tarifa diaria expresada en USD $:</label>
+                                <input type="Number" class="form-control" id="capacidadPasajerosEjecutiva">
+                            </div>
+                            <div class="col-xs-4">
+                                <label for="capacidadPasajerosEjecutiva">Ingrese la tarifa de penalidad diaria expresada en USD $:</label>
+                                <input type="Number" class="form-control" id="capacidadPasajerosEjecutiva">
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <button type="button" id="save_vehicle" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+
+    <script>
+        $("#save_vehicle").click(function (e) {
+            e.preventDefault();
+            var form = $("#formSaveVehicle");
+            $.ajax({
+                url: "gestion_automoviles/saveVehicle",
+                data: form.serialize(),
+                type: 'POST',
+                success: function (data) {
+                    alert("Se guardo");
+                    $('#formSaveVehicle')[0].reset();
+                }
+            });
+        });
+    </script>
+
+}

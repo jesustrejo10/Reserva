@@ -1,0 +1,370 @@
+﻿@model BOReserva.Models.gestion_aviones.CGestion_avion
+
+
+
+<!---------------------- SECCION DE AGREGAR AVION ---------------->
+@using (Html.BeginForm("guardarAvion", "gestion_aviones", null, FormMethod.Post, new { @id = "formGuardarAvion", @class = "form-horizontal" }))
+{
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-success collapsed-box">
+            <div class="box-header with-border">
+                <h1 class="box-title"> Agregar Avión</h1>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-xs-4">
+                            <label for="matriculaAvion">Inserte la matricula del Avión:</label>
+                            @Html.TextBoxFor(m => m._matriculaAvionAgregar, null, new { @class = "form-control", @placeholder = "Matricula", @id = "matriculaAvionAgregar" })
+                        </div>
+                        <div class="col-xs-4">
+                            <label for="modeloAvion">Inserte el modelo del Avión:</label>
+                            @Html.TextBoxFor(m => m._modeloAvionAgregar, null, new { @class = "form-control", @placeholder = "Modelo", @id = "modeloAvionAgregar" })
+                        </div>
+                        <div class="col-xs-4">
+                            <label for="fabricanteAvion">Inserte el fabricante del Avión:</label>
+                            @Html.TextBoxFor(m => m._nombreFabricanteAgregar, null, new { @class = "form-control", @placeholder = "Fabricante", @id = "nombreFabricanteAgregar" })
+                        </div>
+                        <div class="col-xs-4">
+                            <label for="capacidadPasajerosTurista">Capacidad de pasajeros (Clase Turista):</label>
+                            @Html.TextBoxFor(m => m._capacidadPasajerosTuristaAgregar, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadTuristasAgregar" })
+                        </div>
+                        <div class="col-xs-4">
+                            <label for="capacidadPasajerosEjecutiva">Capacidad de pasajeros (Clase Ejecutiva):</label>
+                            @Html.TextBoxFor(m => m._capacidadPasajerosEjecutivaAgregar, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadEjecutivaAgregr" })
+                        </div>
+                        <div class="col-xs-4" style="margin-top: 22px;">
+                            <label for="capacidadPasajerosVIP">Capacidad de pasajeros (Clase VIP):</label>
+                            @Html.TextBoxFor(m => m._capacidadPasajerosVIPAgregar, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadVIPAgregar" })
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="capacidadCombustible">Capacidad de Combustible (En litros):</label>
+                            @Html.TextBoxFor(m => m._capacidadMaximaCombustible, null, new { @class = "form-control", @style = "width:273px;", @placeholder = "0", @type = "number", @id = "capacidadCombustibleAgregar" })
+                        </div>
+                        <div class="col-xs-4">
+                            <label for="capacidadEquipaje">Capacidad de Equipaje (En Kg):</label>
+                            @Html.TextBoxFor(m => m._capacidadEquipajeAgregar, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadEquipajeAgregar" })
+                        </div>
+
+                        <div class="col-xs-4">
+                            <label for="distanciaMaximaDeVuelo">Distancia Máxima de Vuelo (En KM):</label>
+                            @Html.TextBoxFor(m => m._distanciaMaximaVueloAgregar, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "distanciaMaximaVueloAgregar" })
+                        </div>
+                        <div class="col-xs-4" style="margin-left:148px;">
+                            <label for="velocidadMaximaDeVuelo">Velocidad Máxima de Vuelo (Km/H):</label>
+                            @Html.TextBoxFor(m => m._velocidadMaximaDeVueloAgregar, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "velocidadMaximaDeVueloAgregar" })
+                        </div>
+
+                        <div class="col-xs-6">
+                            <label for="potenciaMotor1">Escriba la potencia del motor 1 (en kN):</label>
+                            @Html.TextBoxFor(m => m._potenciaMotor1Agregar, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "potenciaMotor1Agregar" })
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="tipoMotor1">Seleccione el tipo de motor 1:</label>
+                            <select class="form-control" id="tipoMotor1">
+                                <option>Helice</option>
+                                <option>Turbina</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="potenciaMotor2">Escriba la potencia del motor 2 (en kN):</label>
+                            @Html.TextBoxFor(m => m._potenciaMotor2Agregar, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "potenciaMotor2Agregar" })
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="tipoMotor2">Seleccione el tipo de motor 2:</label>
+                            <select class="form-control" id="tipoMotor2">
+                                <option>Helice</option>
+                                <option>Turbina</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <button id="aceptarAvion" type="button" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+    </div>
+<!-- /.row -->
+<script>
+    $("#aceptarAvion").click(function (e) {
+        e.preventDefault();
+        var form = $("#formGuardarAvion");
+        $.ajax({
+            url: "gestion_aviones/guardarAvion",
+            data: form.serialize(),
+            type: 'POST',
+            success: function (data) {
+                alert("Se guardo");
+                $('#formGuardarAvion')[0].reset();
+            }
+        });
+    });
+</script>
+
+
+}   
+
+<!------------------- FIN DE SECCION DE AGREGAR AVION ---------------->
+<!------------------- INICIO SECCION EDITAR AVION Y ESTADISTICAS -------------------->
+<div class="row">
+    <div class="col-md-8">
+        <div class="box box-warning collapsed-box">
+            <div class="box-header with-border">
+                <h1 class="box-title"> Editar Avión</h1>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-8">
+                            <label for="matriculaAvionEditar">Inserte la matrícula del Avión a editar:</label>
+                            <input type="text" class="form-control" id="matriculaAvionEditar">
+                        </div>
+                        <div class="col-xs-4" style="margin-top: 25px;">
+                            <button type="button" class="btn btn-success">Consultar</button>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <div class="col-xs-4">
+                            <label for="modeloAvionEditar">Modificar el modelo del Avión:</label>
+                            <input type="text" class="form-control" id="modeloAvionEditar">
+                        </div>
+                        <div class="col-xs-4">
+                            <label for="modeloAvionEditar">Modificar el fabricante:</label>
+                            <input type="text" class="form-control" id="modeloAvionEditar">
+                        </div>
+                        <div class="col-xs-4">
+                            <label for="capacidadPasajerosEditar">Editar Capacidad de pasajeros:</label>
+                            <input type="Number" class="form-control" id="capacidadPasajerosEditar">
+                        </div>
+                        <div class="col-xs-4">
+                            <label for="capacidadCombustibleEditar">Editar Capacidad de Combustible (En litros):</label>
+                            <input type="Number" class="form-control" id="capacidadCombustibleEditar">
+                        </div>
+                        <div class="col-xs-4">
+                            <label for="capacidadEquipajeEditar">Editar Capacidad de Equipaje (En Kilos):</label>
+                            <input type="Number" class="form-control" id="capacidadEquipajeEditar">
+                        </div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <button type="button" class="btn btn-success" style="margin-left:200px;">Guardar</button>
+                            <button type="button" class="btn btn-primary">Habilitar</button>
+                            <button type="button" class="btn btn-danger">Deshabilitar</button>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="margin-top:10px;">
+                        <div class="col-xs-6">
+                            <label for="potenciaMotorExtra">Escriba la potencia del motor extra (en kN):</label>
+                            <input type="Number" class="form-control" id="potenciaMotorExtra">
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="tipoMotorExtra">Seleccione el tipo de motor extra:</label>
+                            <select class="form-control" id="tipoMotorExtra">
+                                <option>Helice</option>
+                                <option>Turbina</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <button type="button" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+    <div class="col-md-4">
+        <div class="box box-primary collapsed-box">
+            <div class="box-header with-border">
+       <!------- INICIO CONSULTAR ESTADISTICAS -------->
+                <h1 class="box-title"> Consultar Estadísticas</h1>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="col-md-12">
+                @using (Html.BeginForm("consultarEstadisticasAvion", "gestion_aviones", null, FormMethod.Post, new { @id = "formconsultarEstadisticasAvion", @class = "form-horizontal" }))
+                {
+                    <div class="col-xs-8">
+                        <label for="matriculaAvionConsultarEstadistica">Matrícula del Avión:</label>
+                        @Html.TextBoxFor(m => m._matriculaConsultarEstadisticaAvion, null, new { @class = "form-control", @placeholder = "Matricula", @id = "matriculaAvionConsultarEstadistica" })
+                    </div>
+                    <div class="col-xs-4">
+
+                        <button id="consultarEstadistica" type="button" class="btn btn-success" style="margin-top: 25px;">Consultar</button>
+                    </div>
+                    <script>
+                        $("#consultarEstadistica").click(function (e) {
+                        e.preventDefault();
+                        var form = $("#formconsultarEstadisticasAvion");
+                        $.ajax({
+                            url: "gestion_aviones/consultarEstadisticasAvion",
+                            data: form.serialize(),
+                            type: 'POST',
+                            success: function (data) {
+                                alert("Se busco");
+             
+                            }
+                          });
+                       });
+                    </script>
+                }   
+                    <div class="col-xs-12">
+                        <label for="kmsRecorridos">Kilometros Recorridos:</label>
+                        <input type="number" class="form-control" id="kmsRecorridos" disabled>
+                    </div>
+                    <div class="col-xs-12">
+                        <label for="combustibleConsumido">Combustible Consumido:</label>
+                        <input type="number" class="form-control" id="combustibleConsumido" disabled>
+                    </div>
+                    <div class="col-xs-12">
+                        <label for="pasajerosTransportados">Pasajeros Transportados:</label>
+                        <input type="number" class="form-control" id="pasajerosTransportados" disabled>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.row -->
+<!-------------------- FIN SECCION EDITAR AVION Y ESTADISTICAS ----------------------->
+<!-------------------- SECCION DE FALLOS ------------------------>
+<div class="row">
+    <div class="col-md-8">
+        <div class="box box-danger collapsed-box">
+            <div class="box-header with-border">
+                <h1 class="box-title"> Reportar Fallo </h1>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <label for="matriculaAvionFallo">Inserte la matrícula del Avión a reportar:</label>
+                            <input type="text" class="form-control" id="matriculaAvionFallo">
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <div class="col-xs-12">
+                            <label for="descripcionReporte">Describa el fallo encontrado:</label>
+                            <textarea class="form-control" rows="5" id="descripcionReporte"></textarea>
+                        </div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <button type="button" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+    <div class="col-md-4">
+        <div class="box box-danger collapsed-box">
+            <div class="box-header with-border">
+                <h1 class="box-title"> Editar Fallo </h1>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="col-md-12">
+                    <div class="col-xs-8">
+                        <label for="codigoFallo">Código del fallo:</label>
+                        <input type="text" class="form-control" id="codigoFallo">
+                    </div>
+                    <div class="col-xs-4">
+                        <button type="button" class="btn btn-success" style="margin-top: 25px;">Consultar</button>
+                    </div>
+                    <div class="col-xs-12">
+                        <label for="descripcionReporteConsulta">Descripción:</label>
+                        <textarea class="form-control" rows="5" id="descripcionReporteConsulta" disabled></textarea>
+                    </div>
+                    <div class="col-xs-12" style="margin-top:10px;">
+                        <button type="button" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Resuelto</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-md-8">
+        <div class="box box-danger collapsed-box">
+            <div class="box-header with-border">
+                <h1 class="box-title"> Consultar fallos por avión</h1>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-xs-8">
+                            <label for="matriculaAvionConsultaFallo">Inserte la matricula del Avión:</label>
+                            <input type="text" class="form-control" id="matriculaAvionConsultaFallo">
+                        </div>
+                        <div class="col-xs-4">
+                            <button type="button" class="btn btn-success" style="margin-top: 25px;">Consultar</button>
+                        </div>
+                        <div class="col-xs-12">
+                            <label for="codigosError">Codigos de error encontrados asociados al avión:</label>
+                            <textarea class="form-control" rows="10" id="codigosError"></textarea>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+<!-------------------- FIN DE LA SECCION DE FALLOS -------------->
+
+
