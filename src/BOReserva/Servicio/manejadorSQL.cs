@@ -32,7 +32,7 @@ namespace BOReserva.Servicio
                 //uso el SqlCommand para realizar los querys
                 SqlCommand query = conexion.CreateCommand();
                 //ingreso la orden del query
-                query.CommandText = "INSERT INTO Avion VALUES ('" +model._matriculaAvion+ "','" +model._modeloAvion+ "'," +model._capacidadPasajerosTurista+ " , " +model._capacidadPasajerosEjecutiva+ "," +model._capacidadPasajerosVIP+ ", " +model._capacidadEquipaje+ ", " +model._distanciaMaximaVuelo+ ", " +model._velocidadMaximaDeVuelo+ ", " +model._capacidadMaximaCombustible+ ");";
+                query.CommandText = "INSERT INTO Avion VALUES ('" + model._matriculaAvion + "','" + model._modeloAvion + "'," + model._capacidadPasajerosTurista + " , " + model._capacidadPasajerosEjecutiva + "," + model._capacidadPasajerosVIP + ", " + model._capacidadEquipaje + ", " + model._distanciaMaximaVuelo + ", " + model._velocidadMaximaDeVuelo + ", " + model._capacidadMaximaCombustible + ");";
                 //creo un lector sql para la respuesta de la ejecucion del comando anterior               
                 SqlDataReader lector = query.ExecuteReader();
                 //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
@@ -46,15 +46,60 @@ namespace BOReserva.Servicio
                 conexion.Close();
                 return true;
             }
-            catch(SqlException e)
+            catch (SqlException e)
             {
                 return false;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }
-            
+
+        }
+
+        //Procedimiento del Modulo 2 para agregar aviones a la base de datos.
+        public List<string> buscarCiudades()
+        {
+            List<string> ciudades = new List<string>();
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                //uso el SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "SELECT lug_nombre FROM Lugar WHERE lug_tipo_lugar = 'ciudad';";
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                SqlDataReader lector = query.ExecuteReader();
+                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+                if (lector.HasRows)
+                {
+                    while (lector.Read())
+                    {
+                        Console.WriteLine(lector.GetString(0));
+                        ciudades.Add(lector.GetString(0));
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No rows");
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return ciudades;
+            }
+            catch (SqlException e)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
     }

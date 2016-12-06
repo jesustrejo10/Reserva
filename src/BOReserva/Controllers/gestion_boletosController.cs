@@ -13,15 +13,22 @@ namespace BOReserva.Controllers
 
         public ActionResult M05_CrearBoleto()
         {
+            /*//instancio el manejador de sql
+            manejadorSQL sql = new manejadorSQL();
+            List<string> resultado = sql.buscarCiudades();*/
             CBuscarVuelo model = new CBuscarVuelo();
+            //model._ciudadDestinoList = resultado;
             return PartialView(model);
         }
 
         [HttpPost]
         public JsonResult buscarVuelos(CBuscarVuelo model)
         {
-            bool prueba = model._ida;
-            bool prueba2 = model._idaVuelta;
+            String fecha_ida = model._ida;
+            String fecha_vuelta = model._vuelta;
+            int sel = model.SelectedCiudadIdOrigen;
+            int sel2 = model.SelectedCiudadIdDestino;
+
             return (Json(true, JsonRequestBehavior.AllowGet));
 
         }

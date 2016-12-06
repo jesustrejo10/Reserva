@@ -1,5 +1,4 @@
-﻿
-    //EVENTO PARA BUSCAR LOS VUELOS
+﻿    //EVENTO PARA BUSCAR LOS VUELOS
     $("#buscarVuelos").click(function (e) {
         console.log("hola!");
         e.preventDefault();
@@ -35,4 +34,3 @@
             }
         });
     });
-
