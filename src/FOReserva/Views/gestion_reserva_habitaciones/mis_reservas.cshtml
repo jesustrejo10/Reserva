@@ -1,0 +1,124 @@
+﻿@model List<FOReserva.Models.ReservaHabitacion.Cvista_ReservaHabitacion>
+
+
+@if (Model != null)
+{
+
+    <link href="@Url.Content("~/Content/assets/css/layout-datatables.css")" rel="stylesheet" type="text/css" />    
+        
+    
+    <div>
+        <div class="col-xs-12">
+            <h2 class="color-azul">Mis Reservas</h2>
+        </div>
+    </div>
+    <!-- HTML DATATABLES -->
+    <table class="table table-striped table-bordered table-hover" id="sample_1">
+        <thead>
+            <tr>
+                <th>Hotel</th>
+                <th>Habitacion</th>
+                <th>Estado</th>
+                <th>Fecha de Reservacion</th>
+                <th>Cantidad de dias</th>
+                <th>Fecha de Deshalojo</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var reserva in Model)
+            {
+                <tr>
+                    <td>@reserva.Hotel.Nombre</td>
+                    <td>@String.Format("# {0}", reserva.Habitacion)</td>
+                    <td>
+                        <span class="label label-@(
+                                reserva.Estado == FOReserva.Models.ReservaHabitacion.Cvista_ReservaHabitacion.EstadoReserva.Activo  ? "info" :
+                                reserva.Estado == FOReserva.Models.ReservaHabitacion.Cvista_ReservaHabitacion.EstadoReserva.Ocupando ? "success" :
+                                reserva.Estado == FOReserva.Models.ReservaHabitacion.Cvista_ReservaHabitacion.EstadoReserva.Cancelo  ? "warning" : "danger")">
+                            @reserva.Estado.ToString()
+                        </span>
+                    </td>
+                    <td>@reserva.FechaLlegada.ToShortDateString()</td>
+                    <td>@reserva.CantidadDias</td>
+                    <td>@((reserva.FechaPartida != null) ? ((DateTime)reserva.FechaPartida).ToShortDateString() : "-")</td>
+                    <td><button class="btn btn-info" type="button" onclick="cargarContenido('#CI', 'get', '/gestion_reserva_habitaciones/detalle_reserva', @Newtonsoft.Json.JsonConvert.SerializeObject(reserva))"> Detalle </button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+            
+    <!-- JS DATATABLES -->
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/jquery.dataTables.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/dataTables.tableTools.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/dataTables.colReorder.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/dataTables.scroller.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/dataTables.bootstrap.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/select2/js/select2.full.min.js")"></script>
+    <script type="text/javascript">
+        function initTable1() {
+            var table = jQuery('#sample_1');
+
+            /* Table tools samples: https://www.datatables.net/release-datatables/extras/TableTools/ */
+
+            /* Set tabletools buttons and button container */
+
+            $.extend(true, $.fn.DataTable.TableTools.classes, {
+                "container": "btn-group",
+                "buttons": {
+                    "normal": "btn btn-sm btn-default",
+                    "disabled": "btn btn-sm btn-default disabled"
+                },
+                "collection": {
+                    "container": "DTTT_dropdown dropdown-menu tabletools-dropdown-menu"
+                }
+            });
+
+            var oTable = table.dataTable({
+                "order": [
+                    [0, 'asc']
+                ],
+
+                "lengthMenu": [
+                    [5, 15, 20, -1],
+                    [5, 15, 20, "All"] // change per page values here
+                ],
+                // set the initial value
+                "pageLength": 10,
+
+                "dom": "<'row'<'col-md-4 col-sm-12'l><'col-md-4 col-sm-12 centrado'T><'col-md-4 col-sm-12'f>r><'table-scrollable't><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>", // horizobtal scrollable datatable
+
+                "tableTools": {
+                    "sSwfPath": '@Url.Content("~/Content/assets/plugins/datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf")',
+                    
+                    "aButtons": [{
+                        "sExtends": "pdf",
+                        "sButtonText": "PDF"
+                    }, {
+                        "sExtends": "csv",
+                        "sButtonText": "CSV"
+                    }, {
+                        "sExtends": "xls",
+                        "sButtonText": "Excel"
+                    }, {
+                        "sExtends": "print",
+                        "sButtonText": "Print",
+                        "sInfo": 'Please press "CTR+P" to print or "ESC" to quit',
+                        "sMessage": "Generated by DataTables"
+                    }]
+                }
+            });
+
+            var tableWrapper = jQuery('#sample_1_wrapper'); // datatable creates the table wrapper by adding with id {your_table_jd}_wrapper
+
+            tableWrapper.find('.dataTables_length select').select2(); // initialize select2 dropdown
+        }
+
+        // Table Init
+        initTable1();
+    </script>
+}
+else
+{
+    <p>No se pudo cargar el contenido.</p>
+}

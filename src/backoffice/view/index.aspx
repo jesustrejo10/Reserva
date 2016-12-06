@@ -273,6 +273,16 @@
                     <!-- MODULO DE AVIONES -->
                     <li><a href="modules/gestion_aviones/M02_GestionAviones.html"><i class="fa fa-plane"></i> <span>Gestión de Aviones</span></a></li>
                     <!-- FIN MODULO DE AVIONES -->
+                    <!-- MODULO DE USUARIOS -->
+                    <li class="treeview">
+                        <a href="modules/gestion_usuarios/M12_GestionUsuario.html"> <i class="fa fa-user"></i> <span>Gestión de Usuarios</span> <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span> </a>
+                        <ul class="treeview-menu">
+                            <li><a href="modules/gestion_usuarios/M12_GestionUsuario.html"><i class="fa fa-plus-square-o"></i>Gestiónar</a></li>
+                        </ul>
+                    </li>
+                    <!-- FIN MODULO DE USUARIOS -->
                     
                     
                     <!-- MODULO DE BOLETOS AEREOS Y CHECK-IN -->
