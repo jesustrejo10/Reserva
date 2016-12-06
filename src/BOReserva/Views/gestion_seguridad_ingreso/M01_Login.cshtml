@@ -55,21 +55,42 @@
             <p class="login-box-msg">Iniciar Sesión</p> 
 
             <form method="post">
-<<<<<<< HEAD
+
                               
-                   @if (@TempData["Mensaje"] != null)
-                    {
-                        <p style="color:red">@TempData["Mensaje"]</p>
+                   @if (@TempData["CorreoVacio"] != null || @TempData["ContraseñaVacio"]!= null)
+                   {
+
                         <p class="box-title">Correo</p>
+
+                        <p style="color:red">@TempData["CorreoVacio"]</p>
+
                         <div class="form-group has-feedback">
-                          <input type="email" style="border-color:red" name="correo" class="form-control" placeholder="alex@reserva.com">
-                           <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                          @if (TempData["CorreoVacio"] != null)
+                          {
+                          <input type="email" style="border-color:red" name="correo" class="form-control" placeholder="alex@reserva.com" value="@TempData["Correo"]" oninvalid="this.setCustomValidity('Debe colocar un correo valido')" oninput="setCustomValidity('')">
+                          <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                          }
+                          else
+                          {
+                            <input type="email" name="correo" class="form-control" placeholder="alex@reserva.com">
+                            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+
+                          }
                         </div>
                        
                         <p class="box-title">Contraseña</p>
+                        <p style="color:red">@TempData["ContraseñaVacio"]</p>
                         <div class="form-group has-feedback">
+                         @if (TempData["ContraseñaVacio"] != null)
+                         {
                           <input type="password" style="border-color:red" name="contraseña" class="form-control" placeholder="**********">
                           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                         }
+                         else
+                         {
+                            <input type="password" name="contraseña" class="form-control" placeholder="**********">
+                            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                         }
                         </div>
                    }
                    else
@@ -87,27 +108,11 @@
                          </div>
                        }
 
-                 <div class="row">
-=======
-
-                <p class="box-title">Correo</p>
-
-                <div class="form-group has-feedback">
-                    <input type="email" name="correo" class="form-control" placeholder="alex@reserva.com" oninvalid="this.setCustomValidity('Debe colocar un correo valido')" oninput="setCustomValidity('')">
-                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                </div>
-
-
-                <p class="box-title">Contraseña</p>
-                <div class="form-group has-feedback">
-
-                    <input type="password" name="contraseña" class="form-control" placeholder="*****">
-                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                </div>
+                
 
 
                 <div class="row">
->>>>>>> 662b2ac419ac3eea622bfcbdfa599806836d802e
+
                     <!-- /.col -->
                     <div class="col-xs-6">
                         <button type="submit" class="btn bg-olive btn-primary btn-block btn-flat" style="margin-left:90px;">Iniciar Sesión</button>

@@ -12,12 +12,32 @@ namespace BOReserva.Content.Controllers
         //
         // GET: /gestion_seguridad_ingreso/
 
-            [HandleError()]
+           
         [HttpPost]
         public ActionResult M01_Login(string correo, string contraseña)
         {
             Cgestion_seguridad_ingreso ingreso = new Cgestion_seguridad_ingreso();
-            
+            TempData["Correo"] = correo;
+            TempData["Contraseña"] = contraseña;
+
+            if (correo.Equals("") && contraseña.Equals(""))
+            {
+                TempData["CorreoVacio"] = "Debe ingresar su correo";
+                TempData["ContraseñaVacio"] = "Debe ingresar su contraseña";
+                return RedirectToAction("M01_Login", "gestion_seguridad_ingreso");
+            }
+            else if (correo.Equals(""))
+            {
+                TempData["CorreoVacio"] = "Debe ingresar su correo";
+                return RedirectToAction("M01_Login", "gestion_seguridad_ingreso");
+            }
+            else if (contraseña.Equals(""))
+            {
+                TempData["ContraseñaVacio"] = "Debe ingresar su contraseña";
+                return RedirectToAction("M01_Login", "gestion_seguridad_ingreso");
+            }
+         
+
             try
             {
                 System.Diagnostics.Debug.WriteLine("Correo "+correo+" contrasena "+contraseña);
