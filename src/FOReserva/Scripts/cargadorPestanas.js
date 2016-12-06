@@ -55,6 +55,7 @@
         $("#LiHoteles").removeClass("active");
         $("#LiRestaurantes").removeClass("active");
         $("#LiCruceros").removeClass("active");
+        $("#LiDiarios").removeClass("active");
         var url = '/gestion_vuelos/gestion_vuelos';
         var method = 'GET';
         var data = '';
@@ -106,6 +107,7 @@
         $("#LiHoteles").removeClass("active");
         $("#LiRestaurantes").removeClass("active");
         $("#LiCruceros").removeClass("active");
+        $("#LiDiarios").removeClass("active");
     });
 
 
@@ -120,6 +122,7 @@
         $("#LiAutos").removeClass("active");
         $("#LiRestaurantes").removeClass("active");
         $("#LiCruceros").removeClass("active");
+        $("#LiDiarios").removeClass("active");
     });
 
 
@@ -134,6 +137,7 @@
         $("#LiHoteles").removeClass("active");
         $("#LiAutos").removeClass("active");
         $("#LiCruceros").removeClass("active");
+        $("#LiDiarios").removeClass("active");
     });
 
 
@@ -149,5 +153,59 @@
         $("#LiHoteles").removeClass("active");
         $("#LiRestaurantes").removeClass("active");
         $("#LiAutos").removeClass("active");
+        $("#LiDiarios").removeClass("active");
+    });
+
+
+
+    /* CARGADOR DE LA PESTAÑA DIARIOS DE VIAJE*/
+    $("#LiDiarios").click(function (e) {
+        e.preventDefault();
+
+        $("#LiDiarios").addClass("active");
+
+        $("#LiVuelos").removeClass("active");
+        $("#LiHoteles").removeClass("active");
+        $("#LiRestaurantes").removeClass("active");
+        $("#LiAutos").removeClass("active");
+        $("#LiCruceros").removeClass("active");
+        var url = '/gestion_diarios/gestion_diarios';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                dataType: "html",
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenedor").empty();
+                    $("#contenedor").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+
+        var url = '/gestion_diarios/gestion_diariosImagenes';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenedorImagenes").empty();
+                    $("#contenedorImagenes").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
     });
 });

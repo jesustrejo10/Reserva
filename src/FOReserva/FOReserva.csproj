@@ -182,6 +182,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\gestion_diariosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\gestion_vuelosController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -189,6 +190,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Diarios\Cvista_Diarios.cs" />
     <Compile Include="Models\Vuelos\Cvista_Vuelos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -1579,7 +1581,6 @@
     <Content Include="Views\ajax\dummy-lightbox.html" />
     <Content Include="Views\ajax\dummy-modal-ajax.html" />
     <Content Include="Views\busqueda_compra_boletos\placeholder.html" />
-    <Content Include="Views\gestion_diario_viaje\placeholder.html" />
     <Content Include="Views\gestion_planificacion_vacaciones\placeholder.html" />
     <Content Include="Views\gestion_reclamos\placeholder.html" />
     <Content Include="Views\gestion_reserva_auto\placeholder.html" />
@@ -2934,6 +2935,8 @@
     <Content Include="Views\Shared\assets\plugins\styleswitcher\color_schemes\color_scheme.fla" />
     <Content Include="Views\gestion_vuelos\gestion_vuelos.cshtml" />
     <Content Include="Views\gestion_vuelos\gestion_vuelosImagenes.cshtml" />
+    <Content Include="Views\gestion_diarios\gestion_diarios.cshtml" />
+    <Content Include="Views\gestion_diarios\gestion_diariosImagenes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
