@@ -9,7 +9,9 @@ namespace BOReserva.Models.gestion_automoviles
 {
     public class CBasededatos_vehiculo
     {
-        private String connetionString = @"Data Source=LUISALEJANDROPE\LAPGROCK;Initial Catalog=proyds1617;Integrated Security=True"; //No supe cual es el string de conexion jejejeps
+        //private String connetionString = @"Data Source=LUISALEJANDROPE\LAPGROCK;Initial Catalog=proyds1617;Integrated Security=True"; //No supe cual es el string de conexion jejejeps
+        private String connetionString = @"Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User ID=DB_A1380A_reserva_admin;Password = ucabds1617a"; //No supe cual es el string de conexion jejejeps
+        
         private SqlConnection con = null;
 
         public void probarconexion()
@@ -113,7 +115,7 @@ namespace BOReserva.Models.gestion_automoviles
 
         public int MBuscarfkciudad (String ciudad, String pais, String estado)
         {
-            int fk_ciudad = -99;
+            int fk_ciudad = 12;
             try
             {
                 con = new SqlConnection(connetionString);
