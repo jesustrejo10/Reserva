@@ -161,8 +161,7 @@ namespace BOReserva.Models.gestion_usuarios
         /// <summary>
         /// Consultar un usuario por su ID
         /// </summary>
-        /// <param name="usuID">Es el ID del usuario que se va a borrar de la BD</param>
-        /// <returns>Retorna true si es elimanado exitosamente</returns>
+        /// <param name="usuID">Es el ID del usuario que se va a consultar de la BD</param>
         public ListarUsuario consultarUsuario(int usuID)
         {
             DataTable resultado;
