@@ -24,7 +24,7 @@
 
     $("#m08AgregarAutomovil").click(function (e) {
         alert("hola jeffrey");
-        
+
         e.preventDefault();
         var url = '/gestion_automoviles/M08_AgregarAutomovil';
         var method = 'GET';
@@ -44,12 +44,12 @@
                     alert(errorThrown);
                 }
             });
-    
+
     });
 
-    $("#gestionComida").click(function (e) {
+    $("#crearhotel").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_comida_vuelo/M06_AgregarEditarComida';
+        var url = '/gestion_hoteles/M09_GestionHoteles_Crear';
         var method = 'GET';
         var data = '';
 
@@ -69,9 +69,9 @@
             });
     });
 
-    $("#m02_agregaravion").click(function (e) {
+    $("#modificarhotel").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_aviones/M02_AgregarAvion';
+        var url = '/gestion_hoteles/M09_GestionHoteles_ModificarHotel';
         var method = 'GET';
         var data = '';
 
@@ -81,7 +81,6 @@
                 type: method,
                 data: data,
                 success: function (data, textStatus, jqXHR) {
-
                     $("#contenido").empty();
                     $("#contenido").append(data);
                 },
@@ -91,6 +90,54 @@
             });
     });
 
+    $("#desactivarhotel").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_hoteles/M09_GestionHoteles_Desactivar';
+
+        $("#gestionComida").click(function (e) {
+            e.preventDefault();
+            var url = '/gestion_comida_vuelo/M06_AgregarEditarComida';
+            refs / remotes / origin / Develop
+            var method = 'GET';
+            var data = '';
+
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+        });
+
+        $("#m02_agregaravion").click(function (e) {
+            e.preventDefault();
+            var url = '/gestion_aviones/M02_AgregarAvion';
+            var method = 'GET';
+            var data = '';
+
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+        });
+
+    });
 });
-
-

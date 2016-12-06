@@ -253,7 +253,54 @@
                 <!-- search form -->
                 <!-- /.search form -->
                 <!-- sidebar menu: : style can be found in sidebar.less -->
+
                 <ul class="sidebar-menu">
+                    <!-- MODULO DE AVIONES -->
+                    <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Aviones</a></li>
+                    <!-- FIN MODULO DE AVIONES -->
+                    <!-- MODULO DE RUTAS COMERCIALES -->
+                    <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Rutas</a></li>
+                    <!-- FIN MODULO DE RUTAS COMERCIALES -->
+                    <!-- MODULO DE VUELOS -->
+                    <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Vuelos</a></li>
+                    <!-- FIN MODULO DE VUELOS -->
+                    <!-- MODULO DE BOLETOS AEREOS Y CHECK-IN -->
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-files-o"></i>
+                            <span>Gestión de Boletos</span>
+                            <span class="pull-right-container">
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="modules/gestion_venta_boleto/crearboletosvuelos.html"><i class="fa fa-circle-o"></i>Crear boleto</a></li>
+                            <li><a href="modules/gestion_venta_boleto/consultarboleto.html"><i class="fa fa-circle-o"></i>Consultar boleto</a></li>
+                            <li><a href="modules/gestion_venta_boleto/modificarboleto.html"><i class="fa fa-circle-o"></i>Modificar boleto</a></li>
+                            <li><a href="modules/gestion_venta_boleto/eliminarboleto.html"><i class="fa fa-circle-o"></i>Eliminar boleto</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="modules/gestion_venta_boleto/checkin.html"><i class="fa fa-book"></i> <span>Check in</span></a></li>
+                    <!-- FIN MODULO DE BOLETOS AEREOS Y CHECK-IN -->
+                    <!-- MODULO DE COMIDA POR VUELO -->
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-cutlery"></i> <span>Gestión de Comida</span> <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="gestionComida"><a href="modules/gestion_comida_vuelo/M06_AgregarComida.cshtml"><i class="fa fa-plus-square-o"></i>Agregar Nuevo</a></li>
+                            <li id="editarComida"><a href="modules/gestion_comida_vuelo/M06_EditarComida.cshtml"><i class="fa fa-edit"></i>Editar</a></li>
+                            <li id="gestionComidaVuelo"><a href="modules/gestion_comida_vuelo/M06_AgregarPorVuelo.cshtml"><i class="fa fa-plus-square-o"></i>Agregar por Vuelo</a></li>
+                            <li><a href="modules/gestion_comida_vuelo/M06_ConsultarComidas.html"><i class="fa fa-eye"></i>Visualizar</a></li>
+                        </ul>
+                    </li>
+                    <!-- FIN DE MODULO DE COMIDA POR VUELO -->
+                    <!-- MODULO DE EXTRAVIO DE EQUIPAJE -->
+                    <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Equipaje</a></li>
+                    <!-- FIN DE MODULO DE EXTRAVIO DE EQUIPAJE -->
+                    <!-- MODULO DE AUTOMOVILES -->
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-car"></i> <span>Gestión de Automoviles</span> <span class="pull-right-container">
@@ -265,31 +312,23 @@
                             <li><a href="modules/gestion_automoviles/M08_VisualizarAutomoviles.html"><i class="fa fa-eye"></i>Visualizar</a></li>
                         </ul>
                     </li>
-                    <li class="treeview">
-                        <a href="/modules/default/default.html">
-                            <i class="fa fa-car"></i> <span>Pagina de referencia</span> <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="modules/default/default.html"><i class="fa fa-plus-square-o"></i>Crear</a></li>
-                        </ul>
-                    </li>
-                    <li id="gestionComida">
-                        <a href="#">
-                            <i class="fa fa-cutlery"></i> <span>Gestión de Comida</span> <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="modules/gestion_comida_vuelo/M06_AgregarEditarComida.cshtml"><i class="fa fa-plus-square-o"></i>Agregar Nuevo</a></li>
-                            <li><a href="modules/gestion_comida_vuelo/M06_AgregarPorVuelo=.html"><i class="fa fa-plus-square-o"></i>Agregar Vuelo</a></li>
-                            <li><a href="modules/gestion_comida_vuelo/M06_ConsultarComida=.html"><i class="fa fa-eye"></i>Visualizar</a></li>
-                        </ul>
-                    </li>
+                    <!-- FIN DE MODULO DE AUTOMOVILES -->
+                    <!-- MODULO DE HOTELES  -->
+                    <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Hoteles</a></li>
+                    <!-- FIN DE MODULO DE HOTELES -->
+                    <!-- MODULO DE OFERTAS Y PAQUETES -->
+                    <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Ofertas y Paquetes</a></li>
+                    <!-- FIN DE MODULO DE OFERTAS Y PAQUETES -->
+                    <!-- MODULO DE GESTION DE USUARIOS -->
+                    <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Usuarios</a></li>
+                    <!-- FIN DE MODULO DE GESTION DE USUARIOS -->
+                    <!-- MODULO DE GESTION DE ROLES -->
+                    <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Roles</a></li>
+                    <!-- FIN DE MODULO DE GESTION DE ROLES -->
+                    <!-- MODULO DE CRUCEROS -->
                     <li class="treeview">
                         <a href="modules/gestion_cruceros/M24_GestionCruceros.html">
-                            <i class="fa fa-ship"></i> <span>Cruceros</span> <span class="pull-right-container">
+                            <i class="fa fa-ship"></i> <span>Gestión de Cruceros</span> <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
@@ -297,17 +336,11 @@
                             <li><a href="modules/gestion_cruceros/M24_GestionCruceros.html"><i class="fa fa-plus-square-o"></i>Gestionar</a></li>
                         </ul>
                     </li>
-                    <li class="treeview">
-                        <a href="modules/gestion_comida_vuelo/M06_AgregarEditarComida.html">
-                            <i class="fa fa-ship"></i> <span></span> <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="modules/gestion_cruceros/M24_GestionCruceros.html"><i class="fa fa-plus-square-o"></i>Gestionar</a></li>
-                        </ul>
-                    </li>
+                    <!-- FIN DE MODULO DE CRUCEROS -->
+                    <!-- PAGINA DE REFERENCIA -->
                     <!-- MODULO DE AVIONES -->
+                    <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestión De Aviones</a></li>
+                   
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-plane"></i> <span>Gestión de Aviones</span> <span class="pull-right-container">
@@ -322,28 +355,52 @@
                         </ul>
                     </li>
                     <!-- FIN MODULO DE AVIONES -->
-                    <!-- MODULO DE BOLETOS AEREOS Y CHECK-IN -->
+
+                    <!-- MODULO DE HOTELES -->
                     <li class="treeview">
                         <a href="#">
-                            <i class="fa fa-files-o"></i>
-                            <span>Vuelos</span>
-                            <span class="pull-right-container">
+                            <i class="fa fa-circle"></i> <span>Gestión de Hoteles</span> <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="modules/gestion_venta_boleto/crearboletosvuelos.html"><i class="fa fa-circle-o"></i>Crear boleto</a></li>
-                            <li><a href="modules/gestion_venta_boleto/consultarboleto.html"><i class="fa fa-circle-o"></i>Consultar boleto</a></li>
-                            <li><a href="modules/gestion_venta_boleto/modificarboleto.html"><i class="fa fa-circle-o"></i>Modificar boleto</a></li>
-                            <li><a href="modules/gestion_venta_boleto/eliminarboleto.html"><i class="fa fa-circle-o"></i>Eliminar boleto</a></li>
+                            <li id="crearhotel"><a href="#"><i class="fa fa-plus-square-o"></i>Crear Hotel</a></li>
+                            <li id="modificarhotel"><a href="#"><i class="fa fa-plus-square-o"></i>Modificar Hotel</a></li>
+                            <li id="desactivarhotel"><a href="#"><i class="fa fa-plus-square-o"></i>Desactivar Hotel</a></li>
+                            
                         </ul>
                     </li>
+                  
+                    <!-- FIN MODULO DE BOLETOS AEREOS Y CHECK-IN -->
+
+                    <!-- MODULO DE BOLETOS AEREOS Y CHECK-IN -->
+                    <li class="treeview">
+                        <a href="/modules/default/default.html">
+                            <i class="fa fa-car"></i> <span>Pagina de referencia</span> <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="modules/default/default.html"><i class="fa fa-plus-square-o"></i>Crear</a></li>
+                        </ul>
+                    </li>
+                    <!-- FIN PAGINA DE REFERENCIA -->                   
 
                     <li><a href="modules/gestion_venta_boleto/checkin.html"><i class="fa fa-book"></i> <span>Check in</span></a></li>
                     <!-- FIN MODULO DE BOLETOS AEREOS Y CHECK-IN -->
-
-
-
-
+                    <!-- MODULO 12 : GESTION DE USUARIOS -->
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-user"></i> <span>Gestión de Usuarios</span> <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="gestionUsuarios"><a href="/gestion_usuarios/M12_index"><i class="fa fa-plus-square-o"></i>Consultar</a></li>
+                            <li id="agregarUsuarios"><a href="/gestion_usuarios/M12_AgregarUsuario"><i class="fa fa-plus-square-o"></i>Agregar</a></li>
+                        </ul>
+                    </li>
+                    <!-- FIN MODULO 12 -->
                 </ul>
             </section>
             <!-- /.sidebar -->
