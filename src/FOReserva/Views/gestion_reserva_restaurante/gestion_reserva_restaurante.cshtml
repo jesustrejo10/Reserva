@@ -1,0 +1,60 @@
+﻿<div class="heading-title">
+    <h3><span>Restaurante</span></h3>
+</div>
+
+<fieldset>
+    <!-- required [php action request] -->
+    <input type="hidden" name="action" value="contact_send" />
+    <div class="row">
+
+        <div class="col-lg-12">
+            <center> ¡Reserva en los mejores restaurantes de tu ciudad!</center>
+        </div>
+    </div>
+    @using (Html.BeginForm("restaurant_resultados", "gestion_reserva_restaurante", FormMethod.Get))
+    {
+        <div class="row">
+            <div class="col-lg-12">
+                <center>
+                    <div class="input-group top_separate" style="width:100%;">
+                        <div class="form-group-md">
+                            <select name="search_val" class="form-control rest_sel" data-selected="" style="width:20%;">
+                                <option value="0">Bucar por:</option>
+                                <option value="1">Ciudad</option>
+                                <option value="2">Restaurante</option>
+                            </select>
+                            <input type="text" id="search_txt" name="search_text" class="form-control rest_inp" placeholder="¿Dónde quieres comer?" style="width:80%;" required>
+                        </div>
+                    </div>
+                </center>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-12">
+                
+                @*<button type="button"  class="btn btn-primary">Buscar</button>*@
+                <input type="submit" id="buscar_restaurante" value=" buscar" class="btn btn-primary">
+</div>
+        </div>
+    }
+</fieldset>
+
+<!--<script>
+        $("#buscar_restaurante").click(function (e) {
+        e.preventDefault();
+        var form = $("#formBuscarRestaurante");
+        $.ajax({
+            url: "gestion_reserva_restaurante/buscar_restaurante",
+            data: form.serialize(),
+            type: 'POST',
+            success: function (data) {
+
+                //alert("Buscando...");
+                /*$('#formBuscarVuelos')[0].reset();*/
+            }
+        });
+    });
+</script>            -->
+    
+
+@*</form>*@

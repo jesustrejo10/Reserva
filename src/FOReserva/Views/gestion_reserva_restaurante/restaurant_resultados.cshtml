@@ -1,0 +1,31 @@
+﻿@model List<FOReserva.Models.Restaurantes.CRestaurantModel>
+
+@{
+    ViewBag.Title = "Resultados Restaurantes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- FEATURED GRID -->
+
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 col-sm-4">
+                    <div class="price-clean">
+                      
+                       
+                        <div class="image-restaurant-search" style="height: 150px;  background-image: url('../Images/restaurant_generic.jpg'); background-repeat: no-repeat;background-size: cover; padding-top: 50px;">
+                            <h3>@item.Name</h3>
+                        </div>
+                        <hr />
+                        <p>@item.Addres <b>Madrid</b>.</p>
+                        <hr />
+                        <button class="btn btn-3d btn-success" value="@item.Id">Reservar</button>
+                        <!--<a href="detail_restaurant_reservation.html" class="btn btn-3d btn-primary">Reservar</a>-->
+                    </div>
+                </div>
+            }
+
+        </div>
+
+ 
