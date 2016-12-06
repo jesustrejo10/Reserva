@@ -6,6 +6,7 @@
     le pasara la informacion mediante un POST-->
 @using (Html.BeginForm("viewVehicle", "gestion_automoviles", null, FormMethod.Post, new { @id = "viewVehicle", @class = "form-horizontal" }))
 {
+    
     <div class="row">
         <div class="col-md-12">
             <div class="box box-success">
@@ -15,12 +16,13 @@
                     </div>
                 </div>
                 <!-- /.box-header -->
+                        
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <label for="placa">Placa del vehiculo</label>
-                                @Html.TextBoxFor(m => m._matricula, null, new { @class = "form-control", @placeholder = "Placa", @id = "vehi_placa", @disabled = "disabled", @readonly = "readonly" })
+                                @Html.TextBoxFor(m => m._matricula, null, new { @class = "form-control", @placeholder = "", @id = "vehi_placa", @disabled = "disabled", @readonly = "readonly" })
                             </div>
                             <div class="col-xs-6">
                                 <label for="modelo">Fabricante</label>

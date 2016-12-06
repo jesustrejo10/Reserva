@@ -455,6 +455,7 @@
     <Content Include="Views\gestion_automoviles\css\style_module.css" />
     <Content Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx" />
     <Content Include="Views\gestion_automoviles\GestionDeAutomoviles.html" />
+    <Content Include="Views\gestion_automoviles\js\visualizarAutomovil.js" />
     <Content Include="Views\gestion_automoviles\js\module.js" />
     <Content Include="Views\gestion_automoviles\M08_AgregarAutomovil.html" />
     <Content Include="Views\gestion_automoviles\M08_ModificarAutomovil.html" />

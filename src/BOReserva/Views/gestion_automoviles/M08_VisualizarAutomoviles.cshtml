@@ -34,7 +34,7 @@
                                 <td>@item._transmision / @item._color</td>
                                 <td>@disponibilidad / @item._precioalquiler USD</td>
                                 <td>
-                                    <a href="#" class="bolas" data-id="55"><i class="fa fa-check"></i></a>
+                                    <a href="#"> <i class="fa fa-check clasedeprueba"></i></a>
                                     <a href="#"><i class="fa fa-times"></i></a>
                                     <a id="m08_VisualizarAutomovil" href="#"><i class="fa fa-eye"></i></a>
                                     <a id="m08_ModificarAutomovil" href="#"><i class="fa fa-gear"></i></a>
@@ -42,8 +42,8 @@
                             </tr>
                         }
 
-                        <tr id="55">
-                            <td>CANGURO / 3</td>
+                        @*<tr>
+                            <td>Mazda / 3</td>
                             <td>Mazda / 3</td>
                             <td>
                                 Sedan / 5
@@ -345,7 +345,7 @@
                                 <a href="M08_VisualizarAutomovil.html"><i class="fa fa-eye"></i></a>
                                 <a href="M08_ModificarAutomovil.html"><i class="fa fa-gear"></i></a>
                             </td>
-                        </tr>
+                        </tr>*@
 
                     
                      
@@ -438,12 +438,35 @@
 
     <script language="javascript" type="text/javascript">
         $(document).ready(function () {
-            e.preventDefault();
+            //e.preventDefault();
             alert("entrando aca");
-            var table = $('#example1').DataTable();
+            $(".clasedeprueba").click(function () {
+                var identificador = $(this).parent().parent().parent().attr("id");
+                alert('Item selected'+identificador);
+                jQuery.ajax({
+                    type: "GET",
+                    url: "/gestion_automoviles/M08_VisualizarAutomovil",
+                    data: { matricula: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+                }).done(function (data) {
+                    //$("#sdssss").append(data);
 
-            table.on("click", ".bolas", function () {
-                alert("canguro");
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                }).fail(function () {
+                    alert("esta vaina se jodio")
+                });
+
+                        
+            });
+
+            /*
+            $(".clasedeprueba").click(function(){
+                alert("entrando aca por segunda vez");
+            }*/
+        //    var table = $('#example1').DataTable();
+
+          //  table.on("click", ".bolas", function () {
+            //    alert("canguro");
                 //var data = $(this).data('id');
                 //alert(data);
                 /*
@@ -457,7 +480,7 @@
                     data: { valor: modelo }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
                 }).done(function (data) { $("#sdssss").append(data); }).fail(function () { });
                 */
-            })
+            //})
 
         });
     </script>
