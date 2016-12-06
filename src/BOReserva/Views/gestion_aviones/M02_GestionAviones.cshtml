@@ -200,6 +200,7 @@
     <div class="col-md-4">
         <div class="box box-primary collapsed-box">
             <div class="box-header with-border">
+       <!------- INICIO CONSULTAR ESTADISTICAS -------->
                 <h1 class="box-title"> Consultar Estadísticas</h1>
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse">
@@ -209,13 +210,32 @@
             </div>
             <div class="box-body">
                 <div class="col-md-12">
+                @using (Html.BeginForm("consultarEstadisticasAvion", "gestion_aviones", null, FormMethod.Post, new { @id = "formconsultarEstadisticasAvion", @class = "form-horizontal" }))
+                {
                     <div class="col-xs-8">
-                        <label for="matriculaAvionConsultar">Matrícula del Avión:</label>
-                        <input type="text" class="form-control" id="matriculaAvionConsultar">
+                        <label for="matriculaAvionConsultarEstadistica">Matrícula del Avión:</label>
+                        @Html.TextBoxFor(m => m._matriculaConsultarEstadisticaAvion, null, new { @class = "form-control", @placeholder = "Matricula", @id = "matriculaAvionConsultarEstadistica" })
                     </div>
                     <div class="col-xs-4">
-                        <button type="button" class="btn btn-success" style="margin-top: 25px;">Consultar</button>
+
+                        <button id="consultarEstadistica" type="button" class="btn btn-success" style="margin-top: 25px;">Consultar</button>
                     </div>
+                    <script>
+                        $("#consultarEstadistica").click(function (e) {
+                        e.preventDefault();
+                        var form = $("#formconsultarEstadisticasAvion");
+                        $.ajax({
+                            url: "gestion_aviones/consultarEstadisticasAvion",
+                            data: form.serialize(),
+                            type: 'POST',
+                            success: function (data) {
+                                alert("Se busco");
+             
+                            }
+                          });
+                       });
+                    </script>
+                }   
                     <div class="col-xs-12">
                         <label for="kmsRecorridos">Kilometros Recorridos:</label>
                         <input type="number" class="form-control" id="kmsRecorridos" disabled>
@@ -346,3 +366,5 @@
 </div>
 <!-- /.row -->
 <!-------------------- FIN DE LA SECCION DE FALLOS -------------->
+
+

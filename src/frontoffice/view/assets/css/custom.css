@@ -1,0 +1,40 @@
+/*************************** START -  ANDREA CAMACHO ******************************************/
+
+@media (max-width: 768px) {
+    .rest_sel {
+        width: 100% !important;
+    }
+
+    .rest_inp {
+        width: 100% !important;
+    }
+}
+/*************************** END - ANDREA CAMACHO ******************************************/
+/*************************** START -  ALEXANDER PEREZ ******************************************/
+.detalle_reserva_restaurant i{
+	float:left;
+	margin-right: 15px;
+	margin-top: 5px;
+}
+
+.detalle_reserva_restaurant p span{
+	font-weight:bold;
+}
+
+#tablas-reservas-restaurant{
+	text-align: center;
+}
+
+#tablas-reservas-restaurant thead{
+	background: whitesmoke;
+}
+
+#tablas-reservas-restaurant thead tr th{
+	text-align: center;
+}
+
+#tablas-reservas-restaurant tbody td a i{
+	font-size: 25px;
+    margin-right: 5px;
+}
+/*************************** END - ALEXANDER PEREZ ***************************************/
