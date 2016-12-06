@@ -269,7 +269,8 @@ jQuery(document).ready(function () {
                 success: function (data, textStatus, jqXHR) {
 
                     $("#contenedor").empty();
-                    $("#contenedor").html('Cargando').html(data);
+                    $("#contenedor").html(data);
+        
 
                 },
                 error: function (jqXHR, textStatus, errorThrown) {

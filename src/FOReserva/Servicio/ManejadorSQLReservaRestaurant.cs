@@ -30,7 +30,7 @@ namespace FOReserva.Servicio
                     lista_rest.Add(resta);
                 }
             }
-            CloseConextion();
+            CloseConnection();
             return lista_rest;
         }
 
@@ -54,7 +54,7 @@ namespace FOReserva.Servicio
                     lista_rest.Add(resta);
                 }
             }
-            CloseConextion();
+            CloseConnection();
             return lista_rest;
         }
 
@@ -66,7 +66,7 @@ namespace FOReserva.Servicio
             VALUES('"+reserva.GetType()+@"','"+reserva.Name+@"',
             convert(date, '2016-12-20'), '"+reserva.Time+"',"+reserva.Count+","+
             @"1, 4)";
-            CloseConextion();
+            CloseConnection();
         }
     }
 }
