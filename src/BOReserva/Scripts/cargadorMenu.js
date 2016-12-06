@@ -84,6 +84,7 @@
                 data: data,
                 success: function (data, textStatus, jqXHR) {
 
+<<<<<<< HEAD
                     $("#contenido").empty();
                     $("#contenido").append(data);
                 },
@@ -109,11 +110,35 @@
                     $("#contenido").empty();
                     $("#contenido").append(data);
                 },
+=======
+    $("#m02_agregaravion").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_aviones/M02_AgregarAvion';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+>>>>>>> 77d42736ee3d253cea50d2926a09920b376d2bf7
                 error: function (jqXHR, textStatus, errorThrown) {
                     alert(errorThrown);
                 }
             });
     });
+<<<<<<< HEAD
    
     //FIN M06_Gestion_Comida
+=======
+
+>>>>>>> 77d42736ee3d253cea50d2926a09920b376d2bf7
 });
+
+

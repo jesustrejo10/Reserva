@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Title = "reservar_restaurant";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- FEATURED GRID -->
+
+
+<div class="row">
+    <div class="panel panel-default col-sm-5">
+        <div class="panel-heading">
+            <h2 class="panel-title">Reservar restaurante</h2>
+        </div>
+        <div class="panel-body center-block">
+
+            <form class="validate  " action="php/contact.php" method="post" enctype="multipart/form-data" data-success="Sent! Thank you!" data-toastr-position="top-right">
+                <div class="form-group">
+
+                    <label>A nombre de: </label>
+                    <input type="text" name="" value="" class="form-control" data-format="" data-lang="en" data-rtl="false" placeholder="Ingrese su nombre">
+                </div>
+                <div class="form-group">
+
+                    <label>Fecha: </label>
+                    <input type="text" name="contact[start_date]" value="" class="form-control datepicker required" data-format="yyyy-mm-dd" data-lang="en" data-rtl="false" placeholder="Selecciona la fecha">
+                </div>
+                <div class="form-group">
+                    <label>Hora:</label>
+                    <select name="contact[position]" class="form-control pointer required">
+                        <option value="" selected>Selecciona la hora:</option>
+                        <option value="">7:00</option>
+                        <option value="">8:00</option>
+                        <option value="">9:00</option>
+                        <option value="">10:00</option>
+                        <option value="">11:00</option>
+                        <option value="">12:00</option>
+                        <option value="">13:00</option>
+                        <option value="">14:00</option>
+                        <option value="">15:00</option>
+                        <option value="">16:00</option>
+                        <option value="">17:00</option>
+                        <option value="">18:00</option>
+                        <option value="">19:00</option>
+                        <option value="">20:00</option>
+                        <option value="">21:00</option>
+                        <option value="">22:00</option>
+                        <option value="">23:00</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Numero de personas:</label>
+                    <input type="text" value="1" min="1" max="1000" class="form-control stepper">
+                </div>
+                <div class="text-center">
+                    <a href="confirm_restaurantes.html" class="btn  btn-primary">Reservar</a>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="col-sm-7">
+        <div class="relative">
+            <div style="height: 443.6px;background-image: url(&quot;assets/images/demo/restaurant/foto.jpg&quot;);background-repeat: no-repeat;background-size: cover;">
+                <div class="absolute text-left">
+                    <h2>  <b>Paradís Madrid</b>  </h2>
+                    <p style="color: #fff;">Madrid</p>
+                    <p style="color: #fff;" class="font-lato margin-top-30 size-16 hidden-sm hidden-xs"><b>Dirección: </b> Marqués de Cubas, 14 Centro 28014 Madrid.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">Descripción</h2>
+        </div>
+        <div class="panel-body">
+            El restaurante Paradís Madrid se encuentra en pleno centro de la capital y por tanto goza de una excelente ubicación. Es un restaurante donde podrás encontrar sabores mediterráneos, frescura, origen, color, energía, aromas y diseño. Paradis Madrid lleva 20 años manteniendo su estilo propio.
+
+            Entre las especialidades gastronómicas del restaurante Paradís Madrid se encuentran el bonito, el bacalao o el guiso de setas con cebollas tempranas. También es muy recomendable el arroz caldoso de pescadores y los deliciosos postres.
+
+            Paradís Madrid es sin duda un lugar muy confortable donde disfrutar de un ambiente tranquilo y relajado junto a la familia o los amigos. El local cuenta con diferentes espacios donde poder disfrutar de la comida o la cena a tu gusto.
+        </div>
+    </div>
+</div>
+
+<!-- /FEATURED GRID -->
