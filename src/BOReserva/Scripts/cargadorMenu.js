@@ -24,7 +24,7 @@
 
     $("#m08AgregarAutomovil").click(function (e) {
         alert("hola jeffrey");
-        
+
         e.preventDefault();
         var url = '/gestion_automoviles/M08_AgregarAutomovil';
         var method = 'GET';
@@ -44,14 +44,12 @@
                     alert(errorThrown);
                 }
             });
-    
+
     });
 
-    //INICIO M06_Gestion_Comida
-    $("#gestionComida").click(function (e) {
-        //M06_AgregarComida
+    $("#crearhotel").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_comida_vuelo/M06_AgregarComida';
+        var url = '/gestion_hoteles/M09_GestionHoteles_Crear';
         var method = 'GET';
         var data = '';
 
@@ -70,10 +68,10 @@
                 }
             });
     });
-    $("#editarComida").click(function (e) {
-        //M06_EditarComida
+
+    $("#modificarhotel").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_comida_vuelo/M06_EditarComida';
+        var url = '/gestion_hoteles/M09_GestionHoteles_ModificarHotel';
         var method = 'GET';
         var data = '';
 
@@ -83,8 +81,6 @@
                 type: method,
                 data: data,
                 success: function (data, textStatus, jqXHR) {
-
-<<<<<<< HEAD
                     $("#contenido").empty();
                     $("#contenido").append(data);
                 },
@@ -93,52 +89,55 @@
                 }
             });
     });
-    $("#gestionComidaVuelo").click(function (e) {
-        //M06_AgregarPorVuelo
+
+    $("#desactivarhotel").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_comida_vuelo/M06_AgregarPorVuelo';
-        var method = 'GET';
-        var data = '';
+        var url = '/gestion_hoteles/M09_GestionHoteles_Desactivar';
 
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
+        $("#gestionComida").click(function (e) {
+            e.preventDefault();
+            var url = '/gestion_comida_vuelo/M06_AgregarEditarComida';
+            refs / remotes / origin / Develop
+            var method = 'GET';
+            var data = '';
 
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-=======
-    $("#m02_agregaravion").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_aviones/M02_AgregarAvion';
-        var method = 'GET';
-        var data = '';
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
 
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+        });
 
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
->>>>>>> 77d42736ee3d253cea50d2926a09920b376d2bf7
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
+        $("#m02_agregaravion").click(function (e) {
+            e.preventDefault();
+            var url = '/gestion_aviones/M02_AgregarAvion';
+            var method = 'GET';
+            var data = '';
+
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+        });
+
     });
-<<<<<<< HEAD
-   
-    //FIN M06_Gestion_Comida
-=======
-
->>>>>>> 77d42736ee3d253cea50d2926a09920b376d2bf7
 });
-
-
