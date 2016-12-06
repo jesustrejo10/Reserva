@@ -20,6 +20,20 @@ namespace FOReserva.Controllers
         }
 
         [HttpGet]
+        public ActionResult buscar_hoteles()
+        {
+            //var model = Cvista_ReservaHabitacion.ReservasDeUsuario(usu_id: 1);
+            return PartialView();
+        }
+
+        [HttpGet]
+        public ActionResult hoteles_con_habitaciones()
+        {
+            var model = Cvista_ReservaHabitacion.ReservasDeUsuario(usu_id: 1);
+            return PartialView(model);
+        }
+
+        [HttpGet]
         public ActionResult detalle_reserva(Cvista_ReservaHabitacion model)
         {
             model.CargarDesdeDB();

@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Diagnostics;
+using FOReserva.Models.Usuarios;
+using FOReserva.Models.Hoteles;
 
 namespace FOReserva.Models.ReservaHabitacion
 {
-    using Usuario = TMPUsuario;
     using Errores;
-    using Hotel = TMPHotel;
+    using Usuario = Cvista_Usuario;
+    using Hotel = Cvista_Hotel;
 
     public class Cvista_ReservaHabitacion
     {

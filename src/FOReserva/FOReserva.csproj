@@ -3031,6 +3031,7 @@
     <Content Include="Views\gestion_reserva_habitaciones\editar_reserva.cshtml" />
     <Content Include="Views\gestion_reserva_habitaciones\mis_reservas.cshtml" />
     <Content Include="Views\Shared\_MenuPerfil.cshtml" />
+    <Content Include="Views\gestion_reserva_habitaciones\buscar_hoteles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

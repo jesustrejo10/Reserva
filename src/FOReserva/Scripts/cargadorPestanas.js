@@ -25,7 +25,7 @@ function cargarContenido(seccion, tipo, url, data, boton) {
                     mostrarContenedor(1)
                 } else if (seccion == '#CI') {
                     mostrarContenedor(3)
-                } else {
+                } else if (seccion == '#CP') {
                     mostrarContenedor(2)
                 }
 

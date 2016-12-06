@@ -4,12 +4,12 @@
 @if (Model != null)
 {
 
-    <link href="@Url.Content("~/Content/assets/css/layout-datatables.css")" rel="stylesheet" type="text/css" />    
-        
-    
+    <link href="@Url.Content("~/Content/assets/css/layout-datatables.css")" rel="stylesheet" type="text/css" />
+
+
     <div>
         <div class="col-xs-12">
-            <h2 class="color-azul">Historial de reservas de Habitacion.</h2>
+            <h2 class="color-azul">Mis Reservas</h2>
         </div>
     </div>
     <!-- HTML DATATABLES -->
@@ -17,11 +17,8 @@
         <thead>
             <tr>
                 <th>Hotel</th>
-                <th>Habitacion</th>
-                <th>Estado</th>
-                <th>Fecha de Reservacion</th>
-                <th>Cantidad de dias</th>
-                <th>Fecha de Deshalojo</th>
+                <th>Email de Contacto</th>
+                <th>Habitacion Disponible</th>
                 <th></th>
             </tr>
         </thead>
@@ -39,15 +36,12 @@
                             @reserva.Estado.ToString()
                         </span>
                     </td>
-                    <td>@reserva.FechaLlegada.ToShortDateString()</td>
-                    <td>@reserva.CantidadDias</td>
-                    <td>@((reserva.FechaPartida != null) ? ((DateTime)reserva.FechaPartida).ToShortDateString() : "-")</td>
-                    <td><button class="btn btn-info" type="button" onclick="cargarContenido('#CI', 'get', '/gestion_reserva_habitaciones/detalle_reserva', @Newtonsoft.Json.JsonConvert.SerializeObject(reserva))"> Detalle </button></td>
+                    <td><button class="btn btn-info" type="button" onclick="cargarContenido('#CI', 'get', '/gestion_reserva_habitaciones/detalle_reserva', @Newtonsoft.Json.JsonConvert.SerializeObject(reserva))"> Reservar </button></td>
                 </tr>
             }
         </tbody>
     </table>
-            
+
     <!-- JS DATATABLES -->
     <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/jquery.dataTables.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/dataTables.tableTools.min.js")"></script>
@@ -90,7 +84,7 @@
 
                 "tableTools": {
                     "sSwfPath": '@Url.Content("~/Content/assets/plugins/datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf")',
-                    
+
                     "aButtons": [{
                         "sExtends": "pdf",
                         "sButtonText": "PDF"
