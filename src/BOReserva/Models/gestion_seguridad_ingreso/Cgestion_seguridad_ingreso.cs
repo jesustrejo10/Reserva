@@ -23,7 +23,7 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
                 return true;
             }
             else
-                throw new Cvalidar_texto_Exception("Usuario o contraseña incorrecto");
+                throw new Cvalidar_usuario_Exception("Usuario o contraseña incorrecto");
         }
 
         public String correoCampoTexto

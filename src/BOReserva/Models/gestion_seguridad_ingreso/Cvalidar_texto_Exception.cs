@@ -5,9 +5,9 @@ using System.Web;
 
 namespace BOReserva.Models.gestion_seguridad_ingreso
 {
-    public class Cvalidar_texto_Exception : Exception
+    public class Cvalidar_usuario_Exception : Exception
     {
-        public Cvalidar_texto_Exception(String Mensaje) : base(Mensaje) { }
+        public Cvalidar_usuario_Exception(String Mensaje) : base(Mensaje) { }
 
     }
 }
