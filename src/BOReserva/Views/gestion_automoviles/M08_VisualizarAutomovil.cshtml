@@ -67,7 +67,7 @@
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <label for="fecharegistro">Fecha de registro</label>
-                                @Html.TextBoxFor(m => m._fecharegistro, null, new { @type = "date", @class = "form-control", @placeholder = "Kilometraje", @id = "vehi_registro", @disabled = "disabled", @readonly = "readonly" })
+                                @Html.TextBoxFor(m => m._fecharegistro, null, new { @class = "form-control", @placeholder = "Kilometraje", @id = "vehi_registro", @disabled = "disabled", @readonly = "readonly" })
                             </div>
                             <div class="col-xs-6">
                                 <label for="">Pais</label>
@@ -77,32 +77,28 @@
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
-                                <label for="estado">Estado</label>
-                                @Html.TextBoxFor(m => m._estado, null, new { @class = "form-control", @placeholder = "Estado", @id = "vehi_estado", @disabled = "disabled", @readonly = "readonly" })
-                            </div>
-                            <div class="col-xs-6">
                                 <label for="Ciudad">Ciudad</label>
                                 @Html.TextBoxFor(m => m._ciudad, null, new { @class = "form-control", @placeholder = "Ciudad", @id = "vehi_ciudad", @disabled = "disabled", @readonly = "readonly" })
                             </div>
-                        </div>
-                        <div>&nbsp;</div>
-                        <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <label for="transmision">Transmision:</label>
 
                                 @Html.TextBoxFor(m => m._transmision, null, new { @class = "form-control", @placeholder = "Ciudad", @id = "vehi_transmision", @disabled = "disabled", @readonly = "readonly" })
                             </div>
-                            <div class="col-xs-6">
-                                <label for="preciocompra">Precio de compra ($):</label>
-                                @Html.TextBoxFor(m => m._preciocompra, null, new { @type = "number", @class = "form-control", @placeholder = "Dolares", @id = "vehi_compra", @disabled = "disabled", @readonly = "readonly" })
-                            </div>
                         </div>
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
+                                <label for="preciocompra">Precio de compra ($):</label>
+                                @Html.TextBoxFor(m => m._preciocompra, null, new { @type = "number", @class = "form-control", @placeholder = "Dolares", @id = "vehi_compra", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+                            <div class="col-xs-6">
                                 <label for="tarifa">Tarifa diaria ($):</label>
                                 @Html.TextBoxFor(m => m._precioalquiler, null, new { @type = "number", @class = "form-control", @placeholder = "Dolares", @id = "vehi_tarifa", @disabled = "disabled", @readonly = "readonly" })
                             </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <label for="penalidad">Penalidad diaria ($):</label>
                                 @Html.TextBoxFor(m => m._penalidaddiaria, null, new { @type = "number", @class = "form-control", @placeholder = "Dolares", @id = "vehi_penalidad", @disabled = "disabled", @readonly = "readonly" })
