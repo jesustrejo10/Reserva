@@ -256,8 +256,20 @@
 
                 <ul class="sidebar-menu">
                     <!-- MODULO DE AVIONES -->
-                    <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Aviones</a></li>
-                    <!-- FIN MODULO DE AVIONES -->
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-plane"></i> <span>Gestión de Aviones</span> <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="m02_agregaravion"><a href="#"> Agregar </a></li>
+                            <li id="m02_editaravion"><a href="#"> Editar </a></li>
+                            <li id="m02_consultaravion"><a href="#"> Consultar </a></li>
+                            <li id="m02_modificaravion"><a href="#"> Modificar </a></li>
+                        </ul>
+                    </li>
+                    <!--FIN MODULO DE AVIONES -->
                     <!-- MODULO DE RUTAS COMERCIALES -->
                     <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Rutas</a></li>
                     <!-- FIN MODULO DE RUTAS COMERCIALES -->
@@ -320,7 +332,17 @@
                     <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Ofertas y Paquetes</a></li>
                     <!-- FIN DE MODULO DE OFERTAS Y PAQUETES -->
                     <!-- MODULO DE GESTION DE USUARIOS -->
-                    <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Usuarios</a></li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-user"></i> <span>Gestión de Usuarios</span> <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="gestionUsuarios"><a href="/gestion_usuarios/M12_index"><i class="fa fa-plus-square-o"></i>Consultar</a></li>
+                            <li id="agregarUsuarios"><a href="/gestion_usuarios/M12_AgregarUsuario"><i class="fa fa-plus-square-o"></i>Agregar</a></li>
+                        </ul>
+                    </li>
                     <!-- FIN DE MODULO DE GESTION DE USUARIOS -->
                     <!-- MODULO DE GESTION DE ROLES -->
                     <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Roles</a></li>
@@ -336,27 +358,8 @@
                             <li><a href="modules/gestion_cruceros/M24_GestionCruceros.html"><i class="fa fa-plus-square-o"></i>Gestionar</a></li>
                         </ul>
                     </li>
-<<<<<<< HEAD
                     <!-- FIN DE MODULO DE CRUCEROS -->
                     <!-- PAGINA DE REFERENCIA -->
-=======
-                    <!-- MODULO DE AVIONES -->
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-plane"></i> <span>Gestión de Aviones</span> <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li id="m02_agregaravion"><a href="#"> Agregar </a></li>
-                            <li id="m02_editaravion"><a href="#"> Editar </a></li>
-                            <li id="m02_consultaravion"><a href="#"> Consultar </a></li>
-                            <li id="m02_modificaravion"><a href="#"> Modificar </a></li>
-                        </ul>
-                    </li>
-                    <!-- FIN MODULO DE AVIONES -->
-                    <!-- MODULO DE BOLETOS AEREOS Y CHECK-IN -->
->>>>>>> 77d42736ee3d253cea50d2926a09920b376d2bf7
                     <li class="treeview">
                         <a href="/modules/default/default.html">
                             <i class="fa fa-car"></i> <span>Pagina de referencia</span> <span class="pull-right-container">
@@ -367,29 +370,7 @@
                             <li><a href="modules/default/default.html"><i class="fa fa-plus-square-o"></i>Crear</a></li>
                         </ul>
                     </li>
-<<<<<<< HEAD
                     <!-- FIN PAGINA DE REFERENCIA -->                   
-=======
-
-                    <li><a href="modules/gestion_venta_boleto/checkin.html"><i class="fa fa-book"></i> <span>Check in</span></a></li>
-                    <!-- FIN MODULO DE BOLETOS AEREOS Y CHECK-IN -->
-                    <!-- MODULO 12 : GESTION DE USUARIOS -->
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-user"></i> <span>Gestión de Usuarios</span> <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li id="gestionUsuarios"><a href="/gestion_usuarios/M12_index"><i class="fa fa-plus-square-o"></i>Consultar</a></li>
-                            <li id="agregarUsuarios"><a href="/gestion_usuarios/M12_AgregarUsuario"><i class="fa fa-plus-square-o"></i>Agregar</a></li>
-                        </ul>
-                    </li>
-                    <!-- FIN MODULO 12 -->
-
-
-
->>>>>>> 77d42736ee3d253cea50d2926a09920b376d2bf7
                 </ul>
             </section>
             <!-- /.sidebar -->
