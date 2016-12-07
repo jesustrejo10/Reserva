@@ -7,8 +7,8 @@ namespace BOReserva.Models.gestion_restaurantes
 {
     public class CRestauranteModelo
     {
-        public int _id { get; set; }
-        public int _idLugar { get; set; }
+        public int _id { get; set; } = -1;
+        public int _idLugar { get; set; } = -1;
         public string _nombre { get; set; }
         public string _tipoComida { get; set; }
         public string _direccion { get; set; }

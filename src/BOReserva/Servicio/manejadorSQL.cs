@@ -111,19 +111,24 @@ namespace BOReserva.Servicio
                 //uso el SqlCommand para realizar los querys
                 SqlCommand query = conexion.CreateCommand();
                 //ingreso la orden del query
-                query.CommandText = "INSERT INTO Restaurante VALUES ('" + model._nombre + "','" + model._direccion + "',"
-                    + model._descripcion + " , " + model._horarioApertura + "," + model._horarioCierre + ");";
+                query.CommandText = "INSERT INTO Restaurante VALUES ('" + model._nombre + "', '" + model._direccion + "', '"
+                    + model._descripcion + "' , '" + model._horarioApertura + "' ,'" + model._horarioCierre + "', " 
+                    + model._idLugar.ToString() + ")";
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior
+                SqlDataReader lector = query.ExecuteReader();
                 //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
                 conexion.Close();
                 return true;
             }
             catch (SqlException e)
             {
-                return false;
+                throw e;
+                //return false;
             }
             catch (Exception e)
             {
-                return false;
+                throw e;
+                //return false;
             }
         }
 
@@ -140,7 +145,7 @@ namespace BOReserva.Servicio
                 //uso el SqlCommand para realizar los querys
                 SqlCommand query = conexion.CreateCommand();
                 //ingreso la orden del query
-                query.CommandText = "SELECT * FROM Restaurante WHERE id = " + id.ToString() ;
+                query.CommandText = "SELECT * FROM Restaurante WHERE rst_id = " + id.ToString() ;
                 //creo un lector sql para la respuesta de la ejecucion del comando anterior               
                 SqlDataReader lector = query.ExecuteReader();
                 //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
@@ -165,11 +170,13 @@ namespace BOReserva.Servicio
             }
             catch (SqlException e)
             {
-                return null;
+                throw e;
+                //return null;
             }
             catch (Exception e)
             {
-                return null;
+                throw e;
+                //return null;
             }
 
         }
@@ -213,24 +220,79 @@ namespace BOReserva.Servicio
             }
             catch (SqlException e)
             {
-                return null;
+                throw e;
+                //return null;
             }
             catch (Exception e)
             {
-                return null;
+                throw e;
+                //return null;
             }
         }
 
         //Método para la modificación de un restaurante.
         public Boolean modificarRestaurante(CRestauranteModelo model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                //uso el SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "UPDATE Restaurante SET rst_nombre = '" + model._nombre + "', " +
+                    "rst_direccion = '" + model._direccion + "', " + "rst_descripcion = '" + model._descripcion + "', " +
+                    "rst_hora_apertura = '" + model._horarioApertura + "', " + "rst_hora_cierre = '" + model._horarioCierre +
+                    "WHERE rst_id = " + model._id.ToString();
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior
+                SqlDataReader lector = query.ExecuteReader();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                throw e;
+                //return false;
+            }
+            catch (Exception e)
+            {
+                throw e;
+                //return false;
+            }
         }
 
         //Método para la eliminación de un restaurante.
         public Boolean eliminarRestaurante(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                //uso el SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "DELETE FROM Restaurante WHERE rst_id = " + id.ToString();
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior
+                SqlDataReader lector = query.ExecuteReader();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                throw e;
+                //return false;
+            }
+            catch (Exception e)
+            {
+                throw e;
+                //return false;
+            }
         }
 
         /* FIN DE FUNCIONES PARA MODULO 10 BO (RESTAURANTES) */

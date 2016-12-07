@@ -1407,7 +1407,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\gestion_restaurantes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap\css\bootstrap.css.map" />
@@ -1460,7 +1459,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-3.1.1.min.map" />
-
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_aviones\M02_AgregarAvion.cshtml" />
