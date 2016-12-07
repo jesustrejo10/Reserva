@@ -201,6 +201,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\gestion_automovilesController.cs" />
     <Compile Include="Controllers\gestion_avionesController.cs" />
+    <Compile Include="Controllers\gestion_crucerosController.cs" />
     <Compile Include="Controllers\gestion_hotelesController.cs" />
     <Compile Include="Controllers\gestion_comida_vueloController.cs" />
     <Compile Include="Controllers\gestion_usuariosController.cs" />
@@ -222,6 +223,10 @@
     <Compile Include="Models\gestion_automoviles\VehicleModel.cs" />
     <Compile Include="Models\gestion_aviones\CAgregarAvion.cs" />
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
+    <Compile Include="Models\gestion_cruceros\CGestion_cabina.cs" />
+    <Compile Include="Models\gestion_cruceros\CGestion_camarote.cs" />
+    <Compile Include="Models\gestion_cruceros\CGestion_crucero.cs" />
+    <Compile Include="Models\gestion_cruceros\CGestion_itinerario.cs" />
     <Compile Include="Models\gestion_hoteles\cGestionHoteles_CrearHotel.cs" />
     <Compile Include="Models\gestion_usuarios\AgregarUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\ConexionBD.cs" />
@@ -512,7 +517,7 @@
     <Content Include="Views\gestion_comida_vuelo\placeholder.html" />
     <Content Include="Views\gestion_cruceros\css\style_module.css" />
     <Content Include="Views\gestion_cruceros\js\module.js" />
-    <Content Include="Views\gestion_cruceros\M24_GestionCruceros.html" />
+    <Content Include="Views\gestion_cruceros\placeholder.html" />
     <Content Include="Views\gestion_equipaje_perdido\placeholder.html" />
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Actualizar.html" />
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Agregar.html" />
@@ -1401,6 +1406,7 @@
     <Content Include="Views\gestion_usuarios\M12_AgregarUsuario.cshtml" />
     <Content Include="Views\gestion_usuarios\M12_ModificarUsuario.cshtml" />
     <Content Include="Views\gestion_usuarios\_Layout.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_GestionCruceros.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1456,7 +1462,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-3.1.1.min.map" />
-
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_aviones\M02_AgregarAvion.cshtml" />
