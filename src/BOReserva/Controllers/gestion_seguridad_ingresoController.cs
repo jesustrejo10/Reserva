@@ -41,13 +41,14 @@ namespace BOReserva.Content.Controllers
             try
             {
                 System.Diagnostics.Debug.WriteLine("Correo "+correo+" contrasena "+contraseña);
-                if (ingreso.verificarUsuario(correo, contraseña))
-                {
-                    ingreso.correoCampoTexto = correo;
-                    ingreso.nombreUsuarioTexto = "David Botello";
+                ingreso = ingreso.verificarUsuario(correo, contraseña);
+                //if (ingreso.verificarUsuario(correo, contraseña))
+                //{
+                    //ingreso.correoCampoTexto = correo;
+                    //ingreso.nombreUsuarioTexto = "David Botello";
                     Session["Cgestion_seguridad_ingreso"] = ingreso;
                     return RedirectToAction("Index", "Home");
-                }
+                //}
             }
             catch (Exception e)
             {
