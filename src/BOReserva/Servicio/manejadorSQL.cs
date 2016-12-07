@@ -34,7 +34,7 @@ namespace BOReserva.Servicio
                 SqlCommand query = conexion.CreateCommand();
                 //ingreso la orden del query
                 query.CommandText = "INSERT INTO Avion VALUES ('" +model._matriculaAvion+ "','" +model._modeloAvion+ "'," +model._capacidadPasajerosTurista+ " , " +model._capacidadPasajerosEjecutiva+ "," +model._capacidadPasajerosVIP+ ", " +model._capacidadEquipaje+ ", " +model._distanciaMaximaVuelo+ ", " +model._velocidadMaximaDeVuelo+ ", " +model._capacidadMaximaCombustible+ ");";
-                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior
                 SqlDataReader lector = query.ExecuteReader();
                 //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
                 /*while(lector.Read())
@@ -55,7 +55,7 @@ namespace BOReserva.Servicio
             {
                 return false;
             }
-            
+
         }
 
         //Procedimiento del Modulo 9 para agregar hoteles a la base de datos.
@@ -70,9 +70,9 @@ namespace BOReserva.Servicio
                 //uso el SqlCommand para realizar los querys
                 SqlCommand query = conexion.CreateCommand();
                 //ingreso la orden del query
-                query.CommandText = "INSERT INTO Avion VALUES ('" + model._nombre + "','" + model._estrellas + "'," 
+                query.CommandText = "INSERT INTO Avion VALUES ('" + model._nombre + "','" + model._estrellas + "',"
                     + model._puntuacion + " , " + model._direccion + "," + model._paginaWeb +  ");";
-                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior
                 SqlDataReader lector = query.ExecuteReader();
                 //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
                 /*while(lector.Read())
