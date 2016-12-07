@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FOReserva.Models.Restaurantes;
 
 namespace FOReserva.Controllers
 {
@@ -32,6 +33,8 @@ namespace FOReserva.Controllers
 
                         //probando
         }
+
+        
         
 
         public ActionResult Consultar_Revision (string usuario)
@@ -54,8 +57,7 @@ namespace FOReserva.Controllers
         public ActionResult Eliminar_Revision(string usuario, CRevision revision)
         {
 
-            string Usuario;
-            CRevision rev;
+            
             List<CRevision> lista;
 
 
@@ -85,16 +87,41 @@ namespace FOReserva.Controllers
             }
 
 
-       // public ActionResult Crear_Revsion()
-       // {
-
-                
+        public ActionResult Crear_Revsion(CReservation_Restaurant reserva, string usuario, DateTime fecha)                 //crear reserva restaurant
+        {
 
 
+            List<CRevision> lista;
+
+
+          /*  List<CRevision> lista1;
+            List<CReservation_Restaurant> rest;
+            CReservation_Restaurant res;
+           C
+            */
+                       
+            // no se si estara bien
+            //CReservation_Restaurant n = new CReservation_Restaurant();
+            if ((reserva != null)) //&& (  res== reserva))
+            {
+
+                ManejadorSQLRevision manejador = new ManejadorSQLRevision();  // crear en Servicios un manejador para listar 
+                lista = manejador.Crear_Revision(reserva, usuario);
+                return PartialView(lista);
+
+            }
+
+            else
+            {
+
+                CListRevision modelo = new CListRevision();        
+                return PartialView(modelo);
+            }
 
 
 
-       // }    //  hasta aca crear Rev
+
+        }    //  hasta aca crear Rev
 
         }
             
