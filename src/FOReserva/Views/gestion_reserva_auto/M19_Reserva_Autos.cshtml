@@ -1,0 +1,71 @@
+﻿@model FOReserva.Models.Autos.Cvista_ReservaAutos
+
+
+<div class="heading-title">
+    <h3><span>Autos</span></h3>
+</div>
+
+@*<form class="validate" action="php/contact.php" method="post" enctype="multipart/form-data" data-success="Sent! Thank you!" data-toastr-position="top-right">*@
+
+@using (Html.BeginForm("MbuscarCarro", "gestion_reserva_auto", null, FormMethod.Post, new {@id = "formBuscarCarro", @class = "form-horizintal"}))
+{ 
+     <fieldset>
+        <!-- required [php action request] -->
+        <input type="hidden" name="action" value="contact_send" />
+
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-6 col-sm-6">
+                    <label>Recoger en:</label>
+                    <input type="text" name="contact[first_name]" value="" class="form-control required">
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <label>Devolver en:</label>
+                    @Html.TextBoxFor(m => m._prueba, null, new { @class = "form-control required", @name = "contact[first_name]" })
+                    @*<input type="text" name="contact[last_name]" value="" class="form-control required">*@
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-6 col-sm-6">
+                    <label>Fecha y Hora de Recogida:</label>
+                    <input type="text" name="contact[start_date]" value="10-11-2016" class="form-control datepicker required" data-format="dd-mm-yyyy" data-lang="en" data-rtl="false">
+                    <br>
+                    <input type="text" class="form-control timepicker" value="10 : 00 : AM">
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <label>Fecha y Hora de Devolución:</label>
+                    <input type="text" name="contact[start_date]" value="10-11-2016" class="form-control datepicker required" data-format="dd-mm-yyyy" data-lang="en" data-rtl="false">
+                    <br>
+                    <input type="text" class="form-control timepicker" value="10 : 00 : AM">
+
+                </div>
+            </div>
+        </div>
+
+    </fieldset>
+
+    <div class="row text-center">
+        <div class="col-md-12">
+            <button type="button" id="buscarCarro" class="btn btn-primary">Buscar</button>
+        </div>
+    </div>
+
+<script>
+    $("#buscarCarro").click(function (e) {
+        e.preventDefault();
+        var form = $("#formBuscarCarro");
+        $.ajax({
+            url: "gestion_reserva_auto/buscarCarro",
+            data: form.serialize(),
+            type: 'POST',
+            success: function (data) {
+                alert("Buscando...");
+            }
+        });
+    });
+</script>
+
+}
