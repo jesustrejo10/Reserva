@@ -71,6 +71,14 @@
       <HintPath>..\packages\DotNetOpenAuth.OpenId.RelyingParty.4.3.4.13329\lib\net45-full\DotNetOpenAuth.OpenId.RelyingParty.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Data.Edm, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Data.Edm.5.6.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
@@ -90,7 +98,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Extensions.dll</HintPath>
@@ -164,9 +171,6 @@
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -197,7 +201,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\gestion_automovilesController.cs" />
     <Compile Include="Controllers\gestion_avionesController.cs" />
+    <Compile Include="Controllers\gestion_hotelesController.cs" />
     <Compile Include="Controllers\gestion_comida_vueloController.cs" />
+    <Compile Include="Controllers\gestion_usuariosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -216,6 +222,28 @@
     <Compile Include="Models\gestion_automoviles\VehicleModel.cs" />
     <Compile Include="Models\gestion_aviones\CAgregarAvion.cs" />
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
+    <Compile Include="Models\gestion_hoteles\cGestionHoteles_CrearHotel.cs" />
+    <Compile Include="Models\gestion_usuarios\AgregarUsuario.cs" />
+    <Compile Include="Models\gestion_usuarios\ConexionBD.cs" />
+    <Compile Include="Models\gestion_usuarios\CUsuario.cs" />
+    <Compile Include="Models\gestion_usuarios\Encriptar.cs" />
+    <Compile Include="Models\gestion_usuarios\ExceptionBD.cs" />
+    <Compile Include="Models\gestion_usuarios\ExceptionM12Reserva.cs" />
+    <Compile Include="Models\gestion_usuarios\ListarUsuario.cs" />
+    <Compile Include="Models\gestion_usuarios\ModificarUsuario.cs" />
+    <Compile Include="Models\gestion_usuarios\Parametro.cs" />
+    <Compile Include="Models\gestion_usuarios\PersistenciaUsuario.cs" />
+    <Compile Include="Models\gestion_usuarios\RecursoBD.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RecursoBD.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\gestion_usuarios\RecursoUsuario.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RecursoUsuario.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\gestion_usuarios\ResultadoBD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicio\manejadorSQL.cs" />
     <Compile Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx.cs">
@@ -403,6 +431,7 @@
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\Scripts_Aviones\llamadas_generales.js" />
+    <Content Include="Scripts\Scripts_Hoteles\llamadas_generales_hoteles.js" />
     <Content Include="Views\dist\css\AdminLTE.css" />
     <Content Include="Views\dist\css\AdminLTE.min.css" />
     <Content Include="Views\dist\css\skins\skin-black-light.css" />
@@ -487,7 +516,6 @@
     <Content Include="Views\gestion_equipaje_perdido\placeholder.html" />
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Actualizar.html" />
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Agregar.html" />
-    <Content Include="Views\gestion_hoteles\M09_GestionHoteles_AgregarHab.html" />
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Consultar_Servicios.html" />
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Deshabilitar.html" />
     <Content Include="Views\gestion_hoteles\placeholder.html" />
@@ -1317,7 +1345,9 @@
     <Content Include="Content\plugins\timepicker\bootstrap-timepicker.js" />
     <Content Include="Content\plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="Content\plugins\timepicker\bootstrap-timepicker.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -1360,11 +1390,20 @@
     <Content Include="Views\gestion_automoviles\M08_VisualizarAutomoviles.cshtml" />
     <Content Include="Views\gestion_automoviles\M08_VisualizarAutomovil.cshtml" />
     <Content Include="Views\gestion_automoviles\M08_AgregarAutomovil.cshtml" />
+    <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Crear.cshtml" />
+    <Content Include="Views\gestion_hoteles\M09_GestionHoteles_ModificarHotel.cshtml" />
+    <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Desactivar.cshtml" />
+    <Content Include="Views\gestion_comida_vuelo\M06_AgregarComida.cshtml" />
+    <Content Include="Views\gestion_comida_vuelo\M06_AgregarPorVuelo.cshtml" />
+    <Content Include="Views\gestion_comida_vuelo\M06_EditarComida.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarEditarComida.cshtml" />
+    <Content Include="Views\gestion_usuarios\M12_Index.cshtml" />
+    <Content Include="Views\gestion_usuarios\M12_AgregarUsuario.cshtml" />
+    <Content Include="Views\gestion_usuarios\M12_ModificarUsuario.cshtml" />
+    <Content Include="Views\gestion_usuarios\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\gestion_comidavuelo\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap\css\bootstrap.css.map" />
@@ -1421,6 +1460,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_aviones\M02_AgregarAvion.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Models\gestion_usuarios\RecursoBD.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecursoBD.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\gestion_usuarios\RecursoUsuario.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecursoUsuario.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
