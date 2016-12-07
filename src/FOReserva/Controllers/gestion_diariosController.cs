@@ -12,6 +12,7 @@ namespace FOReserva.Controllers
         //
         // GET: /gestion_diarios/
 
+
         public ActionResult gestion_diarios()
         {
             Cvista_Diarios model = new Cvista_Diarios();
@@ -19,9 +20,16 @@ namespace FOReserva.Controllers
         }
 
         public ActionResult gestion_diariosImagenes()
+        {            
+            return PartialView();
+        }
+
+        [HttpPost]
+        public JsonResult buscarDiarios(Cvista_Diarios model)
         {
-            Cvista_Diarios model = new Cvista_Diarios();
-            return PartialView(model);
+            String prueba = model._prueba;
+            Console.WriteLine(prueba);
+            return (Json(true, JsonRequestBehavior.AllowGet));
         }
 
     }

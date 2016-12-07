@@ -3,19 +3,53 @@
 <div class="heading-title">
     <h3><span>Diarios de Viaje</span></h3>
 </div>
-
-
-
 @*<div class="row text-center">
         <a href="#"><button type="button" class="btn btn-default btn-lg"><i class="fa fa-book"></i>Crear un Diario de Viaje</button></a>
     </div>*@
+@using (Html.BeginForm("buscarDiarios", "gestion_diarios", null, FormMethod.Post, new { @id = "formBuscarDiarios", @class = "form-horizontal" }))
+{
+    <fieldset>
 
+        <input type="hidden" name="action" value="contact_send" />
+
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12 col-sm-12">
+                    <label>Prueba</label>
+                    @Html.TextBoxFor(m => m._prueba, null, new { @class = "form-control required", @name = "diario[prueba]", @id= "elText" })
+                </div>
+            </div>
+        </div>
+
+    </fieldset>
 
 <div class="row text-center">
     <div class="col-md-12">
-        <button type="button" class="btn btn-primary"><i class="fa fa-search"></i>Buscar</button>
+        <button type="button" id="buscarDiarios" class="btn btn-primary"><i class="fa fa-search"></i>Buscar</button>
     </div>
 </div>
+<script>
+    //Unificación del jQuery para búsqueda
+    function buscar(a) {
+        a.preventDefault();
+        var form = $("#formBuscarDiarios");
+        $.ajax({
+            url: "gestion_diarios/buscarDiarios",
+            data: form.serialize(),
+            type: 'POST',
+            success: function (data) {
+                alert("Buscando...");
+                /*$('#formBuscarVuelos')[0].reset();*/
+            }
+        });
+    }
+
+    $("#buscarDiarios").click(function (e) { buscar(e) });      //Evento de click en el botón Buscar
+    $("#formBuscarDiarios").submit(function (e) { buscar(e) }); //Evento general de submit (ej. presionar ENTER)
+
+
+</script>
+}
 
 
 <section>

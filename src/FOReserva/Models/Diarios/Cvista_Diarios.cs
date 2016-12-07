@@ -7,5 +7,6 @@ namespace FOReserva.Models.Diarios
 {
     public class Cvista_Diarios
     {
+        public string _prueba { get; set; }
     }
 }
