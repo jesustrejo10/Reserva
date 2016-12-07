@@ -49,8 +49,10 @@ namespace FOReserva.Controllers
 
         public ActionResult reservar_restaurant(int id_rest)
         {
-
-            return View();
+            CRestaurantModel restaurante = new CRestaurantModel();
+            ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
+            restaurante = manejador.buscarRest(id_rest);
+            return View(restaurante);
         }
 
         public ActionResult confirma_restaurant()
