@@ -201,6 +201,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\gestion_automovilesController.cs" />
     <Compile Include="Controllers\gestion_avionesController.cs" />
+    <Compile Include="Controllers\gestion_hotelesController.cs" />
     <Compile Include="Controllers\gestion_comida_vueloController.cs" />
     <Compile Include="Controllers\gestion_usuariosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -210,8 +211,18 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\gestion_automoviles\CAgregarAutomovil.cs" />
+    <Compile Include="Models\gestion_automoviles\CBasededatos_vehiculo.cs" />
+    <Compile Include="Models\gestion_automoviles\CModificarAutomovil.cs" />
+    <Compile Include="Models\gestion_automoviles\CVisualizarAutomovil.cs" />
+    <Compile Include="Models\gestion_automoviles\CVisualizarAutomoviles.cs" />
+    <Compile Include="Models\gestion_automoviles\CAutomovil.cs" />
+    <Compile Include="Models\gestion_automoviles\VehicleList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\gestion_automoviles\VehicleModel.cs" />
     <Compile Include="Models\gestion_aviones\CAgregarAvion.cs" />
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
+    <Compile Include="Models\gestion_hoteles\cGestionHoteles_CrearHotel.cs" />
     <Compile Include="Models\gestion_usuarios\AgregarUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\ConexionBD.cs" />
     <Compile Include="Models\gestion_usuarios\CUsuario.cs" />
@@ -420,6 +431,7 @@
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\Scripts_Aviones\llamadas_generales.js" />
+    <Content Include="Scripts\Scripts_Hoteles\llamadas_generales_hoteles.js" />
     <Content Include="Views\dist\css\AdminLTE.css" />
     <Content Include="Views\dist\css\AdminLTE.min.css" />
     <Content Include="Views\dist\css\skins\skin-black-light.css" />
@@ -486,6 +498,7 @@
     <Content Include="Views\gestion_automoviles\css\style_module.css" />
     <Content Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx" />
     <Content Include="Views\gestion_automoviles\GestionDeAutomoviles.html" />
+    <Content Include="Views\gestion_automoviles\js\visualizarAutomovil.js" />
     <Content Include="Views\gestion_automoviles\js\module.js" />
     <Content Include="Views\gestion_automoviles\M08_AgregarAutomovil.html" />
     <Content Include="Views\gestion_automoviles\M08_ModificarAutomovil.html" />
@@ -503,7 +516,6 @@
     <Content Include="Views\gestion_equipaje_perdido\placeholder.html" />
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Actualizar.html" />
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Agregar.html" />
-    <Content Include="Views\gestion_hoteles\M09_GestionHoteles_AgregarHab.html" />
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Consultar_Servicios.html" />
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Deshabilitar.html" />
     <Content Include="Views\gestion_hoteles\placeholder.html" />
@@ -1374,6 +1386,16 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\gestion_automoviles\M08_ModificarAutomovil.cshtml" />
+    <Content Include="Views\gestion_automoviles\M08_VisualizarAutomoviles.cshtml" />
+    <Content Include="Views\gestion_automoviles\M08_VisualizarAutomovil.cshtml" />
+    <Content Include="Views\gestion_automoviles\M08_AgregarAutomovil.cshtml" />
+    <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Crear.cshtml" />
+    <Content Include="Views\gestion_hoteles\M09_GestionHoteles_ModificarHotel.cshtml" />
+    <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Desactivar.cshtml" />
+    <Content Include="Views\gestion_comida_vuelo\M06_AgregarComida.cshtml" />
+    <Content Include="Views\gestion_comida_vuelo\M06_AgregarPorVuelo.cshtml" />
+    <Content Include="Views\gestion_comida_vuelo\M06_EditarComida.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarEditarComida.cshtml" />
     <Content Include="Views\gestion_usuarios\M12_Index.cshtml" />
     <Content Include="Views\gestion_usuarios\M12_AgregarUsuario.cshtml" />
@@ -1382,7 +1404,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\gestion_comidavuelo\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap\css\bootstrap.css.map" />
@@ -1435,7 +1456,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-3.1.1.min.map" />
-    <Content Include="Views\gestion_automoviles\M08_AgregarAutomovil.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_aviones\M02_AgregarAvion.cshtml" />
