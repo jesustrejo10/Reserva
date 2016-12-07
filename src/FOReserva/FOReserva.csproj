@@ -199,6 +199,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\gestion_reserva_habitacionesController.cs" />
     <Compile Include="Controllers\gestion_reserva_restauranteController.cs" />
+    <Compile Include="Controllers\gestion_revisionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\gestion_vuelosController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -244,6 +245,9 @@
     <Compile Include="Models\ReservaHabitacion\TMPUsuario.cs" />
     <Compile Include="Models\Restaurantes\CReservation_Restaurant.cs" />
     <Compile Include="Models\Restaurantes\CRestaurantModel.cs" />
+    <Compile Include="Models\Revision\CListRevision.cs" />
+    <Compile Include="Models\Revision\CRevision.cs" />
+    <Compile Include="Models\Revision\CRevisionValoracion.cs" />
     <Compile Include="Models\Utilidad.cs" />
     <Compile Include="Models\Vuelos\Cvista_Vuelos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -254,7 +258,9 @@
       <DependentUpon>ReservaDB.dbml</DependentUpon>
     </Compile>
     <Compile Include="Servicio\manejadorSQL.cs" />
-    <Compile Include="Servicio\ManejadorSQLReserva.cs" />
+    <Compile Include="Servicio\ManejadorSQLMuestraRevision.cs" />
+    <Compile Include="Servicio\ManejadorSQLException.cs" />
+    <Compile Include="Servicio\ManejadorSQLReservaRestaurant.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\assets\css\color_scheme\green.css" />
@@ -344,6 +350,7 @@
     <Content Include="Content\assets\images\demo\shop\products\300x450\p7.jpg" />
     <Content Include="Content\assets\images\demo\shop\products\300x450\p8.jpg" />
     <Content Include="Content\assets\images\demo\shop\products\300x450\p9.jpg" />
+    <Content Include="Content\assets\images\favicon.ico" />
     <Content Include="Content\assets\images\female.png" />
     <Content Include="Content\assets\images\footer_sprite.png" />
     <Content Include="Content\assets\images\grabbing.png" />
@@ -3031,7 +3038,9 @@
     <Content Include="Views\gestion_reserva_habitaciones\detalle_reserva.cshtml" />
     <Content Include="Views\gestion_reserva_habitaciones\editar_reserva.cshtml" />
     <Content Include="Views\gestion_reserva_habitaciones\mis_reservas.cshtml" />
-    <Content Include="Views\Shared\_MenuPerfil.cshtml" />
+    <Content Include="Views\gestion_revision\gestion_ListRevicion.cshtml" />
+    <Content Include="Views\gestion_revision\gestion_revision.cshtml" />
+    <Content Include="Views\gestion_revision\Consultar_Revision.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
