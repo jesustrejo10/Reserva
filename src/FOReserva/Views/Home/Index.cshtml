@@ -3,9 +3,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <!-- FEATURED GRID -->
-
 <!-- PETAÑAS CON FORMULARIO DE BÚSQUEDA PARA CADA TIPO DE RESERVA -->
-        <div class="row">
+<div class="row contenedor">
     <!-- SECCIÓN DE PESTAÑAS -->
     <ul class="nav nav-tabs">
         <li class="active" id="LiVuelos"><a href="">Vuelos</a></li>
@@ -140,6 +139,13 @@
     </div>
 
 </div>
+<div id="CP" class="row contenedor"></div>
+<div class="row contenedor">
+    <div class="col-xs-2">
+        @Html.Partial("_MenuPerfil", null)
+    </div>
+    <div id="CI" class="col-xs-10">
+    </div>
+</div>
 <!-- /PETAÑAS CON FORMULARIO DE BÚSQUEDA PARA CADA TIPO DE RESERVA -->
-
 <!-- /FEATURED GRID -->
