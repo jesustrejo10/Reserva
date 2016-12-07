@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using FOReserva.Models.Restaurantes;
 using FOReserva.Servicio;
-using System.Data.Entity;
+
 namespace TestUnitReserva.FO.Reserva_restaurante
 {
     [TestFixture]
