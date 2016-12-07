@@ -201,4 +201,26 @@
             });
     });
 
+    $("#m24_listarcrucero").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_cruceros/M24_ListarCruceros';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
 });

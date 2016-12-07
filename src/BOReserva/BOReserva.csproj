@@ -1407,6 +1407,7 @@
     <Content Include="Views\gestion_usuarios\M12_ModificarUsuario.cshtml" />
     <Content Include="Views\gestion_usuarios\_Layout.cshtml" />
     <Content Include="Views\gestion_cruceros\M24_GestionCruceros.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_ListarCruceros.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
