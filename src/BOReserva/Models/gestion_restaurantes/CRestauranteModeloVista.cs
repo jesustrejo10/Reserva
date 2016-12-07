@@ -7,6 +7,6 @@ namespace BOReserva.Models.gestion_restaurantes
 {
     public class CRestauranteModeloVista
     {
-        List<CRestauranteModelo> _listaRestaurantes { get; set; }
+        public List<CRestauranteModelo> _listaRestaurantes { get; set; }
     }
 }
