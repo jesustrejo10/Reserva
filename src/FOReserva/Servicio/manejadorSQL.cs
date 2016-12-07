@@ -25,9 +25,14 @@ namespace FOReserva.Servicio
         /*Metodo para Abrir la conexion a la DB*/
         private void OpenConnection()
         {
-                conexion = new SqlConnection(stringDeConexion);
+            conexion = new SqlConnection(stringDeConexion);
+            try
+            {
                 conexion.Open();
-            
+            }catch (SqlException e)
+            {
+                throw new ManejadorSQLException("Error de conexion con la DB", e);
+            }
         }
 
         /*Metodo para Cerrar la Conexion a la DB*/

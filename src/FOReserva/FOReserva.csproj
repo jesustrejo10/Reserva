@@ -200,6 +200,7 @@
     <Compile Include="Controllers\gestion_diariosController.cs" />
     <Compile Include="Controllers\gestion_reserva_habitacionesController.cs" />
     <Compile Include="Controllers\gestion_reserva_restauranteController.cs" />
+    <Compile Include="Controllers\gestion_revisionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\gestion_vuelosController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -246,6 +247,9 @@
     <Compile Include="Models\ReservaHabitacion\TMPUsuario.cs" />
     <Compile Include="Models\Restaurantes\CReservation_Restaurant.cs" />
     <Compile Include="Models\Restaurantes\CRestaurantModel.cs" />
+    <Compile Include="Models\Revision\CListRevision.cs" />
+    <Compile Include="Models\Revision\CRevision.cs" />
+    <Compile Include="Models\Revision\CRevisionValoracion.cs" />
     <Compile Include="Models\Utilidad.cs" />
     <Compile Include="Models\Vuelos\Cvista_Vuelos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -257,6 +261,8 @@
     </Compile>
     <Compile Include="Servicio\manejadorSQL.cs" />
     <Compile Include="Servicio\ManejadorSQLDiarios.cs" />
+    <Compile Include="Servicio\ManejadorSQLMuestraRevision.cs" />
+    <Compile Include="Servicio\ManejadorSQLException.cs" />
     <Compile Include="Servicio\ManejadorSQLReservaRestaurant.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2890,11 +2896,12 @@
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\index.cshtml" />
     <Content Include="Views\Shared\assets\fonts\et-line.eot" />
     <Content Include="Views\Shared\assets\fonts\et-line.ttf" />
     <Content Include="Views\Shared\assets\fonts\et-line.woff" />
@@ -3028,13 +3035,16 @@
     <Content Include="Views\gestion_diarios\gestion_diarios.cshtml" />
     <Content Include="Views\gestion_diarios\gestion_diariosImagenes.cshtml" />
     <Content Include="Views\gestion_reserva_restaurante\gestion_reserva_restaurante.cshtml" />
+    <Content Include="Views\Shared\_Layout2.cshtml" />
     <Content Include="Views\gestion_reserva_restaurante\restaurant_resultados.cshtml" />
     <Content Include="Views\gestion_reserva_restaurante\reservar_restaurant.cshtml" />
     <Content Include="Views\gestion_reserva_restaurante\confirma_restaurant.cshtml" />
     <Content Include="Views\gestion_reserva_habitaciones\detalle_reserva.cshtml" />
     <Content Include="Views\gestion_reserva_habitaciones\editar_reserva.cshtml" />
     <Content Include="Views\gestion_reserva_habitaciones\mis_reservas.cshtml" />
-    <Content Include="Views\Shared\_MenuPerfil.cshtml" />
+    <Content Include="Views\gestion_revision\gestion_ListRevicion.cshtml" />
+    <Content Include="Views\gestion_revision\gestion_revision.cshtml" />
+    <Content Include="Views\gestion_revision\Consultar_Revision.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
