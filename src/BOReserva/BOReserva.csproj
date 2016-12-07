@@ -211,6 +211,15 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\gestion_automoviles\CAgregarAutomovil.cs" />
+    <Compile Include="Models\gestion_automoviles\CBasededatos_vehiculo.cs" />
+    <Compile Include="Models\gestion_automoviles\CModificarAutomovil.cs" />
+    <Compile Include="Models\gestion_automoviles\CVisualizarAutomovil.cs" />
+    <Compile Include="Models\gestion_automoviles\CVisualizarAutomoviles.cs" />
+    <Compile Include="Models\gestion_automoviles\CAutomovil.cs" />
+    <Compile Include="Models\gestion_automoviles\VehicleList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\gestion_automoviles\VehicleModel.cs" />
     <Compile Include="Models\gestion_aviones\CAgregarAvion.cs" />
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
     <Compile Include="Models\gestion_hoteles\CGestionHoteles_CrearHotel.cs" />
@@ -489,6 +498,7 @@
     <Content Include="Views\gestion_automoviles\css\style_module.css" />
     <Content Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx" />
     <Content Include="Views\gestion_automoviles\GestionDeAutomoviles.html" />
+    <Content Include="Views\gestion_automoviles\js\visualizarAutomovil.js" />
     <Content Include="Views\gestion_automoviles\js\module.js" />
     <Content Include="Views\gestion_automoviles\M08_AgregarAutomovil.html" />
     <Content Include="Views\gestion_automoviles\M08_ModificarAutomovil.html" />
@@ -1376,6 +1386,10 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\gestion_automoviles\M08_ModificarAutomovil.cshtml" />
+    <Content Include="Views\gestion_automoviles\M08_VisualizarAutomoviles.cshtml" />
+    <Content Include="Views\gestion_automoviles\M08_VisualizarAutomovil.cshtml" />
+    <Content Include="Views\gestion_automoviles\M08_AgregarAutomovil.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Crear.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_ModificarHotel.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Desactivar.cshtml" />
@@ -1442,7 +1456,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-3.1.1.min.map" />
-    <Content Include="Views\gestion_automoviles\M08_AgregarAutomovil.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_aviones\M02_AgregarAvion.cshtml" />

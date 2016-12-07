@@ -1,4 +1,5 @@
-﻿@{
+﻿@model FOReserva.Models.Restaurantes.CRestaurantModel
+@{
     ViewBag.Title = "reservar_restaurant";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -58,14 +59,14 @@
         </div>
 
     </div>
-
+ 
     <div class="col-sm-7">
         <div class="relative">
-            <div style="height: 443.6px;background-image: url(&quot;assets/images/demo/restaurant/foto.jpg&quot;);background-repeat: no-repeat;background-size: cover;">
+            <div style="height: 443.6px;background-image: url('../Images/restaurant_generic.jpg');background-repeat: no-repeat;background-size: cover;">
                 <div class="absolute text-left">
-                    <h2>  <b>Paradís Madrid</b>  </h2>
+                    <h2>  <b>@Model.Name</b>  </h2>
                     <p style="color: #fff;">Madrid</p>
-                    <p style="color: #fff;" class="font-lato margin-top-30 size-16 hidden-sm hidden-xs"><b>Dirección: </b> Marqués de Cubas, 14 Centro 28014 Madrid.</p>
+                    <p style="color: #fff;" class="font-lato margin-top-30 size-16 hidden-sm hidden-xs"><b>Dirección: </b> @Model.Addres</p>
                 </div>
             </div>
 
@@ -80,13 +81,8 @@
             <h2 class="panel-title">Descripción</h2>
         </div>
         <div class="panel-body">
-            El restaurante Paradís Madrid se encuentra en pleno centro de la capital y por tanto goza de una excelente ubicación. Es un restaurante donde podrás encontrar sabores mediterráneos, frescura, origen, color, energía, aromas y diseño. Paradis Madrid lleva 20 años manteniendo su estilo propio.
-
-            Entre las especialidades gastronómicas del restaurante Paradís Madrid se encuentran el bonito, el bacalao o el guiso de setas con cebollas tempranas. También es muy recomendable el arroz caldoso de pescadores y los deliciosos postres.
-
-            Paradís Madrid es sin duda un lugar muy confortable donde disfrutar de un ambiente tranquilo y relajado junto a la familia o los amigos. El local cuenta con diferentes espacios donde poder disfrutar de la comida o la cena a tu gusto.
+            @Model.Description
         </div>
     </div>
 </div>
-
 <!-- /FEATURED GRID -->
