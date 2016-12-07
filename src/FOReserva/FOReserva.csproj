@@ -197,6 +197,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\gestion_reserva_autoController.cs" />
     <Compile Include="Controllers\gestion_reserva_habitacionesController.cs" />
     <Compile Include="Controllers\gestion_reserva_restauranteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -206,6 +207,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Autos\Cvista_ReservaAutos.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\ORM\DB.cs" />
     <Compile Include="Models\ORM\M20_ActualizarEstadoReservaHabitacion_Result.cs">
@@ -3030,6 +3032,9 @@
     <Content Include="Views\gestion_reserva_habitaciones\editar_reserva.cshtml" />
     <Content Include="Views\gestion_reserva_habitaciones\mis_reservas.cshtml" />
     <Content Include="Views\Shared\_MenuPerfil.cshtml" />
+    <Content Include="Views\gestion_reserva_auto\M19_Reserva_Autos.cshtml" />
+    <Content Include="Views\gestion_reserva_auto\M19_Reserva_AutosImagenes.cshtml" />
+    <Content Include="Views\Shared\_LayoutPerfil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

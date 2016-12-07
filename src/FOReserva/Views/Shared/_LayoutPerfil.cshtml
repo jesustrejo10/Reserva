@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <!--[if IE 8]>			<html class="ie ie8"> <![endif]-->
 <!--[if IE 9]>			<html class="ie ie9"> <![endif]-->
 <!--[if gt IE 9]><!-->
@@ -6,7 +7,7 @@
 <!--<![endif]-->
 <head>
     <meta charset="utf-8" />
-    <title>Reserva</title>
+    <title>Smarty - Multipurpose + Admin</title>
     <meta name="keywords" content="HTML5,CSS3,Template" />
     <meta name="description" content="" />
     <meta name="Author" content="Dorin Grigoras [www.stepofweb.com]" />
@@ -28,11 +29,12 @@
     <link href="@Url.Content("~/Content/assets/css/custom.css")" rel="stylesheet" type="text/css" />
 
 
-
     <!-- PAGE LEVEL SCRIPTS -->
     <link href="@Url.Content("~/Content/assets/css/header-1.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/assets/css/layout-shop.css")" rel=" stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/assets/css/color_scheme/green.css")" rel="stylesheet" type="text/css" id="color_scheme" />
+
+    <link href="@Url.Content("~/Content/assets/css/global.css")" rel="stylesheet" />
 </head>
 
 <body class="smoothscroll enable-animation">
@@ -41,7 +43,6 @@
     <div id="slidetop">
 
         <div class="container">
-
 
         </div>
 
@@ -66,25 +67,9 @@
                         <img src="@Url.Content("~/Content/assets/images/logo_final.png")" alt=" " />
                     </a>
 
-                    <!--
-                        Top Nav
-
-                        AVAILABLE CLASSES:
-                        submenu-dark = dark sub menu
-                    -->
                     <div class="navbar-collapse pull-right nav-main-collapse collapse">
                         <nav class="nav-main">
 
-                            <!--
-                                NOTE
-
-                                For a regular link, remove "dropdown" class from LI tag and "dropdown-toggle" class from the href.
-                                Direct Link Example:
-
-                                <li>
-                                    <a href="#">HOME</a>
-                                </li>
-                            -->
                             <ul id="topMain" class="nav nav-pills nav-main">
                                 <li class="active">
                                     <!-- HOME -->
@@ -92,11 +77,11 @@
                                 </li>
                                 <li>
                                     <!-- SOBRE NOSOTROS -->
-                                    <a href="page-about-us.html"> INICIAR SESIÓN </a>
+                                    <a onclick="cargarContenido('#CI', 'get', '/gestion_reserva_habitaciones/mis_reservas', null, this)" href="#"> INICIAR SESIÓN </a>
                                 </li>
                                 <li>
                                     <!-- CONTACTO -->
-                                    <a href="page-contact.html"> REGISTRARSE </a>
+                                    <a onclick="cargarContenido('#CP', 'get', '/gestion_vuelos/gestion_vuelos', null, this)" href="#"> REGISTRARSE </a>
                                 </li>
                             </ul>
 
@@ -109,13 +94,14 @@
 
         </div>
 
-        <!-- FEATURED GRID -->
-        <section class="featured-grid">
+        <!-- /PAGE HEADER -->
+        <!-- -->
+        <section>
             <div class="container">
-                @RenderBody()
+                @RenderBody();
             </div>
         </section>
-        <!-- /FEATURED GRID -->
+        <!-- / -->
         <!-- FOOTER -->
         <footer id="footer">
             <div class="container">
@@ -187,7 +173,7 @@
     <script type="text/javascript" src="@Url.Content("~/Content/assets/js/scripts.js")"></script>
 
     <!--CONTROLADOR DE LA VISTA PARCIAL-->
-    <script type="text/javascript" src="@Url.Content("~/Scripts/cargadorPestanas.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/cargadorPerfil.js")"></script>
     <!-- PAGE LEVEL SCRIPTS -->
     <script type="text/javascript" src="@Url.Content("~/Content/assets/js/view/demo.shop.js")"></script>
 </body>
