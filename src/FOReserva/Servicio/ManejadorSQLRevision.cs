@@ -7,11 +7,11 @@ using System.Data.SqlClient;
 
 namespace FOReserva.Servicio
 {
-    public class ManejadorSQLMuestraRevision : manejadorSQL
+    public class ManejadorSQLRevision : manejadorSQL
     {
 
 
-         public ManejadorSQLMuestraRevision() : base() { }
+         public ManejadorSQLRevision() : base() { }
 
 
          /*Buscar Revision por Usuario*/                        // tome esto de prueba de la parte de alexander

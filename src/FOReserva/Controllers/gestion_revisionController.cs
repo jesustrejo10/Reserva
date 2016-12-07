@@ -22,7 +22,7 @@ namespace FOReserva.Controllers
             return PartialView(modelo);
 
 
-        }
+        }                                                   
 
         public ActionResult gestion_ListRevicion()
         {
@@ -37,14 +37,13 @@ namespace FOReserva.Controllers
         public ActionResult Consultar_Revision (string usuario)
         {
            // int search_val = Int32.Parse(Request.QueryString["search_val"]);
-<<<<<<< HEAD
           // string Usuario = Request.QueryString["Usuario"];
             
             
-            List<CRevision> lista ;  
-            
-                            
-                ManejadorSQLMuestraRevision manejador = new ManejadorSQLMuestraRevision();   
+            List<CRevision> lista ;
+
+
+            ManejadorSQLRevision manejador = new ManejadorSQLRevision();   
                 lista = manejador.ConsultarRevision(usuario);                              
 
                 return PartialView(lista);
@@ -60,7 +59,7 @@ namespace FOReserva.Controllers
             List<CRevision> lista;
 
 
-            ManejadorSQLMuestraRevision manejador = new ManejadorSQLMuestraRevision();  // crear en Servicios un manejador para listar 
+            ManejadorSQLRevision manejador = new ManejadorSQLRevision();  // crear en Servicios un manejador para listar 
             lista = manejador.ConsultarRevision2(usuario, revision);   
 
 
@@ -69,24 +68,12 @@ namespace FOReserva.Controllers
 
                 return PartialView(lista);
 
-=======
-            string search_txt = Request.QueryString["search_text"];
-            
-            List<CRevision> lista ;                   // mostrar revision cuando estoy en el perfil del usuario
-            if (search_txt == usuario)
-            {
-                
-                ManejadorSQLMuestraRevision manejador = new ManejadorSQLMuestraRevision();  // crear en Servicios un manejador para listar 
-                //lista = manejador.ConsultaRevision(usuario);                               //las revisiones de ese usuario
-                
-                //return View(lista);
->>>>>>> refs/remotes/origin/Develop
             }
 
                 else 
                 {
 
-              ManejadorSQLMuestraRevision manejador2 = new ManejadorSQLMuestraRevision();  // crear en Servicios un manejador para listar 
+              ManejadorSQLRevision manejador2 = new ManejadorSQLRevision();  // crear en Servicios un manejador para listar 
             lista = manejador2.Eliminar_Revision(usuario, revision);   
 
                     return PartialView(lista);
@@ -94,7 +81,6 @@ namespace FOReserva.Controllers
                 
                 }
 
-<<<<<<< HEAD
                
             }
 
@@ -112,12 +98,6 @@ namespace FOReserva.Controllers
 
         }
             
-=======
-                Console.Write("No se tienen revisiones");       //mostrar mensaje al usuario y no mostrar nada
-                //return View(lista);
-            }
-            return null;
->>>>>>> refs/remotes/origin/Develop
         }
 
   
