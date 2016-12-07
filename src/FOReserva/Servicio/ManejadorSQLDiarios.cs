@@ -12,5 +12,21 @@ namespace FOReserva.Servicio
     }
 
     //Métodos requeridos
+    
+    
+    //BUSQUEDAS
 
+    
+    
+    
+    //INSERTS
+    
+        //Nuevo Diario
+
+             /* public void CrearDiario(Crear_Nuevo_Diario Cvista_Diarios ) {
+              string query =
+               @"INSERT INTO Diario_Viaje () 
+               VALUES()";
+               CloseConnection();
+               }*/
 }
