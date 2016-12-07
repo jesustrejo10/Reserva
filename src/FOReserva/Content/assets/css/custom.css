@@ -1,0 +1,12 @@
+/*************************** START -  ANDREA CAMACHO ******************************************/
+
+@media (max-width: 768px) {
+    .rest_sel {
+        width: 100% !important;
+    }
+
+    .rest_inp {
+        width: 100% !important;
+    }
+}
+/*************************** END - ANDREA CAMACHO ******************************************/
