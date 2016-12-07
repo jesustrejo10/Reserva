@@ -222,7 +222,7 @@
     <Compile Include="Models\gestion_automoviles\VehicleModel.cs" />
     <Compile Include="Models\gestion_aviones\CAgregarAvion.cs" />
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
-    <Compile Include="Models\gestion_hoteles\cGestionHoteles_CrearHotel.cs" />
+    <Compile Include="Models\gestion_hoteles\CGestionHoteles_CrearHotel.cs" />
     <Compile Include="Models\gestion_usuarios\AgregarUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\ConexionBD.cs" />
     <Compile Include="Models\gestion_usuarios\CUsuario.cs" />

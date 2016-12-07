@@ -37,6 +37,7 @@ namespace FOReserva.Controllers
         public ActionResult Consultar_Revision (string usuario)
         {
            // int search_val = Int32.Parse(Request.QueryString["search_val"]);
+<<<<<<< HEAD
           // string Usuario = Request.QueryString["Usuario"];
             
             
@@ -68,6 +69,18 @@ namespace FOReserva.Controllers
 
                 return PartialView(lista);
 
+=======
+            string search_txt = Request.QueryString["search_text"];
+            
+            List<CRevision> lista ;                   // mostrar revision cuando estoy en el perfil del usuario
+            if (search_txt == usuario)
+            {
+                
+                ManejadorSQLMuestraRevision manejador = new ManejadorSQLMuestraRevision();  // crear en Servicios un manejador para listar 
+                //lista = manejador.ConsultaRevision(usuario);                               //las revisiones de ese usuario
+                
+                //return View(lista);
+>>>>>>> refs/remotes/origin/Develop
             }
 
                 else 
@@ -81,6 +94,7 @@ namespace FOReserva.Controllers
                 
                 }
 
+<<<<<<< HEAD
                
             }
 
@@ -98,6 +112,12 @@ namespace FOReserva.Controllers
 
         }
             
+=======
+                Console.Write("No se tienen revisiones");       //mostrar mensaje al usuario y no mostrar nada
+                //return View(lista);
+            }
+            return null;
+>>>>>>> refs/remotes/origin/Develop
         }
 
   
