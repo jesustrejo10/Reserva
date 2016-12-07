@@ -349,6 +349,7 @@
     <Content Include="Content\assets\images\demo\shop\products\300x450\p7.jpg" />
     <Content Include="Content\assets\images\demo\shop\products\300x450\p8.jpg" />
     <Content Include="Content\assets\images\demo\shop\products\300x450\p9.jpg" />
+    <Content Include="Content\assets\images\favicon.ico" />
     <Content Include="Content\assets\images\female.png" />
     <Content Include="Content\assets\images\footer_sprite.png" />
     <Content Include="Content\assets\images\grabbing.png" />
