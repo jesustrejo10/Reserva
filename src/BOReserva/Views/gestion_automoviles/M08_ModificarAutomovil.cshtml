@@ -19,24 +19,24 @@
                     <div class="row">
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
-                                <label for="placa">Placa del vehiculo</label>
-                                @Html.TextBoxFor(m => m._matricula, null, new { @class = "form-control", @placeholder = "Placa", @id = "vehi_placa", @disabled = "disabled", @readonly = "readonly"})
+                                <label for="placa">Placa del vehiculo</label>                               
+                                     @Html.TextBoxFor(m => m._matricula, null, new { @class = "form-control", @id = "vehi_modelo", @readonly = "readonly" })
                             </div>
                             <div class="col-xs-6">
                                 <label for="modelo">Fabricante</label>
                                 
-                                @Html.TextBoxFor(m => m._fabricante, null, new { @class = "form-control", @placeholder = "Marca", @id = "vehi_marca", @disabled = "disabled", @readonly = "readonly" })
+                                @Html.TextBoxFor(m => m._fabricante, null, new { @class = "form-control", @placeholder = "Marca", @id = "vehi_marca", @readonly = "readonly" })
                             </div>
                         </div>
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <label for="modelo">Modelo</label>
-                                @Html.TextBoxFor(m => m._modelo, null, new { @class = "form-control", @placeholder = "Marca", @id = "vehi_modelo", @disabled = "disabled", @readonly = "readonly" })
+                                @Html.TextBoxFor(m => m._modelo, null, new { @class = "form-control", @placeholder = "Marca", @id = "vehi_modelo", @readonly = "readonly" })
                             </div>
                             <div class="col-xs-6">
                                 <label for="anio">Año de fabricacion</label>
-                                @Html.TextBoxFor(m => m._anio, null, new { @class = "form-control", @placeholder = "Placa", @id = "vehi_modelo", @disabled = "disabled", @readonly = "readonly" })
+                                @Html.TextBoxFor(m => m._anio, null, new { @class = "form-control", @placeholder = "Placa", @id = "vehi_modelo",  @readonly = "readonly" })
                             </div>
                         </div>
                         <div>&nbsp;</div>
@@ -85,52 +85,14 @@
                             </div>
                             <div class="col-xs-6">
                                 <label for="capacidad">Capacidad</label>
-                                @Html.TextBoxFor(m => m._cantpasajeros, null, new { @class = "form-control", @placeholder = "Tipo", @id = "vehi_cantidad", @disabled = "disabled", @readonly = "readonly" })
+                                @Html.TextBoxFor(m => m._cantpasajeros, null, new { @class = "form-control", @placeholder = "Tipo", @id = "vehi_cantidad",  @readonly = "readonly" })
                             </div>
                         </div>
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
-                                <label for="color">Color</label>
-                                @{
-                                    List<SelectListItem> _color = new List<SelectListItem>();
-                                    _color.Add(new SelectListItem
-                                    {
-                                        Text = "",
-                                        Value = ""
-                                    });
-                                    _color.Add(new SelectListItem
-                                         {
-                                             Text = "Azul",
-                                             Value = "Azul"
-                                         });
-                                    _color.Add(new SelectListItem
-                                    {
-                                        Text = "Negro",
-                                        Value = "Negro"
-                                    });
-                                    _color.Add(new SelectListItem
-                                    {
-                                        Text = "Blanco",
-                                        Value = "Blanco"
-                                    });
-                                    _color.Add(new SelectListItem
-                                    {
-                                        Text = "Rojo",
-                                        Value = "Rojo"
-                                    });
-                                    _color.Add(new SelectListItem
-                                    {
-                                        Text = "Gris",
-                                        Value = "Gris"
-                                    });
-                                    _color.Add(new SelectListItem
-                                    {
-                                        Text = "Verde",
-                                        Value = "Verde"
-                                    });
-                                }
-                                @Html.DropDownListFor(m => m._tipovehiculo, _color, new { @class = "form-control", @placeholder = "Color", @id = "vehi_color" })
+                                <label for="color">Color</label>                                
+                                @Html.DropDownListFor(m => m._color, BOReserva.Controllers.gestion_automovilesController.colores(), new { @class = "form-control", @placeholder = "Color", @id = "vehi_tipo" })
                             </div>
                             <div class="col-xs-6">
                                 <label for="kilometraje">Kilometraje</label>
@@ -141,96 +103,39 @@
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <label for="fecharegistro">Fecha de registro</label>
-                                @Html.TextBoxFor(m => m._fecharegistro, null, new { @type = "date", @class = "form-control", @placeholder = "Kilometraje", @id = "vehi_registro", @disabled="disabled", @readonly="readonly" })
+                                @Html.TextBoxFor(m => m._fecharegistro, null, new { @class = "form-control", @placeholder = "Kilometraje", @id = "vehi_registro", @readonly="readonly" })
                             </div>
                             <div class="col-xs-6">
                                 <label for="">Pais</label>
-                                @{
-                                    List<SelectListItem> _pais = new List<SelectListItem>();
-                                    _pais.Add(new SelectListItem
-                                    {
-                                        Text = "",
-                                        Value = ""
-                                    });
-                                    _pais.Add(new SelectListItem
-                                    {
-                                        Text = "Venezuela",
-                                        Value = "Venezuela"
-                                    });
-                                    _pais.Add(new SelectListItem
-                                    {
-                                        Text = "Estados Unidos",
-                                        Value = "USA"
-                                    });
-                                }
-                                @Html.DropDownListFor(m => m._pais, _pais, new { @class = "form-control", @placeholder = "Pais", @id = "vehi_pais" })
+                                @Html.DropDownListFor(m => m._pais, BOReserva.Controllers.gestion_automovilesController.pais(), new { @class = "form-control", @placeholder = "Pais", @id = "vehi_pais" })
                             </div>
                         </div>
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
-                                <label for="estado">Estado</label>
-                                @{
-                                    List<SelectListItem> _estado = new List<SelectListItem>();
-                                    _estado.Add(new SelectListItem
-                                    {
-                                        Text = "",
-                                        Value = ""
-                                    });
-                                    _estado.Add(new SelectListItem
-                                    {
-                                        Text = "Miranda",
-                                        Value = "Miranda"
-                                    });
-                                    _estado.Add(new SelectListItem
-                                    {
-                                        Text = "Texas",
-                                        Value = "Texas"
-                                    });
-                                }
-                                @Html.DropDownListFor(m => m._estado, _estado, new { @class = "form-control", @placeholder = "Estado", @id = "vehi_estado" })
+                                <label for="">Ciudad</label>                                
+                                @Html.DropDownListFor(m => m._ciudad, BOReserva.Controllers.gestion_automovilesController.ciudades(), new { @class = "form-control", @placeholder = "Pais", @id = "vehi_pais" })
                             </div>
-                            <div class="col-xs-6">
-                                <label for="Ciudad">Ciudad</label>
-                                @{
-                                    List<SelectListItem> _ciudad = new List<SelectListItem>();
-                                    _ciudad.Add(new SelectListItem
-                                    {
-                                        Text = "",
-                                        Value = ""
-                                    });
-                                    _ciudad.Add(new SelectListItem
-                                    {
-                                        Text = "Los Teques",
-                                        Value = "Teques"
-                                    });
-                                    _ciudad.Add(new SelectListItem
-                                    {
-                                        Text = "Dallas",
-                                        Value = "Dallas"
-                                    });
-                                }
-                                @Html.DropDownListFor(m => m._ciudad, _ciudad, new { @class = "form-control", @placeholder = "Ciudad", @id = "vehi_ciudad" })
-                            </div>
-                        </div>
-                        <div>&nbsp;</div>
-                        <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <label for="transmision">Transmision:</label>
-                               
-                                @Html.TextBoxFor(m => m._transmision, null, new { @class = "form-control", @placeholder = "Ciudad", @id = "vehi_transmision", @disabled = "disabled", @readonly = "readonly" })
+
+                                @Html.TextBoxFor(m => m._transmision, null, new { @class = "form-control", @placeholder = "Ciudad", @id = "vehi_transmision", @readonly = "readonly" })
                             </div>
-                            <div class="col-xs-6">
-                                <label for="preciocompra">Precio de compra ($):</label>
-                                @Html.TextBoxFor(m => m._preciocompra, null, new { @type = "number", @class = "form-control", @placeholder = "Dolares", @id = "vehi_compra", @disabled = "disabled", @readonly = "readonly" })
-                            </div>
+
                         </div>
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="preciocompra">Precio de compra ($):</label>
+                                @Html.TextBoxFor(m => m._preciocompra, null, new { @type = "number", @class = "form-control", @placeholder = "Dolares", @id = "vehi_compra",  @readonly = "readonly" })
+                            </div>
                             <div class="col-xs-6">
                                 <label for="tarifa">Tarifa diaria ($):</label>
                                 @Html.TextBoxFor(m => m._precioalquiler, null, new { @type = "number", @class = "form-control", @placeholder = "Dolares", @id = "vehi_tarifa" })
                             </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <label for="penalidad">Penalidad diaria ($):</label>
                                 @Html.TextBoxFor(m => m._penalidaddiaria, null, new { @type = "number", @class = "form-control", @placeholder = "Dolares", @id = "vehi_penalidad" })
@@ -266,8 +171,26 @@
                 data: form.serialize(),
                 type: 'POST',
                 success: function (data) {
-                    alert("Se modifico el vehiculo exitosamente");
-                    $('#formModifyVehicle')[0].reset();
+                    alert("Se ha modificado exitosamente y sera redirigido a la tabla de vehiculos");
+                    //$('#formModifyVehicle')[0].reset();
+                    var url1 = '/gestion_automoviles/M08_VisualizarAutomoviles';
+                    var method = 'GET';
+                    var data1 = '';
+
+                    $.ajax(
+                        {
+                            url: url1,
+                            type: method,
+                            data: data,
+                            success: function (data, textStatus, jqXHR) {
+
+                                $("#contenido").empty();
+                                $("#contenido").append(data);
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert(errorThrown);
+                            }
+                        });
                 }
             });
         });

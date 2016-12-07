@@ -36,13 +36,12 @@ namespace BOReserva.Models.gestion_automoviles
           public int _disponibilidad { get; set; }
           public String _transmision { get; set; } 
           public String _pais { get; set; } 
-          public String _estado { get; set; } 
           public String _ciudad { get; set; } 
         
        
           public CAutomovil(String matricula, String modelo, String fabricante, int anio, String tipovehiculo, double kilometraje, int cantpasajeros, 
                          double preciocompra, double precioalquiler, double penalidaddiaria, DateTime fecharegistro, String color, int disponibilidad, 
-                         String transmision, String pais, String estado, String ciudad)
+                         String transmision, String pais, String ciudad)
           {
               _matricula  = matricula;
               _modelo = modelo;
@@ -59,7 +58,6 @@ namespace BOReserva.Models.gestion_automoviles
               _disponibilidad = disponibilidad;
               _transmision = transmision;
               _pais = pais;
-              _estado = estado;
               _ciudad = ciudad;
           }
 
@@ -93,27 +91,10 @@ namespace BOReserva.Models.gestion_automoviles
              _kilometraje = _kilometraje + kilometraje;
          }
          
-         public void MModificarvehiculo(String matricula, String modelo, String fabricante, int anio, String tipovehiculo, double kilometraje, int cantpasajeros, 
-                         double preciocompra, double precioalquiler, double penalidaddiaria, DateTime fecharegistro, String color, int disponibilidad, 
-                         String transmision, String pais, String estado, String ciudad) //METODO PARA MODIFICAR UN VEHICULO
+         public int MModificarvehiculoBD(CAutomovil vehiculo) //METODO PARA MODIFICAR UN VEHICULO
           {
-              _matricula  = matricula; 
-              _modelo  = modelo; 
-              _fabricante  = fabricante; 
-              _anio  = anio; 
-              _tipovehiculo  = tipovehiculo; 
-              _kilometraje  = kilometraje; 
-              _cantpasajeros  = cantpasajeros; 
-              _preciocompra  = preciocompra; 
-              _precioalquiler  = precioalquiler; 
-              _penalidaddiaria  = penalidaddiaria;
-              _fecharegistro  = fecharegistro; 
-              _color  = color; 
-              _disponibilidad  = disponibilidad;
-              _transmision  = transmision; 
-              _pais  = pais; 
-              _estado  = estado; 
-              _ciudad  = ciudad;
+              CBasededatos_vehiculo modificar = new CBasededatos_vehiculo();
+              return modificar.MModificarVehiculoBD(vehiculo);
           }
 
 
