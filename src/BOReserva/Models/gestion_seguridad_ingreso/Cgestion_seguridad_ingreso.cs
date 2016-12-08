@@ -12,6 +12,7 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
        private String _claveCampoTexto;
        private String _nombreUsuarioTexto;
 
+
        public Cgestion_seguridad_ingreso()
        {
        }
@@ -33,7 +34,7 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
         public Cgestion_seguridad_ingreso verificarUsuario(String _correoCampoTexto, String _claveCampoTexto)
         {
             M01SQL bd = new M01SQL();
-            Cgestion_seguridad_ingreso verificacion = bd.UsuarioEnBD(_correoCampoTexto, _claveCampoTexto);
+            Cgestion_seguridad_ingreso verificacion = bd.UsuarioEnBD(_correoCampoTexto);
             if (verificacion._correoCampoTexto.Equals(_correoCampoTexto) && verificacion._claveCampoTexto.Equals(_claveCampoTexto))
             {
                 return verificacion;
@@ -47,6 +48,30 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
             }
             else
                 throw new Cvalidar_usuario_Exception("Usuario o contraseña incorrecto");*/
+        }
+
+        public Boolean EstaActivo() 
+        {
+            M01SQL bd = new M01SQL();
+            String estatus = bd.UsuarioEstatus(this._correoCampoTexto);
+            if (estatus.ToLower().Equals("activo"))
+            {
+                return true;
+            }
+            else
+                return false;
+ 
+        }
+
+        public Boolean BloquearUsuario() {
+            M01SQL bd = new M01SQL();
+            if (bd.BloquearUsuario(this._correoCampoTexto)) {
+                return true;
+            }
+            else
+            {
+                return false; // Creo que aqui deberia lanzar una excepcion
+            }
         }
 
         public String correoCampoTexto
