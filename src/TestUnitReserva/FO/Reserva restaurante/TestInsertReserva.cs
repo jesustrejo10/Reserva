@@ -8,6 +8,7 @@ namespace TestUnitReserva.FO.Reserva_restaurante
     [TestFixture]
     class TestInsertReserva
     {
+       /*
         private CReservation_Restaurant reserva;
 
         [SetUp]
@@ -16,5 +17,6 @@ namespace TestUnitReserva.FO.Reserva_restaurante
             reserva = new CReservation_Restaurant(null, "carlos Herrera", new DateTime(), "09:00", 6);
             
         }
+        * */
     }
 }
