@@ -77,7 +77,7 @@ namespace FOReserva.Servicio
                     rest.Addres = dir;
                 }
             }
-            CloseConextion();
+            CloseConnection();
             return rest;
         }
 
