@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace FOReserva.Models.Hoteles
+namespace FOReserva.Models.ReservaHabitacion
 {
-    public class Cvista_Hotel
+    public class CCiudad
     {
         public int Codigo { get; set; }
         public string Nombre { get; set; }
