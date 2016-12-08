@@ -56,7 +56,6 @@ namespace FOReserva.Controllers
         
         public ActionResult Eliminar_Revision(string usuario, CRevision revision)
         {
-
             
             List<CRevision> lista;
 
