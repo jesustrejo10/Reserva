@@ -67,6 +67,14 @@ namespace BOReserva.Controllers
             
         }
 
+        public ActionResult M02_VisualizarAviones()
+        {
+            manejadorSQL sql = new manejadorSQL();
+            List<CAvion> aviones = new List<CAvion>();
+            aviones = sql.listarAvionesEnBD();
+            return PartialView(aviones);
+        }
+
 
 
 

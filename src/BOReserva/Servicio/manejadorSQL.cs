@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -57,6 +58,42 @@ namespace BOReserva.Servicio
                 return false;
             }
 
+        }
+
+        //Procedimiento del Modulo 2 para retornar una lista con los aviones en la bd
+        public List<CAvion> listarAvionesEnBD()
+        {
+            List<CAvion> aviones = new List<CAvion>();
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "SELECT * FROM Avion";
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                while (lector.Read())
+                {
+                    CAvion avion = new CAvion(Int32.Parse(lector["avi_id"].ToString()), lector["avi_matricula"].ToString(),
+                    lector["avi_modelo"].ToString(), Int32.Parse(lector["avi_pasajeros_turista"].ToString()), 
+                    Int32.Parse(lector["avi_pasajeros_ejecutiva"].ToString()), Int32.Parse(lector["avi_pasajeros_vip"].ToString()), 
+                    float.Parse(lector["avi_cap_equipaje"].ToString()), float.Parse(lector["avi_max_dist"].ToString()), 
+                    float.Parse(lector["avi_max_vel"].ToString()), float.Parse(lector["avi_max_comb"].ToString()),
+                    Int32.Parse(lector["avi_disponibilidad"].ToString()));
+                    aviones.Add(avion);
+                }
+                return aviones;
+
+            }
+            catch ( SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         //Procedimiento del Modulo 9 para agregar hoteles a la base de datos.
