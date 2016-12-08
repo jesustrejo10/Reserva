@@ -169,6 +169,10 @@
     <value>M12_ListarUsuarios</value>
     <comment>Stored Procedure para listar todos los usuarios del BO</comment>
   </data>
+  <data name="ModificarUsuario" xml:space="preserve">
+    <value>M12_ModificarUsuario</value>
+    <comment>Stored Procedure para modificar un usuario.</comment>
+  </data>
   <data name="NombreUsuario" xml:space="preserve">
     <value>nombre</value>
     <comment>Nombre del usuario</comment>
