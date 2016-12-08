@@ -278,7 +278,7 @@ namespace BOReserva.Models.gestion_automoviles
                 cmd.Dispose();
                 con.Close();
                 return listapaises;
-            }
+            }catch(Inva)
             catch (SqlException ex)
             {
                 con.Close();

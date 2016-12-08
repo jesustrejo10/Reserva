@@ -1411,6 +1411,7 @@
     <Content Include="Views\gestion_usuarios\M12_ModificarUsuario.cshtml" />
     <Content Include="Views\gestion_usuarios\_Layout.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Crear.cshtml" />
+    <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Visualizar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
