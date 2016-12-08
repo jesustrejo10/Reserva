@@ -29,11 +29,13 @@
     <link href="@Url.Content("~/Content/assets/css/custom.css")" rel="stylesheet" type="text/css" />
 
 
-
+    
     <!-- PAGE LEVEL SCRIPTS -->
     <link href="@Url.Content("~/Content/assets/css/header-1.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/assets/css/layout-shop.css")" rel=" stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/assets/css/color_scheme/green.css")" rel="stylesheet" type="text/css" id="color_scheme" />
+
+    <link href="@Url.Content("~/Content/assets/css/global.css")" rel="stylesheet" />
 </head>
 
 <body class="smoothscroll enable-animation">
@@ -63,7 +65,7 @@
                     </button>
 
                     <!-- Logo -->
-                    <a class="logo pull-left" href="index.html">
+                    <a onclick="cargarContenido('#MD', 'get', '/gestion_vuelos/gestion_vuelos', null, this)" class="logo pull-left" href="#">
                         <img src="@Url.Content("~/Content/assets/images/logo_final.png")" alt=" " />
                     </a>
 
@@ -89,15 +91,15 @@
                             <ul id="topMain" class="nav nav-pills nav-main">
                                 <li class="active">
                                     <!-- HOME -->
-                                    <a href="index.html"> INICIO </a>
+                                    <a onclick="cargarContenido('#MD', 'get', '/gestion_vuelos/gestion_vuelos', null, this)" href="#"> INICIO </a>
                                 </li>
                                 <li>
                                     <!-- SOBRE NOSOTROS -->
-                                    <a href="page-about-us.html"> INICIAR SESIÓN </a>
+                                    <a onclick="cargarContenido('#CI', 'get', '/gestion_reserva_habitaciones/mis_reservas', null, this)" href="#"> INICIAR SESI&Oacute;N </a>
                                 </li>
                                 <li>
                                     <!-- CONTACTO -->
-                                    <a href="page-contact.html"> REGISTRARSE </a>
+                                    <a onclick="cargarContenido('#CP', 'get', '/gestion_vuelos/gestion_vuelos', null, this)" href="#"> REGISTRARSE </a>
                                 </li>
                             </ul>
 
@@ -191,5 +193,6 @@
     <script type="text/javascript" src="@Url.Content("~/Scripts/cargadorPestanas.js")"></script>
     <!-- PAGE LEVEL SCRIPTS -->
     <script type="text/javascript" src="@Url.Content("~/Content/assets/js/view/demo.shop.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/hola.js")"></script>
 </body>
 </html>
