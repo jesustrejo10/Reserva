@@ -28,6 +28,7 @@ namespace FOReserva.Controllers
         public JsonResult buscarVuelo(Cvista_Vuelos model)
         {
             String prueba = model._prueba;
+            Console.WriteLine(prueba);
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
 
