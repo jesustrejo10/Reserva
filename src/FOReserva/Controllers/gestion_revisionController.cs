@@ -82,13 +82,11 @@ namespace FOReserva.Controllers
             List<CRevision> lista;
 
 
-            ManejadorSQLMuestraRevision manejador = new ManejadorSQLMuestraRevision();
+            ManejadorSQLRevision manejador = new ManejadorSQLRevision();
             lista = manejador.ConsultarRevision(usuario);
 
             return PartialView(lista);
         }
-
-
 
         public ActionResult Eliminar_Revision(string usuario, CRevision revision)
         {
@@ -98,7 +96,7 @@ namespace FOReserva.Controllers
 
 
 
-            ManejadorSQLMuestraRevision manejador = new ManejadorSQLMuestraRevision();  // crear en Servicios un manejador para listar 
+            ManejadorSQLRevision manejador = new ManejadorSQLRevision();  // crear en Servicios un manejador para listar 
             lista = manejador.ConsultarRevision2(usuario, revision);
 
 
@@ -112,7 +110,7 @@ namespace FOReserva.Controllers
             else 
             {
 
-                ManejadorSQLMuestraRevision manejador2 = new ManejadorSQLMuestraRevision();  // crear en Servicios un manejador para listar 
+                ManejadorSQLRevision manejador2 = new ManejadorSQLRevision();  // crear en Servicios un manejador para listar 
                 lista = manejador2.Eliminar_Revision(usuario, revision);
 
                 return PartialView(lista);
@@ -122,7 +120,6 @@ namespace FOReserva.Controllers
 
 
         }
-
 
         public ActionResult Crear_Revsion(CReservation_Restaurant reserva, string usuario) //crear reserva restaurant
         {
@@ -142,7 +139,7 @@ namespace FOReserva.Controllers
             if ((reserva != null)) //&& (  res== reserva))
             {
 
-                ManejadorSQLMuestraRevision manejador = new ManejadorSQLMuestraRevision();  // crear en Servicios un manejador para listar 
+                ManejadorSQLRevision manejador = new ManejadorSQLRevision();  // crear en Servicios un manejador para listar 
                 lista = manejador.Crear_Revision(reserva, usuario);
                 return PartialView(lista);
 
@@ -174,7 +171,7 @@ namespace FOReserva.Controllers
             if ((reserva != null)) //&& (  res== reserva))
             {
 
-                ManejadorSQLMuestraRevision manejador = new ManejadorSQLMuestraRevision();  // crear en Servicios un manejador para listar 
+                ManejadorSQLRevision manejador = new ManejadorSQLRevision();  // crear en Servicios un manejador para listar 
                 lista = manejador.Crear_RevisionHotel(reserva, usuario, fecha);
                 return PartialView(lista);
 

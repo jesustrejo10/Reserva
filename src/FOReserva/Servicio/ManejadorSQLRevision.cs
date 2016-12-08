@@ -8,11 +8,11 @@ using FOReserva.Models.Restaurantes;
 
 namespace FOReserva.Servicio
 {
-    public class ManejadorSQLMuestraRevision : manejadorSQL
+    public class ManejadorSQLRevision : manejadorSQL
     {
 
 
-        public ManejadorSQLMuestraRevision() : base() { }
+        public ManejadorSQLRevision() : base() { }
 
 
         /*Buscar Revision por Usuario*/
