@@ -1652,6 +1652,7 @@
     <Content Include="Models\Restaurantes\placeholder.html" />
     <Content Include="Models\Vuelos\placeholder.html" />
     <Content Include="Scripts\cargadorPestanas.js" />
+    <Content Include="Scripts\hola.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

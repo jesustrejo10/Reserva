@@ -14,20 +14,22 @@
         </div>
         <div class="panel-body center-block">
 
-            <form class="validate  " action="php/contact.php" method="post" enctype="multipart/form-data" data-success="Sent! Thank you!" data-toastr-position="top-right">
+            @using (Html.BeginForm("reservar_restaurant", "gestion_reserva_restaurante", FormMethod.Post))
+            {
+                <input type="hidden" name="id_rest" id="id_rest" value="@Model.Id" />
                 <div class="form-group">
 
                     <label>A nombre de: </label>
-                    <input type="text" name="" value="" class="form-control" data-format="" data-lang="en" data-rtl="false" placeholder="Ingrese su nombre">
+                    <input type="text" name="name_client" id="name_client" value="" class="form-control" data-format="" data-lang="en" data-rtl="false" placeholder="Ingrese su nombre">
                 </div>
                 <div class="form-group">
 
                     <label>Fecha: </label>
-                    <input type="text" name="contact[start_date]" value="" class="form-control datepicker required" data-format="yyyy-mm-dd" data-lang="en" data-rtl="false" placeholder="Selecciona la fecha">
+                    <input type="text" name="reserv_date" id="reserv_date" value="" class="form-control datepicker required" data-format="yyyy-mm-dd" data-lang="en" data-rtl="false" placeholder="Selecciona la fecha">
                 </div>
                 <div class="form-group">
                     <label>Hora:</label>
-                    <select name="contact[position]" class="form-control pointer required">
+                    <select name="reserv_hour" id="reserv_hour" class="form-control pointer required">
                         <option value="" selected>Selecciona la hora:</option>
                         <option value="">7:00</option>
                         <option value="">8:00</option>
@@ -50,12 +52,12 @@
                 </div>
                 <div class="form-group">
                     <label>Numero de personas:</label>
-                    <input type="text" value="1" min="1" max="1000" class="form-control stepper">
+                    <input type="text" name="number_person" id="number_person" value="1" min="1" max="1000" class="form-control stepper">
                 </div>
                 <div class="text-center">
-                    <a href="confirm_restaurantes.html" class="btn  btn-primary">Reservar</a>
+                    <input type="submit" value="Reservar" class="btn btn-primary boton">
                 </div>
-            </form>
+            }
         </div>
 
     </div>
