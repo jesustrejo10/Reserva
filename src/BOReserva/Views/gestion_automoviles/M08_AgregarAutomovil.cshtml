@@ -55,7 +55,7 @@
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <label for="modelo">Modelo</label>
-                                @Html.TextBoxFor(m => m._modelo, null, new {@class = "form-control", @placeholder = "Modelo", @id = "vehi_modelo", @onblur = "checkTextField(this);" })
+                                @Html.TextBoxFor(m => m._modelo, null, new { @class = "form-control", @placeholder = "Modelo", @id = "vehi_modelo", @onblur = "checkTextModelo(this);" })
                             </div>
                             <div class="col-xs-6">
                                 <label for="anio">Año de fabricacion</label>
@@ -296,6 +296,14 @@
         });
        
 
+        function checkTextModelo(field) {
+            var matricula = $('#vehi_modelo').val();
+            if (/[^a-z0-9\.]/gi.test(matricula)) {  // anything but a-zA-Z0-9 and dot
+                alert("No puede contener caracteres especiales");
+                field.value = '';
+            }
+        }
+      
         function checkTextField(field) {
             var matricula = $('#vehi_placa').val();
             if (/[^a-z0-9\.]/gi.test(matricula)) {  // anything but a-zA-Z0-9 and dot
@@ -303,7 +311,7 @@
                 field.value = '';
             }
         }
-      
+
         function checklargo(field) {
             if (field.value > 9999999999) {
                 alert("No puedes exceder los 10 digitos");
