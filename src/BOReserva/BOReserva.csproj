@@ -515,7 +515,7 @@
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarPorVuelo.html" />
     <Content Include="Views\gestion_comida_vuelo\M06_ConsultarComidas.html" />
     <Content Include="Views\gestion_comida_vuelo\placeholder.html" />
-    <Content Include="Views\gestion_cruceros\css\style_module.css" />
+    <Content Include="Content\M24_css\style_module.css" />
     <Content Include="Views\gestion_cruceros\js\module.js" />
     <Content Include="Views\gestion_cruceros\placeholder.html" />
     <Content Include="Views\gestion_equipaje_perdido\placeholder.html" />

@@ -2,51 +2,49 @@
     <div class="box-body">
         <div class="box-header with-border">
             <h1 class="box-title"> Listado de Cruceros</h1>
-            <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"></button>
-            </div>
-        </div>
-        <div class="col-xs-10">
-            <div class="row" id="listaCruceros">
-                <div class="crucero crTitles">
-                    <div class="crNombre"> <b>Nombre</b></div>
-                    <div class="crCompania"> <b>Compañia</b></div>
-                    <div class="crCapacidad"><b>Capacidad</b></div>
-                    <div class="crStatus"><b>Estado</b></div>
-                    <div class="crAcciones"><b>Acciones</b> </div>
+            <div class="row">
+                <div class="col-xs-10">
+                    <div class="row" id="listaCruceros">
+                        <div class="crucero crTitles">
+                            <div class="crNombre"> <b>Nombre</b></div>
+                            <div class="crCompania"> <b>Compañia</b></div>
+                            <div class="crCapacidad"><b>Capacidad</b></div>
+                            <div class="crStatus"><b>Estado</b></div>
+                            <div class="crAcciones"><b>Acciones</b> </div>
+                        </div>
+                        <div class="listCru">
+                            <div class="crucero ">
+                                <div class="crNombre"> <i class="fa fa-ship"></i> Crucero del Caribe </div>
+                                <div class="crCompania">Royal Caribbean</div>
+                                <div class="crCapacidad">2000 <i class="fa fa-user"></i></div>
+                                <div class="crStatus"><i class="fa fa-circle started"></i></div>
+                                <div class="crAcciones"> <i class="fa fa-check"></i> <i class="fa fa-eye" data-toggle="modal" data-target="#viewCruiser"></i> <i class="fa fa-trash"></i> </div>
+                            </div>
+                            <div class="crucero ">
+                                <div class="crNombre"> <i class="fa fa-ship"></i> Crucero Jamaiquino </div>
+                                <div class="crCompania">Royal Caribbean</div>
+                                <div class="crCapacidad">2500 <i class="fa fa-user"></i></div>
+                                <div class="crStatus"><i class="fa fa-circle started"></i></div>
+                                <div class="crAcciones"> <i class="fa fa-check"></i> <i class="fa fa-eye" data-toggle="modal" data-target="#viewCruiser"></i> <i class="fa fa-trash"></i> </div>
+                            </div>
+                            <div class="crucero ">
+                                <div class="crNombre"> <i class="fa fa-ship"></i> Crucero Pampatar </div>
+                                <div class="crCompania">Interntational</div>
+                                <div class="crCapacidad">3500 <i class="fa fa-user"></i></div>
+                                <div class="crStatus"><i class="fa fa-circle paused"></i></div>
+                                <div class="crAcciones"> <i class="fa fa-check"></i> <i class="fa fa-eye" data-toggle="modal" data-target="#viewCruiser"></i> <i class="fa fa-trash"></i> </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="listCru">
-                    <div class="crucero ">
-                        <div class="crNombre"> <i class="fa fa-ship"></i> Crucero del Caribe </div>
-                        <div class="crCompania">Royal Caribbean</div>
-                        <div class="crCapacidad">2000 <i class="fa fa-user"></i></div>
-                        <div class="crStatus"><i class="fa fa-circle started"></i></div>
-                        <div class="crAcciones"> <i class="fa fa-times"></i> <i class="fa fa-eye" data-toggle="modal" data-target="#viewCruiser"></i> <i class="fa fa-trash"></i> </div>
-                    </div>
-                    <div class="crucero ">
-                        <div class="crNombre"> <i class="fa fa-ship"></i> Crucero Jamaiquino </div>
-                        <div class="crCompania">Royal Caribbean</div>
-                        <div class="crCapacidad">2500 <i class="fa fa-user"></i></div>
-                        <div class="crStatus"><i class="fa fa-circle started"></i></div>
-                        <div class="crAcciones"> <i class="fa fa-times"></i> <i class="fa fa-eye" data-toggle="modal" data-target="#viewCruiser"></i> <i class="fa fa-trash"></i> </div>
-                    </div>
-                    <div class="crucero ">
-                        <div class="crNombre"> <i class="fa fa-ship"></i> Crucero Pampatar </div>
-                        <div class="crCompania">Interntational</div>
-                        <div class="crCapacidad">3500 <i class="fa fa-user"></i></div>
-                        <div class="crStatus"><i class="fa fa-circle paused"></i></div>
-                        <div class="crAcciones"> <i class="fa fa-check"></i> <i class="fa fa-eye" data-toggle="modal" data-target="#viewCruiser"></i> <i class="fa fa-trash"></i> </div>
-                    </div>
-                </div>
+                
             </div>
-        </div>
     </div>
-</div>
-                <div class="col-xs-2">
-                    <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#createCruiser">
-                        <span><i class="fa fa-ship" style="font-size:20px"></i></span>
-                        <br> Crear crucero
-                    </button>
-                </div>
-            
+        <div class="col-xs-2">
+            <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#createCruiser">
+                <span><i class="fa fa-ship" style="font-size:20px"></i></span>
+                <br> Crear crucero
+            </button>
+        </div>
+</div>            
         
