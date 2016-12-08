@@ -197,6 +197,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\gestion_planificacion_vacacionesController.cs" />
     <Compile Include="Controllers\gestion_reserva_habitacionesController.cs" />
     <Compile Include="Controllers\gestion_reserva_restauranteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -207,6 +208,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\BaseEntity.cs" />
+    <Compile Include="Models\Itinerario\itinerario.cs" />
     <Compile Include="Models\ORM\DB.cs" />
     <Compile Include="Models\ORM\M20_ActualizarEstadoReservaHabitacion_Result.cs">
       <DependentUpon>ModelDBReserva.tt</DependentUpon>
@@ -3030,6 +3032,7 @@
     <Content Include="Views\gestion_reserva_habitaciones\editar_reserva.cshtml" />
     <Content Include="Views\gestion_reserva_habitaciones\mis_reservas.cshtml" />
     <Content Include="Views\Shared\_MenuPerfil.cshtml" />
+    <Content Include="Views\gestion_planificacion_vacaciones\gestion_itinerario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
