@@ -8,19 +8,6 @@ namespace BOReserva.Models.gestion_automoviles
     public class CAutomovil
     {
 
-        /*public int ID { get; set; }
-        public string Name { get; set; }
-        public string Address { get; set; }
-        public string Town { get; set; }
-
-        public Vehicle(int id, String name, String address, String town) {
-            ID = id;
-            Name = name;
-            Address = address;
-            Town = town;
-        }*/
-
-
           public String _matricula { get; set; } 
           public String _modelo { get; set; } 
           public String _fabricante { get; set; } 
@@ -78,18 +65,11 @@ namespace BOReserva.Models.gestion_automoviles
              return consultar.MMostrarvehiculoBD(matricula);
          }
    
-         public void MActivarVehiculo (){ //METODO PARA ACTIVAR UN VEHICULO
-            _disponibilidad = 1;
+         public int MDisponibilidadVehiculoBD (String matricula, int activar_o_desactivar){ //METODO PARA ACTIVAR UN VEHICULO, EN EL INT activar_o_desactivar 1 ES ACTIVAR Y 0 DESACTIVAR
+             CBasededatos_vehiculo consultar = new CBasededatos_vehiculo();
+             return consultar.MDisponibilidadVehiculoBD(matricula,activar_o_desactivar);
          }
-         
-         
-         public void MDesactivarVehiculo (){ //METODO PARA DESACTIVAR UN VEHICULO
-            _disponibilidad = 0;
-         }
-         
-         public void MAumentarkilometraje (double kilometraje){ //METODO QUE AUMENTA EL KILOMETRAJE
-             _kilometraje = _kilometraje + kilometraje;
-         }
+
          
          public int MModificarvehiculoBD(CAutomovil vehiculo) //METODO PARA MODIFICAR UN VEHICULO
           {
@@ -97,6 +77,11 @@ namespace BOReserva.Models.gestion_automoviles
               return modificar.MModificarVehiculoBD(vehiculo);
           }
 
+         public int MBorrarvehiculoBD(String vehiculo) //METODO PARA MODIFICAR UN VEHICULO
+         {
+             CBasededatos_vehiculo modificar = new CBasededatos_vehiculo();
+             return modificar.MBorrarvehiculoBD(vehiculo);
+         }
 
     }
 }

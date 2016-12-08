@@ -179,7 +179,7 @@ namespace BOReserva.Models.gestion_automoviles
             }
         }
 
-        public int MBorrarvehiculo(String matricula)
+        public int MBorrarvehiculoBD(String matricula)
         {
             try
             {
@@ -284,6 +284,26 @@ namespace BOReserva.Models.gestion_automoviles
             {
                 con.Close();
                 return null;
+            }
+        }
+
+        public int MDisponibilidadVehiculoBD(string matricula, int activardesactivar)
+        {
+            try
+            {
+                con = new SqlConnection(connetionString);
+                con.Open();
+                String sql = "UPDATE Automovil SET aut_disponibilidad = "+activardesactivar+" WHERE aut_matricula = '" + matricula + "'";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                con.Close();
+                return 1;
+            }
+            catch (SqlException ex)
+            {
+                con.Close();
+                return 0;
             }
         }
     }

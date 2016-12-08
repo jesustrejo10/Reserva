@@ -37,7 +37,7 @@
                                     <td>
                                         <a href="#"> <i class="fa fa-eye clasedeprueba"></i></a>
                                         <a href="#"><i class="fa fa-gear modificar"></i></a>
-                                        <a href="#"><i class="fa fa-times"></i></a>
+                                        <a href="#"><i class="fa fa-times eliminar"></i></a>
                                     </td>
                                 </tr>
                             }
@@ -148,36 +148,8 @@
                     $("#contenido").append(data);
                 }).fail(function () {
                     alert("esta vaina se jodio")
-                });
-
-                        
+                });         
             });
-
-            /*
-            $(".clasedeprueba").click(function(){
-                alert("entrando aca por segunda vez");
-            }*/
-        //    var table = $('#example1').DataTable();
-
-          //  table.on("click", ".bolas", function () {
-            //    alert("canguro");
-                //var data = $(this).data('id');
-                //alert(data);
-                /*
-                var tr = jQuery("#car-" + data);
-                var modelo = tr.find("td.modelo").html();
-                alert(tr);
-                console.log(tr);//pinta en el console del browser la fila completa
-                jQuery.ajax({
-                    type: "GET",
-                    url: "/gestion_automoviles/M08_VisualizarAutomoviles",
-                    data: { valor: modelo }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
-                }).done(function (data) { $("#sdssss").append(data); }).fail(function () { });
-                */
-            //})
-
-
-
         });
 
         $(document).ready(function () {
@@ -196,11 +168,42 @@
                 }).fail(function () {
                     alert("esta vaina se jodio")
                 });
-
-
             });
+        });
 
+        $(document).ready(function () {
+            //e.preventDefault();
+            $(".eliminar").click(function () {
+                var identificador = $(this).parent().parent().parent().attr("id");
+                jQuery.ajax({
+                    type: "GET",
+                    url: "/gestion_automoviles/deleteVehicle",
+                    data: { matricula: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+                }).done(function (data) {
+                    //$("#sdssss").append(data);
+                    alert("Se elimino exitosamente el vehiculo")
+                    var url1 = '/gestion_automoviles/M08_VisualizarAutomoviles';
+                    var method = 'GET';
+                    var data1 = '';
 
+                    $.ajax(
+                        {
+                            url: url1,
+                            type: method,
+                            data: data,
+                            success: function (data, textStatus, jqXHR) {
+
+                                $("#contenido").empty();
+                                $("#contenido").append(data);
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert(errorThrown);
+                            }
+                        });
+                }).fail(function () {
+                    alert("esta vaina se jodio")
+                });
+            });
         });
     </script>
 

@@ -46,11 +46,6 @@
                                 @{
                                     List<SelectListItem> _tipos = new List<SelectListItem>();
                                     _tipos.Add(new SelectListItem
-                                    {
-                                        Text = "",
-                                        Value = ""
-                                    });
-                                    _tipos.Add(new SelectListItem
                                          {
                                              Text = "Sedan",
                                              Value = "Sedan"
@@ -107,7 +102,7 @@
                             </div>
                             <div class="col-xs-6">
                                 <label for="">Pais</label>
-                                @Html.DropDownListFor(m => m._pais, BOReserva.Controllers.gestion_automovilesController.pais(), new { @class = "form-control", @placeholder = "Pais", @id = "vehi_pais" })
+                                @Html.DropDownListFor(m => m._pais, BOReserva.Controllers.gestion_automovilesController.pais(), new { @class = "form-control", @placeholder = "Pais", @id = "vehi_pais"})
                             </div>
                         </div>
                         <div>&nbsp;</div>
@@ -199,15 +194,10 @@
         $("#modify_vehicle").click(function (e) {
             e.preventDefault();
             var form = $("#formModifyVehicle");
-            var anio = $('#vehi_anio').val();
-            var tipo = $('#vehi_tipo').val();
-            var color = $('#vehi_color').val();
             var kilometraje = $('#vehi_kilometraje').val();
-            var pais = $('#vehi_pais').val();
-            var ciudad = $('#vehi_ciudad').val();
             var tarifadiaria = $('#vehi_tarifa').val();
             var penalidaddiaria = $('#vehi_penalidad').val();
-            if (anio && tipo && color && kilometraje && pais && ciudad && tarifadiaria && penalidaddiaria) {
+            if (tarifadiaria && penalidaddiaria) {
                 $.ajax({
                     url: "gestion_automoviles/modifyVehicle",
                     data: form.serialize(),
@@ -237,25 +227,6 @@
                 });
             } else {
                 var error = "Los siguientes campos se encuentran vacios: \n\n";
-                
-                if (!anio) {
-                    error = error + "- Año \n";
-                }
-                if (!tipo) {
-                    error = error + "- Tipo \n";
-                }
-                if (!color) {
-                    error = error + "- Color \n";
-                }
-                if (!kilometraje) {
-                    error = error + "- Kilometraje \n";
-                }
-                if (!pais) {
-                    error = error + "- Pais \n";
-                }
-                if (!ciudad) {
-                    error = error + "- Ciudad \n";
-                }
                 if (!tarifadiaria) {
                     error = error + "- Tarifa diaria \n";
                 }

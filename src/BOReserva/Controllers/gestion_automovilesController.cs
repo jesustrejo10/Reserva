@@ -56,6 +56,9 @@ namespace BOReserva.Controllers
             return PartialView(automovil);
         }
 
+
+     
+
         public ActionResult M08_ModificarAutomovil(String matricula)
         {
             CBasededatos_vehiculo buscarvehiculo = new CBasededatos_vehiculo();
@@ -110,11 +113,6 @@ namespace BOReserva.Controllers
         public static List<SelectListItem> colores()
         {
             List<SelectListItem> _color = new List<SelectListItem>();
-            _color.Add(new SelectListItem
-            {
-                Text = "",
-                Value = ""
-            });
             _color.Add(new SelectListItem
             {
                 Text = "Azul",
@@ -200,7 +198,7 @@ namespace BOReserva.Controllers
             CAutomovil carro = new CAutomovil(matricula, modelo, fabricante, anio, tipovehiculo, kilometraje, 
                                              cantpasajeros, preciocompra, precioalquiler, penalidaddiaria, fecharegistro, 
                                              color, 1, transmision, pais, ciudad);  //SE CREA EL VEHICULO
-            int modifico_si_no = carro.MModificarvehiculoBD(carro); //SE AGREGA A LA BD RETORNA 1 SI SE  MODIFICO Y 0 SI NO LO LOGRA
+            int modifico_si_no = carro.MModificarvehiculoBD(carro); //SE MODIFICA A LA BD RETORNA 1 SI SE  MODIFICO Y 0 SI NO LO LOGRA
             
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
@@ -229,18 +227,34 @@ namespace BOReserva.Controllers
         }
 
 
-        public string DeleteData(int id){
-            //TODO hacer el metodo
-            return null;
+        
+        public JsonResult deleteVehicle(String matricula)
+        {
+            String _matricula = matricula;
+            int anio = 0;
+            int cantpasajeros = 0;
+            String ciudad = "";
+            String color = "";
+            int disponibilidad = 0;
+            String fabricante = "";
+            DateTime fecharegistro = DateTime.Now;
+            double kilometraje = 0;
+            String modelo = "";
+            String pais = "";
+            double penalidaddiaria = 0;
+            double precioalquiler = 0;
+            double preciocompra = 0;
+            String tipovehiculo = "";
+            String transmision = "";
+            Debug.WriteLine("IMPRIMIENDO UN MENSAJE" + matricula);
+            CAutomovil carro = new CAutomovil(matricula, modelo, fabricante, anio, tipovehiculo, kilometraje,
+                                             cantpasajeros, preciocompra, precioalquiler, penalidaddiaria, fecharegistro,
+                                             color, 1, transmision, pais, ciudad);  //SE CREA EL VEHICULO
+            int modifico_si_no = carro.MBorrarvehiculoBD(_matricula); //SE BORRA LA BD RETORNA 1 SI SE  BORRA Y 0 SI NO LO LOGRA
+            return (Json(true, JsonRequestBehavior.AllowGet));
         }
-        public string UpdateData(int id, string value, int? rowId,
-               int? columnPosition, int? columnId, string columnName){
-                   return null;
-            }
-        public int AddData(string name, string address, string town, int? country){
-            return 1;
 
-        }
+
 
         public static List<SelectListItem> ciudades()
         {
