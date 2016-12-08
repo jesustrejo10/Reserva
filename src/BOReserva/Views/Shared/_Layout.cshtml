@@ -39,7 +39,8 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+        <script src="~/Content/dist/js/pace.js"></script>
+        <link href="~/Content/dist/css/blue/pace-theme-center-atom.css" rel="stylesheet" />
     </head>
 
 
@@ -398,7 +399,73 @@
         <div class="control-sidebar-bg"></div>
     </div>
 
-  
+    <!--
+
+        <body>
+
+            <header>
+
+                <div class="content-wrapper">
+
+                    <div class="float-left">
+
+                        <p class="site-title">@Html.ActionLink("su logotipo aquí", "Index", "Home")</p>
+
+                    </div>
+
+                    <div class="float-right">
+
+                        <section id="login">
+
+                            @Html.Partial("_LoginPartial")
+
+                        </section>
+
+                        <nav>
+
+                            <ul id="menu">
+
+                                <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+
+                                <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
+
+                                <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+
+                            </ul>
+
+                        </nav>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+            <div id="body">
+
+                @RenderSection("featured", required: false)
+
+                <section class="content-wrapper main-content clear-fix">
+
+                    @RenderBody()
+
+                </section>
+
+            </div>
+
+            <footer>
+
+                <div class="content-wrapper">
+
+                    <div class="float-left">
+
+                        <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET MVC</p>
+
+                    </div>
+
+                </div>
+
+            </footer>-->
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/menu")

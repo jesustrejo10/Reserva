@@ -96,6 +96,9 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\..\..\Documents\NUnit-3.5.0\bin\net-2.0\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -268,6 +271,21 @@
   <ItemGroup>
     <Content Include="Content\dist\css\AdminLTE.css" />
     <Content Include="Content\dist\css\AdminLTE.min.css" />
+    <Content Include="Content\dist\css\blue\pace-theme-barber-shop.css" />
+    <Content Include="Content\dist\css\blue\pace-theme-big-counter.css" />
+    <Content Include="Content\dist\css\blue\pace-theme-bounce.css" />
+    <Content Include="Content\dist\css\blue\pace-theme-center-atom.css" />
+    <Content Include="Content\dist\css\blue\pace-theme-center-circle.css" />
+    <Content Include="Content\dist\css\blue\pace-theme-center-radar.css" />
+    <Content Include="Content\dist\css\blue\pace-theme-center-simple.css" />
+    <Content Include="Content\dist\css\blue\pace-theme-corner-indicator.css" />
+    <Content Include="Content\dist\css\blue\pace-theme-fill-left.css" />
+    <Content Include="Content\dist\css\blue\pace-theme-flash.css" />
+    <Content Include="Content\dist\css\blue\pace-theme-flat-top.css" />
+    <Content Include="Content\dist\css\blue\pace-theme-loading-bar.css" />
+    <Content Include="Content\dist\css\blue\pace-theme-mac-osx.css" />
+    <Content Include="Content\dist\css\blue\pace-theme-material.css" />
+    <Content Include="Content\dist\css\blue\pace-theme-minimal.css" />
     <Content Include="Content\dist\css\skins\skin-black-light.css" />
     <Content Include="Content\dist\css\skins\skin-black-light.min.css" />
     <Content Include="Content\dist\css\skins\skin-black.css" />
@@ -329,6 +347,8 @@
     <Content Include="Content\dist\js\app.js" />
     <Content Include="Content\dist\js\app.min.js" />
     <Content Include="Content\dist\js\demo.js" />
+    <Content Include="Content\dist\js\pace.js" />
+    <Content Include="Content\dist\js\pace.min.js" />
     <Content Include="Content\dist\js\pages\dashboard.js" />
     <Content Include="Content\dist\js\pages\dashboard2.js" />
     <Content Include="Content\themes\base\accordion.css" />
@@ -541,6 +561,23 @@
     <Content Include="Views\gestion_restaurantes\placeholder.html" />
     <Content Include="Views\gestion_roles\placeholder.html" />
     <Content Include="Views\gestion_ruta_comercial\placeholder.html" />
+    <Content Include="Views\gestion_seguridad_ingreso\js\pace.js" />
+    <Content Include="Views\gestion_seguridad_ingreso\js\pace.min.js" />
+    <Content Include="Views\gestion_seguridad_ingreso\pace\blue\pace-theme-barber-shop.css" />
+    <Content Include="Views\gestion_seguridad_ingreso\pace\blue\pace-theme-big-counter.css" />
+    <Content Include="Views\gestion_seguridad_ingreso\pace\blue\pace-theme-bounce.css" />
+    <Content Include="Views\gestion_seguridad_ingreso\pace\blue\pace-theme-center-atom.css" />
+    <Content Include="Views\gestion_seguridad_ingreso\pace\blue\pace-theme-center-circle.css" />
+    <Content Include="Views\gestion_seguridad_ingreso\pace\blue\pace-theme-center-radar.css" />
+    <Content Include="Views\gestion_seguridad_ingreso\pace\blue\pace-theme-center-simple.css" />
+    <Content Include="Views\gestion_seguridad_ingreso\pace\blue\pace-theme-corner-indicator.css" />
+    <Content Include="Views\gestion_seguridad_ingreso\pace\blue\pace-theme-fill-left.css" />
+    <Content Include="Views\gestion_seguridad_ingreso\pace\blue\pace-theme-flash.css" />
+    <Content Include="Views\gestion_seguridad_ingreso\pace\blue\pace-theme-flat-top.css" />
+    <Content Include="Views\gestion_seguridad_ingreso\pace\blue\pace-theme-loading-bar.css" />
+    <Content Include="Views\gestion_seguridad_ingreso\pace\blue\pace-theme-mac-osx.css" />
+    <Content Include="Views\gestion_seguridad_ingreso\pace\blue\pace-theme-material.css" />
+    <Content Include="Views\gestion_seguridad_ingreso\pace\blue\pace-theme-minimal.css" />
     <Content Include="Views\gestion_usuarios\placeholder.html" />
     <Content Include="Views\gestion_check_in\boardingpass.html" />
     <Content Include="Views\gestion_check_in\checkin.html" />
@@ -1411,9 +1448,13 @@
     <Content Include="Views\gestion_usuarios\M12_AgregarUsuario.cshtml" />
     <Content Include="Views\gestion_usuarios\M12_ModificarUsuario.cshtml" />
     <Content Include="Views\gestion_usuarios\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\gestion_comidavuelo\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap\css\bootstrap.css.map" />
