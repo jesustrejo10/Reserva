@@ -72,7 +72,7 @@
                           }
                           else
                           {
-                            <input type="email" name="correo" class="form-control" placeholder="alex@reserva.com">
+                            <input type="email" name="correo" class="form-control" placeholder="alex@reserva.com" oninvalid="this.setCustomValidity('Debe colocar un correo valido')" oninput="setCustomValidity('')">
                             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 
                           }
@@ -98,7 +98,7 @@
                          <p style="color:red">@TempData["Mensaje"]</p>
                          <p class="box-title">Correo</p>
                            <div class="form-group has-feedback">
-                             <input type="email" name="correo" class="form-control" placeholder="alex@reserva.com">
+                               <input type="email" name="correo" class="form-control" placeholder="alex@reserva.com" oninvalid="this.setCustomValidity('Debe colocar un correo valido')" oninput="setCustomValidity('')">
                              <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                            </div>
 
@@ -131,11 +131,13 @@
 
     <!-- FIN DE LA FORMA LOGIN -->
     <!-- jQuery 2.2.3 -->
+    
     <script src="../../Content/plugins/jQuery/jquery-2.2.3.min.js"></script>
     <!-- Bootstrap 3.3.6 -->
     <script src="../../Content/bootstrap/js/bootstrap.min.js"></script>
     <!-- iCheck -->
     <script src="../../Content/bootstrap/iCheck/icheck.min.js"></script>
+
 
 </body>
 </html>
