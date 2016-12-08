@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -13,7 +14,7 @@ namespace BOReserva.Models.gestion_automoviles
         public int _anio { get; set; } 
         public String _tipovehiculo { get; set; } 
         public double _kilometraje { get; set; } 
-        public int _cantpasajeros { get; set; } 
+        public int _cantpasajeros { get; set; }
         public double _preciocompra { get; set; } 
         public double _precioalquiler { get; set; } 
         public double _penalidaddiaria { get; set; }

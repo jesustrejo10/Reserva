@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -9,8 +10,8 @@ namespace BOReserva.Models.gestion_automoviles
 {
     public class CBasededatos_vehiculo
     {
-        //private String connetionString = @"Data Source=LUISALEJANDROPE\LAPGROCK;Initial Catalog=proyds1617;Integrated Security=True"; //No supe cual es el string de conexion jejejeps
-        private String connetionString = @"Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User ID=DB_A1380A_reserva_admin;Password = ucabds1617a"; //No supe cual es el string de conexion jejejeps
+        //private String connetionString = @"Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User ID=DB_A1380A_reserva_admin;Password = ucabds1617a";
+        private String connetionString = ConfigurationManager.ConnectionStrings["DB_A1380A_reserva"].ConnectionString; //de esta forma el string de conexion se encuentra es en el web.config 
         
         private SqlConnection con = null;
 

@@ -37,7 +37,7 @@ namespace BOReserva.Controllers
             //EN TODOS ESTOS METODOS HAY QUE USAR TRY CATCH
             //CAutomovil test = new CAutomovil("AG234FC", "3", "Mazda", 2006, "Sedan", 1589.5, 5, 7550.0, 250.6, 290.4, DateTime.Parse("11/11/2016"), "Azul", 1, "Automatico", "Venezuela", "Distrito Capital", "Caracas");
             CVisualizarAutomovil automovil = new CVisualizarAutomovil();
-            automovil._matricula = vehiculo._matricula ;
+            automovil._matricula = vehiculo._matricula.ToUpper();
             automovil._modelo = vehiculo._modelo ;
             automovil._fabricante = vehiculo._fabricante ;
             automovil._anio = vehiculo._anio ;
@@ -94,12 +94,12 @@ namespace BOReserva.Controllers
             return ls;
         }
 
-        public static List<SelectListItem> cantidadpasajeros()
+        public static List<SelectListItem> cantidad(int cant)
         {
             List<SelectListItem> ls = new List<SelectListItem>();
             ls.Add(new SelectListItem() { Text = "", Value = "" });
 
-            for (int i = 1; i <= 10; i++)
+            for (int i = 1; i <= cant; i++)
             {
                 ls.Add(new SelectListItem() { Text = i.ToString(), Value = i.ToString() });
             }
@@ -153,7 +153,7 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult saveVehicle(CAgregarAutomovil model)
         {
-            String matricula = model._matricula;
+            String matricula = model._matricula.ToUpper();
             int anio = model._anio;
             int cantpasajeros = model._cantpasajeros;
             String ciudad = model._ciudad;
@@ -180,7 +180,7 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult modifyVehicle(CModificarAutomovil model)
         {
-            String matricula = model._matricula;
+            String matricula = model._matricula.ToUpper();
             int anio = model._anio;
             int cantpasajeros = model._cantpasajeros;
             String color = model._color;

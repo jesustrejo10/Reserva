@@ -96,7 +96,7 @@
                             </div>
                             <div class="col-xs-6">
                                 <label for="kilometraje">Kilometraje</label>
-                                @Html.TextBoxFor(m => m._kilometraje, null, new { @type = "number", @class = "form-control", @placeholder = "Kilometraje", @id = "vehi_modelo" })
+                                @Html.TextBoxFor(m => m._kilometraje, null, new { @type = "number", @class = "form-control", @placeholder = "Kilometraje", @id = "vehi_modelo", min = "0", @onblur = "checklargo(this);" })
                             </div>
                         </div>
                         <div>&nbsp;</div>
@@ -114,7 +114,7 @@
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <label for="">Ciudad</label>                                
-                                @Html.DropDownListFor(m => m._ciudad, BOReserva.Controllers.gestion_automovilesController.ciudades(), new { @class = "form-control", @placeholder = "Pais", @id = "vehi_pais" })
+                                @Html.DropDownListFor(m => m._ciudad, BOReserva.Controllers.gestion_automovilesController.ciudades(), new { @class = "form-control", @placeholder = "Pais", @id = "vehi_pais", @readonly = "readonly" })
                             </div>
                             <div class="col-xs-6">
                                 <label for="transmision">Transmision:</label>
@@ -131,14 +131,14 @@
                             </div>
                             <div class="col-xs-6">
                                 <label for="tarifa">Tarifa diaria ($):</label>
-                                @Html.TextBoxFor(m => m._precioalquiler, null, new { @type = "number", @class = "form-control", @placeholder = "Dolares", @id = "vehi_tarifa" })
+                                @Html.TextBoxFor(m => m._precioalquiler, null, new { @type = "number", @class = "form-control", @placeholder = "Dolares", @id = "vehi_tarifa", min = "0", @onblur = "checklargo(this);" })
                             </div>
                         </div>
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <label for="penalidad">Penalidad diaria ($):</label>
-                                @Html.TextBoxFor(m => m._penalidaddiaria, null, new { @type = "number", @class = "form-control", @placeholder = "Dolares", @id = "vehi_penalidad" })
+                                @Html.TextBoxFor(m => m._penalidaddiaria, null, new { @type = "number", @class = "form-control", @placeholder = "Dolares", @id = "vehi_penalidad", min = "0", @onblur = "checklargo(this);" })
                             </div>
                         </div>
                         <div>&nbsp;</div>
@@ -163,36 +163,107 @@
     </div>
 
     <script>
+        //$("#modify_vehicle").click(function (e) {
+        //    e.preventDefault();
+        //    var form = $("#formModifyVehicle");
+        //    $.ajax({
+        //        url: "gestion_automoviles/modifyVehicle",
+        //        data: form.serialize(),
+        //        type: 'POST',
+        //        success: function (data) {
+        //            alert("Se ha modificado exitosamente y sera redirigido a la tabla de vehiculos");
+        //            //$('#formModifyVehicle')[0].reset();
+        //            var url1 = '/gestion_automoviles/M08_VisualizarAutomoviles';
+        //            var method = 'GET';
+        //            var data1 = '';
+
+        //            $.ajax(
+        //                {
+        //                    url: url1,
+        //                    type: method,
+        //                    data: data,
+        //                    success: function (data, textStatus, jqXHR) {
+
+        //                        $("#contenido").empty();
+        //                        $("#contenido").append(data);
+        //                    },
+        //                    error: function (jqXHR, textStatus, errorThrown) {
+        //                        alert(errorThrown);
+        //                    }
+        //                });
+        //        }
+        //    });
+        //});
+
+
         $("#modify_vehicle").click(function (e) {
             e.preventDefault();
             var form = $("#formModifyVehicle");
-            $.ajax({
-                url: "gestion_automoviles/modifyVehicle",
-                data: form.serialize(),
-                type: 'POST',
-                success: function (data) {
-                    alert("Se ha modificado exitosamente y sera redirigido a la tabla de vehiculos");
-                    //$('#formModifyVehicle')[0].reset();
-                    var url1 = '/gestion_automoviles/M08_VisualizarAutomoviles';
-                    var method = 'GET';
-                    var data1 = '';
+            var anio = $('#vehi_anio').val();
+            var tipo = $('#vehi_tipo').val();
+            var color = $('#vehi_color').val();
+            var kilometraje = $('#vehi_kilometraje').val();
+            var pais = $('#vehi_pais').val();
+            var ciudad = $('#vehi_ciudad').val();
+            var tarifadiaria = $('#vehi_tarifa').val();
+            var penalidaddiaria = $('#vehi_penalidad').val();
+            if (anio && tipo && color && kilometraje && pais && ciudad && tarifadiaria && penalidaddiaria) {
+                $.ajax({
+                    url: "gestion_automoviles/modifyVehicle",
+                    data: form.serialize(),
+                    type: 'POST',
+                    success: function (data) {
+                        alert("Se ha modificado exitosamente y sera redirigido a la tabla de vehiculos");
+                        //$('#formModifyVehicle')[0].reset();
+                        var url1 = '/gestion_automoviles/M08_VisualizarAutomoviles';
+                        var method = 'GET';
+                        var data1 = '';
 
-                    $.ajax(
-                        {
-                            url: url1,
-                            type: method,
-                            data: data,
-                            success: function (data, textStatus, jqXHR) {
+                        $.ajax(
+                            {
+                                url: url1,
+                                type: method,
+                                data: data,
+                                success: function (data, textStatus, jqXHR) {
 
-                                $("#contenido").empty();
-                                $("#contenido").append(data);
-                            },
-                            error: function (jqXHR, textStatus, errorThrown) {
-                                alert(errorThrown);
-                            }
-                        });
+                                    $("#contenido").empty();
+                                    $("#contenido").append(data);
+                                },
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    alert(errorThrown);
+                                }
+                            });
+                    }
+                });
+            } else {
+                var error = "Los siguientes campos se encuentran vacios: \n\n";
+                
+                if (!anio) {
+                    error = error + "- Año \n";
                 }
-            });
+                if (!tipo) {
+                    error = error + "- Tipo \n";
+                }
+                if (!color) {
+                    error = error + "- Color \n";
+                }
+                if (!kilometraje) {
+                    error = error + "- Kilometraje \n";
+                }
+                if (!pais) {
+                    error = error + "- Pais \n";
+                }
+                if (!ciudad) {
+                    error = error + "- Ciudad \n";
+                }
+                if (!tarifadiaria) {
+                    error = error + "- Tarifa diaria \n";
+                }
+                if (!penalidaddiaria) {
+                    error = error + "- Penalidad diaria \n";
+                }
+                alert(error);
+            }
         });
 
         $("#cancel_modification").click(function (e) {
@@ -216,6 +287,15 @@
                     }
                 });
         });
+
+        
+
+        function checklargo(field) {
+            if (field.value > 9999999999) {
+                alert("No puedes exceder los 10 digitos");
+                field.value = '';
+            }
+        }
     </script>
 
 

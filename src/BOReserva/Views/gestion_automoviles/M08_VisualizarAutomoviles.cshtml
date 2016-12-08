@@ -29,7 +29,7 @@
                                 if (item._disponibilidad == 1) { disponibilidad = "Disponible";} else { disponibilidad = "No disponible";}
                                 
                                 <tr id="@item._matricula">
-                                    <td>@item._matricula</td>
+                                    <td>@item._matricula.ToUpper()</td>
                                     <td>@item._fabricante / @item._modelo</td>
                                     <td>@item._tipovehiculo / @item._cantpasajeros</td>
                                     <td>@item._transmision / @item._color</td>
