@@ -71,8 +71,8 @@ namespace BOReserva.Servicio
                 //uso el SqlCommand para realizar los querys
                 SqlCommand query = conexion.CreateCommand();
                 //ingreso la orden del query
-                query.CommandText = "INSERT INTO Avion VALUES ('" + model._nombre + "','" + model._estrellas + "',"
-                    + model._puntuacion + " , " + model._direccion + "," + model._paginaWeb + ");";
+                query.CommandText = "INSERT INTO Hotel VALUES ('" + model._nombre + "','" + model._estrellas + "'," 
+                    + model._puntuacion + " , " + model._direccion + "," + model._paginaWeb +  ");";
                 //creo un lector sql para la respuesta de la ejecucion del comando anterior               
                 SqlDataReader lector = query.ExecuteReader();
                 //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd

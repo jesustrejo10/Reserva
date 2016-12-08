@@ -33,7 +33,7 @@
 		
 		smoothscroll 			= create a browser smooth scroll
 		enable-animation		= enable WOW animations
-		
+
 		bg-grey					= grey background
 		grain-grey				= grey grain background
 		grain-blue				= blue grain background
@@ -50,7 +50,6 @@
 		data-background="assets/images/boxed_background/1.jpg"
 	-->
 	<body class="smoothscroll enable-animation">
-
 
 		<!-- SLIDE TOP -->
 		<div id="slidetop">
@@ -97,7 +96,6 @@
 		<!-- wrapper -->
 		<div id="wrapper">
 
-
 			<!-- 
 				AVAILABLE HEADER CLASSES
 
@@ -124,7 +122,7 @@
 
 				Example Usage:  class="clearfix sticky header-sm transparent noborder"
 			-->
-			<div id="header" class="clearfix sticky">
+			<div id="header" class="sticky clearfix">
 
 				<!-- TOP NAV -->
 				<header id="topNav">
@@ -213,7 +211,7 @@
 							AVAILABLE CLASSES:
 							submenu-dark = dark sub menu
 						-->
-						<div class="navbar-collapse pull-right nav-main-collapse collapse submenu-dark">
+						<div class="navbar-collapse pull-right nav-main-collapse collapse">
 							<nav class="nav-main">
 
 								<!--
@@ -352,7 +350,7 @@
 											<li><a href="index-simple-youtube.html">HOME SIMPLE - YOUTUBE</a></li>
 										</ul>
 									</li>
-									<li class="dropdown"><!-- PAGES -->
+									<li class="dropdown active"><!-- PAGES -->
 										<a class="dropdown-toggle" href="#">
 											PAGES
 										</a>
@@ -524,13 +522,13 @@
 													<li><a href="page-coming-soon-2.html">COMING SOON - LAYOUT 2</a></li>
 												</ul>
 											</li>
-											<li class="dropdown">
+											<li class="dropdown active">
 												<a class="dropdown-toggle" href="#">
 													FORUM
 												</a>
 												<ul class="dropdown-menu">
 													<li><a href="page-forum-home.html">FORUM - HOME</a></li>
-													<li><a href="page-forum-topic.html">FORUM - TOPIC</a></li>
+													<li class="active"><a href="page-forum-topic.html">FORUM - TOPIC</a></li>
 													<li><a href="page-forum-post.html">FORUM - POST</a></li>
 												</ul>
 											</li>
@@ -1061,7 +1059,7 @@
 											<li><a href="shop-checkout-final.html">ORDER PLACED</a></li>
 										</ul>
 									</li>
-									<li class="dropdown mega-menu active"><!-- SHORTCODES -->
+									<li class="dropdown mega-menu"><!-- SHORTCODES -->
 										<a class="dropdown-toggle" href="#">
 											SHORTCODES
 										</a>
@@ -1127,7 +1125,7 @@
 															<li><a href="shortcode-styled-icons.html">STYLED ICONS</a></li>
 															<li><a href="shortcode-tables.html">TABLES</a></li>
 															<li><a href="shortcode-tabs.html">TABS</a></li>
-															<li class="active"><a href="shortcode-testimonials.html">TESTIMONIALS</a></li>
+															<li><a href="shortcode-testimonials.html">TESTIMONIALS</a></li>
 															<li><a href="shortcode-thumbnails.html">THUMBNAILS</a></li>
 															<li><a href="shortcode-toggles.html">TOGGLES</a></li>
 														</ul>
@@ -1166,16 +1164,16 @@
 					.shadow-before-3 	= shadow 3 header top
 					.shadow-after-3 	= shadow 3 header bottom
 			-->
-			<section class="page-header page-header-xs">
+			<section class="page-header">
 				<div class="container">
 
-					<h1>TESTIMONIALS</h1>
+					<h1>GENERAL FORUM</h1>
 
 					<!-- breadcrumbs -->
 					<ol class="breadcrumb">
 						<li><a href="#">Home</a></li>
-						<li><a href="#">Shortcodes</a></li>
-						<li class="active">Testimonials</li>
+						<li><a href="#">Forum</a></li>
+						<li class="active">Forum Topic</li>
 					</ol><!-- /breadcrumbs -->
 
 				</div>
@@ -1184,967 +1182,284 @@
 
 
 
-			<!-- -->
-			<section>
-				<div class="container">
-
-					<h3>Boxed Testimonials</h3>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="testimonial testimonial-bordered padding-15">
-								<figure class="pull-left">
-									<img class="rounded" src="assets/images/demo/people/300x300/2-min.jpg" alt="" />
-								</figure>
-                                <div class="testimonial-content">
-                                    <p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero!</p>
-                                    <cite>
-                                        Felicia Doe
-                                        <span>Company Ltd.</span>
-                                    </cite>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="testimonial testimonial-bordered padding-15">
-								<figure class="pull-left">
-									<img class="rounded" src="assets/images/demo/people/300x300/1-min.jpg" alt="" />
-								</figure>
-                                <div class="testimonial-content">
-                                    <p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero!</p>
-                                    <cite>
-                                        Joana Doe
-                                        <span>Company Ltd.</span>
-                                    </cite>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="testimonial testimonial-bordered padding-15">
-								<figure class="pull-left">
-									<img class="rounded" src="assets/images/demo/people/300x300/6-min.jpg" alt="" />
-								</figure>
-                                <div class="testimonial-content">
-                                    <p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero!</p>
-                                    <cite>
-                                        Melissa Doe
-                                        <span>Company Ltd.</span>
-                                    </cite>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-<!-- pre code -->
-<div class="text-left margin-top-20">
-	<a href="javascript:;" onclick="jQuery('#pre-bx').slideToggle();">Show Code</a>
-</div>
-<pre id="pre-bx" class="text-left noradius text-danger softhide">
-<span class="text-success">&lt;!-- 
-	Note: remove class="rounded" from the img for squared image!
---&gt;</span>
-&lt;div class="row"&gt;
-	&lt;div class="col-md-4"&gt;
-		&lt;div class="testimonial testimonial-bordered padding-15"&gt;
-			&lt;figure class="pull-left"&gt;
-				&lt;img class="rounded" src="assets/images/demo/people/300x300/2-min.jpg" alt="" /&gt;
-			&lt;/figure&gt;
-			&lt;div class="testimonial-content"&gt;
-				&lt;p&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero!&lt;/p&gt;
-				&lt;cite&gt;
-					Felicia Doe
-					&lt;span&gt;Company Ltd.&lt;/span&gt;
-				&lt;/cite&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-	&lt;/div&gt;
-	&lt;div class="col-md-4"&gt;
-		&lt;div class="testimonial testimonial-bordered padding-15"&gt;
-			&lt;figure class="pull-left"&gt;
-				&lt;img class="rounded" src="assets/images/demo/people/300x300/1-min.jpg" alt="" /&gt;
-			&lt;/figure&gt;
-			&lt;div class="testimonial-content"&gt;
-				&lt;p&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero!&lt;/p&gt;
-				&lt;cite&gt;
-					Joana Doe
-					&lt;span&gt;Company Ltd.&lt;/span&gt;
-				&lt;/cite&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-	&lt;/div&gt;
-	&lt;div class="col-md-4"&gt;
-		&lt;div class="testimonial testimonial-bordered padding-15"&gt;
-			&lt;figure class="pull-left"&gt;
-				&lt;img class="rounded" src="assets/images/demo/people/300x300/6-min.jpg" alt="" /&gt;
-			&lt;/figure&gt;
-			&lt;div class="testimonial-content"&gt;
-				&lt;p&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero!&lt;/p&gt;
-				&lt;cite&gt;
-					Melissa Doe
-					&lt;span&gt;Company Ltd.&lt;/span&gt;
-				&lt;/cite&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-	&lt;/div&gt;
-&lt;/div&gt;
-</pre>
-<!-- /pre code -->
-
-				</div>
-			</section>
-			<!-- / -->
-
-
-
 
 			<!-- -->
 			<section>
 				<div class="container">
-
-					<h3>Testimonials 2 Columns</h3>
-                    <ul class="row clearfix testimonial-dotted list-unstyled">
-                        <li class="col-md-6">
-                            <div class="testimonial">
-								<figure class="pull-left">
-									<img class="rounded" src="assets/images/demo/people/300x300/2-min.jpg" alt="" />
-								</figure>
-                                <div class="testimonial-content">
-                                    <p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!</p>
-                                    <cite>
-                                        Joana Doe
-                                        <span>Company Ltd.</span>
-                                    </cite>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-md-6">
-                            <div class="testimonial">
-								<figure class="pull-left">
-									<img class="rounded" src="assets/images/demo/people/300x300/6-min.jpg" alt="" />
-								</figure>
-                                <div class="testimonial-content">
-                                    <p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!</p>
-                                    <cite>
-                                        Melissa Doe
-                                        <span>Company Ltd.</span>
-                                    </cite>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-md-6">
-                            <div class="testimonial">
-								<figure class="pull-left">
-									<img class="rounded" src="assets/images/demo/people/300x300/7-min.jpg" alt="" />
-								</figure>
-                                <div class="testimonial-content">
-                                    <p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!</p>
-                                    <cite>
-                                        Stephany Doe
-                                        <span>Company Ltd.</span>
-                                    </cite>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-md-6">
-                            <div class="testimonial">
-								<figure class="pull-left">
-									<img class="rounded" src="assets/images/demo/people/300x300/8-min.jpg" alt="" />
-								</figure>
-                                <div class="testimonial-content">
-                                    <p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!</p>
-                                    <cite>
-                                        Pamela Doe
-                                        <span>Company Ltd.</span>
-                                    </cite>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-
-<!-- pre code -->
-<div class="text-left margin-top-20">
-	<a href="javascript:;" onclick="jQuery('#pre-0').slideToggle();">Show Code</a>
-</div>
-<pre id="pre-0" class="text-left noradius text-danger softhide">
-<span class="text-success">&lt;!-- 
-	Note: remove class="rounded" from the img for squared image!
---&gt;</span>
-&lt;ul class="row clearfix testimonial-dotted list-unstyled"&gt;
-	&lt;li class="col-md-6"&gt;
-		&lt;div class="testimonial"&gt;
-			&lt;figure class="pull-left"&gt;
-				&lt;img class="rounded" src="assets/images/demo/people/300x300/2-min.jpg" alt="" /&gt;
-			&lt;/figure&gt;
-			&lt;div class="testimonial-content"&gt;
-				&lt;p&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!&lt;/p&gt;
-				&lt;cite&gt;
-					Joana Doe
-					&lt;span&gt;Company Ltd.&lt;/span&gt;
-				&lt;/cite&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-	&lt;/li&gt;
-	&lt;li class="col-md-6"&gt;
-		&lt;div class="testimonial"&gt;
-			&lt;figure class="pull-left"&gt;
-				&lt;img class="rounded" src="assets/images/demo/people/300x300/6-min.jpg" alt="" /&gt;
-			&lt;/figure&gt;
-			&lt;div class="testimonial-content"&gt;
-				&lt;p&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!&lt;/p&gt;
-				&lt;cite&gt;
-					Melissa Doe
-					&lt;span&gt;Company Ltd.&lt;/span&gt;
-				&lt;/cite&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-	&lt;/li&gt;
-	&lt;li class="col-md-6"&gt;
-		&lt;div class="testimonial"&gt;
-			&lt;figure class="pull-left"&gt;
-				&lt;img class="rounded" src="assets/images/demo/people/300x300/7-min.jpg" alt="" /&gt;
-			&lt;/figure&gt;
-			&lt;div class="testimonial-content"&gt;
-				&lt;p&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!&lt;/p&gt;
-				&lt;cite&gt;
-					Stephany Doe
-					&lt;span&gt;Company Ltd.&lt;/span&gt;
-				&lt;/cite&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-	&lt;/li&gt;
-	&lt;li class="col-md-6"&gt;
-		&lt;div class="testimonial"&gt;
-			&lt;figure class="pull-left"&gt;
-				&lt;img class="rounded" src="assets/images/demo/people/300x300/8-min.jpg" alt="" /&gt;
-			&lt;/figure&gt;
-			&lt;div class="testimonial-content"&gt;
-				&lt;p&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!&lt;/p&gt;
-				&lt;cite&gt;
-					Pamela Doe
-					&lt;span&gt;Company Ltd.&lt;/span&gt;
-				&lt;/cite&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-	&lt;/li&gt;
-&lt;/ul&gt;
-</pre>
-<!-- /pre code -->
-
-				</div>
-			</section>
-			<!-- / -->
-
-
-
-
-
-			<!-- -->
-			<section>
-				<div class="container">
-
-					<h3>Testimonials 3 Columns</h3>
-                    <ul class="row clearfix testimonial-dotted list-unstyled">
-                        <li class="col-md-4">
-                            <div class="testimonial">
-								<figure class="pull-left">
-									<img class="rounded" src="assets/images/demo/people/300x300/2-min.jpg" alt="" />
-								</figure>
-                                <div class="testimonial-content">
-                                    <p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!</p>
-                                    <cite>
-                                        Joana Doe
-                                        <span>Company Ltd.</span>
-                                    </cite>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-md-4">
-                            <div class="testimonial">
-								<figure class="pull-left">
-									<img class="rounded" src="assets/images/demo/people/300x300/6-min.jpg" alt="" />
-								</figure>
-                                <div class="testimonial-content">
-                                    <p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!</p>
-                                    <cite>
-                                        Melissa Doe
-                                        <span>Company Ltd.</span>
-                                    </cite>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-md-4">
-                            <div class="testimonial">
-								<figure class="pull-left">
-									<img class="rounded" src="assets/images/demo/people/300x300/7-min.jpg" alt="" />
-								</figure>
-                                <div class="testimonial-content">
-                                    <p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!</p>
-                                    <cite>
-                                        Stephany Doe
-                                        <span>Company Ltd.</span>
-                                    </cite>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-md-4">
-                            <div class="testimonial">
-								<figure class="pull-left">
-									<img class="rounded" src="assets/images/demo/people/300x300/8-min.jpg" alt="" />
-								</figure>
-                                <div class="testimonial-content">
-                                    <p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!</p>
-                                    <cite>
-                                        Pamela Doe
-                                        <span>Company Ltd.</span>
-                                    </cite>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-md-4">
-                            <div class="testimonial">
-								<figure class="pull-left">
-									<img class="rounded" src="assets/images/demo/people/300x300/11-min.jpg" alt="" />
-								</figure>
-                                <div class="testimonial-content">
-                                    <p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!</p>
-                                    <cite>
-                                        Simina Doe
-                                        <span>Company Ltd.</span>
-                                    </cite>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-md-4">
-                            <div class="testimonial">
-								<figure class="pull-left">
-									<img class="rounded" src="assets/images/demo/people/300x300/12-min.jpg" alt="" />
-								</figure>
-                                <div class="testimonial-content">
-                                    <p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!</p>
-                                    <cite>
-                                        Mihaela Doe
-                                        <span>Company Ltd.</span>
-                                    </cite>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-
-<!-- pre code -->
-<div class="text-left margin-top-20">
-	<a href="javascript:;" onclick="jQuery('#pre-1').slideToggle();">Show Code</a>
-</div>
-<pre id="pre-1" class="text-left noradius text-danger softhide">
-<span class="text-success">&lt;!-- 
-	Note: remove class="rounded" from the img for squared image!
---&gt;</span>
-&lt;ul class="row clearfix testimonial-dotted list-unstyled"&gt;
-	&lt;li class="col-md-4"&gt;
-		&lt;div class="testimonial"&gt;
-			&lt;figure class="pull-left"&gt;
-				&lt;img class="rounded" src="assets/images/demo/people/300x300/2-min.jpg" alt="" /&gt;
-			&lt;/figure&gt;
-			&lt;div class="testimonial-content"&gt;
-				&lt;p&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!&lt;/p&gt;
-				&lt;cite&gt;
-					Joana Doe
-					&lt;span&gt;Company Ltd.&lt;/span&gt;
-				&lt;/cite&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-	&lt;/li&gt;
-	&lt;li class="col-md-4"&gt;
-		&lt;div class="testimonial"&gt;
-			&lt;figure class="pull-left"&gt;
-				&lt;img class="rounded" src="assets/images/demo/people/300x300/6-min.jpg" alt="" /&gt;
-			&lt;/figure&gt;
-			&lt;div class="testimonial-content"&gt;
-				&lt;p&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!&lt;/p&gt;
-				&lt;cite&gt;
-					Melissa Doe
-					&lt;span&gt;Company Ltd.&lt;/span&gt;
-				&lt;/cite&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-	&lt;/li&gt;
-	&lt;li class="col-md-4"&gt;
-		&lt;div class="testimonial"&gt;
-			&lt;figure class="pull-left"&gt;
-				&lt;img class="rounded" src="assets/images/demo/people/300x300/7-min.jpg" alt="" /&gt;
-			&lt;/figure&gt;
-			&lt;div class="testimonial-content"&gt;
-				&lt;p&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!&lt;/p&gt;
-				&lt;cite&gt;
-					Stephany Doe
-					&lt;span&gt;Company Ltd.&lt;/span&gt;
-				&lt;/cite&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-	&lt;/li&gt;
-	&lt;li class="col-md-4"&gt;
-		&lt;div class="testimonial"&gt;
-			&lt;figure class="pull-left"&gt;
-				&lt;img class="rounded" src="assets/images/demo/people/300x300/8-min.jpg" alt="" /&gt;
-			&lt;/figure&gt;
-			&lt;div class="testimonial-content"&gt;
-				&lt;p&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!&lt;/p&gt;
-				&lt;cite&gt;
-					Pamela Doe
-					&lt;span&gt;Company Ltd.&lt;/span&gt;
-				&lt;/cite&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-	&lt;/li&gt;
-	&lt;li class="col-md-4"&gt;
-		&lt;div class="testimonial"&gt;
-			&lt;figure class="pull-left"&gt;
-				&lt;img class="rounded" src="assets/images/demo/people/300x300/11-min.jpg" alt="" /&gt;
-			&lt;/figure&gt;
-			&lt;div class="testimonial-content"&gt;
-				&lt;p&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!&lt;/p&gt;
-				&lt;cite&gt;
-					Simina Doe
-					&lt;span&gt;Company Ltd.&lt;/span&gt;
-				&lt;/cite&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-	&lt;/li&gt;
-	&lt;li class="col-md-4"&gt;
-		&lt;div class="testimonial"&gt;
-			&lt;figure class="pull-left"&gt;
-				&lt;img class="rounded" src="assets/images/demo/people/300x300/12-min.jpg" alt="" /&gt;
-			&lt;/figure&gt;
-			&lt;div class="testimonial-content"&gt;
-				&lt;p&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum!&lt;/p&gt;
-				&lt;cite&gt;
-					Mihaela Doe
-					&lt;span&gt;Company Ltd.&lt;/span&gt;
-				&lt;/cite&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-	&lt;/li&gt;
-&lt;/ul&gt;
-</pre>
-<!-- /pre code -->
-
-				</div>
-			</section>
-			<!-- / -->
-
-
-
-
-			<!-- -->
-			<section>
-				<div class="container">
-
-					<h3>Carousel Testimonials <small>(multiple effects)</small></h3>
-					<div class="testimonial-bordered">
-					
-						<div class="owl-carousel text-center owl-testimonial nomargin" data-plugin-options='{"singleItem": true, "autoPlay": 4000, "navigation": false, "pagination": true, "transitionStyle":"fade"}'>
-							<div class="testimonial">
-								<figure>
-									<img class="rounded" src="assets/images/demo/DV1.jpg" alt="" />
-								</figure>
-								<div class="testimonial-content nopadding">
-									<p class="lead">Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero.</p>
-									<cite>
-										Joana Doe
-										<span>Company Ltd.</span>
-									</cite>
-								</div>
-							</div>
-							<div class="testimonial">
-								<figure>
-									<img class="rounded" src="assets/images/demo/people/300x300/12-min.jpg" alt="" />
-								</figure>
-								<div class="testimonial-content nopadding">
-									<p class="lead">Quod necessitatibus quis expedita harum provident eos obcaecati id culpa.</p>
-									<cite>
-										Melissa Doe
-										<span>Company Ltd.</span>
-									</cite>
-								</div>
-							</div>
-							<div class="testimonial">
-								<figure>
-									<img class="rounded" src="assets/images/demo/people/300x300/d-min.jpg" alt="" />
-								</figure>
-								<div class="testimonial-content nopadding">
-									<p class="lead">Deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum.</p>
-									<cite>
-										John Doe
-										<span>Company Ltd.</span>
-									</cite>
-								</div>
-							</div>
-							<div class="testimonial">
-								<figure>
-									<img class="rounded" src="assets/images/demo/people/300x300/c-min.jpg" alt="" />
-								</figure>
-								<div class="testimonial-content nopadding">
-									<p class="lead">Fugit repellendus expedita excepturi iure perferendis provident quia eaque.</p>
-									<cite>
-										Simina Doe
-										<span>Company Ltd.</span>
-									</cite>
-								</div>
-							</div>
-						</div>
-
-					</div>
-
-
-<!-- pre code -->
-<div class="text-left margin-top-20">
-	<a href="javascript:;" onclick="jQuery('#pre-2').slideToggle();">Show Code</a>
-</div>
-<pre id="pre-2" class="text-left noradius text-danger softhide">
-<span class="text-success">&lt;!-- 
-	data-plugin-options:
-		"transitionStyle":"fadeUp" (fade,backSlide,goDown,fadeUp)
-
-	Note: remove class="rounded" from the img for squared image!
---&gt;</span>
-&lt;div class="testimonial-bordered"&gt;
-	&lt;div class="owl-carousel text-center owl-testimonial nomargin" data-plugin-options='{"singleItem": true, "autoPlay": 4000, "navigation": false, "pagination": true, "transitionStyle":"fade"}'&gt;
-		
-		&lt;div class="testimonial"&gt;
-			&lt;figure&gt;
-				&lt;img class="rounded" src="assets/images/demo/people/300x300/11-min.jpg" alt="" /&gt;
-			&lt;/figure&gt;
-			&lt;div class="testimonial-content nopadding"&gt;
-				&lt;p class="lead"&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero.&lt;/p&gt;
-				&lt;cite&gt;
-					Joana Doe
-					&lt;span&gt;Company Ltd.&lt;/span&gt;
-				&lt;/cite&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-
-		&lt;div class="testimonial"&gt;
-			&lt;figure&gt;
-				&lt;img class="rounded" src="assets/images/demo/people/300x300/12-min.jpg" alt="" /&gt;
-			&lt;/figure&gt;
-			&lt;div class="testimonial-content nopadding"&gt;
-				&lt;p class="lead"&gt;voluptatum enim quod necessitatibus quis expedita harum provident eos obcaecati id culpa.&lt;/p&gt;
-				&lt;cite&gt;
-					Melissa Doe
-					&lt;span&gt;Company Ltd.&lt;/span&gt;
-				&lt;/cite&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-
-	&lt;/div&gt;
-&lt;/div&gt;
-</pre>
-<!-- /pre code -->
-
-				</div>
-			</section>
-			<!-- / -->
-
-
-
-
-			<!-- -->
-			<section>
-				<div class="container">
-
-					<h3>Mini Carousel Testimonials <small>(multiple effects)</small></h3>
-					
 
 					<div class="row">
+
+						<!-- RIGHT -->
+						<div class="col-md-3 col-md-push-9">
+
+							<!-- INLINE SEARCH -->
+							<div class="inline-search clearfix margin-bottom-60">
+								<form action="" method="get" class="widget_search">
+									<input type="search" placeholder="Search Forum..." id="s" name="s" class="serch-input">
+									<button type="submit">
+										<i class="fa fa-search"></i>
+									</button>
+								</form>
+							</div>
+							<!-- /INLINE SEARCH -->
+
+
+							<!-- SIGN IN -->
+							<form method="post" action="#" class="margin-bottom-80">
+								<label class="block">Forum Sign In</label>
+								<input required type="email" class="form-control" placeholder="Email" />
+								<input required type="password" class="form-control" placeholder="Password" />
+								<div class="clearfix">
+									<a href="#" class="pull-right size-12 margin-top-8">
+										PASSWORD?
+									</a>
+									<span class="pull-right size-11 margin-top-8 width-20 text-center">
+										/
+									</span>
+									<a href="page-register-2.html" class="pull-right size-12 margin-top-8">
+										SIGN UP?
+									</a>
+									<button class="btn btn-default btn-sm">SING IN</button>
+								</div>
+							</form>
+							<!-- /SIGN IN -->
+
+
+							<!-- SIGNED IN -->
+							<h5 class="bold nomargin-bottom">
+								<small class="pull-right size-14 weight-300">(signed in)</small>
+								Welcome, Felicia Doe
+							</h5>
+							<!-- SIDE NAV -->
+							<ul class="side-nav list-group margin-bottom-80" id="sidebar-nav">
+								<li class="list-group-item active"><a href="page-profile.html"><i class="fa fa-eye"></i> PROFILE</a></li>
+								<li class="list-group-item"><a href="page-profile-comments.html"><i class="fa fa-comments-o"></i> COMMENTS</a></li>
+								<li class="list-group-item"><a href="page-profile-history.html"><i class="fa fa-history"></i> HISTORY</a></li>
+								<li class="list-group-item"><a href="page-profile-settings.html"><i class="fa fa-gears"></i> SETTINGS</a></li>
+								<li class="list-group-item"><a href="#"><i class="fa fa-power-off"></i> LOG OUT</a></li>
+							</ul><!-- /SIDE NAV -->
+							<!-- /SIGNED IN -->
+
+						</div>
+
+						<!-- LEFT -->
+						<div class="col-md-9 col-md-pull-3">
 						
-						<div class="col-md-6">
+							<!-- FORUM 1 -->
+							<table class="table table-vertical-middle margin-bottom-60">
+								<thead>
+									<tr class="size-15">
+										<th class="weight-400">TOPIC</th>
+										<th class="text-center hidden-xs width-100 weight-300">VOICES</th>
+										<th class="text-center hidden-xs width-100 weight-300">POSTS</th>
+										<th class="text-center hidden-xs width-200 weight-300">FRESHNESS</th>
+									</tr>
+								</thead>
+								<tbody>
+									
+									<tr>
+										<td>
+											<h4 class="nomargin size-16">
+												<a href="page-forum-post.html">
+													Hello Smarty Users
+												</a>
 
-							<div class="owl-carousel text-center owl-mini-testimonial nomargin" data-plugin-options='{"singleItem": true, "autoPlay": 4000, "navigation": false, "pagination": true, "transitionStyle":"fade"}'>
-								<div class="testimonial">
-									<figure>
-										<img src="assets/images/demo/people/300x300/1-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p >Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero.</p>
-										<cite>
-											Joana Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
-								<div class="testimonial">
-									<figure>
-										<img src="assets/images/demo/people/300x300/2-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p>Quod necessitatibus quis expedita harum provident eos obcaecati id culpa.</p>
-										<cite>
-											Melissa Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
-								<div class="testimonial">
-									<figure>
-										<img src="assets/images/demo/people/300x300/3-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p>Deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum.</p>
-										<cite>
-											John Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
-								<div class="testimonial">
-									<figure>
-										<img src="assets/images/demo/people/300x300/12-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p>Fugit repellendus expedita excepturi iure perferendis provident quia eaque.</p>
-										<cite>
-											Simina Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
+												<ul class="list-inline categories nomargin text-muted size-11 hidden-xs">
+													<li>Created by <a href="#">Felicia Doe</a></li>
+													<li><a href="#" class="text-danger">delete</a></li>
+													<li><a href="#" class="text-success">edit</a></li>
+												</ul>
+
+											</h4>
+										</td>
+										<td class="text-center hidden-xs">
+											<a href="#">13</a>
+										</td>
+										<td class="text-center hidden-xs">
+											<a href="#">322</a>
+										</td>
+										<td class="hidden-xs text-center">
+											<small class="block size-11 text-muted">1 day ago</small>
+											<a class="size-13" href="page-profile.html">Joanna Doe</a>
+										</td>
+									</tr>
+
+									<tr>
+										<td>
+											<h4 class="nomargin size-16">
+												<a href="page-forum-post.html">
+													My First Forum Registration
+												</a>
+
+												<ul class="list-inline categories nomargin text-muted size-11 hidden-xs">
+													<li>Created by <a href="page-profile.html">admin</a></li>
+													<li><a href="#" class="text-danger">delete</a></li>
+													<li><a href="#" class="text-success">edit</a></li>
+												</ul>
+
+											</h4>
+										</td>
+										<td class="text-center hidden-xs">
+											<a href="#">8</a>
+										</td>
+										<td class="text-center hidden-xs">
+											<a href="#">43</a>
+										</td>
+										<td class="hidden-xs text-center">
+											<small class="block size-11 text-muted">54 hours ago</small>
+											<a class="size-13" href="page-profile.html">Jessica</a>
+										</td>
+									</tr>
+
+									<tr>
+										<td>
+											<h4 class="nomargin size-16">
+												<a href="page-forum-post.html">
+													First Topic
+												</a>
+
+												<ul class="list-inline categories nomargin text-muted size-11 hidden-xs">
+													<li>Created by <a href="page-profile.html">John Doe</a></li>
+													<li><a href="#" class="text-danger">delete</a></li>
+													<li><a href="#" class="text-success">edit</a></li>
+												</ul>
+
+											</h4>
+										</td>
+										<td class="text-center hidden-xs">
+											<a href="#">15</a>
+										</td>
+										<td class="text-center hidden-xs">
+											<a href="#">65</a>
+										</td>
+										<td class="hidden-xs text-center">
+											<small class="block size-11 text-muted">55 seconds ago</small>
+											<a class="size-13" href="page-profile.html">don.joe</a>
+										</td>
+									</tr>
+
+									<tr>
+										<td>
+											<h4 class="nomargin size-16">
+												<a href="page-forum-post.html">
+													Second Topic
+												</a>
+
+												<ul class="list-inline categories nomargin text-muted size-11 hidden-xs">
+													<li>Created by <a href="page-profile.html">admin</a></li>
+													<li><a href="#" class="text-danger">delete</a></li>
+													<li><a href="#" class="text-success">edit</a></li>
+												</ul>
+
+											</h4>
+										</td>
+										<td class="text-center hidden-xs">
+											<a href="#">33</a>
+										</td>
+										<td class="text-center hidden-xs">
+											<a href="#">3215</a>
+										</td>
+										<td class="hidden-xs text-center">
+											<small class="block size-11 text-muted">31 minutes ago</small>
+											<a class="size-13" href="page-profile.html">John</a>
+										</td>
+									</tr>
+
+									<tr>
+										<td>
+											<h4 class="nomargin size-16">
+												<a href="page-forum-post.html">
+													Third Topic
+												</a>
+
+												<ul class="list-inline categories nomargin text-muted size-11 hidden-xs">
+													<li>Created by <a href="page-profile.html">admin</a></li>
+													<li><a href="#" class="text-danger">delete</a></li>
+													<li><a href="#" class="text-success">edit</a></li>
+												</ul>
+
+											</h4>
+										</td>
+										<td class="text-center hidden-xs">
+											<a href="#">2</a>
+										</td>
+										<td class="text-center hidden-xs">
+											<a href="#">8</a>
+										</td>
+										<td class="hidden-xs text-center">
+											<small class="block size-11 text-muted">12 hours ago</small>
+											<a class="size-13" href="page-profile.html">Marcy</a>
+										</td>
+									</tr>
+
+									<tr>
+										<td>
+											<h4 class="nomargin size-16">
+												<a href="page-forum-post.html">
+													Fourth Topic
+												</a>
+
+												<ul class="list-inline categories nomargin text-muted size-11 hidden-xs">
+													<li>Created by <a href="page-profile.html">Melissa</a></li>
+													<li><a href="#" class="text-danger">delete</a></li>
+													<li><a href="#" class="text-success">edit</a></li>
+												</ul>
+
+											</h4>
+										</td>
+										<td class="text-center hidden-xs">
+											<a href="#">15</a>
+										</td>
+										<td class="text-center hidden-xs">
+											<a href="#">312</a>
+										</td>
+										<td class="hidden-xs text-center">
+											<small class="block size-11 text-muted">2 days ago</small>
+											<a class="size-13" href="page-profile.html">Al Bundy</a>
+										</td>
+									</tr>
+
+								</tbody>
+							</table>
+							<!-- /FORUM 1 -->
+
+							<div class="divider nomargin"><!-- divider --></div>
+
+							<div class="clearfix margin-bottom-60">
+								<span class="pull-right size-11 hidden-xs">
+									Viewing 5 topics - 1 through 5 (of 5 total)
+								</span>
+								<a href="#" class="btn btn-3d btn-xs btn-reveal btn-teal">
+									<i class="fa fa-pencil-square-o"></i>
+									<span>CREATE NEW TOPIC</span>
+								</a>
 							</div>
 
-						</div>
-
-						<div class="col-md-6">
-
-							<div class="owl-carousel text-center owl-mini-testimonial nomargin" data-plugin-options='{"singleItem": true, "autoPlay": 4000, "navigation": false, "pagination": true, "transitionStyle":"fadeUp"}'>
-								<div class="testimonial">
-									<figure>
-										<img class="rounded" src="assets/images/demo/people/300x300/4-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero.</p>
-										<cite>
-											Joana Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
-								<div class="testimonial">
-									<figure>
-										<img class="rounded" src="assets/images/demo/people/300x300/5-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p>Quod necessitatibus quis expedita harum provident eos obcaecati id culpa.</p>
-										<cite>
-											Melissa Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
-								<div class="testimonial">
-									<figure>
-										<img class="rounded" src="assets/images/demo/people/300x300/6-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p>Deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum.</p>
-										<cite>
-											John Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
-								<div class="testimonial">
-									<figure>
-										<img class="rounded" src="assets/images/demo/people/300x300/11-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p>Fugit repellendus expedita excepturi iure perferendis provident quia eaque.</p>
-										<cite>
-											Simina Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
+							<!-- WARNING -->
+							<div class="alert alert-warning alert-bordered-dashed text-center margin-bottom-30"><!-- DASHED --></span>
+								<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+								<p>YOU MUST BE LOGGED IN TO CREATE A NEW TOPIC!</p>
 							</div>
+							<!-- /WARNING -->
 
-						</div>
 
-					</div>
-
-					<div class="divider divider-dotted hiddn-xs"><!-- divider --></div>
-
-					<div class="row">
-						
-						<div class="col-md-6">
-
-							<div class="owl-carousel text-center owl-mini-testimonial nomargin" data-plugin-options='{"singleItem": true, "autoPlay": 4000, "navigation": false, "pagination": true, "transitionStyle":"goDown"}'>
-								<div class="testimonial">
-									<figure>
-										<img class="rounded" src="assets/images/demo/people/300x300/7-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero.</p>
-										<cite>
-											Joana Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
-								<div class="testimonial">
-									<figure>
-										<img class="rounded" src="assets/images/demo/people/300x300/8-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p>Quod necessitatibus quis expedita harum provident eos obcaecati id culpa.</p>
-										<cite>
-											Melissa Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
-								<div class="testimonial">
-									<figure>
-										<img class="rounded" src="assets/images/demo/people/300x300/9-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p>Deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum.</p>
-										<cite>
-											John Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
-								<div class="testimonial">
-									<figure>
-										<img class="rounded" src="assets/images/demo/people/300x300/10-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p>Fugit repellendus expedita excepturi iure perferendis provident quia eaque.</p>
-										<cite>
-											Simina Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
+							<!-- pagination -->
+							<div class="text-center">
+								<ul class="pagination">
+									<li><a href="#">&laquo;</a></li>
+									<li class="active"><a href="#">1</a></li>
+									<li><a href="#">2</a></li>
+									<li><a href="#">3</a></li>
+									<li><a href="#">4</a></li>
+									<li><a href="#">5</a></li>
+									<li><a href="#">&raquo;</a></li>
+								</ul>
 							</div>
-
-						</div>
-
-						<div class="col-md-6">
-
-							<div class="owl-carousel text-center owl-mini-testimonial nomargin" data-plugin-options='{"singleItem": true, "autoPlay": 4000, "navigation": false, "pagination": true, "transitionStyle":"backSlide"}'>
-								<div class="testimonial">
-									<figure>
-										<img src="assets/images/demo/people/300x300/10-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero.</p>
-										<cite>
-											Joana Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
-								<div class="testimonial">
-									<figure>
-										<img src="assets/images/demo/people/300x300/11-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p>Quod necessitatibus quis expedita harum provident eos obcaecati id culpa.</p>
-										<cite>
-											Melissa Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
-								<div class="testimonial">
-									<figure>
-										<img src="assets/images/demo/people/300x300/12-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p>Deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum.</p>
-										<cite>
-											John Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
-								<div class="testimonial">
-									<figure>
-										<img src="assets/images/demo/people/300x300/9-min.jpg" alt="" />
-									</figure>
-									<div class="testimonial-content nopadding">
-										<p>Fugit repellendus expedita excepturi iure perferendis provident quia eaque.</p>
-										<cite>
-											Simina Doe
-											<span>Company Ltd.</span>
-										</cite>
-									</div>
-								</div>
-							</div>
+							<!-- /pagination -->
 
 						</div>
 
 					</div>
-
-<!-- pre code -->
-<div class="text-left margin-top-20">
-	<a href="javascript:;" onclick="jQuery('#pre-2car').slideToggle();">Show Code</a>
-</div>
-<pre id="pre-2car" class="text-left noradius text-danger softhide">
-<span class="text-success">&lt;!-- 
-	data-plugin-options:
-		"transitionStyle":"fadeUp" (fade,backSlide,goDown,fadeUp)
-
-	Note: remove class="rounded" from the img for squared image!
---&gt;</span>
-&lt;div class="owl-carousel text-center owl-mini-testimonial nomargin" data-plugin-options='{"singleItem": true, "autoPlay": 4000, "navigation": false, "pagination": true, "transitionStyle":"fade"}'&gt;
-
-	&lt;div class="testimonial"&gt;
-		&lt;figure&gt;
-			&lt;img class="rounded" src="assets/images/demo/people/300x300/11-min.jpg" alt="" /&gt;
-		&lt;/figure&gt;
-		&lt;div class="testimonial-content nopadding"&gt;
-			&lt;p&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero.&lt;/p&gt;
-			&lt;cite&gt;
-				Joana Doe
-				&lt;span&gt;Company Ltd.&lt;/span&gt;
-			&lt;/cite&gt;
-		&lt;/div&gt;
-	&lt;/div&gt;
-
-	&lt;div class="testimonial"&gt;
-		&lt;figure&gt;
-			&lt;img class="rounded" src="assets/images/demo/people/300x300/12-min.jpg" alt="" /&gt;
-		&lt;/figure&gt;
-		&lt;div class="testimonial-content nopadding"&gt;
-			&lt;p&gt;Quod necessitatibus quis expedita harum provident eos obcaecati id culpa.&lt;/p&gt;
-			&lt;cite&gt;
-				Melissa Doe
-				&lt;span&gt;Company Ltd.&lt;/span&gt;
-			&lt;/cite&gt;
-		&lt;/div&gt;
-	&lt;/div&gt;
-
-&lt;/div&gt;
-</pre>
-<!-- /pre code -->
-
-				</div>
-			</section>
-			<!-- / -->
-
-
-
-
-
-			<!-- -->
-			<section class="parallax parallax-3" style="background-image:url('assets/images/demo/1200x800/20-min.jpg')">
-				<div class="overlay dark-6"><!-- dark overlay [1 to 9 opacity] --></div>
-
-				<div class="container">
-
-					<div class="owl-carousel text-center owl-testimonial nomargin" data-plugin-options='{"singleItem": true, "autoPlay": 3500, "navigation": false, "pagination": true, "transitionStyle":"fade"}'>
-						<div class="testimonial">
-							<figure>
-								<img class="rounded" src="assets/images/demo/people/300x300/11-min.jpg" alt="" />
-							</figure>
-							<div class="testimonial-content nopadding">
-								<p class="lead">Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero.</p>
-								<cite>
-									Joana Doe
-									<span>Company Ltd.</span>
-								</cite>
-							</div>
-						</div>
-						<div class="testimonial">
-							<figure>
-								<img class="rounded" src="assets/images/demo/people/300x300/12-min.jpg" alt="" />
-							</figure>
-							<div class="testimonial-content nopadding">
-								<p class="lead">Quod necessitatibus quis expedita harum provident eos obcaecati id culpa.</p>
-								<cite>
-									Melissa Doe
-									<span>Company Ltd.</span>
-								</cite>
-							</div>
-						</div>
-						<div class="testimonial">
-							<figure>
-								<img class="rounded" src="assets/images/demo/people/300x300/d-min.jpg" alt="" />
-							</figure>
-							<div class="testimonial-content nopadding">
-								<p class="lead">Deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum.</p>
-								<cite>
-									John Doe
-									<span>Company Ltd.</span>
-								</cite>
-							</div>
-						</div>
-						<div class="testimonial">
-							<figure>
-								<img class="rounded" src="assets/images/demo/people/300x300/c-min.jpg" alt="" />
-							</figure>
-							<div class="testimonial-content nopadding">
-								<p class="lead">Fugit repellendus expedita excepturi iure perferendis provident quia eaque.</p>
-								<cite>
-									Simina Doe
-									<span>Company Ltd.</span>
-								</cite>
-							</div>
-						</div>
-					</div>
-
-				</div>
-			</section>
-			<!-- / -->
-
-			<!-- -->
-			<section class="padding-xxs">
-				<div class="container">
-
-<!-- pre code -->
-<div class="text-left margin-top-20">
-	<a href="javascript:;" onclick="jQuery('#pre-3').slideToggle();">Show Code</a>
-</div>
-<pre id="pre-3" class="text-left noradius text-danger softhide">
-<span class="text-success">&lt;!-- 
-	Note: remove class="rounded" from the img for squared image!
---&gt;</span>
-&lt;section class="parallax parallax-3" style="background-image:url('assets/images/demo/1200x800/20-min.jpg')"&gt;
-	&lt;div class="overlay dark-6"&gt;&lt;!-- dark overlay [1 to 9 opacity] --&gt;&lt;/div&gt;
-
-	&lt;div class="container"&gt;
-
-		&lt;div class="owl-carousel text-center owl-testimonial nomargin" data-plugin-options='{"singleItem": true, "autoPlay": 3500, "navigation": false, "pagination": true, "transitionStyle":"fade"}'&gt;
-			&lt;div class="testimonial"&gt;
-				&lt;figure&gt;
-					&lt;img class="rounded" src="assets/images/demo/people/300x300/11-min.jpg" alt="" /&gt;
-				&lt;/figure&gt;
-				&lt;div class="testimonial-content nopadding"&gt;
-					&lt;p class="lead"&gt;Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero.&lt;/p&gt;
-					&lt;cite&gt;
-						Joana Doe
-						&lt;span&gt;Company Ltd.&lt;/span&gt;
-					&lt;/cite&gt;
-				&lt;/div&gt;
-			&lt;/div&gt;
-			&lt;div class="testimonial"&gt;
-				&lt;figure&gt;
-					&lt;img class="rounded" src="assets/images/demo/people/300x300/12-min.jpg" alt="" /&gt;
-				&lt;/figure&gt;
-				&lt;div class="testimonial-content nopadding"&gt;
-					&lt;p class="lead"&gt;Quod necessitatibus quis expedita harum provident eos obcaecati id culpa.&lt;/p&gt;
-					&lt;cite&gt;
-						Melissa Doe
-						&lt;span&gt;Company Ltd.&lt;/span&gt;
-					&lt;/cite&gt;
-				&lt;/div&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-
-	&lt;/div&gt;
-&lt;/section&gt;
-<span class="text-success">&lt;!-- / --&gt;</span>
-
-</pre>
-<!-- /pre code -->
 
 				</div>
 			</section>

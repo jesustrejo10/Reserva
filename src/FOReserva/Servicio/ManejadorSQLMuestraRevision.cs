@@ -34,7 +34,7 @@ namespace FOReserva.Servicio
                      lista_rest.Add(rev);
                  }
              }
-             CloseConextion();
+             CloseConnection();
              return lista_rest;
          }
 
