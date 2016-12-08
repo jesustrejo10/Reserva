@@ -178,6 +178,15 @@ namespace BOReserva.Models.gestion_usuarios {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to M12_ModificarUsuario.
+        /// </summary>
+        internal static string ModificarUsuario {
+            get {
+                return ResourceManager.GetString("ModificarUsuario", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to nombre.
         /// </summary>
         internal static string NombreUsuario {

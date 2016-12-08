@@ -214,5 +214,52 @@ namespace BOReserva.Models.gestion_usuarios
             }
             return null;
         }
+
+        /// <summary>
+        /// Método para agregar un usuario
+        /// </summary>
+        /// <param name="usuario">Es el objeto que se va a agregar a la BD</param>
+        /// <returns>Retorna true si se agrega en la BD</returns>
+        public bool ModificarUsuario(CUsuario usuario, int id)
+        {
+            Parametro parametro;
+            try
+            {
+                List<Parametro> parametros = new List<Parametro>();
+                parametro = new Parametro(RecursoUsuario.ParametroNombre, SqlDbType.VarChar, ((CUsuario)usuario).nombreUsuario, false);
+                parametros.Add(parametro);
+                parametro = new Parametro(RecursoUsuario.ParametroApellido, SqlDbType.VarChar, ((CUsuario)usuario).nombreUsuario, false);
+                parametros.Add(parametro);
+                parametro = new Parametro(RecursoUsuario.ParametroCorreo, SqlDbType.VarChar, ((CUsuario)usuario).correoUsuario, false);
+                parametros.Add(parametro);
+                parametro = new Parametro(RecursoUsuario.ParametroContraseña, SqlDbType.VarChar, ((CUsuario)usuario).contraseñaUsuario, false);
+                parametros.Add(parametro);
+                parametro = new Parametro(RecursoUsuario.ParametroRolID, SqlDbType.Int, ((CUsuario)usuario).rolUsuario.ToString(), false);
+                parametros.Add(parametro);
+                parametro = new Parametro(RecursoUsuario.ParametroActivo, SqlDbType.VarChar, ((CUsuario)usuario).activoUsuario, false);
+                parametros.Add(parametro);
+                parametro = new Parametro(RecursoUsuario.ParametroID, SqlDbType.Int, id.ToString(), false);
+                parametros.Add(parametro);
+                List<ResultadoBD> results = EjecutarStoredProcedure(RecursoUsuario.ModificarUsuario, parametros);
+                Conectar();
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.ArgumentoInvalido, ex);
+            }
+            catch (FormatException ex)
+            {
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.FormatoInvalido, ex);
+            }
+            catch (SqlException ex)
+            {
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.BDError, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.OtroError, ex);
+            }
+            return true;
+        }
     }
 }

@@ -63,11 +63,26 @@ namespace BOReserva.Controllers
             
         }
 
-       /* [HttpPost]
+       [HttpPost]
         public ActionResult M12_ModificarUsuario(ListarUsuario usuario)
         {
+            if (ModelState.IsValid)
+            {
+                PersistenciaUsuario p = new PersistenciaUsuario();
+                try
+                {
+                    p.ModificarUsuario(usuario.toClass(), 50);
+                    return RedirectToAction("M12_Index");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return View("M12_ModificarUsuario", usuario);
+                }
+            } 
 
-        }*/
+            return PartialView("M12_Index", "_Layout");
+        }
 
 
 

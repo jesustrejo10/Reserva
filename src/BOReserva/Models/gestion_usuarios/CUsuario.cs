@@ -22,6 +22,16 @@ namespace BOReserva.Models.gestion_usuarios
         {
         }
 
+        public CUsuario(String nombre, String apellido, String contraseña, String correo, String activo, int rol)
+        {
+            _correo = correo;
+            _contraseña = contraseña;
+            _nombre = nombre;
+            _apellido = apellido;
+            _activo = activo;
+            _rol = rol;
+        }
+
         public CUsuario(String nombre, String apellido, String contraseña, String correo, String activo, DateTime fechaCreacion, int rol)
         {
             _correo = correo;

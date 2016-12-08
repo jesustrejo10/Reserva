@@ -5,75 +5,83 @@
 }
  
 <section class="content">
-<form role="form" name="consultar" id="consultar">
-    <script language="javascript">
-        function doSearch() {
-            var tableReg = document.getElementById('example2');
-            var searchText = document.getElementById('searchTerm').value.toLowerCase();
-            for (var i = 1; i < tableReg.rows.length; i++) {
-                var cellsOfRow = tableReg.rows[i].getElementsByTagName('td');
-                var found = false;
-                for (var j = 0; j < cellsOfRow.length && !found; j++) {
-                    var compareWith = cellsOfRow[j].innerHTML.toLowerCase();
-                    if (searchText.length == 0 || (compareWith.indexOf(searchText) > -1)) {
-                        found = true;
+    <form role="form" name="consultar" id="consultar">
+        <script language="javascript">
+            function doSearch() {
+                var tableReg = document.getElementById('example2');
+                var searchText = document.getElementById('searchTerm').value.toLowerCase();
+                for (var i = 1; i < tableReg.rows.length; i++) {
+                    var cellsOfRow = tableReg.rows[i].getElementsByTagName('td');
+                    var found = false;
+                    for (var j = 0; j < cellsOfRow.length && !found; j++) {
+                        var compareWith = cellsOfRow[j].innerHTML.toLowerCase();
+                        if (searchText.length == 0 || (compareWith.indexOf(searchText) > -1)) {
+                            found = true;
+                        }
+                    }
+                    if (found) {
+                        tableReg.rows[i].style.display = '';
+                    } else {
+                        tableReg.rows[i].style.display = 'none';
                     }
                 }
-                if (found) {
-                    tableReg.rows[i].style.display = '';
-                } else {
-                    tableReg.rows[i].style.display = 'none';
-                }
             }
-        }
-    </script>
-    <div class="table-responsive">
-        <div style="float: right; padding-top: 5px;">
-            <a style="margin-right: 10px;">Buscador</a>
-            <input id="searchTerm" type="text" onkeyup="doSearch()" />
+        </script>
+        <div class="row">
+            <link rel="stylesheet" href="~/Content/plugins/datatables/dataTables.bootstrap.css">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Lista de Usuarios</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div style="float: right; padding-top: 5px;">
+                            <a style="margin-right: 10px;">Buscador</a>
+                            <input id="searchTerm" type="text" onkeyup="doSearch()" />
+                        </div>
+                        <br />
+                        <br />
+                        <table id="example2" class="table table-bordered table-striped">
+                            <thead>
+                                <tr style="font-size: 16px;">
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Email</th>
+                                    <th>Fecha de Creación</th>
+                                    <th>Rol</th>
+                                    <th>Status</th>
+                                    <th>Acciones</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (BOReserva.Models.gestion_usuarios.ListarUsuario p in Model)
+                                {
+                                    <tr>
+                                        <td>@p._nombre</td>
+                                        <td>@p._apellido</td>
+                                        <td>@p._correo</td>
+                                        <td>@p.getDate()</td>
+                                        <td>@p._rol</td>
+                                        <td>@p._activo</td>
+                                        <td>
+                                            <a href="@Url.Action("ModificarUsuario", "gestion_usuarios", new {usuID = p._id})"><i class="fa fa-gear modificar"></i></a>
+                                            @Html.ActionLink("Eliminar", "EliminarUsuario", new { usuID = p._id }, new { @class = "btn btn-default btn", @role = "button" })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                        <div style="text-align: center;">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <br />
-        <br />
-        <table id="example2" class="table">
-            <thead>
-                <tr style="font-size: 16px;">
-                    <th>Nombre</th>
-                    <th>Email</th>
-                    <th>Fecha de Creación</th>
-                    <th>Rol</th>
-                    <th>Status</th>
-                    <th>Acciones</th>
-                    
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (BOReserva.Models.gestion_usuarios.ListarUsuario p in Model)
-                {
-                    <tr>
-                        <td>@p._nombre</td> 
-                        <td>@p._correo</td> 
-                        <td>@p.getDate()</td>
-                        <td>@p._rol</td>
-                        <td>@p._activo</td>
-                        <td>
-                            @Html.ActionLink("Eliminar", "EliminarUsuario", new { usuID = p._id }, new { @class = "btn btn-default btn", @role = "button" })
-                            @Html.ActionLink("Modificar", "ModificarUsuario", new { usuID = p._id }, new { @class = "btn btn-default btn", @role = "button" })
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-        <div style="text-align: center;">
-           
-        </div>
-    </div>
 </form>
 </section>
-
-
-@Html.ActionLink("Crear Usuario", "M12_AgregarUsuario", "gestion_usuarios", null, new { @class = "btn btn-block btn-primary", @role = "button" })
-            
-
-
 
 
