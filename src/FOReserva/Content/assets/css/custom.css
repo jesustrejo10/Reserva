@@ -9,4 +9,21 @@
         width: 100% !important;
     }
 }
+
+#rest_form .has-error .form-control{
+   border: solid 2px #f39c12 !important;
+}
+
+#rest_form .has-error p{
+  color: #f39c12 !important;
+}
+
+#rest_form .has-success  .form-control{
+   border: solid 2px #18bc9c !important;
+}
+
+#rest_form .has-success p{
+  color: #18bc9c !important;
+}
+
 /*************************** END - ANDREA CAMACHO ******************************************/

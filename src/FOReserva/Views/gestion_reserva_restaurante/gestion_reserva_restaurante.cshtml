@@ -11,33 +11,81 @@
             <center> ¡Reserva en los mejores restaurantes de tu ciudad!</center>
         </div>
     </div>
-    @using (Html.BeginForm("restaurant_resultados", "gestion_reserva_restaurante", FormMethod.Get))
+    @using (Html.BeginForm("restaurant_resultados", "gestion_reserva_restaurante", FormMethod.Get, new { @id = "rest_form" }))
     {
-        <div class="row">
-            <div class="col-lg-12">
-                <center>
-                    <div class="input-group top_separate" style="width:100%;">
-                        <div class="form-group-md">
-                            <select name="search_val" class="form-control rest_sel" data-selected="" style="width:20%;">
-                                <option value="0">Bucar por:</option>
-                                <option value="1">Ciudad</option>
-                                <option value="2">Restaurante</option>
-                            </select>
-                            <input type="text" id="search_txt" name="search_text" class="form-control rest_inp" placeholder="¿Dónde quieres comer?" style="width:80%;" required>
+        <div class="col-lg-12">
+            <center>
+                <div class="input-group top_separate" style="width:100%;">
+                    <div class="form-group-md">
+                        <select id="search_val" name="search_val" class="form-control rest_sel" data-selected="" style="width:20%;">
+                            <option value="0">Bucar por:</option>
+                            <option value="1">Ciudad</option>
+                            <option value="2">Restaurante</option>
+                        </select>
+                        <input type="text" id="name_rest" name="name_rest" class="form-control rest_inp" placeholder="¿Dónde quieres comer?" style="width:80%;" required>
+                        <div id="val_null" style="display: none;" class="has-error">
+                            <p>Debe seleccionar un tipo de busqueda</p>
+                        </div>
+                        <div id="name_empty" style="display: none;" class="has-error">
+                            <p>Debe escribir el nombre de un restaurante o Ciudad</p>
+                        </div>
+                        <div id="name_caract" style="display: none;" class="has-error">
+                            <p>El campo solo debe tener caracteres alfanuméricos</p>
                         </div>
                     </div>
-                </center>
-            </div>
+
+                </div>
+            </center>
         </div>
+
         <div class="row text-center">
             <div class="col-md-12">
-                
-                @*<button type="button"  class="btn btn-primary">Buscar</button>*@
-                <input type="submit" id="buscar_restaurante" value="Buscar" class="btn btn-primary">
-</div>
+                <input type="button" id="buscar_restaurante" value="Buscar" class="btn btn-primary">
+            </div>
         </div>
     }
 </fieldset>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#buscar_restaurante").on("click", function () {
+           
+            var nombre = $("#name_rest").val();
+          
+            var tipo = $("#search_val").val();
+ 
+            var win = false;
+
+            if (nombre == "" || nombre == undefined) {
+                $("#name_rest").addClass("has-error");
+                $("#name_empty").fadeIn();
+                win = false;
+            }
+            else if (tipo == 0) {
+                var win = false;
+                $("#search_val").addClass("has-error");
+                $("#val_null").fadeIn();
+                win = false;
+            }
+
+            else {
+                win = true;
+            }
+
+
+            if (win) {
+                $("#rest_form").submit();
+            }
+            else
+                return false;
+        });
+        
+    });
+</script>
+
+
 
 <!--<script>
         $("#buscar_restaurante").click(function (e) {
@@ -55,6 +103,4 @@
         });
     });
 </script>            -->
-    
-
 @*</form>*@
