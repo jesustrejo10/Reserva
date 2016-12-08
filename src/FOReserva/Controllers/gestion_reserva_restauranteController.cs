@@ -68,7 +68,6 @@ namespace FOReserva.Controllers
                 lista = manejador.buscarRestCity(search_txt);
             else if (search_val == 2)
                 lista = manejador.buscarRestName(search_txt);
-
             return lista;
         }
 
