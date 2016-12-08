@@ -25,6 +25,7 @@
         <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
         <link rel="stylesheet" href="~/Content/dist/css/skins/_all-skins.min.css">
+
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -283,10 +284,12 @@
                             <i class="fa fa-files-o"></i>
                             <span>Gestión de Boletos</span>
                             <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li id="m05_crearboleto"><a href="#"><i class="fa fa-plus-square-o"></i> Crear </a></li>
+                            <li id="m05_crearboleto"><a href="#"><i class="fa fa-plus-square-o"></i>Crear</a></li>
+                            <li id="m05VisualizarBoletos"><a href="#"><i class="fa fa-eye"></i>Visualizar</a></li>
                         </ul>
                     </li>
 
@@ -632,7 +635,9 @@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="/Content/dist/js/pages/dashboard2.js"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="/Content/dist/js/demo.js"></script>}
+    <script src="/Content/dist/js/demo.js"></script>
+    <!-- Select2 -->
+    <script src="/Content/plugins/select2/select2.full.min.js"></script>
 
 </body>
 
