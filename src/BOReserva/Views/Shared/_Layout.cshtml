@@ -6,8 +6,8 @@
        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         @Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")
-       
-        
+
+
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>RESERVA | BackOffice</title>
         <!-- Tell the browser to be responsive to screen width -->
@@ -285,14 +285,15 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="modules/gestion_venta_boleto/crearboletosvuelos.html"><i class="fa fa-circle-o"></i>Crear boleto</a></li>
-                            <li><a href="modules/gestion_venta_boleto/consultarboleto.html"><i class="fa fa-circle-o"></i>Consultar boleto</a></li>
-                            <li><a href="modules/gestion_venta_boleto/modificarboleto.html"><i class="fa fa-circle-o"></i>Modificar boleto</a></li>
-                            <li><a href="modules/gestion_venta_boleto/eliminarboleto.html"><i class="fa fa-circle-o"></i>Eliminar boleto</a></li>
+                            <li id="m05_crearboleto"><a href="#"><i class="fa fa-plus-square-o"></i> Crear </a></li>
                         </ul>
                     </li>
 
-                    <li><a href="modules/gestion_venta_boleto/checkin.html"><i class="fa fa-book"></i> <span>Check in</span></a></li>
+                    <li>
+                      <a href="modules/gestion_venta_boleto/checkin.html">
+                        <i class="fa fa-book"></i>
+                        <span>Check in</span></a>
+                    </li>
                     <!-- FIN MODULO DE BOLETOS AEREOS Y CHECK-IN -->
                     <!-- MODULO DE COMIDA POR VUELO -->
                     <li class="treeview">
@@ -321,18 +322,25 @@
                         </a>
                         <ul class="treeview-menu">
                             <li id="m08AgregarAutomovil"><a href="#"><i class="fa fa-plus-square-o"></i>Crear</a></li>
-                            <li><a href="modules/gestion_automoviles/M08_VisualizarAutomoviles.html"><i class="fa fa-eye"></i>Visualizar</a></li>
-                        </ul>
+                            <li id="m08VisualizarAutomoviles"><a href="#"><i class="fa fa-eye"></i>Visualizar</a></li>
+                         </ul>
                     </li>
                     <!-- FIN DE MODULO DE AUTOMOVILES -->
-                    <!-- MODULO DE HOTELES  -->
-                    <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Hoteles</a></li>
-                    <!-- FIN DE MODULO DE HOTELES -->
                     <!-- MODULO DE OFERTAS Y PAQUETES -->
                     <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Ofertas y Paquetes</a></li>
                     <!-- FIN DE MODULO DE OFERTAS Y PAQUETES -->
                     <!-- MODULO DE GESTION DE USUARIOS -->
-                    <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Usuarios</a></li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-user"></i> <span>Gestión de Usuarios</span> <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="gestionUsuarios"><a href="/gestion_usuarios/M12_index"><i class="fa fa-plus-square-o"></i>Consultar</a></li>
+                            <li id="agregarUsuarios"><a href="/gestion_usuarios/M12_AgregarUsuario"><i class="fa fa-plus-square-o"></i>Agregar</a></li>
+                        </ul>
+                    </li>
                     <!-- FIN DE MODULO DE GESTION DE USUARIOS -->
                     <!-- MODULO DE GESTION DE ROLES -->
                     <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Roles</a></li>
@@ -349,53 +357,19 @@
                         </ul>
                     </li>
                     <!-- FIN DE MODULO DE CRUCEROS -->
-                    <!-- PAGINA DE REFERENCIA -->
-
                     <!-- MODULO DE HOTELES -->
                     <li class="treeview">
                         <a href="#">
-                            <i class="fa fa-circle"></i> <span>Gestión de Hoteles</span> <span class="pull-right-container">
+                            <i class="fa fa-hotel"></i> <span>Gestión de Hoteles</span> <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li id="crearhotel"><a href="#"><i class="fa fa-plus-square-o"></i>Crear Hotel</a></li>
-                            <li id="modificarhotel"><a href="#"><i class="fa fa-plus-square-o"></i>Modificar Hotel</a></li>
-                            <li id="desactivarhotel"><a href="#"><i class="fa fa-plus-square-o"></i>Desactivar Hotel</a></li>
-                            
-                        </ul>
-                    </li>
-                  
-                    <!-- FIN MODULO DE BOLETOS AEREOS Y CHECK-IN -->
-
+                            <li id="crearhotel"><a href="#"><i class="fa fa-plus-circle"></i>Crear Hotel</a></li>
+                            <li id="consultarhotel"><a href="#"><i class="fa fa-search"></i>Consultar Hotel</a></li>
+                            <li id="modificarhotel"><a href="#"><i class="fa fa-pencil"></i>Modificar Hotel</a></li>
+                            <li id="desactivarhotel"><a href="#"><i class="fa fa-remove"></i>Desactivar Hotel</a></li>
                     <!-- MODULO DE BOLETOS AEREOS Y CHECK-IN -->
-                    <li class="treeview">
-                        <a href="/modules/default/default.html">
-                            <i class="fa fa-car"></i> <span>Pagina de referencia</span> <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="modules/default/default.html"><i class="fa fa-plus-square-o"></i>Crear</a></li>
-                        </ul>
-                    </li>
-                    <!-- FIN PAGINA DE REFERENCIA -->                   
-
-                    <li><a href="modules/gestion_venta_boleto/checkin.html"><i class="fa fa-book"></i> <span>Check in</span></a></li>
-                    <!-- FIN MODULO DE BOLETOS AEREOS Y CHECK-IN -->
-                    <!-- MODULO 12 : GESTION DE USUARIOS -->
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-user"></i> <span>Gestión de Usuarios</span> <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li id="gestionUsuarios"><a href="/gestion_usuarios/M12_index"><i class="fa fa-plus-square-o"></i>Consultar</a></li>
-                            <li id="agregarUsuarios"><a href="/gestion_usuarios/M12_AgregarUsuario"><i class="fa fa-plus-square-o"></i>Agregar</a></li>
-                        </ul>
-                    </li>
-                    <!-- FIN MODULO 12 -->
                 </ul>
             </section>
             <!-- /.sidebar -->
@@ -415,7 +389,7 @@
             </section>*@
             <!-- Main content -->
             <section class="content" id="contenido">
-                
+
             </section>
             <!-- /.content -->
         </div>

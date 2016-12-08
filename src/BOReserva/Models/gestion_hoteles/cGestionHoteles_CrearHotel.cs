@@ -5,7 +5,7 @@ using System.Web;
 
 namespace BOReserva.Models.gestion_hoteles
 {
-    public class cGestionHoteles_CrearHotel
+    public class CGestionHoteles_CrearHotel
     {
         public String _nombre { get; set; }
         public String _direccion { get; set; }
