@@ -58,14 +58,6 @@ namespace BOReserva.Controllers
             }
         }
 
-        /*Metodo para consultar la matricula de un avion para sus estadisticas*/
-        [HttpPost]
-        public JsonResult consultarEstadisticasAvion(CGestion_avion model)
-        {
-            String prueba = model._matriculaConsultarEstadisticaAvion;
-            return (Json(true, JsonRequestBehavior.AllowGet));
-            
-        }
 
         public ActionResult M02_VisualizarAviones()
         {
@@ -98,21 +90,61 @@ namespace BOReserva.Controllers
                 return Json(error);
             }
             manejadorSQL sql = new manejadorSQL();
-            return (Json(sql.modificarAvion(model), JsonRequestBehavior.AllowGet));
+            Boolean resultado = sql.modificarAvion(model);
+            if (resultado)
+            { 
+                return (Json(sql.modificarAvion(model), JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error en la base de datos";
+                //Retorno el error
+                return Json(error);
+            }
         }
 
         [HttpPost]
         public JsonResult habilitarAvion(int id)
         {
             manejadorSQL sql = new manejadorSQL();
-            return (Json(sql.habilitarAvion(id), JsonRequestBehavior.AllowGet));
+            Boolean resultado = sql.habilitarAvion(id);
+            if (resultado)
+            {
+                return (Json(true, JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error en la base de datos";
+                //Retorno el error
+                return Json(error);
+            }
+            
         }
 
         [HttpPost]
         public JsonResult deshabilitarAvion(int id)
         {
             manejadorSQL sql = new manejadorSQL();
-            return (Json(sql.deshabilitarAvion(id), JsonRequestBehavior.AllowGet));
+            Boolean resultado = sql.deshabilitarAvion(id);
+            if (resultado)
+            {
+                return (Json(true, JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error en la base de datos";
+                //Retorno el error
+                return Json(error);
+            }
         }
 
 

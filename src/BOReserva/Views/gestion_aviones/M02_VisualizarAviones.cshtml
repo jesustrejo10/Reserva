@@ -47,7 +47,7 @@
                                     <td>@disponibilidad</td>
                                     <td>
                                         @*<a href="#"> <i class="fa fa-eye clasedeprueba"></i></a>*@
-                                        <a href="#" title="Modificar"><i class="fa fa-gear modificar"></i></a>
+                                        <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>
                                         @if (item._disponibilidad == 1)
                                         {
                                             <a href="#" title="Deshabilitar"><i class="fa fa-times deshabilitar"></i></a>
@@ -137,6 +137,7 @@
                     }
                 });
         }).fail(function () {
+            alert("Error en la base de datos");
         });
     });
 
@@ -166,6 +167,7 @@
                     }
                 });
         }).fail(function () {
+            alert("Error en la base de datos");
         });
     });
 
