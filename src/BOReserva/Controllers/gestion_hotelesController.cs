@@ -24,7 +24,14 @@ namespace BOReserva.Controllers
         // GET: gestion_hoteles
         public ActionResult M09_GestionHoteles_ModificarHotel()
         {
-            return PartialView();
+            CGestionHoteles_EditarHotel modificar = new CGestionHoteles_EditarHotel();
+            return PartialView(modificar);
+        }
+
+        [HttpPost]
+        public JsonResult editarhotel(CGestionHoteles_EditarHotel modificar)
+        {
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
 
         // GET: gestion_hoteles

@@ -225,6 +225,7 @@
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
     <Compile Include="Models\gestion_boletos\CBuscarVuelo.cs" />
     <Compile Include="Models\gestion_hoteles\CGestionHoteles_CrearHotel.cs" />
+    <Compile Include="Models\gestion_hoteles\CGestionHoteles_EditarHotel.cs" />
     <Compile Include="Models\gestion_usuarios\AgregarUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\ConexionBD.cs" />
     <Compile Include="Models\gestion_usuarios\CUsuario.cs" />
@@ -247,9 +248,9 @@
     </Compile>
     <Compile Include="Models\gestion_usuarios\ResultadoBD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Servicio\manejadorSQL.cs" />
-    <Compile Include="Servicio\Servicio_Boletos\Ciudades.cs" />
-    <Compile Include="Servicio\Servicio_Boletos\manejadorSQL_Boletos.cs" />
+    <Compile Include="Images\Servicio\manejadorSQL.cs" />
+    <Compile Include="Images\Servicio\Servicio_Boletos\Ciudades.cs" />
+    <Compile Include="Images\Servicio\Servicio_Boletos\manejadorSQL_Boletos.cs" />
     <Compile Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx.cs">
       <DependentUpon>GestionDeAutomoviles.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -440,6 +441,7 @@
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\Scripts_Aviones\llamadas_generales.js" />
+    <Content Include="Scripts\Scripts_Hoteles\editar_hotel.js" />
     <Content Include="Scripts\Scripts_Hoteles\llamadas_generales_hoteles.js" />
     <Content Include="Views\dist\css\AdminLTE.css" />
     <Content Include="Views\dist\css\AdminLTE.min.css" />
@@ -1460,7 +1462,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-3.1.1.min.map" />
-
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_aviones\M02_AgregarAvion.cshtml" />
@@ -1489,7 +1490,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoUsuario.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-</ItemGroup>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
