@@ -23,10 +23,16 @@ namespace FOReserva.Servicio
         private string stringDeConexion = null;
 
         /*Metodo para Abrir la conexion a la DB*/
-        public void OpenConextion()
+        private void OpenConextion()
         {
             conexion = new SqlConnection(stringDeConexion);
-            conexion.Open();
+            try
+            {
+                conexion.Open();
+            }catch (SqlException e)
+            {
+                throw new ManejadorSQLException("Error de conexion con la DB", e);
+            }
         }
 
         /*Metodo para Cerrar la Conexion a la DB*/
@@ -45,6 +51,13 @@ namespace FOReserva.Servicio
             get { return conexion; }
         }
 
-
+        /*Metodo para la accion de un query*/
+        public SqlDataReader Executer(string query)
+        {
+            OpenConextion();
+            SqlCommand execute = this.Conexion.CreateCommand();
+            execute.CommandText = query;
+            return execute.ExecuteReader();
+        }
     }
 }

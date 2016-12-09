@@ -92,6 +92,8 @@
       <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Primitives.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -195,6 +197,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\gestion_reserva_habitacionesController.cs" />
     <Compile Include="Controllers\gestion_reserva_restauranteController.cs" />
     <Compile Include="Controllers\gestion_revisionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -205,9 +208,47 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\BaseEntity.cs" />
+    <Compile Include="Models\ORM\DB.cs" />
+    <Compile Include="Models\ORM\M20_ActualizarEstadoReservaHabitacion_Result.cs">
+      <DependentUpon>ModelDBReserva.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORM\M20_DetalleReservaHabitacion_Result.cs">
+      <DependentUpon>ModelDBReserva.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORM\M20_GuardarReservaHabitacion_Result.cs">
+      <DependentUpon>ModelDBReserva.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORM\M20_HotelHistorialReservaHabitacion_Result.cs">
+      <DependentUpon>ModelDBReserva.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORM\M20_UsuarioHistorialReservaHabitacion_Result.cs">
+      <DependentUpon>ModelDBReserva.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORM\ModelDBReserva.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelDBReserva.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORM\ModelDBReserva.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelDBReserva.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORM\ModelDBReserva.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelDBReserva.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ReservaHabitacion\Cvista_ReservaHabitacion.cs" />
+    <Compile Include="Models\ReservaHabitacion\Errores\ReservaHabitacionException.cs" />
+    <Compile Include="Models\ReservaHabitacion\TMPHotel.cs" />
+    <Compile Include="Models\ReservaHabitacion\TMPUsuario.cs" />
     <Compile Include="Models\Restaurantes\CReservation_Restaurant.cs" />
     <Compile Include="Models\Restaurantes\CRestaurantModel.cs" />
+    <Compile Include="Models\Revision\CListRevision.cs" />
     <Compile Include="Models\Revision\CRevision.cs" />
+    <Compile Include="Models\Revision\CRevisionValoracion.cs" />
+    <Compile Include="Models\Utilidad.cs" />
     <Compile Include="Models\Vuelos\Cvista_Vuelos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\ReservationModels.cs" />
@@ -217,12 +258,15 @@
       <DependentUpon>ReservaDB.dbml</DependentUpon>
     </Compile>
     <Compile Include="Servicio\manejadorSQL.cs" />
-    <Compile Include="Servicio\ManejadorSQLReserva.cs" />
+    <Compile Include="Servicio\ManejadorSQLRevision.cs" />
+    <Compile Include="Servicio\ManejadorSQLException.cs" />
+    <Compile Include="Servicio\ManejadorSQLReservaRestaurant.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\assets\css\color_scheme\green.css" />
     <Content Include="Content\assets\css\custom.css" />
     <Content Include="Content\assets\css\essentials.css" />
+    <Content Include="Content\assets\css\global.css" />
     <Content Include="Content\assets\css\header-1.css" />
     <Content Include="Content\assets\css\layout-dark.css" />
     <Content Include="Content\assets\css\layout-datatables.css" />
@@ -306,6 +350,7 @@
     <Content Include="Content\assets\images\demo\shop\products\300x450\p7.jpg" />
     <Content Include="Content\assets\images\demo\shop\products\300x450\p8.jpg" />
     <Content Include="Content\assets\images\demo\shop\products\300x450\p9.jpg" />
+    <Content Include="Content\assets\images\favicon.ico" />
     <Content Include="Content\assets\images\female.png" />
     <Content Include="Content\assets\images\footer_sprite.png" />
     <Content Include="Content\assets\images\grabbing.png" />
@@ -1583,10 +1628,27 @@
     <Content Include="Content\assets\plugins\slider.swiper\dist\js\maps\swiper.min.js.map" />
     <Content Include="Content\assets\plugins\styleswitcher\color_schemes\color_scheme.fla" />
     <Content Include="Images\restaurant_generic.jpg" />
+    <Content Include="Models\ORM\ModelDBReserva.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelDBReserva.edmx</DependentUpon>
+      <LastGenOutput>ModelDBReserva.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ORM\ModelDBReserva.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelDBReserva.edmx</DependentUpon>
+      <LastGenOutput>ModelDBReserva.cs</LastGenOutput>
+    </Content>
     <Content Include="ReservaDB.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>ReservaDB.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </Content>
+    <EntityDeploy Include="Models\ORM\ModelDBReserva.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelDBReserva.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ORM\ModelDBReserva.edmx.diagram">
+      <DependentUpon>ModelDBReserva.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Models\Autos\placeholder.html" />
@@ -1620,6 +1682,7 @@
     <Content Include="Views\gestion_reserva_crucero\placeholder.html" />
     <Content Include="Views\gestion_reserva_hotel\placeholder.html" />
     <Content Include="Views\gestion_reserva_restaurante\placeholder.html" />
+    <Content Include="Views\gestion_revision\placeholder.html" />
     <Content Include="Views\Shared\assets\css\color_scheme\green.css" />
     <Content Include="Views\Shared\assets\css\essentials.css" />
     <Content Include="Views\Shared\assets\css\header-1.css" />
@@ -2972,7 +3035,15 @@
     <Content Include="Views\gestion_reserva_restaurante\restaurant_resultados.cshtml" />
     <Content Include="Views\gestion_reserva_restaurante\reservar_restaurant.cshtml" />
     <Content Include="Views\gestion_reserva_restaurante\confirma_restaurant.cshtml" />
+    <Content Include="Views\gestion_reserva_habitaciones\detalle_reserva.cshtml" />
+    <Content Include="Views\gestion_reserva_habitaciones\editar_reserva.cshtml" />
+    <Content Include="Views\gestion_reserva_habitaciones\mis_reservas.cshtml" />
+    <Content Include="Views\gestion_revision\gestion_ListRevicion.cshtml" />
     <Content Include="Views\gestion_revision\gestion_revision.cshtml" />
+    <Content Include="Views\gestion_revision\consultar_revision.cshtml" />
+    <Content Include="Views\gestion_revision\crear_revision.cshtml" />
+    <Content Include="Views\gestion_revision\eliminar_revision.cshtml" />
+    <Content Include="Views\gestion_revision\editar_revision.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2983,6 +3054,7 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ReservaDB.dbml.layout">
