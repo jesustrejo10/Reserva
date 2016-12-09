@@ -202,6 +202,7 @@
     <Compile Include="Controllers\gestion_automovilesController.cs" />
     <Compile Include="Controllers\gestion_avionesController.cs" />
     <Compile Include="Controllers\gestion_boletosController.cs" />
+    <Compile Include="Controllers\gestion_check_inController.cs" />
     <Compile Include="Controllers\gestion_hotelesController.cs" />
     <Compile Include="Controllers\gestion_comida_vueloController.cs" />
     <Compile Include="Controllers\gestion_usuariosController.cs" />
@@ -296,7 +297,7 @@
     <Content Include="Content\dist\img\avatar2.png" />
     <Content Include="Content\dist\img\avatar3.png" />
     <Content Include="Content\dist\img\avatar5.png" />
-    <Content Include="Content\dist\img\boardingpass.png" />
+    <Content Include="Content\dist\img\boarding_final.jpg" />
     <Content Include="Content\dist\img\boxed-bg.jpg" />
     <Content Include="Content\dist\img\boxed-bg.png" />
     <Content Include="Content\dist\img\credit\american-express.png" />
@@ -435,7 +436,6 @@
     <Content Include="Scripts\Scripts_Boletos\DetalleBoleto.js" />
     <Content Include="Scripts\Scripts_Boletos\BuscarVuelo.js" />
     <Content Include="Scripts\Scripts_Boletos\DetalleVuelo.js" />
-    <Content Include="Scripts\Scripts_Boletos\VerVuelos.js" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -444,6 +444,11 @@
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\Scripts_Aviones\llamadas_generales.js" />
+    <Content Include="Scripts\Scripts_CheckIn\BoardingPass.js" />
+    <Content Include="Scripts\Scripts_CheckIn\M05_CheckIn.js" />
+    <Content Include="Scripts\Scripts_CheckIn\M05_Equipaje.js" />
+    <Content Include="Scripts\Scripts_CheckIn\M05_VerBoletosCheckIn.js" />
+    <Content Include="Scripts\Scripts_CheckIn\M05_VerDetalleBoleto.js" />
     <Content Include="Scripts\Scripts_Hoteles\llamadas_generales_hoteles.js" />
     <Content Include="Views\dist\css\AdminLTE.css" />
     <Content Include="Views\dist\css\AdminLTE.min.css" />
@@ -539,10 +544,6 @@
     <Content Include="Views\gestion_ruta_comercial\placeholder.html" />
     <Content Include="Views\gestion_seguridad_ingreso\placeholder.html" />
     <Content Include="Views\gestion_usuarios\placeholder.html" />
-    <Content Include="Views\gestion_check_in\boardingpass.html" />
-    <Content Include="Views\gestion_check_in\checkin.html" />
-    <Content Include="Views\gestion_check_in\detallecheckin.html" />
-    <Content Include="Views\gestion_check_in\equipajecheckin.html" />
     <Content Include="Views\gestion_boletos\placeholder.html" />
     <Content Include="Views\gestion_vuelo\placeholder.html" />
     <Content Include="Content\plugins\bootstrap-slider\bootstrap-slider.js" />
@@ -1402,6 +1403,11 @@
     <Content Include="Views\gestion_usuarios\_Layout.cshtml" />
     <Content Include="Views\gestion_boletos\M05_VisualizarBoletos.cshtml" />
     <Content Include="Views\gestion_boletos\M05_VerReserva.cshtml" />
+    <Content Include="Views\gestion_check_in\M05_CheckIn.cshtml" />
+    <Content Include="Views\gestion_check_in\M05_VerBoletosCheckIn.cshtml" />
+    <Content Include="Views\gestion_check_in\M05_VerDetalleBoleto.cshtml" />
+    <Content Include="Views\gestion_check_in\M05_Equipaje.cshtml" />
+    <Content Include="Views\gestion_check_in\M05_VerBoardingPass.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
