@@ -13,6 +13,7 @@ namespace BOReserva.Controllers
         public ActionResult M09_GestionHoteles_Crear()
         {
             CGestionHoteles_CrearHotel crear = new CGestionHoteles_CrearHotel();
+            
             return PartialView(crear);
         }
 

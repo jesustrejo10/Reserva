@@ -223,6 +223,9 @@
     <Compile Include="Models\gestion_aviones\CAgregarAvion.cs" />
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
     <Compile Include="Models\gestion_hoteles\CGestionHoteles_CrearHotel.cs" />
+    <Compile Include="Models\gestion_hoteles\CGestionHoteles_SelectCiudadModel.cs" />
+    <Compile Include="Models\gestion_hoteles\CGestionHoteles_SelectEstrellasModel.cs" />
+    <Compile Include="Models\gestion_hoteles\CGestionHoteles_SelectPaisModel.cs" />
     <Compile Include="Models\gestion_usuarios\AgregarUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\ConexionBD.cs" />
     <Compile Include="Models\gestion_usuarios\CUsuario.cs" />
@@ -1456,7 +1459,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-3.1.1.min.map" />
-
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_aviones\M02_AgregarAvion.cshtml" />
