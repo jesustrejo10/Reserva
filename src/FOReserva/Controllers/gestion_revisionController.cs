@@ -5,9 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FOReserva.Models.Restaurantes;
 
 namespace FOReserva.Controllers
 {
+
+
     public class gestion_revisionController : Controller
     {
         //
@@ -28,33 +31,98 @@ namespace FOReserva.Controllers
             CListRevision modelo = new CListRevision();
             return PartialView(modelo);
 
-                        //probando
+            //probando
         }
 
-        public ActionResult Consultar_Revision (string usuario)
+
+
+
+        public ActionResult Consultar_Revision(string usuario)
         {
-           // int search_val = Int32.Parse(Request.QueryString["search_val"]);
-            string search_txt = Request.QueryString["search_text"];
-            
-            List<CRevision> lista ;                   // mostrar revision cuando estoy en el perfil del usuario
-            if (search_txt == usuario)
+            // int search_val = Int32.Parse(Request.QueryString["search_val"]);
+            // string Usuario = Request.QueryString["Usuario"];
+
+
+            List<CRevision> lista;
+
+
+            ManejadorSQLMuestraRevision manejador = new ManejadorSQLMuestraRevision();
+            lista = manejador.ConsultarRevision(usuario);
+
+            return PartialView(lista);
+        }
+
+
+
+        public ActionResult Eliminar_Revision(string usuario, CRevision revision)
+        {
+
+            List<CRevision> lista;
+
+
+            ManejadorSQLMuestraRevision manejador = new ManejadorSQLMuestraRevision();  // crear en Servicios un manejador para listar 
+            lista = manejador.ConsultarRevision2(usuario, revision);
+
+
+            if (lista == null)
             {
-                
-                ManejadorSQLMuestraRevision manejador = new ManejadorSQLMuestraRevision();  // crear en Servicios un manejador para listar 
-                //lista = manejador.ConsultaRevision(usuario);                               //las revisiones de ese usuario
-                
-                //return View(lista);
+
+                return PartialView(lista);
+
             }
 
             else
             {
 
-                Console.Write("No se tienen revisiones");       //mostrar mensaje al usuario y no mostrar nada
-                //return View(lista);
+                ManejadorSQLMuestraRevision manejador2 = new ManejadorSQLMuestraRevision();  // crear en Servicios un manejador para listar 
+                lista = manejador2.Eliminar_Revision(usuario, revision);
+
+                return PartialView(lista);
+
+
             }
-            return null;
+
+
         }
 
 
+        public ActionResult Crear_Revsion(CReservation_Restaurant reserva, string usuario, DateTime fecha)                 //crear reserva restaurant
+        {
+
+
+            List<CRevision> lista;
+
+
+            /*  List<CRevision> lista1;
+              List<CReservation_Restaurant> rest;
+              CReservation_Restaurant res;
+             C
+              */
+
+            // no se si estara bien
+            //CReservation_Restaurant n = new CReservation_Restaurant();
+            if ((reserva != null)) //&& (  res== reserva))
+            {
+
+                ManejadorSQLMuestraRevision manejador = new ManejadorSQLMuestraRevision();  // crear en Servicios un manejador para listar 
+                lista = manejador.Crear_Revision(reserva, usuario);
+                return PartialView(lista);
+
+            }
+
+            else
+            {
+
+                CListRevision modelo = new CListRevision();
+                return PartialView(modelo);
+            }
+
+
+
+
+        }    //  hasta aca crear Rev
+
     }
+
 }
+

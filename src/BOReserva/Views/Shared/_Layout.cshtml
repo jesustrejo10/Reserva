@@ -264,16 +264,25 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-
                             <li id="m02_agregaravion"><a href="#"> Agregar </a></li>
-                            <li id="m02_editaravion"><a href="#"> Editar </a></li>
-                            <li id="m02_consultaravion"><a href="#"> Consultar </a></li>
-                            <li id="m02_modificaravion"><a href="#"> Modificar </a></li>
+                            <li id="m02_VisualizarAvion"><a href="#"> Visualizar </a></li>
+                            @*<li id="m02_consultaravion"><a href="#"> Consultar </a></li>
+                            <li id="m02_modificaravion"><a href="#"> Modificar </a></li>*@
                         </ul>
                     </li>
                     <!-- FIN MODULO DE AVIONES -->
                     <!-- MODULO DE RUTAS COMERCIALES -->
-                    <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Rutas</a></li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-car"></i> <span>Gestión de rutas</span> <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="m03AgregarRuta"><a href="#"><i class="fa fa-plus-square-o"></i>Crear</a></li>
+                            <li id="m03VisualizarRutas"><a href="#"><i class="fa fa-eye"></i>Visualizar</a></li>
+                        </ul>
+                    </li>
                     <!-- FIN MODULO DE RUTAS COMERCIALES -->
                     <!-- MODULO DE VUELOS -->
                     <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Vuelos</a></li>
@@ -332,10 +341,31 @@
                     <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Ofertas y Paquetes</a></li>
                     <!-- FIN DE MODULO DE OFERTAS Y PAQUETES -->
                     <!-- MODULO DE GESTION DE USUARIOS -->
-                    <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Usuarios</a></li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-user"></i> <span>Gestión de Usuarios</span> <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="gestionUsuarios"><a href="/gestion_usuarios/M12_index"><i class="fa fa-plus-square-o"></i>Consultar</a></li>
+                            <li id="agregarUsuarios"><a href="/gestion_usuarios/M12_AgregarUsuario"><i class="fa fa-plus-square-o"></i>Agregar</a></li>
+                        </ul>
+                    </li>
                     <!-- FIN DE MODULO DE GESTION DE USUARIOS -->
                     <!-- MODULO DE GESTION DE ROLES -->
-                    <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Roles</a></li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-users"></i> <span>Gestión de Roles</span> <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="m13AgregarRol"><a href="#"><i class="fa fa-plus-square-o"></i>Crear</a></li>
+                            <li id="m13VisualizarRol"><a href="#"><i class="fa fa-eye"></i>Visualizar</a></li>
+                        </ul>
+                    </li>
                     <!-- FIN DE MODULO DE GESTION DE ROLES -->
                     <!-- MODULO DE CRUCEROS -->
                     <li class="treeview">
@@ -349,8 +379,6 @@
                         </ul>
                     </li>
                     <!-- FIN DE MODULO DE CRUCEROS -->
-                    <!-- PAGINA DE REFERENCIA -->
-
                     <!-- MODULO DE HOTELES -->
                     <li class="treeview">
                         <a href="#">
@@ -363,25 +391,7 @@
                             <li id="consultarhotel"><a href="#"><i class="fa fa-search"></i>Consultar Hotel</a></li>
                             <li id="modificarhotel"><a href="#"><i class="fa fa-pencil"></i>Modificar Hotel</a></li>
                             <li id="desactivarhotel"><a href="#"><i class="fa fa-remove"></i>Desactivar Hotel</a></li>
-
-                        </ul>
-                    </li>
-
-                    <!-- FIN MODULO DE HOTELES -->
-
-                    <!-- MODULO 12 : GESTION DE USUARIOS -->
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-user"></i> <span>Gestión de Usuarios</span> <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li id="gestionUsuarios"><a href="/gestion_usuarios/M12_index"><i class="fa fa-plus-square-o"></i>Consultar</a></li>
-                            <li id="agregarUsuarios"><a href="/gestion_usuarios/M12_AgregarUsuario"><i class="fa fa-plus-square-o"></i>Agregar</a></li>
-                        </ul>
-                    </li>
-                    <!-- FIN MODULO 12 -->
+                    <!-- MODULO DE BOLETOS AEREOS Y CHECK-IN -->
                 </ul>
             </section>
             <!-- /.sidebar -->
@@ -406,9 +416,9 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        <footer class="main-footer">
+        @*<footer class="main-footer">
             <div class="pull-right hidden-xs"> <b>Version</b> 2.3.7 </div> <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
-        </footer>
+        </footer>*@
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Create the tabs -->
@@ -634,8 +644,6 @@
     <script src="/Content/dist/js/pages/dashboard2.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="/Content/dist/js/demo.js"></script>
-    <!-- Select2 -->
-    <script src="/Content/plugins/select2/select2.full.min.js"></script>
 
 </body>
 
