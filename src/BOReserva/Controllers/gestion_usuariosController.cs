@@ -36,6 +36,7 @@ namespace BOReserva.Controllers
 
         public ActionResult M12_AgregarUsuario()
         {
+            Response.Write("<script>alert('" + "apestas" + "');</script>");
             return PartialView();
         }
 
@@ -81,7 +82,8 @@ namespace BOReserva.Controllers
                 }
                 catch (ExceptionM12Reserva ex)
                 {
-                    ModelState.AddModelError("", ex.Message);
+                    
+                    //ModelState.AddModelError("", ex.Message);
                     return View("M12_ModificarUsuario", usuario);
                 }
                 catch (Exception ex)
