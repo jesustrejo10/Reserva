@@ -1,7 +1,7 @@
 ﻿
 
 <div class="row">
-    <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="~/Content/plugins/datatables/dataTables.bootstrap.css">
 
     <div class="col-xs-12">
         <div class="box">
@@ -17,7 +17,7 @@
                             <th>Modelo</th>
                             <th>Capacidad Turista/Ejecutiva/VIP</th>
                             @*<th>Capacidad Clase Ejecutiva</th>
-                            <th>Capacidad Clase VIP</th>*@
+                                <th>Capacidad Clase VIP</th>*@
                             <th>Equipaje (Kg)</th>
                             <th>Distancia Máxima(Km)</th>
                             <th>Velocidad Máxima(Km/h)</th>
@@ -34,21 +34,28 @@
                                 String disponibilidad;
                                 if (item._disponibilidad == 1) { disponibilidad = "Disponible"; } else { disponibilidad = "No disponible"; }
 
-                                <tr id="@item._matricula">
+                                <tr id="@item._id">
                                     <td>@item._matricula</td>
                                     <td>@item._modelo</td>
                                     <td>@item._capacidadTurista / @item._capacidadEjecutiva / @item._capacidadVIP </td>
                                     @*<td>@item._capacidadEjecutiva</td>
-                                    <td>@item._capacidadVIP</td>*@
+                                        <td>@item._capacidadVIP</td>*@
                                     <td>@item._capacidadEquipaje</td>
                                     <td>@item._distanciaMaximaVuelo</td>
                                     <td>@item._velocidadMaxima</td>
                                     <td>@item._capacidadCombustible</td>
                                     <td>@disponibilidad</td>
                                     <td>
-                                        <a href="#"> <i class="fa fa-eye clasedeprueba"></i></a>
-                                        <a href="#"><i class="fa fa-gear modificar"></i></a>
-                                        <a href="#"><i class="fa fa-times"></i></a>
+                                        @*<a href="#"> <i class="fa fa-eye clasedeprueba"></i></a>*@
+                                        <a href="#" title="Modificar"><i class="fa fa-gear modificar"></i></a>
+                                        @if (item._disponibilidad == 1)
+                                        {
+                                            <a href="#" title="Deshabilitar"><i class="fa fa-times deshabilitar"></i></a>
+                                        }
+                                        else
+                                        {
+                                            <a href="#" title="Habilitar"><i class="fa fa-check habilitar"></i></a>
+                                        }
                                     </td>
                                 </tr>
                             }
@@ -62,13 +69,13 @@
                         <tr>
                             <th>Matricula</th>
                             <th>Modelo</th>
-                            <th>Capacidad Clase Turista</th>
+                            <th>Capacidad Turista/Ejecutiva/VIP</th>
                             @*<th>Capacidad Clase Ejecutiva</th>
-                            <th>Capacidad Clase VIP</th>*@
-                            <th>Capacidad de Equipaje (Kg)</th>
-                            <th>Distancia Máxima de Vuelo (Km)</th>
-                            <th>Velocidad Máxima de Vuelo (Km/h)</th>
-                            <th>Capacidad Máxima de Combustible (L)</th>
+                                <th>Capacidad Clase VIP</th>*@
+                            <th>Equipaje (Kg)</th>
+                            <th>Distancia Máxima(Km)</th>
+                            <th>Velocidad Máxima(Km/h)</th>
+                            <th>Combustible (L)</th>
                             <th>Disponibilidad</th>
                             <th>Opciones</th>
                         </tr>
@@ -83,100 +90,85 @@
 </div>
 <!-- /.row -->
 
-<script>
-
-    $("#m08_VisualizarAutomovil").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_automoviles/M08_VisualizarAutomovil';
-        var method = 'GET';
-        var data = '';
-
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-
-    });
-
-
-    $("#m08_ModificarAutomovil").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_automoviles/M08_ModificarAutomovil';
-        var method = 'GET';
-        var data = '';
-
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-
-    });
-
-</script>
-
 <script language="javascript" type="text/javascript">
-    $(document).ready(function () {
-        //e.preventDefault();
-        $(".clasedeprueba").click(function () {
-            var identificador = $(this).parent().parent().parent().attr("id");
-            jQuery.ajax({
-                type: "GET",
-                url: "/gestion_automoviles/M08_VisualizarAutomovil",
-                data: { matricula: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
-            }).done(function (data) {
-                //$("#sdssss").append(data);
-
-                $("#contenido").empty();
-                $("#contenido").append(data);
-            }).fail(function () {
-                alert("esta vaina se jodio")
-            });
 
 
-        });
-    });
-
-    $(document).ready(function () {
-        //e.preventDefault();
-        $(".modificar").click(function () {
-            var identificador = $(this).parent().parent().parent().attr("id");
-            jQuery.ajax({
-                type: "GET",
-                url: "/gestion_automoviles/M08_ModificarAutomovil",
-                data: { matricula: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
-            }).done(function (data) {
-                //$("#sdssss").append(data);
-
-                $("#contenido").empty();
-                $("#contenido").append(data);
-            }).fail(function () {
-                alert("esta vaina se jodio")
-            });
-
+    $(".modificar").click(function () {
+        console.log("hola");
+        var identificador = $(this).parent().parent().parent().attr("id");
+        jQuery.ajax({
+            type: "GET",
+            url: "/gestion_aviones/M02_ConsultarAvion",
+            data: { id: identificador }
+        }).done(function (data) {
+            $("#contenido").empty();
+            $("#contenido").append(data);
+        }).fail(function () {
 
         });
 
 
     });
+
+
+    $(".deshabilitar").click(function () {
+        console.log("hola");
+        var identificador = $(this).parent().parent().parent().attr("id");
+        jQuery.ajax({
+            type: "POST",
+            url: "/gestion_aviones/deshabilitarAvion",
+            data: { id: identificador }
+        }).done(function (data) {
+            var url = '/gestion_aviones/M02_VisualizarAviones';
+            var method = 'GET';
+            var data = '';
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+        }).fail(function () {
+        });
+    });
+
+    $(".habilitar").click(function () {
+        console.log("hola");
+        var identificador = $(this).parent().parent().parent().attr("id");
+        jQuery.ajax({
+            type: "POST",
+            url: "/gestion_aviones/habilitarAvion",
+            data: { id: identificador }
+        }).done(function (data) {
+            var url = '/gestion_aviones/M02_VisualizarAviones';
+            var method = 'GET';
+            var data = '';
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+        }).fail(function () {
+        });
+    });
+
+
 </script>
 

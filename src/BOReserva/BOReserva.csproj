@@ -225,6 +225,7 @@
     <Compile Include="Models\gestion_aviones\CAgregarAvion.cs" />
     <Compile Include="Models\gestion_aviones\CAvion.cs" />
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
+    <Compile Include="Models\gestion_aviones\CModificarAvion.cs" />
     <Compile Include="Models\gestion_boletos\CBuscarVuelo.cs" />
     <Compile Include="Models\gestion_hoteles\CGestionHoteles_CrearHotel.cs" />
     <Compile Include="Models\gestion_usuarios\AgregarUsuario.cs" />
@@ -1410,6 +1411,7 @@
     <Content Include="Views\gestion_usuarios\M12_ModificarUsuario.cshtml" />
     <Content Include="Views\gestion_usuarios\_Layout.cshtml" />
     <Content Include="Views\gestion_aviones\M02_VisualizarAviones.cshtml" />
+    <Content Include="Views\gestion_aviones\M02_ModificarAvion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

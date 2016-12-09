@@ -75,7 +75,45 @@ namespace BOReserva.Controllers
             return PartialView(aviones);
         }
 
+        public ActionResult M02_ConsultarAvion(int id)
+        {
+            manejadorSQL sql = new manejadorSQL();
+            CAvion avion = new CAvion();
+            avion = sql.consultarAvion(id);
+            CModificarAvion modelo = new CModificarAvion(avion);
+            return PartialView("M02_ModificarAvion",modelo);
+        }
 
+        [HttpPost]
+        public JsonResult modificarAvion(CModificarAvion model)
+        {
+            //Chequeo si los campos obligatorios estan vacios como medida de seguridad
+            if ((model._matriculaAvion == null) || (model._modeloAvion == null) || (model._capacidadEquipaje == 0) || (model._capacidadMaximaCombustible == 0) || (model._distanciaMaximaVuelo == 0))
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error, campo obligatorio vacio";
+                //Retorno el error
+                return Json(error);
+            }
+            manejadorSQL sql = new manejadorSQL();
+            return (Json(sql.modificarAvion(model), JsonRequestBehavior.AllowGet));
+        }
+
+        [HttpPost]
+        public JsonResult habilitarAvion(int id)
+        {
+            manejadorSQL sql = new manejadorSQL();
+            return (Json(sql.habilitarAvion(id), JsonRequestBehavior.AllowGet));
+        }
+
+        [HttpPost]
+        public JsonResult deshabilitarAvion(int id)
+        {
+            manejadorSQL sql = new manejadorSQL();
+            return (Json(sql.deshabilitarAvion(id), JsonRequestBehavior.AllowGet));
+        }
 
 
     }
