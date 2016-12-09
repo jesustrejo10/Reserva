@@ -1,0 +1,26 @@
+/*************************** START -  ANDREA CAMACHO ******************************************/
+
+@media (max-width: 768px) {
+    .rest_sel {
+        width: 100% !important;
+    }
+
+    .rest_inp {
+        width: 100% !important;
+    }
+}
+
+#rest_form .has-error{
+   border-color: #f39c12 !important;
+}
+
+#rest_form .has-success{
+   border-color:  #18bc9c !important;
+}
+
+#rest_form .has-error p{
+  color: #f39c12 !important;
+  margin-bottom:15px;
+}
+
+/*************************** END - ANDREA CAMACHO ******************************************/
