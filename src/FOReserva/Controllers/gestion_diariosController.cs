@@ -27,10 +27,9 @@ namespace FOReserva.Controllers
         [HttpPost]
         public JsonResult buscarDiarios(CDiarioModel model)
         {
-            String prueba = model._prueba;
-            String f_inicio = model._fecha_ini;
-            String f_fin = model._fecha_fin;
-            Console.WriteLine(prueba);
+            String nombre = model.Nombre;
+            DateTime f_inicio = model.Fecha_ini;
+            DateTime f_fin = model.Fecha_fin;
             return (Json("asdf", JsonRequestBehavior.AllowGet));
         }
 
