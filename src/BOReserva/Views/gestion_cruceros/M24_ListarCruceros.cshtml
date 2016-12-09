@@ -1,50 +1,53 @@
-﻿<div class="box">
+﻿@model BOReserva.Models.gestion_cruceros.VistaListaCrucero
+
+<div class="box">
     <div class="box-body">
         <div class="box-header with-border">
             <h1 class="box-title"> Listado de Cruceros</h1>
             <div class="row">
-                <div class="col-xs-10">
-                    <div class="row" id="listaCruceros">
-                        <div class="crucero crTitles">
-                            <div class="crNombre"> <b>Nombre</b></div>
-                            <div class="crCompania"> <b>Compañia</b></div>
-                            <div class="crCapacidad"><b>Capacidad</b></div>
-                            <div class="crStatus"><b>Estado</b></div>
-                            <div class="crAcciones"><b>Acciones</b> </div>
-                        </div>
-                        <div class="listCru">
-                            <div class="crucero ">
-                                <div class="crNombre"> <i class="fa fa-ship"></i> Crucero del Caribe </div>
-                                <div class="crCompania">Royal Caribbean</div>
-                                <div class="crCapacidad">2000 <i class="fa fa-user"></i></div>
-                                <div class="crStatus"><i class="fa fa-circle started"></i></div>
-                                <div class="crAcciones"> <i class="fa fa-check"></i> <i class="fa fa-eye" data-toggle="modal" data-target="#viewCruiser"></i> <i class="fa fa-trash"></i> </div>
-                            </div>
-                            <div class="crucero ">
-                                <div class="crNombre"> <i class="fa fa-ship"></i> Crucero Jamaiquino </div>
-                                <div class="crCompania">Royal Caribbean</div>
-                                <div class="crCapacidad">2500 <i class="fa fa-user"></i></div>
-                                <div class="crStatus"><i class="fa fa-circle started"></i></div>
-                                <div class="crAcciones"> <i class="fa fa-check"></i> <i class="fa fa-eye" data-toggle="modal" data-target="#viewCruiser"></i> <i class="fa fa-trash"></i> </div>
-                            </div>
-                            <div class="crucero ">
-                                <div class="crNombre"> <i class="fa fa-ship"></i> Crucero Pampatar </div>
-                                <div class="crCompania">Interntational</div>
-                                <div class="crCapacidad">3500 <i class="fa fa-user"></i></div>
-                                <div class="crStatus"><i class="fa fa-circle paused"></i></div>
-                                <div class="crAcciones"> <i class="fa fa-check"></i> <i class="fa fa-eye" data-toggle="modal" data-target="#viewCruiser"></i> <i class="fa fa-trash"></i> </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-xs-12">
+                    <table >
+                        <thead>
+                            <tr class="crucero crTitles" id="listaCruceros">
+                                <th class="crNombre">Nombre</th>
+                                <th class="crCompania"> <b>Compañia</b></th>
+                                <th class="crCapacidad"><b>Capacidad</b></th>
+                                <th class="crStatus"><b>Estado</b></th>
+                                <th class="crAcciones"><b>Acciones</b> </th>
+                            </tr>
+                        </thead>
+                        <tbody class="listCru crucero">
+                            @{
+                                foreach(var crucero in Model.cruceros)
+                                {
+                                    <tr id="@crucero._idCrucero">
+                                        <td class="crNombre">@crucero._nombreCrucero </td>
+                                        <td class="crCompania">@crucero._companiaCrucero </td>
+                                        <td class="crCapacidad">@crucero._capacidadCrucero <i class="fa fa-user"></i></td>
+                                        @if(@crucero._estatus == "activo"){
+                                            <td class="crStatus"><i class="fa fa-circle started"></i></td>
+                                            <td class="crAcciones"><i class="fa fa-eye"></i> <i class="fa fa-pencil"></i> <i class="fa fa-times"></i> <i class="fa fa-trash"></i></td>
+                                        }
+                                        else {
+                                            <td class="crStatus"><i class="fa fa-circle paused"></i></td>
+                                            <td class="crAcciones"><i class="fa fa-eye"></i> <i class="fa fa-pencil"></i> <i class="fa fa-check"></i> <i class="fa fa-trash"></i></td>
+                                        }
+                                    </tr>
+
+                                }
+                            }
+
+                        </tbody>
+                    </table>
                 </div>
                 
             </div>
     </div>
-        <div class="col-xs-2">
+        @*<div class="col-xs-2">
             <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#createCruiser">
                 <span><i class="fa fa-ship" style="font-size:20px"></i></span>
                 <br> Crear crucero
             </button>
-        </div>
+        </div>*@
 </div>            
         

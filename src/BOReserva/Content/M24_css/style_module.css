@@ -3,9 +3,8 @@
 }
 
 #listaCruceros {
-    width: calc(100% - 15px);
     min-height: 400px;
-    margin-left: 15px;
+    margin-left: 27px;
     border-radius: 5px;
 }
 
@@ -50,8 +49,9 @@
 
 .crNombre {
     padding: 10px!important;
-    width: calc(100% - 680px);
+    width: 175px;
     display: inline-block;
+    text-align:center;
 }
 
 .crNombre .fa {
@@ -59,21 +59,22 @@
 }
 
 .crCompania {
-    width: 173px;
+    width: 175px;
     display: inline-block;
     padding-left: 10px !important;
+    text-align:center;
 }
 
 .crCapacidad {
     display: inline-block;
-    width: 80px;
+    width: 170px;
     text-align: center
 }
 
 .crStatus {
-    width: 50px;
+    width: 170px;
     display: inline-block;
-    text-align: center
+    text-align: center;
 }
 
 .crFechaf,
@@ -84,9 +85,9 @@
 }
 
 .crAcciones {
-    width: 120px;
+    width: 170px;
     display: inline-block;
-    text-align: center
+    text-align: center;
 }
 
 .listCru {
@@ -98,11 +99,11 @@
 }
 
 .listCru .crNombre {
-    width: 170px;
+    width: 175px;
 }
 
 .listCru .crAcciones {
-    width: 150px;
+    width: 170px;
 }
 
 .crAcciones .fa {
@@ -137,6 +138,13 @@
     color: white;
 }
 
+.crAcciones .fa-pencil {
+    background: #3c8dbc;
+    padding: 2px 4px;
+    border-radius: 2px;
+    color: white;
+}
+
 .reservalogo img {
     max-width: 100%;
     max-height: 50px;
@@ -161,7 +169,6 @@
 
 #bodyCruc {
     height: calc(100vh - 181px);
-    overflow-y: scroll;
     overflow-x: hidden;
 }
 
@@ -209,19 +216,19 @@
     cursor: pointer
 }
 
-.box-header.with-border .fa-times {
+/*.box-header.with-border .fa-times {
     position: absolute;
     top: 13px;
     right: 15px;
     color: #dd4b39
-}
+}*/
 
-.box-header.with-border .fa-pencil {
+/*.box-header.with-border .fa-pencil {
     position: absolute;
     top: 13px;
     right: 30px;
     color: #337ab7;
-}
+}*/
 
 #camList {
     overflow: hidden;

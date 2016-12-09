@@ -1,5 +1,7 @@
-﻿using System;
+﻿using BOReserva.Models.gestion_cruceros;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -12,27 +14,16 @@ namespace BOReserva.Controllers
     {
         // GET: gestion_cruceros
         public ActionResult M24_GestionCruceros()
-        {
+        { 
             return PartialView();
         }
 
         public ActionResult M24_ListarCruceros()
         {
-            return PartialView();
+            ConexionBD cbd = new ConexionBD();
+            VistaListaCrucero vlc = new VistaListaCrucero();
+            vlc.cruceros = cbd.listarCruceros();
+            return PartialView("M24_ListarCruceros",vlc);
         }
-
-        //public DataTable fillDataTable(string table)
-        //{
-        //    string query = "SELECT * FROM dstut.dbo." + table;
-
-        //    SqlConnection sqlConn = new SqlConnection(conSTR);
-        //    sqlConn.Open();
-        //    SqlCommand cmd = new SqlCommand(query, sqlConn);
-
-        //    DataTable dt = new DataTable();
-        //    dt.Load(cmd.ExecuteReader());
-        //    sqlConn.Close();
-        //    return dt;
-        //}
     }
 }

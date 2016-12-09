@@ -229,8 +229,14 @@
     <Compile Include="Models\gestion_cruceros\CGestion_camarote.cs" />
     <Compile Include="Models\gestion_cruceros\CGestion_crucero.cs" />
     <Compile Include="Models\gestion_cruceros\CGestion_itinerario.cs" />
-    <Compile Include="Models\gestion_hoteles\cGestionHoteles_CrearHotel.cs" />
     <Compile Include="Models\gestion_boletos\CBuscarVuelo.cs" />
+    <Compile Include="Models\gestion_cruceros\ConexionBD.cs" />
+    <Compile Include="Models\gestion_cruceros\RecursosCruceros.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RecursosCruceros.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\gestion_cruceros\VistaListaCrucero.cs" />
     <Compile Include="Models\gestion_hoteles\CGestionHoteles_CrearHotel.cs" />
     <Compile Include="Models\gestion_usuarios\AgregarUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\ConexionBD.cs" />
@@ -1491,6 +1497,10 @@
     <Content Include="Views\gestion_boletos\M05_DetalleBoleto.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Models\gestion_cruceros\RecursosCruceros.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecursosCruceros.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Models\gestion_usuarios\RecursoBD.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoBD.Designer.cs</LastGenOutput>
@@ -1498,8 +1508,9 @@
     <EmbeddedResource Include="Models\gestion_usuarios\RecursoUsuario.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoUsuario.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-</ItemGroup>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
