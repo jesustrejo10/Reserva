@@ -106,39 +106,43 @@ namespace BOReserva.Servicio
 
         public Boolean InsertarRuta(CAgregarRuta model)
         {   
-            String[] strDes = model._destinoRuta.Split(new[] { " - " }, StringSplitOptions.None);
-            String[] strOri = model._origenRuta.Split(new[] { " - " }, StringSplitOptions.None);
+            try{
+                String[] strDes = model._destinoRuta.Split(new[] { " - " }, StringSplitOptions.None);
+                String[] strOri = model._origenRuta.Split(new[] { " - " }, StringSplitOptions.None);
             
-            conexion = new SqlConnection(stringDeConexion);
+                conexion = new SqlConnection(stringDeConexion);
 
-            conexion.Open();
+                conexion.Open();
 
-            SqlCommand query = new SqlCommand("M03_AgregarRuta",conexion);
-            query.CommandType = CommandType.StoredProcedure;
+                SqlCommand query = new SqlCommand("M03_AgregarRuta",conexion);
+                query.CommandType = CommandType.StoredProcedure;
 
-            query.Parameters.Add("@ciudadOrigenRuta", SqlDbType.VarChar).Value = strOri[0];
-            query.Parameters.Add("@paisOrigenRuta", SqlDbType.VarChar).Value = strOri[1];
-            query.Parameters.Add("@ciudadDestinoRuta", SqlDbType.VarChar).Value = strDes[0];
-            query.Parameters.Add("@paisDestinoRuta", SqlDbType.VarChar).Value = strDes[1];
-            query.Parameters.Add("@tipoRuta", SqlDbType.VarChar).Value = model._tipoRuta;
-            query.Parameters.Add("@estadoRuta", SqlDbType.VarChar).Value = model._estadoRuta;
-            query.Parameters.Add("@distanciaRuta", SqlDbType.Int).Value = model._distanciaRuta;
+                query.Parameters.Add("@ciudadOrigenRuta", SqlDbType.VarChar).Value = strOri[0];
+                query.Parameters.Add("@paisOrigenRuta", SqlDbType.VarChar).Value = strOri[1];
+                query.Parameters.Add("@ciudadDestinoRuta", SqlDbType.VarChar).Value = strDes[0];
+                query.Parameters.Add("@paisDestinoRuta", SqlDbType.VarChar).Value = strDes[1];
+                query.Parameters.Add("@tipoRuta", SqlDbType.VarChar).Value = model._tipoRuta;
+                query.Parameters.Add("@estadoRuta", SqlDbType.VarChar).Value = model._estadoRuta;
+                query.Parameters.Add("@distanciaRuta", SqlDbType.Int).Value = model._distanciaRuta;
 
-            query.ExecuteNonQuery();
-            
-            
-            /*String dist = model._distanciaRuta.ToString();
-            String miquery = "EXEC M03_AgregarRuta '" + strOri[0] + "','" + strOri[1] + "','" + strDes[0] + "' , '" + strDes[1] + "', '" + model._tipoRuta + "', '" + model._estadoRuta + "', " + dist;
-            System.Diagnostics.Debug.WriteLine(miquery);*/
+                query.ExecuteNonQuery();
 
-            
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                SqlDataReader lector = query.ExecuteReader();
 
-            //creo un lector sql para la respuesta de la ejecucion del comando anterior               
-            SqlDataReader lector = query.ExecuteReader();
+                lector.Close();
 
-            lector.Close();
+                return true;
 
-            return true;
+            }
+            catch (SqlException e)
+            {
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
     
         
