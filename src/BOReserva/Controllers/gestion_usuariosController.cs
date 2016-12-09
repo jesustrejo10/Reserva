@@ -36,13 +36,29 @@ namespace BOReserva.Controllers
 
         public ActionResult M12_AgregarUsuario()
         {
-            Response.Write("<script>alert('" + "apestas" + "');</script>");
+           // Response.Write("<script>alert('" + "prueba" + "');</script>");
+            ViewBag.Roles = new SelectList(new List<SelectListItem>
+                {
+                    new SelectListItem {Text = "Administrador", Value = "1"},
+                    new SelectListItem {Text = "Normal", Value = "2"},
+                    new SelectListItem {Text = "Anonimo", Value = "3"},
+
+                }, "Value", "Text");
             return PartialView();
         }
 
+
+
         [HttpPost]
         public ActionResult M12_AgregarUsuario(AgregarUsuario usuario)
-        {   
+        {
+            ViewBag.Roles = new SelectList(new List<SelectListItem>
+                {
+                    new SelectListItem {Text = "Administrador", Value = "1"},
+                    new SelectListItem {Text = "Normal", Value = "2"},
+                    new SelectListItem {Text = "Anonimo", Value = "3"},
+
+                }, "Value", "Text");
             if (ModelState.IsValid) 
             {
                 PersistenciaUsuario p = new PersistenciaUsuario();
@@ -72,6 +88,7 @@ namespace BOReserva.Controllers
        [HttpPost]
         public ActionResult M12_ModificarUsuario(AgregarUsuario usuario)
         {
+
             if (ModelState.IsValid)
             {
                 PersistenciaUsuario p = new PersistenciaUsuario();
