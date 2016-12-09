@@ -70,7 +70,9 @@ namespace BOReserva.Servicio.Servicio_Boletos
                                                MBuscarnombrepasajero(Int32.Parse(reader["bol_fk_pasajero"].ToString())),
                                                MBuscarapellidopasajero(Int32.Parse(reader["bol_fk_pasajero"].ToString())), fechaboleto,
                                                Int32.Parse(reader["bol_fk_pasajero"].ToString()), reader.GetInt32(reader.GetOrdinal("bol_fk_lugar_origen")).ToString(),
-                                               reader.GetInt32(reader.GetOrdinal("bol_fk_lugar_destino")).ToString());
+                                               reader.GetInt32(reader.GetOrdinal("bol_fk_lugar_destino")).ToString(),
+                                               reader["bol_tipo_boleto"].ToString(),
+                                               MBuscarcorreopasajero(Int32.Parse(reader["bol_fk_pasajero"].ToString())));
                         listaboletos.Add(boleto);
                     }
                 }
@@ -162,6 +164,32 @@ namespace BOReserva.Servicio.Servicio_Boletos
             }
         }
 
+        public String MBuscarcorreopasajero(int id)
+        {
+            String _correo = "";
+            try
+            {
+                SqlConnection con = new SqlConnection(stringDeConexion);
+                con.Open();
+                String sql = "SELECT pas_correo FROM Pasajero WHERE pas_id = '" + id + "'";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        _correo = reader[0].ToString();
+                    }
+                }
+                cmd.Dispose();
+                con.Close();
+                return _correo;
+            }
+            catch (SqlException ex)
+            {
+                return _correo;
+            }
+        }
+
         public int M05AgregarBoletoBD(CBoleto boleto)
         {
                 return 0;         
@@ -175,7 +203,41 @@ namespace BOReserva.Servicio.Servicio_Boletos
        public CBoleto M05MostrarBoletoBD(int id)
        {
            CBoleto boleto = null;
-           return boleto;
+           try
+           {
+               SqlConnection con = new SqlConnection(stringDeConexion);
+               con.Open();
+               String sql = "SELECT * FROM Boleto WHERE bol_id = " + id + "";
+
+               // FALTA OBTENER EL/LOS VUELOS DE ESE BOLETO
+               SqlCommand cmd = new SqlCommand(sql, con);
+               using (SqlDataReader reader = cmd.ExecuteReader())
+               {
+
+                   while (reader.Read())
+                   {
+                       var fecha = reader["bol_fecha"];
+                       DateTime fechaboleto = Convert.ToDateTime(fecha).Date;
+                       boleto = new CBoleto(Int32.Parse(reader["bol_id"].ToString()), Int32.Parse(reader["bol_ida_vuelta"].ToString()),
+                                              Int32.Parse(reader["bol_escala"].ToString()), double.Parse(reader["bol_costo"].ToString()),
+                                              MBuscarnombreciudad(Int32.Parse(reader["bol_fk_lugar_origen"].ToString())),
+                                              MBuscarnombreciudad(Int32.Parse(reader["bol_fk_lugar_destino"].ToString())),
+                                              MBuscarnombrepasajero(Int32.Parse(reader["bol_fk_pasajero"].ToString())),
+                                              MBuscarapellidopasajero(Int32.Parse(reader["bol_fk_pasajero"].ToString())), fechaboleto,
+                                              Int32.Parse(reader["bol_fk_pasajero"].ToString()), reader.GetInt32(reader.GetOrdinal("bol_fk_lugar_origen")).ToString(),
+                                              reader.GetInt32(reader.GetOrdinal("bol_fk_lugar_destino")).ToString(),
+                                              reader["bol_tipo_boleto"].ToString(),
+                                              MBuscarcorreopasajero(Int32.Parse(reader["bol_fk_pasajero"].ToString())));
+                   }
+                   cmd.Dispose();
+                   con.Close();
+                   return boleto;
+               }
+           }
+           catch (SqlException ex)
+           {
+               return null;
+           }
        }
 
        public int M05EliminarBoletoBD(int id)

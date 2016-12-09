@@ -228,6 +228,7 @@
     <Compile Include="Models\gestion_boletos\CBuscarVuelo.cs" />
     <Compile Include="Models\gestion_boletos\CLugar.cs" />
     <Compile Include="Models\gestion_boletos\CPasajero.cs" />
+    <Compile Include="Models\gestion_boletos\CVisualizarBoleto.cs" />
     <Compile Include="Models\gestion_boletos\CVuelo.cs" />
     <Compile Include="Models\gestion_hoteles\CGestionHoteles_CrearHotel.cs" />
     <Compile Include="Models\gestion_usuarios\AgregarUsuario.cs" />
@@ -1408,6 +1409,7 @@
     <Content Include="Views\gestion_check_in\M05_VerDetalleBoleto.cshtml" />
     <Content Include="Views\gestion_check_in\M05_Equipaje.cshtml" />
     <Content Include="Views\gestion_check_in\M05_VerBoardingPass.cshtml" />
+    <Content Include="Views\gestion_boletos\M05_VisualizarBoleto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

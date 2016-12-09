@@ -78,9 +78,9 @@
 
 <script>
 
-    $("#m05_VisualizarAutomovil").click(function (e) {
+    $("#m05_VisualizarBoleto").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_automoviles/M08_VisualizarAutomovil';
+        var url = '/gestion_boletos/M05_VisualizarBoleto';
         var method = 'GET';
         var data = '';
 
@@ -102,6 +102,29 @@
     });
 
 </script>
+
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        //e.preventDefault();
+        $(".consultar").click(function () {
+            var identificador = $(this).parent().parent().parent().attr("id");
+            jQuery.ajax({
+                type: "GET",
+                url: "/gestion_boletos/M05_VisualizarBoleto",
+                data: { id : identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+            }).done(function (data) {
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            }).fail(function () {
+                alert("Ocurrió un error")
+            });
+
+
+        });
+    });   
+</script>
+
+
 
 <script src="../../Content/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->

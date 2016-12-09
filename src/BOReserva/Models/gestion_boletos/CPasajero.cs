@@ -10,7 +10,15 @@ namespace BOReserva.Models.gestion_boletos
         public CPasajero (){
         }
 
-        public CPasajero (int id, String nombre, String apellido){
+        public CPasajero (int id, String nombre, String apellido, String correo){
+            _id = id;
+            _primer_nombre = nombre;
+            _primer_apellido = apellido;
+            _correo = correo;
+        }
+
+        public CPasajero(int id, String nombre, String apellido)
+        {
             _id = id;
             _primer_nombre = nombre;
             _primer_apellido = apellido;

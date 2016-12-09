@@ -66,30 +66,68 @@ namespace BOReserva.Controllers
             return PartialView(listaboletos);
         }
 
+        // GET
         public ActionResult M05_VisualizarBoleto(int id)
         {
             //BUSCA EL BOLETO A MOSTRAR
             manejadorSQL_Boletos buscarboleto = new manejadorSQL_Boletos();
             CBoleto boleto = buscarboleto.M05MostrarBoletoBD(id); 
+            // arreglar porq boleto es un Cboleto
+            CVisualizarBoleto bol = new CVisualizarBoleto();
 
-          /*  CVisualizarAutomovil automovil = new CVisualizarAutomovil();
-            automovil._matricula = vehiculo._matricula;
-            automovil._modelo = vehiculo._modelo;
-            automovil._fabricante = vehiculo._fabricante;
-            automovil._anio = vehiculo._anio;
-            automovil._tipovehiculo = vehiculo._tipovehiculo;
-            automovil._kilometraje = vehiculo._kilometraje;
-            automovil._cantpasajeros = vehiculo._cantpasajeros;
-            automovil._preciocompra = vehiculo._preciocompra;
-            automovil._precioalquiler = vehiculo._precioalquiler;
-            automovil._penalidaddiaria = vehiculo._penalidaddiaria;
-            automovil._fecharegistro = vehiculo._fecharegistro.Month + "/" + vehiculo._fecharegistro.Day + "/" + vehiculo._fecharegistro.Year;
-            automovil._color = vehiculo._color;
-            automovil._disponibilidad = vehiculo._disponibilidad;
-            automovil._transmision = vehiculo._transmision;
-            automovil._pais = vehiculo._pais;
-            automovil._ciudad = vehiculo._ciudad;*/
-            return PartialView(boleto);
+            bol._origen = boleto._origen.Name;
+            bol._destino = boleto._destino.Name;
+
+            /* OBTENER POR MEDIO DE LA LISTA Y LA CLASE CVUELO
+            bol._fechaDespegueIda = boleto._fechaDespegueIda.Day + "/" + boleto._fechaDespegueIda.Month + "/" + boleto._fechaDespegueIda.Year;
+            bol._fechaDespegueVuelta = boleto._fechaDespegueVuelta.Day + "/" + boleto._fechaDespegueVuelta.Month + "/" + boleto._fechaDespegueVuelta.Year;
+            bol._fechaAterrizajeIda = boleto._fechaAterrizajeIda.Day + "/" + boleto._fechaAterrizajeIda.Month + "/" + boleto._fechaAterrizajeIda.Year;
+            bol._fechaAterrizajeVuelta = boleto._fechaAterrizajeVuelta.Day + "/" + boleto._fechaAterrizajeVuelta.Month + "/" + boleto._fechaAterrizajeVuelta.Year;
+            bol._horaSalIda = boleto._fechaDespegueIda.Hour;
+            bol._horaSalVuelta = boleto._fechaDespegueVuelta.Hour;
+            bol._horaLlegIda = boleto._fechaAterrizajeIda.Hour;
+            bol._horaLlegVuelta = boleto._fechaAterrizajeVuelta.Hour;*/
+
+            bol._fechaDespegueIda = "";
+            bol._fechaDespegueVuelta = "";
+            bol._fechaAterrizajeIda = "";
+            bol._fechaAterrizajeVuelta = "";
+            bol._horaDespegueIda = "";
+            bol._horaDespegueVuelta = "";
+            bol._horaAterrizajeIda = "";
+            bol._horaAterrizajeVuelta = "";
+
+            bol._monto = boleto._costo;
+            bol._tipoBoleto = boleto._tipoBoleto;
+            bol._nombre = boleto._pasajero._primer_nombre;
+            bol._apellido = boleto._pasajero._primer_apellido;
+            bol._pasaporte = boleto._pasajero._id;
+            bol._correo = boleto._pasajero._correo;
+
+            return PartialView(bol);
+        }
+
+        // POST
+        [HttpPost]
+        public JsonResult verBoleto(CVisualizarBoleto model)
+        {
+            String origen = model._origen;
+            String destino = model._destino;
+            String fechaSalIda = model._fechaDespegueIda;
+            String fechaSalVuelta = model._fechaDespegueVuelta;
+            String fechaLlegIda= model._fechaAterrizajeIda;
+            String fechaLlegVuelta = model._fechaAterrizajeVuelta;
+            String horaSalIda = model._horaDespegueIda;
+            String horaSalVuelta = model._horaDespegueVuelta;
+            String horaLlegIda = model._horaAterrizajeIda; 
+            String horaLlegVuelta = model._horaAterrizajeVuelta; 
+            double monto = model._monto;
+            String tipoBoleto = model._tipoBoleto; 
+            String nombre = model._nombre;
+            String apellido = model._apellido;
+            int pasaporte = model._pasaporte;
+            String correo = model._correo;
+            return (Json(true, JsonRequestBehavior.AllowGet));
         }
 
 
