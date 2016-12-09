@@ -28,8 +28,10 @@ namespace FOReserva.Controllers
         public JsonResult buscarDiarios(Cvista_Diarios model)
         {
             String prueba = model._prueba;
+            String f_inicio = model._fecha_ini;
+            String f_fin = model._fecha_fin;
             Console.WriteLine(prueba);
-            return (Json(true, JsonRequestBehavior.AllowGet));
+            return (Json("asdf", JsonRequestBehavior.AllowGet));
         }
 
     }
