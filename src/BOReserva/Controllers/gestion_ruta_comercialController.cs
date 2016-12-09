@@ -45,15 +45,10 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult guardarRuta(CAgregarRuta model)
         {
-
+            
             manejadorSQL sql = new manejadorSQL();
             //realizo el insert
             bool resultado = sql.InsertarRuta(model);
-
-
-
-
-
 
             return null;
         }

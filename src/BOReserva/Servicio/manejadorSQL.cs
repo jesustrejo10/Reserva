@@ -107,6 +107,7 @@ namespace BOReserva.Servicio
         public Boolean InsertarRuta(CAgregarRuta model)
         {   
             try{
+                
                 String[] strDes = model._destinoRuta.Split(new[] { " - " }, StringSplitOptions.None);
                 String[] strOri = model._origenRuta.Split(new[] { " - " }, StringSplitOptions.None);
             
