@@ -50,6 +50,11 @@ namespace BOReserva.Controllers
                     p.AgregarUsuario(usuario.toClass());
                     return RedirectToAction("M12_Index");
                 }
+                catch (ExceptionM12Reserva ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return View("M12_AgregarUsuario", "_Layout");
+                }
                 catch (Exception ex)
                 {
                     ModelState.AddModelError("", ex.Message);
@@ -64,15 +69,20 @@ namespace BOReserva.Controllers
         }
 
        [HttpPost]
-        public ActionResult M12_ModificarUsuario(ListarUsuario usuario)
+        public ActionResult M12_ModificarUsuario(AgregarUsuario usuario)
         {
             if (ModelState.IsValid)
             {
                 PersistenciaUsuario p = new PersistenciaUsuario();
                 try
                 {
-                    p.ModificarUsuario(usuario.toClass(), 50);
+                    p.ModificarUsuario(usuario.toClass(), usuario.idUsuario);
                     return RedirectToAction("M12_Index");
+                }
+                catch (ExceptionM12Reserva ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return View("M12_ModificarUsuario", usuario);
                 }
                 catch (Exception ex)
                 {
@@ -86,7 +96,7 @@ namespace BOReserva.Controllers
 
 
 
-        public ActionResult ModificarUsuario(int? usuID)
+       public ActionResult ModificarUsuario(int? usuID)
         {
 
             if (usuID.HasValue)
@@ -94,7 +104,7 @@ namespace BOReserva.Controllers
                 PersistenciaUsuario p = new PersistenciaUsuario();
                 try
                 {
-                    ListarUsuario usuario = p.consultarUsuario(usuID.Value);
+                    AgregarUsuario  usuario = new AgregarUsuario(p.consultarUsuario(usuID.Value));
                     return PartialView("M12_ModificarUsuario", usuario);
                 }
                 catch (Exception ex)
@@ -105,11 +115,10 @@ namespace BOReserva.Controllers
             }
             else
                 return RedirectToAction("M12_Index");
-            
-                
 
         }
 
+        
         public RedirectToRouteResult EliminarUsuario(int usuID)
         {
             
@@ -117,5 +126,6 @@ namespace BOReserva.Controllers
             p.eliminarUsuario(usuID);
             return RedirectToAction("M12_Index");
         }
+        
     }
 }

@@ -16,6 +16,8 @@ namespace BOReserva.Models.gestion_usuarios
         private DateTime _fechaCreacion ;
         private String _activo;
         private int _rol;
+        private int _id;
+        private string _rolS;
 
         #region Constructores
         public CUsuario()
@@ -41,6 +43,29 @@ namespace BOReserva.Models.gestion_usuarios
             _fechaCreacion = fechaCreacion ;
             _activo = activo;
             _rol = rol;
+        }
+
+        public CUsuario(int id, String nombre, String apellido, String contraseña, String correo, String activo, DateTime fechaCreacion, int rol)
+        {
+            _correo = correo;
+            _contraseña = contraseña;
+            _nombre = nombre;
+            _apellido = apellido;
+            _fechaCreacion = fechaCreacion;
+            _activo = activo;
+            _rol = rol;
+            _id = id;
+        }
+
+        public CUsuario(int id, String nombre, String apellido, String contraseña, String correo, String activo, int rol)
+        {
+            _correo = correo;
+            _contraseña = contraseña;
+            _nombre = nombre;
+            _apellido = apellido;
+            _activo = activo;
+            _rol = rol;
+            _id = id;
         }
         #endregion
 
@@ -113,6 +138,26 @@ namespace BOReserva.Models.gestion_usuarios
         {
             get { return _rol; }
             set { _rol = value; }
+        }
+
+        /// <summary>
+        /// Get y Set del atributo _id
+        /// </summary>
+        /// <returns>id del usuario/returns>
+        public int idUsuario
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
+
+        /// <summary>
+        /// Get y Set del atributo _rolS
+        /// </summary>
+        /// <returns>string del rol del usuario/returns>
+        public string rolSUsuario
+        {
+            get { return _rolS; }
+            set { _rolS = value; }
         }
 
     }

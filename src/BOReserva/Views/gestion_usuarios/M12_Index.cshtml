@@ -66,8 +66,12 @@
                                         <td>@p._rol</td>
                                         <td>@p._activo</td>
                                         <td>
-                                            <a href="@Url.Action("ModificarUsuario", "gestion_usuarios", new {usuID = p._id})"><i class="fa fa-gear modificar"></i></a>
-                                            @Html.ActionLink("Eliminar", "EliminarUsuario", new { usuID = p._id }, new { @class = "btn btn-default btn", @role = "button" })
+                                            <a href="@Url.Action("ModificarUsuario", "gestion_usuarios", new { usuID = p._id })">
+                                                <i class="fa fa-pencil modificar" title="Modificar"></i>
+                                            </a>
+                                            <a href="@Url.Action("EliminarUsuario", "gestion_usuarios", new { usuID = p._id })">
+                                                <i class="fa fa-times deshabilitar" title="Eliminar"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 }

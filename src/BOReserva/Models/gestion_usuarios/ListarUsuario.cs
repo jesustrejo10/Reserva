@@ -69,7 +69,7 @@ namespace BOReserva.Models.gestion_usuarios
 
         public CUsuario toClass()
         {
-            CUsuario user = new CUsuario(_nombre, _apellido, HashPassword(_contraseña), _correo, _activo, _rolID);
+            CUsuario user = new CUsuario(_id, _nombre, _apellido, HashPassword(_contraseña), _correo, _activo, _rolID);
             return user;
 
         }
