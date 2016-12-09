@@ -130,6 +130,17 @@ namespace BOReserva.Controllers
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
 
+        // POST
+        [HttpPost]
+        public JsonResult eliminarBoleto(int id)
+        {
+            manejadorSQL_Boletos eliminar = new manejadorSQL_Boletos();
+            int modifico_si_no = eliminar.M05EliminarBoletoBD(id);
+
+            return (Json(true, JsonRequestBehavior.AllowGet));
+        }
+
+
 
     }
 }

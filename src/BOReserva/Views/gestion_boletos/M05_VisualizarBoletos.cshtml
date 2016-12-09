@@ -33,9 +33,9 @@
                                     <td>@item._origen.Name</td>
                                     <td>@item._destino.Name</td>
                                     <td>
-                                        <a href="#"> <i class="fa fa-eye consultar"></i></a>
-                                        <a href="#"><i class="fa fa-gear modificar"></i></a>
-                                        <a href="#"><i class="fa fa-times eliminar"></i></a>
+                                        <a href="#" title="Consultar"> <i class="fa fa-eye consultar"></i></a>
+                                        <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>
+                                        <a href="#" title="Eliminar"><i class="fa fa-times eliminar"></i></a>
                                     </td>
                                 </tr>
                             }
@@ -111,7 +111,7 @@
             jQuery.ajax({
                 type: "GET",
                 url: "/gestion_boletos/M05_VisualizarBoleto",
-                data: { id : identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+                data: { id : identificador }
             }).done(function (data) {
                 $("#contenido").empty();
                 $("#contenido").append(data);
@@ -121,7 +121,42 @@
 
 
         });
-    });   
+    });
+
+    $(document).ready(function () {
+        //e.preventDefault();
+        $(".eliminar").click(function () {
+            var identificador = $(this).parent().parent().parent().attr("id");
+            jQuery.ajax({
+                type: "POST",
+                url: "/gestion_boletos/eliminarBoleto",
+                data: { id: identificador }
+            }).done(function (data) {
+
+                alert("Se eliminó exitosamente el boleto")
+                var url1 = '/gestion_boletos/M05_VisualizarBoletos';
+                var method = 'GET';
+                var data1 = '';
+
+                $.ajax(
+                    {
+                        url: url1,
+                        type: method,
+                        data: data,
+                        success: function (data, textStatus, jqXHR) {
+
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+            }).fail(function () {
+                alert("No se pudo eliminar")
+            });
+        });
+    });
 </script>
 
 

@@ -42,38 +42,9 @@ namespace BOReserva.Models.gestion_boletos
 
           }
 
-         //METODO PARA AGREGAR A LA BASE DE DATOS
-         public int M05Agregar (CBoleto boleto){
-             manejadorSQL_Boletos agregar = new manejadorSQL_Boletos();
-             return agregar.M05AgregarBoletoBD(boleto);
-         }
-
-         //METODO PARA OBTENER LA LISTA DE BOLETOS DE LA BASE DE DATOS
-         public List<CBoleto> M05ListarBoletos () 
-         {
-             manejadorSQL_Boletos listar = new manejadorSQL_Boletos();
-             return listar.M05ListarBoletosBD();
-         }
-
-         //METODO PARA OBTENER LOS DATOS DE UN BOLETO EN ESPECIFICO DE LA BASE DE DATOS
-         public CBoleto M05Consultar (int id) 
-         {
-             manejadorSQL_Boletos consultar = new manejadorSQL_Boletos();
-             return consultar.M05MostrarBoletoBD(id);
-         }
-
-         //METODO PARA MODIFICAR UN BOLETO
-         public int M05Modificar (CBoleto boleto) 
-         {
-              manejadorSQL_Boletos modificar = new manejadorSQL_Boletos();
-              return modificar.M05ModificarBoletoBD(boleto);
-         }
-
-         //METODO PARA ELIMINAR UN BOLETO
-         public int M05Eliminar(int id)
-         {
-             manejadorSQL_Boletos eliminar = new manejadorSQL_Boletos();
-             return eliminar.M05EliminarBoletoBD(id);
-         }
+          public CBoleto(int id) {
+              _id = id;
+          }
+        
     }
 }

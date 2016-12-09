@@ -242,8 +242,21 @@ namespace BOReserva.Servicio.Servicio_Boletos
 
        public int M05EliminarBoletoBD(int id)
        {
-           return 0;
-       }
-        
+            try
+            {
+                SqlConnection con = new SqlConnection(stringDeConexion);
+                con.Open();
+                String sql = "DELETE FROM Boleto WHERE bol_id = "+id+"";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                con.Close();
+                return 1;
+            }
+            catch (SqlException ex)
+            {
+                return 0;
+            }
+        }
     }
 }
