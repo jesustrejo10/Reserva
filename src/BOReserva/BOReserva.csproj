@@ -200,10 +200,13 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\gestion_automovilesController.cs" />
-    <Compile Include="Controllers\gestion_avionesController.cs" />
+    <Compile Include="Controllers\gestion_avionesController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controllers\gestion_boletosController.cs" />
     <Compile Include="Controllers\gestion_hotelesController.cs" />
     <Compile Include="Controllers\gestion_comida_vueloController.cs" />
+    <Compile Include="Controllers\gestion_ofertasController.cs" />
     <Compile Include="Controllers\gestion_restaurantesController.cs" />
     <Compile Include="Controllers\gestion_ruta_comercialController.cs" />
     <Compile Include="Controllers\gestion_usuariosController.cs" />
@@ -228,6 +231,9 @@
     <Compile Include="Models\gestion_boletos\CBuscarVuelo.cs" />
     <Compile Include="Models\gestion_hoteles\CGestionHoteles_CrearHotel.cs" />
     <Compile Include="Models\gestion_lugares\CLugarModelo.cs" />
+    <Compile Include="Models\gestion_ofertas\CAgregarOferta.cs" />
+    <Compile Include="Models\gestion_ofertas\CAgregarPaquete.cs" />
+    <Compile Include="Models\gestion_ofertas\CPaquete.cs" />
     <Compile Include="Models\gestion_ruta_comercial\CAgregarRuta.cs" />
     <Compile Include="Models\gestion_ruta_comercial\CGestion_ruta.cs" />
     <Compile Include="Models\gestion_ruta_comercial\CRuta.cs" />
@@ -1417,9 +1423,13 @@
     <Content Include="Views\gestion_ruta_comercial\ModificarRutasComerciales.cshtml" />
     <Content Include="Views\gestion_ruta_comercial\AgregarRutasComerciales.cshtml" />
     <Content Include="Views\gestion_ruta_comercial\DetallesRutasComerciales.cshtml" />
-    <Content Include="Views\gestion_ofertas\AgregarOferta.cshtml" />
-    <Content Include="Views\gestion_ofertas\ModificarOferta.cshtml" />
-    <Content Include="Views\gestion_ofertas\ConsultarOferta.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_AgregarOferta.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_AgregarPaquete.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_ConsultarOferta.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_ConsultarPaquete.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_GestionOfertas.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_ModificarOferta.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_ModificarPaquete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
