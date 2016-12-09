@@ -7,6 +7,8 @@ using BOReserva.Models;
 using BOReserva.Models.gestion_aviones;
 using BOReserva.Models.gestion_hoteles;
 using BOReserva.Models.gestion_restaurantes;
+using BOReserva.Models.gestion_lugares;
+using System.Diagnostics;
 
 namespace BOReserva.Servicio
 {
@@ -122,13 +124,17 @@ namespace BOReserva.Servicio
             }
             catch (SqlException e)
             {
-                throw e;
-                //return false;
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
             }
             catch (Exception e)
             {
-                throw e;
-                //return false;
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
             }
         }
 
@@ -170,13 +176,17 @@ namespace BOReserva.Servicio
             }
             catch (SqlException e)
             {
-                throw e;
-                //return null;
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
             }
             catch (Exception e)
             {
-                throw e;
-                //return null;
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
             }
 
         }
@@ -220,13 +230,17 @@ namespace BOReserva.Servicio
             }
             catch (SqlException e)
             {
-                throw e;
-                //return null;
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
             }
             catch (Exception e)
             {
-                throw e;
-                //return null;
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
             }
         }
 
@@ -254,13 +268,17 @@ namespace BOReserva.Servicio
             }
             catch (SqlException e)
             {
-                throw e;
-                //return false;
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
             }
             catch (Exception e)
             {
-                throw e;
-                //return false;
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
             }
         }
 
@@ -285,17 +303,130 @@ namespace BOReserva.Servicio
             }
             catch (SqlException e)
             {
-                throw e;
-                //return false;
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
             }
             catch (Exception e)
             {
-                throw e;
-                //return false;
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
             }
         }
 
         /* FIN DE FUNCIONES PARA MODULO 10 BO (RESTAURANTES) */
 
+        /* INICIO DE FUNCIONES COMUNES */
+
+        //Método para la consulta de todos los lugares, sin parámetro y retornando una lista de modelos de lugar.
+        public List<CLugarModelo> consultarLugar()
+        {
+            try
+            {
+                var list = new List<CLugarModelo>();
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                //uso el SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "SELECT * FROM Lugar";
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                SqlDataReader lector = query.ExecuteReader();
+                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+                while (lector.Read())
+                {
+                    var entrada = new CLugarModelo
+                    {
+                        _id = (int)lector.GetSqlInt32(0),
+                        _nombre = lector.GetSqlString(1).ToString(),
+                        _tipoLugar = lector.GetSqlString(2).ToString(),
+                        _zonaHoraria = lector.GetSqlString(3).ToString(),
+                        _idFKLugar = lector.IsDBNull(4) ? -1 : (int)lector.GetSqlInt32(4), //Pregunta si el campo es null, dando valor por defecto en caso que lo sea
+                        _abreviatura = lector.GetSqlString(5).ToString()
+
+                    };
+                    list.Add(entrada);
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return list;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+        }
+
+        //Método para la consulta de ciudades, sin parámetro y retornando una lista de modelos de lugar.
+        public List<CLugarModelo> consultarCiudad()
+        {
+            try
+            {
+                var list = new List<CLugarModelo>();
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                //uso el SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "SELECT * FROM Lugar WHERE lug_tipo_lugar = 'ciudad'";
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                SqlDataReader lector = query.ExecuteReader();
+                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+                while (lector.Read())
+                {
+                    var entrada = new CLugarModelo
+                    {
+                        _id = (int)lector.GetSqlInt32(0),
+                        _nombre = lector.GetSqlString(1).ToString(),
+                        _tipoLugar = lector.GetSqlString(2).ToString(),
+                        _zonaHoraria = lector.GetSqlString(3).ToString(),
+                        _idFKLugar = lector.IsDBNull(4) ? -1 : (int)lector.GetSqlInt32(4), //Pregunta si el campo es null, dando valor por defecto en caso que lo sea
+                        _abreviatura = lector.GetSqlString(5).ToString()
+
+                    };
+                    list.Add(entrada);
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return list;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+        }
+
+        /* FIN DE FUNCIONES COMUNES */
     }
 }
