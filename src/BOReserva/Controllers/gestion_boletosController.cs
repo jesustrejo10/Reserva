@@ -12,6 +12,11 @@ namespace BOReserva.Controllers
     public class gestion_boletosController : Controller
     {
 
+        public ActionResult M05_VerReserva()
+        {
+            return PartialView();
+        }
+
         public ActionResult M05_CrearBoleto()
         {
             /*//instancio el manejador de sql

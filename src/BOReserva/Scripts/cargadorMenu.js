@@ -179,9 +179,9 @@
             });
     });
 
-    $("#m05_crearboleto").click(function (e) {
+    $("#m05VerReserva").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_boletos/M05_CrearBoleto';
+        var url = '/gestion_boletos/M05_VerReserva';
         var method = 'GET';
         var data = '';
 

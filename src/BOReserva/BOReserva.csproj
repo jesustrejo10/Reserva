@@ -433,8 +433,8 @@
     <Content Include="Scripts\cargadorMenu.js" />
     <Content Include="Scripts\Scripts_Boletos\DatosUsuario.js" />
     <Content Include="Scripts\Scripts_Boletos\DetalleBoleto.js" />
-    <Content Include="Scripts\Scripts_Boletos\DetalleVuelo.js" />
     <Content Include="Scripts\Scripts_Boletos\BuscarVuelo.js" />
+    <Content Include="Scripts\Scripts_Boletos\DetalleVuelo.js" />
     <Content Include="Scripts\Scripts_Boletos\VerVuelos.js" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -1410,6 +1410,7 @@
     <Content Include="Views\gestion_usuarios\M12_ModificarUsuario.cshtml" />
     <Content Include="Views\gestion_usuarios\_Layout.cshtml" />
     <Content Include="Views\gestion_boletos\M05_VisualizarBoletos.cshtml" />
+    <Content Include="Views\gestion_boletos\M05_VerReserva.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
