@@ -1417,6 +1417,9 @@
     <Content Include="Views\gestion_ruta_comercial\ModificarRutasComerciales.cshtml" />
     <Content Include="Views\gestion_ruta_comercial\AgregarRutasComerciales.cshtml" />
     <Content Include="Views\gestion_ruta_comercial\DetallesRutasComerciales.cshtml" />
+    <Content Include="Views\gestion_ofertas\AgregarOferta.cshtml" />
+    <Content Include="Views\gestion_ofertas\ModificarOferta.cshtml" />
+    <Content Include="Views\gestion_ofertas\ConsultarOferta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
