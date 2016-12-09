@@ -9,6 +9,7 @@ using BOReserva.Models.gestion_hoteles;
 using BOReserva.Models.gestion_restaurantes;
 using BOReserva.Models.gestion_lugares;
 using BOReserva.Models.gestion_ruta_comercial;
+using BOReserva.Models.gestion_ofertas;
 using System.Diagnostics;
 
 namespace BOReserva.Servicio
@@ -48,6 +49,31 @@ namespace BOReserva.Servicio
                 //cierro el lector
                 lector.Close();
                 //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+        }
+
+        //Procedimiento del Modulo 11 para agregar ofertas a la base de datos.
+        public Boolean agregarOferta(CAgregarOferta model)
+        {
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                SqlCommand query = conexion.CreateCommand();
+                query.CommandText = "INSERT INTO Oferta VALUES ('" + model._nombreOferta + "','" + model.formatDate(model._fechaIniOferta) + "', '" + model.formatDate(model._fechaFinOferta) + "'," + model._porcentajeOferta + ", 0);";
+                SqlDataReader lector = query.ExecuteReader();
+                lector.Close();
                 conexion.Close();
                 return true;
             }
