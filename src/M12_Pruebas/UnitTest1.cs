@@ -72,8 +72,8 @@ namespace M12_Pruebas
         [Test]
         public void TestConsultar()
         {
-            liastarusu = prueba.consultarUsuario(5);
-            Assert.IsNotNull(liastarusu);
+            elUsuario = prueba.consultarUsuario(5);
+            Assert.IsNotNull(elUsuario);
         }
         #endregion
     }
