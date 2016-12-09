@@ -445,6 +445,11 @@
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\Scripts_Aviones\llamadas_generales.js" />
     <Content Include="Scripts\Scripts_Hoteles\llamadas_generales_hoteles.js" />
+    <Content Include="Scripts\Scripts_Restaurantes\llamadas_generales.js" />
+    <Content Include="Scripts\select2\css\select2.min.css" />
+    <Content Include="Scripts\select2\js\i18n\en.js" />
+    <Content Include="Scripts\select2\js\i18n\es.js" />
+    <Content Include="Scripts\select2\js\select2.min.js" />
     <Content Include="Views\dist\css\AdminLTE.css" />
     <Content Include="Views\dist\css\AdminLTE.min.css" />
     <Content Include="Views\dist\css\skins\skin-black-light.css" />
@@ -1409,6 +1414,8 @@
     <Content Include="Views\gestion_usuarios\M12_AgregarUsuario.cshtml" />
     <Content Include="Views\gestion_usuarios\M12_ModificarUsuario.cshtml" />
     <Content Include="Views\gestion_usuarios\_Layout.cshtml" />
+    <Content Include="Views\gestion_restaurantes\M10_GestionRestaurantes_Ver.cshtml" />
+    <Content Include="Views\gestion_restaurantes\M10_GestionRestaurantes_Agregar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
