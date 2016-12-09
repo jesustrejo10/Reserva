@@ -79,7 +79,7 @@ namespace FOReserva.Controllers
             return View(restaurante);
         }
 
-        public ActionResult confirma_restaurant()
+        public ActionResult confirma_restaurant(int id, string name_rest, string addres_rest, string name_client, string reserv_date, string reserv_hour, int number_person)
         {
             return View();
         }
