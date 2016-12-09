@@ -47,4 +47,16 @@
     
     });
 
+    $("#gestionUsuarios").click(function (e) {
+        window.location.href = '/gestion_usuarios/m12_index'
+
+    });
+
+    $("#agregarUsuarios").click(function (e) {
+        window.location.href='/gestion_usuarios/m12_agregarUsuario'
+
+    });
+
+
+
 });

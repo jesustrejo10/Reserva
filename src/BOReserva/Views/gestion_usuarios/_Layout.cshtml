@@ -338,7 +338,7 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li id="gestionUsuarios"><a href="/gestion_usuarios/M12_index"><i class="fa fa-plus-square-o"></i>Consultar</a></li>
+                            <li id="gestionUsuarios"><a href="/gestion_usuarios/M12_index"><i class="fa fa-plus-square-o"></i>Visualizar</a></li>
                             <li id="agregarUsuarios"><a href="/gestion_usuarios/M12_AgregarUsuario"><i class="fa fa-plus-square-o"></i>Agregar</a></li>
                         </ul>
                     </li>
@@ -389,7 +389,9 @@
                     </ol>
                 </section>*@
             <!-- Main content -->
-            <section class="content" id="contenido"></section>
+            <section class="content" id="contenido">
+                @RenderBody()
+            </section>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
@@ -578,8 +580,6 @@
             </header>
             <div id="body">
                 @RenderSection("featured", required: false)
-                <section class="content-wrapper main-content clear-fix">
-                    @RenderBody()
                 </section>
             </div>
             <footer>
