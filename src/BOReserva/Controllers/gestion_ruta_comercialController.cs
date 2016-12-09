@@ -14,8 +14,40 @@ namespace BOReserva.Controllers
         // GET: gestion_ruta_comercial/AgregarRutasComerciales
         public ActionResult AgregarRutasComerciales()
         {
+            List<String> lista = new List<string>();
+            
+            manejadorSQL sql = new manejadorSQL();            
+            
+
+            lista = sql.listarLugares();
+
+            List<SelectListItem> list = lista.ConvertAll(a =>
+                                {
+                                    return new SelectListItem()
+                                    {
+                                        Text = a.ToString(),
+                                        Value = a.ToString(),
+                                        Selected = false
+                                    };
+                                
+                                });
+            
+            
             CAgregarRuta ruta = new CAgregarRuta();
+            ruta._lorigenRuta = list;
+            ruta._ldestinoRuta = list;        
+
+
+            
+
             return PartialView(ruta);
+        }
+
+        public JsonResult cargarLugares() {
+            
+            
+            return null;        
+        
         }
 
 

@@ -4,8 +4,10 @@
 @{
     
     List<SelectListItem> listTipo = new List<SelectListItem>();
-    List<SelectListItem> listEstado = new List<SelectListItem>();    
-
+    List<SelectListItem> listEstado = new List<SelectListItem>();
+    List<SelectListItem> listOrigen = new List<SelectListItem>();
+    listOrigen = Model._lorigenRuta;
+    
 
     listTipo.Add(new SelectListItem
       {
@@ -43,10 +45,10 @@
     @Html.DropDownListFor(m => m._estadoRuta, listEstado, new { @class = "form-control", @placeholder = "Aérea", @id = "rutaTipo" })
     <br />
     <label>Elegir Origen de la Ruta (*)</label>
-    @Html.DropDownListFor(m => m._origenRuta, listItems, new { @class = "form-control", @placeholder = "Ejem.: Caracas - Venezuela", @id = "rutaOrigen" })
+    @Html.DropDownListFor(m => m._origenRuta, listOrigen, new { @class = "form-control", @placeholder = "Ejem.: Caracas - Venezuela", @id = "rutaOrigen" })
     <br />
     <label>Elegir Destino de la Ruta (*)</label>
-    @Html.DropDownListFor(m => m._destinoRuta, listItems, new { @class = "form-control", @placeholder = "Ejem.: Caracas - Venezuela", @id = "rutaDestino" })
+    @Html.DropDownListFor(m => m._destinoRuta, listOrigen, new { @class = "form-control", @placeholder = "Ejem.: Caracas - Venezuela", @id = "rutaDestino" })
     <br />
     <label>Agregar distancia de la Ruta (*)</label>
     @Html.TextBoxFor(m => m._distanciaRuta, null, new { @class = "form-control", @placeholder = "1200 KM", @id = "rutaDistancia" })

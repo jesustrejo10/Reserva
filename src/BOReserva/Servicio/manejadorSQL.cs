@@ -318,12 +318,12 @@ namespace BOReserva.Servicio
                 conexion = new SqlConnection(stringDeConexion);
                 //INTENTO abrir la conexion
                 conexion.Open();
-                String query = "SELECT l.lug_nombre, ll.lug_nombre from Lugar l, Lugar ll where l.lug_FK_lugar_id = ll.lug_id";
+                String query = "SELECT l.lug_nombre as ciudad, ll.lug_nombre as pais from Lugar l, Lugar ll where l.lug_FK_lugar_id = ll.lug_id";
                 SqlCommand cmd = new SqlCommand(query, conexion);
                 SqlDataReader lector = cmd.ExecuteReader();
                 while (lector.Read())
                 {
-                    lugar = lector["l.lug_nombre"].ToString() +" - "+ lector["l.lug_nombre"].ToString();
+                    lugar = lector["ciudad"].ToString() +" - "+ lector["pais"].ToString();
                     lugares.Add(lugar);
                 }
                 //cierro el lector
