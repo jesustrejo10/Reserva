@@ -209,7 +209,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\Diarios\Cvista_Diarios.cs" />
+    <Compile Include="Models\Diarios\CDiarioModel.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\Itinerario\itinerario.cs" />
     <Compile Include="Models\ORM\DB.cs" />

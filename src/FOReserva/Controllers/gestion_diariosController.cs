@@ -15,7 +15,7 @@ namespace FOReserva.Controllers
 
         public ActionResult gestion_diarios()
         {
-            Cvista_Diarios model = new Cvista_Diarios();
+            CDiarioModel model = new CDiarioModel();
             return PartialView(model);
         }
 
@@ -25,7 +25,7 @@ namespace FOReserva.Controllers
         }
 
         [HttpPost]
-        public JsonResult buscarDiarios(Cvista_Diarios model)
+        public JsonResult buscarDiarios(CDiarioModel model)
         {
             String prueba = model._prueba;
             String f_inicio = model._fecha_ini;

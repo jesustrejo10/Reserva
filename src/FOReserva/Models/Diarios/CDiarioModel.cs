@@ -5,7 +5,7 @@ using System.Web;
 
 namespace FOReserva.Models.Diarios
 {
-    public class CDiarioModels : BaseEntity
+    public class CDiarioModel : BaseEntity
     {
         private string   _nombre;
         private DateTime _fecha_ini;
@@ -19,7 +19,7 @@ namespace FOReserva.Models.Diarios
        
         //Constructors
        
-         public CDiarioModels
+         public CDiarioModel
             (int      id, 
              string   name,
              string   nombre,
@@ -45,7 +45,7 @@ namespace FOReserva.Models.Diarios
         }
 
 
-  public CDiarioModels() :base (){ }
+  public CDiarioModel() :base (){ }
         
         //Metodos Get y Set
         
