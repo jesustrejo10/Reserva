@@ -1,0 +1,223 @@
+﻿<!-- Indico que para esta vista, M08_AgregarAutomovil, utilizare el modelo Models/gestion_automoviles/CAgregarAutomovil-->
+@model BOReserva.Models.gestion_automoviles.CModificarAutomovil
+
+<!--Indico que, estoy abriendo un formulario que tendra como accion del submit, el controlador gestion_automoviles"Controller",
+    utilizara el metodo guardarAutomovil
+    le pasara la informacion mediante un POST-->
+@using (Html.BeginForm("modifyVehicle", "gestion_automoviles", null, FormMethod.Post, new { @id = "formModifyVehicle", @class = "form-horizontal" }))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h1 class="box-title"> Modificar automóvil</h1>
+                    <div class="box-tools pull-right">
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="placa">Placa del vehiculo</label>                               
+                                     @Html.TextBoxFor(m => m._matricula, null, new { @class = "form-control", @id = "vehi_modelo", @readonly = "readonly" })
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="modelo">Fabricante</label>
+                                
+                                @Html.TextBoxFor(m => m._fabricante, null, new { @class = "form-control", @placeholder = "Marca", @id = "vehi_marca", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="modelo">Modelo</label>
+                                @Html.TextBoxFor(m => m._modelo, null, new { @class = "form-control", @placeholder = "Marca", @id = "vehi_modelo", @readonly = "readonly" })
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="anio">Año de fabricacion</label>
+                                @Html.TextBoxFor(m => m._anio, null, new { @class = "form-control", @placeholder = "Placa", @id = "vehi_modelo",  @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="tipo">Tipo</label>
+                                @{
+                                    List<SelectListItem> _tipos = new List<SelectListItem>();
+                                    _tipos.Add(new SelectListItem
+                                    {
+                                        Text = "",
+                                        Value = ""
+                                    });
+                                    _tipos.Add(new SelectListItem
+                                         {
+                                             Text = "Sedan",
+                                             Value = "Sedan"
+                                         });
+                                    _tipos.Add(new SelectListItem
+                                    {
+                                        Text = "Familiar",
+                                        Value = "Familiar"
+                                    });
+                                    _tipos.Add(new SelectListItem
+                                    {
+                                        Text = "Deportivo",
+                                        Value = "Deportivo"
+                                    });
+                                    _tipos.Add(new SelectListItem
+                                    {
+                                        Text = "Minivan",
+                                        Value = "Minivan"
+                                    });
+                                    _tipos.Add(new SelectListItem
+                                    {
+                                        Text = "Todoterreno",
+                                        Value = "Todoterreno"
+                                    });
+                                    _tipos.Add(new SelectListItem
+                                    {
+                                        Text = "Camioneta",
+                                        Value = "Camioneta"
+                                    });
+                                }
+                                @Html.DropDownListFor(m => m._tipovehiculo, _tipos, new { @class = "form-control", @placeholder = "Tipo", @id = "vehi_tipo" })
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="capacidad">Capacidad</label>
+                                @Html.TextBoxFor(m => m._cantpasajeros, null, new { @class = "form-control", @placeholder = "Tipo", @id = "vehi_cantidad",  @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="color">Color</label>                                
+                                @Html.DropDownListFor(m => m._color, BOReserva.Controllers.gestion_automovilesController.colores(), new { @class = "form-control", @placeholder = "Color", @id = "vehi_tipo" })
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="kilometraje">Kilometraje</label>
+                                @Html.TextBoxFor(m => m._kilometraje, null, new { @type = "number", @class = "form-control", @placeholder = "Kilometraje", @id = "vehi_modelo" })
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="fecharegistro">Fecha de registro</label>
+                                @Html.TextBoxFor(m => m._fecharegistro, null, new { @class = "form-control", @placeholder = "Kilometraje", @id = "vehi_registro", @readonly="readonly" })
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="">Pais</label>
+                                @Html.DropDownListFor(m => m._pais, BOReserva.Controllers.gestion_automovilesController.pais(), new { @class = "form-control", @placeholder = "Pais", @id = "vehi_pais" })
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="">Ciudad</label>                                
+                                @Html.DropDownListFor(m => m._ciudad, BOReserva.Controllers.gestion_automovilesController.ciudades(), new { @class = "form-control", @placeholder = "Pais", @id = "vehi_pais" })
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="transmision">Transmision:</label>
+
+                                @Html.TextBoxFor(m => m._transmision, null, new { @class = "form-control", @placeholder = "Ciudad", @id = "vehi_transmision", @readonly = "readonly" })
+                            </div>
+
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="preciocompra">Precio de compra ($):</label>
+                                @Html.TextBoxFor(m => m._preciocompra, null, new { @type = "number", @class = "form-control", @placeholder = "Dolares", @id = "vehi_compra",  @readonly = "readonly" })
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="tarifa">Tarifa diaria ($):</label>
+                                @Html.TextBoxFor(m => m._precioalquiler, null, new { @type = "number", @class = "form-control", @placeholder = "Dolares", @id = "vehi_tarifa" })
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="penalidad">Penalidad diaria ($):</label>
+                                @Html.TextBoxFor(m => m._penalidaddiaria, null, new { @type = "number", @class = "form-control", @placeholder = "Dolares", @id = "vehi_penalidad" })
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-2">
+                                <button type="button" id="modify_vehicle" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Modificar</button>
+                            </div>
+                            <div class="col-md-2">
+                                <button id="cancel_modification" type="button" class="btn btn-danger" style="display:block; margin-left:auto; margin-right:auto;">Cancelar</button>
+                            </div>
+                            <div class="col-md-4"></div>    
+                         </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+
+    <script>
+        $("#modify_vehicle").click(function (e) {
+            e.preventDefault();
+            var form = $("#formModifyVehicle");
+            $.ajax({
+                url: "gestion_automoviles/modifyVehicle",
+                data: form.serialize(),
+                type: 'POST',
+                success: function (data) {
+                    alert("Se ha modificado exitosamente y sera redirigido a la tabla de vehiculos");
+                    //$('#formModifyVehicle')[0].reset();
+                    var url1 = '/gestion_automoviles/M08_VisualizarAutomoviles';
+                    var method = 'GET';
+                    var data1 = '';
+
+                    $.ajax(
+                        {
+                            url: url1,
+                            type: method,
+                            data: data,
+                            success: function (data, textStatus, jqXHR) {
+
+                                $("#contenido").empty();
+                                $("#contenido").append(data);
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert(errorThrown);
+                            }
+                        });
+                }
+            });
+        });
+
+        $("#cancel_modification").click(function (e) {
+            e.preventDefault();
+            var url = '/gestion_automoviles/M08_VisualizarAutomoviles';
+            var method = 'GET';
+            var data = '';
+
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+        });
+    </script>
+
+
+
+}
