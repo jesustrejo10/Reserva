@@ -31,11 +31,9 @@
                         <div class="box-body">
                             <div class="row">
                                 <div class="col-md-5">
-                                    <!-- select --> 
-                                    <div class="form-group">
-                                        <label>País</label>
-                                       <select class="form-control"></select>
-                                    </div>
+                                    <!-- select -->                                     
+                                        <label>País</label>                                       
+                                           @Html.DropDownListFor(m => m._pais, BOReserva.Controllers.gestion_hotelesController.pais(), new { @class = "form-control", @placeholder = "Pais", @id = "vehi_pais" })                                                                      
                                 </div><!--div col-xs-->
                                 <div class="col-md-1"></div>
                                 <div class="col-md-5">

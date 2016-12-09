@@ -33,6 +33,11 @@ namespace BOReserva.Controllers
         {
             return PartialView();
         }
+
+        public static List<SelectListItem> pais() {
+            return CGestionHoteles_SelectPaisModel.pais();
+        }
+
     }
 
 
