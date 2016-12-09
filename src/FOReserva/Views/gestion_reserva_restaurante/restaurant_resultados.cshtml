@@ -9,6 +9,7 @@
 @using (Html.BeginForm("reservar_restaurant", "gestion_reserva_restaurante", FormMethod.Post))
 {
     <div class="row">
+        <input type="hidden" name="id_rest" id="id_rest" value="0" />
         @foreach (var item in Model)
         {
             <div class="col-md-4 col-sm-4">
@@ -20,15 +21,11 @@
                     <hr />
                     <p>@item.Addres <b>Madrid</b>.</p>
                     <hr />
-                    <input type="submit" id="boton" value="Reservar" class="btn btn-primary">
-
-
-                    <input type="hidden" name="id_rest" value="@item.Id" />
+                    <input type="submit" id="@item.Id" value="Reservar" class="btn btn-primary boton">
                     <!--<a href="detail_restaurant_reservation.html" class="btn btn-3d btn-primary">Reservar</a>-->
                 </div>
             </div>
         }
-
     </div>
 }
 

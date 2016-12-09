@@ -264,14 +264,24 @@
                         </a>
                         <ul class="treeview-menu">
                             <li id="m02_agregaravion"><a href="#"> Agregar </a></li>
-                            <li id="m02_editaravion"><a href="#"> Editar </a></li>
-                            <li id="m02_consultaravion"><a href="#"> Consultar </a></li>
-                            <li id="m02_modificaravion"><a href="#"> Modificar </a></li>
+                            <li id="m02_VisualizarAvion"><a href="#"> Visualizar </a></li>
+                            @*<li id="m02_consultaravion"><a href="#"> Consultar </a></li>
+                            <li id="m02_modificaravion"><a href="#"> Modificar </a></li>*@
                         </ul>
                     </li>
                     <!-- FIN MODULO DE AVIONES -->
                     <!-- MODULO DE RUTAS COMERCIALES -->
-                    <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Rutas</a></li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-car"></i> <span>Gestión de rutas</span> <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="m03AgregarRuta"><a href="#"><i class="fa fa-plus-square-o"></i>Crear</a></li>
+                            <li id="m03VisualizarRutas"><a href="#"><i class="fa fa-eye"></i>Visualizar</a></li>
+                        </ul>
+                    </li>
                     <!-- FIN MODULO DE RUTAS COMERCIALES -->
                     <!-- MODULO DE VUELOS -->
                     <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Vuelos</a></li>
@@ -357,7 +367,18 @@
                     </li>
                     <!-- FIN DE MODULO DE GESTION DE USUARIOS -->
                     <!-- MODULO DE GESTION DE ROLES -->
-                    <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Roles</a></li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-users"></i> <span>Gestión de Roles</span> <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="m13AgregarRol"><a href="#"><i class="fa fa-plus-square-o"></i>Crear</a></li>
+                            <li id="m13VisualizarRol"><a href="#"><i class="fa fa-eye"></i>Visualizar</a></li>
+                        </ul>
+                    </li>
                     <!-- FIN DE MODULO DE GESTION DE ROLES -->
                     <!-- MODULO DE CRUCEROS -->
                     <li class="treeview">
@@ -408,9 +429,9 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        <footer class="main-footer">
+        @*<footer class="main-footer">
             <div class="pull-right hidden-xs"> <b>Version</b> 2.3.7 </div> <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
-        </footer>
+        </footer>*@
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Create the tabs -->
@@ -635,7 +656,7 @@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="/Content/dist/js/pages/dashboard2.js"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="/Content/dist/js/demo.js"></script>}
+    <script src="/Content/dist/js/demo.js"></script>
 
 </body>
 

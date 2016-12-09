@@ -205,6 +205,8 @@
     <Compile Include="Controllers\gestion_hotelesController.cs" />
     <Compile Include="Controllers\gestion_comida_vueloController.cs" />
     <Compile Include="Controllers\gestion_restaurantesController.cs" />
+    <Compile Include="Controllers\gestion_rolesController.cs" />
+    <Compile Include="Controllers\gestion_ruta_comercialController.cs" />
     <Compile Include="Controllers\gestion_usuariosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -223,10 +225,15 @@
     </Compile>
     <Compile Include="Models\gestion_automoviles\VehicleModel.cs" />
     <Compile Include="Models\gestion_aviones\CAgregarAvion.cs" />
+    <Compile Include="Models\gestion_aviones\CAvion.cs" />
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
+    <Compile Include="Models\gestion_aviones\CModificarAvion.cs" />
     <Compile Include="Models\gestion_boletos\CBuscarVuelo.cs" />
     <Compile Include="Models\gestion_hoteles\CGestionHoteles_CrearHotel.cs" />
     <Compile Include="Models\gestion_lugares\CLugarModelo.cs" />
+    <Compile Include="Models\gestion_ruta_comercial\CAgregarRuta.cs" />
+    <Compile Include="Models\gestion_ruta_comercial\CGestion_ruta.cs" />
+    <Compile Include="Models\gestion_ruta_comercial\CRuta.cs" />
     <Compile Include="Models\gestion_usuarios\AgregarUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\ConexionBD.cs" />
     <Compile Include="Models\gestion_usuarios\CUsuario.cs" />
@@ -1416,9 +1423,18 @@
     <Content Include="Views\gestion_usuarios\_Layout.cshtml" />
     <Content Include="Views\gestion_restaurantes\M10_GestionRestaurantes_Ver.cshtml" />
     <Content Include="Views\gestion_restaurantes\M10_GestionRestaurantes_Agregar.cshtml" />
+    <Content Include="Views\gestion_aviones\M02_VisualizarAviones.cshtml" />
+    <Content Include="Views\gestion_aviones\M02_ModificarAvion.cshtml" />
+    <Content Include="Views\gestion_ruta_comercial\VisualizarRutasComerciales.cshtml" />
+    <Content Include="Views\gestion_ruta_comercial\ModificarRutasComerciales.cshtml" />
+    <Content Include="Views\gestion_ruta_comercial\AgregarRutasComerciales.cshtml" />
+    <Content Include="Views\gestion_ruta_comercial\DetallesRutasComerciales.cshtml" />
+    <Content Include="Views\gestion_roles\M13_AgregarRol.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\gestion_roles\css\" />
+    <Folder Include="Views\gestion_roles\js\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap\css\bootstrap.css.map" />

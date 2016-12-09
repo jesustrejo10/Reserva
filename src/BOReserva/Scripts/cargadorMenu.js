@@ -43,7 +43,80 @@
                 }
             });
     });
+    $("#m02_VisualizarAvion").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_aviones/M02_VisualizarAviones';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+
+    });
+
+
     
+    $("#m03AgregarRuta").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_ruta_comercial/AgregarRutasComerciales';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+
+    });
+
+
+    $("#m03VisualizarRutas").click(function (e) {
+
+
+        e.preventDefault();
+        var url = '/gestion_ruta_comercial/VisualizarRutasComerciales';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+
+    });
+
+
     $("#m08AgregarAutomovil").click(function (e) {
         e.preventDefault();
         var url = '/gestion_automoviles/M08_AgregarAutomovil';
@@ -247,4 +320,46 @@
     });
 
     /* FIN M10 RESTAURANTES BO */
+    $("#m13AgregarRol").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_roles/M13_AgregarRol';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+    $("#m13VisualizarRol").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_roles/M13_VisualizarRol';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
 });
