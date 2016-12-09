@@ -266,6 +266,7 @@
     <Compile Include="Servicio\ManejadorSQLReservaRestaurant.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\assets\css\bootstrap-datepicker3.min.css" />
     <Content Include="Content\assets\css\color_scheme\green.css" />
     <Content Include="Content\assets\css\custom.css" />
     <Content Include="Content\assets\css\essentials.css" />
@@ -1659,6 +1660,7 @@
     <Content Include="Models\Hoteles\placeholder.html" />
     <Content Include="Models\Restaurantes\placeholder.html" />
     <Content Include="Models\Vuelos\placeholder.html" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\cargadorPestanas.js" />
     <Content Include="Scripts\customValidator.js" />
     <Content Include="Scripts\uniqueId.js" />
