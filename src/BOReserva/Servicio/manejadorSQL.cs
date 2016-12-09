@@ -307,6 +307,43 @@ namespace BOReserva.Servicio
                 return false;
             }
         }
+
+        public List<String> listarLugares()
+        {
+            List<String> lugares = new List<String>();
+            String lugar;
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "SELECT l.lug_nombre, ll.lug_nombre from Lugar l, Lugar ll where l.lug_FK_lugar_id = ll.lug_id";
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                while (lector.Read())
+                {
+                    lugar = lector["l.lug_nombre"].ToString() +" - "+ lector["l.lug_nombre"].ToString();
+                    lugares.Add(lugar);
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return lugares;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+
     
         
         /* INICIO DE FUNCIONES PARA MODULO 10 BO (RESTAURANTES) */

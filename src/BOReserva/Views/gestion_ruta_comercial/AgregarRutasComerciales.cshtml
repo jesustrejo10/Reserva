@@ -1,26 +1,10 @@
 ﻿@model BOReserva.Models.gestion_ruta_comercial.CAgregarRuta
 
+
 @{
-    List<SelectListItem> listItems = new List<SelectListItem>();
+    
     List<SelectListItem> listTipo = new List<SelectListItem>();
-    List<SelectListItem> listEstado = new List<SelectListItem>();
-
-
-    listItems.Add(new SelectListItem
-      {
-          Text = "Caracas - Venezuela",
-          Value = "Caracas - Venezuela"
-      });
-    listItems.Add(new SelectListItem
-     {
-         Text = "Ciudad de Panamá -  Panamá",
-         Value = "Ciudad de Panamá - Panamá",
-     });
-    listItems.Add(new SelectListItem
-     {
-         Text = "Madrid - España",
-         Value = "Madrid - España"
-     });
+    List<SelectListItem> listEstado = new List<SelectListItem>();    
 
 
     listTipo.Add(new SelectListItem
