@@ -13,7 +13,7 @@ namespace FOReserva.Servicio
         /*Buscar Restaurantes por Nombre*/
         public List<CRestaurantModel> buscarRestName(string restName)
         {
-            string query = "Select rst_id, rst_nombre, rst_direccion From Restaurante where LOWER(rst_nombre) LIKE LOWER('%" + restName + "%')";
+            string query = "Select rst_id, rst_nombre, rst_direccion, lug.lug_nombre From Restaurante, Lugar as lug where LOWER(rst_nombre) LIKE LOWER('%" + restName + "%') and fk_lugar = lug.lug_id";
             SqlDataReader read = Executer(query);
             List<CRestaurantModel> lista_rest = new List<CRestaurantModel>();
             if (read.HasRows)
@@ -23,10 +23,12 @@ namespace FOReserva.Servicio
                     int id = read.GetInt32(0);
                     string nombre = read.GetString(1);
                     string dir = read.GetString(2);
+                    string city = read.GetString(3);
                     CRestaurantModel resta = new CRestaurantModel();
                     resta.Id = id;
                     resta.Name = nombre;
                     resta.Addres = dir;
+                    resta.CityName = city;
                     lista_rest.Add(resta);
                 }
             }
@@ -37,7 +39,7 @@ namespace FOReserva.Servicio
         /* Buscar restaurante por ciudad */
         public List<CRestaurantModel> buscarRestCity(string cityName)
         {
-            string query = "SELECT res.rst_id ,res.rst_nombre ,res.rst_direccion FROM Restaurante as res, Lugar as lug where res.fk_lugar = lug.lug_id and lug.lug_tipo_lugar = 'ciudad' and LOWER(lug.lug_nombre) LIKE LOWER('%" + cityName + "%')"; 
+            string query = "SELECT res.rst_id ,res.rst_nombre ,res.rst_direccion, lug.lug_nombre  FROM Restaurante as res, Lugar as lug where res.fk_lugar = lug.lug_id and lug.lug_tipo_lugar = 'ciudad' and LOWER(lug.lug_nombre) LIKE LOWER('%" + cityName + "%')"; 
             SqlDataReader read = Executer(query);
             List<CRestaurantModel> lista_rest = new List<CRestaurantModel>();
             if (read.HasRows)
@@ -47,10 +49,12 @@ namespace FOReserva.Servicio
                     int id = read.GetInt32(0);
                     string nombre = read.GetString(1);
                     string dir = read.GetString(2);
+                    string city = read.GetString(3);
                     CRestaurantModel resta = new CRestaurantModel();
                     resta.Id = id;
                     resta.Name = nombre;
                     resta.Addres = dir;
+                    resta.CityName = city;
                     lista_rest.Add(resta);
                 }
             }
@@ -85,12 +89,9 @@ namespace FOReserva.Servicio
         
         public void CrearReserva(CReservation_Restaurant reserva)
         {
-            string query =
-            @"INSERT INTO Reserva ( Tipo, Reserva_Nombre, Fecha, Hora,
-            Cantidad_Personas, FK_RESTAURANTE, FK_USUARIO) 
-            VALUES('"+reserva.GetType()+@"','"+reserva.Name+@"',
-            convert(date, '2016-12-20'), '"+reserva.Time+"',"+reserva.Count+","+
-            @"1, 4)";
+
+            string query = "INSERT INTO Reserva_Restaurante ( Reserva_Nombre, Fecha, Hora,Cantidad_Personas, FK_RESTAURANTE, FK_USUARIO) VALUES( '"+reserva.Name+"',convert(date, '"+reserva.Date+"'),'"+reserva.Time+"',"+reserva.Count+","+reserva.IdRestaurant+", 2)";
+            this.Executer(query);
             CloseConnection();
         }
     }
