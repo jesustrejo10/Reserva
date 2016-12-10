@@ -11,17 +11,20 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
        private String _correoCampoTexto;
        private String _claveCampoTexto;
        private String _nombreUsuarioTexto;
+       private String _usuarioEstatus;
 
 
        public Cgestion_seguridad_ingreso()
        {
        }
         
-        public Cgestion_seguridad_ingreso(String correo, String clave, String nombre)
+        public Cgestion_seguridad_ingreso(String correo, String clave, String nombre, String status)
         {
             this._correoCampoTexto = correo;
             this._claveCampoTexto = clave;
             this._nombreUsuarioTexto = nombre;
+            this._usuarioEstatus = status;
+
         }
 
         /// <summary>
@@ -35,13 +38,17 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
         {
             M01SQL bd = new M01SQL();
             Cgestion_seguridad_ingreso verificacion = bd.UsuarioEnBD(_correoCampoTexto);
-            if (verificacion._correoCampoTexto.Equals(_correoCampoTexto) && verificacion._claveCampoTexto.Equals(_claveCampoTexto))
+            if (verificacion!=null && verificacion._correoCampoTexto.Equals(_correoCampoTexto) && verificacion._claveCampoTexto.Equals(_claveCampoTexto))
             {
                 return verificacion;
             }
-            else
+            else {
+                if (verificacion != null && !verificacion._correoCampoTexto.Equals(""))
+                    bd.IncrementarIntentos(_correoCampoTexto);
                 throw new Cvalidar_usuario_Exception("Usuario o contraseña incorrecto");
-            /*
+            
+            }
+                /*
             if ("admin@admin.com".Equals(_correoCampoTexto) && "123".Equals(_claveCampoTexto))
             {
                 return true;
@@ -52,9 +59,9 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
 
         public Boolean EstaActivo() 
         {
-            M01SQL bd = new M01SQL();
-            String estatus = bd.UsuarioEstatus(this._correoCampoTexto);
-            if (estatus.ToLower().Equals("activo"))
+           // M01SQL bd = new M01SQL();
+          //  String estatus = bd.UsuarioEstatus(this._correoCampoTexto);
+            if (this._usuarioEstatus.ToLower().Equals("activo"))
             {
                 return true;
             }
@@ -72,6 +79,29 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
             {
                 return false; // Creo que aqui deberia lanzar una excepcion
             }
+        }
+
+        public Boolean ResetearIntentos()
+        {
+            M01SQL bd = new M01SQL();
+            if (bd.ResetearIntentos(this._correoCampoTexto))
+            {
+                return true;
+            }
+            else
+            {
+                return false; // Creo que aqui deberia lanzar una excepcion
+            }
+        }
+
+        public Boolean VerificarIntentos()
+        {
+            M01SQL bd = new M01SQL();
+            int intentos = bd.NumeroIntentos(this._correoCampoTexto);
+            if (intentos<3)
+                return true;
+            else
+                return false;
         }
 
         public String correoCampoTexto
