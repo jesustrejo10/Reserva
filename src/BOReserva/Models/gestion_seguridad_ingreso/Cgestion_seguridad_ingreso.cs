@@ -77,6 +77,7 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
         }
 
 
+
         #region Get y Set
         public String correoCampoTexto
         {
@@ -99,6 +100,7 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
         #endregion
 
     }
+
 
     /*
 ﻿using BOReserva.Servicio;
