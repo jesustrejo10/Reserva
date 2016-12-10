@@ -55,17 +55,26 @@ namespace BOReserva.Content.Controllers
                     else
                     {
                         ingreso.BloquearUsuario();
-                        TempData["Mensaje"] = "Su usuario ha sido bloqueado. Por favor contacte al administrador.";
-                        return RedirectToAction("M01_Login", "gestion_seguridad_ingreso");
+                        //TempData["Mensaje"] = "Su usuario ha sido bloqueado. Por favor contacte al administrador.";
+                        //return RedirectToAction("M01_Login", "gestion_seguridad_ingreso");
                     }
                 }
-                else
-                {
-                    TempData["Mensaje"] = "Su usuario ha sido bloqueado. Por favor contacte al administrador.";
-                    return RedirectToAction("M01_Login", "gestion_seguridad_ingreso");
-                }
+                //else
+                //{
+                //    TempData["Mensaje"] = "Su usuario ha sido bloqueado. Por favor contacte al administrador.";
+                //    return RedirectToAction("M01_Login", "gestion_seguridad_ingreso");
+                //}
             }
             catch (Cvalidar_usuario_Exception e)
+            {
+                TempData["Mensaje"] = e.Message;
+            }
+            catch (Cvalidar_bloqueo_exception e)
+            {
+                ingreso.BloquearUsuario();
+                TempData["Mensaje"] = e.Message;
+            }
+            catch (Cvalidar_status_exception e)
             {
                 TempData["Mensaje"] = e.Message;
             }

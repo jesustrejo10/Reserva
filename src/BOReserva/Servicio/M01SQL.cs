@@ -11,7 +11,7 @@ namespace BOReserva.Servicio
     public class M01SQL
     {
         private SqlConnection conexion = null;
-        string stringDeConexion = "Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617b;";
+        string stringDeConexion = "Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617a;";
 
         public Cgestion_seguridad_ingreso UsuarioEnBD(String usuario)
         {
@@ -45,7 +45,7 @@ namespace BOReserva.Servicio
             catch (SqlException e)
             {
                 throw  e;
-                //return null;
+              //  return null;
             }
             catch (Exception e)
             {
@@ -98,7 +98,7 @@ namespace BOReserva.Servicio
             }
             catch (SqlException e)
             {
-                return false;
+                throw e;
             }
             catch (Exception e)
             {
@@ -122,8 +122,7 @@ namespace BOReserva.Servicio
             }
             catch (SqlException e)
             {
-                System.Diagnostics.Debug.WriteLine("El error esta en insertarlogin");
-                return false;
+                throw e;
             }
             catch (Exception e)
             {
@@ -158,7 +157,7 @@ namespace BOReserva.Servicio
             }
             catch (Exception e)
             {
-                return false;
+                throw e;
             }        
         }
 
@@ -179,8 +178,7 @@ namespace BOReserva.Servicio
             }
             catch (SqlException e)
             {
-                System.Diagnostics.Debug.WriteLine("El error esta en resetear intentos");
-                return false;
+                throw e;
 
             }
             catch (Exception e)
@@ -212,8 +210,8 @@ namespace BOReserva.Servicio
             }
             catch (SqlException e)
             {
-                System.Diagnostics.Debug.WriteLine("El error esta en numero intentos");
-                return -1;
+                throw e;
+               // return -1;
             }
             catch (Exception e)
             {

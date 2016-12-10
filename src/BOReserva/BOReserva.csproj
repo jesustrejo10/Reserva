@@ -229,6 +229,7 @@
     <Compile Include="Models\gestion_aviones\CAgregarAvion.cs" />
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cgestion_seguridad_ingreso.cs" />
+    <Compile Include="Models\gestion_seguridad_ingreso\Cvalidar_bloqueo_exception.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cvalidar_status_exception.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cvalidar_usuario_Exception.cs" />
     <Compile Include="Models\gestion_boletos\CBuscarVuelo.cs" />

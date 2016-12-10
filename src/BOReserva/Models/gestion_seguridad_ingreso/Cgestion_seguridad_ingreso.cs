@@ -72,7 +72,8 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
                 return true;
             }
             else
-                return false;
+                throw new Cvalidar_status_exception("Usuario Inactivo contacte administrador");
+
 
         }
 
@@ -109,6 +110,7 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
             if (intentos < 3)
                 return true;
             else
+                throw new Cvalidar_bloqueo_exception("Usuario Bloqueado Contacte administrador");  
                 return false;
         }
 
