@@ -24,6 +24,8 @@ namespace FOReserva.Models
             this._time = time;
         }
 
+        public ReservationModels() : base() { }
+
         /*Fecha de la reserva*/
         public string Date
         {
