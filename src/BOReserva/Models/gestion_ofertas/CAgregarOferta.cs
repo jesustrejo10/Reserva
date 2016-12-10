@@ -12,7 +12,7 @@ namespace BOReserva.Models.gestion_ofertas
 
         public String _nombreOferta { get; set; }
 
-        public String _nombrePaquete { get; set; }
+        public List<CPaquete> _nombrePaquete { get; set; }
 
         public float _porcentajeOferta { get; set; }
 
