@@ -4,13 +4,23 @@
 <script src="@Url.Content("~/Scripts/jquery-3.1.1.min.js")"></script>
 <script src="@Url.Content("~/Scripts/select2/js/select2.min.js")"></script>
 
+<!-- DataTables -->
+<script src="../../Content/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="../../Content/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="../../Content/plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="../../Content/dist/js/app.min.js"></script>
+<!-- page script -->
+
 <script type="text/javascript">
 $(document).ready(function() {
     $(".gestionver-seleccion-restaurante").select2();
+    $("#m10-ver-restaurantes").DataTable();
 });
 </script>
-
-<h1>Hola!</h1>
 
 <select class="gestionver-seleccion-restaurante">
     @if(Model._listaRestaurantes != null)
