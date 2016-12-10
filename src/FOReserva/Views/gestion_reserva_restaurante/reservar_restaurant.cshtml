@@ -69,7 +69,7 @@
                   <!-- CANTIDAD DE PERSONAS  Y  VALIDACIONES-->
                 <div class="form-group">
                     <label>Numero de personas:</label>
-                    <select name="number_person" id="number_person" class="form-control pointer" required>
+                    <select name="number_person" id="number_person" class="form-control" required>
                         <option value="1" selected>1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -122,10 +122,8 @@
         $('.datepicker').datepicker({
             orientation: "bottom",
             format: 'yyyy-mm-dd',
-            startDate: '-3d',
-            minDate: 'today',
-            defaultDate: null,
-           
+            startDate: '0d',
+            endDate: '+2m'
         });
         $('#datepicker').datepicker();
 
