@@ -278,7 +278,7 @@ jQuery(document).ready(function () {
                 }
             });
 
-        var url = '/gestion_diarios/gestion_diariosImagenes';
+        var url = '/gestion_vuelos/gestion_vuelosImagenes';
         var method = 'GET';
         var data = '';
 
@@ -296,7 +296,6 @@ jQuery(document).ready(function () {
                     alert(errorThrown);
                 }
             });
-
 
     });
 });

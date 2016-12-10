@@ -238,6 +238,10 @@
     <Compile Include="Models\gestion_boletos\CVuelo.cs" />
     <Compile Include="Models\gestion_hoteles\CGestionHoteles_CrearHotel.cs" />
     <Compile Include="Models\gestion_lugares\CLugarModelo.cs" />
+    <Compile Include="Models\gestion_roles\CListaGenerica.cs" />
+    <Compile Include="Models\gestion_roles\CModulo_detallado.cs" />
+    <Compile Include="Models\gestion_roles\CModulo_general.cs" />
+    <Compile Include="Models\gestion_roles\CRoles.cs" />
     <Compile Include="Models\gestion_ruta_comercial\CAgregarRuta.cs" />
     <Compile Include="Models\gestion_ruta_comercial\CGestion_ruta.cs" />
     <Compile Include="Models\gestion_ruta_comercial\CRuta.cs" />
@@ -557,6 +561,7 @@
     <Content Include="Views\gestion_ofertas\placeholder.html" />
     <Content Include="Views\gestion_restaurantes\M10_GestionRestaurantes.html" />
     <Content Include="Views\gestion_restaurantes\placeholder.html" />
+    <Content Include="Views\gestion_roles\M13_Roles.html" />
     <Content Include="Views\gestion_roles\placeholder.html" />
     <Content Include="Views\gestion_ruta_comercial\placeholder.html" />
     <Content Include="Views\gestion_seguridad_ingreso\placeholder.html" />
@@ -1435,6 +1440,7 @@
     <Content Include="Views\gestion_ruta_comercial\AgregarRutasComerciales.cshtml" />
     <Content Include="Views\gestion_ruta_comercial\DetallesRutasComerciales.cshtml" />
     <Content Include="Views\gestion_roles\M13_AgregarRol.cshtml" />
+    <Content Include="Views\gestion_roles\M13_VisualizarRol.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1543,7 +1549,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:10778/</IISUrl>
+          <IISUrl>http://localhost:50429/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
