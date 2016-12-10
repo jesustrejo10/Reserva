@@ -513,7 +513,6 @@ namespace BOReserva.Servicio
         }
 
         /* FIN DE FUNCIONES PARA MODULO 10 BO (RESTAURANTES) */
-
         /* INICIO DE FUNCIONES COMUNES */
 
         //Método para la consulta de todos los lugares, sin parámetro y retornando una lista de modelos de lugar.
@@ -623,12 +622,10 @@ namespace BOReserva.Servicio
         }
 
 
-
-
         //Procedimiento del Modulo 13 para retornar lista de los modulos generales
-        public List<CModulo_general> consultarLosModulos()
+        public CListaGenerica<CModulo_general> consultarLosModulos()
         {
-            List<CModulo_general> modulo_general = new List<CModulo_general>();
+            CListaGenerica<CModulo_general> modulo_general = new CListaGenerica<CModulo_general>();
             String nombre_modulo;
 
             try
@@ -648,11 +645,11 @@ namespace BOReserva.Servicio
                 {
                     var entrada = new CModulo_general();
                     {
-                        nombre_modulo = lector.GetSqlString(1).ToString();
+                        nombre_modulo = lector.GetSqlString(0).ToString();
 
 
                     };
-                    modulo_general.Add(entrada);
+                    modulo_general.agregarElemento(entrada);
                 }
 
 

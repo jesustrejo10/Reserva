@@ -36,6 +36,10 @@ namespace BOReserva.Models.gestion_roles
             return _listaGenerica.GetEnumerator();
         }
 
+
+
+
+
         /// <summary>
         /// Método para obtener el enumerador de la lista
         /// </summary>
