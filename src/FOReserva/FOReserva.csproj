@@ -274,12 +274,9 @@
       <DependentUpon>ReservaDB.dbml</DependentUpon>
     </Compile>
     <Compile Include="Servicio\manejadorSQL.cs" />
-<<<<<<< HEAD
     <Compile Include="Servicio\ManejadorSQLRevision.cs" />
-=======
     <Compile Include="Servicio\ManejadorSQLDiarios.cs" />
     <Compile Include="Servicio\ManejadorSQLMuestraRevision.cs" />
->>>>>>> refs/remotes/origin/Develop
     <Compile Include="Servicio\ManejadorSQLException.cs" />
     <Compile Include="Servicio\ManejadorSQLReservaRestaurant.cs" />
   </ItemGroup>
@@ -3071,15 +3068,15 @@
     <Content Include="Views\gestion_planificacion_vacaciones\gestion_itinerario.cshtml" />
     <Content Include="Views\gestion_revision\gestion_ListRevicion.cshtml" />
     <Content Include="Views\gestion_revision\gestion_revision.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\gestion_revision\consultar_revision.cshtml" />
     <Content Include="Views\gestion_revision\crear_revision.cshtml" />
     <Content Include="Views\gestion_revision\eliminar_revision.cshtml" />
     <Content Include="Views\gestion_revision\editar_revision.cshtml" />
-=======
     <Content Include="Views\gestion_revision\Consultar_Revision.cshtml" />
     <Content Include="Views\gestion_diarios\gestion_diarios_resultados.cshtml" />
->>>>>>> refs/remotes/origin/Develop
+    <Content Include="Views\gestion_reserva_restaurante\lista_reserva_restaurantes.cshtml" />
+    <Content Include="Views\gestion_reserva_restaurante\error_conexion.cshtml" />
+    <Content Include="Views\gestion_reserva_restaurante\_NoHayResultados.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

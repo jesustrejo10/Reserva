@@ -1,4 +1,5 @@
 ﻿using FOReserva.Models.Restaurantes;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 
@@ -62,6 +63,7 @@ namespace FOReserva.Servicio
             return lista_rest;
         }
 
+        /*Metodo de busqueda del restaurante en la DB*/
         public CRestaurantModel buscarRest(int rest_id)
         {
             string query = "Select rst_id, rst_nombre, rst_direccion, rst_descripcion, lug_nombre From Restaurante, lugar where rst_id=" + rest_id + "and fk_lugar = lug_id";
@@ -87,14 +89,40 @@ namespace FOReserva.Servicio
             return rest;
         }
 
-
-        
+        /*Metodo que crea una reserva*/
         public void CrearReserva(CReservation_Restaurant reserva)
         {
-
             string query = "INSERT INTO Reserva_Restaurante ( Reserva_Nombre, Fecha, Hora,Cantidad_Personas, FK_RESTAURANTE, FK_USUARIO) VALUES( '"+reserva.Name+"',convert(date, '"+reserva.Date+"'),'"+reserva.Time+"',"+reserva.Count+","+reserva.IdRestaurant+", 2)";
             this.Executer(query);
             CloseConnection();
+        }
+
+        public List<CReservation_Restaurant> buscarReservas() {
+            string query = "Select ID, Reserva_Nombre, Fecha, Hora, Cantidad_Personas, rst_nombre from reserva_restaurante, restaurante where FK_RESTAURANTE = rst_id";
+            SqlDataReader read = Executer(query);
+            List<CReservation_Restaurant> lista_rest = new List<CReservation_Restaurant>();
+            if (read.HasRows)
+            {
+                while (read.Read())
+                {
+                    int id = read.GetInt32(0);
+                    string nombre_reserva = read.GetString(1);
+                    string fecha = read.GetDateTime(2).ToString();
+                    string hora = read.GetString(3);
+                    int cantidad = read.GetInt32(4);
+                    string name_rest = read.GetString(5);
+                    CReservation_Restaurant reserv = new CReservation_Restaurant();
+                    reserv.Id = id;
+                    reserv.Name = nombre_reserva;
+                    reserv.Date = fecha;
+                    reserv.Time = hora;
+                    reserv.Count = cantidad;
+                    reserv.Restaurant = new CRestaurantModel();
+                    reserv.Restaurant.Name = name_rest;
+                    lista_rest.Add(reserv);
+                }
+            }
+            return lista_rest;
         }
     }
 }

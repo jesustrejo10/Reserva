@@ -28,6 +28,8 @@ namespace FOReserva.Models.Restaurantes
             this._idUser = idUser;
             this._idRestaurant = idRestaurant;
         }
+
+        public CReservation_Restaurant() : base() { }
         
         /*Metodos Get y Set de la cantidad de personas de la reserva*/
         public int Count

@@ -16,7 +16,7 @@
             <i class="fa fa-calendar-check-o" aria-hidden="true"></i><p><span>Fecha: </span>@Model.Date</p>
             <i class="fa fa-clock-o" aria-hidden="true"></i> <p><span>Hora: </span>@Model.Time</p>
             <i class="fa fa-users" aria-hidden="true"></i> <p><span>Mesa para: </span>@Model.Count</p>
-            <center> <a href="reservas_restaurantes.html">Mis Reservas</a></center>
+            <center> <a href="@Url.Action("lista_reserva_restaurantes","gestion_reserva_restaurante")">Mis Reservas</a></center>
         </div>
 
     </div>
@@ -26,7 +26,7 @@
             <div style="height: 443.6px;background-image: url('../Images/restaurant_generic.jpg');background-repeat: no-repeat;background-size: cover;">
                 <div class="absolute text-left">
                     <h2>  <b>@Model.Restaurant.Name</b>  </h2>
-                    <p style="color: #fff;">Madrid</p>
+                    <p style="color: #fff;">@Model.Restaurant.CityName</p>
                     <p style="color: #fff;" class="font-lato margin-top-30 size-16 hidden-sm hidden-xs"><b>@Model.Restaurant.Addres</p>
                 </div>
             </div>
