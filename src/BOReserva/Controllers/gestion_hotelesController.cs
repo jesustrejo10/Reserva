@@ -13,6 +13,7 @@ namespace BOReserva.Controllers
         public ActionResult M09_GestionHoteles_Crear()
         {
             CGestionHoteles_CrearHotel crear = new CGestionHoteles_CrearHotel();
+            
             return PartialView(crear);
         }
 
@@ -39,6 +40,11 @@ namespace BOReserva.Controllers
         {
             return PartialView();
         }
+
+        public static List<SelectListItem> pais() {
+            return CGestionHoteles_SelectPaisModel.pais();
+        }
+
     }
 
 

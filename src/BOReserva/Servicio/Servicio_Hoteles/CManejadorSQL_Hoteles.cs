@@ -1,18 +1,16 @@
-﻿using System;
+﻿using BOReserva.Models.gestion_hoteles;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
-using BOReserva.Models;
-using BOReserva.Models.gestion_aviones;
-using BOReserva.Models.gestion_hoteles;
 
-namespace BOReserva.Servicio
+namespace BOReserva.Servicio.Servicio_Hoteles
 {
-    public class manejadorSQL
+    public class CManejadorSQL_Hoteles
     {
         //Inicializo el string de conexion en el constructor
-        public manejadorSQL()
+        public CManejadorSQL_Hoteles()
         {
             stringDeConexion = "Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617a;";
         }
@@ -21,8 +19,9 @@ namespace BOReserva.Servicio
         //string que contendra la conexion a la bd
         private string stringDeConexion = null;
 
-        //Procedimiento del Modulo 2 para agregar aviones a la base de datos.
-        public Boolean insertarAvion(CAgregarAvion model)
+
+        //Procedimiento del Modulo 9 para agregar hoteles a la base de datos.
+        public Boolean insertarHotel(CGestionHoteles_CrearHotel model)
         {
             try
             {
@@ -33,7 +32,8 @@ namespace BOReserva.Servicio
                 //uso el SqlCommand para realizar los querys
                 SqlCommand query = conexion.CreateCommand();
                 //ingreso la orden del query
-                query.CommandText = "INSERT INTO Avion VALUES ('" +model._matriculaAvion+ "','" +model._modeloAvion+ "'," +model._capacidadPasajerosTurista+ " , " +model._capacidadPasajerosEjecutiva+ "," +model._capacidadPasajerosVIP+ ", " +model._capacidadEquipaje+ ", " +model._distanciaMaximaVuelo+ ", " +model._velocidadMaximaDeVuelo+ ", " +model._capacidadMaximaCombustible+ ");";
+                query.CommandText = "INSERT INTO Hotel VALUES ('" + model._nombre + "','" + model._estrellas + "',"
+                    + model._puntuacion + " , " + model._direccion + "," + model._paginaWeb + ");";
                 //creo un lector sql para la respuesta de la ejecucion del comando anterior               
                 SqlDataReader lector = query.ExecuteReader();
                 //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
@@ -47,15 +47,43 @@ namespace BOReserva.Servicio
                 conexion.Close();
                 return true;
             }
-            catch(SqlException e)
+            catch (SqlException e)
             {
                 return false;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }
-            
+        }
+
+        public String[] MListarpaisesBD()
+        {
+            String[] listapaises = new String[5000];
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "SELECT lug_nombre FROM Lugar WHERE lug_tipo_lugar = 'pais'";
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                int i = 0;
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        listapaises[i] = reader[0].ToString();
+                        i++;
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return listapaises;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return null;
+            }
         }
     }
 }

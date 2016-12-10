@@ -226,6 +226,9 @@
     <Compile Include="Models\gestion_boletos\CBuscarVuelo.cs" />
     <Compile Include="Models\gestion_hoteles\CGestionHoteles_CrearHotel.cs" />
     <Compile Include="Models\gestion_hoteles\CGestionHoteles_EditarHotel.cs" />
+    <Compile Include="Models\gestion_hoteles\CGestionHoteles_SelectCiudadModel.cs" />
+    <Compile Include="Models\gestion_hoteles\CGestionHoteles_SelectEstrellasModel.cs" />
+    <Compile Include="Models\gestion_hoteles\CGestionHoteles_SelectPaisModel.cs" />
     <Compile Include="Models\gestion_usuarios\AgregarUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\ConexionBD.cs" />
     <Compile Include="Models\gestion_usuarios\CUsuario.cs" />
@@ -251,6 +254,7 @@
     <Compile Include="Servicio\manejadorSQL.cs" />
     <Compile Include="Servicio\Servicio_Boletos\Ciudades.cs" />
     <Compile Include="Servicio\Servicio_Boletos\manejadorSQL_Boletos.cs" />
+    <Compile Include="Servicio\Servicio_Hoteles\CManejadorSQL_Hoteles.cs" />
     <Compile Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx.cs">
       <DependentUpon>GestionDeAutomoviles.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
