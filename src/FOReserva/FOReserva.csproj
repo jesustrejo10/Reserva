@@ -216,13 +216,22 @@
     <Compile Include="Models\ORM\M20_ActualizarEstadoReservaHabitacion_Result.cs">
       <DependentUpon>ModelDBReserva.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ORM\M20_BuscarHotelesPorCiudad_Result.cs">
+      <DependentUpon>ModelDBReserva.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ORM\M20_DetalleReservaHabitacion_Result.cs">
+      <DependentUpon>ModelDBReserva.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORM\M20_GenerarReservaHabitacion_Result.cs">
       <DependentUpon>ModelDBReserva.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ORM\M20_GuardarReservaHabitacion_Result.cs">
       <DependentUpon>ModelDBReserva.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ORM\M20_HotelHistorialReservaHabitacion_Result.cs">
+      <DependentUpon>ModelDBReserva.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORM\M20_ObtenerCiudades_Result.cs">
       <DependentUpon>ModelDBReserva.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ORM\M20_UsuarioHistorialReservaHabitacion_Result.cs">
@@ -243,10 +252,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelDBReserva.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\ReservaHabitacion\Cvista_ReservaHabitacion.cs" />
+    <Compile Include="Models\ReservaHabitacion\CCiudad.cs" />
+    <Compile Include="Models\Hoteles\CHotel.cs" />
+    <Compile Include="Models\ReservaHabitacion\CReservaHabitacion.cs" />
+    <Compile Include="Models\Usuarios\CUsuario.cs" />
+    <Compile Include="Models\ReservaHabitacion\Cvista_BuscarHotel.cs" />
+    <Compile Include="Models\ReservaHabitacion\Cvista_ReservarHabitacion.cs" />
     <Compile Include="Models\ReservaHabitacion\Errores\ReservaHabitacionException.cs" />
-    <Compile Include="Models\ReservaHabitacion\TMPHotel.cs" />
-    <Compile Include="Models\ReservaHabitacion\TMPUsuario.cs" />
     <Compile Include="Models\Restaurantes\CReservation_Restaurant.cs" />
     <Compile Include="Models\Restaurantes\CRestaurantModel.cs" />
     <Compile Include="Models\Revision\CListRevision.cs" />
@@ -1662,7 +1674,8 @@
     <Content Include="Models\Restaurantes\placeholder.html" />
     <Content Include="Models\Vuelos\placeholder.html" />
     <Content Include="Scripts\cargadorPestanas.js" />
-    <Content Include="Scripts\hola.js" />
+    <Content Include="Scripts\customValidator.js" />
+    <Content Include="Scripts\uniqueId.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -1681,6 +1694,7 @@
     <Content Include="Views\ajax\dummy-lightbox.html" />
     <Content Include="Views\ajax\dummy-modal-ajax.html" />
     <Content Include="Views\busqueda_compra_boletos\placeholder.html" />
+    <Content Include="Views\gestion_diario_viaje\placeholder.html" />
     <Content Include="Views\gestion_planificacion_vacaciones\placeholder.html" />
     <Content Include="Views\gestion_reclamos\placeholder.html" />
     <Content Include="Views\gestion_reserva_auto\placeholder.html" />
@@ -3046,6 +3060,9 @@
     <Content Include="Views\gestion_reserva_habitaciones\editar_reserva.cshtml" />
     <Content Include="Views\gestion_reserva_habitaciones\mis_reservas.cshtml" />
     <Content Include="Views\Shared\_MenuPerfil.cshtml" />
+    <Content Include="Views\gestion_reserva_habitaciones\buscar_hoteles.cshtml" />
+    <Content Include="Views\gestion_reserva_habitaciones\hoteles_con_habitaciones.cshtml" />
+    <Content Include="Views\gestion_reserva_habitaciones\pagina_inicial.cshtml" />
     <Content Include="Views\gestion_planificacion_vacaciones\gestion_itinerario.cshtml" />
     <Content Include="Views\gestion_revision\gestion_ListRevicion.cshtml" />
     <Content Include="Views\gestion_revision\gestion_revision.cshtml" />
