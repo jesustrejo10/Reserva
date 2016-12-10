@@ -35,6 +35,20 @@ namespace BOReserva.Controllers
             return PartialView();
         }
 
+        public ActionResult M06_ConsultarComida(int id)
+        {
+            //manejadorSQL sql = new manejadorSQL();
+           // CAvion avion = new CAvion();
+           // avion = sql.consultarAvion(id);
+           // CModificarAvion modelo = new CModificarAvion(avion);
+            return PartialView("M06_EditarComida");
+        }
+
+        public ActionResult M06_VisualizarComidas()
+        {
+            return PartialView();
+        }
+
        
 	}
 }

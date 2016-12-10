@@ -541,7 +541,6 @@
     <Content Include="Views\gestion_automoviles\M08_VisualizarAutomoviles.html" />
     <Content Include="Views\gestion_aviones\M02_GestionAviones.html" />
     <Content Include="Views\gestion_aviones\placeholder.html" />
-    <Content Include="Views\gestion_comida_vuelo\M06_AgregarEditarComida.html" />
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarPorVuelo.html" />
     <Content Include="Views\gestion_comida_vuelo\M06_ConsultarComidas.html" />
     <Content Include="Views\gestion_comida_vuelo\placeholder.html" />
@@ -1413,7 +1412,6 @@
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarComida.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarPorVuelo.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_EditarComida.cshtml" />
-    <Content Include="Views\gestion_comida_vuelo\M06_AgregarEditarComida.cshtml" />
     <Content Include="Views\gestion_usuarios\M12_Index.cshtml" />
     <Content Include="Views\gestion_usuarios\M12_AgregarUsuario.cshtml" />
     <Content Include="Views\gestion_usuarios\M12_ModificarUsuario.cshtml" />
@@ -1435,15 +1433,14 @@
     <Content Include="Views\gestion_ruta_comercial\AgregarRutasComerciales.cshtml" />
     <Content Include="Views\gestion_ruta_comercial\DetallesRutasComerciales.cshtml" />
     <Content Include="Views\gestion_roles\M13_AgregarRol.cshtml" />
+    <Content Include="Views\gestion_comida_vuelo\M06_VisualizarComidas.cshtml" />
+    <Content Include="Views\gestion_comida_vuelo\M06_VisualizarVuelos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-<<<<<<< HEAD
     <Folder Include="Scripts\Scripts_ComidaVuelo\" />
-=======
     <Folder Include="Views\gestion_roles\css\" />
     <Folder Include="Views\gestion_roles\js\" />
->>>>>>> Develop
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap\css\bootstrap.css.map" />

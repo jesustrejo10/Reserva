@@ -226,6 +226,25 @@
                 }
             });
     });
+    $("#visualizarComidas").click(function (e) {
+        //M06_AgregarPorVuelo
+        e.preventDefault();
+        var url = '/gestion_comida_vuelo/M06_VisualizarComidas';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                }
+            });
+    });
     //FIN M06_Gestion_Comida
 
 
