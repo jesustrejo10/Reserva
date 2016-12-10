@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FOReserva.Models.Diarios;
+using FOReserva.Servicio;
 
 namespace FOReserva.Controllers
 {
@@ -17,11 +18,19 @@ namespace FOReserva.Controllers
         {
             CDiarioModel model = new CDiarioModel();
             return PartialView(model);
+            
         }
 
         public ActionResult gestion_diariosImagenes()
         {            
             return PartialView();
+        }
+
+        public ActionResult gestion_diarios_resultados()
+        {
+            ManejadorSQLDiarios manejador = new ManejadorSQLDiarios();
+            List<CDiarioModel> lista = manejador.buscarDV();
+            return PartialView(lista);
         }
 
         [HttpPost]

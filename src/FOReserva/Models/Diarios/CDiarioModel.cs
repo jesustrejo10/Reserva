@@ -45,7 +45,7 @@ namespace FOReserva.Models.Diarios
         }
 
 
-  public CDiarioModel() :base (){ }
+        public CDiarioModel() :base (){ }
         
         //Metodos Get y Set
         
