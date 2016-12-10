@@ -64,7 +64,7 @@ namespace FOReserva.Servicio
 
         public CRestaurantModel buscarRest(int rest_id)
         {
-            string query = "Select rst_id, rst_nombre, rst_direccion, rst_descripcion From Restaurante where rst_id=" + rest_id;
+            string query = "Select rst_id, rst_nombre, rst_direccion, rst_descripcion, lug_nombre From Restaurante, lugar where rst_id=" + rest_id + "and fk_lugar = lug_id";
             SqlDataReader read = Executer(query);
             CRestaurantModel rest = new CRestaurantModel();
             if (read.HasRows)
@@ -75,10 +75,12 @@ namespace FOReserva.Servicio
                     string nombre = read.GetString(1);
                     string dir = read.GetString(2);
                     string descripcion = read.GetString(3);
+                    string city = read.GetString(4);
                     rest.Id = id;
                     rest.Name = nombre;
                     rest.Description = descripcion;
                     rest.Addres = dir;
+                    rest.CityName = city;
                 }
             }
             CloseConnection();
