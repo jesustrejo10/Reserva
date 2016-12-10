@@ -53,10 +53,7 @@ namespace BOReserva.Controllers
             automovil._pais = vehiculo._pais;
             automovil._ciudad = vehiculo._ciudad;
             return PartialView(automovil);
-        }
-
-
-     
+        }  
 
         public ActionResult M08_ModificarAutomovil(String matricula)
         {
@@ -145,8 +142,6 @@ namespace BOReserva.Controllers
             return _color;
         }
 
-       
-
         [HttpPost]
         public JsonResult saveVehicle(CAgregarAutomovil model)
         {
@@ -224,9 +219,7 @@ namespace BOReserva.Controllers
             Debug.WriteLine("IMPRIMIENDO UN MENSAJE" + matricula);
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
-
-
-        
+   
         public JsonResult deleteVehicle(String matricula)
         {
             String _matricula = matricula;
@@ -252,8 +245,6 @@ namespace BOReserva.Controllers
             int modifico_si_no = carro.MBorrarvehiculoBD(_matricula); //SE BORRA LA BD RETORNA 1 SI SE  BORRA Y 0 SI NO LO LOGRA
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
-
-
 
         public static List<SelectListItem> ciudades()
         {

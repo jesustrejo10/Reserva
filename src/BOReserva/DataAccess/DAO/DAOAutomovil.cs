@@ -1,15 +1,14 @@
-﻿using BOReserva.DataAccess.Model;
+﻿using BOReserva.DataAccess.Domain;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.Models.gestion_automoviles
+namespace BOReserva.DataAccess.DAO
 {
-    public class CBasededatos_vehiculo
+    public class DAOAutomovil
     {
         //private String connetionString = @"Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User ID=DB_A1380A_reserva_admin;Password = ucabds1617a";
         private String connetionString = ConfigurationManager.ConnectionStrings["DB_A1380A_reserva"].ConnectionString; //de esta forma el string de conexion se encuentra es en el web.config 
@@ -18,12 +17,11 @@ namespace BOReserva.Models.gestion_automoviles
 
         public void probarconexion()
         {
-            //con = new SqlConnection(connetionString);
-            con = Connection.getInstance(connetionString);
+            con = new SqlConnection(connetionString);
             con.Open();
         }
 
-        public int MAgregarVehiculoBD(CAutomovil vehiculo)
+        public int MAgregarVehiculoBD(Automovil vehiculo)
         {
             int fk_ciudad = MBuscarfkciudad(vehiculo._ciudad, vehiculo._pais);
             try
@@ -43,10 +41,14 @@ namespace BOReserva.Models.gestion_automoviles
                 con.Close();
                 return 0;
             }
+            catch (Exception e)
+            {
+                con.Close();
+                return 0;
+            }
         }
 
-
-        public int MModificarVehiculoBD(CAutomovil vehiculo)
+        public int MModificarVehiculoBD(Automovil vehiculo)
         {
             int fk_ciudad = MBuscarfkciudad(vehiculo._ciudad, vehiculo._pais);
             try
@@ -67,12 +69,16 @@ namespace BOReserva.Models.gestion_automoviles
                 con.Close();
                 return 0;
             }
+            catch (Exception e)
+            {
+                con.Close();
+                return 0;
+            }
         }
 
-
-        public List<CAutomovil> MListarvehiculosBD()
+        public List<Automovil> MListarvehiculosBD()
         {
-            List<CAutomovil> listavehiculos = new List<CAutomovil>();
+            List<Automovil> listavehiculos = new List<Automovil>();
             try
             {
                 con = new SqlConnection(connetionString);
@@ -85,7 +91,7 @@ namespace BOReserva.Models.gestion_automoviles
                        //Y  SE AGREGA a listavehiculos
                        var fecha = reader["aut_fecharegistro"];
                        DateTime fecharegistro = Convert.ToDateTime(fecha).Date;
-                       CAutomovil vehiculo = new CAutomovil(reader["aut_matricula"].ToString(), reader["aut_modelo"].ToString(), reader["aut_fabricante"].ToString(),
+                       Automovil vehiculo = new Automovil(reader["aut_matricula"].ToString(), reader["aut_modelo"].ToString(), reader["aut_fabricante"].ToString(),
                                               Int32.Parse(reader["aut_anio"].ToString()), reader["aut_tipovehiculo"].ToString(),
                                               double.Parse(reader["aut_kilometraje"].ToString()), Int32.Parse(reader["aut_cantpasajeros"].ToString()),
                                               double.Parse(reader["aut_preciocompra"].ToString()), double.Parse(reader["aut_precioalquiler"].ToString()),
@@ -105,12 +111,16 @@ namespace BOReserva.Models.gestion_automoviles
                 con.Close();
                 return null;
             }
+            catch (Exception e)
+            {
+                con.Close();
+                return null;
+            }
         }
 
-
-        public CAutomovil MMostrarvehiculoBD(String matricula)
+        public Automovil MMostrarvehiculoBD(String matricula)
         {
-            CAutomovil vehiculo = null;
+            Automovil vehiculo = null;
             try
             {
                 con = new SqlConnection(connetionString);
@@ -125,7 +135,7 @@ namespace BOReserva.Models.gestion_automoviles
                     {
                         var fecha = reader["aut_fecharegistro"];
                         DateTime fecharegistro = Convert.ToDateTime(fecha).Date;
-                        vehiculo = new CAutomovil(reader["aut_matricula"].ToString(), reader["aut_modelo"].ToString(), reader["aut_fabricante"].ToString(),
+                        vehiculo = new Automovil(reader["aut_matricula"].ToString(), reader["aut_modelo"].ToString(), reader["aut_fabricante"].ToString(),
                                                  Int32.Parse(reader["aut_anio"].ToString()), reader["aut_tipovehiculo"].ToString(),
                                                  double.Parse(reader["aut_kilometraje"].ToString()), Int32.Parse(reader["aut_cantpasajeros"].ToString()),
                                                  double.Parse(reader["aut_preciocompra"].ToString()), double.Parse(reader["aut_precioalquiler"].ToString()),
@@ -144,12 +154,13 @@ namespace BOReserva.Models.gestion_automoviles
                 con.Close();
                 return null;
             }
+            catch (Exception e)
+            {
+                con.Close();
+                return null;
             }
+        }
         
-
-
-
-
         public int MBuscarfkciudad (String ciudad, String pais)
         {
             int fk_ciudad = 12;
@@ -179,6 +190,11 @@ namespace BOReserva.Models.gestion_automoviles
                 con.Close();
                 return fk_ciudad;
             }
+            catch (Exception e)
+            {
+                con.Close();
+                return 0;
+            }
         }
 
         public int MBorrarvehiculoBD(String matricula)
@@ -195,6 +211,11 @@ namespace BOReserva.Models.gestion_automoviles
                 return 1;
             }
             catch (SqlException ex)
+            {
+                con.Close();
+                return 0;
+            }
+            catch (Exception e)
             {
                 con.Close();
                 return 0;
@@ -228,6 +249,11 @@ namespace BOReserva.Models.gestion_automoviles
                 con.Close();
                 return _ciudad;
             }
+            catch (Exception e)
+            {
+                con.Close();
+                return null;
+            }
         }
 
         public String MBuscarnombrePais(int ciudad) 
@@ -258,6 +284,11 @@ namespace BOReserva.Models.gestion_automoviles
                 con.Close();
                 return _lugar;
             }
+            catch (Exception e)
+            {
+                con.Close();
+                return null;
+            }
         }
 
         public String[] MListarpaisesBD()
@@ -287,37 +318,12 @@ namespace BOReserva.Models.gestion_automoviles
                 con.Close();
                 return null;
             }
-        }
-
-
-        public int MIdpaisesBD(String pais)
-        {
-            int fk = -1;
-            try
-            {
-                con = new SqlConnection(connetionString);
-                con.Open();
-                String sql = "SELECT lug_id FROM Lugar WHERE lug_nombre = '"+pais+"'";
-                SqlCommand cmd = new SqlCommand(sql, con);
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        fk = Int32.Parse(reader[0].ToString());
-                    }
-                }
-                cmd.Dispose();
-                con.Close();
-                return fk;
-            }
-            catch (SqlException ex)
+            catch (Exception e)
             {
                 con.Close();
-                return fk;
+                return null;
             }
         }
-
-       
 
         public int MDisponibilidadVehiculoBD(string matricula, int activardesactivar)
         {
@@ -325,7 +331,7 @@ namespace BOReserva.Models.gestion_automoviles
             {
                 con = new SqlConnection(connetionString);
                 con.Open();
-                String sql = "UPDATE Automovil SET aut_disponibilidad = "+activardesactivar+" WHERE aut_matricula = '" + matricula + "'";
+                String sql = "UPDATE Automovil SET aut_disponibilidad = " + activardesactivar + " WHERE aut_matricula = '" + matricula + "'";
                 SqlCommand cmd = new SqlCommand(sql, con);
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
@@ -337,6 +343,22 @@ namespace BOReserva.Models.gestion_automoviles
                 con.Close();
                 return 0;
             }
+            catch (Exception e)
+            {
+                con.Close();
+                return 0;
+            }
         }
     }
+
+
+
+
+
+
+
+
+
 }
+
+ 
