@@ -50,10 +50,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BOReserva\BOReserva.csproj">
-      <Project>{8e0911c6-d911-4ca1-ae4f-6c5cbf498d24}</Project>
-      <Name>BOReserva</Name>
-    </ProjectReference>
     <ProjectReference Include="..\FOReserva\FOReserva.csproj">
       <Project>{d0dadc5f-8e3e-49b9-a0c6-8137dc0db215}</Project>
       <Name>FOReserva</Name>

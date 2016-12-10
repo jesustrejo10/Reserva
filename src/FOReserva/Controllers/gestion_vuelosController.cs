@@ -12,7 +12,6 @@ namespace FOReserva.Controllers
         //
         // GET: /Vuelos/
 
-
         public ActionResult gestion_vuelos()
         {
             Cvista_Vuelos model = new Cvista_Vuelos();

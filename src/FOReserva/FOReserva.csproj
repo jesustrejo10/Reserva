@@ -199,6 +199,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\gestion_planificacion_vacacionesController.cs" />
     <Compile Include="Controllers\gestion_diariosController.cs" />
+    <Compile Include="Controllers\gestion_reserva_boletoController.cs" />
     <Compile Include="Controllers\gestion_reserva_habitacionesController.cs" />
     <Compile Include="Controllers\gestion_reserva_restauranteController.cs" />
     <Compile Include="Controllers\gestion_revisionController.cs" />
