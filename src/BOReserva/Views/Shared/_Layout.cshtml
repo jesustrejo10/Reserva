@@ -25,6 +25,7 @@
         <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
         <link rel="stylesheet" href="~/Content/dist/css/skins/_all-skins.min.css">
+
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -264,9 +265,9 @@
                         </a>
                         <ul class="treeview-menu">
                             <li id="m02_agregaravion"><a href="#"> Agregar </a></li>
-                            <li id="m02_editaravion"><a href="#"> Editar </a></li>
-                            <li id="m02_consultaravion"><a href="#"> Consultar </a></li>
-                            <li id="m02_modificaravion"><a href="#"> Modificar </a></li>
+                            <li id="m02_VisualizarAvion"><a href="#"> Visualizar </a></li>
+                            @*<li id="m02_consultaravion"><a href="#"> Consultar </a></li>
+                            <li id="m02_modificaravion"><a href="#"> Modificar </a></li>*@
                         </ul>
                     </li>
                     <!-- FIN MODULO DE AVIONES -->
@@ -292,18 +293,18 @@
                             <i class="fa fa-files-o"></i>
                             <span>Gestión de Boletos</span>
                             <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li id="m05_crearboleto"><a href="#"><i class="fa fa-plus-square-o"></i> Crear </a></li>
+                            <li id="m05VerReserva"><a href="#"><i class="fa fa-plus-square-o"></i>Crear</a></li>
+                            <li id="m05VisualizarBoletos"><a href="#"><i class="fa fa-eye"></i>Visualizar</a></li>
                         </ul>
                     </li>
 
-                    <li>
-                      <a href="modules/gestion_venta_boleto/checkin.html">
-                        <i class="fa fa-book"></i>
-                        <span>Check in</span></a>
-                    </li>
+                    <li id="m05CheckIn"><a href="#"><i class="fa fa-book"></i><span>Check in</span></a></li>
+
+
                     <!-- FIN MODULO DE BOLETOS AEREOS Y CHECK-IN -->
                     <!-- MODULO DE COMIDA POR VUELO -->
                     <li class="treeview">
@@ -320,6 +321,20 @@
                         </ul>
                     </li>
                     <!-- FIN DE MODULO DE COMIDA POR VUELO -->
+                    <!-- MODULO DE RESTAURANTES -->
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-cutlery"></i> <span>Gestión de Restaurantes</span> <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="agregarRestaurantes"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar Nuevo Restaurante</a></li>
+                            <li id="verRestaurantes"><a href="#"><i class="fa fa-eye"></i>Ver Restaurantes</a></li>
+                            <li id="editarRestaurantes"><a href="#"><i class="fa fa-edit"></i>Editar Restaurantes</a></li>
+                        </ul>
+                    </li>
+                    <!-- FIN DE MODULO DE RESTAURANTES -->
                     <!-- MODULO DE EXTRAVIO DE EQUIPAJE -->
                     <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Equipaje</a></li>
                     <!-- FIN DE MODULO DE EXTRAVIO DE EQUIPAJE -->
@@ -353,7 +368,18 @@
                     </li>
                     <!-- FIN DE MODULO DE GESTION DE USUARIOS -->
                     <!-- MODULO DE GESTION DE ROLES -->
-                    <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Roles</a></li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-users"></i> <span>Gestión de Roles</span> <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="m13AgregarRol"><a href="#"><i class="fa fa-plus-square-o"></i>Crear</a></li>
+                            <li id="m13VisualizarRol"><a href="#"><i class="fa fa-eye"></i>Visualizar</a></li>
+                        </ul>
+                    </li>
                     <!-- FIN DE MODULO DE GESTION DE ROLES -->
                     <!-- MODULO DE CRUCEROS -->
                     <li class="treeview">
@@ -404,9 +430,9 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        <footer class="main-footer">
+        @*<footer class="main-footer">
             <div class="pull-right hidden-xs"> <b>Version</b> 2.3.7 </div> <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
-        </footer>
+        </footer>*@
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Create the tabs -->
@@ -631,7 +657,7 @@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="/Content/dist/js/pages/dashboard2.js"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="/Content/dist/js/demo.js"></script>}
+    <script src="/Content/dist/js/demo.js"></script>
 
 </body>
 
