@@ -22,7 +22,7 @@
                                 <div class="col-md-12">
                                     <div class="col-xs-6">
                                         <label for="matriculaAvion">Matrícula del avión (<span style="color:red">*</span>):</label>
-                                        @Html.TextBoxFor(m => m._matriculaAvion, null, new { @class = "form-control", @placeholder = "HK4549", @id = "matriculaAvion", @readonly = "readonly" })
+                                        @Html.TextBoxFor(m => m._matriculaAvion, null, new { @class = "form-control", @placeholder = "HK4549", @id = "matriculaAvion", @readonly = "readonly"})
 
                                     </div>
                                     <div class="col-xs-6">
@@ -38,12 +38,12 @@
                                 <div class="col-md-12">
                                     <div class="col-xs-6">
                                         <label for="modeloAvion">Modelo del avión (<span style="color:red">*</span>):</label>
-                                        @Html.TextBoxFor(m => m._modeloAvion, null, new { @class = "form-control", @placeholder = "Boeing 777", @id = "modeloAvion" })
+                                        @Html.TextBoxFor(m => m._modeloAvion, null, new { @class = "form-control", @placeholder = "Boeing 777", @id = "modeloAvion" , @maxlength=10 , @onblur="checkTextModelo(this)" })
 
                                     </div>
                                     <div class="col-xs-6">
                                         <label for="capacidadPasajerosVIP">Capacidad de clase VIP (<span style="color:red">*</span>):</label>
-                                        @Html.TextBoxFor(m => m._capacidadPasajerosVIP, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadVIP", @min = 0 })
+                                        @Html.TextBoxFor(m => m._capacidadPasajerosVIP, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadVIP", @min = 1 , @onblur = "checkLimite(this)"})
 
 
                                     </div>
@@ -55,12 +55,12 @@
                                 <div class="col-md-12">
                                     <div class="col-xs-6">
                                         <label for="capacidadEquipaje">Capacidad de equipaje (en Kg) (<span style="color:red">*</span>):</label>
-                                        @Html.TextBoxFor(m => m._capacidadEquipaje, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadEquipaje", @min = 0 })
+                                        @Html.TextBoxFor(m => m._capacidadEquipaje, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadEquipaje", @min = 1, @onblur = "checkLimite(this)" })
 
                                     </div>
                                     <div class="col-xs-6">
                                         <label for="capacidadPasajerosEjecutiva">Capacidad de clase ejecutiva (<span style="color:red">*</span>):</label>
-                                        @Html.TextBoxFor(m => m._capacidadPasajerosEjecutiva, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadEjecutiva", @min = 0 })
+                                        @Html.TextBoxFor(m => m._capacidadPasajerosEjecutiva, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadEjecutiva", @min = 1, @onblur = "checkLimite(this)" })
 
                                     </div>
                                 </div>
@@ -72,13 +72,13 @@
 
                                     <div class="col-xs-6">
                                         <label for="capacidadCombustible">Capacidad de combustible (en litros) (<span style="color:red">*</span>):</label>
-                                        @Html.TextBoxFor(m => m._capacidadMaximaCombustible, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadCombustible", @min = 0 })
+                                        @Html.TextBoxFor(m => m._capacidadMaximaCombustible, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadCombustible", @min = 1, @onblur = "checkLimite(this)" })
 
                                     </div>
 
                                     <div class="col-xs-6">
                                         <label for="velocidadMaximaDeVuelo">Velocidad máxima de vuelo (en Km/h) (<span style="color:red">*</span>):</label>
-                                        @Html.TextBoxFor(m => m._velocidadMaximaDeVuelo, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "velocidadMaximaDeVuelo", @min = 0 })
+                                        @Html.TextBoxFor(m => m._velocidadMaximaDeVuelo, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "velocidadMaximaDeVuelo", @min = 1, @onblur = "checkLimite(this)" })
 
                                     </div>
                                     <div class="col-xs-6">
@@ -93,7 +93,7 @@
 
                                     <div class="col-xs-6">
                                         <label for="distanciaMaximaDeVuelo">Distancia máxima de vuelo (en Km) (<span style="color:red">*</span>):</label>
-                                        @Html.TextBoxFor(m => m._distanciaMaximaVuelo, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "distanciaMaximaVuelo", @min = 0 })
+                                        @Html.TextBoxFor(m => m._distanciaMaximaVuelo, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "distanciaMaximaVuelo", @min = 1, @onblur = "checkLimite(this)" })
 
                                     </div>
                                 </div>
