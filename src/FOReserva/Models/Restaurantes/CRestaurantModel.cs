@@ -32,6 +32,14 @@ namespace FOReserva.Models.Restaurantes
             this._close = close;
         }
 
+        public CRestaurantModel
+            (int id, string name, string address )
+            : base(id, name)
+        {
+
+            this._address = address;
+        }
+
         /* Constructor Vacio */
         public CRestaurantModel() :base (){ }
 

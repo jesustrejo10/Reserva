@@ -17,6 +17,7 @@ namespace FOReserva.Models.Restaurantes
         private int _count;
         private int _idUser;
         private int _idRestaurant;
+        private CRestaurantModel _restaurant;
 
         /*Constructor Completo*/
         public CReservation_Restaurant
@@ -26,7 +27,6 @@ namespace FOReserva.Models.Restaurantes
             this._count = count;
             this._idUser = idUser;
             this._idRestaurant = idRestaurant;
-            //this._restaurant = restaurant;
         }
         
         /*Metodos Get y Set de la cantidad de personas de la reserva*/
@@ -46,6 +46,12 @@ namespace FOReserva.Models.Restaurantes
         {
             get { return _idRestaurant; }
             set { _idRestaurant = value; }
+        }
+
+        public CRestaurantModel Restaurant
+        {
+            get { return _restaurant; }
+            set { _restaurant = value; }
         }
 
     }

@@ -79,12 +79,13 @@ namespace FOReserva.Controllers
             return View(restaurante);
         }
 
-        public ActionResult confirma_restaurant(int restaurantID, string name_client, string reserv_date, string reserv_hour, int number_person)
+        public ActionResult confirma_restaurant(int restaurantID,string name_rest,string addres_rest, string name_client, string reserv_date, string reserv_hour, int number_person)
         {
             CReservation_Restaurant reserva = new CReservation_Restaurant(name_client,reserv_date,reserv_hour,number_person, 5, restaurantID);
+            reserva.Restaurant = new CRestaurantModel(restaurantID, name_rest, addres_rest);
             ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
             manejador.CrearReserva(reserva);
-            return View();
+            return View(reserva);
         }
     }
 }
