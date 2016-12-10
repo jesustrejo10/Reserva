@@ -7,6 +7,7 @@ using BOReserva.Models;
 using BOReserva.Models.gestion_aviones;
 using BOReserva.Models.gestion_hoteles;
 using BOReserva.Models.gestion_restaurantes;
+using BOReserva.Models.gestion_vuelo;
 
 namespace BOReserva.Servicio
 {
@@ -297,5 +298,146 @@ namespace BOReserva.Servicio
 
         /* FIN DE FUNCIONES PARA MODULO 10 BO (RESTAURANTES) */
 
+
+        public int idRutaVuelo( CCrear_Vuelo model)
+        {
+            try
+            {
+                int test = 0;
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                SqlCommand cmd = new SqlCommand("M04_BuscaIdRuta", conexion);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add("@CiudadOrigen", System.Data.SqlDbType.VarChar, 100);
+                cmd.Parameters["@CiudadOrigen"].Value = "Madrid";
+                cmd.Parameters.Add("@CiudadDestino", System.Data.SqlDbType.VarChar, 100);
+                cmd.Parameters["@CiudadDestino"].Value = "Caracas"; 
+                
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    test = (int)dr.GetSqlInt32(0);
+                }
+                //cierro el lector
+                dr.Close();
+                conexion.Close();
+                return test;
+            }
+            catch (SqlException e)
+            {
+                throw(e);
+                
+            }
+            catch (Exception e)
+            {
+                throw (e); 
+                
+            }
+
+        }
+
+        public List<CCrear_Vuelo> consultarDestinos(String Origen)
+        {
+            try
+            {
+                var list = new List<CCrear_Vuelo>();
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                SqlCommand cmd = new SqlCommand("M04_BuscarDestinos", conexion);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters["@CiudadOrigen"].Value = Origen;
+
+
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    var destinos = new CCrear_Vuelo
+                    {
+                        _ciudadDestino = dr.GetSqlString(0).ToString(),
+                    };
+                    list.Add(destinos);
+                }
+                //cierro el lector
+                dr.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return list;
+            }
+            catch (SqlException e)
+            {
+                throw e;
+                //return null;
+            }
+            catch (Exception e)
+            {
+                throw e;
+                //return null;
+            }
+        }
+
+
+         public List<CCrear_Vuelo> cargarOrigenes()
+        {
+            try
+            {
+                var list = new List<CCrear_Vuelo>();
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "SELECT l.lug_nombre FROM Lugar l WHERE l.lug_tipo_lugar = 'ciudad' ORDER BY l.lug_nombre";
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                SqlDataReader dr = query.ExecuteReader();
+
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+
+                while (dr.Read())
+                {
+                    var destinos = new CCrear_Vuelo
+                    {
+                        _ciudadOrigen = dr.GetSqlString(0).ToString(),
+                    };
+                    list.Add(destinos);
+                }
+                //cierro el lector
+                dr.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return list;
+            }
+            catch (SqlException e)
+            {
+                throw e;
+                //return null;
+            }
+            catch (Exception e)
+            {
+                throw e;
+                //return null;
+            }
+        }
     }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }

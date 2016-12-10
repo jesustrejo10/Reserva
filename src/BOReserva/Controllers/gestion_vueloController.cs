@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Net;
 using BOReserva.Models.gestion_vuelo;
+using BOReserva.Servicio;
 
 namespace BOReserva.Controllers
 {
@@ -66,14 +68,18 @@ namespace BOReserva.Controllers
         public ActionResult M04_GestionVuelo_Crear()
         {
             CCrear_Vuelo model = new CCrear_Vuelo();
+            List<CCrear_Vuelo> resultadoOrigenes = new List<CCrear_Vuelo>();
+            manejadorSQL sql = new manejadorSQL();
+
+
+            resultadoOrigenes = sql.cargarOrigenes();
 
             //llenado dropdownlist de las ciudades origen en la vista crear
-            var listaCiudadesO = dlciudadesOrigen();
             {
-                model._ciudadesOrigen = listaCiudadesO.Select(x => new SelectListItem
+                model._ciudadesOrigen = resultadoOrigenes.Select(x => new SelectListItem
                 {
-                    Value = x,
-                    Text = x
+                    Value = x._ciudadOrigen,
+                    Text = x._ciudadOrigen
                 });
             };
 
@@ -114,10 +120,59 @@ namespace BOReserva.Controllers
         }
 
 
+     //b   public ActionResult M04_GestionVuelo_Visualizar()
+     //b   {
+            //var companies = DataRepository.GetCompanies();
+            //List<CAutomovil> listavehiculos = new List<CAutomovil>();
+      //b      CBasededatos_vehiculo buscarvehiculos = new CBasededatos_vehiculo();
+      //b      List<CAutomovil> listavehiculos = buscarvehiculos.MListarvehiculosBD();  //AQUI SE BUSCA TODO LOS VEHICULOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
+            //CAutomovil test = new CAutomovil("AG234FC", "3", "Mazda", 2006, "Sedan", 1589.5, 5, 7550.0, 250.6, 290.4, DateTime.Parse("11/11/2016"), "Azul", 1, "Automatico", "Venezuela", "Distrito Capital", "Caracas");
+            //listavehiculos.Add(test);
+
+       //b     return PartialView(listavehiculos);
+       //b }
+
+
         //Evento POST de la view de crear vuelo
+
+
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult cargarDestinos(string ciudadO)
+        {
+            CCrear_Vuelo model = new CCrear_Vuelo();
+            List<CCrear_Vuelo> resultado = new List<CCrear_Vuelo>();
+            manejadorSQL sql = new manejadorSQL();
+
+
+            resultado = sql.consultarDestinos(ciudadO);
+
+            
+
+            model._ciudadesDestino = resultado.Select(m => new SelectListItem
+                {
+                    Value = m._ciudadDestino,
+                    Text = m._ciudadDestino
+                });
+
+            if (resultado != null)
+            {
+                return (Json(model._ciudadesDestino, JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error accediendo a la BD";
+                return Json(error);
+            }
+        }
+
+
         [HttpPost]
         public JsonResult guardarVuelo(CCrear_Vuelo model)
         {
+
+
+
             String codigoVuelo = model._codigoVuelo;
             String ciudadOrigen = model._ciudadOrigen;
             String fechaDespegue = model._fechaDespegue;
@@ -127,6 +182,12 @@ namespace BOReserva.Controllers
             String fechaAterrizaje = model._fechaAterrizaje;
             String horaAterrizaje = model._horaAterrizaje;
             String statusAvion = model._statusVuelo;
+
+            manejadorSQL sql = new manejadorSQL();
+            //realizo el insert
+            int resultado = sql.idRutaVuelo(model);
+            //envio una respuesta dependiendo del resultado del insert
+            
 
             return (Json(true, JsonRequestBehavior.AllowGet));
         }

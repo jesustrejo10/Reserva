@@ -33,6 +33,9 @@ namespace BOReserva.Models.gestion_vuelo
         // _statusVuelo tendra todos los valores que iran dentro del DropdownList
         public IEnumerable<SelectListItem> _statusesVuelo { get; set; }
 
+        public CCrear_Vuelo() { }
+
+       
 
 
 

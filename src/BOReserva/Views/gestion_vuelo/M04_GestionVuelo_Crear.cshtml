@@ -2,6 +2,8 @@
 @model BOReserva.Models.gestion_vuelo.CCrear_Vuelo
 
 
+<script src="~/Scripts/Scripts_Vuelos/llamadas_generales_Vuelos.js"></script>
+
 @using (Html.BeginForm("guardarVuelo", "gestion_vuelo", null, FormMethod.Post, new { @id = "formGuardarVuelo",@class = "form-horizontal" }))
 {
     <div class="row">
@@ -31,14 +33,16 @@
                             <!-- DROPDOWN CIUDAD ORIGEN -->
                             <div class="col-xs-6">
                                 <label> Ciudad Origen (<span style="color: #d9534f">*</span>):</label>
-                                @Html.DropDownListFor(m => m._ciudadOrigen, new SelectList(Model._ciudadesOrigen, "Value", "Text"), "Seleccione una ciudad origen", new { @style = "width: 100%;" })
+                                @Html.DropDownListFor(m => m._ciudadOrigen, new SelectList(Model._ciudadesOrigen as System.Collections.IEnumerable, "Value", "Text"),
+                                     "Seleccione una ciudad origen", new { @id = "ciudadO", @style = "width: 100%;" })
                             </div>
                             <!-- FIN CIUDAD ORIGEN -->
                             <!-- DROPDOWN CIUDAD DESTINO  -->
                             <div class="col-xs-6">
                                 <label> Ciudad Destino (<span style="color: #d9534f">*</span>):</label>
-                                @Html.DropDownListFor(m => m._ciudadDestino, new SelectList(Model._ciudadesDestino, "Value", "Text"),
-                            "Seleccione una ciudad destino", new { @style = "width: 100%;", @selected = "Ej: Caracas", @disabled = "disabled" })
+
+                                @Html.DropDownListFor(m => m._ciudadDestino, new SelectList(Enumerable.Empty<SelectListItem>(), "Value", "Text"),
+                                "Seleccione una ciudad destino", new { @id = "ciudadD", @style = "width: 100%;" })
                             </div>
                             <!-- FIN CIUDAD DESTINO  -->
                         </div>
@@ -134,6 +138,7 @@
         <!-- /.box -->
     </div>
 
+    @*
     <script>
         $("#agregarVuelo").click(function (e) {
             e.preventDefault();
@@ -149,5 +154,6 @@
             });
         });
     </script>
+*@
 
-}
+    }
