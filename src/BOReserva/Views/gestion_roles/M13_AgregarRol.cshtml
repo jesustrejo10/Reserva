@@ -27,7 +27,15 @@
                                     
                                 <label>Nombre del Rol:@number.Nombre</label><br>
                                 }
+                                <select name="listbox" id="listbox">
+                                    @foreach (var item in Model.Menu)
+                                    {
 
+                                        <option value="@item.Nombre">
+                                            @item.Nombre
+                                        </option>
+                                    }
+                                </select>
 
                             </div>
 
