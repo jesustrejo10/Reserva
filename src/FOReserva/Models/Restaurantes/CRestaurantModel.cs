@@ -18,7 +18,8 @@ namespace FOReserva.Models.Restaurantes
         private string _description;
         private string _open;
         private string _close;
-        
+        private string _cityName;
+
         /* Constructor Completo */
         public CRestaurantModel
             (int id, string name, string address, string description,
@@ -55,6 +56,14 @@ namespace FOReserva.Models.Restaurantes
         {
             get { return _description; }
             set { _description = value; }
+        }
+
+        /* Metodos Get y Set para la hora de cierre 
+         del restaurante */
+        public string CityName
+        {
+            get { return _cityName; }
+            set { _cityName = value; }
         }
 
         /* Metodos Get y Set 
