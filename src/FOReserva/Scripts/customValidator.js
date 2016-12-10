@@ -10,7 +10,7 @@ jQuery(document).ready(function () {
 
         var win = true;
 
-        if (nombre == "" || nombre == undefined || ! nombre.match(caracteres)) {
+        if (nombre == "" || nombre == undefined || !nombre.match(caracteres)) {
 
             if (nombre == "" || nombre == undefined) {
                 $("#name_rest").addClass("has-error");
@@ -32,6 +32,63 @@ jQuery(document).ready(function () {
 
         if (win) {
             $("#rest_form").submit();
+        }
+        else
+            return false;
+    });
+
+});
+
+
+// CÓDIGO DE VALIDACIÓN PARA CREAR LA RESERVA DE RESTAURANTES 
+jQuery(document).ready(function () {
+    $("#reserv_restaurante").on("click", function () {
+        //clear errors
+        $(".error").hide();
+        $("#name_client").removeClass("has-error");
+        $("#reserv_hour").removeClass("has-error");
+        $("#number_person").removeClass("has-error");
+        number_person
+
+        //find errors
+        var nombre = $("#name_client").val();
+        var hora = $("#reserv_hour").val();
+        var fecha = $("#reserv_date").val();
+        var caracteres = /^[a-zA-Z\s]+$/;
+
+        var win = true;
+        
+        alert(fecha);
+
+        if (nombre == "" || nombre == undefined || !nombre.match(caracteres)) {
+
+            if (nombre == "" || nombre == undefined) {
+                $("#name_client").addClass("has-error");
+                $("#name_empty").fadeIn();
+                win = false;
+            }
+            else {
+                $("#name_client").addClass("has-error");
+                $("#name_format").fadeIn();
+                win = false;
+            }
+        }
+        if (hora == 0) {
+            var win = false;
+            $("#reserv_hour").addClass("has-error");
+            $("#hora_null").fadeIn();
+            win = false;
+        }
+
+        if (fecha == null) {
+            var win = false;
+            $("#reserv_date").addClass("has-error");
+            $("#fecha_null").fadeIn();
+            win = false;
+        }
+
+        if (win) {
+            $("#reserva_form").submit();
         }
         else
             return false;
