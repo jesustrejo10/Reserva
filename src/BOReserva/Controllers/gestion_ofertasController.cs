@@ -44,11 +44,45 @@ namespace BOReserva.Controllers
             return PartialView();
         }
 
+        //Carga paquetes en el multiselect de agregar oferta
+        public JsonResult M11_CargarPaquetesSelect()
+        {
+            manejadorSQL sql = new manejadorSQL();
+            List<CPaquete> paquetesList = new List<CPaquete>();
+            paquetesList = sql.listarPaquetesEnBD();
+            return Json(paquetesList);
+        }
 
         [HttpPost]
-        public JsonResult guardarOferta(CAgregarOferta model)
+        public JsonResult asociarPaquetesOferta(int[] idsPaquetes)
         {
-           
+            //AGREGAR EL USING DEL MANEJADOR SQL ANTES (using BOReserva.Servicio; o using FOReserva.Servicio;)
+            //instancio el manejador de sql
+            manejadorSQL sql = new manejadorSQL();
+            //realizo el insert
+            bool resultado = sql.asociarOfertaPaquete(idsPaquetes);
+            //envio una respuesta dependiendo del resultado del insert
+            if (resultado)
+            {
+                return (Json(true, JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error insertando en la BD";
+                return Json(error);
+            }
+        }
+
+
+        [HttpPost]
+        public JsonResult guardarOferta(CAgregarOferta model, string estadoOferta)
+        {
+
+            if (estadoOferta == "1")
+                model._estadoOferta = true;
+            else
+                model._estadoOferta = false;
             //Chequeo si los campos obligatorios estan vacios como medida de seguridad
             if ((model._nombreOferta == null) || (model._porcentajeOferta == 0) || (model._fechaIniOferta == null) || (model._fechaFinOferta == null))
             {

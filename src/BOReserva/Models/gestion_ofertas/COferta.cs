@@ -5,9 +5,8 @@ using System.Web;
 
 namespace BOReserva.Models.gestion_ofertas
 {
-    public class CAgregarOferta
+    public class COferta
     {
-
         public int _idOferta { get; set; }
 
         public String _nombreOferta { get; set; }
@@ -20,8 +19,18 @@ namespace BOReserva.Models.gestion_ofertas
 
         public bool _estadoOferta { get; set; }
 
-        public String formatDate(DateTime date){
-            return(String.Format("{0:MM/dd/yyyy}", date));
+        public COferta(){ 
+
         }
+
+        public COferta(int id, String nombre, float porcentaje, DateTime fInicio, DateTime fFin, bool estado){
+            _idOferta = id;
+            _nombreOferta = nombre;
+            _porcentajeOferta = porcentaje;
+            _fechaIniOferta = fInicio;
+            _fechaFinOferta = fFin;
+            _estadoOferta = estado;
+        }
+
     }
 }

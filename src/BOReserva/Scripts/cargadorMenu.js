@@ -294,30 +294,29 @@
                 }
             });
     });
-<<<<<<< HEAD
 
     //M11 Gestion Ofertas y Paquetes
+    $("#agregarOferta").unbind('click');
     $("#agregarOferta").click(function (e) {
         e.preventDefault();
         var url = '/gestion_ofertas/M11_AgregarOferta';
         var method = 'GET';
-        var data = '';
-
         $.ajax(
             {
                 url: url,
                 type: method,
-                data: data,
                 success: function (data, textStatus, jqXHR) {
 
                     $("#contenido").empty();
                     $("#contenido").append(data);
+                    getPaquetesFromDB();
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     alert(errorThrown);
                 }
             });
     });
+
 
     $("#modificarOferta").click(function (e) {
         e.preventDefault();
@@ -344,11 +343,6 @@
     $("#consultarOferta").click(function (e) {
         e.preventDefault();
         var url = '/gestion_ofertas/M11_ConsultarOferta';
-=======
-    $("#m13AgregarRol").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_roles/M13_AgregarRol';
->>>>>>> Develop
         var method = 'GET';
         var data = '';
 
@@ -367,7 +361,6 @@
                 }
             });
     });
-<<<<<<< HEAD
 
     $("#agregarPaquete").click(function (e) {
         e.preventDefault();
@@ -416,11 +409,6 @@
     $("#consultarPaquete").click(function (e) {
         e.preventDefault();
         var url = '/gestion_ofertas/M11_ConsultarPaquete';
-=======
-    $("#m13VisualizarRol").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_roles/M13_VisualizarRol';
->>>>>>> Develop
         var method = 'GET';
         var data = '';
 
@@ -439,8 +427,6 @@
                 }
             });
     });
-<<<<<<< HEAD
+
     //Fin M11
-=======
->>>>>>> Develop
 });

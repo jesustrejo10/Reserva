@@ -72,7 +72,7 @@ namespace BOReserva.Servicio
                 conexion = new SqlConnection(stringDeConexion);
                 conexion.Open();
                 SqlCommand query = conexion.CreateCommand();
-                query.CommandText = "INSERT INTO Oferta VALUES ('" + model._nombreOferta + "','" + model.formatDate(model._fechaIniOferta) + "', '" + model.formatDate(model._fechaFinOferta) + "'," + model._porcentajeOferta + ", 0);";
+                query.CommandText = "INSERT INTO Oferta VALUES ('" + model._nombreOferta + "','" + model.formatDate(model._fechaIniOferta) + "', '" + model.formatDate(model._fechaFinOferta) + "'," + model._porcentajeOferta + ",'"+ model._estadoOferta +"');";
                 SqlDataReader lector = query.ExecuteReader();
                 lector.Close();
                 conexion.Close();
@@ -88,6 +88,77 @@ namespace BOReserva.Servicio
             }
 
         }
+
+        public List<CPaquete> listarPaquetesEnBD()
+        {
+            List<CPaquete> paquetesList = new List<CPaquete>();
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "SELECT * FROM Paquete";
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                while (lector.Read())
+                {
+                    CPaquete paquete = new CPaquete(Int32.Parse(lector["pa_codigo"].ToString()), lector["pa_nombre"].ToString(),
+                    float.Parse(lector["pa_precio"].ToString()));
+                    paquetesList.Add(paquete);
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return paquetesList;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        //Procedimiento del Modulo 11 para asociar ofertas a paquetes.
+        public Boolean asociarOfertaPaquete(int[] idsPaquetes)
+        {
+            try
+            {
+                //Obtengo el id de la oferta agregada
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                SqlCommand query = conexion.CreateCommand();
+                query.CommandText = "SELECT IDENT_CURRENT('Oferta');";
+                int idOferta = Convert.ToInt32(query.ExecuteScalar());
+                conexion.Close();
+                foreach(int idPaquete in idsPaquetes){
+                    conexion.Open();
+                    SqlCommand query1 = conexion.CreateCommand();
+                    query1.CommandText = "UPDATE Paquete SET pa_fk_oferta = "+idOferta+" WHERE pa_codigo = "+idPaquete+";";
+                    SqlDataReader lector1 = query1.ExecuteReader();
+                    lector1.Close();
+                    conexion.Close();
+                }
+                
+                return true;
+            }
+            catch (SqlException e)
+            {
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+        }
+        
+        //Fin modulo 11
 
         //Procedimiento del Modulo 2 para retornar una lista con los aviones en la bd
         public List<CAvion> listarAvionesEnBD()

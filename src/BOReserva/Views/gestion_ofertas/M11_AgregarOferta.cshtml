@@ -4,6 +4,20 @@
 <!-----------------SECCION AGREGAR OFERTA-------------------->
 @using (Html.BeginForm("guardarOferta", "gestion_ofertas", null, FormMethod.Post, new { @id = "formGuardarOferta", @class = "form-horizontal" }))
 {
+    List<SelectListItem> listStatus = new List<SelectListItem>();
+
+
+    listStatus.Add(new SelectListItem
+    {
+        Text = "Inactivo",
+        Value = "0"
+    });
+
+    listStatus.Add(new SelectListItem
+    {
+        Text = "Activo",
+        Value = "1"
+    });
 <div class="row">
     <div class="col-md-12">
         <div class="box box">
@@ -55,16 +69,7 @@
 
                     </div>
 
-                    <div class="col-md-12" style="margin-top: 25px;">
-
-                        <div class="col-xs-4">
-                            <label>Seleccione un Paquete  (<span style="color:red">*</span>):</label>
-                            <select class="form-control" id="cbPaquete">
-                                <option>Selecc. Paquete</option>
-                            </select>
-                        </div>
-
-                    </div>
+                    
 
                     <div class="col-md-12" style="margin-top: 25px;">
 
@@ -72,11 +77,30 @@
                             <label>Porcentaje de Oferta  (<span style="color:red">*</span>):</label>
                             @Html.TextBoxFor(m => m._porcentajeOferta, null, new { @class = "form-control", @placeholder = "%", @id = "porcentajeOferta" })
                         </div>
+
+                        <div class="col-xs-4">
+                            <label>Estatus:</label>
+                            <select id="estadoOferta" class="form-control">
+                                <option value="0">Inactivo</option>
+                                <option value="1">Activo</option>
+                            </select>
+                        </div>
                     </div>
 
+                    <div class="col-md-12" style="margin-top: 25px;">
+
+                        <div class="col-xs-4">
+                            <label>Paquetes:</label>
+                            <select id="paquetesMultiselect" class="form-control select2 select2-hidden-accessible" multiple="" data-placeholder="Auto" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                @*Opciones cargadas con js*@
+                            </select>
+
+                        </div>
+                        
+                    </div>
                     <div class="col-md-12">
 
-                        <button type="button" class="btn btn-success" id="btnGuardarOferta" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                        <button type="button" class="btn btn-success" id="btnGuardarOferta" style="display:block; margin-left:auto; margin-right:auto; margin-top: 25px;">Guardar</button>
 
                     </div>
                     <!-- /.col -->
