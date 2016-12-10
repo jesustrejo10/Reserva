@@ -21,12 +21,19 @@
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 
-                                @foreach ( var number in Model.Menu)
-                                {
-
+                               
                                     
-                                <label>Nombre del Rol:@number.Nombre</label><br>
-                                }
+                                
+                                
+                                <label for="nombreRol">Inserte nombre del rol 
+<!--                                (<span style="color:red">*</span>):-->
+                                </label>
+                                @Html.TextBoxFor(m => m.Nombre_rol, null, new { @class = "form-control", @placeholder = "nombre", @id = "nombreRol" })
+
+
+                                </div>
+                            <div class="col-xs-6">
+                               <label for="modelo">Modulo</label><br>
                                 <select name="listbox" id="listbox">
                                     @foreach (var item in Model.Menu)
                                     {
@@ -38,27 +45,42 @@
                                 </select>
 
                             </div>
+                            
+                            <div class="col-xs-12" style="margin-top:10px;">
+                                <label for="Acceso">Tendra acceso a:</label>
+                                
+                                @foreach (var item in Model.Menu)
+                                {
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" value="@item.Nombre">@item.Nombre</label>
+                                    </div>
 
+                                    <!--
+                                            <option value="@item.Nombre">
+                                                @item.Nombre
+                                            </option>
+            -->
+                                }
+
+                                <!--
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" value="">Option 1</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" value="">Option 2</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" value="">Option 3</label>
+                                    </div>
+        -->
+
+
+                            </div>
                         </div>
                         <div>&nbsp;</div>
-                        <div class="col-md-12" style="margin-top:10px;">
-                            
-                            <label for="modelo">Acceso</label>
- 
-                            <div class="checkbox">
-                                <label><input type="checkbox" value="">Option 1</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" value="">Option 2</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" value="">Option 3</label>
-                            </div>
-                            
-                           
-                        </div>
-                        <div>&nbsp;</div>
-
+                        
+                        
+                        
                         <div class="col-md-12" style="margin-top:10px;">
                             <button type="submit" id="save_vehicle" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
                         </div>
