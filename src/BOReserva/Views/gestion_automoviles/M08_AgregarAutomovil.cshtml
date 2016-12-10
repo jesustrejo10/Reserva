@@ -122,14 +122,15 @@
                             </div>
                             <div class="col-xs-6">
                                 <label for="">Pais(<span style="color:red">*</span>)</label>
-                                @Html.DropDownListFor(m => m._pais, BOReserva.Controllers.gestion_automovilesController.pais(), new { @class = "form-control", @placeholder = "Pais", @id = "vehi_pais" })
+                                @Html.DropDownListFor(m => m._pais, BOReserva.Controllers.gestion_automovilesController.pais(), new { @class = "form-control", @placeholder = "Pais", @id = "vehi_pais", @onblur = "listadeciudades(this.value);"})
                             </div>
                         </div>
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <label for="Ciudad">Ciudad(<span style="color:red">*</span>)</label>
-                                @Html.DropDownListFor(m => m._ciudad, BOReserva.Controllers.gestion_automovilesController.ciudades(), new { @class = "form-control", @placeholder = "Ciudad", @id = "vehi_ciudad" })
+                                @*@Html.DropDownListFor(m => m._ciudad, BOReserva.Controllers.gestion_automovilesController.ciudades(), new { @class = "form-control", @placeholder = "Ciudad", @id = "vehi_ciudad" })*@
+                                <select class="form-control" id="ciudades" name="ciudad" onchange="getciudad();"></select>                            
                             </div>
                             <div class="col-xs-6">
                                 <label for="transmision">Transmisión(<span style="color:red">*</span>)</label>
@@ -188,7 +189,9 @@
         <!-- /.box -->
     </div>
 
-    <script src="~/Scripts/Scripts_Automoviles/llamadas_comunes_automoviles.js">
+    <script src="~/Scripts/Scripts_Automoviles/llamadas_comunes_automoviles.js"></script>
+    
+    <script >
 
         $("#save_vehicle").click(function (e) {
             e.preventDefault();
@@ -203,7 +206,7 @@
             var kilometraje = $('#vehi_kilometraje').val();
             var fecha = $('#vehi_registro').val();
             var pais = $('#vehi_pais').val();
-            var ciudad = $('#vehi_ciudad').val();
+            var ciudad = $('#ciudades').val();
             var transmision = $('#vehi_transmision').val();
             var preciocompra = $('#vehi_compra').val();
             var tarifadiaria = $('#vehi_tarifa').val();
@@ -222,6 +225,53 @@
                 alert("Existen campos vacíos, por favor revise todos los campos");
             }
         });
+
+
+
+    </script>
+
+    <script language="javascript" type="text/javascript">
+        function listadeciudades(_stateId) {
+            var procemessage = "<option value='0'> Espere un momento...</option>";
+            $("#ciudades").html(procemessage).show();
+            var url = "/gestion_automoviles/listaciudades";
+            var _pais = $('#vehi_pais option:selected').text();
+            $.ajax({
+                url: url,
+                data: { pais: _pais },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+                     markup = "";
+                     for (var x = 0; x < data.length; x++) {
+                         markup += "<option>" + data[x] + "</option>";
+                    }
+                    $("#ciudades").html(markup).show();
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+            });
+
+        }
+
+
+
+        function getciudad() {
+            var url = "/gestion_automoviles/getCity";
+            var ciudad = $('#ciudades option:selected').text();
+            $.ajax({
+                url: url,
+                data: { _ciudad: ciudad },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+
+                }
+            });
+
+        }
+
     </script>
 
 }

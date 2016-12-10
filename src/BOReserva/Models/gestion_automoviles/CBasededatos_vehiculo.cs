@@ -283,7 +283,7 @@ namespace BOReserva.Models.gestion_automoviles
         }
 
 
-        public int MIdpaisesBD(String pais)
+        public int MBuscaridpaisBD(String pais)
         {
             int fk = -1;
             try
@@ -329,6 +329,38 @@ namespace BOReserva.Models.gestion_automoviles
             {
                 con.Close();
                 return 0;
+            }
+        }
+
+
+        public List<String> MListarciudadesBD(String pais)
+        {
+            List<String> _ciudad = new List<String>();
+            int id = MBuscaridpaisBD(pais);
+            try
+            {
+                con = new SqlConnection(connetionString);
+                con.Open();
+                String sql = "SELECT C.lug_nombre FROM LUGAR C WHERE C.lug_fk_lugar_id = " + id + ""; ;
+                SqlCommand cmd = new SqlCommand(sql, con);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        //SE OBTIENE LA CIUDAD Y SE PASA
+                        //Y  COLOCA QUE FK_CIUDAD ES IGUAL A LO QUE DEVUELVE EL SQL
+                        String ciudad = reader[0].ToString();
+                        _ciudad.Add(ciudad); //EL 0 REPRESENTA LA PRIMERA Y UNICA COLUMNA QUE DEVULVE EL SqlDataReader
+                    }
+                }
+                cmd.Dispose();
+                con.Close();
+                return _ciudad;
+            }
+            catch (SqlException ex)
+            {
+                con.Close();
+                return _ciudad;
             }
         }
     }

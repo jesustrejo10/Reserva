@@ -98,18 +98,19 @@
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <label for="fecharegistro">Fecha de registro</label>
-                                @Html.TextBoxFor(m => m._fecharegistro, null, new { @class = "form-control", @placeholder = "Kilometraje", @id = "vehi_registro", @readonly="readonly" })
+                                @Html.TextBoxFor(m => m._fecharegistro, null, new { @class = "form-control", @placeholder = "Kilometraje", @id = "vehi_registro", @readonly = "readonly" })
                             </div>
                             <div class="col-xs-6">
-                                <label for="">Pais</label>
-                                @Html.DropDownListFor(m => m._pais, BOReserva.Controllers.gestion_automovilesController.pais(), new { @class = "form-control", @placeholder = "Pais", @id = "vehi_pais"})
+                                <label for="">Pais(<span style="color:red">*</span>)</label>
+                                @Html.DropDownListFor(m => m._pais, BOReserva.Controllers.gestion_automovilesController.pais(), new { @class = "form-control", @placeholder = "Pais", @id = "vehi_pais", @onblur = "listadeciudades(this.value);" })
                             </div>
                         </div>
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
-                                <label for="">Ciudad</label>                                
-                                @Html.DropDownListFor(m => m._ciudad, BOReserva.Controllers.gestion_automovilesController.ciudades(), new { @class = "form-control", @placeholder = "Pais", @id = "vehi_pais", @readonly = "readonly" })
+                                <label for="Ciudad">Ciudad(<span style="color:red">*</span>)</label>
+                                @*@Html.DropDownListFor(m => m._ciudad, BOReserva.Controllers.gestion_automovilesController.ciudades(), new { @class = "form-control", @placeholder = "Ciudad", @id = "vehi_ciudad" })*@
+                                <select class="form-control" id="ciudades" name="ciudad" onchange="getciudad();"></select>
                             </div>
                             <div class="col-xs-6">
                                 <label for="transmision">Transmision:</label>
@@ -157,7 +158,9 @@
         <!-- /.box -->
     </div>
 
-    <script src="~/Scripts/Scripts_Automoviles/llamadas_comunes_automoviles.js">
+    <script src="~/Scripts/Scripts_Automoviles/llamadas_comunes_automoviles.js"></script>
+    
+    <script>
 
 
         $("#modify_vehicle").click(function (e) {
@@ -224,30 +227,49 @@
                 });
         });
 
+    </script>
+    
+     <script language="javascript" type="text/javascript">
+        function listadeciudades(_stateId) {
+            var procemessage = "<option value='0'> Espere un momento...</option>";
+            $("#ciudades").html(procemessage).show();
+            var url = "/gestion_automoviles/listaciudades";
+            var _pais = $('#vehi_pais option:selected').text();
+            $.ajax({
+                url: url,
+                data: { pais: _pais },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+                     markup = "";
+                     for (var x = 0; x < data.length; x++) {
+                         markup += "<option>" + data[x] + "</option>";
+                    }
+                    $("#ciudades").html(markup).show();
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+            });
 
-        //function checklargo(field) {
-        //    if (field.value < 0) {
-        //        alert("No puedes colocar números negativos");
-        //        field.value = '';
-        //    }
-        //    if (field.value > 9999999999) {
-        //        alert("No puedes exceder los 10 digitos");
-        //        field.value = '';
-        //    }
-        //}
+        }
 
-        //function checktarifapenalidad(field) {
-        //    if (field.value != '') {
-        //        if (field.value <= 0) {
-        //            alert("No puedes colocar números negativos o que sea igual a cero");
-        //            field.value = '';
-        //        }
-        //        if (field.value > $('#vehi_compra').val()) {
-        //            alert("No puedes colocar un precio mayor al precio de compra");
-        //            field.value = '';
-        //        }
-        //    }
-        //}
+
+
+        function getciudad() {
+            var url = "/gestion_automoviles/getCity";
+            var ciudad = $('#ciudades option:selected').text();
+            $.ajax({
+                url: url,
+                data: { _ciudad: ciudad },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+
+                }
+            });
+
+        }
 
     </script>
 

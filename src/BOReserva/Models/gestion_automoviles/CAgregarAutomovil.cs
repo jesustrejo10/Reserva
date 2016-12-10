@@ -24,6 +24,5 @@ namespace BOReserva.Models.gestion_automoviles
         public bool _disponibilidad { get; set; }
         public String _transmision { get; set; } 
         public String _pais { get; set; } 
-        public String _ciudad { get; set; } 
     }
 }
