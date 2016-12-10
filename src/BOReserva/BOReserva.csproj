@@ -205,6 +205,10 @@
     <Compile Include="Controllers\gestion_comida_vueloController.cs" />
     <Compile Include="Controllers\gestion_usuariosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DataAccess\Model\Connection.cs" />
+    <Compile Include="DataAccess\Model\ConexionUtil.cs" />
+    <Compile Include="DataAccess\DAO\DAOAutomovil.cs" />
+    <Compile Include="DataAccess\Domain\Automovil.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
