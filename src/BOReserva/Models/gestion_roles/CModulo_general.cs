@@ -12,6 +12,13 @@ namespace BOReserva.Models.gestion_roles
 
         private CListaGenerica<CModulo_detallado> _modulo_detallado;
 
+
+        public CModulo_general()
+        {
+            
+        }
+       
+
         // Contructor que recibe el nombre del modulo general 
         public CModulo_general(string nombre)
         {

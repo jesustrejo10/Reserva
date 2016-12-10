@@ -12,6 +12,10 @@ namespace BOReserva.Models.gestion_roles
 
 
 
+        public CModulo_detallado()
+        {
+        }
+
         public CModulo_detallado(string nombre, string url)
         {
             this._nombre = nombre;

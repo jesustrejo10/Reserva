@@ -10,6 +10,7 @@ using BOReserva.Models.gestion_hoteles;
 using BOReserva.Models.gestion_restaurantes;
 using BOReserva.Models.gestion_lugares;
 using BOReserva.Models.gestion_ruta_comercial;
+using BOReserva.Models.gestion_roles;
 using System.Diagnostics;
 
 namespace BOReserva.Servicio
@@ -618,6 +619,58 @@ namespace BOReserva.Servicio
                 Debug.WriteLine("Exception caught: {0}", e);
                 //throw e;
                 return null;
+            }
+        }
+
+
+
+
+        //Procedimiento del Modulo 13 para retornar lista de los modulos generales
+        public List<CModulo_general> consultarLosModulos()
+        {
+            List<CModulo_general> modulo_general = new List<CModulo_general>();
+            String nombre_modulo;
+
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                //query es un string que me devolvera la consulta 
+                String query = "SELECT m.mod_gen_nombre as Modulo_Detallado FROM modulo_general m";
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+
+
+                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+                while (lector.Read())
+                {
+                    var entrada = new CModulo_general();
+                    {
+                        nombre_modulo = lector.GetSqlString(1).ToString();
+
+
+                    };
+                    modulo_general.Add(entrada);
+                }
+
+
+
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return modulo_general;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
         }
 
