@@ -31,7 +31,9 @@ namespace BOReserva.Controllers
         public JsonResult guardarAvion(CAgregarAvion model)
         {
             //Chequeo si los campos obligatorios estan vacios como medida de seguridad
-            if ((model._matriculaAvion == null) || (model._modeloAvion == null) || (model._capacidadEquipaje == 0) || (model._capacidadMaximaCombustible == 0) || (model._distanciaMaximaVuelo == 0))
+            if ((model._matriculaAvion == null) || (model._modeloAvion == null) || (model._capacidadEquipaje == 0) || (model._capacidadMaximaCombustible == 0)
+                || (model._distanciaMaximaVuelo == 0) || (model._capacidadPasajerosEjecutiva == 0) || (model._capacidadPasajerosTurista == 0)
+                || (model._capacidadPasajerosVIP == 0) || (model._velocidadMaximaDeVuelo == 0)) 
             {
                 //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
