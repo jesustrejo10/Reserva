@@ -11,12 +11,12 @@ namespace FOReserva.Models
     public class ReservationModels : BaseEntity
     {
         /*dia de la reservacion*/
-        private DateTime _date;
+        private String _date;
         /*Hora de la reserva*/
         private string _time;
 
         /*Constructor Completo de Reservas*/
-        public ReservationModels( string owner, DateTime date, string time )
+        public ReservationModels( string owner, string date, string time )
             : base( )
         {
             this.Name = owner;
@@ -25,7 +25,7 @@ namespace FOReserva.Models
         }
 
         /*Fecha de la reserva*/
-        public DateTime Date
+        public string Date
         {
             get { return _date; }
             set { _date = value; }
