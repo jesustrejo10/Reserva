@@ -20,8 +20,15 @@
                     <div class="row">
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
-                                <label for="Nombre">Nombre del Rol:@Model.Nombre_rol</label><br>
-                                 
+                                
+                                @foreach ( var number in Model.Menu)
+                                {
+
+                                    
+                                <label>Nombre del Rol:@number.Nombre</label><br>
+                                }
+
+
                             </div>
 
                         </div>
