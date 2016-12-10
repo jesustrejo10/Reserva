@@ -1,0 +1,77 @@
+﻿@model FOReserva.Models.ReservaHabitacion.Cvista_BuscarHotel
+@if (Model != null)
+{
+    <div id="buscador">
+        <div>
+            <div class="col-xs-12">
+                <h3 class="color-azul">Buscar hoteles con habitaciones disponibles</h3>
+            </div>
+        </div>
+        <div>
+            <div class="col-xs-12">
+                @using (Html.BeginForm(null, null, null, FormMethod.Post, new { @id = "formBuscarHotel", @class = "form-horizontal" }))
+                {
+                <fieldset>
+                    <input type="hidden" name="action" value="contact_send" />
+
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6">
+                                <label>Ciudad</label>                                
+                                <select id="LugId" name="LugId" class="form-control pointer required">
+                                    <option value="0">--- Seleccionar ---</option>
+                                    @foreach (var ciudad in Model.Ciudades)
+                                    {
+                                        <option value="@ciudad.Codigo">@ciudad.Nombre</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <label>Fecha de Llegada</label>
+                                <input id="FechaLlegada" name="FechaLlegada" type="date" value="" class="form-control datepicker required" data-format="yyyy-mm-dd" data-lang="en" data-rtl="false">
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <label>Cantidad de Dias</label>
+                                <input id="CantidadDias" type="number" min="1" name="CantidadDias" value="1" class="form-control required">
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+
+                <script>
+                        $("#buscarHotel").click(function (e) {
+                            e.preventDefault();
+                            var form = $("#formBuscarHotel");
+                            $.ajax({
+                                url: "/gestion_reserva_habitaciones/hoteles_con_habitaciones",
+                                data: form.serialize(),
+                                type: 'GET',
+                                success: function (data) {
+                                    $("#resultado")
+                                        .empty()
+                                        .append(data)
+                                        .show();
+                                    $("#buscador").hide();
+                                }
+                            });
+                        });
+                </script>
+                }
+                <div class="row text-center">
+                    <div class="col-md-12">
+                        <a id="buscarHotel" href="#" class="btn btn-primary">Buscar</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="resultado">
+
+    </div>
+}
+else
+{
+    <p>No se pudo cargar el contenido.</p>
+}

@@ -67,7 +67,7 @@
     });
 
 
-    
+
     $("#m03AgregarRuta").click(function (e) {
         e.preventDefault();
         var url = '/gestion_ruta_comercial/AgregarRutasComerciales';
@@ -270,12 +270,12 @@
                     alert(errorThrown);
                 }
             });
-    });   
+    });
 
 
-    $("#m05_crearboleto").click(function (e) {
+    $("#m05VerReserva").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_boletos/M05_CrearBoleto';
+        var url = '/gestion_boletos/M05_VerReserva';
         var method = 'GET';
         var data = '';
 
@@ -315,6 +315,32 @@
                 }
             });
     });
+
+    /* INICIO M10 RESTAURANTES BO */
+
+    $("#verRestaurantes").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_restaurantes/M10_GestionRestaurantes_Ver';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
+    /* FIN M10 RESTAURANTES BO */
     $("#m13VisualizarRol").click(function (e) {
         e.preventDefault();
         var url = '/gestion_roles/M13_VisualizarRol';
@@ -335,5 +361,51 @@
                     alert(errorThrown);
                 }
             });
+    });
+
+    $("#m05VisualizarBoletos").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_boletos/M05_VisualizarBoletos';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+
+    });
+
+    $("#m05CheckIn").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_check_in/M05_CheckIn';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+
     });
 });
