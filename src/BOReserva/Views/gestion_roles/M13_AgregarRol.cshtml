@@ -1,5 +1,5 @@
 ﻿<!-- Indico que para esta vista, M08_AgregarAutomovil, utilizare el modelo Models/gestion_automoviles/CAgregarAutomovil-->
-@model BOReserva.Models.gestion_automoviles.CAgregarAutomovil
+@model BOReserva.Models.gestion_roles.CRoles
 
 <!--Indico que, estoy abriendo un formulario que tendra como accion del submit, el controlador gestion_automoviles"Controller", 
     utilizara el metodo guardarAutomovil
@@ -20,36 +20,10 @@
                     <div class="row">
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
-                                <label for="Nombre">Nombre del Rol</label><br>
-                                 @Html.TextBoxFor(m => m._matricula, null, new { @class = "crearRol", @placeholder = "Nombre", @id = "vehi_placa"})
+                                <label for="Nombre">Nombre del Rol:@Model.Nombre_rol</label><br>
+                                 
                             </div>
-                            <div class="col-xs-6">
-                                <label for="modulo">Modulo</label>
-                                @{
-                                        List<SelectListItem> _modulo = new List<SelectListItem>();
-                                        _modulo.Add(new SelectListItem
-                                        {
-                                            Text = "",
-                                            Value = ""
-                                        });
-                                        _modulo.Add(new SelectListItem
-                                             {
-                                                 Text = "Avion",
-                                                 Value = "Avion"
-                                             });
-                                        _modulo.Add(new SelectListItem
-                                             {
-                                                 Text = "Crucero",
-                                                 Value = "Crucero",
-                                             });
-                                        _modulo.Add(new SelectListItem
-                                             {
-                                                 Text = "Pasaje",
-                                                 Value = "Pasaje"
-                                             });
-                                }
-                                @Html.DropDownListFor(m => m._fabricante, _modulo, new { @class = "form-control", @placeholder = "Marca", @id = "vehi_marca" })
-                            </div>
+
                         </div>
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
@@ -83,21 +57,5 @@
         <!-- /.box -->
     </div>
 
-    <script>
-        $("#save_vehicle").click(function (e) {
-            e.preventDefault();
-            var form = $("#crearRol");
-            $.ajax({
-                url: "gestion_automoviles/saveVehicle",
-                data: form.serialize(),
-                type: 'POST',
-                success: function (data) {
-                    alert("Se registro el vehiculo exitosamente");
-                    $('#formSaveVehicle')[0].reset();
-                }
-            });
-        });
-      
-    </script>
 
 }

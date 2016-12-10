@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BOReserva.Models.gestion_roles;
 
 namespace BOReserva.Controllers
 {
@@ -12,7 +13,9 @@ namespace BOReserva.Controllers
         // GET: /gestion_roles/
         public ActionResult M13_AgregarRol()
         {
-            return PartialView();
+            
+            CRoles rol = new CRoles("Administrador");
+            return PartialView(rol);
         }
         public ActionResult M13_VisualizarRol()
         {
