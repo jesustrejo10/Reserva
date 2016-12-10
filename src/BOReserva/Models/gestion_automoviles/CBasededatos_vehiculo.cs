@@ -16,13 +16,6 @@ namespace BOReserva.Models.gestion_automoviles
         
         private SqlConnection con = null;
 
-        public void probarconexion()
-        {
-            //con = new SqlConnection(connetionString);
-            con = Connection.getInstance(connetionString);
-            con.Open();
-        }
-
         public int MAgregarVehiculoBD(CAutomovil vehiculo)
         {
             int fk_ciudad = MBuscarfkciudad(vehiculo._ciudad, vehiculo._pais);

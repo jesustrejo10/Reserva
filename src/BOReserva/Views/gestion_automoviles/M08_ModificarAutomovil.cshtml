@@ -126,14 +126,14 @@
                             </div>
                             <div class="col-xs-6">
                                 <label for="tarifa">Tarifa diaria ($):</label>
-                                @Html.TextBoxFor(m => m._precioalquiler, null, new { @type = "number", @class = "form-control", @placeholder = "Dolares", @id = "vehi_tarifa", min = "0", @onblur = "checklargo(this);" })
+                                @Html.TextBoxFor(m => m._precioalquiler, null, new { @type = "number", @class = "form-control", @placeholder = "Dolares", @id = "vehi_tarifa", min = "0", @onblur = "checktarifapenalidad(this);" })
                             </div>
                         </div>
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <label for="penalidad">Penalidad diaria ($):</label>
-                                @Html.TextBoxFor(m => m._penalidaddiaria, null, new { @type = "number", @class = "form-control", @placeholder = "Dolares", @id = "vehi_penalidad", min = "0", @onblur = "checklargo(this);" })
+                                @Html.TextBoxFor(m => m._penalidaddiaria, null, new { @type = "number", @class = "form-control", @placeholder = "Dolares", @id = "vehi_penalidad", min = "0", @onblur = "checktarifapenalidad(this);" })
                             </div>
                         </div>
                         <div>&nbsp;</div>
@@ -157,38 +157,7 @@
         <!-- /.box -->
     </div>
 
-    <script>
-        //$("#modify_vehicle").click(function (e) {
-        //    e.preventDefault();
-        //    var form = $("#formModifyVehicle");
-        //    $.ajax({
-        //        url: "gestion_automoviles/modifyVehicle",
-        //        data: form.serialize(),
-        //        type: 'POST',
-        //        success: function (data) {
-        //            alert("Se ha modificado exitosamente y sera redirigido a la tabla de vehiculos");
-        //            //$('#formModifyVehicle')[0].reset();
-        //            var url1 = '/gestion_automoviles/M08_VisualizarAutomoviles';
-        //            var method = 'GET';
-        //            var data1 = '';
-
-        //            $.ajax(
-        //                {
-        //                    url: url1,
-        //                    type: method,
-        //                    data: data,
-        //                    success: function (data, textStatus, jqXHR) {
-
-        //                        $("#contenido").empty();
-        //                        $("#contenido").append(data);
-        //                    },
-        //                    error: function (jqXHR, textStatus, errorThrown) {
-        //                        alert(errorThrown);
-        //                    }
-        //                });
-        //        }
-        //    });
-        //});
+    <script src="~/Scripts/Scripts_Automoviles/llamadas_comunes_automoviles.js">
 
 
         $("#modify_vehicle").click(function (e) {
@@ -226,16 +195,12 @@
                     }
                 });
             } else {
-                var error = "Los siguientes campos se encuentran vacios: \n\n";
-                if (!tarifadiaria) {
-                    error = error + "- Tarifa diaria \n";
-                }
-                if (!penalidaddiaria) {
-                    error = error + "- Penalidad diaria \n";
-                }
+                var error = "Existen campos vacios, por favor reviselos";
                 alert(error);
             }
         });
+
+
 
         $("#cancel_modification").click(function (e) {
             e.preventDefault();
@@ -259,18 +224,31 @@
                 });
         });
 
-        
 
-        function checklargo(field) {
-            if (field.value < 0) {
-                alert("No puedes colocar números negativos");
-                field.value = '';
-            }
-            if (field.value > 9999999999) {
-                alert("No puedes exceder los 10 digitos");
-                field.value = '';
-            }
-        }
+        //function checklargo(field) {
+        //    if (field.value < 0) {
+        //        alert("No puedes colocar números negativos");
+        //        field.value = '';
+        //    }
+        //    if (field.value > 9999999999) {
+        //        alert("No puedes exceder los 10 digitos");
+        //        field.value = '';
+        //    }
+        //}
+
+        //function checktarifapenalidad(field) {
+        //    if (field.value != '') {
+        //        if (field.value <= 0) {
+        //            alert("No puedes colocar números negativos o que sea igual a cero");
+        //            field.value = '';
+        //        }
+        //        if (field.value > $('#vehi_compra').val()) {
+        //            alert("No puedes colocar un precio mayor al precio de compra");
+        //            field.value = '';
+        //        }
+        //    }
+        //}
+
     </script>
 
 

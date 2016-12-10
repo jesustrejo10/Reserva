@@ -8,6 +8,7 @@ namespace BOReserva.Models.gestion_automoviles
 {
     public class CAgregarAutomovil
     {
+        [Required]
         public String _matricula { get; set; } 
         public String _modelo { get; set; } 
         public String _fabricante { get; set; } 
