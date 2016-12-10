@@ -13,7 +13,7 @@
                 data: data,
                 success: function (data, textStatus, jqXHR) {
 
-                    $("#contenido").empty();
+                    $("#contenido").empty()
                     $("#contenido").append(data);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -22,9 +22,102 @@
             });
     });
 
+    $("#m02_agregaravion").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_aviones/M02_AgregarAvion';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+    $("#m02_VisualizarAvion").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_aviones/M02_VisualizarAviones';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+
+    });
+
+
+
+    $("#m03AgregarRuta").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_ruta_comercial/AgregarRutasComerciales';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+
+    });
+
+
+    $("#m03VisualizarRutas").click(function (e) {
+
+
+        e.preventDefault();
+        var url = '/gestion_ruta_comercial/VisualizarRutasComerciales';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+
+    });
+
+
     $("#m08AgregarAutomovil").click(function (e) {
-        alert("hola jeffrey");
-        
         e.preventDefault();
         var url = '/gestion_automoviles/M08_AgregarAutomovil';
         var method = 'GET';
@@ -44,7 +137,29 @@
                     alert(errorThrown);
                 }
             });
-    
+
+    });
+    $("#m08VisualizarAutomoviles").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_automoviles/M08_VisualizarAutomoviles';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+
     });
 
     //INICIO M06_Gestion_Comida
@@ -84,7 +199,6 @@
                 data: data,
                 success: function (data, textStatus, jqXHR) {
 
-<<<<<<< HEAD
                     $("#contenido").empty();
                     $("#contenido").append(data);
                 },
@@ -109,11 +223,16 @@
 
                     $("#contenido").empty();
                     $("#contenido").append(data);
-                },
-=======
-    $("#m02_agregaravion").click(function (e) {
+                }
+            });
+    });
+    //FIN M06_Gestion_Comida
+
+
+
+    $("#crearhotel").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_aviones/M02_AgregarAvion';
+        var url = '/gestion_hoteles/M09_GestionHoteles_Crear';
         var method = 'GET';
         var data = '';
 
@@ -127,18 +246,166 @@
                     $("#contenido").empty();
                     $("#contenido").append(data);
                 },
->>>>>>> 77d42736ee3d253cea50d2926a09920b376d2bf7
                 error: function (jqXHR, textStatus, errorThrown) {
                     alert(errorThrown);
                 }
             });
     });
-<<<<<<< HEAD
-   
-    //FIN M06_Gestion_Comida
-=======
+    $("#modificarhotel").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_hoteles/M09_GestionHoteles_ModificarHotel';
+        var method = 'GET';
+        var data = '';
 
->>>>>>> 77d42736ee3d253cea50d2926a09920b376d2bf7
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
+
+    $("#m05VerReserva").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_boletos/M05_VerReserva';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+    $("#m13AgregarRol").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_roles/M13_AgregarRol';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
+    /* INICIO M10 RESTAURANTES BO */
+
+    $("#verRestaurantes").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_restaurantes/M10_GestionRestaurantes_Ver';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
+    /* FIN M10 RESTAURANTES BO */
+    $("#m13VisualizarRol").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_roles/M13_VisualizarRol';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
+    $("#m05VisualizarBoletos").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_boletos/M05_VisualizarBoletos';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+
+    });
+
+    $("#m05CheckIn").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_check_in/M05_CheckIn';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+
+    });
 });
-
-

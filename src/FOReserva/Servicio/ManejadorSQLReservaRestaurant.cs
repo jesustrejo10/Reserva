@@ -30,7 +30,7 @@ namespace FOReserva.Servicio
                     lista_rest.Add(resta);
                 }
             }
-            CloseConextion();
+            CloseConnection();
             return lista_rest;
         }
 
@@ -54,10 +54,35 @@ namespace FOReserva.Servicio
                     lista_rest.Add(resta);
                 }
             }
-            CloseConextion();
+            CloseConnection();
             return lista_rest;
         }
 
+        public CRestaurantModel buscarRest(int rest_id)
+        {
+            string query = "Select rst_id, rst_nombre, rst_direccion, rst_descripcion From Restaurante where rst_id=" + rest_id;
+            SqlDataReader read = Executer(query);
+            CRestaurantModel rest = new CRestaurantModel();
+            if (read.HasRows)
+            {
+                while (read.Read())
+                {
+                    int id = read.GetInt32(0);
+                    string nombre = read.GetString(1);
+                    string dir = read.GetString(2);
+                    string descripcion = read.GetString(3);
+                    rest.Id = id;
+                    rest.Name = nombre;
+                    rest.Description = descripcion;
+                    rest.Addres = dir;
+                }
+            }
+            CloseConnection();
+            return rest;
+        }
+
+
+        
         public void CrearReserva(CReservation_Restaurant reserva)
         {
             string query =
@@ -66,7 +91,7 @@ namespace FOReserva.Servicio
             VALUES('"+reserva.GetType()+@"','"+reserva.Name+@"',
             convert(date, '2016-12-20'), '"+reserva.Time+"',"+reserva.Count+","+
             @"1, 4)";
-            CloseConextion();
+            CloseConnection();
         }
     }
 }
