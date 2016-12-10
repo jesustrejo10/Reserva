@@ -10,6 +10,7 @@ using BOReserva.Models.gestion_hoteles;
 using BOReserva.Models.gestion_restaurantes;
 using BOReserva.Models.gestion_lugares;
 using BOReserva.Models.gestion_ruta_comercial;
+using BOReserva.Models.gestion_roles;
 using System.Diagnostics;
 
 namespace BOReserva.Servicio
@@ -539,7 +540,7 @@ namespace BOReserva.Servicio
                         _id = (int)lector.GetSqlInt32(0),
                         _nombre = lector.GetSqlString(1).ToString(),
                         _tipoLugar = lector.GetSqlString(2).ToString(),
-                        _zonaHoraria = lector.GetSqlString(3).ToString(),
+                        _zonaHoraria = (int)lector.GetSqlInt32(3),
                         _idFKLugar = lector.IsDBNull(4) ? -1 : (int)lector.GetSqlInt32(4), //Pregunta si el campo es null, dando valor por defecto en caso que lo sea
                         _abreviatura = lector.GetSqlString(5).ToString()
 
@@ -556,15 +557,15 @@ namespace BOReserva.Servicio
             {
                 conexion.Close();
                 Debug.WriteLine("Exception caught: {0}", e);
-                //throw e;
-                return null;
+                throw e;
+                //return null;
             }
             catch (Exception e)
             {
                 conexion.Close();
                 Debug.WriteLine("Exception caught: {0}", e);
-                //throw e;
-                return null;
+                throw e;
+                //return null;
             }
         }
 
@@ -592,7 +593,7 @@ namespace BOReserva.Servicio
                         _id = (int)lector.GetSqlInt32(0),
                         _nombre = lector.GetSqlString(1).ToString(),
                         _tipoLugar = lector.GetSqlString(2).ToString(),
-                        _zonaHoraria = lector.GetSqlString(3).ToString(),
+                        _zonaHoraria = (int)lector.GetSqlInt32(3),
                         _idFKLugar = lector.IsDBNull(4) ? -1 : (int)lector.GetSqlInt32(4), //Pregunta si el campo es null, dando valor por defecto en caso que lo sea
                         _abreviatura = lector.GetSqlString(5).ToString()
 
@@ -621,6 +622,80 @@ namespace BOReserva.Servicio
             }
         }
 
+
+
+
+        //Procedimiento del Modulo 13 para retornar lista de los modulos generales
+        public CListaGenerica<CModulo_general> consultarLosModulos()
+        {
+            CListaGenerica<CModulo_general> modulo_general = new CListaGenerica<CModulo_general>();           
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //Abrir la conexion
+                conexion.Open();
+                //query es un string que me devolvera la consulta 
+                String query = "SELECT m.mod_gen_nombre as Modulo_Detallado FROM modulo_general m";
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+                while (lector.Read())
+                {
+                    var entrada = new CModulo_general();
+                    entrada.Nombre = lector.GetSqlString(0).ToString();                   
+                    modulo_general.agregarElemento(entrada);
+                }
+                //cierro el lector
+                lector.Close();
+                //Cerrar la conexion
+                conexion.Close();
+                return modulo_general;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        //Procedimiento del Modulo 13 para insertar Roles
+        public Boolean insertarRol(CRoles model)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //Abrir la conexion
+                conexion.Open();
+                //SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "INSERT INTO Rol VALUES ('" + model.Nombre_rol + "')";
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior
+                SqlDataReader lector = query.ExecuteReader();
+                //Cierro la conexion
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+        }
         /* FIN DE FUNCIONES COMUNES */
     }
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿
     <!------------------- INICIO SECCION EDITAR AVION Y ESTADISTICAS -------------------->
     <div class="row">
@@ -9,11 +10,30 @@
                         <button type="button" class="btn btn-box-tool" data-widget="collapse">
                             <i class="fa fa-minus"></i>
                         </button>
+=======
+﻿<!-- Indico que para esta vista, M13_AgregarRol, utilizare el modelo Models/gestion_roles/CRoles-->
+@model BOReserva.Models.gestion_roles.CRoles
+
+<!--Indico que, estoy abriendo un formulario que tendra como accion del submit, el controlador gestion_automoviles"Controller", 
+    utilizara el metodo guardarAutomovil
+    le pasara la informacion mediante un POST-->
+
+@using (Html.BeginForm("Agregar_Rol", "gestion_roles", null, FormMethod.Post, new { @id = "formagreagarrol", @class = "form-horizontal" }))
+
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-success">
+                <div class="box-header ">
+                    <h1 class="box-title"> Agregar Rol</h1>
+                    <div class="box-tools pull-right">
+>>>>>>> Develop
                     </div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div class="row">
+<<<<<<< HEAD
                         <div class="col-md-12">
                             <div class="col-md-8">
                                 <label for="matriculaAvionEditar">Inserte la matrícula del Avión a editar:</label>
@@ -145,6 +165,40 @@
                             <div class="col-md-12" style="margin-top:10px;">
                                 <button type="button" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
                             </div>
+=======
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">                           
+                                <label for="nombreRol">Inserte nombre del rol 
+<!--                                (<span style="color:red">*</span>):-->
+                                </label>
+                                @Html.TextBoxFor(m => m.Nombre_rol, null, new { @class = "form-control", @placeholder = "rolnombre", @id = "nombre_rol" })
+                                </div>
+                            <div class="col-xs-6">
+                               <label for="modelo">Modulo</label><br>
+                                <select name="listbox" id="listbox">
+                                    @foreach (var item in Model.Menu)
+                                    {
+                                        <option value="@item.Nombre">
+                                            @item.Nombre
+                                        </option>
+                                    }
+                                </select>
+                            </div>                       
+                            <div class="col-xs-12" style="margin-top:10px;">
+                                <label for="Acceso">Tendra acceso a:</label>                                
+                                @foreach (var item in Model.Menu)
+                                {
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" value="@item.Nombre">@item.Nombre</label>
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>                       
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <button type="submit" id="agreagarrol" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+>>>>>>> Develop
                         </div>
                     </div>
                     <!-- /.col -->
@@ -154,6 +208,7 @@
             <!-- /.box-body -->
         </div>
         <!-- /.box -->
+<<<<<<< HEAD
         <div class="col-md-4">
             <div class="box box-danger">
                 <div class="box-header with-border">
@@ -226,5 +281,26 @@
     <!-- /.row -->
     <!-------------------- FIN DE LA SECCION DE FALLOS -------------->
 
+=======
+    </div>
+    <script>
+    //Accion del boton agregarrol
+        $("#agreagarrol").click(function (e) {
+            e.preventDefault();
+            var form = $("#formagreagarrol");
+            $.ajax({
+                url: "gestion_roles/agregarrol",
+                data: form.serialize(),
+                type: 'POST',
+                success: function (data) {
+                    alert("Se guardo");
+                    $('#formagreagarrol')[0].reset();
+                }
+            });
+        });
+    </script>
+
+}
+>>>>>>> Develop
 
 

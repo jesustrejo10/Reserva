@@ -49,7 +49,7 @@ namespace BOReserva.Controllers
         }
 
         [HttpPost]
-        public JsonResult guardarRestaurante(CRestauranteModelo model)
+        public JsonResult guardarRestaurante(CRestauranteModeloVista model)
         {
             //Chequeo de campos obligatorios para el formulario
             if ((model._nombre == null) || (model._direccion == null) 
@@ -60,7 +60,16 @@ namespace BOReserva.Controllers
                 return Json(error);
             }
             manejadorSQL sql = new manejadorSQL();
-            bool resultado = sql.insertarRestaurante(model);
+            var salida = new CRestauranteModelo
+            {
+                _nombre = model._nombre,
+                _direccion = model._direccion,
+                _descripcion = model._descripcion,
+                _horarioApertura = model._horarioApertura,
+                _horarioCierre = model._horarioCierre,
+                _idLugar = model._idLugar
+            };
+            bool resultado = sql.insertarRestaurante(salida);
             if (resultado)
             {
                 return (Json(true, JsonRequestBehavior.AllowGet));
@@ -74,7 +83,7 @@ namespace BOReserva.Controllers
         }
 
         [HttpPost]
-        public JsonResult modificarRestaurante(CRestauranteModelo model)
+        public JsonResult modificarRestaurante(CRestauranteModeloVista model)
         {
             //Chequeo de campos obligatorios para el formulario
             if ((model._id == -1) || (model._nombre == null) || (model._direccion == null)
@@ -85,7 +94,17 @@ namespace BOReserva.Controllers
                 return Json(error);
             }
             manejadorSQL sql = new manejadorSQL();
-            bool resultado = sql.modificarRestaurante(model);
+            var salida = new CRestauranteModelo
+            {
+                _id = model._id,
+                _nombre = model._nombre,
+                _direccion = model._direccion,
+                _descripcion = model._descripcion,
+                _horarioApertura = model._horarioApertura,
+                _horarioCierre = model._horarioCierre,
+                _idLugar = model._idLugar
+            };
+            bool resultado = sql.insertarRestaurante(salida);
             if (resultado)
             {
                 return (Json(true, JsonRequestBehavior.AllowGet));
@@ -99,7 +118,7 @@ namespace BOReserva.Controllers
         }
 
         [HttpPost]
-        public JsonResult eliminarRestaurante(CRestauranteModelo model)
+        public JsonResult eliminarRestaurante(CRestauranteModeloVista model)
         {
             //Chequeo de campos obligatorios para el formulario
             if ((model._id == -1))
