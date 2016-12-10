@@ -53,7 +53,7 @@ jQuery(document).ready(function () {
         //find errors
         var nombre = $("#name_client").val();
         var hora = $("#reserv_hour").val();
-        var fecha = $("#reserv_date").val();
+        var fecha = $("#reserv_date").prop("value");
         var caracteres = /^[a-zA-Z\s]+$/;
 
         var win = true;
@@ -80,7 +80,7 @@ jQuery(document).ready(function () {
             win = false;
         }
 
-        if (fecha == null) {
+        if (fecha ==  null || fecha == 0) {
             var win = false;
             $("#reserv_date").addClass("has-error");
             $("#fecha_null").fadeIn();
