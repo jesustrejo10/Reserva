@@ -294,4 +294,46 @@
                 }
             });
     });
+    $("#m13AgregarRol").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_roles/M13_AgregarRol';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+    $("#m13VisualizarRol").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_roles/M13_VisualizarRol';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
 });

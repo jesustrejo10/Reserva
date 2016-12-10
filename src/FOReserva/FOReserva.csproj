@@ -211,7 +211,7 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Diarios\Cvista_Diarios.cs" />
     <Compile Include="Models\BaseEntity.cs" />
-    <Compile Include="Models\Itinerario\itinerario.cs" />
+    <Compile Include="Models\Itinerario\CItinerario.cs" />
     <Compile Include="Models\ORM\DB.cs" />
     <Compile Include="Models\ORM\M20_ActualizarEstadoReservaHabitacion_Result.cs">
       <DependentUpon>ModelDBReserva.tt</DependentUpon>
@@ -261,8 +261,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ReservaDB.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Servicio\Ciudades.cs" />
     <Compile Include="Servicio\manejadorSQL.cs" />
     <Compile Include="Servicio\ManejadorSQLDiarios.cs" />
+    <Compile Include="Servicio\ManejadorSQLItinerario.cs" />
     <Compile Include="Servicio\ManejadorSQLMuestraRevision.cs" />
     <Compile Include="Servicio\ManejadorSQLException.cs" />
     <Compile Include="Servicio\ManejadorSQLReservaRestaurant.cs" />
@@ -1661,6 +1663,7 @@
     <Content Include="Models\Hoteles\placeholder.html" />
     <Content Include="Models\Restaurantes\placeholder.html" />
     <Content Include="Models\Vuelos\placeholder.html" />
+    <Content Include="Scripts\BuscarDestino.js" />
     <Content Include="Scripts\cargadorPestanas.js" />
     <Content Include="Scripts\customValidator.js" />
     <Content Include="Scripts\uniqueId.js" />
@@ -3047,10 +3050,10 @@
     <Content Include="Views\gestion_reserva_habitaciones\editar_reserva.cshtml" />
     <Content Include="Views\gestion_reserva_habitaciones\mis_reservas.cshtml" />
     <Content Include="Views\Shared\_MenuPerfil.cshtml" />
-    <Content Include="Views\gestion_planificacion_vacaciones\gestion_itinerario.cshtml" />
     <Content Include="Views\gestion_revision\gestion_ListRevicion.cshtml" />
     <Content Include="Views\gestion_revision\gestion_revision.cshtml" />
     <Content Include="Views\gestion_revision\Consultar_Revision.cshtml" />
+    <Content Include="Views\gestion_planificacion_vacaciones\gestion_itinerario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
