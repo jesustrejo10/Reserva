@@ -340,6 +340,28 @@
             });
     });
 
+    $("#agregarRestaurantes").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_restaurantes/M10_GestionRestaurantes_Agregar';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
     /* FIN M10 RESTAURANTES BO */
     $("#m13VisualizarRol").click(function (e) {
         e.preventDefault();
