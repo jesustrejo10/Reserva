@@ -22,12 +22,12 @@
                             <div class="col-md-12">
                                 <div class="col-xs-6">
                                     <label for="matriculaAvion">Inserte la matrícula del avión (<span style="color:red">*</span>):</label>
-                                    @Html.TextBoxFor(m => m._matriculaAvion, null, new { @class = "form-control", @placeholder = "HK4549", @id = "matriculaAvion" })
+                                    @Html.TextBoxFor(m => m._matriculaAvion, null, new { @class = "form-control", @placeholder = "HK4549", @id = "matriculaAvion", @required = "true" })
 
                                 </div>
                                 <div class="col-xs-6">
                                     <label for="capacidadPasajerosTurista">Capacidad de clase turista (<span style="color:red">*</span>):</label>
-                                    @Html.TextBoxFor(m => m._capacidadPasajerosTurista, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadTuristas", @min = 0 })
+                                    @Html.TextBoxFor(m => m._capacidadPasajerosTurista, null, new { @class = "form-control", @placeholder = "100", @type = "number", @id = "capacidadTuristas", @min = 1 })
                                                                     
                                 </div>
                             </div>
@@ -38,12 +38,12 @@
                             <div class="col-md-12">
                                 <div class="col-xs-6">
                                      <label for="modeloAvion">Inserte el modelo del avión (<span style="color:red">*</span>):</label>
-                                    @Html.TextBoxFor(m => m._modeloAvion, null, new { @class = "form-control", @placeholder = "Boeing 777", @id = "modeloAvion" })
+                                    @Html.TextBoxFor(m => m._modeloAvion, null, new { @class = "form-control", @placeholder = "Boeing777", @id = "modeloAvion", @type = "text", @required="true" })
 
                                 </div>
                                 <div class="col-xs-6">
                                    <label for="capacidadPasajerosVIP">Capacidad de clase VIP (<span style="color:red">*</span>):</label>
-                                    @Html.TextBoxFor(m => m._capacidadPasajerosVIP, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadVIP", @min = 0 })
+                                    @Html.TextBoxFor(m => m._capacidadPasajerosVIP, null, new { @class = "form-control", @type = "number", @id = "capacidadVIP", @min = 1 , @required = "true" })
 
                                    
                                 </div>
@@ -55,12 +55,12 @@
                             <div class="col-md-12">
                                 <div class="col-xs-6">
                                      <label for="capacidadEquipaje">Capacidad de equipaje (en Kg) (<span style="color:red">*</span>):</label>
-                                    @Html.TextBoxFor(m => m._capacidadEquipaje, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadEquipaje", @min = 0 })
+                                    @Html.TextBoxFor(m => m._capacidadEquipaje, null, new { @class = "form-control", @placeholder = "100", @type = "number", @id = "capacidadEquipaje", @min = 1, @required = "true" })
 
                                 </div>
                                 <div class="col-xs-6">
                                     <label for="capacidadPasajerosEjecutiva">Capacidad de clase ejecutiva (<span style="color:red">*</span>):</label>
-                                    @Html.TextBoxFor(m => m._capacidadPasajerosEjecutiva, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadEjecutiva", @min = 0 })
+                                    @Html.TextBoxFor(m => m._capacidadPasajerosEjecutiva, null, new { @class = "form-control", @placeholder = "100", @type = "number", @id = "capacidadEjecutiva", @min = 1, @required = "true" })
 
                                 </div>
                             </div>
@@ -72,13 +72,13 @@
 
                                 <div class="col-xs-6">
                                     <label for="capacidadCombustible">Capacidad de combustible (en litros) (<span style="color:red">*</span>):</label>
-                                    @Html.TextBoxFor(m => m._capacidadMaximaCombustible, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadCombustible", @min = 0 })
+                                    @Html.TextBoxFor(m => m._capacidadMaximaCombustible, null, new { @class = "form-control", @placeholder = "100000", @type = "number", @id = "capacidadCombustible", @min = 1, @required = "true" })
 
                                 </div>
 
                                 <div class="col-xs-6">
                                    <label for="velocidadMaximaDeVuelo">Velocidad máxima de vuelo (en Km/h) (<span style="color:red">*</span>):</label>
-                                    @Html.TextBoxFor(m => m._velocidadMaximaDeVuelo, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "velocidadMaximaDeVuelo", @min = 0 })
+                                    @Html.TextBoxFor(m => m._velocidadMaximaDeVuelo, null, new { @class = "form-control", @placeholder = "1000", @type = "number", @id = "velocidadMaximaDeVuelo", @min = 1 , @required = "true" })
 
                                 </div>
                                 <div class="col-xs-6">
@@ -93,7 +93,7 @@
 
                                 <div class="col-xs-6">
                                     <label for="distanciaMaximaDeVuelo">Distancia máxima de vuelo (en Km) (<span style="color:red">*</span>):</label>
-                                    @Html.TextBoxFor(m => m._distanciaMaximaVuelo, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "distanciaMaximaVuelo", @min = 0 })
+                                    @Html.TextBoxFor(m => m._distanciaMaximaVuelo, null, new { @class = "form-control", @placeholder = "1000", @type = "number", @id = "distanciaMaximaVuelo", @min = 1, @required = "true" })
 
                                 </div>
                             </div>
@@ -117,84 +117,7 @@
 <!-- /.row -->
     
     @*<script>
-        $("#save_vehicle").click(function (e) {
-                e.preventDefault();
-                var form = $("#formSaveVehicle");
-                var placa = $('#vehi_placa').val();
-                var fabricante = $('#vehi_fabricante').val();
-                var modelo = $('#vehi_modelo').val();
-                var anio = $('#vehi_anio').val();
-                var tipo = $('#vehi_tipo').val();
-                var capacidad = $('#vehi_capacidad').val();
-                var color = $('#vehi_color').val();
-                var kilometraje = $('#vehi_kilometraje').val();
-                var fecha = $('#vehi_registro').val();
-                var pais = $('#vehi_pais').val();
-                var ciudad = $('#vehi_ciudad').val();
-                var transmision = $('#vehi_transmision').val();
-                var preciocompra = $('#vehi_compra').val();
-                var tarifadiaria = $('#vehi_tarifa').val();
-                var penalidaddiaria = $('#vehi_penalidad').val();
-                if (placa && fabricante && modelo && anio && tipo && capacidad && color && kilometraje && fecha && pais && ciudad && transmision && preciocompra && tarifadiaria && penalidaddiaria) {
-                    $.ajax({
-                        url: "gestion_automoviles/saveVehicle",
-                        data: form.serialize(),
-                        type: 'POST',
-                        success: function (data) {
-                            alert("Se registro el vehiculo exitosamente");
-                            $('#formSaveVehicle')[0].reset();
-                        }
-                    });
-                } else {
-                    var error = "Los siguientes campos se encuentran vacios: \n\n";
-                    if (!placa){
-                        error = error + "- Placa \n";
-                    }
-                    if (!modelo) {
-                        error = error + "- Modelo \n";
-                    }
-                    if (!fabricante) {
-                        error = error + "- Fabricante \n";
-                    }
-                    if (!anio) {
-                        error = error + "- Año \n";
-                    }
-                    if (!fecha) {
-                        error = error + "- Fecha de registro \n";
-                    }
-                    if (!tipo) {
-                        error = error + "- Tipo \n";
-                    }
-                    if (!capacidad) {
-                        error = error + "- Capacidad \n";
-                    }
-                    if (!color) {
-                        error = error + "- Color \n";
-                    }
-                    if (!kilometraje) {
-                        error = error + "- Kilometraje \n";
-                    }
-                    if (!pais) {
-                        error = error + "- Pais \n";
-                    }
-                    if (!ciudad) {
-                        error = error + "- Ciudad \n";
-                    }
-                    if (!transmision) {
-                        error = error + "- Transmision \n";
-                    }
-                    if (!preciocompra) {
-                        error = error + "- Precio de compra \n";
-                    }
-                    if (!tarifadiaria) {
-                        error = error + "- Tarifa diaria \n";
-                    }
-                    if (!penalidaddiaria) {
-                        error = error + "- Penalidad diaria \n";
-                    }
-                    alert(error);
-                }
-            });
+        
     </script>*@ 
 }
 <!------------------- FIN DE SECCION DE AGREGAR AVION ---------------->
