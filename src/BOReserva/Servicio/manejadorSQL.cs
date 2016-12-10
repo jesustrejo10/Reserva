@@ -351,6 +351,7 @@ namespace BOReserva.Servicio
                 conexion.Open();
                 SqlCommand cmd = new SqlCommand("M04_BuscarDestinos", conexion);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add("@CiudadOrigen", System.Data.SqlDbType.VarChar, 100);
                 cmd.Parameters["@CiudadOrigen"].Value = Origen;
 
 

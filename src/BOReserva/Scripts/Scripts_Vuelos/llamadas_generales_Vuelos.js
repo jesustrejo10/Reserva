@@ -1,4 +1,5 @@
 ﻿
+
 // Evento para agregar un vuelo a la BD
 $("#agregarVuelo").click(function (e) {
     e.preventDefault();
@@ -14,12 +15,11 @@ $("#agregarVuelo").click(function (e) {
     });
 });
 
-       $("#ciudadO").change(function (e) {
-           var cID = $(this).val(Selection);
-           alert(cID);
-             $.getJSON("gestion_vuelo/cargarDestinos", { COI: cID },
-                    function (data) {
-                        var select = $("#ciudadD");
+$("#ciudadO").change(function () {
+    var cID = $(ciudadO).val();
+        $.getJSON("gestion_vuelo/cargarDestinos", { ciudadO: cID },
+               function (data) {
+                   var select = $("#ciudadD");
                         select.empty();
                         select.append($('<option/>', {
                             value: 0,
@@ -32,4 +32,25 @@ $("#agregarVuelo").click(function (e) {
                             }));
                         });
                     });
-         });
+});
+
+
+$("#ciudadD").change(function () {
+    var cID = $(ciudadO).val();
+    var dID = $(ciudadD).val();
+    $.getJSON("gestion_vuelo/cargarDestinos", { ciudadO: cID, ciudadD: dID },
+           function (data) {
+               var select = $("#ciudadD");
+               select.empty();
+               select.append($('<option/>', {
+                   value: 0,
+                   text: "Seleccione una ciudad destino"
+               }));
+               $.each(data, function (index, itemData) {
+                   select.append($('<option/>', {
+                       value: itemData.Value,
+                       text: itemData.Text
+                   }));
+               });
+           });
+});

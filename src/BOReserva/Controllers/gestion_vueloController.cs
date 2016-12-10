@@ -135,6 +135,38 @@ namespace BOReserva.Controllers
 
         //Evento POST de la view de crear vuelo
 
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult validarAviones(string ciudadO, string ciudadD)
+        {
+            CCrear_Vuelo model = new CCrear_Vuelo();
+            List<CCrear_Vuelo> resultado = new List<CCrear_Vuelo>();
+            manejadorSQL sql = new manejadorSQL();
+
+
+            resultado = sql.consultarDestinos(ciudadO);
+
+
+            model._matriculasAvion = resultado.Select(x => new SelectListItem
+            {
+                Value = model._matriculaAvion,
+                Text = model._matriculaAvion
+            });
+
+            if (resultado != null)
+            {
+                return (Json(model._ciudadesDestino, JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error accediendo a la BD";
+                return Json(error);
+            }
+
+
+
+        }
+
 
         [AcceptVerbs(HttpVerbs.Get)]
         public JsonResult cargarDestinos(string ciudadO)
