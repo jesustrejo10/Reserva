@@ -31,10 +31,10 @@ namespace FOReserva.Controllers
         public ActionResult restaurant_resultados()
         {
             int search_val = Int32.Parse(Request.QueryString["search_val"]);
-            string search_txt = Request.QueryString["search_text"];
+            string name_rest = Request.QueryString["name_rest"];
             try
             {
-                List<CRestaurantModel> lista = busqueda(search_val, search_txt);
+                List<CRestaurantModel> lista = busqueda(search_val, name_rest);
                 return View(lista);
             }
             catch ( NullReferenceException e) {
@@ -79,7 +79,7 @@ namespace FOReserva.Controllers
             return View(restaurante);
         }
 
-        public ActionResult confirma_restaurant()
+        public ActionResult confirma_restaurant(int id, string name_rest, string addres_rest, string name_client, string reserv_date, string reserv_hour, int number_person)
         {
             return View();
         }
