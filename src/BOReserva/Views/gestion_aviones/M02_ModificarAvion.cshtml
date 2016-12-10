@@ -4,7 +4,7 @@
 
 
 
-<!---------------------- SECCION DE AGREGAR AVION ---------------->
+<!---------------------- SECCION DE MODIFICAR AVION ---------------->
 @using (Html.BeginForm("guardarAvion", "gestion_aviones", null, FormMethod.Post, new { @id = "formGuardarAvion", @class = "form-horizontal" }))
 {
 
@@ -21,12 +21,12 @@
                                 &nbsp;
                                 <div class="col-md-12">
                                     <div class="col-xs-6">
-                                        <label for="matriculaAvion">Matrícula del Avión (<span style="color:red">*</span>):</label>
-                                        @Html.TextBoxFor(m => m._matriculaAvion, null, new { @class = "form-control", @placeholder = "HK-4549", @id = "matriculaAvion", @readonly = "readonly" })
+                                        <label for="matriculaAvion">Matrícula del avión (<span style="color:red">*</span>):</label>
+                                        @Html.TextBoxFor(m => m._matriculaAvion, null, new { @class = "form-control", @placeholder = "HK4549", @id = "matriculaAvion", @readonly = "readonly" })
 
                                     </div>
                                     <div class="col-xs-6">
-                                        <label for="capacidadPasajerosTurista">Capacidad Clase Turista:</label>
+                                        <label for="capacidadPasajerosTurista">Capacidad de clase turista (<span style="color:red">*</span>):</label>
                                         @Html.TextBoxFor(m => m._capacidadPasajerosTurista, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadTuristas", @min = 0 })
 
                                     </div>
@@ -37,12 +37,12 @@
                                 &nbsp;
                                 <div class="col-md-12">
                                     <div class="col-xs-6">
-                                        <label for="modeloAvion">Modelo del Avión (<span style="color:red">*</span>):</label>
+                                        <label for="modeloAvion">Modelo del avión (<span style="color:red">*</span>):</label>
                                         @Html.TextBoxFor(m => m._modeloAvion, null, new { @class = "form-control", @placeholder = "Boeing 777", @id = "modeloAvion" })
 
                                     </div>
                                     <div class="col-xs-6">
-                                        <label for="capacidadPasajerosVIP">Capacidad Clase VIP:</label>
+                                        <label for="capacidadPasajerosVIP">Capacidad de clase VIP (<span style="color:red">*</span>):</label>
                                         @Html.TextBoxFor(m => m._capacidadPasajerosVIP, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadVIP", @min = 0 })
 
 
@@ -54,12 +54,12 @@
                                 &nbsp;
                                 <div class="col-md-12">
                                     <div class="col-xs-6">
-                                        <label for="capacidadEquipaje">Capacidad de Equipaje (En Kilos) (<span style="color:red">*</span>):</label>
+                                        <label for="capacidadEquipaje">Capacidad de equipaje (en Kg) (<span style="color:red">*</span>):</label>
                                         @Html.TextBoxFor(m => m._capacidadEquipaje, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadEquipaje", @min = 0 })
 
                                     </div>
                                     <div class="col-xs-6">
-                                        <label for="capacidadPasajerosEjecutiva">Capacidad Clase Ejecutiva:</label>
+                                        <label for="capacidadPasajerosEjecutiva">Capacidad de clase ejecutiva (<span style="color:red">*</span>):</label>
                                         @Html.TextBoxFor(m => m._capacidadPasajerosEjecutiva, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadEjecutiva", @min = 0 })
 
                                     </div>
@@ -71,13 +71,13 @@
                                 <div class="col-md-12">
 
                                     <div class="col-xs-6">
-                                        <label for="capacidadCombustible">Capacidad de Combustible (En litros) (<span style="color:red">*</span>):</label>
+                                        <label for="capacidadCombustible">Capacidad de combustible (en litros) (<span style="color:red">*</span>):</label>
                                         @Html.TextBoxFor(m => m._capacidadMaximaCombustible, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "capacidadCombustible", @min = 0 })
 
                                     </div>
 
                                     <div class="col-xs-6">
-                                        <label for="velocidadMaximaDeVuelo">Velocidad Máxima (En Km/h) :</label>
+                                        <label for="velocidadMaximaDeVuelo">Velocidad máxima de vuelo (en Km/h) (<span style="color:red">*</span>):</label>
                                         @Html.TextBoxFor(m => m._velocidadMaximaDeVuelo, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "velocidadMaximaDeVuelo", @min = 0 })
 
                                     </div>
@@ -92,7 +92,7 @@
                                 <div class="col-md-12">
 
                                     <div class="col-xs-6">
-                                        <label for="distanciaMaximaDeVuelo">Distancia Máxima de Vuelo (En Kilometros) (<span style="color:red">*</span>):</label>
+                                        <label for="distanciaMaximaDeVuelo">Distancia máxima de vuelo (en Km) (<span style="color:red">*</span>):</label>
                                         @Html.TextBoxFor(m => m._distanciaMaximaVuelo, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "distanciaMaximaVuelo", @min = 0 })
 
                                     </div>
