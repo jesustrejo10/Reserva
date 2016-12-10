@@ -48,7 +48,7 @@
                                                  Value = "Ford"
                                              });
                                 }
-                                @Html.DropDownListFor(m => m._fabricante, _fabricante, new { @class = "form-control", @placeholder = "Marca", @id = "vehi_marca" })
+                                @Html.DropDownListFor(m => m._fabricante, _fabricante, new { @class = "form-control", @placeholder = "Marca", @id = "vehi_fabricante" })
                             </div>
                         </div>
                         <div>&nbsp;</div>
@@ -103,7 +103,7 @@
                             </div>
                             <div class="col-xs-6">
                                 <label for="capacidad">Capacidad</label>
-                                @Html.DropDownListFor(m => m._cantpasajeros, BOReserva.Controllers.gestion_automovilesController.cantidad(10), new { @class = "form-control", @placeholder = "Tipo", @id = "vehi_cantidad" })
+                                @Html.DropDownListFor(m => m._cantpasajeros, BOReserva.Controllers.gestion_automovilesController.cantidad(10), new { @class = "form-control", @placeholder = "Tipo", @id = "vehi_capacidad" })
                             </div>
                         </div>
                         <div>&nbsp;</div>

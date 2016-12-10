@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BOReserva.DataAccess.Model;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -17,7 +18,8 @@ namespace BOReserva.Models.gestion_automoviles
 
         public void probarconexion()
         {
-            con = new SqlConnection(connetionString);
+            //con = new SqlConnection(connetionString);
+            con = Connection.getInstance(connetionString);
             con.Open();
         }
 
