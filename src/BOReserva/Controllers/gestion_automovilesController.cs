@@ -26,7 +26,6 @@ namespace BOReserva.Controllers
             List<CAutomovil> listavehiculos = buscarvehiculos.MListarvehiculosBD();  //AQUI SE BUSCA TODO LOS VEHICULOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
             //CAutomovil test = new CAutomovil("AG234FC", "3", "Mazda", 2006, "Sedan", 1589.5, 5, 7550.0, 250.6, 290.4, DateTime.Parse("11/11/2016"), "Azul", 1, "Automatico", "Venezuela", "Distrito Capital", "Caracas");
             //listavehiculos.Add(test);
-
             return PartialView(listavehiculos);
         }
 
@@ -302,6 +301,61 @@ namespace BOReserva.Controllers
             return _pais;
         }
 
+
+        public JsonResult activateVehicle(String matricula)
+        {
+            String _matricula = matricula;
+            int anio = 0;
+            int cantpasajeros = 0;
+            String ciudad = "";
+            String color = "";
+            int disponibilidad = 0;
+            String fabricante = "";
+            DateTime fecharegistro = DateTime.Now;
+            double kilometraje = 0;
+            String modelo = "";
+            String pais = "";
+            double penalidaddiaria = 0;
+            double precioalquiler = 0;
+            double preciocompra = 0;
+            String tipovehiculo = "";
+            String transmision = "";
+            Debug.WriteLine("IMPRIMIENDO UN MENSAJE" + matricula);
+            CAutomovil carro = new CAutomovil(matricula, modelo, fabricante, anio, tipovehiculo, kilometraje,
+                                             cantpasajeros, preciocompra, precioalquiler, penalidaddiaria, fecharegistro,
+                                             color, 1, transmision, pais, ciudad);  //SE CREA EL VEHICULO
+            int estatus_si_no = carro.MDisponibilidadVehiculoBD(_matricula, 1); //SE BORRA LA BD RETORNA 1 SI SE  BORRA Y 0 SI NO LO LOGRA
+            return (Json(true, JsonRequestBehavior.AllowGet));
+        }
+
         
+        public JsonResult deactivateVehicle(String matricula)
+        {
+            String _matricula = matricula;
+            int anio = 0;
+            int cantpasajeros = 0;
+            String ciudad = "";
+            String color = "";
+            int disponibilidad = 0;
+            String fabricante = "";
+            DateTime fecharegistro = DateTime.Now;
+            double kilometraje = 0;
+            String modelo = "";
+            String pais = "";
+            double penalidaddiaria = 0;
+            double precioalquiler = 0;
+            double preciocompra = 0;
+            String tipovehiculo = "";
+            String transmision = "";
+            Debug.WriteLine("IMPRIMIENDO UN MENSAJE" + matricula);
+            CAutomovil carro = new CAutomovil(matricula, modelo, fabricante, anio, tipovehiculo, kilometraje,
+                                             cantpasajeros, preciocompra, precioalquiler, penalidaddiaria, fecharegistro,
+                                             color, 1, transmision, pais, ciudad);  //SE CREA EL VEHICULO
+            int estatus_si_no = carro.MDisponibilidadVehiculoBD(_matricula, 0); //SE BORRA LA BD RETORNA 1 SI SE  BORRA Y 0 SI NO LO LOGRA
+            return (Json(true, JsonRequestBehavior.AllowGet));
+        }
+
+        
+
     }
 }
