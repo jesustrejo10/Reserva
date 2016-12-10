@@ -1,5 +1,6 @@
 ﻿@model FOReserva.Models.Autos.Cvista_ReservaAutos
 
+<script src="/Scripts/BuscarCarro.js"></script>
 
 <div class="heading-title">
     <h3><span>Autos</span></h3>
@@ -15,14 +16,17 @@
 
         <div class="row">
             <div class="form-group">
+
                 <div class="col-md-6 col-sm-6">
+
+
                     <label>Recoger en:</label>
-                    <input type="text" name="contact[first_name]" value="" class="form-control required">
+                   @Html.DropDownListFor(m => m.SelectedCiudadIdOrigen, Model.CiudadesOrigen, new { @class = "form-control select2", @id = "res_entrega" })            
                 </div>
+
                 <div class="col-md-6 col-sm-6">
                     <label>Devolver en:</label>
-                    @Html.TextBoxFor(m => m._prueba, null, new { @class = "form-control required", @name = "contact[first_name]" })
-                    @*<input type="text" name="contact[last_name]" value="" class="form-control required">*@
+                    @Html.DropDownListFor(m => m.SelectedCiudadIdDestino, Model.CiudadesDestino, new { @class = "form-control select2" , @id= "res_devolucion"})
                 </div>
             </div>
         </div>
@@ -30,17 +34,60 @@
         <div class="row">
             <div class="form-group">
                 <div class="col-md-6 col-sm-6">
-                    <label>Fecha y Hora de Recogida:</label>
-                    <input type="text" name="contact[start_date]" value="10-11-2016" class="form-control datepicker required" data-format="dd-mm-yyyy" data-lang="en" data-rtl="false">
+                    <label>Fecha de Recogida:</label>
+                    @Html.TextBoxFor(m => m.fechaini, null, new { @type = "date", @class = "form-control", @placeholder = "Fecha", @id = "res_fechaini", min = "today" , max = "2032-12-31"})
+                   <!-- <input type="text" name="contact[start_date]" value="10-11-2016" class="form-control datepicker required" data-format="dd-mm-yyyy" data-lang="en" data-rtl="false">  -->
+                    <label>Hora de Recogida:</label>
+                    <select id="res_horaini "name="contact[position]" class="form-control pointer required">
+                        <option value="" selected>Selecciona la hora:</option>
+                        <option value="7:00">7:00</option>
+                        <option value="8:00">8:00</option>
+                        <option value="9:00">9:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="12:00">12:00</option>
+                        <option value="13:00">13:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                        <option value="18:00">18:00</option>
+                        <option value="19:00">19:00</option>
+                        <option value="20:00">20:00</option>
+                        <option value="21:00">21:00</option>
+                        <option value="22:00">22:00</option>
+                        <option value="23:00">23:00</option>
+                    </select>
                     <br>
-                    <input type="text" class="form-control timepicker" value="10 : 00 : AM">
+                    
                 </div>
                 <div class="col-md-6 col-sm-6">
-                    <label>Fecha y Hora de Devolución:</label>
-                    <input type="text" name="contact[start_date]" value="10-11-2016" class="form-control datepicker required" data-format="dd-mm-yyyy" data-lang="en" data-rtl="false">
+                    <label>Fecha  de Devolución:</label>
+                    @Html.TextBoxFor(m => m.fechaini, null, new { @type = "date", @class = "form-control", @placeholder = "Fecha", @id = "res_fechafin", min = "today", max = "2032-12-31" })
+                    <!--<input type="text" name="contact[start_date]" value="10-11-2016" class="form-control datepicker required" data-format="dd-mm-yyyy" data-lang="en" data-rtl="false"> -->
+                    <label>Hora de Devolucion:</label>
+                    <select id="res_horafin" name="contact[position]" class="form-control pointer required">
+                        <option value="" selected>Selecciona la hora:</option>
+                        <option value="7:00">7:00</option>
+                        <option value="8:00">8:00</option>
+                        <option value="9:00">9:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="12:00">12:00</option>
+                        <option value="13:00">13:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                        <option value="18:00">18:00</option>
+                        <option value="19:00">19:00</option>
+                        <option value="20:00">20:00</option>
+                        <option value="21:00">21:00</option>
+                        <option value="22:00">22:00</option>
+                        <option value="23:00">23:00</option>
+                    </select>
                     <br>
-                    <input type="text" class="form-control timepicker" value="10 : 00 : AM">
-
+                   
                 </div>
             </div>
         </div>
@@ -54,18 +101,40 @@
     </div>
 
 <script>
+  //  $("#buscarCarro").click(function (e) {
+    //    e.preventDefault();
+      //  var form = $("#formBuscarCarro");
+       // $.ajax({
+        //    url: "gestion_reserva_auto/buscarCarro",
+         //   data: form.serialize(),
+          //  type: 'POST',
+           // success: function (data) {
+            //    alert("Buscando...");
+            //}
+       // });
+    //});
+
     $("#buscarCarro").click(function (e) {
         e.preventDefault();
-        var form = $("#formBuscarCarro");
-        $.ajax({
-            url: "gestion_reserva_auto/buscarCarro",
-            data: form.serialize(),
-            type: 'POST',
-            success: function (data) {
-                alert("Buscando...");
-            }
-        });
+        //var form = $("#formSaveVehicle");
+        var entrega = $('#res_entrega').val();
+        var devolucion = $('#res_devolucion').val();
+        var fechainicio = $('#res_fechaini').val();
+        var horainicio = $('#res_horaini').val();
+        var fechafin = $('#res_fechafin').val();
+        var horafin = $('#res_horafin').val();
+        console.log(entrega);
+        console.log(devolucion);
+        console.log(fechainicio);
+        console.log(horainicio);
+        console.log(fechafin);
+        console.log(horafin);
+
+
+
+        
     });
+
 </script>
 
 }

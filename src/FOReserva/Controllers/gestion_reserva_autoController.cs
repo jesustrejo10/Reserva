@@ -26,8 +26,14 @@ namespace FOReserva.Controllers
         [HttpPost]
         public JsonResult buscarCarro(Cvista_ReservaAutos model)
         {
-            String prueba = model._prueba;
-            Console.WriteLine(prueba);
+            
+            DateTime fechaini = model.fechaini;
+            DateTime fechafin = model.fechafin;
+            int sel = model.SelectedCiudadIdOrigen;
+            int sel2 = model.SelectedCiudadIdDestino;
+
+            //Console.WriteLine(prueba);
+            
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
 
