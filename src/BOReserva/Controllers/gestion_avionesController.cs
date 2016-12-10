@@ -58,16 +58,94 @@ namespace BOReserva.Controllers
             }
         }
 
-        /*Metodo para consultar la matricula de un avion para sus estadisticas*/
-        [HttpPost]
-        public JsonResult consultarEstadisticasAvion(CGestion_avion model)
+
+        public ActionResult M02_VisualizarAviones()
         {
-            String prueba = model._matriculaConsultarEstadisticaAvion;
-            return (Json(true, JsonRequestBehavior.AllowGet));
+            manejadorSQL sql = new manejadorSQL();
+            List<CAvion> aviones = new List<CAvion>();
+            aviones = sql.listarAvionesEnBD();
+            return PartialView(aviones);
+        }
+
+        public ActionResult M02_ConsultarAvion(int id)
+        {
+            manejadorSQL sql = new manejadorSQL();
+            CAvion avion = new CAvion();
+            avion = sql.consultarAvion(id);
+            CModificarAvion modelo = new CModificarAvion(avion);
+            return PartialView("M02_ModificarAvion",modelo);
+        }
+
+        [HttpPost]
+        public JsonResult modificarAvion(CModificarAvion model)
+        {
+            //Chequeo si los campos obligatorios estan vacios como medida de seguridad
+            if ((model._matriculaAvion == null) || (model._modeloAvion == null) || (model._capacidadEquipaje == 0) || (model._capacidadMaximaCombustible == 0) || (model._distanciaMaximaVuelo == 0))
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error, campo obligatorio vacio";
+                //Retorno el error
+                return Json(error);
+            }
+            manejadorSQL sql = new manejadorSQL();
+            Boolean resultado = sql.modificarAvion(model);
+            if (resultado)
+            { 
+                return (Json(sql.modificarAvion(model), JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error en la base de datos";
+                //Retorno el error
+                return Json(error);
+            }
+        }
+
+        [HttpPost]
+        public JsonResult habilitarAvion(int id)
+        {
+            manejadorSQL sql = new manejadorSQL();
+            Boolean resultado = sql.habilitarAvion(id);
+            if (resultado)
+            {
+                return (Json(true, JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error en la base de datos";
+                //Retorno el error
+                return Json(error);
+            }
             
         }
 
-
+        [HttpPost]
+        public JsonResult deshabilitarAvion(int id)
+        {
+            manejadorSQL sql = new manejadorSQL();
+            Boolean resultado = sql.deshabilitarAvion(id);
+            if (resultado)
+            {
+                return (Json(true, JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error en la base de datos";
+                //Retorno el error
+                return Json(error);
+            }
+        }
 
 
     }

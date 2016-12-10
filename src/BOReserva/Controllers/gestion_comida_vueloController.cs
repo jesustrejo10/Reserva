@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BOReserva.Models.gestion_comida_vuelo;
 
 namespace BOReserva.Controllers
 {
@@ -11,7 +12,8 @@ namespace BOReserva.Controllers
         // GET: /gestion_comida_vuelo/
         public ActionResult M06_AgregarComida()
         {
-            return PartialView();
+            CAgregarComida model = new CAgregarComida();
+            return PartialView(model);
         }
 
         public ActionResult M06_AgregarPorVuelo()
