@@ -89,4 +89,23 @@
         </div>
     </div>
 </div>
+
+<script>
+
+
+        $(document).ready(function () {
+			$('.datepicker').datepicker({
+				orientation: "bottom",
+				format: 'yyyy-mm-dd',
+			    startDate: '-3d'
+			});
+			$('#datepicker').datepicker();
+
+			$('#datepicker').on("changeDate", function() {
+			    $('#my_hidden_input').val(
+			        $('#datepicker').datepicker('getFormattedDate')
+			    );
+			});
+        });
+    </script>
 <!-- /FEATURED GRID -->
