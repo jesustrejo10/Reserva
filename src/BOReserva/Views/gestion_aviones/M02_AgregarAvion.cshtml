@@ -117,19 +117,84 @@
 <!-- /.row -->
     
     @*<script>
-    $("#aceptarAvion").click(function (e) {
-        e.preventDefault();
-        var form = $("#formGuardarAvion");
-        $.ajax({
-            url: "gestion_aviones/guardarAvion",
-            data: form.serialize(),
-            type: 'POST',
-            success: function (data) {
-                alert("Se guardo");
-                $('#formGuardarAvion')[0].reset();
-            }
-        });
-    });
-</script>*@ 
+        $("#save_vehicle").click(function (e) {
+                e.preventDefault();
+                var form = $("#formSaveVehicle");
+                var placa = $('#vehi_placa').val();
+                var fabricante = $('#vehi_fabricante').val();
+                var modelo = $('#vehi_modelo').val();
+                var anio = $('#vehi_anio').val();
+                var tipo = $('#vehi_tipo').val();
+                var capacidad = $('#vehi_capacidad').val();
+                var color = $('#vehi_color').val();
+                var kilometraje = $('#vehi_kilometraje').val();
+                var fecha = $('#vehi_registro').val();
+                var pais = $('#vehi_pais').val();
+                var ciudad = $('#vehi_ciudad').val();
+                var transmision = $('#vehi_transmision').val();
+                var preciocompra = $('#vehi_compra').val();
+                var tarifadiaria = $('#vehi_tarifa').val();
+                var penalidaddiaria = $('#vehi_penalidad').val();
+                if (placa && fabricante && modelo && anio && tipo && capacidad && color && kilometraje && fecha && pais && ciudad && transmision && preciocompra && tarifadiaria && penalidaddiaria) {
+                    $.ajax({
+                        url: "gestion_automoviles/saveVehicle",
+                        data: form.serialize(),
+                        type: 'POST',
+                        success: function (data) {
+                            alert("Se registro el vehiculo exitosamente");
+                            $('#formSaveVehicle')[0].reset();
+                        }
+                    });
+                } else {
+                    var error = "Los siguientes campos se encuentran vacios: \n\n";
+                    if (!placa){
+                        error = error + "- Placa \n";
+                    }
+                    if (!modelo) {
+                        error = error + "- Modelo \n";
+                    }
+                    if (!fabricante) {
+                        error = error + "- Fabricante \n";
+                    }
+                    if (!anio) {
+                        error = error + "- Año \n";
+                    }
+                    if (!fecha) {
+                        error = error + "- Fecha de registro \n";
+                    }
+                    if (!tipo) {
+                        error = error + "- Tipo \n";
+                    }
+                    if (!capacidad) {
+                        error = error + "- Capacidad \n";
+                    }
+                    if (!color) {
+                        error = error + "- Color \n";
+                    }
+                    if (!kilometraje) {
+                        error = error + "- Kilometraje \n";
+                    }
+                    if (!pais) {
+                        error = error + "- Pais \n";
+                    }
+                    if (!ciudad) {
+                        error = error + "- Ciudad \n";
+                    }
+                    if (!transmision) {
+                        error = error + "- Transmision \n";
+                    }
+                    if (!preciocompra) {
+                        error = error + "- Precio de compra \n";
+                    }
+                    if (!tarifadiaria) {
+                        error = error + "- Tarifa diaria \n";
+                    }
+                    if (!penalidaddiaria) {
+                        error = error + "- Penalidad diaria \n";
+                    }
+                    alert(error);
+                }
+            });
+    </script>*@ 
 }
 <!------------------- FIN DE SECCION DE AGREGAR AVION ---------------->

@@ -35,12 +35,14 @@ namespace BOReserva.Controllers
                 || (model._distanciaMaximaVuelo == 0) || (model._capacidadPasajerosEjecutiva == 0) || (model._capacidadPasajerosVIP == 0) ||
                 (model._capacidadPasajerosTurista == 0) || (model._velocidadMaximaDeVuelo == 0)) 
             {
+                //Agrego mi error
+                var respuesta = "Error! hay campos obligatorios vacios";
+                
                 //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                //Agrego mi error
-                String error = "Error! campo obligatorio vacío";
+               
                 //Retorno el error
-                return Json(error);
+                return Json(respuesta);
             }
             //AGREGAR EL USING DEL MANEJADOR SQL ANTES (using BOReserva.Servicio; o using FOReserva.Servicio;)
             //instancio el manejador de sql
