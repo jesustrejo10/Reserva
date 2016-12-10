@@ -15,14 +15,14 @@ namespace BOReserva.Servicio
 
         public Cgestion_seguridad_ingreso UsuarioEnBD(String usuario)
         {
-            String usuarioBD = "", nombreBD = "", claveBD = "", statusBD="";
+            String usuarioBD = "", nombreBD = "", apellidoBD = "", claveBD = "", statusBD="";
             try
             {
                 //Inicializo la conexion con el string de conexion
                 conexion = new SqlConnection(stringDeConexion);
                 //INTENTO abrir la conexion
                 conexion.Open();
-                SqlCommand cmd = new SqlCommand("Select usu_correo, usu_nombre, usu_contraseña, usu_activo from Usuario where usu_correo like @usu_correo AND usu_fk_rol IS NOT NULL", conexion);
+                SqlCommand cmd = new SqlCommand("Select usu_correo, usu_nombre, usu_apellido ,usu_contraseña, usu_activo from Usuario where usu_correo like @usu_correo AND usu_fk_rol IS NOT NULL", conexion);
                 //cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@usu_correo", usuario);
                 SqlDataReader lector = cmd.ExecuteReader();
@@ -30,16 +30,17 @@ namespace BOReserva.Servicio
                 {
                     usuarioBD = lector.GetString(0);
                     nombreBD = lector.GetString(1);
-                    claveBD = lector.GetString(2);
+                    apellidoBD = lector.GetString(2);
+                    claveBD = lector.GetString(3);
 
                     System.Diagnostics.Debug.WriteLine("Correo " + usuarioBD + " contrasena " + claveBD);
 
-                    statusBD = lector.GetString(3);
+                    statusBD = lector.GetString(4);
 
                 }
                 lector.Close();
                 conexion.Close();
-                return new Cgestion_seguridad_ingreso(usuarioBD, claveBD, nombreBD,statusBD);
+                return new Cgestion_seguridad_ingreso(usuarioBD, claveBD, nombreBD,apellidoBD,statusBD);
             }
             catch (SqlException e)
             {

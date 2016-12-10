@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.SqlClient;
+
 
 namespace BOReserva.Content.Controllers
 {
@@ -38,13 +40,14 @@ namespace BOReserva.Content.Controllers
             }
             try
             {
-                contraseña = Encriptar.CrearHash(contraseña);
-                System.Diagnostics.Debug.WriteLine("Correo "+correo+" contrasena "+contraseña);
+                // contraseña = Encriptar.CrearHash(contraseña);
+                System.Diagnostics.Debug.WriteLine("Correo " + correo + " contrasena " + contraseña);
                 ingreso = ingreso.verificarUsuario(correo, contraseña);
                 if (ingreso.EstaActivo())
                 {
                     if (ingreso.VerificarIntentos())
                     {
+
                         ingreso.ResetearIntentos();
                         Session["Cgestion_seguridad_ingreso"] = ingreso;
                         return RedirectToAction("Index", "Home");
@@ -52,7 +55,7 @@ namespace BOReserva.Content.Controllers
                     else
                     {
                         ingreso.BloquearUsuario();
-                        TempData["Mensaje"] = "Su usuario ha sido bloqueado. Por favor contacte con un administrador.";
+                        TempData["Mensaje"] = "Su usuario ha sido bloqueado. Por favor contacte al administrador.";
                         return RedirectToAction("M01_Login", "gestion_seguridad_ingreso");
                     }
                 }
@@ -62,10 +65,15 @@ namespace BOReserva.Content.Controllers
                     return RedirectToAction("M01_Login", "gestion_seguridad_ingreso");
                 }
             }
-            catch (Exception e)
+            catch (Cvalidar_usuario_Exception e)
             {
-              TempData["Mensaje"] = e.Message;
-            }         
+                TempData["Mensaje"] = e.Message;
+            }
+            catch (SqlException)
+            {
+                TempData["Mensaje"] = "Conexion fallida a Base de Datos Contacte Administrador";
+            }
+            catch (Exception e) { } //exception importante cuando haya problemas con la bd de no conexion colocan un mensaje error de bases de datos 
             return RedirectToAction("M01_Login", "gestion_seguridad_ingreso");
         }
 

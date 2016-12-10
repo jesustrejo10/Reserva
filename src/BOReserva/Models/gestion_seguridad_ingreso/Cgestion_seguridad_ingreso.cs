@@ -13,14 +13,16 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
        private String _correoCampoTexto;
        private String _claveCampoTexto;
        private String _nombreUsuarioTexto;
+       private String _apellidoUsuarioTexto;
        private String _usuarioEstatus;
 
         public Cgestion_seguridad_ingreso() { }
-        public Cgestion_seguridad_ingreso(String correo, String clave, String nombre, String status)
+        public Cgestion_seguridad_ingreso(String correo, String clave, String nombre,String apellido, String status)
         {
             this._correoCampoTexto = correo;
             this._claveCampoTexto = clave;
             this._nombreUsuarioTexto = nombre;
+            this.apellidoUsuarioTexto = apellido;
             this._usuarioEstatus = status;
 
         }
@@ -35,12 +37,11 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
         /// <returns>Retorna true or false segun verificacion de credenciales</returns>
         public Cgestion_seguridad_ingreso verificarUsuario(String _correoCampoTexto, String _claveCampoTexto)
         {
-            //verificacion._correoCampoTexto.Equals(_correoCampoTexto)
-           
+                      
             M01SQL bd = new M01SQL();
-            String clave = Encriptar.CrearHash(_claveCampoTexto);
+            String clave = Encriptar.CrearHash(_claveCampoTexto);//metodo implementado por MOD 12 USUARIO
                      
-            Cgestion_seguridad_ingreso verificacion = bd.UsuarioEnBD(_correoCampoTexto.ToLower());
+            Cgestion_seguridad_ingreso verificacion = bd.UsuarioEnBD(_correoCampoTexto);
             Boolean Usuario = verificacion._correoCampoTexto.Equals(_correoCampoTexto);
             Boolean Contraseña = verificacion._claveCampoTexto.Equals(clave);
             System.Diagnostics.Debug.WriteLine("Correo " + Usuario + " contrasena " + Contraseña);
@@ -53,6 +54,8 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
             {
                 if (verificacion != null && !verificacion._correoCampoTexto.Equals(""))
                     bd.IncrementarIntentos(_correoCampoTexto);
+
+
                 throw new Cvalidar_usuario_Exception("Usuario o contraseña incorrecto");
 
             }
@@ -125,6 +128,12 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
         {
             get { return this._nombreUsuarioTexto; }
             set { this._nombreUsuarioTexto = value; }
+        }
+
+        public String apellidoUsuarioTexto
+        {
+            get { return this._apellidoUsuarioTexto; }
+            set { this._apellidoUsuarioTexto = value; }
         }
 
         #endregion
