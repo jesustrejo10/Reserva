@@ -1,4 +1,5 @@
-﻿<div class="row">
+﻿@model BOReserva.Models.gestion_comida_vuelo.CAgregarComida
+<div class="row">
     <!-- Agregar Comida  -->
     <div class="col-xs-6"> 
         <div class="box-header with-border">
@@ -12,9 +13,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-12">
-                        <label for="agregarEditarComida">Nombre del Plato:</label>
+                        <label for="agregarEditarComida">Nombre del Plato (<span style="color:red">*</span>):</label>
                         <input type="text" class="form-control" id="agregarEditarComida">
-                        <label for="agregarEditarComida">Descripcion:</label>
+                        <label for="agregarEditarComida">Descripcion (<span style="color:red">*</span>):</label>
                         <textarea class="form-control" rows="3"></textarea>
                     </div>
                 </div>
@@ -35,13 +36,15 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-12">
-                        <label for="agregarEditarComida">Tipo:</label>
+                        <label for="agregarEditarComida">Tipo (<span style="color:red">*</span>):</label>
                         <select class="form-control" id="idcomida">
+                            <option>Selecciona uno</option>
                             <option>Comida</option>
                             <option>Bebida</option>
                         </select>
-                        <label for="agregarEditarComidao">Estatus:</label>
+                        <label for="agregarEditarComidao">Estatus (<span style="color:red">*</span>):</label>
                         <select class="form-control" id="idcomida">
+                            <option>Selecciona uno</option>
                             <option>Disponible</option>
                             <option>No Disponible</option>
                         </select>
