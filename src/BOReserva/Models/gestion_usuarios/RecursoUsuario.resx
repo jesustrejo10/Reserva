@@ -133,6 +133,10 @@
     <value>Error de conexión con la base de datos</value>
     <comment>Error de conexión con la BD</comment>
   </data>
+  <data name="ConsultarEmail" xml:space="preserve">
+    <value>M12_ConsultarUsuario</value>
+    <comment>Recupera la información de un usuario a partir de un email</comment>
+  </data>
   <data name="ConsultarID" xml:space="preserve">
     <value>M12_ConsultarUsuarioID</value>
     <comment>Recupera la información de un usuario a partir de su ID</comment>
@@ -148,6 +152,14 @@
   <data name="EliminarUsuario" xml:space="preserve">
     <value>M12_EliminarUsuario</value>
     <comment>Elimina un usuario a partir de su ID</comment>
+  </data>
+  <data name="Error_Conflicto_FK" xml:space="preserve">
+    <value>Error: El usuario no se puede eliminar ya que tiene registros asociados</value>
+    <comment>Mensaje de conflicto de FK con alguna entidad relacionada con la tabla usuario</comment>
+  </data>
+  <data name="Error_Email_Existe" xml:space="preserve">
+    <value>Error, el correo introducido ya se encuentra registrado</value>
+    <comment>Error de constraint unico del email</comment>
   </data>
   <data name="ExceptionM12" xml:space="preserve">
     <value>Reserva_M12</value>
@@ -168,6 +180,10 @@
   <data name="ListarUsuarios" xml:space="preserve">
     <value>M12_ListarUsuarios</value>
     <comment>Stored Procedure para listar todos los usuarios del BO</comment>
+  </data>
+  <data name="ModificarUsuario" xml:space="preserve">
+    <value>M12_ModificarUsuario</value>
+    <comment>Stored Procedure para modificar un usuario.</comment>
   </data>
   <data name="NombreUsuario" xml:space="preserve">
     <value>nombre</value>
