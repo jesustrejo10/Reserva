@@ -15,31 +15,20 @@ namespace FOReserva.Models.Restaurantes
     {
 
         private int _count;
-        private UserProfile _user;
         private int _idUser;
-        private string _restName;
-        private string _restAddres;
+        private int _idRestaurant;
 
         /*Constructor Completo*/
         public CReservation_Restaurant
-           (UserProfile user, string owner, DateTime date, string time, int count, int idUser, string restName, string restAddres)
+           (string owner, string date, string time, int count, int idUser, int idRestaurant)
            : base( owner, date, time )
         {
             this._count = count;
-            this._user = user;
             this._idUser = idUser;
-            this._restName = restName;
-            this._restAddres = restAddres;
+            this._idRestaurant = idRestaurant;
             //this._restaurant = restaurant;
         }
-
-        /*Metodos Get y Set del Usuario de la reserva*/
-        public UserProfile User
-        {
-            get { return _user; }
-            set { _user = value; }
-        }
-
+        
         /*Metodos Get y Set de la cantidad de personas de la reserva*/
         public int Count
         {
@@ -52,16 +41,12 @@ namespace FOReserva.Models.Restaurantes
             get { return _idUser; }
             set { _idUser = value; }
         }
-        public string RestName
+
+        public int IdRestaurant
         {
-            get { return _restName; }
-            set { _restName = value; }
+            get { return _idRestaurant; }
+            set { _idRestaurant = value; }
         }
 
-        public string RestAddres
-        {
-            get { return _restAddres; }
-            set { _restAddres = value; }
-        }
     }
 }

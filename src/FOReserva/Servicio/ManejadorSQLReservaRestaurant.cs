@@ -85,12 +85,9 @@ namespace FOReserva.Servicio
         
         public void CrearReserva(CReservation_Restaurant reserva)
         {
-            string query =
-            @"INSERT INTO Reserva ( Tipo, Reserva_Nombre, Fecha, Hora,
-            Cantidad_Personas, FK_RESTAURANTE, FK_USUARIO) 
-            VALUES('"+reserva.GetType()+@"','"+reserva.Name+@"',
-            convert(date, '2016-12-20'), '"+reserva.Time+"',"+reserva.Count+","+
-            @"1, 4)";
+
+            string query = "INSERT INTO Reserva_Restaurante ( Reserva_Nombre, Fecha, Hora,Cantidad_Personas, FK_RESTAURANTE, FK_USUARIO) VALUES( '"+reserva.Name+"',convert(date, '"+reserva.Date+"'),'"+reserva.Time+"',"+reserva.Count+","+reserva.IdRestaurant+", 2)";
+            this.Executer(query);
             CloseConnection();
         }
     }

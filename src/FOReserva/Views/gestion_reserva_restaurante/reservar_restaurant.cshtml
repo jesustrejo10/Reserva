@@ -16,7 +16,7 @@
 
             @using (Html.BeginForm("confirma_restaurant", "gestion_reserva_restaurante", FormMethod.Post))
             {
-                <input type="hidden" name="id" id="" value="@Model.Id" />
+                <input type="hidden" name="restaurantID" id="" value="@Model.Id" />
                 <input type="hidden" name="name_rest" id="" value="@Model.Name" />
                 <input type="hidden" name="addres_rest" id="" value="@Model.Addres" />
                 <div class="form-group">
