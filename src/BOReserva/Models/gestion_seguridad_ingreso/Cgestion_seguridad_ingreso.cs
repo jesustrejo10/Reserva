@@ -40,7 +40,7 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
             M01SQL bd = new M01SQL();
             String clave = Encriptar.CrearHash(_claveCampoTexto);
                      
-            Cgestion_seguridad_ingreso verificacion = bd.UsuarioEnBD(_correoCampoTexto);
+            Cgestion_seguridad_ingreso verificacion = bd.UsuarioEnBD(_correoCampoTexto.ToLower());
             Boolean Usuario = verificacion._correoCampoTexto.Equals(_correoCampoTexto);
             Boolean Contraseña = verificacion._claveCampoTexto.Equals(clave);
             System.Diagnostics.Debug.WriteLine("Correo " + Usuario + " contrasena " + Contraseña);
