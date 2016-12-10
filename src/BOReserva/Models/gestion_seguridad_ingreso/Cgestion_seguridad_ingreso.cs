@@ -63,6 +63,11 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
         }
         #endregion
 
+        /// <summary>
+        /// Funcion que verifica el estatus de usuario activo o inactivo
+        /// </summary>
+        /// <returns>Retorna true estatus de usuario activo false inacivo</returns>
+
         public Boolean EstaActivo()
         {
             // M01SQL bd = new M01SQL();
@@ -77,6 +82,10 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
 
         }
 
+        /// <summary>
+        /// Funcion que verifica si el usuario se encuentra bloqueado
+        /// </summary>
+        /// <returns>Retorna true bloqueado false si no esta bloqueado</returns>
         public Boolean BloquearUsuario()
         {
             M01SQL bd = new M01SQL();
@@ -90,6 +99,10 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
             }
         }
 
+        /// <summary>
+        /// Funcion reinicia el contador de intentos de usuario
+        /// </summary>
+        /// <returns>Retorna true si el ingreso de contraseña fue correcto false caso contrario</returns>
         public Boolean ResetearIntentos()
         {
             M01SQL bd = new M01SQL();
@@ -103,6 +116,11 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
             }
         }
 
+        /// <summary>
+        /// Funcion que verifica la cantidad de intentos fallidos de ingreso
+        /// de contraseña si llega a 3 se bloquea al usuario
+        /// </summary>
+        /// <returns>Retorna true fue bloqueado false caso contrario</returns>
         public Boolean VerificarIntentos()
         {
             M01SQL bd = new M01SQL();
