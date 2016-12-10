@@ -48,7 +48,6 @@ jQuery(document).ready(function () {
         $("#name_client").removeClass("has-error");
         $("#reserv_hour").removeClass("has-error");
         $("#number_person").removeClass("has-error");
-        number_person
 
         //find errors
         var nombre = $("#name_client").val();
@@ -57,8 +56,6 @@ jQuery(document).ready(function () {
         var caracteres = /^[a-zA-Z\s]+$/;
 
         var win = true;
-        
-        alert(fecha);
 
         if (nombre == "" || nombre == undefined || !nombre.match(caracteres)) {
 
