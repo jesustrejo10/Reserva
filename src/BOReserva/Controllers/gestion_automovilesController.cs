@@ -88,7 +88,7 @@ namespace BOReserva.Controllers
         {
             List<SelectListItem> ls = new List<SelectListItem>();
             ls.Add(new SelectListItem() { Text = "", Value = "" });
-            for (int i = 1999; i <= 2016; i++)
+            for (int i = 1930; i <= 2016; i++)
             {
                 ls.Add(new SelectListItem() { Text = i.ToString(), Value = i.ToString() });
             }
