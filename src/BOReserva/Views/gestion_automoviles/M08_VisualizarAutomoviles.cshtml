@@ -35,14 +35,24 @@
                                     <td>@item._transmision / @item._color</td>
                                     <td>@disponibilidad / @item._precioalquiler USD</td>
                                     <td>
-                                        <a href="#"> <i class="fa fa-eye clasedeprueba"></i></a>
-                                        <a href="#"><i class="fa fa-gear modificar"></i></a>
-                                        <a href="#"><i class="fa fa-times eliminar"></i></a>
+                                        <a href="#" title="Visualizar vehículo"> <i class="fa fa-eye clasedeprueba"></i></a>
+                                        <a href="#" title="Modificar vehículo"><i class="fa fa-pencil modificar"></i></a>
+                                        <a href="#" title="Eliminar vehículo"><i class="fa fa-times eliminar"></i></a>
+                                        @{
+                                            if (item._disponibilidad == 1)
+                                            {
+                                                <a href="#" title="Activar/Desactivar vehículo"><i class="fa fa-toggle-on desactivar"></i></a>
+                                            }  
+                                            if (item._disponibilidad == 0)
+                                            {
+                                                <a href="#" title="Activar/Desactivar vehículo"><i class="fa fa-toggle-off activar"></i></a>
+                                            }  
+                                        }
                                     </td>
                                 </tr>
                             }
                         }catch {
-                            
+                           
                         }
                         
                     <tfoot>
@@ -182,6 +192,80 @@
                 }).done(function (data) {
                     //$("#sdssss").append(data);
                     alert("Se elimino exitosamente el vehiculo")
+                    var url1 = '/gestion_automoviles/M08_VisualizarAutomoviles';
+                    var method = 'GET';
+                    var data1 = '';
+
+                    $.ajax(
+                        {
+                            url: url1,
+                            type: method,
+                            data: data,
+                            success: function (data, textStatus, jqXHR) {
+
+                                $("#contenido").empty();
+                                $("#contenido").append(data);
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert(errorThrown);
+                            }
+                        });
+                }).fail(function () {
+                    alert("esta vaina se jodio")
+                });
+            });
+        });
+
+
+
+        $(document).ready(function () {
+            //e.preventDefault();
+            $(".activar").click(function () {
+                var identificador = $(this).parent().parent().parent().attr("id");
+                jQuery.ajax({
+                    type: "GET",
+                    url: "/gestion_automoviles/activateVehicle",
+                    data: { matricula: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+                }).done(function (data) {
+                    //$("#sdssss").append(data);
+                    alert("Se cambió exitosamente el estatus del vehículo")
+                    var url1 = '/gestion_automoviles/M08_VisualizarAutomoviles';
+                    var method = 'GET';
+                    var data1 = '';
+
+                    $.ajax(
+                        {
+                            url: url1,
+                            type: method,
+                            data: data,
+                            success: function (data, textStatus, jqXHR) {
+
+                                $("#contenido").empty();
+                                $("#contenido").append(data);
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert(errorThrown);
+                            }
+                        });
+                }).fail(function () {
+                    alert("esta vaina se jodio")
+                });
+            });
+        });
+
+
+
+        $(document).ready(function () {
+            //e.preventDefault();
+            $(".desactivar").click(function () {
+                var identificador = $(this).parent().parent().parent().attr("id");
+                jQuery.ajax({
+                    type: "GET",
+                    url: "/gestion_automoviles/deactivateVehicle",
+                    data: { matricula: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+                }).done(function (data) {
+                    //$("#sdssss").append(data);
+                    alert("Se cambió exitosamente el estatus del vehículo")
                     var url1 = '/gestion_automoviles/M08_VisualizarAutomoviles';
                     var method = 'GET';
                     var data1 = '';

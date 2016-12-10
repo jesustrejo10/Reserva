@@ -289,6 +289,36 @@ namespace BOReserva.Models.gestion_automoviles
             }
         }
 
+
+        public int MIdpaisesBD(String pais)
+        {
+            int fk = -1;
+            try
+            {
+                con = new SqlConnection(connetionString);
+                con.Open();
+                String sql = "SELECT lug_id FROM Lugar WHERE lug_nombre = '"+pais+"'";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        fk = Int32.Parse(reader[0].ToString());
+                    }
+                }
+                cmd.Dispose();
+                con.Close();
+                return fk;
+            }
+            catch (SqlException ex)
+            {
+                con.Close();
+                return fk;
+            }
+        }
+
+       
+
         public int MDisponibilidadVehiculoBD(string matricula, int activardesactivar)
         {
             try
