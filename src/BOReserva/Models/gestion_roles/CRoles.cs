@@ -14,9 +14,9 @@ namespace BOReserva.Models.gestion_roles
 
 
 
-        public CRoles(string nombre)
+        public CRoles()
         {
-            this._nombre_rol = nombre;
+            this._nombre_rol = "";
             this._menu = new CListaGenerica<CModulo_general>();
         }
 

@@ -1,11 +1,12 @@
-﻿<!-- Indico que para esta vista, M08_AgregarAutomovil, utilizare el modelo Models/gestion_automoviles/CAgregarAutomovil-->
+﻿<!-- Indico que para esta vista, M13_AgregarRol, utilizare el modelo Models/gestion_roles/CRoles-->
 @model BOReserva.Models.gestion_roles.CRoles
 
 <!--Indico que, estoy abriendo un formulario que tendra como accion del submit, el controlador gestion_automoviles"Controller", 
     utilizara el metodo guardarAutomovil
     le pasara la informacion mediante un POST-->
 
-@using (Html.BeginForm("saveVehicle", "gestion_automoviles", null, FormMethod.Post, new { @id = "formSaveVehicle", @class = "form-horizontal" }))
+@using (Html.BeginForm("Agregar_Rol", "gestion_roles", null, FormMethod.Post, new { @id = "formagreagarrol", @class = "form-horizontal" }))
+
 {
     <div class="row">
         <div class="col-md-12">
@@ -19,70 +20,37 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-12" style="margin-top:10px;">
-                            <div class="col-xs-6">
-                                
-                               
-                                    
-                                
-                                
+                            <div class="col-xs-6">                           
                                 <label for="nombreRol">Inserte nombre del rol 
 <!--                                (<span style="color:red">*</span>):-->
                                 </label>
-                                @Html.TextBoxFor(m => m.Nombre_rol, null, new { @class = "form-control", @placeholder = "nombre", @id = "nombreRol" })
-
-
+                                @Html.TextBoxFor(m => m.Nombre_rol, null, new { @class = "form-control", @placeholder = "rolnombre", @id = "nombre_rol" })
                                 </div>
                             <div class="col-xs-6">
                                <label for="modelo">Modulo</label><br>
                                 <select name="listbox" id="listbox">
                                     @foreach (var item in Model.Menu)
                                     {
-
                                         <option value="@item.Nombre">
                                             @item.Nombre
                                         </option>
                                     }
                                 </select>
-
-                            </div>
-                            
+                            </div>                       
                             <div class="col-xs-12" style="margin-top:10px;">
-                                <label for="Acceso">Tendra acceso a:</label>
-                                
+                                <label for="Acceso">Tendra acceso a:</label>                                
                                 @foreach (var item in Model.Menu)
                                 {
                                     <div class="checkbox">
                                         <label><input type="checkbox" value="@item.Nombre">@item.Nombre</label>
                                     </div>
-
-                                    <!--
-                                            <option value="@item.Nombre">
-                                                @item.Nombre
-                                            </option>
-            -->
                                 }
-
-                                <!--
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" value="">Option 1</label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" value="">Option 2</label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" value="">Option 3</label>
-                                    </div>
-        -->
-
 
                             </div>
                         </div>
-                        <div>&nbsp;</div>
-                        
-                        
-                        
+                        <div>&nbsp;</div>                       
                         <div class="col-md-12" style="margin-top:10px;">
-                            <button type="submit" id="save_vehicle" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                            <button type="submit" id="agreagarrol" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
                         </div>
                     </div>
                     <!-- /.col -->
@@ -93,6 +61,23 @@
         </div>
         <!-- /.box -->
     </div>
-
+    <script>
+    //Accion del boton agregarrol
+        $("#agreagarrol").click(function (e) {
+            e.preventDefault();
+            var form = $("#formagreagarrol");
+            $.ajax({
+                url: "gestion_roles/agregarrol",
+                data: form.serialize(),
+                type: 'POST',
+                success: function (data) {
+                    alert("Se guardo");
+                    $('#formagreagarrol')[0].reset();
+                }
+            });
+        });
+    </script>
 
 }
+
+

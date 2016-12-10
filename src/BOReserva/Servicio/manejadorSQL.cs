@@ -633,7 +633,7 @@ namespace BOReserva.Servicio
             {
                 //Inicializo la conexion con el string de conexion
                 conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
+                //Abrir la conexion
                 conexion.Open();
                 //query es un string que me devolvera la consulta 
                 String query = "SELECT m.mod_gen_nombre as Modulo_Detallado FROM modulo_general m";
@@ -648,7 +648,7 @@ namespace BOReserva.Servicio
                 }
                 //cierro el lector
                 lector.Close();
-                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                //Cerrar la conexion
                 conexion.Close();
                 return modulo_general;
 
@@ -662,7 +662,40 @@ namespace BOReserva.Servicio
                 throw e;
             }
         }
-
+        //Procedimiento del Modulo 13 para insertar Roles
+        public Boolean insertarRol(CRoles model)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //Abrir la conexion
+                conexion.Open();
+                //SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "INSERT INTO Rol VALUES ('" + model.Nombre_rol + "')";
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior
+                SqlDataReader lector = query.ExecuteReader();
+                //Cierro la conexion
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+        }
         /* FIN DE FUNCIONES COMUNES */
     }
 }
