@@ -88,5 +88,11 @@ namespace FOReserva.Controllers
             manejador.CrearReserva(reserva);
             return View(reserva);
         }
+
+        public ActionResult lista_reserva_restaurante()
+        {
+            
+            return View();
+        }
     }
 }
