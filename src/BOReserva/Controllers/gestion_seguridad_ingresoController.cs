@@ -1,4 +1,5 @@
 ﻿using BOReserva.Models.gestion_seguridad_ingreso;
+using BOReserva.Models.gestion_usuarios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,6 @@ namespace BOReserva.Content.Controllers
             Cgestion_seguridad_ingreso ingreso = new Cgestion_seguridad_ingreso();
             TempData["Correo"] = correo;
             TempData["Contraseña"] = contraseña;
-
             if (correo.Equals("") && contraseña.Equals(""))
             {
                 TempData["CorreoVacio"] = "Debe ingresar su correo";
@@ -36,34 +36,36 @@ namespace BOReserva.Content.Controllers
                 TempData["ContraseñaVacio"] = "Debe ingresar su contraseña";
                 return RedirectToAction("M01_Login", "gestion_seguridad_ingreso");
             }
-         
-
             try
             {
+                contraseña = Encriptar.CrearHash(contraseña);
                 System.Diagnostics.Debug.WriteLine("Correo "+correo+" contrasena "+contraseña);
                 ingreso = ingreso.verificarUsuario(correo, contraseña);
-                //if (ingreso.verificarUsuario(correo, contraseña))
-                //{
-                    //ingreso.correoCampoTexto = correo;
-                    //ingreso.nombreUsuarioTexto = "David Botello";
                 if (ingreso.EstaActivo())
                 {
-                    Session["Cgestion_seguridad_ingreso"] = ingreso;
-                    return RedirectToAction("Index", "Home");
+                    if (ingreso.VerificarIntentos())
+                    {
+                        ingreso.ResetearIntentos();
+                        Session["Cgestion_seguridad_ingreso"] = ingreso;
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        ingreso.BloquearUsuario();
+                        TempData["Mensaje"] = "Su usuario ha sido bloqueado. Por favor contacte con un administrador.";
+                        return RedirectToAction("M01_Login", "gestion_seguridad_ingreso");
+                    }
                 }
                 else
                 {
                     TempData["Mensaje"] = "Su usuario ha sido bloqueado. Por favor contacte al administrador.";
                     return RedirectToAction("M01_Login", "gestion_seguridad_ingreso");
                 }
-                //}
             }
             catch (Exception e)
             {
               TempData["Mensaje"] = e.Message;
-            }
-
-         
+            }         
             return RedirectToAction("M01_Login", "gestion_seguridad_ingreso");
         }
 
