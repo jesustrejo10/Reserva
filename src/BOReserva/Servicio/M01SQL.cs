@@ -11,7 +11,7 @@ namespace BOReserva.Servicio
     public class M01SQL
     {
         private SqlConnection conexion = null;
-        string stringDeConexion = "Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617a;";
+        string stringDeConexion = "Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617b;";
 
         public Cgestion_seguridad_ingreso UsuarioEnBD(String usuario)
         {
@@ -44,7 +44,8 @@ namespace BOReserva.Servicio
             }
             catch (SqlException e)
             {
-                return null;
+                throw  e;
+                //return null;
             }
             catch (Exception e)
             {
