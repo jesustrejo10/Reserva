@@ -2,81 +2,102 @@
 
 <script src="~/Scripts/Scripts_Hoteles/editar_hotel.js"></script>
 
-@using (Html.BeginForm("editarhotel", "gestion_hoteles", null, FormMethod.Post, new { @id = "formEditarHotel", @class = "form-horizontal" }))
+@using (Html.BeginForm("modificarhotel", "gestion_hoteles", null, FormMethod.Post, new { @id = "formEditarHotel", @class = "form-horizontal" }))
 {
 <div class="row">
         <!-- left column -->
-        <div class="col-md-6">
+        <div class="col-md-12">
             <!-- general form elements -->
+            <!--<div class="box box-primary">-->
             <div class="box box-primary">
+                <!--<div class="box-header with-border">-->
                 <div class="box-header with-border">
-                    <h3 class="box-title"><b>Actualizar de hotel</b></h3>
-                </div>
-                <!-- /.box-header -->
-                <!-- form start -->
-                <form role="form">
+                    <h3 class="box-title"><b>Actualizar hotel</b></h3>
+                  </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    <!--<form role="form">-->
+                    <form role="form"> <!--<div class="box-body">-->
                     <div class="box-body">
-                        <div class="form-group">
-                            <label>Nombre</label>
-                          <!--  <input type="nombre" class="form-control" id="nombreHotel" placeholder="Introduzca nombre">-->
-                            @Html.TextBoxFor(m => m._nombre, null, new { @class = "form-control", @placeholder = "Introduzca nombre", @id = "nombreHotel" })
-
-
+                        <div class="col-md-11">
+                            <div class="form-group">
+                                <label>Nombre</label>
+                                <!--  <input type="nombre" class="form-control" id="nombreHotel" placeholder="Introduzca nombre">-->
+                                @Html.TextBoxFor(m => m._nombre, null, new { @class = "form-control", @placeholder = "", @id = "nombreHotel" })
+                            </div>
+                            <div class="form-group">
+                                <label>Dirección</label>
+                                @Html.TextBoxFor(m => m._direccion, null, new { @class = "form-control", @placeholder = "", @id = "direccionHotel" })
+                            </div>
                         </div>
-                        <div class="form-group">
+                            
+
+                            <!--</div>-->  <!--<div class="col-md-12">-->
+                            <!--<div class="form-group">-->
                             <!--<label>Dirección</label>-->
                             <!--<textarea name="direccion" rows="2" class="form-control" placeholder="Introduzca dirección del inmueble"></textarea>-->
                             <!--País y ciudad-->
-                            <div class="box-body">
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>País</label>
-                                            <select class="form-control"></select>
-                                        </div>
-                                    </div><!--div col-xs-->
-                                    <div class="col-xs-6">
-                                        <div class="form-group">
-                                            <label>Ciudad</label>
-                                            <select class="form-control"></select>
-
-                                        </div>
-                                    </div>
-                                </div> <!--/div row-->
-                            </div> <!--/div box-body-->  
-
-                            <!--País y ciudad-->
-                        </div>
                         <div class="box-body">
                             <div class="row">
-                                <div class="col-xs-6">
+                                <!--<div class="row">-->
+                                <div class="col-md-5">
+                                    <!-- select -->
+                                    <div class="form-group">
+                                        <label>País</label>
+                                        <select class="form-control"></select>
+                                    </div>
+                                </div><!--div col-xs-->
+                                <div class="col-md-1"></div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label>Ciudad</label>
+                                        <select class="form-control"></select>
+                                    </div>
+                                </div>
+                            </div> <!--/div row-->
+                        </div> <!--/div box-body-->
+                            <!--País y ciudad-->
+                            <!-- </div>-->
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-5">
                                     <!-- select -->
                                     <div class="form-group">
                                         <label>Clasificación</label>
                                         <select class="form-control">
                                             <option>1 Estrella</option>
-                                            
+                                            <option>2 Estrellas</option>
+                                            <option>3 Estrellas</option>
+                                            <option>4 Estrellas</option>
+                                            <option>5 Estrellas</option>
                                         </select>
                                     </div>
                                 </div><!--div col-xs-->
-                                <div class="col-xs-6">
+                                <div class="col-md-1"> </div>
+                                <div class="col-md-5">
                                     <div class="form-group">
-                                        <label for="Puntuacion">Puntuación</label>
-                                        <input type="clasificacion" class="form-control" id="puntuacionHotel" placeholder="Rate">
+                                        <label for="pagina">Página web</label>
+                                        <!--  <input type="pagina" class="form-control" id="paginaHotel" placeholder="">-->
+                                        @Html.TextBoxFor(m => m._paginaWeb, null, new { @class = "form-control", @placeholder = "", @id = "paginaHotel" })
                                     </div>
                                 </div>
                             </div> <!--/div row-->
                         </div> <!--/div box-body-->
-                        <div class="form-group">
-                            <label for="pagina">Página Web</label>
-                            <input type="pagina" class="form-control" id="paginaHotel" placeholder="Introduzca página web">
+                            <!--<div class="form-group">-->
+                        <div class="box-body">
+                            <div class="row">
+                                <!-- </div> -->
+                                <!-- <div class="form-group">-->
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label for="correo">Correo electrónico</label>
+                                        @Html.TextBoxFor(m => m._email, null, new { @class = "form-control", @placeholder = "", @id = "correoHotel" })
+                                        <!--   <input type="correo" class="form-control" id="correoHotel" placeholder="">-->
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="pagina">Correo Electrónico</label>
-                            <input type="correo" class="form-control" id="correoHotel" placeholder="Introduzca correo electrónico">
-                        </div>
-
+                            <!--</div>--> 
                     </div>
 
                     <!-- /.box-body -->
@@ -86,8 +107,10 @@
                             <button type="button" class="btn btn-danger">Cancelar</button>
                         </div>
                     </div>
-                </form>
+                </form>  <!--<div class="col-md-12">-->
+                <!--</form>  -->  <!--<form role="form">-->
             </div>
 
         </div>
     </div>
+}
