@@ -1,114 +1,111 @@
 ﻿<!-- /.TIENES QUE ADAPTARLO A POST Y SI ES SUCCESS LO MANDAS A LA VISTA PARCIAL DETALLE VUELO -->
 <script src="/Scripts/Scripts_Boletos/DetalleVuelo.js"></script>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box box-success">
-                <div class="box-header with-border">
-                    <h1 class="box-title">Vuelos Disponibles</h1>
-                    <div class="box-tools pull-right">
-                    </div>
-                </div>
-                <div class="box-body">
-                        <table id="example2" class="table table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Id vuelo</th>
-                                    <th>Origen</th>
-                                    <th>Destino</th>
-                                    <th>Fecha</th>
-                                    <th>Hora</th>
-                                    <th>Monto</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>001</td>
-                                    <td>Caracas</td>
-                                    <td>Miami</td>
-                                    <td>01/01/2017</td>
-                                    <td>10:00 am</td>
-                                    <td>$300</td>
-                                </tr>
-                                <tr>
-                                    <td>002</td>
-                                    <td>Caracas</td>
-                                    <td>Miami</td>
-                                    <td>01/02/2017</td>
-                                    <td>11:00 am</td>
-                                    <td>$350</td>
-                                </tr>
-                                <tr>
-                                    <td>003</td>
-                                    <td>Caracas</td>
-                                    <td>Miami</td>
-                                    <td>01/03/2017</td>
-                                    <td>12:00 am</td>
-                                    <td>$280</td>
-                                </tr>
-                                <tr>
-                                    <td>004</td>
-                                    <td>Caracas</td>
-                                    <td>Miami</td>
-                                    <td>01/04/2017</td>
-                                    <td>01:00 pm</td>
-                                    <td>$500</td>
-                                </tr>
-                                <tr>
-                                    <td>005</td>
-                                    <td>Caracas</td>
-                                    <td>Miami</td>
-                                    <td>01/05/2017</td>
-                                    <td>02:00 pm</td>
-                                    <td>$700</td>
-                                </tr>
-                                <tr>
-                                    <td>006</td>
-                                    <td>Caracas</td>
-                                    <td>Miami</td>
-                                    <td>01/06/2017</td>
-                                    <td>03:00 pm</td>
-                                    <td>$420</td>
-                                </tr>
-                                <tr>
-                                    <td>007</td>
-                                    <td>Caracas</td>
-                                    <td>Miami</td>
-                                    <td>01/07/2017</td>
-                                    <td>04:00 pm</td>
-                                    <td>$570</td>
-                                </tr>
-                                <tr>
-                                    <td>008</td>
-                                    <td>Caracas</td>
-                                    <td>Miami</td>
-                                    <td>01/08/2017</td>
-                                    <td>05:00 pm</td>
-                                    <td>$540</td>
-                                </tr>
+<div class="row">
+    <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
 
-
-                            </tbody>
-                        </table>
-
-                    <div class="col-md-12" style="margin-top:10px;">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-2">
-                            <button type="button" id="detalleVuelo" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Siguiente</button>
-                        </div>
-                        <div class="col-md-2">
-                            <button id="cancel" type="button" class="btn btn-danger" style="display:block; margin-left:auto; margin-right:auto;">Cancelar</button>
-                        </div>
-                        <div class="col-md-4"></div>
-                    </div>
-                    
-                </div>
-                    </div>
-
-
-                    <!-- /.box-footer -->
-                </div>
-                <!-- /.box -->
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Vuelos Disponibles</h3>
             </div>
-            <!-- /.col -->
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="example" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Origen / Destino</th>
+                            <th>Fecha Salida</th>
+                            <th>Hora Salida</th>
+                            <th>Fecha Llegada</th>
+                            <th>Hora Llegada</th>
+                            <th>Monto</th>
+                            <th>Selección</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @try
+                        {
+                            foreach (var item in Model)
+                            {
+                                String fechaSal = @item._fechaPartida.Date.ToString();
+                                String horaSal = @item._fechaPartida.Time.ToString();
+                                String fechaLleg = @item._fechaLlegada.Date.ToString();
+                                String horaLleg = @item._fechaLlegada.Time.ToString();
+                                
+                                <tr id="@item._id">
+                                    <td>@item._origen / @item._destino </td>
+                                    <td>fechaSal</td>
+                                    <td>horaSal</td>
+                                    <td>fechaLlehg</td>
+                                    <td>horaLLeg</td>
+                                    <td>@item._monto</td>
+                                    <td>
+                                        <input type="checkbox" class="call-checkbox">
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        catch
+                        {
+
+                        }
+                </table>
+
+                <div class="col-md-12" style="margin-top:10px;">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-2">
+                        <button type="button" id="detalleVuelo" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Siguiente</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button id="cancel" type="button" class="btn btn-danger" style="display:block; margin-left:auto; margin-right:auto;">Cancelar</button>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable({
+            "pagingType": "simple_numbers",
+            "language": {
+                "lengthMenu": "N° _MENU_ registros por página.",
+                "zeroRecords": "No se encontró registro.",
+                "info": "  Mostrando registros _START_ - _END_  (_TOTAL_ registros totales).",
+                "infoEmpty": "0 de 0 de 0 registros",
+                "infoFiltered": "(Encontrado de _MAX_registros)",
+                "search": "Buscar: ",
+                "processing": "Procesando la información",
+                "paginate": {
+                    "first": " |< ",
+                    "previous": "Anterior",
+                    "next": "Siguiente",
+                    "last": " >| "
+                }
+            }
+        });
+    });
+</script>
+
+<script src="../../Content/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="../../Content/bootstrap/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="../../Content/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="../../Content/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="../../Content/plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="../../Content/dist/js/app.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+<!-- page script -->
 
