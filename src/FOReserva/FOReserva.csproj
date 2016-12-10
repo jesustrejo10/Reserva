@@ -372,6 +372,8 @@
     <Content Include="Content\assets\images\loaders\9.gif" />
     <Content Include="Content\assets\images\loaders\9s.gif" />
     <Content Include="Content\assets\images\logo_final.png" />
+    <Content Include="Content\assets\images\demo\shop\home\M19_Carro_Imagen_1.jpg" />
+    <Content Include="Content\assets\images\demo\shop\home\M19_Carro_Imagen_2.jpg" />
     <Content Include="Content\assets\images\male.png" />
     <Content Include="Content\assets\images\noimage.jpg" />
     <Content Include="Content\assets\images\playing-dark.gif" />
