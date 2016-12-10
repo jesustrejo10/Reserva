@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BOReserva.Models.gestion_roles;
-
+using BOReserva.Servicio;
 namespace BOReserva.Controllers
 {
     public class gestion_rolesController : Controller
@@ -13,14 +13,10 @@ namespace BOReserva.Controllers
         // GET: /gestion_roles/
         public ActionResult M13_AgregarRol()
         {
+            manejadorSQL sql = new manejadorSQL();            
             CRoles rol = new CRoles("Administrador");
-            CModulo_general modulo1 = new CModulo_general("Roles");
-            CModulo_general modulo2 = new CModulo_general("Aviones");
-            CModulo_general modulo3 = new CModulo_general("Automoviles");
-            rol.Menu.agregarElemento(modulo1);
-            rol.Menu.agregarElemento(modulo2);
-            rol.Menu.agregarElemento(modulo3);   
-           
+            rol.Menu = sql.consultarLosModulos();
+            sql.insertarRol();
             return PartialView(rol);
         }
         public ActionResult M13_VisualizarRol()

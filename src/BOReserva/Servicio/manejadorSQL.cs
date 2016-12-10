@@ -628,6 +628,7 @@ namespace BOReserva.Servicio
             CListaGenerica<CModulo_general> modulo_general = new CListaGenerica<CModulo_general>();
             String nombre_modulo;
 
+
             try
             {
                 //Inicializo la conexion con el string de conexion
@@ -638,22 +639,18 @@ namespace BOReserva.Servicio
                 String query = "SELECT m.mod_gen_nombre as Modulo_Detallado FROM modulo_general m";
                 SqlCommand cmd = new SqlCommand(query, conexion);
                 SqlDataReader lector = cmd.ExecuteReader();
-
-
                 //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
                 while (lector.Read())
                 {
                     var entrada = new CModulo_general();
                     {
-                        nombre_modulo = lector.GetSqlString(0).ToString();
+                        entrada.Nombre = lector.GetSqlString(0).ToString();
 
 
                     };
+
                     modulo_general.agregarElemento(entrada);
                 }
-
-
-
                 //cierro el lector
                 lector.Close();
                 //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
@@ -670,6 +667,46 @@ namespace BOReserva.Servicio
                 throw e;
             }
         }
+
+
+        //Procedimiento del Modulo 13 para un rol a la base de datos.
+        public Boolean insertarRol()
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                //uso el SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "INSERT INTO ROL VALUES ('Prueba manuel');";
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                SqlDataReader lector = query.ExecuteReader();
+                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+                /*while(lector.Read())
+                {
+                      //COMENTADO PORQUE ESTE METODO NO LO APLICA, SERÁ BORRADO DESPUES
+                }*/
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+        }
+
+
 
         /* FIN DE FUNCIONES COMUNES */
     }
