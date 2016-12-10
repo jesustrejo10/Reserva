@@ -41,13 +41,22 @@ namespace BOReserva.Content.Controllers
             try
             {
                 System.Diagnostics.Debug.WriteLine("Correo "+correo+" contrasena "+contraseña);
-                if (ingreso.verificarUsuario(correo, contraseña))
+                ingreso = ingreso.verificarUsuario(correo, contraseña);
+                //if (ingreso.verificarUsuario(correo, contraseña))
+                //{
+                    //ingreso.correoCampoTexto = correo;
+                    //ingreso.nombreUsuarioTexto = "David Botello";
+                if (ingreso.EstaActivo())
                 {
-                    ingreso.correoCampoTexto = correo;
-                    ingreso.nombreUsuarioTexto = "David Botello";
                     Session["Cgestion_seguridad_ingreso"] = ingreso;
                     return RedirectToAction("Index", "Home");
                 }
+                else
+                {
+                    TempData["Mensaje"] = "Su usuario ha sido bloqueado. Por favor contacte al administrador.";
+                    return RedirectToAction("M01_Login", "gestion_seguridad_ingreso");
+                }
+                //}
             }
             catch (Exception e)
             {
