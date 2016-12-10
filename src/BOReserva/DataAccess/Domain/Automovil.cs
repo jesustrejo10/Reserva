@@ -1,14 +1,13 @@
-﻿using BOReserva.DataAccess.DAO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.DataAccess.Domain
+namespace BOReserva.Models.gestion_automoviles
 {
     public class Automovil
     {
-        
+
           public String _matricula { get; set; } 
           public String _modelo { get; set; } 
           public String _fabricante { get; set; } 
@@ -85,5 +84,4 @@ namespace BOReserva.DataAccess.Domain
          }
 
     }
-
 }

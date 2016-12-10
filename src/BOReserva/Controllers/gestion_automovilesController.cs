@@ -22,8 +22,8 @@ namespace BOReserva.Controllers
         {
             //var companies = DataRepository.GetCompanies();
             //List<CAutomovil> listavehiculos = new List<CAutomovil>();
-            CBasededatos_vehiculo buscarvehiculos = new CBasededatos_vehiculo();
-            List<CAutomovil> listavehiculos = buscarvehiculos.MListarvehiculosBD();  //AQUI SE BUSCA TODO LOS VEHICULOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
+            DAOAutomovil buscarvehiculos = new DAOAutomovil();
+            List<Automovil> listavehiculos = buscarvehiculos.MListarvehiculosBD();  //AQUI SE BUSCA TODO LOS VEHICULOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
             //CAutomovil test = new CAutomovil("AG234FC", "3", "Mazda", 2006, "Sedan", 1589.5, 5, 7550.0, 250.6, 290.4, DateTime.Parse("11/11/2016"), "Azul", 1, "Automatico", "Venezuela", "Distrito Capital", "Caracas");
             //listavehiculos.Add(test);
             return PartialView(listavehiculos);
@@ -31,8 +31,8 @@ namespace BOReserva.Controllers
 
         public ActionResult M08_VisualizarAutomovil(String matricula)
         {
-            CBasededatos_vehiculo buscarvehiculo = new CBasededatos_vehiculo();
-            CAutomovil vehiculo = buscarvehiculo.MMostrarvehiculoBD(matricula); //BUSCA EL AUTOMOVIL A MOSTRAR
+            DAOAutomovil buscarvehiculo = new DAOAutomovil();
+            Automovil vehiculo = buscarvehiculo.MMostrarvehiculoBD(matricula); //BUSCA EL AUTOMOVIL A MOSTRAR
             //EN TODOS ESTOS METODOS HAY QUE USAR TRY CATCH
             //CAutomovil test = new CAutomovil("AG234FC", "3", "Mazda", 2006, "Sedan", 1589.5, 5, 7550.0, 250.6, 290.4, DateTime.Parse("11/11/2016"), "Azul", 1, "Automatico", "Venezuela", "Distrito Capital", "Caracas");
             CVisualizarAutomovil automovil = new CVisualizarAutomovil();
@@ -57,8 +57,8 @@ namespace BOReserva.Controllers
 
         public ActionResult M08_ModificarAutomovil(String matricula)
         {
-            CBasededatos_vehiculo buscarvehiculo = new CBasededatos_vehiculo();
-            CAutomovil vehiculo = buscarvehiculo.MMostrarvehiculoBD(matricula); //BUSCA EL AUTOMOVIL A MOSTRAR
+            DAOAutomovil buscarvehiculo = new DAOAutomovil();
+            Automovil vehiculo = buscarvehiculo.MMostrarvehiculoBD(matricula); //BUSCA EL AUTOMOVIL A MOSTRAR
             //EN TODOS ESTOS METODOS HAY QUE USAR TRY CATCH
             //CAutomovil test = new CAutomovil("AG234FC", "3", "Mazda", 2006, "Sedan", 1589.5, 5, 7550.0, 250.6, 290.4, DateTime.Parse("11/11/2016"), "Azul", 1, "Automatico", "Venezuela", "Distrito Capital", "Caracas");
             CModificarAutomovil automovil = new CModificarAutomovil();
@@ -161,7 +161,7 @@ namespace BOReserva.Controllers
             double preciocompra = model._preciocompra;
             String tipovehiculo = model._tipovehiculo;
             String transmision = model._transmision;
-            CAutomovil carronuevo = new CAutomovil(matricula, modelo, fabricante, anio, tipovehiculo, kilometraje, 
+            Automovil carronuevo = new Automovil(matricula, modelo, fabricante, anio, tipovehiculo, kilometraje, 
                                              cantpasajeros, preciocompra, precioalquiler, penalidaddiaria, fecharegistro, 
                                              color, 1, transmision, pais, ciudad);  //SE CREA EL VEHICULO
             int agrego_si_no = carronuevo.MAgregaraBD(carronuevo); //SE AGREGA A LA BD RETORNA 1 SI SE AGREGA Y 0 SINO LO LOGRA
@@ -189,7 +189,7 @@ namespace BOReserva.Controllers
             String tipovehiculo = model._tipovehiculo;
             String transmision = model._transmision;
 
-            CAutomovil carro = new CAutomovil(matricula, modelo, fabricante, anio, tipovehiculo, kilometraje, 
+            Automovil carro = new Automovil(matricula, modelo, fabricante, anio, tipovehiculo, kilometraje, 
                                              cantpasajeros, preciocompra, precioalquiler, penalidaddiaria, fecharegistro, 
                                              color, 1, transmision, pais, ciudad);  //SE CREA EL VEHICULO
             int modifico_si_no = carro.MModificarvehiculoBD(carro); //SE MODIFICA A LA BD RETORNA 1 SI SE  MODIFICO Y 0 SI NO LO LOGRA
@@ -239,7 +239,7 @@ namespace BOReserva.Controllers
             String tipovehiculo = "";
             String transmision = "";
             Debug.WriteLine("IMPRIMIENDO UN MENSAJE" + matricula);
-            CAutomovil carro = new CAutomovil(matricula, modelo, fabricante, anio, tipovehiculo, kilometraje,
+            Automovil carro = new Automovil(matricula, modelo, fabricante, anio, tipovehiculo, kilometraje,
                                              cantpasajeros, preciocompra, precioalquiler, penalidaddiaria, fecharegistro,
                                              color, 1, transmision, pais, ciudad);  //SE CREA EL VEHICULO
             int modifico_si_no = carro.MBorrarvehiculoBD(_matricula); //SE BORRA LA BD RETORNA 1 SI SE  BORRA Y 0 SI NO LO LOGRA
@@ -269,7 +269,7 @@ namespace BOReserva.Controllers
 
         public static List<SelectListItem> pais()
         {
-            CBasededatos_vehiculo pais = new CBasededatos_vehiculo();
+            DAOAutomovil pais = new DAOAutomovil();
             List<SelectListItem> _pais = new List<SelectListItem>();
             String[] paises = pais.MListarpaisesBD();
             int i = 0;
@@ -312,7 +312,7 @@ namespace BOReserva.Controllers
             String tipovehiculo = "";
             String transmision = "";
             Debug.WriteLine("IMPRIMIENDO UN MENSAJE" + matricula);
-            CAutomovil carro = new CAutomovil(matricula, modelo, fabricante, anio, tipovehiculo, kilometraje,
+            Automovil carro = new Automovil(matricula, modelo, fabricante, anio, tipovehiculo, kilometraje,
                                              cantpasajeros, preciocompra, precioalquiler, penalidaddiaria, fecharegistro,
                                              color, 1, transmision, pais, ciudad);  //SE CREA EL VEHICULO
             int estatus_si_no = carro.MDisponibilidadVehiculoBD(_matricula, 1); //SE BORRA LA BD RETORNA 1 SI SE  BORRA Y 0 SI NO LO LOGRA
@@ -339,7 +339,7 @@ namespace BOReserva.Controllers
             String tipovehiculo = "";
             String transmision = "";
             Debug.WriteLine("IMPRIMIENDO UN MENSAJE" + matricula);
-            CAutomovil carro = new CAutomovil(matricula, modelo, fabricante, anio, tipovehiculo, kilometraje,
+            Automovil carro = new Automovil(matricula, modelo, fabricante, anio, tipovehiculo, kilometraje,
                                              cantpasajeros, preciocompra, precioalquiler, penalidaddiaria, fecharegistro,
                                              color, 1, transmision, pais, ciudad);  //SE CREA EL VEHICULO
             int estatus_si_no = carro.MDisponibilidadVehiculoBD(_matricula, 0); //SE BORRA LA BD RETORNA 1 SI SE  BORRA Y 0 SI NO LO LOGRA
