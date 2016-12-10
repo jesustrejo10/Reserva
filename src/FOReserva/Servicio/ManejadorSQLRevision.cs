@@ -36,7 +36,7 @@ namespace FOReserva.Servicio
                     lista_rev.Add(rev);
                 }
             }
-            CloseConextion();
+            CloseConnection();
             return lista_rev;
         }
 
@@ -59,7 +59,7 @@ namespace FOReserva.Servicio
                     lista_rev.Add(rev);
                 }
             }
-            CloseConextion();
+            CloseConnection();
             return lista_rev;
         }
 
@@ -82,7 +82,7 @@ namespace FOReserva.Servicio
                     lista_rev.Add(rev);
                 }
             }
-            CloseConextion();
+            CloseConnection();
             return lista_rev;
         }
 
@@ -105,7 +105,7 @@ namespace FOReserva.Servicio
                     lista_rev.Add(rev);
                 }
             }
-            CloseConextion();
+            CloseConnection();
             return lista_rev;
         }
 
@@ -129,7 +129,7 @@ namespace FOReserva.Servicio
                     lista_rev.Add(rev);
                 }
             }
-            CloseConextion();
+            CloseConnection();
             return lista_rev;
         }
 

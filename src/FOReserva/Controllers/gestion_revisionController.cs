@@ -9,7 +9,7 @@ using FOReserva.Models.Restaurantes;
 
 namespace FOReserva.Controllers
 {
-
+/*
 <<<<<<< HEAD
     /// <summary>
     /// Gestion Revision Controlador
@@ -173,7 +173,7 @@ namespace FOReserva.Controllers
               List<CReservation_Restaurant> rest;
               CReservation_Restaurant res;
              C
-              */
+              
 
             // no se si estara bien
             //CReservation_Restaurant n = new CReservation_Restaurant();
@@ -213,7 +213,7 @@ namespace FOReserva.Controllers
               List<CReservation_Restaurant> rest;
               CReservation_Restaurant res;
              C
-              */
+              
 
 <<<<<<< HEAD
 =======
@@ -228,7 +228,7 @@ namespace FOReserva.Controllers
               List<CReservation_Restaurant> rest;
               CReservation_Restaurant res;
              C
-              */
+              
 
 >>>>>>> refs/remotes/origin/Develop
             // no se si estara bien
@@ -277,4 +277,5 @@ namespace FOReserva.Controllers
 
 }
 
->>>>>>> refs/remotes/origin/Develop
+>>>>>>> refs/remotes/origin/Develop*/
+}
