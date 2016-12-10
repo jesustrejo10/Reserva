@@ -153,6 +153,10 @@
     <value>M12_EliminarUsuario</value>
     <comment>Elimina un usuario a partir de su ID</comment>
   </data>
+  <data name="Error_Conflicto_FK" xml:space="preserve">
+    <value>Error: El usuario no se puede eliminar ya que tiene registros asociados</value>
+    <comment>Mensaje de conflicto de FK con alguna entidad relacionada con la tabla usuario</comment>
+  </data>
   <data name="Error_Email_Existe" xml:space="preserve">
     <value>Error, el correo introducido ya se encuentra registrado</value>
     <comment>Error de constraint unico del email</comment>

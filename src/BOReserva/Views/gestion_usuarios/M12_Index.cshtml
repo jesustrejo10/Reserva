@@ -3,7 +3,7 @@
 
     Layout = "~/Views/gestion_usuarios/_Layout.cshtml";
 }
- 
+
 <section class="content">
     <form role="form" name="consultar" id="consultar">
         <script language="javascript">
@@ -88,4 +88,11 @@
 </form>
 </section>
 
-
+@{
+    if (TempData["message"] != null)
+    {
+        <script type="text/javascript">
+        alert(@Html.Raw(Json.Encode(TempData["message"])));
+        </script>
+    }
+}

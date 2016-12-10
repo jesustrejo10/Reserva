@@ -1,15 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backoffice", "backoffice\backoffice.csproj", "{ADBE5E89-3D82-48C9-B98F-36B6464F68F5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "frontoffice", "frontoffice\frontoffice.csproj", "{625077AB-6512-4F23-90DE-4C5887FDFC80}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BOReserva", "BOReserva\BOReserva.csproj", "{8E0911C6-D911-4CA1-AE4F-6C5CBF498D24}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M12_Pruebas", "M12_Pruebas\M12_Pruebas.csproj", "{ABF74913-1E80-4E78-A897-01407EB6827F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +27,6 @@ Global
 		{8E0911C6-D911-4CA1-AE4F-6C5CBF498D24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E0911C6-D911-4CA1-AE4F-6C5CBF498D24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E0911C6-D911-4CA1-AE4F-6C5CBF498D24}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ABF74913-1E80-4E78-A897-01407EB6827F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ABF74913-1E80-4E78-A897-01407EB6827F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ABF74913-1E80-4E78-A897-01407EB6827F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ABF74913-1E80-4E78-A897-01407EB6827F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -153,6 +153,8 @@ namespace BOReserva.Models.gestion_usuarios
             }
             catch ( SqlException ex )
             {
+                if (ex.Number == 547)
+                    throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.Error_Conflicto_FK, ex);
                 throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.BDError, ex);
             }
             catch ( Exception ex )
