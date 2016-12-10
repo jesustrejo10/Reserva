@@ -89,10 +89,11 @@ namespace FOReserva.Controllers
             return View(reserva);
         }
 
-        public ActionResult lista_reserva_restaurante()
+        public ActionResult lista_reserva_restaurantes()
         {
-            
-            return View();
+            ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
+            List<CReservation_Restaurant> lista = manejador.buscarReservas();
+            return View(lista);
         }
     }
 }
