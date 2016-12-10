@@ -3074,6 +3074,9 @@
     <Content Include="Views\gestion_revision\editar_revision.cshtml" />
     <Content Include="Views\gestion_revision\Consultar_Revision.cshtml" />
     <Content Include="Views\gestion_diarios\gestion_diarios_resultados.cshtml" />
+    <Content Include="Views\gestion_reserva_restaurante\lista_reserva_restaurantes.cshtml" />
+    <Content Include="Views\gestion_reserva_restaurante\error_conexion.cshtml" />
+    <Content Include="Views\gestion_reserva_restaurante\_NoHayResultados.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
