@@ -23,10 +23,17 @@ namespace FOReserva.Controllers
         //    return (Json(true, JsonRequestBehavior.AllowGet));
         //}
 
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
+
+        public ActionResult error_conexion()
         {
             return View();
         }
+
+     
 
         public ActionResult restaurant_resultados()
         {
@@ -42,17 +49,17 @@ namespace FOReserva.Controllers
                 //No se puede usar el mensaje de la excepcion "e.mensaje"
                 //Esto se causa al realizar una busqueda con parametros que no son
                 //como son caracteres especiales y de mas
-                System.Diagnostics.Debug.WriteLine("Error de busqueda");
-                System.Diagnostics.Debug.Write(e.Message);
+                return View("error_conexion");
             }
-            catch ( ManejadorSQLException e )
+            catch ( ManejadorSQLException f)
             {
                 //Ventana de error no conecto a la db
                 //Se puede usar el mensaje de la excepcion "e.mensaje"
-                System.Diagnostics.Debug.WriteLine("Error de manejador sql");
-                System.Diagnostics.Debug.Write( e.Message );
+                return View("error_conexion");
             }
-            catch (Exception e) { }
+            catch (Exception g) { 
+            
+            }
 
             // Error desconocido (seria bueno mostrar 
             // el mensaje para ver que lo causo
