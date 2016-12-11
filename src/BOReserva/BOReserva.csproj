@@ -232,15 +232,12 @@
     <Compile Include="Models\gestion_aviones\CAgregarAvion.cs" />
     <Compile Include="Models\gestion_aviones\CAvion.cs" />
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
-
     <Compile Include="Models\gestion_seguridad_ingreso\Cgestion_seguridad_ingreso.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cvalidar_bloqueo_exception.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cvalidar_status_exception.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cvalidar_usuario_Exception.cs" />
-
     <Compile Include="Models\gestion_aviones\CModificarAvion.cs" />
     <Compile Include="Models\gestion_boletos\CBoleto.cs" />
-
     <Compile Include="Models\gestion_boletos\CBuscarVuelo.cs" />
     <Compile Include="Models\gestion_comida_vuelo\CAgregarComida.cs" />
     <Compile Include="Models\gestion_boletos\CLugar.cs" />
@@ -466,13 +463,10 @@
     <Content Include="Scripts\Scripts_Boletos\DatosUsuario.js" />
     <Content Include="Scripts\Scripts_Boletos\DetalleBoleto.js" />
     <Content Include="Scripts\Scripts_Boletos\BuscarVuelo.js" />
-
     <Content Include="Scripts\Scripts_Boletos\VerVuelos.js" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
-
     <Content Include="Scripts\Scripts_Boletos\DetalleVuelo.js" />
-
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -585,6 +579,7 @@
     <Content Include="Views\gestion_roles\M13_Roles.html" />
     <Content Include="Views\gestion_roles\placeholder.html" />
     <Content Include="Views\gestion_ruta_comercial\placeholder.html" />
+    <Content Include="Content\dist\js\Logout.js" />
     <Content Include="Views\gestion_usuarios\placeholder.html" />
     <Content Include="Views\gestion_boletos\placeholder.html" />
     <Content Include="Views\gestion_vuelo\placeholder.html" />
@@ -1442,15 +1437,11 @@
     <Content Include="Views\gestion_usuarios\M12_AgregarUsuario.cshtml" />
     <Content Include="Views\gestion_usuarios\M12_ModificarUsuario.cshtml" />
     <Content Include="Views\gestion_usuarios\_Layout.cshtml" />
-
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Views\gestion_comidavuelo\" />
-
     <Content Include="Views\gestion_boletos\M05_VisualizarBoletos.cshtml" />
     <Content Include="Views\gestion_boletos\M05_VerReserva.cshtml" />
     <Content Include="Views\gestion_check_in\M05_CheckIn.cshtml" />
@@ -1472,9 +1463,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\gestion_comidavuelo\" />
     <Folder Include="Views\gestion_roles\css\" />
     <Folder Include="Views\gestion_roles\js\" />
-
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap\css\bootstrap.css.map" />

@@ -43,6 +43,7 @@ namespace BOReserva.Content.Controllers
                 // contraseña = Encriptar.CrearHash(contraseña);
                 System.Diagnostics.Debug.WriteLine("Correo " + correo + " contrasena " + contraseña);
                 ingreso = ingreso.verificarUsuario(correo, contraseña);
+
                 if (ingreso.EstaActivo())
                 {
                     if (ingreso.VerificarIntentos())
