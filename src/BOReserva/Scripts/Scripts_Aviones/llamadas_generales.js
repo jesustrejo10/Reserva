@@ -44,7 +44,7 @@
       
     function checkTextModelo(field) {
         var modelo = $('#modeloAvion').val();
-        if (/[^a-z0-9]/gi.test(modelo)) {  // anything but a-zA-Z0-9 and dot
+        if (/[^a-z0-9/-]/gi.test(modelo)) {  // anything but a-zA-Z0-9 and dot
             alert("El modelo no puede contener caracteres especiales ni espacios");
             field.value = '';
         }

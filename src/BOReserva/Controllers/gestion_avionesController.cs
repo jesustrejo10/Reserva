@@ -26,6 +26,11 @@ namespace BOReserva.Controllers
             return PartialView(model);
         }
 
+        /// <summary>
+        /// Metodo para guardar el avion, haciendo el insert en la base de datos si los datos son correctos
+        /// </summary>
+        /// <param name="model">CAgregarAvion</param>
+        /// <returns> Json </returns>
 
         [HttpPost]
         public JsonResult guardarAvion(CAgregarAvion model)
