@@ -104,6 +104,123 @@ namespace BOReserva.Servicio
             }
         }
 
+        //Procedimiento del Modulo 6 para retornar un objeto del tipo CComida buscado por su respectiva id
+        public CComida consultarAvion(int id)
+        {
+            CComida platoRetorno = new CComida();
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "SELECT * FROM Avion where avi_id = " + id;
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                while (lector.Read())
+                {
+
+                    CComida plato = new CComida(Int32.Parse(lector["comi_id"].ToString()), lector["comi_nombre"].ToString(),
+                    lector["comi_tipo"].ToString(),lector["comi_estatus"].ToString(),lector["comi_descripcion"].ToString());;
+                    platoRetorno = plato;
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return platoRetorno;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+
+        //Procedimiento del Modulo 6 para modificar un plato
+        public Boolean modificarPlato(CEditarComida model)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "UPDATE Comida SET comi_estatus='" + model._nombrePlato + "','" + model._tipoPlato + "'," + model._estatusPlato + " , " + model._descripcionPlato + "')";
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                conexion.Close();
+                return true;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        //Procedimiento del Modulo 2 para deshabilitar un avion
+        public Boolean deshabilitarAvion(int id)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "UPDATE Avion SET avi_disponibilidad=0 where avi_id=" + id;
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                conexion.Close();
+                return true;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        //Procedimiento del Modulo 2 para habilitar un avion
+        public Boolean habilitarAvion(int id)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "UPDATE Avion SET avi_disponibilidad=1 where avi_id=" + id;
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                conexion.Close();
+                return true;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+
 
         //Procedimiento del Modulo 11 para agregar ofertas a la base de datos.
         public Boolean agregarOferta(CAgregarOferta model)
