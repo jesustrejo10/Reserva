@@ -172,7 +172,7 @@ namespace BOReserva.Controllers
             String transmision = model._transmision;
             Automovil carronuevo = new Automovil(matricula, modelo, fabricante, anio, tipovehiculo, kilometraje, 
                                              cantpasajeros, preciocompra, precioalquiler, penalidaddiaria, fecharegistro, 
-                                             color, 1, transmision, pais, ciudad);  //SE CREA EL VEHICULO
+                                             color, 1, transmision, pais, _ciudad);  //SE CREA EL VEHICULO
             int agrego_si_no = carronuevo.MAgregaraBD(carronuevo); //SE AGREGA A LA BD RETORNA 1 SI SE AGREGA Y 0 SINO LO LOGRA
             
             return (Json(true, JsonRequestBehavior.AllowGet));
@@ -190,8 +190,8 @@ namespace BOReserva.Controllers
             DateTime fecharegistro = Convert.ToDateTime(model._fecharegistro);
             double kilometraje = model._kilometraje;
             String modelo = model._modelo;
-            String pais = model._pais;
-            String ciudad = model._ciudad;
+            String pais = _pais;
+            String _ciudad = ciudad;
             double penalidaddiaria = model._penalidaddiaria;
             double precioalquiler = model._precioalquiler;
             double preciocompra = model._preciocompra;
@@ -200,7 +200,7 @@ namespace BOReserva.Controllers
 
             Automovil carro = new Automovil(matricula, modelo, fabricante, anio, tipovehiculo, kilometraje, 
                                              cantpasajeros, preciocompra, precioalquiler, penalidaddiaria, fecharegistro, 
-                                             color, 1, transmision, pais, ciudad);  //SE CREA EL VEHICULO
+                                             color, 1, transmision, pais, _ciudad);  //SE CREA EL VEHICULO
             int modifico_si_no = carro.MModificarvehiculoBD(carro); //SE MODIFICA A LA BD RETORNA 1 SI SE  MODIFICO Y 0 SI NO LO LOGRA
             
             return (Json(true, JsonRequestBehavior.AllowGet));
