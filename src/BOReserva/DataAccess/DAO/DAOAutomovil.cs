@@ -10,6 +10,9 @@ using System.Web;
 
 namespace BOReserva.Models.gestion_automoviles
 {
+    /// <summary>
+    /// Clase donde se realiza el acceso de datos para los vehículos
+    /// </summary>
     public class DAOAutomovil
     {
         //private String connetionString = @"Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User ID=DB_A1380A_reserva_admin;Password = ucabds1617a";
@@ -18,10 +21,16 @@ namespace BOReserva.Models.gestion_automoviles
         
         private SqlConnection con = null;
 
+
+
+        /// <summary>
+        /// Método que agrega un vehículo a la base de datos
+        /// </summary>
+        /// <param name="vehiculo">Vehículo a agregar a la base de datos</param>
+        /// <param name="id">El id de la ciudad a donde será agregado</param>
+        /// <returns>Retorna 1 si se agregó exitosamente y retorna 0 si no lo pudo hacer</returns>
         public int MAgregarVehiculoBD(Automovil vehiculo, int id)
         {
-           // int fk_ciudad = MBuscarfkciudad(vehiculo._ciudad, vehiculo._pais);
-            int fk_ciudad = 12;
             try
             {
                 con = new SqlConnection(connetionString);
@@ -44,6 +53,13 @@ namespace BOReserva.Models.gestion_automoviles
             }
         }
 
+
+        /// <summary>
+        /// Método que modifica un vehículo existente de la base de datos
+        /// </summary>
+        /// <param name="vehiculo">Vehículo a modificar de la base de datos</param>
+        /// <param name="id">El id de la ciudad a donde se ubica</param>
+        /// <returns>Retorna 1 si se modificó exitosamente y retorna 0 si no lo pudo hacer</returns>
         public int MModificarVehiculoBD(Automovil vehiculo, int id)
         {
             try
@@ -66,6 +82,11 @@ namespace BOReserva.Models.gestion_automoviles
             }
         }
 
+
+        /// <summary>
+        /// Método que lista todos los vehículos de la base de datos
+        /// </summary>
+        /// <returns>Retorna una lista de tipo Automovil</returns>
         public List<Automovil> MListarvehiculosBD()
         {
             List<Automovil> listavehiculos = new List<Automovil>();
@@ -87,7 +108,7 @@ namespace BOReserva.Models.gestion_automoviles
                                               double.Parse(reader["aut_preciocompra"].ToString()), double.Parse(reader["aut_precioalquiler"].ToString()),
                                               double.Parse(reader["aut_penalidaddiaria"].ToString()), fecharegistro ,
                                               reader["aut_color"].ToString(), Int32.Parse(reader["aut_disponibilidad"].ToString()), reader["aut_transmision"].ToString(),
-                                              MBuscarnombreciudad(Int32.Parse(reader["aut_fk_ciudad"].ToString())), MBuscarnombrePais(Int32.Parse(reader["aut_fk_ciudad"].ToString()))
+                                              MBuscarnombreciudadBD(Int32.Parse(reader["aut_fk_ciudad"].ToString())), MBuscarnombrePaisBD(Int32.Parse(reader["aut_fk_ciudad"].ToString()))
                                               );
                        listavehiculos.Add(vehiculo);
                    }
@@ -103,6 +124,12 @@ namespace BOReserva.Models.gestion_automoviles
             }
         }
 
+
+        /// <summary>
+        /// Método para buscar un vehículo en particular de la base de datos
+        /// </summary>
+        /// <param name="matricula">La matrícula del vehículo a buscar</param>
+        /// <returns>Retorna un objeto de tipo Automovil</returns>
         public Automovil MMostrarvehiculoBD(String matricula)
         {
             Automovil vehiculo = null;
@@ -114,8 +141,6 @@ namespace BOReserva.Models.gestion_automoviles
                 SqlCommand cmd = new SqlCommand(sql, con);
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    //SE CREA UN OBJECTO VEHICLE SE PASAN LOS ATRIBUTO ASI reader["<etiqueta de la columna en la tabla Automovil>"]
-                    //Y  SE AGREGA a vehiculo
                     while (reader.Read())
                     {
                         var fecha = reader["aut_fecharegistro"];
@@ -126,7 +151,7 @@ namespace BOReserva.Models.gestion_automoviles
                                                  double.Parse(reader["aut_preciocompra"].ToString()), double.Parse(reader["aut_precioalquiler"].ToString()),
                                                  double.Parse(reader["aut_penalidaddiaria"].ToString()), fecharegistro,
                                                  reader["aut_color"].ToString(), Int32.Parse(reader["aut_disponibilidad"].ToString()), reader["aut_transmision"].ToString(),
-                                                 MBuscarnombreciudad(Int32.Parse(reader["aut_fk_ciudad"].ToString())), MBuscarnombrePais(Int32.Parse(reader["aut_fk_ciudad"].ToString()))
+                                                 MBuscarnombreciudadBD(Int32.Parse(reader["aut_fk_ciudad"].ToString())), MBuscarnombrePaisBD(Int32.Parse(reader["aut_fk_ciudad"].ToString()))
                                                  );
                     }
                     cmd.Dispose();
@@ -141,9 +166,11 @@ namespace BOReserva.Models.gestion_automoviles
             }
             }
 
-        public int MBuscarfkciudad (String ciudad, String pais)
+
+
+        public int MBuscaridciudadBD (String ciudad, String pais)
         {
-            int fk_ciudad = 12;
+            int id_ciudad = 12;
             try
             {
                 con = new SqlConnection(connetionString);
@@ -158,17 +185,17 @@ namespace BOReserva.Models.gestion_automoviles
                     {
                         //SE OBTIENE LA CIUDAD Y SE PASA
                         //Y  COLOCA QUE FK_CIUDAD ES IGUAL A LO QUE DEVUELVE EL SQL
-                        fk_ciudad = Int32.Parse(reader[0].ToString()); //EL 0 REPRESENTA LA PRIMERA Y UNICA COLUMNA QUE DEVULVE EL SqlDataReader
+                        id_ciudad = Int32.Parse(reader[0].ToString()); //EL 0 REPRESENTA LA PRIMERA Y UNICA COLUMNA QUE DEVULVE EL SqlDataReader
                     }   
                 }
                 cmd.Dispose();
                 con.Close();
-                return fk_ciudad;
+                return id_ciudad;
             }
             catch (SqlException ex)
             {
                 con.Close();
-                return fk_ciudad;
+                return id_ciudad;
             }
         }
 
@@ -192,7 +219,7 @@ namespace BOReserva.Models.gestion_automoviles
             }
         }
 
-        public String MBuscarnombreciudad(int id)
+        public String MBuscarnombreciudadBD(int id)
         {
             String _ciudad = "No aplica";
             try
@@ -221,7 +248,7 @@ namespace BOReserva.Models.gestion_automoviles
             }
         }
 
-        public String MBuscarnombrePais(int ciudad) 
+        public String MBuscarnombrePaisBD(int ciudad) 
         {
             String _lugar = "No aplica";
             try
