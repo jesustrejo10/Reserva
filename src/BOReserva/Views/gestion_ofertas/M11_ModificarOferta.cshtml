@@ -1,0 +1,90 @@
+﻿@model BOReserva.Models.gestion_ofertas.CAgregarOferta
+<!-----------------SECCION MODIFICAR OFERTA-------------------->
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box">
+            <div class="box-header with-border">
+                <h1 class="box-title"> Modificar Oferta</h1>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="col-xs-4">
+                            <label>Seleccione Oferta</label>
+                            <select class="form-control" id="cbModOfeSelecOferta">
+                                <option>Seleccionar Oferta</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12" style="margin-top: 25px">
+
+                        <div class="col-xs-4">
+                            <label>Nombre de la Oferta</label>
+                            <input type="text" class="form-control" id="iNombreOferta">
+                        </div>
+
+                            <div class="col-xs-4">
+                                <label>Fecha Inicio:</label>
+
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.TextBoxFor(m => m._fechaIniOferta, null, new { @class = "form-control datepicker required", @name = "fechaIniOferta", @type = "date" })
+                                    @*<input type="text" name="fechaIniOferta" value="" class="form-control datepicker required">*@
+
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+
+                            <div class="col-xs-4">
+                                <label>Fecha fin:</label>
+
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.TextBoxFor(m => m._fechaFinOferta, null, new { @class = "form-control datepicker required", @name = "fechaFinOferta", @type = "date" })
+                                    @*<input type="text" name="fechaFinOferta" value="" class="form-control datepicker required">*@
+
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+
+
+                        <div class="col-xs-4" style="margin-top: 25px">
+                            <label>Porcentaje de Oferta</label>
+                            <input type="text" class="form-control" id="iPrecioOferta">
+                        </div>
+
+                    <div class="col-md-12" style="margin-top: 25px">
+
+                        <div class="col-xs-4">
+                            
+                        </div>
+
+                        <div class="col-xs-4">
+                            <button type="button" class="btn btn-success" style="display: inline-block;">Activar</button>
+                            <button type="button" class="btn btn-danger" style="display: inline-block;">Desactivar</button>
+                        </div>
+
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+<!-----------------FIN SECCION MODIFICAR OFERTA-------------------->

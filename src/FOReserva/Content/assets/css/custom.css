@@ -10,17 +10,24 @@
     }
 }
 
-#rest_form .has-error{
+#rest_form .has-error, #reserva_form .has-error{
    border-color: #f39c12 !important;
 }
 
-#rest_form .has-success{
+#rest_form .has-success, #reserva_form .has-success{
    border-color:  #18bc9c !important;
 }
 
-#rest_form .has-error p{
+.has-error p {
   color: #f39c12 !important;
   margin-bottom:15px;
 }
+
+.orange {
+      color: #f39c12 !important
+}
+
+
+
 
 /*************************** END - ANDREA CAMACHO ******************************************/
