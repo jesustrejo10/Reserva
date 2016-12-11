@@ -10,11 +10,24 @@ namespace FOReserva.Controllers
     {
         //
         // GET: /gestion_reserva_boleto/
-
-        public ActionResult Index()
+        public ActionResult busqueda_parametros()
         {
-            return View();
+            //System.Diagnostics.Debug.WriteLine("mamalo");
+            return PartialView();
         }
+        public ActionResult busqueda_resultados()
+        {
+            return PartialView();
+        }
+        public ActionResult boleto_datos()
+        {
+            return PartialView();
+        }
+        public ActionResult boleto_reserva()
+        {
+            return PartialView();
+        }
+
 
     }
 }

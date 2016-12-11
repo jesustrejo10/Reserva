@@ -1,0 +1,79 @@
+﻿<style>
+    .shop-item-list > .col-lg-12 > .shop-item p {
+        margin: 0px !important;
+    }
+
+    div.shop-item-summary {
+        padding: 0px 8px !important;
+    }
+
+    div.shop-item {
+        margin-bottom: 15px !important;
+    }
+
+    .thumbnail {
+        padding: 0px !important;
+    }
+</style>
+<br />
+<div class="container">
+    <div class=" relative">
+
+
+
+        <ul class="shop-item-list row list-inline nomargin">
+
+            <!-- ITEM -->
+            <li class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                <div class="shop-item clearfix">
+
+                    <div class="thumbnail" style="width: 91px;">
+                        <!-- product image(s) -->
+                        <a class="shop-item-image">
+                            <img class="img-responsive" src="~/Images/avion4.png" alt="shop first image"  style="background-color:rgba(0,0,0,0.1);" />
+                        </a>
+                        <!-- /product image(s) -->
+
+                    </div>
+                    <div class="shop-item-summary" style="left: 115px;">
+                        <p>
+                            <!-- IDA -->
+                            <span class="glyphicon glyphicon-plane "></span>&nbsp;&nbsp;<b>SALIDA</b><br />
+                            <b>Fecha :  </b>Mar 15/11                      <br />
+                            <b>Origen : </b>[<b> 08:50</b>&nbsp;] Bogotá El Dorado - Colombia<br />
+                            <b>Destino :</b>[<b> 07:03(+1)</b>&nbsp;] San Diego McClellan - EEUU  <br /><br />
+
+                            <!-- VUELTA -->
+                            <span class="glyphicon glyphicon-plane fa-rotate-180"></span>&nbsp;&nbsp;<b>LLEGADA</b><br />
+                            <b>Fecha :  </b>Mar 15/11                      <br />
+                            <b>Origen : </b>[<b> 08:50</b>&nbsp;] Bogotá El Dorado - Colombia<br />
+                            <b>Destino :</b>[<b> 07:03(+1)</b>&nbsp;] San Diego McClellan - EEUU  <br />
+                            <b>Boletos Requeridos :</b>           1        <br />
+                        </p><!-- /product short description -->
+                        <!-- price -->
+                        <div class="shop-item-price">
+                            $780.00
+                        </div>
+                        <!-- /price -->
+                        <!-- buttons -->
+                        <div class="shop-item-buttons">
+                            <a class="btn btn-default disabled" onclick="boleto_datos()" href="#"><i class="fa fa-paper-plane"></i> Continuar</a>
+                            <!-- replace data-item-id width the real item ID - used by js/view/demo.shop.js -->
+                        </div>
+                        <!-- /buttons -->
+
+                    </div>
+                </div>
+            </li>
+            <!-- /ITEM -->
+        </ul>
+    </div>
+
+</div>
+<script>
+    function boleto_datos() {
+        //cargarContenido('#MD', 'get', '/gestion_reserva_boleto/boleto_datos', null, this)
+        alert("continuar");
+    }
+</script>

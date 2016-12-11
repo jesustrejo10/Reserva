@@ -1,14 +1,11 @@
-﻿@model FOReserva.Models.Vuelos.Cvista_Vuelos
-
+﻿
 <div class="heading-title">
     <h3><span>Vuelos</span></h3>
 </div>
 
-@*<form class="validate" action="php/contact.php" method="post" enctype="multipart/form-data" data-success="Sent! Thank you!" data-toastr-position="top-right">*@
-
 @using (Html.BeginForm("Index", "gestion_reserva_boleto", FormMethod.Post, new { @id = "formBuscarVuelos", @class = "form-horizontal" }))
 {
-  <fieldset>
+    <fieldset>
         <!-- required [php action request] -->
         <input type="hidden" name="action" value="contact_send" />
 
@@ -16,8 +13,7 @@
             <div class="form-group">
                 <div class="col-md-6 col-sm-6">
                     <label>Origen</label>
-                      @Html.TextBoxFor(m => m._prueba, null, new { @class = "form-control required", @name = "contact[first_name]" })
-                    @*<input type="text" name="contact[first_name]" value="" class="form-control required">*@
+                    <input type="text" name="contact[first_name]" value="" class="form-control required">
                 </div>
                 <div class="col-md-6 col-sm-6">
                     <label>Destino</label>
@@ -66,33 +62,47 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-6 col-sm-6">
+                    <label>Clase</label>
+                    <select name="contact[position]" class="form-control pointer required">
+                        <option value="">--- Seleccionar ---</option>
+                        <option value="1">Turista</option>
+                        <option value="2">Ejecutivo</option>
+                        <option value="3">V.I.P.</option>
+
+                    </select>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <label>Escala</label>
+                    <select name="contact[position]" class="form-control pointer required">
+                        <option value="1">NO</option>
+                        <option value="2">SI</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
     </fieldset>
 
     <div class="row text-center">
         <div class="col-md-12">
-            <a class="btn btn-primary" onclick="resumenBusqueda()" href="#"> INICIO </a>
-            @*<button type="button" id="buscarVuelo" class="btn btn-primary" >Buscar</button>*@
+            <button type="button" id="buscarVuelo" class="btn btn-primary">Buscar</button>
         </div>
     </div>
-<script>
-    function resumenBusqueda() {
-        cargarContenido('#MD', 'get', '/gestion_reserva_boleto/busqueda_parametros', null, this)
-        cargarContenido('#MI', 'get', '/gestion_reserva_boleto/busqueda_resultados', null, this)
-    }
-    //$("#buscarVuelo").click(function (e) {
-    //    e.preventDefault();
-    //    var form = $("#formBuscarVuelos");
-    //    $.ajax({
-    //        url: "gestion_reserva_boleto/Index",
-    //        data: form.serialize(),
-    //        type: 'POST',
-    //        success: function (data) {
-    //            $("#formBuscarVuelos").submit();
-    //        }
-    //    });
-    //});
-</script>
-       
+    <script>
+        $("#buscarVuelo").click(function (e) {
+            e.preventDefault();
+            var form = $("#formBuscarVuelos");
+            $.ajax({
+                url: "gestion_reserva_boleto/Index",
+                data: form.serialize(),
+                type: 'POST',
+                success: function (data) {
+                    $("#formBuscarVuelos").submit();
+                }
+            });
+        });
+    </script>
 }
-
-@*</form>*@

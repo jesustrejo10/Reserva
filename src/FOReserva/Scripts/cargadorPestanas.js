@@ -10,8 +10,7 @@
 
 /* Cargador Generico */
 function cargarContenido(seccion, tipo, url, data, boton) {
-    
-    // tipo CP : 1 columna, Todo el ancho de la pagina
+    // tipo CP : 1 columna,  Todo el ancho de la pagina
     // tipo MD : 2 columnas, contenido derecha
     // tipo MI : 2 columnas, contenido izquierda
     // tipo CL : 2 columnas, contenido izquierda 
@@ -21,6 +20,7 @@ function cargarContenido(seccion, tipo, url, data, boton) {
             type: tipo,
             data: data,
             success: function (data, textStatus, jqXHR) {
+                console.log('cargarContenido : ' + url);
                 if (seccion == '#MD' || seccion == '#MI') {
                     mostrarContenedor(1)
                 } else if (seccion == '#CI') {
