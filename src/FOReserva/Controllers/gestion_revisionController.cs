@@ -9,11 +9,6 @@ using FOReserva.Models.Restaurantes;
 
 namespace FORevision.Controllers
 {
-<<<<<<< HEAD
-=======
-/*
-<<<<<<< HEAD
->>>>>>> refs/remotes/origin/Develop
     /// <summary>
     /// Gestion Revision Controlador
     /// </summary>
@@ -176,7 +171,8 @@ namespace FORevision.Controllers
             }
 
             ManejadorSQLMuestraRevision manejador2 = new ManejadorSQLMuestraRevision();  // crear en Servicios un manejador para listar 
-            //lista = manejador2.Eliminar_Revision(usuario, revision);
+            //lista = manejador2.Eliminar_Revision(usuario, revision);*/
+            return null;
         }
 
         /// <summary>
@@ -191,15 +187,12 @@ namespace FORevision.Controllers
               List<CReservation_Restaurant> rest;
               CReservation_Restaurant res;
              C
-<<<<<<< HEAD
+
               */
             return null;
         }
-=======
-              
->>>>>>> refs/remotes/origin/Develop
 
-        public ActionResult Crear_Revsion(CReservation_Restaurant reserva, string usuario, DateTime fecha)                 //crear reserva restaurant
+        public ActionResult Crear_Revision(CReservation_Restaurant reserva, string usuario, DateTime fecha)                 //crear reserva restaurant
         {
 
 
@@ -224,14 +217,10 @@ namespace FORevision.Controllers
             {
                 CListRevision modelo = new CListRevision();
                 return PartialView(modelo);
-            }
+            }*/
+            return null;
         }
 
     }
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> refs/remotes/origin/Develop*/
-}
->>>>>>> refs/remotes/origin/Develop
