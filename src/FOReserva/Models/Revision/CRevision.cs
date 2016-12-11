@@ -27,7 +27,7 @@ namespace FOReserva.Models.Revision
         /// <param name="puntuacion">Puntuacion de la Revision</param>
         /// <param name="positivo">Valoraciones positivos</param>
         /// <param name="negativo">Valoraciones negativas</param>        
-        public CRevision(int id, string name, DateTime fecha, string mensaje, int tipo, int puntuacion, int positivo, int negativo, int tipo)
+        public CRevision(int id, string name, DateTime fecha, string mensaje, int tipo, int puntuacion, int positivo, int negativo)
             : base(id, name)
         {
              this._fecha = fecha;

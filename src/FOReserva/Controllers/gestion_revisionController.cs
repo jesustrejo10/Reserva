@@ -78,7 +78,7 @@ namespace FORevision.Controllers
         /// Creacion Modelo Lista Revision
         /// </summary>
         /// <returns>Vista Modelo</returns>
-        public ActionResult Consultar_Revision(string usuario)
+     /*   public ActionResult Consultar_Revision(string usuario)
         {
             // int search_val = Int32.Parse(Request.QueryString["search_val"]);
             // string Usuario = Request.QueryString["Usuario"];
@@ -89,19 +89,21 @@ namespace FORevision.Controllers
             CRevision modelo = new CRevision();
             return PartialView(modelo);
         }
+      * 
+      * */
 
         /// <summary>
         /// Creacion Modelo Lista Revision
         /// </summary>
         /// <returns>Vista Modelo</returns>
-        public ActionResult Consultar_Revision_Lista(string usuario)
+        public ActionResult Consultar_Revision_Lista(string nombre , string apellido)
         {
             // int search_val = Int32.Parse(Request.QueryString["search_val"]);
             // string Usuario = Request.QueryString["Usuario"];
 
             List<CRevision> lista;
             ManejadorSQLMuestraRevision manejador = new ManejadorSQLMuestraRevision();
-            lista = manejador.ConsultarRevision(usuario);
+            lista = manejador.ConsultarRevision(nombre, apellido);
 
             return PartialView(lista);
         }

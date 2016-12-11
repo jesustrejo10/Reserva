@@ -28,7 +28,7 @@ namespace FOReserva.Servicio
                 {
                     int id = read.GetInt32(0);
                     string nombre = read.GetString(1);
-                    string tipo = read.GetString(2);
+                    int tipo = read.GetInt32(2);
                     CRevision rev = new CRevision();
                     rev.Id = id;
                     rev.Name = nombre;
@@ -51,7 +51,7 @@ namespace FOReserva.Servicio
                 {
                     int id = read.GetInt32(0);
                     string nombre = read.GetString(1);
-                    string tipo = read.GetString(2);
+                    int tipo = read.GetInt32(2);
                     CRevision rev = new CRevision();
                     rev.Id = id;
                     rev.Name = nombre;
@@ -74,7 +74,7 @@ namespace FOReserva.Servicio
                 {
                     int id = read.GetInt32(0);
                     string nombre = read.GetString(1);
-                    string tipo = read.GetString(2);
+                    int tipo = read.GetInt32(2);
                     CRevision rev = new CRevision();
                     rev.Id = id;
                     rev.Name = nombre;
@@ -97,7 +97,7 @@ namespace FOReserva.Servicio
                 {
                     int id = read.GetInt32(0);
                     string nombre = read.GetString(1);
-                    string tipo = read.GetString(2);
+                    int tipo = read.GetInt32(2);
                     CRevision rev = new CRevision();
                     rev.Id = id;
                     rev.Name = nombre;
@@ -121,7 +121,7 @@ namespace FOReserva.Servicio
                 {
                     int id = read.GetInt32(0);
                     string nombre = read.GetString(1);
-                    string tipo = read.GetString(2);
+                    int tipo = read.GetInt32(2);
                     CRevision rev = new CRevision();
                     rev.Id = id;
                     rev.Name = nombre;
