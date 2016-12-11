@@ -26,18 +26,18 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr id="@item.Id" value="@item.Id">
-                                <td>@item.Id</td>
-                                <td>@item.Restaurant.Name</td>
-                                <td class="reserv_name" value="@item.Name">@item.Name</td>
-                                <td class="reserv_date" value="@item.Date">@item.Date</td>
-                                <td class="reserv_time" value="@item.Time">@item.Time</td>
-                                <td class="reserv_count" value="@item.Count">@item.Count</td>
-                                <td style="text-align: center;">
-                                    <a href="#" class="update list-icon" value="@item.Id"><i class="fa fa fa-pencil-square"></i></a>
-                                    <a href="#" class="delete list-icon" value="@item.Id"><i class="fa fa-times-circle"></i></a>
-                                </td>
-                            </tr>
+                        <tr id="@item.Id" value="@item.Id">
+                            <td>@item.Id</td>
+                            <td>@item.Restaurant.Name</td>
+                            <td class="reserv_name" value="@item.Name">@item.Name</td>
+                            <td class="reserv_date" value="@item.Date">@item.Date</td>
+                            <td class="reserv_time" value="@item.Time">@item.Time</td>
+                            <td class="reserv_count" value="@item.Count">@item.Count</td>
+                            <td style="text-align: center;">
+                                <a href="#" class="update list-icon" value="@item.Id"><i class="fa fa fa-pencil-square"></i></a>
+                                <a href="#" class="delete list-icon" value="@item.Id"><i class="fa fa-times-circle"></i></a>
+                            </td>
+                        </tr>
                         }
                     </tbody>
                 </table>
@@ -180,6 +180,14 @@
 	    });
     });
     $(document).on('click', '.update', function () {
+        //clear errors
+        $(".error").hide();
+        $("#name_client").removeClass("has-error");
+        $("#reserv_hour").removeClass("has-error");
+        $("#reserv_date").removeClass("has-error");
+
+
+        //activar modal
         var id_fila = '#' + $(this).attr('value');
         $('#aceptar_modificar').attr('value', $(this).attr('value'));
         $('#name_client').attr('value', $(id_fila).children('.reserv_name').attr('value'));
@@ -209,12 +217,12 @@
 	        console.log("complete");
 	    });
     }
-   
+
 </script>
 
 
 <script>
-   // DATE PICKER
+    // DATE PICKER
     $(document).ready(function () {
         $('.datepicker').datepicker({
             orientation: "bottom",
@@ -280,7 +288,5 @@
             else
                 return false;
         });
-
     });
-
 </script>
