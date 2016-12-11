@@ -38,13 +38,13 @@ namespace FORevision.Controllers
         public bool Eliminar_Revision(string nombre, string apellido, int revision)
         {
 
-            bool resultado;
-            ManejadorSQLRevision manejador = new ManejadorSQLRevision();
-            resultado = manejador.Eliminar_Revision(nombre, apellido, revision);
-            return true;
-
-
-
+           
+                bool resultado;
+                ManejadorSQLRevision manejador = new ManejadorSQLRevision();
+                resultado = manejador.Eliminar_Revision(nombre, apellido, revision);
+                return resultado;
+           
+         
         }
 
         /// <summary>
