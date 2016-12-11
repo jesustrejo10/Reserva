@@ -35,7 +35,7 @@
                                 <td>@item.Count</td>
                                 <td>
                                     <a href="#" class="update" value="@item.Id"><i class="fa fa fa-pencil-square"></i></a>
-                                    <a href="#" class="delete" value="@item.Id"><i class="fa fa-times-circle"></i></a>
+                                    <a href="#" class="delete" value="@item.Id" ><i class="fa fa-times-circle"></i></a>
                                 </td>
                             </tr>
                          }
@@ -46,6 +46,27 @@
      </div>
 </div>
 
+<div id="ModalEliminar" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Eliminar Reserva</h4>
+      </div>
+      <div class="modal-body">
+        <p>¿Está seguro que desea eliminar esta reserva?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="aceptar_eliminar" value="0" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <script>
         $(document).ready(function() {
             $('#tablas-reservas-restaurant').DataTable();
@@ -53,6 +74,12 @@
 </script>
 <script>
     $(document).on('click', '.delete', function () {
+        var id_fila = $(this).attr('value');
+        $('#aceptar_eliminar').attr('value', id_fila);
+        $('#ModalEliminar').modal('show');
+    });
+
+    $(document).on('click', '#aceptar_eliminar', function () {
         var id_fila =$(this).attr('value');
         $.ajax({
             url: "/gestion_reserva_restaurante/eliminar_reserva/",
@@ -60,7 +87,8 @@
             data: { id: id_fila },
            
         }).done(function (respuesta) {
-            console.log(respuesta);
+            $('#' + id_fila).remove();
+            $('#ModalEliminar').modal('hide');
         })
 	    .fail(function () {
 	        console.log("error");
