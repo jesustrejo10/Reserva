@@ -25,8 +25,8 @@ namespace FORevision.Controllers
         {
 
             List<CRevision> lista;
-            ManejadorSQLMuestraRevision manejador = new ManejadorSQLMuestraRevision();
-            lista = manejador.ConsultarRevision(nombre, apellido);
+            ManejadorSQLRevision manejador = new ManejadorSQLRevision();
+            lista = manejador.Consultar_Revision(nombre, apellido);
 
             return PartialView(lista);
         }
@@ -39,7 +39,7 @@ namespace FORevision.Controllers
         {
 
             bool resultado;
-            ManejadorSQLMuestraRevision manejador = new ManejadorSQLMuestraRevision();
+            ManejadorSQLRevision manejador = new ManejadorSQLRevision();
             resultado = manejador.Eliminar_Revision(nombre, apellido, revision);
             return true;
 
@@ -55,7 +55,7 @@ namespace FORevision.Controllers
         {
 
             bool Revision;
-            ManejadorSQLMuestraRevision manejador = new ManejadorSQLMuestraRevision();
+            ManejadorSQLRevision manejador = new ManejadorSQLRevision();
             Revision = manejador.Crear_Revision(nombre, apellido);
             return true;
 
@@ -71,16 +71,16 @@ namespace FORevision.Controllers
             if (tipo == 1)
             {
                 List<CRevision> lista;
-                ManejadorSQLMuestraRevision manejador = new ManejadorSQLMuestraRevision();
-                lista = manejador.MostrarRevision_Restaurant(nombre, apellido, tipo);
+                ManejadorSQLRevision manejador = new ManejadorSQLRevision();
+                lista = manejador.Mostrar_Revision_Restaurant(nombre, apellido, tipo);
                 return PartialView(lista);
             }
             else
             {
 
                 List<CRevision> lista;
-                ManejadorSQLMuestraRevision manejador = new ManejadorSQLMuestraRevision();
-                lista = manejador.MostrarRevision_Hotel(nombre, apellido, tipo);
+                ManejadorSQLRevision manejador = new ManejadorSQLRevision();
+                lista = manejador.Mostrar_Revision_Hotel(nombre, apellido, tipo);
                 return PartialView(lista);
 
 
@@ -95,7 +95,7 @@ namespace FORevision.Controllers
         {
 
             bool resultado;
-            ManejadorSQLMuestraRevision manejador = new ManejadorSQLMuestraRevision();
+            ManejadorSQLRevision manejador = new ManejadorSQLRevision();
             resultado = manejador.Editar_Revision(nombre, apellido, revision);
             return true;
 
