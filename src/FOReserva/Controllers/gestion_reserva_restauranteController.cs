@@ -115,7 +115,7 @@ namespace FOReserva.Controllers
                 //Ventana de error no conecto a la db
                 //Se puede usar el mensaje de la excepcion "e.mensaje"
                 reserva = null;
-                return View("error_conexion" );
+                return View("error_conexion" + e.Message);
             }
             catch (InvalidManejadorSQLException f)
             {
@@ -123,11 +123,11 @@ namespace FOReserva.Controllers
                 //Esto se causa por una sitaxis erronea del sql
                 //como son caracteres especiales o demas
                 reserva = null;
-                ViewBag.Message = "Lo sentimos, la reserva no pudo ser realizada";
-                return View(reserva);
+                return View("Error al crear Reserva");
             }
             catch (Exception e)
             {
+                reserva = null;
                 ViewBag.Message = "Lo sentimos, la reserva no pudo ser realizada debido al siguiente error del sistema:" + e.Message;
                 return View(reserva);
             }

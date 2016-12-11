@@ -46,6 +46,8 @@
      </div>
 </div>
 
+<<<<<<< HEAD
+=======
 <div id="ModalEliminar" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
@@ -67,6 +69,7 @@
   </div>
 </div>
 
+>>>>>>> Develop
 <script>
         $(document).ready(function() {
             $('#tablas-reservas-restaurant').DataTable();
@@ -74,6 +77,11 @@
 </script>
 <script>
     $(document).on('click', '.delete', function () {
+<<<<<<< HEAD
+        var id_fila ='#'+$(this).attr('value');
+        console.log($(id_fila).attr('value'));
+    });
+=======
         var id_fila = $(this).attr('value');
         $('#aceptar_eliminar').attr('value', id_fila);
         $('#ModalEliminar').modal('show');
@@ -96,4 +104,5 @@
 	        console.log("complete");
 	    });
      });
+>>>>>>> Develop
 </script>
