@@ -126,9 +126,7 @@ namespace BOReserva.Controllers
             manejadorSQL_Boletos buscarboleto = new manejadorSQL_Boletos();
             CBoleto boleto = buscarboleto.M05MostrarBoletoBD(id);
 
-            CModificarBoleto bolView = new CModificarBoleto();
-
-            bolView.bol = boleto;
+            CModificarBoleto bolView = new CModificarBoleto(boleto);
             return PartialView(bolView);
         }
 
@@ -161,6 +159,18 @@ namespace BOReserva.Controllers
         {
             manejadorSQL_Boletos eliminar = new manejadorSQL_Boletos();
             int modifico_si_no = eliminar.M05EliminarBoletoBD(id);
+
+            return (Json(true, JsonRequestBehavior.AllowGet));
+        }
+
+        [HttpPost]
+        public JsonResult modificarDatosPasajero(CModificarBoleto model)
+        {
+
+            CPasajero pas = new CPasajero(model._id, model._primer_nombre,model._segundo_nombre,model._primer_apellido,
+                                          model._segundo_apellido,model._sexo,model._fecha_nac,model._correo);
+            manejadorSQL_Boletos modificar = new manejadorSQL_Boletos();
+            int modifico_si_no = modificar.M05ModificarDatosPasajero(pas);
 
             return (Json(true, JsonRequestBehavior.AllowGet));
         }

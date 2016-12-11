@@ -226,9 +226,26 @@ namespace BOReserva.Servicio.Servicio_Boletos
                 return 0;         
         }
 
-       public int M05ModificarBoletoBD(CBoleto boleto)
+       public int M05ModificarDatosPasajero(CPasajero pasajero)
        {
-            return 0;
+           int idaaaa = pasajero._id;
+           String va = pasajero._primer_nombre;
+           try
+           {
+               SqlConnection con = new SqlConnection(stringDeConexion);
+               con.Open();
+               String sql = "UPDATE Pasajero SET pas_primer_nombre = '"+ pasajero._primer_nombre+"' , pas_segundo_nombre = '" + pasajero._segundo_nombre + "' , pas_primer_apellido = '" + pasajero._primer_apellido +"' , pas_segundo_apellido = '" + pasajero._segundo_apellido + "' , pas_correo = '" + pasajero._correo + "' WHERE pas_id = " + pasajero._id + "";
+
+               SqlCommand cmd = new SqlCommand(sql, con);
+               cmd.ExecuteNonQuery();
+               cmd.Dispose();
+               con.Close();
+               return 1;
+           }
+           catch (SqlException ex)
+           {
+               return 0;
+           }
        }
 
        public CBoleto M05MostrarBoletoBD(int id)
