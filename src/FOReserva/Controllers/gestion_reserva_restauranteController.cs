@@ -171,5 +171,10 @@ namespace FOReserva.Controllers
                 // Error desconocido del sistema
             }
         }
+        [System.Web.Services.WebMethod]
+        public void editar_reserva(int id)
+        {
+
+        }
     }
 }
