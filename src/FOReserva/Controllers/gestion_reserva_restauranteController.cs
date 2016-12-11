@@ -186,10 +186,46 @@ namespace FOReserva.Controllers
                 ViewBag.Message = "Lo sentimos, la reserva no pudo ser realizada debido al siguiente error del sistema:" + e.Message;
             }
         }
+
+        /*
+         *  Metodo para Modificar una reserva
+         *   c_id_reserva: ID de la reserva a modificar
+         *   c_name_client: A nombre de quien se hizo la reserva
+         *   c_reserv_date: Fecha de la reserva
+         *   c_reserv_hour: hora de la reserva
+         *   c_number_person: numero de personas
+         */
         [System.Web.Services.WebMethod]
         public void editar_reserva(int c_id_reserva,string c_name_client, string c_reserv_date, string c_reserv_hour,int c_number_person)
         {
+            CReservation_Restaurant tmp = new CReservation_Restaurant();
+            tmp.Id = c_id_reserva;
+            tmp.Name = c_name_client;
+            tmp.Date = c_reserv_date;
+            tmp.Time = c_reserv_hour;
+            tmp.Count = c_number_person;
 
+            try
+            {
+                ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
+                manejador.actualizarReserva(tmp);
+            }
+            catch (ManejadorSQLException e)
+            {
+                /*
+                 * Controlar error de conexion
+                 *
+                 */
+
+            }
+            catch (InvalidManejadorSQLException e)
+            {
+                /*
+                 * Controlar error de operacion invalida 
+                 */
+
+            }
+            catch (Exception e) { /* Error generico del sistema */ }
         }
     }
 }
