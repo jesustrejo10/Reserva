@@ -342,7 +342,7 @@
 
     $("#consultarOferta").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_ofertas/M11_ConsultarOferta';
+        var url = '/gestion_ofertas/M11_VisualizarOferta';
         var method = 'GET';
         var data = '';
 

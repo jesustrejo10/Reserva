@@ -89,6 +89,57 @@ namespace BOReserva.Servicio
 
         }
 
+        public Boolean desactivarOferta(int ofertaId)
+        {
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                SqlCommand query = conexion.CreateCommand();
+                query.CommandText = "UPDATE Oferta SET of_estado = 0 WHERE of_id="+ofertaId;
+                SqlDataReader lector = query.ExecuteReader();
+                lector.Close();
+                SqlCommand query1 = conexion.CreateCommand();
+                query1.CommandText = "UPDATE Paquete SET pa_fk_oferta = null WHERE pa_fk_oferta=" + ofertaId;
+                SqlDataReader lector1 = query1.ExecuteReader();
+                lector1.Close();
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        public Boolean activarOferta(int ofertaId)
+        {
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                SqlCommand query = conexion.CreateCommand();
+                query.CommandText = "UPDATE Oferta SET of_estado = 1 WHERE of_id=" + ofertaId;
+                SqlDataReader lector = query.ExecuteReader();
+                lector.Close();
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        //Metodo para mostrar paquetes al momento de agregar una oferta
         public List<CPaquete> listarPaquetesEnBD()
         {
             List<CPaquete> paquetesList = new List<CPaquete>();
@@ -98,7 +149,7 @@ namespace BOReserva.Servicio
                 conexion = new SqlConnection(stringDeConexion);
                 //INTENTO abrir la conexion
                 conexion.Open();
-                String query = "SELECT * FROM Paquete";
+                String query = "SELECT * FROM Paquete WHERE pa_fk_oferta = null";
                 SqlCommand cmd = new SqlCommand(query, conexion);
                 SqlDataReader lector = cmd.ExecuteReader();
                 while (lector.Read())
@@ -112,6 +163,84 @@ namespace BOReserva.Servicio
                 //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
                 conexion.Close();
                 return paquetesList;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public List<CPaquete> listarPaquetesPorOferta(int ofertaId)
+        {
+            List<CPaquete> paquetesList = new List<CPaquete>();
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "SELECT * FROM Paquete WHERE pa_fk_oferta = "+ ofertaId;
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                while (lector.Read())
+                {
+                    CPaquete paquete = new CPaquete(Int32.Parse(lector["pa_id"].ToString()), lector["pa_nombre"].ToString(),
+                    float.Parse(lector["pa_precio"].ToString()));
+                    paquetesList.Add(paquete);
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return paquetesList;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public List<COferta> listarOfertasEnBD()
+        {
+            List<COferta> ofertasList = new List<COferta>();
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "SELECT * FROM Oferta";
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                while (lector.Read())
+                {
+                    String estado = lector["of_estado"].ToString();
+                    bool estadoOferta;
+                    if (estado == "True")
+                        estadoOferta = true;
+                    else
+                        estadoOferta = false;
+
+                    COferta oferta = new COferta(Int32.Parse(lector["of_id"].ToString()), lector["of_nombre"].ToString(),
+                    float.Parse(lector["of_porcentaje"].ToString()),Convert.ToDateTime(lector["of_fechaInicio"].ToString()),
+                    Convert.ToDateTime(lector["of_fechaFin"].ToString()), estadoOferta);
+                    ofertasList.Add(oferta);
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return ofertasList;
 
             }
             catch (SqlException e)
@@ -139,7 +268,7 @@ namespace BOReserva.Servicio
                 foreach(int idPaquete in idsPaquetes){
                     conexion.Open();
                     SqlCommand query1 = conexion.CreateCommand();
-                    query1.CommandText = "UPDATE Paquete SET pa_fk_oferta = "+idOferta+" WHERE pa_codigo = "+idPaquete+";";
+                    query1.CommandText = "UPDATE Paquete SET pa_fk_oferta = "+idOferta+" WHERE pa_id = "+idPaquete+";";
                     SqlDataReader lector1 = query1.ExecuteReader();
                     lector1.Close();
                     conexion.Close();

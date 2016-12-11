@@ -1432,7 +1432,7 @@
     <Content Include="Views\gestion_ruta_comercial\DetallesRutasComerciales.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_AgregarOferta.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_AgregarPaquete.cshtml" />
-    <Content Include="Views\gestion_ofertas\M11_ConsultarOferta.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_VisualizarOferta.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_ConsultarPaquete.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_GestionOfertas.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_ModificarOferta.cshtml" />
