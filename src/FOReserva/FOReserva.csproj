@@ -199,7 +199,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\gestion_planificacion_vacacionesController.cs" />
     <Compile Include="Controllers\gestion_diariosController.cs" />
-    <Compile Include="Controllers\gestion_reserva_cruceroController.cs" />
     <Compile Include="Controllers\gestion_reserva_habitacionesController.cs" />
     <Compile Include="Controllers\gestion_reserva_restauranteController.cs" />
     <Compile Include="Controllers\gestion_revisionController.cs" />
@@ -210,8 +209,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\Cruceros\CReserva_Cruceros.cs" />
-    <Compile Include="Models\Cruceros\CVista_Cruceros.cs" />
     <Compile Include="Models\Diarios\CDiarioModel.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\Itinerario\itinerario.cs" />
@@ -339,8 +336,6 @@
     <Content Include="Content\assets\images\demo\shop\banners\pointing_girl.png.png" />
     <Content Include="Content\assets\images\demo\shop\banners\top_1.png" />
     <Content Include="Content\assets\images\demo\shop\banners\top_2.png" />
-    <Content Include="Content\assets\images\demo\shop\home\crucero1.jpg" />
-    <Content Include="Content\assets\images\demo\shop\home\crucero2.jpg" />
     <Content Include="Content\assets\images\demo\shop\home\grid1.jpg" />
     <Content Include="Content\assets\images\demo\shop\home\grid2.jpg" />
     <Content Include="Content\assets\images\demo\shop\home\grid3.jpg" />
@@ -1680,7 +1675,6 @@
     <Content Include="Models\Vuelos\placeholder.html" />
     <Content Include="Scripts\cargadorPestanas.js" />
     <Content Include="Scripts\customValidator.js" />
-    <Content Include="Scripts\indexReservaCrucero.js" />
     <Content Include="Scripts\uniqueId.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -3073,8 +3067,6 @@
     <Content Include="Views\gestion_revision\gestion_revision.cshtml" />
     <Content Include="Views\gestion_revision\Consultar_Revision.cshtml" />
     <Content Include="Views\gestion_diarios\gestion_diarios_resultados.cshtml" />
-    <Content Include="Views\gestion_reserva_crucero\gestion_reserva_crucero.cshtml" />
-    <Content Include="Views\gestion_reserva_crucero\gestion_reserva_cruceroImagenes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
