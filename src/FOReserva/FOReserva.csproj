@@ -278,15 +278,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ReservaDB.dbml</DependentUpon>
     </Compile>
-
     <Compile Include="Servicio\InvalidManejadorSQLException.cs" />
     <Compile Include="Servicio\manejadorSQL.cs" />
-    <Compile Include="Servicio\ManejadorSQLRevision.cs" />
     <Compile Include="Servicio\Cruceros.cs" />
     <Compile Include="Servicio\manejadorSQLCrucero.cs" />
-
     <Compile Include="Servicio\ManejadorSQLDiarios.cs" />
-    <Compile Include="Servicio\ManejadorSQLMuestraRevision.cs" />
+    <Compile Include="Servicio\ManejadorSQLRevision.cs" />
     <Compile Include="Servicio\ManejadorSQLException.cs" />
     <Compile Include="Servicio\ManejadorSQLReservaRestaurant.cs" />
   </ItemGroup>
