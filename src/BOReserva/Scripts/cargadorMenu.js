@@ -1,5 +1,6 @@
 ﻿jQuery(document).ready(function () {
 
+    // INICIO DE AVIONES
     $("#gestionAviones").click(function (e) {
         e.preventDefault();
         var url = '/gestion_aviones/M02_GestionAviones';
@@ -21,7 +22,6 @@
                 }
             });
     });
-
     $("#m02_agregaravion").click(function (e) {
         e.preventDefault();
         var url = '/gestion_aviones/M02_AgregarAvion';
@@ -65,9 +65,9 @@
             });
 
     });
+    //FIN DE AVIONES
 
-
-
+    //INICIO DE RUTAS
     $("#m03AgregarRuta").click(function (e) {
         e.preventDefault();
         var url = '/gestion_ruta_comercial/AgregarRutasComerciales';
@@ -90,8 +90,6 @@
             });
 
     });
-
-
     $("#m03VisualizarRutas").click(function (e) {
 
 
@@ -115,8 +113,9 @@
             });
 
     });
+    //FIN DE RUTAS
 
-
+    //INICIO AUTOMOVILES
     $("#m08AgregarAutomovil").click(function (e) {
         e.preventDefault();
         var url = '/gestion_automoviles/M08_AgregarAutomovil';
@@ -161,6 +160,7 @@
             });
 
     });
+    //FIN DE AUTOMOVILES
 
     //INICIO M06_Gestion_Comida
     $("#gestionComida").click(function (e) {
@@ -248,7 +248,7 @@
     //FIN M06_Gestion_Comida
 
 
-
+    // INICIO DE HOTELES
     $("#crearhotel").click(function (e) {
         e.preventDefault();
         var url = '/gestion_hoteles/M09_GestionHoteles_Crear';
@@ -290,8 +290,10 @@
                 }
             });
     });
+    // FIN DE HOTELES
 
 
+    // INICIO RESERVAS
     $("#m05VerReserva").click(function (e) {
         e.preventDefault();
         var url = '/gestion_boletos/M05_VerReserva';
@@ -313,6 +315,7 @@
                 }
             });
     });
+    //FIN RESERVAS
 
     //M11 Gestion Ofertas y Paquetes
     $("#agregarOferta").unbind('click');
@@ -335,8 +338,15 @@
                 }
             });
     });
+    $("#consultarOferta").click(function (e) {
 
 
+
+
+
+
+
+    });
     $("#modificarOferta").click(function (e) {
         e.preventDefault();
         var url = '/gestion_ofertas/M11_ModificarOferta';
@@ -358,102 +368,11 @@
                 }
             });
     });
-
-    $("#consultarOferta").click(function (e) {
-    /* INICIO M10 RESTAURANTES BO */
-
-    $("#verRestaurantes").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_restaurantes/M10_GestionRestaurantes_Ver';
-        var method = 'GET';
-        var data = '';
-
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-    });
-
-    $("#agregarRestaurantes").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_restaurantes/M10_GestionRestaurantes_Agregar';
-        var method = 'GET';
-        var data = '';
-
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-    });
-
-    /* FIN M10 RESTAURANTES BO */
-    $("#m13VisualizarRol").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_ofertas/M11_VisualizarOferta';
-        var method = 'GET';
-        var data = '';
-
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-    });
-
     $("#agregarPaquete").click(function (e) {
         e.preventDefault();
         var url = '/gestion_ofertas/M11_AgregarPaquete';
-    $("#m05VisualizarBoletos").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_boletos/M05_VisualizarBoletos';
-        var method = 'GET';
-        var data = '';
 
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
     });
-
     $("#modificarPaquete").click(function (e) {
         e.preventDefault();
         var url = '/gestion_ofertas/M11_ModificarPaquete';
@@ -475,13 +394,80 @@
                 }
             });
     });
-
     $("#consultarPaquete").click(function (e) {
         e.preventDefault();
         var url = '/gestion_ofertas/M11_ConsultarPaquete';
 
     });
+    //M11 Fin ofertes y paquetes
 
+    /* INICIO M10 RESTAURANTES BO */
+    $("#verRestaurantes").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_restaurantes/M10_GestionRestaurantes_Ver';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+    $("#agregarRestaurantes").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_restaurantes/M10_GestionRestaurantes_Agregar';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+    /* FIN M10 RESTAURANTES BO */
+
+    //M05 Boletos y checkin
+    $("#m05VisualizarBoletos").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_boletos/M05_VisualizarBoletos';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
     $("#m05CheckIn").click(function (e) {
         e.preventDefault();
         var url = '/gestion_check_in/M05_CheckIn';
@@ -503,9 +489,32 @@
                 }
             });
     });
+    //FIN M05
 
-    //Fin M11
-});
 
+    //M13 ROLES
+    $("#m13VisualizarRol").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_ofertas/M11_VisualizarOferta';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
     });
+    //FIN M13 ROLES
+
+
 });

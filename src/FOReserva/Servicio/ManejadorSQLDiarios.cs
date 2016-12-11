@@ -13,8 +13,8 @@ namespace FOReserva.Servicio
 
     /*BUSQUEDAS*/
 
-    /*Buscar TODOS los DV*/
-    public List<CDiarioModel> buscarDV(){
+    /*Buscar TODOS los Diarios de Viaje*/
+    public List<CDiarioModel> obtenerDiarios(){
         string query = @"SELECT
 	                        id_diar,
 	                        nombre_diario,
@@ -42,6 +42,34 @@ namespace FOReserva.Servicio
             CloseConnection();
             return listaDV;
     }  
+
+    /*Buscar TODOS los Lugares para dropdown*/
+    public List<CLugar> obtenerLugares()
+    {
+        string query = @"SELECT
+	                        lug_id,
+	                        lug_nombre,
+                            lug_tipo_lugar
+                         FROM Lugar;";
+        SqlDataReader read = Executer(query);
+        List<CLugar> listaLugares = new List<CLugar>();
+        if (read.HasRows)
+        {
+            while (read.Read())
+            {
+                int id = read.GetInt32(0);
+                string nombre = read.GetString(1);
+                string tipo = read.GetString(2);
+                CLugar lug = new CLugar();
+                lug.ID = id;
+                lug.Nombre = nombre;
+                lug.Tipo = tipo;
+                listaLugares.Add(lug);
+            }
+        }
+        CloseConnection();
+        return listaLugares;
+    }
     
     
     /*INSERTS*/
