@@ -68,9 +68,9 @@ namespace UnitTestProject1
             Assert.IsNotNull(response);
             Assert.AreEqual(response, 12);
             //Verifico que si le paso 2 vacios funcione
-           /* response = daoAutomovil.MBuscaridciudadBD("", "");
+            response = daoAutomovil.MBuscaridciudadBD("", "");
             Debug.WriteLine(response);
-            Assert.AreEqual(response, 0);*/
+            Assert.AreEqual(response, 0);
             //Verifico que si le paso 2 null funcione
            response = daoAutomovil.MBuscaridciudadBD(null, null);
             Debug.WriteLine(response);
