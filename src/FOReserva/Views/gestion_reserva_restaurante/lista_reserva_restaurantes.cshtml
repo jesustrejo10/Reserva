@@ -53,7 +53,20 @@
 </script>
 <script>
     $(document).on('click', '.delete', function () {
-        var id_fila ='#'+$(this).attr('value');
-        console.log($(id_fila).attr('value'));
-    });
+        var id_fila =$(this).attr('value');
+        $.ajax({
+            url: "/gestion_reserva_restaurante/eliminar_reserva/",
+            type: 'POST',
+            data: { id: id_fila },
+           
+        }).done(function (respuesta) {
+            console.log(respuesta);
+        })
+	    .fail(function () {
+	        console.log("error");
+	    })
+	    .always(function () {
+	        console.log("complete");
+	    });
+     });
 </script>
