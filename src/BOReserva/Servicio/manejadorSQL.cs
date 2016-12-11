@@ -625,7 +625,6 @@ namespace BOReserva.Servicio
         /* FIN DE FUNCIONES COMUNES */
 
 
-
         //Procedimiento del Modulo 13 para retornar lista de los modulos generales
         public CListaGenerica<CModulo_general> consultarLosModulos()
         {
@@ -698,6 +697,8 @@ namespace BOReserva.Servicio
             }
         }
 
+
+        /* INICIO DE FUNCIONES MODULO 6 (COMIDAS POR VUELOS) */
         //Procedimiento del Modulo 6 para agregar platos a la base de datos.
         public Boolean insertarPlato(CAgregarComida model)
         {
@@ -734,6 +735,80 @@ namespace BOReserva.Servicio
             }
 
         }
+
+        //Procedimiento del Modulo 6 para retornar una lista con los platos en la bd
+        public List<CComida> listarPlatosEnBD()
+        {
+            List<CComida> comidas = new List<CComida>();
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "SELECT * FROM Comida";
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                while (lector.Read())
+                {
+                    CComida comida = new CComida(Int32.Parse(lector["comi_id"].ToString()), lector["comi_nombre"].ToString(),
+                    lector["comi_tipo"].ToString(), lector["comi_estatus"].ToString(),lector["comi_descripcion"].ToString());
+                    comidas.Add(comida);
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return comidas;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        //Procedimiento del Modulo 6 para retornar un objeto del tipo CComida buscado por su respectiva id
+        public CComida consultarComida(int id)
+        {
+            CComida platoRetorno = new CComida();
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "SELECT * FROM Comida where comi_id = " + id;
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                while (lector.Read())
+                {
+                    CComida comida = new CComida(Int32.Parse(lector["comi_id"].ToString()), lector["comi_nombre"].ToString(),
+                    lector["comi_tipo"].ToString(), lector["comi_estatus"].ToString(), lector["comi_descripcion"].ToString());
+                    platoRetorno = comida;
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return platoRetorno;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /* FIN DE FUNCIONES MODULO 6 (COMIDAS POR VUELOS) */
         
     }
 }
