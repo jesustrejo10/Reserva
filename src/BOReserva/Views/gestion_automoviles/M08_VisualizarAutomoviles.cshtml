@@ -143,8 +143,8 @@
 
     <script language="javascript" type="text/javascript">
         $(document).ready(function () {
-            e.preventDefault();
-            table = $('#example1').DataTable().makeEditable();
+            //e.preventDefault();
+            table = $('#example1').DataTable();
             $(".clasedeprueba").click(function () {
                 var identificador = $(this).parent().parent().parent().attr("id");
                 jQuery.ajax({
@@ -219,7 +219,7 @@
 
 
         $(document).ready(function () {
-            e.preventDefault();
+            //e.preventDefault();
             $(".activar").click(function () {
                 var identificador = $(this).parent().parent().parent().attr("id");
                 jQuery.ajax({
@@ -291,3 +291,152 @@
         });
     </script>
 
+@*
+
+
+
+    <script>
+
+        $("#m08_VisualizarAutomovil").click(function (e) {
+            e.preventDefault();
+            var url = '/gestion_automoviles/M08_VisualizarAutomovil';
+            var method = 'GET';
+            var data = '';
+
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+
+        });
+
+
+        $("#m08_ModificarAutomovil").click(function (e) {
+            e.preventDefault();
+            var url = '/gestion_automoviles/M08_ModificarAutomovil';
+            var method = 'GET';
+            var data = '';
+
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+
+        });
+
+    </script>
+
+    <script src="../../Content/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <!-- Bootstrap 3.3.6 -->
+    <script src="../../Content/bootstrap/js/bootstrap.min.js"></script>
+    <!-- DataTables -->
+    <script src="../../Content/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <!-- SlimScroll -->
+    <script src="../../Content/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="../../Content/plugins/fastclick/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../Content/dist/js/app.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../dist/js/demo.js"></script>
+    <!-- page script -->
+
+        <script language="javascript" type="text/javascript">
+            $(document).ready(function () {
+                //e.preventDefault();
+                $(".clasedeprueba").click(function () {
+                    var identificador = $(this).parent().parent().parent().attr("id");
+                    jQuery.ajax({
+                        type: "GET",
+                        url: "/gestion_automoviles/M08_VisualizarAutomovil",
+                        data: { matricula: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+                    }).done(function (data) {
+                        //$("#sdssss").append(data);
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    }).fail(function () {
+                        alert("esta vaina se jodio")
+                    });
+                });
+            });
+
+            $(document).ready(function () {
+                //e.preventDefault();
+                $(".modificar").click(function () {
+                    var identificador = $(this).parent().parent().parent().attr("id");
+                    jQuery.ajax({
+                        type: "GET",
+                        url: "/gestion_automoviles/M08_ModificarAutomovil",
+                        data: { matricula: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+                    }).done(function (data) {
+                        //$("#sdssss").append(data);
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    }).fail(function () {
+                        alert("esta vaina se jodio")
+                    });
+                });
+            });
+
+            $(document).ready(function () {
+                //e.preventDefault();
+                $(".eliminar").click(function () {
+                    var identificador = $(this).parent().parent().parent().attr("id");
+                    jQuery.ajax({
+                        type: "GET",
+                        url: "/gestion_automoviles/deleteVehicle",
+                        data: { matricula: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+                    }).done(function (data) {
+                        //$("#sdssss").append(data);
+                        alert("Se elimino exitosamente el vehiculo")
+                        var url1 = '/gestion_automoviles/M08_VisualizarAutomoviles';
+                        var method = 'GET';
+                        var data1 = '';
+
+                        $.ajax(
+                            {
+                                url: url1,
+                                type: method,
+                                data: data,
+                                success: function (data, textStatus, jqXHR) {
+
+                                    $("#contenido").empty();
+                                    $("#contenido").append(data);
+                                },
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    alert(errorThrown);
+                                }
+                            });
+                    }).fail(function () {
+                        alert("esta vaina se jodio")
+                    });
+                });
+            });
+        </script>
+
+
+
+*@
