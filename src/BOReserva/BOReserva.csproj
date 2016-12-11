@@ -242,6 +242,7 @@
       <DependentUpon>RecursoUsuario.resx</DependentUpon>
     </Compile>
     <Compile Include="Models\gestion_usuarios\ResultadoBD.cs" />
+    <Compile Include="Models\Util.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicio\manejadorSQL.cs" />
     <Compile Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx.cs">
@@ -1467,6 +1468,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoUsuario.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
