@@ -833,6 +833,8 @@
     <Content Include="Content\assets\plugins\datatables\js\dataTables.tableTools.min.js" />
     <Content Include="Content\assets\plugins\datatables\js\jquery.dataTables.js" />
     <Content Include="Content\assets\plugins\datatables\js\jquery.dataTables.min.js" />
+    <Content Include="Content\assets\plugins\datatable\css\jquery.dataTables.min.css" />
+    <Content Include="Content\assets\plugins\datatable\js\jquery.dataTables.min.js" />
     <Content Include="Content\assets\plugins\editor.markdown\css\bootstrap-markdown.min.css" />
     <Content Include="Content\assets\plugins\editor.markdown\js\bootstrap-markdown.js" />
     <Content Include="Content\assets\plugins\editor.markdown\js\bootstrap-markdown.min.js" />
@@ -3070,8 +3072,6 @@
     <Content Include="Views\gestion_revision\Consultar_Revision.cshtml" />
     <Content Include="Views\gestion_diarios\gestion_diarios_resultados.cshtml" />
     <Content Include="Views\gestion_reserva_restaurante\lista_reserva_restaurantes.cshtml" />
-    <Content Include="Views\gestion_reserva_restaurante\error_conexion.cshtml" />
-    <Content Include="Views\gestion_reserva_restaurante\_NoHayResultados.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
