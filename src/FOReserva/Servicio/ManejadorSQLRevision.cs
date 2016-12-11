@@ -46,7 +46,7 @@ namespace FOReserva.Servicio
             return lista_rev;
         }
 
-        public bool Eliminar_Revision(string nombre, string apellido, int revision)
+        public bool Eliminar_Revision(string nombre, string apellido, int revision)   //FALTA
         {
             string query = "DELETE FROM Reserva_Restaurante ( Reserva_Nombre, Fecha, Hora,Cantidad_Personas, FK_RESTAURANTE, FK_USUARIO) VALUES( )";
             this.Executer(query);
@@ -54,7 +54,7 @@ namespace FOReserva.Servicio
             return true;
         }
 
-        public bool Crear_Revision(string nombre, string apellido)
+        public bool Crear_Revision(string nombre, string apellido)   //FALTA
         {
             string query = "INSERT INTO Reserva_Restaurante ( Reserva_Nombre, Fecha, Hora,Cantidad_Personas, FK_RESTAURANTE, FK_USUARIO) VALUES( )";
             this.Executer(query);
@@ -126,7 +126,7 @@ namespace FOReserva.Servicio
             return lista_rev;
         }
 
-        public bool Editar_Revision(string nombre, string apellido, int revision)
+        public bool Editar_Revision(string nombre, string apellido, int revision)  // FALTA
         {
             string query = "INSERT INTO Reserva_Restaurante ( Reserva_Nombre, Fecha, Hora,Cantidad_Personas, FK_RESTAURANTE, FK_USUARIO) VALUES( )";
             this.Executer(query);

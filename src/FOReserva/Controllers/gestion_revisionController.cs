@@ -35,14 +35,14 @@ namespace FORevision.Controllers
             catch (NullReferenceException e)
             {
                 //Parametro Nulos
-                return View("Parametro Nulo");
+                return PartialView("Parametro Nulo");
             }
 
             catch (ManejadorSQLException f)
             {
                 //Ventana de error no conecto a la db
                 //Se puede usar el mensaje de la excepcion "f.mensaje"
-                return View("error_conexion");
+                returnPartialView("error_conexion");
             }
             catch (Exception g)
             {
@@ -124,7 +124,6 @@ namespace FORevision.Controllers
 
         }
 
-
         /// <summary>
         /// Creacion Modelo Mostrar Revision
         /// </summary>
@@ -155,14 +154,14 @@ namespace FORevision.Controllers
             catch (NullReferenceException e)
             {
                 //Parametro Nulos
-                return View("Parametro Nulo");
+                return PartialView("Parametro Nulo");
             }
 
             catch (ManejadorSQLException f)
             {
                 //Ventana de error no conecto a la db
                 //Se puede usar el mensaje de la excepcion "f.mensaje"
-                return View("error_conexion");
+                return PartialView("error_conexion");
             }
 
             return PartialView();
@@ -201,8 +200,6 @@ namespace FORevision.Controllers
 
 
         }
-
-
 
     }
 }
