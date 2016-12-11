@@ -42,8 +42,30 @@ namespace BOReserva.Controllers
             return PartialView();
         }
 
-        public static List<SelectListItem> pais() {
-            return CGestionHoteles_SelectPaisModel.pais();
+        public static List<SelectListItem> pais()
+        {
+            CManejadorSQL_Hoteles pais = new CManejadorSQL_Hoteles();
+            List<SelectListItem> _pais = new List<SelectListItem>();
+            String[] paises = pais.MListarpaisesBD();
+            int i = 0;
+            bool verdad = true;
+            while (verdad == true)
+            {
+                try
+                {
+                    _pais.Add(new SelectListItem
+                    {
+                        Text = paises[i].ToString(),
+                        Value = i.ToString()
+                    });
+                    i++;
+                }
+                catch (Exception e)
+                {
+                    verdad = false;
+                }
+            }
+            return _pais;
         }
 
         public ActionResult M09_GestionHoteles_Visualizar()

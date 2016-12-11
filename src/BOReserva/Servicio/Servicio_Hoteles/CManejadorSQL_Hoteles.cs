@@ -119,6 +119,7 @@ namespace BOReserva.Servicio.Servicio_Hoteles
             }
         }
 
+
         public String MBuscarnombrePais(int ciudad)
         {
             String _lugar = "No aplica";
@@ -212,5 +213,6 @@ namespace BOReserva.Servicio.Servicio_Hoteles
                 return null;
             }
         }
+
     }
 }

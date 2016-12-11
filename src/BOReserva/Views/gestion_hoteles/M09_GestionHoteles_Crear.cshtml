@@ -11,7 +11,7 @@
             <!-- general form elements -->
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><b>Registro de hotel</b></h3>
+                    <h3 class="box-title"><b>Registro de Hotel</b></h3>
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
@@ -33,14 +33,13 @@
                                 <div class="col-md-5">
                                     <!-- select -->                                     
                                         <label>País</label>                                       
-                                           @Html.DropDownListFor(m => m._pais, BOReserva.Controllers.gestion_hotelesController.pais(), new { @class = "form-control", @placeholder = "Pais", @id = "vehi_pais" })                                                                      
+                                           @Html.DropDownListFor(m => m._pais, BOReserva.Controllers.gestion_hotelesController.pais(), new { @class = "form-control", @placeholder = "Pais", @id = "paisHotel" })                                                                      
                                 </div><!--div col-xs-->
                                 <div class="col-md-1"></div>
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <label>Ciudad</label>
                                         <select class="form-control"></select>
-
                                     </div>
                                 </div>
                             </div> <!--/div row-->
