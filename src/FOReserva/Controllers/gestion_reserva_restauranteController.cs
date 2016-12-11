@@ -123,6 +123,9 @@ namespace FOReserva.Controllers
             return View(lista);
         }
 
+        /* 
+         * Metodo para la eliminacion de la reserva
+         */
         [System.Web.Services.WebMethod] 
         public string eliminar_reserva(int id)
         {
@@ -138,7 +141,7 @@ namespace FOReserva.Controllers
             }
             catch (InvalidManejadorSQLException e)
             {
-                //Ventana de error al crear la reserva
+                //Ventana de error al eliminar la reserva
                 //Esto se causa por una sitaxis erronea del sql
                 //como son caracteres especiales o demas
             }

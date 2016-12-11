@@ -129,5 +129,15 @@ namespace FOReserva.Servicio
             this.Executer(query);
             CloseConnection();
         }
+
+        /*
+         *  Metodo para actualizar datos de la reserva
+         */
+        public void actualizarReserva(int idReserva)
+        {
+            string query = "update Reserva_restaurante set reserva_nombre = 'Daniel Medina', fecha = convert(date, '2016-11-29'), hora = '15:00', cantidad_personas = 3 where ID ="+idReserva;
+            this.Executer(query);
+            CloseConnection();
+        }
     }
 }
