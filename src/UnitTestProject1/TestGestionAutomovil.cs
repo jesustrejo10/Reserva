@@ -173,6 +173,42 @@ namespace UnitTestProject1
 
         }
         /// <summary>
+        /// Método que verificar modificarvehiculo, si se logra modificar retorna 1 sino retorna 0
+        /// </summary>
+        [TestMethod]
+        public void MModificarVehiculoBD()
+        { 
+            String placa = placa1;
+            auto = new Automovil(placa,"3","Mazda",1936,"Sedan",5,5,1,1,1,DateTime.Now,"Azul",1,"Automatica","Venezuela","Caracas");
+            int agregar = daoAutomovil.MAgregarVehiculoBD(auto, 12);
+            int prueba = daoAutomovil.MModificarVehiculoBD(auto, 13);
+            Assert.AreEqual(1, prueba);
+            auto = new Automovil(placa, "", "", 1936, "", 5, 5, 1, 1, 1, DateTime.Now, "", 1, "", "", "");
+            int prueba2 = daoAutomovil.MModificarVehiculoBD(auto, 1000);
+
+            Assert.AreEqual(0, prueba2);
+        }
+        /// <summary>
+        /// Método que lista todos los vehículos existentes
+        /// </summary>
+        [TestMethod]
+        public void MListarvehiculosBD()
+        {
+            List<Automovil> prueba = daoAutomovil.MListarvehiculosBD();
+            Assert.IsInstanceOfType(prueba, typeof (List<Automovil>));
+        }
+        /// <summary>
+        /// Método que realiza la busqueda del nombre de la ciudad si existe su id, si no lo consigue arroja "Error al buscar"
+        /// </summary>
+        [TestMethod]
+        public void MBuscarnombreciudadBD()
+        {
+            String prueba = daoAutomovil.MBuscarnombreciudadBD(12);
+            Assert.AreEqual("Caracas", prueba);
+            string prueba2 = daoAutomovil.MBuscarnombreciudadBD(1000);
+            Assert.AreEqual("Error al buscar", prueba2);
+        }
+        /// <summary>
         /// Método que verifica si el vehículo es borrado de la base de datos correctamente
         /// </summary>
         [TestMethod]
