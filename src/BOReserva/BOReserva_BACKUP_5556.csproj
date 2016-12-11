@@ -1429,7 +1429,7 @@
     <Content Include="Views\gestion_ruta_comercial\ModificarRutasComerciales.cshtml" />
     <Content Include="Views\gestion_ruta_comercial\AgregarRutasComerciales.cshtml" />
     <Content Include="Views\gestion_ruta_comercial\DetallesRutasComerciales.cshtml" />
-<<<<<<< HEAD
+
     <Content Include="Views\gestion_ofertas\M11_AgregarOferta.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_AgregarPaquete.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_ConsultarOferta.cshtml" />
@@ -1437,9 +1437,9 @@
     <Content Include="Views\gestion_ofertas\M11_GestionOfertas.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_ModificarOferta.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_ModificarPaquete.cshtml" />
-=======
+
     <Content Include="Views\gestion_roles\M13_AgregarRol.cshtml" />
->>>>>>> Develop
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
