@@ -24,7 +24,7 @@
                                 <label for="nombreRol">Inserte nombre del rol 
 <!--                                (<span style="color:red">*</span>):-->
                                 </label>
-                                @Html.TextBoxFor(m => m.Nombre_rol, null, new { @class = "form-control", @placeholder = "rolnombre", id = "nombre_rol" })
+                                @Html.TextBoxFor(m => m.Nombre_rol, null, new { @class = "form-control", @placeholder = "Nombre del Rol", id = "nombre_rol" })
                                 </div>
                             <div class="col-xs-6">
                                <label for="modelo">Modulo</label><br>                                                           
@@ -127,11 +127,13 @@
 
                 var permisos = response;
                 var container = $('#listaPermisos');
+                container.empty();
                 jQuery.each(permisos, function (i) {                                
                 var inputs = container.find('input');
                 var id = inputs.length + 1;
                 $('<input />', { type: 'checkbox', id: 'permiso' + id, value: permisos[i] }).appendTo(container);
                 $('<label />', { 'for': 'permiso' + id, text: permisos[i] }).appendTo(container);
+                $('<br>').appendTo(container)
                 });
 
             }
