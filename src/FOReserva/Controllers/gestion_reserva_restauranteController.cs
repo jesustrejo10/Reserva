@@ -122,10 +122,31 @@ namespace FOReserva.Controllers
             List<CReservation_Restaurant> lista = manejador.buscarReservas();
             return View(lista);
         }
+
         [System.Web.Services.WebMethod] 
         public string eliminar_reserva(int id)
         {
-            return ("hola");
+            try
+            {
+                ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
+                manejador.eliminarReserva(id);
+            }
+            catch (ManejadorSQLException e)
+            {
+                //Ventana de error no conecto a la db
+                //Se puede usar el mensaje de la excepcion "e.mensaje"
+            }
+            catch (InvalidManejadorSQLException e)
+            {
+                //Ventana de error al crear la reserva
+                //Esto se causa por una sitaxis erronea del sql
+                //como son caracteres especiales o demas
+            }
+            catch (Exception e)
+            {
+                // Error desconocido del sistema
+            }
+            return "hola";
         }
     }
 }

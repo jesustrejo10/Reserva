@@ -119,5 +119,15 @@ namespace FOReserva.Servicio
             }
             return lista_rest;
         }
+
+        /*Metodo para eliminar una reserva
+         *  idReserva: ID de la reserva a eliminar
+         */
+        public void eliminarReserva(int idReserva)
+        {
+            string query = "DELETE FROM Reserva_Restaurante WHERE ID = "+idReserva;
+            this.Executer(query);
+            CloseConnection();
+        }
     }
 }
