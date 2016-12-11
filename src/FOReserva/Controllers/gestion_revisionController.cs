@@ -38,7 +38,7 @@ namespace FORevision.Controllers
         /// Creacion Modelo Lista Revision
         /// </summary>
         /// <returns>Vista Modelo</returns>
-        public ActionResult Consultar_Revision(string nombre , string apellido)
+        public ActionResult Consultar_Revision_Usuario(string nombre , string apellido)
         {
         
             List<CRevision> lista;
