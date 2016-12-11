@@ -171,9 +171,11 @@ namespace BOReserva.Controllers
             String tipovehiculo = model._tipovehiculo;
             String transmision = model._transmision;
             Automovil carronuevo = new Automovil(matricula, modelo, fabricante, anio, tipovehiculo, kilometraje, 
-                                             cantpasajeros, preciocompra, precioalquiler, penalidaddiaria, fecharegistro, 
+                                             cantpasajeros, preciocompra, precioalquiler, penalidaddiaria, fecharegistro,
                                              color, 1, transmision, pais, _ciudad);  //SE CREA EL VEHICULO
-            int agrego_si_no = carronuevo.MAgregaraBD(carronuevo); //SE AGREGA A LA BD RETORNA 1 SI SE AGREGA Y 0 SINO LO LOGRA
+            DAOAutomovil buscarid = new DAOAutomovil();
+            int id_ciudad = buscarid.MBuscarfkciudad(_ciudad, pais);
+            int agrego_si_no = carronuevo.MAgregaraBD(carronuevo, id_ciudad); //SE AGREGA A LA BD RETORNA 1 SI SE AGREGA Y 0 SINO LO LOGRA
             
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
@@ -201,7 +203,9 @@ namespace BOReserva.Controllers
             Automovil carro = new Automovil(matricula, modelo, fabricante, anio, tipovehiculo, kilometraje, 
                                              cantpasajeros, preciocompra, precioalquiler, penalidaddiaria, fecharegistro, 
                                              color, 1, transmision, pais, _ciudad);  //SE CREA EL VEHICULO
-            int modifico_si_no = carro.MModificarvehiculoBD(carro); //SE MODIFICA A LA BD RETORNA 1 SI SE  MODIFICO Y 0 SI NO LO LOGRA
+            DAOAutomovil buscarid = new DAOAutomovil();
+            int id_ciudad = buscarid.MBuscarfkciudad(_ciudad, pais);
+            int modifico_si_no = carro.MModificarvehiculoBD(carro, id_ciudad); //SE MODIFICA A LA BD RETORNA 1 SI SE  MODIFICO Y 0 SI NO LO LOGRA
             
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
@@ -255,26 +259,6 @@ namespace BOReserva.Controllers
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
 
-        public static List<SelectListItem> ciudades()
-        {
-            List<SelectListItem> _ciudad = new List<SelectListItem>();
-            _ciudad.Add(new SelectListItem
-            {
-                Text = "Caracas",
-                Value = "Caracas"
-            });
-            _ciudad.Add(new SelectListItem
-            {
-                Text = "Los Teques",
-                Value = "Teques"
-            });
-            _ciudad.Add(new SelectListItem
-            {
-                Text = "Dallas",
-                Value = "Dallas"
-            });
-            return _ciudad;
-        }
 
         public static List<SelectListItem> pais()
         {
@@ -308,7 +292,8 @@ namespace BOReserva.Controllers
             List<String> objcity = new List<String>();
             _pais = pais;
             DAOAutomovil listaciudades = new DAOAutomovil();
-            objcity = listaciudades.MListarciudadesBD(pais);
+            int fk = listaciudades.MIdpaisesBD(pais);
+            objcity = listaciudades.MListarciudadesBD(pais, fk);
             return Json(objcity);
         }
 
