@@ -1657,6 +1657,7 @@
     <Content Include="Models\Restaurantes\placeholder.html" />
     <Content Include="Models\Vuelos\placeholder.html" />
     <Content Include="Scripts\BuscarCarro.js" />
+    <Content Include="Scripts\cargadorPerfil.js" />
     <Content Include="Scripts\cargadorPestanas.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -3041,6 +3042,8 @@
     <Content Include="Views\gestion_reserva_auto\M19_Reserva_Autos.cshtml" />
     <Content Include="Views\gestion_reserva_auto\M19_Reserva_AutosImagenes.cshtml" />
     <Content Include="Views\Shared\_LayoutPerfil.cshtml" />
+    <Content Include="Views\gestion_reserva_auto\M19_Reserva_Autos_Perfil.cshtml" />
+    <Content Include="Views\Shared\Perfil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
