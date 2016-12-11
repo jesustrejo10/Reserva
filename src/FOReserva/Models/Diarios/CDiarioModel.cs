@@ -5,6 +5,8 @@ using System.Web;
 
 namespace FOReserva.Models.Diarios
 {
+    using FOReserva.Servicio;
+
     public class CDiarioModel : BaseEntity
     {
         private string   _nombre;
@@ -13,8 +15,9 @@ namespace FOReserva.Models.Diarios
         private string   _descripcion;
         private DateTime _fecha_carga;
         private int      _calif_creador;
-        private int     _raiting;
+        private int     _rating;
         private int     _num_visita;
+        private int     _fk_lugar;
 
        
         //Constructors
@@ -28,8 +31,9 @@ namespace FOReserva.Models.Diarios
              string   descripcion,
              DateTime fecha_carga,
              int      calif_creador,
-             int      raiting,
-             int      num_visita)
+             int      rating,
+             int      num_visita,
+             int      fk_lugar)
             : base(id, name)
         {
 
@@ -39,7 +43,7 @@ namespace FOReserva.Models.Diarios
             this._descripcion   = descripcion;
             this._fecha_carga   = fecha_carga;
             this._calif_creador = calif_creador;
-            this._raiting       = raiting;
+            this._rating        = rating;
             this._num_visita    = num_visita;
 
         }
@@ -91,11 +95,11 @@ namespace FOReserva.Models.Diarios
             set { _calif_creador = value; }
         }
         
-        //Raiting
-        public int Raiting
+        //Rating
+        public int Rating
         {
-            get { return _raiting; }
-            set { _raiting = value; }
+            get { return _rating; }
+            set { _rating = value; }
         }
 
         //Numero de visitas del diario
@@ -103,6 +107,22 @@ namespace FOReserva.Models.Diarios
         {
             get { return _num_visita; }
             set { _num_visita = value; }
+        }
+
+        //ID de lugar de viaje
+        public int Lugar
+        {
+            get { return _fk_lugar; }
+            set { _fk_lugar = value; }
+        }
+
+
+
+        public List<CLugar> diariosLugares()
+        {
+            ManejadorSQLDiarios manejador = new ManejadorSQLDiarios();
+            List<CLugar> lugares = manejador.obtenerLugares();
+            return lugares;
         }
     }
 }
