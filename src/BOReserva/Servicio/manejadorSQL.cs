@@ -11,6 +11,7 @@ using BOReserva.Models.gestion_restaurantes;
 using BOReserva.Models.gestion_lugares;
 using BOReserva.Models.gestion_ruta_comercial;
 using BOReserva.Models.gestion_roles;
+using BOReserva.Models.gestion_comida_vuelo;
 using System.Diagnostics;
 
 namespace BOReserva.Servicio
@@ -621,7 +622,7 @@ namespace BOReserva.Servicio
                 return null;
             }
         }
-
+        /* FIN DE FUNCIONES COMUNES */
 
 
 
@@ -696,6 +697,43 @@ namespace BOReserva.Servicio
                 return false;
             }
         }
-        /* FIN DE FUNCIONES COMUNES */
+
+        //Procedimiento del Modulo 6 para agregar platos a la base de datos.
+        public Boolean insertarPlato(CAgregarComida model)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                //uso el SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "INSERT INTO Comida VALUES ('" + model._nombrePlato + "','" + model._tipoPlato + "'," + model._estatusPlato + " , " + model._descripcionPlato + ", 1);";
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                SqlDataReader lector = query.ExecuteReader();
+                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+                /*while(lector.Read())
+                {
+                      //COMENTADO PORQUE ESTE METODO NO LO APLICA, SERÁ BORRADO DESPUES
+                }*/
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+        }
+        
     }
 }

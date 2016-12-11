@@ -465,6 +465,7 @@
     <Content Include="Scripts\Scripts_CheckIn\M05_Equipaje.js" />
     <Content Include="Scripts\Scripts_CheckIn\M05_VerBoletosCheckIn.js" />
     <Content Include="Scripts\Scripts_CheckIn\M05_VerDetalleBoleto.js" />
+    <Content Include="Scripts\Scripts_ComidaVuelo\llamadas_generales.js" />
     <Content Include="Scripts\Scripts_Hoteles\llamadas_generales_hoteles.js" />
     <Content Include="Scripts\Scripts_Restaurantes\llamadas_generales.js" />
     <Content Include="Scripts\select2\css\select2.min.css" />
@@ -1443,7 +1444,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\Scripts_ComidaVuelo\" />
     <Folder Include="Views\gestion_roles\css\" />
     <Folder Include="Views\gestion_roles\js\" />
   </ItemGroup>
