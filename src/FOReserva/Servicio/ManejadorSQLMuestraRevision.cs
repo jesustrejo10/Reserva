@@ -51,7 +51,7 @@ namespace FOReserva.Servicio
             return lista_rev;
         }
 
-        public List<CRevision> ConsultarRevision2(string nombre, string apellido, int revision) //consulta para eliminar
+        public List<CRevision> ConsultarRevision2(string nombre, string apellido, int revision)
         {
             string query = "Select rst_id, rst_nombre, rst_direccion From Restaurante where LOWER(nom colum a bscar) LIKE LOWER('%" + nombre + "%' '%" + apellido + "%' '%" + revision + "%')";
             SqlDataReader read = Executer(query);
@@ -94,14 +94,22 @@ namespace FOReserva.Servicio
             CloseConnection();
         }
 
-        public void Crear_Revision(string nombre, string apellido, int reserva)   //INSERT
+        public void Crear_Revision(string nombre, string apellido, int reserva)   
         {
             string query = "INSERT INTO Reserva_Restaurante ( Reserva_Nombre, Fecha, Hora,Cantidad_Personas, FK_RESTAURANTE, FK_USUARIO) VALUES( )";
             this.Executer(query);
             CloseConnection();
         }
 
-        
+        public void Editar_Revision(string nombre, string apellido, int revision)
+        {
+            string query = "UPDATE FROM Reserva_Restaurante ( Reserva_Nombre, Fecha, Hora,Cantidad_Personas, FK_RESTAURANTE, FK_USUARIO) VALUES( )";
+            this.Executer(query);
+            CloseConnection();
+        }
+
+
+
 
     }
 
