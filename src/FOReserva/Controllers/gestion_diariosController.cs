@@ -36,9 +36,12 @@ namespace FOReserva.Controllers
         [HttpPost]
         public JsonResult buscarDiarios(CDiarioModel model)
         {
+    
             String nombre = model.Nombre;
             DateTime f_inicio = model.Fecha_ini;
             DateTime f_fin = model.Fecha_fin;
+            int fk_lugar = model.Lugar;
+
             return (Json("asdf", JsonRequestBehavior.AllowGet));
         }
 

@@ -29,60 +29,69 @@
             <div class="form-group">
                 <div class="col-sm-12">
                     <label>Rango de fechas</label>
-                    <input type="text" class="form-control" name="rangofecha" value="" readonly />
-                    <!--Inicializar selector de rango de fechas-->
-                    <script type="text/javascript">
-                        $(function () {
-                            $('input[name="rangofecha"]').daterangepicker({
-                                locale: {
-                                    format: 'YYYY-MM-DD',
-                                    applyLabel: "Aplicar",
-                                    cancelLabel: "Cancelar",
-                                    fromLabel: "Desde",
-                                    toLabel: "Hasta",
-                                    customRangeLabel: "Personalizado",
-                                    daysOfWeek: [
-                                        "Do",
-                                        "Lu",
-                                        "Ma",
-                                        "Mi",
-                                        "Ju",
-                                        "Vi",
-                                        "Sa"
-                                    ],
-                                    monthNames: [
-                                        "Enero",
-                                        "Febrero",
-                                        "Marzo",
-                                        "Abril",
-                                        "Mayo",
-                                        "Junio",
-                                        "Julio",
-                                        "Agosto",
-                                        "Septiembre",
-                                        "Octubre",
-                                        "Noviembre",
-                                        "Diciembre"
-                                    ],
-                                    firstDay: 1
-                                }
-                            });
-                        });
-                    </script>
+                    <input id="rf" type="text" class="form-control" name="rangofecha" value="" readonly />
+                    
                 </div>
+                
+                <!--Script para el selector de fechas-->
+                <script type="text/javascript">
+                    //función para inicializar y dar formato
+                    $('input[name="rangofecha"]').daterangepicker({
+                        locale: {
+                            format: "DD/MM/YYYY",
+                            applyLabel: "Aplicar",
+                            cancelLabel: "Cancelar",
+                            fromLabel: "Desde",
+                            toLabel: "Hasta",
+                            linkedCalendars: false,
+                            showDropdowns: true,
+                            autoApply: true,
+                            daysOfWeek: [
+                                "Do",
+                                "Lu",
+                                "Ma",
+                                "Mi",
+                                "Ju",
+                                "Vi",
+                                "Sa"
+                            ],
+                            monthNames: [
+                                "Enero",
+                                "Febrero",
+                                "Marzo",
+                                "Abril",
+                                "Mayo",
+                                "Junio",
+                                "Julio",
+                                "Agosto",
+                                "Septiembre",
+                                "Octubre",
+                                "Noviembre",
+                                "Diciembre"
+                            ],
+                            firstDay: 1
+                        },
+                        minDate: "31/12/2000",
+                        maxDate: "@DateTime.Today.ToString("dd/MM/yyyy")",
+                        startDate: "@DateTime.Today.AddYears(-1).ToString("dd/MM/yyyy")",
+                        endDate: "@DateTime.Today.ToString("dd/MM/yyyy")"
+
+                    });
+                    //Actualizar los input que se usarán en el modelo
+                    $("#rf").on('hide.daterangepicker', function () {
+                        var drp = $('#rf').data('daterangepicker');
+                        $("#f_ini").val(drp.startDate.format('YYYY-MM-DD')),
+                        $("#f_fin").val(drp.endDate.format('YYYY-MM-DD'))
+                    });
+
+                </script>
+
                 <!--Inputs ocultos de fechas para el formulario-->
                 <div>
                     @Html.TextBoxFor(m => m.Fecha_ini, null, new { @id = "f_ini", @class = "form-control required", @name = "diario[f_inicio]", @type = "hidden", @value = "" })
                 </div>
                 <div>
                     @Html.TextBoxFor(m => m.Fecha_fin, null, new { @id = "f_fin", @class = "form-control required", @name = "diario[f_fin]", @type = "hidden", @value = "" })
-                </div>
-
-                <div id="fec_null" style="display: none;" class="has-error error col-sm-6">
-                    <p><i class="fa fa-times-circle" aria-hidden="true"></i> Escribir Fecha</p>
-                </div>
-                <div id="fec_formato" style="display: none;" class="has-error error col-sm-6">
-                    <p><i class="fa fa-times-circle" aria-hidden="true"></i> Formato inv&aacute;lido</p>
                 </div>
             </div>
         </div>
@@ -91,13 +100,14 @@
             <div class="form-group">
                 <div class="col-sm-12">
                     <label>Lugares</label>
-                    
-                    <select id="list_lugar" class="form-control">
-                        @*@foreach (var ciudad in )
-                        {*@
-                        <option value="0">Caracas</option>
-                        @*}*@
-                    </select>
+                    @Html.DropDownListFor(m => m.Lugar, Model.diariosLugares(), new { @class="col-md-12" })  
+                    @*<select name="list_lugar "id="list_lugar" class="form-control">
+                        <option value="0">------ Buscar por destino de viaje ------</option>
+                        @foreach (var lug in Model.diariosLugares())
+                        {
+                        <option value="@lug.ID">@(lug.Tipo.Equals("pais")?"":"  --- ")@lug.Nombre</option>
+                        }
+                    </select>*@
                 </div>
             </div>
         </div>
@@ -114,11 +124,13 @@
     function buscar(a) {
         a.preventDefault();
         var form = $("#formBuscarDiarios");
+        alert("en buscar");
         $.ajax({
             url: "gestion_diarios/buscarDiarios",
             data: form.serialize(),
             type: 'POST',
             success: function (data) {
+                alert("en ajax success");
                 $(".error").hide();
                 $("#nombreD").removeClass("has-error");
                 $("#f_ini").removeClass("has-error");
@@ -126,49 +138,23 @@
                 var texto = $("#nombreD").val();
                 var inicio = $("#f_ini").val();
                 var fin = $("#f_fin").val();
-                var formato = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
-
+         
                 var win = true;
 
                 if (texto == "" || texto == undefined) {
                     $("#nombreD").addClass("has-error");
                     $("#prueba_null").fadeIn();
                     win = false;
-                }
-                if (inicio == "" || inicio == undefined || !inicio.match(formato)) {
-                    if (inicio == "" || inicio == undefined) {
-                        $("#f_ini").addClass("has-error");
-                        $("#fec_null").fadeIn();
-                        win = false;
-                    }
-                    else {
-                        $("#f_ini").addClass("has-error");
-                        $("#fec_formato").fadeIn();
-                        win = false;
-                    }
-                }
-
-                if (fin == "" || fin == undefined || !fin.match(formato)) {
-                    if (fin == "" || fin == undefined) {
-                        $("#f_fin").addClass("has-error");
-                        $("#fec_null").fadeIn();
-                        win = false;
-                    }
-                    else {
-                        $("#f_fin").addClass("has-error");
-                        $("#fec_formato").fadeIn();
-                        win = false;
-                    }
-                }
+                }                
 
                 if (win) {
+                    
                     return true;
-                    //form.submit();
                 }
                 else
                     alert(data);
                 
-                /*$('#formBuscarVuelos')[0].reset();*/
+                //$('#formBuscarVuelos')[0].reset();
             }
         });
     }
@@ -178,9 +164,12 @@
 
     jQuery(document).ready(function () {
 
+        $("#f_ini").val("@DateTime.Today.ToString("yyyy-MM-dd")");
+        $("#f_fin").val("@DateTime.Today.AddYears(-1).ToString("yyyy-MM-dd")");
         var url = '/gestion_diarios/gestion_diarios_resultados';
         var method = 'GET';
         var data = '';
+        $("#resultados").html('<div class="text-center">Cargando...</div>')
         $.ajax(
             {
                 url: url,
@@ -203,6 +192,8 @@
 }
 </div>
 
+<hr/>
+
 <section>
     <div id="resultados" class="container">
     
@@ -212,7 +203,7 @@
                 <!-- company logo -->
                 <img src="@Url.Content("~/Content/assets/images/noimage.jpg")" class="img-responsive img-thumbnail" alt="company logo">
             </div>
-            <div class="col-md-10">
+            <div class="col-md-4">
                 <!-- company detail -->
                 <h4 class="margin-bottom-10"><font color="black">Nombre</font></h4>
                 <p>Descripcion</p>

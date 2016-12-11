@@ -43,7 +43,7 @@ namespace FOReserva.Servicio
             return listaDV;
     }  
 
-    /*Buscar TODOS los Lugares*/
+    /*Buscar TODOS los Lugares para dropdown*/
     public List<CLugar> obtenerLugares()
     {
         string query = @"SELECT

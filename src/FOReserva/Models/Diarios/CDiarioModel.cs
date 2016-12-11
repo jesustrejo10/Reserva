@@ -6,6 +6,7 @@ using System.Web;
 namespace FOReserva.Models.Diarios
 {
     using FOReserva.Servicio;
+    using System.Web.Mvc;
 
     public class CDiarioModel : BaseEntity
     {
@@ -116,13 +117,19 @@ namespace FOReserva.Models.Diarios
             set { _fk_lugar = value; }
         }
 
-
-
-        public List<CLugar> diariosLugares()
+        public List<SelectListItem> diariosLugares()
         {
             ManejadorSQLDiarios manejador = new ManejadorSQLDiarios();
-            List<CLugar> lugares = manejador.obtenerLugares();
+            List<CLugar> lugaresCLugar = manejador.obtenerLugares();
+            List<SelectListItem> lugares = new List<SelectListItem>();
+            lugares.Add(new SelectListItem { Value = "0", Text = "------ Buscar por destino de viaje ------", Selected=true});
+            foreach (CLugar lug in lugaresCLugar)
+            {
+                SelectListItem l = new SelectListItem { Value = lug.ID.ToString(), Text = (lug.Tipo.Equals("pais") ? "" : "  --- ") + lug.Nombre };
+                lugares.Add(l);
+            }
             return lugares;
         }
+
     }
 }
