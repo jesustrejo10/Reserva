@@ -23,7 +23,7 @@ namespace FORevision.Controllers
         public ActionResult Consultar_Revision_Usuario(string nombre, string apellido)
         {
 
-             try
+            try
             {
                 List<CRevision> lista;
                 ManejadorSQLRevision manejador = new ManejadorSQLRevision();
@@ -32,23 +32,23 @@ namespace FORevision.Controllers
                 return PartialView(lista);
             }
 
-             catch (NullReferenceException e)
-             {
-                 //Parametro Nulos
-                 return View("Parametro Nulo");
-             }
+            catch (NullReferenceException e)
+            {
+                //Parametro Nulos
+                return View("Parametro Nulo");
+            }
 
-             catch (ManejadorSQLException f)
-             {
-                 //Ventana de error no conecto a la db
-                 //Se puede usar el mensaje de la excepcion "f.mensaje"
-                 return View("error_conexion");
-             }
-             catch (Exception g)
-             {
+            catch (ManejadorSQLException f)
+            {
+                //Ventana de error no conecto a la db
+                //Se puede usar el mensaje de la excepcion "f.mensaje"
+                return View("error_conexion");
+            }
+            catch (Exception g)
+            {
 
-             }
-             return PartialView();
+            }
+            return PartialView();
         }
 
         /// <summary>
@@ -57,16 +57,16 @@ namespace FORevision.Controllers
         /// <returns>Vista Modelo</returns>
         public bool Eliminar_Revision(string nombre, string apellido, int revision)
         {
-        
+
             try
             {
-           // if ((nombre != null) && (apellido != null) && (revision != null))
-            //{
+                // if ((nombre != null) && (apellido != null) && (revision != null))
+                //{
                 bool resultado;
                 ManejadorSQLRevision manejador = new ManejadorSQLRevision();
                 resultado = manejador.Eliminar_Revision(nombre, apellido, revision);
                 return resultado;
-            //}
+                //}
             }
 
             catch (NullReferenceException e)
@@ -83,9 +83,9 @@ namespace FORevision.Controllers
 
             return true;
 
-            
-               
-         
+
+
+
         }
 
         /// <summary>
@@ -95,35 +95,36 @@ namespace FORevision.Controllers
         public bool Crear_Revision(string nombre, string apellido)
         {
 
-            try { 
+            try
+            {
 
-           // if ((nombre != null) && (apellido != null))
-          //  {
+                // if ((nombre != null) && (apellido != null))
+                //  {
 
                 bool Revision;
                 ManejadorSQLRevision manejador = new ManejadorSQLRevision();
                 Revision = manejador.Crear_Revision(nombre, apellido);
                 return true;
-           // }
+                // }
             }
             catch (NullReferenceException e)
-             {
-                 //Parametro Nulos
-                 
-             }
+            {
+                //Parametro Nulos
 
-             catch (ManejadorSQLException f)
-             {
-                 //Ventana de error no conecto a la db
-                                 
-             }
+            }
+
+            catch (ManejadorSQLException f)
+            {
+                //Ventana de error no conecto a la db
+
+            }
 
             return true;
 
-                      
-            }
 
-        
+        }
+
+
         /// <summary>
         /// Creacion Modelo Mostrar Revision
         /// </summary>
@@ -163,7 +164,7 @@ namespace FORevision.Controllers
                 //Se puede usar el mensaje de la excepcion "f.mensaje"
                 return View("error_conexion");
             }
-            
+
             return PartialView();
         }
 
@@ -173,7 +174,7 @@ namespace FORevision.Controllers
         /// <returns>Vista Modelo</returns>
         public bool Editar_Revision(string nombre, string apellido, int revision)
         {
-            
+
 
             try
             {
@@ -185,23 +186,18 @@ namespace FORevision.Controllers
             }
 
             catch (NullReferenceException e)
-             {
-                 //Parametro Nulos
-                 
-             }
+            {
+                //Parametro Nulos
 
-             catch (ManejadorSQLException f)
-             {
-                 //Ventana de error no conecto a la db
-                                 
-             }
-
-            return true();
-
-                      
             }
 
-            
+            catch (ManejadorSQLException f)
+            {
+                //Error con la Base de Datos
+
+            }
+
+            return true;
 
 
         }
@@ -210,5 +206,6 @@ namespace FORevision.Controllers
 
     }
 }
+
 
 
