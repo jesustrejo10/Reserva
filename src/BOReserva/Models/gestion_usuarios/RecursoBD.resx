@@ -149,4 +149,8 @@
     <value>Error en la ejecución de un stored procedure debido a un parametro</value>
     <comment>Error de un parametro en la ejecución del stored procedure</comment>
   </data>
+  <data name="StringConexion" xml:space="preserve">
+    <value>DB_A1380A_reserva</value>
+    <comment>Nombre de la conexion en Web.config</comment>
+  </data>
 </root>

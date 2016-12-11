@@ -252,7 +252,6 @@
     <Compile Include="Models\gestion_usuarios\ExceptionBD.cs" />
     <Compile Include="Models\gestion_usuarios\ExceptionM12Reserva.cs" />
     <Compile Include="Models\gestion_usuarios\ListarUsuario.cs" />
-    <Compile Include="Models\gestion_usuarios\ModificarUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\Parametro.cs" />
     <Compile Include="Models\gestion_usuarios\PersistenciaUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\RecursoBD.Designer.cs">
@@ -1444,6 +1443,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\Scripts_ComidaVuelo\" />
     <Folder Include="Views\gestion_roles\css\" />
     <Folder Include="Views\gestion_roles\js\" />
   </ItemGroup>
