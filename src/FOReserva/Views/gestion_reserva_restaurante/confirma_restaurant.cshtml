@@ -4,35 +4,59 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!-- FEATURED GRID -->
-<div class="row"> <center><h1>Su reserva ha sido realizada exitosamente!</h1></center></div>
-<div class="row">
-    <div class="panel panel-default col-sm-5">
-        <div class="panel-heading">
-            <h2 class="panel-title">Detalles de la Reserva</h2>
+@{
+    if (Model == null)
+    {
+        <div class="row">
+            <center><h1><i class="fa fa-exclamation-circle orange" aria-hidden="true"></i> @ViewBag.Message</h1></center>
         </div>
+<<<<<<< HEAD
         <div class="panel-body center-block detalle_reserva_restaurant">
             <i class="fa fa-user" aria-hidden="true"></i> <p><span>A nombre de: </span>@Model.Name</p>
             <i class="fa fa-calendar-check-o" aria-hidden="true"></i><p><span>Fecha: </span>@Model.Date</p>
             <i class="fa fa-clock-o" aria-hidden="true"></i> <p><span>Hora: </span>@Model.Time</p>
             <i class="fa fa-users" aria-hidden="true"></i> <p><span>Mesa para: </span>@Model.Count</p>
             <center> <a class="btn btn-primary" href="@Url.Action("lista_reserva_restaurantes","gestion_reserva_restaurante")">Mis Reservas</a></center>
+=======
+    }
+    else
+    {
+
+        <!-- FEATURED GRID -->
+        <div class="row">
+            <center><h1>Su reserva ha sido realizada exitosamente!</h1></center>
+            <center><h1>@ViewBag.Message</h1></center>
+>>>>>>> Develop
         </div>
-
-    </div>
-
-    <div class="col-sm-7">
-        <div class="relative">
-            <div style="height: 443.6px;background-image: url('../Images/restaurant_generic.jpg');background-repeat: no-repeat;background-size: cover;">
-                <div class="absolute text-left">
-                    <h2>  <b>@Model.Restaurant.Name</b>  </h2>
-                    <p style="color: #fff;">@Model.Restaurant.CityName</p>
-                    <p style="color: #fff;" class="font-lato margin-top-30 size-16 hidden-sm hidden-xs"><b>@Model.Restaurant.Addres</p>
+        <div class="row">
+            <div class="panel panel-default col-sm-5">
+                <div class="panel-heading">
+                    <h2 class="panel-title">Detalles de la Reserva</h2>
                 </div>
+                <div class="panel-body center-block detalle_reserva_restaurant">
+                    <i class="fa fa-user" aria-hidden="true"></i> <p><span>A nombre de: </span>@Model.Name</p>
+                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i><p><span>Fecha: </span>@Model.Date</p>
+                    <i class="fa fa-clock-o" aria-hidden="true"></i> <p><span>Hora: </span>@Model.Time</p>
+                    <i class="fa fa-users" aria-hidden="true"></i> <p><span>Mesa para: </span>@Model.Count</p>
+                    <center> <a class="btn btn-primary" href="@Url.Action("lista_reserva_restaurantes","gestion_reserva_restaurante")">Mis Reservas</a></center>
+                </div>
+
             </div>
+
+            <div class="col-sm-7">
+                <div class="relative">
+                    <div style="height: 443.6px;background-image: url('../Images/restaurant_generic.jpg');background-repeat: no-repeat;background-size: cover;">
+                        <div class="descrip-conten">
+                            <h2>  <b>@Model.Restaurant.Name</b>  </h2>
+                            <p>@Model.Restaurant.CityName</p>
+                            <p class="font-lato margin-top-30 size-16 hidden-sm hidden-xs"><b>@Model.Restaurant.Addres</b></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
+        <!-- /FEATURED GRID -->
 
-    </div>
-
-</div>
-<!-- /FEATURED GRID -->
+    }

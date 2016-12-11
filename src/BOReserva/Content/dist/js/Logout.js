@@ -1,7 +1,7 @@
 ﻿var timoutWarning = 60000; //Muestra pop up al usuario al minuto restante de cierre de sesion
 var timoutNow = 120000; // Cierra la sesion a los 2 min 
-//var logoutUrl = 'gestion_seguridad_ingreso/M01_Login' // redirige al landing page Login.
-var logoutUrl = 'Home/Index'
+var logoutUrl = 'gestion_seguridad_ingreso/M01_Login' // redirige al landing page Login.
+
 var warningTimer;
 var timeoutTimer;
 

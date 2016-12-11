@@ -70,10 +70,24 @@ namespace FOReserva.Controllers
              */
         public ActionResult reservar_restaurant(int id_rest)
         {
-            CRestaurantModel restaurante = new CRestaurantModel();
-            ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
-            restaurante = manejador.buscarRest(id_rest);
-            return View(restaurante);
+            try
+            {
+                CRestaurantModel restaurante = new CRestaurantModel();
+                ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
+                restaurante = manejador.buscarRest(id_rest);
+                return View(restaurante);
+            }
+            catch (ManejadorSQLException f)
+            {
+                //Ventana de error no conecto a la db
+                //Se puede usar el mensaje de la excepcion "f.mensaje"
+                return View("error_conexion");
+            }
+            catch (Exception g)
+            {
+
+            }
+            return View();
         }
 
         /*
@@ -97,19 +111,35 @@ namespace FOReserva.Controllers
                 //Ventana de error no conecto a la db
                 //Se puede usar el mensaje de la excepcion "e.mensaje"
                 reserva = null;
+<<<<<<< HEAD
                 return View("error_conexion" + e.Message);
             }
             catch (InvalidManejadorSQLException e)
+=======
+                return View("error_conexion" );
+            }
+            catch (InvalidManejadorSQLException f)
+>>>>>>> Develop
             {
                 //Ventana de error al crear la reserva
                 //Esto se causa por una sitaxis erronea del sql
                 //como son caracteres especiales o demas
                 reserva = null;
+<<<<<<< HEAD
                 return View("Error al crear Reserva");
             }
             catch (Exception e)
             {
                 return View("Error desconocido del sistema");
+=======
+                ViewBag.Message = "Lo sentimos, la reserva no pudo ser realizada";
+                return View(reserva);
+            }
+            catch (Exception e)
+            {
+                ViewBag.Message = "Lo sentimos, la reserva no pudo ser realizada debido al siguiente error del sistema:" + e.Message;
+                return View(reserva);
+>>>>>>> Develop
             }
         }
 
@@ -123,5 +153,35 @@ namespace FOReserva.Controllers
             return View(lista);
         }
 
+<<<<<<< HEAD
+=======
+        /* 
+         * Metodo para la eliminacion de la reserva
+         */
+        [System.Web.Services.WebMethod] 
+        public void eliminar_reserva(int id)
+        {
+            try
+            {
+                ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
+                manejador.eliminarReserva(id);
+            }
+            catch (ManejadorSQLException e)
+            {
+                //Ventana de error no conecto a la db
+                //Se puede usar el mensaje de la excepcion "e.mensaje"
+            }
+            catch (InvalidManejadorSQLException e)
+            {
+                //Ventana de error al eliminar la reserva
+                //Esto se causa por una sitaxis erronea del sql
+                //como son caracteres especiales o demas
+            }
+            catch (Exception e)
+            {
+                // Error desconocido del sistema
+            }
+        }
+>>>>>>> Develop
     }
 }
