@@ -6,8 +6,11 @@ using System.Diagnostics;
 
 namespace UnitTestProject1
 {
+    /// <summary>
+    /// Clase que realiza pruebas unitarias
+    /// </summary>
     [TestClass]
-    public class UnitTest1
+    public class TestGestionAutomovil
     {
 
         DAOAutomovil daoAutomovil;
