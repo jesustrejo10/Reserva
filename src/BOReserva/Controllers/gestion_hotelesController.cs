@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BOReserva.Models.gestion_hoteles;
+using BOReserva.Servicio.Servicio_Hoteles;
 
 namespace BOReserva.Controllers
 {
@@ -43,6 +44,13 @@ namespace BOReserva.Controllers
 
         public static List<SelectListItem> pais() {
             return CGestionHoteles_SelectPaisModel.pais();
+        }
+
+        public ActionResult M09_GestionHoteles_Visualizar()
+        { 
+            CManejadorSQL_Hoteles buscarhoteles = new CManejadorSQL_Hoteles();
+            List<CHotel> listahoteles = buscarhoteles.MListarHotelesBD();  //AQUI SE BUSCAN TODO LOS HOTELES QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA       
+            return PartialView(listahoteles);
         }
 
     }

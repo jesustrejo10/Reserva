@@ -85,5 +85,98 @@ namespace BOReserva.Servicio.Servicio_Hoteles
                 return null;
             }
         }
+
+        public String MBuscarnombrePais(int ciudad)
+        {
+            String _lugar = "No aplica";
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "SELECT E.lug_nombre FROM LUGAR E, LUGAR C WHERE E.lug_id = C.lug_fk_lugar_id " +
+                             "AND C.lug_id = " + ciudad;
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        //SE OBTIENE LA CIUDAD Y SE PASA
+                        //Y  COLOCA QUE FK_CIUDAD ES IGUAL A LO QUE DEVUELVE EL SQL
+                        _lugar = reader[0].ToString(); //EL 0 REPRESENTA LA PRIMERA Y UNICA COLUMNA QUE DEVULVE EL SqlDataReader
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return _lugar;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return _lugar;
+            }
+        }
+
+        public String MBuscarnombreciudad(int id)
+        {
+            String _ciudad = "No aplica";
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "SELECT C.lug_nombre FROM LUGAR C WHERE C.lug_id = '" + id + "'"; ;
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        //SE OBTIENE LA CIUDAD Y SE PASA
+                        //Y  COLOCA QUE FK_CIUDAD ES IGUAL A LO QUE DEVUELVE EL SQL
+                        _ciudad = reader[0].ToString(); //EL 0 REPRESENTA LA PRIMERA Y UNICA COLUMNA QUE DEVULVE EL SqlDataReader
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return _ciudad;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return _ciudad;
+            }
+        }
+
+
+        public List<CHotel> MListarHotelesBD()
+        {
+            List<CHotel> listahoteles = new List<CHotel>();
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "SELECT * FROM Hotel";
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        //SE AGREGA CREA UN OBJETO hotel SE PASAN LOS ATRIBUTOS ASI reader["<etiqueta de la columna en la tabla Hotel>"]
+                        //Y  SE AGREGA a listavehiculos
+
+                        CHotel hotel = new CHotel(Int32.Parse(reader["hot_id"].ToString()), reader["hot_nombre"].ToString(), reader["hot_url_pagina"].ToString(), reader["hot_email"].ToString(),
+                            Int32.Parse(reader["hot_cantidad_habitaciones"].ToString()), reader["hot_direccion"].ToString(), MBuscarnombreciudad(Int32.Parse(reader["hot_fk_ciudad"].ToString())), 
+                            MBuscarnombrePais(Int32.Parse(reader["hot_fk_ciudad"].ToString())), Int32.Parse(reader["hot_estrellas"].ToString()),float.Parse(reader["hot_puntuacion"].ToString()));
+                        listahoteles.Add(hotel);
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return listahoteles;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return null;
+            }
+        }
     }
 }
