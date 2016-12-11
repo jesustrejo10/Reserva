@@ -253,6 +253,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelDBReserva.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ReservaBoleto\CModeloBoleto.cs" />
+    <Compile Include="Models\ReservaBoleto\CReservacion_Boleto.cs" />
     <Compile Include="Models\ReservaHabitacion\CCiudad.cs" />
     <Compile Include="Models\Hoteles\CHotel.cs" />
     <Compile Include="Models\ReservaHabitacion\CReservaHabitacion.cs" />
@@ -278,6 +280,7 @@
     <Compile Include="Servicio\ManejadorSQLDiarios.cs" />
     <Compile Include="Servicio\ManejadorSQLMuestraRevision.cs" />
     <Compile Include="Servicio\ManejadorSQLException.cs" />
+    <Compile Include="Servicio\ManejadorSQLReservaBoleto.cs" />
     <Compile Include="Servicio\ManejadorSQLReservaRestaurant.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -3068,6 +3071,10 @@
     <Content Include="Views\gestion_revision\gestion_revision.cshtml" />
     <Content Include="Views\gestion_revision\Consultar_Revision.cshtml" />
     <Content Include="Views\gestion_diarios\gestion_diarios_resultados.cshtml" />
+    <Content Include="Views\gestion_reserva_boleto\boleto_datos.cshtml" />
+    <Content Include="Views\gestion_reserva_boleto\boleto_reserva.cshtml" />
+    <Content Include="Views\gestion_reserva_boleto\busqueda_parametros.cshtml" />
+    <Content Include="Views\gestion_reserva_boleto\busqueda_resultados.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
