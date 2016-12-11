@@ -174,7 +174,7 @@ namespace BOReserva.Models.gestion_automoviles
         /// <returns>Retorna el identificador de la ciudad</returns>
         public int MBuscaridciudadBD (String ciudad, String pais)
         {
-            int id_ciudad = 12;
+            int id_ciudad = 0;
             try
             {
                 conexion = new SqlConnection(stringDeConexion);
@@ -185,14 +185,27 @@ namespace BOReserva.Models.gestion_automoviles
                 {
                     while (reader.Read())
                     {
-                        id_ciudad = Int32.Parse(reader[0].ToString()); 
-                    }   
+                        //SE OBTIENE LA CIUDAD Y SE PASA
+                        //Y  COLOCA QUE FK_CIUDAD ES IGUAL A LO QUE DEVUELVE EL SQL
+                        id_ciudad = Int32.Parse(reader[0].ToString()); //EL 0 REPRESENTA LA PRIMERA Y UNICA COLUMNA QUE DEVULVE EL SqlDataReader
+                    }
                 }
                 cmd.Dispose();
                 conexion.Close();
                 return id_ciudad;
             }
             catch (SqlException ex)
+            {
+                conexion.Close();
+                return id_ciudad;
+            }
+            catch (NullReferenceException ex)
+            {
+                conexion.Close();
+                //Error recibiendo los parametros
+                return id_ciudad;
+            }
+            catch (Exception e) 
             {
                 conexion.Close();
                 return id_ciudad;
@@ -260,7 +273,6 @@ namespace BOReserva.Models.gestion_automoviles
         }
 
 
-
         /// <summary>
         /// Método para buscar el nombre de un país
         /// </summary>
@@ -276,6 +288,7 @@ namespace BOReserva.Models.gestion_automoviles
                 String sql = "SELECT E.lug_nombre FROM LUGAR E, LUGAR C WHERE E.lug_id = C.lug_fk_lugar_id " +
                              "AND C.lug_id = " + ciudad ;
                 SqlCommand cmd = new SqlCommand(sql, conexion);
+
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -288,6 +301,16 @@ namespace BOReserva.Models.gestion_automoviles
                 return _lugar;
             }
             catch (SqlException ex)
+            {
+                conexion.Close();
+                return _lugar;
+            }
+            catch (NullReferenceException ex)
+            {
+                conexion.Close();
+                return _lugar;
+            }
+            catch (Exception e)
             {
                 conexion.Close();
                 return _lugar;
@@ -361,6 +384,11 @@ namespace BOReserva.Models.gestion_automoviles
                 return fk;
             }
             catch (SqlException ex)
+            {
+                conexion.Close();
+                return fk;
+            }
+            catch (Exception e) 
             {
                 conexion.Close();
                 return fk;

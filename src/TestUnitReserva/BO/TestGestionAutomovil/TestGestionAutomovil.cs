@@ -38,7 +38,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
             Debug.WriteLine(prueba1);
             Assert.AreEqual(1, prueba1);
         }
-
+        /*
         [Test]
         public void MBorrarvehiculoBD()
         {
@@ -50,21 +50,60 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
             int prueba2 = Has1.MBorrarvehiculoBD(placa1);
             Assert.AreEqual(0, prueba2);
         }
-
+        */
         
 
-        /*
+        
         [Test]
         public void M08_BuscarFkCiudad()
         {
             String pais = "Venezuela";
             String ciudad = "Caracas";
             //ya se que el id de la ciudad Caracas, Venezuela es: 12
-            int response = daoAutomovil.MBuscarfkciudad(ciudad, pais);
+            int response = daoAutomovil.MBuscaridciudadBD(ciudad, pais);
+            Assert.NotNull(response);
             Assert.AreEqual(response, 12);
-
+            //Verifico que si le paso 2 vacios funcione
+            response = daoAutomovil.MBuscaridciudadBD("", "");
+            Assert.AreEqual(response, 0);
+            //Verifico que si le paso 2 null funcione
+            response = daoAutomovil.MBuscaridciudadBD(null, null);
+            Assert.AreEqual(response, 0);
+       
         }
 
-        */
+        [Test]
+        public void M08_MIdpaisesBD()
+        {
+
+            String pais = "Venezuela";
+            //ya se que el id de la ciudad Caracas, Venezuela es: 11
+            int response = daoAutomovil.MIdpaisesBD(pais);
+            Assert.NotNull(response);
+            Assert.AreEqual(response, 11);
+           
+            //Verifico que si le paso 2 vacios funcione
+            response = daoAutomovil.MIdpaisesBD("");
+            Assert.AreEqual(response, -1);
+            //Verifico que si le paso 2 null funcione
+
+            response = daoAutomovil.MIdpaisesBD(null);
+            Assert.AreEqual(response, -1);
+            
+        }
+
+        [Test]
+        public void M08_MBuscarnombrePaisBD() 
+        {
+            int pais = 12;
+            //ya se que el id de la ciudad caracas es: 12
+            String response = daoAutomovil.MBuscarnombrePaisBD(pais);
+            Assert.NotNull(response);
+            Assert.AreEqual(response, "Venezuela");
+
+            //Verifico que si le paso 2 vacios funcione
+            response = daoAutomovil.MBuscarnombrePaisBD(0);
+            Assert.AreEqual(response, "No aplica");
+        }
     }
 }
