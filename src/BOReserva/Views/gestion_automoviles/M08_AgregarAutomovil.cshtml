@@ -52,7 +52,7 @@
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <label for="modelo">Modelo(<span style="color:red">*</span>)</label>
-                                @Html.TextBoxFor(m => m._modelo, null, new { @class = "form-control", @placeholder = "Modelo", @id = "vehi_modelo", @onblur = "checkTextModelo(this);" })
+                                @Html.TextBoxFor(m => m._modelo, null, new { @class = "form-control", @placeholder = "Modelo", @id = "vehi_modelo", @onblur = "checkTextModelo(this);", @maxlength = 12 })
                             </div>
                             <div class="col-xs-6">
                                 <label for="anio">Año de fabricación(<span style="color:red">*</span>)</label>
@@ -118,7 +118,7 @@
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <label for="fecharegistro">Fecha de registro(<span style="color:red">*</span>)</label>
-                                @Html.TextBoxFor(m => m._fecharegistro, null, new { @type = "date", @class = "form-control", @placeholder = "Fecha", @id = "vehi_registro", min = "2000-01-01", max = "2016-12-31", @onblur = "checkanio(this);" })
+                                @Html.TextBoxFor(m => m._fecharegistro, null, new { @type = "date", @class = "form-control", @placeholder = "Fecha", @id = "vehi_registro", min = "2001-01-01", max = "2016-12-31", @onblur = "checkanio(this);" })
                             </div>
                             <div class="col-xs-6">
                                 <label for="">Pais(<span style="color:red">*</span>)</label>

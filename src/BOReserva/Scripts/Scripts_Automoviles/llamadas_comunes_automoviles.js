@@ -26,7 +26,7 @@
         function checklargo(field) {
             if (field.value != '') {
                 if (field.value < 0) {
-                    alert("No puedes colocar números negativos o que sea igual a cero");
+                    alert("No puedes colocar números negativos");
                     field.value = '';
                 }
                 if (field.value > 999999999) {
