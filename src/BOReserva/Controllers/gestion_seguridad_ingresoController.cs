@@ -40,7 +40,7 @@ namespace BOReserva.Content.Controllers
             }
             try
             {
-                // contraseña = Encriptar.CrearHash(contraseña);
+           
                 System.Diagnostics.Debug.WriteLine("Correo " + correo + " contrasena " + contraseña);
                 ingreso = ingreso.verificarUsuario(correo, contraseña);
 
