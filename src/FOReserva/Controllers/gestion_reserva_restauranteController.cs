@@ -15,7 +15,9 @@ namespace FOReserva.Controllers
         {
             return PartialView();
         }
-        
+
+
+
         public ActionResult restaurant_resultados()
         {
             int search_val = Int32.Parse(Request.QueryString["search_val"]);
@@ -25,21 +27,23 @@ namespace FOReserva.Controllers
                 List<CRestaurantModel> lista = busqueda(search_val, name_rest);
                 return View(lista);
             }
-            catch ( NullReferenceException e) {
+            catch (NullReferenceException e)
+            {
                 //Ventana de error al buscar
                 //No se puede usar el mensaje de la excepcion "e.mensaje"
                 //Esto se causa al realizar una busqueda con parametros que no son
                 //como son caracteres especiales y de mas
                 return View("No se encontraron resultados");
             }
-            catch ( ManejadorSQLException f)
+            catch (ManejadorSQLException f)
             {
                 //Ventana de error no conecto a la db
                 //Se puede usar el mensaje de la excepcion "e.mensaje"
                 return View("error_conexion");
             }
-            catch (Exception g) { 
-            
+            catch (Exception g)
+            {
+
             }
 
             // Error desconocido (seria bueno mostrar 
@@ -111,35 +115,21 @@ namespace FOReserva.Controllers
                 //Ventana de error no conecto a la db
                 //Se puede usar el mensaje de la excepcion "e.mensaje"
                 reserva = null;
-<<<<<<< HEAD
                 return View("error_conexion" + e.Message);
             }
-            catch (InvalidManejadorSQLException e)
-=======
-                return View("error_conexion" );
-            }
             catch (InvalidManejadorSQLException f)
->>>>>>> Develop
             {
                 //Ventana de error al crear la reserva
                 //Esto se causa por una sitaxis erronea del sql
                 //como son caracteres especiales o demas
                 reserva = null;
-<<<<<<< HEAD
                 return View("Error al crear Reserva");
             }
             catch (Exception e)
             {
-                return View("Error desconocido del sistema");
-=======
-                ViewBag.Message = "Lo sentimos, la reserva no pudo ser realizada";
-                return View(reserva);
-            }
-            catch (Exception e)
-            {
+                reserva = null;
                 ViewBag.Message = "Lo sentimos, la reserva no pudo ser realizada debido al siguiente error del sistema:" + e.Message;
                 return View(reserva);
->>>>>>> Develop
             }
         }
 
@@ -153,8 +143,6 @@ namespace FOReserva.Controllers
             return View(lista);
         }
 
-<<<<<<< HEAD
-=======
         /* 
          * Metodo para la eliminacion de la reserva
          */
@@ -170,6 +158,7 @@ namespace FOReserva.Controllers
             {
                 //Ventana de error no conecto a la db
                 //Se puede usar el mensaje de la excepcion "e.mensaje"
+             
             }
             catch (InvalidManejadorSQLException e)
             {
@@ -182,6 +171,5 @@ namespace FOReserva.Controllers
                 // Error desconocido del sistema
             }
         }
->>>>>>> Develop
     }
 }
