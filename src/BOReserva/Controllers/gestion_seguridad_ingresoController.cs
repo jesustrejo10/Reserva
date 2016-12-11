@@ -56,15 +56,10 @@ namespace BOReserva.Content.Controllers
                     else
                     {
                         ingreso.BloquearUsuario();
-                        //TempData["Mensaje"] = "Su usuario ha sido bloqueado. Por favor contacte al administrador.";
-                        //return RedirectToAction("M01_Login", "gestion_seguridad_ingreso");
+                        
                     }
                 }
-                //else
-                //{
-                //    TempData["Mensaje"] = "Su usuario ha sido bloqueado. Por favor contacte al administrador.";
-                //    return RedirectToAction("M01_Login", "gestion_seguridad_ingreso");
-                //}
+              
             }
             catch (Cvalidar_usuario_Exception e)
             {
@@ -83,7 +78,7 @@ namespace BOReserva.Content.Controllers
             {
                 TempData["Mensaje"] = "Conexion fallida a Base de Datos Contacte Administrador";
             }
-            catch (Exception e) { } //exception importante cuando haya problemas con la bd de no conexion colocan un mensaje error de bases de datos 
+            catch (Exception e) { } 
             return RedirectToAction("M01_Login", "gestion_seguridad_ingreso");
         }
 
