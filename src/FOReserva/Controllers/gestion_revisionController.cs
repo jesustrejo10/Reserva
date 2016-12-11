@@ -15,7 +15,6 @@ namespace FORevision.Controllers
     public class gestion_revisionController : Controller
     {
 
-
         /// <summary>
         /// Creacion Modelo Consultar Revision
         /// </summary>
@@ -24,11 +23,32 @@ namespace FORevision.Controllers
         public ActionResult Consultar_Revision_Usuario(string nombre, string apellido)
         {
 
-            List<CRevision> lista;
-            ManejadorSQLRevision manejador = new ManejadorSQLRevision();
-            lista = manejador.Consultar_Revision(nombre, apellido);
+             try
+            {
+                List<CRevision> lista;
+                ManejadorSQLRevision manejador = new ManejadorSQLRevision();
+                lista = manejador.Consultar_Revision(nombre, apellido);
 
-            return PartialView(lista);
+                return PartialView(lista);
+            }
+
+             catch (NullReferenceException e)
+             {
+                 //Parametro Nulos
+                 return View("Parametro Nulo");
+             }
+
+             catch (ManejadorSQLException f)
+             {
+                 //Ventana de error no conecto a la db
+                 //Se puede usar el mensaje de la excepcion "f.mensaje"
+                 return View("error_conexion");
+             }
+             catch (Exception g)
+             {
+
+             }
+             return PartialView();
         }
 
         /// <summary>
@@ -37,13 +57,34 @@ namespace FORevision.Controllers
         /// <returns>Vista Modelo</returns>
         public bool Eliminar_Revision(string nombre, string apellido, int revision)
         {
-
-           
+        
+            try
+            {
+           // if ((nombre != null) && (apellido != null) && (revision != null))
+            //{
                 bool resultado;
                 ManejadorSQLRevision manejador = new ManejadorSQLRevision();
                 resultado = manejador.Eliminar_Revision(nombre, apellido, revision);
                 return resultado;
-           
+            //}
+            }
+
+            catch (NullReferenceException e)
+            {
+                //Parametro Nulos
+
+            }
+
+            catch (ManejadorSQLException f)
+            {
+                //Ventana de error no conecto a la db
+
+            }
+
+            return true;
+
+            
+               
          
         }
 
@@ -54,37 +95,76 @@ namespace FORevision.Controllers
         public bool Crear_Revision(string nombre, string apellido)
         {
 
-            bool Revision;
-            ManejadorSQLRevision manejador = new ManejadorSQLRevision();
-            Revision = manejador.Crear_Revision(nombre, apellido);
+            try { 
+
+           // if ((nombre != null) && (apellido != null))
+          //  {
+
+                bool Revision;
+                ManejadorSQLRevision manejador = new ManejadorSQLRevision();
+                Revision = manejador.Crear_Revision(nombre, apellido);
+                return true;
+           // }
+            }
+            catch (NullReferenceException e)
+             {
+                 //Parametro Nulos
+                 
+             }
+
+             catch (ManejadorSQLException f)
+             {
+                 //Ventana de error no conecto a la db
+                                 
+             }
+
             return true;
 
-        }
+                      
+            }
 
+        
         /// <summary>
         /// Creacion Modelo Mostrar Revision
         /// </summary>
         /// <returns>Vista Modelo</returns>
         public ActionResult Mostrar_Revision(string nombre, string apellido, int tipo)
         {
-
-            if (tipo == 1)
-            {
-                List<CRevision> lista;
-                ManejadorSQLRevision manejador = new ManejadorSQLRevision();
-                lista = manejador.Mostrar_Revision_Restaurant(nombre, apellido, tipo);
-                return PartialView(lista);
-            }
-            else
+            try
             {
 
-                List<CRevision> lista;
-                ManejadorSQLRevision manejador = new ManejadorSQLRevision();
-                lista = manejador.Mostrar_Revision_Hotel(nombre, apellido, tipo);
-                return PartialView(lista);
+                if (tipo == 1)
+                {
+                    List<CRevision> lista;
+                    ManejadorSQLRevision manejador = new ManejadorSQLRevision();
+                    lista = manejador.Mostrar_Revision_Restaurant(nombre, apellido, tipo);
+                    return PartialView(lista);
+                }
+                else
+                {
+
+                    List<CRevision> lista;
+                    ManejadorSQLRevision manejador = new ManejadorSQLRevision();
+                    lista = manejador.Mostrar_Revision_Hotel(nombre, apellido, tipo);
+                    return PartialView(lista);
 
 
+                }
             }
+            catch (NullReferenceException e)
+            {
+                //Parametro Nulos
+                return View("Parametro Nulo");
+            }
+
+            catch (ManejadorSQLException f)
+            {
+                //Ventana de error no conecto a la db
+                //Se puede usar el mensaje de la excepcion "f.mensaje"
+                return View("error_conexion");
+            }
+            
+            return PartialView();
         }
 
         /// <summary>
@@ -93,11 +173,35 @@ namespace FORevision.Controllers
         /// <returns>Vista Modelo</returns>
         public bool Editar_Revision(string nombre, string apellido, int revision)
         {
+            
 
-            bool resultado;
-            ManejadorSQLRevision manejador = new ManejadorSQLRevision();
-            resultado = manejador.Editar_Revision(nombre, apellido, revision);
-            return true;
+            try
+            {
+
+                bool resultado;
+                ManejadorSQLRevision manejador = new ManejadorSQLRevision();
+                resultado = manejador.Editar_Revision(nombre, apellido, revision);
+                return true;
+            }
+
+            catch (NullReferenceException e)
+             {
+                 //Parametro Nulos
+                 
+             }
+
+             catch (ManejadorSQLException f)
+             {
+                 //Ventana de error no conecto a la db
+                                 
+             }
+
+            return true();
+
+                      
+            }
+
+            
 
 
         }
