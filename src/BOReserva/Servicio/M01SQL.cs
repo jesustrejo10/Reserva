@@ -22,8 +22,9 @@ namespace BOReserva.Servicio
                 conexion = new SqlConnection(stringDeConexion);
                 //INTENTO abrir la conexion
                 conexion.Open();
-                SqlCommand cmd = new SqlCommand("Select usu_correo, usu_nombre, usu_apellido ,usu_contraseña, usu_activo from Usuario where usu_correo like @usu_correo AND usu_fk_rol IS NOT NULL", conexion);
+                //SqlCommand cmd = new SqlCommand("Select usu_correo, usu_nombre, usu_apellido ,usu_contraseña, usu_activo from Usuario where usu_correo like @usu_correo AND usu_fk_rol IS NOT NULL", conexion);
                 //cmd.CommandType = CommandType.StoredProcedure;
+                 SqlCommand cmd = new SqlCommand("Select usu_correo, usu_nombre, usu_apellido ,usu_contraseña, usu_activo from Usuario where usu_correo like @usu_correo AND usu_fk_rol NOT BETWEEN 2 AND 3", conexion);
                 cmd.Parameters.AddWithValue("@usu_correo", usuario);
                 SqlDataReader lector = cmd.ExecuteReader();
                 while (lector.Read())
