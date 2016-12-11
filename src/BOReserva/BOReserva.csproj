@@ -239,6 +239,8 @@
     <Compile Include="Models\gestion_boletos\CPasajero.cs" />
     <Compile Include="Models\gestion_boletos\CVisualizarBoleto.cs" />
     <Compile Include="Models\gestion_boletos\CVuelo.cs" />
+    <Compile Include="Models\gestion_comida_vuelo\CComida.cs" />
+    <Compile Include="Models\gestion_comida_vuelo\CEditarComida.cs" />
     <Compile Include="Models\gestion_hoteles\CGestionHoteles_CrearHotel.cs" />
     <Compile Include="Models\gestion_lugares\CLugarModelo.cs" />
     <Compile Include="Models\gestion_ofertas\CAgregarOferta.cs" />
@@ -1458,7 +1460,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\Scripts_ComidaVuelo\" />
     <Folder Include="Views\gestion_roles\css\" />
     <Folder Include="Views\gestion_roles\js\" />
   </ItemGroup>
