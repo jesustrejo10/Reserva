@@ -70,10 +70,24 @@ namespace FOReserva.Controllers
              */
         public ActionResult reservar_restaurant(int id_rest)
         {
-            CRestaurantModel restaurante = new CRestaurantModel();
-            ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
-            restaurante = manejador.buscarRest(id_rest);
-            return View(restaurante);
+            try
+            {
+                CRestaurantModel restaurante = new CRestaurantModel();
+                ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
+                restaurante = manejador.buscarRest(id_rest);
+                return View(restaurante);
+            }
+            catch (ManejadorSQLException f)
+            {
+                //Ventana de error no conecto a la db
+                //Se puede usar el mensaje de la excepcion "f.mensaje"
+                return View("error_conexion");
+            }
+            catch (Exception g)
+            {
+
+            }
+            return View();
         }
 
         /*
@@ -97,19 +111,21 @@ namespace FOReserva.Controllers
                 //Ventana de error no conecto a la db
                 //Se puede usar el mensaje de la excepcion "e.mensaje"
                 reserva = null;
-                return View("error_conexion" + e.Message);
+                return View("error_conexion" );
             }
-            catch (InvalidManejadorSQLException e)
+            catch (InvalidManejadorSQLException f)
             {
                 //Ventana de error al crear la reserva
                 //Esto se causa por una sitaxis erronea del sql
                 //como son caracteres especiales o demas
                 reserva = null;
-                return View("Error al crear Reserva");
+                ViewBag.Message = "Lo sentimos, la reserva no pudo ser realizada";
+                return View(reserva);
             }
             catch (Exception e)
             {
-                return View("Error desconocido del sistema");
+                ViewBag.Message = "Lo sentimos, la reserva no pudo ser realizada debido al siguiente error del sistema:" + e.Message;
+                return View(reserva);
             }
         }
 
