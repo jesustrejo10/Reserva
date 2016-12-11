@@ -86,5 +86,23 @@ namespace UnitTestProject1
             Boolean resultadoModificar = prueba.modificarAvion(avion);
             Assert.AreEqual(resultadoModificar, true);
         }
+       
+        [TestMethod]
+        public void verificarDeshabilitarAvion()
+        {
+            Boolean resultado = prueba.deshabilitarAvion(1);
+            Assert.AreEqual(resultado, true);
+        }
+       
+        [TestMethod]
+        public void verificarHabilitarAvion()
+        {
+            Boolean resultado = prueba.habilitarAvion(1);
+            Assert.AreEqual(resultado, true);
+        }
+
+
+        
     }
+
 }
