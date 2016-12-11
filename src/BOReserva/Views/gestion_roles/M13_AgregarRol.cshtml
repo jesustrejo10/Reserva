@@ -39,12 +39,11 @@
                             </div>                       
                             <div class="col-xs-12" style="margin-top:10px;">
                                 <label for="Acceso">Tendra acceso a:</label>                                
-                                @foreach (var item in Model.Menu)
-                                {
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" value="@item.Nombre">@item.Nombre</label>
-                                    </div>
-                                }
+
+                                <div class="checkbox" id="listaPermisos">
+                                    <label><input type="checkbox" value="a">a</label>
+                                </div>
+
 
                             </div>
                         </div>
@@ -91,13 +90,33 @@
                 dataType: 'json',
                 url: 'gestion_roles/Consultarpermisos',
                 data: data,
-                success: function (data) {
-                alert("Se guardo");
+                success: OnSuccess,
+                failure: function (response) {
+                    alert("Se guardo");
+
                 }
                 
             });
+            function OnSuccess(response) {
+
+                var permisos = response;
+                console.log(permisos);
+                console.log(permisos[0]);
+                var container = $('#listaPermisos');
+                jQuery.each(permisos, function (i) {
+                    
+                
+                var inputs = container.find('input');
+                var id = inputs.length + 1;
+                $('<input />', { type: 'checkbox', id: 'permiso' + id, value: permisos[i] }).appendTo(container);
+                $('<label />', { 'for': 'permiso' + id, text: permisos[i] }).appendTo(container);
+                });
+
+            }
+
         });
 
+        
     </script>
 
 }

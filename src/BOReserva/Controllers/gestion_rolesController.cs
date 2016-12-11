@@ -77,9 +77,14 @@ namespace BOReserva.Controllers
             
             //Realizo el consulto y Guardo la respuesta de mi metodo sql 
              permisos = sql.consultarPermisos(modulo);
+             var _nombrePermiso = new List<object>();
+             foreach (var permiso in permisos)
+             {
+                 _nombrePermiso.Add(permiso.Nombre);
+             }
              System.Diagnostics.Debug.WriteLine(permisos);
             //envio el resultado de la consulta
-            return (Json(true, JsonRequestBehavior.AllowGet));
+             return (Json(_nombrePermiso, JsonRequestBehavior.AllowGet));
         }
 
  
