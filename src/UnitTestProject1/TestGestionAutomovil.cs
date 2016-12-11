@@ -158,6 +158,21 @@ namespace UnitTestProject1
 
         }
         /// <summary>
+        /// Método validar buscarvehículo para ver si existe el automovil
+        /// </summary>
+        [TestMethod]
+        public void MMostrarvehiculoBD()
+        {
+            // si no consigue
+            Automovil buscarvehiculo = daoAutomovil.MMostrarvehiculoBD("HGJYJG");
+            Assert.IsNull(buscarvehiculo);
+            Automovil buscarvehiculo1= daoAutomovil.MMostrarvehiculoBD("AUT223");
+            //si pasa..
+            Assert.IsInstanceOfType(buscarvehiculo1,typeof(Automovil));
+
+
+        }
+        /// <summary>
         /// Método que verifica si el vehículo es borrado de la base de datos correctamente
         /// </summary>
         [TestMethod]
