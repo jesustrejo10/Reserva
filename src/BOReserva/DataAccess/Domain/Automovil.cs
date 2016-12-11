@@ -48,9 +48,9 @@ namespace BOReserva.Models.gestion_automoviles
               _ciudad = ciudad;
           }
 
-         public int MAgregaraBD (Automovil vehiculo){ //METODO PARA AGREGAR A LA BASE DE DATOS
+         public int MAgregaraBD (Automovil vehiculo, int id){ //METODO PARA AGREGAR A LA BASE DE DATOS
              DAOAutomovil agregar = new DAOAutomovil();
-             return agregar.MAgregarVehiculoBD(vehiculo);
+             return agregar.MAgregarVehiculoBD(vehiculo, id);
          }
 
          public List<Automovil> MListarvehiculos() //METODO PARA OBTENER LA LISTA DE VEHICULOS DE LA BASE DE DATOS
@@ -71,10 +71,10 @@ namespace BOReserva.Models.gestion_automoviles
          }
 
          
-         public int MModificarvehiculoBD(Automovil vehiculo) //METODO PARA MODIFICAR UN VEHICULO
+         public int MModificarvehiculoBD(Automovil vehiculo, int id) //METODO PARA MODIFICAR UN VEHICULO
           {
               DAOAutomovil modificar = new DAOAutomovil();
-              return modificar.MModificarVehiculoBD(vehiculo);
+              return modificar.MModificarVehiculoBD(vehiculo, id);
           }
 
          public int MBorrarvehiculoBD(String vehiculo) //METODO PARA MODIFICAR UN VEHICULO

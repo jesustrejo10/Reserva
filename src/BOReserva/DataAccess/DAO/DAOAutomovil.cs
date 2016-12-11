@@ -16,15 +16,14 @@ namespace BOReserva.Models.gestion_automoviles
         
         private SqlConnection con = null;
 
-        public int MAgregarVehiculoBD(Automovil vehiculo)
+        public int MAgregarVehiculoBD(Automovil vehiculo, int id)
         {
-            int fk_ciudad = MBuscarfkciudad(vehiculo._ciudad, vehiculo._pais);
             try
             {
                 con = new SqlConnection(connetionString);
                 con.Open();
                 String sql = "INSERT INTO Automovil VALUES ('"+vehiculo._matricula+"', '"+vehiculo._modelo+"', '"+vehiculo._fabricante+"', "+vehiculo._anio+", "+vehiculo._kilometraje+", "+vehiculo._cantpasajeros+", '"+vehiculo._tipovehiculo+
-                    "', " + vehiculo._preciocompra + ", " + vehiculo._precioalquiler + ", " + vehiculo._penalidaddiaria + ", '" + vehiculo._fecharegistro + "', '" + vehiculo._color + "', "+ 1 +", '"+vehiculo._transmision+"', "+ fk_ciudad+")";
+                    "', " + vehiculo._preciocompra + ", " + vehiculo._precioalquiler + ", " + vehiculo._penalidaddiaria + ", '" + vehiculo._fecharegistro + "', '" + vehiculo._color + "', "+ 1 +", '"+vehiculo._transmision+"', "+ id +")";
                 SqlCommand cmd = new SqlCommand(sql, con);
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
@@ -38,15 +37,14 @@ namespace BOReserva.Models.gestion_automoviles
             }
         }
 
-        public int MModificarVehiculoBD(Automovil vehiculo)
+        public int MModificarVehiculoBD(Automovil vehiculo, int id)
         {
-            int fk_ciudad = MBuscarfkciudad(vehiculo._ciudad, vehiculo._pais);
             try
             {
                 con = new SqlConnection(connetionString);
                 con.Open();
                 String sql = "UPDATE Automovil SET aut_modelo ='" + vehiculo._modelo + "', aut_fabricante = '" + vehiculo._fabricante + "', aut_anio = " + vehiculo._anio + ", aut_kilometraje = " + vehiculo._kilometraje + ", aut_cantpasajeros = " + vehiculo._cantpasajeros + ", aut_tipovehiculo = '" + vehiculo._tipovehiculo +
-                    "', aut_preciocompra = " + vehiculo._preciocompra + ", aut_precioalquiler = " + vehiculo._precioalquiler + ", aut_penalidaddiaria = " + vehiculo._penalidaddiaria + ", aut_fecharegistro = '" + vehiculo._fecharegistro + "', aut_color = '" + vehiculo._color + "', aut_transmision = '" + vehiculo._transmision + "', aut_fk_ciudad = " + fk_ciudad + 
+                    "', aut_preciocompra = " + vehiculo._preciocompra + ", aut_precioalquiler = " + vehiculo._precioalquiler + ", aut_penalidaddiaria = " + vehiculo._penalidaddiaria + ", aut_fecharegistro = '" + vehiculo._fecharegistro + "', aut_color = '" + vehiculo._color + "', aut_transmision = '" + vehiculo._transmision + "', aut_fk_ciudad = " + id + 
                     " WHERE aut_matricula = '"+vehiculo._matricula+"'";
                 SqlCommand cmd = new SqlCommand(sql, con);
                 cmd.ExecuteNonQuery();
@@ -327,9 +325,8 @@ namespace BOReserva.Models.gestion_automoviles
             }
         }
 
-        public List<string> MListarciudadesBD(string pais)
+        public List<string> MListarciudadesBD(string pais, int fk)
         {
-            int fk = MIdpaisesBD(pais);
             List<String> _ciudades = new List<string>();
             try
             {
