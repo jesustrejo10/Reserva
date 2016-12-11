@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using FOReserva.Models.Restaurantes;
 using FOReserva.Servicio;
@@ -88,9 +86,31 @@ namespace FOReserva.Controllers
             CReservation_Restaurant reserva = new CReservation_Restaurant(name_client,reserv_date,reserv_hour,number_person, 5, restaurantID);
             reserva.Restaurant = new CRestaurantModel(restaurantID, name_rest, addres_rest);
             reserva.Restaurant.CityName = name_city;
-            ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
-            manejador.CrearReserva(reserva);
-            return View(reserva);
+            try
+            {
+                ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
+                manejador.CrearReserva(reserva);
+                return View(reserva);
+            }
+            catch (ManejadorSQLException e)
+            {
+                //Ventana de error no conecto a la db
+                //Se puede usar el mensaje de la excepcion "e.mensaje"
+                reserva = null;
+                return View("error_conexion" + e.Message);
+            }
+            catch (InvalidManejadorSQLException e)
+            {
+                //Ventana de error al crear la reserva
+                //Esto se causa por una sitaxis erronea del sql
+                //como son caracteres especiales o demas
+                reserva = null;
+                return View("Error al crear Reserva");
+            }
+            catch (Exception e)
+            {
+                return View("Error desconocido del sistema");
+            }
         }
 
         /* Metodo que devuelve todas las reservas del usuario logeado 
