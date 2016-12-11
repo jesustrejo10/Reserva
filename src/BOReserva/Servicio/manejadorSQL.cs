@@ -122,7 +122,7 @@ namespace BOReserva.Servicio
         /// <returns> CAvion el avion buscado</returns>
         public CAvion consultarAvion(int id)
         {
-            CAvion avionRetorno = new CAvion();
+            CAvion avionRetorno = null;
             try
             {
                 //Inicializo la conexion con el string de conexion
