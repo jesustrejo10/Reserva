@@ -197,6 +197,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\gestion_planificacion_vacacionesController.cs" />
     <Compile Include="Controllers\gestion_reserva_autoController.cs" />
     <Compile Include="Controllers\gestion_reserva_habitacionesController.cs" />
     <Compile Include="Controllers\gestion_reserva_restauranteController.cs" />
@@ -212,6 +213,7 @@
     <Compile Include="Models\Autos\CLugar.cs" />
     <Compile Include="Models\Autos\Cvista_ReservaAutos.cs" />
     <Compile Include="Models\BaseEntity.cs" />
+    <Compile Include="Models\Itinerario\Cvista_Itinerario.cs" />
     <Compile Include="Models\ORM\DB.cs" />
     <Compile Include="Models\ORM\M20_ActualizarEstadoReservaHabitacion_Result.cs">
       <DependentUpon>ModelDBReserva.tt</DependentUpon>
@@ -258,7 +260,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ReservaDB.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Servicio\Ciudades.cs" />
+    <Compile Include="Servicio\Fechas.cs" />
     <Compile Include="Servicio\manejadorSQL.cs" />
+    <Compile Include="Servicio\ManejadorSQLItinerario.cs" />
     <Compile Include="Servicio\ManejadorSQLReservaAutomovil.cs" />
     <Compile Include="Servicio\ManejadorSQLReservaRestaurant.cs" />
   </ItemGroup>
@@ -1658,8 +1663,10 @@
     <Content Include="Models\Restaurantes\placeholder.html" />
     <Content Include="Models\Vuelos\placeholder.html" />
     <Content Include="Scripts\BuscarCarro.js" />
+    <Content Include="Scripts\BuscarDestino.js" />
     <Content Include="Scripts\cargadorPerfil.js" />
     <Content Include="Scripts\cargadorPestanas.js" />
+    <Content Include="Scripts\CuadroTexto.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -1679,7 +1686,6 @@
     <Content Include="Views\ajax\dummy-modal-ajax.html" />
     <Content Include="Views\busqueda_compra_boletos\placeholder.html" />
     <Content Include="Views\gestion_diario_viaje\placeholder.html" />
-    <Content Include="Views\gestion_planificacion_vacaciones\placeholder.html" />
     <Content Include="Views\gestion_reclamos\placeholder.html" />
     <Content Include="Views\gestion_reserva_auto\placeholder.html" />
     <Content Include="Views\gestion_reserva_crucero\placeholder.html" />
@@ -3045,6 +3051,7 @@
     <Content Include="Views\Shared\_LayoutPerfil.cshtml" />
     <Content Include="Views\gestion_reserva_auto\M19_Reserva_Autos_Perfil.cshtml" />
     <Content Include="Views\Shared\Perfil.cshtml" />
+    <Content Include="Views\gestion_planificacion_vacaciones\M17_gestion_itinerario_Perfil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
