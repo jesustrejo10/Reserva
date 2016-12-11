@@ -102,7 +102,7 @@ namespace FOReserva.Servicio
                 {
                     int id = read.GetInt32(0);
                     string nombre_reserva = read.GetString(1);
-                    string fecha = read.GetDateTime(2).ToString();
+                    string fecha = read.GetDateTime(2).ToString("yyyy-MM-dd");
                     string hora = read.GetString(3);
                     int cantidad = read.GetInt32(4);
                     string name_rest = read.GetString(5);
