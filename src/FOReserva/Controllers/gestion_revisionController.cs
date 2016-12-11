@@ -42,7 +42,7 @@ namespace FORevision.Controllers
             {
                 //Ventana de error no conecto a la db
                 //Se puede usar el mensaje de la excepcion "f.mensaje"
-                returnPartialView("error_conexion");
+                return PartialView("error_conexion");
             }
             catch (Exception g)
             {
