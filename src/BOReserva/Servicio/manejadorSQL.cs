@@ -1081,7 +1081,7 @@ namespace BOReserva.Servicio
         /// <returns>Retorna el identificador de la ciudad</returns>
         public int MBuscaridciudadBD(String ciudad, String pais)
         {
-            int id_ciudad = 12;
+            int id_ciudad = 0;
             try
             {
                 conexion = new SqlConnection(stringDeConexion);
@@ -1092,7 +1092,9 @@ namespace BOReserva.Servicio
                 {
                     while (reader.Read())
                     {
-                        id_ciudad = Int32.Parse(reader[0].ToString());
+                        //SE OBTIENE LA CIUDAD Y SE PASA
+                        //Y  COLOCA QUE FK_CIUDAD ES IGUAL A LO QUE DEVUELVE EL SQL
+                        id_ciudad = Int32.Parse(reader[0].ToString()); //EL 0 REPRESENTA LA PRIMERA Y UNICA COLUMNA QUE DEVULVE EL SqlDataReader
                     }
                 }
                 cmd.Dispose();
@@ -1102,9 +1104,25 @@ namespace BOReserva.Servicio
             catch (SqlException ex)
             {
                 conexion.Close();
+                Debug.WriteLine(ex.ToString());
                 return id_ciudad;
             }
+            catch (NullReferenceException ex)
+            {
+                conexion.Close();
+                Debug.WriteLine(ex.ToString());
+                //Error recibiendo los parametros
+                return id_ciudad;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine(e.ToString());
+                return id_ciudad;
+            }
+
         }
+
 
 
 

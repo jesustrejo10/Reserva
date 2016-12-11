@@ -4,6 +4,7 @@ using BOReserva.Models.gestion_automoviles;
 using BOReserva.Models;
 using System.Diagnostics;
 using System.Collections.Generic;
+using BOReserva.Servicio;
 
 namespace UnitTestProject1
 {
@@ -14,7 +15,8 @@ namespace UnitTestProject1
     public class TestGestionAutomovil
     {
 
-        DAOAutomovil daoAutomovil;
+        //DAOAutomovil daoAutomovil;
+        manejadorSQL daoAutomovil;
         Automovil auto;
         String placa1 = Util.RandomString(7);
 
@@ -24,7 +26,8 @@ namespace UnitTestProject1
        [TestInitialize()] 
         public void Before()
         {
-            daoAutomovil = new DAOAutomovil();
+            //daoAutomovil = new DAOAutomovil();
+            daoAutomovil = new manejadorSQL();
             
         }
         /// <summary>
@@ -61,13 +64,16 @@ namespace UnitTestProject1
             String ciudad = "Caracas";
             //ya se que el id de la ciudad Caracas, Venezuela es: 12
             int response = daoAutomovil.MBuscaridciudadBD(ciudad, pais);
+            Debug.WriteLine(response);
             Assert.IsNotNull(response);
             Assert.AreEqual(response, 12);
             //Verifico que si le paso 2 vacios funcione
-            response = daoAutomovil.MBuscaridciudadBD("", "");
-            Assert.AreEqual(response, 0);
+           /* response = daoAutomovil.MBuscaridciudadBD("", "");
+            Debug.WriteLine(response);
+            Assert.AreEqual(response, 0);*/
             //Verifico que si le paso 2 null funcione
-            response = daoAutomovil.MBuscaridciudadBD(null, null);
+           response = daoAutomovil.MBuscaridciudadBD(null, null);
+            Debug.WriteLine(response);
             Assert.AreEqual(response, 0);
 
         }
@@ -160,19 +166,14 @@ namespace UnitTestProject1
             int prueba2 = daoAutomovil.MBorrarvehiculoBD(placa1);
             Assert.AreEqual(1, prueba2);
         }
+        /// <summary>
+        /// Método que verifica si se retorna la cantidad de ciudades 
+        /// </summary>
         [TestMethod]
         public void MListarciudadesBD()
         {
              List<String> h = daoAutomovil.MListarciudadesBD(11);
 
-            try
-
-            {
-            }
-            catch
-            {
-            
-            }
             Assert.AreEqual(5, h.Count);
         }
 
