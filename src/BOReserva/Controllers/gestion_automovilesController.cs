@@ -174,7 +174,7 @@ namespace BOReserva.Controllers
                                              cantpasajeros, preciocompra, precioalquiler, penalidaddiaria, fecharegistro,
                                              color, 1, transmision, pais, _ciudad);  //SE CREA EL VEHICULO
             DAOAutomovil buscarid = new DAOAutomovil();
-            int id_ciudad = buscarid.MBuscarfkciudad(_ciudad, pais);
+            int id_ciudad = buscarid.MBuscaridciudadBD(_ciudad, pais);
             int agrego_si_no = carronuevo.MAgregaraBD(carronuevo, id_ciudad); //SE AGREGA A LA BD RETORNA 1 SI SE AGREGA Y 0 SINO LO LOGRA
             
             return (Json(true, JsonRequestBehavior.AllowGet));
@@ -204,7 +204,7 @@ namespace BOReserva.Controllers
                                              cantpasajeros, preciocompra, precioalquiler, penalidaddiaria, fecharegistro, 
                                              color, 1, transmision, pais, _ciudad);  //SE CREA EL VEHICULO
             DAOAutomovil buscarid = new DAOAutomovil();
-            int id_ciudad = buscarid.MBuscarfkciudad(_ciudad, pais);
+            int id_ciudad = buscarid.MBuscaridciudadBD(_ciudad, pais);
             int modifico_si_no = carro.MModificarvehiculoBD(carro, id_ciudad); //SE MODIFICA A LA BD RETORNA 1 SI SE  MODIFICO Y 0 SI NO LO LOGRA
             
             return (Json(true, JsonRequestBehavior.AllowGet));
