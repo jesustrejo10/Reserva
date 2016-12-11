@@ -1,12 +1,13 @@
-﻿using BOReserva.DataAccess.Domain;
+﻿using BOReserva.DataAccess.Model;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.DataAccess.DAO
+namespace BOReserva.Models.gestion_automoviles
 {
     public class DAOAutomovil
     {
@@ -15,18 +16,12 @@ namespace BOReserva.DataAccess.DAO
         
         private SqlConnection con = null;
 
-        public void probarconexion()
-        {
-            con = new SqlConnection(connetionString);
-            con.Open();
-        }
-
         public int MAgregarVehiculoBD(Automovil vehiculo)
         {
             int fk_ciudad = MBuscarfkciudad(vehiculo._ciudad, vehiculo._pais);
             try
             {
-                con = new SqlConnection(connetionString);
+                con = Connection.getInstance(connetionString);
                 con.Open();
                 String sql = "INSERT INTO Automovil VALUES ('"+vehiculo._matricula+"', '"+vehiculo._modelo+"', '"+vehiculo._fabricante+"', "+vehiculo._anio+", "+vehiculo._kilometraje+", "+vehiculo._cantpasajeros+", '"+vehiculo._tipovehiculo+
                     "', " + vehiculo._preciocompra + ", " + vehiculo._precioalquiler + ", " + vehiculo._penalidaddiaria + ", '" + vehiculo._fecharegistro + "', '" + vehiculo._color + "', "+ 1 +", '"+vehiculo._transmision+"', "+ fk_ciudad+")";
@@ -41,11 +36,6 @@ namespace BOReserva.DataAccess.DAO
                 con.Close();
                 return 0;
             }
-            catch (Exception e)
-            {
-                con.Close();
-                return 0;
-            }
         }
 
         public int MModificarVehiculoBD(Automovil vehiculo)
@@ -53,7 +43,7 @@ namespace BOReserva.DataAccess.DAO
             int fk_ciudad = MBuscarfkciudad(vehiculo._ciudad, vehiculo._pais);
             try
             {
-                con = new SqlConnection(connetionString);
+                con = Connection.getInstance(connetionString);
                 con.Open();
                 String sql = "UPDATE Automovil SET aut_modelo ='" + vehiculo._modelo + "', aut_fabricante = '" + vehiculo._fabricante + "', aut_anio = " + vehiculo._anio + ", aut_kilometraje = " + vehiculo._kilometraje + ", aut_cantpasajeros = " + vehiculo._cantpasajeros + ", aut_tipovehiculo = '" + vehiculo._tipovehiculo +
                     "', aut_preciocompra = " + vehiculo._preciocompra + ", aut_precioalquiler = " + vehiculo._precioalquiler + ", aut_penalidaddiaria = " + vehiculo._penalidaddiaria + ", aut_fecharegistro = '" + vehiculo._fecharegistro + "', aut_color = '" + vehiculo._color + "', aut_transmision = '" + vehiculo._transmision + "', aut_fk_ciudad = " + fk_ciudad + 
@@ -69,11 +59,6 @@ namespace BOReserva.DataAccess.DAO
                 con.Close();
                 return 0;
             }
-            catch (Exception e)
-            {
-                con.Close();
-                return 0;
-            }
         }
 
         public List<Automovil> MListarvehiculosBD()
@@ -81,7 +66,7 @@ namespace BOReserva.DataAccess.DAO
             List<Automovil> listavehiculos = new List<Automovil>();
             try
             {
-                con = new SqlConnection(connetionString);
+                con = Connection.getInstance(connetionString);
                 con.Open();
                 String sql = "SELECT * FROM Automovil";
                 SqlCommand cmd = new SqlCommand(sql, con);
@@ -111,11 +96,6 @@ namespace BOReserva.DataAccess.DAO
                 con.Close();
                 return null;
             }
-            catch (Exception e)
-            {
-                con.Close();
-                return null;
-            }
         }
 
         public Automovil MMostrarvehiculoBD(String matricula)
@@ -123,7 +103,7 @@ namespace BOReserva.DataAccess.DAO
             Automovil vehiculo = null;
             try
             {
-                con = new SqlConnection(connetionString);
+                con = Connection.getInstance(connetionString);
                 con.Open();
                 String sql = "SELECT * FROM Automovil WHERE aut_matricula = '" + matricula + "'";
                 SqlCommand cmd = new SqlCommand(sql, con);
@@ -154,19 +134,14 @@ namespace BOReserva.DataAccess.DAO
                 con.Close();
                 return null;
             }
-            catch (Exception e)
-            {
-                con.Close();
-                return null;
             }
-        }
-        
+
         public int MBuscarfkciudad (String ciudad, String pais)
         {
             int fk_ciudad = 12;
             try
             {
-                con = new SqlConnection(connetionString);
+                con = Connection.getInstance(connetionString);
                 con.Open();
                 //String sql = "SELECT C.id_lugar FROM LUGAR P, LUGAR E, LUGAR C WHERE P.id_lugar = E.FK_lugar_id AND E.id_lugar = C.FK_lugar_id AND " +
                 //             "P.nombre_lugar = '"+pais+"' AND E.nombre_lugar = '"+estado+"' AND C.nombre_lugar = '"+ciudad+"'";
@@ -190,18 +165,13 @@ namespace BOReserva.DataAccess.DAO
                 con.Close();
                 return fk_ciudad;
             }
-            catch (Exception e)
-            {
-                con.Close();
-                return 0;
-            }
         }
 
         public int MBorrarvehiculoBD(String matricula)
         {
             try
             {
-                con = new SqlConnection(connetionString);
+                con = Connection.getInstance(connetionString);
                 con.Open();
                 String sql = "DELETE FROM Automovil WHERE aut_matricula = '"+matricula+"'";
                 SqlCommand cmd = new SqlCommand(sql, con);
@@ -215,11 +185,6 @@ namespace BOReserva.DataAccess.DAO
                 con.Close();
                 return 0;
             }
-            catch (Exception e)
-            {
-                con.Close();
-                return 0;
-            }
         }
 
         public String MBuscarnombreciudad(int id)
@@ -227,7 +192,7 @@ namespace BOReserva.DataAccess.DAO
             String _ciudad = "No aplica";
             try
             {
-                con = new SqlConnection(connetionString);
+                con = Connection.getInstance(connetionString);
                 con.Open();
                 String sql = "SELECT C.lug_nombre FROM LUGAR C WHERE C.lug_id = '" + id + "'"; ;
                 SqlCommand cmd = new SqlCommand(sql, con);
@@ -249,11 +214,6 @@ namespace BOReserva.DataAccess.DAO
                 con.Close();
                 return _ciudad;
             }
-            catch (Exception e)
-            {
-                con.Close();
-                return null;
-            }
         }
 
         public String MBuscarnombrePais(int ciudad) 
@@ -261,7 +221,7 @@ namespace BOReserva.DataAccess.DAO
             String _lugar = "No aplica";
             try
             {
-                con = new SqlConnection(connetionString);
+                con = Connection.getInstance(connetionString);
                 con.Open();
                 String sql = "SELECT E.lug_nombre FROM LUGAR E, LUGAR C WHERE E.lug_id = C.lug_fk_lugar_id " +
                              "AND C.lug_id = " + ciudad ;
@@ -284,11 +244,6 @@ namespace BOReserva.DataAccess.DAO
                 con.Close();
                 return _lugar;
             }
-            catch (Exception e)
-            {
-                con.Close();
-                return null;
-            }
         }
 
         public String[] MListarpaisesBD()
@@ -296,7 +251,7 @@ namespace BOReserva.DataAccess.DAO
             String[] listapaises = new String[5000];
             try
             {
-                con = new SqlConnection(connetionString);
+                con = Connection.getInstance(connetionString);
                 con.Open();
                 String sql = "SELECT lug_nombre FROM Lugar WHERE lug_tipo_lugar = 'pais'";
                 SqlCommand cmd = new SqlCommand(sql, con);
@@ -318,10 +273,32 @@ namespace BOReserva.DataAccess.DAO
                 con.Close();
                 return null;
             }
-            catch (Exception e)
+        }
+
+        public int MIdpaisesBD(String pais)
+        {
+            int fk = -1;
+            try
+            {
+                con = Connection.getInstance(connetionString);
+                con.Open();
+                String sql = "SELECT lug_id FROM Lugar WHERE lug_nombre = '"+pais+"'";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        fk = Int32.Parse(reader[0].ToString());
+                    }
+                }
+                cmd.Dispose();
+                con.Close();
+                return fk;
+            }
+            catch (SqlException ex)
             {
                 con.Close();
-                return null;
+                return fk;
             }
         }
 
@@ -329,9 +306,9 @@ namespace BOReserva.DataAccess.DAO
         {
             try
             {
-                con = new SqlConnection(connetionString);
+                con = Connection.getInstance(connetionString);
                 con.Open();
-                String sql = "UPDATE Automovil SET aut_disponibilidad = " + activardesactivar + " WHERE aut_matricula = '" + matricula + "'";
+                String sql = "UPDATE Automovil SET aut_disponibilidad = "+activardesactivar+" WHERE aut_matricula = '" + matricula + "'";
                 SqlCommand cmd = new SqlCommand(sql, con);
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
@@ -343,22 +320,6 @@ namespace BOReserva.DataAccess.DAO
                 con.Close();
                 return 0;
             }
-            catch (Exception e)
-            {
-                con.Close();
-                return 0;
-            }
         }
     }
-
-
-
-
-
-
-
-
-
 }
-
- 
