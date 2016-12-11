@@ -102,5 +102,6 @@ namespace FOReserva.Controllers
             List<CReservation_Restaurant> lista = manejador.buscarReservas();
             return View(lista);
         }
+
     }
 }
