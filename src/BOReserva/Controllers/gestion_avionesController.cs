@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using BOReserva.Models.gestion_aviones;
 using System.Net;
 using BOReserva.Servicio;
+using System.Data.SqlClient;
 
 namespace BOReserva.Controllers
 {
@@ -13,12 +14,6 @@ namespace BOReserva.Controllers
     {
         //
         // GET: /gestion_aviones/
-
-        public ActionResult M02_GestionAviones()
-        {
-            CGestion_avion model = new CGestion_avion();
-            return PartialView(model);
-        }
 
         public ActionResult M02_AgregarAvion()
         {
@@ -38,7 +33,7 @@ namespace BOReserva.Controllers
             //Chequeo si los campos obligatorios estan vacios como medida de seguridad
             if ((model._matriculaAvion == null) || (model._modeloAvion == null) || (model._capacidadEquipaje == 0) || (model._capacidadMaximaCombustible == 0)
                 || (model._distanciaMaximaVuelo == 0) || (model._capacidadPasajerosEjecutiva == 0) || (model._capacidadPasajerosTurista == 0)
-                || (model._capacidadPasajerosVIP == 0) || (model._velocidadMaximaDeVuelo == 0)) 
+                || (model._capacidadPasajerosVIP == 0) || (model._velocidadMaximaDeVuelo == 0))
             {
                 //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
@@ -51,21 +46,34 @@ namespace BOReserva.Controllers
             //instancio el manejador de sql
             manejadorSQL sql = new manejadorSQL();
             //realizo el insert
-            bool resultado = sql.insertarAvion(model);
-            //envio una respuesta dependiendo del resultado del insert
-            if (resultado)
-            { 
-                return (Json(true, JsonRequestBehavior.AllowGet));
+            try
+            {
+                bool resultado = sql.insertarAvion(model);
+                //envio una respuesta dependiendo del resultado del insert
+                if (resultado)
+                {
+                    return (Json(true, JsonRequestBehavior.AllowGet));
+                }
+
             }
-            else
+            catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error insertando en la BD";
+                String error = "Error insertando en la BD.";
                 return Json(error);
             }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
+                return Json(error);
+            }
+
+            return (Json(true, JsonRequestBehavior.AllowGet));
+
         }
-        
- 
+
+
 
 
         /*Metodo para consultar la matricula de un avion para sus estadisticas*/
@@ -74,16 +82,28 @@ namespace BOReserva.Controllers
         {
             String prueba = model._matriculaConsultarEstadisticaAvion;
             return (Json(true, JsonRequestBehavior.AllowGet));
-            
+
         }
 
         public ActionResult M02_VisualizarAviones()
         {
             manejadorSQL sql = new manejadorSQL();
             List<CAvion> aviones = new List<CAvion>();
-            aviones = sql.listarAvionesEnBD();
-            return PartialView(aviones);
+            try
+            {
+                aviones = sql.listarAvionesEnBD();
+                return PartialView(aviones);
+            }
+            catch (SqlException e)
+            {
+                return PartialView();
+            }
+            catch (Exception e)
+            {
+                return PartialView();
+            }
         }
+
 
         public ActionResult M02_ConsultarAvion(int id)
         {
@@ -131,9 +151,38 @@ namespace BOReserva.Controllers
                 //Retorno el error  
                 return Json(error);
             }
-        }  
+        }
 
-
-
-    }
+        [HttpPost]
+        public JsonResult modificarAvion(CModificarAvion model)
+        {
+            //Chequeo si los campos obligatorios estan vacios como medida de seguridad
+            if ((model._matriculaAvion == null) || (model._modeloAvion == null) || (model._capacidadEquipaje == 0) || (model._capacidadMaximaCombustible == 0)
+                || (model._distanciaMaximaVuelo == 0) || (model._velocidadMaximaDeVuelo == 0) || (model._capacidadPasajerosEjecutiva == 0)
+                || (model._capacidadPasajerosVIP == 0) || (model._capacidadPasajerosTurista == 0))
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error! campo obligatorio vacío";
+                //Retorno el error
+                return Json(error);
+            }
+            manejadorSQL sql = new manejadorSQL();
+            Boolean resultado = sql.modificarAvion(model);
+            if (resultado)
+            {
+                return (Json(sql.modificarAvion(model), JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error en la base de datos";
+                //Retorno el error
+                return Json(error);
+            }
+        }
+   }
 }
