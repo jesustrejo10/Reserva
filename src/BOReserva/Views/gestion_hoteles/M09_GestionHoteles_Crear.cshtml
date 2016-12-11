@@ -33,13 +33,13 @@
                                 <div class="col-md-5">
                                     <!-- select -->                                     
                                         <label>País</label>                                       
-                                           @Html.DropDownListFor(m => m._pais, BOReserva.Controllers.gestion_hotelesController.pais(), new { @class = "form-control", @placeholder = "Pais", @id = "paisHotel" })                                                                      
+                                           @Html.DropDownList("Country", ViewData["pais"] as List<SelectListItem>, new { @class = "form-control", @placeholder = "Pais", @id = "Country" })                                                                      
                                 </div><!--div col-xs-->
                                 <div class="col-md-1"></div>
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <label>Ciudad</label>
-                                        <select class="form-control"></select>
+                                       @Html.DropDownList("State", new SelectList(string.Empty, "Value", "Text"), "Please select a State", new { @class = "form-control", @placeholder = "Ciudad", @id = "State" })                                                                      
                                     </div>
                                 </div>
                             </div> <!--/div row-->

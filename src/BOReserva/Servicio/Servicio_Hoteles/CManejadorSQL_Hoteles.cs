@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 
@@ -59,6 +60,7 @@ namespace BOReserva.Servicio.Servicio_Hoteles
 
         public String[] MListarpaisesBD()
         {
+            Debug.WriteLine("SERVICIO");
             String[] listapaises = new String[5000];
             try
             {
@@ -72,6 +74,7 @@ namespace BOReserva.Servicio.Servicio_Hoteles
                     while (reader.Read())
                     {
                         listapaises[i] = reader[0].ToString();
+                        Debug.WriteLine(reader[0].ToString());
                         i++;
                     }
                 }
@@ -88,6 +91,7 @@ namespace BOReserva.Servicio.Servicio_Hoteles
 
         public String[] MListarciudadesBD(String _pais)
         {
+            Debug.WriteLine("CIUDADES");
             String[] listaciudades = new String[5000];
             try
             {
