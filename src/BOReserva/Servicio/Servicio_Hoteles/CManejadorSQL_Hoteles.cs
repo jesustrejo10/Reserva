@@ -164,7 +164,8 @@ namespace BOReserva.Servicio.Servicio_Hoteles
 
                         CHotel hotel = new CHotel(Int32.Parse(reader["hot_id"].ToString()), reader["hot_nombre"].ToString(), reader["hot_url_pagina"].ToString(), reader["hot_email"].ToString(),
                             Int32.Parse(reader["hot_cantidad_habitaciones"].ToString()), reader["hot_direccion"].ToString(), MBuscarnombreciudad(Int32.Parse(reader["hot_fk_ciudad"].ToString())), 
-                            MBuscarnombrePais(Int32.Parse(reader["hot_fk_ciudad"].ToString())), Int32.Parse(reader["hot_estrellas"].ToString()),float.Parse(reader["hot_puntuacion"].ToString()));
+                            MBuscarnombrePais(Int32.Parse(reader["hot_fk_ciudad"].ToString())), Int32.Parse(reader["hot_estrellas"].ToString()),float.Parse(reader["hot_puntuacion"].ToString()),
+                            Int32.Parse(reader["hot_disponibilidad"].ToString()));
                         listahoteles.Add(hotel);
                     }
                 }

@@ -5,7 +5,7 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Lista de Hoteles</h3>
+                <h3 class="box-title"><b>Lista de Hoteles</b></h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -16,10 +16,11 @@
                             <th>Dirección</th>
                             <th>País</th>
                             <th>Ciudad</th>
-                            <th>Clasificación</th>
+                            <th>Estrellas</th>
                             <th>Página web</th>
-                            <th>Correo electrónico</th>
-                            @*<th>Opciones</th>*@
+                            <th>Email</th>
+                            <th>Disponibilidad</th>
+                            <th>Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -27,21 +28,21 @@
                         {
                             foreach (var item in Model)
                             {
-                                
+                                String disponibilidad;
+                                if (item._disponibilidad == 1) { disponibilidad = "Disponible"; } else { disponibilidad = "No disponible"; }
 
                                 <tr id="@item._id">
                                     <td>@item._nombre</td>
                                     <td>@item._direccion</td>
                                     <td>@item._pais</td>
-                                    @*<td>@item._capacidadEjecutiva</td>
-                                        <td>@item._capacidadVIP</td>*@
                                     <td>@item._ciudad</td>
                                     <td>@item._estrellas</td>
                                     <td>@item._paginaweb</td>
-                                    <td>@item.__email</td>
+                                    <td>@item._email</td>
+                                    <td>@disponibilidad</td>
                                     <td>
                                         <a href="#"> <i class="fa fa-eye clasedeprueba"></i></a>
-                                        <a href="#"><i class="fa fa-gear modificar"></i></a>
+                                        <a href="#"><i class="fa fa-pencil modificar"></i></a>
                                         <a href="#"><i class="fa fa-times"></i></a> 
                                     </td>
                                 </tr>
