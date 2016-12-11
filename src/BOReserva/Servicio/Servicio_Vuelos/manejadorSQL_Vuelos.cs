@@ -284,7 +284,7 @@ namespace BOReserva.Servicio.Servicio_Vuelos
          }
 
             public string fechaVuelo(string fechaDes, string horaDes, string Origen, string Destino, string matriAvion)
-         {
+            {
              try
              {
                  string fechaA = "";
@@ -312,7 +312,7 @@ namespace BOReserva.Servicio.Servicio_Vuelos
 
                  while (dr.Read())
                  {
-                     fechaA = dr.GetSqlString(0).ToString();
+                     fechaA = dr.GetSqlDateTime(0).ToString();
                  }
                  //cierro el lector
                  dr.Close();
