@@ -16,7 +16,7 @@ namespace BOReserva.Controllers
         {
             List<String> lista = new List<string>();
             
-            manejadorSQL sql = new manejadorSQL();                       
+            CBasededatos_ruta_comercial sql = new CBasededatos_ruta_comercial();                       
 
             lista = sql.listarLugares();
 
@@ -76,7 +76,7 @@ namespace BOReserva.Controllers
         public JsonResult guardarRuta(CAgregarRuta model)
         {
             
-            manejadorSQL sql = new manejadorSQL();
+            CBasededatos_ruta_comercial sql = new CBasededatos_ruta_comercial();
             //realizo el insert
             bool resultado = sql.InsertarRuta(model);
 
