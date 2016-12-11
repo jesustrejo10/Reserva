@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -58,10 +61,6 @@
     <ProjectReference Include="..\BOReserva\BOReserva.csproj">
       <Project>{8e0911c6-d911-4ca1-ae4f-6c5cbf498d24}</Project>
       <Name>BOReserva</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TestUnitReserva\TestUnitReserva.csproj">
-      <Project>{00ad6c7b-ea19-46fe-99ed-935349739971}</Project>
-      <Name>TestUnitReserva</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

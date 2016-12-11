@@ -59,6 +59,10 @@
       <Project>{d0dadc5f-8e3e-49b9-a0c6-8137dc0db215}</Project>
       <Name>FOReserva</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UnitTestProject1\NoTocar.csproj">
+      <Project>{5e7367eb-0061-4b11-9cb1-589c0af34122}</Project>
+      <Name>NoTocar</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
