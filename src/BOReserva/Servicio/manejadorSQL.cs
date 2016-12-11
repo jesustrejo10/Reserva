@@ -71,7 +71,11 @@ namespace BOReserva.Servicio
             }
 
         }
-        //Procedimiento del Modulo 2 para retornar una lista con los aviones en la bd
+        
+        /// <summary>
+        /// Procedimiento del Modulo 2 para retornar una lista con los aviones en la base de datos
+        /// </summary>
+        /// <returns> List<CAvion> la lista de aviones en la base de datos</returns>
         public List<CAvion> listarAvionesEnBD()
         {
             List<CAvion> aviones = new List<CAvion>();
@@ -111,7 +115,11 @@ namespace BOReserva.Servicio
             }
         }
 
-        //Procedimiento del Modulo 2 para retornar un objeto del tipo CAvion buscado por su respectiva id
+        /// <summary>
+        /// Procedimiento del Modulo 2 para retornar un objeto del tipo CAvion buscado por su respectiva id
+        /// </summary>
+        /// <param name="id"> int </param>
+        /// <returns> CAvion el avion buscado</returns>
         public CAvion consultarAvion(int id)
         {
             CAvion avionRetorno = new CAvion();
@@ -153,7 +161,11 @@ namespace BOReserva.Servicio
         }
 
 
-        //Procedimiento del Modulo 2 para modificar un avion
+       /// <summary>
+        /// Procedimiento del Modulo 2 para modificar un avion
+       /// </summary>
+        /// <param name="model"> CModificarAvion </param>
+        /// <returns> Boolean true si se modifico bien, false si no </returns>
         public Boolean modificarAvion(CModificarAvion model)
         {
             try
@@ -179,7 +191,11 @@ namespace BOReserva.Servicio
             }
         }
 
-        //Procedimiento del Modulo 2 para deshabilitar un avion
+        /// <summary>
+        /// Procedimiento del Modulo 2 para deshabilitar un avion
+        /// </summary>
+        /// <param name="id"> int </param>
+        /// <returns>Boolean true si se deshabilito bien, false si dio un error </returns>
         public Boolean deshabilitarAvion(int id)
         {
             try
@@ -205,7 +221,11 @@ namespace BOReserva.Servicio
             }
         }
 
-        //Procedimiento del Modulo 2 para habilitar un avion
+        /// <summary>
+        /// Procedimiento del Modulo 2 para habilitar un avion
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>Boolean true si se habilito bien, false si dio un error </returns>
         public Boolean habilitarAvion(int id)
         {
             try

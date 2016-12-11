@@ -10,11 +10,17 @@ using System.Data.SqlClient;
 
 namespace BOReserva.Controllers
 {
+    /// <summary>
+    /// Clase que emite las respuestas de los eventos AJAX
+    /// </summary>
     public class gestion_avionesController : Controller
     {
-        //
-        // GET: /gestion_aviones/
-
+       
+       
+        /// <summary>
+        /// Metodo para guardar el avion, haciendo el insert en la base de datos 
+        /// </summary>
+        /// <returns>Retorna un ActionResult que contiene los elementos de la vista </returns>
         public ActionResult M02_AgregarAvion()
         {
             CAgregarAvion model = new CAgregarAvion();
@@ -22,7 +28,7 @@ namespace BOReserva.Controllers
         }
 
         /// <summary>
-        /// Metodo para guardar el avion, haciendo el insert en la base de datos si los datos son correctos
+        /// Metodo para modificar el avion, haciendo el insert en la base de datos si los datos son correctos
         /// </summary>
         /// <param name="model">CAgregarAvion</param>
         /// <returns> Json </returns>
@@ -75,16 +81,11 @@ namespace BOReserva.Controllers
 
 
 
-
-        /*Metodo para consultar la matricula de un avion para sus estadisticas*/
-        [HttpPost]
-        public JsonResult consultarEstadisticasAvion(CGestion_avion model)
-        {
-            String prueba = model._matriculaConsultarEstadisticaAvion;
-            return (Json(true, JsonRequestBehavior.AllowGet));
-
-        }
-
+    
+        /// <summary>
+        /// Metodo para ver los aviones disponibles
+        /// </summary>
+        /// <returns>ActionResult que contiene una lista de los aviones en el sistema </returns>
         public ActionResult M02_VisualizarAviones()
         {
             manejadorSQL sql = new manejadorSQL();
@@ -104,7 +105,11 @@ namespace BOReserva.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Metodo que carga la vista para modificar el avion 
+        /// </summary>
+        /// <param name="id"> int </param>
+        /// <returns> ActionResult con los datos de un avion </returns>
         public ActionResult M02_ConsultarAvion(int id)
         {
             manejadorSQL sql = new manejadorSQL();
@@ -114,6 +119,11 @@ namespace BOReserva.Controllers
             return PartialView("M02_ModificarAvion", modelo);
         }
 
+        /// <summary>
+        /// Metodo para que el avion este disponible para su uso
+        /// </summary>
+        /// <param name="id"> int </param>
+        /// <returns> JsonResult booleano conteniendo la respuesta del sistema </returns>
         [HttpPost]
         public JsonResult habilitarAvion(int id)
         {
@@ -133,6 +143,12 @@ namespace BOReserva.Controllers
                 return Json(error);
             }
         }
+       
+        /// <summary>
+        /// Metodo para que el avion NO este disponible para su uso
+        /// </summary>
+        /// <param name="id"> int </param>
+        /// <returns> JsonResult booleano conteniendo la respuesta del sistema</returns>
         [HttpPost]
         public JsonResult deshabilitarAvion(int id)
         {
@@ -153,6 +169,11 @@ namespace BOReserva.Controllers
             }
         }
 
+        /// <summary>
+        /// Metodo que guarda los cambios realizados a un avion
+        /// </summary>
+        /// <param name="model"> CModificarAvion </param>
+        /// <returns> JsonResult booleano que informa si se ejecuta el cambio </returns>
         [HttpPost]
         public JsonResult modificarAvion(CModificarAvion model)
         {
