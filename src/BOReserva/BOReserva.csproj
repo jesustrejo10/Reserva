@@ -200,11 +200,14 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\gestion_automovilesController.cs" />
-    <Compile Include="Controllers\gestion_avionesController.cs" />
+    <Compile Include="Controllers\gestion_avionesController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controllers\gestion_boletosController.cs" />
     <Compile Include="Controllers\gestion_check_inController.cs" />
     <Compile Include="Controllers\gestion_hotelesController.cs" />
     <Compile Include="Controllers\gestion_comida_vueloController.cs" />
+    <Compile Include="Controllers\gestion_ofertasController.cs" />
     <Compile Include="Controllers\gestion_restaurantesController.cs" />
     <Compile Include="Controllers\gestion_rolesController.cs" />
     <Compile Include="Controllers\gestion_ruta_comercialController.cs" />
@@ -238,6 +241,14 @@
     <Compile Include="Models\gestion_boletos\CVuelo.cs" />
     <Compile Include="Models\gestion_hoteles\CGestionHoteles_CrearHotel.cs" />
     <Compile Include="Models\gestion_lugares\CLugarModelo.cs" />
+    <Compile Include="Models\gestion_ofertas\CAgregarOferta.cs" />
+    <Compile Include="Models\gestion_ofertas\CAgregarPaquete.cs" />
+    <Compile Include="Models\gestion_ofertas\COferta.cs" />
+    <Compile Include="Models\gestion_ofertas\CPaquete.cs" />
+    <Compile Include="Models\gestion_roles\CListaGenerica.cs" />
+    <Compile Include="Models\gestion_roles\CModulo_detallado.cs" />
+    <Compile Include="Models\gestion_roles\CModulo_general.cs" />
+    <Compile Include="Models\gestion_roles\CRoles.cs" />
     <Compile Include="Models\gestion_ruta_comercial\CAgregarRuta.cs" />
     <Compile Include="Models\gestion_ruta_comercial\CGestion_ruta.cs" />
     <Compile Include="Models\gestion_ruta_comercial\CRuta.cs" />
@@ -248,7 +259,6 @@
     <Compile Include="Models\gestion_usuarios\ExceptionBD.cs" />
     <Compile Include="Models\gestion_usuarios\ExceptionM12Reserva.cs" />
     <Compile Include="Models\gestion_usuarios\ListarUsuario.cs" />
-    <Compile Include="Models\gestion_usuarios\ModificarUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\Parametro.cs" />
     <Compile Include="Models\gestion_usuarios\PersistenciaUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\RecursoBD.Designer.cs">
@@ -462,6 +472,7 @@
     <Content Include="Scripts\Scripts_CheckIn\M05_VerBoletosCheckIn.js" />
     <Content Include="Scripts\Scripts_CheckIn\M05_VerDetalleBoleto.js" />
     <Content Include="Scripts\Scripts_Hoteles\llamadas_generales_hoteles.js" />
+    <Content Include="Scripts\Scripts_Ofertas\llamadas_generales.js" />
     <Content Include="Scripts\Scripts_Restaurantes\llamadas_generales.js" />
     <Content Include="Scripts\select2\css\select2.min.css" />
     <Content Include="Scripts\select2\js\i18n\en.js" />
@@ -557,6 +568,7 @@
     <Content Include="Views\gestion_ofertas\placeholder.html" />
     <Content Include="Views\gestion_restaurantes\M10_GestionRestaurantes.html" />
     <Content Include="Views\gestion_restaurantes\placeholder.html" />
+    <Content Include="Views\gestion_roles\M13_Roles.html" />
     <Content Include="Views\gestion_roles\placeholder.html" />
     <Content Include="Views\gestion_ruta_comercial\placeholder.html" />
     <Content Include="Views\gestion_seguridad_ingreso\placeholder.html" />
@@ -1434,10 +1446,19 @@
     <Content Include="Views\gestion_ruta_comercial\ModificarRutasComerciales.cshtml" />
     <Content Include="Views\gestion_ruta_comercial\AgregarRutasComerciales.cshtml" />
     <Content Include="Views\gestion_ruta_comercial\DetallesRutasComerciales.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_AgregarOferta.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_AgregarPaquete.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_VisualizarOferta.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_ConsultarPaquete.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_GestionOfertas.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_ModificarOferta.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_ModificarPaquete.cshtml" />
     <Content Include="Views\gestion_roles\M13_AgregarRol.cshtml" />
+    <Content Include="Views\gestion_roles\M13_VisualizarRol.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\Scripts_ComidaVuelo\" />
     <Folder Include="Views\gestion_roles\css\" />
     <Folder Include="Views\gestion_roles\js\" />
   </ItemGroup>
@@ -1539,7 +1560,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:10778/</IISUrl>
+          <IISUrl>http://localhost:50429/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
