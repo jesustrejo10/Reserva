@@ -103,7 +103,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
 
             //Verifico que si le paso 2 vacios funcione
             response = daoAutomovil.MBuscarnombrePaisBD(0);
-            Assert.AreEqual(response, "No aplica");
+            Assert.AreEqual(response, "Error al buscar");
         }
     }
 }
