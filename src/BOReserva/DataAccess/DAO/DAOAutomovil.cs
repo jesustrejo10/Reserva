@@ -167,17 +167,17 @@ namespace BOReserva.Models.gestion_automoviles
             }
 
 
-
+        //con prueba
         public int MBuscaridciudadBD (String ciudad, String pais)
         {
-            int id_ciudad = 12;
+            int id_ciudad = 0;
             try
             {
                 con = new SqlConnection(connetionString);
                 con.Open();
                 //String sql = "SELECT C.id_lugar FROM LUGAR P, LUGAR E, LUGAR C WHERE P.id_lugar = E.FK_lugar_id AND E.id_lugar = C.FK_lugar_id AND " +
                 //             "P.nombre_lugar = '"+pais+"' AND E.nombre_lugar = '"+estado+"' AND C.nombre_lugar = '"+ciudad+"'";
-                String sql = "SELECT d.lug_id FROM LUGAR C, LUGAR D WHERE C.lug_id = d.lug_FK_lugar_id AND C.lug_nombre = '"+pais+"' and D.lug_nombre = '"+ciudad+"'"; /*ESTE SQL ES EN CASO DE QUE NO SE MANEJE AL FINAL ESTADOS SINO SOLO PAISES Y CIUDADES*/
+                String sql = "SELECT d.lug_id FROM LUGAR C, LUGAR D WHERE C.lug_id = d.lug_FK_lugar_id AND C.lug_nombre = '" + pais + "' and D.lug_nombre = '" + ciudad + "'"; /*ESTE SQL ES EN CASO DE QUE NO SE MANEJE AL FINAL ESTADOS SINO SOLO PAISES Y CIUDADES*/
                 SqlCommand cmd = new SqlCommand(sql, con);
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -186,13 +186,24 @@ namespace BOReserva.Models.gestion_automoviles
                         //SE OBTIENE LA CIUDAD Y SE PASA
                         //Y  COLOCA QUE FK_CIUDAD ES IGUAL A LO QUE DEVUELVE EL SQL
                         id_ciudad = Int32.Parse(reader[0].ToString()); //EL 0 REPRESENTA LA PRIMERA Y UNICA COLUMNA QUE DEVULVE EL SqlDataReader
-                    }   
+                    }
                 }
                 cmd.Dispose();
                 con.Close();
                 return id_ciudad;
             }
             catch (SqlException ex)
+            {
+                con.Close();
+                return id_ciudad;
+            }
+            catch (NullReferenceException ex)
+            {
+                con.Close();
+                //Error recibiendo los parametros
+                return id_ciudad;
+            }
+            catch (Exception e) 
             {
                 con.Close();
                 return id_ciudad;
@@ -218,6 +229,7 @@ namespace BOReserva.Models.gestion_automoviles
                 return 0;
             }
         }
+
 
         public String MBuscarnombreciudadBD(int id)
         {
@@ -248,6 +260,7 @@ namespace BOReserva.Models.gestion_automoviles
             }
         }
 
+
         public String MBuscarnombrePaisBD(int ciudad) 
         {
             String _lugar = "No aplica";
@@ -255,8 +268,8 @@ namespace BOReserva.Models.gestion_automoviles
             {
                 con = new SqlConnection(connetionString);
                 con.Open();
-                String sql = "SELECT E.lug_nombre FROM LUGAR E, LUGAR C WHERE E.lug_id = C.lug_fk_lugar_id " +
-                             "AND C.lug_id = " + ciudad ;
+                String sql = "SELECT P.lug_nombre FROM LUGAR P, LUGAR C WHERE P.lug_id = C.lug_fk_lugar_id " +
+                             "AND C.lug_id = " + ciudad;
                 SqlCommand cmd = new SqlCommand(sql, con);
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -272,6 +285,16 @@ namespace BOReserva.Models.gestion_automoviles
                 return _lugar;
             }
             catch (SqlException ex)
+            {
+                con.Close();
+                return _lugar;
+            }
+            catch (NullReferenceException ex)
+            {
+                con.Close();
+                return _lugar;
+            }
+            catch (Exception e)
             {
                 con.Close();
                 return _lugar;
@@ -312,6 +335,7 @@ namespace BOReserva.Models.gestion_automoviles
             }
         }
 
+        //Con prueba
         public int MIdpaisesBD(String pais)
         {
             int fk = -1;
@@ -319,7 +343,7 @@ namespace BOReserva.Models.gestion_automoviles
             {
                 con = new SqlConnection(connetionString);
                 con.Open();
-                String sql = "SELECT lug_id FROM Lugar WHERE lug_nombre = '"+pais+"'";
+                String sql = "SELECT lug_id FROM Lugar WHERE lug_nombre = '" + pais + "'";
                 SqlCommand cmd = new SqlCommand(sql, con);
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -333,6 +357,11 @@ namespace BOReserva.Models.gestion_automoviles
                 return fk;
             }
             catch (SqlException ex)
+            {
+                con.Close();
+                return fk;
+            }
+            catch (Exception e) 
             {
                 con.Close();
                 return fk;
