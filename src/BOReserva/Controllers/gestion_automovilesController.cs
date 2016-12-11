@@ -293,7 +293,7 @@ namespace BOReserva.Controllers
             _pais = pais;
             DAOAutomovil listaciudades = new DAOAutomovil();
             int fk = listaciudades.MIdpaisesBD(pais);
-            objcity = listaciudades.MListarciudadesBD(pais, fk);
+            objcity = listaciudades.MListarciudadesBD(fk);
             return Json(objcity);
         }
 
