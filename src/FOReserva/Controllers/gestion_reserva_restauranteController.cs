@@ -124,7 +124,7 @@ namespace FOReserva.Controllers
         }
 
         [System.Web.Services.WebMethod] 
-        public string eliminar_reserva(int id)
+        public void eliminar_reserva(int id)
         {
             try
             {
@@ -146,7 +146,6 @@ namespace FOReserva.Controllers
             {
                 // Error desconocido del sistema
             }
-            return "hola";
         }
     }
 }

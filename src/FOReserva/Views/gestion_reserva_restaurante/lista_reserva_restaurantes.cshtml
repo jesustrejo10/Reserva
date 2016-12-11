@@ -86,9 +86,8 @@
             type: 'POST',
             data: { id: id_fila },
            
-        }).done(function (respuesta) {
+        }).done(function () {
             $('#' + id_fila).remove();
-            $('#ModalEliminar').modal('hide');
         })
 	    .fail(function () {
 	        console.log("error");
