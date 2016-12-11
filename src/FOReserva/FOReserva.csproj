@@ -276,6 +276,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ReservaDB.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Servicio\InvalidManejadorSQLException.cs" />
     <Compile Include="Servicio\manejadorSQL.cs" />
     <Compile Include="Servicio\ManejadorSQLRevision.cs" />
     <Compile Include="Servicio\ManejadorSQLDiarios.cs" />
@@ -839,6 +840,8 @@
     <Content Include="Content\assets\plugins\datatables\js\dataTables.tableTools.min.js" />
     <Content Include="Content\assets\plugins\datatables\js\jquery.dataTables.js" />
     <Content Include="Content\assets\plugins\datatables\js\jquery.dataTables.min.js" />
+    <Content Include="Content\assets\plugins\datatable\css\jquery.dataTables.min.css" />
+    <Content Include="Content\assets\plugins\datatable\js\jquery.dataTables.min.js" />
     <Content Include="Content\assets\plugins\editor.markdown\css\bootstrap-markdown.min.css" />
     <Content Include="Content\assets\plugins\editor.markdown\js\bootstrap-markdown.js" />
     <Content Include="Content\assets\plugins\editor.markdown\js\bootstrap-markdown.min.js" />
