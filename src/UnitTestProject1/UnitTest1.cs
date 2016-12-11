@@ -38,13 +38,7 @@ namespace UnitTestProject1
             Assert.AreEqual(1, prueba1);
         }
 
-        [TestMethod]
-        public void MBorrarvehiculoBD()
-        {
-            int prueba2 = daoAutomovil.MBorrarvehiculoBD(placa1);
-            Assert.AreEqual(1, prueba2);
-        }
-
+    
         [TestMethod]
         public void M08_BuscarFkCiudad()
         {
@@ -104,9 +98,41 @@ namespace UnitTestProject1
             //prueba no vacia
             Assert.IsNotNull(prueba);
           //
-         
-           
+            int contar = 0;
+            bool verdad= true;
+            
+           while (verdad==true)
+            {
+                try
+                {
+                    string prueb1 = prueba[contar].ToUpper();
+                    ++contar;
+                }
+                catch 
+                {
+                    verdad = false;    
+                }
+              
+
+           }
+           Assert.AreEqual(16, contar);
 
         }
+
+        [TestMethod]
+        public void MDisponibilidadVehiculoBD()
+        {
+            int prueba3 = daoAutomovil.MDisponibilidadVehiculoBD(placa1, 0);
+            Assert.AreEqual(1, prueba3);
+
+        }
+
+        [TestMethod]
+        public void MBorrarvehiculoBD()
+        {
+            int prueba2 = daoAutomovil.MBorrarvehiculoBD(placa1);
+            Assert.AreEqual(1, prueba2);
+        }
+
     }
 }
