@@ -229,6 +229,7 @@
     <Compile Include="Models\gestion_hoteles\CGestionHoteles_SelectCiudadModel.cs" />
     <Compile Include="Models\gestion_hoteles\CGestionHoteles_SelectEstrellasModel.cs" />
     <Compile Include="Models\gestion_hoteles\CGestionHoteles_SelectPaisModel.cs" />
+    <Compile Include="Models\gestion_hoteles\CHotel.cs" />
     <Compile Include="Models\gestion_usuarios\AgregarUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\ConexionBD.cs" />
     <Compile Include="Models\gestion_usuarios\CUsuario.cs" />
@@ -1411,6 +1412,7 @@
     <Content Include="Views\gestion_usuarios\M12_AgregarUsuario.cshtml" />
     <Content Include="Views\gestion_usuarios\M12_ModificarUsuario.cshtml" />
     <Content Include="Views\gestion_usuarios\_Layout.cshtml" />
+    <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Visualizar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
