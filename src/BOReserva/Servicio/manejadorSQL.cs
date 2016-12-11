@@ -540,7 +540,7 @@ namespace BOReserva.Servicio
                         _id = (int)lector.GetSqlInt32(0),
                         _nombre = lector.GetSqlString(1).ToString(),
                         _tipoLugar = lector.GetSqlString(2).ToString(),
-                        _zonaHoraria = lector.GetSqlString(3).ToString(),
+                        _zonaHoraria = (int)lector.GetSqlInt32(3),
                         _idFKLugar = lector.IsDBNull(4) ? -1 : (int)lector.GetSqlInt32(4), //Pregunta si el campo es null, dando valor por defecto en caso que lo sea
                         _abreviatura = lector.GetSqlString(5).ToString()
 
@@ -557,15 +557,15 @@ namespace BOReserva.Servicio
             {
                 conexion.Close();
                 Debug.WriteLine("Exception caught: {0}", e);
-                //throw e;
-                return null;
+                throw e;
+                //return null;
             }
             catch (Exception e)
             {
                 conexion.Close();
                 Debug.WriteLine("Exception caught: {0}", e);
-                //throw e;
-                return null;
+                throw e;
+                //return null;
             }
         }
 
@@ -593,7 +593,7 @@ namespace BOReserva.Servicio
                         _id = (int)lector.GetSqlInt32(0),
                         _nombre = lector.GetSqlString(1).ToString(),
                         _tipoLugar = lector.GetSqlString(2).ToString(),
-                        _zonaHoraria = lector.GetSqlString(3).ToString(),
+                        _zonaHoraria = (int)lector.GetSqlInt32(3),
                         _idFKLugar = lector.IsDBNull(4) ? -1 : (int)lector.GetSqlInt32(4), //Pregunta si el campo es null, dando valor por defecto en caso que lo sea
                         _abreviatura = lector.GetSqlString(5).ToString()
 

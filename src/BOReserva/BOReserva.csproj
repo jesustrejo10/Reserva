@@ -1444,8 +1444,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+<<<<<<< HEAD
+    <Folder Include="Scripts\Scripts_ComidaVuelo\" />
+=======
     <Folder Include="Views\gestion_roles\css\" />
     <Folder Include="Views\gestion_roles\js\" />
+>>>>>>> Develop
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap\css\bootstrap.css.map" />
