@@ -96,5 +96,16 @@ namespace UnitTestProject1
             response = daoAutomovil.MBuscarnombrePaisBD(0);
             Assert.AreEqual(response, "Error al buscar");
         }
+
+        [TestMethod]
+        public void MListarpaisesBD()
+        {
+            String[] prueba = daoAutomovil.MListarpaisesBD();
+            //prueba no vacia
+            Assert.IsNotNull(prueba);
+          //
+            int contar=0;
+
+        }
     }
 }

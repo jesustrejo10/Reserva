@@ -343,6 +343,7 @@ namespace BOReserva.Models.gestion_automoviles
                 }
                 cmd.Dispose();
                 con.Close();
+               
                 return listapaises;
             }
             catch (SqlException ex)
