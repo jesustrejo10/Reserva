@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
+﻿
 namespace FOReserva.Models.Restaurantes
 {
     /*Clase Modelo de la Reservacion de un restaurante
       Atributos:
        _count: Cantidad de personas de la reservacion
-       _user: Usuario con el que se realiza la reserva
+       _idUser: id del usuario con el que se realiza la reserva
+       _restaurant: Restaurante al que se realiza la reserva
          */
     public class CReservation_Restaurant : ReservationModels
     {
@@ -29,6 +25,7 @@ namespace FOReserva.Models.Restaurantes
             this._idRestaurant = idRestaurant;
         }
 
+        /*Constructor Vacio*/
         public CReservation_Restaurant() : base() { }
         
         /*Metodos Get y Set de la cantidad de personas de la reserva*/
@@ -38,6 +35,7 @@ namespace FOReserva.Models.Restaurantes
             set { _count = value; }
         }
 
+        /*Id del usuario que se encuentra logeado*/
         public int IdUser
         {
             get { return _idUser; }
@@ -50,6 +48,9 @@ namespace FOReserva.Models.Restaurantes
             set { _idRestaurant = value; }
         }
 
+        /*
+         * Restaurante de la reserva
+         */
         public CRestaurantModel Restaurant
         {
             get { return _restaurant; }
