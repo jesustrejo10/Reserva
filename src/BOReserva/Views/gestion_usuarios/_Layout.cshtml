@@ -1,37 +1,38 @@
 ﻿<!DOCTYPE html>
 <html lang="es">
-    <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <meta charset="utf-8" />
-       <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")
-        
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>RESERVA | BackOffice</title>
-        <!-- Tell the browser to be responsive to screen width -->
-        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <!-- Bootstrap 3.3.6 -->
-        <link href="~/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-        <!-- Ionicons -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-        <!-- jvectormap -->
-        <link rel="stylesheet" href="~/Content/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
-        <!-- Theme style -->
-        <link rel="stylesheet" href="~/Content/dist/css/AdminLTE.min.css">
-        <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-        <link rel="stylesheet" href="~/Content/dist/css/skins/_all-skins.min.css">
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>RESERVA | BackOffice</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.6 -->
+    <link href="~/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- jvectormap -->
+    <link rel="stylesheet" href="~/Content/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Content/dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+    folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="~/Content/dist/css/skins/_all-skins.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    </head>
+</head>
 
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -252,7 +253,68 @@
                 <!-- search form -->
                 <!-- /.search form -->
                 <!-- sidebar menu: : style can be found in sidebar.less -->
+
                 <ul class="sidebar-menu">
+                    <!-- MODULO DE AVIONES -->
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-plane"></i> <span>Gestión de Aviones</span> <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="m02_agregaravion"><a href="#"> Agregar </a></li>
+                            <li id="m02_VisualizarAvion"><a href="#"> Visualizar </a></li>
+                            @*<li id="m02_consultaravion"><a href="#"> Consultar </a></li>
+                                <li id="m02_modificaravion"><a href="#"> Modificar </a></li>*@
+                        </ul>
+                    </li>
+                    <!-- FIN MODULO DE AVIONES -->
+                    <!-- MODULO DE RUTAS COMERCIALES -->
+                    <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Rutas</a></li>
+                    <!-- FIN MODULO DE RUTAS COMERCIALES -->
+                    <!-- MODULO DE VUELOS -->
+                    <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Vuelos</a></li>
+                    <!-- FIN MODULO DE VUELOS -->
+                    <!-- MODULO DE BOLETOS AEREOS Y CHECK-IN -->
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-files-o"></i>
+                            <span>Gestión de Boletos</span>
+                            <span class="pull-right-container">
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="m05_crearboleto"><a href="#"><i class="fa fa-plus-square-o"></i> Crear </a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="modules/gestion_venta_boleto/checkin.html">
+                            <i class="fa fa-book"></i>
+                            <span>Check in</span>
+                        </a>
+                    </li>
+                    <!-- FIN MODULO DE BOLETOS AEREOS Y CHECK-IN -->
+                    <!-- MODULO DE COMIDA POR VUELO -->
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-cutlery"></i> <span>Gestión de Comida</span> <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="gestionComida"><a href="modules/gestion_comida_vuelo/M06_AgregarComida.cshtml"><i class="fa fa-plus-square-o"></i>Agregar Nuevo</a></li>
+                            <li id="editarComida"><a href="modules/gestion_comida_vuelo/M06_EditarComida.cshtml"><i class="fa fa-edit"></i>Editar</a></li>
+                            <li id="gestionComidaVuelo"><a href="modules/gestion_comida_vuelo/M06_AgregarPorVuelo.cshtml"><i class="fa fa-plus-square-o"></i>Agregar por Vuelo</a></li>
+                            <li><a href="modules/gestion_comida_vuelo/M06_ConsultarComidas.html"><i class="fa fa-eye"></i>Visualizar</a></li>
+                        </ul>
+                    </li>
+                    <!-- FIN DE MODULO DE COMIDA POR VUELO -->
+                    <!-- MODULO DE EXTRAVIO DE EQUIPAJE -->
+                    <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Equipaje</a></li>
+                    <!-- FIN DE MODULO DE EXTRAVIO DE EQUIPAJE -->
+                    <!-- MODULO DE AUTOMOVILES -->
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-car"></i> <span>Gestión de Automoviles</span> <span class="pull-right-container">
@@ -261,52 +323,23 @@
                         </a>
                         <ul class="treeview-menu">
                             <li id="m08AgregarAutomovil"><a href="#"><i class="fa fa-plus-square-o"></i>Crear</a></li>
-                            <li><a href="modules/gestion_automoviles/M08_VisualizarAutomoviles.html"><i class="fa fa-eye"></i>Visualizar</a></li>
+                            <li id="m08VisualizarAutomoviles"><a href="#"><i class="fa fa-eye"></i>Visualizar</a></li>
                         </ul>
                     </li>
-                    <li class="treeview">
-                        <a href="/modules/default/default.html">
-                            <i class="fa fa-car"></i> <span>Pagina de referencia</span> <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="modules/default/default.html"><i class="fa fa-plus-square-o"></i>Crear</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="modules/gestion_cruceros/M24_GestionCruceros.html">
-                            <i class="fa fa-ship"></i> <span>Cruceros</span> <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="modules/gestion_cruceros/M24_GestionCruceros.html"><i class="fa fa-plus-square-o"></i>Gestionar</a></li>
-                        </ul>
-                    </li>
-                    <!-- MODULO DE AVIONES -->
-                    <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Aviones</a></li>
-                   
-                    <!-- FIN MODULO DE AVIONES -->
-                    <!-- MODULO DE BOLETOS AEREOS Y CHECK-IN -->
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-files-o"></i>
-                            <span>Vuelos</span>
-                            <span class="pull-right-container">
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="modules/gestion_venta_boleto/crearboletosvuelos.html"><i class="fa fa-circle-o"></i>Crear boleto</a></li>
-                            <li><a href="modules/gestion_venta_boleto/consultarboleto.html"><i class="fa fa-circle-o"></i>Consultar boleto</a></li>
-                            <li><a href="modules/gestion_venta_boleto/modificarboleto.html"><i class="fa fa-circle-o"></i>Modificar boleto</a></li>
-                            <li><a href="modules/gestion_venta_boleto/eliminarboleto.html"><i class="fa fa-circle-o"></i>Eliminar boleto</a></li>
-                        </ul>
-                    </li>
+<<<<<<< HEAD
 
                     <li><a href="modules/gestion_venta_boleto/checkin.html"><i class="fa fa-book"></i> <span>Check in</span></a></li>
                     <!-- FIN MODULO DE BOLETOS AEREOS Y CHECK-IN -->
-                    <!-- MODULO 12 : GESTION DE USUARIOS -->
+                  
+                    
+                      <!-- MODULO 12 : GESTION DE USUARIOS -->
+=======
+                    <!-- FIN DE MODULO DE AUTOMOVILES -->
+                    <!-- MODULO DE OFERTAS Y PAQUETES -->
+                    <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Ofertas y Paquetes</a></li>
+                    <!-- FIN DE MODULO DE OFERTAS Y PAQUETES -->
+                    <!-- MODULO DE GESTION DE USUARIOS -->
+>>>>>>> Develop
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-user"></i> <span>Gestión de Usuarios</span> <span class="pull-right-container">
@@ -314,16 +347,40 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li id="gestionUsuarios"><a href="/gestion_usuarios/M12_index"><i class="fa fa-plus-square-o"></i>Consultar</a></li>
+                            <li id="gestionUsuarios"><a href="/gestion_usuarios/M12_index"><i class="fa fa-plus-square-o"></i>Visualizar</a></li>
                             <li id="agregarUsuarios"><a href="/gestion_usuarios/M12_AgregarUsuario"><i class="fa fa-plus-square-o"></i>Agregar</a></li>
                         </ul>
                     </li>
-
-                    <!-- FIN MODULO 12 -->
-
-
-
-                </ul>
+                    <!-- FIN DE MODULO DE GESTION DE USUARIOS -->
+                    <!-- MODULO DE GESTION DE ROLES -->
+                    <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Roles</a></li>
+                    <!-- FIN DE MODULO DE GESTION DE ROLES -->
+                    <!-- MODULO DE CRUCEROS -->
+                    <li class="treeview">
+                        <a href="modules/gestion_cruceros/M24_GestionCruceros.html">
+                            <i class="fa fa-ship"></i> <span>Gestión de Cruceros</span> <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="modules/gestion_cruceros/M24_GestionCruceros.html"><i class="fa fa-plus-square-o"></i>Gestionar</a></li>
+                        </ul>
+                    </li>
+                    <!-- FIN DE MODULO DE CRUCEROS -->
+                    <!-- MODULO DE HOTELES -->
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-hotel"></i> <span>Gestión de Hoteles</span> <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="crearhotel"><a href="#"><i class="fa fa-plus-circle"></i>Crear Hotel</a></li>
+                            <li id="consultarhotel"><a href="#"><i class="fa fa-search"></i>Consultar Hotel</a></li>
+                            <li id="modificarhotel"><a href="#"><i class="fa fa-pencil"></i>Modificar Hotel</a></li>
+                            <li id="desactivarhotel"><a href="#"><i class="fa fa-remove"></i>Desactivar Hotel</a></li>
+                            <!-- MODULO DE BOLETOS AEREOS Y CHECK-IN -->
+                        </ul>
             </section>
             <!-- /.sidebar -->
         </aside>
@@ -331,25 +388,25 @@
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             @*<section class="content-header">
-                <h1>
-                    Dashboard
-                    <small>Version 2.0</small>
-                </h1>
-                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                    <li class="active">Dashboard</li>
-                </ol>
-            </section>*@
+                    <h1>
+                        Dashboard
+                        <small>Version 2.0</small>
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li class="active">Dashboard</li>
+                    </ol>
+                </section>*@
             <!-- Main content -->
             <section class="content" id="contenido">
-                @RenderBody()   
+                @RenderBody()
             </section>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <div class="pull-right hidden-xs"> <b>Version</b> 2.3.7 </div> <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
-        </footer>
+        @*<footer class="main-footer">
+                <div class="pull-right hidden-xs"> <b>Version</b> 2.3.7 </div> <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
+            </footer>*@
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Create the tabs -->
@@ -497,11 +554,8 @@
                         <div class="form-group">
                             <label class="control-sidebar-subheading"> Delete chat history <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a> </label>
                         </div>
-                       
                         <!-- /.form-group -->
-
                     </form>
-
                 </div>
                 <!-- /.tab-pane -->
             </div>
@@ -535,8 +589,6 @@
             </header>
             <div id="body">
                 @RenderSection("featured", required: false)
-                <section class="content-wrapper main-content clear-fix">
-                    
                 </section>
             </div>
             <footer>
@@ -552,6 +604,10 @@
     @RenderSection("scripts", required: false)
 
     <script src="/Scripts/cargadorMenu.js"></script>
+
+    <!--SCRIPTS PARA GESTION DE AVIONES-->
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Scripts_Aviones/llamadas_generales.js")"></script>
+
     <!-- jQuery 2.2.3 -->
     <script src="/Content/plugins/jQuery/jquery-2.2.3.min.js"></script>
     <!-- Bootstrap 3.3.6 -->
@@ -572,7 +628,7 @@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="/Content/dist/js/pages/dashboard2.js"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="/Content/dist/js/demo.js"></script>}
+    <script src="/Content/dist/js/demo.js"></script>
 
 </body>
 

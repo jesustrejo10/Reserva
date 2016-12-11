@@ -10,17 +10,53 @@
     }
 }
 
-#rest_form .has-error, #reserva_form .has-error{
-   border-color: #f39c12 !important;
+#rest_form .has-error, #reserva_form .has-error {
+    border-color: #f39c12 !important;
 }
 
-#rest_form .has-success, #reserva_form .has-success{
-   border-color:  #18bc9c !important;
+#rest_form .has-success, #reserva_form .has-success {
+    border-color: #18bc9c !important;
 }
 
-#rest_form .has-error p, #reserva_form .has-error p{
-  color: #f39c12 !important;
-  margin-bottom:15px;
+.has-error p {
+    color: #f39c12 !important;
+    margin-bottom: 15px;
 }
+
+.orange {
+    color: #f39c12 !important;
+}
+
+.descrip-wrapper {
+    height: 443.6px;
+    background-image: url('../../../Images/restaurant_generic.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.descrip-conten {
+    color: #fff;
+    text-align: left;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    background-color: rgba(0,0,0,0.5);
+    padding-top: 20px;
+    padding-left: 20px;
+}
+
+    .descrip-conten h2 {
+        text-transform: uppercase;
+    }
+
+.list-icon {
+    font-size: 24px;
+    margin: 0 5px;
+}
+
+    .list-icon:hover {
+        color: #f39c12 !important;
+    }
 
 /*************************** END - ANDREA CAMACHO ******************************************/
