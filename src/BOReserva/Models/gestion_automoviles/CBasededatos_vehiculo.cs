@@ -4,31 +4,27 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics;
 using System.Linq;
 using System.Web;
 
 namespace BOReserva.Models.gestion_automoviles
 {
-    public class DAOAutomovil
+    public class CBasededatos_vehiculo
     {
         //private String connetionString = @"Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User ID=DB_A1380A_reserva_admin;Password = ucabds1617a";
-        private String connetionString ="Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;Persist Security Info=True;User ID=DB_A1380A_reserva_admin;Password=ucabds1617a"; //de esta forma el string de conexion se encuentra es en el web.config 
-        //private static String connetionString = ConfigurationManager.ConnectionStrings["DB_A1380A_reserva"].ConnectionString; //de esta forma el string de conexion se encuentra es en el web.config 
+        private String connetionString = ConfigurationManager.ConnectionStrings["DB_A1380A_reserva"].ConnectionString; //de esta forma el string de conexion se encuentra es en el web.config 
         
         private SqlConnection con = null;
 
-        public int MAgregarVehiculoBD(Automovil vehiculo)
+        public int MAgregarVehiculoBD(CAutomovil vehiculo)
         {
-           // int fk_ciudad = MBuscarfkciudad(vehiculo._ciudad, vehiculo._pais);
-            int fk_ciudad = 12;
+            int fk_ciudad = MBuscarfkciudad(vehiculo._ciudad, vehiculo._pais);
             try
             {
                 con = new SqlConnection(connetionString);
                 con.Open();
-                String sql = "INSERT INTO Automovil VALUES ('" + vehiculo._matricula + "', '" + vehiculo._modelo + "', '" + vehiculo._fabricante + "', " + vehiculo._anio + ", " + vehiculo._kilometraje + ", " + vehiculo._cantpasajeros + ", '" + vehiculo._tipovehiculo +
-                    "', " + vehiculo._preciocompra + ", " + vehiculo._precioalquiler + ", " + vehiculo._penalidaddiaria + ", '" + vehiculo._fecharegistro + "', '" + vehiculo._color + "', " + 1 + ", '" + vehiculo._transmision + "', " + fk_ciudad + ")";
-                Debug.WriteLine(sql);
+                String sql = "INSERT INTO Automovil VALUES ('"+vehiculo._matricula+"', '"+vehiculo._modelo+"', '"+vehiculo._fabricante+"', "+vehiculo._anio+", "+vehiculo._kilometraje+", "+vehiculo._cantpasajeros+", '"+vehiculo._tipovehiculo+
+                    "', " + vehiculo._preciocompra + ", " + vehiculo._precioalquiler + ", " + vehiculo._penalidaddiaria + ", '" + vehiculo._fecharegistro + "', '" + vehiculo._color + "', "+ 1 +", '"+vehiculo._transmision+"', "+ fk_ciudad+")";
                 SqlCommand cmd = new SqlCommand(sql, con);
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
@@ -37,14 +33,13 @@ namespace BOReserva.Models.gestion_automoviles
             }
             catch (SqlException ex)
             {
-                Debug.WriteLine("ENTRO EN EL CATCH");
-                Debug.WriteLine(ex.ToString());
                 con.Close();
                 return 0;
             }
         }
 
-        public int MModificarVehiculoBD(Automovil vehiculo)
+
+        public int MModificarVehiculoBD(CAutomovil vehiculo)
         {
             int fk_ciudad = MBuscarfkciudad(vehiculo._ciudad, vehiculo._pais);
             try
@@ -67,9 +62,10 @@ namespace BOReserva.Models.gestion_automoviles
             }
         }
 
-        public List<Automovil> MListarvehiculosBD()
+
+        public List<CAutomovil> MListarvehiculosBD()
         {
-            List<Automovil> listavehiculos = new List<Automovil>();
+            List<CAutomovil> listavehiculos = new List<CAutomovil>();
             try
             {
                 con = new SqlConnection(connetionString);
@@ -82,7 +78,7 @@ namespace BOReserva.Models.gestion_automoviles
                        //Y  SE AGREGA a listavehiculos
                        var fecha = reader["aut_fecharegistro"];
                        DateTime fecharegistro = Convert.ToDateTime(fecha).Date;
-                       Automovil vehiculo = new Automovil(reader["aut_matricula"].ToString(), reader["aut_modelo"].ToString(), reader["aut_fabricante"].ToString(),
+                       CAutomovil vehiculo = new CAutomovil(reader["aut_matricula"].ToString(), reader["aut_modelo"].ToString(), reader["aut_fabricante"].ToString(),
                                               Int32.Parse(reader["aut_anio"].ToString()), reader["aut_tipovehiculo"].ToString(),
                                               double.Parse(reader["aut_kilometraje"].ToString()), Int32.Parse(reader["aut_cantpasajeros"].ToString()),
                                               double.Parse(reader["aut_preciocompra"].ToString()), double.Parse(reader["aut_precioalquiler"].ToString()),
@@ -104,9 +100,10 @@ namespace BOReserva.Models.gestion_automoviles
             }
         }
 
-        public Automovil MMostrarvehiculoBD(String matricula)
+
+        public CAutomovil MMostrarvehiculoBD(String matricula)
         {
-            Automovil vehiculo = null;
+            CAutomovil vehiculo = null;
             try
             {
                 con = new SqlConnection(connetionString);
@@ -121,7 +118,7 @@ namespace BOReserva.Models.gestion_automoviles
                     {
                         var fecha = reader["aut_fecharegistro"];
                         DateTime fecharegistro = Convert.ToDateTime(fecha).Date;
-                        vehiculo = new Automovil(reader["aut_matricula"].ToString(), reader["aut_modelo"].ToString(), reader["aut_fabricante"].ToString(),
+                        vehiculo = new CAutomovil(reader["aut_matricula"].ToString(), reader["aut_modelo"].ToString(), reader["aut_fabricante"].ToString(),
                                                  Int32.Parse(reader["aut_anio"].ToString()), reader["aut_tipovehiculo"].ToString(),
                                                  double.Parse(reader["aut_kilometraje"].ToString()), Int32.Parse(reader["aut_cantpasajeros"].ToString()),
                                                  double.Parse(reader["aut_preciocompra"].ToString()), double.Parse(reader["aut_precioalquiler"].ToString()),
@@ -141,6 +138,10 @@ namespace BOReserva.Models.gestion_automoviles
                 return null;
             }
             }
+        
+
+
+
 
         public int MBuscarfkciudad (String ciudad, String pais)
         {
@@ -279,14 +280,10 @@ namespace BOReserva.Models.gestion_automoviles
                 con.Close();
                 return null;
             }
-            catch (InvalidOperationException ex)
-            {
-                con.Close();
-                return null;
-            }
         }
 
-        public int MIdpaisesBD(String pais)
+
+        public int MBuscaridpaisBD(String pais)
         {
             int fk = -1;
             try
@@ -313,6 +310,8 @@ namespace BOReserva.Models.gestion_automoviles
             }
         }
 
+       
+
         public int MDisponibilidadVehiculoBD(string matricula, int activardesactivar)
         {
             try
@@ -333,31 +332,35 @@ namespace BOReserva.Models.gestion_automoviles
             }
         }
 
-        public List<string> MListarciudadesBD(string pais)
+
+        public List<String> MListarciudadesBD(String pais)
         {
-            int fk = MIdpaisesBD(pais);
-            List<String> _ciudades = new List<string>();
+            List<String> _ciudad = new List<String>();
+            int id = MBuscaridpaisBD(pais);
             try
             {
                 con = new SqlConnection(connetionString);
                 con.Open();
-                String sql = "SELECT lug_nombre FROM Lugar WHERE lug_fk_lugar_id = " + fk ;
+                String sql = "SELECT C.lug_nombre FROM LUGAR C WHERE C.lug_fk_lugar_id = " + id + ""; ;
                 SqlCommand cmd = new SqlCommand(sql, con);
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        _ciudades.Add(reader[0].ToString());
+                        //SE OBTIENE LA CIUDAD Y SE PASA
+                        //Y  COLOCA QUE FK_CIUDAD ES IGUAL A LO QUE DEVUELVE EL SQL
+                        String ciudad = reader[0].ToString();
+                        _ciudad.Add(ciudad); //EL 0 REPRESENTA LA PRIMERA Y UNICA COLUMNA QUE DEVULVE EL SqlDataReader
                     }
                 }
                 cmd.Dispose();
                 con.Close();
-                return _ciudades;
+                return _ciudad;
             }
             catch (SqlException ex)
             {
                 con.Close();
-                return _ciudades;
+                return _ciudad;
             }
         }
     }

@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{03BEF0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestUnitReserva", "TestUnitReserva\TestUnitReserva.csproj", "{00AD6C7B-EA19-46FE-99ED-935349739971}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{5E7367EB-0061-4B11-9CB1-589C0AF34122}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoTocar", "UnitTestProject1\NoTocar.csproj", "{5E7367EB-0061-4B11-9CB1-589C0AF34122}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
