@@ -9,9 +9,7 @@ namespace BOReserva.Models.gestion_boletos
     {
         public int _id { get; set; }
 
-        public String _origen { get; set; }
-
-        public String _destino { get; set; }
+        public CRuta _ruta { get; set; }
 
         public DateTime _fechaPartida { get; set; }
 
@@ -19,13 +17,15 @@ namespace BOReserva.Models.gestion_boletos
 
         public double _monto { get; set; }
 
-        public CVuelo(int id, string origen, string destino, DateTime fechasal, 
-                     DateTime fechalleg) {
-              _id = id;
-              _origen = origen;
-              _destino = destino;
-              _fechaPartida = fechasal;
-              _fechaLlegada = fechalleg;
+        public CVuelo(int num_id, DateTime fechasal, DateTime fechalleg, int ruta_id, int ori, int dest, String nombre1, String nombre2 )
+        {
+            _id = num_id;
+            _fechaPartida = fechasal;
+            _fechaLlegada = fechalleg;
+            _ruta = new CRuta(ruta_id, ori, dest, nombre1, nombre2);
+        }
+
+        public CVuelo() { 
         }
     }
 }

@@ -76,33 +76,6 @@
     });
 </script>
 
-<script>
-
-    $("#m05_VisualizarBoleto").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_boletos/M05_VisualizarBoleto';
-        var method = 'GET';
-        var data = '';
-
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-
-    });
-
-</script>
-
 <script language="javascript" type="text/javascript">
     $(document).ready(function () {
         //e.preventDefault();
@@ -121,6 +94,27 @@
 
 
         });
+    });
+
+    $(document).ready(function () {
+        //e.preventDefault();
+        $(".modificar").click(function () {
+            var identificador = $(this).parent().parent().parent().attr("id");
+            jQuery.ajax({
+                type: "GET",
+                url: "/gestion_boletos/M05_ModificarBoleto",
+                data: { id: identificador }
+            }).done(function (data) {
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            }).fail(function () {
+                alert("Ocurrió un error")
+            });
+
+
+        });
+
+
     });
 
     $(document).ready(function () {

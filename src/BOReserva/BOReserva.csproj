@@ -232,7 +232,9 @@
     <Compile Include="Models\gestion_boletos\CBoleto.cs" />
     <Compile Include="Models\gestion_boletos\CBuscarVuelo.cs" />
     <Compile Include="Models\gestion_boletos\CLugar.cs" />
+    <Compile Include="Models\gestion_boletos\CModificarBoleto.cs" />
     <Compile Include="Models\gestion_boletos\CPasajero.cs" />
+    <Compile Include="Models\gestion_boletos\CRuta.cs" />
     <Compile Include="Models\gestion_boletos\CVisualizarBoleto.cs" />
     <Compile Include="Models\gestion_boletos\CVuelo.cs" />
     <Compile Include="Models\gestion_hoteles\CGestionHoteles_CrearHotel.cs" />

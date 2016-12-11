@@ -190,6 +190,37 @@ namespace BOReserva.Servicio.Servicio_Boletos
             }
         }
 
+        public CPasajero MBuscarDatosPasajero(int id)
+        {
+            CPasajero pas = null;
+            try
+            {
+                SqlConnection con = new SqlConnection(stringDeConexion);
+                con.Open();
+                String sql = "SELECT * FROM Pasajero WHERE pas_id = '" + id + "'";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var fecha = reader["pas_fecha_nacimiento"];
+                        DateTime fechanac = Convert.ToDateTime(fecha).Date;
+                        pas = new CPasajero (Int32.Parse(reader["pas_id"].ToString()), reader["pas_primer_nombre"].ToString(),
+                                             reader["pas_segundo_nombre"].ToString(), reader["pas_primer_apellido"].ToString(),
+                                             reader["pas_segundo_apellido"].ToString(), reader["pas_sexo"].ToString(),
+                                             fechanac,reader["pas_correo"].ToString());
+                    }
+                }
+                cmd.Dispose();
+                con.Close();
+                return pas;
+            }
+            catch (SqlException ex)
+            {
+                return pas;
+            }
+        }
+
         public int M05AgregarBoletoBD(CBoleto boleto)
         {
                 return 0;         
@@ -217,22 +248,113 @@ namespace BOReserva.Servicio.Servicio_Boletos
                    while (reader.Read())
                    {
                        var fecha = reader["bol_fecha"];
+                       List<CVuelo> lista= M05ListarVuelosBoleto(id);
+                       CPasajero pasajero = MBuscarDatosPasajero(reader.GetInt32(reader.GetOrdinal("bol_fk_pasajero")));
                        DateTime fechaboleto = Convert.ToDateTime(fecha).Date;
+
                        boleto = new CBoleto(Int32.Parse(reader["bol_id"].ToString()), Int32.Parse(reader["bol_ida_vuelta"].ToString()),
                                               Int32.Parse(reader["bol_escala"].ToString()), double.Parse(reader["bol_costo"].ToString()),
                                               MBuscarnombreciudad(Int32.Parse(reader["bol_fk_lugar_origen"].ToString())),
-                                              MBuscarnombreciudad(Int32.Parse(reader["bol_fk_lugar_destino"].ToString())),
-                                              MBuscarnombrepasajero(Int32.Parse(reader["bol_fk_pasajero"].ToString())),
-                                              MBuscarapellidopasajero(Int32.Parse(reader["bol_fk_pasajero"].ToString())), fechaboleto,
-                                              Int32.Parse(reader["bol_fk_pasajero"].ToString()), reader.GetInt32(reader.GetOrdinal("bol_fk_lugar_origen")).ToString(),
+                                              MBuscarnombreciudad(Int32.Parse(reader["bol_fk_lugar_destino"].ToString())), fechaboleto,
+                                              reader.GetInt32(reader.GetOrdinal("bol_fk_lugar_origen")).ToString(),
                                               reader.GetInt32(reader.GetOrdinal("bol_fk_lugar_destino")).ToString(),
-                                              reader["bol_tipo_boleto"].ToString(),
-                                              MBuscarcorreopasajero(Int32.Parse(reader["bol_fk_pasajero"].ToString())));
+                                              reader["bol_tipo_boleto"].ToString());
+                       boleto._vuelos = lista;
+                       boleto._pasajero = pasajero;
                    }
                    cmd.Dispose();
                    con.Close();
                    return boleto;
                }
+           }
+           catch (SqlException ex)
+           {
+               return null;
+           }
+       }
+
+       public CVuelo MBuscarDatosVuelo(int id)
+       {
+           CVuelo vuelo = null;
+           try
+           {
+               SqlConnection con = new SqlConnection(stringDeConexion);
+               con.Open();
+               String sql = "SELECT vue_fecha_despegue, vue_fecha_aterrizaje, vue_fk_ruta FROM Vuelo WHERE vue_id ="+id+"";
+               SqlCommand cmd = new SqlCommand(sql, con);
+               using (SqlDataReader reader = cmd.ExecuteReader())
+               {
+                   while (reader.Read())
+                   {
+
+                       CRuta rut = MBuscarDatosRuta(Int32.Parse(reader["vue_fk_ruta"].ToString()));
+                       vuelo = new CVuelo(id, reader.GetDateTime(reader.GetOrdinal("vue_fecha_despegue")),
+                                          reader.GetDateTime(reader.GetOrdinal("vue_fecha_aterrizaje")), 
+                                          Int32.Parse(reader["vue_fk_ruta"].ToString()),
+                                          rut._origen, rut._destino, rut._nomOrigen,rut._nomDestino);   
+                   }
+               }
+               cmd.Dispose();
+               con.Close();
+               return vuelo;
+           }
+           catch (SqlException ex)
+           {
+               return vuelo;
+           }
+       }
+
+       public CRuta MBuscarDatosRuta(int id)
+       {
+           CRuta ruta = null;
+           try
+           {
+               SqlConnection con = new SqlConnection(stringDeConexion);
+               con.Open();
+               String sql = "SELECT rut_FK_lugar_origen, rut_FK_lugar_destino FROM Ruta WHERE rut_id =" + id + "";
+               SqlCommand cmd = new SqlCommand(sql, con);
+               using (SqlDataReader reader = cmd.ExecuteReader())
+               {
+                   while (reader.Read())
+                   {
+                       ruta = new CRuta(id, Int32.Parse(reader["rut_FK_lugar_origen"].ToString()), Int32.Parse(reader["rut_FK_lugar_destino"].ToString()),
+                            MBuscarnombreciudad(Int32.Parse(reader["rut_FK_lugar_origen"].ToString())),
+                            MBuscarnombreciudad(Int32.Parse(reader["rut_FK_lugar_destino"].ToString())));
+                   }
+               }
+               cmd.Dispose();
+               con.Close();
+               return ruta;
+           }
+           catch (SqlException ex)
+           {
+               return ruta;
+           }
+       }
+
+
+       public List<CVuelo> M05ListarVuelosBoleto(int id_boleto)
+       {
+           List<CVuelo> listavuelos = new List<CVuelo>();
+           try
+           {
+               SqlConnection con = new SqlConnection(stringDeConexion);
+               con.Open();
+               String sql = "SELECT bol_fk_vuelo FROM Boleto_Vuelo WHERE bol_fk_boleto ="+id_boleto+"";
+               SqlCommand cmd = new SqlCommand(sql, con);
+               using (SqlDataReader reader = cmd.ExecuteReader())
+               {
+                   while (reader.Read())
+                   {
+
+                       CVuelo datosVuelo = MBuscarDatosVuelo(Int32.Parse(reader["bol_fk_vuelo"].ToString()));
+                       listavuelos.Add(datosVuelo);
+                   }
+               }
+               cmd.Dispose();
+               con.Close();
+               int  inte = listavuelos.Count;
+               return listavuelos;
            }
            catch (SqlException ex)
            {
