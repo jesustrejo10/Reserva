@@ -15,8 +15,18 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
        
     
     {
-  
-       
+
+        [Test]
+        public void MBorrarvehiculoBD()
+        {
+
+            String placa1 = Util.RandomString(7);
+            Automovil auto = new Automovil(placa1,"3","Mazda",1936,"Sedan",5,5,1,1,1,DateTime.Now,"Azul",1,"Automatica","Venezuela","Caracas");
+            DAOAutomovil Has1 = new DAOAutomovil();
+            Has1.MAgregarVehiculoBD(auto,12);
+            int prueba2 = Has1.MBorrarvehiculoBD(placa1);
+            Assert.AreEqual(0, prueba2);
+        }
 
         [Test]
         public void M08_AgregarVehiculoBD()
@@ -24,7 +34,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
             String placa = Util.RandomString(7);
             Automovil auto = new Automovil(placa,"3","Mazda",1936,"Sedan",5,5,1,1,1,DateTime.Now,"Azul",1,"Automatica","Venezuela","Caracas");
             DAOAutomovil Has = new DAOAutomovil();
-            int prueba1 = Has.MAgregarVehiculoBD(auto);
+            int prueba1 = Has.MAgregarVehiculoBD(auto,12);
             Debug.WriteLine(prueba1);
             Assert.AreEqual(1, prueba1);
         }
