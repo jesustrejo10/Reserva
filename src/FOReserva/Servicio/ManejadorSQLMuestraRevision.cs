@@ -15,9 +15,9 @@ namespace FOReserva.Servicio
         public ManejadorSQLMuestraRevision() : base() { }
 
 
-        public List<CRevision> ConsultarRevision(string nombre, string apellido)   //se consulta para eliminar
+        public List<CRevision> ConsultarRevision(string nombre, string apellido)   //se consulta para consultar
         {
-            string query = "Select rst_id, rst_nombre, rst_direccion From Restaurante where LOWER(nom colum a bscar) LIKE LOWER('%" + nombre + "%' '%" + apellido + "%')";
+            string query = "SELECT rev.rev_fecha, rev.rev_mensaje, rev.rev_tipo, rev.rev_puntuacion, val.rv_val_pos, val.rv_val_neg FROM Revision as rev, Revision_Valoracion as val, Usuario as us, Reserva_Restaurante as rest where val.rv_id=rev.rev_FK_rev_val_id and LOWER(us.usu_nombre) LIKE LOWER('%" + nombre + "%') and LOWER(us.usu_apellido) LIKE LOWER('%" + apellido + "%') and rev.rev_FK_usu_id=us.usu_id and  rest.FK_USUARIO=us.usu_id and rest.FK_RESTAURANTE=rev.rev_FK_res_res_id";
             SqlDataReader read = Executer(query);
             List<CRevision> lista_rev = new List<CRevision>();
             if (read.HasRows)
