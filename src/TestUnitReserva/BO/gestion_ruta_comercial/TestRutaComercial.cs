@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using BOReserva.Models.gestion_ruta_comercial;
-using BOReserva.Servicio;
 using System.Diagnostics;
 
 namespace TestUnitReserva.BO.gestion_ruta_comercial
@@ -13,10 +12,10 @@ namespace TestUnitReserva.BO.gestion_ruta_comercial
     [TestFixture]
     class TestRutaComercial
     {
-        manejadorSQL sql = new manejadorSQL();
+        CBasededatos_ruta_comercial sql = new CBasededatos_ruta_comercial();
 
         [Test]
-        public void TestCrearRestaurantes()
+        public void TestAgregarRuta()
         {
             CAgregarRuta prueba = new CAgregarRuta
             {
@@ -26,7 +25,15 @@ namespace TestUnitReserva.BO.gestion_ruta_comercial
                 _tipoRuta = "Aerea",
                 _distanciaRuta = 155,
             };
-            Assert.IsTrue(sql.InsertarRuta(prueba));
+            Assert.IsTrue(sql.MAgregarRuta(prueba));
+        }
+
+        [Test]
+        public void TestConsultarRuta()
+        {
+            List<CRuta> prueba = new List<CRuta>();
+            prueba = sql.MListarRutasBD();
+            Assert.IsNotNull(prueba);
         }
     }
 }
