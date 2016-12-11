@@ -1,25 +1,20 @@
-﻿using BOReserva.DataAccess.Domain;
+﻿using BOReserva.DataAccess.Model;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.DataAccess.DAO
+namespace BOReserva.Models.gestion_automoviles
 {
     public class DAOAutomovil
     {
         //private String connetionString = @"Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User ID=DB_A1380A_reserva_admin;Password = ucabds1617a";
-        private String connetionString = ConfigurationManager.ConnectionStrings["DB_A1380A_reserva"].ConnectionString; //de esta forma el string de conexion se encuentra es en el web.config 
+        private static String connetionString = ConfigurationManager.ConnectionStrings["DB_A1380A_reserva"].ConnectionString; //de esta forma el string de conexion se encuentra es en el web.config 
         
         private SqlConnection con = null;
-
-        public void probarconexion()
-        {
-            con = new SqlConnection(connetionString);
-            con.Open();
-        }
 
         public int MAgregarVehiculoBD(Automovil vehiculo)
         {
@@ -37,11 +32,6 @@ namespace BOReserva.DataAccess.DAO
                 return 1;
             }
             catch (SqlException ex)
-            {
-                con.Close();
-                return 0;
-            }
-            catch (Exception e)
             {
                 con.Close();
                 return 0;
@@ -65,11 +55,6 @@ namespace BOReserva.DataAccess.DAO
                 return 1;
             }
             catch (SqlException ex)
-            {
-                con.Close();
-                return 0;
-            }
-            catch (Exception e)
             {
                 con.Close();
                 return 0;
@@ -107,11 +92,6 @@ namespace BOReserva.DataAccess.DAO
                 return listavehiculos;
             }
             catch (SqlException ex)
-            {
-                con.Close();
-                return null;
-            }
-            catch (Exception e)
             {
                 con.Close();
                 return null;
@@ -154,13 +134,8 @@ namespace BOReserva.DataAccess.DAO
                 con.Close();
                 return null;
             }
-            catch (Exception e)
-            {
-                con.Close();
-                return null;
             }
-        }
-        
+
         public int MBuscarfkciudad (String ciudad, String pais)
         {
             int fk_ciudad = 12;
@@ -190,11 +165,6 @@ namespace BOReserva.DataAccess.DAO
                 con.Close();
                 return fk_ciudad;
             }
-            catch (Exception e)
-            {
-                con.Close();
-                return 0;
-            }
         }
 
         public int MBorrarvehiculoBD(String matricula)
@@ -211,11 +181,6 @@ namespace BOReserva.DataAccess.DAO
                 return 1;
             }
             catch (SqlException ex)
-            {
-                con.Close();
-                return 0;
-            }
-            catch (Exception e)
             {
                 con.Close();
                 return 0;
@@ -249,11 +214,6 @@ namespace BOReserva.DataAccess.DAO
                 con.Close();
                 return _ciudad;
             }
-            catch (Exception e)
-            {
-                con.Close();
-                return null;
-            }
         }
 
         public String MBuscarnombrePais(int ciudad) 
@@ -284,11 +244,6 @@ namespace BOReserva.DataAccess.DAO
                 con.Close();
                 return _lugar;
             }
-            catch (Exception e)
-            {
-                con.Close();
-                return null;
-            }
         }
 
         public String[] MListarpaisesBD()
@@ -318,10 +273,37 @@ namespace BOReserva.DataAccess.DAO
                 con.Close();
                 return null;
             }
-            catch (Exception e)
+            catch (InvalidOperationException ex)
             {
                 con.Close();
                 return null;
+            }
+        }
+
+        public int MIdpaisesBD(String pais)
+        {
+            int fk = -1;
+            try
+            {
+                con = new SqlConnection(connetionString);
+                con.Open();
+                String sql = "SELECT lug_id FROM Lugar WHERE lug_nombre = '"+pais+"'";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        fk = Int32.Parse(reader[0].ToString());
+                    }
+                }
+                cmd.Dispose();
+                con.Close();
+                return fk;
+            }
+            catch (SqlException ex)
+            {
+                con.Close();
+                return fk;
             }
         }
 
@@ -331,7 +313,7 @@ namespace BOReserva.DataAccess.DAO
             {
                 con = new SqlConnection(connetionString);
                 con.Open();
-                String sql = "UPDATE Automovil SET aut_disponibilidad = " + activardesactivar + " WHERE aut_matricula = '" + matricula + "'";
+                String sql = "UPDATE Automovil SET aut_disponibilidad = "+activardesactivar+" WHERE aut_matricula = '" + matricula + "'";
                 SqlCommand cmd = new SqlCommand(sql, con);
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
@@ -343,22 +325,34 @@ namespace BOReserva.DataAccess.DAO
                 con.Close();
                 return 0;
             }
-            catch (Exception e)
+        }
+
+        public List<string> MListarciudadesBD(string pais)
+        {
+            int fk = MIdpaisesBD(pais);
+            List<String> _ciudades = new List<string>();
+            try
+            {
+                con = new SqlConnection(connetionString);
+                con.Open();
+                String sql = "SELECT lug_nombre FROM Lugar WHERE lug_fk_lugar_id = " + fk ;
+                SqlCommand cmd = new SqlCommand(sql, con);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        _ciudades.Add(reader[0].ToString());
+                    }
+                }
+                cmd.Dispose();
+                con.Close();
+                return _ciudades;
+            }
+            catch (SqlException ex)
             {
                 con.Close();
-                return 0;
+                return _ciudades;
             }
         }
     }
-
-
-
-
-
-
-
-
-
 }
-
- 

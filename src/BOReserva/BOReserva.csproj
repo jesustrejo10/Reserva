@@ -207,23 +207,17 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DataAccess\Model\Connection.cs" />
     <Compile Include="DataAccess\Model\ConexionUtil.cs" />
-    <Compile Include="DataAccess\DAO\DAOAutomovil.cs" />
-    <Compile Include="DataAccess\Domain\Automovil.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\gestion_automoviles\CAgregarAutomovil.cs" />
-    <Compile Include="Models\gestion_automoviles\CBasededatos_vehiculo.cs" />
+    <Compile Include="DataAccess\DAO\DAOAutomovil.cs" />
     <Compile Include="Models\gestion_automoviles\CModificarAutomovil.cs" />
     <Compile Include="Models\gestion_automoviles\CVisualizarAutomovil.cs" />
     <Compile Include="Models\gestion_automoviles\CVisualizarAutomoviles.cs" />
-    <Compile Include="Models\gestion_automoviles\CAutomovil.cs" />
-    <Compile Include="Models\gestion_automoviles\VehicleList.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Models\gestion_automoviles\VehicleModel.cs" />
+    <Compile Include="DataAccess\Domain\Automovil.cs" />
     <Compile Include="Models\gestion_aviones\CAgregarAvion.cs" />
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
     <Compile Include="Models\gestion_hoteles\cGestionHoteles_CrearHotel.cs" />
@@ -412,7 +406,6 @@
     <Content Include="Content\bootstrap\js\bootstrap.js" />
     <Content Include="Content\bootstrap\js\bootstrap.min.js" />
     <Content Include="Content\bootstrap\js\npm.js" />
-    <Content Include="Models\gestion_automoviles\placeholder.html" />
     <Content Include="Models\gestion_aviones\placeholder.html" />
     <Content Include="Models\gestion_comida_vuelo\placeholder.html" />
     <Content Include="Models\gestion_cruceros\placeholder.html" />
