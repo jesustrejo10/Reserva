@@ -15,7 +15,6 @@ namespace BOReserva.Models.gestion_automoviles
     /// </summary>
     public class DAOAutomovil
     {
-        //private String connetionString = @"Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User ID=DB_A1380A_reserva_admin;Password = ucabds1617a";
         private String connetionString ="Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;Persist Security Info=True;User ID=DB_A1380A_reserva_admin;Password=ucabds1617a"; //de esta forma el string de conexion se encuentra es en el web.config 
         //private static String connetionString = ConfigurationManager.ConnectionStrings["DB_A1380A_reserva"].ConnectionString; //de esta forma el string de conexion se encuentra es en el web.config 
         
@@ -167,7 +166,12 @@ namespace BOReserva.Models.gestion_automoviles
             }
 
 
-
+        /// <summary>
+        /// Método que busca en la base de datos el identificador de una ciudad
+        /// </summary>
+        /// <param name="ciudad">Ciudad cuyo identificador se desea conocer</param>
+        /// <param name="pais">País en donde se ubica la ciudad</param>
+        /// <returns>Retorna el identificador de la ciudad</returns>
         public int MBuscaridciudadBD (String ciudad, String pais)
         {
             int id_ciudad = 12;
@@ -175,17 +179,13 @@ namespace BOReserva.Models.gestion_automoviles
             {
                 con = new SqlConnection(connetionString);
                 con.Open();
-                //String sql = "SELECT C.id_lugar FROM LUGAR P, LUGAR E, LUGAR C WHERE P.id_lugar = E.FK_lugar_id AND E.id_lugar = C.FK_lugar_id AND " +
-                //             "P.nombre_lugar = '"+pais+"' AND E.nombre_lugar = '"+estado+"' AND C.nombre_lugar = '"+ciudad+"'";
                 String sql = "SELECT d.lug_id FROM LUGAR C, LUGAR D WHERE C.lug_id = d.lug_FK_lugar_id AND C.lug_nombre = '"+pais+"' and D.lug_nombre = '"+ciudad+"'"; /*ESTE SQL ES EN CASO DE QUE NO SE MANEJE AL FINAL ESTADOS SINO SOLO PAISES Y CIUDADES*/
                 SqlCommand cmd = new SqlCommand(sql, con);
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        //SE OBTIENE LA CIUDAD Y SE PASA
-                        //Y  COLOCA QUE FK_CIUDAD ES IGUAL A LO QUE DEVUELVE EL SQL
-                        id_ciudad = Int32.Parse(reader[0].ToString()); //EL 0 REPRESENTA LA PRIMERA Y UNICA COLUMNA QUE DEVULVE EL SqlDataReader
+                        id_ciudad = Int32.Parse(reader[0].ToString()); 
                     }   
                 }
                 cmd.Dispose();
@@ -199,6 +199,13 @@ namespace BOReserva.Models.gestion_automoviles
             }
         }
 
+
+
+        /// <summary>
+        /// Método para borrar un vehículo de la base de datos
+        /// </summary>
+        /// <param name="matricula">Matrícula del vehículo a borrar</param>
+        /// <returns>Retorna 1 si se eliminó exitosamente y retorna 0 si no lo pudo hacer</returns>
         public int MBorrarvehiculoBD(String matricula)
         {
             try
@@ -219,9 +226,15 @@ namespace BOReserva.Models.gestion_automoviles
             }
         }
 
+
+        /// <summary>
+        /// Método para buscar el nombre de una ciudad en la base de datos
+        /// </summary>
+        /// <param name="id">Identificador de la ciudad a buscar</param>
+        /// <returns>Retorna el nombre de la ciudad</returns>
         public String MBuscarnombreciudadBD(int id)
         {
-            String _ciudad = "No aplica";
+            String _ciudad = "Error al buscar";
             try
             {
                 con = new SqlConnection(connetionString);
@@ -232,9 +245,7 @@ namespace BOReserva.Models.gestion_automoviles
                 {
                     while (reader.Read())
                     {
-                        //SE OBTIENE LA CIUDAD Y SE PASA
-                        //Y  COLOCA QUE FK_CIUDAD ES IGUAL A LO QUE DEVUELVE EL SQL
-                        _ciudad = reader[0].ToString(); //EL 0 REPRESENTA LA PRIMERA Y UNICA COLUMNA QUE DEVULVE EL SqlDataReader
+                        _ciudad = reader[0].ToString();
                     }
                 }
                 cmd.Dispose();
@@ -248,9 +259,16 @@ namespace BOReserva.Models.gestion_automoviles
             }
         }
 
+
+
+        /// <summary>
+        /// Método para buscar el nombre de un país
+        /// </summary>
+        /// <param name="ciudad">Identificador de la ciudad que pertenece a dicho país</param>
+        /// <returns>Retorna el nombre de la ciudad</returns>
         public String MBuscarnombrePaisBD(int ciudad) 
         {
-            String _lugar = "No aplica";
+            String _lugar = "Error al buscar";
             try
             {
                 con = new SqlConnection(connetionString);
@@ -262,9 +280,7 @@ namespace BOReserva.Models.gestion_automoviles
                 {
                     while (reader.Read())
                     {
-                        //SE OBTIENE LA CIUDAD Y SE PASA
-                        //Y  COLOCA QUE FK_CIUDAD ES IGUAL A LO QUE DEVUELVE EL SQL
-                        _lugar = reader[0].ToString(); //EL 0 REPRESENTA LA PRIMERA Y UNICA COLUMNA QUE DEVULVE EL SqlDataReader
+                        _lugar = reader[0].ToString();
                     }
                 }
                 cmd.Dispose();
@@ -278,6 +294,12 @@ namespace BOReserva.Models.gestion_automoviles
             }
         }
 
+
+
+        /// <summary>
+        /// Método para listar todos los países de la base de datos
+        /// </summary>
+        /// <returns>Retorna un String[] con todos los países</returns>
         public String[] MListarpaisesBD()
         {
             String[] listapaises = new String[5000];
@@ -312,6 +334,12 @@ namespace BOReserva.Models.gestion_automoviles
             }
         }
 
+
+        /// <summary>
+        /// Método que retorna el identificador de un país
+        /// </summary>
+        /// <param name="pais">Nombre del país cuyo identificador se desea conocer</param>
+        /// <returns>Retorna el identificador del país</returns>
         public int MIdpaisesBD(String pais)
         {
             int fk = -1;
@@ -339,6 +367,12 @@ namespace BOReserva.Models.gestion_automoviles
             }
         }
 
+        /// <summary>
+        /// Método para cambiar la disponibilidad de un vehículo de la base de datos
+        /// </summary>
+        /// <param name="matricula">Matrícula del vehículo cuya disponibilidad se desea cambiar</param>
+        /// <param name="activardesactivar">Estatus por el cual se desea cambiar (1 para activar, 0 para desactivar)</param>
+        /// <returns>Retorna 1 si se cambio el estatus exitosamente y retorna 0 si no lo pudo hacer</returns>
         public int MDisponibilidadVehiculoBD(string matricula, int activardesactivar)
         {
             try
@@ -359,7 +393,13 @@ namespace BOReserva.Models.gestion_automoviles
             }
         }
 
-        public List<string> MListarciudadesBD(string pais, int fk)
+
+        /// <summary>
+        /// Método para listar todas las ciudades de un país
+        /// </summary>
+        /// <param name="fk">Identificador de país del cual se desea conocer sus ciudades</param>
+        /// <returns>Retorna una lista de String que posee las ciudades</returns>
+        public List<string> MListarciudadesBD(int fk)
         {
             List<String> _ciudades = new List<string>();
             try
