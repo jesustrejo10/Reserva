@@ -56,6 +56,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTest_Aviones.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BOReserva\BOReserva.csproj">

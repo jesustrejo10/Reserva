@@ -30,7 +30,12 @@ namespace BOReserva.Servicio
         //string que contendra la conexion a la bd
         private string stringDeConexion = null;
 
-        //Procedimiento del Modulo 2 para agregar aviones a la base de datos.
+        
+        /// <summary>
+        /// Procedimiento del Modulo 2 para agregar aviones a la base de datos.
+        /// </summary>
+        /// <param name="model">CAgregarAvion</param>
+        /// <returns>Boolean. Retorna true si agregó correctamente a la bbdd o false en caso contrario</returns>
         public Boolean insertarAvion(CAgregarAvion model)
         {
             try
