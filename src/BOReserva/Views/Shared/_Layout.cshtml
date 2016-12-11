@@ -25,6 +25,7 @@
         <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
         <link rel="stylesheet" href="~/Content/dist/css/skins/_all-skins.min.css">
+
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -32,7 +33,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    </head>
+</head>
 
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -292,18 +293,18 @@
                             <i class="fa fa-files-o"></i>
                             <span>Gestión de Boletos</span>
                             <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li id="m05_crearboleto"><a href="#"><i class="fa fa-plus-square-o"></i> Crear </a></li>
+                            <li id="m05VerReserva"><a href="#"><i class="fa fa-plus-square-o"></i>Crear</a></li>
+                            <li id="m05VisualizarBoletos"><a href="#"><i class="fa fa-eye"></i>Visualizar</a></li>
                         </ul>
                     </li>
 
-                    <li>
-                      <a href="modules/gestion_venta_boleto/checkin.html">
-                        <i class="fa fa-book"></i>
-                        <span>Check in</span></a>
-                    </li>
+                    <li id="m05CheckIn"><a href="#"><i class="fa fa-book"></i><span>Check in</span></a></li>
+
+
                     <!-- FIN MODULO DE BOLETOS AEREOS Y CHECK-IN -->
                     <!-- MODULO DE COMIDA POR VUELO -->
                     <li class="treeview">
@@ -320,6 +321,20 @@
                         </ul>
                     </li>
                     <!-- FIN DE MODULO DE COMIDA POR VUELO -->
+                    <!-- MODULO DE RESTAURANTES -->
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-cutlery"></i> <span>Gestión de Restaurantes</span> <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="agregarRestaurantes"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar Nuevo Restaurante</a></li>
+                            <li id="verRestaurantes"><a href="#"><i class="fa fa-eye"></i>Ver Restaurantes</a></li>
+                            <!--<li id="editarRestaurantes"><a href="#"><i class="fa fa-edit"></i>Editar Restaurantes</a></li>-->
+                        </ul>
+                    </li>
+                    <!-- FIN DE MODULO DE RESTAURANTES -->
                     <!-- MODULO DE EXTRAVIO DE EQUIPAJE -->
                     <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Equipaje</a></li>
                     <!-- FIN DE MODULO DE EXTRAVIO DE EQUIPAJE -->
@@ -408,22 +423,24 @@
                             <li id="desactivarhotel"><a href="#"><i class="fa fa-remove"></i>Desactivar Hotel</a></li>
                     <!-- MODULO DE BOLETOS AEREOS Y CHECK-IN -->
                 </ul>
+            
             </section>
             <!-- /.sidebar -->
         </aside>
+       
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             @*<section class="content-header">
-                <h1>
-                    Dashboard
-                    <small>Version 2.0</small>
-                </h1>
-                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                    <li class="active">Dashboard</li>
-                </ol>
-            </section>*@
+                    <h1>
+                        Dashboard
+                        <small>Version 2.0</small>
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li class="active">Dashboard</li>
+                    </ol>
+                </section>*@
             <!-- Main content -->
             <section class="content" id="contenido">
 

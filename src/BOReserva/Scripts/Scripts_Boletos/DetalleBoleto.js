@@ -1,5 +1,5 @@
-﻿function llamarVistaDetalleBoleto() {
-
+﻿$("#siguiente").click(function (e) {
+    e.preventDefault();
     var url = '/gestion_boletos/M05_DetalleBoleto';
     var method = 'GET';
     var data = '';
@@ -18,4 +18,4 @@
                 alert(errorThrown);
             }
         });
-};
+});

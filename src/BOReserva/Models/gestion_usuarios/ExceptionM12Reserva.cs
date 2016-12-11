@@ -19,6 +19,11 @@ namespace BOReserva.Models.gestion_usuarios
 
         }
 
+        public ExceptionM12Reserva(String codigo, String mensaje)
+            :base(mensaje)
+        {
+
+        }
         /// <summary>
         /// Constructor de la clase de excepciones de Reserva Modulo 12
         /// </summary>
