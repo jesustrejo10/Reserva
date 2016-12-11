@@ -89,10 +89,13 @@
 </section>
 
 @{
-    if (TempData["message"] != null)
-    {
-        <script type="text/javascript">
-        alert(@Html.Raw(Json.Encode(TempData["message"])));
-        </script>
-    }
-}
+    var message = TempData["message"] ?? string.Empty;
+} 
+
+<script type="text/javascript">
+     var message = '@message';
+
+    if(message) alert(message);
+
+</script>
+
