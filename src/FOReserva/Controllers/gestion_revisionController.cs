@@ -14,65 +14,7 @@ namespace FORevision.Controllers
     /// </summary>
     public class gestion_revisionController : Controller
     {
-        /// <summary>
-        /// Creacion Modelo Revision
-        /// </summary>
-        /// <returns>Vista Modelo</returns>
-        public ActionResult Gestion_Revision()
-        {
-            CRevision modelo = new CRevision();
-            return PartialView(modelo);
-        }
-
-        /// <summary>
-        /// Creacion Modelo Lista Revision
-        /// </summary>
-        /// <returns>Vista Modelo</returns>
-        public ActionResult Gestion_ListRevision()
-        {
-            CListRevision modelo = new CListRevision();
-            return PartialView(modelo);
-        }
-
-        /// <summary>
-        /// Creacion Modelo Eliminar Revision
-        /// </summary>
-        /// <returns>Vista Modelo</returns>
-        public ActionResult Eliminar_Revision()
-        {
-            CRevision modelo = new CRevision();
-            return PartialView(modelo);
-        }
-
-        /// <summary>
-        /// Creacion Modelo Consultar Revision
-        /// </summary>
-        /// <returns>Vista Modelo</returns>
-        public ActionResult Consultar_Revision()
-        {
-            CRevision modelo = new CRevision();
-            return PartialView(modelo);
-        }
-
-        /// <summary>
-        /// Creacion Modelo Crear Revision
-        /// </summary>
-        /// <returns>Vista Modelo</returns>
-        public ActionResult Crear_revision()
-        {
-            CRevision modelo = new CRevision();
-            return PartialView(modelo);
-        }
-
-        /// <summary>
-        /// Creacion Modelo Editar Revision
-        /// </summary>
-        /// <returns>Vista Modelo</returns>
-        public ActionResult Editar_revision()
-        {
-            CRevision modelo = new CRevision();
-            return PartialView(modelo);
-        }
+       
 
         /// <summary>
         /// Creacion Modelo Lista Revision
@@ -125,24 +67,30 @@ namespace FORevision.Controllers
         /// Creacion Modelo Lista Revision
         /// </summary>
         /// <returns>Vista Modelo</returns>
-        public ActionResult Eliminar_Revision(string nombre,string apellido, int revision)
+        public ActionResult Eliminar_Revision(string nombre, string apellido, int revision)
         {
-
-            List<CRevision> lista;
-            ManejadorSQLMuestraRevision manejador = new ManejadorSQLMuestraRevision();  // crear en Servicios un manejador para listar 
-            lista = manejador.ConsultarRevision2(nombre, apellido, revision);
-
-            if (lista == null) //exception
+           
+            if (revision != null)
             {
-                return PartialView(lista);
-            }
-            else
-            {
+
+
+                List<CRevision> lista;
                 ManejadorSQLMuestraRevision manejador2 = new ManejadorSQLMuestraRevision();  // crear en Servicios un manejador para listar 
                 lista = manejador2.Eliminar_Revision(nombre, apellido, revision);
                 return PartialView(lista);
             }
+
+            else
+            {
+                List<CRevision> lista;
+                ManejadorSQLMuestraRevision manejador2 = new ManejadorSQLMuestraRevision();  // crear en Servicios un manejador para listar 
+                lista = manejador2.Eliminar_Revision(nombre, apellido, revision);
+                return PartialView(lista);
+
+            }
+
         }
+        
 
         /// <summary>
         /// Creacion Modelo Crear Revision
@@ -152,9 +100,9 @@ namespace FORevision.Controllers
         {
             List<CRevision> lista;
 
-              List<CRevision> lista1;
-              List<CReservation_Restaurant> rest;
-              CReservation_Restaurant res;
+             // List<CRevision> lista1;
+             // List<CReservation_Restaurant> rest;
+             // CReservation_Restaurant res;
              
               
 
@@ -177,22 +125,8 @@ namespace FORevision.Controllers
             return null;
         }
 
-        /// <summary>
-        /// Creacion Modelo Eliminar Revision
-        /// </summary>
-        /// <returns>Vista Modelo</returns>
-        public ActionResult Crear_RevisionHotel(int reserva, string nombre, string apellido)
-        {
-            List<CRevision> lista;
-
-            /*  List<CRevision> lista1;
-              List<CReservation_Restaurant> rest;
-              CReservation_Restaurant res;
-             C
-
-              */
-            return null;
-        }
+      
+    
 
        
 
