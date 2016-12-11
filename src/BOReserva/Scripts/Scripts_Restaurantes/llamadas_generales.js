@@ -2,6 +2,7 @@
 $("#aceptarRestaurante").click(function (e) {
     console.log("Enviando...");
     e.preventDefault();
+    e.stopImmediatePropagation();
     var form = $("#formGuardarRestaurante");
     $.ajax({
         url: "gestion_restaurantes/guardarRestaurante",

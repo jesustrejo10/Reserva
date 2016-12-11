@@ -557,15 +557,15 @@ namespace BOReserva.Servicio
             {
                 conexion.Close();
                 Debug.WriteLine("Exception caught: {0}", e);
-                throw e;
-                //return null;
+                //throw e;
+                return null;
             }
             catch (Exception e)
             {
                 conexion.Close();
                 Debug.WriteLine("Exception caught: {0}", e);
-                throw e;
-                //return null;
+                //throw e;
+                return null;
             }
         }
 

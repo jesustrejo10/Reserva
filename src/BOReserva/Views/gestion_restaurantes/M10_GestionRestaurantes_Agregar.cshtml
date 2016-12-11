@@ -51,8 +51,14 @@ $(document).ready(function() {
                                     </div>
                                     <div class="col-xs-6">
                                         <label for="ciudad">Ciudad(<span style="color:red">*</span>):</label>
-                                        @Html.DropDownListFor(m => m._idLugar, new SelectList(Model._listaCiudades, "_id", "_nombre"), new  { id = "M10BOciudadDropdown" })
+                                        @try
+                                        {
+                                            @Html.DropDownListFor(m => m._idLugar, new SelectList(Model._listaCiudades, "_id", "_nombre"), new { id = "M10BOciudadDropdown" })
+                                        }
+                                        catch
+                                        {
 
+                                        }
 
                                     </div>
                                 </div>
