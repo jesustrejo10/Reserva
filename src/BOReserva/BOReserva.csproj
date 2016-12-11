@@ -201,9 +201,17 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\gestion_automovilesController.cs" />
-    <Compile Include="Controllers\gestion_avionesController.cs" />
+    <Compile Include="Controllers\gestion_avionesController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\gestion_boletosController.cs" />
+    <Compile Include="Controllers\gestion_check_inController.cs" />
     <Compile Include="Controllers\gestion_hotelesController.cs" />
     <Compile Include="Controllers\gestion_comida_vueloController.cs" />
+    <Compile Include="Controllers\gestion_ofertasController.cs" />
+    <Compile Include="Controllers\gestion_restaurantesController.cs" />
+    <Compile Include="Controllers\gestion_rolesController.cs" />
+    <Compile Include="Controllers\gestion_ruta_comercialController.cs" />
     <Compile Include="Controllers\gestion_usuariosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DataAccess\Model\Connection.cs" />
@@ -219,8 +227,29 @@
     <Compile Include="Models\gestion_automoviles\CVisualizarAutomovil.cs" />
     <Compile Include="DataAccess\Domain\Automovil.cs" />
     <Compile Include="Models\gestion_aviones\CAgregarAvion.cs" />
+    <Compile Include="Models\gestion_aviones\CAvion.cs" />
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
-    <Compile Include="Models\gestion_hoteles\cGestionHoteles_CrearHotel.cs" />
+    <Compile Include="Models\gestion_aviones\CModificarAvion.cs" />
+    <Compile Include="Models\gestion_boletos\CBoleto.cs" />
+    <Compile Include="Models\gestion_boletos\CBuscarVuelo.cs" />
+    <Compile Include="Models\gestion_comida_vuelo\CAgregarComida.cs" />
+    <Compile Include="Models\gestion_boletos\CLugar.cs" />
+    <Compile Include="Models\gestion_boletos\CPasajero.cs" />
+    <Compile Include="Models\gestion_boletos\CVisualizarBoleto.cs" />
+    <Compile Include="Models\gestion_boletos\CVuelo.cs" />
+    <Compile Include="Models\gestion_hoteles\CGestionHoteles_CrearHotel.cs" />
+    <Compile Include="Models\gestion_lugares\CLugarModelo.cs" />
+    <Compile Include="Models\gestion_ofertas\CAgregarOferta.cs" />
+    <Compile Include="Models\gestion_ofertas\CAgregarPaquete.cs" />
+    <Compile Include="Models\gestion_ofertas\COferta.cs" />
+    <Compile Include="Models\gestion_ofertas\CPaquete.cs" />
+    <Compile Include="Models\gestion_roles\CListaGenerica.cs" />
+    <Compile Include="Models\gestion_roles\CModulo_detallado.cs" />
+    <Compile Include="Models\gestion_roles\CModulo_general.cs" />
+    <Compile Include="Models\gestion_roles\CRoles.cs" />
+    <Compile Include="Models\gestion_ruta_comercial\CAgregarRuta.cs" />
+    <Compile Include="Models\gestion_ruta_comercial\CGestion_ruta.cs" />
+    <Compile Include="Models\gestion_ruta_comercial\CRuta.cs" />
     <Compile Include="Models\gestion_usuarios\AgregarUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\ConexionBD.cs" />
     <Compile Include="Models\gestion_usuarios\CUsuario.cs" />
@@ -228,7 +257,6 @@
     <Compile Include="Models\gestion_usuarios\ExceptionBD.cs" />
     <Compile Include="Models\gestion_usuarios\ExceptionM12Reserva.cs" />
     <Compile Include="Models\gestion_usuarios\ListarUsuario.cs" />
-    <Compile Include="Models\gestion_usuarios\ModificarUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\Parametro.cs" />
     <Compile Include="Models\gestion_usuarios\PersistenciaUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\RecursoBD.Designer.cs">
@@ -243,8 +271,11 @@
     </Compile>
     <Compile Include="Models\gestion_usuarios\ResultadoBD.cs" />
     <Compile Include="Models\Util.cs" />
+    <Compile Include="Models\gestion_restaurantes\CRestauranteModeloVista.cs" />
+    <Compile Include="Models\gestion_restaurantes\CRestauranteModelo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicio\manejadorSQL.cs" />
+    <Compile Include="Servicio\Servicio_Boletos\manejadorSQL_Boletos.cs" />
     <Compile Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx.cs">
       <DependentUpon>GestionDeAutomoviles.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -287,7 +318,7 @@
     <Content Include="Content\dist\img\avatar2.png" />
     <Content Include="Content\dist\img\avatar3.png" />
     <Content Include="Content\dist\img\avatar5.png" />
-    <Content Include="Content\dist\img\boardingpass.png" />
+    <Content Include="Content\dist\img\boarding_final.jpg" />
     <Content Include="Content\dist\img\boxed-bg.jpg" />
     <Content Include="Content\dist\img\boxed-bg.png" />
     <Content Include="Content\dist\img\credit\american-express.png" />
@@ -418,9 +449,13 @@
     <Content Include="Models\gestion_ruta_comercial\placeholder.html" />
     <Content Include="Models\gestion_seguridad_ingreso\placeholder.html" />
     <Content Include="Models\gestion_usuarios\placeholder.html" />
-    <Content Include="Models\gestion_venta_boleto\placeholder.html" />
+    <Content Include="Models\gestion_boletos\placeholder.html" />
     <Content Include="Models\gestion_vuelo\placeholder.html" />
     <Content Include="Scripts\cargadorMenu.js" />
+    <Content Include="Scripts\Scripts_Boletos\DatosUsuario.js" />
+    <Content Include="Scripts\Scripts_Boletos\DetalleBoleto.js" />
+    <Content Include="Scripts\Scripts_Boletos\BuscarVuelo.js" />
+    <Content Include="Scripts\Scripts_Boletos\DetalleVuelo.js" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -430,7 +465,18 @@
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\Scripts_Automoviles\llamadas_comunes_automoviles.js" />
     <Content Include="Scripts\Scripts_Aviones\llamadas_generales.js" />
+    <Content Include="Scripts\Scripts_CheckIn\BoardingPass.js" />
+    <Content Include="Scripts\Scripts_CheckIn\M05_CheckIn.js" />
+    <Content Include="Scripts\Scripts_CheckIn\M05_Equipaje.js" />
+    <Content Include="Scripts\Scripts_CheckIn\M05_VerBoletosCheckIn.js" />
+    <Content Include="Scripts\Scripts_CheckIn\M05_VerDetalleBoleto.js" />
     <Content Include="Scripts\Scripts_Hoteles\llamadas_generales_hoteles.js" />
+    <Content Include="Scripts\Scripts_Ofertas\llamadas_generales.js" />
+    <Content Include="Scripts\Scripts_Restaurantes\llamadas_generales.js" />
+    <Content Include="Scripts\select2\css\select2.min.css" />
+    <Content Include="Scripts\select2\js\i18n\en.js" />
+    <Content Include="Scripts\select2\js\i18n\es.js" />
+    <Content Include="Scripts\select2\js\select2.min.js" />
     <Content Include="Views\dist\css\AdminLTE.css" />
     <Content Include="Views\dist\css\AdminLTE.min.css" />
     <Content Include="Views\dist\css\skins\skin-black-light.css" />
@@ -521,29 +567,12 @@
     <Content Include="Views\gestion_ofertas\placeholder.html" />
     <Content Include="Views\gestion_restaurantes\M10_GestionRestaurantes.html" />
     <Content Include="Views\gestion_restaurantes\placeholder.html" />
+    <Content Include="Views\gestion_roles\M13_Roles.html" />
     <Content Include="Views\gestion_roles\placeholder.html" />
     <Content Include="Views\gestion_ruta_comercial\placeholder.html" />
     <Content Include="Views\gestion_seguridad_ingreso\placeholder.html" />
     <Content Include="Views\gestion_usuarios\placeholder.html" />
-    <Content Include="Views\gestion_venta_boleto\boardingpass.html" />
-    <Content Include="Views\gestion_venta_boleto\checkin.html" />
-    <Content Include="Views\gestion_venta_boleto\confirmacioneliminarvuelo.html" />
-    <Content Include="Views\gestion_venta_boleto\confirmacionmodificarvuelo.html" />
-    <Content Include="Views\gestion_venta_boleto\consultarboleto.html" />
-    <Content Include="Views\gestion_venta_boleto\crearboletosvuelos.html" />
-    <Content Include="Views\gestion_venta_boleto\datospago.html" />
-    <Content Include="Views\gestion_venta_boleto\datosusuario.html" />
-    <Content Include="Views\gestion_venta_boleto\detallecheckin.html" />
-    <Content Include="Views\gestion_venta_boleto\detalleconsultavuelo.html" />
-    <Content Include="Views\gestion_venta_boleto\detalleeliminarvuelo.html" />
-    <Content Include="Views\gestion_venta_boleto\detallemodificarvuelo.html" />
-    <Content Include="Views\gestion_venta_boleto\detallevuelo.html" />
-    <Content Include="Views\gestion_venta_boleto\eliminarboleto.html" />
-    <Content Include="Views\gestion_venta_boleto\equipajecheckin.html" />
-    <Content Include="Views\gestion_venta_boleto\modificarboleto.html" />
-    <Content Include="Views\gestion_venta_boleto\placeholder.html" />
-    <Content Include="Views\gestion_venta_boleto\resultadosboleto.html" />
-    <Content Include="Views\gestion_venta_boleto\vervuelosdisponibles.html" />
+    <Content Include="Views\gestion_boletos\placeholder.html" />
     <Content Include="Views\gestion_vuelo\placeholder.html" />
     <Content Include="Content\plugins\bootstrap-slider\bootstrap-slider.js" />
     <Content Include="Content\plugins\bootstrap-slider\slider.css" />
@@ -1400,9 +1429,37 @@
     <Content Include="Views\gestion_usuarios\M12_AgregarUsuario.cshtml" />
     <Content Include="Views\gestion_usuarios\M12_ModificarUsuario.cshtml" />
     <Content Include="Views\gestion_usuarios\_Layout.cshtml" />
+    <Content Include="Views\gestion_boletos\M05_VisualizarBoletos.cshtml" />
+    <Content Include="Views\gestion_boletos\M05_VerReserva.cshtml" />
+    <Content Include="Views\gestion_check_in\M05_CheckIn.cshtml" />
+    <Content Include="Views\gestion_check_in\M05_VerBoletosCheckIn.cshtml" />
+    <Content Include="Views\gestion_check_in\M05_VerDetalleBoleto.cshtml" />
+    <Content Include="Views\gestion_check_in\M05_Equipaje.cshtml" />
+    <Content Include="Views\gestion_check_in\M05_VerBoardingPass.cshtml" />
+    <Content Include="Views\gestion_boletos\M05_VisualizarBoleto.cshtml" />
+    <Content Include="Views\gestion_restaurantes\M10_GestionRestaurantes_Ver.cshtml" />
+    <Content Include="Views\gestion_restaurantes\M10_GestionRestaurantes_Agregar.cshtml" />
+    <Content Include="Views\gestion_aviones\M02_VisualizarAviones.cshtml" />
+    <Content Include="Views\gestion_aviones\M02_ModificarAvion.cshtml" />
+    <Content Include="Views\gestion_ruta_comercial\VisualizarRutasComerciales.cshtml" />
+    <Content Include="Views\gestion_ruta_comercial\ModificarRutasComerciales.cshtml" />
+    <Content Include="Views\gestion_ruta_comercial\AgregarRutasComerciales.cshtml" />
+    <Content Include="Views\gestion_ruta_comercial\DetallesRutasComerciales.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_AgregarOferta.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_AgregarPaquete.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_VisualizarOferta.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_ConsultarPaquete.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_GestionOfertas.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_ModificarOferta.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_ModificarPaquete.cshtml" />
+    <Content Include="Views\gestion_roles\M13_AgregarRol.cshtml" />
+    <Content Include="Views\gestion_roles\M13_VisualizarRol.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\Scripts_ComidaVuelo\" />
+    <Folder Include="Views\gestion_roles\css\" />
+    <Folder Include="Views\gestion_roles\js\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap\css\bootstrap.css.map" />
@@ -1460,6 +1517,21 @@
     <Content Include="Views\gestion_aviones\M02_AgregarAvion.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\gestion_boletos\M05_CrearBoleto.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\gestion_boletos\M05_VerVuelos.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\gestion_boletos\M05_DetalleVuelo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\gestion_boletos\M05_DatosUsuario.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\gestion_boletos\M05_DetalleBoleto.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="Models\gestion_usuarios\RecursoBD.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoBD.Designer.cs</LastGenOutput>
@@ -1490,7 +1562,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:10778/</IISUrl>
+          <IISUrl>http://localhost:50429/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -1506,7 +1578,7 @@
     <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
   </Target>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
