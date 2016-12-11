@@ -36,7 +36,7 @@
          
     function checkTextMatricula(field) {
         var matricula = $('#matriculaAvion').val();
-        if (/[^a-z0-9\.]/gi.test(matricula)) {  // Valido que no tenga caracteres especiales ni espacios
+        if (/[^a-z0-9]/gi.test(matricula)) {  // Valido que no tenga caracteres especiales ni espacios
             alert("La matrícula no puede contener caracteres especiales ni espacios en blanco");
             field.value = '';
         }
@@ -50,13 +50,120 @@
         }
     }
 
+    $('#capacidadTurista').keyup(function () {
+        var numbers = $(this).val();
+        $(this).val(numbers.replace(/\D/, ''));
+    });
+
+    $('#capacidadTurista').focusout(function () {
+        var numbers = $(this).val();
+        if (numbers > 999999999) {
+            $(this).val('');
+            alert("Debe ingresar un valor válido");
+        }
+        if (numbers <= 0) {
+            $(this).val('');
+            alert("Debe ingresar un valor mayor a cero");
+        }
+    });
+
+    $('#capacidadEjecutiva').keyup(function () {
+        var numbers = $(this).val();
+        $(this).val(numbers.replace(/\D/, ''));
+    });
+
+    $('#capacidadEjecutiva').focusout(function () {
+        var numbers = $(this).val();
+        if (numbers > 999999999) {
+            $(this).val('');
+            alert("Debe ingresar un valor válido");
+        }
+        if (numbers <= 0) {
+            $(this).val('');
+            alert("Debe ingresar un valor mayor a cero");
+        }
+    });
+
+    $('#capacidadVIP').keyup(function () {
+        var numbers = $(this).val();
+        $(this).val(numbers.replace(/\D/, ''));
+    });
+
+    $('#capacidadVIP').focusout(function () {
+        var numbers = $(this).val();
+        if (numbers > 999999999) {
+            $(this).val('');
+            alert("Debe ingresar un valor válido");
+        }
+        if (numbers <= 0) {
+            $(this).val('');
+            alert("Debe ingresar un valor mayor a cero");
+        }
+    });
+
+    $('#velocidadMaximaDeVuelo').keyup(function () {
+        var numbers = $(this).val();
+        $(this).val(numbers.replace(/\D/, ''));
+    });
+
+    $('#velocidadMaximaDeVuelo').focusout(function () {
+        var numbers = $(this).val();
+        if (numbers > 999999999) {
+            $(this).val('');
+            alert("Debe ingresar un valor válido");
+        }
+        if (numbers <= 0) {
+            $(this).val('');
+            alert("Debe ingresar un valor mayor a cero");
+        }
+    });
+
+    $('#distanciaMaximaDeVuelo').keyup(function () {
+        var numbers = $(this).val();
+        $(this).val(numbers.replace(/\D/, ''));
+    });
+
+    $('#distanciaMaximaDeVuelo').focusout(function () {
+        var numbers = $(this).val();
+        if (numbers > 999999999) {
+            $(this).val('');
+            alert("Debe ingresar un valor válido");
+        }
+        if (numbers <= 0) {
+            $(this).val('');
+            alert("Debe ingresar un valor mayor a cero");
+        }
+    });
+
+    $('#capacidadCombustible').keyup(function () {
+        var numbers = $(this).val();
+        $(this).val(numbers.replace(/\D/, ''));
+    });
+
+    $('#capacidadCombustible').focusout(function () {
+        var numbers = $(this).val();
+        if (numbers > 999999999) {
+            $(this).val('');
+            alert("Debe ingresar un valor válido");
+        }
+        if (numbers <= 0) {
+            $(this).val('');
+            alert("Debe ingresar un valor mayor a cero");
+        }
+    });
+
+
+
     function NumeroEntero(field) {
         if (field != '') {
-            var turista = $('#capacidadTurista').val();
-            if (/[0-9]/gi.test(turista)) {  // solo numeros
-                alert("Este campo solo admite valores enteros");
-                field.value = '';
-            }
+            var turista = $('#capacidadTurista').keyup(function () {
+                var numbers = $(this).val();
+                $(this).val(numbers.replace(/\D/,''));
+            });
+           // if (/[0-9]/gi.test(turista)) {  // solo numeros
+             //   alert("Este campo solo admite valores enteros");
+               // field.value = '';
+            //}
             if (field.value > 9999999999) { //limite de digitos
                 alert("No puede exceder los 10 digitos");
                 field.value = '';

@@ -38,7 +38,7 @@ namespace BOReserva.Controllers
                 //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 //Agrego mi error
-                String error = "Error, campo obligatorio vacio";
+                String error = "Error, campos obligatorios vacios";
                 //Retorno el error
                 return Json(error);
             }
@@ -72,6 +72,61 @@ namespace BOReserva.Controllers
             
         }
 
+        public ActionResult M02_VisualizarAviones()
+        {
+            manejadorSQL sql = new manejadorSQL();
+            List<CAvion> aviones = new List<CAvion>();
+            aviones = sql.listarAvionesEnBD();
+            return PartialView(aviones);
+        }
+
+        public ActionResult M02_ConsultarAvion(int id)
+        {
+            manejadorSQL sql = new manejadorSQL();
+            CAvion avion = new CAvion();
+            avion = sql.consultarAvion(id);
+            CModificarAvion modelo = new CModificarAvion(avion);
+            return PartialView("M02_ModificarAvion", modelo);
+        }
+
+        [HttpPost]
+        public JsonResult habilitarAvion(int id)
+        {
+            manejadorSQL sql = new manejadorSQL();
+            Boolean resultado = sql.habilitarAvion(id);
+            if (resultado)
+            {
+                return (Json(true, JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)  
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error  
+                String error = "Error en la base de datos";
+                //Retorno el error  
+                return Json(error);
+            }
+        }
+        [HttpPost]
+        public JsonResult deshabilitarAvion(int id)
+        {
+            manejadorSQL sql = new manejadorSQL();
+            Boolean resultado = sql.deshabilitarAvion(id);
+            if (resultado)
+            {
+                return (Json(true, JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)  
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error  
+                String error = "Error en la base de datos";
+                //Retorno el error  
+                return Json(error);
+            }
+        }  
 
 
 
