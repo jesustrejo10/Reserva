@@ -122,6 +122,10 @@ namespace FOReserva.Controllers
             List<CReservation_Restaurant> lista = manejador.buscarReservas();
             return View(lista);
         }
-
+        [System.Web.Services.WebMethod] 
+        public string eliminar_reserva(int id)
+        {
+            return ("hola");
+        }
     }
 }
