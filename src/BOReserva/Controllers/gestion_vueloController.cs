@@ -313,10 +313,13 @@ namespace BOReserva.Controllers
 
 
             resultado = sql.fechaVuelo(fechaDes, horaDes, ciudadO, ciudadD, matriAvion);
+            string[] separando = resultado.Split(' ');
+
+            fecha = separando[0];
 
             if (resultado != null)
             {
-                return (Json(resultado, JsonRequestBehavior.AllowGet));
+                return (Json(fecha, JsonRequestBehavior.AllowGet));
             }
             else
             {
