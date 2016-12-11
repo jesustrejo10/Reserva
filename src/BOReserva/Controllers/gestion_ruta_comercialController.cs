@@ -16,8 +16,7 @@ namespace BOReserva.Controllers
         {
             List<String> lista = new List<string>();
             
-            manejadorSQL sql = new manejadorSQL();            
-            
+            manejadorSQL sql = new manejadorSQL();                       
 
             lista = sql.listarLugares();
 
@@ -35,18 +34,16 @@ namespace BOReserva.Controllers
             
             CAgregarRuta ruta = new CAgregarRuta();
             ruta._lorigenRuta = list;
-            ruta._ldestinoRuta = list;        
-
-
-            
-
+            ruta._ldestinoRuta = list;
             return PartialView(ruta);
         }
 
-        public JsonResult cargarLugares() {
-            
-            
-            return null;        
+        public JsonResult cargarOrigenes(String tipo) {
+            List<SelectListItem> origenes = new List<SelectListItem>();
+
+
+
+            return Json(new SelectList(origenes, "Value", "Text"));
         
         }
 
