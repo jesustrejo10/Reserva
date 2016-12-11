@@ -294,14 +294,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="BOReserva_BACKUP_12060.csproj" />
-    <Content Include="BOReserva_BACKUP_5556.csproj" />
-    <Content Include="BOReserva_BASE_12060.csproj" />
-    <Content Include="BOReserva_BASE_5556.csproj" />
-    <Content Include="BOReserva_LOCAL_12060.csproj" />
-    <Content Include="BOReserva_LOCAL_5556.csproj" />
-    <Content Include="BOReserva_REMOTE_12060.csproj" />
-    <Content Include="BOReserva_REMOTE_5556.csproj" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\dist\css\AdminLTE.css" />
@@ -479,16 +471,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Scripts\Scripts_Boletos\DetalleVuelo.js" />
-
-    <Content Include=".BOReserva.csproj.swp" />
-    <Content Include=".BOReserva_BASE_5556.csproj.swp" />
-    <Content Include=".BOReserva_LOCAL_5556.csproj.swp" />
-    <Content Include=".BOReserva_REMOTE_5556.csproj.swp" />
-
-
     <None Include="Properties\PublishProfiles\Webdeploy Smarterasp.pubxml" />
-
-
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -1392,11 +1375,9 @@
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarComida.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarPorVuelo.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_EditarComida.cshtml" />
-
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarEditarComida.cshtml" />
     <Content Include="Views\gestion_seguridad_ingreso\M01_Login.cshtml" />
     <Content Include="Views\gestion_seguridad_ingreso\M01_RecuperarContrasenna.cshtml" />
-
     <Content Include="Views\gestion_usuarios\M12_Index.cshtml" />
     <Content Include="Views\gestion_usuarios\M12_AgregarUsuario.cshtml" />
     <Content Include="Views\gestion_usuarios\M12_ModificarUsuario.cshtml" />
@@ -1435,16 +1416,10 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\Scripts_ComidaVuelo\" />
-
-    <Folder Include="Views\gestion_comidavuelo\" />
-
-
-    <Folder Include="Views\gestion_comidavuelo\" />
-
     <Folder Include="Views\dist\css\skins\" />
     <Folder Include="Views\dist\img\credit\" />
     <Folder Include="Views\dist\js\pages\" />
-
+    <Folder Include="Views\gestion_comidavuelo\" />
     <Folder Include="Views\gestion_roles\css\" />
     <Folder Include="Views\gestion_roles\js\" />
   </ItemGroup>
