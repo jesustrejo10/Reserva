@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FOReserva.Models.Cruceros;
+using FOReserva.Servicio;
+
 
 namespace FOReserva.Controllers
 {
@@ -24,14 +26,14 @@ namespace FOReserva.Controllers
         }
 
         [HttpPost]
-
-        public JsonResult buscarCrucero(CVista_Cruceros model)
+        public JsonResult buscarCruceros(CVista_Cruceros model)
         {
-            String prueba = model._prueba;
-            DateTime fechaida = model._fechaIda;
-            DateTime fechavuelta = model._fechaVuelta;
+            String fecha_ida = model._ida;
+            String fecha_vuelta = model._vuelta;
+            int sel = model.SelectedCrucero;
 
             return (Json(true, JsonRequestBehavior.AllowGet));
+
         }
 
     }
