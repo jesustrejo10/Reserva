@@ -214,6 +214,8 @@
     <Compile Include="Models\Cruceros\CVista_Cruceros.cs" />
     <Compile Include="Models\Diarios\CDiarioModel.cs" />
     <Compile Include="Models\BaseEntity.cs" />
+    <Compile Include="Models\Diarios\CFoto_Diario.cs" />
+    <Compile Include="Models\Diarios\CLugar.cs" />
     <Compile Include="Models\Itinerario\itinerario.cs" />
     <Compile Include="Models\ORM\DB.cs" />
     <Compile Include="Models\ORM\M20_ActualizarEstadoReservaHabitacion_Result.cs">
@@ -276,10 +278,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ReservaDB.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Servicio\InvalidManejadorSQLException.cs" />
     <Compile Include="Servicio\manejadorSQL.cs" />
-    <Compile Include="Servicio\ManejadorSQLRevision.cs" />
+    <Compile Include="Servicio\Cruceros.cs" />
+    <Compile Include="Servicio\manejadorSQLCrucero.cs" />
     <Compile Include="Servicio\ManejadorSQLDiarios.cs" />
-    <Compile Include="Servicio\ManejadorSQLMuestraRevision.cs" />
+    <Compile Include="Servicio\ManejadorSQLRevision.cs" />
     <Compile Include="Servicio\ManejadorSQLException.cs" />
     <Compile Include="Servicio\ManejadorSQLReservaRestaurant.cs" />
   </ItemGroup>
@@ -493,12 +497,11 @@
     <Content Include="Content\assets\plugins\bootstrap.datepicker\locales\bootstrap-datepicker.vi.min.js" />
     <Content Include="Content\assets\plugins\bootstrap.datepicker\locales\bootstrap-datepicker.zh-CN.min.js" />
     <Content Include="Content\assets\plugins\bootstrap.datepicker\locales\bootstrap-datepicker.zh-TW.min.js" />
-    <Content Include="Content\assets\plugins\bootstrap.daterangepicker\daterangepicker-bs2.css" />
-    <Content Include="Content\assets\plugins\bootstrap.daterangepicker\daterangepicker-bs3.css" />
+    <Content Include="Content\assets\plugins\bootstrap.daterangepicker\daterangepicker.css" />
     <Content Include="Content\assets\plugins\bootstrap.daterangepicker\daterangepicker.js" />
-    <Content Include="Content\assets\plugins\bootstrap.daterangepicker\examples.html" />
     <Content Include="Content\assets\plugins\bootstrap.daterangepicker\moment.js" />
     <Content Include="Content\assets\plugins\bootstrap.daterangepicker\moment.min.js" />
+    <Content Include="Content\assets\plugins\bootstrap.daterangepicker\package.js" />
     <Content Include="Content\assets\plugins\bootstrap\css\bootstrap-theme.css" />
     <Content Include="Content\assets\plugins\bootstrap\css\bootstrap-theme.min.css" />
     <Content Include="Content\assets\plugins\bootstrap\css\bootstrap.css" />
@@ -1538,9 +1541,6 @@
     <Content Include="Content\assets\fonts\FontAwesome.otf" />
     <Content Include="Content\assets\images\logo_final.png~HEAD" />
     <Content Include="Content\assets\images\logo_final.png~M21_Reserva_Restaurante_FO" />
-    <Content Include="Content\assets\plugins\bootstrap.daterangepicker\bower.json" />
-    <Content Include="Content\assets\plugins\bootstrap.daterangepicker\package.json" />
-    <Content Include="Content\assets\plugins\bootstrap.daterangepicker\README.md" />
     <Content Include="Content\assets\plugins\bootstrap\css\bootstrap-theme.css.map" />
     <Content Include="Content\assets\plugins\bootstrap\css\bootstrap.css.map" />
     <Content Include="Content\assets\plugins\bootstrap\fonts\glyphicons-halflings-regular.eot" />
@@ -1676,6 +1676,11 @@
     <Content Include="Models\ORM\ModelDBReserva.edmx.diagram">
       <DependentUpon>ModelDBReserva.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\assets\plugins\bootstrap.daterangepicker\bower.json" />
+    <Content Include="Content\assets\plugins\bootstrap.daterangepicker\daterangepicker.scss" />
+    <Content Include="Content\assets\plugins\bootstrap.daterangepicker\package.json" />
+    <Content Include="Content\assets\plugins\bootstrap.daterangepicker\README.md" />
+    <None Include="Properties\PublishProfiles\Webdeploy SmarterASP.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Models\Autos\placeholder.html" />
     <Content Include="Models\Cruceros\placeholder.html" />
@@ -1705,14 +1710,12 @@
     <Content Include="Views\ajax\dummy-lightbox.html" />
     <Content Include="Views\ajax\dummy-modal-ajax.html" />
     <Content Include="Views\busqueda_compra_boletos\placeholder.html" />
-    <Content Include="Views\gestion_diario_viaje\placeholder.html" />
     <Content Include="Views\gestion_planificacion_vacaciones\placeholder.html" />
     <Content Include="Views\gestion_reclamos\placeholder.html" />
     <Content Include="Views\gestion_reserva_auto\placeholder.html" />
     <Content Include="Views\gestion_reserva_crucero\placeholder.html" />
     <Content Include="Views\gestion_reserva_hotel\placeholder.html" />
     <Content Include="Views\gestion_reserva_restaurante\placeholder.html" />
-    <Content Include="Views\gestion_revision\placeholder.html" />
     <Content Include="Views\Shared\assets\css\color_scheme\green.css" />
     <Content Include="Views\Shared\assets\css\essentials.css" />
     <Content Include="Views\Shared\assets\css\header-1.css" />
@@ -2929,7 +2932,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Shared\index.cshtml" />
     <Content Include="Views\Shared\assets\fonts\et-line.eot" />
     <Content Include="Views\Shared\assets\fonts\et-line.ttf" />
     <Content Include="Views\Shared\assets\fonts\et-line.woff" />
@@ -3062,7 +3064,6 @@
     <Content Include="Views\gestion_vuelos\gestion_vuelosImagenes.cshtml" />
     <Content Include="Views\gestion_diarios\gestion_diarios.cshtml" />
     <Content Include="Views\gestion_reserva_restaurante\gestion_reserva_restaurante.cshtml" />
-    <Content Include="Views\Shared\_Layout2.cshtml" />
     <Content Include="Views\gestion_reserva_restaurante\restaurant_resultados.cshtml" />
     <Content Include="Views\gestion_reserva_restaurante\reservar_restaurant.cshtml" />
     <Content Include="Views\gestion_reserva_restaurante\confirma_restaurant.cshtml" />
@@ -3090,6 +3091,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\gestion_diario_viaje\" />
     <Folder Include="Views\registro_autenticacion\" />
   </ItemGroup>
   <ItemGroup>
