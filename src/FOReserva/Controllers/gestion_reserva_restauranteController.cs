@@ -49,7 +49,7 @@ namespace FOReserva.Controllers
                 //No se puede usar el mensaje de la excepcion "e.mensaje"
                 //Esto se causa al realizar una busqueda con parametros que no son
                 //como son caracteres especiales y de mas
-                return View("error_conexion");
+                return View("No se encontraron resultados");
             }
             catch ( ManejadorSQLException f)
             {
