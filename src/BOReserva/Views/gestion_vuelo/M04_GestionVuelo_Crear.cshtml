@@ -66,40 +66,43 @@
                             <div class="col-xs-6">
                                 <!-- DROPDOWN ELEGIR MATRICULA AVION -->
                                 <label> Elegir avion (<span style="color: #d9534f">*</span>):</label>
-                                @Html.DropDownListFor(m => m._matriculaAvion, new SelectList(Model._matriculasAvion, "Value", "Text"),
-     "Seleccione un avion", new { @style = "width: 100%;", @disabled = "disabled", @class = "form-control" })
+                                @Html.DropDownListFor(m => m._matriculaAvion, new SelectList(Enumerable.Empty<SelectListItem>(), "Value", "Text"),
+                                "Seleccione un avion", new { @class = "form-control", @id = "matAvion", @style = "width: 100%;" })
                             </div>
                             <!-- FIN ELEGIR MATRICULA AVION -->
+                        </div>
+                            <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <!-- TEXTBOXFOR MODELO AVION -->
                                 <label> Modelo avion:</label>
                                 @Html.TextBoxFor(m => m._modeloAvion, null, new { @id = "modeloAvion", @disabled = "disabled", @class = "form-control" })
                             </div>
                             <!-- FIN MODELO AVION -->
-                        </div>
-                        <div>&nbsp;</div>
-                        <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <!-- TEXTBOXFOR CANTIDAD PASAJEROS -->
                                 <label>Capacidad de pasajeros del avion:</label>
                                 @Html.TextBoxFor(m => m._pasajerosAvion, null, new { @class = "form-control", @id = "pasajerosAvion", @disabled = "disabled" })
                             </div>
-                            <!-- FIN CANTIDAD PASAJEROS -->
+                        </div>
+                        <div>&nbsp;</div>
+                                <!-- FIN CANTIDAD PASAJEROS -->
+                        <div class="col-md-12" style="margin-top:10px;">
                             <!-- TEXTBOXFOR DISTANCIA MAXIMA VUELO AVION -->
                             <div class="col-xs-6">
                                 <label>Distancia maxima de vuelo:</label>
                                 @Html.TextBoxFor(m => m._distanciaMaxima, null, new { @class = "form-control", @id = "distanciaMaxima", @disabled = "disabled" })
                             </div>
                             <!-- DISTANCIA MAXIMA VUELO AVION -->
-                        </div>
-                        <div>&nbsp;</div>
-                        <div class="col-md-12" style="margin-top:10px;">
                             <!-- TEXTBOXFOR VELOCIDAD MAXIMA VUELO AVION -->
                             <div class="col-xs-6">
                                 <label>Velocidad maxima:</label>
                                 @Html.TextBoxFor(m => m._velocidadMaxima, null, new { @class = "form-control", @id = "velocidadMaxima", @disabled = "disabled" })
                             </div>
                             <!-- FIN TEXTBOXFOR VELOCIDAD MAXIMA VUELO AVION -->
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <!-- DROPDOWNLISTFOR STATUS-->
                                 <label> Estado vuelo (<span style="color: #d9534f">*</span>):</label>
@@ -108,27 +111,27 @@
                             </div>
                             <!-- FIN STATUS  -->
                         </div>
-                        <div>&nbsp;</div>
-                        <div class="col-md-12" style="margin-top:10px;">
-                            <div class="col-xs-6">
-                                <!-- DATE FECHA ATERRIZAJE  -->
-                                <label> Fecha Aterrizaje:</label>
-                                @Html.TextBoxFor(m => m._fechaAterrizaje, null, new { @class = "datepicker", @type = "date", @id = "fechaaterrizaje", @style = "width: 100%;", @disabled = "disabled" })
+                            <div>&nbsp;</div>
+                            <div class="col-md-12" style="margin-top:10px;">
+                                <div class="col-xs-6">
+                                    <!-- DATE FECHA ATERRIZAJE  -->
+                                    <label> Fecha Aterrizaje:</label>
+                                    @Html.TextBoxFor(m => m._fechaAterrizaje, null, new { @class = "datepicker", @type = "date", @id = "fechaaterrizaje", @style = "width: 100%;", @disabled = "disabled" })
+                                </div>
+                                <!-- FIN FECHA ATERRIZAJE  -->
+                                <div class="col-xs-6">
+                                    <label> Hora Aterrizaje:</label>
+                                    @Html.TextBoxFor(m => m._horaAterrizaje, null, new {  @class = "datepicker", @type = "time", @id = "horaaterrizaje", @style = "width: 100%;", @disabled = "disabled" })
+                                </div>
                             </div>
-                            <!-- FIN FECHA ATERRIZAJE  -->
-                            <div class="col-xs-6">
-                                <label> Hora Aterrizaje:</label>
-                                @Html.TextBoxFor(m => m._horaAterrizaje, null, new {  @class = "datepicker", @type = "time", @id = "horaaterrizaje", @style = "width: 100%;", @disabled = "disabled" })
-                            </div>
-                        </div>
-                        <div>&nbsp;</div>
+                            <div>&nbsp;</div>
 
-                        <!-- FIN CAMPOS FORMULARIO-->
-                        <!-- BOTON GUARDAR-->
-                        <div class="col-md-12" style="margin-top:10px;">
-                            <button type="submit" id="agregarVuelo" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                            <!-- FIN CAMPOS FORMULARIO-->
+                            <!-- BOTON GUARDAR-->
+                            <div class="col-md-12" style="margin-top:10px;">
+                                <button type="submit" id="agregarVuelo" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                            </div>
                         </div>
-                    </div>
                     <!-- /.col -->
                 </div>
                 <!-- /.row -->

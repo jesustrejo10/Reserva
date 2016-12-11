@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Net;
 using BOReserva.Models.gestion_vuelo;
-using BOReserva.Servicio;
+using BOReserva.Servicio.Servicio_Aviones;
 
 namespace BOReserva.Controllers
 {
@@ -69,7 +69,7 @@ namespace BOReserva.Controllers
         {
             CCrear_Vuelo model = new CCrear_Vuelo();
             List<CCrear_Vuelo> resultadoOrigenes = new List<CCrear_Vuelo>();
-            manejadorSQL sql = new manejadorSQL();
+            manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
 
 
             resultadoOrigenes = sql.cargarOrigenes();
@@ -119,20 +119,6 @@ namespace BOReserva.Controllers
             return PartialView(model);
         }
 
-
-     //b   public ActionResult M04_GestionVuelo_Visualizar()
-     //b   {
-            //var companies = DataRepository.GetCompanies();
-            //List<CAutomovil> listavehiculos = new List<CAutomovil>();
-      //b      CBasededatos_vehiculo buscarvehiculos = new CBasededatos_vehiculo();
-      //b      List<CAutomovil> listavehiculos = buscarvehiculos.MListarvehiculosBD();  //AQUI SE BUSCA TODO LOS VEHICULOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
-            //CAutomovil test = new CAutomovil("AG234FC", "3", "Mazda", 2006, "Sedan", 1589.5, 5, 7550.0, 250.6, 290.4, DateTime.Parse("11/11/2016"), "Azul", 1, "Automatico", "Venezuela", "Distrito Capital", "Caracas");
-            //listavehiculos.Add(test);
-
-       //b     return PartialView(listavehiculos);
-       //b }
-
-
         //Evento POST de la view de crear vuelo
 
         [AcceptVerbs(HttpVerbs.Get)]
@@ -140,21 +126,22 @@ namespace BOReserva.Controllers
         {
             CCrear_Vuelo model = new CCrear_Vuelo();
             List<CCrear_Vuelo> resultado = new List<CCrear_Vuelo>();
-            manejadorSQL sql = new manejadorSQL();
+            manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
 
 
-            resultado = sql.consultarDestinos(ciudadO);
+            resultado = sql.buscarAviones(ciudadO, ciudadD);
 
 
-            model._matriculasAvion = resultado.Select(x => new SelectListItem
+
+            model._matriculasAvion = resultado.Select(m => new SelectListItem
             {
-                Value = model._matriculaAvion,
-                Text = model._matriculaAvion
+                Value = m._matriculaAvion,
+                Text = m._matriculaAvion
             });
 
             if (resultado != null)
             {
-                return (Json(model._ciudadesDestino, JsonRequestBehavior.AllowGet));
+                return (Json(model._matriculasAvion, JsonRequestBehavior.AllowGet));
             }
             else
             {
@@ -173,7 +160,7 @@ namespace BOReserva.Controllers
         {
             CCrear_Vuelo model = new CCrear_Vuelo();
             List<CCrear_Vuelo> resultado = new List<CCrear_Vuelo>();
-            manejadorSQL sql = new manejadorSQL();
+            manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
 
 
             resultado = sql.consultarDestinos(ciudadO);
@@ -215,7 +202,7 @@ namespace BOReserva.Controllers
             String horaAterrizaje = model._horaAterrizaje;
             String statusAvion = model._statusVuelo;
 
-            manejadorSQL sql = new manejadorSQL();
+            manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
             //realizo el insert
             int resultado = sql.idRutaVuelo(model);
             //envio una respuesta dependiendo del resultado del insert

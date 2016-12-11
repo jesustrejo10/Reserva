@@ -38,13 +38,13 @@ $("#ciudadO").change(function () {
 $("#ciudadD").change(function () {
     var cID = $(ciudadO).val();
     var dID = $(ciudadD).val();
-    $.getJSON("gestion_vuelo/cargarDestinos", { ciudadO: cID, ciudadD: dID },
+    $.getJSON("gestion_vuelo/validarAviones", { ciudadO: cID, ciudadD: dID },
            function (data) {
-               var select = $("#ciudadD");
+               var select = $("#matAvion");
                select.empty();
                select.append($('<option/>', {
                    value: 0,
-                   text: "Seleccione una ciudad destino"
+                   text: "Seleccione un avion"
                }));
                $.each(data, function (index, itemData) {
                    select.append($('<option/>', {
