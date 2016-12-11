@@ -24,7 +24,7 @@
                                 <label for="nombreRol">Inserte nombre del rol 
 <!--                                (<span style="color:red">*</span>):-->
                                 </label>
-                                @Html.TextBoxFor(m => m.Nombre_rol, null, new { @class = "form-control", @placeholder = "rolnombre", @id = "nombre_rol" })
+                                @Html.TextBoxFor(m => m.Nombre_rol, null, new { @class = "form-control", @placeholder = "rolnombre", id = "nombre_rol" })
                                 </div>
                             <div class="col-xs-6">
                                <label for="modelo">Modulo</label><br>                                                           
@@ -41,7 +41,6 @@
                                 <label for="Acceso">Tendra acceso a:</label>                                
 
                                 <div class="checkbox" id="listaPermisos">
-                                    <label><input type="checkbox" value="a">a</label>
                                 </div>
 
 
@@ -64,7 +63,14 @@
     //Accion del boton agregarrol
         $("#agreagarrol").click(function (e) {
             e.preventDefault();
-            var form = $("#formagreagarrol");
+            var form = $("#formagreagarrol");            
+            var permisos = [$("#nombre_rol").val()];
+            jQuery.each($("input[type='checkbox']"), function (i) {               
+                if (this.checked && this.value!="on") {
+                    permisos.push(this.value);
+                }
+                
+            });
             $.ajax({
                 url: "gestion_roles/agregarrol",
                 data: form.serialize(),
@@ -74,6 +80,26 @@
                     $('#formagreagarrol')[0].reset();
                 }
             });
+            var data = {
+                json: JSON.stringify(permisos),
+            };
+            console.log(data);
+            $.ajax({
+                type: 'post',
+                dataType: 'json',
+                url: 'gestion_roles/asignarpermisos',
+                data: data,
+                success: function (data) {
+                    alert("Se asignaron los permisos");
+
+                },
+                failure: function (response) {
+                    alert("No se pudo asignar permisos");
+
+                }
+
+            });
+
         });
 
         $("#listamodulos").change(function (e) {
@@ -90,22 +116,18 @@
                 dataType: 'json',
                 url: 'gestion_roles/Consultarpermisos',
                 data: data,
-                success: OnSuccess,
+                success: cargadorPermisos,
                 failure: function (response) {
-                    alert("Se guardo");
+                    alert("Error buscando permisos");
 
                 }
                 
             });
-            function OnSuccess(response) {
+            function cargadorPermisos(response) {
 
                 var permisos = response;
-                console.log(permisos);
-                console.log(permisos[0]);
                 var container = $('#listaPermisos');
-                jQuery.each(permisos, function (i) {
-                    
-                
+                jQuery.each(permisos, function (i) {                                
                 var inputs = container.find('input');
                 var id = inputs.length + 1;
                 $('<input />', { type: 'checkbox', id: 'permiso' + id, value: permisos[i] }).appendTo(container);

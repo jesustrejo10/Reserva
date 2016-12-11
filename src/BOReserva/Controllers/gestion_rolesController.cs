@@ -49,6 +49,31 @@ namespace BOReserva.Controllers
 
         
         }
+        //Metodo para asignar permisos a los roles
+        [HttpPost]
+        public JsonResult asignarpermisos(string json)
+        {
+            // creo un item para guardar el Json 
+            var _permisos=JArray.Parse(json);         
+            //Verifico que todos los campos no sean nulos
+            if (_permisos == null)
+            {
+                //Creo el codigo de error de respuesta
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error               
+                String error = "Error, campo obligatorio vacio";
+                //Retorno el error                
+                return Json(error);
+            }
+            //instancio el manejador de sql
+            manejadorSQL sql = new manejadorSQL();
+            //Realizo el consulto y Guardo la respuesta de mi metodo sql 
+            //sql.consultarPermisos(_permisos);
+ 
+            //envio el resultado de la consulta
+            return (Json(true, JsonRequestBehavior.AllowGet));
+
+        }
         //Metodo para consultar permisos de modulo
         [HttpPost]
         public JsonResult Consultarpermisos(string json)
@@ -82,7 +107,6 @@ namespace BOReserva.Controllers
              {
                  _nombrePermiso.Add(permiso.Nombre);
              }
-             System.Diagnostics.Debug.WriteLine(permisos);
             //envio el resultado de la consulta
              return (Json(_nombrePermiso, JsonRequestBehavior.AllowGet));
         }
