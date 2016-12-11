@@ -69,12 +69,14 @@ $(document).ready(function() {
                                 <div class="col-md-12">
                                     <div class="col-xs-6">
                                         <label for="horarioApertura">Hora Apertura(<span style="color:red">*</span>):</label>
-                                        @Html.TextBoxFor(m => m._horarioApertura, null, new { @class = "form-control", @id = "horarioApertura"})
+                                        @Html.DropDownListFor(m => m._horarioApertura, new SelectList(Model._horarioLista))
+                                        @*Html.TextBoxFor(m => m._horarioApertura, null, new { @class = "form-control", @id = "horarioApertura"})*@
 
                                     </div>
                                     <div class="col-xs-6">
-                                        <label for="horarioCierre">Hora Cierre:</label>
-                                        @Html.TextBoxFor(m => m._horarioCierre, null, new { @class = "form-control", @id = "horarioCierre"})
+                                        <label for="horarioCierre">Hora Cierre(<span style="color:red">*</span>):</label>
+                                        @Html.DropDownListFor(m => m._horarioCierre, new SelectList(Model._horarioLista))
+                                        @*Html.TextBoxFor(m => m._horarioCierre, null, new { @class = "form-control", @id = "horarioCierre"})*@
 
                                     </div>
                                 </div>
