@@ -17,9 +17,10 @@ namespace FORevision.Controllers
        
 
         /// <summary>
-        /// Creacion Modelo Consultar Revision
+        /// Creacion Modelo Lista Revision
         /// </summary>
         /// <returns>Vista Modelo</returns>
+        
         
         public ActionResult Consultar_Revision_Usuario(string nombre , string apellido)
         {
@@ -32,34 +33,41 @@ namespace FORevision.Controllers
         }
 
         /// <summary>
-        /// Creacion Modelo Eliminar Revision
+        /// Creacion Modelo Lista Revision
         /// </summary>
         /// <returns>Vista Modelo</returns>
-        public bool Eliminar_Revision(string nombre, string apellido, int revision)
+        public ActionResult Eliminar_Revision(string nombre, string apellido, int revision)
         {
+           
+           
 
-                bool resultado;
+                CRevision Revision = new CRevision();
                 ManejadorSQLMuestraRevision manejador = new ManejadorSQLMuestraRevision();  
-                resultado = manejador.Eliminar_Revision(nombre, apellido, revision);
-                return true;
-                         
+                Revision = manejador.Eliminar_Revision(nombre, apellido, revision);
+                return PartialView(Revision);
+           
+
+           
+            
             
 
         }
         
+
         /// <summary>
         /// Creacion Modelo Crear Revision
         /// </summary>
         /// <returns>Vista Modelo</returns>
-        public bool Crear_Revision(string nombre, string apellido) 
+        public ActionResult Crear_Revision(string nombre, string apellido, int reserva) //crear reserva restaurant
         {
 
-            bool Revision;
+            CRevision Revision = new CRevision();
             ManejadorSQLMuestraRevision manejador = new ManejadorSQLMuestraRevision();
-           Revision = manejador.Crear_Revision(nombre, apellido);
-           return true;
+           // Revision = manejador.Crear_Revision(nombre, apellido, reserva);
+            return PartialView(Revision);
 
         }
+
 
         /// <summary>
         /// Creacion Modelo Mostrar Revision
@@ -88,19 +96,12 @@ namespace FORevision.Controllers
         }
 
          /// <summary>
-        /// Creacion Modelo Editar Revision
+        /// Creacion Modelo Crear Revision
         /// </summary>
         /// <returns>Vista Modelo</returns>
-        public bool Editar_Revision(string nombre, string apellido, int revision)
-        {
+        public ActionResult Editar_Revision(string nombre, string apellido, int reserva)
 
-            bool resultado;
-            ManejadorSQLMuestraRevision manejador = new ManejadorSQLMuestraRevision();
-            resultado = manejador.Editar_Revision(nombre, apellido, revision);
-            return true;
-
-
-        }
+    
 
        
 
