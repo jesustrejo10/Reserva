@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 
@@ -12,19 +13,21 @@ namespace BOReserva.Models.gestion_automoviles
     public class DAOAutomovil
     {
         //private String connetionString = @"Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User ID=DB_A1380A_reserva_admin;Password = ucabds1617a";
-        private String connetionString = ConfigurationManager.ConnectionStrings["DB_A1380A_reserva"].ConnectionString; //de esta forma el string de conexion se encuentra es en el web.config 
+        private String connetionString ="Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;Persist Security Info=True;User ID=DB_A1380A_reserva_admin;Password=ucabds1617a"; //de esta forma el string de conexion se encuentra es en el web.config 
         
         private SqlConnection con = null;
 
         public int MAgregarVehiculoBD(Automovil vehiculo)
         {
-            int fk_ciudad = MBuscarfkciudad(vehiculo._ciudad, vehiculo._pais);
+           // int fk_ciudad = MBuscarfkciudad(vehiculo._ciudad, vehiculo._pais);
+            int fk_ciudad = 12;
             try
             {
                 con = Connection.getInstance(connetionString);
                 con.Open();
-                String sql = "INSERT INTO Automovil VALUES ('"+vehiculo._matricula+"', '"+vehiculo._modelo+"', '"+vehiculo._fabricante+"', "+vehiculo._anio+", "+vehiculo._kilometraje+", "+vehiculo._cantpasajeros+", '"+vehiculo._tipovehiculo+
-                    "', " + vehiculo._preciocompra + ", " + vehiculo._precioalquiler + ", " + vehiculo._penalidaddiaria + ", '" + vehiculo._fecharegistro + "', '" + vehiculo._color + "', "+ 1 +", '"+vehiculo._transmision+"', "+ fk_ciudad+")";
+                String sql = "INSERT INTO Automovil VALUES ('" + vehiculo._matricula + "', '" + vehiculo._modelo + "', '" + vehiculo._fabricante + "', " + vehiculo._anio + ", " + vehiculo._kilometraje + ", " + vehiculo._cantpasajeros + ", '" + vehiculo._tipovehiculo +
+                    "', " + vehiculo._preciocompra + ", " + vehiculo._precioalquiler + ", " + vehiculo._penalidaddiaria + ", '" + vehiculo._fecharegistro + "', '" + vehiculo._color + "', " + 1 + ", '" + vehiculo._transmision + "', " + fk_ciudad + ")";
+                Debug.WriteLine(sql);
                 SqlCommand cmd = new SqlCommand(sql, con);
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
@@ -33,6 +36,8 @@ namespace BOReserva.Models.gestion_automoviles
             }
             catch (SqlException ex)
             {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
                 con.Close();
                 return 0;
             }
