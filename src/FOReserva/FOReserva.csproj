@@ -207,6 +207,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Autos\CAgregarReserva.cs" />
     <Compile Include="Models\Autos\CLugar.cs" />
     <Compile Include="Models\Autos\Cvista_ReservaAutos.cs" />
     <Compile Include="Models\BaseEntity.cs" />

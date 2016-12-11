@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Data;
+using System;
 
 
 namespace FOReserva.Servicio
@@ -52,7 +53,11 @@ namespace FOReserva.Servicio
 
            }
 
+        public Boolean InsertarReservaAuto(CAgregarReserva model) {
 
+
+            return true;
+        }
 
 
     }

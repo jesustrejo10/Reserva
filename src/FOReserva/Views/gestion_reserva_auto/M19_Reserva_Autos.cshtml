@@ -18,16 +18,22 @@
             <div class="form-group">
 
                 <div class="col-md-6 col-sm-6">
-
-
                     <label>Recoger en:</label>
-                   @Html.DropDownListFor(m => m.SelectedCiudadIdOrigen, Model.CiudadesOrigen, new { @class = "form-control select2", @id = "res_entrega" })            
+                   @Html.DropDownListFor(m => m.SelectedCiudadIdOrigen, Model.CiudadesOrigen, new { @class = "form-control select2", @id = "res_entrega" })      
+                    <div id="entrega" style="display: none;" class="has-error error">
+                        <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe seleccionar una ciudad de entrega</p>
+                    </div>      
                 </div>
-
+                
                 <div class="col-md-6 col-sm-6">
                     <label>Devolver en:</label>
                     @Html.DropDownListFor(m => m.SelectedCiudadIdDestino, Model.CiudadesDestino, new { @class = "form-control select2" , @id= "res_devolucion"})
+                    <div id="devolucion" style="display: none;" class="has-error error">
+                        <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe seleccionar una ciudad de entrega</p>
+                    </div>
                 </div>
+                
+                
             </div>
         </div>
 
@@ -35,10 +41,14 @@
             <div class="form-group">
                 <div class="col-md-6 col-sm-6">
                     <label>Fecha de Recogida:</label>
-                    @Html.TextBoxFor(m => m.fechaini, null, new { @type = "date", @class = "form-control", @placeholder = "Fecha", @id = "res_fechaini", min = "2016-12-10" , max = "2032-12-31"})
-                   <!-- <input type="text" name="contact[start_date]" value="10-11-2016" class="form-control datepicker required" data-format="dd-mm-yyyy" data-lang="en" data-rtl="false">  -->
+                    @Html.TextBoxFor(m => m.fechaini, null, new { @type = "date", @class = "form-control", @placeholder = "Fecha", @id = "res_fechaini", min = "Date" , max = "2032-12-31"})
+                   
+                    <div id="fechavieja" style="display: none;" class="has-error error">
+                        <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe seleccionar una fecha correcta</p>
+                    </div> 
+                   <br>
                     <label>Hora de Recogida:</label>
-                    <select id="res_horaini "name="contact[position]" class="form-control pointer required">
+                    <select id="res_horaini" name="contact[position]" class="form-control pointer required">
                         <option value="" selected>Selecciona la hora:</option>
                         <option value="7:00">7:00</option>
                         <option value="8:00">8:00</option>
@@ -58,13 +68,19 @@
                         <option value="22:00">22:00</option>
                         <option value="23:00">23:00</option>
                     </select>
+                    <div id="horaini_null" style="display: none;" class="has-error error">
+                        <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe seleccionar una hora para la entrega</p>
+                    </div>
                     <br>
                     
                 </div>
                 <div class="col-md-6 col-sm-6">
                     <label>Fecha  de Devolución:</label>
-                    @Html.TextBoxFor(m => m.fechaini, null, new { @type = "date", @class = "form-control", @placeholder = "Fecha", @id = "res_fechafin", min = "today", max = "2032-12-31" })
-                    <!--<input type="text" name="contact[start_date]" value="10-11-2016" class="form-control datepicker required" data-format="dd-mm-yyyy" data-lang="en" data-rtl="false"> -->
+                    @Html.TextBoxFor(m => m.fechafin, null, new { @type = "date", @class = "form-control", @placeholder = "Fecha", @id = "res_fechafin",  max = "2032-12-31" })
+                    <div id="fechafin_null" style="display: none;" class="has-error error">
+                        <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe seleccionar una fecha correcta</p>
+                    </div> 
+                    <br>
                     <label>Hora de Devolucion:</label>
                     <select id="res_horafin" name="contact[position]" class="form-control pointer required">
                         <option value="" selected>Selecciona la hora:</option>
@@ -86,6 +102,12 @@
                         <option value="22:00">22:00</option>
                         <option value="23:00">23:00</option>
                     </select>
+                    <div id="horafin_null" style="display: none;" class="has-error error">
+                        <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe seleccionar una hora para la devolucion</p>
+                    </div>
+                    <div id="horafin_igual" style="display: none;" class="has-error error">
+                        <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe seleccionar una hora distinta a la hora de entrega</p>
+                    </div>
                     <br>
                    
                 </div>
@@ -116,7 +138,7 @@
 
     $("#buscarCarro").click(function (e) {
         e.preventDefault();
-        //var form = $("#formSaveVehicle");
+        var form = $("#formBuscarCarro");
         var entrega = $('#res_entrega').val();
         var devolucion = $('#res_devolucion').val();
         var fechainicio = $('#res_fechaini').val();
@@ -129,8 +151,113 @@
         console.log(horainicio);
         console.log(fechafin);
         console.log(horafin);
+        
+        var horasistema = new Date();
+        console.log(horasistema);
+        var dia = horasistema.getDate();
+        var mes =horasistema.getMonth() + 1;        
+        console.log(mes);    
+        var anio = horasistema.getFullYear();
+        console.log(dia);
+        console.log(anio);
+        var union = anio + "-" + mes + "-" + dia;    
+        console.log(union);
+        var comparacion = fechainicio.localeCompare(union);
+        var comparacion2 = fechafin.localeCompare(union);
+        var comparacion3 = fechainicio.localeCompare(fechafin);
+        var horauno = parseInt(horainicio);
+        var horados = parseInt(horafin);
+        console.log(horauno);
+        console.log(horados);
+        var win = true;
+
+        //clear errors
+        $(".error").hide();
+        $("#res_entrega").removeClass("has-error");
+        $("#res_devolucion").removeClass("has-error");
+        $("#res_fechaini").removeClass("has-error");
+        $("#res_fechafin").removeClass("has-error");
+        $("#res_horaini").removeClass("has-error");
+        $("#res_horafin").removeClass("has-error");
+        
+       
+       
+        //AQUI VAN TRY/CATCH FALTA VALIDAR ESO
+        if (entrega=="-1")  {
+            $("#res_entrega").addClass("has-error");
+            $("entrega").fadeIn();
+          
+        }
+        if (devolucion=="-1") {
+            $("#res_devolucion").addClass("has-error");
+            $("devolucion").fadeIn();
+
+      }
+        
+
+       
+        //pregunto si la la fecha de entrega es menor a la fecha actual
+        if (comparacion == -1) {
+            $("#res_fechaini").addClass("has-error");
+            $("#fechavieja").fadeIn();
+            win = false;
+
+        } 
+            if (comparacion2 == -1) {
+                $("#res_fechafin").addClass("has-error");
+                $("#fechafin_null").fadeIn();
+                win = false;
+
+            }
+        
+
+        
+            if (fechainicio == null) {
+                $("#res_fechaini").addClass("has-error");
+                $("#fechavieja").fadeIn();
+                win = false;
+            } else {
+
+             if (fechafin == null) {
+                    $("#res_fechafin").addClass("has-error");
+                    $("#fechafin_null").fadeIn();
+                    win = false;
+                }
+            }
+            
+            if ((horafin == null) || (horafin == 0)) {
+                $("#res_horafin").addClass("has-error");
+                $("#horafin_null").fadeIn();
+                win = false;
+
+            }
+
+         if ((horainicio == null) || (horainicio == 0)) {
+                $("#res_horaini").addClass("has-error");
+                $("#horaini_null").fadeIn();
+                win = false;
+
+            } else {
+
+                if ((horafin == null) || (horafin == 0)) {
+                    $("#res_horafin").addClass("has-error");
+                    $("#horafin_null").fadeIn();
+                    win = false;
+                } else {
+                    if (comparacion3 == 0) {
+                        if ((horauno == horados) || (horados<=horauno)) {
+                            $("#res_horafin").addClass("has-error");
+                            $("#horafin_igual").fadeIn();
+                            win = false;
+                        }
+
+                    }
 
 
+                }
+
+
+            }
 
         
     });
