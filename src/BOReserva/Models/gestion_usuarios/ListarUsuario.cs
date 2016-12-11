@@ -50,18 +50,28 @@ namespace BOReserva.Models.gestion_usuarios
         /// <summary>
         /// id del usuario almacenado en la bd a traves de una secuencia
         /// </summary>
-        public int _contraseña { get; set; }
+        public string _contraseña { get; set; }
 
         /// <summary>
         /// id del usuario almacenado en la bd a traves de una secuencia
         /// </summary>
-        public int _confirmarContraseña { get; set; }
+        public string _confirmarContraseña { get; set; }
 
+        private String HashPassword(String pass)
+        {
+            return Encriptar.CrearHash(_contraseña);
+        }
 
         public String getDate()
         {
             return _fechaCreacion.ToString("dd/MM/yyyy");
         }
 
+        public CUsuario toClass()
+        {
+            CUsuario user = new CUsuario(_id, _nombre, _apellido, HashPassword(_contraseña), _correo, _activo, _rolID);
+            return user;
+
+        }
     }
 }

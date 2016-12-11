@@ -1,0 +1,90 @@
+﻿<script src="~/Scripts/Scripts_CheckIn/M05_Equipaje.js"></script>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h1 class="box-title">Registro Equipaje</h1>
+                <div class="box-tools pull-right">
+                </div>
+            </div>
+            <div class="box-body">
+
+                <div class="row">
+                    <div class="form-group">
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                <label>Cantidad de maletas:</label>
+                                <select name="maletas" onchange="maletasOnChange(this)" class="form-control select2" style="width: 100%;">
+                                    <option value="uno" selected="selected">1</option>
+                                    <option value="dos">2</option>
+                                    <option value="tres">3</option>
+                                </select>
+
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-6">
+
+                            <label>Peso maleta 1 (Kilogramos):</label>
+                            <input type="text" class="form-control" placeholder="Ej. 14">
+                        </div>
+
+
+
+
+
+                    </div>
+                </div>
+
+
+                <br>
+
+
+                <div class="row">
+
+
+
+
+                    <div class="col-md-6">
+
+                        <label id="maleta2lbl">Peso maleta 2 (Kilogramos):</label>
+                        <input type="text" class="form-control" placeholder="Ej. 14" id="maleta2tb">
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <label id="maleta3lbl">Peso maleta 3 (Kilogramos):</label>
+                        <input type="text" class="form-control" placeholder="Ej. 14" id="maleta3tb">
+                    </div>
+
+
+                </div>
+
+                <br>
+
+
+
+
+                <div class="row">
+
+                    <div class="col-md-12" style="margin-top:10px;">
+                        <button type="button" id="siguiente" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Registrar</button>
+                    </div>
+
+                </div>
+
+
+
+
+
+                <br>
+            </div>
+        </div>
+    </div>
+</div>  
