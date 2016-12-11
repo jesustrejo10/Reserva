@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Net;
 using BOReserva.Models.gestion_vuelo;
-using BOReserva.Servicio.Servicio_Aviones;
+using BOReserva.Servicio.Servicio_Vuelos;
 
 namespace BOReserva.Controllers
 {

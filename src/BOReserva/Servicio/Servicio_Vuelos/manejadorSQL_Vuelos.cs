@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using System.Data;
 using BOReserva.Models.gestion_vuelo;
 
-namespace BOReserva.Servicio.Servicio_Aviones
+namespace BOReserva.Servicio.Servicio_Vuelos
 {
     public class manejadorSQL_Vuelos
     {
