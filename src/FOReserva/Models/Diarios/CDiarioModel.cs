@@ -20,6 +20,8 @@ namespace FOReserva.Models.Diarios
         private int     _num_visita;
         private int     _fk_lugar;
 
+        //Para el formulario
+        private int     _filtro;
        
         //Constructors
        
@@ -46,6 +48,7 @@ namespace FOReserva.Models.Diarios
             this._calif_creador = calif_creador;
             this._rating        = rating;
             this._num_visita    = num_visita;
+            this._fk_lugar      = fk_lugar;
 
         }
 
@@ -111,24 +114,22 @@ namespace FOReserva.Models.Diarios
         }
 
         //ID de lugar de viaje
-        public int Lugar
+        public int Destino
         {
             get { return _fk_lugar; }
             set { _fk_lugar = value; }
         }
 
-        public List<SelectListItem> diariosLugares()
+        public List<SelectListItem> Lugares()
         {
-            ManejadorSQLDiarios manejador = new ManejadorSQLDiarios();
-            List<CLugar> lugaresCLugar = manejador.obtenerLugares();
-            List<SelectListItem> lugares = new List<SelectListItem>();
-            lugares.Add(new SelectListItem { Value = "0", Text = "------ Buscar por destino de viaje ------", Selected=true});
-            foreach (CLugar lug in lugaresCLugar)
-            {
-                SelectListItem l = new SelectListItem { Value = lug.ID.ToString(), Text = (lug.Tipo.Equals("pais") ? "" : "  --- ") + lug.Nombre };
-                lugares.Add(l);
-            }
-            return lugares;
+            CLugar cl= new CLugar();
+            return cl.diariosLugares();
+        }
+
+        public int Filtro
+        {
+            get { return _filtro; }
+            set { _filtro = value; }
         }
 
     }

@@ -11,8 +11,6 @@
 {
     <fieldset>
 
-        <input type="hidden" name="action" value="contact_send" />
-
         <div class="row">
             <div class="form-group">
                 <div class="col-sm-12">
@@ -83,16 +81,13 @@
                         $("#f_ini").val(drp.startDate.format('YYYY-MM-DD')),
                         $("#f_fin").val(drp.endDate.format('YYYY-MM-DD'))
                     });
-
+                    
                 </script>
 
                 <!--Inputs ocultos de fechas para el formulario-->
-                <div>
+
                     @Html.TextBoxFor(m => m.Fecha_ini, null, new { @id = "f_ini", @class = "form-control required", @name = "diario[f_inicio]", @type = "hidden", @value = "" })
-                </div>
-                <div>
                     @Html.TextBoxFor(m => m.Fecha_fin, null, new { @id = "f_fin", @class = "form-control required", @name = "diario[f_fin]", @type = "hidden", @value = "" })
-                </div>
             </div>
         </div>
 
@@ -100,7 +95,7 @@
             <div class="form-group">
                 <div class="col-sm-12">
                     <label>Lugares</label>
-                    @Html.DropDownListFor(m => m.Lugar, Model.diariosLugares(), new { @class="col-md-12" })  
+                    @Html.DropDownListFor(m => m.Destino, Model.Lugares(), new { @class="col-md-12", @id="lugares" })  
                     @*<select name="list_lugar "id="list_lugar" class="form-control">
                         <option value="0">------ Buscar por destino de viaje ------</option>
                         @foreach (var lug in Model.diariosLugares())
@@ -112,7 +107,24 @@
             </div>
         </div>
 
-    </fieldset>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <label>Ordenar por</label>
+                    <label class="radio-inline"><input type="radio" value="0" name="orden">Recientes primero</label>
+                    <label class="radio-inline"><input type="radio" value="1" name="orden">Antiguos primero</label>
+                    <label class="radio-inline"><input type="radio" value="2" name="orden">3333</label>
+                </div>
+            </div>
+        </div>
+        
+        <!--Input que guarda el valor del radiobutton seleccionado-->
+        @Html.TextBoxFor(m => m.Filtro, null, new { @id = "ordenInput", @class = "form-control required", @name = "dOrden", @type = "hidden" })
+
+
+
+
+</fieldset>
 
 <div class="row text-center">
     <div class="col-md-12">
@@ -124,39 +136,35 @@
     function buscar(a) {
         a.preventDefault();
         var form = $("#formBuscarDiarios");
-        alert("en buscar");
-        $.ajax({
-            url: "gestion_diarios/buscarDiarios",
-            data: form.serialize(),
-            type: 'POST',
-            success: function (data) {
-                alert("en ajax success");
-                $(".error").hide();
-                $("#nombreD").removeClass("has-error");
-                $("#f_ini").removeClass("has-error");
-                $("#f_fin").removeClass("has-error");
-                var texto = $("#nombreD").val();
-                var inicio = $("#f_ini").val();
-                var fin = $("#f_fin").val();
-         
-                var win = true;
 
-                if (texto == "" || texto == undefined) {
-                    $("#nombreD").addClass("has-error");
-                    $("#prueba_null").fadeIn();
-                    win = false;
-                }                
+        alert(form.serialize());
+        $(".error").hide();
+        $("#nombreD").removeClass("has-error");
+        $("#f_ini").removeClass("has-error");
+        $("#f_fin").removeClass("has-error");
+        var texto = $("#nombreD").val();
 
-                if (win) {
-                    
-                    return true;
-                }
-                else
+        var win = true;
+
+        if (texto == "" || texto == undefined) {
+            $("#nombreD").addClass("has-error");
+            $("#prueba_null").fadeIn();
+            win = false;
+        }
+
+        if (win) {
+            $.ajax({
+                url: "gestion_diarios/buscarDiarios",
+                data: form.serialize(),
+                type: 'POST',
+                success: function (data) {
                     alert(data);
-                
-                //$('#formBuscarVuelos')[0].reset();
-            }
-        });
+                }
+            });
+        }
+        else {
+            alert("Error de formularios");
+        }        
     }
 
     $("#buscarDiarios").click(function (e) { buscar(e) });      //Evento de click en el botón Buscar
@@ -166,6 +174,11 @@
 
         $("#f_ini").val("@DateTime.Today.ToString("yyyy-MM-dd")");
         $("#f_fin").val("@DateTime.Today.AddYears(-1).ToString("yyyy-MM-dd")");
+        $("#ordenInput").val("-1");
+        $('input[name=orden]:radio').change(function () {
+            $("#ordenInput").val($('input[name=orden]:checked').val());
+            alert($("#ordenInput").val());
+        });
         var url = '/gestion_diarios/gestion_diarios_resultados';
         var method = 'GET';
         var data = '';
@@ -180,8 +193,7 @@
 
                     $("#resultados").empty();
                     $("#resultados").html(data);
-
-
+                    
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     alert(errorThrown);
