@@ -123,13 +123,41 @@ namespace BOReserva.Servicio
             }
             catch (SqlException e)
             {
+                return false;
                 throw e;
+                
             }
             catch (Exception e)
             {
                 return false;
             }
         
+        }
+
+        public Boolean EliminarLogin(String usuario)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                SqlCommand cmd = new SqlCommand("DELETE from Login WHERE log_idusuario=1", conexion);
+                //cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@usu_correo", usuario);
+                cmd.ExecuteNonQuery();
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
         }
 
         public Boolean IncrementarIntentos(String usuario) {
