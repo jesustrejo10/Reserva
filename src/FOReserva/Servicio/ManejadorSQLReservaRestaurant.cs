@@ -125,7 +125,9 @@ namespace FOReserva.Servicio
          */
         public void eliminarReserva(int idReserva)
         {
-            string query = "DELETE FROM Reserva_Restaurante WHERE ID = "+idReserva;
+            string query = "Delete from Revision where rev_FK_res_res_id =" + idReserva;
+            this.Executer(query);
+            query = "DELETE FROM Reserva_Restaurante WHERE ID = "+idReserva;
             this.Executer(query);
             CloseConnection();
         }
