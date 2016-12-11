@@ -1,8 +1,8 @@
-﻿@model BOReserva.Models.gestion_hoteles.CGestionHoteles_CrearHotel
+﻿@model BOReserva.Models.gestion_hoteles.CHotel
 
 <script src="~/Scripts/Scripts_Hoteles/llamadas_generales_hoteles.js"></script>
 
-@using (Html.BeginForm("crearhotel", "gestion_hoteles", null, FormMethod.Post, new { @id = "formCrearHotel", @class = "form-horizontal" }))
+@using (Html.BeginForm("guardarHotel", "gestion_hoteles", null, FormMethod.Post, new { @id = "formCrearHotel", @class = "form-horizontal" }))
 
 {
    <div class="row">
@@ -33,13 +33,13 @@
                                 <div class="col-md-5">
                                     <!-- select -->                                     
                                         <label>País</label>                                       
-                                           @Html.DropDownList("Country", ViewData["pais"] as List<SelectListItem>, new { @class = "form-control", @placeholder = "Pais", @id = "Country" })                                                                      
+                                           @Html.DropDownListFor(m => m._pais, Model._listapaises, new { @class = "form-control", @id = "Country" })                                                                      
                                 </div><!--div col-xs-->
                                 <div class="col-md-1"></div>
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <label>Ciudad</label>
-                                       @Html.DropDownList("State", new SelectList(string.Empty, "Value", "Text"), "Please select a State", new { @class = "form-control", @placeholder = "Ciudad", @id = "State" })                                                                      
+                                                                                             
                                     </div>
                                 </div>
                             </div> <!--/div row-->
@@ -69,7 +69,7 @@
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <label for="pagina">Página Web</label>
-                                        @Html.TextBoxFor(m => m._paginaWeb, null, new { @class = "form-control", @placeholder = "Introduzca página web", @id = "paginaHotel" })
+                                        @Html.TextBoxFor(m => m._paginaweb, null, new { @class = "form-control", @placeholder = "Introduzca página web", @id = "paginaHotel" })
                                     </div>
                                 </div>
                             </div> <!--/div row-->
@@ -82,6 +82,13 @@
                                         @Html.TextBoxFor(m => m._email, null, new { @class = "form-control", @placeholder = "Introduzca correo electrónico del hotel", @id = "correoHotel" })
                                     </div>
                                 </div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label for="pagina">Cantidad de Habitaciones</label>
+                                        @Html.TextBoxFor(m => m._canthabitaciones, null, new { @class = "form-control", @placeholder = "Introduzca Cantidad de Habitaciones", @id = "habHotel" })
+                                    </div>
+                                </div>
                             </div> <!--/div row-->
                         </div> <!--/div box-body-->
                     </div>
@@ -89,7 +96,7 @@
                                 <div class="box-footer">
 
                                     <div class="pull-right">
-                                        <button type="submit" class="btn btn-success">Enviar</button>
+                                        <button type="button" id="aceptarhotel" class="btn btn-success">Guardar</button>
                                         <button type="button" class="btn btn-danger">Cancelar</button>
                                     </div>
                                 </div>

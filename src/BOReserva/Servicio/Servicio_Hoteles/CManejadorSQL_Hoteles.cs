@@ -22,7 +22,7 @@ namespace BOReserva.Servicio.Servicio_Hoteles
 
 
         //Procedimiento del Modulo 9 para agregar hoteles a la base de datos.
-        public Boolean insertarHotel(CGestionHoteles_CrearHotel model)
+        public Boolean insertarHotel(CHotel model)
         {
             try
             {
@@ -33,10 +33,14 @@ namespace BOReserva.Servicio.Servicio_Hoteles
                 //uso el SqlCommand para realizar los querys
                 SqlCommand query = conexion.CreateCommand();
                 //ingreso la orden del query
-                query.CommandText = "INSERT INTO Hotel VALUES ('" + model._nombre + "','" + model._estrellas + "',"
-                    + model._puntuacion + " , " + model._direccion + "," + model._paginaWeb + ");";
+                query.CommandText = "INSERT INTO Hotel " +
+                                     "(hot_nombre, hot_url_pagina, hot_email, hot_cantidad_habitaciones , hot_direccion, hot_estrellas, hot_puntuacion, hot_disponibilidad) " +
+                                     "VALUES ('" + model._nombre + "','" + model._paginaweb + "','" + model._email + "'," + 
+                                                   model._canthabitaciones.ToString() + ",'" + model._direccion + "'," + model._estrellas.ToString() + ",0,1);";
                 //creo un lector sql para la respuesta de la ejecucion del comando anterior               
                 SqlDataReader lector = query.ExecuteReader();
+
+                Debug.WriteLine("DEGUG SQL"+lector.ToString());
                 //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
                 /*while(lector.Read())
                 {
