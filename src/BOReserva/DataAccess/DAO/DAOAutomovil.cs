@@ -15,10 +15,10 @@ namespace BOReserva.Models.gestion_automoviles
     /// </summary>
     public class DAOAutomovil
     {
-        private String connetionString ="Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;Persist Security Info=True;User ID=DB_A1380A_reserva_admin;Password=ucabds1617a"; //de esta forma el string de conexion se encuentra es en el web.config 
+        private String stringDeConexion ="Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;Persist Security Info=True;User ID=DB_A1380A_reserva_admin;Password=ucabds1617a"; //de esta forma el string de conexion se encuentra es en el web.config 
         //private static String connetionString = ConfigurationManager.ConnectionStrings["DB_A1380A_reserva"].ConnectionString; //de esta forma el string de conexion se encuentra es en el web.config 
         
-        private SqlConnection con = null;
+        private SqlConnection conexion = null;
 
 
 
@@ -32,22 +32,22 @@ namespace BOReserva.Models.gestion_automoviles
         {
             try
             {
-                con = new SqlConnection(connetionString);
-                con.Open();
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
                 String sql = "INSERT INTO Automovil VALUES ('"+vehiculo._matricula+"', '"+vehiculo._modelo+"', '"+vehiculo._fabricante+"', "+vehiculo._anio+", "+vehiculo._kilometraje+", "+vehiculo._cantpasajeros+", '"+vehiculo._tipovehiculo+
                     "', " + vehiculo._preciocompra + ", " + vehiculo._precioalquiler + ", " + vehiculo._penalidaddiaria + ", '" + vehiculo._fecharegistro + "', '" + vehiculo._color + "', "+ 1 +", '"+vehiculo._transmision+"', "+ id +")";
                 Debug.WriteLine(sql);
-                SqlCommand cmd = new SqlCommand(sql, con);
+                SqlCommand cmd = new SqlCommand(sql, conexion);
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
-                con.Close();
+                conexion.Close();
                 return 1;
             }
             catch (SqlException ex)
             {
                 Debug.WriteLine("ENTRO EN EL CATCH");
                 Debug.WriteLine(ex.ToString());
-                con.Close();
+                conexion.Close();
                 return 0;
             }
         }
@@ -63,20 +63,20 @@ namespace BOReserva.Models.gestion_automoviles
         {
             try
             {
-                con = new SqlConnection(connetionString);
-                con.Open();
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
                 String sql = "UPDATE Automovil SET aut_modelo ='" + vehiculo._modelo + "', aut_fabricante = '" + vehiculo._fabricante + "', aut_anio = " + vehiculo._anio + ", aut_kilometraje = " + vehiculo._kilometraje + ", aut_cantpasajeros = " + vehiculo._cantpasajeros + ", aut_tipovehiculo = '" + vehiculo._tipovehiculo +
                     "', aut_preciocompra = " + vehiculo._preciocompra + ", aut_precioalquiler = " + vehiculo._precioalquiler + ", aut_penalidaddiaria = " + vehiculo._penalidaddiaria + ", aut_fecharegistro = '" + vehiculo._fecharegistro + "', aut_color = '" + vehiculo._color + "', aut_transmision = '" + vehiculo._transmision + "', aut_fk_ciudad = " + id + 
                     " WHERE aut_matricula = '"+vehiculo._matricula+"'";
-                SqlCommand cmd = new SqlCommand(sql, con);
+                SqlCommand cmd = new SqlCommand(sql, conexion);
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
-                con.Close();
+                conexion.Close();
                 return 1;
             }
             catch (SqlException ex)
             {
-                con.Close();
+                conexion.Close();
                 return 0;
             }
         }
@@ -91,10 +91,10 @@ namespace BOReserva.Models.gestion_automoviles
             List<Automovil> listavehiculos = new List<Automovil>();
             try
             {
-                con = new SqlConnection(connetionString);
-                con.Open();
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
                 String sql = "SELECT * FROM Automovil";
-                SqlCommand cmd = new SqlCommand(sql, con);
+                SqlCommand cmd = new SqlCommand(sql, conexion);
                 using (SqlDataReader reader = cmd.ExecuteReader()) {
                    while (reader.Read()) {
                        //SE AGREGA CREA UN OBJECTO VEHICLE SE PASAN LOS ATRIBUTO ASI reader["<etiqueta de la columna en la tabla Automovil>"]
@@ -113,12 +113,12 @@ namespace BOReserva.Models.gestion_automoviles
                    }
                 }
                 cmd.Dispose();
-                con.Close();
+                conexion.Close();
                 return listavehiculos;
             }
             catch (SqlException ex)
             {
-                con.Close();
+                conexion.Close();
                 return null;
             }
         }
@@ -134,10 +134,10 @@ namespace BOReserva.Models.gestion_automoviles
             Automovil vehiculo = null;
             try
             {
-                con = new SqlConnection(connetionString);
-                con.Open();
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
                 String sql = "SELECT * FROM Automovil WHERE aut_matricula = '" + matricula + "'";
-                SqlCommand cmd = new SqlCommand(sql, con);
+                SqlCommand cmd = new SqlCommand(sql, conexion);
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -154,13 +154,13 @@ namespace BOReserva.Models.gestion_automoviles
                                                  );
                     }
                     cmd.Dispose();
-                    con.Close();
+                    conexion.Close();
                     return vehiculo;
                 }
             }
             catch (SqlException ex)
             {
-                con.Close();
+                conexion.Close();
                 return null;
             }
             }
@@ -177,10 +177,10 @@ namespace BOReserva.Models.gestion_automoviles
             int id_ciudad = 12;
             try
             {
-                con = new SqlConnection(connetionString);
-                con.Open();
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
                 String sql = "SELECT d.lug_id FROM LUGAR C, LUGAR D WHERE C.lug_id = d.lug_FK_lugar_id AND C.lug_nombre = '"+pais+"' and D.lug_nombre = '"+ciudad+"'"; /*ESTE SQL ES EN CASO DE QUE NO SE MANEJE AL FINAL ESTADOS SINO SOLO PAISES Y CIUDADES*/
-                SqlCommand cmd = new SqlCommand(sql, con);
+                SqlCommand cmd = new SqlCommand(sql, conexion);
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -189,12 +189,12 @@ namespace BOReserva.Models.gestion_automoviles
                     }   
                 }
                 cmd.Dispose();
-                con.Close();
+                conexion.Close();
                 return id_ciudad;
             }
             catch (SqlException ex)
             {
-                con.Close();
+                conexion.Close();
                 return id_ciudad;
             }
         }
@@ -210,18 +210,18 @@ namespace BOReserva.Models.gestion_automoviles
         {
             try
             {
-                con = new SqlConnection(connetionString);
-                con.Open();
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
                 String sql = "DELETE FROM Automovil WHERE aut_matricula = '"+matricula+"'";
-                SqlCommand cmd = new SqlCommand(sql, con);
+                SqlCommand cmd = new SqlCommand(sql, conexion);
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
-                con.Close();
+                conexion.Close();
                 return 1;
             }
             catch (SqlException ex)
             {
-                con.Close();
+                conexion.Close();
                 return 0;
             }
         }
@@ -237,10 +237,10 @@ namespace BOReserva.Models.gestion_automoviles
             String _ciudad = "Error al buscar";
             try
             {
-                con = new SqlConnection(connetionString);
-                con.Open();
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
                 String sql = "SELECT C.lug_nombre FROM LUGAR C WHERE C.lug_id = '" + id + "'"; ;
-                SqlCommand cmd = new SqlCommand(sql, con);
+                SqlCommand cmd = new SqlCommand(sql, conexion);
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -249,12 +249,12 @@ namespace BOReserva.Models.gestion_automoviles
                     }
                 }
                 cmd.Dispose();
-                con.Close();
+                conexion.Close();
                 return _ciudad;
             }
             catch (SqlException ex)
             {
-                con.Close();
+                conexion.Close();
                 return _ciudad;
             }
         }
@@ -271,11 +271,11 @@ namespace BOReserva.Models.gestion_automoviles
             String _lugar = "Error al buscar";
             try
             {
-                con = new SqlConnection(connetionString);
-                con.Open();
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
                 String sql = "SELECT E.lug_nombre FROM LUGAR E, LUGAR C WHERE E.lug_id = C.lug_fk_lugar_id " +
                              "AND C.lug_id = " + ciudad ;
-                SqlCommand cmd = new SqlCommand(sql, con);
+                SqlCommand cmd = new SqlCommand(sql, conexion);
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -284,12 +284,12 @@ namespace BOReserva.Models.gestion_automoviles
                     }
                 }
                 cmd.Dispose();
-                con.Close();
+                conexion.Close();
                 return _lugar;
             }
             catch (SqlException ex)
             {
-                con.Close();
+                conexion.Close();
                 return _lugar;
             }
         }
@@ -305,10 +305,10 @@ namespace BOReserva.Models.gestion_automoviles
             String[] listapaises = new String[5000];
             try
             {
-                con = new SqlConnection(connetionString);
-                con.Open();
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
                 String sql = "SELECT lug_nombre FROM Lugar WHERE lug_tipo_lugar = 'pais'";
-                SqlCommand cmd = new SqlCommand(sql, con);
+                SqlCommand cmd = new SqlCommand(sql, conexion);
                 int i = 0;
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -319,17 +319,17 @@ namespace BOReserva.Models.gestion_automoviles
                     }
                 }
                 cmd.Dispose();
-                con.Close();
+                conexion.Close();
                 return listapaises;
             }
             catch (SqlException ex)
             {
-                con.Close();
+                conexion.Close();
                 return null;
             }
             catch (InvalidOperationException ex)
             {
-                con.Close();
+                conexion.Close();
                 return null;
             }
         }
@@ -345,10 +345,10 @@ namespace BOReserva.Models.gestion_automoviles
             int fk = -1;
             try
             {
-                con = new SqlConnection(connetionString);
-                con.Open();
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
                 String sql = "SELECT lug_id FROM Lugar WHERE lug_nombre = '"+pais+"'";
-                SqlCommand cmd = new SqlCommand(sql, con);
+                SqlCommand cmd = new SqlCommand(sql, conexion);
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -357,12 +357,12 @@ namespace BOReserva.Models.gestion_automoviles
                     }
                 }
                 cmd.Dispose();
-                con.Close();
+                conexion.Close();
                 return fk;
             }
             catch (SqlException ex)
             {
-                con.Close();
+                conexion.Close();
                 return fk;
             }
         }
@@ -377,18 +377,18 @@ namespace BOReserva.Models.gestion_automoviles
         {
             try
             {
-                con = new SqlConnection(connetionString);
-                con.Open();
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
                 String sql = "UPDATE Automovil SET aut_disponibilidad = "+activardesactivar+" WHERE aut_matricula = '" + matricula + "'";
-                SqlCommand cmd = new SqlCommand(sql, con);
+                SqlCommand cmd = new SqlCommand(sql, conexion);
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
-                con.Close();
+                conexion.Close();
                 return 1;
             }
             catch (SqlException ex)
             {
-                con.Close();
+                conexion.Close();
                 return 0;
             }
         }
@@ -404,10 +404,10 @@ namespace BOReserva.Models.gestion_automoviles
             List<String> _ciudades = new List<string>();
             try
             {
-                con = new SqlConnection(connetionString);
-                con.Open();
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
                 String sql = "SELECT lug_nombre FROM Lugar WHERE lug_fk_lugar_id = " + fk ;
-                SqlCommand cmd = new SqlCommand(sql, con);
+                SqlCommand cmd = new SqlCommand(sql, conexion);
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -416,12 +416,12 @@ namespace BOReserva.Models.gestion_automoviles
                     }
                 }
                 cmd.Dispose();
-                con.Close();
+                conexion.Close();
                 return _ciudades;
             }
             catch (SqlException ex)
             {
-                con.Close();
+                conexion.Close();
                 return _ciudades;
             }
         }

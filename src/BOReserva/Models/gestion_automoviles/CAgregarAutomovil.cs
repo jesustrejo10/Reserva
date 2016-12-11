@@ -6,6 +6,9 @@ using System.Web;
 
 namespace BOReserva.Models.gestion_automoviles
 {
+    /// <summary>
+    /// Clase del modelo de la vista parcial M08_AgregarAutomovil
+    /// </summary>
     public class CAgregarAutomovil
     {
         [Required]

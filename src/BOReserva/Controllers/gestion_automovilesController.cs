@@ -5,35 +5,56 @@ using System.Web;
 using System.Web.Mvc;
 using BOReserva.Models.gestion_automoviles;
 using System.Diagnostics;
+using BOReserva.Servicio;
 namespace BOReserva.Controllers
 {
+    /// <summary>
+    /// Clase controladora del módulo de Gestión de Automóviles
+    /// </summary>
     public class gestion_automovilesController : Controller
     {
-        //
-        // GET: /gestion_automoviles/
+        
         public static String ciudad;
         public static String _pais;
 
+
+
+        /// <summary>
+        /// Método de la vista parcial M08_AgregarAutomovil
+        /// </summary>
+        /// <returns>Retorna la vista parcial M08_AgregarAutomovil</returns>
         public ActionResult M08_AgregarAutomovil()
         {
             CAgregarAutomovil model = new CAgregarAutomovil();
             return PartialView(model);
         }
 
+
+        /// <summary>
+        /// Método de la vista parcial M08_VisualizarAutomoviles
+        /// </summary>
+        /// <returns>Retorna la vista parcial M08_VisualizarAutomoviles</returns>
         public ActionResult M08_VisualizarAutomoviles()
         {
             //var companies = DataRepository.GetCompanies();
             //List<CAutomovil> listavehiculos = new List<CAutomovil>();
-            DAOAutomovil buscarvehiculos = new DAOAutomovil();
+            manejadorSQL buscarvehiculos = new manejadorSQL();
             List<Automovil> listavehiculos = buscarvehiculos.MListarvehiculosBD();  //AQUI SE BUSCA TODO LOS VEHICULOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
             //CAutomovil test = new CAutomovil("AG234FC", "3", "Mazda", 2006, "Sedan", 1589.5, 5, 7550.0, 250.6, 290.4, DateTime.Parse("11/11/2016"), "Azul", 1, "Automatico", "Venezuela", "Distrito Capital", "Caracas");
             //listavehiculos.Add(test);
             return PartialView(listavehiculos);
         }
 
+
+
+        /// <summary>
+        /// Método de la vista parcial M08_VisualizarAutomovil
+        /// </summary>
+        /// <param name="matricula">Matrícula del vehículo a visualizar</param>
+        /// <returns>Retorna la vista parcial M08_VisualizarAutomovil</returns>
         public ActionResult M08_VisualizarAutomovil(String matricula)
         {
-            DAOAutomovil buscarvehiculo = new DAOAutomovil();
+            manejadorSQL buscarvehiculo = new manejadorSQL();
             Automovil vehiculo = buscarvehiculo.MMostrarvehiculoBD(matricula); //BUSCA EL AUTOMOVIL A MOSTRAR
             //EN TODOS ESTOS METODOS HAY QUE USAR TRY CATCH
             //CAutomovil test = new CAutomovil("AG234FC", "3", "Mazda", 2006, "Sedan", 1589.5, 5, 7550.0, 250.6, 290.4, DateTime.Parse("11/11/2016"), "Azul", 1, "Automatico", "Venezuela", "Distrito Capital", "Caracas");
@@ -55,11 +76,18 @@ namespace BOReserva.Controllers
             automovil._pais = vehiculo._pais;
             automovil._ciudad = vehiculo._ciudad;
             return PartialView(automovil);
-        }  
+        }
 
+
+
+        /// <summary>
+        /// Método de la vista parcial M08_ModificarAutomovil
+        /// </summary>
+        /// <param name="matricula">Matrícula del vehículo a modificar</param>
+        /// <returns>Retorna la vista parcial M08_ModificarAutomovil</returns>
         public ActionResult M08_ModificarAutomovil(String matricula)
         {
-            DAOAutomovil buscarvehiculo = new DAOAutomovil();
+            manejadorSQL buscarvehiculo = new manejadorSQL();
             Automovil vehiculo = buscarvehiculo.MMostrarvehiculoBD(matricula); //BUSCA EL AUTOMOVIL A MOSTRAR
             //EN TODOS ESTOS METODOS HAY QUE USAR TRY CATCH
             //CAutomovil test = new CAutomovil("AG234FC", "3", "Mazda", 2006, "Sedan", 1589.5, 5, 7550.0, 250.6, 290.4, DateTime.Parse("11/11/2016"), "Azul", 1, "Automatico", "Venezuela", "Distrito Capital", "Caracas");
@@ -83,7 +111,12 @@ namespace BOReserva.Controllers
             return PartialView(automovil);
         }
 
-        public static List<SelectListItem> GetDropDownListForYears()
+
+        /// <summary>
+        /// Método que lista los años desde 1930 al 2016
+        /// </summary>
+        /// <returns>Retorna una lista de items que contine los años</returns>
+        public static List<SelectListItem> listadeanios()
         {
             List<SelectListItem> ls = new List<SelectListItem>();
             ls.Add(new SelectListItem() { Text = "", Value = "" });
@@ -95,6 +128,12 @@ namespace BOReserva.Controllers
             return ls;
         }
 
+
+        /// <summary>
+        /// Método que lista una cantidad de números
+        /// </summary>
+        /// <param name="cant">Tope hasta donde se va a listar</param>
+        /// <returns>Retorna una lista de items que contine los números listados</returns>
         public static List<SelectListItem> cantidad(int cant)
         {
             List<SelectListItem> ls = new List<SelectListItem>();
@@ -108,6 +147,11 @@ namespace BOReserva.Controllers
             return ls;
         }
 
+
+        /// <summary>
+        /// Método que lista los colores disponibles para los vehículos
+        /// </summary>
+        /// <returns>Retorna una lista de items que contine los colores</returns>
         public static List<SelectListItem> colores()
         {
             List<SelectListItem> _color = new List<SelectListItem>();
@@ -144,13 +188,22 @@ namespace BOReserva.Controllers
             return _color;
         }
 
+
+        /// <summary>
+        /// Método que guarda en una variable la ciudad seleccionada
+        /// </summary>
+        /// <param name="_ciudad">Nombre de la ciudad a guardar</param>
         [HttpPost]
         public void getCity(String _ciudad)
         {
             ciudad = _ciudad;
         }
 
-
+        /// <summary>
+        /// Método que se utiliza para guardar un vehículo ingresado
+        /// </summary>
+        /// <param name="model">Datos que provienen de un formulario de la vista parcial M08_AgregarAutomovil</param>
+        /// <returns>Retorna un JsonResult</returns>
         [HttpPost]
         public JsonResult saveVehicle(CAgregarAutomovil model)
         {
@@ -173,13 +226,19 @@ namespace BOReserva.Controllers
             Automovil carronuevo = new Automovil(matricula, modelo, fabricante, anio, tipovehiculo, kilometraje, 
                                              cantpasajeros, preciocompra, precioalquiler, penalidaddiaria, fecharegistro,
                                              color, 1, transmision, pais, _ciudad);  //SE CREA EL VEHICULO
-            DAOAutomovil buscarid = new DAOAutomovil();
+            manejadorSQL buscarid = new manejadorSQL();
             int id_ciudad = buscarid.MBuscaridciudadBD(_ciudad, pais);
             int agrego_si_no = carronuevo.MAgregaraBD(carronuevo, id_ciudad); //SE AGREGA A LA BD RETORNA 1 SI SE AGREGA Y 0 SINO LO LOGRA
             
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
 
+
+        /// <summary>
+        /// Método que se utiliza para modificar un vehículo existente
+        /// </summary>
+        /// <param name="model">Datos que provienen de un formulario de la vista parcial M08_ModificarAutomovil</param>
+        /// <returns>Retorna un JsonResult</returns>
         [HttpPost]
         public JsonResult modifyVehicle(CModificarAutomovil model)
         {
@@ -187,7 +246,6 @@ namespace BOReserva.Controllers
             int anio = model._anio;
             int cantpasajeros = model._cantpasajeros;
             String color = model._color;
-            bool disponibilidad = true;
             String fabricante = model._fabricante;
             DateTime fecharegistro = Convert.ToDateTime(model._fecharegistro);
             double kilometraje = model._kilometraje;
@@ -203,15 +261,20 @@ namespace BOReserva.Controllers
             Automovil carro = new Automovil(matricula, modelo, fabricante, anio, tipovehiculo, kilometraje, 
                                              cantpasajeros, preciocompra, precioalquiler, penalidaddiaria, fecharegistro, 
                                              color, 1, transmision, pais, _ciudad);  //SE CREA EL VEHICULO
-            DAOAutomovil buscarid = new DAOAutomovil();
+            manejadorSQL buscarid = new manejadorSQL();
             int id_ciudad = buscarid.MBuscaridciudadBD(_ciudad, pais);
             int modifico_si_no = carro.MModificarvehiculoBD(carro, id_ciudad); //SE MODIFICA A LA BD RETORNA 1 SI SE  MODIFICO Y 0 SI NO LO LOGRA
             
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
 
+        /// <summary>
+        /// Método que se utiliza para visualizar un vehículo ingresado
+        /// </summary>
+        /// <param name="model">Datos que provienen de un formulario de la vista parcial M08_VisualizarAutomovil</param>
+        /// <returns>Retorna un JsonResult</returns>
         [HttpPost]
-        public JsonResult viewVehicle(CModificarAutomovil model)
+        public JsonResult viewVehicle(CVisualizarAutomovil model)
         {
             String matricula = model._matricula;
             int anio = model._anio;
@@ -232,7 +295,14 @@ namespace BOReserva.Controllers
             Debug.WriteLine("IMPRIMIENDO UN MENSAJE" + matricula);
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
-   
+
+
+
+        /// <summary>
+        /// Método que se utiliza para eliminar un vehículo existente
+        /// </summary>
+        /// <param name="matricula">Matrícula del vehículo a eliminar</param>
+        /// <returns>Retorna un JsonResult</returns>
         public JsonResult deleteVehicle(String matricula)
         {
             String _matricula = matricula;
@@ -240,7 +310,6 @@ namespace BOReserva.Controllers
             int cantpasajeros = 0;
             String ciudad = "";
             String color = "";
-            int disponibilidad = 0;
             String fabricante = "";
             DateTime fecharegistro = DateTime.Now;
             double kilometraje = 0;
@@ -260,9 +329,13 @@ namespace BOReserva.Controllers
         }
 
 
+        /// <summary>
+        /// Método que retorna la lista de países
+        /// </summary>
+        /// <returns>Retorna una lista de Items que contiene los países disponibles</returns>
         public static List<SelectListItem> pais()
         {
-            DAOAutomovil pais = new DAOAutomovil();
+            manejadorSQL pais = new manejadorSQL();
             List<SelectListItem> _pais = new List<SelectListItem>();
             String[] paises = pais.MListarpaisesBD();
             int i = 0;
@@ -285,18 +358,27 @@ namespace BOReserva.Controllers
             return _pais;
         }
 
-
+        /// <summary>
+        /// Método que retorna la lista de ciudades
+        /// </summary>
+        /// <param name="pais">Nombre del país del cual se desea conocer las ciudades disponibles</param>
+        /// <returns>Retorna un ActionResult que contiene las ciudades disponibles para el país solicitado</returns>
         [HttpPost]
         public ActionResult listaciudades(String pais)
         {
             List<String> objcity = new List<String>();
             _pais = pais;
-            DAOAutomovil listaciudades = new DAOAutomovil();
+            manejadorSQL listaciudades = new manejadorSQL();
             int fk = listaciudades.MIdpaisesBD(pais);
             objcity = listaciudades.MListarciudadesBD(fk);
             return Json(objcity);
         }
 
+        /// <summary>
+        /// Método para cambiar a "Disponible" el estatus de un vehículo
+        /// </summary>
+        /// <param name="matricula">Matrícula del vehículo al que se le cambiará el estatus</param>
+        /// <returns>Retorna un JsonResult</returns>
         public JsonResult activateVehicle(String matricula)
         {
             String _matricula = matricula;
@@ -304,7 +386,6 @@ namespace BOReserva.Controllers
             int cantpasajeros = 0;
             String ciudad = "";
             String color = "";
-            int disponibilidad = 0;
             String fabricante = "";
             DateTime fecharegistro = DateTime.Now;
             double kilometraje = 0;
@@ -323,7 +404,11 @@ namespace BOReserva.Controllers
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
 
-        
+        /// <summary>
+        /// Método para cambiar a "No disponible" el estatus de un vehículo
+        /// </summary>
+        /// <param name="matricula">Matrícula del vehículo al que se le cambiará el estatus</param>
+        /// <returns>Retorna un JsonResult</returns>
         public JsonResult deactivateVehicle(String matricula)
         {
             String _matricula = matricula;
@@ -331,7 +416,6 @@ namespace BOReserva.Controllers
             int cantpasajeros = 0;
             String ciudad = "";
             String color = "";
-            int disponibilidad = 0;
             String fabricante = "";
             DateTime fecharegistro = DateTime.Now;
             double kilometraje = 0;

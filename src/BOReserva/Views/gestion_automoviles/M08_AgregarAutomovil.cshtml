@@ -56,7 +56,7 @@
                             </div>
                             <div class="col-xs-6">
                                 <label for="anio">Año de fabricación(<span style="color:red">*</span>)</label>
-                                @Html.DropDownListFor(m => m._anio, BOReserva.Controllers.gestion_automovilesController.GetDropDownListForYears(), new { @class = "form-control", @placeholder = "Placa", @id = "vehi_anio"})
+                                @Html.DropDownListFor(m => m._anio, BOReserva.Controllers.gestion_automovilesController.listadeanios(), new { @class = "form-control", @placeholder = "Placa", @id = "vehi_anio"})
                             </div>
                         </div>
                         <div>&nbsp;</div>
