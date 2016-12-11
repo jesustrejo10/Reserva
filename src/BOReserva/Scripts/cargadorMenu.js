@@ -313,9 +313,33 @@
                 }
             });
     });
-    $("#m13AgregarRol").click(function (e) {
+
+    //M11 Gestion Ofertas y Paquetes
+    $("#agregarOferta").unbind('click');
+    $("#agregarOferta").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_roles/M13_AgregarRol';
+        var url = '/gestion_ofertas/M11_AgregarOferta';
+        var method = 'GET';
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                    getPaquetesFromDB();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
+
+    $("#modificarOferta").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_ofertas/M11_ModificarOferta';
         var method = 'GET';
         var data = '';
 
@@ -335,6 +359,7 @@
             });
     });
 
+    $("#consultarOferta").click(function (e) {
     /* INICIO M10 RESTAURANTES BO */
 
     $("#verRestaurantes").click(function (e) {
@@ -384,7 +409,7 @@
     /* FIN M10 RESTAURANTES BO */
     $("#m13VisualizarRol").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_roles/M13_VisualizarRol';
+        var url = '/gestion_ofertas/M11_VisualizarOferta';
         var method = 'GET';
         var data = '';
 
@@ -404,6 +429,9 @@
             });
     });
 
+    $("#agregarPaquete").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_ofertas/M11_AgregarPaquete';
     $("#m05VisualizarBoletos").click(function (e) {
         e.preventDefault();
         var url = '/gestion_boletos/M05_VisualizarBoletos';
@@ -424,6 +452,33 @@
                     alert(errorThrown);
                 }
             });
+    });
+
+    $("#modificarPaquete").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_ofertas/M11_ModificarPaquete';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
+    $("#consultarPaquete").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_ofertas/M11_ConsultarPaquete';
 
     });
 
@@ -447,6 +502,10 @@
                     alert(errorThrown);
                 }
             });
+    });
+
+    //Fin M11
+});
 
     });
 });
