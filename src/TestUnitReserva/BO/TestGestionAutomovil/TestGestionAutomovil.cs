@@ -12,37 +12,43 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
 {
     [TestFixture]
     public class  TestGestionAutomovil
-       
-    
     {
-  
-       
+        DAOAutomovil daoAutomovil;
+
+        [SetUp]
+        public void Before()
+        {
+            DAOAutomovil daoAutomovil = new DAOAutomovil();    
+        }
+
+        [TearDown]
+        public void After() {
+            daoAutomovil = null;
+        }
 
         [Test]
         public void M08_AgregarVehiculoBD()
         {
             String placa = Util.RandomString(7);
             Automovil auto = new Automovil(placa,"3","Mazda",1936,"Sedan",5,5,1,1,1,DateTime.Now,"Azul",1,"Automatica","Venezuela","Caracas");
-            DAOAutomovil Has = new DAOAutomovil();
-            int prueba1 = Has.MAgregarVehiculoBD(auto);
+            
+            int prueba1 = daoAutomovil.MAgregarVehiculoBD(auto);
             Debug.WriteLine(prueba1);
             Assert.AreEqual(1, prueba1);
         }
 
+        /*
         [Test]
         public void M08_BuscarFkCiudad()
         {
-/*
-            Automovil auto = new Automovil("zxcas", "3", "Mazda", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
-            DAOAutomovil Has = new DAOAutomovil();
-            int prueba1 = Has.MAgregarVehiculoBD(auto);
-            Debug.WriteLine(prueba1);
-            
- */ 
-            Assert.AreEqual(1, 1);
+            String pais = "Venezuela";
+            String ciudad = "Caracas";
+            //ya se que el id de la ciudad Caracas, Venezuela es: 12
+            int response = daoAutomovil.MBuscarfkciudad(ciudad, pais);
+            Assert.AreEqual(response, 12);
 
         }
 
-
+        */
     }
 }

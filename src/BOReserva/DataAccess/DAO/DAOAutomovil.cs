@@ -144,7 +144,7 @@ namespace BOReserva.Models.gestion_automoviles
 
         public int MBuscarfkciudad (String ciudad, String pais)
         {
-            int fk_ciudad = 12;
+            int fk_ciudad = 0;
             try
             {
                 con = new SqlConnection(connetionString);
