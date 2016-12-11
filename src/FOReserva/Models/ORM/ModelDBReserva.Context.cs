@@ -50,7 +50,7 @@ namespace FOReserva.Models.ORM
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<M20_DetalleReservaHabitacion_Result>("M20_DetalleReservaHabitacion", id_reservaParameter);
         }
     
-        public virtual ObjectResult<M20_GuardarReservaHabitacion_Result> M20_GuardarReservaHabitacion(Nullable<int> id_reserva, Nullable<int> habitacion, Nullable<int> cantidad_dias, Nullable<System.DateTime> fecha_reservada, Nullable<int> hot_id, Nullable<int> usu_id, Nullable<int> estado)
+        public virtual ObjectResult<M20_GuardarReservaHabitacion_Result> M20_GuardarReservaHabitacion(Nullable<int> id_reserva, Nullable<int> habitacion, Nullable<int> cantidad_dias, Nullable<System.DateTime> fecha_llegada, Nullable<int> hot_id, Nullable<int> usu_id, Nullable<int> estado)
         {
             var id_reservaParameter = id_reserva.HasValue ?
                 new ObjectParameter("id_reserva", id_reserva) :
@@ -64,9 +64,9 @@ namespace FOReserva.Models.ORM
                 new ObjectParameter("cantidad_dias", cantidad_dias) :
                 new ObjectParameter("cantidad_dias", typeof(int));
     
-            var fecha_reservadaParameter = fecha_reservada.HasValue ?
-                new ObjectParameter("fecha_reservada", fecha_reservada) :
-                new ObjectParameter("fecha_reservada", typeof(System.DateTime));
+            var fecha_llegadaParameter = fecha_llegada.HasValue ?
+                new ObjectParameter("fecha_llegada", fecha_llegada) :
+                new ObjectParameter("fecha_llegada", typeof(System.DateTime));
     
             var hot_idParameter = hot_id.HasValue ?
                 new ObjectParameter("hot_id", hot_id) :
@@ -80,7 +80,7 @@ namespace FOReserva.Models.ORM
                 new ObjectParameter("estado", estado) :
                 new ObjectParameter("estado", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<M20_GuardarReservaHabitacion_Result>("M20_GuardarReservaHabitacion", id_reservaParameter, habitacionParameter, cantidad_diasParameter, fecha_reservadaParameter, hot_idParameter, usu_idParameter, estadoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<M20_GuardarReservaHabitacion_Result>("M20_GuardarReservaHabitacion", id_reservaParameter, habitacionParameter, cantidad_diasParameter, fecha_llegadaParameter, hot_idParameter, usu_idParameter, estadoParameter);
         }
     
         public virtual ObjectResult<M20_HotelHistorialReservaHabitacion_Result> M20_HotelHistorialReservaHabitacion(Nullable<int> id_hotel)
@@ -99,6 +99,49 @@ namespace FOReserva.Models.ORM
                 new ObjectParameter("id_usuario", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<M20_UsuarioHistorialReservaHabitacion_Result>("M20_UsuarioHistorialReservaHabitacion", id_usuarioParameter);
+        }
+    
+        public virtual ObjectResult<M20_BuscarHotelesPorCiudad_Result> M20_BuscarHotelesPorCiudad(Nullable<int> id_ciudad, Nullable<int> cantidad_dias, Nullable<System.DateTime> fecha_llegada)
+        {
+            var id_ciudadParameter = id_ciudad.HasValue ?
+                new ObjectParameter("id_ciudad", id_ciudad) :
+                new ObjectParameter("id_ciudad", typeof(int));
+    
+            var cantidad_diasParameter = cantidad_dias.HasValue ?
+                new ObjectParameter("cantidad_dias", cantidad_dias) :
+                new ObjectParameter("cantidad_dias", typeof(int));
+    
+            var fecha_llegadaParameter = fecha_llegada.HasValue ?
+                new ObjectParameter("fecha_llegada", fecha_llegada) :
+                new ObjectParameter("fecha_llegada", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<M20_BuscarHotelesPorCiudad_Result>("M20_BuscarHotelesPorCiudad", id_ciudadParameter, cantidad_diasParameter, fecha_llegadaParameter);
+        }
+    
+        public virtual ObjectResult<M20_GenerarReservaHabitacion_Result> M20_GenerarReservaHabitacion(Nullable<int> hot_id, Nullable<int> usu_id, Nullable<int> cantidad_dias, Nullable<System.DateTime> fecha_llegada)
+        {
+            var hot_idParameter = hot_id.HasValue ?
+                new ObjectParameter("hot_id", hot_id) :
+                new ObjectParameter("hot_id", typeof(int));
+    
+            var usu_idParameter = usu_id.HasValue ?
+                new ObjectParameter("usu_id", usu_id) :
+                new ObjectParameter("usu_id", typeof(int));
+    
+            var cantidad_diasParameter = cantidad_dias.HasValue ?
+                new ObjectParameter("cantidad_dias", cantidad_dias) :
+                new ObjectParameter("cantidad_dias", typeof(int));
+    
+            var fecha_llegadaParameter = fecha_llegada.HasValue ?
+                new ObjectParameter("fecha_llegada", fecha_llegada) :
+                new ObjectParameter("fecha_llegada", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<M20_GenerarReservaHabitacion_Result>("M20_GenerarReservaHabitacion", hot_idParameter, usu_idParameter, cantidad_diasParameter, fecha_llegadaParameter);
+        }
+    
+        public virtual ObjectResult<M20_ObtenerCiudades_Result> M20_ObtenerCiudades()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<M20_ObtenerCiudades_Result>("M20_ObtenerCiudades");
         }
     }
 }

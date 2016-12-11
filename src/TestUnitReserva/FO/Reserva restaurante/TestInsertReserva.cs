@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using NUnit.Framework;
 using FOReserva.Models.Restaurantes;
 using FOReserva.Servicio;
@@ -6,7 +7,7 @@ using FOReserva.Servicio;
 namespace TestUnitReserva.FO.Reserva_restaurante
 {
     [TestFixture]
-    class TestInsertReserva
+    public class TestInsertReserva
     {
        /*
         private CReservation_Restaurant reserva;
