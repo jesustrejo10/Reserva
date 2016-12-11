@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BO\gestion_restaurantes\TestRestaurante.cs" />
+    <Compile Include="BO\gestion_ruta_comercial\TestRutaComercial.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FO\Reserva restaurante\TestInsertReserva.cs" />
   </ItemGroup>
