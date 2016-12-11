@@ -55,21 +55,59 @@ $("#ciudadD").change(function () {
            });
 });
 
+
 $("#matAvion").change(function () {
-    var aID = $(ciudadO).val();
+    var aID = $(matAvion).val();
     $.getJSON("gestion_vuelo/buscaModeloA", { matriAvion: aID },
            function (data) {
-               var select = $("#modeloAvion");
-               select.empty();
-               select.append($('<option/>', {
-                   value: 0,
-                   text: ""
-               }));
-               $.each(data, function (index, itemData) {
-                   select.append($('<option/>', {
-                       value: itemData.Value,
-                       text: itemData.Text
-                   }));
-               });
+               $("#modeloAvion").val(data);
            });
+});
+
+$("#matAvion").change(function () {
+    var aID = $(matAvion).val();
+    $.getJSON("gestion_vuelo/buscaPasajerosA", { matriAvion: aID },
+       function (data) {
+           $("#pasajerosAvion").val(data);
+       });
+});
+
+$("#matAvion").change(function () {
+    var aID = $(matAvion).val();
+    $.getJSON("gestion_vuelo/buscaDistanciaA", { matriAvion: aID },
+       function (data) {
+           $("#distanciaMaxima").val(data);
+       });
+});
+
+$("#matAvion").change(function () {
+    var aID = $(matAvion).val();
+    $.getJSON("gestion_vuelo/buscaVelocidadA", { matriAvion: aID },
+       function (data) {
+           $("#velocidadMaxima").val(data);
+       });
+});
+
+$("#estadoVuelo").change(function () {
+    var fID = $(fechaDespegue).val();
+    var hID = $(horaDespegue).val();
+    var oID = $(ciudadO).val();
+    var dID = $(ciudadD).val();
+    var mID = $(matAvion).val();
+    $.getJSON("gestion_vuelo/buscaFechaA", { fechaDes: fID, horaDes: hID, ciudadO: oID, ciudadD: dID, matriAvion: mID  },
+       function (data) {
+           $("#fechaAterrizaje").val(data);
+       });
+});
+
+$("#estadoVuelo").change(function () {
+    var fID = $(fechaDespegue).val();
+    var hID = $(horaDespegue).val();
+    var oID = $(ciudadO).val();
+    var dID = $(ciudadD).val();
+    var mID = $(matAvion).val();
+    $.getJSON("gestion_vuelo/buscaHoraA", { fechaDes: fID, horaDes: hID, ciudadO: oID, ciudadD: dID, matriAvion: mID },
+       function (data) {
+           $("#horaAterrizaje").val(data);
+       });
 });

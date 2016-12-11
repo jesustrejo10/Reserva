@@ -154,24 +154,18 @@ namespace BOReserva.Controllers
 
 
         [AcceptVerbs(HttpVerbs.Get)]
-        public JsonResult buscaModeloA(string ciudadO)
+        public JsonResult buscaModeloA(string matriAvion)
         {
             CCrear_Vuelo model = new CCrear_Vuelo();
-            List<CCrear_Vuelo> resultado = new List<CCrear_Vuelo>();
+            string resultado = "";
             manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
 
 
-            resultado = sql.consultarDestinos(ciudadO);
-
-            model._ciudadesDestino = resultado.Select(m => new SelectListItem
-            {
-                Value = m._ciudadDestino,
-                Text = m._ciudadDestino
-            });
+            resultado = sql.modeloAvion(matriAvion);
 
             if (resultado != null)
             {
-                return (Json(model._ciudadesDestino, JsonRequestBehavior.AllowGet));
+                return (Json(resultado, JsonRequestBehavior.AllowGet));
             }
             else
             {
@@ -180,6 +174,76 @@ namespace BOReserva.Controllers
                 return Json(error);
             }
         }
+
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult buscaPasajerosA(string matriAvion)
+        {
+            CCrear_Vuelo model = new CCrear_Vuelo();
+            string resultado = "";
+            manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
+
+
+            resultado = sql.pasajerosAvion(matriAvion);
+
+            if (resultado != null)
+            {
+                return (Json(resultado, JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error accediendo a la BD";
+                return Json(error);
+            }
+        }
+
+
+
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult buscaDistanciaA(string matriAvion)
+        {
+            CCrear_Vuelo model = new CCrear_Vuelo();
+            string resultado = "";
+            manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
+
+
+            resultado = sql.distanciaAvion(matriAvion);
+
+            if (resultado != null)
+            {
+                return (Json(resultado, JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error accediendo a la BD";
+                return Json(error);
+            }
+        }
+
+
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult buscaVelocidadA(string matriAvion)
+        {
+            CCrear_Vuelo model = new CCrear_Vuelo();
+            string resultado = "";
+            manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
+
+
+            resultado = sql.velocidadAvion(matriAvion);
+
+            if (resultado != null)
+            {
+                return (Json(resultado, JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error accediendo a la BD";
+                return Json(error);
+            }
+        }
+
 
 
 
@@ -228,9 +292,6 @@ namespace BOReserva.Controllers
             String horaAterrizaje = model._horaAterrizaje;
             String statusAvion = model._statusVuelo;
 
-            manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
-            //realizo el insert
-            int resultado = sql.idRutaVuelo(model);
             
 
             return (Json(true, JsonRequestBehavior.AllowGet));
@@ -241,5 +302,29 @@ namespace BOReserva.Controllers
         {
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
+
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult buscaFechaA(string fechaDes, string horaDes, string ciudadO, string ciudadD, string matriAvion)
+        {
+            CCrear_Vuelo model = new CCrear_Vuelo();
+            string resultado = "";
+            string fecha = "";
+            manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
+
+
+            resultado = sql.fechaVuelo(fechaDes, horaDes, ciudadO, ciudadD, matriAvion);
+
+            if (resultado != null)
+            {
+                return (Json(resultado, JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error accediendo a la BD";
+                return Json(error);
+            }
+        }
+
     }
 }
