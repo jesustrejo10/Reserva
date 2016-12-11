@@ -72,7 +72,7 @@
             var str = $('#vehi_registro').val();
             var date = new Date(str);
             var year = date.getFullYear();
-            if ((year < 2000) || (year > 2016)) {
+            if ((year <= 1999) || (year > 2016)) {
                 alert('El año ingresado no es válido');
                 $("#vehi_registro").val("");
             }

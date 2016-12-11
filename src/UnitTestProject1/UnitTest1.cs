@@ -104,7 +104,8 @@ namespace UnitTestProject1
             //prueba no vacia
             Assert.IsNotNull(prueba);
           //
-            int contar=0;
+         
+           
 
         }
     }
