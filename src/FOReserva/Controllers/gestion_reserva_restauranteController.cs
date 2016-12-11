@@ -187,7 +187,7 @@ namespace FOReserva.Controllers
             }
         }
         [System.Web.Services.WebMethod]
-        public void editar_reserva(int id)
+        public void editar_reserva(int c_id_reserva,string c_name_client, string c_reserv_date, string c_reserv_hour,int c_number_person)
         {
 
         }

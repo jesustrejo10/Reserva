@@ -196,33 +196,13 @@
         $('#number_person').attr('value', $(id_fila).children('.reserv_count').attr('value'));
         $('#ModalModificar').modal('show');
     });
-    function editar_reserva() {
-        var id_fila = $(this).attr('value');
-        var name_client = $('#name_client').attr('value');
-        var reserv_date = $('#reserv_date').attr('value');
-        var reserv_hour = $('#reserv_hour').attr('value');
-        var number_person = $('#number_person').attr('value');
-        $.ajax({
-            url: "/gestion_reserva_restaurante/editar_reserva/",
-            type: 'POST',
-            data: {},
-
-        }).done(function () {
-
-        })
-	    .fail(function () {
-	        console.log("error");
-	    })
-	    .always(function () {
-	        console.log("complete");
-	    });
-    }
 
 </script>
 
 
 <script>
     // DATE PICKER
+
     $(document).ready(function () {
         $('.datepicker').datepicker({
             orientation: "bottom",
@@ -283,7 +263,31 @@
             }
 
             if (win) {
-                $("#reserva_form").submit();
+                var id_fila = $(this).attr('value');
+                var name_client = $('#name_client').attr('value');
+                var reserv_date = $('#reserv_date').attr('value');
+                var reserv_hour = $('#reserv_hour').attr('value');
+                var number_person = $('#number_person').attr('value');
+                $.ajax({
+                    url: "/gestion_reserva_restaurante/editar_reserva/",
+                    type: 'POST',
+                    data: {
+                        c_id_reserva: id_fila,
+                        c_name_client: name_client,
+                        c_reserv_date: reserv_date,
+                        c_reserv_hour: reserv_hour,
+                        c_number_person: number_person
+                    },
+
+                }).done(function () {
+
+                })
+                .fail(function () {
+                    console.log("error");
+                })
+                .always(function () {
+                    console.log("complete");
+                });
             }
             else
                 return false;
