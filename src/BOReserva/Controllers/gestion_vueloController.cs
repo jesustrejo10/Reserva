@@ -131,8 +131,6 @@ namespace BOReserva.Controllers
 
             resultado = sql.buscarAviones(ciudadO, ciudadD);
 
-
-
             model._matriculasAvion = resultado.Select(m => new SelectListItem
             {
                 Value = m._matriculaAvion,
@@ -156,7 +154,7 @@ namespace BOReserva.Controllers
 
 
         [AcceptVerbs(HttpVerbs.Get)]
-        public JsonResult cargarDestinos(string ciudadO)
+        public JsonResult buscaModeloA(string ciudadO)
         {
             CCrear_Vuelo model = new CCrear_Vuelo();
             List<CCrear_Vuelo> resultado = new List<CCrear_Vuelo>();
@@ -165,7 +163,35 @@ namespace BOReserva.Controllers
 
             resultado = sql.consultarDestinos(ciudadO);
 
-            
+            model._ciudadesDestino = resultado.Select(m => new SelectListItem
+            {
+                Value = m._ciudadDestino,
+                Text = m._ciudadDestino
+            });
+
+            if (resultado != null)
+            {
+                return (Json(model._ciudadesDestino, JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error accediendo a la BD";
+                return Json(error);
+            }
+        }
+
+
+
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult cargarDestinos(string ciudadO)
+        {
+            CCrear_Vuelo model = new CCrear_Vuelo();
+            List<CCrear_Vuelo> resultado = new List<CCrear_Vuelo>();
+            manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
+
+
+            resultado = sql.consultarDestinos(ciudadO);
 
             model._ciudadesDestino = resultado.Select(m => new SelectListItem
                 {
@@ -205,7 +231,6 @@ namespace BOReserva.Controllers
             manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
             //realizo el insert
             int resultado = sql.idRutaVuelo(model);
-            //envio una respuesta dependiendo del resultado del insert
             
 
             return (Json(true, JsonRequestBehavior.AllowGet));

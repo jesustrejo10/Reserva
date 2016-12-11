@@ -22,7 +22,6 @@ namespace BOReserva.Servicio.Servicio_Vuelos
         private string stringDeConexion = null;
 
 
-
         public int idRutaVuelo( CCrear_Vuelo model)
         {
             try

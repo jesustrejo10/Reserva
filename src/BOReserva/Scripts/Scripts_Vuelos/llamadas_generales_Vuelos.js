@@ -54,3 +54,22 @@ $("#ciudadD").change(function () {
                });
            });
 });
+
+$("#matAvion").change(function () {
+    var aID = $(ciudadO).val();
+    $.getJSON("gestion_vuelo/buscaModeloA", { matriAvion: aID },
+           function (data) {
+               var select = $("#modeloAvion");
+               select.empty();
+               select.append($('<option/>', {
+                   value: 0,
+                   text: ""
+               }));
+               $.each(data, function (index, itemData) {
+                   select.append($('<option/>', {
+                       value: itemData.Value,
+                       text: itemData.Text
+                   }));
+               });
+           });
+});
