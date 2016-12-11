@@ -27,8 +27,8 @@
                                 @Html.TextBoxFor(m => m.Nombre_rol, null, new { @class = "form-control", @placeholder = "rolnombre", @id = "nombre_rol" })
                                 </div>
                             <div class="col-xs-6">
-                               <label for="modelo">Modulo</label><br>
-                                <select name="listbox" id="listbox">
+                               <label for="modelo">Modulo</label><br>                                                           
+                                <select name="lista_modulos" id="listamodulos">
                                     @foreach (var item in Model.Menu)
                                     {
                                         <option value="@item.Nombre">
@@ -76,6 +76,28 @@
                 }
             });
         });
+
+        $("#listamodulos").change(function (e) {
+            e.preventDefault();
+            var modulo = $("#listamodulos option:selected").text();
+            var json = {
+                mod: modulo,
+            };
+            var data = {
+                json: JSON.stringify(json),
+            };
+            $.ajax({
+                type: 'post',
+                dataType: 'json',
+                url: 'gestion_roles/Consultarpermisos',
+                data: data,
+                success: function (data) {
+                alert("Se guardo");
+                }
+                
+            });
+        });
+
     </script>
 
 }

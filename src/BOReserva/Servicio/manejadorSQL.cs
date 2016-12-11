@@ -662,6 +662,47 @@ namespace BOReserva.Servicio
                 throw e;
             }
         }
+        //Procedimiento del Modulo 13 para retornar lista de los modulos detallados
+        public CListaGenerica<CModulo_detallado> consultarPermisos(String modulo)
+        {
+            CListaGenerica<CModulo_detallado> modulo_detallado = new CListaGenerica<CModulo_detallado>();
+            try
+            {
+                
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //Abrir la conexion
+                conexion.Open();
+                //query es un string que me devolvera la consulta 
+                System.Diagnostics.Debug.WriteLine(modulo);
+                String query = "SELECT mod_det_nombre,mod_det_url FROM Modulo_Detallado,Modulo_general WHERE mod_gen_id=fk_mod_gen_id and mod_gen_nombre='"+modulo+"'" ;
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+                while (lector.Read())
+                {
+                    var entrada = new CModulo_detallado();
+                    entrada.Nombre = lector.GetSqlString(0).ToString();
+                    entrada.Url= lector.GetSqlString(1).ToString();
+                    modulo_detallado.agregarElemento(entrada);
+                   
+                }
+                //cierro el lector
+                lector.Close();
+                //Cerrar la conexion
+                conexion.Close();
+                return modulo_detallado;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
         //Procedimiento del Modulo 13 para insertar Roles
         public Boolean insertarRol(CRoles model)
         {
