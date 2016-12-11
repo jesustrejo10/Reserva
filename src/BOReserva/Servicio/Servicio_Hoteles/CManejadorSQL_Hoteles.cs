@@ -85,5 +85,38 @@ namespace BOReserva.Servicio.Servicio_Hoteles
                 return null;
             }
         }
+
+        public String[] MListarciudadesBD(String _pais)
+        {
+            String[] listaciudades = new String[5000];
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "SELECT A.lug_nombre" +
+                             "FROM Lugar A, (SELECT lug_id FROM Lugar " +
+                                                                "WHERE lug_nombre = '" + _pais + "') C" +
+                             "WHERE A.lug_FK_lugar_id =C.lug_id";
+
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                int i = 0;
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        listaciudades[i] = reader[0].ToString();
+                        i++;
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return listaciudades;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return null;
+            }
+        }
     }
 }
