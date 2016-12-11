@@ -1,0 +1,149 @@
+﻿
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title> Sistema Backoffice Reserva</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="../../Content/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../Content/dist/css/AdminLTE.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="../../Content/plugins/iCheck/square/blue.css">
+
+    <link href="~/Views/Login/css/Background.css" rel="stylesheet" />
+
+   
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+
+
+    </style>
+</head>
+
+
+<body class="hold-transition login-page" style="background: url(../../Content/dist/img/travelling.jpg) no-repeat center center fixed">
+
+
+
+    <div class="login-box">
+
+        <div class="login-logo">
+
+            <img src="../../Content/dist/img/logo_final1.png" alt="Logo Reserva" align="middle" />
+
+        </div>
+
+
+        <!-- INICIO DE LA FORMA LOGIN-->
+        <div class="login-box-body">
+            <p class="login-box-msg">Iniciar Sesión</p> 
+
+            <form method="post">
+
+                              
+                   @if (@TempData["CorreoVacio"] != null || @TempData["ContraseñaVacio"]!= null)
+                   {
+
+                        <p class="box-title">Correo</p>
+
+                        <p style="color:red">@TempData["CorreoVacio"]</p>
+
+                        <div class="form-group has-feedback">
+                          @if (TempData["CorreoVacio"] != null)
+                          {
+                          <input type="email" style="border-color:red" name="correo" class="form-control" placeholder="alex@reserva.com" value="@TempData["Correo"]" oninvalid="this.setCustomValidity('Debe colocar un correo valido')" oninput="setCustomValidity('')">
+                          <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                          }
+                          else
+                          {
+                            <input type="email" name="correo" class="form-control" placeholder="alex@reserva.com" oninvalid="this.setCustomValidity('Debe colocar un correo valido')" oninput="setCustomValidity('')">
+                            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+
+                          }
+                        </div>
+                       
+                        <p class="box-title">Contraseña</p>
+                        <p style="color:red">@TempData["ContraseñaVacio"]</p>
+                        <div class="form-group has-feedback">
+                         @if (TempData["ContraseñaVacio"] != null)
+                         {
+                          <input type="password" style="border-color:red" name="contraseña" class="form-control" placeholder="**********">
+                          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                         }
+                         else
+                         {
+                            <input type="password" name="contraseña" class="form-control" placeholder="**********">
+                            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                         }
+                        </div>
+                   }
+                   else
+                     {
+                         <p style="color:red">@TempData["Mensaje"]</p>
+                         <p class="box-title">Correo</p>
+                           <div class="form-group has-feedback">
+                               <input type="email" name="correo" class="form-control" placeholder="alex@reserva.com" oninvalid="this.setCustomValidity('Debe colocar un correo valido')" oninput="setCustomValidity('')">
+                             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                           </div>
+
+                         <p class="box-title">Contraseña</p>
+                         <div class="form-group has-feedback">
+                           <input type="password" name="contraseña" class="form-control" placeholder="**********">
+                           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                         </div>
+                       }
+
+                
+
+
+                <div class="row">
+
+                    <!-- /.col -->
+                    <div class="col-xs-6">
+                        <button type="submit" class="btn bg-olive btn-primary btn-block btn-flat" style="margin-left:90px;">Iniciar Sesión</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+
+            </form>
+
+            <!--<a href="/gestion_seguridad_ingreso/M01_RecuperarContrasenna" style="margin-left:86px;">¿Olvidaste tu contraseña?</a><br>-->
+
+           
+        </div>
+        <!-- /.login-box-body -->
+       
+    </div>
+
+    <!-- FIN DE LA FORMA LOGIN -->
+    <!-- jQuery 2.2.3 -->
+    
+    <script src="../../Content/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <!-- Bootstrap 3.3.6 -->
+    <script src="../../Content/bootstrap/js/bootstrap.min.js"></script>
+    <!-- iCheck -->
+    <script src="../../Content/bootstrap/iCheck/icheck.min.js"></script>
+
+
+
+</body>
+</html>
