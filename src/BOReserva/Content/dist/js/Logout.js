@@ -1,5 +1,5 @@
 ﻿var timoutWarning = 540000; //Muestra pop up al usuario al minuto restante de cierre de sesion
-var timoutNow = 60000; // Cierra la sesion a los 10 min 
+var timoutNow = 600000; // Cierra la sesion a los 10 min 
 var logoutUrl = 'gestion_seguridad_ingreso/M01_Login' // redirige al landing page Login.
 
 var warningTimer;
