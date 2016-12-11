@@ -27,7 +27,15 @@
       color: #f39c12 !important
 }
 
-
-
+.descrip-conten {
+    color: #fff;
+    text-align: left;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: auto;
+    background-color: rgba(0,0,0,0.5);
+    padding: 20px;
+}
 
 /*************************** END - ANDREA CAMACHO ******************************************/
