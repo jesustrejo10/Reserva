@@ -7,7 +7,7 @@ using FOReserva.Servicio;
 namespace TestUnitReserva.FO.Reserva_restaurante
 {
     [TestFixture]
-    class TestInsertReserva
+    public class TestInsertReserva
     {
        /*
         private CReservation_Restaurant reserva;

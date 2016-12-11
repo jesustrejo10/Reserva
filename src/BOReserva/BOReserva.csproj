@@ -33,6 +33,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\BOReserva.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -200,31 +201,31 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\gestion_automovilesController.cs" />
-    <Compile Include="Controllers\gestion_avionesController.cs" />
+    <Compile Include="Controllers\gestion_avionesController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controllers\gestion_boletosController.cs" />
     <Compile Include="Controllers\gestion_check_inController.cs" />
     <Compile Include="Controllers\gestion_hotelesController.cs" />
     <Compile Include="Controllers\gestion_comida_vueloController.cs" />
+    <Compile Include="Controllers\gestion_ofertasController.cs" />
     <Compile Include="Controllers\gestion_restaurantesController.cs" />
     <Compile Include="Controllers\gestion_rolesController.cs" />
     <Compile Include="Controllers\gestion_ruta_comercialController.cs" />
     <Compile Include="Controllers\gestion_usuariosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DataAccess\Model\Connection.cs" />
+    <Compile Include="DataAccess\Model\ConexionUtil.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\gestion_automoviles\CAgregarAutomovil.cs" />
-    <Compile Include="Models\gestion_automoviles\CBasededatos_vehiculo.cs" />
+    <Compile Include="DataAccess\DAO\DAOAutomovil.cs" />
     <Compile Include="Models\gestion_automoviles\CModificarAutomovil.cs" />
     <Compile Include="Models\gestion_automoviles\CVisualizarAutomovil.cs" />
-    <Compile Include="Models\gestion_automoviles\CVisualizarAutomoviles.cs" />
-    <Compile Include="Models\gestion_automoviles\CAutomovil.cs" />
-    <Compile Include="Models\gestion_automoviles\VehicleList.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Models\gestion_automoviles\VehicleModel.cs" />
+    <Compile Include="DataAccess\Domain\Automovil.cs" />
     <Compile Include="Models\gestion_aviones\CAgregarAvion.cs" />
     <Compile Include="Models\gestion_aviones\CAvion.cs" />
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
@@ -238,6 +239,10 @@
     <Compile Include="Models\gestion_boletos\CVuelo.cs" />
     <Compile Include="Models\gestion_hoteles\CGestionHoteles_CrearHotel.cs" />
     <Compile Include="Models\gestion_lugares\CLugarModelo.cs" />
+    <Compile Include="Models\gestion_ofertas\CAgregarOferta.cs" />
+    <Compile Include="Models\gestion_ofertas\CAgregarPaquete.cs" />
+    <Compile Include="Models\gestion_ofertas\COferta.cs" />
+    <Compile Include="Models\gestion_ofertas\CPaquete.cs" />
     <Compile Include="Models\gestion_roles\CListaGenerica.cs" />
     <Compile Include="Models\gestion_roles\CModulo_detallado.cs" />
     <Compile Include="Models\gestion_roles\CModulo_general.cs" />
@@ -252,7 +257,6 @@
     <Compile Include="Models\gestion_usuarios\ExceptionBD.cs" />
     <Compile Include="Models\gestion_usuarios\ExceptionM12Reserva.cs" />
     <Compile Include="Models\gestion_usuarios\ListarUsuario.cs" />
-    <Compile Include="Models\gestion_usuarios\ModificarUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\Parametro.cs" />
     <Compile Include="Models\gestion_usuarios\PersistenciaUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\RecursoBD.Designer.cs">
@@ -266,6 +270,7 @@
       <DependentUpon>RecursoUsuario.resx</DependentUpon>
     </Compile>
     <Compile Include="Models\gestion_usuarios\ResultadoBD.cs" />
+    <Compile Include="Models\Util.cs" />
     <Compile Include="Models\gestion_restaurantes\CRestauranteModeloVista.cs" />
     <Compile Include="Models\gestion_restaurantes\CRestauranteModelo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -433,7 +438,6 @@
     <Content Include="Content\bootstrap\js\bootstrap.js" />
     <Content Include="Content\bootstrap\js\bootstrap.min.js" />
     <Content Include="Content\bootstrap\js\npm.js" />
-    <Content Include="Models\gestion_automoviles\placeholder.html" />
     <Content Include="Models\gestion_aviones\placeholder.html" />
     <Content Include="Models\gestion_comida_vuelo\placeholder.html" />
     <Content Include="Models\gestion_cruceros\placeholder.html" />
@@ -459,6 +463,7 @@
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\Scripts_Automoviles\llamadas_comunes_automoviles.js" />
     <Content Include="Scripts\Scripts_Aviones\llamadas_generales.js" />
     <Content Include="Scripts\Scripts_CheckIn\BoardingPass.js" />
     <Content Include="Scripts\Scripts_CheckIn\M05_CheckIn.js" />
@@ -466,6 +471,7 @@
     <Content Include="Scripts\Scripts_CheckIn\M05_VerBoletosCheckIn.js" />
     <Content Include="Scripts\Scripts_CheckIn\M05_VerDetalleBoleto.js" />
     <Content Include="Scripts\Scripts_Hoteles\llamadas_generales_hoteles.js" />
+    <Content Include="Scripts\Scripts_Ofertas\llamadas_generales.js" />
     <Content Include="Scripts\Scripts_Restaurantes\llamadas_generales.js" />
     <Content Include="Scripts\select2\css\select2.min.css" />
     <Content Include="Scripts\select2\js\i18n\en.js" />
@@ -1439,6 +1445,13 @@
     <Content Include="Views\gestion_ruta_comercial\ModificarRutasComerciales.cshtml" />
     <Content Include="Views\gestion_ruta_comercial\AgregarRutasComerciales.cshtml" />
     <Content Include="Views\gestion_ruta_comercial\DetallesRutasComerciales.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_AgregarOferta.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_AgregarPaquete.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_VisualizarOferta.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_ConsultarPaquete.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_GestionOfertas.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_ModificarOferta.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_ModificarPaquete.cshtml" />
     <Content Include="Views\gestion_roles\M13_AgregarRol.cshtml" />
     <Content Include="Views\gestion_roles\M13_VisualizarRol.cshtml" />
   </ItemGroup>
@@ -1527,6 +1540,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoUsuario.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

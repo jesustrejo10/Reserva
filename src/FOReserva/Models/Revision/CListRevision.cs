@@ -5,32 +5,35 @@ using System.Web;
 
 namespace FOReserva.Models.Revision
 {
-    public class CListRevision : List <CRevision>
+    /// <summary>
+    /// Clase Lista Revision
+    /// </summary>
+    public class CListRevision : List<CRevision>
     {
         private int _num;
         private string _lugar;
         private CRevision _revision;
 
-
-
-
-
-
-        public CListRevision(int numero, string lugar , CRevision revision)   // preguntar si coloco los atributos de CRevision
- 
-            {
-    
+        /// <summary>
+        /// Builder Lista Revision
+        /// </summary>
+        /// <param name="numero"></param>
+        /// <param name="lugar"></param>
+        /// <param name="revision"></param>
+        public CListRevision(int numero, string lugar, CRevision revision)
+        {
             this._num = numero;
             this._lugar = lugar;
-            this._revision = new CRevision();   // colocaria los atributos de la clase
-
-                 
-    }
-        public CListRevision()
-        {
-            
+            this._revision = revision;
         }
 
+        /// <summary>
+        /// Builder Lista Revision Vacio
+        /// </summary>
+        public CListRevision()
+        {
+
+        }
 
         public int Num
         {
@@ -42,7 +45,5 @@ namespace FOReserva.Models.Revision
             get { return _lugar; }
             set { _lugar = value; }
         }
-
-
     }
 }

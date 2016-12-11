@@ -23,10 +23,17 @@ namespace FOReserva.Controllers
         //    return (Json(true, JsonRequestBehavior.AllowGet));
         //}
 
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
+
+        public ActionResult error_conexion()
         {
             return View();
         }
+
+     
 
         public ActionResult restaurant_resultados()
         {
@@ -42,17 +49,17 @@ namespace FOReserva.Controllers
                 //No se puede usar el mensaje de la excepcion "e.mensaje"
                 //Esto se causa al realizar una busqueda con parametros que no son
                 //como son caracteres especiales y de mas
-                System.Diagnostics.Debug.WriteLine("Error de busqueda");
-                System.Diagnostics.Debug.Write(e.Message);
+                return View("error_conexion");
             }
-            catch ( ManejadorSQLException e )
+            catch ( ManejadorSQLException f)
             {
                 //Ventana de error no conecto a la db
                 //Se puede usar el mensaje de la excepcion "e.mensaje"
-                System.Diagnostics.Debug.WriteLine("Error de manejador sql");
-                System.Diagnostics.Debug.Write( e.Message );
+                return View("error_conexion");
             }
-            catch (Exception e) { }
+            catch (Exception g) { 
+            
+            }
 
             // Error desconocido (seria bueno mostrar 
             // el mensaje para ver que lo causo
@@ -79,13 +86,21 @@ namespace FOReserva.Controllers
             return View(restaurante);
         }
 
-        public ActionResult confirma_restaurant(int restaurantID,string name_rest,string addres_rest, string name_client, string reserv_date, string reserv_hour, int number_person)
+        public ActionResult confirma_restaurant(int restaurantID,string name_rest,string addres_rest, string name_client, string reserv_date, string reserv_hour, int number_person, string name_city)
         {
             CReservation_Restaurant reserva = new CReservation_Restaurant(name_client,reserv_date,reserv_hour,number_person, 5, restaurantID);
             reserva.Restaurant = new CRestaurantModel(restaurantID, name_rest, addres_rest);
+            reserva.Restaurant.CityName = name_city;
             ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
             manejador.CrearReserva(reserva);
             return View(reserva);
+        }
+
+        public ActionResult lista_reserva_restaurantes()
+        {
+            ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
+            List<CReservation_Restaurant> lista = manejador.buscarReservas();
+            return View(lista);
         }
     }
 }
