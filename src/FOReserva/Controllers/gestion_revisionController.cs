@@ -9,6 +9,11 @@ using FOReserva.Models.Restaurantes;
 
 namespace FORevision.Controllers
 {
+<<<<<<< HEAD
+=======
+/*
+<<<<<<< HEAD
+>>>>>>> refs/remotes/origin/Develop
     /// <summary>
     /// Gestion Revision Controlador
     /// </summary>
@@ -154,7 +159,7 @@ namespace FORevision.Controllers
               List<CReservation_Restaurant> rest;
               CReservation_Restaurant res;
              C
-              */
+              
 
             // no se si estara bien
             //CReservation_Restaurant n = new CReservation_Restaurant();
@@ -186,9 +191,13 @@ namespace FORevision.Controllers
               List<CReservation_Restaurant> rest;
               CReservation_Restaurant res;
              C
+<<<<<<< HEAD
               */
             return null;
         }
+=======
+              
+>>>>>>> refs/remotes/origin/Develop
 
         public ActionResult Crear_Revsion(CReservation_Restaurant reserva, string usuario, DateTime fecha)                 //crear reserva restaurant
         {
@@ -200,7 +209,7 @@ namespace FORevision.Controllers
               List<CReservation_Restaurant> rest;
               CReservation_Restaurant res;
              C
-              */
+              
 
             // no se si estara bien
             //CReservation_Restaurant n = new CReservation_Restaurant();
@@ -220,3 +229,9 @@ namespace FORevision.Controllers
 
     }
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/Develop*/
+}
+>>>>>>> refs/remotes/origin/Develop
