@@ -1,0 +1,142 @@
+﻿@model BOReserva.Models.gestion_boletos.CBuscarVuelo
+
+<script src="/Scripts/Scripts_Boletos/BuscarVuelo.js"></script>
+
+<!---------------------- SECCION DE AGREGAR AVION ---------------->
+@using (Html.BeginForm("buscarVuelos", "gestion_boletos", null, FormMethod.Post, new { @id = "formBuscarVuelo", @class = "form-horizontal" }))
+{
+
+    <div class="row">
+        <div class="col-md-12">
+                <div class="box box-success">
+                    <div class="box-header with-border">
+                        <h1 class="box-title">Crear Boleto</h1>
+                        <div class="box-tools pull-right">
+                        </div>
+                    </div>
+                    <div class="box-body">
+
+                        <div class="row">
+                            <div class="col-md-12" style="margin-top:10px;">
+                                <div class="col-md-6">
+                                        <label>Salir de:</label>
+                                        @Html.DropDownListFor(m => m.SelectedCiudadIdOrigen, Model.CiudadesOrigen, new { @class = "form-control select2", @id = "vuelta" })
+                                </div>
+                                <div class="col-md-6">
+                                        <label>Llegar a:</label>
+                                        @Html.DropDownListFor(m => m.SelectedCiudadIdDestino, Model.CiudadesDestino, new { @class = "form-control select2", @id = "vuelta" })
+                                </div>
+
+                                <!-- /.row -->
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+
+                        <div class="row">
+                            <div class="col-md-12" style="margin-top:10px;">
+                                <div class="col-md-6">
+                                        <label>Detalle:</label>
+                                        <select name="detalle" onchange="idavueltaOnChange(this)" class="form-control select2" style="width: 100%;">
+                                            <option value="ida" selected="selected">Solo ida</option>
+                                            <option value="idavuelta">Ida y vuelta</option>
+                                        </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                        <label>Tipo:</label>
+                                        <select name="detalle" onchange="idavueltaOnChange(this)" class="form-control select2" style="width: 100%;">
+                                            <option value="ida" selected="selected">Comercial</option>
+                                            <option value="idavuelta">Ejecutivo</option>
+                                        </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+
+                        <div class="row">
+                            <div class="col-md-12" style="margin-top:10px;">
+                                <div class="col-md-6">
+                                        <label id="idalbl">Fechas ida:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-clock-o"></i>
+                                            </div>
+                                            @Html.TextBoxFor(m => m._ida, null, new { @type = "date", @class = "form-control pull-right", @id = "ida" })
+                                        </div>
+                                        <!-- /.input group -->
+                                </div>
+
+                                <div class="col-md-6" id="divvuelta">
+                                        <label id="vueltalbl">Fechas vuelta:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-clock-o"></i>
+                                            </div>
+                                            @Html.TextBoxFor(m => m._vuelta, null, new { @type = "date", @class = "form-control pull-right", @id = "vuelta" })
+
+                                        </div>
+                                        <!-- /.input group -->
+                                </div>
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <button type="button" id="buscarVuelos" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Ver vuelos disponibles</button>
+                        </div>
+
+                        <!-- ./box-body -->
+                        <div class="box-footer">
+
+                            <!-- /.row -->
+                        </div>
+                        <!-- /.box-footer -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.row -->
+
+    @*<script>
+        $("#buscarVuelos").click(function (e) {
+            e.preventDefault();
+            var form = $("#formBuscarVuelo");
+            $.ajax({
+                url: "gestion_boletos/buscarVuelos",
+                data: form.serialize(),
+                type: 'POST',
+                success: function (data) {
+                    alert("Se están buscando los vuelos");
+                    $('#formBuscarVuelo')[0].reset();
+                }
+            });
+        });
+        </script>*@
+}
+
+<script>
+
+    $("#divvuelta").css("display", "none");
+    $("#vueltalbl").css("display", "none");
+
+    function idavueltaOnChange(sel) {
+
+
+        if (sel.value == "ida") {
+            $("#ida").css("display", "block");
+            $("#idalbl").css("display", "block");
+            $("#divvuelta").css("display", "none");
+            $("#vueltalbl").css("display", "none");
+
+        } else if (sel.value == "idavuelta") {
+            $("#ida").css("display", "block");
+            $("#idalbl").css("display", "block");
+            $("#divvuelta").css("display", "block");
+            $("#vueltalbl").css("display", "block");
+
+        }
+    }
+</script>

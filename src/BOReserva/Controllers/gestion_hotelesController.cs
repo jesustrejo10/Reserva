@@ -12,12 +12,12 @@ namespace BOReserva.Controllers
         // GET: gestion_hoteles
         public ActionResult M09_GestionHoteles_Crear()
         {
-            cGestionHoteles_CrearHotel crear = new cGestionHoteles_CrearHotel();
+            CGestionHoteles_CrearHotel crear = new CGestionHoteles_CrearHotel();
             return PartialView(crear);
         }
 
         [HttpPost]
-        public JsonResult crearhotel(cGestionHoteles_CrearHotel crear) {
+        public JsonResult crearhotel(CGestionHoteles_CrearHotel crear) {
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 

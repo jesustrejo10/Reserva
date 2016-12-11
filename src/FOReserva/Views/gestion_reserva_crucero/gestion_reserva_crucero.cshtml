@@ -1,0 +1,83 @@
+﻿@model FOReserva.Models.Cruceros.CVista_Cruceros
+           <!-- aqui va el contenedor del formulario de la vista cruceros pero la index de nosotros como tal -->
+<div class="heading-title">
+	<h3><span>Cruceros</span></h3>
+</div>
+@using (Html.BeginForm("buscarCrucero", "gestion_reserva_crucero", null, FormMethod.Post, new { @id = "formBuscarCruceros", @class = "form-horizontal"}))
+{
+    <fieldset>
+										<!-- required [php action request] -->
+										<input type="hidden" name="action" value="contact_send" />
+
+
+										<!-- select -->
+										<label> Cruceros y Puerto de Embarque</label>
+										<select class="form-control select2" required>
+
+											<option value="">Seleccione un Crucero</option>
+											<option value="ALL-ALL">Mar Caribe</option>
+
+										</select>
+										<br>
+										<br>
+										<div class="row">
+											<div class="form-group">
+												<div class="col-md-6 col-sm-6" required>
+													<label>Fecha ida</label>
+                                                    @Html.TextBoxFor(m => m._fechaIda, null, new { @class = "form-control", @type = "date", @id = "fechaida", @placeholder = "Fecha", min = "today", max = "2023-12-31" })
+												<!--	<input type="text" name="contact[start_date]" value="" class="form-control datepicker required" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">-->
+												</div>
+												<div class="col-md-6 col-sm-6" required>
+													<label>Fecha vuelta</label>
+                                                    @Html.TextBoxFor(m => m._fechaVuelta, null, new { @class = "form-control", @type = "date", @id = "fechavuelta", @placeholder = "Fecha", min = "today", max = "2023-12-31" })
+												<!--	<input type="text" name="contact[start_date]" value="" class="form-control datepicker required" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">-->
+												</div>
+											</div>
+										</div>
+
+
+										<br>
+										<div class="row">
+											<div class="form-group">
+												<div class="col-md-2 col-sm-2" required>
+													<label>Noches</label>
+													<select name="contact[position]"  class="form-control pointer required" style="width: 60px" required>
+														<option value="1" selected="selected">1</option>
+														<option value="2">2</option>
+														<option value="3">3</option>
+														<option value="4">4</option>
+														<option value="5">5</option>
+														<option value="6">6</option>
+														<option value="7">7</option>
+														<option value="8">8</option>
+														<option value="9">9</option>
+														<option value="10">10</option>
+													</select>
+												</div>
+
+											</div>
+										</div>
+
+
+									</fieldset>
+    <div class="row text-center">
+										<div class="col-md-12">
+											<button type="button" id="buscarCrucero" class="btn btn-primary">Buscar</button>
+										</div>
+									</div>
+    <script>
+    $("#buscarCrucero").click(function (e) {
+        e.preventDefault();
+        var form = $("#formBuscarCruceros");
+        $.ajax({
+            url: "gestion_reserva_crucero/buscarCrucero",
+            data: form.serialize(),
+            type: 'POST',
+            success: function (data) {
+                alert("Buscando...");
+                /*$('#formBuscarVuelos')[0].reset();*/
+            }
+        });
+    });
+</script>
+}

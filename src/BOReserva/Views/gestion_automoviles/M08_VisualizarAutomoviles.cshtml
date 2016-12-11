@@ -134,6 +134,7 @@
         $(document).ready(function () {
             //e.preventDefault();
             table = $('#example1').DataTable();
+
             $(".clasedeprueba").click(function () {
                 var identificador = $(this).parent().parent().parent().attr("id");
                 jQuery.ajax({
@@ -169,7 +170,6 @@
                 });
             });
         });
-
         $(document).ready(function () {
             //e.preventDefault();
             $(".eliminar").click(function () {
@@ -241,8 +241,6 @@
                 });
             });
         });
-
-
 
         $(document).ready(function () {
             //e.preventDefault();
@@ -331,6 +329,17 @@
                     }
                 });
 
+                                $("#contenido").empty();
+                                $("#contenido").append(data);
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert(errorThrown);
+                            }
+                        });
+                }).fail(function () {
+                    alert("esta vaina se jodio")
+                });
+            });
         });
 
     </script>

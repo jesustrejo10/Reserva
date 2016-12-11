@@ -131,5 +131,14 @@ namespace BOReserva.Models.gestion_usuarios {
                 return ResourceManager.GetString("Error_Parametro", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DB_A1380A_reserva.
+        /// </summary>
+        internal static string StringConexion {
+            get {
+                return ResourceManager.GetString("StringConexion", resourceCulture);
+            }
+        }
     }
 }
