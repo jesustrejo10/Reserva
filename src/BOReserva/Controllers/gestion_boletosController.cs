@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Net;
 using BOReserva.Models.gestion_boletos;
 using BOReserva.Servicio.Servicio_Boletos;
+using System.Net;
 
 namespace BOReserva.Controllers
 {
@@ -126,6 +127,8 @@ namespace BOReserva.Controllers
             manejadorSQL_Boletos buscarboleto = new manejadorSQL_Boletos();
             CBoleto boleto = buscarboleto.M05MostrarBoletoBD(id);
 
+            String hola = boleto._tipoBoleto;
+
             CModificarBoleto bolView = new CModificarBoleto(boleto);
             return PartialView(bolView);
         }
@@ -173,6 +176,128 @@ namespace BOReserva.Controllers
             int modifico_si_no = modificar.M05ModificarDatosPasajero(pas);
 
             return (Json(true, JsonRequestBehavior.AllowGet));
+        }
+
+        public bool verificarDisponibilidad(int codigo_vuelo, String tipo)
+        {
+            bool disponibilidad = false;
+            manejadorSQL_Boletos modificar = new manejadorSQL_Boletos();
+
+            int compara1 = String.Compare(tipo, "Turista");
+            int compara2 = String.Compare(tipo, "Ejecutivo");
+            int compara3 = String.Compare(tipo, "Vip");
+
+            if (compara1 == 0)
+            {
+
+                int conteo = modificar.MConteoTurista(codigo_vuelo);
+                int cap = modificar.MBuscarCapTurista(codigo_vuelo);
+                System.Diagnostics.Debug.WriteLine(conteo);
+                System.Diagnostics.Debug.WriteLine(cap);
+                if (conteo < cap)
+                {
+                    disponibilidad = true;
+                }
+                else
+                {
+                    disponibilidad = false;
+                }
+
+            }
+
+            if (compara2 == 0)
+            {
+                int conteo = modificar.MConteoEjecutivo(codigo_vuelo);
+                int cap = modificar.MBuscarCapEjecutivo(codigo_vuelo);
+                System.Diagnostics.Debug.WriteLine(conteo);
+                System.Diagnostics.Debug.WriteLine(cap);
+                if (conteo < cap)
+                {
+                    disponibilidad = true;
+                }
+                else
+                {
+                    disponibilidad = false;
+                }
+            }
+
+            if (compara3 == 0)
+            {
+
+                int conteo = modificar.MConteoVip(codigo_vuelo);
+                int cap = modificar.MBuscarCapVip(codigo_vuelo);
+                if (conteo < cap)
+                {
+                    disponibilidad = true;
+                }
+                else
+                {
+                    disponibilidad = false;
+                }
+            }
+
+            return disponibilidad;
+        }
+
+
+        [HttpPost]
+        public JsonResult modificarTipoBoleto(CModificarBoleto model)
+        {
+            bool disponibilidad = false;
+            String tipo = model._tipoBoleto;
+
+            manejadorSQL_Boletos modificar = new manejadorSQL_Boletos();
+            String tipoOri = modificar.MBuscarTipoBoletoOriginal(model._bol_id);
+            List<CVuelo> lista = modificar.M05ListarVuelosBoleto(model._bol_id);
+
+            int compara = String.Compare(tipoOri, tipo);
+            if (compara != 0) {
+
+                // PRIMERO VEO SI ES IDA O IDA Y VUELTA 
+                int ida_vuelta = modificar. MBuscarIdaVuelta(model._bol_id);
+                // EL BOLETO ES IDA 1
+                // EL BOLETO ES IDA Y VUELTA 2
+                if (ida_vuelta == 1) {
+                    int codigo_vuelo1 = lista[0]._id;
+
+                    disponibilidad = verificarDisponibilidad(codigo_vuelo1, tipo);
+
+                } else {
+                    int codigo_vuelo_ida = lista[0]._id;
+                    int codigo_vuelo_vuelta = lista[1]._id;
+
+                    bool disp_ida = verificarDisponibilidad(codigo_vuelo_ida, tipo);
+                    bool disp_vuelta = verificarDisponibilidad(codigo_vuelo_vuelta, tipo);
+
+                    disponibilidad = ((disp_ida) && (disp_vuelta));
+                    System.Diagnostics.Debug.WriteLine(disponibilidad);
+
+                }
+
+                if (disponibilidad) {
+
+                    // HACER EL UPDATE
+                    int num = modificar.M05ModificarTipoBoleto(model._bol_id, tipo);
+                    return (Json(true, JsonRequestBehavior.AllowGet));
+                } else {
+                    //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    //Agrego mi error
+                    String error = "No hay disponibilidad para cambiar de categoría";
+                    //Retorno el error
+                    return Json(error);
+                }
+
+            } else {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Posee la misma categoría de boleto";
+                //Retorno el error
+                return Json(error);
+            }
+
+
         }
 
 

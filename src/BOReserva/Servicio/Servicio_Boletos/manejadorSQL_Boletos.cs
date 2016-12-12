@@ -349,6 +349,32 @@ namespace BOReserva.Servicio.Servicio_Boletos
            }
        }
 
+       public String MBuscarTipoBoletoOriginal(int id)
+       {
+           String tipo = "";
+           try
+           {
+               SqlConnection con = new SqlConnection(stringDeConexion);
+               con.Open();
+               String sql = "SELECT bol_tipo_boleto FROM Boleto WHERE bol_id =" + id + "";
+               SqlCommand cmd = new SqlCommand(sql, con);
+               using (SqlDataReader reader = cmd.ExecuteReader())
+               {
+                   while (reader.Read())
+                   {
+                       tipo = reader["bol_tipo_boleto"].ToString();
+                   }
+               }
+               cmd.Dispose();
+               con.Close();
+               return tipo;
+           }
+           catch (SqlException ex)
+           {
+               return tipo;
+           }
+       }
+
 
        public List<CVuelo> M05ListarVuelosBoleto(int id_boleto)
        {
@@ -397,5 +423,230 @@ namespace BOReserva.Servicio.Servicio_Boletos
                 return 0;
             }
         }
-    }
+
+       public int MConteoTurista(int id)
+       {
+           int _conteo = 0;
+           try
+           {
+               SqlConnection con = new SqlConnection(stringDeConexion);
+               con.Open();
+               String sql = "SELECT COUNT(*) AS num "+
+                            "FROM Boleto_Vuelo B, Boleto C "+
+                            "WHERE B.bol_fk_vuelo = "+id+
+                            " AND C.bol_id = B.bol_fk_boleto "+
+                            "AND UPPER(C.bol_tipo_boleto) = UPPER('Turista')";
+               SqlCommand cmd = new SqlCommand(sql, con);
+               using (SqlDataReader reader = cmd.ExecuteReader())
+               {
+                   while (reader.Read())
+                   {
+                       _conteo = reader.GetInt32(reader.GetOrdinal("num")); ;
+                   }
+               }
+               cmd.Dispose();
+               con.Close();
+               return _conteo;
+           }
+           catch (SqlException ex)
+           {
+               return _conteo;
+           }
+       }
+
+       public int MConteoEjecutivo(int id)
+       {
+           int _conteo = 0;
+           try
+           {
+               SqlConnection con = new SqlConnection(stringDeConexion);
+               con.Open();
+               String sql = "SELECT COUNT(*) AS num " +
+                            "FROM Boleto_Vuelo B, Boleto C " +
+                            "WHERE B.bol_fk_vuelo = " + id +
+                            " AND C.bol_id = B.bol_fk_boleto " +
+                            "AND UPPER(C.bol_tipo_boleto) = UPPER('Ejecutivo')";
+               SqlCommand cmd = new SqlCommand(sql, con);
+               using (SqlDataReader reader = cmd.ExecuteReader())
+               {
+                   while (reader.Read())
+                   {
+                       _conteo = reader.GetInt32(reader.GetOrdinal("num")); ;
+                   }
+               }
+               cmd.Dispose();
+               con.Close();
+               return _conteo;
+           }
+           catch (SqlException ex)
+           {
+               return _conteo;
+           }
+       }
+
+       public int MConteoVip(int id)
+       {
+           int _conteo = 0;
+           try
+           {
+               SqlConnection con = new SqlConnection(stringDeConexion);
+               con.Open();
+               String sql = "SELECT COUNT(*) AS num " +
+                            "FROM Boleto_Vuelo B, Boleto C " +
+                            "WHERE B.bol_fk_vuelo = " + id +
+                            " AND C.bol_id = B.bol_fk_boleto " +
+                            "AND UPPER(C.bol_tipo_boleto) = UPPER('Vip')";
+               SqlCommand cmd = new SqlCommand(sql, con);
+               using (SqlDataReader reader = cmd.ExecuteReader())
+               {
+                   while (reader.Read())
+                   {
+                       _conteo = reader.GetInt32(reader.GetOrdinal("num")); ;
+                   }
+               }
+               cmd.Dispose();
+               con.Close();
+               return _conteo;
+           }
+           catch (SqlException ex)
+           {
+               return _conteo;
+           }
+       }
+
+
+       public int MBuscarIdaVuelta(int id)
+       {
+           int _conteo = 0;
+           try
+           {
+               SqlConnection con = new SqlConnection(stringDeConexion);
+               con.Open();
+               String sql = "SELECT bol_ida_vuelta FROM Boleto WHERE bol_id =" + id + "";
+               SqlCommand cmd = new SqlCommand(sql, con);
+               using (SqlDataReader reader = cmd.ExecuteReader())
+               {
+                   while (reader.Read())
+                   {
+                       _conteo = reader.GetInt32(reader.GetOrdinal("bol_ida_vuelta")); ;
+                   }
+               }
+               cmd.Dispose();
+               con.Close();
+               return _conteo;
+           }
+           catch (SqlException ex)
+           {
+               return _conteo;
+           }
+       }
+
+       public int MBuscarCapTurista(int id)
+       {
+           int _conteo = 0;
+           try
+           {
+               SqlConnection con = new SqlConnection(stringDeConexion);
+               con.Open();
+               String sql = "SELECT A.avi_pasajeros_turista num " +
+                            "FROM Vuelo V, Avion A " +
+                            "WHERE V.vue_id =" +id+
+                            " AND V.vue_fk_avion = A.avi_id";
+               SqlCommand cmd = new SqlCommand(sql, con);
+               using (SqlDataReader reader = cmd.ExecuteReader())
+               {
+                   while (reader.Read())
+                   {
+                       _conteo = reader.GetInt32(reader.GetOrdinal("num")); ;
+                   }
+               }
+               cmd.Dispose();
+               con.Close();
+               return _conteo;
+           }
+           catch (SqlException ex)
+           {
+               return _conteo;
+           }
+       }
+
+       public int MBuscarCapEjecutivo(int id)
+       {
+           int _conteo = 0;
+           try
+           {
+               SqlConnection con = new SqlConnection(stringDeConexion);
+               con.Open();
+               String sql = "SELECT A.avi_pasajeros_ejecutiva num " +
+                            "FROM Vuelo V, Avion A " +
+                            "WHERE V.vue_id =" + id +
+                            " AND V.vue_fk_avion = A.avi_id";
+               SqlCommand cmd = new SqlCommand(sql, con);
+               using (SqlDataReader reader = cmd.ExecuteReader())
+               {
+                   while (reader.Read())
+                   {
+                       _conteo = reader.GetInt32(reader.GetOrdinal("num")); ;
+                   }
+               }
+               cmd.Dispose();
+               con.Close();
+               return _conteo;
+           }
+           catch (SqlException ex)
+           {
+               return _conteo;
+           }
+       }
+
+       public int MBuscarCapVip(int id)
+       {
+           int _conteo = 0;
+           try
+           {
+               SqlConnection con = new SqlConnection(stringDeConexion);
+               con.Open();
+               String sql = "SELECT A.avi_pasajeros_vip num " +
+                            "FROM Vuelo V, Avion A " +
+                            "WHERE V.vue_id =" + id +
+                            " AND V.vue_fk_avion = A.avi_id";
+               SqlCommand cmd = new SqlCommand(sql, con);
+               using (SqlDataReader reader = cmd.ExecuteReader())
+               {
+                   while (reader.Read())
+                   {
+                       _conteo = reader.GetInt32(reader.GetOrdinal("num")); ;
+                   }
+               }
+               cmd.Dispose();
+               con.Close();
+               return _conteo;
+           }
+           catch (SqlException ex)
+           {
+               return _conteo;
+           }
+       }
+
+       public int M05ModificarTipoBoleto(int id_bol, String tipo)
+       {
+
+           try
+           {
+               SqlConnection con = new SqlConnection(stringDeConexion);
+               con.Open();
+               String sql = "UPDATE Boleto SET bol_tipo_boleto = '" + tipo + "' WHERE bol_id = " + id_bol +"";
+
+               SqlCommand cmd = new SqlCommand(sql, con);
+               cmd.ExecuteNonQuery();
+               cmd.Dispose();
+               con.Close();
+               return 1;
+           }
+           catch (SqlException ex)
+           {
+               return 0;
+           }
+       }
+    } // de la clase
 }
