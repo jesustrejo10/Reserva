@@ -9,9 +9,11 @@
     <ul class="nav nav-tabs">
         <li class="active" id="LiVuelos"><a href="">Vuelos</a></li>
         <li id="LiAutos"><a href="">Autos</a></li>
-        <li id="LiHoteles"><a href="">Hoteles</a></li>
+        <li id="LiHoteles"><a onclick="cargarContenido('#MD', 'get', '/gestion_reserva_habitaciones/buscar_hoteles', null, this)" href="">Hoteles</a></li>
         <li id="LiRestaurantes"><a href="">Restaurantes</a></li>
         <li id="LiCruceros"><a href="">Cruceros</a></li>
+        <li id="LiDiarios"><a href="">Diarios de Viaje</a></li>
+
     </ul>
 
     <!-- SECCIÓN A CAMBIAR POR CADA MODULO -->
@@ -22,7 +24,7 @@
                     <h3><span>Vuelos</span></h3>
                 </div>
 
-                <form class="validate" action="php/contact.php" method="post" enctype="multipart/form-data" data-success="Sent! Thank you!" data-toastr-position="top-right">
+                <form class="validate" method="post" enctype="multipart/form-data" data-success="Sent! Thank you!" data-toastr-position="top-right">
                     <fieldset>
                         <!-- required [php action request] -->
                         <input type="hidden" name="action" value="contact_send" />

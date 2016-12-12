@@ -1,0 +1,148 @@
+﻿<!-- Indico que para esta vista, M13_AgregarRol, utilizare el modelo Models/gestion_roles/CRoles-->
+@model BOReserva.Models.gestion_roles.CRoles
+
+<!--Indico que, estoy abriendo un formulario que tendra como accion del submit, el controlador gestion_automoviles"Controller", 
+    utilizara el metodo guardarAutomovil
+    le pasara la informacion mediante un POST-->
+
+@using (Html.BeginForm("Agregar_Rol", "gestion_roles", null, FormMethod.Post, new { @id = "formagreagarrol", @class = "form-horizontal" }))
+
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-success">
+                <div class="box-header ">
+                    <h1 class="box-title"> Agregar Rol</h1>
+                    <div class="box-tools pull-right">
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">                           
+                                <label for="nombreRol">Inserte nombre del rol 
+<!--                                (<span style="color:red">*</span>):-->
+                                </label>
+                                @Html.TextBoxFor(m => m.Nombre_rol, null, new { @class = "form-control", @placeholder = "Nombre del Rol", id = "nombre_rol" })
+                                </div>
+                            <div class="col-xs-6">
+                               <label for="modelo">Modulo</label><br>                                                           
+                                <select name="lista_modulos" id="listamodulos">
+                                    @foreach (var item in Model.Menu)
+                                    {
+                                        <option value="@item.Nombre">
+                                            @item.Nombre
+                                        </option>
+                                    }
+                                </select>
+                            </div>                       
+                            <div class="col-xs-12" style="margin-top:10px;">
+                                <label for="Acceso">Tendra acceso a:</label>                                
+
+                                <div class="checkbox" id="listaPermisos">
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>                       
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <button type="submit" id="agreagarrol" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <script>
+    //Accion del boton agregarrol
+        $("#agreagarrol").click(function (e) {
+            e.preventDefault();
+            var form = $("#formagreagarrol");            
+            var permisos = [$("#nombre_rol").val()];
+            jQuery.each($("input[type='checkbox']"), function (i) {               
+                if (this.checked && this.value!="on") {
+                    permisos.push(this.value);
+                }
+                
+            });
+            $.ajax({
+                url: "gestion_roles/agregarrol",
+                data: form.serialize(),
+                type: 'POST',
+                success: function (data) {
+                    alert("Se guardo");
+                    $('#formagreagarrol')[0].reset();
+                }
+            });
+            var data = {
+                json: JSON.stringify(permisos),
+            };
+            console.log(data);
+            $.ajax({
+                type: 'post',
+                dataType: 'json',
+                url: 'gestion_roles/asignarpermisos',
+                data: data,
+                success: function (data) {
+                    alert("Se asignaron los permisos");
+
+                },
+                failure: function (response) {
+                    alert("No se pudo asignar permisos");
+
+                }
+
+            });
+
+        });
+
+        $("#listamodulos").change(function (e) {
+            e.preventDefault();
+            var modulo = $("#listamodulos option:selected").text();
+            var json = {
+                mod: modulo,
+            };
+            var data = {
+                json: JSON.stringify(json),
+            };
+            $.ajax({
+                type: 'post',
+                dataType: 'json',
+                url: 'gestion_roles/Consultarpermisos',
+                data: data,
+                success: cargadorPermisos,
+                failure: function (response) {
+                    alert("Error buscando permisos");
+
+                }
+                
+            });
+            function cargadorPermisos(response) {
+
+                var permisos = response;
+                var container = $('#listaPermisos');
+                container.empty();
+                jQuery.each(permisos, function (i) {                                
+                var inputs = container.find('input');
+                var id = inputs.length + 1;
+                $('<input />', { type: 'checkbox', id: 'permiso' + id, value: permisos[i] }).appendTo(container);
+                $('<label />', { 'for': 'permiso' + id, text: permisos[i] }).appendTo(container);
+                $('<br>').appendTo(container)
+                });
+
+            }
+
+        });
+
+        
+    </script>
+
+}
+
+

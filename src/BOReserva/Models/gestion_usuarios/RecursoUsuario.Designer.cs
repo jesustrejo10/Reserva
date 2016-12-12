@@ -97,6 +97,15 @@ namespace BOReserva.Models.gestion_usuarios {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to M12_ConsultarUsuario.
+        /// </summary>
+        internal static string ConsultarEmail {
+            get {
+                return ResourceManager.GetString("ConsultarEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to M12_ConsultarUsuarioID.
         /// </summary>
         internal static string ConsultarID {
@@ -129,6 +138,24 @@ namespace BOReserva.Models.gestion_usuarios {
         internal static string EliminarUsuario {
             get {
                 return ResourceManager.GetString("EliminarUsuario", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error: El usuario no se puede eliminar ya que tiene registros asociados.
+        /// </summary>
+        internal static string Error_Conflicto_FK {
+            get {
+                return ResourceManager.GetString("Error_Conflicto_FK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error, el correo introducido ya se encuentra registrado.
+        /// </summary>
+        internal static string Error_Email_Existe {
+            get {
+                return ResourceManager.GetString("Error_Email_Existe", resourceCulture);
             }
         }
         
@@ -174,6 +201,15 @@ namespace BOReserva.Models.gestion_usuarios {
         internal static string ListarUsuarios {
             get {
                 return ResourceManager.GetString("ListarUsuarios", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M12_ModificarUsuario.
+        /// </summary>
+        internal static string ModificarUsuario {
+            get {
+                return ResourceManager.GetString("ModificarUsuario", resourceCulture);
             }
         }
         

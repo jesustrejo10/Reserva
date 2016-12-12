@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace BOReserva.Models.gestion_hoteles
 {
-    public class CGGestionHoteles_CrearHotel
+    public class CGestionHoteles_CrearHotel
     {
         public int _id { get; set; }
         public String _nombre { get; set; }

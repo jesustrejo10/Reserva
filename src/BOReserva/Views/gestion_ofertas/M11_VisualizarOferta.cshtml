@@ -1,0 +1,188 @@
+﻿
+
+<div class="row">
+    <link rel="stylesheet" href="~/Content/plugins/datatables/dataTables.bootstrap.css">
+
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Lista de Ofertas</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Fecha Inicio</th>
+                            <th>Fecha Fin</th>
+                            <th>Porcentaje</th>
+                            <th>Estado</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                        <tbody>
+                            @try
+                        {
+                            foreach (var item in Model)
+                            {
+                                String estado;
+                                if (item._estadoOferta == true){
+                                    estado = "Activo";
+                                }
+                                else{
+                                    estado = "Inactivo";
+                                }
+
+                                String fechaInicio = String.Format("{0:dd/MM/yyyy}", item._fechaIniOferta);
+                                String fechaFin = String.Format("{0:dd/MM/yyyy}", item._fechaFinOferta);
+                                
+                                <tr id="@item._idOferta">
+                                    <td>@item._nombreOferta</td>
+                                    <td>@fechaInicio</td>
+                                    <td>@fechaFin</td>
+                                    <td>@item._porcentajeOferta %</td>
+                                    <td>@estado</td>
+                                    <td>
+                                        @*<a href="#"> <i class="fa fa-eye clasedeprueba"></i></a>*@
+                                        <a href="#" title="Modificar"><i class="fa fa-eye modificar"></i></a>
+                                        <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>
+                                        @if (item._estadoOferta == true)
+                                        {
+                                            <a href="#" title="Desactivar"><i class="fa fa-times desactivar"></i></a>
+                                        }
+                                        else
+                                        {
+                                            <a href="#" title="Activar"><i class="fa fa-check activar"></i></a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        catch
+                        {
+
+                        }
+                        </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Fecha Inicio</th>
+                            <th>Fecha Fin</th>
+                            <th>Porcentaje</th>
+                            <th>Estado</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<script language="javascript" type="text/javascript">
+
+
+    $(".modificar").click(function () {
+        var identificador = $(this).parent().parent().parent().attr("id");
+        jQuery.ajax({
+            type: "GET",
+            url: "/gestion_aviones/M02_ConsultarAvion",
+            data: { id: identificador }
+        }).done(function (data) {
+            $("#contenido").empty();
+            $("#contenido").append(data);
+        }).fail(function () {
+
+        });
+
+
+    });
+
+    $(".detalle").click(function () {
+        var identificador = $(this).parent().parent().parent().attr("id");
+        jQuery.ajax({
+            type: "GET",
+            url: "/gestion_ofertas/M11_VisualizarOferta",
+            data: { id: identificador }
+        }).done(function (data) {
+            $("#contenido").empty();
+            $("#contenido").append(data);
+        }).fail(function () {
+
+        });
+
+
+    });
+
+
+    $(".desactivar").click(function () {
+        var idOferta = $(this).parent().parent().parent().attr("id");
+        var r = confirm("Está seguro que desea desactivar la oferta?");
+        if (r == true) {
+            jQuery.ajax({
+                        type: "POST",
+                        url: "/gestion_ofertas/desactivarOferta",
+                        data: { ofertaIdStr : idOferta}
+                    }).done(function (data) {
+                        var url = '/gestion_ofertas/M11_VisualizarOferta';
+                        var method = 'GET';
+                        var data = '';
+                        $.ajax(
+                            {
+                                url: url,
+                                type: method,
+                                data: data,
+                                success: function (data, textStatus, jqXHR) {
+                                    $("#contenido").empty();
+                                    $("#contenido").append(data);
+                                },
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    alert(errorThrown);
+                                }
+                            });
+                    }).fail(function () {
+                        alert("Error en la base de datos");
+                    });
+        }        
+    });
+
+    $(".activar").click(function () {
+        var idOferta = $(this).parent().parent().parent().attr("id");
+        var r = confirm("Esta seguro que desea activar la oferta?");
+        if (r == true) {
+            jQuery.ajax({
+                        type: "POST",
+                        url: "/gestion_ofertas/activarOferta",
+                        data: { ofertaIdStr: idOferta }
+                    }).done(function (data) {
+                        var url = '/gestion_ofertas/M11_VisualizarOferta';
+                        var method = 'GET';
+                        var data = '';
+                        $.ajax(
+                            {
+                                url: url,
+                                type: method,
+                                data: data,
+                                success: function (data, textStatus, jqXHR) {
+
+                                    $("#contenido").empty();
+                                    $("#contenido").append(data);
+                                },
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    alert(errorThrown);
+                                }
+                            });
+                    }).fail(function () {
+                        alert("Error en la base de datos");
+                    });
+        }
+    });
+
+
+</script>
+

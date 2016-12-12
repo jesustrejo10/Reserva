@@ -15,7 +15,7 @@ namespace BOReserva.Controllers
         // GET: gestion_hoteles
         public ActionResult M09_GestionHoteles_Crear()
         {
-             CGGestionHoteles_CrearHotel crear = new CGGestionHoteles_CrearHotel() {
+             CGestionHoteles_CrearHotel crear = new CGestionHoteles_CrearHotel() {
                 _listapaises = new List<SelectListItem>(pais())
              };
 
@@ -125,7 +125,7 @@ namespace BOReserva.Controllers
         }
 
         [HttpPost]
-        public JsonResult guardarHotel(CGGestionHoteles_CrearHotel model)
+        public JsonResult guardarHotel(CGestionHoteles_CrearHotel model)
         {
             Debug.WriteLine(model._direccion);
             Debug.WriteLine(model._email);

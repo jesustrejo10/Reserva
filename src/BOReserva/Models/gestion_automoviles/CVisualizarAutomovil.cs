@@ -5,8 +5,12 @@ using System.Web;
 
 namespace BOReserva.Models.gestion_automoviles
 {
+    /// <summary>
+    /// Clase del modelo de la vista parcial M08_VisualizarAutomovil
+    /// </summary>
     public class CVisualizarAutomovil
     {
+
         public String _matricula { get; set; }
         public String _modelo { get; set; }
         public String _fabricante { get; set; }

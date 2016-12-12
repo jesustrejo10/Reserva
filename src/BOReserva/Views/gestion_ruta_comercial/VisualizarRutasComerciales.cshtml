@@ -1,0 +1,87 @@
+﻿@model BOReserva.Models.gestion_ruta_comercial.CGestion_ruta
+
+
+
+
+
+<table id="example1" class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Tipo</th>
+            <th>Origen</th>
+            <th>Destino</th>
+            <th>Distancia</th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Aérea</td>
+            <td>
+                Caracas - Venezuela
+            </td>
+            <td>
+                Ciudad de Panamá - Panamá
+            </td>
+            <td>
+                1395 KM
+            </td>
+            <td>
+                <a href="#"><i class="fa fa-check"></i></a>
+                <a href="#"><i class="fa fa-times"></i></a>
+                <a href="#"><i class="fa fa-eye" id="m03DetalleRutas"></i></a>
+                <a href="#"><i class="fa fa-gear" id="m03EditarRutas"></i></a>
+            </td>
+        </tr>
+    <tfoot>
+        <tr>
+            <th>Tipo</th>
+            <th>Origen</th>
+            <th>Destino</th>
+            <th>Distancia</th>
+            <th>Opciones</th>
+        </tr>
+    </tfoot>
+
+
+</table>
+
+<script>
+    $("#m03EditarRutas").click(function (e) {
+        e.preventDefault();
+        alert("Botón Editar");
+        $.ajax({
+            url: '/gestion_ruta_comercial/ModificarRutasComerciales',
+            data: '',
+            type: 'GET',
+            success: function (data) {
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+    });
+
+
+    $("#m03DetalleRutas").click(function (e) {
+        e.preventDefault();
+        alert("Botón Editar");
+        $.ajax({
+            url: '/gestion_ruta_comercial/DetalleRutasComerciales',
+            data: '',
+            type: 'GET',
+            success: function (data) {
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+    });
+
+</script>
+
+
