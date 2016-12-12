@@ -1,0 +1,75 @@
+﻿
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h1 class="box-title">Reserva Boleto</h1>
+                <div class="box-tools pull-right">
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-12" style="margin-top:10px;">
+                        <label>El usuario posee reserva:</label>
+                        <select name="detalle" onchange="reservaOnChange(this)" class="form-control select2">
+                            <option selected="selected"> </option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </div>
+                    <div class="row">
+                        <div class="col-md-12" id="reserva" style="margin-top:10px;">
+                            <label id="numreserva">Número de reserva:</label>
+                            <input type="text" class="form-control" placeholder="Ej. 1995">
+                        </div>
+
+                    </div>
+                <div>&nbsp;</div>
+                    <div class="col-md-12" style="margin-top:10px;">
+                        <button type="button" id="m05CrearBoleto" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Siguiente</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.row -->
+
+<script>
+    $("#reserva").css("display", "none");
+
+    function reservaOnChange(sel) {
+
+        $("#reserva").css("display", "none");
+
+        if (sel.value == "si") {
+            $("#reserva").css("display", "block");
+
+
+        } else if (sel.value == "no") {
+
+            $("#m05CrearBoleto").click(function (e) {
+                e.preventDefault();
+                var url = '/gestion_boletos/M05_CrearBoleto';
+                var method = 'GET';
+                var data = '';
+
+                $.ajax(
+                    {
+                        url: url,
+                        type: method,
+                        data: data,
+                        success: function (data, textStatus, jqXHR) {
+
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+            });
+
+        }
+    }
+</script>

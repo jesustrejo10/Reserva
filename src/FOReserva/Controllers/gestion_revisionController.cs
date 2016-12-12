@@ -1,60 +1,111 @@
-﻿using FOReserva.Models.Revision;
+using FOReserva.Models.Revision;
 using FOReserva.Servicio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FOReserva.Models.Restaurantes;
 
-namespace FOReserva.Controllers
+namespace FORevision.Controllers
 {
+    /// <summary>
+    /// Gestion Revision Controlador
+    /// </summary>
     public class gestion_revisionController : Controller
     {
-        //
-        // GET: /gestion_revision/
 
-        public ActionResult gestion_revision()
+
+        /// <summary>
+        /// Creacion Modelo Consultar Revision
+        /// </summary>
+        /// <returns>Vista Modelo</returns>
+
+        public ActionResult Consultar_Revision_Usuario(string nombre, string apellido)
         {
 
-            CRevision modelo = new CRevision();
-            return PartialView(modelo);
+            List<CRevision> lista;
+            ManejadorSQLRevision manejador = new ManejadorSQLRevision();
+            lista = manejador.Consultar_Revision(nombre, apellido);
+
+            return PartialView(lista);
+        }
+
+        /// <summary>
+        /// Creacion Modelo Eliminar Revision
+        /// </summary>
+        /// <returns>Vista Modelo</returns>
+        public bool Eliminar_Revision(string nombre, string apellido, int revision)
+        {
+
+            bool resultado;
+            ManejadorSQLRevision manejador = new ManejadorSQLRevision();
+            resultado = manejador.Eliminar_Revision(nombre, apellido, revision);
+            return true;
+
 
 
         }
 
-        public ActionResult gestion_ListRevicion()
+        /// <summary>
+        /// Creacion Modelo Crear Revision
+        /// </summary>
+        /// <returns>Vista Modelo</returns>
+        public bool Crear_Revision(string nombre, string apellido)
         {
 
-            CListRevision modelo = new CListRevision();
-            return PartialView(modelo);
+            bool Revision;
+            ManejadorSQLRevision manejador = new ManejadorSQLRevision();
+            Revision = manejador.Crear_Revision(nombre, apellido);
+            return true;
 
-                        //probando
         }
 
-        public ActionResult Consultar_Revision (string usuario)
+        /// <summary>
+        /// Creacion Modelo Mostrar Revision
+        /// </summary>
+        /// <returns>Vista Modelo</returns>
+        public ActionResult Mostrar_Revision(string nombre, string apellido, int tipo)
         {
-           // int search_val = Int32.Parse(Request.QueryString["search_val"]);
-            string search_txt = Request.QueryString["search_text"];
-            
-            List<CRevision> lista ;                   // mostrar revision cuando estoy en el perfil del usuario
-            if (search_txt == usuario)
+
+            if (tipo == 1)
             {
-                
-                ManejadorSQLMuestraRevision manejador = new ManejadorSQLMuestraRevision();  // crear en Servicios un manejador para listar 
-                //lista = manejador.ConsultaRevision(usuario);                               //las revisiones de ese usuario
-                
-                //return View(lista);
+                List<CRevision> lista;
+                ManejadorSQLRevision manejador = new ManejadorSQLRevision();
+                lista = manejador.Mostrar_Revision_Restaurant(nombre, apellido, tipo);
+                return PartialView(lista);
             }
-
             else
             {
 
-                Console.Write("No se tienen revisiones");       //mostrar mensaje al usuario y no mostrar nada
-                //return View(lista);
+                List<CRevision> lista;
+                ManejadorSQLRevision manejador = new ManejadorSQLRevision();
+                lista = manejador.Mostrar_Revision_Hotel(nombre, apellido, tipo);
+                return PartialView(lista);
+
+
             }
-            return null;
         }
+
+        /// <summary>
+        /// Creacion Modelo Editar Revision
+        /// </summary>
+        /// <returns>Vista Modelo</returns>
+        public bool Editar_Revision(string nombre, string apellido, int revision)
+        {
+
+            bool resultado;
+            ManejadorSQLRevision manejador = new ManejadorSQLRevision();
+            resultado = manejador.Editar_Revision(nombre, apellido, revision);
+            return true;
+
+
+        }
+
 
 
     }
 }
+
+
+

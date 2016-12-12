@@ -30,7 +30,7 @@ namespace BOReserva.Models.gestion_usuarios
 
             try
             {
-                strConexion = ConfigurationManager.ConnectionStrings["DB_A1380A_reserva"].ConnectionString;
+                strConexion = ConfigurationManager.ConnectionStrings[RecursoBD.StringConexion].ConnectionString;
                 if (conexion == null)
                 {
                     conexion = new SqlConnection(strConexion);
@@ -104,7 +104,10 @@ namespace BOReserva.Models.gestion_usuarios
                     comando = new SqlCommand(query, conexion);
                     comando.CommandType = CommandType.StoredProcedure;
                     AsignarParametros(parametros);
-                    conexion.Open();
+                    if (conexion.State == ConnectionState.Closed)
+                    {
+                        conexion.Open();
+                    }
                     comando.ExecuteNonQuery();
                     if (comando.Parameters != null)
                     {
@@ -131,7 +134,8 @@ namespace BOReserva.Models.gestion_usuarios
             }
             catch (SqlException ex)
             {
-                throw new ExceptionBD(RecursoBD.Cod_Error_General, RecursoBD.Error_General, ex);
+                //throw new ExceptionBD(RecursoBD.Cod_Error_General, RecursoBD.Error_General, ex);
+                throw ex;
             }
             catch (Exception ex)
             {
@@ -256,11 +260,11 @@ namespace BOReserva.Models.gestion_usuarios
             }
             catch (SqlException ex)
             {
-               
+                throw new ExceptionBD(RecursoBD.Cod_Error_General, RecursoBD.Error_General, ex);   
             }
             catch (Exception ex)
             {
-                
+                throw new ExceptionBD(RecursoBD.Cod_Error_General, RecursoBD.Error_General, ex);    
             }
             finally
             {

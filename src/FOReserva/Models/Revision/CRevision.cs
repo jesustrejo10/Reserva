@@ -1,35 +1,45 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace FOReserva.Models.Revision
 {
+    /// <summary>
+    /// Clase Revision
+    /// </summary>
     public class CRevision : BaseEntity
     {
         private DateTime _fecha;
-        private string _descripcion;
-        private int _puntuacion;
+        private string _mensaje;        
+        private int _tipo;
+        private int _puntuacion;        
         private CRevisionValoracion _valoracion;
-        private string _tipo;
 
-
-
-        public CRevision(int id, string name, DateTime fecha, string descripcion, int puntuacion, int positivo, int negativo, string tipo)
+        /// <summary>
+        /// Builder Revision
+        /// </summary>
+        /// <param name="id">ID Base</param>
+        /// <param name="name">Name Base</param>
+        /// <param name="fecha">Fecha Revision</param>
+        /// <param name="mensaje">Mensaje en Revision</param>
+        /// <param name="tipo">Tipo Revision</param>
+        /// <param name="puntuacion">Puntuacion de la Revision</param>
+        /// <param name="positivo">Valoraciones positivos</param>
+        /// <param name="negativo">Valoraciones negativas</param>        
+        public CRevision(int id, string name, DateTime fecha, string mensaje, int tipo, int puntuacion, int positivo, int negativo)
             : base(id, name)
         {
-
-             this._valoracion = new CRevisionValoracion(positivo, negativo);
              this._fecha = fecha;
-             this._descripcion = descripcion;
-             this._puntuacion = puntuacion;
+             this._mensaje = mensaje;
              this._tipo = tipo;
-
-
-
-
+             this._puntuacion = puntuacion;             
+             this._valoracion = new CRevisionValoracion(positivo, negativo);
         }
 
+        /// <summary>
+        /// Builder Revision Vacio
+        /// </summary>
         public CRevision() : base(){}
 
         public DateTime Fecha
@@ -37,21 +47,20 @@ namespace FOReserva.Models.Revision
             get { return _fecha; }
             set { _fecha = value; }
         }
-        public string Descripcion
+        public string Mensaje
         {
-            get { return _descripcion; }
-            set { _descripcion = value; }
+            get { return _mensaje; }
+            set { _mensaje = value; }
         }
         public int Puntuacion
         {
             get { return _puntuacion; }
             set { _puntuacion = value; }
         }
-        public string Tipo
+        public int Tipo
         {
             get { return _tipo; }
             set { _tipo = value; }
         }
-
     }
 }
