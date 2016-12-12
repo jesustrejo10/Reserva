@@ -5,6 +5,7 @@ using System.Web;
 
 namespace BOReserva.Models.gestion_aviones
 {
+    
     public class CAgregarAvion
     {
         public String _matriculaAvion { get; set; }

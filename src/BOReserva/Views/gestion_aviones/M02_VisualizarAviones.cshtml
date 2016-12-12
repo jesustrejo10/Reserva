@@ -1,0 +1,178 @@
+﻿
+
+<div class="row">
+    <link rel="stylesheet" href="~/Content/plugins/datatables/dataTables.bootstrap.css">
+
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Lista de Aviones</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Matrícula</th>
+                            <th>Modelo</th>
+                            <th>Capacidad Turista/Ejecutiva/VIP</th>
+                            @*<th>Capacidad Clase Ejecutiva</th>
+                                <th>Capacidad Clase VIP</th>*@
+                            <th>Equipaje (Kg)</th>
+                            <th>Distancia Máxima(Km)</th>
+                            <th>Velocidad Máxima(Km/h)</th>
+                            <th>Combustible (L)</th>
+                            <th>Disponibilidad</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @try
+                        {
+                            foreach (var item in Model)
+                            {
+                                String disponibilidad;
+                                if (item._disponibilidad == 1) { disponibilidad = "Disponible"; } else { disponibilidad = "No disponible"; }
+
+                                <tr id="@item._id">
+                                    <td>@item._matricula</td>
+                                    <td>@item._modelo</td>
+                                    <td>@item._capacidadTurista / @item._capacidadEjecutiva / @item._capacidadVIP </td>
+                                    @*<td>@item._capacidadEjecutiva</td>
+                                        <td>@item._capacidadVIP</td>*@
+                                    <td>@item._capacidadEquipaje</td>
+                                    <td>@item._distanciaMaximaVuelo</td>
+                                    <td>@item._velocidadMaxima</td>
+                                    <td>@item._capacidadCombustible</td>
+                                    <td>@disponibilidad</td>
+                                    <td>
+                                        @*<a href="#"> <i class="fa fa-eye clasedeprueba"></i></a>*@
+                                        <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>
+                                        @if (item._disponibilidad == 1)
+                                        {
+                                            <a href="#" title="Deshabilitar"><i class="fa fa-times deshabilitar"></i></a>
+                                        }
+                                        else
+                                        {
+                                            <a href="#" title="Habilitar"><i class="fa fa-check habilitar"></i></a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        catch
+                        {
+                            <script>
+                                alert("Error en el listado, por favor intente acceder nuevamente");
+                            </script>
+                        }
+
+                    <tfoot>
+                        <tr>
+                            <th>Matrícula</th>
+                            <th>Modelo</th>
+                            <th>Capacidad Turista/Ejecutiva/VIP</th>
+                            @*<th>Capacidad Clase Ejecutiva</th>
+                                <th>Capacidad Clase VIP</th>*@
+                            <th>Equipaje (Kg)</th>
+                            <th>Distancia Máxima(Km)</th>
+                            <th>Velocidad Máxima(Km/h)</th>
+                            <th>Combustible (L)</th>
+                            <th>Disponibilidad</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<script language="javascript" type="text/javascript">
+
+
+    $(".modificar").click(function () {
+        console.log("hola");
+        var identificador = $(this).parent().parent().parent().attr("id");
+        jQuery.ajax({
+            type: "GET",
+            url: "/gestion_aviones/M02_ConsultarAvion",
+            data: { id: identificador }
+        }).done(function (data) {
+            $("#contenido").empty();
+            $("#contenido").append(data);
+        }).fail(function () {
+
+        });
+
+
+    });
+
+
+    $(".deshabilitar").click(function () {
+        console.log("hola");
+        var identificador = $(this).parent().parent().parent().attr("id");
+        jQuery.ajax({
+            type: "POST",
+            url: "/gestion_aviones/deshabilitarAvion",
+            data: { id: identificador }
+        }).done(function (data) {
+            var url = '/gestion_aviones/M02_VisualizarAviones';
+            var method = 'GET';
+            var data = '';
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+        }).fail(function () {
+            alert("Error en la base de datos");
+        });
+    });
+
+    $(".habilitar").click(function () {
+        console.log("hola");
+        var identificador = $(this).parent().parent().parent().attr("id");
+        jQuery.ajax({
+            type: "POST",
+            url: "/gestion_aviones/habilitarAvion",
+            data: { id: identificador }
+        }).done(function (data) {
+            var url = '/gestion_aviones/M02_VisualizarAviones';
+            var method = 'GET';
+            var data = '';
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+        }).fail(function () {
+            alert("Error en la base de datos");
+        });
+    });
+
+
+</script>
+

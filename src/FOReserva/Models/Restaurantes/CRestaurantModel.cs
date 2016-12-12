@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
+﻿
 namespace FOReserva.Models.Restaurantes
 {
     /*Clase del modelo Restaurante
@@ -18,7 +14,8 @@ namespace FOReserva.Models.Restaurantes
         private string _description;
         private string _open;
         private string _close;
-        
+        private string _cityName;
+
         /* Constructor Completo */
         public CRestaurantModel
             (int id, string name, string address, string description,
@@ -30,6 +27,14 @@ namespace FOReserva.Models.Restaurantes
             this._description = description;
             this._open = open;
             this._close = close;
+        }
+
+        public CRestaurantModel
+            (int id, string name, string address )
+            : base(id, name)
+        {
+
+            this._address = address;
         }
 
         /* Constructor Vacio */
@@ -47,6 +52,14 @@ namespace FOReserva.Models.Restaurantes
         {
             get { return _description; }
             set { _description = value; }
+        }
+
+        /* Metodos Get y Set para la hora de cierre 
+         del restaurante */
+        public string CityName
+        {
+            get { return _cityName; }
+            set { _cityName = value; }
         }
 
         /* Metodos Get y Set 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using NUnit.Framework;
 using FOReserva.Models.Restaurantes;
 using FOReserva.Servicio;
@@ -6,8 +7,9 @@ using FOReserva.Servicio;
 namespace TestUnitReserva.FO.Reserva_restaurante
 {
     [TestFixture]
-    class TestInsertReserva
+    public class TestInsertReserva
     {
+       /*
         private CReservation_Restaurant reserva;
 
         [SetUp]
@@ -16,5 +18,6 @@ namespace TestUnitReserva.FO.Reserva_restaurante
             reserva = new CReservation_Restaurant(null, "carlos Herrera", new DateTime(), "09:00", 6);
             
         }
+        * */
     }
 }
