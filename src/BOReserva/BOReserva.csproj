@@ -33,6 +33,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\BOReserva.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -95,6 +96,9 @@
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\..\..\Documents\NUnit-3.5.0\bin\net-2.0\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -200,34 +204,39 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\gestion_automovilesController.cs" />
-    <Compile Include="Controllers\gestion_avionesController.cs" />
+    <Compile Include="Controllers\gestion_avionesController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controllers\gestion_boletosController.cs" />
     <Compile Include="Controllers\gestion_check_inController.cs" />
     <Compile Include="Controllers\gestion_hotelesController.cs" />
     <Compile Include="Controllers\gestion_comida_vueloController.cs" />
+    <Compile Include="Controllers\gestion_seguridad_ingresoController.cs" />
+    <Compile Include="Controllers\gestion_ofertasController.cs" />
     <Compile Include="Controllers\gestion_restaurantesController.cs" />
     <Compile Include="Controllers\gestion_rolesController.cs" />
     <Compile Include="Controllers\gestion_ruta_comercialController.cs" />
     <Compile Include="Controllers\gestion_usuariosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DataAccess\Model\Connection.cs" />
+    <Compile Include="DataAccess\Model\ConexionUtil.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\gestion_automoviles\CAgregarAutomovil.cs" />
-    <Compile Include="Models\gestion_automoviles\CBasededatos_vehiculo.cs" />
+    <Compile Include="DataAccess\DAO\DAOAutomovil.cs" />
     <Compile Include="Models\gestion_automoviles\CModificarAutomovil.cs" />
     <Compile Include="Models\gestion_automoviles\CVisualizarAutomovil.cs" />
-    <Compile Include="Models\gestion_automoviles\CVisualizarAutomoviles.cs" />
-    <Compile Include="Models\gestion_automoviles\CAutomovil.cs" />
-    <Compile Include="Models\gestion_automoviles\VehicleList.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Models\gestion_automoviles\VehicleModel.cs" />
+    <Compile Include="DataAccess\Domain\Automovil.cs" />
     <Compile Include="Models\gestion_aviones\CAgregarAvion.cs" />
     <Compile Include="Models\gestion_aviones\CAvion.cs" />
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
+    <Compile Include="Models\gestion_seguridad_ingreso\Cgestion_seguridad_ingreso.cs" />
+    <Compile Include="Models\gestion_seguridad_ingreso\Cvalidar_bloqueo_exception.cs" />
+    <Compile Include="Models\gestion_seguridad_ingreso\Cvalidar_status_exception.cs" />
+    <Compile Include="Models\gestion_seguridad_ingreso\Cvalidar_usuario_Exception.cs" />
     <Compile Include="Models\gestion_aviones\CModificarAvion.cs" />
     <Compile Include="Models\gestion_boletos\CBoleto.cs" />
     <Compile Include="Models\gestion_boletos\CBuscarVuelo.cs" />
@@ -238,6 +247,10 @@
     <Compile Include="Models\gestion_boletos\CVuelo.cs" />
     <Compile Include="Models\gestion_hoteles\CGestionHoteles_CrearHotel.cs" />
     <Compile Include="Models\gestion_lugares\CLugarModelo.cs" />
+    <Compile Include="Models\gestion_ofertas\CAgregarOferta.cs" />
+    <Compile Include="Models\gestion_ofertas\CAgregarPaquete.cs" />
+    <Compile Include="Models\gestion_ofertas\COferta.cs" />
+    <Compile Include="Models\gestion_ofertas\CPaquete.cs" />
     <Compile Include="Models\gestion_roles\CListaGenerica.cs" />
     <Compile Include="Models\gestion_roles\CModulo_detallado.cs" />
     <Compile Include="Models\gestion_roles\CModulo_general.cs" />
@@ -265,9 +278,11 @@
       <DependentUpon>RecursoUsuario.resx</DependentUpon>
     </Compile>
     <Compile Include="Models\gestion_usuarios\ResultadoBD.cs" />
+    <Compile Include="Models\Util.cs" />
     <Compile Include="Models\gestion_restaurantes\CRestauranteModeloVista.cs" />
     <Compile Include="Models\gestion_restaurantes\CRestauranteModelo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Servicio\M01SQL.cs" />
     <Compile Include="Servicio\manejadorSQL.cs" />
     <Compile Include="Servicio\Servicio_Boletos\manejadorSQL_Boletos.cs" />
     <Compile Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx.cs">
@@ -279,6 +294,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\dist\css\AdminLTE.css" />
     <Content Include="Content\dist\css\AdminLTE.min.css" />
     <Content Include="Content\dist\css\skins\skin-black-light.css" />
@@ -325,10 +342,12 @@
     <Content Include="Content\dist\img\default-50x50.gif" />
     <Content Include="Content\dist\img\icons.png" />
     <Content Include="Content\dist\img\logo_final.png" />
+    <Content Include="Content\dist\img\logo_final1.png" />
     <Content Include="Content\dist\img\photo1.png" />
     <Content Include="Content\dist\img\photo2.png" />
     <Content Include="Content\dist\img\photo3.jpg" />
     <Content Include="Content\dist\img\photo4.jpg" />
+    <Content Include="Content\dist\img\travelling.jpg" />
     <Content Include="Content\dist\img\user1-128x128.jpg" />
     <Content Include="Content\dist\img\user2-160x160.jpg" />
     <Content Include="Content\dist\img\user3-128x128.jpg" />
@@ -432,7 +451,6 @@
     <Content Include="Content\bootstrap\js\bootstrap.js" />
     <Content Include="Content\bootstrap\js\bootstrap.min.js" />
     <Content Include="Content\bootstrap\js\npm.js" />
-    <Content Include="Models\gestion_automoviles\placeholder.html" />
     <Content Include="Models\gestion_aviones\placeholder.html" />
     <Content Include="Models\gestion_comida_vuelo\placeholder.html" />
     <Content Include="Models\gestion_cruceros\placeholder.html" />
@@ -442,7 +460,6 @@
     <Content Include="Models\gestion_restaurantes\placeholder.html" />
     <Content Include="Models\gestion_roles\placeholder.html" />
     <Content Include="Models\gestion_ruta_comercial\placeholder.html" />
-    <Content Include="Models\gestion_seguridad_ingreso\placeholder.html" />
     <Content Include="Models\gestion_usuarios\placeholder.html" />
     <Content Include="Models\gestion_boletos\placeholder.html" />
     <Content Include="Models\gestion_vuelo\placeholder.html" />
@@ -450,7 +467,11 @@
     <Content Include="Scripts\Scripts_Boletos\DatosUsuario.js" />
     <Content Include="Scripts\Scripts_Boletos\DetalleBoleto.js" />
     <Content Include="Scripts\Scripts_Boletos\BuscarVuelo.js" />
+    <Content Include="Scripts\Scripts_Boletos\VerVuelos.js" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Scripts\Scripts_Boletos\DetalleVuelo.js" />
+    <None Include="Properties\PublishProfiles\Webdeploy Smarterasp.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -458,6 +479,7 @@
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\Scripts_Automoviles\llamadas_comunes_automoviles.js" />
     <Content Include="Scripts\Scripts_Aviones\llamadas_generales.js" />
     <Content Include="Scripts\Scripts_CheckIn\BoardingPass.js" />
     <Content Include="Scripts\Scripts_CheckIn\M05_CheckIn.js" />
@@ -465,74 +487,13 @@
     <Content Include="Scripts\Scripts_CheckIn\M05_VerBoletosCheckIn.js" />
     <Content Include="Scripts\Scripts_CheckIn\M05_VerDetalleBoleto.js" />
     <Content Include="Scripts\Scripts_Hoteles\llamadas_generales_hoteles.js" />
+    <Content Include="Scripts\Scripts_Ofertas\llamadas_generales.js" />
     <Content Include="Scripts\Scripts_Restaurantes\llamadas_generales.js" />
     <Content Include="Scripts\select2\css\select2.min.css" />
     <Content Include="Scripts\select2\js\i18n\en.js" />
     <Content Include="Scripts\select2\js\i18n\es.js" />
     <Content Include="Scripts\select2\js\select2.min.js" />
-    <Content Include="Views\dist\css\AdminLTE.css" />
-    <Content Include="Views\dist\css\AdminLTE.min.css" />
-    <Content Include="Views\dist\css\skins\skin-black-light.css" />
-    <Content Include="Views\dist\css\skins\skin-black-light.min.css" />
-    <Content Include="Views\dist\css\skins\skin-black.css" />
-    <Content Include="Views\dist\css\skins\skin-black.min.css" />
-    <Content Include="Views\dist\css\skins\skin-blue-light.css" />
-    <Content Include="Views\dist\css\skins\skin-blue-light.min.css" />
-    <Content Include="Views\dist\css\skins\skin-blue.css" />
-    <Content Include="Views\dist\css\skins\skin-blue.min.css" />
-    <Content Include="Views\dist\css\skins\skin-green-light.css" />
-    <Content Include="Views\dist\css\skins\skin-green-light.min.css" />
-    <Content Include="Views\dist\css\skins\skin-green.css" />
-    <Content Include="Views\dist\css\skins\skin-green.min.css" />
-    <Content Include="Views\dist\css\skins\skin-purple-light.css" />
-    <Content Include="Views\dist\css\skins\skin-purple-light.min.css" />
-    <Content Include="Views\dist\css\skins\skin-purple.css" />
-    <Content Include="Views\dist\css\skins\skin-purple.min.css" />
-    <Content Include="Views\dist\css\skins\skin-red-light.css" />
-    <Content Include="Views\dist\css\skins\skin-red-light.min.css" />
-    <Content Include="Views\dist\css\skins\skin-red.css" />
-    <Content Include="Views\dist\css\skins\skin-red.min.css" />
-    <Content Include="Views\dist\css\skins\skin-yellow-light.css" />
-    <Content Include="Views\dist\css\skins\skin-yellow-light.min.css" />
-    <Content Include="Views\dist\css\skins\skin-yellow.css" />
-    <Content Include="Views\dist\css\skins\skin-yellow.min.css" />
-    <Content Include="Views\dist\css\skins\_all-skins.css" />
-    <Content Include="Views\dist\css\skins\_all-skins.min.css" />
-    <Content Include="Views\dist\img\avatar.png" />
-    <Content Include="Views\dist\img\avatar04.png" />
-    <Content Include="Views\dist\img\avatar2.png" />
-    <Content Include="Views\dist\img\avatar3.png" />
     <Content Include="Views\dist\img\avatar5.png" />
-    <Content Include="Views\dist\img\boardingpass.png" />
-    <Content Include="Views\dist\img\boxed-bg.jpg" />
-    <Content Include="Views\dist\img\boxed-bg.png" />
-    <Content Include="Views\dist\img\credit\american-express.png" />
-    <Content Include="Views\dist\img\credit\cirrus.png" />
-    <Content Include="Views\dist\img\credit\mastercard.png" />
-    <Content Include="Views\dist\img\credit\mestro.png" />
-    <Content Include="Views\dist\img\credit\paypal.png" />
-    <Content Include="Views\dist\img\credit\paypal2.png" />
-    <Content Include="Views\dist\img\credit\visa.png" />
-    <Content Include="Views\dist\img\default-50x50.gif" />
-    <Content Include="Views\dist\img\icons.png" />
-    <Content Include="Views\dist\img\logo_final.png" />
-    <Content Include="Views\dist\img\photo1.png" />
-    <Content Include="Views\dist\img\photo2.png" />
-    <Content Include="Views\dist\img\photo3.jpg" />
-    <Content Include="Views\dist\img\photo4.jpg" />
-    <Content Include="Views\dist\img\user1-128x128.jpg" />
-    <Content Include="Views\dist\img\user2-160x160.jpg" />
-    <Content Include="Views\dist\img\user3-128x128.jpg" />
-    <Content Include="Views\dist\img\user4-128x128.jpg" />
-    <Content Include="Views\dist\img\user5-128x128.jpg" />
-    <Content Include="Views\dist\img\user6-128x128.jpg" />
-    <Content Include="Views\dist\img\user7-128x128.jpg" />
-    <Content Include="Views\dist\img\user8-128x128.jpg" />
-    <Content Include="Views\dist\js\app.js" />
-    <Content Include="Views\dist\js\app.min.js" />
-    <Content Include="Views\dist\js\demo.js" />
-    <Content Include="Views\dist\js\pages\dashboard.js" />
-    <Content Include="Views\dist\js\pages\dashboard2.js" />
     <Content Include="Views\gestion_automoviles\css\style_module.css" />
     <Content Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx" />
     <Content Include="Views\gestion_automoviles\GestionDeAutomoviles.html" />
@@ -563,7 +524,7 @@
     <Content Include="Views\gestion_roles\M13_Roles.html" />
     <Content Include="Views\gestion_roles\placeholder.html" />
     <Content Include="Views\gestion_ruta_comercial\placeholder.html" />
-    <Content Include="Views\gestion_seguridad_ingreso\placeholder.html" />
+    <Content Include="Scripts\Scripts_Ingreso_Seguridad\Logout.js" />
     <Content Include="Views\gestion_usuarios\placeholder.html" />
     <Content Include="Views\gestion_boletos\placeholder.html" />
     <Content Include="Views\gestion_vuelo\placeholder.html" />
@@ -1400,9 +1361,6 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -1418,10 +1376,17 @@
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarPorVuelo.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_EditarComida.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarEditarComida.cshtml" />
+    <Content Include="Views\gestion_seguridad_ingreso\M01_Login.cshtml" />
+    <Content Include="Views\gestion_seguridad_ingreso\M01_RecuperarContrasenna.cshtml" />
     <Content Include="Views\gestion_usuarios\M12_Index.cshtml" />
     <Content Include="Views\gestion_usuarios\M12_AgregarUsuario.cshtml" />
     <Content Include="Views\gestion_usuarios\M12_ModificarUsuario.cshtml" />
     <Content Include="Views\gestion_usuarios\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Views\gestion_boletos\M05_VisualizarBoletos.cshtml" />
     <Content Include="Views\gestion_boletos\M05_VerReserva.cshtml" />
     <Content Include="Views\gestion_check_in\M05_CheckIn.cshtml" />
@@ -1438,12 +1403,23 @@
     <Content Include="Views\gestion_ruta_comercial\ModificarRutasComerciales.cshtml" />
     <Content Include="Views\gestion_ruta_comercial\AgregarRutasComerciales.cshtml" />
     <Content Include="Views\gestion_ruta_comercial\DetallesRutasComerciales.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_AgregarOferta.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_AgregarPaquete.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_VisualizarOferta.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_ConsultarPaquete.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_GestionOfertas.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_ModificarOferta.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_ModificarPaquete.cshtml" />
     <Content Include="Views\gestion_roles\M13_AgregarRol.cshtml" />
     <Content Include="Views\gestion_roles\M13_VisualizarRol.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\Scripts_ComidaVuelo\" />
+    <Folder Include="Views\dist\css\skins\" />
+    <Folder Include="Views\dist\img\credit\" />
+    <Folder Include="Views\dist\js\pages\" />
+    <Folder Include="Views\gestion_comidavuelo\" />
     <Folder Include="Views\gestion_roles\css\" />
     <Folder Include="Views\gestion_roles\js\" />
   </ItemGroup>
@@ -1526,6 +1502,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoUsuario.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

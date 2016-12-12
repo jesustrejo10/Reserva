@@ -295,7 +295,7 @@ jQuery(document).ready(function () {
         var url = '/gestion_diarios/gestion_diarios';
         var method = 'GET';
         var data = '';
-
+        $("#contenedor").html('<div class="text-center">Cargando...</div>')
         $.ajax(
             {
                 url: url,
