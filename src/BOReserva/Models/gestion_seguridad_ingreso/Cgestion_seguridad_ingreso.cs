@@ -78,7 +78,7 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
                 return true;
             }
             else
-                throw new Cvalidar_status_exception("Usuario Inactivo contacte administrador");
+                throw new Cvalidar_status_exception("Usuario Bloqueado Contacte administrador");
 
 
         }
@@ -121,6 +121,7 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
             }
         }
         #endregion
+
         #region Verificacion de Intentos de contraseña fallida
         /// <summary>
         /// Funcion que verifica la cantidad de intentos fallidos de ingreso
