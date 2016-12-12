@@ -1,183 +1,249 @@
-﻿<script src="~/Scripts/Scripts_CheckIn/M05_VerDetalleBoleto.js"></script>
+﻿@model BOReserva.Models.gestion_check_in.CDetalleBoleto
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="box box-success">
-            <div class="box-header with-border">
-                <h1 class="box-title">Detalle Boleto</h1>
-                <div class="box-tools pull-right">
+@using (Html.BeginForm("verDatosBoleto", "gestion_check_in", null, FormMethod.Post, new { @id = "formverDatosBoleto", @class = "form-horizontal" }))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h1 class="box-title"> Detalle del Boleto</h1>
+                    <div class="box-tools pull-right">
+                    </div>
                 </div>
-            </div>
-            <div class="box-body">
-                <div class="row">
-                    <div class="form-group">
-
-
-                        <div class="col-md-6">
-                            <label>Origen:</label>
-                            <input type="text" class="form-control" placeholder="Caracas" disabled>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label>Destino:</label>
-                            <input type="text" class="form-control" placeholder="Miami" disabled>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <br>
-
-                <div class="row">
-                    <div class="form-group">
-
-
-                        <div class="col-md-6">
-                            <label>Fecha salida (IDA):</label>
-                            <input type="text" class="form-control" placeholder="01/03/2017" disabled>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label>Fecha llegada (IDA):</label>
-                            <input type="text" class="form-control" placeholder="02/03/2017" disabled>
-                        </div>
-
-
-
-
-                    </div>
-
-                </div>
-
-                <br>
-
-                <div class="row">
-                    <div class="form-group">
-
-                        <div class="col-md-6">
-                            <label>Hora salida (IDA):</label>
-                            <input type="text" class="form-control" placeholder="12:00 am" disabled>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label>Hora llegada (IDA):</label>
-                            <input type="text" class="form-control" placeholder="1:00 am" disabled>
-                        </div>
-
-
-
-                    </div>
-
-                </div>
-
-                <br>
-
-                <div class="row">
-                    <div class="form-group">
-
-
-                        <div class="col-md-6">
-                            <label>Fecha salida (VUELTA):</label>
-                            <input type="text" class="form-control" placeholder="01/03/2017" disabled>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label>Fecha llegada (VUELTA):</label>
-                            <input type="text" class="form-control" placeholder="02/03/2017" disabled>
-                        </div>
-
-
-
-
-                    </div>
-
-                </div>
-
-                <br>
-
-                <div class="row">
-                    <div class="form-group">
-
-                        <div class="col-md-6">
-                            <label>Hora salida (VUELTA):</label>
-                            <input type="text" class="form-control" placeholder="12:00 am" disabled>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label>Hora llegada (VUELTA):</label>
-                            <input type="text" class="form-control" placeholder="1:00 am" disabled>
-                        </div>
-
-
-
-                    </div>
-
-                </div>
-
-                <br>
-
-                <div class="row">
-
-                    <div class="col-md-6">
-                        <label>Monto:</label>
-                        <input type="text" class="form-control" placeholder="$280" disabled>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label>Tipo Boleto:</label>
-                        <input type="text" class="form-control" placeholder="Ejecutivo" disabled>
-                    </div>
-
-                </div>
-
-                <br>
-
-                <div class="row">
-                    <div class="form-group">
-
-                        <div class="col-md-6">
-                            <label>Nombre:</label>
-                            <input type="text" class="form-control" placeholder="Luis" disabled>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label>Apellido:</label>
-                            <input type="text" class="form-control" placeholder="Luis" disabled>
-                        </div>
-
-
-                    </div>
-
-                </div>
-
-                <br>
-
-                <div class="row">
-
-                    <div class="col-md-6">
-                        <label>Número de pasaporte:</label>
-                        <input type="text" class="form-control" placeholder="053519254" disabled>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label>Correo:</label>
-                        <input type="text" class="form-control" placeholder="correo@gmail.com" disabled>
-                    </div>
-
-
-                </div>
-
-                <br>
-
-                <div class="row">
+                <!-- /.box-header -->
+                <div class="box-body">
 
                     <div class="col-md-12" style="margin-top:10px;">
-                        <button type="button" id="siguiente" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Registrar equipaje</button>
+
+                        <div class="col-md-6">
+                            <label>N° de Boleto:</label>
+                            @Html.TextBoxFor(m => m._bol_id, null, new { @class = "form-control", @placeholder = "", @readonly = "readonly" })
+                        </div>
+
+                    </div>
+
+                    <div>&nbsp;</div>
+
+                    <!-------------------- INICIO SECCIÓN DATOS DEL PASAJERO ------------------------------>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="box collapsed-box">
+                                <div class="box-header with-border">
+                                    <h1 class="box-title"> Datos del Pasajero</h1>
+                                    <div class="box-tools pull-right">
+                                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div style="display: none;" class="box-body">
+                                    <div class="row">
+
+                                        <div class="col-md-12" style="margin-top:10px;">
+                                            <div class="col-md-6">
+                                                <label>Pasaporte:</label>
+                                                @Html.TextBoxFor(m => m._id, null, new { @class = "form-control", @placeholder = "", @readonly = "readonly" })
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label>Fecha Nacimiento:</label>
+                                                @Html.TextBoxFor(m => m._fecha_nac, "{0:dd/MM/yyy}", new { @class = "form-control", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+
+                                        <div>&nbsp;</div>
+
+                                        <div class="col-md-12" style="margin-top:10px;">
+
+                                            <div class="col-xs-6">
+                                                <label>Primer Nombre:</label>
+                                                @Html.TextBoxFor(m => m._primer_nombre, null, new { @class = "form-control", @placeholder = "", @readonly = "readonly" })
+                                            </div>
+
+                                            <div class="col-xs-6">
+                                                <label>Segundo Nombre:</label>
+                                                @Html.TextBoxFor(m => m._segundo_nombre, null, new { @class = "form-control", @placeholder = "", @readonly = "readonly" })
+                                            </div>
+
+                                        </div>
+
+                                        <div>&nbsp;</div>
+
+                                        <div class="col-md-12" style="margin-top:10px;">
+                                            <div class="col-md-6">
+                                                <label>Primer Apellido:</label>
+                                                @Html.TextBoxFor(m => m._primer_apellido, null, new { @class = "form-control", @placeholder = "", @readonly = "readonly" })
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label>Segundo Apellido:</label>
+                                                @Html.TextBoxFor(m => m._segundo_apellido, null, new { @class = "form-control", @placeholder = "", @readonly = "readonly" })
+                                            </div>
+
+                                        </div>
+
+                                        <div>&nbsp;</div>
+
+                                        <div class="col-md-12" style="margin-top:10px;">
+
+                                            <div class="col-md-6">
+                                                <label>Sexo:</label>
+                                                @Html.TextBoxFor(m => m._sexo, null, new { @class = "form-control", @placeholder = "", @readonly = "readonly" })
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label>Correo:</label>
+                                                @Html.TextBoxFor(m => m._correo, null, new { @class = "form-control", @placeholder = "", @readonly = "readonly" })
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-------------------- INICIO SECCIÓN DATOS DEL VUELO ------------------------------>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="box collapsed-box">
+                                <div class="box-header with-border">
+                                    <h1 class="box-title"> Datos Vuelo</h1>
+                                    <div class="box-tools pull-right">
+                                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div style="display: none;" class="box-body">
+                                    <div class="row">
+
+                                        <div class="col-md-12" style="margin-top:10px;">
+
+                                            <div class="col-md-6">
+                                                <label>Origen:</label>
+                                                @Html.TextBoxFor(m => m._origen, null, new { @class = "form-control", @placeholder = "", @readonly = "readonly" })
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label>Destino:</label>
+                                                @Html.TextBoxFor(m => m._destino, null, new { @class = "form-control", @placeholder = "", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+
+                                        <div>&nbsp;</div>
+
+                                        <div class="col-md-12" style="margin-top:10px;">
+                                            <div class="col-md-6">
+                                                <label>Fecha salida (IDA):</label>
+                                                @Html.TextBoxFor(m => m._fechaDespegueIda, null, new { @class = "form-control", @placeholder = "", @readonly = "readonly" })
+                                            </div>
+
+
+                                            <div class="col-md-6">
+                                                <label>Hora salida (IDA):</label>
+                                                @Html.TextBoxFor(m => m._fechaAterrizajeIda, null, new { @class = "form-control", @placeholder = "", @readonly = "readonly" })
+                                            </div>
+
+                                        </div>
+
+                                        <div>&nbsp;</div>
+
+                                        <div class="col-md-12" style="margin-top:10px;">
+                                            <div class="col-md-6">
+                                                <label>Fecha salida (VUELTA):</label>
+                                                @Html.TextBoxFor(m => m._fechaDespegueVuelta, null, new { @class = "form-control", @placeholder = "", @readonly = "readonly" })
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label>Hora salida (VUELTA):</label>
+                                                @Html.TextBoxFor(m => m._fechaAterrizajeVuelta, null, new { @class = "form-control", @placeholder = "", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+
+                                        <div>&nbsp;</div>
+
+                                        <div class="col-md-12" style="margin-top:10px;">
+
+                                            <div class="col-md-6">
+                                                <label>Seleccione el Pase de Abordaje a generar:</label>
+                                                @Html.DropDownListFor(m => m._tipoBoardingPass, Model._tipos, new { @class = "form-control", @placeholder = "Tipo" })
+                                            </div>
+
+                                        </div>
+                                        <div>&nbsp;</div>
+                                        <div class="col-md-12" style="margin-top:10px;">
+                                            <div class="col-md-4"></div>
+                                            <div class="col-md-2">
+                                                <button type="button" id="modificar_tipo_boleto" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Generar</button>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button id="cancel_tipo" type="button" class="btn btn-danger" style="display:block; margin-left:auto; margin-right:auto;">Cancelar</button>
+                                            </div>
+                                            <div class="col-md-4"></div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
             </div>
         </div>
     </div>
-</div>
+}
+
+<script>
+
+    $("#modificar_tipo_boleto").click(function (e) {
+        e.preventDefault();
+        var form = $("#formverDatosBoleto");
+        $.ajax({
+            url: "gestion_check_in/generarBoardingPass",
+            data: form.serialize(),
+            type: 'POST',
+            success: function (data) {
+                alert("Se está generando el boleto");
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            }
+            , error: function (xhr, textStatus, exceptionThrown) {
+                //muestro el texto del error
+                alert(xhr.responseText);
+            }
+        });
+    });
+
+    $("#cancel_tipo").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_check_in/M05_CheckIn';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+</script>
+
+
+
+
+
+
+

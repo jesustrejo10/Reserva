@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using System.Net;
 using BOReserva.Models.gestion_boletos;
 using BOReserva.Servicio.Servicio_Boletos;
-using System.Net;
+
 
 namespace BOReserva.Controllers
 {
@@ -105,8 +105,8 @@ namespace BOReserva.Controllers
                 bol._fechaAterrizajeIda = vuelos[0]._fechaLlegada.Day + "/" + vuelos[0]._fechaLlegada.Month + "/" + vuelos[0]._fechaLlegada.Year;
                 bol._fechaAterrizajeVuelta = vuelos[1]._fechaLlegada.Day + "/" + vuelos[1]._fechaLlegada.Month + "/" + vuelos[1]._fechaLlegada.Year;
                 bol._horaDespegueIda = time0;
-                bol._horaDespegueVuelta = time1;
-                bol._horaAterrizajeIda = time2;
+                bol._horaAterrizajeIda = time1;
+                bol._horaDespegueVuelta = time2;
                 bol._horaAterrizajeVuelta = time3;
             }
 

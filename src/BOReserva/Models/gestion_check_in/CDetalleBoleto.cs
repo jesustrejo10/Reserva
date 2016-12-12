@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
-namespace BOReserva.Models.gestion_boletos
+namespace BOReserva.Models.gestion_check_in
 {
-    public class CModificarBoleto
+    public class CDetalleBoleto
     {
+
         public int _id {get; set;}
 
         public String _primer_nombre {get; set;}
@@ -39,12 +42,18 @@ namespace BOReserva.Models.gestion_boletos
         public String _tipoBoleto { get; set; }
         public int _bol_id { get; set; }
 
+       public String _tipoBoardingPass { get; set; }
+
+       public List<SelectListItem> _tipos { get; set; }
+
+
         //Constructor por default por si acaso
-        public CModificarBoleto() { }
+        public CDetalleBoleto() { }
 
         //Constructor para pasarle los valores a la vista
-        public CModificarBoleto(CBoleto boleto)
+        public CDetalleBoleto(CBoleto boleto)
         {
+            _tipos = new List<SelectListItem>();
             _id = boleto._pasajero._id;
             _primer_nombre =  boleto._pasajero._primer_nombre;
             _segundo_nombre =  boleto._pasajero._segundo_nombre;
@@ -69,6 +78,12 @@ namespace BOReserva.Models.gestion_boletos
                 _horaDespegueVuelta = "";
                 _horaAterrizajeIda = time1;
                 _horaAterrizajeVuelta = "";
+                _tipos.Add(new SelectListItem
+                        {
+                            Text = "Ida",
+                            Value = "Ida"
+                });
+                _tipoBoardingPass = "Ida";
             }
             else
             {
@@ -84,7 +99,24 @@ namespace BOReserva.Models.gestion_boletos
                 _horaDespegueVuelta = time1;
                 _horaAterrizajeIda = time2;
                 _horaAterrizajeVuelta = time3;
+                _tipos.Add(new SelectListItem
+                {
+                    Text = "",
+                    Value = ""
+                });
+                _tipos.Add(new SelectListItem
+                        {
+                            Text = "Ida",
+                            Value = "Ida"
+                        });
+                _tipos.Add(new SelectListItem
+                {
+                    Text = "Vuelta",
+                    Value = "Vuelta"
+                });
+                _tipoBoardingPass = "";
             }
+
 
             _origen = boleto._origen.Name;
             _destino = boleto._destino.Name;
@@ -92,6 +124,5 @@ namespace BOReserva.Models.gestion_boletos
             _tipoBoleto = boleto._tipoBoleto;
 
         }
-    
     }
 }
