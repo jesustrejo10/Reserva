@@ -1,9 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.Web.Mvc;
 using FOReserva.Models.Restaurantes;
 using FOReserva.Servicio;
-
+using System.Data.Linq;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace FOReserva.Controllers
 {
@@ -91,7 +92,7 @@ namespace FOReserva.Controllers
             catch (Exception g)
             {
                 ViewBag.Message = "Lo sentimos, la reserva no pudo ser realizada debido al siguiente error del sistema:" + g.Message;
-               
+
             }
             return View();
         }
@@ -101,9 +102,9 @@ namespace FOReserva.Controllers
          *  Crea la reserva en DB
          *  En caso contrario devuelve vista al momento de crear la reserva
              */
-        public ActionResult confirma_restaurant(int restaurantID,string name_rest,string addres_rest, string name_client, string reserv_date, string reserv_hour, int number_person, string name_city)
+        public ActionResult confirma_restaurant(int restaurantID, string name_rest, string addres_rest, string name_client, string reserv_date, string reserv_hour, int number_person, string name_city)
         {
-            CReservation_Restaurant reserva = new CReservation_Restaurant(name_client,reserv_date,reserv_hour,number_person, 5, restaurantID);
+            CReservation_Restaurant reserva = new CReservation_Restaurant(name_client, reserv_date, reserv_hour, number_person, 5, restaurantID);
             reserva.Restaurant = new CRestaurantModel(restaurantID, name_rest, addres_rest);
             reserva.Restaurant.CityName = name_city;
             try
@@ -151,11 +152,11 @@ namespace FOReserva.Controllers
             }
             catch (Exception g)
             {
-             ViewBag.Message = "Lo sentimos, la reserva no pudo ser realizada debido al siguiente error del sistema:" + g.Message;
-                
+                ViewBag.Message = "Lo sentimos, la reserva no pudo ser realizada debido al siguiente error del sistema:" + g.Message;
+
             }
             return View();
-            
+
         }
 
 
@@ -199,15 +200,24 @@ namespace FOReserva.Controllers
          *   c_reserv_hour: hora de la reserva
          *   c_number_person: numero de personas
          */
-        [System.Web.Services.WebMethod]
-        public void editar_reserva(int c_id_reserva,string c_name_client, string c_reserv_date, string c_reserv_hour,int c_number_person)
+
+        [HttpPost]
+        public ActionResult _EditarReserva(int id)
         {
-            CReservation_Restaurant tmp = new CReservation_Restaurant();
-            tmp.Id = c_id_reserva;
-            tmp.Name = c_name_client;
-            tmp.Date = c_reserv_date;
-            tmp.Time = c_reserv_hour;
-            tmp.Count = c_number_person;
+
+            ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
+            List<CReservation_Restaurant> lista = manejador.buscarReservas();
+            CReservation_Restaurant model = new CReservation_Restaurant();
+
+            CReservation_Restaurant DBModel = lista.Where(i => i.Id.Equals(id)).FirstOrDefault();
+            if (DBModel != null) model = DBModel;
+
+            return View(model);
+
+        }
+
+        public JsonResult UpdateReserva(CReservation_Restaurant tmp)
+        {
 
             try
             {
@@ -216,21 +226,27 @@ namespace FOReserva.Controllers
             }
             catch (ManejadorSQLException e)
             {
-                /*
-                 * Controlar error de conexion
-                 *
-                 */
-
+                //Ventana de error no conecto a la db
+                //Se puede usar el mensaje de la excepcion "e.mensaje"
+                return null;
             }
             catch (InvalidManejadorSQLException e)
             {
-                /*
-                 * Controlar error de operacion invalida 
-                 */
-
+                //Ventana de error al eliminar la reserva
+                //Esto se causa por una sitaxis erronea del sql
+                //como son caracteres especiales o demas
             }
-            catch (Exception e) { /* Error generico del sistema */ }
+            catch (Exception e)
+            {
+                // Error desconocido del sistema
+                return null;
+            }
+
+            return Json("exito");
+
         }
+
+
     }
 }
 
