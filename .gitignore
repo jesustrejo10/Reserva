@@ -508,4 +508,3 @@ paket-files/
 *.sln.iml
 src/FOReserva/Servicio/manejadorSQL.cs
 src/FOReserva/Servicio/manejadorSQL.cs
->>>>>>> refs/remotes/origin/Develop
