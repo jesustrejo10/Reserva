@@ -40,6 +40,10 @@ namespace BOReserva.Servicio
         {
             try
             {
+                if (model._matriculaAvion == null)
+                {
+                    return false;
+                }
                 //Inicializo la conexion con el string de conexion
                 conexion = new SqlConnection(stringDeConexion);
                 //INTENTO abrir la conexion
@@ -50,11 +54,6 @@ namespace BOReserva.Servicio
                 query.CommandText = "INSERT INTO Avion VALUES ('" + model._matriculaAvion + "','" + model._modeloAvion + "'," + model._capacidadPasajerosTurista + " , " + model._capacidadPasajerosEjecutiva + "," + model._capacidadPasajerosVIP + ", " + model._capacidadEquipaje + ", " + model._distanciaMaximaVuelo + ", " + model._velocidadMaximaDeVuelo + ", " + model._capacidadMaximaCombustible + ", 1);";
                 //creo un lector sql para la respuesta de la ejecucion del comando anterior               
                 SqlDataReader lector = query.ExecuteReader();
-                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
-                /*while(lector.Read())
-                {
-                      //COMENTADO PORQUE ESTE METODO NO LO APLICA, SERÁ BORRADO DESPUES
-                }*/
                 //cierro el lector
                 lector.Close();
                 //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
@@ -250,6 +249,38 @@ namespace BOReserva.Servicio
                 throw e;
             }
         }
+
+
+        /// <summary>
+        /// Metodo para eliminar un avion de la base de datos
+        /// </summary>
+        /// <param name="id"> id del avion a eliminar</param>
+        /// <returns>Booleano que resultara true si la eliminacion se ejecuta, false en caso de error</returns>
+        public Boolean eliminarAvion(int id)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "DELETE FROM AVION WHERE avi_id=" + id;
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                conexion.Close();
+                return true;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+ 
 
 
         //Procedimiento del Modulo 11 para agregar ofertas a la base de datos.

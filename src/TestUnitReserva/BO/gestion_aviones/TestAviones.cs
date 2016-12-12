@@ -36,7 +36,7 @@ namespace TestUnitReserva.BO.gestion_aviones
             Boolean resultadoconnull = prueba.insertarAvion(null);
             Assert.AreEqual(resultadoconnull, false);
             //Pruebo que no me deje insertar una matrícula en null
-            avion._matriculaAvion =null;
+            avion._matriculaAvion = null;
             Boolean resultadosinmatricula = prueba.insertarAvion(avion);
             Assert.AreEqual(resultadosinmatricula, false);
             //Aquí pruebo que no me deje insertar una matricula repetida
@@ -99,6 +99,14 @@ namespace TestUnitReserva.BO.gestion_aviones
             Boolean resultado = prueba.habilitarAvion(1);
             Assert.AreEqual(resultado, true);
        }
+
+        [Test]
+        public void verificarEliminarAvion()
+        {
+            int id = 65; //suponiendo que quiero eliminar el avion 65 si es que existe
+            Boolean resultado = prueba.eliminarAvion(id);
+            Assert.AreEqual(resultado, true);
+        }
 
         [Test]        
         public void modificarAvionNulo()
