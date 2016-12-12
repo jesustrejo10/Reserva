@@ -222,11 +222,22 @@ namespace UnitTestProject1
         [TestMethod]
         public void MListarciudadesBD()
         {
-             List<String> h = daoAutomovil.MListarciudadesBD(11);
+            List<String> h = daoAutomovil.MListarciudadesBD(11);
 
             Assert.AreEqual(5, h.Count);
         }
 
 
+        /// <summary>
+        /// Método que verifica si se ejecuta bien la revisión de placa
+        /// </summary>
+        [TestMethod]
+        public void MPlacarepetidaBD()
+        {
+            int repetida = daoAutomovil.MPlacarepetidaBD("PRUEBANA");
+            Assert.AreEqual(1, repetida);
+            int repetidano = daoAutomovil.MPlacarepetidaBD("SIUL1208");
+            Assert.AreEqual(0, repetidano);
+        }
     }
 }
