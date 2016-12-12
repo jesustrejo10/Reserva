@@ -1732,8 +1732,6 @@
     <Content Include="Views\ajax\dummy-lightbox.html" />
     <Content Include="Views\ajax\dummy-modal-ajax.html" />
     <Content Include="Views\busqueda_compra_boletos\placeholder.html" />
-    <Content Include="Views\gestion_planificacion_vacaciones\placeholder.html" />
-    <Content Include="Views\gestion_diario_viaje\placeholder.html" />
     <Content Include="Views\gestion_reclamos\placeholder.html" />
     <Content Include="Views\gestion_reserva_auto\placeholder.html" />
     <Content Include="Views\gestion_reserva_crucero\placeholder.html" />
@@ -3095,7 +3093,6 @@
     <Content Include="Views\Shared\_MenuPerfil.cshtml" />
     <Content Include="Views\gestion_reserva_auto\M19_Reserva_Autos.cshtml" />
     <Content Include="Views\gestion_reserva_auto\M19_Reserva_AutosImagenes.cshtml" />
-    <Content Include="Views\Shared\_LayoutPerfil.cshtml" />
     <Content Include="Views\gestion_reserva_auto\M19_Reserva_Autos_Perfil.cshtml" />
     <Content Include="Views\Shared\Perfil.cshtml" />
     <Content Include="Views\gestion_planificacion_vacaciones\M17_gestion_itinerario_Perfil.cshtml" />
@@ -3120,6 +3117,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\gestion_diario_viaje\" />
     <Folder Include="Views\registro_autenticacion\" />
   </ItemGroup>
   <ItemGroup>
