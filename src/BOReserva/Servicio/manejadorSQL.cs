@@ -31,8 +31,11 @@ namespace BOReserva.Servicio
         //string que contendra la conexion a la bd
         private string stringDeConexion = null;
 
+
+
+
         //Procedimiento del Modulo 6 para agregar platos a la base de datos.
-        public Boolean insertarAvion(CAgregarComida model)
+        public Boolean insertarPlato(CAgregarComida model)
         {
             try
             {
@@ -67,7 +70,6 @@ namespace BOReserva.Servicio
             }
 
         }
-
         //Procedimiento del Modulo 6 para retornar una lista con los platos en la bd
         public List<CComida> listarPlatosEnBD()
         {
@@ -105,7 +107,7 @@ namespace BOReserva.Servicio
         }
 
         //Procedimiento del Modulo 6 para retornar un objeto del tipo CComida buscado por su respectiva id
-        public CComida consultarAvion(int id)
+        public CComida consultarComida(int id)
         {
             CComida platoRetorno = new CComida();
             try
@@ -114,7 +116,7 @@ namespace BOReserva.Servicio
                 conexion = new SqlConnection(stringDeConexion);
                 //INTENTO abrir la conexion
                 conexion.Open();
-                String query = "SELECT * FROM Avion where avi_id = " + id;
+                String query = "SELECT * FROM Comida where comi_id = " + id;
                 SqlCommand cmd = new SqlCommand(query, conexion);
                 SqlDataReader lector = cmd.ExecuteReader();
                 while (lector.Read())
@@ -168,7 +170,172 @@ namespace BOReserva.Servicio
             }
         }
 
-        //Procedimiento del Modulo 2 para deshabilitar un avion
+
+
+        /// <summary>
+        /// Procedimiento del Modulo 2 para agregar aviones a la base de datos.
+        /// </summary>
+        /// <param name="model">CAgregarAvion</param>
+        /// <returns>Boolean. Retorna true si agregó correctamente a la bbdd o false en caso contrario</returns>
+        public Boolean insertarAvion(CAgregarAvion model)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                //uso el SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "INSERT INTO Avion VALUES ('" + model._matriculaAvion + "','" + model._modeloAvion + "'," + model._capacidadPasajerosTurista + " , " + model._capacidadPasajerosEjecutiva + "," + model._capacidadPasajerosVIP + ", " + model._capacidadEquipaje + ", " + model._distanciaMaximaVuelo + ", " + model._velocidadMaximaDeVuelo + ", " + model._capacidadMaximaCombustible + ", 1);";
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                SqlDataReader lector = query.ExecuteReader();
+                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+                /*while(lector.Read())
+                {
+                      //COMENTADO PORQUE ESTE METODO NO LO APLICA, SERÁ BORRADO DESPUES
+                }*/
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+        }
+        /// <summary>
+        /// Procedimiento del Modulo 2 para retornar una lista con los aviones en la base de datos
+        /// </summary>
+        /// <returns> List<CAvion> la lista de aviones en la base de datos</returns>
+        public List<CAvion> listarAvionesEnBD()
+
+        {
+            List<CAvion> aviones = new List<CAvion>();
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "SELECT * FROM Avion";
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                while (lector.Read())
+                {
+                    CAvion avion = new CAvion(Int32.Parse(lector["avi_id"].ToString()), lector["avi_matricula"].ToString(),
+                    lector["avi_modelo"].ToString(), Int32.Parse(lector["avi_pasajeros_turista"].ToString()),
+                    Int32.Parse(lector["avi_pasajeros_ejecutiva"].ToString()), Int32.Parse(lector["avi_pasajeros_vip"].ToString()),
+                    float.Parse(lector["avi_cap_equipaje"].ToString()), float.Parse(lector["avi_max_dist"].ToString()),
+                    float.Parse(lector["avi_max_vel"].ToString()), float.Parse(lector["avi_max_comb"].ToString()),
+                    Int32.Parse(lector["avi_disponibilidad"].ToString()));
+                    aviones.Add(avion);
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return aviones;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// Procedimiento del Modulo 2 para retornar un objeto del tipo CAvion buscado por su respectiva id
+        /// </summary>
+        /// <param name="id"> int </param>
+        /// <returns> CAvion el avion buscado</returns>
+        public CAvion consultarAvion(int id)
+        {
+            CAvion avionRetorno = null;
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "SELECT * FROM Avion where avi_id = " + id;
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                while (lector.Read())
+                {
+
+                    CAvion avion = new CAvion(Int32.Parse(lector["avi_id"].ToString()), lector["avi_matricula"].ToString(),
+                    lector["avi_modelo"].ToString(), Int32.Parse(lector["avi_pasajeros_turista"].ToString()),
+                    Int32.Parse(lector["avi_pasajeros_ejecutiva"].ToString()), Int32.Parse(lector["avi_pasajeros_vip"].ToString()),
+                    float.Parse(lector["avi_cap_equipaje"].ToString()), float.Parse(lector["avi_max_dist"].ToString()),
+                    float.Parse(lector["avi_max_vel"].ToString()), float.Parse(lector["avi_max_comb"].ToString()),
+                    Int32.Parse(lector["avi_disponibilidad"].ToString()));
+                    avionRetorno = avion;
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return avionRetorno;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+       /// <summary>
+        /// Procedimiento del Modulo 2 para modificar un avion
+       /// </summary>
+        /// <param name="model"> CModificarAvion </param>
+        /// <returns> Boolean true si se modifico bien, false si no </returns>
+        public Boolean modificarAvion(CModificarAvion model)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "UPDATE Avion SET avi_modelo='" + model._modeloAvion + "', avi_pasajeros_turista=" + model._capacidadPasajerosTurista + ", avi_pasajeros_ejecutiva=" + model._capacidadPasajerosEjecutiva + ", avi_pasajeros_vip='" + model._capacidadPasajerosVIP + "', avi_cap_equipaje=" + model._capacidadEquipaje + ", avi_max_dist=" + model._distanciaMaximaVuelo + ", avi_max_vel=" + model._velocidadMaximaDeVuelo + ", avi_max_comb=" + model._capacidadMaximaCombustible + " WHERE (avi_matricula='" + model._matriculaAvion + "')";
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                conexion.Close();
+                return true;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// Procedimiento del Modulo 2 para deshabilitar un avion
+        /// </summary>
+        /// <param name="id"> int </param>
+        /// <returns>Boolean true si se deshabilito bien, false si dio un error </returns>
         public Boolean deshabilitarAvion(int id)
         {
             try
@@ -194,7 +361,11 @@ namespace BOReserva.Servicio
             }
         }
 
-        //Procedimiento del Modulo 2 para habilitar un avion
+        /// <summary>
+        /// Procedimiento del Modulo 2 para habilitar un avion
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>Boolean true si se habilito bien, false si dio un error </returns>
         public Boolean habilitarAvion(int id)
         {
             try
@@ -219,7 +390,6 @@ namespace BOReserva.Servicio
                 throw e;
             }
         }
-
 
 
         //Procedimiento del Modulo 11 para agregar ofertas a la base de datos.
@@ -447,165 +617,6 @@ namespace BOReserva.Servicio
         
         //Fin modulo 11
 
-        //Procedimiento del Modulo 2 para retornar una lista con los aviones en la bd
-        public List<CAvion> listarAvionesEnBD()
-        {
-            List<CAvion> aviones = new List<CAvion>();
-            try
-            {
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                String query = "SELECT * FROM Avion";
-                SqlCommand cmd = new SqlCommand(query, conexion);
-                SqlDataReader lector = cmd.ExecuteReader();
-                while (lector.Read())
-                {
-                    CAvion avion = new CAvion(Int32.Parse(lector["avi_id"].ToString()), lector["avi_matricula"].ToString(),
-                    lector["avi_modelo"].ToString(), Int32.Parse(lector["avi_pasajeros_turista"].ToString()), 
-                    Int32.Parse(lector["avi_pasajeros_ejecutiva"].ToString()), Int32.Parse(lector["avi_pasajeros_vip"].ToString()), 
-                    float.Parse(lector["avi_cap_equipaje"].ToString()), float.Parse(lector["avi_max_dist"].ToString()), 
-                    float.Parse(lector["avi_max_vel"].ToString()), float.Parse(lector["avi_max_comb"].ToString()),
-                    Int32.Parse(lector["avi_disponibilidad"].ToString()));
-                    aviones.Add(avion);
-                }
-                //cierro el lector
-                lector.Close();
-                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
-                conexion.Close();
-                return aviones;
-
-            }
-            catch ( SqlException e)
-            {
-                throw e;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
-
-        //Procedimiento del Modulo 2 para retornar un objeto del tipo CAvion buscado por su respectiva id
-        public CAvion consultarAvion(int id)
-        {
-            CAvion avionRetorno = new CAvion();
-            try
-            {
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                String query = "SELECT * FROM Avion where avi_id = "+id;
-                SqlCommand cmd = new SqlCommand(query, conexion);
-                SqlDataReader lector = cmd.ExecuteReader();
-                while (lector.Read())
-                {
-                    
-                    CAvion avion = new CAvion(Int32.Parse(lector["avi_id"].ToString()), lector["avi_matricula"].ToString(),
-                    lector["avi_modelo"].ToString(), Int32.Parse(lector["avi_pasajeros_turista"].ToString()),
-                    Int32.Parse(lector["avi_pasajeros_ejecutiva"].ToString()), Int32.Parse(lector["avi_pasajeros_vip"].ToString()),
-                    float.Parse(lector["avi_cap_equipaje"].ToString()), float.Parse(lector["avi_max_dist"].ToString()),
-                    float.Parse(lector["avi_max_vel"].ToString()), float.Parse(lector["avi_max_comb"].ToString()),
-                    Int32.Parse(lector["avi_disponibilidad"].ToString()));
-                    avionRetorno = avion;
-                }
-                //cierro el lector
-                lector.Close();
-                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
-                conexion.Close();
-                return avionRetorno;
-
-            }
-            catch (SqlException e)
-            {
-                throw e;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
-
-
-        //Procedimiento del Modulo 2 para modificar un avion
-        public Boolean modificarAvion(CModificarAvion model)
-        {
-            try
-            {
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                String query = "UPDATE Avion SET avi_modelo='"+model._modeloAvion+"', avi_pasajeros_turista="+model._capacidadPasajerosTurista+", avi_pasajeros_ejecutiva="+model._capacidadPasajerosEjecutiva+", avi_pasajeros_vip='"+model._capacidadPasajerosVIP+"', avi_cap_equipaje="+model._capacidadEquipaje+", avi_max_dist="+model._distanciaMaximaVuelo+", avi_max_vel="+model._velocidadMaximaDeVuelo+", avi_max_comb="+model._capacidadMaximaCombustible+" WHERE (avi_matricula='"+model._matriculaAvion+"')";
-                SqlCommand cmd = new SqlCommand(query, conexion);
-                SqlDataReader lector = cmd.ExecuteReader();
-                conexion.Close();
-                return true;
-
-            }
-            catch (SqlException e)
-            {
-                throw e;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
-
-        //Procedimiento del Modulo 2 para deshabilitar un avion
-        public Boolean deshabilitarAvion(int id)
-        {
-            try
-            {
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                String query = "UPDATE Avion SET avi_disponibilidad=0 where avi_id="+id;
-                SqlCommand cmd = new SqlCommand(query, conexion);
-                SqlDataReader lector = cmd.ExecuteReader();
-                conexion.Close();
-                return true;
-
-            }
-            catch (SqlException e)
-            {
-                throw e;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
-
-        //Procedimiento del Modulo 2 para habilitar un avion
-        public Boolean habilitarAvion(int id)
-        {
-            try
-            {
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                String query = "UPDATE Avion SET avi_disponibilidad=1 where avi_id=" + id;
-                SqlCommand cmd = new SqlCommand(query, conexion);
-                SqlDataReader lector = cmd.ExecuteReader();
-                conexion.Close();
-                return true;
-
-            }
-            catch (SqlException e)
-            {
-                throw e;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
 
 
         //Procedimiento del Modulo 9 para agregar hoteles a la base de datos.
