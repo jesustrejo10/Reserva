@@ -11,5 +11,6 @@ namespace FOReserva.Models.ReservaHabitacion
         public DateTime FechaLlegada { get; set; }
         public int CantidadDias { get; set; }
         public List<CCiudad> Ciudades { get; set; }
+        public List<CCiudad> Hoteles { get; set; }
     }
 }

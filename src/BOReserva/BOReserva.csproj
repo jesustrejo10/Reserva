@@ -524,7 +524,7 @@
     <Content Include="Views\gestion_roles\M13_Roles.html" />
     <Content Include="Views\gestion_roles\placeholder.html" />
     <Content Include="Views\gestion_ruta_comercial\placeholder.html" />
-    <Content Include="Content\dist\js\Logout.js" />
+    <Content Include="Scripts\Scripts_Ingreso_Seguridad\Logout.js" />
     <Content Include="Views\gestion_usuarios\placeholder.html" />
     <Content Include="Views\gestion_boletos\placeholder.html" />
     <Content Include="Views\gestion_vuelo\placeholder.html" />

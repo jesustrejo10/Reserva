@@ -1,12 +1,14 @@
 ﻿using FOReserva.Models.Diarios;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Text;
 
 namespace FOReserva.Servicio
 {
     /*Clase para manejo de Diarios de Viaje en BD*/
     public class ManejadorSQLDiarios : manejadorSQL
     {
+        StringBuilder sb;
         /*Constructor de manejadorSQL*/
         public ManejadorSQLDiarios() : base() { }
     
@@ -41,6 +43,42 @@ namespace FOReserva.Servicio
             }
             CloseConnection();
             return listaDV;
+    }
+
+    /*Buscar Diarios de Viaje dado un modelo*/
+    public List<CDiarioModel> buscarDiarios(CDiarioModel diar)
+    {
+        string fecha_i = diar.Fecha_ini.ToString("yyyy-MM-dd");
+        string fecha_f = diar.Fecha_fin.ToString("yyyy-MM-dd");
+        sb = new StringBuilder();
+        sb.Append("SELECT ");
+        sb.Append(" id_diar, nombre_diario, CASE ");
+        sb.Append("  WHEN len(d.descripcion_diar)>100 ");
+        sb.Append("  THEN LEFT(d.descripcion_diar, 97) + '...' ");
+        sb.Append("  ELSE d.descripcion_diar END descr ");
+        sb.Append("FROM Diario_Viaje d, Lugar l ");
+        sb.Append("WHERE d.fecha_carga_diar BETWEEN '" + fecha_i + "' AND '" + fecha_f + "' ");
+        sb.Append(" AND l.lug_id = " + diar.Destino);
+        sb.Append(" AND d.fk_destino = l.lug_id;");
+        string query = sb.ToString();
+        SqlDataReader read = Executer(query);
+        List<CDiarioModel> listaDV = new List<CDiarioModel>();
+        if (read.HasRows)
+        {
+            while (read.Read())
+            {
+                int id = read.GetInt32(0);
+                string nombre = read.GetString(1);
+                string desc = read.GetString(2);
+                CDiarioModel diario = new CDiarioModel();
+                diario.Id = id;
+                diario.Nombre = nombre;
+                diario.Descripcion = desc;
+                listaDV.Add(diario);
+            }
+        }
+        CloseConnection();
+        return listaDV;
     }  
 
     /*Buscar TODOS los Lugares para dropdown*/

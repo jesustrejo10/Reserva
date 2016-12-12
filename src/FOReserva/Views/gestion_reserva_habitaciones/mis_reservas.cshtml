@@ -21,7 +21,7 @@
                 <th>Estado</th>
                 <th>Fecha de Reservacion</th>
                 <th>Cantidad de dias</th>
-                <th>Fecha de Deshalojo</th>
+                <th>Fecha de Desalojo</th>
                 <th></th>
             </tr>
         </thead>
@@ -47,25 +47,19 @@
             }
         </tbody>
     </table>
-            
-    <!-- JS DATATABLES -->
-    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/jquery.dataTables.min.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/dataTables.tableTools.min.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/dataTables.colReorder.min.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/dataTables.scroller.min.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/dataTables.bootstrap.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/select2/js/select2.full.min.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/js/scripts.js")"></script>
     <script type="text/javascript">
         function initTable1() {
             var table = jQuery('#sample_1');
 
-            /* Table tools samples: https://www.datatables.net/release-datatables/extras/TableTools/ */
+			/* Table tools samples: https://www.datatables.net/release-datatables/extras/TableTools/ */
 
-            /* Set tabletools buttons and button container */
+			/* Set tabletools buttons and button container */
 
-            $.extend(true, $.fn.DataTable.TableTools.classes, {
-                "container": "btn-group",
-                "buttons": {
+			$.extend(true, $.fn.DataTable.TableTools.classes, {
+				"container": "btn-group",
+				"buttons": {
                     "normal": "btn btn-sm btn-default",
                     "disabled": "btn btn-sm btn-default disabled"
                 },
@@ -75,6 +69,14 @@
             });
 
             var oTable = table.dataTable({
+                "language": {
+                    "lengthMenu": "_MENU_",
+                    "zeroRecords": "No se encontraron Reservas.",
+                    "info": "(_PAGE_ / _PAGES_)",
+                    "infoEmpty": "No hay registros disponibles.",
+                    "infoFiltered": "",
+                    "search": ""
+                },
                 "order": [
                     [0, 'asc']
                 ],
