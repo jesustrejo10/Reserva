@@ -993,6 +993,113 @@ namespace BOReserva.Servicio
         }
 
 
+        public string MBuscarid_IdRol(string rolBuscar) {
+
+            string rolIdDevolver = "" ;
+            conexion = new SqlConnection(stringDeConexion);
+            //INTENTO abrir la conexion
+            conexion.Open();
+            String query = "SELECT rol_id  FROM Rol WHERE rol_nombre = '"+rolBuscar+"'" ;
+            SqlCommand cmd = new SqlCommand(query, conexion);
+            SqlDataReader lector = cmd.ExecuteReader();
+            while (lector.Read())
+            {
+                rolIdDevolver = lector["rol_id"].ToString();
+                
+            }
+            //cierro el lector
+            lector.Close();
+            //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+            conexion.Close();
+            return rolIdDevolver;
+        }
+
+
+        public string MBuscarid_Permiso(string permisoBucar)
+        {
+
+            string PermisoIdDevolver = "";
+            conexion = new SqlConnection(stringDeConexion);
+            //INTENTO abrir la conexion
+            conexion.Open();
+            String query = "SELECT mod_det_id  FROM modulo_detallado WHERE mod_det_nombre ='" + permisoBucar + "'";
+            SqlCommand cmd = new SqlCommand(query, conexion);
+            SqlDataReader lector = cmd.ExecuteReader();
+            while (lector.Read())
+            {
+                PermisoIdDevolver = lector["mod_det_id"].ToString();
+
+            }
+            //cierro el lector
+            lector.Close();
+            //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+            conexion.Close();
+            return PermisoIdDevolver;
+        }
+
+
+        //Metodo para insertar permisos de un rol 
+        public Boolean insertarPermisosRol(string rol , string permiso)
+        {
+             List<CAvion> aviones = new List<CAvion>();
+            try
+            {
+                System.Diagnostics.Debug.WriteLine("Entro en roles");
+                string idRol = "";
+                string idPermiso = "";
+
+                //Metodo para que busque el id del rol
+                System.Diagnostics.Debug.WriteLine("--------- " + idRol);
+
+                idRol       = MBuscarid_IdRol(rol);
+                System.Diagnostics.Debug.WriteLine("id rol " + idRol);
+
+                //Metodo para que busque el id del permisos
+                System.Diagnostics.Debug.WriteLine("--------- " + idRol);
+                idPermiso   = MBuscarid_Permiso(permiso);
+                System.Diagnostics.Debug.WriteLine("id permiso " + idPermiso);
+
+
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+
+                conexion.Open();
+                //uso el SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                String queryString;
+                SqlCommand cmd;
+                SqlDataReader lector;
+
+                query.CommandText = "INSERT INTO Rol_Modulo_Detallado VALUES ('" + idRol + "','" + idPermiso + "')";
+                lector = query.ExecuteReader();
+                lector.Close();
+                conexion.Close();
+
+
+                return true;
+
+            }
+            catch ( SqlException e)
+            
+            {
+                Debug.WriteLine("Exception sql");
+                return false;
+
+                throw e;
+
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Exception e");
+
+                return false;
+
+                throw e;
+
+            }
+        }
+
+
         public Boolean insertarPermisosRol(CRoles rol , CListaGenerica<CModulo_detallado> listaPermisos)
         {
              List<CAvion> aviones = new List<CAvion>();
@@ -1128,6 +1235,7 @@ namespace BOReserva.Servicio
                     
                     Debug.WriteLine("este es el valor de i " + i);
                     Debug.WriteLine("+++++1+++++");
+
                     query.CommandText = "INSERT INTO Rol_Modulo_Detallado VALUES ('" + rol + "','" + listaString[i] + "')";
                     Debug.WriteLine("+++++2+++++");
 
