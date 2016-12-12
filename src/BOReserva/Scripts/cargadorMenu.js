@@ -251,9 +251,9 @@
                 }
             });
     });
-    $("#modificarhotel").click(function (e) {
+    $("#consultarhotel").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_hoteles/M09_GestionHoteles_ModificarHotel';
+        var url = '/gestion_hoteles/M09_GestionHoteles_Visualizar';
         var method = 'GET';
         var data = '';
 
@@ -263,6 +263,7 @@
                 type: method,
                 data: data,
                 success: function (data, textStatus, jqXHR) {
+
                     $("#contenido").empty();
                     $("#contenido").append(data);
                 },
@@ -270,6 +271,7 @@
                     alert(errorThrown);
                 }
             });
+
     });
 
     $("#consultarhotel").click(function (e) {
