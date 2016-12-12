@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Net;
 using BOReserva.Models.gestion_vuelo;
 using BOReserva.Servicio.Servicio_Vuelos;
+using BOReserva.Models.gestion_automoviles;
 
 namespace BOReserva.Controllers
 {
@@ -17,7 +18,9 @@ namespace BOReserva.Controllers
 
         public ActionResult M04_GestionVuelo_Visualizar()
         {
-            return PartialView();
+            manejadorSQL_Vuelos buscarvuelos = new manejadorSQL_Vuelos();
+            List<CVuelo> listavuelos = buscarvuelos.MListarvuelosBD(); //AQUI SE BUSCA TODO LOS VUELOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
+            return PartialView(listavuelos);
         }
 
 
@@ -241,5 +244,38 @@ namespace BOReserva.Controllers
         {
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
+
+
+        public ActionResult M04_GestionVuelo_Mostrar(String codigovuelo)
+        {
+            manejadorSQL_Vuelos buscarvuelo = new manejadorSQL_Vuelos();
+            CVuelo vuelo = buscarvuelo.MMostrarvueloBD(codigovuelo); //BUSCA EL VUELO A MOSTRAR
+                                                                                //EN TODOS ESTOS METODOS HAY QUE USAR TRY CATCH
+            //CVuelo vuelo = new CVuelo();
+            //vuelo._codigoVuelo = vuelo._codigoVuelo;
+            //vuelo._ciudadOrigen = vuelo._ciudadOrigen;
+            //vuelo._ciudadDestino = vuelo._ciudadDestino;
+            //vuelo._fechaDespegue = vuelo._fechaDespegue;
+            //vuelo._fechaAterrizaje = vuelo._fechaAterrizaje;
+            //vuelo._statusVuelo = vuelo._statusVuelo;
+            //vuelo._matriculaAvion = vuelo._matriculaAvion;
+            return PartialView(vuelo);
+        }
+
+
+        
+    public ActionResult M04_GestionVuelo_Desactivar(String codigovuelo)
+    {
+        manejadorSQL_Vuelos desactivarvuelo = new manejadorSQL_Vuelos();
+        Boolean vuelo = desactivarvuelo.MDesactivarVuelo(codigovuelo); //DESATIVANDO  EL VUELO 
+                                                                       //manejadorSQL_Vuelos buscarvuelos = new manejadorSQL_Vuelos();
+                                                                       //List<CVuelo> listavuelos = buscarvuelos.MListarvuelosBD(); //AQUI SE BUSCA TODO LOS VUELOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
+                                                                       //return PartialView(listavuelos);
+            return null;
+        
     }
+
+}
+
+
 }

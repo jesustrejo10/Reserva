@@ -251,6 +251,7 @@
     <Compile Include="Models\gestion_usuarios\ResultadoBD.cs" />
     <Compile Include="Models\gestion_restaurantes\CRestauranteModeloVista.cs" />
     <Compile Include="Models\gestion_restaurantes\CRestauranteModelo.cs" />
+    <Compile Include="Models\gestion_vuelo\CVuelo.cs" />
     <Compile Include="Models\gestion_vuelo\CCrear_Vuelo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicio\manejadorSQL.cs" />
@@ -1415,6 +1416,7 @@
     <Content Include="Views\gestion_usuarios\_Layout.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Crear.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Visualizar.cshtml" />
+    <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Mostrar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
