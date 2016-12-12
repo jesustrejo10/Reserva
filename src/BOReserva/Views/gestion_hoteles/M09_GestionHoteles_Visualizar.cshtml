@@ -41,9 +41,15 @@
                                     <td>@item._email</td>
                                     <td>@disponibilidad</td>
                                     <td>
-                                        <a href="#"> <i class="fa fa-eye clasedeprueba"></i></a>
-                                        <a href="#"><i class="fa fa-pencil modificar"></i></a>
-                                        <a href="#"><i class="fa fa-times"></i></a> 
+                                        <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>
+                                        @if (item._disponibilidad == 1)
+                                        {
+                                            <a href="#" title="Deshabilitar"><i class="fa fa-times deshabilitar"></i></a>
+                                        }
+                                        else
+                                        {
+                                            <a href="#" title="Habilitar"><i class="fa fa-check habilitar"></i></a>
+                                        }
                                     </td>
                                 </tr>
                             }
@@ -63,104 +69,85 @@
 </div>
 <!-- /.row -->
 
-<script src="../../Content/plugins/jQuery/jquery-2.2.3.min.js"></script>
-<!-- Bootstrap 3.3.6 -->
-<script src="../../Content/bootstrap/js/bootstrap.min.js"></script>
-<!-- DataTables -->
-<script src="../../Content/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="../../Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
-<!-- SlimScroll -->
-<script src="../../Content/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-<!-- FastClick -->
-<script src="../../Content/plugins/fastclick/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="../../Content/dist/js/app.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
-<!-- page script -->
-@*
-    <script language="javascript" type="text/javascript">
+<script language="javascript" type="text/javascript">
 
 
-        $(".modificar").click(function () {
-            console.log("hola");
-            var identificador = $(this).parent().parent().parent().attr("id");
-            jQuery.ajax({
-                type: "GET",
-                url: "/gestion_aviones/M02_ConsultarAvion",
-                data: { id: identificador }
-            }).done(function (data) {
-                $("#contenido").empty();
-                $("#contenido").append(data);
-            }).fail(function () {
-
-            });
-
-
+    $(".modificar").click(function () {
+        console.log("hola");
+        var identificador = $(this).parent().parent().parent().attr("id");
+        jQuery.ajax({
+            type: "GET",
+            url: "/gestion_hoteles/ConsultarHotel",
+            data: { id: identificador }
+        }).done(function (data) {
+            $("#contenido").empty();
+            $("#contenido").append(data);
+        }).fail(function () {
         });
+    });
 
 
-        $(".deshabilitar").click(function () {
-            console.log("hola");
-            var identificador = $(this).parent().parent().parent().attr("id");
-            jQuery.ajax({
-                type: "POST",
-                url: "/gestion_aviones/deshabilitarAvion",
-                data: { id: identificador }
-            }).done(function (data) {
-                var url = '/gestion_aviones/M02_VisualizarAviones';
-                var method = 'GET';
-                var data = '';
-                $.ajax(
-                    {
-                        url: url,
-                        type: method,
-                        data: data,
-                        success: function (data, textStatus, jqXHR) {
+    $(".deshabilitar").click(function () {
+        console.log("hola");
+        var identificador = $(this).parent().parent().parent().attr("id");
+        jQuery.ajax({
+            type: "POST",
+            url: "/gestion_hoteles/deshabilitarHotel",
+            data: { id: identificador }
+        }).done(function (data) {
+            var url = '/gestion_hoteles/M09_GestionHoteles_Visualizar';
+            var method = 'GET';
+            var data = '';
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
 
-                            $("#contenido").empty();
-                            $("#contenido").append(data);
-                        },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            alert(errorThrown);
-                        }
-                    });
-            }).fail(function () {
-                alert("Error en la base de datos");
-            });
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+        }).fail(function () {
+            alert("Error en la base de datos");
         });
+    });
 
-        $(".habilitar").click(function () {
-            console.log("hola");
-            var identificador = $(this).parent().parent().parent().attr("id");
-            jQuery.ajax({
-                type: "POST",
-                url: "/gestion_aviones/habilitarAvion",
-                data: { id: identificador }
-            }).done(function (data) {
-                var url = '/gestion_aviones/M02_VisualizarAviones';
-                var method = 'GET';
-                var data = '';
-                $.ajax(
-                    {
-                        url: url,
-                        type: method,
-                        data: data,
-                        success: function (data, textStatus, jqXHR) {
+    $(".habilitar").click(function () {
+        console.log("hola");
+        var identificador = $(this).parent().parent().parent().attr("id");
+        jQuery.ajax({
+            type: "POST",
+            url: "/gestion_hoteles/habilitarHotel",
+            data: { id: identificador }
+        }).done(function (data) {
+            var url = '/gestion_hoteles/M09_GestionHoteles_Visualizar';
+            var method = 'GET';
+            var data = '';
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
 
-                            $("#contenido").empty();
-                            $("#contenido").append(data);
-                        },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            alert(errorThrown);
-                        }
-                    });
-            }).fail(function () {
-                alert("Error en la base de datos");
-            });
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+        }).fail(function () {
+            alert("Error en la base de datos");
         });
+    });
 
 
-    </script>*@
+</script>
 
 

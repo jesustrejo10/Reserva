@@ -21,9 +21,41 @@ namespace BOReserva.Servicio.Servicio_Hoteles
         private string stringDeConexion = null;
 
 
+        public int LeerPkHotel()
+        {
+            Debug.WriteLine("PK");
+            int pk = 0;
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "select max(hot_id) from Hotel";
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                int i = 0;
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        pk = reader.GetInt32(0);
+                        Debug.WriteLine(reader[0].ToString());
+                        i++;
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return pk;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return 0;
+            }
+        }
+
         //Procedimiento del Modulo 9 para agregar hoteles a la base de datos.
         public Boolean insertarHotel(CHotel model)
         {
+            int pk = LeerPkHotel() + 1;
             try
             {
                 //Inicializo la conexion con el string de conexion
@@ -33,14 +65,15 @@ namespace BOReserva.Servicio.Servicio_Hoteles
                 //uso el SqlCommand para realizar los querys
                 SqlCommand query = conexion.CreateCommand();
                 //ingreso la orden del query
+
                 query.CommandText = "INSERT INTO Hotel " +
-                                     "(hot_nombre, hot_url_pagina, hot_email, hot_cantidad_habitaciones , hot_direccion, hot_estrellas, hot_puntuacion, hot_disponibilidad) " +
-                                     "VALUES ('" + model._nombre + "','" + model._paginaweb + "','" + model._email + "'," + 
+                                     "(hot_id, hot_nombre, hot_url_pagina, hot_email, hot_cantidad_habitaciones , hot_direccion, hot_estrellas, hot_puntuacion, hot_disponibilidad) " +
+                                     "VALUES (" + pk.ToString() + ",'" + model._nombre + "','" + model._paginaweb + "','" + model._email + "'," +
                                                    model._canthabitaciones.ToString() + ",'" + model._direccion + "'," + model._estrellas.ToString() + ",0,1);";
-                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior              
                 SqlDataReader lector = query.ExecuteReader();
 
-                Debug.WriteLine("DEGUG SQL"+lector.ToString());
+                Debug.WriteLine("DEGUG SQL" + lector.ToString());
                 //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
                 /*while(lector.Read())
                 {
@@ -204,9 +237,16 @@ namespace BOReserva.Servicio.Servicio_Hoteles
                         //SE AGREGA CREA UN OBJETO hotel SE PASAN LOS ATRIBUTOS ASI reader["<etiqueta de la columna en la tabla Hotel>"]
                         //Y  SE AGREGA a listavehiculos
 
-                        CHotel hotel = new CHotel(Int32.Parse(reader["hot_id"].ToString()), reader["hot_nombre"].ToString(), reader["hot_url_pagina"].ToString(), reader["hot_email"].ToString(),
-                            Int32.Parse(reader["hot_cantidad_habitaciones"].ToString()), reader["hot_direccion"].ToString(), MBuscarnombreciudad(Int32.Parse(reader["hot_fk_ciudad"].ToString())), 
-                            MBuscarnombrePais(Int32.Parse(reader["hot_fk_ciudad"].ToString())), Int32.Parse(reader["hot_estrellas"].ToString()),float.Parse(reader["hot_puntuacion"].ToString()),
+                        CHotel hotel = new CHotel(Int32.Parse(reader["hot_id"].ToString()),
+                            reader["hot_nombre"].ToString(), 
+                            reader["hot_url_pagina"].ToString(), 
+                            reader["hot_email"].ToString(),
+                            Int32.Parse(reader["hot_cantidad_habitaciones"].ToString()), 
+                            reader["hot_direccion"].ToString(), 
+                            MBuscarnombreciudad(Int32.Parse(reader["hot_fk_ciudad"].ToString())), 
+                            MBuscarnombrePais(Int32.Parse(reader["hot_fk_ciudad"].ToString())), 
+                            Int32.Parse(reader["hot_estrellas"].ToString()),
+                            float.Parse(reader["hot_puntuacion"].ToString()),
                             Int32.Parse(reader["hot_disponibilidad"].ToString()));
                         listahoteles.Add(hotel);
                     }
@@ -222,5 +262,114 @@ namespace BOReserva.Servicio.Servicio_Hoteles
             }
         }
 
+        /// <summary>
+        /// Procedimiento del Modulo 2 para retornar un objeto del tipo CHotel buscado por su respectiva id
+        /// </summary>
+        /// <param name="id"> int </param>
+        /// <returns> CHotel el hotel buscado</returns>
+        public CHotel consultarHotel(int id)
+        {
+            Debug.WriteLine("CONSULTAR HOTEL BD");
+
+            CHotel hotelRetorno = null;
+
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "SELECT * FROM Hotel";
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                                CHotel hotel = new CHotel(Int32.Parse(reader["hot_id"].ToString()),
+                                reader["hot_nombre"].ToString(),
+                                reader["hot_url_pagina"].ToString(),
+                                reader["hot_email"].ToString(),
+                                Int32.Parse(reader["hot_cantidad_habitaciones"].ToString()),
+                                reader["hot_direccion"].ToString(),
+                                MBuscarnombreciudad(Int32.Parse(reader["hot_fk_ciudad"].ToString())),
+                                MBuscarnombrePais(Int32.Parse(reader["hot_fk_ciudad"].ToString())),
+                                Int32.Parse(reader["hot_estrellas"].ToString()),
+                                float.Parse(reader["hot_puntuacion"].ToString()),
+                                Int32.Parse(reader["hot_disponibilidad"].ToString()));
+                        hotelRetorno = hotel;
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                Debug.WriteLine("HOTEL BUENO");
+                return hotelRetorno;
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine("NULL HOTEL");
+                conexion.Close();
+                return null;
+            }
+        }
+
+        public bool deshabilitarHotelBD(int pk_hotel)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+
+                //ingreso la orden del query                
+                String query = "update Hotel set hot_disponibilidad = 0 where hot_id = " + pk_hotel;
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                SqlDataReader lector = cmd.ExecuteReader();
+                Debug.WriteLine("DEGUG SQL" + lector.ToString());
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        public bool activarHotelBD(int pk_hotel)
+        {
+          
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+
+                //ingreso la orden del query                
+                String query = "update Hotel set hot_disponibilidad = 1 where hot_id = " + pk_hotel;
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                SqlDataReader lector = cmd.ExecuteReader();
+                Debug.WriteLine("DEGUG SQL" + lector.ToString());
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+        }
     }
 }
