@@ -1,1 +1,31 @@
-﻿model.FOReserva.Models.Revision.Cvista_revision
+﻿
+
+<<table class="table table-bordered table-hover" id="tablas-revision">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Mensaje</th>
+            <th>Tipo</th>
+            <th>Puntuacion</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Fecha</td>
+                <td>@item.Mensaje</td>
+                <td>@item.Tipo</td>
+                <td>@item.Puntuacion</td>
+                
+                <td style="text-align: center;">
+                    
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
