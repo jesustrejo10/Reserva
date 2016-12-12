@@ -49,8 +49,8 @@ namespace UnitTestProject1
         {
             
             auto = new Automovil(placa1,"3","Mazda",1936,"Sedan",5,5,1,1,1,DateTime.Now,"Azul",1,"Automatica","Venezuela","Caracas");
-            int prueba1 = daoAutomovil.MAgregarVehiculoBD(auto, 12);
-            Assert.AreEqual(1, prueba1);
+            String prueba1 = daoAutomovil.MAgregarVehiculoBD(auto, 12);
+            Assert.AreEqual("1", prueba1);
         }
          
 
@@ -153,8 +153,8 @@ namespace UnitTestProject1
         [TestMethod]
         public void MDisponibilidadVehiculoBD()
         {
-            int prueba3 = daoAutomovil.MDisponibilidadVehiculoBD(placa1, 0);
-            Assert.AreEqual(1, prueba3);
+            String prueba3 = daoAutomovil.MDisponibilidadVehiculoBD(placa1, 0);
+            Assert.AreEqual("1", prueba3);
 
         }
         /// <summary>
@@ -180,13 +180,12 @@ namespace UnitTestProject1
         { 
             String placa = placa1;
             auto = new Automovil(placa,"3","Mazda",1936,"Sedan",5,5,1,1,1,DateTime.Now,"Azul",1,"Automatica","Venezuela","Caracas");
-            int agregar = daoAutomovil.MAgregarVehiculoBD(auto, 12);
-            int prueba = daoAutomovil.MModificarVehiculoBD(auto, 13);
-            Assert.AreEqual(1, prueba);
+            String agregar = daoAutomovil.MAgregarVehiculoBD(auto, 12);
+            String prueba = daoAutomovil.MModificarVehiculoBD(auto, 13);
+            Assert.AreEqual("1", prueba);
             auto = new Automovil(placa, "", "", 1936, "", 5, 5, 1, 1, 1, DateTime.Now, "", 1, "", "", "");
-            int prueba2 = daoAutomovil.MModificarVehiculoBD(auto, 1000);
-
-            Assert.AreEqual(0, prueba2);
+            String prueba2 = daoAutomovil.MModificarVehiculoBD(auto, 1000);
+            Assert.AreNotEqual(0, prueba2);
         }
         /// <summary>
         /// Método que lista todos los vehículos existentes
@@ -214,8 +213,8 @@ namespace UnitTestProject1
         [TestMethod]
         public void MBorrarvehiculoBD()
         {
-            int prueba2 = daoAutomovil.MBorrarvehiculoBD(placa1);
-            Assert.AreEqual(1, prueba2);
+            String prueba2 = daoAutomovil.MBorrarvehiculoBD(placa1);
+            Assert.AreEqual("1", prueba2);
         }
         /// <summary>
         /// Método que verifica si se retorna la cantidad de ciudades 

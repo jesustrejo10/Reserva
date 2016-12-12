@@ -228,9 +228,9 @@ namespace BOReserva.Controllers
                                              color, 1, transmision, pais, _ciudad);  //SE CREA EL VEHICULO
             manejadorSQL buscarid = new manejadorSQL();
             int id_ciudad = buscarid.MBuscaridciudadBD(_ciudad, pais);
-            int agrego_si_no = carronuevo.MAgregaraBD(carronuevo, id_ciudad); //SE AGREGA A LA BD RETORNA 1 SI SE AGREGA Y 0 SINO LO LOGRA
+            String agrego_si_no = carronuevo.MAgregaraBD(carronuevo, id_ciudad); //SE AGREGA A LA BD RETORNA 1 SI SE AGREGA Y 0 SINO LO LOGRA
             
-            return (Json(true, JsonRequestBehavior.AllowGet));
+            return (Json(agrego_si_no));
         }
 
 
@@ -263,9 +263,9 @@ namespace BOReserva.Controllers
                                              color, 1, transmision, pais, _ciudad);  //SE CREA EL VEHICULO
             manejadorSQL buscarid = new manejadorSQL();
             int id_ciudad = buscarid.MBuscaridciudadBD(_ciudad, pais);
-            int modifico_si_no = carro.MModificarvehiculoBD(carro, id_ciudad); //SE MODIFICA A LA BD RETORNA 1 SI SE  MODIFICO Y 0 SI NO LO LOGRA
+            String modifico_si_no = carro.MModificarvehiculoBD(carro, id_ciudad); //SE MODIFICA A LA BD RETORNA 1 SI SE  MODIFICO Y 0 SI NO LO LOGRA
             
-            return (Json(true, JsonRequestBehavior.AllowGet));
+            return (Json(modifico_si_no));
         }
 
         /// <summary>
@@ -324,8 +324,8 @@ namespace BOReserva.Controllers
             Automovil carro = new Automovil(matricula, modelo, fabricante, anio, tipovehiculo, kilometraje,
                                              cantpasajeros, preciocompra, precioalquiler, penalidaddiaria, fecharegistro,
                                              color, 1, transmision, pais, ciudad);  //SE CREA EL VEHICULO
-            int modifico_si_no = carro.MBorrarvehiculoBD(_matricula); //SE BORRA LA BD RETORNA 1 SI SE  BORRA Y 0 SI NO LO LOGRA
-            return (Json(true, JsonRequestBehavior.AllowGet));
+            String borro_si_no = carro.MBorrarvehiculoBD(_matricula); //SE BORRA LA BD RETORNA 1 SI SE  BORRA Y 0 SI NO LO LOGRA
+            return (Json(borro_si_no));
         }
 
 
@@ -336,15 +336,16 @@ namespace BOReserva.Controllers
         public static List<SelectListItem> pais()
         {
             manejadorSQL pais = new manejadorSQL();
-            List<SelectListItem> _pais = new List<SelectListItem>();
+            List<SelectListItem> __pais = new List<SelectListItem>();
             String[] paises = pais.MListarpaisesBD();
             int i = 0;
             bool verdad =true;
+            _pais = paises[0];
             while (verdad == true)
             {
                 try
                 {
-                    _pais.Add(new SelectListItem
+                    __pais.Add(new SelectListItem
                     {
                         Text = paises[i].ToString(),
                         Value = i.ToString()
@@ -355,7 +356,7 @@ namespace BOReserva.Controllers
                     verdad = false;
                 }
             }
-            return _pais;
+            return __pais;
         }
 
         /// <summary>
@@ -371,6 +372,7 @@ namespace BOReserva.Controllers
             manejadorSQL listaciudades = new manejadorSQL();
             int fk = listaciudades.MIdpaisesBD(pais);
             objcity = listaciudades.MListarciudadesBD(fk);
+            ciudad = objcity.First();
             return Json(objcity);
         }
 
@@ -379,6 +381,7 @@ namespace BOReserva.Controllers
         /// </summary>
         /// <param name="matricula">Matrícula del vehículo al que se le cambiará el estatus</param>
         /// <returns>Retorna un JsonResult</returns>
+        [HttpPost]
         public JsonResult activateVehicle(String matricula)
         {
             String _matricula = matricula;
@@ -400,8 +403,8 @@ namespace BOReserva.Controllers
             Automovil carro = new Automovil(matricula, modelo, fabricante, anio, tipovehiculo, kilometraje,
                                              cantpasajeros, preciocompra, precioalquiler, penalidaddiaria, fecharegistro,
                                              color, 1, transmision, pais, ciudad);  //SE CREA EL VEHICULO
-            int estatus_si_no = carro.MDisponibilidadVehiculoBD(_matricula, 1); //SE BORRA LA BD RETORNA 1 SI SE  BORRA Y 0 SI NO LO LOGRA
-            return (Json(true, JsonRequestBehavior.AllowGet));
+            String estatus_si_no = carro.MDisponibilidadVehiculoBD(_matricula, 1); //SE BORRA LA BD RETORNA 1 SI SE  BORRA Y 0 SI NO LO LOGRA
+            return (Json(estatus_si_no));
         }
 
         /// <summary>
@@ -409,6 +412,7 @@ namespace BOReserva.Controllers
         /// </summary>
         /// <param name="matricula">Matrícula del vehículo al que se le cambiará el estatus</param>
         /// <returns>Retorna un JsonResult</returns>
+        [HttpPost]
         public JsonResult deactivateVehicle(String matricula)
         {
             String _matricula = matricula;
@@ -430,8 +434,8 @@ namespace BOReserva.Controllers
             Automovil carro = new Automovil(matricula, modelo, fabricante, anio, tipovehiculo, kilometraje,
                                              cantpasajeros, preciocompra, precioalquiler, penalidaddiaria, fecharegistro,
                                              color, 1, transmision, pais, ciudad);  //SE CREA EL VEHICULO
-            int estatus_si_no = carro.MDisponibilidadVehiculoBD(_matricula, 0); //SE BORRA LA BD RETORNA 1 SI SE  BORRA Y 0 SI NO LO LOGRA
-            return (Json(true, JsonRequestBehavior.AllowGet));
+            String estatus_si_no = carro.MDisponibilidadVehiculoBD(_matricula, 0); //SE BORRA LA BD RETORNA 1 SI SE  BORRA Y 0 SI NO LO LOGRA
+            return (Json(estatus_si_no));
         }
 
         /// <summary>

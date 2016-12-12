@@ -61,8 +61,8 @@
                     alert("No puedes colocar números negativos o que sea igual a cero");
                     field.value = '';
                 }
-                if (field.value > $('#vehi_compra').val()) {
-                    alert("No puedes colocar un precio mayor al precio de compra");
+                if (field.value > 9999) {
+                    alert("No puedes colocar un precio mayor a 4 dígitos");
                     field.value = '';
                 }
             }

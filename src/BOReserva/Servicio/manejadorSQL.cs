@@ -926,14 +926,20 @@ namespace BOReserva.Servicio
         }
         /* FIN DE FUNCIONES COMUNES */
 
+
+
+
+
+
+
     /* MODULO 8 GESTION DE AUTOMOVILES*/
         /// <summary>
         /// Método que agrega un vehículo a la base de datos
         /// </summary>
         /// <param name="vehiculo">Vehículo a agregar a la base de datos</param>
         /// <param name="id">El id de la ciudad a donde será agregado</param>
-        /// <returns>Retorna 1 si se agregó exitosamente y retorna 0 si no lo pudo hacer</returns>
-        public int MAgregarVehiculoBD(Automovil vehiculo, int id)
+        /// <returns>Retorna 1 si se agregó exitosamente y retorna la excepcion si no lo pudo hacer</returns>
+        public String MAgregarVehiculoBD(Automovil vehiculo, int id)
         {
             try
             {
@@ -946,14 +952,12 @@ namespace BOReserva.Servicio
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
                 conexion.Close();
-                return 1;
+                return "1";
             }
             catch (SqlException ex)
             {
-                Debug.WriteLine("ENTRO EN EL CATCH");
-                Debug.WriteLine(ex.ToString());
                 conexion.Close();
-                return 0;
+                return ex.Message;
             }
         }
 
@@ -963,8 +967,8 @@ namespace BOReserva.Servicio
         /// </summary>
         /// <param name="vehiculo">Vehículo a modificar de la base de datos</param>
         /// <param name="id">El id de la ciudad a donde se ubica</param>
-        /// <returns>Retorna 1 si se modificó exitosamente y retorna 0 si no lo pudo hacer</returns>
-        public int MModificarVehiculoBD(Automovil vehiculo, int id)
+        /// <returns>Retorna 1 si se modificó exitosamente y retorna la excepcion si no lo pudo hacer</returns>
+        public String MModificarVehiculoBD(Automovil vehiculo, int id)
         {
             try
             {
@@ -977,12 +981,12 @@ namespace BOReserva.Servicio
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
                 conexion.Close();
-                return 1;
+                return "1";
             }
             catch (SqlException ex)
             {
                 conexion.Close();
-                return 0;
+                return ex.Message;
             }
         }
 
@@ -1131,7 +1135,7 @@ namespace BOReserva.Servicio
         /// </summary>
         /// <param name="matricula">Matrícula del vehículo a borrar</param>
         /// <returns>Retorna 1 si se eliminó exitosamente y retorna 0 si no lo pudo hacer</returns>
-        public int MBorrarvehiculoBD(String matricula)
+        public String MBorrarvehiculoBD(String matricula)
         {
             try
             {
@@ -1142,12 +1146,12 @@ namespace BOReserva.Servicio
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
                 conexion.Close();
-                return 1;
+                return "1";
             }
             catch (SqlException ex)
             {
                 conexion.Close();
-                return 0;
+                return ex.Message;
             }
         }
 
@@ -1190,7 +1194,7 @@ namespace BOReserva.Servicio
         /// Método para buscar el nombre de un país
         /// </summary>
         /// <param name="ciudad">Identificador de la ciudad que pertenece a dicho país</param>
-        /// <returns>Retorna el nombre de la ciudad</returns>
+        /// <returns>Retorna el nombre del pais</returns>
         public String MBuscarnombrePaisBD(int ciudad)
         {
             String _lugar = "Error al buscar";
@@ -1250,7 +1254,8 @@ namespace BOReserva.Servicio
             catch (SqlException ex)
             {
                 conexion.Close();
-                return null;
+                listapaises[0] = ex.Message;
+                return listapaises;
             }
             catch (InvalidOperationException ex)
             {
@@ -1297,8 +1302,8 @@ namespace BOReserva.Servicio
         /// </summary>
         /// <param name="matricula">Matrícula del vehículo cuya disponibilidad se desea cambiar</param>
         /// <param name="activardesactivar">Estatus por el cual se desea cambiar (1 para activar, 0 para desactivar)</param>
-        /// <returns>Retorna 1 si se cambio el estatus exitosamente y retorna 0 si no lo pudo hacer</returns>
-        public int MDisponibilidadVehiculoBD(string matricula, int activardesactivar)
+        /// <returns>Retorna 1 si se cambio el estatus exitosamente y retorna la excepcion si no lo pudo hacer</returns>
+        public String MDisponibilidadVehiculoBD(string matricula, int activardesactivar)
         {
             try
             {
@@ -1309,12 +1314,12 @@ namespace BOReserva.Servicio
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
                 conexion.Close();
-                return 1;
+                return "1";
             }
             catch (SqlException ex)
             {
                 conexion.Close();
-                return 0;
+                return ex.Message;
             }
         }
 
@@ -1323,7 +1328,7 @@ namespace BOReserva.Servicio
         /// Método para listar todas las ciudades de un país
         /// </summary>
         /// <param name="fk">Identificador de país del cual se desea conocer sus ciudades</param>
-        /// <returns>Retorna una lista de String que posee las ciudades</returns>
+        /// <returns>Retorna una lista de String que posee las ciudades o retorna la excepcion</returns>
         public List<string> MListarciudadesBD(int fk)
         {
             List<String> _ciudades = new List<string>();
@@ -1347,6 +1352,7 @@ namespace BOReserva.Servicio
             catch (SqlException ex)
             {
                 conexion.Close();
+                _ciudades.Add(ex.Message);
                 return _ciudades;
             }
         }

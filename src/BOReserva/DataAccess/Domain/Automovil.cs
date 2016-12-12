@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BOReserva.Servicio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -78,9 +79,9 @@ namespace BOReserva.Models.gestion_automoviles
         /// </summary>
         /// <param name="vehiculo">Vehículo a agregar</param>
         /// <param name="id">Identificador de la ciudad donde se ubica</param>
-        /// <returns>Retorna 1 o 0 si se agrega o no</returns>
-         public int MAgregaraBD (Automovil vehiculo, int id){ 
-             DAOAutomovil agregar = new DAOAutomovil();
+        /// <returns>Retorna si se agrega o no</returns>
+         public String /*int*/ MAgregaraBD (Automovil vehiculo, int id){ 
+             manejadorSQL agregar = new manejadorSQL();
              return agregar.MAgregarVehiculoBD(vehiculo, id);
          }
 
@@ -91,7 +92,7 @@ namespace BOReserva.Models.gestion_automoviles
         /// <returns>Retorna de una Lista de tipo Automovil</returns>
          public List<Automovil> MListarvehiculos() 
          {
-             DAOAutomovil listar = new DAOAutomovil();
+             manejadorSQL listar = new manejadorSQL();
              return listar.MListarvehiculosBD();
          }
 
@@ -103,7 +104,7 @@ namespace BOReserva.Models.gestion_automoviles
         /// <returns>Retorna el vehículo de que se consulto</returns>
          public Automovil MConsultarvehiculo(String matricula)
          {
-             DAOAutomovil consultar = new DAOAutomovil();
+             manejadorSQL consultar = new manejadorSQL();
              return consultar.MMostrarvehiculoBD(matricula);
          }
    
@@ -114,9 +115,9 @@ namespace BOReserva.Models.gestion_automoviles
         /// </summary>
         /// <param name="matricula">Matrícula del vehículo del cual se cambiará el estatus</param>
         /// <param name="activar_o_desactivar">Estatus a colocar en el vehículo</param>
-        /// <returns>Retorna un entero si se logra modificar o no</returns>
-         public int MDisponibilidadVehiculoBD (String matricula, int activar_o_desactivar){ 
-             DAOAutomovil consultar = new DAOAutomovil();
+        /// <returns>Retorna si se logra modificar o no</returns>
+         public String MDisponibilidadVehiculoBD (String matricula, int activar_o_desactivar){ 
+             manejadorSQL consultar = new manejadorSQL();
              return consultar.MDisponibilidadVehiculoBD(matricula,activar_o_desactivar);
          }
 
@@ -125,10 +126,10 @@ namespace BOReserva.Models.gestion_automoviles
          /// </summary>
          /// <param name="vehiculo">Matrícula del vehículo que se modificará</param>
          /// <param name="id">Identificador de la ciudad donde se ubica el vehículo</param>
-         /// <returns>Retorna un entero si se logra modificar o no</returns>
-         public int MModificarvehiculoBD(Automovil vehiculo, int id) 
+         /// <returns>Retorna si se logra modificar o no</returns>
+         public String MModificarvehiculoBD(Automovil vehiculo, int id) 
           {
-              DAOAutomovil modificar = new DAOAutomovil();
+              manejadorSQL modificar = new manejadorSQL();
               return modificar.MModificarVehiculoBD(vehiculo, id);
           }
 
@@ -138,10 +139,10 @@ namespace BOReserva.Models.gestion_automoviles
          /// Método para eliminar un vehículo
          /// </summary>
          /// <param name="vehiculo">Mátricula del vehículo a eliminar</param>
-         /// <returns>Retorna un entero si se logra modificar o no</returns>
-         public int MBorrarvehiculoBD(String vehiculo) //METODO PARA MODIFICAR UN VEHICULO
+         /// <returns>Retorna si se logra eliminar o no</returns>
+         public String MBorrarvehiculoBD(String vehiculo) //METODO PARA MODIFICAR UN VEHICULO
          {
-             DAOAutomovil modificar = new DAOAutomovil();
+             manejadorSQL modificar = new manejadorSQL();
              return modificar.MBorrarvehiculoBD(vehiculo);
          }
 

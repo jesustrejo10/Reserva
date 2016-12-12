@@ -52,6 +52,7 @@
                                 </tr>
                             }
                         }catch (Exception e){
+                            Response.Write("<script>window.open('Error','No se pudo cargar los vehículos o no hay vehículos registrados','width=800,height=500') </script>");
                         }
                         
                     <tfoot>
@@ -170,112 +171,195 @@
                 });
             });
         });
+        //$(document).ready(function () {
+        //    //e.preventDefault();
+        //    $(".eliminar").click(function () {
+        //        var identificador = $(this).parent().parent().parent().attr("id");
+        //        jQuery.ajax({
+        //            type: "GET",
+        //            url: "/gestion_automoviles/deleteVehicle",
+        //            data: { matricula: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+        //        }).done(function (data) {
+        //            //$("#sdssss").append(data);
+        //            alert("Se elimino exitosamente el vehiculo")
+        //            var url1 = '/gestion_automoviles/M08_VisualizarAutomoviles';
+        //            var method = 'GET';
+        //            var data1 = '';
+
+        //            $.ajax(
+        //                {
+        //                    url: url1,
+        //                    type: method,
+        //                    data: data,
+        //                    success: function (data, textStatus, jqXHR) {
+
+        //                        $("#contenido").empty();
+        //                        $("#contenido").append(data);
+        //                    },
+        //                    error: function (jqXHR, textStatus, errorThrown) {
+        //                        alert(errorThrown);
+        //                    }
+        //                });
+        //        }).fail(function () {
+        //            alert("esta vaina se jodio")
+        //        });
+        //    });
+        //});
+
         $(document).ready(function () {
             //e.preventDefault();
             $(".eliminar").click(function () {
                 var identificador = $(this).parent().parent().parent().attr("id");
                 jQuery.ajax({
-                    type: "GET",
+                    type: "POST",
                     url: "/gestion_automoviles/deleteVehicle",
                     data: { matricula: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
                 }).done(function (data) {
-                    //$("#sdssss").append(data);
-                    alert("Se elimino exitosamente el vehiculo")
-                    var url1 = '/gestion_automoviles/M08_VisualizarAutomoviles';
-                    var method = 'GET';
-                    var data1 = '';
+                    if (data === "1") {
 
-                    $.ajax(
-                        {
-                            url: url1,
-                            type: method,
-                            data: data,
-                            success: function (data, textStatus, jqXHR) {
+                        //$("#sdssss").append(data);
+                        alert("Se elimino exitosamente el vehículo")
+                        var url1 = '/gestion_automoviles/M08_VisualizarAutomoviles';
+                        var method = 'GET';
+                        var data1 = '';
 
-                                $("#contenido").empty();
-                                $("#contenido").append(data);
-                            },
-                            error: function (jqXHR, textStatus, errorThrown) {
-                                alert(errorThrown);
-                            }
-                        });
+                        $.ajax(
+                            {
+                                url: url1,
+                                type: method,
+                                data: data,
+                                success: function (data, textStatus, jqXHR) {
+
+                                    $("#contenido").empty();
+                                    $("#contenido").append(data);
+                                },
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    alert(errorThrown);
+                                }
+                            });
+                    } else {
+                        alert(data);
+                    }
                 }).fail(function () {
                     alert("esta vaina se jodio")
                 });
             });
         });
-
-
 
         $(document).ready(function () {
             //e.preventDefault();
             $(".activar").click(function () {
                 var identificador = $(this).parent().parent().parent().attr("id");
                 jQuery.ajax({
-                    type: "GET",
+                    type: "POST",
                     url: "/gestion_automoviles/activateVehicle",
                     data: { matricula: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
                 }).done(function (data) {
-                    //$("#sdssss").append(data);
-                    alert("Se cambió exitosamente el estatus del vehículo")
-                    var url1 = '/gestion_automoviles/M08_VisualizarAutomoviles';
-                    var method = 'GET';
-                    var data1 = '';
+                    if (data === "1") {
 
-                    $.ajax(
-                        {
-                            url: url1,
-                            type: method,
-                            data: data,
-                            success: function (data, textStatus, jqXHR) {
+                        //$("#sdssss").append(data);
+                        alert("Se cambió exitosamente el estatus del vehículo")
+                        var url1 = '/gestion_automoviles/M08_VisualizarAutomoviles';
+                        var method = 'GET';
+                        var data1 = '';
 
-                                $("#contenido").empty();
-                                $("#contenido").append(data);
-                            },
-                            error: function (jqXHR, textStatus, errorThrown) {
-                                alert(errorThrown);
-                            }
-                        });
+                        $.ajax(
+                            {
+                                url: url1,
+                                type: method,
+                                data: data,
+                                success: function (data, textStatus, jqXHR) {
+
+                                    $("#contenido").empty();
+                                    $("#contenido").append(data);
+                                },
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    alert(errorThrown);
+                                }
+                            });
+                    } else {
+                        alert(data);
+                    }
                 }).fail(function () {
                     alert("esta vaina se jodio")
                 });
             });
         });
+
 
         $(document).ready(function () {
             //e.preventDefault();
             $(".desactivar").click(function () {
                 var identificador = $(this).parent().parent().parent().attr("id");
                 jQuery.ajax({
-                    type: "GET",
+                    type: "POST",
                     url: "/gestion_automoviles/deactivateVehicle",
                     data: { matricula: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
                 }).done(function (data) {
-                    //$("#sdssss").append(data);
-                    alert("Se cambió exitosamente el estatus del vehículo")
-                    var url1 = '/gestion_automoviles/M08_VisualizarAutomoviles';
-                    var method = 'GET';
-                    var data1 = '';
+                    if (data === "1") {
 
-                    $.ajax(
-                        {
-                            url: url1,
-                            type: method,
-                            data: data,
-                            success: function (data, textStatus, jqXHR) {
+                        //$("#sdssss").append(data);
+                        alert("Se cambió exitosamente el estatus del vehículo")
+                        var url1 = '/gestion_automoviles/M08_VisualizarAutomoviles';
+                        var method = 'GET';
+                        var data1 = '';
 
-                                $("#contenido").empty();
-                                $("#contenido").append(data);
-                            },
-                            error: function (jqXHR, textStatus, errorThrown) {
-                                alert(errorThrown);
-                            }
-                        });
+                        $.ajax(
+                            {
+                                url: url1,
+                                type: method,
+                                data: data,
+                                success: function (data, textStatus, jqXHR) {
+
+                                    $("#contenido").empty();
+                                    $("#contenido").append(data);
+                                },
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    alert(errorThrown);
+                                }
+                            });
+                    } else {
+                        alert(data);
+                    }
                 }).fail(function () {
                     alert("esta vaina se jodio")
                 });
             });
         });
+        //$(document).ready(function () {
+        //    //e.preventDefault();
+        //    $(".desactivar").click(function () {
+        //        var identificador = $(this).parent().parent().parent().attr("id");
+        //        jQuery.ajax({
+        //            type: "GET",
+        //            url: "/gestion_automoviles/deactivateVehicle",
+        //            data: { matricula: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+        //        }).done(function (data) {
+        //            //$("#sdssss").append(data);
+        //            alert("Se cambió exitosamente el estatus del vehículo")
+        //            var url1 = '/gestion_automoviles/M08_VisualizarAutomoviles';
+        //            var method = 'GET';
+        //            var data1 = '';
+
+        //            $.ajax(
+        //                {
+        //                    url: url1,
+        //                    type: method,
+        //                    data: data,
+        //                    success: function (data, textStatus, jqXHR) {
+
+        //                        $("#contenido").empty();
+        //                        $("#contenido").append(data);
+        //                    },
+        //                    error: function (jqXHR, textStatus, errorThrown) {
+        //                        alert(errorThrown);
+        //                    }
+        //                });
+        //        }).fail(function () {
+        //            alert("esta vaina se jodio")
+        //        });
+        //    });
+        //});
     </script>
 
 @*

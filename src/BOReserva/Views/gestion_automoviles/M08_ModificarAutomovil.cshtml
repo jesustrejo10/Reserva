@@ -175,26 +175,30 @@
                     data: form.serialize(),
                     type: 'POST',
                     success: function (data) {
-                        alert("Se ha modificado exitosamente y sera redirigido a la tabla de vehiculos");
-                        //$('#formModifyVehicle')[0].reset();
-                        var url1 = '/gestion_automoviles/M08_VisualizarAutomoviles';
-                        var method = 'GET';
-                        var data1 = '';
+                        if (data === "1") {
+                            alert("Se ha modificado exitosamente y sera redirigido a la tabla de vehiculos");
+                            //$('#formModifyVehicle')[0].reset();
+                            var url1 = '/gestion_automoviles/M08_VisualizarAutomoviles';
+                            var method = 'GET';
+                            var data1 = '';
 
-                        $.ajax(
-                            {
-                                url: url1,
-                                type: method,
-                                data: data,
-                                success: function (data, textStatus, jqXHR) {
+                            $.ajax(
+                                {
+                                    url: url1,
+                                    type: method,
+                                    data: data,
+                                    success: function (data, textStatus, jqXHR) {
 
-                                    $("#contenido").empty();
-                                    $("#contenido").append(data);
-                                },
-                                error: function (jqXHR, textStatus, errorThrown) {
-                                    alert(errorThrown);
-                                }
-                            });
+                                        $("#contenido").empty();
+                                        $("#contenido").append(data);
+                                    },
+                                    error: function (jqXHR, textStatus, errorThrown) {
+                                        alert(errorThrown);
+                                    }
+                                });
+                        } else {
+                            alert(data);
+                        }
                     }
                 });
             } else {
