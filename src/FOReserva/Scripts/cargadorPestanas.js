@@ -167,6 +167,44 @@ jQuery(document).ready(function () {
         $("#LiRestaurantes").removeClass("active");
         $("#LiCruceros").removeClass("active");
         $("#LiDiarios").removeClass("active");
+
+        var url = '/gestion_reserva_auto/M19_Reserva_Autos';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenedor").empty();
+                    $("#contenedor").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+
+        var url = '/gestion_reserva_auto/M19_Reserva_AutosImagenes';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenedorImagenes").empty();
+                    $("#contenedorImagenes").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
     });
 
 
