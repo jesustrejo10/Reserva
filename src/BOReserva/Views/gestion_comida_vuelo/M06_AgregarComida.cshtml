@@ -21,7 +21,7 @@
                         <label for="nombrePlato">Nombre del Plato (<span style="color:red">*</span>):</label>
                          @Html.TextBoxFor(m => m._nombrePlato, null, new { @class = "form-control", @placeholder = "Pasta Carbonara", @id = "nombrePlato" })
                         <label for="descripcionPlato">Descripcion (<span style="color:red">*</span>):</label>
-                        @Html.TextAreaFor(m => m._descripcionPlato,'0','0', new { @class = "form-control", @placeholder = "Descripcion del Plato", @id = "descripcionPlato" })
+                        @Html.TextBoxFor(m => m._descripcionPlato,null, new { @class = "form-control", @placeholder = "Descripcion del Plato", @id = "descripcionPlato" })
                          </div>
                 </div>
                 <!-- /.box-body -->
@@ -61,27 +61,7 @@
                                      });
                             }
                             @Html.DropDownListFor(m => m._tipoPlato, _tipoPlato, new { @class = "form-control", @placeholder = "Tipo ", @id = "tipoPlato" })
-                        <label for="estatusPlato">Estatus (<span style="color:red">*</span>):</label>
-                            @{
-                                List<SelectListItem> _estatusPlato = new List<SelectListItem>();
-                                _estatusPlato.Add(new SelectListItem
-                                {
-                                    Text = "Seleccione Uno",
-                                    Value = "Seleccione uno"
-                                });
-                                _estatusPlato.Add(new SelectListItem
-                                     {
-                                         Text = "Disponible",
-                                         Value = "Disponible"
-                                     });
-                                _estatusPlato.Add(new SelectListItem
-                                     {
-                                         Text = "No Disponible",
-                                         Value = "No Disponible",
-                                     });
-                            }
-                            @Html.DropDownListFor(m => m._estatusPlato, _estatusPlato, new { @class = "form-control", @placeholder = "Estatus", @id = "estatusPlato" })
-                    </div>
+                        </div>
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -94,27 +74,5 @@
     <div class="col-md-12" style="margin-top:10px;">
         <button type="button" id="aceptarPlato" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
     </div>
-
-   @* <script>
-        $("#aceptarPlato").click(function (e) {
-            console.log("hola!");
-            e.preventDefault();
-            var form = $("#formGuardarPlato");
-            $.ajax({
-                url: "gestion_comida_vuelo/guardarPlato",
-                data: form.serialize(),
-                type: 'POST',
-                success: function (data) {
-                    alert("Se guardo");
-                    $('#formGuardarPlato')[0].reset();
-                }
-                , error: function (xhr, textStatus, exceptionThrown) {
-                    //muestro el texto del error
-                    alert(xhr.responseText);
-                }
-            });
-        });
-    </script>*@
-
     </div>
 }
