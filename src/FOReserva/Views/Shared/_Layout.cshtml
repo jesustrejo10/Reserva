@@ -102,11 +102,11 @@
                                     <a onclick="cargarContenido('#MD', 'get', '/gestion_vuelos/gestion_vuelos', null, this)" href="#"> INICIO </a>
                                 </li>
                                 <li>
-                                    <!-- SOBRE NOSOTROS -->
-                                    <a onclick="cargarContenido('#CI', 'get', '/gestion_reserva_habitaciones/mis_reservas', null, this)" href="#"> INICIAR SESI&Oacute;N </a>
+                                    <!-- INICIAR SESIÓN -->
+                                        @Html.ActionLink("INICIAR SESIÓN", "Perfil", "Perfil")                                
                                 </li>
                                 <li>
-                                    <!-- CONTACTO -->
+                                    <!-- REGISTRARSE -->
                                     <a onclick="cargarContenido('#CP', 'get', '/gestion_vuelos/gestion_vuelos', null, this)" href="#"> REGISTRARSE </a>
                                 </li>
                             </ul>
@@ -192,8 +192,15 @@
     </div><!-- /PRELOADER -->
     <!-- JAVASCRIPT FILES -->
     <script type="text/javascript">var plugin_path = 'Content/assets/plugins/';</script>
-
+    <!-- JS DATATABLES -->
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/jquery.dataTables.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/dataTables.tableTools.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/dataTables.colReorder.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/dataTables.scroller.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/dataTables.bootstrap.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/select2/js/select2.full.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/assets/js/scripts.js")"></script>
+
     @*<script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/bootstrap/js/bootstrap.min.js")"></script>*@
     @*<script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/bootstrap.datepicker/js/bootstrap-datepicker.min.js")"></script>*@
 

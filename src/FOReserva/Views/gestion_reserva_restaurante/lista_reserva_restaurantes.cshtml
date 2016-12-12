@@ -67,6 +67,27 @@
 
     </div>
 </div>
+<!-- MODAL ERROR ELIMINAR RESERVA -->
+<div id="ModalErrorEliminar" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header bg-danger modal-header-danger">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Eliminar Reserva</h4>
+            </div>
+            <div class="modal-body">
+                <p>Error al eliminar la reserva intente mas tarde</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="" value="0" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 <!-- MODAL PARA MODIFICAR RESERVA -->
 <div id="ModalModificar" class="modal fade" role="dialog">
@@ -167,15 +188,17 @@
         $.ajax({
             url: "/gestion_reserva_restaurante/eliminar_reserva/",
             type: 'POST',
-            data: { id: id_fila },
+            dataType: "json",
+            data: { id: id_fila }
 
-        }).done(function () {
+        }).done(function (data) {
             $('#' + id_fila).remove();
         })
-	    .fail(function () {
+	    .fail(function (data) {
+	        $('#ModalErrorEliminar').modal('show');
 	        console.log("error");
 	    })
-	    .always(function () {
+	    .always(function (data) {
 	        console.log("complete");
 	    });
     });
