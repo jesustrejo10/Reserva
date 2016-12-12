@@ -6,7 +6,7 @@
 
 @*<form class="validate" action="php/contact.php" method="post" enctype="multipart/form-data" data-success="Sent! Thank you!" data-toastr-position="top-right">*@
 
-@using (Html.BeginForm("busqueda", "gestion_reserva_boleto", FormMethod.Post, new { @id = "formBuscarVuelos", @class = "form-horizontal" }))
+@using (Html.BeginForm("Index", "gestion_reserva_boleto", FormMethod.Post, new { @id = "formBuscarVuelos", @class = "form-horizontal" }))
 {
   <fieldset>
         <!-- required [php action request] -->
@@ -16,11 +16,12 @@
             <div class="form-group">
                 <div class="col-md-6 col-sm-6">
                     <label>Origen</label>
-                      <input type="text" name="origen" value="" class="form-control required">
+                      @Html.TextBoxFor(m => m._prueba, null, new { @class = "form-control required", @name = "contact[first_name]" })
+                    @*<input type="text" name="contact[first_name]" value="" class="form-control required">*@
                 </div>
                 <div class="col-md-6 col-sm-6">
                     <label>Destino</label>
-                    <input type="text" name="destino" value="" class="form-control required">
+                    <input type="text" name="contact[last_name]" value="" class="form-control required">
                 </div>
             </div>
         </div>
@@ -69,8 +70,8 @@
 
     <div class="row text-center">
         <div class="col-md-12">
-            @*<a class="btn btn-primary" onclick="resumenBusqueda()" href="#"> INICIO </a>*@
-            <button type="submit" class="btn btn-primary" >Buscar</button>
+            <a class="btn btn-primary" onclick="resumenBusqueda()" href="#"> INICIO </a>
+            @*<button type="button" id="buscarVuelo" class="btn btn-primary" >Buscar</button>*@
         </div>
     </div>
 <script>
@@ -78,15 +79,15 @@
         cargarContenido('#MD', 'get', '/gestion_reserva_boleto/busqueda_parametros', null, this)
         cargarContenido('#MI', 'get', '/gestion_reserva_boleto/busqueda_resultados', null, this)
     }
-    //$("#buscarvuelo").click(function (e) {
-    //    e.preventdefault();
-    //    var form = $("#formbuscarvuelos");
+    //$("#buscarVuelo").click(function (e) {
+    //    e.preventDefault();
+    //    var form = $("#formBuscarVuelos");
     //    $.ajax({
-    //        url: "gestion_reserva_boleto/index",
+    //        url: "gestion_reserva_boleto/Index",
     //        data: form.serialize(),
-    //        type: 'post',
+    //        type: 'POST',
     //        success: function (data) {
-    //            $("#formbuscarvuelos").submit();
+    //            $("#formBuscarVuelos").submit();
     //        }
     //    });
     //});

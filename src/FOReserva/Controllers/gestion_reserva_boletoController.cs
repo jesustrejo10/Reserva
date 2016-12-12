@@ -13,12 +13,15 @@ namespace FOReserva.Controllers
         //
         private ManejadorSQLReservaBoleto _manejador = new ManejadorSQLReservaBoleto();
         // GET: /gestion_reserva_boleto/
- 
+
         public ActionResult busqueda_parametros()
         {
-            //IList<CModeloBoleto> boletos = _manejador.buscarReserva("Caracas", "Valencia", "2016-10-18");
-            //foreach (CModeloBoleto boleto in boletos)
-            //    System.Diagnostics.Debug.WriteLine(boleto.codigo);
+
+            IList<CModeloBoleto> boletos = _manejador.buscarReserva("Caracas", "Valencia", "2016-10-18");
+            foreach (CModeloBoleto boleto in boletos)
+                System.Diagnostics.Debug.WriteLine(boleto.codigo);
+
+
             return PartialView();
         }
         public ActionResult busqueda_resultados()
