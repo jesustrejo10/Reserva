@@ -174,7 +174,7 @@ namespace FOReserva.Controllers
             {
                 //Ventana de error no conecto a la db
                 //Se puede usar el mensaje de la excepcion "e.mensaje"
-                return (Json(false, JsonRequestBehavior.AllowGet));
+                return null;
             }
             catch (InvalidManejadorSQLException e)
             {
@@ -188,7 +188,7 @@ namespace FOReserva.Controllers
                 ViewBag.Message = "Lo sentimos, la reserva no pudo ser realizada debido al siguiente error del sistema:" + e.Message;
             }
 
-            return (Json(true, JsonRequestBehavior.AllowGet));
+            return Json("exito");
         }
 
         /*
