@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using FOReserva.Models.Restaurantes;
 using FOReserva.Servicio;
+using Microsoft.Ajax.Utilities;
 
 namespace FOReserva.Controllers
 {
@@ -160,8 +161,8 @@ namespace FOReserva.Controllers
         /* 
          * Metodo para la eliminacion de la reserva
          */
-        [System.Web.Services.WebMethod] 
-        public void eliminar_reserva(int id)
+        [System.Web.Services.WebMethod]
+        public JsonResult eliminar_reserva(int id)
         {
             try
             {
@@ -172,7 +173,7 @@ namespace FOReserva.Controllers
             {
                 //Ventana de error no conecto a la db
                 //Se puede usar el mensaje de la excepcion "e.mensaje"
-             
+                return (Json(false, JsonRequestBehavior.AllowGet));
             }
             catch (InvalidManejadorSQLException e)
             {
@@ -185,6 +186,8 @@ namespace FOReserva.Controllers
                 // Error desconocido del sistema
                 ViewBag.Message = "Lo sentimos, la reserva no pudo ser realizada debido al siguiente error del sistema:" + e.Message;
             }
+
+            return (Json(true, JsonRequestBehavior.AllowGet));
         }
         [System.Web.Services.WebMethod]
         public void editar_reserva(int c_id_reserva,string c_name_client, string c_reserv_date, string c_reserv_hour,int c_number_person)
