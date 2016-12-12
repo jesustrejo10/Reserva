@@ -45,7 +45,8 @@ namespace BOReserva.Controllers
             bool resultado = sql.insertarPlato(model);
             //envio una respuesta dependiendo del resultado del insert
             if (resultado)
-            { 
+            {
+                Response.Write("Inserte plato"+model._nombrePlato + " tipo " + model._tipoPlato + " desc " + model._descripcionPlato + " estatus "+model._estatusPlato);
                 return (Json(true, JsonRequestBehavior.AllowGet));
             }
             else
