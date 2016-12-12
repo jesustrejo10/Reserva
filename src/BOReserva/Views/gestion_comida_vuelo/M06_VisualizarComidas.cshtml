@@ -28,7 +28,7 @@
                                 String estatus;
                                 if (item._estatusPlato == 1) { estatus = "Disponible"; } else { estatus = "No disponible"; }
                                 
-                                <tr id="@item._id">
+                                    <tr id="@item._id">
                                     <td>@item._nombrePlato</td>
                                     <td>@item._tipoPlato</td>
                                     <td>@estatus</td>
@@ -41,11 +41,11 @@
                                       @{
                                           if (item._estatusPlato == 0)
                                         {
-                                            <a href="#" title="Disponible"><i class="fa fa-times disponible"></i></a>
+                                            <a href="#" title="Disponible"><i class="fa fa-toggle-off disponible"></i></a>
                                         }
                                         else
                                         {
-                                            <a href="#" title="No Disponible"><i class="fa fa-check no disponible"></i></a>
+                                            <a href="#" title="No Disponible"><i class="fa fa-toggle-on no disponible"></i></a>
                                         }}
                                     </td>
                                 </tr>
