@@ -46,7 +46,7 @@ namespace BOReserva.Servicio
                 //uso el SqlCommand para realizar los querys
                 SqlCommand query = conexion.CreateCommand();
                 //ingreso la orden del query
-                query.CommandText = "INSERT INTO Comida VALUES ('" + model._nombrePlato + "','" + model._tipoPlato + "','" + model._descripcionPlato + " ',' " + model._estatusPlato + "');";
+                query.CommandText = "INSERT INTO Comida VALUES ('" + model._nombrePlato + "','" + model._tipoPlato + "','" + model._estatusPlato + " ',' " + model._descripcionPlato + "');";
                 //creo un lector sql para la respuesta de la ejecucion del comando anterior               
                 SqlDataReader lector = query.ExecuteReader();
                 //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
@@ -86,7 +86,7 @@ namespace BOReserva.Servicio
                 while (lector.Read())
                 {
                     CComida plato = new CComida(Int32.Parse(lector["com_id"].ToString()), lector["com_nombre"].ToString(),
-                    lector["com_tipo"].ToString(),lector["com_referencia"].ToString(),lector["com_estatus"].ToString());
+                    lector["com_tipo"].ToString(),Convert.ToInt32(lector["com_estatus"]),lector["com_referencia"].ToString());
                     platos.Add(plato);
                 }
                 //cierro el lector
@@ -123,7 +123,7 @@ namespace BOReserva.Servicio
                 {
 
                     CComida plato = new CComida(Int32.Parse(lector["comi_id"].ToString()), lector["comi_nombre"].ToString(),
-                    lector["comi_tipo"].ToString(),lector["comi_estatus"].ToString(),lector["comi_descripcion"].ToString());;
+                    lector["comi_tipo"].ToString(), Convert.ToInt32(lector["com_estatus"]), lector["comi_descripcion"].ToString()); ;
                     platoRetorno = plato;
                 }
                 //cierro el lector
