@@ -29,6 +29,7 @@
                             <div class="col-xs-6">
                                <label for="modelo">Modulo</label><br>                                                           
                                 <select name="lista_modulos" id="listamodulos">
+                                    <option selected disabled hidden style='display: none' value=''></option>  
                                     @foreach (var item in Model.Menu)
                                     {
                                         <option value="@item.Nombre">
@@ -127,8 +128,8 @@
 
                 var permisos = response;
                 var container = $('#listaPermisos');
-                container.empty();
-                jQuery.each(permisos, function (i) {                                
+                //container.empty();
+                jQuery.each(permisos, function (i) {
                 var inputs = container.find('input');
                 var id = inputs.length + 1;
                 $('<input />', { type: 'checkbox', id: 'permiso' + id, value: permisos[i] }).appendTo(container);
@@ -142,6 +143,19 @@
 
         
     </script>
+
+    <style>
+        #listamodulos {
+            padding:6px;
+            border-radius:0;
+            width: 100%;
+            border-color:lightgray;       
+        }
+        #listamodulos:active {
+            border-color: gray;
+        }
+        
+    </style>
 
 }
 
