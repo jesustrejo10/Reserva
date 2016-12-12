@@ -7,18 +7,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BOReserva.Models.gestion_seguridad_ingreso;
+using BOReserva.Models.gestion_usuarios;
+using System.Data.SqlClient;
+
 
 namespace TestUnitReserva.BO.gestion_seguridad_ingreso
 {
     [TestFixture]
     class TestLogin
     {
-        M01SQL bd = new M01SQL();
+        M01SQL bd;
+        Cgestion_seguridad_ingreso modelo;
+        
 
-       /* [Test]
-        public void ExcepcionSQL() {
-            Assert.Throws<SqlException>(()=>bd.UsuarioEnBD(null));
-        }*/
+        [SetUp]
+        public void TestSetUp()
+        {
+             bd = new M01SQL();
+             modelo = new Cgestion_seguridad_ingreso("prueba@reserva.com",
+                "12345", "pruebaNombre", "pruebaApellido", "activo");
+        }
+
+
+        [Test]
+        public void ExcepcionSQL()
+        {
+            Assert.Throws<SqlException>(() => bd.UsuarioEnBD(null));
+        }
+
 
 
         //Test de que no hubieron problemas en conectarse a la bd
@@ -27,56 +43,86 @@ namespace TestUnitReserva.BO.gestion_seguridad_ingreso
         [Test]
         public void PruebaUsuarioEnBD()
         {
-            Assert.IsInstanceOf<Cgestion_seguridad_ingreso>(bd.UsuarioEnBD("drbr@reserva.com"));
+            var usuario = bd.UsuarioEnBD("drbr@reserva.com");
+            Assert.IsInstanceOf(typeof(Cgestion_seguridad_ingreso), usuario);
+            Assert.IsNotNull(usuario.correoCampoTexto);
+            Assert.That(usuario.correoCampoTexto, Is.EqualTo("drbr@reserva.com"));
+            
         }
 
         [Test]
         public void PruebaResetearIntentos()
-        {
-            Assert.IsTrue(bd.ResetearIntentos("prueba"));
+        {    
+            Assert.IsTrue(bd.ResetearIntentos("drbr@reserva.com"));    
         }
 
-        [Test]
+        [Test]       
         public void PruebaIncrementarIntentos()
         {
-            Assert.IsTrue(bd.IncrementarIntentos("prueba"));
+            Assert.IsTrue(bd.IncrementarIntentos("drbr@reserva.com"));            
         }
 
         [Test]
         public void PruebaBloqueoUsuario()
         {
-            Assert.IsTrue(bd.BloquearUsuario("prueba"));
+
+            Assert.IsTrue(bd.BloquearUsuario("drbr@reserva.com"));
         }
 
         [Test]
         public void PruebaInsertarLogin()
         {
-            Assert.IsTrue(bd.InsertarLogin("prueba"));
+            Boolean insertar = bd.InsertarLogin("prueba@reserva.com");
+            if (!insertar)
+            {
+                bd.EliminarLogin("prueba@reserva.com");
+                Assert.IsTrue(bd.InsertarLogin("prueba@reserva.com"));
+            }
+            else
+            {
+                Assert.IsTrue(insertar);
+            }
+      
         }
+
+        
 
         [Test]
         public void PruebaNumeroIntentos()
         {
-            Assert.AreEqual(bd.NumeroIntentos("prueba"),0);
+            bd.ResetearIntentos("drbr@reserva.com");
+            Assert.AreEqual(bd.NumeroIntentos("drbr@reserva.com"),0);
         }
         //Fin pruebas SQL
+
+        //Pruebas de modelo
+
         [Test]
         public void PruebaTipoModelo()
         {
-            Cgestion_seguridad_ingreso modelo =new Cgestion_seguridad_ingreso("prueba@Correo", 
-                "pruebaClave", "pruebaNombre", "pruebaApellido", "activo");
+            
             Assert.IsInstanceOf<Cgestion_seguridad_ingreso>(modelo);
+            Assert.IsNotNull(modelo);
+            
         }
 
         [Test]
         public void PruebaActivo()
         {
-            Cgestion_seguridad_ingreso modelo = new Cgestion_seguridad_ingreso("prueba@Correo", 
-                "pruebaClave", "pruebaNombre", "pruebaApellido", "activo");
+            
             Assert.IsTrue(modelo.EstaActivo());
+            Assert.IsNotNull(modelo);
         }
-        //Pruebas de modelo
+        
 
         //Fin de pruebas de modelo
+
+        [TearDown]
+        public void TestTearDown()
+        {
+            bd = null;
+            modelo = null;
+        }
+        
     }
 }

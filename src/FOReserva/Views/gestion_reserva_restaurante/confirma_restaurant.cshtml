@@ -1,4 +1,5 @@
 ﻿@model FOReserva.Models.Restaurantes.CReservation_Restaurant
+
 @{
     ViewBag.Title = "confirma_restaurant";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -10,24 +11,12 @@
         <div class="row">
             <center><h1><i class="fa fa-exclamation-circle orange" aria-hidden="true"></i> @ViewBag.Message</h1></center>
         </div>
-<<<<<<< HEAD
-        <div class="panel-body center-block detalle_reserva_restaurant">
-            <i class="fa fa-user" aria-hidden="true"></i> <p><span>A nombre de: </span>@Model.Name</p>
-            <i class="fa fa-calendar-check-o" aria-hidden="true"></i><p><span>Fecha: </span>@Model.Date</p>
-            <i class="fa fa-clock-o" aria-hidden="true"></i> <p><span>Hora: </span>@Model.Time</p>
-            <i class="fa fa-users" aria-hidden="true"></i> <p><span>Mesa para: </span>@Model.Count</p>
-            <center> <a class="btn btn-primary" href="@Url.Action("lista_reserva_restaurantes","gestion_reserva_restaurante")">Mis Reservas</a></center>
-=======
+
     }
     else
     {
-
         <!-- FEATURED GRID -->
-        <div class="row">
-            <center><h1>Su reserva ha sido realizada exitosamente!</h1></center>
-            <center><h1>@ViewBag.Message</h1></center>
->>>>>>> Develop
-        </div>
+
         <div class="row">
             <div class="panel panel-default col-sm-5">
                 <div class="panel-heading">
@@ -45,7 +34,7 @@
 
             <div class="col-sm-7">
                 <div class="relative">
-                    <div style="height: 443.6px;background-image: url('../Images/restaurant_generic.jpg');background-repeat: no-repeat;background-size: cover;">
+                    <div class="descrip-wrapper">
                         <div class="descrip-conten">
                             <h2>  <b>@Model.Restaurant.Name</b>  </h2>
                             <p>@Model.Restaurant.CityName</p>
@@ -58,5 +47,6 @@
 
         </div>
         <!-- /FEATURED GRID -->
-
     }
+
+}
