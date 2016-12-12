@@ -1,184 +1,148 @@
-﻿    <!-- Content Header (Page header) -->
-<section class="content-header">
-    <h1>
-        Datos usuario
-    </h1>
+<script src="/Scripts/Scripts_Boletos/DetalleBoleto.js"></script>
 
-</section>
+   <div class="row">
+    <div class="col-md-12">
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h1 class="box-title">Datos Usuario</h1>
+                <div class="box-tools pull-right">
+                </div>
+            </div>
+            <div class="box-body">
 
-<!-- Main content -->
-<section class="content">
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box">
-                <!-- /.box-header -->
-                <div class="box-body">
+                <div class="row">
 
-                    <div class="row">
+                    <div class="col-md-6">
 
-                        <div class="col-md-12">
-
-                            Para ejecutar la venta del boleto se deben ingresar los datos del usuario
-
-                        </div>
+                        <label>Primer nombre:</label>
+                        <input type="text" class="form-control" placeholder="Ej. Juan">
 
                     </div>
 
-                    <hr>
+                    <div class="col-md-6">
 
-                    <div class="row">
-
-                        <div class="col-md-2">
-
-                            <input type="text" class="form-control" placeholder="Primer nombre">
-
-                        </div>
-
-                        <div class="col-md-2">
-
-                            <input type="text" class="form-control" placeholder="Segundo nombre">
-
-                        </div>
-
-                        <div class="col-md-2">
-
-                            <input type="text" class="form-control" placeholder="Primer apellido">
-
-                        </div>
-
-                        <div class="col-md-2">
-
-                            <input type="text" class="form-control" placeholder="Segundo apellido">
-
-                        </div>
-
+                        <label>Segundo nombre:</label>
+                        <input type="text" class="form-control" placeholder="Ej. Lionel">
 
                     </div>
 
-                    <hr>
+                </div>
 
-                    <div class="row">
+                <br>
 
-                        <div class="col-md-4">
-                            <label>Fecha de nacimiento:</label>
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <label>Primer apellido:</label>
+                        <input type="text" class="form-control" placeholder="Ej. Jimenez">
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label>Segundo apellido:</label>
+                        <input type="text" class="form-control" placeholder="Ej. Arango">
+
+                    </div>
+
+                </div>
+
+                <br>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <label>Fecha de nacimiento:</label>
+                        <input type="date" class="form-control">
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+
+                            <label>Sexo:</label>
+                            <select class="form-control select2" style="width: 100%;">
+                                <option selected="selected">Masculino</option>
+                                <option>Femenino</option>
+                            </select>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <br>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+
+                            <label>País:</label>
+                            <select class="form-control select2" style="width: 100%;">
+                                <option selected="selected">Venezuela</option>
+                                <option>Estados Unidos</option>
+                                <option>España</option>
+                                <option>Italia</option>
+                                <option>Francia</option>
+                                <option>Alemania</option>
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+
+                            <label>Teléfono:</label>
 
                             <div class="input-group">
                                 <div class="input-group-addon">
-                                    <i class="fa fa-calendar"></i>
+                                    <i class="fa fa-phone"></i>
                                 </div>
-                                <input type="text" class="form-control pull-right" id="reservation">
+                                <input type="text" class="form-control" data-inputmask='"mask": "(999) 999-9999"' data-mask placeholder="Ej. (414)544-2014">
                             </div>
-                            <!-- /.input group -->
+
                         </div>
+                    </div>
+                </div>
 
+                <br>
 
-                        <div class="col-md-2">
-                            <br>
-                            <div class="form-group">
+                <div class="row">
 
-                                <label>
-                                    <input type="checkbox" name="ridavuelta" class="minimal">
-                                    Hombre
-                                </label>
+                    <div class="col-md-6">
 
-                            </div>
-                        </div>
-
-
-                        <div class="col-md-2">
-                            <br>
-                            <div class="form-group">
-
-                                <label>
-                                    <input type="checkbox" name="ridavuelta" class="minimal">
-                                    Mujer
-                                </label>
-
-                            </div>
-                        </div>
-
-
+                        <label>Número de pasaporte:</label>
+                        <input type="text" class="form-control" placeholder="Ej. 237690944">
 
                     </div>
 
-                    <hr>
+                    <div class="col-md-6">
 
-                    <div class="row">
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-
-                                <label>País:</label>
-                                <select class="form-control select2" style="width: 100%;">
-                                    <option selected="selected">Venezuela</option>
-                                    <option>Estados Unidos</option>
-                                    <option>España</option>
-                                    <option>Italia</option>
-                                    <option>Francia</option>
-                                    <option>Alemania</option>
-                                </select>
-
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-
-                                <label>Teléfono:</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-phone"></i>
-                                    </div>
-                                    <input type="text" class="form-control" data-inputmask='"mask": "(999) 999-9999"' data-mask>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <div class="row">
-
-                        <div class="col-md-8">
-
-                            <input type="text" class="form-control" placeholder="Número de pasaporte/cédula">
-
-                        </div>
+                        <label>Correo electrónico:</label>
+                        <input type="text" class="form-control" placeholder="Ej. pepitoperez@gmail.com">
 
                     </div>
 
-                    <hr>
+                </div>
 
-                    <div class="row">
 
-                        <div class="col-md-8">
+                <br>
 
-                            <input type="text" class="form-control" placeholder="Correo electrónico">
 
-                        </div>
+                <div class="row">
 
+                    <div class="col-md-12" style="margin-top:10px;">
+                            <button type="button" id="siguiente" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Siguiente</button>
                     </div>
 
-                    <hr>
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <button type="button" class="btn btn-block btn-primary btn-sm" onclick="llamarVistaDetalleBoleto();">Guardar Datos</button>
-                        </div>
-
-                        <div class="col-md-4">
-                                <button type="button" class="btn btn-block btn-danger btn-sm">Regresar</button>
-                        </div>
-
-                    </div>
                 </div>
             </div>
         </div>
-        <!-- /.row -->
-</section>
-<!-- /.content -->
+    </div>
+</div>
 
-<script src="/Scripts/Scripts_Boletos/DetalleBoleto.js"></script>

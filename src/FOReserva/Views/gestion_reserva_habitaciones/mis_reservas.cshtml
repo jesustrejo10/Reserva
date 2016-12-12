@@ -1,4 +1,4 @@
-﻿@model List<FOReserva.Models.ReservaHabitacion.Cvista_ReservaHabitacion>
+@model List<FOReserva.Models.ReservaHabitacion.CReservaHabitacion>
 
 
 @if (Model != null)
@@ -9,7 +9,7 @@
     
     <div>
         <div class="col-xs-12">
-            <h2 class="color-azul">Mis Reservas</h2>
+            <h2 class="color-azul">Historial de reservas de Habitacion.</h2>
         </div>
     </div>
     <!-- HTML DATATABLES -->
@@ -33,9 +33,9 @@
                     <td>@String.Format("# {0}", reserva.Habitacion)</td>
                     <td>
                         <span class="label label-@(
-                                reserva.Estado == FOReserva.Models.ReservaHabitacion.Cvista_ReservaHabitacion.EstadoReserva.Activo  ? "info" :
-                                reserva.Estado == FOReserva.Models.ReservaHabitacion.Cvista_ReservaHabitacion.EstadoReserva.Ocupando ? "success" :
-                                reserva.Estado == FOReserva.Models.ReservaHabitacion.Cvista_ReservaHabitacion.EstadoReserva.Cancelo  ? "warning" : "danger")">
+                                reserva.Estado == FOReserva.Models.ReservaHabitacion.CReservaHabitacion.EstadoReserva.Activo  ? "info" :
+                                reserva.Estado == FOReserva.Models.ReservaHabitacion.CReservaHabitacion.EstadoReserva.Ocupando ? "success" :
+                                reserva.Estado == FOReserva.Models.ReservaHabitacion.CReservaHabitacion.EstadoReserva.Cancelo  ? "warning" : "danger")">
                             @reserva.Estado.ToString()
                         </span>
                     </td>
@@ -122,3 +122,4 @@ else
 {
     <p>No se pudo cargar el contenido.</p>
 }
+

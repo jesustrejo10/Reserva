@@ -1,7 +1,5 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using FOReserva.Models.Restaurantes;
 using FOReserva.Servicio;
@@ -10,31 +8,21 @@ namespace FOReserva.Controllers
 {
     public class gestion_reserva_restauranteController : Controller
     {
+
         //
         // GET: /GestionReservaRestaurant/
         public ActionResult gestion_reserva_restaurante()
         {
             return PartialView();
         }
-
-        //[HttpPost]
-        //public JsonResult buscar_restaurante(CRestaurantModel model)
-        //{
-        //    return (Json(true, JsonRequestBehavior.AllowGet));
-        //}
-
-        public ActionResult Index()
-        {
-            return View();
-        }
-
+        
         public ActionResult restaurant_resultados()
         {
             int search_val = Int32.Parse(Request.QueryString["search_val"]);
-            string search_txt = Request.QueryString["search_text"];
+            string name_rest = Request.QueryString["name_rest"];
             try
             {
-                List<CRestaurantModel> lista = busqueda(search_val, search_txt);
+                List<CRestaurantModel> lista = busqueda(search_val, name_rest);
                 return View(lista);
             }
             catch ( NullReferenceException e) {
@@ -42,17 +30,17 @@ namespace FOReserva.Controllers
                 //No se puede usar el mensaje de la excepcion "e.mensaje"
                 //Esto se causa al realizar una busqueda con parametros que no son
                 //como son caracteres especiales y de mas
-                System.Diagnostics.Debug.WriteLine("Error de busqueda");
-                System.Diagnostics.Debug.Write(e.Message);
+                return View("No se encontraron resultados");
             }
-            catch ( ManejadorSQLException e )
+            catch ( ManejadorSQLException f)
             {
                 //Ventana de error no conecto a la db
                 //Se puede usar el mensaje de la excepcion "e.mensaje"
-                System.Diagnostics.Debug.WriteLine("Error de manejador sql");
-                System.Diagnostics.Debug.Write( e.Message );
+                return View("error_conexion");
             }
-            catch (Exception e) { }
+            catch (Exception g) { 
+            
+            }
 
             // Error desconocido (seria bueno mostrar 
             // el mensaje para ver que lo causo
@@ -60,6 +48,12 @@ namespace FOReserva.Controllers
             return View();
         }
 
+        /* Metodo para la busqueda de los restaurantes en DB
+           search_val: Metodo de busqueda 
+             1 para ciudad
+             2 para nombre
+           search_txt:
+             nombre de la ciudad o del restaurante a buscar*/
         private List<CRestaurantModel> busqueda(int search_val, string search_txt)
         {
             List<CRestaurantModel> lista = null;
@@ -71,6 +65,9 @@ namespace FOReserva.Controllers
             return lista;
         }
 
+        /* Metodo para la seleccion del restaurante 
+           donde hacer la reserva
+             */
         public ActionResult reservar_restaurant(int id_rest)
         {
             CRestaurantModel restaurante = new CRestaurantModel();
@@ -79,9 +76,53 @@ namespace FOReserva.Controllers
             return View(restaurante);
         }
 
-        public ActionResult confirma_restaurant()
+        /*
+         * Metodo que confirma la reserva
+         *  Crea la reserva en DB
+         *  En caso contrario devuelve vista al momento de crear la reserva
+             */
+        public ActionResult confirma_restaurant(int restaurantID,string name_rest,string addres_rest, string name_client, string reserv_date, string reserv_hour, int number_person, string name_city)
         {
-            return View();
+            CReservation_Restaurant reserva = new CReservation_Restaurant(name_client,reserv_date,reserv_hour,number_person, 5, restaurantID);
+            reserva.Restaurant = new CRestaurantModel(restaurantID, name_rest, addres_rest);
+            reserva.Restaurant.CityName = name_city;
+            try
+            {
+                ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
+                manejador.CrearReserva(reserva);
+                return View(reserva);
+            }
+            catch (ManejadorSQLException e)
+            {
+                //Ventana de error no conecto a la db
+                //Se puede usar el mensaje de la excepcion "e.mensaje"
+                reserva = null;
+                return View("error_conexion" + e.Message);
+            }
+            catch (InvalidManejadorSQLException e)
+            {
+                //Ventana de error al crear la reserva
+                //Esto se causa por una sitaxis erronea del sql
+                //como son caracteres especiales o demas
+                reserva = null;
+                return View("Error al crear Reserva");
+            }
+            catch (Exception e)
+            {
+                return View("Error desconocido del sistema");
+            }
         }
+
+        /* Metodo que devuelve todas las reservas del usuario logeado 
+         * userID = id del usuario logeado
+             */
+        public ActionResult lista_reserva_restaurantes()
+        {
+            ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
+            List<CReservation_Restaurant> lista = manejador.buscarReservas();
+            return View(lista);
+        }
+
     }
 }
+

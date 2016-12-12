@@ -1,4 +1,4 @@
-﻿@model BOReserva.Models.gestion_aviones.CAgregarAvion
+@model BOReserva.Models.gestion_aviones.CAgregarAvion
 
 <script src="~/Scripts/Scripts_Aviones/llamadas_generales.js"></script>
 
@@ -77,7 +77,7 @@
                                 </div>
 
                                 <div class="col-xs-6">
-                                   <label for="velocidadMaximaDeVuelo">Velocidad Máxima de Vuelo (En Kilometros) :</label>
+                                   <label for="velocidadMaximaDeVuelo">Velocidad Máxima de Vuelo (En Km/h) :</label>
                                     @Html.TextBoxFor(m => m._velocidadMaximaDeVuelo, null, new { @class = "form-control", @placeholder = "0", @type = "number", @id = "velocidadMaximaDeVuelo", @min = 0 })
 
                                 </div>

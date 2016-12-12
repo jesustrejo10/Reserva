@@ -36,19 +36,42 @@ namespace BOReserva.Controllers
 
         public ActionResult M12_AgregarUsuario()
         {
+           // Response.Write("<script>alert('" + "prueba" + "');</script>");
+            ViewBag.Roles = new SelectList(new List<SelectListItem>
+                {
+                    new SelectListItem {Text = "Administrador", Value = "1"},
+                    new SelectListItem {Text = "Normal", Value = "2"},
+                    new SelectListItem {Text = "Anonimo", Value = "3"},
+
+                }, "Value", "Text");
             return PartialView();
         }
 
+
+
         [HttpPost]
         public ActionResult M12_AgregarUsuario(AgregarUsuario usuario)
-        {   
+        {
+            ViewBag.Roles = new SelectList(new List<SelectListItem>
+                {
+                    new SelectListItem {Text = "Administrador", Value = "1"},
+                    new SelectListItem {Text = "Normal", Value = "2"},
+                    new SelectListItem {Text = "Anonimo", Value = "3"},
+
+                }, "Value", "Text");
             if (ModelState.IsValid) 
             {
                 PersistenciaUsuario p = new PersistenciaUsuario();
                 try
                 {
                     p.AgregarUsuario(usuario.toClass());
+                    TempData["message"] = "Usuario Agregado Exitosamente";
                     return RedirectToAction("M12_Index");
+                }
+                catch (ExceptionM12Reserva ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return View("M12_AgregarUsuario", "_Layout");
                 }
                 catch (Exception ex)
                 {
@@ -63,15 +86,38 @@ namespace BOReserva.Controllers
             
         }
 
-       /* [HttpPost]
-        public ActionResult M12_ModificarUsuario(ListarUsuario usuario)
+       [HttpPost]
+        public ActionResult M12_ModificarUsuario(AgregarUsuario usuario)
         {
 
-        }*/
+            if (ModelState.IsValid)
+            {
+                PersistenciaUsuario p = new PersistenciaUsuario();
+                try
+                {
+                    p.ModificarUsuario(usuario.toClass(), usuario.idUsuario);
+                    TempData["message"] = "Usuario Modficado Exitosamente";
+                    return RedirectToAction("M12_Index");
+                }
+                catch (ExceptionM12Reserva ex)
+                {
+                    
+                    //ModelState.AddModelError("", ex.Message);
+                    return View("M12_ModificarUsuario", usuario);
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return View("M12_ModificarUsuario", usuario);
+                }
+            } 
+
+            return PartialView("M12_Index", "_Layout");
+        }
 
 
 
-        public ActionResult ModificarUsuario(int? usuID)
+       public ActionResult ModificarUsuario(int? usuID)
         {
 
             if (usuID.HasValue)
@@ -79,28 +125,42 @@ namespace BOReserva.Controllers
                 PersistenciaUsuario p = new PersistenciaUsuario();
                 try
                 {
-                    ListarUsuario usuario = p.consultarUsuario(usuID.Value);
+                    AgregarUsuario  usuario = new AgregarUsuario(p.consultarUsuario(usuID.Value));
                     return PartialView("M12_ModificarUsuario", usuario);
                 }
                 catch (Exception ex)
                 {
-                    ModelState.AddModelError("", ex.Message);
+                    //ModelState.AddModelError("", ex.Message);
+                    TempData["message"] = ex.Message;
                     return PartialView("M12_Index", "_Layout");
                 }
             }
             else
                 return RedirectToAction("M12_Index");
-            
-                
 
         }
 
+        
         public RedirectToRouteResult EliminarUsuario(int usuID)
         {
-            
-            PersistenciaUsuario p = new PersistenciaUsuario();
-            p.eliminarUsuario(usuID);
+            try
+            {
+                PersistenciaUsuario p = new PersistenciaUsuario();
+                p.eliminarUsuario(usuID);
+            }
+            catch(ExceptionM12Reserva ex)
+            {
+                TempData["message"] = ex.Message;
+                
+            }
+            catch (Exception ex)
+            {
+                TempData["message"] = ex.Message;
+            }
             return RedirectToAction("M12_Index");
+            
+            
         }
+        
     }
 }
