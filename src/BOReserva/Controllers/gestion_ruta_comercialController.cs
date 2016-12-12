@@ -91,13 +91,32 @@ namespace BOReserva.Controllers
             CBasededatos_ruta_comercial sql = new CBasededatos_ruta_comercial();
             //realizo el insert
 
-            if (model._destinoRuta == "Seleccione ruta de destino" || model._origenRuta == "Seleccione ruta de destino")
+            if (model._origenRuta == null || model._destinoRuta == null)
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error, no ha seleccionado un origen/destino valido";
+                //Retorno el error
+                return Json(error);
+
+            }
+            else if (model._distanciaRuta <= 0 || model._distanciaRuta == 999999) {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error, distancia de ruta invalida";
+                //Retorno el error
+                return Json(error);
+            }
+            else
             {
                 bool resultado = sql.InsertarRuta(model);
+                return null;
             }
             
 
-            return null;
+            
         }
 
     }

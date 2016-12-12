@@ -29,6 +29,28 @@ $("#enviar").click(function (e) {
         success: function (data) {
             alert("Ruta guardada exitosamente");
             $('#formGuardarRuta')[0].reset();
+        }, error: function (xhr, textStatus, exceptionThrown) {
+            //muestro el texto del error
+            alert(xhr.responseText);
         }
+
     });
+});
+
+
+$('#distanciaRuta').keyup(function () {
+    var numbers = $(this).val();
+    $(this).val(numbers.replace(/\D/, ''));
+});
+
+$('#distanciaRuta').focusout(function () {
+    var numbers = $(this).val();
+    if (numbers > 999999999) {
+        $(this).val('');
+        alert("Debe ingresar un valor válido");
+    }
+    if (numbers <= 0) {
+        $(this).val('');
+        alert("Debe ingresar un valor mayor a cero");
+    }
 });
