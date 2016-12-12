@@ -90,7 +90,12 @@ namespace BOReserva.Controllers
             
             CBasededatos_ruta_comercial sql = new CBasededatos_ruta_comercial();
             //realizo el insert
-            bool resultado = sql.InsertarRuta(model);
+
+            if (model._destinoRuta == "Seleccione ruta de destino" || model._origenRuta == "Seleccione ruta de destino")
+            {
+                bool resultado = sql.InsertarRuta(model);
+            }
+            
 
             return null;
         }

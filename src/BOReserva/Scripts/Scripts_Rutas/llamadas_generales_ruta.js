@@ -16,3 +16,19 @@
                });
            });
 });
+
+$("#enviar").click(function (e) {
+    e.preventDefault();
+    var form = $("#formGuardarRuta");
+    var origen = $('#rutaOrigen').find(":selected").text();
+    var destino = $('#rutaDestino').find(":selected").text();
+    $.ajax({
+        url: "gestion_ruta_comercial/guardarRuta",
+        data: form.serialize(),
+        type: 'POST',
+        success: function (data) {
+            alert("Ruta guardada exitosamente");
+            $('#formGuardarRuta')[0].reset();
+        }
+    });
+});
