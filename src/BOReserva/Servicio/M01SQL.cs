@@ -53,33 +53,6 @@ namespace BOReserva.Servicio
                 return null;
             }
         }
-/*
-        public String UsuarioEstatus(String usuario)
-        {
-            String estatus = "";
-            try
-            {
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                SqlCommand cmd = new SqlCommand("Select usu_activo from Usuario where usu_correo like @usu_correo", conexion);
-                //cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@usu_correo", usuario);
-                estatus = Convert.ToString(cmd.ExecuteScalar());
-                conexion.Close();
-                return estatus;
-            }
-            catch (SqlException e)
-            {
-                return null;
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
-        }*/
-
         
 
         public Boolean BloquearUsuario(String usuario)
