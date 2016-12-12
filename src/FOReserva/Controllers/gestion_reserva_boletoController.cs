@@ -17,9 +17,9 @@ namespace FOReserva.Controllers
         public ActionResult busqueda_parametros()
         {
 
-            IList<CModeloBoleto> boletos = _manejador.buscarReserva("Caracas", "Valencia", "2016-10-18");
+            IList<CModeloBoleto> boletos = _manejador.buscarReserva("Caracas", "Valencia", "2013-08-30", "2013-09-02", "Turista");
             foreach (CModeloBoleto boleto in boletos)
-                System.Diagnostics.Debug.WriteLine(boleto.codigo);
+            System.Diagnostics.Debug.WriteLine(boleto.codigo);
 
 
             return PartialView();
