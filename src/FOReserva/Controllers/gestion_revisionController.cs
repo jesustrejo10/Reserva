@@ -2,6 +2,7 @@
 using FOReserva.Servicio;
 using System;
 using System.Collections.Generic;
+using FOReserva.Models.Restaurantes;
 using System.Web.Mvc;
 using System;
 
@@ -26,6 +27,18 @@ namespace FORevision.Controllers
             ManejadorSQLRevision manejador = new ManejadorSQLRevision();
             List<CRevision> lista = manejador.BuscarRevisiones();
             return PartialView(lista);
+        }
+
+        public ActionResult crear_revision_form()
+        {
+            ManejadorSQLRevision manejador = new ManejadorSQLRevision();
+            bool resp = manejador.Crear_Revision();
+            return PartialView();
+        }
+
+        public ActionResult crear_revision()
+        {
+            return PartialView();
         }
     }
 }
