@@ -137,21 +137,22 @@ namespace FOReserva.Servicio
         /// Metodo para listar revisiones guardadas
         /// </summary>
         /// <returns>Lista de revisiones</returns>
-        public List<CRevision> BuscarRevisiones()
+        public List<MostrarRevision> BuscarRevisiones()
         {
             string query = "SELECT * FROM Revision as rev";
             SqlDataReader read = Executer(query);
-            List<CRevision> lista_rev = new List<CRevision>();
+            List<MostrarRevision> lista_rev = new List<MostrarRevision>();
 
             if (read.HasRows)
             {
                 while (read.Read())
                 {
-                    DateTime _fecha = read.GetDateTime(0);
-                    string _mensaje = read.GetString(1);
-                    int _tipo = read.GetInt32(2);
-                    int _puntuacion = read.GetInt32(3);
-                    CRevision rev = new CRevision();
+                    DateTime _fecha = read.GetDateTime(1);
+                    string _mensaje = read.GetString(2);
+                    int _tipo = read.GetInt32(3);
+                    int _puntuacion = read.GetInt32(4);
+
+                    MostrarRevision rev = new MostrarRevision();
                     rev.Fecha = _fecha;
                     rev.Mensaje = _mensaje;
                     rev.Tipo = _tipo;

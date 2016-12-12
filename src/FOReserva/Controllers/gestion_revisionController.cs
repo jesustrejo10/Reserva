@@ -24,8 +24,8 @@ namespace FORevision.Controllers
         public ActionResult lista_revisiones()
         {
             ManejadorSQLRevision manejador = new ManejadorSQLRevision();
-            List<CRevision> lista = manejador.BuscarRevisiones();
-            return View(lista);
+            List<MostrarRevision> lista = manejador.BuscarRevisiones();
+            return PartialView(lista);
         }
     }
 }

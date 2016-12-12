@@ -265,13 +265,13 @@
     <Compile Include="Models\ReservaHabitacion\CCiudad.cs" />
     <Compile Include="Models\Hoteles\CHotel.cs" />
     <Compile Include="Models\ReservaHabitacion\CReservaHabitacion.cs" />
+    <Compile Include="Models\Revision\MostrarRevision.cs" />
     <Compile Include="Models\Usuarios\CUsuario.cs" />
     <Compile Include="Models\ReservaHabitacion\Cvista_BuscarHotel.cs" />
     <Compile Include="Models\ReservaHabitacion\Cvista_ReservarHabitacion.cs" />
     <Compile Include="Models\ReservaHabitacion\Errores\ReservaHabitacionException.cs" />
     <Compile Include="Models\Restaurantes\CReservation_Restaurant.cs" />
     <Compile Include="Models\Restaurantes\CRestaurantModel.cs" />
-    <Compile Include="Models\Revision\CListRevision.cs" />
     <Compile Include="Models\Revision\CRevision.cs" />
     <Compile Include="Models\Revision\CRevisionValoracion.cs" />
     <Compile Include="Models\Utilidad.cs" />
@@ -3096,7 +3096,6 @@
     <Content Include="Views\gestion_reserva_habitaciones\buscar_hoteles.cshtml" />
     <Content Include="Views\gestion_reserva_habitaciones\hoteles_con_habitaciones.cshtml" />
     <Content Include="Views\gestion_planificacion_vacaciones\gestion_itinerario.cshtml" />
-    <Content Include="Views\gestion_revision\gestion_ListRevicion.cshtml" />
     <Content Include="Views\gestion_revision\gestion_revision.cshtml" />
     <Content Include="Views\gestion_revision\consultar_revision.cshtml" />
     <Content Include="Views\gestion_revision\crear_revision.cshtml" />
@@ -3112,7 +3111,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\gestion_diario_viaje\" />
     <Folder Include="Views\registro_autenticacion\" />
   </ItemGroup>
   <ItemGroup>
