@@ -73,12 +73,13 @@
                     url: "/gestion_reserva_habitaciones/realizar_reserva",
                     data: reserva,
                     type: 'POST',
-                    success: function (data) {
+                    success: function (proceso) {
                         console.log(0)
-                        if (data){
-                            alert("Fecilidades!");
+                        if (proceso.CulminoCorrectamente) {
+                            alert(proceso.Mensaje);
+                            cargarContenido('#CI', 'get', '/gestion_reserva_habitaciones/detalle_reserva', { "Codigo": proceso.Referencia })
                         }else{
-                            alert("No es posible realizar la reserva.");
+                            alert(proceso.Mensaje);
                         }
 
                     }
@@ -112,6 +113,7 @@
                         "infoFiltered": "",
                         "search": ""
                     },
+                    "bDestroy": true,
                     "order": [
                         [0, 'asc']
                     ],

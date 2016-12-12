@@ -1,4 +1,4 @@
-@model List<FOReserva.Models.ReservaHabitacion.CReservaHabitacion>
+﻿@model List<FOReserva.Models.ReservaHabitacion.CReservaHabitacion>
 
 
 @if (Model != null)
@@ -8,8 +8,8 @@
         
     
     <div>
-        <div class="col-xs-12">
-            <h2 class="color-azul">Historial de reservas de Habitacion.</h2>
+        <div class="col-xs-12 heading-title">
+            <h3> <span>Reserva de Habitacion: <small>Historial de reservas de Habitacion.</small></span></h3>
         </div>
     </div>
     <!-- HTML DATATABLES -->
@@ -48,7 +48,14 @@
         </tbody>
     </table>
 
-    <script type="text/javascript" src="@Url.Content("~/Content/assets/js/scripts.js")"></script>
+        <!-- JS DATATABLES -->
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/jquery.dataTables.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/dataTables.tableTools.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/dataTables.colReorder.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/dataTables.scroller.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/dataTables.bootstrap.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/select2/js/select2.full.min.js")"></script>
+
     <script type="text/javascript">
         function initTable1() {
             var table = jQuery('#sample_1');
@@ -77,6 +84,7 @@
                     "infoFiltered": "",
                     "search": ""
                 },
+                "bDestroy": true,
                 "order": [
                     [0, 'asc']
                 ],
@@ -114,6 +122,8 @@
             var tableWrapper = jQuery('#sample_1_wrapper'); // datatable creates the table wrapper by adding with id {your_table_jd}_wrapper
 
             tableWrapper.find('.dataTables_length select').select2(); // initialize select2 dropdown
+
+            $("#sample_1_length > label > select option[value=5]").attr("selected", true).change()
         }
 
         // Table Init
@@ -124,4 +134,3 @@ else
 {
     <p>No se pudo cargar el contenido.</p>
 }
-
