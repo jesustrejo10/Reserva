@@ -14,9 +14,9 @@ namespace BOReserva.Models.gestion_ruta_comercial
 
         public String _destinoRuta { get; set; }
 
-        public List<SelectListItem> _lorigenRuta { get; set; }
+        public IEnumerable<SelectListItem> _lorigenRuta { get; set; }
 
-        public List<SelectListItem> _ldestinoRuta { get; set; }
+        public IEnumerable<SelectListItem> _ldestinoRuta { get; set; }
 
         public String _tipoRuta { get; set; }
 

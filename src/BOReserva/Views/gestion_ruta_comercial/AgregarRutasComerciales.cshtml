@@ -1,12 +1,13 @@
 ﻿@model BOReserva.Models.gestion_ruta_comercial.CAgregarRuta
 
+<script src="~/Scripts\Scripts_Rutas\llamadas_generales_ruta.js"></script>
+
 
 @{
     
     List<SelectListItem> listTipo = new List<SelectListItem>();
     List<SelectListItem> listEstado = new List<SelectListItem>();
-    List<SelectListItem> listOrigen = new List<SelectListItem>();
-    listOrigen = Model._lorigenRuta;
+    IEnumerable<SelectListItem> listOrigen = Model._lorigenRuta;
     
 
     listTipo.Add(new SelectListItem
@@ -45,10 +46,12 @@
     @Html.DropDownListFor(m => m._estadoRuta, listEstado, new { @class = "form-control", @placeholder = "Aérea", @id = "rutaTipo" })
     <br />
     <label>Elegir Origen de la Ruta (*)</label>
-    @Html.DropDownListFor(m => m._origenRuta, listOrigen, new { @class = "form-control", @placeholder = "Ejem.: Caracas - Venezuela", @id = "rutaOrigen" })
+    @Html.DropDownListFor(m => m._origenRuta, new SelectList(Model._lorigenRuta as System.Collections.IEnumerable, "Value", "Text"),
+              "Seleccione una ciudad origen", new { @class = "form-control", @id = "ciudadO", @style = "width: 100%;" })
     <br />
     <label>Elegir Destino de la Ruta (*)</label>
-    @Html.DropDownListFor(m => m._destinoRuta, listOrigen, new { @class = "form-control", @placeholder = "Ejem.: Caracas - Venezuela", @id = "rutaDestino" })
+    @Html.DropDownListFor(m => m._destinoRuta, new SelectList(Enumerable.Empty<SelectListItem>(), "Value", "Text"),
+                                "Seleccione una ciudad destino", new { @class = "form-control", @id = "ciudadD", @style = "width: 100%;" })
     <br />
     <label>Agregar distancia de la Ruta (*)</label>
     @Html.TextBoxFor(m => m._distanciaRuta, null, new { @class = "form-control", @placeholder = "1200 KM", @id = "rutaDistancia" })

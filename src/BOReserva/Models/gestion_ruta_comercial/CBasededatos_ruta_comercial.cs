@@ -168,6 +168,43 @@ namespace BOReserva.Models.gestion_ruta_comercial
                 throw e;
             }
         }
+
+
+        public List<String> consultarDestinos(String origen)
+        {
+            String[] strOri = origen.Split(new[] { " - " }, StringSplitOptions.None);
+            var lugares = new List<String>();
+            String lugar;
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                con = new SqlConnection(connetionString);
+                //INTENTO abrir la conexion
+                con.Open();
+                String query = "SELECT l.lug_nombre as ciudad, ll.lug_nombre as pais from Lugar l, Lugar ll where l.lug_FK_lugar_id = ll.lug_id and l.lug_nombre != '"+ strOri[0]+"'";
+                SqlCommand cmd = new SqlCommand(query, con);
+                SqlDataReader lector = cmd.ExecuteReader();
+                while (lector.Read())
+                {
+                    lugar = lector["ciudad"].ToString() + " - " + lector["pais"].ToString();
+                    lugares.Add(lugar);
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                con.Close();
+                return lugares;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
         
         
     }

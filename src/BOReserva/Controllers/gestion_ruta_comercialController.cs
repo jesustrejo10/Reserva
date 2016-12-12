@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using BOReserva.Models.gestion_ruta_comercial;
 using BOReserva.Servicio;
+using System.Net;
 
 namespace BOReserva.Controllers
 {
@@ -16,35 +17,46 @@ namespace BOReserva.Controllers
         {
             List<String> lista = new List<string>();
             
+            CAgregarRuta ruta = new CAgregarRuta();
+            
             CBasededatos_ruta_comercial sql = new CBasededatos_ruta_comercial();                       
 
             lista = sql.listarLugares();
 
-            List<SelectListItem> list = lista.ConvertAll(a =>
-                                {
-                                    return new SelectListItem()
-                                    {
-                                        Text = a.ToString(),
-                                        Value = a.ToString(),
-                                        Selected = false
-                                    };
-                                
-                                });
-            
-            
-            CAgregarRuta ruta = new CAgregarRuta();
-            ruta._lorigenRuta = list;
-            ruta._ldestinoRuta = list;
+            ruta._lorigenRuta = lista.Select(x => new SelectListItem
+                {
+                    Value = x,
+                    Text = x
+                });         
             return PartialView(ruta);
         }
 
-        public JsonResult cargarOrigenes(String tipo) {
-            List<SelectListItem> origenes = new List<SelectListItem>();
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult cargarDestinos(string ciudadO)
+        {
+            CAgregarRuta model = new CAgregarRuta();
+            List<String> resultado = new List<String>();
+            CBasededatos_ruta_comercial sql = new CBasededatos_ruta_comercial();                       
 
 
+            resultado = sql.consultarDestinos(ciudadO);
 
-            return Json(new SelectList(origenes, "Value", "Text"));
-        
+            model._ldestinoRuta = resultado.Select(m => new SelectListItem
+            {
+                Value = m,
+                Text = m
+            });
+
+            if (resultado != null)
+            {
+                return (Json(model._ldestinoRuta, JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error accediendo a la BD";
+                return Json(error);
+            }
         }
 
 
