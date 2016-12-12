@@ -1370,10 +1370,8 @@
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Crear.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_ModificarHotel.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Desactivar.cshtml" />
-    <Content Include="Views\gestion_comida_vuelo\M06_AgregarComida.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarPorVuelo.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_EditarComida.cshtml" />
-    <Content Include="Views\gestion_comida_vuelo\M06_AgregarEditarComida.cshtml" />
     <Content Include="Views\gestion_seguridad_ingreso\M01_Login.cshtml" />
     <Content Include="Views\gestion_seguridad_ingreso\M01_RecuperarContrasenna.cshtml" />
     <Content Include="Views\gestion_usuarios\M12_Index.cshtml" />
