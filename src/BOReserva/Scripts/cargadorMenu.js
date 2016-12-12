@@ -43,17 +43,10 @@
                 }
             });
     });
-<<<<<<< HEAD
 
-
-    $("#m04_crearvuelo").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_vuelo/M04_GestionVuelo_Crear';
-=======
     $("#m02_VisualizarAvion").click(function (e) {
         e.preventDefault();
         var url = '/gestion_aviones/M02_VisualizarAviones';
->>>>>>> Develop
         var method = 'GET';
         var data = '';
 
@@ -71,16 +64,8 @@
                     alert(errorThrown);
                 }
             });
-<<<<<<< HEAD
     });
-    $("#m04_visualizarvuelo").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_vuelo/M04_GestionVuelo_Visualizar';
-        var method = 'GET';
-        var data = '';
-=======
 
-    });
     //FIN DE AVIONES
 
     //INICIO DE RUTAS
@@ -89,8 +74,6 @@
         var url = '/gestion_ruta_comercial/AgregarRutasComerciales';
         var method = 'GET';
         var data = '';
-
->>>>>>> Develop
         $.ajax(
             {
                 url: url,
@@ -106,7 +89,6 @@
                 }
             });
 
-<<<<<<< HEAD
         //e.preventDefault();
         //var url = '/gestion_vuelo/M04_VisualizarVuelo';
         //var method = 'GET';
@@ -128,10 +110,6 @@
         //        }
         //    });
 
-    });
-
-    
-=======
     });
     $("#m03VisualizarRutas").click(function (e) {
 
@@ -159,7 +137,6 @@
     //FIN DE RUTAS
 
     //INICIO AUTOMOVILES
->>>>>>> Develop
     $("#m08AgregarAutomovil").click(function (e) {
         e.preventDefault();
         var url = '/gestion_automoviles/M08_AgregarAutomovil';
@@ -182,9 +159,6 @@
             });
 
     });
-
-
-
     $("#m08VisualizarAutomoviles").click(function (e) {
         e.preventDefault();
         var url = '/gestion_automoviles/M08_VisualizarAutomoviles';
@@ -318,7 +292,6 @@
                 }
             });
     });
-
     $("#consultarhotel").click(function (e) {
         e.preventDefault();
         var url = '/gestion_hoteles/M09_GestionHoteles_Visualizar';
@@ -571,5 +544,51 @@
     });
     //FIN M13 ROLES
 
+    //M04 vuelos
+    $("#m04_crearvuelo").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_vuelos/M04_GestionVuelo_Crear';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+
+    });
+    $("#m04_isualizarvuelo").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_vuelo/M08_estionVuelo_Mostrar';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+
+    });
+    //FIN M04 vuelos
 
 });
