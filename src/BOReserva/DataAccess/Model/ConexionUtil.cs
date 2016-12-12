@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.Models
+namespace BOReserva.DataAccess
 {
-    public class Vehicle
+    public class ConexionUtil
     {
-        public String prueba { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Collections;
 using System.Data.SqlClient;
@@ -10,8 +10,10 @@ using BOReserva.Models.gestion_hoteles;
 using BOReserva.Models.gestion_restaurantes;
 using BOReserva.Models.gestion_lugares;
 using BOReserva.Models.gestion_ruta_comercial;
+using BOReserva.Models.gestion_ofertas;
 using BOReserva.Models.gestion_roles;
 using System.Diagnostics;
+using BOReserva.Models.gestion_automoviles;
 
 namespace BOReserva.Servicio
 {
@@ -27,7 +29,12 @@ namespace BOReserva.Servicio
         //string que contendra la conexion a la bd
         private string stringDeConexion = null;
 
-        //Procedimiento del Modulo 2 para agregar aviones a la base de datos.
+
+        /// <summary>
+        /// Procedimiento del Modulo 2 para agregar aviones a la base de datos.
+        /// </summary>
+        /// <param name="model">CAgregarAvion</param>
+        /// <returns>Boolean. Retorna true si agregó correctamente a la bbdd o false en caso contrario</returns>
         public Boolean insertarAvion(CAgregarAvion model)
         {
             try
@@ -64,7 +71,10 @@ namespace BOReserva.Servicio
 
         }
 
-        //Procedimiento del Modulo 2 para retornar una lista con los aviones en la bd
+        /// <summary>
+        /// Procedimiento del Modulo 2 para retornar una lista con los aviones en la base de datos
+        /// </summary>
+        /// <returns> List<CAvion> la lista de aviones en la base de datos</returns>
         public List<CAvion> listarAvionesEnBD()
         {
             List<CAvion> aviones = new List<CAvion>();
@@ -80,9 +90,9 @@ namespace BOReserva.Servicio
                 while (lector.Read())
                 {
                     CAvion avion = new CAvion(Int32.Parse(lector["avi_id"].ToString()), lector["avi_matricula"].ToString(),
-                    lector["avi_modelo"].ToString(), Int32.Parse(lector["avi_pasajeros_turista"].ToString()), 
-                    Int32.Parse(lector["avi_pasajeros_ejecutiva"].ToString()), Int32.Parse(lector["avi_pasajeros_vip"].ToString()), 
-                    float.Parse(lector["avi_cap_equipaje"].ToString()), float.Parse(lector["avi_max_dist"].ToString()), 
+                    lector["avi_modelo"].ToString(), Int32.Parse(lector["avi_pasajeros_turista"].ToString()),
+                    Int32.Parse(lector["avi_pasajeros_ejecutiva"].ToString()), Int32.Parse(lector["avi_pasajeros_vip"].ToString()),
+                    float.Parse(lector["avi_cap_equipaje"].ToString()), float.Parse(lector["avi_max_dist"].ToString()),
                     float.Parse(lector["avi_max_vel"].ToString()), float.Parse(lector["avi_max_comb"].ToString()),
                     Int32.Parse(lector["avi_disponibilidad"].ToString()));
                     aviones.Add(avion);
@@ -94,7 +104,7 @@ namespace BOReserva.Servicio
                 return aviones;
 
             }
-            catch ( SqlException e)
+            catch (SqlException e)
             {
                 throw e;
             }
@@ -104,22 +114,26 @@ namespace BOReserva.Servicio
             }
         }
 
-        //Procedimiento del Modulo 2 para retornar un objeto del tipo CAvion buscado por su respectiva id
+        /// <summary>
+        /// Procedimiento del Modulo 2 para retornar un objeto del tipo CAvion buscado por su respectiva id
+        /// </summary>
+        /// <param name="id"> int </param>
+        /// <returns> CAvion el avion buscado</returns>
         public CAvion consultarAvion(int id)
         {
-            CAvion avionRetorno = new CAvion();
+            CAvion avionRetorno = null;
             try
             {
                 //Inicializo la conexion con el string de conexion
                 conexion = new SqlConnection(stringDeConexion);
                 //INTENTO abrir la conexion
                 conexion.Open();
-                String query = "SELECT * FROM Avion where avi_id = "+id;
+                String query = "SELECT * FROM Avion where avi_id = " + id;
                 SqlCommand cmd = new SqlCommand(query, conexion);
                 SqlDataReader lector = cmd.ExecuteReader();
                 while (lector.Read())
                 {
-                    
+
                     CAvion avion = new CAvion(Int32.Parse(lector["avi_id"].ToString()), lector["avi_matricula"].ToString(),
                     lector["avi_modelo"].ToString(), Int32.Parse(lector["avi_pasajeros_turista"].ToString()),
                     Int32.Parse(lector["avi_pasajeros_ejecutiva"].ToString()), Int32.Parse(lector["avi_pasajeros_vip"].ToString()),
@@ -146,7 +160,11 @@ namespace BOReserva.Servicio
         }
 
 
-        //Procedimiento del Modulo 2 para modificar un avion
+        /// <summary>
+        /// Procedimiento del Modulo 2 para modificar un avion
+        /// </summary>
+        /// <param name="model"> CModificarAvion </param>
+        /// <returns> Boolean true si se modifico bien, false si no </returns>
         public Boolean modificarAvion(CModificarAvion model)
         {
             try
@@ -155,7 +173,7 @@ namespace BOReserva.Servicio
                 conexion = new SqlConnection(stringDeConexion);
                 //INTENTO abrir la conexion
                 conexion.Open();
-                String query = "UPDATE Avion SET avi_modelo='"+model._modeloAvion+"', avi_pasajeros_turista="+model._capacidadPasajerosTurista+", avi_pasajeros_ejecutiva="+model._capacidadPasajerosEjecutiva+", avi_pasajeros_vip='"+model._capacidadPasajerosVIP+"', avi_cap_equipaje="+model._capacidadEquipaje+", avi_max_dist="+model._distanciaMaximaVuelo+", avi_max_vel="+model._velocidadMaximaDeVuelo+", avi_max_comb="+model._capacidadMaximaCombustible+" WHERE (avi_matricula='"+model._matriculaAvion+"')";
+                String query = "UPDATE Avion SET avi_modelo='" + model._modeloAvion + "', avi_pasajeros_turista=" + model._capacidadPasajerosTurista + ", avi_pasajeros_ejecutiva=" + model._capacidadPasajerosEjecutiva + ", avi_pasajeros_vip='" + model._capacidadPasajerosVIP + "', avi_cap_equipaje=" + model._capacidadEquipaje + ", avi_max_dist=" + model._distanciaMaximaVuelo + ", avi_max_vel=" + model._velocidadMaximaDeVuelo + ", avi_max_comb=" + model._capacidadMaximaCombustible + " WHERE (avi_matricula='" + model._matriculaAvion + "')";
                 SqlCommand cmd = new SqlCommand(query, conexion);
                 SqlDataReader lector = cmd.ExecuteReader();
                 conexion.Close();
@@ -172,7 +190,11 @@ namespace BOReserva.Servicio
             }
         }
 
-        //Procedimiento del Modulo 2 para deshabilitar un avion
+        /// <summary>
+        /// Procedimiento del Modulo 2 para deshabilitar un avion
+        /// </summary>
+        /// <param name="id"> int </param>
+        /// <returns>Boolean true si se deshabilito bien, false si dio un error </returns>
         public Boolean deshabilitarAvion(int id)
         {
             try
@@ -181,7 +203,7 @@ namespace BOReserva.Servicio
                 conexion = new SqlConnection(stringDeConexion);
                 //INTENTO abrir la conexion
                 conexion.Open();
-                String query = "UPDATE Avion SET avi_disponibilidad=0 where avi_id="+id;
+                String query = "UPDATE Avion SET avi_disponibilidad=0 where avi_id=" + id;
                 SqlCommand cmd = new SqlCommand(query, conexion);
                 SqlDataReader lector = cmd.ExecuteReader();
                 conexion.Close();
@@ -198,7 +220,11 @@ namespace BOReserva.Servicio
             }
         }
 
-        //Procedimiento del Modulo 2 para habilitar un avion
+        /// <summary>
+        /// Procedimiento del Modulo 2 para habilitar un avion
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>Boolean true si se habilito bien, false si dio un error </returns>
         public Boolean habilitarAvion(int id)
         {
             try
@@ -225,6 +251,234 @@ namespace BOReserva.Servicio
         }
 
 
+        //Procedimiento del Modulo 11 para agregar ofertas a la base de datos.
+        public Boolean agregarOferta(CAgregarOferta model)
+        {
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                SqlCommand query = conexion.CreateCommand();
+                query.CommandText = "INSERT INTO Oferta VALUES ('" + model._nombreOferta + "','" + model.formatDate(model._fechaIniOferta) + "', '" + model.formatDate(model._fechaFinOferta) + "'," + model._porcentajeOferta + ",'" + model._estadoOferta + "');";
+                SqlDataReader lector = query.ExecuteReader();
+                lector.Close();
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+        }
+
+        public Boolean desactivarOferta(int ofertaId)
+        {
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                SqlCommand query = conexion.CreateCommand();
+                query.CommandText = "UPDATE Oferta SET of_estado = 0 WHERE of_id=" + ofertaId;
+                SqlDataReader lector = query.ExecuteReader();
+                lector.Close();
+                SqlCommand query1 = conexion.CreateCommand();
+                query1.CommandText = "UPDATE Paquete SET pa_fk_oferta = null WHERE pa_fk_oferta=" + ofertaId;
+                SqlDataReader lector1 = query1.ExecuteReader();
+                lector1.Close();
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        public Boolean activarOferta(int ofertaId)
+        {
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                SqlCommand query = conexion.CreateCommand();
+                query.CommandText = "UPDATE Oferta SET of_estado = 1 WHERE of_id=" + ofertaId;
+                SqlDataReader lector = query.ExecuteReader();
+                lector.Close();
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        //Metodo para mostrar paquetes al momento de agregar una oferta
+        public List<CPaquete> listarPaquetesEnBD()
+        {
+            List<CPaquete> paquetesList = new List<CPaquete>();
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "SELECT * FROM Paquete WHERE pa_fk_oferta = null";
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                while (lector.Read())
+                {
+                    CPaquete paquete = new CPaquete(Int32.Parse(lector["pa_codigo"].ToString()), lector["pa_nombre"].ToString(),
+                    float.Parse(lector["pa_precio"].ToString()));
+                    paquetesList.Add(paquete);
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return paquetesList;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public List<CPaquete> listarPaquetesPorOferta(int ofertaId)
+        {
+            List<CPaquete> paquetesList = new List<CPaquete>();
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "SELECT * FROM Paquete WHERE pa_fk_oferta = " + ofertaId;
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                while (lector.Read())
+                {
+                    CPaquete paquete = new CPaquete(Int32.Parse(lector["pa_id"].ToString()), lector["pa_nombre"].ToString(),
+                    float.Parse(lector["pa_precio"].ToString()));
+                    paquetesList.Add(paquete);
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return paquetesList;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public List<COferta> listarOfertasEnBD()
+        {
+            List<COferta> ofertasList = new List<COferta>();
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "SELECT * FROM Oferta";
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                while (lector.Read())
+                {
+                    String estado = lector["of_estado"].ToString();
+                    bool estadoOferta;
+                    if (estado == "True")
+                        estadoOferta = true;
+                    else
+                        estadoOferta = false;
+
+                    COferta oferta = new COferta(Int32.Parse(lector["of_id"].ToString()), lector["of_nombre"].ToString(),
+                    float.Parse(lector["of_porcentaje"].ToString()), Convert.ToDateTime(lector["of_fechaInicio"].ToString()),
+                    Convert.ToDateTime(lector["of_fechaFin"].ToString()), estadoOferta);
+                    ofertasList.Add(oferta);
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return ofertasList;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        //Procedimiento del Modulo 11 para asociar ofertas a paquetes.
+        public Boolean asociarOfertaPaquete(int[] idsPaquetes)
+        {
+            try
+            {
+                //Obtengo el id de la oferta agregada
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                SqlCommand query = conexion.CreateCommand();
+                query.CommandText = "SELECT IDENT_CURRENT('Oferta');";
+                int idOferta = Convert.ToInt32(query.ExecuteScalar());
+                conexion.Close();
+                foreach (int idPaquete in idsPaquetes)
+                {
+                    conexion.Open();
+                    SqlCommand query1 = conexion.CreateCommand();
+                    query1.CommandText = "UPDATE Paquete SET pa_fk_oferta = " + idOferta + " WHERE pa_id = " + idPaquete + ";";
+                    SqlDataReader lector1 = query1.ExecuteReader();
+                    lector1.Close();
+                    conexion.Close();
+                }
+
+                return true;
+            }
+            catch (SqlException e)
+            {
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+        }
+
+        //Fin modulo 11
+
+
+
         //Procedimiento del Modulo 9 para agregar hoteles a la base de datos.
         public Boolean insertarHotel(CGestionHoteles_CrearHotel model)
         {
@@ -237,8 +491,8 @@ namespace BOReserva.Servicio
                 //uso el SqlCommand para realizar los querys
                 SqlCommand query = conexion.CreateCommand();
                 //ingreso la orden del query
-                query.CommandText = "INSERT INTO Hotel VALUES ('" + model._nombre + "','" + model._estrellas + "'," 
-                    + model._puntuacion + " , " + model._direccion + "," + model._paginaWeb +  ");";
+                query.CommandText = "INSERT INTO Hotel VALUES ('" + model._nombre + "','" + model._estrellas + "',"
+                    + model._puntuacion + " , " + model._direccion + "," + model._paginaWeb + ");";
                 //creo un lector sql para la respuesta de la ejecucion del comando anterior               
                 SqlDataReader lector = query.ExecuteReader();
                 //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
@@ -266,8 +520,8 @@ namespace BOReserva.Servicio
         //Modulo 3 insertar nueva ruta
 
         public Boolean InsertarRuta(CAgregarRuta model)
-        {           
-            
+        {
+
             conexion = new SqlConnection(stringDeConexion);
 
             conexion.Open();
@@ -276,9 +530,9 @@ namespace BOReserva.Servicio
 
             String[] strDes = model._destinoRuta.Split(new[] { " - " }, StringSplitOptions.None);
             String[] strOri = model._origenRuta.Split(new[] { " - " }, StringSplitOptions.None);
-            
-            
-            
+
+
+
             String dist = model._distanciaRuta.ToString();
             String miquery = "EXEC M03_AgregarRuta '" + strOri[0] + "','" + strOri[1] + "','" + strDes[0] + "' , '" + strDes[1] + "', '" + model._tipoRuta + "', '" + model._estadoRuta + "', " + dist;
             System.Diagnostics.Debug.WriteLine(miquery);
@@ -292,8 +546,8 @@ namespace BOReserva.Servicio
 
             return true;
         }
-    
-        
+
+
         /* INICIO DE FUNCIONES PARA MODULO 10 BO (RESTAURANTES) */
         //Método del Modulo 10 (Backoffice) para agregar restaurantes a la base de datos.
 
@@ -309,7 +563,7 @@ namespace BOReserva.Servicio
                 SqlCommand query = conexion.CreateCommand();
                 //ingreso la orden del query
                 query.CommandText = "INSERT INTO Restaurante VALUES ('" + model._nombre + "', '" + model._direccion + "', '"
-                    + model._descripcion + "' , '" + model._horarioApertura + "' ,'" + model._horarioCierre + "', " 
+                    + model._descripcion + "' , '" + model._horarioApertura + "' ,'" + model._horarioCierre + "', "
                     + model._idLugar.ToString() + ")";
                 //creo un lector sql para la respuesta de la ejecucion del comando anterior
                 SqlDataReader lector = query.ExecuteReader();
@@ -346,11 +600,11 @@ namespace BOReserva.Servicio
                 //uso el SqlCommand para realizar los querys
                 SqlCommand query = conexion.CreateCommand();
                 //ingreso la orden del query
-                query.CommandText = "SELECT * FROM Restaurante WHERE rst_id = " + id.ToString() ;
+                query.CommandText = "SELECT * FROM Restaurante WHERE rst_id = " + id.ToString();
                 //creo un lector sql para la respuesta de la ejecucion del comando anterior               
                 SqlDataReader lector = query.ExecuteReader();
                 //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
-                while(lector.Read())
+                while (lector.Read())
                 {
                     entrada = new CRestauranteModelo
                     {
@@ -622,13 +876,10 @@ namespace BOReserva.Servicio
         }
 
 
-        //Procedimiento del Modulo 13 para retornar lista de los modulos generales
+ //Procedimiento del Modulo 13 para retornar lista de los modulos generales
         public CListaGenerica<CModulo_general> consultarLosModulos()
         {
             CListaGenerica<CModulo_general> modulo_general = new CListaGenerica<CModulo_general>();
-            String nombre_modulo;
-
-
             try
             {
                 //Inicializo la conexion con el string de conexion
@@ -643,12 +894,7 @@ namespace BOReserva.Servicio
                 while (lector.Read())
                 {
                     var entrada = new CModulo_general();
-                    {
-                        entrada.Nombre = lector.GetSqlString(0).ToString();
-
-
-                    };
-
+                    entrada.Nombre = lector.GetSqlString(0).ToString();
                     modulo_general.agregarElemento(entrada);
                 }
                 //cierro el lector
@@ -656,7 +902,6 @@ namespace BOReserva.Servicio
                 //Cerrar la conexion
                 conexion.Close();
                 return modulo_general;
-
             }
             catch (SqlException e)
             {
@@ -667,20 +912,21 @@ namespace BOReserva.Servicio
                 throw e;
             }
         }
+
         //Procedimiento del Modulo 13 para retornar lista de los modulos detallados
         public CListaGenerica<CModulo_detallado> consultarPermisos(String modulo)
         {
             CListaGenerica<CModulo_detallado> modulo_detallado = new CListaGenerica<CModulo_detallado>();
             try
             {
-                
+
                 //Inicializo la conexion con el string de conexion
                 conexion = new SqlConnection(stringDeConexion);
                 //Abrir la conexion
                 conexion.Open();
                 //query es un string que me devolvera la consulta 
                 System.Diagnostics.Debug.WriteLine(modulo);
-                String query = "SELECT mod_det_nombre,mod_det_url FROM Modulo_Detallado,Modulo_general WHERE mod_gen_id=fk_mod_gen_id and mod_gen_nombre='"+modulo+"'" ;
+                String query = "SELECT mod_det_nombre,mod_det_url FROM Modulo_Detallado,Modulo_general WHERE mod_gen_id=fk_mod_gen_id and mod_gen_nombre='" + modulo + "'";
                 SqlCommand cmd = new SqlCommand(query, conexion);
                 SqlDataReader lector = cmd.ExecuteReader();
                 //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
@@ -688,9 +934,9 @@ namespace BOReserva.Servicio
                 {
                     var entrada = new CModulo_detallado();
                     entrada.Nombre = lector.GetSqlString(0).ToString();
-                    entrada.Url= lector.GetSqlString(1).ToString();
+                    entrada.Url = lector.GetSqlString(1).ToString();
                     modulo_detallado.agregarElemento(entrada);
-                   
+
                 }
                 //cierro el lector
                 lector.Close();
@@ -908,5 +1154,415 @@ namespace BOReserva.Servicio
         
         
         /* FIN DE FUNCIONES COMUNES */
+
+
+        /* MODULO 8 GESTION DE AUTOMOVILES*/
+        /// <summary>
+        /// Método que agrega un vehículo a la base de datos
+        /// </summary>
+        /// <param name="vehiculo">Vehículo a agregar a la base de datos</param>
+        /// <param name="id">El id de la ciudad a donde será agregado</param>
+        /// <returns>Retorna 1 si se agregó exitosamente y retorna 0 si no lo pudo hacer</returns>
+        public int MAgregarVehiculoBD(Automovil vehiculo, int id)
+        {
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "INSERT INTO Automovil VALUES ('" + vehiculo._matricula + "', '" + vehiculo._modelo + "', '" + vehiculo._fabricante + "', " + vehiculo._anio + ", " + vehiculo._kilometraje + ", " + vehiculo._cantpasajeros + ", '" + vehiculo._tipovehiculo +
+                    "', " + vehiculo._preciocompra + ", " + vehiculo._precioalquiler + ", " + vehiculo._penalidaddiaria + ", '" + vehiculo._fecharegistro + "', '" + vehiculo._color + "', " + 1 + ", '" + vehiculo._transmision + "', " + id + ")";
+                Debug.WriteLine(sql);
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                conexion.Close();
+                return 1;
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return 0;
+            }
+        }
+
+
+        /// <summary>
+        /// Método que modifica un vehículo existente de la base de datos
+        /// </summary>
+        /// <param name="vehiculo">Vehículo a modificar de la base de datos</param>
+        /// <param name="id">El id de la ciudad a donde se ubica</param>
+        /// <returns>Retorna 1 si se modificó exitosamente y retorna 0 si no lo pudo hacer</returns>
+        public int MModificarVehiculoBD(Automovil vehiculo, int id)
+        {
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "UPDATE Automovil SET aut_modelo ='" + vehiculo._modelo + "', aut_fabricante = '" + vehiculo._fabricante + "', aut_anio = " + vehiculo._anio + ", aut_kilometraje = " + vehiculo._kilometraje + ", aut_cantpasajeros = " + vehiculo._cantpasajeros + ", aut_tipovehiculo = '" + vehiculo._tipovehiculo +
+                    "', aut_preciocompra = " + vehiculo._preciocompra + ", aut_precioalquiler = " + vehiculo._precioalquiler + ", aut_penalidaddiaria = " + vehiculo._penalidaddiaria + ", aut_fecharegistro = '" + vehiculo._fecharegistro + "', aut_color = '" + vehiculo._color + "', aut_transmision = '" + vehiculo._transmision + "', aut_fk_ciudad = " + id +
+                    " WHERE aut_matricula = '" + vehiculo._matricula + "'";
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                conexion.Close();
+                return 1;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return 0;
+            }
+        }
+
+
+        /// <summary>
+        /// Método que lista todos los vehículos de la base de datos
+        /// </summary>
+        /// <returns>Retorna una lista de tipo Automovil</returns>
+        public List<Automovil> MListarvehiculosBD()
+        {
+            List<Automovil> listavehiculos = new List<Automovil>();
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "SELECT * FROM Automovil";
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        //SE AGREGA CREA UN OBJECTO VEHICLE SE PASAN LOS ATRIBUTO ASI reader["<etiqueta de la columna en la tabla Automovil>"]
+                        //Y  SE AGREGA a listavehiculos
+                        var fecha = reader["aut_fecharegistro"];
+                        DateTime fecharegistro = Convert.ToDateTime(fecha).Date;
+                        Automovil vehiculo = new Automovil(reader["aut_matricula"].ToString(), reader["aut_modelo"].ToString(), reader["aut_fabricante"].ToString(),
+                                               Int32.Parse(reader["aut_anio"].ToString()), reader["aut_tipovehiculo"].ToString(),
+                                               double.Parse(reader["aut_kilometraje"].ToString()), Int32.Parse(reader["aut_cantpasajeros"].ToString()),
+                                               double.Parse(reader["aut_preciocompra"].ToString()), double.Parse(reader["aut_precioalquiler"].ToString()),
+                                               double.Parse(reader["aut_penalidaddiaria"].ToString()), fecharegistro,
+                                               reader["aut_color"].ToString(), Int32.Parse(reader["aut_disponibilidad"].ToString()), reader["aut_transmision"].ToString(),
+                                               MBuscarnombreciudadBD(Int32.Parse(reader["aut_fk_ciudad"].ToString())), MBuscarnombrePaisBD(Int32.Parse(reader["aut_fk_ciudad"].ToString()))
+                                               );
+                        listavehiculos.Add(vehiculo);
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return listavehiculos;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return null;
+            }
+        }
+
+
+        /// <summary>
+        /// Método para buscar un vehículo en particular de la base de datos
+        /// </summary>
+        /// <param name="matricula">La matrícula del vehículo a buscar</param>
+        /// <returns>Retorna un objeto de tipo Automovil</returns>
+        public Automovil MMostrarvehiculoBD(String matricula)
+        {
+            Automovil vehiculo = null;
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "SELECT * FROM Automovil WHERE aut_matricula = '" + matricula + "'";
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var fecha = reader["aut_fecharegistro"];
+                        DateTime fecharegistro = Convert.ToDateTime(fecha).Date;
+                        vehiculo = new Automovil(reader["aut_matricula"].ToString(), reader["aut_modelo"].ToString(), reader["aut_fabricante"].ToString(),
+                                                 Int32.Parse(reader["aut_anio"].ToString()), reader["aut_tipovehiculo"].ToString(),
+                                                 double.Parse(reader["aut_kilometraje"].ToString()), Int32.Parse(reader["aut_cantpasajeros"].ToString()),
+                                                 double.Parse(reader["aut_preciocompra"].ToString()), double.Parse(reader["aut_precioalquiler"].ToString()),
+                                                 double.Parse(reader["aut_penalidaddiaria"].ToString()), fecharegistro,
+                                                 reader["aut_color"].ToString(), Int32.Parse(reader["aut_disponibilidad"].ToString()), reader["aut_transmision"].ToString(),
+                                                 MBuscarnombreciudadBD(Int32.Parse(reader["aut_fk_ciudad"].ToString())), MBuscarnombrePaisBD(Int32.Parse(reader["aut_fk_ciudad"].ToString()))
+                                                 );
+                    }
+                    cmd.Dispose();
+                    conexion.Close();
+                    return vehiculo;
+                }
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return null;
+            }
+        }
+
+
+        /// <summary>
+        /// Método que busca en la base de datos el identificador de una ciudad
+        /// </summary>
+        /// <param name="ciudad">Ciudad cuyo identificador se desea conocer</param>
+        /// <param name="pais">País en donde se ubica la ciudad</param>
+        /// <returns>Retorna el identificador de la ciudad</returns>
+        public int MBuscaridciudadBD(String ciudad, String pais)
+        {
+            int id_ciudad = 12;
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "SELECT d.lug_id FROM LUGAR C, LUGAR D WHERE C.lug_id = d.lug_FK_lugar_id AND C.lug_nombre = '" + pais + "' and D.lug_nombre = '" + ciudad + "'"; /*ESTE SQL ES EN CASO DE QUE NO SE MANEJE AL FINAL ESTADOS SINO SOLO PAISES Y CIUDADES*/
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        id_ciudad = Int32.Parse(reader[0].ToString());
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return id_ciudad;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return id_ciudad;
+            }
+        }
+
+
+
+        /// <summary>
+        /// Método para borrar un vehículo de la base de datos
+        /// </summary>
+        /// <param name="matricula">Matrícula del vehículo a borrar</param>
+        /// <returns>Retorna 1 si se eliminó exitosamente y retorna 0 si no lo pudo hacer</returns>
+        public int MBorrarvehiculoBD(String matricula)
+        {
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "DELETE FROM Automovil WHERE aut_matricula = '" + matricula + "'";
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                conexion.Close();
+                return 1;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return 0;
+            }
+        }
+
+
+        /// <summary>
+        /// Método para buscar el nombre de una ciudad en la base de datos
+        /// </summary>
+        /// <param name="id">Identificador de la ciudad a buscar</param>
+        /// <returns>Retorna el nombre de la ciudad</returns>
+        public String MBuscarnombreciudadBD(int id)
+        {
+            String _ciudad = "Error al buscar";
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "SELECT C.lug_nombre FROM LUGAR C WHERE C.lug_id = '" + id + "'"; ;
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        _ciudad = reader[0].ToString();
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return _ciudad;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return _ciudad;
+            }
+        }
+
+
+
+        /// <summary>
+        /// Método para buscar el nombre de un país
+        /// </summary>
+        /// <param name="ciudad">Identificador de la ciudad que pertenece a dicho país</param>
+        /// <returns>Retorna el nombre de la ciudad</returns>
+        public String MBuscarnombrePaisBD(int ciudad)
+        {
+            String _lugar = "Error al buscar";
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "SELECT E.lug_nombre FROM LUGAR E, LUGAR C WHERE E.lug_id = C.lug_fk_lugar_id " +
+                             "AND C.lug_id = " + ciudad;
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        _lugar = reader[0].ToString();
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return _lugar;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return _lugar;
+            }
+        }
+
+
+
+        /// <summary>
+        /// Método para listar todos los países de la base de datos
+        /// </summary>
+        /// <returns>Retorna un String[] con todos los países</returns>
+        public String[] MListarpaisesBD()
+        {
+            String[] listapaises = new String[5000];
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "SELECT lug_nombre FROM Lugar WHERE lug_tipo_lugar = 'pais'";
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                int i = 0;
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        listapaises[i] = reader[0].ToString();
+                        i++;
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return listapaises;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return null;
+            }
+            catch (InvalidOperationException ex)
+            {
+                conexion.Close();
+                return null;
+            }
+        }
+
+
+        /// <summary>
+        /// Método que retorna el identificador de un país
+        /// </summary>
+        /// <param name="pais">Nombre del país cuyo identificador se desea conocer</param>
+        /// <returns>Retorna el identificador del país</returns>
+        public int MIdpaisesBD(String pais)
+        {
+            int fk = -1;
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "SELECT lug_id FROM Lugar WHERE lug_nombre = '" + pais + "'";
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        fk = Int32.Parse(reader[0].ToString());
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return fk;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return fk;
+            }
+        }
+
+        /// <summary>
+        /// Método para cambiar la disponibilidad de un vehículo de la base de datos
+        /// </summary>
+        /// <param name="matricula">Matrícula del vehículo cuya disponibilidad se desea cambiar</param>
+        /// <param name="activardesactivar">Estatus por el cual se desea cambiar (1 para activar, 0 para desactivar)</param>
+        /// <returns>Retorna 1 si se cambio el estatus exitosamente y retorna 0 si no lo pudo hacer</returns>
+        public int MDisponibilidadVehiculoBD(string matricula, int activardesactivar)
+        {
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "UPDATE Automovil SET aut_disponibilidad = " + activardesactivar + " WHERE aut_matricula = '" + matricula + "'";
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                conexion.Close();
+                return 1;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return 0;
+            }
+        }
+
+
+        /// <summary>
+        /// Método para listar todas las ciudades de un país
+        /// </summary>
+        /// <param name="fk">Identificador de país del cual se desea conocer sus ciudades</param>
+        /// <returns>Retorna una lista de String que posee las ciudades</returns>
+        public List<string> MListarciudadesBD(int fk)
+        {
+            List<String> _ciudades = new List<string>();
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "SELECT lug_nombre FROM Lugar WHERE lug_fk_lugar_id = " + fk;
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        _ciudades.Add(reader[0].ToString());
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return _ciudades;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return _ciudades;
+            }
+        }
+
     }
+
 }

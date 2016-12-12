@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using BOReserva.Models.gestion_seguridad_ingreso;
 
 namespace BOReserva.Models.gestion_usuarios
 {
@@ -282,7 +283,9 @@ namespace BOReserva.Models.gestion_usuarios
         {
             DataTable resultado;
             Parametro parametro;
+          
             CUsuario usuario = new CUsuario();
+
             try
             {
                 List<Parametro> parametros = new List<Parametro>();

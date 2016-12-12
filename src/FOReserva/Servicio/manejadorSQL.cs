@@ -57,7 +57,20 @@ namespace FOReserva.Servicio
             OpenConnection();
             SqlCommand execute = this.Conexion.CreateCommand();
             execute.CommandText = query;
-            return execute.ExecuteReader();
+            SqlDataReader tmp = null;
+            try
+            {
+                tmp = execute.ExecuteReader();
+            }
+            catch (SqlException e)
+            {
+                throw new ManejadorSQLException("Error de conexion con la DB", e);
+            }
+            catch (InvalidOperationException e)
+            {
+                throw new InvalidManejadorSQLException("Operacion invalida en la DB", e);
+            }
+            return tmp;
         }
     }
 }
