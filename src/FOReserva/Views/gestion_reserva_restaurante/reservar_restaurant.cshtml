@@ -1,4 +1,4 @@
-﻿@model FOReserva.Models.Restaurantes.CRestaurantModel
+@model FOReserva.Models.Restaurantes.CRestaurantModel
 @{
     ViewBag.Title = "Reservar Restaurante";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -91,12 +91,11 @@
         </div>
 
     </div>
-
     <div class="col-sm-7">
         <div class="relative">
-            <div style="height: 443.6px;background-image: url('../Images/restaurant_generic.jpg');background-repeat: no-repeat;background-size: cover;">
-                <div class="absolute text-left">
-                    <h2>  <b>@Model.Name</b>  </h2>
+            <div class="descrip-wrapper">
+                <div class="descrip-conten">
+                    <h2><b>@Model.Name</b></h2>
                     <p style="color: #fff;">@Model.CityName</p>
                     <p style="color: #fff;" class="font-lato margin-top-30 size-16 hidden-sm hidden-xs"><b>Dirección: </b> @Model.Addres</p>
                 </div>
@@ -142,7 +141,7 @@
             $(".error").hide();
             $("#name_client").removeClass("has-error");
             $("#reserv_hour").removeClass("has-error");
-            $("#number_person").removeClass("has-error");
+            $("#reserv_date").removeClass("has-error");
 
             //find errors
             var nombre = $("#name_client").val();
@@ -190,4 +189,5 @@
 
 
 </script>
+
 

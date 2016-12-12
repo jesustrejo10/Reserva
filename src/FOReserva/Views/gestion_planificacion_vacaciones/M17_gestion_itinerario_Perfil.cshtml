@@ -1,0 +1,89 @@
+﻿@model FOReserva.Models.Itinerario.Cvista_Itinerario
+
+<script language="JavaScript" type="text/javascript" src="/Scripts/BuscarDestino.js"></script>
+
+
+@using (Html.BeginForm("buscarDestino", "gestion_planificacion_vacaciones", null, FormMethod.Post, new { @id = "formbuscarDestino", @class = "form-horizontal" }))
+{
+
+
+        <!-- FLIP BOX -->
+        <div class="box-light box-icon box-icon-center box-icon-round box-icon-large text-center nomargin">
+            <div class="front">
+                <div class="box1 noradius">
+                    <div class="box-icon-title">
+                        <i class="ico-rounded ico-hover et-calendar"></i>
+                        <h2> PLANIFICA TUS VACACIONES </h2>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /FLIP BOX -->
+
+        <div class="box-light">
+            <!-- .box-light OR .box-dark -->
+
+            <div class="box-inner">
+                @Html.DropDownListFor(m => m.SelectedCiudadIdOrigen , Model.CiudadesOrigen, new {@class = "form-control select2", @onchange = "Cuadro('2013-09-01 19:05:00.000', '2013-09-05 19:05:00.000')", @id = "buscarDestino" })
+               
+
+                <div>
+                    
+                </div>
+                <div class="timeline">
+                    <!-- .timeline-inverse = right position [left on RTL] -->
+                    <!-- ITEM -->
+                    <!-- /ITEM -->
+                    <!-- ITEM -->
+                    <script language="JavaScript" type="text/javascript" src='@Url.Content("~/Scripts/CuadroTexto.js")'></script>
+
+                    <div id="dondepego">
+                    </div>
+
+
+
+
+                    <script type="text/javascript">
+                  
+                            
+                        
+                        //CuadroTexto('10/09/2014','16/10/2014');
+                    </script>
+                    <!-- /ITEM -->
+                    <!-- ITEM -->
+                    <!-- /ITEM -->
+                    <!-- ITEM -->
+                    <!-- /ITEM -->
+                    <div>
+                        <div class="divider"><!-- divider --></div>
+
+                    </div>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary">Descargar</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    <!-- LEFT -->
+    <div class="col-lg-3 col-md-3 col-sm-4 col-lg-pull-9 col-md-pull-9 col-sm-pull-8">
+
+
+
+        <!-- completed -->
+        <div class="margin-bottom-30 text-center">
+            <!-- aqui van los botones de destino -->
+
+
+
+        </div>
+        <!-- /completed -->
+
+
+
+    </div>
+}
