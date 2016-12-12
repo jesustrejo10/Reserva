@@ -501,6 +501,7 @@
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\Scripts_Automoviles\llamadas_comunes_automoviles.js" />
     <Content Include="Scripts\Scripts_Aviones\llamadas_generales.js" />
+    <Content Include="Scripts\Scripts_Cruceros\scripts_cruceros.js" />
     <Content Include="Scripts\Scripts_Hoteles\editar_hotel.js" />
     <Content Include="Scripts\Scripts_CheckIn\BoardingPass.js" />
     <Content Include="Scripts\Scripts_CheckIn\M05_CheckIn.js" />

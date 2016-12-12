@@ -73,7 +73,7 @@
 
 .crStatus {
     width: 170px;
-    display: inline-block;
+    /*display: inline-block;*/
     text-align: center;
 }
 
@@ -86,7 +86,7 @@
 
 .crAcciones {
     width: 170px;
-    display: inline-block;
+    /*display: inline-block;*/
     text-align: center;
 }
 

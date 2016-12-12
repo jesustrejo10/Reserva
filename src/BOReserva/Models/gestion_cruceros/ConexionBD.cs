@@ -168,8 +168,9 @@ namespace BOReserva.Models.gestion_cruceros
             using (comando = new SqlCommand(RecursosCruceros.ListarCabinas, conexion))
             {
                 comando.CommandType = CommandType.StoredProcedure;
-               // conexion.Open();
-                comando.ExecuteNonQuery();
+                comando.Parameters.AddWithValue("@idCrucero", idCrucero);
+                conexion.Open();
+                //comando.ExecuteNonQuery();
                 SqlDataReader reader = comando.ExecuteReader();
 
                 while (reader.Read())

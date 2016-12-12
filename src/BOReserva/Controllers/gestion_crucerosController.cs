@@ -22,14 +22,29 @@ namespace BOReserva.Controllers
         {
             ConexionBD cbd = new ConexionBD();
             VistaListaCrucero vlc = new VistaListaCrucero();
-            CGestion_cabina cabina = new CGestion_cabina();
+            CGestion_cabina cabina = new CGestion_cabina() { cabinas = new List<CGestion_cabina>()};
             //CGestion_crucero crucero = new CGestion_crucero();
             vlc.cruceros = cbd.listarCruceros();
             ViewBag.ShowDropDown = new SelectList(vlc.cruceros, "_idCrucero", "_nombreCrucero");
             //cabina.cabinas = cbd.listarCabinas(crucero._idCrucero);
-            //return PartialView("M24_AgregarCabinas", cabina);
-            return PartialView();
+            return PartialView("M24_AgregarCabinas", cabina);
+            //return PartialView();
         }
+
+        public JsonResult M24_ListarCabinas(int id)
+        {
+            ConexionBD cbd = new ConexionBD();
+            //VistaListaCrucero vlc = new VistaListaCrucero();
+            //CGestion_cabina cabina = new CGestion_cabina();
+            ////CGestion_crucero crucero = new CGestion_crucero();
+            //vlc.cruceros = cbd.listarCruceros();
+            //ViewBag.ShowDropDown = new SelectList(vlc.cruceros, "_idCrucero", "_nombreCrucero");
+            var listaCabinas = cbd.listarCabinas(id);
+            //return Json (new { cabinas = listaCabinas });
+            return (Json(listaCabinas, JsonRequestBehavior.AllowGet));
+            //return PartialView();
+        }
+
 
         public ActionResult M24_ListarCruceros()
         {
