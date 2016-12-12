@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -1701,7 +1701,7 @@
     <Content Include="Content\assets\plugins\bootstrap.daterangepicker\bower.json" />
     <Content Include="Content\assets\plugins\bootstrap.daterangepicker\daterangepicker.scss" />
     <Content Include="Content\assets\plugins\bootstrap.daterangepicker\package.json" />
-    <Content Include="Content\assets\plugins\bootstrap.daterangepicker\README.md" />    
+    <Content Include="Content\assets\plugins\bootstrap.daterangepicker\README.md" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Properties\PublishProfiles\Webdeploy SmarterASP.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
@@ -1738,7 +1738,6 @@
     <Content Include="Views\ajax\dummy-modal-ajax.html" />
     <Content Include="Views\busqueda_compra_boletos\placeholder.html" />
     <Content Include="Views\gestion_planificacion_vacaciones\placeholder.html" />
-    <Content Include="Views\gestion_diario_viaje\placeholder.html" />
     <Content Include="Views\gestion_reclamos\placeholder.html" />
     <Content Include="Views\gestion_reserva_auto\placeholder.html" />
     <Content Include="Views\gestion_reserva_crucero\placeholder.html" />
@@ -3128,7 +3127,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\gestion_diario_viaje\" />
     <Folder Include="Views\registro_autenticacion\" />
   </ItemGroup>
   <ItemGroup>
