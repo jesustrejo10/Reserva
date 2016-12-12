@@ -1007,7 +1007,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-primary" style="float:right;margin-top:10px" data-toggle="modal" data-target=" ">Agregar itinerario</button>
+                                <button type="button" class="btn btn-primary" style="float:right;margin-top:10px" data-toggle="modal" data-target="#createIti ">Agregar itinerario</button>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -1018,89 +1018,75 @@
                 </div>
             </div>
             <!-- CREAR ITINERARIO -->
-            <div class="modal fade" id="createIti" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+             <div class="modal fade" id="createIti" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Editar cabina</h4> </div>
+                            <h4 class="modal-title" id="myModalLabel">Crear itinerario</h4> </div>
                         <div class="modal-body" id="bodyCruc">
-                            <div class="form-group">
-                                <label>Nombre de la cabina:</label>
-                                <input type="text" class="form-control" placeholder="Introduce el nombre de la cabina" value="Nombre de cabina"> </div>
                             <div class="row">
                                 <div class="col-xs-6">
                                     <div class="form-group">
-                                        <label>Precio:</label>
-                                        <input type="number" class="form-control" placeholder="Introduce el precio de la cabina" value="150"> </div>
+                                        <label>Fecha de inicio:</label>
+                                        <div class="input-group date">
+                                            <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
+                                            <input type="text" class="form-control pull-right datepicker" placeholder="Seleccione la fecha"> </div>
+                                    </div>
                                 </div>
                                 <div class="col-xs-6">
                                     <div class="form-group">
-                                        <label>Estado:</label>
-                                        <select class="form-control">
-                                            <option>Inactivo</option>
-                                            <option>Activo</option>
-                                        </select>
+                                        <label>Fecha fin:</label>
+                                        <div class="input-group date">
+                                            <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
+                                            <input type="text" class="form-control pull-right datepicker" placeholder="Seleccione la fecha"> </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> 
                             <hr>
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <p><b>Lista de camarotes:</b></p>
-                                    <ul id="camList">
-                                        <li class="camarote"> Camarote&nbsp;&nbsp;#105 -&nbsp;&nbsp;<i class="fa fa-circle started"></i><i class="fa fa-times" aria-hidden="true"></i>
-                                            <ul>
-                                                <li class="hab">2&nbsp;&nbsp;<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;individuales</li>
-                                            </ul>
-                                        </li>
-                                        <li class="camarote"> Camarote&nbsp;&nbsp;#106 -&nbsp;&nbsp;<i class="fa fa-circle started"></i><i class="fa fa-times" aria-hidden="true"></i>
-                                            <ul>
-                                                <li class="hab">1&nbsp;&nbsp;<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;matrimonial</li>
-                                            </ul>
-                                        </li>
-                                        <li class="camarote"> Camarote&nbsp;&nbsp;#107 -&nbsp;&nbsp;<i class="fa fa-circle paused"></i><i class="fa fa-times" aria-hidden="true"></i>
-                                            <ul>
-                                                <li class="hab"> 2&nbsp;&nbsp;<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;literas</li>
-                                            </ul>
-                                        </li>
-                                        <li class="camarote"> Camarote&nbsp;&nbsp;#108 -&nbsp;&nbsp;<i class="fa fa-circle started"></i><i class="fa fa-times" aria-hidden="true"></i>
-                                            <ul>
-                                                <li class="hab">1&nbsp;&nbsp;<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;matrimonial</li>
-                                            </ul>
-                                        </li>
-                                        <li class="camarote"> Camarote&nbsp;&nbsp;#109 -&nbsp;&nbsp;<i class="fa fa-circle started"></i><i class="fa fa-times" aria-hidden="true"></i>
-                                            <ul>
-                                                <li class="hab">2&nbsp;&nbsp;<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;matrimoniales</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-xs-6">
-                                    <p><b>Agregar camarote:</b></p>
                                     <div class="form-group">
-                                        <label>Número:</label>
-                                        <input type="number" class="form-control" placeholder="Introduce el número del camarote"> </div>
+                                        <label>Ruta:</label>
+                                        <select class="form-control">
+                                            <option>CCS - PNM</option>
+                                            <option>CCS - JMQ</option>
+                                            <option>PNM - JMQ</option>
+                                            <option>CRC - JMQ</option>
+                                            <option>MIA - CUB</option>
+                                            <option>MIA - CCS</option>
+                                        </select>
+                                    </div></div>
+                                    <div class="col-xs-6">
+                                    <p> <b>Paradas:</b> </p>
+                                    <div id="stopList">
+                                        <ul>
+                                            <li>Curacao <i class="fa fa-times" aria-hidden="true" style="color:#dd4b39"></i></li>
+                                            <li>Panama <i class="fa fa-times" aria-hidden="true" style="color:#dd4b39"></i></li>
+                                            <li>Margarita <i class="fa fa-times" aria-hidden="true" style="color:#dd4b39"></i></li>
+                                            <li>Lost Roques <i class="fa fa-times" aria-hidden="true" style="color:#dd4b39"></i></li>
+                                        </ul>
+                                    </div>
                                     <div class="row">
-                                        <div class="col-xs-6">
+                                        <p style="padding-left:15px"><b>Agregar Parada:</b></p>
+                                        <div class="col-xs-10">
                                             <div class="form-group">
-                                                <label>Camas:</label>
-                                                <input type="number" class="form-control" placeholder="Cantidad"> </div>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <div class="form-group">
-                                                <label>Tipo:</label>
                                                 <select class="form-control">
-                                                    <option>Individual</option>
-                                                    <option>Familiar</option>
-                                                    <option>Litera</option>
+                                                    <option>La Guaira </option>
+<option>Margarita </option>
+<option>Miami </option>
+<option>Costa Rica </option>
+<option>Curacao </option>
+<option>Cuba </option>
+<option>Jamaica </option>
+<option>Los Roques </option>
+<option>Asuncion </option>
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-12" style="text-align:right">
-                                            <button type="button" class="btn btn-primary">Agregar camarote</button>
+                                        <div class="col-xs-2" style="padding: 0;margin-left: -5px;
+">
+                                            <button type="button" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -1108,7 +1094,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-primary">Editar cabina</button>
+                            <button type="button" class="btn btn-primary">Crear itinerario</button>
                         </div>
                     </div>
                 </div>
@@ -1332,5 +1318,5 @@
     <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
 </body>
 
->>>>>>> refs/remotes/origin/Develop
+>>>>>>> Develop
 </html>

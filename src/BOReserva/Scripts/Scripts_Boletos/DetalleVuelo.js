@@ -1,3 +1,26 @@
+<<<<<<< HEAD
+﻿function llamarVistaDetalleVuelo() {
+
+    var url = '/gestion_boletos/M05_DetalleVuelo';
+    var method = 'GET';
+    var data = '';
+
+    $.ajax(
+        {
+            url: url,
+            type: method,
+            data: data,
+            success: function (data, textStatus, jqXHR) {
+
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+};
+=======
 ﻿$("#detalleVuelo").click(function (e) {
     e.preventDefault();
     var url = '/gestion_boletos/M05_DetalleVuelo';
@@ -41,3 +64,4 @@ $("#cancel").click(function (e) {
             }
         });
 });
+>>>>>>> Develop

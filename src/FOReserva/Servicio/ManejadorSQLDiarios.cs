@@ -52,14 +52,32 @@ namespace FOReserva.Servicio
         string fecha_f = diar.Fecha_fin.ToString("yyyy-MM-dd");
         sb = new StringBuilder();
         sb.Append("SELECT ");
-        sb.Append(" id_diar, nombre_diario, CASE ");
+        sb.Append(" d.id_diar, d.nombre_diario, CASE ");
         sb.Append("  WHEN len(d.descripcion_diar)>100 ");
         sb.Append("  THEN LEFT(d.descripcion_diar, 97) + '...' ");
         sb.Append("  ELSE d.descripcion_diar END descr ");
-        sb.Append("FROM Diario_Viaje d, Lugar l ");
+        sb.Append("FROM Diario_Viaje d ");
+        if (diar.Destino != 0) //Si se busca por destino se anexa la tabla al query
+        {
+            sb.Append(", Lugar l ");
+        }
         sb.Append("WHERE d.fecha_carga_diar BETWEEN '" + fecha_i + "' AND '" + fecha_f + "' ");
-        sb.Append(" AND l.lug_id = " + diar.Destino);
-        sb.Append(" AND d.fk_destino = l.lug_id;");
+        if (diar.Destino != 0) //Si se busca por destino se anexa la condición al query
+        {
+            sb.Append(" AND (l.lug_id = " + diar.Destino + " OR l.lug_FK_lugar_id = " + diar.Destino + ") AND d.fk_destino = l.lug_id ");
+        }
+        if (diar.Rating != 0) //Si se filtra por rating se anexa la condición al query
+        {
+            sb.Append(" AND d.calif_creador >= " + diar.Rating + " ");
+        }
+        if (diar.Filtro == 0) //Fechas descendientes (más recientes primero)
+        {
+            sb.Append("ORDER BY d.fecha_carga_diar DESC");
+        }
+        else if (diar.Filtro == 1) //Fechas ascendientes (más antiguos primero)
+        {
+            sb.Append("ORDER BY d.fecha_carga_diar ASC");
+        }
         string query = sb.ToString();
         SqlDataReader read = Executer(query);
         List<CDiarioModel> listaDV = new List<CDiarioModel>();
