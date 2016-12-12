@@ -17,7 +17,7 @@
                                        "<td class='crAcciones'><i class='fa fa-eye'></i> <i class='fa fa-pencil'></i> <i class='fa fa-check'></i> <i class='fa fa-trash eliminar_crucero'></i></td>";
 
                 console.log(statusHTML)
-                html = "<tr><td style='text-align:center'>" + data[index]._nombreCabina + "</td><td style='text-align:center'>" + data[index]._precioCabina + "</td>" + statusHTML + "</tr>";
+                html = "<tr id='"+data[index]._idCabina+"'><td style='text-align:center'>" + data[index]._nombreCabina + "</td><td style='text-align:center'>" + data[index]._precioCabina + "</td>" + statusHTML + "</tr>";
                 console.log(html)
                 $("#tablaCabinas").append(html);
             }
