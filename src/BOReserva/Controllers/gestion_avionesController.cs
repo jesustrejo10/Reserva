@@ -169,6 +169,32 @@ namespace BOReserva.Controllers
             }
         }
 
+
+        /// <summary>
+        /// Metodo utilizado para enviar una respuesta a la solicitud de eliminar un avion
+        /// </summary>
+        /// <param name="id">ID correspondiente al avion</param>
+        /// <returns>JsonResult con un codigo de exito/error</returns>
+        [HttpPost]
+        public JsonResult eliminarAvion(int id)
+        {
+            manejadorSQL sql = new manejadorSQL();
+            Boolean resultado = sql.eliminarAvion(id);
+            if (resultado)
+            {
+                return (Json(true, JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)  
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error  
+                String error = "Error en la base de datos";
+                //Retorno el error  
+                return Json(error);
+            }
+        }
+
         /// <summary>
         /// Metodo que guarda los cambios realizados a un avion
         /// </summary>

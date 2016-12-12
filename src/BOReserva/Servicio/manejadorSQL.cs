@@ -1,4 +1,7 @@
-﻿﻿using System;
+
+
+
+﻿using System;
 using System.Collections.Generic;
 using System.Collections;
 using System.Data.SqlClient;
@@ -39,6 +42,10 @@ namespace BOReserva.Servicio
         {
             try
             {
+                if (model._matriculaAvion == null)
+                {
+                    return false;
+                }
                 //Inicializo la conexion con el string de conexion
                 conexion = new SqlConnection(stringDeConexion);
                 //INTENTO abrir la conexion
@@ -49,11 +56,6 @@ namespace BOReserva.Servicio
                 query.CommandText = "INSERT INTO Avion VALUES ('" + model._matriculaAvion + "','" + model._modeloAvion + "'," + model._capacidadPasajerosTurista + " , " + model._capacidadPasajerosEjecutiva + "," + model._capacidadPasajerosVIP + ", " + model._capacidadEquipaje + ", " + model._distanciaMaximaVuelo + ", " + model._velocidadMaximaDeVuelo + ", " + model._capacidadMaximaCombustible + ", 1);";
                 //creo un lector sql para la respuesta de la ejecucion del comando anterior               
                 SqlDataReader lector = query.ExecuteReader();
-                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
-                /*while(lector.Read())
-                {
-                      //COMENTADO PORQUE ESTE METODO NO LO APLICA, SERÁ BORRADO DESPUES
-                }*/
                 //cierro el lector
                 lector.Close();
                 //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
@@ -250,6 +252,36 @@ namespace BOReserva.Servicio
             }
         }
 
+
+        /// <summary>
+        /// Metodo para eliminar un avion de la base de datos
+        /// </summary>
+        /// <param name="id"> id del avion a eliminar</param>
+        /// <returns>Booleano que resultara true si la eliminacion se ejecuta, false en caso de error</returns>
+        public Boolean eliminarAvion(int id)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "DELETE FROM AVION WHERE avi_id=" + id;
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                conexion.Close();
+                return true;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
 
         //Procedimiento del Modulo 11 para agregar ofertas a la base de datos.
         public Boolean agregarOferta(CAgregarOferta model)
@@ -708,7 +740,7 @@ namespace BOReserva.Servicio
                 query.CommandText = "UPDATE Restaurante SET rst_nombre = '" + model._nombre + "', " +
                     "rst_direccion = '" + model._direccion + "', " + "rst_descripcion = '" + model._descripcion + "', " +
                     "rst_hora_apertura = '" + model._horarioApertura + "', " + "rst_hora_cierre = '" + model._horarioCierre +
-                    "', fk_lugar = " + model._idLugar + " WHERE rst_id = " + model._id.ToString();
+                    "WHERE rst_id = " + model._id.ToString();
                 //creo un lector sql para la respuesta de la ejecucion del comando anterior
                 SqlDataReader lector = query.ExecuteReader();
                 //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
@@ -916,48 +948,6 @@ namespace BOReserva.Servicio
                 throw e;
             }
         }
-
-        //Procedimiento del Modulo 13 para retornar lista de los modulos detallados
-        public CListaGenerica<CModulo_detallado> consultarPermisos(String modulo)
-        {
-            CListaGenerica<CModulo_detallado> modulo_detallado = new CListaGenerica<CModulo_detallado>();
-            try
-            {
-
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //Abrir la conexion
-                conexion.Open();
-                //query es un string que me devolvera la consulta 
-                System.Diagnostics.Debug.WriteLine(modulo);
-                String query = "SELECT mod_det_nombre,mod_det_url FROM Modulo_Detallado,Modulo_general WHERE mod_gen_id=fk_mod_gen_id and mod_gen_nombre='" + modulo + "'";
-                SqlCommand cmd = new SqlCommand(query, conexion);
-                SqlDataReader lector = cmd.ExecuteReader();
-                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
-                while (lector.Read())
-                {
-                    var entrada = new CModulo_detallado();
-                    entrada.Nombre = lector.GetSqlString(0).ToString();
-                    entrada.Url = lector.GetSqlString(1).ToString();
-                    modulo_detallado.agregarElemento(entrada);
-
-                }
-                //cierro el lector
-                lector.Close();
-                //Cerrar la conexion
-                conexion.Close();
-                return modulo_detallado;
-
-            }
-            catch (SqlException e)
-            {
-                throw e;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
         //Procedimiento del Modulo 13 para insertar Roles
         public Boolean insertarRol(CRoles model)
         {
@@ -993,7 +983,6 @@ namespace BOReserva.Servicio
             }
         }
         /* FIN DE FUNCIONES COMUNES */
-
 
         /* MODULO 8 GESTION DE AUTOMOVILES*/
         /// <summary>
@@ -1401,7 +1390,45 @@ namespace BOReserva.Servicio
                 return _ciudades;
             }
         }
+        public CListaGenerica<CModulo_detallado> consultarPermisos(String modulo)
+        {
+            CListaGenerica<CModulo_detallado> modulo_detallado = new CListaGenerica<CModulo_detallado>();
+            try
+            {
 
-    }
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //Abrir la conexion
+                conexion.Open();
+                //query es un string que me devolvera la consulta 
+                System.Diagnostics.Debug.WriteLine(modulo);
+                String query = "SELECT mod_det_nombre,mod_det_url FROM Modulo_Detallado,Modulo_general WHERE mod_gen_id=fk_mod_gen_id and mod_gen_nombre='" + modulo + "'";
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+                while (lector.Read())
+                {
+                    var entrada = new CModulo_detallado();
+                    entrada.Nombre = lector.GetSqlString(0).ToString();
+                    entrada.Url = lector.GetSqlString(1).ToString();
+                    modulo_detallado.agregarElemento(entrada);
 
-}
+                }
+                //cierro el lector
+                lector.Close();
+                //Cerrar la conexion
+                conexion.Close();
+                return modulo_detallado;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+    }
