@@ -1,3 +1,4 @@
+
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections;
@@ -14,6 +15,7 @@ using BOReserva.Models.gestion_ofertas;
 using BOReserva.Models.gestion_roles;
 using System.Diagnostics;
 using BOReserva.Models.gestion_automoviles;
+
 
 namespace BOReserva.Servicio
 {
@@ -545,37 +547,6 @@ namespace BOReserva.Servicio
             }
 
         }
-
-        //Modulo 3 insertar nueva ruta
-
-        public Boolean InsertarRuta(CAgregarRuta model)
-        {
-
-            conexion = new SqlConnection(stringDeConexion);
-
-            conexion.Open();
-
-            SqlCommand query = conexion.CreateCommand();
-
-            String[] strDes = model._destinoRuta.Split(new[] { " - " }, StringSplitOptions.None);
-            String[] strOri = model._origenRuta.Split(new[] { " - " }, StringSplitOptions.None);
-
-
-
-            String dist = model._distanciaRuta.ToString();
-            String miquery = "EXEC M03_AgregarRuta '" + strOri[0] + "','" + strOri[1] + "','" + strDes[0] + "' , '" + strDes[1] + "', '" + model._tipoRuta + "', '" + model._estadoRuta + "', " + dist;
-            System.Diagnostics.Debug.WriteLine(miquery);
-
-            query.CommandText = miquery;
-
-            //creo un lector sql para la respuesta de la ejecucion del comando anterior               
-            SqlDataReader lector = query.ExecuteReader();
-
-            lector.Close();
-
-            return true;
-        }
-
 
         /* INICIO DE FUNCIONES PARA MODULO 10 BO (RESTAURANTES) */
         //Método del Modulo 10 (Backoffice) para agregar restaurantes a la base de datos.
@@ -1429,4 +1400,4 @@ namespace BOReserva.Servicio
         }
 
     }
-}
+}
