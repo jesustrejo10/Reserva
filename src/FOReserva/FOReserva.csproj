@@ -163,7 +163,7 @@
     </Reference>
     <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.2.0.30506.0\lib\net40\WebMatrix.Data.dll</HintPath>
+      <HintPath>..\..\..\..\..\Downloads\bin\bin\WebMatrix.Data.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.WebPages.OAuth, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -3073,7 +3073,6 @@
     <Content Include="Views\Shared\_MenuPerfil.cshtml" />
     <Content Include="Views\gestion_reserva_habitaciones\buscar_hoteles.cshtml" />
     <Content Include="Views\gestion_reserva_habitaciones\hoteles_con_habitaciones.cshtml" />
-    <Content Include="Views\gestion_reserva_habitaciones\pagina_inicial.cshtml" />
     <Content Include="Views\gestion_planificacion_vacaciones\gestion_itinerario.cshtml" />
     <Content Include="Views\gestion_revision\gestion_ListRevicion.cshtml" />
     <Content Include="Views\gestion_revision\gestion_revision.cshtml" />
