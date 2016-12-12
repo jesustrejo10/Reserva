@@ -16,12 +16,11 @@
             <div class="form-group">
                 <div class="col-md-6 col-sm-6">
                     <label>Origen</label>
-                      @Html.TextBoxFor(m => m._prueba, null, new { @class = "form-control required", @name = "contact[first_name]" })
-                    @*<input type="text" name="contact[first_name]" value="" class="form-control required">*@
+                    <input type="text" name="origen" value="" class="form-control required">
                 </div>
                 <div class="col-md-6 col-sm-6">
                     <label>Destino</label>
-                    <input type="text" name="contact[last_name]" value="" class="form-control required">
+                    <input type="text" name="destino" value="" class="form-control required">
                 </div>
             </div>
         </div>
@@ -70,8 +69,8 @@
 
     <div class="row text-center">
         <div class="col-md-12">
-            <a class="btn btn-primary" onclick="resumenBusqueda()" href="#"> INICIO </a>
-            @*<button type="button" id="buscarVuelo" class="btn btn-primary" >Buscar</button>*@
+            @*<a class="btn btn-primary" onclick="resumenBusqueda()" href="#"> INICIO </a>*@
+            <button type="button" id="buscarVuelo" class="btn btn-primary" >Buscar</button>
         </div>
     </div>
 <script>
