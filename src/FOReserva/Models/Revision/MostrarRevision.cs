@@ -5,7 +5,7 @@ using System.Web;
 
 namespace FOReserva.Models.Revision
 {
-    public class MostrarRevision : BaseEntity
+    public class MostrarRevision 
     {
         private DateTime _fecha;
         private string _mensaje;
@@ -24,8 +24,8 @@ namespace FOReserva.Models.Revision
         /// <param name="puntuacion">Puntuacion de la Revision</param>
         /// <param name="positivo">Valoraciones positivos</param>
         /// <param name="negativo">Valoraciones negativas</param>        
-        public MostrarRevision(int id, string name, DateTime fecha, string mensaje, int tipo, int puntuacion)
-            : base(id, name)
+        public MostrarRevision(DateTime fecha, string mensaje, int tipo, int puntuacion)
+            
         {
             this._fecha = fecha;
             this._mensaje = mensaje;

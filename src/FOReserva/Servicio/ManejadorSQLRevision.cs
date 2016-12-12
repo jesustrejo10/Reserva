@@ -13,12 +13,12 @@ namespace FOReserva.Servicio
     {
         public ManejadorSQLRevision() : base() { }
 
-        public List<CRevision> Consultar_Revision(string nombre, string apellido)
+        public List<MostrarRevision> Consultar_Revision(string nombre, string apellido)
         {
 
             string query = "SELECT rev.rev_fecha, rev.rev_mensaje, rev.rev_tipo, rev.rev_puntuacion, val.rv_val_pos, val.rv_val_neg FROM Revision as rev, Revision_Valoracion as val, Usuario as us where val.rv_FK_rev=rev.rev_id and LOWER(us.usu_nombre) LIKE LOWER('%" + nombre + "%') and LOWER(us.usu_apellido) LIKE LOWER('%" + apellido + "%') and rev.rev_FK_usu_id=us.usu_id";
             SqlDataReader read = Executer(query);
-            List<CRevision> lista_rev = new List<CRevision>();
+            List<MostrarRevision> lista_rev = new List<MostrarRevision>();
             if (read.HasRows)
             {
                 while (read.Read())
@@ -28,7 +28,7 @@ namespace FOReserva.Servicio
                     int _tipo = read.GetInt32(2);
                     int _puntuacion = read.GetInt32(3);
                     // int _valoracion = read.GetInt32(4);
-                    CRevision rev = new CRevision();
+                    MostrarRevision rev = new MostrarRevision();
                     // CRevisionValoracion reva = new CRevisionValoracion();
                     rev.Fecha = _fecha;
                     rev.Mensaje = _mensaje;
@@ -137,11 +137,11 @@ namespace FOReserva.Servicio
         /// Metodo para listar revisiones guardadas
         /// </summary>
         /// <returns>Lista de revisiones</returns>
-        public List<MostrarRevision> BuscarRevisiones()
+        public List<CRevision> BuscarRevisiones()
         {
             string query = "SELECT * FROM Revision as rev";
             SqlDataReader read = Executer(query);
-            List<MostrarRevision> lista_rev = new List<MostrarRevision>();
+            List<CRevision> lista_rev = new List<CRevision>();
 
             if (read.HasRows)
             {
@@ -152,7 +152,7 @@ namespace FOReserva.Servicio
                     int _tipo = read.GetInt32(3);
                     int _puntuacion = read.GetInt32(4);
 
-                    MostrarRevision rev = new MostrarRevision();
+                    CRevision rev = new CRevision();
                     rev.Fecha = _fecha;
                     rev.Mensaje = _mensaje;
                     rev.Tipo = _tipo;
