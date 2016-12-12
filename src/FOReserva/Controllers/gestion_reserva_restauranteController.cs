@@ -115,16 +115,12 @@ namespace FOReserva.Controllers
             {
                 //Ventana de error no conecto a la db
                 //Se puede usar el mensaje de la excepcion "e.mensaje"
-
                 return View("error_conexion");
             }
             catch (InvalidManejadorSQLException f)
-
             {
                 reserva = null;
-
                 ViewBag.Message = "Lo sentimos, la reserva no pudo ser realizada debido a un error del sistema";
-
                 return View(reserva);
             }
             catch (Exception e)
@@ -160,6 +156,7 @@ namespace FOReserva.Controllers
             return View();
             
         }
+
 
         /* 
          * Metodo para la eliminacion de la reserva
