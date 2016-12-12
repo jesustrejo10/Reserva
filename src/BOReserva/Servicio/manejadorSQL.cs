@@ -1,6 +1,3 @@
-
-
-
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections;
@@ -740,7 +737,7 @@ namespace BOReserva.Servicio
                 query.CommandText = "UPDATE Restaurante SET rst_nombre = '" + model._nombre + "', " +
                     "rst_direccion = '" + model._direccion + "', " + "rst_descripcion = '" + model._descripcion + "', " +
                     "rst_hora_apertura = '" + model._horarioApertura + "', " + "rst_hora_cierre = '" + model._horarioCierre +
-                    "WHERE rst_id = " + model._id.ToString();
+                    "', fk_lugar = " + model._idLugar + " WHERE rst_id = " + model._id.ToString();
                 //creo un lector sql para la respuesta de la ejecucion del comando anterior
                 SqlDataReader lector = query.ExecuteReader();
                 //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
@@ -1431,4 +1428,5 @@ namespace BOReserva.Servicio
             }
         }
 
-    }
+    }
+}
