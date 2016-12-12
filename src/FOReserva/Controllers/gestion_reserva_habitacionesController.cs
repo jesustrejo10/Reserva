@@ -1,5 +1,5 @@
-﻿
-using FOReserva.Models.ReservaHabitacion;
+
+﻿using FOReserva.Models.ReservaHabitacion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +12,13 @@ namespace FOReserva.Controllers
     {
         //
         // GET: /gestion_reserva_habitaciones/
+
+        [HttpGet]
+        public ActionResult pagina_inicial()
+        {            
+            return PartialView();
+        }
+
         [HttpGet]
         public ActionResult mis_reservas()
         {
@@ -20,20 +27,15 @@ namespace FOReserva.Controllers
         }
 
         [HttpGet]
-        public ActionResult buscar_hoteles(Cvista_BuscarHotel model)
+        public ActionResult buscar_hoteles()
         {
-            if (Session["RHACiudades"] == null)
-                Session["RHACiudades"] = CReservaHabitacion.ObtenerCiudades();
-
-            if (model.Ciudades == null)
-                model.Ciudades = (List<CCiudad>)Session["RHACiudades"];
-
-            if (model.FechaLlegada.Ticks == 0)
-                model.FechaLlegada = DateTime.Now.AddDays(1);
-
-            if (model.CantidadDias < 1)
-                model.CantidadDias = 1;
-
+            var ciudades = CReservaHabitacion.ObtenerCiudades();
+            var model = new Cvista_BuscarHotel {
+                LugId = 0,
+                FechaLlegada = DateTime.Now,
+                CantidadDias = 1,
+                Ciudades = ciudades
+            };
             return PartialView(model);
         }
 
@@ -77,3 +79,4 @@ namespace FOReserva.Controllers
 
     }
 }
+

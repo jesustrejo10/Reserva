@@ -1,4 +1,4 @@
-﻿using FOReserva.Models.Hoteles;
+using FOReserva.Models.Hoteles;
 using FOReserva.Models.Usuarios;
 using System;
 using System.Collections.Generic;

@@ -24,11 +24,11 @@
                                 <label for="nombreRol">Inserte nombre del rol 
 <!--                                (<span style="color:red">*</span>):-->
                                 </label>
-                                @Html.TextBoxFor(m => m.Nombre_rol, null, new { @class = "form-control", @placeholder = "Nombre del Rol", id = "nombre_rol" })
+                                @Html.TextBoxFor(m => m.Nombre_rol, null, new { @class = "form-control", @placeholder = "rolnombre", @id = "nombre_rol" })
                                 </div>
                             <div class="col-xs-6">
-                               <label for="modelo">Modulo</label><br>                                                           
-                                <select name="lista_modulos" id="listamodulos">
+                               <label for="modelo">Modulo</label><br>
+                                <select name="listbox" id="listbox">
                                     @foreach (var item in Model.Menu)
                                     {
                                         <option value="@item.Nombre">
@@ -39,10 +39,12 @@
                             </div>                       
                             <div class="col-xs-12" style="margin-top:10px;">
                                 <label for="Acceso">Tendra acceso a:</label>                                
-
-                                <div class="checkbox" id="listaPermisos">
-                                </div>
-
+                                @foreach (var item in Model.Menu)
+                                {
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" value="@item.Nombre">@item.Nombre</label>
+                                    </div>
+                                }
 
                             </div>
                         </div>
@@ -63,14 +65,7 @@
     //Accion del boton agregarrol
         $("#agreagarrol").click(function (e) {
             e.preventDefault();
-            var form = $("#formagreagarrol");            
-            var permisos = [$("#nombre_rol").val()];
-            jQuery.each($("input[type='checkbox']"), function (i) {               
-                if (this.checked && this.value!="on") {
-                    permisos.push(this.value);
-                }
-                
-            });
+            var form = $("#formagreagarrol");
             $.ajax({
                 url: "gestion_roles/agregarrol",
                 data: form.serialize(),
@@ -80,67 +75,7 @@
                     $('#formagreagarrol')[0].reset();
                 }
             });
-            var data = {
-                json: JSON.stringify(permisos),
-            };
-            console.log(data);
-            $.ajax({
-                type: 'post',
-                dataType: 'json',
-                url: 'gestion_roles/asignarpermisos',
-                data: data,
-                success: function (data) {
-                    alert("Se asignaron los permisos");
-
-                },
-                failure: function (response) {
-                    alert("No se pudo asignar permisos");
-
-                }
-
-            });
-
         });
-
-        $("#listamodulos").change(function (e) {
-            e.preventDefault();
-            var modulo = $("#listamodulos option:selected").text();
-            var json = {
-                mod: modulo,
-            };
-            var data = {
-                json: JSON.stringify(json),
-            };
-            $.ajax({
-                type: 'post',
-                dataType: 'json',
-                url: 'gestion_roles/Consultarpermisos',
-                data: data,
-                success: cargadorPermisos,
-                failure: function (response) {
-                    alert("Error buscando permisos");
-
-                }
-                
-            });
-            function cargadorPermisos(response) {
-
-                var permisos = response;
-                var container = $('#listaPermisos');
-                container.empty();
-                jQuery.each(permisos, function (i) {                                
-                var inputs = container.find('input');
-                var id = inputs.length + 1;
-                $('<input />', { type: 'checkbox', id: 'permiso' + id, value: permisos[i] }).appendTo(container);
-                $('<label />', { 'for': 'permiso' + id, text: permisos[i] }).appendTo(container);
-                $('<br>').appendTo(container)
-                });
-
-            }
-
-        });
-
-        
     </script>
 
 }

@@ -1,4 +1,4 @@
-﻿using FOReserva.Models.Restaurantes;
+using FOReserva.Models.Restaurantes;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -102,7 +102,7 @@ namespace FOReserva.Servicio
                 {
                     int id = read.GetInt32(0);
                     string nombre_reserva = read.GetString(1);
-                    string fecha = read.GetDateTime(2).ToString("yyyy-MM-dd");
+                    string fecha = read.GetDateTime(2).ToString();
                     string hora = read.GetString(3);
                     int cantidad = read.GetInt32(4);
                     string name_rest = read.GetString(5);
@@ -118,30 +118,6 @@ namespace FOReserva.Servicio
                 }
             }
             return lista_rest;
-        }
-
-        /*Metodo para eliminar una reserva
-         *  idReserva: ID de la reserva a eliminar
-         */
-        public void eliminarReserva(int idReserva)
-        {
-            string query = "DELETE FROM Revision_Valoracion where rv_FK_rev in (select rev_id from Revision where rev_FK_res_res_id =" + idReserva +")";
-            this.Executer(query);
-            query = "Delete from Revision where rev_FK_res_res_id =" + idReserva;
-            this.Executer(query);
-            query = "DELETE FROM Reserva_Restaurante WHERE ID = "+idReserva;
-            this.Executer(query);
-            CloseConnection();
-        }
-
-        /*
-         *  Metodo para actualizar datos de la reserva
-         */
-        public void actualizarReserva(CReservation_Restaurant reserva)
-        {
-            string query = "update Reserva_restaurante set reserva_nombre = '"+reserva.Name+"', fecha = convert(date, '"+reserva.Date+"'), hora = '"+reserva.Time+"', cantidad_personas ="+reserva.Count+" where ID ="+ reserva.Id;
-            this.Executer(query);
-            CloseConnection();
         }
     }
 }

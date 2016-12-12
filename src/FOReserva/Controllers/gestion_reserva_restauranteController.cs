@@ -1,9 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using FOReserva.Models.Restaurantes;
 using FOReserva.Servicio;
-using Microsoft.Ajax.Utilities;
 
 namespace FOReserva.Controllers
 {
@@ -16,9 +15,7 @@ namespace FOReserva.Controllers
         {
             return PartialView();
         }
-
-
-
+        
         public ActionResult restaurant_resultados()
         {
             int search_val = Int32.Parse(Request.QueryString["search_val"]);
@@ -28,23 +25,21 @@ namespace FOReserva.Controllers
                 List<CRestaurantModel> lista = busqueda(search_val, name_rest);
                 return View(lista);
             }
-            catch (NullReferenceException e)
-            {
+            catch ( NullReferenceException e) {
                 //Ventana de error al buscar
                 //No se puede usar el mensaje de la excepcion "e.mensaje"
                 //Esto se causa al realizar una busqueda con parametros que no son
                 //como son caracteres especiales y de mas
-                return View();
+                return View("No se encontraron resultados");
             }
-            catch (ManejadorSQLException f)
+            catch ( ManejadorSQLException f)
             {
                 //Ventana de error no conecto a la db
                 //Se puede usar el mensaje de la excepcion "e.mensaje"
                 return View("error_conexion");
             }
-            catch (Exception g)
-            {
-
+            catch (Exception g) { 
+            
             }
 
             // Error desconocido (seria bueno mostrar 
@@ -75,25 +70,10 @@ namespace FOReserva.Controllers
              */
         public ActionResult reservar_restaurant(int id_rest)
         {
-            try
-            {
-                CRestaurantModel restaurante = new CRestaurantModel();
-                ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
-                restaurante = manejador.buscarRest(id_rest);
-                return View(restaurante);
-            }
-            catch (ManejadorSQLException f)
-            {
-                //Ventana de error no conecto a la db
-                //Se puede usar el mensaje de la excepcion "f.mensaje"
-                return View("error_conexion");
-            }
-            catch (Exception g)
-            {
-                ViewBag.Message = "Lo sentimos, la reserva no pudo ser realizada debido al siguiente error del sistema:" + g.Message;
-               
-            }
-            return View();
+            CRestaurantModel restaurante = new CRestaurantModel();
+            ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
+            restaurante = manejador.buscarRest(id_rest);
+            return View(restaurante);
         }
 
         /*
@@ -116,19 +96,20 @@ namespace FOReserva.Controllers
             {
                 //Ventana de error no conecto a la db
                 //Se puede usar el mensaje de la excepcion "e.mensaje"
-                return View("error_conexion");
-            }
-            catch (InvalidManejadorSQLException f)
-            {
                 reserva = null;
-                ViewBag.Message = "Lo sentimos, la reserva no pudo ser realizada debido a un error del sistema";
-                return View(reserva);
+                return View("error_conexion" + e.Message);
+            }
+            catch (InvalidManejadorSQLException e)
+            {
+                //Ventana de error al crear la reserva
+                //Esto se causa por una sitaxis erronea del sql
+                //como son caracteres especiales o demas
+                reserva = null;
+                return View("Error al crear Reserva");
             }
             catch (Exception e)
             {
-                reserva = null;
-                ViewBag.Message = "Lo sentimos, la reserva no pudo ser realizada debido al siguiente error del sistema:" + e.Message;
-                return View(reserva);
+                return View("Error desconocido del sistema");
             }
         }
 
@@ -137,99 +118,11 @@ namespace FOReserva.Controllers
              */
         public ActionResult lista_reserva_restaurantes()
         {
-            try
-            {
-                ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
-                List<CReservation_Restaurant> lista = manejador.buscarReservas();
-                return View(lista);
-            }
-            catch (ManejadorSQLException f)
-            {
-                //Ventana de error no conecto a la db
-                //Se puede usar el mensaje de la excepcion "f.mensaje"
-                return View("error_conexion");
-            }
-            catch (Exception g)
-            {
-             ViewBag.Message = "Lo sentimos, la reserva no pudo ser realizada debido al siguiente error del sistema:" + g.Message;
-                
-            }
-            return View();
-            
+            ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
+            List<CReservation_Restaurant> lista = manejador.buscarReservas();
+            return View(lista);
         }
 
-
-        /* 
-         * Metodo para la eliminacion de la reserva
-         */
-        [System.Web.Services.WebMethod]
-        public JsonResult eliminar_reserva(int id)
-        {
-            try
-            {
-                ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
-                manejador.eliminarReserva(id);
-            }
-            catch (ManejadorSQLException e)
-            {
-                //Ventana de error no conecto a la db
-                //Se puede usar el mensaje de la excepcion "e.mensaje"
-                return (Json(false, JsonRequestBehavior.AllowGet));
-            }
-            catch (InvalidManejadorSQLException e)
-            {
-                //Ventana de error al eliminar la reserva
-                //Esto se causa por una sitaxis erronea del sql
-                //como son caracteres especiales o demas
-            }
-            catch (Exception e)
-            {
-                // Error desconocido del sistema
-                ViewBag.Message = "Lo sentimos, la reserva no pudo ser realizada debido al siguiente error del sistema:" + e.Message;
-            }
-
-            return (Json(true, JsonRequestBehavior.AllowGet));
-        }
-
-        /*
-         *  Metodo para Modificar una reserva
-         *   c_id_reserva: ID de la reserva a modificar
-         *   c_name_client: A nombre de quien se hizo la reserva
-         *   c_reserv_date: Fecha de la reserva
-         *   c_reserv_hour: hora de la reserva
-         *   c_number_person: numero de personas
-         */
-        [System.Web.Services.WebMethod]
-        public void editar_reserva(int c_id_reserva,string c_name_client, string c_reserv_date, string c_reserv_hour,int c_number_person)
-        {
-            CReservation_Restaurant tmp = new CReservation_Restaurant();
-            tmp.Id = c_id_reserva;
-            tmp.Name = c_name_client;
-            tmp.Date = c_reserv_date;
-            tmp.Time = c_reserv_hour;
-            tmp.Count = c_number_person;
-
-            try
-            {
-                ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
-                manejador.actualizarReserva(tmp);
-            }
-            catch (ManejadorSQLException e)
-            {
-                /*
-                 * Controlar error de conexion
-                 *
-                 */
-
-            }
-            catch (InvalidManejadorSQLException e)
-            {
-                /*
-                 * Controlar error de operacion invalida 
-                 */
-
-            }
-            catch (Exception e) { /* Error generico del sistema */ }
-        }
     }
 }
+
