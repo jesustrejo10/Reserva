@@ -22,11 +22,7 @@ namespace BOReserva.Servicio.Servicio_Hoteles
 
 
         //Procedimiento del Modulo 9 para agregar hoteles a la base de datos.
-<<<<<<< HEAD
         public Boolean insertarHotel(CGGestionHoteles_CrearHotel model)
-=======
-        public Boolean insertarHotel(CHotel model)
->>>>>>> 4b1d7a703393a001257cadd1fbd3e98ac23ab734
         {
             try
             {

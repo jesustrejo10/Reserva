@@ -224,10 +224,7 @@
     <Compile Include="Models\gestion_aviones\CAgregarAvion.cs" />
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
     <Compile Include="Models\gestion_boletos\CBuscarVuelo.cs" />
-<<<<<<< HEAD
-    <Compile Include="Models\gestion_hoteles\cGestionHoteles_CrearHotel.cs" />
-=======
->>>>>>> 4b1d7a703393a001257cadd1fbd3e98ac23ab734
+    <Compile Include="Models\gestion_hoteles\CGestionHoteles_CrearHotel.cs" />
     <Compile Include="Models\gestion_hoteles\CGestionHoteles_EditarHotel.cs" />
     <Compile Include="Models\gestion_hoteles\CGestionHoteles_SelectCiudadModel.cs" />
     <Compile Include="Models\gestion_hoteles\CGestionHoteles_SelectEstrellasModel.cs" />
