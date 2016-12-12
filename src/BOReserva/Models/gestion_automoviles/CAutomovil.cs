@@ -61,6 +61,11 @@ namespace BOReserva.Models.gestion_automoviles
               _ciudad = ciudad;
           }
 
+          public CAutomovil() //CONSTRUCTOR VACIO
+          {
+              
+          }
+
          public int MAgregaraBD (CAutomovil vehiculo){ //METODO PARA AGREGAR A LA BASE DE DATOS
              CBasededatos_vehiculo agregar = new CBasededatos_vehiculo();
              return agregar.MAgregarVehiculoBD(vehiculo);

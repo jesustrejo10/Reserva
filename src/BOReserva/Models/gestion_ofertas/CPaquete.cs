@@ -12,49 +12,43 @@ namespace BOReserva.Models.gestion_ofertas
 
         public String _nombrePaquete { get; set; }
 
-        //public String _nombreHabitacion { get; set; }
-
-        //public String _nombreCrucero { get; set; }
-
-        //public String _nombreVuelo { get; set; }
-
-        //public String _nombreAuto { get; set; }
-
-        //public String _nombreRestaurante { get; set; }
+        public String _idAuto { get; set; }
 
         public float _precioPaquete { get; set; }
 
         public COferta _oferta;
 
-        //public int _seleccionAuto { get; set; }
+        public int? _seleccionAuto { get; set; }
 
-        //public int _seleccionRestaurante { get; set; }
+        public int? _idRestaurante { get; set; }
 
-        //public int _seleccionHabitacion { get; set; }
+        public int? _idHabitacion { get; set; }
 
-        //public int _seleccionCrucero { get; set; }
+        public int? _idCrucero { get; set; }
 
-        //public int _seleccionVuelo { get; set; }
+        public int? _idVuelo { get; set; }
 
-        //public DateTime _fechaIniAuto { get; set; }
+        public DateTime? _fechaIniAuto { get; set; }
 
-        //public DateTime _fechaIniRest { get; set; }
+        public DateTime? _fechaIniRest { get; set; }
 
-        //public DateTime _fechaIniHabi { get; set; }
+        public DateTime? _fechaIniHabi { get; set; }
 
-        //public DateTime _fechaIniCruc { get; set; }
+        public DateTime? _fechaIniCruc { get; set; }
 
-        //public DateTime _fechaIniVuelo { get; set; }
+        public DateTime? _fechaIniVuelo { get; set; }
 
-        //public DateTime _fechaFinAuto { get; set; }
+        public DateTime? _fechaFinAuto { get; set; }
 
-        //public DateTime _fechaFinRest { get; set; }
+        public DateTime? _fechaFinRest { get; set; }
 
-        //public DateTime _fechaFinHabi { get; set; }
+        public DateTime? _fechaFinHabi { get; set; }
 
-        //public DateTime _fechaFinCruc { get; set; }
+        public DateTime? _fechaFinCruc { get; set; }
 
-        //public DateTime _fechaFinVuelo { get; set; }
+        public DateTime? _fechaFinVuelo { get; set; }
+
+        public bool _estadoPaquete { get; set; }
 
        public CPaquete() { }
         public CPaquete (int id, string nombre, float precio, COferta oferta)
@@ -65,11 +59,24 @@ namespace BOReserva.Models.gestion_ofertas
             _oferta = oferta;
         }
 
+        public CPaquete(int id, string nombre, float precio, bool estado)
+        {
+            _idPaquete = id;
+            _nombrePaquete = nombre;
+            _precioPaquete = precio;
+            _estadoPaquete = estado;
+        }
+
         public CPaquete(int id, string nombre, float precio)
         {
             _idPaquete = id;
             _nombrePaquete = nombre;
             _precioPaquete = precio;
+        }
+
+        public String formatDate(DateTime? date)
+        {
+            return (String.Format("{0:MM/dd/yyyy}", date));
         }
     }
 }

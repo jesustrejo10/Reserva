@@ -71,6 +71,7 @@ function mostrarPaquetesMultiselect(data) {
     }
 }
 
+//Devuelve id seleccionados de multiselect
 function getSelected() {
     var selectedValues = [];
     $("#paquetesMultiselect :selected").each(function () {

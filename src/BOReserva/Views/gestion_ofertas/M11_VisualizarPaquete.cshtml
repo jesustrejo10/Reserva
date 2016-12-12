@@ -1,0 +1,179 @@
+﻿
+
+<div class="row">
+    <link rel="stylesheet" href="~/Content/plugins/datatables/dataTables.bootstrap.css">
+
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Lista de Paquetes</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Estado</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                        <tbody>
+                            @try
+                        {
+                            foreach (var item in Model)
+                            {
+                                String estado;
+                                if (item._estadoPaquete == true){
+                                    estado = "Activo";
+                                }
+                                else{
+                                    estado = "Inactivo";
+                                }
+                                
+                                <tr id="@item._idPaquete">
+                                    <td>@item._nombrePaquete</td>
+                                    <td>@item._precioPaquete</td>
+                                    <td>@estado</td>
+                                    <td>
+                                        @*<a href="#"> <i class="fa fa-eye clasedeprueba"></i></a>*@
+                                        <a href="#" title="Detalle"><i class="fa fa-eye detalle"></i></a>
+                                        <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>
+                                        @if (item._estadoPaquete == true)
+                                        {
+                                            <a href="#" title="Desactivar"><i class="fa fa-times desactivar"></i></a>
+                                        }
+                                        else
+                                        {
+                                            <a href="#" title="Activar"><i class="fa fa-check activar"></i></a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        catch
+                        {
+
+                        }
+                        </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Estado</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<script language="javascript" type="text/javascript">
+
+
+    $(".modificar").click(function () {
+        var identificador = $(this).parent().parent().parent().attr("id");
+        jQuery.ajax({
+            type: "GET",
+            url: "/gestion_ofertas/M11_ModificarPaquete",
+            data: { }
+        }).done(function (data) {
+            $("#contenido").empty();
+            $("#contenido").append(data);
+        }).fail(function () {
+
+        });
+
+
+    });
+
+    $(".detalle").click(function () {
+        var identificador = $(this).parent().parent().parent().attr("id");
+        jQuery.ajax({
+            type: "GET",
+            url: "/gestion_ofertas/M11_DetallePaquete",
+            data: { 'paqueteIdStr': identificador }
+        }).done(function (data) {
+            $("#contenido").empty();
+            $("#contenido").append(data);
+        }).fail(function () {
+
+        });
+
+
+    });
+
+
+    $(".desactivar").click(function () {
+        var idOferta = $(this).parent().parent().parent().attr("id");
+        var r = confirm("Está seguro que desea desactivar el paquete?");
+        if (r == true) {
+            jQuery.ajax({
+                type: "POST",
+                url: "/gestion_ofertas/desactivarPaquete",
+                data: { ofertaIdStr: idOferta }
+            }).done(function (data) {
+                var url = '/gestion_ofertas/M11_VisualizarPaquete';
+                var method = 'GET';
+                var data = '';
+                $.ajax(
+                    {
+                        url: url,
+                        type: method,
+                        data: data,
+                        success: function (data, textStatus, jqXHR) {
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+            }).fail(function () {
+                alert("Error en la base de datos");
+            });
+        }
+    });
+
+    $(".activar").click(function () {
+        var idOferta = $(this).parent().parent().parent().attr("id");
+        var r = confirm("Esta seguro que desea activar el paquete?");
+        if (r == true) {
+            jQuery.ajax({
+                type: "POST",
+                url: "/gestion_ofertas/activarPaquete",
+                data: { ofertaIdStr: idOferta }
+            }).done(function (data) {
+                var url = '/gestion_ofertas/M11_VisualizarPaquete';
+                var method = 'GET';
+                var data = '';
+                $.ajax(
+                    {
+                        url: url,
+                        type: method,
+                        data: data,
+                        success: function (data, textStatus, jqXHR) {
+
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+            }).fail(function () {
+                alert("Error en la base de datos");
+            });
+        }
+    });
+
+
+</script>
+

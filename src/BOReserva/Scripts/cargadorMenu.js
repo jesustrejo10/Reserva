@@ -295,52 +295,6 @@
             });
     });
 
-    //M11 Gestion Ofertas y Paquetes
-    $("#agregarOferta").unbind('click');
-    $("#agregarOferta").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_ofertas/M11_AgregarOferta';
-        var method = 'GET';
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                    getPaquetesFromDB();
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-    });
-
-
-    $("#modificarOferta").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_ofertas/M11_ModificarOferta';
-        var method = 'GET';
-        var data = '';
-
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-    });
-
-    $("#consultarOferta").click(function (e) {
     /* INICIO M10 RESTAURANTES BO */
 
     $("#verRestaurantes").click(function (e) {
@@ -410,12 +364,120 @@
             });
     });
 
-    $("#agregarPaquete").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_ofertas/M11_AgregarPaquete';
     $("#m05VisualizarBoletos").click(function (e) {
         e.preventDefault();
         var url = '/gestion_boletos/M05_VisualizarBoletos';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
+    $("#m05CheckIn").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_check_in/M05_CheckIn';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
+    //M11 Gestion Ofertas y Paquetes
+    $("#agregarOferta").unbind('click');
+    $("#agregarOferta").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_ofertas/M11_AgregarOferta';
+        var method = 'GET';
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                    getPaquetesFromDB();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
+
+    $("#modificarOferta").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_ofertas/M11_ModificarOferta';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
+    $("#consultarOferta").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_ofertas/M11_VisualizarOferta';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
+    $("#agregarPaquete").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_ofertas/M11_AgregarPaquete';
         var method = 'GET';
         var data = '';
 
@@ -459,13 +521,7 @@
 
     $("#consultarPaquete").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_ofertas/M11_ConsultarPaquete';
-
-    });
-
-    $("#m05CheckIn").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_check_in/M05_CheckIn';
+        var url = '/gestion_ofertas/M11_VisualizarPaquete';
         var method = 'GET';
         var data = '';
 
@@ -486,7 +542,5 @@
     });
 
     //Fin M11
-});
 
-    });
 });
