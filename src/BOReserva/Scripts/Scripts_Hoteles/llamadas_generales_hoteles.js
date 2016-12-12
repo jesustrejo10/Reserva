@@ -5,7 +5,7 @@
         e.preventDefault();
         var form = $("#formCrearHotel");
         $.ajax({
-            url: "gestion_hoteles/crearhotel",
+            url: "gestion_hoteles/guardarHotel",
             data: form.serialize(),
             type: 'POST',
             success: function (data) {

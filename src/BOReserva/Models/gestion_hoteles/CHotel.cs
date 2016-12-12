@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace BOReserva.Models.gestion_hoteles
 {
@@ -13,8 +14,7 @@ namespace BOReserva.Models.gestion_hoteles
         public String _paginaweb { get; set; }
         public string _email { get; set; }
         public int _canthabitaciones { get; set; }
-        public String _direccion { get; set; }
-        
+        public String _direccion { get; set; }        
         public String _ciudad { get; set; }
         public String _pais { get; set; }
         public int _estrellas { get; set; }

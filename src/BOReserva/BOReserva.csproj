@@ -224,7 +224,7 @@
     <Compile Include="Models\gestion_aviones\CAgregarAvion.cs" />
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
     <Compile Include="Models\gestion_boletos\CBuscarVuelo.cs" />
-    <Compile Include="Models\gestion_hoteles\CGestionHoteles_CrearHotel.cs" />
+    <Compile Include="Models\gestion_hoteles\cGestionHoteles_CrearHotel.cs" />
     <Compile Include="Models\gestion_hoteles\CGestionHoteles_EditarHotel.cs" />
     <Compile Include="Models\gestion_hoteles\CGestionHoteles_SelectCiudadModel.cs" />
     <Compile Include="Models\gestion_hoteles\CGestionHoteles_SelectEstrellasModel.cs" />
