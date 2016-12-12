@@ -3089,6 +3089,7 @@
     <Content Include="Views\gestion_reserva_crucero\gestion_reserva_crucero.cshtml" />
     <Content Include="Views\gestion_reserva_crucero\gestion_reserva_cruceroImagenes.cshtml" />
     <Content Include="Views\gestion_diarios\_NoHayResultados.cshtml" />
+    <Content Include="Views\gestion_diarios\gestion_diarios_crear.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
