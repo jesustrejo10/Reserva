@@ -37,14 +37,14 @@
                                                             <td>@item.estadoRuta</td>
                                                             <td>
                                                                 <a href="#"> <i class="fa fa-eye clasedeprueba"></i></a>
-                                                                <a href="#"><i class="fa fa-gear modificar"></i></a>
+                                                                <a href="#"><i class="fa fa-pencil m03EditarRutas"></i></a>
                                                             </td>
                                                             </tr>
                                                     }
                                                 }
                                                 catch
                                                 {
-
+                                                    
                                                 }
 <tfoot>
                         <tr>
@@ -135,7 +135,7 @@
             });
 
     });
-    $("#m03EditarRutas").click(function (e) {
+    $(".m03EditarRutas").click(function (e) {
         e.preventDefault();
         alert("Botón Editar");
         $.ajax({

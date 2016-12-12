@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BOReserva.Models.gestion_ruta_comercial;
-using BOReserva.Servicio;
+using BOReserva.Servicio.Servicio_Rutas;
 using System.Net;
 
 namespace BOReserva.Controllers
@@ -19,7 +19,7 @@ namespace BOReserva.Controllers
             
             CAgregarRuta ruta = new CAgregarRuta();
             
-            CBasededatos_ruta_comercial sql = new CBasededatos_ruta_comercial();                       
+            CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();                       
 
             lista = sql.listarLugares();
 
@@ -36,7 +36,7 @@ namespace BOReserva.Controllers
         {
             CAgregarRuta model = new CAgregarRuta();
             List<String> resultado = new List<String>();
-            CBasededatos_ruta_comercial sql = new CBasededatos_ruta_comercial();                       
+            CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();                       
 
 
             resultado = sql.consultarDestinos(ciudadO);
@@ -71,7 +71,7 @@ namespace BOReserva.Controllers
         // GET: gestion_ruta_comercial/VisualizarRutasComerciales
         public PartialViewResult VisualizarRutasComerciales()
         {
-            CBasededatos_ruta_comercial ruta = new CBasededatos_ruta_comercial();
+            CManejadorSQL_Rutas ruta = new CManejadorSQL_Rutas();
             List<CRuta> listarutas = ruta.MListarRutasBD();
             return PartialView(listarutas);
         }
@@ -88,7 +88,7 @@ namespace BOReserva.Controllers
         public JsonResult guardarRuta(CAgregarRuta model)
         {
             
-            CBasededatos_ruta_comercial sql = new CBasededatos_ruta_comercial();
+            CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();
             //realizo el insert
 
             if (model._origenRuta == null || model._destinoRuta == null)

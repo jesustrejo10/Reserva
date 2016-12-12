@@ -1,17 +1,18 @@
-﻿using System;
+﻿using BOReserva.Models.gestion_ruta_comercial;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.Models.gestion_ruta_comercial
+namespace BOReserva.Servicio.Servicio_Rutas
 {
-    public class CBasededatos_ruta_comercial
+    public class CManejadorSQL_Rutas
     {
-        
         private String connetionString = @"Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User ID=DB_A1380A_reserva_admin;Password = ucabds1617a"; //No supe cual es el string de conexion jejejeps
-        
+
         private SqlConnection con = null;
 
         public void probarconexion()
@@ -62,7 +63,7 @@ namespace BOReserva.Models.gestion_ruta_comercial
             }
         }
 
-                
+
         public List<CRuta> MListarRutasBD()
         {
             List<CRuta> listarutas = new List<CRuta>();
@@ -72,14 +73,16 @@ namespace BOReserva.Models.gestion_ruta_comercial
                 con.Open();
                 String sql = "SELECT a.lug_nombre AS NOrigen,b.lug_nombre AS NDestino,r.rut_tipo_ruta AS TRuta,r.rut_distancia AS DRuta,r.rut_status_ruta AS SRuta FROM Ruta r, Lugar a, Lugar b WHERE r.rut_FK_lugar_origen=a.lug_id AND r.rut_FK_lugar_destino=b.lug_id";
                 SqlCommand cmd = new SqlCommand(sql, con);
-                using (SqlDataReader reader = cmd.ExecuteReader()) {
-                   while (reader.Read()) {
-                       //SE AGREGA CREA UN OBJECTO VEHICLE SE PASAN LOS ATRIBUTO ASI reader["<etiqueta de la columna en la tabla Automovil>"]
-                       //Y  SE AGREGA a listavehiculos
-                       CRuta ruta = new CRuta(reader["NOrigen"].ToString(), reader["NDestino"].ToString(), reader["SRuta"].ToString(),
-                                              reader["TRuta"].ToString(),Int32.Parse(reader["DRuta"].ToString()));
-                       listarutas.Add(ruta);
-                   }
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        //SE AGREGA CREA UN OBJECTO VEHICLE SE PASAN LOS ATRIBUTO ASI reader["<etiqueta de la columna en la tabla Automovil>"]
+                        //Y  SE AGREGA a listavehiculos
+                        CRuta ruta = new CRuta(reader["NOrigen"].ToString(), reader["NDestino"].ToString(), reader["SRuta"].ToString(),
+                                               reader["TRuta"].ToString(), Int32.Parse(reader["DRuta"].ToString()));
+                        listarutas.Add(ruta);
+                    }
                 }
                 con.Close();
                 return listarutas;
@@ -181,7 +184,7 @@ namespace BOReserva.Models.gestion_ruta_comercial
                 con = new SqlConnection(connetionString);
                 //INTENTO abrir la conexion
                 con.Open();
-                String query = "SELECT l.lug_nombre as ciudad, ll.lug_nombre as pais from Lugar l, Lugar ll where l.lug_FK_lugar_id = ll.lug_id and l.lug_nombre != '"+ strOri[0]+"'";
+                String query = "SELECT l.lug_nombre as ciudad, ll.lug_nombre as pais from Lugar l, Lugar ll where l.lug_FK_lugar_id = ll.lug_id and l.lug_nombre != '" + strOri[0] + "'";
                 SqlCommand cmd = new SqlCommand(query, con);
                 SqlDataReader lector = cmd.ExecuteReader();
                 while (lector.Read())
@@ -205,7 +208,6 @@ namespace BOReserva.Models.gestion_ruta_comercial
                 throw e;
             }
         }
-        
-        
+
     }
 }

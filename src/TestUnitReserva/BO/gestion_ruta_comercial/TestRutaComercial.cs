@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using BOReserva.Models.gestion_ruta_comercial;
+using BOReserva.Servicio.Servicio_Rutas;
 using System.Diagnostics;
 
 namespace TestUnitReserva.BO.gestion_ruta_comercial
@@ -12,7 +13,7 @@ namespace TestUnitReserva.BO.gestion_ruta_comercial
     [TestFixture]
     class TestRutaComercial
     {
-        CBasededatos_ruta_comercial sql = new CBasededatos_ruta_comercial();
+        CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();
 
         [Test]
         public void TestAgregarRuta()

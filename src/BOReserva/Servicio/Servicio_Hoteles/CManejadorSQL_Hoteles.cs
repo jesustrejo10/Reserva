@@ -8,10 +8,10 @@ using System.Web;
 
 namespace BOReserva.Servicio.Servicio_Hoteles
 {
-    public class CManejadorSQL_Hoteles
+    public class CManejadorSQL_Rutas
     {
         //Inicializo el string de conexion en el constructor
-        public CManejadorSQL_Hoteles()
+        public CManejadorSQL_Rutas()
         {
             stringDeConexion = "Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617a;";
         }
