@@ -117,7 +117,14 @@ namespace BOReserva.Controllers
                 return Json(error);
             }
         }
-        
-       
+
+        public ActionResult M06_VisualizarVuelosComidas()
+        {
+           // manejadorSQL sql = new manejadorSQL();
+            //List<CComida> comidas = new List<CComida>();
+            //comidas = sql.listarPlatosEnBD();
+            //return PartialView(comidas);
+            return PartialView();
+        }
 	}
 }
