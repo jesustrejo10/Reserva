@@ -912,7 +912,64 @@ namespace BOReserva.Servicio
                 throw e;
             }
         }
-
+        //Procedimiento del Modulo 13 para retornar lista de roles
+        public List<CRoles> consultarListaroles()
+        {
+            List<CRoles> _roles = new List<CRoles>();
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                SqlConnection conexion2 = new SqlConnection(stringDeConexion);
+                //Abrir la conexion
+                conexion.Open();
+                //query es un string que me devolvera la consulta 
+                String query = "select rol_nombre,rol_id from rol";
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+                while (lector.Read())
+                {
+                    CRoles _rol = new CRoles();
+                    _rol.Nombre_rol = lector.GetSqlString(0).ToString();
+                    string a = lector.GetSqlInt32(1).ToString();
+                    //Abrir la conexion
+                    conexion2.Open();
+                    //query es un string que me devolvera la consulta 
+                    String query2 = "select mod_det_nombre from Rol_Modulo_Detallado,Modulo_Detallado where "+lector.GetSqlInt32(1)+"=fk_rol_id and mod_det_id=fk_mod_det_id";
+                    SqlCommand cmd2 = new SqlCommand(query2, conexion2);
+                    SqlDataReader lector2 = cmd2.ExecuteReader();
+                    //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+                    while (lector2.Read())
+                    {                       
+                        var entrada = new CModulo_detallado();
+                        entrada.Nombre = lector2.GetSqlString(0).ToString();
+                        //agrego un permiso a la lista de roles
+                        _rol.Permisos.agregarElemento(entrada);
+                        
+                    }
+                    //cierro el lector
+                    lector2.Close();
+                    //Cerrar la conexion
+                    conexion2.Close();
+                    //Agrego rol a la lista de roles
+                    _roles.Add(_rol);
+                }
+                //cierro el lector
+                lector.Close();
+                //Cerrar la conexion
+                conexion.Close();
+                return _roles;
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
         //Procedimiento del Modulo 13 para retornar lista de los modulos detallados
         public CListaGenerica<CModulo_detallado> consultarPermisos(String modulo)
         {
