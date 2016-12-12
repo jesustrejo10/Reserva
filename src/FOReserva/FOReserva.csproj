@@ -259,6 +259,7 @@
     </Compile>
     <Compile Include="Models\ReservaHabitacion\CCiudad.cs" />
     <Compile Include="Models\Hoteles\CHotel.cs" />
+    <Compile Include="Models\ReservaHabitacion\CProcesoResultado.cs" />
     <Compile Include="Models\ReservaHabitacion\CReservaHabitacion.cs" />
     <Compile Include="Models\Usuarios\CUsuario.cs" />
     <Compile Include="Models\ReservaHabitacion\Cvista_BuscarHotel.cs" />
