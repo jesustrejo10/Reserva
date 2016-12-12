@@ -21,6 +21,9 @@ namespace FOReserva.Controllers
             foreach (CModeloBoleto boleto in boletos)
             System.Diagnostics.Debug.WriteLine(boleto.codigo);
 
+            IList<CModeloBoleto> disponib = _manejador.buscarDisponibilidad("Turista", "2013-08-30 22:05:00.000");
+            foreach (CModeloBoleto boleto in disponib)
+            System.Diagnostics.Debug.WriteLine(boleto.codigo);
 
             return PartialView();
         }
