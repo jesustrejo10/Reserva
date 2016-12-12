@@ -15,7 +15,11 @@ namespace BOReserva.Controllers
         // GET: gestion_hoteles
         public ActionResult M09_GestionHoteles_Crear()
         {
+<<<<<<< HEAD
             CGGestionHoteles_CrearHotel crear = new CGGestionHoteles_CrearHotel() {
+=======
+            CHotel crear = new CHotel() {
+>>>>>>> 4b1d7a703393a001257cadd1fbd3e98ac23ab734
                 _listapaises = new List<SelectListItem>(pais())
              };
 
@@ -69,7 +73,11 @@ namespace BOReserva.Controllers
                     _pais.Add(new SelectListItem
                     {
                         Text = paises[i].ToString(),
+<<<<<<< HEAD
                         Value =paises[i].ToString()
+=======
+                        Value = paises[i].ToString()
+>>>>>>> 4b1d7a703393a001257cadd1fbd3e98ac23ab734
                     });
                     i++;
                 }
@@ -124,7 +132,11 @@ namespace BOReserva.Controllers
         }
 
         [HttpPost]
+<<<<<<< HEAD
         public JsonResult guardarHotel(CGGestionHoteles_CrearHotel model)
+=======
+        public JsonResult guardarHotel(CHotel model)
+>>>>>>> 4b1d7a703393a001257cadd1fbd3e98ac23ab734
         {
             Debug.WriteLine(model._direccion);
             Debug.WriteLine(model._email);

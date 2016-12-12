@@ -20,6 +20,9 @@ namespace BOReserva.Models.gestion_hoteles
         public int _estrellas { get; set; }
         public float _puntuacion { get; set; }
         public int _disponibilidad { get; set; }
+        public List<SelectListItem> _listapaises { get; set;}
+
+        public CHotel() { }
 
         public CHotel(int id, String nombre, String paginaweb, string email, int canthabitaciones, String direccion, String ciudad, String pais, int estrellas,
              float puntuacion, int disponibilidad)
