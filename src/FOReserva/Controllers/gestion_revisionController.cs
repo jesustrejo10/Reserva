@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Net;
 using FOReserva.Models.Restaurantes;
 
 namespace FORevision.Controllers
@@ -14,6 +15,12 @@ namespace FORevision.Controllers
     /// </summary>
     public class gestion_revisionController : Controller
     {
+
+        public ActionResult gestion_revision()
+        {
+            Cvista_revision model = new Cvista_revision();
+            return PartialView(model);
+        }
 
         /// <summary>
         /// Creacion Modelo Consultar Revision
@@ -173,8 +180,6 @@ namespace FORevision.Controllers
         /// <returns>Vista Modelo</returns>
         public bool Editar_Revision(string nombre, string apellido, int revision)
         {
-
-<<<<<<< HEAD
             bool resultado;
             ManejadorSQLRevision manejador = new ManejadorSQLRevision();
             resultado = manejador.Editar_Revision(nombre, apellido, revision);
@@ -182,10 +187,10 @@ namespace FORevision.Controllers
         }
 
         /// <summary>
-        /// TEST
+        /// Listado Revisiones
         /// </summary>
         /// <returns>TEST</returns>
-        public ActionResult Test()
+        public ActionResult Listado_revision()
         {
             return PartialView();
         }
@@ -211,34 +216,6 @@ namespace FORevision.Controllers
                 lista = manejador.Mostrar_Revision_Hotel(nombre, apellido, tipo);
                 return PartialView(lista);
             }
-        }
-=======
-
-            try
-            {
-
-                bool resultado;
-                ManejadorSQLRevision manejador = new ManejadorSQLRevision();
-                resultado = manejador.Editar_Revision(nombre, apellido, revision);
-                return true;
-            }
-
-            catch (NullReferenceException e)
-            {
-                //Parametro Nulos
-
-            }
-
-            catch (ManejadorSQLException f)
-            {
-                //Error con la Base de Datos
->>>>>>> origin/M10_Revision_FO
-
-            }
-
-            return true;
-
-
         }
 
     }
