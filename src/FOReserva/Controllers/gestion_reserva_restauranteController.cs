@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using FOReserva.Models.Restaurantes;
@@ -233,3 +233,4 @@ namespace FOReserva.Controllers
         }
     }
 }
+

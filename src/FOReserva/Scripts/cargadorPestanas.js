@@ -1,4 +1,4 @@
-﻿function mostrarContenedor(posicion) {
+function mostrarContenedor(posicion) {
 
     $(".contenedor").hide();
     if (posicion > 0 && posicion <= $(".contenedor").length) {
@@ -379,3 +379,4 @@ jQuery(document).ready(function () {
 
     });
 });
+
