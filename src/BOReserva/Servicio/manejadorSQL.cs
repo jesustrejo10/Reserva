@@ -539,7 +539,7 @@ namespace BOReserva.Servicio
                         _id = (int)lector.GetSqlInt32(0),
                         _nombre = lector.GetSqlString(1).ToString(),
                         _tipoLugar = lector.GetSqlString(2).ToString(),
-                        _zonaHoraria = lector.GetSqlString(3).ToString(),
+                        _zonaHoraria = (int)lector.GetSqlInt32(3),
                         _idFKLugar = lector.IsDBNull(4) ? -1 : (int)lector.GetSqlInt32(4), //Pregunta si el campo es null, dando valor por defecto en caso que lo sea
                         _abreviatura = lector.GetSqlString(5).ToString()
 
@@ -556,15 +556,15 @@ namespace BOReserva.Servicio
             {
                 conexion.Close();
                 Debug.WriteLine("Exception caught: {0}", e);
-                //throw e;
-                return null;
+                throw e;
+                //return null;
             }
             catch (Exception e)
             {
                 conexion.Close();
                 Debug.WriteLine("Exception caught: {0}", e);
-                //throw e;
-                return null;
+                throw e;
+                //return null;
             }
         }
 
@@ -592,7 +592,7 @@ namespace BOReserva.Servicio
                         _id = (int)lector.GetSqlInt32(0),
                         _nombre = lector.GetSqlString(1).ToString(),
                         _tipoLugar = lector.GetSqlString(2).ToString(),
-                        _zonaHoraria = lector.GetSqlString(3).ToString(),
+                        _zonaHoraria = (int)lector.GetSqlInt32(3),
                         _idFKLugar = lector.IsDBNull(4) ? -1 : (int)lector.GetSqlInt32(4), //Pregunta si el campo es null, dando valor por defecto en caso que lo sea
                         _abreviatura = lector.GetSqlString(5).ToString()
 
@@ -633,7 +633,7 @@ namespace BOReserva.Servicio
             {
                 //Inicializo la conexion con el string de conexion
                 conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
+                //Abrir la conexion
                 conexion.Open();
                 //query es un string que me devolvera la consulta 
                 String query = "SELECT m.mod_gen_nombre as Modulo_Detallado FROM modulo_general m";
@@ -653,7 +653,7 @@ namespace BOReserva.Servicio
                 }
                 //cierro el lector
                 lector.Close();
-                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                //Cerrar la conexion
                 conexion.Close();
                 return modulo_general;
 
@@ -667,47 +667,246 @@ namespace BOReserva.Servicio
                 throw e;
             }
         }
+        //Procedimiento del Modulo 13 para retornar lista de los modulos detallados
+        public CListaGenerica<CModulo_detallado> consultarPermisos(String modulo)
+        {
+            CListaGenerica<CModulo_detallado> modulo_detallado = new CListaGenerica<CModulo_detallado>();
+            try
+            {
+                
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //Abrir la conexion
+                conexion.Open();
+                //query es un string que me devolvera la consulta 
+                System.Diagnostics.Debug.WriteLine(modulo);
+                String query = "SELECT mod_det_nombre,mod_det_url FROM Modulo_Detallado,Modulo_general WHERE mod_gen_id=fk_mod_gen_id and mod_gen_nombre='"+modulo+"'" ;
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+                while (lector.Read())
+                {
+                    var entrada = new CModulo_detallado();
+                    entrada.Nombre = lector.GetSqlString(0).ToString();
+                    entrada.Url= lector.GetSqlString(1).ToString();
+                    modulo_detallado.agregarElemento(entrada);
+                   
+                }
+                //cierro el lector
+                lector.Close();
+                //Cerrar la conexion
+                conexion.Close();
+                return modulo_detallado;
 
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
 
-        //Procedimiento del Modulo 13 para un rol a la base de datos.
-        public Boolean insertarRol()
+        //Procedimiento del Modulo 13 para insertar Roles
+        public Boolean insertarRol(CRoles model)
         {
             try
             {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //Abrir la conexion
+                conexion.Open();
+                //SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "INSERT INTO Rol VALUES ('" + model.Nombre_rol + "')";
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior
+                SqlDataReader lector = query.ExecuteReader();
+                //cierro el lector
+                lector.Close();
+                //Cierro la conexion
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+        }
+
+
+        public Boolean insertarPermisosRol(CRoles rol , CListaGenerica<CModulo_detallado> listaPermisos)
+        {
+             List<CAvion> aviones = new List<CAvion>();
+            try
+            {
+                string idRol = "";
+
+                List<string> listaPermiso = new List<string>();
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "SELECT rol_id FROM Rol where rol_nombre = '"+rol.Nombre_rol+"'";
+               
+                SqlCommand cmd = new SqlCommand(query, conexion);
+
+
+                SqlDataReader lector = cmd.ExecuteReader();
+
+
+                while (lector.Read())
+                {
+
+                      Debug.WriteLine("IDiiiiiii" + lector["rol_id"].ToString());
+                      idRol = lector["rol_id"].ToString();
+                      Debug.WriteLine("----------------");
+
+                }
+
+ 
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                SqlDataReader lectorDetalle = null ;
+                String queryDetallado , queryInsertar; 
+
+                foreach (var detalle in listaPermisos)
+                {
+                    Debug.WriteLine("Amount is {0} and type is {1}", detalle.Nombre, detalle.Url);
+               
+                    queryDetallado = "SELECT mod_det_id from Modulo_Detallado where mod_det_nombre = '" + detalle.Nombre + "'";
+                    Debug.WriteLine("---------3-------");
+
+
+                    SqlCommand cmd2 = new SqlCommand(queryDetallado, conexion);
+
+                    Debug.WriteLine("--------4--------");
+
+
+                    lectorDetalle = cmd2.ExecuteReader();
+
+                    Debug.WriteLine("-------41---------");
+
+
+                    while (lectorDetalle.Read())
+                    {
+
+                        Debug.WriteLine("ID metodo detallado " + lectorDetalle["mod_det_id"].ToString());
+
+                        listaPermiso.Add(lectorDetalle["mod_det_id"].ToString());
+                                                                    
+                        Debug.WriteLine("----------------");
+
+                    }
+                    Debug.WriteLine("-----------5-----");
+                    lectorDetalle.Close();
+
+                }
+
+                insertarRolPermisos(idRol, listaPermiso);
+                conexion.Close();
+                
+                return true;
+
+            }
+            catch ( SqlException e)
+            
+            {
+                Debug.WriteLine("Exception sql");
+                return false;
+
+                throw e;
+
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Exception e");
+
+                return false;
+
+                throw e;
+
+            }
+        }
+
+        public void insertarRolPermisos(string rol, List<string> listaString)
+        {
+
+
+            Debug.WriteLine("Rol "+rol);
+            Debug.WriteLine("Rol " + listaString.Count);
+            if (listaString.Count > 0)
+            {
+                int i = 0;
+                foreach (var money in listaString)
+                {
+                    i += 0; 
+                    Debug.WriteLine("Rol " + listaString[i]);
+
+                }
+
+
+
                 //Inicializo la conexion con el string de conexion
                 conexion = new SqlConnection(stringDeConexion);
                 //INTENTO abrir la conexion
                 conexion.Open();
                 //uso el SqlCommand para realizar los querys
                 SqlCommand query = conexion.CreateCommand();
+                String queryString;
+                SqlCommand cmd;
+                SqlDataReader lector;
+
                 //ingreso la orden del query
-                query.CommandText = "INSERT INTO ROL VALUES ('Prueba manuel');";
-                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
-                SqlDataReader lector = query.ExecuteReader();
-                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
-                /*while(lector.Read())
+
+ 
+
+                foreach (var money in listaString)
                 {
-                      //COMENTADO PORQUE ESTE METODO NO LO APLICA, SERÁ BORRADO DESPUES
-                }*/
-                //cierro el lector
-                lector.Close();
+                    
+                    Debug.WriteLine("este es el valor de i " + i);
+                    Debug.WriteLine("+++++1+++++");
+                    query.CommandText = "INSERT INTO Rol_Modulo_Detallado VALUES ('" + rol + "','" + listaString[i] + "')";
+                    Debug.WriteLine("+++++2+++++");
+
+                    lector = query.ExecuteReader();
+                    Debug.WriteLine("+++++3+++++");
+
+                    //cierro el lector
+                    lector.Close();
+                    Debug.WriteLine("+++++4+++++");
+
+
+                    i += 1;
+                    
+                }
+
                 //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
                 conexion.Close();
-                return true;
-            }
-            catch (SqlException e)
-            {
-                return false;
-            }
-            catch (Exception e)
-            {
-                return false;
+
+
+
             }
 
         }
-
-
-
+        
+        
         /* FIN DE FUNCIONES COMUNES */
     }
 }

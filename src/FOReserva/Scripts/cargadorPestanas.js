@@ -10,11 +10,11 @@
 
 /* Cargador Generico */
 function cargarContenido(seccion, tipo, url, data, boton) {
-    
+
     // tipo CP : 1 columna, Todo el ancho de la pagina
     // tipo MD : 2 columnas, contenido derecha
     // tipo MI : 2 columnas, contenido izquierda
-    // tipo CL : 2 columnas, contenido izquierda 
+    // tipo CL : 2 columnas, contenido izquierda
     $.ajax(
         {
             url: url,
@@ -25,7 +25,7 @@ function cargarContenido(seccion, tipo, url, data, boton) {
                     mostrarContenedor(1)
                 } else if (seccion == '#CI') {
                     mostrarContenedor(3)
-                } else {
+                } else if (seccion == '#CP') {
                     mostrarContenedor(2)
                 }
 
@@ -231,7 +231,7 @@ jQuery(document).ready(function () {
     });
 
 
-    /* CARGADOR DE LA PESTAÑA CRUCEROS*/
+   /* CARGADOR DE LA PESTAÑA CRUCEROS*/
     $("#LiCruceros").click(function (e) {
         e.preventDefault();
 
@@ -241,7 +241,43 @@ jQuery(document).ready(function () {
         $("#LiHoteles").removeClass("active");
         $("#LiRestaurantes").removeClass("active");
         $("#LiAutos").removeClass("active");
-        $("#LiDiarios").removeClass("active");
+        var url = '/gestion_reserva_crucero/gestion_reserva_crucero';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenedor").empty();
+                    $("#contenedor").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+
+        var url = '/gestion_reserva_crucero/gestion_reserva_cruceroImagenes';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenedorImagenes").empty();
+                    $("#contenedorImagenes").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
     });
 
 
@@ -270,7 +306,7 @@ jQuery(document).ready(function () {
 
                     $("#contenedor").empty();
                     $("#contenedor").html(data);
-        
+
 
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -278,7 +314,7 @@ jQuery(document).ready(function () {
                 }
             });
 
-        var url = '/gestion_diarios/gestion_diariosImagenes';
+        var url = '/gestion_vuelos/gestion_vuelosImagenes';
         var method = 'GET';
         var data = '';
 
@@ -296,7 +332,6 @@ jQuery(document).ready(function () {
                     alert(errorThrown);
                 }
             });
-
 
     });
 });

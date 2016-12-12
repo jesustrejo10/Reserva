@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FOReserva.Models.Diarios;
+using FOReserva.Servicio;
 
 namespace FOReserva.Controllers
 {
@@ -15,8 +16,9 @@ namespace FOReserva.Controllers
 
         public ActionResult gestion_diarios()
         {
-            Cvista_Diarios model = new Cvista_Diarios();
+            CDiarioModel model = new CDiarioModel();
             return PartialView(model);
+            
         }
 
         public ActionResult gestion_diariosImagenes()
@@ -24,12 +26,20 @@ namespace FOReserva.Controllers
             return PartialView();
         }
 
-        [HttpPost]
-        public JsonResult buscarDiarios(Cvista_Diarios model)
+        public ActionResult gestion_diarios_resultados()
         {
-            String prueba = model._prueba;
-            Console.WriteLine(prueba);
-            return (Json(true, JsonRequestBehavior.AllowGet));
+            ManejadorSQLDiarios manejador = new ManejadorSQLDiarios();
+            List<CDiarioModel> lista = manejador.buscarDV();
+            return PartialView(lista);
+        }
+
+        [HttpPost]
+        public JsonResult buscarDiarios(CDiarioModel model)
+        {
+            String nombre = model.Nombre;
+            DateTime f_inicio = model.Fecha_ini;
+            DateTime f_fin = model.Fecha_fin;
+            return (Json("asdf", JsonRequestBehavior.AllowGet));
         }
 
     }
