@@ -61,6 +61,42 @@ namespace BOReserva.Models.gestion_cruceros {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to M24_AgregarCabinas.
+        /// </summary>
+        internal static string AgregarCabinas {
+            get {
+                return ResourceManager.GetString("AgregarCabinas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M24_AgregarCrucero.
+        /// </summary>
+        internal static string AgregarCruceros {
+            get {
+                return ResourceManager.GetString("AgregarCruceros", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M24_EliminarCruceros.
+        /// </summary>
+        internal static string EliminarCruceros {
+            get {
+                return ResourceManager.GetString("EliminarCruceros", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M24_ListarCabinas.
+        /// </summary>
+        internal static string ListarCabinas {
+            get {
+                return ResourceManager.GetString("ListarCabinas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to M24_ConsultarCrucero.
         /// </summary>
         internal static string ListarCruceros {

@@ -237,6 +237,7 @@
     <Compile Include="Models\gestion_cruceros\CGestion_crucero.cs" />
     <Compile Include="Models\gestion_cruceros\CGestion_itinerario.cs" />
     <Compile Include="Models\gestion_cruceros\ConexionBD.cs" />
+    <Compile Include="Models\gestion_cruceros\ModelCruceros.cs" />
     <Compile Include="Models\gestion_cruceros\RecursosCruceros.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -361,6 +362,7 @@
     <Content Include="Content\dist\js\demo.js" />
     <Content Include="Content\dist\js\pages\dashboard.js" />
     <Content Include="Content\dist\js\pages\dashboard2.js" />
+    <Content Include="Content\M24_css\style_module.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -568,7 +570,6 @@
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarPorVuelo.html" />
     <Content Include="Views\gestion_comida_vuelo\M06_ConsultarComidas.html" />
     <Content Include="Views\gestion_comida_vuelo\placeholder.html" />
-    <Content Include="Content\M24_css\style_module.css" />
     <Content Include="Views\gestion_cruceros\js\module.js" />
     <Content Include="Views\gestion_cruceros\placeholder.html" />
     <Content Include="Views\gestion_equipaje_perdido\placeholder.html" />
@@ -1469,6 +1470,7 @@
     <Content Include="Views\gestion_ofertas\M11_ModificarPaquete.cshtml" />
     <Content Include="Views\gestion_roles\M13_AgregarRol.cshtml" />
     <Content Include="Views\gestion_roles\M13_VisualizarRol.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_AgregarCabinas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

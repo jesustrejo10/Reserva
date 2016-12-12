@@ -340,7 +340,7 @@
             });
     });
 
-    $("#consultarOferta").click(function (e) {
+    $("#consultarOferta").click(function (e) {});
     /* INICIO M10 RESTAURANTES BO */
 
     $("#verRestaurantes").click(function (e) {
@@ -434,7 +434,7 @@
                     }
                 });
         });
-
+    });
         $("#modificarPaquete").click(function (e) {
             e.preventDefault();
             var url = '/gestion_ofertas/M11_ModificarPaquete';
@@ -501,6 +501,28 @@
                 });
         });
 
+        $("#m24_agregarcabina").click(function (e) {
+            e.preventDefault();
+            var url = '/gestion_cruceros/M24_AgregarCabinas';
+            var method = 'GET';
+            var data = '';
+            console.log("x");
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+        });
+
         $("#consultarPaquete").click(function (e) {
             e.preventDefault();
             var url = '/gestion_ofertas/M11_ConsultarPaquete';
@@ -531,5 +553,3 @@
 
         //Fin M11
         });
-    });
-});

@@ -1,221 +1,73 @@
-﻿<div class="box">
-    <div class="box-body">
-        <div class="box-header with-border">
-            <h1 class="box-title"> Agregar Crucero</h1>
-            <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"></button>
-            </div>
-        </div>
-        <div class="modal-body col-xs-6" id="bodyCruc">
-            <div class="form-group">
-                <label>Nombre del Crucero:</label>
-                <input type="text" class="form-control" placeholder="Introduce el nombre del crucero">
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <label>Compañia:</label>
-                        <input type="text" class="form-control" placeholder="Introduce la compañia del crucero">
-                    </div>
+﻿@model BOReserva.Models.gestion_cruceros.CGestion_crucero
+@using (Html.BeginForm("guardarCrucero", "gestion_cruceros", null, FormMethod.Post, new { @id = "formGuardarCrucero", @class = "form-horizontal" }))
+{
+    <div class="box">
+        <div class="box-body">
+            <div class="box-header with-border">
+                <h1 class="box-title"> Agregar Crucero</h1>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"></button>
                 </div>
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <label>Capacidad:</label>
-                        <input type="number" class="form-control" placeholder="Introduce la capacidad del crucero">
-                    </div>
+            </div>
+            <div class="modal-body col-xs-6" id="bodyCruc" style="margin-left:10%">
+                <div class="form-group">
+                    <label>Nombre del Crucero:</label>
+                    @Html.TextBoxFor(m => m._nombreCrucero, null, new { @class = "form-control", @placeholder = "Introduce el nombre del crucero", @id = "nombrecrucero" })
+                    @*<input type="text" class="form-control" placeholder="Introduce el nombre del crucero">*@
                 </div>
-                <label>Imagen:</label>
-                <input type="file" class="form-control" placeholder="Introduce el nombre del crucero">
-            </div>
-            </div>
-            <hr>
-
-        </div>
-        <div class="row col-xs-6">
-            <div class="col-xs-12">
-                <p> <label>Cabinas y camarotes:</label> </p>
-                <div id="cabinList">
-                    <div class="box-group" id="accordion">
-                        <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
-                        <div class="panel box">
-                            <div class="box-header with-border" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" class="collapsed">
-                                <p style="margin:0"> <b>Cabina 1 :</b> 150$ <i class="fa fa-circle started"></i><i class="fa fa-times" aria-hidden="true"></i><i class="fa fa-pencil editCabin" on-click="openEdit($event)" aria-hidden="true"></i></p>
-                            </div>
-                            <div id="collapseOne" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
-                                <div class="box-body">
-                                    <ul>
-                                        <li class="camarote">
-                                            Camarote&nbsp;&nbsp;#105 -&nbsp;&nbsp;<i class="fa fa-circle started"></i>
-                                            <ul>
-                                                <li class="hab">2&nbsp;&nbsp;<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;individuales</li>
-                                            </ul>
-                                        </li>
-                                        <li class="camarote">
-                                            Camarote&nbsp;&nbsp;#106 -&nbsp;&nbsp;<i class="fa fa-circle started"></i>
-                                            <ul>
-                                                <li class="hab">1&nbsp;&nbsp;<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;matrimonial</li>
-                                            </ul>
-                                        </li>
-                                        <li class="camarote">
-                                            Camarote&nbsp;&nbsp;#107 -&nbsp;&nbsp;<i class="fa fa-circle paused"></i>
-                                            <ul>
-                                                <li class="hab"> 2&nbsp;&nbsp;<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;literas</li>
-                                            </ul>
-                                        </li>
-                                        <li class="camarote">
-                                            Camarote&nbsp;&nbsp;#108 -&nbsp;&nbsp;<i class="fa fa-circle started"></i>
-                                            <ul>
-                                                <li class="hab">1&nbsp;&nbsp;<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;individual</li>
-                                            </ul>
-                                        </li>
-                                        <li class="camarote">
-                                            Camarote&nbsp;&nbsp;#109 -&nbsp;&nbsp;<i class="fa fa-circle started"></i>
-                                            <ul>
-                                                <li class="hab">2&nbsp;&nbsp;<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;matrimoniales</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel box">
-                            <div class="box-header with-border" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed" aria-expanded="false">
-                                <p style="margin:0"> <b> Cabina 2 :</b> 250$ <i class="fa fa-circle started"></i><i class="fa fa-times" aria-hidden="true"></i><i class="fa fa-pencil editCabin" on-click="openEdit($event)" aria-hidden="true"></i></p>
-                            </div>
-                            <div id="collapseThree" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
-                                <div class="box-body">
-                                    <ul>
-                                        <li class="camarote">
-                                            Camarote&nbsp;&nbsp;#105 -&nbsp;&nbsp;<i class="fa fa-circle started"></i>
-                                            <ul>
-                                                <li class="hab">2&nbsp;&nbsp;<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;individuales</li>
-                                            </ul>
-                                        </li>
-                                        <li class="camarote">
-                                            Camarote&nbsp;&nbsp;#106 -&nbsp;&nbsp;<i class="fa fa-circle started"></i>
-                                            <ul>
-                                                <li class="hab">1&nbsp;&nbsp;<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;matrimonial</li>
-                                            </ul>
-                                        </li>
-                                        <li class="camarote">
-                                            Camarote&nbsp;&nbsp;#107 -&nbsp;&nbsp;<i class="fa fa-circle paused"></i>
-                                            <ul>
-                                                <li class="hab"> 2&nbsp;&nbsp;<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;literas</li>
-                                            </ul>
-                                        </li>
-                                        <li class="camarote">
-                                            Camarote&nbsp;&nbsp;#108 -&nbsp;&nbsp;<i class="fa fa-circle started"></i>
-                                            <ul>
-                                                <li class="hab">1&nbsp;&nbsp;<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;matrimonial</li>
-                                            </ul>
-                                        </li>
-                                        <li class="camarote">
-                                            Camarote&nbsp;&nbsp;#109 -&nbsp;&nbsp;<i class="fa fa-circle started"></i>
-                                            <ul>
-                                                <li class="hab">2&nbsp;&nbsp;<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;matrimoniales</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel box">
-                            <div class="box-header with-border" data-toggle="collapse" data-parent="#accordion" href="#collapse4" class="collapsed" aria-expanded="false">
-                                <p style="margin:0"> <b>Cabina 3 :</b> 1500$ <i class="fa fa-circle started"></i><i class="fa fa-times" aria-hidden="true"></i><i class="fa fa-pencil editCabin" on-click="openEdit($event)" aria-hidden="true"></i></p>
-                            </div>
-                            <div id="collapse4" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
-                                <div class="box-body">
-                                    <ul>
-                                        <li class="camarote">
-                                            Camarote&nbsp;&nbsp;#105 -&nbsp;&nbsp;<i class="fa fa-circle started"></i>
-                                            <ul>
-                                                <li class="hab">2&nbsp;&nbsp;<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;individuales</li>
-                                            </ul>
-                                        </li>
-                                        <li class="camarote">
-                                            Camarote&nbsp;&nbsp;#106 -&nbsp;&nbsp;<i class="fa fa-circle started"></i>
-                                            <ul>
-                                                <li class="hab">1&nbsp;&nbsp;<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;matrimonial</li>
-                                            </ul>
-                                        </li>
-                                        <li class="camarote">
-                                            Camarote&nbsp;&nbsp;#107 -&nbsp;&nbsp;<i class="fa fa-circle paused"></i>
-                                            <ul>
-                                                <li class="hab"> 2&nbsp;&nbsp;<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;literas</li>
-                                            </ul>
-                                        </li>
-                                        <li class="camarote">
-                                            Camarote&nbsp;&nbsp;#108 -&nbsp;&nbsp;<i class="fa fa-circle started"></i>
-                                            <ul>
-                                                <li class="hab">1&nbsp;&nbsp;<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;individual</li>
-                                            </ul>
-                                        </li>
-                                        <li class="camarote">
-                                            Camarote&nbsp;&nbsp;#109 -&nbsp;&nbsp;<i class="fa fa-circle started"></i>
-                                            <ul>
-                                                <li class="hab">2&nbsp;&nbsp;<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;matrimoniales</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel box">
-                            <div class="box-header with-border" data-toggle="collapse" data-parent="#accordion" href="#collapse5" class="collapsed" aria-expanded="false">
-                                <p style="margin:0"> <b> Cabina 4 :</b> 3000$ <i class="fa fa-circle paused"></i><i class="fa fa-times" aria-hidden="true"></i><i class="fa fa-pencil editCabin" on-click="openEdit($event)" aria-hidden="true"></i></p>
-                            </div>
-                            <div id="collapse5" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
-                                <div class="box-body">
-                                    <ul>
-                                        <li class="camarote">
-                                            Camarote&nbsp;&nbsp;#105 -&nbsp;&nbsp;<i class="fa fa-circle paused"></i>
-                                            <ul>
-                                                <li class="hab">2&nbsp;&nbsp;<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;individuales</li>
-                                            </ul>
-                                        </li>
-                                        <li class="camarote">
-                                            Camarote&nbsp;&nbsp;#106 -&nbsp;&nbsp;<i class="fa fa-circle paused"></i>
-                                            <ul>
-                                                <li class="hab">1&nbsp;&nbsp;<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;matrimonial</li>
-                                            </ul>
-                                        </li>
-                                        <li class="camarote">
-                                            Camarote&nbsp;&nbsp;#107 -&nbsp;&nbsp;<i class="fa fa-circle paused"></i>
-                                            <ul>
-                                                <li class="hab"> 2&nbsp;&nbsp;<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;literas</li>
-                                            </ul>
-                                        </li>
-                                        <li class="camarote">
-                                            Camarote&nbsp;&nbsp;#108 -&nbsp;&nbsp;<i class="fa fa-circle paused"></i>
-                                            <ul>
-                                                <li class="hab">1&nbsp;&nbsp;<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;matrimonial</li>
-                                            </ul>
-                                        </li>
-                                        <li class="camarote">
-                                            Camarote&nbsp;&nbsp;#109 -&nbsp;&nbsp;<i class="fa fa-circle paused"></i>
-                                            <ul>
-                                                <li class="hab">2&nbsp;&nbsp;<i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;matrimoniales</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label>Compañia:</label>
+                            @Html.TextBoxFor(m => m._companiaCrucero, null, new { @class = "form-control", @placeholder = "Introduce el nombre de la compania", @id = "compania" })
+                            @*<input type="text" class="form-control" placeholder="Introduce la compañia del crucero">*@
                         </div>
                     </div>
-                    <div class="col-xs-6 col-xs-offset-6" style="padding:0">
-                        <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#createCabin" style="margin-top:15px">Agregar cabina</button>
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label>Capacidad:</label>
+                            @Html.TextBoxFor(m => m._capacidadCrucero, null, new { @type = "number", @class = "form-control", @placeholder = "Introduce la capacidad del crucero", @id = "capacidad" })
+                            @*<input type="number" class="form-control" placeholder="Introduce la capacidad del crucero">*@
+                        </div>
                     </div>
+                    <label>Imagen:</label>
+                    @Html.TextBoxFor(m => m._imagen, null, new { @type = "file", @class = "form-control", @placeholder = "Introduce la imagen del crucero", @id = "imagen" })
                 </div>
-
-                <!-- Fin Agregar Crucero  -->
-                <!-- Botón Guardar -->
-                <div>&nbsp;</div>
-
-
+                <div class="col-md-12" style="margin-top:10px;">
+                    <button type="button" id="guardar_crucero" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                </div>
             </div>
-        </div>
-        <div class="col-md-12" style="margin-top:10px;">
-            <button type="button" id="guardarCrucero" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
         </div>
     </div>
-</div>
+
+    <script>
+        $("#guardar_crucero").click(function (e) {         
+            e.preventDefault();
+            var form = $("#formGuardarCrucero");
+            $.ajax({
+                url: "gestion_cruceros/guardarCrucero",
+                data: form.serialize(),
+                type: 'POST',
+                success: function (data) {
+                    $.ajax({
+                        url: '/gestion_cruceros/M24_ListarCruceros',
+                        type: 'GET',
+                        data: '',
+                        success: function (data, textStatus, jqXHR) {
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+                    $('#formGuardarCrucero')[0].reset();
+                },
+                error: function (data) {
+                    console.log(data);
+                    $('#formGuardarCrucero')[0].reset();
+                }
+            });
+        });
+    </script>
+}

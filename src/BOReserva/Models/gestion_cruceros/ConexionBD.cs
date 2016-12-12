@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace BOReserva.Models.gestion_cruceros
 {
@@ -111,5 +112,79 @@ namespace BOReserva.Models.gestion_cruceros
             }
             return listaCruceros;
         }
+
+        public void insertarCruceros(CGestion_crucero crucero)
+        {
+            Conectar();
+            using (comando = new SqlCommand(RecursosCruceros.AgregarCruceros, conexion))
+            {
+                comando.CommandType = CommandType.StoredProcedure;
+
+                comando.Parameters.AddWithValue("@nombrecrucero", crucero._nombreCrucero);
+                comando.Parameters.AddWithValue("@compania", crucero._companiaCrucero);
+                comando.Parameters.AddWithValue("@capacidad", crucero._capacidadCrucero);
+                comando.Parameters.AddWithValue("@imagen", "url");
+
+
+                conexion.Open();
+                comando.ExecuteNonQuery();
+            }
+        }
+
+        public void eliminarCrucero(int id_crucero)
+        {
+            Conectar();
+            using (comando = new SqlCommand(RecursosCruceros.EliminarCruceros, conexion))
+            {
+                comando.CommandType = CommandType.StoredProcedure;
+
+                comando.Parameters.AddWithValue("@id", id_crucero);
+
+                conexion.Open();
+                comando.ExecuteNonQuery();
+            }
+        }
+
+        public void insertarCabinas(CGestion_cabina cabina)
+        {
+            Conectar();
+            using (comando = new SqlCommand(RecursosCruceros.AgregarCabinas, conexion))
+            {
+                comando.CommandType = CommandType.StoredProcedure;
+
+                comando.Parameters.AddWithValue("@nombrecabina", cabina._nombreCabina);
+                comando.Parameters.AddWithValue("@precio", cabina._precioCabina);
+                comando.Parameters.AddWithValue("@fk_id_crucero", cabina._fkCrucero);
+                conexion.Open();
+                comando.ExecuteNonQuery();
+            }
+        }
+
+        public List<CGestion_cabina> listarCabinas(int idCrucero)
+        {
+            List<CGestion_cabina> listaCabinas = new List<CGestion_cabina>();
+            CGestion_cabina cabina;
+            Conectar();
+            using (comando = new SqlCommand(RecursosCruceros.ListarCabinas, conexion))
+            {
+                comando.CommandType = CommandType.StoredProcedure;
+               // conexion.Open();
+                comando.ExecuteNonQuery();
+                SqlDataReader reader = comando.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    cabina = new CGestion_cabina();
+                    cabina._idCabina = int.Parse(reader["id"].ToString());
+                    cabina._nombreCabina = reader["nombre"].ToString();
+                    cabina._precioCabina = float.Parse(reader["precio"].ToString());
+                    cabina._estatus = reader["estatus"].ToString();
+                    listaCabinas.Add(cabina);
+                }
+                reader.Close();
+            }
+            return listaCabinas;
+        }
+
     }
 }
