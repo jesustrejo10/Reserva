@@ -126,7 +126,7 @@ namespace BOReserva.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         public JsonResult eliminarRestaurante(int id)
         {
             //Chequeo de campos obligatorios para el formulario

@@ -11,6 +11,25 @@ $("#aceptarRestaurante").click(function (e) {
         success: function (data) {
             alert("El restaurante se agrego con exito.");
             $('#formGuardarRestaurante')[0].reset();
+
+            var url = '/gestion_restaurantes/M10_GestionRestaurantes_Ver';
+            var method = 'GET';
+            var data = '';
+
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
         }
         , error: function (xhr, textStatus, exceptionThrown) {
             alert(xhr.responseText);
@@ -36,6 +55,45 @@ $(".modificar").click(function () {
 
 });
 
+//EVENTO PARA LA ELIMINACIÓN DE RESTAURANTES
+
+$(".eliminar").click(function () {
+    var identificador = $(this).parent().parent().parent().attr("id");
+    jQuery.ajax({
+        type: "GET",
+        url: "gestion_restaurantes/eliminarRestaurante",
+        data: { id: identificador },
+        success: function (data) {
+            alert("El restaurante se elimino con exito.");
+
+            var url = '/gestion_restaurantes/M10_GestionRestaurantes_Ver';
+            var method = 'GET';
+            var data = '';
+
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+
+        }
+        , error: function (xhr, textStatus, exceptionThrown) {
+            alert(xhr.responseText);
+        }
+    });
+
+
+});
+
 //EVENTO PARA GUARDAR LA MODIFICACIÓN DE UN RESTAURANTE
 
 $("#aceptarRestauranteModificacion").click(function (e) {
@@ -49,10 +107,52 @@ $("#aceptarRestauranteModificacion").click(function (e) {
         type: 'POST',
         success: function (data) {
             alert("El restaurante se modifico con exito.");
-            $('#formModificarRestaurante')[0].reset();
+
+            var url = '/gestion_restaurantes/M10_GestionRestaurantes_Ver';
+            var method = 'GET';
+            var data = '';
+
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+
         }
         , error: function (xhr, textStatus, exceptionThrown) {
             alert(xhr.responseText);
         }
     });
+});
+
+//EVENTO PARA CANCELAR LA MODIFICACIÓN DE UN RESTAURANTE
+
+$("#cancelarRestauranteModificacion").click(function (e) {
+    var url = '/gestion_restaurantes/M10_GestionRestaurantes_Ver';
+    var method = 'GET';
+    var data = '';
+
+    $.ajax(
+        {
+            url: url,
+            type: method,
+            data: data,
+            success: function (data, textStatus, jqXHR) {
+
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
 });

@@ -18,20 +18,9 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $(".gestionver-seleccion-restaurante").select2();
     $("#m10-ver-restaurantes").DataTable();
 });
 </script>
-
-<select class="gestionver-seleccion-restaurante">
-    @if(Model._listaRestaurantes != null)
-    {
-        foreach (var entrada in Model._listaRestaurantes)
-        {
-            <option value="@entrada._id">@entrada._nombre</option>
-        }
-    }
-</select>
 
 <div class="row">
     <link rel="stylesheet" href="~/Content/plugins/datatables/dataTables.bootstrap.css">

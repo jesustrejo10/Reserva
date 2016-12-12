@@ -536,8 +536,6 @@
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Deshabilitar.html" />
     <Content Include="Views\gestion_hoteles\placeholder.html" />
     <Content Include="Views\gestion_ofertas\placeholder.html" />
-    <Content Include="Views\gestion_restaurantes\M10_GestionRestaurantes.html" />
-    <Content Include="Views\gestion_restaurantes\placeholder.html" />
     <Content Include="Views\gestion_roles\M13_Roles.html" />
     <Content Include="Views\gestion_roles\placeholder.html" />
     <Content Include="Views\gestion_ruta_comercial\placeholder.html" />
@@ -1436,9 +1434,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\Scripts_ComidaVuelo\" />
-    <Folder Include="Views\dist\css\skins\" />
-    <Folder Include="Views\dist\img\credit\" />
-    <Folder Include="Views\dist\js\pages\" />
     <Folder Include="Views\gestion_comidavuelo\" />
     <Folder Include="Views\gestion_roles\css\" />
     <Folder Include="Views\gestion_roles\js\" />
