@@ -1,6 +1,6 @@
 ﻿
 
-// Evento para agregar un vuelo a la BD
+// Evento para agregar un vuelo a la BD CREAR
 $("#agregarVuelo").click(function (e) {
     e.preventDefault();
     var form = $("#formGuardarVuelo");
@@ -15,7 +15,7 @@ $("#agregarVuelo").click(function (e) {
     });
 });
 
-//evento para cargar los destinos disponibles segun el origen seleccionado en la vista
+//evento para cargar los destinos disponibles segun el origen seleccionado en la vista CREAR
 $("#ciudadO").change(function () {
     var cID = $(ciudadO).val();
         $.getJSON("gestion_vuelo/cargarDestinos", { ciudadO: cID },
@@ -35,7 +35,7 @@ $("#ciudadO").change(function () {
                     });
 });
 
-//evento para cargar los aviones que puedan cubrir la distancia de la ruta seleccionada en la vista
+//evento para cargar los aviones que puedan cubrir la distancia de la ruta seleccionada en la vista CREAR
 $("#ciudadD").change(function () {
     var cID = $(ciudadO).val();
     var dID = $(ciudadD).val();
@@ -56,7 +56,7 @@ $("#ciudadD").change(function () {
            });
 });
 
-//evento para traer el modelo del avion seleccionado en la vista
+//evento para traer el modelo del avion seleccionado en la vista CREAR
 $("#matAvion").change(function () {
     var aID = $(matAvion).val();
     $.getJSON("gestion_vuelo/buscaModeloA", { matriAvion: aID },
@@ -65,7 +65,7 @@ $("#matAvion").change(function () {
            });
 });
 
-//evento para traer la cantidad de pasajeros segun avion seleccionado en la vista
+//evento para traer la cantidad de pasajeros segun avion seleccionado en la vista CREAR
 $("#matAvion").change(function () {
     var aID = $(matAvion).val();
     $.getJSON("gestion_vuelo/buscaPasajerosA", { matriAvion: aID },
@@ -74,7 +74,7 @@ $("#matAvion").change(function () {
        });
 });
 
-//evento para traer la distancia maxima que cubre segun avion seleccionado en la vista
+//evento para traer la distancia maxima que cubre segun avion seleccionado en la vista CREAR
 $("#matAvion").change(function () {
     var aID = $(matAvion).val();
     $.getJSON("gestion_vuelo/buscaDistanciaA", { matriAvion: aID },
@@ -83,7 +83,7 @@ $("#matAvion").change(function () {
        });
 });
 
-//evento para traer la velocidad maxima segun avion seleccionado en la vista
+//evento para traer la velocidad maxima segun avion seleccionado en la vista CREAR
 $("#matAvion").change(function () {
     var aID = $(matAvion).val();
     $.getJSON("gestion_vuelo/buscaVelocidadA", { matriAvion: aID },
@@ -92,7 +92,7 @@ $("#matAvion").change(function () {
        });
 });
 
-//evento para luego de haber seleccionado el estado del vuelo, se calcule la fecha del aterrizaje
+//evento para luego de haber seleccionado el estado del vuelo, se calcule la fecha del aterrizaje en la vista CREAR
 $("#estadoVuelo").change(function () {
     var fID = $(fechaDespegue).val();
     var hID = $(horaDespegue).val();
@@ -105,7 +105,7 @@ $("#estadoVuelo").change(function () {
        });
 });
 
-//evento para luego de haber seleccionado el estado del vuelo, se calcule la hora del aterrizaje
+//evento para luego de haber seleccionado el estado del vuelo, se calcule la hora del aterrizaje en la vista CREAR
 $("#estadoVuelo").change(function () {
     var fID = $(fechaDespegue).val();
     var hID = $(horaDespegue).val();
@@ -117,3 +117,26 @@ $("#estadoVuelo").change(function () {
            $("#horaAterrizaje").val(data);
        });
 });
+
+//evento para el boton de return de la vista VISUALIZAR-->MOSTRAR
+        $("#return").click(function (e) {
+            e.preventDefault();
+            var url = '/gestion_vuelo/M04_GestionVuelo_Visualizar';
+            var method = 'GET';
+            var data = '';
+
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+        });

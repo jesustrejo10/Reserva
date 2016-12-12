@@ -7,7 +7,6 @@ using System.Net;
 using System.Text.RegularExpressions;
 using BOReserva.Models.gestion_vuelo;
 using BOReserva.Servicio.Servicio_Vuelos;
-using BOReserva.Models.gestion_automoviles;
 
 namespace BOReserva.Controllers
 {
@@ -304,19 +303,47 @@ namespace BOReserva.Controllers
             }
         }
 
+        public ActionResult M04_GestionVuelo_Modificar(String codigovuelo)
+        {
+            CVueloModificar model = new CVueloModificar();
+            List<CCrear_Vuelo> resultadoOrigenes = new List<CCrear_Vuelo>();
+            manejadorSQL_Vuelos buscarvuelo = new manejadorSQL_Vuelos();
+
+            resultadoOrigenes = buscarvuelo.cargarOrigenes();
+
+            //llenado dropdownlist de las ciudades origen en la vista crear
+            {
+                model._ciudadesOrigen = resultadoOrigenes.Select(x => new SelectListItem
+                {
+                    Value = x._ciudadOrigen,
+                    Text = x._ciudadOrigen
+                });
+            };
+
+            //paso la lista al formato de DropDownList
+            var listaEstados = dlstatusvuelo();
+            {
+                model._statusesVuelo = listaEstados.Select(x => new SelectListItem
+                {
+                    Value = x,
+                    Text = x
+                });
+            };
+
+
+            CVueloModificar vuelo = buscarvuelo.MModificarBD(codigovuelo); //BUSCA EL VUELO A MOSTRAR
+
+                                                                                
+            return PartialView(vuelo);
+        }
+
+
+
         public ActionResult M04_GestionVuelo_Mostrar(String codigovuelo)
         {
             manejadorSQL_Vuelos buscarvuelo = new manejadorSQL_Vuelos();
             CVuelo vuelo = buscarvuelo.MMostrarvueloBD(codigovuelo); //BUSCA EL VUELO A MOSTRAR
-                                                                                //EN TODOS ESTOS METODOS HAY QUE USAR TRY CATCH
-            //CVuelo vuelo = new CVuelo();
-            //vuelo._codigoVuelo = vuelo._codigoVuelo;
-            //vuelo._ciudadOrigen = vuelo._ciudadOrigen;
-            //vuelo._ciudadDestino = vuelo._ciudadDestino;
-            //vuelo._fechaDespegue = vuelo._fechaDespegue;
-            //vuelo._fechaAterrizaje = vuelo._fechaAterrizaje;
-            //vuelo._statusVuelo = vuelo._statusVuelo;
-            //vuelo._matriculaAvion = vuelo._matriculaAvion;
+                                                                                
             return PartialView(vuelo);
         }
 

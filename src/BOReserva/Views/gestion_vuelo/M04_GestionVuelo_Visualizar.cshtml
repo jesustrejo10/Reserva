@@ -27,9 +27,7 @@
                         {
                             foreach (BOReserva.Models.gestion_vuelo.CVuelo item in Model)
                             {
-                               // String disponibilidad;
-                                //if (item._disponibilidad == 1) { disponibilidad = "Disponible"; } else { disponibilidad = "No disponible"; }
-
+                              
                                 <tr id="@item._codigoVuelo">
                                     <td>@item._codigoVuelo</td>
                                     <td>@item._ciudadOrigen</td>
@@ -39,7 +37,7 @@
                                     <td>@item._statusVuelo</td>
                                     <td>@item._matriculaAvion</td>
                                     <td>
-                                        <a href="#"> <i class="fa fa-eye clasedeprueba"></i></a>
+                                        <a href="#"> <i class="fa fa-eye mostrar"></i></a>
                                         <a href="#"><i class="fa fa-gear modificar"></i></a>
                                         <a href="#"><i class="fa fa-times desactivar"></i></a>
                                     </td>
@@ -95,13 +93,12 @@
 
 <script language="javascript" type="text/javascript">
         $(document).ready(function () {
-            //e.preventDefault();
-            $(".clasedeprueba").click(function () {
+            $(".mostrar").click(function () {
                 var identificador = $(this).parent().parent().parent().attr("id");
                 jQuery.ajax({
                     type: "GET",
                     url: "/gestion_vuelo/M04_GestionVuelo_Mostrar",
-                    data: { codigovuelo: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+                    data: { codigovuelo: identificador }
                 }).done(function (data) {
                     $("#contenido").empty();
                     $("#contenido").append(data);
@@ -130,64 +127,75 @@
 
             });
 
-            /*
-            $(".clasedeprueba").click(function(){
-                alert("entrando aca por segunda vez");
-            }*/
-        //    var table = $('#example1').DataTable();
 
-          //  table.on("click", ".bolas", function () {
-            //    alert("canguro");
-                //var data = $(this).data('id');
-                //alert(data);
-                /*
-                var tr = jQuery("#car-" + data);
-                var modelo = tr.find("td.modelo").html();
-                alert(tr);
-                console.log(tr);//pinta en el console del browser la fila completa
+
+        });
+
+        $(document).ready(function () {
+            $(".modificar").click(function () {
+                var identificador = $(this).parent().parent().parent().attr("id");
                 jQuery.ajax({
                     type: "GET",
-                    url: "/gestion_automoviles/M08_VisualizarAutomoviles",
-                    data: { valor: modelo }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
-                }).done(function (data) { $("#sdssss").append(data); }).fail(function () { });
-                */
-            //})
+                    url: "/gestion_vuelo/M04_GestionVuelo_Modificar",
+                    data: { codigovuelo: identificador }
+                }).done(function (data) {
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                    var url = '/gestion_vuelo/M04_GestionVuelo_Visualizar';
+                    var method = 'GET';
+                    var data = '';
+
+                    $.ajax(
+                        {
+                            url: url,
+                            type: method,
+                            data: data,
+                            success: function (data, textStatus, jqXHR) {
+
+                                $("#contenido").empty();
+                                $("#contenido").append(data);
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert(errorThrown);
+                            }
+                        });
+                }).fail(function (err) {
+                    alert(err)
+                });
+
+
+            });
 
 
 
         });
 
-        //$(document).ready(function () {
-        //    //e.preventDefault();
-        //    $(".modificar").click(function () {
-        //        var identificador = $(this).parent().parent().parent().attr("id");
-        //        jQuery.ajax({
-        //            type: "GET",
-        //            url: "/gestion_automoviles/M08_ModificarAutomovil",
-        //            data: { matricula: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
-        //        }).done(function (data) {
-        //            //$("#sdssss").append(data);
-
-        //            $("#contenido").empty();
-        //            $("#contenido").append(data);
-        //        }).fail(function () {
-        //            alert("esta vaina se jodio")
-        //        });
-
-
-        //    });
+   //     $(document).ready(function () {
+   //         $(".modificar").click(function () {
+   //             var identificador = $(this).parent().parent().parent().attr("id");
+   //             jQuery.ajax({
+   //                 type: "GET",
+   //                 url: "/gestion_automoviles/M04_GestionVuelo_Modificar",
+   //                 data: { codigoVuelo: identificador }
+   //             }).done(function (data) {
+   //                 //$("#sdssss").append(data);
+   //                 $("#contenido").empty();
+   //                 $("#contenido").append(data);
+   //             }).fail(function () {
+   //                 alert("error en la carga desde Base de Datos")
+   //             });
+   //         });
+//});
 
 
-    //});
         $(document).ready(function () {
-            //e.preventDefault();
             $(".desactivar").click(function () {
                 alert("Desactivando Vuelo Por favor Espere...")
                 var identificador = $(this).parent().parent().parent().attr("id");
                 jQuery.ajax({
                     type: "GET",
                     url: "/gestion_vuelo/M04_GestionVuelo_Desactivar",
-                    data: { codigovuelo: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M04_(string valor)
+                    data: { codigovuelo: identificador }
                 }).done(function (data) {
                     $("#contenido").empty();
                     $("#contenido").append(data);

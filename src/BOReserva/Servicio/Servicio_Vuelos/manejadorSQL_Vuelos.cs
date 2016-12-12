@@ -633,15 +633,60 @@ namespace BOReserva.Servicio.Servicio_Vuelos
                     {
                         //var fecha = reader["aut_fecharegistro"];
                         //DateTime fecharegistro = Convert.ToDateTime(fecha).Date;
-                        vuelo = new CVuelo(reader["vue_codigo"].ToString(), MBuscarciudadOrigen(Int32.Parse(reader["vue_fk_ruta"].ToString())), MBuscarciudadDestino(Int32.Parse(reader["vue_fk_ruta"].ToString())), reader["vue_fecha_despegue"].ToString(),
-                                               reader["vue_status"].ToString(), reader["vue_fecha_aterrizaje"].ToString(), MBuscaravion(Int32.Parse(reader["vue_fk_avion"].ToString()))
-                                               );
+                        vuelo = new CVuelo(
+                            reader["vue_codigo"].ToString(), 
+                            MBuscarciudadOrigen(Int32.Parse(reader["vue_fk_ruta"].ToString())), 
+                            MBuscarciudadDestino(Int32.Parse(reader["vue_fk_ruta"].ToString())), 
+                            reader["vue_fecha_despegue"].ToString(),
+                            reader["vue_status"].ToString(), 
+                            reader["vue_fecha_aterrizaje"].ToString(), 
+                            MBuscaravion(Int32.Parse(reader["vue_fk_avion"].ToString()))
+                            );
                     }
                     cmd.Dispose();
                     conexion.Close();
                     return vuelo;
                 }
             }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return null;
+            }
+        }
+
+
+        public CVueloModificar MModificarBD(String CodigoVuelo)
+        {
+            CVueloModificar vuelo = null;
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                SqlCommand cmd = new SqlCommand("M04_BuscaModificar", conexion);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add("@CodigoVuelo", System.Data.SqlDbType.VarChar, 100);
+                cmd.Parameters["@CodigoVuelo"].Value = CodigoVuelo;
+                SqlDataReader dr = cmd.ExecuteReader();
+                    //SE CREA UN OBJECTO VUELO SE PASAN LOS ATRIBUTO ASI reader["<etiqueta de la columna en la tabla Automovil>"]
+                    //Y  SE AGREGA a vehiculo
+                    while (dr.Read())
+                    {
+                        //var fecha = reader["aut_fecharegistro"];
+                        //DateTime fecharegistro = Convert.ToDateTime(fecha).Date;
+                        vuelo = new CVueloModificar(
+                            dr["vue_codigo"].ToString(),
+                            dr["avi_matricula"].ToString(),
+                            dr["vue_status"].ToString(),
+                            MBuscarciudadOrigen(Int32.Parse(dr["vue_fk_ruta"].ToString())), 
+                            MBuscarciudadDestino(Int32.Parse(dr["vue_fk_ruta"].ToString()))
+                            );
+
+                    }
+                    dr.Close();
+                    conexion.Close();
+                    return vuelo;
+                }
             catch (SqlException ex)
             {
                 conexion.Close();

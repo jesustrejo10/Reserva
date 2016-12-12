@@ -253,6 +253,7 @@
     <Compile Include="Models\gestion_restaurantes\CRestauranteModelo.cs" />
     <Compile Include="Models\gestion_vuelo\CVuelo.cs" />
     <Compile Include="Models\gestion_vuelo\CCrear_Vuelo.cs" />
+    <Compile Include="Models\gestion_vuelo\CVueloModificar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicio\manejadorSQL.cs" />
     <Compile Include="Servicio\Servicio_Vuelos\manejadorSQL_Vuelos.cs" />
@@ -1417,6 +1418,7 @@
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Crear.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Visualizar.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Mostrar.cshtml" />
+    <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Modificar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1519,7 +1521,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:10779/</IISUrl>
+          <IISUrl>http://localhost:10777/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
