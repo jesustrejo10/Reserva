@@ -7,18 +7,25 @@
         <a href="#"><button type="button" class="btn btn-default btn-lg"><i class="fa fa-book"></i>Crear un Diario de Viaje</button></a>
     </div>*@
 <div class="panel">
-    @using (Html.BeginForm("buscarDiarios", "gestion_diarios", null, FormMethod.Post, new { @id = "formBuscarDiarios", @class = "form-horizontal" }))
+    @using (Html.BeginForm("gestion_diarios_resultados", "gestion_diarios", null, FormMethod.Post, new { @id = "formBuscarDiarios", @class = "form-horizontal" }))
     {
         <fieldset>
 
             <div class="row">
                 <div class="form-group">
                     <div class="col-sm-12">
-                        <label>Nombre</label>
-                        @Html.TextBoxFor(m => m.Nombre, null, new { @id = "nombreD", @class = "form-control required", @name = "diario[prueba]", @placeholder = "Buscar por nombre" })
-                    </div>
-                    <div id="prueba_null" style="display: none;" class="has-error error col-sm-12">
-                        <p><i class="fa fa-times-circle" aria-hidden="true"></i> Escribir Texto</p>
+                        <label>Calificación del viajero</label>
+                        @Html.DropDownListFor(m => m.Rating,
+                            new List<SelectListItem>{
+                                new SelectListItem{Value = "0", Text = "------ Elige una calificación mínima ------", Selected = true},
+                                new SelectListItem{Value = "1", Text = "1+ estrellas"},
+                                new SelectListItem{Value = "2", Text = "2+ estrellas"},
+                                new SelectListItem{Value = "3", Text = "3+ estrellas"},
+                                new SelectListItem{Value = "4", Text = "4+ estrellas"},
+                                new SelectListItem{Value = "5", Text = "5  estrellas"}
+
+                            },
+                            new { @class = "col-md-12", @id = "califD" })
                     </div>
                 </div>
             </div>
@@ -26,7 +33,7 @@
             <div class="row">
                 <div class="form-group">
                     <div class="col-sm-12">
-                        <label>Rango de fechas</label>
+                        <label>Periodo de carga del diario</label>
                         <input id="rf" type="text" class="form-control" name="rangofecha" value="" readonly />
 
                     </div>
@@ -95,13 +102,6 @@
                     <div class="col-sm-12">
                         <label>Lugares</label>
                         @Html.DropDownListFor(m => m.Destino, Model.Lugares(), new { @class = "col-md-12", @id = "lugares" })
-                        @*<select name="list_lugar "id="list_lugar" class="form-control">
-                                <option value="0">------ Buscar por destino de viaje ------</option>
-                                @foreach (var lug in Model.diariosLugares())
-                                {
-                                <option value="@lug.ID">@(lug.Tipo.Equals("pais")?"":"  --- ")@lug.Nombre</option>
-                                }
-                            </select>*@
                     </div>
                 </div>
             </div>
@@ -112,7 +112,8 @@
                         <label>Ordenar por</label>
                         <label class="radio-inline"><input type="radio" value="0" name="orden">Recientes primero</label>
                         <label class="radio-inline"><input type="radio" value="1" name="orden">Antiguos primero</label>
-                        <label class="radio-inline"><input type="radio" value="2" name="orden">3333</label>
+
+
                     </div>
                 </div>
             </div>
@@ -120,89 +121,61 @@
             <!--Input que guarda el valor del radiobutton seleccionado-->
             @Html.TextBoxFor(m => m.Filtro, null, new { @id = "ordenInput", @class = "form-control required", @name = "dOrden", @type = "hidden" })
 
-
-
-
         </fieldset>
 
         <div class="row text-center">
-            <div class="col-md-12">
+            <div class="col-sm-12">
                 <button type="button" id="buscarDiarios" class="btn btn-primary"><i class="fa fa-search"></i>Buscar</button>
             </div>
         </div>
         <script>
-    //Unificación del jQuery para búsqueda. ESTO SE PONDRÁ EN UN .js
-    function buscar(a) {
-        a.preventDefault();
+            $("#buscarDiarios").click(function (e) { e.preventDefault(); cargarResultados(1); });      //Evento de click en el botón Buscar
+            $("#formBuscarDiarios").submit(function (e) { e.preventDefault(); cargarResultados(1); }); //Evento general de submit (ej. presionar ENTER)
 
-        $(".error").hide();
-        $("#nombreD").removeClass("has-error");
-        $("#f_ini").removeClass("has-error");
-        $("#f_fin").removeClass("has-error");
-        var texto = $("#nombreD").val();
+            function cargarResultados(a) {
+                $("#resultados").html('<div class="text-center">Cargando...</div>')
 
-        var win = true;
+                var form = $("#formBuscarDiarios");
+                var contr = '/gestion_diarios/';
+                var datos;
+                var metodo;
+                if (a == 0) {
+                    contr = contr + 'gestion_diarios_resultados';
+                    datos = '';
+                    metodo = 'GET';
+                } else {
+                    contr = contr + 'gestion_diarios_resultados';
+                    datos = form.serialize();
+                    metodo = 'POST';
+                }
 
-        if (texto == "" || texto == undefined) {
-            $("#nombreD").addClass("has-error");
-            $("#prueba_null").fadeIn();
-            win = false;
-        }
-
-        if (win) {
-            cargarResultados(1);
-        }
-        else {
-            alert("Error de formularios");
-        }
-    }
-
-    $("#buscarDiarios").click(function (e) { buscar(e) });      //Evento de click en el botón Buscar
-    $("#formBuscarDiarios").submit(function (e) { buscar(e) }); //Evento general de submit (ej. presionar ENTER)
-
-    function cargarResultados(a) {
-        $("#resultados").html('<div class="text-center">Cargando...</div>')
-
-        var form = $("#formBuscarDiarios");
-        var contr = '/gestion_diarios/';
-        var datos;
-        var metodo;
-        if (a == 0) {
-            contr = contr + 'gestion_diarios_resultados';
-            datos = '';
-            metodo = 'GET';            
-        } else {
-            contr = contr + 'gestion_diarios_resultados';
-            datos = form.serialize();
-            metodo = 'POST';     
-        }
-        $.ajax({
-            url: contr,
-            type: metodo,
-            data: datos,
-            success: function (data) {
-                $("#resultados").empty();
-                $("#resultados").html(data);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert(errorThrown);
+                $.ajax({
+                    url: contr,
+                    type: metodo,
+                    data: datos,
+                    success: function (data) {
+                        $("#resultados").empty();
+                        $("#resultados").html(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
             }
-        });
-    }
 
-    jQuery(document).ready(function () {
+            jQuery(document).ready(function () {
 
-        $("#f_ini").val("@DateTime.Today.AddYears(-10).ToString("yyyy-MM-dd")");
-        $("#f_fin").val("@DateTime.Today.ToString("yyyy-MM-dd")");
-        $("#ordenInput").val("-1");
-        $('input[name=orden]:radio').change(function () {
-            $("#ordenInput").val($('input[name=orden]:checked').val());
-        });
-        cargarResultados(0);
+                $("#f_ini").val("@DateTime.Today.AddYears(-10).ToString("yyyy-MM-dd")");
+                $("#f_fin").val("@DateTime.Today.ToString("yyyy-MM-dd")");
+                $("#ordenInput").val("-1");
+                $('input[name=orden]:radio').change(function () {
+                    $("#ordenInput").val($('input[name=orden]:checked').val());
+                });
+                cargarResultados(0);
 
-    });
+            });
         </script>
-    }
+    } <!--Fin FORM-->
 </div>
 
 <hr />
@@ -227,4 +200,3 @@
     <hr />
 
 </div>
-
