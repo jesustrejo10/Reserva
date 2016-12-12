@@ -13,11 +13,28 @@
 
 
         function checkTextField(field) {
-            var matricula = $('#vehi_placa').val();
+            var _matricula = $('#vehi_placa').val();
 
-            if (/[^a-z0-9\.]/gi.test(matricula)) {
+            if (/[^a-z0-9\.]/gi.test(_matricula)) {
                 alert("No puede contener caracteres especiales");
                 field.value = '';
+            } else {
+                var url = "/gestion_automoviles/checkplaca";
+                $.ajax({
+                    url: url,
+                    data: { matricula: _matricula},
+                    cache: false,
+                    type: "POST",
+                    success: function (data) {
+                        if (data == "1") {
+                            alert("Esa matrícula ya esta registrada");
+                            field.value = '';
+                        }
+                    },
+                    error: function (reponse) {
+                        alert("error : " + reponse);
+                    }
+                });
             }
         }
 

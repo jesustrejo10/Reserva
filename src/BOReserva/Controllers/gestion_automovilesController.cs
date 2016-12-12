@@ -434,7 +434,18 @@ namespace BOReserva.Controllers
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
 
-        
+        /// <summary>
+        /// Método para verificar si una matrícula esta registrada
+        /// </summary>
+        /// <param name="matricula">Matrícula a revisar</param>
+        /// <returns>Retorna si esta o no repetida</returns>
+        [HttpPost]
+        public ActionResult checkplaca(String matricula)
+        {
+            manejadorSQL placa = new manejadorSQL();
+            int existe = placa.MPlacarepetidaBD(matricula); 
+            return Json(existe);
+        } 
 
     }
 }

@@ -1350,6 +1350,48 @@ namespace BOReserva.Servicio
                 return _ciudades;
             }
         }
-    
+
+
+        /// <summary>
+        /// Método para verificar si una matrícula esta registrada en la BD
+        /// </summary>
+        /// <param name="matricula">Matrícula a revisar</param>
+        /// <returns>Retorna si existe o no la matrícula</returns>
+        public int MPlacarepetidaBD(String matricula)
+        {
+            bool verdad = false;
+            int i = 0;
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "SELECT * FROM Automovil WHERE aut_matricula = '" + matricula +"'";
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        String matricularetornada = reader[0].ToString();
+                        verdad = matricularetornada.Equals(matricula);
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                if (verdad == true)
+                {
+                    i = 1;
+                }
+                if (verdad == false) 
+                { 
+                    i = 0; 
+                }
+                return i;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return 1;
+            }
+        }
     }
 }
