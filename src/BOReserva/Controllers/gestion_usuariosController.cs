@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -65,29 +66,31 @@ namespace BOReserva.Controllers
                 try
                 {
                     p.AgregarUsuario(usuario.toClass());
-                    TempData["message"] = "Usuario Agregado Exitosamente";
-                    return RedirectToAction("M12_Index");
+                    TempData["message"] = "Usuario agregado Exitosamente";
+                    //return RedirectToAction("M12_Index");
                 }
                 catch (ExceptionM12Reserva ex)
                 {
-                    ModelState.AddModelError("", ex.Message);
-                    return View("M12_AgregarUsuario", "_Layout");
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    return Json(ex.Message);
                 }
                 catch (Exception ex)
                 {
-                    ModelState.AddModelError("", ex.Message);
-                    return View("M12_AgregarUsuario", "_Layout");
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    return Json(ex.Message);
                 }
-            } 
-            else {
-                return View("M12_AgregarUsuario", "_Layout");    
-            } 
+            }
+            return Json("true");
+            //return RedirectToAction("M12_Index");
+            //return View("M12_AgregarUsuario", "_Layout");    
+            
  
             
         }
 
+
        [HttpPost]
-        public ActionResult M12_ModificarUsuario(AgregarUsuario usuario)
+        public RedirectToRouteResult M12_ModificarUsuario(AgregarUsuario usuario)
         {
 
             if (ModelState.IsValid)
@@ -96,27 +99,28 @@ namespace BOReserva.Controllers
                 try
                 {
                     p.ModificarUsuario(usuario.toClass(), usuario.idUsuario);
-                    TempData["message"] = "Usuario Modficado Exitosamente";
+                    TempData["message"] = "Usuario modificado Exitosamente";
+                    //return RedirectToAction("M12_ModificarUsuario");
                     return RedirectToAction("M12_Index");
                 }
                 catch (ExceptionM12Reserva ex)
                 {
-                    
-                    //ModelState.AddModelError("", ex.Message);
-                    return View("M12_ModificarUsuario", usuario);
+
+                    TempData["message"] = ex.Message;
+                    //return View("M12_ModificarUsuario", usuario);
                 }
                 catch (Exception ex)
                 {
-                    ModelState.AddModelError("", ex.Message);
-                    return View("M12_ModificarUsuario", usuario);
+                    TempData["message"] = ex.Message;
+                    //return View("M12_ModificarUsuario", usuario);
                 }
-            } 
-
-            return PartialView("M12_Index", "_Layout");
+            }
+            return RedirectToAction("M12_Index");
+            //return PartialView("M12_Index", "_Layout");
         }
 
-
-
+ 
+       
        public ActionResult ModificarUsuario(int? usuID)
         {
 
@@ -147,6 +151,7 @@ namespace BOReserva.Controllers
             {
                 PersistenciaUsuario p = new PersistenciaUsuario();
                 p.eliminarUsuario(usuID);
+                TempData["message"] = "Usuario Eliminado exitosamente";
             }
             catch(ExceptionM12Reserva ex)
             {

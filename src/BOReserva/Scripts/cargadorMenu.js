@@ -47,13 +47,48 @@
     
     });
 
-    $("#gestionUsuarios").click(function (e) {
-        window.location.href = '/gestion_usuarios/m12_index'
+    $("#indexUsuarios").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_usuarios/M12_Index';
+        var method = 'GET';
+        var data = '';
 
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
     });
 
     $("#agregarUsuarios").click(function (e) {
-        window.location.href='/gestion_usuarios/m12_agregarUsuario'
+        e.preventDefault();
+        var url = '/gestion_usuarios/M12_AgregarUsuario';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
 
     });
 

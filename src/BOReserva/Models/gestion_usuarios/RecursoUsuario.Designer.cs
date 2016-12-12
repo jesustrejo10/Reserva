@@ -88,7 +88,7 @@ namespace BOReserva.Models.gestion_usuarios {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error de conexión con la base de datos.
+        ///   Looks up a localized string similar to Error de conexion con la base de datos.
         /// </summary>
         internal static string BDError {
             get {
@@ -201,6 +201,24 @@ namespace BOReserva.Models.gestion_usuarios {
         internal static string ListarUsuarios {
             get {
                 return ResourceManager.GetString("ListarUsuarios", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Usuario Agregado Exitosamente.
+        /// </summary>
+        internal static string MensajeAgregado {
+            get {
+                return ResourceManager.GetString("MensajeAgregado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Usuario Modficado Exitosamente.
+        /// </summary>
+        internal static string MensajeModificado {
+            get {
+                return ResourceManager.GetString("MensajeModificado", resourceCulture);
             }
         }
         

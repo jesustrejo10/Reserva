@@ -1,10 +1,13 @@
 ﻿@{
-
-    Layout = "~/Views/gestion_usuarios/_Layout.cshtml";
+    var message = TempData["message"] ?? string.Empty;
 }
-
+<script>
+    var message = '@message';
+    if (message)
+        alert(message);
+</script>
 @model BOReserva.Models.gestion_usuarios.AgregarUsuario
-@using (Html.BeginForm())
+@using (Html.BeginForm("M12_M12_AgregarUsuario", "gestion_usuarios", FormMethod.Post, new { @class = "agregarUsuario_form" }))
 {
 @Html.ValidationSummary() 
 
@@ -102,11 +105,12 @@
                                 </div>
                             </div>
                                 <div class="col-md-12" style="margin-top:10px;">
+                                    <input type="submit" id="aceptarUsuario" class="btn btn-success" value="Guardar" style="display:block; margin-left:auto; margin-right:auto;">
                                     <!--  <input type="button" value="Create" class="btn btn-success" onclick=" return confirm('¿Seguro que desea crear este usuario?');" /> -->
-                                    <button type="submit" class="btn btn-success" value="Registrar" id="agregarUsuario"
+                                    <!--<button type="submit" class="btn btn-success" value="Registrar" id="agregarUsuario"
                                             style="display:block; margin-left:auto; margin-right:auto;">
                                         Guardar
-                                    </button>
+                                    </button>-->
                                 </div>
                             </div>
                     </div>
@@ -115,28 +119,65 @@
         </div>
     </div>   
 </div>
-    <script language="javascript">
-        var password = document.getElementById("contraseñaUsuario")
-        , confirm_password = document.getElementById("confContraseña");
+<script language="javascript">
 
-        function validatePassword() {
-            if (password.value != confirm_password.value) {
-                confirm_password.setCustomValidity("Las contraseñas no coinciden");
-            } else {
-                confirm_password.setCustomValidity('');
-            }
+
+    var password = document.getElementById("contraseñaUsuario")
+    , confirm_password = document.getElementById("confContraseña");
+
+    function validatePassword() {
+        if (password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Las contraseñas no coinciden");
+        } else {
+            confirm_password.setCustomValidity('');
         }
+    }
 
-        password.onchange = validatePassword;
-        confirm_password.onkeyup = validatePassword;
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+
+
+    $(".agregarUsuario_form").submit(function (e) {
+        console.log("hola!");
+        e.preventDefault();
+        var form = $(".agregarUsuario_form");
+        $.ajax({
+            url: "gestion_usuarios/M12_AgregarUsuario",
+            data: form.serialize(),
+            type: 'POST',
+            success: function (data) {
+                toIndex();
+            }
+        , error: function (xhr, textStatus, exceptionThrown) {
+            //muestro el texto del error
+            alert(xhr.responseText);
+        }
+        });
+    });
+
+    function toIndex() {
+        var url = '/gestion_usuarios/M12_Index';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    };
+
+
     </script>
 }
 
-@{
-    if (TempData["message"] != null)
-    {
-        <script type="text/javascript">
-        alert(@Html.Raw(Json.Encode(TempData["message"])));
-        </script>
-    }
-}
+

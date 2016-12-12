@@ -130,7 +130,7 @@
     <comment>Argumento Invalido</comment>
   </data>
   <data name="BDError" xml:space="preserve">
-    <value>Error de conexión con la base de datos</value>
+    <value>Error de conexion con la base de datos</value>
     <comment>Error de conexión con la BD</comment>
   </data>
   <data name="ConsultarEmail" xml:space="preserve">
@@ -180,6 +180,14 @@
   <data name="ListarUsuarios" xml:space="preserve">
     <value>M12_ListarUsuarios</value>
     <comment>Stored Procedure para listar todos los usuarios del BO</comment>
+  </data>
+  <data name="MensajeAgregado" xml:space="preserve">
+    <value>Usuario Agregado Exitosamente</value>
+    <comment>Mensaje cuando se agrega exitosamente un usuario</comment>
+  </data>
+  <data name="MensajeModificado" xml:space="preserve">
+    <value>Usuario Modficado Exitosamente</value>
+    <comment>Mensaje cuando se modifica exitosamente un usuario</comment>
   </data>
   <data name="ModificarUsuario" xml:space="preserve">
     <value>M12_ModificarUsuario</value>
