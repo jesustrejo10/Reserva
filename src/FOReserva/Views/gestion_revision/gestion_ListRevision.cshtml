@@ -1,0 +1,20 @@
+﻿@model List<FOReserva.Models.Revision.CRevision>
+
+
+@if (Model != null)
+{
+
+    <link href="@Url.Content("~/Content/assets/css/layout-datatables.css")" rel="stylesheet" type="text/css" />
+
+
+    <div>
+        <div class="col-xs-12">
+            <h2 class="color-azul">Historial de reservas de Habitacion.</h2>
+        </div>
+    </div>
+
+}
+else
+{
+    <p>No se pudo cargar el contenido.</p>
+}

@@ -98,10 +98,39 @@ namespace FORevision.Controllers
             ManejadorSQLRevision manejador = new ManejadorSQLRevision();
             resultado = manejador.Editar_Revision(nombre, apellido, revision);
             return true;
-
-
         }
 
+        /// <summary>
+        /// TEST
+        /// </summary>
+        /// <returns>TEST</returns>
+        public ActionResult Test()
+        {
+            return PartialView();
+        }
+
+        /// <summary>
+        /// Creacion Modelo Listar Revisiones
+        /// </summary>
+        /// <returns>Vista Modelo</returns>
+        public ActionResult Listar_Revisiones(int tipo, string nombre, string apellido)
+        {
+
+            if (tipo == 1)
+            {
+                List<CRevision> lista;
+                ManejadorSQLRevision manejador = new ManejadorSQLRevision();
+                lista = manejador.Mostrar_Revision_Restaurant(nombre, apellido, tipo);
+                return PartialView(lista);
+            }
+            else
+            {
+                List<CRevision> lista;
+                ManejadorSQLRevision manejador = new ManejadorSQLRevision();
+                lista = manejador.Mostrar_Revision_Hotel(nombre, apellido, tipo);
+                return PartialView(lista);
+            }
+        }
 
 
     }
