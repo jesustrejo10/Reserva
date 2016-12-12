@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -229,6 +229,9 @@
     <Compile Include="Models\ORM\M20_BuscarHotelesPorCiudad_Result.cs">
       <DependentUpon>ModelDBReserva.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ORM\M20_ConflictosReservaHabitacion_Result.cs">
+      <DependentUpon>ModelDBReserva.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ORM\M20_DetalleReservaHabitacion_Result.cs">
       <DependentUpon>ModelDBReserva.tt</DependentUpon>
     </Compile>
@@ -236,6 +239,9 @@
       <DependentUpon>ModelDBReserva.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ORM\M20_GuardarReservaHabitacion_Result.cs">
+      <DependentUpon>ModelDBReserva.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORM\M20_HabitacionesByHotel_Result.cs">
       <DependentUpon>ModelDBReserva.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ORM\M20_HotelHistorialReservaHabitacion_Result.cs">
@@ -1680,6 +1686,10 @@
       <LastGenOutput>ReservaDB.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Content\assets\plugins\bootstrap.daterangepicker\bower.json" />
+    <Content Include="Content\assets\plugins\bootstrap.daterangepicker\daterangepicker.scss" />
+    <Content Include="Content\assets\plugins\bootstrap.daterangepicker\package.json" />
+    <Content Include="Content\assets\plugins\bootstrap.daterangepicker\README.md" />
     <EntityDeploy Include="Models\ORM\ModelDBReserva.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ModelDBReserva.Designer.cs</LastGenOutput>
@@ -1687,10 +1697,6 @@
     <Content Include="Models\ORM\ModelDBReserva.edmx.diagram">
       <DependentUpon>ModelDBReserva.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\assets\plugins\bootstrap.daterangepicker\bower.json" />
-    <Content Include="Content\assets\plugins\bootstrap.daterangepicker\daterangepicker.scss" />
-    <Content Include="Content\assets\plugins\bootstrap.daterangepicker\package.json" />
-    <Content Include="Content\assets\plugins\bootstrap.daterangepicker\README.md" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Properties\PublishProfiles\Webdeploy SmarterASP.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
@@ -3114,7 +3120,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\gestion_diario_viaje\" />
     <Folder Include="Views\registro_autenticacion\" />
   </ItemGroup>
   <ItemGroup>

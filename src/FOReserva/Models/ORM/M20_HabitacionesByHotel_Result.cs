@@ -11,12 +11,9 @@ namespace FOReserva.Models.ORM
 {
     using System;
     
-    public partial class M20_BuscarHotelesPorCiudad_Result
+    public partial class M20_HabitacionesByHotel_Result
     {
         public int hot_id { get; set; }
-        public string hot_nombre { get; set; }
-        public string hot_email { get; set; }
-        public Nullable<int> hot_fk_ciudad { get; set; }
-        public Nullable<int> hot_cantidad_habitaciones_disponible { get; set; }
+        public int habitacion { get; set; }
     }
 }
