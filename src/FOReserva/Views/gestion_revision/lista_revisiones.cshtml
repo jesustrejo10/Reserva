@@ -1,0 +1,39 @@
+﻿@model List<FOReserva.Models.Revision.CRevision>
+@{
+    ViewBag.Title = "Lista de Revisiones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="panel panel-default col-sm-12">
+            <div class="panel-heading">
+                <h2 class="panel-title">Listado de Revisiones</h2>
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered table-hover" id="tablas-revisiones">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Mensaje</th>
+                            <th>Usuario</th>
+                            <th>Tipo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr id="@item.Id" value="@item.Id">
+                                <td>@item.Id</td>
+                                <td class="rev_fecha" value="@item.Fecha">@item.Fecha</td>
+                                <td class="rev_mensaje" value="@item.Mensaje">@item.Mensaje</td>
+                                <td class="rev_tipo" value="@item.Tipo">@item.Tipo</td>
+                                <td class="rev_puntuacion" value="@item.Puntuacion">@item.Puntuacion</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

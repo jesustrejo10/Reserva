@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using FOReserva.Models.Revision;
 using System.Data.SqlClient;
-using FOReserva.Models.Restaurantes;
 
 
 namespace FOReserva.Servicio
 {
+    /// <summary>
+    /// Clase para el manejo Revisiones en BD
+    /// </summary>
     public class ManejadorSQLRevision : manejadorSQL
     {
-
         public ManejadorSQLRevision() : base() { }
-
 
         public List<CRevision> Consultar_Revision(string nombre, string apellido)
         {
@@ -134,7 +133,35 @@ namespace FOReserva.Servicio
             return true;
         }
 
+        /// <summary>
+        /// Metodo para listar revisiones guardadas
+        /// </summary>
+        /// <returns>Lista de revisiones</returns>
+        public List<CRevision> BuscarRevisiones()
+        {
+            string query = "SELECT * FROM Revision as rev";
+            SqlDataReader read = Executer(query);
+            List<CRevision> lista_rev = new List<CRevision>();
 
+            if (read.HasRows)
+            {
+                while (read.Read())
+                {
+                    DateTime _fecha = read.GetDateTime(0);
+                    string _mensaje = read.GetString(1);
+                    int _tipo = read.GetInt32(2);
+                    int _puntuacion = read.GetInt32(3);
+                    CRevision rev = new CRevision();
+                    rev.Fecha = _fecha;
+                    rev.Mensaje = _mensaje;
+                    rev.Tipo = _tipo;
+                    rev.Puntuacion = _puntuacion;
+                    lista_rev.Add(rev);
+                }
+                return lista_rev;
+            }
+            return null;
+        }
     }
 }
 
