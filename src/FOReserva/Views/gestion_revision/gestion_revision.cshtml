@@ -1,4 +1,4 @@
-﻿@Model FOReserva.Models.Revision.MostrarRevision
+﻿@Model FOReserva.Models.Revision.CRevision
 <<table class="table table-bordered table-hover" id="tablas-revision">
     <thead>
         <tr>
@@ -10,7 +10,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (FOReserva.Models.Revision.MostrarRevision item in Model)
+        @foreach (var item in Model)
         {
             <tr>
                 <td>@item.Fecha</td>
@@ -18,7 +18,7 @@
                 <td>@item.Tipo</td>
                 <td>@item.Puntuacion</td>
                 
-                <td style="text-align: center;">
+                
                     
                 </td>
             </tr>
