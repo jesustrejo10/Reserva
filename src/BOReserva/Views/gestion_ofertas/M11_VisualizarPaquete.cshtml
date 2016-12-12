@@ -83,7 +83,7 @@
         jQuery.ajax({
             type: "GET",
             url: "/gestion_ofertas/M11_ModificarPaquete",
-            data: { }
+            data: {'paqueteIdStr' : identificador }
         }).done(function (data) {
             $("#contenido").empty();
             $("#contenido").append(data);

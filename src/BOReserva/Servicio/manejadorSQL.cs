@@ -95,15 +95,38 @@ namespace BOReserva.Servicio
         {
             try
             {
+                int estado;
+                if (paquete._estadoPaquete == true)
+                    estado = 1;
+                else
+                    estado = 0;
                 conexion = new SqlConnection(stringDeConexion);
                 conexion.Open();
                 SqlCommand query = conexion.CreateCommand();
-                query.CommandText = "INSERT INTO Paquete (paq_nombre, paq_precio, paq_fk_automovil, paq_fk_restaurante, paq_fk_hotel,"+
-                    " paq_fk_crucero, paq_fk_vuelo, paq_fechaInicio_automovil, paq_fechaInicio_restaurante, paq_fechaInicio_crucero, paq_fechaInicio_hotel, paq_fechaInicio_boleto,"+
-                    " paq_fechaFin_automovil, paq_fechaFin_restaurante, paq_fechaFin_hotel, paq_fechaFin_crucero, paq_fechaFin_boleto)"+
-                    "VALUES  ('" + paquete._nombrePaquete + "', " + paquete._precioPaquete + ",'" + paquete._idAuto + "', " + paquete._idRestaurante + "," + paquete._idHabitacion + ", "+
-                    paquete._idCrucero + ", " + paquete._idVuelo + ",'" + paquete.formatDate(paquete._fechaIniAuto) + "', '" + paquete.formatDate(paquete._fechaIniRest) + "','" + paquete.formatDate(paquete._fechaIniCruc) + "','" + paquete.formatDate(paquete._fechaIniHabi) + "','" +
-                    paquete.formatDate(paquete._fechaIniVuelo) + "','" + paquete.formatDate(paquete._fechaFinAuto) + "','" + paquete.formatDate(paquete._fechaFinRest) + "', '" + paquete.formatDate(paquete._fechaFinHabi) + "','" + paquete.formatDate(paquete._fechaFinCruc) + "','"+ paquete.formatDate(paquete._fechaFinVuelo)+"');";
+                query.CommandText = "INSERT INTO Paquete (paq_nombre, paq_precio, paq_fk_automovil, paq_fk_restaurante, paq_fk_hotel," +
+                    " paq_fk_crucero, paq_fk_vuelo, paq_fechaInicio_automovil, paq_fechaInicio_restaurante, paq_fechaInicio_crucero, paq_fechaInicio_hotel, paq_fechaInicio_boleto," +
+                    " paq_fechaFin_automovil, paq_fechaFin_restaurante, paq_fechaFin_hotel, paq_fechaFin_crucero, paq_fechaFin_boleto, paq_estado)" +
+                    "VALUES  (@pn, @pp, @pfa, @pfr, @pfh, @pfc, @pfv, @fia, @fir, @fic, @fih, @fib, @ffa, @ffr, @ffh, @ffc, @ffb, @pe);";
+
+                query.Parameters.AddWithValue("@pn", paquete._nombrePaquete);
+                query.Parameters.AddWithValue("@pp", paquete._precioPaquete);
+                query.Parameters.AddWithValue("@pfa", (object)paquete._idAuto ?? DBNull.Value);
+                query.Parameters.AddWithValue("@pfr", (object)paquete._idRestaurante ?? DBNull.Value);
+                query.Parameters.AddWithValue("@pfh", (object)paquete._idHabitacion ?? DBNull.Value);
+                query.Parameters.AddWithValue("@pfc", (object)paquete._idCrucero ?? DBNull.Value);
+                query.Parameters.AddWithValue("@pfv", (object)paquete._idVuelo ?? DBNull.Value);
+                query.Parameters.AddWithValue("@fia", (object)paquete._fechaIniAuto ?? DBNull.Value);
+                query.Parameters.AddWithValue("@fir", (object)paquete._fechaIniRest ?? DBNull.Value);
+                query.Parameters.AddWithValue("@fic", (object)paquete._fechaIniCruc ?? DBNull.Value);
+                query.Parameters.AddWithValue("@fih", (object)paquete._fechaIniHabi ?? DBNull.Value);
+                query.Parameters.AddWithValue("@fib", (object)paquete._fechaIniVuelo ?? DBNull.Value);
+                query.Parameters.AddWithValue("@ffa", (object)paquete._fechaFinAuto ?? DBNull.Value);
+                query.Parameters.AddWithValue("@ffr", (object)paquete._fechaFinRest ?? DBNull.Value);
+                query.Parameters.AddWithValue("@ffh", (object)paquete._fechaFinHabi ?? DBNull.Value);
+                query.Parameters.AddWithValue("@ffc", (object)paquete._fechaFinCruc ?? DBNull.Value);
+                query.Parameters.AddWithValue("@ffb", (object)paquete._fechaFinVuelo ?? DBNull.Value);
+                query.Parameters.AddWithValue("@pe", estado);
+
                 SqlDataReader lector = query.ExecuteReader();
                 lector.Close();
                 conexion.Close();
@@ -119,6 +142,262 @@ namespace BOReserva.Servicio
             }
 
         }
+
+        //Procedimiento del Modulo 11 para agregar paquetes a la base de datos.
+        public Boolean modificarPaquete(CPaquete paquete)
+        {
+            try
+            {
+                int estado;
+                if (paquete._estadoPaquete == true)
+                    estado = 1;
+                else
+                    estado = 0;
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                SqlCommand query = conexion.CreateCommand();
+                query.CommandText = "UPDATE Paquete " +
+                    "SET paq_nombre=@pn, paq_precio=@pp, paq_fk_automovil=@pfa, paq_fk_restaurante=@pfr, paq_fk_hotel=@pfh, "+
+                    "paq_fk_crucero=@pfc, paq_fk_vuelo=@pfv, paq_fechaInicio_automovil=@fia, paq_fechaInicio_restaurante=@fir, "+
+                    "paq_fechaInicio_crucero=@fic, paq_fechaInicio_hotel=@fih, paq_fechaInicio_boleto=@fib, paq_fechaFin_automovil=@ffa, "+
+                    "paq_fechaFin_restaurante=@ffr, paq_fechaFin_hotel=@ffh, paq_fechaFin_crucero=@ffc, paq_fechaFin_boleto=@ffb, paq_estado=@pe "+
+                    "WHERE paq_id=" + paquete._idPaquete + ";";
+
+                query.Parameters.AddWithValue("@pn", paquete._nombrePaquete);
+                query.Parameters.AddWithValue("@pp", paquete._precioPaquete);
+                query.Parameters.AddWithValue("@pfa", (object)paquete._idAuto ?? DBNull.Value);
+                query.Parameters.AddWithValue("@pfr", (object)paquete._idRestaurante ?? DBNull.Value);
+                query.Parameters.AddWithValue("@pfh", (object)paquete._idHabitacion ?? DBNull.Value);
+                query.Parameters.AddWithValue("@pfc", (object)paquete._idCrucero ?? DBNull.Value);
+                query.Parameters.AddWithValue("@pfv", (object)paquete._idVuelo ?? DBNull.Value);
+                query.Parameters.AddWithValue("@fia", (object)paquete._fechaIniAuto ?? DBNull.Value);
+                query.Parameters.AddWithValue("@fir", (object)paquete._fechaIniRest ?? DBNull.Value);
+                query.Parameters.AddWithValue("@fic", (object)paquete._fechaIniCruc ?? DBNull.Value);
+                query.Parameters.AddWithValue("@fih", (object)paquete._fechaIniHabi ?? DBNull.Value);
+                query.Parameters.AddWithValue("@fib", (object)paquete._fechaIniVuelo ?? DBNull.Value);
+                query.Parameters.AddWithValue("@ffa", (object)paquete._fechaFinAuto ?? DBNull.Value);
+                query.Parameters.AddWithValue("@ffr", (object)paquete._fechaFinRest ?? DBNull.Value);
+                query.Parameters.AddWithValue("@ffh", (object)paquete._fechaFinHabi ?? DBNull.Value);
+                query.Parameters.AddWithValue("@ffc", (object)paquete._fechaFinCruc ?? DBNull.Value);
+                query.Parameters.AddWithValue("@ffb", (object)paquete._fechaFinVuelo ?? DBNull.Value);
+                query.Parameters.AddWithValue("@pe", estado);
+
+                SqlDataReader lector = query.ExecuteReader();
+                lector.Close();
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+        }
+
+
+        public List<COferta> MListarOfertasBD()
+        {
+            List<COferta> listaofertas = new List<COferta>();
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "SELECT * FROM Oferta";
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var fechaInivar = reader["ofe_fechaInicio"];
+                        var fechaFinvar = reader["ofe_fechaFin"];
+                        var estadovar = reader["ofe_estado"];
+
+                        DateTime fechaInicio = Convert.ToDateTime(fechaInivar).Date;
+                        DateTime fechaFin = Convert.ToDateTime(fechaFinvar).Date;
+                        Boolean disponibilidad = Convert.ToBoolean(estadovar);
+
+
+                        List<String> listaPaquetes = new List<String>();
+
+                        listaPaquetes = MBuscarNombrePaquetesDeOferta(Int32.Parse(reader["ofe_id"].ToString()));
+
+                        COferta oferta = new COferta(reader["ofe_id"].ToString(), reader["ofe_nombre"].ToString(), listaPaquetes, float.Parse(reader["ofe_porcentaje"].ToString()),
+                                               fechaInicio, fechaFin, disponibilidad);
+
+                        listaofertas.Add(oferta);
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return listaofertas;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return null;
+            }
+        }
+
+
+        public COferta MMostrarOfertaBD(int id)
+        {
+            COferta oferta = null;
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "SELECT * FROM Oferta WHERE ofe_ID = '" + id + "'";
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var fechaInivar = reader["ofe_fechaInicio"];
+                        var fechaFinvar = reader["ofe_fechaFin"];
+                        var estadovar = reader["ofe_estado"];
+
+                        DateTime fechaInicio = Convert.ToDateTime(fechaInivar).Date;
+                        DateTime fechaFin = Convert.ToDateTime(fechaFinvar).Date;
+                        Boolean disponibilidad = Convert.ToBoolean(estadovar);
+
+                        List<String> listaPaquetes = new List<String>();
+
+                        listaPaquetes = MBuscarNombrePaquetesDeOferta(Int32.Parse(reader["ofe_ID"].ToString()));
+
+                        oferta = new COferta(reader["ofe_ID"].ToString(), reader["ofe_nombre"].ToString(), listaPaquetes, float.Parse(reader["ofe_porcentaje"].ToString()),
+                                               fechaInicio, fechaFin, disponibilidad);
+                    }
+                    cmd.Dispose();
+                    conexion.Close();
+                    return oferta;
+                }
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return null;
+            }
+        }
+
+
+        public List<String> MBuscarNombrePaquetesDeOferta(int idOferta)
+        {
+            List<String> listaPaquetes = new List<String>();
+            String oferta = "No tiene paquetes asociados";
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "SELECT * FROM PAQUETE P, OFERTA O WHERE O.ofe_ID = P.paq_fk_oferta " +
+                             "AND O.ofe_ID = " + idOferta;
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                        oferta = reader["paq_nombre"].ToString() + " \n";
+                        listaPaquetes.Add(oferta);
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return listaPaquetes;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                listaPaquetes.Add(oferta);
+                return listaPaquetes;
+            }
+        }
+
+        public List<CPaquete> MBuscarPaquetesDeOferta(int idOferta)
+        {
+            List<CPaquete> listaPaquetes = new List<CPaquete>();
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "SELECT * FROM PAQUETE P, OFERTA O WHERE O.ofe_ID = P.paq_fk_oferta " +
+                             "AND O.ofe_ID = " + idOferta;
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                        CPaquete oferta = new CPaquete(Int32.Parse(reader["paq_id"].ToString()), reader["paq_nombre"].ToString(), float.Parse(reader["paq_precio"].ToString()),
+                                                        Int32.Parse(reader["paq_fk_oferta"].ToString()));
+                        listaPaquetes.Add(oferta);
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return listaPaquetes;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return null;
+            }
+        }
+
+        public int MModificarOfertaBD(COferta oferta, String idStr)
+        {
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                SqlCommand query = conexion.CreateCommand();
+
+                int id = Int32.Parse(idStr);
+                //var fechaInivar = oferta._fechaIniOferta;
+                //var fechaFinvar = oferta._fechaFinOferta;
+                Boolean estadovar = oferta._estadoOferta;
+                string fi = oferta._fechaIniOferta.ToString("dd/MM/yyyy");
+                string ff = oferta._fechaFinOferta.ToString("dd/MM/yyyy");
+
+                query.CommandText = "UPDATE Oferta SET ofe_nombre = '" + oferta._nombreOferta + "', ofe_fechaInicio = '"+fi+"'"+
+                            ", ofe_fechaFin = '"+ff+"', ofe_porcentaje = " + oferta._porcentajeOferta + " WHERE ofe_id = " + id;
+                SqlDataReader lector = query.ExecuteReader();
+                lector.Close();
+                conexion.Close();
+                return 1;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return 0;
+            }
+        }
+
+        public int MDesvincularPaqueteDeOfertaBD(int id)
+        {
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+
+                String sql = "UPDATE PAQUETE SET paq_fk_oferta = null" +
+                            " WHERE paq_id = " + id;
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                conexion.Close();
+                return 1;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return 0;
+            }
+        }
+
 
         public Boolean desactivarOferta(int ofertaId)
         {
@@ -170,6 +449,41 @@ namespace BOReserva.Servicio
             }
         }
 
+
+        public COferta obtenerOferta(int ofertaId)
+        {
+            try
+            {
+                COferta oferta = new COferta();
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                SqlCommand query = conexion.CreateCommand();
+                query.CommandText = "SELECT * from Oferta WHERE ofe_id=" + ofertaId;
+                SqlDataReader lector = query.ExecuteReader();
+                oferta._idOferta = ofertaId;
+                while (lector.Read())
+                {
+                    oferta._nombreOferta = lector["ofe_nombre"].ToString();
+                    oferta._porcentajeOferta = float.Parse(lector["ofe_porcentaje"].ToString());
+                }
+                lector.Close();
+                conexion.Close();
+                return oferta;
+            }
+            catch (SqlException e)
+            {
+                COferta oferta1 = new COferta();
+                return oferta1;
+            }
+            catch (Exception e)
+            {
+                COferta oferta2 = new COferta();
+                return oferta2;
+            }
+        }
+
+
+
         public CPaquete detallePaquete(int paqueteId)
         {
             try
@@ -202,6 +516,8 @@ namespace BOReserva.Servicio
                     paquete._idCrucero = Int32.Parse(lector["paq_fk_crucero"].ToString());
                     if (lector["paq_fk_vuelo"].ToString()!= "")
                     paquete._idVuelo = Int32.Parse(lector["paq_fk_vuelo"].ToString());
+                    if (lector["paq_fk_oferta"].ToString() != "")
+                        paquete._idOferta = Int32.Parse(lector["paq_fk_oferta"].ToString());
 
 
 
@@ -308,6 +624,42 @@ namespace BOReserva.Servicio
                 //INTENTO abrir la conexion
                 conexion.Open();
                 String query = "SELECT * FROM Paquete WHERE paq_fk_oferta IS null";
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                while (lector.Read())
+                {
+                    CPaquete paquete = new CPaquete(Int32.Parse(lector["paq_id"].ToString()), lector["paq_nombre"].ToString(),
+                    float.Parse(lector["paq_precio"].ToString()));
+                    paquetesList.Add(paquete);
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return paquetesList;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+
+        public List<CPaquete> listarPaquetesAsociados(int idOferta)
+        {
+            List<CPaquete> paquetesList = new List<CPaquete>();
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "SELECT * FROM Paquete WHERE paq_fk_oferta="+idOferta;
                 SqlCommand cmd = new SqlCommand(query, conexion);
                 SqlDataReader lector = cmd.ExecuteReader();
                 while (lector.Read())
@@ -487,6 +839,64 @@ namespace BOReserva.Servicio
 
         }
 
+        //Procedimiento del Modulo 11 para asociar ofertas a paquetes modificar.
+        public Boolean asociarPaquetesModificar(int[] idsPaquetes, int idOferta)
+        {
+            try
+            {
+                //Obtengo el id de la oferta agregada
+                conexion = new SqlConnection(stringDeConexion);
+                foreach (int idPaquete in idsPaquetes)
+                {
+                    conexion.Open();
+                    SqlCommand query1 = conexion.CreateCommand();
+                    query1.CommandText = "UPDATE Paquete SET paq_fk_oferta = " + idOferta + " WHERE paq_id = " + idPaquete + ";";
+                    SqlDataReader lector1 = query1.ExecuteReader();
+                    lector1.Close();
+                    conexion.Close();
+                }
+
+                return true;
+            }
+            catch (SqlException e)
+            {
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        //Procedimiento del Modulo 11 para asociar ofertas a paquetes modificar.
+        public Boolean desasociarPaquetesModificar(int[] idsPaquetes, int idOferta)
+        {
+            try
+            {
+                //Obtengo el id de la oferta agregada
+                conexion = new SqlConnection(stringDeConexion);
+                foreach (int idPaquete in idsPaquetes)
+                {
+                    conexion.Open();
+                    SqlCommand query1 = conexion.CreateCommand();
+                    query1.CommandText = "UPDATE Paquete SET paq_fk_oferta = null WHERE paq_id = " + idPaquete + ";";
+                    SqlDataReader lector1 = query1.ExecuteReader();
+                    lector1.Close();
+                    conexion.Close();
+                }
+
+                return true;
+            }
+            catch (SqlException e)
+            {
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
         //Método modulo 11 para consultar todos los hoteles
         public List<CConsultar> listarHotelesM11()
         {
@@ -540,7 +950,7 @@ namespace BOReserva.Servicio
                 query.CommandText = 
                     "SELECT v.vue_id, v.vue_codigo, l1.lug_nombre, l2.lug_nombre " +
                     "FROM vuelo v, ruta r, lugar l1, lugar l2 "+
-                    "WHERE v.vue_fk_ruta = r.rut_id and r.rut_fk_lugar_origen = l1.lug_id and r.rut_fk_lugar_destino = l2.lug_id and vue_status = 'activo'";
+                    "WHERE v.vue_fk_ruta = r.rut_id and r.rut_fk_lugar_origen = l1.lug_id and r.rut_fk_lugar_destino = l2.lug_id";
                 SqlDataReader lector = query.ExecuteReader();
                 var columns = new List<string>();
                 for (int i = 0; i < lector.FieldCount; i++)

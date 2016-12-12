@@ -244,8 +244,10 @@
     <Compile Include="Models\gestion_ofertas\CAgregarOferta.cs" />
     <Compile Include="Models\gestion_ofertas\CAgregarPaquete.cs" />
     <Compile Include="Models\gestion_ofertas\CConsultar.cs" />
+    <Compile Include="Models\gestion_ofertas\CModificarOferta.cs" />
     <Compile Include="Models\gestion_ofertas\COferta.cs" />
     <Compile Include="Models\gestion_ofertas\CPaquete.cs" />
+    <Compile Include="Models\gestion_ofertas\CVisualizarOferta.cs" />
     <Compile Include="Models\gestion_roles\CListaGenerica.cs" />
     <Compile Include="Models\gestion_roles\CModulo_detallado.cs" />
     <Compile Include="Models\gestion_roles\CModulo_general.cs" />
@@ -1457,6 +1459,8 @@
     <Content Include="Views\gestion_roles\M13_AgregarRol.cshtml" />
     <Content Include="Views\gestion_roles\M13_VisualizarRol.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_DetallePaquete.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_DetalleOferta.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_ConsultarOferta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

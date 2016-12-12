@@ -2,34 +2,35 @@
 //EVENTO PARA AGREGAR UNA OFERTA
 $("#btnGuardarOferta").click(function (e) {
     e.preventDefault();
-    var form = $("#formGuardarOferta");
+    if (validarCamposVacios() && validarEstarFechas() && compararFechas()) {
+        var form = $("#formGuardarOferta");
 
-    //Si el usuario selecciono paquetes
-    var selectedValues = [];
-    $("#paquetesMultiselect :selected").each(function () {
-        selectedValues.push($(this).val());
-    });
-    
-    $.ajax({
-        url: "gestion_ofertas/guardarOferta",
-        data: form.serialize() + "&estadoOferta=" + $("#estadoOferta").val(),
-        //data: { 'nombreOferta': $("#nombreOferta").val(), 'fInicio': $("#fInicio").val(), 'fFin': $("#fFin").val(), 'porcentajeOferta': $("#porcentajeOferta").val() },
-        type: 'POST',
-        success: function (data) {
-            if (selectedValues.length > 0) {
-                asociarPaquetesOferta(selectedValues);
-            }
-            else {
-                $('#formGuardarOferta')[0].reset();
-                alert("La oferta ha sido creada");
-            }
-        }
-        , error: function (xhr, textStatus, exceptionThrown) {
-            //muestro el texto del error
-            alert(xhr.responseText);
-        }
-    });
+        //Si el usuario selecciono paquetes
+        var selectedValues = [];
+        $("#paquetesMultiselect :selected").each(function () {
+            selectedValues.push($(this).val());
+        });
 
+        $.ajax({
+            url: "gestion_ofertas/guardarOferta",
+            data: form.serialize() + "&estadoOferta=" + $("#estadoOferta").val(),
+            type: 'POST',
+            success: function (data) {
+                if (selectedValues.length > 0) {
+                    asociarPaquetesOferta(selectedValues);
+                }
+                else {
+                    $('#formGuardarOferta')[0].reset();
+                    alert("La oferta ha sido creada");
+                    irVisualizarOferta();
+                }
+            }
+            , error: function (xhr, textStatus, exceptionThrown) {
+                //muestro el texto del error
+                alert(xhr.responseText);
+            }
+        });
+    }
 });
 
 function asociarPaquetesOferta(idsPaquetes) {
@@ -40,6 +41,7 @@ function asociarPaquetesOferta(idsPaquetes) {
         success: function (data) {
             alert("La oferta ha sido creada");
             $('#formGuardarOferta')[0].reset();
+            irVisualizarOferta();
         }
         , error: function (xhr, textStatus, exceptionThrown) {
             //muestro el texto del error
@@ -54,7 +56,6 @@ function getPaquetesFromDB() {
            url: '/gestion_ofertas/M11_CargarPaquetesSelect',
            type: 'POST',
            success: function (data) {
-               console.log(data);
                mostrarPaquetesMultiselect(data);
            },
            error: function (jqXHR, textStatus, errorThrown) {
@@ -77,6 +78,26 @@ function getSelected() {
     $("#paquetesMultiselect :selected").each(function () {
         selectedValues.push($(this).val());
     });
-    alert(selectedValues);
     return false;
+}
+
+function irVisualizarOferta() {
+    var url = '/gestion_ofertas/M11_VisualizarOferta';
+    var method = 'GET';
+    var data = '';
+
+    $.ajax(
+        {
+            url: url,
+            type: method,
+            data: data,
+            success: function (data, textStatus, jqXHR) {
+
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
 }

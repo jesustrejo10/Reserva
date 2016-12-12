@@ -16,6 +16,8 @@ namespace BOReserva.Models.gestion_ofertas
 
         public float _precioPaquete { get; set; }
 
+        public int _idOferta { get; set; }
+
         public COferta _oferta;
 
         public int? _seleccionAuto { get; set; }
@@ -50,6 +52,8 @@ namespace BOReserva.Models.gestion_ofertas
 
         public bool _estadoPaquete { get; set; }
 
+        public int _fkOferta { get; set; }
+
        public CPaquete() { }
         public CPaquete (int id, string nombre, float precio, COferta oferta)
         {
@@ -73,6 +77,16 @@ namespace BOReserva.Models.gestion_ofertas
             _nombrePaquete = nombre;
             _precioPaquete = precio;
         }
+
+        public CPaquete(int idPaquete, String nombrePaquete, float precioPaquete, int fkOferta)
+        {
+            _idPaquete = idPaquete;
+            _nombrePaquete = nombrePaquete;
+            _precioPaquete = precioPaquete;
+            _fkOferta = fkOferta;
+        }
+
+
 
         public String formatDate(DateTime? date)
         {

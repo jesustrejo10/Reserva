@@ -61,7 +61,7 @@
 
                         <div class="col-xs-4">
                             <label>Porcentaje de Oferta  (<span style="color:red">*</span>):</label>
-                            @Html.TextBoxFor(m => m._porcentajeOferta, null, new { @class = "form-control", @placeholder = "%", @id = "porcentajeOferta" })
+                            @Html.TextBoxFor(m => m._porcentajeOferta, null, new { @class = "form-control", @placeholder = "%", @id = "porcentajeOferta", @type = "number", @min="1", @max="99" })
                         </div>
 
                         <div class="col-xs-4">
@@ -101,3 +101,37 @@
 </div>
 }
 <!-----------------FIN SECCION AGREGAR OFERTA-------------------->
+<script>
+    function validarEstarFechas() {
+            if (($("#fInicio").val() == "") || ($("#fFin").val() == "")) {
+                alert('La Oferta debe tener fecha inicio y fecha fin!');
+                return false;
+            }
+        return true;
+    }
+
+    //Valida que el nombre y precio no esten vacios
+    function validarCamposVacios() {
+        if (($("#nombreOferta").val() == "") || ($("#porcentajeOferta").val() == "")) {
+            alert('Debes llenar el nombre y porcentaje de la Oferta!');
+            return false;
+        }
+        return true;
+    }
+    //Compara todas las fechas introducidas
+    function compararFechas() {
+        if (!validarFechas($("#fInicio").val(), $("#fFin").val())) {
+            alert('La fecha fin debe ser mayor que la fecha inicio!');
+            return false;
+        }
+        return true;
+    }
+
+    //Valida que la fecha inicio sea mayor que la fecha fin
+    function validarFechas(fi, ff) {
+        if ((new Date(fi).getTime() > new Date(ff).getTime())) {
+            return false;
+        }
+        return true;
+    }
+</script>
