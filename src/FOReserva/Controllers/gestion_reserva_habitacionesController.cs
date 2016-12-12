@@ -12,13 +12,6 @@ namespace FOReserva.Controllers
     {
         //
         // GET: /gestion_reserva_habitaciones/
-
-        [HttpGet]
-        public ActionResult pagina_inicial()
-        {            
-            return PartialView();
-        }
-
         [HttpGet]
         public ActionResult mis_reservas()
         {
@@ -27,15 +20,20 @@ namespace FOReserva.Controllers
         }
 
         [HttpGet]
-        public ActionResult buscar_hoteles()
+        public ActionResult buscar_hoteles(Cvista_BuscarHotel model)
         {
-            var ciudades = CReservaHabitacion.ObtenerCiudades();
-            var model = new Cvista_BuscarHotel {
-                LugId = 0,
-                FechaLlegada = DateTime.Now,
-                CantidadDias = 1,
-                Ciudades = ciudades
-            };
+            if (Session["RHACiudades"] == null)
+                Session["RHACiudades"] = CReservaHabitacion.ObtenerCiudades();
+
+            if (model.Ciudades == null)
+                model.Ciudades = (List<CCiudad>)Session["RHACiudades"];
+
+            if (model.FechaLlegada.Ticks == 0)
+                model.FechaLlegada = DateTime.Now.AddDays(1);
+
+            if (model.CantidadDias < 1)
+                model.CantidadDias = 1;
+
             return PartialView(model);
         }
 
@@ -57,25 +55,15 @@ namespace FOReserva.Controllers
         public ActionResult realizar_reserva(Cvista_ReservarHabitacion reserva)
         {
             reserva.UsuId = 1; // Usuario Actual
-            if (CReservaHabitacion.GenerarReserva(reserva))
-                return Json(true, JsonRequestBehavior.AllowGet);
-            else
-                return Json(false, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpGet]
-        public ActionResult editar_reserva(CReservaHabitacion model)
-        {            
-            return PartialView(model);
+            var resultado = CReservaHabitacion.GenerarReserva(reserva);
+            return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public JsonResult guardar_reserva()
+        public ActionResult cancelar_reserva(CReservaHabitacion reserva)
         {
-            return Json(new { hubo_problemas = false, mensaje = "Reserva guardada..." }, JsonRequestBehavior.AllowGet);
+            var resultado = CReservaHabitacion.CancelarReserva(reserva);
+            return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-
-
-
     }
 }

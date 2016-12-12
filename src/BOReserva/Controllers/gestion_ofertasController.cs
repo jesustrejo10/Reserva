@@ -72,7 +72,7 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult M11_ListarAutomoviles()
         {
-            CAutomovil automovil = new CAutomovil();
+            Automovil automovil = new Automovil();
             return Json(automovil.MListarvehiculos());
         }
 
