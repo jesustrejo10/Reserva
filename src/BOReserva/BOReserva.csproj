@@ -204,6 +204,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\gestion_automovilesController.cs" />
+    <Compile Include="Controllers\gestion_crucerosController.cs" />
     <Compile Include="Controllers\gestion_avionesController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -233,6 +234,17 @@
     <Compile Include="Models\gestion_aviones\CAgregarAvion.cs" />
     <Compile Include="Models\gestion_aviones\CAvion.cs" />
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
+    <Compile Include="Models\gestion_cruceros\CGestion_cabina.cs" />
+    <Compile Include="Models\gestion_cruceros\CGestion_camarote.cs" />
+    <Compile Include="Models\gestion_cruceros\CGestion_crucero.cs" />
+    <Compile Include="Models\gestion_cruceros\CGestion_itinerario.cs" />
+    <Compile Include="Models\gestion_cruceros\ConexionBD.cs" />
+    <Compile Include="Models\gestion_cruceros\RecursosCruceros.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RecursosCruceros.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\gestion_cruceros\VistaListaCrucero.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cgestion_seguridad_ingreso.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cvalidar_bloqueo_exception.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cvalidar_status_exception.cs" />
@@ -246,6 +258,11 @@
     <Compile Include="Models\gestion_boletos\CVisualizarBoleto.cs" />
     <Compile Include="Models\gestion_boletos\CVuelo.cs" />
     <Compile Include="Models\gestion_hoteles\CGestionHoteles_CrearHotel.cs" />
+    <Compile Include="Models\gestion_hoteles\CGestionHoteles_EditarHotel.cs" />
+    <Compile Include="Models\gestion_hoteles\CGestionHoteles_SelectCiudadModel.cs" />
+    <Compile Include="Models\gestion_hoteles\CGestionHoteles_SelectEstrellasModel.cs" />
+    <Compile Include="Models\gestion_hoteles\CGestionHoteles_SelectPaisModel.cs" />
+    <Compile Include="Models\gestion_hoteles\CHotel.cs" />
     <Compile Include="Models\gestion_lugares\CLugarModelo.cs" />
     <Compile Include="Models\gestion_ofertas\CAgregarOferta.cs" />
     <Compile Include="Models\gestion_ofertas\CAgregarPaquete.cs" />
@@ -286,6 +303,7 @@
     <Compile Include="Servicio\M01SQL.cs" />
     <Compile Include="Servicio\manejadorSQL.cs" />
     <Compile Include="Servicio\Servicio_Boletos\manejadorSQL_Boletos.cs" />
+    <Compile Include="Servicio\Servicio_Hoteles\CManejadorSQL_Hoteles.cs" />
     <Compile Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx.cs">
       <DependentUpon>GestionDeAutomoviles.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -362,6 +380,7 @@
     <Content Include="Content\dist\js\demo.js" />
     <Content Include="Content\dist\js\pages\dashboard.js" />
     <Content Include="Content\dist\js\pages\dashboard2.js" />
+    <Content Include="Content\M24_css\style_module.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -482,6 +501,7 @@
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\Scripts_Automoviles\llamadas_comunes_automoviles.js" />
     <Content Include="Scripts\Scripts_Aviones\llamadas_generales.js" />
+    <Content Include="Scripts\Scripts_Hoteles\editar_hotel.js" />
     <Content Include="Scripts\Scripts_CheckIn\BoardingPass.js" />
     <Content Include="Scripts\Scripts_CheckIn\M05_CheckIn.js" />
     <Content Include="Scripts\Scripts_CheckIn\M05_Equipaje.js" />
@@ -511,9 +531,8 @@
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarPorVuelo.html" />
     <Content Include="Views\gestion_comida_vuelo\M06_ConsultarComidas.html" />
     <Content Include="Views\gestion_comida_vuelo\placeholder.html" />
-    <Content Include="Views\gestion_cruceros\css\style_module.css" />
     <Content Include="Views\gestion_cruceros\js\module.js" />
-    <Content Include="Views\gestion_cruceros\M24_GestionCruceros.html" />
+    <Content Include="Views\gestion_cruceros\placeholder.html" />
     <Content Include="Views\gestion_equipaje_perdido\placeholder.html" />
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Actualizar.html" />
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Agregar.html" />
@@ -1382,12 +1401,16 @@
     <Content Include="Views\gestion_usuarios\M12_AgregarUsuario.cshtml" />
     <Content Include="Views\gestion_usuarios\M12_ModificarUsuario.cshtml" />
     <Content Include="Views\gestion_usuarios\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_GestionCruceros.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_ListarCruceros.cshtml" />
+    <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Visualizar.cshtml" />
+	<Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\gestion_restaurantes\M10_GestionRestaurantes_Modificar.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Visualizar.cshtml" />
     <Content Include="Views\gestion_boletos\M05_VisualizarBoletos.cshtml" />
     <Content Include="Views\gestion_boletos\M05_VerReserva.cshtml" />
     <Content Include="Views\gestion_check_in\M05_CheckIn.cshtml" />
@@ -1413,6 +1436,7 @@
     <Content Include="Views\gestion_ofertas\M11_ModificarPaquete.cshtml" />
     <Content Include="Views\gestion_roles\M13_AgregarRol.cshtml" />
     <Content Include="Views\gestion_roles\M13_VisualizarRol.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_AgregarCabinas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1495,6 +1519,10 @@
     <Content Include="Views\gestion_boletos\M05_DetalleBoleto.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Models\gestion_cruceros\RecursosCruceros.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecursosCruceros.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Models\gestion_usuarios\RecursoBD.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoBD.Designer.cs</LastGenOutput>
@@ -1502,6 +1530,7 @@
     <EmbeddedResource Include="Models\gestion_usuarios\RecursoUsuario.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoUsuario.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

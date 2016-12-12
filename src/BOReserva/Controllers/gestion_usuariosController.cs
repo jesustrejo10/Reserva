@@ -1,6 +1,4 @@
 ﻿using BOReserva.Models.gestion_usuarios;
-using BOReserva.Models.gestion_seguridad_ingreso;
-using BOReserva.Servicio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -91,13 +89,6 @@ namespace BOReserva.Controllers
        [HttpPost]
         public ActionResult M12_ModificarUsuario(AgregarUsuario usuario)
         {
-            //Se resetea intentos en la Tabla Login MO1 Ingreso Seguridad
-            Cgestion_seguridad_ingreso ingreso = new Cgestion_seguridad_ingreso();
-            ingreso.correoCampoTexto = usuario.correoUsuario;
-            
-
-          
-            System.Diagnostics.Debug.WriteLine("Correo " + usuario.correoUsuario );
 
             if (ModelState.IsValid)
             {
@@ -105,7 +96,6 @@ namespace BOReserva.Controllers
                 try
                 {
                     p.ModificarUsuario(usuario.toClass(), usuario.idUsuario);
-                    ingreso.ResetearIntentos();//Metodo M01_Ingreso_Seguridad
                     TempData["message"] = "Usuario Modficado Exitosamente";
                     return RedirectToAction("M12_Index");
                 }
