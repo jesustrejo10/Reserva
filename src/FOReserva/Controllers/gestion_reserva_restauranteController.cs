@@ -33,7 +33,7 @@ namespace FOReserva.Controllers
                 //No se puede usar el mensaje de la excepcion "e.mensaje"
                 //Esto se causa al realizar una busqueda con parametros que no son
                 //como son caracteres especiales y de mas
-                return View("No se encontraron resultados");
+                return View();
             }
             catch (ManejadorSQLException f)
             {
@@ -89,7 +89,8 @@ namespace FOReserva.Controllers
             }
             catch (Exception g)
             {
-
+                ViewBag.Message = "Lo sentimos, la reserva no pudo ser realizada debido al siguiente error del sistema:" + g.Message;
+               
             }
             return View();
         }
@@ -114,16 +115,13 @@ namespace FOReserva.Controllers
             {
                 //Ventana de error no conecto a la db
                 //Se puede usar el mensaje de la excepcion "e.mensaje"
-                reserva = null;
-                return View("error_conexion" + e.Message);
+                return View("error_conexion");
             }
             catch (InvalidManejadorSQLException f)
             {
-                //Ventana de error al crear la reserva
-                //Esto se causa por una sitaxis erronea del sql
-                //como son caracteres especiales o demas
                 reserva = null;
-                return View("Error al crear Reserva");
+                ViewBag.Message = "Lo sentimos, la reserva no pudo ser realizada debido a un error del sistema";
+                return View(reserva);
             }
             catch (Exception e)
             {
@@ -138,10 +136,27 @@ namespace FOReserva.Controllers
              */
         public ActionResult lista_reserva_restaurantes()
         {
-            ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
-            List<CReservation_Restaurant> lista = manejador.buscarReservas();
-            return View(lista);
+            try
+            {
+                ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
+                List<CReservation_Restaurant> lista = manejador.buscarReservas();
+                return View(lista);
+            }
+            catch (ManejadorSQLException f)
+            {
+                //Ventana de error no conecto a la db
+                //Se puede usar el mensaje de la excepcion "f.mensaje"
+                return View("error_conexion");
+            }
+            catch (Exception g)
+            {
+             ViewBag.Message = "Lo sentimos, la reserva no pudo ser realizada debido al siguiente error del sistema:" + g.Message;
+                
+            }
+            return View();
+            
         }
+
 
         /* 
          * Metodo para la eliminacion de la reserva
@@ -169,7 +184,49 @@ namespace FOReserva.Controllers
             catch (Exception e)
             {
                 // Error desconocido del sistema
+                ViewBag.Message = "Lo sentimos, la reserva no pudo ser realizada debido al siguiente error del sistema:" + e.Message;
             }
+        }
+
+        /*
+         *  Metodo para Modificar una reserva
+         *   c_id_reserva: ID de la reserva a modificar
+         *   c_name_client: A nombre de quien se hizo la reserva
+         *   c_reserv_date: Fecha de la reserva
+         *   c_reserv_hour: hora de la reserva
+         *   c_number_person: numero de personas
+         */
+        [System.Web.Services.WebMethod]
+        public void editar_reserva(int c_id_reserva,string c_name_client, string c_reserv_date, string c_reserv_hour,int c_number_person)
+        {
+            CReservation_Restaurant tmp = new CReservation_Restaurant();
+            tmp.Id = c_id_reserva;
+            tmp.Name = c_name_client;
+            tmp.Date = c_reserv_date;
+            tmp.Time = c_reserv_hour;
+            tmp.Count = c_number_person;
+
+            try
+            {
+                ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
+                manejador.actualizarReserva(tmp);
+            }
+            catch (ManejadorSQLException e)
+            {
+                /*
+                 * Controlar error de conexion
+                 *
+                 */
+
+            }
+            catch (InvalidManejadorSQLException e)
+            {
+                /*
+                 * Controlar error de operacion invalida 
+                 */
+
+            }
+            catch (Exception e) { /* Error generico del sistema */ }
         }
     }
 }
