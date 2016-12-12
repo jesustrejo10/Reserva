@@ -1,0 +1,104 @@
+﻿<div class="row">
+    <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
+
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title"> Lista de Vuelos </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Codigo Vuelo</th>
+                            <th>Hora Salida/th>
+                            <th>Hora Llegada</th>
+                            <th>Clase Turista/Ejecutiva/VIP</th>
+                            <th>Cantidad Asignar</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @try
+                        {
+                            foreach (var item in Model)
+                            {
+                               
+                                <tr id="@item._codigoVuelo">
+                                    <td>@item._tipoPlato</td>
+                                    <td>@item._horaSalida</td>
+                                    <td>@item._horaLlegada</td>
+                                    <td>@item._capacidadPasajerosTurista</td>
+                                    <td>@item._capacidadPasajerosEjecutiva</td>
+                                    <td>@item._capacidadPasajerosVIP</td>
+                                    <td>@item._cantidadAsignar</td>
+                                    <td>
+                                        @*<a href="#" title="Consultar"> <i class="fa fa-eye consultar"></i></a>
+                                            <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>*@
+                                        <a href="#" title="Agregar"><i class="fa fa-plus agregarvuelo"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        catch
+                        {
+
+                        }
+
+                    <tfoot>
+                        <tr>
+                            <th>Codigo Vuelo</th>
+                            <th>Hora Salida/th>
+                            <th>Hora Llegada</th>
+                            <th>Clase Turista/Ejecutiva/VIP</th>
+                            <th>Cantidad Asignar</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+
+<script src="../../Content/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="../../Content/bootstrap/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="../../Content/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="../../Content/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="../../Content/plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="../../Content/dist/js/app.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+<!-- page script -->
+<!-- DataTables -->
+<script src="../../Content/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+<script language="javascript" type="text/javascript">
+    $(".agregarvuelo").click(function () {
+        console.log("hola");
+        var identificador = $(this).parent().parent().parent().attr("id");
+        jQuery.ajax({
+            type: "GET",
+            url: "/gestion_comida_vuelo/M06_AgregarPorVuelo",
+            data: { id: identificador }
+        }).done(function (data) {
+            $("#contenido").empty();
+            $("#contenido").append(data);
+        }).fail(function () {
+
+        });
+
+
+    });
+    </script>
