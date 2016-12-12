@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BOReserva.Models.gestion_roles;
-using BOReserva.Models.gestion_aviones;
 using BOReserva.Servicio;
 using System.Net;
 using Newtonsoft.Json.Linq;
@@ -17,35 +16,27 @@ namespace BOReserva.Controllers
         // GET: /gestion_roles/
         public ActionResult M13_AgregarRol()
         {
-            manejadorSQL sql = new manejadorSQL();            
-
+            manejadorSQL sql = new manejadorSQL();
             CRoles rol = new CRoles();
             rol.Menu = sql.consultarLosModulos();
-            //sql.insertarRol();
-
-            //            CListaGenerica<CModulo_detallado> listaPermisos= new CListaGenerica<CModulo_detallado>();
-
-            //            CModulo_detallado hola = new CModulo_detallado("Agregar rol", "prueba");
-            //            CModulo_detallado hola2 = new CModulo_detallado("Modificar rol", "prueba 2");
-            // CModulo_detallado hola3 = new CModulo_detallado("Consultar rol", "prueba 3");
-
-
-
-            // listaPermisos.agregarElemento(hola);
-            //listaPermisos.agregarElemento(hola2);
-            //listaPermisos.agregarElemento(hola3);
-
-  //             CRoles pruebaRol = new CRoles();
-//               pruebaRol.Nombre_rol = "Cliente";
-
-               // sql.insertarPermisosRol(pruebaRol, listaPermisos);
-
 
             return PartialView(rol);
         }
         public ActionResult M13_VisualizarRol()
         {
-            return PartialView();
+            manejadorSQL sql = new manejadorSQL();
+            List<CRoles> listaroles = sql.consultarListaroles();
+            foreach (var item in listaroles)
+            {
+                System.Diagnostics.Debug.WriteLine("-------------------");
+                System.Diagnostics.Debug.WriteLine(item.Nombre_rol);
+                System.Diagnostics.Debug.WriteLine("-------------------");
+                foreach (var item2 in item.Permisos)
+                {
+                    System.Diagnostics.Debug.WriteLine(item2.Nombre);
+                }
+            }
+            return PartialView(listaroles);
         }
         //Metodo para agregar roles
         [HttpPost]
