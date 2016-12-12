@@ -17,10 +17,19 @@ namespace FOReserva.Controllers
         public ActionResult busqueda_parametros()
         {
 
-            IList<CModeloBoleto> boletos = _manejador.buscarReserva("Caracas", "Valencia", "2016-10-18");
-            foreach (CModeloBoleto boleto in boletos)
-                System.Diagnostics.Debug.WriteLine(boleto.codigo);
+            /*IList<CModeloBoleto> boletos = _manejador.buscarReserva("Caracas", "Valencia", "2013-08-30", "2013-09-02", "Turista");
+              foreach (CModeloBoleto boleto in boletos)
+              System.Diagnostics.Debug.WriteLine(boleto.codigo); */
 
+            /*IList < CModeloBoleto > disponib = _manejador.buscarDisponibilidad("Turista", "2013-08-30 22:05:00.000");  
+              foreach (CModeloBoleto boleto in disponib)
+              System.Diagnostics.Debug.WriteLine(boleto.codigo); */
+
+            /*IList<CModeloBoleto> boletos = _manejador.buscarReserva("4455743");
+              foreach (CModeloBoleto boleto in boletos)
+              System.Diagnostics.Debug.WriteLine(boleto.codigo); */
+
+ //           IList <CModeloBoleto> boletos = _manejador.insertarReserva(DateTime.Today,0,440,"R0002","Ejecutivo", "Valencia","Caracas",4455743);
 
             return PartialView();
         }

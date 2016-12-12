@@ -8,18 +8,23 @@ namespace FOReserva.Models.ReservaBoleto
 {
     public class CModeloBoleto : BaseEntity
     {
+
         private string _codigo;
         private DateTime _fecha;
         private float _costo;
         private string _tipo;
+        private string _origen;
+        private string _destino; 
 
         public CModeloBoleto
-            (int id, string name, string codigo, DateTime fecha, float costo, string tipo) : base(id, name)
+            (int id, string name, string codigo, DateTime fecha, float costo, string tipo, string origen, string destino) : base(id, name)
         {
             this._codigo = codigo;
             this._fecha = fecha;
             this._costo = costo;
             this._tipo = tipo;
+            this._origen = origen;
+            this._destino = destino;
 
         }
         /* Constructor Vacio */
@@ -51,6 +56,18 @@ namespace FOReserva.Models.ReservaBoleto
         {
             get { return _tipo; }
             set { _tipo = value; }
+        }
+
+        public string origen
+        {
+            get { return _origen; }
+            set { _origen = value; }
+        }
+
+        public string destino
+        {
+            get { return _destino; }
+            set { _destino = value; }
         }
 
     }
