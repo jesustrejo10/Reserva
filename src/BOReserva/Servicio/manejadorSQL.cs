@@ -143,7 +143,6 @@ namespace BOReserva.Servicio
             }
         }
 
-
         //Procedimiento del Modulo 6 para modificar un plato
         public Boolean modificarPlato(CEditarComida model)
         {
@@ -170,6 +169,65 @@ namespace BOReserva.Servicio
             }
         }
 
+
+        /// <summary>
+        /// Procedimiento del Modulo 6 para deshabilitar un plato
+        /// </summary>
+        /// <param name="id"> int </param>
+        /// <returns>Boolean true si se deshabilito bien, false si dio un error </returns>
+        public Boolean deshabilitarPlato(int id)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "UPDATE Comida SET com_estatus='No Disponible' where com_id=" + id;
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                conexion.Close();
+                return true;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        /// <summary>
+        /// Procedimiento del Modulo 6 para habilitar un plato
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>Boolean true si se habilito bien, false si dio un error </returns>
+        public Boolean habilitarPlato(int id)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "UPDATE Comida SET com_estatus='Disponible' where com_id=" + id;
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                conexion.Close();
+                return true;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
 
 
         /// <summary>
