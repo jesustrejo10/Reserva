@@ -11,7 +11,7 @@ namespace BOReserva.Models.gestion_hoteles
     {
         public static List<SelectListItem> pais()
         {
-            CManejadorSQL_Rutas pais = new CManejadorSQL_Rutas();
+            CManejadorSQL_Hoteles pais = new CManejadorSQL_Hoteles();
             List<SelectListItem> _pais = new List<SelectListItem>();
             String[] paises = pais.MListarpaisesBD();
             int i = 0;

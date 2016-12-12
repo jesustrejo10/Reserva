@@ -61,7 +61,7 @@ namespace BOReserva.Controllers
 
         public static List<SelectListItem> pais()
         {
-            CManejadorSQL_Rutas pais = new CManejadorSQL_Rutas();
+            CManejadorSQL_Hoteles pais = new CManejadorSQL_Hoteles();
             List<SelectListItem> _pais = new List<SelectListItem>();
             String[] paises = pais.MListarpaisesBD();
 
@@ -95,7 +95,7 @@ namespace BOReserva.Controllers
 
         public ActionResult M09_GestionHoteles_Visualizar()
         { 
-            CManejadorSQL_Rutas buscarhoteles = new CManejadorSQL_Rutas();
+            CManejadorSQL_Hoteles buscarhoteles = new CManejadorSQL_Hoteles();
             List<CHotel> listahoteles = buscarhoteles.MListarHotelesBD();  //AQUI SE BUSCAN TODO LOS HOTELES QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA       
             return PartialView(listahoteles);
         }
@@ -104,7 +104,7 @@ namespace BOReserva.Controllers
         {
             Debug.WriteLine("CIUDAD FILTRADA");
             List<SelectListItem> _ciudades = new List<SelectListItem>();
-            CManejadorSQL_Rutas ciudad = new CManejadorSQL_Rutas();
+            CManejadorSQL_Hoteles ciudad = new CManejadorSQL_Hoteles();
             String[] ciudadesBD = ciudad.MListarciudadesBD(pais);
 
             _ciudades.Add(new SelectListItem
@@ -159,7 +159,7 @@ namespace BOReserva.Controllers
             }
             //AGREGAR EL USING DEL MANEJADOR SQL ANTES (using BOReserva.Servicio; o using FOReserva.Servicio;)
             //instancio el manejador de sql
-            CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();
+            CManejadorSQL_Hoteles sql = new CManejadorSQL_Hoteles();
             //realizo el insert
             bool resultado = sql.insertarHotel(model);
             //envio una respuesta dependiendo del resultado del insert

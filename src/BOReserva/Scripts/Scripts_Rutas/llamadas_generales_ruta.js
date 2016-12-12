@@ -54,3 +54,60 @@ $('#distanciaRuta').focusout(function () {
         alert("Debe ingresar un valor mayor a cero");
     }
 });
+
+$("#VisualizarRutasComerciales").click(function (e) {
+    e.preventDefault();
+    var url = '/gestion_ruta_comercial/VisualizarRutasComerciales';
+    var method = 'GET';
+    var data = '';
+
+    $.ajax(
+        {
+            url: url,
+            type: method,
+            data: data,
+            success: function (data, textStatus, jqXHR) {
+
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+
+});
+$("#m03EditarRutas").click(function (e) {
+    e.preventDefault();
+    alert("Botón Editar");
+    $.ajax({
+        url: '/gestion_ruta_comercial/ModificarRutasComerciales',
+        data: '',
+        type: 'GET',
+        success: function (data) {
+            $("#contenido").empty();
+            $("#contenido").append(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+        }
+    });
+});
+
+
+$("#m03DetalleRutas").click(function (e) {
+    e.preventDefault();
+    alert("Botón Editar");
+    $.ajax({
+        url: '/gestion_ruta_comercial/DetalleRutasComerciales',
+        data: '',
+        type: 'GET',
+        success: function (data) {
+            $("#contenido").empty();
+            $("#contenido").append(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+        }
+    });
+});

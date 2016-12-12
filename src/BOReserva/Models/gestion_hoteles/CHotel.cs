@@ -42,7 +42,7 @@ namespace BOReserva.Models.gestion_hoteles
 
         public List<CHotel> MListarHoteles() //METODO PARA OBTENER LA LISTA DE HOTELES DE LA BASE DE DATOS
         {
-            CManejadorSQL_Rutas listar = new CManejadorSQL_Rutas();
+            CManejadorSQL_Hoteles listar = new CManejadorSQL_Hoteles();
             return listar.MListarHotelesBD();
         }
 
