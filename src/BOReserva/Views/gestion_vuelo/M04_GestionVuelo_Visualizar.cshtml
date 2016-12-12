@@ -103,26 +103,25 @@
                     $("#contenido").empty();
                     $("#contenido").append(data);
                             var url = '/gestion_vuelo/M04_GestionVuelo_Visualizar';
-        var method = 'GET';
-        var data = '';
+                            var method = 'GET';
+                            var data = '';
+                            $.ajax(
+                                {
+                                    url: url,
+                                    type: method,
+                                    data: data,
+                                    success: function (data, textStatus, jqXHR) {
 
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-                }).fail(function (err) {
-                    alert(err)
-                });
+                                        $("#contenido").empty();
+                                        $("#contenido").append(data);
+                                    },
+                                    error: function (jqXHR, textStatus, errorThrown) {
+                                        alert(errorThrown);
+                                    }
+                                });
+                                    }).fail(function (err) {
+                                        alert(err)
+                                    });
 
 
             });
@@ -170,22 +169,6 @@
 
         });
 
-   //     $(document).ready(function () {
-   //         $(".modificar").click(function () {
-   //             var identificador = $(this).parent().parent().parent().attr("id");
-   //             jQuery.ajax({
-   //                 type: "GET",
-   //                 url: "/gestion_automoviles/M04_GestionVuelo_Modificar",
-   //                 data: { codigoVuelo: identificador }
-   //             }).done(function (data) {
-   //                 //$("#sdssss").append(data);
-   //                 $("#contenido").empty();
-   //                 $("#contenido").append(data);
-   //             }).fail(function () {
-   //                 alert("error en la carga desde Base de Datos")
-   //             });
-   //         });
-//});
 
 
         $(document).ready(function () {

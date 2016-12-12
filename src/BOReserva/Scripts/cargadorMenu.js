@@ -71,7 +71,6 @@
         var url = '/gestion_vuelo/M04_GestionVuelo_Visualizar';
         var method = 'GET';
         var data = '';
-
         $.ajax(
             {
                 url: url,
