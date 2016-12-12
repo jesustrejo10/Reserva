@@ -15,6 +15,7 @@ $("#agregarVuelo").click(function (e) {
     });
 });
 
+//evento para cargar los destinos disponibles segun el origen seleccionado en la vista
 $("#ciudadO").change(function () {
     var cID = $(ciudadO).val();
         $.getJSON("gestion_vuelo/cargarDestinos", { ciudadO: cID },
@@ -34,7 +35,7 @@ $("#ciudadO").change(function () {
                     });
 });
 
-
+//evento para cargar los aviones que puedan cubrir la distancia de la ruta seleccionada en la vista
 $("#ciudadD").change(function () {
     var cID = $(ciudadO).val();
     var dID = $(ciudadD).val();
@@ -55,21 +56,64 @@ $("#ciudadD").change(function () {
            });
 });
 
+//evento para traer el modelo del avion seleccionado en la vista
 $("#matAvion").change(function () {
-    var aID = $(ciudadO).val();
+    var aID = $(matAvion).val();
     $.getJSON("gestion_vuelo/buscaModeloA", { matriAvion: aID },
            function (data) {
-               var select = $("#modeloAvion");
-               select.empty();
-               select.append($('<option/>', {
-                   value: 0,
-                   text: ""
-               }));
-               $.each(data, function (index, itemData) {
-                   select.append($('<option/>', {
-                       value: itemData.Value,
-                       text: itemData.Text
-                   }));
-               });
+               $("#modeloAvion").val(data);
            });
+});
+
+//evento para traer la cantidad de pasajeros segun avion seleccionado en la vista
+$("#matAvion").change(function () {
+    var aID = $(matAvion).val();
+    $.getJSON("gestion_vuelo/buscaPasajerosA", { matriAvion: aID },
+       function (data) {
+           $("#pasajerosAvion").val(data);
+       });
+});
+
+//evento para traer la distancia maxima que cubre segun avion seleccionado en la vista
+$("#matAvion").change(function () {
+    var aID = $(matAvion).val();
+    $.getJSON("gestion_vuelo/buscaDistanciaA", { matriAvion: aID },
+       function (data) {
+           $("#distanciaMaxima").val(data);
+       });
+});
+
+//evento para traer la velocidad maxima segun avion seleccionado en la vista
+$("#matAvion").change(function () {
+    var aID = $(matAvion).val();
+    $.getJSON("gestion_vuelo/buscaVelocidadA", { matriAvion: aID },
+       function (data) {
+           $("#velocidadMaxima").val(data);
+       });
+});
+
+//evento para luego de haber seleccionado el estado del vuelo, se calcule la fecha del aterrizaje
+$("#estadoVuelo").change(function () {
+    var fID = $(fechaDespegue).val();
+    var hID = $(horaDespegue).val();
+    var oID = $(ciudadO).val();
+    var dID = $(ciudadD).val();
+    var mID = $(matAvion).val();
+    $.getJSON("gestion_vuelo/buscaFechaA", { fechaDes: fID, horaDes: hID, ciudadO: oID, ciudadD: dID, matriAvion: mID, opcion: 0},
+       function (data) {
+           $("#fechaAterrizaje").val(data);
+       });
+});
+
+//evento para luego de haber seleccionado el estado del vuelo, se calcule la hora del aterrizaje
+$("#estadoVuelo").change(function () {
+    var fID = $(fechaDespegue).val();
+    var hID = $(horaDespegue).val();
+    var oID = $(ciudadO).val();
+    var dID = $(ciudadD).val();
+    var mID = $(matAvion).val();
+    $.getJSON("gestion_vuelo/buscaFechaA", { fechaDes: fID, horaDes: hID, ciudadO: oID, ciudadD: dID, matriAvion: mID, opcion: 1 },
+       function (data) {
+           $("#horaAterrizaje").val(data);
+       });
 });

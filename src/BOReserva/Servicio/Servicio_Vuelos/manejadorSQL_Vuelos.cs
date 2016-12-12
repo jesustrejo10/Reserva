@@ -22,7 +22,57 @@ namespace BOReserva.Servicio.Servicio_Vuelos
         private string stringDeConexion = null;
 
 
-        public int idRutaVuelo( CCrear_Vuelo model)
+
+        public Boolean insertarVuelo(string Codigo, string Origen, string Destino, string Despegue, string Status, string Aterrizaje, string Matricula)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                SqlCommand cmd = new SqlCommand("M04_CrearVuelo", conexion);
+                //le indico que voy a executar un Stored Procedure en la Base de Datos
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                //le paso los parametros que espera el SP
+                cmd.Parameters.Add("@CodVuelo", System.Data.SqlDbType.VarChar, 100);
+                cmd.Parameters["@CodVuelo"].Value = Codigo;
+                cmd.Parameters.Add("@CiudadOrigen", System.Data.SqlDbType.VarChar, 100);
+                cmd.Parameters["@CiudadOrigen"].Value = Origen;
+                cmd.Parameters.Add("@CiudadDestino", System.Data.SqlDbType.VarChar, 100);
+                cmd.Parameters["@CiudadDestino"].Value = Destino;
+                cmd.Parameters.Add("@FechaDespegue", System.Data.SqlDbType.DateTime);
+                cmd.Parameters["@FechaDespegue"].Value = Despegue;
+                cmd.Parameters.Add("@Status", System.Data.SqlDbType.VarChar, 100);
+                cmd.Parameters["@Status"].Value = Status;
+                cmd.Parameters.Add("@FechaAterrizaje", System.Data.SqlDbType.DateTime);
+                cmd.Parameters["@FechaAterrizaje"].Value = Aterrizaje;
+                cmd.Parameters.Add("@MatriculaAvion", System.Data.SqlDbType.VarChar, 100);
+                cmd.Parameters["@MatriculaAvion"].Value = Matricula;
+
+
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                SqlDataReader dr = cmd.ExecuteReader();
+                //no leo el ExecuteReader por que no espero nada de la BD, por eso lo cierro
+                dr.Close();
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+        }
+        // fin insertarVuelo
+
+
+
+        public int idRutaVuelo( string Origen, string Destino)
         {
             try
             {
@@ -31,18 +81,21 @@ namespace BOReserva.Servicio.Servicio_Vuelos
                 conexion = new SqlConnection(stringDeConexion);
                 //INTENTO abrir la conexion
                 conexion.Open();
+                //le indico que voy a executar un Stored Procedure en la Base de Datos
                 SqlCommand cmd = new SqlCommand("M04_BuscaIdRuta", conexion);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                //le paso los parametros que espera el SP 
                 cmd.Parameters.Add("@CiudadOrigen", System.Data.SqlDbType.VarChar, 100);
-                cmd.Parameters["@CiudadOrigen"].Value = "Madrid";
+                cmd.Parameters["@CiudadOrigen"].Value = Origen;
                 cmd.Parameters.Add("@CiudadDestino", System.Data.SqlDbType.VarChar, 100);
-                cmd.Parameters["@CiudadDestino"].Value = "Caracas"; 
+                cmd.Parameters["@CiudadDestino"].Value = Destino; 
                 
                 //creo un lector sql para la respuesta de la ejecucion del comando anterior               
                 SqlDataReader dr = cmd.ExecuteReader();
 
                 while (dr.Read())
                 {
+                    //leo y convierto el int esperado del ID de la tabla de ruta
                     test = (int)dr.GetSqlInt32(0);
                 }
                 //cierro el lector
@@ -60,8 +113,8 @@ namespace BOReserva.Servicio.Servicio_Vuelos
                 throw (e); 
                 
             }
-
         }
+        //fin idRutaVuelo
 
         public List<CCrear_Vuelo> consultarDestinos(String Origen)
         {
@@ -72,8 +125,10 @@ namespace BOReserva.Servicio.Servicio_Vuelos
                 conexion = new SqlConnection(stringDeConexion);
                 //INTENTO abrir la conexion
                 conexion.Open();
+                //le indico que voy a executar un Stored Procedure en la Base de Datos
                 SqlCommand cmd = new SqlCommand("M04_BuscarDestinos", conexion);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                //le paso los parametros que espera el SP
                 cmd.Parameters.Add("@CiudadOrigen", System.Data.SqlDbType.VarChar, 100);
                 cmd.Parameters["@CiudadOrigen"].Value = Origen;
 
@@ -85,6 +140,7 @@ namespace BOReserva.Servicio.Servicio_Vuelos
                 {
                     var destinos = new CCrear_Vuelo
                     {
+                        //leo los diferentes valores que cargaran la lista ya que espero varios resultados
                         _ciudadDestino = dr.GetSqlString(0).ToString(),
                     };
                     list.Add(destinos);
@@ -106,6 +162,7 @@ namespace BOReserva.Servicio.Servicio_Vuelos
                 //return null;
             }
         }
+        // fin consultarDestinos
 
 
 
@@ -118,8 +175,10 @@ namespace BOReserva.Servicio.Servicio_Vuelos
                 conexion = new SqlConnection(stringDeConexion);
                 //INTENTO abrir la conexion
                 conexion.Open();
+                //le indico que voy a executar un Stored Procedure en la Base de Datos
                 SqlCommand cmd = new SqlCommand("M04_ValidarAvionParaRuta", conexion);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                //le paso los parametros que espera el SP
                 cmd.Parameters.Add("@CiudadOrigen", System.Data.SqlDbType.VarChar, 100);
                 cmd.Parameters["@CiudadOrigen"].Value = Origen;
                 cmd.Parameters.Add("@CiudadDestino", System.Data.SqlDbType.VarChar, 100);
@@ -134,6 +193,7 @@ namespace BOReserva.Servicio.Servicio_Vuelos
                 {
                     var matriculas = new CCrear_Vuelo
                     {
+                        //leo los diferentes valores que cargaran la lista ya que espero varios resultados
                         _matriculaAvion = dr.GetSqlString(0).ToString(),
                     };
                     list.Add(matriculas);
@@ -155,6 +215,7 @@ namespace BOReserva.Servicio.Servicio_Vuelos
                 //return null;
             }
         }
+        //fin buscarAviones
 
 
          public List<CCrear_Vuelo> cargarOrigenes()
@@ -166,6 +227,7 @@ namespace BOReserva.Servicio.Servicio_Vuelos
                 conexion = new SqlConnection(stringDeConexion);
                 //INTENTO abrir la conexion
                 conexion.Open();
+                //le indico que voy a executar un query en la BD
                 SqlCommand query = conexion.CreateCommand();
                 //ingreso la orden del query
                 query.CommandText = "SELECT l.lug_nombre FROM Lugar l WHERE l.lug_tipo_lugar = 'ciudad' ORDER BY l.lug_nombre";
@@ -178,6 +240,7 @@ namespace BOReserva.Servicio.Servicio_Vuelos
                 {
                     var destinos = new CCrear_Vuelo
                     {
+                        //leo los diferentes valores que cargaran la lista ya que espero varios resultados
                         _ciudadOrigen = dr.GetSqlString(0).ToString(),
                     };
                     list.Add(destinos);
@@ -199,6 +262,241 @@ namespace BOReserva.Servicio.Servicio_Vuelos
                 //return null;
             }
         }
+        //fin cargarOrigenes
+
+
+         public string modeloAvion(string matriculaAvion)
+         {
+             try
+             {
+                 string matri = "";
+                 //Inicializo la conexion con el string de conexion
+                 conexion = new SqlConnection(stringDeConexion);
+                 //INTENTO abrir la conexion
+                 conexion.Open();
+                 //indico que enviare un comando que ejecutara un Stored Procedure en la BD
+                 SqlCommand cmd = new SqlCommand("M04_DetalleAvion_Modelo", conexion);
+                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                 //le paso el parametro que espera el SP
+                 cmd.Parameters.Add("@MatriculaAvion", System.Data.SqlDbType.VarChar, 100);
+                 cmd.Parameters["@MatriculaAvion"].Value = matriculaAvion;
+
+
+                 //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                 SqlDataReader dr = cmd.ExecuteReader();
+
+                 while (dr.Read())
+                {
+                     //tomo un unico valor como esperado segun comportamiento del SP
+                    matri = dr.GetSqlString(0).ToString();
+                }
+                //cierro el lector
+                dr.Close();
+                conexion.Close();
+                return matri;
+             }
+             catch (SqlException e)
+             {
+                 throw (e);
+             }
+             catch (Exception e)
+             {
+                 throw (e);
+
+             }
+
+         }
+        //fin modeloAvion
+
+         public string pasajerosAvion(string matriculaAvion)
+         {
+             try
+             {
+                 string matri = "";
+                 //Inicializo la conexion con el string de conexion
+                 conexion = new SqlConnection(stringDeConexion);
+                 //INTENTO abrir la conexion
+                 conexion.Open();
+                 //indico que ejecutare un Stored Procedured en la BD 
+                 SqlCommand cmd = new SqlCommand("M04_DetalleAvion_Pasajeros", conexion);
+                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                 //le paso los parametros que espera el SP
+                 cmd.Parameters.Add("@MatriculaAvion", System.Data.SqlDbType.VarChar, 100);
+                 cmd.Parameters["@MatriculaAvion"].Value = matriculaAvion;
+
+
+                 //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                 SqlDataReader dr = cmd.ExecuteReader();
+
+                 while (dr.Read())
+                 {
+                     //tomo un unico valor como esperado segun comportamiento del SP
+                     matri = dr.GetSqlString(0).ToString();
+                 }
+                 //cierro el lector
+                 dr.Close();
+                 conexion.Close();
+
+                 return matri;
+             }
+             catch (SqlException e)
+             {
+                 throw (e);
+
+             }
+             catch (Exception e)
+             {
+                 throw (e);
+
+             }
+
+         }
+        //fin pasajerosAvion
+
+            public string fechaVuelo(string fechaDes, string horaDes, string Origen, string Destino, string matriAvion)
+            {
+             try
+             {
+                 string fechaA = "";
+                 string fecha = ""+fechaDes+" "+horaDes;
+                 int resultado = idRutaVuelo(Origen, Destino);
+                 //Inicializo la conexion con el string de conexion
+                 conexion = new SqlConnection(stringDeConexion);
+                 //INTENTO abrir la conexion
+                 conexion.Open();
+                 //le indico que ejecutare un Stored Procedure en la BD
+                 SqlCommand cmd = new SqlCommand("M04_CalcularFechaAterrizaje", conexion);
+                 //le paso los parametros que espera el SP
+                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                 cmd.Parameters.Add("@fechaDespegue", System.Data.SqlDbType.DateTime);
+                 cmd.Parameters["@fechaDespegue"].Value = fecha;
+                 cmd.Parameters.Add("@CiudadOrigen", System.Data.SqlDbType.VarChar, 100);
+                 cmd.Parameters["@CiudadOrigen"].Value = Origen;
+                 cmd.Parameters.Add("@CiudadDestino", System.Data.SqlDbType.VarChar, 100);
+                 cmd.Parameters["@CiudadDestino"].Value = Destino; 
+                 cmd.Parameters.Add("@matriculaAvion", System.Data.SqlDbType.VarChar, 100);
+                 cmd.Parameters["@matriculaAvion"].Value = matriAvion;
+                 cmd.Parameters.Add("@idRuta", System.Data.SqlDbType.Int, 100);
+                 cmd.Parameters["@idRuta"].Value = resultado;
+
+                 //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                 SqlDataReader dr = cmd.ExecuteReader();
+
+                 while (dr.Read())
+                 {
+                     //tomo un unico valor como esperado segun comportamiento del SP
+                     fechaA = dr.GetSqlDateTime(0).ToString();
+                 }
+                 //cierro el lector
+                 dr.Close();
+                 conexion.Close();
+
+                 return fechaA;
+             }
+             catch (SqlException e)
+             {
+                 throw (e);
+
+             }
+             catch (Exception e)
+             {
+                 throw (e);
+
+             }
+
+         }//fin fechaVuelo
+
+
+         public string distanciaAvion(string matriculaAvion)
+         {
+             try
+             {
+                 string dist = "";
+                 //Inicializo la conexion con el string de conexion
+                 conexion = new SqlConnection(stringDeConexion);
+                 //INTENTO abrir la conexion
+                 conexion.Open();
+                 //indico que ejecutare un Stored Procedure en la BD
+                 SqlCommand cmd = new SqlCommand("M04_DetalleAvion_Distancia", conexion);
+                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                 //le paso el parametro que espero en la base de datos
+                 cmd.Parameters.Add("@MatriculaAvion", System.Data.SqlDbType.VarChar, 100);
+                 cmd.Parameters["@MatriculaAvion"].Value = matriculaAvion;
+
+
+                 //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                 SqlDataReader dr = cmd.ExecuteReader();
+
+                 while (dr.Read())
+                 {
+                     //tomo un unico valor como esperado segun comportamiento del SP
+                     dist = dr.GetSqlString(0).ToString();
+                 }
+                 //cierro el lector
+                 dr.Close();
+                 conexion.Close();
+
+                 return dist;
+             }
+             catch (SqlException e)
+             {
+                 throw (e);
+
+             }
+             catch (Exception e)
+             {
+                 throw (e);
+
+             }
+
+         }//fin distancia avion
+
+
+         public string velocidadAvion(string matriculaAvion)
+         {
+             try
+             {
+                 string dist = "";
+                 //Inicializo la conexion con el string de conexion
+                 conexion = new SqlConnection(stringDeConexion);
+                 //INTENTO abrir la conexion
+                 conexion.Open();
+                 //le indico que ejecutare un Stored Procedure en la BD
+                 SqlCommand cmd = new SqlCommand("M04_DetalleAvion_Velocidad", conexion);
+                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                 //le paso el parametro que espera el SP
+                 cmd.Parameters.Add("@MatriculaAvion", System.Data.SqlDbType.VarChar, 100);
+                 cmd.Parameters["@MatriculaAvion"].Value = matriculaAvion;
+
+
+                 //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                 SqlDataReader dr = cmd.ExecuteReader();
+
+                 while (dr.Read())
+                 {
+                     //tomo un unico valor como esperado segun comportamiento del SP
+                     dist = dr.GetSqlString(0).ToString();
+                 }
+                 //cierro el lector
+                 dr.Close();
+                 conexion.Close();
+
+                 return dist;
+             }
+             catch (SqlException e)
+             {
+                 throw (e);
+
+             }
+             catch (Exception e)
+             {
+                 throw (e);
+
+             }
+
+         }
+        //fin velocidadAvion
+
 
         public List<CVuelo> MListarvuelosBD()
         {
@@ -386,7 +684,4 @@ namespace BOReserva.Servicio.Servicio_Vuelos
             }
         }
     }
-
-
-
 }
