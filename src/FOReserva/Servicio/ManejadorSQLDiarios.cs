@@ -14,7 +14,7 @@ namespace FOReserva.Servicio
         public ManejadorSQLDiarios() : base() { }
 
 
-        /*BUSQUEDAS*/
+    /*BUSQUEDAS*/
 
 
         /*Buscar TODOS los Diarios de Viaje*/
@@ -57,6 +57,7 @@ namespace FOReserva.Servicio
 
 
         /*Buscar Diarios de Viaje dado un modelo*/
+       
         public List<CDiarioModel> buscarDiarios(CDiarioModel diar)
         {
             string fecha_i = diar.Fecha_ini.ToString("yyyy-MM-dd");
@@ -119,6 +120,7 @@ namespace FOReserva.Servicio
         }
 
         /*Buscar un Diario de Viaje dado su ID*/
+       
         public CDiarioModel buscarDiarios(int id_dia)
         {
             CDiarioModel diario = null;
@@ -154,6 +156,7 @@ namespace FOReserva.Servicio
         }
 
         /*Buscar TODOS los Lugares para dropdown*/
+       
         public List<CLugar> obtenerLugares()
         {
             string query = @"SELECT
@@ -206,6 +209,9 @@ namespace FOReserva.Servicio
             return nombre;
         }
 
+        
+        //Busqueda de Nombres de Lugares (obtiene el Lugar a traves de la id
+        
         public String obtenerNombreLugar(int id)
         {
             string query = @"SELECT
@@ -224,12 +230,33 @@ namespace FOReserva.Servicio
             return nombre;
         }
 
-        /*INSERCIONES*/
+        //Busqueda de numero de visitas de un Diario
+        
+        public int obtenerNumeroVisitas(int id)
+        {
+            string query = @"SELECT
+                Diario_Viaje.num_visita
+            FROM dbo.Diario_Viaje 
+            WHERE id_diar = " + id;
+            SqlDataReader read = Executer(query);
+            int numero=0 ;
+
+            if (read.HasRows)
+            {
+                read.Read();
+                numero = read.GetInt16(0) ;
+            }
+            CloseConnection();
+            return numero;
+        }
+
+
+     /*INSERCIONES*/
 
         /*Nuevo Diario*/
 
 
-        public void CrearDiario(CDiarioModel crear_Nuevo_Diario)
+        public int CrearDiario(CDiarioModel crear_Nuevo_Diario)
         {
             string query =
             @"INSERT INTO Diario_Viaje (nombre_diario,fecha_ini_diar,descripcion_diar,
@@ -240,14 +267,21 @@ namespace FOReserva.Servicio
             + crear_Nuevo_Diario.Calif_creador + "', '" + crear_Nuevo_Diario.Rating + "',0,'" + crear_Nuevo_Diario.Usuario + "','"
             + crear_Nuevo_Diario.Fecha_fin + "','" + crear_Nuevo_Diario.Fecha_fin + "' )";
             CloseConnection();
+            return 0;
         }
+        
+        
+        
+        
         /*MODIFICACIONES*/
 
         /*Actualizar numero de visitas*/
+        /*Este metodo obtendra el objeto_diario a partir de la respuesta
+          de buscar diario de viaje dado un modelo */
 
-        public void actualizarVisitas(CDiarioModel num_Visitas)
+        public void actualizarVisitas(CDiarioModel objeto_diario)
         {
-            string query = "update Diario_Viaje set num_visita = '" + num_Visitas.Num_visita;
+            string query = "update Diario_Viaje set num_visita = '" +objeto_diario.Num_visita+1 +"'where id_diar='"+objeto_diario.Id;
             this.Executer(query);
             CloseConnection();
         }

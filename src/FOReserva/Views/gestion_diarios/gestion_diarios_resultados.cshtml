@@ -10,13 +10,15 @@
         <div class="panel panel-default col-sm-12">
             <div class="border-bottom-1 border-top-1 padding-10 col-sm-12">
                 <span class="pull-right size-11 margin-top-3 text-muted"><b>@Model.Count()</b> Resultados</span>
+                <h3><span>Resultados</span></h3>
             </div>
+
             @using (Html.BeginForm("gestion_diarios_ver", "gestion_diarios", FormMethod.Post))
             {
                 <input type="hidden" name="id_diario" id="id_diario" value="0" />
 
 
-
+                //Carga de Imagenes  
                 foreach (var item in Model)
                 {
                     <div class="row">
@@ -25,6 +27,7 @@
                             <img src="@Url.Content(a)" class="img-responsive img-thumbnail">
                             <div class="rating rating-@item.Calif_creador size-13"></div>
                         </div>
+
                         <div class="col-md-8">
                             <h4 class="margin-bottom-10"><font color="black">@item.Nombre - <i>[@item.Nombre_lugar(@item.Destino)]</i></font></h4>
                             <p>@item.Descripcion</p>
@@ -43,6 +46,7 @@
                     });
                 </script>
             }
+
         </div>
     }
 }

@@ -66,7 +66,7 @@
                     <div class="row">
                         <div class="form-group">
                             <div class="col-md-12 col-sm-12">
-                                <!-- Descripcion de la  experienci -->
+                                <!-- Descripcion de la  experiencia -->
                                 <label>Contenido *</label>
                                 <!-- textarea -->
                                 <div class="fancy-form">
@@ -97,7 +97,19 @@
                                     <small class="text-muted">Opcional</small>
                                 </label>
 
-                                <!-- custom file upload -->
+                                <!-- Carga de fotos -->
+                                <div class="fancy-file-upload fancy-file-primary">
+                                    <i class="fa fa-upload"></i>
+                                    <input type="file" class="form-control" name="contact[attachment]" onchange="jQuery(this).next('input').val(this.value);" />
+                                    <input type="text" class="form-control" placeholder="no hay archivo seleccionado" readonly="" />
+                                    <span class="button">Elegir Archivo</span>
+                                </div>
+                                <div class="fancy-file-upload fancy-file-primary">
+                                    <i class="fa fa-upload"></i>
+                                    <input type="file" class="form-control" name="contact[attachment]" onchange="jQuery(this).next('input').val(this.value);" />
+                                    <input type="text" class="form-control" placeholder="no hay archivo seleccionado" readonly="" />
+                                    <span class="button">Elegir Archivo</span>
+                                </div>
                                 <div class="fancy-file-upload fancy-file-primary">
                                     <i class="fa fa-upload"></i>
                                     <input type="file" class="form-control" name="contact[attachment]" onchange="jQuery(this).next('input').val(this.value);" />

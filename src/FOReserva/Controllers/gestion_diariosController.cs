@@ -62,6 +62,17 @@ namespace FOReserva.Controllers
             CDiarioModel model = new CDiarioModel();
             return PartialView(model);
         }
+
+        [HttpPost]
+        public ActionResult gestion_diarios_insertar(CDiarioModel nuevo_diario)
+        {
+            ManejadorSQLDiarios man = new ManejadorSQLDiarios();
+            int id_nuevo = man.CrearDiario(nuevo_diario);             
+            if(id_nuevo != -1){
+                return PartialView("_CrearDiarioExito");
+            }
+            return PartialView("_CrearDiarioExito");
+        }
                 
     }
 }
