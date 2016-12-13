@@ -218,7 +218,6 @@
                     if (data === "1") {
 
                         //$("#sdssss").append(data);
-                        alert("Se elimino exitosamente el vehículo")
                         var url1 = '/gestion_automoviles/M08_VisualizarAutomoviles';
                         var method = 'GET';
                         var data1 = '';
@@ -232,6 +231,7 @@
 
                                     $("#contenido").empty();
                                     $("#contenido").append(data);
+                                    alert("Se elimino exitosamente el vehículo");
                                 },
                                 error: function (jqXHR, textStatus, errorThrown) {
                                     alert(errorThrown);
@@ -260,7 +260,6 @@
                     if (data === "1") {
 
                         //$("#sdssss").append(data);
-                        alert("Se cambió exitosamente el estatus del vehículo")
                         var url1 = '/gestion_automoviles/M08_VisualizarAutomoviles';
                         var method = 'GET';
                         var data1 = '';
@@ -274,6 +273,7 @@
 
                                     $("#contenido").empty();
                                     $("#contenido").append(data);
+                                    alert("Se cambió exitosamente el estatus del vehículo");
                                 },
                                 error: function (jqXHR, textStatus, errorThrown) {
                                     alert(errorThrown);
@@ -301,7 +301,6 @@
                     if (data === "1") {
 
                         //$("#sdssss").append(data);
-                        alert("Se cambió exitosamente el estatus del vehículo")
                         var url1 = '/gestion_automoviles/M08_VisualizarAutomoviles';
                         var method = 'GET';
                         var data1 = '';
@@ -315,6 +314,7 @@
 
                                     $("#contenido").empty();
                                     $("#contenido").append(data);
+                                    alert("Se cambió exitosamente el estatus del vehículo");
                                 },
                                 error: function (jqXHR, textStatus, errorThrown) {
                                     alert(errorThrown);
