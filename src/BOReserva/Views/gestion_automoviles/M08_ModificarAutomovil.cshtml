@@ -104,8 +104,8 @@
                                 <label for="">Pais(<span style="color:red">*</span>)</label>
                                 @{
                                     List<SelectListItem> paises = BOReserva.Controllers.gestion_automovilesController.pais();
-                                    if (paises.First().ToString().Length > 15){
-                                        Response.Write("<script>alert('" + paises.First().ToString() + "');</script>");
+                                    if (paises.First().Text.Length > 15){
+                                        Response.Write("<script>alert('" + paises.First().Text + "');</script>");
                                         @Html.DropDownListFor(m => m._pais, paises, new { @class = "form-control", @placeholder = "Pais", @id = "vehi_pais", @onblur = "listadeciudades(this.value);" });
                                     }else{
                                         @Html.DropDownListFor(m => m._pais, paises, new { @class = "form-control", @placeholder = "Pais", @id = "vehi_pais", @onblur = "listadeciudades(this.value);" });

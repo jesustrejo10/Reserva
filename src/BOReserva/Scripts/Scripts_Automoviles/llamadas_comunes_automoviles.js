@@ -4,7 +4,7 @@
 
         function checkTextModelo(field) {
             var matricula = $('#vehi_modelo').val();
-            if (/[^a-z0-9\.]/gi.test(matricula)) {  // anything but a-zA-Z0-9 and dot
+            if (/[^a-z0-9]/gi.test(matricula)) { 
                 alert("No puede contener caracteres especiales");
                 field.value = '';
             }
@@ -15,7 +15,7 @@
         function checkTextField(field) {
             var _matricula = $('#vehi_placa').val();
 
-            if (/[^a-z0-9\.]/gi.test(_matricula)) {
+            if (/[^a-z0-9]/gi.test(_matricula)) {
                 alert("No puede contener caracteres especiales");
                 field.value = '';
             } else {
