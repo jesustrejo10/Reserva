@@ -103,7 +103,7 @@ namespace BOReserva.Servicio.Servicio_Rutas
             String[] strDes = model._destinoRuta.Split(new[] { " - " }, StringSplitOptions.None);
             String[] strOri = model._origenRuta.Split(new[] { " - " }, StringSplitOptions.None);
 
-            con = new SqlConnection(connetionString);
+            con = new SqlConnection(connectionString);
 
             con.Open();
 
