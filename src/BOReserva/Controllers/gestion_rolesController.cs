@@ -28,9 +28,7 @@ namespace BOReserva.Controllers
             List<CRoles> listaroles = sql.consultarListaroles();
             foreach (var item in listaroles)
             {
-                System.Diagnostics.Debug.WriteLine("-------------------");
                 System.Diagnostics.Debug.WriteLine(item.Nombre_rol);
-                System.Diagnostics.Debug.WriteLine("-------------------");
                 foreach (var item2 in item.Permisos)
                 {
                     System.Diagnostics.Debug.WriteLine(item2.Nombre);
@@ -71,32 +69,15 @@ namespace BOReserva.Controllers
             CRoles pruebaRol = new CRoles();
             CListaGenerica<CModulo_detallado> listaPermisosAsignar = new CListaGenerica<CModulo_detallado>();
 
-            System.Diagnostics.Debug.WriteLine("Asginrar json"+json);
             // creo un item para guardar el Json 
             var _permisos=JArray.Parse(json);
 
-            //Creo un objeto rol  y le paso el primer valor 
-            if (_permisos.Count() >= 0 ) {
-            System.Diagnostics.Debug.WriteLine("Entro en el if");
-
-            pruebaRol.Nombre_rol = _permisos[0].ToString();
-                try
-                {
-                    sql.insertarRol(pruebaRol);
-                }
-                catch (Exception e)
-                {
-                    System.Diagnostics.Debug.WriteLine("Sino puedo insertar");
-
-                }
-            }
 
             // Si es mayor que uno , Significa que hay al menos un permiso 
             if (_permisos.Count() >= 1) {
 
                 for (int i=1; i < _permisos.Count(); i++)
                 {
-                    System.Diagnostics.Debug.WriteLine("CUantos permisos tienes ");
 
                     sql.insertarPermisosRol(pruebaRol.Nombre_rol, _permisos[i].ToString());
 
@@ -106,13 +87,6 @@ namespace BOReserva.Controllers
                        
             //La posicion 0 devolvera el Rol a insertar
 
-            foreach (var detalle in _permisos)
-            {
-                System.Diagnostics.Debug.WriteLine("Asginrar foreach");
-                System.Diagnostics.Debug.WriteLine("Asginrar foreach" + _permisos.Count);
-                System.Diagnostics.Debug.WriteLine("Asginrar foreach" + _permisos[1]);
-
-            }
             //Verifico que todos los campos no sean nulos
             if (_permisos == null)
             {
