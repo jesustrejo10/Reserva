@@ -145,6 +145,32 @@ namespace BOReserva.Models.gestion_cruceros
             }
         }
 
+        public CGestion_crucero consultarCrucero(int id_crucero)
+        {
+            CGestion_crucero crucero = new CGestion_crucero();
+            List<CGestion_crucero> listaCruceros = new List<CGestion_crucero>();
+            Conectar();      
+            using (comando = new SqlCommand(RecursosCruceros.ConsultarCruceros, conexion))
+            {
+                comando.CommandType = CommandType.StoredProcedure;
+                comando.Parameters.AddWithValue("@idCrucero", id_crucero);
+                conexion.Open();
+                comando.ExecuteNonQuery();
+                SqlDataReader reader = comando.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    crucero._nombreCrucero = reader["nombreCrucero"].ToString();
+                    crucero._companiaCrucero = reader["compania"].ToString();
+                    crucero._capacidadCrucero = int.Parse(reader["capacidad"].ToString());
+                    crucero._imagen = reader["imagen"].ToString();
+                    listaCruceros.Add(crucero);
+                }
+                reader.Close();
+            }
+            return listaCruceros[1];
+        }
+
         public void insertarCabinas(CGestion_cabina cabina)
         {
             Conectar();

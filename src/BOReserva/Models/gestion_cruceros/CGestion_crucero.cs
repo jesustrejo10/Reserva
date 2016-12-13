@@ -27,9 +27,13 @@ namespace BOReserva.Models.gestion_cruceros
         {
         }
 
-        public void ListarCruceros()
+        public CGestion_crucero ConsultarCrucero(int id_crucero)
         {
-
+            CGestion_crucero crucero = new CGestion_crucero();
+            ConexionBD cbd = new ConexionBD();
+            Console.WriteLine(id_crucero + "crucero");
+            crucero = cbd.consultarCrucero(id_crucero);
+            return crucero;
         }
 
         public void AgregarCrucero(CGestion_crucero crucero)

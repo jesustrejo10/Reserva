@@ -18,10 +18,15 @@ namespace BOReserva.Controllers
             return PartialView();
         }
 
-        //public ActionResult M24_AgregarCamarote()
-        //{
-        //    return PartialView();
-        //}
+        public ActionResult M24_ConsultarCrucero(int id)
+        {
+            CGestion_crucero crucero = new CGestion_crucero();
+            ConexionBD cbd = new ConexionBD();
+            crucero = cbd.consultarCrucero(id);
+            return PartialView();
+
+        }
+
 
         public ActionResult M24_AgregarCabinas()
         {
@@ -112,6 +117,7 @@ namespace BOReserva.Controllers
         }
 
         [HttpPost]
+
         public JsonResult guardarCamarote(CGestion_camarote model)
         {
             int _cantidadCama = model._cantidadCama;
@@ -122,6 +128,14 @@ namespace BOReserva.Controllers
             camarote.AgregarCamarote(camarote);
 
             return (Json(true, JsonRequestBehavior.AllowGet));
+        }
+
+        public JsonResult consultarCrucero(int id_crucero)
+        {
+            Console.WriteLine(id_crucero + "controller");
+            CGestion_crucero crucero = new CGestion_crucero();
+            crucero.ConsultarCrucero(id_crucero);
+            return (Json(crucero, JsonRequestBehavior.AllowGet));
         }
     }
 }
