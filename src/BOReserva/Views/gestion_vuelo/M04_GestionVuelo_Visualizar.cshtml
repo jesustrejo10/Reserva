@@ -1,5 +1,4 @@
-﻿<!--@model List<BOReserva.Models.gestion_vuelo.CVuelo>
--->
+﻿@model List<BOReserva.Models.gestion_vuelo.CVuelo>
 <div class="row">
     <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
 
@@ -140,24 +139,6 @@
                 }).done(function (data) {
                     $("#contenido").empty();
                     $("#contenido").append(data);
-                    var url = '/gestion_vuelo/M04_GestionVuelo_Visualizar';
-                    var method = 'GET';
-                    var data = '';
-
-                    $.ajax(
-                        {
-                            url: url,
-                            type: method,
-                            data: data,
-                            success: function (data, textStatus, jqXHR) {
-
-                                $("#contenido").empty();
-                                $("#contenido").append(data);
-                            },
-                            error: function (jqXHR, textStatus, errorThrown) {
-                                alert(errorThrown);
-                            }
-                        });
                 }).fail(function (err) {
                     alert(err)
                 });

@@ -1,5 +1,5 @@
-﻿<!-- Indico que para esta vista, M04_GestionVuelo_Crear, utilizare el modelo Models/gestion_vuelo/CGestionVuelo-->
-@model BOReserva.Models.gestion_vuelo.CCrear_Vuelo
+﻿<!-- Indico que para esta vista, M04_GestionVuelo_Modificar, utilizare el modelo Models/gestion_vuelo/CGestionVuelo-->
+@model BOReserva.Models.gestion_vuelo.CVueloModificar
 
 
 <script src="~/Scripts/Scripts_Vuelos/llamadas_generales_Vuelos.js"></script>
@@ -10,7 +10,7 @@
         <div class="col-md-12">
             <h1>
                 Gestion de vuelos
-                <small>Crear un vuelo</small>
+                <small>Modificar un vuelo</small>
             </h1>
             <div class="box box-solid">
                 <div class="box box-solid">
@@ -33,16 +33,14 @@
                             <!-- DROPDOWN CIUDAD ORIGEN -->
                             <div class="col-xs-6">
                                 <label> Ciudad Origen (<span style="color: #d9534f">*</span>):</label>
-                                @Html.DropDownListFor(m => m._ciudadOrigen, new SelectList(Model._ciudadesOrigen as System.Collections.IEnumerable, "Value", "Text"),
-              "Seleccione una ciudad origen", new { @class = "form-control", @id = "ciudadO", @style = "width: 100%;" })
+                                @Html.TextBoxFor(m => m._ciudadOrigen, null, new { @class = "form-control", @placeholder = "Ej: AA 2254", @id = "codigoVuelo", @allign = "center" })
                             </div>
                             <!-- FIN CIUDAD ORIGEN -->
                             <!-- DROPDOWN CIUDAD DESTINO  -->
                             <div class="col-xs-6">
                                 <label> Ciudad Destino (<span style="color: #d9534f">*</span>):</label>
                                 <!--Enumerable empty por que lleno con script-->
-                                @Html.DropDownListFor(m => m._ciudadDestino, new SelectList(Enumerable.Empty<SelectListItem>(), "Value", "Text"),
-                                "Seleccione una ciudad destino", new { @class = "form-control", @id = "ciudadD", @style = "width: 100%;" })
+                                @Html.TextBoxFor(m => m._ciudadDestino, null, new { @class = "form-control", @placeholder = "Ej: AA 2254", @id = "codigoVuelo", @allign = "center" })
                             </div>
                             <!-- FIN CIUDAD DESTINO  -->
                         </div>
@@ -50,25 +48,19 @@
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <!-- DATE FECHA DESPEGUE  -->
-                                <label> Fecha Despegue (<span style="color: #d9534f">*</span>):</label>
-                                @Html.TextBoxFor(m => m._fechaDespegue, null, new { @class = "datepicker", @type = "date", @id = "fechaDespegue", @style = "width: 100%;" })
+                                <label> Fecha/Hora Despegue (<span style="color: #d9534f">*</span>):</label>
+                                @Html.TextBoxFor(m => m._fechaDespegue, null, new { @class = "form-control", @placeholder = "Ej: AA 2254", @id = "codigoVuelo", @allign = "center" })
                             </div>
                             <!-- FIN FECHA DESPEGUE -->
-                            <div class="col-xs-6">
-                                <!-- TIME HORA DESPEGUE  -->
-                                <label> Hora Despegue (<span style="color: #d9534f">*</span>):</label>
-                                @Html.TextBoxFor(m => m._horaDespegue, null, new { @class = "datepicker", @type = "time", @id = "horaDespegue", @style = "width: 100%;" })
-                            </div>
-                            <!-- FIN HORA DESPEGUE -->
                         </div>
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <!-- DROPDOWN ELEGIR MATRICULA AVION -->
-                                <label> Elegir avion (<span style="color: #d9534f">*</span>):</label>
+                                <label> Avion (<span style="color: #d9534f">*</span>):</label>
                                 <!--Enumerable empty por que lleno con script-->
-                                @Html.DropDownListFor(m => m._matriculaAvion, new SelectList(Enumerable.Empty<SelectListItem>(), "Value", "Text"),
-                                "Seleccione un avion", new { @class = "form-control", @id = "matAvion", @style = "width: 100%;" })
+                                @Html.TextBoxFor(m => m._matriculaAvion, null, new { @class = "form-control", @placeholder = "Ej: AA 2254", @id = "codigoVuelo", @allign = "center" })
+
                             </div>
                             <!-- FIN ELEGIR MATRICULA AVION -->
                         </div>
@@ -112,8 +104,7 @@
                                 <!-- DROPDOWNLISTFOR STATUS-->
                                 <label> Estado vuelo (<span style="color: #d9534f">*</span>):</label>
                                 <!--Solo puede ser de tipo "Activo" o "Inactivo"-->
-                                @Html.DropDownListFor(m => m._statusVuelo, new SelectList(Model._statusesVuelo, "Value", "Text"),
-                                   "Seleccione el status", new { @style = "width: 100%;", @class = "form-control", @id = "estadoVuelo" })
+                                @Html.TextBoxFor(m => m._statusVuelo, null, new { @class = "form-control", @placeholder = "Ej: AA 2254", @id = "codigoVuelo", @allign = "center" })
                             </div>
                             <!-- FIN STATUS  -->
                         </div>
@@ -121,23 +112,19 @@
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <!-- DATE FECHA ATERRIZAJE  -->
-                                <label> Fecha Aterrizaje:</label>
+                                <label> Fecha/Hora Aterrizaje:</label>
                                 <!--desabilitado por que lleno con script que calcula segun ruta y avion-->
                                 @Html.TextBoxFor(m => m._fechaAterrizaje, null, new { @class = "form-control", @placeholder = "dd/mm/yyyy", @id = "fechaAterrizaje", @style = "width: 100%;", @disabled = "disabled" })
                             </div>
                             <!-- FIN FECHA ATERRIZAJE  -->
-                            <div class="col-xs-6">
-                                <label> Hora Aterrizaje:</label>
-                                <!--desabilitado por que lleno con script que calcula segun ruta y avion-->
-                                @Html.TextBoxFor(m => m._horaAterrizaje, null, new { @class = "form-control", @placeholder = "--:--", @id = "horaAterrizaje", @style = "width: 100%;", @disabled = "disabled" })
-                            </div>
+
                         </div>
                         <div>&nbsp;</div>
 
                         <!-- FIN CAMPOS FORMULARIO-->
                         <!-- BOTON GUARDAR-->
                         <div class="col-md-12" style="margin-top:10px;">
-                            <button type="button" id="return" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Regresar</button>
+                            <button type="button" id="return" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
                         </div>
                         <!--FIN BOTON GUARDAR-->
                     </div>

@@ -10,6 +10,9 @@ using BOReserva.Servicio.Servicio_Vuelos;
 
 namespace BOReserva.Controllers
 {
+    /// <summary>
+    /// Clase que emite las respuestas de los eventos AJAX
+    /// </summary>
     public class gestion_vueloController : Controller
     {
         //
@@ -305,35 +308,9 @@ namespace BOReserva.Controllers
 
         public ActionResult M04_GestionVuelo_Modificar(String codigovuelo)
         {
-            CVueloModificar model = new CVueloModificar();
-            List<CCrear_Vuelo> resultadoOrigenes = new List<CCrear_Vuelo>();
             manejadorSQL_Vuelos buscarvuelo = new manejadorSQL_Vuelos();
-
-            resultadoOrigenes = buscarvuelo.cargarOrigenes();
-
-            //llenado dropdownlist de las ciudades origen en la vista crear
-            {
-                model._ciudadesOrigen = resultadoOrigenes.Select(x => new SelectListItem
-                {
-                    Value = x._ciudadOrigen,
-                    Text = x._ciudadOrigen
-                });
-            };
-
-            //paso la lista al formato de DropDownList
-            var listaEstados = dlstatusvuelo();
-            {
-                model._statusesVuelo = listaEstados.Select(x => new SelectListItem
-                {
-                    Value = x,
-                    Text = x
-                });
-            };
-
-
             CVueloModificar vuelo = buscarvuelo.MModificarBD(codigovuelo); //BUSCA EL VUELO A MOSTRAR
-
-                                                                                
+                                                                               
             return PartialView(vuelo);
         }
 

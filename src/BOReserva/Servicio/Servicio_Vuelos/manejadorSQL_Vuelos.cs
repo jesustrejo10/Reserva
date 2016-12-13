@@ -676,7 +676,13 @@ namespace BOReserva.Servicio.Servicio_Vuelos
                         //DateTime fecharegistro = Convert.ToDateTime(fecha).Date;
                         vuelo = new CVueloModificar(
                             dr["vue_codigo"].ToString(),
+                            dr["vue_fecha_aterrizaje"].ToString(),
+                            dr["vue_fecha_despegue"].ToString(),
                             dr["avi_matricula"].ToString(),
+                            modeloAvion(dr["avi_matricula"].ToString()),
+                            pasajerosAvion(dr["avi_matricula"].ToString()),
+                            velocidadAvion(dr["avi_matricula"].ToString()),
+                            distanciaAvion(dr["avi_matricula"].ToString()),
                             dr["vue_status"].ToString(),
                             MBuscarciudadOrigen(Int32.Parse(dr["vue_fk_ruta"].ToString())), 
                             MBuscarciudadDestino(Int32.Parse(dr["vue_fk_ruta"].ToString()))

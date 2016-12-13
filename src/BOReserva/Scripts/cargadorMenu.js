@@ -89,27 +89,6 @@
                 }
             });
 
-        //e.preventDefault();
-        //var url = '/gestion_vuelo/M04_VisualizarVuelo';
-        //var method = 'GET';
-        //var data = '';
-        //$.ajax(
-        //    {
-        //        url: url,
-        //        type: method,
-        //        data: data,
-        //        success: function (data, textStatus, jqXHR) {
-        //            alert(data);
-
-        //            $("#contenido").empty();
-        //            $("#contenido").append(data);
-        //        },
-        //        error: function (jqXHR, errorThrown) {
-        //            alert(jqXHR.data);
-        //            alert(errorThrown);
-        //        }
-        //    });
-
     });
     $("#m03VisualizarRutas").click(function (e) {
 
@@ -614,17 +593,15 @@
     //M04 vuelos
     $("#m04_crearvuelo").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_vuelos/M04_GestionVuelo_Crear';
+        var url = '/gestion_vuelo/M04_GestionVuelo_Crear';
         var method = 'GET';
         var data = '';
-
         $.ajax(
             {
                 url: url,
                 type: method,
                 data: data,
                 success: function (data, textStatus, jqXHR) {
-
                     $("#contenido").empty();
                     $("#contenido").append(data);
                 },
@@ -634,9 +611,9 @@
             });
 
     });
-    $("#m04_isualizarvuelo").click(function (e) {
+    $("#m04_visualizarvuelo").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_vuelo/M08_estionVuelo_Mostrar';
+        var url = '/gestion_vuelo/M04_GestionVuelo_Visualizar';
         var method = 'GET';
         var data = '';
 

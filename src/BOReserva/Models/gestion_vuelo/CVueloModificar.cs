@@ -15,12 +15,7 @@ namespace BOReserva.Models.gestion_vuelo
         public String _horaDespegue { get; set; }
         public String _codigoVuelo { get; set; }
         public String _ciudadOrigen { get; set; }
-        // _ciudadesOrigen tendra todos los valores que iran dentro del DropdownList
-        public IEnumerable<SelectListItem> _ciudadesOrigen { get; set; }
-        // _matriculasAvion tendra todos los valores que iran dentro del DropdownList
-        public IEnumerable<SelectListItem> _matriculasAvion { get; set; }
         public String _matriculaAvion { get; set; }
-
         // me van a pasar un int, pero lo convertiremos a string
         public String _pasajerosAvion { get; set; }
         // me van a pasar un int, pero lo convertiremos a string
@@ -28,23 +23,23 @@ namespace BOReserva.Models.gestion_vuelo
         public String _modeloAvion { get; set; }
         public String _ciudadDestino { get; set; }
         public String _velocidadMaxima { get; set; }
-        // _ciudadesDestino tendra todos los valores que iran dentro del DropdownList
-        public IEnumerable<SelectListItem> _ciudadesDestino { get; set; }
         public String _statusVuelo { get; set; }
-        // _statusVuelo tendra todos los valores que iran dentro del DropdownList
-        public IEnumerable<SelectListItem> _statusesVuelo { get; set; }
 
 
-        public CVueloModificar(String codigovuelo, String matriculaavion, String status, String ciudadorigen, String ciudaddestino)
+        public CVueloModificar(String codigovuelo, String fechaAterrizaje, String fechaDespegue, String matriculaavion,String modeloavion,String pasajerosavion,
+            String velocidadavion, String distanciaavion, String status, String ciudadorigen, String ciudaddestino)
         {
             _codigoVuelo = codigovuelo;
+            _fechaAterrizaje = fechaAterrizaje;
+            _fechaDespegue = fechaDespegue;
             _ciudadOrigen = ciudadorigen;
             _ciudadDestino = ciudaddestino;
             _statusVuelo = status;
             _matriculaAvion = matriculaavion;
-        }
-
-        public CVueloModificar() {
+            _distanciaMaxima = distanciaavion;
+            _modeloAvion = modeloavion;
+            _pasajerosAvion = pasajerosavion;
+            _velocidadMaxima = velocidadavion;
         }
 
 
