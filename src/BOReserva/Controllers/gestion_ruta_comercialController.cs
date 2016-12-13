@@ -101,7 +101,7 @@ namespace BOReserva.Controllers
                 return Json(error);
 
             }
-            else if (model._distanciaRuta <= 0 || model._distanciaRuta == 999999) {
+            else if (model._distanciaRuta <= 0 || model._distanciaRuta == 999999 || model._distanciaRuta == null) {
                 //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 //Agrego mi error

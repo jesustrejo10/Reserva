@@ -122,11 +122,13 @@ namespace BOReserva.Servicio.Servicio_Rutas
             //creo un lector sql para la respuesta de la ejecucion del comando anterior               
             SqlDataReader lector = query.ExecuteReader();
 
+            if (!lector.HasRows)
+                return true;
+            else
+                return false;
+
             lector.Close();
-                if( !lector["resultado"].Equals(null))
-                    return true;
-                else                          
-                    return false;
+                
 
             }
             catch (SqlException e)
