@@ -1,4 +1,5 @@
 ﻿using BOReserva.Models.gestion_usuarios;
+using BOReserva.Models.gestion_seguridad_ingreso;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,12 +57,17 @@ namespace BOReserva.Controllers
         [HttpPost]
         public ActionResult M12_AgregarUsuario(AgregarUsuario usuario)
         {
+            //Se resetea intentos en la Tabla Login MO1 Ingreso Seguridad
+            Cgestion_seguridad_ingreso ingreso = new Cgestion_seguridad_ingreso();
+            ingreso.correoCampoTexto = usuario.correoUsuario;
+            
             if (ModelState.IsValid) 
             {
                 PersistenciaUsuario p = new PersistenciaUsuario();
                 try
                 {
                     p.AgregarUsuario(usuario.toClass());
+                    ingreso.ResetearIntentos();//Metodo M01_Ingreso_Seguridad
                     TempData["message"] = RecursoUsuario.MensajeAgregado;
                     //return RedirectToAction("M12_Index");
                 }
@@ -88,13 +94,16 @@ namespace BOReserva.Controllers
        [HttpPost]
         public ActionResult M12_ModificarUsuario(AgregarUsuario usuario)
         {
-
+            //Se resetea intentos en la Tabla Login MO1 Ingreso Seguridad
+            Cgestion_seguridad_ingreso ingreso = new Cgestion_seguridad_ingreso();
+            ingreso.correoCampoTexto = usuario.correoUsuario;
             if (ModelState.IsValid)
             {
                 PersistenciaUsuario p = new PersistenciaUsuario();
                 try
                 {
                     p.ModificarUsuario(usuario.toClass(), usuario.idUsuario);
+                    ingreso.ResetearIntentos();//Metodo M01_Ingreso_Seguridad
                     TempData["message"] = RecursoUsuario.MensajeModificado;
                     //return RedirectToAction("M12_Index");
                 }
@@ -120,6 +129,9 @@ namespace BOReserva.Controllers
        
        public ActionResult ModificarUsuario(int? usuID)
         {
+            //Se resetea intentos en la Tabla Login MO1 Ingreso Seguridad
+            Cgestion_seguridad_ingreso ingreso = new Cgestion_seguridad_ingreso();
+           
 
             if (usuID.HasValue)
             {
@@ -127,9 +139,11 @@ namespace BOReserva.Controllers
                 {
                     PersistenciaUsuario p = new PersistenciaUsuario();
                     AgregarUsuario  usuario = new AgregarUsuario(p.consultarUsuario(usuID.Value));
+                    ingreso.correoCampoTexto = usuario.correoUsuario;//Metodo M01_Ingreso_Seguridad
                     p = new PersistenciaUsuario();
                     List<ListaRoles> lista = p.ListarRoles();
                     ViewBag.Roles = new SelectList(lista, "rolID", "rolNombre");
+                    ingreso.ResetearIntentos();//Metodo M01_Ingreso_Seguridad
                     return PartialView("M12_ModificarUsuario", usuario);
                 }
                 catch (Exception ex)

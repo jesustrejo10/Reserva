@@ -124,7 +124,10 @@ namespace BOReserva.Models.gestion_usuarios
 
         }
 
-
+        /// <summary>
+        /// Listar todos los roles del BackOffice
+        /// </summary>
+        /// <returns>Retorna una lista con los roles del sistema</returns>
         public List<ListaRoles> ListarRoles()
         {
             DataTable resultado;
@@ -201,6 +204,8 @@ namespace BOReserva.Models.gestion_usuarios
             {
                 if (ex.Number == 547)
                     throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.Error_Conflicto_FK, ex);
+                if (ex.Number == 55567)
+                    throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.Error_Activo, ex);
                 throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.BDError, ex);
             }
             catch ( Exception ex )
@@ -383,6 +388,12 @@ namespace BOReserva.Models.gestion_usuarios
             return null;
         }
 
+        /// <summary>
+        /// Método para cambiar el status del usuario
+        /// </summary>
+        /// <param name="usuID">ID del usuario que se va a alterar</param>
+        /// /// <param name="activo">Estado actual del usuario</param>
+        /// <returns>Retorna true si se modifico correctamente el status/returns>
         public bool CambiarStatus(int usuID, string activo)
         {
             Parametro parametro;
@@ -408,6 +419,8 @@ namespace BOReserva.Models.gestion_usuarios
             {
                 if (ex.Number == 2627)
                     throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.Error_Email_Existe, ex);
+                if (ex.Number == 55567)
+                    throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.Error_Activo, ex);
                 throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.BDError, ex);
             }
             catch (Exception ex)

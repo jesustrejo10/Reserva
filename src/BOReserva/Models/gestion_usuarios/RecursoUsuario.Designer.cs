@@ -151,6 +151,15 @@ namespace BOReserva.Models.gestion_usuarios {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error: Debe existir al menos un usuario Administrador Activo.
+        /// </summary>
+        internal static string Error_Activo {
+            get {
+                return ResourceManager.GetString("Error_Activo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error: El usuario no se puede eliminar ya que tiene registros asociados.
         /// </summary>
         internal static string Error_Conflicto_FK {
@@ -160,7 +169,7 @@ namespace BOReserva.Models.gestion_usuarios {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error, el correo introducido ya se encuentra registrado.
+        ///   Looks up a localized string similar to Error: el correo introducido ya se encuentra registrado.
         /// </summary>
         internal static string Error_Email_Existe {
             get {
