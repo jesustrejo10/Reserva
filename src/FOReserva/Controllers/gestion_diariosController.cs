@@ -71,7 +71,7 @@ namespace FOReserva.Controllers
             if(id_nuevo != -1){
                 return PartialView("_CrearDiarioExito");
             }
-            return PartialView("_CrearDiarioExito");
+            return PartialView("_CrearDiarioError");
         }
                 
     }
