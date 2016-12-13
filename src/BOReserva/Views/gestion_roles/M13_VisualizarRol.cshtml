@@ -15,7 +15,7 @@
                         <tr>
                             <th>Nombre</th>
                             <th>Modulo</th>
-                            
+
                             <th>Acceso a</th>
                         </tr>
                     </thead>
@@ -24,24 +24,15 @@
                         {
                             foreach (var item in Model)
                             {
-                                String disponibilidad;
-                                if (item._disponibilidad == 1) { disponibilidad = "Disponible"; } else { disponibilidad = "No disponible"; }
-
-                                <tr id="@item._id">
-                                    <td>@item._nombre</td>
-                                    <td>@item._modelo</td>
+                                <tr id="@item.Nombre_rol">
+                                    <td>@item.Nombre_rol</td>
+                                    <td></td>
                                     <td></td>
                                     <td>
-                                        @*<a href="#"> <i class="fa fa-eye clasedeprueba"></i></a>*@
-                                        <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>
-                                        @if (item._disponibilidad == 1)
-                                        {
-                                            <a href="#" title="Deshabilitar"><i class="fa fa-times deshabilitar"></i></a>
-                                        }
-                                        else
-                                        {
-                                            <a href="#" title="Habilitar"><i class="fa fa-check habilitar"></i></a>
-                                        }
+                                        <a href="#" title="Eliminar Rol"><i class="fa fa-times eliminar"></i></a>
+
+
+                                        
                                     </td>
                                 </tr>
                             }
@@ -55,7 +46,7 @@
                         <tr>
                             <th>Nombre</th>
                             <th>Modulo</th>
-                           
+
                             <th>Acceso a</th>
                         </tr>
                     </tfoot>
@@ -71,34 +62,14 @@
 
 <script language="javascript" type="text/javascript">
 
-
-    $(".modificar").click(function () {
-        console.log("hola");
-        var identificador = $(this).parent().parent().parent().attr("id");
-        jQuery.ajax({
-            type: "GET",
-            url: "/gestion_aviones/M02_ConsultarAvion",
-            data: { id: identificador }
-        }).done(function (data) {
-            $("#contenido").empty();
-            $("#contenido").append(data);
-        }).fail(function () {
-
-        });
-
-
-    });
-
-
-    $(".deshabilitar").click(function () {
-        console.log("hola");
+    $(".eliminar").click(function () {
         var identificador = $(this).parent().parent().parent().attr("id");
         jQuery.ajax({
             type: "POST",
-            url: "/gestion_aviones/deshabilitarAvion",
-            data: { id: identificador }
+            url: "/gestion_roles/eliminarRol",
+            data: { _nombrerol: identificador }
         }).done(function (data) {
-            var url = '/gestion_aviones/M02_VisualizarAviones';
+            var url = '/gestion_roles/M13_VisualizarRol';
             var method = 'GET';
             var data = '';
             $.ajax(
@@ -115,46 +86,13 @@
                         alert(errorThrown);
                     }
                 });
-        }).fail(function () {
-            alert("Error en la base de datos");
+        }).fail(function (data) {
+            alert(data);
         });
     });
-
-    $(".habilitar").click(function () {
-        console.log("hola");
-        var identificador = $(this).parent().parent().parent().attr("id");
-        jQuery.ajax({
-            type: "POST",
-            url: "/gestion_aviones/habilitarAvion",
-            data: { id: identificador }
-        }).done(function (data) {
-            var url = '/gestion_aviones/M02_VisualizarAviones';
-            var method = 'GET';
-            var data = '';
-            $.ajax(
-                {
-                    url: url,
-                    type: method,
-                    data: data,
-                    success: function (data, textStatus, jqXHR) {
-
-                        $("#contenido").empty();
-                        $("#contenido").append(data);
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        alert(errorThrown);
-                    }
-                });
-        }).fail(function () {
-            alert("Error en la base de datos");
-        });
-    });
-
-
 </script>
 
 <style>
 
 
 </style>
-
