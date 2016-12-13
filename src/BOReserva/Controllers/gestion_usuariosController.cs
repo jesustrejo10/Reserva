@@ -1,4 +1,5 @@
 ﻿using BOReserva.Models.gestion_usuarios;
+using BOReserva.Models.gestion_seguridad_ingreso;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,12 +57,16 @@ namespace BOReserva.Controllers
         [HttpPost]
         public ActionResult M12_AgregarUsuario(AgregarUsuario usuario)
         {
+            Cgestion_seguridad_ingreso ingreso = new Cgestion_seguridad_ingreso();
+            ingreso.correoCampoTexto = usuario.correoUsuario;
+            
             if (ModelState.IsValid) 
             {
                 PersistenciaUsuario p = new PersistenciaUsuario();
                 try
                 {
                     p.AgregarUsuario(usuario.toClass());
+                    ingreso.ResetearIntentos();//Metodo M01_Ingreso_Seguridad
                     TempData["message"] = RecursoUsuario.MensajeAgregado;
                     //return RedirectToAction("M12_Index");
                 }
