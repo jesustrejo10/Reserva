@@ -494,7 +494,6 @@
     <Content Include="Scripts\Scripts_Boletos\DatosUsuario.js" />
     <Content Include="Scripts\Scripts_Boletos\DetalleBoleto.js" />
     <Content Include="Scripts\Scripts_Boletos\BuscarVuelo.js" />
-    <Content Include="Scripts\Scripts_Boletos\VerVuelos.js" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Scripts\Scripts_Boletos\DetalleVuelo.js" />
@@ -568,7 +567,6 @@
     <Content Include="Views\gestion_automoviles\M08_VisualizarAutomoviles.html" />
     <Content Include="Views\gestion_aviones\M02_GestionAviones.html" />
     <Content Include="Views\gestion_aviones\placeholder.html" />
-    <Content Include="Views\gestion_comida_vuelo\M06_AgregarEditarComida.html" />
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarPorVuelo.html" />
     <Content Include="Views\gestion_comida_vuelo\M06_ConsultarComidas.html" />
     <Content Include="Views\gestion_comida_vuelo\placeholder.html" />
@@ -1432,10 +1430,8 @@
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Crear.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_ModificarHotel.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Desactivar.cshtml" />
-    <Content Include="Views\gestion_comida_vuelo\M06_AgregarComida.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarPorVuelo.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_EditarComida.cshtml" />
-    <Content Include="Views\gestion_comida_vuelo\M06_AgregarEditarComida.cshtml" />
     <Content Include="Views\gestion_seguridad_ingreso\M01_Login.cshtml" />
     <Content Include="Views\gestion_seguridad_ingreso\M01_RecuperarContrasenna.cshtml" />
     <Content Include="Views\gestion_usuarios\M12_Index.cshtml" />
