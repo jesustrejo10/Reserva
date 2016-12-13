@@ -104,7 +104,32 @@ namespace BOReserva.Controllers
             return (Json(true, JsonRequestBehavior.AllowGet));
 
         }
+        //Metodo para Eliminar roles
+        [HttpPost]
+        public JsonResult eliminarRol(string _nombrerol)
+        {
+            CRoles model = new CRoles();
+            model.Nombre_rol = _nombrerol;
 
+            //Verifico que todos los campos no sean nulos
+            if (model.Nombre_rol == null)
+            {
+                //Creo el codigo de error de respuesta
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error               
+                String error = "Error, campo obligatorio vacio";
+                //Retorno el error                
+                return Json(error);
+            }
+            //instancio el manejador de sql
+            manejadorSQL sql = new manejadorSQL();
+            //Elimino y Guardo la respuesta de mi metodo sql en un bool
+            bool respuesta = sql.eliminarRol(model);
+            //envio una respuesta dependiendo del resultado sql
+            return (Json(respuesta, JsonRequestBehavior.AllowGet));
+
+
+        }
         //Metodo para consultar permisos de modulo
         [HttpPost]
         public JsonResult Consultarpermisos(string json)
