@@ -57,6 +57,7 @@ jQuery(document).ready(function () {
                     alert(errorThrown);
                 }
             });
+
     }); 
     //FIN DE AVIONES    //INICIO DE RUTAS
     $("#m03AgregarRuta").click(function (e) {
@@ -246,7 +247,6 @@ jQuery(document).ready(function () {
             });
 
     });
-
     $("#consultarhotel").click(function (e) {
         e.preventDefault();
         var url = '/gestion_hoteles/M09_GestionHoteles_Visualizar';
@@ -572,14 +572,12 @@ jQuery(document).ready(function () {
         var url = '/gestion_usuarios/M12_Index';
         var method = 'GET';
         var data = '';
-
         $.ajax(
             {
                 url: url,
                 type: method,
                 data: data,
                 success: function (data, textStatus, jqXHR) {
-
                     $("#contenido").empty();
                     $("#contenido").append(data);
                 },
@@ -611,6 +609,50 @@ jQuery(document).ready(function () {
             });
 
     });
+
     //Fin M12 Usuarios
+    //Inicio M04 Vuelos
+    $("#m04_crearvuelo").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_vuelo/M04_GestionVuelo_Crear';
+        var method = 'GET';
+        var data = '';
+        $.ajax(
+           {
+               url: url,
+               type: method,
+               data: data,
+               success: function (data, textStatus, jqXHR) {
+                   $("#contenido").empty();
+                   $("#contenido").append(data);
+               },
+               error: function (jqXHR, textStatus, errorThrown) {
+                   alert(errorThrown);
+               }
+           });
+    });
+    $("#m04_visualizarvuelo").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_vuelo/M04_GestionVuelo_Visualizar';
+        var method = 'GET';
+        var data = '';
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+
+    });
+
+
+    //Fin M04 Vuelos
 
 });
