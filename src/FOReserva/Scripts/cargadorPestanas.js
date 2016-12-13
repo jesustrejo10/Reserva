@@ -15,27 +15,33 @@ function cargarContenido(seccion, tipo, url, data, boton) {
     // tipo MD : 2 columnas, contenido derecha
     // tipo MI : 2 columnas, contenido izquierda
     // tipo CL : 2 columnas, contenido izquierda
+
+    if (seccion == '#MD' || seccion == '#MI') {
+        mostrarContenedor(1)
+    } else if (seccion == '#CI') {
+        mostrarContenedor(3)
+    } else if (seccion == '#CP') {
+        mostrarContenedor(2)
+    }
+
+    if (seccion == "#MD")
+        seccion = "#contenedor"
+    else if (seccion == "#MI")
+        seccion = "#contenedorImagenes"
+
+    $(seccion)
+        .empty()
+        .append($("<div />", { class: "text-center", text: "Cargando..." }));
+
     $.ajax(
         {
             url: url,
             type: tipo,
             data: data,
             success: function (data, textStatus, jqXHR) {
-                if (seccion == '#MD' || seccion == '#MI') {
-                    mostrarContenedor(1)
-                } else if (seccion == '#CI') {
-                    mostrarContenedor(3)
-                } else if (seccion == '#CP') {
-                    mostrarContenedor(2)
-                }
-
-                if (seccion == "#MD")
-                    seccion = "#contenedor"
-                else if (seccion == "#MI")
-                    seccion = "#contenedorImagenes"
-
-                $(seccion).empty();
-                $(seccion).append(data);
+                $(seccion)
+                    .empty()
+                    .append(data);
 
                 if (boton != null)
                 {
@@ -48,6 +54,7 @@ function cargarContenido(seccion, tipo, url, data, boton) {
             }
         });
 };
+
 
 jQuery(document).ready(function () {
 
