@@ -97,6 +97,15 @@ namespace BOReserva.Models.gestion_usuarios {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to M12_CambiarStatus.
+        /// </summary>
+        internal static string CambiarStatus {
+            get {
+                return ResourceManager.GetString("CambiarStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to M12_ConsultarUsuario.
         /// </summary>
         internal static string ConsultarEmail {
@@ -196,6 +205,15 @@ namespace BOReserva.Models.gestion_usuarios {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to M12_ListarRoles.
+        /// </summary>
+        internal static string ListarRoles {
+            get {
+                return ResourceManager.GetString("ListarRoles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to M12_ListarUsuarios.
         /// </summary>
         internal static string ListarUsuarios {
@@ -214,11 +232,29 @@ namespace BOReserva.Models.gestion_usuarios {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Usuario Eliminado Exitosamente.
+        /// </summary>
+        internal static string MensajeEliminado {
+            get {
+                return ResourceManager.GetString("MensajeEliminado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Usuario Modficado Exitosamente.
         /// </summary>
         internal static string MensajeModificado {
             get {
                 return ResourceManager.GetString("MensajeModificado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status Cambiado Exitosamente.
+        /// </summary>
+        internal static string MensajeStatus {
+            get {
+                return ResourceManager.GetString("MensajeStatus", resourceCulture);
             }
         }
         
@@ -241,7 +277,7 @@ namespace BOReserva.Models.gestion_usuarios {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error al momento de realizar la operación.
+        ///   Looks up a localized string similar to Error al momento de realizar la operacion.
         /// </summary>
         internal static string OtroError {
             get {

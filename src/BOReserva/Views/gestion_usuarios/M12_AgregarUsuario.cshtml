@@ -7,6 +7,7 @@
         alert(message);
 </script>
 @model BOReserva.Models.gestion_usuarios.AgregarUsuario
+<script src="~/Scripts/Scripts_Usuarios/llamadas_generales.js"></script>
 @using (Html.BeginForm("M12_M12_AgregarUsuario", "gestion_usuarios", FormMethod.Post, new { @class = "agregarUsuario_form" }))
 {
 @Html.ValidationSummary() 
@@ -105,7 +106,7 @@
                                 </div>
                             </div>
                                 <div class="col-md-12" style="margin-top:10px;">
-                                    <input type="submit" id="aceptarUsuario" class="btn btn-success" value="Guardar" style="display:block; margin-left:auto; margin-right:auto;">
+                                    <button type="submit" id="aceptarUsuario" class="btn btn-success" value="Guardar" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
                                     <!--  <input type="button" value="Create" class="btn btn-success" onclick=" return confirm('¿Seguro que desea crear este usuario?');" /> -->
                                     <!--<button type="submit" class="btn btn-success" value="Registrar" id="agregarUsuario"
                                             style="display:block; margin-left:auto; margin-right:auto;">
@@ -137,45 +138,7 @@
     confirm_password.onkeyup = validatePassword;
 
 
-    $(".agregarUsuario_form").submit(function (e) {
-        console.log("hola!");
-        e.preventDefault();
-        var form = $(".agregarUsuario_form");
-        $.ajax({
-            url: "gestion_usuarios/M12_AgregarUsuario",
-            data: form.serialize(),
-            type: 'POST',
-            success: function (data) {
-                toIndex();
-            }
-        , error: function (xhr, textStatus, exceptionThrown) {
-            //muestro el texto del error
-            alert(xhr.responseText);
-        }
-        });
-    });
-
-    function toIndex() {
-        var url = '/gestion_usuarios/M12_Index';
-        var method = 'GET';
-        var data = '';
-
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-    };
-
+    
 
     </script>
 }

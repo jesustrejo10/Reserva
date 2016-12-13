@@ -73,6 +73,16 @@
                                         <td>
                                             <a href="#" title="Modificar" id="Modificar"><i class="fa fa-pencil modificar"></i></a>
                                             <a href="#" title="Eliminar" id="Eliminar"><i class="fa fa-times eliminar"></i></a>
+                                            @{
+                                                if (p._activo.Equals("Activo"))
+                                                {
+                                                    <a href="#" title="Inactivar Usuario" ><i class="fa fa-toggle-on desactivar"></i></a>
+                                                }
+                                                if (p._activo.Equals("Inactivo"))
+                                                {
+                                                    <a href="#" title="Activar Usuario"><i class="fa fa-toggle-off activar"></i></a>
+                                                }
+                                            }
                                            <!--<a href="@Url.Action("ModificarUsuario", "gestion_usuarios", new { usuID = p._id })">
                                                 <i class="fa fa-pencil modificar" title="Modificar"></i>
                                             </a>-->
@@ -127,10 +137,46 @@
                     $("#contenido").empty();
                     $("#contenido").append(data);
                 }).fail(function () {
-
+                    alert(errorThrown);
                 });
 
                 
+            });
+
+            $(".desactivar").click(function () {
+                console.log("hola");
+                var id = $(this).parent().parent().parent().attr("id");
+                var estado = "Activo";
+                jQuery.ajax({
+                    type: "GET",
+                    url: "gestion_usuarios/CambiarStatus",
+                    data: { usuID: id , activo: estado }
+                }).done(function (data) {
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                }).fail(function () {
+                    alert(errorThrown);
+                });
+
+
+            });
+
+            $(".activar").click(function () {
+                console.log("hola");
+                var id = $(this).parent().parent().parent().attr("id");
+                var estado = "Inactivo";
+                jQuery.ajax({
+                    type: "GET",
+                    url: "gestion_usuarios/CambiarStatus",
+                    data: { usuID: id, activo: estado }
+                }).done(function (data) {
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                }).fail(function () {
+                    alert(errorThrown);
+                });
+
+
             });
   
 </script>

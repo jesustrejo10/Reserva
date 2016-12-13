@@ -206,6 +206,7 @@
     <Compile Include="Models\gestion_usuarios\Encriptar.cs" />
     <Compile Include="Models\gestion_usuarios\ExceptionBD.cs" />
     <Compile Include="Models\gestion_usuarios\ExceptionM12Reserva.cs" />
+    <Compile Include="Models\gestion_usuarios\ListaRoles.cs" />
     <Compile Include="Models\gestion_usuarios\ListarUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\Parametro.cs" />
     <Compile Include="Models\gestion_usuarios\PersistenciaUsuario.cs" />
@@ -405,6 +406,7 @@
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\Scripts_Usuarios\llamadas_generales.js" />
     <Content Include="Views\dist\css\AdminLTE.css" />
     <Content Include="Views\dist\css\AdminLTE.min.css" />
     <Content Include="Views\dist\css\skins\skin-black-light.css" />
