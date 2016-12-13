@@ -84,8 +84,8 @@ namespace FOReserva.Controllers
         /// <summary>
         /// Creacion Modelo Crear Revision
         /// </summary>
-        /// <returns>Vista Modelo</returns>
-        public ActionResult Crear_Revision(CReservation_Restaurant reserva, string usuario) //crear reserva restaurant
+        /// <returns>Vista Modelo</returns>/*
+        /*public ActionResult Crear_Revision(CReservation_Restaurant reserva, string usuario) //crear reserva restaurant
         {
             List<CRevision> lista;
 
@@ -107,11 +107,11 @@ namespace FOReserva.Controllers
             {
                 CListRevision modelo = new CListRevision();
                 return PartialView(modelo);
-            }*/
+            }
 			return null;
 
         }
-
+        */
         /// <summary>
         /// Creacion Modelo Eliminar Revision
         /// </summary>
