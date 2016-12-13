@@ -12,6 +12,7 @@ namespace UnitTestProject1
     {
         manejadorSQL prueba = new manejadorSQL();
 
+
         [TestMethod]
         public void M02_InsertarAvion()
         {
@@ -63,28 +64,19 @@ namespace UnitTestProject1
             Assert.IsInstanceOfType(prueba.consultarAvion(numeroNulo), typeof(CAvion));
         }
 
+
+        
+  // ME FALTAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
         [TestMethod]
         [ExpectedException(typeof(System.NullReferenceException))]
         public void modificarAvionNulo()
         {
             prueba.modificarAvion(null);
-        }
+        } 
+        
 
-        [TestMethod]
-        public void modificarAvionInexistente()
-        {
-            CModificarAvion avion = new CModificarAvion();
-            avion._matriculaAvion = "HK-45";
-            avion._modeloAvion = "Boeing700";
-            avion._capacidadPasajerosTurista = 100;
-            avion._capacidadPasajerosEjecutiva = 100;
-            avion._capacidadPasajerosVIP = 100;
-            avion._capacidadEquipaje = 100;
-            avion._distanciaMaximaVuelo = 200;
-            avion._velocidadMaximaDeVuelo = 1000;
-            avion._capacidadMaximaCombustible = 100;
-            Boolean resultadoModificar = prueba.modificarAvion(avion);
-            Assert.AreEqual(resultadoModificar, true);
-        }
+        
     }
+
 }

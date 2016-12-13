@@ -1,0 +1,142 @@
+﻿@model BOReserva.Models.gestion_cruceros.CGestion_cabina
+@using (Html.BeginForm("guardarCabina", "gestion_cruceros", null, FormMethod.Post, new { @id = "formGuardarCabina", @class = "form-horizontal" }))
+{
+    <div class="box">
+        <div class="box-body">
+            <div class="box-header with-border">
+                <h1 class="box-title"> Agregar Cabina</h1>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"></button>
+                </div>
+            </div>
+                <div class="modal-body col-xs-6" id="bodyCruc" style="margin-left:10%">
+                    <section id="primeraParte">
+                        <div class="form-group">
+                            <label>Cruceros:</label>
+                            @{
+                                SelectList list = ViewBag.ShowDropDown;
+                            }
+                            @*@Html.DropDownList("DROPDOWNID", list, "Cruceros", new { @id = "fk_id_crucero" })*@
+                            @Html.DropDownListFor(m => m._fkCrucero, list, new { @id = "fk_id_crucero" })
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label>Nombre de Cabina:</label>
+                                    @Html.TextBoxFor(m => m._nombreCabina, null, new { @class = "form-control", @placeholder = "Introduce el nombre de la cabina", @id = "nombrecabina" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label>Precio:</label>
+                                    @Html.TextBoxFor(m => m._precioCabina, null, new { @type = "number", @class = "form-control", @placeholder = "Introduce el nombre de la cabina", @id = "precio" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <button type="button" id="guardar_cabina" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                        </div>
+                    </section>
+            @*<div class="col-xs-12">
+                <table>
+                    <thead>
+                        <tr class="crucero crTitles" id="listaCruceros">
+                            <th class="crNombre">Nombre</th>
+                            <th class="crCompania"> <b>Precio</b></th>
+                        </tr>
+                    </thead>
+                    <tbody class="listCru crucero">
+                        @{
+                            foreach (var cabina in Model.cabinas)
+                            {
+                                <tr id="@cabina._idCabina ">
+                                    <td class="crNombre">@cabina._nombreCabina</td>
+                                    <td class="crCompania">@cabina._precioCabina</td>
+                                    @if (@cabina._estatus == "activo")
+                                    {
+                                        <td class="crStatus"><i class="fa fa-circle started"></i></td>
+                                            <td class="crAcciones"><i class="fa fa-eye"></i> <i class="fa fa-pencil"></i> <i class="fa fa-times"></i> <i class="fa fa-trash eliminar_crucero"></i></td>
+                                    }
+                                    else {
+                                        <td class="crStatus"><i class="fa fa-circle paused"></i></td>
+                                            <td class="crAcciones"><i class="fa fa-eye"></i> <i class="fa fa-pencil"></i> <i class="fa fa-check"></i> <i class="fa fa-trash"></i></td>
+                                    }
+                                </tr>
+
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>*@
+        </div>
+
+    </div>
+</div>
+
+@*<script>
+    $("#fk_id_crucero").change(function (e) {
+            e.preventDefault();
+            var form = $("#formGuardarCabina");
+            console.log("cambio");
+            //$.ajax({
+            //    url: "gestion_cruceros/listarCabinas",
+            //    data: form.serialize(),
+            //    type: 'GET',
+            //    success: function (data) {
+            //        $.ajax({
+            //            url: '/gestion_cruceros/M24_AgregarCabinas',
+            //            type: 'GET',
+            //            data: '',
+            //            success: function (data, textStatus, jqXHR) {
+            //                $("#contenido").empty();
+            //                $("#contenido").append(data);
+            //            },
+            //            error: function (jqXHR, textStatus, errorThrown) {
+            //                alert(errorThrown);
+            //            }
+            //        });
+            //        $('#formGuardarCabina')[0].reset();
+            //    },
+            //    error: function (data) {
+            //        console.log(data);
+            //        $('#formGuardarCabina')[0].reset();
+            //    }
+            //});
+        });
+</script>*@
+
+    <script>
+        $("#guardar_cabina").click(function (e) {
+            e.preventDefault();
+            var form = $("#formGuardarCabina");
+            $.ajax({
+                url: "gestion_cruceros/guardarCabina",
+                data: form.serialize(),
+                type: 'POST',
+                success: function (data) {
+                    $.ajax({
+                        url: '/gestion_cruceros/M24_AgregarCabinas',
+                        type: 'GET',
+                        data: '',
+                        success: function (data, textStatus, jqXHR) {
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+                    $('#formGuardarCabina')[0].reset();
+                },
+                error: function (data) {
+                    console.log(data);
+                    $('#formGuardarCabina')[0].reset();
+                }
+            });
+        });
+    </script>
+}
+

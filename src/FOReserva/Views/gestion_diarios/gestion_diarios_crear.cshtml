@@ -1,0 +1,139 @@
+﻿@model FOReserva.Models.Diarios.CDiarioModel
+
+@{
+    ViewBag.Title = "Crear un Diario de Viaje";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<div class="heading-title">
+    <h3><span>Crear un Diario de Viaje</span></h3>
+</div>
+
+<div class="panel">
+    <!-- Formulario para la creacion de un diario-->
+    @using (Html.BeginForm("gestion_diarios_crear", "gestion_diarios", null, FormMethod.Post, new { @id = "formCrearDiarios", @class = "form-horizontal" }))
+    {
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <fieldset>
+                    <!-- required [php action request] -->
+                    <input type="hidden" name="action" value="contact_send" />
+
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-12 col-sm-12">
+
+                                <!--    Nombre que describe el diario de viaje -->
+                                <label>Título del Diario de Viaje *</label>
+
+                                @Html.TextBoxFor(m => m.Nombre, null, new { @class = "form-control required", @placeholder = "Ejemplo: Ecuador Unico", @id = "nombre" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-12 col-sm-12">
+                                <label>Calificación de usuario *</label>
+                                <select name="contact[position]" class="form-control pointer required">
+                                    <option value="">--- Seleccionar ---</option>
+                                    <option value="0">0 Estrellas</option>
+                                    <option value="1">1 Estrella</option>
+                                    <option value="2">2 Estrellas</option>
+                                    <option value="3">3 Estrellas</option>
+                                    <option value="4">4 Estrellas</option>
+                                    <option value="5">5 Estrellas</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6">
+                                <label>Fecha de inicio del viaje *</label>
+                                @Html.TextBoxFor(m => m.Fecha_ini, null, new { @class = "form-control", @type = "date", @id = "fechaini", @placeholder = "Fecha", min = "today", max = "2019-12-31" })
+
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <label>Fecha de culminación del viaje *</label>
+                                @Html.TextBoxFor(m => m.Fecha_fin, null, new { @class = "form-control", @type = "date", @id = "fechafin", @placeholder = "Fecha", min = "today", max = "2019-12-31" })
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-12 col-sm-12">
+                                <!-- Descripcion de la  experiencia -->
+                                <label>Contenido *</label>
+                                <!-- textarea -->
+                                <div class="fancy-form">
+
+                                    @Html.TextBoxFor(m => m.Descripcion, null, new { @class = "form-control", @placeholder = "Describa aqui su experiencia", @id = "descripcion" })
+                                    <i class="fa fa-comments"><!-- icon --></i>
+
+                                    <span class="fancy-hint size-11 text-muted">
+                                        <strong>Atención:</strong> Se permiten 5000 palabras
+                                        <span class="pull-right">
+                                            <span id="textarea-words-info">0/200</span> Palabras
+                                        </span>
+                                    </span>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <!-- Agregar Fotografia-->
+                                <label>
+                                    Cargar Fotos
+                                    <small class="text-muted">Opcional</small>
+                                </label>
+
+                                <!-- Carga de fotos -->
+                                <div class="fancy-file-upload fancy-file-primary">
+                                    <i class="fa fa-upload"></i>
+                                    <input type="file" class="form-control" name="contact[attachment]" onchange="jQuery(this).next('input').val(this.value);" />
+                                    <input type="text" class="form-control" placeholder="no hay archivo seleccionado" readonly="" />
+                                    <span class="button">Elegir Archivo</span>
+                                </div>
+                                <div class="fancy-file-upload fancy-file-primary">
+                                    <i class="fa fa-upload"></i>
+                                    <input type="file" class="form-control" name="contact[attachment]" onchange="jQuery(this).next('input').val(this.value);" />
+                                    <input type="text" class="form-control" placeholder="no hay archivo seleccionado" readonly="" />
+                                    <span class="button">Elegir Archivo</span>
+                                </div>
+                                <div class="fancy-file-upload fancy-file-primary">
+                                    <i class="fa fa-upload"></i>
+                                    <input type="file" class="form-control" name="contact[attachment]" onchange="jQuery(this).next('input').val(this.value);" />
+                                    <input type="text" class="form-control" placeholder="no hay archivo seleccionado" readonly="" />
+                                    <span class="button">Elegir Archivo</span>
+                                </div>
+                                <small class="text-muted block">Tamaño máximo por archivo: 5Mb (jpg/png/bmp)</small>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </fieldset>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-3d btn-teal btn-xlg btn-block margin-top-30">
+                            Cargar Diario de Viaje
+                            <span class="block font-lato">Gracias por compartirnos tu experiencia!</span>
+                        </button>
+                    </div>
+                </div>
+                                
+            </div>
+        </div>
+    }<!--Fin Form-->
+</div>

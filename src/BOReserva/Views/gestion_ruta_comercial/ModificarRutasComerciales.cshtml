@@ -52,24 +52,39 @@
 
 @using (Html.BeginForm("guardarRuta", "gestion_ruta_comercial", null, FormMethod.Post, new { @id = "formGuardarRuta", @class = "form-horizontal" }))
 {
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
 
-    <label>Elegir Estado de la Ruta (*)</label>
-    @Html.DropDownList("rutaEstado", listEstado, new { @class = "form-control", @placeholder = "Activa", @id = "rutaEstado" })
-    <br />
-    <label>Elegir Tipo de la Ruta (*)</label>
-    @Html.DropDownList("rutaTipo", listTipo, new { @class = "form-control", @placeholder = "Aérea", @id = "rutaTipo" })
-    <br />
-    <label>Elegir Origen de la Ruta (*)</label>
-    @Html.DropDownList("rutaOrigen", listItems, new { @class = "form-control", @placeholder = "Ejem.: Caracas - Venezuela", @id = "rutaOrigen" })
-    <br />
-    <label>Elegir Destino de la Ruta (*)</label>
-    @Html.DropDownList("rutaDestino", listItems, new { @class = "form-control", @placeholder = "Ejem.: Caracas - Venezuela", @id = "rutaDestino" })
-    <br />
-    <label>Agregar distancia de la Ruta (*)</label>
-    @Html.TextBoxFor(m => m._distanciaRuta, null, new { @class = "form-control", @placeholder = "1200 KM", @id = "rutaDistancia" })
-    <br />
-    <center><button id="enviar" class="btn btn-success">Guardar</button></center>
-
+                <div class="box-body">
+                    <h2 class="box-title"> Agregar Ruta</h2>
+                    <div class="row">
+                        <label>Elegir Estado de la Ruta (*)</label>
+                        @Html.DropDownList("rutaEstado", listEstado, new { @class = "form-control", @placeholder = "Activa", @id = "rutaEstado" })
+                        <br />
+                        <label>Elegir Tipo de la Ruta (*)</label>
+                        @Html.DropDownList("rutaTipo", listTipo, new { @class = "form-control", @placeholder = "Aérea", @id = "rutaTipo" })
+                        <br />
+                        <label>Elegir Origen de la Ruta (*)</label>
+                        @Html.DropDownList("rutaOrigen", listItems, new { @class = "form-control", @placeholder = "Ejem.: Caracas - Venezuela", @id = "rutaOrigen" })
+                        <br />
+                        <label>Elegir Destino de la Ruta (*)</label>
+                        @Html.DropDownList("rutaDestino", listItems, new { @class = "form-control", @placeholder = "Ejem.: Caracas - Venezuela", @id = "rutaDestino" })
+                        <br />
+                        <label>Agregar distancia de la Ruta (*)</label>
+                        @Html.TextBoxFor(m => m._distanciaRuta, null, new { @class = "form-control", @placeholder = "1200 KM", @id = "rutaDistancia" })
+                        <br />
+                        <center><button id="enviar" class="btn btn-success">Guardar</button></center>
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
 
 
 
