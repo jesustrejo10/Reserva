@@ -137,6 +137,7 @@
             table = $('#example1').DataTable();
 
             $(".clasedeprueba").click(function () {
+                alert("Se esta procesando tu solicitud, por favor espere");
                 var identificador = $(this).parent().parent().parent().attr("id");
                 jQuery.ajax({
                     type: "GET",
@@ -156,6 +157,7 @@
         $(document).ready(function () {
             //e.preventDefault();
             $(".modificar").click(function () {
+                alert("Se esta procesando tu solicitud, por favor espere");
                 var identificador = $(this).parent().parent().parent().attr("id");
                 jQuery.ajax({
                     type: "GET",
@@ -209,6 +211,7 @@
         $(document).ready(function () {
             //e.preventDefault();
             $(".eliminar").click(function () {
+                alert("Se esta procesando tu solicitud, por favor espere");
                 var identificador = $(this).parent().parent().parent().attr("id");
                 jQuery.ajax({
                     type: "POST",
@@ -251,11 +254,14 @@
         $(document).ready(function () {
             //e.preventDefault();
             $(".activar").click(function () {
+                alert("Se esta procesando tu solicitud, por favor espere");
                 var identificador = $(this).parent().parent().parent().attr("id");
                 jQuery.ajax({
                     type: "POST",
                     url: "/gestion_automoviles/activateVehicle",
                     data: { matricula: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+                    
+                     
                 }).done(function (data) {
                     if (data === "1") {
 
@@ -292,6 +298,7 @@
         $(document).ready(function () {
             //e.preventDefault();
             $(".desactivar").click(function () {
+                alert("Se esta procesando tu solicitud, por favor espere");
                 var identificador = $(this).parent().parent().parent().attr("id");
                 jQuery.ajax({
                     type: "POST",

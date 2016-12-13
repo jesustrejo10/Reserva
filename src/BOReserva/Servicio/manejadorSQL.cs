@@ -1380,7 +1380,7 @@ namespace BOReserva.Servicio
                     while (reader.Read())
                     {
                         String matricularetornada = reader[0].ToString();
-                        verdad = matricularetornada.Equals(matricula);
+                        verdad = matricularetornada.Equals(matricula.ToUpper());
                     }
                 }
                 cmd.Dispose();

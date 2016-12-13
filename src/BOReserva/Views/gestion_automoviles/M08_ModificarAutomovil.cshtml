@@ -187,7 +187,7 @@
                     type: 'POST',
                     success: function (data) {
                         if (data === "1") {
-                            alert("Se ha modificado exitosamente y sera redirigido a la tabla de vehiculos");
+                            alert("Se ha modificado exitosamente y sera redirigido a la tabla de vehiculos, por favor espere");
                             //$('#formModifyVehicle')[0].reset();
                             var url1 = '/gestion_automoviles/M08_VisualizarAutomoviles';
                             var method = 'GET';
@@ -225,6 +225,7 @@
             var url = '/gestion_automoviles/M08_VisualizarAutomoviles';
             var method = 'GET';
             var data = '';
+            alert("Espere un momento y será redirigido");
 
             $.ajax(
                 {
