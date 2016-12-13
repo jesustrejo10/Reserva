@@ -138,10 +138,10 @@ namespace FOReserva.Servicio
         /// Metodo para listar revisiones guardadas
         /// </summary>
         /// <returns>Lista de revisiones</returns>
-        public List<CRevision> BuscarRevisiones()
+        public List<CRevision> BuscarRevisiones(int id)
         {
-            
-            string query = "SELECT rev_id, rev_fecha, rev_mensaje, rev_tipo, rev_puntuacion FROM Revision";
+
+            string query = "SELECT rest.rst_id, rest.rst_nombre, rev.rev_mensaje, rev.rev_puntuacion FROM Restaurante as rest, Reserva_Restaurante as res, Revision as rev  WHERE   rev.rev_tipo=1 and rev.rev_FK_res_res_id=res.ID and rest.rst_id=res.FK_RESTAURANTE rest.rst_id= '" + id + "'";
             SqlDataReader read = Executer(query);
             List<CRevision> lista_rev = new List<CRevision>();
 
