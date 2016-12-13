@@ -109,12 +109,12 @@ jQuery(document).ready(function () {
  
     $("#m08AgregarAutomovil").click(function (e) {
         e.preventDefault();
-
-        alert("Se esta procesando tu solicitud, por favor espere");
         var url = '/gestion_automoviles/M08_AgregarAutomovil';
         var method = 'GET';
         var data = '';
         $.ajax(
+
+            alert("Se esta procesando tu solicitud, por favor espere"),
  
             {
                 url: url,
@@ -133,11 +133,11 @@ jQuery(document).ready(function () {
     $("#m08VisualizarAutomoviles").click(function (e) {
         e.preventDefault();
 
-        alert("Se esta procesando tu solicitud, por favor espere");
         var url = '/gestion_automoviles/M08_VisualizarAutomoviles';
         var method = 'GET';
         var data = '';
         $.ajax(
+        alert("Se esta procesando tu solicitud, por favor espere"),
             {
                 url: url,
                 type: method,
