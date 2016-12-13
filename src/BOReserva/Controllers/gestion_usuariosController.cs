@@ -1,7 +1,9 @@
 ﻿using BOReserva.Models.gestion_usuarios;
+using BOReserva.Models.gestion_seguridad_ingreso;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -37,13 +39,16 @@ namespace BOReserva.Controllers
         public ActionResult M12_AgregarUsuario()
         {
            // Response.Write("<script>alert('" + "prueba" + "');</script>");
-            ViewBag.Roles = new SelectList(new List<SelectListItem>
-                {
-                    new SelectListItem {Text = "Administrador", Value = "1"},
-                    new SelectListItem {Text = "Normal", Value = "2"},
-                    new SelectListItem {Text = "Anonimo", Value = "3"},
-
-                }, "Value", "Text");
+            try { 
+                PersistenciaUsuario p = new PersistenciaUsuario();
+                List<ListaRoles> lista = p.ListarRoles();
+                ViewBag.Roles = new SelectList(lista, "rolID", "rolNombre");
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(ex.Message);
+            }
             return PartialView();
         }
 
@@ -52,87 +57,99 @@ namespace BOReserva.Controllers
         [HttpPost]
         public ActionResult M12_AgregarUsuario(AgregarUsuario usuario)
         {
-            ViewBag.Roles = new SelectList(new List<SelectListItem>
-                {
-                    new SelectListItem {Text = "Administrador", Value = "1"},
-                    new SelectListItem {Text = "Normal", Value = "2"},
-                    new SelectListItem {Text = "Anonimo", Value = "3"},
-
-                }, "Value", "Text");
+            //Se resetea intentos en la Tabla Login MO1 Ingreso Seguridad
+            Cgestion_seguridad_ingreso ingreso = new Cgestion_seguridad_ingreso();
+            ingreso.correoCampoTexto = usuario.correoUsuario;
+            
             if (ModelState.IsValid) 
             {
                 PersistenciaUsuario p = new PersistenciaUsuario();
                 try
                 {
                     p.AgregarUsuario(usuario.toClass());
-                    TempData["message"] = "Usuario Agregado Exitosamente";
-                    return RedirectToAction("M12_Index");
+                    ingreso.ResetearIntentos();//Metodo M01_Ingreso_Seguridad
+                    TempData["message"] = RecursoUsuario.MensajeAgregado;
+                    //return RedirectToAction("M12_Index");
                 }
                 catch (ExceptionM12Reserva ex)
                 {
-                    ModelState.AddModelError("", ex.Message);
-                    return View("M12_AgregarUsuario", "_Layout");
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    return Json(ex.Message);
                 }
                 catch (Exception ex)
                 {
-                    ModelState.AddModelError("", ex.Message);
-                    return View("M12_AgregarUsuario", "_Layout");
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    return Json(ex.Message);
                 }
-            } 
-            else {
-                return View("M12_AgregarUsuario", "_Layout");    
-            } 
+            }
+            return Json("true");
+            //return RedirectToAction("M12_Index");
+            //return View("M12_AgregarUsuario", "_Layout");    
+            
  
             
         }
 
+
        [HttpPost]
         public ActionResult M12_ModificarUsuario(AgregarUsuario usuario)
         {
-
+            //Se resetea intentos en la Tabla Login MO1 Ingreso Seguridad
+            Cgestion_seguridad_ingreso ingreso = new Cgestion_seguridad_ingreso();
+            ingreso.correoCampoTexto = usuario.correoUsuario;
             if (ModelState.IsValid)
             {
                 PersistenciaUsuario p = new PersistenciaUsuario();
                 try
                 {
                     p.ModificarUsuario(usuario.toClass(), usuario.idUsuario);
-                    TempData["message"] = "Usuario Modficado Exitosamente";
-                    return RedirectToAction("M12_Index");
+                    ingreso.ResetearIntentos();//Metodo M01_Ingreso_Seguridad
+                    TempData["message"] = RecursoUsuario.MensajeModificado;
+                    //return RedirectToAction("M12_Index");
                 }
                 catch (ExceptionM12Reserva ex)
                 {
-                    
-                    //ModelState.AddModelError("", ex.Message);
-                    return View("M12_ModificarUsuario", usuario);
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    return Json(ex.Message);
+                    //return View("M12_ModificarUsuario", usuario);
                 }
                 catch (Exception ex)
                 {
-                    ModelState.AddModelError("", ex.Message);
-                    return View("M12_ModificarUsuario", usuario);
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    return Json(ex.Message);
+                    //return View("M12_ModificarUsuario", usuario);
                 }
             } 
-
-            return PartialView("M12_Index", "_Layout");
+            return Json("true");
+            //return RedirectToAction("M12_Index");
+            //return PartialView("M12_Index", "_Layout");
         }
 
-
-
+ 
+       
        public ActionResult ModificarUsuario(int? usuID)
         {
+            //Se resetea intentos en la Tabla Login MO1 Ingreso Seguridad
+            Cgestion_seguridad_ingreso ingreso = new Cgestion_seguridad_ingreso();
+           
 
             if (usuID.HasValue)
             {
-                PersistenciaUsuario p = new PersistenciaUsuario();
                 try
                 {
+                    PersistenciaUsuario p = new PersistenciaUsuario();
                     AgregarUsuario  usuario = new AgregarUsuario(p.consultarUsuario(usuID.Value));
+                    ingreso.correoCampoTexto = usuario.correoUsuario;//Metodo M01_Ingreso_Seguridad
+                    p = new PersistenciaUsuario();
+                    List<ListaRoles> lista = p.ListarRoles();
+                    ViewBag.Roles = new SelectList(lista, "rolID", "rolNombre");
+                    ingreso.ResetearIntentos();//Metodo M01_Ingreso_Seguridad
                     return PartialView("M12_ModificarUsuario", usuario);
                 }
                 catch (Exception ex)
                 {
-                    //ModelState.AddModelError("", ex.Message);
-                    TempData["message"] = ex.Message;
-                    return PartialView("M12_Index", "_Layout");
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    return Json(ex.Message);
                 }
             }
             else
@@ -147,6 +164,7 @@ namespace BOReserva.Controllers
             {
                 PersistenciaUsuario p = new PersistenciaUsuario();
                 p.eliminarUsuario(usuID);
+                TempData["message"] = RecursoUsuario.MensajeEliminado;
             }
             catch(ExceptionM12Reserva ex)
             {
@@ -160,6 +178,28 @@ namespace BOReserva.Controllers
             return RedirectToAction("M12_Index");
             
             
+        }
+
+        public RedirectToRouteResult CambiarStatus(int usuID, string activo)
+        {
+            try
+            {
+                PersistenciaUsuario p = new PersistenciaUsuario();
+                p.CambiarStatus(usuID, activo);
+                TempData["message"] = RecursoUsuario.MensajeStatus;
+            }
+            catch (ExceptionM12Reserva ex)
+            {
+                TempData["message"] = ex.Message;
+
+            }
+            catch (Exception ex)
+            {
+                TempData["message"] = ex.Message;
+            }
+            return RedirectToAction("M12_Index");
+
+
         }
         
     }
