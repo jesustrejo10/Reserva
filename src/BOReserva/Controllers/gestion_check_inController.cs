@@ -76,7 +76,6 @@ namespace BOReserva.Controllers
         public ActionResult generarBoardingPass(CDetalleBoleto model)
         {
 
-            String tipo = model._tipoBoardingPass;
             int id_bol = model._bol_id;
 
             manejadorSQL_Check modificar = new manejadorSQL_Check();
@@ -89,22 +88,62 @@ namespace BOReserva.Controllers
             int ida_vuelta = modificar.MBuscarIdaVuelta(model._bol_id);
             // EL BOLETO ES IDA 1
             // EL BOLETO ES IDA Y VUELTA 2
+            
+            // DATOS PARA INSERTAR EN PASE DE ABORDAJE
+            CBoardingPass pase = new CBoardingPass();
+
             if (ida_vuelta == 1)
             {
-                int codigo_vuelo1 = lista[0]._id;
+                pase._vuelo = lista[0]._id;
+                pase._fechaPartida = lista[0]._fechaPartida;
+                pase._fechaLlegada = lista[0]._fechaLlegada;
+                pase._horaPartida = lista[0]._fechaPartida.TimeOfDay.ToString(); 
+                pase._origen = lista[0]._ruta._origen;
+                pase._destino = lista[0]._ruta._destino;
+                pase._nombreOri = lista[0]._ruta._nomOrigen;
+                pase._nombreDest = lista[0]._ruta._nomDestino;
 
             }
             else
             {
-                int codigo_vuelo_ida = lista[0]._id;
-                int codigo_vuelo_vuelta = lista[1]._id;
+                String tipo = model._tipoBoardingPass;
+                int compara = String.Compare(tipo, "Ida");
+                if (compara == 0)
+                {
+                    pase._vuelo = lista[0]._id;
+                    pase._fechaPartida = lista[0]._fechaPartida;
+                    pase._fechaLlegada = lista[0]._fechaLlegada;
+                    pase._horaPartida = lista[0]._fechaPartida.TimeOfDay.ToString(); 
+                    pase._origen = lista[0]._ruta._origen;
+                    pase._destino = lista[0]._ruta._destino;
+                    pase._nombreOri = lista[0]._ruta._nomOrigen;
+                    pase._nombreDest = lista[0]._ruta._nomDestino;
 
+                }
+                else
+                {
+                    pase._vuelo = lista[1]._id;
+                    pase._fechaPartida = lista[1]._fechaPartida;
+                    pase._fechaLlegada = lista[1]._fechaLlegada;
+                    pase._horaPartida = lista[1]._fechaPartida.TimeOfDay.ToString(); 
+                    pase._origen = lista[1]._ruta._origen;
+                    pase._destino = lista[1]._ruta._destino;
+                    pase._nombreOri = lista[1]._ruta._nomOrigen;
+                    pase._nombreDest = lista[1]._ruta._nomDestino;
+                }
             }
 
+            pase._boleto = model._bol_id;
+            pase._asiento = "A12";
+            pase._nombre = model._primer_nombre;
+            pase._apellido = model._primer_apellido;
+
+
+
             // HACER EL INSERT DE PASE DE ABORDAJE
-            
+            int resultado = modificar.CrearBoardingPass(pase);
             // TENGO QUE INSTANCIAR AL MODELO DE VER BOARDING PASS
-            return PartialView("M05_VerBoardingPass");
+            return PartialView("M05_VerBoardingPass",pase);
         }
 
 

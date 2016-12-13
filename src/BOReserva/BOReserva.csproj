@@ -238,6 +238,7 @@
     <Compile Include="Models\gestion_boletos\CRuta.cs" />
     <Compile Include="Models\gestion_boletos\CVisualizarBoleto.cs" />
     <Compile Include="Models\gestion_boletos\CVuelo.cs" />
+    <Compile Include="Models\gestion_check_in\CBoardingPass.cs" />
     <Compile Include="Models\gestion_check_in\CBoleto.cs" />
     <Compile Include="Models\gestion_check_in\CCheckIn.cs" />
     <Compile Include="Models\gestion_check_in\CDetalleBoleto.cs" />

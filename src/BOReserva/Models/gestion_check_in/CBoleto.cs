@@ -64,5 +64,9 @@ namespace BOReserva.Models.gestion_check_in
             _id = id;
         }
 
+        public CBoleto()
+        {
+        }
+
     }
 }

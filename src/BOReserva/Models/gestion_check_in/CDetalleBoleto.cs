@@ -46,7 +46,6 @@ namespace BOReserva.Models.gestion_check_in
 
        public List<SelectListItem> _tipos { get; set; }
 
-
         //Constructor por default por si acaso
         public CDetalleBoleto() { }
 
@@ -122,7 +121,6 @@ namespace BOReserva.Models.gestion_check_in
             _destino = boleto._destino.Name;
             _monto = boleto._costo;
             _tipoBoleto = boleto._tipoBoleto;
-
         }
     }
 }

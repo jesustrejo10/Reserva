@@ -351,5 +351,28 @@ namespace BOReserva.Servicio.Servicio_Boletos
                return null;
            }
        }
+
+       public int CrearBoardingPass(CBoardingPass pase)
+       {
+
+           try
+           {
+               SqlConnection con = new SqlConnection(stringDeConexion);
+               con.Open();
+               String sql = "INSERT INTO Pase_Abordaje (pas_fk_boleto,pas_fk_asiento, pas_fk_lugar_origen, pas_fk_lugar_destino,pas_fk_vuelo) " +
+                   " VALUES (" + pase._boleto + ",'" + pase._asiento + "'," + pase._origen + "," + pase._destino + ","+ pase._vuelo +")";
+               
+               SqlCommand cmd = new SqlCommand(sql, con);
+               cmd.ExecuteNonQuery();
+               cmd.Dispose();
+               con.Close();
+               return 1;
+           }
+           catch (SqlException ex)
+           {
+               String hola = ex.ToString();
+               return 0;
+           }
+       }
     }
 }
