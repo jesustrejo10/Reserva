@@ -933,6 +933,8 @@ namespace BOReserva.Servicio
 
 
     /* MODULO 8 GESTION DE AUTOMOVILES*/
+        
+
         /// <summary>
         /// Método que agrega un vehículo a la base de datos
         /// </summary>
@@ -961,7 +963,6 @@ namespace BOReserva.Servicio
             }
         }
 
-
         /// <summary>
         /// Método que modifica un vehículo existente de la base de datos
         /// </summary>
@@ -989,7 +990,6 @@ namespace BOReserva.Servicio
                 return ex.Message;
             }
         }
-
 
         /// <summary>
         /// Método que lista todos los vehículos de la base de datos
@@ -1034,7 +1034,6 @@ namespace BOReserva.Servicio
             }
         }
 
-
         /// <summary>
         /// Método para buscar un vehículo en particular de la base de datos
         /// </summary>
@@ -1075,7 +1074,6 @@ namespace BOReserva.Servicio
                 return null;
             }
         }
-
 
         /// <summary>
         /// Método que busca en la base de datos el identificador de una ciudad
@@ -1127,9 +1125,6 @@ namespace BOReserva.Servicio
 
         }
 
-
-
-
         /// <summary>
         /// Método para borrar un vehículo de la base de datos
         /// </summary>
@@ -1154,7 +1149,6 @@ namespace BOReserva.Servicio
                 return ex.Message;
             }
         }
-
 
         /// <summary>
         /// Método para buscar el nombre de una ciudad en la base de datos
@@ -1188,8 +1182,6 @@ namespace BOReserva.Servicio
             }
         }
 
-
-
         /// <summary>
         /// Método para buscar el nombre de un país
         /// </summary>
@@ -1221,9 +1213,13 @@ namespace BOReserva.Servicio
                 conexion.Close();
                 return _lugar;
             }
+            catch (InvalidOperationException ex) {
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return _lugar;
+
+            }
         }
-
-
 
         /// <summary>
         /// Método para listar todos los países de la base de datos
@@ -1263,7 +1259,6 @@ namespace BOReserva.Servicio
                 return null;
             }
         }
-
 
         /// <summary>
         /// Método que retorna el identificador de un país
@@ -1323,7 +1318,6 @@ namespace BOReserva.Servicio
             }
         }
 
-
         /// <summary>
         /// Método para listar todas las ciudades de un país
         /// </summary>
@@ -1356,7 +1350,6 @@ namespace BOReserva.Servicio
                 return _ciudades;
             }
         }
-
 
         /// <summary>
         /// Método para verificar si una matrícula esta registrada en la BD
@@ -1399,5 +1392,8 @@ namespace BOReserva.Servicio
                 return 1;
             }
         }
+        
+    /* FIN MODULO 8 GESTION DE AUTOMOVILES*/
+
     }
 }
