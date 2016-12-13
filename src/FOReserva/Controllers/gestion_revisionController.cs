@@ -37,6 +37,20 @@ namespace FOReserva.Controllers
             return PartialView();
         }
 
+        public ActionResult consultar_revision()
+        {
+            return PartialView();
+        }
+        public ActionResult eliminar_revision()
+        {
+            return PartialView();
+        }
+
+        public ActionResult editar_revision()
+        {
+            return PartialView();
+        }
+
         public ActionResult crear_revision()
         {
             return PartialView();
@@ -46,7 +60,7 @@ namespace FOReserva.Controllers
         /// Creacion Modelo Lista Revision
         /// </summary>
         /// <returns>Vista Modelo</returns>
-        public ActionResult Consultar_Revision(string usuario)
+        public ActionResult Consultar_Revision_AR(string usuario)
         {
             // int search_val = Int32.Parse(Request.QueryString["search_val"]);
             // string Usuario = Request.QueryString["Usuario"];
@@ -57,7 +71,7 @@ namespace FOReserva.Controllers
             return PartialView(lista);
         }
 
-        public ActionResult Eliminar_Revision(string usuario, CRevision revision)
+        public ActionResult Eliminar_Revision_AR(string usuario, CRevision revision)
         {
 
             List<CRevision> lista = new List<CRevision>();

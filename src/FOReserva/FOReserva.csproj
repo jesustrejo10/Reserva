@@ -3107,12 +3107,9 @@
     <Content Include="Views\gestion_reserva_habitaciones\buscar_hoteles.cshtml" />
     <Content Include="Views\gestion_reserva_habitaciones\hoteles_con_habitaciones.cshtml" />
     <Content Include="Views\gestion_planificacion_vacaciones\gestion_itinerario.cshtml" />
-    <Content Include="Views\gestion_revision\gestion_revision.cshtml" />
-    <Content Include="Views\gestion_revision\consultar_revision.cshtml" />
     <Content Include="Views\gestion_revision\crear_revision.cshtml" />
     <Content Include="Views\gestion_revision\eliminar_revision.cshtml" />
     <Content Include="Views\gestion_revision\editar_revision.cshtml" />
-    <Content Include="Views\gestion_revision\Consultar_Revision.cshtml" />
     <Content Include="Views\gestion_diarios\gestion_diarios_resultados.cshtml" />
     <Content Include="Views\gestion_reserva_restaurante\lista_reserva_restaurantes.cshtml" />
     <Content Include="Views\gestion_reserva_restaurante\error_conexion.cshtml" />
@@ -3124,6 +3121,7 @@
     <Content Include="Views\Shared\assets\plugins\slider.swiper\dist\js\maps\swiper.min.js.map" />
     <Content Include="Views\gestion_reserva_restaurante\_EditarReserva.cshtml" />
     <Content Include="Views\gestion_revision\lista_revisiones.cshtml" />
+    <Content Include="Views\gestion_revision\consultar_revision.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
