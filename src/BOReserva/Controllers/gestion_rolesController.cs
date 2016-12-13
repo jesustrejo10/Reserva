@@ -36,6 +36,21 @@ namespace BOReserva.Controllers
             }
             return PartialView(listaroles);
         }
+        
+                    public ActionResult M13_ModificarRol()
+        {
+            manejadorSQL sql = new manejadorSQL();
+            List<CRoles> listaroles = sql.consultarListaroles();
+            foreach (var item in listaroles)
+            {
+                System.Diagnostics.Debug.WriteLine(item.Nombre_rol);
+                foreach (var item2 in item.Permisos)
+                {
+                    System.Diagnostics.Debug.WriteLine(item2.Nombre);
+                }
+            }
+            return PartialView(listaroles);
+        }
         //Metodo para agregar roles
         [HttpPost]
         public JsonResult agregarrol(CRoles model)

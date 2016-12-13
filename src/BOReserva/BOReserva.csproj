@@ -1449,10 +1449,11 @@
     <Content Include="Views\gestion_cruceros\M24_GestionCruceros.cshtml" />
     <Content Include="Views\gestion_cruceros\M24_ListarCruceros.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Visualizar.cshtml" />
-	<Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\gestion_restaurantes\M10_GestionRestaurantes_Modificar.cshtml" />
+    <Content Include="Views\gestion_roles\M13_ModificarRol.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Visualizar.cshtml" />

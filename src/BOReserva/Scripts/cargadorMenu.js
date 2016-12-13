@@ -543,6 +543,28 @@ jQuery(document).ready(function () {
                 }
             });
     });
+    //M13 ROLES
+    $("#m13ModificarRol").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_roles/M13_ModificarRol';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
     $("#m13AgregarRol").click(function (e) {
         e.preventDefault();
         var url = '/gestion_roles/M13_AgregarRol';
