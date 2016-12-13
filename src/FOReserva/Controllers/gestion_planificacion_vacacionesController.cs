@@ -15,8 +15,8 @@ namespace FOReserva.Controllers
 
         public ActionResult gestion_itinerario()
         {
-            itinerario model = new itinerario();
-            return PartialView(model);
+            //itinerario model = new itinerario();
+            return PartialView(/*model*/);
         }
 
     }

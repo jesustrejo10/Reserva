@@ -26,23 +26,30 @@ namespace FOReserva.Controllers
             return PartialView();
         }
 
+        [HttpGet]
         public ActionResult gestion_diarios_resultados()
         {
             ManejadorSQLDiarios manejador = new ManejadorSQLDiarios();
             List<CDiarioModel> lista = manejador.obtenerDiarios();
             return PartialView(lista);
         }
-                
+
         [HttpPost]
-        public JsonResult buscarDiarios(CDiarioModel model)
-        {    
-            String nombre = model.Nombre;
-            DateTime f_inicio = model.Fecha_ini;
-            DateTime f_fin = model.Fecha_fin;
-            int fk_lugar = model.Destino;
-            int filtro = model.Filtro;
-            return (Json("Retorno del controlador", JsonRequestBehavior.AllowGet));
+        public ActionResult gestion_diarios_resultados(CDiarioModel model)
+        {
+            ManejadorSQLDiarios manejador = new ManejadorSQLDiarios();
+            List<CDiarioModel> lista = manejador.buscarDiarios(model);
+            return PartialView(lista);
         }
 
+        [HttpPost]
+        public ActionResult gestion_diarios_ver(int id_diario)
+        {
+            CDiarioModel model;
+            ManejadorSQLDiarios man = new ManejadorSQLDiarios();
+            model = man.buscarDiarios(id_diario);
+            return PartialView(model);
+        }
+                
     }
 }

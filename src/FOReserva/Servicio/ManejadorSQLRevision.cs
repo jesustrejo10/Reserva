@@ -11,131 +11,134 @@ namespace FOReserva.Servicio
     public class ManejadorSQLRevision : manejadorSQL
     {
 
+
         public ManejadorSQLRevision() : base() { }
 
 
-        public List<CRevision> Consultar_Revision(string nombre, string apellido)
+        /*Buscar Revision por Usuario*/
+       
+        public List<CRevision> ConsultarRevision(string restName)   //se consulta para eliminar
         {
-
-            string query = "SELECT us.usu_id, us.usu_activo, rev.rev_fecha, rev.rev_mensaje, rev.rev_tipo, rev.rev_puntuacion, val.rv_val_pos, val.rv_val_neg FROM Revision as rev, Revision_Valoracion as val, Usuario as us where val.rv_id=rev.rev_FK_rev_val_id and LOWER(us.usu_nombre) LIKE LOWER('%" + nombre + "%') and LOWER(us.usu_apellido) LIKE LOWER('%" + apellido + "%') and rev.rev_FK_usu_id=us.usu_id";
+            string query = "Select rst_id, rst_nombre, rst_direccion From Restaurante where LOWER(nom colum a bscar) LIKE LOWER('%" + restName + "%')";
             SqlDataReader read = Executer(query);
             List<CRevision> lista_rev = new List<CRevision>();
             if (read.HasRows)
             {
-                while (read.Read())
+                while (read.Read())                        //agregar aca los campos de la clase CRevision
                 {
-                    DateTime _fecha = read.GetDateTime(0);
-                    string _mensaje = read.GetString(1);
-                    int _tipo = read.GetInt32(2);
-                    int _puntuacion = read.GetInt32(3);
-                    // int _valoracion = read.GetInt32(4);
+                    int id = read.GetInt32(0);
+                    string nombre = read.GetString(1);
+                    string tipo = read.GetString(2);
                     CRevision rev = new CRevision();
-                    // CRevisionValoracion reva = new CRevisionValoracion();
-                    rev.Fecha = _fecha;
-                    rev.Mensaje = _mensaje;
-                    rev.Tipo = _tipo;
-                    rev.Puntuacion = _puntuacion;
-                    //  reva. = _valoracion;
+                    rev.Id = id;
+                    rev.Name = nombre;
+                    rev.Tipo = tipo;
                     lista_rev.Add(rev);
-
-
                 }
             }
-
             CloseConnection();
             return lista_rev;
         }
 
-        public bool Eliminar_Revision(string nombre, string apellido, int revision)
+        public List<CRevision> ConsultarRevision2(string restName, CRevision revision)
         {
-            string query = "DELETE FROM Reserva_Restaurante ( Reserva_Nombre, Fecha, Hora,Cantidad_Personas, FK_RESTAURANTE, FK_USUARIO) VALUES( )";
-            this.Executer(query);
-            CloseConnection();
-            return true;
-        }
-
-        public bool Crear_Revision(string nombre, string apellido)
-        {
-            string query = "INSERT INTO Reserva_Restaurante ( Reserva_Nombre, Fecha, Hora,Cantidad_Personas, FK_RESTAURANTE, FK_USUARIO) VALUES( )";
-            this.Executer(query);
-            CloseConnection();
-            return true;
-        }
-
-        public List<CRevision> Mostrar_Revision_Restaurant(string nombre, string apellido, int tipo)
-        {
-
-            string query = "SELECT us.usu_id, us.usu_activo, rev.rev_fecha, rev.rev_mensaje, rev.rev_tipo, rev.rev_puntuacion, val.rv_val_pos, val.rv_val_neg FROM Revision as rev, Revision_Valoracion as val, Usuario as us, Reserva_Restaurante as rest where val.rv_id=rev.rev_FK_rev_val_id and LOWER(us.usu_nombre) LIKE LOWER('%" + nombre + "%') and LOWER(us.usu_apellido) LIKE LOWER('%" + apellido + "%') and rev.rev_FK_usu_id=us.usu_id and  rest.FK_USUARIO=us.usu_id and rest.FK_RESTAURANTE=rev.rev_FK_res_res_id ";
+            string query = "Select rst_id, rst_nombre, rst_direccion From Restaurante where LOWER(nom colum a bscar) LIKE LOWER('%" + restName + "%')";
             SqlDataReader read = Executer(query);
             List<CRevision> lista_rev = new List<CRevision>();
             if (read.HasRows)
             {
-                while (read.Read())
+                while (read.Read())                        //agregar aca los campos de la clase CRevision
                 {
-                    DateTime _fecha = read.GetDateTime(0);
-                    string _mensaje = read.GetString(1);
-                    int _tipo = read.GetInt32(2);
-                    int _puntuacion = read.GetInt32(3);
-                    // int _valoracion = read.GetInt32(4);
+                    int id = read.GetInt32(0);
+                    string nombre = read.GetString(1);
+                    string tipo = read.GetString(2);
                     CRevision rev = new CRevision();
-                    // CRevisionValoracion reva = new CRevisionValoracion();
-                    rev.Fecha = _fecha;
-                    rev.Mensaje = _mensaje;
-                    rev.Tipo = _tipo;
-                    rev.Puntuacion = _puntuacion;
-                    //  reva. = _valoracion;
+                    rev.Id = id;
+                    rev.Name = nombre;
+                    rev.Tipo = tipo;
                     lista_rev.Add(rev);
-
-
                 }
             }
-
             CloseConnection();
             return lista_rev;
         }
 
-        public List<CRevision> Mostrar_Revision_Hotel(string nombre, string apellido, int tipo)
+        public List<CRevision> Eliminar_Revision(string usuario, CRevision revision)
         {
-
-            string query = "SELECT us.usu_id, us.usu_activo, rev.rev_fecha, rev.rev_mensaje, rev.rev_tipo, rev.rev_puntuacion, val.rv_val_pos, val.rv_val_neg FROM Revision as rev, Revision_Valoracion as val, Usuario as us, Reserva_Habitacion as hot where val.rv_id=rev.rev_FK_rev_val_id and LOWER(us.usu_nombre) LIKE LOWER('%" + nombre + "%') and LOWER(us.usu_apellido) LIKE LOWER('%" + apellido + "%') and rev.rev_FK_usu_id=us.usu_id AND hot.rha_fk_usu_id=us.usu_id and hot.rha_id=rev.rev_FK_res_hot_id;";
+            string query = "Select rst_id, rst_nombre, rst_direccion From Restaurante where LOWER(nom colum a bscar) LIKE LOWER('%" + usuario + "%' '%" + revision + "%')";
             SqlDataReader read = Executer(query);
             List<CRevision> lista_rev = new List<CRevision>();
             if (read.HasRows)
             {
-                while (read.Read())
+                while (read.Read())                        //agregar aca los campos de la clase CRevision
                 {
-                    DateTime _fecha = read.GetDateTime(0);
-                    string _mensaje = read.GetString(1);
-                    int _tipo = read.GetInt32(2);
-                    int _puntuacion = read.GetInt32(3);
-                    // int _valoracion = read.GetInt32(4);
+                    int id = read.GetInt32(0);
+                    string nombre = read.GetString(1);
+                    string tipo = read.GetString(2);
                     CRevision rev = new CRevision();
-                    // CRevisionValoracion reva = new CRevisionValoracion();
-                    rev.Fecha = _fecha;
-                    rev.Mensaje = _mensaje;
-                    rev.Tipo = _tipo;
-                    rev.Puntuacion = _puntuacion;
-                    //  reva. = _valoracion;
+                    rev.Id = id;
+                    rev.Name = nombre;
+                    rev.Tipo = tipo;
                     lista_rev.Add(rev);
-
-
                 }
             }
-
             CloseConnection();
             return lista_rev;
         }
 
-        public bool Editar_Revision(string nombre, string apellido, int revision)
+        public List<CRevision> Crear_Revision(CReservation_Restaurant res, string usuario)   //aca iria el INSERT
         {
-            string query = "INSERT INTO Reserva_Restaurante ( Reserva_Nombre, Fecha, Hora,Cantidad_Personas, FK_RESTAURANTE, FK_USUARIO) VALUES( )";
-            this.Executer(query);
+            string query = "Select rst_id, rst_nombre, rst_direccion From Restaurante where LOWER(nom colum a bscar) LIKE LOWER('%" + usuario + "%' '%" + usuario + "%')";
+            SqlDataReader read = Executer(query);
+            List<CRevision> lista_rev = new List<CRevision>();
+            if (read.HasRows)
+            {
+                while (read.Read())                        //agregar aca los campos de la clase CRevision
+                {
+                    int id = read.GetInt32(0);
+                    string nombre = read.GetString(1);
+                    string tipo = read.GetString(2);
+                    CRevision rev = new CRevision();
+                    rev.Id = id;
+                    rev.Name = nombre;
+                    rev.Tipo = tipo;
+                    lista_rev.Add(rev);
+                }
+            }
             CloseConnection();
-            return true;
+            return lista_rev;
+        }
+
+
+        public List<CRevision> Crear_RevisionHotel(CReservation_Restaurant res, string usuario, DateTime fecha)   //aca iria el INSERT
+        {
+            string query = "Select rst_id, rst_nombre, rst_direccion From Restaurante where LOWER(nom colum a bscar) LIKE LOWER('%" + usuario + "%' '%" + usuario + "%''%" + fecha + "%')";
+            SqlDataReader read = Executer(query);
+            List<CRevision> lista_rev = new List<CRevision>();
+            if (read.HasRows)
+            {
+                while (read.Read())                        //agregar aca los campos de la clase CRevision
+                {
+                    int id = read.GetInt32(0);
+                    string nombre = read.GetString(1);
+                    string tipo = read.GetString(2);
+                    CRevision rev = new CRevision();
+                    rev.Id = id;
+                    rev.Name = nombre;
+                    rev.Tipo = tipo;
+                    lista_rev.Add(rev);
+                }
+            }
+            CloseConnection();
+            return lista_rev;
         }
 
 
     }
+
+
 }
+
+
 
 
