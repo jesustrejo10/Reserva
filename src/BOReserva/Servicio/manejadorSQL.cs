@@ -976,8 +976,7 @@ namespace BOReserva.Servicio
 
 
         //Procedimiento del Modulo 13 para retornar lista de los modulos generales de cada rol
-        public CListaGenerica<CModulo_general>
-            consultarLosModulosRol(CRoles _rol)
+        public CListaGenerica<CModulo_general> consultarLosModulosRol(CRoles _rol)
         {
             CListaGenerica<CModulo_general>
                 modulo_general = new CListaGenerica<CModulo_general>

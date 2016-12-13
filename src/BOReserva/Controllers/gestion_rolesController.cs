@@ -33,6 +33,10 @@ namespace BOReserva.Controllers
                 {
                     System.Diagnostics.Debug.WriteLine(item2.Nombre);
                 }
+                foreach (var item3 in item.Menu)
+                {
+                    System.Diagnostics.Debug.WriteLine(item3.Nombre);
+                }
             }
             return PartialView(listaroles);
         }
