@@ -54,7 +54,7 @@ jQuery(document).ready(function () {
     mostrarContenedor(1)
 
     /* NO QUITAR ESTA CARGA INICIAL QUE ES LA QUE HARÁ QUE POR DEFAULT SALGA VENTA DE VUELOS AL INICIAR LA PAGINA*/
-    $("#contenedor").empty();
+    $("#contenedor").html('<div class="text-center">Cargando...</div>');
     var url = '/gestion_vuelos/gestion_vuelos';
     var method = 'GET';
     var data = '';

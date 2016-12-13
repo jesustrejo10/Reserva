@@ -1671,6 +1671,13 @@
     <Content Include="Content\assets\plugins\slider.swiper\dist\js\maps\swiper.jquery.min.js.map" />
     <Content Include="Content\assets\plugins\slider.swiper\dist\js\maps\swiper.min.js.map" />
     <Content Include="Content\assets\plugins\styleswitcher\color_schemes\color_scheme.fla" />
+    <Content Include="Images\anon_user.png" />
+    <Content Include="Images\diario1.jpg" />
+    <Content Include="Images\diario2.jpg" />
+    <Content Include="Images\diario3.jpg" />
+    <Content Include="Images\diario4.jpg" />
+    <Content Include="Images\diario5.jpg" />
+    <Content Include="Images\diario6.jpg" />
     <Content Include="Images\restaurant_generic.jpg" />
     <Content Include="Models\ORM\ModelDBReserva.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -3124,6 +3131,7 @@
     <Content Include="Views\gestion_diarios\gestion_diarios_crear.cshtml" />
     <Content Include="Views\Shared\assets\plugins\slider.swiper\dist\js\maps\swiper.min.js.map" />
     <Content Include="Views\gestion_reserva_restaurante\_EditarReserva.cshtml" />
+    <Content Include="Views\gestion_diarios\gestion_diarios_ver.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

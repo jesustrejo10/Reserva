@@ -3,9 +3,7 @@
 <div class="heading-title">
     <h3><span>Diarios de Viaje</span></h3>
 </div>
-@*<div class="row text-center">
-        <a href="#"><button type="button" class="btn btn-default btn-lg"><i class="fa fa-book"></i>Crear un Diario de Viaje</button></a>
-    </div>*@
+
 <div class="panel">
     @using (Html.BeginForm("gestion_diarios_resultados", "gestion_diarios", null, FormMethod.Post, new { @id = "formBuscarDiarios", @class = "form-horizontal" }))
     {
@@ -112,8 +110,6 @@
                         <label>Ordenar por</label>
                         <label class="radio-inline"><input type="radio" value="0" name="orden">Recientes primero</label>
                         <label class="radio-inline"><input type="radio" value="1" name="orden">Antiguos primero</label>
-
-
                     </div>
                 </div>
             </div>
@@ -123,12 +119,19 @@
 
         </fieldset>
 
-        <div class="row text-center">
-            <div class="col-sm-12">
-                <button type="button" id="buscarDiarios" class="btn btn-primary"><i class="fa fa-search"></i>Buscar</button>
-            </div>
+        <div class="row text-center col-sm-12">
+            <button type="button" id="buscarDiarios" class="btn btn-primary">Buscar</button>
         </div>
-        <script>
+        <div class="row text-center col-sm-12">
+            <button type="button" id="crearDiario" class="btn btn-primary">Crear un Diario de Viaje</button>
+        </div>
+        <hr />
+
+
+    } <!--Fin FORM-->
+</div>
+
+<script>
             $("#buscarDiarios").click(function (e) { e.preventDefault(); cargarResultados(1); });      //Evento de click en el botón Buscar
             $("#formBuscarDiarios").submit(function (e) { e.preventDefault(); cargarResultados(1); }); //Evento general de submit (ej. presionar ENTER)
 
@@ -139,7 +142,7 @@
                 var contr = '/gestion_diarios/gestion_diarios_resultados';
                 var datos;
                 var metodo;
-                if (a == 0) {                    
+                if (a == 0) {
                     datos = '';
                     metodo = 'GET';
                 } else {
@@ -171,11 +174,10 @@
                 });
                 cargarResultados(0);
             });
-        </script>
-    } <!--Fin FORM-->
-</div>
+</script>
 
-<hr />
+
+
 
 <div id="resultados" class="container col-sm-12">
 
@@ -195,5 +197,4 @@
     </div><!-- /item -->
 
     <hr />
-
 </div>

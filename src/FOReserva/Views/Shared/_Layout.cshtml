@@ -22,6 +22,8 @@
     <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/bootstrap/js/bootstrap.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/bootstrap.daterangepicker/moment.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/bootstrap.datepicker/js/bootstrap-datepicker.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/imagesloaded/imagesloaded.pkgd.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/masonry.pkgd.min.js")"></script>
     <!-- CORE CSS -->
     <link href="@Url.Content("~/Content/assets/plugins/bootstrap/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/assets/plugins/bootstrap.datepicker/css/bootstrap-datepicker3.min.css")" rel="stylesheet" type="text/css" />
@@ -102,7 +104,7 @@
                                 </li>
                                 <li>
                                     <!-- INICIAR SESIÓN -->
-                                        @Html.ActionLink("INICIAR SESIÓN", "Perfil", "Perfil")                                
+                                        @Html.ActionLink("INICIAR SESIÓN", "Perfil", "Perfil")
                                 </li>
                                 <li>
                                     <!-- REGISTRARSE -->
@@ -190,7 +192,7 @@
         </div>
     </div><!-- /PRELOADER -->
     <!-- JAVASCRIPT FILES -->
-    <script type="text/javascript">var plugin_path = 'Content/assets/plugins/';</script>
+    <script type="text/javascript">var plugin_path = "@Url.Content("~/Content/assets/plugins/")";</script>
     <!-- JS DATATABLES -->
     <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/jquery.dataTables.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/dataTables.tableTools.min.js")"></script>
@@ -203,7 +205,7 @@
     @*<script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/bootstrap/js/bootstrap.min.js")"></script>*@
     @*<script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/bootstrap.datepicker/js/bootstrap-datepicker.min.js")"></script>*@
 
-    <!--CONTROLADOR DE LA VISTA PARCIAL-->
+<!--CONTROLADOR DE LA VISTA PARCIAL-->
     <script type="text/javascript" src="@Url.Content("~/Scripts/cargadorPestanas.js")"></script>
 
     <!-- PAGE LEVEL SCRIPTS -->
