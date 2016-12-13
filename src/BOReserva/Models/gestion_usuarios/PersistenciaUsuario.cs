@@ -124,6 +124,52 @@ namespace BOReserva.Models.gestion_usuarios
 
         }
 
+
+        public List<ListaRoles> ListarRoles()
+        {
+            DataTable resultado;
+            ListaRoles rol;
+            List<ListaRoles> lista;
+            try
+            {
+                resultado = EjecutarStoredProcedureTuplas(RecursoUsuario.ListarRoles);
+                Conectar();
+                if (resultado != null)
+                {
+                    lista = new List<ListaRoles>();
+                    foreach (DataRow row in resultado.Rows)
+                    {
+                        string usuRol = row[RecursoUsuario.RolUsuario].ToString();
+                        int usuIDRol = int.Parse(row[RecursoUsuario.RolIDUsuario].ToString());
+                        rol = new ListaRoles();
+                        rol.rolID = usuIDRol;
+                        rol.rolNombre = usuRol;
+                        lista.Add(rol);
+                    }
+                    return lista;
+                }
+
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.ArgumentoInvalido, ex);
+            }
+            catch (FormatException ex)
+            {
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.FormatoInvalido, ex);
+            }
+            catch (SqlException ex)
+            {
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.BDError, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.OtroError, ex);
+            }
+            return null;
+
+        }
+
         /// <summary>
         /// Borrar usuario por el Id de un usuario
         /// </summary>
@@ -241,7 +287,7 @@ namespace BOReserva.Models.gestion_usuarios
                 parametros.Add(parametro);
                 parametro = new Parametro(RecursoUsuario.ParametroCorreo, SqlDbType.VarChar, ((CUsuario)usuario).correoUsuario, false);
                 parametros.Add(parametro);
-                parametro = new Parametro(RecursoUsuario.ParametroContraseña, SqlDbType.VarChar, ((CUsuario)usuario).contraseñaUsuario, false);
+                parametro = new Parametro(RecursoUsuario.ParametroContraseña, SqlDbType.VarChar, ((CUsuario)usuario).contraseñaUsuario ?? String.Empty, false);
                 parametros.Add(parametro);
                 parametro = new Parametro(RecursoUsuario.ParametroRolID, SqlDbType.Int, ((CUsuario)usuario).rolUsuario.ToString(), false);
                 parametros.Add(parametro);

@@ -38,13 +38,16 @@ namespace BOReserva.Controllers
         public ActionResult M12_AgregarUsuario()
         {
            // Response.Write("<script>alert('" + "prueba" + "');</script>");
-            ViewBag.Roles = new SelectList(new List<SelectListItem>
-                {
-                    new SelectListItem {Text = "Administrador", Value = "1"},
-                    new SelectListItem {Text = "Normal", Value = "2"},
-                    new SelectListItem {Text = "Anonimo", Value = "3"},
-
-                }, "Value", "Text");
+            try { 
+                PersistenciaUsuario p = new PersistenciaUsuario();
+                List<ListaRoles> lista = p.ListarRoles();
+                ViewBag.Roles = new SelectList(lista, "rolID", "rolNombre");
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(ex.Message);
+            }
             return PartialView();
         }
 
@@ -53,20 +56,13 @@ namespace BOReserva.Controllers
         [HttpPost]
         public ActionResult M12_AgregarUsuario(AgregarUsuario usuario)
         {
-            ViewBag.Roles = new SelectList(new List<SelectListItem>
-                {
-                    new SelectListItem {Text = "Administrador", Value = "1"},
-                    new SelectListItem {Text = "Normal", Value = "2"},
-                    new SelectListItem {Text = "Anonimo", Value = "3"},
-
-                }, "Value", "Text");
             if (ModelState.IsValid) 
             {
                 PersistenciaUsuario p = new PersistenciaUsuario();
                 try
                 {
                     p.AgregarUsuario(usuario.toClass());
-                    TempData["message"] = "Usuario agregado Exitosamente";
+                    TempData["message"] = RecursoUsuario.MensajeAgregado;
                     //return RedirectToAction("M12_Index");
                 }
                 catch (ExceptionM12Reserva ex)
@@ -90,7 +86,7 @@ namespace BOReserva.Controllers
 
 
        [HttpPost]
-        public RedirectToRouteResult M12_ModificarUsuario(AgregarUsuario usuario)
+        public ActionResult M12_ModificarUsuario(AgregarUsuario usuario)
         {
 
             if (ModelState.IsValid)
@@ -99,23 +95,24 @@ namespace BOReserva.Controllers
                 try
                 {
                     p.ModificarUsuario(usuario.toClass(), usuario.idUsuario);
-                    TempData["message"] = "Usuario modificado Exitosamente";
-                    //return RedirectToAction("M12_ModificarUsuario");
-                    return RedirectToAction("M12_Index");
+                    TempData["message"] = RecursoUsuario.MensajeModificado;
+                    //return RedirectToAction("M12_Index");
                 }
                 catch (ExceptionM12Reserva ex)
                 {
-
-                    TempData["message"] = ex.Message;
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    return Json(ex.Message);
                     //return View("M12_ModificarUsuario", usuario);
                 }
                 catch (Exception ex)
                 {
-                    TempData["message"] = ex.Message;
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    return Json(ex.Message);
                     //return View("M12_ModificarUsuario", usuario);
                 }
-            }
-            return RedirectToAction("M12_Index");
+            } 
+            return Json("true");
+            //return RedirectToAction("M12_Index");
             //return PartialView("M12_Index", "_Layout");
         }
 
@@ -126,17 +123,19 @@ namespace BOReserva.Controllers
 
             if (usuID.HasValue)
             {
-                PersistenciaUsuario p = new PersistenciaUsuario();
                 try
                 {
+                    PersistenciaUsuario p = new PersistenciaUsuario();
                     AgregarUsuario  usuario = new AgregarUsuario(p.consultarUsuario(usuID.Value));
+                    p = new PersistenciaUsuario();
+                    List<ListaRoles> lista = p.ListarRoles();
+                    ViewBag.Roles = new SelectList(lista, "rolID", "rolNombre");
                     return PartialView("M12_ModificarUsuario", usuario);
                 }
                 catch (Exception ex)
                 {
-                    //ModelState.AddModelError("", ex.Message);
-                    TempData["message"] = ex.Message;
-                    return PartialView("M12_Index", "_Layout");
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    return Json(ex.Message);
                 }
             }
             else

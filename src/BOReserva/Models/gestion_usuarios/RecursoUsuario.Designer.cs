@@ -196,6 +196,15 @@ namespace BOReserva.Models.gestion_usuarios {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to M12_ListarRoles.
+        /// </summary>
+        internal static string ListarRoles {
+            get {
+                return ResourceManager.GetString("ListarRoles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to M12_ListarUsuarios.
         /// </summary>
         internal static string ListarUsuarios {

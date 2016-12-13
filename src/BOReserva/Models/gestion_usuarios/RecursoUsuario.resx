@@ -177,6 +177,10 @@
     <value>usuID</value>
     <comment>Usuario ID</comment>
   </data>
+  <data name="ListarRoles" xml:space="preserve">
+    <value>M12_ListarRoles</value>
+    <comment>Procedure que devuelve la lista de todos los roles del BO</comment>
+  </data>
   <data name="ListarUsuarios" xml:space="preserve">
     <value>M12_ListarUsuarios</value>
     <comment>Stored Procedure para listar todos los usuarios del BO</comment>
