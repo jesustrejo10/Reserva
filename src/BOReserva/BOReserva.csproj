@@ -280,7 +280,6 @@
     <Compile Include="Models\gestion_roles\CModulo_general.cs" />
     <Compile Include="Models\gestion_roles\CRoles.cs" />
     <Compile Include="Models\gestion_ruta_comercial\CAgregarRuta.cs" />
-    <Compile Include="Models\gestion_ruta_comercial\CBasededatos_ruta_comercial.cs" />
     <Compile Include="Models\gestion_ruta_comercial\CGestion_ruta.cs" />
     <Compile Include="Models\gestion_ruta_comercial\CRuta.cs" />
     <Compile Include="Models\gestion_usuarios\AgregarUsuario.cs" />
@@ -317,6 +316,7 @@
     <Compile Include="Servicio\Servicio_Vuelos\manejadorSQL_Vuelos.cs" />
     <Compile Include="Servicio\Servicio_Boletos\manejadorSQL_Boletos.cs" />
     <Compile Include="Servicio\Servicio_Hoteles\CManejadorSQL_Hoteles.cs" />
+    <Compile Include="Servicio\Servicio_Rutas\CManejadorSQL_Rutas.cs" />
     <Compile Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx.cs">
       <DependentUpon>GestionDeAutomoviles.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
