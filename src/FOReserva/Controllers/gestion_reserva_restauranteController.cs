@@ -89,6 +89,7 @@ namespace FOReserva.Controllers
                 //Se puede usar el mensaje de la excepcion "f.mensaje"
                 return View("error_conexion");
             }
+          
             catch (Exception g)
             {
                 ViewBag.Message = "Lo sentimos, la reserva no pudo ser realizada debido al siguiente error del sistema:" + g.Message;
