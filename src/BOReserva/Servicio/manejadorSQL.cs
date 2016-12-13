@@ -946,7 +946,7 @@ namespace BOReserva.Servicio
                 conexion = new SqlConnection(stringDeConexion);
                 conexion.Open();
                 String sql = "INSERT INTO Automovil VALUES ('" + vehiculo._matricula + "', '" + vehiculo._modelo + "', '" + vehiculo._fabricante + "', " + vehiculo._anio + ", " + vehiculo._kilometraje + ", " + vehiculo._cantpasajeros + ", '" + vehiculo._tipovehiculo +
-                    "', " + vehiculo._preciocompra + ", " + vehiculo._precioalquiler + ", " + vehiculo._penalidaddiaria + ", '" + vehiculo._fecharegistro + "', '" + vehiculo._color + "', " + 1 + ", '" + vehiculo._transmision + "', " + id + ")";
+                    "', " + vehiculo._preciocompra + ", " + vehiculo._precioalquiler + ", " + vehiculo._penalidaddiaria + ", CURRENT_TIMESTAMP, '" + vehiculo._color + "', " + 1 + ", '" + vehiculo._transmision + "', " + id + ")";
                 Debug.WriteLine(sql);
                 SqlCommand cmd = new SqlCommand(sql, conexion);
                 cmd.ExecuteNonQuery();
@@ -974,8 +974,8 @@ namespace BOReserva.Servicio
             {
                 conexion = new SqlConnection(stringDeConexion);
                 conexion.Open();
-                String sql = "UPDATE Automovil SET aut_modelo ='" + vehiculo._modelo + "', aut_fabricante = '" + vehiculo._fabricante + "', aut_anio = " + vehiculo._anio + ", aut_kilometraje = " + vehiculo._kilometraje + ", aut_cantpasajeros = " + vehiculo._cantpasajeros + ", aut_tipovehiculo = '" + vehiculo._tipovehiculo +
-                    "', aut_preciocompra = " + vehiculo._preciocompra + ", aut_precioalquiler = " + vehiculo._precioalquiler + ", aut_penalidaddiaria = " + vehiculo._penalidaddiaria + ", aut_fecharegistro = '" + vehiculo._fecharegistro + "', aut_color = '" + vehiculo._color + "', aut_transmision = '" + vehiculo._transmision + "', aut_fk_ciudad = " + id +
+                String sql = "UPDATE Automovil SET aut_kilometraje = " + vehiculo._kilometraje + ", aut_tipovehiculo = '" + vehiculo._tipovehiculo +
+                    "', aut_precioalquiler = " + vehiculo._precioalquiler + ", aut_penalidaddiaria = " + vehiculo._penalidaddiaria + ", aut_color = '" + vehiculo._color + "', aut_fk_ciudad = " + id +
                     " WHERE aut_matricula = '" + vehiculo._matricula + "'";
                 SqlCommand cmd = new SqlCommand(sql, conexion);
                 cmd.ExecuteNonQuery();

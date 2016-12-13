@@ -237,6 +237,8 @@
                                     alert(errorThrown);
                                 }
                             });
+                    } else if (data.includes("Reserva_Automovil")){
+                        alert("No se puede eliminar este vehículo porque tiene una reserva");
                     } else {
                         alert(data);
                     }
