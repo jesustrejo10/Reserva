@@ -1,1 +1,30 @@
-﻿
+﻿@Model FOReserva.Models.Revision.CRevision
+<<table class="table table-bordered table-hover" id="tablas-revision">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Mensaje</th>
+            <th>Tipo</th>
+            <th>Puntuacion</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Fecha</td>
+                <td>@item.Mensaje</td>
+                <td>@item.Tipo</td>
+                <td>@item.Puntuacion</td>
+                
+                
+                    
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
