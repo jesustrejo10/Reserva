@@ -26,11 +26,11 @@
                                         @if (@crucero._estatus == "activo")
                                         {
                                             <td class="crStatus"><i class="fa fa-circle started"></i></td>
-                                            <td class="crAcciones"><i class="fa fa-eye consultar_crucero"></i> <i class="fa fa-pencil"></i> <i class="fa fa-times"></i> <i class="fa fa-trash eliminar_crucero"></i></td>
+                                            <td class="crAcciones"><i class="fa fa-eye"></i> <i class="fa fa-pencil"></i> <i class="fa fa-times"></i> <i class="fa fa-trash eliminar_crucero"></i></td>
                                         }
                                         else {
                                             <td class="crStatus"><i class="fa fa-circle paused"></i></td>
-                                            <td class="crAcciones"><i class="fa fa-eye consultar_crucero"></i> <i class="fa fa-pencil"></i> <i class="fa fa-check"></i> <i class="fa fa-trash"></i></td>
+                                            <td class="crAcciones"><i class="fa fa-eye"></i> <i class="fa fa-pencil"></i> <i class="fa fa-check"></i> <i class="fa fa-trash"></i></td>
                                         }
                                     </tr>
 
@@ -82,32 +82,3 @@
         });
 </script>
 
-<script>
-    $(".consultar_crucero").click(function (e) {
-            e.preventDefault();
-            var crucero_id = $(this).closest('tr').attr('id');
-            $.ajax({
-                url: "gestion_cruceros/consultarCrucero",
-                data: {"id_crucero": crucero_id },
-                type: 'POST',
-                success: function (data) {
-                    $.ajax({
-                        url: '/gestion_cruceros/M24_ConsultarCrucero/' + crucero_id,
-                        type: 'GET',
-                        data: '',
-                        success: function (data, textStatus, jqXHR) {
-                            $("#contenido").empty();
-                            $("#contenido").append(data);
-                        },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            alert(errorThrown);
-                        }
-                    });
-                },
-                error: function (data) {
-                    console.log(data);
-                }
-            });
-        });
-</script>                
-        

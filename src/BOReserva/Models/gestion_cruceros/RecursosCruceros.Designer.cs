@@ -88,11 +88,11 @@ namespace BOReserva.Models.gestion_cruceros {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a M24_ConsultarCruceros.
+        ///   Busca una cadena traducida similar a M24_CambiarEstatusCabina.
         /// </summary>
-        internal static string ConsultarCruceros {
+        internal static string CambioEstatusCabinas {
             get {
-                return ResourceManager.GetString("ConsultarCruceros", resourceCulture);
+                return ResourceManager.GetString("CambioEstatusCabinas", resourceCulture);
             }
         }
         
