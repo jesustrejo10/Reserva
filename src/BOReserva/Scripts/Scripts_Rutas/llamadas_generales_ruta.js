@@ -77,7 +77,8 @@ $("#VisualizarRutasComerciales").click(function (e) {
         });
 
 });
-$("#m03EditarRutas").click(function (e) {
+
+$(".m03EditarRutas").click(function (e) {
     e.preventDefault();
     alert("Botón Editar");
     $.ajax({
@@ -109,5 +110,24 @@ $("#m03DetalleRutas").click(function (e) {
         error: function (jqXHR, textStatus, errorThrown) {
             alert(errorThrown);
         }
+    });
+});
+
+$(document).ready(function () {
+    //e.preventDefault();
+    $(".m03EditarRutas").click(function () {
+        var identificador = $(this).parent().parent().parent().attr("id");
+        jQuery.ajax({
+            type: "GET",
+            url: "/gestion_ruta_comercial/ModificarRutasComerciales",
+            data: { idRuta:identificador }//valor = es el nombre q recibes en el método es decir public ActionResult ModificarRutasComerciales(string valor)
+        }).done(function (data) {
+            //$("#sdssss").append(data);
+
+            $("#contenido").empty();
+            $("#contenido").append(data);
+        }).fail(function () {
+            alert("No Funcionó")
+        });
     });
 });

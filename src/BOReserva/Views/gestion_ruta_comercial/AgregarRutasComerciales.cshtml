@@ -60,7 +60,7 @@
                             @Html.DropDownListFor(m => m._destinoRuta, new SelectList(Enumerable.Empty<SelectListItem>(), "Value", "Text"),
                                 "Seleccione una ciudad destino", new { @class = "form-control", @id = "ciudadD", @style = "width: 100%;", @required = "true" })
                             <br />
-                            <label>Agregar distancia de la Ruta (KG) (<span style="color:red">*</span>):</label>
+                            <label>Agregar distancia de la Ruta (KM) (<span style="color:red">*</span>):</label>
                             @Html.TextBoxFor(m => m._distanciaRuta, null, new { @class = "form-control", @placeholder = "1200 KM", @id = "rutaDistancia", @min = 1, @required = "true"})
                             <br />                            
                             <div class="col-md-12" style="margin-top:10px;">
