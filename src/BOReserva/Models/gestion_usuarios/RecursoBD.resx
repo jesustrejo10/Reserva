@@ -134,11 +134,11 @@
     <comment>Código error en el parametro de un stored procedure</comment>
   </data>
   <data name="Error_Conexion" xml:space="preserve">
-    <value>No se pudo establecer una conexión con el servidor de datos</value>
+    <value>No se pudo establecer una conexion con el servidor de datos</value>
     <comment>Error de conexión con la base de datos</comment>
   </data>
   <data name="Error_Desconexión" xml:space="preserve">
-    <value>Ocurrio un error al cerrar la conexión con el servidor de datos</value>
+    <value>Ocurrio un error al cerrar la conexion con el servidor de datos</value>
     <comment>Error al intentar cerrar una conexión a la base de datos</comment>
   </data>
   <data name="Error_General" xml:space="preserve">
