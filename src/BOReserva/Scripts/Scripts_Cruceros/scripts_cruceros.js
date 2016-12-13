@@ -13,8 +13,8 @@
                 console.log(data[index])
           
                 var statusHTML = data[index]._estatus == "activo" ? "<td class='crStatus'><i class='fa fa-circle started'></i></td>"+
-                                        "<td class='crAcciones'><i class='fa fa-eye'></i> <i class='fa fa-pencil'></i> <i class='fa fa-times'></i> <i class='fa fa-trash eliminar_crucero'></i></td>" : "<td class='crStatus'><i class='fa fa-circle paused'></i></td>"+
-                                       "<td class='crAcciones'><i class='fa fa-eye'></i> <i class='fa fa-pencil'></i> <i class='fa fa-check'></i> <i class='fa fa-trash eliminar_crucero'></i></td>";
+                                        "<td class='crAcciones'><i class='fa fa-pencil'></i> <i class='fa fa-times cambioCabina'></i></td>" : "<td class='crStatus'><i class='fa fa-circle paused'></i></td>"+
+                                       "<td class='crAcciones'><i class='fa fa-pencil'></i> <i class='fa fa-check cambioCabina'></i></td>";
 
                 console.log(statusHTML)
                 html = "<tr id='"+data[index]._idCabina+"'><td style='text-align:center'>" + data[index]._nombreCabina + "</td><td style='text-align:center'>" + data[index]._precioCabina + "</td>" + statusHTML + "</tr>";

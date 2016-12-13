@@ -125,6 +125,10 @@
     <value>M24_AgregarCrucero</value>
     <comment>Agrega un nuevo Crucero al sistema</comment>
   </data>
+  <data name="CambioEstatusCabinas" xml:space="preserve">
+    <value>M24_CambiarEstatusCabina</value>
+    <comment>Cambia el estatus de una cabina y de sus camarotes</comment>
+  </data>
   <data name="ConsultarCruceros" xml:space="preserve">
     <value>M24_ConsultarCruceros</value>
     <comment>Consulta información de un crucero</comment>

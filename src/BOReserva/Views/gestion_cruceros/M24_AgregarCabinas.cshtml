@@ -113,5 +113,35 @@
             });
         });
     </script>
-}
+
+    <script>
+        $("#cambioCabina").click(function (e) {
+            e.preventDefault();
+            var cabina_id = $(this).closest('tr').attr('id');
+            console.log(crucero_id);
+            $.ajax({
+                url: "gestion_cruceros/cambioEstatusCabina",
+                data: { "id_cabina": cabina_id },
+                type: 'POST',
+                success: function (data) {
+                    $.ajax({
+                        url: '/gestion_cruceros/M24_AgregarCabinas',
+                        type: 'GET',
+                        data: '',
+                        success: function (data, textStatus, jqXHR) {
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        });
+    </script>
+                                }
 

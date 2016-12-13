@@ -18,15 +18,6 @@ namespace BOReserva.Controllers
             return PartialView();
         }
 
-        public ActionResult M24_ConsultarCrucero(int id)
-        {
-            CGestion_crucero crucero = new CGestion_crucero();
-            ConexionBD cbd = new ConexionBD();
-            crucero = cbd.consultarCrucero(id);
-            return PartialView();
-
-        }
-
         public ActionResult M24_AgregarCabinas()
         {
             ConexionBD cbd = new ConexionBD();
@@ -100,12 +91,11 @@ namespace BOReserva.Controllers
         }
 
         [HttpPost]
-        public JsonResult consultarCrucero(int id_crucero)
+        public JsonResult cambioEstatusCabina(int id_cabina)
         {
-            Console.WriteLine(id_crucero + "controller");
-            CGestion_crucero crucero = new CGestion_crucero();
-            crucero.ConsultarCrucero(id_crucero);
-            return (Json(crucero, JsonRequestBehavior.AllowGet));
+            CGestion_cabina cabina = new CGestion_cabina();
+            cabina.cambioEstatusCabina(id_cabina);
+            return (Json(true, JsonRequestBehavior.AllowGet));
         }
     }
 }

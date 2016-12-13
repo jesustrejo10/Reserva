@@ -79,6 +79,15 @@ namespace BOReserva.Models.gestion_cruceros {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to M24_CambiarEstatusCabina.
+        /// </summary>
+        internal static string CambioEstatusCabinas {
+            get {
+                return ResourceManager.GetString("CambioEstatusCabinas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to M24_ConsultarCruceros.
         /// </summary>
         internal static string ConsultarCruceros {
