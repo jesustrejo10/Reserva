@@ -41,6 +41,15 @@ namespace FOReserva.Controllers
             List<CDiarioModel> lista = manejador.buscarDiarios(model);
             return PartialView(lista);
         }
+
+        [HttpPost]
+        public ActionResult gestion_diarios_ver(int id_diario)
+        {
+            CDiarioModel model;
+            ManejadorSQLDiarios man = new ManejadorSQLDiarios();
+            model = man.buscarDiarios(id_diario);
+            return PartialView(model);
+        }
                 
     }
 }

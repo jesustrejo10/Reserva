@@ -19,8 +19,7 @@
             <thead>
                 <tr>
                     <th>Hotel</th>
-                    <th>Email de Contacto</th>
-                    <th>Habitacion Disponible</th>
+                    <th>Cant. Disponibles</th>
                     <th></th>
                 </tr>
             </thead>
@@ -29,7 +28,6 @@
                 {
                     <tr>
                         <td>@hotel.Nombre</td>
-                        <td>@hotel.EmailContacto</td>
                         <td>
                             <span class="label label-@(
                                 hotel.CantidadHabitacionesDisponible > 20  ? "success" :
@@ -73,12 +71,13 @@
                     url: "/gestion_reserva_habitaciones/realizar_reserva",
                     data: reserva,
                     type: 'POST',
-                    success: function (data) {
+                    success: function (proceso) {
                         console.log(0)
-                        if (data){
-                            alert("Fecilidades!");
+                        if (proceso.CulminoCorrectamente) {
+                            alert(proceso.Mensaje);
+                            cargarContenido('#CI', 'get', '/gestion_reserva_habitaciones/detalle_reserva', { "Codigo": proceso.Referencia })
                         }else{
-                            alert("No es posible realizar la reserva.");
+                            alert(proceso.Mensaje);
                         }
 
                     }
@@ -104,6 +103,11 @@
                 });
 
                 var oTable = table.dataTable({
+                    "columns": [
+                        { "width": "70%" },
+                        null,
+                        null
+                    ],
                     "language": {
                         "lengthMenu": "_MENU_",
                         "zeroRecords": "No se encontraron Hoteles.",
@@ -112,6 +116,7 @@
                         "infoFiltered": "",
                         "search": ""
                     },
+                    "bDestroy": true,
                     "order": [
                         [0, 'asc']
                     ],

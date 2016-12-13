@@ -1,4 +1,4 @@
-﻿using FOReserva.Models.Hoteles;
+using FOReserva.Models.Hoteles;
 using FOReserva.Models.Usuarios;
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ namespace FOReserva.Models.ReservaHabitacion
 
     public class CReservaHabitacion
     {
-        public enum EstadoReserva { Ocupando, Activo, Expiro, Cancelo }
+        public enum EstadoReserva { Ocupando, Activo, Expiro, Cancelo, Revocado }
 
         public Hotel Hotel { get; set; }
         public Usuario Usuario { get; set; }
@@ -53,21 +53,58 @@ namespace FOReserva.Models.ReservaHabitacion
             return null;
         }
 
-        public static bool GenerarReserva(Cvista_ReservarHabitacion reserva)
+        public static CResultadoProceso GenerarReserva(Cvista_ReservarHabitacion reserva)
         {
             try
             {
                 var resultado = from datos in DB.Singleton().M20_GenerarReservaHabitacion(reserva.HotId, reserva.UsuId, reserva.CantidadDias, reserva.FechaLlegada)
-                                select datos;
+                                select new CResultadoProceso {
+                                   CulminoCorrectamente = datos.Estatus == 0,
+                                   Estatus = datos.Referencia ?? -1,
+                                   Mensaje = datos.Mensaje,
+                                   Referencia = datos.Referencia ?? 0
+                                };
 
-                return resultado.First().Estatus == 0;
+                return resultado.First();
             }
             catch (Exception ex)
             {
                 Utilidad.RegistrarLog(new ReservaHabitacionException("Ocurrio un problema al obtener los hoteles.", ex));
             }
-            return false;
+            return new CResultadoProceso {
+                CulminoCorrectamente = false,
+                Mensaje = "No se pudo ejecutar su solicitud.",
+                Referencia = 0
+            };
         }
+
+        public static CResultadoProceso CancelarReserva(CReservaHabitacion reserva)
+        {
+            try
+            {
+                var resultado = from datos in DB.Singleton().M20_ActualizarEstadoReservaHabitacion(reserva.Codigo, (int)EstadoReserva.Cancelo)
+                                select new CResultadoProceso
+                                {
+                                    CulminoCorrectamente = datos.Estatus == 0,
+                                    Estatus = datos.Referencia ?? -1,
+                                    Mensaje = datos.Mensaje,
+                                    Referencia = datos.Referencia ?? 0
+                                };
+
+                return resultado.First();
+            }
+            catch (Exception ex)
+            {
+                Utilidad.RegistrarLog(new ReservaHabitacionException("Ocurrio un problema al obtener los hoteles.", ex));
+            }
+            return new CResultadoProceso
+            {
+                CulminoCorrectamente = false,
+                Mensaje = "No se pudo ejecutar su solicitud.",
+                Referencia = 0
+            };
+        }
+
 
         public static List<CCiudad> ObtenerCiudades()
         {

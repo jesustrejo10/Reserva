@@ -181,9 +181,8 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li id="agregarRestaurantes"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar Nuevo Restaurante</a></li>
-                            <li id="verRestaurantes"><a href="#"><i class="fa fa-eye"></i>Ver Restaurantes</a></li>
-                            <!--<li id="editarRestaurantes"><a href="#"><i class="fa fa-edit"></i>Editar Restaurantes</a></li>-->
+                            <li id="agregarRestaurantes"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar Restaurante</a></li>
+                            <li id="verRestaurantes"><a href="#"><i class="fa fa-eye"></i>Visualizar Restaurantes</a></li>
                         </ul>
                     </li>
                     <!-- FIN DE MODULO DE RESTAURANTES -->
@@ -230,8 +229,8 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li id="gestionUsuarios"><a href="/gestion_usuarios/M12_index"><i class="fa fa-plus-square-o"></i>Consultar</a></li>
-                            <li id="agregarUsuarios"><a href="/gestion_usuarios/M12_AgregarUsuario"><i class="fa fa-plus-square-o"></i>Agregar</a></li>
+                            <li id="agregarUsuarios"><a href="#">Agregar</a></li>
+                            <li id="indexUsuarios"><a href="#">Visualizar</a></li>
                         </ul>
                     </li>
                     <!-- FIN DE MODULO DE GESTION DE USUARIOS -->
@@ -251,13 +250,17 @@
                     <!-- FIN DE MODULO DE GESTION DE ROLES -->
                     <!-- MODULO DE CRUCEROS -->
                     <li class="treeview">
-                        <a href="modules/gestion_cruceros/M24_GestionCruceros.html">
+                        <a href="#">
                             <i class="fa fa-ship"></i> <span>Gestión de Cruceros</span> <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="modules/gestion_cruceros/M24_GestionCruceros.html"><i class="fa fa-plus-square-o"></i>Gestionar</a></li>
+                            <li id="m24_listarcrucero"><a href="#"> Visualizar </a></li>
+                            <li id="m24_agregarcrucero"><a href="#"> Agregar Crucero </a></li>
+                            <li id="m24_agregarcabina"><a href="#"> Agregar Cabina </a></li>
+                           <!-- <li id="m24_consultarcrucero"><a href="#"> Consultar </a></li>
+                            <li id="m24_modificarcrucero"><a href="#"> Modificar </a></li>-->
                         </ul>
                     </li>
                     <!-- FIN DE MODULO DE CRUCEROS -->
@@ -270,9 +273,7 @@
                         </a>
                         <ul class="treeview-menu">
                             <li id="crearhotel"><a href="#"><i class="fa fa-plus-circle"></i>Crear Hotel</a></li>
-                            <li id="consultarhotel"><a href="#"><i class="fa fa-search"></i>Consultar Hotel</a></li>
-                            <li id="modificarhotel"><a href="#"><i class="fa fa-pencil"></i>Modificar Hotel</a></li>
-                            <li id="desactivarhotel"><a href="#"><i class="fa fa-remove"></i>Desactivar Hotel</a></li>
+                            <li id="consultarhotel"><a href="#"><i class="fa fa-search"></i>Visualizar Hoteles</a></li>
                     <!-- MODULO DE BOLETOS AEREOS Y CHECK-IN -->
                 </ul>
             
@@ -542,6 +543,9 @@
 
     <!--SCRIPTS PARA GESTION DE AVIONES-->
     <script type="text/javascript" src="@Url.Content("~/Scripts/Scripts_Aviones/llamadas_generales.js")"></script>
+    
+    <!--SCRIPTS PARA GESTION DE CRUCEROS-->
+    <link href="~/Content/M24_css/style_module.css" rel="stylesheet" />
 
 
 

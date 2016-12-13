@@ -1,8 +1,13 @@
-﻿@model IEnumerable<BOReserva.Models.gestion_usuarios.ListarUsuario> 
-@{
-
-    Layout = "~/Views/gestion_usuarios/_Layout.cshtml";
+﻿@{
+    var message = TempData["message"] ?? string.Empty;
 }
+<script>
+    var message = '@message';
+    if (message)
+        alert(message);
+</script>
+@model IEnumerable<BOReserva.Models.gestion_usuarios.ListarUsuario> 
+
 
 <section class="content">
     <form role="form" name="consultar" id="consultar">
@@ -58,7 +63,7 @@
                             <tbody>
                                 @foreach (BOReserva.Models.gestion_usuarios.ListarUsuario p in Model)
                                 {
-                                    <tr>
+                                    <tr id="@p._id">
                                         <td>@p._nombre</td>
                                         <td>@p._apellido</td>
                                         <td>@p._correo</td>
@@ -66,12 +71,24 @@
                                         <td>@p._rol</td>
                                         <td>@p._activo</td>
                                         <td>
-                                            <a href="@Url.Action("ModificarUsuario", "gestion_usuarios", new { usuID = p._id })">
+                                            <a href="#" title="Modificar" id="Modificar"><i class="fa fa-pencil modificar"></i></a>
+                                            <a href="#" title="Eliminar" id="Eliminar"><i class="fa fa-times eliminar"></i></a>
+                                            @{
+                                                if (p._activo.Equals("Activo"))
+                                                {
+                                                    <a href="#" title="Inactivar Usuario" ><i class="fa fa-toggle-on desactivar"></i></a>
+                                                }
+                                                if (p._activo.Equals("Inactivo"))
+                                                {
+                                                    <a href="#" title="Activar Usuario"><i class="fa fa-toggle-off activar"></i></a>
+                                                }
+                                            }
+                                           <!--<a href="@Url.Action("ModificarUsuario", "gestion_usuarios", new { usuID = p._id })">
                                                 <i class="fa fa-pencil modificar" title="Modificar"></i>
-                                            </a>
-                                            <a href="@Url.Action("EliminarUsuario", "gestion_usuarios", new { usuID = p._id })">
+                                            </a>-->
+                                            <!--<a href="@Url.Action("EliminarUsuario", "gestion_usuarios", new { usuID = p._id })">
                                                 <i class="fa fa-times deshabilitar" title="Eliminar"></i>
-                                            </a>
+                                            </a>-->
                                         </td>
                                     </tr>
                                 }
@@ -88,11 +105,79 @@
 </form>
 </section>
 
-@{
-    if (TempData["message"] != null)
-    {
-        <script type="text/javascript">
-        alert(@Html.Raw(Json.Encode(TempData["message"])));
-        </script>
-    }
-}
+
+<script type="text/javascript">
+
+    
+            $(".modificar").click(function () {
+                console.log("hola");
+                var id = $(this).parent().parent().parent().attr("id");
+                jQuery.ajax({
+                    type: "GET",
+                    url: "gestion_usuarios/ModificarUsuario",
+                    data: { usuID: id }
+                }).done(function (data) {
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                }).fail(function () {
+
+                });
+
+
+            });
+            
+            $(".eliminar").click(function () {
+                console.log("hola");
+                var id = $(this).parent().parent().parent().attr("id");
+                jQuery.ajax({
+                    type: "GET",
+                    url: "gestion_usuarios/EliminarUsuario",
+                    data: { usuID: id }
+                }).done(function (data) {
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                }).fail(function () {
+                    alert(errorThrown);
+                });
+
+                
+            });
+
+            $(".desactivar").click(function () {
+                console.log("hola");
+                var id = $(this).parent().parent().parent().attr("id");
+                var estado = "Activo";
+                jQuery.ajax({
+                    type: "GET",
+                    url: "gestion_usuarios/CambiarStatus",
+                    data: { usuID: id , activo: estado }
+                }).done(function (data) {
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                }).fail(function () {
+                    alert(errorThrown);
+                });
+
+
+            });
+
+            $(".activar").click(function () {
+                console.log("hola");
+                var id = $(this).parent().parent().parent().attr("id");
+                var estado = "Inactivo";
+                jQuery.ajax({
+                    type: "GET",
+                    url: "gestion_usuarios/CambiarStatus",
+                    data: { usuID: id, activo: estado }
+                }).done(function (data) {
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                }).fail(function () {
+                    alert(errorThrown);
+                });
+
+
+            });
+  
+</script>
+

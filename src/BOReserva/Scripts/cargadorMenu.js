@@ -1,20 +1,18 @@
-﻿jQuery(document).ready(function () {
+jQuery(document).ready(function () {
 
     // INICIO DE AVIONES
     $("#gestionAviones").click(function (e) {
         e.preventDefault();
         var url = '/gestion_aviones/M02_GestionAviones';
-        var method = 'GET';
+        var method = 'GET'; 
         var data = '';
-
         $.ajax(
             {
                 url: url,
                 type: method,
                 data: data,
                 success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty()
+                    $("#contenido").empty();
                     $("#contenido").append(data);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -27,35 +25,31 @@
         var url = '/gestion_aviones/M02_AgregarAvion';
         var method = 'GET';
         var data = '';
-
         $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-    });
+           {
+               url: url,
+               type: method,
+               data: data,
+               success: function (data, textStatus, jqXHR) {
+                   $("#contenido").empty();
+                   $("#contenido").append(data);
+               },
+               error: function (jqXHR, textStatus, errorThrown) {
+                   alert(errorThrown);
+               }
+           }); 
+    });    
     $("#m02_VisualizarAvion").click(function (e) {
         e.preventDefault();
         var url = '/gestion_aviones/M02_VisualizarAviones';
         var method = 'GET';
         var data = '';
-
         $.ajax(
             {
                 url: url,
                 type: method,
                 data: data,
                 success: function (data, textStatus, jqXHR) {
-
                     $("#contenido").empty();
                     $("#contenido").append(data);
                 },
@@ -63,41 +57,32 @@
                     alert(errorThrown);
                 }
             });
-
-    });
-    //FIN DE AVIONES
-
-    //INICIO DE RUTAS
+    }); 
+    //FIN DE AVIONES    //INICIO DE RUTAS
     $("#m03AgregarRuta").click(function (e) {
         e.preventDefault();
         var url = '/gestion_ruta_comercial/AgregarRutasComerciales';
         var method = 'GET';
         var data = '';
-
         $.ajax(
             {
                 url: url,
                 type: method,
                 data: data,
                 success: function (data, textStatus, jqXHR) {
-
                     $("#contenido").empty();
                     $("#contenido").append(data);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     alert(errorThrown);
                 }
-            });
+            });    });
 
-    });
     $("#m03VisualizarRutas").click(function (e) {
-
-
         e.preventDefault();
         var url = '/gestion_ruta_comercial/VisualizarRutasComerciales';
         var method = 'GET';
         var data = '';
-
         $.ajax(
             {
                 url: url,
@@ -106,51 +91,44 @@
                 success: function (data, textStatus, jqXHR) {
                     $("#contenido").empty();
                     $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
+                },                error: function (jqXHR, textStatus, errorThrown) {
                     alert(errorThrown);
                 }
             });
-
     });
-    //FIN DE RUTAS
-
-    //INICIO AUTOMOVILES
+    //FIN DE RUTAS 
+    //INICIO AUTOMOVILES 
     $("#m08AgregarAutomovil").click(function (e) {
         e.preventDefault();
         var url = '/gestion_automoviles/M08_AgregarAutomovil';
         var method = 'GET';
         var data = '';
-
-        $.ajax(
+        $.ajax( 
             {
                 url: url,
                 type: method,
                 data: data,
                 success: function (data, textStatus, jqXHR) {
-
                     $("#contenido").empty();
                     $("#contenido").append(data);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
+                      alert(errorThrown);
                 }
             });
-
     });
+
     $("#m08VisualizarAutomoviles").click(function (e) {
         e.preventDefault();
         var url = '/gestion_automoviles/M08_VisualizarAutomoviles';
         var method = 'GET';
         var data = '';
-
         $.ajax(
             {
                 url: url,
                 type: method,
                 data: data,
                 success: function (data, textStatus, jqXHR) {
-
                     $("#contenido").empty();
                     $("#contenido").append(data);
                 },
@@ -158,7 +136,6 @@
                     alert(errorThrown);
                 }
             });
-
     });
     //FIN DE AUTOMOVILES
 
@@ -169,7 +146,6 @@
         var url = '/gestion_comida_vuelo/M06_AgregarComida';
         var method = 'GET';
         var data = '';
-
         $.ajax(
             {
                 url: url,
@@ -184,21 +160,19 @@
                     alert(errorThrown);
                 }
             });
-    });
+    });
     $("#editarComida").click(function (e) {
         //M06_EditarComida
         e.preventDefault();
         var url = '/gestion_comida_vuelo/M06_EditarComida';
         var method = 'GET';
         var data = '';
-
         $.ajax(
             {
                 url: url,
                 type: method,
                 data: data,
                 success: function (data, textStatus, jqXHR) {
-
                     $("#contenido").empty();
                     $("#contenido").append(data);
                 },
@@ -206,14 +180,13 @@
                     alert(errorThrown);
                 }
             });
-    });
+    });
     $("#gestionComidaVuelo").click(function (e) {
         //M06_AgregarPorVuelo
         e.preventDefault();
         var url = '/gestion_comida_vuelo/M06_AgregarPorVuelo';
         var method = 'GET';
         var data = '';
-
         $.ajax(
             {
                 url: url,
@@ -251,9 +224,9 @@
                 }
             });
     });
-    $("#modificarhotel").click(function (e) {
+    $("#consultarhotel").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_hoteles/M09_GestionHoteles_ModificarHotel';
+        var url = '/gestion_hoteles/M09_GestionHoteles_Visualizar';
         var method = 'GET';
         var data = '';
 
@@ -263,6 +236,7 @@
                 type: method,
                 data: data,
                 success: function (data, textStatus, jqXHR) {
+
                     $("#contenido").empty();
                     $("#contenido").append(data);
                 },
@@ -270,6 +244,30 @@
                     alert(errorThrown);
                 }
             });
+
+    });
+
+    $("#consultarhotel").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_hoteles/M09_GestionHoteles_Visualizar';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+
     });
     // FIN DE HOTELES
 
@@ -352,7 +350,6 @@
     $("#agregarPaquete").click(function (e) {
         e.preventDefault();
         var url = '/gestion_ofertas/M11_AgregarPaquete';
-
     });
     $("#modificarPaquete").click(function (e) {
         e.preventDefault();
@@ -386,23 +383,6 @@
     $("#verRestaurantes").click(function (e) {
         e.preventDefault();
         var url = '/gestion_restaurantes/M10_GestionRestaurantes_Ver';
-        var method = 'GET';
-        var data = '';
-
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
     });
     $("#agregarRestaurantes").click(function (e) {
         e.preventDefault();
@@ -449,6 +429,74 @@
                 }
             });
     });
+
+        $("#m24_agregarcrucero").click(function (e) {
+            e.preventDefault();
+            var url = '/gestion_cruceros/M24_GestionCruceros';
+            var method = 'GET';
+            var data = '';
+
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+        });
+
+        $("#m24_listarcrucero").click(function (e) {
+            e.preventDefault();
+            var url = '/gestion_cruceros/M24_ListarCruceros';
+            var method = 'GET';
+            var data = '';
+
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+        });
+
+        $("#m24_agregarcabina").click(function (e) {
+            e.preventDefault();
+            var url = '/gestion_cruceros/M24_AgregarCabinas';
+            var method = 'GET';
+            var data = '';
+            console.log("x");
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+        });
+
+
     $("#m05CheckIn").click(function (e) {
         e.preventDefault();
         var url = '/gestion_check_in/M05_CheckIn';
@@ -476,7 +524,28 @@
     //M13 ROLES
     $("#m13VisualizarRol").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_ofertas/M11_VisualizarOferta';
+        var url = '/gestion_roles/M13_VisualizarRol';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+    $("#m13AgregarRol").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_roles/M13_AgregarRol';
         var method = 'GET';
         var data = '';
 
@@ -497,5 +566,51 @@
     });
     //FIN M13 ROLES
 
+    // Comienzo M12 Usuarios
+    $("#indexUsuarios").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_usuarios/M12_Index';
+        var method = 'GET';
+        var data = '';
 
-});
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
+    $("#agregarUsuarios").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_usuarios/M12_AgregarUsuario';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+
+    });
+    //Fin M12 Usuarios
+
+});
