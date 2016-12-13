@@ -14,6 +14,7 @@
                 <!-- NOMBRE  Y  VALIDACIONES-->
                 <div class="form-group">
                     @Html.HiddenFor(model => model.Id)
+                    @Html.HiddenFor(model => model.Restaurant.Name)
                     <label>A nombre de: </label>
                     @Html.TextBoxFor(model => model.Name, new { @id = "name_client"})
                     @*<input type="text" name="c_name_client" id="c_name_client" value="" class="form-control" data-format="" data-lang="en" data-rtl="false" placeholder="Ingrese el nombre" required>*@
@@ -49,7 +50,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" id="aceptar_modificar" value="0" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+                <button type="button" id="aceptar_modificar" value="@Model.Id" class="btn btn-success" data-dismiss="modal">Aceptar</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
             </div>
         </div>
