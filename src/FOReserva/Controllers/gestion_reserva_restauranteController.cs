@@ -241,7 +241,7 @@ namespace FOReserva.Controllers
                 return null;
             }
 
-            string botones = "<a href='#' id='icon_edit' data-action='/gestion_reserva_restaurante/_EditarReserva/" + tmp.Id + "'" + "class='update list-icon' value='" + tmp.Id + "'>" + "<i class='fa fa fa-pencil-square'></i></a>" + "<a href='#' class='delete list-icon' value='" + tmp.Id + "'>" + "<i class='fa fa-times-circle'></i></a>";
+            string botones = "<a href='#' id='icon_edit' data-action='/gestion_reserva_restaurante/_EditarReserva/" + tmp.Id + "'" + "class='update list-icon' value='" + tmp.Id + "'>" + "<i class='fa fa fa-pencil-square'></i></a>" + "<a href='#' class='delete list-icon' value='" + tmp.Id + "'style='margin-left: 4px;'>" + "<i class='fa fa-times-circle'></i></a>";
             string fila = "<td>" + tmp.Id + "</td>" + "<td>" + tmp.Restaurant.Name + "</td>" + "<td class='reserv_name' value='"
                 + tmp.Name + "'>" + tmp.Name + "</td>" + "<td class='reserv_date' value='" + tmp.Date + "'>" + tmp.Date + "</td>"
                 + "<td class='reserv_time' value='" + tmp.Time + "'>" + tmp.Time + "</td>" + "<td class='reserv_count' value='" + tmp.Count + "'>"
