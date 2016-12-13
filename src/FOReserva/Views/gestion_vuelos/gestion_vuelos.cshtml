@@ -1,12 +1,10 @@
-﻿@model FOReserva.Models.Vuelos.Cvista_Vuelos
+﻿@model FOReserva.Models.ReservaBoleto.CBuscarVuelo;
 
 <div class="heading-title">
     <h3><span>Vuelos</span></h3>
 </div>
 
-@*<form class="validate" action="php/contact.php" method="post" enctype="multipart/form-data" data-success="Sent! Thank you!" data-toastr-position="top-right">*@
-
-@using (Html.BeginForm("Index", "gestion_reserva_boleto", FormMethod.Post, new { @id = "formBuscarVuelos", @class = "form-horizontal" }))
+@using (Html.BeginForm("buscarVuelos", "gestion_reserva_boleto", null, FormMethod.Post, new { @id = "formBuscarVuelo", @class = "form-horizontal" }))
 {
   <fieldset>
         <!-- required [php action request] -->
@@ -16,11 +14,13 @@
             <div class="form-group">
                 <div class="col-md-6 col-sm-6">
                     <label>Origen</label>
-                    <input type="text" name="origen" value="" class="form-control required">
+                    @Html.DropDownListFor(m => m.SelectedCiudadIdOrigen, Model.CiudadesOrigen, new { @class = "form-control select2", @id = "vuelta" })
+                    @*<input type="text" name="origen" value="" class="form-control required">*@
                 </div>
                 <div class="col-md-6 col-sm-6">
                     <label>Destino</label>
-                    <input type="text" name="destino" value="" class="form-control required">
+                    @Html.DropDownListFor(m => m.SelectedCiudadIdOrigen, Model.CiudadesOrigen, new { @class = "form-control select2", @id = "vuelta" })
+                    @*<input type="text" name="destino" value="" class="form-control required">*@
                 </div>
             </div>
         </div>

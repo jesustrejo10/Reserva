@@ -14,7 +14,7 @@ namespace FOReserva.Controllers
 
         public ActionResult gestion_vuelos()
         {
-            Cvista_Vuelos model = new Cvista_Vuelos();
+            Models.ReservaBoleto.CBuscarVuelo model = new Models.ReservaBoleto.CBuscarVuelo();
             return PartialView(model);
         }
 

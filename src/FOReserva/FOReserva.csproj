@@ -252,8 +252,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelDBReserva.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ReservaBoleto\CBoleto.cs" />
+    <Compile Include="Models\ReservaBoleto\CLugar.cs" />
     <Compile Include="Models\ReservaBoleto\CModeloBoleto.cs" />
+    <Compile Include="Models\ReservaBoleto\CPasajero.cs" />
     <Compile Include="Models\ReservaBoleto\CReservacion_Boleto.cs" />
+    <Compile Include="Models\ReservaBoleto\CVuelo.cs" />
     <Compile Include="Models\ReservaHabitacion\CCiudad.cs" />
     <Compile Include="Models\Hoteles\CHotel.cs" />
     <Compile Include="Models\ReservaHabitacion\CReservaHabitacion.cs" />

@@ -10,9 +10,8 @@ namespace FOReserva.Controllers
 {
     public class gestion_reserva_boletoController : Controller
     {
-        //
+
         private ManejadorSQLReservaBoleto _manejador = new ManejadorSQLReservaBoleto();
-        // GET: /gestion_reserva_boleto/
 
         public ActionResult busqueda_parametros()
         {
@@ -33,17 +32,32 @@ namespace FOReserva.Controllers
 
             return PartialView();
         }
+
         public ActionResult busqueda_resultados()
         {
             return PartialView();
         }
+
         public ActionResult boleto_datos()
         {
             return PartialView();
         }
+
         public ActionResult boleto_reserva()
         {
             return PartialView();
+        }
+
+        [HttpPost]
+        public JsonResult buscarVuelos(CBuscarVuelo model)
+        {
+            String fecha_ida = model._ida;
+            String fecha_vuelta = model._vuelta;
+            int sel = model.SelectedCiudadIdOrigen;
+            int sel2 = model.SelectedCiudadIdDestino;
+
+            return (Json(true, JsonRequestBehavior.AllowGet));
+
         }
     }
 }
