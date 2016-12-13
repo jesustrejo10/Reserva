@@ -7,23 +7,31 @@
     }
     else
     {
-        foreach (var item in Model)
+        using (Html.BeginForm("gestion_diarios_ver", "gestion_diarios", FormMethod.Post))
         {
-            using (Html.BeginForm("gestion_diarios_ver", "gestion_diarios", FormMethod.Post))
-            {                
-            <div class="row">
-                <div class="col-md-2">
-                    <img src="@Url.Content("~/Content/assets/images/noimage.jpg")" class="img-responsive img-thumbnail" alt="company logo">
+            <input type="hidden" name="id_diario" id="id_diario" value="0" />
+            foreach (var item in Model)
+            {
+                <div class="row">
+                    <div class="col-md-2">
+                        <img src="@Url.Content("~/Content/assets/images/noimage.jpg")" class="img-responsive img-thumbnail" alt="company logo">
+                    </div>
+                    <div class="col-md-8">
+                        <h4 class="margin-bottom-10"><font color="black">@item.Nombre</font></h4>
+                        <p>@item.Descripcion</p>
+                        <input type="submit" id="@item.Id" class="btn btn-default diar" value="Ver el Diario Completo" />
+                        <a href="#" class="text-success"><i class="fa fa-thumbs-up"></i> Like</a> | <a href="#" class="text-danger"><i class="fa fa-thumbs-down"></i> Dislike</a>
+                    </div>
                 </div>
-                <div class="col-md-8">
-                    <h4 class="margin-bottom-10"><font color="black">@item.Nombre</font></h4>
-                    <p>@item.Descripcion</p>
-                    <button type="submit" id="@item.Id" class="btn btn-default">Ver el Diario Completo</button>
-                    <a href="#" class="text-success"><i class="fa fa-thumbs-up"></i> Like</a> | <a href="#" class="text-danger"><i class="fa fa-thumbs-down"></i> Dislike</a>
-                </div>
-            </div>
             <hr />
             }
+            <script>
+                $('.diar').mouseenter(function () {
+                    var id = $(this).attr('id');
+                    $('#id_diario').val(id);
+                    console.log($('#id_diario').val());
+                });
+            </script>
         }
     }
 }

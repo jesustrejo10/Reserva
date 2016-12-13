@@ -1,20 +1,17 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace FOReserva.Models.Revision
 {
-    /// <summary>
-    /// Clase Revision
-    /// </summary>
-    public class CRevision : BaseEntity
-    {        
-        private int _puntuacion;
+    public class MostrarRevision 
+    {
+        private DateTime _fecha;
         private string _mensaje;
         private int _tipo;
-        private DateTime _fecha;
-        private CRevisionValoracion _valoracion;
+        private int _puntuacion;
+
 
         /// <summary>
         /// Builder Revision
@@ -23,24 +20,24 @@ namespace FOReserva.Models.Revision
         /// <param name="name">Name Base</param>
         /// <param name="fecha">Fecha Revision</param>
         /// <param name="mensaje">Mensaje en Revision</param>
+        /// <param name="tipo">Tipo Revision</param>
         /// <param name="puntuacion">Puntuacion de la Revision</param>
         /// <param name="positivo">Valoraciones positivos</param>
-        /// <param name="negativo">Valoraciones negativas</param>
-        /// <param name="tipo">Tipo Revision</param>
-        public CRevision(int id, string name, DateTime fecha, string mensaje, int puntuacion, int tipo)
-            : base(id, name)
+        /// <param name="negativo">Valoraciones negativas</param>        
+        public MostrarRevision(DateTime fecha, string mensaje, int tipo, int puntuacion)
+            
         {
-             this._fecha = fecha;
-             this._mensaje = mensaje;
-             this._puntuacion = puntuacion;
-             this._tipo = tipo;
-             this._valoracion = new CRevisionValoracion(0,0);
+            this._fecha = fecha;
+            this._mensaje = mensaje;
+            this._tipo = tipo;
+            this._puntuacion = puntuacion;
+
         }
 
         /// <summary>
         /// Builder Revision Vacio
         /// </summary>
-        public CRevision() : base(){}
+        public MostrarRevision() : base() { }
 
         public DateTime Fecha
         {

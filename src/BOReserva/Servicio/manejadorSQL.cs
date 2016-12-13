@@ -952,6 +952,8 @@ namespace BOReserva.Servicio
                     lector2.Close();
                     //Cerrar la conexion
                     conexion2.Close();
+                    //Agrego los modulos sobre los que el rol tiene permiso
+                    _rol.Menu = consultarLosModulosRol(_rol);
                     //Agrego rol a la lista de roles
                     _roles.Add(_rol);
                 }
@@ -970,6 +972,179 @@ namespace BOReserva.Servicio
                 throw e;
             }
         }
+
+
+
+        //Procedimiento del Modulo 13 para retornar lista de los modulos generales de cada rol
+        public CListaGenerica<CModulo_general> consultarLosModulosRol(CRoles _rol)
+        {
+            CListaGenerica<CModulo_general>
+                modulo_general = new CListaGenerica<CModulo_general>
+                    ();
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //Abrir la conexion
+                conexion.Open();
+                //query es un string que me devolvera la consulta
+                String query = "SELECT mod_gen_nombre as Modulo_Detallado FROM modulo_general ,rol,rol_modulo_detallado,modulo_detallado  where rol_id=fk_rol_id and fk_mod_det_id=mod_det_id and fk_mod_gen_id=mod_gen_id and rol_nombre='" + _rol.Nombre_rol + "'";
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+                while (lector.Read())
+                {
+                    var entrada = new CModulo_general();
+                    entrada.Nombre = lector.GetSqlString(0).ToString();
+                    modulo_general.agregarElemento(entrada);
+                }
+                //cierro el lector
+                lector.Close();
+                //Cerrar la conexion
+                conexion.Close();
+                return modulo_general;
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        //Metodo para quitarle todos los permisos aun usuario
+        public Boolean quitarPermisos(CRoles model)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //Abrir la conexion
+                conexion.Open();
+                //SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "DELETE FROM Rol_Modulo_Detallado WHERE fk_rol_id in (SELECT rol_id from Rol where rol_nombre='" + model.Nombre_rol + "')";
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior
+                SqlDataReader lector = query.ExecuteReader();
+                //cierro el lector
+                lector.Close();
+                //Cierro la conexion
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+        }
+        //Procedimiento del Modulo 13 borrar Roles
+        public Boolean eliminarRol(CRoles model)
+        {
+            try
+            {   //Quito los permisos al rol para luego poder borrarlo
+                bool respuesta = quitarPermisos(model);
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //Abrir la conexion
+                conexion.Open();
+                //SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "DELETE FROM Rol WHERE rol_nombre='" + model.Nombre_rol + "'";
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior
+                SqlDataReader lector = query.ExecuteReader();
+                //cierro el lector
+                lector.Close();
+                //Cierro la conexion
+                conexion.Close();
+                return respuesta;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+        }
+        //Meotodo del Modulo 13 para retornar lista de los 
+
+        public List<String> M13consultarRolesDeUnUsuario(int id)
+        {
+            try
+            {
+
+                List<String> listarModuloDetallado = new List<String>();
+
+                CRestauranteModelo entrada = null;
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                SqlCommand query = conexion.CreateCommand();
+                String prueba = "165";
+                query.CommandText = "SELECT usu_id, usu_nombre , rol_nombre , mod_det_nombre  FROM usuario , rol  ,Rol_Modulo_Detallado , Modulo_Detallado WHERE usu_fk_rol = rol_id AND usu_id = '" + id + "' AND mod_det_id = fk_mod_det_id AND rol_id = fk_rol_id";
+
+                SqlDataReader lector = query.ExecuteReader();
+
+                int i = 0;
+                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+                while (lector.Read())
+                {
+
+                    //Debug.WriteLine("id del usuario " + lector["usu_id"].ToString());
+                    Debug.WriteLine("id del usuario nombre " + lector["usu_nombre"].ToString());
+                    Debug.WriteLine("id del id rol " + lector["rol_nombre"].ToString());
+                    Debug.WriteLine("id del id rol " + lector["mod_det_nombre"].ToString());
+                    i += 1;
+                    Debug.WriteLine("id del usuario " + i);
+
+
+                    listarModuloDetallado.Add(lector["mod_det_nombre"].ToString());
+
+
+                }
+
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return listarModuloDetallado;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+
+        }
+
         //Procedimiento del Modulo 13 para retornar lista de los modulos detallados
         public CListaGenerica<CModulo_detallado> consultarPermisos(String modulo)
         {
@@ -1726,5 +1901,19 @@ namespace BOReserva.Servicio
             }
         }
 
+
     }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
