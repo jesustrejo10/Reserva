@@ -22,7 +22,7 @@ namespace BOReserva.Models.gestion_usuarios
                 List<Parametro> parametros = new List<Parametro>();
                 parametro = new Parametro(RecursoUsuario.ParametroNombre, SqlDbType.VarChar, ((CUsuario)usuario).nombreUsuario, false);
                 parametros.Add(parametro);
-                parametro = new Parametro(RecursoUsuario.ParametroApellido, SqlDbType.VarChar, ((CUsuario)usuario).nombreUsuario, false);
+                parametro = new Parametro(RecursoUsuario.ParametroApellido, SqlDbType.VarChar, ((CUsuario)usuario).apellidoUsuario, false);
                 parametros.Add(parametro);
                 parametro = new Parametro(RecursoUsuario.ParametroCorreo, SqlDbType.VarChar, ((CUsuario)usuario).correoUsuario, false);
                 parametros.Add(parametro);
@@ -103,6 +103,52 @@ namespace BOReserva.Models.gestion_usuarios
                     return lista;
                 }
                 
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.ArgumentoInvalido, ex);
+            }
+            catch (FormatException ex)
+            {
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.FormatoInvalido, ex);
+            }
+            catch (SqlException ex)
+            {
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.BDError, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.OtroError, ex);
+            }
+            return null;
+
+        }
+
+
+        public List<ListaRoles> ListarRoles()
+        {
+            DataTable resultado;
+            ListaRoles rol;
+            List<ListaRoles> lista;
+            try
+            {
+                resultado = EjecutarStoredProcedureTuplas(RecursoUsuario.ListarRoles);
+                Conectar();
+                if (resultado != null)
+                {
+                    lista = new List<ListaRoles>();
+                    foreach (DataRow row in resultado.Rows)
+                    {
+                        string usuRol = row[RecursoUsuario.RolUsuario].ToString();
+                        int usuIDRol = int.Parse(row[RecursoUsuario.RolIDUsuario].ToString());
+                        rol = new ListaRoles();
+                        rol.rolID = usuIDRol;
+                        rol.rolNombre = usuRol;
+                        lista.Add(rol);
+                    }
+                    return lista;
+                }
+
             }
             catch (ArgumentNullException ex)
             {
@@ -241,7 +287,7 @@ namespace BOReserva.Models.gestion_usuarios
                 parametros.Add(parametro);
                 parametro = new Parametro(RecursoUsuario.ParametroCorreo, SqlDbType.VarChar, ((CUsuario)usuario).correoUsuario, false);
                 parametros.Add(parametro);
-                parametro = new Parametro(RecursoUsuario.ParametroContraseña, SqlDbType.VarChar, ((CUsuario)usuario).contraseñaUsuario, false);
+                parametro = new Parametro(RecursoUsuario.ParametroContraseña, SqlDbType.VarChar, ((CUsuario)usuario).contraseñaUsuario ?? String.Empty, false);
                 parametros.Add(parametro);
                 parametro = new Parametro(RecursoUsuario.ParametroRolID, SqlDbType.Int, ((CUsuario)usuario).rolUsuario.ToString(), false);
                 parametros.Add(parametro);
@@ -337,6 +383,38 @@ namespace BOReserva.Models.gestion_usuarios
             return null;
         }
 
-        
+        public bool CambiarStatus(int usuID, string activo)
+        {
+            Parametro parametro;
+            try
+            {
+                List<Parametro> parametros = new List<Parametro>();
+                parametro = new Parametro(RecursoUsuario.ParametroActivo, SqlDbType.VarChar, activo, false);
+                parametros.Add(parametro);
+                parametro = new Parametro(RecursoUsuario.ParametroID, SqlDbType.Int, usuID.ToString(), false);
+                parametros.Add(parametro);
+                List<ResultadoBD> results = EjecutarStoredProcedure(RecursoUsuario.CambiarStatus, parametros);
+                Conectar();
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.ArgumentoInvalido, ex);
+            }
+            catch (FormatException ex)
+            {
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.FormatoInvalido, ex);
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 2627)
+                    throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.Error_Email_Existe, ex);
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.BDError, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.OtroError, ex);
+            }
+            return true;
+        }
     }
 }

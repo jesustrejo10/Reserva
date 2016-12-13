@@ -1,166 +1,3 @@
-﻿jQuery(document).ready(function () {
-
-    // INICIO DE AVIONES
-    $("#gestionAviones").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_aviones/M02_GestionAviones';
-        var method = 'GET';
-        var data = '';
-
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty()
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-    });
-    $("#m02_agregaravion").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_aviones/M02_AgregarAvion';
-        var method = 'GET';
-        var data = '';
-
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-    });
-    $("#m02_VisualizarAvion").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_aviones/M02_VisualizarAviones';
-        var method = 'GET';
-        var data = '';
-
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-
-    });
-    //FIN DE AVIONES
-
-    //INICIO DE RUTAS
-    $("#m03AgregarRuta").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_ruta_comercial/AgregarRutasComerciales';
-        var method = 'GET';
-        var data = '';
-
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-
-    });
-    $("#m03VisualizarRutas").click(function (e) {
-
-
-        e.preventDefault();
-        var url = '/gestion_ruta_comercial/VisualizarRutasComerciales';
-        var method = 'GET';
-        var data = '';
-
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-
-    });
-    //FIN DE RUTAS
-
-    //INICIO AUTOMOVILES
-    $("#m08AgregarAutomovil").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_automoviles/M08_AgregarAutomovil';
-        var method = 'GET';
-        var data = '';
-
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-
-    });
-    $("#m08VisualizarAutomoviles").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_automoviles/M08_VisualizarAutomoviles';
-        var method = 'GET';
-        var data = '';
-
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-
-    });
-    //FIN DE AUTOMOVILES
 
     //INICIO M06_Gestion_Comida
     $("#gestionComida").click(function (e) {
@@ -169,7 +6,6 @@
         var url = '/gestion_comida_vuelo/M06_AgregarComida';
         var method = 'GET';
         var data = '';
-
         $.ajax(
             {
                 url: url,
@@ -184,36 +20,18 @@
                     alert(errorThrown);
                 }
             });
-    });
     $("#editarComida").click(function (e) {
         //M06_EditarComida
         e.preventDefault();
         var url = '/gestion_comida_vuelo/M06_EditarComida';
         var method = 'GET';
         var data = '';
-
         $.ajax(
             {
                 url: url,
                 type: method,
                 data: data,
                 success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-    });
-    $("#gestionComidaVuelo").click(function (e) {
-        //M06_AgregarPorVuelo
-        e.preventDefault();
-        var url = '/gestion_comida_vuelo/M06_AgregarPorVuelo';
-        var method = 'GET';
-        var data = '';
-
         $.ajax(
             {
                 url: url,
@@ -594,4 +412,4 @@
     //FIN M13 ROLES
 
 
-});
+});
