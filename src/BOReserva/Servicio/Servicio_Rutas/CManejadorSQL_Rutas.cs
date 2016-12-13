@@ -11,13 +11,13 @@ namespace BOReserva.Servicio.Servicio_Rutas
 {
     public class CManejadorSQL_Rutas
     {
-        private String connetionString = @"Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User ID=DB_A1380A_reserva_admin;Password = ucabds1617a"; //No supe cual es el string de conexion jejejeps
+        private String connectionString = @"Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User ID=DB_A1380A_reserva_admin;Password = ucabds1617a"; //No supe cual es el string de conexion jejejeps
 
         private SqlConnection con = null;
 
         public void probarconexion()
         {
-            con = new SqlConnection(connetionString);
+            con = new SqlConnection(connectionString);
             con.Open();
         }
 
@@ -29,7 +29,7 @@ namespace BOReserva.Servicio.Servicio_Rutas
                 String[] strDes = model._destinoRuta.Split(new[] { " - " }, StringSplitOptions.None);
                 String[] strOri = model._origenRuta.Split(new[] { " - " }, StringSplitOptions.None);
 
-                con = new SqlConnection(connetionString);
+                con = new SqlConnection(connectionString);
                 con.Open();
 
                 SqlCommand query = new SqlCommand("M03_AgregarRuta", con);
@@ -69,17 +69,17 @@ namespace BOReserva.Servicio.Servicio_Rutas
             List<CRuta> listarutas = new List<CRuta>();
             try
             {
-                con = new SqlConnection(connetionString);
+                con = new SqlConnection(connectionString);
                 con.Open();
-                String sql = "SELECT a.lug_nombre AS NOrigen,b.lug_nombre AS NDestino,r.rut_tipo_ruta AS TRuta,r.rut_distancia AS DRuta,r.rut_status_ruta AS SRuta FROM Ruta r, Lugar a, Lugar b WHERE r.rut_FK_lugar_origen=a.lug_id AND r.rut_FK_lugar_destino=b.lug_id";
+                String sql = "SELECT r.rut_id as IRuta, lO.lug_nombre as PaisO, lD.lug_nombre as PaisD,  a.lug_nombre AS NOrigen,b.lug_nombre AS NDestino,r.rut_tipo_ruta AS TRuta,r.rut_distancia AS DRuta,r.rut_status_ruta AS SRuta FROM Ruta r, Lugar a, Lugar b, Lugar lO, Lugar lD WHERE r.rut_FK_lugar_origen=a.lug_id AND r.rut_FK_lugar_destino=b.lug_id AND a.lug_FK_lugar_id=lO.lug_id AND b.lug_FK_lugar_id=lD.lug_id";
                 SqlCommand cmd = new SqlCommand(sql, con);
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        //SE AGREGA CREA UN OBJECTO VEHICLE SE PASAN LOS ATRIBUTO ASI reader["<etiqueta de la columna en la tabla Automovil>"]
-                        //Y  SE AGREGA a listavehiculos
-                        CRuta ruta = new CRuta(reader["NOrigen"].ToString(), reader["NDestino"].ToString(), reader["SRuta"].ToString(),
+                        //SE AGREGA CREA UN OBJECTO RUTA SE PASAN LOS ATRIBUTO ASI reader["<etiqueta de la columna en la tabla Rutas>"]
+                        //Y  SE AGREGA a listarutas
+                        CRuta ruta = new CRuta(Int32.Parse(reader["IRuta"].ToString()), reader["NOrigen"].ToString() + " - " + reader["PaisO"].ToString(), reader["NDestino"].ToString() + " - " + reader["PaisD"].ToString(), reader["SRuta"].ToString(),
                                                reader["TRuta"].ToString(), Int32.Parse(reader["DRuta"].ToString()));
                         listarutas.Add(ruta);
                     }
@@ -150,7 +150,7 @@ namespace BOReserva.Servicio.Servicio_Rutas
                 String[] strDes = model._destinoRuta.Split(new[] { " - " }, StringSplitOptions.None);
                 String[] strOri = model._origenRuta.Split(new[] { " - " }, StringSplitOptions.None);
 
-                con = new SqlConnection(connetionString);
+                con = new SqlConnection(connectionString);
 
                 con.Open();
                 
@@ -201,7 +201,7 @@ namespace BOReserva.Servicio.Servicio_Rutas
             try
             {
                 //Inicializo la conexion con el string de conexion
-                con = new SqlConnection(connetionString);
+                con = new SqlConnection(connectionString);
                 //INTENTO abrir la conexion
                 con.Open();
                 String query = "SELECT l.lug_nombre as ciudad, ll.lug_nombre as pais from Lugar l, Lugar ll where l.lug_FK_lugar_id = ll.lug_id";
@@ -238,10 +238,10 @@ namespace BOReserva.Servicio.Servicio_Rutas
             try
             {
                 //Inicializo la conexion con el string de conexion
-                con = new SqlConnection(connetionString);
+                con = new SqlConnection(connectionString);
                 //INTENTO abrir la conexion
                 con.Open();
-                String query = "SELECT l.lug_nombre as ciudad, ll.lug_nombre as pais from Lugar l, Lugar ll where l.lug_FK_lugar_id = ll.lug_id and l.lug_nombre != '" + strOri[0] + "'";
+                String query = "SELECT l.lug_nombre as ciudad, ll.lug_nombre as pais from Lugar l, Lugar ll where l.lug_FK_lugar_id = ll.lug_id  and l.lug_nombre != '" + strOri[0] + "'";
                 SqlCommand cmd = new SqlCommand(query, con);
                 SqlDataReader lector = cmd.ExecuteReader();
                 while (lector.Read())
@@ -263,6 +263,38 @@ namespace BOReserva.Servicio.Servicio_Rutas
             catch (Exception e)
             {
                 throw e;
+            }
+        }
+
+        public CAgregarRuta MMostrarRutaBD(int idRuta)
+        {
+            CAgregarRuta ruta = new CAgregarRuta();
+            try
+            {
+                con = new SqlConnection(connectionString);
+                con.Open();
+                String sql = "SELECT a.lug_nombre AS NOrigen, lO.lug_nombre as PaisO, lD.lug_nombre as PaisD,b.lug_nombre AS NDestino,r.rut_tipo_ruta AS TRuta,r.rut_distancia AS DRuta,r.rut_status_ruta AS SRuta FROM Ruta r, Lugar a, Lugar b, Lugar lO, Lugar lD WHERE r.rut_FK_lugar_origen=a.lug_id AND r.rut_FK_lugar_destino=b.lug_id AND a.lug_FK_lugar_id=lO.lug_id AND b.lug_FK_lugar_id=lD.lug_id AND r.rut_id = '" + idRuta + "'";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        ruta._idRuta = idRuta;
+                        ruta._origenRuta = reader["NOrigen"].ToString() + " - " + reader["PaisO"].ToString();
+                        ruta._destinoRuta = reader["NDestino"].ToString() + " - " + reader["PaisD"].ToString();
+                        ruta._estadoRuta = reader["SRuta"].ToString();
+                        ruta._tipoRuta = reader["TRuta"].ToString();
+                        ruta._distanciaRuta = Int32.Parse(reader["DRuta"].ToString());
+                    }
+                    cmd.Dispose();
+                    con.Close();
+                    return ruta;
+                }
+            }
+            catch (SqlException ex)
+            {
+                con.Close();
+                return null;
             }
         }
 

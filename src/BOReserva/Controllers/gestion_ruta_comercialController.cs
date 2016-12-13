@@ -61,10 +61,21 @@ namespace BOReserva.Controllers
 
 
         // GET: gestion_ruta_comercial/ModificarRutasComerciales
-        public PartialViewResult ModificarRutasComerciales()
+        public PartialViewResult ModificarRutasComerciales(int idRuta)
         {
-            CGestion_ruta ruta = new CGestion_ruta();
-            return PartialView(ruta);
+            CManejadorSQL_Rutas buscarRuta = new CManejadorSQL_Rutas();
+            CAgregarRuta Route = buscarRuta.MMostrarRutaBD(idRuta);
+            CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();
+            List<String> lista = new List<string>();
+
+            lista = sql.listarLugares();
+
+            Route._lorigenRuta = lista.Select(x => new SelectListItem
+            {
+                Value = x,
+                Text = x
+            });
+            return PartialView(Route);
         }
 
 
