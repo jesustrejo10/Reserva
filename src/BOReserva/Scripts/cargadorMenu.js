@@ -1,20 +1,18 @@
-﻿jQuery(document).ready(function () {
+jQuery(document).ready(function () {
 
     // INICIO DE AVIONES
     $("#gestionAviones").click(function (e) {
         e.preventDefault();
         var url = '/gestion_aviones/M02_GestionAviones';
-        var method = 'GET';
+        var method = 'GET'; 
         var data = '';
-
         $.ajax(
             {
                 url: url,
                 type: method,
                 data: data,
                 success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty()
+                    $("#contenido").empty();
                     $("#contenido").append(data);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -27,36 +25,31 @@
         var url = '/gestion_aviones/M02_AgregarAvion';
         var method = 'GET';
         var data = '';
-
         $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-    });
-
+           {
+               url: url,
+               type: method,
+               data: data,
+               success: function (data, textStatus, jqXHR) {
+                   $("#contenido").empty();
+                   $("#contenido").append(data);
+               },
+               error: function (jqXHR, textStatus, errorThrown) {
+                   alert(errorThrown);
+               }
+           }); 
+    });    
     $("#m02_VisualizarAvion").click(function (e) {
         e.preventDefault();
         var url = '/gestion_aviones/M02_VisualizarAviones';
         var method = 'GET';
         var data = '';
-
         $.ajax(
             {
                 url: url,
                 type: method,
                 data: data,
                 success: function (data, textStatus, jqXHR) {
-
                     $("#contenido").empty();
                     $("#contenido").append(data);
                 },
@@ -64,11 +57,9 @@
                     alert(errorThrown);
                 }
             });
-    });
 
-    //FIN DE AVIONES
-
-    //INICIO DE RUTAS
+    }); 
+    //FIN DE AVIONES    //INICIO DE RUTAS
     $("#m03AgregarRuta").click(function (e) {
         e.preventDefault();
         var url = '/gestion_ruta_comercial/AgregarRutasComerciales';
@@ -80,24 +71,19 @@
                 type: method,
                 data: data,
                 success: function (data, textStatus, jqXHR) {
-
                     $("#contenido").empty();
                     $("#contenido").append(data);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     alert(errorThrown);
                 }
-            });
+            });    });
 
-    });
     $("#m03VisualizarRutas").click(function (e) {
-
-
         e.preventDefault();
         var url = '/gestion_ruta_comercial/VisualizarRutasComerciales';
         var method = 'GET';
         var data = '';
-
         $.ajax(
             {
                 url: url,
@@ -106,51 +92,44 @@
                 success: function (data, textStatus, jqXHR) {
                     $("#contenido").empty();
                     $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
+                },                error: function (jqXHR, textStatus, errorThrown) {
                     alert(errorThrown);
                 }
             });
-
     });
-    //FIN DE RUTAS
-
-    //INICIO AUTOMOVILES
+    //FIN DE RUTAS 
+    //INICIO AUTOMOVILES 
     $("#m08AgregarAutomovil").click(function (e) {
         e.preventDefault();
         var url = '/gestion_automoviles/M08_AgregarAutomovil';
         var method = 'GET';
         var data = '';
-
-        $.ajax(
+        $.ajax( 
             {
                 url: url,
                 type: method,
                 data: data,
                 success: function (data, textStatus, jqXHR) {
-
                     $("#contenido").empty();
                     $("#contenido").append(data);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
+                      alert(errorThrown);
                 }
             });
-
     });
+
     $("#m08VisualizarAutomoviles").click(function (e) {
         e.preventDefault();
         var url = '/gestion_automoviles/M08_VisualizarAutomoviles';
         var method = 'GET';
         var data = '';
-
         $.ajax(
             {
                 url: url,
                 type: method,
                 data: data,
                 success: function (data, textStatus, jqXHR) {
-
                     $("#contenido").empty();
                     $("#contenido").append(data);
                 },
@@ -158,7 +137,6 @@
                     alert(errorThrown);
                 }
             });
-
     });
     //FIN DE AUTOMOVILES
 
@@ -169,7 +147,6 @@
         var url = '/gestion_comida_vuelo/M06_AgregarComida';
         var method = 'GET';
         var data = '';
-
         $.ajax(
             {
                 url: url,
@@ -184,21 +161,19 @@
                     alert(errorThrown);
                 }
             });
-    });
+    });
     $("#editarComida").click(function (e) {
         //M06_EditarComida
         e.preventDefault();
         var url = '/gestion_comida_vuelo/M06_EditarComida';
         var method = 'GET';
         var data = '';
-
         $.ajax(
             {
                 url: url,
                 type: method,
                 data: data,
                 success: function (data, textStatus, jqXHR) {
-
                     $("#contenido").empty();
                     $("#contenido").append(data);
                 },
@@ -206,14 +181,13 @@
                     alert(errorThrown);
                 }
             });
-    });
+    });
     $("#gestionComidaVuelo").click(function (e) {
         //M06_AgregarPorVuelo
         e.preventDefault();
         var url = '/gestion_comida_vuelo/M06_AgregarPorVuelo';
         var method = 'GET';
         var data = '';
-
         $.ajax(
             {
                 url: url,
@@ -251,9 +225,9 @@
                 }
             });
     });
-    $("#modificarhotel").click(function (e) {
+    $("#consultarhotel").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_hoteles/M09_GestionHoteles_ModificarHotel';
+        var url = '/gestion_hoteles/M09_GestionHoteles_Visualizar';
         var method = 'GET';
         var data = '';
 
@@ -263,6 +237,7 @@
                 type: method,
                 data: data,
                 success: function (data, textStatus, jqXHR) {
+
                     $("#contenido").empty();
                     $("#contenido").append(data);
                 },
@@ -270,6 +245,7 @@
                     alert(errorThrown);
                 }
             });
+
     });
     $("#consultarhotel").click(function (e) {
         e.preventDefault();
@@ -590,40 +566,82 @@
     });
     //FIN M13 ROLES
 
-    //M04 vuelos
+    // Comienzo M12 Usuarios
+    $("#indexUsuarios").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_usuarios/M12_Index';
+        var method = 'GET';
+        var data = '';
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
+    $("#agregarUsuarios").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_usuarios/M12_AgregarUsuario';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+
+    });
+
+    //Fin M12 Usuarios
+    //Inicio M04 Vuelos
     $("#m04_crearvuelo").click(function (e) {
         e.preventDefault();
         var url = '/gestion_vuelo/M04_GestionVuelo_Crear';
         var method = 'GET';
         var data = '';
         $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-
-    });
+           {
+               url: url,
+               type: method,
+               data: data,
+               success: function (data, textStatus, jqXHR) {
+                   $("#contenido").empty();
+                   $("#contenido").append(data);
+               },
+               error: function (jqXHR, textStatus, errorThrown) {
+                   alert(errorThrown);
+               }
+           });
+    });
     $("#m04_visualizarvuelo").click(function (e) {
         e.preventDefault();
         var url = '/gestion_vuelo/M04_GestionVuelo_Visualizar';
         var method = 'GET';
         var data = '';
-
         $.ajax(
             {
                 url: url,
                 type: method,
                 data: data,
                 success: function (data, textStatus, jqXHR) {
-
                     $("#contenido").empty();
                     $("#contenido").append(data);
                 },
@@ -633,6 +651,8 @@
             });
 
     });
-    //FIN M04 vuelos
 
-});
+
+    //Fin M04 Vuelos
+
+});

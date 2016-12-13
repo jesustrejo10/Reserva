@@ -136,15 +136,13 @@
                 $("#resultados").html('<div class="text-center">Cargando...</div>')
 
                 var form = $("#formBuscarDiarios");
-                var contr = '/gestion_diarios/';
+                var contr = '/gestion_diarios/gestion_diarios_resultados';
                 var datos;
                 var metodo;
-                if (a == 0) {
-                    contr = contr + 'gestion_diarios_resultados';
+                if (a == 0) {                    
                     datos = '';
                     metodo = 'GET';
                 } else {
-                    contr = contr + 'gestion_diarios_resultados';
                     datos = form.serialize();
                     metodo = 'POST';
                 }
@@ -172,7 +170,6 @@
                     $("#ordenInput").val($('input[name=orden]:checked').val());
                 });
                 cargarResultados(0);
-
             });
         </script>
     } <!--Fin FORM-->

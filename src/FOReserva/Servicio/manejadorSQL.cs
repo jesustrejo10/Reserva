@@ -68,7 +68,7 @@ namespace FOReserva.Servicio
             }
             catch (InvalidOperationException e)
             {
-                throw new InvalidManejadorSQLException("Operacion invalida en la DB", e);
+                throw new ManejadorSQLException("Operacion invalida en la DB", e);
             }
             return tmp;
         }
