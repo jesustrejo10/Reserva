@@ -44,5 +44,11 @@ namespace BOReserva.Models.gestion_cruceros
             cbd.eliminarCrucero(id_crucero);
         }
 
+        public void cambiarEstatusCruceros(int id_crucero)
+        {
+            ConexionBD cbd = new ConexionBD();
+            cbd.cambiarEstado(id_crucero);
+        }
+
     }
 }

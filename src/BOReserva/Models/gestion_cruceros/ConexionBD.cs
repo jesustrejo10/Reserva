@@ -221,7 +221,7 @@ namespace BOReserva.Models.gestion_cruceros
                
         
 
-        public List<CGestion_camarote> listarCamarote(int idCabina)
+        public List<CGestion_camarote> listarCamarotes(int idCabina)
         {
             List<CGestion_camarote> listaCamarote = new List<CGestion_camarote>();
             CGestion_camarote camarote;
@@ -237,7 +237,7 @@ namespace BOReserva.Models.gestion_cruceros
                 while (reader.Read())
                 {
                     camarote = new CGestion_camarote();
-                    //cabina._idCabina = int.Parse(reader["id"].ToString());
+                    camarote._idCamarote = int.Parse(reader["id"].ToString());
                     camarote._cantidadCama = int.Parse(reader["cantidadCama"].ToString());
                     camarote._tipoCama= reader["tipoCama"].ToString();
                     camarote._estatus= reader["estatus"].ToString();
@@ -246,6 +246,34 @@ namespace BOReserva.Models.gestion_cruceros
                 reader.Close();
             }
             return listaCamarote;
+        }
+
+        public void cambiarEstado(int id_crucero)
+        {
+            Conectar();
+            using (comando = new SqlCommand(RecursosCruceros.CambioEstatusCrucero, conexion))
+            {
+                comando.CommandType = CommandType.StoredProcedure;
+
+                comando.Parameters.AddWithValue("@idCrucero", id_crucero);
+
+                conexion.Open();
+                comando.ExecuteNonQuery();
+            }
+        }
+
+        public void estatusCamarote(int id_camarote)
+        {
+            Conectar();
+            using (comando = new SqlCommand(RecursosCruceros.CambioEstatusCamarote, conexion))
+            {
+                comando.CommandType = CommandType.StoredProcedure;
+
+                comando.Parameters.AddWithValue("@idCamarote", id_camarote);
+
+                conexion.Open();
+                comando.ExecuteNonQuery();
+            }
         }
 
     }

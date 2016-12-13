@@ -18,7 +18,7 @@
                             SelectList list1 = ViewBag.ShowDropDown;
                         }
                         @*@Html.DropDownList("DROPDOWNID", list, "Cruceros", new { @id = "fk_id_crucero" })*@
-                        @Html.DropDownListFor(m => m._fkCrucero, list1, new { @id = "fk_id_crucero", @style = "width:41% ; margin-left:2%" })
+                        @Html.DropDownListFor(m => m._fkCrucero, list1, "Cruceros", new { @id = "fk_id_crucero", @style = "width:41% ; margin-left:2%"})
                     </div>
                     <div class="form-group" style="margin-bottom:20px">
                         <label>Cabinas:</label>
@@ -27,15 +27,15 @@
                         }
                         
                         @*@Html.DropDownListFor(m => m._fkCabina, list, new { @id = "fk_id_cabina", @style = "width:41% ; margin-left:2%" })*@
-                        <select id="fk_id_cabina">
+                        <select id="fk_id_cabina" name="_fkCabina" style="width: 41%;margin-left: 2.5%;">
 
                         </select>
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="form-group">
-                                <label>Cantidad Cama:</label>
-                                @Html.TextBoxFor(m => m._cantidadCama, null, new { @type = "number", @class = "form-control", @placeholder = "Introduce la cantidad de camas de un camarote", @id = "cantidadCama", @style = "width:50%" })
+                                <label>Cantidad de Camas:</label>
+                                @Html.TextBoxFor(m => m._cantidadCama, null, new { @type = "number", @class = "form-control", placeholder = "Introduce la cantidad de camas de un camarote", @id = "cantidadCama", @style = "width:50%", required = "required" })
                             </div>
                         </div>
                     </div>
@@ -64,6 +64,7 @@
                             <th style="width:170px;height: 40px;text-align: center">Cantidad de camas</th>
                             <th style="width:170px;height: 40px;text-align: center"> <b>Tipo de camas</b></th>
                             <th style="width:170px;height: 40px;text-align: center"><b>Estado</b></th>
+                            <th style="width:170px;height: 40px;text-align: center"><b>Acciones</b></th>
                         </tr>
                     </thead>
                     <tbody id="tablaCamarote" class="">
@@ -104,22 +105,7 @@
                 data: form.serialize(),
                 type: 'POST',
                 success: function (data) {
-                    console.log(data)
-                    //$("#tablaCabinas tr").remove();
-                    $("#tablaCamarote").append("<tr><td>" + $("#cantidad_camas").val() + "</td><td>" + $("#tipo_cama").val() + "</td></tr>");
-                    //$.ajax({
-                    //    url: '/gestion_cruceros/M24_AgregarCabinas',
-                    //    type: 'GET',
-                    //    data: '',
-                    //    success: function (data, textStatus, jqXHR) {
-                    //        $("#contenido").empty();
-                    //        $("#contenido").append(data);
-                    //    },
-                    //    error: function (jqXHR, textStatus, errorThrown) {
-                    //        alert(errorThrown);
-                    //    }
-                    //});
-                    //$('#formGuardarCabina')[0].reset();
+                    $("#tablaCamarote").append("<tr><td>" + $("#cantidadCama").val() + "</td><td>" + $("#tipoCama").val() + "</td></tr>");
                 },
                 error: function (data) {
                     console.log(data);
@@ -128,4 +114,33 @@
             });
         });
     </script>
-}
+
+    <script>
+
+        function cambioCamarote(camarote_id) {
+            $.ajax({
+                url: "gestion_cruceros/cambioEstatusCamarote",
+                data: { "id_camarote": camarote_id },
+                type: 'POST',
+                success: function (data) {
+                    $.ajax({
+                        url: '/gestion_cruceros/M24_AgregarCamarote',
+                        type: 'GET',
+                        data: '',
+                        success: function (data, textStatus, jqXHR) {
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        }
+
+    </script>
+                            }

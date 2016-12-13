@@ -7,8 +7,8 @@ namespace BOReserva.Models.gestion_cruceros
 {
     public class CGestion_camarote
     {
-        public int _fkCabina;
-        public int _fkCrucero;
+        public int _fkCabina { get; set; }
+        public int _fkCrucero { get; set; }
         internal List<CGestion_camarote> camarote;
 
         public CGestion_camarote(int _cantidadCama, string _tipoCama, int _fkCabina)
@@ -25,6 +25,7 @@ namespace BOReserva.Models.gestion_cruceros
         public class GGestion_camarote
         {
         }
+        public int _idCamarote { get; set; }
         public int _cantidadCama { get; set; }
         public String _tipoCama { get; set; }
         public String _estatus { get; set; }
@@ -34,6 +35,12 @@ namespace BOReserva.Models.gestion_cruceros
         {
             ConexionBD cbd = new ConexionBD();
             cbd.insertarCamarote(camarote);
+        }
+
+        public void cambioEstatusCamarote(int id_camarote)
+        {
+            ConexionBD cbd = new ConexionBD();
+            cbd.estatusCamarote(id_camarote);
         }
     }
 }

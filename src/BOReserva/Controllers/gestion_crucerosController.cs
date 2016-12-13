@@ -61,6 +61,13 @@ namespace BOReserva.Controllers
             //return PartialView();
         }
 
+        public JsonResult M24_ListarCamarotes(int id)
+        {
+            ConexionBD cbd = new ConexionBD();
+            var listaCamarotes = cbd.listarCamarotes(id);
+            return (Json(listaCamarotes, JsonRequestBehavior.AllowGet));
+        }
+
 
         public ActionResult M24_ListarCruceros()
         {
@@ -123,6 +130,22 @@ namespace BOReserva.Controllers
         {
             CGestion_cabina cabina = new CGestion_cabina();
             cabina.cambioEstatusCabina(id_cabina);
+            return (Json(true, JsonRequestBehavior.AllowGet));
+        }
+
+        [HttpPost]
+        public JsonResult cambiarEstatusCrucero(int id_crucero)
+        {
+            CGestion_crucero crucero = new CGestion_crucero();
+            crucero.cambiarEstatusCruceros(id_crucero);
+            Console.WriteLine(id_crucero);
+            return (Json(true, JsonRequestBehavior.AllowGet));
+        }
+
+        public JsonResult cambioEstatusCamarote(int id_camarote)
+        {
+            CGestion_camarote camarote = new CGestion_camarote();
+            camarote.cambioEstatusCamarote(id_camarote);
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
     }

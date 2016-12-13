@@ -18,13 +18,13 @@
                                 SelectList list = ViewBag.ShowDropDown;
                             }
                             @*@Html.DropDownList("DROPDOWNID", list, "Cruceros", new { @id = "fk_id_crucero" })*@
-                            @Html.DropDownListFor(m => m._fkCrucero, list, new { @id = "fk_id_crucero", @style="width:41% ; margin-left:2%"})
+                            @Html.DropDownListFor(m => m._fkCrucero, list, "Cruceros",new { @id = "fk_id_crucero", @style="width:41% ; margin-left:2%"})
                         </div>
                         <div class="row">
                             <div class="col-xs-6">
                                 <div class="form-group">
                                     <label>Nombre de Cabina:</label>
-                                    @Html.TextBoxFor(m => m._nombreCabina, null, new { @class = "form-control", @placeholder = "Introduce el nombre de la cabina", @id = "nombrecabina" })
+                                    @Html.TextBoxFor(m => m._nombreCabina, null, new { @class = "form-control", @placeholder = "Introduce el nombre de la cabina", @id = "nombrecabina", @required = "true" })
                                 </div>
                             </div>
                         </div>
@@ -32,7 +32,7 @@
                             <div class="col-xs-6">
                                 <div class="form-group">
                                     <label>Precio:</label>
-                                    @Html.TextBoxFor(m => m._precioCabina, null, new { @type = "number", @class = "form-control", @placeholder = "Introduce el nombre de la cabina", @id = "precio" })
+                                    @Html.TextBoxFor(m => m._precioCabina, null, new { @type = "number", @class = "form-control", @placeholder = "Introduce el precio de la cabina", @id = "precio", @required = "true" })
                                 </div>
                             </div>
                         </div>
@@ -89,22 +89,11 @@
                 data: form.serialize(),
                 type: 'POST',
                 success: function (data) {
-                    console.log(data)
-                    //$("#tablaCabinas tr").remove();
-                    $("#tablaCabinas").append("<tr><td>" + $("#nombrecabina").val() + "</td><td>" + $("#precio").val() + "</td></tr>");
-                    //$.ajax({
-                    //    url: '/gestion_cruceros/M24_AgregarCabinas',
-                    //    type: 'GET',
-                    //    data: '',
-                    //    success: function (data, textStatus, jqXHR) {
-                    //        $("#contenido").empty();
-                    //        $("#contenido").append(data);
-                    //    },
-                    //    error: function (jqXHR, textStatus, errorThrown) {
-                    //        alert(errorThrown);
-                    //    }
-                    //});
-                    //$('#formGuardarCabina')[0].reset();
+                    var statusHTML = "<td class='crStatus'><i class='fa fa-circle started'></i></td><td class='crAcciones'><i class='fa fa-pencil'></i> <i class='fa fa-times' onclick='cambioCabina(" + $("#idCabina").val() + ")'></i></td>";
+                        html = "<tr><td style='text-align:center'>" + $("#nombrecabina").val() + "</td><td style='text-align:center'>" + $("#precio").val() + "</td>" + statusHTML + "</tr>";
+                        console.log(html)
+                        $("#tablaCabinas").append(html);
+                    //$("#tablaCabinas").append("<tr><td>" + $("#nombrecabina").val() + "</td><td>" + $("#precio").val() + "</td></tr>");
                 },
                 error: function (data) {
                     console.log(data);
@@ -115,22 +104,32 @@
     </script>
 
     <script>
-        $("#cambioCabina").click(function (e) {
-            e.preventDefault();
-            var cabina_id = $(this).closest('tr').attr('id');
-            console.log(crucero_id);
+
+        function cambioCabina(cabina_id) {
             $.ajax({
                 url: "gestion_cruceros/cambioEstatusCabina",
                 data: { "id_cabina": cabina_id },
                 type: 'POST',
                 success: function (data) {
                     $.ajax({
-                        url: '/gestion_cruceros/M24_AgregarCabinas',
+                        url: "gestion_cruceros/M24_ListarCabinas/" + $("#fk_id_crucero").val(),
+                        data: null,
                         type: 'GET',
-                        data: '',
-                        success: function (data, textStatus, jqXHR) {
-                            $("#contenido").empty();
-                            $("#contenido").append(data);
+                        success: function (data) {
+                            console.log(data)
+                            $("#tablaCabinas").empty();
+                            for (var index = 0; index < data.length; index++) {
+                                console.log(data[index])
+
+                                var statusHTML = data[index]._estatus == "activo" ? "<td class='crStatus'><i class='fa fa-circle started'></i></td>" +
+                                                        "<td class='crAcciones'><i class='fa fa-pencil'></i> <i class='fa fa-times' onclick='cambioCabina(" + data[index]._idCabina + ")'></i></td>" : "<td class='crStatus'><i class='fa fa-circle paused'></i></td><td class='crAcciones'><i class='fa fa-pencil'></i> <i class='fa fa-check' onclick='cambioCabina(" + data[index]._idCabina + ")'></i></td>";
+
+
+                                console.log(statusHTML)
+                                html = "<tr id='" + data[index]._idCabina + "'><td style='text-align:center'>" + data[index]._nombreCabina + "</td><td style='text-align:center'>" + data[index]._precioCabina + "</td>" + statusHTML + "</tr>";
+                                console.log(html)
+                                $("#tablaCabinas").append(html);
+                            }
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
                             alert(errorThrown);
@@ -141,7 +140,8 @@
                     console.log(data);
                 }
             });
-        });
+        }
+
     </script>
-                                }
+}
 
