@@ -970,6 +970,66 @@ namespace BOReserva.Servicio
                 throw e;
             }
         }
+
+        //Meotodo del Modulo 13 para retornar lista de los 
+
+        public List<String> M13consultarRolesDeUnUsuario(int id)
+        {
+            try
+            {
+
+                List<String> listarModuloDetallado = new List<String>();
+
+                CRestauranteModelo entrada = null;
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                SqlCommand query = conexion.CreateCommand();
+                String prueba = "165";
+                query.CommandText = "SELECT usu_id, usu_nombre , rol_nombre , mod_det_nombre  FROM usuario , rol  ,Rol_Modulo_Detallado , Modulo_Detallado WHERE usu_fk_rol = rol_id AND usu_id = '" + id + "' AND mod_det_id = fk_mod_det_id AND rol_id = fk_rol_id";
+
+                SqlDataReader lector = query.ExecuteReader();
+
+                int i = 0;
+                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+                while (lector.Read())
+                {
+
+                    //Debug.WriteLine("id del usuario " + lector["usu_id"].ToString());
+                    Debug.WriteLine("id del usuario nombre " + lector["usu_nombre"].ToString());
+                    Debug.WriteLine("id del id rol " + lector["rol_nombre"].ToString());
+                    Debug.WriteLine("id del id rol " + lector["mod_det_nombre"].ToString());
+                    i += 1;
+                    Debug.WriteLine("id del usuario " + i);
+
+
+                    listarModuloDetallado.Add(lector["mod_det_nombre"].ToString());
+
+
+                }
+
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return listarModuloDetallado;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+
+        }
+
         //Procedimiento del Modulo 13 para retornar lista de los modulos detallados
         public CListaGenerica<CModulo_detallado> consultarPermisos(String modulo)
         {
