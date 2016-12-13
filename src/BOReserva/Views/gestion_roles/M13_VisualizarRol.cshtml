@@ -1,4 +1,4 @@
-
+@model List<BOReserva.Models.gestion_roles.CRoles>
 
 <div class="row">
     <link rel="stylesheet" href="~/Content/plugins/datatables/dataTables.bootstrap.css">
@@ -26,13 +26,28 @@
                             {
                                 <tr id="@item.Nombre_rol">
                                     <td>@item.Nombre_rol</td>
-                                    <td></td>
-                                    <td></td>
+                                    <!---<td>  falta el arroba           item.Menu.obtenerUnObjetoDeLaLista(0)</td>-->
                                     <td>
-                                        <a href="#" title="Eliminar Rol"><i class="fa fa-times eliminar"></i></a>
+                                        <table>
+                                            @foreach (var item2 in item.Menu)
+                                            {
+                                                <tr>@item2.Nombre</tr>
+                                                <br>}
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table>
+                                            @foreach (var item2 in item.Permisos)
+                                            {
+                                                <tr>@item2.Nombre</tr>
+                                                <br>}
+                                        </table>
+                                    </td>
+                                    <td>
+
+                                        <a href="#" onclick="Eliminar()" title="Eliminar Rol" id="@item.Nombre_rol"><i class="fa fa-times eliminar"></i></a>
 
 
-                                        
                                     </td>
                                 </tr>
                             }
@@ -59,6 +74,7 @@
     <!-- /.col -->
 </div>
 <!-- /.row -->
+
 
 <script language="javascript" type="text/javascript">
 
