@@ -1,11 +1,16 @@
-﻿@model BOReserva.Models.gestion_ofertas.CAgregarPaquete
+﻿@model BOReserva.Models.gestion_ofertas.CPaquete
            
+
+<style type="text/css">
+
+</style>
 <!---------------------- SECCION DE AGREGAR PAQUETE ---------------->
 <div class="row">
     <div class="col-md-12">
         <div class="box box-default">
             <div class="box-header with-border">
-                <h1 class="box-title"> Agregar Paquete</h1>
+                <h1 class="box-title"> Detalle Paquete</h1>
+                @Html.TextBoxFor(m => m._idOferta, null, new { @style = "display:none;", @id = "idOferta"})
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse">
                         <i class="fa fa-minus"></i>
@@ -15,27 +20,25 @@
             <!-- /.box-header -->
             <div class="box-body">
                 <div class="row">
-                    <div class="col-md-12" style="margin-top: 25px;">
-
-                        </div>
-
 
                     <div class="col-md-12">
                         <div class="col-md-12">
                             <div class="col-xs-4">
-                                <label>Nombre del Paquete (<span style="color:red">*</span>):</label>
-                                <input type="text" class="form-control" id="nombrePaq">
+                                <label>Nombre del Paquete</label>
+                                    @Html.TextBoxFor(m => m._nombrePaquete, null, new { @class = "form-control", @readonly = "readonly"})
                             </div>
                         </div>
 
+                        <!-- AUTO -->
+                        <div class="col-md-12" style="margin-top: 25px;">
+
+                        </div>
 
                         <div class="col-md-12">
 
                             <div class="col-xs-4">
-                                <label>Seleccione Automóvil</label>
-                                <select class="form-control" id="cbAuto">
-                                    <option id="cbAuto-00" value="00">Cargando...</option>
-                                </select>
+                                <label>Automóvil</label>
+                                    @Html.TextBoxFor(m => m._idAuto, null, new { @class = "form-control", @name = "fechaIniAuto", @id = "idAuto",  @readonly = "readonly" })
                             </div>
 
                             <div class="col-xs-4">
@@ -45,7 +48,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.TextBoxFor(m => m._fechaIniAuto, null, new { @class = "form-control datepicker required", @name = "fechaIniAuto", @id = "fechaIniAuto", @type = "date" })
+                                    @Html.TextBoxFor(m => m._fechaIniAuto, null, new { @class = "form-control", @name = "fechaIniAuto", @id = "fechaIniAuto", @readonly = "readonly"})
                                     @*<input type="text" name="fechaIniAuto" value="" class="form-control datepicker required">*@
 
                                 </div>
@@ -59,7 +62,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.TextBoxFor(m => m._fechaFinAuto, null, new { @class = "form-control datepicker required", @name = "fechaFinAuto", @id = "fechaFinAuto", @type = "date" })
+                                    @Html.TextBoxFor(m => m._fechaFinAuto, null, new { @class = "form-control", @name = "fechaFinAuto", @id = "fechaFinAuto", @readonly = "readonly" })
                                     @*<input type="text" name="fechaFinAuto" value="" class="form-control datepicker required">*@
 
                                 </div>
@@ -72,14 +75,11 @@
 
                         </div>
 
-
                         <div class="col-md-12">
 
                             <div class="col-xs-4">
-                                <label>Seleccione Restaurante</label>
-                                <select class="form-control" id="cbRest">
-                                    <option id="cbRest-00" value="00">Cargando...</option>
-                                </select>
+                                <label>Restaurante</label>
+                                    @Html.TextBoxFor(m => m._idRestaurante, null, new { @class = "form-control", @name = "fechaIniAuto", @id = "idRest",  @readonly = "readonly" })
                             </div>
 
                             <div class="col-xs-4">
@@ -89,7 +89,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.TextBoxFor(m => m._fechaIniRest, null, new { @class = "form-control datepicker required", @name = "fechaIniRest", @id = "fechaIniRest", @type = "date" })
+                                    @Html.TextBoxFor(m => m._fechaIniRest, null, new { @class = "form-control", @name = "fechaIniRest", @id = "fechaIniRest", @readonly = "readonly" })
                                     @*<input type="text" name="fechaIniRest" value="" class="form-control datepicker required">*@
 
                                 </div>
@@ -103,7 +103,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.TextBoxFor(m => m._fechaFinRest, null, new { @class = "form-control datepicker required", @name = "fechaFinRest", @id = "fechaFinRest", @type = "date" })
+                                    @Html.TextBoxFor(m => m._fechaFinRest, null, new { @class = "form-control", @name = "fechaFinRest", @id = "fechaFinRest", @readonly = "readonly" })
                                     @*<input type="text" name="fechaFinRest" value="" class="form-control datepicker required">*@
 
                                 </div>
@@ -116,14 +116,11 @@
 
                         </div>
 
-
                         <div class="col-md-12">
 
                             <div class="col-xs-4">
-                                <label>Seleccione Habitación</label>
-                                <select class="form-control" id="cbHab">
-                                    <option id="cbHab-00" value="00">Cargando...</option>
-                                </select>
+                                <label>Habitación</label>
+                                @Html.TextBoxFor(m => m._idHabitacion, null, new { @class = "form-control", @name = "fechaIniAuto", @id = "idHotel",  @readonly = "readonly" })
                             </div>
 
                             <div class="col-xs-4">
@@ -133,7 +130,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.TextBoxFor(m => m._fechaIniHabi, null, new { @class = "form-control datepicker required", @name = "fechaIniHabi", @id = "fechaIniHabi", @type = "date" })
+                                    @Html.TextBoxFor(m => m._fechaIniHabi, null, new { @class = "form-control", @name = "fechaIniHabi", @id = "fechaIniHabi", @readonly = "readonly" })
                                     @*<input type="text" name="fechaIniHabi" value="" class="form-control datepicker required">*@
 
                                 </div>
@@ -147,7 +144,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.TextBoxFor(m => m._fechaFinHabi, null, new { @class = "form-control datepicker required", @name = "fechaFinHabi", @id = "fechaFinHabi", @type = "date" })
+                                    @Html.TextBoxFor(m => m._fechaFinHabi, null, new { @class = "form-control", @name = "fechaFinHabi", @id = "fechaFinHabi", @readonly = "readonly" })
                                     @*<input type="text" name="fechaFinHabi" value="" class="form-control datepicker required">*@
 
                                 </div>
@@ -160,15 +157,11 @@
 
                         </div>
 
-
-
                         <div class="col-md-12">
 
                             <div class="col-xs-4">
-                                <label>Seleccione Crucero</label>
-                                <select class="form-control" id="cbCrucero">
-                                    <option id="cbCrucero-00" value="00">Cargando...</option>
-                                </select>
+                                <label>Crucero</label>
+                                @Html.TextBoxFor(m => m._idCrucero, null, new { @class = "form-control", @name = "fechaIniAuto", @id = "idCruc",  @readonly = "readonly" })
                             </div>
 
                             <div class="col-xs-4">
@@ -178,7 +171,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.TextBoxFor(m => m._fechaIniCruc, null, new { @class = "form-control datepicker required", @name = "fechaIniCruc", @id = "fechaIniCruc", @type = "date" })
+                                    @Html.TextBoxFor(m => m._fechaIniCruc, null, new { @class = "form-control", @name = "fechaIniCruc", @id = "fechaIniCruc", @readonly = "readonly" })
                                     @*<input type="text" name="fechaIniCruc" value="" class="form-control datepicker required">*@
 
                                 </div>
@@ -192,7 +185,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.TextBoxFor(m => m._fechaFinCruc, null, new { @class = "form-control datepicker required", @name = "fechaFinCruc", @id = "fechaFinCruc", @type = "date" })
+                                    @Html.TextBoxFor(m => m._fechaFinCruc, null, new { @class = "form-control", @name = "fechaFinCruc", @id = "fechaFinCruc", @readonly = "readonly"})
                                     @*<input type="text" name="fechaFinCruc" value="" class="form-control datepicker required">*@
 
                                 </div>
@@ -205,14 +198,11 @@
 
                         </div>
 
- 
                         <div class="col-md-12">
 
                             <div class="col-xs-4">
-                                <label>Seleccione Vuelo</label>
-                                <select class="form-control" id="cbVuelo">
-                                    <option id="cbVuelo-00" value="00">Cargando...</option>
-                                </select>
+                                <label>Vuelo</label>
+                                @Html.TextBoxFor(m => m._idVuelo, null, new { @class = "form-control", @name = "fechaIniAuto", @id = "idVuelo",  @readonly = "readonly" })
                             </div>
                             <div class="col-xs-4">
                                 <label>Fecha Inicio:</label>
@@ -221,7 +211,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.TextBoxFor(m => m._fechaIniVuelo, null, new { @class = "form-control datepicker required", @name = "fechaIniVuelo", @id = "fechaIniVuelo", @type = "date" })
+                                    @Html.TextBoxFor(m => m._fechaIniVuelo, null, new { @class = "form-control", @name = "fechaIniVuelo", @id = "fechaIniVuelo", @readonly = "readonly"})
                                     @*<input type="text" name="fechaIniVuelo" value="" class="form-control datepicker required">*@
 
                                 </div>
@@ -235,7 +225,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.TextBoxFor(m => m._fechaFinVuelo, null, new { @class = "form-control datepicker required", @name = "fechaFinVuelo", @id = "fechaFinVuelo", @type = "date" })
+                                    @Html.TextBoxFor(m => m._fechaFinVuelo, null, new { @class = "form-control", @name = "fechaFinVuelo", @id = "fechaFinVuelo", @readonly = "readonly"})
                                     @*<input type="text" name="fechaFinVuelo" value="" class="form-control datepicker required">*@
 
                                 </div>
@@ -247,28 +237,26 @@
                     <div class="col-md-12" style="margin-top: 25px;">
 
                         <div class="col-xs-4">
-                            <label>Precio del paquete (<span style="color:red">*</span>):</label>
-                            <input type="number" class="form-control" id="precioPaq">
+                            <label>Precio del paquete:</label>
+                            @Html.TextBoxFor(m => m._precioPaquete, null, new { @class = "form-control", @readonly = "readonly"})
                         </div>
-
                         <div class="col-xs-4">
-                            <label>Estatus:</label>
-                            <select id="estadoPaquete" class="form-control">
-                                <option value="0">Inactivo</option>
-                                <option value="1">Activo</option>
-                            </select>
+                            <label>Estado:</label> 
+
+                            @Html.TextBoxFor(m => m._estadoPaquete, null, new { @class = "form-control", @readonly = "readonly", @id = "estado"})
+                        </div>
+                        <div class="col-xs-4">
+                            <label>Oferta:</label> 
+
+                            <input type="text" id="tbOferta" class="form-control" readonly="readonly"/>
                         </div>
                     </div>
 
-                        <div class="col-md-12" style="margin-top:10px;">
-                            <div class="col-md-4"></div>
-                            <div class="col-md-2">
-                                <button type="button" id="btnCrearPaquete" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+
+                        <div class="col-md-12" style="margin-top: 25px">
+                            <div class="col-md-12" style="margin-top:10px;">
+                                <button type="button" id="return" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Regresar</button>
                             </div>
-                            <div class="col-md-2">
-                                <button id="btnVolver" type="button" class="btn btn-danger" style="display:block; margin-left:auto; margin-right:auto;">Cancelar</button>
-                            </div>
-                            <div class="col-md-4"></div>
                         </div>
                     <!-- /.row -->
                 </div>
@@ -282,11 +270,25 @@
     <!-- /.row -->
     <!------------------- FIN DE SECCION DE AGREGAR PAQUETE ---------------->
     <script>
-        getAutomovilesFromDB();
-        getRestaurantesFromDB();
-        getHotelesFromDB();
-        getCrucerosFromDB();
-        getVuelosFromDB();
+
+        if ($("#estado").val() == "True") {
+            $("#estado").val("Activo");
+        }
+        else {
+            $("#estado").val("Inactivo");
+        }
+
+        $(document).ready(function () {
+            getAutomovilesFromDB();
+            getRestaurantesFromDB();
+            getHotelesFromDB();
+            getCrucerosFromDB();
+            getVuelosFromDB();
+            obtenerOferta();
+        });
+
+        
+
 
         function getAutomovilesFromDB() {
             $.ajax(
@@ -303,13 +305,16 @@
         }
 
         function cargarAutosCB(data) {
+            var idSelected = $("#idAuto").val();
             for (var i in data) {
-                var idAuto = data[i]._matricula;
+                var id = data[i]._matricula;
                 var fabricante = data[i]._fabricante;
                 var modelo = data[i]._modelo;
-                $("#cbAuto").append('<option value="' + idAuto + '">' + fabricante + " " + modelo + '</option>');
+                if (idSelected == id) {
+                    $("#idAuto").val(fabricante + " " + modelo);
+                    return false
+                }
             }
-            $("#cbAuto-00").text("Seleccione Automóvil");
         }
 
         function getRestaurantesFromDB() {
@@ -327,12 +332,14 @@
         }
 
         function cargarRestaurantesCB(data) {
+            var restIdSelected = $("#idRest").val();
             for (var i in data) {
                 var idRest = data[i]._id;
-                var nombreRest = data[i]._nombre;
-                $("#cbRest").append('<option value="' + idRest + '">' + nombreRest + '</option>');
+                if (restIdSelected == idRest) {
+                    $("#idRest").val(data[i]._nombre);
+                    return false;
+                }
             }
-            $("#cbRest-00").text("Seleccione Restaurante");
         }
 
         function getHotelesFromDB() {
@@ -349,13 +356,36 @@
                });
         }
 
+        function obtenerOferta() {
+            var idOferta = $("#idOferta").val();
+            $("#tbOferta").empty();
+            $("#tbOferta").val("");
+            if (idOferta != 0) {
+                $.ajax(
+                   {
+                       url: '/gestion_ofertas/obtenerOferta',
+                       type: 'POST',
+                       data: { idOferta: idOferta },
+                       success: function (data) {
+                           $("#tbOferta").val(data._nombreOferta + " - " + data._porcentajeOferta + "%");
+                       },
+                       error: function (jqXHR, textStatus, errorThrown) {
+                           alert(errorThrown);
+                       }
+                   });
+            }
+        }
+
         function cargarHotelesCB(data) {
+            var idSelected = $("#idHotel").val();
             for (var i in data) {
                 var idHotel = data[i]._id;
                 var nombreHotel = data[i]._nombre;
-                $("#cbHab").append('<option value="' + idHotel + '">' + nombreHotel + '</option>');
+                if (idHotel == idSelected) {
+                    $("#idHotel").val(nombreHotel);
+                    return false;
+                }
             }
-            $("#cbHab-00").text("Seleccione Hotel");
         }
 
         function getCrucerosFromDB() {
@@ -373,12 +403,15 @@
         }
 
         function cargarCrucerosCB(data) {
+            var idSelected = $("#idCruc").val();
             for (var i in data) {
                 var idCrucero = data[i]._id;
                 var nombreCrucero = data[i]._nombre;
-                $("#cbCrucero").append('<option value="' + idCrucero + '">' + nombreCrucero + '</option>');
+                if (idCrucero == idSelected) {
+                    $("#idCruc").val(nombreCrucero);
+                    return false;
+                }
             }
-            $("#cbCrucero-00").text("Seleccione Crucero");
         }
 
         function getVuelosFromDB() {
@@ -396,167 +429,21 @@
         }
 
         function cargarVuelosCB(data) {
+            var idSelected = $("#idVuelo").val();
             for (var i in data) {
                 var idVuelo = data[i]._id;
                 var codigoVuelo = data[i]._codigoVuelo;
                 var origen = data[i]._nombreSalida;
                 var destino = data[i]._nombreLlegada;
-                $("#cbVuelo").append('<option value="' + idVuelo + '">' + codigoVuelo + " - " + origen + " - " + destino + '</option>');
+                if (idVuelo == idSelected) {
+                    $("#idVuelo").val(codigoVuelo + " - " + origen + " - " + destino);
+                    return false;
+                }
             }
-            $("#cbVuelo-00").text("Seleccione Vuelo");
         }
 
-        $("#btnCrearPaquete").click(function (e) {
+        $("#return").click(function (e) {
             e.preventDefault();
-            if (validarCamposVacios() && validarAlMenosUno() && validarEstarFechas() && compararFechas()) {
-                var form = $("#formGuardarOferta");
-                var idAuto = $("#cbAuto").val();
-                var idHotel = $("#cbHab").val();
-                var idCrucero = $("#cbCrucero").val();
-                var idRestaurante = $("#cbRest").val();
-                var idVuelo = $("#cbVuelo").val();
-                var fiAuto = $("#fechaIniAuto").val();
-                var ffAuto = $("#fechaFinAuto").val();
-                var fiHotel = $("#fechaIniHabi").val();
-                var ffHotel = $("#fechaFinHabi").val();
-                var fiCrucero = $("#fechaIniCruc").val();
-                var ffCrucero = $("#fechaFinCruc").val();
-                var fiRestaurante = $("#fechaIniRest").val();
-                var ffRestaurante = $("#fechaFinRest").val();
-                var fiVuelo = $("#fechaIniVuelo").val();
-                var ffVuelo = $("#fechaFinVuelo").val();
-                var precio = $("#precioPaq").val();
-                var nombrePaq = $("#nombrePaq").val();
-                var estadoPaq = $("#estadoPaquete").val();
-
-                $.ajax({
-                    url: "gestion_ofertas/guardarPaquete",
-                    data: {
-                        'nombrePaq': nombrePaq, 'idAuto': idAuto, 'idHotel': idHotel, 'idCrucero': idCrucero, 'idRestaurante': idRestaurante,
-                        'idVuelo': idVuelo, 'fiAuto': fiAuto, 'ffAuto': ffAuto, 'fiHotel': fiHotel, 'ffHotel': ffHotel, 'fiCrucero': fiCrucero, 'ffCrucero': ffCrucero,
-                        'fiRestaurante': fiRestaurante, 'ffRestaurante': ffRestaurante, 'fiVuelo': fiVuelo, 'ffVuelo': ffVuelo, 'precio': precio, 'estado': estadoPaq
-                    },
-                    //data: { 'nombreOferta': $("#nombreOferta").val(), 'fInicio': $("#fInicio").val(), 'fFin': $("#fFin").val(), 'porcentajeOferta': $("#porcentajeOferta").val() },
-                    type: 'POST',
-                    success: function (data) {
-                        alert("El paquete ha sido creado exitosamente");
-                        irVisualizar();
-                    }
-                    , error: function (xhr, textStatus, exceptionThrown) {
-                        //muestro el texto del error
-                        alert(xhr.responseText);
-                    }
-                });
-            }
-
-        });
-
-        //Valida que existan fecha inicio y fin del item seleccionado
-        function validarEstarFechas() {
-            if ($("#cbAuto").val() != "00") {
-                if (($("#fechaIniAuto").val() == "") || ($("#fechaFinAuto").val() == "")) {
-                    alert('Los elementos deben tener fecha inicio y fecha fin!');
-                    return false;
-                }
-            }
-            if ($("#cbRest").val() != "00") {
-                if (($("#fechaIniRest").val() == "") || ($("#fechaFinRest").val() == "")) {
-                    alert('Los elementos deben tener fecha inicio y fecha fin!');
-                    return false;
-                }
-            }
-            if ($("#cbHab").val() != "00") {
-                if (($("#fechaIniHabi").val() == "") || ($("#fechaFinHabi").val() == "")) {
-                    alert('Los elementos deben tener fecha inicio y fecha fin!');
-                    return false;
-                }
-            }
-            if ($("#cbCrucero").val() != "00") {
-                if (($("#fechaIniCruc").val() == "") || ($("#fechaFinCruc").val() == "")) {
-                    alert('Los elementos deben tener fecha inicio y fecha fin!');
-                    return false;
-                }
-            }
-            if ($("#cbVuelo").val() != "00") {
-                if (($("#fechaIniVuelo").val() == "") || ($("#fechaFinVuelo").val() == "")) {
-                    alert('Los elementos deben tener fecha inicio y fecha fin!');
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        //Valida que el usuario haya agregado al menos un item al paquete
-        function validarAlMenosUno() {
-            if ($("#cbAuto").val() != "00") {
-                    return true;
-            }
-            if ($("#cbRest").val() != "00") {
-                    return true;
-            }
-            if ($("#cbHab").val() != "00") {
-                    return true;
-            }
-            if ($("#cbCrucero").val() != "00") {
-                    return true;
-            }
-            if ($("#cbVuelo").val() != "00") {
-                    return true;
-            }
-            alert('Debe agregar al menos un elemento al paquete!');
-            return false;
-        }
-
-        //Valida que el nombre y precio no esten vacios
-        function validarCamposVacios() {
-            if (($("#nombrePaq").val() == "") || ($("#precioPaq").val() == "")) {
-                alert('Debes llenar el nombre y precio del paquete!');
-                return false;
-            }
-            return true;
-        }
-        //Compara todas las fechas introducidas
-        function compararFechas() {
-            if ($("#cbAuto").val() != "00") {
-                if (!validarFechas( $("#fechaIniAuto").val() , $("#fechaFinAuto").val() )) {
-                    alert('La fecha fin debe ser mayor que la fecha inicio!');
-                    return false;
-                }
-            }
-            if (!validarFechas($("#fechaIniRest").val(), $("#fechaFinRest").val())) {
-                alert('La fecha fin debe ser mayor que la fecha inicio!');
-                return false;
-            }
-            if (!validarFechas($("#fechaIniHabi").val(), $("#fechaFinHabi").val())) {
-                alert('La fecha fin debe ser mayor que la fecha inicio!');
-                return false;
-            }
-            if (!validarFechas($("#fechaIniCruc").val(), $("#fechaFinCruc").val())) {
-                alert('La fecha fin debe ser mayor que la fecha inicio!');
-                return false;
-            }
-            if (!validarFechas($("#fechaIniVuelo").val(), $("#fechaFinVuelo").val())) {
-                alert('La fecha fin debe ser mayor que la fecha inicio!');
-                return false;
-            }
-            return true;
-        }
-
-        //Valida que la fecha inicio sea mayor que la fecha fin
-        function validarFechas(fi, ff) {
-            if( (new Date(fi).getTime() > new Date(ff).getTime()))
-            {
-                return false;
-            }
-            return true;
-        }
-
-        $("#btnVolver").click(function (e) {
-            e.preventDefault();
-            irVisualizar();
-        });
-
-        function irVisualizar(){
             var url = '/gestion_ofertas/M11_VisualizarPaquete';
             var method = 'GET';
             var data = '';
@@ -575,5 +462,6 @@
                         alert(errorThrown);
                     }
                 });
-        }
+        });
+
     </script>

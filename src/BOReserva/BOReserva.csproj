@@ -268,8 +268,11 @@
     <Compile Include="Models\gestion_lugares\CLugarModelo.cs" />
     <Compile Include="Models\gestion_ofertas\CAgregarOferta.cs" />
     <Compile Include="Models\gestion_ofertas\CAgregarPaquete.cs" />
+    <Compile Include="Models\gestion_ofertas\CConsultar.cs" />
+    <Compile Include="Models\gestion_ofertas\CModificarOferta.cs" />
     <Compile Include="Models\gestion_ofertas\COferta.cs" />
     <Compile Include="Models\gestion_ofertas\CPaquete.cs" />
+    <Compile Include="Models\gestion_ofertas\CVisualizarOferta.cs" />
     <Compile Include="Models\gestion_roles\CListaGenerica.cs" />
     <Compile Include="Models\gestion_roles\CModulo_detallado.cs" />
     <Compile Include="Models\gestion_roles\CModulo_general.cs" />
@@ -302,6 +305,7 @@
     <Compile Include="Models\Util.cs" />
     <Compile Include="Models\gestion_restaurantes\CRestauranteModeloVista.cs" />
     <Compile Include="Models\gestion_restaurantes\CRestauranteModelo.cs" />
+    <Compile Include="MySQLException.cs" />
     <Compile Include="Models\gestion_vuelo\CVuelo.cs" />
     <Compile Include="Models\gestion_vuelo\CCrear_Vuelo.cs" />
     <Compile Include="Models\gestion_vuelo\CVueloModificar.cs" />
@@ -1472,12 +1476,15 @@
     <Content Include="Views\gestion_ofertas\M11_AgregarOferta.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_AgregarPaquete.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_VisualizarOferta.cshtml" />
-    <Content Include="Views\gestion_ofertas\M11_ConsultarPaquete.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_VisualizarPaquete.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_GestionOfertas.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_ModificarOferta.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_ModificarPaquete.cshtml" />
     <Content Include="Views\gestion_roles\M13_AgregarRol.cshtml" />
     <Content Include="Views\gestion_roles\M13_VisualizarRol.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_DetallePaquete.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_DetalleOferta.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_ConsultarOferta.cshtml" />
     <Content Include="Views\gestion_cruceros\M24_AgregarCabinas.cshtml" />
   </ItemGroup>
   <ItemGroup>

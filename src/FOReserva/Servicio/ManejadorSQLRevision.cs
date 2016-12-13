@@ -53,13 +53,14 @@ namespace FOReserva.Servicio
             return true;
         }
 
-        public bool Crear_Revision()   //FALTA
+        public bool Crear_Revision(string mensaje, int puntuacion)   //FALTA
         {
             string query = "INSERT INTO Revision (rev_fecha, rev_mensaje, rev_tipo, rev_puntuacion, rev_FK_usu_id, rev_FK_res_hot_id, rev_FK_res_res_id) VALUES('2016/12/10','Comida exquisita',1,10,70,null,46);";
             this.Executer(query);
             CloseConnection();
             return true;
         }
+
 
         public List<CRevision> Eliminar_Revision(string usuario, CRevision revision)
         {

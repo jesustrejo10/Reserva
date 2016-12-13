@@ -30,12 +30,14 @@ namespace FOReserva.Controllers
             return PartialView(lista);
         }
 
-        public ActionResult crear_revision_form()
+        public ActionResult crear_revision_form(string msj, int ptn)
         {
+            Console.WriteLine("LLEGUE A CREAR REVISION2222");
             ManejadorSQLRevision manejador = new ManejadorSQLRevision();
-            bool resp = manejador.Crear_Revision();
+            bool resp = manejador.Crear_Revision(msj, ptn);
             return PartialView();
         }
+
 
         public ActionResult consultar_revision()
         {
@@ -53,8 +55,12 @@ namespace FOReserva.Controllers
 
         public ActionResult crear_revision()
         {
-            return PartialView();
+            Console.WriteLine("LLEGUE A CREAR REVISION");
+            CRevision rev = new CRevision();
+            return PartialView(rev);
         }
+    
+
 
         /// <summary>
         /// Creacion Modelo Lista Revision

@@ -4,7 +4,7 @@ jQuery(document).ready(function () {
     $("#gestionAviones").click(function (e) {
         e.preventDefault();
         var url = '/gestion_aviones/M02_GestionAviones';
-        var method = 'GET'; 
+        var method = 'GET';
         var data = '';
         $.ajax(
             {
@@ -37,8 +37,9 @@ jQuery(document).ready(function () {
                error: function (jqXHR, textStatus, errorThrown) {
                    alert(errorThrown);
                }
-           }); 
-    });    
+           });
+    });
+
     $("#m02_VisualizarAvion").click(function (e) {
         e.preventDefault();
         var url = '/gestion_aviones/M02_VisualizarAviones';
@@ -58,8 +59,11 @@ jQuery(document).ready(function () {
                 }
             });
 
-    }); 
-    //FIN DE AVIONES    //INICIO DE RUTAS
+    });
+
+    //FIN DE AVIONES
+
+    //INICIO DE RUTAS
     $("#m03AgregarRuta").click(function (e) {
         e.preventDefault();
         var url = '/gestion_ruta_comercial/AgregarRutasComerciales';
@@ -77,7 +81,8 @@ jQuery(document).ready(function () {
                 error: function (jqXHR, textStatus, errorThrown) {
                     alert(errorThrown);
                 }
-            });    });
+            });
+    });
 
     $("#m03VisualizarRutas").click(function (e) {
         e.preventDefault();
@@ -92,19 +97,23 @@ jQuery(document).ready(function () {
                 success: function (data, textStatus, jqXHR) {
                     $("#contenido").empty();
                     $("#contenido").append(data);
-                },                error: function (jqXHR, textStatus, errorThrown) {
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
                     alert(errorThrown);
                 }
             });
     });
-    //FIN DE RUTAS 
-    //INICIO AUTOMOVILES 
+    //FIN DE RUTAS
+
+    //INICIO AUTOMOVILES
+
     $("#m08AgregarAutomovil").click(function (e) {
         e.preventDefault();
         var url = '/gestion_automoviles/M08_AgregarAutomovil';
         var method = 'GET';
         var data = '';
-        $.ajax( 
+        $.ajax(
+
             {
                 url: url,
                 type: method,
@@ -114,7 +123,7 @@ jQuery(document).ready(function () {
                     $("#contenido").append(data);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                      alert(errorThrown);
+                    alert(errorThrown);
                 }
             });
     });
@@ -161,7 +170,8 @@ jQuery(document).ready(function () {
                     alert(errorThrown);
                 }
             });
-    });
+    });
+
     $("#editarComida").click(function (e) {
         //M06_EditarComida
         e.preventDefault();
@@ -181,7 +191,8 @@ jQuery(document).ready(function () {
                     alert(errorThrown);
                 }
             });
-    });
+    });
+
     $("#gestionComidaVuelo").click(function (e) {
         //M06_AgregarPorVuelo
         e.preventDefault();
@@ -296,88 +307,9 @@ jQuery(document).ready(function () {
     });
     //FIN RESERVAS
 
-    //M11 Gestion Ofertas y Paquetes
-    $("#agregarOferta").unbind('click');
-    $("#agregarOferta").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_ofertas/M11_AgregarOferta';
-        var method = 'GET';
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                    getPaquetesFromDB();
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-    });
-    $("#consultarOferta").click(function (e) {
-
-
-
-
-
-
-
-    });
-    $("#modificarOferta").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_ofertas/M11_ModificarOferta';
-        var method = 'GET';
-        var data = '';
-
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-    });
-    $("#agregarPaquete").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_ofertas/M11_AgregarPaquete';
-    });
-    $("#modificarPaquete").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_ofertas/M11_ModificarPaquete';
-        var method = 'GET';
-        var data = '';
-
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-    });
-    $("#consultarPaquete").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_ofertas/M11_ConsultarPaquete';
-
-    });
-    //M11 Fin ofertes y paquetes
+   
+   
+   
 
     /* INICIO M10 RESTAURANTES BO */
     $("#verRestaurantes").click(function (e) {
@@ -430,71 +362,71 @@ jQuery(document).ready(function () {
             });
     });
 
-        $("#m24_agregarcrucero").click(function (e) {
-            e.preventDefault();
-            var url = '/gestion_cruceros/M24_GestionCruceros';
-            var method = 'GET';
-            var data = '';
+    $("#m24_agregarcrucero").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_cruceros/M24_GestionCruceros';
+        var method = 'GET';
+        var data = '';
 
-            $.ajax(
-                {
-                    url: url,
-                    type: method,
-                    data: data,
-                    success: function (data, textStatus, jqXHR) {
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
 
-                        $("#contenido").empty();
-                        $("#contenido").append(data);
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        alert(errorThrown);
-                    }
-                });
-        });
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
 
-        $("#m24_listarcrucero").click(function (e) {
-            e.preventDefault();
-            var url = '/gestion_cruceros/M24_ListarCruceros';
-            var method = 'GET';
-            var data = '';
+    $("#m24_listarcrucero").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_cruceros/M24_ListarCruceros';
+        var method = 'GET';
+        var data = '';
 
-            $.ajax(
-                {
-                    url: url,
-                    type: method,
-                    data: data,
-                    success: function (data, textStatus, jqXHR) {
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
 
-                        $("#contenido").empty();
-                        $("#contenido").append(data);
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        alert(errorThrown);
-                    }
-                });
-        });
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
 
-        $("#m24_agregarcabina").click(function (e) {
-            e.preventDefault();
-            var url = '/gestion_cruceros/M24_AgregarCabinas';
-            var method = 'GET';
-            var data = '';
-            console.log("x");
-            $.ajax(
-                {
-                    url: url,
-                    type: method,
-                    data: data,
-                    success: function (data, textStatus, jqXHR) {
+    $("#m24_agregarcabina").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_cruceros/M24_AgregarCabinas';
+        var method = 'GET';
+        var data = '';
+        console.log("x");
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
 
-                        $("#contenido").empty();
-                        $("#contenido").append(data);
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        alert(errorThrown);
-                    }
-                });
-        });
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
 
 
     $("#m05CheckIn").click(function (e) {
@@ -652,7 +584,8 @@ jQuery(document).ready(function () {
                    alert(errorThrown);
                }
            });
-    });
+    });
+
     $("#m04_visualizarvuelo").click(function (e) {
         e.preventDefault();
         var url = '/gestion_vuelo/M04_GestionVuelo_Visualizar';
@@ -677,4 +610,148 @@ jQuery(document).ready(function () {
 
     //Fin M04 Vuelos
 
-});
+
+    //M11 Gestion Ofertas y Paquetes
+    $("#agregarOferta").unbind('click');
+    $("#agregarOferta").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_ofertas/M11_AgregarOferta';
+        var method = 'GET';
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                    getPaquetesFromDB();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
+
+    $("#modificarOferta").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_ofertas/M11_ModificarOferta';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
+    $("#consultarOferta").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_ofertas/M11_VisualizarOferta';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
+    $("#agregarPaquete").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_ofertas/M11_AgregarPaquete';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
+    $("#modificarPaquete").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_ofertas/M11_ModificarPaquete';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
+    $("#consultarPaquete").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_ofertas/M11_VisualizarPaquete';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
+    //Fin M11
+
+
+});
+
+
+
+
+        /*
+        
+        */

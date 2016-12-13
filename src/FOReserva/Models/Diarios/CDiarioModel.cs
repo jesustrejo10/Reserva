@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FOReserva.Servicio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -90,7 +91,7 @@ namespace FOReserva.Models.Diarios
         public DateTime Fecha_carga
         {
             get { return _fecha_carga; }
-            set { _fecha_carga =DateTime.Today;; }
+            set { _fecha_carga = value; }
         }
 
         //Calificacion dada por el creador del diario a la experiencia
@@ -131,6 +132,20 @@ namespace FOReserva.Models.Diarios
         {
             CLugar cl= new CLugar();
             return cl.diariosLugares();
+        }
+
+        public String Nombre_usuario(int id_DV)
+        {
+            ManejadorSQLDiarios manejador = new ManejadorSQLDiarios();
+            string usr = manejador.obtenerUsuario(id_DV);
+            return usr;
+        }
+
+        public String Nombre_lugar(int id_lug)
+        {
+            ManejadorSQLDiarios manejador = new ManejadorSQLDiarios();
+            string lug = manejador.obtenerNombreLugar(id_lug);
+            return lug;
         }
 
         public int Filtro

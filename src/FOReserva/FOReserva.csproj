@@ -1,4 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
+
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -1671,6 +1672,13 @@
     <Content Include="Content\assets\plugins\slider.swiper\dist\js\maps\swiper.jquery.min.js.map" />
     <Content Include="Content\assets\plugins\slider.swiper\dist\js\maps\swiper.min.js.map" />
     <Content Include="Content\assets\plugins\styleswitcher\color_schemes\color_scheme.fla" />
+    <Content Include="Images\anon_user.png" />
+    <Content Include="Images\diario1.jpg" />
+    <Content Include="Images\diario2.jpg" />
+    <Content Include="Images\diario3.jpg" />
+    <Content Include="Images\diario4.jpg" />
+    <Content Include="Images\diario5.jpg" />
+    <Content Include="Images\diario6.jpg" />
     <Content Include="Images\restaurant_generic.jpg" />
     <Content Include="Models\ORM\ModelDBReserva.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -3107,9 +3115,13 @@
     <Content Include="Views\gestion_reserva_habitaciones\buscar_hoteles.cshtml" />
     <Content Include="Views\gestion_reserva_habitaciones\hoteles_con_habitaciones.cshtml" />
     <Content Include="Views\gestion_planificacion_vacaciones\gestion_itinerario.cshtml" />
+    <Content Include="Views\gestion_revision\gestion_ListRevicion.cshtml" />
+    <Content Include="Views\gestion_revision\gestion_revision.cshtml" />
+    <Content Include="Views\gestion_revision\consultar_revision.cshtml" />
     <Content Include="Views\gestion_revision\crear_revision.cshtml" />
     <Content Include="Views\gestion_revision\eliminar_revision.cshtml" />
     <Content Include="Views\gestion_revision\editar_revision.cshtml" />
+    <Content Include="Views\gestion_revision\Consultar_Revision.cshtml" />
     <Content Include="Views\gestion_diarios\gestion_diarios_resultados.cshtml" />
     <Content Include="Views\gestion_reserva_restaurante\lista_reserva_restaurantes.cshtml" />
     <Content Include="Views\gestion_reserva_restaurante\error_conexion.cshtml" />
@@ -3120,6 +3132,7 @@
     <Content Include="Views\gestion_diarios\gestion_diarios_crear.cshtml" />
     <Content Include="Views\Shared\assets\plugins\slider.swiper\dist\js\maps\swiper.min.js.map" />
     <Content Include="Views\gestion_reserva_restaurante\_EditarReserva.cshtml" />
+    <Content Include="Views\gestion_diarios\gestion_diarios_ver.cshtml" />
     <Content Include="Views\gestion_revision\lista_revisiones.cshtml" />
     <Content Include="Views\gestion_revision\consultar_revision.cshtml" />
   </ItemGroup>
