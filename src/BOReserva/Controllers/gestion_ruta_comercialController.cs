@@ -122,8 +122,21 @@ namespace BOReserva.Controllers
             }
             else
             {
+
                 bool resultado = sql.InsertarRuta(model);
-                return null;
+                if (resultado)
+                {
+                    return null;
+                }
+                else{
+                    //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    //Agrego mi error
+                    String error = "Error, ruta existente";
+                    //Retorno el error
+                    return Json(error);
+                }
+                
             }
             
 
