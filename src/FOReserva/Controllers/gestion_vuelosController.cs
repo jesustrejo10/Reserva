@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using FOReserva.Models.Vuelos;
+using FOReserva.Models.ReservaBoleto;
 
 namespace FOReserva.Controllers
 {
     public class gestion_vuelosController : Controller
     {
-        //
-        // GET: /Vuelos/
-
+   
         public ActionResult gestion_vuelos()
         {
-            Models.ReservaBoleto.CBuscarVuelo model = new Models.ReservaBoleto.CBuscarVuelo();
+            CBuscarVuelo model = new CBuscarVuelo();
             return PartialView(model);
         }
 
@@ -23,13 +21,17 @@ namespace FOReserva.Controllers
             return PartialView();
         }
 
-        [HttpPost]
-        public JsonResult buscarVuelo(Cvista_Vuelos model)
-        {
-            String prueba = model._prueba;
-            Console.WriteLine(prueba);
-            return (Json(true, JsonRequestBehavior.AllowGet));
-        }
+        //[HttpPost]
+        //public JsonResult buscarVuelos(CBuscarVuelo model)
+        //{
+        //    String fecha_ida = model._ida;
+        //    String fecha_vuelta = model._vuelta;
+        //    int sel = model.SelectedCiudadIdOrigen;
+        //    int sel2 = model.SelectedCiudadIdDestino;
+
+        //    return (Json(true, JsonRequestBehavior.AllowGet));
+
+        //}
 
     }
 }

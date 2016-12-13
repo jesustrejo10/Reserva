@@ -129,10 +129,12 @@ namespace FOReserva.Servicio
             return lista_res;
         }
 
+
+
         public List<CLugar> buscarCiudades()
         {
 
-            string query = "SELECT [lug_id] ,[lug_nombre] FROM [dbo].[Lugar] WHERE [lug_tipo_lugar] = 'ciudad'";
+            string query = "SELECT [lug_id] ,[lug_nombre] FROM [dbo].[Lugar] WHERE [lug_tipo_lugar] = 'ciudad' ";
 
             SqlDataReader read = Executer(query);
 

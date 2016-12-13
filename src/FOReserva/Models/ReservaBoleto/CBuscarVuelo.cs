@@ -14,13 +14,21 @@ namespace FOReserva.Models.ReservaBoleto
 
         public String _vuelta { get; set; }
 
+        public int _adultos { get; set; }
+
+        public int _ninos { get; set; }
+
         [Display(Name = "Ciudad")]
         public int SelectedCiudadIdOrigen { get; set; }
 
         [Display(Name = "Ciudad")]
         public int SelectedCiudadIdDestino { get; set; }
 
-        public CBuscarVuelo() { }
+        public CBuscarVuelo()
+        {
+            this._adultos = 0;
+            this._ninos = 0;
+        }
 
         public IEnumerable<SelectListItem> CiudadesOrigen
         {
@@ -68,6 +76,11 @@ namespace FOReserva.Models.ReservaBoleto
                     Text = "Selecciona Ciudad Destino"
                 }, count: 1);
             }
+        }
+
+        public int numeroBoletos()
+        {
+            return this._adultos + this._ninos;
         }
     }
 }

@@ -253,6 +253,7 @@
       <DependentUpon>ModelDBReserva.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ReservaBoleto\CBoleto.cs" />
+    <Compile Include="Models\ReservaBoleto\CBuscarVuelo.cs" />
     <Compile Include="Models\ReservaBoleto\CLugar.cs" />
     <Compile Include="Models\ReservaBoleto\CModeloBoleto.cs" />
     <Compile Include="Models\ReservaBoleto\CPasajero.cs" />
@@ -1674,6 +1675,7 @@
     <Content Include="Models\ORM\ModelDBReserva.edmx.diagram">
       <DependentUpon>ModelDBReserva.edmx</DependentUpon>
     </Content>
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Models\Autos\placeholder.html" />
     <Content Include="Models\Cruceros\placeholder.html" />
@@ -1682,6 +1684,7 @@
     <Content Include="Models\Vuelos\placeholder.html" />
     <Content Include="Scripts\cargadorPestanas.js" />
     <Content Include="Scripts\customValidator.js" />
+    <Content Include="Scripts\ReservaBoleto\BusquedaBoleto.js" />
     <Content Include="Scripts\uniqueId.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />

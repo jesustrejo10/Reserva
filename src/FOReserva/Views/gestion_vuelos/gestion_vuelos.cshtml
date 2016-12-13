@@ -1,39 +1,46 @@
-﻿@model FOReserva.Models.ReservaBoleto.CBuscarVuelo;
+﻿@model  FOReserva.Models.ReservaBoleto.CBuscarVuelo
 
-<div class="heading-title">
+<div class="heading-title" style="margin-bottom: 21px;">
     <h3><span>Vuelos</span></h3>
 </div>
 
-@using (Html.BeginForm("buscarVuelos", "gestion_reserva_boleto", null, FormMethod.Post, new { @id = "formBuscarVuelo", @class = "form-horizontal" }))
+@using (Html.BeginForm("buscar_vuelos", "gestion_reserva_boleto", null, FormMethod.Post, new { @id = "formBuscarVuelo", @class = "form-horizontal" }))
 {
   <fieldset>
-        <!-- required [php action request] -->
         <input type="hidden" name="action" value="contact_send" />
-
         <div class="row">
             <div class="form-group">
                 <div class="col-md-6 col-sm-6">
+                    <div>
+                        <label class="radio">
+                            <input type="radio" name="radio-btn" onclick="opcionIdaVuelta(this)" value="ida">
+                            <i></i> Ida
+                        </label>
+                        <label class="radio">
+                            <input type="radio" name="radio-btn" onclick="opcionIdaVuelta(this)" value="idavuelta" checked="checked">
+                            <i></i> Ida y Vuelta
+                        </label>
+                    </div>
                     <label>Origen</label>
                     @Html.DropDownListFor(m => m.SelectedCiudadIdOrigen, Model.CiudadesOrigen, new { @class = "form-control select2", @id = "vuelta" })
-                    @*<input type="text" name="origen" value="" class="form-control required">*@
                 </div>
-                <div class="col-md-6 col-sm-6">
+                <div class="col-md-6 col-sm-6" style=" margin-top: 46px;">
                     <label>Destino</label>
-                    @Html.DropDownListFor(m => m.SelectedCiudadIdOrigen, Model.CiudadesOrigen, new { @class = "form-control select2", @id = "vuelta" })
-                    @*<input type="text" name="destino" value="" class="form-control required">*@
+                    @Html.DropDownListFor(m => m.SelectedCiudadIdDestino, Model.CiudadesDestino, new { @class = "form-control select2", @id = "vuelta" })
                 </div>
             </div>
         </div>
-
+        
         <div class="row">
             <div class="form-group">
                 <div class="col-md-6 col-sm-6">
                     <label>Fecha ida</label>
-                    <input type="text" name="contact[start_date]" value="" class="form-control datepicker required" data-format="yyyy-mm-dd" data-lang="en" data-rtl="false">
+                    @Html.TextBoxFor(m => m._ida, null, new { @type = "date", @class = "form-control pull-right", @id = "ida" })
                 </div>
-                <div class="col-md-6 col-sm-6">
+                <div class="col-md-6 col-sm-6" id="contenedorIdaVuelta">
                     <label>Fecha vuelta</label>
-                    <input type="text" name="contact[start_date]" value="" class="form-control datepicker required" data-format="yyyy-mm-dd" data-lang="en" data-rtl="false">
+                    @Html.TextBoxFor(m => m._vuelta, null, new { @type = "date", @class = "form-control pull-right", @id = "vuelta" })
+                    
                 </div>
             </div>
         </div>
@@ -42,25 +49,11 @@
             <div class="form-group">
                 <div class="col-md-6 col-sm-6">
                     <label>Adultos</label>
-                    <select name="contact[position]" class="form-control pointer required">
-                        <option value="">--- Seleccionar ---</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
+                    @Html.TextBoxFor(m => m._adultos, new { type = "number", @class = "form-control stepper", min = "0", step = "1" })
                 </div>
                 <div class="col-md-6 col-sm-6">
                     <label>Niños</label>
-                    <select name="contact[position]" class="form-control pointer required">
-                        <option value="">--- Seleccionar ---</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
+                    @Html.TextBoxFor(m => m._ninos, new { type = "number", @class = "form-control stepper", min = "0", step = "1" })
                 </div>
             </div>
         </div>
@@ -69,27 +62,27 @@
 
     <div class="row text-center">
         <div class="col-md-12">
-            @*<a class="btn btn-primary" onclick="resumenBusqueda()" href="#"> INICIO </a>*@
-            <button type="button" id="buscarVuelo" class="btn btn-primary" >Buscar</button>
+            <button type="button" id="buscarVuelos" class="btn btn-primary" >Buscar</button>
         </div>
     </div>
-<script>
-    function resumenBusqueda() {
-        cargarContenido('#MD', 'get', '/gestion_reserva_boleto/busqueda_parametros', null, this)
-        cargarContenido('#MI', 'get', '/gestion_reserva_boleto/busqueda_resultados', null, this)
+
+    <script src="~/Scripts/ReservaBoleto/BusquedaBoleto.js"></script>
+    <script>
+
+    $("#contenedorIdaVuelta").css("display", "block");
+
+    function opcionIdaVuelta(seleccion) {
+
+        if (seleccion.value == "ida")
+        {
+            $("#contenedorIdaVuelta").css("display", "none");
+        }
+        else if (seleccion.value == "idavuelta") 
+        {
+            $("#contenedorIdaVuelta").css("display", "block");
+        }
     }
-    //$("#buscarVuelo").click(function (e) {
-    //    e.preventDefault();
-    //    var form = $("#formBuscarVuelos");
-    //    $.ajax({
-    //        url: "gestion_reserva_boleto/Index",
-    //        data: form.serialize(),
-    //        type: 'POST',
-    //        success: function (data) {
-    //            $("#formBuscarVuelos").submit();
-    //        }
-    //    });
-    //});
+
 </script>
        
 }

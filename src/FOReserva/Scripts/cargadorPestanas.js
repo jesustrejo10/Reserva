@@ -65,7 +65,6 @@ jQuery(document).ready(function () {
             type: method,
             data: data,
             success: function (data, textStatus, jqXHR) {
-                console.log('hola carlos')
                 $("#contenedor").empty();
                 $("#contenedor").append(data);
             },

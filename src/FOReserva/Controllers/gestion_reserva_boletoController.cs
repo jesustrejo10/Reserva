@@ -49,12 +49,19 @@ namespace FOReserva.Controllers
         }
 
         [HttpPost]
-        public JsonResult buscarVuelos(CBuscarVuelo model)
+        public JsonResult buscar_vuelos(CBuscarVuelo model)
         {
-            String fecha_ida = model._ida;
-            String fecha_vuelta = model._vuelta;
-            int sel = model.SelectedCiudadIdOrigen;
-            int sel2 = model.SelectedCiudadIdDestino;
+            string fecha_ida = model._ida;
+            string fecha_vuelta = model._vuelta;
+            int origen = model.SelectedCiudadIdOrigen;
+            int destino = model.SelectedCiudadIdDestino;
+            int numeroBoletos = model.numeroBoletos();
+
+            System.Diagnostics.Debug.WriteLine(fecha_ida);
+            System.Diagnostics.Debug.WriteLine(fecha_vuelta);
+            System.Diagnostics.Debug.WriteLine(origen);
+            System.Diagnostics.Debug.WriteLine(destino);
+            System.Diagnostics.Debug.WriteLine(numeroBoletos);
 
             return (Json(true, JsonRequestBehavior.AllowGet));
 
