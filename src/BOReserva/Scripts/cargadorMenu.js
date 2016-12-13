@@ -38,7 +38,8 @@ jQuery(document).ready(function () {
                    alert(errorThrown);
                }
            }); 
-    });    
+    });
+    
     $("#m02_VisualizarAvion").click(function (e) {
         e.preventDefault();
         var url = '/gestion_aviones/M02_VisualizarAviones';
@@ -58,8 +59,11 @@ jQuery(document).ready(function () {
                 }
             });
 
-    }); 
-    //FIN DE AVIONES    //INICIO DE RUTAS
+    });
+ 
+    //FIN DE AVIONES
+
+    //INICIO DE RUTAS
     $("#m03AgregarRuta").click(function (e) {
         e.preventDefault();
         var url = '/gestion_ruta_comercial/AgregarRutasComerciales';
@@ -77,7 +81,8 @@ jQuery(document).ready(function () {
                 error: function (jqXHR, textStatus, errorThrown) {
                     alert(errorThrown);
                 }
-            });    });
+            });
+    });
 
     $("#m03VisualizarRutas").click(function (e) {
         e.preventDefault();
@@ -92,19 +97,25 @@ jQuery(document).ready(function () {
                 success: function (data, textStatus, jqXHR) {
                     $("#contenido").empty();
                     $("#contenido").append(data);
-                },                error: function (jqXHR, textStatus, errorThrown) {
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
                     alert(errorThrown);
                 }
             });
     });
-    //FIN DE RUTAS 
-    //INICIO AUTOMOVILES 
+    //FIN DE RUTAS
+ 
+    //INICIO AUTOMOVILES
+ 
     $("#m08AgregarAutomovil").click(function (e) {
         e.preventDefault();
+
+        alert("Se esta procesando tu solicitud, por favor espere");
         var url = '/gestion_automoviles/M08_AgregarAutomovil';
         var method = 'GET';
         var data = '';
-        $.ajax( 
+        $.ajax(
+ 
             {
                 url: url,
                 type: method,
@@ -121,6 +132,8 @@ jQuery(document).ready(function () {
 
     $("#m08VisualizarAutomoviles").click(function (e) {
         e.preventDefault();
+
+        alert("Se esta procesando tu solicitud, por favor espere");
         var url = '/gestion_automoviles/M08_VisualizarAutomoviles';
         var method = 'GET';
         var data = '';
@@ -161,7 +174,8 @@ jQuery(document).ready(function () {
                     alert(errorThrown);
                 }
             });
-    });
+    });
+
     $("#editarComida").click(function (e) {
         //M06_EditarComida
         e.preventDefault();
@@ -181,7 +195,8 @@ jQuery(document).ready(function () {
                     alert(errorThrown);
                 }
             });
-    });
+    });
+
     $("#gestionComidaVuelo").click(function (e) {
         //M06_AgregarPorVuelo
         e.preventDefault();
@@ -652,7 +667,8 @@ jQuery(document).ready(function () {
                    alert(errorThrown);
                }
            });
-    });
+    });
+
     $("#m04_visualizarvuelo").click(function (e) {
         e.preventDefault();
         var url = '/gestion_vuelo/M04_GestionVuelo_Visualizar';
@@ -677,4 +693,4 @@ jQuery(document).ready(function () {
 
     //Fin M04 Vuelos
 
-});
+});
