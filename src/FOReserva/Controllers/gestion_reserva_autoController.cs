@@ -27,11 +27,40 @@ namespace FOReserva.Controllers
 
         public ActionResult M19_Reserva_Autos_Perfil()
         {
-
-            return PartialView();
+            ManejadorSQLReservaAutomovil manejador = new ManejadorSQLReservaAutomovil();
+            List<CReserva_Autos_Perfil> lista = manejador.buscarReservas();
+            return PartialView(lista);
         }
 
-        [HttpPost]
+        public ActionResult M19_Busqueda_Autos()
+        {
+            string res_entrega = Request.Form["SelectedCiudadIdOrigen"].ToString();
+            string res_destino = Request.Form["SelectedCiudadIdDestino"].ToString();
+
+
+                List<CBusquedaModel> lista = busqueda(res_entrega, res_destino);
+                return View(lista);
+        }
+
+        public ActionResult M19_Accion_Reservar()
+        {
+
+            return View();
+        }
+
+        private List<CBusquedaModel> busqueda(string res_entrega, string res_destino)
+        {
+            List<CBusquedaModel> lista = null;
+            ManejadorSQLReservaAutomovil manejador = new ManejadorSQLReservaAutomovil();
+            if (res_entrega == "12")
+            {
+                lista = manejador.buscarAutosCiudad(res_entrega, res_destino);
+            }
+            return lista;
+        }
+
+
+        /*
         public JsonResult buscarCarro(Cvista_ReservaAutos model)
         {
             
@@ -43,9 +72,9 @@ namespace FOReserva.Controllers
             //Console.WriteLine(prueba);
             
             return (Json(true, JsonRequestBehavior.AllowGet));
-        }
+        } */
 
-        //[HttpPost]
+        [HttpPost]
         public JsonResult InsertarReservaCarro(CAgregarReserva model)
         {
 
@@ -67,8 +96,6 @@ namespace FOReserva.Controllers
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 String error2 = "Error insertando en la BD";
                 return Json(error2); 
-            
-            
             }
       
         }
