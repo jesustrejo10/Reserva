@@ -1,6 +1,5 @@
 using FOReserva.Models.Revision;
 using FOReserva.Servicio;
-using System;
 using System.Collections.Generic;
 using FOReserva.Models.Restaurantes;
 using System.Web.Mvc;
@@ -61,11 +60,11 @@ namespace FOReserva.Controllers
         public ActionResult Eliminar_Revision(string usuario, CRevision revision)
         {
 
-            List<CRevision> lista;
+            List<CRevision> lista = new List<CRevision>();
 
 
-            ManejadorSQLMuestraRevision manejador = new ManejadorSQLMuestraRevision();  // crear en Servicios un manejador para listar 
-            lista = manejador.ConsultarRevision2(usuario, revision);
+            //ManejadorSQLMuestraRevision manejador = new ManejadorSQLMuestraRevision();  // crear en Servicios un manejador para listar 
+            //lista = manejador.ConsultarRevision2(usuario, revision);
 
 
             if (lista == null)

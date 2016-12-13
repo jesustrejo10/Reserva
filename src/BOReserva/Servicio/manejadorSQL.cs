@@ -970,7 +970,79 @@ namespace BOReserva.Servicio
                 throw e;
             }
         }
-
+        //Metodo para quitarle todos los permisos aun usuario
+        public Boolean quitarPermisos(CRoles model)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //Abrir la conexion
+                conexion.Open();
+                //SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "DELETE FROM Rol_Modulo_Detallado WHERE fk_rol_id in (SELECT rol_id from Rol where rol_nombre='" + model.Nombre_rol + "')";
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior
+                SqlDataReader lector = query.ExecuteReader();
+                //cierro el lector
+                lector.Close();
+                //Cierro la conexion
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+        }
+        //Procedimiento del Modulo 13 borrar Roles
+        public Boolean eliminarRol(CRoles model)
+        {
+            try
+            {   //Quito los permisos al rol para luego poder borrarlo
+                bool respuesta = quitarPermisos(model);
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //Abrir la conexion
+                conexion.Open();
+                //SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "DELETE FROM Rol WHERE rol_nombre='" + model.Nombre_rol + "'";
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior
+                SqlDataReader lector = query.ExecuteReader();
+                //cierro el lector
+                lector.Close();
+                //Cierro la conexion
+                conexion.Close();
+                return respuesta;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+        }
         //Meotodo del Modulo 13 para retornar lista de los 
 
         public List<String> M13consultarRolesDeUnUsuario(int id)
