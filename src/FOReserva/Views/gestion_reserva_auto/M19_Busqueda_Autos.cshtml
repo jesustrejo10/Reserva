@@ -1,0 +1,40 @@
+﻿@model List<FOReserva.Models.Autos.CBusquedaModel>
+@{
+    ViewBag.Title = "Resultados Automoviles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- FEATURED GRID -->
+@using (Html.BeginForm("M19_Accion_Reserva", "gestion_reserva_auto", FormMethod.Post))
+{  
+<div class="row">
+    <ul class="shop-item-list row list-inline nomargin">
+
+        @foreach (var item in Model)
+        { 
+        <!-- ITEM -->
+        <li class="col-lg-12">
+            <div class="shop-item clearfix">
+                <div class="shop-item-summary ">
+                    <h2>@item.Fabricante - @item.Modelo</h2>
+                    <p>
+                        <span><strong>Itinerario:</strong></span>@item.Ciudad<br>
+                    </p>
+
+                </div>
+                <div class="shop-item-buttons text-right">
+                    <br>
+                    <span style="font-size: 20px; color: black"><strong>$78.00</strong></span><br>
+                    <button type="submit" id="reservaAutos" class="btn btn-primary">Reserva</button>
+
+                </div>
+            </div>
+
+        </li>
+           
+        }
+    </ul>
+</div>
+} 
+
