@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace FOReserva.Models.Diarios
 {
-    using FOReserva.Servicio;
-    using System.Web.Mvc;
-
     public class CDiarioModel : BaseEntity
     {
         private string   _nombre;
@@ -16,9 +14,10 @@ namespace FOReserva.Models.Diarios
         private string   _descripcion;
         private DateTime _fecha_carga;
         private int      _calif_creador;
-        private int     _rating;
-        private int     _num_visita;
-        private int     _fk_lugar;
+        private int      _rating;
+        private int      _num_visita;
+        private int      _fk_lugar;
+        private int      _fk_usuario;
 
         //Para el formulario
         private int     _filtro;
@@ -36,7 +35,9 @@ namespace FOReserva.Models.Diarios
              int      calif_creador,
              int      rating,
              int      num_visita,
-             int      fk_lugar)
+             int      fk_lugar,
+             int      fk_usuario)
+
             : base(id, name)
         {
 
@@ -46,10 +47,10 @@ namespace FOReserva.Models.Diarios
             this._descripcion   = descripcion;
             this._fecha_carga   = fecha_carga;
             this._calif_creador = calif_creador;
-            this._rating        = rating;
+            this._rating       = rating;
             this._num_visita    = num_visita;
             this._fk_lugar      = fk_lugar;
-
+            this._fk_usuario = fk_usuario;
         }
 
 
@@ -85,11 +86,11 @@ namespace FOReserva.Models.Diarios
             set { _descripcion = value; }
         }
 
-        //Fecha del final del viaje
+        //Fecha de carga de la publicacion
         public DateTime Fecha_carga
         {
             get { return _fecha_carga; }
-            set { _fecha_carga = value; }
+            set { _fecha_carga =DateTime.Today;; }
         }
 
         //Calificacion dada por el creador del diario a la experiencia
@@ -119,6 +120,12 @@ namespace FOReserva.Models.Diarios
             get { return _fk_lugar; }
             set { _fk_lugar = value; }
         }
+        //ID de usuario que crea el Diario
+        public int Usuario
+        {
+            get { return _fk_usuario; }
+            set { _fk_usuario = value; }
+        }
 
         public List<SelectListItem> Lugares()
         {
@@ -131,6 +138,5 @@ namespace FOReserva.Models.Diarios
             get { return _filtro; }
             set { _filtro = value; }
         }
-
     }
 }
