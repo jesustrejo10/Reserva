@@ -1,6 +1,6 @@
 ﻿@model BOReserva.Models.gestion_hoteles.CGestionHoteles_EditarHotel 
 
-<script src="~/Scripts/Scripts_Hoteles/editar_hotel.js"></script>
+<!--<script src="~/Scripts/Scripts_Hoteles/editar_hotel.js"></script>-->
 
 @using (Html.BeginForm("editarhotel", "gestion_hoteles", null, FormMethod.Post, new { @id = "formEditarHotel", @class = "form-horizontal" }))
 {
@@ -114,5 +114,71 @@
         </div>
     </div>
     
+    <script>
+
+
+        $("#modify_hotel").click(function (e) {
+            e.preventDefault();
+            var form = $("#formEditarHotel");
+            
+            //if (tarifadiaria && penalidaddiaria) {
+                $.ajax({
+                    url: "gestion_hoteles/editarhotel",
+                    data: form.serialize(),
+                    type: 'POST',
+                    success: function (data) {
+                        alert("Se ha modificado exitosamente y será redirigido a la tabla de hoteles.");
+                        //$('#formModifyVehicle')[0].reset();
+                        var url1 = '/gestion_hoteles/M09_GestionHoteles_Visualizar';
+                        var method = 'GET';
+                        var data1 = '';
+
+                        $.ajax(
+                            {
+                                url: url1,
+                                type: method,
+                                data: data,
+                                success: function (data, textStatus, jqXHR) {
+
+                                    $("#contenido").empty();
+                                    $("#contenido").append(data);
+                                },
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    alert(errorThrown);
+                                }
+                            });
+                    }
+                });
+            /*} else {
+                var error = "Existen campos vacíos, por favor reviselos.";
+                alert(error);
+            }*/
+        });
+
+
+
+        $("#cancel_modification").click(function (e) {
+            e.preventDefault();
+            var url = '/gestion_hoteles/M09_GestionHoteles_Visualizar';
+            var method = 'GET';
+            var data = '';
+
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+        });
+
+    </script>
   
 }
