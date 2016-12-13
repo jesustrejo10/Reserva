@@ -22,19 +22,21 @@ $("#enviar").click(function (e) {
     var form = $("#formGuardarRuta");
     var origen = $('#rutaOrigen').find(":selected").text();
     var destino = $('#rutaDestino').find(":selected").text();
-    $.ajax({
-        url: "gestion_ruta_comercial/guardarRuta",
-        data: form.serialize(),
-        type: 'POST',
-        success: function (data) {
-            alert("Ruta guardada exitosamente");
-            $('#formGuardarRuta')[0].reset();
-        }, error: function (xhr, textStatus, exceptionThrown) {
-            //muestro el texto del error
-            alert(xhr.responseText);
-        }
+    if (confirm("¿Esta seguro que desea agregar esta ruta?") == true) {
+        $.ajax({
+            url: "gestion_ruta_comercial/guardarRuta",
+            data: form.serialize(),
+            type: 'POST',
+            success: function (data) {
+                alert("Ruta guardada exitosamente");
+                $('#formGuardarRuta')[0].reset();
+            }, error: function (xhr, textStatus, exceptionThrown) {
+                //muestro el texto del error
+                alert(xhr.responseText);
+            }
 
-    });
+        });
+    }
 });
 
 
