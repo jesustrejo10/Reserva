@@ -2,7 +2,7 @@
 
 <script src="~/Scripts/Scripts_Hoteles/editar_hotel.js"></script>
 
-@using (Html.BeginForm("modificarhotel", "gestion_hoteles", null, FormMethod.Post, new { @id = "formEditarHotel", @class = "form-horizontal" }))
+@using (Html.BeginForm("editarhotel", "gestion_hoteles", null, FormMethod.Post, new { @id = "formEditarHotel", @class = "form-horizontal" }))
 {
 <div class="row">
         <!-- left column -->
@@ -12,7 +12,7 @@
             <div class="box box-primary">
                 <!--<div class="box-header with-border">-->
                 <div class="box-header with-border">
-                    <h3 class="box-title"><b>Actualizar hotel</b></h3>
+                    <h3 class="box-title"><b>Modificar hotel</b></h3>
                   </div>
                     <!-- /.box-header -->
                     <!-- form start -->
@@ -56,8 +56,8 @@
                                 </div>
                             </div> <!--/div row-->
                         </div> <!--/div box-body-->
-                            <!--País y ciudad-->
-                            <!-- </div>-->
+                        <!--País y ciudad-->
+                        <!-- </div>-->
                         <div class="box-body">
                             <div class="row">
                                 <div class="col-md-5">
@@ -78,7 +78,7 @@
                                     <div class="form-group">
                                         <label for="pagina">Página web</label>
                                         <!--  <input type="pagina" class="form-control" id="paginaHotel" placeholder="">-->
-                                        @Html.TextBoxFor(m => m._paginaWeb, null, new { @class = "form-control", @placeholder = "", @id = "paginaHotel" })
+                                        @Html.TextBoxFor(m => m._paginaweb, null, new { @class = "form-control", @placeholder = "", @id = "paginaHotel" })
                                     </div>
                                 </div>
                             </div> <!--/div row-->
@@ -103,8 +103,8 @@
                     <!-- /.box-body -->
                     <div class="box-footer">
                         <div class="pull-right">
-                            <button type="submit" class="btn btn-success">Enviar</button>
-                            <button type="button" class="btn btn-danger">Cancelar</button>
+                            <button type="submit" id="modify_hotel" class="btn btn-success">Enviar</button>
+                            <button id="cancel_modification" type="button" class="btn btn-danger">Cancelar</button>
                         </div>
                     </div>
                 </form>  <!--<div class="col-md-12">-->
@@ -113,4 +113,6 @@
 
         </div>
     </div>
+    
+  
 }
