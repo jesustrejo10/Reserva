@@ -242,6 +242,7 @@
     <Compile Include="Models\gestion_check_in\CBoleto.cs" />
     <Compile Include="Models\gestion_check_in\CCheckIn.cs" />
     <Compile Include="Models\gestion_check_in\CDetalleBoleto.cs" />
+    <Compile Include="Models\gestion_check_in\CEquipaje.cs" />
     <Compile Include="Models\gestion_check_in\CLugar.cs" />
     <Compile Include="Models\gestion_check_in\CPasajero.cs" />
     <Compile Include="Models\gestion_check_in\CRuta.cs" />
@@ -468,11 +469,7 @@
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\Scripts_Aviones\llamadas_generales.js" />
-    <Content Include="Scripts\Scripts_CheckIn\BoardingPass.js" />
     <Content Include="Scripts\Scripts_CheckIn\M05_CheckIn.js" />
-    <Content Include="Scripts\Scripts_CheckIn\M05_Equipaje.js" />
-    <Content Include="Scripts\Scripts_CheckIn\M05_VerBoletosCheckIn.js" />
-    <Content Include="Scripts\Scripts_CheckIn\M05_VerDetalleBoleto.js" />
     <Content Include="Scripts\Scripts_Hoteles\llamadas_generales_hoteles.js" />
     <Content Include="Views\dist\css\AdminLTE.css" />
     <Content Include="Views\dist\css\AdminLTE.min.css" />
@@ -1441,6 +1438,8 @@
     <Content Include="Views\gestion_ruta_comercial\DetallesRutasComerciales.cshtml" />
     <Content Include="Views\gestion_roles\M13_AgregarRol.cshtml" />
     <Content Include="Views\gestion_boletos\M05_ModificarBoleto.cshtml" />
+    <Content Include="Views\gestion_check_in\M05_RegistroEquipaje.cshtml" />
+    <Content Include="Views\gestion_check_in\M05_VerPasesAbordaje.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

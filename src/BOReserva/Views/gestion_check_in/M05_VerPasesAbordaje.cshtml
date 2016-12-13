@@ -4,15 +4,15 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Lista de Boletos</h3>
+                <h3 class="box-title">Lista de Pases de Abordaje</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
                 <table id="example" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>N° Boleto</th>
-                            <th>Fecha emisión</th>
+                            <th>N° Pase Abordaje</th>
+                            <th>N° Vuelo</th>
                             <th>Origen</th>
                             <th>Destino</th>
                             <th>Selección</th>
@@ -23,13 +23,12 @@
                         {
                             foreach (var item in Model)
                             {
-                                String fecha_emi = @item._fechaBoleto.Day + "/" + @item._fechaBoleto.Month + "/" + @item._fechaBoleto.Year;
-                
+
                                 <tr id="@item._id">
                                     <td>@item._id</td>
-                                    <td>@fecha_emi</td>
-                                    <td>@item._origen.Name</td>
-                                    <td>@item._destino.Name</td>
+                                    <td>@item._vuelo</td>
+                                    <td>@item._nombreOri</td>
+                                    <td>@item._nombreDest</td>
                                     <td>
                                         <a href="#" title="Seleccionar"><i class="fa fa-check modificar"></i></a>
                                     </td>
@@ -50,7 +49,6 @@
     <!-- /.col -->
 </div>
 <!-- /.row -->
-
 <script>
     $(document).ready(function () {
         $('#example').DataTable({
@@ -80,7 +78,7 @@
             var identificador = $(this).parent().parent().parent().attr("id");
             jQuery.ajax({
                 type: "GET",
-                url: "/gestion_check_in/M05_VerDetalleBoleto",
+                url: "/gestion_check_in/Equipaje",
                 data: { id: identificador }
             }).done(function (data) {
                 $("#contenido").empty();
@@ -95,8 +93,6 @@
 
     });
 </script>
-
-
 
 <script src="../../Content/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
@@ -113,3 +109,4 @@
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
 <!-- page script -->
+

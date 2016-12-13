@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -372,6 +370,149 @@ namespace BOReserva.Servicio.Servicio_Boletos
            {
                String hola = ex.ToString();
                return 0;
+           }
+       }
+
+       public int MConteoBoarding(int num_bol, int num_vue)
+       {
+           int _conteo = 0;
+           try
+           {
+               SqlConnection con = new SqlConnection(stringDeConexion);
+               con.Open();
+               String sql = "SELECT COUNT(*) AS num " +
+                            "FROM Pase_Abordaje B " +
+                            "WHERE B.pas_fk_vuelo = " + num_vue +
+                            " AND B.pas_fk_boleto =" + num_bol + "";
+               SqlCommand cmd = new SqlCommand(sql, con);
+               using (SqlDataReader reader = cmd.ExecuteReader())
+               {
+                   while (reader.Read())
+                   {
+                       _conteo = reader.GetInt32(reader.GetOrdinal("num")); ;
+                   }
+               }
+               cmd.Dispose();
+               con.Close();
+               return _conteo;
+           }
+           catch (SqlException ex)
+           {
+               return _conteo;
+           }
+       }
+
+       public int IdBoardingPass(int num_bol, int num_vue)
+       {
+           int _conteo = 0;
+           try
+           {
+               SqlConnection con = new SqlConnection(stringDeConexion);
+               con.Open();
+               String sql = "SELECT P.pas_id AS id_pase " +
+                            "FROM Pase_Abordaje P " +
+                            "WHERE P.pas_fk_vuelo = " + num_vue +
+                            " AND  P.pas_fk_boleto =" + num_bol + "";
+               SqlCommand cmd = new SqlCommand(sql, con);
+               using (SqlDataReader reader = cmd.ExecuteReader())
+               {
+                   while (reader.Read())
+                   {
+                       _conteo = reader.GetInt32(reader.GetOrdinal("id_pase")); ;
+                   }
+               }
+               cmd.Dispose();
+               con.Close();
+               return _conteo;
+           }
+           catch (SqlException ex)
+           {
+               return _conteo;
+           }
+       }
+
+       public List<CBoardingPass> M05ListarPasesPasajero(int pasaporte)
+       {
+           List<CBoardingPass> listaboletos = new List<CBoardingPass>();
+           try
+           {
+               SqlConnection con = new SqlConnection(stringDeConexion);
+               con.Open();
+               String sql = "SELECT P.pas_id AS numpas, P.pas_fk_lugar_origen AS origen, P.pas_fk_lugar_destino AS destino, P.pas_fk_vuelo AS vuelo" +
+                            " FROM Pase_Abordaje P, Boleto B "+
+                            " WHERE B.bol_fk_pasajero = "+ pasaporte +
+                            " AND P.pas_fk_boleto = B.bol_id";
+               SqlCommand cmd = new SqlCommand(sql, con);
+               using (SqlDataReader reader = cmd.ExecuteReader())
+               {
+                   while (reader.Read())
+                   {
+
+                       CBoardingPass boleto = new CBoardingPass(Int32.Parse(reader["numpas"].ToString()),
+                                              MBuscarnombreciudad(Int32.Parse(reader["origen"].ToString())),
+                                              MBuscarnombreciudad(Int32.Parse(reader["destino"].ToString())),
+                                              Int32.Parse(reader["vuelo"].ToString()));
+                       listaboletos.Add(boleto);
+                   }
+               }
+               cmd.Dispose();
+               con.Close();
+               return listaboletos;
+           }
+           catch (SqlException ex)
+           {
+               return null;
+           }
+       }
+
+       public int CrearEquipaje(int id, int peso)
+       {
+
+           try
+           {
+               SqlConnection con = new SqlConnection(stringDeConexion);
+               con.Open();
+               String sql = "INSERT INTO Equipaje (equ_peso,equ_fk_pase_abordaje) " +
+                   " VALUES (" + peso + "," + id + ")";
+
+               SqlCommand cmd = new SqlCommand(sql, con);
+               cmd.ExecuteNonQuery();
+               cmd.Dispose();
+               con.Close();
+               return 1;
+           }
+           catch (SqlException ex)
+           {
+               String hola = ex.ToString();
+               return 0;
+           }
+       }
+
+       public int MConteoMaletas(int pase)
+       {
+           int _conteo = -1;
+           try
+           {
+               SqlConnection con = new SqlConnection(stringDeConexion);
+               con.Open();
+               String sql = "SELECT COUNT(*) AS num " +
+                            " FROM Equipaje  " +
+                            " WHERE equ_fk_pase_abordaje = " + pase + "";
+               SqlCommand cmd = new SqlCommand(sql, con);
+               using (SqlDataReader reader = cmd.ExecuteReader())
+               {
+                   while (reader.Read())
+                   {
+                       _conteo = reader.GetInt32(reader.GetOrdinal("num")); ;
+                   }
+               }
+               cmd.Dispose();
+               con.Close();
+               return _conteo;
+           }
+           catch (SqlException ex)
+           {
+               return _conteo;
            }
        }
     }

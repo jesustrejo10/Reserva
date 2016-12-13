@@ -10,53 +10,60 @@
                 <div class="box-tools pull-right">
                 </div>
             </div>
+            <div class="row">
 
-            <div class="content" style="background: url(/Content/dist/img/boarding_final.jpg) no-repeat center; background-size: 680px;">
+                <div class="content" style="background: url(/Content/dist/img/boarding_final.jpg) no-repeat center; background-size: 680px;">
 
-                <div id="apDiv7">
-                     @Html.DisplayFor(m => m._vuelo)
-                </div>
-
-                <div id="apDiv8">
-                    @Html.DisplayFor(m => m._apellido)
-
-                    <div id="apDiv9">
-                        @Html.DisplayFor(m => m._nombre)
-
-                        <div id="apDiv11">
-                            @Html.DisplayFor(m => m._vuelo)
-                        </div>
-
+                    <div id="apDiv7">
+                        @Html.DisplayFor(m => m._vuelo)
                     </div>
-                </div>
 
-                <div id="apDiv4">
-                    <label id="puertapartida">A22</label>
-                    <div id="apDiv5">
-                        @Html.DisplayFor(m => m._fechaPartida)
+                    <div id="apDiv8">
+                        @Html.DisplayFor(m => m._apellido)
 
-                        <div id="apDiv12">
-                            @Html.DisplayFor(m => m._asiento)
+                        <div id="apDiv9">
+                            @Html.DisplayFor(m => m._nombre)
+
+                            <div id="apDiv11">
+                                @Html.DisplayFor(m => m._vuelo)
+                            </div>
+
                         </div>
+                    </div>
 
-                        <div id="apDiv14">
-                            @Html.DisplayFor(m => m._nombreOri)
-                        </div>
-
-                        <div id="apDiv15">-</div>
-                        <div id="apDiv16">
-                            @Html.DisplayFor(m => m._nombreDest)
-                        </div>
-                        <div id="apDiv13">
+                    <div id="apDiv4">
+                        <label id="puertapartida">A22</label>
+                        <div id="apDiv5">
                             @Html.DisplayFor(m => m._fechaPartida)
-                        </div>
-                        <div id="apDiv6">
-                        <label id="zona">2</label>
+
+                            <div id="apDiv12">
+                                @Html.DisplayFor(m => m._asiento)
+                            </div>
+
+                            <div id="apDiv14">
+                                @Html.DisplayFor(m => m._nombreOri)
+                            </div>
+
+                            <div id="apDiv15">-</div>
+                            <div id="apDiv16">
+                                @Html.DisplayFor(m => m._nombreDest)
+                            </div>
+                            <div id="apDiv13">
+                                @Html.DisplayFor(m => m._fechaPartida)
+                            </div>
+                            <div id="apDiv6">
+                                <label id="zona">2</label>
+                            </div>
+                            <div id="apDiv17">
+                                @Html.DisplayFor(m => m._id)
+                                @Html.HiddenFor(m => m._id, new { id = "num_pase" })
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
+                </div>
+
+            </div>
         </div>
     </div>
 </div>
@@ -223,4 +230,13 @@
         left: 261px;
         top: -81px;
     }
+    #apDiv17 {
+        position: absolute;
+        width: 60px;
+        height: 44px;
+        z-index: 1012;
+        left: 250px;
+        top: 105px;
+    }
 </style>
+

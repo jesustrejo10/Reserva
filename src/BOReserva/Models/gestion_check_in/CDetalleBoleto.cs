@@ -100,8 +100,8 @@ namespace BOReserva.Models.gestion_check_in
                 _horaAterrizajeVuelta = time3;
                 _tipos.Add(new SelectListItem
                 {
-                    Text = "",
-                    Value = ""
+                    Text = "Seleccione",
+                    Value = "Seleccione"
                 });
                 _tipos.Add(new SelectListItem
                         {

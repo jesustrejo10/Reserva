@@ -31,6 +31,13 @@ namespace BOReserva.Models.gestion_check_in
         public String _horaPartida { get; set; }
 
         public CBoardingPass() { }
+
+        public CBoardingPass(int id, String nombre1, String nombre2, int vuelo) {
+            _id = id;
+            _nombreOri = nombre1;
+            _nombreDest = nombre2;
+            _vuelo = vuelo;
+        }
   
     }
 }

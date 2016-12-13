@@ -16,13 +16,10 @@
                     <div class="col-md-12" style="margin-top:10px;">
 
                         <div class="col-md-6">
-                            <label>N° de Boleto:</label>
-                            @Html.TextBoxFor(m => m._bol_id, null, new { @class = "form-control", @placeholder = "", @readonly = "readonly" })
+                            @Html.HiddenFor(m => m._bol_id)
                         </div>
 
                     </div>
-
-                    <div>&nbsp;</div>
 
                     <!-------------------- INICIO SECCIÓN DATOS DEL PASAJERO ------------------------------>
                     <div class="row">
@@ -207,7 +204,7 @@
             data: form.serialize(),
             type: 'POST',
             success: function (data) {
-                alert("Se está generando el boleto");
+                alert("Espere para visualizar el boleto");
                 $("#contenido").empty();
                 $("#contenido").append(data);
             }
