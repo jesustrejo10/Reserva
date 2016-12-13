@@ -1,0 +1,131 @@
+﻿@model BOReserva.Models.gestion_cruceros.CGestion_camarote
+<script src="~/Scripts/Scripts_Cruceros/scripts_cruceros.js"></script>
+@using (Html.BeginForm("guardarCamarote", "gestion_cruceros", null, FormMethod.Post, new { @id = "formGuardarCamarote", @class = "form-horizontal" }))
+{
+    <div class="box">
+        <div class="box-body">
+            <div class="box-header with-border">
+                <h1 class="box-title"> Agregar Camarote</h1>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"></button>
+                </div>
+            </div>
+            <div class="modal-body col-xs-12" id="bodyCruc" style="margin-left:24% ; height:300px">
+                <section id="primeraParte">
+                    <div class="form-group" style="margin-bottom:20px">
+                        <label>Cruceros:</label>
+                        @{
+                            SelectList list1 = ViewBag.ShowDropDown;
+                        }
+                        @*@Html.DropDownList("DROPDOWNID", list, "Cruceros", new { @id = "fk_id_crucero" })*@
+                        @Html.DropDownListFor(m => m._fkCrucero, list1, new { @id = "fk_id_crucero", @style = "width:41% ; margin-left:2%" })
+                    </div>
+                    <div class="form-group" style="margin-bottom:20px">
+                        <label>Cabinas:</label>
+                        @{
+                            SelectList list = ViewBag.ShowDropDown;
+                        }
+                        
+                        @*@Html.DropDownListFor(m => m._fkCabina, list, new { @id = "fk_id_cabina", @style = "width:41% ; margin-left:2%" })*@
+                        <select id="fk_id_cabina">
+
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label>Cantidad Cama:</label>
+                                @Html.TextBoxFor(m => m._cantidadCama, null, new { @type = "number", @class = "form-control", @placeholder = "Introduce la cantidad de camas de un camarote", @id = "cantidadCama", @style = "width:50%" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label>Tipo Cama:</label>
+                                @*<select>
+                                    <option>
+
+                                    </option>
+                                </select>*@
+                                @Html.TextBoxFor(m => m._tipoCama, null, new { @type = "text", @class = "form-control", @placeholder = "Introduce el nombre de la cabina", @id = "tipoCama" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-top:10px;">
+                        <button type="button" id="guardar_camarote" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                    </div>
+                </section>
+            </div>
+            <div class="modal-body col-xs-12" id="bodyCruc" style="margin-left: 14.5%">
+                <table>
+                    <thead>
+                        <tr class="crucero crTitles" id="listaCruceros">
+                            <th style="width:170px;height: 40px;text-align: center">Cantidad de camas</th>
+                            <th style="width:170px;height: 40px;text-align: center"> <b>Tipo de camas</b></th>
+                            <th style="width:170px;height: 40px;text-align: center"><b>Estado</b></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaCamarote" class="">
+                        @*@{
+                                foreach (var cabina in Model.cabinas)
+                                {
+                                    <tr id="@cabina._idCabina ">
+                                        <td class="crNombre">@cabina._nombreCabina</td>
+                                        <td class="crCompania">@cabina._precioCabina</td>
+                                        @if (@cabina._estatus == "activo")
+                                        {
+                                            <td class="crStatus"><i class="fa fa-circle started"></i></td>
+                                            <td class="crAcciones"><i class="fa fa-eye"></i> <i class="fa fa-pencil"></i> <i class="fa fa-times"></i> <i class="fa fa-trash eliminar_crucero"></i></td>
+                                        }
+                                        else {
+                                            <td class="crStatus"><i class="fa fa-circle paused"></i></td>
+                                            <td class="crAcciones"><i class="fa fa-eye"></i> <i class="fa fa-pencil"></i> <i class="fa fa-check"></i> <i class="fa fa-trash"></i></td>
+                                        }
+                                    </tr>
+
+                                }
+                            }*@
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <script>
+        $("#guardar_camarote").click(function (e) {
+            e.preventDefault();
+            var form = $("#formGuardarCamarote");
+            $.ajax({
+                url: "gestion_cruceros/guardarCamarote",
+                data: form.serialize(),
+                type: 'POST',
+                success: function (data) {
+                    console.log(data)
+                    //$("#tablaCabinas tr").remove();
+                    $("#tablaCamarote").append("<tr><td>" + $("#cantidad_camas").val() + "</td><td>" + $("#tipo_cama").val() + "</td></tr>");
+                    //$.ajax({
+                    //    url: '/gestion_cruceros/M24_AgregarCabinas',
+                    //    type: 'GET',
+                    //    data: '',
+                    //    success: function (data, textStatus, jqXHR) {
+                    //        $("#contenido").empty();
+                    //        $("#contenido").append(data);
+                    //    },
+                    //    error: function (jqXHR, textStatus, errorThrown) {
+                    //        alert(errorThrown);
+                    //    }
+                    //});
+                    //$('#formGuardarCabina')[0].reset();
+                },
+                error: function (data) {
+                    console.log(data);
+                    $('#formGuardarCamarote')[0].reset();
+                }
+            });
+        });
+    </script>
+}

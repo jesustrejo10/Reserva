@@ -521,6 +521,28 @@
                 });
         });
 
+        $("#m24_agregarcamarote").click(function (e) {
+            e.preventDefault();
+            var url = '/gestion_cruceros/M24_AgregarCamarote';
+            var method = 'GET';
+            var data = '';
+            console.log("xjjj");
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+        });
+
 
     $("#m05CheckIn").click(function (e) {
         e.preventDefault();

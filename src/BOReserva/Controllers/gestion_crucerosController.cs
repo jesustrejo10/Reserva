@@ -18,6 +18,11 @@ namespace BOReserva.Controllers
             return PartialView();
         }
 
+        //public ActionResult M24_AgregarCamarote()
+        //{
+        //    return PartialView();
+        //}
+
         public ActionResult M24_AgregarCabinas()
         {
             ConexionBD cbd = new ConexionBD();
@@ -28,6 +33,22 @@ namespace BOReserva.Controllers
             ViewBag.ShowDropDown = new SelectList(vlc.cruceros, "_idCrucero", "_nombreCrucero");
             //cabina.cabinas = cbd.listarCabinas(crucero._idCrucero);
             return PartialView("M24_AgregarCabinas", cabina);
+            //return PartialView();
+        }
+
+        public ActionResult M24_AgregarCamarote()
+        {
+            ConexionBD cbd = new ConexionBD();
+            VistaListaCrucero vlc = new VistaListaCrucero();
+            CGestion_cabina cabina = new CGestion_cabina();
+            CGestion_camarote camarote = new CGestion_camarote() { camarote = new List<CGestion_camarote>() };
+            //CGestion_crucero crucero = new CGestion_crucero();
+            vlc.cruceros = cbd.listarCruceros();
+            ViewBag.ShowDropDown = new SelectList(vlc.cruceros, "_idCrucero", "_nombreCrucero");
+            //cabina.cabinas = cbd.listarCabinas(crucero._idCrucero);
+            //ViewBag.ShowDropDown = new SelectList(cabina.cabinas, "_idCabina", "_nombreCabina");
+            //cabina.cabinas = cbd.listarCabinas(crucero._idCrucero);
+            return PartialView("M24_AgregarCamarote", camarote);
             //return PartialView();
         }
 
@@ -86,6 +107,19 @@ namespace BOReserva.Controllers
 
             CGestion_cabina cabina = new CGestion_cabina(_nombreCabina, _precioCabina, _fkCrucero);
             cabina.AgregarCabinas(cabina);
+
+            return (Json(true, JsonRequestBehavior.AllowGet));
+        }
+
+        [HttpPost]
+        public JsonResult guardarCamarote(CGestion_camarote model)
+        {
+            int _cantidadCama = model._cantidadCama;
+            String _tipoCama = model._tipoCama;
+            int _fkCabina = model._fkCabina;
+
+            CGestion_camarote camarote = new CGestion_camarote(_cantidadCama, _tipoCama, _fkCabina);
+            camarote.AgregarCamarote(camarote);
 
             return (Json(true, JsonRequestBehavior.AllowGet));
         }

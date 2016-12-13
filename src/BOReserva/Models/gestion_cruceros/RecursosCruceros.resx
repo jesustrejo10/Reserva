@@ -121,6 +121,10 @@
     <value>M24_AgregarCabinas</value>
     <comment>Agrega una nueva Cabina a un crucero</comment>
   </data>
+  <data name="AgregarCamarote" xml:space="preserve">
+    <value>M24_AgregarCamarote</value>
+    <comment>Agregar un nuevo camarote a la cabina</comment>
+  </data>
   <data name="AgregarCruceros" xml:space="preserve">
     <value>M24_AgregarCrucero</value>
     <comment>Agrega un nuevo Crucero al sistema</comment>
@@ -136,6 +140,10 @@
   <data name="ListarCabinas" xml:space="preserve">
     <value>M24_ListarCabinas</value>
     <comment>Consulta lista de cabinas de un crucero</comment>
+  </data>
+  <data name="ListarCamarote" xml:space="preserve">
+    <value>M24_ListarCamarote</value>
+    <comment>Consultar lista de Camarotes</comment>
   </data>
   <data name="ListarCruceros" xml:space="preserve">
     <value>M24_ListarCruceros</value>

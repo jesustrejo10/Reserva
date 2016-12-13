@@ -187,5 +187,53 @@ namespace BOReserva.Models.gestion_cruceros
             return listaCabinas;
         }
 
+        public void insertarCamarote(CGestion_camarote camarote)
+        {
+            Conectar();
+                using (comando = new SqlCommand(RecursosCruceros.AgregarCamarote, conexion)) ;
+            
+                {
+                    comando.CommandType = CommandType.StoredProcedure;
+
+                    comando.Parameters.AddWithValue("@cantidad_camas", camarote._cantidadCama);
+                    comando.Parameters.AddWithValue("@tipo_cama", camarote._tipoCama);
+                    comando.Parameters.AddWithValue("@fk_id_cabina", camarote._fkCabina);
+                    conexion.Open();
+                    comando.ExecuteNonQuery();
+                }
+                    
+                }
+               
+        
+
+        public List<CGestion_camarote> listarCamarote(int idCabina)
+        {
+            List<CGestion_camarote> listaCamarote = new List<CGestion_camarote>();
+            CGestion_camarote camarote;
+            Conectar();
+            using (comando = new SqlCommand(RecursosCruceros.ListarCamarote, conexion))
+            {
+                comando.CommandType = CommandType.StoredProcedure;
+                comando.Parameters.AddWithValue("@idCabina", idCabina);
+                conexion.Open();
+                //comando.ExecuteNonQuery();
+                SqlDataReader reader = comando.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    camarote = new CGestion_camarote();
+                    //cabina._idCabina = int.Parse(reader["id"].ToString());
+                    camarote._cantidadCama = int.Parse(reader["cantidadCama"].ToString());
+                    camarote._tipoCama= reader["tipoCama"].ToString();
+                    camarote._estatus= reader["estatus"].ToString();
+                    listaCamarote.Add(camarote);
+                }
+                reader.Close();
+            }
+            return listaCamarote;
+        }
+
     }
+
+
 }
