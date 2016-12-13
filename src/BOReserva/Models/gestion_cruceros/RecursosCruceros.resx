@@ -125,6 +125,10 @@
     <value>M24_AgregarCrucero</value>
     <comment>Agrega un nuevo Crucero al sistema</comment>
   </data>
+  <data name="ConsultarCruceros" xml:space="preserve">
+    <value>M24_ConsultarCruceros</value>
+    <comment>Consulta información de un crucero</comment>
+  </data>
   <data name="EliminarCruceros" xml:space="preserve">
     <value>M24_EliminarCruceros</value>
     <comment>Elimina un crucero</comment>
@@ -134,7 +138,7 @@
     <comment>Consulta lista de cabinas de un crucero</comment>
   </data>
   <data name="ListarCruceros" xml:space="preserve">
-    <value>M24_ConsultarCrucero</value>
+    <value>M24_ListarCruceros</value>
     <comment>Consultar lista de Cruceros</comment>
   </data>
 </root>

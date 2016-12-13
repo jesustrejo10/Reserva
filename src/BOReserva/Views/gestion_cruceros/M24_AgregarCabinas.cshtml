@@ -89,7 +89,8 @@
                 data: form.serialize(),
                 type: 'POST',
                 success: function (data) {
-
+                    console.log(data)
+                    //$("#tablaCabinas tr").remove();
                     $("#tablaCabinas").append("<tr><td>" + $("#nombrecabina").val() + "</td><td>" + $("#precio").val() + "</td></tr>");
                     //$.ajax({
                     //    url: '/gestion_cruceros/M24_AgregarCabinas',

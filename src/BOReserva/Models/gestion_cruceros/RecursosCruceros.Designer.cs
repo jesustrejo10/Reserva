@@ -79,6 +79,15 @@ namespace BOReserva.Models.gestion_cruceros {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to M24_ConsultarCruceros.
+        /// </summary>
+        internal static string ConsultarCruceros {
+            get {
+                return ResourceManager.GetString("ConsultarCruceros", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to M24_EliminarCruceros.
         /// </summary>
         internal static string EliminarCruceros {
@@ -97,7 +106,7 @@ namespace BOReserva.Models.gestion_cruceros {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to M24_ConsultarCrucero.
+        ///   Looks up a localized string similar to M24_ListarCruceros.
         /// </summary>
         internal static string ListarCruceros {
             get {
