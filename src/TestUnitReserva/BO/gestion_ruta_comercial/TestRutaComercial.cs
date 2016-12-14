@@ -39,8 +39,8 @@ namespace TestUnitReserva.BO.gestion_ruta_comercial
         public void TestValidarRuta()
         {
             CAgregarRuta prueba = new CAgregarRuta();
-            prueba._origenRuta = "Valencia - Venezuela";
-            prueba._destinoRuta = "Valencia - España";
+            prueba._origenRuta = "Merida - Venezuela";
+            prueba._destinoRuta = "Texas - Estados Unidos";
             prueba._estadoRuta = "Activa";
             prueba._tipoRuta = "Aerea";
             prueba._distanciaRuta = 765;
