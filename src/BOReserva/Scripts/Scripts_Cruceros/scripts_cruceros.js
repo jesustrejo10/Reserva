@@ -40,14 +40,14 @@ $("#fk_id_crucero").change(function (e) {
         url: "gestion_cruceros/M24_ListarCabinas/"+ $("#fk_id_crucero").val(),
         data: null,
         type: 'GET',
-        success: function (data) { 
+        success: function (data) {
+            $("#fk_id_cabina").empty();
             for (var index = 0; index < data.length; index++) {
                 console.log(data[index])
                 html = "<option id='" + data[index]._idCabina + "' value='" + data[index]._idCabina + "'>" + data[index]._nombreCabina + "</option>"; 
                 console.log(html)
                 $("#fk_id_cabina").append(html);
-            }
-            $("#fk_id_cabina").clear();
+            } 
             //$('#formGuardarCabina')[0].reset();
         },
         error: function (data) {

@@ -105,7 +105,11 @@
                 data: form.serialize(),
                 type: 'POST',
                 success: function (data) {
-                    $("#tablaCamarote").append("<tr><td>" + $("#cantidadCama").val() + "</td><td>" + $("#tipoCama").val() + "</td></tr>");
+                    var statusHTML = "<td class='crStatus'><i class='fa fa-circle started'></i></td><td class='crAcciones'><i class='fa fa-pencil'></i> <i class='fa fa-times' onclick='cambioCamarote(" + $("#idCamarote").val() + ")'></i></td>";
+                    html = "<tr><td style='text-align:center'>" + $("#cantidadCama").val() + "</td><td style='text-align:center'>" + $("#tipoCama").val() + "</td>" + statusHTML + "</tr>";
+                    console.log(html)
+                    $("#tablaCamarote").append(html);
+                    //$("#tablaCamarote").append("<tr><td>" + $("#cantidadCama").val() + "</td><td>" + $("#tipoCama").val() + "</td></tr>");
                 },
                 error: function (data) {
                     console.log(data);
@@ -124,12 +128,23 @@
                 type: 'POST',
                 success: function (data) {
                     $.ajax({
-                        url: '/gestion_cruceros/M24_AgregarCamarote',
+                        url: "/gestion_cruceros/M24_ListarCamarotes/" + $("#fk_id_cabina").val(),
                         type: 'GET',
                         data: '',
                         success: function (data, textStatus, jqXHR) {
-                            $("#contenido").empty();
-                            $("#contenido").append(data);
+                            $("#tablaCamarote").empty();
+                            for (var index = 0; index < data.length; index++) {
+                                console.log(data[index])
+
+                                var statusHTML = data[index]._estatus == "activo" ? "<td class='crStatus'><i class='fa fa-circle started'></i></td>" +
+                                                        "<td class='crAcciones'><i class='fa fa-pencil'></i> <i class='fa fa-times' onclick='cambioCamarote(" + data[index]._idCamarote + ")'></i></td>" : "<td class='crStatus'><i class='fa fa-circle paused'></i></td><td class='crAcciones'><i class='fa fa-pencil'></i> <i class='fa fa-check' onclick='cambioCamarote(" + data[index]._idCamarote + ")'></i></td>";
+
+
+                                console.log(statusHTML)
+                                html = "<tr id='" + data[index]._idCamarote + "'><td style='text-align:center'>" + data[index]._cantidadCama + "</td><td style='text-align:center'>" + data[index]._tipoCama + "</td>" + statusHTML + "</tr>";
+                                console.log(html)
+                                $("#tablaCamarote").append(html);
+                            }
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
                             alert(errorThrown);

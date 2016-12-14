@@ -169,7 +169,6 @@
 
 #bodyCruc {
     height: calc(100vh - 181px);
-    overflow-x: hidden;
 }
 
 #cabinList,
