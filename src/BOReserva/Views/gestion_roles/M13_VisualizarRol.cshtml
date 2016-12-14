@@ -78,66 +78,71 @@
 
 
 <script language="javascript" type="text/javascript">
-
+   
     $(".eliminar").click(function () {
-        var identificador = $(this).parent().parent().parent().attr("id");
-        jQuery.ajax({
-            type: "POST",
-            url: "/gestion_roles/eliminarRol",
-            data: { _nombrerol: identificador }
-        }).done(function (data) {
-            var url = '/gestion_roles/M13_VisualizarRol';
-            var method = 'GET';
-            var data = '';
-            $.ajax(
-                {
-                    url: url,
-                    type: method,
-                    data: data,
-                    success: function (data, textStatus, jqXHR) {
+        var r = confirm("Esta función no podrá ser revertida, ¿Está seguro de que desea continuar?")
+        if (r) {
+            var identificador = $(this).parent().parent().parent().attr("id");
+            jQuery.ajax({
+                type: "POST",
+                url: "/gestion_roles/eliminarRol",
+                data: { _nombrerol: identificador }
+            }).done(function (data) {
+                var url = '/gestion_roles/M13_VisualizarRol';
+                var method = 'GET';
+                var data = '';
+                $.ajax(
+                    {
+                        url: url,
+                        type: method,
+                        data: data,
+                        success: function (data, textStatus, jqXHR) {
 
-                        $("#contenido").empty();
-                        $("#contenido").append(data);
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        alert(errorThrown);
-                    }
-                });
-        }).fail(function (data) {
-            alert(data);
-        });
-    });
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+            }).fail(function (data) {
+                alert(data);
+            });
+    
+        } });
 
 
     $(".eliminarpermiso").click(function () {
-        var nombreRol = $(this).parent().parent().parent().attr("id");
-        var nombrePermiso = $(this).parent().attr("id");
-        jQuery.ajax({
-            type: "POST",
-            url: "/gestion_roles/quitarPermisoRol",
-            data: { _nombrerol: nombreRol, _nombrepermiso: nombrePermiso }
-        }).done(function (data) {
-            var url = '/gestion_roles/M13_VisualizarRol';
-            var method = 'GET';
-            var data = '';
-            $.ajax(
-                {
-                    url: url,
-                    type: method,
-                    data: data,
-                    success: function (data, textStatus, jqXHR) {
+        var r = confirm("Esta función no podrá ser revertida, ¿Está seguro de que desea continuar?")
+        if (r) {
+            var nombreRol = $(this).parent().parent().parent().attr("id");
+            var nombrePermiso = $(this).parent().attr("id");
+            jQuery.ajax({
+                type: "POST",
+                url: "/gestion_roles/quitarPermisoRol",
+                data: { _nombrerol: nombreRol, _nombrepermiso: nombrePermiso }
+            }).done(function (data) {
+                var url = '/gestion_roles/M13_VisualizarRol';
+                var method = 'GET';
+                var data = '';
+                $.ajax(
+                    {
+                        url: url,
+                        type: method,
+                        data: data,
+                        success: function (data, textStatus, jqXHR) {
 
-                        $("#contenido").empty();
-                        $("#contenido").append(data);
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        alert(errorThrown);
-                    }
-                });
-        }).fail(function (data) {
-            alert(data);
-        });
-    });
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+            }).fail(function (data) {
+                alert(data);
+            });
+        }});
 </script>
 
 <style>
