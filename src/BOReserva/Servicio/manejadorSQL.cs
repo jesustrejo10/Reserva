@@ -906,7 +906,7 @@ namespace BOReserva.Servicio
                 //Abrir la conexion
                 conexion.Open();
                 //query es un string que me devolvera la consulta
-                String query = "SELECT mod_gen_nombre as Modulo_Detallado FROM modulo_general ,rol,rol_modulo_detallado,modulo_detallado  where rol_id=fk_rol_id and fk_mod_det_id=mod_det_id and fk_mod_gen_id=mod_gen_id and rol_nombre='" + _rol.Nombre_rol + "'";
+                String query = "SELECT DISTINCT mod_gen_nombre as Modulo_Detallado FROM modulo_general ,rol,rol_modulo_detallado,modulo_detallado  where rol_id=fk_rol_id and fk_mod_det_id=mod_det_id and fk_mod_gen_id=mod_gen_id and rol_nombre='" + _rol.Nombre_rol + "'";
                 SqlCommand cmd = new SqlCommand(query, conexion);
                 SqlDataReader lector = cmd.ExecuteReader();
                 //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
