@@ -131,7 +131,7 @@ namespace BOReserva.Controllers
         {
             //Se resetea intentos en la Tabla Login MO1 Ingreso Seguridad
             Cgestion_seguridad_ingreso ingreso = new Cgestion_seguridad_ingreso();
-           
+            
 
             if (usuID.HasValue)
             {
