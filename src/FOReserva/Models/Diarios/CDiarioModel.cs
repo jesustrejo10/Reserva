@@ -91,7 +91,7 @@ namespace FOReserva.Models.Diarios
         public DateTime Fecha_carga
         {
             get { return _fecha_carga; }
-            set { _fecha_carga = DateTime.Today; }
+            set { _fecha_carga = value; }
         }
 
         //Calificacion dada por el creador del diario a la experiencia
