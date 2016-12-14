@@ -1,4 +1,4 @@
-﻿<!-- Indico que para esta vista, M08_AgregarAutomovil, utilizare el modelo Models/gestion_automoviles/CAgregarAutomovil-->
+<!-- Indico que para esta vista, M08_AgregarAutomovil, utilizare el modelo Models/gestion_automoviles/CAgregarAutomovil-->
 @model BOReserva.Models.gestion_automoviles.CModificarAutomovil
 
 <!--Indico que, estoy abriendo un formulario que tendra como accion del submit, el controlador gestion_automoviles"Controller",
@@ -102,7 +102,16 @@
                             </div>
                             <div class="col-xs-6">
                                 <label for="">Pais(<span style="color:red">*</span>)</label>
-                                @Html.DropDownListFor(m => m._pais, BOReserva.Controllers.gestion_automovilesController.pais(), new { @class = "form-control", @placeholder = "Pais", @id = "vehi_pais", @onblur = "listadeciudades(this.value);" })
+                                @{
+                                    List<SelectListItem> paises = BOReserva.Controllers.gestion_automovilesController.pais();
+                                    if (paises.First().Text.Length > 15){
+                                        Response.Write("<script>alert('" + paises.First().Text + "');</script>");
+                                        @Html.DropDownListFor(m => m._pais, paises, new { @class = "form-control", @placeholder = "Pais", @id = "vehi_pais", @onblur = "listadeciudades(this.value);" });
+                                    }else{
+                                        @Html.DropDownListFor(m => m._pais, paises, Model._pais, new { @class = "form-control", @placeholder = "Pais", @id = "vehi_pais", @onblur = "listadeciudades(this.value);" });
+                                        
+                                    }
+                                 }
                             </div>
                         </div>
                         <div>&nbsp;</div>
@@ -110,12 +119,14 @@
                             <div class="col-xs-6">
                                 <label for="Ciudad">Ciudad(<span style="color:red">*</span>)</label>
                                 @*@Html.DropDownListFor(m => m._ciudad, BOReserva.Controllers.gestion_automovilesController.ciudades(), new { @class = "form-control", @placeholder = "Ciudad", @id = "vehi_ciudad" })*@
-                                <select class="form-control" id="ciudades" name="ciudad" onchange="getciudad();"></select>
+                                <select class="form-control" id="ciudades" name="ciudad" onchange="getciudad();">
+                                    <option> @Model._ciudad</option>
+                                </select>
                             </div>
                             <div class="col-xs-6">
                                 <label for="transmision">Transmision:</label>
 
-                                @Html.TextBoxFor(m => m._transmision, null, new { @class = "form-control", @placeholder = "Ciudad", @id = "vehi_transmision", @readonly = "readonly" })
+                                @Html.TextBoxFor(m => m._transmision, null, new { @class = "form-control", @placeholder = "Transmision", @id = "vehi_transmision", @readonly = "readonly" })
                             </div>
 
                         </div>
@@ -175,26 +186,30 @@
                     data: form.serialize(),
                     type: 'POST',
                     success: function (data) {
-                        alert("Se ha modificado exitosamente y sera redirigido a la tabla de vehiculos");
-                        //$('#formModifyVehicle')[0].reset();
-                        var url1 = '/gestion_automoviles/M08_VisualizarAutomoviles';
-                        var method = 'GET';
-                        var data1 = '';
+                        if (data === "1") {
+                            alert("Se ha modificado exitosamente y sera redirigido a la tabla de vehiculos, por favor espere");
+                            //$('#formModifyVehicle')[0].reset();
+                            var url1 = '/gestion_automoviles/M08_VisualizarAutomoviles';
+                            var method = 'GET';
+                            var data1 = '';
 
-                        $.ajax(
-                            {
-                                url: url1,
-                                type: method,
-                                data: data,
-                                success: function (data, textStatus, jqXHR) {
+                            $.ajax(
+                                {
+                                    url: url1,
+                                    type: method,
+                                    data: data,
+                                    success: function (data, textStatus, jqXHR) {
 
-                                    $("#contenido").empty();
-                                    $("#contenido").append(data);
-                                },
-                                error: function (jqXHR, textStatus, errorThrown) {
-                                    alert(errorThrown);
-                                }
-                            });
+                                        $("#contenido").empty();
+                                        $("#contenido").append(data);
+                                    },
+                                    error: function (jqXHR, textStatus, errorThrown) {
+                                        alert(errorThrown);
+                                    }
+                                });
+                        } else {
+                            alert(data);
+                        }
                     }
                 });
             } else {
@@ -210,6 +225,7 @@
             var url = '/gestion_automoviles/M08_VisualizarAutomoviles';
             var method = 'GET';
             var data = '';
+            alert("Espere un momento y será redirigido");
 
             $.ajax(
                 {
@@ -276,3 +292,4 @@
 
 
 }
+

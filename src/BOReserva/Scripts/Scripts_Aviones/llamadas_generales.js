@@ -1,4 +1,3 @@
-﻿
     //EVENTO PARA AGREGAR UN AVION
     $("#aceptarAvion").click(function (e) {
         console.log("hola!");
@@ -254,5 +253,3 @@
             });
 
     });
-
-

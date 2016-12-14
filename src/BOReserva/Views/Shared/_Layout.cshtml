@@ -137,7 +137,17 @@
                     </li>
                     <!-- FIN MODULO DE RUTAS COMERCIALES -->
                     <!-- MODULO DE VUELOS -->
-                    <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Vuelos</a></li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-plane"></i> <span>Gestión de Vuelos</span> <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="m04_crearvuelo"><a href="#"> Crear </a></li>
+                            <li id="m04_visualizarvuelo"><a href="#"> Visualizar </a></li>
+                        </ul>
+                    </li>
                     <!-- FIN MODULO DE VUELOS -->
                     <!-- MODULO DE BOLETOS AEREOS Y CHECK-IN -->
                     <li class="treeview">
@@ -153,10 +163,7 @@
                             <li id="m05VisualizarBoletos"><a href="#"><i class="fa fa-eye"></i>Visualizar</a></li>
                         </ul>
                     </li>
-
                     <li id="m05CheckIn"><a href="#"><i class="fa fa-book"></i><span>Check in</span></a></li>
-
-
                     <!-- FIN MODULO DE BOLETOS AEREOS Y CHECK-IN -->
                     <!-- MODULO DE COMIDA POR VUELO -->
                     <li class="treeview">
@@ -166,10 +173,10 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li id="gestionComida"><a href="modules/gestion_comida_vuelo/M06_AgregarComida.cshtml"><i class="fa fa-plus-square-o"></i>Agregar Nuevo</a></li>
-                            <li id="editarComida"><a href="modules/gestion_comida_vuelo/M06_EditarComida.cshtml"><i class="fa fa-edit"></i>Editar</a></li>
-                            <li id="gestionComidaVuelo"><a href="modules/gestion_comida_vuelo/M06_AgregarPorVuelo.cshtml"><i class="fa fa-plus-square-o"></i>Agregar por Vuelo</a></li>
-                            <li><a href="modules/gestion_comida_vuelo/M06_ConsultarComidas.html"><i class="fa fa-eye"></i>Visualizar</a></li>
+                            <li id="gestionComida"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar Nuevo</a></li>
+                          @*<li id="editarComida"><a href="#"><i class="fa fa-edit"></i>Editar</a></li>
+                            <li id="gestionComidaVuelo"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar por Vuelo</a></li>*@
+                            <li id="visualizarComidas"><a href="#"><i class="fa fa-eye"></i>Visualizar</a></li>
                         </ul>
                     </li>
                     <!-- FIN DE MODULO DE COMIDA POR VUELO -->
@@ -181,9 +188,8 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li id="agregarRestaurantes"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar Nuevo Restaurante</a></li>
-                            <li id="verRestaurantes"><a href="#"><i class="fa fa-eye"></i>Ver Restaurantes</a></li>
-                            <!--<li id="editarRestaurantes"><a href="#"><i class="fa fa-edit"></i>Editar Restaurantes</a></li>-->
+                            <li id="agregarRestaurantes"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar Restaurante</a></li>
+                            <li id="verRestaurantes"><a href="#"><i class="fa fa-eye"></i>Visualizar Restaurantes</a></li>
                         </ul>
                     </li>
                     <!-- FIN DE MODULO DE RESTAURANTES -->
@@ -215,10 +221,8 @@
                         <ul class="treeview-menu">
                             <li id="agregarOferta"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar Oferta</a></li>
                             <li id="agregarPaquete"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar Paquete</a></li>
-                            <li id="modificarOferta"><a href="#"><i class="fa fa-edit"></i>Modificar Oferta</a></li>
-                            <li id="modificarPaquete"><a href="#"><i class="fa fa-edit"></i>Modificar Paquete</a></li>
                             <li id="consultarOferta"><a href="#"><i class="fa fa-eye"></i>Visualizar Oferta</a></li>
-                            <li id="consultarPaquete"><a href="#"><i class="fa fa-eye"></i>Consultar Paquete</a></li>
+                            <li id="consultarPaquete"><a href="#"><i class="fa fa-eye"></i>Visualizar Paquete</a></li>
                         </ul>
                     </li>
                     <!-- FIN DE MODULO DE OFERTAS Y PAQUETES -->
@@ -230,8 +234,8 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li id="gestionUsuarios"><a href="/gestion_usuarios/M12_index"><i class="fa fa-plus-square-o"></i>Consultar</a></li>
-                            <li id="agregarUsuarios"><a href="/gestion_usuarios/M12_AgregarUsuario"><i class="fa fa-plus-square-o"></i>Agregar</a></li>
+                            <li id="agregarUsuarios"><a href="#">Agregar</a></li>
+                            <li id="indexUsuarios"><a href="#">Visualizar</a></li>
                         </ul>
                     </li>
                     <!-- FIN DE MODULO DE GESTION DE USUARIOS -->
@@ -244,20 +248,25 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li id="m13AgregarRol"><a href="#"><i class="fa fa-plus-square-o"></i>Crear</a></li>
-                            <li id="m13VisualizarRol"><a href="#"><i class="fa fa-eye"></i>Visualizar</a></li>
+                            <li id="m13AgregarRol"><a href="#">Agregar</a></li>
+                            <li id="m13VisualizarRol"><a href="#">Visualizar</a></li>
+                            <li id="m13ModificarRol"><a href="#">Modificar</a></li>
                         </ul>
                     </li>
                     <!-- FIN DE MODULO DE GESTION DE ROLES -->
                     <!-- MODULO DE CRUCEROS -->
                     <li class="treeview">
-                        <a href="modules/gestion_cruceros/M24_GestionCruceros.html">
+                        <a href="#">
                             <i class="fa fa-ship"></i> <span>Gestión de Cruceros</span> <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="modules/gestion_cruceros/M24_GestionCruceros.html"><i class="fa fa-plus-square-o"></i>Gestionar</a></li>
+                            <li id="m24_listarcrucero"><a href="#"> Visualizar </a></li>
+                            <li id="m24_agregarcrucero"><a href="#"> Agregar Crucero </a></li>
+                            <li id="m24_agregarcabina"><a href="#"> Agregar Cabina </a></li>
+                           <!-- <li id="m24_consultarcrucero"><a href="#"> Consultar </a></li>
+                            <li id="m24_modificarcrucero"><a href="#"> Modificar </a></li>-->
                         </ul>
                     </li>
                     <!-- FIN DE MODULO DE CRUCEROS -->
@@ -270,9 +279,7 @@
                         </a>
                         <ul class="treeview-menu">
                             <li id="crearhotel"><a href="#"><i class="fa fa-plus-circle"></i>Crear Hotel</a></li>
-                            <li id="consultarhotel"><a href="#"><i class="fa fa-search"></i>Consultar Hotel</a></li>
-                            <li id="modificarhotel"><a href="#"><i class="fa fa-pencil"></i>Modificar Hotel</a></li>
-                            <li id="desactivarhotel"><a href="#"><i class="fa fa-remove"></i>Desactivar Hotel</a></li>
+                            <li id="consultarhotel"><a href="#"><i class="fa fa-search"></i>Visualizar Hoteles</a></li>
                     <!-- MODULO DE BOLETOS AEREOS Y CHECK-IN -->
                 </ul>
             
@@ -542,8 +549,15 @@
 
     <!--SCRIPTS PARA GESTION DE AVIONES-->
     <script type="text/javascript" src="@Url.Content("~/Scripts/Scripts_Aviones/llamadas_generales.js")"></script>
+    
+    <!--SCRIPTS PARA GESTION DE CRUCEROS-->
+    <link href="~/Content/M24_css/style_module.css" rel="stylesheet" />
 
+<<<<<<< HEAD
+    
+=======
 
+>>>>>>> Develop
 
     <!-- jQuery 2.2.3 -->
     <script src="/Content/plugins/jQuery/jquery-2.2.3.min.js"></script>
@@ -563,6 +577,7 @@
     <!-- ChartJS 1.0.1 -->
     <script src="/Content/plugins/chartjs/Chart.min.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+
     <script src="/Content/dist/js/demo.js"></script>
     
     }

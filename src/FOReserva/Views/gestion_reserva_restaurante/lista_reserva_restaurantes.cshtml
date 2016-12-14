@@ -1,4 +1,4 @@
-﻿@model List<FOReserva.Models.Restaurantes.CReservation_Restaurant>
+@model List<FOReserva.Models.Restaurantes.CReservation_Restaurant>
 @{
     ViewBag.Title = "lista reserva de restaurantes";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -26,18 +26,18 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                        <tr id="@item.Id" value="@item.Id">
-                            <td>@item.Id</td>
-                            <td>@item.Restaurant.Name</td>
-                            <td class="reserv_name" value="@item.Name">@item.Name</td>
-                            <td class="reserv_date" value="@item.Date">@item.Date</td>
-                            <td class="reserv_time" value="@item.Time">@item.Time</td>
-                            <td class="reserv_count" value="@item.Count">@item.Count</td>
-                            <td style="text-align: center;">
-                                <a href="#" class="update list-icon" value="@item.Id"><i class="fa fa fa-pencil-square"></i></a>
-                                <a href="#" class="delete list-icon" value="@item.Id"><i class="fa fa-times-circle"></i></a>
-                            </td>
-                        </tr>
+                            <tr id="@item.Id" value="@item.Id">
+                                <td>@item.Id</td>
+                                <td>@item.Restaurant.Name</td>
+                                <td class="reserv_name" value="@item.Name">@item.Name</td>
+                                <td class="reserv_date" value="@item.Date">@item.Date</td>
+                                <td class="reserv_time" value="@item.Time">@item.Time</td>
+                                <td class="reserv_count" value="@item.Count">@item.Count</td>
+                                <td style="text-align: center;">
+                                    <a href="#" id="icon_edit" data-action="@Url.Action("_EditarReserva", "gestion_reserva_restaurante", new { id = item.Id })" class="update list-icon" value="@item.Id" style=" margin-right: 10px;"><i class="fa fa fa-pencil-square"></i></a>
+                                    <a href="#" class="delete list-icon" value="@item.Id"><i class="fa fa-times-circle"></i></a>
+                                </td>
+                            </tr>
                         }
                     </tbody>
                 </table>
@@ -91,85 +91,30 @@
 
 <!-- MODAL PARA MODIFICAR RESERVA -->
 <div id="ModalModificar" class="modal fade" role="dialog">
+</div>
+<!-- MODAL ERROR EDITAR RESERVA -->
+<div id="ModalErrorEditar" class="modal fade" role="dialog">
     <div class="modal-dialog">
+
         <!-- Modal content-->
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header bg-danger modal-header-danger">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modificar Reserva</h4>
+                <h4 class="modal-title">Eliminar Reserva</h4>
             </div>
             <div class="modal-body">
-                <!-- NOMBRE  Y  VALIDACIONES-->
-                <div class="form-group">
-                    <label>A nombre de: </label>
-                    <input type="text" name="name_client" id="name_client" value="" class="form-control" data-format="" data-lang="en" data-rtl="false" placeholder="Ingrese el nombre" required>
-                </div>
-                <div id="name_empty" style="display: none;" class="has-error error">
-                    <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe llenar este campo</p>
-                </div>
-                <div id="name_format" style="display: none;" class="has-error error">
-                    <p><i class="fa fa-times-circle" aria-hidden="true"></i> El campo solo debe contener caracteres alfabéticos</p>
-                </div>
-                <!-- FECHA  Y  VALIDACIONES-->
-                <div class="form-group">
-                    <label>Fecha: </label>
-                    <input type="text" name="reserv_date" id="reserv_date" value="" class="form-control datepicker" readonly data-format="yyyy-mm-dd" required data-lang="en" data-rtl="false" placeholder="Selecciona la fecha">
-                </div>
-                <div id="fecha_null" style="display: none;" class="has-error error">
-                    <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe seleccionar una fecha</p>
-                </div>
-                <!-- HORA  Y  VALIDACIONES-->
-                <div class="form-group">
-                    <label>Hora:</label>
-                    <select name="reserv_hour" id="reserv_hour" class="form-control pointer required">
-                        <option value="" selected>Selecciona la hora:</option>
-                        <option value="7:00">7:00</option>
-                        <option value="8:00">8:00</option>
-                        <option value="9:00">9:00</option>
-                        <option value="10:00">10:00</option>
-                        <option value="11:00">11:00</option>
-                        <option value="12:00">12:00</option>
-                        <option value="13:00">13:00</option>
-                        <option value="14:00">14:00</option>
-                        <option value="15:00">15:00</option>
-                        <option value="16:00">16:00</option>
-                        <option value="17:00">17:00</option>
-                        <option value="18:00">18:00</option>
-                        <option value="19:00">19:00</option>
-                        <option value="20:00">20:00</option>
-                        <option value="21:00">21:00</option>
-                        <option value="22:00">22:00</option>
-                        <option value="23:00">23:00</option>
-                    </select>
-                </div>
-                <div id="hora_null" style="display: none;" class="has-error error">
-                    <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe seleccionar una hora</p>
-                </div>
-                <!-- CANTIDAD DE PERSONAS  Y  VALIDACIONES-->
-                <div class="form-group">
-                    <label>Numero de personas:</label>
-                    <select name="number_person" id="number_person" class="form-control" required>
-                        <option value="1" selected>1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select>
-                </div>
+                <p>Error al editar la reserva intente mas tarde</p>
             </div>
             <div class="modal-footer">
-                <button type="button" id="aceptar_modificar" value="0" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+                <button type="button" id="" value="0" class="btn btn-success" data-dismiss="modal">Aceptar</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
             </div>
         </div>
 
     </div>
 </div>
+
+
 
 <!-- LLAMADAS AL MODAL -->
 <script>
@@ -202,7 +147,10 @@
 	        console.log("complete");
 	    });
     });
-    $(document).on('click', '.update', function () {
+
+    $(document).on('click', '.update', function (e) {
+        e.preventDefault();
+
         //clear errors
         $(".error").hide();
         $("#name_client").removeClass("has-error");
@@ -211,13 +159,19 @@
 
 
         //activar modal
-        var id_fila = '#' + $(this).attr('value');
-        $('#aceptar_modificar').attr('value', $(this).attr('value'));
-        $('#name_client').attr('value', $(id_fila).children('.reserv_name').attr('value'));
-        $('#reserv_date').attr('value', $(id_fila).children('.reserv_date').attr('value'));
-        $('#reserv_hour').attr('value', $(id_fila).children('.reserv_time').attr('value'));
-        $('#number_person').attr('value', $(id_fila).children('.reserv_count').attr('value'));
-        $('#ModalModificar').modal('show');
+        var url = $(this).attr('data-action');
+
+        $.post(url, function (data) {
+            $("#ModalModificar").html(data);
+            //var id_fila = '#' + $(this).attr('value');
+            //$('#aceptar_modificar').attr('value', $(this).attr('value'));
+            //$('#name_client').attr('value', $(id_fila).children('.reserv_name').attr('value'));
+            //$('#reserv_date').attr('value', $(id_fila).children('.reserv_date').attr('value'));
+            //$('#reserv_hour').attr('value', $(id_fila).children('.reserv_time').attr('value'));
+            //$('#number_person').attr('value', $(id_fila).children('.reserv_count').attr('value'));
+
+            $('#ModalModificar').modal('show');
+        })
     });
 
 </script>
@@ -242,78 +196,72 @@
         });
     });
     // CUSTOM VALIDATOR
-    $(document).ready(function () {
-        $("#aceptar_modificar").on("click", function () {
-            //clear errors
-            $(".error").hide();
-            $("#name_client").removeClass("has-error");
-            $("#reserv_hour").removeClass("has-error");
-            $("#reserv_date").removeClass("has-error");
+    $(document).on('click', '#aceptar_modificar', function (e) {
+        e.preventDefault();
 
-            //find errors
-            var nombre = $("#name_client").val();
-            var hora = $("#reserv_hour").val();
-            var fecha = $("#reserv_date").prop("value");
-            var caracteres = /^[a-zA-Z\s]+$/;
+        //clear errors
+        $(".error").hide();
+        $("#name_client").removeClass("has-error");
+        $("#reserv_hour").removeClass("has-error");
+        $("#reserv_date").removeClass("has-error");
 
-            var win = true;
+        //find errors
+        var nombre = $("#name_client").val();
+        var hora = $("#reserv_hour").val();
+        var fecha = $("#reserv_date").prop("value");
+        var caracteres = /^[a-zA-Z\s]+$/;
 
-            if (nombre == "" || nombre == undefined || !nombre.match(caracteres)) {
+        var win = true;
 
-                if (nombre == "" || nombre == undefined) {
-                    $("#name_client").addClass("has-error");
-                    $("#name_empty").fadeIn();
-                    win = false;
-                }
-                else {
-                    $("#name_client").addClass("has-error");
-                    $("#name_format").fadeIn();
-                    win = false;
-                }
-            }
-            if (hora == 0) {
-                var win = false;
-                $("#reserv_hour").addClass("has-error");
-                $("#hora_null").fadeIn();
+        if (nombre == "" || nombre == undefined || !nombre.match(caracteres)) {
+         
+            if (nombre == "" || nombre == undefined) {
+                $("#name_client").addClass("has-error");
+                $("#name_empty").fadeIn();
                 win = false;
             }
-
-            if (fecha == null || fecha == 0) {
-                var win = false;
-                $("#reserv_date").addClass("has-error");
-                $("#fecha_null").fadeIn();
+            else {
+                $("#name_client").addClass("has-error");
+                $("#name_format").fadeIn();
                 win = false;
             }
+        }
+        if (hora == 0) {
+            var win = false;
+            $("#reserv_hour").addClass("has-error");
+            $("#hora_null").fadeIn();
+            win = false;
+        }
 
-            if (win) {
-                var id_fila = $(this).attr('value');
-                var name_client = $('#name_client').attr('value');
-                var reserv_date = $('#reserv_date').attr('value');
-                var reserv_hour = $('#reserv_hour').attr('value');
-                var number_person = $('#number_person').attr('value');
-                $.ajax({
-                    url: "/gestion_reserva_restaurante/editar_reserva/",
-                    type: 'POST',
-                    data: {
-                        c_id_reserva: id_fila,
-                        c_name_client: name_client,
-                        c_reserv_date: reserv_date,
-                        c_reserv_hour: reserv_hour,
-                        c_number_person: number_person
-                    },
+        if (fecha == null || fecha == 0) {
+            alert(fecha);
+            var win = false;
+            $("#reserv_date").addClass("has-error");
+            $("#fecha_null").fadeIn();
+            win = false;
+        }
 
-                }).done(function () {
+        if (win) {
+            var form = $('#edit_form');
+            $.ajax({
+                url: form.attr('action'),
+                type: 'POST',
+                data: form.serialize()
+            }).done(function (data) {
+                console.log(data);
+                $('#' + $('#aceptar_modificar').attr('value')).empty();
+                $('#' + $('#aceptar_modificar').attr('value')).html(data);
+            })
+	        .fail(function (data) {
+	            $('#ModalErrorEditar').modal('show');
+	            console.log("error");
+	        })
+	        .always(function (data) {
+	            console.log("complete");
+	        });
+        }
+        else
+            return false;
 
-                })
-                .fail(function () {
-                    console.log("error");
-                })
-                .always(function () {
-                    console.log("complete");
-                });
-            }
-            else
-                return false;
-        });
-    });
+    })
 </script>

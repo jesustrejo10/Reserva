@@ -171,7 +171,9 @@ namespace BOReserva.Models.gestion_usuarios
 
         private String HashPassword(String pass)
         {
-            return Encriptar.CrearHash(_contraseña);
+            if (pass != null)
+                return Encriptar.CrearHash(_contraseña);
+            else return null;
         }
 
         private void setFecha()

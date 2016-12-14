@@ -1,4 +1,4 @@
-﻿function mostrarContenedor(posicion) {
+function mostrarContenedor(posicion) {
 
     $(".contenedor").hide();
     if (posicion > 0 && posicion <= $(".contenedor").length) {
@@ -55,12 +55,13 @@ function cargarContenido(seccion, tipo, url, data, boton) {
         });
 };
 
+
 jQuery(document).ready(function () {
 
     mostrarContenedor(1)
 
     /* NO QUITAR ESTA CARGA INICIAL QUE ES LA QUE HARÁ QUE POR DEFAULT SALGA VENTA DE VUELOS AL INICIAR LA PAGINA*/
-    $("#contenedor").empty();
+    $("#contenedor").html('<div class="text-center">Cargando...</div>');
     var url = '/gestion_vuelos/gestion_vuelos';
     var method = 'GET';
     var data = '';
@@ -167,44 +168,6 @@ jQuery(document).ready(function () {
         $("#LiRestaurantes").removeClass("active");
         $("#LiCruceros").removeClass("active");
         $("#LiDiarios").removeClass("active");
-
-        var url = '/gestion_reserva_auto/M19_Reserva_Autos';
-        var method = 'GET';
-        var data = '';
-
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenedor").empty();
-                    $("#contenedor").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-
-        var url = '/gestion_reserva_auto/M19_Reserva_AutosImagenes';
-        var method = 'GET';
-        var data = '';
-
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenedorImagenes").empty();
-                    $("#contenedorImagenes").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
     });
 
 
@@ -339,7 +302,7 @@ jQuery(document).ready(function () {
         var url = '/gestion_diarios/gestion_diarios';
         var method = 'GET';
         var data = '';
-        $("#contenedor").html('<div class="text-center">Cargando...</div>')
+
         $.ajax(
             {
                 url: url,
@@ -379,3 +342,4 @@ jQuery(document).ready(function () {
 
     });
 });
+
