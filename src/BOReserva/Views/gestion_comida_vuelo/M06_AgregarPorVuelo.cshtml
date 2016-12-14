@@ -1,137 +1,69 @@
 
-﻿<div class="row">
-    <!-- Agregar Comida a un Vuelo -->
-    <div class="col-xs-6">
-        <div class="box-header with-border">
-            <h1 class="box-title"> Agregar Comida-Bebida a un Vuelo</h1>
-            <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"></button>
-            </div>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-12">
-                        <label for="idvuelo">Seleccione un Vuelo:</label>
-                        <select class="form-control" id="idvuelo">
-                            <option>V-54239</option>
-                            <option>S-47593</option>
-                        </select>
-                        <label for="horaSalida">Hora Salida: </label>
-                        <input type="text" class="form-control" id="horaSalida" disabled>
-                        <label for="horaLlegada">Hora Llegada: </label>
-                        <input type="text" class="form-control" id="horaLlegada" disabled>
-                        <label for="comida">Comidas a Asignar: </label>
-                        <input type="text" class="form-control" id="numeroComida" disabled>
-                    </div>
-                </div>
-                <!-- /.box-body -->
-            </div>
-        </div>
+<div class="row">
+    <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
 
-    </div>
-    <div class="col-xs-6">
-        <div class="box-header with-border">
-            <h1 class="box-title"></h1>
-            <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"></button>
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Lista de Vuelos</h3>
             </div>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-12">
-                        <label for="Turista"> Clase Turista:</label>
-                        <input type="text" class="form-control" id="ClaseTurista" disabled>
-                        <label for="Ejecutiva"> Clase Ejecutiva:</label>
-                        <input type="text" class="form-control" id="ClaseEjecutiva" disabled>
-                        <label for="Vip"> Clase VIP:</label>
-                        <input type="text" class="form-control" id="ClaseVip" disabled>
-                        <label for="Ejecutiva"> Bebidas a Asignar:</label>
-                        <input type="text" class="form-control" id="ClaseEjecutiva" disabled>
-                    </div>
-                </div>
-                <!-- /.box-body -->
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Vuelo</th>
+                            <th>Ciudad Origen</th>
+                            <th>Ciudad Destino</th>>
+                            <th>Capacidad Turista/Ejecutiva/VIP</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @try
+                        {
+                            foreach (var item in Model)
+                            {
+                                    <tr id="@item._id">
+                                    <td>@item._codigoVuelo</td>
+                                    <td>@item._ciudadOrigen</td>
+                                    <td>@item._ciudadDestino</td>
+                                    <td>@item._capacidadTurista</td>
+                                    <td>@item._capacidadEjecutiva</td>
+                                    <td>@item._capacidadVip</td>
+                                    <td>
+                                        <a href="#" title="Agregar"><i class="fa fa-plus agregarvuelo"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        catch (Exception e)
+                        {
+
+                        }
+
+                    <tfoot>
+                        <tr>
+                            <th>Vuelo</th>
+                            <th>Ciudad Origen</th>
+                            <th>Ciudad Destino</th>
+                            <th>Capacidad Turista/Ejecutiva/VIP</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
+            <!-- /.box-body -->
         </div>
+        <!-- /.box -->
     </div>
-
-    <!-- Fin Agregar Comida a un Vuelo -->
-
-    <!-- Botón Guardar -->
-    <div>&nbsp;</div>
-    <div class="col-md-12" style="margin-top:10px;">
-        <button type="button" id="save_vehicle" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
-    </div>
+    <!-- /.col -->
 </div>
 
-﻿<div class="row">
-    <!-- Agregar Comida a un Vuelo -->
-    <div class="col-xs-6">
-        <div class="box-header with-border">
-            <h1 class="box-title"> Agregar Comida-Bebida a un Vuelo</h1>
-            <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"></button>
-            </div>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-12">
-                        <label for="idvuelo">Seleccione un Vuelo:</label>
-                        <select class="form-control" id="idvuelo">
-                            <option>V-54239</option>
-                            <option>S-47593</option>
-                        </select>
-                        <label for="horaSalida">Hora Salida: </label>
-                        <input type="text" class="form-control" id="horaSalida" disabled>
-                        <label for="horaLlegada">Hora Llegada: </label>
-                        <input type="text" class="form-control" id="horaLlegada" disabled>
-                        <label for="comida">Comidas a Asignar: </label>
-                        <input type="text" class="form-control" id="numeroComida" disabled>
-                    </div>
-                </div>
-                <!-- /.box-body -->
-            </div>
-        </div>
-
-    </div>
-    <div class="col-xs-6">
-        <div class="box-header with-border">
-            <h1 class="box-title"></h1>
-            <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"></button>
-            </div>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-12">
-                        <label for="Turista"> Clase Turista:</label>
-                        <input type="text" class="form-control" id="ClaseTurista" disabled>
-                        <label for="Ejecutiva"> Clase Ejecutiva:</label>
-                        <input type="text" class="form-control" id="ClaseEjecutiva" disabled>
-                        <label for="Vip"> Clase VIP:</label>
-                        <input type="text" class="form-control" id="ClaseVip" disabled>
-                        <label for="Ejecutiva"> Bebidas a Asignar:</label>
-                        <input type="text" class="form-control" id="ClaseEjecutiva" disabled>
-                    </div>
-                </div>
-                <!-- /.box-body -->
-            </div>
-        </div>
-    </div>
 
 
-    <!-- Fin Agregar Comida a un Vuelo -->
-    <!-- Botón Guardar -->
-    <div>&nbsp;</div>
-    <div class="col-md-12" style="margin-top:10px;">
-        <button type="button" id="save_vehicle" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
-    </div>
-</div>
+<!-- DataTables -->
+<script src="../../Content/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
 
