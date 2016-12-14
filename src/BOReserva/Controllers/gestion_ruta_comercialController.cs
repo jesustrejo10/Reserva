@@ -61,12 +61,16 @@ namespace BOReserva.Controllers
 
 
         // GET: gestion_ruta_comercial/ModificarRutasComerciales
-        public PartialViewResult ModificarRutasComerciales(int idRuta)
+        public ActionResult ModificarRutasComerciales(int idRuta)
         {
+            
             CManejadorSQL_Rutas buscarRuta = new CManejadorSQL_Rutas();
             CAgregarRuta Route = buscarRuta.MMostrarRutaBD(idRuta);
+            Route._idRuta = idRuta;
             CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();
             List<String> lista = new List<string>();
+
+            
 
             lista = sql.listarLugares();
 
@@ -82,12 +86,14 @@ namespace BOReserva.Controllers
         // GET: gestion_ruta_comercial/VisualizarRutasComerciales
         public PartialViewResult VisualizarRutasComerciales()
         {
-            CManejadorSQL_Rutas ruta = new CManejadorSQL_Rutas();
+            
+            CManejadorSQL_Rutas ruta = new CManejadorSQL_Rutas();            
             List<CRuta> listarutas = ruta.MListarRutasBD();
             return PartialView(listarutas);
+            
         }
 
-        // GET: gestion_ruta_comercial/VisualizarRutasComerciales
+        
         public PartialViewResult DetalleRutasComerciales()
         {
             CGestion_ruta ruta = new CGestion_ruta();
@@ -141,6 +147,48 @@ namespace BOReserva.Controllers
             
 
             
+        }
+
+
+
+        [HttpPost]
+        public JsonResult modificarRuta(CAgregarRuta model)
+        {
+
+            CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();
+            //realizo el insert
+
+            if (model._distanciaRuta <= 0 || model._distanciaRuta == 999999 || model._distanciaRuta == null)
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error, distancia de ruta invalida";
+                //Retorno el error
+                return Json(error);
+            }
+            else
+            {
+
+                bool resultado = sql.MModificarRuta(model);
+                if (resultado)
+                {
+                    return null;
+                }
+                else
+                {
+                    //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    //Agrego mi error
+                    String error = "Error, la ruta no pudo ser modificada";
+                    //Retorno el error
+                    return Json(error);
+                }
+
+            }
+
+
+
         }
 
     }
