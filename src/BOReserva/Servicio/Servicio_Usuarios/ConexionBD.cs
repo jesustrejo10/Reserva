@@ -31,11 +31,7 @@ namespace BOReserva.Models.gestion_usuarios
             try
             {
                 strConexion = ConfigurationManager.ConnectionStrings[RecursoBD.StringConexion].ConnectionString;
-                if (conexion == null)
-                {
-                    conexion = new SqlConnection(strConexion);
-                }
-
+                conexion = new SqlConnection(strConexion);
             }
 
             catch (Exception ex)

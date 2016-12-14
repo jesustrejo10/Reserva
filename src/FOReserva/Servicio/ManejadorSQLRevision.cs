@@ -1,3 +1,4 @@
+
 ﻿using System;
 using System.Collections.Generic;
 using FOReserva.Models.Revision;
@@ -53,9 +54,9 @@ namespace FOReserva.Servicio
             return true;
         }
 
-        public bool Crear_Revision(string mensaje, int puntuacion)   //FALTA
+        public bool Crear_Revision(string rev_mensaje, int rev_puntuacion)   //FALTA
         {
-            string query = "INSERT INTO Revision (rev_fecha, rev_mensaje, rev_tipo, rev_puntuacion, rev_FK_usu_id, rev_FK_res_hot_id, rev_FK_res_res_id) VALUES('2016/12/10','Comida exquisita',1,10,70,null,46);";
+            string query = "INSERT INTO Revision (rev_fecha, rev_mensaje, rev_tipo, rev_puntuacion, rev_FK_usu_id, rev_FK_res_hot_id, rev_FK_res_res_id) VALUES('2016/12/10','" + rev_mensaje + "',1,'" + rev_puntuacion + "',70,null,46);";
             this.Executer(query);
             CloseConnection();
             return true;
