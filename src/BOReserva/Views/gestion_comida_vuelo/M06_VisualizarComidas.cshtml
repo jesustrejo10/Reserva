@@ -169,7 +169,7 @@
         var identificador = $(this).parent().parent().parent().attr("id");
         jQuery.ajax({
             type: "POST",
-            url: "/gestion_comida_vuelo/nodisponibleComida",
+            url: "/gestion_comida_vuelo/desahilitarPlato",
             data: { id: identificador }
         }).done(function (data) {
             var url = '/gestion_comida_vuelo/M06_VisualizarComidas';
@@ -198,7 +198,7 @@
         var identificador = $(this).parent().parent().parent().attr("id");
         jQuery.ajax({
             type: "POST",
-            url: "/gestion_comida_vuelo/disponibleComida",
+            url: "/gestion_comida_vuelo/habilitarPlato",
             data: { id: identificador }
         }).done(function (data) {
             var url = '/gestion_comida_vuelo/M06_VisualizarComidas';

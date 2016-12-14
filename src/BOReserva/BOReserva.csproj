@@ -1458,6 +1458,7 @@
     <Content Include="Views\gestion_comida_vuelo\M06_VisualizarVuelosComidas.cshtml" />
     <Content Include="Views\gestion_restaurantes\M10_GestionRestaurantes_Modificar.cshtml" />
     <Content Include="Views\gestion_roles\M13_ModificarRol.cshtml" />
+    <Content Include="Views\gestion_comida_vuelo\M06_AgregarComida.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Visualizar.cshtml" />
@@ -1494,8 +1495,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\dist\css\skins\" />
-    <Folder Include="Scripts\Scripts_ComidaVuelo\" />
     <Folder Include="Views\dist\img\credit\" />
     <Folder Include="Views\dist\js\pages\" />
     <Folder Include="Views\gestion_roles\css\" />
