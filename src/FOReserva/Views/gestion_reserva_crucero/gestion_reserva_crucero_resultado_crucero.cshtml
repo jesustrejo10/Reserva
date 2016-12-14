@@ -1,0 +1,111 @@
+﻿@model FOReserva.Models.Cruceros.CReserva_Cruceros
+
+@{
+    ViewBag.Title = "Resultado de Busqueda Crucero";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- FEATURED GRID -->
+@using (Html.BeginForm("gestion_reserva_crucero_confirmar", "gestion_reserva_crucero", FormMethod.Post, new { @id = "crucero_form" }))
+{
+    			<div class="container">
+
+					<!-- LIST OPTIONS -->
+					<!-- /LIST OPTIONS -->
+
+
+					<ul class="shop-item-list row list-inline nomargin">
+
+						<!-- ITEM -->
+						<li class="col-lg-12" >
+
+							<div class="shop-item ">
+
+
+							               <div class="shop-item-summary ">
+                                    <h2>@Model._crucero - De @Model._origen a @Model._destino</h2>
+
+                                    <p text-justify>
+
+                                        <span><strong>Salidas:</strong></span> <br>
+                                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                        <span><strong>Fecha Salida:</strong> @Model._fecha_inicio    > <strong>Fecha Llegada:</strong> @Model._fecha_fin</span>
+                                        <br>
+                                        <br>
+                                        <input type="hidden" name="id_crucero" id="id_crucero" value="@Model._crucero" />
+                                        <input type="hidden" name="id_origen" id="id_origen" value="@Model._origen" />
+                                        <input type="hidden" name="id_destino" id="id_destino" value="@Model._destino" />
+                                        <input type="hidden" name="id_inicio" id="id_inicio" value="@Model._fecha_inicio" />
+                                        <input type="hidden" name="id_fin" id="id_fin" value="@Model._fecha_fin" />
+                                        <input type="hidden" name="fk_ruta" id="fk_ruta" value="@Model._fk_ruta" />
+                                        <input type="hidden" name="fk_crucero" id="fk_crucero" value="@Model._fk_crucero" />
+                                    </p>
+                          <div class="form-group">
+
+                              <label>Numero de Pasajeros </label>
+                              <input type="number" name="pasajeros_num" id="pasajeros_num" value="" min="1" class="form-control" data-format="" data-lang="en" data-rtl="false" placeholder="Ingrese el numero de pasajeros" >
+                          </div>
+                          <div id="pasajero_null" style="display: none;" class="has-error error">
+                              <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe ingresar la cantidad de pasajeros</p>
+                          </div>
+                                    <!-- price -->
+                                    <!-- /price -->
+                                    <!-- buttons -->
+                                    <!-- /buttons -->
+
+
+
+                                </div>
+
+
+							</div>
+
+						</li>
+						<!-- /ITEM -->
+
+
+
+					</ul>
+
+					<hr />
+
+                    <div class="shop-item-buttons text-right">
+                        <br>
+                        <center><button type="button" id="buscarCrucero" name="buscarCrucero" class="btn btn-primary">RESERVAR</button></center>
+
+
+                    </div>
+
+				</div>
+
+    <script>
+
+        $("#buscarCrucero").click(function (e) {
+            e.preventDefault();
+            //clear errors
+            $(".error").hide();
+            $("#pasajeros_num").removeClass("has-error");
+            var win = true;
+
+            var cantpasa = $("#pasajeros_num").val();
+            console.log("hola");
+            if (cantpasa == "") {
+                $("#pasajeros_num").addClass("has-error");
+                $("#pasajero_null").fadeIn();
+                win = false;
+            }
+            if (win) {
+                $("#crucero_form").submit();
+            }
+            else
+                return false;
+
+
+        });
+
+
+    </script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/indexReservaCrucero.js")"></script>
+
+}
