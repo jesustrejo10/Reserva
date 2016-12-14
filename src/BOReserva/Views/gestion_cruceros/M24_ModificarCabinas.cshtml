@@ -5,7 +5,7 @@
     <div class="box">
         <div class="box-body">
             <div class="box-header with-border">
-                <h1 class="box-title"> Agregar Cabina</h1>
+                <h1 class="box-title"> Modificar Cabina</h1>
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"></button>
                 </div>
@@ -67,7 +67,7 @@
             e.preventDefault();
             var form = $("#formGuardarCabina");
             $.ajax({
-                url: "gestion_cruceros/guardarCabina",
+                url: "gestion_cruceros/modificarCabina",
                 data: form.serialize(),
                 type: 'POST',
                 success: function (data) {
