@@ -16,23 +16,24 @@ namespace FOReserva.Controllers
 
         public ActionResult gestion_reserva_crucero()
         {
+            CVista_Cruceros model = null;
             try { 
-            CVista_Cruceros model = new CVista_Cruceros();
+            model = new CVista_Cruceros();
             return PartialView(model);
             }
             catch (NullReferenceException e)
             {
 
-                return PartialView();
+                return PartialView(model);
             }
             catch (ManejadorSQLException f)
             {
-                CVista_Cruceros model = null;
-                return PartialView(model);
+
+                return View("gestion_reserva_crucero_error_conexion");
             }
             catch (Exception g)
             {
-                CVista_Cruceros model = null;
+              
                 return PartialView(model);
             }
            }
@@ -47,6 +48,7 @@ namespace FOReserva.Controllers
             manejadorSQLCrucero manejador = new manejadorSQLCrucero();
             try
             {
+
                 manejador.CrearReserva(reserva);
                 return View();
             }
@@ -57,7 +59,6 @@ namespace FOReserva.Controllers
             }
             catch (ManejadorSQLException f)
             {
-
                 return View("gestion_reserva_crucero_error_conexion");
             }
             catch (Exception g)
@@ -89,17 +90,17 @@ namespace FOReserva.Controllers
             }
               catch (NullReferenceException e)
             {
-
-                return View();
+                List<CReserva_Cruceros> Model = null;
+                return View(Model);
             }
             catch (ManejadorSQLException f)
             {
-
                 return View("gestion_reserva_crucero_error_conexion");
             }
             catch (Exception g)
             {
-                return View();
+                List<CReserva_Cruceros> Model = null;
+                return View(Model);
             }
         }
 
@@ -127,12 +128,11 @@ namespace FOReserva.Controllers
              }
               catch (NullReferenceException e)
             {
-
-                return View();
+                CReserva_Cruceros reserva = null;
+                return View(reserva);
             }
             catch (ManejadorSQLException f)
             {
-
                 return View("gestion_reserva_crucero_error_conexion");
             }
             
@@ -161,20 +161,16 @@ namespace FOReserva.Controllers
             }
             catch (ManejadorSQLException e)
             {
-                //Ventana de error no conecto a la db
-                //Se puede usar el mensaje de la excepcion "e.mensaje"
-                return View("error_conexion");
+                return View("gestion_reserva_crucero_error_conexion");
             }
             catch (InvalidManejadorSQLException f)
             {
                 reserva = null;
-                ViewBag.Message = "Lo sentimos, la reserva no pudo ser realizada debido a un error del sistema";
                 return View(reserva);
             }
             catch (Exception e)
             {
                 reserva = null;
-                ViewBag.Message = "Lo sentimos, la reserva no pudo ser realizada debido al siguiente error del sistema:" + e.Message;
                 return View(reserva);
             }
         }
@@ -192,22 +188,17 @@ namespace FOReserva.Controllers
             }
             catch (ManejadorSQLException e)
             {
-                //Ventana de error no conecto a la db
-                //Se puede usar el mensaje de la excepcion "e.mensaje"
+
                 return null;
             }
             catch (InvalidManejadorSQLException e)
             {
-                //Ventana de error al eliminar la reserva
-                //Esto se causa por una sitaxis erronea del sql
-                //como son caracteres especiales o demas
+                return null;
             }
             catch (Exception e)
             {
-                // Error desconocido del sistema
-                ViewBag.Message = "Lo sentimos, la reserva no pudo ser realizada debido al siguiente error del sistema:" + e.Message;
+             
             }
-
             return Json("exito");
         }
 
@@ -222,19 +213,16 @@ namespace FOReserva.Controllers
             }
             catch (ManejadorSQLException e)
             {
-                //Ventana de error no conecto a la db
-                //Se puede usar el mensaje de la excepcion "e.mensaje"
+               
                 return null;
             }
             catch (InvalidManejadorSQLException e)
             {
-                //Ventana de error al eliminar la reserva
-                //Esto se causa por una sitaxis erronea del sql
-                //como son caracteres especiales o demas
+               
             }
             catch (Exception e)
             {
-                // Error desconocido del sistema
+             
                 return null;
             }
 
