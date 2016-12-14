@@ -73,6 +73,18 @@ namespace FOReserva.Controllers
             }
             return PartialView("_CrearDiarioError");
         }
-                
+
+        /* Dar Like */
+        public ActionResult likeRating(CDiarioModel diar){
+            ManejadorSQLDiarios sql = new ManejadorSQLDiarios();
+            int rating = sql.actualizarRating(diar,true);
+            return Json(rating,JsonRequestBehavior.AllowGet);
+        }
+        /* Dar Dislike */
+        public ActionResult dislikeRating(CDiarioModel diar){
+            ManejadorSQLDiarios sql = new ManejadorSQLDiarios();
+            int rating = sql.actualizarRating(diar,false);
+            return Json(rating,JsonRequestBehavior.AllowGet);
+        }
     }
 }
