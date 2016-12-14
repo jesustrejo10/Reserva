@@ -39,11 +39,6 @@ namespace BOReserva.Content.Controllers
                 return RedirectToAction("M01_Login", "gestion_seguridad_ingreso");
             }
 
-            if (correo.Equals("reserva@reserva.com"))
-            {
-                ingreso.ResetearIntentos();
-            }
-
             try
             {
            
