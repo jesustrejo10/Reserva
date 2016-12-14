@@ -5,7 +5,7 @@
     utilizara el metodo agregarRol
     le pasara la informacion mediante un POST-->
 
-<div class="row">
+<div class="row" >
     <div class="col-md-12">
         <div class="box box-success">
             <div class="box-header ">
@@ -19,7 +19,7 @@
                     <div class="col-md-12" style="margin-top:10px;">
                         <div class="col-xs-6">
                             <!--se agrega el campo para Nombre del rol a modificar -->
-                            <label for="nombreRol">
+                            <label for="nombreRol" class="nombre_Rol" id="@Model.Nombre_rol">
                                 Nombre del rol
                                 <!--                                (<span style="color:red">*</span>):-->
                             </label>
@@ -85,7 +85,7 @@
         $(".eliminarpermiso").click(function () {
             var r = confirm("Esta función no podrá ser revertida, ¿Está seguro de que desea continuar?")
             if (r) {
-                var nombreRol = $(this).parent().parent().parent().attr("id");
+                var nombreRol = $(".eliminarpermiso").parent().attr("class");
                 console.log(nombreRol);
                 var nombrePermiso = $(this).parent().attr("id");
                 console.log(nombrePermiso);
@@ -166,7 +166,7 @@
 
         
         function consultarNoPermisos() {
-            var identificador = $(".eliminarpermiso").parent().attr("class");
+            var identificador = $(".nombre_Rol").attr("id");
             $.ajax({
                 url: "gestion_roles/consultarLosPermisosNoAsignados",
                 data: { nombre_rol: identificador },
