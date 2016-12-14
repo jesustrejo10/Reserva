@@ -86,12 +86,14 @@ namespace BOReserva.Controllers
         // GET: gestion_ruta_comercial/VisualizarRutasComerciales
         public PartialViewResult VisualizarRutasComerciales()
         {
-            CManejadorSQL_Rutas ruta = new CManejadorSQL_Rutas();
+            
+            CManejadorSQL_Rutas ruta = new CManejadorSQL_Rutas();            
             List<CRuta> listarutas = ruta.MListarRutasBD();
             return PartialView(listarutas);
+            
         }
 
-        // GET: gestion_ruta_comercial/VisualizarRutasComerciales
+        
         public PartialViewResult DetalleRutasComerciales()
         {
             CGestion_ruta ruta = new CGestion_ruta();
