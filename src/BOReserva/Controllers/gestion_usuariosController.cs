@@ -22,14 +22,16 @@ namespace BOReserva.Controllers
             }
             catch (ExceptionM12Reserva ex)
             {
+                Response.Write("<script>alert('" + ex.Message + "');</script>");
+                Response.End();
                 IEnumerable<ListarUsuario> lista = new List<ListarUsuario>();
-                ModelState.AddModelError("", ex.Message);
                 return PartialView("M12_Index", lista);
             }
             catch (Exception ex)
             {
+                Response.Write("<script>alert('" + ex.Message + "');</script>");
+                Response.End();
                 IEnumerable<ListarUsuario> lista = new List<ListarUsuario>();
-                ModelState.AddModelError("", ex.Message);
                 return PartialView("M12_Index", lista);
             }
         }
@@ -37,18 +39,19 @@ namespace BOReserva.Controllers
 
         public ActionResult M12_AgregarUsuario()
         {
-           // Response.Write("<script>alert('" + "prueba" + "');</script>");
             try { 
                 PersistenciaUsuario p = new PersistenciaUsuario();
                 List<ListaRoles> lista = p.ListarRoles();
                 ViewBag.Roles = new SelectList(lista, "rolID", "rolNombre");
+                return PartialView();
             }
             catch (Exception ex)
             {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                Response.Write("<script>alert('" + ex.Message + "');</script>");
+                Response.End();
                 return Json(ex.Message);
             }
-            return PartialView();
+            
         }
 
 
@@ -134,7 +137,8 @@ namespace BOReserva.Controllers
                 }
                 catch (Exception ex)
                 {
-                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    Response.Write("<script>alert('" + ex.Message + "');</script>");
+                    Response.End();
                     return Json(ex.Message);
                 }
             }
