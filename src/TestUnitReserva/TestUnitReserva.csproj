@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BO\gestion_aviones\TestAviones.cs" />
+    <Compile Include="BO\gestion_vuelos\TestVuelo.cs" />
     <Compile Include="BO\TestGestionAutomovil\TestGestionAutomovil.cs" />
     <Compile Include="BO\gestion_restaurantes\TestLugar.cs" />
     <Compile Include="BO\gestion_restaurantes\TestRestaurante.cs" />

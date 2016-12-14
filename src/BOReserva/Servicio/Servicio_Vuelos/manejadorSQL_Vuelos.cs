@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -105,12 +105,12 @@ namespace BOReserva.Servicio.Servicio_Vuelos
             }
             catch (SqlException e)
             {
-                throw(e);
+                throw e;
                 
             }
             catch (Exception e)
             {
-                throw (e); 
+                throw e;
                 
             }
         }
