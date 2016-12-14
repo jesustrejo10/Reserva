@@ -1470,6 +1470,7 @@
     <Content Include="Views\gestion_cruceros\M24_AgregarItinerario.cshtml" />
     <Content Include="Views\gestion_roles\M13_ModificarRol.cshtml" />
     <Content Include="Views\gestion_cruceros\M24_ModificarCrucero.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_ModificarCabinas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Visualizar.cshtml" />

@@ -178,21 +178,30 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult modificarCrucero(CGestion_crucero model)
         {
+            int _idCrucero = model._idCrucero;
             String _nombreCrucero = model._nombreCrucero;
             String _companiaCrucero = model._companiaCrucero;
             int _capacidadCrucero = model._capacidadCrucero;
-            CGestion_crucero crucero = new CGestion_crucero(_nombreCrucero, _companiaCrucero, _capacidadCrucero);
+            CGestion_crucero crucero = new CGestion_crucero(_idCrucero, _nombreCrucero, _companiaCrucero, _capacidadCrucero);
             crucero.ModificarCrucero(crucero);
 
-            return (Json(true, JsonRequestBehavior.AllowGet));
+            return (Json(crucero, JsonRequestBehavior.AllowGet));
         }
 
         public ActionResult M24_ModificarCrucero(int id)
         {
-            ConexionBD cbd = new ConexionBD();
-            CGestion_crucero crucero = new CGestion_crucero();
-            crucero = cbd.consultarCruceroID(id);
-            return PartialView("M24_ModificarCrucero", crucero);
+            try
+            {
+                ConexionBD cbd = new ConexionBD();
+                CGestion_crucero crucero = new CGestion_crucero();
+                crucero = cbd.consultarCruceroID(id);
+                //crucero.cabinas = cbd.listarCabinas(id);
+                return PartialView("M24_ModificarCrucero", crucero);
+            }
+            catch (Exception ex)
+            {
+                return PartialView("M24_ModificarCrucero");
+            }
         }
 
     }
