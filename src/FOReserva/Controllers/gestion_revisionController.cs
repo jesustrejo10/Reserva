@@ -22,11 +22,11 @@ namespace FOReserva.Controllers
             return PartialView();
         }
 
-        public ActionResult lista_revisiones(int id)
+        public ActionResult lista_revisiones(int revision)
         {
-            Console.WriteLine("Lista Rev " + id);
+            Console.WriteLine("Lista Rev " + revision);
             ManejadorSQLRevision manejador = new ManejadorSQLRevision();
-            List<CRevision> lista = manejador.BuscarRevisiones(id);
+            List<CRevision> lista = manejador.BuscarRevisiones(revision);
             return PartialView(lista);
         }
 

@@ -135,10 +135,10 @@ namespace FOReserva.Servicio
         /// Metodo para listar revisiones guardadas
         /// </summary>
         /// <returns>Lista de revisiones</returns>
-        public List<CRevision> BuscarRevisiones(int id)
+        public List<CRevision> BuscarRevisiones(int revision)
         {
 
-            string query = "SELECT rest.rst_id, rest.rst_nombre, rev.rev_mensaje, rev.rev_puntuacion FROM Restaurante as rest, Reserva_Restaurante as res, Revision as rev  WHERE   rev.rev_tipo=1 and rev.rev_FK_res_res_id=res.ID and rest.rst_id=res.FK_RESTAURANTE rest.rst_id= '" + id + "'";
+            string query = "SELECT rest.rst_id, rev.rev_fecha, rev.rev_mensaje, rev.rev_puntuacion FROM Restaurante as rest, Reserva_Restaurante as res, Revision as rev  WHERE rev.rev_tipo=1 and rev.rev_FK_res_res_id=res.ID and rest.rst_id=res.FK_RESTAURANTE and rest.rst_id= " + revision ;
             SqlDataReader read = Executer(query);
             List<CRevision> lista_rev = new List<CRevision>();
 
@@ -147,16 +147,18 @@ namespace FOReserva.Servicio
                 while (read.Read())
                 {
                     int _Id = read.GetInt32(0);
-                    DateTime _fecha = read.GetDateTime(1);
+                    
+                   DateTime _fecha = read.GetDateTime(1);
                     string _mensaje = read.GetString(2);
-                    int _tipo = read.GetInt32(3);
-                    int _puntuacion = read.GetInt32(4);
+                   // int _tipo = read.GetInt32(3);
+                    int _puntuacion = read.GetInt32(3);
 
                     CRevision rev = new CRevision();
                     rev.Id = _Id;
-                    rev.Fecha = _fecha;
+                   rev.Fecha = _fecha;
+                    
                     rev.Mensaje = _mensaje;
-                    rev.Tipo = _tipo;
+                    //rev.Tipo = _tipo;
                     rev.Puntuacion = _puntuacion;
                     lista_rev.Add(rev);
                 }
