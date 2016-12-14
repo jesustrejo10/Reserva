@@ -61,7 +61,7 @@ namespace BOReserva.Servicio
                 //uso el SqlCommand para realizar los querys
                 SqlCommand query = conexion.CreateCommand();
                 //ingreso la orden del query
-                query.CommandText = "INSERT INTO Comida VALUES ('" + model._nombrePlato + "','" + model._tipoPlato + "','" + model._estatusPlato + " ',' " + model._descripcionPlato + "');";
+                query.CommandText = "INSERT INTO Comida VALUES ('" + model._nombrePlato + "','" + model._tipoPlato + "',1,' " + model._descripcionPlato + "');";
                 //creo un lector sql para la respuesta de la ejecucion del comando anterior               
                 SqlDataReader lector = query.ExecuteReader();
                 //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
@@ -184,6 +184,67 @@ namespace BOReserva.Servicio
                 throw e;
             }
         }
+
+
+        /// <summary>
+        /// Procedimiento del Modulo 6 para deshabilitar un plato
+        /// </summary>
+        /// <param name="id"> int </param>
+        /// <returns>Boolean true si se deshabilito bien, false si dio un error </returns>
+        public Boolean deshabilitarPlato(int id)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "UPDATE Comida SET com_estatus=0 where com_id=" + id;
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                conexion.Close();
+                return true;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        /// <summary>
+        /// Procedimiento del Modulo 6 para habilitar un plato
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>Boolean true si se habilito bien, false si dio un error </returns>
+        public Boolean habilitarPlato(int id)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "UPDATE Comida SET com_estatus=1 where com_id=" + id;
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                conexion.Close();
+                return true;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
 
 
 

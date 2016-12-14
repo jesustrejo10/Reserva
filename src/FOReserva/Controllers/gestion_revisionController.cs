@@ -33,7 +33,7 @@ namespace FOReserva.Controllers
 
         public ActionResult crear_revision_form(string rev_mensaje, int rev_puntuacion)
         {
-            
+           
             ManejadorSQLRevision manejador = new ManejadorSQLRevision();
             bool resp = manejador.Crear_Revision(rev_mensaje, rev_puntuacion);
             return PartialView();
@@ -45,9 +45,15 @@ namespace FOReserva.Controllers
         {
             return PartialView();
         }
-        public ActionResult eliminar_revision()
+       public ActionResult eliminar_revision(int Id) 
         {
-            return PartialView();
+            
+                ManejadorSQLRevision manejador = new ManejadorSQLRevision();
+                manejador.Eliminar_Revision(Id);
+                return PartialView();
+           
+
+           
         }
 
         public ActionResult editar_revision()
@@ -57,7 +63,7 @@ namespace FOReserva.Controllers
 
         public ActionResult crear_revision(int revision1)
         {
-            Console.WriteLine("LLEGUE A CREAR REVISION");
+            
             CRevision rev = new CRevision();
             return PartialView(rev);
         }
@@ -79,7 +85,7 @@ namespace FOReserva.Controllers
             return PartialView(lista);
         }
 
-        public ActionResult Eliminar_Revision_AR(string usuario, CRevision revision)
+      /*  public ActionResult Eliminar_Revision_AR(string usuario, CRevision revision)
         {
 
             List<CRevision> lista = new List<CRevision>();
@@ -102,6 +108,7 @@ namespace FOReserva.Controllers
                 return PartialView(lista);
             }
         }
+       * */
 
         /// <summary>
         /// Creacion Modelo Crear Revision
