@@ -1,5 +1,5 @@
 using FOReserva.Models.Diarios;
-using FOReserva.Servicio.manejadorSQL;
+using FOReserva.Servicio;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -286,7 +286,7 @@ namespace FOReserva.Servicio
         {
             int visitas = objeto_diario.Num_visita;
             visitas++;
-            string query = "update Diario_Viaje set num_visita = " +objeto_diario.Num_visita+1 +" where id_diar="+objeto_diario.Id;
+            string query = "update Diario_Viaje set num_visita = " + visitas +" where id_diar="+objeto_diario.Id;
             this.Executer(query);
             CloseConnection();
             return visitas;
