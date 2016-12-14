@@ -1,4 +1,5 @@
 using FOReserva.Models.Diarios;
+using FOReserva.Servicio.manejadorSQL;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -253,6 +254,8 @@ namespace FOReserva.Servicio
 
      /*INSERCIONES*/
 
+
+
         /*Nuevo Diario*/
 
 
@@ -306,4 +309,6 @@ namespace FOReserva.Servicio
             return nuevoRating;
         }
     }
+
+    
 }
