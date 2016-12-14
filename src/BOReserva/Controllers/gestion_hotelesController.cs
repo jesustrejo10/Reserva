@@ -66,7 +66,7 @@ namespace BOReserva.Controllers
             CHotel hotel = new CHotel(id, nombre, paginaweb, email, canthabitaciones, direccion, ciudad, pais, estrellas,
             puntuacion, disponibilidad);
             CManejadorSQL_Hoteles hot = new CManejadorSQL_Hoteles();
-            int modifico_si_no = hot.MModificarhotelBD(hotel);
+            int modifico_si_no = hot.MModificarhotelBD(hotel, id);
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 

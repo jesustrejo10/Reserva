@@ -411,14 +411,13 @@ namespace BOReserva.Servicio.Servicio_Hoteles
             }
         }
 
-        public int MModificarhotelBD(CHotel hotel)
+        public int MModificarhotelBD(CHotel hotel, int id)
         {
             try
             {
                 conexion = new SqlConnection(stringDeConexion);
                 conexion.Open();
-                String sql = "UPDATE Hotel SET hot_nombre ='" + hotel._nombre + "', hot_url_pagina = '" + hotel._paginaweb + "', hot_email = '" + hotel._email + "', hot_cantidad_habitaciones = " + hotel._canthabitaciones + ", hot_direccion = '" + hotel._direccion + "', hot_estrellas = '" + hotel._estrellas +
-                    " WHERE hot_id = " + hotel._id;
+                String sql = "UPDATE Hotel SET hot_nombre ='" + hotel._nombre + "', hot_url_pagina = '" + hotel._paginaweb + "', hot_email = '" + hotel._email + "', hot_cantidad_habitaciones = " + hotel._canthabitaciones + ", hot_direccion = '" + hotel._direccion + "', hot_estrellas = " + hotel._estrellas + " WHERE hot_id = " + id;
                 SqlCommand cmd = new SqlCommand(sql, conexion);
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
