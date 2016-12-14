@@ -184,6 +184,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         public void MDisponibilidadVehiculo()
 
         {
+            Automovil auto = new Automovil(placa1, "3", "Mazda", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
             String prueba = auto.MDisponibilidadVehiculoBD(placa1, 0);
             Assert.AreEqual("1", prueba);
 
@@ -209,8 +210,11 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         [Test]
         public void MConsultarvehiculo()
         {
-            Automovil auto1 = auto.MConsultarvehiculo(placa3);
+            Automovil auto = new Automovil("PRUEBACON", "3", "Mazda", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
+            String agregar = daoAutomovil.MAgregarVehiculoBD(auto, 12);
+            Automovil auto1 = auto.MConsultarvehiculo("PRUEBACON");
             Assert.IsInstanceOf(typeof(Automovil), auto1);
+            String prueba2 = daoAutomovil.MBorrarvehiculoBD("PRUEBACON");
         
         }
         /// <summary>
@@ -260,7 +264,8 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         [Test]
         public void MListarvehiculos()
         {
-           
+
+            Automovil auto = new Automovil(placa1, "3", "Mazda", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
             List<Automovil> h= auto.MListarvehiculos();
             Assert.IsInstanceOf(typeof(List<Automovil>), h);
    
@@ -306,7 +311,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         [Test]
         public void MBorrarvehiculo()
         {
-          
+            Automovil auto = new Automovil(placa1, "3", "Mazda", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
             String Prueba3 = auto.MBorrarvehiculoBD(placa3);
             Assert.AreEqual("1", Prueba3);
         }
