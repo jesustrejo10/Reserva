@@ -81,7 +81,7 @@ namespace BOReserva.Controllers
         }
 
         /// <summary>
-        /// Metodo para que el avion este disponible para su uso
+        /// Metodo para que el lato este disponible para su uso
         /// </summary>
         /// <param name="id"> int </param>
         /// <returns> JsonResult booleano conteniendo la respuesta del sistema </returns>
@@ -106,7 +106,7 @@ namespace BOReserva.Controllers
         }
 
         /// <summary>
-        /// Metodo para que el avion NO este disponible para su uso
+        /// Metodo para que el lato NO este disponible para su uso
         /// </summary>
         /// <param name="id"> int </param>
         /// <returns> JsonResult booleano conteniendo la respuesta del sistema</returns>

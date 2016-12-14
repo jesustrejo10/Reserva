@@ -185,7 +185,7 @@ namespace BOReserva.Servicio
                 conexion = new SqlConnection(stringDeConexion);
                 //INTENTO abrir la conexion
                 conexion.Open();
-                String query = "UPDATE Comida SET com_estatus=0 where avi_id=" + id;
+                String query = "UPDATE Comida SET com_estatus=0 where com_id=" + id;
                 SqlCommand cmd = new SqlCommand(query, conexion);
                 SqlDataReader lector = cmd.ExecuteReader();
                 conexion.Close();
