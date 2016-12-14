@@ -1,4 +1,4 @@
-﻿using FOReserva.Models.Restaurantes;
+using FOReserva.Models.Restaurantes;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -57,7 +57,20 @@ namespace FOReserva.Servicio
             OpenConnection();
             SqlCommand execute = this.Conexion.CreateCommand();
             execute.CommandText = query;
-            return execute.ExecuteReader();
+            SqlDataReader tmp = null;
+            try
+            {
+                tmp = execute.ExecuteReader();
+            }
+            catch (SqlException e)
+            {
+                throw new ManejadorSQLException("Error de conexion con la DB", e);
+            }
+            catch (InvalidOperationException e)
+            {
+                throw new ManejadorSQLException("Operacion invalida en la DB", e);
+            }
+            return tmp;
         }
     }
 }

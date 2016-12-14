@@ -1,10 +1,12 @@
 ﻿@model FOReserva.Models.ReservaHabitacion.Cvista_BuscarHotel
 @if (Model != null)
 {
+    if (Model.Ciudades != null && Model.Ciudades.Count > 0)
+    {
     <div id="buscador">
         <div>
-            <div class="col-xs-12">
-                <h3 class="color-azul">Buscar hoteles con habitaciones disponibles</h3>
+            <div class="col-xs-12 heading-title">
+                <h3> <span>Hoteles: <small>Buscar hoteles con habitaciones disponibles.</small></span></h3>
             </div>
         </div>
         <div>
@@ -12,13 +14,11 @@
                 @using (Html.BeginForm(null, null, null, FormMethod.Post, new { @id = "formBuscarHotel", @class = "form-horizontal" }))
                 {
                 <fieldset>
-                    <input type="hidden" name="action" value="contact_send" />
-
                     <div class="row">
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6">
                                 <label>Ciudad</label>                                
-                                <select id="LugId" name="LugId" class="form-control pointer required">
+                                <select id="LugId" name="LugId" class="form-control pointer required select2">
                                     <option value="0">--- Seleccionar ---</option>
                                     @foreach (var ciudad in Model.Ciudades)
                                     {
@@ -28,34 +28,52 @@
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <label>Fecha de Llegada</label>
-                                <input id="FechaLlegada" name="FechaLlegada" type="date" value="" class="form-control datepicker required" data-format="yyyy-mm-dd" data-lang="en" data-rtl="false">
+                                <input id="FechaLlegada" name="FechaLlegada" value="@Model.FechaLlegada.ToString("yyyy-MM-dd")" class="form-control datepicker required" data-format="yyyy-mm-dd" data-lang="es" data-rtl="false">
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <label>Cantidad de Dias</label>
-                                <input id="CantidadDias" type="number" min="1" name="CantidadDias" value="1" class="form-control required">
+                                <input id="CantidadDias" min="1" name="CantidadDias" value="@Model.CantidadDias" class="form-control required stepper">
                             </div>
                         </div>
                     </div>
                 </fieldset>
 
 
+                <script type="text/javascript" src="@Url.Content("~/Content/assets/js/scripts.js")"></script>
                 <script>
                         $("#buscarHotel").click(function (e) {
                             e.preventDefault();
-                            var form = $("#formBuscarHotel");
-                            $.ajax({
-                                url: "/gestion_reserva_habitaciones/hoteles_con_habitaciones",
-                                data: form.serialize(),
-                                type: 'GET',
-                                success: function (data) {
-                                    $("#resultado")
-                                        .empty()
-                                        .append(data)
-                                        .show();
-                                    $("#buscador").hide();
-                                }
-                            });
+
+                            var segmento = $("#FechaLlegada").val().split("-")
+                            var fecha_llegada = new Date(segmento[0], parseInt(segmento[1]) - 1, segmento[2]);
+                            var fecha_actual = new Date();
+                            var cantidad_dias = parseInt($("#CantidadDias").val())
+                            var lug_id = parseInt($("#LugId option:selected").val())
+
+                            if (fecha_llegada <= fecha_actual)
+                                alert("Debe realizar la reserva con antelación, indique una fecha futura.")
+                            else if (cantidad_dias < 1)
+                                alert("Debe indicar cuandos dias tiene pensado quedarse.")
+                            else if (lug_id < 1)
+                                alert("Debe indicar la ciudad donde tiene pensado quedarse.")
+                            else 
+                            { 
+                                var form = $("#formBuscarHotel");
+                                $.ajax({
+                                    url: "/gestion_reserva_habitaciones/hoteles_con_habitaciones",
+                                    data: form.serialize(),
+                                    type: 'GET',
+                                    success: function (data) {
+                                        $("#resultado")
+                                            .empty()
+                                            .append(data)
+                                            .show();
+                                        $("#buscador").hide();
+                                    }
+                                });
+                            }
                         });
+                        $("#LugId option[value=@Model.LugId]").attr("selected", true).change()
                 </script>
                 }
                 <div class="row text-center">
@@ -70,8 +88,17 @@
     <div id="resultado">
 
     </div>
+    }
+    else
+    {
+        <div class="text-center">
+            <p>No se pudo cargar ciudades con hoteles.</p>
+        </div>
+    }
 }
 else
 {
-    <p>No se pudo cargar el contenido.</p>
+    <div class="text-center">
+        <p>No se pudo cargar el contenido.</p>
+    </div>
 }

@@ -1,10 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace BOReserva.Models.gestion_automoviles
 {
+    /// <summary>
+    /// Clase del modelo de la vista parcial M08_ModificarAutomovil
+    /// </summary>
     public class CModificarAutomovil
     {
         public String _matricula { get; set; }

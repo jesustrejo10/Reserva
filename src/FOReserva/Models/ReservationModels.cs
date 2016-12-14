@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data.Entity;
 using System.Web.Mvc;
 
@@ -42,3 +42,4 @@ namespace FOReserva.Models
 
     }
 }
+

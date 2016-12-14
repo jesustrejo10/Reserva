@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections;
 using System.Data.SqlClient;
@@ -13,6 +13,8 @@ using BOReserva.Models.gestion_ruta_comercial;
 using BOReserva.Models.gestion_ofertas;
 using BOReserva.Models.gestion_roles;
 using System.Diagnostics;
+using BOReserva.Models.gestion_automoviles;
+
 
 namespace BOReserva.Servicio
 {
@@ -28,8 +30,262 @@ namespace BOReserva.Servicio
         //string que contendra la conexion a la bd
         private string stringDeConexion = null;
 
-        //Procedimiento del Modulo 2 para agregar aviones a la base de datos.
+
+        /// <summary>
+        /// Procedimiento del Modulo 2 para agregar aviones a la base de datos.
+        /// </summary>
+        /// <param name="model">CAgregarAvion</param>
+        /// <returns>Boolean. Retorna true si agregó correctamente a la bbdd o false en caso contrario</returns>
         public Boolean insertarAvion(CAgregarAvion model)
+        {
+            try
+            {
+                if (model._matriculaAvion == null)
+                {
+                    return false;
+                }
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                //uso el SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "INSERT INTO Avion VALUES ('" + model._matriculaAvion + "','" + model._modeloAvion + "'," + model._capacidadPasajerosTurista + " , " + model._capacidadPasajerosEjecutiva + "," + model._capacidadPasajerosVIP + ", " + model._capacidadEquipaje + ", " + model._distanciaMaximaVuelo + ", " + model._velocidadMaximaDeVuelo + ", " + model._capacidadMaximaCombustible + ", 1);";
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                SqlDataReader lector = query.ExecuteReader();
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+        }
+
+        /// <summary>
+        /// Procedimiento del Modulo 2 para retornar una lista con los aviones en la base de datos
+        /// </summary>
+        /// <returns> List<CAvion> la lista de aviones en la base de datos</returns>
+        public List<CAvion> listarAvionesEnBD()
+        {
+            List<CAvion> aviones = new List<CAvion>();
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "SELECT * FROM Avion";
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                while (lector.Read())
+                {
+                    CAvion avion = new CAvion(Int32.Parse(lector["avi_id"].ToString()), lector["avi_matricula"].ToString(),
+                    lector["avi_modelo"].ToString(), Int32.Parse(lector["avi_pasajeros_turista"].ToString()),
+                    Int32.Parse(lector["avi_pasajeros_ejecutiva"].ToString()), Int32.Parse(lector["avi_pasajeros_vip"].ToString()),
+                    float.Parse(lector["avi_cap_equipaje"].ToString()), float.Parse(lector["avi_max_dist"].ToString()),
+                    float.Parse(lector["avi_max_vel"].ToString()), float.Parse(lector["avi_max_comb"].ToString()),
+                    Int32.Parse(lector["avi_disponibilidad"].ToString()));
+                    aviones.Add(avion);
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return aviones;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// Procedimiento del Modulo 2 para retornar un objeto del tipo CAvion buscado por su respectiva id
+        /// </summary>
+        /// <param name="id"> int </param>
+        /// <returns> CAvion el avion buscado</returns>
+        public CAvion consultarAvion(int id)
+        {
+            CAvion avionRetorno = null;
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "SELECT * FROM Avion where avi_id = " + id;
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                while (lector.Read())
+                {
+
+                    CAvion avion = new CAvion(Int32.Parse(lector["avi_id"].ToString()), lector["avi_matricula"].ToString(),
+                    lector["avi_modelo"].ToString(), Int32.Parse(lector["avi_pasajeros_turista"].ToString()),
+                    Int32.Parse(lector["avi_pasajeros_ejecutiva"].ToString()), Int32.Parse(lector["avi_pasajeros_vip"].ToString()),
+                    float.Parse(lector["avi_cap_equipaje"].ToString()), float.Parse(lector["avi_max_dist"].ToString()),
+                    float.Parse(lector["avi_max_vel"].ToString()), float.Parse(lector["avi_max_comb"].ToString()),
+                    Int32.Parse(lector["avi_disponibilidad"].ToString()));
+                    avionRetorno = avion;
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return avionRetorno;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+
+        /// <summary>
+        /// Procedimiento del Modulo 2 para modificar un avion
+        /// </summary>
+        /// <param name="model"> CModificarAvion </param>
+        /// <returns> Boolean true si se modifico bien, false si no </returns>
+        public Boolean modificarAvion(CModificarAvion model)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "UPDATE Avion SET avi_modelo='" + model._modeloAvion + "', avi_pasajeros_turista=" + model._capacidadPasajerosTurista + ", avi_pasajeros_ejecutiva=" + model._capacidadPasajerosEjecutiva + ", avi_pasajeros_vip='" + model._capacidadPasajerosVIP + "', avi_cap_equipaje=" + model._capacidadEquipaje + ", avi_max_dist=" + model._distanciaMaximaVuelo + ", avi_max_vel=" + model._velocidadMaximaDeVuelo + ", avi_max_comb=" + model._capacidadMaximaCombustible + " WHERE (avi_matricula='" + model._matriculaAvion + "')";
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                conexion.Close();
+                return true;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// Procedimiento del Modulo 2 para deshabilitar un avion
+        /// </summary>
+        /// <param name="id"> int </param>
+        /// <returns>Boolean true si se deshabilito bien, false si dio un error </returns>
+        public Boolean deshabilitarAvion(int id)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "UPDATE Avion SET avi_disponibilidad=0 where avi_id=" + id;
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                conexion.Close();
+                return true;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// Procedimiento del Modulo 2 para habilitar un avion
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>Boolean true si se habilito bien, false si dio un error </returns>
+        public Boolean habilitarAvion(int id)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "UPDATE Avion SET avi_disponibilidad=1 where avi_id=" + id;
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                conexion.Close();
+                return true;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+
+        /// <summary>
+        /// Metodo para eliminar un avion de la base de datos
+        /// </summary>
+        /// <param name="id"> id del avion a eliminar</param>
+        /// <returns>Booleano que resultara true si la eliminacion se ejecuta, false en caso de error</returns>
+        public Boolean eliminarAvion(int id)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "DELETE FROM AVION WHERE avi_id=" + id;
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                conexion.Close();
+                return true;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+     
+
+
+        //Procedimiento del Modulo 9 para agregar hoteles a la base de datos.
+        public Boolean insertarHotel(CGestionHoteles_CrearHotel model)
         {
             try
             {
@@ -40,7 +296,8 @@ namespace BOReserva.Servicio
                 //uso el SqlCommand para realizar los querys
                 SqlCommand query = conexion.CreateCommand();
                 //ingreso la orden del query
-                query.CommandText = "INSERT INTO Avion VALUES ('" + model._matriculaAvion + "','" + model._modeloAvion + "'," + model._capacidadPasajerosTurista + " , " + model._capacidadPasajerosEjecutiva + "," + model._capacidadPasajerosVIP + ", " + model._capacidadEquipaje + ", " + model._distanciaMaximaVuelo + ", " + model._velocidadMaximaDeVuelo + ", " + model._capacidadMaximaCombustible + ", 1);";
+                query.CommandText = "INSERT INTO Hotel VALUES ('" + model._nombre + "','" + model._estrellas + "',"
+                    + model._puntuacion + " , " + model._direccion + "," + model._paginaweb + ");";
                 //creo un lector sql para la respuesta de la ejecucion del comando anterior               
                 SqlDataReader lector = query.ExecuteReader();
                 //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
@@ -65,7 +322,1418 @@ namespace BOReserva.Servicio
 
         }
 
-        //Procedimiento del Modulo 11 para agregar ofertas a la base de datos.
+        /* INICIO DE FUNCIONES PARA MODULO 10 BO (RESTAURANTES) */
+        //Método del Modulo 10 (Backoffice) para agregar restaurantes a la base de datos.
+
+        public Boolean insertarRestaurante(CRestauranteModelo model)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                //uso el SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "INSERT INTO Restaurante VALUES ('" + model._nombre + "', '" + model._direccion + "', '"
+                    + model._descripcion + "' , '" + model._horarioApertura + "' ,'" + model._horarioCierre + "', "
+                    + model._idLugar.ToString() + ")";
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior
+                SqlDataReader lector = query.ExecuteReader();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+        }
+
+        //Método para la consulta de un sólo restaurante, dado un ID como parámetro, retornando un modelo del restaurante.
+        public CRestauranteModelo consultarRestaurante(int id)
+        {
+            try
+            {
+                CRestauranteModelo entrada = null;
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                //uso el SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "SELECT * FROM Restaurante WHERE rst_id = " + id.ToString();
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                SqlDataReader lector = query.ExecuteReader();
+                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+                while (lector.Read())
+                {
+                    entrada = new CRestauranteModelo
+                    {
+                        _id = (int)lector.GetSqlInt32(0),
+                        _nombre = lector.GetSqlString(1).ToString(),
+                        _descripcion = lector.GetSqlString(2).ToString(),
+                        _direccion = lector.GetSqlString(3).ToString(),
+                        _horarioApertura = lector.GetSqlString(4).ToString(),
+                        _horarioCierre = lector.GetSqlString(5).ToString(),
+                        _idLugar = (int)lector.GetSqlInt32(6)
+                    };
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return entrada;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+
+        }
+
+        //Método para la consulta de todos los restaurantes, retornando una lista de modelos de restaurante.
+        public List<CRestauranteModelo> consultarRestaurante()
+        {
+            try
+            {
+                var list = new List<CRestauranteModelo>();
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                //uso el SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "SELECT * FROM Restaurante";
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                SqlDataReader lector = query.ExecuteReader();
+                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+                while (lector.Read())
+                {
+                    var entrada = new CRestauranteModelo
+                    {
+                        _id = (int)lector.GetSqlInt32(0),
+                        _nombre = lector.GetSqlString(1).ToString(),
+                        _descripcion = lector.GetSqlString(2).ToString(),
+                        _direccion = lector.GetSqlString(3).ToString(),
+                        _horarioApertura = lector.GetSqlString(4).ToString(),
+                        _horarioCierre = lector.GetSqlString(5).ToString(),
+                        _idLugar = (int)lector.GetSqlInt32(6)
+                    };
+                    list.Add(entrada);
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return list;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+        }
+
+        //Método para la modificación de un restaurante.
+        public Boolean modificarRestaurante(CRestauranteModelo model)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                //uso el SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "UPDATE Restaurante SET rst_nombre = '" + model._nombre + "', " +
+                    "rst_direccion = '" + model._direccion + "', " + "rst_descripcion = '" + model._descripcion + "', " +
+                    "rst_hora_apertura = '" + model._horarioApertura + "', " + "rst_hora_cierre = '" + model._horarioCierre +
+                    "', fk_lugar = " + model._idLugar + " WHERE rst_id = " + model._id.ToString();
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior
+                SqlDataReader lector = query.ExecuteReader();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+        }
+
+        //Método para la eliminación de un restaurante.
+        public Boolean eliminarRestaurante(int id)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                //uso el SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "DELETE FROM Restaurante WHERE rst_id = " + id.ToString();
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior
+                SqlDataReader lector = query.ExecuteReader();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+        }
+
+        /* FIN DE FUNCIONES PARA MODULO 10 BO (RESTAURANTES) */
+        /* INICIO DE FUNCIONES COMUNES */
+
+        //Método para la consulta de todos los lugares, sin parámetro y retornando una lista de modelos de lugar.
+        public List<CLugarModelo> consultarLugar()
+        {
+            try
+            {
+                var list = new List<CLugarModelo>();
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                //uso el SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "SELECT * FROM Lugar";
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                SqlDataReader lector = query.ExecuteReader();
+                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+                while (lector.Read())
+                {
+                    var entrada = new CLugarModelo
+                    {
+                        _id = (int)lector.GetSqlInt32(0),
+                        _nombre = lector.GetSqlString(1).ToString(),
+                        _tipoLugar = lector.GetSqlString(2).ToString(),
+                        _zonaHoraria = (int)lector.GetSqlInt32(3),
+                        _idFKLugar = lector.IsDBNull(4) ? -1 : (int)lector.GetSqlInt32(4), //Pregunta si el campo es null, dando valor por defecto en caso que lo sea
+                        _abreviatura = lector.GetSqlString(5).ToString()
+
+                    };
+                    list.Add(entrada);
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return list;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                throw e;
+                //return null;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                throw e;
+                //return null;
+            }
+        }
+
+        //Método para la consulta de ciudades, sin parámetro y retornando una lista de modelos de lugar.
+        public List<CLugarModelo> consultarCiudad()
+        {
+            try
+            {
+                var list = new List<CLugarModelo>();
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                //uso el SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "SELECT * FROM Lugar WHERE lug_tipo_lugar = 'ciudad'";
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                SqlDataReader lector = query.ExecuteReader();
+                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+                while (lector.Read())
+                {
+                    var entrada = new CLugarModelo
+                    {
+                        _id = (int)lector.GetSqlInt32(0),
+                        _nombre = lector.GetSqlString(1).ToString(),
+                        _tipoLugar = lector.GetSqlString(2).ToString(),
+                        _zonaHoraria = (int)lector.GetSqlInt32(3),
+                        _idFKLugar = lector.IsDBNull(4) ? -1 : (int)lector.GetSqlInt32(4), //Pregunta si el campo es null, dando valor por defecto en caso que lo sea
+                        _abreviatura = lector.GetSqlString(5).ToString()
+
+                    };
+                    list.Add(entrada);
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return list;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+        }
+
+
+        //Procedimiento del Modulo 13 para retornar lista de los modulos generales
+        public CListaGenerica<CModulo_general> consultarLosModulos()
+        {
+            CListaGenerica<CModulo_general> modulo_general = new CListaGenerica<CModulo_general>();
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //Abrir la conexion
+                conexion.Open();
+                //query es un string que me devolvera la consulta 
+                String query = "SELECT m.mod_gen_nombre as Modulo_Detallado FROM modulo_general m";
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+                while (lector.Read())
+                {
+                    var entrada = new CModulo_general();
+                    entrada.Nombre = lector.GetSqlString(0).ToString();
+                    modulo_general.agregarElemento(entrada);
+                }
+                //cierro el lector
+                lector.Close();
+                //Cerrar la conexion
+                conexion.Close();
+                return modulo_general;
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        //Procedimiento del Modulo 13 para retornar lista de roles
+        public List<CRoles> consultarListaroles()
+        {
+            List<CRoles> _roles = new List<CRoles>();
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                SqlConnection conexion2 = new SqlConnection(stringDeConexion);
+                //Abrir la conexion
+                conexion.Open();
+                //query es un string que me devolvera la consulta 
+                String query = "select rol_nombre,rol_id from rol";
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+                while (lector.Read())
+                {
+                    CRoles _rol = new CRoles();
+                    _rol.Nombre_rol = lector.GetSqlString(0).ToString();
+                    string a = lector.GetSqlInt32(1).ToString();
+                    //Abrir la conexion
+                    conexion2.Open();
+                    //query es un string que me devolvera la consulta 
+                    String query2 = "select mod_det_nombre from Rol_Modulo_Detallado,Modulo_Detallado where " + lector.GetSqlInt32(1) + "=fk_rol_id and mod_det_id=fk_mod_det_id";
+                    SqlCommand cmd2 = new SqlCommand(query2, conexion2);
+                    SqlDataReader lector2 = cmd2.ExecuteReader();
+                    //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+                    while (lector2.Read())
+                    {
+                        var entrada = new CModulo_detallado();
+                        entrada.Nombre = lector2.GetSqlString(0).ToString();
+                        //agrego un permiso a la lista de roles
+                        _rol.Permisos.agregarElemento(entrada);
+
+                    }
+                    //cierro el lector
+                    lector2.Close();
+                    //Cerrar la conexion
+                    conexion2.Close();
+                    //Agrego los modulos sobre los que el rol tiene permiso
+                    _rol.Menu = consultarLosModulosRol(_rol);
+                    //Agrego rol a la lista de roles
+                    _roles.Add(_rol);
+                }
+                //cierro el lector
+                lector.Close();
+                //Cerrar la conexion
+                conexion.Close();
+                return _roles;
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+
+
+        //Procedimiento del Modulo 13 para retornar lista de los modulos generales de cada rol
+        public CListaGenerica<CModulo_general> consultarLosModulosRol(CRoles _rol)
+        {
+            CListaGenerica<CModulo_general>
+                modulo_general = new CListaGenerica<CModulo_general>
+                    ();
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //Abrir la conexion
+                conexion.Open();
+                //query es un string que me devolvera la consulta
+                String query = "SELECT mod_gen_nombre as Modulo_Detallado FROM modulo_general ,rol,rol_modulo_detallado,modulo_detallado  where rol_id=fk_rol_id and fk_mod_det_id=mod_det_id and fk_mod_gen_id=mod_gen_id and rol_nombre='" + _rol.Nombre_rol + "'";
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+                while (lector.Read())
+                {
+                    var entrada = new CModulo_general();
+                    entrada.Nombre = lector.GetSqlString(0).ToString();
+                    modulo_general.agregarElemento(entrada);
+                }
+                //cierro el lector
+                lector.Close();
+                //Cerrar la conexion
+                conexion.Close();
+                return modulo_general;
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        //Metodo para quitarle todos los permisos aun usuario
+        public Boolean quitarPermisos(CRoles model)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //Abrir la conexion
+                conexion.Open();
+                //SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "DELETE FROM Rol_Modulo_Detallado WHERE fk_rol_id in (SELECT rol_id from Rol where rol_nombre='" + model.Nombre_rol + "')";
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior
+                SqlDataReader lector = query.ExecuteReader();
+                //cierro el lector
+                lector.Close();
+                //Cierro la conexion
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+        }
+        //Procedimiento del Modulo 13 borrar Roles
+        public Boolean eliminarRol(CRoles model)
+        {
+            try
+            {   //Quito los permisos al rol para luego poder borrarlo
+                bool respuesta = quitarPermisos(model);
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //Abrir la conexion
+                conexion.Open();
+                //SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "DELETE FROM Rol WHERE rol_nombre='" + model.Nombre_rol + "'";
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior
+                SqlDataReader lector = query.ExecuteReader();
+                //cierro el lector
+                lector.Close();
+                //Cierro la conexion
+                conexion.Close();
+                return respuesta;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+        }
+        //Meotodo del Modulo 13 para retornar lista de los 
+
+        public List<String> M13consultarRolesDeUnUsuario(int id)
+        {
+            try
+            {
+
+                List<String> listarModuloDetallado = new List<String>();
+
+                CRestauranteModelo entrada = null;
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                SqlCommand query = conexion.CreateCommand();
+                String prueba = "165";
+                query.CommandText = "SELECT usu_id, usu_nombre , rol_nombre , mod_det_nombre  FROM usuario , rol  ,Rol_Modulo_Detallado , Modulo_Detallado WHERE usu_fk_rol = rol_id AND usu_id = '" + id + "' AND mod_det_id = fk_mod_det_id AND rol_id = fk_rol_id";
+
+                SqlDataReader lector = query.ExecuteReader();
+
+                int i = 0;
+                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+                while (lector.Read())
+                {
+
+                    //Debug.WriteLine("id del usuario " + lector["usu_id"].ToString());
+                    Debug.WriteLine("id del usuario nombre " + lector["usu_nombre"].ToString());
+                    Debug.WriteLine("id del id rol " + lector["rol_nombre"].ToString());
+                    Debug.WriteLine("id del id rol " + lector["mod_det_nombre"].ToString());
+                    i += 1;
+                    Debug.WriteLine("id del usuario " + i);
+
+
+                    listarModuloDetallado.Add(lector["mod_det_nombre"].ToString());
+
+
+                }
+
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return listarModuloDetallado;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+
+        }
+
+        //Procedimiento del Modulo 13 para retornar lista de los modulos detallados
+        public CListaGenerica<CModulo_detallado> consultarPermisos(String modulo)
+        {
+            CListaGenerica<CModulo_detallado> modulo_detallado = new CListaGenerica<CModulo_detallado>();
+            try
+            {
+
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //Abrir la conexion
+                conexion.Open();
+                //query es un string que me devolvera la consulta 
+                System.Diagnostics.Debug.WriteLine(modulo);
+                String query = "SELECT mod_det_nombre,mod_det_url FROM Modulo_Detallado,Modulo_general WHERE mod_gen_id=fk_mod_gen_id and mod_gen_nombre='" + modulo + "'";
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+                while (lector.Read())
+                {
+                    var entrada = new CModulo_detallado();
+                    entrada.Nombre = lector.GetSqlString(0).ToString();
+                    entrada.Url = lector.GetSqlString(1).ToString();
+                    modulo_detallado.agregarElemento(entrada);
+
+                }
+                //cierro el lector
+                lector.Close();
+                //Cerrar la conexion
+                conexion.Close();
+                return modulo_detallado;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        //Procedimiento del Modulo 13 para insertar Roles
+        public Boolean insertarRol(CRoles model)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //Abrir la conexion
+                conexion.Open();
+                //SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "INSERT INTO Rol VALUES ('" + model.Nombre_rol + "')";
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior
+                SqlDataReader lector = query.ExecuteReader();
+                //cierro el lector
+                lector.Close();
+                //Cierro la conexion
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+        }
+
+
+        public string MBuscarid_IdRol(string rolBuscar)
+        {
+
+            string rolIdDevolver = "";
+            conexion = new SqlConnection(stringDeConexion);
+            //INTENTO abrir la conexion
+            conexion.Open();
+            String query = "SELECT rol_id  FROM Rol WHERE rol_nombre = '" + rolBuscar + "'";
+            SqlCommand cmd = new SqlCommand(query, conexion);
+            SqlDataReader lector = cmd.ExecuteReader();
+            while (lector.Read())
+            {
+                rolIdDevolver = lector["rol_id"].ToString();
+
+            }
+            //cierro el lector
+            lector.Close();
+            //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+            conexion.Close();
+            return rolIdDevolver;
+        }
+
+
+        public string MBuscarid_Permiso(string permisoBucar)
+        {
+
+            string PermisoIdDevolver = "";
+            conexion = new SqlConnection(stringDeConexion);
+            //INTENTO abrir la conexion
+            conexion.Open();
+            String query = "SELECT mod_det_id  FROM modulo_detallado WHERE mod_det_nombre ='" + permisoBucar + "'";
+            SqlCommand cmd = new SqlCommand(query, conexion);
+            SqlDataReader lector = cmd.ExecuteReader();
+            while (lector.Read())
+            {
+                PermisoIdDevolver = lector["mod_det_id"].ToString();
+
+            }
+            //cierro el lector
+            lector.Close();
+            //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+            conexion.Close();
+            return PermisoIdDevolver;
+        }
+
+
+        //Metodo para insertar permisos de un rol 
+        public Boolean insertarPermisosRol(string rol, string permiso)
+        {
+            List<CAvion> aviones = new List<CAvion>();
+            try
+            {
+                System.Diagnostics.Debug.WriteLine("Entro en roles");
+                string idRol = "";
+                string idPermiso = "";
+
+                //Metodo para que busque el id del rol
+                System.Diagnostics.Debug.WriteLine("--------- " + idRol);
+
+                idRol = MBuscarid_IdRol(rol);
+                System.Diagnostics.Debug.WriteLine("id rol " + idRol);
+
+                //Metodo para que busque el id del permisos
+                System.Diagnostics.Debug.WriteLine("--------- " + idRol);
+                idPermiso = MBuscarid_Permiso(permiso);
+                System.Diagnostics.Debug.WriteLine("id permiso " + idPermiso);
+
+
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+
+                conexion.Open();
+                //uso el SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                String queryString;
+                SqlCommand cmd;
+                SqlDataReader lector;
+
+                query.CommandText = "INSERT INTO Rol_Modulo_Detallado VALUES ('" + idRol + "','" + idPermiso + "')";
+                lector = query.ExecuteReader();
+                lector.Close();
+                conexion.Close();
+
+
+                return true;
+
+            }
+            catch (SqlException e)
+            {
+                Debug.WriteLine("Exception sql");
+                return false;
+
+                throw e;
+
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Exception e");
+
+                return false;
+
+                throw e;
+
+            }
+        }
+
+
+        public Boolean insertarPermisosRol(CRoles rol, CListaGenerica<CModulo_detallado> listaPermisos)
+        {
+            List<CAvion> aviones = new List<CAvion>();
+            try
+            {
+                string idRol = "";
+
+                List<string> listaPermiso = new List<string>();
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "SELECT rol_id FROM Rol where rol_nombre = '" + rol.Nombre_rol + "'";
+
+                SqlCommand cmd = new SqlCommand(query, conexion);
+
+
+                SqlDataReader lector = cmd.ExecuteReader();
+
+
+                while (lector.Read())
+                {
+
+                    Debug.WriteLine("IDiiiiiii" + lector["rol_id"].ToString());
+                    idRol = lector["rol_id"].ToString();
+                    Debug.WriteLine("----------------");
+
+                }
+
+
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                SqlDataReader lectorDetalle = null;
+                String queryDetallado, queryInsertar;
+
+                foreach (var detalle in listaPermisos)
+                {
+                    Debug.WriteLine("Amount is {0} and type is {1}", detalle.Nombre, detalle.Url);
+
+                    queryDetallado = "SELECT mod_det_id from Modulo_Detallado where mod_det_nombre = '" + detalle.Nombre + "'";
+                    Debug.WriteLine("---------3-------");
+
+
+                    SqlCommand cmd2 = new SqlCommand(queryDetallado, conexion);
+
+                    Debug.WriteLine("--------4--------");
+
+
+                    lectorDetalle = cmd2.ExecuteReader();
+
+                    Debug.WriteLine("-------41---------");
+
+
+                    while (lectorDetalle.Read())
+                    {
+
+                        Debug.WriteLine("ID metodo detallado " + lectorDetalle["mod_det_id"].ToString());
+
+                        listaPermiso.Add(lectorDetalle["mod_det_id"].ToString());
+
+                        Debug.WriteLine("----------------");
+
+                    }
+                    Debug.WriteLine("-----------5-----");
+                    lectorDetalle.Close();
+
+                }
+
+                insertarRolPermisos(idRol, listaPermiso);
+                conexion.Close();
+
+                return true;
+
+            }
+            catch (SqlException e)
+            {
+                Debug.WriteLine("Exception sql");
+                return false;
+
+                throw e;
+
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Exception e");
+
+                return false;
+
+                throw e;
+
+            }
+        }
+
+        public void insertarRolPermisos(string rol, List<string> listaString)
+        {
+
+
+            Debug.WriteLine("Rol " + rol);
+            Debug.WriteLine("Rol " + listaString.Count);
+            if (listaString.Count > 0)
+            {
+                int i = 0;
+                foreach (var money in listaString)
+                {
+                    i += 0;
+                    Debug.WriteLine("Rol " + listaString[i]);
+
+                }
+
+
+
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                //uso el SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                String queryString;
+                SqlCommand cmd;
+                SqlDataReader lector;
+
+                //ingreso la orden del query
+
+
+
+                foreach (var money in listaString)
+                {
+
+                    Debug.WriteLine("este es el valor de i " + i);
+                    Debug.WriteLine("+++++1+++++");
+
+                    query.CommandText = "INSERT INTO Rol_Modulo_Detallado VALUES ('" + rol + "','" + listaString[i] + "')";
+                    Debug.WriteLine("+++++2+++++");
+
+                    lector = query.ExecuteReader();
+                    Debug.WriteLine("+++++3+++++");
+
+                    //cierro el lector
+                    lector.Close();
+                    Debug.WriteLine("+++++4+++++");
+
+
+                    i += 1;
+
+                }
+
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+
+
+
+            }
+
+        }
+
+
+        /* FIN DE FUNCIONES COMUNES */
+
+        /* MODULO 8 GESTION DE AUTOMOVILES*/
+
+
+        /// <summary>
+        /// Método que agrega un vehículo a la base de datos
+        /// </summary>
+        /// <param name="vehiculo">Vehículo a agregar a la base de datos</param>
+        /// <param name="id">El id de la ciudad a donde será agregado</param>
+        /// <returns>Retorna 1 si se agregó exitosamente y retorna la excepcion si no lo pudo hacer</returns>
+        public String MAgregarVehiculoBD(Automovil vehiculo, int id)
+        {
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "INSERT INTO Automovil VALUES ('" + vehiculo._matricula + "', '" + vehiculo._modelo + "', '" + vehiculo._fabricante + "', " + vehiculo._anio + ", " + vehiculo._kilometraje + ", " + vehiculo._cantpasajeros + ", '" + vehiculo._tipovehiculo +
+                    "', " + vehiculo._preciocompra + ", " + vehiculo._precioalquiler + ", " + vehiculo._penalidaddiaria + ", CURRENT_TIMESTAMP, '" + vehiculo._color + "', " + 1 + ", '" + vehiculo._transmision + "', " + id + ")";
+                Debug.WriteLine(sql);
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                conexion.Close();
+                return "1";
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return ex.Message;
+            }
+        }
+
+        /// <summary>
+        /// Método que modifica un vehículo existente de la base de datos
+        /// </summary>
+        /// <param name="vehiculo">Vehículo a modificar de la base de datos</param>
+        /// <param name="id">El id de la ciudad a donde se ubica</param>
+        /// <returns>Retorna 1 si se modificó exitosamente y retorna la excepcion si no lo pudo hacer</returns>
+        public String MModificarVehiculoBD(Automovil vehiculo, int id)
+        {
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "UPDATE Automovil SET aut_kilometraje = " + vehiculo._kilometraje + ", aut_tipovehiculo = '" + vehiculo._tipovehiculo +
+                    "', aut_precioalquiler = " + vehiculo._precioalquiler + ", aut_penalidaddiaria = " + vehiculo._penalidaddiaria + ", aut_color = '" + vehiculo._color + "', aut_fk_ciudad = " + id +
+                    " WHERE aut_matricula = '" + vehiculo._matricula + "'";
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                conexion.Close();
+                return "1";
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return ex.Message;
+            }
+        }
+
+        /// <summary>
+        /// Método que lista todos los vehículos de la base de datos
+        /// </summary>
+        /// <returns>Retorna una lista de tipo Automovil</returns>
+        public List<Automovil> MListarvehiculosBD()
+        {
+            List<Automovil> listavehiculos = new List<Automovil>();
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "SELECT * FROM Automovil";
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        //SE AGREGA CREA UN OBJECTO VEHICLE SE PASAN LOS ATRIBUTO ASI reader["<etiqueta de la columna en la tabla Automovil>"]
+                        //Y  SE AGREGA a listavehiculos
+                        var fecha = reader["aut_fecharegistro"];
+                        DateTime fecharegistro = Convert.ToDateTime(fecha).Date;
+                        Automovil vehiculo = new Automovil(reader["aut_matricula"].ToString(), reader["aut_modelo"].ToString(), reader["aut_fabricante"].ToString(),
+                                               Int32.Parse(reader["aut_anio"].ToString()), reader["aut_tipovehiculo"].ToString(),
+                                               double.Parse(reader["aut_kilometraje"].ToString()), Int32.Parse(reader["aut_cantpasajeros"].ToString()),
+                                               double.Parse(reader["aut_preciocompra"].ToString()), double.Parse(reader["aut_precioalquiler"].ToString()),
+                                               double.Parse(reader["aut_penalidaddiaria"].ToString()), fecharegistro,
+                                               reader["aut_color"].ToString(), Int32.Parse(reader["aut_disponibilidad"].ToString()), reader["aut_transmision"].ToString(),
+                                               MBuscarnombreciudadBD(Int32.Parse(reader["aut_fk_ciudad"].ToString())), MBuscarnombrePaisBD(Int32.Parse(reader["aut_fk_ciudad"].ToString()))
+                                               );
+                        listavehiculos.Add(vehiculo);
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return listavehiculos;
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Método para buscar un vehículo en particular de la base de datos
+        /// </summary>
+        /// <param name="matricula">La matrícula del vehículo a buscar</param>
+        /// <returns>Retorna un objeto de tipo Automovil</returns>
+        public Automovil MMostrarvehiculoBD(String matricula)
+        {
+            Automovil vehiculo = null;
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "SELECT * FROM Automovil WHERE aut_matricula = '" + matricula + "'";
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var fecha = reader["aut_fecharegistro"];
+                        DateTime fecharegistro = Convert.ToDateTime(fecha).Date;
+                        vehiculo = new Automovil(reader["aut_matricula"].ToString(), reader["aut_modelo"].ToString(), reader["aut_fabricante"].ToString(),
+                                                 Int32.Parse(reader["aut_anio"].ToString()), reader["aut_tipovehiculo"].ToString(),
+                                                 double.Parse(reader["aut_kilometraje"].ToString()), Int32.Parse(reader["aut_cantpasajeros"].ToString()),
+                                                 double.Parse(reader["aut_preciocompra"].ToString()), double.Parse(reader["aut_precioalquiler"].ToString()),
+                                                 double.Parse(reader["aut_penalidaddiaria"].ToString()), fecharegistro,
+                                                 reader["aut_color"].ToString(), Int32.Parse(reader["aut_disponibilidad"].ToString()), reader["aut_transmision"].ToString(),
+                                                 MBuscarnombrePaisBD(Int32.Parse(reader["aut_fk_ciudad"].ToString())), MBuscarnombreciudadBD(Int32.Parse(reader["aut_fk_ciudad"].ToString()))
+                                                 );
+                    }
+                    cmd.Dispose();
+                    conexion.Close();
+                    return vehiculo;
+                }
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Método que busca en la base de datos el identificador de una ciudad
+        /// </summary>
+        /// <param name="ciudad">Ciudad cuyo identificador se desea conocer</param>
+        /// <param name="pais">País en donde se ubica la ciudad</param>
+        /// <returns>Retorna el identificador de la ciudad</returns>
+        public int MBuscaridciudadBD(String ciudad, String pais)
+        {
+            int id_ciudad = 0;
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "SELECT d.lug_id FROM LUGAR C, LUGAR D WHERE C.lug_id = d.lug_FK_lugar_id AND C.lug_nombre = '" + pais + "' and D.lug_nombre = '" + ciudad + "'"; /*ESTE SQL ES EN CASO DE QUE NO SE MANEJE AL FINAL ESTADOS SINO SOLO PAISES Y CIUDADES*/
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        //SE OBTIENE LA CIUDAD Y SE PASA
+                        //Y  COLOCA QUE FK_CIUDAD ES IGUAL A LO QUE DEVUELVE EL SQL
+                        id_ciudad = Int32.Parse(reader[0].ToString()); //EL 0 REPRESENTA LA PRIMERA Y UNICA COLUMNA QUE DEVULVE EL SqlDataReader
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return id_ciudad;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                Debug.WriteLine(ex.ToString());
+                return id_ciudad;
+            }
+            catch (NullReferenceException ex)
+            {
+                conexion.Close();
+                Debug.WriteLine(ex.ToString());
+                //Error recibiendo los parametros
+                return id_ciudad;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine(e.ToString());
+                return id_ciudad;
+            }
+
+        }
+
+        /// <summary>
+        /// Método para borrar un vehículo de la base de datos
+        /// </summary>
+        /// <param name="matricula">Matrícula del vehículo a borrar</param>
+        /// <returns>Retorna 1 si se eliminó exitosamente y retorna 0 si no lo pudo hacer</returns>
+        public String MBorrarvehiculoBD(String matricula)
+        {
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "DELETE FROM Automovil WHERE aut_matricula = '" + matricula + "'";
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                conexion.Close();
+                return "1";
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return ex.Message;
+            }
+        }
+
+        /// <summary>
+        /// Método para buscar el nombre de una ciudad en la base de datos
+        /// </summary>
+        /// <param name="id">Identificador de la ciudad a buscar</param>
+        /// <returns>Retorna el nombre de la ciudad</returns>
+        public String MBuscarnombreciudadBD(int id)
+        {
+            String _ciudad = "Error al buscar";
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "SELECT C.lug_nombre FROM LUGAR C WHERE C.lug_id = '" + id + "'"; ;
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        _ciudad = reader[0].ToString();
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return _ciudad;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return _ciudad;
+            }
+        }
+
+        /// <summary>
+        /// Método para buscar el nombre de un país
+        /// </summary>
+        /// <param name="ciudad">Identificador de la ciudad que pertenece a dicho país</param>
+        /// <returns>Retorna el nombre del pais</returns>
+        public String MBuscarnombrePaisBD(int ciudad)
+        {
+            String _lugar = "Error al buscar";
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "SELECT E.lug_nombre FROM LUGAR E, LUGAR C WHERE E.lug_id = C.lug_fk_lugar_id " +
+                             "AND C.lug_id = " + ciudad;
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        _lugar = reader[0].ToString();
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return _lugar;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return _lugar;
+            }
+            catch (InvalidOperationException ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return _lugar;
+
+            }
+        }
+
+        /// <summary>
+        /// Método para listar todos los países de la base de datos
+        /// </summary>
+        /// <returns>Retorna un String[] con todos los países</returns>
+        public String[] MListarpaisesBD()
+        {
+            String[] listapaises = new String[5000];
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "SELECT lug_nombre FROM Lugar WHERE lug_tipo_lugar = 'pais'";
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                int i = 0;
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        listapaises[i] = reader[0].ToString();
+                        i++;
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return listapaises;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                listapaises[0] = ex.Message;
+                return listapaises;
+            }
+            catch (InvalidOperationException ex)
+            {
+                conexion.Close();
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Método que retorna el identificador de un país
+        /// </summary>
+        /// <param name="pais">Nombre del país cuyo identificador se desea conocer</param>
+        /// <returns>Retorna el identificador del país</returns>
+        public int MIdpaisesBD(String pais)
+        {
+            int fk = -1;
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "SELECT lug_id FROM Lugar WHERE lug_nombre = '" + pais + "'";
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        fk = Int32.Parse(reader[0].ToString());
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return fk;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return fk;
+            }
+        }
+
+        /// <summary>
+        /// Método para cambiar la disponibilidad de un vehículo de la base de datos
+        /// </summary>
+        /// <param name="matricula">Matrícula del vehículo cuya disponibilidad se desea cambiar</param>
+        /// <param name="activardesactivar">Estatus por el cual se desea cambiar (1 para activar, 0 para desactivar)</param>
+        /// <returns>Retorna 1 si se cambio el estatus exitosamente y retorna la excepcion si no lo pudo hacer</returns>
+        public String MDisponibilidadVehiculoBD(string matricula, int activardesactivar)
+        {
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "UPDATE Automovil SET aut_disponibilidad = " + activardesactivar + " WHERE aut_matricula = '" + matricula + "'";
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                conexion.Close();
+                return "1";
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return ex.Message;
+            }
+        }
+
+        /// <summary>
+        /// Método para listar todas las ciudades de un país
+        /// </summary>
+        /// <param name="fk">Identificador de país del cual se desea conocer sus ciudades</param>
+        /// <returns>Retorna una lista de String que posee las ciudades o retorna la excepcion</returns>
+        public List<string> MListarciudadesBD(int fk)
+        {
+            List<String> _ciudades = new List<string>();
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "SELECT lug_nombre FROM Lugar WHERE lug_fk_lugar_id = " + fk;
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        _ciudades.Add(reader[0].ToString());
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return _ciudades;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                _ciudades.Add(ex.Message);
+                return _ciudades;
+            }
+        }
+
+        /// <summary>
+        /// Método para verificar si una matrícula esta registrada en la BD
+        /// </summary>
+        /// <param name="matricula">Matrícula a revisar</param>
+        /// <returns>Retorna si existe o no la matrícula</returns>
+        public int MPlacarepetidaBD(String matricula)
+        {
+            bool verdad = false;
+            int i = 0;
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "SELECT * FROM Automovil WHERE aut_matricula = '" + matricula + "'";
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        String matricularetornada = reader[0].ToString();
+                        verdad = matricularetornada.Equals(matricula.ToUpper());
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                if (verdad == true)
+                {
+                    i = 1;
+                }
+                if (verdad == false)
+                {
+                    i = 0;
+                }
+                return i;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return 1;
+            }
+        }
+
+        /* FIN MODULO 8 GESTION DE AUTOMOVILES*/
+
+                //Procedimiento del Modulo 11 para agregar ofertas a la base de datos.
         public Boolean agregarOferta(CAgregarOferta model)
         {
             try
@@ -1072,638 +2740,21 @@ namespace BOReserva.Servicio
         
         //Fin modulo 11
 
-        //Procedimiento del Modulo 2 para retornar una lista con los aviones en la bd
-        public List<CAvion> listarAvionesEnBD()
-        {
-            List<CAvion> aviones = new List<CAvion>();
-            try
-            {
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                String query = "SELECT * FROM Avion";
-                SqlCommand cmd = new SqlCommand(query, conexion);
-                SqlDataReader lector = cmd.ExecuteReader();
-                while (lector.Read())
-                {
-                    CAvion avion = new CAvion(Int32.Parse(lector["avi_id"].ToString()), lector["avi_matricula"].ToString(),
-                    lector["avi_modelo"].ToString(), Int32.Parse(lector["avi_pasajeros_turista"].ToString()), 
-                    Int32.Parse(lector["avi_pasajeros_ejecutiva"].ToString()), Int32.Parse(lector["avi_pasajeros_vip"].ToString()), 
-                    float.Parse(lector["avi_cap_equipaje"].ToString()), float.Parse(lector["avi_max_dist"].ToString()), 
-                    float.Parse(lector["avi_max_vel"].ToString()), float.Parse(lector["avi_max_comb"].ToString()),
-                    Int32.Parse(lector["avi_disponibilidad"].ToString()));
-                    aviones.Add(avion);
-                }
-                //cierro el lector
-                lector.Close();
-                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
-                conexion.Close();
-                return aviones;
-
-            }
-            catch ( SqlException e)
-            {
-                throw e;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
-
-        //Procedimiento del Modulo 2 para retornar un objeto del tipo CAvion buscado por su respectiva id
-        public CAvion consultarAvion(int id)
-        {
-            CAvion avionRetorno = new CAvion();
-            try
-            {
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                String query = "SELECT * FROM Avion where avi_id = "+id;
-                SqlCommand cmd = new SqlCommand(query, conexion);
-                SqlDataReader lector = cmd.ExecuteReader();
-                while (lector.Read())
-                {
-                    
-                    CAvion avion = new CAvion(Int32.Parse(lector["avi_id"].ToString()), lector["avi_matricula"].ToString(),
-                    lector["avi_modelo"].ToString(), Int32.Parse(lector["avi_pasajeros_turista"].ToString()),
-                    Int32.Parse(lector["avi_pasajeros_ejecutiva"].ToString()), Int32.Parse(lector["avi_pasajeros_vip"].ToString()),
-                    float.Parse(lector["avi_cap_equipaje"].ToString()), float.Parse(lector["avi_max_dist"].ToString()),
-                    float.Parse(lector["avi_max_vel"].ToString()), float.Parse(lector["avi_max_comb"].ToString()),
-                    Int32.Parse(lector["avi_disponibilidad"].ToString()));
-                    avionRetorno = avion;
-                }
-                //cierro el lector
-                lector.Close();
-                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
-                conexion.Close();
-                return avionRetorno;
-
-            }
-            catch (SqlException e)
-            {
-                throw e;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
-
-
-        //Procedimiento del Modulo 2 para modificar un avion
-        public Boolean modificarAvion(CModificarAvion model)
-        {
-            try
-            {
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                String query = "UPDATE Avion SET avi_modelo='"+model._modeloAvion+"', avi_pasajeros_turista="+model._capacidadPasajerosTurista+", avi_pasajeros_ejecutiva="+model._capacidadPasajerosEjecutiva+", avi_pasajeros_vip='"+model._capacidadPasajerosVIP+"', avi_cap_equipaje="+model._capacidadEquipaje+", avi_max_dist="+model._distanciaMaximaVuelo+", avi_max_vel="+model._velocidadMaximaDeVuelo+", avi_max_comb="+model._capacidadMaximaCombustible+" WHERE (avi_matricula='"+model._matriculaAvion+"')";
-                SqlCommand cmd = new SqlCommand(query, conexion);
-                SqlDataReader lector = cmd.ExecuteReader();
-                conexion.Close();
-                return true;
-
-            }
-            catch (SqlException e)
-            {
-                throw e;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
-
-        //Procedimiento del Modulo 2 para deshabilitar un avion
-        public Boolean deshabilitarAvion(int id)
-        {
-            try
-            {
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                String query = "UPDATE Avion SET avi_disponibilidad=0 where avi_id="+id;
-                SqlCommand cmd = new SqlCommand(query, conexion);
-                SqlDataReader lector = cmd.ExecuteReader();
-                conexion.Close();
-                return true;
-
-            }
-            catch (SqlException e)
-            {
-                throw e;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
-
-        //Procedimiento del Modulo 2 para habilitar un avion
-        public Boolean habilitarAvion(int id)
-        {
-            try
-            {
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                String query = "UPDATE Avion SET avi_disponibilidad=1 where avi_id=" + id;
-                SqlCommand cmd = new SqlCommand(query, conexion);
-                SqlDataReader lector = cmd.ExecuteReader();
-                conexion.Close();
-                return true;
-
-            }
-            catch (SqlException e)
-            {
-                throw e;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
-
-
-        //Procedimiento del Modulo 9 para agregar hoteles a la base de datos.
-        public Boolean insertarHotel(CGestionHoteles_CrearHotel model)
-        {
-            try
-            {
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                //uso el SqlCommand para realizar los querys
-                SqlCommand query = conexion.CreateCommand();
-                //ingreso la orden del query
-                query.CommandText = "INSERT INTO Hotel VALUES ('" + model._nombre + "','" + model._estrellas + "'," 
-                    + model._puntuacion + " , " + model._direccion + "," + model._paginaWeb +  ");";
-                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
-                SqlDataReader lector = query.ExecuteReader();
-                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
-                /*while(lector.Read())
-                {
-                      //COMENTADO PORQUE ESTE METODO NO LO APLICA, SERÁ BORRADO DESPUES
-                }*/
-                //cierro el lector
-                lector.Close();
-                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
-                conexion.Close();
-                return true;
-            }
-            catch (SqlException e)
-            {
-                return false;
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
-
-        }
-
-        //Modulo 3 insertar nueva ruta
-
-        public Boolean InsertarRuta(CAgregarRuta model)
-        {           
-            
-            conexion = new SqlConnection(stringDeConexion);
-
-            conexion.Open();
-
-            SqlCommand query = conexion.CreateCommand();
-
-            String[] strDes = model._destinoRuta.Split(new[] { " - " }, StringSplitOptions.None);
-            String[] strOri = model._origenRuta.Split(new[] { " - " }, StringSplitOptions.None);
-            
-            
-            
-            String dist = model._distanciaRuta.ToString();
-            String miquery = "EXEC M03_AgregarRuta '" + strOri[0] + "','" + strOri[1] + "','" + strDes[0] + "' , '" + strDes[1] + "', '" + model._tipoRuta + "', '" + model._estadoRuta + "', " + dist;
-            System.Diagnostics.Debug.WriteLine(miquery);
-
-            query.CommandText = miquery;
-
-            //creo un lector sql para la respuesta de la ejecucion del comando anterior               
-            SqlDataReader lector = query.ExecuteReader();
-
-            lector.Close();
-
-            return true;
-        }
-    
-        
-        /* INICIO DE FUNCIONES PARA MODULO 10 BO (RESTAURANTES) */
-        //Método del Modulo 10 (Backoffice) para agregar restaurantes a la base de datos.
-
-        public Boolean insertarRestaurante(CRestauranteModelo model)
-        {
-            try
-            {
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                //uso el SqlCommand para realizar los querys
-                SqlCommand query = conexion.CreateCommand();
-                //ingreso la orden del query
-                query.CommandText = "INSERT INTO Restaurante VALUES ('" + model._nombre + "', '" + model._direccion + "', '"
-                    + model._descripcion + "' , '" + model._horarioApertura + "' ,'" + model._horarioCierre + "', " 
-                    + model._idLugar.ToString() + ")";
-                //creo un lector sql para la respuesta de la ejecucion del comando anterior
-                SqlDataReader lector = query.ExecuteReader();
-                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
-                conexion.Close();
-                return true;
-            }
-            catch (SqlException e)
-            {
-                conexion.Close();
-                Debug.WriteLine("Exception caught: {0}", e);
-                //throw e;
-                return false;
-            }
-            catch (Exception e)
-            {
-                conexion.Close();
-                Debug.WriteLine("Exception caught: {0}", e);
-                //throw e;
-                return false;
-            }
-        }
-
-        //Método para la consulta de un sólo restaurante, dado un ID como parámetro, retornando un modelo del restaurante.
-        public CRestauranteModelo consultarRestaurante(int id)
-        {
-            try
-            {
-                CRestauranteModelo entrada = null;
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                //uso el SqlCommand para realizar los querys
-                SqlCommand query = conexion.CreateCommand();
-                //ingreso la orden del query
-                query.CommandText = "SELECT * FROM Restaurante WHERE rst_id = " + id.ToString() ;
-                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
-                SqlDataReader lector = query.ExecuteReader();
-                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
-                while(lector.Read())
-                {
-                    entrada = new CRestauranteModelo
-                    {
-                        _id = (int)lector.GetSqlInt32(0),
-                        _nombre = lector.GetSqlString(1).ToString(),
-                        _descripcion = lector.GetSqlString(2).ToString(),
-                        _direccion = lector.GetSqlString(3).ToString(),
-                        _horarioApertura = lector.GetSqlString(4).ToString(),
-                        _horarioCierre = lector.GetSqlString(5).ToString(),
-                        _idLugar = (int)lector.GetSqlInt32(6)
-                    };
-                }
-                //cierro el lector
-                lector.Close();
-                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
-                conexion.Close();
-                return entrada;
-            }
-            catch (SqlException e)
-            {
-                conexion.Close();
-                Debug.WriteLine("Exception caught: {0}", e);
-                //throw e;
-                return null;
-            }
-            catch (Exception e)
-            {
-                conexion.Close();
-                Debug.WriteLine("Exception caught: {0}", e);
-                //throw e;
-                return null;
-            }
-
-        }
-
-        //Método para la consulta de todos los restaurantes, retornando una lista de modelos de restaurante.
-        public List<CRestauranteModelo> consultarRestaurante()
-        {
-            try
-            {
-                var list = new List<CRestauranteModelo>();
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                //uso el SqlCommand para realizar los querys
-                SqlCommand query = conexion.CreateCommand();
-                //ingreso la orden del query
-                query.CommandText = "SELECT * FROM Restaurante";
-                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
-                SqlDataReader lector = query.ExecuteReader();
-                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
-                while (lector.Read())
-                {
-                    var entrada = new CRestauranteModelo
-                    {
-                        _id = (int)lector.GetSqlInt32(0),
-                        _nombre = lector.GetSqlString(1).ToString(),
-                        _descripcion = lector.GetSqlString(2).ToString(),
-                        _direccion = lector.GetSqlString(3).ToString(),
-                        _horarioApertura = lector.GetSqlString(4).ToString(),
-                        _horarioCierre = lector.GetSqlString(5).ToString(),
-                        _idLugar = (int)lector.GetSqlInt32(6)
-                    };
-                    list.Add(entrada);
-                }
-                //cierro el lector
-                lector.Close();
-                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
-                conexion.Close();
-                return list;
-            }
-            catch (SqlException e)
-            {
-                conexion.Close();
-                Debug.WriteLine("Exception caught: {0}", e);
-                //throw e;
-                return null;
-            }
-            catch (Exception e)
-            {
-                conexion.Close();
-                Debug.WriteLine("Exception caught: {0}", e);
-                //throw e;
-                return null;
-            }
-        }
-
-        //Método para la modificación de un restaurante.
-        public Boolean modificarRestaurante(CRestauranteModelo model)
-        {
-            try
-            {
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                //uso el SqlCommand para realizar los querys
-                SqlCommand query = conexion.CreateCommand();
-                //ingreso la orden del query
-                query.CommandText = "UPDATE Restaurante SET rst_nombre = '" + model._nombre + "', " +
-                    "rst_direccion = '" + model._direccion + "', " + "rst_descripcion = '" + model._descripcion + "', " +
-                    "rst_hora_apertura = '" + model._horarioApertura + "', " + "rst_hora_cierre = '" + model._horarioCierre +
-                    "WHERE rst_id = " + model._id.ToString();
-                //creo un lector sql para la respuesta de la ejecucion del comando anterior
-                SqlDataReader lector = query.ExecuteReader();
-                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
-                conexion.Close();
-                return true;
-            }
-            catch (SqlException e)
-            {
-                conexion.Close();
-                Debug.WriteLine("Exception caught: {0}", e);
-                //throw e;
-                return false;
-            }
-            catch (Exception e)
-            {
-                conexion.Close();
-                Debug.WriteLine("Exception caught: {0}", e);
-                //throw e;
-                return false;
-            }
-        }
-
-        //Método para la eliminación de un restaurante.
-        public Boolean eliminarRestaurante(int id)
-        {
-            try
-            {
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                //uso el SqlCommand para realizar los querys
-                SqlCommand query = conexion.CreateCommand();
-                //ingreso la orden del query
-                query.CommandText = "DELETE FROM Restaurante WHERE rst_id = " + id.ToString();
-                //creo un lector sql para la respuesta de la ejecucion del comando anterior
-                SqlDataReader lector = query.ExecuteReader();
-                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
-                conexion.Close();
-                return true;
-            }
-            catch (SqlException e)
-            {
-                conexion.Close();
-                Debug.WriteLine("Exception caught: {0}", e);
-                //throw e;
-                return false;
-            }
-            catch (Exception e)
-            {
-                conexion.Close();
-                Debug.WriteLine("Exception caught: {0}", e);
-                //throw e;
-                return false;
-            }
-        }
-
-        /* FIN DE FUNCIONES PARA MODULO 10 BO (RESTAURANTES) */
-
-        /* INICIO DE FUNCIONES COMUNES */
-
-        //Método para la consulta de todos los lugares, sin parámetro y retornando una lista de modelos de lugar.
-        public List<CLugarModelo> consultarLugar()
-        {
-            try
-            {
-                var list = new List<CLugarModelo>();
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                //uso el SqlCommand para realizar los querys
-                SqlCommand query = conexion.CreateCommand();
-                //ingreso la orden del query
-                query.CommandText = "SELECT * FROM Lugar";
-                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
-                SqlDataReader lector = query.ExecuteReader();
-                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
-                while (lector.Read())
-                {
-                    var entrada = new CLugarModelo
-                    {
-                        _id = (int)lector.GetSqlInt32(0),
-                        _nombre = lector.GetSqlString(1).ToString(),
-                        _tipoLugar = lector.GetSqlString(2).ToString(),
-                        _zonaHoraria = (int)lector.GetSqlInt32(3),
-                        _idFKLugar = lector.IsDBNull(4) ? -1 : (int)lector.GetSqlInt32(4), //Pregunta si el campo es null, dando valor por defecto en caso que lo sea
-                        _abreviatura = lector.GetSqlString(5).ToString()
-
-                    };
-                    list.Add(entrada);
-                }
-                //cierro el lector
-                lector.Close();
-                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
-                conexion.Close();
-                return list;
-            }
-            catch (SqlException e)
-            {
-                conexion.Close();
-                Debug.WriteLine("Exception caught: {0}", e);
-                throw e;
-                //return null;
-            }
-            catch (Exception e)
-            {
-                conexion.Close();
-                Debug.WriteLine("Exception caught: {0}", e);
-                throw e;
-                //return null;
-            }
-        }
-
-        //Método para la consulta de ciudades, sin parámetro y retornando una lista de modelos de lugar.
-        public List<CLugarModelo> consultarCiudad()
-        {
-            try
-            {
-                var list = new List<CLugarModelo>();
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                //uso el SqlCommand para realizar los querys
-                SqlCommand query = conexion.CreateCommand();
-                //ingreso la orden del query
-                query.CommandText = "SELECT * FROM Lugar WHERE lug_tipo_lugar = 'ciudad'";
-                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
-                SqlDataReader lector = query.ExecuteReader();
-                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
-                while (lector.Read())
-                {
-                    var entrada = new CLugarModelo
-                    {
-                        _id = (int)lector.GetSqlInt32(0),
-                        _nombre = lector.GetSqlString(1).ToString(),
-                        _tipoLugar = lector.GetSqlString(2).ToString(),
-                        _zonaHoraria = (int)lector.GetSqlInt32(3),
-                        _idFKLugar = lector.IsDBNull(4) ? -1 : (int)lector.GetSqlInt32(4), //Pregunta si el campo es null, dando valor por defecto en caso que lo sea
-                        _abreviatura = lector.GetSqlString(5).ToString()
-
-                    };
-                    list.Add(entrada);
-                }
-                //cierro el lector
-                lector.Close();
-                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
-                conexion.Close();
-                return list;
-            }
-            catch (SqlException e)
-            {
-                conexion.Close();
-                Debug.WriteLine("Exception caught: {0}", e);
-                //throw e;
-                return null;
-            }
-            catch (Exception e)
-            {
-                conexion.Close();
-                Debug.WriteLine("Exception caught: {0}", e);
-                //throw e;
-                return null;
-            }
-        }
 
 
 
-
-        //Procedimiento del Modulo 13 para retornar lista de los modulos generales
-        public CListaGenerica<CModulo_general> consultarLosModulos()
-        {
-            CListaGenerica<CModulo_general> modulo_general = new CListaGenerica<CModulo_general>();           
-            try
-            {
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //Abrir la conexion
-                conexion.Open();
-                //query es un string que me devolvera la consulta 
-                String query = "SELECT m.mod_gen_nombre as Modulo_Detallado FROM modulo_general m";
-                SqlCommand cmd = new SqlCommand(query, conexion);
-                SqlDataReader lector = cmd.ExecuteReader();
-                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
-                while (lector.Read())
-                {
-                    var entrada = new CModulo_general();
-                    entrada.Nombre = lector.GetSqlString(0).ToString();                   
-                    modulo_general.agregarElemento(entrada);
-                }
-                //cierro el lector
-                lector.Close();
-                //Cerrar la conexion
-                conexion.Close();
-                return modulo_general;
-
-            }
-            catch (SqlException e)
-            {
-                throw e;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
-        //Procedimiento del Modulo 13 para insertar Roles
-        public Boolean insertarRol(CRoles model)
-        {
-            try
-            {
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //Abrir la conexion
-                conexion.Open();
-                //SqlCommand para realizar los querys
-                SqlCommand query = conexion.CreateCommand();
-                //ingreso la orden del query
-                query.CommandText = "INSERT INTO Rol VALUES ('" + model.Nombre_rol + "')";
-                //creo un lector sql para la respuesta de la ejecucion del comando anterior
-                SqlDataReader lector = query.ExecuteReader();
-                //Cierro la conexion
-                conexion.Close();
-                return true;
-            }
-            catch (SqlException e)
-            {
-                conexion.Close();
-                Debug.WriteLine("Exception caught: {0}", e);
-                //throw e;
-                return false;
-            }
-            catch (Exception e)
-            {
-                conexion.Close();
-                Debug.WriteLine("Exception caught: {0}", e);
-                //throw e;
-                return false;
-            }
-        }
-        /* FIN DE FUNCIONES COMUNES */
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

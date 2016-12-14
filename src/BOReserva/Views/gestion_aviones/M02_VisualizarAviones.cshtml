@@ -13,16 +13,16 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>Matricula</th>
+                            <th>Matrícula</th>
                             <th>Modelo</th>
                             <th>Capacidad Turista/Ejecutiva/VIP</th>
                             @*<th>Capacidad Clase Ejecutiva</th>
                                 <th>Capacidad Clase VIP</th>*@
                             <th>Equipaje (Kg)</th>
-                            <th>Distancia Máxima(Km)</th>
-                            <th>Velocidad Máxima(Km/h)</th>
+                            <th>Dist. Max(Km)</th>
+                            <th>Vel. Max(Km/h)</th>
                             <th>Combustible (L)</th>
-                            <th>Disponibilidad</th>
+                            <th>Estado</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
@@ -48,35 +48,39 @@
                                     <td>
                                         @*<a href="#"> <i class="fa fa-eye clasedeprueba"></i></a>*@
                                         <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>
+                                        <a href="#" title="Eliminar avión"><i class="fa fa-times eliminar"></i></a>
                                         @if (item._disponibilidad == 1)
                                         {
-                                            <a href="#" title="Deshabilitar"><i class="fa fa-times deshabilitar"></i></a>
+                                            <a href="#" title="Deshabilitar"><i class="fa fa-toggle-on desactivar"></i></a>
                                         }
                                         else
                                         {
-                                            <a href="#" title="Habilitar"><i class="fa fa-check habilitar"></i></a>
+                                            <a href="#" title="Habilitar"><i class="fa fa-toggle-off activar"></i></a>
                                         }
+
                                     </td>
                                 </tr>
                             }
                         }
                         catch
                         {
-
+                            <script>
+                                alert("Error en el listado, por favor intente acceder nuevamente");
+                            </script>
                         }
 
                     <tfoot>
                         <tr>
-                            <th>Matricula</th>
+                            <th>Matrícula</th>
                             <th>Modelo</th>
                             <th>Capacidad Turista/Ejecutiva/VIP</th>
                             @*<th>Capacidad Clase Ejecutiva</th>
                                 <th>Capacidad Clase VIP</th>*@
                             <th>Equipaje (Kg)</th>
-                            <th>Distancia Máxima(Km)</th>
-                            <th>Velocidad Máxima(Km/h)</th>
+                            <th>Dist. Max(Km)</th>
+                            <th>Vel. Max(Km/h)</th>
                             <th>Combustible (L)</th>
-                            <th>Disponibilidad</th>
+                            <th>Estado</th>
                             <th>Opciones</th>
                         </tr>
                     </tfoot>
@@ -90,11 +94,14 @@
 </div>
 <!-- /.row -->
 
+<script src="~/Content/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="//cdn.datatables.net/plug-ins/1.10.13/i18n/Spanish.json"></script>
+
 <script language="javascript" type="text/javascript">
 
-
+    table = $('#example1').DataTable();
     $(".modificar").click(function () {
-        console.log("hola");
         var identificador = $(this).parent().parent().parent().attr("id");
         jQuery.ajax({
             type: "GET",
@@ -104,14 +111,45 @@
             $("#contenido").empty();
             $("#contenido").append(data);
         }).fail(function () {
+            alert(data);
+        });
 
+
+    });
+
+    $(".eliminar").click(function () {
+        var identificador = $(this).parent().parent().parent().attr("id");
+        jQuery.ajax({
+            type: "POST",
+            url: "/gestion_aviones/eliminarAvion",
+            data: { id: identificador }
+        }).done(function (data) {
+            var url = '/gestion_aviones/M02_VisualizarAviones';
+            var method = 'GET';
+            var data = '';
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+        }).fail(function (data) {
+            alert(data);
         });
 
 
     });
 
 
-    $(".deshabilitar").click(function () {
+    $(".desactivar").click(function () {
         console.log("hola");
         var identificador = $(this).parent().parent().parent().attr("id");
         jQuery.ajax({
@@ -141,7 +179,7 @@
         });
     });
 
-    $(".habilitar").click(function () {
+    $(".activar").click(function () {
         console.log("hola");
         var identificador = $(this).parent().parent().parent().attr("id");
         jQuery.ajax({
