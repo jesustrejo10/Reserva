@@ -85,9 +85,8 @@ namespace FOReserva.Controllers
             }
             catch (ManejadorSQLException f)
             {
-                //Ventana de error no conecto a la db
-                //Se puede usar el mensaje de la excepcion "f.mensaje"
-                return View("error_conexion");
+
+                return View("gestion_reserva_crucero_error_conexion");
             }
           
             catch (Exception g)

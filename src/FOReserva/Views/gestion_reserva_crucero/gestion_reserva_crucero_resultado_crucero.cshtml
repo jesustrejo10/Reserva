@@ -4,10 +4,20 @@
     ViewBag.Title = "Resultado de Busqueda Crucero";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@{
 
+     if (Model == null)
+{
+        <center>
+    <h1><i class="fa fa-exclamation-circle orange" aria-hidden="true"></i> Lo sentimos, ha habido un problema con la conexión!</h1>
+              <h2>Revise su conexión e intente de nuevo</h2>
+           
+</center>
 
+}
+     else { 
 <!-- FEATURED GRID -->
-@using (Html.BeginForm("gestion_reserva_crucero_confirmar", "gestion_reserva_crucero", FormMethod.Post, new { @id = "crucero_form" }))
+using (Html.BeginForm("gestion_reserva_crucero_confirmar", "gestion_reserva_crucero", FormMethod.Post, new { @id = "crucero_form" }))
 {
     			<div class="container">
 
@@ -107,5 +117,6 @@
 
     </script>
     <script type="text/javascript" src="@Url.Content("~/Scripts/indexReservaCrucero.js")"></script>
-
+    }
+}
 }
