@@ -213,6 +213,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Cruceros\CReserva_Cruceros.cs" />
+    <Compile Include="Models\Cruceros\Crucero.cs" />
     <Compile Include="Models\Cruceros\CVista_Cruceros.cs" />
     <Compile Include="Models\Diarios\CDiarioModel.cs" />
     <Compile Include="Models\Autos\CAgregarReserva.cs" />
@@ -3137,6 +3138,12 @@
     <Content Include="Views\gestion_diarios\_CrearDiarioExito.cshtml" />
     <Content Include="Views\gestion_reserva_restaurante\_FailReservar.cshtml" />
     <Content Include="Views\gestion_revision\crear_revision_form.cshtml" />
+    <Content Include="Views\gestion_reserva_crucero\gestion_reserva_crucero_buscar_crucero.cshtml" />
+    <Content Include="Views\gestion_reserva_crucero\gestion_reserva_crucero_confirmar.cshtml" />
+    <Content Include="Views\gestion_reserva_crucero\gestion_reserva_crucero_error_conexion.cshtml" />
+    <Content Include="Views\gestion_reserva_crucero\gestion_reserva_crucero_no_resultados.cshtml" />
+    <Content Include="Views\gestion_reserva_crucero\gestion_reserva_crucero_perfil.cshtml" />
+    <Content Include="Views\gestion_reserva_crucero\gestion_reserva_crucero_resultado_crucero.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

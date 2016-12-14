@@ -288,6 +288,9 @@ jQuery(document).ready(function () {
         $("#LiHoteles").removeClass("active");
         $("#LiRestaurantes").removeClass("active");
         $("#LiAutos").removeClass("active");
+
+        $("#contenedor").html('<div class="text-center">Cargando...</div>');
+
         var url = '/gestion_reserva_crucero/gestion_reserva_crucero';
         var method = 'GET';
         var data = '';
@@ -303,7 +306,7 @@ jQuery(document).ready(function () {
                     $("#contenedor").append(data);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
+                    $("#contenedor").html('<div class="text-center">No se pudo Cargar los datos...</div>');
                 }
             });
 

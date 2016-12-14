@@ -1,9 +1,11 @@
 ﻿@model FOReserva.Models.Cruceros.CVista_Cruceros
+
            <!-- aqui va el contenedor del formulario de la vista cruceros pero la index de nosotros como tal -->
 <div class="heading-title">
 	<h3><span>Cruceros</span></h3>
 </div>
-@using (Html.BeginForm("buscarCrucero", "gestion_reserva_crucero", null, FormMethod.Post, new { @id = "formBuscarCruceros", @class = "form-horizontal"}))
+
+@using (Html.BeginForm("gestion_reserva_crucero_buscar_crucero", "gestion_reserva_crucero", null, FormMethod.Post, new { @id = "formBuscarCruceros", @class = "form-horizontal" }))
 {
     <fieldset>
 										<!-- required [php action request] -->
@@ -11,52 +13,41 @@
 
 
 										<!-- select -->
-										<label> Cruceros y Puerto de Embarque</label>
-										<select class="form-control select2" required>
-
-											<option value="">Seleccione un Crucero</option>
-											<option value="ALL-ALL">Mar Caribe</option>
-
-										</select>
+										<label> Cruceros </label>
+                                       @Html.DropDownListFor(m => m.SelectedCrucero, Model.Cruceros, new { @class = "form-control select2", @id = "select2", @name = "select2" })
+                                     <div id="val_null" style="display: none;" class="has-error error">
+                                         <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe seleccionar un tipo de Crucero</p>
+                                     </div>
 										<br>
 										<br>
-										<div class="row">
-											<div class="form-group">
-												<div class="col-md-6 col-sm-6" required>
+
+											<div class="form-group ">
+												<div class="col-md-5 col-sm-5" >
 													<label>Fecha ida</label>
-                                                    @Html.TextBoxFor(m => m._fechaIda, null, new { @class = "form-control", @type = "date", @id = "fechaida", @placeholder = "Fecha", min = "today", max = "2023-12-31" })
+                                                    @Html.TextBoxFor(m => m._ida, null, new { @class = "form-control ", @type = "date", @id = "fechaida", @name = "fechaida", @placeholder = "Fecha", min = "today", max = "2023-12-31" })
 												<!--	<input type="text" name="contact[start_date]" value="" class="form-control datepicker required" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">-->
-												</div>
-												<div class="col-md-6 col-sm-6" required>
-													<label>Fecha vuelta</label>
-                                                    @Html.TextBoxFor(m => m._fechaVuelta, null, new { @class = "form-control", @type = "date", @id = "fechavuelta", @placeholder = "Fecha", min = "today", max = "2023-12-31" })
-												<!--	<input type="text" name="contact[start_date]" value="" class="form-control datepicker required" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">-->
-												</div>
+                                                    <div id="name_null" style="display: none;" class="has-error error">
+                                                        <p><i class="fa fa-times-circle" aria-hidden="true"></i> Seleccione una fecha</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-5 col-sm-5 ">
+                                                    <label>Fecha vuelta</label>
+                                                    @Html.TextBoxFor(m => m._vuelta, null, new { @class = "form-control ", @type = "date", @id = "fechavuelta", @name = "fechavuelta", @placeholder = "Fecha", min = "today", max = "2023-12-31" })
+                                                    <!--	<input type="text" name="contact[start_date]" value="" class="form-control datepicker required" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">-->
+                                                    <div id="name_null2" style="display: none;" class="has-error error">
+                                                        <p><i class="fa fa-times-circle" aria-hidden="true"></i> Seleccione una fecha</p>
+                                                    </div>
+                                                    <div id="name_empty" style="display: none;" class="has-error error">
+                                                        <p><i class="fa fa-times-circle" aria-hidden="true"></i> No puede haber una fecha de vuelta menor a la fecha de ida</p>
+                                                    </div>
+                                                </div>
+
+                                                <div id="name_format" style="display: none;" class="has-error error">
+                                                    <p><i class="fa fa-times-circle" aria-hidden="true"></i> Las noches no coinciden</p>
+                                                </div>
 											</div>
-										</div>
 
 
-										<br>
-										<div class="row">
-											<div class="form-group">
-												<div class="col-md-2 col-sm-2" required>
-													<label>Noches</label>
-													<select name="contact[position]"  class="form-control pointer required" style="width: 60px" required>
-														<option value="1" selected="selected">1</option>
-														<option value="2">2</option>
-														<option value="3">3</option>
-														<option value="4">4</option>
-														<option value="5">5</option>
-														<option value="6">6</option>
-														<option value="7">7</option>
-														<option value="8">8</option>
-														<option value="9">9</option>
-														<option value="10">10</option>
-													</select>
-												</div>
-
-											</div>
-										</div>
 
 
 									</fieldset>
@@ -64,10 +55,90 @@
 										<div class="col-md-12">
 											<button type="button" id="buscarCrucero" class="btn btn-primary">Buscar</button>
 										</div>
-									</div>
+				
+    					</div>
+
     <script>
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+
+        today = yyyy + '-' + mm + '-' + dd;
+       document.getElementById("fechaida").setAttribute("min", today);
+        var today1 = new Date();
+        var dd1 = today1.getDate() +1;
+        var mm1 = today1.getMonth() + 1; //January is 0!
+        var yyyy1 = today1.getFullYear();
+        if (dd1 < 10) {
+            dd1 = '0' + dd1
+        }
+        if (mm1 < 10) {
+            mm1 = '0' + mm1
+        }
+        today1 = yyyy1 + '-' + mm1 + '-' + dd1;
+        document.getElementById("fechavuelta").setAttribute("min", today1);
+
     $("#buscarCrucero").click(function (e) {
         e.preventDefault();
+        $(".error").hide();
+        $("#select2").removeClass("has-error");
+        $("#fechaida").removeClass("has-error");
+        $("#fechavuelta").removeClass("has-error");
+        var fechavuelta = $("#fechavuelta").val();
+        var fechaida = $("#fechaida").val();
+        var crucero = $("#select2").val();
+        //var caracteres = /^[a-zA-Z0-9\s]+$/;
+
+        var win = true;
+        if (fechaida == "")  {
+            $("#fechaida").addClass("has-error");
+            $("#name_null").fadeIn();
+            win = false;
+        }
+        if (fechavuelta == "") {
+            $("#fechavuelta").addClass("has-error");
+            $("#name_null2").fadeIn();
+            win = false;
+        }
+        if (fechaida > fechavuelta) {
+            $("#fechaida").addClass("has-error");
+            $("#name_empty").fadeIn();
+            win = false;
+        }
+
+       /** if (nombre == "" || nombre == undefined || !nombre.match(caracteres)) {
+
+            if (nombre == "" || nombre == undefined) {
+                $("#name_rest").addClass("has-error");
+                $("#name_empty").fadeIn();
+                win = false;
+            }
+            else {
+                $("#name_rest").addClass("has-error");
+                $("#name_format").fadeIn();
+                win = false;
+            }
+        }*/
+        if (crucero == -1) {
+            var win = false;
+            $("#select2").addClass("has-error");
+            $("#val_null").fadeIn();
+            win = false;
+        }
+
+        if (win) {
+            $("#formBuscarCruceros").submit();
+        }
+        else
+            return false;
+   /**
         var form = $("#formBuscarCruceros");
         $.ajax({
             url: "gestion_reserva_crucero/buscarCrucero",
@@ -75,9 +146,10 @@
             type: 'POST',
             success: function (data) {
                 alert("Buscando...");
-                /*$('#formBuscarVuelos')[0].reset();*/
+                /*$('#formBuscarVuelos')[0].reset();
             }
-        });
+        });*/
     });
 </script>
 }
+    

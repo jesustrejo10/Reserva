@@ -1467,6 +1467,7 @@
     <Content Include="Views\gestion_comida_vuelo\M06_VisualizarVuelosComidas.cshtml" />
     <Content Include="Views\gestion_restaurantes\M10_GestionRestaurantes_Modificar.cshtml" />
     <Content Include="Views\gestion_roles\M13_ModificarRol.cshtml" />
+    <Content Include="Views\gestion_comida_vuelo\M06_AgregarComida.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Visualizar.cshtml" />
@@ -1485,7 +1486,7 @@
     <Content Include="Views\gestion_ruta_comercial\VisualizarRutasComerciales.cshtml" />
     <Content Include="Views\gestion_ruta_comercial\ModificarRutasComerciales.cshtml" />
     <Content Include="Views\gestion_ruta_comercial\AgregarRutasComerciales.cshtml" />
-    <Content Include="Views\gestion_ruta_comercial\DetallesRutasComerciales.cshtml" />
+    <Content Include="Views\gestion_ruta_comercial\DetalleRutasComerciales.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_AgregarOferta.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_AgregarPaquete.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_VisualizarOferta.cshtml" />

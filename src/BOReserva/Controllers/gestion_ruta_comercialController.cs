@@ -93,11 +93,13 @@ namespace BOReserva.Controllers
             
         }
 
-        
-        public PartialViewResult DetalleRutasComerciales()
+        // GET: gestion_ruta_comercial/DetalleRutasComerciales
+        public ActionResult DetalleRutasComerciales(int idRuta)
         {
-            CGestion_ruta ruta = new CGestion_ruta();
-            return PartialView(ruta);
+            CManejadorSQL_Rutas buscarRuta = new CManejadorSQL_Rutas();
+            CAgregarRuta Route = buscarRuta.MMostrarRutaBD(idRuta);
+            Route._idRuta = idRuta;
+            return PartialView(Route);
         }
 
 
@@ -189,6 +191,56 @@ namespace BOReserva.Controllers
 
 
 
+        }
+
+        /// <summary>
+        /// Método para cambiar a "Activa" el status de una ruta
+        /// </summary>
+        /// <param name="idRuta">Id de la Ruta a la que se le cambiará el estatus</param>
+        /// <returns>Retorna un JsonResult</returns>
+        [HttpPost]
+        public JsonResult HabilitarRuta(int idRuta)
+        {
+            CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();
+            Boolean resultado = sql.habilitarRuta(idRuta);
+            if (resultado)
+            {
+                return (Json(true, JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)  
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error  
+                String error = "Error en la base de datos";
+                //Retorno el error  
+                return Json(error);
+            }
+        }
+
+        /// <summary>
+        /// Método para cambiar a "Inactiva" el status de una ruta
+        /// </summary>
+        /// <param name="idRuta">Id de la Ruta a la que se le cambiará el estatus</param>
+        /// <returns>Retorna un JsonResult</returns>
+        [HttpPost]
+        public JsonResult InhabilitarRuta(int idRuta)
+        {
+            CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();
+            Boolean resultado = sql.deshabilitarRuta(idRuta);
+            if (resultado)
+            {
+                return (Json(true, JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)  
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error  
+                String error = "Error en la base de datos";
+                //Retorno el error  
+                return Json(error);
+            }
         }
 
     }
