@@ -19,6 +19,7 @@
                             <th>Fecha Aterrizaje </th>
                             <th>Status</th>
                             <th>Avion</th>
+                            <th>Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,14 +39,25 @@
                                     <td>
                                         <a href="#"> <i class="fa fa-eye mostrar"></i></a>
                                         <a href="#"><i class="fa fa-gear modificar"></i></a>
-                                        <a href="#"><i class="fa fa-times desactivar"></i></a>
+                                        @{
+                                            if (item._statusVuelo == "activo")
+                                            {
+                                                <a href="#" title="Activar/Desactivar vuelo"><i class="fa fa-toggle-on desactivar"></i></a>
+                                            }
+                                            if (item._statusVuelo == "inactivo")
+                                            {
+                                                <a href="#" title="Activar/Desactivar vuelo"><i class="fa fa-toggle-off activar"></i></a>
+                                            }
+                                        }
                                     </td>
                                 </tr>
                             }
                         }
                         catch
                         {
-
+                            <script>
+                                alert("Error en el listado, por favor intente acceder nuevamente");
+                            </script>
                         }
 
                     <tfoot>
@@ -57,6 +69,7 @@
                             <th>Fecha Aterrizaje </th>
                             <th>Status</th>
                             <th>Avion</th>
+                            <th>Opciones</th>
                         </tr>
                     </tfoot>
                 </table>
@@ -69,28 +82,61 @@
 </div>
 <!-- /.row -->
 
-<script>
+<script src="~/Content/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
 
-    
-</script>
-
-<script src="../../Content/plugins/jQuery/jquery-2.2.3.min.js"></script>
-<!-- Bootstrap 3.3.6 -->
-<script src="../../Content/bootstrap/js/bootstrap.min.js"></script>
-<!-- DataTables -->
-<script src="../../Content/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="../../Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
-<!-- SlimScroll -->
-<script src="../../Content/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-<!-- FastClick -->
-<script src="../../Content/plugins/fastclick/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="../../Content/dist/js/app.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
-<!-- page script -->
 
 <script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        //e.preventDefault();
+        table = $('#example1').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": true,
+            "language": {
+                "lengthMenu": "Mostrando _MENU_ registros por página",
+                "zeroRecords": "Sin registros disponibles",
+                "info": "Página _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(filtered from _MAX_ total records)",
+                "infoPostFix": "",
+                "search": "Buscar:",
+                "url": "",
+                "infoThousands": ",",
+                "loadingRecords": "Cargando...",
+
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Último",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+            },
+            "pageLength": 100
+
+        });
+
+        $(".mostrar").on("click", (function () {
+
+            alert("Se esta procesando tu solicitud, por favor espere");
+            var identificador = $(this).parent().parent().parent().attr("id");
+            jQuery.ajax({
+                type: "GET",
+                url: "/gestion_vuelo/M04_GestionVuelo_Mostrar",
+                data: { matricula: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+            }).done(function (data) {
+                //$("#sdssss").append(data);
+
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            }).fail(function () {
+                alert("error")
+            });
+        }));
+    });
         $(document).ready(function () {
             $(".mostrar").click(function () {
                 var identificador = $(this).parent().parent().parent().attr("id");
@@ -154,16 +200,12 @@
 
         $(document).ready(function () {
             $(".desactivar").click(function () {
-                alert("Desactivando Vuelo Por favor Espere...")
                 var identificador = $(this).parent().parent().parent().attr("id");
                 jQuery.ajax({
                     type: "GET",
                     url: "/gestion_vuelo/M04_GestionVuelo_Desactivar",
                     data: { codigovuelo: identificador }
                 }).done(function (data) {
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                    alert("Vuelo Desactivado, Cargando Vuelos")
                     var url = '/gestion_vuelo/M04_GestionVuelo_Visualizar';
                     var method = 'GET';
                     var data = '';
@@ -189,5 +231,37 @@
 
         });
 
+        $(document).ready(function () {
+            $(".activar").click(function () {
+                var identificador = $(this).parent().parent().parent().attr("id");
+                jQuery.ajax({
+                    type: "GET",
+                    url: "/gestion_vuelo/M04_GestionVuelo_Activar",
+                    data: { codigovuelo: identificador }
+                }).done(function (data) {
+                    var url = '/gestion_vuelo/M04_GestionVuelo_Visualizar';
+                    var method = 'GET';
+                    var data = '';
+
+                    $.ajax(
+                        {
+                            url: url,
+                            type: method,
+                            data: data,
+                            success: function (data, textStatus, jqXHR) {
+
+                                $("#contenido").empty();
+                                $("#contenido").append(data);
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert(errorThrown);
+                            }
+                        });
+                }).fail(function (err) {
+                    alert('Fallo')
+                });
+            });
+
+        });
 </script>
 

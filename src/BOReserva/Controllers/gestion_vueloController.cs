@@ -504,8 +504,35 @@ namespace BOReserva.Controllers
         
             return null;
     }
+        public ActionResult M04_GestionVuelo_Activar(String codigovuelo)
+        {
+            manejadorSQL_Vuelos desactivarvuelo = new manejadorSQL_Vuelos();
+            try
+            {
+                Boolean vuelo = desactivarvuelo.MActivarVuelo(codigovuelo);
+                //DESATIVANDO  EL VUELO 
+                //manejadorSQL_Vuelos buscarvuelos = new manejadorSQL_Vuelos();
+                //List<CVuelo> listavuelos = buscarvuelos.MListarvuelosBD(); 
+                //AQUI SE BUSCA TODO LOS VUELOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
+                //return PartialView(listavuelos);
+            }
+            catch (SqlException e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error ingresando a la base de datos.";
+                return Json(error);
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
+                return Json(error);
+            }
 
-}
+            return null;
+        }
+
+    }
 
 
 }
