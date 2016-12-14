@@ -22,6 +22,7 @@ $("#enviar").click(function (e) {
     var form = $("#formGuardarRuta");
     var origen = $('#rutaOrigen').find(":selected").text();
     var destino = $('#rutaDestino').find(":selected").text();
+
     if (confirm("¿Esta conforme con la información suministrada?") == true) {
         alert("Agregando ruta, por favor espere...");
         $.ajax({
@@ -63,6 +64,7 @@ $("#VisualizarRutasComerciales").click(function (e) {
         });
 
 });
+
 
 $("#m03DetalleRutas").click(function (e) {
     e.preventDefault();

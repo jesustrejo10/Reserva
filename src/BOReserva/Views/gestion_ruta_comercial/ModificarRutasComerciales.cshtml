@@ -58,7 +58,7 @@
                             @Html.TextBoxFor(m => m._destinoRuta, Model._destinoRuta, new { @class = "form-control", @id = "rutaDestino", @min = 1, @required = "true", @disabled = "disabled" })
                             <br />
                             <label>Agregar distancia de la Ruta (KM):</label>
-                            @Html.TextBoxFor(m => m._distanciaRuta, null, new { @class = "form-control", @placeholder = "1200 KM", @id = "rutaDistancia", @min = 1, @required = "true" })
+                            @Html.TextBoxFor(m => m._distanciaRuta, null, new { @class = "form-control", @id = "rutaDistancia", @min = 1, @required = "true" })
                             <br />
                             <div class="row" style="margin-top:10px;">
                                 <div class="col-md-2 col-md-offset-4">
@@ -81,25 +81,4 @@
         <!-- /.col -->
     </div>
     <!-- /.row -->
-
-
-
-    /*<script>
-        $("#enviar").click(function (e) {
-            e.preventDefault();
-            var form = $("#formGuardarRuta");
-            var origen = $('#rutaOrigen').get;
-            var destino = $('#rutaDestino').val;
-            alert("Ruta origen: " + origen + " Ruta Destino: " + destino);
-            $.ajax({
-                url: "gestion_ruta_comercial/guradarRuta",
-                data: form.serialize(),
-                type: 'POST',
-                success: function (data) {
-                    alert("Ruta guardada exitosamente");
-                    $('#formGuardarRuta')[0].reset();
-                }
-            });
-        });
-    </script>*/
 }
