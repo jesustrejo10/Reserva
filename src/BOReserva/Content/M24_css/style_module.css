@@ -245,5 +245,9 @@
 .itiRuta{
     display: inline-block;
     width: 90px;
+}
 
+.campo.required .control-label:after {
+  content:"*";
+  color:red;
 }

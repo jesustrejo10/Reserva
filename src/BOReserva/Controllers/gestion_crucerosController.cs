@@ -96,8 +96,6 @@ namespace BOReserva.Controllers
             String _nombreCrucero = model._nombreCrucero;
             String _companiaCrucero = model._companiaCrucero;
             int _capacidadCrucero = model._capacidadCrucero;
-            //HttpPostedFile = model._imagen;
-
             CGestion_crucero crucero = new CGestion_crucero(_nombreCrucero, _companiaCrucero, _capacidadCrucero);
             crucero.AgregarCrucero(crucero); 
 
@@ -176,5 +174,26 @@ namespace BOReserva.Controllers
             camarote.cambioEstatusCamarote(id_camarote);
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
+
+        [HttpPost]
+        public JsonResult modificarCrucero(CGestion_crucero model)
+        {
+            String _nombreCrucero = model._nombreCrucero;
+            String _companiaCrucero = model._companiaCrucero;
+            int _capacidadCrucero = model._capacidadCrucero;
+            CGestion_crucero crucero = new CGestion_crucero(_nombreCrucero, _companiaCrucero, _capacidadCrucero);
+            crucero.ModificarCrucero(crucero);
+
+            return (Json(true, JsonRequestBehavior.AllowGet));
+        }
+
+        public ActionResult M24_ModificarCrucero(int id)
+        {
+            ConexionBD cbd = new ConexionBD();
+            CGestion_crucero crucero = new CGestion_crucero();
+            crucero = cbd.consultarCruceroID(id);
+            return PartialView("M24_ModificarCrucero", crucero);
+        }
+
     }
 }

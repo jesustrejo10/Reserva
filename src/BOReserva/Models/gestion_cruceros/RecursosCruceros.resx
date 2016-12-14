@@ -145,6 +145,10 @@
     <value>M24_CambiarEstatusCrucero</value>
     <comment>Cambia el estatus de un crucero y de sus cabinas</comment>
   </data>
+  <data name="ConsultarCruceroID" xml:space="preserve">
+    <value>M24_ConsultarCruceroID</value>
+    <comment>Consulta la informacion de un crucero especifico</comment>
+  </data>
   <data name="EliminarCruceros" xml:space="preserve">
     <value>M24_EliminarCruceros</value>
     <comment>Elimina un crucero</comment>
@@ -155,11 +159,14 @@
   </data>
   <data name="ListarCamarote" xml:space="preserve">
     <value>M24_ListarCamarote</value>
-    <comment>Consultar lista de Camarotes</comment>
+    <comment>Consulta lista de Camarotes</comment>
   </data>
   <data name="ListarCruceros" xml:space="preserve">
     <value>M24_ListarCruceros</value>
-    <comment>Consultar lista de Cruceros</comment>
+    <comment>Consulta lista de Cruceros</comment>
   </data>
-
+  <data name="ModificarCruceros" xml:space="preserve">
+    <value>M24_ModificarCrucero</value>
+    <comment>Modifica los datos de un crucero</comment>
+  </data>
 </root>

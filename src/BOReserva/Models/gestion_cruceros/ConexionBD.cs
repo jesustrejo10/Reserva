@@ -123,7 +123,7 @@ namespace BOReserva.Models.gestion_cruceros
                 comando.Parameters.AddWithValue("@nombrecrucero", crucero._nombreCrucero);
                 comando.Parameters.AddWithValue("@compania", crucero._companiaCrucero);
                 comando.Parameters.AddWithValue("@capacidad", crucero._capacidadCrucero);
-                comando.Parameters.AddWithValue("@imagen", "url");
+                comando.Parameters.AddWithValue("@imagen", "");
 
 
                 conexion.Open();
@@ -292,5 +292,43 @@ namespace BOReserva.Models.gestion_cruceros
             }
         }
 
+        public CGestion_crucero consultarCruceroID(int id)
+        {
+            CGestion_crucero crucero = new CGestion_crucero();
+            Conectar();
+            using (comando = new SqlCommand(RecursosCruceros.ConsultarCruceroID, conexion))
+            {
+                comando.CommandType = CommandType.StoredProcedure;
+                comando.Parameters.AddWithValue("@id", id);
+                conexion.Open();
+                comando.ExecuteNonQuery();
+                SqlDataReader reader = comando.ExecuteReader();
+                while (reader.Read())
+                {
+                    crucero._nombreCrucero = reader["nombre"].ToString();
+                    crucero._companiaCrucero = reader["compania"].ToString();
+                    crucero._capacidadCrucero = int.Parse(reader["capacidad"].ToString());
+                }
+                reader.Close();
+            }
+            return crucero;
+        }
+
+        public void modificarCruceros(CGestion_crucero crucero)
+        {
+            Conectar();
+            using (comando = new SqlCommand(RecursosCruceros.ModificarCruceros, conexion))
+            {
+                comando.CommandType = CommandType.StoredProcedure;
+                comando.Parameters.AddWithValue("@idCrucero", crucero._idCrucero);
+                comando.Parameters.AddWithValue("@nombreCrucero", crucero._nombreCrucero);
+                comando.Parameters.AddWithValue("@compania", crucero._companiaCrucero);
+                comando.Parameters.AddWithValue("@capacidad", crucero._capacidadCrucero);
+
+
+                conexion.Open();
+                comando.ExecuteNonQuery();
+            }
+        }
     }
 }

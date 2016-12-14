@@ -26,11 +26,11 @@
                                         @if (@crucero._estatus == "activo")
                                         {
                                             <td class="crStatus"><i class="fa fa-circle started"></i></td>
-                                            <td class="crAcciones"><i class="fa fa-pencil"></i> <i class="fa fa-times cambioCrucero"></i></td>
+                                            <td class="crAcciones"><i class="fa fa-pencil modificoCrucero"></i> <i class="fa fa-times cambioCrucero"></i></td>
                                         }
                                         else {
                                             <td class="crStatus"><i class="fa fa-circle paused"></i></td>
-                                            <td class="crAcciones"><i class="fa fa-pencil"></i> <i class="fa fa-check cambioCrucero"></i></td>
+                                            <td class="crAcciones"><i class="fa fa-pencil modificoCrucero"></i> <i class="fa fa-check cambioCrucero"></i></td>
                                         }
                                     </tr>
 
@@ -111,3 +111,28 @@
             });
         });
 </script>
+
+
+<script>
+    $(".modificoCrucero").click(function (e) {
+        e.preventDefault();
+        var crucero_id = $(this).closest('tr').attr('id');
+        var url = "/gestion_cruceros/M24_ModificarCrucero/" + crucero_id;
+        var method = 'GET';
+        var data = ''
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+</script>
+
