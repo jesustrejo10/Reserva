@@ -1,10 +1,17 @@
 ﻿@model FOReserva.Models.Itinerario.Cvista_Itinerario
 
-<script language="JavaScript" type="text/javascript" src="/Scripts/BuscarDestino.js"></script>
 
 
-@using (Html.BeginForm("buscarDestino", "gestion_planificacion_vacaciones", null, FormMethod.Post, new { @id = "formbuscarDestino", @class = "form-horizontal" }))
-{
+<script language="JavaScript" type="text/javascript" src="/Scripts/llamadasItinerario.js"></script>
+
+   @{
+       IEnumerable<SelectListItem> listOrigen = Model._lciudad;
+
+   }
+
+
+    @using (Html.BeginForm("buscarDestino", "gestion_planificacion_vacaciones", null, FormMethod.Post, new { @id = "formbuscarDestino", @class = "form-horizontal" }))
+    {
 
 
         <!-- FLIP BOX -->
@@ -25,31 +32,59 @@
             <!-- .box-light OR .box-dark -->
 
             <div class="box-inner">
-                @Html.DropDownListFor(m => m.SelectedCiudadIdOrigen , Model.CiudadesOrigen, new {@class = "form-control select2", @onchange = "Cuadro('2013-09-01 19:05:00.000', '2013-09-05 19:05:00.000')", @id = "buscarDestino" })
+ 
                
+                @Html.DropDownListFor(m => m._ciudad, new SelectList(Model._lciudad as System.Collections.IEnumerable, "Value", "Text"),
+                "Selecciona tu Destino:", new { @class = "form-control", @id = "ciudadO", @style = "width: 100%;", @required = "true" })
+                <label>
+                
+                </label>
+                @Html.DropDownListFor(m => m._fecha, new SelectList(Enumerable.Empty<SelectListItem>(), "Value", "Text"),
+             "Elige el dia a planear:", new { @class = "form-control", @id = "fecha", @style = "width: 100%;", @required = "true" ,@onchange = "Cuadro()"})
 
                 <div>
-                    
+
                 </div>
                 <div class="timeline">
                     <!-- .timeline-inverse = right position [left on RTL] -->
                     <!-- ITEM -->
                     <!-- /ITEM -->
                     <!-- ITEM -->
-                    <script language="JavaScript" type="text/javascript" src='@Url.Content("~/Scripts/CuadroTexto.js")'></script>
 
-                    <div id="dondepego">
+
+                    <div class="timeline-item timeline-item-bordered">
+                        <div class="timeline-entry rounded">
+                            <span class="size-14" style="text-transform: none"> Dia: </span>
+                            <span class="size=13">
+                            </span>
+                            <div class="timeline-vline">
+                            </div>
+                        </div>
+                        <h2 class="uppercase"></h2>
+                        <div class="fancy-form">
+                          
+                            @Html.TextAreaFor(m => m._actividad, new { @class = "form-control word count", @placeholder = "Escribe aqui...",rows =10, colums=20 , @id = "actividad" })
+                          
+                            <span class="fancy-hint size-11 text-muted">
+                                <span class="pull-right">
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <form id="form1" name="form1">
+                            <button id="consultarItinerario" type="button" name="este" class="btn btn-primary">Consultar</button>
+                            <button id="modificarItinerario" type="button" name="este" class="btn btn-primary">Modificar</button>
+                            <button id="eliminarItinerario" type="button" name="este1" class="btn btn-primary">Eliminar</button>
+                            <button id="aceptarItinerario" type="button" name="este2" class="btn btn-primary">Guardar</button>
+                        </form>
                     </div>
 
 
 
 
-                    <script type="text/javascript">
-                  
-                            
-                        
-                        //CuadroTexto('10/09/2014','16/10/2014');
-                    </script>
+
+                    
                     <!-- /ITEM -->
                     <!-- ITEM -->
                     <!-- /ITEM -->
@@ -62,28 +97,36 @@
                     <div class="text-center">
                         <button type="button" class="btn btn-primary">Descargar</button>
                     </div>
-                </div>
 
-            </div>
+                    
+    </div>
+
+    
+                </div>
 
         </div>
 
 
     <!-- LEFT -->
-    <div class="col-lg-3 col-md-3 col-sm-4 col-lg-pull-9 col-md-pull-9 col-sm-pull-8">
+        <div class="col-lg-3 col-md-3 col-sm-4 col-lg-pull-9 col-md-pull-9 col-sm-pull-8">
 
 
 
-        <!-- completed -->
-        <div class="margin-bottom-30 text-center">
-            <!-- aqui van los botones de destino -->
+            <!-- completed -->
+            <div class="margin-bottom-30 text-center">
+                <!-- aqui van los botones de destino -->
+
+
+
+            </div>
+            <!-- /completed -->
 
 
 
         </div>
-        <!-- /completed -->
+   
+        <script type="text/javascript" src="@Url.Content("~/Content/assets/js/view/demo.shop.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/uniqueId.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatable/js/jquery.dataTables.min.js")"></script>
 
-
-
-    </div>
-}
+    }

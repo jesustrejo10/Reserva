@@ -1,5 +1,4 @@
-﻿
-@using BOReserva.Models.gestion_seguridad_ingreso;
+﻿@using BOReserva.Models.gestion_seguridad_ingreso;
 
 @{
     var usuario = Session["Cgestion_seguridad_ingreso"] as Cgestion_seguridad_ingreso;
@@ -42,7 +41,8 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+        
+        <!-- CIERRE DE SESION AUTOMATICO MODULO 1 INGRESO SEGURIDAD NO TOCAR-->
         <script src="../../Scripts/Scripts_Ingreso_Seguridad/Logout.js"></script>
 
     </head>
@@ -187,9 +187,9 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li id="gestionComida"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar Nuevo</a></li>
-                            @*<li id="editarComida"><a href="#"><i class="fa fa-edit"></i>Editar</a></li>
-                    <li id="gestionComidaVuelo"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar por Vuelo</a></li>*@
+                            <li id="gestionComida"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar</a></li>
+                          @*<li id="editarComida"><a href="#"><i class="fa fa-edit"></i>Editar</a></li>
+                            <li id="gestionComidaVuelo"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar por Vuelo</a></li>*@
                             <li id="visualizarComidas"><a href="#"><i class="fa fa-eye"></i>Visualizar</a></li>
                         </ul>
                     </li>

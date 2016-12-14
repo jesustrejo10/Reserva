@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-﻿
-
 <div class="row">
     <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
-
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
@@ -28,7 +24,7 @@
                             {
                                 String estatus;
                                 if (item._estatusPlato == 1) { estatus = "Disponible"; } else { estatus = "No disponible"; }
-                                
+
                                 <tr id="@item._id">
                                     <td>@item._nombrePlato</td>
                                     <td>@item._tipoPlato</td>
@@ -37,28 +33,27 @@
                                     <td>
                                         @*<a href="#" title="Consultar"> <i class="fa fa-eye consultar"></i></a>*@
                                         @*  <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>*@
-                                        @*<a href="#" title="Agregar"><i class="fa fa-plus agregarvuelo"></i></a>*@
+                                        <a href="#" title="Agregar"><i class="fa fa-plus agregarvuelo"></i></a>
                                         @{
-                                
+
                                             if (item._estatusPlato == 1)
-                                        {
-                                                
-                                            <a href="#" title="Activar/Desactivar Plato"><i class="fa fa-toggle-on desactivar" ></i></a>
-                                        }
+                                            {
+
+                                                <a href="#" title="Activar/Desactivar Plato"><i class="fa fa-toggle-on desactivar"></i></a>
+                                            }
                                             if (item._estatusPlato == 0)
-                                        {
-                                            <a href="#" title="Activar/Desactivar Plato"><i class="fa fa-toggle-off activar"></i></a>
-                                        }
+                                            {
+                                                <a href="#" title="Activar/Desactivar Plato"><i class="fa fa-toggle-off activar"></i></a>
+                                            }
                                         }
                                     </td>
                                 </tr>
-                            }
-                        }
-                        catch (Exception e)
-                        {
+                                                }
+                                            }
+                                            catch (Exception e)
+                                            {
 
-                        }
-
+                                            }
                     <tfoot>
                         <tr>
                             <th>Nombre</th>
@@ -83,7 +78,58 @@
 <script src="../../Content/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="../../Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
 
+
 <script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        //e.preventDefault();
+        table = $('#example1').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": true,
+            "language": {
+                "lengthMenu": "Mostrando _MENU_ registros por página",
+                "zeroRecords": "Sin registros disponibles",
+                "info": "Página _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(filtered from _MAX_ total records)",
+                "infoPostFix": "",
+                "search": "Buscar:",
+                "url": "",
+                "infoThousands": ",",
+                "loadingRecords": "Cargando...",
+
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Último",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+            },
+            "pageLength": 100
+
+        });
+
+        $(".clasedeprueba").on("click", (function () {
+
+            alert("Se esta procesando tu solicitud, por favor espere");
+            var identificador = $(this).parent().parent().parent().attr("id");
+            jQuery.ajax({
+                type: "GET",
+                url: "/gestion_automoviles/M08_VisualizarAutomovil",
+                data: { matricula: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+            }).done(function (data) {
+                //$("#sdssss").append(data);
+
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            }).fail(function () {
+                alert("esta vaina se jodio")
+            });
+        }));
+    });
 
     $(".desactivar").click(function () {
         console.log("desactivando una comida");
@@ -152,7 +198,7 @@
         var identificador = $(this).parent().parent().parent().attr("id");
         jQuery.ajax({
             type: "GET",
-            url: "/gestion_comida_vuelo/M06_VisualizarVuelosComidas",
+            url: "/gestion_vuelo/M04_GestionVuelo_Visualizar",
             data: { id: identificador }
         }).done(function (data) {
             $("#contenido").empty();
@@ -170,7 +216,7 @@
         var identificador = $(this).parent().parent().parent().attr("id");
         jQuery.ajax({
             type: "POST",
-            url: "/gestion_comida_vuelo/nodisponibleComida",
+            url: "/gestion_comida_vuelo/desahilitarPlato",
             data: { id: identificador }
         }).done(function (data) {
             var url = '/gestion_comida_vuelo/M06_VisualizarComidas';
@@ -194,154 +240,9 @@
             alert("Error en la base de datos");
         });
     });
+
+
     $(".disponible").click(function () {
-        console.log("hola");
-        var identificador = $(this).parent().parent().parent().attr("id");
-        jQuery.ajax({
-            type: "POST",
-            url: "/gestion_comida_vuelo/disponibleComida",
-            data: { id: identificador }
-        }).done(function (data) {
-            var url = '/gestion_comida_vuelo/M06_VisualizarComidas';
-            var method = 'GET';
-            var data = '';
-            $.ajax(
-                {
-                    url: url,
-                    type: method,
-                    data: data,
-                    success: function (data, textStatus, jqXHR) {
-
-                        $("#contenido").empty();
-                        $("#contenido").append(data);
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        alert(errorThrown);
-                    }
-                });
-        }).fail(function () {
-            alert("Error en la base de datos");
-        });
-    });
-=======
-﻿
-
-<div class="row">
-    <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
-
-    <div class="col-xs-12">
-        <div class="box">
-            <div class="box-header">
-                <h3 class="box-title">Lista de Platos</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Tipo</th>
-                            <th>Estatus</th>
-                            <th>Descripcion</th>
-                            <th>Opciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @try
-                        {
-                            foreach (var item in Model)
-                            {
-                                String estatus;
-                                if (item._estatusPlato == 1) { estatus = "Disponible"; } else { estatus = "No disponible"; }
-                                
-                                <tr id="@item._id">
-                                    <td>@item._nombrePlato</td>
-                                    <td>@item._tipoPlato</td>
-                                    <td>@estatus</td>
-                                    <td>@item._descripcionPlato</td>
-                                    <td>
-                                        @*<a href="#" title="Consultar"> <i class="fa fa-eye consultar"></i></a>*@
-                                        @*  <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>*@
-                                        @*<a href="#" title="Agregar"><i class="fa fa-plus agregarvuelo"></i></a>*@
-                                        @{
-                                
-                                            if (item._estatusPlato == 1)
-                                        {
-                                                
-                                            <a href="#" title="Activar/Desactivar Plato"><i class="fa fa-toggle-on desactivar" ></i></a>
-                                        }
-                                            if (item._estatusPlato == 0)
-                                        {
-                                            <a href="#" title="Activar/Desactivar Plato"><i class="fa fa-toggle-off activar"></i></a>
-                                        }
-                                        }
-                                    </td>
-                                </tr>
-                            }
-                        }
-                        catch (Exception e)
-                        {
-
-                        }
-
-                    <tfoot>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Tipo</th>
-                            <th>Estatus</th>
-                            <th>Descripcion</th>
-                            <th>Opciones</th>>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
-            <!-- /.box-body -->
-        </div>
-        <!-- /.box -->
-    </div>
-    <!-- /.col -->
-</div>
-
-
-
-<!-- DataTables -->
-<script src="../../Content/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="../../Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
-
-<script language="javascript" type="text/javascript">
-
-    $(".desactivar").click(function () {
-        console.log("desactivando una comida");
-        var identificador = $(this).parent().parent().parent().attr("id");
-        jQuery.ajax({
-            type: "POST",
-            url: "/gestion_comida_vuelo/deshabilitarPlato",
-            data: { id: identificador }
-        }).done(function (data) {
-            var url = '/gestion_comida_vuelo/M06_VisualizarComidas';
-            var method = 'GET';
-            var data = '';
-            $.ajax(
-                {
-                    url: url,
-                    type: method,
-                    data: data,
-                    success: function (data, textStatus, jqXHR) {
-
-                        $("#contenido").empty();
-                        $("#contenido").append(data);
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        alert(errorThrown);
-                    }
-                });
-        }).fail(function () {
-            alert("Error en la base de datos");
-        });
-    });
-
-
-    $(".activar").click(function () {
         console.log("hola");
         var identificador = $(this).parent().parent().parent().attr("id");
         jQuery.ajax({
@@ -370,83 +271,4 @@
             alert("Error en la base de datos");
         });
     });
-
-
-    $(".agregarvuelo").click(function () {
-        console.log("hola");
-        var identificador = $(this).parent().parent().parent().attr("id");
-        jQuery.ajax({
-            type: "GET",
-            url: "/gestion_comida_vuelo/M06_VisualizarVuelosComidas",
-            data: { id: identificador }
-        }).done(function (data) {
-            $("#contenido").empty();
-            $("#contenido").append(data);
-        }).fail(function () {
-
-        });
-
-
-    });
-
-
-    $(".nodisponible").click(function () {
-        console.log("hola");
-        var identificador = $(this).parent().parent().parent().attr("id");
-        jQuery.ajax({
-            type: "POST",
-            url: "/gestion_comida_vuelo/nodisponibleComida",
-            data: { id: identificador }
-        }).done(function (data) {
-            var url = '/gestion_comida_vuelo/M06_VisualizarComidas';
-            var method = 'GET';
-            var data = '';
-            $.ajax(
-                {
-                    url: url,
-                    type: method,
-                    data: data,
-                    success: function (data, textStatus, jqXHR) {
-
-                        $("#contenido").empty();
-                        $("#contenido").append(data);
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        alert(errorThrown);
-                    }
-                });
-        }).fail(function () {
-            alert("Error en la base de datos");
-        });
-    });
-    $(".disponible").click(function () {
-        console.log("hola");
-        var identificador = $(this).parent().parent().parent().attr("id");
-        jQuery.ajax({
-            type: "POST",
-            url: "/gestion_comida_vuelo/disponibleComida",
-            data: { id: identificador }
-        }).done(function (data) {
-            var url = '/gestion_comida_vuelo/M06_VisualizarComidas';
-            var method = 'GET';
-            var data = '';
-            $.ajax(
-                {
-                    url: url,
-                    type: method,
-                    data: data,
-                    success: function (data, textStatus, jqXHR) {
-
-                        $("#contenido").empty();
-                        $("#contenido").append(data);
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        alert(errorThrown);
-                    }
-                });
-        }).fail(function () {
-            alert("Error en la base de datos");
-        });
-    });
->>>>>>> Develop
- </script>
+</script>

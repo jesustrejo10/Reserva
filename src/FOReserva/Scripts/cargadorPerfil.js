@@ -108,8 +108,25 @@
         $("#PeAutos").removeClass("active");
         $("#PeHabitaciones").removeClass("active");
         $("#PeRestaurantes").removeClass("active");
-    });
 
+        var url = '/gestion_reserva_crucero/gestion_reserva_crucero_perfil';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+                    $("#contenedorPerfil").empty();
+                    $("#contenedorPerfil").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
     /* CARGADOR DE BOTON AUTOS */
     $("#PeAutos").click(function (e) {
         e.preventDefault();
