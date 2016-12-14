@@ -127,10 +127,17 @@ $("#estadoVuelo").change(function () {
     $.getJSON("gestion_vuelo/buscaFechaA", { fechaDes: fID, horaDes: hID, ciudadO: oID, ciudadD: dID, matriAvion: mID, opcion: 1 },
        function (data) {
            $("#horaAterrizaje").val(data);
-
        });
 });
 
+// verificar que el campo de Codigo Vuelo no tenga caracteres especiales ni espacios
+function checkTextCodigo(field) {
+    var codigo = $('#codigoVuelo').val();
+    if (/[^a-z0-9]/gi.test(codigo)) {  // Validando 
+        alert("El codigo de vuelo no puede contener caracteres especiales ni espacios");
+        field.value = '';
+    }
+}
 //evento para el boton de return de la vista VISUALIZAR-->MOSTRAR
         $("#return").click(function (e) {
             e.preventDefault();
@@ -144,7 +151,6 @@ $("#estadoVuelo").change(function () {
                     type: method,
                     data: data,
                     success: function (data, textStatus, jqXHR) {
-
                         $("#contenido").empty();
                         $("#contenido").append(data);
                     },
@@ -153,3 +159,30 @@ $("#estadoVuelo").change(function () {
                     }
                 });
         });
+
+//verificar campo de CodigoVuelo
+        function checkTextField(field) {
+            var _codVuelo = $('#codigoVuelo').val();
+            // verificar que el campo de Codigo Vuelo no tenga caracteres especiales ni espacios
+            if (/[^a-z0-9]/gi.test(codVuelo)) {// Validando 
+                alert("El codigo de vuelo no puede contener caracteres especiales ni espacios");
+                field.value = '';
+            } else {
+                var url = "/gestion_automoviles/revisarCodVuelo";
+                $.ajax({
+                    url: url,
+                    data: { codigoVuelo: _codVuelo },
+                    cache: false,
+                    type: "POST",
+                    success: function (data) {
+                        if (data == "1") {
+                            alert("Este codigo ya esta registrado");
+                            field.value = '';
+                        }
+                    },
+                    error: function (reponse) {
+                        alert("error : " + reponse);
+                    }
+                });
+            }
+        }
