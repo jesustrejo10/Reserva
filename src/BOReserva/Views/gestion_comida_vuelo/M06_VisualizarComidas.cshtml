@@ -1,5 +1,4 @@
 ﻿
-
 <div class="row">
     <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
 
@@ -36,7 +35,7 @@
                                     <td>
                                         @*<a href="#" title="Consultar"> <i class="fa fa-eye consultar"></i></a>*@
                                         @*  <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>*@
-                                        @*<a href="#" title="Agregar"><i class="fa fa-plus agregarvuelo"></i></a>*@
+                                        <a href="#" title="Agregar"><i class="fa fa-plus agregarvuelo"></i></a>
                                         @{
                                 
                                             if (item._estatusPlato == 1)
@@ -201,7 +200,7 @@
         var identificador = $(this).parent().parent().parent().attr("id");
         jQuery.ajax({
             type: "GET",
-            url: "/gestion_comida_vuelo/M06_VisualizarVuelosComidas",
+            url: "/gestion_vuelo/M04_GestionVuelo_Visualizar",
             data: { id: identificador }
         }).done(function (data) {
             $("#contenido").empty();
