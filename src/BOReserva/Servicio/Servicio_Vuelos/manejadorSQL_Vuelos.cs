@@ -105,12 +105,12 @@ namespace BOReserva.Servicio.Servicio_Vuelos
             }
             catch (SqlException e)
             {
-                throw(e);
+                return 747;
                 
             }
             catch (Exception e)
             {
-                throw (e); 
+                return 747;
                 
             }
         }
