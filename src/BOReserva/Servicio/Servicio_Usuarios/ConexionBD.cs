@@ -35,6 +35,10 @@ namespace BOReserva.Models.gestion_usuarios
                 {
                     conexion = new SqlConnection(strConexion);
                 }
+                if (conexion != null)
+                {
+                    conexion = new SqlConnection(strConexion);
+                }
 
             }
 
