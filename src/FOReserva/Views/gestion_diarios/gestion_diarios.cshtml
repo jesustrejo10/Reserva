@@ -3,9 +3,7 @@
 <div class="heading-title">
     <h3><span>Diarios de Viaje</span></h3>
 </div>
-@*<div class="row text-center">
-        <a href="#"><button type="button" class="btn btn-default btn-lg"><i class="fa fa-book"></i>Crear un Diario de Viaje</button></a>
-    </div>*@
+
 <div class="panel">
     @using (Html.BeginForm("gestion_diarios_resultados", "gestion_diarios", null, FormMethod.Post, new { @id = "formBuscarDiarios", @class = "form-horizontal" }))
     {
@@ -112,8 +110,6 @@
                         <label>Ordenar por</label>
                         <label class="radio-inline"><input type="radio" value="0" name="orden">Recientes primero</label>
                         <label class="radio-inline"><input type="radio" value="1" name="orden">Antiguos primero</label>
-
-
                     </div>
                 </div>
             </div>
@@ -122,78 +118,67 @@
             @Html.TextBoxFor(m => m.Filtro, null, new { @id = "ordenInput", @class = "form-control required", @name = "dOrden", @type = "hidden" })
 
         </fieldset>
-
-        <div class="row text-center">
-            <div class="col-sm-12">
-                <button type="button" id="buscarDiarios" class="btn btn-primary"><i class="fa fa-search"></i>Buscar</button>
+        <div class="row">
+            <div class="row text-center col-sm-12">
+                <button type="button" id="buscarDiarios" class="btn btn-primary">Buscar</button>
+            </div>
+            <div class="row text-center col-sm-12">
+                <button onclick="location.href='@Url.Action("gestion_diarios_crear","gestion_diarios")'" type="button" id="crearDiario" class="btn btn-primary">Crear un Diario de Viaje</button>
             </div>
         </div>
-        <script>
-            $("#buscarDiarios").click(function (e) { e.preventDefault(); cargarResultados(1); });      //Evento de click en el botón Buscar
-            $("#formBuscarDiarios").submit(function (e) { e.preventDefault(); cargarResultados(1); }); //Evento general de submit (ej. presionar ENTER)
+        <hr />
 
-            function cargarResultados(a) {
-                $("#resultados").html('<div class="text-center">Cargando...</div>')
 
-                var form = $("#formBuscarDiarios");
-                var contr = '/gestion_diarios/gestion_diarios_resultados';
-                var datos;
-                var metodo;
-                if (a == 0) {                    
-                    datos = '';
-                    metodo = 'GET';
-                } else {
-                    datos = form.serialize();
-                    metodo = 'POST';
-                }
-
-                $.ajax({
-                    url: contr,
-                    type: metodo,
-                    data: datos,
-                    success: function (data) {
-                        $("#resultados").empty();
-                        $("#resultados").html(data);
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        alert(errorThrown);
-                    }
-                });
-            }
-
-            jQuery(document).ready(function () {
-
-                $("#f_ini").val("@DateTime.Today.AddYears(-10).ToString("yyyy-MM-dd")");
-                $("#f_fin").val("@DateTime.Today.ToString("yyyy-MM-dd")");
-                $("#ordenInput").val("-1");
-                $('input[name=orden]:radio').change(function () {
-                    $("#ordenInput").val($('input[name=orden]:checked').val());
-                });
-                cargarResultados(0);
-            });
-        </script>
     } <!--Fin FORM-->
 </div>
 
-<hr />
+<script>
+    function cargarResultados(a) {
+        $("#contenedorImagenes").html('<div class="text-center">Cargando...</div>')
 
-<div id="resultados" class="container col-sm-12">
+        var form = $("#formBuscarDiarios");
+        var contr = '/gestion_diarios/gestion_diarios_resultados';
+        var datos;
+        var metodo;
+        if (a == 0) {//Para la carga inicial de resultados
+            datos = '';
+            metodo = 'GET';
+        } else {    //Para la carga con búsquedas de resultados
+            datos = form.serialize();
+            metodo = 'POST';
+        }
 
-    <div class="row">
-        <!-- item -->
-        <div class="col-md-1">
-            <!-- company logo -->
-            <img src="@Url.Content("~/Content/assets/images/noimage.jpg")" class="img-responsive img-thumbnail" alt="company logo">
-        </div>
-        <div class="col-md-4">
-            <!-- company detail -->
-            <h4 class="margin-bottom-10"><font color="black">Nombre</font></h4>
-            <p>Descripcion</p>
-            <button type="button" class="btn btn-primary">Ver el Diario Completo</button>
-            <a href="#" class="text-success"><i class="fa fa-thumbs-up"></i> Like</a> <a href="#" class="text-danger"><i class="fa fa-thumbs-down"></i> Dislike</a>
-        </div>
-    </div><!-- /item -->
+        $.ajax({
+            url: contr,
+            type: metodo,
+            data: datos,
+            success: function (data) {
+                $("#contenedorImagenes").empty();
+                $("#contenedorImagenes").html(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+    }
 
-    <hr />
+    $("#buscarDiarios").click(function (e) { e.preventDefault(); cargarResultados(1); });      //Evento de click en el botón Buscar
+    $("#formBuscarDiarios").submit(function (e) { e.preventDefault(); cargarResultados(1); }); //Evento general de submit (ej. presionar ENTER)
 
-</div>
+    $("#crearDiario").click(function (e) {
+        e.preventDefault();
+        cargarResultados(1);
+    });      //Evento de click en el botón Buscar
+
+
+    jQuery(document).ready(function () {
+        //Inicializar valores al cargar la página
+        $("#f_ini").val("@DateTime.Today.AddYears(-10).ToString("yyyy-MM-dd")");
+        $("#f_fin").val("@DateTime.Today.ToString("yyyy-MM-dd")");
+        $("#ordenInput").val("-1");
+        $('input[name=orden]:radio').change(function () {
+            $("#ordenInput").val($('input[name=orden]:checked').val());
+        });
+        //cargarResultados(0);
+    });
+</script>

@@ -85,10 +85,10 @@ namespace FOReserva.Controllers
             }
             catch (ManejadorSQLException f)
             {
-                //Ventana de error no conecto a la db
-                //Se puede usar el mensaje de la excepcion "f.mensaje"
-                return View("error_conexion");
+
+                return View("gestion_reserva_crucero_error_conexion");
             }
+          
             catch (Exception g)
             {
                 ViewBag.Message = "Lo sentimos, la reserva no pudo ser realizada debido al siguiente error del sistema:" + g.Message;
@@ -216,9 +216,17 @@ namespace FOReserva.Controllers
 
         }
 
+        public string cadena (CReservation_Restaurant tmp) {
+            string botones = "<a href='#' id='icon_edit' data-action='/gestion_reserva_restaurante/_EditarReserva/" + tmp.Id + "'" + "class='update list-icon' value='" + tmp.Id + "'>" + "<i class='fa fa fa-pencil-square'></i></a>" + "<a href='#' class='delete list-icon' value='" + tmp.Id + "'style='margin-left: 12px;'>" + "<i class='fa fa-times-circle'></i></a>";
+            string fila = "<td>" + tmp.Id + "</td>" + "<td>" + tmp.Restaurant.Name + "</td>" + "<td class='reserv_name' value='"
+                + tmp.Name + "'>" + tmp.Name + "</td>" + "<td class='reserv_date' value='" + tmp.Date + "'>" + tmp.Date + "</td>"
+                + "<td class='reserv_time' value='" + tmp.Time + "'>" + tmp.Time + "</td>" + "<td class='reserv_count' value='" + tmp.Count + "'>"
+                + tmp.Count + "</td>" + "<td style='text-align: center;'>" + botones + "</td>";
+            return fila;
+        }
+
         public JsonResult UpdateReserva(CReservation_Restaurant tmp)
         {
-
             try
             {
                 ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
@@ -242,7 +250,8 @@ namespace FOReserva.Controllers
                 return null;
             }
 
-            return Json("exito");
+            string fila = cadena(tmp);
+            return Json(fila);
 
         }
 

@@ -1,5 +1,18 @@
 ﻿@model List<FOReserva.Models.Diarios.CDiarioModel>
 
+<style>
+    div.myautoscroll {
+
+        height: 605px;
+        overflow-y: hidden;
+    }
+
+        div.myautoscroll:hover {
+            overflow-y: auto;
+        }
+
+</style>
+
 @{
     if (Model.Count() == 0)
     {
@@ -7,31 +20,49 @@
     }
     else
     {
-        using (Html.BeginForm("gestion_diarios_ver", "gestion_diarios", FormMethod.Post))
-        {
-            <input type="hidden" name="id_diario" id="id_diario" value="0" />
-            foreach (var item in Model)
-            {
-                <div class="row">
-                    <div class="col-md-2">
-                        <img src="@Url.Content("~/Content/assets/images/noimage.jpg")" class="img-responsive img-thumbnail" alt="company logo">
-                    </div>
-                    <div class="col-md-8">
-                        <h4 class="margin-bottom-10"><font color="black">@item.Nombre</font></h4>
-                        <p>@item.Descripcion</p>
-                        <input type="submit" id="@item.Id" class="btn btn-default diar" value="Ver el Diario Completo" />
-                        <a href="#" class="text-success"><i class="fa fa-thumbs-up"></i> Like</a> | <a href="#" class="text-danger"><i class="fa fa-thumbs-down"></i> Dislike</a>
-                    </div>
-                </div>
-            <hr />
-            }
-            <script>
-                $('.diar').mouseenter(function () {
-                    var id = $(this).attr('id');
-                    $('#id_diario').val(id);
-                    console.log($('#id_diario').val());
-                });
-            </script>
-        }
+
+        <div class="panel panel-default">
+            <div class="border-bottom-1 border-top-1 padding-10">
+                <span class="pull-right size-11 margin-top-3 text-muted"><b>@Model.Count()</b> Resultados</span>
+                <h3><span>Resultados</span></h3>
+            </div>
+            <div class="row col-md-12"><hr /></div>
+
+            <div class="myautoscroll col-md-12">
+
+                @using (Html.BeginForm("gestion_diarios_ver", "gestion_diarios", FormMethod.Post))
+                {
+                    <input type="hidden" name="id_diario" id="id_diario" value="0" />
+
+                    foreach (var item in Model)
+                    {
+                        <div class="row col-md-12">
+                            @{String a = "~/Images/diario" + ((@item.Id % 6) + 1) + ".jpg";}
+                            <div class="col-md-3">
+                                <img src="@Url.Content(a)" class="img-responsive img-thumbnail">
+                                <div class="rating rating-@item.Calif_creador size-13"></div>
+                            </div>
+
+                            <div class="col-md-9">
+                                <h4 class="margin-bottom-10"><font color="black">@item.Nombre - <i>[@item.Nombre_lugar(@item.Destino)]</i></font></h4>
+                                <p>@item.Descripcion</p>
+                                <input type="submit" id="@item.Id" class="btn btn-default diar" value="Ver el Diario Completo" />
+                                <small class="block">Publicado: @item.Fecha_carga.ToString("dd/MM/yyyy")</small>
+                            </div>
+                            <div class="col-md-12"><hr /></div>
+                        </div>
+
+                    }
+
+                    <script>
+                        $('.diar').mouseenter(function () {
+                            var id = $(this).attr('id');
+                            $('#id_diario').val(id);
+                            //console.log($('#id_diario').val());
+                        });
+                    </script>
+                }
+            </div>
+        </div>
     }
 }

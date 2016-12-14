@@ -213,6 +213,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Cruceros\CReserva_Cruceros.cs" />
+    <Compile Include="Models\Cruceros\Crucero.cs" />
     <Compile Include="Models\Cruceros\CVista_Cruceros.cs" />
     <Compile Include="Models\Diarios\CDiarioModel.cs" />
     <Compile Include="Models\Autos\CAgregarReserva.cs" />
@@ -221,6 +222,7 @@
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\Diarios\CFoto_Diario.cs" />
     <Compile Include="Models\Diarios\CLugar.cs" />
+    <Compile Include="Models\Itinerario\CItinerario.cs" />
     <Compile Include="Models\Itinerario\Cvista_Itinerario.cs" />
     <Compile Include="Models\ORM\DB.cs" />
     <Compile Include="Models\ORM\M20_ActualizarEstadoReservaHabitacion_Result.cs">
@@ -291,8 +293,6 @@
       <DependentUpon>ReservaDB.dbml</DependentUpon>
     </Compile>
     <Compile Include="Servicio\InvalidManejadorSQLException.cs" />
-    <Compile Include="Servicio\Ciudades.cs" />
-    <Compile Include="Servicio\Fechas.cs" />
     <Compile Include="Servicio\manejadorSQL.cs" />
     <Compile Include="Servicio\Cruceros.cs" />
     <Compile Include="Servicio\manejadorSQLCrucero.cs" />
@@ -1671,6 +1671,13 @@
     <Content Include="Content\assets\plugins\slider.swiper\dist\js\maps\swiper.jquery.min.js.map" />
     <Content Include="Content\assets\plugins\slider.swiper\dist\js\maps\swiper.min.js.map" />
     <Content Include="Content\assets\plugins\styleswitcher\color_schemes\color_scheme.fla" />
+    <Content Include="Images\anon_user.png" />
+    <Content Include="Images\diario1.jpg" />
+    <Content Include="Images\diario2.jpg" />
+    <Content Include="Images\diario3.jpg" />
+    <Content Include="Images\diario4.jpg" />
+    <Content Include="Images\diario5.jpg" />
+    <Content Include="Images\diario6.jpg" />
     <Content Include="Images\restaurant_generic.jpg" />
     <Content Include="Models\ORM\ModelDBReserva.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1711,13 +1718,12 @@
     <Content Include="Models\Restaurantes\placeholder.html" />
     <Content Include="Models\Vuelos\placeholder.html" />
     <Content Include="Scripts\BuscarCarro.js" />
-    <Content Include="Scripts\BuscarDestino.js" />
     <Content Include="Scripts\cargadorPerfil.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\cargadorPestanas.js" />
-    <Content Include="Scripts\CuadroTexto.js" />
     <Content Include="Scripts\customValidator.js" />
     <Content Include="Scripts\indexReservaCrucero.js" />
+    <Content Include="Scripts\llamadasItinerario.js" />
     <Content Include="Scripts\uniqueId.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -3106,7 +3112,6 @@
     <Content Include="Views\gestion_planificacion_vacaciones\M17_gestion_itinerario_Perfil.cshtml" />
     <Content Include="Views\gestion_reserva_habitaciones\buscar_hoteles.cshtml" />
     <Content Include="Views\gestion_reserva_habitaciones\hoteles_con_habitaciones.cshtml" />
-    <Content Include="Views\gestion_planificacion_vacaciones\gestion_itinerario.cshtml" />
     <Content Include="Views\gestion_revision\gestion_ListRevicion.cshtml" />
     <Content Include="Views\gestion_revision\gestion_revision.cshtml" />
     <Content Include="Views\gestion_revision\consultar_revision.cshtml" />
@@ -3124,6 +3129,18 @@
     <Content Include="Views\gestion_diarios\gestion_diarios_crear.cshtml" />
     <Content Include="Views\Shared\assets\plugins\slider.swiper\dist\js\maps\swiper.min.js.map" />
     <Content Include="Views\gestion_reserva_restaurante\_EditarReserva.cshtml" />
+    <Content Include="Views\gestion_diarios\gestion_diarios_ver.cshtml" />
+    <Content Include="Views\gestion_revision\lista_revisiones.cshtml" />
+    <Content Include="Views\gestion_revision\consultar_revision.cshtml" />
+    <Content Include="Views\gestion_diarios\_CrearDiarioExito.cshtml" />
+    <Content Include="Views\gestion_reserva_restaurante\_FailReservar.cshtml" />
+    <Content Include="Views\gestion_revision\crear_revision_form.cshtml" />
+    <Content Include="Views\gestion_reserva_crucero\gestion_reserva_crucero_buscar_crucero.cshtml" />
+    <Content Include="Views\gestion_reserva_crucero\gestion_reserva_crucero_confirmar.cshtml" />
+    <Content Include="Views\gestion_reserva_crucero\gestion_reserva_crucero_error_conexion.cshtml" />
+    <Content Include="Views\gestion_reserva_crucero\gestion_reserva_crucero_no_resultados.cshtml" />
+    <Content Include="Views\gestion_reserva_crucero\gestion_reserva_crucero_perfil.cshtml" />
+    <Content Include="Views\gestion_reserva_crucero\gestion_reserva_crucero_resultado_crucero.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

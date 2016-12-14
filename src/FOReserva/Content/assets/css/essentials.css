@@ -1309,10 +1309,6 @@ section.section-video .overlay {
 }
 
 
-
-
-
-
 /* overlay */
 .overlay {
 	background:rgba(0,0,0, 0.2);
@@ -1425,8 +1421,6 @@ ul.list-icons>li>i {
 	text-align: center;
 	top: 5px;
 }
-
-
 
 /**
 	Ribbon

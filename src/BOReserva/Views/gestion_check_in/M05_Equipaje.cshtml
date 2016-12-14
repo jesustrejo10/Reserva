@@ -1,4 +1,7 @@
-﻿<script src="~/Scripts/Scripts_CheckIn/M05_Equipaje.js"></script>
+﻿@model BOReserva.Models.gestion_check_in.CEquipaje
+
+@using (Html.BeginForm("registrarMaleta", "gestion_check_in", null, FormMethod.Post, new { @id = "formregistrarMaleta", @class = "form-horizontal" }))
+{
 
 <div class="row">
     <div class="col-md-12">
@@ -10,81 +13,126 @@
             </div>
             <div class="box-body">
 
-                <div class="row">
-                    <div class="form-group">
+                <div class="col-md-12" style="margin-top:10px;">
 
-                        <div class="col-md-6">
-                            <div class="form-group">
+                    <div class="col-md-6">
+                        @Html.HiddenFor(m => m._pase)
+                    </div>
 
-                                <label>Cantidad de maletas:</label>
-                                <select name="maletas" onchange="maletasOnChange(this)" class="form-control select2" style="width: 100%;">
-                                    <option value="uno" selected="selected">1</option>
-                                    <option value="dos">2</option>
-                                    <option value="tres">3</option>
-                                </select>
+                </div>
 
-                            </div>
-                        </div>
+                <div class="col-md-12" style="margin-top:10px;">
 
-
-
-                        <div class="col-md-6">
-
-                            <label>Peso maleta 1 (Kilogramos):</label>
-                            <input type="text" class="form-control" placeholder="Ej. 14">
-                        </div>
+                    <div class="col-md-6">
+                        <label>Cantidad de maletas:</label>
+                        <select name="maletas" onchange="maletasOnChange(this)" class="form-control select2" style="width: 100%;">
+                            <option value="uno" selected="selected">1</option>
+                            <option value="dos">2</option>
+                        </select>
+                    </div>
 
 
-
-
-
+                    <div class="col-md-6">
+                        <label>Peso maleta 1 (Kilogramos):</label>
+                        @Html.TextBoxFor(m => m._peso1, null, new { @type = "number", @class = "form-control" })
                     </div>
                 </div>
 
 
-                <br>
+                <div>&nbsp;</div>
 
-
-                <div class="row">
-
-
-
+                <div class="col-md-12" style="margin-top:10px;">
 
                     <div class="col-md-6">
 
                         <label id="maleta2lbl">Peso maleta 2 (Kilogramos):</label>
-                        <input type="text" class="form-control" placeholder="Ej. 14" id="maleta2tb">
-                    </div>
-
-
-                    <div class="col-md-6">
-
-                        <label id="maleta3lbl">Peso maleta 3 (Kilogramos):</label>
-                        <input type="text" class="form-control" placeholder="Ej. 14" id="maleta3tb">
-                    </div>
-
-
-                </div>
-
-                <br>
-
-
-
-
-                <div class="row">
-
-                    <div class="col-md-12" style="margin-top:10px;">
-                        <button type="button" id="siguiente" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Registrar</button>
+                        @Html.TextBoxFor(m => m._peso2, null, new { @type = "number", @class = "form-control", @id = "maleta2tb" })
                     </div>
 
                 </div>
 
+                <div>&nbsp;</div>
+                <div class="col-md-12" style="margin-top:10px;">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-2">
+                        <button type="button" id="modificar_tipo_boleto" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Registrar</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button id="cancel_tipo" type="button" class="btn btn-danger" style="display:block; margin-left:auto; margin-right:auto;">Cancelar</button>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
 
 
-
-
-                <br>
             </div>
         </div>
     </div>
-</div>  
+</div>
+}
+
+<script>
+$("#maleta2tb").css("display", "none");
+$("#maleta2lbl").css("display", "none");
+
+function maletasOnChange(sel) {
+
+
+    if (sel.value=="uno"){
+        $("#maleta1tb").css("display", "block");
+        $("#maleta1lbl").css("display", "block");
+        $("#maleta2tb").css("display", "none");
+        $("#maleta2lbl").css("display", "none");
+
+    }else if (sel.value=="dos"){
+        $("#maleta2tb").css("display", "block");
+        $("#maleta2lbl").css("display", "block");
+
+
+    }
+}
+
+</script>
+
+<script>
+
+    $("#modificar_tipo_boleto").click(function (e) {
+        e.preventDefault();
+        var form = $("#formregistrarMaleta");
+        $.ajax({
+            url: "gestion_check_in/insertarEquipaje",
+            data: form.serialize(),
+            type: 'POST',
+            success: function (data) {
+                alert("Se registró exitosamente");
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            }
+            , error: function (xhr, textStatus, exceptionThrown) {
+                //muestro el texto del error
+                alert(xhr.responseText);
+            }
+        });
+    });
+
+    $("#cancel_tipo").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_check_in/M05_RegistroEquipaje';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+</script>

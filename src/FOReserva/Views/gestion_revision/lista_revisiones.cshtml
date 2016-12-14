@@ -1,0 +1,121 @@
+﻿@model List<FOReserva.Models.Revision.CRevision>
+@{
+    ViewBag.Title = "Lista de Revisiones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    <div class="row">
+        <div class="panel panel-default col-sm-12">
+            <div class="panel-heading">
+                <h2 class="panel-title">Listado de Revisiones</h2>
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered table-hover" id="tablas-revisiones">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Fecha</th>
+                            <th>Mensaje</th>
+                            <th>Tipo</th>
+                            <th>Puntuacion</th>
+                            <th>Acciones</th>
+
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr id="@item.Id" value="@item.Id">
+                                <td>@item.Id</td>
+                                <td class="rev_fecha" value="@item.Fecha">@item.Fecha</td>
+                                <td class="rev_mensaje" value="@item.Mensaje">@item.Mensaje</td>
+                                <td class="rev_tipo" value="@item.Tipo">@item.Tipo</td>
+                                <td class="rev_puntuacion" value="@item.Puntuacion">@item.Puntuacion</td>
+                                <td style="text-align: center;">
+                                    <a href="#" id="icon_edit" data-action="@Url.Action("_EditarReserva", "gestion_reserva_restaurante", new { id = item.Id })" class="update list-icon" value="@item.Id" style=" margin-right: 10px;"><i class="fa fa fa-pencil-square"></i></a>
+                                    <a href="#" title="Eliminar revision"><i class="fa fa-times-circle eliminar"></i></a>
+</tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- MODAL PARA ELIMINAR REVISION -->
+<div id="ModalEliminar" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Eliminar Revision</h4>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro que desea eliminar esta revision?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="aceptar_eliminar" value="0" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+
+    </div>
+   
+    <script>
+        $(document).ready(function () {
+            $(document).ready(function () {
+                //e.preventDefault();
+                $(".eliminar").click(function () {
+                    alert("Se esta procesando tu solicitud, por favor espere");
+                    var identificador = $(this).parent().parent().parent().attr("id");
+                    jQuery.ajax({
+                        type: "GET",
+                        url: "/gestion_revision/eliminar_revision",
+                        data: { Id: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+                    }).done(function (data) {
+                       // if (data === "1") {
+
+                            //$("#sdssss").append(data);
+                            var url1 = '/gestion_revision/eliminar_revision';
+                            var method = 'GET';
+                            var data1 = '';
+                            
+
+                            $.ajax(
+                                {
+                                    url: url1,
+                                    type: method,
+                                    data: data,
+                                    success: function (data, textStatus, jqXHR) {
+
+                                        $("#contenido").empty();
+                                        $("#contenido").append(data);
+                                        alert("Se elimino exitosamente el vehiculo");
+                          
+                                    },
+                                    error: function (jqXHR, textStatus, errorThrown) {
+                                        alert(errorThrown);
+                                    }
+                                });
+                           // } else if (data.includes("Reserva_Automovil")){
+                             //   alert("No se puede eliminar este vehiculo porque tiene una reserva");
+                           // } else {
+                           //     alert(data);
+                    });
+                  //  }).fail(function () {
+                    //    alert("esta vaina se jodio")
+                    //});
+                });
+            });
+
+        });
+            </script>
+
+

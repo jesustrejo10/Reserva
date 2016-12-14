@@ -27,18 +27,18 @@
                     <i class="fa fa-calendar-check-o" aria-hidden="true"></i><p><span>Fecha: </span>@Model.Date</p>
                     <i class="fa fa-clock-o" aria-hidden="true"></i> <p><span>Hora: </span>@Model.Time</p>
                     <i class="fa fa-users" aria-hidden="true"></i> <p><span>Mesa para: </span>@Model.Count</p>
-                    <center> <a class="btn btn-primary" href="@Url.Action("lista_reserva_restaurantes","gestion_reserva_restaurante")">Mis Reservas</a></center>
+                    <center> <a class="link-rest" href="@Url.Action("lista_reserva_restaurantes", "gestion_reserva_restaurante")"> <i class="fa fa-cutlery" aria-hidden="true"></i>  Mis Reservas</a></center>
                 </div>
 
             </div>
 
             <div class="col-sm-7">
                 <div class="relative">
-                    <div class="descrip-wrapper">
-                        <div class="descrip-conten">
-                            <h2>  <b>@Model.Restaurant.Name</b>  </h2>
+                    <div class="descript_bg">
+                        <div class="descript_conten">
+                            <h2><b>@Model.Restaurant.Name</b></h2>
                             <p>@Model.Restaurant.CityName</p>
-                            <p class="font-lato margin-top-30 size-16 hidden-sm hidden-xs"><b>@Model.Restaurant.Addres</b></p>
+                            <p class="font-lato size-16"><b>@Model.Restaurant.Addres</b></p>
                         </div>
                     </div>
                 </div>

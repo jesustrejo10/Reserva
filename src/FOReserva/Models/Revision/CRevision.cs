@@ -11,8 +11,8 @@ namespace FOReserva.Models.Revision
     public class CRevision : BaseEntity
     {        
         private int _puntuacion;
-        private string _descripcion;
-        private string _tipo;
+        private string _mensaje;
+        private int _tipo;
         private DateTime _fecha;
         private CRevisionValoracion _valoracion;
 
@@ -22,19 +22,19 @@ namespace FOReserva.Models.Revision
         /// <param name="id">ID Base</param>
         /// <param name="name">Name Base</param>
         /// <param name="fecha">Fecha Revision</param>
-        /// <param name="descripcion">Mensaje en Revision</param>
+        /// <param name="mensaje">Mensaje en Revision</param>
         /// <param name="puntuacion">Puntuacion de la Revision</param>
         /// <param name="positivo">Valoraciones positivos</param>
         /// <param name="negativo">Valoraciones negativas</param>
         /// <param name="tipo">Tipo Revision</param>
-        public CRevision(int id, string name, DateTime fecha, string descripcion, int puntuacion, int positivo, int negativo, string tipo)
+        public CRevision(int id, string name, DateTime fecha, string mensaje, int puntuacion, int tipo)
             : base(id, name)
         {
              this._fecha = fecha;
-             this._descripcion = descripcion;
+             this._mensaje = mensaje;
              this._puntuacion = puntuacion;
              this._tipo = tipo;
-             this._valoracion = new CRevisionValoracion(positivo, negativo);
+             this._valoracion = new CRevisionValoracion(0,0);
         }
 
         /// <summary>
@@ -47,17 +47,17 @@ namespace FOReserva.Models.Revision
             get { return _fecha; }
             set { _fecha = value; }
         }
-        public string Descripcion
+        public string Mensaje
         {
-            get { return _descripcion; }
-            set { _descripcion = value; }
+            get { return _mensaje; }
+            set { _mensaje = value; }
         }
         public int Puntuacion
         {
             get { return _puntuacion; }
             set { _puntuacion = value; }
         }
-        public string Tipo
+        public int Tipo
         {
             get { return _tipo; }
             set { _tipo = value; }

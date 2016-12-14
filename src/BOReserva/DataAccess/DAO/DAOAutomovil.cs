@@ -197,19 +197,23 @@ namespace BOReserva.Models.gestion_automoviles
             catch (SqlException ex)
             {
                 conexion.Close();
+                Debug.WriteLine(ex.ToString());
                 return id_ciudad;
             }
             catch (NullReferenceException ex)
             {
                 conexion.Close();
+                Debug.WriteLine(ex.ToString());
                 //Error recibiendo los parametros
                 return id_ciudad;
             }
             catch (Exception e) 
             {
                 conexion.Close();
+                Debug.WriteLine(e.ToString());
                 return id_ciudad;
             }
+
         }
 
 

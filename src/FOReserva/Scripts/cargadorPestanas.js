@@ -15,27 +15,35 @@ function cargarContenido(seccion, tipo, url, data, boton) {
     // tipo MD : 2 columnas, contenido derecha
     // tipo MI : 2 columnas, contenido izquierda
     // tipo CL : 2 columnas, contenido izquierda
+
+    if (seccion == '#MD' || seccion == '#MI') {
+        mostrarContenedor(1)
+    }/* else if (seccion == '#CI') {
+        mostrarContenedor(3)
+    }*/ else if (seccion == '#CP') {
+        mostrarContenedor(2)
+    }
+
+    if (seccion == "#MD")
+        seccion = "#contenedor"
+    else if (seccion == "#MI")
+        seccion = "#contenedorImagenes"
+    else if (seccion == "#CI")
+        seccion = "#contenedorPerfil"
+
+    $(seccion)
+        .empty()
+        .append($("<div />", { class: "text-center", text: "Cargando..." }));
+
     $.ajax(
         {
             url: url,
             type: tipo,
             data: data,
             success: function (data, textStatus, jqXHR) {
-                if (seccion == '#MD' || seccion == '#MI') {
-                    mostrarContenedor(1)
-                } else if (seccion == '#CI') {
-                    mostrarContenedor(3)
-                } else if (seccion == '#CP') {
-                    mostrarContenedor(2)
-                }
-
-                if (seccion == "#MD")
-                    seccion = "#contenedor"
-                else if (seccion == "#MI")
-                    seccion = "#contenedorImagenes"
-
-                $(seccion).empty();
-                $(seccion).append(data);
+                $(seccion)
+                    .empty()
+                    .append(data);
 
                 if (boton != null)
                 {
@@ -49,12 +57,13 @@ function cargarContenido(seccion, tipo, url, data, boton) {
         });
 };
 
+
 jQuery(document).ready(function () {
 
     mostrarContenedor(1)
 
     /* NO QUITAR ESTA CARGA INICIAL QUE ES LA QUE HARÁ QUE POR DEFAULT SALGA VENTA DE VUELOS AL INICIAR LA PAGINA*/
-    $("#contenedor").empty();
+    $("#contenedor").html('<div class="text-center">Cargando...</div>');
     var url = '/gestion_vuelos/gestion_vuelos';
     var method = 'GET';
     var data = '';
@@ -161,6 +170,46 @@ jQuery(document).ready(function () {
         $("#LiRestaurantes").removeClass("active");
         $("#LiCruceros").removeClass("active");
         $("#LiDiarios").removeClass("active");
+
+        $("#contenedor").html('<div class="text-center">Cargando...</div>');
+
+        var url = '/gestion_reserva_auto/M19_Reserva_Autos';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenedor").empty();
+                    $("#contenedor").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+
+        var url = '/gestion_reserva_auto/M19_Reserva_AutosImagenes';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenedorImagenes").empty();
+                    $("#contenedorImagenes").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
     });
 
 
@@ -241,6 +290,9 @@ jQuery(document).ready(function () {
         $("#LiHoteles").removeClass("active");
         $("#LiRestaurantes").removeClass("active");
         $("#LiAutos").removeClass("active");
+
+        $("#contenedor").html('<div class="text-center">Cargando...</div>');
+
         var url = '/gestion_reserva_crucero/gestion_reserva_crucero';
         var method = 'GET';
         var data = '';
@@ -256,7 +308,7 @@ jQuery(document).ready(function () {
                     $("#contenedor").append(data);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
+                    $("#contenedor").html('<div class="text-center">No se pudo Cargar los datos...</div>');
                 }
             });
 
