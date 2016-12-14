@@ -45,7 +45,11 @@
                                                 <br>}
                                         </table>
                                     </td>
-                                    <td>
+                                    <td class="center">
+                                        @if (@item.Nombre_rol != "Administrador" )
+                                        {
+                                            <a href="#" title="Modificar Rol"><i class="fa fa-pencil modificar"></i></a>
+                                        }
                                         @if (@item.Nombre_rol != "Administrador" && @item.Nombre_rol != "Cargador" && @item.Nombre_rol != "Operador" && @item.Nombre_rol != "Cliente" && @item.Nombre_rol != "Anonimo")
                                         {
                                         <a href="#"  title="Eliminar Rol"><i class="fa fa-times eliminar"></i></a>
@@ -88,7 +92,23 @@
    
     table = $('#VisualizarRol').DataTable();
     
+    table = $('#example1').DataTable();
+    $(".modificar").click(function () {
+        var identificador = $(this).parent().parent().parent().attr("id");
+        console.log(identificador);
+        jQuery.ajax({
+            type: "GET",
+            url: "/gestion_roles/M13_ModificarRol",
+            data: { _rolnombre: identificador }
+        }).done(function (data) {
+            $("#contenido").empty();
+            $("#contenido").append(data);
+        }).fail(function () {
+            alert(data);
+        });
 
+
+    });
 
 
 
