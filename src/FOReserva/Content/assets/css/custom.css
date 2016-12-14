@@ -36,6 +36,15 @@
         color: #f39c12 !important;
     }
 
+.link-rest {
+      display:block;
+      font-size: 18px;
+
+}
+.link-rest:hover {
+     color: #f39c12 !important;
+   
+}
 .descript_bg {
     height: 443.6px;
     background-image: url('../../../Images/restaurant_generic.jpg');

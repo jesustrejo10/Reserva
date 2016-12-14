@@ -16,7 +16,7 @@ namespace BOReserva.Servicio
         private manejadorSQL bd=new manejadorSQL(); 
 
         public M01SQL() {
-            this.stringDeConexion=bd.getstringDeConexion();
+            this.stringDeConexion=bd.stringDeConexions;
         }
         
         public Cgestion_seguridad_ingreso UsuarioEnBD(String usuario)
