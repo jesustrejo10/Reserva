@@ -1,4 +1,7 @@
 ﻿@model List<BOReserva.Models.gestion_vuelo.CVuelo>
+
+<script src="~/Scripts/Scripts_Vuelos/llamadas_generales_Vuelos.js"></script>
+
 <div class="row">
     <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
 
@@ -90,116 +93,7 @@
   
     table = $('#example1').DataTable();
 
-            $(".mostrar").click(function () {
-                var identificador = $(this).parent().parent().parent().attr("id");
-                jQuery.ajax({
-                    type: "GET",
-                    url: "/gestion_vuelo/M04_GestionVuelo_Mostrar",
-                    data: { id: identificador }
-                }).done(function (data) {
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                            var url = '/gestion_vuelo/M04_GestionVuelo_Visualizar';
-                            var method = 'GET';
-                            var data = '';
-                            $.ajax(
-                                {
-                                    url: url,
-                                    type: method,
-                                    data: data,
-                                    success: function (data, textStatus, jqXHR) {
 
-                                        $("#contenido").empty();
-                                        $("#contenido").append(data);
-                                    },
-                                    error: function (jqXHR, textStatus, errorThrown) {
-                                        alert(errorThrown);
-                                    }
-                                });
-                                    }).fail(function (err) {
-                                        alert(err)
-                                    });
-
-
-            });
-
-            $(".modificar").click(function () {
-                var identificador = $(this).parent().parent().parent().attr("id");
-                jQuery.ajax({
-                    type: "GET",
-                    url: "/gestion_vuelo/M04_GestionVuelo_Modificar",
-                    data: { id: identificador }
-                }).done(function (data) {
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                }).fail(function (err) {
-                    alert(err)
-                });
-
-
-            });
-
-
-
-            $(".desactivar").click(function () {
-                var identificador = $(this).parent().parent().parent().attr("id");
-                jQuery.ajax({
-                    type: "GET",
-                    url: "/gestion_vuelo/M04_GestionVuelo_Desactivar",
-                    data: { id: identificador }
-                }).done(function (data) {
-                    var url = '/gestion_vuelo/M04_GestionVuelo_Visualizar';
-                    var method = 'GET';
-                    var data = '';
-
-                    $.ajax(
-                        {
-                            url: url,
-                            type: method,
-                            data: data,
-                            success: function (data, textStatus, jqXHR) {
-
-                                $("#contenido").empty();
-                                $("#contenido").append(data);
-                            },
-                            error: function (jqXHR, textStatus, errorThrown) {
-                                alert(errorThrown);
-                            }
-                        });
-                }).fail(function (err) {
-                    alert('Fallo')
-                });
-            });
-
-            $(".activar").click(function () {
-                var identificador = $(this).parent().parent().parent().attr("id");
-                jQuery.ajax({
-                    type: "GET",
-                    url: "/gestion_vuelo/M04_GestionVuelo_Activar",
-                    data: { id: identificador }
-                }).done(function (data) {
-                    var url = '/gestion_vuelo/M04_GestionVuelo_Visualizar';
-                    var method = 'GET';
-                    var data = '';
-
-                    $.ajax(
-                        {
-                            url: url,
-                            type: method,
-                            data: data,
-                            success: function (data, textStatus, jqXHR) {
-
-                                $("#contenido").empty();
-                                $("#contenido").append(data);
-                            },
-                            error: function (jqXHR, textStatus, errorThrown) {
-                                alert(errorThrown);
-                            }
-                        });
-                }).fail(function (err) {
-                    alert('Fallo')
-                });
-            });
 
 </script>
 

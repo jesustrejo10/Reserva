@@ -253,13 +253,13 @@ namespace BOReserva.Controllers
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 String error = "Error consultando la velocidad del avion.";
-                return Json(error);
+                return Json(error,JsonRequestBehavior.DenyGet);
             }
             catch (Exception e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 String error = "Error desconocido, contacte con el administrador.";
-                return Json(error);
+                return Json(error, JsonRequestBehavior.DenyGet);
             }
 
             return (Json(resultado, JsonRequestBehavior.AllowGet)); 
@@ -310,6 +310,7 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult guardarVuelo(CCrear_Vuelo model)
         {
+            manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
             if ((model._matriculaAvion == null) || (model._codigoVuelo == null) || (model._ciudadOrigen == null)
                 || (model._ciudadDestino == null) || (model._statusVuelo == null) || (model._fechaDespegue == null) || (model._horaDespegue == null))
             {
@@ -320,6 +321,35 @@ namespace BOReserva.Controllers
                 //Retorno el error
                 return Json(error);
             }
+
+            try // intento consultar en BD si el Codigo de vuelo ya fue previamente registrado
+            {
+                int repetido = sql.codVueloUnico(model._codigoVuelo);// llamo a BD
+                if (repetido == 1)// vale 1 si ya fue registrado
+                {
+                    //Creo el codigo de error de respuesta
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    //Agrego mi error
+                    String error = "El codigo de vuelo ya esta registrado";
+                    //Retorno el error
+                    return Json(error);
+                }
+            }
+            catch (SqlException e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error ingresando a la base de datos.";
+                return Json(error);
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
+                return Json(error);
+            }
+         
+
+
 
         //    if ((model._fechaAterrizaje == null) || (model._horaAterrizaje == null))
         //    {
@@ -334,7 +364,6 @@ namespace BOReserva.Controllers
 
             string resultadoFechaAterrizaje = "";
             string resultadoFechaDespegue = "";
-            manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
 
             //tomo todas la variables que se introducieron en la vista
             String codigoVuelo = model._codigoVuelo;
@@ -439,6 +468,7 @@ namespace BOReserva.Controllers
             try
             {
                 vuelo = buscarvuelo.MModificarBD(id); //BUSCA EL VUELO A MOSTRAR
+                
             }
             catch (SqlException e)
             {
@@ -539,13 +569,6 @@ namespace BOReserva.Controllers
             return null;
         }
 
-        [HttpPost]
-        public ActionResult revisarCodVuelo(String codigoVuelo)
-        {
-            manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
-            int Registrada = sql.codVueloUnico(codigoVuelo);
-            return Json(Registrada);
-        } 
 
     }
 

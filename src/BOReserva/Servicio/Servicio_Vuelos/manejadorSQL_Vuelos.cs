@@ -264,6 +264,8 @@ namespace BOReserva.Servicio.Servicio_Vuelos
         }
         //fin cargarOrigenes
 
+        
+
 
          public string modeloAvion(string matriculaAvion)
          {
@@ -784,7 +786,7 @@ namespace BOReserva.Servicio.Servicio_Vuelos
                 {
                     while (reader.Read())
                     {
-                        String retorno = reader[0].ToString();
+                        String retorno = reader[1].ToString();
                         verdad = retorno.Equals(codVuelo.ToUpper());
                     }
                 }
