@@ -166,6 +166,7 @@
 
             $(".clasedeprueba").on("click", (function () {
 
+                alert("Se esta procesando tu solicitud, por favor espere");
                 var identificador = $(this).parent().parent().parent().attr("id");
                 jQuery.ajax({
                     type: "GET",
@@ -185,6 +186,7 @@
         $(document).ready(function () {
             //e.preventDefault();
             $(".modificar").click(function () {
+                alert("Se esta procesando tu solicitud, por favor espere");
                 var identificador = $(this).parent().parent().parent().attr("id");
                 jQuery.ajax({
                     type: "GET",
@@ -238,6 +240,7 @@
         $(document).ready(function () {
             //e.preventDefault();
             $(".eliminar").click(function () {
+                alert("Se esta procesando tu solicitud, por favor espere");
                 var identificador = $(this).parent().parent().parent().attr("id");
                 jQuery.ajax({
                     type: "POST",
@@ -247,7 +250,6 @@
                     if (data === "1") {
 
                         //$("#sdssss").append(data);
-                        alert("Se elimino exitosamente el vehículo")
                         var url1 = '/gestion_automoviles/M08_VisualizarAutomoviles';
                         var method = 'GET';
                         var data1 = '';
@@ -261,6 +263,7 @@
 
                                     $("#contenido").empty();
                                     $("#contenido").append(data);
+                                    alert("Se elimino exitosamente el vehículo");
                                 },
                                 error: function (jqXHR, textStatus, errorThrown) {
                                     alert(errorThrown);
@@ -280,16 +283,18 @@
         $(document).ready(function () {
             //e.preventDefault();
             $(".activar").click(function () {
+                alert("Se esta procesando tu solicitud, por favor espere");
                 var identificador = $(this).parent().parent().parent().attr("id");
                 jQuery.ajax({
                     type: "POST",
                     url: "/gestion_automoviles/activateVehicle",
                     data: { matricula: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+                    
+                     
                 }).done(function (data) {
                     if (data === "1") {
 
                         //$("#sdssss").append(data);
-                        alert("Se cambió exitosamente el estatus del vehículo")
                         var url1 = '/gestion_automoviles/M08_VisualizarAutomoviles';
                         var method = 'GET';
                         var data1 = '';
@@ -303,6 +308,7 @@
 
                                     $("#contenido").empty();
                                     $("#contenido").append(data);
+                                    alert("Se cambió exitosamente el estatus del vehículo");
                                 },
                                 error: function (jqXHR, textStatus, errorThrown) {
                                     alert(errorThrown);
@@ -321,6 +327,7 @@
         $(document).ready(function () {
             //e.preventDefault();
             $(".desactivar").click(function () {
+                alert("Se esta procesando tu solicitud, por favor espere");
                 var identificador = $(this).parent().parent().parent().attr("id");
                 jQuery.ajax({
                     type: "POST",
@@ -330,7 +337,6 @@
                     if (data === "1") {
 
                         //$("#sdssss").append(data);
-                        alert("Se cambió exitosamente el estatus del vehículo")
                         var url1 = '/gestion_automoviles/M08_VisualizarAutomoviles';
                         var method = 'GET';
                         var data1 = '';
@@ -344,6 +350,7 @@
 
                                     $("#contenido").empty();
                                     $("#contenido").append(data);
+                                    alert("Se cambió exitosamente el estatus del vehículo");
                                 },
                                 error: function (jqXHR, textStatus, errorThrown) {
                                     alert(errorThrown);
