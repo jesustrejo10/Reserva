@@ -1,4 +1,6 @@
-﻿@model FOReserva.Models.Restaurantes.CRestaurantModel
+
+@model FOReserva.Models.Restaurantes.CRestaurantModel
+
 @{
     ViewBag.Title = "Reservar Restaurante";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -117,9 +119,24 @@
         </div>
     </div>
 </div>
+
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">Revisiones</h2>
+        </div>
+        <div class="panel-body">
+            
+
+            <center> <input id="lista_rev" type="button" value="Ver Revisiones" class="btn btn-primary boton" /> </center>
+               
+                <center> <a class="btn btn-primary" href="@Url.Action("crear_revision", "gestion_revision")">Agregar Revision</a></center>
+</div>
+</div>
 <!-- /FEATURED GRID -->
 
 <script>
+
     $(document).ready(function () {
         $('.datepicker').datepicker({
             orientation: "bottom",
@@ -142,7 +159,7 @@
             $(".error").hide();
             $("#name_client").removeClass("has-error");
             $("#reserv_hour").removeClass("has-error");
-            $("#number_person").removeClass("has-error");
+            $("#reserv_date").removeClass("has-error");
 
             //find errors
             var nombre = $("#name_client").val();
@@ -188,6 +205,25 @@
 
     });
 
+    $(document).ready(function () {
+        $("#lista_rev").click(function () {
+           
+            var ide = $(this).parent().parent().parent().parent().attr("id");
+            
+            jQuery.ajax({
+                type: "GET",
+                url: "/gestion_revision/lista_revisiones",
+                data: { id: ide }
+            }).done(function () {
+                alert("Envie")
+            }).fail(function () {
+                alert("Ocurrió un error")
+            });
+
+        });
+
+    });
 
 </script>
+
 
