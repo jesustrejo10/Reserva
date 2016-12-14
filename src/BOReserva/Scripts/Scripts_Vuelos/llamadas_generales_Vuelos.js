@@ -30,16 +30,20 @@ $("#ciudadO").change(function () {
                         select.append($('<option/>', {
                             value: 0,
                             text: "Seleccione una ciudad destino"
+                            , error: function (xhr, textStatus, exceptionThrown) {
+                                alert(xhr.responseText);
+                            }
                         }));
                         $.each(data, function (index, itemData) {
                             select.append($('<option/>', {
                                 value: itemData.Value,
                                 text: itemData.Text
                             }));
-                        });
-                    });
-});
 
+                        });
+                   
+               });
+});
 //evento para cargar los aviones que puedan cubrir la distancia de la ruta seleccionada en la vista CREAR
 $("#ciudadD").change(function () {
     var cID = $(ciudadO).val();
@@ -51,6 +55,9 @@ $("#ciudadD").change(function () {
                select.append($('<option/>', {
                    value: 0,
                    text: "Seleccione un avion"
+                   , error: function (xhr, textStatus, exceptionThrown) {
+                       alert(xhr.responseText);
+                   }
                }));
                $.each(data, function (index, itemData) {
                    select.append($('<option/>', {
@@ -120,6 +127,7 @@ $("#estadoVuelo").change(function () {
     $.getJSON("gestion_vuelo/buscaFechaA", { fechaDes: fID, horaDes: hID, ciudadO: oID, ciudadD: dID, matriAvion: mID, opcion: 1 },
        function (data) {
            $("#horaAterrizaje").val(data);
+
        });
 });
 

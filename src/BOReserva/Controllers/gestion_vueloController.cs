@@ -132,7 +132,7 @@ namespace BOReserva.Controllers
             catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error ingresando a la base de datos.";
+                String error = "Error consultando los aviones disponibles para la ruta.";
                 return Json(error);
             }
             catch (Exception e)
@@ -161,7 +161,7 @@ namespace BOReserva.Controllers
             catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error ingresando a la base de datos.";
+                String error = "Error consultando el modelo del avion.";
                 return Json(error);
             }
             catch (Exception e)
@@ -189,7 +189,7 @@ namespace BOReserva.Controllers
             catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error ingresando a la base de datos.";
+                String error = "Error consultando la cantidad de pasajeros.";
                 return Json(error);
             }
             catch (Exception e)
@@ -221,7 +221,7 @@ namespace BOReserva.Controllers
             catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error ingresando a la base de datos.";
+                String error = "Error consultando la distancia maxima del avion.";
                 return Json(error);
             }
             catch (Exception e)
@@ -252,7 +252,7 @@ namespace BOReserva.Controllers
             catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error ingresando a la base de datos.";
+                String error = "Error consultando la velocidad del avion.";
                 return Json(error);
             }
             catch (Exception e)
