@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Net;
+using System.Data.SqlClient;
 using System.Text.RegularExpressions;
 using BOReserva.Models.gestion_vuelo;
 using BOReserva.Servicio.Servicio_Vuelos;
@@ -22,7 +23,25 @@ namespace BOReserva.Controllers
         public ActionResult M04_GestionVuelo_Visualizar()
         {
             manejadorSQL_Vuelos buscarvuelos = new manejadorSQL_Vuelos();
-            List<CVuelo> listavuelos = buscarvuelos.MListarvuelosBD(); //AQUI SE BUSCA TODO LOS VUELOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
+            List<CVuelo> listavuelos = new List<CVuelo>();
+            try
+            {
+                //AQUI SE BUSCA TODO LOS VUELOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
+                listavuelos = buscarvuelos.MListarvuelosBD(); 
+
+            }
+            catch (SqlException e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error ingresando a la base de datos.";
+                return Json(error);
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
+                return Json(error);
+            }
             return PartialView(listavuelos);
         }
 
@@ -43,17 +62,41 @@ namespace BOReserva.Controllers
             List<CCrear_Vuelo> resultadoOrigenes = new List<CCrear_Vuelo>();
             manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
 
-            //hago llamado a metodo que llena la lista desde BD
-            resultadoOrigenes = sql.cargarOrigenes();
 
-            //llenado dropdownlist de las ciudades origen en la vista crear
+            try
             {
-                model._ciudadesOrigen = resultadoOrigenes.Select(x => new SelectListItem
+                //hago llamado a metodo que llena la lista desde BD
+                  resultadoOrigenes = sql.cargarOrigenes();
+                //llenado dropdownlist de las ciudades origen en la vista crear
+                    model._ciudadesOrigen = resultadoOrigenes.Select(x => new SelectListItem
+                    {
+                        Value = x._ciudadOrigen,
+                        Text = x._ciudadOrigen
+                    });
+                
+                if (resultadoOrigenes != null)
                 {
-                    Value = x._ciudadOrigen,
-                    Text = x._ciudadOrigen
-                });
-            };
+                    model._ciudadesOrigen = resultadoOrigenes.Select(x => new SelectListItem
+                    {
+                        Value = x._ciudadOrigen,
+                        Text = x._ciudadOrigen
+                    });
+                }
+
+            }
+            catch (SqlException e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error ingresando a la base de datos.";
+                return Json(error);
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
+                return Json(error);
+            }
+
 
             //paso la lista al formato de DropDownList
             var listaEstados = dlstatusvuelo();
@@ -78,29 +121,35 @@ namespace BOReserva.Controllers
             List<CCrear_Vuelo> resultado = new List<CCrear_Vuelo>();
             manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
 
-            //llamo a metodo que llena la lista con BD
-            resultado = sql.buscarAviones(ciudadO, ciudadD);
-
-            //paso la lista al formato de DropDownList
-            model._matriculasAvion = resultado.Select(m => new SelectListItem
+            try
             {
-                Value = m._matriculaAvion,
-                Text = m._matriculaAvion
-            });
+                //llamo a metodo que llena la lista con BD
+                resultado = sql.buscarAviones(ciudadO, ciudadD);
 
-            if (resultado != null)
-            {
-                return (Json(model._matriculasAvion, JsonRequestBehavior.AllowGet));
+                if (resultado!= null)
+                {
+                    //paso la lista al formato de DropDownList
+                    model._matriculasAvion = resultado.Select(m => new SelectListItem
+                    {
+                        Value = m._matriculaAvion,
+                        Text = m._matriculaAvion
+                    });
+                }
             }
-            else
+            catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error accediendo a la BD";
+                String error = "Error ingresando a la base de datos.";
+                return Json(error);
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
                 return Json(error);
             }
 
-
-
+                return (Json(model._matriculasAvion, JsonRequestBehavior.AllowGet));
         }
 
 
@@ -111,19 +160,25 @@ namespace BOReserva.Controllers
             string resultado = "";
             manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
 
-            //metodo para BD
-            resultado = sql.modeloAvion(matriAvion);
-
-            if (resultado != null)
+            try
             {
-                return (Json(resultado, JsonRequestBehavior.AllowGet));
+                //metodo para BD
+                resultado = sql.modeloAvion(matriAvion);
             }
-            else
+            catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error accediendo a la BD";
+                String error = "Error ingresando a la base de datos.";
                 return Json(error);
             }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
+                return Json(error);
+            }
+                
+            return (Json(resultado, JsonRequestBehavior.AllowGet));
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
@@ -133,19 +188,26 @@ namespace BOReserva.Controllers
             string resultado = "";
             manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
 
-            //metodo para BD
-            resultado = sql.pasajerosAvion(matriAvion);
-
-            if (resultado != null)
+            try
             {
-                return (Json(resultado, JsonRequestBehavior.AllowGet));
+                //metodo para BD
+                resultado = sql.pasajerosAvion(matriAvion);
             }
-            else
+            catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error accediendo a la BD";
+                String error = "Error ingresando a la base de datos.";
                 return Json(error);
             }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
+                return Json(error);
+            }
+
+            return (Json(resultado, JsonRequestBehavior.AllowGet)); 
+
         }
 
 
@@ -157,19 +219,26 @@ namespace BOReserva.Controllers
             string resultado = "";
             manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
 
-            //metodo para BD
-            resultado = sql.distanciaAvion(matriAvion);
-
-            if (resultado != null)
+            
+            try
             {
-                return (Json(resultado, JsonRequestBehavior.AllowGet));
+                //metodo para BD
+                resultado = sql.distanciaAvion(matriAvion);
             }
-            else
+            catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error accediendo a la BD";
+                String error = "Error ingresando a la base de datos.";
                 return Json(error);
             }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
+                return Json(error);
+            }
+
+            return (Json(resultado, JsonRequestBehavior.AllowGet)); 
         }
 
 
@@ -180,19 +249,27 @@ namespace BOReserva.Controllers
             string resultado = "";
             manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
 
-            //metodo para BD
-            resultado = sql.velocidadAvion(matriAvion);
+            
 
-            if (resultado != null)
+            try
             {
-                return (Json(resultado, JsonRequestBehavior.AllowGet));
+                //metodo para BD
+                resultado = sql.velocidadAvion(matriAvion);
             }
-            else
+            catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error accediendo a la BD";
+                String error = "Error ingresando a la base de datos.";
                 return Json(error);
             }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
+                return Json(error);
+            }
+
+            return (Json(resultado, JsonRequestBehavior.AllowGet)); 
         }
 
 
@@ -205,26 +282,35 @@ namespace BOReserva.Controllers
             List<CCrear_Vuelo> resultado = new List<CCrear_Vuelo>();
             manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
 
-            //metodo para BD que llenara lista
-            resultado = sql.consultarDestinos(ciudadO);
-
-            //paso la lista a formato de DropDownList para la vista
-            model._ciudadesDestino = resultado.Select(m => new SelectListItem
-                {
-                    Value = m._ciudadDestino,
-                    Text = m._ciudadDestino
-                });
-
-            if (resultado != null)
+            try
             {
-                return (Json(model._ciudadesDestino, JsonRequestBehavior.AllowGet));
+                //metodo para BD que llenara lista
+                resultado = sql.consultarDestinos(ciudadO);
+
+                if (resultado != null)
+                {
+                    //paso la lista a formato de DropDownList para la vista
+                    model._ciudadesDestino = resultado.Select(m => new SelectListItem
+                    {
+                        Value = m._ciudadDestino,
+                        Text = m._ciudadDestino
+                    });
+                }
             }
-            else
+            catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error accediendo a la BD";
+                String error = "Error ingresando a la base de datos.";
                 return Json(error);
             }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
+                return Json(error);
+            }
+
+            return (Json(model._matriculasAvion, JsonRequestBehavior.AllowGet));
         }
 
 
@@ -270,25 +356,51 @@ namespace BOReserva.Controllers
 
             //convierto fecha y hora en formato que acepte la BD
             resultadoFechaDespegue = "" + fechaDespegue + " " + horaDespegue;
-            //metodo para calcular la fecha y hora de aterrizaje del vuelo, que luego llama a Stored Procedure
-            resultadoFechaAterrizaje = sql.fechaVuelo(fechaDespegue, horaDespegue, ciudadOrigen, ciudadDestino, matriculaAvion);
 
-            //elimino caracteres sobrantes para insert correcto
-            resultadoFechaAterrizaje = Regex.Replace(resultadoFechaAterrizaje, ":00", "");
-
-            //procedo a insertar en la tabla Vuelo de la BD
-            bool resultado = sql.insertarVuelo(codigoVuelo, ciudadOrigen, ciudadDestino, resultadoFechaDespegue, statusAvion, resultadoFechaAterrizaje, matriculaAvion);
-            //envio una respuesta dependiendo del resultado del insert
-            if (resultado)
+            try
             {
-                return (Json(true, JsonRequestBehavior.AllowGet));
+                //metodo para calcular la fecha y hora de aterrizaje del vuelo, que luego llama a Stored Procedure
+                resultadoFechaAterrizaje = sql.fechaVuelo(fechaDespegue, horaDespegue, ciudadOrigen, ciudadDestino, matriculaAvion);
+                if (resultadoFechaAterrizaje != null)
+                {
+                    //elimino caracteres sobrantes para insert correcto
+                    resultadoFechaAterrizaje = Regex.Replace(resultadoFechaAterrizaje, ":00", "");
+                }
             }
-            else
+            catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error insertando en la BD";
+                String error = "Error ingresando a la base de datos.";
                 return Json(error);
             }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
+                return Json(error);
+            }
+
+            try
+            {
+                //procedo a insertar en la tabla Vuelo de la BD
+                bool resultado = sql.insertarVuelo(codigoVuelo, ciudadOrigen, ciudadDestino, resultadoFechaDespegue, statusAvion, resultadoFechaAterrizaje, matriculaAvion);
+                //envio una respuesta dependiendo del resultado del insert
+            }
+            catch (SqlException e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error ingresando a la base de datos.";
+                return Json(error);
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
+                return Json(error);
+            }
+
+            return (Json(model._matriculasAvion, JsonRequestBehavior.AllowGet));
+            
         }
 
 
@@ -311,31 +423,38 @@ namespace BOReserva.Controllers
                 return Json(error);
             }
 
-            //llamo a metodo para calcular fecha de aterrizaje segun datos introducidos en la vista
-            resultado = sql.fechaVuelo(fechaDes, horaDes, ciudadO, ciudadD, matriAvion);
-            //separo el resultado del metodo para poner enviar a TextBoxes diferentes
-            string[] separando = resultado.Split(' ');
-
-            // si opcion es igual a "0" obtengo fecha, si es igual a "1" obtengo hora
-            fecha = separando[opcion];
-
-            //elimino caracteres sobrantes para la vista 
-            if (opcion == 1)
+            try
             {
-                //elimino caracteres sobrantes para la vista
-                fecha = Regex.Replace(fecha, ":00", "");
+                //llamo a metodo para calcular fecha de aterrizaje segun datos introducidos en la vista
+                resultado = sql.fechaVuelo(fechaDes, horaDes, ciudadO, ciudadD, matriAvion);
+                //separo el resultado del metodo para poner enviar a TextBoxes diferentes
+                if (resultado != null)
+                {
+                    string[] separando = resultado.Split(' ');
+                    // si opcion es igual a "0" obtengo fecha, si es igual a "1" obtengo hora
+                    fecha = separando[opcion];
+                    //elimino caracteres sobrantes para la vista 
+                    if (opcion == 1)
+                    {
+                        //elimino caracteres sobrantes para la vista
+                        fecha = Regex.Replace(fecha, ":00", "");
+                    }
+                }
             }
-
-            if (resultado != null)
-            {
-                return (Json(fecha, JsonRequestBehavior.AllowGet));
-            }
-            else
+            catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error accediendo a la BD";
+                String error = "Error ingresando a la base de datos.";
                 return Json(error);
             }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
+                return Json(error);
+            }
+            return (Json(model._matriculasAvion, JsonRequestBehavior.AllowGet));
+
         }
 
         public ActionResult M04_GestionVuelo_Modificar(String codigovuelo)
@@ -361,12 +480,28 @@ namespace BOReserva.Controllers
     public ActionResult M04_GestionVuelo_Desactivar(String codigovuelo)
     {
         manejadorSQL_Vuelos desactivarvuelo = new manejadorSQL_Vuelos();
-        Boolean vuelo = desactivarvuelo.MDesactivarVuelo(codigovuelo); 
-        //DESATIVANDO  EL VUELO 
-        //manejadorSQL_Vuelos buscarvuelos = new manejadorSQL_Vuelos();
-        //List<CVuelo> listavuelos = buscarvuelos.MListarvuelosBD(); 
-        //AQUI SE BUSCA TODO LOS VUELOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
-        //return PartialView(listavuelos);
+        try
+        {
+            Boolean vuelo = desactivarvuelo.MDesactivarVuelo(codigovuelo);
+            //DESATIVANDO  EL VUELO 
+            //manejadorSQL_Vuelos buscarvuelos = new manejadorSQL_Vuelos();
+            //List<CVuelo> listavuelos = buscarvuelos.MListarvuelosBD(); 
+            //AQUI SE BUSCA TODO LOS VUELOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
+            //return PartialView(listavuelos);
+        }
+        catch (SqlException e)
+        {
+            Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            String error = "Error ingresando a la base de datos.";
+            return Json(error);
+        }
+        catch (Exception e)
+        {
+            Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            String error = "Error desconocido, contacte con el administrador.";
+            return Json(error);
+        }
+        
             return null;
     }
 
