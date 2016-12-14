@@ -231,6 +231,27 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult guardarVuelo(CCrear_Vuelo model)
         {
+            if ((model._matriculaAvion == null) || (model._codigoVuelo == null) || (model._ciudadOrigen == null)
+                || (model._ciudadesDestino == null) || (model._statusVuelo == null) || (model._fechaDespegue == null) || (model._horaDespegue == null))
+            {
+                //Creo el codigo de error de respuesta
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error, campos obligatorios vacios";
+                //Retorno el error
+                return Json(error);
+            }
+
+            if ((model._fechaAterrizaje == null) || (model._horaAterrizaje == null))
+            {
+                //Creo el codigo de error de respuesta
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error en el calculo de la fecha de aterrizaje. Por favor intente nuevamente y complete los campos obligatorios";
+                //Retorno el error
+                return Json(error);
+            }
+
 
             string resultadoFechaAterrizaje = "";
             string resultadoFechaDespegue = "";
@@ -274,10 +295,21 @@ namespace BOReserva.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public JsonResult buscaFechaA(string fechaDes, string horaDes, string ciudadO, string ciudadD, string matriAvion, int opcion)
         {
+
             CCrear_Vuelo model = new CCrear_Vuelo();
             string resultado = "";
             string fecha = "";
             manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
+
+            if ((model._fechaAterrizaje == null) || (model._horaAterrizaje == null))
+            {
+                //Creo el codigo de error de respuesta
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error en el calculo de la fecha de aterrizaje. Por favor intente nuevamente y complete los campos obligatorios";
+                //Retorno el error
+                return Json(error);
+            }
 
             //llamo a metodo para calcular fecha de aterrizaje segun datos introducidos en la vista
             resultado = sql.fechaVuelo(fechaDes, horaDes, ciudadO, ciudadD, matriAvion);
@@ -329,10 +361,12 @@ namespace BOReserva.Controllers
     public ActionResult M04_GestionVuelo_Desactivar(String codigovuelo)
     {
         manejadorSQL_Vuelos desactivarvuelo = new manejadorSQL_Vuelos();
-        Boolean vuelo = desactivarvuelo.MDesactivarVuelo(codigovuelo); //DESATIVANDO  EL VUELO 
-                                                                       //manejadorSQL_Vuelos buscarvuelos = new manejadorSQL_Vuelos();
-                                                                       //List<CVuelo> listavuelos = buscarvuelos.MListarvuelosBD(); //AQUI SE BUSCA TODO LOS VUELOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
-                                                                       //return PartialView(listavuelos);
+        Boolean vuelo = desactivarvuelo.MDesactivarVuelo(codigovuelo); 
+        //DESATIVANDO  EL VUELO 
+        //manejadorSQL_Vuelos buscarvuelos = new manejadorSQL_Vuelos();
+        //List<CVuelo> listavuelos = buscarvuelos.MListarvuelosBD(); 
+        //AQUI SE BUSCA TODO LOS VUELOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
+        //return PartialView(listavuelos);
             return null;
     }
 
