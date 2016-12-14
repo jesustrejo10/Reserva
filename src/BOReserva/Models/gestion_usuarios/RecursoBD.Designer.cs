@@ -97,7 +97,7 @@ namespace BOReserva.Models.gestion_usuarios {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No se pudo establecer una conexión con el servidor de datos.
+        ///   Looks up a localized string similar to No se pudo establecer una conexion con el servidor de datos.
         /// </summary>
         internal static string Error_Conexion {
             get {
@@ -106,7 +106,7 @@ namespace BOReserva.Models.gestion_usuarios {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ocurrio un error al cerrar la conexión con el servidor de datos.
+        ///   Looks up a localized string similar to Ocurrio un error al cerrar la conexion con el servidor de datos.
         /// </summary>
         internal static string Error_Desconexión {
             get {
@@ -129,6 +129,15 @@ namespace BOReserva.Models.gestion_usuarios {
         internal static string Error_Parametro {
             get {
                 return ResourceManager.GetString("Error_Parametro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DB_A1380A_reserva.
+        /// </summary>
+        internal static string StringConexion {
+            get {
+                return ResourceManager.GetString("StringConexion", resourceCulture);
             }
         }
     }

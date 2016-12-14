@@ -1,4 +1,10 @@
-﻿<div class="row">
+﻿@model BOReserva.Models.gestion_comida_vuelo.CAgregarComida
+<script src="~/Scripts/Scripts_ComidaVuelo/llamadas_generales.js"></script>
+@using (Html.BeginForm("guardarPlato", "gestion_comida_vuelo", null, FormMethod.Post, new { @id = "formGuardarPlato", @class = "form-horizontal" }))
+{
+
+      
+<div class="row">
     <!-- Agregar Comida  -->
     <div class="col-xs-6"> 
         <div class="box-header with-border">
@@ -12,11 +18,11 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-12">
-                        <label for="agregarEditarComida">Nombre del Plato:</label>
-                        <input type="text" class="form-control" id="agregarEditarComida">
-                        <label for="agregarEditarComida">Descripcion:</label>
-                        <textarea class="form-control" rows="3"></textarea>
-                    </div>
+                        <label for="nombrePlato">Nombre del Plato (<span style="color:red">*</span>):</label>
+                         @Html.TextBoxFor(m => m._nombrePlato, null, new { @class = "form-control", @placeholder = "Pasta Carbonara", @id = "nombrePlato" })
+                        <label for="descripcionPlato">Descripcion (<span style="color:red">*</span>):</label>
+                        @Html.TextAreaFor(m => m._descripcionPlato,'0','0', new { @class = "form-control", @placeholder = "Descripcion del Plato", @id = "descripcionPlato" })
+                         </div>
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -35,16 +41,46 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-12">
-                        <label for="agregarEditarComida">Tipo:</label>
-                        <select class="form-control" id="idcomida">
-                            <option>Comida</option>
-                            <option>Bebida</option>
-                        </select>
-                        <label for="agregarEditarComidao">Estatus:</label>
-                        <select class="form-control" id="idcomida">
-                            <option>Disponible</option>
-                            <option>No Disponible</option>
-                        </select>
+                        <label for="tipoPlato">Tipo (<span style="color:red">*</span>):</label>
+                        @{
+                                List<SelectListItem> _tipoPlato = new List<SelectListItem>();
+                                _tipoPlato.Add(new SelectListItem
+                                {
+                                    Text = "Seleccione Uno",
+                                    Value = "Seleccione uno"
+                                });
+                                _tipoPlato.Add(new SelectListItem
+                                     {
+                                         Text = "Comida",
+                                         Value = "Comida"
+                                     });
+                                _tipoPlato.Add(new SelectListItem
+                                     {
+                                         Text = "Bebida",
+                                         Value = "Bebida",
+                                     });
+                            }
+                            @Html.DropDownListFor(m => m._tipoPlato, _tipoPlato, new { @class = "form-control", @placeholder = "Tipo ", @id = "tipoPlato" })
+                        <label for="estatusPlato">Estatus (<span style="color:red">*</span>):</label>
+                            @{
+                                List<SelectListItem> _estatusPlato = new List<SelectListItem>();
+                                _estatusPlato.Add(new SelectListItem
+                                {
+                                    Text = "Seleccione Uno",
+                                    Value = "Seleccione uno"
+                                });
+                                _estatusPlato.Add(new SelectListItem
+                                     {
+                                         Text = "Disponible",
+                                         Value = "Disponible"
+                                     });
+                                _estatusPlato.Add(new SelectListItem
+                                     {
+                                         Text = "No Disponible",
+                                         Value = "No Disponible",
+                                     });
+                            }
+                            @Html.DropDownListFor(m => m._estatusPlato, _estatusPlato, new { @class = "form-control", @placeholder = "Estatus", @id = "estatusPlato" })
                     </div>
                 </div>
                 <!-- /.box-body -->
@@ -56,7 +92,31 @@
     <!-- Botón Guardar -->
     <div>&nbsp;</div>
     <div class="col-md-12" style="margin-top:10px;">
-        <button type="button" id="save_vehicle" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+        <button type="button" id="aceptarPlato" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
     </div>
 
-</div>
+   @* <script>
+        $("#aceptarPlato").click(function (e) {
+            console.log("hola!");
+            e.preventDefault();
+            var form = $("#formGuardarPlato");
+            $.ajax({
+                url: "gestion_comida_vuelo/guardarPlato",
+                data: form.serialize(),
+                type: 'POST',
+                success: function (data) {
+                    alert("Se guardo");
+                    $('#formGuardarPlato')[0].reset();
+                }
+                , error: function (xhr, textStatus, exceptionThrown) {
+                    //muestro el texto del error
+                    alert(xhr.responseText);
+                }
+            });
+        });
+    </script>*@
+
+
+    </div>
+}
+

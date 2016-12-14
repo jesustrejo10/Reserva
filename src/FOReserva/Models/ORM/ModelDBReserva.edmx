@@ -9,21 +9,57 @@
           <Parameter Name="id_reserva" Type="int" Mode="In" />
           <Parameter Name="estado" Type="int" Mode="In" />
         </Function>
+        <Function Name="M20_BuscarHotelesPorCiudad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_ciudad" Type="int" Mode="In" />
+          <Parameter Name="cantidad_dias" Type="int" Mode="In" />
+          <Parameter Name="fecha_llegada" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="M20_ConflictosReservaHabitacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="hot_id" Type="int" Mode="In" />
+          <Parameter Name="cantidad_dias" Type="int" Mode="In" />
+          <Parameter Name="fecha_llegada" Type="datetime" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="rha_fk_hot_id" Type="int" Nullable="false" />
+                <Property Name="rha_habitacion" Type="int" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <Function Name="M20_DetalleReservaHabitacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_reserva" Type="int" Mode="In" />
+        </Function>
+        <Function Name="M20_GenerarReservaHabitacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="hot_id" Type="int" Mode="In" />
+          <Parameter Name="usu_id" Type="int" Mode="In" />
+          <Parameter Name="cantidad_dias" Type="int" Mode="In" />
+          <Parameter Name="fecha_llegada" Type="datetime" Mode="In" />
         </Function>
         <Function Name="M20_GuardarReservaHabitacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_reserva" Type="int" Mode="In" />
           <Parameter Name="habitacion" Type="int" Mode="In" />
           <Parameter Name="cantidad_dias" Type="int" Mode="In" />
-          <Parameter Name="fecha_reservada" Type="datetime" Mode="In" />
+          <Parameter Name="fecha_llegada" Type="datetime" Mode="In" />
           <Parameter Name="hot_id" Type="int" Mode="In" />
           <Parameter Name="usu_id" Type="int" Mode="In" />
           <Parameter Name="estado" Type="int" Mode="In" />
         </Function>
+        <Function Name="M20_HabitacionesByHotel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="hot_id" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="hot_id" Type="int" Nullable="false" />
+                <Property Name="habitacion" Type="int" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <Function Name="M20_HotelHistorialReservaHabitacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_hotel" Type="int" Mode="In" />
         </Function>
+        <Function Name="M20_ObtenerCiudades" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="M20_UsuarioHistorialReservaHabitacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_usuario" Type="int" Mode="In" />
         </Function>
@@ -33,19 +69,46 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBReservaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="DBReserva" annotation:LazyLoadingEnabled="true" >
+        <ComplexType Name="M20_ConflictosReservaHabitacion_Result">
+          <Property Name="rha_fk_hot_id" Type="Int32" Nullable="false" />
+          <Property Name="rha_habitacion" Type="Int32" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="M20_HabitacionesByHotel_Result">
+          <Property Name="hot_id" Type="Int32" Nullable="false" />
+          <Property Name="habitacion" Type="Int32" Nullable="false" />
+        </ComplexType>
+        <EntityContainer Name="DBReserva" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="M20_ConflictosReservaHabitacion" IsComposable="true" ReturnType="Collection(DBReservaModel.M20_ConflictosReservaHabitacion_Result)">
+            <Parameter Name="hot_id" Mode="In" Type="Int32" />
+            <Parameter Name="cantidad_dias" Mode="In" Type="Int32" />
+            <Parameter Name="fecha_llegada" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="M20_HabitacionesByHotel" IsComposable="true" ReturnType="Collection(DBReservaModel.M20_HabitacionesByHotel_Result)">
+            <Parameter Name="hot_id" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="M20_ActualizarEstadoReservaHabitacion" ReturnType="Collection(DBReservaModel.M20_ActualizarEstadoReservaHabitacion_Result)">
             <Parameter Name="id_reserva" Mode="In" Type="Int32" />
             <Parameter Name="estado" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="M20_BuscarHotelesPorCiudad" ReturnType="Collection(DBReservaModel.M20_BuscarHotelesPorCiudad_Result)">
+            <Parameter Name="id_ciudad" Mode="In" Type="Int32" />
+            <Parameter Name="cantidad_dias" Mode="In" Type="Int32" />
+            <Parameter Name="fecha_llegada" Mode="In" Type="DateTime" />
+          </FunctionImport>
           <FunctionImport Name="M20_DetalleReservaHabitacion" ReturnType="Collection(DBReservaModel.M20_DetalleReservaHabitacion_Result)">
             <Parameter Name="id_reserva" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="M20_GenerarReservaHabitacion" ReturnType="Collection(DBReservaModel.M20_GenerarReservaHabitacion_Result)">
+            <Parameter Name="hot_id" Mode="In" Type="Int32" />
+            <Parameter Name="usu_id" Mode="In" Type="Int32" />
+            <Parameter Name="cantidad_dias" Mode="In" Type="Int32" />
+            <Parameter Name="fecha_llegada" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="M20_GuardarReservaHabitacion" ReturnType="Collection(DBReservaModel.M20_GuardarReservaHabitacion_Result)">
             <Parameter Name="id_reserva" Mode="In" Type="Int32" />
             <Parameter Name="habitacion" Mode="In" Type="Int32" />
             <Parameter Name="cantidad_dias" Mode="In" Type="Int32" />
-            <Parameter Name="fecha_reservada" Mode="In" Type="DateTime" />
+            <Parameter Name="fecha_llegada" Mode="In" Type="DateTime" />
             <Parameter Name="hot_id" Mode="In" Type="Int32" />
             <Parameter Name="usu_id" Mode="In" Type="Int32" />
             <Parameter Name="estado" Mode="In" Type="Int32" />
@@ -53,6 +116,7 @@
           <FunctionImport Name="M20_HotelHistorialReservaHabitacion" ReturnType="Collection(DBReservaModel.M20_HotelHistorialReservaHabitacion_Result)">
             <Parameter Name="id_hotel" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="M20_ObtenerCiudades" ReturnType="Collection(DBReservaModel.M20_ObtenerCiudades_Result)" />
           <FunctionImport Name="M20_UsuarioHistorialReservaHabitacion" ReturnType="Collection(DBReservaModel.M20_UsuarioHistorialReservaHabitacion_Result)">
             <Parameter Name="id_usuario" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -61,6 +125,13 @@
           <Property Type="Int32" Name="Estatus" Nullable="true" />
           <Property Type="String" Name="Mensaje" Nullable="true" />
           <Property Type="Int32" Name="Referencia" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="M20_BuscarHotelesPorCiudad_Result">
+          <Property Type="Int32" Name="hot_id" Nullable="false" />
+          <Property Type="String" Name="hot_nombre" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="hot_email" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="hot_fk_ciudad" Nullable="true" />
+          <Property Type="Int32" Name="hot_cantidad_habitaciones_disponible" Nullable="true" />
         </ComplexType>
         <ComplexType Name="M20_DetalleReservaHabitacion_Result">
           <Property Type="Int32" Name="hot_id" Nullable="false" />
@@ -73,6 +144,11 @@
           <Property Type="Int32" Name="rha_cantidad_dias" Nullable="false" />
           <Property Type="DateTime" Name="rha_fecha_partida" Nullable="true" Precision="23" />
           <Property Type="Int32" Name="rha_estado" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="M20_GenerarReservaHabitacion_Result">
+          <Property Type="Int32" Name="Estatus" Nullable="true" />
+          <Property Type="String" Name="Mensaje" Nullable="true" />
+          <Property Type="Int32" Name="Referencia" Nullable="true" />
         </ComplexType>
         <ComplexType Name="M20_GuardarReservaHabitacion_Result">
           <Property Type="Int32" Name="Estatus" Nullable="true" />
@@ -91,6 +167,10 @@
           <Property Type="DateTime" Name="rha_fecha_partida" Nullable="true" Precision="23" />
           <Property Type="Int32" Name="rha_estado" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="M20_ObtenerCiudades_Result">
+          <Property Type="Int32" Name="lug_id" Nullable="false" />
+          <Property Type="String" Name="lug_nombre" Nullable="false" MaxLength="50" />
+        </ComplexType>
         <ComplexType Name="M20_UsuarioHistorialReservaHabitacion_Result">
           <Property Type="Int32" Name="hot_id" Nullable="false" />
           <Property Type="String" Name="hot_nombre" Nullable="false" MaxLength="60" />
@@ -108,13 +188,40 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DBReservaModelStoreContainer" CdmEntityContainer="DBReserva" >
+        <EntityContainerMapping StorageEntityContainer="DBReservaModelStoreContainer" CdmEntityContainer="DBReserva">
+          <FunctionImportMapping FunctionName="DBReservaModel.Store.M20_ConflictosReservaHabitacion" FunctionImportName="M20_ConflictosReservaHabitacion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBReservaModel.M20_ConflictosReservaHabitacion_Result">
+                <ScalarProperty Name="rha_fk_hot_id" ColumnName="rha_fk_hot_id" />
+                <ScalarProperty Name="rha_habitacion" ColumnName="rha_habitacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="DBReservaModel.Store.M20_HabitacionesByHotel" FunctionImportName="M20_HabitacionesByHotel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBReservaModel.M20_HabitacionesByHotel_Result">
+                <ScalarProperty Name="hot_id" ColumnName="hot_id" />
+                <ScalarProperty Name="habitacion" ColumnName="habitacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="M20_ActualizarEstadoReservaHabitacion" FunctionName="DBReservaModel.Store.M20_ActualizarEstadoReservaHabitacion">
             <ResultMapping>
               <ComplexTypeMapping TypeName="DBReservaModel.M20_ActualizarEstadoReservaHabitacion_Result">
                 <ScalarProperty Name="Estatus" ColumnName="Estatus" />
                 <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
                 <ScalarProperty Name="Referencia" ColumnName="Referencia" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="M20_BuscarHotelesPorCiudad" FunctionName="DBReservaModel.Store.M20_BuscarHotelesPorCiudad">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBReservaModel.M20_BuscarHotelesPorCiudad_Result">
+                <ScalarProperty Name="hot_id" ColumnName="hot_id" />
+                <ScalarProperty Name="hot_nombre" ColumnName="hot_nombre" />
+                <ScalarProperty Name="hot_email" ColumnName="hot_email" />
+                <ScalarProperty Name="hot_fk_ciudad" ColumnName="hot_fk_ciudad" />
+                <ScalarProperty Name="hot_cantidad_habitaciones_disponible" ColumnName="hot_cantidad_habitaciones_disponible" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -131,6 +238,15 @@
                 <ScalarProperty Name="rha_cantidad_dias" ColumnName="rha_cantidad_dias" />
                 <ScalarProperty Name="rha_fecha_partida" ColumnName="rha_fecha_partida" />
                 <ScalarProperty Name="rha_estado" ColumnName="rha_estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="M20_GenerarReservaHabitacion" FunctionName="DBReservaModel.Store.M20_GenerarReservaHabitacion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBReservaModel.M20_GenerarReservaHabitacion_Result">
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -156,6 +272,14 @@
                 <ScalarProperty Name="rha_cantidad_dias" ColumnName="rha_cantidad_dias" />
                 <ScalarProperty Name="rha_fecha_partida" ColumnName="rha_fecha_partida" />
                 <ScalarProperty Name="rha_estado" ColumnName="rha_estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="M20_ObtenerCiudades" FunctionName="DBReservaModel.Store.M20_ObtenerCiudades">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBReservaModel.M20_ObtenerCiudades_Result">
+                <ScalarProperty Name="lug_id" ColumnName="lug_id" />
+                <ScalarProperty Name="lug_nombre" ColumnName="lug_nombre" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -192,7 +316,7 @@
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
