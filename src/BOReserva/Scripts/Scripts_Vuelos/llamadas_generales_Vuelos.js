@@ -12,8 +12,13 @@ $("#agregarVuelo").click(function (e) {
             alert("Se guardo el vuelo exitosamente");
             $('formGuardarVuelo')[0].reset();
         }
+        , error: function (xhr, textStatus, exceptionThrown) {
+            alert(xhr.responseText);
+        }
     });
 });
+
+
 
 //evento para cargar los destinos disponibles segun el origen seleccionado en la vista CREAR
 $("#ciudadO").change(function () {
