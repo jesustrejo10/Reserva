@@ -734,5 +734,38 @@ namespace BOReserva.Servicio.Servicio_Vuelos
                 //return null;
             }
         }
+        public Boolean MActivarVuelo(String CodigoVuelo)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                SqlCommand cmd = new SqlCommand("M04_ActivarVuelo", conexion);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add("@CodigoVuelo", System.Data.SqlDbType.VarChar, 100);
+                cmd.Parameters["@CodigoVuelo"].Value = CodigoVuelo;
+
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                //cierro el lector
+                dr.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                throw e;
+                //return null;
+            }
+            catch (Exception e)
+            {
+                throw e;
+                //return null;
+            }
+        }
     }
 }
