@@ -767,5 +767,48 @@ namespace BOReserva.Servicio.Servicio_Vuelos
                 //return null;
             }
         }
+
+        public int codVueloUnico(String codVuelo)
+        {
+            bool verdad = false;
+            int i = 0;
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "SELECT * FROM Vuelo WHERE vue_codigo = '" + codVuelo + "'";
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        String retorno = reader[0].ToString();
+                        verdad = retorno.Equals(codVuelo.ToUpper());
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                if (verdad == true)
+                {
+                    i = 1;
+                }
+                if (verdad == false)
+                {
+                    i = 0;
+                }
+                return i;
+            }
+            catch (SqlException e)
+            {
+                throw e;
+                //return null;
+            }
+            catch (Exception e)
+            {
+                throw e;
+                //return null;
+            }
+        }
+
     }
 }

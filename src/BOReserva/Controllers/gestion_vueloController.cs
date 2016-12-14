@@ -311,7 +311,7 @@ namespace BOReserva.Controllers
         public JsonResult guardarVuelo(CCrear_Vuelo model)
         {
             if ((model._matriculaAvion == null) || (model._codigoVuelo == null) || (model._ciudadOrigen == null)
-                || (model._ciudadesDestino == null) || (model._statusVuelo == null) || (model._fechaDespegue == null) || (model._horaDespegue == null))
+                || (model._ciudadDestino == null) || (model._statusVuelo == null) || (model._fechaDespegue == null) || (model._horaDespegue == null))
             {
                 //Creo el codigo de error de respuesta
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
@@ -321,15 +321,15 @@ namespace BOReserva.Controllers
                 return Json(error);
             }
 
-            if ((model._fechaAterrizaje == null) || (model._horaAterrizaje == null))
-            {
-                //Creo el codigo de error de respuesta
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                //Agrego mi error
-                String error = "Error en el calculo de la fecha de aterrizaje. Por favor intente nuevamente y complete los campos obligatorios";
-                //Retorno el error
-                return Json(error);
-            }
+        //    if ((model._fechaAterrizaje == null) || (model._horaAterrizaje == null))
+        //    {
+        //        //Creo el codigo de error de respuesta
+        //        Response.StatusCode = (int)HttpStatusCode.BadRequest;
+        //        //Agrego mi error
+        //        String error = "Error en el calculo de la fecha de aterrizaje. Por favor intente nuevamente y complete los campos obligatorios";
+        //        //Retorno el error
+        //        return Json(error);
+        //    }
 
 
             string resultadoFechaAterrizaje = "";
@@ -344,8 +344,7 @@ namespace BOReserva.Controllers
             String horaDespegue = model._horaDespegue;
             String matriculaAvion = model._matriculaAvion;
             String statusAvion = model._statusVuelo;
-            String fechaAterrizaje = model._fechaAterrizaje;
-            String horaAterrizaje = model._horaAterrizaje;
+
 
             //convierto fecha y hora en formato que acepte la BD
             resultadoFechaDespegue = "" + fechaDespegue + " " + horaDespegue;
@@ -391,10 +390,8 @@ namespace BOReserva.Controllers
             string fecha = "";
             manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
 
-            if ((model._fechaAterrizaje == null) || (model._horaAterrizaje == null))
+            if ((fechaDes == null) || (horaDes == null))
             {
-                //Creo el codigo de error de respuesta
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 //Agrego mi error
                 String error = "Error en el calculo de la fecha de aterrizaje. Por favor intente nuevamente y complete los campos obligatorios";
                 //Retorno el error
@@ -541,6 +538,14 @@ namespace BOReserva.Controllers
 
             return null;
         }
+
+        [HttpPost]
+        public ActionResult revisarCodVuelo(String codigoVuelo)
+        {
+            manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
+            int Registrada = sql.codVueloUnico(codigoVuelo);
+            return Json(Registrada);
+        } 
 
     }
 
