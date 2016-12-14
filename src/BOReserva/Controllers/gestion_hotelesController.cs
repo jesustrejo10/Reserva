@@ -15,11 +15,10 @@ namespace BOReserva.Controllers
         // GET: gestion_hoteles
         public ActionResult M09_GestionHoteles_Crear()
         {
-            CHotel crear = new CHotel() {
+            CHotel crear = new CHotel()
+            {
                 _listapaises = new List<SelectListItem>(pais())
-             };
-
-            //ViewData["pais"] = pais();
+            };
 
             return PartialView(crear);
         }
@@ -29,23 +28,35 @@ namespace BOReserva.Controllers
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: gestion_hoteles
-        public ActionResult M09_GestionHoteles_ModificarHotel()
-        {
-            CGestionHoteles_EditarHotel modificar = new CGestionHoteles_EditarHotel();
-            return PartialView(modificar);
-        }
-
         [HttpPost]
         public JsonResult editarhotel(CGestionHoteles_EditarHotel modificar)
         {
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: gestion_hoteles
-        public ActionResult M09_GestionHoteles_Desactivar()
+        /// <summary>
+        /// Metodo para que el Hotel NO este disponible para su uso
+        /// </summary>
+        /// <param name="id"> int </param>
+        /// <returns> JsonResult booleano conteniendo la respuesta del sistema</returns>
+        [HttpPost]
+        public JsonResult deshabilitarHotel(int id)
         {
-            return PartialView();
+            CManejadorSQL_Hoteles sql = new CManejadorSQL_Hoteles();
+            Boolean resultado = sql.deshabilitarHotelBD(id);
+            if (resultado)
+            {
+                return (Json(true, JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)  
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error  
+                String error = "Error en la base de datos";
+                //Retorno el error  
+                return Json(error);
+            }
         }
 
         public static List<SelectListItem> pais()
@@ -69,7 +80,8 @@ namespace BOReserva.Controllers
                     _pais.Add(new SelectListItem
                     {
                         Text = paises[i].ToString(),
-                        Value = paises[i].ToString()
+                        Value =paises[i].ToString()
+
                     });
                     i++;
                 }
@@ -159,6 +171,48 @@ namespace BOReserva.Controllers
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 String error = "Error insertando en la BD";
+                return Json(error);
+            }
+        }
+
+        /// <summary>
+        /// Metodo que carga la vista para modificar el Hotel 
+        /// </summary>
+        /// <param name="id"> int </param>
+        /// <returns> ActionResult con los datos de un Hotel </returns>
+        public ActionResult ConsultarHotel(int id)
+        {
+            Debug.WriteLine("CONSULTAR HOTEL CONTROLLER");
+            CManejadorSQL_Hoteles sql = new CManejadorSQL_Hoteles();
+            CHotel hotel = new CHotel();
+            hotel = sql.consultarHotel(id);
+            Debug.WriteLine(hotel._nombre);
+            CGestionHoteles_EditarHotel modelo = new CGestionHoteles_EditarHotel(hotel);
+            Debug.WriteLine(modelo._nombre);
+            Debug.WriteLine("MODELO EITAR HOTEL");
+            return PartialView("M09_GestionHoteles_ModificarHotel", modelo);
+        }
+
+        /// Metodo para que el hotel este disponible para su uso
+        /// </summary>
+        /// <param name="id"> int </param>
+        /// <returns> JsonResult booleano conteniendo la respuesta del sistema </returns>
+        [HttpPost]
+        public JsonResult habilitarHotel(int id)
+        {
+            CManejadorSQL_Hoteles sql = new CManejadorSQL_Hoteles();
+            Boolean resultado = sql.activarHotelBD(id);
+            if (resultado)
+            {
+                return (Json(true, JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)  
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error  
+                String error = "Error en la base de datos";
+                //Retorno el error  
                 return Json(error);
             }
         }

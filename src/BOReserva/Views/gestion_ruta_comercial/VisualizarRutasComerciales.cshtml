@@ -1,5 +1,7 @@
 ﻿@model  List<BOReserva.Models.gestion_ruta_comercial.CRuta>
 
+<script src="~/Scripts\Scripts_Rutas\llamadas_generales_ruta.js"></script>
+
 <div class="row">
     <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
 
@@ -29,7 +31,7 @@
                                                         //String disponibilidad;
                                                         //if (item._disponibilidad == 1) { disponibilidad = "Disponible"; } else { disponibilidad = "No disponible"; }
 
-                                                        <tr>
+                                                        <tr id="@item.idRuta">
                                                             <td>@item.tipoRuta</td>
                                                             <td>@item.origenRuta</td>
                                                             <td>@item.destinoRuta</td>
@@ -37,14 +39,14 @@
                                                             <td>@item.estadoRuta</td>
                                                             <td>
                                                                 <a href="#"> <i class="fa fa-eye clasedeprueba"></i></a>
-                                                                <a href="#"><i class="fa fa-gear modificar"></i></a>
+                                                                <a href="#"><i class="fa fa-pencil m03EditarRutas"></i></a>
                                                             </td>
                                                             </tr>
                                                     }
                                                 }
                                                 catch
                                                 {
-
+                                                    
                                                 }
 <tfoot>
                         <tr>
@@ -111,7 +113,7 @@
 
 
 
-<script>
+@*<script>
 
     $("#VisualizarRutasComerciales").click(function (e) {
         e.preventDefault();
@@ -135,7 +137,7 @@
             });
 
     });
-    $("#m03EditarRutas").click(function (e) {
+    $(".m03EditarRutas").click(function (e) {
         e.preventDefault();
         alert("Botón Editar");
         $.ajax({
@@ -170,6 +172,6 @@
         });
     });
 
-</script>
+</script>*@
 
 

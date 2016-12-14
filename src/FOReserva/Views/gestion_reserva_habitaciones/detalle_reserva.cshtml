@@ -88,7 +88,6 @@
 
         function cancelarReserva(boton, rha_id) {
             $(".bs-example-modal-sm").modal('hide');
-            console.log("lol")
             var reserva = JSON.parse('@Html.Raw(@Newtonsoft.Json.JsonConvert.SerializeObject(reserva))');
 
             $.ajax({
@@ -96,7 +95,6 @@
                 data: reserva,
                 type: 'POST',
                 success: function (proceso) {
-                    console.log(0)
                     if (proceso.CulminoCorrectamente) {
                         alert(proceso.Mensaje);
                         cargarContenido('#CI', 'get', '/gestion_reserva_habitaciones/mis_reservas', null, this)

@@ -1,170 +1,215 @@
 ﻿@model FOReserva.Models.Diarios.CDiarioModel
 
-<div class="heading-title">
-    <h3><span>Diarios de Viaje</span></h3>
-</div>
-@*<div class="row text-center">
-        <a href="#"><button type="button" class="btn btn-default btn-lg"><i class="fa fa-book"></i>Crear un Diario de Viaje</button></a>
-    </div>*@
+@{
+    ViewBag.Title = "Crear un Diario de Viaje";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
+}
+<div class="heading-title">
+    <h3><span>Crear un Diario de Viaje</span></h3>
+</div>
 
 <div class="panel">
-
     <!-- Formulario para la creacion de un diario-->
-
-    @using (Html.BeginForm("crear_Diarios", "gestion_diarios", null, FormMethod.Post, new { @id = "formCrearDiarios", @class = "form-horizontal" }))
+    @using (Html.BeginForm("gestion_diarios_insertar", "gestion_diarios", null, FormMethod.Post, new { @id = "formCrearDiarios", @class = "form-horizontal" }))
     {
-  
-			<section>
-				<div class="container">
+        <!--Inputs para otros campos no editables-->
 
-					<div class="row">
+        <input type="hidden" name="id_diario" id="id_diario" value="0" />
+        <input type="hidden" name="id_diario" id="id_diario" value="0" />
 
+        <div class="panel panel-default">
+            <fieldset>
+                <!--Panel Izquierdo-->
+                <div class="panel panel-default col-sm-6">
+                    <!--    Nombre que describe el diario de viaje -->
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-12 col-sm-12">
+                                <label>
+                                    Título del Diario de Viaje
+                                    <small class="text-muted">Requerido</small>
+                                </label>
+                                @Html.TextBoxFor(m => m.Nombre, null, new { @class = "form-control required", @placeholder = "Ejemplo: Ecuador Único", @id = "nombre" })
+                            </div>
+                        </div>
+                    </div>
 
-						<div class="col-md-12 col-sm-12">
+                    <!--    Calificacion del viajero -->
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-12 col-sm-12">
+                                <label>
+                                    Calificación de usuario
+                                    <small class="text-muted">Requerido</small>
+                                </label>
+                                <select name="contact[position]" class="form-control pointer required">
+                                    <option value="">--- Seleccionar ---</option>
+                                    <option value="0">0 Estrellas</option>
+                                    <option value="1">1 Estrella</option>
+                                    <option value="2">2 Estrellas</option>
+                                    <option value="3">3 Estrellas</option>
+                                    <option value="4">4 Estrellas</option>
+                                    <option value="5">5 Estrellas</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
 
+                    <!-- Selector de fechas DateRangePicker-->
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label>
+                                    Inicio y Fin del viaje
+                                    <small class="text-muted">Requerido</small>
+                                </label>
+                                <input id="inifin" type="text" class="form-control" name="inifin" value="" readonly />
+                            </div>
 
-							<!-- Useful Elements -->
-							<div class="panel panel-default">
-								<div class="panel-heading panel-heading-transparent">
-									<h2 class="panel-title">Nuevo Diario de Viaje</h2>
-								</div>
+                            <!--Script para el selector de fechas-->
+                            <script type="text/javascript">
+                                    //función para inicializar y dar formato
+                                    $('input[name="inifin"]').daterangepicker({
+                                        locale: {
+                                            format: "DD/MM/YYYY",
+                                            applyLabel: "Aplicar",
+                                            cancelLabel: "Cancelar",
+                                            fromLabel: "Desde",
+                                            toLabel: "Hasta",
+                                            linkedCalendars: false,
+                                            showDropdowns: true,
+                                            autoApply: true,
+                                            daysOfWeek: [
+                                                "Do",
+                                                "Lu",
+                                                "Ma",
+                                                "Mi",
+                                                "Ju",
+                                                "Vi",
+                                                "Sa"
+                                            ],
+                                            monthNames: [
+                                                "Enero",
+                                                "Febrero",
+                                                "Marzo",
+                                                "Abril",
+                                                "Mayo",
+                                                "Junio",
+                                                "Julio",
+                                                "Agosto",
+                                                "Septiembre",
+                                                "Octubre",
+                                                "Noviembre",
+                                                "Diciembre"
+                                            ],
+                                            firstDay: 1
+                                        },
+                                        minDate: "31/12/2000",
+                                        maxDate: "@DateTime.Today.ToString("dd/MM/yyyy")",
+                                        startDate: "@DateTime.Today.ToString("dd/MM/yyyy")",
+                                        endDate: "@DateTime.Today.ToString("dd/MM/yyyy")"
 
-								<div class="panel-body">
+                                    });
+                                    //Actualizar los input que se usarán en el modelo
+                                    $("#inifin").on('hide.daterangepicker', function () {
+                                        var drp = $('#inifin').data('daterangepicker');
+                                        $("#f_ini").val(drp.startDate.format('YYYY-MM-DD')),
+                                        $("#f_fin").val(drp.endDate.format('YYYY-MM-DD'))
+                                    });
 
-									<form class="validate" action="php/contact.php" method="post" enctype="multipart/form-data" data-success="Sent! Thank you!" data-toastr-position="top-right">
-										<fieldset>
-											<!-- required [php action request] -->
-											<input type="hidden" name="action" value="contact_send" />
+                            </script>
 
-											<div class="row">
-												<div class="form-group">
-													<div class="col-md-12 col-sm-12">
-														<label>Título del Diario de Viaje *</label>
-													
-                                                        @Html.TextBoxFor(m => m.Nombre, null, new { @class = "form-control", @placeholder = "Ejemplo: Ecuador Unico", @id = "nombre" })
-													</div>
-												</div>
-											</div>
+                            <!--Inputs ocultos de fechas para el formulario-->
+                            @Html.TextBoxFor(m => m.Fecha_ini, null, new { @id = "f_ini", @class = "form-control required", @name = "diario[f_inicio]", @type = "hidden", @value = "" })
+                            @Html.TextBoxFor(m => m.Fecha_fin, null, new { @id = "f_fin", @class = "form-control required", @name = "diario[f_fin]", @type = "hidden", @value = "" })
+                        </div>
+                    </div>
 
-											<div class="row">
-												<div class="form-group">
-													<div class="col-md-6 col-sm-6">
-														<label>Nombre *</label>
-                                                        <!-- DUDA AQUI  -->
-                                                        @Html.TextBoxFor(m => m, null, new { @class = "form-control", @placeholder = "Nombre", @id = "descripcion" })
-													</div>
-													<div class="col-md-6 col-sm-6">
-														<label>Apellido *</label>
-														<input type="text" name="contact[last_name]" value="" class="form-control required">
-													</div>
-												</div>
-											</div>
+                    <!-- Descripción -->
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-12 col-sm-12">
+                                <label>
+                                    Contenido
+                                    <small class="text-muted">Requerido</small>
+                                </label>
+                                <!-- textarea -->
+                                <div class="fancy-form">
+                                    <textarea rows="6" id="contenido" class="form-control required" maxlength="5000" placeholder="Escriba su experiencia..."></textarea>
 
-											<div class="row">
-												<div class="form-group">
-													<div class="col-md-12 col-sm-12">
-														<label>Calificación de usuario *</label>
-														<select name="contact[position]" class="form-control pointer required">
-                                              
-															<option value="">--- Seleccionar ---</option>
-															<option value="0">0 Estrellas</option>
-															<option value="1">1 Estrella</option>
-															<option value="2">2 Estrellas</option>
-															<option value="3">3 Estrellas</option>
-															<option value="4">4 Estrellas</option>
-															<option value="5">5 Estrellas</option>
-														</select>
-													</div>
-												</div>
-											</div>
+                                    <i class="fa fa-comments"><!-- icon --></i>
 
-											<div class="row">
-												<div class="form-group">
-													<div class="col-md-6 col-sm-6">
-														<label>Fecha de inicio del viaje *</label>
-                                                        @Html.TextBoxFor(m => m.Fecha_ini, null, new { @class = "form-control", @type = "date", @id = "fechaini", @placeholder = "Fecha", min = "today", max = "2019-12-31" })
-													</div>
-													<div class="col-md-6 col-sm-6">
-														<label>Fecha de culminación del viaje *</label>
-														@Html.TextBoxFor(m => m.Fecha_fin, null, new { @class = "form-control", @type = "date", @id = "fechafin", @placeholder = "Fecha", min = "today", max = "2019-12-31" })
-													</div>
-												</div>
-											</div>
+                                    <span class="fancy-hint size-11 text-muted">
+                                        <strong>Atención:</strong> Se permiten 5000 caracteres
+                                        <span class="pull-right">
+                                            <span id="contenido_feedback"></span>
+                                        </span>
+                                    </span>
+                                    <script>
+                                            $(document).ready(function () {
+                                                var text_max = 5000;
+                                                $('#contenido_feedback').html(text_max + ' caracteres restantes');
 
-											<div class="row">
-												<div class="form-group">
-													<div class="col-md-12 col-sm-12">
-														<label>Contenido *</label>
-														<!-- textarea -->
-														<div class="fancy-form">
+                                                $('#contenido').keyup(function () {
+                                                    var text_length = $('#contenido').val().length;
+                                                    var text_remaining = text_max - text_length;
 
-                                                            @Html.TextBoxFor(m => m.Descripcion, null, new { @class = "form-control", @placeholder = "Describa aqui su experiencia", @id = "descripcion" })
-															<i class="fa fa-comments"><!-- icon --></i>
+                                                    $('#contenido_feedback').html(text_remaining + ' caracteres restantes');
+                                                });
+                                            });
+                                    </script>
 
-															<span class="fancy-hint size-11 text-muted">
-																<strong>Atención:</strong> Se permiten 5000 palabras
-																<span class="pull-right">
-																	<span id="textarea-words-info">0/200</span> Palabras
-																</span>
-															</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Panel Derecho-->
+                <div class="panel panel-default col-sm-6">
+                    <!-- Agregar Fotografías-->
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label>
+                                    Cargar Fotos
+                                    <small class="text-muted">Opcional</small>
+                                </label>
 
-														</div>
-													</div>
-												</div>
-											</div>
+                                <!-- Carga de fotos -->
+                                <div class="fancy-file-upload fancy-file-primary">
+                                    <i class="fa fa-upload"></i>
+                                    <input type="file" class="form-control" name="contact[attachment]" onchange="jQuery(this).next('input').val(this.value);" />
+                                    <input type="text" class="form-control" placeholder="No hay archivo seleccionado" readonly="" />
+                                    <span class="button">Elegir Archivo</span>
+                                </div>
+                                <div class="fancy-file-upload fancy-file-primary">
+                                    <i class="fa fa-upload"></i>
+                                    <input type="file" class="form-control" name="contact[attachment]" onchange="jQuery(this).next('input').val(this.value);" />
+                                    <input type="text" class="form-control" placeholder="no hay archivo seleccionado" readonly="" />
+                                    <span class="button">Elegir Archivo</span>
+                                </div>
+                                <div class="fancy-file-upload fancy-file-primary">
+                                    <i class="fa fa-upload"></i>
+                                    <input type="file" class="form-control" name="contact[attachment]" onchange="jQuery(this).next('input').val(this.value);" />
+                                    <input type="text" class="form-control" placeholder="no hay archivo seleccionado" readonly="" />
+                                    <span class="button">Elegir Archivo</span>
+                                </div>
+                                <small class="text-muted block">Tamaño máximo por archivo: 5Mb (jpg/png/bmp)</small>
 
-											
-
-											<div class="row">
-												<div class="form-group">
-													<div class="col-md-12">
-														<label>
-															Cargar Fotos 
-															<small class="text-muted">Opcional</small>
-														</label>
-
-														<!-- custom file upload -->
-														<div class="fancy-file-upload fancy-file-primary">
-															<i class="fa fa-upload"></i>
-															<input type="file" class="form-control" name="contact[attachment]" onchange="jQuery(this).next('input').val(this.value);" />
-															<input type="text" class="form-control" placeholder="no hay archivo seleccionado" readonly="" />
-															<span class="button">Elegir Archivo</span>
-														</div>
-														<small class="text-muted block">Tamaño máximo por archivo: 5Mb (jpg/png/bmp)</small>
-
-													</div>
-												</div>
-											</div>
-
-										</fieldset>
-
-										<div class="row">
-											<div class="col-md-12">
-												<button type="submit" class="btn btn-3d btn-teal btn-xlg btn-block margin-top-30">
-													Cargar Diario de Viaje
-													<span class="block font-lato">Gracias por compartirnos tu experiencia!</span>
-												</button>
-											</div>
-										</div>
-
-									</form>
-
-
-								</div>
-
-								
-							</div>
-							<!-- /Useful Elements -->
-
-						</div>
-
-					</div>
-
-				</div>
-			</section>
-
-
-        
-              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="row">
+                <div class="row text-center col-sm-12">
+                    <button type="submit" id="nuevoDiario" class="btn btn-primary">Publicar Diario de Viaje</button>
+                </div>
+            </div>
+            <div class="row">
+                <hr/>
+            </div>
+        </div>
+    }<!--Fin Form-->
 </div>

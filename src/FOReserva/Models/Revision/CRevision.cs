@@ -9,11 +9,11 @@ namespace FOReserva.Models.Revision
     /// Clase Revision
     /// </summary>
     public class CRevision : BaseEntity
-    {
-        private DateTime _fecha;
-        private string _mensaje;        
+    {        
+        private int _puntuacion;
+        private string _mensaje;
         private int _tipo;
-        private int _puntuacion;        
+        private DateTime _fecha;
         private CRevisionValoracion _valoracion;
 
         /// <summary>
@@ -23,18 +23,18 @@ namespace FOReserva.Models.Revision
         /// <param name="name">Name Base</param>
         /// <param name="fecha">Fecha Revision</param>
         /// <param name="mensaje">Mensaje en Revision</param>
-        /// <param name="tipo">Tipo Revision</param>
         /// <param name="puntuacion">Puntuacion de la Revision</param>
         /// <param name="positivo">Valoraciones positivos</param>
-        /// <param name="negativo">Valoraciones negativas</param>        
-        public CRevision(int id, string name, DateTime fecha, string mensaje, int tipo, int puntuacion, int positivo, int negativo)
+        /// <param name="negativo">Valoraciones negativas</param>
+        /// <param name="tipo">Tipo Revision</param>
+        public CRevision(int id, string name, DateTime fecha, string mensaje, int puntuacion, int tipo)
             : base(id, name)
         {
              this._fecha = fecha;
              this._mensaje = mensaje;
+             this._puntuacion = puntuacion;
              this._tipo = tipo;
-             this._puntuacion = puntuacion;             
-             this._valoracion = new CRevisionValoracion(positivo, negativo);
+             this._valoracion = new CRevisionValoracion(0,0);
         }
 
         /// <summary>

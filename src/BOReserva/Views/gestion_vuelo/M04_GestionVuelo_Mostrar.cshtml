@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿<!-- Indico que para esta vista, M04_GestionVuelo_Crear, utilizare el modelo Models/gestion_vuelo/CGestionVueloModificar-->
 @model BOReserva.Models.gestion_vuelo.CVuelo
 
@@ -84,3 +85,91 @@
         </div>
     </div>
 
+=======
+﻿<!-- Indico que para esta vista, M04_GestionVuelo_Crear, utilizare el modelo Models/gestion_vuelo/CGestionVueloModificar-->
+@model BOReserva.Models.gestion_vuelo.CVuelo
+
+<script src="~/Scripts/Scripts_Vuelos/llamadas_generales_Vuelos.js"></script>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h1>
+                Gestion de vuelos
+                <small>Mostrar un vuelo</small>
+            </h1>
+            <div class="box box-solid">
+                <div class="box box-solid">
+                    <div class="box-tools pull-right">
+                    </div>
+                </div>
+                @*/.box-header*@
+                <div class="box-body">
+                    <div class="row">
+                        <!-- TEXTBOX CODIGO DE VUELO -->
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label style="display:block; margin-left:auto; margin-right:auto;">Codigo de vuelo :</label>
+                                @Html.TextBoxFor(m => m._codigoVuelo, null, new { @class = "form-control", @disabled = "disabled" })
+                            </div>
+                        </div>
+                        <!-- FIN CODIGO DE VUELO -->
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <!-- TEXTBOX CIUDAD ORIGEN -->
+                            <div class="col-xs-6">
+                                <label> Ciudad Origen :</label>
+                                @Html.TextBoxFor(m => m._ciudadOrigen, null, new { @class = "form-control", @disabled = "disabled" })
+                            </div>
+                            <!-- FIN CIUDAD ORIGEN -->
+                            <!-- TEXTBOX CIUDAD DESTINO  -->
+                            <div class="col-xs-6">
+                                <label> Ciudad Destino :</label>
+                                @Html.TextBoxFor(m => m._ciudadDestino, null, new { @class = "form-control", @disabled = "disabled" })
+                            </div>
+                            <!-- FIN CIUDAD DESTINO  -->
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <!-- TEXTBOX FECHA DESPEGUE  -->
+                                <label> Fecha Despegue :</label>
+                                @Html.TextBoxFor(m => m._fechaDespegue, null, new { @class = "form-control", @disabled = "disabled" })
+                            </div>
+                        </div>
+                            <!-- FIN FECHA DESPEGUE -->
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <!-- TEXTBOX MATRICULA AVION -->
+                                <label>Matricula Avion :</label>
+                                @Html.TextBoxFor(m => m._matriculaAvion, null, new { @class = "form-control", @disabled = "disabled" })
+                            </div>
+                                <!-- FIN  MATRICULA AVION -->
+                            <div class="col-xs-6">
+                                <!-- TEXTBOX STATUS-->
+                                <label> Estado vuelo :</label>
+                                @Html.TextBoxFor(m => m._statusVuelo, null, new { @class = "form-control", @disabled = "disabled" })
+                                <!-- FIN STATUS -->
+                            </div>
+                            <!-- FIN STATUS  -->
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <!-- DATE FECHA ATERRIZAJE  -->
+                                <label> Fecha Aterrizaje :</label>
+                                @Html.TextBoxFor(m => m._fechaAterrizaje, null, new { @class = "form-control", @disabled = "disabled" })
+                            </div>
+                            <!-- FIN FECHA ATERRIZAJE  -->
+                            <div>&nbsp;</div>
+                            <div class="col-md-12" style="margin-top:10px;">
+                                <button type="button" id="return" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Regresar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+>>>>>>> Develop

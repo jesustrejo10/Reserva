@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿.pv10 {
     padding: 10px 0
 }
@@ -241,5 +242,8 @@
     overflow-y: scroll; 
     border: 1px solid #ddd
 }
-.itiRuta{display: inline-block;
-    width: 90px;}
+.itiRuta{
+    display: inline-block;
+    width: 90px;
+
+}

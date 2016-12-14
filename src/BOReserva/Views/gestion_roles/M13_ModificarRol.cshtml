@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿<!-- Indico que para esta vista, M13_AgregarRol, utilizare el modelo Models/gestion_roles/CRoles-->
 @model List<BOReserva.Models.gestion_roles.CRoles>
 
@@ -170,3 +171,177 @@
     </style>
 
 
+=======
+﻿<!-- Indico que para esta vista, M13_AgregarRol, utilizare el modelo Models/gestion_roles/CRoles-->
+@model List<BOReserva.Models.gestion_roles.CRoles>
+
+<!--Indico que, estoy abriendo un formulario que tendra como accion del submit, el controlador gestion_roles"Controller",
+    utilizara el metodo agregarRol
+    le pasara la informacion mediante un POST-->
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-success">
+            <div class="box-header ">
+                <h1 class="box-title"> Modificar Rol</h1>
+                <div class="box-tools pull-right">
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-12" style="margin-top:10px;">
+                        <div class="col-xs-6">
+
+                            <div class="col-xs-6">
+                                <label for="modelo">Modulo</label><br>
+                                <select name="lista_modulos" id="listamodulos">
+                                    <option selected disabled hidden style='display: none' value=''></option>
+                                    <!-- muestra todos los modulos existentes para crear asignarle permisos-->
+                                    @foreach (var item2 in Model)
+                                    {
+                                        <option value="@item2.Nombre_rol">
+                                            @item2.Nombre_rol
+                                        </option>
+                                    }
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-xs-12" style="margin-top:10px;">
+                                <label for="Acceso">Tendra acceso a:</label>
+                                <!--se llena por javascript los permisos que del modulo cada vez que se cambia la seleccion de un elemento aqui -->
+
+                                <div class="checkbox" id="listaPermisos">
+                                    @foreach (var item in Model)
+                                    {
+                                        foreach (var item3 in item.Permisos)
+                                        {
+                                            <option value="@item3.Nombre">@item3.Nombre</option>
+
+                                        }
+                                    }
+                                </div>
+
+
+
+
+
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <button type="submit" id="agreagarrol" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <script>
+        //Accion del boton agregarrol
+        $("#agreagarrol").click(function (e) {
+            e.preventDefault();
+            var form = $("#formagreagarrol");
+            var permisos = [$("#nombre_rol").val()];
+            //agrega el nombre del rol
+            jQuery.each($("input[type='checkbox']"), function (i) {
+                if (this.checked && this.value != "on") {
+                    permisos.push(this.value);
+                }
+                //agrega cada permiso en particular
+            });
+            $.ajax({
+                url: "gestion_roles/agregarrol",
+                data: form.serialize(),
+                type: 'POST',
+                success: function (data) {
+                    alert("Se guardo");
+                    $('#formagreagarrol')[0].reset();
+                }
+
+            });
+            var data = {
+                json: JSON.stringify(permisos),
+            };
+            console.log(data);
+            $.ajax({
+                type: 'post',
+                dataType: 'json',
+                url: 'gestion_roles/asignarpermisos',
+                data: data,
+                success: function (data) {
+                    alert("Se asignaron los permisos");
+
+                },
+                failure: function (response) {
+                    alert("No se pudo asignar permisos");
+
+                }
+                //envia al metodo en la url los parametros para ser almacenados en BD
+            });
+
+        });
+
+        $("#listamodulos").change(function (e) {
+            e.preventDefault();
+            var modulo = $("#listamodulos option:selected").text();
+            //agarra el elemento seleccionado
+            var json = {
+                mod: modulo,
+            };
+            var data = {
+                json: JSON.stringify(json),
+            };
+            $.ajax({
+                type: 'post',
+                dataType: 'json',
+                url: 'gestion_roles/Consultarpermisos',
+                data: data,
+                success: cargadorPermisos,
+                //realiza el metodo especificado en el url llevando como valor el elemento seleccionadoy devuelve las accesibilidades del modulo
+                failure: function (response) {
+                    alert("Error buscando permisos");
+
+                }
+
+            });
+            function cargadorPermisos(response) {
+
+                var permisos = response;
+                var container = $('#listaPermisos');
+                container.empty();
+                //se vacia la lista de permisos para colocar los nuevos seleccionados
+                jQuery.each(permisos, function (i) {
+                    var inputs = container.find('input');
+                    var id = inputs.length + 1;
+                    $('<input />', { type: 'checkbox', id: 'permiso' + id, value: permisos[i] }).appendTo(container);
+                    $('<label />', { 'for': 'permiso' + id, text: permisos[i] }).appendTo(container);
+                    $('<br>').appendTo(container)
+                });
+                //se agrega por cada elemento dentro de la lista un checkbox y un label con el valor del permiso
+            }
+
+        });
+
+
+    </script>
+
+    <style>
+        #listamodulos {
+            padding: 6px;
+            border-radius: 0;
+            width: 100%;
+            border-color: lightgray;
+        }
+
+            #listamodulos:active {
+                border-color: gray;
+            }
+    </style>
+
+
+>>>>>>> Develop
