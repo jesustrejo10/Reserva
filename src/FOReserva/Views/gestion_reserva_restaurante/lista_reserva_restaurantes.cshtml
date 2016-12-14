@@ -78,11 +78,10 @@
                 <h4 class="modal-title">Eliminar Reserva</h4>
             </div>
             <div class="modal-body">
-                <p>Error al eliminar la reserva intente mas tarde</p>
+                <p>Error al eliminar la reserva, por favor intente mas tarde</p>
             </div>
             <div class="modal-footer">
                 <button type="button" id="" value="0" class="btn btn-success" data-dismiss="modal">Aceptar</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
             </div>
         </div>
 
@@ -91,6 +90,7 @@
 
 <!-- MODAL PARA MODIFICAR RESERVA -->
 <div id="ModalModificar" class="modal fade" role="dialog">
+
 </div>
 <!-- MODAL ERROR EDITAR RESERVA -->
 <div id="ModalErrorEditar" class="modal fade" role="dialog">
@@ -100,14 +100,14 @@
         <div class="modal-content">
             <div class="modal-header bg-danger modal-header-danger">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Eliminar Reserva</h4>
+                <h4 class="modal-title">Editar Reserva</h4>
             </div>
             <div class="modal-body">
-                <p>Error al editar la reserva intente mas tarde</p>
+                <p>Error al editar la reserva, por favor intente mas tarde</p>
             </div>
             <div class="modal-footer">
                 <button type="button" id="" value="0" class="btn btn-success" data-dismiss="modal">Aceptar</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+               
             </div>
         </div>
 
@@ -154,7 +154,6 @@
         //clear errors
         $(".error").hide();
         $("#name_client").removeClass("has-error");
-        $("#reserv_hour").removeClass("has-error");
         $("#reserv_date").removeClass("has-error");
 
 
@@ -163,13 +162,6 @@
 
         $.post(url, function (data) {
             $("#ModalModificar").html(data);
-            //var id_fila = '#' + $(this).attr('value');
-            //$('#aceptar_modificar').attr('value', $(this).attr('value'));
-            //$('#name_client').attr('value', $(id_fila).children('.reserv_name').attr('value'));
-            //$('#reserv_date').attr('value', $(id_fila).children('.reserv_date').attr('value'));
-            //$('#reserv_hour').attr('value', $(id_fila).children('.reserv_time').attr('value'));
-            //$('#number_person').attr('value', $(id_fila).children('.reserv_count').attr('value'));
-
             $('#ModalModificar').modal('show');
         })
     });
@@ -178,23 +170,7 @@
 
 
 <script>
-    // DATE PICKER
-
-    $(document).ready(function () {
-        $('.datepicker').datepicker({
-            orientation: "bottom",
-            format: 'yyyy-mm-dd',
-            startDate: '0d',
-            endDate: '+2m'
-        });
-        $('#datepicker').datepicker();
-
-        $('#datepicker').on("changeDate", function () {
-            $('#my_hidden_input').val(
-                $('#datepicker').datepicker('getFormattedDate')
-            );
-        });
-    });
+   
     // CUSTOM VALIDATOR
     $(document).on('click', '#aceptar_modificar', function (e) {
         e.preventDefault();
@@ -202,19 +178,19 @@
         //clear errors
         $(".error").hide();
         $("#name_client").removeClass("has-error");
-        $("#reserv_hour").removeClass("has-error");
         $("#reserv_date").removeClass("has-error");
 
         //find errors
         var nombre = $("#name_client").val();
-        var hora = $("#reserv_hour").val();
+      
         var fecha = $("#reserv_date").prop("value");
         var caracteres = /^[a-zA-Z\s]+$/;
 
         var win = true;
 
+        //VALIDACION PARA EL NOMBRE
         if (nombre == "" || nombre == undefined || !nombre.match(caracteres)) {
-         
+        
             if (nombre == "" || nombre == undefined) {
                 $("#name_client").addClass("has-error");
                 $("#name_empty").fadeIn();
@@ -226,16 +202,9 @@
                 win = false;
             }
         }
-        if (hora == 0) {
-            var win = false;
-            $("#reserv_hour").addClass("has-error");
-            $("#hora_null").fadeIn();
-            win = false;
-        }
-
+        //VALIDACION PARA FECHA
         if (fecha == null || fecha == 0) {
-            alert(fecha);
-            var win = false;
+         
             $("#reserv_date").addClass("has-error");
             $("#fecha_null").fadeIn();
             win = false;
@@ -261,6 +230,7 @@
 	        });
         }
         else
+            $('#ModalErrorEditar').modal('show');
             return false;
 
     })

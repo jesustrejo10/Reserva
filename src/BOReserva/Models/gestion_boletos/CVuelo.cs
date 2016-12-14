@@ -25,7 +25,7 @@ namespace BOReserva.Models.gestion_boletos
             _ruta = new CRuta(ruta_id, ori, dest, nombre1, nombre2);
         }
 
-        public CVuelo() { 
+        public CVuelo() {
         }
     }
 }

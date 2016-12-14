@@ -429,5 +429,76 @@ namespace BOReserva.Models.gestion_usuarios
             }
             return true;
         }
+
+        /// <summary>
+        /// Método para consultar id del ultimo usuario registrado
+        /// </summary>
+        /// <returns>Retorna el id del ultimo usuario que se registro en la base de datos/returns>
+        public int ultimoUsuarioID()
+        {
+            DataTable resultado;
+            int usuID = 0;
+            try
+            {
+                resultado = EjecutarStoredProcedureTuplas(RecursoUsuario.ConsultarIDUltimo);
+                Conectar();
+                foreach (DataRow row in resultado.Rows)
+                {
+                    usuID = int.Parse(row[RecursoUsuario.IDUsuario].ToString());
+                }
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.ArgumentoInvalido, ex);
+            }
+            catch (FormatException ex)
+            {
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.FormatoInvalido, ex);
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 2627)
+                    throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.Error_Email_Existe, ex);
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.BDError, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.OtroError, ex);
+            }
+            return usuID;
+        }
+        public int contarUsuario()
+        {
+            DataTable resultado;
+            int usunum = 0;
+            try
+            {
+                resultado = EjecutarStoredProcedureTuplas(RecursoUsuario.ContarUsuario);
+                Conectar();
+                foreach (DataRow row in resultado.Rows)
+                {
+                    usunum = int.Parse(row[RecursoUsuario.NumUsuario].ToString());
+                }
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.ArgumentoInvalido, ex);
+            }
+            catch (FormatException ex)
+            {
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.FormatoInvalido, ex);
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 2627)
+                    throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.Error_Email_Existe, ex);
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.BDError, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.OtroError, ex);
+            }
+            return usunum;
+        }
     }
 }

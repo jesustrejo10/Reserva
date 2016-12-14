@@ -12,13 +12,13 @@ namespace BOReserva.Controllers
     public class gestion_check_inController : Controller
     {
 
-        // GET 
+        // GET
         public ActionResult M05_CheckIn()
         {
             return PartialView();
         }
 
-        // GET 
+        // GET
         public ActionResult M05_RegistroEquipaje()
         {
             return PartialView();
@@ -48,7 +48,7 @@ namespace BOReserva.Controllers
             return PartialView("M05_VerPasesAbordaje", listaboletos);
         }
 
-        // GET 
+        // GET
         public ActionResult M05_VerBoletosCheckIn()
         {
             return PartialView();
@@ -85,7 +85,7 @@ namespace BOReserva.Controllers
             CBoleto boleto = buscarboleto.M05MostrarBoletoBD(id);
 
             String hola = boleto._tipoBoleto;
-            
+
             CDetalleBoleto bolView = new CDetalleBoleto(boleto);
             return PartialView(bolView);
             //return PartialView();
@@ -114,7 +114,7 @@ namespace BOReserva.Controllers
 
                 List<CVuelo> lista = modificar.M05ListarVuelosBoleto(model._bol_id);
 
-                // PRIMERO VEO SI ES IDA O IDA Y VUELTA 
+                // PRIMERO VEO SI ES IDA O IDA Y VUELTA
                 int ida_vuelta = modificar.MBuscarIdaVuelta(model._bol_id);
                 // EL BOLETO ES IDA 1
                 // EL BOLETO ES IDA Y VUELTA 2
@@ -207,7 +207,7 @@ namespace BOReserva.Controllers
                 //Retorno el error
                 return Json(error);
             }
-            
+
             manejadorSQL_Check sql = new manejadorSQL_Check();
             // VEO SI YA TIENE LA MAXIMA CANTIDAD DE MALETAS INSERTADAS
             int num_maletas = sql.MConteoMaletas(pase);
@@ -255,7 +255,7 @@ namespace BOReserva.Controllers
         }
 
 
-        // GET 
+        // GET
         public ActionResult M05_Equipaje()
         {
             return PartialView();

@@ -21,8 +21,8 @@ namespace BOReserva.Servicio.Servicio_Boletos
         //Procedimiento del Modulo 5 para buscar las ciudades
         public List<CLugar> buscarCiudades()
         {
-            List<CLugar> ciudades = new List<CLugar>(); 
-           
+            List<CLugar> ciudades = new List<CLugar>();
+
             string queryString = "SELECT [lug_id] ,[lug_nombre] FROM [dbo].[Lugar] WHERE [lug_tipo_lugar] = 'ciudad'";
 
             using (SqlConnection connection = new SqlConnection(stringDeConexion))
@@ -40,8 +40,8 @@ namespace BOReserva.Servicio.Servicio_Boletos
                             var text = reader.GetString(reader.GetOrdinal("lug_nombre"));
                             var id = reader.GetInt32(reader.GetOrdinal("lug_id"));
                             ciudades.Add(new CLugar(id.ToString(), text));
-                        } 
-                     
+                        }
+
                     }
                 }
             }
@@ -63,8 +63,8 @@ namespace BOReserva.Servicio.Servicio_Boletos
                     {
                         var fecha = reader["bol_fecha"];
                         DateTime fechaboleto = Convert.ToDateTime(fecha).Date;
-                        CBoleto boleto = new CBoleto(Int32.Parse(reader["bol_id"].ToString()),Int32.Parse(reader["bol_ida_vuelta"].ToString()), 
-                                               Int32.Parse(reader["bol_escala"].ToString()), double.Parse(reader["bol_costo"].ToString()), 
+                        CBoleto boleto = new CBoleto(Int32.Parse(reader["bol_id"].ToString()),Int32.Parse(reader["bol_ida_vuelta"].ToString()),
+                                               Int32.Parse(reader["bol_escala"].ToString()), double.Parse(reader["bol_costo"].ToString()),
                                                MBuscarnombreciudad(Int32.Parse(reader["bol_fk_lugar_origen"].ToString())),
                                                MBuscarnombreciudad(Int32.Parse(reader["bol_fk_lugar_destino"].ToString())),
                                                MBuscarnombrepasajero(Int32.Parse(reader["bol_fk_pasajero"].ToString())),
@@ -99,7 +99,7 @@ namespace BOReserva.Servicio.Servicio_Boletos
                 {
                     while (reader.Read())
                     {
-                        _ciudad = reader[0].ToString(); 
+                        _ciudad = reader[0].ToString();
                     }
                 }
                 cmd.Dispose();
@@ -223,7 +223,7 @@ namespace BOReserva.Servicio.Servicio_Boletos
 
         public int M05AgregarBoletoBD(CBoleto boleto)
         {
-                return 0;         
+                return 0;
         }
 
        public int M05ModificarDatosPasajero(CPasajero pasajero)
@@ -306,9 +306,9 @@ namespace BOReserva.Servicio.Servicio_Boletos
 
                        CRuta rut = MBuscarDatosRuta(Int32.Parse(reader["vue_fk_ruta"].ToString()));
                        vuelo = new CVuelo(id, reader.GetDateTime(reader.GetOrdinal("vue_fecha_despegue")),
-                                          reader.GetDateTime(reader.GetOrdinal("vue_fecha_aterrizaje")), 
+                                          reader.GetDateTime(reader.GetOrdinal("vue_fecha_aterrizaje")),
                                           Int32.Parse(reader["vue_fk_ruta"].ToString()),
-                                          rut._origen, rut._destino, rut._nomOrigen,rut._nomDestino);   
+                                          rut._origen, rut._destino, rut._nomOrigen,rut._nomDestino);
                    }
                }
                cmd.Dispose();

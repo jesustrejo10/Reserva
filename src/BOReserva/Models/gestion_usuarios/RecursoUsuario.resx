@@ -145,6 +145,14 @@
     <value>M12_ConsultarUsuarioID</value>
     <comment>Recupera la información de un usuario a partir de su ID</comment>
   </data>
+  <data name="ConsultarIDUltimo" xml:space="preserve">
+    <value>M12_ConsultarUltimoUsuarioID</value>
+    <comment>Stored Procedure para obtener el id del ultimo usuario agregado</comment>
+  </data>
+  <data name="ContarUsuario" xml:space="preserve">
+    <value>M12_ContarUsuario</value>
+    <comment>Stored Procedure Cuenta cuantos usuarios hay en la base de datos</comment>
+  </data>
   <data name="CorreoUsuario" xml:space="preserve">
     <value>correo</value>
     <comment>Correo del usuario</comment>
@@ -216,6 +224,10 @@
   <data name="NombreUsuario" xml:space="preserve">
     <value>nombre</value>
     <comment>Nombre del usuario</comment>
+  </data>
+  <data name="NumUsuario" xml:space="preserve">
+    <value>usunum</value>
+    <comment>Numero de Usuarios</comment>
   </data>
   <data name="OtroError" xml:space="preserve">
     <value>Error al momento de realizar la operacion</value>

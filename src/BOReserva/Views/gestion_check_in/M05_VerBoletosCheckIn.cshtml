@@ -24,7 +24,7 @@
                             foreach (var item in Model)
                             {
                                 String fecha_emi = @item._fechaBoleto.Day + "/" + @item._fechaBoleto.Month + "/" + @item._fechaBoleto.Year;
-                
+
                                 <tr id="@item._id">
                                     <td>@item._id</td>
                                     <td>@fecha_emi</td>
@@ -77,4 +77,3 @@
 
     });
 </script>
-

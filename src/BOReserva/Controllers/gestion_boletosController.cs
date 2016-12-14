@@ -63,7 +63,7 @@ namespace BOReserva.Controllers
         {
             //SE BUSCAN TODOS LOS BOLETOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
              manejadorSQL_Boletos buscarboletos = new manejadorSQL_Boletos();
-             List<CBoleto> listaboletos = buscarboletos.M05ListarBoletosBD();  
+             List<CBoleto> listaboletos = buscarboletos.M05ListarBoletosBD();
             return PartialView(listaboletos);
         }
 
@@ -72,7 +72,7 @@ namespace BOReserva.Controllers
         {
             //BUSCA EL BOLETO A MOSTRAR
             manejadorSQL_Boletos buscarboleto = new manejadorSQL_Boletos();
-            CBoleto boleto = buscarboleto.M05MostrarBoletoBD(id); 
+            CBoleto boleto = buscarboleto.M05MostrarBoletoBD(id);
 
             // EL/LOS VUELOS DEL BOLETO ESTAN EN UNA LISTA
             // NO SOPORTA ESCALAS
@@ -145,10 +145,10 @@ namespace BOReserva.Controllers
             String fechaLlegVuelta = model._fechaAterrizajeVuelta;
             String horaSalIda = model._horaDespegueIda;
             String horaSalVuelta = model._horaDespegueVuelta;
-            String horaLlegIda = model._horaAterrizajeIda; 
-            String horaLlegVuelta = model._horaAterrizajeVuelta; 
+            String horaLlegIda = model._horaAterrizajeIda;
+            String horaLlegVuelta = model._horaAterrizajeVuelta;
             double monto = model._monto;
-            String tipoBoleto = model._tipoBoleto; 
+            String tipoBoleto = model._tipoBoleto;
             String nombre = model._nombre;
             String apellido = model._apellido;
             int pasaporte = model._pasaporte;
@@ -253,7 +253,7 @@ namespace BOReserva.Controllers
             int compara = String.Compare(tipoOri, tipo);
             if (compara != 0) {
 
-                // PRIMERO VEO SI ES IDA O IDA Y VUELTA 
+                // PRIMERO VEO SI ES IDA O IDA Y VUELTA
                 int ida_vuelta = modificar. MBuscarIdaVuelta(model._bol_id);
                 // EL BOLETO ES IDA 1
                 // EL BOLETO ES IDA Y VUELTA 2
@@ -304,4 +304,3 @@ namespace BOReserva.Controllers
 
     }
 }
-
