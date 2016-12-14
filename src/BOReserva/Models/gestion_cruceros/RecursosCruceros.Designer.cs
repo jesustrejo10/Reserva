@@ -88,6 +88,15 @@ namespace BOReserva.Models.gestion_cruceros {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a M24_AgregarItinerario.
+        /// </summary>
+        internal static string AgregarItinerario {
+            get {
+                return ResourceManager.GetString("AgregarItinerario", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a M24_CambiarEstatusCabina.
         /// </summary>
         internal static string CambioEstatusCabinas {

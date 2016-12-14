@@ -31,6 +31,19 @@ namespace BOReserva.Controllers
             //return PartialView();
         }
 
+        public ActionResult M24_AgregarItinerario()
+        {
+            ConexionBD cbd = new ConexionBD();
+            VistaListaCrucero vlc = new VistaListaCrucero();
+            //VistaListaRuta vlr = new VistaListaRuta(); Hacer VistaListaRuta
+            CGestion_itinerario itinerario = new CGestion_itinerario() { itinerario = new List<CGestion_itinerario>() };
+            vlc.cruceros = cbd.listarCruceros();
+            ViewBag.ShowDropDown = new SelectList(vlc.cruceros, "_idCrucero", "_nombreCrucero");
+            return PartialView("M24_AgregarItinerario", itinerario);
+            //return PartialView();
+            // falta poner la ruta
+        }
+
         public ActionResult M24_AgregarCamarote()
         {
             ConexionBD cbd = new ConexionBD();
@@ -115,6 +128,21 @@ namespace BOReserva.Controllers
 
             CGestion_camarote camarote = new CGestion_camarote(_cantidadCama, _tipoCama, _fkCabina);
             camarote.AgregarCamarote(camarote);
+
+            return (Json(true, JsonRequestBehavior.AllowGet));
+        }
+
+
+        [HttpPost]
+        public JsonResult guardarItinerario(CGestion_itinerario model)
+        {
+            DateTime _fechaInicio = model._fechaInicio;
+            DateTime _fechaFin = model._fechaFin;
+            int _fkCrucero = model._fkCrucero;
+            int _fkRuta = model._fkRuta;
+
+            CGestion_itinerario itinerario = new CGestion_itinerario(_fechaInicio, _fechaFin, _fkCrucero, _fkRuta);
+            itinerario.AgregarItinerario(itinerario);
 
             return (Json(true, JsonRequestBehavior.AllowGet));
         }

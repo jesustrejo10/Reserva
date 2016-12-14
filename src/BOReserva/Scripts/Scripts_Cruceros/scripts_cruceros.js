@@ -56,3 +56,6 @@ $("#fk_id_crucero").change(function (e) {
         }
     });
 });
+
+
+

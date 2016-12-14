@@ -175,6 +175,22 @@ namespace BOReserva.Models.gestion_cruceros
             }
         }
 
+        public void insertarItinerario(CGestion_itinerario itinerario)
+        {
+            Conectar();
+            using (comando = new SqlCommand(RecursosCruceros.AgregarItinerario, conexion))
+            {
+                comando.CommandType = CommandType.StoredProcedure;
+
+                comando.Parameters.AddWithValue("@fecha_inicio", itinerario._fechaInicio);
+                comando.Parameters.AddWithValue("@fecha_fin", itinerario._fechaFin);
+                comando.Parameters.AddWithValue("@fk_crucero", itinerario._fkCrucero);
+                comando.Parameters.AddWithValue("@fk_ruta", itinerario._fkRuta);
+                conexion.Open();
+                comando.ExecuteNonQuery();
+            }
+        }
+
         public List<CGestion_cabina> listarCabinas(int idCrucero)
         {
             List<CGestion_cabina> listaCabinas = new List<CGestion_cabina>();
