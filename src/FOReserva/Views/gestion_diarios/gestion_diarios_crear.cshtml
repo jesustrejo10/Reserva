@@ -22,7 +22,7 @@
             <fieldset>
                 <!--Panel Izquierdo-->
                 <div class="panel panel-default col-sm-6">
-                    <!--    Nombre que describe el diario de viaje -->
+                    <!-- Nombre que describe el diario de viaje -->
                     <div class="row">
                         <div class="form-group">
                             <div class="col-md-12 col-sm-12">
@@ -35,15 +35,15 @@
                         </div>
                     </div>
 
-                    <!--    Calificacion del viajero -->
+                    <!-- Calificacion del viajero -->
                     <div class="row">
                         <div class="form-group">
-                            <div class="col-md-12 col-sm-12">
+                            <div class="col-md-12">
                                 <label>
                                     Calificación de usuario
                                     <small class="text-muted">Requerido</small>
                                 </label>
-                                <select name="contact[position]" class="form-control pointer required">
+                                <select name="contact[position]" class="col-md-12 form-control pointer required">
                                     <option value="">--- Seleccionar ---</option>
                                     <option value="0">0 Estrellas</option>
                                     <option value="1">1 Estrella</option>
@@ -55,7 +55,50 @@
                             </div>
                         </div>
                     </div>
+                                        
+                    <!-- Descripción -->
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-12 col-sm-12">
+                                <label>
+                                    Contenido
+                                    <small class="text-muted">Requerido</small>
+                                </label>
+                                <!-- textarea -->
+                                <div class="fancy-form">
+                                    <textarea rows="5" id="contenido" class="form-control required" maxlength="5000" placeholder="Escriba su experiencia..."></textarea>
 
+                                    <i class="fa fa-comments"><!-- icon --></i>
+
+                                    <span class="fancy-hint size-11 text-muted">
+                                        <strong>Atención:</strong> Se permiten 5000 caracteres
+                                        <span class="pull-right">
+                                            <span id="contenido_feedback"></span>
+                                        </span>
+                                    </span>
+                                    <!-- Script para el contador de carcteres -->
+                                    <script>
+                                            $(document).ready(function () {
+                                                var text_max = 5000;
+                                                $('#contenido_feedback').html(text_max + ' caracteres restantes');
+
+                                                $('#contenido').keyup(function () {
+                                                    var text_length = $('#contenido').val().length;
+                                                    var text_remaining = text_max - text_length;
+
+                                                    $('#contenido_feedback').html(text_remaining + ' caracteres restantes');
+                                                });
+                                            });
+                                    </script>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Panel Derecho-->
+                <div class="panel panel-default col-sm-6">
                     <!-- Selector de fechas DateRangePicker-->
                     <div class="row">
                         <div class="form-group">
@@ -125,48 +168,20 @@
                             @Html.TextBoxFor(m => m.Fecha_fin, null, new { @id = "f_fin", @class = "form-control required", @name = "diario[f_fin]", @type = "hidden", @value = "" })
                         </div>
                     </div>
-
-                    <!-- Descripción -->
+                    
+                    <!-- Elegir Destino -->
                     <div class="row">
                         <div class="form-group">
-                            <div class="col-md-12 col-sm-12">
+                            <div class="col-md-12">
                                 <label>
-                                    Contenido
+                                    Destino visitado
                                     <small class="text-muted">Requerido</small>
                                 </label>
-                                <!-- textarea -->
-                                <div class="fancy-form">
-                                    <textarea rows="6" id="contenido" class="form-control required" maxlength="5000" placeholder="Escriba su experiencia..."></textarea>
-
-                                    <i class="fa fa-comments"><!-- icon --></i>
-
-                                    <span class="fancy-hint size-11 text-muted">
-                                        <strong>Atención:</strong> Se permiten 5000 caracteres
-                                        <span class="pull-right">
-                                            <span id="contenido_feedback"></span>
-                                        </span>
-                                    </span>
-                                    <script>
-                                            $(document).ready(function () {
-                                                var text_max = 5000;
-                                                $('#contenido_feedback').html(text_max + ' caracteres restantes');
-
-                                                $('#contenido').keyup(function () {
-                                                    var text_length = $('#contenido').val().length;
-                                                    var text_remaining = text_max - text_length;
-
-                                                    $('#contenido_feedback').html(text_remaining + ' caracteres restantes');
-                                                });
-                                            });
-                                    </script>
-
-                                </div>
+                                @Html.DropDownListFor(m => m.Destino, Model.Lugares(), new { @class = "col-md-12 form-control pointer required", @id = "lugares" })
                             </div>
                         </div>
                     </div>
-                </div>
-                <!--Panel Derecho-->
-                <div class="panel panel-default col-sm-6">
+
                     <!-- Agregar Fotografías-->
                     <div class="row">
                         <div class="form-group">
@@ -212,4 +227,11 @@
             </div>
         </div>
     }<!--Fin Form-->
+    <script>
+        $("#formBuscarDiarios").on(function (e) {
+            e.preventDefault();
+            alert($("#formCrearDiarios").serialize);
+        }); //Evento general de submit (ej. presionar ENTER)
+
+    </script>
 </div>

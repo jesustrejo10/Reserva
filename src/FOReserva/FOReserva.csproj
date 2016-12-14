@@ -3137,6 +3137,7 @@
     <Content Include="Views\gestion_diarios\_CrearDiarioExito.cshtml" />
     <Content Include="Views\gestion_reserva_restaurante\_FailReservar.cshtml" />
     <Content Include="Views\gestion_revision\crear_revision_form.cshtml" />
+    <Content Include="Views\gestion_diarios\_CrearDiarioFallo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

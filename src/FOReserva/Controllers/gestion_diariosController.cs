@@ -63,6 +63,7 @@ namespace FOReserva.Controllers
             return PartialView(model);
         }
 
+        /* Llama al manejador para insertar y carga la vista resultante */
         [HttpPost]
         public ActionResult gestion_diarios_insertar(CDiarioModel nuevo_diario)
         {
@@ -71,7 +72,7 @@ namespace FOReserva.Controllers
             if(id_nuevo != -1){
                 return PartialView("_CrearDiarioExito");
             }
-            return PartialView("_CrearDiarioError");
+            return PartialView("_CrearDiarioFallo");
         }
 
         /* Dar Like */
