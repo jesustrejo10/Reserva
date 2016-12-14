@@ -10,7 +10,7 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h1 class="box-title" style="font-size:32px;"> Modificar autom&oacute;vil</h1>
+                    <h1 class="box-title" style="font-size:32px;"> Modificar automovil</h1>
                     <div class="box-tools pull-right">
                     </div>
                 </div>
@@ -19,7 +19,7 @@
                     <div class="row">
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
-                                <label for="placa">Placa del veh&iacute;culo</label>                               
+                                <label for="placa">Placa del vehiculo</label>                               
                                      @Html.TextBoxFor(m => m._matricula, null, new { @class = "form-control", @id = "vehi_modelo", @readonly = "readonly" })
                             </div>
                             <div class="col-xs-6">
@@ -35,7 +35,7 @@
                                 @Html.TextBoxFor(m => m._modelo, null, new { @class = "form-control", @placeholder = "Marca", @id = "vehi_modelo", @readonly = "readonly" })
                             </div>
                             <div class="col-xs-6">
-                                <label for="anio">A&ntilde;o de fabricaci&oacute;n</label>
+                                <label for="anio">A&ntilde;o de fabricaci&on</label>
                                 @Html.TextBoxFor(m => m._anio, null, new { @class = "form-control", @placeholder = "Placa", @id = "vehi_modelo",  @readonly = "readonly" })
                             </div>
                         </div>
@@ -101,7 +101,7 @@
                                 @Html.TextBoxFor(m => m._fecharegistro, null, new { @class = "form-control", @placeholder = "Kilometraje", @id = "vehi_registro", @readonly = "readonly" })
                             </div>
                             <div class="col-xs-6">
-                                <label for="">Pa&iacute;s(<span style="color:red">*</span>)</label>
+                                <label for="">Pais(<span style="color:red">*</span>)</label>
                                 @{
                                     List<SelectListItem> paises = BOReserva.Controllers.gestion_automovilesController.pais();
                                     if (paises.First().Text.Length > 15){
@@ -124,7 +124,7 @@
                                 </select>
                             </div>
                             <div class="col-xs-6">
-                                <label for="transmision">Transmisi&oacute;n</label>
+                                <label for="transmision">Transmision</label>
 
                                 @Html.TextBoxFor(m => m._transmision, null, new { @class = "form-control", @placeholder = "Transmision", @id = "vehi_transmision", @readonly = "readonly" })
                             </div>
@@ -225,7 +225,7 @@
             var url = '/gestion_automoviles/M08_VisualizarAutomoviles';
             var method = 'GET';
             var data = '';
-            alert("Espere un momento y será redirigido");
+            alert("Espere un momento y sera redirigido");
 
             $.ajax(
                 {

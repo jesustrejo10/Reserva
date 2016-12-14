@@ -6,14 +6,14 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title" style="font-size:32px;">Lista de Autom&oacute;viles</h3>
+                <h3 class="box-title" style="font-size:32px;">Lista de Automoviles</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>Matr&iacute;cula</th>
+                            <th>Matricula</th>
                             <th>Marca / Modelo</th>
                             <th>Clase / Capacidad</th>
                             <th>Tipo / Color </th>
@@ -52,12 +52,12 @@
                                 </tr>
                             }
                         }catch (Exception e){
-                            Response.Write("<script>alert('No hay vehículos para mostrar');</script>");
+                            Response.Write("<script>alert('No hay vehiculos para mostrar');</script>");
                         }
                         
                     <tfoot>
                         <tr>
-                            <th>Matr&iacute;cula</th>
+                            <th>Matricula</th>
                             <th>Marca / Modelo</th>
                             <th>Clase / Capacidad</th>
                             <th>Tipo / Color </th>
@@ -142,20 +142,20 @@
                 "info": true,
                 "autoWidth": true,
                 "language": {
-                    "lengthMenu": "Mostrando _MENU_ registros por página",
+                    "lengthMenu": "Mostrando _MENU_ registros por pagina",
                     "zeroRecords": "Sin registros disponibles",
                     "info": "Página _PAGE_ de _PAGES_",
                     "infoEmpty": "No hay registros disponibles",
                     "infoFiltered": "(filtered from _MAX_ total records)",
                     "infoPostFix":    "",
-                    "search":         "Buscar:",
+                    "search":         "Buscar: ",
                     "url":            "",
                     "infoThousands":  ",",
                     "loadingRecords": "Cargando...",
 
                     "paginate": {
                         "first":    "Primero",
-                        "last":     "Último",
+                        "last":     "Ultimo",
                         "next":     "Siguiente",
                         "previous": "Anterior"
                     }
@@ -263,14 +263,14 @@
 
                                     $("#contenido").empty();
                                     $("#contenido").append(data);
-                                    alert("Se elimino exitosamente el vehículo");
+                                    alert("Se elimino exitosamente el vehiculo");
                                 },
                                 error: function (jqXHR, textStatus, errorThrown) {
                                     alert(errorThrown);
                                 }
                             });
                     } else if (data.includes("Reserva_Automovil")){
-                        alert("No se puede eliminar este vehículo porque tiene una reserva");
+                        alert("No se puede eliminar este vehiculo porque tiene una reserva");
                     } else {
                         alert(data);
                     }
@@ -308,7 +308,7 @@
 
                                     $("#contenido").empty();
                                     $("#contenido").append(data);
-                                    alert("Se cambió exitosamente el estatus del vehículo");
+                                    alert("Se cambio exitosamente el estatus del vehiculo");
                                 },
                                 error: function (jqXHR, textStatus, errorThrown) {
                                     alert(errorThrown);
@@ -350,7 +350,7 @@
 
                                     $("#contenido").empty();
                                     $("#contenido").append(data);
-                                    alert("Se cambió exitosamente el estatus del vehículo");
+                                    alert("Se cambio exitosamente el estatus del vehiculo");
                                 },
                                 error: function (jqXHR, textStatus, errorThrown) {
                                     alert(errorThrown);
