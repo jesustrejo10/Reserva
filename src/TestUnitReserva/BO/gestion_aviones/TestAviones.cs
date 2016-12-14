@@ -33,7 +33,7 @@ namespace TestUnitReserva.BO.gestion_aviones
             Boolean resultadoconavion = prueba.insertarAvion(avion);
             Assert.AreEqual(resultadoconavion, true);
             //Aquí pruebo que el insertar avión no me deje agregar vacío
-            Boolean resultadoconnull = prueba.insertarAvion(null);
+            Boolean resultadoconnull = prueba.insertarPlato(null);
             Assert.AreEqual(resultadoconnull, false);
             //Pruebo que no me deje insertar una matrícula en null
             avion._matriculaAvion = null;
