@@ -256,9 +256,21 @@
     <Compile Include="Models\gestion_boletos\CBuscarVuelo.cs" />
     <Compile Include="Models\gestion_comida_vuelo\CAgregarComida.cs" />
     <Compile Include="Models\gestion_boletos\CLugar.cs" />
+    <Compile Include="Models\gestion_boletos\CModificarBoleto.cs" />
     <Compile Include="Models\gestion_boletos\CPasajero.cs" />
+    <Compile Include="Models\gestion_boletos\CRuta.cs" />
     <Compile Include="Models\gestion_boletos\CVisualizarBoleto.cs" />
     <Compile Include="Models\gestion_boletos\CVuelo.cs" />
+    <Compile Include="Models\gestion_check_in\CBoardingPass.cs" />
+    <Compile Include="Models\gestion_check_in\CBoleto.cs" />
+    <Compile Include="Models\gestion_check_in\CCheckIn.cs" />
+    <Compile Include="Models\gestion_check_in\CDetalleBoleto.cs" />
+    <Compile Include="Models\gestion_check_in\CEquipaje.cs" />
+    <Compile Include="Models\gestion_check_in\CLugar.cs" />
+    <Compile Include="Models\gestion_check_in\CPasajero.cs" />
+    <Compile Include="Models\gestion_check_in\CRuta.cs" />
+    <Compile Include="Models\gestion_check_in\CVisualizarBoleto.cs" />
+    <Compile Include="Models\gestion_check_in\CVuelo.cs" />
     <Compile Include="Models\gestion_comida_vuelo\CComida.cs" />
     <Compile Include="Models\gestion_comida_vuelo\CEditarComida.cs" />
     <Compile Include="Models\gestion_hoteles\CGestionHoteles_CrearHotel.cs" />
@@ -315,6 +327,7 @@
     <Compile Include="Servicio\manejadorSQL.cs" />
     <Compile Include="Servicio\Servicio_Vuelos\manejadorSQL_Vuelos.cs" />
     <Compile Include="Servicio\Servicio_Boletos\manejadorSQL_Boletos.cs" />
+    <Compile Include="Servicio\Servicio_Boletos\manejadorSQL_Check.cs" />
     <Compile Include="Servicio\Servicio_Hoteles\CManejadorSQL_Hoteles.cs" />
     <Compile Include="Servicio\Servicio_Rutas\CManejadorSQL_Rutas.cs" />
     <Compile Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx.cs">
@@ -514,11 +527,7 @@
     <Content Include="Scripts\Scripts_Automoviles\llamadas_comunes_automoviles.js" />
     <Content Include="Scripts\Scripts_Aviones\llamadas_generales.js" />
     <Content Include="Scripts\Scripts_Hoteles\editar_hotel.js" />
-    <Content Include="Scripts\Scripts_CheckIn\BoardingPass.js" />
     <Content Include="Scripts\Scripts_CheckIn\M05_CheckIn.js" />
-    <Content Include="Scripts\Scripts_CheckIn\M05_Equipaje.js" />
-    <Content Include="Scripts\Scripts_CheckIn\M05_VerBoletosCheckIn.js" />
-    <Content Include="Scripts\Scripts_CheckIn\M05_VerDetalleBoleto.js" />
     <Content Include="Scripts\Scripts_ComidaVuelo\llamadas_generales.js" />
     <Content Include="Scripts\Scripts_Hoteles\llamadas_generales_hoteles.js" />
     <Content Include="Scripts\Scripts_Vuelos\llamadas_generales_Vuelos.js" />
@@ -1485,6 +1494,9 @@
     <Content Include="Views\gestion_ofertas\M11_ModificarOferta.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_ModificarPaquete.cshtml" />
     <Content Include="Views\gestion_roles\M13_AgregarRol.cshtml" />
+    <Content Include="Views\gestion_boletos\M05_ModificarBoleto.cshtml" />
+    <Content Include="Views\gestion_check_in\M05_RegistroEquipaje.cshtml" />
+    <Content Include="Views\gestion_check_in\M05_VerPasesAbordaje.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_VisualizarComidas.cshtml" />
     <Content Include="Views\gestion_roles\M13_VisualizarRol.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_DetallePaquete.cshtml" />
@@ -1498,6 +1510,7 @@
     <Folder Include="Views\dist\js\pages\" />
     <Folder Include="Views\gestion_roles\css\" />
     <Folder Include="Views\gestion_roles\js\" />
+    <Folder Include="Views\Prueba\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap\css\bootstrap.css.map" />

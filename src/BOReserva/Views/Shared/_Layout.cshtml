@@ -44,7 +44,7 @@
     <![endif]-->
 
         <script src="../../Scripts/Scripts_Ingreso_Seguridad/Logout.js"></script>
-       
+
     </head>
 
 
@@ -66,9 +66,9 @@
                 <!-- Navbar Right Menu -->
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
-                     
-                      
-                    
+
+
+
                         <!-- MODULO 1 CIERRE DE SESIÓN Y NOMBRE DE USUARIO -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="/Content/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"> <span class="hidden-xs">@nombre @apellido</span> </a>
@@ -78,11 +78,11 @@
                                     <img src="/Content/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                                     <p> @nombre @apellido</p>
                                 </li>
-                            
-                               
+
+
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
-                                  
+
                                     <div class="pull-right"> @Html.ActionLink("Cerrar Sesion", "M01_Logout", "gestion_seguridad_ingreso",null, new { @class = "btn btn-default btn-flat"})  </div>
 
                                </li>
@@ -159,11 +159,25 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li id="m05VerReserva"><a href="#"><i class="fa fa-plus-square-o"></i>Crear</a></li>
-                            <li id="m05VisualizarBoletos"><a href="#"><i class="fa fa-eye"></i>Visualizar</a></li>
+                            <li id="m05VerReserva"><a href="#">Agregar</a></li>
+                            <li id="m05VisualizarBoletos"><a href="#">Visualizar</a></li>
                         </ul>
                     </li>
-                    <li id="m05CheckIn"><a href="#"><i class="fa fa-book"></i><span>Check in</span></a></li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-book"></i>
+                            <span>Check in</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="m05CheckIn"><a href="#">Pase Abordaje</a></li>
+                            <li id="m05RegistroEquipaje"><a href="#">Equipaje</a></li>
+                        </ul>
+                    </li>
+
                     <!-- FIN MODULO DE BOLETOS AEREOS Y CHECK-IN -->
                     <!-- MODULO DE COMIDA POR VUELO -->
                     <li class="treeview">
@@ -282,11 +296,11 @@
                             <li id="consultarhotel"><a href="#"><i class="fa fa-search"></i>Visualizar Hoteles</a></li>
                     <!-- MODULO DE BOLETOS AEREOS Y CHECK-IN -->
                 </ul>
-            
+
             </section>
             <!-- /.sidebar -->
         </aside>
-       
+
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -468,7 +482,7 @@
                 </div>
                 <!-- /.tab-pane -->
             </div>
-  
+
         <div class="control-sidebar-bg"></div>
     </div>
 
@@ -549,15 +563,11 @@
 
     <!--SCRIPTS PARA GESTION DE AVIONES-->
     <script type="text/javascript" src="@Url.Content("~/Scripts/Scripts_Aviones/llamadas_generales.js")"></script>
-    
+
     <!--SCRIPTS PARA GESTION DE CRUCEROS-->
     <link href="~/Content/M24_css/style_module.css" rel="stylesheet" />
 
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> Develop
 
     <!-- jQuery 2.2.3 -->
     <script src="/Content/plugins/jQuery/jquery-2.2.3.min.js"></script>
@@ -579,7 +589,7 @@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 
     <script src="/Content/dist/js/demo.js"></script>
-    
+
     }
 
 

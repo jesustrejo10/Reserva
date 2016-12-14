@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.Models.gestion_boletos
+namespace BOReserva.Models.gestion_check_in
 {
     public class CVuelo
     {
@@ -17,7 +17,7 @@ namespace BOReserva.Models.gestion_boletos
 
         public double _monto { get; set; }
 
-        public CVuelo(int num_id, DateTime fechasal, DateTime fechalleg, int ruta_id, int ori, int dest, String nombre1, String nombre2 )
+        public CVuelo(int num_id, DateTime fechasal, DateTime fechalleg, int ruta_id, int ori, int dest, String nombre1, String nombre2)
         {
             _id = num_id;
             _fechaPartida = fechasal;
@@ -25,7 +25,8 @@ namespace BOReserva.Models.gestion_boletos
             _ruta = new CRuta(ruta_id, ori, dest, nombre1, nombre2);
         }
 
-        public CVuelo() {
+        public CVuelo()
+        {
         }
     }
 }
