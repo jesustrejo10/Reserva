@@ -435,13 +435,13 @@ namespace BOReserva.Controllers
 
         }
 
-        public ActionResult M04_GestionVuelo_Modificar(String codigovuelo)
+        public ActionResult M04_GestionVuelo_Modificar(int id)
         {
             manejadorSQL_Vuelos buscarvuelo = new manejadorSQL_Vuelos();
             CVueloModificar vuelo = new CVueloModificar();
             try
             {
-                vuelo = buscarvuelo.MModificarBD(codigovuelo); //BUSCA EL VUELO A MOSTRAR
+                vuelo = buscarvuelo.MModificarBD(id); //BUSCA EL VUELO A MOSTRAR
             }
             catch (SqlException e)
             {
@@ -461,13 +461,13 @@ namespace BOReserva.Controllers
 
 
 
-        public ActionResult M04_GestionVuelo_Mostrar(String codigovuelo)
+        public ActionResult M04_GestionVuelo_Mostrar(int id)
         {
             manejadorSQL_Vuelos buscarvuelo = new manejadorSQL_Vuelos();
             CVuelo vuelo = new CVuelo();
             try
             {
-               vuelo = buscarvuelo.MMostrarvueloBD(codigovuelo); //BUSCA EL VUELO A MOSTRAR
+               vuelo = buscarvuelo.MMostrarvueloBD(id); //BUSCA EL VUELO A MOSTRAR
             }
             catch (SqlException e)
             {
@@ -487,12 +487,12 @@ namespace BOReserva.Controllers
 
 
         
-    public ActionResult M04_GestionVuelo_Desactivar(String codigovuelo)
+    public ActionResult M04_GestionVuelo_Desactivar(int id)
     {
         manejadorSQL_Vuelos desactivarvuelo = new manejadorSQL_Vuelos();
         try
         {
-            Boolean vuelo = desactivarvuelo.MDesactivarVuelo(codigovuelo);
+            Boolean vuelo = desactivarvuelo.MDesactivarVuelo(id);
             //DESATIVANDO  EL VUELO 
             //manejadorSQL_Vuelos buscarvuelos = new manejadorSQL_Vuelos();
             //List<CVuelo> listavuelos = buscarvuelos.MListarvuelosBD(); 
@@ -514,12 +514,12 @@ namespace BOReserva.Controllers
         
             return null;
     }
-        public ActionResult M04_GestionVuelo_Activar(String codigovuelo)
+        public ActionResult M04_GestionVuelo_Activar(int id)
         {
-            manejadorSQL_Vuelos desactivarvuelo = new manejadorSQL_Vuelos();
+            manejadorSQL_Vuelos activarvuelo = new manejadorSQL_Vuelos();
             try
             {
-                Boolean vuelo = desactivarvuelo.MActivarVuelo(codigovuelo);
+                Boolean vuelo = activarvuelo.MActivarVuelo(id);
                 //DESATIVANDO  EL VUELO 
                 //manejadorSQL_Vuelos buscarvuelos = new manejadorSQL_Vuelos();
                 //List<CVuelo> listavuelos = buscarvuelos.MListarvuelosBD(); 

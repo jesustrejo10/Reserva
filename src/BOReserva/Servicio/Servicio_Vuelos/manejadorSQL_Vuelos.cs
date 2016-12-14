@@ -513,7 +513,7 @@ namespace BOReserva.Servicio.Servicio_Vuelos
                     {
                         //SE AGREGA CREA UN OBJECTO VUELO SE PASAN LOS ATRIBUTO ASI reader["<etiqueta de la columna en la tabla VUELO>"]
                         //Y  SE AGREGA a listavehiculos
-                        CVuelo vuelo = new CVuelo(reader["vue_codigo"].ToString(),MBuscarciudadOrigen(Int32.Parse( reader["vue_fk_ruta"].ToString())), MBuscarciudadDestino(Int32.Parse(reader["vue_fk_ruta"].ToString())), reader["vue_fecha_despegue"].ToString(),
+                        CVuelo vuelo = new CVuelo(Int32.Parse(reader["vue_id"].ToString()),reader["vue_codigo"].ToString(),MBuscarciudadOrigen(Int32.Parse( reader["vue_fk_ruta"].ToString())), MBuscarciudadDestino(Int32.Parse(reader["vue_fk_ruta"].ToString())), reader["vue_fecha_despegue"].ToString(),
                                                reader["vue_status"].ToString(), reader["vue_fecha_aterrizaje"].ToString(), MBuscaravion(Int32.Parse(reader["vue_fk_avion"].ToString()))
                                                );
                         listavuelo.Add(vuelo);
@@ -616,14 +616,14 @@ namespace BOReserva.Servicio.Servicio_Vuelos
             }
         }
 
-        public CVuelo MMostrarvueloBD(String codigovuelo)
+        public CVuelo MMostrarvueloBD(int id)
         {
             CVuelo vuelo = null;
             try
             {
                 conexion = new SqlConnection(stringDeConexion);
                 conexion.Open();
-                String sql = "SELECT * FROM Vuelo WHERE vue_codigo = '" + codigovuelo + "'";
+                String sql = "SELECT * FROM Vuelo WHERE vue_id = '" + id + "'";
                 SqlCommand cmd = new SqlCommand(sql, conexion);
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -634,6 +634,7 @@ namespace BOReserva.Servicio.Servicio_Vuelos
                         //var fecha = reader["aut_fecharegistro"];
                         //DateTime fecharegistro = Convert.ToDateTime(fecha).Date;
                         vuelo = new CVuelo(
+                            Int32.Parse(reader["vue_id"].ToString()),
                             reader["vue_codigo"].ToString(), 
                             MBuscarciudadOrigen(Int32.Parse(reader["vue_fk_ruta"].ToString())), 
                             MBuscarciudadDestino(Int32.Parse(reader["vue_fk_ruta"].ToString())), 
@@ -656,7 +657,7 @@ namespace BOReserva.Servicio.Servicio_Vuelos
         }
 
 
-        public CVueloModificar MModificarBD(String CodigoVuelo)
+        public CVueloModificar MModificarBD(int id)
         {
             CVueloModificar vuelo = null;
             try
@@ -665,8 +666,8 @@ namespace BOReserva.Servicio.Servicio_Vuelos
                 conexion.Open();
                 SqlCommand cmd = new SqlCommand("M04_BuscaModificar", conexion);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add("@CodigoVuelo", System.Data.SqlDbType.VarChar, 100);
-                cmd.Parameters["@CodigoVuelo"].Value = CodigoVuelo;
+                cmd.Parameters.Add("@id", System.Data.SqlDbType.Int);
+                cmd.Parameters["@id"].Value = id;
                 SqlDataReader dr = cmd.ExecuteReader();
                     //SE CREA UN OBJECTO VUELO SE PASAN LOS ATRIBUTO ASI reader["<etiqueta de la columna en la tabla Automovil>"]
                     //Y  SE AGREGA a vehiculo
@@ -675,6 +676,7 @@ namespace BOReserva.Servicio.Servicio_Vuelos
                         //var fecha = reader["aut_fecharegistro"];
                         //DateTime fecharegistro = Convert.ToDateTime(fecha).Date;
                         vuelo = new CVueloModificar(
+                            Int32.Parse(dr["vue_id"].ToString()),
                             dr["vue_codigo"].ToString(),
                             dr["vue_fecha_aterrizaje"].ToString(),
                             dr["vue_fecha_despegue"].ToString(),
@@ -701,7 +703,7 @@ namespace BOReserva.Servicio.Servicio_Vuelos
         }
 
 
-        public Boolean MDesactivarVuelo(String CodigoVuelo)
+        public Boolean MDesactivarVuelo(int id)
         {
             try
             {
@@ -711,8 +713,8 @@ namespace BOReserva.Servicio.Servicio_Vuelos
                 conexion.Open();
                 SqlCommand cmd = new SqlCommand("M04_DesactivarVuelo", conexion);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add("@CodigoVuelo", System.Data.SqlDbType.VarChar, 100);
-                cmd.Parameters["@CodigoVuelo"].Value = CodigoVuelo;
+                cmd.Parameters.Add("@id", System.Data.SqlDbType.Int);
+                cmd.Parameters["@id"].Value = id;
 
                 //creo un lector sql para la respuesta de la ejecucion del comando anterior               
                 SqlDataReader dr = cmd.ExecuteReader();
@@ -734,7 +736,7 @@ namespace BOReserva.Servicio.Servicio_Vuelos
                 //return null;
             }
         }
-        public Boolean MActivarVuelo(String CodigoVuelo)
+        public Boolean MActivarVuelo(int id)
         {
             try
             {
@@ -744,8 +746,8 @@ namespace BOReserva.Servicio.Servicio_Vuelos
                 conexion.Open();
                 SqlCommand cmd = new SqlCommand("M04_ActivarVuelo", conexion);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add("@CodigoVuelo", System.Data.SqlDbType.VarChar, 100);
-                cmd.Parameters["@CodigoVuelo"].Value = CodigoVuelo;
+                cmd.Parameters.Add("@id", System.Data.SqlDbType.Int);
+                cmd.Parameters["@id"].Value = id;
 
                 //creo un lector sql para la respuesta de la ejecucion del comando anterior               
                 SqlDataReader dr = cmd.ExecuteReader();
