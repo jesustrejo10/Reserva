@@ -36,7 +36,8 @@ namespace FOReserva.Controllers
             
             ManejadorSQLRevision manejador = new ManejadorSQLRevision();
             bool resp = manejador.Crear_Revision(rev_mensaje, rev_puntuacion);
-            return null;
+            return PartialView();
+
         }
 
 
