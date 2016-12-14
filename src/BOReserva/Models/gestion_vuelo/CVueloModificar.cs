@@ -25,7 +25,7 @@ namespace BOReserva.Models.gestion_vuelo
         public String _velocidadMaxima { get; set; }
         public String _statusVuelo { get; set; }
 
-
+        public CVueloModificar() {}
         public CVueloModificar(String codigovuelo, String fechaAterrizaje, String fechaDespegue, String matriculaavion,String modeloavion,String pasajerosavion,
             String velocidadavion, String distanciaavion, String status, String ciudadorigen, String ciudaddestino)
         {
