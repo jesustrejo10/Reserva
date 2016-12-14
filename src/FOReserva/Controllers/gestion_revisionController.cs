@@ -30,23 +30,43 @@ namespace FOReserva.Controllers
             return PartialView(lista);
         }
 
-        public ActionResult crear_revision_form()
+        public ActionResult crear_revision_form(string msj, int ptn)
         {
+            Console.WriteLine("LLEGUE A CREAR REVISION2222");
             ManejadorSQLRevision manejador = new ManejadorSQLRevision();
-            bool resp = manejador.Crear_Revision();
+            bool resp = manejador.Crear_Revision(msj, ptn);
+            return PartialView();
+        }
+
+
+        public ActionResult consultar_revision()
+        {
+            return PartialView();
+        }
+        public ActionResult eliminar_revision()
+        {
+            return PartialView();
+        }
+
+        public ActionResult editar_revision()
+        {
             return PartialView();
         }
 
         public ActionResult crear_revision()
         {
-            return PartialView();
+            Console.WriteLine("LLEGUE A CREAR REVISION");
+            CRevision rev = new CRevision();
+            return PartialView(rev);
         }
+    
+
 
         /// <summary>
         /// Creacion Modelo Lista Revision
         /// </summary>
         /// <returns>Vista Modelo</returns>
-        public ActionResult Consultar_Revision(string usuario)
+        public ActionResult Consultar_Revision_AR(string usuario)
         {
             // int search_val = Int32.Parse(Request.QueryString["search_val"]);
             // string Usuario = Request.QueryString["Usuario"];
@@ -57,7 +77,7 @@ namespace FOReserva.Controllers
             return PartialView(lista);
         }
 
-        public ActionResult Eliminar_Revision(string usuario, CRevision revision)
+        public ActionResult Eliminar_Revision_AR(string usuario, CRevision revision)
         {
 
             List<CRevision> lista = new List<CRevision>();
@@ -84,8 +104,8 @@ namespace FOReserva.Controllers
         /// <summary>
         /// Creacion Modelo Crear Revision
         /// </summary>
-        /// <returns>Vista Modelo</returns>
-        public ActionResult Crear_Revision(CReservation_Restaurant reserva, string usuario) //crear reserva restaurant
+        /// <returns>Vista Modelo</returns>/*
+        /*public ActionResult Crear_Revision(CReservation_Restaurant reserva, string usuario) //crear reserva restaurant
         {
             List<CRevision> lista;
 
@@ -107,11 +127,11 @@ namespace FOReserva.Controllers
             {
                 CListRevision modelo = new CListRevision();
                 return PartialView(modelo);
-            }*/
+            }
 			return null;
 
         }
-
+        */
         /// <summary>
         /// Creacion Modelo Eliminar Revision
         /// </summary>

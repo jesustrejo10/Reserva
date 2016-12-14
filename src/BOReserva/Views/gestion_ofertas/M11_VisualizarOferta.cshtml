@@ -44,8 +44,7 @@
                                     <td>@item._porcentajeOferta %</td>
                                     <td>@estado</td>
                                     <td>
-                                        @*<a href="#"> <i class="fa fa-eye clasedeprueba"></i></a>*@
-                                        <a href="#" title="Modificar"><i class="fa fa-eye modificar"></i></a>
+                                        <a href="#" title="Detalle"><i class="fa fa-eye detalle"></i></a>
                                         <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>
                                         @if (item._estadoOferta == true)
                                         {
@@ -91,7 +90,7 @@
         var identificador = $(this).parent().parent().parent().attr("id");
         jQuery.ajax({
             type: "GET",
-            url: "/gestion_aviones/M02_ConsultarAvion",
+            url: "/gestion_ofertas/M11_ModificarOferta",
             data: { id: identificador }
         }).done(function (data) {
             $("#contenido").empty();
@@ -107,8 +106,8 @@
         var identificador = $(this).parent().parent().parent().attr("id");
         jQuery.ajax({
             type: "GET",
-            url: "/gestion_ofertas/M11_VisualizarOferta",
-            data: { id: identificador }
+            url: "/gestion_ofertas/M11_ConsultarOferta",
+            data: { id : identificador }
         }).done(function (data) {
             $("#contenido").empty();
             $("#contenido").append(data);

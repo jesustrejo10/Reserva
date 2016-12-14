@@ -20,7 +20,7 @@
                   <!-- PUNTUACION  Y  VALIDACIONES-->
         <div class="form-group">
             <label>Puntuacion:</label>
-            <select name="rev_puntuacion" id="rev_puntuacion" class="form-control" required>
+            <select name="rev_puntuacion" id="rev_puntuacion" class="form-control pointer required">
                 <option value="1" selected>1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -31,7 +31,25 @@
                     <!-- BOTON QUE ACCIONA EL SUBMIT -->
         <div class="text-center">
             <input id="rev_agregar" type="submit" value="Crear" class="btn btn-primary boton" />
+            <input id="rev_agregar" value="Cancelar" class="btn btn-primary boton" />
         </div>
     }
 </div>
+
+<script>
+
+    $(document).ready(function () {
+        $("#rev_agregar").click(function () {
+            var mensaje = $("#rev_mensaje").val();
+            var puntuacion = rev_puntuacion.options[rev_puntuacion.selectedIndex].value;
+            jQuery.ajax({
+                type: "GET",
+                url: "/gestion_revision/crear_revision",
+                data: { msj: mensaje, ptn: puntuacion }
+            }).done(function () { alert("PUDE ENVIAR el mensajes y la puntuacion son " + mensaje + puntuacion) })
+        });
+    });
+
+</script>
+
 

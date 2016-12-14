@@ -33,6 +33,25 @@ namespace BOReserva.Controllers
                 {
                     System.Diagnostics.Debug.WriteLine(item2.Nombre);
                 }
+                foreach (var item3 in item.Menu)
+                {
+                    System.Diagnostics.Debug.WriteLine(item3.Nombre);
+                }
+            }
+            return PartialView(listaroles);
+        }
+        
+                    public ActionResult M13_ModificarRol()
+        {
+            manejadorSQL sql = new manejadorSQL();
+            List<CRoles> listaroles = sql.consultarListaroles();
+            foreach (var item in listaroles)
+            {
+                System.Diagnostics.Debug.WriteLine(item.Nombre_rol);
+                foreach (var item2 in item.Permisos)
+                {
+                    System.Diagnostics.Debug.WriteLine(item2.Nombre);
+                }
             }
             return PartialView(listaroles);
         }
