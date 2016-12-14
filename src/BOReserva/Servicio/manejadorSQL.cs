@@ -1301,21 +1301,13 @@ namespace BOReserva.Servicio
             List<CAvion> aviones = new List<CAvion>();
             try
             {
-                System.Diagnostics.Debug.WriteLine("Entro en roles");
                 string idRol = "";
                 string idPermiso = "";
 
                 //Metodo para que busque el id del rol
-                System.Diagnostics.Debug.WriteLine("--------- " + idRol);
-
                 idRol = MBuscarid_IdRol(rol);
-                System.Diagnostics.Debug.WriteLine("id rol " + idRol);
-
                 //Metodo para que busque el id del permisos
-                System.Diagnostics.Debug.WriteLine("--------- " + idRol);
                 idPermiso = MBuscarid_Permiso(permiso);
-                System.Diagnostics.Debug.WriteLine("id permiso " + idPermiso);
-
 
                 //Inicializo la conexion con el string de conexion
                 conexion = new SqlConnection(stringDeConexion);

@@ -80,7 +80,6 @@ namespace BOReserva.Controllers
 
             manejadorSQL sql = new manejadorSQL();
 
-            CRoles pruebaRol = new CRoles();
             CListaGenerica<CModulo_detallado> listaPermisosAsignar = new CListaGenerica<CModulo_detallado>();
 
             // creo un item para guardar el Json 
@@ -93,7 +92,7 @@ namespace BOReserva.Controllers
                 for (int i=1; i < _permisos.Count(); i++)
                 {
 
-                    sql.insertarPermisosRol(pruebaRol.Nombre_rol, _permisos[i].ToString());
+                    sql.insertarPermisosRol(_permisos[0].ToString(), _permisos[i].ToString());
 
                 }
                     
