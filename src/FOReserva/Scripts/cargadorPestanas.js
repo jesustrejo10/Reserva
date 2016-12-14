@@ -18,9 +18,9 @@ function cargarContenido(seccion, tipo, url, data, boton) {
 
     if (seccion == '#MD' || seccion == '#MI') {
         mostrarContenedor(1)
-    } else if (seccion == '#CI') {
+    }/* else if (seccion == '#CI') {
         mostrarContenedor(3)
-    } else if (seccion == '#CP') {
+    }*/ else if (seccion == '#CP') {
         mostrarContenedor(2)
     }
 
@@ -28,6 +28,8 @@ function cargarContenido(seccion, tipo, url, data, boton) {
         seccion = "#contenedor"
     else if (seccion == "#MI")
         seccion = "#contenedorImagenes"
+    else if (seccion == "#CI")
+        seccion = "#contenedorPerfil"
 
     $(seccion)
         .empty()
