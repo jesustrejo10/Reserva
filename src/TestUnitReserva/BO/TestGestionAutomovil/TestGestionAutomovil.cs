@@ -60,7 +60,8 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         }
 
         /// <summary>
-        /// 
+        /// Método que verifica si el vehículo es agregado correctamente a la base de datos
+        /// retornando 1
         /// </summary>
         [Test]
         public void MAgregaraBD()
@@ -178,7 +179,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         }
 
         /// <summary>
-        /// 
+        /// Método que verifica si la placa a buscar existe
         /// </summary>
         [Test]
         public void MDisponibilidadVehiculo()
@@ -205,7 +206,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
 
         }
         /// <summary>
-        /// 
+        /// Método validar buscarvehículo para ver si existe el automovil
         /// </summary>
         [Test]
         public void MConsultarvehiculo()
@@ -234,7 +235,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         }
 
         /// <summary>
-        /// 
+        /// Método que verificar modificarvehiculo, si se logra modificar retorna 1 sino retorna 0
         /// </summary>
         [Test]
         public void MModificarvehiculo()
@@ -259,7 +260,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
             Assert.IsInstanceOf(typeof(List<Automovil>), prueba);
         }
         /// <summary>
-        /// 
+        ///  Método que lista todos los vehículos existentes
         /// </summary>
         [Test]
         public void MListarvehiculos()
@@ -306,7 +307,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
             Assert.AreEqual("1", prueba2);
         }
         /// <summary>
-        /// 
+        ///  Método que verifica si el vehículo es borrado de la base de datos correctamente
         /// </summary>
         [Test]
         public void MBorrarvehiculo()
