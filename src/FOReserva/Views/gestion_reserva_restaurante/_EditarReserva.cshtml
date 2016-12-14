@@ -16,7 +16,7 @@
                     @Html.HiddenFor(model => model.Id)
                     @Html.HiddenFor(model => model.Restaurant.Name)
                     <label>A nombre de: </label>
-                    @Html.TextBoxFor(model => model.Name, new { @id = "name_client"})
+                    @Html.TextBoxFor(model => model.Name, new { @id = "name_client", @class = "form-control" })
                     @*<input type="text" name="c_name_client" id="c_name_client" value="" class="form-control" data-format="" data-lang="en" data-rtl="false" placeholder="Ingrese el nombre" required>*@
                 </div>
                 <div id="name_empty" style="display: none;" class="has-error error">
@@ -28,7 +28,7 @@
                 <!-- FECHA  Y  VALIDACIONES-->
                 <div class="form-group">
                     <label>Fecha: </label>
-                    @Html.TextBoxFor(model => model.Date, new { @id = "reserv_date" })
+                    @Html.TextBoxFor(model => model.Date, new { @id = "reserv_date", @class = "form-control datepicker", @readonly = "readonly" })
                     @*<input type="text" name="c_reserv_date" id="c_reserv_date" value="" class="form-control datepicker" readonly data-format="yyyy-mm-dd" required data-lang="en" data-rtl="false" placeholder="Selecciona la fecha">*@
                 </div>
                 <div id="fecha_null" style="display: none;" class="has-error error">
@@ -37,15 +37,13 @@
                 <!-- HORA  Y  VALIDACIONES-->
                 <div class="form-group">
                     <label>Hora:</label>
-                    @Html.DropDownListFor(model => model.Time, Model._Time, new { @id = "reserv_hour" })
+                    @Html.DropDownListFor(model => model.Time, Model._Time, new { @id = "reserv_hour", @class = "form-control" })
                 </div>
-                <div id="hora_null" style="display: none;" class="has-error error">
-                    <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe seleccionar una hora</p>
-                </div>
+              
                 <!-- CANTIDAD DE PERSONAS  Y  VALIDACIONES-->
                 <div class="form-group">
                     <label>Numero de personas:</label>
-                    @Html.DropDownListFor(model => model.Count, Model._Count)
+                    @Html.DropDownListFor(model => model.Count, Model._Count,new{ @class = "form-control" })
 
                 </div>
             </div>
@@ -57,3 +55,21 @@
     </div>
 
 </form>
+<script>// DATE PICKER
+
+    $(document).ready(function () {
+        $('.datepicker').datepicker({
+            orientation: "bottom",
+            format: 'yyyy-mm-dd',
+            startDate: '0d',
+            endDate: '+2m'
+        });
+        $('#datepicker').datepicker();
+
+        $('#datepicker').on("changeDate", function () {
+            $('#my_hidden_input').val(
+                $('#datepicker').datepicker('getFormattedDate')
+            );
+        });
+    });</script>
+

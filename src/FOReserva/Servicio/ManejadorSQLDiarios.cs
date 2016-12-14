@@ -1,4 +1,4 @@
-﻿    using FOReserva.Models.Diarios;
+using FOReserva.Models.Diarios;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
