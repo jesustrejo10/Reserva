@@ -78,9 +78,8 @@ $("#VisualizarRutasComerciales").click(function (e) {
 
 });
 
-$(".m03EditarRutas").click(function (e) {
+/*$(".m03EditarRutas").click(function (e) {
     e.preventDefault();
-    alert("Botón Editar");
     $.ajax({
         url: '/gestion_ruta_comercial/ModificarRutasComerciales',
         data: '',
@@ -93,10 +92,10 @@ $(".m03EditarRutas").click(function (e) {
             alert(errorThrown);
         }
     });
-});
+});*/
 
 
-$("#m03DetalleRutas").click(function (e) {
+$(".m03DetalleRutas").click(function (e) {
     e.preventDefault();
     alert("Botón Editar");
     $.ajax({
