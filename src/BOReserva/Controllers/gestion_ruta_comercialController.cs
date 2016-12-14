@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BOReserva.Models.gestion_ruta_comercial;
-using BOReserva.Servicio;
+using BOReserva.Servicio.Servicio_Rutas;
 using System.Net;
 
 namespace BOReserva.Controllers
@@ -19,7 +19,7 @@ namespace BOReserva.Controllers
             
             CAgregarRuta ruta = new CAgregarRuta();
             
-            CBasededatos_ruta_comercial sql = new CBasededatos_ruta_comercial();                       
+            CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();                       
 
             lista = sql.listarLugares();
 
@@ -36,7 +36,7 @@ namespace BOReserva.Controllers
         {
             CAgregarRuta model = new CAgregarRuta();
             List<String> resultado = new List<String>();
-            CBasededatos_ruta_comercial sql = new CBasededatos_ruta_comercial();                       
+            CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();                       
 
 
             resultado = sql.consultarDestinos(ciudadO);
@@ -61,17 +61,28 @@ namespace BOReserva.Controllers
 
 
         // GET: gestion_ruta_comercial/ModificarRutasComerciales
-        public PartialViewResult ModificarRutasComerciales()
+        public PartialViewResult ModificarRutasComerciales(int idRuta)
         {
-            CGestion_ruta ruta = new CGestion_ruta();
-            return PartialView(ruta);
+            CManejadorSQL_Rutas buscarRuta = new CManejadorSQL_Rutas();
+            CAgregarRuta Route = buscarRuta.MMostrarRutaBD(idRuta);
+            CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();
+            List<String> lista = new List<string>();
+
+            lista = sql.listarLugares();
+
+            Route._lorigenRuta = lista.Select(x => new SelectListItem
+            {
+                Value = x,
+                Text = x
+            });
+            return PartialView(Route);
         }
 
 
         // GET: gestion_ruta_comercial/VisualizarRutasComerciales
         public PartialViewResult VisualizarRutasComerciales()
         {
-            CBasededatos_ruta_comercial ruta = new CBasededatos_ruta_comercial();
+            CManejadorSQL_Rutas ruta = new CManejadorSQL_Rutas();
             List<CRuta> listarutas = ruta.MListarRutasBD();
             return PartialView(listarutas);
         }
@@ -88,16 +99,48 @@ namespace BOReserva.Controllers
         public JsonResult guardarRuta(CAgregarRuta model)
         {
             
-            CBasededatos_ruta_comercial sql = new CBasededatos_ruta_comercial();
+            CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();
             //realizo el insert
 
-            if (model._destinoRuta == "Seleccione ruta de destino" || model._origenRuta == "Seleccione ruta de destino")
+            if (model._origenRuta == null || model._destinoRuta == null)
             {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error, no ha seleccionado un origen/destino valido";
+                //Retorno el error
+                return Json(error);
+
+            }
+            else if (model._distanciaRuta <= 0 || model._distanciaRuta == 999999 || model._distanciaRuta == null) {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error, distancia de ruta invalida";
+                //Retorno el error
+                return Json(error);
+            }
+            else
+            {
+
                 bool resultado = sql.InsertarRuta(model);
+                if (resultado)
+                {
+                    return null;
+                }
+                else{
+                    //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    //Agrego mi error
+                    String error = "Error, ruta existente";
+                    //Retorno el error
+                    return Json(error);
+                }
+                
             }
             
 
-            return null;
+            
         }
 
     }

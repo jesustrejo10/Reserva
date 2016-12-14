@@ -9,7 +9,7 @@ namespace BOReserva.Models.gestion_comida_vuelo
     {
         public String _nombrePlato { get; set; }
         public String _tipoPlato { get; set; }
-        public String _estatusPlato { get; set; }
+        public int _estatusPlato { get; set; }
         public String _descripcionPlato { get; set; }
     }
 }

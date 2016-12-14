@@ -15,7 +15,15 @@ namespace TestUnitReserva.BO.gestion_aviones
     class TestAviones
     {
         manejadorSQL prueba = new manejadorSQL();
-
+        /// <summary>
+        /// Pruebas para insertar un avión en la base de datos
+        /// Creo el avión y se lo paso como parámetro a la función
+        /// el resultado lo guardo en un variable 
+        /// la primera prueba es verificar que efectivamente inserta el avión, es decir, la función devuelve true
+        /// la segunda prueba es pasar null a la función y que la misma retorne false
+        /// la tercera prueba es asignarle null a la matrícula, lo cual no está permitido entonces debe retornar false
+        /// la cuarta prueba es pasarle a la función un avión repetido, la misma debe retorna false
+        /// </summary>
         [Test]
         public void M02_InsertarAvion()
         {
@@ -33,7 +41,7 @@ namespace TestUnitReserva.BO.gestion_aviones
             Boolean resultadoconavion = prueba.insertarAvion(avion);
             Assert.AreEqual(resultadoconavion, true);
             //Aquí pruebo que el insertar avión no me deje agregar vacío
-            Boolean resultadoconnull = prueba.insertarAvion(null);
+            Boolean resultadoconnull = prueba.insertarPlato(null);
             Assert.AreEqual(resultadoconnull, false);
             //Pruebo que no me deje insertar una matrícula en null
             avion._matriculaAvion = null;
@@ -45,22 +53,30 @@ namespace TestUnitReserva.BO.gestion_aviones
             Assert.AreEqual(resultadomatricularepetida, false);    
           
         }
-
+        /// <summary>
+        /// Pruebas para verificar que la lista que se muestra en el visualizar no venga vacía
+        /// Creo la variable respuesta de tipo List<> y le asigno lo que retorna la función listar aviones
+        /// Compruebo que la variable respuesta sea distinta a null
+        /// </summary>
         [Test]
         public void M02_ListarAvionesEnBd()
         {
-            //pruebo que la lista no retorne vacia
+            //pruebo que la lista no retorne vacía
             List<CAvion> respuesta = prueba.listarAvionesEnBD();
             Assert.IsNotNull(respuesta);
         }
-
+        /// <summary>
+        /// Prueba del método consultar avión pasando un número inválido
+        /// </summary>
         [Test]
         public void consultarAvionIdInvalida()
         {
             int numeroNulo = 31211;
             Assert.IsNotInstanceOf(typeof(CAvion) ,prueba.consultarAvion(numeroNulo));
         }
-
+        /// <summary>
+        /// Prueba del método consultar avión pasando un número válido
+        /// </summary>
         [Test]
         public void consultarAvionIdValida()
         {
@@ -68,7 +84,9 @@ namespace TestUnitReserva.BO.gestion_aviones
             Assert.IsInstanceOf( typeof(CAvion) , prueba.consultarAvion(numeroValido));
         }
 
-   
+   /// <summary>
+   /// Prueba del método modificar con un avión que no existe
+   /// </summary>
         [Test]
         public void modificarAvionInexistente()
         {
@@ -85,21 +103,27 @@ namespace TestUnitReserva.BO.gestion_aviones
             Boolean resultadoModificar = prueba.modificarAvion(avion);
             Assert.AreEqual(resultadoModificar, true);
         }
-
+        /// <summary>
+        /// Prueba para la verificación del método Deshabilitar un avión
+        /// </summary>
         [Test]
         public void verificarDeshabilitarAvion()
         {
             Boolean resultado = prueba.deshabilitarAvion(1);
             Assert.AreEqual(resultado, true);
         }
-
+        /// <summary>
+        /// Prueba para verificar el método Habilitar un avión
+        /// </summary>
         [Test]
         public void verificarHabilitarAvion()
         {
             Boolean resultado = prueba.habilitarAvion(1);
             Assert.AreEqual(resultado, true);
        }
-
+        /// <summary>
+        /// Prueba para ver verificar el método Eliminar avión 
+        /// </summary>
         [Test]
         public void verificarEliminarAvion()
         {
