@@ -902,7 +902,7 @@ namespace BOReserva.Servicio
                 //Abrir la conexion
                 conexion.Open();
                 //query es un string que me devolvera la consulta 
-                String query = "SELECT mod_det_nombre FROM modulo_detallado,rol_modulo_detallado,rol where mod_det_id=fk_mod_det_id and fk_rol_id!=rol_id and rol_nombre='"+ _rol.Nombre_rol +"'";
+                String query = "select mod_det_nombre from modulo_detallado where mod_det_nombre not in(SELECT mod_det_nombre FROM modulo_detallado,rol_modulo_detallado,rol where mod_det_id=fk_mod_det_id AND fk_rol_id=rol_id and rol_nombre='" + _rol.Nombre_rol + "')";
                 SqlCommand cmd = new SqlCommand(query, conexion);
                 SqlDataReader lector = cmd.ExecuteReader();
                 //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
