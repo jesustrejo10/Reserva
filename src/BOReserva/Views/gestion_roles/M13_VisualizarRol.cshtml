@@ -39,7 +39,7 @@
                                         <table>
                                             @foreach (var item2 in item.Permisos)
                                             {
-                                                <tr>@item2.Nombre <a href="#" title="Eliminar Permiso"><i class="fa fa-times eliminarpermmiso"></i></a></tr>
+                                                <tr>@item2.Nombre <a href="#" id="@item2.Nombre" title="Eliminar Permiso" class="eliminarpermiso"><i class="fa fa-times eliminarpermiso"></i></a></tr>
                                                 <br>}
                                         </table>
                                     </td>
@@ -110,11 +110,12 @@
 
 
     $(".eliminarpermiso").click(function () {
-        var identificador = $(this).parent().parent().parent().attr("id");
+        var nombreRol = $(this).parent().parent().parent().attr("id");
+        var nombrePermiso = $(this).parent().attr("id");
         jQuery.ajax({
             type: "POST",
             url: "/gestion_roles/quitarPermisoRol",
-            data: { _nombrerol: identificador }
+            data: { _nombrerol: nombreRol, _nombrepermiso: nombrePermiso }
         }).done(function (data) {
             var url = '/gestion_roles/M13_VisualizarRol';
             var method = 'GET';
@@ -140,6 +141,6 @@
 </script>
 
 <style>
-
+.eliminarpermiso{float:right;}
 
 </style>

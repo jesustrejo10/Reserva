@@ -931,7 +931,7 @@ namespace BOReserva.Servicio
                 throw e;
             }
         }
-        //Metodo para quitarle todos los permisos aun usuario
+        //Metodo para quitarle todos los permisos aun rol
         public Boolean quitarPermisos(CRoles model)
         {
             try
@@ -944,6 +944,42 @@ namespace BOReserva.Servicio
                 SqlCommand query = conexion.CreateCommand();
                 //ingreso la orden del query
                 query.CommandText = "DELETE FROM Rol_Modulo_Detallado WHERE fk_rol_id in (SELECT rol_id from Rol where rol_nombre='" + model.Nombre_rol + "')";
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior
+                SqlDataReader lector = query.ExecuteReader();
+                //cierro el lector
+                lector.Close();
+                //Cierro la conexion
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+        }
+        //Metodo para quitarle un permiso a un rol
+        public Boolean quitarPermisoRol(CRoles model,CModulo_detallado permiso)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //Abrir la conexion
+                conexion.Open();
+                //SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "DELETE FROM Rol_Modulo_Detallado WHERE fk_rol_id in (SELECT rol_id from Rol where rol_nombre='" + model.Nombre_rol + "') and fk_mod_det_id in (SELECT mod_det_id from modulo_detallado where mod_det_nombre='" + permiso.Nombre + "') ";
                 //creo un lector sql para la respuesta de la ejecucion del comando anterior
                 SqlDataReader lector = query.ExecuteReader();
                 //cierro el lector

@@ -123,6 +123,33 @@ namespace BOReserva.Controllers
             return (Json(true, JsonRequestBehavior.AllowGet));
 
         }
+        //Metodo para Eliminar permiso a un Rol
+        [HttpPost]
+        public JsonResult quitarPermisoRol(string _nombrerol, string _nombrepermiso)
+        {
+            CRoles model = new CRoles();
+            model.Nombre_rol = _nombrerol;
+            CModulo_detallado permiso = new CModulo_detallado();
+            permiso.Nombre = _nombrepermiso;
+            //Verifico que todos los campos no sean nulos
+            if (model.Nombre_rol == null || permiso.Nombre== null)
+            {
+                //Creo el codigo de error de respuesta
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error               
+                String error = "Error, campo obligatorio vacio";
+                //Retorno el error                
+                return Json(error);
+            }
+            //instancio el manejador de sql
+            manejadorSQL sql = new manejadorSQL();
+            //Elimino y Guardo la respuesta de mi metodo sql en un bool
+            bool respuesta = sql.quitarPermisoRol(model,permiso);
+            //envio una respuesta dependiendo del resultado sql
+            return (Json(respuesta, JsonRequestBehavior.AllowGet));
+
+
+        }       
         //Metodo para Eliminar roles
         [HttpPost]
         public JsonResult eliminarRol(string _nombrerol)
