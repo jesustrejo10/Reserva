@@ -7,15 +7,16 @@ namespace BOReserva.Models.gestion_ruta_comercial
 {
     public class CRuta
     {
-
+        private int _id;
         private String _origen;
         private String _destino;
         private String _estado;
         private String _tipo;
         private int _distancia;
 
-        public CRuta(String origen, String destino, String estado, String tipo, int distancia)
+        public CRuta(int id,String origen, String destino, String estado, String tipo, int distancia)
         {
+            _id = id;
             _origen = origen;
             _destino = destino;
             _estado = estado;
@@ -23,6 +24,11 @@ namespace BOReserva.Models.gestion_ruta_comercial
             _distancia = distancia;
         }
 
+        public int idRuta
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
 
         public String origenRuta
         {

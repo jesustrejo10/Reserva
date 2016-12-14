@@ -14,19 +14,21 @@ namespace FOReserva.Servicio
         public ManejadorSQLDiarios() : base() { }
 
 
-        /*BUSQUEDAS*/
+    /*BUSQUEDAS*/
 
-        
+
         /*Buscar TODOS los Diarios de Viaje*/
-        public List<CDiarioModel> obtenerDiarios(){
+        public List<CDiarioModel> obtenerDiarios()
+        {
             string query = @"SELECT
-            id_diar,
-            nombre_diario,
+            d.id_diar,
+            d.nombre_diario,
             CASE 
             WHEN len(descripcion_diar)>100
             THEN LEFT(descripcion_diar, 97) + '...' 
-            ELSE descripcion_diar END descr
-            FROM Diario_Viaje;";
+            ELSE descripcion_diar END descr,
+            d.fk_destino, d.calif_creador, d.fecha_carga_diar 
+            FROM Diario_Viaje d;";
             SqlDataReader read = Executer(query);
             List<CDiarioModel> listaDV = new List<CDiarioModel>();
             if (read.HasRows)
@@ -36,10 +38,16 @@ namespace FOReserva.Servicio
                     int id = read.GetInt32(0);
                     string nombre = read.GetString(1);
                     string desc = read.GetString(2);
+                    int lug = read.GetInt32(3);
+                    int cal = read.GetInt32(4);
+                    DateTime carga = read.GetDateTime(5);
                     CDiarioModel diario = new CDiarioModel();
                     diario.Id = id;
                     diario.Nombre = nombre;
                     diario.Descripcion = desc;
+                    diario.Destino = lug;
+                    diario.Calif_creador = cal;
+                    diario.Fecha_carga = carga;
                     listaDV.Add(diario);
                 }
             }
@@ -49,6 +57,7 @@ namespace FOReserva.Servicio
 
 
         /*Buscar Diarios de Viaje dado un modelo*/
+       
         public List<CDiarioModel> buscarDiarios(CDiarioModel diar)
         {
             string fecha_i = diar.Fecha_ini.ToString("yyyy-MM-dd");
@@ -58,7 +67,8 @@ namespace FOReserva.Servicio
             sb.Append(" d.id_diar, d.nombre_diario, CASE ");
             sb.Append("  WHEN len(d.descripcion_diar)>100 ");
             sb.Append("  THEN LEFT(d.descripcion_diar, 97) + '...' ");
-            sb.Append("  ELSE d.descripcion_diar END descr ");
+            sb.Append("  ELSE d.descripcion_diar END descr, ");
+            sb.Append("  d.fk_destino, d.calif_creador, d.fecha_carga_diar ");
             sb.Append("FROM Diario_Viaje d ");
             if (diar.Destino != 0) //Si se busca por destino se anexa la tabla al query
             {
@@ -92,10 +102,16 @@ namespace FOReserva.Servicio
                     int id = read.GetInt32(0);
                     string nombre = read.GetString(1);
                     string desc = read.GetString(2);
+                    int lug = read.GetInt32(3);
+                    int cal = read.GetInt32(4);
+                    DateTime carga = read.GetDateTime(5);
                     CDiarioModel diario = new CDiarioModel();
                     diario.Id = id;
                     diario.Nombre = nombre;
                     diario.Descripcion = desc;
+                    diario.Destino = lug;
+                    diario.Calif_creador = cal;
+                    diario.Fecha_carga = carga;
                     listaDV.Add(diario);
                 }
             }
@@ -104,6 +120,7 @@ namespace FOReserva.Servicio
         }
 
         /*Buscar un Diario de Viaje dado su ID*/
+       
         public CDiarioModel buscarDiarios(int id_dia)
         {
             CDiarioModel diario = null;
@@ -131,7 +148,7 @@ namespace FOReserva.Servicio
                 int user = read.GetInt32(8);
                 DateTime f_fin = read.GetDateTime(9);
                 int destino = read.GetInt32(10);
-                diario = new CDiarioModel(id, null, nombre, f_ini, f_fin, desc, f_carga, cal, rating, visitas, destino,user);
+                diario = new CDiarioModel(id, null, nombre, f_ini, f_fin, desc, f_carga, cal, rating, visitas, destino, user);
             }
 
             CloseConnection();
@@ -139,6 +156,7 @@ namespace FOReserva.Servicio
         }
 
         /*Buscar TODOS los Lugares para dropdown*/
+       
         public List<CLugar> obtenerLugares()
         {
             string query = @"SELECT
@@ -166,31 +184,104 @@ namespace FOReserva.Servicio
             return listaLugares;
         }
 
+        /* Buscar el nombre del publicador del diario de viaje según el ID de este */
 
-        /*INSERCIONES*/
+        public String obtenerUsuario(int id)
+        {
+            string query = @"SELECT
+                u.usu_nombre,
+                u.usu_apellido
+                FROM
+                    dbo.Usuario AS u
+                    INNER JOIN dbo.Diario_Viaje AS dv 
+                    ON dv.fk_usuario_id = u.usu_id
+                WHERE
+                    dv.id_diar = " + id;
+            SqlDataReader read = Executer(query);
+            string nombre = "";
 
-            /*Nuevo Diario*/
+            if (read.HasRows)
+            {
+                read.Read();
+                nombre = read.GetString(0) + " " + read.GetString(1);
+            }
+            CloseConnection();
+            return nombre;
+        }
+
+        
+        //Busqueda de Nombres de Lugares (obtiene el Lugar a traves de la id
+        
+        public String obtenerNombreLugar(int id)
+        {
+            string query = @"SELECT
+                l.lug_nombre
+            FROM dbo.Lugar AS l
+            WHERE l.lug_id = " + id;
+            SqlDataReader read = Executer(query);
+            string nombre = "";
+
+            if (read.HasRows)
+            {
+                read.Read();
+                nombre = read.GetString(0);
+            }
+            CloseConnection();
+            return nombre;
+        }
+
+        //Busqueda de numero de visitas de un Diario
+        
+        public int obtenerNumeroVisitas(int id)
+        {
+            string query = @"SELECT
+                Diario_Viaje.num_visita
+            FROM dbo.Diario_Viaje 
+            WHERE id_diar = " + id;
+            SqlDataReader read = Executer(query);
+            int numero=0 ;
+
+            if (read.HasRows)
+            {
+                read.Read();
+                numero = read.GetInt16(0) ;
+            }
+            CloseConnection();
+            return numero;
+        }
 
 
-        public void CrearDiario( CDiarioModel crear_Nuevo_Diario )
+     /*INSERCIONES*/
+
+        /*Nuevo Diario*/
+
+
+        public int CrearDiario(CDiarioModel crear_Nuevo_Diario)
         {
             string query =
             @"INSERT INTO Diario_Viaje (nombre_diario,fecha_ini_diar,descripcion_diar,
             fecha_carga_diar,calif_creador,rating,num_visita
             ,fk_usuario_id,fecha_fin_diar,fk_destino) 
-            VALUES('" + crear_Nuevo_Diario.Nombre        + "',convert(date, '" +crear_Nuevo_Diario.Fecha_ini+ "'),'" 
-            + crear_Nuevo_Diario.Descripcion   + "','"               + crear_Nuevo_Diario.Fecha_carga + "','"
-            + crear_Nuevo_Diario.Calif_creador + "', '"              + crear_Nuevo_Diario.Rating       + "',0,'" + crear_Nuevo_Diario.Usuario + "','"
-            + crear_Nuevo_Diario.Fecha_fin      + "','"               +crear_Nuevo_Diario.Fecha_fin+"' )";
+            VALUES('" + crear_Nuevo_Diario.Nombre + "',convert(date, '" + crear_Nuevo_Diario.Fecha_ini + "'),'"
+            + crear_Nuevo_Diario.Descripcion + "','" + crear_Nuevo_Diario.Fecha_carga + "','"
+            + crear_Nuevo_Diario.Calif_creador + "', '" + crear_Nuevo_Diario.Rating + "',0,'" + crear_Nuevo_Diario.Usuario + "','"
+            + crear_Nuevo_Diario.Fecha_fin + "','" + crear_Nuevo_Diario.Fecha_fin + "' )";
             CloseConnection();
+            return 0;
         }
+        
+        
+        
+        
         /*MODIFICACIONES*/
 
         /*Actualizar numero de visitas*/
+        /*Este metodo obtendra el objeto_diario a partir de la respuesta
+          de buscar diario de viaje dado un modelo */
 
-        public void actualizarVisitas(CDiarioModel num_Visitas)
+        public void actualizarVisitas(CDiarioModel objeto_diario)
         {
-            string query = "update Diario_Viaje set num_visita = '" +num_Visitas.Num_visita ;
+            string query = "update Diario_Viaje set num_visita = '" +objeto_diario.Num_visita+1 +"'where id_diar='"+objeto_diario.Id;
             this.Executer(query);
             CloseConnection();
         }
