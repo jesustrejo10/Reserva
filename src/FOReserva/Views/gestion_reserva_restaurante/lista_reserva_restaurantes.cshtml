@@ -178,12 +178,10 @@
         //clear errors
         $(".error").hide();
         $("#name_client").removeClass("has-error");
-        $("#reserv_date").removeClass("has-error");
 
         //find errors
         var nombre = $("#name_client").val();
       
-        var fecha = $("#reserv_date").prop("value");
         var caracteres = /^[a-zA-Z\s]+$/;
 
         var win = true;
@@ -202,14 +200,7 @@
                 win = false;
             }
         }
-        //VALIDACION PARA FECHA
-        if (fecha == null || fecha == 0) {
-         
-            $("#reserv_date").addClass("has-error");
-            $("#fecha_null").fadeIn();
-            win = false;
-        }
-
+     
         if (win) {
             var form = $('#edit_form');
             $.ajax({
@@ -223,7 +214,7 @@
                 $('#ModalModificar').modal('hide');
             })
 	        .fail(function (data) {
-	            $('#ModalModificar').modal('show');
+	            $('#ModalModificar').modal('hide');
 	            $('#ModalErrorEditar').modal('show');
 	            console.log("error");
 	        })
