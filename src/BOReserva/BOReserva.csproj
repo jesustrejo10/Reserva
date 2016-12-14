@@ -1485,7 +1485,7 @@
     <Content Include="Views\gestion_ruta_comercial\VisualizarRutasComerciales.cshtml" />
     <Content Include="Views\gestion_ruta_comercial\ModificarRutasComerciales.cshtml" />
     <Content Include="Views\gestion_ruta_comercial\AgregarRutasComerciales.cshtml" />
-    <Content Include="Views\gestion_ruta_comercial\DetallesRutasComerciales.cshtml" />
+    <Content Include="Views\gestion_ruta_comercial\DetalleRutasComerciales.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_AgregarOferta.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_AgregarPaquete.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_VisualizarOferta.cshtml" />

@@ -39,8 +39,16 @@
                                                             <td>@item.distanciaRuta KM</td>
                                                             <td>@item.estadoRuta</td>
                                                             <td>
-                                                                <a href="#"> <i class="fa fa-eye clasedeprueba"></i></a>
+                                                                <a href="#"> <i class="fa fa-eye m03DetalleRutas"></i></a>
                                                                 <a href="#"><i class="fa fa-pencil m03EditarRutas"></i></a>
+                                                                @if (item.estadoRuta == "Activa")
+                                                                {
+                                                                    <a href="#" title="Deshabilitar"><i class="fa fa-toggle-on desactivar"></i></a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="#" title="Habilitar"><i class="fa fa-toggle-off activar"></i></a>
+                                                                }
                                                             </td>
                                                             </tr>
                                                     }
@@ -69,108 +77,9 @@
 </div>
 <!-- /.row -->
 
+<script src="~/Content/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
 
-@*<table id="example1" class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Tipo</th>
-                <th>Origen</th>
-                <th>Destino</th>
-                <th>Distancia</th>
-                <th>Opciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Aérea</td>
-                <td>
-                    Caracas - Venezuela
-                </td>
-                <td>
-                    Ciudad de Panamá - Panamá
-                </td>
-                <td>
-                    1395 KM
-                </td>
-                <td>
-                    <a href="#"><i class="fa fa-check"></i></a>
-                    <a href="#"><i class="fa fa-times"></i></a>
-                    <a href="#"><i class="fa fa-eye" id="m03DetalleRutas"></i></a>
-                    <a href="#"><i class="fa fa-gear" id="m03EditarRutas"></i></a>
-                </td>
-            </tr>
-        <tfoot>
-            <tr>
-                <th>Tipo</th>
-                <th>Origen</th>
-                <th>Destino</th>
-                <th>Distancia</th>
-                <th>Opciones</th>
-            </tr>
-        </tfoot>
-
-
-    </table>*@
-
-
-
-@*<script>
-
-    $("#VisualizarRutasComerciales").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_ruta_comercial/VisualizarRutasComerciales';
-        var method = 'GET';
-        var data = '';
-
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-
-    });
-    $(".m03EditarRutas").click(function (e) {
-        e.preventDefault();
-        alert("Botón Editar");
-        $.ajax({
-            url: '/gestion_ruta_comercial/ModificarRutasComerciales',
-            data: '',
-            type: 'GET',
-            success: function (data) {
-                $("#contenido").empty();
-                $("#contenido").append(data);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert(errorThrown);
-            }
-        });
-    });
-
-
-    $("#m03DetalleRutas").click(function (e) {
-        e.preventDefault();
-        alert("Botón Editar");
-        $.ajax({
-            url: '/gestion_ruta_comercial/DetalleRutasComerciales',
-            data: '',
-            type: 'GET',
-            success: function (data) {
-                $("#contenido").empty();
-                $("#contenido").append(data);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert(errorThrown);
-            }
-        });
-    });
-
-</script>*@
+<script language="javascript" type="text/javascript">
+    table = $('#example1').DataTable();
+</script>

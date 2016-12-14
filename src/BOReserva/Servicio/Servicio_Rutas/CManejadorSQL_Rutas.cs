@@ -329,5 +329,56 @@ namespace BOReserva.Servicio.Servicio_Rutas
             }
         }
 
+        public Boolean deshabilitarRuta(int id)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                con = new SqlConnection(connectionString);
+                //INTENTO abrir la conexion
+                con.Open();
+                String query = "UPDATE Ruta SET rut_status_ruta='Inactiva' where rut_id='" + id + "'";
+                SqlCommand cmd = new SqlCommand(query, con);
+                SqlDataReader lector = cmd.ExecuteReader();
+                con.Close();
+                return true;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public Boolean habilitarRuta(int id)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                con = new SqlConnection(connectionString);
+                //INTENTO abrir la conexion
+                con.Open();
+                String query = "UPDATE Ruta SET rut_status_ruta='Activa' where rut_id='" + id + "'";
+                SqlCommand cmd = new SqlCommand(query, con);
+                SqlDataReader lector = cmd.ExecuteReader();
+                con.Close();
+                return true;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+
     }
 }
