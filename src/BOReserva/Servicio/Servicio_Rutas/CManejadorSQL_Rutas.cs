@@ -61,7 +61,7 @@ namespace BOReserva.Servicio.Servicio_Rutas
             {
                 return false;
             }
-        }
+        }           
 
 
         public List<CRuta> MListarRutasBD()
@@ -192,7 +192,33 @@ namespace BOReserva.Servicio.Servicio_Rutas
         }
 
 
-        
+        public Boolean MModificarRuta(CAgregarRuta model)        {
+            try
+            {
+                String status = model._estadoRuta;
+                int distancia = model._distanciaRuta;
+                int id = model._idRuta;
+
+                con = new SqlConnection(connectionString);
+                con.Open();
+                String query = "UPDATE Ruta Set rut_status_ruta = '"+status+"', rut_distancia = "+distancia+" where rut_id = "+id;
+                SqlCommand cmd = new SqlCommand(query, con);
+                SqlDataReader lector = cmd.ExecuteReader();                
+
+                lector.Close();
+
+                return true;
+
+            }
+            catch (SqlException e)
+            {
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
 
         public List<String> listarLugares()
         {

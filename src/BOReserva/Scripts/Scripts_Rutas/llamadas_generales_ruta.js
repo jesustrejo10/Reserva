@@ -132,3 +132,23 @@ $(document).ready(function () {
         });
     });
 });
+
+
+
+$("#Modificar").click(function (e) {
+    e.preventDefault();
+    var form = $("#formGuardarRuta");    
+    $.ajax({
+        url: "gestion_ruta_comercial/modificarRuta",
+        data: form.serialize(),
+        type: 'POST',
+        success: function (data) {
+            alert("Ruta modificada exitosamente");
+            $('#formGuardarRuta')[0].reset();
+        }, error: function (xhr, textStatus, exceptionThrown) {
+            //muestro el texto del error
+            alert(xhr.responseText);
+        }
+
+    });
+});
