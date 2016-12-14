@@ -148,6 +148,10 @@
   <data name="ConsultarCruceroID" xml:space="preserve">
     <value>M24_ConsultarCruceroID</value>
     <comment>Consulta la informacion de un crucero especifico</comment>
+</data>
+  <data name="CambioEstatusItinerario" xml:space="preserve">
+    <value>M24_CambiarEstatusItinerario</value>
+    <comment>Cambia el estatus de un itinerario </comment>
   </data>
   <data name="EliminarCruceros" xml:space="preserve">
     <value>M24_EliminarCruceros</value>
@@ -168,5 +172,13 @@
   <data name="ModificarCruceros" xml:space="preserve">
     <value>M24_ModificarCrucero</value>
     <comment>Modifica los datos de un crucero</comment>
+  </data>
+  <data name="ListarItinerario" xml:space="preserve">
+    <value>M24_ListarItinerario</value>
+    <comment>Consulta lista de itinerarios</comment>
+  </data>
+  <data name="ListarRuta" xml:space="preserve">
+    <value>M24_ListarRutas</value>
+    <comment>Consultar lista de Rutas</comment>
   </data>
 </root>

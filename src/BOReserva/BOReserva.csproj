@@ -247,6 +247,8 @@
       <DependentUpon>RecursosCruceros.resx</DependentUpon>
     </Compile>
     <Compile Include="Models\gestion_cruceros\VistaListaCrucero.cs" />
+    <Compile Include="Models\gestion_cruceros\VistaListaItinerario.cs" />
+    <Compile Include="Models\gestion_ruta_comercial\VistaListaRuta.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cgestion_seguridad_ingreso.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cvalidar_bloqueo_exception.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cvalidar_status_exception.cs" />
@@ -1471,6 +1473,7 @@
     <Content Include="Views\gestion_roles\M13_ModificarRol.cshtml" />
     <Content Include="Views\gestion_cruceros\M24_ModificarCrucero.cshtml" />
     <Content Include="Views\gestion_cruceros\M24_ModificarCabinas.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_ListarItinerario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Visualizar.cshtml" />

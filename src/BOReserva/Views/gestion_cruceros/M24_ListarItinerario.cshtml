@@ -1,0 +1,94 @@
+﻿@model BOReserva.Models.gestion_cruceros.VistaListaItinerario
+<div class="box">
+    <div class="box-body">
+        <div class="box-header with-border">
+            <h1 class="box-title"> Listado de Itinerarios</h1>
+            <div class="row">
+                <div class="col-xs-20">
+                    <table style="width:100%;">
+                        <thead>
+                            <tr class="itinerario crTitles" id="listaItinerarios">
+                                <th class="itiNombre">Crucero</th>
+                                <th class="itiItinerario"><b>Ruta</b></th>
+                                <th class="itiFechaI"><b>Fecha Inicio</b></th>
+                                <th class="itiFechaF"><b>Fecha Fin</b></th>
+                                <th class="itiEstatus"><b>Estatus</b></th>
+                                <th class="crAcciones"><b>Acciones</b> </th>
+                            </tr>
+                        </thead>
+                        <tbody class="listItine itinerario">
+                            @{
+                                foreach (var itinerario in Model.itinerarios)
+                                {
+                                    <tr id="@itinerario._fechaInicio">
+                                        <td id=" itinerario." class="itiNombre">@itinerario._crucero </td>
+                                        <td class="itiItinerario">@itinerario._ItinerarioCrucero </td>
+                                        <td class="itiFechaI">@itinerario._fechaInicio </td>
+                                        <td class="itiItinerario">@itinerario._fechaFin </td>
+                                        @if (@itinerario._estatus == "activo")
+                                        {
+                                            <td class="crStatus"><i class="fa fa-circle started"></i></td>
+                                            <td class="CrAcciones"><i class="fa fa-pencil"></i> <i class="fa fa-times cambioItinerario"></i></td>
+                                        }
+                                        else
+                                        {
+                                            <td class="crStatus"><i class="fa fa-circle paused"></i></td>
+                                            <td class="CrAcciones"><i class="fa fa-pencil"></i> <i class="fa fa-check cambioItinerario"></i></td>
+                                        }
+                                    </tr>
+
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+        @*<div class="col-xs-2">
+                <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#createCruiser">
+                    <span><i class="fa fa-ship" style="font-size:20px"></i></span>
+                    <br> Crear crucero
+                </button>
+            </div>*@
+    </div>
+</div>
+
+
+<script>
+    $(".cambioItinerario").click(function (e) {
+            e.preventDefault();
+            var fechaInicio = $(this).closest('tr').attr('id');
+            var fkCrucero = $(this).closest('tr').attr('id');
+            var fkRuta = $(this).closest('tr').attr('id');
+            console.log("crucero");
+            console.log(fkCrucero);
+            $.ajax({
+                url: "gestion_cruceros/cambiarEstatusItinerario",
+                data: {
+                    fecha_inicio: fechaInicio,
+                    fk_crucero: fkCrucero,
+                    fk_ruta: fkRuta
+                },
+                type: 'POST',
+                success: function (data) {
+                    $.ajax({
+                        url: '/gestion_cruceros/M24_ListarItinerarios',
+                        type: 'GET',
+                        data: '',
+                        success: function (data, textStatus, jqXHR) {
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        });
+</script>

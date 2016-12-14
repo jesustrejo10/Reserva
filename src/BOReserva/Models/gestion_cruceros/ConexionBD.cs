@@ -1,4 +1,5 @@
 using System;
+using BOReserva.Models.gestion_ruta_comercial;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -127,7 +128,8 @@ namespace BOReserva.Models.gestion_cruceros
         ///</summary>
         public Boolean insertarCruceros(CGestion_crucero crucero)
         {
-            try {
+            try
+            {
                 Conectar();
                 using (comando = new SqlCommand(RecursosCruceros.AgregarCruceros, conexion))
                 {
@@ -144,14 +146,64 @@ namespace BOReserva.Models.gestion_cruceros
                     conexion.Close();
                     return true;
                 }
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return false;
             }
         }
-        ///<summary>
-        ///Método para eliminar un crucero de la base de datos
-        ///</summary>
+
+        public List<CGestion_itinerario> listarItinerario()
+        {
+            List<CGestion_itinerario> listaItinerarios = new List<CGestion_itinerario>();
+            CGestion_itinerario itinerario;
+            Conectar();
+            using (comando = new SqlCommand(RecursosCruceros.ListarItinerario, conexion))
+            {
+                comando.CommandType = CommandType.StoredProcedure;
+                conexion.Open();
+                comando.ExecuteNonQuery();
+                SqlDataReader reader = comando.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    itinerario = new CGestion_itinerario();
+                    itinerario._crucero = reader["nombreCrucero"].ToString();
+                    itinerario._fechaInicio = Convert.ToDateTime(reader["fechaInicio"].ToString());
+                    itinerario._fechaFin = Convert.ToDateTime(reader["fechaInicio"].ToString());
+                    itinerario._ItinerarioCrucero = reader["ruta"].ToString();
+                    itinerario._estatus = reader["estatus"].ToString();
+                    listaItinerarios.Add(itinerario);
+                }
+                reader.Close();
+            }
+            return listaItinerarios;
+        }
+        public List<CGestion_ruta> listarRutas()
+        {
+            List<CGestion_ruta> listaRuta = new List<CGestion_ruta>();
+            CGestion_ruta ruta;
+            Conectar();
+            using (comando = new SqlCommand(RecursosCruceros.ListarRuta, conexion))
+            {
+                comando.CommandType = CommandType.StoredProcedure;
+               // conexion.Open();
+                comando.ExecuteNonQuery();
+                SqlDataReader reader = comando.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    ruta = new CGestion_ruta();
+                    ruta._idRuta = int.Parse(reader["id"].ToString());
+                    ruta._rutaCrucero = reader["ruta"].ToString();
+
+                    listaRuta.Add(ruta);
+                }
+                reader.Close();
+            }
+            return listaRuta;
+        }
+
         public void eliminarCrucero(int id_crucero)
         {
             Conectar();
@@ -193,7 +245,6 @@ namespace BOReserva.Models.gestion_cruceros
                 }
             }
         }
-
 
         public Boolean insertarCabinas(CGestion_cabina cabina)
         {
@@ -299,8 +350,6 @@ namespace BOReserva.Models.gestion_cruceros
                     
          }
                
-        
-
         public List<CGestion_camarote> listarCamarotes(int idCabina)
         {
             List<CGestion_camarote> listaCamarote = new List<CGestion_camarote>();
@@ -331,6 +380,28 @@ namespace BOReserva.Models.gestion_cruceros
                 throw e;
             }
             return listaCamarote;
+        }
+
+        public Boolean cambiarEstadoItinerario(DateTime fechaInicio, int fkCrucero, int fkRuta )
+        {
+            try { 
+            Conectar();
+                using (comando = new SqlCommand(RecursosCruceros.CambioEstatusItinerario, conexion))
+                {
+                    comando.CommandType = CommandType.StoredProcedure;
+
+                    comando.Parameters.AddWithValue("fecha_inicio", fechaInicio);
+                    comando.Parameters.AddWithValue("fk_crucero", fkCrucero);
+                    comando.Parameters.AddWithValue("fk_ruta", fkRuta);
+                    conexion.Open();
+                    comando.ExecuteNonQuery();
+                    conexion.Close();
+                    return true;
+                }
+            } catch(Exception e)
+            {
+                return false;
+            }
         }
 
         public Boolean cambiarEstado(int id_crucero)

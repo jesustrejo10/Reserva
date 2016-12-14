@@ -520,7 +520,7 @@ jQuery(document).ready(function () {
         var url = '/gestion_cruceros/M24_AgregarItinerario';
         var method = 'GET';
         var data = '';
-        console.log("xjjj");
+
         $.ajax(
             {
                 url: url,
@@ -536,6 +536,30 @@ jQuery(document).ready(function () {
                 }
             });
     });
+
+    $("#m24_listaritinerario").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_cruceros/M24_ListarItinerario';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
+
     //Fin Modulo 24 Cruceros
 
 
