@@ -229,6 +229,7 @@
     <Compile Include="Models\gestion_aviones\CAvion.cs" />
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
     <Compile Include="Models\gestion_aviones\CModificarAvion.cs" />
+    <Compile Include="Models\gestion_boletos\CReserva.cs" />
     <Compile Include="Models\gestion_boletos\CBoleto.cs" />
     <Compile Include="Models\gestion_boletos\CBuscarVuelo.cs" />
     <Compile Include="Models\gestion_boletos\CLugar.cs" />
@@ -1430,6 +1431,13 @@
     <Content Include="Views\gestion_ruta_comercial\DetallesRutasComerciales.cshtml" />
     <Content Include="Views\gestion_roles\M13_AgregarRol.cshtml" />
     <Content Include="Views\gestion_boletos\M05_ModificarBoleto.cshtml" />
+    <Content Include="Views\gestion_boletos\M05_VisualizarReservasPasajero.cshtml" />
+    <Content Include="Views\gestion_boletos\M05_DetalleVueloReserva.cshtml" />
+    <Content Include="Views\gestion_boletos\M05_DetallePrueba.cshtml" />
+    <Content Include="Views\gestion_boletos\M05_BoletoCreadoReserva.cshtml" />
+    <Content Include="Views\gestion_boletos\M05_DetalleVuelo.cshtml" />
+    <Content Include="Views\gestion_boletos\M05_DetalleBoleto.cshtml" />
+    <Content Include="Views\gestion_boletos\M05_BoletoCreado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1498,13 +1506,10 @@
     <Content Include="Views\gestion_boletos\M05_VerVuelos.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\gestion_boletos\M05_DetalleVuelo.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\gestion_boletos\M05_DatosUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\gestion_boletos\M05_DetalleBoleto.cshtml" />
+    <Content Include="Views\gestion_boletos\M05_DetalleBoletoReserva.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Models\gestion_usuarios\RecursoBD.resx">

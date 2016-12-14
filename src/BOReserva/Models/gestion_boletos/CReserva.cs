@@ -5,7 +5,7 @@ using System.Web;
 
 namespace BOReserva.Models.gestion_boletos
 {
-    public class CBoleto
+    public class CReserva
     {
         public int _id { get; set; }
 
@@ -22,15 +22,15 @@ namespace BOReserva.Models.gestion_boletos
 
         public CPasajero _pasajero { get; set; }
 
-        public DateTime _fechaBoleto { get; set; }
+        public DateTime _fechaReservado { get; set; }
 
         public List<CVuelo> _vuelos { get; set; }
 
-        public String _codigo { get; set; }
+        public int _codigoReserva { get; set; }
 
-        public CBoleto(int id, int ida_vuelta, int escala, double costo, String origen, String destino,
+        public CReserva(int id, int ida_vuelta, int escala, double costo, String origen, String destino,
                       String nombre, String apellido, DateTime fechaBoleto, int idPasajero, string idOrigen, string idDestino,
-                      String tipoBol, String correo)
+                      String tipoBol, String correo, int codigoReserva)
         {
             _id = id;
             _ida_vuelta = ida_vuelta;
@@ -39,32 +39,14 @@ namespace BOReserva.Models.gestion_boletos
             _pasajero = new CPasajero(idPasajero, nombre, apellido, correo);
             _origen = new CLugar(idOrigen, origen);
             _destino = new CLugar(idDestino, destino);
-            _fechaBoleto = fechaBoleto;
+            _fechaReservado = fechaBoleto;
             _tipoBoleto = tipoBol;
             _vuelos = new List<CVuelo>();
+            _codigoReserva = codigoReserva;
 
         }
 
-        //Constructor usado para las reservas, ya que el único atributo extra en la tabla reserva es el código
-        public CBoleto(int id, int ida_vuelta, int escala, double costo, String origen, String destino,
-                      String nombre, String apellido, DateTime fechaBoleto, int idPasajero, string idOrigen, string idDestino,
-                      String tipoBol, String correo, string codigo)
-        {
-            _id = id;
-            _ida_vuelta = ida_vuelta;
-            _escala = escala;
-            _costo = costo;
-            _pasajero = new CPasajero(idPasajero, nombre, apellido, correo);
-            _origen = new CLugar(idOrigen, origen);
-            _destino = new CLugar(idDestino, destino);
-            _fechaBoleto = fechaBoleto;
-            _tipoBoleto = tipoBol;
-            _vuelos = new List<CVuelo>();
-            _codigo = codigo;
-
-        }
-
-        public CBoleto(int id, int ida_vuelta, int escala, double costo, String origen, String destino,
+        public CReserva(int id, int ida_vuelta, int escala, double costo, String origen, String destino,
                        DateTime fechaBoleto, string idOrigen, string idDestino, String tipoBol)
         {
             _id = id;
@@ -74,15 +56,13 @@ namespace BOReserva.Models.gestion_boletos
             _pasajero = new CPasajero();
             _origen = new CLugar(idOrigen, origen);
             _destino = new CLugar(idDestino, destino);
-            _fechaBoleto = fechaBoleto;
+            _fechaReservado = fechaBoleto;
             _tipoBoleto = tipoBol;
             _vuelos = new List<CVuelo>();
 
         }
 
-
-
-        public CBoleto(int id)
+        public CReserva(int id)
         {
             _id = id;
         }

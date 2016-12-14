@@ -23,6 +23,14 @@ namespace BOReserva.Models.gestion_boletos
         public String _apellido { get; set; }
         public int _pasaporte { get; set; }
         public String _correo { get; set; }
+        public int _idReserva { get; set; }
+
+        public int _idOrigen { get; set; }
+
+        public int _idDestino { get; set; }
+        public CPasajero _pasajero { get; set; }
+
+        public int _idVuelo { get; set; }
 
     }
 }

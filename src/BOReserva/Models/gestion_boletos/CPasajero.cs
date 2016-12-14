@@ -55,5 +55,8 @@ namespace BOReserva.Models.gestion_boletos
         public String _sexo {get; set;}
 
         public String _correo {get; set;}
+
+
+        public string _fecha_nacimiento { get; set; }
     }
 }

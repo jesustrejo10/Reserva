@@ -1,7 +1,5 @@
 ﻿@model BOReserva.Models.gestion_boletos.CBuscarVuelo
 
-<script src="/Scripts/Scripts_Boletos/BuscarVuelo.js"></script>
-
 <!---------------------- SECCION DE AGREGAR AVION ---------------->
 @using (Html.BeginForm("buscarVuelos", "gestion_boletos", null, FormMethod.Post, new { @id = "formBuscarVuelo", @class = "form-horizontal" }))
 {
@@ -20,11 +18,11 @@
                             <div class="col-md-12" style="margin-top:10px;">
                                 <div class="col-md-6">
                                         <label>Salir de:</label>
-                                        @Html.DropDownListFor(m => m.SelectedCiudadIdOrigen, Model.CiudadesOrigen, new { @class = "form-control select2", @id = "vuelta" })
+                                        @Html.DropDownListFor(m => m.SelectedCiudadIdOrigen, Model.CiudadesOrigen, new { @class = "form-control select2", @id = "id_origen" })
                                 </div>
                                 <div class="col-md-6">
                                         <label>Llegar a:</label>
-                                        @Html.DropDownListFor(m => m.SelectedCiudadIdDestino, Model.CiudadesDestino, new { @class = "form-control select2", @id = "vuelta" })
+                                        @Html.DropDownListFor(m => m.SelectedCiudadIdDestino, Model.CiudadesDestino, new { @class = "form-control select2", @id = "id_destino" })
                                 </div>
 
                                 <!-- /.row -->
@@ -36,7 +34,7 @@
                             <div class="col-md-12" style="margin-top:10px;">
                                 <div class="col-md-6">
                                         <label>Detalle:</label>
-                                        <select name="detalle" onchange="idavueltaOnChange(this)" class="form-control select2" style="width: 100%;">
+                                        <select id="ida_vuelta" name="detalle" onchange="idavueltaOnChange(this)" class="form-control select2" style="width: 100%;">
                                             <option value="ida" selected="selected">Solo ida</option>
                                             <option value="idavuelta">Ida y vuelta</option>
                                         </select>
@@ -44,9 +42,9 @@
 
                                 <div class="col-md-6">
                                         <label>Tipo:</label>
-                                        <select name="detalle" onchange="idavueltaOnChange(this)" class="form-control select2" style="width: 100%;">
-                                            <option value="ida" selected="selected">Comercial</option>
-                                            <option value="idavuelta">Ejecutivo</option>
+                                        <select id="tipo" name="detalle" onchange="idavueltaOnChange(this)" class="form-control select2" style="width: 100%;">
+                                            <option selected="selected">Comercial</option>
+                                            <option>Ejecutivo</option>
                                         </select>
                                 </div>
                             </div>
@@ -56,24 +54,24 @@
                         <div class="row">
                             <div class="col-md-12" style="margin-top:10px;">
                                 <div class="col-md-6">
-                                        <label id="idalbl">Fechas ida:</label>
+                                        <label id="idalbl">Fecha ida:</label>
                                         <div class="input-group">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-clock-o"></i>
                                             </div>
-                                            @Html.TextBoxFor(m => m._ida, null, new { @type = "date", @class = "form-control pull-right", @id = "ida" })
+                                            @Html.TextBoxFor(m => m._ida, null, new { @type = "date", @class = "form-control pull-right", @id = "fecha_ida" })
                                         </div>
                                         <!-- /.input group -->
                                 </div>
 
                                 <div class="col-md-6" id="divvuelta">
-                                        <label id="vueltalbl">Fechas vuelta:</label>
+                                        <label id="vueltalbl">Fecha vuelta:</label>
 
                                         <div class="input-group">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-clock-o"></i>
                                             </div>
-                                            @Html.TextBoxFor(m => m._vuelta, null, new { @type = "date", @class = "form-control pull-right", @id = "vuelta" })
+                                            @Html.TextBoxFor(m => m._vuelta, null, new { @type = "date", @class = "form-control pull-right", @id = "fecha_vuelta" })
 
                                         </div>
                                         <!-- /.input group -->
@@ -100,21 +98,47 @@
         </div>
         <!-- /.row -->
 
-    @*<script>
+    <script>
         $("#buscarVuelos").click(function (e) {
             e.preventDefault();
-            var form = $("#formBuscarVuelo");
-            $.ajax({
-                url: "gestion_boletos/buscarVuelos",
-                data: form.serialize(),
-                type: 'POST',
-                success: function (data) {
-                    alert("Se están buscando los vuelos");
-                    $('#formBuscarVuelo')[0].reset();
-                }
-            });
+
+
+
+            var id_origen = document.getElementById("id_origen").value;
+            // alert("Id origen: " + id_origen);
+            var id_destino = document.getElementById("id_destino").value;
+           // alert("Id destino: " + id_destino);
+            var ida_vuelta = document.getElementById("ida_vuelta").value;
+            //alert("Ida y/o vuelta: " + ida_vuelta);
+            var tipo = document.getElementById("tipo").value;
+            //alert("Tipo: " + tipo);
+            var fecha_ida = document.getElementById("fecha_ida").value;
+            //alert("Fecha ida: " + fecha_ida);
+            var fecha_vuelta = document.getElementById("fecha_vuelta").value;
+            //alert("Fecha vuelta: " + fecha_vuelta);
+
+
+            var url = '/gestion_boletos/M05_VerVuelos';
+            var method = 'GET';
+            var data = { idorigen : id_origen, iddestino : id_destino, idavuelta : ida_vuelta, tipo : tipo, fechaida : fecha_ida, fechavuelta : fecha_vuelta };
+
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+
         });
-        </script>*@
+        </script>
 }
 
 <script>
@@ -140,3 +164,4 @@
         }
     }
 </script>
+    
