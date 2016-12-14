@@ -52,7 +52,7 @@
                                 </tr>
                             }
                         }catch (Exception e){
-                            Response.Write("<script>alert('No hay vehículos para mostrar');</script>");
+                            Response.Write("<script>alert('No hay vehiculos para mostrar');</script>");
                         }
                         
                     <tfoot>
@@ -142,20 +142,20 @@
                 "info": true,
                 "autoWidth": true,
                 "language": {
-                    "lengthMenu": "Mostrando _MENU_ registros por página",
+                    "lengthMenu": "Mostrando _MENU_ registros por pagina",
                     "zeroRecords": "Sin registros disponibles",
                     "info": "Página _PAGE_ de _PAGES_",
                     "infoEmpty": "No hay registros disponibles",
                     "infoFiltered": "(filtered from _MAX_ total records)",
                     "infoPostFix":    "",
-                    "search":         "Buscar:",
+                    "search":         "Buscar: ",
                     "url":            "",
                     "infoThousands":  ",",
                     "loadingRecords": "Cargando...",
 
                     "paginate": {
                         "first":    "Primero",
-                        "last":     "Último",
+                        "last":     "Ultimo",
                         "next":     "Siguiente",
                         "previous": "Anterior"
                     }
@@ -263,14 +263,14 @@
 
                                     $("#contenido").empty();
                                     $("#contenido").append(data);
-                                    alert("Se elimino exitosamente el vehículo");
+                                    alert("Se elimino exitosamente el vehiculo");
                                 },
                                 error: function (jqXHR, textStatus, errorThrown) {
                                     alert(errorThrown);
                                 }
                             });
                     } else if (data.includes("Reserva_Automovil")){
-                        alert("No se puede eliminar este vehículo porque tiene una reserva");
+                        alert("No se puede eliminar este vehiculo porque tiene una reserva");
                     } else {
                         alert(data);
                     }
@@ -308,7 +308,7 @@
 
                                     $("#contenido").empty();
                                     $("#contenido").append(data);
-                                    alert("Se cambió exitosamente el estatus del vehículo");
+                                    alert("Se cambio exitosamente el estatus del vehiculo");
                                 },
                                 error: function (jqXHR, textStatus, errorThrown) {
                                     alert(errorThrown);
@@ -350,7 +350,7 @@
 
                                     $("#contenido").empty();
                                     $("#contenido").append(data);
-                                    alert("Se cambió exitosamente el estatus del vehículo");
+                                    alert("Se cambio exitosamente el estatus del vehiculo");
                                 },
                                 error: function (jqXHR, textStatus, errorThrown) {
                                     alert(errorThrown);

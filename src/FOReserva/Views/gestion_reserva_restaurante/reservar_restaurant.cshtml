@@ -131,9 +131,22 @@
 					<h2 class="panel-title">Revisiones</h2>
 				</div>
 				<div class="panel-body">
-					<center> <input id="lista_rev" type="button" value="Ver Revisiones" class="btn btn-primary boton" /> </center>
-					<center> <a class="btn btn-primary" href="@Url.Action("crear_revision", "gestion_revision")">Agregar Revision</a></center>
-				</div>
+
+@using (Html.BeginForm("lista_revisiones", "gestion_revision", FormMethod.Post, new { @id = "revision_form" }))
+                    {
+    <input type="hidden" name="revision" id="" value="@Model.Id" />
+    <center> <input id="lista_rev" type="submit" value="Ver Revisiones" class="btn btn-primary boton" /> </center>
+}
+
+			
+                     @using (Html.BeginForm("crear_revision", "gestion_revision", FormMethod.Post, new { @id = "revision_form" }))
+                    {
+                      <input type="hidden" name="revision1" id="" value="@Model.Id" />
+                         
+                          <center> <input id="lista_rev1" type="submit" value="Agregar Revision" class="btn btn-primary boton" /> </center>
+				
+                     }
+                         </div>
 			</div>
 		</div>
         <!-- /FEATURED GRID -->
@@ -209,25 +222,11 @@
 
     });
 
-    $(document).ready(function () {
-        $("#lista_rev").click(function () {
-           
-            var ide = $(this).parent().parent().parent().parent().attr("id");
-            
-            jQuery.ajax({
-                type: "GET",
-                url: "/gestion_revision/lista_revisiones",
-                data: { id: ide }
-            }).done(function () {
-                alert("Envie")
-            }).fail(function () {
-                alert("Ocurrió un error")
-            });
-
-        });
-
-    });
+   
 
 </script>
 
 
+
+
+   

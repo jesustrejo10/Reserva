@@ -37,9 +37,10 @@ jQuery(document).ready(function () {
                error: function (jqXHR, textStatus, errorThrown) {
                    alert(errorThrown);
                }
-           });
-    });
 
+           }); 
+    });
+    
     $("#m02_VisualizarAvion").click(function (e) {
         e.preventDefault();
         var url = '/gestion_aviones/M02_VisualizarAviones';
@@ -104,9 +105,9 @@ jQuery(document).ready(function () {
             });
     });
     //FIN DE RUTAS
-
+ 
     //INICIO AUTOMOVILES
-
+ 
     $("#m08AgregarAutomovil").click(function (e) {
         e.preventDefault();
         var url = '/gestion_automoviles/M08_AgregarAutomovil';
@@ -114,6 +115,8 @@ jQuery(document).ready(function () {
         var data = '';
         $.ajax(
 
+            alert("Se esta procesando tu solicitud, por favor espere"),
+ 
             {
                 url: url,
                 type: method,
@@ -130,10 +133,12 @@ jQuery(document).ready(function () {
 
     $("#m08VisualizarAutomoviles").click(function (e) {
         e.preventDefault();
+
         var url = '/gestion_automoviles/M08_VisualizarAutomoviles';
         var method = 'GET';
         var data = '';
         $.ajax(
+        alert("Se esta procesando tu solicitud, por favor espere"),
             {
                 url: url,
                 type: method,
@@ -301,35 +306,6 @@ jQuery(document).ready(function () {
     });
     // FIN DE HOTELES
 
-
-    // INICIO RESERVAS
-    $("#m05VerReserva").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_boletos/M05_VerReserva';
-        var method = 'GET';
-        var data = '';
-
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-    });
-    //FIN RESERVAS
-
-   
-   
-   
-
     /* INICIO M10 RESTAURANTES BO */
     $("#verRestaurantes").click(function (e) {
         e.preventDefault();
@@ -359,6 +335,29 @@ jQuery(document).ready(function () {
     /* FIN M10 RESTAURANTES BO */
 
     //M05 Boletos y checkin
+
+    $("#m05VerReserva").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_boletos/M05_VerReserva';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
     $("#m05VisualizarBoletos").click(function (e) {
         e.preventDefault();
         var url = '/gestion_boletos/M05_VisualizarBoletos';
@@ -380,6 +379,52 @@ jQuery(document).ready(function () {
                 }
             });
     });
+
+    $("#m05CheckIn").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_check_in/M05_CheckIn';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
+    $("#m05RegistroEquipaje").click(function (e) {
+    e.preventDefault();
+    var url = '/gestion_check_in/M05_RegistroEquipaje';
+    var method = 'GET';
+    var data = '';
+
+    $.ajax(
+        {
+            url: url,
+            type: method,
+            data: data,
+            success: function (data, textStatus, jqXHR) {
+
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+
+      });
+    //FIN M05
 
     $("#m24_agregarcrucero").click(function (e) {
         e.preventDefault();
@@ -446,31 +491,6 @@ jQuery(document).ready(function () {
                 }
             });
     });
-
-
-    $("#m05CheckIn").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_check_in/M05_CheckIn';
-        var method = 'GET';
-        var data = '';
-
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-    });
-    //FIN M05
-
 
     //M13 ROLES
     $("#m13VisualizarRol").click(function (e) {
@@ -630,6 +650,7 @@ jQuery(document).ready(function () {
     //Fin M04 Vuelos
 
 
+
     //M11 Gestion Ofertas y Paquetes
     $("#agregarOferta").unbind('click');
     $("#agregarOferta").click(function (e) {
@@ -771,6 +792,3 @@ jQuery(document).ready(function () {
 
 
 
-        /*
-        
-        */

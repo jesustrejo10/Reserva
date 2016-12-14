@@ -1,3 +1,4 @@
+
 using FOReserva.Models.Revision;
 using FOReserva.Servicio;
 using System.Collections.Generic;
@@ -22,20 +23,21 @@ namespace FOReserva.Controllers
             return PartialView();
         }
 
-        public ActionResult lista_revisiones(int id)
+        public ActionResult lista_revisiones(int revision)
         {
-            Console.WriteLine("Lista Rev " + id);
+            Console.WriteLine("Lista Rev " + revision);
             ManejadorSQLRevision manejador = new ManejadorSQLRevision();
-            List<CRevision> lista = manejador.BuscarRevisiones(id);
+            List<CRevision> lista = manejador.BuscarRevisiones(revision);
             return PartialView(lista);
         }
 
-        public ActionResult crear_revision_form(string msj, int ptn)
+        public ActionResult crear_revision_form(string rev_mensaje, int rev_puntuacion)
         {
-            Console.WriteLine("LLEGUE A CREAR REVISION2222");
+            
             ManejadorSQLRevision manejador = new ManejadorSQLRevision();
-            bool resp = manejador.Crear_Revision(msj, ptn);
+            bool resp = manejador.Crear_Revision(rev_mensaje, rev_puntuacion);
             return PartialView();
+
         }
 
 
@@ -53,7 +55,7 @@ namespace FOReserva.Controllers
             return PartialView();
         }
 
-        public ActionResult crear_revision()
+        public ActionResult crear_revision(int revision1)
         {
             Console.WriteLine("LLEGUE A CREAR REVISION");
             CRevision rev = new CRevision();
