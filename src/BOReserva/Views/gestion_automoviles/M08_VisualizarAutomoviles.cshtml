@@ -134,10 +134,35 @@
     <script language="javascript" type="text/javascript">
         $(document).ready(function () {
             //e.preventDefault();
-            table = $('#example1').DataTable(
-                {
-                    "pageLength": 100
-                });
+            table = $('#example1').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true,
+                "language": {
+                    "lengthMenu": "Mostrando _MENU_ registros por página",
+                    "zeroRecords": "Sin registros disponibles",
+                    "info": "Página _PAGE_ de _PAGES_",
+                    "infoEmpty": "No hay registros disponibles",
+                    "infoFiltered": "(filtered from _MAX_ total records)",
+                    "infoPostFix":    "",
+                    "search":         "Buscar:",
+                    "url":            "",
+                    "infoThousands":  ",",
+                    "loadingRecords": "Cargando...",
+
+                    "paginate": {
+                        "first":    "Primero",
+                        "last":     "Último",
+                        "next":     "Siguiente",
+                        "previous": "Anterior"
+                    }
+                },
+                "pageLength": 100
+
+            });
 
             $(".clasedeprueba").on("click", (function () {
 

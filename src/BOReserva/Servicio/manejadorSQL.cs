@@ -1029,6 +1029,7 @@ namespace BOReserva.Servicio
             }
             catch (SqlException ex)
             {
+                Debug.WriteLine(ex.ToString());
                 conexion.Close();
                 return null;
             }
