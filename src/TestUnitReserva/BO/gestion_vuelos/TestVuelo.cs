@@ -48,6 +48,7 @@ namespace TestUnitReserva.BO.gestion_vuelos
             int busqueda = sql.idRutaVuelo(Origen, Destino);
             //Pruebo que al buscar una ruta con una ciudad de origen y una ciudad destino dada me devuelva un id existente.
             Assert.NotNull(busqueda);
+            Assert.That(() => sql.idRutaVuelo(null,null), Throws.TypeOf<NullReferenceException>());
         }
 
         [Test]
@@ -59,6 +60,7 @@ namespace TestUnitReserva.BO.gestion_vuelos
             Assert.IsNotNull(consulta);
             // Ya se que una de las ciudades destino de Caracas es Maracaibo
             //Assert.AreEqual(consulta, "Maracaibo");
+            Assert.That(() => sql.consultarDestinos(null), Throws.TypeOf<NullReferenceException>());
 
         }
         [Test]
@@ -77,6 +79,7 @@ namespace TestUnitReserva.BO.gestion_vuelos
             List<CCrear_Vuelo> cargar = sql.cargarOrigenes();
             // Pruebo que al cargar un Origen no me retorne una lista nula.
             Assert.IsNotNull(cargar);
+            Assert.That(() => sql.cargarOrigenes(), Throws.TypeOf<NullReferenceException>());
         }
 
         [Test]
@@ -88,6 +91,7 @@ namespace TestUnitReserva.BO.gestion_vuelos
             Assert.AreEqual(modelo, "Boeing 777");
             //Verifico que no me traiga un modelo nulo.
             Assert.IsNotNull(modelo);
+            Assert.That(() => sql.modeloAvion(null), Throws.TypeOf<NullReferenceException>());
         }
 
         [Test]
@@ -99,6 +103,8 @@ namespace TestUnitReserva.BO.gestion_vuelos
             Assert.AreEqual(pasajeros, 40);
             //Verifico que no me traiga una capacidad nula.
             Assert.IsNotNull(pasajeros);
+            //pruebo que al buscar una capacidad de un avion con una matricula nula, dispare la excepcion de tipo NullReferenceException
+            Assert.That(() => sql.pasajerosAvion(null), Throws.TypeOf<NullReferenceException>());
 
         }
 
