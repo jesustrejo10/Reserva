@@ -22,19 +22,21 @@ $("#enviar").click(function (e) {
     var form = $("#formGuardarRuta");
     var origen = $('#rutaOrigen').find(":selected").text();
     var destino = $('#rutaDestino').find(":selected").text();
-    $.ajax({
-        url: "gestion_ruta_comercial/guardarRuta",
-        data: form.serialize(),
-        type: 'POST',
-        success: function (data) {
-            alert("Ruta guardada exitosamente");
-            $('#formGuardarRuta')[0].reset();
-        }, error: function (xhr, textStatus, exceptionThrown) {
-            //muestro el texto del error
-            alert(xhr.responseText);
-        }
+    if (confirm("¿Esta seguro que desea agregar esta ruta?") == true) {
+        $.ajax({
+            url: "gestion_ruta_comercial/guardarRuta",
+            data: form.serialize(),
+            type: 'POST',
+            success: function (data) {
+                alert("Ruta guardada exitosamente");
+                $('#formGuardarRuta')[0].reset();
+            }, error: function (xhr, textStatus, exceptionThrown) {
+                //muestro el texto del error
+                alert(xhr.responseText);
+            }
 
-    });
+        });
+    }
 });
 
 
@@ -78,22 +80,6 @@ $("#VisualizarRutasComerciales").click(function (e) {
 
 });
 
-/*$(".m03EditarRutas").click(function (e) {
-    e.preventDefault();
-    $.ajax({
-        url: '/gestion_ruta_comercial/ModificarRutasComerciales',
-        data: '',
-        type: 'GET',
-        success: function (data) {
-            $("#contenido").empty();
-            $("#contenido").append(data);
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert(errorThrown);
-        }
-    });
-});*/
-
 
 $(".m03DetalleRutas").click(function (e) {
     e.preventDefault();
@@ -120,8 +106,7 @@ $(document).ready(function () {
             type: "GET",
             url: "/gestion_ruta_comercial/ModificarRutasComerciales",
             data: { idRuta:identificador }//valor = es el nombre q recibes en el método es decir public ActionResult ModificarRutasComerciales(string valor)
-        }).done(function (data) {
-            //$("#sdssss").append(data);
+        }).done(function (data) {          
 
             $("#contenido").empty();
             $("#contenido").append(data);

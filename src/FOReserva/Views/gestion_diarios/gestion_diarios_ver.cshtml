@@ -1,0 +1,88 @@
+﻿@model FOReserva.Models.Diarios.CDiarioModel
+
+@{
+    ViewBag.Title = "Diarios de Viaje";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<div class="panel panel-default col-sm-12">
+    <div id="diariodiv" class="col-sm-6">
+        <div class="clearfix margin-bottom-60">
+
+            <div class="border-bottom-1 border-top-1 padding-10">
+                <span class="pull-right size-11 margin-top-3 text-muted">Lecturas: <b>@Model.Num_visita</b> | Publicado: <b>@Model.Fecha_carga.ToString("d \\de MMMM \\de yyyy")</b></span>
+                <strong>@Model.Nombre</strong>
+            </div>
+
+            <div class="block-review-content">
+
+                <div class="block-review-body">
+
+                    <div class="block-review-avatar text-center">
+                        <div class="push-bit">
+                            <a href="page-profile.html">
+                                <img src="@Url.Content("~/Images/anon_user.png")" width="100" alt="avatar">
+                            </a>
+                        </div>
+                        <small class="block">@Model.Nombre_usuario(Model.Id)</small>
+
+                        <hr />
+                        <small class="block"><b>Calificación del viajero:</b></small>
+                        <div class="rating rating-@Model.Calif_creador size-13"><!-- rating-0 ... rating-5 --></div>
+                    </div>
+                    <p>
+                        @Model.Descripcion
+                    </p>
+                    <em>- @Model.Nombre_usuario(Model.Id)</em>
+                </div>
+
+            </div>
+
+
+
+        </div>
+        <div class="border-bottom-1 border-top-1 padding-10">
+            <span class="pull-right size-11 margin-top-3 text-muted">Puntuacion: <b>@Model.Rating</b> | <a href="#" class="text-success"><i class="fa fa-thumbs-up"></i> Like</a> <a href="#" class="text-danger"><i class="fa fa-thumbs-down"></i> Dislike</a></span>
+            <strong>Tiempo de viaje: <b>@((int)(Model.Fecha_fin.Subtract(Model.Fecha_ini)).TotalDays + 1) d&iacute;as</b> (@Model.Fecha_ini.ToString("dd/MM/yyyy") - @Model.Fecha_fin.ToString("dd/MM/yyyy"))</strong>
+        </div>
+    </div>
+
+
+    <div id=" fotosdiv" class="col-sm-6">
+        <div class="clearfix margin-bottom-60">
+
+            <div class="masonry-gallery columns-2 clearfix lightbox" data-img-big="3" data-plugin-options='{"delegate": "a", "gallery": {"enabled": true}}'>
+
+                <a class="image-hover" href="@Url.Content("~/Images/diario1.jpg")">
+                    <img src="@Url.Content("~/Images/diario1.jpg")" alt="dv1">
+                </a>
+
+                <a class="image-hover" href="@Url.Content("~/Images/diario2.jpg")">
+                    <img src="@Url.Content("~/Images/diario2.jpg")" alt="dv1">
+                </a>
+
+                <a class="image-hover" href="@Url.Content("~/Images/diario3.jpg")">
+                    <img src="@Url.Content("~/Images/diario3.jpg")" alt="dv1">
+                </a>
+
+                <a class="image-hover" href="@Url.Content("~/Images/diario4.jpg")">
+                    <img src="@Url.Content("~/Images/diario4.jpg")" alt="dv1">
+                </a>
+
+                <a class="image-hover" href="@Url.Content("~/Images/diario5.jpg")">
+                    <img src="@Url.Content("~/Images/diario5.jpg")" alt="dv1">
+                </a>
+
+                <a class="image-hover" href="@Url.Content("~/Images/diario6.jpg")">
+                    <img src="@Url.Content("~/Images/diario6.jpg")" alt="dv1">
+                </a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

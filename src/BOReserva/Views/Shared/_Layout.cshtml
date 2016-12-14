@@ -137,7 +137,17 @@
                     </li>
                     <!-- FIN MODULO DE RUTAS COMERCIALES -->
                     <!-- MODULO DE VUELOS -->
-                    <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Vuelos</a></li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-plane"></i> <span>Gestión de Vuelos</span> <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="m04_crearvuelo"><a href="#"> Crear </a></li>
+                            <li id="m04_visualizarvuelo"><a href="#"> Visualizar </a></li>
+                        </ul>
+                    </li>
                     <!-- FIN MODULO DE VUELOS -->
                     <!-- MODULO DE BOLETOS AEREOS Y CHECK-IN -->
                     <li class="treeview">
@@ -181,9 +191,8 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li id="agregarRestaurantes"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar Nuevo Restaurante</a></li>
-                            <li id="verRestaurantes"><a href="#"><i class="fa fa-eye"></i>Ver Restaurantes</a></li>
-                            <!--<li id="editarRestaurantes"><a href="#"><i class="fa fa-edit"></i>Editar Restaurantes</a></li>-->
+                            <li id="agregarRestaurantes"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar Restaurante</a></li>
+                            <li id="verRestaurantes"><a href="#"><i class="fa fa-eye"></i>Visualizar Restaurantes</a></li>
                         </ul>
                     </li>
                     <!-- FIN DE MODULO DE RESTAURANTES -->
@@ -215,10 +224,8 @@
                         <ul class="treeview-menu">
                             <li id="agregarOferta"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar Oferta</a></li>
                             <li id="agregarPaquete"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar Paquete</a></li>
-                            <li id="modificarOferta"><a href="#"><i class="fa fa-edit"></i>Modificar Oferta</a></li>
-                            <li id="modificarPaquete"><a href="#"><i class="fa fa-edit"></i>Modificar Paquete</a></li>
                             <li id="consultarOferta"><a href="#"><i class="fa fa-eye"></i>Visualizar Oferta</a></li>
-                            <li id="consultarPaquete"><a href="#"><i class="fa fa-eye"></i>Consultar Paquete</a></li>
+                            <li id="consultarPaquete"><a href="#"><i class="fa fa-eye"></i>Visualizar Paquete</a></li>
                         </ul>
                     </li>
                     <!-- FIN DE MODULO DE OFERTAS Y PAQUETES -->
@@ -230,8 +237,8 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li id="gestionUsuarios"><a href="/gestion_usuarios/M12_index"><i class="fa fa-plus-square-o"></i>Consultar</a></li>
-                            <li id="agregarUsuarios"><a href="/gestion_usuarios/M12_AgregarUsuario"><i class="fa fa-plus-square-o"></i>Agregar</a></li>
+                            <li id="agregarUsuarios"><a href="#">Agregar</a></li>
+                            <li id="indexUsuarios"><a href="#">Visualizar</a></li>
                         </ul>
                     </li>
                     <!-- FIN DE MODULO DE GESTION DE USUARIOS -->
@@ -244,8 +251,9 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li id="m13AgregarRol"><a href="#"><i class="fa fa-plus-square-o"></i>Crear</a></li>
-                            <li id="m13VisualizarRol"><a href="#"><i class="fa fa-eye"></i>Visualizar</a></li>
+                            <li id="m13AgregarRol"><a href="#">Agregar</a></li>
+                            <li id="m13VisualizarRol"><a href="#">Visualizar</a></li>
+                            <li id="m13ModificarRol"><a href="#">Modificar</a></li>
                         </ul>
                     </li>
                     <!-- FIN DE MODULO DE GESTION DE ROLES -->
@@ -568,6 +576,7 @@
     <!-- ChartJS 1.0.1 -->
     <script src="/Content/plugins/chartjs/Chart.min.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+
     <script src="/Content/dist/js/demo.js"></script>
     
     }

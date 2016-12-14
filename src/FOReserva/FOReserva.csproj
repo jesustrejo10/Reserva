@@ -1,4 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
+
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -1613,6 +1614,7 @@
     <Content Include="Content\assets\plugins\jquery\jquery-2.1.4.min.map" />
     <Content Include="Content\assets\plugins\jqvmap\LICENSE" />
     <Content Include="Content\assets\plugins\jqvmap\README.md" />
+    <Content Include="Content\assets\plugins\slider.elastic\js\jquery.eislideshow.js.bak" />
     <Content Include="Content\assets\plugins\slider.flexslider\CONTRIBUTING.md" />
     <Content Include="Content\assets\plugins\slider.flexslider\css\base.less" />
     <Content Include="Content\assets\plugins\slider.flexslider\css\font.less" />
@@ -1670,6 +1672,13 @@
     <Content Include="Content\assets\plugins\slider.swiper\dist\js\maps\swiper.jquery.min.js.map" />
     <Content Include="Content\assets\plugins\slider.swiper\dist\js\maps\swiper.min.js.map" />
     <Content Include="Content\assets\plugins\styleswitcher\color_schemes\color_scheme.fla" />
+    <Content Include="Images\anon_user.png" />
+    <Content Include="Images\diario1.jpg" />
+    <Content Include="Images\diario2.jpg" />
+    <Content Include="Images\diario3.jpg" />
+    <Content Include="Images\diario4.jpg" />
+    <Content Include="Images\diario5.jpg" />
+    <Content Include="Images\diario6.jpg" />
     <Content Include="Images\restaurant_generic.jpg" />
     <Content Include="Models\ORM\ModelDBReserva.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1697,6 +1706,10 @@
     <Content Include="Models\ORM\ModelDBReserva.edmx.diagram">
       <DependentUpon>ModelDBReserva.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\assets\plugins\bootstrap.daterangepicker\bower.json" />
+    <Content Include="Content\assets\plugins\bootstrap.daterangepicker\daterangepicker.scss" />
+    <Content Include="Content\assets\plugins\bootstrap.daterangepicker\package.json" />
+    <Content Include="Content\assets\plugins\bootstrap.daterangepicker\README.md" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Properties\PublishProfiles\Webdeploy SmarterASP.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
@@ -1732,6 +1745,7 @@
     <Content Include="Views\ajax\dummy-lightbox.html" />
     <Content Include="Views\ajax\dummy-modal-ajax.html" />
     <Content Include="Views\busqueda_compra_boletos\placeholder.html" />
+    <Content Include="Views\gestion_planificacion_vacaciones\placeholder.html" />
     <Content Include="Views\gestion_reclamos\placeholder.html" />
     <Content Include="Views\gestion_reserva_auto\placeholder.html" />
     <Content Include="Views\gestion_reserva_crucero\placeholder.html" />
@@ -3023,6 +3037,7 @@
     <Content Include="Views\Shared\assets\plugins\jquery\jquery-2.1.4.min.map" />
     <Content Include="Views\Shared\assets\plugins\jqvmap\LICENSE" />
     <Content Include="Views\Shared\assets\plugins\jqvmap\README.md" />
+    <Content Include="Views\Shared\assets\plugins\slider.elastic\js\jquery.eislideshow.js.bak" />
     <Content Include="Views\Shared\assets\plugins\slider.flexslider\CONTRIBUTING.md" />
     <Content Include="Views\Shared\assets\plugins\slider.flexslider\css\base.less" />
     <Content Include="Views\Shared\assets\plugins\slider.flexslider\css\font.less" />
@@ -3093,6 +3108,7 @@
     <Content Include="Views\Shared\_MenuPerfil.cshtml" />
     <Content Include="Views\gestion_reserva_auto\M19_Reserva_Autos.cshtml" />
     <Content Include="Views\gestion_reserva_auto\M19_Reserva_AutosImagenes.cshtml" />
+    <Content Include="Views\Shared\_LayoutPerfil.cshtml" />
     <Content Include="Views\gestion_reserva_auto\M19_Reserva_Autos_Perfil.cshtml" />
     <Content Include="Views\Shared\Perfil.cshtml" />
     <Content Include="Views\gestion_planificacion_vacaciones\M17_gestion_itinerario_Perfil.cshtml" />
@@ -3114,11 +3130,14 @@
     <Content Include="Views\gestion_reserva_crucero\gestion_reserva_cruceroImagenes.cshtml" />
     <Content Include="Views\gestion_diarios\_NoHayResultados.cshtml" />
     <Content Include="Views\gestion_diarios\gestion_diarios_crear.cshtml" />
+    <Content Include="Views\Shared\assets\plugins\slider.swiper\dist\js\maps\swiper.min.js.map" />
     <Content Include="Views\gestion_reserva_restaurante\_EditarReserva.cshtml" />
+    <Content Include="Views\gestion_diarios\gestion_diarios_ver.cshtml" />
+    <Content Include="Views\gestion_revision\lista_revisiones.cshtml" />
+    <Content Include="Views\gestion_revision\consultar_revision.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\gestion_diario_viaje\" />
     <Folder Include="Views\registro_autenticacion\" />
   </ItemGroup>
   <ItemGroup>
