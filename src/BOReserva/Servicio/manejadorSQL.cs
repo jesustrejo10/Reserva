@@ -31,23 +31,8 @@ namespace BOReserva.Servicio
         //string que contendra la conexion a la bd
         private string stringDeConexion = null;
 
-        /// <summary>
-        /// metodo que retorna el string de conexion 
-        /// </summary>
-        /// <returns>string que contiene la información de la conexion hacia la base de datos</returns>
-        public string getstringDeConexion ()
-        {
-            return this.stringDeConexion;
-        }
 
-        /// <summary>
-        /// metodo que se usaria para cambiar el string de conexion
-        /// </summary>
-        /// <param name="nuevoString">string que contiene la información de la conexion hacia la base de datos</param>
-        public void setstringDeConexion (string nuevoString)
-        {
-            this.stringDeConexion = nuevoString;
-        }
+
 
         //Procedimiento del Modulo 6 para agregar platos a la base de datos.
         public Boolean insertarPlato(CAgregarComida model)
@@ -2897,6 +2882,15 @@ namespace BOReserva.Servicio
         }
 
         //Fin modulo 11
+
+
+      
+
+        public string stringDeConexions
+        {
+            get { return this.stringDeConexion; }
+            set { this.stringDeConexion = value; }
+        }
 
 
 
