@@ -48,8 +48,8 @@ namespace BOReserva.Controllers
         public string[] dlstatusvuelo()
         {
             string[] _listaEstados = new String[2];
-            _listaEstados[0] = "Activo";
-            _listaEstados[1] = "Inactivo";
+            _listaEstados[0] = "activo";
+            _listaEstados[1] = "inactivo";
             return _listaEstados;
         }
 
