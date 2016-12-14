@@ -26,12 +26,26 @@ namespace BOReserva.Models.gestion_cruceros
         public DateTime _fechaFin { get; set; }
         public DateTime _fechaInicio { get; set; }
         public int _fkRuta { get; set; }
-        public List<CGestion_itinerario> itinerario { get; set; }
+        
+
+        public string _ItinerarioCrucero { get; set; }
+
+        public string _estatus { get; set; }
+
+        public string _crucero { get; set; }
+
+        public List<CGestion_itinerario> itinerarios { get; set; }
 
         public void AgregarItinerario(CGestion_itinerario itinerario)
         {
             ConexionBD cbd = new ConexionBD();
             cbd.insertarItinerario(itinerario);
+        }
+
+        public void cambiarEstatusItinerario(DateTime fechaInicio, int fkCrucero, int fkRuta)
+        {
+            ConexionBD cbd = new ConexionBD();
+            cbd.cambiarEstadoItinerario(fechaInicio,fkCrucero, fkRuta);
         }
     }
 }

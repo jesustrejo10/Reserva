@@ -1,4 +1,5 @@
 using BOReserva.Models.gestion_cruceros;
+using BOReserva.Models.gestion_ruta_comercial;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -35,13 +36,15 @@ namespace BOReserva.Controllers
         {
             ConexionBD cbd = new ConexionBD();
             VistaListaCrucero vlc = new VistaListaCrucero();
-            //VistaListaRuta vlr = new VistaListaRuta(); Hacer VistaListaRuta
-            CGestion_itinerario itinerario = new CGestion_itinerario() { itinerario = new List<CGestion_itinerario>() };
+            VistaListaRuta vlr = new VistaListaRuta();
+            CGestion_itinerario itinerario = new CGestion_itinerario() { itinerarios = new List<CGestion_itinerario>() };
+          //  CGestion_crucero crucero = new CGestion_crucero();
             vlc.cruceros = cbd.listarCruceros();
+            vlr.rutas = cbd.listarRutas();
             ViewBag.ShowDropDown = new SelectList(vlc.cruceros, "_idCrucero", "_nombreCrucero");
+            ViewBag.ShowDropDown2 = new SelectList(vlr.rutas, "_idRuta", "_rutaCrucero");
             return PartialView("M24_AgregarItinerario", itinerario);
             //return PartialView();
-            // falta poner la ruta
         }
 
         public ActionResult M24_AgregarCamarote()
@@ -81,6 +84,13 @@ namespace BOReserva.Controllers
             return (Json(listaCamarotes, JsonRequestBehavior.AllowGet));
         }
 
+        public ActionResult M24_ListarItinerario()
+        {
+            ConexionBD cbd = new ConexionBD();
+            VistaListaItinerario vlc = new VistaListaItinerario();
+            vlc.itinerarios = cbd.listarItinerario();
+            return PartialView("M24_ListarItinerario", vlc);
+        }
 
         public ActionResult M24_ListarCruceros()
         {
@@ -167,6 +177,15 @@ namespace BOReserva.Controllers
             CGestion_crucero crucero = new CGestion_crucero();
             crucero.cambiarEstatusCruceros(id_crucero);
             Console.WriteLine(id_crucero);
+            return (Json(true, JsonRequestBehavior.AllowGet));
+        }
+
+        [HttpPost]
+        public JsonResult cambiarEstatusItinerario(String fechaInicio, int fkCrucero, int fkRuta)
+        {
+            DateTime pty = Convert.ToDateTime(fechaInicio);
+            CGestion_itinerario itinerario = new CGestion_itinerario();
+            itinerario.cambiarEstatusItinerario(pty, fkCrucero, fkRuta);
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
 

@@ -1,4 +1,5 @@
 using System;
+using BOReserva.Models.gestion_ruta_comercial;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -113,6 +114,59 @@ namespace BOReserva.Models.gestion_cruceros
             return listaCruceros;
         }
 
+        public List<CGestion_itinerario> listarItinerario()
+        {
+            List<CGestion_itinerario> listaItinerarios = new List<CGestion_itinerario>();
+            CGestion_itinerario itinerario;
+            Conectar();
+            using (comando = new SqlCommand(RecursosCruceros.ListarItinerario, conexion))
+            {
+                comando.CommandType = CommandType.StoredProcedure;
+                conexion.Open();
+                comando.ExecuteNonQuery();
+                SqlDataReader reader = comando.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    itinerario = new CGestion_itinerario();
+                    itinerario._crucero = reader["nombreCrucero"].ToString();
+                    itinerario._fechaInicio = Convert.ToDateTime(reader["fechaInicio"].ToString());
+                    itinerario._fechaFin = Convert.ToDateTime(reader["fechaInicio"].ToString());
+                    itinerario._ItinerarioCrucero = reader["ruta"].ToString();
+                    itinerario._estatus = reader["estatus"].ToString();
+                    listaItinerarios.Add(itinerario);
+                }
+                reader.Close();
+            }
+            return listaItinerarios;
+        }
+        public List<CGestion_ruta> listarRutas()
+        {
+            List<CGestion_ruta> listaRuta = new List<CGestion_ruta>();
+            CGestion_ruta ruta;
+            Conectar();
+            using (comando = new SqlCommand(RecursosCruceros.ListarRuta, conexion))
+            {
+                comando.CommandType = CommandType.StoredProcedure;
+               // conexion.Open();
+                comando.ExecuteNonQuery();
+                SqlDataReader reader = comando.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    ruta = new CGestion_ruta();
+                    ruta._idRuta = int.Parse(reader["id"].ToString());
+                    ruta._rutaCrucero = reader["ruta"].ToString();
+
+                    listaRuta.Add(ruta);
+                }
+                reader.Close();
+            }
+            return listaRuta;
+        }
+
+    
+
         public void insertarCruceros(CGestion_crucero crucero)
         {
             Conectar();
@@ -177,17 +231,28 @@ namespace BOReserva.Models.gestion_cruceros
 
         public void insertarItinerario(CGestion_itinerario itinerario)
         {
-            Conectar();
-            using (comando = new SqlCommand(RecursosCruceros.AgregarItinerario, conexion))
+            try
             {
-                comando.CommandType = CommandType.StoredProcedure;
+                Conectar();
+                using (comando = new SqlCommand(RecursosCruceros.AgregarItinerario, conexion))
+                {
+                    comando.CommandType = CommandType.StoredProcedure;
 
-                comando.Parameters.AddWithValue("@fecha_inicio", itinerario._fechaInicio);
-                comando.Parameters.AddWithValue("@fecha_fin", itinerario._fechaFin);
-                comando.Parameters.AddWithValue("@fk_crucero", itinerario._fkCrucero);
-                comando.Parameters.AddWithValue("@fk_ruta", itinerario._fkRuta);
-                conexion.Open();
-                comando.ExecuteNonQuery();
+                    comando.Parameters.AddWithValue("@fk_crucero", itinerario._fkCrucero);
+                    comando.Parameters.AddWithValue("@fecha_fin", itinerario._fechaFin);
+                    comando.Parameters.AddWithValue("@fecha_inicio", itinerario._fechaInicio);
+                    comando.Parameters.AddWithValue("@fk_ruta", itinerario._fkRuta);
+                    conexion.Open();
+                    comando.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Error en Sql: " + e.Message);
+            }
+            catch ( Exception e)
+            {
+                Console.WriteLine("Error General: " + e.Message);
             }
         }
 
@@ -262,6 +327,24 @@ namespace BOReserva.Models.gestion_cruceros
                 reader.Close();
             }
             return listaCamarote;
+        }
+
+        public void cambiarEstadoItinerario(DateTime fechaInicio, int fkCrucero, int fkRuta )
+        {
+            Conectar();
+            using (comando = new SqlCommand(RecursosCruceros.CambioEstatusItinerario, conexion))
+            {
+                comando.CommandType = CommandType.StoredProcedure;
+
+                comando.Parameters.AddWithValue("fecha_inicio", fechaInicio);
+                comando.Parameters.AddWithValue("fk_crucero", fkCrucero);
+                comando.Parameters.AddWithValue("fk_ruta", fkRuta);
+
+
+
+                conexion.Open();
+                comando.ExecuteNonQuery();
+            }
         }
 
         public void cambiarEstado(int id_crucero)
