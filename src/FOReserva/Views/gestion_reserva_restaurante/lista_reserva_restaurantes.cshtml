@@ -193,12 +193,12 @@
         
             if (nombre == "" || nombre == undefined) {
                 $("#name_client").addClass("has-error");
-                $("#name_empty").fadeIn();
+                $("#name_empty").show();
                 win = false;
             }
             else {
                 $("#name_client").addClass("has-error");
-                $("#name_format").fadeIn();
+                $("#name_format").show();
                 win = false;
             }
         }
@@ -220,8 +220,10 @@
                 console.log(data);
                 $('#' + $('#aceptar_modificar').attr('value')).empty();
                 $('#' + $('#aceptar_modificar').attr('value')).html(data);
+                $('#ModalModificar').modal('hide');
             })
 	        .fail(function (data) {
+	            $('#ModalModificar').modal('show');
 	            $('#ModalErrorEditar').modal('show');
 	            console.log("error");
 	        })
@@ -230,7 +232,7 @@
 	        });
         }
         else
-            $('#ModalErrorEditar').modal('show');
+           // $('#ModalErrorEditar').modal('show');
             return false;
 
     })
