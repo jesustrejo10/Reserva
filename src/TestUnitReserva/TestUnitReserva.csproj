@@ -70,6 +70,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="FO\Reserva restaurante\TestReservaRestaurante.cs" />
+    <Compile Include="FO\Reserva_Cruceros\TestReservaCruceros.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
