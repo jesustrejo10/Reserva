@@ -24,7 +24,7 @@ namespace BOReserva.Controllers
             //aqui debe ir  la variable de session id en vez de 1
             var usuario = Session["Cgestion_seguridad_ingreso"] as Cgestion_seguridad_ingreso;
             //permisos = sql.M13consultarRolesDeUnUsuario(usuario.nombreUsuarioTexto);
-            permisos = sql.M13consultarRolesDeUnUsuario("");
+            permisos = sql.M13consultarRolesDeUnUsuario(usuario.correoCampoTexto);
             Session["Permisos"] = permisos;
 
             return View();
