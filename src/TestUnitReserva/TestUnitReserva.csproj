@@ -60,16 +60,20 @@
   <ItemGroup>
     <Compile Include="BO\gestion_aviones\TestAviones.cs" />
     <Compile Include="BO\gestion_usuario\TestUsuario.cs" />
+	<Compile Include="BO\gestion_comida_vuelo\TestComidaVuelo.cs" />
     <Compile Include="BO\TestGestionAutomovil\TestGestionAutomovil.cs" />
     <Compile Include="BO\gestion_restaurantes\TestLugar.cs" />
     <Compile Include="BO\gestion_restaurantes\TestRestaurante.cs" />
     <Compile Include="BO\gestion_seguridad_ingreso\TestLogin.cs" />
     <Compile Include="BO\gestion_ruta_comercial\TestRutaComercial.cs" />
     <Compile Include="FO\Diario\TestLugarDiario.cs" />
+    <Compile Include="FO\Itinerario\TestPlanificacionVacacion.cs" />
+    <Compile Include="BO\gestion_cruceros\TestCruceros.cs" />
     <Compile Include="FO\Reserva restaurante\TestInsertReserva.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="FO\Reserva restaurante\TestReservaRestaurante.cs" />
+    <Compile Include="FO\Reserva_Automovil\TestReservaAuto.cs" />
     <Compile Include="FO\Reserva_Cruceros\TestReservaCruceros.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

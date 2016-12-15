@@ -106,6 +106,48 @@ namespace BOReserva.Servicio
             }
         }
 
+        //Procedimiento del Modulo 6 para Retornar una lista con los datos del vuelo y el avion
+
+        public List<CVuelo> listarVuelosEnBD()
+{
+	List<CVuelo> vuelos = new List<CVuelo>();
+	try
+	{
+		conexion = new SqlConnection(stringDeConexion);
+		conexion.Open();
+		String query = "SELECT v.vue_id AS id, v.vue_codigo AS codigo,origen.lug_nombre AS origen,destino.lug_nombre AS destino, a.avi_pasajeros_turista AS turista, a.avi_pasajeros_ejecutiva AS ejecutiva, a.avi_pasajeros_vip AS vip "+
+                        "FROM Vuelo AS v, avion a, ruta r, lugar origen, lugar destino "+
+                        "WHERE a.avi_id = v.vue_fk_avion AND "+
+                        "v.vue_fk_ruta = r.rut_id AND "+
+                        "r.rut_FK_lugar_origen = origen.lug_id AND "+
+                        "r.rut_Fk_lugar_destino = destino.lug_id AND v.vue_status = 'activo'";
+        SqlCommand cmd = new SqlCommand(query, conexion);
+        SqlDataReader lector = cmd.ExecuteReader();
+        while (lector.Read())
+        {
+            CVuelo vuelo = new CVuelo(Convert.ToInt32(lector["id"].ToString()),
+                                      lector["codigo"].ToString(),
+        		                      lector["origen"].ToString(),
+                                      lector["destino"].ToString(),
+        		                      Int32.Parse(lector["turista"].ToString()),
+        		                      Int32.Parse(lector["ejecutiva"].ToString()),
+        		                      Int32.Parse(lector["vip"].ToString()));
+        	vuelos.Add(vuelo);
+        }
+        lector.Close();
+        conexion.Close();
+        return vuelos;
+	}
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+}
+
         //Procedimiento del Modulo 6 para retornar un objeto del tipo CComida buscado por su respectiva id
         public CComida consultarComida(int id)
         {
@@ -230,8 +272,85 @@ namespace BOReserva.Servicio
             }
         }
 
+        //Procedimiento del Modulo 6 para retornar una lista con los platos en la bd
+        public List<CVueloComida> listarVuelosComidaEnBD()
+        {
+            List<CVueloComida> platos = new List<CVueloComida>();
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "SELECT com_vue_id, com_nombre, vue_codigo, com_vue_cantidad FROM Comida_Vuelo, Comida, Vuelo WHERE com_id = com_vue_fk_comida AND vue_id = com_vue_fk_vuelo ";
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                while (lector.Read())
+                {
+                    CVueloComida plato = new CVueloComida(Int32.Parse(lector["com_vue_id"].ToString()), lector["vue_codigo"].ToString(),
+                    lector["com_nombre"].ToString(), Int32.Parse(lector["com_vue_cantidad"].ToString()));
+                    platos.Add(plato);
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return platos;
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public string[] pasajeroComida(string matriculaAvion)
+        {
+            try
+            {
+                string[] pasajeros = null;
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                //indico que ejecutare un Stored Procedured en la BD 
+                SqlCommand cmd = new SqlCommand("M06_Pasajero_XClase", conexion);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                //le paso los parametros que espera el SP
+                cmd.Parameters.Add("@MatriculaAvion", System.Data.SqlDbType.VarChar, 100);
+                cmd.Parameters["@MatriculaAvion"].Value = matriculaAvion;
 
 
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    //tomo un unico valor como esperado segun comportamiento del SP
+                    pasajeros[0] = dr.GetSqlString(0).ToString();
+                    pasajeros[1] = dr.GetSqlString(1).ToString();
+                    pasajeros[2] = dr.GetSqlString(2).ToString();
+                }
+                //cierro el lector
+                dr.Close();
+                conexion.Close();
+                return pasajeros;
+            }
+            catch (SqlException e)
+            {
+                throw (e);
+
+            }
+            catch (Exception e)
+            {
+                throw (e);
+
+            }
+
+        }
 
 
         /// <summary>
@@ -526,8 +645,12 @@ namespace BOReserva.Servicio
         }
 
         /* INICIO DE FUNCIONES PARA MODULO 10 BO (RESTAURANTES) */
-        //Método del Modulo 10 (Backoffice) para agregar restaurantes a la base de datos.
 
+        /// <summary>
+        /// //Método del Modulo 10 (Backoffice) para agregar restaurantes a la base de datos.
+        /// </summary>
+        /// <param name="model">Modelo de restaurante</param>
+        /// <returns>Un booleano que indica si la operación se terminó o no con éxito.</returns>
         public Boolean insertarRestaurante(CRestauranteModelo model)
         {
             try
@@ -539,9 +662,13 @@ namespace BOReserva.Servicio
                 //uso el SqlCommand para realizar los querys
                 SqlCommand query = conexion.CreateCommand();
                 //ingreso la orden del query
-                query.CommandText = "INSERT INTO Restaurante VALUES ('" + model._nombre + "', '" + model._direccion + "', '"
-                    + model._descripcion + "' , '" + model._horarioApertura + "' ,'" + model._horarioCierre + "', "
-                    + model._idLugar.ToString() + ")";
+                query.CommandText = "INSERT INTO Restaurante VALUES (@nom, @dir, @desc, @horap, @horcie, @fklug)";
+                query.Parameters.AddWithValue("@nom", model._nombre);
+                query.Parameters.AddWithValue("@dir", model._direccion);
+                query.Parameters.AddWithValue("@desc", model._descripcion);
+                query.Parameters.AddWithValue("@horap", model._horarioApertura);
+                query.Parameters.AddWithValue("@horcie", model._horarioCierre);
+                query.Parameters.AddWithValue("@fklug", model._idLugar);
                 //creo un lector sql para la respuesta de la ejecucion del comando anterior
                 SqlDataReader lector = query.ExecuteReader();
                 //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
@@ -564,7 +691,11 @@ namespace BOReserva.Servicio
             }
         }
 
-        //Método para la consulta de un sólo restaurante, dado un ID como parámetro, retornando un modelo del restaurante.
+        /// <summary>
+        /// Método para la consulta de un sólo restaurante, dado un ID como parámetro, retornando un modelo del restaurante.
+        /// </summary>
+        /// <param name="id">El id del restaurante a consultar.</param>
+        /// <returns>Un modelo de Restaurante con los datos pedidos.</returns>
         public CRestauranteModelo consultarRestaurante(int id)
         {
             try
@@ -577,7 +708,8 @@ namespace BOReserva.Servicio
                 //uso el SqlCommand para realizar los querys
                 SqlCommand query = conexion.CreateCommand();
                 //ingreso la orden del query
-                query.CommandText = "SELECT * FROM Restaurante WHERE rst_id = " + id.ToString();
+                query.CommandText = "SELECT * FROM Restaurante WHERE rst_id = @id";
+                query.Parameters.AddWithValue("@id", id);
                 //creo un lector sql para la respuesta de la ejecucion del comando anterior               
                 SqlDataReader lector = query.ExecuteReader();
                 //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
@@ -587,8 +719,8 @@ namespace BOReserva.Servicio
                     {
                         _id = (int)lector.GetSqlInt32(0),
                         _nombre = lector.GetSqlString(1).ToString(),
-                        _descripcion = lector.GetSqlString(2).ToString(),
-                        _direccion = lector.GetSqlString(3).ToString(),
+                        _direccion = lector.GetSqlString(2).ToString(),
+                        _descripcion = lector.GetSqlString(3).ToString(),
                         _horarioApertura = lector.GetSqlString(4).ToString(),
                         _horarioCierre = lector.GetSqlString(5).ToString(),
                         _idLugar = (int)lector.GetSqlInt32(6)
@@ -617,7 +749,10 @@ namespace BOReserva.Servicio
 
         }
 
-        //Método para la consulta de todos los restaurantes, retornando una lista de modelos de restaurante.
+        /// <summary>
+        /// Método para la consulta de todos los restaurantes, retornando una lista de modelos de restaurante.
+        /// </summary>
+        /// <returns>Una lista de modelos de Restaurante.</returns>
         public List<CRestauranteModelo> consultarRestaurante()
         {
             try
@@ -640,8 +775,8 @@ namespace BOReserva.Servicio
                     {
                         _id = (int)lector.GetSqlInt32(0),
                         _nombre = lector.GetSqlString(1).ToString(),
-                        _descripcion = lector.GetSqlString(2).ToString(),
-                        _direccion = lector.GetSqlString(3).ToString(),
+                        _direccion = lector.GetSqlString(2).ToString(),
+                        _descripcion = lector.GetSqlString(3).ToString(),
                         _horarioApertura = lector.GetSqlString(4).ToString(),
                         _horarioCierre = lector.GetSqlString(5).ToString(),
                         _idLugar = (int)lector.GetSqlInt32(6)
@@ -670,7 +805,11 @@ namespace BOReserva.Servicio
             }
         }
 
-        //Método para la modificación de un restaurante.
+        /// <summary>
+        /// Método para la modificación de un restaurante.
+        /// </summary>
+        /// <param name="model">Modelo de restaurante a ser modificado.</param>
+        /// <returns>Un booleano que indica si la operación se terminó o no con éxito.</returns>
         public Boolean modificarRestaurante(CRestauranteModelo model)
         {
             try
@@ -682,10 +821,15 @@ namespace BOReserva.Servicio
                 //uso el SqlCommand para realizar los querys
                 SqlCommand query = conexion.CreateCommand();
                 //ingreso la orden del query
-                query.CommandText = "UPDATE Restaurante SET rst_nombre = '" + model._nombre + "', " +
-                    "rst_direccion = '" + model._direccion + "', " + "rst_descripcion = '" + model._descripcion + "', " +
-                    "rst_hora_apertura = '" + model._horarioApertura + "', " + "rst_hora_cierre = '" + model._horarioCierre +
-                    "', fk_lugar = " + model._idLugar + " WHERE rst_id = " + model._id.ToString();
+                query.CommandText = "UPDATE Restaurante SET rst_nombre = @nom, rst_direccion = @dir, rst_descripcion = @desc," +
+                    "rst_hora_apertura = @horap, rst_hora_cierre = @horcie, fk_lugar = @fklug WHERE rst_id = @id";
+                query.Parameters.AddWithValue("@id", model._id);
+                query.Parameters.AddWithValue("@nom", model._nombre);
+                query.Parameters.AddWithValue("@dir", model._direccion);
+                query.Parameters.AddWithValue("@desc", model._descripcion);
+                query.Parameters.AddWithValue("@horap", model._horarioApertura);
+                query.Parameters.AddWithValue("@horcie", model._horarioCierre);
+                query.Parameters.AddWithValue("@fklug", model._idLugar);
                 //creo un lector sql para la respuesta de la ejecucion del comando anterior
                 SqlDataReader lector = query.ExecuteReader();
                 //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
@@ -709,6 +853,11 @@ namespace BOReserva.Servicio
         }
 
         //Método para la eliminación de un restaurante.
+        /// <summary>
+        /// Método para la eliminación de un restaurante.
+        /// </summary>
+        /// <param name="id">El id del restaurante a ser eliminado.</param>
+        /// <returns>Un booleano que indica si la operación se terminó o no con éxito.</returns>
         public Boolean eliminarRestaurante(int id)
         {
             try
@@ -720,7 +869,8 @@ namespace BOReserva.Servicio
                 //uso el SqlCommand para realizar los querys
                 SqlCommand query = conexion.CreateCommand();
                 //ingreso la orden del query
-                query.CommandText = "DELETE FROM Restaurante WHERE rst_id = " + id.ToString();
+                query.CommandText = "DELETE FROM Restaurante WHERE rst_id = @id";
+                query.Parameters.AddWithValue("@id", id);
                 //creo un lector sql para la respuesta de la ejecucion del comando anterior
                 SqlDataReader lector = query.ExecuteReader();
                 //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
@@ -746,7 +896,10 @@ namespace BOReserva.Servicio
         /* FIN DE FUNCIONES PARA MODULO 10 BO (RESTAURANTES) */
         /* INICIO DE FUNCIONES COMUNES */
 
-        //Método para la consulta de todos los lugares, sin parámetro y retornando una lista de modelos de lugar.
+        /// <summary>
+        /// Método para la consulta de todos los lugares, sin parámetro.
+        /// </summary>
+        /// <returns>Una lista de modelos de lugar.</returns>
         public List<CLugarModelo> consultarLugar()
         {
             try
@@ -799,7 +952,10 @@ namespace BOReserva.Servicio
             }
         }
 
-        //Método para la consulta de ciudades, sin parámetro y retornando una lista de modelos de lugar.
+        /// <summary>
+        /// Método para la consulta de ciudades, sin parámetro.
+        /// </summary>
+        /// <returns>Una lista de modelos de lugar.</returns>
         public List<CLugarModelo> consultarCiudad()
         {
             try
