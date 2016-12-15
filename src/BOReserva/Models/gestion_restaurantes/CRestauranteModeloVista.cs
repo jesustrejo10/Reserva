@@ -6,6 +6,9 @@ using BOReserva.Models.gestion_lugares;
 
 namespace BOReserva.Models.gestion_restaurantes
 {
+    /// <summary>
+    /// Clase modelo integradora para las vistas parciales de restaurante.
+    /// </summary>
     public class CRestauranteModeloVista
     {
         public List<CRestauranteModelo> _listaRestaurantes { get; set; }
