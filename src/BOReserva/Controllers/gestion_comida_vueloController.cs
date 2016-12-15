@@ -7,7 +7,6 @@ using BOReserva.Models.gestion_comida_vuelo;
 using System.Net;
 using BOReserva.Servicio;
 
-
 namespace BOReserva.Controllers
 {
     public class gestion_comida_vueloController : Controller
@@ -143,6 +142,8 @@ namespace BOReserva.Controllers
                 return Json(error);
             }
         }
+
+        }
        
 	}
-}
+

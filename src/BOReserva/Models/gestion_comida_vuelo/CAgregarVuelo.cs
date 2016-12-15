@@ -7,7 +7,8 @@ namespace BOReserva.Models.gestion_comida_vuelo
 {
     public class CAgregarVuelo
     {
-        public string _codigoVuelo { get; set; }
+        public int _idVuelo { get; set; }
+        public int _idComida { get; set; }
         public int _cantidadComida { get; set; }
     }
 }
