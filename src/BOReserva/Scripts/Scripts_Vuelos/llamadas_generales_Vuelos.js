@@ -144,6 +144,7 @@ function checkTextCodigo(field) {
             var url = '/gestion_vuelo/M04_GestionVuelo_Visualizar';
             var method = 'GET';
             var data = '';
+            alert("Cargando, por favor espere...");
 
             $.ajax(
                 {
@@ -186,3 +187,123 @@ function checkTextCodigo(field) {
                 });
             }
         }
+
+// VISTA VISUALIZAR = Funcion que llamara a la vista de mostrar y le pasa el id del vuelo seleccionado
+        $(".mostrar").click(function () {
+            var identificador = $(this).parent().parent().parent().attr("id");
+            jQuery.ajax({
+                type: "GET",
+                url: "/gestion_vuelo/M04_GestionVuelo_Mostrar",
+                data: { id: identificador }
+            }).done(function (data) {
+                $("#contenido").empty();
+                $("#contenido").append(data);
+                var url = '/gestion_vuelo/M04_GestionVuelo_Visualizar';
+                var method = 'GET';
+                var data = '';
+                alert("Cargando, por favor espere...");
+                $.ajax(
+                    {
+                        url: url,
+                        type: method,
+                        data: data,
+                        success: function (data, textStatus, jqXHR) {
+
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                            },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+            }).fail(function (err) {
+                alert(err)
+            });
+
+
+        });
+
+
+// VISTA VISUALIZAR = Funcion que llamara a la vista de modificar y mostara el vuelo seleciconado a modificar
+        $(".modificar").click(function () {
+            var identificador = $(this).parent().parent().parent().attr("id");
+            jQuery.ajax({
+                type: "GET",
+                url: "/gestion_vuelo/M04_GestionVuelo_Modificar", 
+                data: { id: identificador }
+            }).done(function (data) {
+                $("#contenido").empty();
+                $("#contenido").append(data);
+                alert("Cargando, por favor espere...");
+            }).fail(function (err) {
+                alert(err)
+            });
+
+
+        });
+
+
+//VISTA VISUALIZAR= funcion que tomara el ID de la tupla seleccionada en la tabla y procedera a desactivara en la BD
+        $(".desactivar").click(function () {
+            var identificador = $(this).parent().parent().parent().attr("id");
+            jQuery.ajax({
+                type: "GET",
+                url: "/gestion_vuelo/M04_GestionVuelo_Desactivar", //llama a la funcion en controller que desactivara el vuelo
+                data: { id: identificador }
+            }).done(function (data) {
+                var url = '/gestion_vuelo/M04_GestionVuelo_Visualizar'; //vuelve a cargar la ventana actualizada
+                var method = 'GET';
+                var data = '';
+                alert("Cargando, por favor espere...");
+
+
+                $.ajax(
+                    {
+                        url: url,
+                        type: method,
+                        data: data,
+                        success: function (data, textStatus, jqXHR) {
+
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+            }).fail(function (err) {
+                alert('Fallo')
+            });
+        });
+
+// VISTA VISUALIZAR= Funcion que procedera a activar un vuelo en estado inactivo
+        $(".activar").click(function () {
+            var identificador = $(this).parent().parent().parent().attr("id");
+            jQuery.ajax({
+                type: "GET",
+                url: "/gestion_vuelo/M04_GestionVuelo_Activar", //llama a la funcion que activara el vuelo en la BD
+                data: { id: identificador }
+            }).done(function (data) {
+                var url = '/gestion_vuelo/M04_GestionVuelo_Visualizar'; //vuelve a cargar la vista con el vuelo actualizado
+                var method = 'GET';
+                var data = '';
+                alert("Cargando, por favor espere...");
+
+                $.ajax(
+                    {
+                        url: url,
+                        type: method,
+                        data: data,
+                        success: function (data, textStatus, jqXHR) {
+
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+            }).fail(function (err) {
+                alert('Fallo')
+            });
+        });
