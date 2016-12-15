@@ -1,0 +1,54 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    ViewBag.Title = "Cambiar Clave";
+}
+
+<script>
+
+    var error = '@ViewData["error"]';
+    if (error.length > 3) {
+        alert('@ViewData["error"]');
+    }
+</script>
+
+<div class="container" id="contenedorRecupera" style=" min-height:310px !important;">
+    <div class="row container-form">
+        <div class="col-md-6 col-md-offset-3">
+
+            @using (Html.BeginForm("ResponderPreguntas", "registro_autenticacion", FormMethod.Post, new { @class = "sky-form", @id = "formCorreoRecupera" }))
+            {
+                <input type="hidden" id="value_pregunta" name="value_pregunta" />
+                <input type="hidden" id="id_usuario" name="id_usuario" />
+                <div class="clearfix">
+                    <h2>Pregunta Secreta</h2>
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label>Pregunta:</label>
+                        <input type="text" class="form-control" id="1" readonly="readonly" placeholder="Lugar de nacimiento de su madre." style="display:none;">
+                        <input type="text" class="form-control" id="2" readonly="readonly" placeholder="Nombre de su mejor amigo de la infancia." style="display:none;">
+                        <input type="text" class="form-control" id="3" readonly="readonly" placeholder="Nombre de su profesor favorito." style="display:none;">
+                        <input type="text" class="form-control" id="4" readonly="readonly" placeholder="Nombre de su película favorita." style="display:none;">
+                        <input type="text" class="form-control" id="5" readonly="readonly" placeholder="Nombre de su personaje primera mascota." style="display:none;">
+                        <input type="text" class="form-control" id="6" readonly="readonly" placeholder="Nombre de su comida favorita." style="display:none;">
+                        <input type="text" class="form-control" id="7" readonly="readonly" placeholder="Ocupación de su madre." style="display:none;">
+                        <input type="text" class="form-control" id="8" readonly="readonly" placeholder="Ocupación de su padre." style="display:none;">
+                        <input type="text" class="form-control" id="9" readonly="readonly" placeholder="Serie favorita de televisión." style="display:none;">
+                    </div>
+                    <script>
+                        document.getElementById("@Session["value_pregunta"]").style.display = "block";
+                    </script>
+                    <div class="form-group">
+                        <label>Respuesta:</label>
+                        <input type="text" class="form-control" id="respuesta" name="respuesta" required="required">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 text-right">
+                        <!-- <button class="btn btn-primary"><i class="fa fa-check"></i> Enviar</button> -->
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Enviar</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
