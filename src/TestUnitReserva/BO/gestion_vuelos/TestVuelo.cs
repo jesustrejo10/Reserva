@@ -15,6 +15,7 @@ namespace TestUnitReserva.BO.gestion_vuelos
     [TestFixture]
     class TestVuelo
     {
+        BOReserva.Controllers.gestion_vueloController controlador = new BOReserva.Controllers.gestion_vueloController();
         manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
         String Codigo = "AA123";
         String Origen = "Caracas";
@@ -263,7 +264,17 @@ namespace TestUnitReserva.BO.gestion_vuelos
             Assert.IsNotNull(cargar);
             Assert.That(() => sql.cargarOrigenes(), Throws.TypeOf<NullReferenceException>());
         }
+        public void M04_ValidarAvion()
+        {
+            Assert.IsInstanceOf(typeof(JsonResult), controlador.validarAviones(Origen,Destino));
+        }
+    
+    
+    
+    
+    
     }
+
 
 
 
