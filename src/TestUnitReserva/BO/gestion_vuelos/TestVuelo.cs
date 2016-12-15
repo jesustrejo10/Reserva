@@ -220,7 +220,7 @@ namespace TestUnitReserva.BO.gestion_vuelos
 
         }
         [Test]
-        public void ListarciudadesOrigenBD()
+        public void M04_ListarciudadesOrigenBD()
         {
             String[] listaorigenes = sql.MListarciudadesOrigenBD();
             //Pruebo que al llamar la funcion MListarciudadesOrigenBD() no me traiga una lista nula; 
@@ -228,7 +228,7 @@ namespace TestUnitReserva.BO.gestion_vuelos
 
         }
         [Test]
-        public void ListarciudadesDestinoBD()
+        public void M04_ListarciudadesDestinoBD()
         {
             String origen = "Caracas";
             String[] listadestinos = sql.MListarciudadesDestinoBD();
@@ -237,10 +237,32 @@ namespace TestUnitReserva.BO.gestion_vuelos
 
         }
 
+        [Test]
+        public void M04_ConsultarDestinosModificar()
+        {
+            String origen = "Caracas";
+            List<CVueloModificar> consultar = sql.consultarDestinosModificar(origen);
+            // Pruebo que al consultar una lista de destinos no me retorne una lista nula.
+            Assert.IsNotNull(consultar);
+            Assert.That(() => sql.consultarDestinosModificar(), Throws.TypeOf<NullReferenceException>());
+        }
 
+        [Test]
+        public void M04_ListaravionesValidadosBD()
+        {
+            String[] listaviones = sql.MListaravionesValidadosBD(Origen,Destino);
+            //Pruebo que al llamar la funcion MListarciudadesOrigenBD() no me traiga una lista nula; 
+            Assert.IsNotNull(listadestinos);
 
-
-
+        }
+        [Test]
+        public void M04_BuscarAvionesModificar()
+        {
+            List <CVueloModificar> cargar = sql.buscarAvionesModificar(Origen, Destino);
+            // Pruebo que al buscra una lista de aviones posibles para cubrir una ruta no me retorne una lista nula.
+            Assert.IsNotNull(cargar);
+            Assert.That(() => sql.cargarOrigenes(), Throws.TypeOf<NullReferenceException>());
+        }
     }
 
 
