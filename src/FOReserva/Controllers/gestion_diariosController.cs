@@ -63,6 +63,7 @@ namespace FOReserva.Controllers
             return PartialView(model);
         }
 
+        /* Llama al manejador para insertar y carga la vista resultante */
         [HttpPost]
         public ActionResult gestion_diarios_insertar(CDiarioModel nuevo_diario)
         {
@@ -71,20 +72,28 @@ namespace FOReserva.Controllers
             if(id_nuevo != -1){
                 return PartialView("_CrearDiarioExito");
             }
-            return PartialView("_CrearDiarioError");
+            return PartialView("_CrearDiarioFallo");
         }
 
         /* Dar Like */
         public ActionResult likeRating(CDiarioModel diar){
             ManejadorSQLDiarios sql = new ManejadorSQLDiarios();
             int rating = sql.actualizarRating(diar,true);
-            return Json(rating,JsonRequestBehavior.AllowGet);
+            return Json(rating, JsonRequestBehavior.AllowGet);
         }
         /* Dar Dislike */
         public ActionResult dislikeRating(CDiarioModel diar){
             ManejadorSQLDiarios sql = new ManejadorSQLDiarios();
             int rating = sql.actualizarRating(diar,false);
-            return Json(rating,JsonRequestBehavior.AllowGet);
+            return Json(rating, JsonRequestBehavior.AllowGet);
+        }
+
+        /* Sumar una visita al diario */
+        public ActionResult vistaMasUno(CDiarioModel diar)
+        {
+            ManejadorSQLDiarios sql = new ManejadorSQLDiarios();
+            int visitas = sql.actualizarVisitas(diar);
+            return Json(visitas, JsonRequestBehavior.AllowGet);
         }
     }
 }

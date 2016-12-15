@@ -24,7 +24,7 @@ namespace BOReserva.Servicio
         //Inicializo el string de conexion en el constructor
         public manejadorSQL()
         {
-            stringDeConexion = "Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617a;";
+            stringDeConexion = "Data Source=localhost;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617a;";
         }
         //Atributo que ejecutara la conexion a la bd
         private SqlConnection conexion = null;
@@ -950,7 +950,43 @@ namespace BOReserva.Servicio
                 throw e;
             }
         }
+        //Procedimiento del Modulo 13 para Modificar Roles
+        public Boolean ModificarrRol(string model, string nombre_rolnuevo)
+        {
+            try
+            {
 
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //Abrir la conexion
+                conexion.Open();
+                //SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "UPDATE rol set rol_nombre= '" + nombre_rolnuevo + "' where rol_id in (select rol_id from rol where rol_nombre= '" + model + "') ";
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior
+                SqlDataReader lector = query.ExecuteReader();
+                //cierro el lector
+                lector.Close();
+                //Cierro la conexion
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+        }
         //Procedimiento del Modulo 13 para retornar lalista de permisos que no tiene el rol
         public CListaGenerica<CModulo_detallado> consultarLosPermisosNoAsignados(CRoles _rol)
         {
@@ -1431,9 +1467,8 @@ namespace BOReserva.Servicio
                 while (lector.Read())
                 {
 
-                    Debug.WriteLine("IDiiiiiii" + lector["rol_id"].ToString());
+
                     idRol = lector["rol_id"].ToString();
-                    Debug.WriteLine("----------------");
 
                 }
 
@@ -1449,33 +1484,21 @@ namespace BOReserva.Servicio
 
                 foreach (var detalle in listaPermisos)
                 {
-                    Debug.WriteLine("Amount is {0} and type is {1}", detalle.Nombre, detalle.Url);
-
                     queryDetallado = "SELECT mod_det_id from Modulo_Detallado where mod_det_nombre = '" + detalle.Nombre + "'";
-                    Debug.WriteLine("---------3-------");
-
 
                     SqlCommand cmd2 = new SqlCommand(queryDetallado, conexion);
 
-                    Debug.WriteLine("--------4--------");
-
-
                     lectorDetalle = cmd2.ExecuteReader();
-
-                    Debug.WriteLine("-------41---------");
 
 
                     while (lectorDetalle.Read())
                     {
 
-                        Debug.WriteLine("ID metodo detallado " + lectorDetalle["mod_det_id"].ToString());
-
                         listaPermiso.Add(lectorDetalle["mod_det_id"].ToString());
 
-                        Debug.WriteLine("----------------");
 
                     }
-                    Debug.WriteLine("-----------5-----");
+
                     lectorDetalle.Close();
 
                 }
@@ -1508,16 +1531,13 @@ namespace BOReserva.Servicio
         public void insertarRolPermisos(string rol, List<string> listaString)
         {
 
-
-            Debug.WriteLine("Rol " + rol);
-            Debug.WriteLine("Rol " + listaString.Count);
             if (listaString.Count > 0)
             {
                 int i = 0;
                 foreach (var money in listaString)
                 {
                     i += 0;
-                    Debug.WriteLine("Rol " + listaString[i]);
+                    
 
                 }
 
@@ -1540,18 +1560,16 @@ namespace BOReserva.Servicio
                 foreach (var money in listaString)
                 {
 
-                    Debug.WriteLine("este es el valor de i " + i);
-                    Debug.WriteLine("+++++1+++++");
 
                     query.CommandText = "INSERT INTO Rol_Modulo_Detallado VALUES ('" + rol + "','" + listaString[i] + "')";
-                    Debug.WriteLine("+++++2+++++");
+
 
                     lector = query.ExecuteReader();
-                    Debug.WriteLine("+++++3+++++");
+
 
                     //cierro el lector
                     lector.Close();
-                    Debug.WriteLine("+++++4+++++");
+
 
 
                     i += 1;
@@ -1599,6 +1617,11 @@ namespace BOReserva.Servicio
                 conexion.Close();
                 return ex.Message;
             }
+            catch (NullReferenceException ex)
+            {
+                conexion.Close();
+                return ex.Message;
+            }
         }
 
         /// <summary>
@@ -1623,6 +1646,11 @@ namespace BOReserva.Servicio
                 return "1";
             }
             catch (SqlException ex)
+            {
+                conexion.Close();
+                return ex.Message;
+            }
+            catch (NullReferenceException ex)
             {
                 conexion.Close();
                 return ex.Message;
@@ -1712,6 +1740,11 @@ namespace BOReserva.Servicio
                 conexion.Close();
                 return null;
             }
+            catch (NullReferenceException ex)
+            {
+                conexion.Close();
+                return null;
+            }
         }
 
         /// <summary>
@@ -1768,7 +1801,7 @@ namespace BOReserva.Servicio
         /// Método para borrar un vehículo de la base de datos
         /// </summary>
         /// <param name="matricula">Matrícula del vehículo a borrar</param>
-        /// <returns>Retorna 1 si se eliminó exitosamente y retorna 0 si no lo pudo hacer</returns>
+        /// <returns>Retorna 1 si se eliminó exitosamente y retorna la excepcion si no lo pudo hacer</returns>
         public String MBorrarvehiculoBD(String matricula)
         {
             try
@@ -1819,6 +1852,12 @@ namespace BOReserva.Servicio
                 conexion.Close();
                 return _ciudad;
             }
+
+            catch (NullReferenceException ex)
+            {
+                conexion.Close();
+                return ex.Message;
+            }
         }
 
         /// <summary>
@@ -1858,6 +1897,12 @@ namespace BOReserva.Servicio
                 conexion.Close();
                 return _lugar;
 
+            }
+
+            catch (NullReferenceException ex)
+            {
+                conexion.Close();
+                return ex.Message;
             }
         }
 
@@ -1930,6 +1975,12 @@ namespace BOReserva.Servicio
                 conexion.Close();
                 return fk;
             }
+
+            catch (NullReferenceException ex)
+            {
+                conexion.Close();
+                return fk;
+            }
         }
 
         /// <summary>
@@ -1952,6 +2003,12 @@ namespace BOReserva.Servicio
                 return "1";
             }
             catch (SqlException ex)
+            {
+                conexion.Close();
+                return ex.Message;
+            }
+
+            catch (NullReferenceException ex)
             {
                 conexion.Close();
                 return ex.Message;
@@ -1987,6 +2044,12 @@ namespace BOReserva.Servicio
             {
                 conexion.Close();
                 _ciudades.Add(ex.Message);
+                return _ciudades;
+            }
+
+            catch (NullReferenceException ex)
+            {
+                conexion.Close();
                 return _ciudades;
             }
         }
@@ -2027,6 +2090,12 @@ namespace BOReserva.Servicio
                 return i;
             }
             catch (SqlException ex)
+            {
+                conexion.Close();
+                return 1;
+            }
+
+            catch (NullReferenceException ex)
             {
                 conexion.Close();
                 return 1;
