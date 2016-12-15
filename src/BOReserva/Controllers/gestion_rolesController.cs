@@ -14,6 +14,10 @@ namespace BOReserva.Controllers
     {
         //
         // GET: /gestion_roles/
+        /// <summary>
+        /// Metodo para llamar la vista parcial M13_AgregarRol
+        /// </summary>
+        /// <returns>return un objeto de tipo CRoles</returns>
         public ActionResult M13_AgregarRol()
         {
             manejadorSQL sql = new manejadorSQL();
@@ -22,6 +26,9 @@ namespace BOReserva.Controllers
 
             return PartialView(rol);
         }
+        /// <summary>
+        /// Metodo para llamar la vista parcial M13_VisualizarRol
+        /// <returns>returna la lista de roles</returns>
         public ActionResult M13_VisualizarRol()
         {
             manejadorSQL sql = new manejadorSQL();
@@ -30,7 +37,11 @@ namespace BOReserva.Controllers
             return PartialView(listaroles);
         }
         
-
+        /// <summary>
+        /// Metodo para llamar la vista parcial M13_ModificarRol
+        /// </summary>
+        /// <param name="_rolnombre">pasa el nombre del rol</param>
+        /// <returns>Devuelve el objeto del Tipo CRoles</returns>
         public ActionResult M13_ModificarRol(string _rolnombre)
         {
 
@@ -39,15 +50,7 @@ namespace BOReserva.Controllers
             _rol.Nombre_rol = _rolnombre;
             _rol.Permisos = sql.consultarLosPermisosAsignados(_rol);
 
-            
-
-            foreach (var item in _rol.Permisos)
-            {
-                
-                System.Diagnostics.Debug.WriteLine(item.Nombre);
-                
-            }
-
+           
             return PartialView(_rol);
         }
         //Metodo para agregar roles
@@ -78,9 +81,6 @@ namespace BOReserva.Controllers
         public JsonResult modificarrol(string rol, string nombrerolnuevo)
         {
 
-            System.Diagnostics.Debug.WriteLine("aqui1");
-            System.Diagnostics.Debug.WriteLine(nombrerolnuevo);
-            System.Diagnostics.Debug.WriteLine(rol);
 
             if (rol == null && nombrerolnuevo == null)
             {
@@ -262,7 +262,7 @@ namespace BOReserva.Controllers
             foreach (var permiso in _permisos)
             {
                 _nombrePermiso.Add(permiso.Nombre);
-                System.Diagnostics.Debug.WriteLine(permiso.Nombre);
+
             }
             //envio el resultado de la consulta
             return (Json(_nombrePermiso, JsonRequestBehavior.AllowGet));

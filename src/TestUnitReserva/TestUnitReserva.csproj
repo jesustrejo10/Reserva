@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -82,6 +82,10 @@
     <ProjectReference Include="..\BOReserva\BOReserva.csproj">
       <Project>{8e0911c6-d911-4ca1-ae4f-6c5cbf498d24}</Project>
       <Name>BOReserva</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FOReserva\FOReserva.csproj">
+      <Project>{d0dadc5f-8e3e-49b9-a0c6-8137dc0db215}</Project>
+      <Name>FOReserva</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
