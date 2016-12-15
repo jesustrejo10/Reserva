@@ -59,7 +59,11 @@ namespace BOReserva.Controllers
 
         public ActionResult M06_AgregarPorVuelo()
         {
-           return PartialView();
+            manejadorSQL sql = new manejadorSQL();
+            //manejadorSQL sqlPasajero = new manejadorSQL();
+            List<CVuelo> vuelos = new List<CVuelo>();
+            vuelos = sql.listarVuelosEnBD();
+            return PartialView(vuelos);
         }
 
         public ActionResult M06_ConsultarComida(int id)
