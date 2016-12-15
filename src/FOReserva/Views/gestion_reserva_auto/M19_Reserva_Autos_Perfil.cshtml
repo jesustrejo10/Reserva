@@ -1,8 +1,4 @@
 ﻿@model List<FOReserva.Models.Autos.CReserva_Autos_Perfil>
-@{
-    ViewBag.Title = "Mis Reservas Autos";
-    Layout = "~/Views/Shared/_Layout.cshtml";
- }
 
 <!-- FLIP BOX -->
 <div class="box-light box-icon box-icon-center box-icon-round box-icon-large text-center nomargin">
@@ -26,13 +22,13 @@
             <table class="table table-bordered table-hover" id="sample_1">
                 <thead>
                     <tr>
-                        <th>#</th>
                         <th>Fabricante</th>
                         <th>Modelo</th>
                         <th>Origen</th>
                         <th>Destino</th>
                         <th>Fecha Recogida</th>
                         <th>Fecha Devolución</th>
+                        <th>Precio</th>
                         <th>Estatus</th>
                         <th>Acciones</th>
 
@@ -41,14 +37,14 @@
                 <tbody>
                     @foreach (var item in Model)
                     { 
-                    <tr id="@item.IdReserva">
-                        <td>@item.IdReserva</td>
+                    <tr>
                         <td>@item.Autos.Fabricante</td>
                         <td>@item.Autos.Modelo</td>
                         <td>@item.CiudadOri</td>
                         <td>@item.CiudadDes</td>
                         <td>@item.FechaIni</td>
                         <td>@item.FechaFin</td>
+                        <td>@item.Autos.Precio</td>
                         <td>
                             @if(item.Status == 1)
                             {
@@ -60,7 +56,6 @@
                             }
                         </td>
                         <td>
-                            <a href="#" class="btn btn-info btn-xs"><i class="fa fa-edit white"></i> Editar </a>
                             <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-times white"></i> Eliminar </a>
                         </td>
                     </tr>

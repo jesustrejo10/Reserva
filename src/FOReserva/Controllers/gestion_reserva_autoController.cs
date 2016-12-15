@@ -34,72 +34,47 @@ namespace FOReserva.Controllers
 
         public ActionResult M19_Busqueda_Autos()
         {
+            try { 
             string res_entrega = Request.Form["SelectedCiudadIdOrigen"].ToString();
             string res_destino = Request.Form["SelectedCiudadIdDestino"].ToString();
+            string fechaIni = Request.Form["fechaini"];
+            string fechaFin = Request.Form["fechafin"];
+            string horaIni = Request.Form["res_horaini"];
+            string horaFin = Request.Form["res_horafin"];
 
 
-                List<CBusquedaModel> lista = busqueda(res_entrega, res_destino);
+                List<CReserva_Autos_Perfil> lista = busqueda(res_entrega, res_destino, fechaIni, fechaFin, horaIni, horaFin);
                 return View(lista);
-        }
-
-        public ActionResult M19_Accion_Reservar()
-        {
-
-            return View();
-        }
-
-        private List<CBusquedaModel> busqueda(string res_entrega, string res_destino)
-        {
-            List<CBusquedaModel> lista = null;
-            ManejadorSQLReservaAutomovil manejador = new ManejadorSQLReservaAutomovil();
-            if (res_entrega == "12")
-            {
-                lista = manejador.buscarAutosCiudad(res_entrega, res_destino);
             }
+            catch (Exception Error)
+            {
+                return View();
+            }
+        }
+
+        public ActionResult M19_Accion_Reserva(string matricula, string modelo, string fabricante, string tipo, string color, string transmision, int ciudad, decimal precio, int anio, int pasajero, int disponibilidad, string owner, string date, string time, string fechaini, string fechafin, string horaini, string horafin, string ciudadori, string ciudaddes)
+        {
+            CReserva_Autos_Perfil reserva = new CReserva_Autos_Perfil(owner, date, time, fechaini, fechafin, horaini, horafin, ciudaddes, ciudadori,1);
+            reserva.Autos = new CBusquedaModel(matricula, modelo, fabricante, tipo, color, transmision, ciudad, precio, anio, pasajero, disponibilidad);
+
+            try
+            {
+                ManejadorSQLReservaAutomovil manejador = new ManejadorSQLReservaAutomovil();
+                manejador.InsertarReservaAuto(reserva);
+                return View(reserva);
+            }
+            catch (ManejadorSQLException AgregarError)
+            {
+                return View();
+            }
+        }
+
+        public List<CReserva_Autos_Perfil> busqueda(string res_entrega, string res_destino, string fechaini, string fechafin, string horaini, string horafin)
+        {
+            List<CReserva_Autos_Perfil> lista = null;
+            ManejadorSQLReservaAutomovil manejador = new ManejadorSQLReservaAutomovil();
+            lista = manejador.buscarAutosCiudad(res_entrega, res_destino, fechaini, fechafin, horaini, horafin);
             return lista;
         }
-
-
-        /*
-        public JsonResult buscarCarro(Cvista_ReservaAutos model)
-        {
-            
-            DateTime fechaini = model.fechaini;
-            DateTime fechafin = model.fechafin;
-            int sel = model.SelectedCiudadIdOrigen;
-            int sel2 = model.SelectedCiudadIdDestino;
-
-            //Console.WriteLine(prueba);
-            
-            return (Json(true, JsonRequestBehavior.AllowGet));
-        } */
-
-        [HttpPost]
-        public JsonResult InsertarReservaCarro(CAgregarReserva model)
-        {
-
-            if (model.raut_automovil == null)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error= "Error, campo obligatorio vacio";
-                return Json(error);          
-            }
-            ManejadorSQLReservaAutomovil sql = new ManejadorSQLReservaAutomovil();
-            bool resultado = sql.InsertarReservaAuto(model);
-
-            if (resultado)
-            {
-                return (Json(true, JsonRequestBehavior.AllowGet));
-            }
-            else
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error2 = "Error insertando en la BD";
-                return Json(error2); 
-            }
-      
-        }
-
-
     }
 }

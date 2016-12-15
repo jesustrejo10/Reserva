@@ -21,21 +21,22 @@ namespace FOReserva.Models.Autos
 
     public class CBusquedaModel : BaseEntity
     {
+        private string _matricula;
         private string _modelo;
         private string _fabricante;
         private string _tipo;
         private string _color;
         private string _transmision;
         private int _ciudad;
-        private float _precio;
+        private decimal _precio;
         private int _anio;
         private int _pasajeros;
-        private int _uso;
+        private int _disponibilidad;
 
         /* Constructor Completo */
-        public CBusquedaModel(int id, string modelo, string fabricante, string tipo, string color, string transmision, int ciudad, float precio, int anio, int pasajero, int uso)
-            : base(id, modelo)
+        public CBusquedaModel(string matricula, string modelo, string fabricante, string tipo, string color, string transmision, int ciudad, decimal precio, int anio, int pasajero, int disponibilidad)
         {
+            this._matricula = matricula;
             this._modelo = modelo;
             this._fabricante = fabricante;
             this._tipo = tipo;
@@ -45,10 +46,16 @@ namespace FOReserva.Models.Autos
             this._precio = precio;
             this._anio = anio;
             this._pasajeros = pasajero;
-            this._uso = uso;
+            this._disponibilidad = disponibilidad;
         }
 
         public CBusquedaModel() : base() { }
+
+        public string Matricula
+        {
+            get { return _matricula; }
+            set { _matricula = value; }
+        }
 
         /* Metodos Get y Set para el modelo del carro */
         public string Modelo
@@ -93,7 +100,7 @@ namespace FOReserva.Models.Autos
         }
 
         /* Metodos Get y Set para el precio del carro */
-        public float Precio
+        public decimal Precio
         {
             get { return _precio; }
             set { _precio = value; }
@@ -114,10 +121,10 @@ namespace FOReserva.Models.Autos
         }
 
         /* Metodos Get y Set para el disponibilidad de uso del carro */
-        public int Uso
+        public int Disponibilidad
         {
-            get { return _uso; }
-            set { _uso = value; }
+            get { return _disponibilidad; }
+            set { _disponibilidad = value; }
         }
     }
 }

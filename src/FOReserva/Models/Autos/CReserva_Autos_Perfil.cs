@@ -7,40 +7,41 @@ namespace FOReserva.Models.Autos
 {
     public class CReserva_Autos_Perfil : ReservationModels
     {
-        private int _idReserva;
+       //private int _idReserva;
         private string _fechaIni;
         private string _fechaFin;
+        private string _horaini;
+        private string _horafin;
         private string _ciudadOri;
         private string _ciudadDes;
         private int _status;
-        private int _idUsuario;
-        private int _cuenta;
-        private int _idAutos;
+      //  private int _idUsuario;
         private CBusquedaModel _autos;
 
         /*Constructor Completo*/
-        public CReserva_Autos_Perfil(string owner, string date, string time, int idReserva, string fechaIni, string fechaFin, string ciudadOri, string ciudadDes, int status, int cuenta, int idUsuario, int idAutos)
+        public CReserva_Autos_Perfil(string owner, string date, string time, string fechaIni, string fechaFin,
+            string horaIni, string horaFin, string ciudadOri, string ciudadDes, int status)
             : base( owner, date, time )
         {
-            this._idReserva = idReserva;
+            //this._idReserva = idReserva;
             this._fechaIni = fechaIni;
             this._fechaFin = fechaFin;
+            this._horaini = horaIni;
+            this._horafin = horaFin;
             this._ciudadOri = ciudadOri;
             this._ciudadDes = ciudadDes;
             this._status = status;
-            this._cuenta = cuenta;
-            this._idUsuario = idUsuario;
-            this._idAutos = idAutos;
+           // this._idUsuario = idUsuario;
         }
 
         /*Constructor Vacio*/
         public CReserva_Autos_Perfil() : base() { }
 
-        public int IdReserva
-        {
-            get { return _idReserva; }
-            set { _idReserva = value; }
-        }
+        //public int IdReserva
+        //{
+        //    get { return _idReserva; }
+        //    set { _idReserva = value; }
+        //}
 
         public string FechaIni
         {
@@ -52,6 +53,18 @@ namespace FOReserva.Models.Autos
         {
             get { return _fechaFin; }
             set { _fechaFin = value; }
+        }
+
+        public string HoraIni
+        {
+            get { return _horaini; }
+            set { _horaini = value; }
+        }
+
+        public string HoraFin
+        {
+            get { return _horafin; }
+            set { _horafin = value; }
         }
 
         public string CiudadOri
@@ -72,25 +85,12 @@ namespace FOReserva.Models.Autos
             set { _status = value; }
         }
 
-        /*Metodos Get y Set de persona de la reserva*/
-        public int cuenta
-        {
-            get { return _cuenta; }
-            set { _cuenta = value; }
-        }
-
         /*Id del usuario que se encuentra logeado*/
-        public int IdUsuario
-        {
-            get { return IdUsuario; }
-            set { IdUsuario = value; }
-        }
-
-        public int IdAutos
-        {
-            get { return IdAutos; }
-            set { IdAutos = value; }
-        }
+        //public int IdUsuario
+        //{
+        //    get { return IdUsuario; }
+        //    set { IdUsuario = value; }
+        //}
 
         /*
          * Autos de la reserva

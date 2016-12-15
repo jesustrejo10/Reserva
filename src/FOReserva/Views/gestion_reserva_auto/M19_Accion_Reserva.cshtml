@@ -1,17 +1,20 @@
-﻿@{
-    Layout = null;
+﻿@model FOReserva.Models.Autos.CReserva_Autos_Perfil
+@{
+    ViewBag.Title = "Confirma_Reserva";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
+@if (Model == null)
+{
+    <div class="row">
+            <center><h1><i class="fa fa-exclamation-circle orange" aria-hidden="true"></i> Fallo de Reserva</h1></center>
+        </div>
+}
+else
+{
+     <div class="row">
+            <center><h1><i class="fa fa-exclamation-circle orange" aria-hidden="true"></i> Reserva Exitosa </h1></center>
+        </div>
+}
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>M19_Accion_Reserva</title>
-</head>
-<body>
-    <div>
         
-    </div>
-</body>
-</html>
