@@ -32,20 +32,20 @@ namespace BOReserva.Controllers
             //return PartialView();
         }
 
-        public ActionResult M24_AgregarItinerario()
-        {
-            ConexionBD cbd = new ConexionBD();
-            VistaListaCrucero vlc = new VistaListaCrucero();
-            VistaListaRuta vlr = new VistaListaRuta();
-            CGestion_itinerario itinerario = new CGestion_itinerario() { itinerarios = new List<CGestion_itinerario>() };
-          //  CGestion_crucero crucero = new CGestion_crucero();
-            vlc.cruceros = cbd.listarCruceros();
-            vlr.rutas = cbd.listarRutas();
-            ViewBag.ShowDropDown = new SelectList(vlc.cruceros, "_idCrucero", "_nombreCrucero");
-            ViewBag.ShowDropDown2 = new SelectList(vlr.rutas, "_idRuta", "_rutaCrucero");
-            return PartialView("M24_AgregarItinerario", itinerario);
-            //return PartialView();
-        }
+        //public ActionResult M24_AgregarItinerario()
+        //{
+        //    ConexionBD cbd = new ConexionBD();
+        //    VistaListaCrucero vlc = new VistaListaCrucero();
+        //    //VistaListaRuta vlr = new VistaListaRuta();
+        //    CGestion_itinerario itinerario = new CGestion_itinerario() { itinerarios = new List<CGestion_itinerario>() };
+        //  //  CGestion_crucero crucero = new CGestion_crucero();
+        //    vlc.cruceros = cbd.listarCruceros();
+        //    vlr.rutas = cbd.listarRutas();
+        //    ViewBag.ShowDropDown = new SelectList(vlc.cruceros, "_idCrucero", "_nombreCrucero");
+        //    ViewBag.ShowDropDown2 = new SelectList(vlr.rutas, "_idRuta", "_rutaCrucero");
+        //    return PartialView("M24_AgregarItinerario", itinerario);
+        //    //return PartialView();
+        //}
 
         public ActionResult M24_AgregarCamarote()
         {
