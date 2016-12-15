@@ -667,7 +667,23 @@ namespace BOReserva.Controllers
         public ActionResult revisarCodVuelo(String codVuelo)
         {
             manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
-            int existe = sql.codVueloUnico(codVuelo);
+            int existe = 0;
+            try
+            {
+               existe = sql.codVueloUnico(codVuelo);
+            }
+            catch (SqlException e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error ingresando a la base de datos.";
+                return Json(error);
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
+                return Json(error);
+            }
             return Json(existe);
         } 
 
