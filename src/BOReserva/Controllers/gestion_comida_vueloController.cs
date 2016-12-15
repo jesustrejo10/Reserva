@@ -62,7 +62,7 @@ namespace BOReserva.Controllers
             manejadorSQL sql = new manejadorSQL();
             //manejadorSQL sqlPasajero = new manejadorSQL();
             List<CVuelo> vuelos = new List<CVuelo>();
-            vuelos = listarVuelosEnBD();
+            vuelos = sql.listarVuelosEnBD();
             return PartialView(vuelos);
         }
 
