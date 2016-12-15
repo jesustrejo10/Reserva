@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DBReservaModelStoreContainer" CdmEntityContainer="DBReserva">
+    <FunctionImportMapping FunctionName="DBReservaModel.Store.M20_ConflictosReservaHabitacion" FunctionImportName="M20_ConflictosReservaHabitacion">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBReservaModel.M20_ConflictosReservaHabitacion_Result">
+          <ScalarProperty Name="rha_fk_hot_id" ColumnName="rha_fk_hot_id" />
+          <ScalarProperty Name="rha_habitacion" ColumnName="rha_habitacion" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionName="DBReservaModel.Store.M20_HabitacionesByHotel" FunctionImportName="M20_HabitacionesByHotel">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBReservaModel.M20_HabitacionesByHotel_Result">
+          <ScalarProperty Name="hot_id" ColumnName="hot_id" />
+          <ScalarProperty Name="habitacion" ColumnName="habitacion" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="M20_ActualizarEstadoReservaHabitacion" FunctionName="DBReservaModel.Store.M20_ActualizarEstadoReservaHabitacion">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBReservaModel.M20_ActualizarEstadoReservaHabitacion_Result">
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+          <ScalarProperty Name="Referencia" ColumnName="Referencia" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="M20_BuscarHotelesPorCiudad" FunctionName="DBReservaModel.Store.M20_BuscarHotelesPorCiudad">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBReservaModel.M20_BuscarHotelesPorCiudad_Result">
+          <ScalarProperty Name="hot_id" ColumnName="hot_id" />
+          <ScalarProperty Name="hot_nombre" ColumnName="hot_nombre" />
+          <ScalarProperty Name="hot_email" ColumnName="hot_email" />
+          <ScalarProperty Name="hot_fk_ciudad" ColumnName="hot_fk_ciudad" />
+          <ScalarProperty Name="hot_cantidad_habitaciones_disponible" ColumnName="hot_cantidad_habitaciones_disponible" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="M20_DetalleReservaHabitacion" FunctionName="DBReservaModel.Store.M20_DetalleReservaHabitacion">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBReservaModel.M20_DetalleReservaHabitacion_Result">
+          <ScalarProperty Name="hot_id" ColumnName="hot_id" />
+          <ScalarProperty Name="hot_nombre" ColumnName="hot_nombre" />
+          <ScalarProperty Name="usu_id" ColumnName="usu_id" />
+          <ScalarProperty Name="fullname" ColumnName="fullname" />
+          <ScalarProperty Name="rha_id" ColumnName="rha_id" />
+          <ScalarProperty Name="rha_habitacion" ColumnName="rha_habitacion" />
+          <ScalarProperty Name="rha_fecha_llegada" ColumnName="rha_fecha_llegada" />
+          <ScalarProperty Name="rha_cantidad_dias" ColumnName="rha_cantidad_dias" />
+          <ScalarProperty Name="rha_fecha_partida" ColumnName="rha_fecha_partida" />
+          <ScalarProperty Name="rha_estado" ColumnName="rha_estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="M20_GenerarReservaHabitacion" FunctionName="DBReservaModel.Store.M20_GenerarReservaHabitacion">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBReservaModel.M20_GenerarReservaHabitacion_Result">
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+          <ScalarProperty Name="Referencia" ColumnName="Referencia" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="M20_GuardarReservaHabitacion" FunctionName="DBReservaModel.Store.M20_GuardarReservaHabitacion">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBReservaModel.M20_GuardarReservaHabitacion_Result">
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+          <ScalarProperty Name="Referencia" ColumnName="Referencia" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="M20_HotelHistorialReservaHabitacion" FunctionName="DBReservaModel.Store.M20_HotelHistorialReservaHabitacion">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBReservaModel.M20_HotelHistorialReservaHabitacion_Result">
+          <ScalarProperty Name="hot_id" ColumnName="hot_id" />
+          <ScalarProperty Name="hot_nombre" ColumnName="hot_nombre" />
+          <ScalarProperty Name="usu_id" ColumnName="usu_id" />
+          <ScalarProperty Name="fullname" ColumnName="fullname" />
+          <ScalarProperty Name="rha_id" ColumnName="rha_id" />
+          <ScalarProperty Name="rha_habitacion" ColumnName="rha_habitacion" />
+          <ScalarProperty Name="rha_fecha_llegada" ColumnName="rha_fecha_llegada" />
+          <ScalarProperty Name="rha_cantidad_dias" ColumnName="rha_cantidad_dias" />
+          <ScalarProperty Name="rha_fecha_partida" ColumnName="rha_fecha_partida" />
+          <ScalarProperty Name="rha_estado" ColumnName="rha_estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="M20_ObtenerCiudades" FunctionName="DBReservaModel.Store.M20_ObtenerCiudades">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBReservaModel.M20_ObtenerCiudades_Result">
+          <ScalarProperty Name="lug_id" ColumnName="lug_id" />
+          <ScalarProperty Name="lug_nombre" ColumnName="lug_nombre" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="M20_UsuarioHistorialReservaHabitacion" FunctionName="DBReservaModel.Store.M20_UsuarioHistorialReservaHabitacion">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBReservaModel.M20_UsuarioHistorialReservaHabitacion_Result">
+          <ScalarProperty Name="hot_id" ColumnName="hot_id" />
+          <ScalarProperty Name="hot_nombre" ColumnName="hot_nombre" />
+          <ScalarProperty Name="usu_id" ColumnName="usu_id" />
+          <ScalarProperty Name="fullname" ColumnName="fullname" />
+          <ScalarProperty Name="rha_id" ColumnName="rha_id" />
+          <ScalarProperty Name="rha_habitacion" ColumnName="rha_habitacion" />
+          <ScalarProperty Name="rha_fecha_llegada" ColumnName="rha_fecha_llegada" />
+          <ScalarProperty Name="rha_cantidad_dias" ColumnName="rha_cantidad_dias" />
+          <ScalarProperty Name="rha_fecha_partida" ColumnName="rha_fecha_partida" />
+          <ScalarProperty Name="rha_estado" ColumnName="rha_estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>
