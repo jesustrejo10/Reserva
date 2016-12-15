@@ -6,51 +6,48 @@
     <h3><span>Autos</span></h3>
 </div>
 
-@*<form class="validate" action="php/contact.php" method="post" enctype="multipart/form-data" data-success="Sent! Thank you!" data-toastr-position="top-right">*@
+     
 
-@using (Html.BeginForm("MbuscarCarro", "gestion_reserva_auto", null, FormMethod.Post, new {@id = "formBuscarCarro", @class = "form-horizintal"}))
-{ 
-     <fieldset>
-        <!-- required [php action request] -->
-        <input type="hidden" name="action" value="contact_send" />
-
+@using (Html.BeginForm("M19_Busqueda_Autos", "gestion_reserva_auto", FormMethod.Post, new { @id = "formBuscarCarro", @class = "form-horizintal" }))
+{
+    <fieldset>
         <div class="row">
             <div class="form-group">
 
                 <div class="col-md-6 col-sm-6">
                     <label>Recoger en:</label>
-                   @Html.DropDownListFor(m => m.SelectedCiudadIdOrigen, Model.CiudadesOrigen, new { @class = "form-control select2", @id = "res_entrega" })      
+                    @Html.DropDownListFor(m => m.SelectedCiudadIdOrigen, Model.CiudadesOrigen, new { @class = "form-control select2", @id = "res_entrega", @name = "res_entrega" })
                     <div id="entrega" style="display: none;" class="has-error error">
                         <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe seleccionar una ciudad de entrega</p>
-                    </div>      
+                    </div>
                 </div>
-                
+
                 <div class="col-md-6 col-sm-6">
                     <label>Devolver en:</label>
-                    @Html.DropDownListFor(m => m.SelectedCiudadIdDestino, Model.CiudadesDestino, new { @class = "form-control select2" , @id= "res_devolucion"})
+                    @Html.DropDownListFor(m => m.SelectedCiudadIdDestino, Model.CiudadesDestino, new { @class = "form-control select2" , @id= "res_devolucion", @name ="res_devolucion"})
                     <div id="devolucion" style="display: none;" class="has-error error">
                         <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe seleccionar una ciudad de entrega</p>
                     </div>
                 </div>
-                
-                
+
+
             </div>
         </div>
 
         <div class="row">
             <div class="form-group">
+
                 <div class="col-md-6 col-sm-6">
                     <label>Fecha de Recogida:</label>
-                    @Html.TextBoxFor(m => m.fechaini, null, new { @type = "date", @class = "form-control", @placeholder = "Fecha", @id = "res_fechaini", min = "Date" , max = "2032-12-31"})
-                   
+                    @Html.TextBoxFor(m => m.fechaini, null, new { @type = "date", @class = "form-control", @placeholder = "Fecha", @id = "res_fechaini", @name = "res_fechaini", min = "Date" , max = "2032-12-31"})
+
                     <div id="fechavieja" style="display: none;" class="has-error error">
                         <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe seleccionar una fecha correcta</p>
-                    </div> 
-                   <br>
+                    </div>
+                    <br>
                     <label>Hora de Recogida:</label>
-                    <select id="res_horaini" name="contact[position]" class="form-control pointer required">
+                    <select id="res_horaini" name="res_horaini" class="form-control pointer required">
                         <option value="" selected>Selecciona la hora:</option>
-                        <option value="7:00">7:00</option>
                         <option value="8:00">8:00</option>
                         <option value="9:00">9:00</option>
                         <option value="10:00">10:00</option>
@@ -61,30 +58,24 @@
                         <option value="15:00">15:00</option>
                         <option value="16:00">16:00</option>
                         <option value="17:00">17:00</option>
-                        <option value="18:00">18:00</option>
-                        <option value="19:00">19:00</option>
-                        <option value="20:00">20:00</option>
-                        <option value="21:00">21:00</option>
-                        <option value="22:00">22:00</option>
-                        <option value="23:00">23:00</option>
                     </select>
                     <div id="horaini_null" style="display: none;" class="has-error error">
                         <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe seleccionar una hora para la entrega</p>
                     </div>
                     <br>
-                    
+
                 </div>
+
                 <div class="col-md-6 col-sm-6">
                     <label>Fecha  de Devolución:</label>
-                    @Html.TextBoxFor(m => m.fechafin, null, new { @type = "date", @class = "form-control", @placeholder = "Fecha", @id = "res_fechafin",  max = "2032-12-31" })
+                    @Html.TextBoxFor(m => m.fechafin, null, new { @type = "date", @class = "form-control", @placeholder = "Fecha", @id = "res_fechafin",@name ="resfechafin" ,  max = "2032-12-31" })
                     <div id="fechafin_null" style="display: none;" class="has-error error">
                         <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe seleccionar una fecha correcta</p>
-                    </div> 
+                    </div>
                     <br>
                     <label>Hora de Devolucion:</label>
-                    <select id="res_horafin" name="contact[position]" class="form-control pointer required">
+                    <select id="res_horafin" name="res_horafin" class="form-control pointer required">
                         <option value="" selected>Selecciona la hora:</option>
-                        <option value="7:00">7:00</option>
                         <option value="8:00">8:00</option>
                         <option value="9:00">9:00</option>
                         <option value="10:00">10:00</option>
@@ -95,12 +86,6 @@
                         <option value="15:00">15:00</option>
                         <option value="16:00">16:00</option>
                         <option value="17:00">17:00</option>
-                        <option value="18:00">18:00</option>
-                        <option value="19:00">19:00</option>
-                        <option value="20:00">20:00</option>
-                        <option value="21:00">21:00</option>
-                        <option value="22:00">22:00</option>
-                        <option value="23:00">23:00</option>
                     </select>
                     <div id="horafin_null" style="display: none;" class="has-error error">
                         <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe seleccionar una hora para la devolucion</p>
@@ -109,18 +94,19 @@
                         <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe seleccionar una hora distinta a la hora de entrega</p>
                     </div>
                     <br>
-                   
+
                 </div>
             </div>
         </div>
 
     </fieldset>
-
     <div class="row text-center">
         <div class="col-md-12">
-            <button type="button" id="buscarCarro" class="btn btn-primary">Buscar</button>
+            <button type="button" id="buscar" class="btn btn-primary">BUSCAR</button>
         </div>
     </div>
+
+     
 
 <script>
   //  $("#buscarCarro").click(function (e) {
@@ -136,8 +122,9 @@
        // });
     //});
 
-    $("#buscarCarro").click(function (e) {
+    $("#buscar").click(function (e) {
         e.preventDefault();
+
         var form = $("#formBuscarCarro");
         var entrega = $('#res_entrega').val();
         var devolucion = $('#res_devolucion').val();
@@ -145,13 +132,7 @@
         var horainicio = $('#res_horaini').val();
         var fechafin = $('#res_fechafin').val();
         var horafin = $('#res_horafin').val();
-        console.log(entrega);
-        console.log(devolucion);
-        console.log(fechainicio);
-        console.log(horainicio);
-        console.log(fechafin);
-        console.log(horafin);
-        
+
         var horasistema = new Date();
         console.log(horasistema);
         var dia = horasistema.getDate();
@@ -179,39 +160,28 @@
         $("#res_fechafin").removeClass("has-error");
         $("#res_horaini").removeClass("has-error");
         $("#res_horafin").removeClass("has-error");
-        
-       
+           
        
         //AQUI VAN TRY/CATCH FALTA VALIDAR ESO
         if (entrega=="-1")  {
             $("#res_entrega").addClass("has-error");
             $("entrega").fadeIn();
-          
-        }
+          }
         if (devolucion=="-1") {
             $("#res_devolucion").addClass("has-error");
             $("devolucion").fadeIn();
-
-      }
-        
-
-       
+        }
         //pregunto si la la fecha de entrega es menor a la fecha actual
         if (comparacion == -1) {
             $("#res_fechaini").addClass("has-error");
             $("#fechavieja").fadeIn();
             win = false;
-
-        } 
+        }
             if (comparacion2 == -1) {
                 $("#res_fechafin").addClass("has-error");
                 $("#fechafin_null").fadeIn();
                 win = false;
-
-            }
-        
-
-        
+            }       
             if (fechainicio == null) {
                 $("#res_fechaini").addClass("has-error");
                 $("#fechavieja").fadeIn();
@@ -250,18 +220,14 @@
                             $("#horafin_igual").fadeIn();
                             win = false;
                         }
-
                     }
-
-
                 }
+         }
+         if (win) {
+             $('#formBuscarCarro').submit();
 
-
-            }
-
-        
+         } else return false;
     });
 
 </script>
-
 }
