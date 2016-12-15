@@ -21,29 +21,41 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
     {
 
         //DAOAutomovil daoAutomovil;
-        manejadorSQL daoAutomovil;
-        Automovil auto;
-        String placa1 = Util.RandomString(7);
-        String placa3 = Util.RandomString(7);
+        manejadorSQL _manejadorSql;
+        Automovil _automovil;
+        String _matriculaPrueba;
+        String _matriculaPrueba2;
 
         /// <summary>
-        /// Método que intancia la base de datos antes de todo
+        /// Metodo que se ejecuta una sola vez durante toda la prueba;
+        /// Guardo valores de _matriculaPrueba y _matriculaPrueba2;
+        /// </summary>
+        [SetUpFixture]
+        public void BeforeAll() {
+            _matriculaPrueba = Util.RandomString(7);
+            _matriculaPrueba2 = Util.RandomString(7);
+        }
+        
+        /// <summary>
+        /// Metodo que se ejecuta antes que se ejecute cada prueba
+        /// Esta encargado de instanciar el manejadorSQL
         /// </summary>
         [SetUp]
         public void Before()
         {
             //daoAutomovil = new DAOAutomovil();
-            daoAutomovil = new manejadorSQL();
+            _manejadorSql = new manejadorSQL();
 
         }
         /// <summary>
-        /// Método que al finalizar las pruebas limpia las variables
+        /// Método que se ejecuta cada vez que termina de correr una prueba;
+        /// Se encanga de limpiar las variables utilizadas en la prueba
         /// </summary>
         [TearDown]
         public void After()
         {
-            daoAutomovil = null;
-            auto = null;
+            _manejadorSql = null;
+            _automovil = null;
         }
 
         /// <summary>
@@ -54,8 +66,8 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         public void M08_AgregarVehiculoBD()
         {
 
-            auto = new Automovil(placa1, "3", "Mazda", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
-            String prueba1 = daoAutomovil.MAgregarVehiculoBD(auto, 12);
+            _automovil = new Automovil(_matriculaPrueba, "3", "Mazda", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
+            String prueba1 = _manejadorSql.MAgregarVehiculoBD(_automovil, 12);
             Assert.AreEqual("1", prueba1);
         }
 
@@ -66,9 +78,9 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         [Test]
         public void MAgregaraBD()
         {
-            auto = new Automovil(placa3, "4", "Jeep", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
-            String h=auto.MAgregaraBD(auto,12);
-            Assert.AreEqual("1", h);
+            _automovil = new Automovil(_matriculaPrueba2, "4", "Jeep", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
+            String respuestaAgregar=_automovil.MAgregaraBD(_automovil,12);
+            Assert.AreEqual("1", respuestaAgregar);
         
         }
 
@@ -83,16 +95,16 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
             String pais = "Venezuela";
             String ciudad = "Caracas";
             //ya se que el id de la ciudad Caracas, Venezuela es: 12
-            int response = daoAutomovil.MBuscaridciudadBD(ciudad, pais);
+            int response = _manejadorSql.MBuscaridciudadBD(ciudad, pais);
             Debug.WriteLine(response);
             Assert.IsNotNull(response);
             Assert.AreEqual(response, 12);
             //Verifico que si le paso 2 vacios funcione
-            response = daoAutomovil.MBuscaridciudadBD("", "");
+            response = _manejadorSql.MBuscaridciudadBD("", "");
             Debug.WriteLine(response);
             Assert.AreEqual(response, 0);
             //Verifico que si le paso 2 null funcione
-            response = daoAutomovil.MBuscaridciudadBD(null, null);
+            response = _manejadorSql.MBuscaridciudadBD(null, null);
             Debug.WriteLine(response);
             Assert.AreEqual(response, 0);
 
@@ -106,16 +118,16 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
 
             String pais = "Venezuela";
             //ya se que el id de la ciudad Caracas, Venezuela es: 11
-            int response = daoAutomovil.MIdpaisesBD(pais);
+            int response = _manejadorSql.MIdpaisesBD(pais);
             Assert.IsNotNull(response);
             Assert.AreEqual(response, 11);
 
             //Verifico que si le paso 2 vacios funcione
-            response = daoAutomovil.MIdpaisesBD("");
+            response = _manejadorSql.MIdpaisesBD("");
             Assert.AreEqual(response, -1);
             //Verifico que si le paso 2 null funcione
 
-            response = daoAutomovil.MIdpaisesBD(null);
+            response = _manejadorSql.MIdpaisesBD(null);
             Assert.AreEqual(response, -1);
 
         }
@@ -128,12 +140,12 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         {
             int pais = 12;
             //ya se que el id de la ciudad caracas es: 12
-            String response = daoAutomovil.MBuscarnombrePaisBD(pais);
+            String response = _manejadorSql.MBuscarnombrePaisBD(pais);
             Assert.IsNotNull(response);
             Assert.AreEqual(response, "Venezuela");
 
             //Verifico que si le paso 2 vacios funcione
-            response = daoAutomovil.MBuscarnombrePaisBD(0);
+            response = _manejadorSql.MBuscarnombrePaisBD(0);
             Assert.AreEqual(response, "Error al buscar");
         }
         /// <summary>
@@ -143,7 +155,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         [Test]
         public void MListarpaisesBD()
         {
-            String[] prueba = daoAutomovil.MListarpaisesBD();
+            String[] prueba = _manejadorSql.MListarpaisesBD();
             //prueba no vacia
             Assert.IsNotNull(prueba);
             //
@@ -173,7 +185,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         [Test]
         public void MDisponibilidadVehiculoBD()
         {
-            String prueba3 = daoAutomovil.MDisponibilidadVehiculoBD(placa1, 0);
+            String prueba3 = _manejadorSql.MDisponibilidadVehiculoBD(_matriculaPrueba, 0);
             Assert.AreEqual("1", prueba3);
 
         }
@@ -185,8 +197,8 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         public void MDisponibilidadVehiculo()
 
         {
-            Automovil auto = new Automovil(placa1, "3", "Mazda", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
-            String prueba = auto.MDisponibilidadVehiculoBD(placa1, 0);
+            Automovil auto = new Automovil(_matriculaPrueba, "3", "Mazda", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
+            String prueba = auto.MDisponibilidadVehiculoBD(_matriculaPrueba, 0);
             Assert.AreEqual("1", prueba);
 
         }
@@ -197,9 +209,9 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         public void MMostrarvehiculoBD()
         {
             // si no consigue
-            Automovil buscarvehiculo = daoAutomovil.MMostrarvehiculoBD("HGJYJG");
+            Automovil buscarvehiculo = _manejadorSql.MMostrarvehiculoBD("HGJYJG");
             Assert.IsNull(buscarvehiculo);
-            Automovil buscarvehiculo1 = daoAutomovil.MMostrarvehiculoBD("AUT223");
+            Automovil buscarvehiculo1 = _manejadorSql.MMostrarvehiculoBD("AUT223");
             //si pasa..
             Assert.IsInstanceOf(typeof(Automovil), buscarvehiculo1);
 
@@ -212,10 +224,10 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         public void MConsultarvehiculo()
         {
             Automovil auto = new Automovil("PRUEBACON", "3", "Mazda", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
-            String agregar = daoAutomovil.MAgregarVehiculoBD(auto, 12);
+            String agregar = _manejadorSql.MAgregarVehiculoBD(auto, 12);
             Automovil auto1 = auto.MConsultarvehiculo("PRUEBACON");
             Assert.IsInstanceOf(typeof(Automovil), auto1);
-            String prueba2 = daoAutomovil.MBorrarvehiculoBD("PRUEBACON");
+            String prueba2 = _manejadorSql.MBorrarvehiculoBD("PRUEBACON");
         
         }
         /// <summary>
@@ -224,13 +236,13 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         [Test]
         public void MModificarVehiculoBD()
         {
-            String placa = placa1;
-            auto = new Automovil(placa, "3", "Mazda", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
-            String agregar = daoAutomovil.MAgregarVehiculoBD(auto, 12);
-            String prueba = daoAutomovil.MModificarVehiculoBD(auto, 13);
+            String placa = _matriculaPrueba;
+            _automovil = new Automovil(placa, "3", "Mazda", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
+            String agregar = _manejadorSql.MAgregarVehiculoBD(_automovil, 12);
+            String prueba = _manejadorSql.MModificarVehiculoBD(_automovil, 13);
             Assert.AreEqual("1", prueba);
-            auto = new Automovil(placa, "", "", 1936, "", 5, 5, 1, 1, 1, DateTime.Now, "", 1, "", "", "");
-            String prueba2 = daoAutomovil.MModificarVehiculoBD(auto, 1000);
+            _automovil = new Automovil(placa, "", "", 1936, "", 5, 5, 1, 1, 1, DateTime.Now, "", 1, "", "", "");
+            String prueba2 = _manejadorSql.MModificarVehiculoBD(_automovil, 1000);
             Assert.AreNotEqual(0, prueba2);
         }
 
@@ -240,13 +252,13 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         [Test]
         public void MModificarvehiculo()
         {
-            String placa = placa3;
-            auto = new Automovil(placa, "3", "Mazda", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
-            String agregar = daoAutomovil.MAgregarVehiculoBD(auto, 12);
-            String prueba = auto.MModificarvehiculoBD(auto, 13);
+            String placa = _matriculaPrueba2;
+            _automovil = new Automovil(placa, "3", "Mazda", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
+            String agregar = _manejadorSql.MAgregarVehiculoBD(_automovil, 12);
+            String prueba = _automovil.MModificarvehiculoBD(_automovil, 13);
             Assert.AreEqual("1", prueba);
-            auto = new Automovil(placa, "", "", 1936, "", 5, 5, 1, 1, 1, DateTime.Now, "", 1, "", "", "");
-            String prueba2 = auto.MModificarvehiculoBD(auto, 1000);
+            _automovil = new Automovil(placa, "", "", 1936, "", 5, 5, 1, 1, 1, DateTime.Now, "", 1, "", "", "");
+            String prueba2 = _automovil.MModificarvehiculoBD(_automovil, 1000);
             Assert.AreNotEqual(0, prueba2);
         
         }
@@ -256,7 +268,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         [Test]
         public void MListarvehiculosBD()
         {
-            List<Automovil> prueba = daoAutomovil.MListarvehiculosBD();
+            List<Automovil> prueba = _manejadorSql.MListarvehiculosBD();
             Assert.IsInstanceOf(typeof(List<Automovil>), prueba);
         }
         /// <summary>
@@ -266,7 +278,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         public void MListarvehiculos()
         {
 
-            Automovil auto = new Automovil(placa1, "3", "Mazda", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
+            Automovil auto = new Automovil(_matriculaPrueba, "3", "Mazda", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
             List<Automovil> h= auto.MListarvehiculos();
             Assert.IsInstanceOf(typeof(List<Automovil>), h);
    
@@ -279,9 +291,9 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         [Test]
         public void MBuscarnombreciudadBD()
         {
-            String prueba = daoAutomovil.MBuscarnombreciudadBD(12);
+            String prueba = _manejadorSql.MBuscarnombreciudadBD(12);
             Assert.AreEqual("Caracas", prueba);
-            string prueba2 = daoAutomovil.MBuscarnombreciudadBD(1000);
+            string prueba2 = _manejadorSql.MBuscarnombreciudadBD(1000);
             Assert.AreEqual("Error al buscar", prueba2);
         }
 
@@ -292,9 +304,9 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         public void MPlacarepetidaBD()
         {
 
-            int repetida = daoAutomovil.MPlacarepetidaBD(placa1);
+            int repetida = _manejadorSql.MPlacarepetidaBD(_matriculaPrueba);
             Assert.AreEqual(1, repetida);
-            int repetidano = daoAutomovil.MPlacarepetidaBD("SIUL1208");
+            int repetidano = _manejadorSql.MPlacarepetidaBD("SIUL1208");
             Assert.AreEqual(0, repetidano);
         }
         /// <summary>
@@ -303,7 +315,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         [Test]
         public void MBorrarvehiculoBD()
         {
-            String prueba2 = daoAutomovil.MBorrarvehiculoBD(placa1);
+            String prueba2 = _manejadorSql.MBorrarvehiculoBD(_matriculaPrueba);
             Assert.AreEqual("1", prueba2);
         }
         /// <summary>
@@ -312,8 +324,8 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         [Test]
         public void MBorrarvehiculo()
         {
-            Automovil auto = new Automovil(placa1, "3", "Mazda", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
-            String Prueba3 = auto.MBorrarvehiculoBD(placa3);
+            Automovil auto = new Automovil(_matriculaPrueba, "3", "Mazda", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
+            String Prueba3 = auto.MBorrarvehiculoBD(_matriculaPrueba2);
             Assert.AreEqual("1", Prueba3);
         }
         /// <summary>
@@ -322,7 +334,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         [Test]
         public void MListarciudadesBD()
         {
-            List<String> h = daoAutomovil.MListarciudadesBD(11);
+            List<String> h = _manejadorSql.MListarciudadesBD(11);
 
             Assert.AreEqual(5, h.Count);
         }
