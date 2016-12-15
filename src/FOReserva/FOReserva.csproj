@@ -80,6 +80,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.3.5.0\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
@@ -212,11 +215,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Autos\CBusquedaModel.cs" />
+    <Compile Include="Models\Autos\CReserva_Autos_Perfil.cs" />
     <Compile Include="Models\Cruceros\CReserva_Cruceros.cs" />
     <Compile Include="Models\Cruceros\Crucero.cs" />
     <Compile Include="Models\Cruceros\CVista_Cruceros.cs" />
     <Compile Include="Models\Diarios\CDiarioModel.cs" />
-    <Compile Include="Models\Autos\CAgregarReserva.cs" />
     <Compile Include="Models\Autos\CLugar.cs" />
     <Compile Include="Models\Autos\Cvista_ReservaAutos.cs" />
     <Compile Include="Models\BaseEntity.cs" />
@@ -368,6 +372,7 @@
     <Content Include="Content\assets\images\demo\shop\home\grid3.jpg" />
     <Content Include="Content\assets\images\demo\shop\home\grid4.jpg" />
     <Content Include="Content\assets\images\demo\shop\home\man_cat.jpg" />
+    <Content Include="Content\assets\images\demo\shop\home\nodisponible.jpg" />
     <Content Include="Content\assets\images\demo\shop\home\rvslider_girl.png" />
     <Content Include="Content\assets\images\demo\shop\home\slide_1.jpg" />
     <Content Include="Content\assets\images\demo\shop\home\slide_1_man.png" />
@@ -3143,6 +3148,8 @@
     <Content Include="Views\gestion_reserva_crucero\gestion_reserva_crucero_resultado_crucero.cshtml" />
     <Content Include="Views\gestion_revision\Revision_usuario.cshtml" />
     <Content Include="Views\gestion_diarios\_CrearDiarioFallo.cshtml" />
+    <Content Include="Views\gestion_reserva_auto\M19_Accion_Reserva.cshtml" />
+    <Content Include="Views\gestion_reserva_auto\M19_Busqueda_Autos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
