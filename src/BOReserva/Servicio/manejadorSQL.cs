@@ -107,6 +107,48 @@ namespace BOReserva.Servicio
             }
         }
 
+        //Procedimiento del Modulo 6 para Retornar una lista con los datos del vuelo y el avion
+
+        public List<CVuelo> listarVuelosEnBD()
+{
+	List<CVuelo> vuelos = new List<CVuelo>();
+	try
+	{
+		conexion = new SqlConnection(stringDeConexion);
+		conexion.Open();
+		String query = "SELECT v.vue_id, v.vue_codigo,origen.lug_nombre,destino.lug_nombre, a.avi_pasajeros_turista, a.avi_pasajeros_ejecutiva, a.avi_pasajeros_vip"+
+                        "FROM vuelo v, avion a, ruta r, lugar origen, lugar destino"+
+                        "WHERE a.avi_id = v.vue_fk_avion AND"+
+                        "v.vue_fk_ruta = r.rut_id AND"+
+                        "r.rut_FK_lugar_origen = origen.lug_id AND"+
+                        "r.rut_Fk_lugar_destino = destino.lug_id";
+        SqlCommand cmd = new SqlCommand(query, conexion);
+        SqlDataReader lector = cmd.ExecuteReader();
+        while (lector.Read())
+        {
+        	CVuelo vuelo = new CVuelo(Int32.Parse(lector["v.vue_id"].ToString()),
+                                      lector["v.vue_codigo"].ToString(),
+        		                      lector["origen.lug_nombre"].ToString(),
+                                      lector["destino.lug_nombre"].ToString(),
+        		                      Int32.Parse(lector["a.avi_pasajeros_turista"].ToString()),
+        		                      Int32.Parse(lector["a.avi_pasajeros_ejecutiva"].ToString()),
+        		                      Int32.Parse(lector["a.avi_pasajeros_vip"].ToString()));
+        	vuelos.Add(vuelo);
+        }
+        lector.Close();
+        conexion.Close();
+        return vuelos;
+	}
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+}
+
         //Procedimiento del Modulo 6 para retornar un objeto del tipo CComida buscado por su respectiva id
         public CComida consultarComida(int id)
         {
