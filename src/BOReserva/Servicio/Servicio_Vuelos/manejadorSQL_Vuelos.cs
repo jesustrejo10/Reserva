@@ -814,5 +814,126 @@ namespace BOReserva.Servicio.Servicio_Vuelos
             }
         }
 
+        public String[] MListarciudadesOrigenBD()
+        {
+            String[] listaorigenes = new String[5000];
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "SELECT l.lug_nombre FROM Lugar l WHERE l.lug_tipo_lugar = 'ciudad' ORDER BY l.lug_nombre";
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                int i = 0;
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        listaorigenes[i] = reader[0].ToString();
+                        i++;
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return listaorigenes;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                listaorigenes[0] = ex.Message;
+                return listaorigenes;
+            }
+            catch (InvalidOperationException ex)
+            {
+                conexion.Close();
+                return null;
+            }
+        }
+
+        public String[] MListarciudadesDestinoBD(String Origen)
+        {
+            String[] listadestinos = new String[5000];
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                SqlCommand cmd = new SqlCommand("M04_BuscarDestinos", conexion);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                //le paso los parametros que espera el SP
+                cmd.Parameters.Add("@CiudadOrigen", System.Data.SqlDbType.VarChar, 100);
+                cmd.Parameters["@CiudadOrigen"].Value = Origen;
+                int i = 0;
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        listadestinos[i] = reader[0].ToString();
+                        i++;
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return listadestinos;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                listadestinos[0] = ex.Message;
+                return listadestinos;
+            }
+            catch (InvalidOperationException ex)
+            {
+                conexion.Close();
+                return null;
+            }
+        }
+
+        public List<CVueloModificar> consultarDestinosModificar(String Origen)
+        {
+            try
+            {
+                var list = new List<CVueloModificar>();
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                //le indico que voy a executar un Stored Procedure en la Base de Datos
+                SqlCommand cmd = new SqlCommand("M04_BuscarDestinos", conexion);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                //le paso los parametros que espera el SP
+                cmd.Parameters.Add("@CiudadOrigen", System.Data.SqlDbType.VarChar, 100);
+                cmd.Parameters["@CiudadOrigen"].Value = Origen;
+
+
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    var destinos = new CVueloModificar
+                    {
+                        //leo los diferentes valores que cargaran la lista ya que espero varios resultados
+                        _ciudadDestino = dr.GetSqlString(0).ToString(),
+                    };
+                    list.Add(destinos);
+                }
+                //cierro el lector
+                dr.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return list;
+            }
+            catch (SqlException e)
+            {
+                throw e;
+                //return null;
+            }
+            catch (Exception e)
+            {
+                throw e;
+                //return null;
+            }
+        }
+        // fin consultarDestinos
+
     }
 }

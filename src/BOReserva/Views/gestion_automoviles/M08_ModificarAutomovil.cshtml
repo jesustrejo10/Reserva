@@ -107,11 +107,13 @@
                                     if (paises.First().Text.Length > 15){
                                         Response.Write("<script>alert('" + paises.First().Text + "');</script>");
                                         @Html.DropDownListFor(m => m._pais, paises, new { @class = "form-control", @placeholder = "Pais", @id = "vehi_pais", @onblur = "listadeciudades(this.value);" });
-                                    }else{
-                                        @Html.DropDownListFor(m => m._pais, paises, Model._pais, new { @class = "form-control", @placeholder = "Pais", @id = "vehi_pais", @onblur = "listadeciudades(this.value);" });
-                                        
                                     }
-                                 }
+                                    else
+                                    {
+                                        @Html.DropDownListFor(m => m._pais, paises, Model._pais, new { @class = "form-control", @placeholder = "Pais", @id = "vehi_pais", @onblur = "listadeciudades(this.value);" });
+
+                                    }
+                                }
                             </div>
                         </div>
                         <div>&nbsp;</div>

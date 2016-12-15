@@ -17,8 +17,10 @@ namespace BOReserva.Models.gestion_vuelo
         public String _horaDespegue { get; set; }
         public String _ciudadOrigen { get; set; }
         public String _ciudadOrigenNuevo { get; set; }
+        public String _ciudadDestinoNuevo { get; set; }
         // _ciudadesOrigen tendra todos los valores que iran dentro del DropdownList
         public IEnumerable<SelectListItem> _ciudadesOrigen { get; set; }
+        public IEnumerable<SelectListItem> _ciudadesDestino { get; set; }
         public String _matriculaAvion { get; set; }
         // me van a pasar un int, pero lo convertiremos a string
         public String _pasajerosAvion { get; set; }

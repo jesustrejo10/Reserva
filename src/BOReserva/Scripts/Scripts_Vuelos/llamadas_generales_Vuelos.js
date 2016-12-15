@@ -307,3 +307,26 @@ function checkTextCodigo(field) {
                 alert('Fallo')
             });
         });
+ $("#ciudadOMod").change(function () {
+            var cID = $(ciudadOMod).val();
+            $.getJSON("gestion_vuelo/cargarDestinosModificar", { ciudadOMod: cID },
+                   function (data) {
+                       var select = $("#ciudadDMod");
+                       select.empty();
+                       select.append($('<option/>', {
+                           value: 0,
+                           text: "Seleccione una ciudad destino"
+                           , error: function (xhr, textStatus, exceptionThrown) {
+                               alert(xhr.responseText);
+                           }
+                       }));
+                       $.each(data, function (index, itemData) {
+                           select.append($('<option/>', {
+                               value: itemData.Value,
+                               text: itemData.Text
+                           }));
+
+                       });
+
+                   });
+        });
