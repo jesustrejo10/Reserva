@@ -48,6 +48,8 @@ namespace FOReserva.Servicio
             }
             catch (SqlException e)
             {
+                System.Diagnostics.Debug.WriteLine("ERROR -------->" + e.Message);
+                System.Diagnostics.Debug.WriteLine("ERROR -------->" + e.StackTrace);
                 throw e;
             }
             catch (Exception e)
@@ -117,10 +119,14 @@ namespace FOReserva.Servicio
             }
             catch (SqlException e)
             {
+                System.Diagnostics.Debug.WriteLine("ERROR -------->" + e.Message);
+                System.Diagnostics.Debug.WriteLine("ERROR -------->" + e.StackTrace);
                 throw e;
             }
             catch (Exception e)
             {
+                System.Diagnostics.Debug.WriteLine("ERROR -------->" + e.Message);
+                System.Diagnostics.Debug.WriteLine("ERROR -------->" + e.StackTrace);
                 throw e;
             }
         }
@@ -164,11 +170,14 @@ namespace FOReserva.Servicio
             
             catch (SqlException e)
             {
+                System.Diagnostics.Debug.WriteLine("ERROR -------->" + e.Message);
+                System.Diagnostics.Debug.WriteLine("ERROR -------->" + e.StackTrace);
                 return false;
             }
             catch (Exception e)
             {
-                
+                System.Diagnostics.Debug.WriteLine("ERROR -------->" + e.Message);
+                System.Diagnostics.Debug.WriteLine("ERROR -------->" + e.StackTrace);
                 return false;
             }
 
@@ -217,10 +226,14 @@ namespace FOReserva.Servicio
             }
             catch (SqlException e)
             {
+                System.Diagnostics.Debug.WriteLine("ERROR -------->" + e.Message);
+                System.Diagnostics.Debug.WriteLine("ERROR -------->" + e.StackTrace);
                 return false;
             }
             catch (Exception e)
             {
+                System.Diagnostics.Debug.WriteLine("ERROR -------->" + e.Message);
+                System.Diagnostics.Debug.WriteLine("ERROR -------->" + e.StackTrace);
                 return false;
             }
 
@@ -271,10 +284,14 @@ namespace FOReserva.Servicio
             }
             catch (SqlException e)
             {
+                System.Diagnostics.Debug.WriteLine("ERROR -------->" + e.Message);
+                System.Diagnostics.Debug.WriteLine("ERROR -------->" + e.StackTrace);
                 return false;
             }
             catch (Exception e)
             {
+                System.Diagnostics.Debug.WriteLine("ERROR -------->" + e.Message);
+                System.Diagnostics.Debug.WriteLine("ERROR -------->" + e.StackTrace);
                 return false;
             }
         }
@@ -328,11 +345,15 @@ namespace FOReserva.Servicio
              }
              catch (SqlException e)
              {
-                 throw e;
+                System.Diagnostics.Debug.WriteLine("ERROR -------->" + e.Message);
+                System.Diagnostics.Debug.WriteLine("ERROR -------->" + e.StackTrace);
+                throw e;
              }
              catch (Exception e)
              {
-                 throw e;
+                System.Diagnostics.Debug.WriteLine("ERROR -------->" + e.Message);
+                System.Diagnostics.Debug.WriteLine("ERROR -------->" + e.StackTrace);
+                throw e;
              }
          }
     }
