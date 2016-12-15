@@ -344,6 +344,9 @@ jQuery(document).ready(function () {
         $("#LiRestaurantes").removeClass("active");
         $("#LiAutos").removeClass("active");
         $("#LiCruceros").removeClass("active");
+
+        $("#contenedor").html('<div class="text-center">Cargando...</div>');
+
         var url = '/gestion_diarios/gestion_diarios';
         var method = 'GET';
         var data = '';

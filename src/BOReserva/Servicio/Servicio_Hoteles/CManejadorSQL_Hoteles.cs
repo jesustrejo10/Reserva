@@ -67,9 +67,9 @@ namespace BOReserva.Servicio.Servicio_Hoteles
                 //ingreso la orden del query
 
                 query.CommandText = "INSERT INTO Hotel " +
-                                     "(hot_id, hot_nombre, hot_url_pagina, hot_email, hot_cantidad_habitaciones , hot_direccion, hot_estrellas, hot_puntuacion, hot_disponibilidad) " +
+                                     "(hot_id, hot_nombre, hot_url_pagina, hot_email, hot_cantidad_habitaciones , hot_direccion, hot_estrellas, hot_puntuacion, hot_disponibilidad, hot_fk_ciudad) " +
                                      "VALUES (" + pk.ToString() + ",'" + model._nombre + "','" + model._paginaweb + "','" + model._email + "'," +
-                                                   model._canthabitaciones.ToString() + ",'" + model._direccion + "'," + model._estrellas.ToString() + ",0,1);";
+                                                   model._canthabitaciones.ToString() + ",'" + model._direccion + "'," + model._estrellas.ToString() + ",0,1,15);";
                 //creo un lector sql para la respuesta de la ejecucion del comando anterior              
                 SqlDataReader lector = query.ExecuteReader();
 

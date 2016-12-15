@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using BOReserva.Models.gestion_ruta_comercial;
 using BOReserva.Servicio.Servicio_Rutas;
 using System.Net;
+using System.Data.SqlClient;
 
 namespace BOReserva.Controllers
 {
@@ -109,42 +110,54 @@ namespace BOReserva.Controllers
             
             CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();
             //realizo el insert
-
-            if (model._origenRuta == null || model._destinoRuta == null)
+            try
             {
-                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                //Agrego mi error
-                String error = "Error, no ha seleccionado un origen/destino valido";
-                //Retorno el error
-                return Json(error);
-
-            }
-            else if (model._distanciaRuta <= 0 || model._distanciaRuta == 999999 || model._distanciaRuta == null) {
-                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                //Agrego mi error
-                String error = "Error, distancia de ruta invalida";
-                //Retorno el error
-                return Json(error);
-            }
-            else
-            {
-
-                bool resultado = sql.InsertarRuta(model);
-                if (resultado)
+                if (model._origenRuta == null || model._destinoRuta == null)
                 {
-                    return null;
-                }
-                else{
                     //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
                     Response.StatusCode = (int)HttpStatusCode.BadRequest;
                     //Agrego mi error
-                    String error = "Error, ruta existente";
+                    String error = "Error, no ha seleccionado un origen/destino valido";
+                    //Retorno el error
+                    return Json(error);
+
+                }
+                else if (model._distanciaRuta <= 0 || model._distanciaRuta == 999999 || model._distanciaRuta == null)
+                {
+                    //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    //Agrego mi error
+                    String error = "Error, distancia de ruta invalida";
                     //Retorno el error
                     return Json(error);
                 }
-                
+                else
+                {
+
+                    bool resultado = sql.InsertarRuta(model);
+                    if (resultado)
+                    {
+                        return (Json(true, JsonRequestBehavior.AllowGet));
+                    }
+                    else
+                    {
+                        //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                        Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                        //Agrego mi error
+                        String error = "Error, ruta existente";
+                        //Retorno el error
+                        return Json(error);
+                    }
+
+                }
+            }
+            catch (SqlException e) {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error, no se pudo conectar con la base de datos";
+                //Retorno el error
+                return Json(error);            
             }
             
 
@@ -159,34 +172,46 @@ namespace BOReserva.Controllers
 
             CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();
             //realizo el insert
-
-            if (model._distanciaRuta <= 0 || model._distanciaRuta == 999999 || model._distanciaRuta == null)
-            {
-                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                //Agrego mi error
-                String error = "Error, distancia de ruta invalida";
-                //Retorno el error
-                return Json(error);
-            }
-            else
+            try
             {
 
-                bool resultado = sql.MModificarRuta(model);
-                if (resultado)
-                {
-                    return null;
-                }
-                else
+
+                if (model._distanciaRuta <= 0 || model._distanciaRuta == 999999 || model._distanciaRuta == null)
                 {
                     //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
                     Response.StatusCode = (int)HttpStatusCode.BadRequest;
                     //Agrego mi error
-                    String error = "Error, la ruta no pudo ser modificada";
+                    String error = "Error, distancia de ruta invalida";
                     //Retorno el error
                     return Json(error);
                 }
+                else
+                {
 
+                    bool resultado = sql.MModificarRuta(model);
+                    if (resultado)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                        Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                        //Agrego mi error
+                        String error = "Error, la ruta no pudo ser modificada";
+                        //Retorno el error
+                        return Json(error);
+                    }
+
+                }
+            }
+            catch (SqlException e) {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error, no se pudo conectar con la base de datos";
+                //Retorno el error
+                return Json(error);            
             }
 
 
@@ -202,18 +227,30 @@ namespace BOReserva.Controllers
         public JsonResult HabilitarRuta(int idRuta)
         {
             CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();
-            Boolean resultado = sql.habilitarRuta(idRuta);
-            if (resultado)
+            try
             {
-                return (Json(true, JsonRequestBehavior.AllowGet));
+                Boolean resultado = sql.habilitarRuta(idRuta);
+                if (resultado)
+                {
+                    return (Json(true, JsonRequestBehavior.AllowGet));
+                }
+                else
+                {
+                    //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)  
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    //Agrego mi error  
+                    String error = "Error en la base de datos";
+                    //Retorno el error  
+                    return Json(error);
+                }
             }
-            else
+            catch (SqlException e)
             {
-                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)  
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                //Agrego mi error  
-                String error = "Error en la base de datos";
-                //Retorno el error  
+                //Agrego mi error
+                String error = "Error, no se pudo conectar con la base de datos";
+                //Retorno el error
                 return Json(error);
             }
         }
@@ -227,21 +264,33 @@ namespace BOReserva.Controllers
         public JsonResult InhabilitarRuta(int idRuta)
         {
             CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();
-            Boolean resultado = sql.deshabilitarRuta(idRuta);
-            if (resultado)
+            try
             {
-                return (Json(true, JsonRequestBehavior.AllowGet));
+                Boolean resultado = sql.deshabilitarRuta(idRuta);
+                if (resultado)
+                {
+                    return (Json(true, JsonRequestBehavior.AllowGet));
+                }
+                else
+                {
+                    //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)  
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    //Agrego mi error  
+                    String error = "Error en la base de datos";
+                    //Retorno el error  
+                    return Json(error);
+                }
             }
-            else
+
+            catch (SqlException e)
             {
-                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)  
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                //Agrego mi error  
-                String error = "Error en la base de datos";
-                //Retorno el error  
+                //Agrego mi error
+                String error = "Error, no se pudo conectar con la base de datos";
+                //Retorno el error
                 return Json(error);
             }
         }
-
     }
 }
