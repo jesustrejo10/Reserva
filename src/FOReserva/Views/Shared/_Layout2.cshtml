@@ -1,58 +1,13 @@
-﻿<!--<!DOCTYPE html>
-<html lang="es">
-    <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <meta charset="utf-8" />
-        <title>@ViewBag.Title - Mi aplicación ASP.NET MVC</title>
-        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <meta name="viewport" content="width=device-width" />
-        @Styles.Render("~/Content/css")
-        @Styles.Render("~/Views/assets/plugins/bootstrap/css")
-        <link href="@Url.Content("~/Content/assets/plugins/bootstrap/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
-        @Scripts.Render("~/bundles/modernizr")
+﻿<style>
+    .dropdown-toggle:focus {
+        background-color: white !important;
+    }
 
+    .dropdown-toggle:hover {
+        background-color: white !important;
+    }
 
-    </head>
-    <body>
-        <header>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("su logotipo aquí", "Index", "Home")</p>
-                </div>
-                <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
-                    <nav>
-                        <ul id="menu">
-                            <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                            <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </header>
-        <div id="body">
-            @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix">
-                @RenderBody()
-            </section>
-        </div>
-        <footer>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET MVC</p>
-                </div>
-            </div>
-        </footer>
-
-        @Scripts.Render("~/bundles/jquery")
-        @RenderSection("scripts", required: false)
-    </body>
-</html>-->
-
-
+</style>
 <!DOCTYPE html>
 <!--[if IE 8]>			<html class="ie ie8"> <![endif]-->
 <!--[if IE 9]>			<html class="ie ie9"> <![endif]-->
@@ -117,7 +72,7 @@
                     </button>
 
                     <!-- Logo -->
-                    <a class="logo pull-left" href="index.html">
+                    <a class="logo pull-left" href=@Url.Action("Index", "Home")>
                         <img src="@Url.Content("~/Content/assets/images/logo_final.png")" alt=" " />
                     </a>
 
@@ -140,21 +95,38 @@
                                     <a href="#">HOME</a>
                                 </li>
                             -->
-                            <ul id="topMain" class="nav nav-pills nav-main">
-                                <li class="active">
-                                    <!-- HOME -->
-                                    <a href="index.html"> INICIO </a>
-                                </li>
-                                <li>
-                                    <!-- SOBRE NOSOTROS -->
-                                    <a href="page-about-us.html"> INICIAR SESIÓN </a>
-                                </li>
-                                <li>
-                                    <!-- CONTACTO -->
-                                    <a href="page-contact.html"> REGISTRARSE </a>
-                                </li>
-                            </ul>
+                            @if (Session["id_usuario"] != null)
+                            {
+                                <ul class="nav navbar-nav navbar-right" style="margin-top: 20px;">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@Session["correo"] <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="@Url.Action("VerPerfil", "registro_autenticacion")" class="PePerfil">Ver Perfil</a></li>
+                                            <li><a href="@Url.Action("CambiarClavePerfil", "registro_autenticacion")" id="CambiarClavePerfil" class="CambiarClavePerfil">Cambiar Clave</a></li>
+                                            <li role="separator" class="divider"></li>
+                                            <li><a href="@Url.Action("CerrarSesion", "registro_autenticacion")">Cerrar Sesión</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
 
+                            }
+                            else
+                            {
+                                <ul id="topMain" class="nav nav-pills nav-main">
+                                    <li class="active">
+                                        <!-- HOME -->
+                                        @Html.ActionLink("INICIO", "Index", "Home")
+                                    </li>
+                                    <li>
+                                        <!-- SOBRE NOSOTROS -->
+                                        @Html.ActionLink("INICIO SESIÓN", "Login", "registro_autenticacion")
+                                    </li>
+                                    <li>
+                                        <!-- CONTACTO -->
+                                        @Html.ActionLink("REGISTRARSE", "Registro", "registro_autenticacion")
+                                    </li>
+                                </ul>
+                            }
                         </nav>
                     </div>
 
@@ -167,7 +139,9 @@
         <!-- CENTRAL CONTAINER -->
         <div id="body">
             <section>
+                
                 @RenderBody()
+
             </section>
         </div>
 
@@ -184,24 +158,26 @@
 
 
                         <!-- Social Icons -->
-                        <div class="clearfix">
+                        
+                            <div class="clearfix">
 
-                            <a href="#" class="social-icon social-icon-sm social-icon-border social-facebook pull-left" data-toggle="tooltip" data-placement="top" title="Facebook">
-                                <i class="icon-facebook"></i>
-                                <i class="icon-facebook"></i>
-                            </a>
+                                <a href="#" class="social-icon social-icon-sm social-icon-border social-facebook pull-left" data-toggle="tooltip" data-placement="top" title="Facebook">
+                                    <i class="icon-facebook"></i>
+                                    <i class="icon-facebook"></i>
+                                </a>
 
-                            <a href="#" class="social-icon social-icon-sm social-icon-border social-twitter pull-left" data-toggle="tooltip" data-placement="top" title="Twitter">
-                                <i class="icon-twitter"></i>
-                                <i class="icon-twitter"></i>
-                            </a>
+                                <a href="#" class="social-icon social-icon-sm social-icon-border social-twitter pull-left" data-toggle="tooltip" data-placement="top" title="Twitter">
+                                    <i class="icon-twitter"></i>
+                                    <i class="icon-twitter"></i>
+                                </a>
 
-                            <a href="#" class="social-icon social-icon-sm social-icon-border social-instagram pull-left" data-toggle="tooltip" data-placement="top" title="Instagram">
-                                <i class="icon-instagram"></i>
-                                <i class="icon-instagram"></i>
-                            </a>
+                                <a href="#" class="social-icon social-icon-sm social-icon-border social-instagram pull-left" data-toggle="tooltip" data-placement="top" title="Instagram">
+                                    <i class="icon-instagram"></i>
+                                    <i class="icon-instagram"></i>
+                                </a>
 
-                        </div>
+                            </div>
+                        
                         <!-- /Social Icons -->
 
                     </div>
@@ -242,6 +218,9 @@
     <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/jquery/jquery-2.1.4.min.js")"></script>
 
     <script type="text/javascript" src="@Url.Content("~/Content/assets/js/scripts.js")"></script>
+
+    <!--VALIDACIONES M14 REGISTRO-->
+    <script type="text/javascript" src=@Url.Content("~/Scripts/validaciones_registro_autenticacion.js")></script>
 
     <!--CONTROLADOR DE LA VISTA PARCIAL-->
     <script type="text/javascript" src="@Url.Content("~/Scripts/cargadorPestanas.js")"></script>

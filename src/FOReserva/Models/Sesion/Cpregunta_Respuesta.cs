@@ -3,29 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace FOReserva.Models.registro_autenticacion
+namespace FOReserva.Models.Sesion
 {
     public class Cpregunta_Respuesta
     {
-        public Cpregunta_Respuesta(String _pregunta1, String _pregunta2, String _pregunta3, String _respuesta1, String _respuesta2, String _respuesta3)
-        {
-            //Constructor
+        private string _pregunta;
+        private string _respuesta;
+
+        public Cpregunta_Respuesta() {
+            _pregunta = "";
+            _respuesta = "";
         }
 
-        public String Mrecuperacion(String _pregunta, String _respuesta)
-        {
-            //Recupera
-            return null;
+        public Cpregunta_Respuesta(string _pregunta, string _respuesta) {
+            this._pregunta = _pregunta;
+            this._respuesta = _respuesta;
         }
 
-        public Boolean Mvalidar_Respuesta(String _pregunta)
-        {
-            //Valida respuesta
-            return false;
+        public string Pregunta {
+            get { return this._pregunta; }
+            set { this._pregunta = value; }
         }
 
-        public String _pregunta { get; set; }
-        public String _respuesta { get; set; }
+        public string Respuesta {
+            get { return this._respuesta; }
+            set { this._respuesta = value; }
+        }
 
     }
 }

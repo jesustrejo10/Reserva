@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace FOReserva.Models.registro_autenticacion
+namespace FOReserva.Models.Sesion
 {
     public class Ccodigo_Temporal
     {

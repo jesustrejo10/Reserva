@@ -44,7 +44,5 @@ namespace FOReserva.Servicio
         {
             get { return conexion; }
         }
-
-
     }
 }

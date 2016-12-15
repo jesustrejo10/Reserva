@@ -99,7 +99,7 @@
     /* CARGADOR DE LA PESTAÑA AUTOS*/
     $("#LiAutos").click(function (e) {
         e.preventDefault();
-
+        
         $("#LiAutos").addClass("active");
 
         $("#LiVuelos").removeClass("active");
@@ -172,8 +172,6 @@
                 }
             });
     });
-
-
 
 
     /* CARGADOR DE LA PESTAÑA CRUCEROS*/

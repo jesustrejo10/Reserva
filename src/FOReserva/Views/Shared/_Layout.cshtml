@@ -10,8 +10,8 @@
         @Styles.Render("~/Views/assets/plugins/bootstrap/css")
         <link href="@Url.Content("~/Content/assets/plugins/bootstrap/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
         @Scripts.Render("~/bundles/modernizr")
-        
-       
+
+
     </head>
     <body>
         <header>
@@ -74,11 +74,11 @@
 
     <!-- CORE CSS -->
     <link href="@Url.Content("~/Content/assets/plugins/bootstrap/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
-  
+
     <!-- THEME CSS -->
-    
+
     <link href="@Url.Content("~/Content/assets/css/essentials.css")" rel="stylesheet" type="text/css" />
-    
+
     <link href="@Url.Content("~/Content/assets/css/layout.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/assets/css/custom.css")" rel="stylesheet" type="text/css" />
 
@@ -117,8 +117,9 @@
                     </button>
 
                     <!-- Logo -->
-                    <a class="logo pull-left" href="index.html">
-                        <img src="@Url.Content("~/Content/assets/images/logo_final.png")" alt=" " /></a>
+                    <a class="logo pull-left" href=@Url.Action("Index", "Home")>
+                        <img src="@Url.Content("~/Content/assets/images/logo_final.png")" alt=" " />
+                    </a>
 
                     <!--
                         Top Nav
@@ -142,15 +143,15 @@
                             <ul id="topMain" class="nav nav-pills nav-main">
                                 <li class="active">
                                     <!-- HOME -->
-                                    <a href="index.html"> INICIO </a>
+                                    @Html.ActionLink("INICIO", "Index", "Home")
                                 </li>
                                 <li>
                                     <!-- SOBRE NOSOTROS -->
-                                    <a href="../registro_autenticacion/Sesion_registro_recuperacion"> INICIAR SESIÓN </a>
+                                    @Html.ActionLink("INICIO SESIÓN", "Login", "registro_autenticacion")
                                 </li>
                                 <li>
                                     <!-- CONTACTO -->
-                                    <a href="page-contact.html"> REGISTRARSE </a>
+                                    @Html.ActionLink("REGISTRARSE", "Registro", "registro_autenticacion")
                                 </li>
                             </ul>
 
@@ -371,7 +372,7 @@
     </div><!-- /PRELOADER -->
     <!-- JAVASCRIPT FILES -->
     <script type="text/javascript">var plugin_path = 'Content/assets/plugins/';</script>
-    
+
     <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/jquery/jquery-2.1.4.min.js")"></script>
 
     <script type="text/javascript" src="@Url.Content("~/Content/assets/js/scripts.js")"></script>
