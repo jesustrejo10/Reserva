@@ -12,65 +12,17 @@ namespace FOReserva.Models.Itinerario
     {
         public Cvista_Itinerario() { }
 
-        public String _ida { get; set; }
-        public String _vuelta { get; set; }
-
-        [Display(Name = "Ciudad")]
-        public int SelectedCiudadIdDestino { get; set; }
-
-        public IEnumerable<SelectListItem> CiudadesDestino
-        {
-            get
-            {
-                var sqlObj = new ManejadorSQLItinerario();
-                var allCiudades = sqlObj.buscarCiudades();
-
-                return DefaultCiudadDestinoItem.Concat(new SelectList(allCiudades, "Id", "Name"));
-
-            }
-        }
-
-        [Display(Name = "Ciudad")]
-        public int SelectedCiudadIdOrigen { get; set; }
-
-        public IEnumerable<SelectListItem> CiudadesOrigen
-        {
-            get
-            {
-                var sqlObj = new ManejadorSQLItinerario();
-                var allCiudades = sqlObj.buscarCiudades();
-
-                return DefaultCiudadOrigenItem.Concat(new SelectList(allCiudades, "Id", "Name"));
-
-            }
-        }
+        public int _id { get; set; }
+        public String _ciudad { get; set; }
+        public String _fecha { get; set; }
+        public IEnumerable<SelectListItem> _lciudad { get; set; }
+        public IEnumerable<SelectListItem> _lfecha { get; set; }
+        public String _actividad { get; set; }
+        public int _boleto { get; set; }
+        public int _crucero { get; set; }
 
 
-
-        public IEnumerable<SelectListItem> DefaultCiudadOrigenItem
-        {
-            get
-            {
-                return Enumerable.Repeat(new SelectListItem
-                {
-                    Value = "-1",
-                    Text = "Selecciona Tu Destino"
-                }, count: 1);
-            }
-        }
-
-        public IEnumerable<SelectListItem> DefaultCiudadDestinoItem
-        {
-            get
-            {
-                return Enumerable.Repeat(new SelectListItem
-                {
-                    Value = "-1",
-                    Text = "Selecciona Ciudad Destino"
-                }, count: 1);
-            }
-        }
-
+     
     }
 
 

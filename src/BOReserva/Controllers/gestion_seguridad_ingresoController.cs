@@ -38,11 +38,14 @@ namespace BOReserva.Content.Controllers
                 TempData["ContraseñaVacio"] = "Debe ingresar su contraseña";
                 return RedirectToAction("M01_Login", "gestion_seguridad_ingreso");
             }
+
             try
             {
            
                 System.Diagnostics.Debug.WriteLine("Correo " + correo + " contrasena " + contraseña);
                 ingreso = ingreso.verificarUsuario(correo, contraseña);
+                System.Diagnostics.Debug.WriteLine(correo.Equals("reserva@reserva.com"));
+               
 
                 if (ingreso.EstaActivo())
                 {
@@ -55,7 +58,8 @@ namespace BOReserva.Content.Controllers
                     }
                     else
                     {
-                        ingreso.BloquearUsuario();
+
+                            ingreso.BloquearUsuario();
                         
                     }
                 }

@@ -7,6 +7,8 @@
 <div class="panel-body center-block">
 
     <!-- FORMULARIO PARA CREAR UNA REVISION-->
+
+
     @using (Html.BeginForm("crear_revision_form", "gestion_revision", FormMethod.Post))
     {
         <div class="form-group">
@@ -36,20 +38,6 @@
     }
 </div>
 
-<script>
 
-    $(document).ready(function () {
-        $("#rev_agregar").click(function () {
-            var mensaje = $("#rev_mensaje").val();
-            var puntuacion = rev_puntuacion.options[rev_puntuacion.selectedIndex].value;
-            jQuery.ajax({
-                type: "GET",
-                url: "/gestion_revision/crear_revision",
-                data: { msj: mensaje, ptn: puntuacion }
-            }).done(function () { alert("PUDE ENVIAR el mensajes y la puntuacion son " + mensaje + puntuacion) })
-        });
-    });
-
-</script>
 
 
