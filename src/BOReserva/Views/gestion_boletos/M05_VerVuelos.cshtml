@@ -1,26 +1,30 @@
-<!-- /.TIENES QUE ADAPTARLO A POST Y SI ES SUCCESS LO MANDAS A LA VISTA PARCIAL DETALLE VUELO -->
-<script src="/Scripts/Scripts_Boletos/DetalleVuelo.js"></script>
-
-<div class="row">
+﻿<div class="row">
     <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
 
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Vuelos Disponibles</h3>
+                <h3 class="box-title">
+                    Vuelos disponibles
+                </h3>
+
+
             </div>
             <!-- /.box-header -->
             <div class="box-body">
                 <table id="example" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>Origen / Destino</th>
-                            <th>Fecha Salida</th>
-                            <th>Hora Salida</th>
-                            <th>Fecha Llegada</th>
-                            <th>Hora Llegada</th>
+                            <th>Origen</th>
+                            <th>Destino</th>
+                            <th>Fecha salida</th>
+                            <th>Fecha llegada</th>
                             <th>Monto</th>
-                            <th>Selección</th>
+                            <th>Tipo</th>
+                            <th style="display:none;">Id origen</th>
+                            <th style="display:none;">Id destino</th>
+                            <th style="display:none;">Fecha vuelta</th>
+                            <th>Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,20 +32,20 @@
                         {
                             foreach (var item in Model)
                             {
-                                String fechaSal = @item._fechaPartida.Date.ToString();
-                                String horaSal = @item._fechaPartida.Time.ToString();
-                                String fechaLleg = @item._fechaLlegada.Date.ToString();
-                                String horaLleg = @item._fechaLlegada.Time.ToString();
+
 
                                 <tr id="@item._id">
-                                    <td>@item._origen / @item._destino </td>
-                                    <td>fechaSal</td>
-                                    <td>horaSal</td>
-                                    <td>fechaLlehg</td>
-                                    <td>horaLLeg</td>
-                                    <td>@item._monto</td>
+                                    <td id="origen">@item._ruta._nomOrigen</td>
+                                    <td id="destino">@item._ruta._nomDestino</td>
+                                    <td id="fechapartida">@item._fechaPartida</td>
+                                    <td id="fechallegada">@item._fechaLlegada</td>
+                                    <td id="monto">@item._monto</td>
+                                    <td id="tipo">@item._tipo</td>
+                                    <td id="idorigen" style="display:none;">@item._ruta._origen</td>
+                                    <td id="iddestino" style="display:none;">@item._ruta._destino</td>
+                                    <td id="fechavuelta" style="display:none;">@item._fechaVuelta</td>
                                     <td>
-                                        <input type="checkbox" class="call-checkbox">
+                                        <a href="#" title="Crear boleto"> <i class="fa fa-eye consultar"></i></a>
                                     </td>
                                 </tr>
                             }
@@ -49,19 +53,11 @@
                         catch
                         {
 
+
                         }
                 </table>
 
-                <div class="col-md-12" style="margin-top:10px;">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-2">
-                        <button type="button" id="detalleVuelo" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Siguiente</button>
-                    </div>
-                    <div class="col-md-2">
-                        <button id="cancel" type="button" class="btn btn-danger" style="display:block; margin-left:auto; margin-right:auto;">Cancelar</button>
-                    </div>
-                    <div class="col-md-4"></div>
-                </div>
+
             </div>
             <!-- /.box-body -->
         </div>
@@ -70,41 +66,90 @@
     <!-- /.col -->
 </div>
 <!-- /.row -->
-<script>
-    $(document).ready(function () {
-        $('#example').DataTable({
-            "pagingType": "simple_numbers",
-            "language": {
-                "lengthMenu": "N° _MENU_ registros por página.",
-                "zeroRecords": "No se encontró registro.",
-                "info": "  Mostrando registros _START_ - _END_  (_TOTAL_ registros totales).",
-                "infoEmpty": "0 de 0 de 0 registros",
-                "infoFiltered": "(Encontrado de _MAX_registros)",
-                "search": "Buscar: ",
-                "processing": "Procesando la información",
-                "paginate": {
-                    "first": " |< ",
-                    "previous": "Anterior",
-                    "next": "Siguiente",
-                    "last": " >| "
-                }
-            }
-        });
-    });
-</script>
 
-<script src="../../Content/plugins/jQuery/jquery-2.2.3.min.js"></script>
-<!-- Bootstrap 3.3.6 -->
-<script src="../../Content/bootstrap/js/bootstrap.min.js"></script>
-<!-- DataTables -->
-<script src="../../Content/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="../../Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
-<!-- SlimScroll -->
-<script src="../../Content/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-<!-- FastClick -->
-<script src="../../Content/plugins/fastclick/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="../../Content/dist/js/app.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
-<!-- page script -->
+<script src="~/Content/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+<script language="javascript" type="text/javascript">
+    table = $('#example').DataTable();
+    $(document).ready(function () {
+
+        $(".consultar").click(function (e) {
+            e.preventDefault();
+            alert("Creando boleto sin reserva");
+
+            var id_vuelo = $(this).parent().parent().parent().attr("id");
+            //alert("ID ---- "+ identificador);
+
+            var nombre_origen = "";
+            var nombre_destino = "";
+            var fecha_salida = "";
+            var fecha_llegada = "";
+            var id_origen = "";
+            var id_destino = "";
+            var monto = "";
+            var tipo = "";
+            var fecha_vuelta = "";
+
+            // Obtenemos todos los valores contenidos en los <td> de la fila
+            // seleccionada
+            $(this).parents("tr").find("#origen").each(function () {
+                nombre_origen += $(this).html() + "\n";
+            });
+            $(this).parents("tr").find("#destino").each(function () {
+                nombre_destino += $(this).html() + "\n";
+            });
+            $(this).parents("tr").find("#fechapartida").each(function () {
+                fecha_salida += $(this).html() + "\n";
+            });
+            $(this).parents("tr").find("#fechallegada").each(function () {
+                fecha_llegada += $(this).html() + "\n";
+            });
+            $(this).parents("tr").find("#idorigen").each(function () {
+                id_origen += $(this).html() + "\n";
+            });
+            $(this).parents("tr").find("#iddestino").each(function () {
+                id_destino += $(this).html() + "\n";
+            });
+            $(this).parents("tr").find("#monto").each(function () {
+                monto += $(this).html() + "\n";
+            });
+            $(this).parents("tr").find("#tipo").each(function () {
+                tipo += $(this).html() + "\n";
+            });
+            $(this).parents("tr").find("#fechavuelta").each(function () {
+                fecha_vuelta += $(this).html() + "\n";
+            });
+
+
+
+
+
+           // alert(nombre_origen + " " + nombre_destino + " " + fecha_salida + " " + fecha_llegada+" "+id_origen+" "+id_destino+" "+tipo);
+
+            var url = '/gestion_boletos/M05_DetalleVuelo';
+            var method = 'GET';
+            var data = { origen : nombre_origen, destino : nombre_destino, fechasalida : fecha_salida, fechallegada : fecha_llegada, idorigen : id_origen, iddestino : id_destino, monto : monto, tipo : tipo, idvuelo : id_vuelo };
+
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+        });
+
+        });
+
+
+
+
+</script>
