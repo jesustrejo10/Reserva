@@ -623,7 +623,6 @@ namespace BOReserva.Servicio
                 conexion.Open();
                 SqlCommand query = conexion.CreateCommand();
                 query.CommandText = "UPDATE Oferta SET ofe_estado = 0 WHERE ofe_id="+ofertaId;
-                query.CommandText = "UPDATE Oferta SET of_estado = 0 WHERE of_id=" + ofertaId;
                 SqlDataReader lector = query.ExecuteReader();
                 lector.Close();
                 SqlCommand query1 = conexion.CreateCommand();
