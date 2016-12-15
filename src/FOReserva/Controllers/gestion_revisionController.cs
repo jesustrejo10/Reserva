@@ -83,11 +83,11 @@ namespace FOReserva.Controllers
             return PartialView(lista);
         }
 
-        public ActionResult Revision_usuario(int usuario)
+        public ActionResult Revision_usuario()
         {
-            Console.WriteLine("Lista Rev " + usuario);
+            //Console.WriteLine("Lista Rev " + usuario);
             ManejadorSQLRevision manejador = new ManejadorSQLRevision();
-            List<CRevision> lista = manejador.BuscarRevisionesUsuario(usuario);
+            List<CRevision> lista = manejador.BuscarRevisionesUsuario();
             return PartialView(lista);
         }
 

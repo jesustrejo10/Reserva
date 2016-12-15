@@ -125,10 +125,10 @@ namespace FOReserva.Servicio
             return null;
         }
 
-        public List<CRevision> BuscarRevisionesUsuario(int usuario)
+        public List<CRevision> BuscarRevisionesUsuario()
         {
 
-            string query = "SELECT rest.rst_id, rev.rev_fecha, rev.rev_mensaje, rev.rev_puntuacion FROM Restaurante as rest, Reserva_Restaurante as res, Revision as rev  WHERE rev.rev_tipo=1 and rev.rev_FK_res_res_id=res.ID and rest.rst_id=res.FK_RESTAURANTE and rest.rst_id= " + usuario;
+            string query = "SELECT rest.rst_id, rev.rev_fecha, rev.rev_mensaje, rev.rev_puntuacion FROM Restaurante as rest, Reserva_Restaurante as res, Revision as rev  and rev.rev_FK_res_res_id=res.ID and rest.rst_id=res.FK_RESTAURANTE ";
             SqlDataReader read = Executer(query);
             List<CRevision> lista_rev = new List<CRevision>();
 
