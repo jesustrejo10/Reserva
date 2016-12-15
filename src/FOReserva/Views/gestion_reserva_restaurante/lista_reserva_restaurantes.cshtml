@@ -60,7 +60,7 @@
                 <h4 class="modal-title">Eliminar Reserva</h4>
             </div>
             <div class="modal-body">
-                <p>¿Está seguro que desea eliminar esta reserva?</p>
+                <p>&#191;Est&aacute; seguro que desea eliminar esta reserva?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" id="aceptar_eliminar" value="0" class="btn btn-success" data-dismiss="modal">Aceptar</button>
@@ -81,7 +81,7 @@
                 <h4 class="modal-title">Eliminar Reserva</h4>
             </div>
             <div class="modal-body">
-                <p>Error al eliminar la reserva, por favor intente mas tarde</p>
+                <p>Error al eliminar la reserva, por favor intente m&aacute;s tarde</p>
             </div>
             <div class="modal-footer">
                 <button type="button" id="" value="0" class="btn btn-success" data-dismiss="modal">Aceptar</button>
@@ -106,7 +106,7 @@
                 <h4 class="modal-title">Editar Reserva</h4>
             </div>
             <div class="modal-body">
-                <p>Error al editar la reserva, por favor intente mas tarde</p>
+                <p>Error al editar la reserva, por favor intente m&aacute;s tarde</p>
             </div>
             <div class="modal-footer">
                 <button type="button" id="" value="0" class="btn btn-success" data-dismiss="modal">Aceptar</button>
@@ -181,12 +181,10 @@
         //clear errors
         $(".error").hide();
         $("#name_client").removeClass("has-error");
-        $("#reserv_date").removeClass("has-error");
 
         //find errors
         var nombre = $("#name_client").val();
       
-        var fecha = $("#reserv_date").prop("value");
         var caracteres = /^[a-zA-Z\s]+$/;
 
         var win = true;
@@ -196,23 +194,16 @@
         
             if (nombre == "" || nombre == undefined) {
                 $("#name_client").addClass("has-error");
-                $("#name_empty").fadeIn();
+                $("#name_empty").show();
                 win = false;
             }
             else {
                 $("#name_client").addClass("has-error");
-                $("#name_format").fadeIn();
+                $("#name_format").show();
                 win = false;
             }
         }
-        //VALIDACION PARA FECHA
-        if (fecha == null || fecha == 0) {
-         
-            $("#reserv_date").addClass("has-error");
-            $("#fecha_null").fadeIn();
-            win = false;
-        }
-
+     
         if (win) {
             var form = $('#edit_form');
             $.ajax({
@@ -223,8 +214,10 @@
                 console.log(data);
                 $('#' + $('#aceptar_modificar').attr('value')).empty();
                 $('#' + $('#aceptar_modificar').attr('value')).html(data);
+                $('#ModalModificar').modal('hide');
             })
 	        .fail(function (data) {
+	            $('#ModalModificar').modal('hide');
 	            $('#ModalErrorEditar').modal('show');
 	            console.log("error");
 	        })
@@ -233,7 +226,7 @@
 	        });
         }
         else
-            $('#ModalErrorEditar').modal('show');
+           // $('#ModalErrorEditar').modal('show');
             return false;
 
     })

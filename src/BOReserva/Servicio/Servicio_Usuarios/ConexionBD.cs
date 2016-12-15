@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BOReserva.Servicio;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -30,7 +31,9 @@ namespace BOReserva.Models.gestion_usuarios
 
             try
             {
-                strConexion = ConfigurationManager.ConnectionStrings[RecursoBD.StringConexion].ConnectionString;
+                //strConexion = ConfigurationManager.ConnectionStrings[RecursoBD.StringConexion].ConnectionString;
+                manejadorSQL manejador = new manejadorSQL();
+                strConexion = manejador.stringDeConexions;
                 conexion = new SqlConnection(strConexion);
             }
 

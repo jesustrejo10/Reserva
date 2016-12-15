@@ -1,6 +1,7 @@
 ﻿using FOReserva.Servicio;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,7 +11,7 @@ namespace FOReserva.Models.Diarios
     public class CFoto_Diario : BaseEntity
     {
         private string _nombre;
-        private string _datos;
+        private byte[] _datos;
         private int _fk_diario;
 
 
@@ -20,7 +21,7 @@ namespace FOReserva.Models.Diarios
            (int id,
             string name,
             string nombre,
-            string  datos,
+            byte[]  datos,
             int fk_diario)
             : base(id, name)
         {
@@ -45,7 +46,7 @@ namespace FOReserva.Models.Diarios
         }
 
         //Obtener datos de la imagen
-        public string Datos
+        public byte[] Datos
         {
             get { return _datos; }
             set { _datos = value; }

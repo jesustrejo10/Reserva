@@ -18,9 +18,9 @@ function cargarContenido(seccion, tipo, url, data, boton) {
 
     if (seccion == '#MD' || seccion == '#MI') {
         mostrarContenedor(1)
-    } else if (seccion == '#CI') {
+    }/* else if (seccion == '#CI') {
         mostrarContenedor(3)
-    } else if (seccion == '#CP') {
+    }*/ else if (seccion == '#CP') {
         mostrarContenedor(2)
     }
 
@@ -28,6 +28,8 @@ function cargarContenido(seccion, tipo, url, data, boton) {
         seccion = "#contenedor"
     else if (seccion == "#MI")
         seccion = "#contenedorImagenes"
+    else if (seccion == "#CI")
+        seccion = "#contenedorPerfil"
 
     $(seccion)
         .empty()
@@ -186,7 +188,7 @@ jQuery(document).ready(function () {
                     $("#contenedor").append(data);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
+                    $("#contenedor").html('<div class="text-center">No se pudo cargar la data</div>');
                 }
             });
 
@@ -342,6 +344,9 @@ jQuery(document).ready(function () {
         $("#LiRestaurantes").removeClass("active");
         $("#LiAutos").removeClass("active");
         $("#LiCruceros").removeClass("active");
+
+        $("#contenedor").html('<div class="text-center">Cargando...</div>');
+
         var url = '/gestion_diarios/gestion_diarios';
         var method = 'GET';
         var data = '';

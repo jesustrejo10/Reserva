@@ -23,14 +23,50 @@ namespace BOReserva.Controllers
             return PartialView(crear);
         }
 
+        public ActionResult M09_GestionHoteles_ModificarHotel(int id)
+        {
+            CManejadorSQL_Hoteles buscarhotel = new CManejadorSQL_Hoteles();
+            CHotel hot = buscarhotel.MMostrarhotelBD(id); //BUSCA EL HOTEL A MOSTRAR
+          
+            //CHotel hotel = new CHotel();
+            CGestionHoteles_EditarHotel hotel = new CGestionHoteles_EditarHotel();
+            hotel._id = hot._id;
+            hotel._nombre = hot._nombre;
+            hotel._paginaweb = hot._paginaweb;
+            hotel._email = hot._email;
+            hotel._canthabitaciones = hot._canthabitaciones;
+            hotel._pais = hot._pais;
+            hotel._ciudad = hot._ciudad;
+            hotel._direccion = hot._direccion;
+            hotel._estrellas = hot._estrellas;
+            hotel._puntuacion = hot._puntuacion;
+            hotel._disponibilidad = hot._disponibilidad;
+            return PartialView(hotel);
+        }
+
         [HttpPost]
         public JsonResult crearhotel(CHotel crear) {
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public JsonResult editarhotel(CGestionHoteles_EditarHotel modificar)
+        public JsonResult editarhotel(CGestionHoteles_EditarHotel model)
         {
+            int id = model._id;
+            String nombre = model._nombre;
+            String paginaweb = model._paginaweb;
+            String email = model._email;
+            int canthabitaciones = model._canthabitaciones;
+            String pais = model._pais;
+            String ciudad = model._ciudad;
+            String direccion = model._direccion;
+            int estrellas = model._estrellas;
+            float puntuacion = model._puntuacion;
+            int disponibilidad = model._disponibilidad;
+            CHotel hotel = new CHotel(id, nombre, paginaweb, email, canthabitaciones, direccion, ciudad, pais, estrellas,
+            puntuacion, disponibilidad);
+            CManejadorSQL_Hoteles hot = new CManejadorSQL_Hoteles();
+            int modifico_si_no = hot.MModificarhotelBD(hotel, id);
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 

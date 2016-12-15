@@ -67,9 +67,9 @@ namespace BOReserva.Servicio.Servicio_Hoteles
                 //ingreso la orden del query
 
                 query.CommandText = "INSERT INTO Hotel " +
-                                     "(hot_id, hot_nombre, hot_url_pagina, hot_email, hot_cantidad_habitaciones , hot_direccion, hot_estrellas, hot_puntuacion, hot_disponibilidad) " +
+                                     "(hot_id, hot_nombre, hot_url_pagina, hot_email, hot_cantidad_habitaciones , hot_direccion, hot_estrellas, hot_puntuacion, hot_disponibilidad, hot_fk_ciudad) " +
                                      "VALUES (" + pk.ToString() + ",'" + model._nombre + "','" + model._paginaweb + "','" + model._email + "'," +
-                                                   model._canthabitaciones.ToString() + ",'" + model._direccion + "'," + model._estrellas.ToString() + ",0,1);";
+                                                   model._canthabitaciones.ToString() + ",'" + model._direccion + "'," + model._estrellas.ToString() + ",0,1,15);";
                 //creo un lector sql para la respuesta de la ejecucion del comando anterior              
                 SqlDataReader lector = query.ExecuteReader();
 
@@ -370,6 +370,65 @@ namespace BOReserva.Servicio.Servicio_Hoteles
                 return false;
             }
 
+        }
+
+        public CHotel MMostrarhotelBD(int id)
+        {
+            CHotel hotelRet = null;
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "SELECT * FROM Hotel WHERE hot_id = " + id;
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                        CHotel hotel = new CHotel(Int32.Parse(reader["hot_id"].ToString()),
+                                reader["hot_nombre"].ToString(),
+                                reader["hot_url_pagina"].ToString(),
+                                reader["hot_email"].ToString(),
+                                Int32.Parse(reader["hot_cantidad_habitaciones"].ToString()),
+                                reader["hot_direccion"].ToString(),
+                                MBuscarnombreciudad(Int32.Parse(reader["hot_fk_ciudad"].ToString())),
+                                MBuscarnombrePais(Int32.Parse(reader["hot_fk_ciudad"].ToString())),
+                                Int32.Parse(reader["hot_estrellas"].ToString()),
+                                float.Parse(reader["hot_puntuacion"].ToString()),
+                                Int32.Parse(reader["hot_disponibilidad"].ToString()));
+                        hotelRet = hotel;
+                    }
+                    cmd.Dispose();
+                    conexion.Close();
+                    return hotelRet;
+                }
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return null;
+            }
+        }
+
+        public int MModificarhotelBD(CHotel hotel, int id)
+        {
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "UPDATE Hotel SET hot_nombre ='" + hotel._nombre + "', hot_url_pagina = '" + hotel._paginaweb + "', hot_email = '" + hotel._email + "', hot_cantidad_habitaciones = " + hotel._canthabitaciones + ", hot_direccion = '" + hotel._direccion + "', hot_estrellas = " + hotel._estrellas + " WHERE hot_id = " + id;
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                conexion.Close();
+                return 1;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return 0;
+            }
         }
     }
 }
