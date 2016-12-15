@@ -37,7 +37,6 @@ namespace FOReserva.Models.Autos
 
             public int SelectedCiudadIdOrigen { get; set; }
 
-
             public IEnumerable<SelectListItem> CiudadesOrigen
             {
                 get
@@ -46,9 +45,7 @@ namespace FOReserva.Models.Autos
                     var allCiudades = sqlObj.buscarCiudades();
 
                     return DefaultCiudadOrigenItem.Concat(new SelectList(allCiudades, "Id", "Name"));
-
                 }
-               
             }
 
 
