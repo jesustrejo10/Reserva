@@ -1307,7 +1307,45 @@ namespace BOReserva.Servicio
                 return false;
             }
         }
-
+        //Procedimiento del Modulo 13 para Modificar Roles
+        public Boolean ModificarrRol(string model, string nombre_rolnuevo)
+        {
+            try
+            {
+                System.Diagnostics.Debug.WriteLine("aqui");
+                System.Diagnostics.Debug.WriteLine(model);
+                System.Diagnostics.Debug.WriteLine(nombre_rolnuevo);
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //Abrir la conexion
+                conexion.Open();
+                //SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "UPDATE rol set rol_nombre= '" + nombre_rolnuevo + "' where rol_id in (select rol_id from rol where rol_nombre= '" + model + "') ";
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior
+                SqlDataReader lector = query.ExecuteReader();
+                //cierro el lector
+                lector.Close();
+                //Cierro la conexion
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+        }
 
         public string MBuscarid_IdRol(string rolBuscar)
         {
