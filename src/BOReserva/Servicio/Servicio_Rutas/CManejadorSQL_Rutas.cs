@@ -11,7 +11,13 @@ namespace BOReserva.Servicio.Servicio_Rutas
 {
     public class CManejadorSQL_Rutas
     {
-        private String connectionString = "Data Source=localhost;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617a;";
+        private String connectionString = "";
+        private manejadorSQL bd = new manejadorSQL(); 
+
+
+        public CManejadorSQL_Rutas() {
+            this.connectionString = bd.stringDeConexions;
+        }
 
         private SqlConnection con = null;
 
