@@ -1678,6 +1678,8 @@
     <Content Include="Images\diario4.jpg" />
     <Content Include="Images\diario5.jpg" />
     <Content Include="Images\diario6.jpg" />
+    <Content Include="Images\DiarioBanner1.jpg" />
+    <Content Include="Images\DiarioBanner2.jpg" />
     <Content Include="Images\restaurant_generic.jpg" />
     <Content Include="Models\ORM\ModelDBReserva.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -3143,6 +3145,7 @@
     <Content Include="Views\gestion_reserva_crucero\gestion_reserva_crucero_resultado_crucero.cshtml" />
     <Content Include="Views\gestion_revision\Revision_usuario.cshtml" />
     <Content Include="Views\gestion_diarios\_CrearDiarioFallo.cshtml" />
+    <Content Include="Views\gestion_diarios\gestion_diariosImagenes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
