@@ -310,6 +310,23 @@ jQuery(document).ready(function () {
     $("#verRestaurantes").click(function (e) {
         e.preventDefault();
         var url = '/gestion_restaurantes/M10_GestionRestaurantes_Ver';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
     });
     $("#agregarRestaurantes").click(function (e) {
         e.preventDefault();

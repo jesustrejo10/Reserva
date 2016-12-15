@@ -46,15 +46,7 @@ namespace FOReserva.Servicio
             return lista_rev;
         }
 
-        /*public bool Eliminar_Revision(string nombre, string apellido, int revision)   //FALTA
-        {
-            string query = "DELETE FROM Reserva_Restaurante ( Reserva_Nombre, Fecha, Hora,Cantidad_Personas, FK_RESTAURANTE, FK_USUARIO) VALUES( )";
-            this.Executer(query);
-            CloseConnection();
-            return true;
-        }
-         * 
-         */
+       
 
         public bool Crear_Revision(string rev_mensaje, int rev_puntuacion)   //FALTA
         {
@@ -118,13 +110,41 @@ namespace FOReserva.Servicio
                     
                    DateTime _fecha = read.GetDateTime(1);
                     string _mensaje = read.GetString(2);
-                   // int _tipo = read.GetInt32(3);
                     int _puntuacion = read.GetInt32(3);
-
                     CRevision rev = new CRevision();
                     rev.Id = _Id;
                    rev.Fecha = _fecha;
                     
+                    rev.Mensaje = _mensaje;
+                    //rev.Tipo = _tipo;
+                    rev.Puntuacion = _puntuacion;
+                    lista_rev.Add(rev);
+                }
+                return lista_rev;
+            }
+            return null;
+        }
+
+        public List<CRevision> BuscarRevisionesUsuario()
+        {
+
+            string query = "SELECT rest.rst_id, rev.rev_fecha, rev.rev_mensaje, rev.rev_puntuacion FROM Restaurante as rest, Reserva_Restaurante as res, Revision as rev  and rev.rev_FK_res_res_id=res.ID and rest.rst_id=res.FK_RESTAURANTE ";
+            SqlDataReader read = Executer(query);
+            List<CRevision> lista_rev = new List<CRevision>();
+
+            if (read.HasRows)
+            {
+                while (read.Read())
+                {
+                    int _Id = read.GetInt32(0);
+
+                    DateTime _fecha = read.GetDateTime(1);
+                    string _mensaje = read.GetString(2);
+                    int _puntuacion = read.GetInt32(3);
+                    CRevision rev = new CRevision();
+                    rev.Id = _Id;
+                    rev.Fecha = _fecha;
+
                     rev.Mensaje = _mensaje;
                     //rev.Tipo = _tipo;
                     rev.Puntuacion = _puntuacion;

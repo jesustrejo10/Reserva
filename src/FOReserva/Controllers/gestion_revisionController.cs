@@ -40,12 +40,12 @@ namespace FOReserva.Controllers
 
         }
 
-
         public ActionResult consultar_revision()
         {
             return PartialView();
         }
-       public ActionResult eliminar_revision(int Id) 
+      
+        public ActionResult eliminar_revision(int Id) 
         {
             
                 ManejadorSQLRevision manejador = new ManejadorSQLRevision();
@@ -68,8 +68,6 @@ namespace FOReserva.Controllers
             return PartialView(rev);
         }
     
-
-
         /// <summary>
         /// Creacion Modelo Lista Revision
         /// </summary>
@@ -85,95 +83,20 @@ namespace FOReserva.Controllers
             return PartialView(lista);
         }
 
-      /*  public ActionResult Eliminar_Revision_AR(string usuario, CRevision revision)
+        public ActionResult Revision_usuario()
         {
-
-            List<CRevision> lista = new List<CRevision>();
-
-
-            //ManejadorSQLMuestraRevision manejador = new ManejadorSQLMuestraRevision();  // crear en Servicios un manejador para listar 
-            //lista = manejador.ConsultarRevision2(usuario, revision);
-
-
-            if (lista == null)
-            {
-
-                return PartialView(lista);
-            }
-            else
-            {
-                ManejadorSQLRevision manejador2 = new ManejadorSQLRevision();  // crear en Servicios un manejador para listar 
-                lista = manejador2.Eliminar_Revision(usuario, revision);
-
-                return PartialView(lista);
-            }
+            //Console.WriteLine("Lista Rev " + usuario);
+            ManejadorSQLRevision manejador = new ManejadorSQLRevision();
+            List<CRevision> lista = manejador.BuscarRevisionesUsuario();
+            return PartialView(lista);
         }
-       * */
 
-        /// <summary>
-        /// Creacion Modelo Crear Revision
-        /// </summary>
-        /// <returns>Vista Modelo</returns>/*
-        /*public ActionResult Crear_Revision(CReservation_Restaurant reserva, string usuario) //crear reserva restaurant
-        {
-            List<CRevision> lista;
-
-            /*  List<CRevision> lista1;
-              List<CReservation_Restaurant> rest;
-              CReservation_Restaurant res;
-             C
-              
-
-            // no se si estara bien
-            //CReservation_Restaurant n = new CReservation_Restaurant();
-            if ((reserva != null)) //&& (  res== reserva))
-            {
-                ManejadorSQLRevision manejador = new ManejadorSQLRevision();  // crear en Servicios un manejador para listar 
-                lista = manejador.Crear_Revision(reserva, usuario);
-                return PartialView(lista);
-            }
-            else
-            {
-                CListRevision modelo = new CListRevision();
-                return PartialView(modelo);
-            }
-			return null;
-
-        }
-        */
-        /// <summary>
-        /// Creacion Modelo Eliminar Revision
-        /// </summary>
-        /// <returns>Vista Modelo</returns>
-        public ActionResult Crear_RevisionHotel(CReservation_Restaurant reserva, string usuario, DateTime fecha) //crear reserva hotel
-        {
-            List<CRevision> lista;
-			return null;
-            /*  List<CRevision> lista1;
-              List<CReservation_Restaurant> rest;
-              CReservation_Restaurant res;
-             C
-              
-
-
-            // no se si estara bien
-            //CReservation_Restaurant n = new CReservation_Restaurant();
-            if ((reserva != null)) //&& (  res== reserva))
-            {
-
-                ManejadorSQLRevision manejador = new ManejadorSQLRevision();  // crear en Servicios un manejador para listar 
-                lista = manejador.Crear_RevisionHotel(reserva, usuario, fecha);
-                return PartialView(lista);
-            }
-            else
-            {
-                CListRevision modelo = new CListRevision();
-                return PartialView(modelo);
-            }*/
+      
+        
         }
 
     } 
-}
+
 
 
 
