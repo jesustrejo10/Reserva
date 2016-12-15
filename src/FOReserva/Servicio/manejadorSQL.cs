@@ -34,7 +34,10 @@ namespace FOReserva.Servicio
                 conexion.Open();
             }catch (SqlException e)
             {
-                    throw new ManejadorSQLException("Error de conexion con la DB", e);
+                System.Diagnostics.Debug.WriteLine("SQL EXCEPTIONNNNNNNNNNNNNNNNNN=" + e.Message);
+                System.Diagnostics.Debug.WriteLine("SQL EXCEPTIONNNNNNNNNNNNNNNNNN=" + e.StackTrace);
+
+                throw new ManejadorSQLException("Error de conexion con la DB", e);
             }
         }
 
@@ -67,10 +70,16 @@ namespace FOReserva.Servicio
             }
             catch (SqlException e)
             {
+                System.Diagnostics.Debug.WriteLine("SQL EXCEPTIONNNNNNNNNNNNNNNNNN=" + e.Message);
+                System.Diagnostics.Debug.WriteLine("SQL EXCEPTIONNNNNNNNNNNNNNNNNN=" + e.StackTrace);
+
                 throw new ManejadorSQLException("Error de conexion con la DB", e);
             }
             catch (InvalidOperationException e)
             {
+                System.Diagnostics.Debug.WriteLine("SQL EXCEPTIONNNNNNNNNNNNNNNNNN=" + e.Message);
+                System.Diagnostics.Debug.WriteLine("SQL EXCEPTIONNNNNNNNNNNNNNNNNN=" + e.StackTrace);
+
                 throw new ManejadorSQLException("Operacion invalida en la DB", e);
             }
             return tmp;
