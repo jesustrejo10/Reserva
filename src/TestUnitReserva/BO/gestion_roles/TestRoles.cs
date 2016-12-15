@@ -63,6 +63,14 @@ namespace TestUnitReserva.BO.gestion_roles
 
         }
 
+        [Test]
+        public void M13_consultarPerisosDeUnModulo()
+        {
+
+             CListaGenerica<CModulo_detallado> respueta = prueba.consultarPermisos("Modulo de roles");
+             Assert.AreNotEqual(respueta,0 );
+
+        }
 
 
         

@@ -20,7 +20,7 @@ namespace BOReserva.Controllers
 
             manejadorSQL sql = new manejadorSQL();
             //aqui debe ir  la variable de session id en vez de 10
-            permisos = sql.M13consultarRolesDeUnUsuario(1);
+            permisos = sql.M13consultarRolesDeUnUsuario("Aqui va el string que almacenda el correo");
             Session["Permisos"] = permisos;
 
             return View();
