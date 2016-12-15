@@ -7,6 +7,7 @@ using BOReserva.Models.gestion_comida_vuelo;
 using System.Net;
 using BOReserva.Servicio;
 
+
 namespace BOReserva.Controllers
 {
     public class gestion_comida_vueloController : Controller
@@ -80,6 +81,55 @@ namespace BOReserva.Controllers
             //return PartialView();
         }
 
+        /// <summary>
+        /// Metodo para que el lato este disponible para su uso
+        /// </summary>
+        /// <param name="id"> int </param>
+        /// <returns> JsonResult booleano conteniendo la respuesta del sistema </returns>
+        [HttpPost]
+        public JsonResult habilitarPlato(int id)
+        {
+            manejadorSQL sql = new manejadorSQL();
+            Boolean resultado = sql.habilitarPlato(id);
+            if (resultado)
+            {
+                return (Json(true, JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)  
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error  
+                String error = "Error en la base de datos";
+                //Retorno el error  
+                return Json(error);
+            }
+        }
+
+        /// <summary>
+        /// Metodo para que el lato NO este disponible para su uso
+        /// </summary>
+        /// <param name="id"> int </param>
+        /// <returns> JsonResult booleano conteniendo la respuesta del sistema</returns>
+        [HttpPost]
+        public JsonResult deshabilitarPlato(int id)
+        {
+            manejadorSQL sql = new manejadorSQL();
+            Boolean resultado = sql.deshabilitarPlato(id);
+            if (resultado)
+            {
+                return (Json(true, JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)  
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error  
+                String error = "Error en la base de datos";
+                //Retorno el error  
+                return Json(error);
+            }
+        }
        
 	}
 }

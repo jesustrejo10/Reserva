@@ -1,4 +1,4 @@
-﻿using FOReserva.Models.Diarios;
+using FOReserva.Models.Diarios;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -276,14 +276,34 @@ namespace FOReserva.Servicio
         /*MODIFICACIONES*/
 
         /*Actualizar numero de visitas*/
-        /*Este metodo obtendra el objeto_diario a partir de la respuesta
+        /*Este metodo obtendra el diario a partir de la respuesta
           de buscar diario de viaje dado un modelo */
 
-        public void actualizarVisitas(CDiarioModel objeto_diario)
+        public int actualizarVisitas(CDiarioModel objeto_diario)
         {
-            string query = "update Diario_Viaje set num_visita = '" +objeto_diario.Num_visita+1 +"'where id_diar='"+objeto_diario.Id;
+            int visitas = objeto_diario.Num_visita;
+            visitas++;
+            string query = "update Diario_Viaje set num_visita = " +objeto_diario.Num_visita+1 +" where id_diar="+objeto_diario.Id;
             this.Executer(query);
             CloseConnection();
+            return visitas;
+        }
+
+        public int actualizarRating(CDiarioModel diario, bool esLike)
+        {
+            int nuevoRating = diario.Rating;
+            if (esLike)
+            {
+                nuevoRating++;
+            }
+            else
+            {
+                nuevoRating--;
+            }
+            string query = "update Diario_Viaje set rating = " + nuevoRating + " where id_diar=" + diario.Id;
+            this.Executer(query);
+            CloseConnection();
+            return nuevoRating;
         }
     }
 }

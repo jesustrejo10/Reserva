@@ -1,5 +1,3 @@
-﻿
-
 // Evento para agregar un vuelo a la BD CREAR
 $("#agregarVuelo").click(function (e) {
     e.preventDefault();

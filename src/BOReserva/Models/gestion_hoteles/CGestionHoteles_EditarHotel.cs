@@ -21,6 +21,8 @@ namespace BOReserva.Models.gestion_hoteles
         public int _disponibilidad { get; set; }
         public List<SelectListItem> _listapaises { get; set; }
 
+        public CGestionHoteles_EditarHotel() { }
+
         public CGestionHoteles_EditarHotel(CHotel hotel)
         {
             _id = hotel._id;
