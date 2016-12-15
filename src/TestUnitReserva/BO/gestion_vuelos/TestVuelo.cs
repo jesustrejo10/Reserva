@@ -85,8 +85,8 @@ namespace TestUnitReserva.BO.gestion_vuelos
         [Test]
         public void M04_Detalle_Avion_Modelo()
         {
-            string matriculaAvion = "IAM-123";
-            string modelo = sql.modeloAvion(matriculaAvion);
+            String matriculaAvion = "IAM-123";
+            String modelo = sql.modeloAvion(matriculaAvion);
             //verifico que modelo de avion le corresponde a la martricula IAM-123 el cual es Boeing 777.
             Assert.AreEqual(modelo, "Boeing 777");
             //Verifico que no me traiga un modelo nulo.
@@ -97,8 +97,8 @@ namespace TestUnitReserva.BO.gestion_vuelos
         [Test]
         public void M04_DetalleAvion_Pasajeros()
         {
-            string matriculaAvion = "IAM-123";
-            string pasajeros = sql.pasajerosAvion(matriculaAvion);
+            String matriculaAvion = "IAM-123";
+            String pasajeros = sql.pasajerosAvion(matriculaAvion);
             //verifico la capacidad maxima del avion con matricula IAM-123 la cual es 40
             Assert.AreEqual(pasajeros, 40);
             //Verifico que no me traiga una capacidad nula.
@@ -109,13 +109,87 @@ namespace TestUnitReserva.BO.gestion_vuelos
         }
 
          [Test]
-        public void M04_Fecha_Vuelo()
+        public void M04_distanciaAvion()
         {
-            
+            String matriculaAvion = "IAM-123";
+            String distancia = sql.distanciaAvion(matriculaAvion);
+            Assert.IsNotNull(distancia);
+            Assert.AreEqual(distancia, 1900);
+            Assert.That(() => sql.distanciaAvion(null), Throws.TypeOf<NullReferenceException>());
+        }
+
+        [Test]
+        public void M04_VelocidadAvion()
+         {
+             String matriculaAvion = "IAM-123";
+             String velocidad = sql.velocidadAvion(matriculaAvion);
+             Assert.IsNotNull(velocidad);
+             Assert.AreEqual(velocidad, 1900);
+             Assert.That(() => sql.distanciaAvion(null), Throws.TypeOf<NullReferenceException>());
+
+
+         }
+        [Test]
+        public void M04_ListarVuelos()
+        {
+            List<CVuelo> lista = sql.MListarvuelosBD();
+            Assert.IsNotNull(lista);
+        }
+
+
+        [Test]
+        public void M04_BuscarCiudadOrigen()
+        {
+            int id= 5;
+            String origen = sql.MBuscarciudadOrigen(id);
+            Assert.IsNotNull(origen);
+        }
+
+        [Test]
+        public void M04_BuscarCiudadDestino()
+        {
+            int id = 5;
+            String destino = sql.MBuscarciudadDestino(id);
+            Assert.IsNotNull(destino);
+        }
+
+        [Test]
+        public void M04_BuscarAvion()
+        {
+            int idavion = 1;
+            String avion = sql.MBuscarciudadDestino(idavion);
+            Assert.IsNotNull(avion);
+        }
+
+        [Test]
+        public void M04_MostrarVuelo()
+        {
+            int idvuelo = 20;
+            CVuelo avion = sql.MMostrarvueloBD(idvuelo);
+            Assert.IsNotNull(avion);
+        }
+
+        [Test]
+        public void M04_ModificarBD()
+        {
+            int idvuelo = 6;
+            CVueloModificar vuelo = sql.MModificarBD(idvuelo);
+            Assert.IsNotNull(vuelo);
+        }
 
 
 
+        [Test]
+        public void M04_DesactivarVuelo()
+        {
+            int idvuelo = 20;
+            Boolean resultado = sql.MDesactivarVuelo(idvuelo);
 
+            //Aquí pruebo que al desactivar un vuelo de manera correcta la función devuelva true
+            Assert.Equals(resultado, true);
+            //Aqui pruebo que no me pueda desactivar un vuelo que ya ha sido desactivado
+            Boolean resultadocodigorepetido = sql.MDesactivarVuelo(7);
+            Assert.AreEqual(resultadocodigorepetido, false);
 
         }
 
