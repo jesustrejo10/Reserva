@@ -26,6 +26,8 @@ namespace BOReserva.Models.gestion_boletos
 
         public List<CVuelo> _vuelos { get; set; }
 
+        public String _codigo { get; set; }
+
         public CBoleto(int id, int ida_vuelta, int escala, double costo, String origen, String destino,
                       String nombre, String apellido, DateTime fechaBoleto, int idPasajero, string idOrigen, string idDestino,
                       String tipoBol, String correo)
@@ -40,6 +42,25 @@ namespace BOReserva.Models.gestion_boletos
             _fechaBoleto = fechaBoleto;
             _tipoBoleto = tipoBol;
             _vuelos = new List<CVuelo>();
+
+        }
+
+        //Constructor usado para las reservas, ya que el único atributo extra en la tabla reserva es el código
+        public CBoleto(int id, int ida_vuelta, int escala, double costo, String origen, String destino,
+                      String nombre, String apellido, DateTime fechaBoleto, int idPasajero, string idOrigen, string idDestino,
+                      String tipoBol, String correo, string codigo)
+        {
+            _id = id;
+            _ida_vuelta = ida_vuelta;
+            _escala = escala;
+            _costo = costo;
+            _pasajero = new CPasajero(idPasajero, nombre, apellido, correo);
+            _origen = new CLugar(idOrigen, origen);
+            _destino = new CLugar(idDestino, destino);
+            _fechaBoleto = fechaBoleto;
+            _tipoBoleto = tipoBol;
+            _vuelos = new List<CVuelo>();
+            _codigo = codigo;
 
         }
 
@@ -58,6 +79,8 @@ namespace BOReserva.Models.gestion_boletos
             _vuelos = new List<CVuelo>();
 
         }
+
+
 
         public CBoleto(int id)
         {

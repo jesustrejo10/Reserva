@@ -28,19 +28,15 @@ if (Model.Count() == 0)
 {
     <div class="row">
         <center>
-            <h1><i class="fa fa-exclamation-circle orange" aria-hidden="true"></i> Lo sentimos, su búsqueda no arrojó resultados</h1>
-            <div class="row" style="margin-top: 20px;">
-                <div class="col-md-12 text-center">
-                    <a id="volver" href="javascript:history.back(1)" class="btn btn-primary">Volver</a>
-                </div>
-            </div>
+            <h4><i class="fa fa-exclamation-circle orange" aria-hidden="true"></i> No posee reservas</h4>
+            
         </center>
         
     </div>
 }
 else
 {
-foreach (var item in Model) { 
+
 <div class="box-light">
     <!-- .box-light OR .box-dark -->
 
@@ -63,7 +59,7 @@ foreach (var item in Model) {
                     </tr>
                 </thead>
                 <tbody>
-                      
+                    @foreach (var item in Model) {     
     <tr id="@item._id_reserva" value="@item._id_reserva">
         <td class="text-center" >@item._fecha</td>
         <td class="pasajeros_table text-center" id="pasajeros_table">@item._cantidadPasajeros</td>
@@ -94,7 +90,7 @@ foreach (var item in Model) {
 }
         </td>
 
-    </tr>
+    </tr>}
 
                 </tbody>
 
@@ -104,7 +100,7 @@ foreach (var item in Model) {
     </div>
 
 </div>
-    }
+    
     }
 }
 <div id="ModalEliminar" class="modal fade" role="dialog">

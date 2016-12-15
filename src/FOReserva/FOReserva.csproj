@@ -3142,6 +3142,7 @@
     <Content Include="Views\gestion_reserva_crucero\gestion_reserva_crucero_perfil.cshtml" />
     <Content Include="Views\gestion_reserva_crucero\gestion_reserva_crucero_resultado_crucero.cshtml" />
     <Content Include="Views\gestion_revision\Revision_usuario.cshtml" />
+    <Content Include="Views\gestion_diarios\_CrearDiarioFallo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -23,7 +23,7 @@ namespace TestUnitReserva.FO.Reserva_restaurante
         public void buscar_restaunte_nombre_test() {
             restaurante = manejador.buscarRestName("taxco");
             Assert.NotNull(restaurante);
-            Assert.AreEqual(restaurante[0].Name, "taxco");
+            Assert.AreEqual(restaurante[0].Name, "Taxco");
             Assert.IsInstanceOf(typeof(List<CRestaurantModel>),manejador.buscarRestName("taxco"));
         }
 
@@ -33,7 +33,7 @@ namespace TestUnitReserva.FO.Reserva_restaurante
             restaurante = manejador.buscarRestCity("caracas");
             Assert.NotNull(restaurante);
             Assert.IsInstanceOf(typeof(List<CRestaurantModel>), manejador.buscarRestCity("caracas"));
-            Assert.AreEqual(restaurante[0].CityName, "caracas");
+            Assert.AreEqual(restaurante[0].CityName, "Caracas");
         }
 
         [Test]
@@ -42,8 +42,8 @@ namespace TestUnitReserva.FO.Reserva_restaurante
             CRestaurantModel restaurante = manejador.buscarRest(1);
             Assert.NotNull(restaurante);
             Assert.IsInstanceOf(typeof(CRestaurantModel), manejador.buscarRest(1));
-            Assert.AreEqual(restaurante.CityName, "caracas");
-            Assert.AreEqual(restaurante.Name, "taxco");
+            Assert.AreEqual(restaurante.CityName, "Caracas");
+            Assert.AreEqual(restaurante.Name, "Taxco");
         }
 
         [Test]
