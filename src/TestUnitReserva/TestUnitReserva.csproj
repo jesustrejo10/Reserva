@@ -50,6 +50,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Web" />
+	<Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\BOReserva\bin\System.Web.Mvc.dll</HintPath>
@@ -60,6 +63,7 @@
   <ItemGroup>
     <Compile Include="BO\gestion_aviones\TestAviones.cs" />
     <Compile Include="BO\gestion_usuario\TestUsuario.cs" />
+	<Compile Include="BO\gestion_comida_vuelo\TestComidaVuelo.cs" />
     <Compile Include="BO\TestGestionAutomovil\TestGestionAutomovil.cs" />
     <Compile Include="BO\gestion_restaurantes\TestLugar.cs" />
     <Compile Include="BO\gestion_restaurantes\TestRestaurante.cs" />

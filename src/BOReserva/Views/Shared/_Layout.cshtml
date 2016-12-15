@@ -220,11 +220,17 @@
                         </a>
                         <ul class="treeview-menu">
 
+
                             @foreach (string i in ((List<string>)Session["Permisos"]))
                             {
                                 if (i == "Gestion comida")
                                 {
-                            <li id="gestionComida"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar</a></li>}
+                            <li id="gestionComida"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar</a></li>
+                            <li id="gestionComidaVuelo"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar a Vuelo</a></li>
+                            <li id="visualizarComidas"><a href="#"><i class="fa fa-eye"></i>Visualizar</a></li>
+                            <li id="visualizarVuelosComidas"><a href="#"><i class="fa fa-edit"></i>Visualizar Vuelos-Comidas</a></li>
+                            
+                            }
 
                             
 
@@ -232,7 +238,11 @@
                             <li id="gestionComidaVuelo"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar por Vuelo</a></li>*@
                                 if (i == "Editar comida")
                                 {
-                            <li id="visualizarComidas"><a href="#"><i class="fa fa-eye"></i>Visualizar</a></li>}}
+                            <li id="visualizarComidas"><a href="#"><i class="fa fa-eye"></i>Visualizar</a></li>
+                            
+                                }
+                                                                                                               }
+
                         </ul>
                     </li>
                     <!-- FIN DE MODULO DE COMIDA POR VUELO -->
@@ -292,6 +302,7 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
+<<<<<<< HEAD
                             @foreach (string i in ((List<string>)Session["Permisos"]))
                             {
                                 if (i == "Agregar ofertas")
@@ -306,6 +317,12 @@
                                 if (i == "Modificar paquete")
                                 {
                             <li id="consultarPaquete"><a href="#"><i class="fa fa-eye"></i>Visualizar Paquete</a></li>}}
+=======
+                            <li id="agregarOferta"><a href="#">Agregar Oferta</a></li>
+                            <li id="agregarPaquete"><a href="#">Agregar Paquete</a></li>
+                            <li id="consultarOferta"><a href="#">Visualizar Oferta</a></li>
+                            <li id="consultarPaquete"><a href="#">Visualizar Paquete</a></li>
+>>>>>>> M06_Comida
                         </ul>
                     </li>
                     <!-- FIN DE MODULO DE OFERTAS Y PAQUETES -->
