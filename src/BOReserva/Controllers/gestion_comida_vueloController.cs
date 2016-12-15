@@ -80,6 +80,15 @@ namespace BOReserva.Controllers
             //return PartialView();
         }
 
+        public ActionResult M06_VisualizarVuelosComidas()
+        {
+            manejadorSQL sql = new manejadorSQL();
+            List<CVueloComida> comidas = new List<CVueloComida>();
+            comidas = sql.listarVuelosComidaEnBD();
+            return PartialView(comidas);
+            //return PartialView();
+        }
+
         /// <summary>
         /// Metodo para que el lato este disponible para su uso
         /// </summary>

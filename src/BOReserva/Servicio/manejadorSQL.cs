@@ -231,7 +231,41 @@ namespace BOReserva.Servicio
             }
         }
 
+        //Procedimiento del Modulo 6 para retornar una lista con los platos en la bd
+        public List<CVueloComida> listarVuelosComidaEnBD()
+        {
+            List<CVueloComida> platos = new List<CVueloComida>();
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "SELECT com_vue_id, com_nombre, vue_codigo, com_vue_cantidad FROM Comida_Vuelo, Comida, Vuelo WHERE com_id = com_vue_fk_comida AND vue_id = com_vue_fk_vuelo ";
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                while (lector.Read())
+                {
+                    CVueloComida plato = new CVueloComida(Int32.Parse(lector["com_vue_id"].ToString()), lector["vue_codigo"].ToString(),
+                    lector["com_nombre"].ToString(), Int32.Parse(lector["com_vue_cantidad"].ToString()));
+                    platos.Add(plato);
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return platos;
 
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
 
 
 

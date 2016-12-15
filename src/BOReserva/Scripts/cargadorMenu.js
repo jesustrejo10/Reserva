@@ -172,10 +172,10 @@ jQuery(document).ready(function () {
             });
     });
 
-    $("#editarComida").click(function (e) {
-        //M06_EditarComida
+    $("#visualizarVuelosComidas").click(function (e) {
+        //M06_VisualizarVuelosComidas
         e.preventDefault();
-        var url = '/gestion_comida_vuelo/M06_EditarComida';
+        var url = '/gestion_comida_vuelo/M06_VisualizarVuelosComidas';
         var method = 'GET';
         var data = '';
         $.ajax(
