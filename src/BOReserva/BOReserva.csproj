@@ -247,6 +247,8 @@
       <DependentUpon>RecursosCruceros.resx</DependentUpon>
     </Compile>
     <Compile Include="Models\gestion_cruceros\VistaListaCrucero.cs" />
+    <Compile Include="Models\gestion_cruceros\VistaListaItinerario.cs" />
+    <Compile Include="Models\gestion_ruta_comercial\VistaListaRuta.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cgestion_seguridad_ingreso.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cvalidar_bloqueo_exception.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cvalidar_status_exception.cs" />
@@ -527,6 +529,7 @@
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\Scripts_Automoviles\llamadas_comunes_automoviles.js" />
     <Content Include="Scripts\Scripts_Aviones\llamadas_generales.js" />
+    <Content Include="Scripts\Scripts_Cruceros\scripts_cruceros.js" />
     <Content Include="Scripts\Scripts_Hoteles\editar_hotel.js" />
     <Content Include="Scripts\Scripts_CheckIn\M05_CheckIn.js" />
     <Content Include="Scripts\Scripts_ComidaVuelo\llamadas_generales.js" />
@@ -1469,6 +1472,11 @@
     <Content Include="Views\gestion_restaurantes\M10_GestionRestaurantes_Modificar.cshtml" />
     <Content Include="Views\gestion_roles\M13_ModificarRol.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarComida.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_AgregarCamarote.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_AgregarItinerario.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_ListarItinerario.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_ModificarCabinas.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_ModificarCrucero.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Visualizar.cshtml" />

@@ -35,5 +35,11 @@ namespace BOReserva.Models.gestion_cruceros
             ConexionBD cbd = new ConexionBD();
             cbd.insertarCabinas(cabina);
         }
+
+        public void cambioEstatusCabina(int id_cabina)
+        {
+            ConexionBD cbd = new ConexionBD();
+            cbd.estatusCabina(id_cabina);
+        }
     }
 }

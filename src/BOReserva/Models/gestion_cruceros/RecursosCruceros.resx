@@ -121,9 +121,37 @@
     <value>M24_AgregarCabinas</value>
     <comment>Agrega una nueva Cabina a un crucero</comment>
   </data>
+  <data name="AgregarCamarote" xml:space="preserve">
+    <value>M24_AgregarCamarote</value>
+    <comment>Agregar un nuevo camarote a la cabina</comment>
+  </data>
   <data name="AgregarCruceros" xml:space="preserve">
     <value>M24_AgregarCrucero</value>
     <comment>Agrega un nuevo Crucero al sistema</comment>
+  </data>
+  <data name="AgregarItinerario" xml:space="preserve">
+    <value>M24_AgregarItinerario</value>
+    <comment>Agrega un nuevo itinerario</comment>
+  </data>
+  <data name="CambioEstatusCabinas" xml:space="preserve">
+    <value>M24_CambiarEstatusCabina</value>
+    <comment>Cambia el estatus de una cabina y de sus camarotes</comment>
+  </data>
+  <data name="CambioEstatusCamarote" xml:space="preserve">
+    <value>M24_CambiarEstatusCamarote</value>
+    <comment>Cambia el estatus de un camarote</comment>
+  </data>
+  <data name="CambioEstatusCrucero" xml:space="preserve">
+    <value>M24_CambiarEstatusCrucero</value>
+    <comment>Cambia el estatus de un crucero y de sus cabinas</comment>
+  </data>
+  <data name="ConsultarCruceroID" xml:space="preserve">
+    <value>M24_ConsultarCruceroID</value>
+    <comment>Consulta la informacion de un crucero especifico</comment>
+</data>
+  <data name="CambioEstatusItinerario" xml:space="preserve">
+    <value>M24_CambiarEstatusItinerario</value>
+    <comment>Cambia el estatus de un itinerario </comment>
   </data>
   <data name="EliminarCruceros" xml:space="preserve">
     <value>M24_EliminarCruceros</value>
@@ -133,8 +161,24 @@
     <value>M24_ListarCabinas</value>
     <comment>Consulta lista de cabinas de un crucero</comment>
   </data>
+  <data name="ListarCamarote" xml:space="preserve">
+    <value>M24_ListarCamarote</value>
+    <comment>Consulta lista de Camarotes</comment>
+  </data>
   <data name="ListarCruceros" xml:space="preserve">
-    <value>M24_ConsultarCrucero</value>
-    <comment>Consultar lista de Cruceros</comment>
+    <value>M24_ListarCruceros</value>
+    <comment>Consulta lista de Cruceros</comment>
+  </data>
+  <data name="ModificarCruceros" xml:space="preserve">
+    <value>M24_ModificarCrucero</value>
+    <comment>Modifica los datos de un crucero</comment>
+  </data>
+  <data name="ListarItinerario" xml:space="preserve">
+    <value>M24_ListarItinerario</value>
+    <comment>Consulta lista de itinerarios</comment>
+  </data>
+  <data name="ListarRuta" xml:space="preserve">
+    <value>M24_ListarRutas</value>
+    <comment>Consultar lista de Rutas</comment>
   </data>
 </root>
