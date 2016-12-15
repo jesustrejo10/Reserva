@@ -204,12 +204,12 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\gestion_automovilesController.cs" />
-    <Compile Include="Controllers\gestion_crucerosController.cs" />
     <Compile Include="Controllers\gestion_avionesController.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\gestion_boletosController.cs" />
     <Compile Include="Controllers\gestion_check_inController.cs" />
+    <Compile Include="Controllers\gestion_crucerosController.cs" />
     <Compile Include="Controllers\gestion_hotelesController.cs" />
     <Compile Include="Controllers\gestion_comida_vueloController.cs" />
     <Compile Include="Controllers\gestion_seguridad_ingresoController.cs" />
@@ -241,12 +241,9 @@
     <Compile Include="Models\gestion_cruceros\CGestion_crucero.cs" />
     <Compile Include="Models\gestion_cruceros\CGestion_itinerario.cs" />
     <Compile Include="Models\gestion_cruceros\ConexionBD.cs" />
-    <Compile Include="Models\gestion_cruceros\RecursosCruceros.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RecursosCruceros.resx</DependentUpon>
-    </Compile>
+    <Compile Include="Models\gestion_cruceros\RecursosCruceros.Designer.cs" />
     <Compile Include="Models\gestion_cruceros\VistaListaCrucero.cs" />
+    <Compile Include="Models\gestion_cruceros\VistaListaItinerario.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cgestion_seguridad_ingreso.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cvalidar_bloqueo_exception.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cvalidar_status_exception.cs" />
@@ -500,7 +497,6 @@
     <Content Include="Content\bootstrap\js\npm.js" />
     <Content Include="Models\gestion_aviones\placeholder.html" />
     <Content Include="Models\gestion_comida_vuelo\placeholder.html" />
-    <Content Include="Models\gestion_cruceros\placeholder.html" />
     <Content Include="Models\gestion_equipaje_perdido\placeholder.html" />
     <Content Include="Models\gestion_hoteles\placeholder.html" />
     <Content Include="Models\gestion_ofertas\placeholder.html" />
@@ -527,6 +523,7 @@
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\Scripts_Automoviles\llamadas_comunes_automoviles.js" />
     <Content Include="Scripts\Scripts_Aviones\llamadas_generales.js" />
+    <Content Include="Scripts\Scripts_Cruceros\scripts_cruceros.js" />
     <Content Include="Scripts\Scripts_Hoteles\editar_hotel.js" />
     <Content Include="Scripts\Scripts_CheckIn\M05_CheckIn.js" />
     <Content Include="Scripts\Scripts_ComidaVuelo\llamadas_generales.js" />
@@ -588,7 +585,6 @@
     <Content Include="Views\gestion_comida_vuelo\M06_ConsultarComidas.html" />
     <Content Include="Views\gestion_comida_vuelo\placeholder.html" />
     <Content Include="Views\gestion_cruceros\js\module.js" />
-    <Content Include="Views\gestion_cruceros\placeholder.html" />
     <Content Include="Views\gestion_equipaje_perdido\placeholder.html" />
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Actualizar.html" />
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Agregar.html" />
@@ -1459,8 +1455,6 @@
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Visualizar.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Mostrar.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Modificar.cshtml" />
-    <Content Include="Views\gestion_cruceros\M24_GestionCruceros.cshtml" />
-    <Content Include="Views\gestion_cruceros\M24_ListarCruceros.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Visualizar.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
@@ -1469,6 +1463,14 @@
     <Content Include="Views\gestion_restaurantes\M10_GestionRestaurantes_Modificar.cshtml" />
     <Content Include="Views\gestion_roles\M13_ModificarRol.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarComida.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_AgregarCabinas.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_AgregarCamarote.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_AgregarItinerario.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_GestionCruceros.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_ListarCruceros.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_ListarItinerario.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_ModificarCabinas.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_ModificarCrucero.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Visualizar.cshtml" />
@@ -1511,7 +1513,6 @@
     <Content Include="Views\gestion_ofertas\M11_DetallePaquete.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_DetalleOferta.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_ConsultarOferta.cshtml" />
-    <Content Include="Views\gestion_cruceros\M24_AgregarCabinas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1589,10 +1590,7 @@
     <Content Include="Views\gestion_boletos\M05_DetalleBoletoReserva.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Models\gestion_cruceros\RecursosCruceros.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>RecursosCruceros.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Models\gestion_cruceros\RecursosCruceros.resx" />
     <EmbeddedResource Include="Models\gestion_usuarios\RecursoBD.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoBD.Designer.cs</LastGenOutput>
