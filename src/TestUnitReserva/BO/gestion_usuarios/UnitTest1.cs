@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 
 
-namespace M12_Prueba
+namespace TestUnitReserva.BO.gestion_usuarios
 {
     [TestFixture]
     public class UnitTest1
