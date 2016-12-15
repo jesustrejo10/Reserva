@@ -44,11 +44,11 @@
                                         <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>
                                         @if (item._disponibilidad == 1)
                                         {
-                                            <a href="#" title="Deshabilitar"><i class="fa fa-times deshabilitar"></i></a>
+                                            <a href="#" title="Deshabilitar"><i class="fa fa-toggle-on deshabilitar"></i></a>
                                         }
                                         else
                                         {
-                                            <a href="#" title="Habilitar"><i class="fa fa-check habilitar"></i></a>
+                                            <a href="#" title="Habilitar"><i class="fa fa-toggle-off habilitar"></i></a>
                                         }
                                     </td>
                                 </tr>
@@ -68,23 +68,52 @@
     <!-- /.col -->
 </div>
 <!-- /.row -->
+<script>
 
-<script language="javascript" type="text/javascript">
+    $("#m09_ModificarHotel").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_hoteles/M09_GestionHoteles_ModificarHotel';
+        var method = 'GET';
+        var data = '';
 
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
 
-    $(".modificar").click(function () {
-        console.log("hola");
-        var identificador = $(this).parent().parent().parent().attr("id");
-        jQuery.ajax({
-            type: "GET",
-            url: "/gestion_hoteles/ConsultarHotel",
-            data: { id: identificador }
-        }).done(function (data) {
-            $("#contenido").empty();
-            $("#contenido").append(data);
-        }).fail(function () {
-        });
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+
     });
+
+    </script>
+
+<script src="../../Content/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+    <script language="javascript" type="text/javascript">
+
+
+        $(".modificar").click(function () {
+            console.log("hola");
+            var identificador = $(this).parent().parent().parent().attr("id");
+            jQuery.ajax({
+                type: "GET",
+                url: "/gestion_hoteles/M09_GestionHoteles_ModificarHotel",
+                data: { id: identificador }
+            }).done(function (data) {
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            }).fail(function () {
+            });
+        });
 
 
     $(".deshabilitar").click(function () {
