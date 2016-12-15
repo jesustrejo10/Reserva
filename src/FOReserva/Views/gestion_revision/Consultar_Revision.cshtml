@@ -1,0 +1,37 @@
+﻿@model FOReserva.Models.Revision.CRevision
+@{
+    ViewBag.Title = "Detalle Revision";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel-body center-block">
+
+    <!-- FORMULARIO PARA CREAR UNA REVISION-->
+    @using (Html.BeginForm("detalle_revision_form", "gestion_revision", FormMethod.Post))
+    {
+        <div class="form-group">
+            <label>Mensaje: </label>
+            <input type="text" name="rev_mensaje" id="rev_mensaje" value="" class="form-control" data-format="" data-lang="en" data-rtl="false" placeholder="Ingrese su mensaje" required>
+        </div>
+
+        <div id="rev_mensaje_empty" style="display: none;" class="has-error error">
+            <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe llenar este campo</p>
+        </div>
+                  <!-- PUNTUACION  Y  VALIDACIONES-->
+        <div class="form-group">
+            <label>Puntuacion:</label>
+            <select name="rev_puntuacion" id="rev_puntuacion" class="form-control" required>
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+                    <!-- BOTON QUE ACCIONA EL SUBMIT -->
+        <div class="text-center">
+            <input id="rev_agregar" value="Regresar" class="btn btn-primary boton" />
+        </div>
+    }
+</div>
+

@@ -1,0 +1,40 @@
+﻿@model BOReserva.Models.gestion_check_in.CCheckIn
+
+@using (Html.BeginForm("buscarBoletos", "gestion_check_in", null, FormMethod.Post, new { @id = "formPasaporte", @class = "form-horizontal" }))
+{
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h1 class="box-title">Check In</h1>
+                <div class="box-tools pull-right">
+                </div>
+            </div>
+            <div class="box-body">
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <label>Número de pasaporte:</label>
+                        @Html.TextBoxFor(m => m._pasaporte, null, new { @class = "form-control", @placeholder = "Ej. 237654242" })
+                    </div>
+                    <br>
+
+                    <div class="row">
+
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <button type="button" id="siguiente" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Siguiente</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+<script src="~/Scripts/Scripts_CheckIn/M05_CheckIn.js"></script>

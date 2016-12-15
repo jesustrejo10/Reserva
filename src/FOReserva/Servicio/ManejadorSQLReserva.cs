@@ -13,10 +13,8 @@ namespace FOReserva.Servicio
         /*Buscar Restaurantes por Nombre*/
         public List<CRestaurantModel> buscarRestName(string restName)
         {
-            OpenConextion();
-            SqlCommand query = this.Conexion.CreateCommand();
-            query.CommandText = "Select rst_id, rst_nombre, rst_direccion From Restaurante where rst_nombre LIKE '%"+restName+"%'";
-            SqlDataReader read = query.ExecuteReader();
+            string query = "Select rst_id, rst_nombre, rst_direccion From Restaurante where rst_nombre LIKE '%"+restName+"%'";
+            SqlDataReader read = Executer(query);
             List<CRestaurantModel> lista_rest = new List<CRestaurantModel>();
             if (read.HasRows)
             {
@@ -31,17 +29,15 @@ namespace FOReserva.Servicio
                     lista_rest.Add(resta);
                 }
             }
-            CloseConextion();
+            CloseConnection();
             return lista_rest;
         }
 
         /* Buscar restaurante por ciudad */
         public List<CRestaurantModel> buscarRestCity(string cityName)
         {
-            OpenConextion();
-            SqlCommand query = this.Conexion.CreateCommand();
-            query.CommandText = "SELECT res.rst_id ,res.rst_nombre ,res.rst_direccion FROM Restaurante as res, Lugar as lug where res.fk_lugar = lug.lug_id and lug.lug_tipo_lugar = 'ciudad' and lug.lug_nombre LIKE '%" + cityName + "%'"; ;
-            SqlDataReader read = query.ExecuteReader();
+            string query = "SELECT res.rst_id ,res.rst_nombre ,res.rst_direccion FROM Restaurante as res, Lugar as lug where res.fk_lugar = lug.lug_id and lug.lug_tipo_lugar = 'ciudad' and lug.lug_nombre LIKE '%" + cityName + "%'"; ;
+            SqlDataReader read = Executer(query);
             List<CRestaurantModel> lista_rest = new List<CRestaurantModel>();
             if (read.HasRows)
             {
@@ -56,21 +52,18 @@ namespace FOReserva.Servicio
                     lista_rest.Add(resta);
                 }
             }
-            CloseConextion();
+            CloseConnection();
             return lista_rest;
         }
 
         public void CrearReserva(CReservation_Restaurant reserva)
         {
-            OpenConextion();
-            SqlCommand query = this.Conexion.CreateCommand();
-            query.CommandText =
-            @"INSERT INTO Reserva ( Tipo, Reserva_Nombre, Fecha, Hora,
+            string query = @"INSERT INTO Reserva ( Tipo, Reserva_Nombre, Fecha, Hora,
             Cantidad_Personas, FK_RESTAURANTE, FK_USUARIO) 
             VALUES('"+reserva.GetType()+@"','"+reserva.Name+@"',
             convert(date, '2016-12-20'), '"+reserva.Time+"',"+reserva.Count+","+
             @"1, 4)";
-            CloseConextion();
+            CloseConnection();
         }
     }
 }

@@ -18,11 +18,9 @@ namespace FOReserva.Servicio
             System.Diagnostics.Debug.WriteLine(correo);
             SqlDataReader read;
                try {
-                OpenConextion();
-                SqlCommand query = this.Conexion.CreateCommand();
-                query.CommandText = "SELECT usu_id FROM dbo.Usuario WHERE usu_correo='"+correo+"';";
-                read = query.ExecuteReader();
-              
+                string query = "SELECT usu_id FROM dbo.Usuario WHERE usu_correo='"+correo+"';";
+                read = Executer(query);
+
             }
             catch (SqlException e)
             {
@@ -42,7 +40,7 @@ namespace FOReserva.Servicio
                     throw new ExisteUsuarioCorreoException();
                 
             }
-            CloseConextion();
+            CloseConnection();
         }
         public void ValidacionRegistroCliente(Ccliente cliente)
         {
@@ -51,20 +49,16 @@ namespace FOReserva.Servicio
                 ValidacionUsuarioCorreo(cliente.Correo);
                 string clave = Seguridad.Cifrar(cliente.Clave0);
 
-                OpenConextion();
 
-                SqlCommand query = this.Conexion.CreateCommand();
+                string query = @"INSERT INTO dbo.Usuario(usu_nombre, usu_apellido, usu_correo, usu_contraseña, usu_fk_rol, usu_fechaCreacion, usu_activo)VALUES('" + cliente.Nombre + @"','" + cliente.Apellido + @"','" + cliente.Correo + @"','" + clave + @"','2','" + DateTime.Now.ToString("yyyy-MM-dd") + @"','Activo');";
                 //query.CommandText = @"INSERT INTO dbo.Usuario VALUES ('" + cliente.Nombre + @"','" + cliente.Apellido + @"','" + cliente.Correo + @"','" + cliente.Clave0 + @"',2," + System.DateTime.Now.ToString("dd/MM/yyyy") + @",'Activo');";
                 //query.CommandText = @"INSERT INTO dbo.Usuario(usu_nombre, usu_apellido, usu_correo, usu_contraseña, usu_fk_rol, usu_id, usu_fechaCreacion, usu_activo)VALUES('"+cliente.Nombre+@"','"+cliente.Apellido+@"','"+cliente.Correo+@"','"+clave+@"','2',NEXT VALUE FOR usu_id,convert(date,"+@"'"+System.DateTime.Now.ToString("dd/MM/yyyy")+@"'"+"),'Activo');";
                 //query.CommandText = @"INSERT INTO dbo.Usuario(usu_nombre, usu_apellido, usu_correo, usu_contraseña, usu_fk_rol, usu_id, usu_fechaCreacion, usu_activo)VALUES('"+cliente.Nombre+@"','"+cliente.Apellido+@"','"+cliente.Correo+@"','"+clave+@"','2',NEXT VALUE FOR usu_id,'"+ DateTime.Now.ToString("yyyy-MM-dd") + @"','Activo');";
-                query.CommandText = @"INSERT INTO dbo.Usuario(usu_nombre, usu_apellido, usu_correo, usu_contraseña, usu_fk_rol, usu_fechaCreacion, usu_activo)VALUES('" + cliente.Nombre + @"','" + cliente.Apellido + @"','" + cliente.Correo + @"','" + clave + @"','2','" + DateTime.Now.ToString("yyyy-MM-dd") + @"','Activo');";
-                System.Diagnostics.Debug.WriteLine(query.CommandText);
-                SqlDataReader read = query.ExecuteReader();
+                SqlDataReader read = Executer(query);
                 read.Close();
 
-                SqlCommand query1 = Conexion.CreateCommand();
-                query1.CommandText = "SELECT usu_id FROM dbo.Usuario Where usu_correo='" + cliente.Correo + "';";
-                SqlDataReader read1 = query1.ExecuteReader();
+                string query1 = "SELECT usu_id FROM dbo.Usuario Where usu_correo='" + cliente.Correo + "';";
+                SqlDataReader read1 = Executer(query1);
 
                 int id_usuario = 0;
                 if (read1.HasRows)
@@ -85,10 +79,8 @@ namespace FOReserva.Servicio
                 read5.Close();
 
                 // Buscar id telefono
-                SqlCommand query7 = this.Conexion.CreateCommand();
-                query7.CommandText = "SELECT MAX(tel_id) FROM dbo.Telefono;";
-                System.Diagnostics.Debug.WriteLine(query7.CommandText);
-                SqlDataReader read7 = query7.ExecuteReader();
+                string query7 = "SELECT MAX(tel_id) FROM dbo.Telefono;";
+                SqlDataReader read7 = Executer(query7);
                 int id_telefono = 0;
                 if (read7.HasRows)
                 {
@@ -100,17 +92,13 @@ namespace FOReserva.Servicio
                 read7.Close();
 
                 // insertar en Perfil
-                SqlCommand query6 = this.Conexion.CreateCommand();
-                query6.CommandText = @"INSERT INTO dbo.Perfil(per_fk_usuario, per_genero, per_fecha_nacimiento, per_fk_telefono, per_fk_lugar)VALUES(" + id_usuario + @", 'Hombre', '2016-12-14', " + id_telefono + @", 12);";
-                System.Diagnostics.Debug.WriteLine(query6.CommandText);
-                SqlDataReader read6 = query6.ExecuteReader();
+                string query6 = @"INSERT INTO dbo.Perfil(per_fk_usuario, per_genero, per_fecha_nacimiento, per_fk_telefono, per_fk_lugar)VALUES(" + id_usuario + @", 'Hombre', '2016-12-14', " + id_telefono + @", 12);";
+                SqlDataReader read6 = Executer(query6);
                 read6.Close();
 
                 // seleccionar ID Perfil
-                SqlCommand query8 = this.Conexion.CreateCommand();
-                query8.CommandText = "SELECT MAX(per_id) FROM dbo.Perfil;";
-                System.Diagnostics.Debug.WriteLine(query8.CommandText);
-                SqlDataReader read8 = query8.ExecuteReader();
+                string query8 = "SELECT MAX(per_id) FROM dbo.Perfil;";
+                SqlDataReader read8 = Executer(query8);
                 int id_perfil = 0;
                 if (read8.HasRows)
                 {
@@ -121,19 +109,16 @@ namespace FOReserva.Servicio
                 }
                 read8.Close();
 
-                SqlCommand query2 = Conexion.CreateCommand();
-                query2.CommandText = @"INSERT INTO dbo.Pregunta_Respuesta (pr_value,pr_respuesta,fk_perfil) VALUES (" + cliente.PreguntaRespuesta0.Pregunta + @",'" + cliente.PreguntaRespuesta0.Respuesta + @"'," + id_perfil + @");";
-                SqlDataReader read2 = query2.ExecuteReader();
+                string query2 = @"INSERT INTO dbo.Pregunta_Respuesta (pr_value,pr_respuesta,fk_perfil) VALUES (" + cliente.PreguntaRespuesta0.Pregunta + @",'" + cliente.PreguntaRespuesta0.Respuesta + @"'," + id_perfil + @");";
+                SqlDataReader read2 = Executer(query2);
                 read2.Close();
 
-                SqlCommand query3 = Conexion.CreateCommand();
-                query3.CommandText = @"INSERT INTO dbo.Pregunta_Respuesta (pr_value,pr_respuesta,fk_perfil) VALUES (" + cliente.PreguntaRespuesta1.Pregunta + @",'" + cliente.PreguntaRespuesta1.Respuesta + @"'," + id_perfil + @");";
-                SqlDataReader read3 = query3.ExecuteReader();
+                string query3 = @"INSERT INTO dbo.Pregunta_Respuesta (pr_value,pr_respuesta,fk_perfil) VALUES (" + cliente.PreguntaRespuesta1.Pregunta + @",'" + cliente.PreguntaRespuesta1.Respuesta + @"'," + id_perfil + @");";
+                SqlDataReader read3 = Executer(query3);
                 read3.Close();
 
-                SqlCommand query4 = Conexion.CreateCommand();
-                query4.CommandText = @"INSERT INTO dbo.Pregunta_Respuesta (pr_value,pr_respuesta,fk_perfil) VALUES (" + cliente.PreguntaRespuesta2.Pregunta + @",'" + cliente.PreguntaRespuesta2.Respuesta + @"'," + id_perfil + @");";
-                SqlDataReader read4 = query4.ExecuteReader();
+                string query4 = @"INSERT INTO dbo.Pregunta_Respuesta (pr_value,pr_respuesta,fk_perfil) VALUES (" + cliente.PreguntaRespuesta2.Pregunta + @",'" + cliente.PreguntaRespuesta2.Respuesta + @"'," + id_perfil + @");";
+                SqlDataReader read4 = Executer(query4);
                 read4.Close();
             }
             catch (ExisteUsuarioCorreoException e)
@@ -151,7 +136,7 @@ namespace FOReserva.Servicio
                 System.Diagnostics.Debug.WriteLine(e.Message);
                 throw new Exception(e.Message);
             }
-            CloseConextion();
+            CloseConnection();
         }
 
         
@@ -161,10 +146,9 @@ namespace FOReserva.Servicio
             try
             {
                 ValidacionUsuarioCorreoExiste(cliente.Correo);
-                OpenConextion();
-                SqlCommand query = this.Conexion.CreateCommand();
-                query.CommandText = "SELECT usu_id, usu_nombre, usu_apellido, usu_correo, usu_contraseña FROM dbo.Usuario WHERE usu_correo='" + cliente.Correo + "';";
-                SqlDataReader read = query.ExecuteReader();
+
+                string query = "SELECT usu_id, usu_nombre, usu_apellido, usu_correo, usu_contraseña FROM dbo.Usuario WHERE usu_correo='" + cliente.Correo + "';";
+                SqlDataReader read = Executer(query);
                 string clave_descifrada = string.Empty;
 
                 if (read.HasRows)
@@ -201,7 +185,7 @@ namespace FOReserva.Servicio
             {
                 throw new System.Exception(mensaje.Message);
             }
-            CloseConextion();
+            CloseConnection();
             return cliente;
         }
 
@@ -210,12 +194,10 @@ namespace FOReserva.Servicio
             SqlDataReader read;
             try
             {
-                OpenConextion();
-                SqlCommand query = this.Conexion.CreateCommand();
-                query.CommandText = "SELECT usu_id FROM dbo.Usuario WHERE usu_correo='"+correo+"';";
-                read = query.ExecuteReader();
+                string query = "SELECT usu_id FROM dbo.Usuario WHERE usu_correo='"+correo+"';";
+                read = Executer(query);
 
-                
+
             }
             catch (SqlException S)
             {
@@ -232,7 +214,7 @@ namespace FOReserva.Servicio
             {
                 throw new ExisteUsuarioCorreoException();
             }
-            CloseConextion();
+            CloseConnection();
 
         }
 
@@ -241,11 +223,8 @@ namespace FOReserva.Servicio
 
             try
             {
-                OpenConextion();
-                SqlCommand query = this.Conexion.CreateCommand();
-                query.CommandText = "UPDATE dbo.Usuario SET usu_contraseña='" + Seguridad.Cifrar(clave) + "' WHERE usu_id=" + id + ";";
-                System.Diagnostics.Debug.WriteLine(query.CommandText);
-                SqlDataReader read = query.ExecuteReader();
+                string query = "UPDATE dbo.Usuario SET usu_contraseña='" + Seguridad.Cifrar(clave) + "' WHERE usu_id=" + id + ";";
+                SqlDataReader read = Executer(query);
             }
             catch (SqlException S)
             {
@@ -261,7 +240,7 @@ namespace FOReserva.Servicio
 
                 throw new System.Exception(mensaje.Message);
             }
-            CloseConextion();
+            CloseConnection();
         }
 
         public void ValidarPreguntaRespuesta(int id, string pregunta, string respuesta )
@@ -269,12 +248,10 @@ namespace FOReserva.Servicio
             SqlDataReader read;
             try
             {
-               OpenConextion();
 
                 // seleccionamos el id del perfil
-                SqlCommand query3 = Conexion.CreateCommand();
-                query3.CommandText = "SELECT per_id FROM dbo.Perfil Where per_fk_usuario='" + id + "';";
-                SqlDataReader read3 = query3.ExecuteReader();
+                string query3 = "SELECT per_id FROM dbo.Perfil Where per_fk_usuario='" + id + "';";
+                SqlDataReader read3 = Executer(query3);
                 int id_perfil = 0;
                 if (read3.HasRows)
                 {
@@ -284,16 +261,15 @@ namespace FOReserva.Servicio
                     }
                 }
                 read3.Close();
-                SqlCommand query = this.Conexion.CreateCommand();
-                query.CommandText = "SELECT pr_id FROM dbo.Pregunta_Respuesta Where fk_perfil=" + id_perfil + " AND pr_value=" + pregunta + " AND pr_respuesta='" + respuesta + "'";
-                read = query.ExecuteReader();
+                string query = "SELECT pr_id FROM dbo.Pregunta_Respuesta Where fk_perfil=" + id_perfil + " AND pr_value=" + pregunta + " AND pr_respuesta='" + respuesta + "'";
+                read = Executer(query);
                 if (!read.HasRows)
                 {
                     System.Diagnostics.Debug.WriteLine("RESPUESTA ERRONEAAAAAAAAAAAAA");
                     throw new RespuestaErroneaException();
                 }
 
-                CloseConextion();
+                CloseConnection();
             }
             catch (SqlException S)
             {
@@ -319,11 +295,9 @@ namespace FOReserva.Servicio
             try {
                 ValidacionUsuarioCorreoExiste(correo);
 
-                                OpenConextion();
                 // seleccionamos el id del usuario
-                SqlCommand query1 = Conexion.CreateCommand();
-                query1.CommandText = "SELECT usu_id FROM dbo.Usuario Where usu_correo='" + correo + "';";
-                SqlDataReader read1 = query1.ExecuteReader();
+                string query1 = "SELECT usu_id FROM dbo.Usuario Where usu_correo='" + correo + "';";
+                SqlDataReader read1 = Executer(query1);
 
                 int id_usuario = 0;
                 if (read1.HasRows)
@@ -337,9 +311,8 @@ namespace FOReserva.Servicio
 
 
                 // seleccionamos el id del perfil
-                SqlCommand query3 = Conexion.CreateCommand();
-                query3.CommandText = "SELECT per_id FROM dbo.Perfil Where per_fk_usuario='" + id_usuario + "';";
-                SqlDataReader read3 = query3.ExecuteReader();
+                string query3 = "SELECT per_id FROM dbo.Perfil Where per_fk_usuario='" + id_usuario + "';";
+                SqlDataReader read3 = Executer(query3);
                 int id_perfil = 0;
                 if (read3.HasRows)
                 {
@@ -352,9 +325,8 @@ namespace FOReserva.Servicio
 
                 // seleccionamos la lista de respuestas
                 int[] lista = new int[3];
-                SqlCommand query2 = this.Conexion.CreateCommand();
-                query2.CommandText = "SELECT pr_value FROM dbo.Pregunta_Respuesta WHERE pr_id='" + id_perfil + "';";
-                SqlDataReader read2 = query2.ExecuteReader();
+                string query2 = "SELECT pr_value FROM dbo.Pregunta_Respuesta WHERE pr_id='" + id_perfil + "';";
+                SqlDataReader read2 = Executer(query2);
                 string clave_descifrada = string.Empty;
                 int contador = 0;
                 if (read2.HasRows)
@@ -386,7 +358,7 @@ namespace FOReserva.Servicio
                 throw new Exception();
             }
 
-            CloseConextion();
+            CloseConnection();
             return mapa;
         }
 
@@ -406,27 +378,20 @@ namespace FOReserva.Servicio
                 codigo_area = int.Parse(cliente.Codigo_Area);
                 telefono = int.Parse(cliente.Telefono);
                 ValidacionUsuarioCorreoExiste(cliente.Correo); // validamos que el usuario exista
-                OpenConextion();
 
                 //UPDATE USUARIO
-                SqlCommand query = this.Conexion.CreateCommand();
-                query.CommandText = "UPDATE U SET U.usu_nombre = '" + cliente.Nombre+"', U.usu_apellido = '"+cliente.Apellido+"' FROM dbo.Usuario AS U WHERE U.usu_correo='" + cliente.Correo+"';";
-                System.Diagnostics.Debug.WriteLine("QUERY1:"+query.CommandText);
-                read = query.ExecuteReader();
+                string query = "UPDATE U SET U.usu_nombre = '" + cliente.Nombre+"', U.usu_apellido = '"+cliente.Apellido+"' FROM dbo.Usuario AS U WHERE U.usu_correo='" + cliente.Correo+"';";
+                read = Executer(query);
                 read.Close();
 
                 //UPDATE PERFIL
-                SqlCommand query2 = this.Conexion.CreateCommand();
-                query2.CommandText = "UPDATE P SET P.per_genero = '" + cliente.Genero + "' FROM dbo.Perfil AS P INNER JOIN dbo.Usuario AS U ON U.usu_id = P.per_fk_usuario WHERE U.usu_correo='" + cliente.Correo + "';";
-                System.Diagnostics.Debug.WriteLine("QUERY2:" + query2.CommandText);
-                read2 = query2.ExecuteReader();
+                string query2 = "UPDATE P SET P.per_genero = '" + cliente.Genero + "' FROM dbo.Perfil AS P INNER JOIN dbo.Usuario AS U ON U.usu_id = P.per_fk_usuario WHERE U.usu_correo='" + cliente.Correo + "';";
+                read2 = Executer(query2);
                 read2.Close();
 
                 //UPDATE PERFIL
-                SqlCommand query3 = this.Conexion.CreateCommand();
-                query3.CommandText = "UPDATE T SET T.tel_cod_area = " + codigo_area + ", T.tel_num_telefonico = " + telefono + " FROM dbo.Telefono AS T INNER JOIN dbo.Perfil AS P ON P.per_fk_telefono = T.tel_id INNER JOIN dbo.Usuario AS U ON U.usu_id = P.per_fk_usuario WHERE U.usu_correo = '" + cliente.Correo + "';";
-                System.Diagnostics.Debug.WriteLine("QUERY3:" + query3.CommandText);
-                read3 = query3.ExecuteReader();
+                string query3 = "UPDATE T SET T.tel_cod_area = " + codigo_area + ", T.tel_num_telefonico = " + telefono + " FROM dbo.Telefono AS T INNER JOIN dbo.Perfil AS P ON P.per_fk_telefono = T.tel_id INNER JOIN dbo.Usuario AS U ON U.usu_id = P.per_fk_usuario WHERE U.usu_correo = '" + cliente.Correo + "';";
+                read3 = Executer(query3);
                 read3.Close();
             }
             catch (ExisteUsuarioCorreoException e)
@@ -445,8 +410,8 @@ namespace FOReserva.Servicio
             {
                 throw new System.Exception(mensaje.Message);
             }
-            
-            CloseConextion();
+
+            CloseConnection();
         }
 
 
@@ -456,10 +421,9 @@ namespace FOReserva.Servicio
             try
             {
                 ValidacionUsuarioCorreoExiste(cliente.Correo); // validamos que el usuario exista
-                OpenConextion();
-                SqlCommand query = this.Conexion.CreateCommand();
-                query.CommandText = "SELECT U.usu_nombre, U.usu_apellido, P.per_genero, T.tel_cod_area, T.tel_num_telefonico FROM dbo.Usuario U, dbo.Perfil P, dbo.Telefono T WHERE U.usu_correo='" + cliente.Correo + "' and U.usu_id = P.per_fk_usuario and P.per_fk_telefono = T.tel_id;";
-                read = query.ExecuteReader();
+
+                string query = "SELECT U.usu_nombre, U.usu_apellido, P.per_genero, T.tel_cod_area, T.tel_num_telefonico FROM dbo.Usuario U, dbo.Perfil P, dbo.Telefono T WHERE U.usu_correo='" + cliente.Correo + "' and U.usu_id = P.per_fk_usuario and P.per_fk_telefono = T.tel_id;";
+                read = Executer(query);
 
                 if (!read.HasRows)
                 {
@@ -491,7 +455,7 @@ namespace FOReserva.Servicio
                 throw new System.Exception(mensaje.Message);
             }
 
-            CloseConextion();
+            CloseConnection();
             return cliente;
         }
 

@@ -1,0 +1,75 @@
+﻿@{ 
+    Layout= "~/Views/Shared/_Layout2.cshtml";
+}}
+<head>
+    <meta charset="utf-8" />
+    <title>Reserva</title>
+    <meta name="keywords" content="HTML5,CSS3,Template" />
+    <meta name="description" content="" />
+    <meta name="Author" content="Dorin Grigoras [www.stepofweb.com]" />
+
+    <!-- mobile settings -->
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
+    <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+    <!-- WEB FONTS : use %7C instead of | (pipe) -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400%7CRaleway:300,400,500,600,700%7CLato:300,400,400italic,600,700" rel="stylesheet" type="text/css" />
+
+    <!-- CORE CSS -->
+    <link href="@Url.Content("~/Content/assets/plugins/bootstrap/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+
+    <!-- THEME CSS -->
+
+    <link href="@Url.Content("~/Content/assets/css/essentials.css")" rel="stylesheet" type="text/css" />
+
+    <link href="@Url.Content("~/Content/assets/css/layout.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/assets/css/custom.css")" rel="stylesheet" type="text/css" />
+
+
+
+    <!-- PAGE LEVEL SCRIPTS -->
+    <link href="@Url.Content("~/Content/assets/css/header-1.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/assets/css/layout-shop.css")" rel=" stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/assets/css/color_scheme/green.css")" rel="stylesheet" type="text/css" id="color_scheme" />
+</head>
+
+<!-- -->
+<section>
+    <div class="container">
+
+        <!-- LEFT -->
+        <div class="col-lg-3 col-md-3 col-sm-4">
+
+            <div class="thumbnail text-center">
+                <h2 class="size-18 margin-top-10 margin-bottom-0">@Session["nombre"] @Session["apellido"]</h2>
+                <h3 class="size-11 margin-top-0 margin-bottom-10 text-muted">CLIENTE</h3>
+            </div>
+            <!-- SIDE NAV -->
+            <ul class="side-nav list-group margin-bottom-60" id="sidebar-nav">
+                <li class="list-group-item active" id="PePerfil"><a href=""> PERFIL</a></li>
+                <li class="list-group-item" id="peitinerario"><a href=" "> MI ITINERARIO</a></li>
+                <li class="list-group-item" id="PeDiario"><a href=" "> MI DIARIO DE VIAJE</a></li>
+                <li class="list-group-item" id="PeVuelos"><a href=" "> MIS VUELOS</a></li>
+                <li class="list-group-item" id="PeCruceros"><a href=" "> MIS CRUCEROS</a></li>
+                <li class="list-group-item" id="PeAutos"><a href=" "> MIS AUTOS</a></li>
+                <li class="list-group-item"><a onclick="cargarContenido('#CI', 'get', '/gestion_reserva_habitaciones/mis_reservas', null, this)" href="#"> MIS HABITACIONES</a></li>
+                <li class="list-group-item" id="PeRestaurantes"><a href=" "> MIS RESTAURANTES</a></li>
+            </ul>
+            <!-- /SIDE NAV -->
+            <!-- info -->
+        </div>
+
+        <!-- RIGHT -->
+        <div class="col-lg-9 col-md-9 col-sm-8">
+            <div id="contenedorPerfil">
+               
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!--CONTROLADOR DE LA VISTA PARCIAL-->
+<script type="text/javascript">var plugin_path = 'Content/assets/plugins/';</script>
+<script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/jquery/jquery-2.1.4.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/cargadorPerfil.js")"></script>
+
