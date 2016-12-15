@@ -18,6 +18,9 @@ namespace BOReserva.Controllers
     {
         //
         // GET: /gestion_vuelo/
+        public static String _origen;
+        public static String _destino;
+        public static String _avion;
 
 
         public ActionResult M04_GestionVuelo_Visualizar()
@@ -569,9 +572,9 @@ namespace BOReserva.Controllers
             return null;
         }
 
-        public static List<SelectListItem> ciudadesorigen()
+        public static List<SelectListItem> ciudadesorigen( string CiudadO)
         {
-            manejadorSQL_Vuelos ciudadorigen = new manejadorSQL_Vuelos();
+           manejadorSQL_Vuelos ciudadorigen = new manejadorSQL_Vuelos();
             List<SelectListItem> _ciudadorigenes = new List<SelectListItem>();
             String[] origenes = ciudadorigen.MListarciudadesOrigenBD();
             int i = 0;
@@ -584,7 +587,11 @@ namespace BOReserva.Controllers
                     {
                         Text = origenes[i].ToString(),
                         Value = origenes[i].ToString()
+
                     });
+                    if (origenes[i].Equals(CiudadO)) {
+                        _origen = origenes[i];
+                    }
                     i++;
                 }
                 catch (Exception e)
@@ -598,12 +605,13 @@ namespace BOReserva.Controllers
 
 
 
-        public static List<SelectListItem> ciudadesdestino(String COrigen)
+        public static List<SelectListItem> ciudadesdestino(String COrigen,String CDestino)
         {
             manejadorSQL_Vuelos ciudaddestino = new manejadorSQL_Vuelos();
             List<SelectListItem> _ciudaddestinos = new List<SelectListItem>();
             String[] destinos = ciudaddestino.MListarciudadesDestinoBD(COrigen);
             int i = 0;
+           _destino = destinos[0];
             bool verdad = true;
             while (verdad == true)
             {
@@ -614,7 +622,11 @@ namespace BOReserva.Controllers
                         Text = destinos[i].ToString(),
                         Value = destinos[i].ToString()
                     });
-                    i++;
+                    if (destinos[i].Equals(CDestino))
+                    {
+                        _destino = destinos[i];
+                    }
+                        i++;
                 }
                 catch (Exception e)
                 {
@@ -663,6 +675,79 @@ namespace BOReserva.Controllers
             return (Json(model._ciudadesDestino, JsonRequestBehavior.AllowGet));
         }
 
+        public static List<SelectListItem> avionesvalidados(String COrigen,String CDestino, String Avion)
+        {
+            manejadorSQL_Vuelos avionvalidado = new manejadorSQL_Vuelos();
+            List<SelectListItem> _avionesvalidados = new List<SelectListItem>();
+            String[] aviones = avionvalidado.MListaravionesValidadosBD(COrigen, CDestino);
+            int i = 0;
+            _avion = aviones[ 0];
+            bool verdad = true;
+            while (verdad == true)
+            {
+                try
+                {
+                    _avionesvalidados.Add(new SelectListItem
+                    {
+                        Text = aviones[i].ToString(),
+                        Value = aviones[i].ToString()
+                    });
+                    if (aviones[i].Equals(Avion))
+                    {
+                        _avion = aviones[i];
+                    }
+                    i++;
+                }
+                catch (Exception e)
+                {
+                    verdad = false;
+                }
+            }
+            return _avionesvalidados;
+        }
 
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult validarAvionesModificar(string ciudadO, string ciudadD)
+        {
+            if (ciudadO.Equals("")) {
+
+                ciudadO = _origen;
+
+            }
+            CVueloModificar model = new CVueloModificar();
+            //creo la lista que lleno con las matriculas de avion que cubren la ruta especificada
+            List<CVueloModificar> resultado = new List<CVueloModificar>();
+            manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
+
+            try
+            {
+                //llamo a metodo que llena la lista con BD
+                resultado = sql.buscarAvionesModificar(ciudadO, ciudadD);
+
+                if (resultado != null)
+                {
+                    //paso la lista al formato de DropDownList
+                    model._matriculaAviones = resultado.Select(m => new SelectListItem
+                    {
+                        Value = m._matriculaAvion,
+                        Text = m._matriculaAvion
+                    });
+                }
+            }
+            catch (SqlException e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error consultando los aviones disponibles para la ruta.";
+                return Json(error);
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
+                return Json(error);
+            }
+
+            return (Json(model._matriculaAviones, JsonRequestBehavior.AllowGet));
+        }
     }
 }

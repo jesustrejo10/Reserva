@@ -327,4 +327,26 @@ function checkTextCodigo(field) {
                        });
 
                    });
-        });
+ });
+ $("#ciudadDMod").change(function () {
+     var cID = $(ciudadOMod).val();
+     var dID = $(ciudadDMod).val();
+     $.getJSON("gestion_vuelo/validarAvionesModificar", { ciudadO: cID, ciudadD: dID },
+            function (data) {
+                var select = $("#matAvion");
+                select.empty();
+                select.append($('<option/>', {
+                    value: 0,
+                    text: "Seleccione un avion"
+                    , error: function (xhr, textStatus, exceptionThrown) {
+                        alert(xhr.responseText);
+                    }
+                }));
+                $.each(data, function (index, itemData) {
+                    select.append($('<option/>', {
+                        value: itemData.Value,
+                        text: itemData.Text
+                    }));
+                });
+            });
+ });
