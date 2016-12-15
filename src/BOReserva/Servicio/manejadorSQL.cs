@@ -232,7 +232,51 @@ namespace BOReserva.Servicio
         }
 
 
+        public string[] pasajeroComida(string matriculaAvion)
+        {
+            try
+            {
+                string[] pasajeros = null;
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                //indico que ejecutare un Stored Procedured en la BD 
+                SqlCommand cmd = new SqlCommand("M06_Pasajero_XClase", conexion);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                //le paso los parametros que espera el SP
+                cmd.Parameters.Add("@MatriculaAvion", System.Data.SqlDbType.VarChar, 100);
+                cmd.Parameters["@MatriculaAvion"].Value = matriculaAvion;
 
+
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    //tomo un unico valor como esperado segun comportamiento del SP
+                    pasajeros[0] = dr.GetSqlString(0).ToString();
+                    pasajeros[1] = dr.GetSqlString(1).ToString();
+                    pasajeros[2] = dr.GetSqlString(2).ToString();
+                }
+                //cierro el lector
+                dr.Close();
+                conexion.Close();
+
+                return pasajeros;
+            }
+            catch (SqlException e)
+            {
+                throw (e);
+
+            }
+            catch (Exception e)
+            {
+                throw (e);
+
+            }
+
+        }
 
 
         /// <summary>

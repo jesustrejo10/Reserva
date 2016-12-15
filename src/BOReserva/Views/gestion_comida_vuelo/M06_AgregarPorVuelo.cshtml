@@ -32,7 +32,7 @@
                                     <td>@item._capacidadEjecutiva</td>
                                     <td>@item._capacidadVip</td>
                                     <td>
-                                        <a href="#" title="Agregar"><i class="fa fa-plus agregarvuelo"></i></a>
+                                        <a href="#" title="Agregar comida"><i class="fa fa-plus agregarvuelo"></i></a>
                                     </td>
                                 </tr>
                             }
@@ -66,4 +66,23 @@
 <script src="../../Content/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="../../Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
 
+<script language="javascript" type="text/javascript">
 
+    $(".agregarvuelo").click(function () {
+        console.log("hola");
+        var identificador = $(this).parent().parent().parent().attr("id");
+        jQuery.ajax({
+            type: "GET",
+            url: "/gestion_vuelo/M04_GestionVuelo_Visualizar",
+            data: { id: identificador }
+        }).done(function (data) {
+            $("#contenido").empty();
+            $("#contenido").append(data);
+        }).fail(function () {
+
+        });
+
+
+    });
+
+</script>

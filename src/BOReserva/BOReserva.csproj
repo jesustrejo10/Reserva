@@ -236,6 +236,8 @@
     <Compile Include="Models\gestion_aviones\CAgregarAvion.cs" />
     <Compile Include="Models\gestion_aviones\CAvion.cs" />
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
+    <Compile Include="Models\gestion_comida_vuelo\CAgregarVuelo.cs" />
+    <Compile Include="Models\gestion_comida_vuelo\CVuelo.cs" />
     <Compile Include="Models\gestion_cruceros\CGestion_cabina.cs" />
     <Compile Include="Models\gestion_cruceros\CGestion_camarote.cs" />
     <Compile Include="Models\gestion_cruceros\CGestion_crucero.cs" />
@@ -1459,6 +1461,7 @@
     <Content Include="Views\gestion_restaurantes\M10_GestionRestaurantes_Modificar.cshtml" />
     <Content Include="Views\gestion_roles\M13_ModificarRol.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarComida.cshtml" />
+    <Content Include="Views\gestion_comida_vuelo\M06_VisualizarVuelos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Visualizar.cshtml" />
