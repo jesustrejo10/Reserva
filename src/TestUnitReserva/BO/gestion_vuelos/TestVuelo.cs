@@ -190,8 +190,55 @@ namespace TestUnitReserva.BO.gestion_vuelos
             //Aqui pruebo que no me pueda desactivar un vuelo que ya ha sido desactivado
             Boolean resultadocodigorepetido = sql.MDesactivarVuelo(7);
             Assert.AreEqual(resultadocodigorepetido, false);
+            Assert.That(() => sql.MDesactivarVuelo(null), Throws.TypeOf<NullReferenceException>());
 
         }
+
+
+        [Test]
+        public void M04_ActivarVuelo()
+        {
+            int idvuelo = 20;
+            Boolean resultado = sql.MActivarVuelo(idvuelo);
+
+            //Aquí pruebo que al activar un vuelo de manera correcta la función devuelva true
+            Assert.Equals(resultado, true);
+            //Aqui pruebo que no me pueda activar un vuelo que ya ha sido activado
+            Boolean resultadocodigorepetido = sql.MDesactivarVuelo(7);
+            Assert.AreEqual(resultadocodigorepetido, false);
+            Assert.That(() => sql.MActivarVuelo(null), Throws.TypeOf<NullReferenceException>());
+
+        }
+
+        [Test]
+        public void M04_CodigoUnicoVuelo()
+        {
+            String idvuelo = "CD780";
+            String codigovuelo = sql.codVueloUnico(idvuelo);
+            Assert.IsNotNull(codigovuelo);
+            Assert.That(() => sql.codVueloUnico(null), Throws.TypeOf<NullReferenceException>());
+
+        }
+        [Test]
+        public void ListarciudadesOrigenBD()
+        {
+            String[] listaorigenes = sql.MListarciudadesOrigenBD();
+            //Pruebo que al llamar la funcion MListarciudadesOrigenBD() no me traiga una lista nula; 
+            Assert.IsNotNull(listaorigenes);
+
+        }
+        [Test]
+        public void ListarciudadesDestinoBD()
+        {
+            String origen = "Caracas";
+            String[] listadestinos = sql.MListarciudadesDestinoBD();
+            //Pruebo que al llamar la funcion MListarciudadesOrigenBD() no me traiga una lista nula; 
+            Assert.IsNotNull(listadestinos);
+
+        }
+
+
+
 
 
     }
