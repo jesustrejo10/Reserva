@@ -188,7 +188,7 @@ jQuery(document).ready(function () {
                     $("#contenedor").append(data);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
+                    $("#contenedor").html('<div class="text-center">No se pudo cargar la data</div>');
                 }
             });
 
