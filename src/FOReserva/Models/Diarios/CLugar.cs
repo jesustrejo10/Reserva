@@ -18,7 +18,7 @@ namespace FOReserva.Models.Diarios
             ManejadorSQLDiarios manejador = new ManejadorSQLDiarios();
             List<CLugar> lugaresCLugar = manejador.obtenerLugares();
             List<SelectListItem> lugares = new List<SelectListItem>();
-            lugares.Add(new SelectListItem { Value = "0", Text = "------ Buscar por destino de viaje ------", Selected = true });
+            lugares.Add(new SelectListItem { Value = "-1", Text = "------ Buscar por destino de viaje ------", Selected = true });
             foreach (CLugar lug in lugaresCLugar)
             {
                 SelectListItem l = new SelectListItem { Value = lug.ID.ToString(), Text = (lug.Tipo.Equals("pais") ? "" : "  --- ") + lug.Nombre };

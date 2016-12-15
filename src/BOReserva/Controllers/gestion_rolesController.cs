@@ -73,6 +73,33 @@ namespace BOReserva.Controllers
 
         
         }
+        //Metodo para modifcar nombre roles
+        [HttpPost]
+        public JsonResult modificarrol(string rol, string nombrerolnuevo)
+        {
+
+            System.Diagnostics.Debug.WriteLine("aqui1");
+            System.Diagnostics.Debug.WriteLine(nombrerolnuevo);
+            System.Diagnostics.Debug.WriteLine(rol);
+
+            if (rol == null && nombrerolnuevo == null)
+            {
+                //Creo el codigo de error de respuesta
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error               
+                String error = "Error, campo obligatorio vacio";
+                //Retorno el error                
+                return Json(error);
+            }
+            //instancio el manejador de sql
+            manejadorSQL sql = new manejadorSQL();
+            //Realizo el insert y Guardo la respuesta de mi metodo sql en un bool
+            bool respuesta = sql.ModificarrRol(rol, nombrerolnuevo);
+            //envio una respuesta dependiendo del resultado del insert
+            return (Json(respuesta, JsonRequestBehavior.AllowGet));
+
+
+        }
         //Metodo para asignar permisos a los roles
         [HttpPost]
         public JsonResult asignarpermisos(string json)

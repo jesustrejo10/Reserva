@@ -8,8 +8,11 @@ using BOReserva.Models.gestion_aviones;
 using BOReserva.Servicio;
 using System.Diagnostics;
 using System.Data.SqlClient;
+<<<<<<< HEAD
+=======
 using System.Web;
 using System.Web.Mvc;
+>>>>>>> Develop
 
 namespace TestUnitReserva.BO.gestion_aviones
 {
@@ -17,7 +20,10 @@ namespace TestUnitReserva.BO.gestion_aviones
     class TestAviones
     {
         manejadorSQL prueba = new manejadorSQL();
+<<<<<<< HEAD
+=======
         BOReserva.Controllers.gestion_avionesController controlador = new BOReserva.Controllers.gestion_avionesController();
+>>>>>>> Develop
         /// <summary>
         /// Pruebas para insertar un avión en la base de datos
         /// Creo el avión y se lo paso como parámetro a la función
@@ -53,8 +59,13 @@ namespace TestUnitReserva.BO.gestion_aviones
             //Aquí pruebo que no me deje insertar una matricula repetida
             avion._matriculaAvion = "Hk900";
             Boolean resultadomatricularepetida = prueba.insertarAvion(avion);
+<<<<<<< HEAD
+            Assert.AreEqual(resultadomatricularepetida, false);    
+          
+=======
             Assert.AreEqual(resultadomatricularepetida, false);
 
+>>>>>>> Develop
         }
         /// <summary>
         /// Pruebas para verificar que la lista que se muestra en el visualizar no venga vacía
@@ -84,12 +95,21 @@ namespace TestUnitReserva.BO.gestion_aviones
         public void consultarAvionIdValida()
         {
             int numeroValido = 1;
+<<<<<<< HEAD
+            Assert.IsInstanceOf( typeof(CAvion) , prueba.consultarAvion(numeroValido));
+        }
+
+   /// <summary>
+   /// Prueba del método modificar con un avión que no existe
+   /// </summary>
+=======
             Assert.IsInstanceOf(typeof(CAvion), prueba.consultarAvion(numeroValido));
         }
 
         /// <summary>
         /// Prueba del método modificar con un avión que no existe
         /// </summary>
+>>>>>>> Develop
         [Test]
         public void modificarAvionInexistente()
         {
@@ -134,11 +154,16 @@ namespace TestUnitReserva.BO.gestion_aviones
             Boolean resultado = prueba.eliminarAvion(id);
             Assert.AreEqual(resultado, true);
         }
+<<<<<<< HEAD
+        
+        [Test]        
+=======
 
         /// <summary>
         /// Prueba que se encarga de verificar que se produzca una excepcion si se pasa el parametro nulo
         /// </summary>
         [Test]
+>>>>>>> Develop
         public void modificarAvionNulo()
         {
             Assert.That(() => prueba.modificarAvion(null), Throws.TypeOf<NullReferenceException>());
@@ -303,5 +328,10 @@ namespace TestUnitReserva.BO.gestion_aviones
             Assert.That(() => controlador.modificarAvion(null), Throws.TypeOf<NullReferenceException>());
         }
 
+<<<<<<< HEAD
+        } 
+        
+=======
+>>>>>>> Develop
     }
 }

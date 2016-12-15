@@ -118,16 +118,40 @@
             });
         }
     });
+
+    //boton cancelar
     $("#cancelarModificacion").click(function (e) {
+    
+        var url = '/gestion_roles/M13_VisualizarRol';
+        var method = 'GET';
+        var data = '';
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
 
-
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    
+    
+    
     });
-    //Accion del boton agregarrol
+    //Accion del boton modicar rol
     $("#modificarrol").click(function (e) {
         e.preventDefault();
-        var form = $("#modificar_Rol");
+        //nombre del rol
+        var form = $(".nombre_Rol").attr("id");
+        //nombre del nuevo rol
+        var nombrerol_nuevo=$("#nombre_rol").val();
         var permisos = [$("#nombre_rol").val()];
-        //agrega el nombre del rol
+        console.log(form);
         jQuery.each($("input[type='checkbox']"), function (i) {
             if (this.checked && this.value != "on") {
                 permisos.push(this.value);
@@ -136,7 +160,7 @@
         });
         $.ajax({
             url: "gestion_roles/modificarrol",
-            data: form.serialize(),
+            data: { rol: form, nombrerolnuevo: nombrerol_nuevo },
             type: 'POST',
             success: function (data) {
                 alert("Se guardo");
@@ -154,7 +178,26 @@
             url: 'gestion_roles/asignarpermisos',
             data: data,
             success: function (data) {
-                alert("Se asignaron los permisos");
+
+                var url = '/gestion_roles/M13_VisualizarRol';
+                var method = 'GET';
+                var data = '';
+                $.ajax(
+                    {
+                        url: url,
+                        type: method,
+                        data: data,
+                        success: function (data, textStatus, jqXHR) {
+
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+
+
 
             },
             failure: function (response) {
