@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BOReserva.Servicio;
+using BOReserva.Models.gestion_seguridad_ingreso;
 
 namespace BOReserva.Controllers
 {
@@ -19,7 +20,9 @@ namespace BOReserva.Controllers
             }
 
             manejadorSQL sql = new manejadorSQL();
-            //aqui debe ir  la variable de session id en vez de 10
+            //aqui debe ir  la variable de session id en vez de 1
+            var usuario = Session["Cgestion_seguridad_ingreso"] as Cgestion_seguridad_ingreso;
+            //permisos = sql.M13consultarRolesDeUnUsuario(usuario.nombreUsuarioTexto);
             permisos = sql.M13consultarRolesDeUnUsuario(1);
             Session["Permisos"] = permisos;
 
