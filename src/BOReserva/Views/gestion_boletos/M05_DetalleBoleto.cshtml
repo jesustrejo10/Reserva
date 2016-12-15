@@ -45,7 +45,7 @@
 
                         <div>&nbsp;</div>
 
-  
+
 
                         <div class="col-md-12" style="margin-top:10px;">
 
@@ -82,12 +82,12 @@
                         <div class="col-md-12" style="margin-top:10px;">
 
                             <div class="col-md-6">
-                                <label>Primer nombre:</label>
+                                <label>Primer apellido:</label>
                                 @Html.TextBoxFor(m => m._pasajero._primer_apellido, null, new { @class = "form-control", @placeholder = "", @id = "boleto_papellido", @disabled = "disabled", @readonly = "readonly" })
                             </div>
 
                             <div class="col-md-6">
-                                <label>Segundo nombre:</label>
+                                <label>Segundo apellido:</label>
                                 @Html.TextBoxFor(m => m._pasajero._segundo_apellido, null, new { @class = "form-control", @placeholder = "", @id = "boleto_sapellido", @disabled = "disabled", @readonly = "readonly" })
                             </div>
 
@@ -159,7 +159,7 @@
             var url = '/gestion_boletos/M05_BoletoCreado';
             var method = 'GET';
             var data = { idorigen : id_origen, iddestino : id_destino, pasaporte : pasaporte, monto : monto, tipo : tipo, idvuelo : id_vuelo };
-       
+
             $.ajax(
                 {
                     url: url,

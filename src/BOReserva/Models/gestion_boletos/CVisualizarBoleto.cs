@@ -31,6 +31,7 @@ namespace BOReserva.Models.gestion_boletos
         public CPasajero _pasajero { get; set; }
 
         public int _idVuelo { get; set; }
+        public List<CVuelo> _vuelos { get; set; }
 
     }
 }

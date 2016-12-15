@@ -19,14 +19,14 @@
 
 
                             <div class="col-xs-6">
-                                <label>Primer nombre:</label>
+                                <label>Primer nombre(*):</label>
                                 <input id="primer_nombre" type="text" class="form-control" placeholder="Ej. Juan">
 
                             </div>
 
                             <div class="col-xs-6">
 
-                                <label>Segundo nombre:</label>
+                                <label>Segundo nombre(*):</label>
                                 <input id="segundo_nombre" type="text" class="form-control" placeholder="Ej. Lionel">
 
                             </div>
@@ -38,14 +38,14 @@
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-md-6">
 
-                                <label>Primer apellido:</label>
+                                <label>Primer apellido(*):</label>
                                 <input id="primer_apellido" type="text" class="form-control" placeholder="Ej. Jimenez">
 
                             </div>
 
                             <div class="col-md-6">
 
-                                <label>Segundo apellido:</label>
+                                <label>Segundo apellido(*):</label>
                                 <input id="segundo_apellido" type="text" class="form-control" placeholder="Ej. Arango">
 
                             </div>
@@ -61,14 +61,14 @@
 
                             <div class="col-xs-6">
 
-                                <label>Fecha de nacimiento:</label>
+                                <label>Fecha de nacimiento(*):</label>
                                 <input id="fecha_nac" type="date" class="form-control">
 
                             </div>
 
                             <div class="col-xs-6">
 
-                                <label>Sexo:</label>
+                                <label>Sexo(*):</label>
                                 <select id="sexo" class="form-control select2" style="width: 100%;">
                                     <option selected="selected"> </option>
                                     <option value="Masculino">Masculino</option>
@@ -88,14 +88,14 @@
 
                             <div class="col-xs-6">
 
-                                <label>Número de pasaporte:</label>
+                                <label>Número de pasaporte(*):</label>
                                 <input id="pasaporte" type="text" class="form-control" placeholder="Ej. 237690944">
 
                             </div>
 
                             <div class="col-xs-6">
 
-                                <label>Correo electrónico:</label>
+                                <label>Correo electrónico(*):</label>
                                 <input id="correo" type="text" class="form-control" placeholder="Ej. pepitoperez@gmail.com">
 
                             </div>
@@ -126,7 +126,7 @@
                             <div class="col-md-2">
                                 @Html.TextBoxFor(m => m._tipoBoleto, null, new { @class = "form-control", @placeholder = "", @id = "tipo", @disabled = "disabled", @readonly = "readonly", style = "display: none;" })
                             </div>
-                            
+
 
                         </div>
 
@@ -154,7 +154,7 @@
             </div>
         </div>
     </div>
-    
+
     <script>
         $("#siguiente").click(function (e) {
             e.preventDefault();
@@ -194,12 +194,12 @@
 
            // alert("primer nombre: "+primer_nombre+", segundo nombre: "+segundo_nombre+", primer apellido: "+primer_apellido+", segundo aoellido: "+segundo_apellido+", fecha nac: "+fecha_nac+", pos: "+posicion+", sexo: "+sexo+", pasaporte: "+pasaporte+", correo: "+correo);
 
-            
-            
+
+
             var url = '/gestion_boletos/M05_DetalleBoleto';
             var method = 'GET';
             var data = { idorigen: id_origen, iddestino: id_destino, fechadespegue: fecha_despegue, fechaaterrizaje: fecha_aterrizaje, monto: monto, tipo : tipo, primernombre : primer_nombre, segundonombre : segundo_nombre, primerapellido : primer_apellido, segundoapellido : segundo_apellido, fechanac : fecha_nac, sexo : sexo, pasaporte : pasaporte, correo : correo, idvuelo : id_vuelo };
-            
+
             $.ajax(
                 {
                     url: url,
@@ -217,4 +217,3 @@
         });
     </script>
 }
-

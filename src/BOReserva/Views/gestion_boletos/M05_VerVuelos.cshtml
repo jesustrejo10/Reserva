@@ -6,8 +6,6 @@
             <div class="box-header">
                 <h3 class="box-title">
                     Vuelos disponibles
-                <br>
-                    (Si no sale el buscador de vuelos seleccione de nuevo la opción crear boleto sin reserva)<br>
                 </h3>
 
 
@@ -25,6 +23,7 @@
                             <th>Tipo</th>
                             <th style="display:none;">Id origen</th>
                             <th style="display:none;">Id destino</th>
+                            <th style="display:none;">Fecha vuelta</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
@@ -44,6 +43,7 @@
                                     <td id="tipo">@item._tipo</td>
                                     <td id="idorigen" style="display:none;">@item._ruta._origen</td>
                                     <td id="iddestino" style="display:none;">@item._ruta._destino</td>
+                                    <td id="fechavuelta" style="display:none;">@item._fechaVuelta</td>
                                     <td>
                                         <a href="#" title="Crear boleto"> <i class="fa fa-eye consultar"></i></a>
                                     </td>
@@ -52,12 +52,12 @@
                         }
                         catch
                         {
-                            
+
 
                         }
                 </table>
 
-                
+
             </div>
             <!-- /.box-body -->
         </div>
@@ -69,14 +69,14 @@
 
 <script src="~/Content/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="~/Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
- 
+
 <script language="javascript" type="text/javascript">
     table = $('#example').DataTable();
     $(document).ready(function () {
 
         $(".consultar").click(function (e) {
             e.preventDefault();
-            alert("Crear boleto sin reserva");
+            alert("Creando boleto sin reserva");
 
             var id_vuelo = $(this).parent().parent().parent().attr("id");
             //alert("ID ---- "+ identificador);
@@ -89,6 +89,7 @@
             var id_destino = "";
             var monto = "";
             var tipo = "";
+            var fecha_vuelta = "";
 
             // Obtenemos todos los valores contenidos en los <td> de la fila
             // seleccionada
@@ -116,15 +117,19 @@
             $(this).parents("tr").find("#tipo").each(function () {
                 tipo += $(this).html() + "\n";
             });
+            $(this).parents("tr").find("#fechavuelta").each(function () {
+                fecha_vuelta += $(this).html() + "\n";
+            });
 
-          
- 
+
+
+
 
            // alert(nombre_origen + " " + nombre_destino + " " + fecha_salida + " " + fecha_llegada+" "+id_origen+" "+id_destino+" "+tipo);
 
             var url = '/gestion_boletos/M05_DetalleVuelo';
             var method = 'GET';
-            var data = { origen : nombre_origen, destino : nombre_destino, fechasalida : fecha_salida, fechallegada : fecha_llegada, idorigen : id_origen, iddestino : id_destino, monto : monto, tipo : tipo, idvuelo : id_vuelo  };
+            var data = { origen : nombre_origen, destino : nombre_destino, fechasalida : fecha_salida, fechallegada : fecha_llegada, idorigen : id_origen, iddestino : id_destino, monto : monto, tipo : tipo, idvuelo : id_vuelo };
 
             $.ajax(
                 {
@@ -148,4 +153,3 @@
 
 
 </script>
-

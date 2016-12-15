@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Net;
 using BOReserva.Models.gestion_boletos;
 using BOReserva.Servicio.Servicio_Boletos;
+
 
 namespace BOReserva.Controllers
 {
@@ -58,7 +59,7 @@ namespace BOReserva.Controllers
         public ActionResult M05_DetalleVuelo(string origen,string destino,string fechasalida,string fechallegada,int idorigen,int iddestino,int monto, string tipo, int idvuelo)
         {
 
-            System.Diagnostics.Debug.WriteLine("Llega al controller");
+            System.Diagnostics.Debug.WriteLine("Llega al controller de detalleVuelo");
             System.Diagnostics.Debug.WriteLine("origen: " + origen + ", destino: " + destino + ", fecha salida: " + fechasalida + ", fecha llegada: " + fechallegada + ", id origen: " + idorigen + ", id destino: " + iddestino+", monto: "+monto+", tipo: "+tipo+", id vuelo: "+idvuelo);
 
             CVisualizarBoleto vue = new CVisualizarBoleto();
@@ -78,7 +79,7 @@ namespace BOReserva.Controllers
             return PartialView(vue);
         }
 
-
+       
 
         public ActionResult M05_CrearBoleto()
         {
@@ -106,25 +107,11 @@ namespace BOReserva.Controllers
 
             System.Diagnostics.Debug.WriteLine("Llega al controller de VerVuelos");
             System.Diagnostics.Debug.WriteLine("DATOS CONTROLLER VERVUELOS: id_origen: "+idorigen+", id_destino: "+iddestino+", ida_vuelta: "+idavuelta+", tipo: "+tipo+", fecha ida: "+ fechaida+", fecha vuelta: "+fechavuelta);
-           
 
             manejadorSQL_Boletos sqlboletos = new manejadorSQL_Boletos();
-
             List<CVuelo> listavuelos = new List<CVuelo>();
-            
-
-            if (idavuelta == "idavuelta")
-            {
-                //Si es idavuelta hago un union de vuelos que tengan idorigen=idorigenseleccionado, iddestino=iddestino seleccionado unido con idorigen=iddestinoseleccionado, iddestino=idorigenseleccionado
-                listavuelos = sqlboletos.M05ListarVuelosIdaVueltaBD(fechaida,fechavuelta,idorigen,iddestino,tipo);
-
-            }
-            else
-            {
-
-                listavuelos = sqlboletos.M05ListarVuelosIdaBD(fechaida, fechavuelta, idorigen, iddestino, tipo);
-                
-            }
+            listavuelos = sqlboletos.M05ListarVuelosIdaBD(fechaida, fechavuelta, idorigen, iddestino, tipo);
+           // System.Diagnostics.Debug.WriteLine("DATOS CONTROLLER VERVUELOS: listavuelos: vuelos[0]: partida:  "+ listavuelos[0]._fechaPartida+", llegada: "+listavuelos[0]._fechaLlegada);
 
 
             return PartialView(listavuelos);
@@ -411,7 +398,7 @@ namespace BOReserva.Controllers
         {
             //SE BUSCAN TODOS LOS BOLETOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
              manejadorSQL_Boletos buscarboletos = new manejadorSQL_Boletos();
-             List<CBoleto> listaboletos = buscarboletos.M05ListarBoletosBD();  
+             List<CBoleto> listaboletos = buscarboletos.M05ListarBoletosBD();
             return PartialView(listaboletos);
         }
 
@@ -437,7 +424,7 @@ namespace BOReserva.Controllers
 
             //BUSCA EL BOLETO A MOSTRAR
             manejadorSQL_Boletos buscarboleto = new manejadorSQL_Boletos();
-            CBoleto boleto = buscarboleto.M05MostrarBoletoBD(id); 
+            CBoleto boleto = buscarboleto.M05MostrarBoletoBD(id);
 
             // EL/LOS VUELOS DEL BOLETO ESTAN EN UNA LISTA
             // NO SOPORTA ESCALAS
@@ -470,8 +457,8 @@ namespace BOReserva.Controllers
                 bol._fechaAterrizajeIda = vuelos[0]._fechaLlegada.Day + "/" + vuelos[0]._fechaLlegada.Month + "/" + vuelos[0]._fechaLlegada.Year;
                 bol._fechaAterrizajeVuelta = vuelos[1]._fechaLlegada.Day + "/" + vuelos[1]._fechaLlegada.Month + "/" + vuelos[1]._fechaLlegada.Year;
                 bol._horaDespegueIda = time0;
-                bol._horaDespegueVuelta = time1;
-                bol._horaAterrizajeIda = time2;
+                bol._horaAterrizajeIda = time1;
+                bol._horaDespegueVuelta = time2;
                 bol._horaAterrizajeVuelta = time3;
             }
 
@@ -496,9 +483,9 @@ namespace BOReserva.Controllers
             manejadorSQL_Boletos buscarboleto = new manejadorSQL_Boletos();
             CBoleto boleto = buscarboleto.M05MostrarBoletoBD(id);
 
-            CModificarBoleto bolView = new CModificarBoleto();
+            String hola = boleto._tipoBoleto;
 
-            bolView.bol = boleto;
+            CModificarBoleto bolView = new CModificarBoleto(boleto);
             return PartialView(bolView);
         }
 
@@ -514,10 +501,10 @@ namespace BOReserva.Controllers
             String fechaLlegVuelta = model._fechaAterrizajeVuelta;
             String horaSalIda = model._horaDespegueIda;
             String horaSalVuelta = model._horaDespegueVuelta;
-            String horaLlegIda = model._horaAterrizajeIda; 
-            String horaLlegVuelta = model._horaAterrizajeVuelta; 
+            String horaLlegIda = model._horaAterrizajeIda;
+            String horaLlegVuelta = model._horaAterrizajeVuelta;
             double monto = model._monto;
-            String tipoBoleto = model._tipoBoleto; 
+            String tipoBoleto = model._tipoBoleto;
             String nombre = model._nombre;
             String apellido = model._apellido;
             int pasaporte = model._pasaporte;
@@ -569,6 +556,140 @@ namespace BOReserva.Controllers
             int modifico_si_no = eliminar.M05EliminarBoletoBD(id);
 
             return (Json(true, JsonRequestBehavior.AllowGet));
+        }
+
+        [HttpPost]
+        public JsonResult modificarDatosPasajero(CModificarBoleto model)
+        {
+
+            CPasajero pas = new CPasajero(model._id, model._primer_nombre,model._segundo_nombre,model._primer_apellido,
+                                          model._segundo_apellido,model._sexo,model._fecha_nac,model._correo);
+            manejadorSQL_Boletos modificar = new manejadorSQL_Boletos();
+            int modifico_si_no = modificar.M05ModificarDatosPasajero(pas);
+
+            return (Json(true, JsonRequestBehavior.AllowGet));
+        }
+
+        public bool verificarDisponibilidad(int codigo_vuelo, String tipo)
+        {
+            bool disponibilidad = false;
+            manejadorSQL_Boletos modificar = new manejadorSQL_Boletos();
+
+            int compara1 = String.Compare(tipo, "Turista");
+            int compara2 = String.Compare(tipo, "Ejecutivo");
+            int compara3 = String.Compare(tipo, "Vip");
+
+            if (compara1 == 0)
+            {
+
+                int conteo = modificar.MConteoTurista(codigo_vuelo);
+                int cap = modificar.MBuscarCapTurista(codigo_vuelo);
+                System.Diagnostics.Debug.WriteLine(conteo);
+                System.Diagnostics.Debug.WriteLine(cap);
+                if (conteo < cap)
+                {
+                    disponibilidad = true;
+                }
+                else
+                {
+                    disponibilidad = false;
+                }
+
+            }
+
+            if (compara2 == 0)
+            {
+                int conteo = modificar.MConteoEjecutivo(codigo_vuelo);
+                int cap = modificar.MBuscarCapEjecutivo(codigo_vuelo);
+                System.Diagnostics.Debug.WriteLine(conteo);
+                System.Diagnostics.Debug.WriteLine(cap);
+                if (conteo < cap)
+                {
+                    disponibilidad = true;
+                }
+                else
+                {
+                    disponibilidad = false;
+                }
+            }
+
+            if (compara3 == 0)
+            {
+
+                int conteo = modificar.MConteoVip(codigo_vuelo);
+                int cap = modificar.MBuscarCapVip(codigo_vuelo);
+                if (conteo < cap)
+                {
+                    disponibilidad = true;
+                }
+                else
+                {
+                    disponibilidad = false;
+                }
+            }
+
+            return disponibilidad;
+        }
+
+
+        [HttpPost]
+        public JsonResult modificarTipoBoleto(CModificarBoleto model)
+        {
+            bool disponibilidad = false;
+            String tipo = model._tipoBoleto;
+
+            manejadorSQL_Boletos modificar = new manejadorSQL_Boletos();
+            String tipoOri = modificar.MBuscarTipoBoletoOriginal(model._bol_id);
+            List<CVuelo> lista = modificar.M05ListarVuelosBoleto(model._bol_id);
+
+            int compara = String.Compare(tipoOri, tipo);
+            if (compara != 0) {
+
+                // PRIMERO VEO SI ES IDA O IDA Y VUELTA
+                int ida_vuelta = modificar. MBuscarIdaVuelta(model._bol_id);
+                // EL BOLETO ES IDA 1
+                // EL BOLETO ES IDA Y VUELTA 2
+                if (ida_vuelta == 1) {
+                    int codigo_vuelo1 = lista[0]._id;
+
+                    disponibilidad = verificarDisponibilidad(codigo_vuelo1, tipo);
+
+                } else {
+                    int codigo_vuelo_ida = lista[0]._id;
+                    int codigo_vuelo_vuelta = lista[1]._id;
+
+                    bool disp_ida = verificarDisponibilidad(codigo_vuelo_ida, tipo);
+                    bool disp_vuelta = verificarDisponibilidad(codigo_vuelo_vuelta, tipo);
+
+                    disponibilidad = ((disp_ida) && (disp_vuelta));
+                    System.Diagnostics.Debug.WriteLine(disponibilidad);
+
+                }
+
+                if (disponibilidad) {
+
+                    // HACER EL UPDATE
+                    int num = modificar.M05ModificarTipoBoleto(model._bol_id, tipo);
+                    return (Json(true, JsonRequestBehavior.AllowGet));
+                } else {
+                    //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    //Agrego mi error
+                    String error = "No hay disponibilidad para cambiar de categoría";
+                    //Retorno el error
+                    return Json(error);
+                }
+
+            } else {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Posee la misma categoría de boleto";
+                //Retorno el error
+                return Json(error);
+            }
+
+
         }
 
 

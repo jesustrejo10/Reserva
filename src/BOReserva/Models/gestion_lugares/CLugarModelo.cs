@@ -11,7 +11,7 @@ namespace BOReserva.Models.gestion_lugares
         public int _idFKLugar { get; set; }
         public string _nombre { get; set; }
         public string _tipoLugar { get; set; }
-        public string _zonaHoraria { get; set; }
+        public int _zonaHoraria { get; set; }
         public string _abreviatura { get; set; }
 
         /* Constructor por defecto */
@@ -23,7 +23,7 @@ namespace BOReserva.Models.gestion_lugares
 
         /* Constructor completo */
 
-        public CLugarModelo(int id, string nombre, string tipoLugar, string zonaHoraria, string abreviatura, int idFKLugar)
+        public CLugarModelo(int id, string nombre, string tipoLugar, int zonaHoraria, string abreviatura, int idFKLugar)
         {
             this._id = id;
             this._nombre = nombre;
@@ -35,7 +35,7 @@ namespace BOReserva.Models.gestion_lugares
 
         /* Constructor sin FK de Lugar */
 
-        public CLugarModelo(int id, string nombre, string tipoLugar, string zonaHoraria, string abreviatura)
+        public CLugarModelo(int id, string nombre, string tipoLugar, int zonaHoraria, string abreviatura)
         {
             this._id = id;
             this._nombre = nombre;

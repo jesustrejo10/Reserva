@@ -134,11 +134,11 @@
     <comment>Código error en el parametro de un stored procedure</comment>
   </data>
   <data name="Error_Conexion" xml:space="preserve">
-    <value>No se pudo establecer una conexión con el servidor de datos</value>
+    <value>No se pudo establecer una conexion con el servidor de datos</value>
     <comment>Error de conexión con la base de datos</comment>
   </data>
   <data name="Error_Desconexión" xml:space="preserve">
-    <value>Ocurrio un error al cerrar la conexión con el servidor de datos</value>
+    <value>Ocurrio un error al cerrar la conexion con el servidor de datos</value>
     <comment>Error al intentar cerrar una conexión a la base de datos</comment>
   </data>
   <data name="Error_General" xml:space="preserve">
@@ -148,5 +148,9 @@
   <data name="Error_Parametro" xml:space="preserve">
     <value>Error en la ejecución de un stored procedure debido a un parametro</value>
     <comment>Error de un parametro en la ejecución del stored procedure</comment>
+  </data>
+  <data name="StringConexion" xml:space="preserve">
+    <value>DB_A1380A_reserva</value>
+    <comment>Nombre de la conexion en Web.config</comment>
   </data>
 </root>

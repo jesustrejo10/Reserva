@@ -1,15 +1,18 @@
-﻿@model FOReserva.Models.ReservaHabitacion.Cvista_ReservaHabitacion
+@model FOReserva.Models.ReservaHabitacion.CReservaHabitacion
 @{var reserva = Model; }
 @if (Model != null)
 {
     <div>
-        <div class="col-xs-8">
-            <h2 class="color-azul">Detalle de Reserva : @reserva.Id</h2>
+        <div class="col-xs-6 heading-title">
+            <h3> <span>Reserva de Habitacion: <small>Detalle de reserva  #@reserva.Codigo.</small></span></h3>
         </div>
-        <div class="col-xs-4">
-            <button type="button" class="btn btn-danger pull-right" data-toggle="modal" data-target=".bs-example-modal-sm">Eliminar</button>
-            <button type="button" class="btn btn-info pull-right" onclick="cargarContenido('#CI', 'get', '/gestion_reserva_habitaciones/editar_reserva', null, this)">Modificar</button>
-            <button type="button" class="btn btn-default pull-right" onclick="cargarContenido('#CI', 'get', '/gestion_reserva_habitaciones/mis_reservas', null, this)">Regresar</button>
+        <div class="col-xs-6">
+            @if (Model.Estado == FOReserva.Models.ReservaHabitacion.CReservaHabitacion.EstadoReserva.Activo)
+            {
+                <button type="button" class="btn btn-danger pull-right" onclick="mostrarCuadroDialogo(this)">Cancelar</button>
+            }
+            @*<button type="button" class="btn btn-info pull-right" onclick="cargarContenido('#CI', 'get', '/gestion_reserva_habitaciones/editar_reserva', null, this)">Modificar</button>*@
+            <button type="button" class="btn btn-default pull-right" onclick="cargarContenido('#CI', 'get', '/gestion_reserva_habitaciones/mis_reservas', null, this)">Ver Reservas de Habitación</button>
         </div>
     </div>
     <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -19,14 +22,14 @@
                 <!-- header modal -->
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="mySmallModalLabel">¿Esta seguro que desea eliminar la reserva?</h4>
+                    <span class="modal-title" id="mySmallModalLabel">¿Esta seguro que desea cancelar la reserva?</span>
                 </div>
 
                 <!-- body modal -->
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-xs-12 centrado">
-                            <button type="button" class="btn btn-success">Seguro</button>
+                            <button type="button" class="btn btn-success" onclick="cancelarReserva(this, @reserva.Codigo)">Seguro</button>
                             <button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-sm">Cancelar</button>
                         </div>
                     </div>
@@ -78,6 +81,31 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        function mostrarCuadroDialogo(boton) {
+            $(".bs-example-modal-sm").modal('show');
+        }
+
+        function cancelarReserva(boton, rha_id) {
+            $(".bs-example-modal-sm").modal('hide');
+            var reserva = JSON.parse('@Html.Raw(@Newtonsoft.Json.JsonConvert.SerializeObject(reserva))');
+
+            $.ajax({
+                url: "/gestion_reserva_habitaciones/cancelar_reserva",
+                data: reserva,
+                type: 'POST',
+                success: function (proceso) {
+                    if (proceso.CulminoCorrectamente) {
+                        alert(proceso.Mensaje);
+                        cargarContenido('#CI', 'get', '/gestion_reserva_habitaciones/mis_reservas', null, this)
+                    } else {
+                        alert(proceso.Mensaje);
+                    }
+
+                }
+            });
+        }
+    </script>
 }
 else
 {

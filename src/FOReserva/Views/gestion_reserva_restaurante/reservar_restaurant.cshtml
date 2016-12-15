@@ -1,92 +1,233 @@
-﻿@model FOReserva.Models.Restaurantes.CRestaurantModel
+@model FOReserva.Models.Restaurantes.CRestaurantModel
 @{
-    ViewBag.Title = "reservar_restaurant";
+    ViewBag.Title = "Reservar Restaurante";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!-- FEATURED GRID -->
+@{
+    if (Model == null)
+    {
+        @Html.Partial("_NoHayResultados");
+    }
+    else
+    {
 
+        <!-- FEATURED GRID -->
+        <div class="row">
+            <div class="panel panel-default col-sm-5">
+                <div class="panel-heading">
+                    <h2 class="panel-title">Reservar restaurante</h2>
+                </div>
+                <div class="panel-body center-block">
 
-<div class="row">
-    <div class="panel panel-default col-sm-5">
-        <div class="panel-heading">
-            <h2 class="panel-title">Reservar restaurante</h2>
-        </div>
-        <div class="panel-body center-block">
+                    <!-- FORMULARIO PARA CREAR UNA RESERVA EN RESTAURANTE-->
+                    @using (Html.BeginForm("confirma_restaurant", "gestion_reserva_restaurante", FormMethod.Post, new { @id = "reserva_form" }))
+                    {
+                        <input type="hidden" name="restaurantID" id="" value="@Model.Id" />
+                        <input type="hidden" name="name_rest" id="" value="@Model.Name" />
+                        <input type="hidden" name="addres_rest" id="" value="@Model.Addres" />
+                        <input type="hidden" name="name_city" id="" value="@Model.CityName" />
+                    <!-- NOMBRE  Y  VALIDACIONES-->
+                        <div class="form-group">
 
-            @using (Html.BeginForm("confirma_restaurant", "gestion_reserva_restaurante", FormMethod.Post))
-            {
-                <input type="hidden" name="id" id="" value="@Model.Id" />
-                <input type="hidden" name="name_rest" id="" value="@Model.Name" />
-                <input type="hidden" name="addres_rest" id="" value="@Model.Addres" />
-                <div class="form-group">
+                            <label>A nombre de: </label>
+                            <input type="text" name="name_client" id="name_client" value="" class="form-control" data-format="" data-lang="en" data-rtl="false" placeholder="Ingrese el nombre" required>
+                        </div>
 
-                    <label>A nombre de: </label>
-                    <input type="text" name="name_client" id="name_client" value="" class="form-control" data-format="" data-lang="en" data-rtl="false" placeholder="Ingrese su nombre">
+                        <div id="name_empty" style="display: none;" class="has-error error">
+                            <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe llenar este campo</p>
+                        </div>
+                        <div id="name_format" style="display: none;" class="has-error error">
+                            <p><i class="fa fa-times-circle" aria-hidden="true"></i> El campo solo debe contener caracteres alfabéticos</p>
+                        </div>
+                    <!-- FECHA  Y  VALIDACIONES-->
+                        <div class="form-group">
+                            <label>Fecha: </label>
+                            <input type="text" name="reserv_date" id="reserv_date" value="" class="form-control datepicker" readonly data-format="yyyy-mm-dd" required data-lang="en" data-rtl="false" placeholder="Selecciona la fecha">
+                        </div>
+                        <div id="fecha_null" style="display: none;" class="has-error error">
+                            <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe seleccionar una fecha</p>
+                        </div>
+                    <!-- HORA  Y  VALIDACIONES-->
+                        <div class="form-group">
+                            <label>Hora:</label>
+                            <select name="reserv_hour" id="reserv_hour" class="form-control pointer required">
+                                <option value="" selected>Selecciona la hora:</option>
+                                <option value="7:00">7:00</option>
+                                <option value="8:00">8:00</option>
+                                <option value="9:00">9:00</option>
+                                <option value="10:00">10:00</option>
+                                <option value="11:00">11:00</option>
+                                <option value="12:00">12:00</option>
+                                <option value="13:00">13:00</option>
+                                <option value="14:00">14:00</option>
+                                <option value="15:00">15:00</option>
+                                <option value="16:00">16:00</option>
+                                <option value="17:00">17:00</option>
+                                <option value="18:00">18:00</option>
+                                <option value="19:00">19:00</option>
+                                <option value="20:00">20:00</option>
+                                <option value="21:00">21:00</option>
+                                <option value="22:00">22:00</option>
+                                <option value="23:00">23:00</option>
+                            </select>
+                        </div>
+                        <div id="hora_null" style="display: none;" class="has-error error">
+                            <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe seleccionar una hora</p>
+                        </div>
+                    <!-- CANTIDAD DE PERSONAS  Y  VALIDACIONES-->
+                        <div class="form-group">
+                            <label>Numero de personas:</label>
+                            <select name="number_person" id="number_person" class="form-control" required>
+                                <option value="1" selected>1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </div>
+                    <!-- BOTON QUE ACCIONA EL SUBMIT -->
+                        <div class="text-center">
+                            <input id="reserv_restaurante" type="button" value="Reservar" class="btn btn-primary boton" />
+                        </div>
+                    }
                 </div>
-                <div class="form-group">
 
-                    <label>Fecha: </label>
-                    <input type="text" name="reserv_date" id="reserv_date" value="" class="form-control datepicker required" data-format="yyyy-mm-dd" data-lang="en" data-rtl="false" placeholder="Selecciona la fecha">
-                </div>
-                <div class="form-group">
-                    <label>Hora:</label>
-                    <select name="reserv_hour" id="reserv_hour" class="form-control pointer required">
-                        <option value="" selected>Selecciona la hora:</option>
-                        <option value="7:00">7:00</option>
-                        <option value="8:00">8:00</option>
-                        <option value="9:00">9:00</option>
-                        <option value="10:00">10:00</option>
-                        <option value="11:00">11:00</option>
-                        <option value="12:00">12:00</option>
-                        <option value="13:00">13:00</option>
-                        <option value="14:00">14:00</option>
-                        <option value="15:00">15:00</option>
-                        <option value="16:00">16:00</option>
-                        <option value="17:00">17:00</option>
-                        <option value="18:00">18:00</option>
-                        <option value="19:00">19:00</option>
-                        <option value="20:00">20:00</option>
-                        <option value="21:00">21:00</option>
-                        <option value="22:00">22:00</option>
-                        <option value="23:00">23:00</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Numero de personas:</label>
-                    <input type="text" name="number_person" id="number_person" value="1" min="1" max="1000" class="form-control stepper">
-                </div>
-                <div class="text-center">
-                    <input type="submit" value="Reservar" class="btn btn-primary boton">
-                </div>
-            }
-        </div>
+            </div>
 
-    </div>
- 
-    <div class="col-sm-7">
-        <div class="relative">
-            <div style="height: 443.6px;background-image: url('../Images/restaurant_generic.jpg');background-repeat: no-repeat;background-size: cover;">
-                <div class="absolute text-left">
-                    <h2>  <b>@Model.Name</b>  </h2>
-                    <p style="color: #fff;">Madrid</p>
-                    <p style="color: #fff;" class="font-lato margin-top-30 size-16 hidden-sm hidden-xs"><b>Dirección: </b> @Model.Addres</p>
+            <div class="col-sm-7">
+                <div class="relative">
+                    <div class="descript_bg">
+                        <div class="descript_conten">
+                            <h2>  <b>@Model.Name</b>  </h2>
+                            <p style="color: #fff;">@Model.CityName</p>
+                            <p style="color: #fff;" class="font-lato margin-top-30 size-16 hidden-sm hidden-xs"><b>Dirección: </b> @Model.Addres</p>
+                        </div>
+                    </div>
+
                 </div>
+
             </div>
 
         </div>
-
-    </div>
-
-</div>
-<div class="row">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h2 class="panel-title">Descripción</h2>
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">Descripción</h2>
+                </div>
+                <div class="panel-body">
+                    @Model.Description
+                </div>
+            </div>
         </div>
-        <div class="panel-body">
-            @Model.Description
-        </div>
-    </div>
-</div>
-<!-- /FEATURED GRID -->
+		<div class="row">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h2 class="panel-title">Revisiones</h2>
+				</div>
+				<div class="panel-body">
+					<center> <input id="lista_rev" type="button" value="Ver Revisiones" class="btn btn-primary boton" /> </center>
+					<center> <a class="btn btn-primary" href="@Url.Action("crear_revision", "gestion_revision")">Agregar Revision</a></center>
+				</div>
+			</div>
+		</div>
+        <!-- /FEATURED GRID -->
+    }
+}
+<script>
+
+    $(document).ready(function () {
+        $('.datepicker').datepicker({
+            orientation: "bottom",
+            format: 'yyyy-mm-dd',
+            startDate: '0d',
+            endDate: '+2m'
+        });
+        $('#datepicker').datepicker();
+
+        $('#datepicker').on("changeDate", function () {
+            $('#my_hidden_input').val(
+                $('#datepicker').datepicker('getFormattedDate')
+            );
+        });
+    });
+
+    $(document).ready(function () {
+        $("#reserv_restaurante").on("click", function () {
+            //clear errors
+            $(".error").hide();
+            $("#name_client").removeClass("has-error");
+            $("#reserv_hour").removeClass("has-error");
+            $("#reserv_date").removeClass("has-error");
+
+            //find errors
+            var nombre = $("#name_client").val();
+            var hora = $("#reserv_hour").val();
+            var fecha = $("#reserv_date").prop("value");
+            var caracteres = /^[a-zA-Z\s]+$/;
+
+            var win = true;
+
+            if (nombre == "" || nombre == undefined || !nombre.match(caracteres)) {
+
+                if (nombre == "" || nombre == undefined) {
+                    $("#name_client").addClass("has-error");
+                    $("#name_empty").fadeIn();
+                    win = false;
+                }
+                else {
+                    $("#name_client").addClass("has-error");
+                    $("#name_format").fadeIn();
+                    win = false;
+                }
+            }
+            if (hora == 0) {
+                var win = false;
+                $("#reserv_hour").addClass("has-error");
+                $("#hora_null").fadeIn();
+                win = false;
+            }
+
+            if (fecha == null || fecha == 0) {
+                var win = false;
+                $("#reserv_date").addClass("has-error");
+                $("#fecha_null").fadeIn();
+                win = false;
+            }
+
+            if (win) {
+                $("#reserva_form").submit();
+            }
+            else
+                return false;
+        });
+
+    });
+
+    $(document).ready(function () {
+        $("#lista_rev").click(function () {
+           
+            var ide = $(this).parent().parent().parent().parent().attr("id");
+            
+            jQuery.ajax({
+                type: "GET",
+                url: "/gestion_revision/lista_revisiones",
+                data: { id: ide }
+            }).done(function () {
+                alert("Envie")
+            }).fail(function () {
+                alert("Ocurrió un error")
+            });
+
+        });
+
+    });
+
+</script>
+
+

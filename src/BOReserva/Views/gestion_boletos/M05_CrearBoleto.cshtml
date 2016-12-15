@@ -17,11 +17,11 @@
                         <div class="row">
                             <div class="col-md-12" style="margin-top:10px;">
                                 <div class="col-md-6">
-                                        <label>Salir de:</label>
+                                        <label>Salir de(*):</label>
                                         @Html.DropDownListFor(m => m.SelectedCiudadIdOrigen, Model.CiudadesOrigen, new { @class = "form-control select2", @id = "id_origen" })
                                 </div>
                                 <div class="col-md-6">
-                                        <label>Llegar a:</label>
+                                        <label>Llegar a(*):</label>
                                         @Html.DropDownListFor(m => m.SelectedCiudadIdDestino, Model.CiudadesDestino, new { @class = "form-control select2", @id = "id_destino" })
                                 </div>
 
@@ -33,18 +33,18 @@
                         <div class="row">
                             <div class="col-md-12" style="margin-top:10px;">
                                 <div class="col-md-6">
-                                        <label>Detalle:</label>
+                                        <label>Detalle(*):</label>
                                         <select id="ida_vuelta" name="detalle" onchange="idavueltaOnChange(this)" class="form-control select2" style="width: 100%;">
                                             <option value="ida" selected="selected">Solo ida</option>
-                                            <option value="idavuelta">Ida y vuelta</option>
                                         </select>
                                 </div>
 
                                 <div class="col-md-6">
-                                        <label>Tipo:</label>
+                                        <label>Tipo(*):</label>
                                         <select id="tipo" name="detalle" onchange="idavueltaOnChange(this)" class="form-control select2" style="width: 100%;">
-                                            <option selected="selected">Comercial</option>
+                                            <option selected="selected">Turista</option>
                                             <option>Ejecutivo</option>
+                                            <option>Vip</option>
                                         </select>
                                 </div>
                             </div>
@@ -54,7 +54,7 @@
                         <div class="row">
                             <div class="col-md-12" style="margin-top:10px;">
                                 <div class="col-md-6">
-                                        <label id="idalbl">Fecha ida:</label>
+                                        <label id="idalbl">Fecha ida(*):</label>
                                         <div class="input-group">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-clock-o"></i>
@@ -65,7 +65,7 @@
                                 </div>
 
                                 <div class="col-md-6" id="divvuelta">
-                                        <label id="vueltalbl">Fecha vuelta:</label>
+                                        <label id="vueltalbl">Fecha vuelta(*):</label>
 
                                         <div class="input-group">
                                             <div class="input-group-addon">
@@ -164,4 +164,3 @@
         }
     }
 </script>
-    
