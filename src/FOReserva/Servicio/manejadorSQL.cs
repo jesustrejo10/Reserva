@@ -34,7 +34,7 @@ namespace FOReserva.Servicio
                 conexion.Open();
             }catch (SqlException e)
             {
-                throw new ManejadorSQLException("Error de conexion con la DB", e);
+                    throw new ManejadorSQLException("Error de conexion con la DB", e);
             }
         }
 

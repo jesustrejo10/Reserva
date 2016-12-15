@@ -270,8 +270,8 @@ namespace FOReserva.Servicio
             ,fk_usuario_id,fecha_fin_diar,fk_destino) 
             OUTPUT Inserted.id_diar
             VALUES('" + crear_Nuevo_Diario.Nombre + "','" + crear_Nuevo_Diario.Fecha_ini.ToString("yyyy-MM-dd") + "','"
-            + crear_Nuevo_Diario.Descripcion + "','" + crear_Nuevo_Diario.Fecha_carga.ToString("yyyy-MM-dd") + "','"
-            + crear_Nuevo_Diario.Calif_creador + "',0,0,170,'"
+            + crear_Nuevo_Diario.Descripcion + "','" + crear_Nuevo_Diario.Fecha_carga.ToString("yyyy-MM-dd") + "',"
+            + crear_Nuevo_Diario.Calif_creador + ",0,0,11,'"
             + crear_Nuevo_Diario.Fecha_fin.ToString("yyyy-MM-dd") + "','" + crear_Nuevo_Diario.Destino + "' )";
             SqlDataReader read = Executer(query);
             int id = -1;
