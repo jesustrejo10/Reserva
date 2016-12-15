@@ -3,24 +3,24 @@
 <link href="@Url.Content("~/Scripts/select2/css/select2.min.css")" rel="stylesheet" />
 <script src="@Url.Content("~/Scripts/jquery-3.1.1.min.js")"></script>
 <script src="@Url.Content("~/Scripts/select2/js/select2.min.js")"></script>
+<script src="~/Scripts/Scripts_Restaurantes/llamadas_generales.js"></script>
+
+<!-- DataTables -->
+<script src="../../Content/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="../../Content/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="../../Content/plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="../../Content/dist/js/app.min.js"></script>
+<!-- page script -->
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $(".gestionver-seleccion-restaurante").select2();
+    $("#m10-ver-restaurantes").DataTable();
 });
 </script>
-
-<h1>Hola!</h1>
-
-<select class="gestionver-seleccion-restaurante">
-    @if(Model._listaRestaurantes != null)
-    {
-        foreach (var entrada in Model._listaRestaurantes)
-        {
-            <option value="@entrada._id">@entrada._nombre</option>
-        }
-    }
-</select>
 
 <div class="row">
     <link rel="stylesheet" href="~/Content/plugins/datatables/dataTables.bootstrap.css">
@@ -60,6 +60,7 @@ $(document).ready(function() {
                                     <td>@Model._listaCiudades.FirstOrDefault(x => x._id == @item._idLugar)._nombre</td> <!-- Demasiado astuto para mi propio bien -->
                                     <td>
                                         <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>
+                                        <a href="#" title="Eliminar"><i class="fa fa-times eliminar"></i></a>
                                     </td>
                                 </tr>
                             }

@@ -15,7 +15,12 @@ namespace FOReserva.Controllers
         [HttpGet]
         public ActionResult mis_reservas()
         {
-            var model = CReservaHabitacion.ReservasDeUsuario(usu_id: 1);
+            var user_id = 1;
+
+            if (Session["id_usuario"] != null && Session["id_usuario"] is int)
+                user_id = (int)Session["id_usuario"];
+
+            var model = CReservaHabitacion.ReservasDeUsuario(usu_id: user_id);
             return PartialView(model);
         }
 
@@ -54,26 +59,21 @@ namespace FOReserva.Controllers
         [HttpPost]
         public ActionResult realizar_reserva(Cvista_ReservarHabitacion reserva)
         {
-            reserva.UsuId = 1; // Usuario Actual
-            if (CReservaHabitacion.GenerarReserva(reserva))
-                return Json(true, JsonRequestBehavior.AllowGet);
-            else
-                return Json(false, JsonRequestBehavior.AllowGet);
-        }
+            var user_id = 1;
 
-        [HttpGet]
-        public ActionResult editar_reserva(CReservaHabitacion model)
-        {            
-            return PartialView(model);
+            if (Session["id_usuario"] != null && Session["id_usuario"] is int)
+                user_id = (int)Session["id_usuario"];
+
+            reserva.UsuId = user_id; // Usuario Actual
+            var resultado = CReservaHabitacion.GenerarReserva(reserva);
+            return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public JsonResult guardar_reserva()
+        public ActionResult cancelar_reserva(CReservaHabitacion reserva)
         {
-            return Json(new { hubo_problemas = false, mensaje = "Reserva guardada..." }, JsonRequestBehavior.AllowGet);
+            var resultado = CReservaHabitacion.CancelarReserva(reserva);
+            return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-
-
-
     }
 }

@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+using System.Web.Mvc;
 namespace FOReserva.Models.Restaurantes
 {
     /*Clase Modelo de la Reservacion de un restaurante
@@ -13,7 +15,11 @@ namespace FOReserva.Models.Restaurantes
         private int _count;
         private int _idUser;
         private int _idRestaurant;
+        private string _time;
         private CRestaurantModel _restaurant;
+
+        public List<SelectListItem> _Time { get; set; }
+        public List<SelectListItem> _Count { get; set; }
 
         /*Constructor Completo*/
         public CReservation_Restaurant
@@ -23,10 +29,55 @@ namespace FOReserva.Models.Restaurantes
             this._count = count;
             this._idUser = idUser;
             this._idRestaurant = idRestaurant;
+            this._time = time;
+
+
+            this._Time = new List<SelectListItem>();
+            for (var i = 7; i <= 23; i++)
+            {
+                this._Time.Add(new SelectListItem()
+                {
+                    Value = i.ToString() + ":00",
+                    Text = i.ToString() + ":00"
+                });
+            }
+
+            this._Count = new List<SelectListItem>();
+
+            for (var j = 1; j <= 10; j++)
+            {
+                this._Count.Add(new SelectListItem()
+                {
+                    Value = j.ToString(),
+                    Text = j.ToString() 
+                });
+            }
+
+
         }
 
         /*Constructor Vacio*/
-        public CReservation_Restaurant() : base() { }
+        public CReservation_Restaurant() : base() {
+
+            this._Time = new List<SelectListItem>();
+            for (var i = 7; i <= 23;i++ )
+            {
+                this._Time.Add(new SelectListItem() { 
+                    Value = i.ToString() + ":00",
+                    Text = i.ToString() + ":00"
+                });
+            }
+
+            this._Count = new List<SelectListItem>();
+            for (var j = 1; j <= 10; j++)
+            {
+                this._Count.Add(new SelectListItem()
+                {
+                    Value = j.ToString(),
+                    Text = j.ToString()
+                });
+            }
+        }
         
         /*Metodos Get y Set de la cantidad de personas de la reserva*/
         public int Count
@@ -59,3 +110,4 @@ namespace FOReserva.Models.Restaurantes
 
     }
 }
+

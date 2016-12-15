@@ -1,9 +1,11 @@
 ﻿@model FOReserva.Models.Cruceros.CVista_Cruceros
+
            <!-- aqui va el contenedor del formulario de la vista cruceros pero la index de nosotros como tal -->
 <div class="heading-title">
 	<h3><span>Cruceros</span></h3>
 </div>
-@using (Html.BeginForm("buscarCrucero", "gestion_reserva_crucero", null, FormMethod.Post, new { @id = "formBuscarCruceros", @class = "form-horizontal"}))
+
+@using (Html.BeginForm("gestion_reserva_crucero_buscar_crucero", "gestion_reserva_crucero", null, FormMethod.Post, new { @id = "formBuscarCruceros", @class = "form-horizontal" }))
 {
     <fieldset>
 										<!-- required [php action request] -->
@@ -12,18 +14,17 @@
 
 										<!-- select -->
 										<label> Cruceros </label>
-                                       @Html.DropDownListFor(m => m.SelectedCrucero, Model.Cruceros, new { @class = "form-control select2", @id = "select2" })
-										
+                                       @Html.DropDownListFor(m => m.SelectedCrucero, Model.Cruceros, new { @class = "form-control select2", @id = "select2", @name = "select2" })
                                      <div id="val_null" style="display: none;" class="has-error error">
                                          <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe seleccionar un tipo de Crucero</p>
                                      </div>
 										<br>
 										<br>
-									
+
 											<div class="form-group ">
 												<div class="col-md-5 col-sm-5" >
 													<label>Fecha ida</label>
-                                                    @Html.TextBoxFor(m => m._ida, null, new { @class = "form-control ", @type = "date", @id = "fechaida", @placeholder = "Fecha", min = "today", max = "2023-12-31" })
+                                                    @Html.TextBoxFor(m => m._ida, null, new { @class = "form-control ", @type = "date", @id = "fechaida", @name = "fechaida", @placeholder = "Fecha", min = "today", max = "2023-12-31" })
 												<!--	<input type="text" name="contact[start_date]" value="" class="form-control datepicker required" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">-->
                                                     <div id="name_null" style="display: none;" class="has-error error">
                                                         <p><i class="fa fa-times-circle" aria-hidden="true"></i> Seleccione una fecha</p>
@@ -31,7 +32,7 @@
                                                 </div>
                                                 <div class="col-md-5 col-sm-5 ">
                                                     <label>Fecha vuelta</label>
-                                                    @Html.TextBoxFor(m => m._vuelta, null, new { @class = "form-control ", @type = "date", @id = "fechavuelta", @placeholder = "Fecha", min = "today", max = "2023-12-31" })
+                                                    @Html.TextBoxFor(m => m._vuelta, null, new { @class = "form-control ", @type = "date", @id = "fechavuelta", @name = "fechavuelta", @placeholder = "Fecha", min = "today", max = "2023-12-31" })
                                                     <!--	<input type="text" name="contact[start_date]" value="" class="form-control datepicker required" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">-->
                                                     <div id="name_null2" style="display: none;" class="has-error error">
                                                         <p><i class="fa fa-times-circle" aria-hidden="true"></i> Seleccione una fecha</p>
@@ -40,12 +41,12 @@
                                                         <p><i class="fa fa-times-circle" aria-hidden="true"></i> No puede haber una fecha de vuelta menor a la fecha de ida</p>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div id="name_format" style="display: none;" class="has-error error">
                                                     <p><i class="fa fa-times-circle" aria-hidden="true"></i> Las noches no coinciden</p>
                                                 </div>
 											</div>
-										
+
 
 
 
@@ -54,7 +55,9 @@
 										<div class="col-md-12">
 											<button type="button" id="buscarCrucero" class="btn btn-primary">Buscar</button>
 										</div>
-									</div>
+				
+    					</div>
+
     <script>
         var today = new Date();
         var dd = today.getDate();
@@ -68,7 +71,7 @@
         }
 
         today = yyyy + '-' + mm + '-' + dd;
-        document.getElementById("fechaida").setAttribute("min", today);
+       document.getElementById("fechaida").setAttribute("min", today);
         var today1 = new Date();
         var dd1 = today1.getDate() +1;
         var mm1 = today1.getMonth() + 1; //January is 0!
@@ -109,7 +112,7 @@
             $("#name_empty").fadeIn();
             win = false;
         }
-       
+
        /** if (nombre == "" || nombre == undefined || !nombre.match(caracteres)) {
 
             if (nombre == "" || nombre == undefined) {
@@ -149,3 +152,4 @@
     });
 </script>
 }
+    

@@ -4,11 +4,11 @@
     if (Model.Ciudades != null && Model.Ciudades.Count > 0)
     {
     <div id="buscador">
-        <div>
+        @*<div>
             <div class="col-xs-12 heading-title">
                 <h3> <span>Hoteles: <small>Buscar hoteles con habitaciones disponibles.</small></span></h3>
             </div>
-        </div>
+        </div>*@
         <div>
             <div class="col-xs-12">
                 @using (Html.BeginForm(null, null, null, FormMethod.Post, new { @id = "formBuscarHotel", @class = "form-horizontal" }))
@@ -43,19 +43,35 @@
                 <script>
                         $("#buscarHotel").click(function (e) {
                             e.preventDefault();
-                            var form = $("#formBuscarHotel");
-                            $.ajax({
-                                url: "/gestion_reserva_habitaciones/hoteles_con_habitaciones",
-                                data: form.serialize(),
-                                type: 'GET',
-                                success: function (data) {
-                                    $("#resultado")
-                                        .empty()
-                                        .append(data)
-                                        .show();
-                                    $("#buscador").hide();
-                                }
-                            });
+
+                            var segmento = $("#FechaLlegada").val().split("-")
+                            var fecha_llegada = new Date(segmento[0], parseInt(segmento[1]) - 1, segmento[2]);
+                            var fecha_actual = new Date();
+                            var cantidad_dias = parseInt($("#CantidadDias").val())
+                            var lug_id = parseInt($("#LugId option:selected").val())
+
+                            if (fecha_llegada <= fecha_actual)
+                                alert("Debe realizar la reserva con antelación, indique una fecha futura.")
+                            else if (cantidad_dias < 1)
+                                alert("Debe indicar cuandos dias tiene pensado quedarse.")
+                            else if (lug_id < 1)
+                                alert("Debe indicar la ciudad donde tiene pensado quedarse.")
+                            else 
+                            { 
+                                var form = $("#formBuscarHotel");
+                                $.ajax({
+                                    url: "/gestion_reserva_habitaciones/hoteles_con_habitaciones",
+                                    data: form.serialize(),
+                                    type: 'GET',
+                                    success: function (data) {
+                                        $("#resultado")
+                                            .empty()
+                                            .append(data)
+                                            .show();
+                                        $("#buscador").hide();
+                                    }
+                                });
+                            }
                         });
                         $("#LugId option[value=@Model.LugId]").attr("selected", true).change()
                 </script>

@@ -1,4 +1,4 @@
-﻿using FOReserva.Models.Restaurantes;
+using FOReserva.Models.Restaurantes;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -84,7 +84,7 @@ namespace FOReserva.Servicio
         /*Metodo que crea una reserva*/
         public void CrearReserva(CReservation_Restaurant reserva)
         {
-            string query = "INSERT INTO Reserva_Restaurante ( Reserva_Nombre, Fecha, Hora,Cantidad_Personas, FK_RESTAURANTE, FK_USUARIO) VALUES( '"+reserva.Name+"',convert(date, '"+reserva.Date+"'),'"+reserva.Time+"',"+reserva.Count+","+reserva.IdRestaurant+", 2)";
+            string query = "INSERT INTO Reserva_Restaurante ( Reserva_Nombre, Fecha, Hora,Cantidad_Personas, FK_RESTAURANTE, FK_USUARIO) VALUES( '"+reserva.Name+"',convert(date, '"+reserva.Date+"'),'"+reserva.Time+"',"+reserva.Count+","+reserva.IdRestaurant+", 1)";
             this.Executer(query);
             CloseConnection();
         }

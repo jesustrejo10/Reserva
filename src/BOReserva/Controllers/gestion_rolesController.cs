@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BOReserva.Models.gestion_roles;
-using BOReserva.Models.gestion_aviones;
 using BOReserva.Servicio;
 using System.Net;
 using Newtonsoft.Json.Linq;
@@ -17,14 +16,39 @@ namespace BOReserva.Controllers
         // GET: /gestion_roles/
         public ActionResult M13_AgregarRol()
         {
-            manejadorSQL sql = new manejadorSQL();            
+            manejadorSQL sql = new manejadorSQL();
             CRoles rol = new CRoles();
             rol.Menu = sql.consultarLosModulos();
+
             return PartialView(rol);
         }
         public ActionResult M13_VisualizarRol()
         {
-            return PartialView();
+            manejadorSQL sql = new manejadorSQL();
+            List<CRoles> listaroles = sql.consultarListaroles();
+
+            return PartialView(listaroles);
+        }
+        
+
+        public ActionResult M13_ModificarRol(string _rolnombre)
+        {
+
+            manejadorSQL sql = new manejadorSQL();
+            CRoles _rol = new CRoles();
+            _rol.Nombre_rol = _rolnombre;
+            _rol.Permisos = sql.consultarLosPermisosAsignados(_rol);
+
+            
+
+            foreach (var item in _rol.Permisos)
+            {
+                
+                System.Diagnostics.Debug.WriteLine(item.Nombre);
+                
+            }
+
+            return PartialView(_rol);
         }
         //Metodo para agregar roles
         [HttpPost]
@@ -49,14 +73,16 @@ namespace BOReserva.Controllers
 
         
         }
-        //Metodo para asignar permisos a los roles
+        //Metodo para modifcar nombre roles
         [HttpPost]
-        public JsonResult asignarpermisos(string json)
+        public JsonResult modificarrol(string rol, string nombrerolnuevo)
         {
-            // creo un item para guardar el Json 
-            var _permisos=JArray.Parse(json);         
-            //Verifico que todos los campos no sean nulos
-            if (_permisos == null)
+
+            System.Diagnostics.Debug.WriteLine("aqui1");
+            System.Diagnostics.Debug.WriteLine(nombrerolnuevo);
+            System.Diagnostics.Debug.WriteLine(rol);
+
+            if (rol == null && nombrerolnuevo == null)
             {
                 //Creo el codigo de error de respuesta
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
@@ -67,11 +93,108 @@ namespace BOReserva.Controllers
             }
             //instancio el manejador de sql
             manejadorSQL sql = new manejadorSQL();
+            //Realizo el insert y Guardo la respuesta de mi metodo sql en un bool
+            bool respuesta = sql.ModificarrRol(rol, nombrerolnuevo);
+            //envio una respuesta dependiendo del resultado del insert
+            return (Json(respuesta, JsonRequestBehavior.AllowGet));
+
+
+        }
+        //Metodo para asignar permisos a los roles
+        [HttpPost]
+        public JsonResult asignarpermisos(string json)
+        {
+
+            manejadorSQL sql = new manejadorSQL();
+
+            CListaGenerica<CModulo_detallado> listaPermisosAsignar = new CListaGenerica<CModulo_detallado>();
+
+            // creo un item para guardar el Json 
+            var _permisos=JArray.Parse(json);
+
+
+            // Si es mayor que uno , Significa que hay al menos un permiso 
+            if (_permisos.Count() >= 1) {
+
+                for (int i=1; i < _permisos.Count(); i++)
+                {
+
+                    sql.insertarPermisosRol(_permisos[0].ToString(), _permisos[i].ToString());
+
+                }
+                    
+            }
+                       
+            //La posicion 0 devolvera el Rol a insertar
+
+            //Verifico que todos los campos no sean nulos
+            if (_permisos == null)
+            {
+                //Creo el codigo de error de respuesta
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error               
+                String error = "Error, campo obligatorio vacio";
+                //Retorno el error                
+                return Json(error);
+            }
             //Realizo el consulto y Guardo la respuesta de mi metodo sql 
             //sql.consultarPermisos(_permisos);
  
             //envio el resultado de la consulta
             return (Json(true, JsonRequestBehavior.AllowGet));
+
+        }
+        //Metodo para Eliminar permiso a un Rol
+        [HttpPost]
+        public JsonResult quitarPermisoRol(string _nombrerol, string _nombrepermiso)
+        {
+            CRoles model = new CRoles();
+            model.Nombre_rol = _nombrerol;
+            CModulo_detallado permiso = new CModulo_detallado();
+            permiso.Nombre = _nombrepermiso;
+            //Verifico que todos los campos no sean nulos
+            if (model.Nombre_rol == null || permiso.Nombre== null)
+            {
+                //Creo el codigo de error de respuesta
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error               
+                String error = "Error, campo obligatorio vacio";
+                //Retorno el error                
+                return Json(error);
+            }
+            //instancio el manejador de sql
+            manejadorSQL sql = new manejadorSQL();
+            //Elimino y Guardo la respuesta de mi metodo sql en un bool
+            bool respuesta = sql.quitarPermisoRol(model,permiso);
+            //envio una respuesta dependiendo del resultado sql
+            return (Json(respuesta, JsonRequestBehavior.AllowGet));
+
+
+        }       
+        //Metodo para Eliminar roles
+        [HttpPost]
+        public JsonResult eliminarRol(string _nombrerol)
+        {
+            CRoles model = new CRoles();
+            model.Nombre_rol = _nombrerol;
+
+            //Verifico que todos los campos no sean nulos
+            if (model.Nombre_rol == null)
+            {
+                //Creo el codigo de error de respuesta
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error               
+                String error = "Error, campo obligatorio vacio";
+                //Retorno el error                
+                return Json(error);
+            }
+            //instancio el manejador de sql
+            manejadorSQL sql = new manejadorSQL();
+            //Elimino y Guardo la respuesta de mi metodo sql en un bool
+            bool respuesta = sql.eliminarRol(model);
+            //envio una respuesta dependiendo del resultado sql
+            return (Json(respuesta, JsonRequestBehavior.AllowGet));
+
 
         }
         //Metodo para consultar permisos de modulo
@@ -111,7 +234,39 @@ namespace BOReserva.Controllers
              return (Json(_nombrePermiso, JsonRequestBehavior.AllowGet));
         }
 
- 
+        //Metodo para consultar permisos que no tiene asignado el rol
+        [HttpPost]
+        public JsonResult consultarLosPermisosNoAsignados(string nombre_rol)
+        {
+            //Verifico que todos los campos no sean nulos
+            if (nombre_rol == null)
+            {
+                //Creo el codigo de error de respuesta
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error               
+                String error = "Error, campo obligatorio vacio";
+                //Retorno el error                
+                return Json(error);
+            }
+            //instancio el manejador de sql
+            manejadorSQL sql = new manejadorSQL();
+            
+            //Instancio y coloco el nombre en el objeto
+            CRoles _rol = new CRoles();
+            _rol.Nombre_rol = nombre_rol;
+            //Instancio y coloco el nombre en el objeto
+            CListaGenerica<CModulo_detallado> _permisos= new CListaGenerica<CModulo_detallado>();
+            //Realizo la consulta y Guardo la respuesta de mi metodo sql 
+            _permisos = sql.consultarLosPermisosNoAsignados(_rol);
+            var _nombrePermiso = new List<object>();
+            foreach (var permiso in _permisos)
+            {
+                _nombrePermiso.Add(permiso.Nombre);
+                System.Diagnostics.Debug.WriteLine(permiso.Nombre);
+            }
+            //envio el resultado de la consulta
+            return (Json(_nombrePermiso, JsonRequestBehavior.AllowGet));
+        }
 
 	}
 }

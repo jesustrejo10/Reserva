@@ -1,4 +1,4 @@
-﻿$("#siguiente").click(function (e) {
+﻿/*$("#siguiente").click(function (e) {
     e.preventDefault();
     var url = '/gestion_boletos/M05_DatosUsuario';
     var method = 'GET';
@@ -40,4 +40,4 @@ $("#cancel").click(function (e) {
                 alert(errorThrown);
             }
         });
-});
+});*/

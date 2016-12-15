@@ -1,4 +1,4 @@
-
+@model List<BOReserva.Models.gestion_roles.CRoles>
 
 <div class="row">
     <link rel="stylesheet" href="~/Content/plugins/datatables/dataTables.bootstrap.css">
@@ -10,13 +10,14 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="VisualizarRol" class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>Nombre</th>
                             <th>Modulo</th>
-                            
+
                             <th>Acceso a</th>
+                            <th>Accion</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -24,24 +25,36 @@
                         {
                             foreach (var item in Model)
                             {
-                                String disponibilidad;
-                                if (item._disponibilidad == 1) { disponibilidad = "Disponible"; } else { disponibilidad = "No disponible"; }
-
-                                <tr id="@item._id">
-                                    <td>@item._nombre</td>
-                                    <td>@item._modelo</td>
-                                    <td>@Acceso</td>
+                                <tr id="@item.Nombre_rol">
+                                    <td>@item.Nombre_rol</td>
+                                    <!---<td>  falta el arroba           item.Menu.obtenerUnObjetoDeLaLista(0)</td>-->
                                     <td>
-                                        @*<a href="#"> <i class="fa fa-eye clasedeprueba"></i></a>*@
-                                        <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>
-                                        @if (item._disponibilidad == 1)
+                                        <table>
+                                            @foreach (var item2 in item.Menu)
+                                            {
+                                                <tr>@item2.Nombre    </tr>
+                                                <br>}
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table>
+                                            @foreach (var item2 in item.Permisos)
+                                            {
+                                                <tr>@item2.Nombre 
+                                            <!--<a href="#" id="@item2.Nombre" title="Eliminar Permiso" class="eliminarpermiso"><i class="fa fa-times eliminarpermiso"></i></a>--></tr>
+                                                <br>}
+                                        </table>
+                                    </td>
+                                    <td class="center">
+                                        @if (@item.Nombre_rol != "Administrador" )
                                         {
-                                            <a href="#" title="Deshabilitar"><i class="fa fa-times deshabilitar"></i></a>
+                                            <a href="#" title="Modificar Rol"><i class="fa fa-pencil modificar"></i></a>
                                         }
-                                        else
+                                        @if (@item.Nombre_rol != "Administrador" && @item.Nombre_rol != "Cargador" && @item.Nombre_rol != "Operador" && @item.Nombre_rol != "Cliente" && @item.Nombre_rol != "Anonimo")
                                         {
-                                            <a href="#" title="Habilitar"><i class="fa fa-check habilitar"></i></a>
+                                        <a href="#"  title="Eliminar Rol"><i class="fa fa-times eliminar"></i></a>
                                         }
+
                                     </td>
                                 </tr>
                             }
@@ -55,7 +68,7 @@
                         <tr>
                             <th>Nombre</th>
                             <th>Modulo</th>
-                           
+
                             <th>Acceso a</th>
                         </tr>
                     </tfoot>
@@ -69,87 +82,103 @@
 </div>
 <!-- /.row -->
 
+
+
+
+<script src="~/Content/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
 <script language="javascript" type="text/javascript">
-
-
+   
+    table = $('#VisualizarRol').DataTable();
+    
+    table = $('#example1').DataTable();
     $(".modificar").click(function () {
-        console.log("hola");
         var identificador = $(this).parent().parent().parent().attr("id");
+        console.log(identificador);
         jQuery.ajax({
             type: "GET",
-            url: "/gestion_aviones/M02_ConsultarAvion",
-            data: { id: identificador }
+            url: "/gestion_roles/M13_ModificarRol",
+            data: { _rolnombre: identificador }
         }).done(function (data) {
             $("#contenido").empty();
             $("#contenido").append(data);
         }).fail(function () {
-
+            alert(data);
         });
 
 
     });
 
 
-    $(".deshabilitar").click(function () {
-        console.log("hola");
-        var identificador = $(this).parent().parent().parent().attr("id");
-        jQuery.ajax({
-            type: "POST",
-            url: "/gestion_aviones/deshabilitarAvion",
-            data: { id: identificador }
-        }).done(function (data) {
-            var url = '/gestion_aviones/M02_VisualizarAviones';
-            var method = 'GET';
-            var data = '';
-            $.ajax(
-                {
-                    url: url,
-                    type: method,
-                    data: data,
-                    success: function (data, textStatus, jqXHR) {
 
-                        $("#contenido").empty();
-                        $("#contenido").append(data);
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        alert(errorThrown);
-                    }
-                });
-        }).fail(function () {
-            alert("Error en la base de datos");
-        });
-    });
+    $(".eliminar").click(function () {
+        var r = confirm("Esta función no podrá ser revertida, ¿Está seguro de que desea continuar?")
+        if (r) {
+            var identificador = $(this).parent().parent().parent().attr("id");
+            jQuery.ajax({
+                type: "POST",
+                url: "/gestion_roles/eliminarRol",
+                data: { _nombrerol: identificador }
+            }).done(function (data) {
+                var url = '/gestion_roles/M13_VisualizarRol';
+                var method = 'GET';
+                var data = '';
+                $.ajax(
+                    {
+                        url: url,
+                        type: method,
+                        data: data,
+                        success: function (data, textStatus, jqXHR) {
 
-    $(".habilitar").click(function () {
-        console.log("hola");
-        var identificador = $(this).parent().parent().parent().attr("id");
-        jQuery.ajax({
-            type: "POST",
-            url: "/gestion_aviones/habilitarAvion",
-            data: { id: identificador }
-        }).done(function (data) {
-            var url = '/gestion_aviones/M02_VisualizarAviones';
-            var method = 'GET';
-            var data = '';
-            $.ajax(
-                {
-                    url: url,
-                    type: method,
-                    data: data,
-                    success: function (data, textStatus, jqXHR) {
-
-                        $("#contenido").empty();
-                        $("#contenido").append(data);
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        alert(errorThrown);
-                    }
-                });
-        }).fail(function () {
-            alert("Error en la base de datos");
-        });
-    });
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+            }).fail(function (data) {
+                alert(data);
+            });
+    
+        } });
 
 
+    $(".eliminarpermiso").click(function () {
+        var r = confirm("Esta función no podrá ser revertida, ¿Está seguro de que desea continuar?")
+        if (r) {
+            var nombreRol = $(this).parent().parent().parent().attr("id");
+            var nombrePermiso = $(this).parent().attr("id");
+            jQuery.ajax({
+                type: "POST",
+                url: "/gestion_roles/quitarPermisoRol",
+                data: { _nombrerol: nombreRol, _nombrepermiso: nombrePermiso }
+            }).done(function (data) {
+                var url = '/gestion_roles/M13_VisualizarRol';
+                var method = 'GET';
+                var data = '';
+                $.ajax(
+                    {
+                        url: url,
+                        type: method,
+                        data: data,
+                        success: function (data, textStatus, jqXHR) {
+
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+            }).fail(function (data) {
+                alert(data);
+            });
+        }});
 </script>
 
+<style>
+.eliminarpermiso{float:right;}
+
+</style>

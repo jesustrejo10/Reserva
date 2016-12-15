@@ -204,6 +204,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\gestion_automovilesController.cs" />
+    <Compile Include="Controllers\gestion_crucerosController.cs" />
     <Compile Include="Controllers\gestion_avionesController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -217,7 +218,9 @@
     <Compile Include="Controllers\gestion_rolesController.cs" />
     <Compile Include="Controllers\gestion_ruta_comercialController.cs" />
     <Compile Include="Controllers\gestion_usuariosController.cs" />
+    <Compile Include="Controllers\gestion_vueloController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\List.cs" />
     <Compile Include="DataAccess\Model\Connection.cs" />
     <Compile Include="DataAccess\Model\ConexionUtil.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -233,24 +236,58 @@
     <Compile Include="Models\gestion_aviones\CAgregarAvion.cs" />
     <Compile Include="Models\gestion_aviones\CAvion.cs" />
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
+    <Compile Include="Models\gestion_cruceros\CGestion_cabina.cs" />
+    <Compile Include="Models\gestion_cruceros\CGestion_camarote.cs" />
+    <Compile Include="Models\gestion_cruceros\CGestion_crucero.cs" />
+    <Compile Include="Models\gestion_cruceros\CGestion_itinerario.cs" />
+    <Compile Include="Models\gestion_cruceros\ConexionBD.cs" />
+    <Compile Include="Models\gestion_cruceros\RecursosCruceros.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RecursosCruceros.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\gestion_cruceros\VistaListaCrucero.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cgestion_seguridad_ingreso.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cvalidar_bloqueo_exception.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cvalidar_status_exception.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cvalidar_usuario_Exception.cs" />
     <Compile Include="Models\gestion_aviones\CModificarAvion.cs" />
+    <Compile Include="Models\gestion_boletos\CReserva.cs" />
     <Compile Include="Models\gestion_boletos\CBoleto.cs" />
     <Compile Include="Models\gestion_boletos\CBuscarVuelo.cs" />
     <Compile Include="Models\gestion_comida_vuelo\CAgregarComida.cs" />
     <Compile Include="Models\gestion_boletos\CLugar.cs" />
+    <Compile Include="Models\gestion_boletos\CModificarBoleto.cs" />
     <Compile Include="Models\gestion_boletos\CPasajero.cs" />
+    <Compile Include="Models\gestion_boletos\CRuta.cs" />
     <Compile Include="Models\gestion_boletos\CVisualizarBoleto.cs" />
     <Compile Include="Models\gestion_boletos\CVuelo.cs" />
+    <Compile Include="Models\gestion_check_in\CBoardingPass.cs" />
+    <Compile Include="Models\gestion_check_in\CBoleto.cs" />
+    <Compile Include="Models\gestion_check_in\CCheckIn.cs" />
+    <Compile Include="Models\gestion_check_in\CDetalleBoleto.cs" />
+    <Compile Include="Models\gestion_check_in\CEquipaje.cs" />
+    <Compile Include="Models\gestion_check_in\CLugar.cs" />
+    <Compile Include="Models\gestion_check_in\CPasajero.cs" />
+    <Compile Include="Models\gestion_check_in\CRuta.cs" />
+    <Compile Include="Models\gestion_check_in\CVisualizarBoleto.cs" />
+    <Compile Include="Models\gestion_check_in\CVuelo.cs" />
+    <Compile Include="Models\gestion_comida_vuelo\CComida.cs" />
+    <Compile Include="Models\gestion_comida_vuelo\CEditarComida.cs" />
     <Compile Include="Models\gestion_hoteles\CGestionHoteles_CrearHotel.cs" />
+    <Compile Include="Models\gestion_hoteles\CGestionHoteles_EditarHotel.cs" />
+    <Compile Include="Models\gestion_hoteles\CGestionHoteles_SelectCiudadModel.cs" />
+    <Compile Include="Models\gestion_hoteles\CGestionHoteles_SelectEstrellasModel.cs" />
+    <Compile Include="Models\gestion_hoteles\CGestionHoteles_SelectPaisModel.cs" />
+    <Compile Include="Models\gestion_hoteles\CHotel.cs" />
     <Compile Include="Models\gestion_lugares\CLugarModelo.cs" />
     <Compile Include="Models\gestion_ofertas\CAgregarOferta.cs" />
     <Compile Include="Models\gestion_ofertas\CAgregarPaquete.cs" />
+    <Compile Include="Models\gestion_ofertas\CConsultar.cs" />
+    <Compile Include="Models\gestion_ofertas\CModificarOferta.cs" />
     <Compile Include="Models\gestion_ofertas\COferta.cs" />
     <Compile Include="Models\gestion_ofertas\CPaquete.cs" />
+    <Compile Include="Models\gestion_ofertas\CVisualizarOferta.cs" />
     <Compile Include="Models\gestion_roles\CListaGenerica.cs" />
     <Compile Include="Models\gestion_roles\CModulo_detallado.cs" />
     <Compile Include="Models\gestion_roles\CModulo_general.cs" />
@@ -259,14 +296,15 @@
     <Compile Include="Models\gestion_ruta_comercial\CGestion_ruta.cs" />
     <Compile Include="Models\gestion_ruta_comercial\CRuta.cs" />
     <Compile Include="Models\gestion_usuarios\AgregarUsuario.cs" />
-    <Compile Include="Models\gestion_usuarios\ConexionBD.cs" />
+    <Compile Include="Servicio\Servicio_Usuarios\ConexionBD.cs" />
     <Compile Include="Models\gestion_usuarios\CUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\Encriptar.cs" />
     <Compile Include="Models\gestion_usuarios\ExceptionBD.cs" />
     <Compile Include="Models\gestion_usuarios\ExceptionM12Reserva.cs" />
+    <Compile Include="Models\gestion_usuarios\ListaRoles.cs" />
     <Compile Include="Models\gestion_usuarios\ListarUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\Parametro.cs" />
-    <Compile Include="Models\gestion_usuarios\PersistenciaUsuario.cs" />
+    <Compile Include="Servicio\Servicio_Usuarios\PersistenciaUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\RecursoBD.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -281,10 +319,18 @@
     <Compile Include="Models\Util.cs" />
     <Compile Include="Models\gestion_restaurantes\CRestauranteModeloVista.cs" />
     <Compile Include="Models\gestion_restaurantes\CRestauranteModelo.cs" />
+    <Compile Include="MySQLException.cs" />
+    <Compile Include="Models\gestion_vuelo\CVuelo.cs" />
+    <Compile Include="Models\gestion_vuelo\CCrear_Vuelo.cs" />
+    <Compile Include="Models\gestion_vuelo\CVueloModificar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicio\M01SQL.cs" />
     <Compile Include="Servicio\manejadorSQL.cs" />
+    <Compile Include="Servicio\Servicio_Vuelos\manejadorSQL_Vuelos.cs" />
     <Compile Include="Servicio\Servicio_Boletos\manejadorSQL_Boletos.cs" />
+    <Compile Include="Servicio\Servicio_Boletos\manejadorSQL_Check.cs" />
+    <Compile Include="Servicio\Servicio_Hoteles\CManejadorSQL_Hoteles.cs" />
+    <Compile Include="Servicio\Servicio_Rutas\CManejadorSQL_Rutas.cs" />
     <Compile Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx.cs">
       <DependentUpon>GestionDeAutomoviles.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -361,6 +407,7 @@
     <Content Include="Content\dist\js\demo.js" />
     <Content Include="Content\dist\js\pages\dashboard.js" />
     <Content Include="Content\dist\js\pages\dashboard2.js" />
+    <Content Include="Content\M24_css\style_module.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -467,7 +514,6 @@
     <Content Include="Scripts\Scripts_Boletos\DatosUsuario.js" />
     <Content Include="Scripts\Scripts_Boletos\DetalleBoleto.js" />
     <Content Include="Scripts\Scripts_Boletos\BuscarVuelo.js" />
-    <Content Include="Scripts\Scripts_Boletos\VerVuelos.js" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Scripts\Scripts_Boletos\DetalleVuelo.js" />
@@ -481,18 +527,51 @@
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\Scripts_Automoviles\llamadas_comunes_automoviles.js" />
     <Content Include="Scripts\Scripts_Aviones\llamadas_generales.js" />
-    <Content Include="Scripts\Scripts_CheckIn\BoardingPass.js" />
+    <Content Include="Scripts\Scripts_Hoteles\editar_hotel.js" />
     <Content Include="Scripts\Scripts_CheckIn\M05_CheckIn.js" />
-    <Content Include="Scripts\Scripts_CheckIn\M05_Equipaje.js" />
-    <Content Include="Scripts\Scripts_CheckIn\M05_VerBoletosCheckIn.js" />
-    <Content Include="Scripts\Scripts_CheckIn\M05_VerDetalleBoleto.js" />
+    <Content Include="Scripts\Scripts_ComidaVuelo\llamadas_generales.js" />
     <Content Include="Scripts\Scripts_Hoteles\llamadas_generales_hoteles.js" />
+    <Content Include="Scripts\Scripts_Vuelos\llamadas_generales_Vuelos.js" />
+    <Content Include="Views\dist\css\AdminLTE.css" />
+    <Content Include="Views\dist\css\AdminLTE.min.css" />
+    <Content Include="Views\dist\css\skins\skin-black-light.css" />
+    <Content Include="Views\dist\css\skins\skin-black-light.min.css" />
+    <Content Include="Views\dist\css\skins\skin-black.css" />
+    <Content Include="Views\dist\css\skins\skin-black.min.css" />
+    <Content Include="Views\dist\css\skins\skin-blue-light.css" />
+    <Content Include="Views\dist\css\skins\skin-blue-light.min.css" />
+    <Content Include="Views\dist\css\skins\skin-blue.css" />
+    <Content Include="Views\dist\css\skins\skin-blue.min.css" />
+    <Content Include="Views\dist\css\skins\skin-green-light.css" />
+    <Content Include="Views\dist\css\skins\skin-green-light.min.css" />
+    <Content Include="Views\dist\css\skins\skin-green.css" />
+    <Content Include="Views\dist\css\skins\skin-green.min.css" />
+    <Content Include="Views\dist\css\skins\skin-purple-light.css" />
+    <Content Include="Views\dist\css\skins\skin-purple-light.min.css" />
+    <Content Include="Views\dist\css\skins\skin-purple.css" />
+    <Content Include="Views\dist\css\skins\skin-purple.min.css" />
+    <Content Include="Views\dist\css\skins\skin-red-light.css" />
+    <Content Include="Views\dist\css\skins\skin-red-light.min.css" />
+    <Content Include="Views\dist\css\skins\skin-red.css" />
+    <Content Include="Views\dist\css\skins\skin-red.min.css" />
+    <Content Include="Views\dist\css\skins\skin-yellow-light.css" />
+    <Content Include="Views\dist\css\skins\skin-yellow-light.min.css" />
+    <Content Include="Views\dist\css\skins\skin-yellow.css" />
+    <Content Include="Views\dist\css\skins\skin-yellow.min.css" />
+    <Content Include="Views\dist\css\skins\_all-skins.css" />
+    <Content Include="Views\dist\css\skins\_all-skins.min.css" />
+    <Content Include="Views\dist\img\avatar.png" />
+    <Content Include="Views\dist\img\avatar04.png" />
+    <Content Include="Views\dist\img\avatar2.png" />
+    <Content Include="Views\dist\img\avatar3.png" />
     <Content Include="Scripts\Scripts_Ofertas\llamadas_generales.js" />
     <Content Include="Scripts\Scripts_Restaurantes\llamadas_generales.js" />
+    <Content Include="Scripts\Scripts_Rutas\llamadas_generales_ruta.js" />
     <Content Include="Scripts\select2\css\select2.min.css" />
     <Content Include="Scripts\select2\js\i18n\en.js" />
     <Content Include="Scripts\select2\js\i18n\es.js" />
     <Content Include="Scripts\select2\js\select2.min.js" />
+    <Content Include="Scripts\Scripts_Usuarios\llamadas_generales.js" />
     <Content Include="Views\dist\img\avatar5.png" />
     <Content Include="Views\gestion_automoviles\css\style_module.css" />
     <Content Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx" />
@@ -505,13 +584,11 @@
     <Content Include="Views\gestion_automoviles\M08_VisualizarAutomoviles.html" />
     <Content Include="Views\gestion_aviones\M02_GestionAviones.html" />
     <Content Include="Views\gestion_aviones\placeholder.html" />
-    <Content Include="Views\gestion_comida_vuelo\M06_AgregarEditarComida.html" />
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarPorVuelo.html" />
     <Content Include="Views\gestion_comida_vuelo\M06_ConsultarComidas.html" />
     <Content Include="Views\gestion_comida_vuelo\placeholder.html" />
-    <Content Include="Views\gestion_cruceros\css\style_module.css" />
     <Content Include="Views\gestion_cruceros\js\module.js" />
-    <Content Include="Views\gestion_cruceros\M24_GestionCruceros.html" />
+    <Content Include="Views\gestion_cruceros\placeholder.html" />
     <Content Include="Views\gestion_equipaje_perdido\placeholder.html" />
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Actualizar.html" />
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Agregar.html" />
@@ -519,8 +596,6 @@
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Deshabilitar.html" />
     <Content Include="Views\gestion_hoteles\placeholder.html" />
     <Content Include="Views\gestion_ofertas\placeholder.html" />
-    <Content Include="Views\gestion_restaurantes\M10_GestionRestaurantes.html" />
-    <Content Include="Views\gestion_restaurantes\placeholder.html" />
     <Content Include="Views\gestion_roles\M13_Roles.html" />
     <Content Include="Views\gestion_roles\placeholder.html" />
     <Content Include="Views\gestion_ruta_comercial\placeholder.html" />
@@ -1372,21 +1447,31 @@
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Crear.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_ModificarHotel.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Desactivar.cshtml" />
-    <Content Include="Views\gestion_comida_vuelo\M06_AgregarComida.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarPorVuelo.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_EditarComida.cshtml" />
-    <Content Include="Views\gestion_comida_vuelo\M06_AgregarEditarComida.cshtml" />
     <Content Include="Views\gestion_seguridad_ingreso\M01_Login.cshtml" />
     <Content Include="Views\gestion_seguridad_ingreso\M01_RecuperarContrasenna.cshtml" />
     <Content Include="Views\gestion_usuarios\M12_Index.cshtml" />
     <Content Include="Views\gestion_usuarios\M12_AgregarUsuario.cshtml" />
     <Content Include="Views\gestion_usuarios\M12_ModificarUsuario.cshtml" />
     <Content Include="Views\gestion_usuarios\_Layout.cshtml" />
+    <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Crear.cshtml" />
+    <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Visualizar.cshtml" />
+    <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Mostrar.cshtml" />
+    <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Modificar.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_GestionCruceros.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_ListarCruceros.cshtml" />
+    <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Visualizar.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\gestion_comida_vuelo\M06_VisualizarVuelosComidas.cshtml" />
+    <Content Include="Views\gestion_restaurantes\M10_GestionRestaurantes_Modificar.cshtml" />
+    <Content Include="Views\gestion_roles\M13_ModificarRol.cshtml" />
+    <Content Include="Views\gestion_comida_vuelo\M06_AgregarComida.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Visualizar.cshtml" />
     <Content Include="Views\gestion_boletos\M05_VisualizarBoletos.cshtml" />
     <Content Include="Views\gestion_boletos\M05_VerReserva.cshtml" />
     <Content Include="Views\gestion_check_in\M05_CheckIn.cshtml" />
@@ -1402,26 +1487,39 @@
     <Content Include="Views\gestion_ruta_comercial\VisualizarRutasComerciales.cshtml" />
     <Content Include="Views\gestion_ruta_comercial\ModificarRutasComerciales.cshtml" />
     <Content Include="Views\gestion_ruta_comercial\AgregarRutasComerciales.cshtml" />
-    <Content Include="Views\gestion_ruta_comercial\DetallesRutasComerciales.cshtml" />
+    <Content Include="Views\gestion_ruta_comercial\DetalleRutasComerciales.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_AgregarOferta.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_AgregarPaquete.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_VisualizarOferta.cshtml" />
-    <Content Include="Views\gestion_ofertas\M11_ConsultarPaquete.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_VisualizarPaquete.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_GestionOfertas.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_ModificarOferta.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_ModificarPaquete.cshtml" />
     <Content Include="Views\gestion_roles\M13_AgregarRol.cshtml" />
+    <Content Include="Views\gestion_boletos\M05_ModificarBoleto.cshtml" />
+    <Content Include="Views\gestion_boletos\M05_VisualizarReservasPasajero.cshtml" />
+    <Content Include="Views\gestion_boletos\M05_DetalleVueloReserva.cshtml" />
+    <Content Include="Views\gestion_boletos\M05_DetallePrueba.cshtml" />
+    <Content Include="Views\gestion_boletos\M05_BoletoCreadoReserva.cshtml" />
+    <Content Include="Views\gestion_boletos\M05_DetalleVuelo.cshtml" />
+    <Content Include="Views\gestion_boletos\M05_DetalleBoleto.cshtml" />
+    <Content Include="Views\gestion_boletos\M05_BoletoCreado.cshtml" />
+    <Content Include="Views\gestion_check_in\M05_RegistroEquipaje.cshtml" />
+    <Content Include="Views\gestion_check_in\M05_VerPasesAbordaje.cshtml" />
+    <Content Include="Views\gestion_comida_vuelo\M06_VisualizarComidas.cshtml" />
     <Content Include="Views\gestion_roles\M13_VisualizarRol.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_DetallePaquete.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_DetalleOferta.cshtml" />
+    <Content Include="Views\gestion_ofertas\M11_ConsultarOferta.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_AgregarCabinas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\Scripts_ComidaVuelo\" />
-    <Folder Include="Views\dist\css\skins\" />
     <Folder Include="Views\dist\img\credit\" />
     <Folder Include="Views\dist\js\pages\" />
-    <Folder Include="Views\gestion_comidavuelo\" />
     <Folder Include="Views\gestion_roles\css\" />
     <Folder Include="Views\gestion_roles\js\" />
+    <Folder Include="Views\Prueba\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap\css\bootstrap.css.map" />
@@ -1485,15 +1583,16 @@
     <Content Include="Views\gestion_boletos\M05_VerVuelos.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\gestion_boletos\M05_DetalleVuelo.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\gestion_boletos\M05_DatosUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\gestion_boletos\M05_DetalleBoleto.cshtml" />
+    <Content Include="Views\gestion_boletos\M05_DetalleBoletoReserva.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Models\gestion_cruceros\RecursosCruceros.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecursosCruceros.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Models\gestion_usuarios\RecursoBD.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoBD.Designer.cs</LastGenOutput>
@@ -1501,6 +1600,7 @@
     <EmbeddedResource Include="Models\gestion_usuarios\RecursoUsuario.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoUsuario.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -1524,7 +1624,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50429/</IISUrl>
+          <IISUrl>http://localhost:6580/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

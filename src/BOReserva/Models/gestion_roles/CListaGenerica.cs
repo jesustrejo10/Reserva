@@ -12,11 +12,17 @@ namespace BOReserva.Models.gestion_roles
     {
         //Instancio 
         private List<T> _listaGenerica;
+             
+        private List<CModulo_detallado> _listaGenericaCModuloDetallado;
+        private List<CModulo_general> _listaGenericaCModuloGeneral;
 
 
+        
         public CListaGenerica() 
         {
             _listaGenerica = new List<T>();
+            _listaGenericaCModuloDetallado  = new List<CModulo_detallado>();
+            _listaGenericaCModuloGeneral    = new List<CModulo_general>();
         }
 
         //Método para agregar un elemento a la lista
@@ -35,6 +41,26 @@ namespace BOReserva.Models.gestion_roles
         {
             return _listaGenerica.GetEnumerator();
         }
+
+
+        public int sizeListaDetallada(CListaGenerica<CModulo_detallado> elemento)
+        {
+            return _listaGenerica.Count;
+        }
+
+        public T obtenerUnObjetoDeLaLista (int indiceLista ){
+
+
+
+            T objeto = _listaGenerica[indiceLista];
+
+
+             return objeto;
+        }
+
+
+
+
 
         /// <summary>
         /// Método para obtener el enumerador de la lista

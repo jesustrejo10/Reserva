@@ -1,4 +1,4 @@
-﻿@model List<FOReserva.Models.Restaurantes.CRestaurantModel>
+@model List<FOReserva.Models.Restaurantes.CRestaurantModel>
 
 @{
     ViewBag.Title = "Resultados Restaurantes";
@@ -14,30 +14,34 @@
     {
 
         <!-- FEATURED GRID -->
-        using (Html.BeginForm("reservar_restaurant", "gestion_reserva_restaurante", FormMethod.Post))
-        {
-            <div class="row">
-                <input type="hidden" name="id_rest" id="id_rest" value="0" />
-                @foreach (var item in Model)
+
+        <div class="row">
+
+            @foreach (var item in Model)
+            {
+                using (Html.BeginForm("reservar_restaurant", "gestion_reserva_restaurante", FormMethod.Post, new { @class= "rest_form"}))
                 {
                     <div class="col-md-4 col-sm-4">
                         <div class="price-clean">
-
+                            <input type="hidden" name="id_rest" value="@item.Id" />
                             <div class="image-restaurant-search" style="height: 150px;  background-image: url('../Images/restaurant_generic.jpg'); background-repeat: no-repeat;background-size: cover; padding-top: 50px;">
                                 <h3>@item.Name</h3>
                             </div>
                             <hr />
-                            <p>@item.Addres <b>@item.CityName</b>.</p>
+                            <p>@item.Addres </p>
+                            <p><b>@item.CityName</b></p>
                             <hr />
-                            <input type="submit" id="@item.Id" value="Reservar" class="btn btn-primary boton">
-                            <!--<a href="detail_restaurant_reservation.html" class="btn btn-3d btn-primary">Reservar</a>-->
+                            <input type="submit" value="Reservar" class="btn btn-primary">
                         </div>
                     </div>
+   
                 }
-            </div>
-        }
-
-
+            }
+           
+        </div>
     }
+
+
 }
+
 

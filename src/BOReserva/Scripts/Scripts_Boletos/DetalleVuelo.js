@@ -1,4 +1,4 @@
-﻿$("#detalleVuelo").click(function (e) {
+﻿/*$("#detalleVuelo").click(function (e) {
     e.preventDefault();
     var url = '/gestion_boletos/M05_DetalleVuelo';
     var method = 'GET';
@@ -40,4 +40,4 @@ $("#cancel").click(function (e) {
                 alert(errorThrown);
             }
         });
-});
+});*/
