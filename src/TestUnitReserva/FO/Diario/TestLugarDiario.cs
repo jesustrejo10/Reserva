@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using FOReserva.Models.Diarios;
 using FOReserva.Servicio;
-using FOReserva.Servicio.ManejadorSQLDiarios;
 using System.Diagnostics;
 using System.Data.SqlClient;
 

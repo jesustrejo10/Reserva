@@ -54,7 +54,6 @@ namespace TestUnitReserva.BO.gestion_aviones
             avion._matriculaAvion = "Hk900";
             Boolean resultadomatricularepetida = prueba.insertarAvion(avion);
             Assert.AreEqual(resultadomatricularepetida, false);
-
         }
         /// <summary>
         /// Pruebas para verificar que la lista que se muestra en el visualizar no venga vacía
@@ -302,6 +301,5 @@ namespace TestUnitReserva.BO.gestion_aviones
         {
             Assert.That(() => controlador.modificarAvion(null), Throws.TypeOf<NullReferenceException>());
         }
-
     }
 }

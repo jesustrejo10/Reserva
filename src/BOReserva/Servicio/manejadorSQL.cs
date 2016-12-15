@@ -24,7 +24,7 @@ namespace BOReserva.Servicio
         //Inicializo el string de conexion en el constructor
         public manejadorSQL()
         {
-            stringDeConexion = "Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617a;";
+            stringDeConexion = "Data Source=localhost;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617a;";
         }
         //Atributo que ejecutara la conexion a la bd
         private SqlConnection conexion = null;
@@ -1617,6 +1617,11 @@ namespace BOReserva.Servicio
                 conexion.Close();
                 return ex.Message;
             }
+            catch (NullReferenceException ex)
+            {
+                conexion.Close();
+                return ex.Message;
+            }
         }
 
         /// <summary>
@@ -1641,6 +1646,11 @@ namespace BOReserva.Servicio
                 return "1";
             }
             catch (SqlException ex)
+            {
+                conexion.Close();
+                return ex.Message;
+            }
+            catch (NullReferenceException ex)
             {
                 conexion.Close();
                 return ex.Message;
@@ -1730,6 +1740,11 @@ namespace BOReserva.Servicio
                 conexion.Close();
                 return null;
             }
+            catch (NullReferenceException ex)
+            {
+                conexion.Close();
+                return null;
+            }
         }
 
         /// <summary>
@@ -1786,7 +1801,7 @@ namespace BOReserva.Servicio
         /// Método para borrar un vehículo de la base de datos
         /// </summary>
         /// <param name="matricula">Matrícula del vehículo a borrar</param>
-        /// <returns>Retorna 1 si se eliminó exitosamente y retorna 0 si no lo pudo hacer</returns>
+        /// <returns>Retorna 1 si se eliminó exitosamente y retorna la excepcion si no lo pudo hacer</returns>
         public String MBorrarvehiculoBD(String matricula)
         {
             try
@@ -1837,6 +1852,12 @@ namespace BOReserva.Servicio
                 conexion.Close();
                 return _ciudad;
             }
+
+            catch (NullReferenceException ex)
+            {
+                conexion.Close();
+                return ex.Message;
+            }
         }
 
         /// <summary>
@@ -1876,6 +1897,12 @@ namespace BOReserva.Servicio
                 conexion.Close();
                 return _lugar;
 
+            }
+
+            catch (NullReferenceException ex)
+            {
+                conexion.Close();
+                return ex.Message;
             }
         }
 
@@ -1948,6 +1975,12 @@ namespace BOReserva.Servicio
                 conexion.Close();
                 return fk;
             }
+
+            catch (NullReferenceException ex)
+            {
+                conexion.Close();
+                return fk;
+            }
         }
 
         /// <summary>
@@ -1970,6 +2003,12 @@ namespace BOReserva.Servicio
                 return "1";
             }
             catch (SqlException ex)
+            {
+                conexion.Close();
+                return ex.Message;
+            }
+
+            catch (NullReferenceException ex)
             {
                 conexion.Close();
                 return ex.Message;
@@ -2005,6 +2044,12 @@ namespace BOReserva.Servicio
             {
                 conexion.Close();
                 _ciudades.Add(ex.Message);
+                return _ciudades;
+            }
+
+            catch (NullReferenceException ex)
+            {
+                conexion.Close();
                 return _ciudades;
             }
         }
@@ -2045,6 +2090,12 @@ namespace BOReserva.Servicio
                 return i;
             }
             catch (SqlException ex)
+            {
+                conexion.Close();
+                return 1;
+            }
+
+            catch (NullReferenceException ex)
             {
                 conexion.Close();
                 return 1;
