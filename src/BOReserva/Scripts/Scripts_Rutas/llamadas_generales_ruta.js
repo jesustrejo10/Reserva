@@ -66,20 +66,21 @@ $("#VisualizarRutasComerciales").click(function (e) {
 });
 
 
-$("#m03DetalleRutas").click(function (e) {
-    e.preventDefault();
-    alert("Botón Editar");
-    $.ajax({
-        url: '/gestion_ruta_comercial/DetalleRutasComerciales',
-        data: '',
-        type: 'GET',
-        success: function (data) {
+$(document).ready(function () {
+    //e.preventDefault();
+    $(".m03DetalleRutas").click(function () {
+        var identificador = $(this).parent().parent().parent().attr("id");
+        jQuery.ajax({
+            type: "GET",
+            url: "/gestion_ruta_comercial/DetalleRutasComerciales",
+            data: { idRuta:identificador }//valor = es el nombre q recibes en el método es decir public ActionResult ModificarRutasComerciales(string valor)
+        }).done(function (data) {          
+
             $("#contenido").empty();
             $("#contenido").append(data);
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert(errorThrown);
-        }
+        }).fail(function () {
+            alert("No Funcionó")
+        });
     });
 });
 
@@ -157,4 +158,77 @@ $('#distanciaRuta').focusout(function () {
         $(this).val('');
         alert("Debe ingresar un valor mayor a cero");
     }
+});
+
+$(document).ready(function () {
+    //e.preventDefault();
+    $(".activar").click(function () {
+        var identificador = $(this).parent().parent().parent().attr("id");
+        jQuery.ajax({
+            type: "POST",
+            url: "/gestion_ruta_comercial/HabilitarRuta",
+            data: { idRuta: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+
+
+        }).done(function (data) {
+
+                //$("#sdssss").append(data);
+                var url1 = '/gestion_ruta_comercial/VisualizarRutasComerciales';
+                var method = 'GET';
+                var data1 = '';
+
+                $.ajax(
+                    {
+                        url: url1,
+                        type: method,
+                        data: data,
+                        success: function (data, textStatus, jqXHR) {
+
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+        }).fail(function () {
+            alert("no funciono")
+        });
+    });
+});
+
+
+$(document).ready(function () {
+    //e.preventDefault();
+    $(".desactivar").click(function () {
+        var identificador = $(this).parent().parent().parent().attr("id");
+        jQuery.ajax({
+            type: "POST",
+            url: "/gestion_ruta_comercial/InhabilitarRuta",
+            data: { idRuta: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+        }).done(function (data) {
+
+                //$("#sdssss").append(data);
+                var url1 = '/gestion_ruta_comercial/VisualizarRutasComerciales';
+                var method = 'GET';
+                var data1 = '';
+
+                $.ajax(
+                    {
+                        url: url1,
+                        type: method,
+                        data: data,
+                        success: function (data, textStatus, jqXHR) {
+
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+        }).fail(function () {
+            alert("no funciono")
+        });
+    });
 });

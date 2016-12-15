@@ -15,6 +15,9 @@ namespace TestUnitReserva.BO.gestion_restaurantes
     {
         manejadorSQL sql = new manejadorSQL();
 
+        /// <summary>
+        /// Prueba del servicio SQL para la consulta de restaurantes.
+        /// </summary>
         [Test]
         public void TestConsultarRestaurantes()
         {
@@ -27,6 +30,9 @@ namespace TestUnitReserva.BO.gestion_restaurantes
             Assert.IsInstanceOf(typeof(CRestauranteModelo), sql.consultarRestaurante(1));
         }
 
+        /// <summary>
+        /// Prueba del servicio SQL para la creación de restaurantes.
+        /// </summary>
         [Test]
         public void TestCrearRestaurantes()
         {
@@ -42,5 +48,28 @@ namespace TestUnitReserva.BO.gestion_restaurantes
             };
             Assert.IsTrue(sql.insertarRestaurante(prueba));
         }
+
+        /// <summary>
+        /// Prueba del servicio SQL para la modificación de restuarantes.
+        /// </summary>
+        [Test]
+        public void TestModificarRestaurantes()
+        {
+            var prueba = sql.consultarRestaurante().FirstOrDefault(x => x._nombre == "Restaurante de prueba"); //Debe existir al menos un restaurante de prueba
+            prueba._descripcion = "X"; //Forzando una modificación
+            Assert.IsTrue(sql.modificarRestaurante(prueba));
+        }
+
+        /// <summary>
+        /// Prueba del servicio SQL para la eliminación de restaurantes.
+        /// </summary>
+        [Test]
+        public void TestEliminarRestaurantes()
+        {
+            var prueba = sql.consultarRestaurante().FirstOrDefault(x => x._nombre == "Restaurante de prueba"); //Debe existir al menos un restaurante de prueba
+            Assert.IsTrue(sql.eliminarRestaurante(prueba._id));
+        }
+
+
     }
 }

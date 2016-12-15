@@ -41,7 +41,8 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+        
+        <!-- CIERRE DE SESION AUTOMATICO MODULO 1 INGRESO SEGURIDAD NO TOCAR-->
         <script src="../../Scripts/Scripts_Ingreso_Seguridad/Logout.js"></script>
 
     </head>
@@ -222,7 +223,10 @@
                             {
                                 if (i == "Gestion comida")
                                 {
-                            <li id="gestionComida"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar Nuevo</a></li>}
+                            <li id="gestionComida"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar</a></li>}
+
+                            
+
                           @*<li id="editarComida"><a href="#"><i class="fa fa-edit"></i>Editar</a></li>
                             <li id="gestionComidaVuelo"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar por Vuelo</a></li>*@
                                 if (i == "Editar comida")
@@ -380,14 +384,16 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
+
                             @foreach (string i in ((List<string>)Session["Permisos"]))
                             {
                               if (i == "Crear Hoteles")
                             {
-                            <li id="crearhotel"><a href="#"><i class="fa fa-plus-circle"></i>Crear Hotel</a></li>}
+                            <li id="crearhotel"><a href="#">Agregar</a></li>}
                               if (i == "Consultar Hotel")
                             { 
-                            <li id="consultarhotel"><a href="#"><i class="fa fa-search"></i>Visualizar Hoteles</a></li>}}
+                            <li id="consultarhotel"><a href="#">Visualizar</a></li>}}
+
                     <!-- MODULO DE BOLETOS AEREOS Y CHECK-IN -->
                 </ul>
 

@@ -8,7 +8,7 @@
     <div class="row">
 
         <div class="col-lg-12">
-            <center> ¡Reserva en los mejores restaurantes de tu ciudad!</center>
+            <center>&#161;Reserva en los mejores restaurantes de tu ciudad!</center>
         </div>
     </div>
     <!-- FORMULARIO PARA BUSQUEDA DE RESTAURANTE POR NOMBRE O CIUDAD -->
@@ -24,17 +24,17 @@
                                 <option value="1">Ciudad</option>
                                 <option value="2">Restaurante</option>
                             </select>
-                            <input type="text" id="name_rest" name="name_rest" class="form-control rest_inp" placeholder="¿Dónde quieres comer?" style="width:80%;" required>
+                            <input type="text" id="name_rest" name="name_rest" class="form-control rest_inp" placeholder="D&oacute;nde quieres comer?" style="width:80%;" required>
                             <!-- DIV OCULTOS  PARA VALIDACIONES-->
                             <div id="val_null" style="display: none;" class="has-error error">
-                                <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe seleccionar un tipo de búsqueda</p>
+                                <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe seleccionar un tipo de b&uacute;squeda</p>
                             </div>
                             <div id="name_empty" style="display: none;" class="has-error error">
                                 <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe escribir el nombre de un restaurante o Ciudad</p>
                             </div>
                 
                             <div id="name_format" style="display: none;" class="has-error error">
-                                <p><i class="fa fa-times-circle" aria-hidden="true"></i> El campo solo debe contener caracteres alfanuméricos</p>
+                                <p><i class="fa fa-times-circle" aria-hidden="true"></i> El campo solo debe contener caracteres alfanum&eacute;ricos y sin acentos</p>
                             </div>
                         </div>
 
@@ -53,7 +53,7 @@
 
       <div class="row" style="margin-top: 20px;">
             <div class="col-md-12 text-center">
-                 <center> <a class="btn btn-primary" href="@Url.Action("lista_reserva_restaurantes", "gestion_reserva_restaurante")">Mis Reservas</a></center>
+                 <center> <a class="link-rest" href="@Url.Action("lista_reserva_restaurantes", "gestion_reserva_restaurante")"> <i class="fa fa-cutlery" aria-hidden="true"></i>  Mis Reservas</a></center>
             </div>
         </div>
 </fieldset>
