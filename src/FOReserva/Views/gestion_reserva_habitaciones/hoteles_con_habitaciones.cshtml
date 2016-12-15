@@ -75,7 +75,8 @@
                         console.log(0)
                         if (proceso.CulminoCorrectamente) {
                             alert(proceso.Mensaje);
-                            cargarContenido('#CI', 'get', '/gestion_reserva_habitaciones/detalle_reserva', { "Codigo": proceso.Referencia })
+                            //cargarContenido('#CI', 'get', '/gestion_reserva_habitaciones/detalle_reserva', { "Codigo": proceso.Referencia })
+                            $("#regresarBuscador").trigger("click")
                         }else{
                             alert(proceso.Mensaje);
                         }
