@@ -5,13 +5,11 @@
 
     <link href="@Url.Content("~/Content/assets/css/layout-datatables.css")" rel="stylesheet" type="text/css" />
     <div>
-        <div class="col-xs-10 heading-title">
-            <h3> <span>Hoteles: <small>Hoteles con habitaciones disponibles.</small></span></h3>
-        </div>
-        <div class="col-xs-2">
-            <button id="regresarBuscador" type="button" class="btn btn-default pull-right">Regresar</button>
+        <div class="col-xs-12">
+            <button id="regresarBuscador" type="button" class="btn btn-default pull-right">Regresar</button>        
         </div>
     </div>
+
     if (hoteles.Count > 0)
     {
     <!-- HTML DATATABLES -->
@@ -75,7 +73,8 @@
                         console.log(0)
                         if (proceso.CulminoCorrectamente) {
                             alert(proceso.Mensaje);
-                            cargarContenido('#CI', 'get', '/gestion_reserva_habitaciones/detalle_reserva', { "Codigo": proceso.Referencia })
+                            //cargarContenido('#CI', 'get', '/gestion_reserva_habitaciones/detalle_reserva', { "Codigo": proceso.Referencia })
+                            $("#regresarBuscador").trigger("click")
                         }else{
                             alert(proceso.Mensaje);
                         }

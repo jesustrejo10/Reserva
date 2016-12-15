@@ -15,7 +15,12 @@ namespace FOReserva.Controllers
         [HttpGet]
         public ActionResult mis_reservas()
         {
-            var model = CReservaHabitacion.ReservasDeUsuario(usu_id: 1);
+            var user_id = 1;
+
+            if (Session["id_usuario"] != null && Session["id_usuario"] is int)
+                user_id = (int)Session["id_usuario"];
+
+            var model = CReservaHabitacion.ReservasDeUsuario(usu_id: user_id);
             return PartialView(model);
         }
 
@@ -54,7 +59,12 @@ namespace FOReserva.Controllers
         [HttpPost]
         public ActionResult realizar_reserva(Cvista_ReservarHabitacion reserva)
         {
-            reserva.UsuId = 1; // Usuario Actual
+            var user_id = 1;
+
+            if (Session["id_usuario"] != null && Session["id_usuario"] is int)
+                user_id = (int)Session["id_usuario"];
+
+            reserva.UsuId = user_id; // Usuario Actual
             var resultado = CReservaHabitacion.GenerarReserva(reserva);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }

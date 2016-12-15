@@ -1,4 +1,3 @@
-
 <div class="row">
     <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
 
@@ -14,7 +13,7 @@
                         <tr>
                             <th>Vuelo</th>
                             <th>Ciudad Origen</th>
-                            <th>Ciudad Destino</th>>
+                            <th>Ciudad Destino</th>
                             <th>Capacidad Turista/Ejecutiva/VIP</th>
                             <th>Opciones</th>
                         </tr>
@@ -64,14 +63,18 @@
 <script src="../../Content/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="../../Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
 
+
+
 <script language="javascript" type="text/javascript">
+
+    table = $('#example1').DataTable();
 
     $(".agregarvuelo").click(function () {
         console.log("hola");
         var identificador = $(this).parent().parent().parent().attr("id");
         jQuery.ajax({
             type: "GET",
-            url: "/gestion_comida_vuelo/M06_AgregarComidaVuelo",
+            url: "/gestion_vuelo/M04_GestionVuelo_Visualizar",
             data: { id: identificador }
         }).done(function (data) {
             $("#contenido").empty();
@@ -84,3 +87,4 @@
     });
 
 </script>
+
