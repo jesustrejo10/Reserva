@@ -12,6 +12,11 @@ namespace BOReserva.Controllers
     public class gestion_restaurantesController : Controller
     {
         // GET: gestion_restaurantes
+
+        /// <summary>
+        /// Método para el acceso a la interfaz de visualización de restaurantes.
+        /// </summary>
+        /// <returns>Retorna un objeto para renderizar la vista parcial.</returns>
         public ActionResult M10_GestionRestaurantes_Ver()
         {
             var modelo = new CRestauranteModeloVista();
@@ -21,6 +26,10 @@ namespace BOReserva.Controllers
             return PartialView(modelo);
         }
 
+        /// <summary>
+        /// Método para el acceso a la interfaz de agregación de restaurantes.
+        /// </summary>
+        /// <returns>Retorna un objeto para renderizar la vista parcial.</returns>
         public ActionResult M10_GestionRestaurantes_Agregar()
         {
             var modelo = new CRestauranteModeloVista();
@@ -30,6 +39,10 @@ namespace BOReserva.Controllers
             return PartialView(modelo);
         }
 
+        /// <summary>
+        /// Método para el acceso a la interfaz de modificación de restaurantes.
+        /// </summary>
+        /// <returns>Retorna un objeto para renderizar la vista parcial.</returns>
         public ActionResult M10_GestionRestaurantes_Modificar(int id)
         {
             var bd = new manejadorSQL();
@@ -48,6 +61,10 @@ namespace BOReserva.Controllers
             return PartialView(modelo);
         }
 
+        /// <summary>
+        /// Método para el acceso a la interfaz de eliminación de restaurantes.
+        /// </summary>
+        /// <returns>Retorna un objeto para renderizar la vista parcial.</returns>
         public ActionResult M10_GestionRestaurantes_Eliminar()
         {
             var modelo = new CRestauranteModeloVista();
@@ -57,6 +74,10 @@ namespace BOReserva.Controllers
             return PartialView(modelo);
         }
 
+        /// <summary>
+        /// Método para el almacenado de restaurantes, tomando como parámetro un modelo de restaurante.
+        /// </summary>
+        /// <returns>Retorna un objecto tipo JsonResult que indica el éxito o fracaso de la operación.</returns>
         [HttpPost]
         public JsonResult guardarRestaurante(CRestauranteModeloVista model)
         {
@@ -91,6 +112,10 @@ namespace BOReserva.Controllers
             }
         }
 
+        /// <summary>
+        /// Método para la modificación de restaurantes, tomando como parámetro un modelo de restaurante.
+        /// </summary>
+        /// <returns>Retorna un objecto tipo JsonResult que indica el éxito o fracaso de la operación.</returns>
         [HttpPost]
         public JsonResult modificarRestaurante(CRestauranteModeloVista model)
         {
@@ -126,6 +151,10 @@ namespace BOReserva.Controllers
             }
         }
 
+        /// <summary>
+        /// Método para la eliminación de restaurantes, tomando como parámetro un id de restaurante.
+        /// </summary>
+        /// <returns>Retorna un objecto tipo JsonResult que indica el éxito o fracaso de la operación.</returns>
         [HttpGet]
         public JsonResult eliminarRestaurante(int id)
         {
