@@ -33,12 +33,20 @@
                                 <select name="lista_modulos" id="listamodulos">
                                     <option selected disabled hidden style='display: none' value=''></option>  
                                     <!-- muestra todos los modulos existentes para crear asignarle permisos--> 
-                                    @foreach (var item in Model.Menu)
+                                @try
+                                {
+                                    foreach (var item in Model.Menu)
                                     {
                                         <option value="@item.Nombre">
                                             @item.Nombre
                                         </option>
                                     }
+                                }catch
+                        {
+                            <script>
+                                alert("Error en el listado, por favor intente acceder nuevamente");
+                            </script>
+                        }
                                 </select>
                             </div>                       
                             <div class="col-xs-12" style="margin-top:10px;">

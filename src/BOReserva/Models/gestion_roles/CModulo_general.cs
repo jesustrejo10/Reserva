@@ -12,6 +12,10 @@ namespace BOReserva.Models.gestion_roles
 
         private CListaGenerica<CModulo_detallado> _modulo_detallado;
 
+        private int id_modulo_detallado;
+
+
+
 
         public CModulo_general()
         {
@@ -44,6 +48,12 @@ namespace BOReserva.Models.gestion_roles
         {
             get { return _modulo_detallado; }
             set { _modulo_detallado = value; }
+        }
+
+        public int Id_modulo_detallado
+        {
+            get { return id_modulo_detallado; }
+            set { id_modulo_detallado = value; }
         }
 
     }
