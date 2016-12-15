@@ -1,0 +1,149 @@
+<!-- Indico que para esta vista, M08_AgregarAutomovil, utilizare el modelo Models/gestion_automoviles/CAgregarAutomovil-->
+@model BOReserva.Models.gestion_automoviles.CVisualizarAutomovil
+
+<!--Indico que, estoy abriendo un formulario que tendra como accion del submit, el controlador gestion_automoviles"Controller",
+    utilizara el metodo guardarAutomovil
+    le pasara la informacion mediante un POST-->
+@using (Html.BeginForm("viewVehicle", "gestion_automoviles", null, FormMethod.Post, new { @id = "viewVehicle", @class = "form-horizontal" }))
+{
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h1 class="box-title" style="font-size:32px;"> Detalles del automovil</h1>
+                    <div class="box-tools pull-right">
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                        
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="placa">Placa del vehiculo</label>
+                                @Html.TextBoxFor(m => m._matricula, null, new { @class = "form-control", @placeholder = "", @id = "vehi_placa", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="modelo">Fabricante</label>
+
+                                @Html.TextBoxFor(m => m._fabricante, null, new { @class = "form-control", @placeholder = "Marca", @id = "vehi_marca", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="modelo">Modelo</label>
+                                @Html.TextBoxFor(m => m._modelo, null, new { @class = "form-control", @placeholder = "Marca", @id = "vehi_modelo", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="anio">A&ntilde;o de fabricaci&on</label>
+                                @Html.TextBoxFor(m => m._anio, null, new { @class = "form-control", @placeholder = "Placa", @id = "vehi_modelo", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="tipo">Tipo</label>
+                                @Html.TextBoxFor(m => m._tipovehiculo, null, new { @class = "form-control", @placeholder = "Tipo", @id = "vehi_tipo", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="capacidad">Capacidad</label>
+                                @Html.TextBoxFor(m => m._cantpasajeros, null, new { @class = "form-control", @placeholder = "Tipo", @id = "vehi_cantidad", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="color">Color</label>
+                                @Html.TextBoxFor(m => m._tipovehiculo, null, new { @class = "form-control", @placeholder = "Color", @id = "vehi_color", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="kilometraje">Kilometraje</label>
+                                @Html.TextBoxFor(m => m._kilometraje, null, new { @type = "number", @class = "form-control", @placeholder = "Kilometraje", @id = "vehi_modelo", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="fecharegistro">Fecha de registro</label>
+                                @Html.TextBoxFor(m => m._fecharegistro, null, new { @class = "form-control", @placeholder = "Kilometraje", @id = "vehi_registro", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="">Pais</label>
+                                @Html.TextBoxFor(m => m._pais, null, new { @class = "form-control", @placeholder = "Pais", @id = "vehi_pais", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="Ciudad">Ciudad</label>
+                                @Html.TextBoxFor(m => m._ciudad, null, new { @class = "form-control", @placeholder = "Ciudad", @id = "vehi_ciudad", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="transmision">Transmision:</label>
+
+                                @Html.TextBoxFor(m => m._transmision, null, new { @class = "form-control", @placeholder = "Ciudad", @id = "vehi_transmision", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="preciocompra">Precio de compra ($)</label>
+                                @Html.TextBoxFor(m => m._preciocompra, null, new { @type = "number", @class = "form-control", @placeholder = "Dolares", @id = "vehi_compra", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="tarifa">Tarifa diaria ($)</label>
+                                @Html.TextBoxFor(m => m._precioalquiler, null, new { @type = "number", @class = "form-control", @placeholder = "Dolares", @id = "vehi_tarifa", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="penalidad">Penalidad diaria ($)</label>
+                                @Html.TextBoxFor(m => m._penalidaddiaria, null, new { @type = "number", @class = "form-control", @placeholder = "Dolares", @id = "vehi_penalidad", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <button type="button" id="return" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Regresar</button>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+
+    <script>
+        $("#return").click(function (e) {
+            e.preventDefault();
+            var url = '/gestion_automoviles/M08_VisualizarAutomoviles';
+            var method = 'GET';
+            var data = '';
+            alert("Se esta procesando tu solicitud, por favor espere");
+
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+        });
+    </script>
+
+
+
+}
+
