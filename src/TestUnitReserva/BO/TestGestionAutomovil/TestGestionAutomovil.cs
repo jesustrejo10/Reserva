@@ -23,19 +23,9 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         //DAOAutomovil daoAutomovil;
         manejadorSQL _manejadorSql;
         Automovil _automovil;
-        String _matriculaPrueba;
-        String _matriculaPrueba2;
+        String _matriculaPrueba = Util.RandomString(7);
+        String _matriculaPrueba2 = Util.RandomString(7);
 
-        /// <summary>
-        /// Metodo que se ejecuta una sola vez durante toda la prueba;
-        /// Guardo valores de _matriculaPrueba y _matriculaPrueba2;
-        /// </summary>
-        [SetUpFixture]
-        public void BeforeAll() {
-            _matriculaPrueba = Util.RandomString(7);
-            _matriculaPrueba2 = Util.RandomString(7);
-        }
-        
         /// <summary>
         /// Metodo que se ejecuta antes que se ejecute cada prueba
         /// Esta encargado de instanciar el manejadorSQL
@@ -76,7 +66,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         /// retornando 1
         /// </summary>
         [Test]
-        public void MAgregaraBD()
+        public void M08_MAgregaraBD()
         {
             _automovil = new Automovil(_matriculaPrueba2, "4", "Jeep", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
             String respuestaAgregar=_automovil.MAgregaraBD(_automovil,12);
@@ -153,7 +143,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         /// se realzia la prueba por ser un rango definido de paises y verifica si no llega vacio
         /// </summary>
         [Test]
-        public void MListarpaisesBD()
+        public void M08_MListarpaisesBD()
         {
             String[] prueba = _manejadorSql.MListarpaisesBD();
             //prueba no vacia
@@ -183,7 +173,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         /// Método que verifica si la placa a buscar existe
         /// </summary>
         [Test]
-        public void MDisponibilidadVehiculoBD()
+        public void M08_MDisponibilidadVehiculoBD()
         {
             String prueba3 = _manejadorSql.MDisponibilidadVehiculoBD(_matriculaPrueba, 0);
             Assert.AreEqual("1", prueba3);
@@ -194,7 +184,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         /// Método que verifica si la placa a buscar existe
         /// </summary>
         [Test]
-        public void MDisponibilidadVehiculo()
+        public void M08_MDisponibilidadVehiculo()
 
         {
             Automovil auto = new Automovil(_matriculaPrueba, "3", "Mazda", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
@@ -206,7 +196,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         /// Método validar buscarvehículo para ver si existe el automovil
         /// </summary>
         [Test]
-        public void MMostrarvehiculoBD()
+        public void M08_MMostrarvehiculoBD()
         {
             // si no consigue
             Automovil buscarvehiculo = _manejadorSql.MMostrarvehiculoBD("FALLAR");
@@ -223,7 +213,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         /// Método validar buscarvehículo para ver si existe el automovil
         /// </summary>
         [Test]
-        public void MConsultarvehiculo()
+        public void M08_MConsultarvehiculo()
         {
             Automovil auto = new Automovil("PRUEBACON", "3", "Mazda", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
             String agregar = _manejadorSql.MAgregarVehiculoBD(auto, 12);
@@ -236,7 +226,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         /// Método que verificar modificarvehiculo, si se logra modificar retorna 1 sino retorna 0
         /// </summary>
         [Test]
-        public void MModificarVehiculoBD()
+        public void M08_MModificarVehiculoBD()
         {
             String placa = _matriculaPrueba;
             _automovil = new Automovil(placa, "3", "Mazda", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
@@ -252,7 +242,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         /// Método que verificar modificarvehiculo, si se logra modificar retorna 1 sino retorna 0
         /// </summary>
         [Test]
-        public void MModificarvehiculo()
+        public void M08_MModificarvehiculo()
         {
             String placa = _matriculaPrueba2;
             _automovil = new Automovil(placa, "3", "Mazda", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
@@ -268,7 +258,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         /// Método que lista todos los vehículos existentes
         /// </summary>
         [Test]
-        public void MListarvehiculosBD()
+        public void M08_MListarvehiculosBD()
         {
             List<Automovil> prueba = _manejadorSql.MListarvehiculosBD();
             Assert.IsInstanceOf(typeof(List<Automovil>), prueba);
@@ -277,7 +267,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         ///  Método que lista todos los vehículos existentes
         /// </summary>
         [Test]
-        public void MListarvehiculos()
+        public void M08_MListarvehiculos()
         {
 
             Automovil auto = new Automovil(_matriculaPrueba, "3", "Mazda", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
@@ -291,7 +281,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         /// Método que realiza la busqueda del nombre de la ciudad si existe su id, si no lo consigue arroja "Error al buscar"
         /// </summary>
         [Test]
-        public void MBuscarnombreciudadBD()
+        public void M08_MBuscarnombreciudadBD()
         {
             String prueba = _manejadorSql.MBuscarnombreciudadBD(12);
             Assert.AreEqual("Caracas", prueba);
@@ -303,19 +293,19 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         /// Método que verifica si se ejecuta bien la revisión de placa
         /// </summary>
         [Test]
-        public void MPlacarepetidaBD()
+        public void M08_MPlacarepetidaBD()
         {
 
             int repetida = _manejadorSql.MPlacarepetidaBD(_matriculaPrueba);
             Assert.AreEqual(1, repetida);
-            int repetidano = _manejadorSql.MPlacarepetidaBD("SIUL1208");
+            int repetidano = _manejadorSql.MPlacarepetidaBD("XXXXXXXX");
             Assert.AreEqual(0, repetidano);
         }
         /// <summary>
         /// Método que verifica si el vehículo es borrado de la base de datos correctamente
         /// </summary>
         [Test]
-        public void MBorrarvehiculoBD()
+        public void M08_MBorrarvehiculoBD()
         {
             String prueba2 = _manejadorSql.MBorrarvehiculoBD(_matriculaPrueba);
             Assert.AreEqual("1", prueba2);
@@ -324,7 +314,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         ///  Método que verifica si el vehículo es borrado de la base de datos correctamente
         /// </summary>
         [Test]
-        public void MBorrarvehiculo()
+        public void M08_MBorrarvehiculo()
         {
             Automovil auto = new Automovil(_matriculaPrueba, "3", "Mazda", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
             String Prueba3 = auto.MBorrarvehiculoBD(_matriculaPrueba2);
@@ -334,11 +324,14 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         /// Método que verifica si se retorna la cantidad de ciudades 
         /// </summary>
         [Test]
-        public void MListarciudadesBD()
+        public void M08_MListarciudadesBD()
         {
-            List<String> h = _manejadorSql.MListarciudadesBD(11);
+            List<String> listaCiudades = _manejadorSql.MListarciudadesBD(11);
+            //se que por defecto en el pais 11, hay solo 5 ciudades.
+            Assert.AreEqual(5, listaCiudades.Count);
 
-            Assert.AreEqual(5, h.Count);
+
+
         }
 
 

@@ -79,7 +79,6 @@ namespace BOReserva.Models.gestion_automoviles
         /// </summary>
         /// <param name="vehiculo">Vehículo a agregar</param>
         /// <param name="id">Identificador de la ciudad donde se ubica</param>
-        /// <returns>Retorna si se agrega o no</returns>
         public String MAgregaraBD(Automovil vehiculo, int id)
         {
             manejadorSQL agregar = new manejadorSQL();
