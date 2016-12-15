@@ -55,7 +55,7 @@ namespace BOReserva.Servicio.Servicio_Rutas
             }
             catch (SqlException e)
             {
-                return false;
+                throw e;
             }
             catch (Exception e)
             {
@@ -90,7 +90,7 @@ namespace BOReserva.Servicio.Servicio_Rutas
             catch (SqlException ex)
             {
                 con.Close();
-                return null;
+                throw ex;
             }
         }
 
@@ -133,7 +133,8 @@ namespace BOReserva.Servicio.Servicio_Rutas
             }
             catch (SqlException e)
             {
-                return false;
+                con.Close();
+                throw e;
             }
             catch (Exception e)
             {
@@ -183,7 +184,7 @@ namespace BOReserva.Servicio.Servicio_Rutas
             }
             catch (SqlException e)
             {
-                return false;
+                throw e; ;
             }
             catch (Exception e)
             {
@@ -212,7 +213,7 @@ namespace BOReserva.Servicio.Servicio_Rutas
             }
             catch (SqlException e)
             {
-                return false;
+                throw e;
             }
             catch (Exception e)
             {
@@ -325,7 +326,7 @@ namespace BOReserva.Servicio.Servicio_Rutas
             catch (SqlException ex)
             {
                 con.Close();
-                return null;
+                throw ex;
             }
         }
 
