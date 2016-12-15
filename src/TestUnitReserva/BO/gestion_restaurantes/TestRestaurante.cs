@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using BOReserva.Models.gestion_restaurantes;
+using BOReserva.Controllers;
 using BOReserva.Servicio;
 using System.Diagnostics;
+using System.Web.Mvc;
 
 namespace TestUnitReserva.BO.gestion_restaurantes
 {
@@ -70,6 +72,34 @@ namespace TestUnitReserva.BO.gestion_restaurantes
             Assert.IsTrue(sql.eliminarRestaurante(prueba._id));
         }
 
+        /// <summary>
+        /// Test al controlador para comprobar la generación de los datos a la vista de visualizar restaurantes.
+        /// </summary>
+        [Test]
+        public void TestControladorVer()
+        {
+            var prueba = new gestion_restaurantesController();
+            Assert.IsInstanceOf(typeof(PartialViewResult), prueba.M10_GestionRestaurantes_Ver());
+        }
 
+        /// <summary>
+        /// Test al controlador para comprobar la generación de los datos a la vista de agregar restaurantes.
+        /// </summary>
+        [Test]
+        public void TestControladorAgregar()
+        {
+            var prueba = new gestion_restaurantesController();
+            Assert.IsInstanceOf(typeof(PartialViewResult), prueba.M10_GestionRestaurantes_Agregar());
+        }
+
+        /// <summary>
+        /// Test al controlador para comprobar la generación de los datos a la vista de modificar restaurantes.
+        /// </summary>
+        [Test]
+        public void TestControladorModificar()
+        {
+            var prueba = new gestion_restaurantesController();
+            Assert.IsInstanceOf(typeof(PartialViewResult), prueba.M10_GestionRestaurantes_Modificar(1));
+        }
     }
 }
