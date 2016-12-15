@@ -35,13 +35,13 @@ namespace BOReserva.Controllers
             catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error ingresando a la base de datos.";
+                String error = "Error cargando la pagina visualizar desde la base de datos.";
                 return Json(error);
             }
             catch (Exception e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
+                String error = "Error desconocido cargando la pagina visualizar, contacte con el administrador.";
                 return Json(error);
             }
             return PartialView(listavuelos);
@@ -83,13 +83,13 @@ namespace BOReserva.Controllers
             catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error ingresando a la base de datos.";
+                String error = "Error ingresando a la base de datos para la pagina agregar.";
                 return Json(error);
             }
             catch (Exception e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
+                String error = "Error desconocido ingresando a la pagina agregar, contacte con el administrador.";
                 return Json(error);
             }
 
@@ -141,7 +141,7 @@ namespace BOReserva.Controllers
             catch (Exception e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
+                String error = "Error desconocido consultando los aviones disponibles, contacte con el administrador.";
                 return Json(error);
             }
 
@@ -149,7 +149,7 @@ namespace BOReserva.Controllers
         }
 
 
-        [AcceptVerbs(HttpVerbs.Get)]
+        [HttpPost]
         public JsonResult buscaModeloA(string matriAvion)
         {
             CCrear_Vuelo model = new CCrear_Vuelo();
@@ -170,14 +170,14 @@ namespace BOReserva.Controllers
             catch (Exception e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
+                String error = "Error desconocido consultando el modelo del avion, contacte con el administrador.";
                 return Json(error);
             }
                 
             return (Json(resultado, JsonRequestBehavior.AllowGet));
         }
 
-        [AcceptVerbs(HttpVerbs.Get)]
+        [HttpPost]
         public JsonResult buscaPasajerosA(string matriAvion)
         {
             CCrear_Vuelo model = new CCrear_Vuelo();
@@ -198,7 +198,7 @@ namespace BOReserva.Controllers
             catch (Exception e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
+                String error = "Error desconocido consultando la cantidad de pasajeros, contacte con el administrador.";
                 return Json(error);
             }
 
@@ -208,7 +208,7 @@ namespace BOReserva.Controllers
 
 
 
-        [AcceptVerbs(HttpVerbs.Get)]
+        [HttpPost]
         public JsonResult buscaDistanciaA(string matriAvion)
         {
             CCrear_Vuelo model = new CCrear_Vuelo();
@@ -230,7 +230,7 @@ namespace BOReserva.Controllers
             catch (Exception e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
+                String error = "Error desconocido consultando la distancia maxima del avion, contacte con el administrador.";
                 return Json(error);
             }
 
@@ -238,7 +238,7 @@ namespace BOReserva.Controllers
         }
 
 
-        [AcceptVerbs(HttpVerbs.Get)]
+        [HttpPost]
         public JsonResult buscaVelocidadA(string matriAvion)
         {
             CCrear_Vuelo model = new CCrear_Vuelo();
@@ -261,7 +261,7 @@ namespace BOReserva.Controllers
             catch (Exception e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
+                String error = "Error desconocido consultando la velocidad del avion, contacte con el administrador.";
                 return Json(error, JsonRequestBehavior.DenyGet);
             }
 
@@ -296,13 +296,13 @@ namespace BOReserva.Controllers
             catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error ingresando a la base de datos.";
+                String error = "Error cargando los destinos desde la base de datos.";
                 return Json(error);
             }
             catch (Exception e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
+                String error = "Error desconocido cargando los destinos, contacte con el administrador.";
                 return Json(error);
             }
 
@@ -341,13 +341,13 @@ namespace BOReserva.Controllers
             catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error ingresando a la base de datos.";
+                String error = "Error verificando el codigo de vuelo en la base de datos.";
                 return Json(error);
             }
             catch (Exception e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
+                String error = "Error desconocido verificando el codigo de vuelo, contacte con el administrador.";
                 return Json(error);
             }
          
@@ -397,13 +397,13 @@ namespace BOReserva.Controllers
             catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error ingresando a la base de datos.";
+                String error = "Error insertando el vuelo en la base de datos.";
                 return Json(error);
             }
             catch (Exception e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
+                String error = "Error desconocido insertando el vuelo, contacte con el administrador.";
                 return Json(error);
             }
 
@@ -413,7 +413,7 @@ namespace BOReserva.Controllers
         }
 
 
-        [AcceptVerbs(HttpVerbs.Get)]
+        [HttpPost]
         public JsonResult buscaFechaA(string fechaDes, string horaDes, string ciudadO, string ciudadD, string matriAvion, int opcion)
         {
 
@@ -451,13 +451,13 @@ namespace BOReserva.Controllers
             catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error ingresando a la base de datos.";
+                String error = "Error calculando la fecha de aterrizaje en la base de datos.";
                 return Json(error);
             }
             catch (Exception e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
+                String error = "Error desconocido calculando la fecha de aterrizaje, contacte con el administrador.";
                 return Json(error);
             }
             return (Json(fecha, JsonRequestBehavior.AllowGet));
@@ -476,13 +476,13 @@ namespace BOReserva.Controllers
             catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error ingresando a la base de datos.";
+                String error = "Error cargando la vista de modificar desde la base de datos.";
                 return Json(error);
             }
             catch (Exception e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
+                String error = "Error desconocido cargando la vista modificar, contacte con el administrador.";
                 return Json(error);
             }
                                                                    
@@ -502,13 +502,13 @@ namespace BOReserva.Controllers
             catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error ingresando a la base de datos.";
+                String error = "Error cargando el vualo a mostrar desde la base de datos.";
                 return Json(error);
             }
             catch (Exception e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
+                String error = "Error desconocido cargando el vuelo a mostrar, contacte con el administrador.";
                 return Json(error);
             }
                                                                   
@@ -532,13 +532,13 @@ namespace BOReserva.Controllers
         catch (SqlException e)
         {
             Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            String error = "Error ingresando a la base de datos.";
+            String error = "Error desactivando el vuelo en la base de datos.";
             return Json(error);
         }
         catch (Exception e)
         {
             Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            String error = "Error desconocido, contacte con el administrador.";
+            String error = "Error desconocido desactivando el vuelo, contacte con el administrador.";
             return Json(error);
         }
         
@@ -559,13 +559,13 @@ namespace BOReserva.Controllers
             catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error ingresando a la base de datos.";
+                String error = "Error activando el vuelo en la base de datos.";
                 return Json(error);
             }
             catch (Exception e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
+                String error = "Error desconocido activando el vuelo, contacte con el administrador.";
                 return Json(error);
             }
 
@@ -662,26 +662,51 @@ namespace BOReserva.Controllers
             catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error ingresando a la base de datos.";
+                String error = "Error ingresando a la base de datos para cargar los detinos.";
                 return Json(error);
             }
             catch (Exception e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
+                String error = "Error desconocido cargando los destinos, contacte con el administrador.";
                 return Json(error);
             }
 
             return (Json(model._ciudadesDestino, JsonRequestBehavior.AllowGet));
         }
 
-        public static List<SelectListItem> avionesvalidados(String COrigen,String CDestino, String Avion)
+
+        [HttpPost]
+        public ActionResult revisarCodVuelo(String codVuelo)
+        {
+            manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
+            int existe = 0;
+            try
+            {
+               existe = sql.codVueloUnico(codVuelo);
+            }
+            catch (SqlException e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error ingresando a la base de datos para verificar el codigo.";
+                return Json(error);
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido verificando codigo, contacte con el administrador.";
+                return Json(error);
+            }
+            return Json(existe);
+        } 
+
+        public static List<SelectListItem> avionesvalidados(String COrigen, String CDestino, String Avion)
         {
             manejadorSQL_Vuelos avionvalidado = new manejadorSQL_Vuelos();
             List<SelectListItem> _avionesvalidados = new List<SelectListItem>();
             String[] aviones = avionvalidado.MListaravionesValidadosBD(COrigen, CDestino);
             int i = 0;
-            _avion = aviones[ 0];
+            _avion = aviones[0];
             bool verdad = true;
             while (verdad == true)
             {
