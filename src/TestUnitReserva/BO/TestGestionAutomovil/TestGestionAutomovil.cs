@@ -23,19 +23,9 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         //DAOAutomovil daoAutomovil;
         manejadorSQL _manejadorSql;
         Automovil _automovil;
-        String _matriculaPrueba;
-        String _matriculaPrueba2;
+        String _matriculaPrueba = Util.RandomString(7);
+        String _matriculaPrueba2 = Util.RandomString(7);
 
-        /// <summary>
-        /// Metodo que se ejecuta una sola vez durante toda la prueba;
-        /// Guardo valores de _matriculaPrueba y _matriculaPrueba2;
-        /// </summary>
-        [SetUpFixture]
-        public void BeforeAll() {
-            _matriculaPrueba = Util.RandomString(7);
-            _matriculaPrueba2 = Util.RandomString(7);
-        }
-        
         /// <summary>
         /// Metodo que se ejecuta antes que se ejecute cada prueba
         /// Esta encargado de instanciar el manejadorSQL
@@ -306,7 +296,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
 
             int repetida = _manejadorSql.MPlacarepetidaBD(_matriculaPrueba);
             Assert.AreEqual(1, repetida);
-            int repetidano = _manejadorSql.MPlacarepetidaBD("SIUL1208");
+            int repetidano = _manejadorSql.MPlacarepetidaBD("XXXXXXXX");
             Assert.AreEqual(0, repetidano);
         }
         /// <summary>
@@ -334,9 +324,12 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         [Test]
         public void MListarciudadesBD()
         {
-            List<String> h = _manejadorSql.MListarciudadesBD(11);
+            List<String> listaCiudades = _manejadorSql.MListarciudadesBD(11);
+            //se que por defecto en el pais 11, hay solo 5 ciudades.
+            Assert.AreEqual(5, listaCiudades.Count);
 
-            Assert.AreEqual(5, h.Count);
+
+
         }
 
 
