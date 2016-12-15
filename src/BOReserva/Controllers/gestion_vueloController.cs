@@ -146,7 +146,7 @@ namespace BOReserva.Controllers
         }
 
 
-        [AcceptVerbs(HttpVerbs.Get)]
+        [HttpPost]
         public JsonResult buscaModeloA(string matriAvion)
         {
             CCrear_Vuelo model = new CCrear_Vuelo();
@@ -174,7 +174,7 @@ namespace BOReserva.Controllers
             return (Json(resultado, JsonRequestBehavior.AllowGet));
         }
 
-        [AcceptVerbs(HttpVerbs.Get)]
+        [HttpPost]
         public JsonResult buscaPasajerosA(string matriAvion)
         {
             CCrear_Vuelo model = new CCrear_Vuelo();
@@ -205,7 +205,7 @@ namespace BOReserva.Controllers
 
 
 
-        [AcceptVerbs(HttpVerbs.Get)]
+        [HttpPost]
         public JsonResult buscaDistanciaA(string matriAvion)
         {
             CCrear_Vuelo model = new CCrear_Vuelo();
@@ -235,7 +235,7 @@ namespace BOReserva.Controllers
         }
 
 
-        [AcceptVerbs(HttpVerbs.Get)]
+        [HttpPost]
         public JsonResult buscaVelocidadA(string matriAvion)
         {
             CCrear_Vuelo model = new CCrear_Vuelo();
@@ -410,7 +410,7 @@ namespace BOReserva.Controllers
         }
 
 
-        [AcceptVerbs(HttpVerbs.Get)]
+        [HttpPost]
         public JsonResult buscaFechaA(string fechaDes, string horaDes, string ciudadO, string ciudadD, string matriAvion, int opcion)
         {
 
@@ -662,6 +662,14 @@ namespace BOReserva.Controllers
 
             return (Json(model._ciudadesDestino, JsonRequestBehavior.AllowGet));
         }
+
+        [HttpPost]
+        public ActionResult revisarCodVuelo(String codVuelo)
+        {
+            manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
+            int existe = sql.codVueloUnico(codVuelo);
+            return Json(existe);
+        } 
 
 
     }
