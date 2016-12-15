@@ -12,11 +12,10 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>Nombre</th>
-                            <th>Tipo</th>
-                            <th>Estatus</th>
-                            <th>Descripcion</th>
-                            <th>Opciones</th>
+                            <th>Codigo Vuelo</th>
+                            <th>Nombre Plato</th>
+                            <th>Cantidad Comida</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -27,17 +26,10 @@
 
 
                                 <tr id="@item._id">
+                                    <td>@item._codigoVuelo</td>
                                     <td>@item._nombrePlato</td>
-                                    <td>@item._tipoPlato</td>
-                                    <td>@item._estatusPlato</td>
-                                    <td>@item._descripcionPlato</td>
+                                    <td>@item._cantidadComida</td>
                                     <td>
-
-
-                                        @{
-
-                                    <a href="#" title="Agregar Plato"><i class="fa fa-check agregarPlato"></i></a>
-                                }
 
                                         
                                     </td>
@@ -51,11 +43,9 @@
 
                     <tfoot>
                         <tr>
-                            <th>Nombre</th>
-                            <th>Tipo</th>
-                            <th>Estatus</th>
-                            <th>Descripcion</th>
-                            <th>Opciones</th>
+                            <th>Codigo Vuelo</th>
+                            <th>Nombre Plato</th>
+                            <th>Cantidad Comida</th>
                         </tr>
                     </tfoot>
                 </table>
