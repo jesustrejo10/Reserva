@@ -11,7 +11,7 @@ namespace BOReserva.Servicio.Servicio_Rutas
 {
     public class CManejadorSQL_Rutas
     {
-        private String connectionString = @"Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User ID=DB_A1380A_reserva_admin;Password = ucabds1617a"; //No supe cual es el string de conexion jejejeps
+        private String connectionString = "Data Source=localhost;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617a;";
 
         private SqlConnection con = null;
 
