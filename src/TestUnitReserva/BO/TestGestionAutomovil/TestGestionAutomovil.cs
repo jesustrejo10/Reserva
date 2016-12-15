@@ -9,6 +9,8 @@ using System.Diagnostics;
 using BOReserva.Models;
 using BOReserva.Servicio;
 using BOReserva.Controllers;
+using System.Web;
+using System.Web.Mvc;
 
 
 namespace TestUnitReserva.BO.TestGestionAutomovil
@@ -25,6 +27,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         Automovil _automovil;
         String _matriculaPrueba = Util.RandomString(7);
         String _matriculaPrueba2 = Util.RandomString(7);
+        gestion_automovilesController _controlador = new gestion_automovilesController();
 
         /// <summary>
         /// Metodo que se ejecuta antes que se ejecute cada prueba
@@ -329,14 +332,234 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
             List<String> listaCiudades = _manejadorSql.MListarciudadesBD(11);
             //se que por defecto en el pais 11, hay solo 5 ciudades.
             Assert.AreEqual(5, listaCiudades.Count);
+        }
 
 
+        /// <summary>
+        /// Método qe verifica si se retornan ActionResult por parte de las vistas parciales
+        /// </summary>
+        [Test]
+        public void M08_Retornavistasparciales()
+        {
+            _automovil = new Automovil("KMKMKM", "3", "Mazda", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
+            String agregar = _manejadorSql.MAgregarVehiculoBD(_automovil, 12);
+            Assert.IsInstanceOf(typeof(ActionResult), _controlador.M08_AgregarAutomovil());
+            Assert.IsInstanceOf(typeof(ActionResult), _controlador.M08_ModificarAutomovil("KMKMKM"));
+            Assert.IsInstanceOf(typeof(ActionResult), _controlador.M08_VisualizarAutomovil("KMKMKM"));
+            Assert.IsInstanceOf(typeof(ActionResult), _controlador.M08_VisualizarAutomoviles());
+            String Prueba3 = _manejadorSql.MBorrarvehiculoBD("KMKMKM");
+        }
+
+        /// <summary>
+        /// Método que verifica si se retornan los años de 1930 a 2016
+        /// </summary>
+        [Test]
+        public void M08_Listaranios()
+        {
+            List<SelectListItem> ls = BOReserva.Controllers.gestion_automovilesController.listadeanios();
+            int cantidad = 1;
+            for (int i = 1; i <= ls.Count()-3; i++)
+            {
+                cantidad++;
+            }
+            Assert.AreEqual(86,cantidad);
+
+        }
+
+        /// <summary>
+        /// Método que verifica si se retorna la cantidad pedida
+        /// </summary>
+        [Test]
+        public void M08_Listarcantidad()
+        {
+            List<SelectListItem> ls = BOReserva.Controllers.gestion_automovilesController.cantidad(80);
+            int cantidad = 1;
+            for (int i = 1; i <= ls.Count()-2; i++)
+            {
+                cantidad++;
+            }
+            Assert.AreEqual(80, cantidad);
 
         }
 
 
+        /// <summary>
+        /// Método que verifica si se retornan los colores
+        /// </summary>
+        [Test]
+        public void M08_Listarcolores()
+        {
+            List<SelectListItem> ls = BOReserva.Controllers.gestion_automovilesController.colores();
+            int cantidad = 1;
+            for (int i = 1; i <= ls.Count() - 1; i++)
+            {
+                cantidad++;
+            }
+            Assert.AreEqual(6, cantidad);
 
-        
+        }
+
+
+        /// <summary>
+        /// Método que verifica si se guarda una ciudad
+        /// </summary>
+        [Test]
+        public void M08_getCity()
+        {
+            _controlador.getCity("Caracas");
+            Assert.AreEqual("Caracas", BOReserva.Controllers.gestion_automovilesController.ciudad);
+
+        }
+
+
+        /// <summary>
+        /// Método que verifica si se retorna un JsonResult en saveVehicle
+        /// </summary>
+        [Test]
+        public void M08_saveVehicle()
+        {
+            CAgregarAutomovil auto = new CAgregarAutomovil();
+            auto._anio = 1995;
+            auto._cantpasajeros = 5;
+            auto._color = "Azul";
+            auto._disponibilidad = true;
+            auto._fabricante = "Mazda";
+            auto._fecharegistro = DateTime.Now;
+            auto._kilometraje = 0;
+            auto._matricula = "FATTTTT";
+            auto._modelo = "prueba";
+            auto._pais = "Venezuela";
+            auto._penalidaddiaria = 0;
+            auto._precioalquiler = 0;
+            auto._preciocompra = 0;
+            auto._tipovehiculo = "Sedan";
+            auto._transmision = "Automatica";
+            JsonResult probarjsonresult = _controlador.saveVehicle(auto);
+            Assert.IsInstanceOf(typeof(JsonResult), probarjsonresult);
+            String prueba2 = _manejadorSql.MBorrarvehiculoBD("FATTTTT");
+        }
+
+        /// <summary>
+        /// Método que verifica si se retorna un JsonResult en modifyVehicle
+        /// </summary>
+        [Test]
+        public void M08_modifyVehicle()
+        {
+            CModificarAutomovil auto = new CModificarAutomovil();
+            auto._anio = 1995;
+            auto._cantpasajeros = 5;
+            auto._color = "Azul";
+            auto._disponibilidad = 1;
+            auto._fabricante = "Mazda";
+            auto._fecharegistro = DateTime.Now.ToString();
+            auto._kilometraje = 0;
+            auto._matricula = "FATTTTT";
+            auto._modelo = "prueba";
+            auto._pais = "Venezuela";
+            auto._penalidaddiaria = 0;
+            auto._precioalquiler = 0;
+            auto._preciocompra = 0;
+            auto._tipovehiculo = "Sedan";
+            auto._transmision = "Automatica";
+            JsonResult probarjsonresult = _controlador.modifyVehicle(auto);
+            Assert.IsInstanceOf(typeof(JsonResult), probarjsonresult);
+            String prueba2 = _manejadorSql.MBorrarvehiculoBD("FATTTTT");
+        }
+
+        /// <summary>
+        /// Método que verifica si se retorna un JsonResult en viewVehicle
+        /// </summary>
+        [Test]
+        public void M08_viewVehicle()
+        {
+            CVisualizarAutomovil auto = new CVisualizarAutomovil();
+            auto._anio = 1995;
+            auto._cantpasajeros = 5;
+            auto._color = "Azul";
+            auto._disponibilidad = 1;
+            auto._fabricante = "Mazda";
+            auto._fecharegistro = DateTime.Now.ToString();
+            auto._kilometraje = 0;
+            auto._matricula = "FATTTTT";
+            auto._modelo = "prueba";
+            auto._pais = "Venezuela";
+            auto._penalidaddiaria = 0;
+            auto._precioalquiler = 0;
+            auto._preciocompra = 0;
+            auto._tipovehiculo = "Sedan";
+            auto._transmision = "Automatica";
+            JsonResult probarjsonresult = _controlador.viewVehicle(auto);
+            Assert.IsInstanceOf(typeof(JsonResult), probarjsonresult);
+            String prueba2 = _manejadorSql.MBorrarvehiculoBD("FATTTTT");
+        }
+
+        /// <summary>
+        /// Método que verifica si se retorna un JsonResult en deleteVehicle
+        /// </summary>
+        [Test]
+        public void M08_deleteVehicle()
+        {
+            _automovil = new Automovil("FATTTT", "3", "Mazda", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
+            String agregar = _manejadorSql.MAgregarVehiculoBD(_automovil, 12);
+            JsonResult probarjsonresult = _controlador.deleteVehicle("FATTTT");
+            Assert.IsInstanceOf(typeof(JsonResult), probarjsonresult);
+        }
+
+
+        /// <summary>
+        /// Método que verifica si se retorna un JsonResult en deactivateVehicle y en activateVehicle
+        /// </summary>
+        [Test]
+        public void M08_disponibilityVehicle()
+        {
+            _automovil = new Automovil("FATTTT", "3", "Mazda", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
+            String agregar = _manejadorSql.MAgregarVehiculoBD(_automovil, 12);
+            JsonResult probarjsonresult = _controlador.deactivateVehicle("FATTTT");
+            Assert.IsInstanceOf(typeof(JsonResult), probarjsonresult);
+            probarjsonresult = _controlador.activateVehicle("FATTTT");
+            Assert.IsInstanceOf(typeof(JsonResult), probarjsonresult);
+            String prueba2 = _manejadorSql.MBorrarvehiculoBD("FATTTTT");
+        }
+
+
+        /// <summary>
+        /// Método que verifica si se retorna un ActionResult en checkplaca
+        /// </summary>
+        [Test]
+        public void M08_checkplaca()
+        {
+            _automovil = new Automovil("FATTTT", "3", "Mazda", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
+            String agregar = _manejadorSql.MAgregarVehiculoBD(_automovil, 12);
+            ActionResult probarjsonresult = _controlador.checkplaca("FATTTT");
+            Assert.IsInstanceOf(typeof(ActionResult), probarjsonresult);
+            String prueba2 = _manejadorSql.MBorrarvehiculoBD("FATTTTT");
+        }
+
+        /// <summary>
+        /// Método que verifica si se retornan los países
+        /// </summary>
+        [Test]
+        public void M08_Listarpaises()
+        {
+            List<SelectListItem> ls = BOReserva.Controllers.gestion_automovilesController.pais();
+            int cantidad = 1;
+            for (int i = 1; i <= ls.Count() - 1; i++)
+            {
+                cantidad++;
+            }
+            Assert.AreEqual(16, cantidad);
+
+        }
+
+        /// <summary>
+        /// Método que verifica si se retorna un ActionResult en listaciudades
+        /// </summary>
+        [Test]
+        public void M08_listaciudades()
+        {
+            ActionResult probarjsonresult = _controlador.listaciudades("Venezuela");
+            Assert.IsInstanceOf(typeof(ActionResult), probarjsonresult);
+        }
     }
 }
 ﻿
