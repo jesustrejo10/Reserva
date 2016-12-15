@@ -170,7 +170,7 @@ namespace BOReserva.Models.gestion_cruceros
                     itinerario = new CGestion_itinerario();
                     itinerario._crucero = reader["nombreCrucero"].ToString();
                     itinerario._fechaInicio = Convert.ToDateTime(reader["fechaInicio"].ToString());
-                    itinerario._fechaFin = Convert.ToDateTime(reader["fechaInicio"].ToString());
+                    itinerario._fechaFin = Convert.ToDateTime(reader["fechaFin"].ToString());
                     itinerario._ItinerarioCrucero = reader["ruta"].ToString();
                     itinerario._estatus = reader["estatus"].ToString();
                     listaItinerarios.Add(itinerario);
@@ -187,7 +187,7 @@ namespace BOReserva.Models.gestion_cruceros
             using (comando = new SqlCommand(RecursosCruceros.ListarRuta, conexion))
             {
                 comando.CommandType = CommandType.StoredProcedure;
-               // conexion.Open();
+                conexion.Open();
                 comando.ExecuteNonQuery();
                 SqlDataReader reader = comando.ExecuteReader();
 
@@ -200,6 +200,7 @@ namespace BOReserva.Models.gestion_cruceros
                     listaRuta.Add(ruta);
                 }
                 reader.Close();
+                conexion.Close();
             }
             return listaRuta;
         }

@@ -14,7 +14,7 @@ $("#fk_id_crucero").change(function (e) {
                 console.log(data[index])
           
                 var statusHTML = data[index]._estatus == "activo" ? "<td class='crStatus'><i class='fa fa-circle started'></i></td>"+
-                                        "<td class='crAcciones'><i class='fa fa-pencil'></i> <i class='fa fa-times' onclick='cambioCabina(" + data[index]._idCabina + ")'></i></td>" : "<td class='crStatus'><i class='fa fa-circle paused'></i></td><td class='crAcciones'><i class='fa fa-pencil'></i> <i class='fa fa-check' onclick='cambioCabina(" + data[index]._idCabina + ")'></i></td>";
+                                        "<td class='crAcciones'></i> <i class='fa fa-times' onclick='cambioCabina(" + data[index]._idCabina + ")'></i></td>" : "<td class='crStatus'><i class='fa fa-circle paused'></i></td><td class='crAcciones'> <i class='fa fa-check' onclick='cambioCabina(" + data[index]._idCabina + ")'></i></td>";
                                        
 
                 console.log(statusHTML)

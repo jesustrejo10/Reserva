@@ -12,8 +12,6 @@
                                 <th class="itiItinerario"><b>Ruta</b></th>
                                 <th class="itiFechaI"><b>Fecha Inicio</b></th>
                                 <th class="itiFechaF"><b>Fecha Fin</b></th>
-                                <th class="itiEstatus"><b>Estatus</b></th>
-                                <th class="crAcciones"><b>Acciones</b> </th>
                             </tr>
                         </thead>
                         <tbody class="listItine itinerario">
@@ -25,16 +23,6 @@
                                         <td class="itiItinerario">@itinerario._ItinerarioCrucero </td>
                                         <td class="itiFechaI">@itinerario._fechaInicio </td>
                                         <td class="itiItinerario">@itinerario._fechaFin </td>
-                                        @if (@itinerario._estatus == "activo")
-                                        {
-                                            <td class="crStatus"><i class="fa fa-circle started"></i></td>
-                                            <td class="CrAcciones"><i class="fa fa-pencil"></i> <i class="fa fa-times cambioItinerario"></i></td>
-                                        }
-                                        else
-                                        {
-                                            <td class="crStatus"><i class="fa fa-circle paused"></i></td>
-                                            <td class="CrAcciones"><i class="fa fa-pencil"></i> <i class="fa fa-check cambioItinerario"></i></td>
-                                        }
                                     </tr>
 
                                 }
