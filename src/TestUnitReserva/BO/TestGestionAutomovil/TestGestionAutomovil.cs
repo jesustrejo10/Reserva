@@ -209,9 +209,11 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         public void MMostrarvehiculoBD()
         {
             // si no consigue
-            Automovil buscarvehiculo = _manejadorSql.MMostrarvehiculoBD("HGJYJG");
+            Automovil buscarvehiculo = _manejadorSql.MMostrarvehiculoBD("FALLAR");
             Assert.IsNull(buscarvehiculo);
-            Automovil buscarvehiculo1 = _manejadorSql.MMostrarvehiculoBD("AUT223");
+            Automovil auto = new Automovil("PRUEBACON", "3", "Mazda", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
+            String agregar = _manejadorSql.MAgregarVehiculoBD(auto, 12);
+            Automovil buscarvehiculo1 = _manejadorSql.MMostrarvehiculoBD("PRUEBACON");
             //si pasa..
             Assert.IsInstanceOf(typeof(Automovil), buscarvehiculo1);
 
@@ -279,8 +281,8 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         {
 
             Automovil auto = new Automovil(_matriculaPrueba, "3", "Mazda", 1936, "Sedan", 5, 5, 1, 1, 1, DateTime.Now, "Azul", 1, "Automatica", "Venezuela", "Caracas");
-            List<Automovil> h= auto.MListarvehiculos();
-            Assert.IsInstanceOf(typeof(List<Automovil>), h);
+            List<Automovil> listado = auto.MListarvehiculos();
+            Assert.IsInstanceOf(typeof(List<Automovil>), listado);
    
 
         }
