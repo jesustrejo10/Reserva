@@ -5,6 +5,9 @@ using System.Web;
 
 namespace BOReserva.Models.gestion_restaurantes
 {
+    /// <summary>
+    /// Clase del modelo de restaurantes.
+    /// </summary>
     public class CRestauranteModelo
     {
         public int _id { get; set; }
