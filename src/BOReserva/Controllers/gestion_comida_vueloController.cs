@@ -142,6 +142,7 @@ namespace BOReserva.Controllers
                 return Json(error);
             }
         }
+
+        }
        
 	}
-}
