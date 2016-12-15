@@ -89,7 +89,7 @@
                 data: form.serialize(),
                 type: 'POST',
                 success: function (data) {
-                    var statusHTML = "<td class='crStatus'><i class='fa fa-circle started'></i></td><td class='crAcciones'><i class='fa fa-pencil'></i> <i class='fa fa-times' onclick='cambioCabina(" + $("#idCabina").val() + ")'></i></td>";
+                    var statusHTML = "<td class='crStatus'><i class='fa fa-circle started'></i></td><td class='crAcciones'></i> <i class='fa fa-times' onclick='cambioCabina(" + $("#idCabina").val() + ")'></i></td>";
                         html = "<tr><td style='text-align:center'>" + $("#nombrecabina").val() + "</td><td style='text-align:center'>" + $("#precio").val()+'$' + "</td>" + statusHTML + "</tr>";
                         console.log(html)
                         $("#tablaCabinas").append(html);
@@ -126,7 +126,7 @@
 
 
                                 console.log(statusHTML)
-                                html = "<tr id='" + data[index]._idCabina + "'><td style='text-align:center'>" + data[index]._nombreCabina + "</td><td style='text-align:center'>" + data[index]._precioCabina + "</td>" + statusHTML + "</tr>";
+                                html = "<tr id='" + data[index]._idCabina + "'><td style='text-align:center'>" + data[index]._nombreCabina + "</td><td style='text-align:center'>" + data[index]._precioCabina + '$' + "</td>" + statusHTML + "</tr>";
                                 console.log(html)
                                 $("#tablaCabinas").append(html);
                             }

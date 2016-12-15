@@ -105,7 +105,7 @@
                 data: form.serialize(),
                 type: 'POST',
                 success: function (data) {
-                    var statusHTML = "<td class='crStatus'><i class='fa fa-circle started'></i></td><td class='crAcciones'><i class='fa fa-pencil'></i> <i class='fa fa-times' onclick='cambioCamarote(" + $("#idCamarote").val() + ")'></i></td>";
+                    var statusHTML = "<td class='crStatus'><i class='fa fa-circle started'></i></td><td class='crAcciones'> <i class='fa fa-times' onclick='cambioCamarote(" + $("#idCamarote").val() + ")'></i></td>";
                     html = "<tr><td style='text-align:center'>" + $("#cantidadCama").val() + "</td><td style='text-align:center'>" + $("#tipoCama").val() + "</td>" + statusHTML + "</tr>";
                     console.log(html)
                     $("#tablaCamarote").append(html);

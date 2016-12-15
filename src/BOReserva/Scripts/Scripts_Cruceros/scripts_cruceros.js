@@ -18,7 +18,7 @@ $("#fk_id_crucero").change(function (e) {
                                        
 
                 console.log(statusHTML)
-                html = "<tr id='"+data[index]._idCabina+"'><td style='text-align:center'>" + data[index]._nombreCabina + "</td><td style='text-align:center'>" + data[index]._precioCabina + "</td>" + statusHTML + "</tr>";
+                html = "<tr id='" + data[index]._idCabina + "'><td style='text-align:center'>" + data[index]._nombreCabina + "</td><td style='text-align:center'>" + data[index]._precioCabina + '$' + "</td>" + statusHTML + "</tr>";
                 console.log(html)
                 $("#tablaCabinas").append(html);
             }
@@ -72,7 +72,7 @@ $("#fk_id_cabina").change(function (e) {
                 console.log(data[index])
 
                 var statusHTML = data[index]._estatus == "activo" ? "<td class='crStatus'><i class='fa fa-circle started'></i></td>" +
-                                        "<td class='crAcciones'><i class='fa fa-pencil'></i> <i class='fa fa-times' onclick='cambioCamarote(" + data[index]._idCamarote + ")'></i></td>" : "<td class='crStatus'><i class='fa fa-circle paused'></i></td><td class='crAcciones'><i class='fa fa-pencil'></i> <i class='fa fa-check' onclick='cambioCamarote(" + data[index]._idCamarote + ")'></i></td>";
+                                        "<td class='crAcciones'><i class='fa fa-times' onclick='cambioCamarote(" + data[index]._idCamarote + ")'></i></td>" : "<td class='crStatus'><i class='fa fa-circle paused'></i></td><td class='crAcciones'></i> <i class='fa fa-check' onclick='cambioCamarote(" + data[index]._idCamarote + ")'></i></td>";
 
 
                 console.log(statusHTML)
