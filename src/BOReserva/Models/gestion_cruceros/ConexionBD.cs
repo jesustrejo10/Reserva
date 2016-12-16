@@ -215,6 +215,32 @@ namespace BOReserva.Models.gestion_cruceros
             }
             return listaRuta;
         }
+        //public List<CGestion_ruta> listarRutas()
+        //{
+        //    List<CGestion_ruta> listaRuta = new List<CGestion_ruta>();
+        //    CGestion_ruta ruta;
+        //    Conectar();
+        //    using (comando = new SqlCommand(RecursosCruceros.ListarRuta, conexion))
+        //    {
+        //        comando.CommandType = CommandType.StoredProcedure;
+        //        conexion.Open();
+        //        comando.ExecuteNonQuery();
+        //        SqlDataReader reader = comando.ExecuteReader();
+
+        //        while (reader.Read())
+        //        {
+        //            ruta = new CGestion_ruta();
+        //            ruta._idRuta = int.Parse(reader["id"].ToString());
+        //            ruta._rutaCrucero = reader["ruta"].ToString();
+
+        //            listaRuta.Add(ruta);
+        //        }
+        //        reader.Close();
+        //        conexion.Close();
+        //    }
+        //    return listaRuta;
+        //}
+
 
         public void eliminarCrucero(int id_crucero)
         {
@@ -283,8 +309,8 @@ namespace BOReserva.Models.gestion_cruceros
                     return true;
                 }
             }
-            catch (Exception e) {
-
+            catch (Exception e)
+            { 
 
                 return false;
             }
@@ -294,6 +320,7 @@ namespace BOReserva.Models.gestion_cruceros
         {
             try
             {
+                Conectar();
                 using (comando = new SqlCommand(RecursosCruceros.AgregarItinerario, conexion))
                 {
                     comando.CommandType = CommandType.StoredProcedure;
@@ -341,7 +368,6 @@ namespace BOReserva.Models.gestion_cruceros
                     reader.Close();
                     conexion.Close();
                 }
-               
             }
             catch (Exception e)
             {
