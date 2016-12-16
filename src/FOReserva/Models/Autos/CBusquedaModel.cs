@@ -51,6 +51,7 @@ namespace FOReserva.Models.Autos
 
         public CBusquedaModel() : base() { }
 
+        /* Metodos Get y Set para la matricula del carro */
         public string Matricula
         {
             get { return _matricula; }

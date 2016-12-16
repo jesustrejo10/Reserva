@@ -76,5 +76,36 @@ namespace FOReserva.Controllers
             lista = manejador.buscarAutosCiudad(res_entrega, res_destino, fechaini, fechafin, horaini, horafin);
             return lista;
         }
+
+        [System.Web.Services.WebMethod]
+        public JsonResult eliminarReservaAuto(int id)
+        {///Se instancia un try para la consulta a la base de datos
+            try
+            {
+                ManejadorSQLReservaAutomovil manejador = new ManejadorSQLReservaAutomovil();
+                manejador.eliminarReserva(id);
+            }
+            ///Se atrapa las Exception de Tipo ManejadorSQL Exception
+            catch (ManejadorSQLException e)
+            {
+
+                return null;
+            }
+            ///Se atrapa las Exception de Tipo Invalid ManejadorSQL Exception
+            catch (InvalidManejadorSQLException e)
+            {
+                return null;
+            }
+            ///Se atrapa las Exception de Tipo Exception
+            catch (Exception e)
+            {
+             
+            }
+            return Json("exito");
+        }
+
+       
+
+       
     }
 }
