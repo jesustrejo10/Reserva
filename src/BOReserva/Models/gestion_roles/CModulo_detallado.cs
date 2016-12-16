@@ -9,6 +9,8 @@ namespace BOReserva.Models.gestion_roles
     {
         private string _nombre;
         private string _url;
+        private int _id;
+
 
 
 
@@ -35,7 +37,12 @@ namespace BOReserva.Models.gestion_roles
             get { return _url; }
             set { _url = value; }
         }
-        
+        public int Id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
+
 
     }
 

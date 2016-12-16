@@ -45,7 +45,14 @@ namespace BOReserva.Models.gestion_roles
 
         public int sizeListaDetallada(CListaGenerica<CModulo_detallado> elemento)
         {
-            return _listaGenerica.Count;
+            try
+            {
+                return _listaGenerica.Count;
+
+            }
+            catch (ArgumentOutOfRangeException E) {
+                return 0; 
+            }
         }
 
         public T obtenerUnObjetoDeLaLista (int indiceLista ){

@@ -1,4 +1,4 @@
-function mostrarContenedor(posicion) {
+﻿function mostrarContenedor(posicion) {
 
     $(".contenedor").hide();
     if (posicion > 0 && posicion <= $(".contenedor").length) {
@@ -118,6 +118,9 @@ jQuery(document).ready(function () {
         $("#LiRestaurantes").removeClass("active");
         $("#LiCruceros").removeClass("active");
         $("#LiDiarios").removeClass("active");
+
+        $("#contenedor").html('<div class="text-center">Cargando...</div>');
+
         var url = '/gestion_vuelos/gestion_vuelos';
         var method = 'GET';
         var data = '';
@@ -240,6 +243,9 @@ jQuery(document).ready(function () {
         $("#LiAutos").removeClass("active");
         $("#LiCruceros").removeClass("active");
         $("#LiDiarios").removeClass("active");
+
+        $("#contenedor").html('<div class="text-center">Cargando...</div>');
+
         var url = '/gestion_reserva_restaurante/gestion_reserva_restaurante';
         var method = 'GET';
         var data = '';
@@ -290,6 +296,7 @@ jQuery(document).ready(function () {
         $("#LiHoteles").removeClass("active");
         $("#LiRestaurantes").removeClass("active");
         $("#LiAutos").removeClass("active");
+        $("#LiDiarios").removeClass("active");
 
         $("#contenedor").html('<div class="text-center">Cargando...</div>');
 
@@ -369,7 +376,7 @@ jQuery(document).ready(function () {
                 }
             });
 
-        var url = '/gestion_vuelos/gestion_vuelosImagenes';
+        var url = '/gestion_diarios/gestion_diariosImagenes';
         var method = 'GET';
         var data = '';
 
@@ -390,4 +397,3 @@ jQuery(document).ready(function () {
 
     });
 });
-
