@@ -12,10 +12,10 @@ $("#fk_id_crucero").change(function (e) {
             $("#tablaCabinas tr").remove();
             for (var index = 0; index < data.length; index++) {
                 console.log(data[index])
-          
-                var statusHTML = data[index]._estatus == "activo" ? "<td class='crStatus'><i class='fa fa-circle started'></i></td>"+
+
+                var statusHTML = data[index]._estatus == "activo" ? "<td class='crStatus'><i class='fa fa-circle started'></i></td>" +
                                         "<td class='crAcciones'></i> <i class='fa fa-times' onclick='cambioCabina(" + data[index]._idCabina + ")'></i></td>" : "<td class='crStatus'><i class='fa fa-circle paused'></i></td><td class='crAcciones'> <i class='fa fa-check' onclick='cambioCabina(" + data[index]._idCabina + ")'></i></td>";
-                                       
+
 
                 console.log(statusHTML)
                 html = "<tr id='" + data[index]._idCabina + "'><td style='text-align:center'>" + data[index]._nombreCabina + "</td><td style='text-align:center'>" + data[index]._precioCabina + '$' + "</td>" + statusHTML + "</tr>";
@@ -37,17 +37,17 @@ $("#fk_id_crucero").change(function (e) {
     var form = $("#formGuardarCamarote");
     console.log("cambio");
     $.ajax({
-        url: "gestion_cruceros/M24_ListarCabinas/"+ $("#fk_id_crucero").val(),
+        url: "gestion_cruceros/M24_ListarCabinas/" + $("#fk_id_crucero").val(),
         data: null,
         type: 'GET',
         success: function (data) {
             $("#fk_id_cabina").empty();
             for (var index = 0; index < data.length; index++) {
                 console.log(data[index])
-                html = "<option id='" + data[index]._idCabina + "' value='" + data[index]._idCabina + "'>" + data[index]._nombreCabina + "</option>"; 
+                html = "<option id='" + data[index]._idCabina + "' value='" + data[index]._idCabina + "'>" + data[index]._nombreCabina + "</option>";
                 console.log(html)
                 $("#fk_id_cabina").append(html);
-            } 
+            }
             //$('#formGuardarCabina')[0].reset();
         },
         error: function (data) {
