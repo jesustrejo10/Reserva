@@ -23,7 +23,7 @@ namespace BOReserva.Controllers
         {
             ConexionBD cbd = new ConexionBD();
             VistaListaCrucero vlc = new VistaListaCrucero();
-            CGestion_cabina cabina = new CGestion_cabina() { cabinas = new List<CGestion_cabina>()};
+            CGestion_cabina cabina = new CGestion_cabina() { cabinas = new List<CGestion_cabina>() };
             //CGestion_crucero crucero = new CGestion_crucero();
             vlc.cruceros = cbd.listarCruceros();
             ViewBag.ShowDropDown = new SelectList(vlc.cruceros, "_idCrucero", "_nombreCrucero");
@@ -38,7 +38,7 @@ namespace BOReserva.Controllers
             VistaListaCrucero vlc = new VistaListaCrucero();
             VistaListaRuta vlr = new VistaListaRuta();
             CGestion_itinerario itinerario = new CGestion_itinerario() { itinerarios = new List<CGestion_itinerario>() };
-          //  CGestion_crucero crucero = new CGestion_crucero();
+            //  CGestion_crucero crucero = new CGestion_crucero();
             vlc.cruceros = cbd.listarCruceros();
             vlr.rutas = cbd.listarRutas();
             ViewBag.ShowDropDown = new SelectList(vlc.cruceros, "_idCrucero", "_nombreCrucero");
@@ -107,7 +107,7 @@ namespace BOReserva.Controllers
             String _companiaCrucero = model._companiaCrucero;
             int _capacidadCrucero = model._capacidadCrucero;
             CGestion_crucero crucero = new CGestion_crucero(_nombreCrucero, _companiaCrucero, _capacidadCrucero);
-            crucero.AgregarCrucero(crucero); 
+            crucero.AgregarCrucero(crucero);
 
             return (Json(true, JsonRequestBehavior.AllowGet));
         }

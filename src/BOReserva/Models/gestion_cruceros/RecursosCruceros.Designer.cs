@@ -8,10 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BOReserva.Models.gestion_cruceros {
+namespace BOReserva.Models.gestion_cruceros
+{
     using System;
-    
-    
+
+
     /// <summary>
     ///   Clase de recurso fuertemente tipado, para buscar cadenas traducidas, etc.
     /// </summary>
@@ -22,184 +23,224 @@ namespace BOReserva.Models.gestion_cruceros {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class RecursosCruceros {
-        
+    internal class RecursosCruceros
+    {
+
         private static global::System.Resources.ResourceManager resourceMan;
-        
+
         private static global::System.Globalization.CultureInfo resourceCulture;
-        
+
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal RecursosCruceros() {
+        internal RecursosCruceros()
+        {
         }
-        
+
         /// <summary>
         ///   Devuelve la instancia de ResourceManager almacenada en caché utilizada por esta clase.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
-            get {
-                if (object.ReferenceEquals(resourceMan, null)) {
+        internal static global::System.Resources.ResourceManager ResourceManager
+        {
+            get
+            {
+                if (object.ReferenceEquals(resourceMan, null))
+                {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BOReserva.Models.gestion_cruceros.RecursosCruceros", typeof(RecursosCruceros).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-        
+
         /// <summary>
         ///   Reemplaza la propiedad CurrentUICulture del subproceso actual para todas las
         ///   búsquedas de recursos mediante esta clase de recurso fuertemente tipado.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
-            get {
+        internal static global::System.Globalization.CultureInfo Culture
+        {
+            get
+            {
                 return resourceCulture;
             }
-            set {
+            set
+            {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
         ///   Busca una cadena traducida similar a M24_AgregarCabinas.
         /// </summary>
-        internal static string AgregarCabinas {
-            get {
+        internal static string AgregarCabinas
+        {
+            get
+            {
                 return ResourceManager.GetString("AgregarCabinas", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Busca una cadena traducida similar a M24_AgregarCamarote.
         /// </summary>
-        internal static string AgregarCamarote {
-            get {
+        internal static string AgregarCamarote
+        {
+            get
+            {
                 return ResourceManager.GetString("AgregarCamarote", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Busca una cadena traducida similar a M24_AgregarCrucero.
         /// </summary>
-        internal static string AgregarCruceros {
-            get {
+        internal static string AgregarCruceros
+        {
+            get
+            {
                 return ResourceManager.GetString("AgregarCruceros", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to M24_AgregarItinerario.
         /// </summary>
-        internal static string AgregarItinerario {
-            get {
+        internal static string AgregarItinerario
+        {
+            get
+            {
                 return ResourceManager.GetString("AgregarItinerario", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to M24_CambiarEstatusCabina.
         /// </summary>
-        internal static string CambioEstatusCabinas {
-            get {
+        internal static string CambioEstatusCabinas
+        {
+            get
+            {
                 return ResourceManager.GetString("CambioEstatusCabinas", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Busca una cadena traducida similar a M24_CambiarEstatusCamarote.
         /// </summary>
-        internal static string CambioEstatusCamarote {
-            get {
+        internal static string CambioEstatusCamarote
+        {
+            get
+            {
                 return ResourceManager.GetString("CambioEstatusCamarote", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Busca una cadena traducida similar a M24_CambiarEstatusCrucero.
         /// </summary>
-        internal static string CambioEstatusCrucero {
-            get {
+        internal static string CambioEstatusCrucero
+        {
+            get
+            {
                 return ResourceManager.GetString("CambioEstatusCrucero", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to M24_ConsultarCruceroID.
         /// </summary>
-        internal static string ConsultarCruceroID {
-            get {
+        internal static string ConsultarCruceroID
+        {
+            get
+            {
                 return ResourceManager.GetString("ConsultarCruceroID", resourceCulture);
-			}
-		}
-		
-		/// <summary>
+            }
+        }
+
+        /// <summary>
         ///   Busca una cadena traducida similar a M24_CambiarEstatusItinerario.
         /// </summary>
-        internal static string CambioEstatusItinerario {
-            get {
+        internal static string CambioEstatusItinerario
+        {
+            get
+            {
                 return ResourceManager.GetString("CambioEstatusItinerario", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to M24_EliminarCruceros.
         /// </summary>
-        internal static string EliminarCruceros {
-            get {
+        internal static string EliminarCruceros
+        {
+            get
+            {
                 return ResourceManager.GetString("EliminarCruceros", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Busca una cadena traducida similar a M24_ListarCabinas.
         /// </summary>
-        internal static string ListarCabinas {
-            get {
+        internal static string ListarCabinas
+        {
+            get
+            {
                 return ResourceManager.GetString("ListarCabinas", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Busca una cadena traducida similar a M24_ListarCamarote.
         /// </summary>
-        internal static string ListarCamarote {
-            get {
+        internal static string ListarCamarote
+        {
+            get
+            {
                 return ResourceManager.GetString("ListarCamarote", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Busca una cadena traducida similar a M24_ListarCruceros.
         /// </summary>
-        internal static string ListarCruceros {
-            get {
+        internal static string ListarCruceros
+        {
+            get
+            {
                 return ResourceManager.GetString("ListarCruceros", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to M24_ModificarCrucero.
         /// </summary>
-        internal static string ModificarCruceros {
-            get {
+        internal static string ModificarCruceros
+        {
+            get
+            {
                 return ResourceManager.GetString("ModificarCruceros", resourceCulture);
-			}
-		}
-		
-		/// <summary>
+            }
+        }
+
+        /// <summary>
         ///   Busca una cadena traducida similar a M24_ListarItinerario.
         /// </summary>
-        internal static string ListarItinerario {
-            get {
+        internal static string ListarItinerario
+        {
+            get
+            {
                 return ResourceManager.GetString("ListarItinerario", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Busca una cadena traducida similar a M24_ListarRutas.
         /// </summary>
-        internal static string ListarRuta {
-            get {
+        internal static string ListarRuta
+        {
+            get
+            {
                 return ResourceManager.GetString("ListarRuta", resourceCulture);
             }
         }

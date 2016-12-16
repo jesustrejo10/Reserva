@@ -13,9 +13,11 @@ namespace BOReserva.Servicio.Servicio_Vuelos
     public class manejadorSQL_Vuelos
     {
         //Inicializo el string de conexion en el constructor
+        private manejadorSQL bd = new manejadorSQL();
         public manejadorSQL_Vuelos()
         {
-            stringDeConexion = "Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617a;";
+            //stringDeConexion = "Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617a;";
+            this.stringDeConexion = bd.stringDeConexions;
         }
         //Atributo que ejecutara la conexion a la bd
         private SqlConnection conexion = null;
@@ -263,6 +265,7 @@ namespace BOReserva.Servicio.Servicio_Vuelos
                 //return null;
             }
         }
+
         //fin cargarOrigenes
 
         
@@ -935,6 +938,98 @@ namespace BOReserva.Servicio.Servicio_Vuelos
             }
         }
         // fin consultarDestinos
+        public String[] MListaravionesValidadosBD(String Origen,String Destino)
+        {
+            String[] listaviones = new String[5000];
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                //le indico que voy a executar un Stored Procedure en la Base de Datos
+                SqlCommand cmd = new SqlCommand("M04_ValidarAvionParaRuta", conexion);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                //le paso los parametros que espera el SP
+                cmd.Parameters.Add("@CiudadOrigen", System.Data.SqlDbType.VarChar, 100);
+                cmd.Parameters["@CiudadOrigen"].Value = Origen;
+                cmd.Parameters.Add("@CiudadDestino", System.Data.SqlDbType.VarChar, 100);
+                cmd.Parameters["@CiudadDestino"].Value = Destino;
 
+                int i = 0;
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        listaviones[i] = reader[0].ToString();
+                        i++;
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return listaviones;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                listaviones[0] = ex.Message;
+                return listaviones;
+            }
+            catch (InvalidOperationException ex)
+            {
+                conexion.Close();
+                return null;
+            }
+        }
+        public List<CVueloModificar> buscarAvionesModificar(String Origen, String Destino)
+        {
+            try
+            {
+                var list = new List<CVueloModificar>();
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                //le indico que voy a executar un Stored Procedure en la Base de Datos
+                SqlCommand cmd = new SqlCommand("M04_ValidarAvionParaRuta", conexion);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                //le paso los parametros que espera el SP
+                cmd.Parameters.Add("@CiudadOrigen", System.Data.SqlDbType.VarChar, 100);
+                cmd.Parameters["@CiudadOrigen"].Value = Origen;
+                cmd.Parameters.Add("@CiudadDestino", System.Data.SqlDbType.VarChar, 100);
+                cmd.Parameters["@CiudadDestino"].Value = Destino;
+
+
+
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    var matriculas = new CVueloModificar
+                    {
+                        //leo los diferentes valores que cargaran la lista ya que espero varios resultados
+                        _matriculaAvion = dr.GetSqlString(0).ToString(),
+                    };
+                    list.Add(matriculas);
+                }
+                //cierro el lector
+                dr.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return list;
+            }
+            catch (SqlException e)
+            {
+                throw e;
+                //return null;
+            }
+            catch (Exception e)
+            {
+                throw e;
+                //return null;
+            }
+        }
+        //fin buscarAviones
     }
 }

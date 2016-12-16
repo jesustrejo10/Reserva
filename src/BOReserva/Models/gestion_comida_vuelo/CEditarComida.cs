@@ -14,7 +14,7 @@ namespace BOReserva.Models.gestion_comida_vuelo
         public String _descripcionPlato { get; set; }
 
         //Constructor por default por si acaso
-        //public CEditarComida() { }
+        public CEditarComida() { }
 
         //Constructor para pasarle los valores a la vista
         public CEditarComida(CComida comida)

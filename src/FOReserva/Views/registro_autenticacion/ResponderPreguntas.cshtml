@@ -1,0 +1,65 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    ViewBag.Title = "Responder Pregunta de Seguridad";
+}
+
+<div class="container">
+    <div class="row container-form">
+        <div class="col-md-6 col-md-offset-3">
+            <form class="sky-form" method="post" action="#" autocomplete="off">
+                <div class="clearfix">
+                    <h2>Responder preguntas</h2>
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label>Pregunta #0</label>
+                        <input type="text" class="form-control" readonly="readonly" placeholder="Lugar de nacimiento de su madre.">
+                    </div>
+                    <div class="form-group">
+                        <label>Respuesta #0</label>
+                        <input type="text" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Pregunta #1</label>
+                        <input type="text" class="form-control" readonly="readonly" placeholder="Lugar de nacimiento de su madre.">
+                    </div>
+                    <div class="form-group">
+                        <label>Respuesta #1</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Pregunta #2</label>
+                        <input type="text" class="form-control" readonly="readonly" placeholder="Lugar de nacimiento de su madre.">
+                    </div>
+                    <div class="form-group">
+                        <label>Respuesta #2</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Pregunta #3</label>
+                        <input type="text" class="form-control" readonly="readonly" placeholder="Lugar de nacimiento de su madre.">
+                    </div>
+                    <div class="form-group">
+                        <label>Respuesta #3</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Pregunta #4</label>
+                        <input type="text" class="form-control" readonly="readonly" placeholder="Lugar de nacimiento de su madre.">
+                    </div>
+                    <div class="form-group">
+                        <label>Respuesta #4</label>
+                        <input type="text" class="form-control">
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 text-right">
+                        <!-- <button class="btn btn-primary"><i class="fa fa-check"></i> Enviar</button> -->
+                        <a href='@Url.Action("CambiarClave", "registro_autenticacion")' class="btn btn-primary"><i class="fa fa-check"></i> Enviar</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

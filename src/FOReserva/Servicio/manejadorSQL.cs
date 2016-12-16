@@ -1,13 +1,5 @@
-using FOReserva.Models.Restaurantes;
-using FOReserva.Models.Diarios;
 using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System;
-
-
 
 //IMPORTANTE AGREGAR EL USING DE SUS RESPECTIVAS CLASES PARA PODER AGREGAR EL METODO DE AGREGAR/CONSULTAR
 
@@ -34,7 +26,7 @@ namespace FOReserva.Servicio
                 conexion.Open();
             }catch (SqlException e)
             {
-                    throw new ManejadorSQLException("Error de conexion con la DB", e);
+                throw new ManejadorSQLException("Error de conexion con la DB", e);
             }
         }
 
@@ -109,36 +101,4 @@ namespace FOReserva.Servicio
             return tmp;
         }
     }
-
-    /*public int insertarDiario(CDiarioModel diarionuevo)
-        {
-            try
-            {
-                
-                
-                conexion = new SqlConnection(stringDeConexion);
-               
-                conexion.Open();
-               
-                SqlCommand query = conexion.CreateCommand();
-              
-                query.CommandText = "";
-                       
-                SqlDataReader lector = query.ExecuteReader();
-                
-                lector.Close();
-               
-                conexion.Close();
-                return 0;
-            }
-            catch (SqlException e)
-            {
-                return 1;
-            }
-            catch (Exception e)
-            {
-                return 1;
-            }
-
-        }*/
 }

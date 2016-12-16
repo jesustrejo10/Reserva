@@ -29,7 +29,7 @@ namespace BOReserva.Models.gestion_cruceros
         public int _cantidadCama { get; set; }
         public String _tipoCama { get; set; }
         public String _estatus { get; set; }
-        
+
 
         public void AgregarCamarote(CGestion_camarote camarote)
         {
