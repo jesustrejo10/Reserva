@@ -24,7 +24,8 @@ namespace FOReserva.Servicio
             try
             {
                 conexion.Open();
-            }catch (SqlException e)
+            }
+            catch (SqlException e)
             {
                 throw new ManejadorSQLException("Error de conexion con la DB", e);
             }
@@ -46,46 +47,13 @@ namespace FOReserva.Servicio
             get { return conexion; }
         }
 
-        /*Metodo para la accion de un query por string*/
+        /*Metodo para la accion de un query*/
         public SqlDataReader Executer(string query)
         {
             OpenConnection();
             SqlCommand execute = this.Conexion.CreateCommand();
             execute.CommandText = query;
             SqlDataReader tmp = null;
-            try
-            {
-                tmp = execute.ExecuteReader();
-            }
-            catch (SqlException e)
-            {
-                throw new ManejadorSQLException("Error de conexion con la DB", e);
-            }
-            catch (InvalidOperationException e)
-            {
-                throw new ManejadorSQLException("Operacion invalida en la DB", e);
-            }
-            return tmp;
-        }
-
-        /*Metodo para la accion de un query parametrizado con lista de SqlParameter*/
-        public SqlDataReader Executer(string query, List<SqlParameter> parametros)
-        {
-            conexion = new SqlConnection(stringDeConexion);
-            SqlCommand execute = new SqlCommand(query, conexion);
-            foreach(SqlParameter p in parametros){
-                execute.Parameters.Add(p);
-            }
-            SqlDataReader tmp = null;
-            conexion.Open();
-
-            //Para probar el query final
-            string aaa = execute.CommandText;
-            foreach (SqlParameter p in execute.Parameters)
-            {
-                aaa = aaa.Replace(p.ParameterName, p.Value.ToString());
-            }
-            
             try
             {
                 tmp = execute.ExecuteReader();
