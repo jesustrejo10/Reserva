@@ -1,3 +1,4 @@
+﻿
 ﻿.pv10 {
     padding: 10px 0
 }
@@ -73,7 +74,7 @@
 
 .crStatus {
     width: 170px;
-    display: inline-block;
+    /*display: inline-block;*/
     text-align: center;
 }
 
@@ -86,7 +87,7 @@
 
 .crAcciones {
     width: 170px;
-    display: inline-block;
+    /*display: inline-block;*/
     text-align: center;
 }
 
@@ -169,7 +170,6 @@
 
 #bodyCruc {
     height: calc(100vh - 181px);
-    overflow-x: hidden;
 }
 
 #cabinList,
@@ -242,5 +242,12 @@
     overflow-y: scroll; 
     border: 1px solid #ddd
 }
-.itiRuta{display: inline-block;
-    width: 90px;}
+.itiRuta{
+    display: inline-block;
+    width: 90px;
+}
+
+.campo.required .control-label:after {
+  content:"*";
+  color:red;
+}

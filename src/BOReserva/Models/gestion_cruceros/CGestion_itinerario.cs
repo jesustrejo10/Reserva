@@ -7,13 +7,13 @@ namespace BOReserva.Models.gestion_cruceros
 {
     public class CGestion_itinerario
     {
-        
+
 
         public CGestion_itinerario()
         {
         }
 
-        public CGestion_itinerario(DateTime _fechaInicio, DateTime _fechaFin, int _fkCrucero, int _fkRuta) 
+        public CGestion_itinerario(DateTime _fechaInicio, DateTime _fechaFin, int _fkCrucero, int _fkRuta)
         {
             this._fechaInicio = _fechaInicio;
             this._fechaFin = _fechaFin;
@@ -26,7 +26,7 @@ namespace BOReserva.Models.gestion_cruceros
         public DateTime _fechaFin { get; set; }
         public DateTime _fechaInicio { get; set; }
         public int _fkRuta { get; set; }
-        
+
 
         public string _ItinerarioCrucero { get; set; }
 
@@ -45,7 +45,7 @@ namespace BOReserva.Models.gestion_cruceros
         public void cambiarEstatusItinerario(DateTime fechaInicio, int fkCrucero, int fkRuta)
         {
             ConexionBD cbd = new ConexionBD();
-            cbd.cambiarEstadoItinerario(fechaInicio,fkCrucero, fkRuta);
+            cbd.cambiarEstadoItinerario(fechaInicio, fkCrucero, fkRuta);
         }
     }
 }

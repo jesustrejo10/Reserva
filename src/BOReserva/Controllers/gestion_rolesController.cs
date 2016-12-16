@@ -7,6 +7,7 @@ using BOReserva.Models.gestion_roles;
 using BOReserva.Servicio;
 using System.Net;
 using Newtonsoft.Json.Linq;
+using System.Data.SqlClient;
 
 namespace BOReserva.Controllers
 {
@@ -22,8 +23,23 @@ namespace BOReserva.Controllers
         {
             manejadorSQL sql = new manejadorSQL();
             CRoles rol = new CRoles();
+            try
+            {
             rol.Menu = sql.consultarLosModulos();
+                                    }
+            catch (SqlException e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error insertando en la BD.";
+                return Json(error);
 
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
+                return Json(error);
+            }
             return PartialView(rol);
         }
         /// <summary>
@@ -32,8 +48,24 @@ namespace BOReserva.Controllers
         public ActionResult M13_VisualizarRol()
         {
             manejadorSQL sql = new manejadorSQL();
-            List<CRoles> listaroles = sql.consultarListaroles();
+            List<CRoles> listaroles = new List<CRoles>();
+            try
+            {
+            listaroles = sql.consultarListaroles();
+                                    }
+            catch (SqlException e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error insertando en la BD.";
+                return Json(error);
 
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
+                return Json(error);
+            }
             return PartialView(listaroles);
         }
         
@@ -44,13 +76,28 @@ namespace BOReserva.Controllers
         /// <returns>Devuelve el objeto del Tipo CRoles</returns>
         public ActionResult M13_ModificarRol(string _rolnombre)
         {
-
+            
             manejadorSQL sql = new manejadorSQL();
             CRoles _rol = new CRoles();
             _rol.Nombre_rol = _rolnombre;
+            try
+            {
             _rol.Permisos = sql.consultarLosPermisosAsignados(_rol);
 
-           
+                                   }
+            catch (SqlException e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error insertando en la BD.";
+                return Json(error);
+
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
+                return Json(error);
+            }
             return PartialView(_rol);
         }
         //Metodo para agregar roles
@@ -66,13 +113,30 @@ namespace BOReserva.Controllers
                 String error = "Error, campo obligatorio vacio";
                 //Retorno el error                
                 return Json(error);
-            }            
-            //instancio el manejador de sql
-            manejadorSQL sql = new manejadorSQL();
-            //Realizo el insert y Guardo la respuesta de mi metodo sql en un bool
-            bool respuesta= sql.insertarRol(model);
+            }
+            try
+            {
+                //instancio el manejador de sql
+                manejadorSQL sql = new manejadorSQL();
+                //Realizo el insert y Guardo la respuesta de mi metodo sql en un bool
+                bool respuesta = sql.insertarRol(model);
+            }
+            catch (SqlException e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error insertando en la BD.";
+                return Json(error);
+
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
+                return Json(error);
+            }
+
             //envio una respuesta dependiendo del resultado del insert
-            return (Json(respuesta, JsonRequestBehavior.AllowGet));
+            return (Json(true, JsonRequestBehavior.AllowGet));
 
         
         }
@@ -91,12 +155,27 @@ namespace BOReserva.Controllers
                 //Retorno el error                
                 return Json(error);
             }
+            try{
             //instancio el manejador de sql
             manejadorSQL sql = new manejadorSQL();
             //Realizo el insert y Guardo la respuesta de mi metodo sql en un bool
             bool respuesta = sql.ModificarrRol(rol, nombrerolnuevo);
+                        }
+            catch (SqlException e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error insertando en la BD.";
+                return Json(error);
+
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
+                return Json(error);
+            }
             //envio una respuesta dependiendo del resultado del insert
-            return (Json(respuesta, JsonRequestBehavior.AllowGet));
+            return (Json(true, JsonRequestBehavior.AllowGet));
 
 
         }
@@ -112,18 +191,6 @@ namespace BOReserva.Controllers
             // creo un item para guardar el Json 
             var _permisos=JArray.Parse(json);
 
-
-            // Si es mayor que uno , Significa que hay al menos un permiso 
-            if (_permisos.Count() >= 1) {
-
-                for (int i=1; i < _permisos.Count(); i++)
-                {
-
-                    sql.insertarPermisosRol(_permisos[0].ToString(), _permisos[i].ToString());
-
-                }
-                    
-            }
                        
             //La posicion 0 devolvera el Rol a insertar
 
@@ -137,9 +204,34 @@ namespace BOReserva.Controllers
                 //Retorno el error                
                 return Json(error);
             }
-            //Realizo el consulto y Guardo la respuesta de mi metodo sql 
-            //sql.consultarPermisos(_permisos);
- 
+            
+            //La posicion 0 devolvera el Rol a insertar
+            // Si es mayor que uno , Significa que hay al menos un permiso 
+            try{
+            if (_permisos.Count() >= 1) {
+
+                for (int i=1; i < _permisos.Count(); i++)
+                {
+
+                    sql.insertarPermisosRol(_permisos[0].ToString(), _permisos[i].ToString());
+
+                }
+                    
+            }
+                         }
+            catch (SqlException e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error insertando en la BD.";
+                return Json(error);
+
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
+                return Json(error);
+            }
             //envio el resultado de la consulta
             return (Json(true, JsonRequestBehavior.AllowGet));
 
@@ -162,12 +254,27 @@ namespace BOReserva.Controllers
                 //Retorno el error                
                 return Json(error);
             }
+            try{
             //instancio el manejador de sql
             manejadorSQL sql = new manejadorSQL();
             //Elimino y Guardo la respuesta de mi metodo sql en un bool
             bool respuesta = sql.quitarPermisoRol(model,permiso);
             //envio una respuesta dependiendo del resultado sql
-            return (Json(respuesta, JsonRequestBehavior.AllowGet));
+                                    }
+            catch (SqlException e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error insertando en la BD.";
+                return Json(error);
+
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
+                return Json(error);
+            }
+            return (Json(true, JsonRequestBehavior.AllowGet));
 
 
         }       
@@ -188,12 +295,27 @@ namespace BOReserva.Controllers
                 //Retorno el error                
                 return Json(error);
             }
+            try{
             //instancio el manejador de sql
             manejadorSQL sql = new manejadorSQL();
             //Elimino y Guardo la respuesta de mi metodo sql en un bool
             bool respuesta = sql.eliminarRol(model);
             //envio una respuesta dependiendo del resultado sql
-            return (Json(respuesta, JsonRequestBehavior.AllowGet));
+                                    }
+            catch (SqlException e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error insertando en la BD.";
+                return Json(error);
+
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
+                return Json(error);
+            }
+            return (Json(true, JsonRequestBehavior.AllowGet));
 
 
         }
@@ -222,9 +344,23 @@ namespace BOReserva.Controllers
             //instancio mi clase modulo general
             CListaGenerica<CModulo_detallado> permisos = new CListaGenerica<CModulo_detallado>();
             //coloco el nombre
-            
+            try{
             //Realizo el consulto y Guardo la respuesta de mi metodo sql 
              permisos = sql.consultarPermisos(modulo);
+                                    }
+            catch (SqlException e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error insertando en la BD.";
+                return Json(error);
+
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
+                return Json(error);
+            }
              var _nombrePermiso = new List<object>();
              foreach (var permiso in permisos)
              {
@@ -256,8 +392,23 @@ namespace BOReserva.Controllers
             _rol.Nombre_rol = nombre_rol;
             //Instancio y coloco el nombre en el objeto
             CListaGenerica<CModulo_detallado> _permisos= new CListaGenerica<CModulo_detallado>();
+            try{
             //Realizo la consulta y Guardo la respuesta de mi metodo sql 
             _permisos = sql.consultarLosPermisosNoAsignados(_rol);
+                                    }
+            catch (SqlException e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error insertando en la BD.";
+                return Json(error);
+
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
+                return Json(error);
+            }
             var _nombrePermiso = new List<object>();
             foreach (var permiso in _permisos)
             {

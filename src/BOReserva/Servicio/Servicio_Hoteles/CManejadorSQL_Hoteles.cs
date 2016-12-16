@@ -13,7 +13,9 @@ namespace BOReserva.Servicio.Servicio_Hoteles
         //Inicializo el string de conexion en el constructor
         public CManejadorSQL_Hoteles()
         {
-            stringDeConexion = "Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617a;";
+            manejadorSQL msql = new manejadorSQL();
+            stringDeConexion = msql.stringDeConexions;
+            // stringDeConexion = "Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617a;";
         }
         //Atributo que ejecutara la conexion a la bd
         private SqlConnection conexion = null;
@@ -411,23 +413,33 @@ namespace BOReserva.Servicio.Servicio_Hoteles
             }
         }
 
-        public int MModificarhotelBD(CHotel hotel, int id)
+        public String MModificarhotelBD(CHotel hotel, String nombre, String paginaweb)
         {
             try
-            {
+            {   Debug.WriteLine("El id del hotel es "+hotel._id);
                 conexion = new SqlConnection(stringDeConexion);
                 conexion.Open();
-                String sql = "UPDATE Hotel SET hot_nombre ='" + hotel._nombre + "', hot_url_pagina = '" + hotel._paginaweb + "', hot_email = '" + hotel._email + "', hot_cantidad_habitaciones = " + hotel._canthabitaciones + ", hot_direccion = '" + hotel._direccion + "', hot_estrellas = " + hotel._estrellas + " WHERE hot_id = " + id;
+                String sql = "UPDATE Hotel SET hot_nombre ='" + hotel._nombre + "', hot_url_pagina = '" + hotel._paginaweb + 
+                    "', hot_email = '" + hotel._email + "', hot_cantidad_habitaciones = " + hotel._canthabitaciones + 
+                    ", hot_direccion = '" + hotel._direccion + "', hot_estrellas = " + hotel._estrellas + 
+                    " WHERE hot_nombre = '" + nombre + "' and hot_url_pagina = '" + paginaweb + "'";
                 SqlCommand cmd = new SqlCommand(sql, conexion);
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
                 conexion.Close();
-                return 1;
+                return "1";
             }
             catch (SqlException ex)
             {
                 conexion.Close();
-                return 0;
+                //return 0;
+                return ex.Message;
+            }
+
+            catch (NullReferenceException ex)
+            {
+                conexion.Close();
+                return ex.Message;
             }
         }
     }

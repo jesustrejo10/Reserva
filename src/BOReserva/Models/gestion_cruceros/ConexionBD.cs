@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BOReserva.Servicio;
 
 namespace BOReserva.Models.gestion_cruceros
 {
@@ -17,6 +18,13 @@ namespace BOReserva.Models.gestion_cruceros
         private string strConexion;
         private SqlCommand comando;
         private string query;
+        //Inicializo el string de conexion en el constructor
+        private manejadorSQL bd = new manejadorSQL();
+        public ConexionBD()
+        {
+            //stringDeConexion = "Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617a;";
+            this.strConexion = bd.stringDeConexions;
+        }
         // cargar metodos despues de creacion del ER y mdf
         #endregion
 
@@ -31,7 +39,9 @@ namespace BOReserva.Models.gestion_cruceros
 
             try
             {
-                strConexion = ConfigurationManager.ConnectionStrings["DB_A1380A_reserva"].ConnectionString;
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(strConexion);
+                //strConexion = ConfigurationManager.ConnectionStrings["DB_A1380A_reserva"].ConnectionString;
                 if (conexion == null)
                 {
                     conexion = new SqlConnection(strConexion);
@@ -66,7 +76,7 @@ namespace BOReserva.Models.gestion_cruceros
             catch (Exception ex)
             {
                 throw ex;
-            
+
             }
 
         }
@@ -94,7 +104,8 @@ namespace BOReserva.Models.gestion_cruceros
         {
             List<CGestion_crucero> listaCruceros = new List<CGestion_crucero>();
             CGestion_crucero crucero;
-            try {
+            try
+            {
                 Conectar();
                 using (comando = new SqlCommand(RecursosCruceros.ListarCruceros, conexion))
                 {
@@ -115,9 +126,9 @@ namespace BOReserva.Models.gestion_cruceros
                     }
                     reader.Close();
                 }
-                conexion.Close(); 
+                conexion.Close();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return null;
             }
@@ -179,38 +190,39 @@ namespace BOReserva.Models.gestion_cruceros
             }
             return listaItinerarios;
         }
-        //public List<CGestion_ruta> listarRutas()
-        //{
-        //    List<CGestion_ruta> listaRuta = new List<CGestion_ruta>();
-        //    CGestion_ruta ruta;
-        //    Conectar();
-        //    using (comando = new SqlCommand(RecursosCruceros.ListarRuta, conexion))
-        //    {
-        //        comando.CommandType = CommandType.StoredProcedure;
-        //        conexion.Open();
-        //        comando.ExecuteNonQuery();
-        //        SqlDataReader reader = comando.ExecuteReader();
+        public List<CGestion_ruta> listarRutas()
+        {
+            List<CGestion_ruta> listaRuta = new List<CGestion_ruta>();
+            CGestion_ruta ruta;
+            Conectar();
+            using (comando = new SqlCommand(RecursosCruceros.ListarRuta, conexion))
+            {
+                comando.CommandType = CommandType.StoredProcedure;
+                conexion.Open();
+                comando.ExecuteNonQuery();
+                SqlDataReader reader = comando.ExecuteReader();
 
-        //        while (reader.Read())
-        //        {
-        //            ruta = new CGestion_ruta();
-        //            ruta._idRuta = int.Parse(reader["id"].ToString());
-        //            ruta._rutaCrucero = reader["ruta"].ToString();
+                while (reader.Read())
+                {
+                    ruta = new CGestion_ruta();
+                    ruta._idRuta = int.Parse(reader["id"].ToString());
+                    ruta._rutaCrucero = reader["ruta"].ToString();
 
-        //            listaRuta.Add(ruta);
-        //        }
-        //        reader.Close();
-        //        conexion.Close();
-        //    }
-        //    return listaRuta;
-        //}
+                    listaRuta.Add(ruta);
+                }
+                reader.Close();
+                conexion.Close();
+            }
+            return listaRuta;
+        }
 
         public void eliminarCrucero(int id_crucero)
         {
             Conectar();
             using (comando = new SqlCommand(RecursosCruceros.EliminarCruceros, conexion))
             {
-                try {
+                try
+                {
                     comando.CommandType = CommandType.StoredProcedure;
 
                     comando.Parameters.AddWithValue("@id", id_crucero);
@@ -231,7 +243,8 @@ namespace BOReserva.Models.gestion_cruceros
             Conectar();
             using (comando = new SqlCommand(RecursosCruceros.CambioEstatusCabinas, conexion))
             {
-                try {
+                try
+                {
                     comando.CommandType = CommandType.StoredProcedure;
 
                     comando.Parameters.AddWithValue("@idCabina", id_cabina);
@@ -240,7 +253,8 @@ namespace BOReserva.Models.gestion_cruceros
                     comando.ExecuteNonQuery();
                     conexion.Close();
                     return true;
-                } catch(Exception e)
+                }
+                catch (Exception e)
                 {
                     return false;
                 }
@@ -249,11 +263,12 @@ namespace BOReserva.Models.gestion_cruceros
 
         public Boolean insertarCabinas(CGestion_cabina cabina)
         {
-            try {
+            try
+            {
                 Conectar();
                 using (comando = new SqlCommand(RecursosCruceros.AgregarCabinas, conexion))
                 {
-                    if(cabina._fkCrucero == null)
+                    if (cabina._fkCrucero == null)
                     {
                         return false;
                     }
@@ -267,7 +282,8 @@ namespace BOReserva.Models.gestion_cruceros
                     conexion.Close();
                     return true;
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 return false;
             }
@@ -275,7 +291,8 @@ namespace BOReserva.Models.gestion_cruceros
 
         public Boolean insertarItinerario(CGestion_itinerario itinerario)
         {
-            try {
+            try
+            {
                 Conectar();
                 using (comando = new SqlCommand(RecursosCruceros.AgregarItinerario, conexion))
                 {
@@ -290,7 +307,8 @@ namespace BOReserva.Models.gestion_cruceros
                     conexion.Close();
                     return true;
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 return false;
             }
@@ -300,8 +318,9 @@ namespace BOReserva.Models.gestion_cruceros
         {
             List<CGestion_cabina> listaCabinas = new List<CGestion_cabina>();
             CGestion_cabina cabina;
-            try { 
-            Conectar();
+            try
+            {
+                Conectar();
                 using (comando = new SqlCommand(RecursosCruceros.ListarCabinas, conexion))
                 {
                     comando.CommandType = CommandType.StoredProcedure;
@@ -322,7 +341,8 @@ namespace BOReserva.Models.gestion_cruceros
                     reader.Close();
                     conexion.Close();
                 }
-            }catch (Exception e)
+            }
+            catch (Exception e)
             {
                 throw e;
             }
@@ -331,9 +351,11 @@ namespace BOReserva.Models.gestion_cruceros
 
         public Boolean insertarCamarote(CGestion_camarote camarote)
         {
-            try {
+            try
+            {
                 Conectar();
-                using (comando = new SqlCommand(RecursosCruceros.AgregarCamarote, conexion)) {
+                using (comando = new SqlCommand(RecursosCruceros.AgregarCamarote, conexion))
+                {
                     comando.CommandType = CommandType.StoredProcedure;
 
                     comando.Parameters.AddWithValue("@cantidad_camas", camarote._cantidadCama);
@@ -344,18 +366,20 @@ namespace BOReserva.Models.gestion_cruceros
                     conexion.Close();
                     return true;
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 return false;
             }
-                    
-         }
-               
+
+        }
+
         public List<CGestion_camarote> listarCamarotes(int idCabina)
         {
             List<CGestion_camarote> listaCamarote = new List<CGestion_camarote>();
             CGestion_camarote camarote;
-            try {
+            try
+            {
                 Conectar();
                 using (comando = new SqlCommand(RecursosCruceros.ListarCamarote, conexion))
                 {
@@ -376,17 +400,19 @@ namespace BOReserva.Models.gestion_cruceros
                     }
                     reader.Close();
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 throw e;
             }
             return listaCamarote;
         }
 
-        public Boolean cambiarEstadoItinerario(DateTime fechaInicio, int fkCrucero, int fkRuta )
+        public Boolean cambiarEstadoItinerario(DateTime fechaInicio, int fkCrucero, int fkRuta)
         {
-            try { 
-            Conectar();
+            try
+            {
+                Conectar();
                 using (comando = new SqlCommand(RecursosCruceros.CambioEstatusItinerario, conexion))
                 {
                     comando.CommandType = CommandType.StoredProcedure;
@@ -399,7 +425,8 @@ namespace BOReserva.Models.gestion_cruceros
                     conexion.Close();
                     return true;
                 }
-            } catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return false;
             }
@@ -407,7 +434,8 @@ namespace BOReserva.Models.gestion_cruceros
 
         public Boolean cambiarEstado(int id_crucero)
         {
-            try {
+            try
+            {
                 Conectar();
                 using (comando = new SqlCommand(RecursosCruceros.CambioEstatusCrucero, conexion))
                 {
@@ -420,7 +448,8 @@ namespace BOReserva.Models.gestion_cruceros
                     conexion.Close();
                     return true;
                 }
-            }catch (SqlException e)
+            }
+            catch (SqlException e)
             {
                 return false;
             }
@@ -428,7 +457,8 @@ namespace BOReserva.Models.gestion_cruceros
 
         public Boolean estatusCamarote(int id_camarote)
         {
-            try {
+            try
+            {
                 Conectar();
                 using (comando = new SqlCommand(RecursosCruceros.CambioEstatusCamarote, conexion))
                 {
@@ -441,7 +471,8 @@ namespace BOReserva.Models.gestion_cruceros
                     conexion.Close();
                     return true;
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 return false;
             }
@@ -450,7 +481,8 @@ namespace BOReserva.Models.gestion_cruceros
         public CGestion_crucero consultarCruceroID(int id)
         {
             CGestion_crucero crucero = new CGestion_crucero();
-            try {
+            try
+            {
                 Conectar();
                 using (comando = new SqlCommand(RecursosCruceros.ConsultarCruceroID, conexion))
                 {
@@ -469,7 +501,8 @@ namespace BOReserva.Models.gestion_cruceros
                     reader.Close();
                     conexion.Close();
                 }
-            }catch (Exception e)
+            }
+            catch (Exception e)
             {
                 throw e;
             }
@@ -478,7 +511,8 @@ namespace BOReserva.Models.gestion_cruceros
 
         public Boolean modificarCruceros(CGestion_crucero crucero)
         {
-            try {
+            try
+            {
                 Conectar();
                 using (comando = new SqlCommand(RecursosCruceros.ModificarCruceros, conexion))
                 {
@@ -494,7 +528,8 @@ namespace BOReserva.Models.gestion_cruceros
                     conexion.Close();
                     return true;
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 return false;
             }

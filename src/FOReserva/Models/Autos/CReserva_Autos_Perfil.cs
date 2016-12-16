@@ -5,9 +5,21 @@ using System.Web;
 
 namespace FOReserva.Models.Autos
 {
+    /*Clase para la Reserva
+      Atributos: 
+       _idReserva: Modelo del carro
+       _fechaIni: Fabricante - Marca del carro
+       _fechaFin: Tipo del carro - Camioneta, Sedan...
+       _horaini: Color del carro
+       _horafin: Automatica - Secuencial
+       _ciudadOri: Ciudad de origen del carro
+       _ciudadDes: Precio de alquiler
+       _ciudadDes: Precio de alquiler
+       _status: Status de la reserva Activa - Cancelada   
+     */
     public class CReserva_Autos_Perfil : ReservationModels
     {
-       //private int _idReserva;
+        private int _idReserva;
         private string _fechaIni;
         private string _fechaFin;
         private string _horaini;
@@ -37,11 +49,11 @@ namespace FOReserva.Models.Autos
         /*Constructor Vacio*/
         public CReserva_Autos_Perfil() : base() { }
 
-        //public int IdReserva
-        //{
-        //    get { return _idReserva; }
-        //    set { _idReserva = value; }
-        //}
+        public int IdReserva
+        {
+            get { return _idReserva; }
+            set { _idReserva = value; }
+        }
 
         public string FechaIni
         {
