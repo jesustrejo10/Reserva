@@ -35,11 +35,8 @@
                                     <td>
                                         @*<a href="#" title="Consultar"> <i class="fa fa-eye consultar"></i></a>*@
                                         @*  <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>*@
-<<<<<<< HEAD
-                                        
-=======
+
                                         @*<a href="#" title="Agregar"><i class="fa fa-plus agregarvuelo"></i></a>*@
->>>>>>> 943ff4633f1796aec9d5f2348802b36974774f79
                                         @{
                                 
                                             if (item._estatusPlato == 1)
@@ -88,35 +85,7 @@
 <script language="javascript" type="text/javascript">
     $(document).ready(function () {
         //e.preventDefault();
-        table = $('#example1').DataTable({
-            "paging": true,
-            "lengthChange": true,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": true,
-            "language": {
-                "lengthMenu": "Mostrando _MENU_ registros por página",
-                "zeroRecords": "Sin registros disponibles",
-                "info": "Página _PAGE_ de _PAGES_",
-                "infoEmpty": "No hay registros disponibles",
-                "infoFiltered": "(filtered from _MAX_ total records)",
-                "infoPostFix": "",
-                "search": "Buscar:",
-                "url": "",
-                "infoThousands": ",",
-                "loadingRecords": "Cargando...",
-
-                "paginate": {
-                    "first": "Primero",
-                    "last": "Último",
-                    "next": "Siguiente",
-                    "previous": "Anterior"
-                }
-            },
-            "pageLength": 100
-
-        });
+        table = $('#example1').DataTable();
 
         $(".clasedeprueba").on("click", (function () {
 

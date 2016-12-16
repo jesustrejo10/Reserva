@@ -20,12 +20,12 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult guardarPlato(CAgregarComida model)
         {
-           // string nombrePlato = model._nombrePlato;
-           // string descripcionPlato = model._descripcionPlato;
-           // string tipoPlato = model._tipoPlato;
-           // string estatusPlato = model._estatusPlato;
-           // return(Json(true, JsonRequestBehavior.AllowGet));
-          
+            // string nombrePlato = model._nombrePlato;
+            // string descripcionPlato = model._descripcionPlato;
+            // string tipoPlato = model._tipoPlato;
+            // string estatusPlato = model._estatusPlato;
+            // return(Json(true, JsonRequestBehavior.AllowGet));
+
             //Chequeo si los campos obligatorios estan vacios como medida de seguridad
             if ((model._nombrePlato == null) || (model._tipoPlato == null) || (model._estatusPlato == null) || (model._descripcionPlato == null))
             {
@@ -36,9 +36,9 @@ namespace BOReserva.Controllers
                 //Retorno el error
                 return Json(error);
             }
-           
-                //return (Json(true, JsonRequestBehavior.AllowGet));
-                //AGREGAR EL USING DEL MANEJADOR SQL ANTES (using BOReserva.Servicio; o using FOReserva.Servicio;)
+
+            //return (Json(true, JsonRequestBehavior.AllowGet));
+            //AGREGAR EL USING DEL MANEJADOR SQL ANTES (using BOReserva.Servicio; o using FOReserva.Servicio;)
             //instancio el manejador de sql
             manejadorSQL sql = new manejadorSQL();
             //realizo el insert
@@ -143,6 +143,53 @@ namespace BOReserva.Controllers
             }
         }
 
+        public ActionResult M06_AgregarComidaVuelo(int id)
+        {
+            CAgregarVuelo model = new CAgregarVuelo();
+            model._idVuelo = id;
+
+            manejadorSQL sql = new manejadorSQL();
+            List<CComida> comidas = new List<CComida>();
+            comidas = sql.listarPlatosEnBD();
+            model._codigoVuelo = sql.consultarVuelo(id)._codigoVuelo;
+            model._capacidadTurista = sql.consultarVuelo(id)._capacidadTurista;
+            model._capacidadEjecutiva = sql.consultarVuelo(id)._capacidadEjecutiva;
+            model._capacidadVip = sql.consultarVuelo(id)._capacidadVip;
+            {
+                model._nombrePlato = comidas.Select(x => new SelectListItem
+                {
+                    Value = x._id.ToString(),
+                    Text = x._nombrePlato,
+                });
+            };
+
+
+            return PartialView(model);
         }
-       
+        [HttpPost]
+        public JsonResult guardarPlatoVuelo(CAgregarVuelo model)
+        {
+
+            manejadorSQL sql = new manejadorSQL();
+            int idVuelo = model._idVuelo;
+            int idComida = Convert.ToInt32(model._nombrePlato);
+            int cantidadComida = 0;
+            if (model._tipoClase.Equals("Turista")) { cantidadComida = model._capacidadTurista; }
+            if (model._tipoClase.Equals("Ejecutiva")) { cantidadComida = model._capacidadEjecutiva; }
+            if (model._tipoClase.Equals("VIP")) { cantidadComida = model._capacidadVip; }
+            //realizo el insert
+            bool resultado = sql.insertarPlatoVuelo(idVuelo, idComida, cantidadComida);
+            //envio una respuesta dependiendo del resultado del insert
+            if (resultado)
+            {
+                return (Json(true, JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error insertando en la BD";
+                return Json(error);
+            }
+        }
+    }   
 	}

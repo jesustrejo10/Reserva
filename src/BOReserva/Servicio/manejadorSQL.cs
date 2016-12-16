@@ -353,6 +353,88 @@ namespace BOReserva.Servicio
 
         }
 
+        public CVuelo consultarVuelo(int id)
+        {
+            CVuelo codigoVuelo = new CVuelo();
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                String query = "SELECT v.vue_id AS id, v.vue_codigo AS codigo,origen.lug_nombre AS origen,destino.lug_nombre AS destino, a.avi_pasajeros_turista AS turista, a.avi_pasajeros_ejecutiva AS ejecutiva, a.avi_pasajeros_vip AS vip " +
+                        "FROM Vuelo AS v, avion a, ruta r, lugar origen, lugar destino " +
+                        "WHERE a.avi_id = v.vue_fk_avion AND " +
+                        "v.vue_fk_ruta = r.rut_id AND " +
+                        "r.rut_FK_lugar_origen = origen.lug_id AND " +
+                        "r.rut_Fk_lugar_destino = destino.lug_id AND v.vue_id = "+ id;
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                while (lector.Read())
+                {
+                    CVuelo vuelo = new CVuelo(Convert.ToInt32(lector["id"].ToString()),
+                                     lector["codigo"].ToString(),
+                                     lector["origen"].ToString(),
+                                     lector["destino"].ToString(),
+                                     Int32.Parse(lector["turista"].ToString()),
+                                     Int32.Parse(lector["ejecutiva"].ToString()),
+                                     Int32.Parse(lector["vip"].ToString()));
+                    codigoVuelo = vuelo;
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return codigoVuelo;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        //Procedimiento del Modulo 6 para agregar platos a un vuelo la base de datos.
+        public Boolean insertarPlatoVuelo(int Vuelo, int Comida, int Cantidad)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                //uso el SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "INSERT INTO Comida_Vuelo VALUES (" + Vuelo + "," + Comida + ", " + Cantidad + "); INSERT INTO Comida_Vuelo VALUES (" + Vuelo + "," + Comida + ", " + Cantidad + "); INSERT INTO Comida_Vuelo VALUES (" + Vuelo + "," + Comida + ", " + Cantidad + ");";
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                SqlDataReader lector = query.ExecuteReader();
+                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+                /*while(lector.Read())
+                {
+                      //COMENTADO PORQUE ESTE METODO NO LO APLICA, SERÁ BORRADO DESPUES
+                }*/
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+        }
+
 
         /// <summary>
         /// Procedimiento del Modulo 2 para agregar aviones a la base de datos.

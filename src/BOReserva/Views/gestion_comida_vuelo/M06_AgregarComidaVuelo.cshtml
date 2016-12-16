@@ -1,85 +1,74 @@
 ﻿@model BOReserva.Models.gestion_comida_vuelo.CAgregarVuelo
+
 <script src="~/Scripts/Scripts_ComidaVuelo/llamadas_generales.js"></script>
 @using (Html.BeginForm("guardarPlatoVuelo", "gestion_comida_vuelo", null, FormMethod.Post, new { @id = "formGuardarPlatoVuelo", @class = "form-horizontal" }))
 {
     <a href="~/Views/gestion_comida_vuelo/M06_AgregarComidaVuelo.cshtml"></a>
 
 
-<div class="row">
-    <!-- Agregar Comida  -->
-    <div class="col-xs-6"> 
-        <div class="box-header with-border">
-            <h1 class="box-title"> Agregar Comida-Bebida a Vuelo</h1>
-            <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"></button>
-            </div>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-12">
-                        <label for="nombrePlato">Codigo Vuelo:</label>
-                        
-                        <label for="descripcionPlato">Descripcion (<span style="color:red">*</span>):</label>
-                        
-                         </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box-header with-border">
+                <h1 class="box-title"> Agregar Comida-Bebida a Vuelo</h1>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"></button>
                 </div>
-                <!-- /.box-body -->
             </div>
-    </div>
-   
-    </div>
-    <div class="col-xs-6">
-        <div class="box-header with-border">
-            <h1 class="box-title"></h1>
-            <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"></button>
-            </div>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-12">
-                        <label for="tipoPlato">Tipo (<span style="color:red">*</span>):</label>
-                         
-                         </div>
+                <div class="box box-solid">
+                    <div class="box box-solid">
+                        <div class="box-tools pull-right">
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="row">
+                            <!-- TEXTBOX CODIGO DE VUELO -->
+                            <div class="col-md-12" style="margin-top:10px;">
+                                <div class="col-xs-6">
+                                    <label for="nombrePlato">Codigo Vuelo:</label>
+                                    @Html.TextBoxFor(m => m._codigoVuelo, null, new { @class = "form-control", @disabled = "disabled" })
+                                </div>
+                            </div>
+                            <!-- FIN CODIGO DE VUELO -->
+                            <div>&nbsp;</div>
+                            <div class="col-md-12" style="margin-top:10px;">
+                                <!-- CLASES POR AVION -->
+                                <div class="col-xs-6">
+                                    <label for="tipoClase">CLase Turista:</label>
+                                    @Html.TextBoxFor(m => m._capacidadTurista, null, new { @class = "form-control", @placeholder = "Tipo ", @id = "tipoClase", @disabled = "disabled" })
+                                    <label for="tipoClase">CLase Ejecutiva:</label>
+                                    @Html.TextBoxFor(m => m._capacidadEjecutiva, null, new { @class = "form-control", @placeholder = "Tipo ", @id = "tipoClase", @disabled = "disabled" })
+                                    <label for="tipoClase">CLase VIP:</label>
+                                    @Html.TextBoxFor(m => m._capacidadVip, null, new { @class = "form-control", @placeholder = "Tipo ", @id = "tipoClase", @disabled = "disabled" })
+                                </div>
+                                <!-- FIN CLASES POR AVION -->
+                                <!-- DROPDOWN PLATOS  -->
+                                <div class="col-xs-6">
+                                    <label for="descripcionPlato">Platos (<span style="color:red">*</span>):</label>
+                                    @Html.DropDownListFor(m => m._idComida, new SelectList(Model._nombrePlato as System.Collections.IEnumerable,"Value","Text"),
+                                    "Seleccione un plato", new { @class = "form-control", @placeholder = "Nombre ", @id = "nombrePlato" })
+                                    <label for="descripcionPlato">Platos (<span style="color:red">*</span>):</label>
+                                    @Html.DropDownListFor(m => m._idComida, new SelectList(Model._nombrePlato as System.Collections.IEnumerable,"Value", "Text"),
+                                   "Seleccione un plato", new { @class = "form-control", @placeholder = "Nombre ", @id = "nombrePlato" })
+                                    <label for="descripcionPlato">Platos (<span style="color:red">*</span>):</label>
+                                    @Html.DropDownListFor(m => m._idComida, new SelectList(Model._nombrePlato as System.Collections.IEnumerable,"Value", "Text"),
+                                   "Seleccione un plato", new { @class = "form-control", @placeholder = "Nombre ", @id = "nombrePlato" })
+                                </div>
+                                <!-- FIN PLATOD  -->
+                            </div>
+                            <!-- FIN CAMPOS FORMULARIO-->
+                            <!-- BOTON GUARDAR-->
+                            <div class="col-md-12" style="margin-top:10px;">
+                                <button type="submit" id="guardarPlatoVuelo" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                            </div>
+                            <!--FIN BOTON GUARDAR-->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
                 </div>
-                <!-- /.box-body -->
             </div>
-        </div>
-    </div>
-    <!-- Fin Agregar Comida  -->
-    
-    <!-- Botón Guardar -->
-    <div>&nbsp;</div>
-    <div class="col-md-12" style="margin-top:10px;">
-        <button type="button" id="guardarPlatoVuelo" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
-    </div>
-
-   @* <script>
-        $("#aceptarPlato").click(function (e) {
-            console.log("hola!");
-            e.preventDefault();
-            var form = $("#formGuardarPlato");
-            $.ajax({
-                url: "gestion_comida_vuelo/guardarPlato",
-                data: form.serialize(),
-                type: 'POST',
-                success: function (data) {
-                    alert("Se guardo");
-                    $('#formGuardarPlato')[0].reset();
-                }
-                , error: function (xhr, textStatus, exceptionThrown) {
-                    //muestro el texto del error
-                    alert(xhr.responseText);
-                }
-            });
-        });
-    </script>*@
-
-
     </div>
 }
+
 

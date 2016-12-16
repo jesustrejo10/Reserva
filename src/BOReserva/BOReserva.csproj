@@ -237,6 +237,7 @@
     <Compile Include="Models\gestion_aviones\CAvion.cs" />
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
     <Compile Include="Models\gestion_comida_vuelo\CAgregarVuelo.cs" />
+    <Compile Include="Models\gestion_comida_vuelo\CComidaVuelo.cs" />
     <Compile Include="Models\gestion_comida_vuelo\CVuelo.cs" />
     <Compile Include="Models\gestion_comida_vuelo\CVueloComida.cs" />
     <Compile Include="Models\gestion_cruceros\CGestion_cabina.cs" />
