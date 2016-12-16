@@ -20,7 +20,7 @@ namespace BOReserva.Models.gestion_hoteles
         public float _puntuacion { get; set; }
         public int _disponibilidad { get; set; }
         public List<SelectListItem> _listapaises { get; set; }
-
+        /*
         public CGestionHoteles_EditarHotel() { }
 
         public CGestionHoteles_EditarHotel(CHotel hotel)
@@ -37,5 +37,6 @@ namespace BOReserva.Models.gestion_hoteles
             _puntuacion = hotel._puntuacion;
             _disponibilidad = hotel._disponibilidad;
         }
+        */
     }
 }

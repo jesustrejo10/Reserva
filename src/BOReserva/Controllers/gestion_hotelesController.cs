@@ -52,8 +52,10 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult editarhotel(CGestionHoteles_EditarHotel model)
         {
+            Debug.WriteLine("El id del hotel es "+model._id);
             int id = model._id;
             String nombre = model._nombre;
+            Debug.WriteLine("El nombre del hotel es " + model._nombre);
             String paginaweb = model._paginaweb;
             String email = model._email;
             int canthabitaciones = model._canthabitaciones;
@@ -66,8 +68,9 @@ namespace BOReserva.Controllers
             CHotel hotel = new CHotel(id, nombre, paginaweb, email, canthabitaciones, direccion, ciudad, pais, estrellas,
             puntuacion, disponibilidad);
             CManejadorSQL_Hoteles hot = new CManejadorSQL_Hoteles();
-            int modifico_si_no = hot.MModificarhotelBD(hotel, id);
-            return Json(true, JsonRequestBehavior.AllowGet);
+            String modifico_si_no = hot.MModificarhotelBD(hotel, nombre, paginaweb);
+            //return Json(true, JsonRequestBehavior.AllowGet);
+            return (Json(modifico_si_no));
         }
 
         /// <summary>
@@ -223,7 +226,7 @@ namespace BOReserva.Controllers
             CHotel hotel = new CHotel();
             hotel = sql.consultarHotel(id);
             Debug.WriteLine(hotel._nombre);
-            CGestionHoteles_EditarHotel modelo = new CGestionHoteles_EditarHotel(hotel);
+            CGestionHoteles_EditarHotel modelo = new CGestionHoteles_EditarHotel();
             Debug.WriteLine(modelo._nombre);
             Debug.WriteLine("MODELO EITAR HOTEL");
             return PartialView("M09_GestionHoteles_ModificarHotel", modelo);
