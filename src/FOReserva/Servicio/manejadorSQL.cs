@@ -1,13 +1,5 @@
-using FOReserva.Models.Restaurantes;
-using FOReserva.Models.Diarios;
 using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System;
-
-
 
 //IMPORTANTE AGREGAR EL USING DE SUS RESPECTIVAS CLASES PARA PODER AGREGAR EL METODO DE AGREGAR/CONSULTAR
 
@@ -34,9 +26,6 @@ namespace FOReserva.Servicio
                 conexion.Open();
             }catch (SqlException e)
             {
-                System.Diagnostics.Debug.WriteLine("SQL EXCEPTIONNNNNNNNNNNNNNNNNN=" + e.Message);
-                System.Diagnostics.Debug.WriteLine("SQL EXCEPTIONNNNNNNNNNNNNNNNNN=" + e.StackTrace);
-
                 throw new ManejadorSQLException("Error de conexion con la DB", e);
             }
         }
@@ -70,16 +59,10 @@ namespace FOReserva.Servicio
             }
             catch (SqlException e)
             {
-                System.Diagnostics.Debug.WriteLine("SQL EXCEPTIONNNNNNNNNNNNNNNNNN=" + e.Message);
-                System.Diagnostics.Debug.WriteLine("SQL EXCEPTIONNNNNNNNNNNNNNNNNN=" + e.StackTrace);
-
                 throw new ManejadorSQLException("Error de conexion con la DB", e);
             }
             catch (InvalidOperationException e)
             {
-                System.Diagnostics.Debug.WriteLine("SQL EXCEPTIONNNNNNNNNNNNNNNNNN=" + e.Message);
-                System.Diagnostics.Debug.WriteLine("SQL EXCEPTIONNNNNNNNNNNNNNNNNN=" + e.StackTrace);
-
                 throw new ManejadorSQLException("Operacion invalida en la DB", e);
             }
             return tmp;

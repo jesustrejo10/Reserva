@@ -281,6 +281,7 @@
     <Compile Include="Models\Hoteles\CHotel.cs" />
     <Compile Include="Models\ReservaHabitacion\CProcesoResultado.cs" />
     <Compile Include="Models\ReservaHabitacion\CReservaHabitacion.cs" />
+    <Compile Include="Models\Restaurantes\Cvista_restaurante.cs" />
     <Compile Include="Models\Sesion\Ccliente.cs" />
     <Compile Include="Models\Sesion\Ccodigo_Temporal.cs" />
     <Compile Include="Models\Sesion\Ccontrasena.cs" />
