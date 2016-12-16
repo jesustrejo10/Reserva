@@ -118,7 +118,7 @@
                         <ul class="treeview-menu">
                             @foreach(string i in ((List<string>)Session["Permisos"]))
                             {
-                                if (i == "Gestion de aviones")
+                                if (i == "Agregar aviones")
                                 {
                             <li id="m02_agregaravion"><a href="#"> Agregar </a></li>}
 
@@ -301,7 +301,7 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-<<<<<<< HEAD
+
                             @foreach (string i in ((List<string>)Session["Permisos"]))
                             {
                                 if (i == "Agregar ofertas")
@@ -316,12 +316,7 @@
                                 if (i == "Modificar paquete")
                                 {
                             <li id="consultarPaquete"><a href="#"><i class="fa fa-eye"></i>Visualizar Paquete</a></li>}}
-=======
-                            <li id="agregarOferta"><a href="#">Agregar Oferta</a></li>
-                            <li id="agregarPaquete"><a href="#">Agregar Paquete</a></li>
-                            <li id="consultarOferta"><a href="#">Visualizar Oferta</a></li>
-                            <li id="consultarPaquete"><a href="#">Visualizar Paquete</a></li>
->>>>>>> M06_Comida
+
                         </ul>
                     </li>
                     <!-- FIN DE MODULO DE OFERTAS Y PAQUETES -->
@@ -342,9 +337,10 @@
                             if (i == "Visualizar usuario")
                                                     {
                                                                           
-                                                <li id="indexUsuarios"><a href="#">Visualizar</a></li>}}
+                                                <li id="indexUsuarios"><a href="#">Visualizar</a></li>}
+                                                                                                      }
                         
-                        }</ul>
+                        </ul>
                     </li>
                     <!-- FIN DE MODULO DE GESTION DE USUARIOS -->
                     <!-- MODULO DE GESTION DE ROLES -->
@@ -388,7 +384,7 @@
                             if (i == "Agregar cabina")
                             {
                             <li id="m24_agregarcabina"><a href="#"> Agregar Cabina </a></li>}
-                            if (i == "Agregar cabina")
+                            if (i == "Agregar camarote")
                             {
                             <li id="m24_agregarcamarote"><a href="#"> Agregar Camarote </a></li>}
                             if (i == "Agregar itinerario")
