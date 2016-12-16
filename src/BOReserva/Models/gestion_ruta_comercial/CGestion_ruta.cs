@@ -19,7 +19,7 @@ namespace BOReserva.Models.gestion_ruta_comercial
 
         public int _distanciaRuta { get; set; }
 
-
+        public String _rutaCrucero { get; set; }
 
     }
 

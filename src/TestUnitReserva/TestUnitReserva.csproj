@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -58,6 +58,8 @@
     <Reference Include="System.Web.RegularExpressions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BO\gestion_OfertasYPaquetes\testOfertasYPaquetes.cs" />
+    <Compile Include="BO\gestion_roles\TestRoles.cs" />
     <Compile Include="BO\gestion_aviones\TestAviones.cs" />
     <Compile Include="BO\gestion_usuario\TestUsuario.cs" />
     <Compile Include="BO\TestGestionAutomovil\TestGestionAutomovil.cs" />
@@ -66,6 +68,8 @@
     <Compile Include="BO\gestion_seguridad_ingreso\TestLogin.cs" />
     <Compile Include="BO\gestion_ruta_comercial\TestRutaComercial.cs" />
     <Compile Include="FO\Diario\TestLugarDiario.cs" />
+    <Compile Include="FO\Itinerario\TestPlanificacionVacacion.cs" />
+    <Compile Include="BO\gestion_cruceros\TestCruceros.cs" />
     <Compile Include="FO\Reserva restaurante\TestInsertReserva.cs">
       <SubType>Code</SubType>
     </Compile>

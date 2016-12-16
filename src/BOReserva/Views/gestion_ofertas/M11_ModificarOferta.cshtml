@@ -37,7 +37,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.TextBoxFor(m => m._fechaIniOferta, "{0:dd/MM/yyyy}", new { @class = "form-control", @placeholder = "dd/MM/YYYY", @id = "fechaIniOferta" })
+                                    @Html.TextBoxFor(m => m._fechaIniOferta, "{0:dd/MM/yyyy}", new { @class = "form-control", @placeholder = "dd/MM/AAAA", @id = "fechaIniOferta" })
                                 </div>
                             </div>
 
@@ -47,7 +47,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.TextBoxFor(m => m._fechaFinOferta, "{0:dd/MM/yyyy}", new { @class = "form-control", @placeholder = "dd/MM/YYYY", @id = "fechaFinOferta" })
+                                    @Html.TextBoxFor(m => m._fechaFinOferta, "{0:dd/MM/yyyy}", new { @class = "form-control", @placeholder = "dd/MM/AAAA", @id = "fechaFinOferta" })
                                 </div>
                             </div>
                         </div>
@@ -124,10 +124,13 @@
 
     $("#modify_oferta").click(function (e) {
         e.preventDefault();
-        enviarPaquetesDisponibles();
+        if (validarCamposVacios() && validarEstarFechas() && compararFechas()) {
+            enviarPaquetesDisponibles();
+        }
     });
 
     function modificarOferta() {
+
         var form = $("#modifyOfertaForm");
         var porcentajeOferta = $('#porcentajeOferta').val();
         var estadoOferta = $('#estadoOferta').val();
@@ -333,7 +336,7 @@
     });
 
     function validarEstarFechas() {
-        if (($("#fInicio").val() == "") || ($("#fFin").val() == "")) {
+        if (($("#fechaIniOferta").val() == "") || ($("#fechaFinOferta").val() == "")) {
             alert('La Oferta debe tener fecha inicio y fecha fin!');
             return false;
         }
@@ -350,7 +353,7 @@
     }
     //Compara todas las fechas introducidas
     function compararFechas() {
-        if (!validarFechas($("#fInicio").val(), $("#fFin").val())) {
+        if (!validarFechas($("#fechaIniOferta").val(), $("#fechaFinOferta").val())) {
             alert('La fecha fin debe ser mayor que la fecha inicio!');
             return false;
         }

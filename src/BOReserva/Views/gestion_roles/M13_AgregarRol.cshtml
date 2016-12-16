@@ -22,7 +22,7 @@
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6"> 
                                 <!--se agrega el campo para insertar el nombre del nuevo rol-->                          
-                                <label for="nombreRol">Inserte nombre del rol 
+                                <label for="nombreRol">Inserte nombre del rol (*)
 <!--                                (<span style="color:red">*</span>):-->
                                 </label>
                                 <!-- nuevo rol-->  
@@ -33,12 +33,20 @@
                                 <select name="lista_modulos" id="listamodulos">
                                     <option selected disabled hidden style='display: none' value=''></option>  
                                     <!-- muestra todos los modulos existentes para crear asignarle permisos--> 
-                                    @foreach (var item in Model.Menu)
+                                @try
+                                {
+                                    foreach (var item in Model.Menu)
                                     {
                                         <option value="@item.Nombre">
                                             @item.Nombre
                                         </option>
                                     }
+                                }catch
+                        {
+                            <script>
+                                alert("Error en el listado, por favor intente acceder nuevamente");
+                            </script>
+                        }
                                 </select>
                             </div>                       
                             <div class="col-xs-12" style="margin-top:10px;">
@@ -69,44 +77,49 @@
             e.preventDefault();
             var form = $("#formagreagarrol");            
             var permisos = [$("#nombre_rol").val()];
-            //agrega el nombre del rol
-            jQuery.each($("input[type='checkbox']"), function (i) {               
-                if (this.checked && this.value!="on") {
-                    permisos.push(this.value);
-                }
-                //agrega cada permiso en particular 
-            });
-            $.ajax({
-                url: "gestion_roles/agregarrol",
-                data: form.serialize(),
-                type: 'POST',
-                success: function (data) {
-                    alert("Se guardo");
-                    $('#formagreagarrol')[0].reset();
-                }
-                
-            });
-            var data = {
-                json: JSON.stringify(permisos),
-            };
-            console.log(data);
-            $.ajax({
-                type: 'post',
-                dataType: 'json',
-                url: 'gestion_roles/asignarpermisos',
-                data: data,
-                success: function (data) {
-                    alert("Se asignaron los permisos");
-                    $('#listaPermisos').empty();
+            if ($("#nombre_rol").val().length < 1) {
+                alert("El nombre es obligatorio");
+                return false;
+            }
+            else {
+                //agrega el nombre del rol
+                jQuery.each($("input[type='checkbox']"), function (i) {
+                    if (this.checked && this.value != "on") {
+                        permisos.push(this.value);
+                    }
+                    //agrega cada permiso en particular 
+                });
+                $.ajax({
+                    url: "gestion_roles/agregarrol",
+                    data: form.serialize(),
+                    type: 'POST',
+                    success: function (data) {
+                        alert("Se guardo");
+                        $('#formagreagarrol')[0].reset();
+                    }
 
-                },
-                failure: function (response) {
-                    alert("No se pudo asignar permisos");
+                });
+                var data = {
+                    json: JSON.stringify(permisos),
+                };
+                console.log(data);
+                $.ajax({
+                    type: 'post',
+                    dataType: 'json',
+                    url: 'gestion_roles/asignarpermisos',
+                    data: data,
+                    success: function (data) {
+                        alert("Se asignaron los permisos");
+                        $('#listaPermisos').empty();
 
-                }
-                //envia al metodo en la url los parametros para ser almacenados en BD
-            });
+                    },
+                    failure: function (response) {
+                        alert("No se pudo asignar permisos");
 
+                    }
+                    //envia al metodo en la url los parametros para ser almacenados en BD
+                });
+            }
         });
 
         $("#listamodulos").change(function (e) {

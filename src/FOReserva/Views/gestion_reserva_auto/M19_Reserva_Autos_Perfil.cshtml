@@ -1,14 +1,13 @@
-﻿@model FOReserva.Models.Autos.Cvista_ReservaAutos
+﻿@model List<FOReserva.Models.Autos.CReserva_Autos_Perfil>
 
 <!-- FLIP BOX -->
 <div class="box-light box-icon box-icon-center box-icon-round box-icon-large text-center nomargin">
     <div class="front">
         <div class="box1 noradius">
             <div class="box-icon-title">
-                <i class="fa fa-history"></i>
-                <h2>Felica Doe &ndash; History</h2>
+                <i class="fa fa-car"></i>
+                <h2>Mis Reservas</h2>
             </div>
-            <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Integer posuere erat a ante venenatis dapibus posuere</p>
         </div>
     </div>
 </div>
@@ -17,89 +16,124 @@
 
 <div class="box-light">
     <!-- .box-light OR .box-dark -->
-
     <div class="box-inner">
-
         <h4>Mis Reservas de Autos</h4>
         <div class="table-responsive">
-            <table class="table table-bordered table-hover" id="sample_1">
+            @if (Model.Count() == 0)
+            {
+            <div class="row">
+                <center><h1><i class="fa fa-exclamation-circle orange" aria-hidden="true"></i> No posee reservas </h1></center>
+            </div>
+            }
+            else
+            {
+                <table class="table table-bordered table-hover" id="sample_1">
                 <thead>
                     <tr>
-                        <th class="width-30">Img</th>
-                        <th>Column name</th>
-                        <th>Ratings</th>
+                        <th>Fabricante</th>
+                        <th>Modelo</th>
+                        <th>Origen</th>
+                        <th>Destino</th>
+                        <th>Fecha Recogida</th>
+                        <th>Fecha Devolución</th>
+                        <th>Precio</th>
                         <th>Estatus</th>
-                        <th>Column name</th>
+                        <th>Acciones</th>
+
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="text-center"><img src="@Url.Content("~/Content/assets/images/male.png")" alt="" width="20"></td>
-                        <td>Value 1</td>
-                        <td><div class="rating rating-0 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
-                        <td>
-                            <span class="label label-success">Aprobado </span>
-                        </td>
-                        <td>
-                            <a href="#" class="btn btn-info btn-xs"><i class="fa fa-edit white"></i> Edit </a>
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-times white"></i> Delete </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-center"><img src="@Url.Content("~/Content/assets/images/female.png")" alt="" width="20"></td>
-                        <td>Value 2</td>
-                        <td><div class="rating rating-1 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
-                        <td>
-                            <span class="label label-info">Pendiente</span>
-                        </td>
-                        <td>
-                            <a href="#" class="btn btn-info btn-xs"><i class="fa fa-edit white"></i> Edit </a>
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-times white"></i> Delete </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-center"><img src="@Url.Content("~/Content/assets/images/female.png")" alt="" width="20"></td>
-                        <td>Value 3</td>
-                        <td><div class="rating rating-2 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
-                        <td>
-                            <span class="label label-warning">Suspendido</span>
-                        </td>
-                        <td>
-                            <a href="#" class="btn btn-info btn-xs"><i class="fa fa-edit white"></i> Edit </a>
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-times white"></i> Delete </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-center"><img src="@Url.Content("~/Content/assets/images/male.png")" alt="" width="20"></td>
-                        <td>Value 4</td>
-                        <td><div class="rating rating-3 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
-                        <td>
-                            <span class="label label-danger">Cancelado</span>
-                        </td>
-                        <td>
-                            <a href="#" class="btn btn-info btn-xs"><i class="fa fa-edit white"></i> Edit </a>
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-times white"></i> Delete </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-center"><img src="@Url.Content("~/Content/assets/images/male.png")" alt="" width="20"></td>
-                        <td>Value 5</td>
-                        <td><div class="rating rating-4 size-13 width-100"><!-- rating-0 ... rating-5 --></div></td>
-                        <td><span class="label label-primary">N/A </span></td>
-                        <td>
-                            <a href="#" class="btn btn-info btn-xs"><i class="fa fa-edit white"></i> Edit </a>
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-times white"></i> Delete </a>
-                        </td>
-                    </tr>
-                </tbody>
+                    @foreach (var item in Model)
+{
+    <tr id="@item.IdReserva" value="@item.IdReserva">
+        <td>@item.Autos.Fabricante</td>
+        <td>@item.Autos.Modelo</td>
+        <td>@item.CiudadOri</td>
+        <td>@item.CiudadDes</td>
+        <td>@item.FechaIni</td>
+        <td>@item.FechaFin</td>
+        <td>@item.Autos.Precio</td>
+        <td>
+            @if (item.Status == 1)
+            {
+                <span class="label label-success">Activa</span>
+            }
+            else
+            {
+                <span class="label label-danger">Cancelada</span>
+            }
+        </td>
+        <td>
+@if (item.Status == 1)
+            {
 
+            <a id="eliminar" href="#ModalEliminar" name="eliminar" data-id="@item.IdReserva" data-toggle="modal" class="open-AddBookDialog btn btn-danger btn-xs"><i class="fa fa-times white"></i> Cancelar </a>
+}
+        </td>
+    </tr>
+}
+                </tbody>
             </table>
+            }
+        </div>
+    </div>
+</div>
+<div id="ModalEliminar" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Eliminar Reserva</h4>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro que desea cancelar esta reserva?</p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="aceptar_eliminar" value="0" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
         </div>
 
     </div>
-
 </div>
+<script>
+    $(document).on("click", ".open-AddBookDialog", function () {
+        var myBookId = $(this).data('id');
+        $(".modal-footer #aceptar_eliminar").val(myBookId);
+        $(".error").hide();
+        console.log(myBookId);
+        
+    });
+    $(document).on('click', '#aceptar_eliminar', function () {
+        var id_fila = $(this).val();
+        console.log(id_fila);
+        $.ajax({
+            url: "/gestion_reserva_auto/eliminarReservaAuto/",
+            type: 'POST',
+            dataType: "json",
+            data: { id: id_fila }
 
+        }).done(function (data) {
+            javascript: location.reload();
+        })
+	    .fail(function (data) {
+	        $('#ModalErrorEliminar').modal('show');
+	        console.log("error");
+	    })
+	    .always(function (data) {
+	        console.log("complete");
+	    });
+    });
+
+
+
+
+
+
+</script>
 <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/jquery.dataTables.min.js")"></script>
 <script type="text/javascript" src="@Url.Content("~/Contentassets/plugins/datatables/js/dataTables.tableTools.min.js")"></script>
 <script type="text/javascript" src="@Url.Content("~/Contentassets/plugins/datatables/js/dataTables.colReorder.min.js")"></script>

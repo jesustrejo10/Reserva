@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "Cambiar Clave";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+@model FOReserva.Models.Sesion.Ccliente
+
+<script>
+    var error = '@ViewData["error"]';
+    if (error.length > 3) {
+        alert('@ViewData["error"]');
+    }
+
+    function validaCaracteres(e) {
+        key = e.keyCode || e.which;
+        tecla = String.fromCharCode(key).toLowerCase();
+        letras = " abcdefghijklmnopqrstuvwxyz0123456789._-";
+        especiales = [8];
+
+        tecla_especial = false
+        for (var i in especiales) {
+            if (key == especiales[i]) {
+                tecla_especial = true;
+                break;
+            }
+        }
+
+        if (letras.indexOf(tecla) == -1 && !tecla_especial)
+            return false;
+    }
+</script>
+
+<div class="container">
+    <div class="row container-form">
+        <div class="col-md-6 col-md-offset-3">
+           
+            @using (Html.BeginForm("CambiarClave", "registro_autenticacion", FormMethod.Post, new { @class = "sky-form", @id = "formularioRegistro" }))
+            {
+                <div class="clearfix">
+                    <h2>Ingrese su nueva clave</h2>
+                    <!-- Email -->
+                    <div class="col-md-12">
+                        <label for="register:pass1">Clave</label>
+                        <label class="input margin-bottom-10">
+                            <i class="ico-append fa fa-lock"></i>
+                            
+                            <input id="clave0" type="password" name="clave0" required="required" onkeypress="return validaCaracteres(event)"/>
+                            <b class="tooltip tooltip-bottom-right">Ingrese su nueva clave</b>
+                        </label>
+                        <!-- DIV OCULTOS  PARA VALIDACIONES-->
+                        <div id="clave0Empty" style="display: none;" class="has-error error">
+                            <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe colocar su confirmación de clave</p>
+                        </div>
+
+                        <div id="clave0Format" style="display: none;" class="has-error error">
+                            <p><i class="fa fa-times-circle" aria-hidden="true"></i> El campo solo debe contener caracteres alfabéticos, números y . _ ó -</p>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="register:pass2">Repita su clave nueva</label>
+                        <label class="input margin-bottom-10">
+                            <i class="ico-append fa fa-lock"></i>
+                            <input id="clave1" type="password" name="clave1" required="required" onkeypress="return validaCaracteres(event)"/>
+                            <b class="tooltip tooltip-bottom-right">Ingrese su clave nuevamente</b>
+                        </label>
+                        <!-- DIV OCULTOS  PARA VALIDACIONES-->
+                        <div id="clave1Empty" style="display: none;" class="has-error error">
+                            <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe colocar su confirmación de clave</p>
+                        </div>
+
+                        <div id="clave1Format" style="display: none;" class="has-error error">
+                            <p><i class="fa fa-times-circle" aria-hidden="true"></i> El campo solo debe contener caracteres alfabéticos, números y . _ ó -</p>
+                        </div>
+
+                        <div id="clave1Error" style="display: none;" class="has-error error">
+                            <p><i class="fa fa-times-circle" aria-hidden="true"></i> La confirmación de clave no coincide con la clave </p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 text-right" style="padding-top: 20px!important;">
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Enviar</button>
+                    </div>
+                </div>
+            }   
+        </div>
+    </div>

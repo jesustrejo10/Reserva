@@ -67,75 +67,134 @@ $("#ciudadD").change(function () {
 });
 
 //evento para traer el modelo del avion seleccionado en la vista CREAR
-$("#matAvion").change(function () {
+$("#matAvion").click(function (e) {
+    e.preventDefault();
     var aID = $(matAvion).val();
-    $.getJSON("gestion_vuelo/buscaModeloA", { matriAvion: aID },
-           function (data) {
-               $("#modeloAvion").val(data);
-           });
+    var url = "gestion_vuelo/buscaModeloA";
+    $.ajax({
+        url: url,
+        data: { matriAvion: aID },
+        cache: false,
+        type: 'POST',
+        success: function (data) {
+            if (data != null) {
+                $("#modeloAvion").val(data);
+            }
+        }
+        , error: function (xhr, textStatus, exceptionThrown) {
+            alert(xhr.responseText);
+        }
+    });
 });
 
 //evento para traer la cantidad de pasajeros segun avion seleccionado en la vista CREAR
-$("#matAvion").change(function () {
+$("#matAvion").click(function (e) {
+    e.preventDefault();
     var aID = $(matAvion).val();
-    $.getJSON("gestion_vuelo/buscaPasajerosA", { matriAvion: aID },
-       function (data) {
-           $("#pasajerosAvion").val(data);
-       });
+    var url = "gestion_vuelo/buscaPasajerosA";
+    $.ajax({
+        url: url,
+        data: { matriAvion: aID },
+        cache: false,
+        type: 'POST',
+        success: function (data) {
+            if (data != null) {
+                $("#pasajerosAvion").val(data);
+            }
+        }
+        , error: function (xhr, textStatus, exceptionThrown) {
+            alert(xhr.responseText);
+        }
+    });
 });
 
 //evento para traer la distancia maxima que cubre segun avion seleccionado en la vista CREAR
-$("#matAvion").change(function () {
+$("#matAvion").click(function (e) {
+    e.preventDefault();
     var aID = $(matAvion).val();
-    $.getJSON("gestion_vuelo/buscaDistanciaA", { matriAvion: aID },
-       function (data) {
-           $("#distanciaMaxima").val(data);
-       });
+    var url = "gestion_vuelo/buscaDistanciaA";
+    $.ajax({
+        url: url,
+        data: { matriAvion: aID },
+        cache: false,
+        type: 'POST',
+        success: function (data) {
+            if (data != null) {
+                $("#distanciaMaxima").val(data);
+            }
+        }
+        , error: function (xhr, textStatus, exceptionThrown) {
+            alert(xhr.responseText);
+        }
+    });
 });
 
 //evento para traer la velocidad maxima segun avion seleccionado en la vista CREAR
-$("#matAvion").change(function () {
+$("#matAvion").click(function (e) {
+    e.preventDefault();
     var aID = $(matAvion).val();
-    $.getJSON("gestion_vuelo/buscaVelocidadA", { matriAvion: aID },
-       function (data) {
-           $("#velocidadMaxima").val(data);
-       });
+    var url = "gestion_vuelo/buscaVelocidadA";
+    $.ajax({
+        url: url,
+        data: { matriAvion: aID },
+        cache: false,
+        type: 'POST',
+        success: function (data) {
+            if (data != null) {
+                $("#velocidadMaxima").val(data);
+            }
+        }
+        , error: function (xhr, textStatus, exceptionThrown) {
+            alert(xhr.responseText);
+        }
+    });
 });
 
 //evento para luego de haber seleccionado el estado del vuelo, se calcule la fecha del aterrizaje en la vista CREAR
-$("#estadoVuelo").change(function () {
+$("#estadoVuelo").click(function (e) {
+    e.preventDefault();
     var fID = $(fechaDespegue).val();
     var hID = $(horaDespegue).val();
     var oID = $(ciudadO).val();
     var dID = $(ciudadD).val();
     var mID = $(matAvion).val();
-    $.getJSON("gestion_vuelo/buscaFechaA", { fechaDes: fID, horaDes: hID, ciudadO: oID, ciudadD: dID, matriAvion: mID, opcion: 0},
-       function (data) {
-           $("#fechaAterrizaje").val(data);
-       });
+    var url = "gestion_vuelo/buscaFechaA";
+    $.ajax({
+        url: url,
+        data: { fechaDes: fID, horaDes: hID, ciudadO: oID, ciudadD: dID, matriAvion: mID, opcion: 0 },
+        cache: false,
+        type: 'POST',
+        success: function (data) {
+            $("#fechaAterrizaje").val(data);
+        }
+        , error: function (xhr, textStatus, exceptionThrown) {
+            alert(xhr.responseText);
+        }
+    });
 });
 
 //evento para luego de haber seleccionado el estado del vuelo, se calcule la hora del aterrizaje en la vista CREAR
-$("#estadoVuelo").change(function () {
+$("#estadoVuelo").click(function (e) {
+    e.preventDefault();
     var fID = $(fechaDespegue).val();
     var hID = $(horaDespegue).val();
     var oID = $(ciudadO).val();
     var dID = $(ciudadD).val();
     var mID = $(matAvion).val();
-    $.getJSON("gestion_vuelo/buscaFechaA", { fechaDes: fID, horaDes: hID, ciudadO: oID, ciudadD: dID, matriAvion: mID, opcion: 1 },
-       function (data) {
-           $("#horaAterrizaje").val(data);
-       });
+    var url = "gestion_vuelo/buscaFechaA";
+    $.ajax({
+        url: url,
+        data: { fechaDes: fID, horaDes: hID, ciudadO: oID, ciudadD: dID, matriAvion: mID, opcion: 1 },
+        cache: false,
+        type: 'POST',
+        success: function (data) {
+            $("#horaAterrizaje").val(data);
+        }
+        , error: function (xhr, textStatus, exceptionThrown) {
+            alert(xhr.responseText);
+        }
+    });
 });
-
-// verificar que el campo de Codigo Vuelo no tenga caracteres especiales ni espacios
-function checkTextCodigo(field) {
-    var codigo = $('#codigoVuelo').val();
-    if (/[^a-z0-9]/gi.test(codigo)) {  // Validando 
-        alert("El codigo de vuelo no puede contener caracteres especiales ni espacios");
-        field.value = '';
-    }
-}
 //evento para el boton de return de la vista VISUALIZAR-->MOSTRAR
         $("#return").click(function (e) {
             e.preventDefault();
@@ -159,23 +218,26 @@ function checkTextCodigo(field) {
                 });
         });
 
+
+
 //verificar campo de CodigoVuelo
-        function checkTextField(field) {
-            var _codVuelo = $('#codigoVuelo').val();
+
+        function checkTextCodigo(field) {
+            var codVuelo = $('#codigoVuelo').val();
             // verificar que el campo de Codigo Vuelo no tenga caracteres especiales ni espacios
             if (/[^a-z0-9]/gi.test(codVuelo)) {// Validando 
-                alert("El codigo de vuelo no puede contener caracteres especiales ni espacios");
+                alert("El codigo de vuelo no puede contener caracteres especiales");
                 field.value = '';
             } else {
-                var url = "/gestion_automoviles/revisarCodVuelo";
+                var url = "/gestion_vuelo/revisarCodVuelo";
                 $.ajax({
                     url: url,
-                    data: { codigoVuelo: _codVuelo },
+                    data: { codVuelo: codVuelo },
                     cache: false,
                     type: "POST",
                     success: function (data) {
                         if (data == "1") {
-                            alert("Este codigo ya esta registrado");
+                            alert("Este codigo de vuelo ya esta registrado");
                             field.value = '';
                         }
                     },
@@ -327,4 +389,26 @@ function checkTextCodigo(field) {
                        });
 
                    });
-        });
+ });
+ $("#ciudadDMod").change(function () {
+     var cID = $(ciudadOMod).val();
+     var dID = $(ciudadDMod).val();
+     $.getJSON("gestion_vuelo/validarAvionesModificar", { ciudadO: cID, ciudadD: dID },
+            function (data) {
+                var select = $("#matAvion");
+                select.empty();
+                select.append($('<option/>', {
+                    value: 0,
+                    text: "Seleccione un avion"
+                    , error: function (xhr, textStatus, exceptionThrown) {
+                        alert(xhr.responseText);
+                    }
+                }));
+                $.each(data, function (index, itemData) {
+                    select.append($('<option/>', {
+                        value: itemData.Value,
+                        text: itemData.Text
+                    }));
+                });
+            });
+ });

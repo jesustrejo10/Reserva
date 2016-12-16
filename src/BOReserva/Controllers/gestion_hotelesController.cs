@@ -21,7 +21,7 @@ namespace BOReserva.Controllers
         {
             CHotel crear = new CHotel()
             {
-                _listapaises = new List<SelectListItem>(pais())                
+                _listapaises = new List<SelectListItem>(pais())
             };
 
             return PartialView(crear);
@@ -195,7 +195,7 @@ namespace BOReserva.Controllers
             Debug.WriteLine("ciudad " + model._ciudad);
 
             //Chequeo si los campos obligatorios estan vacios como medida de seguridad
-            if ((model._canthabitaciones == 0) || (model._direccion == null) || (model._nombre == null) 
+            if ((model._canthabitaciones == 0) || (model._direccion == null) || (model._nombre == null)
                 || (model._email == null) || (model._estrellas == 0)  || (model._paginaweb == null) || (model._pais == null)) 
             {
                 //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
@@ -302,8 +302,8 @@ namespace BOReserva.Controllers
             for (int i = 0; i < ciudadesFiltradas.Length; i++) {
                 if(ciudadesFiltradas[i]!=null)
                     objcity.Add(ciudadesFiltradas[i]);
-                }
-               
+        }
+
             // objcity = new List<String>(ciudadesFiltradas);
 
             _ciudad = objcity.First();

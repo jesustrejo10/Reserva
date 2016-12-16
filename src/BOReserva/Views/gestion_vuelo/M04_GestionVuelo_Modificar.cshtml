@@ -38,9 +38,9 @@
                             <div class="col-xs-6">  
                                  <label> Nueva ciudad de origen:</label>
                                 @{
-                                    List<SelectListItem> ciudadesorigenes = BOReserva.Controllers.gestion_vueloController.ciudadesorigen();
-                                        @Html.DropDownListFor(m => m._ciudadOrigenNuevo, ciudadesorigenes, Model._ciudadOrigen, new { @class = "form-control", @placeholder = "CiudadOrigen", @id = "ciudadOMod", @onblur = "listadeciudades(this.value);" });
 
+                                        List<SelectListItem> ciudadesorigenes = BOReserva.Controllers.gestion_vueloController.ciudadesorigen(Model._ciudadOrigen);
+                                        @Html.DropDownListFor(m => m._ciudadOrigenNuevo, ciudadesorigenes, Model._ciudadOrigen, new { @class = "form-control", @placeholder = "CiudadOrigen", @id = "ciudadOMod", @onblur = "listadeciudades(this.value);" });
                                 }
                            </div>
                          </div>
@@ -56,9 +56,8 @@
                         <div class="col-xs-6">
                             <label> Nueva ciudad de destino:</label>
                             @{
-                                List<SelectListItem> ciudadesdestinos = BOReserva.Controllers.gestion_vueloController.ciudadesdestino(Model._ciudadOrigen);
-                                Response.Write("<script>alert('" + ciudadesdestinos.First().Text + "');</script>");
-                                @Html.DropDownListFor(m => m._ciudadDestino, ciudadesdestinos, Model._ciudadDestino, new { @class = "form-control", @placeholder = "CiudadOrigen", @id = "ciudadDMod", @onblur = "listadeciudades(this.value);" });
+                                List<SelectListItem> ciudadesdestinos = BOReserva.Controllers.gestion_vueloController.ciudadesdestino(Model._ciudadOrigen,Model._ciudadDestino);
+                                @Html.DropDownListFor(m => m._ciudadDestinoNuevo, ciudadesdestinos, Model._ciudadDestino, new { @class = "form-control", @placeholder = "CiudadOrigen", @id = "ciudadDMod", @onblur = "listadeciudades(this.value);" });
 
                             }
                         </div>
@@ -78,9 +77,11 @@
                             <div class="col-xs-6">
                                 <!-- DROPDOWN ELEGIR MATRICULA AVION -->
                                 <label> Avion (<span style="color: #d9534f">*</span>):</label>
-                                <!--Enumerable empty por que lleno con script-->
-                                @Html.TextBoxFor(m => m._matriculaAvion, null, new { @class = "form-control", @placeholder = "Ej: AA 2254", @id = "codigoVuelo", @allign = "center" })
+                                @{
+                                    List<SelectListItem> aviones = BOReserva.Controllers.gestion_vueloController.avionesvalidados(Model._ciudadOrigen,Model._ciudadDestino,Model._matriculaAvion);
+                                    @Html.DropDownListFor(m => m._matriculaAvion, aviones, Model._matriculaAvion, new { @class = "form-control", @placeholder = "CiudadOrigen", @id = "matAvion", @onblur = "listadeciudades(this.value);" });
 
+                                }
                             </div>
                             <!-- FIN ELEGIR MATRICULA AVION -->
                         </div>

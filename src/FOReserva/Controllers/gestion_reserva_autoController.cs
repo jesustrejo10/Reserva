@@ -27,52 +27,85 @@ namespace FOReserva.Controllers
 
         public ActionResult M19_Reserva_Autos_Perfil()
         {
-
-            return PartialView();
+            ManejadorSQLReservaAutomovil manejador = new ManejadorSQLReservaAutomovil();
+            List<CReserva_Autos_Perfil> lista = manejador.buscarReservas();
+            return PartialView(lista);
         }
 
-        [HttpPost]
-        public JsonResult buscarCarro(Cvista_ReservaAutos model)
+        public ActionResult M19_Busqueda_Autos()
         {
-            
-            DateTime fechaini = model.fechaini;
-            DateTime fechafin = model.fechafin;
-            int sel = model.SelectedCiudadIdOrigen;
-            int sel2 = model.SelectedCiudadIdDestino;
+            try { 
+            string res_entrega = Request.Form["SelectedCiudadIdOrigen"].ToString();
+            string res_destino = Request.Form["SelectedCiudadIdDestino"].ToString();
+            string fechaIni = Request.Form["fechaini"];
+            string fechaFin = Request.Form["fechafin"];
+            string horaIni = Request.Form["res_horaini"];
+            string horaFin = Request.Form["res_horafin"];
 
-            //Console.WriteLine(prueba);
-            
-            return (Json(true, JsonRequestBehavior.AllowGet));
+
+                List<CReserva_Autos_Perfil> lista = busqueda(res_entrega, res_destino, fechaIni, fechaFin, horaIni, horaFin);
+                return View(lista);
+            }
+            catch (Exception Error)
+            {
+                return View();
+            }
         }
 
-        //[HttpPost]
-        public JsonResult InsertarReservaCarro(CAgregarReserva model)
+        public ActionResult M19_Accion_Reserva(string matricula, string modelo, string fabricante, string tipo, string color, string transmision, int ciudad, decimal precio, int anio, int pasajero, int disponibilidad, string owner, string date, string time, string fechaini, string fechafin, string horaini, string horafin, string ciudadori, string ciudaddes)
         {
+            CReserva_Autos_Perfil reserva = new CReserva_Autos_Perfil(owner, date, time, fechaini, fechafin, horaini, horafin, ciudaddes, ciudadori,1);
+            reserva.Autos = new CBusquedaModel(matricula, modelo, fabricante, tipo, color, transmision, ciudad, precio, anio, pasajero, disponibilidad);
 
-            if (model.raut_automovil == null)
+            try
             {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error= "Error, campo obligatorio vacio";
-                return Json(error);          
+                ManejadorSQLReservaAutomovil manejador = new ManejadorSQLReservaAutomovil();
+                manejador.InsertarReservaAuto(reserva);
+                return View(reserva);
             }
-            ManejadorSQLReservaAutomovil sql = new ManejadorSQLReservaAutomovil();
-            bool resultado = sql.InsertarReservaAuto(model);
-
-            if (resultado)
+            catch (ManejadorSQLException AgregarError)
             {
-                return (Json(true, JsonRequestBehavior.AllowGet));
+                return View();
             }
-            else
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error2 = "Error insertando en la BD";
-                return Json(error2); 
-            
-            
-            }
-      
         }
 
+        public List<CReserva_Autos_Perfil> busqueda(string res_entrega, string res_destino, string fechaini, string fechafin, string horaini, string horafin)
+        {
+            List<CReserva_Autos_Perfil> lista = null;
+            ManejadorSQLReservaAutomovil manejador = new ManejadorSQLReservaAutomovil();
+            lista = manejador.buscarAutosCiudad(res_entrega, res_destino, fechaini, fechafin, horaini, horafin);
+            return lista;
+        }
 
+        [System.Web.Services.WebMethod]
+        public JsonResult eliminarReservaAuto(int id)
+        {///Se instancia un try para la consulta a la base de datos
+            try
+            {
+                ManejadorSQLReservaAutomovil manejador = new ManejadorSQLReservaAutomovil();
+                manejador.eliminarReserva(id);
+            }
+            ///Se atrapa las Exception de Tipo ManejadorSQL Exception
+            catch (ManejadorSQLException e)
+            {
+
+                return null;
+            }
+            ///Se atrapa las Exception de Tipo Invalid ManejadorSQL Exception
+            catch (InvalidManejadorSQLException e)
+            {
+                return null;
+            }
+            ///Se atrapa las Exception de Tipo Exception
+            catch (Exception e)
+            {
+             
+            }
+            return Json("exito");
+        }
+
+       
+
+       
     }
 }

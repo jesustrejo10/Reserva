@@ -1,0 +1,154 @@
+﻿@model BOReserva.Models.gestion_cruceros.CGestion_crucero
+@using (Html.BeginForm("modificarCrucero", "gestion_cruceros", null, FormMethod.Post, new { @id = "formModificarCrucero", @class = "form-horizontal" }))
+{
+    <div class="box">
+        <div class="box-body">
+            <div class="box-header with-border">
+                <h1 class="box-title"> Modificar Crucero</h1>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"></button>
+                </div>
+            </div>
+            @if (Model != null)
+            {
+                <div style="display:none">@Html.TextBoxFor(m => m._idCrucero, new { @class = "form-control campo required", @id = "idCrucero", @Value = Model._idCrucero })</div>
+                <div class="modal-body col-xs-6" id="bodyCruc" style="margin-left:10%">
+                    <div class="form-group">
+                        <label>Nombre del Crucero:</label>
+                        @Html.TextBoxFor(m => m._nombreCrucero, new { @class = "form-control campo required", @id = "nombrecrucero", @Value = Model._nombreCrucero })
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label>Compañia:</label>
+                                @Html.TextBoxFor(m => m._companiaCrucero, null, new { @class = "form-control", @id = "compania", @Value = Model._companiaCrucero })
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label>Capacidad:</label>
+                                @Html.TextBoxFor(m => m._capacidadCrucero, null, new { @type = "number", @class = "form-control", @Value = Model._capacidadCrucero })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="margin-top:10px;">
+                        <button type="button" id="modificar_crucero" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                    </div>
+                </div>
+                @*<div class="modal-body col-xs-12" id="bodyCruc">
+                        <label>Cabinas</label>
+                        <table>
+                            <thead>
+                                <tr class="crucero crTitles" id="listaCruceros">
+                                    <th style="width:170px;height: 40px;text-align: center">Nombre</th>
+                                    <th style="width:170px;height: 40px;text-align: center"> <b>Precio</b></th>
+                                    <th style="width:170px;height: 40px;text-align: center"><b>Estado</b></th>
+                                    <th style="width:170px;height: 40px;text-align: center"><b>Acciones</b> </th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaCabinas" class="">
+                                @{
+                                    foreach (var cabina in Model.cabinas)
+                                    {
+                                        <tr id="@cabina._idCabina">
+                                            <td class="crNombre">@cabina._nombreCabina </td>
+                                            <td class="crCompania">@cabina._precioCabina</td>
+                                            @if (@cabina._estatus == "activo")
+                                            {
+                                                <td class="crStatus"><i class="fa fa-circle started"></i></td>
+                                                    <td class="crAcciones"><i class="fa fa-pencil modificaCabina"></i> <i class="fa fa-times cambioCabina"></i></td>
+                                            }
+                                            else {
+                                                <td class="crStatus"><i class="fa fa-circle paused"></i></td>
+                                                    <td class="crAcciones"><i class="fa fa-pencil modificaCabina"></i> <i class="fa fa-check cambioCabina"></i></td>
+                                            }
+                                        </tr>
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>*@
+            }
+            else
+            {
+                <p>Ha ocurrido un error </p>
+            }
+        </div>
+    </div>
+
+    <script>
+        $("#modificar_crucero").click(function (e) {
+            e.preventDefault();
+            var form = $("#formModificarCrucero");
+            $.ajax({
+                url: "gestion_cruceros/modificarCrucero",
+                data: form.serialize(),
+                type: 'POST',
+                success: function (data) {
+                    console.log(data)
+                    $.ajax({
+                        url: '/gestion_cruceros/M24_ListarCruceros',
+                        type: 'GET',
+                        data: '',
+                        success: function (data, textStatus, jqXHR) {
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+                    $('#formGuardarCrucero')[0].reset();
+                },
+                error: function (data) {
+                    console.log(data);
+                    $('#formGuardarCrucero')[0].reset();
+                }
+            });
+        });
+    </script>
+
+    @*<script>
+
+            function cambioCabina(_idCabina) {
+                $.ajax({
+                    url: "gestion_cruceros/cambioEstatusCabina",
+                    data: { "id_cabina": _idCabina },
+                    type: 'POST',
+                    success: function (data) {
+                        $.ajax({
+                            url: "gestion_cruceros/M24_ListarCabinas/" + idCrucero,
+                            data: null,
+                            type: 'GET',
+                            success: function (data) {
+                                console.log(data)
+                                $("#tablaCabinas").empty();
+                                for (var index = 0; index < data.length; index++) {
+                                    console.log(data[index])
+
+                                    var statusHTML = data[index]._estatus == "activo" ? "<td class='crStatus'><i class='fa fa-circle started'></i></td>" +
+                                                            "<td class='crAcciones'><i class='fa fa-pencil'></i> <i class='fa fa-times' onclick='cambioCabina(" + data[index]._idCabina + ")'></i></td>" : "<td class='crStatus'><i class='fa fa-circle paused'></i></td><td class='crAcciones'><i class='fa fa-pencil'></i> <i class='fa fa-check' onclick='cambioCabina(" + data[index]._idCabina + ")'></i></td>";
+
+
+                                    console.log(statusHTML)
+                                    html = "<tr id='" + data[index]._idCabina + "'><td style='text-align:center'>" + data[index]._nombreCabina + "</td><td style='text-align:center'>" + data[index]._precioCabina + "</td>" + statusHTML + "</tr>";
+                                    console.log(html)
+                                    $("#tablaCabinas").append(html);
+                                }
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert(errorThrown);
+                            }
+                        });
+                    },
+                    error: function (data) {
+                        console.log(data);
+                    }
+                });
+            }
+
+        </script>*@
+}
+
+

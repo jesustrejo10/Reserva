@@ -31,7 +31,7 @@ $("#aceptarItinerario").click(function (e) {
         type: 'POST',
         success: function (data) {
             alert("Se agregó el Itinerario");
-            $('#formbuscarDestino')[0].reset();
+          //  $('#formbuscarDestino')[0].reset();
         }
         , error: function (xhr, textStatus, exceptionThrown) {
             //muestro el texto del error
@@ -91,7 +91,8 @@ $("#modificarItinerario").click(function (e) {
         type: 'POST',
         success: function (data) {
             alert("Se ha modificado su Itinerario");
-            $('#formbuscarDestino')[0].reset();
+           // $('#formbuscarDestino')[0].reset();
+          
         }
         , error: function (xhr, textStatus, exceptionThrown) {
             //muestro el texto del error
@@ -120,10 +121,13 @@ $("#consultarItinerario").click(function (e) {
         success: function (data) {
             $("#actividad").empty();
             $("#actividad").append(data);
+           // $('#formbuscarDestino')[0].reset();
+       
         }
         , error: function (xhr, textStatus, exceptionThrown) {
             //muestro el texto del error
-            alert(xhr.responseText);
+            alert("Ud no cuenta con Itinerarios para consultar");
+           // alert(xhr.responseText);
         }
     });
 });

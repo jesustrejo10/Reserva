@@ -1,0 +1,139 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    ViewBag.Title = "Login";
+
+}
+
+@model FOReserva.Models.Sesion.Ccliente
+      
+    <script>
+        function validaCaracteres(e) {
+            key = e.keyCode || e.which;
+            tecla = String.fromCharCode(key).toLowerCase();
+            letras = " abcdefghijklmnñopqrstuvwxyz0123456789";
+            especiales = [8, 45, 46, 95];
+
+            tecla_especial = false
+            for (var i in especiales) {
+                if (key == especiales[i]) {
+                    tecla_especial = true;
+                    break;
+                }
+            }
+
+            if (letras.indexOf(tecla) == -1 && !tecla_especial)
+                return false;
+        }
+
+        function validaLetrasYEspacio(e) {
+            key = e.keyCode || e.which;
+            tecla = String.fromCharCode(key).toLowerCase();
+            letras = " abcdefghijklmnñopqrstuvwxyz0123456789";
+            especiales = [8, 127];
+
+            tecla_especial = false
+            for (var i in especiales) {
+                if (key == especiales[i]) {
+                    tecla_especial = true;
+                    break;
+                }
+            }
+
+            if (letras.indexOf(tecla) == -1 && !tecla_especial)
+                return false;
+        }
+
+        function validaCorreo(e) {
+            key = e.keyCode || e.which;
+            tecla = String.fromCharCode(key).toLowerCase();
+            letras = " abcdefghijklmnñopqrstuvwxyz0123456789";
+            especiales = [8, 45, 46, 95, 64];
+
+            tecla_especial = false
+            for (var i in especiales) {
+                if (key == especiales[i]) {
+                    tecla_especial = true;
+                    break;
+                }
+            }
+
+            if (letras.indexOf(tecla) == -1 && !tecla_especial)
+                return false;
+        }
+
+        var error = '@ViewData["error"]';
+        if (error.length > 3) {
+            alert('@ViewData["error"]');
+        }
+
+        
+
+    </script>
+
+<div class="container" id="contenedorLogin">
+    <div class="row container-form">
+        <div class="col-md-6 col-md-offset-3">
+           
+            @using (Html.BeginForm("Login", "registro_autenticacion", FormMethod.Post, new { @class = "sky-form" , @id = "formularioLogin"}))
+            {
+                <div class="clearfix">
+                    <h2>Iniciar sesión</h2>
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label>Correo</label>
+                        <label class="input margin-bottom-10">
+                            <i class="ico-append fa fa-user"></i>
+                            @Html.TextBoxFor(m => m.Correo, new { @required=true, @placeholder= "Ingrese su correo", @id = "logCorreo", oncontextmenu = "return false", onkeypress = "return validaCorreo(event);" })
+                        </label>
+                        <script>
+                            document.getElementById("logCorreo").value = "";
+                        </script>
+                        <!-- DIV OCULTOS  PARA VALIDACIONES-->
+                        <div id="logCorreoEmpty" style="display: none;" class="has-error error">
+                            <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe colocar su correo</p>
+                        </div>
+
+                        <div id="logCorreoFormat" style="display: none;" class="has-error error">
+                            <p><i class="fa fa-times-circle" aria-hidden="true"></i> Correo inválido, debe tener &#64 y una dirección</p>
+                        </div>
+                    </div>
+                    <!-- Password -->
+                    <div class="form-group">
+                        <label>Clave</label>
+                        <label class="input margin-bottom-10">
+                            <i class="ico-append fa fa-lock"></i>
+                            @Html.PasswordFor(m => m.Clave0, new { @required = true, @placeholder = "Ingrese su clave", @id = "logClave", oncontextmenu = "return false", onkeypress = "return validaCaracteres(event)"})
+                        </label>
+                        
+                        <!-- DIV OCULTOS  PARA VALIDACIONES-->
+                        <div id="logClaveEmpty" style="display: none;" class="has-error error">
+                            <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe colocar su clave</p>
+                        </div>
+
+                        <div id="logClaveFormat" style="display: none;" class="has-error error">
+                            <p><i class="fa fa-times-circle" aria-hidden="true"></i> El campo solo debe contener caracteres alfabéticos, numéricos,._ ó -</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+
+                        <!-- Inform Tip -->
+                        <div class="form-tip pt-20">
+                            <a class="no-text-decoration size-13 margin-top-10 block bold" href="@Url.Action("OlvidarClave","registro_autenticacion")">Olvido su clave?</a>  
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+                        <button type="button" id="logBotonSubmit" class="btn btn-primary"><i class="fa fa-check"></i>Iniciar Sesión</button>
+                    </div>
+                    <!-- DIV OCULTOS  PARA VALIDACIONES-->
+                    <div id="logErrorEnFormulario" style="display: none;" class="has-error error">
+                        <p><i class="fa fa-times-circle" aria-hidden="true"></i> Existen valores inválidos en el formulario</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
