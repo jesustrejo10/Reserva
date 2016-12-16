@@ -11,13 +11,16 @@ namespace BOReserva.Servicio.Servicio_Boletos
 {
     public class manejadorSQL_Check
     {
-        public string stringDeConexion;
+        private SqlConnection conexion = null;
+        private string stringDeConexion = "";
+            //"Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617a;";
+        private manejadorSQL bd=new manejadorSQL(); 
+
 
         public manejadorSQL_Check()
         {
-            stringDeConexion = "Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617a;";
+        this.stringDeConexion=bd.stringDeConexions;  
         }
-
 
         public String MBuscarnombreciudad(int id)
         {

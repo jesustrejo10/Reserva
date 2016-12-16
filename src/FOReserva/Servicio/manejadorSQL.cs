@@ -68,36 +68,4 @@ namespace FOReserva.Servicio
             return tmp;
         }
     }
-
-    /*public int insertarDiario(CDiarioModel diarionuevo)
-        {
-            try
-            {
-                
-                
-                conexion = new SqlConnection(stringDeConexion);
-               
-                conexion.Open();
-               
-                SqlCommand query = conexion.CreateCommand();
-              
-                query.CommandText = "";
-                       
-                SqlDataReader lector = query.ExecuteReader();
-                
-                lector.Close();
-               
-                conexion.Close();
-                return 0;
-            }
-            catch (SqlException e)
-            {
-                return 1;
-            }
-            catch (Exception e)
-            {
-                return 1;
-            }
-
-        }*/
 }
