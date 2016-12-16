@@ -38,11 +38,6 @@ namespace BOReserva.Models.gestion_cruceros
         }
 
 
-        public void AgregarCamarote(CGestion_camarote camarote)
-        {
-            ConexionBD cbd = new ConexionBD();
-            cbd.insertarCamarote(camarote);
-        }
 
         public void cambioEstatusCamarote(int id_camarote)
         {

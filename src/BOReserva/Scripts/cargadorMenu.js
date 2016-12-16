@@ -445,7 +445,6 @@ jQuery(document).ready(function () {
 
     //M13 ROLES
     $("#m13VisualizarRol").click(function (e) {
-<<<<<<< HEAD
         e.preventDefault();
         var url = '/gestion_roles/M13_VisualizarRol';
         var method = 'GET';
@@ -513,8 +512,6 @@ jQuery(document).ready(function () {
 
     // Comienzo M12 Usuarios
     $("#indexUsuarios").click(function (e) {
-=======
->>>>>>> master
         e.preventDefault();
         var url = '/gestion_usuarios/M12_Index';
         var method = 'GET';
