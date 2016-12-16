@@ -35,24 +35,24 @@
                                 <!-- CLASES POR AVION -->
                                 <div class="col-xs-6">
                                     <label for="tipoClase">CLase Turista:</label>
-                                    @Html.TextBoxFor(m => m._capacidadTurista, null, new { @class = "form-control", @placeholder = "Tipo ", @id = "tipoClase", @disabled = "disabled" })
+                                    @Html.TextBoxFor(m => m._capacidadTurista, null, new { @class = "form-control", @placeholder = "Tipo ", @id = "tipoClase1", @disabled = "disabled" })
                                     <label for="tipoClase">CLase Ejecutiva:</label>
-                                    @Html.TextBoxFor(m => m._capacidadEjecutiva, null, new { @class = "form-control", @placeholder = "Tipo ", @id = "tipoClase", @disabled = "disabled" })
+                                    @Html.TextBoxFor(m => m._capacidadEjecutiva, null, new { @class = "form-control", @placeholder = "Tipo ", @id = "tipoClase2", @disabled = "disabled" })
                                     <label for="tipoClase">CLase VIP:</label>
-                                    @Html.TextBoxFor(m => m._capacidadVip, null, new { @class = "form-control", @placeholder = "Tipo ", @id = "tipoClase", @disabled = "disabled" })
+                                    @Html.TextBoxFor(m => m._capacidadVip, null, new { @class = "form-control", @placeholder = "Tipo ", @id = "tipoClase3", @disabled = "disabled" })
                                 </div>
                                 <!-- FIN CLASES POR AVION -->
                                 <!-- DROPDOWN PLATOS  -->
                                 <div class="col-xs-6">
                                     <label for="descripcionPlato">Platos (<span style="color:red">*</span>):</label>
                                     @Html.DropDownListFor(m => m._idComida, new SelectList(Model._nombrePlato as System.Collections.IEnumerable,"Value","Text"),
-                                    "Seleccione un plato", new { @class = "form-control", @placeholder = "Nombre ", @id = "nombrePlato" })
+                                    "Seleccione un plato", new { @class = "form-control", @placeholder = "Nombre ", @id = "nombrePlato1" })
                                     <label for="descripcionPlato">Platos (<span style="color:red">*</span>):</label>
                                     @Html.DropDownListFor(m => m._idComida, new SelectList(Model._nombrePlato as System.Collections.IEnumerable,"Value", "Text"),
-                                   "Seleccione un plato", new { @class = "form-control", @placeholder = "Nombre ", @id = "nombrePlato" })
+                                   "Seleccione un plato", new { @class = "form-control", @placeholder = "Nombre ", @id = "nombrePlato2" })
                                     <label for="descripcionPlato">Platos (<span style="color:red">*</span>):</label>
                                     @Html.DropDownListFor(m => m._idComida, new SelectList(Model._nombrePlato as System.Collections.IEnumerable,"Value", "Text"),
-                                   "Seleccione un plato", new { @class = "form-control", @placeholder = "Nombre ", @id = "nombrePlato" })
+                                   "Seleccione un plato", new { @class = "form-control", @placeholder = "Nombre ", @id = "nombrePlato3" })
                                 </div>
                                 <!-- FIN PLATOD  -->
                             </div>
