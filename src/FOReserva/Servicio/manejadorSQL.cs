@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 
 //IMPORTANTE AGREGAR EL USING DE SUS RESPECTIVAS CLASES PARA PODER AGREGAR EL METODO DE AGREGAR/CONSULTAR
@@ -16,6 +17,16 @@ namespace FOReserva.Servicio
         private SqlConnection conexion = null;
         //string que contendra la conexion a la bd
         private string stringDeConexion = null;
+
+        public string getStringConexion()
+        {
+            return this.stringDeConexion;
+        }
+
+        public void setStringConexion(string conector)
+        {
+            this.stringDeConexion = conector;
+        }
 
         /*Metodo para Abrir la conexion a la DB*/
         private void OpenConnection()
