@@ -35,6 +35,7 @@ namespace TestUnitReserva.BO.gestion_cruceros
         // Pruebas para insertar una cabina en la base de datos
         // Se crea la cabina y es pasado como parámetro a la función    
         //</summary>
+        [Test]
         public void insertarCabinaTest()
         {
             CGestion_cabina cabina = new CGestion_cabina();
@@ -50,6 +51,7 @@ namespace TestUnitReserva.BO.gestion_cruceros
         // Pruebas para insertar un camarote en la base de datos
         // Se crea el camarote y es pasado como parámetro a la función    
         //</summary>
+        [Test]
         public void insertarCamaroteTest()
         {
             CGestion_camarote camarote = new CGestion_camarote();
@@ -65,6 +67,7 @@ namespace TestUnitReserva.BO.gestion_cruceros
         // Pruebas para insertar un itinerario en la base de datos
         // Se crea el camarote y es pasado como parámetro a la función    
         //</summary>
+        [Test]
         public void insertarItinerarioTest()
         {
             CGestion_itinerario itinerario = new CGestion_itinerario();
@@ -80,6 +83,7 @@ namespace TestUnitReserva.BO.gestion_cruceros
         //<summary>
         // Prueba que se retorne una lista con un crucero agregado
         //</summary>
+        [Test]
         public void listarCrucerosTest()
         {
             List<CGestion_crucero> listaCruceros = new List<CGestion_crucero>();
