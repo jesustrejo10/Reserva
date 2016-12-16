@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -207,11 +207,15 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\gestion_vuelosController.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
+    <Compile Include="Controllers\registro_autenticacionController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Autos\CBusquedaModel.cs" />
+    <Compile Include="Models\Autos\CReserva_Autos_Perfil.cs" />
+    <Compile Include="Models\Cruceros\CBuscarCrucero.cs" />
     <Compile Include="Models\Cruceros\CReserva_Cruceros.cs" />
     <Compile Include="Models\Cruceros\Crucero.cs" />
     <Compile Include="Models\Cruceros\CVista_Cruceros.cs" />
@@ -222,8 +226,11 @@
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\Diarios\CFoto_Diario.cs" />
     <Compile Include="Models\Diarios\CLugar.cs" />
+    <Compile Include="Models\Diarios\CPuntuacion.cs" />
     <Compile Include="Models\Itinerario\CItinerario.cs" />
     <Compile Include="Models\Itinerario\Cvista_Itinerario.cs" />
+    <Compile Include="Models\Itinerario\itinerario.cs" />
+    <Compile Include="Models\Login\Login.cs" />
     <Compile Include="Models\ORM\DB.cs" />
     <Compile Include="Models\ORM\M20_ActualizarEstadoReservaHabitacion_Result.cs">
       <DependentUpon>ModelDBReserva.tt</DependentUpon>
@@ -274,6 +281,17 @@
     <Compile Include="Models\Hoteles\CHotel.cs" />
     <Compile Include="Models\ReservaHabitacion\CProcesoResultado.cs" />
     <Compile Include="Models\ReservaHabitacion\CReservaHabitacion.cs" />
+    <Compile Include="Models\Restaurantes\Cvista_restaurante.cs" />
+    <Compile Include="Models\Sesion\Ccliente.cs" />
+    <Compile Include="Models\Sesion\Ccodigo_Temporal.cs" />
+    <Compile Include="Models\Sesion\Ccontrasena.cs" />
+    <Compile Include="Models\Sesion\ClavesDiferentesException.cs" />
+    <Compile Include="Models\Sesion\Cpregunta_Respuesta.cs" />
+    <Compile Include="Models\Sesion\Csesion.cs" />
+    <Compile Include="Models\Sesion\ExisteUsuarioCorreoException.cs" />
+    <Compile Include="Models\Sesion\RegistroClienteException.cs" />
+    <Compile Include="Models\Sesion\RespuestaErroneaException.cs" />
+    <Compile Include="Models\Sesion\Seguridad.cs" />
     <Compile Include="Models\Usuarios\CUsuario.cs" />
     <Compile Include="Models\ReservaHabitacion\Cvista_BuscarHotel.cs" />
     <Compile Include="Models\ReservaHabitacion\Cvista_ReservarHabitacion.cs" />
@@ -297,11 +315,14 @@
     <Compile Include="Servicio\Cruceros.cs" />
     <Compile Include="Servicio\manejadorSQLCrucero.cs" />
     <Compile Include="Servicio\ManejadorSQLDiarios.cs" />
+    <Compile Include="Servicio\ManejadorSQLMuestraRevision.cs" />
+    <Compile Include="Servicio\ManejadorSQLReserva.cs" />
     <Compile Include="Servicio\ManejadorSQLRevision.cs" />
     <Compile Include="Servicio\ManejadorSQLException.cs" />
     <Compile Include="Servicio\ManejadorSQLItinerario.cs" />
     <Compile Include="Servicio\ManejadorSQLReservaAutomovil.cs" />
     <Compile Include="Servicio\ManejadorSQLReservaRestaurant.cs" />
+    <Compile Include="Servicio\ManejadorSQLSesion.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\assets\css\bootstrap-datepicker3.min.css" />
@@ -1724,6 +1745,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\cargadorPestanas.js" />
     <Content Include="Scripts\customValidator.js" />
+    <Content Include="Scripts\global.js" />
     <Content Include="Scripts\indexReservaCrucero.js" />
     <Content Include="Scripts\llamadasItinerario.js" />
     <Content Include="Scripts\uniqueId.js" />
@@ -1741,6 +1763,7 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\validaciones_registro_autenticacion.js" />
     <Content Include="Views\ajax\dummy-jqtable.html" />
     <Content Include="Views\ajax\dummy-lightbox.html" />
     <Content Include="Views\ajax\dummy-modal-ajax.html" />
@@ -3146,10 +3169,19 @@
     <Content Include="Views\gestion_revision\Revision_usuario.cshtml" />
     <Content Include="Views\gestion_diarios\_CrearDiarioFallo.cshtml" />
     <Content Include="Views\gestion_diarios\gestion_diariosImagenes.cshtml" />
+    <Content Include="Views\registro_autenticacion\CambiarClave.cshtml" />
+    <Content Include="Views\registro_autenticacion\CambiarClavePerfil.cshtml" />
+    <Content Include="Views\registro_autenticacion\EditarPerfil.cshtml" />
+    <Content Include="Views\registro_autenticacion\Login.cshtml" />
+    <Content Include="Views\registro_autenticacion\OlvidarClave.cshtml" />
+    <Content Include="Views\registro_autenticacion\Perfil.cshtml" />
+    <Content Include="Views\registro_autenticacion\Registro.cshtml" />
+    <Content Include="Views\registro_autenticacion\ResponderPreguntas.cshtml" />
+    <Content Include="Views\registro_autenticacion\ResponderPreguntaSeguridad.cshtml" />
+    <Content Include="Views\registro_autenticacion\VerPerfil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\registro_autenticacion\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
