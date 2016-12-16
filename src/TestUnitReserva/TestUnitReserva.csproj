@@ -60,7 +60,6 @@
   <ItemGroup>
     <Compile Include="BO\gestion_roles\TestRoles.cs" />
     <Compile Include="BO\gestion_aviones\TestAviones.cs" />
-    <Compile Include="BO\gestion_cruceros\TestCruceros.cs" />
     <Compile Include="BO\gestion_usuario\TestUsuario.cs" />
     <Compile Include="BO\TestGestionAutomovil\TestGestionAutomovil.cs" />
     <Compile Include="BO\gestion_restaurantes\TestLugar.cs" />
@@ -69,7 +68,6 @@
     <Compile Include="BO\gestion_ruta_comercial\TestRutaComercial.cs" />
     <Compile Include="FO\Diario\TestLugarDiario.cs" />
     <Compile Include="FO\Itinerario\TestPlanificacionVacacion.cs" />
-    <Compile Include="BO\gestion_cruceros\TestCruceros.cs" />
     <Compile Include="FO\Reserva restaurante\TestInsertReserva.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -94,7 +92,9 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="BO\gestion_cruceros\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
