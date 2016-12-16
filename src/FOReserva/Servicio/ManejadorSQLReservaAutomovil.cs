@@ -120,8 +120,8 @@ namespace FOReserva.Servicio
         public List<CReserva_Autos_Perfil> buscarReservas()
         {
 
-            try {
-            string consulta = "SELECT raut_id, aut_fabricante, aut_modelo, raut_fecha_ini, raut_fecha_fin, lugarEntrega.lug_nombre, lugarDevolucion.lug_nombre, raut_estatus FROM Automovil, Reserva_Automovil, Usuario, Lugar lugarEntrega, Lugar lugarDevolucion WHERE usu_id=1 and raut_fk_usuario=usu_id and raut_fk_automovil=aut_matricula and raut_fk_ciudad_entrega=lugarEntrega.lug_id and raut_fk_ciudad_devolucion=lugarDevolucion.lug_id";
+           
+                string consulta = "SELECT raut_id, aut_fabricante, aut_modelo, raut_fecha_ini, raut_fecha_fin, lugarEntrega.lug_nombre, lugarDevolucion.lug_nombre, raut_estatus FROM Automovil, Reserva_Automovil, Usuario, Lugar lugarEntrega, Lugar lugarDevolucion WHERE usu_id=1 and raut_fk_usuario=usu_id and raut_fk_automovil=aut_matricula and raut_fk_ciudad_entrega=lugarEntrega.lug_id and raut_fk_ciudad_devolucion=lugarDevolucion.lug_id ";
             SqlDataReader leer = Executer(consulta);
             List<CReserva_Autos_Perfil> lista_misreservas = new List<CReserva_Autos_Perfil>();
             
@@ -129,7 +129,7 @@ namespace FOReserva.Servicio
             {
                 while (leer.Read())
                 {
-                 //   string matricula = leer.GetString(0);
+                    int idReserva = leer.GetInt32(0);
                     string fabricante = leer.GetString(1);
                     string modelo = leer.GetString(2);
                     string fechaIni = leer.GetString(3);
@@ -139,8 +139,8 @@ namespace FOReserva.Servicio
                     int status = leer.GetInt32(7);
 
                     CReserva_Autos_Perfil perfil = new CReserva_Autos_Perfil();
+                    perfil.IdReserva = idReserva;
                     perfil.Autos = new CBusquedaModel();
-                   // perfil.Autos.Matricula = matricula;
                     perfil.Autos.Fabricante = fabricante;
                     perfil.Autos.Modelo = modelo;
                     perfil.FechaIni = fechaIni;
@@ -153,16 +153,9 @@ namespace FOReserva.Servicio
                 }
             }
             return lista_misreservas;
-        }
-        catch (ManejadorSQLException ErrorBD)
-         {
-
-             throw ErrorBD;
-         }
+        
         }
         
-        
-
         public void InsertarReservaAuto(CReserva_Autos_Perfil model) {
 
             try
@@ -179,6 +172,13 @@ namespace FOReserva.Servicio
             {
                 throw ErrorBD;
             }
+        }
+
+        public void eliminarReserva(int idReserva)
+        {
+            string query = "UPDATE Reserva_Automovil SET raut_estatus=0 FROM Usuario WHERE usu_id=1 and raut_fk_usuario=usu_id and raut_estatus=1 and raut_id =" + idReserva;
+            this.Executer(query);
+            CloseConnection();
         }
     }
 }
