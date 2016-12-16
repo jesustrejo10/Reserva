@@ -366,10 +366,12 @@ namespace BOReserva.Models.gestion_cruceros
                     reader.Close();
                     conexion.Close();
                 }
+                return null;
             }
             catch (Exception e)
             {
-                throw e;
+                return null;
+               // throw e;
             }
         }
 
