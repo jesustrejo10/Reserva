@@ -58,6 +58,7 @@ namespace BOReserva.Servicio.Servicio_Hoteles
         public Boolean insertarHotel(CHotel model)
         {
             int pk = LeerPkHotel() + 1;
+         //   int fkCiudad = getIdCiudad(model._ciudad) ; // en realidad busca un lugar en función de su nombre
             try
             {
                 //Inicializo la conexion con el string de conexion
@@ -131,15 +132,18 @@ namespace BOReserva.Servicio.Servicio_Hoteles
         public String[] MListarciudadesBD(String _pais)
         {
             Debug.WriteLine("CIUDADES");
+
+            int lug_pk = getIdPais(_pais);
+
+            Debug.WriteLine("SQL " + _pais);
+            Debug.WriteLine("PK País" + lug_pk.ToString());
+
             String[] listaciudades = new String[5000];
             try
             {
                 conexion = new SqlConnection(stringDeConexion);
                 conexion.Open();
-                String sql = "SELECT A.lug_nombre" +
-                             "FROM Lugar A, (SELECT lug_id FROM Lugar " +
-                                                                "WHERE lug_nombre = '" + _pais + "') C" +
-                             "WHERE A.lug_FK_lugar_id =C.lug_id";
+                String sql = "SELECT lug_nombre FROM Lugar WHERE lug_fk_lugar_id = " + lug_pk.ToString();
 
                 SqlCommand cmd = new SqlCommand(sql, conexion);
                 int i = 0;
@@ -148,6 +152,8 @@ namespace BOReserva.Servicio.Servicio_Hoteles
                     while (reader.Read())
                     {
                         listaciudades[i] = reader[0].ToString();
+                        Debug.WriteLine("CIUDAD" + reader[0].ToString());
+                        Debug.WriteLine("CIUDAD" + listaciudades[i]);
                         i++;
                     }
                 }
@@ -157,6 +163,7 @@ namespace BOReserva.Servicio.Servicio_Hoteles
             }
             catch (SqlException ex)
             {
+                Debug.WriteLine("EXCEPCION CIUDADES");
                 conexion.Close();
                 return null;
             }
@@ -240,13 +247,13 @@ namespace BOReserva.Servicio.Servicio_Hoteles
                         //Y  SE AGREGA a listavehiculos
 
                         CHotel hotel = new CHotel(Int32.Parse(reader["hot_id"].ToString()),
-                            reader["hot_nombre"].ToString(), 
-                            reader["hot_url_pagina"].ToString(), 
+                            reader["hot_nombre"].ToString(),
+                            reader["hot_url_pagina"].ToString(),
                             reader["hot_email"].ToString(),
-                            Int32.Parse(reader["hot_cantidad_habitaciones"].ToString()), 
-                            reader["hot_direccion"].ToString(), 
-                            MBuscarnombreciudad(Int32.Parse(reader["hot_fk_ciudad"].ToString())), 
-                            MBuscarnombrePais(Int32.Parse(reader["hot_fk_ciudad"].ToString())), 
+                            Int32.Parse(reader["hot_cantidad_habitaciones"].ToString()),
+                            reader["hot_direccion"].ToString(),
+                            MBuscarnombreciudad(Int32.Parse(reader["hot_fk_ciudad"].ToString())),
+                            MBuscarnombrePais(Int32.Parse(reader["hot_fk_ciudad"].ToString())),
                             Int32.Parse(reader["hot_estrellas"].ToString()),
                             float.Parse(reader["hot_puntuacion"].ToString()),
                             Int32.Parse(reader["hot_disponibilidad"].ToString()));
@@ -285,17 +292,17 @@ namespace BOReserva.Servicio.Servicio_Hoteles
                 {
                     while (reader.Read())
                     {
-                                CHotel hotel = new CHotel(Int32.Parse(reader["hot_id"].ToString()),
-                                reader["hot_nombre"].ToString(),
-                                reader["hot_url_pagina"].ToString(),
-                                reader["hot_email"].ToString(),
-                                Int32.Parse(reader["hot_cantidad_habitaciones"].ToString()),
-                                reader["hot_direccion"].ToString(),
-                                MBuscarnombreciudad(Int32.Parse(reader["hot_fk_ciudad"].ToString())),
-                                MBuscarnombrePais(Int32.Parse(reader["hot_fk_ciudad"].ToString())),
-                                Int32.Parse(reader["hot_estrellas"].ToString()),
-                                float.Parse(reader["hot_puntuacion"].ToString()),
-                                Int32.Parse(reader["hot_disponibilidad"].ToString()));
+                        CHotel hotel = new CHotel(Int32.Parse(reader["hot_id"].ToString()),
+                        reader["hot_nombre"].ToString(),
+                        reader["hot_url_pagina"].ToString(),
+                        reader["hot_email"].ToString(),
+                        Int32.Parse(reader["hot_cantidad_habitaciones"].ToString()),
+                        reader["hot_direccion"].ToString(),
+                        MBuscarnombreciudad(Int32.Parse(reader["hot_fk_ciudad"].ToString())),
+                        MBuscarnombrePais(Int32.Parse(reader["hot_fk_ciudad"].ToString())),
+                        Int32.Parse(reader["hot_estrellas"].ToString()),
+                        float.Parse(reader["hot_puntuacion"].ToString()),
+                        Int32.Parse(reader["hot_disponibilidad"].ToString()));
                         hotelRetorno = hotel;
                     }
                 }
@@ -344,7 +351,7 @@ namespace BOReserva.Servicio.Servicio_Hoteles
 
         public bool activarHotelBD(int pk_hotel)
         {
-          
+
             try
             {
                 //Inicializo la conexion con el string de conexion
@@ -440,6 +447,69 @@ namespace BOReserva.Servicio.Servicio_Hoteles
             {
                 conexion.Close();
                 return ex.Message;
+            }
+        }
+
+
+        public int getIdPais(String _pais)
+        {
+            Debug.WriteLine(_pais);
+            int pk = 0;
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "select lug_id from lugar where lug_nombre = '"+ _pais +"';";
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                int i = 0;
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        pk = reader.GetInt32(0);
+                        Debug.WriteLine(reader[0].ToString());
+                        i++;
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return pk;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return 0;
+            }
+        }
+
+        public int getIdCiudad(String _ciudad)
+        {
+            Debug.WriteLine(_ciudad);
+            int pk = 0;
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "select lug_id from lugar where lug_nombre = '" + _ciudad + "' and lug_tipo_lugar ='ciudad';";
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                int i = 0;
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        pk = reader.GetInt32(0);
+                        Debug.WriteLine(reader[0].ToString());
+                        i++;
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return pk;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return 0;
             }
         }
     }
