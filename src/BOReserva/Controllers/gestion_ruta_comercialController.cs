@@ -66,21 +66,34 @@ namespace BOReserva.Controllers
         {
             
             CManejadorSQL_Rutas buscarRuta = new CManejadorSQL_Rutas();
-            CAgregarRuta Route = buscarRuta.MMostrarRutaBD(idRuta);
-            Route._idRuta = idRuta;
-            CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();
-            List<String> lista = new List<string>();
-
-            
-
-            lista = sql.listarLugares();
-
-            Route._lorigenRuta = lista.Select(x => new SelectListItem
+            try
             {
-                Value = x,
-                Text = x
-            });
-            return PartialView(Route);
+                CAgregarRuta Route = buscarRuta.MMostrarRutaBD(idRuta);
+                Route._idRuta = idRuta;
+                CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();
+                List<String> lista = new List<string>();
+
+
+
+                lista = sql.listarLugares();
+
+                Route._lorigenRuta = lista.Select(x => new SelectListItem
+                {
+                    Value = x,
+                    Text = x
+                });
+                return PartialView(Route);
+            }
+            catch (SqlException e)
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error, no se pudo conectar con la base de datos";
+                //Retorno el error
+                return PartialView(error);
+            }
+            
         }
 
 
@@ -88,9 +101,22 @@ namespace BOReserva.Controllers
         public PartialViewResult VisualizarRutasComerciales()
         {
             
-            CManejadorSQL_Rutas ruta = new CManejadorSQL_Rutas();            
-            List<CRuta> listarutas = ruta.MListarRutasBD();
-            return PartialView(listarutas);
+            CManejadorSQL_Rutas ruta = new CManejadorSQL_Rutas();
+            try
+            {
+                List<CRuta> listarutas = ruta.MListarRutasBD();
+                return PartialView(listarutas);
+            }
+            catch (SqlException e)
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error, no se pudo conectar con la base de datos";
+                //Retorno el error
+                return PartialView(error);
+            }
+            
             
         }
 
@@ -98,9 +124,23 @@ namespace BOReserva.Controllers
         public ActionResult DetalleRutasComerciales(int idRuta)
         {
             CManejadorSQL_Rutas buscarRuta = new CManejadorSQL_Rutas();
-            CAgregarRuta Route = buscarRuta.MMostrarRutaBD(idRuta);
-            Route._idRuta = idRuta;
-            return PartialView(Route);
+            try 
+            {
+                CAgregarRuta Route = buscarRuta.MMostrarRutaBD(idRuta);
+                Route._idRuta = idRuta;
+                return PartialView(Route);
+ 
+            }
+            catch (SqlException e)
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error, no se pudo conectar con la base de datos";
+                //Retorno el error
+                return Json(error);
+            }
+            
         }
 
 
@@ -110,8 +150,7 @@ namespace BOReserva.Controllers
             
             CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();
             //realizo el insert
-            try
-            {
+            
                 if (model._origenRuta == null || model._destinoRuta == null)
                 {
                     //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
@@ -133,35 +172,34 @@ namespace BOReserva.Controllers
                 }
                 else
                 {
-
-                    bool resultado = sql.InsertarRuta(model);
-                    if (resultado)
+                     try
                     {
-                        return (Json(true, JsonRequestBehavior.AllowGet));
+                       bool resultado = sql.InsertarRuta(model);
+                       if (resultado)
+                       {
+                           return (Json(true, JsonRequestBehavior.AllowGet));
+                       }
+                       else
+                       {
+                           //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                           Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                           //Agrego mi error
+                           String error = "Error, ruta existente";
+                           //Retorno el error
+                           return Json(error);
+                       }
                     }
-                    else
-                    {
-                        //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
-                        Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                        //Agrego mi error
-                        String error = "Error, ruta existente";
-                        //Retorno el error
-                        return Json(error);
-                    }
+                     catch (SqlException e)
+                     {
+                         //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                         Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                         //Agrego mi error
+                         String error = "Error, no se pudo conectar con la base de datos";
+                         //Retorno el error
+                         return Json(error);
+                     }
 
                 }
-            }
-            catch (SqlException e) {
-                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                //Agrego mi error
-                String error = "Error, no se pudo conectar con la base de datos";
-                //Retorno el error
-                return Json(error);            
-            }
-            
-
-            
         }
 
 
@@ -172,8 +210,6 @@ namespace BOReserva.Controllers
 
             CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();
             //realizo el insert
-            try
-            {
 
 
                 if (model._distanciaRuta <= 0 || model._distanciaRuta == 999999 || model._distanciaRuta == null)
@@ -188,31 +224,35 @@ namespace BOReserva.Controllers
                 else
                 {
 
-                    bool resultado = sql.MModificarRuta(model);
-                    if (resultado)
+                     try
                     {
-                        return null;
+
+                       bool resultado = sql.MModificarRuta(model);
+                       if (resultado)
+                       {
+                           return null;
+                       }
+                       else
+                       {
+                           //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                           Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                           //Agrego mi error
+                           String error = "Error, la ruta no pudo ser modificada";
+                           //Retorno el error
+                           return Json(error);
+                       }
                     }
-                    else
-                    {
-                        //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
-                        Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                        //Agrego mi error
-                        String error = "Error, la ruta no pudo ser modificada";
-                        //Retorno el error
-                        return Json(error);
-                    }
+                     catch (SqlException e)
+                     {
+                         //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                         Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                         //Agrego mi error
+                         String error = "Error, no se pudo conectar con la base de datos";
+                         //Retorno el error
+                         return Json(error);
+                     }
 
                 }
-            }
-            catch (SqlException e) {
-                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                //Agrego mi error
-                String error = "Error, no se pudo conectar con la base de datos";
-                //Retorno el error
-                return Json(error);            
-            }
 
 
 

@@ -3,7 +3,7 @@
     /* NO QUITAR ESTA CARGA INICIAL QUE ES LA QUE HARÁ QUE POR DEFAULT */
     $("#contenedorPerfil").empty();
     /* CAMBIAR URL POR VISTA DE PERFIL */
-    var url = '/gestion_reserva_auto/M19_Reserva_Autos_PerfilPrueba';
+    var url = '/registro_autenticacion/VerPerfil';
     var method = 'GET';
     var data = '';
 
@@ -23,7 +23,7 @@
 
 
     /* CARGADOR DE BOTON PERFIL */
-    $("#PePerfil").click(function (e) {
+    $(".CambiarClavePerfil").click(function (e) {
         e.preventDefault();
         $("#PePerfil").addClass("active");
 
@@ -34,6 +34,56 @@
         $("#PeAutos").removeClass("active");
         $("#PeHabitaciones").removeClass("active");
         $("#PeRestaurantes").removeClass("active");
+
+        var url = '/registro_autenticacion/CambiarClavePerfil';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+                    $("#contenedorPerfil").empty();
+                    $("#contenedorPerfil").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
+    /* CARGADOR DE BOTON PERFIL */
+    $(".PePerfil").click(function (e) {
+        e.preventDefault();
+        $("#PePerfil").addClass("active");
+
+        $("#peitinerario").removeClass("active");
+        $("#PeDiario").removeClass("active");
+        $("#PeVuelos").removeClass("active");
+        $("#PeCruceros").removeClass("active");
+        $("#PeAutos").removeClass("active");
+        $("#PeHabitaciones").removeClass("active");
+        $("#PeRestaurantes").removeClass("active");
+
+        var url = '/registro_autenticacion/VerPerfil';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+                    $("#contenedorPerfil").empty();
+                    $("#contenedorPerfil").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
     });
 
     /* CARGADOR DE BOTON ITINERARIO */
@@ -80,6 +130,26 @@
         $("#PeAutos").removeClass("active");
         $("#PeHabitaciones").removeClass("active");
         $("#PeRestaurantes").removeClass("active");
+
+        var url = '/gestion_diarios/gestion_diarios_crear';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+                    $("#contenedorPerfil").empty();
+                    $("#contenedorPerfil").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+
+
     });
 
     /* CARGADOR DE BOTON VUELOS */
@@ -127,6 +197,7 @@
                 }
             });
     });
+
     /* CARGADOR DE BOTON AUTOS */
     $("#PeAutos").click(function (e) {
         e.preventDefault();
@@ -171,6 +242,24 @@
         $("#PeCruceros").removeClass("active");
         $("#PeAutos").removeClass("active");
         $("#PeRestaurantes").removeClass("active");
+
+        var url = '/gestion_reserva_habitaciones/mis_reservas';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+                    $("#contenedorPerfil").empty();
+                    $("#contenedorPerfil").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
     });
 
     /* CARGADOR DE BOTON HABITACIONES */

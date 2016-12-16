@@ -1,0 +1,382 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    ViewBag.Title = "Registro";
+}
+
+@model FOReserva.Models.Sesion.Ccliente
+
+<script>
+    function validaCaracteres(e) {
+        key = e.keyCode || e.which;
+        tecla = String.fromCharCode(key).toLowerCase();
+        letras = " abcdefghijklmnñopqrstuvwxyz0123456789";
+        especiales = [45, 46, 95, 8];
+
+
+        tecla_especial = false
+        for (var i in especiales) {
+            if (key == especiales[i]) {
+                tecla_especial = true;
+                break;
+            }
+        }
+
+        if (letras.indexOf(tecla) == -1 && !tecla_especial)
+            return false;
+    }
+
+    function validaLetras(e) {
+        key = e.keyCode || e.which;
+        tecla = String.fromCharCode(key).toLowerCase();
+        letras = "abcdefghijklmnñopqrstuvwxyz";
+        especiales = [8];
+
+
+        tecla_especial = false
+        for (var i in especiales) {
+            if (key == especiales[i]) {
+                tecla_especial = true;
+                break;
+            }
+        }
+
+        if (letras.indexOf(tecla) == -1 && !tecla_especial)
+            return false;
+    }
+
+    function validaLetrasYEspacio(e) {
+        key = e.keyCode || e.which;
+        tecla = String.fromCharCode(key).toLowerCase();
+        letras = " abcdefghijklmnñopqrstuvwxyz0123456789";
+        especiales = [8];
+
+
+        tecla_especial = false
+        for (var i in especiales) {
+            if (key == especiales[i]) {
+                tecla_especial = true;
+                break;
+            }
+        }
+
+        if (letras.indexOf(tecla) == -1 && !tecla_especial)
+            return false;
+    }
+
+    function validaCorreo(e) {
+        key = e.keyCode || e.which;
+        tecla = String.fromCharCode(key).toLowerCase();
+        letras = " abcdefghijklmnñopqrstuvwxyz0123456789";
+        especiales = [45, 46, 95, 64, 8];
+
+        tecla_especial = false
+        for (var i in especiales) {
+            if (key == especiales[i]) {
+                tecla_especial = true;
+                break;
+            }
+        }
+
+        if (letras.indexOf(tecla) == -1 && !tecla_especial)
+            return false;
+    }
+
+    var error = '@ViewData["error"]';
+    if (error.length > 3) {
+        alert('@ViewData["error"]');
+    }
+</script>
+
+<div class="container">
+    <div class="row container-form">
+        <div class="col-md-6 col-md-offset-3">
+            @using (Html.BeginForm("Registro", "registro_autenticacion", FormMethod.Post, new { @class = "nomargin sky-form", @id = "formularioRegistro" }))
+            {
+                <fieldset>
+                    <div class="row">
+                        <dic class="col-md-12">
+                            <h2>Registrarse</h2>
+                        </dic>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label>Nombre*</label>
+                                <label class="input margin-bottom-10">
+                                    <i class="ico-append fa fa-user"></i>
+                                   
+                                    @Html.TextBoxFor(m => m.Nombre, new { @MaxLength=20, @required = "required", @id = "regNombre" , oncontextmenu = "return false", onkeypress = "return validaLetras(event)" })
+                                    <b class="tooltip tooltip-bottom-right">Ingrese su primer nombre</b>
+                                </label>
+                                <!-- DIV OCULTOS  PARA VALIDACIONES-->
+                                <div id="regNombreEmpty" style="display: none;" class="has-error error">
+                                    <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe colocar su nombre</p>
+                                </div>
+
+                                <div id="regNombreFormat" style="display: none;" class="has-error error">
+                                    <p><i class="fa fa-times-circle" aria-hidden="true"></i> El campo solo debe contener caracteres alfabéticos</p>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="register:last_name">Apellido*</label>
+                                <label class="input margin-bottom-10">
+                                    <i class="ico-append fa fa-user"></i>
+                                   
+                                    @Html.TextBoxFor(m => m.Apellido, new { @MaxLength = 20,  @required = "required", @id = "regApellido", oncontextmenu = "return false", onkeypress = "return validaLetras(event)" })
+                                    <b class="tooltip tooltip-bottom-right">Ingrese su primer apellido</b>
+                                </label>
+                                <!-- DIV OCULTOS  PARA VALIDACIONES-->
+                                <div id="regApellidoEmpty" style="display: none;" class="has-error error">
+                                    <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe colocar su apellido</p>
+                                </div>
+
+                                <div id="regApellidoFormat" style="display: none;" class="has-error error">
+                                    <p><i class="fa fa-times-circle" aria-hidden="true"></i> El campo solo debe contener caracteres alfabéticos</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label for="register:email">Correo electrónico*</label>
+                                <label class="input margin-bottom-10">
+                                    <i class="ico-append fa fa-envelope"></i>
+                                   
+                                    @Html.TextBoxFor(m => m.Correo, new { @MaxLength = 30, @required = "required", @id = "regCorreo", oncontextmenu = "return false", onkeypress = "return validaCorreo(event)"})
+                                    <b class="tooltip tooltip-bottom-right">ingrese su corre electrónico</b>
+                                </label>
+                                <!-- DIV OCULTOS  PARA VALIDACIONES-->
+                                <div id="regCorreoEmpty" style="display: none;" class="has-error error">
+                                    <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe colocar su correo</p>
+                                </div>
+
+                                <div id="regCorreoFormat" style="display: none;" class="has-error error">
+                                    <p><i class="fa fa-times-circle" aria-hidden="true"></i> Correo inválido, debe tener &#64 y una dirección</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label for="register:pass1">Clave*</label>
+                                <label class="input margin-bottom-10">
+                                    <i class="ico-append fa fa-lock"></i>
+                                    
+                                    @Html.PasswordFor(m => m.Clave0, new { @MaxLength = 20, @required = "required", @id = "regClave", oncontextmenu = "return false" , onkeypress = "return validaCaracteres(event);"})
+                                    <b class="tooltip tooltip-bottom-right">Ingrese su clave</b>
+                                </label>
+                                <!-- DIV OCULTOS  PARA VALIDACIONES-->
+                                <div id="regClaveEmpty" style="display: none;" class="has-error error">
+                                    <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe colocar su clave</p>
+                                </div>
+
+                                <div id="regClaveFormat" style="display: none;" class="has-error error">
+                                    <p><i class="fa fa-times-circle" aria-hidden="true"></i> El campo solo debe contener caracteres alfabéticos, números y . _ ó -</p>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="register:pass2">Repita su clave*</label>
+                                <label class="input margin-bottom-10">
+                                    <i class="ico-append fa fa-lock"></i>
+                                    
+                                    @Html.PasswordFor(m => m.Clave1, new { @MaxLength = 20, @required = "required", @id = "regConfirmaClave", oncontextmenu = "return false", onkeypress = "return validaCaracteres(event);" })
+                                    <b class="tooltip tooltip-bottom-right">Ingrese su clave nuevamente</b>
+                                </label>
+                                <!-- DIV OCULTOS  PARA VALIDACIONES-->
+                                <div id="regConfirmaClaveEmpty" style="display: none;" class="has-error error">
+                                    <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe colocar su confirmación de clave</p>
+                                </div>
+
+                                <div id="regConfirmaClaveFormat" style="display: none;" class="has-error error">
+                                    <p><i class="fa fa-times-circle" aria-hidden="true"></i> El campo solo debe contener caracteres alfabéticos, números y . _ ó -</p>
+                                </div>
+
+                                <div id="regConfirmaClaveError" style="display: none;" class="has-error error">
+                                    <p><i class="fa fa-times-circle" aria-hidden="true"></i> La confirmación de clave no coincide con la clave </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p>La clave debe ser mayor a seis caracteres y solo estar formado por valores alfanuméricos y '_-.'</p>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <dic class="col-md-12">
+                            <h3>Preguntas de seguridad</h3>
+                        </dic>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="pregunta0">Pregunta #0</label>
+                                @{
+                                    List<SelectListItem> listaOpciones0 = new List<SelectListItem>();
+                                    listaOpciones0.Add(new SelectListItem
+                                    {
+                                        Text = "Lugar de nacimiento de su madre.",
+                                        Value = "1",
+                                        Selected = true
+                                    });
+                                    listaOpciones0.Add(new SelectListItem
+                                    {
+                                        Text = "Nombre de su mejor amigo de la infancia.",
+                                        Value = "2",
+
+                                    });
+                                    listaOpciones0.Add(new SelectListItem
+                                    {
+                                        Text = "Nombre de su profesor favorito.",
+                                        Value = "3"
+                                    });
+
+                                }
+                                @Html.DropDownListFor(model => model.PreguntaRespuesta0.Pregunta, listaOpciones0,  new { @id= "regPregunta0", @class = "form-control" })
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="respuesta0">Respuesta #0</label>
+                                @Html.TextBoxFor(m => m.PreguntaRespuesta0.Respuesta, new { @MaxLength = 20, @id ="regRespuesta0", @class="form-control", @required= "required", oncontextmenu = "return false", onkeypress = "return validaLetrasYEspacio(event)" })
+                            </div>
+                            <!-- DIV OCULTOS  PARA VALIDACIONES-->
+                            <div id="regRespuesta0Empty" style="display: none;" class="has-error error">
+                                <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe colocar su respuesta</p>
+                            </div>
+
+                            <div id="regRespuesta0Format" style="display: none;" class="has-error error">
+                                <p><i class="fa fa-times-circle" aria-hidden="true"></i> El campo solo debe contener caracteres alfabéticos y espacios</p>
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="pregunta1">Pregunta #1</label>
+                                @{
+                                    List<SelectListItem> listaOpciones1 = new List<SelectListItem>();
+                                    
+                                    listaOpciones1.Add(new SelectListItem
+                                    {
+                                        Text = "Nombre de su película favorita.",
+                                        Value = "4",
+                                        Selected = true
+                                    });
+                                    listaOpciones1.Add(new SelectListItem
+                                    {
+                                        Text = "Nombre de su personaje primera mascota.",
+                                        Value = "5"
+                                    });
+                                    listaOpciones1.Add(new SelectListItem
+                                    {
+                                        Text = "Nombre de su comida favorita.",
+                                        Value = "6"
+                                    });
+                                }
+                                @Html.DropDownListFor(model => model.PreguntaRespuesta1.Pregunta, listaOpciones1, new {@id="regPregunta1" ,@class = "form-control" })
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Respuesta #1</label>
+                                @Html.TextBoxFor(m => m.PreguntaRespuesta1.Respuesta, new { @MaxLength = 20, @id ="regRespuesta1", @class = "form-control", @required = "required", oncontextmenu = "return false", onkeypress = "return validaLetrasYEspacio(event)" })
+                            </div>
+                            <hr>
+                            <!-- DIV OCULTOS  PARA VALIDACIONES-->
+                            <div id="regRespuesta1Empty" style="display: none;" class="has-error error">
+                                <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe colocar su respuesta</p>
+                            </div>
+
+                            <div id="regRespuesta1Format" style="display: none;" class="has-error error">
+                                <p><i class="fa fa-times-circle" aria-hidden="true"></i> El campo solo debe contener caracteres alfabéticos y espacios</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="pregunta2">Pregunta #2</label>
+                                @{
+                                    List<SelectListItem> listaOpciones2 = new List<SelectListItem>();
+                                    listaOpciones2.Add(new SelectListItem
+                                    {
+                                        Text = "Ocupación de su madre.",
+                                        Value = "7",
+                                        Selected = true
+                                    });
+                                    listaOpciones2.Add(new SelectListItem
+                                    {
+                                        Text = "Ocupación de su padre.",
+                                        Value = "8",
+
+                                    });
+                                    listaOpciones2.Add(new SelectListItem
+                                    {
+                                        Text = "Serie favorita de televisión.",
+                                        Value = "9"
+                                    });
+                                }
+
+                                @Html.DropDownListFor(model => model.PreguntaRespuesta2.Pregunta, listaOpciones2, new { @id="regPregunta2", @class="form-control"})
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="respuesta2">Respuesta #2</label>
+                                @Html.TextBoxFor(m => m.PreguntaRespuesta2.Respuesta, new { @MaxLength = 20, @id ="regRespuesta2", @class = "form-control", @required = "required", oncontextmenu = "return false", onkeypress = "return validaLetrasYEspacio(event)" })
+                            </div>
+                            <hr>
+                            <!-- DIV OCULTOS  PARA VALIDACIONES-->
+                            <div id="regRespuesta2Empty" style="display: none;" class="has-error error">
+                                <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe colocar su respuesta</p>
+                            </div>
+
+                            <div id="regRespuesta2Format" style="display: none;" class="has-error error">
+                                <p><i class="fa fa-times-circle" aria-hidden="true"></i> El campo solo debe contener caracteres alfabéticos y espacios</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <label class="checkbox nomargin"><input class="checked-agree" type="checkbox" name="checkbox"><i></i>I agree to the <a href="#" data-toggle="modal" data-target="#termsModal">Terms of Service</a></label>
+                    <label class="checkbox nomargin"><input type="checkbox" name="checkbox"><i></i>Subscribe to newsletter</label> -->
+                </fieldset>
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <button type="submit" id="regBotonSubmit" class="btn btn-primary"><i class="fa fa-check"></i>Registrarse</button>
+                    </div>
+                    <!-- DIV OCULTOS  PARA VALIDACIONES-->
+                    <div id="regErrorEnFormulario" style="display: none;" class="has-error error">
+                        <p><i class="fa fa-times-circle" aria-hidden="true"></i> Existen valores inválidos en el formulario</p>
+                    </div>
+                    <script>
+                        document.getElementById("regErrorEnFormulario").style.display = 'none';
+                    </script>
+                </div>
+            }
+ 
+        </div>
+    </div>
+</div>

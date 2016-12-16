@@ -1,13 +1,5 @@
-using FOReserva.Models.Restaurantes;
-using FOReserva.Models.Diarios;
 using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System;
-
-
 
 //IMPORTANTE AGREGAR EL USING DE SUS RESPECTIVAS CLASES PARA PODER AGREGAR EL METODO DE AGREGAR/CONSULTAR
 
@@ -34,7 +26,7 @@ namespace FOReserva.Servicio
                 conexion.Open();
             }catch (SqlException e)
             {
-                    throw new ManejadorSQLException("Error de conexion con la DB", e);
+                throw new ManejadorSQLException("Error de conexion con la DB", e);
             }
         }
 
