@@ -104,7 +104,8 @@ namespace BOReserva.Models.gestion_cruceros
         {
             List<CGestion_crucero> listaCruceros = new List<CGestion_crucero>();
             CGestion_crucero crucero;
-            try {
+            try
+            {
                 Conectar();
                 using (comando = new SqlCommand(RecursosCruceros.ListarCruceros, conexion))
                 {
@@ -125,9 +126,9 @@ namespace BOReserva.Models.gestion_cruceros
                     }
                     reader.Close();
                 }
-                conexion.Close(); 
+                conexion.Close();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return null;
             }
@@ -277,7 +278,8 @@ namespace BOReserva.Models.gestion_cruceros
                     comando.ExecuteNonQuery();
                     conexion.Close();
                     return true;
-                } catch(Exception e)
+                }
+                catch (Exception e)
                 {
                     return false;
                 }
@@ -309,6 +311,7 @@ namespace BOReserva.Models.gestion_cruceros
             catch (Exception e)
 
                 {
+
                 return false;
             }
         }
@@ -367,6 +370,7 @@ namespace BOReserva.Models.gestion_cruceros
                     conexion.Close();
                 }
                 return null;
+
             }
             catch (Exception e)
             {

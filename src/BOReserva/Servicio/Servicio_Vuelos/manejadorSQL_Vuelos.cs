@@ -13,9 +13,11 @@ namespace BOReserva.Servicio.Servicio_Vuelos
     public class manejadorSQL_Vuelos
     {
         //Inicializo el string de conexion en el constructor
+        private manejadorSQL bd = new manejadorSQL();
         public manejadorSQL_Vuelos()
         {
-            stringDeConexion = "Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617a;";
+            //stringDeConexion = "Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617a;";
+            this.stringDeConexion = bd.stringDeConexions;
         }
         //Atributo que ejecutara la conexion a la bd
         private SqlConnection conexion = null;
@@ -263,6 +265,7 @@ namespace BOReserva.Servicio.Servicio_Vuelos
                 //return null;
             }
         }
+
         //fin cargarOrigenes
 
         

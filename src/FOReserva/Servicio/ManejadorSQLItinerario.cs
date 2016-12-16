@@ -16,7 +16,8 @@ namespace FOReserva.Servicio
 
         public ManejadorSQLItinerario()
         {
-            stringDeConexion = "Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617a;";
+            manejadorSQL manejador = new manejadorSQL();
+            stringDeConexion = manejador.getStringConexion();
         }
 
         //Procedimiento para traer la lista de lugares destino de usuario

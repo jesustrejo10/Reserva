@@ -36,13 +36,21 @@
                         <!--se llena por javascript los permisos que del modulo cada vez que se cambia la seleccion de un elemento aqui -->
 
                         <div class="checkbox" id="listaPermisos">
-
-                            @foreach (var item in Model.Permisos)
+                            @try
                             {
+                                foreach (var item in Model.Permisos)
+                                {
 
 
-                                <a href="#" title="Eliminar Permiso" id="@item.Nombre" class="@Model.Nombre_rol"><i class=" fa fa-times eliminarpermiso"></i></a>
-                                <option class="modificar" value="@item.Nombre">@item.Nombre </option> <br>
+                                    <a href="#" title="Eliminar Permiso" id="@item.Nombre" class="@Model.Nombre_rol"><i class=" fa fa-times eliminarpermiso"></i></a>
+                                    <option class="modificar" value="@item.Nombre">@item.Nombre </option> <br>
+                                }
+                            }
+                            catch
+                            {
+                                <script>
+                                    alert("Error en el listado, por favor intente acceder nuevamente");
+                                </script>
                             }
 
                         </div>
@@ -55,11 +63,51 @@
                     <div class="col-xs-6" style="margin-top:10px;">
                         <label for="Acceso">Asignar Permiso:</label>
                         <!--se llena por javascript los permisos que del modulo cada vez que se cambia la seleccion de un elemento aqui -->
+                        @try
+                        {
+                            <div class="checkbox" id="listaNoPermisos">
+                                <script>
+                                    function consultarNoPermisos() {
+                                        var identificador = $(".nombre_Rol").attr("id");
+                                        $.ajax({
+                                            url: "gestion_roles/consultarLosPermisosNoAsignados",
+                                            data: { nombre_rol: identificador },
+                                            type: 'POST',
+                                            success: cargadorPermisos,
+                                            failure: function (response) {
+                                                alert("Error buscando permisos");
 
-                        <div class="checkbox" id="listaNoPermisos">
+                                            }
+                                        });
+                                    }
+                                    consultarNoPermisos();
+                                    function cargadorPermisos(response) {
+
+                                        var permisos = response;
+                                        var container = $('#listaNoPermisos');
+                                        container.empty();
+                                        //se vacia la lista de permisos para colocar los nuevos seleccionados
+                                        jQuery.each(permisos, function (i) {
+                                            var inputs = container.find('input');
+                                            var id = inputs.length + 1;
+                                            $('<input />', { type: 'checkbox', id: 'permiso' + id, value: permisos[i] }).appendTo(container);
+                                            $('<label />', { 'for': 'permiso' + id, text: permisos[i] }).appendTo(container);
+                                            $('<br>').appendTo(container)
+                                        });
+                                        //se agrega por cada elemento dentro de la lista un checkbox y un label con el valor del permiso
+                                    }
+                                </script>
 
 
-                        </div>
+                            </div>
+                        }
+                        catch
+                        {
+
+                            <script>
+                                alert("Error en el listado, por favor intente acceder nuevamente");
+                            </script>
+                        }
 
 
 
@@ -121,7 +169,7 @@
 
     //boton cancelar
     $("#cancelarModificacion").click(function (e) {
-    
+
         var url = '/gestion_roles/M13_VisualizarRol';
         var method = 'GET';
         var data = '';
@@ -139,9 +187,9 @@
                     alert(errorThrown);
                 }
             });
-    
-    
-    
+
+
+
     });
     //Accion del boton modicar rol
     $("#modificarrol").click(function (e) {
@@ -149,7 +197,7 @@
         //nombre del rol
         var form = $(".nombre_Rol").attr("id");
         //nombre del nuevo rol
-        var nombrerol_nuevo=$("#nombre_rol").val();
+        var nombrerol_nuevo = $("#nombre_rol").val();
         var permisos = [$("#nombre_rol").val()];
         console.log(form);
         jQuery.each($("input[type='checkbox']"), function (i) {

@@ -8,6 +8,7 @@ namespace BOReserva.Models.gestion_cruceros
     public class CGestion_itinerario
     {
 
+
         public CGestion_itinerario()
         {
         }
