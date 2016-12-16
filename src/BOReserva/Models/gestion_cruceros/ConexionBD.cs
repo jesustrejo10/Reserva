@@ -104,7 +104,8 @@ namespace BOReserva.Models.gestion_cruceros
         {
             List<CGestion_crucero> listaCruceros = new List<CGestion_crucero>();
             CGestion_crucero crucero;
-            try {
+            try
+            {
                 Conectar();
                 using (comando = new SqlCommand(RecursosCruceros.ListarCruceros, conexion))
                 {
@@ -125,9 +126,9 @@ namespace BOReserva.Models.gestion_cruceros
                     }
                     reader.Close();
                 }
-                conexion.Close(); 
+                conexion.Close();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return null;
             }
@@ -214,6 +215,7 @@ namespace BOReserva.Models.gestion_cruceros
             }
             return listaRuta;
         }
+<<<<<<< HEAD
         //public List<CGestion_ruta> listarRutas()
         //{
         //    List<CGestion_ruta> listaRuta = new List<CGestion_ruta>();
@@ -239,6 +241,8 @@ namespace BOReserva.Models.gestion_cruceros
         //    }
         //    return listaRuta;
         //}
+=======
+>>>>>>> Develop
 
         public void eliminarCrucero(int id_crucero)
         {
@@ -277,7 +281,8 @@ namespace BOReserva.Models.gestion_cruceros
                     comando.ExecuteNonQuery();
                     conexion.Close();
                     return true;
-                } catch(Exception e)
+                }
+                catch (Exception e)
                 {
                     return false;
                 }
@@ -307,8 +312,12 @@ namespace BOReserva.Models.gestion_cruceros
                 }
             }
             catch (Exception e)
+<<<<<<< HEAD
 
                 {
+=======
+            {
+>>>>>>> Develop
                 return false;
             }
         }
@@ -317,7 +326,10 @@ namespace BOReserva.Models.gestion_cruceros
         {
             try
             {
+<<<<<<< HEAD
 
+=======
+>>>>>>> Develop
                 Conectar();
                 using (comando = new SqlCommand(RecursosCruceros.AgregarItinerario, conexion))
                 {
@@ -366,7 +378,10 @@ namespace BOReserva.Models.gestion_cruceros
                     reader.Close();
                     conexion.Close();
                 }
+<<<<<<< HEAD
                 return null;
+=======
+>>>>>>> Develop
             }
             catch (Exception e)
             {

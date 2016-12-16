@@ -140,7 +140,7 @@
         var contr = '/gestion_diarios/gestion_diarios_resultados';
         var datos;
         var metodo;
-        if (a == 0) {//Para la carga inicial de resultados
+        if (a==0) {//Para la carga inicial de resultados
             datos = '';
             metodo = 'GET';
         } else {    //Para la carga con búsquedas de resultados
@@ -167,7 +167,6 @@
 
     $("#crearDiario").click(function (e) {
         e.preventDefault();
-        cargarResultados(1);
     });      //Evento de click en el botón Buscar
 
 

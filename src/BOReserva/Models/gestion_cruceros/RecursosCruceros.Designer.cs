@@ -146,6 +146,7 @@ namespace BOReserva.Models.gestion_cruceros
             }
         }
 
+<<<<<<< HEAD
         /// <summary>
         ///   Looks up a localized string similar to M24_ConsultarCruceroID.
         /// </summary>
@@ -181,18 +182,32 @@ namespace BOReserva.Models.gestion_cruceros
         /// </summary>
 
         
+=======
+>>>>>>> Develop
         /// <summary>
         ///   Looks up a localized string similar to M24_ConsultarCruceroID.
         /// </summary>
-        internal static string ConsultarCruceroID {
-            get {
+        internal static string ConsultarCruceroID
+        {
+            get
+            {
                 return ResourceManager.GetString("ConsultarCruceroID", resourceCulture);
-			}
-		}
-		
-		/// <summary>
+            }
+        }
+
+        /// <summary>
         ///   Busca una cadena traducida similar a M24_CambiarEstatusItinerario.
         /// </summary>
+<<<<<<< HEAD
+=======
+        internal static string CambioEstatusItinerario
+        {
+            get
+            {
+                return ResourceManager.GetString("CambioEstatusItinerario", resourceCulture);
+            }
+        }
+>>>>>>> Develop
 
         /// <summary>
         ///   Looks up a localized string similar to M24_EliminarCruceros.

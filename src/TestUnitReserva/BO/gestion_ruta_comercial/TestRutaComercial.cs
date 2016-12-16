@@ -16,18 +16,6 @@ namespace TestUnitReserva.BO.gestion_ruta_comercial
         CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();
 
         [Test]
-        public void TestAgregarRuta()
-        {
-            CAgregarRuta prueba = new CAgregarRuta();
-            prueba._origenRuta = "Caracas - Venezuela";
-            prueba._destinoRuta = "Miami - Estados Unidos";
-            prueba._estadoRuta = "Activa";
-            prueba._tipoRuta = "Aerea";
-            prueba._distanciaRuta = 55555555;
-            Assert.IsTrue(sql.InsertarRuta(prueba));
-        }
-
-        [Test]
         public void TestConsultarRuta()
         {
             List<CRuta> prueba = new List<CRuta>();

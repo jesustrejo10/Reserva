@@ -19,7 +19,15 @@
     <div class="box-inner">
         <h4>Mis Reservas de Autos</h4>
         <div class="table-responsive">
-            <table class="table table-bordered table-hover" id="sample_1">
+            @if (Model.Count() == 0)
+            {
+            <div class="row">
+                <center><h1><i class="fa fa-exclamation-circle orange" aria-hidden="true"></i> No posee reservas </h1></center>
+            </div>
+            }
+            else
+            {
+                <table class="table table-bordered table-hover" id="sample_1">
                 <thead>
                     <tr>
                         <th>Fabricante</th>
@@ -36,36 +44,96 @@
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
-                    { 
-                    <tr>
-                        <td>@item.Autos.Fabricante</td>
-                        <td>@item.Autos.Modelo</td>
-                        <td>@item.CiudadOri</td>
-                        <td>@item.CiudadDes</td>
-                        <td>@item.FechaIni</td>
-                        <td>@item.FechaFin</td>
-                        <td>@item.Autos.Precio</td>
-                        <td>
-                            @if(item.Status == 1)
-                            {
-                                <span class="label label-success">Activa</span>
-                            }
-                            else
-                            {
-                                 <span class="label label-danger">Cancelada</span>
-                            }
-                        </td>
-                        <td>
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-times white"></i> Eliminar </a>
-                        </td>
-                    </tr>
-                    }
+{
+    <tr id="@item.IdReserva" value="@item.IdReserva">
+        <td>@item.Autos.Fabricante</td>
+        <td>@item.Autos.Modelo</td>
+        <td>@item.CiudadOri</td>
+        <td>@item.CiudadDes</td>
+        <td>@item.FechaIni</td>
+        <td>@item.FechaFin</td>
+        <td>@item.Autos.Precio</td>
+        <td>
+            @if (item.Status == 1)
+            {
+                <span class="label label-success">Activa</span>
+            }
+            else
+            {
+                <span class="label label-danger">Cancelada</span>
+            }
+        </td>
+        <td>
+@if (item.Status == 1)
+            {
+
+            <a id="eliminar" href="#ModalEliminar" name="eliminar" data-id="@item.IdReserva" data-toggle="modal" class="open-AddBookDialog btn btn-danger btn-xs"><i class="fa fa-times white"></i> Cancelar </a>
+}
+        </td>
+    </tr>
+}
                 </tbody>
             </table>
+            }
         </div>
     </div>
 </div>
+<div id="ModalEliminar" class="modal fade" role="dialog">
+    <div class="modal-dialog">
 
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Eliminar Reserva</h4>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro que desea cancelar esta reserva?</p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="aceptar_eliminar" value="0" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    $(document).on("click", ".open-AddBookDialog", function () {
+        var myBookId = $(this).data('id');
+        $(".modal-footer #aceptar_eliminar").val(myBookId);
+        $(".error").hide();
+        console.log(myBookId);
+        
+    });
+    $(document).on('click', '#aceptar_eliminar', function () {
+        var id_fila = $(this).val();
+        console.log(id_fila);
+        $.ajax({
+            url: "/gestion_reserva_auto/eliminarReservaAuto/",
+            type: 'POST',
+            dataType: "json",
+            data: { id: id_fila }
+
+        }).done(function (data) {
+            javascript: location.reload();
+        })
+	    .fail(function (data) {
+	        $('#ModalErrorEliminar').modal('show');
+	        console.log("error");
+	    })
+	    .always(function (data) {
+	        console.log("complete");
+	    });
+    });
+
+
+
+
+
+
+</script>
 <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/jquery.dataTables.min.js")"></script>
 <script type="text/javascript" src="@Url.Content("~/Contentassets/plugins/datatables/js/dataTables.tableTools.min.js")"></script>
 <script type="text/javascript" src="@Url.Content("~/Contentassets/plugins/datatables/js/dataTables.colReorder.min.js")"></script>

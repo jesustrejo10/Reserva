@@ -14,6 +14,7 @@ namespace FOReserva.Servicio
     public class ManejadorSQLDiarios : manejadorSQL
     {
         StringBuilder sb;
+        SqlCommand cmd;
         /*Constructor de manejadorSQL*/
         public ManejadorSQLDiarios() : base() { }
 
@@ -64,8 +65,6 @@ namespace FOReserva.Servicio
        
         public List<CDiarioModel> buscarDiarios(CDiarioModel diar)
         {
-            string fecha_i = diar.Fecha_ini.ToString("yyyy-MM-dd");
-            string fecha_f = diar.Fecha_fin.ToString("yyyy-MM-dd");
             sb = new StringBuilder();
             sb.Append("SELECT ");
             sb.Append(" d.id_diar, d.nombre_diario, CASE ");
@@ -74,18 +73,18 @@ namespace FOReserva.Servicio
             sb.Append("  ELSE d.descripcion_diar END descr, ");
             sb.Append("  d.fk_destino, d.calif_creador, d.fecha_carga_diar ");
             sb.Append("FROM Diario_Viaje d ");
-            if (diar.Destino != 0) //Si se busca por destino se anexa la tabla al query
+            if (diar.Destino != -1) //Si se busca por destino se anexa la tabla al query
             {
                 sb.Append(", Lugar l ");
             }
-            sb.Append("WHERE d.fecha_carga_diar BETWEEN '" + fecha_i + "' AND '" + fecha_f + "' ");
-            if (diar.Destino != 0) //Si se busca por destino se anexa la condición al query
+            sb.Append("WHERE d.fecha_carga_diar BETWEEN CONVERT(varchar,@finicio,111) AND CONVERT(varchar,@ffin,111)");
+            if (diar.Destino != -1) //Si se busca por destino se anexa la condición al query
             {
-                sb.Append(" AND (l.lug_id = " + diar.Destino + " OR l.lug_FK_lugar_id = " + diar.Destino + ") AND d.fk_destino = l.lug_id ");
+                sb.Append(" AND (l.lug_id = @destino OR l.lug_FK_lugar_id = @destino ) AND d.fk_destino = l.lug_id ");
             }
             if (diar.Rating != 0) //Si se filtra por rating se anexa la condición al query
             {
-                sb.Append(" AND d.calif_creador >= " + diar.Rating + " ");
+                sb.Append(" AND d.calif_creador >= @rating ");
             }
             if (diar.Filtro == 0) //Fechas descendientes (más recientes primero)
             {
@@ -97,7 +96,13 @@ namespace FOReserva.Servicio
             }
             string query = sb.ToString();
 
-            SqlDataReader read = Executer(query);
+            List<SqlParameter> par = new List<SqlParameter>();
+            par.Add(new SqlParameter("@finicio", diar.Fecha_ini));
+            par.Add(new SqlParameter("@ffin", diar.Fecha_fin));
+            par.Add(new SqlParameter("@destino", diar.Destino));
+            par.Add(new SqlParameter("@rating", diar.Rating));
+
+            SqlDataReader read = Executer(query,par);
             List<CDiarioModel> listaDV = new List<CDiarioModel>();
             if (read.HasRows)
             {
@@ -135,9 +140,13 @@ namespace FOReserva.Servicio
             sb.Append("  d.calif_creador, d.rating, d.num_visita, ");
             sb.Append("  d.fk_usuario_id, d.fecha_fin_diar, d.fk_destino ");
             sb.Append("FROM dbo.Diario_Viaje AS d ");
-            sb.Append("WHERE d.id_diar = " + id_dia);
+            sb.Append("WHERE d.id_diar = @diarid");
             string query = sb.ToString();
-            SqlDataReader read = Executer(query);
+
+            List<SqlParameter> par = new List<SqlParameter>();
+            par.Add(new SqlParameter("@diarid", id_dia));
+
+            SqlDataReader read = Executer(query,par);
             if (read.HasRows)
             {
                 read.Read();
@@ -200,8 +209,12 @@ namespace FOReserva.Servicio
                     INNER JOIN dbo.Diario_Viaje AS dv 
                     ON dv.fk_usuario_id = u.usu_id
                 WHERE
-                    dv.id_diar = " + id;
-            SqlDataReader read = Executer(query);
+                    dv.id_diar = @userid";
+
+            List<SqlParameter> par = new List<SqlParameter>();
+            par.Add(new SqlParameter("@userid", id));
+
+            SqlDataReader read = Executer(query,par);
             string nombre = "";
 
             if (read.HasRows)
@@ -221,8 +234,12 @@ namespace FOReserva.Servicio
             string query = @"SELECT
                 l.lug_nombre
             FROM dbo.Lugar AS l
-            WHERE l.lug_id = " + id;
-            SqlDataReader read = Executer(query);
+            WHERE l.lug_id = @lugarid";
+
+            List<SqlParameter> par = new List<SqlParameter>();
+            par.Add(new SqlParameter("@lugarid", id));
+
+            SqlDataReader read = Executer(query,par);
             string nombre = "";
 
             if (read.HasRows)
@@ -241,8 +258,12 @@ namespace FOReserva.Servicio
             string query = @"SELECT
                 Diario_Viaje.num_visita
             FROM dbo.Diario_Viaje 
-            WHERE id_diar = " + id;
-            SqlDataReader read = Executer(query);
+            WHERE id_diar = @diarid";
+
+            List<SqlParameter> par = new List<SqlParameter>();
+            par.Add(new SqlParameter("@diarid", id));
+
+            SqlDataReader read = Executer(query,par);
             int numero=0 ;
 
             if (read.HasRows)
@@ -262,18 +283,26 @@ namespace FOReserva.Servicio
         /*Nuevo Diario*/
 
 
-        public int CrearDiario(CDiarioModel crear_Nuevo_Diario)
+        public int CrearDiario(CDiarioModel nDiar)
         {
-            string query =@"INSERT INTO Diario_Viaje
+            string query = @"INSERT INTO Diario_Viaje
             (nombre_diario,fecha_ini_diar,descripcion_diar,
             fecha_carga_diar,calif_creador,rating,num_visita
             ,fk_usuario_id,fecha_fin_diar,fk_destino) 
             OUTPUT Inserted.id_diar
-            VALUES('" + crear_Nuevo_Diario.Nombre + "','" + crear_Nuevo_Diario.Fecha_ini.ToString("yyyy-MM-dd") + "','"
-            + crear_Nuevo_Diario.Descripcion + "','" + crear_Nuevo_Diario.Fecha_carga.ToString("yyyy-MM-dd") + "',"
-            + crear_Nuevo_Diario.Calif_creador + ",0,0,11,'"
-            + crear_Nuevo_Diario.Fecha_fin.ToString("yyyy-MM-dd") + "','" + crear_Nuevo_Diario.Destino + "' )";
-            SqlDataReader read = Executer(query);
+            VALUES(@nombre,CONVERT(varchar,@finicio,111),@descr,
+            CONVERT(varchar,@fcarga,111),@calif,0,0,11,@ffin,@dest)";
+
+            List<SqlParameter> par = new List<SqlParameter>();
+            par.Add(new SqlParameter("@nombre", nDiar.Nombre));
+            par.Add(new SqlParameter("@finicio", nDiar.Fecha_ini));
+            par.Add(new SqlParameter("@descr", nDiar.Descripcion));
+            par.Add(new SqlParameter("@fcarga", nDiar.Fecha_carga));
+            par.Add(new SqlParameter("@calif", nDiar.Calif_creador));
+            par.Add(new SqlParameter("@ffin", nDiar.Fecha_fin));
+            par.Add(new SqlParameter("@dest", nDiar.Destino));
+            
+            SqlDataReader read = Executer(query,par);
             int id = -1;
             if (read.HasRows)
             {
@@ -293,12 +322,17 @@ namespace FOReserva.Servicio
         /*Este metodo obtendra el diario a partir de la respuesta
           de buscar diario de viaje dado un modelo */
 
-        public int actualizarVisitas(CDiarioModel objeto_diario)
+        public int actualizarVisitas(CDiarioModel diar)
         {
-            int visitas = objeto_diario.Num_visita;
+            int visitas = diar.Num_visita;
             visitas++;
-            string query = "update Diario_Viaje set num_visita = " + visitas +" where id_diar="+objeto_diario.Id;
-            this.Executer(query);
+            string query = "UPDATE Diario_Viaje SET num_visita = @visitas WHERE id_diar = @did";
+            
+            List<SqlParameter> par = new List<SqlParameter>();
+            par.Add(new SqlParameter("@visitas", visitas));
+            par.Add(new SqlParameter("@did", diar.Id));
+                        
+            this.Executer(query,par);
             CloseConnection();
             return visitas;
         }
@@ -314,8 +348,13 @@ namespace FOReserva.Servicio
             {
                 nuevoRating--;
             }
-            string query = "update Diario_Viaje set rating = " + nuevoRating + " where id_diar=" + diario.Id;
-            this.Executer(query);
+            string query = "UPDATE Diario_Viaje SET rating = @rat WHERE id_diar = @did";
+
+            List<SqlParameter> par = new List<SqlParameter>();
+            par.Add(new SqlParameter("@rat", nuevoRating));
+            par.Add(new SqlParameter("@did", diario.Id));
+
+            this.Executer(query,par);
             CloseConnection();
             return nuevoRating;
         }

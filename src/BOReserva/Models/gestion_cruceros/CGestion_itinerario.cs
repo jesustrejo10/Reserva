@@ -45,7 +45,6 @@ namespace BOReserva.Models.gestion_cruceros
         {
             ConexionBD cbd = new ConexionBD();
             cbd.cambiarEstadoItinerario(fechaInicio, fkCrucero, fkRuta);
-
         }
     }
 }
