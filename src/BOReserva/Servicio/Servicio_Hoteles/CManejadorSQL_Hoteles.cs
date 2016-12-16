@@ -56,6 +56,7 @@ namespace BOReserva.Servicio.Servicio_Hoteles
         public Boolean insertarHotel(CHotel model)
         {
             int pk = LeerPkHotel() + 1;
+         //   int fkCiudad = getIdCiudad(model._ciudad) ; // en realidad busca un lugar en función de su nombre
             try
             {
                 //Inicializo la conexion con el string de conexion
@@ -447,6 +448,37 @@ namespace BOReserva.Servicio.Servicio_Hoteles
                 conexion = new SqlConnection(stringDeConexion);
                 conexion.Open();
                 String sql = "select lug_id from lugar where lug_nombre = '"+ _pais +"';";
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                int i = 0;
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        pk = reader.GetInt32(0);
+                        Debug.WriteLine(reader[0].ToString());
+                        i++;
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return pk;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return 0;
+            }
+        }
+
+        public int getIdCiudad(String _ciudad)
+        {
+            Debug.WriteLine(_ciudad);
+            int pk = 0;
+            try
+            {
+                conexion = new SqlConnection(stringDeConexion);
+                conexion.Open();
+                String sql = "select lug_id from lugar where lug_nombre = '" + _ciudad + "' and lug_tipo_lugar ='ciudad';";
                 SqlCommand cmd = new SqlCommand(sql, conexion);
                 int i = 0;
                 using (SqlDataReader reader = cmd.ExecuteReader())

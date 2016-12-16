@@ -14,6 +14,7 @@ namespace BOReserva.Controllers
     {
         public static String _ciudad;
         public static String _pais;
+        public static String sciudad;
 
         // GET: gestion_hoteles
         public ActionResult M09_GestionHoteles_Crear()
@@ -177,6 +178,7 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult guardarHotel(CHotel model)
         {
+            
             Debug.WriteLine(model._direccion);
             Debug.WriteLine(model._email);
             Debug.WriteLine(model._estrellas.ToString());
@@ -184,10 +186,13 @@ namespace BOReserva.Controllers
             Debug.WriteLine(model._paginaweb);
             Debug.WriteLine("Pais "+model._pais);
             Debug.WriteLine(model._nombre);
-           // Debug.WriteLine(model._ciudad);
+            Debug.WriteLine(model._ciudad);
+            model._ciudad = _ciudad;
+            model._pais = _pais;
+            Debug.WriteLine("ciudad " + model._ciudad);
 
             //Chequeo si los campos obligatorios estan vacios como medida de seguridad
-            if ((model._canthabitaciones == 0) || (model._direccion == null) || (model._nombre == null)
+            if ((model._canthabitaciones == 0) || (model._direccion == null) || (model._nombre == null) 
                 || (model._email == null) || (model._estrellas == 0)  || (model._paginaweb == null) || (model._pais == null)) 
             {
                 //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
@@ -263,8 +268,9 @@ namespace BOReserva.Controllers
         /// <param name="_ciudad">Nombre de la ciudad a guardar</param>
         [HttpPost]
         public void getciudad(String ciudad)
-        {
+         {
             _ciudad=ciudad;
+            Debug.WriteLine("DEBUG GET CIUDAD" + _ciudad);
         }
 
         /// <summary>
@@ -298,6 +304,14 @@ namespace BOReserva.Controllers
             // objcity = new List<String>(ciudadesFiltradas);
 
             _ciudad = objcity.First();
+
+            gestion_hotelesController._pais = pais;
+
+            gestion_hotelesController._ciudad = objcity.First();
+
+                
+
+           Debug.WriteLine("CIUDAD SELECCIONADA" + _ciudad);
 
            return Json(objcity);
         }
