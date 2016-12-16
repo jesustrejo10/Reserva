@@ -66,6 +66,8 @@
     <Compile Include="BO\gestion_seguridad_ingreso\TestLogin.cs" />
     <Compile Include="BO\gestion_ruta_comercial\TestRutaComercial.cs" />
     <Compile Include="FO\Diario\TestLugarDiario.cs" />
+    <Compile Include="FO\Itinerario\TestPlanificacionVacacion.cs" />
+    <Compile Include="BO\gestion_cruceros\TestCruceros.cs" />
     <Compile Include="FO\Reserva restaurante\TestInsertReserva.cs">
       <SubType>Code</SubType>
     </Compile>

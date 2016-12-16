@@ -992,9 +992,7 @@ namespace BOReserva.Servicio
         {
             try
             {
-                System.Diagnostics.Debug.WriteLine("aqui");
-                System.Diagnostics.Debug.WriteLine(model);
-                System.Diagnostics.Debug.WriteLine(nombre_rolnuevo);
+
                 //Inicializo la conexion con el string de conexion
                 conexion = new SqlConnection(stringDeConexion);
                 //Abrir la conexion
@@ -1506,9 +1504,8 @@ namespace BOReserva.Servicio
                 while (lector.Read())
                 {
 
-                    Debug.WriteLine("IDiiiiiii" + lector["rol_id"].ToString());
+
                     idRol = lector["rol_id"].ToString();
-                    Debug.WriteLine("----------------");
 
                 }
 
@@ -1524,33 +1521,21 @@ namespace BOReserva.Servicio
 
                 foreach (var detalle in listaPermisos)
                 {
-                    Debug.WriteLine("Amount is {0} and type is {1}", detalle.Nombre, detalle.Url);
-
                     queryDetallado = "SELECT mod_det_id from Modulo_Detallado where mod_det_nombre = '" + detalle.Nombre + "'";
-                    Debug.WriteLine("---------3-------");
-
 
                     SqlCommand cmd2 = new SqlCommand(queryDetallado, conexion);
 
-                    Debug.WriteLine("--------4--------");
-
-
                     lectorDetalle = cmd2.ExecuteReader();
-
-                    Debug.WriteLine("-------41---------");
 
 
                     while (lectorDetalle.Read())
                     {
 
-                        Debug.WriteLine("ID metodo detallado " + lectorDetalle["mod_det_id"].ToString());
-
                         listaPermiso.Add(lectorDetalle["mod_det_id"].ToString());
 
-                        Debug.WriteLine("----------------");
 
                     }
-                    Debug.WriteLine("-----------5-----");
+
                     lectorDetalle.Close();
 
                 }
@@ -1583,16 +1568,13 @@ namespace BOReserva.Servicio
         public void insertarRolPermisos(string rol, List<string> listaString)
         {
 
-
-            Debug.WriteLine("Rol " + rol);
-            Debug.WriteLine("Rol " + listaString.Count);
             if (listaString.Count > 0)
             {
                 int i = 0;
                 foreach (var money in listaString)
                 {
                     i += 0;
-                    Debug.WriteLine("Rol " + listaString[i]);
+                    
 
                 }
 
@@ -1615,18 +1597,16 @@ namespace BOReserva.Servicio
                 foreach (var money in listaString)
                 {
 
-                    Debug.WriteLine("este es el valor de i " + i);
-                    Debug.WriteLine("+++++1+++++");
 
                     query.CommandText = "INSERT INTO Rol_Modulo_Detallado VALUES ('" + rol + "','" + listaString[i] + "')";
-                    Debug.WriteLine("+++++2+++++");
+
 
                     lector = query.ExecuteReader();
-                    Debug.WriteLine("+++++3+++++");
+
 
                     //cierro el lector
                     lector.Close();
-                    Debug.WriteLine("+++++4+++++");
+
 
 
                     i += 1;
