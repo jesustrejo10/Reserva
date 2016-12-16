@@ -215,34 +215,6 @@ namespace BOReserva.Models.gestion_cruceros
             }
             return listaRuta;
         }
-<<<<<<< HEAD
-        //public List<CGestion_ruta> listarRutas()
-        //{
-        //    List<CGestion_ruta> listaRuta = new List<CGestion_ruta>();
-        //    CGestion_ruta ruta;
-        //    Conectar();
-        //    using (comando = new SqlCommand(RecursosCruceros.ListarRuta, conexion))
-        //    {
-        //        comando.CommandType = CommandType.StoredProcedure;
-        //        conexion.Open();
-        //        comando.ExecuteNonQuery();
-        //        SqlDataReader reader = comando.ExecuteReader();
-
-        //        while (reader.Read())
-        //        {
-        //            ruta = new CGestion_ruta();
-        //            ruta._idRuta = int.Parse(reader["id"].ToString());
-        //            ruta._rutaCrucero = reader["ruta"].ToString();
-
-        //            listaRuta.Add(ruta);
-        //        }
-        //        reader.Close();
-        //        conexion.Close();
-        //    }
-        //    return listaRuta;
-        //}
-=======
->>>>>>> Develop
 
         public void eliminarCrucero(int id_crucero)
         {
@@ -311,13 +283,9 @@ namespace BOReserva.Models.gestion_cruceros
                     return true;
                 }
             }
-            catch (Exception e)
-<<<<<<< HEAD
+            catch (Exception e) {
 
-                {
-=======
-            {
->>>>>>> Develop
+
                 return false;
             }
         }
@@ -326,11 +294,6 @@ namespace BOReserva.Models.gestion_cruceros
         {
             try
             {
-<<<<<<< HEAD
-
-=======
->>>>>>> Develop
-                Conectar();
                 using (comando = new SqlCommand(RecursosCruceros.AgregarItinerario, conexion))
                 {
                     comando.CommandType = CommandType.StoredProcedure;
@@ -349,7 +312,7 @@ namespace BOReserva.Models.gestion_cruceros
             {
                 return false;
             }
-        }
+        } 
 
         public List<CGestion_cabina> listarCabinas(int idCrucero)
         {
@@ -378,16 +341,14 @@ namespace BOReserva.Models.gestion_cruceros
                     reader.Close();
                     conexion.Close();
                 }
-<<<<<<< HEAD
-                return null;
-=======
->>>>>>> Develop
+               
             }
             catch (Exception e)
             {
                 return null;
-               // throw e;
+                // throw e;
             }
+            return listaCabinas;
         }
 
         public Boolean insertarCamarote(CGestion_camarote camarote)

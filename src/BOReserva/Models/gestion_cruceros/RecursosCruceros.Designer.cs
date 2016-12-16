@@ -146,12 +146,6 @@ namespace BOReserva.Models.gestion_cruceros
             }
         }
 
-<<<<<<< HEAD
-        /// <summary>
-        ///   Looks up a localized string similar to M24_ConsultarCruceroID.
-        /// </summary>
-
-
         /// <summary>
         ///   Busca una cadena traducida similar a M24_CambiarEstatusItinerario.
         /// </summary>
@@ -162,28 +156,6 @@ namespace BOReserva.Models.gestion_cruceros
                 return ResourceManager.GetString("CambioEstatusItinerario", resourceCulture);
             }
         }
-
-        /// <summary>
-        ///   Looks up a localized string similar to M24_AgregarItinerario.
-        /// </summary>
-
-        
-        /// <summary>
-        ///   Looks up a localized string similar to M24_CambiarEstatusCabina.
-        /// </summary>
-
-        /// <summary>
-        ///   Busca una cadena traducida similar a M24_CambiarEstatusCamarote.
-        /// </summary>
-
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a M24_CambiarEstatusCrucero.
-        /// </summary>
-
-        
-=======
->>>>>>> Develop
         /// <summary>
         ///   Looks up a localized string similar to M24_ConsultarCruceroID.
         /// </summary>
@@ -195,19 +167,6 @@ namespace BOReserva.Models.gestion_cruceros
             }
         }
 
-        /// <summary>
-        ///   Busca una cadena traducida similar a M24_CambiarEstatusItinerario.
-        /// </summary>
-<<<<<<< HEAD
-=======
-        internal static string CambioEstatusItinerario
-        {
-            get
-            {
-                return ResourceManager.GetString("CambioEstatusItinerario", resourceCulture);
-            }
-        }
->>>>>>> Develop
 
         /// <summary>
         ///   Looks up a localized string similar to M24_EliminarCruceros.
