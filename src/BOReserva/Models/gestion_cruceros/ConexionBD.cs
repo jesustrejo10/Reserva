@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BOReserva.Servicio;
 
 namespace BOReserva.Models.gestion_cruceros
 {
@@ -17,6 +18,13 @@ namespace BOReserva.Models.gestion_cruceros
         private string strConexion;
         private SqlCommand comando;
         private string query;
+        //Inicializo el string de conexion en el constructor
+        private manejadorSQL bd = new manejadorSQL();
+        public ConexionBD()
+        {
+            //stringDeConexion = "Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617a;";
+            this.strConexion = bd.stringDeConexions;
+        }
         // cargar metodos despues de creacion del ER y mdf
         #endregion
 
@@ -31,7 +39,9 @@ namespace BOReserva.Models.gestion_cruceros
 
             try
             {
-                strConexion = ConfigurationManager.ConnectionStrings["DB_A1380A_reserva"].ConnectionString;
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(strConexion);
+                //strConexion = ConfigurationManager.ConnectionStrings["DB_A1380A_reserva"].ConnectionString;
                 if (conexion == null)
                 {
                     conexion = new SqlConnection(strConexion);
