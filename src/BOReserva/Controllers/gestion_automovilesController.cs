@@ -247,8 +247,9 @@ namespace BOReserva.Controllers
             int cantpasajeros = model._cantpasajeros;
             String color = model._color;
             String fabricante = model._fabricante;
-            DateTime fecharegistro = Convert.ToDateTime(model._fecharegistro);
-            double kilometraje = model._kilometraje;
+            DateTime fecharegistro = new DateTime();
+
+                double kilometraje = model._kilometraje;
             String modelo = model._modelo;
             String pais = _pais;
             String _ciudad = ciudad;
