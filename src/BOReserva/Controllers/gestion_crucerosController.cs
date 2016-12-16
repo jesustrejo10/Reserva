@@ -1,4 +1,4 @@
-﻿using BOReserva.Models.gestion_cruceros;
+using BOReserva.Models.gestion_cruceros;
 using BOReserva.Models.gestion_ruta_comercial;
 using System;
 using System.Collections.Generic;
@@ -23,7 +23,7 @@ namespace BOReserva.Controllers
         {
             ConexionBD cbd = new ConexionBD();
             VistaListaCrucero vlc = new VistaListaCrucero();
-            CGestion_cabina cabina = new CGestion_cabina() { cabinas = new List<CGestion_cabina>() };
+            CGestion_cabina cabina = new CGestion_cabina() { cabinas = new List<CGestion_cabina>()};
             //CGestion_crucero crucero = new CGestion_crucero();
             vlc.cruceros = cbd.listarCruceros();
             ViewBag.ShowDropDown = new SelectList(vlc.cruceros, "_idCrucero", "_nombreCrucero");

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using BOReserva.Models.gestion_ruta_comercial;
 using System.Collections.Generic;
 using System.Configuration;
@@ -98,14 +98,13 @@ namespace BOReserva.Models.gestion_cruceros
         #endregion
 
         ///<summary>
-        /// Método para consultar todos los cruceros de la base de datos
+        /// M�todo para consultar todos los cruceros de la base de datos
         ///</summary>
         public List<CGestion_crucero> listarCruceros()
         {
             List<CGestion_crucero> listaCruceros = new List<CGestion_crucero>();
             CGestion_crucero crucero;
-            try
-            {
+            try {
                 Conectar();
                 using (comando = new SqlCommand(RecursosCruceros.ListarCruceros, conexion))
                 {
@@ -126,9 +125,9 @@ namespace BOReserva.Models.gestion_cruceros
                     }
                     reader.Close();
                 }
-                conexion.Close();
+                conexion.Close(); 
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 return null;
             }
@@ -215,6 +214,31 @@ namespace BOReserva.Models.gestion_cruceros
             }
             return listaRuta;
         }
+        //public List<CGestion_ruta> listarRutas()
+        //{
+        //    List<CGestion_ruta> listaRuta = new List<CGestion_ruta>();
+        //    CGestion_ruta ruta;
+        //    Conectar();
+        //    using (comando = new SqlCommand(RecursosCruceros.ListarRuta, conexion))
+        //    {
+        //        comando.CommandType = CommandType.StoredProcedure;
+        //        conexion.Open();
+        //        comando.ExecuteNonQuery();
+        //        SqlDataReader reader = comando.ExecuteReader();
+
+        //        while (reader.Read())
+        //        {
+        //            ruta = new CGestion_ruta();
+        //            ruta._idRuta = int.Parse(reader["id"].ToString());
+        //            ruta._rutaCrucero = reader["ruta"].ToString();
+
+        //            listaRuta.Add(ruta);
+        //        }
+        //        reader.Close();
+        //        conexion.Close();
+        //    }
+        //    return listaRuta;
+        //}
 
         public void eliminarCrucero(int id_crucero)
         {
@@ -253,8 +277,7 @@ namespace BOReserva.Models.gestion_cruceros
                     comando.ExecuteNonQuery();
                     conexion.Close();
                     return true;
-                }
-                catch (Exception e)
+                } catch(Exception e)
                 {
                     return false;
                 }
@@ -284,7 +307,8 @@ namespace BOReserva.Models.gestion_cruceros
                 }
             }
             catch (Exception e)
-            {
+
+                {
                 return false;
             }
         }
@@ -293,6 +317,7 @@ namespace BOReserva.Models.gestion_cruceros
         {
             try
             {
+
                 Conectar();
                 using (comando = new SqlCommand(RecursosCruceros.AgregarItinerario, conexion))
                 {
@@ -346,7 +371,6 @@ namespace BOReserva.Models.gestion_cruceros
             {
                 throw e;
             }
-            return listaCabinas;
         }
 
         public Boolean insertarCamarote(CGestion_camarote camarote)

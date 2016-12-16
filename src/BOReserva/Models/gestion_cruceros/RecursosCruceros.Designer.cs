@@ -169,6 +169,60 @@ namespace BOReserva.Models.gestion_cruceros
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to M24_AgregarItinerario.
+        /// </summary>
+        internal static string AgregarItinerario {
+            get {
+                return ResourceManager.GetString("AgregarItinerario", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M24_CambiarEstatusCabina.
+        /// </summary>
+        internal static string CambioEstatusCabinas {
+            get {
+                return ResourceManager.GetString("CambioEstatusCabinas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a M24_CambiarEstatusCamarote.
+        /// </summary>
+        internal static string CambioEstatusCamarote {
+            get {
+                return ResourceManager.GetString("CambioEstatusCamarote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a M24_CambiarEstatusCrucero.
+        /// </summary>
+        internal static string CambioEstatusCrucero {
+            get {
+                return ResourceManager.GetString("CambioEstatusCrucero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M24_ConsultarCruceroID.
+        /// </summary>
+        internal static string ConsultarCruceroID {
+            get {
+                return ResourceManager.GetString("ConsultarCruceroID", resourceCulture);
+			}
+		}
+		
+		/// <summary>
+        ///   Busca una cadena traducida similar a M24_CambiarEstatusItinerario.
+        /// </summary>
+        internal static string CambioEstatusItinerario {
+            get {
+                return ResourceManager.GetString("CambioEstatusItinerario", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to M24_EliminarCruceros.
         /// </summary>
         internal static string EliminarCruceros

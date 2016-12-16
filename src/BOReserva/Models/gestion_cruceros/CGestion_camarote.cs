@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -29,6 +29,13 @@ namespace BOReserva.Models.gestion_cruceros
         public int _cantidadCama { get; set; }
         public String _tipoCama { get; set; }
         public String _estatus { get; set; }
+        
+
+        public void AgregarCamarote(CGestion_camarote camarote)
+        {
+            ConexionBD cbd = new ConexionBD();
+            cbd.insertarCamarote(camarote);
+        }
 
 
         public void AgregarCamarote(CGestion_camarote camarote)

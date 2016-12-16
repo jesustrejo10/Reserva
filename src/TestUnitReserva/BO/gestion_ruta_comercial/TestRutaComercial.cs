@@ -24,7 +24,7 @@ namespace TestUnitReserva.BO.gestion_ruta_comercial
             prueba._estadoRuta = "Activa";
             prueba._tipoRuta = "Aerea";
             prueba._distanciaRuta = 55555555;
-            Assert.IsTrue(sql.MAgregarRuta(prueba));
+            Assert.IsTrue(sql.InsertarRuta(prueba));
         }
 
         [Test]
