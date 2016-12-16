@@ -11,7 +11,7 @@ namespace BOReserva.Servicio.Servicio_Rutas
 {
     public class CManejadorSQL_Rutas
     {
-        private String connectionString = @"Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User ID=DB_A1380A_reserva_admin;Password = ucabds1617a"; //No supe cual es el string de conexion jejejeps
+        private String connectionString = "Data Source=localhost;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617a;";
 
         private SqlConnection con = null;
 
@@ -55,13 +55,13 @@ namespace BOReserva.Servicio.Servicio_Rutas
             }
             catch (SqlException e)
             {
-                return false;
+                throw e;
             }
             catch (Exception e)
             {
                 return false;
             }
-        }
+        }           
 
 
         public List<CRuta> MListarRutasBD()
@@ -90,7 +90,7 @@ namespace BOReserva.Servicio.Servicio_Rutas
             catch (SqlException ex)
             {
                 con.Close();
-                return null;
+                throw ex;
             }
         }
 
@@ -133,7 +133,8 @@ namespace BOReserva.Servicio.Servicio_Rutas
             }
             catch (SqlException e)
             {
-                return false;
+                con.Close();
+                throw e;
             }
             catch (Exception e)
             {
@@ -183,7 +184,7 @@ namespace BOReserva.Servicio.Servicio_Rutas
             }
             catch (SqlException e)
             {
-                return false;
+                throw e; ;
             }
             catch (Exception e)
             {
@@ -192,7 +193,33 @@ namespace BOReserva.Servicio.Servicio_Rutas
         }
 
 
-        
+        public Boolean MModificarRuta(CAgregarRuta model)        {
+            try
+            {
+                String status = model._estadoRuta;
+                int distancia = model._distanciaRuta;
+                int id = model._idRuta;
+
+                con = new SqlConnection(connectionString);
+                con.Open();
+                String query = "UPDATE Ruta Set rut_status_ruta = '"+status+"', rut_distancia = "+distancia+" where rut_id = "+id;
+                SqlCommand cmd = new SqlCommand(query, con);
+                SqlDataReader lector = cmd.ExecuteReader();                
+
+                lector.Close();
+
+                return true;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
 
         public List<String> listarLugares()
         {
@@ -205,8 +232,12 @@ namespace BOReserva.Servicio.Servicio_Rutas
                 //INTENTO abrir la conexion
                 con.Open();
                 String query = "SELECT l.lug_nombre as ciudad, ll.lug_nombre as pais from Lugar l, Lugar ll where l.lug_FK_lugar_id = ll.lug_id";
+                
                 SqlCommand cmd = new SqlCommand(query, con);
+
+
                 SqlDataReader lector = cmd.ExecuteReader();
+                
                 while (lector.Read())
                 {
                     lugar = lector["ciudad"].ToString() + " - " + lector["pais"].ToString();
@@ -275,6 +306,7 @@ namespace BOReserva.Servicio.Servicio_Rutas
                 con.Open();
                 String sql = "SELECT a.lug_nombre AS NOrigen, lO.lug_nombre as PaisO, lD.lug_nombre as PaisD,b.lug_nombre AS NDestino,r.rut_tipo_ruta AS TRuta,r.rut_distancia AS DRuta,r.rut_status_ruta AS SRuta FROM Ruta r, Lugar a, Lugar b, Lugar lO, Lugar lD WHERE r.rut_FK_lugar_origen=a.lug_id AND r.rut_FK_lugar_destino=b.lug_id AND a.lug_FK_lugar_id=lO.lug_id AND b.lug_FK_lugar_id=lD.lug_id AND r.rut_id = '" + idRuta + "'";
                 SqlCommand cmd = new SqlCommand(sql, con);
+
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -294,9 +326,60 @@ namespace BOReserva.Servicio.Servicio_Rutas
             catch (SqlException ex)
             {
                 con.Close();
-                return null;
+                throw ex;
             }
         }
+
+        public Boolean deshabilitarRuta(int id)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                con = new SqlConnection(connectionString);
+                //INTENTO abrir la conexion
+                con.Open();
+                String query = "UPDATE Ruta SET rut_status_ruta='Inactiva' where rut_id='" + id + "'";
+                SqlCommand cmd = new SqlCommand(query, con);
+                SqlDataReader lector = cmd.ExecuteReader();
+                con.Close();
+                return true;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public Boolean habilitarRuta(int id)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                con = new SqlConnection(connectionString);
+                //INTENTO abrir la conexion
+                con.Open();
+                String query = "UPDATE Ruta SET rut_status_ruta='Activa' where rut_id='" + id + "'";
+                SqlCommand cmd = new SqlCommand(query, con);
+                SqlDataReader lector = cmd.ExecuteReader();
+                con.Close();
+                return true;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
 
     }
 }

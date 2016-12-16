@@ -1,21 +1,18 @@
 ﻿$("#siguiente").click(function (e) {
     e.preventDefault();
-    var url = '/gestion_check_in/M05_VerBoletosCheckIn';
-    var method = 'GET';
-    var data = '';
+    var form = $("#formPasaporte");
+    $.ajax({
+        url: "gestion_check_in/buscarBoletos",
+        data: form.serialize(),
+        type: 'POST',
+        success: function (data) {
 
-    $.ajax(
-        {
-            url: url,
-            type: method,
-            data: data,
-            success: function (data, textStatus, jqXHR) {
+            $("#contenido").empty();
+            $("#contenido").append(data);
+        }
+           , error: function (xhr, textStatus, exceptionThrown) {
 
-                $("#contenido").empty();
-                $("#contenido").append(data);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert(errorThrown);
-            }
-        });
+               alert(xhr.responseText);
+           }
+    });
 });

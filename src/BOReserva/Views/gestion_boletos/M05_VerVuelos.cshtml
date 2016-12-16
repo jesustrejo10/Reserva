@@ -1,115 +1,155 @@
-<!-- /.TIENES QUE ADAPTARLO A POST Y SI ES SUCCESS LO MANDAS A LA VISTA PARCIAL DETALLE VUELO -->
-<script src="/Scripts/Scripts_Boletos/DetalleVuelo.js"></script>
+﻿<div class="row">
+    <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box box-success">
-                <div class="box-header with-border">
-                    <h1 class="box-title">Vuelos Disponibles</h1>
-                    <div class="box-tools pull-right">
-                    </div>
-                </div>
-                <div class="box-body">
-                        <table id="example2" class="table table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Id vuelo</th>
-                                    <th>Origen</th>
-                                    <th>Destino</th>
-                                    <th>Fecha</th>
-                                    <th>Hora</th>
-                                    <th>Monto</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>001</td>
-                                    <td>Caracas</td>
-                                    <td>Miami</td>
-                                    <td>01/01/2017</td>
-                                    <td>10:00 am</td>
-                                    <td>$300</td>
-                                </tr>
-                                <tr>
-                                    <td>002</td>
-                                    <td>Caracas</td>
-                                    <td>Miami</td>
-                                    <td>01/02/2017</td>
-                                    <td>11:00 am</td>
-                                    <td>$350</td>
-                                </tr>
-                                <tr>
-                                    <td>003</td>
-                                    <td>Caracas</td>
-                                    <td>Miami</td>
-                                    <td>01/03/2017</td>
-                                    <td>12:00 am</td>
-                                    <td>$280</td>
-                                </tr>
-                                <tr>
-                                    <td>004</td>
-                                    <td>Caracas</td>
-                                    <td>Miami</td>
-                                    <td>01/04/2017</td>
-                                    <td>01:00 pm</td>
-                                    <td>$500</td>
-                                </tr>
-                                <tr>
-                                    <td>005</td>
-                                    <td>Caracas</td>
-                                    <td>Miami</td>
-                                    <td>01/05/2017</td>
-                                    <td>02:00 pm</td>
-                                    <td>$700</td>
-                                </tr>
-                                <tr>
-                                    <td>006</td>
-                                    <td>Caracas</td>
-                                    <td>Miami</td>
-                                    <td>01/06/2017</td>
-                                    <td>03:00 pm</td>
-                                    <td>$420</td>
-                                </tr>
-                                <tr>
-                                    <td>007</td>
-                                    <td>Caracas</td>
-                                    <td>Miami</td>
-                                    <td>01/07/2017</td>
-                                    <td>04:00 pm</td>
-                                    <td>$570</td>
-                                </tr>
-                                <tr>
-                                    <td>008</td>
-                                    <td>Caracas</td>
-                                    <td>Miami</td>
-                                    <td>01/08/2017</td>
-                                    <td>05:00 pm</td>
-                                    <td>$540</td>
-                                </tr>
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">
+                    Vuelos disponibles
+                </h3>
 
 
-                            </tbody>
-                        </table>
-
-                    <div class="col-md-12" style="margin-top:10px;">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-2">
-                            <button type="button" id="detalleVuelo" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Siguiente</button>
-                        </div>
-                        <div class="col-md-2">
-                            <button id="cancel" type="button" class="btn btn-danger" style="display:block; margin-left:auto; margin-right:auto;">Cancelar</button>
-                        </div>
-                        <div class="col-md-4"></div>
-                    </div>
-                    
-                </div>
-                    </div>
-
-
-                    <!-- /.box-footer -->
-                </div>
-                <!-- /.box -->
             </div>
-            <!-- /.col -->
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="example" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Origen</th>
+                            <th>Destino</th>
+                            <th>Fecha salida</th>
+                            <th>Fecha llegada</th>
+                            <th>Monto</th>
+                            <th>Tipo</th>
+                            <th style="display:none;">Id origen</th>
+                            <th style="display:none;">Id destino</th>
+                            <th style="display:none;">Fecha vuelta</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @try
+                        {
+                            foreach (var item in Model)
+                            {
 
 
+                                <tr id="@item._id">
+                                    <td id="origen">@item._ruta._nomOrigen</td>
+                                    <td id="destino">@item._ruta._nomDestino</td>
+                                    <td id="fechapartida">@item._fechaPartida</td>
+                                    <td id="fechallegada">@item._fechaLlegada</td>
+                                    <td id="monto">@item._monto</td>
+                                    <td id="tipo">@item._tipo</td>
+                                    <td id="idorigen" style="display:none;">@item._ruta._origen</td>
+                                    <td id="iddestino" style="display:none;">@item._ruta._destino</td>
+                                    <td id="fechavuelta" style="display:none;">@item._fechaVuelta</td>
+                                    <td>
+                                        <a href="#" title="Crear boleto"> <i class="fa fa-eye consultar"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        catch
+                        {
+
+
+                        }
+                </table>
+
+
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<script src="~/Content/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+<script language="javascript" type="text/javascript">
+    table = $('#example').DataTable();
+    $(document).ready(function () {
+
+        $(".consultar").click(function (e) {
+            e.preventDefault();
+            alert("Creando boleto sin reserva");
+
+            var id_vuelo = $(this).parent().parent().parent().attr("id");
+            //alert("ID ---- "+ identificador);
+
+            var nombre_origen = "";
+            var nombre_destino = "";
+            var fecha_salida = "";
+            var fecha_llegada = "";
+            var id_origen = "";
+            var id_destino = "";
+            var monto = "";
+            var tipo = "";
+            var fecha_vuelta = "";
+
+            // Obtenemos todos los valores contenidos en los <td> de la fila
+            // seleccionada
+            $(this).parents("tr").find("#origen").each(function () {
+                nombre_origen += $(this).html() + "\n";
+            });
+            $(this).parents("tr").find("#destino").each(function () {
+                nombre_destino += $(this).html() + "\n";
+            });
+            $(this).parents("tr").find("#fechapartida").each(function () {
+                fecha_salida += $(this).html() + "\n";
+            });
+            $(this).parents("tr").find("#fechallegada").each(function () {
+                fecha_llegada += $(this).html() + "\n";
+            });
+            $(this).parents("tr").find("#idorigen").each(function () {
+                id_origen += $(this).html() + "\n";
+            });
+            $(this).parents("tr").find("#iddestino").each(function () {
+                id_destino += $(this).html() + "\n";
+            });
+            $(this).parents("tr").find("#monto").each(function () {
+                monto += $(this).html() + "\n";
+            });
+            $(this).parents("tr").find("#tipo").each(function () {
+                tipo += $(this).html() + "\n";
+            });
+            $(this).parents("tr").find("#fechavuelta").each(function () {
+                fecha_vuelta += $(this).html() + "\n";
+            });
+
+
+
+
+
+           // alert(nombre_origen + " " + nombre_destino + " " + fecha_salida + " " + fecha_llegada+" "+id_origen+" "+id_destino+" "+tipo);
+
+            var url = '/gestion_boletos/M05_DetalleVuelo';
+            var method = 'GET';
+            var data = { origen : nombre_origen, destino : nombre_destino, fechasalida : fecha_salida, fechallegada : fecha_llegada, idorigen : id_origen, iddestino : id_destino, monto : monto, tipo : tipo, idvuelo : id_vuelo };
+
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+        });
+
+        });
+
+
+
+
+</script>

@@ -38,7 +38,7 @@
                             <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe llenar este campo</p>
                         </div>
                         <div id="name_format" style="display: none;" class="has-error error">
-                            <p><i class="fa fa-times-circle" aria-hidden="true"></i> El campo solo debe contener caracteres alfabéticos</p>
+                            <p><i class="fa fa-times-circle" aria-hidden="true"></i> El campo solo debe contener caracteres alfab&eacute;ticos y sin acentos</p>
                         </div>
                     <!-- FECHA  Y  VALIDACIONES-->
                         <div class="form-group">
@@ -77,7 +77,7 @@
                         </div>
                     <!-- CANTIDAD DE PERSONAS  Y  VALIDACIONES-->
                         <div class="form-group">
-                            <label>Numero de personas:</label>
+                            <label>N&uacute;mero de personas:</label>
                             <select name="number_person" id="number_person" class="form-control" required>
                                 <option value="1" selected>1</option>
                                 <option value="2">2</option>
@@ -106,7 +106,7 @@
                         <div class="descript_conten">
                             <h2>  <b>@Model.Name</b>  </h2>
                             <p style="color: #fff;">@Model.CityName</p>
-                            <p style="color: #fff;" class="font-lato margin-top-30 size-16 hidden-sm hidden-xs"><b>Dirección: </b> @Model.Addres</p>
+                            <p style="color: #fff;" class="font-lato margin-top-30 size-16 hidden-sm hidden-xs"><b>Direcci&oacute;n: </b> @Model.Addres</p>
                         </div>
                     </div>
 
@@ -118,7 +118,7 @@
         <div class="row">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h2 class="panel-title">Descripción</h2>
+                    <h2 class="panel-title">Descripci&oacute;n</h2>
                 </div>
                 <div class="panel-body">
                     @Model.Description
@@ -131,9 +131,22 @@
 					<h2 class="panel-title">Revisiones</h2>
 				</div>
 				<div class="panel-body">
-					<center> <input id="lista_rev" type="button" value="Ver Revisiones" class="btn btn-primary boton" /> </center>
-					<center> <a class="btn btn-primary" href="@Url.Action("crear_revision", "gestion_revision")">Agregar Revision</a></center>
-				</div>
+
+@using (Html.BeginForm("lista_revisiones", "gestion_revision", FormMethod.Post, new { @id = "revision_form" }))
+                    {
+    <input type="hidden" name="revision" id="" value="@Model.Id" />
+    <center> <input id="lista_rev" type="submit" value="Ver Revisiones" class="btn btn-primary boton" /> </center>
+}
+
+			
+                     @using (Html.BeginForm("crear_revision", "gestion_revision", FormMethod.Post, new { @id = "revision_form" }))
+                    {
+                      <input type="hidden" name="revision1" id="" value="@Model.Id" />
+                         
+                          <center> <input id="lista_rev1" type="submit" value="Agregar Revision" class="btn btn-primary boton" /> </center>
+				
+                     }
+                         </div>
 			</div>
 		</div>
         <!-- /FEATURED GRID -->
@@ -209,25 +222,11 @@
 
     });
 
-    $(document).ready(function () {
-        $("#lista_rev").click(function () {
-           
-            var ide = $(this).parent().parent().parent().parent().attr("id");
-            
-            jQuery.ajax({
-                type: "GET",
-                url: "/gestion_revision/lista_revisiones",
-                data: { id: ide }
-            }).done(function () {
-                alert("Envie")
-            }).fail(function () {
-                alert("Ocurrió un error")
-            });
-
-        });
-
-    });
+   
 
 </script>
 
 
+
+
+   

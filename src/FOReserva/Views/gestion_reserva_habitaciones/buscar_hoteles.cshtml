@@ -4,11 +4,11 @@
     if (Model.Ciudades != null && Model.Ciudades.Count > 0)
     {
     <div id="buscador">
-        <div>
+        @*<div>
             <div class="col-xs-12 heading-title">
                 <h3> <span>Hoteles: <small>Buscar hoteles con habitaciones disponibles.</small></span></h3>
             </div>
-        </div>
+        </div>*@
         <div>
             <div class="col-xs-12">
                 @using (Html.BeginForm(null, null, null, FormMethod.Post, new { @id = "formBuscarHotel", @class = "form-horizontal" }))

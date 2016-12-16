@@ -12,6 +12,7 @@ namespace BOReserva.Models.gestion_boletos
         public int _ida_vuelta { get; set; }
 
         public int _escala { get; set; }
+
         public String _tipoBoleto { get; set; }
         public double _costo { get; set; }
 
@@ -23,7 +24,9 @@ namespace BOReserva.Models.gestion_boletos
 
         public DateTime _fechaBoleto { get; set; }
 
-        public List<CVuelo> vuelos { get; set; }
+        public List<CVuelo> _vuelos { get; set; }
+
+        public String _codigo { get; set; }
 
         public CBoleto(int id, int ida_vuelta, int escala, double costo, String origen, String destino,
                       String nombre, String apellido, DateTime fechaBoleto, int idPasajero, string idOrigen, string idDestino,
@@ -38,8 +41,46 @@ namespace BOReserva.Models.gestion_boletos
             _destino = new CLugar(idDestino, destino);
             _fechaBoleto = fechaBoleto;
             _tipoBoleto = tipoBol;
+            _vuelos = new List<CVuelo>();
 
         }
+
+        //Constructor usado para las reservas, ya que el único atributo extra en la tabla reserva es el código
+        public CBoleto(int id, int ida_vuelta, int escala, double costo, String origen, String destino,
+                      String nombre, String apellido, DateTime fechaBoleto, int idPasajero, string idOrigen, string idDestino,
+                      String tipoBol, String correo, string codigo)
+        {
+            _id = id;
+            _ida_vuelta = ida_vuelta;
+            _escala = escala;
+            _costo = costo;
+            _pasajero = new CPasajero(idPasajero, nombre, apellido, correo);
+            _origen = new CLugar(idOrigen, origen);
+            _destino = new CLugar(idDestino, destino);
+            _fechaBoleto = fechaBoleto;
+            _tipoBoleto = tipoBol;
+            _vuelos = new List<CVuelo>();
+            _codigo = codigo;
+
+        }
+
+        public CBoleto(int id, int ida_vuelta, int escala, double costo, String origen, String destino,
+                       DateTime fechaBoleto, string idOrigen, string idDestino, String tipoBol)
+        {
+            _id = id;
+            _ida_vuelta = ida_vuelta;
+            _escala = escala;
+            _costo = costo;
+            _pasajero = new CPasajero();
+            _origen = new CLugar(idOrigen, origen);
+            _destino = new CLugar(idDestino, destino);
+            _fechaBoleto = fechaBoleto;
+            _tipoBoleto = tipoBol;
+            _vuelos = new List<CVuelo>();
+
+        }
+
+
 
         public CBoleto(int id)
         {

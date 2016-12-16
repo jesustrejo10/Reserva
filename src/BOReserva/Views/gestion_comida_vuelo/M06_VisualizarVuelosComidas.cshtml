@@ -1,11 +1,10 @@
-﻿
-<div class="row">
+﻿<div class="row">
     <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
 
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Lista de Platos</h3>
+                <h3 class="box-title">Lista de Vuerlos con Comidas</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -13,9 +12,8 @@
                     <thead>
                         <tr>
                             <th>Codigo Vuelo</th>
-                            <th>Nombre Plato</th>
-                            <th>Cantidad Comida</th>
-
+                            <th>Comida</th>
+                            <th>Cantidad</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -23,16 +21,11 @@
                         {
                             foreach (var item in Model)
                             {
-
-
                                 <tr id="@item._id">
                                     <td>@item._codigoVuelo</td>
                                     <td>@item._nombrePlato</td>
                                     <td>@item._cantidadComida</td>
-                                    <td>
 
-                                        
-                                    </td>
                                 </tr>
                             }
                         }
@@ -44,8 +37,8 @@
                     <tfoot>
                         <tr>
                             <th>Codigo Vuelo</th>
-                            <th>Nombre Plato</th>
-                            <th>Cantidad Comida</th>
+                            <th>Comida</th>
+                            <th>Cantidad</th>
                         </tr>
                     </tfoot>
                 </table>
@@ -58,7 +51,6 @@
 </div>
 
 
-
 <!-- DataTables -->
 <script src="../../Content/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="../../Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
@@ -67,6 +59,9 @@
     $(document).ready(function () {
         //e.preventDefault();
         table = $('#example1').DataTable();
+<<<<<<< HEAD
 
+=======
+>>>>>>> e8346243e0e4aaba46f0eb304b1cfdfbb805e5b5
     });
 </script>

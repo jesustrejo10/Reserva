@@ -34,7 +34,6 @@ namespace BOReserva.Servicio
 
 
 
-
         //Procedimiento del Modulo 6 para agregar platos a la base de datos.
         public Boolean insertarPlato(CAgregarComida model)
         {
@@ -1152,9 +1151,116 @@ namespace BOReserva.Servicio
                 throw e;
             }
         }
+        //Procedimiento del Modulo 13 para Modificar Roles
+        public Boolean ModificarrRol(string model, string nombre_rolnuevo)
+        {
+            try
+            {
 
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //Abrir la conexion
+                conexion.Open();
+                //SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "UPDATE rol set rol_nombre= '" + nombre_rolnuevo + "' where rol_id in (select rol_id from rol where rol_nombre= '" + model + "') ";
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior
+                SqlDataReader lector = query.ExecuteReader();
+                //cierro el lector
+                lector.Close();
+                //Cierro la conexion
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+        }
+        //Procedimiento del Modulo 13 para retornar lalista de permisos que no tiene el rol
+        public CListaGenerica<CModulo_detallado> consultarLosPermisosNoAsignados(CRoles _rol)
+        {
+            CListaGenerica<CModulo_detallado> modulo_detallado = new CListaGenerica<CModulo_detallado>();
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //Abrir la conexion
+                conexion.Open();
+                //query es un string que me devolvera la consulta 
+                String query = "select mod_det_nombre from modulo_detallado where mod_det_nombre not in(SELECT mod_det_nombre FROM modulo_detallado,rol_modulo_detallado,rol where mod_det_id=fk_mod_det_id AND fk_rol_id=rol_id and rol_nombre='" + _rol.Nombre_rol + "')";
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+                while (lector.Read())
+                {
+                    var entrada = new CModulo_detallado();
+                    entrada.Nombre = lector.GetSqlString(0).ToString();
+                    modulo_detallado.agregarElemento(entrada);
+                }
+                //cierro el lector
+                lector.Close();
+                //Cerrar la conexion
+                conexion.Close();
+                return modulo_detallado;
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
 
-
+        //Procedimiento del Modulo 13 para retornar lalista de permisos que tiene el rol
+        public CListaGenerica<CModulo_detallado> consultarLosPermisosAsignados(CRoles _rol)
+        {
+            CListaGenerica<CModulo_detallado> modulo_detallado = new CListaGenerica<CModulo_detallado>();
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //Abrir la conexion
+                conexion.Open();
+                //query es un string que me devolvera la consulta 
+                String query = "SELECT mod_det_nombre FROM modulo_detallado,rol_modulo_detallado,rol where mod_det_id=fk_mod_det_id and fk_rol_id=rol_id and rol_nombre='" + _rol.Nombre_rol + "'";
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader lector = cmd.ExecuteReader();
+                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+                while (lector.Read())
+                {
+                    var entrada = new CModulo_detallado();
+                    entrada.Nombre = lector.GetSqlString(0).ToString();
+                    modulo_detallado.agregarElemento(entrada);
+                }
+                //cierro el lector
+                lector.Close();
+                //Cerrar la conexion
+                conexion.Close();
+                return modulo_detallado;
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
         //Procedimiento del Modulo 13 para retornar lista de los modulos generales de cada rol
         public CListaGenerica<CModulo_general> consultarLosModulosRol(CRoles _rol)
         {
@@ -1168,7 +1274,7 @@ namespace BOReserva.Servicio
                 //Abrir la conexion
                 conexion.Open();
                 //query es un string que me devolvera la consulta
-                String query = "SELECT mod_gen_nombre as Modulo_Detallado FROM modulo_general ,rol,rol_modulo_detallado,modulo_detallado  where rol_id=fk_rol_id and fk_mod_det_id=mod_det_id and fk_mod_gen_id=mod_gen_id and rol_nombre='" + _rol.Nombre_rol + "'";
+                String query = "SELECT DISTINCT mod_gen_nombre as Modulo_Detallado FROM modulo_general ,rol,rol_modulo_detallado,modulo_detallado  where rol_id=fk_rol_id and fk_mod_det_id=mod_det_id and fk_mod_gen_id=mod_gen_id and rol_nombre='" + _rol.Nombre_rol + "'";
                 SqlCommand cmd = new SqlCommand(query, conexion);
                 SqlDataReader lector = cmd.ExecuteReader();
                 //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
@@ -1193,7 +1299,7 @@ namespace BOReserva.Servicio
                 throw e;
             }
         }
-        //Metodo para quitarle todos los permisos aun usuario
+        //Metodo para quitarle todos los permisos aun rol
         public Boolean quitarPermisos(CRoles model)
         {
             try
@@ -1206,6 +1312,42 @@ namespace BOReserva.Servicio
                 SqlCommand query = conexion.CreateCommand();
                 //ingreso la orden del query
                 query.CommandText = "DELETE FROM Rol_Modulo_Detallado WHERE fk_rol_id in (SELECT rol_id from Rol where rol_nombre='" + model.Nombre_rol + "')";
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior
+                SqlDataReader lector = query.ExecuteReader();
+                //cierro el lector
+                lector.Close();
+                //Cierro la conexion
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return false;
+            }
+        }
+        //Metodo para quitarle un permiso a un rol
+        public Boolean quitarPermisoRol(CRoles model,CModulo_detallado permiso)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //Abrir la conexion
+                conexion.Open();
+                //SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "DELETE FROM Rol_Modulo_Detallado WHERE fk_rol_id in (SELECT rol_id from Rol where rol_nombre='" + model.Nombre_rol + "') and fk_mod_det_id in (SELECT mod_det_id from modulo_detallado where mod_det_nombre='" + permiso.Nombre + "') ";
                 //creo un lector sql para la respuesta de la ejecucion del comando anterior
                 SqlDataReader lector = query.ExecuteReader();
                 //cierro el lector
@@ -1456,21 +1598,13 @@ namespace BOReserva.Servicio
             List<CAvion> aviones = new List<CAvion>();
             try
             {
-                System.Diagnostics.Debug.WriteLine("Entro en roles");
                 string idRol = "";
                 string idPermiso = "";
 
                 //Metodo para que busque el id del rol
-                System.Diagnostics.Debug.WriteLine("--------- " + idRol);
-
                 idRol = MBuscarid_IdRol(rol);
-                System.Diagnostics.Debug.WriteLine("id rol " + idRol);
-
                 //Metodo para que busque el id del permisos
-                System.Diagnostics.Debug.WriteLine("--------- " + idRol);
                 idPermiso = MBuscarid_Permiso(permiso);
-                System.Diagnostics.Debug.WriteLine("id permiso " + idPermiso);
-
 
                 //Inicializo la conexion con el string de conexion
                 conexion = new SqlConnection(stringDeConexion);
@@ -1534,9 +1668,8 @@ namespace BOReserva.Servicio
                 while (lector.Read())
                 {
 
-                    Debug.WriteLine("IDiiiiiii" + lector["rol_id"].ToString());
+
                     idRol = lector["rol_id"].ToString();
-                    Debug.WriteLine("----------------");
 
                 }
 
@@ -1552,33 +1685,21 @@ namespace BOReserva.Servicio
 
                 foreach (var detalle in listaPermisos)
                 {
-                    Debug.WriteLine("Amount is {0} and type is {1}", detalle.Nombre, detalle.Url);
-
                     queryDetallado = "SELECT mod_det_id from Modulo_Detallado where mod_det_nombre = '" + detalle.Nombre + "'";
-                    Debug.WriteLine("---------3-------");
-
 
                     SqlCommand cmd2 = new SqlCommand(queryDetallado, conexion);
 
-                    Debug.WriteLine("--------4--------");
-
-
                     lectorDetalle = cmd2.ExecuteReader();
-
-                    Debug.WriteLine("-------41---------");
 
 
                     while (lectorDetalle.Read())
                     {
 
-                        Debug.WriteLine("ID metodo detallado " + lectorDetalle["mod_det_id"].ToString());
-
                         listaPermiso.Add(lectorDetalle["mod_det_id"].ToString());
 
-                        Debug.WriteLine("----------------");
 
                     }
-                    Debug.WriteLine("-----------5-----");
+
                     lectorDetalle.Close();
 
                 }
@@ -1611,16 +1732,13 @@ namespace BOReserva.Servicio
         public void insertarRolPermisos(string rol, List<string> listaString)
         {
 
-
-            Debug.WriteLine("Rol " + rol);
-            Debug.WriteLine("Rol " + listaString.Count);
             if (listaString.Count > 0)
             {
                 int i = 0;
                 foreach (var money in listaString)
                 {
                     i += 0;
-                    Debug.WriteLine("Rol " + listaString[i]);
+                    
 
                 }
 
@@ -1643,18 +1761,16 @@ namespace BOReserva.Servicio
                 foreach (var money in listaString)
                 {
 
-                    Debug.WriteLine("este es el valor de i " + i);
-                    Debug.WriteLine("+++++1+++++");
 
                     query.CommandText = "INSERT INTO Rol_Modulo_Detallado VALUES ('" + rol + "','" + listaString[i] + "')";
-                    Debug.WriteLine("+++++2+++++");
+
 
                     lector = query.ExecuteReader();
-                    Debug.WriteLine("+++++3+++++");
+
 
                     //cierro el lector
                     lector.Close();
-                    Debug.WriteLine("+++++4+++++");
+
 
 
                     i += 1;
@@ -1702,6 +1818,11 @@ namespace BOReserva.Servicio
                 conexion.Close();
                 return ex.Message;
             }
+            catch (NullReferenceException ex)
+            {
+                conexion.Close();
+                return ex.Message;
+            }
         }
 
         /// <summary>
@@ -1726,6 +1847,11 @@ namespace BOReserva.Servicio
                 return "1";
             }
             catch (SqlException ex)
+            {
+                conexion.Close();
+                return ex.Message;
+            }
+            catch (NullReferenceException ex)
             {
                 conexion.Close();
                 return ex.Message;
@@ -1815,6 +1941,11 @@ namespace BOReserva.Servicio
                 conexion.Close();
                 return null;
             }
+            catch (NullReferenceException ex)
+            {
+                conexion.Close();
+                return null;
+            }
         }
 
         /// <summary>
@@ -1871,7 +2002,7 @@ namespace BOReserva.Servicio
         /// Método para borrar un vehículo de la base de datos
         /// </summary>
         /// <param name="matricula">Matrícula del vehículo a borrar</param>
-        /// <returns>Retorna 1 si se eliminó exitosamente y retorna 0 si no lo pudo hacer</returns>
+        /// <returns>Retorna 1 si se eliminó exitosamente y retorna la excepcion si no lo pudo hacer</returns>
         public String MBorrarvehiculoBD(String matricula)
         {
             try
@@ -1922,6 +2053,12 @@ namespace BOReserva.Servicio
                 conexion.Close();
                 return _ciudad;
             }
+
+            catch (NullReferenceException ex)
+            {
+                conexion.Close();
+                return ex.Message;
+            }
         }
 
         /// <summary>
@@ -1961,6 +2098,12 @@ namespace BOReserva.Servicio
                 conexion.Close();
                 return _lugar;
 
+            }
+
+            catch (NullReferenceException ex)
+            {
+                conexion.Close();
+                return ex.Message;
             }
         }
 
@@ -2033,6 +2176,12 @@ namespace BOReserva.Servicio
                 conexion.Close();
                 return fk;
             }
+
+            catch (NullReferenceException ex)
+            {
+                conexion.Close();
+                return fk;
+            }
         }
 
         /// <summary>
@@ -2055,6 +2204,12 @@ namespace BOReserva.Servicio
                 return "1";
             }
             catch (SqlException ex)
+            {
+                conexion.Close();
+                return ex.Message;
+            }
+
+            catch (NullReferenceException ex)
             {
                 conexion.Close();
                 return ex.Message;
@@ -2090,6 +2245,12 @@ namespace BOReserva.Servicio
             {
                 conexion.Close();
                 _ciudades.Add(ex.Message);
+                return _ciudades;
+            }
+
+            catch (NullReferenceException ex)
+            {
+                conexion.Close();
                 return _ciudades;
             }
         }
@@ -2130,6 +2291,12 @@ namespace BOReserva.Servicio
                 return i;
             }
             catch (SqlException ex)
+            {
+                conexion.Close();
+                return 1;
+            }
+
+            catch (NullReferenceException ex)
             {
                 conexion.Close();
                 return 1;
@@ -3145,6 +3312,15 @@ namespace BOReserva.Servicio
         }
 
         //Fin modulo 11
+
+
+      
+
+        public string stringDeConexions
+        {
+            get { return this.stringDeConexion; }
+            set { this.stringDeConexion = value; }
+        }
 
 
 

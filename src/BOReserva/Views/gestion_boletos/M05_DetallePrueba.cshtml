@@ -1,0 +1,167 @@
+﻿<!-- Indico que para esta vista, M05_VisualizarBoleto, utilizare el modelo Models/gestion_boletos/CVisualizarBoleto-->
+@model BOReserva.Models.gestion_boletos.CVisualizarBoleto
+
+@using (Html.BeginForm("verBoleto", "gestion_boletos", null, FormMethod.Post, new { @id = "verBoleto", @class = "form-horizontal" }))
+{
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h1 class="box-title">Detalle Vuelo</h1>
+                <div class="box-tools pull-right">
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-12" style="margin-top:10px;">
+
+                        <div class="col-xs-6">
+                            <label>Origen:</label>
+                            @Html.TextBoxFor(m => m._origen, null, new { @class = "form-control", @placeholder = "", @id = "boleto_origen", @disabled = "disabled", @readonly = "readonly" })
+                           
+                        </div>
+
+                        <div class="col-xs-6">
+                            <label>Destino:</label>
+                            @Html.TextBoxFor(m => m._destino, null, new { @class = "form-control", @placeholder = "", @id = "boleto_destino", @disabled = "disabled", @readonly = "readonly" })
+                           
+                        </div>
+
+                    </div>
+
+                    <div>&nbsp;</div>
+
+                    <div class="col-md-12" style="margin-top:10px;">
+                        <div class="col-md-6">
+                            <label>Fecha salida (IDA):</label>
+                            @Html.TextBoxFor(m => m._fechaDespegueIda, null, new { @class = "form-control", @placeholder = "", @id = "boleto_fechaDespegueIda", @disabled = "disabled", @readonly = "readonly" })
+                          
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>Fecha llegada (IDA):</label>
+                            @Html.TextBoxFor(m => m._fechaAterrizajeIda, null, new { @class = "form-control", @placeholder = "", @id = "boleto_fechaAterrizajeIda", @disabled = "disabled", @readonly = "readonly" })
+                           
+                        </div>
+
+                    </div>
+
+                    <div>&nbsp;</div>
+
+                    <div class="col-md-12" style="margin-top:10px;">
+
+                        <div class="col-md-6">
+                            <label>Hora salida (IDA):</label>
+                           
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>Hora llegada (IDA):</label>
+                           
+                        </div>
+                    </div>
+
+                    <div>&nbsp;</div>
+
+
+                    <div class="col-md-12" style="margin-top:10px;">
+                        <div class="col-md-6">
+                            <label>Fecha salida (VUELTA):</label>
+                           
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>Fecha llegada (VUELTA):</label>
+                           
+                        </div>
+                    </div>
+
+                    <div>&nbsp;</div>
+
+                    <div class="col-md-12" style="margin-top:10px;">
+
+                        <div class="col-md-6">
+                            <label>Hora salida (VUELTA):</label>
+                           
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>Hora llegada (VUELTA):</label>
+                           
+                        </div>
+
+                    </div>
+
+                    <div>&nbsp;</div>
+
+                    <div class="col-md-12" style="margin-top:10px;">
+
+                        <div class="col-md-6">
+                            <label>Monto:</label>
+                           
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>Tipo Boleto:</label>
+                           
+                        </div>
+
+                    </div>
+
+                    <div>&nbsp;</div>
+
+                    <div class="col-md-12" style="margin-top:10px;">
+
+                        <div class="col-md-6">
+                            <label>Nombre:</label>
+                           
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>Apellido:</label>
+                          
+                        </div>
+
+                    </div>
+
+                    <div>&nbsp;</div>
+
+
+
+
+                    <div>&nbsp;</div>
+                    <div class="col-md-12" style="margin-top:10px;">
+                        <button type="button" id="return" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Regresar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <script>
+        $("#return").click(function (e) {
+            e.preventDefault();
+
+ 
+            var url = '/gestion_boletos/M05_VisualizarBoletosPasajero';
+            var method = 'GET';
+            var data = '';
+
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+        });
+    </script>
+}

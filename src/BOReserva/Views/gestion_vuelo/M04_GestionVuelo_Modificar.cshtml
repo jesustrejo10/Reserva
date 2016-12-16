@@ -23,26 +23,46 @@
                         <!-- TEXTBOX CODIGO DE VUELO -->
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
-                                <label style="display:block; margin-left:auto; margin-right:auto;">Codigo de vuelo (<span style="color: #d9534f">*</span>):</label>
-                                @Html.TextBoxFor(m => m._codigoVuelo, null, new { @class = "form-control", @placeholder = "Ej: AA 2254", @id = "codigoVuelo", @allign = "center" })
+                                <label> Codigo de vuelo anterior:</label>
+                                @Html.TextBoxFor(m => m._codigoVuelo, null, new { @class = "form-control", @allign = "center", @disabled="disabled" })
+                               </div>
+                            <div class="col-xs-6">
+                                <label> Nuevo codigo de vuelo</label>
+                                @Html.TextBoxFor(m => m._codigoVueloNuevo, null, new { @class = "form-control", @placeholder = "Ej: AA 2254", @id = "codigoVuelo", @allign = "center" })
                             </div>
-                        </div>
+                         </div>
                         <!-- FIN CODIGO DE VUELO -->
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
                             <!-- DROPDOWN CIUDAD ORIGEN -->
-                            <div class="col-xs-6">
-                                <label> Ciudad Origen (<span style="color: #d9534f">*</span>):</label>
-                                @Html.TextBoxFor(m => m._ciudadOrigen, null, new { @class = "form-control", @placeholder = "Ej: AA 2254", @id = "codigoVuelo", @allign = "center" })
-                            </div>
-                            <!-- FIN CIUDAD ORIGEN -->
+                            <div class="col-xs-6">  
+                                 <label> Nueva ciudad de origen:</label>
+                                @{
+                                    List<SelectListItem> ciudadesorigenes = BOReserva.Controllers.gestion_vueloController.ciudadesorigen();
+                                        @Html.DropDownListFor(m => m._ciudadOrigenNuevo, ciudadesorigenes, Model._ciudadOrigen, new { @class = "form-control", @placeholder = "CiudadOrigen", @id = "ciudadOMod", @onblur = "listadeciudades(this.value);" });
+
+                                }
+                           </div>
+                         </div>
+                        <!-- FIN CIUDAD ORIGEN -->
+                        <div>&nbsp;</div>
                             <!-- DROPDOWN CIUDAD DESTINO  -->
                             <div class="col-xs-6">
                                 <label> Ciudad Destino (<span style="color: #d9534f">*</span>):</label>
                                 <!--Enumerable empty por que lleno con script-->
-                                @Html.TextBoxFor(m => m._ciudadDestino, null, new { @class = "form-control", @placeholder = "Ej: AA 2254", @id = "codigoVuelo", @allign = "center" })
+                                @Html.TextBoxFor(m => m._ciudadDestinoNuevo, null, new { @class = "form-control", @placeholder = "Ej: AA 2254", @id = "codigoVuelo", @allign = "center" })
                             </div>
                             <!-- FIN CIUDAD DESTINO  -->
+                        <div class="col-xs-6">
+                            <label> Nueva ciudad de destino:</label>
+                            @{
+                                List<SelectListItem> ciudadesdestinos = BOReserva.Controllers.gestion_vueloController.ciudadesdestino(Model._ciudadOrigen);
+                                Response.Write("<script>alert('" + ciudadesdestinos.First().Text + "');</script>");
+                                @Html.DropDownListFor(m => m._ciudadDestino, ciudadesdestinos, Model._ciudadDestino, new { @class = "form-control", @placeholder = "CiudadOrigen", @id = "ciudadDMod", @onblur = "listadeciudades(this.value);" });
+
+                            }
+                        </div>
+
                         </div>
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
@@ -135,8 +155,5 @@
             <!-- /.box-body -->
         </div>
         <!-- /.box -->
-    </div>
 
 }
-
-

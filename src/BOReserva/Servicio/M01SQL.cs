@@ -11,8 +11,14 @@ namespace BOReserva.Servicio
     public class M01SQL
     {
         private SqlConnection conexion = null;
-        string stringDeConexion = "Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617a;";
+        private string stringDeConexion = "";
+            //"Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617a;";
+        private manejadorSQL bd=new manejadorSQL(); 
 
+        public M01SQL() {
+            this.stringDeConexion=bd.stringDeConexions;
+        }
+        
         public Cgestion_seguridad_ingreso UsuarioEnBD(String usuario)
         {
             String usuarioBD = "", nombreBD = "", apellidoBD = "", claveBD = "", statusBD="";

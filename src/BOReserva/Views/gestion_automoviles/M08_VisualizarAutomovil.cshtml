@@ -11,7 +11,7 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h1 class="box-title" style="font-size:32px;"> Detalles del automóvil</h1>
+                    <h1 class="box-title" style="font-size:32px;"> Detalles del automovil</h1>
                     <div class="box-tools pull-right">
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                                 @Html.TextBoxFor(m => m._modelo, null, new { @class = "form-control", @placeholder = "Marca", @id = "vehi_modelo", @disabled = "disabled", @readonly = "readonly" })
                             </div>
                             <div class="col-xs-6">
-                                <label for="anio">Año de fabricacion</label>
+                                <label for="anio">A&ntilde;o de fabricaci&on</label>
                                 @Html.TextBoxFor(m => m._anio, null, new { @class = "form-control", @placeholder = "Placa", @id = "vehi_modelo", @disabled = "disabled", @readonly = "readonly" })
                             </div>
                         </div>
@@ -89,18 +89,18 @@
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
-                                <label for="preciocompra">Precio de compra ($):</label>
+                                <label for="preciocompra">Precio de compra ($)</label>
                                 @Html.TextBoxFor(m => m._preciocompra, null, new { @type = "number", @class = "form-control", @placeholder = "Dolares", @id = "vehi_compra", @disabled = "disabled", @readonly = "readonly" })
                             </div>
                             <div class="col-xs-6">
-                                <label for="tarifa">Tarifa diaria ($):</label>
+                                <label for="tarifa">Tarifa diaria ($)</label>
                                 @Html.TextBoxFor(m => m._precioalquiler, null, new { @type = "number", @class = "form-control", @placeholder = "Dolares", @id = "vehi_tarifa", @disabled = "disabled", @readonly = "readonly" })
                             </div>
                         </div>
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
-                                <label for="penalidad">Penalidad diaria ($):</label>
+                                <label for="penalidad">Penalidad diaria ($)</label>
                                 @Html.TextBoxFor(m => m._penalidaddiaria, null, new { @type = "number", @class = "form-control", @placeholder = "Dolares", @id = "vehi_penalidad", @disabled = "disabled", @readonly = "readonly" })
                             </div>
                         </div>
@@ -124,6 +124,7 @@
             var url = '/gestion_automoviles/M08_VisualizarAutomoviles';
             var method = 'GET';
             var data = '';
+            alert("Se esta procesando tu solicitud, por favor espere");
 
             $.ajax(
                 {

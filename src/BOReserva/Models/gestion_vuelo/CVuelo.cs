@@ -7,6 +7,7 @@ namespace BOReserva.Models.gestion_vuelo
 {
     public class CVuelo
     {
+        public int _id { get; set; }
         public String _codigoVuelo { get; set; }
         public String _ciudadOrigen { get; set; }
         public String _ciudadDestino { get; set; }
@@ -16,8 +17,9 @@ namespace BOReserva.Models.gestion_vuelo
         public String _matriculaAvion { get; set; }
 
 
-        public CVuelo(String codigovuelo, String ciudadorigen,String ciudaddestino, String fechadespegue, String status, String fechaaterrizaje, String matriculaavion)
+        public CVuelo(int id, String codigovuelo, String ciudadorigen, String ciudaddestino, String fechadespegue, String status, String fechaaterrizaje, String matriculaavion)
         {
+            _id = id;
             _codigoVuelo = codigovuelo;
             _ciudadOrigen = ciudadorigen;
             _ciudadDestino = ciudaddestino;
@@ -27,7 +29,8 @@ namespace BOReserva.Models.gestion_vuelo
             _matriculaAvion = matriculaavion;
         }
 
-        public CVuelo() {
+        public CVuelo()
+        {
         }
 
 

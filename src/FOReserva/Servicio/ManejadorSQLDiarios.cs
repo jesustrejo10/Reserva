@@ -1,7 +1,11 @@
-﻿using FOReserva.Models.Diarios;
+using FOReserva.Models.Diarios;
+using FOReserva.Servicio;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Text;
 
 namespace FOReserva.Servicio
@@ -244,7 +248,7 @@ namespace FOReserva.Servicio
             if (read.HasRows)
             {
                 read.Read();
-                numero = read.GetInt16(0) ;
+                numero = read.GetInt32(0) ;
             }
             CloseConnection();
             return numero;
@@ -253,21 +257,31 @@ namespace FOReserva.Servicio
 
      /*INSERCIONES*/
 
+
+
         /*Nuevo Diario*/
 
 
         public int CrearDiario(CDiarioModel crear_Nuevo_Diario)
         {
-            string query =
-            @"INSERT INTO Diario_Viaje (nombre_diario,fecha_ini_diar,descripcion_diar,
+            string query =@"INSERT INTO Diario_Viaje
+            (nombre_diario,fecha_ini_diar,descripcion_diar,
             fecha_carga_diar,calif_creador,rating,num_visita
             ,fk_usuario_id,fecha_fin_diar,fk_destino) 
-            VALUES('" + crear_Nuevo_Diario.Nombre + "',convert(date, '" + crear_Nuevo_Diario.Fecha_ini + "'),'"
-            + crear_Nuevo_Diario.Descripcion + "','" + crear_Nuevo_Diario.Fecha_carga + "','"
-            + crear_Nuevo_Diario.Calif_creador + "', '" + crear_Nuevo_Diario.Rating + "',0,'" + crear_Nuevo_Diario.Usuario + "','"
-            + crear_Nuevo_Diario.Fecha_fin + "','" + crear_Nuevo_Diario.Fecha_fin + "' )";
+            OUTPUT Inserted.id_diar
+            VALUES('" + crear_Nuevo_Diario.Nombre + "','" + crear_Nuevo_Diario.Fecha_ini.ToString("yyyy-MM-dd") + "','"
+            + crear_Nuevo_Diario.Descripcion + "','" + crear_Nuevo_Diario.Fecha_carga.ToString("yyyy-MM-dd") + "',"
+            + crear_Nuevo_Diario.Calif_creador + ",0,0,11,'"
+            + crear_Nuevo_Diario.Fecha_fin.ToString("yyyy-MM-dd") + "','" + crear_Nuevo_Diario.Destino + "' )";
+            SqlDataReader read = Executer(query);
+            int id = -1;
+            if (read.HasRows)
+            {
+                read.Read();
+                id = read.GetInt32(0);
+            }
             CloseConnection();
-            return 0;
+            return id;
         }
         
         
@@ -276,14 +290,48 @@ namespace FOReserva.Servicio
         /*MODIFICACIONES*/
 
         /*Actualizar numero de visitas*/
-        /*Este metodo obtendra el objeto_diario a partir de la respuesta
+        /*Este metodo obtendra el diario a partir de la respuesta
           de buscar diario de viaje dado un modelo */
 
-        public void actualizarVisitas(CDiarioModel objeto_diario)
+        public int actualizarVisitas(CDiarioModel objeto_diario)
         {
-            string query = "update Diario_Viaje set num_visita = '" +objeto_diario.Num_visita+1 +"'where id_diar='"+objeto_diario.Id;
+            int visitas = objeto_diario.Num_visita;
+            visitas++;
+            string query = "update Diario_Viaje set num_visita = " + visitas +" where id_diar="+objeto_diario.Id;
             this.Executer(query);
             CloseConnection();
+            return visitas;
         }
-    }
+
+        public int actualizarRating(CDiarioModel diario, bool esLike)
+        {
+            int nuevoRating = diario.Rating;
+            if (esLike)
+            {
+                nuevoRating++;
+            }
+            else
+            {
+                nuevoRating--;
+            }
+            string query = "update Diario_Viaje set rating = " + nuevoRating + " where id_diar=" + diario.Id;
+            this.Executer(query);
+            CloseConnection();
+            return nuevoRating;
+        }
+
+        /* Utilidad para imágenes */
+        public static Image ByteAImagen(byte[] byteArrayIn)
+        {
+            MemoryStream ms = new MemoryStream(byteArrayIn);
+            return Image.FromStream(ms);
+        }
+
+        public static byte[] ImagenAByte(Image imageIn)
+        {
+            MemoryStream ms = new MemoryStream();
+            imageIn.Save(ms, ImageFormat.Jpeg);
+            return ms.ToArray();
+        }
+    }    
 }

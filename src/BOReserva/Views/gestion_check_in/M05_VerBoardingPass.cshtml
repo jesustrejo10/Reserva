@@ -1,4 +1,74 @@
-﻿<style type="text/css">
+﻿@model BOReserva.Models.gestion_check_in.CBoardingPass
+
+@using (Html.BeginForm("mostrarPase", "gestion_check_in", null, FormMethod.Post, new { @id = "formPase", @class = "form-horizontal" }))
+{
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h1 class="box-title">Pase Abordaje</h1>
+                <div class="box-tools pull-right">
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="content" style="background: url(/Content/dist/img/boarding_final.jpg) no-repeat center; background-size: 680px;">
+
+                    <div id="apDiv7">
+                        @Html.DisplayFor(m => m._vuelo)
+                    </div>
+
+                    <div id="apDiv8">
+                        @Html.DisplayFor(m => m._apellido)
+
+                        <div id="apDiv9">
+                            @Html.DisplayFor(m => m._nombre)
+
+                            <div id="apDiv11">
+                                @Html.DisplayFor(m => m._vuelo)
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div id="apDiv4">
+                        <label id="puertapartida">A22</label>
+                        <div id="apDiv5">
+                            @Html.DisplayFor(m => m._fechaPartida)
+
+                            <div id="apDiv12">
+                                @Html.DisplayFor(m => m._asiento)
+                            </div>
+
+                            <div id="apDiv14">
+                                @Html.DisplayFor(m => m._nombreOri)
+                            </div>
+
+                            <div id="apDiv15">-</div>
+                            <div id="apDiv16">
+                                @Html.DisplayFor(m => m._nombreDest)
+                            </div>
+                            <div id="apDiv13">
+                                @Html.DisplayFor(m => m._fechaPartida)
+                            </div>
+                            <div id="apDiv6">
+                                <label id="zona">2</label>
+                            </div>
+                            <div id="apDiv17">
+                                @Html.DisplayFor(m => m._id)
+                                @Html.HiddenFor(m => m._id, new { id = "num_pase" })
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+}
+<style type="text/css">
     #apDiv1 {
         position: absolute;
         width: 119px;
@@ -40,8 +110,8 @@
         width: 74px;
         height: 52px;
         z-index: 1011;
-        left: 264px;
-        top: 155px;
+        left: 250px;
+        top: 92px;
     }
 
     #apDiv5 {
@@ -67,8 +137,8 @@
         width: 54px;
         height: 28px;
         z-index: 1012;
-        left: 362px;
-        top: 113px;
+        left: 332px;
+        top: 47px;
     }
 
     #apDiv8 {
@@ -76,8 +146,8 @@
         width: 82px;
         height: 29px;
         z-index: 1013;
-        left: 429px;
-        top: 113px;
+        left: 402px;
+        top: 47px;
     }
 
     #apDiv {
@@ -160,39 +230,12 @@
         left: 261px;
         top: -81px;
     }
+    #apDiv17 {
+        position: absolute;
+        width: 60px;
+        height: 44px;
+        z-index: 1012;
+        left: 250px;
+        top: 105px;
+    }
 </style>
-<div class="row">
-    <div class="col-md-12">
-        <div class="box box-success">
-            <div class="box-header with-border">
-                <h1 class="box-title">Pase Abordaje</h1>
-                <div class="box-tools pull-right">
-                </div>
-            </div>
-            <div class="box-body">
-                    <div id="apDiv7"><label id="numvuelo1">3048</label></div>
-                    <div id="apDiv8">
-                        <label id="apellido">Garcia,</label>
-                        <div id="apDiv9">
-                            <label id="nombre">Luis</label>
-                            <div id="apDiv11"><label id="numvuelo2">3048</label></div>
-                        </div>
-                    </div>
-                    <div class="content" style="background: url(/Content/dist/img/boarding_final.jpg) no-repeat center; background-size: 680px;">
-                        <div id="apDiv4">
-                            <label id="puertapartida">A22</label>
-                            <div id="apDiv5">
-                                <label id="horaabordo">3:15 pm</label>
-                                <div id="apDiv12"><label id="numasiento">23A</label></div>
-                                <div id="apDiv14"><label id="origen">Caracas</label></div>
-                                <div id="apDiv15">-</div>
-                                <div id="apDiv16"><label id="destino">Miami</label></div>
-                                <div id="apDiv13"><label id="horapartida">3:40 pm</label></div>
-                                <div id="apDiv6"><label id="zona">2</label></div>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-        </div>
-    </div>
-</div>

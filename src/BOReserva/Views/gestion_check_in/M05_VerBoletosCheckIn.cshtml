@@ -1,121 +1,79 @@
-﻿<script src="~/Scripts/Scripts_CheckIn/M05_VerBoletosCheckIn.js"></script>
+﻿<div class="row">
+    <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="box box-success">
+    <div class="col-xs-12">
+        <div class="box">
             <div class="box-header with-border">
-                <h1 class="box-title">Boletos</h1>
-                <div class="box-tools pull-right">
-                </div>
+                <h3 class="box-title">Lista de Boletos</h3>
             </div>
+            <!-- /.box-header -->
             <div class="box-body">
+                <table id="example" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>N° Boleto</th>
+                            <th>Fecha emisión</th>
+                            <th>Origen</th>
+                            <th>Destino</th>
+                            <th>Selección</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @try
+                        {
+                            foreach (var item in Model)
+                            {
+                                String fecha_emi = @item._fechaBoleto.Day + "/" + @item._fechaBoleto.Month + "/" + @item._fechaBoleto.Year;
 
-                <div class="box-body">
-                    <table id="example2" class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>Codigo</th>
-                                <th>Origen</th>
-                                <th>Destino</th>
-                                <th>Escala(s)</th>
-                                <th>Fecha</th>
-                                <th>Hora salida</th>
-                                <th>Hora llegada</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>001</td>
-                                <td>Caracas</td>
-                                <td>Miami</td>
-                                <td>Barcelona</td>
-                                <td>01/01/2017</td>
-                                <td>10:00 am</td>
-                                <td>11:00 am</td>
-                            </tr>
-                            <tr>
-                                <td>002</td>
-                                <td>Caracas</td>
-                                <td>Miami</td>
-                                <td></td>
-                                <td>01/02/2017</td>
-                                <td>10:00 am</td>
-                                <td>11:00 am</td>
-                            </tr>
-                            <tr>
-                                <td>003</td>
-                                <td>Caracas</td>
-                                <td>Miami</td>
-                                <td>Falcon</td>
-                                <td>01/03/2017</td>
-                                <td>10:00 am</td>
-                                <td>11:00 am</td>
-                            </tr>
-                            <tr>
-                                <td>004</td>
-                                <td>Caracas</td>
-                                <td>Miami</td>
-                                <td>Zulia</td>
-                                <td>01/04/2017</td>
-                                <td>10:00 am</td>
-                                <td>11:00 am</td>
-                            </tr>
-                            <tr>
-                                <td>005</td>
-                                <td>Caracas</td>
-                                <td>Miami</td>
-                                <td>Zulia-Cucuta</td>
-                                <td>01/05/2017</td>
-                                <td>10:00 am</td>
-                                <td>11:00 am</td>
-                            </tr>
-                            <tr>
-                                <td>006</td>
-                                <td>Caracas</td>
-                                <td>Miami</td>
-                                <td></td>
-                                <td>01/06/2017</td>
-                                <td>10:00 am</td>
-                                <td>11:00 am</td>
-                            </tr>
-                            <tr>
-                                <td>007</td>
-                                <td>Caracas</td>
-                                <td>Miami</td>
-                                <td></td>
-                                <td>01/07/2017</td>
-                                <td>10:00 am</td>
-                                <td>11:00 am</td>
-                            </tr>
-                            <tr>
-                                <td>008</td>
-                                <td>Caracas</td>
-                                <td>Miami</td>
-                                <td>Boston</td>
-                                <td>01/08/2017</td>
-                                <td>10:00 am</td>
-                                <td>11:00 am</td>
-                            </tr>
-                    </table>
-                </div>
+                                <tr id="@item._id">
+                                    <td>@item._id</td>
+                                    <td>@fecha_emi</td>
+                                    <td>@item._origen.Name</td>
+                                    <td>@item._destino.Name</td>
+                                    <td>
+                                        <a href="#" title="Seleccionar"><i class="fa fa-check modificar"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        catch
+                        {
 
-                <hr>
-
-                <div class="row">
-
-                    <div class="col-md-12" style="margin-top:10px;">
-                        <button type="button" id="siguiente" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Siguiente</button>
-                    </div>
-
-                </div>
-
+                        }
+                    </tbody>
+                </table>
             </div>
-
-
-            <!-- /.box-footer -->
+            <!-- /.box-body -->
         </div>
-            <!-- /.box -->
-        </div>
-        <!-- /.col -->
+        <!-- /.box -->
     </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
 
+<script src="~/Content/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+<script language="javascript" type="text/javascript">
+    table = $('#example').DataTable();
+    $(document).ready(function () {
+        //e.preventDefault();
+        $(".modificar").click(function () {
+            var identificador = $(this).parent().parent().parent().attr("id");
+            jQuery.ajax({
+                type: "GET",
+                url: "/gestion_check_in/M05_VerDetalleBoleto",
+                data: { id: identificador }
+            }).done(function (data) {
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            }).fail(function () {
+                alert("Ocurrió un error")
+            });
+
+
+        });
+
+
+    });
+</script>
