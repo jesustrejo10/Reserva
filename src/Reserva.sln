@@ -5,7 +5,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.24720.0
 =======
 VisualStudioVersion = 14.0.25123.0
+<<<<<<< HEAD
 >>>>>>> Develop
+=======
+>>>>>>> aa521f81a177ad427e679c055401b97fc4a06504
+>>>>>>> master
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BOReserva", "BOReserva\BOReserva.csproj", "{8E0911C6-D911-4CA1-AE4F-6C5CBF498D24}"
 EndProject

@@ -164,6 +164,21 @@ namespace BOReserva.Models.gestion_cruceros
      
         
         /// <summary>
+
+        ///   Looks up a localized string similar to M24_CambiarEstatusCabina.
+        /// </summary>
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a M24_CambiarEstatusCamarote.
+        /// </summary>
+
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a M24_CambiarEstatusCrucero.
+        /// </summary>
+
+        
+        /// <summary>
         ///   Looks up a localized string similar to M24_ConsultarCruceroID.
         /// </summary>
         internal static string ConsultarCruceroID
@@ -174,7 +189,9 @@ namespace BOReserva.Models.gestion_cruceros
             }
         }
 
-
+        /// <summary>
+        ///   Busca una cadena traducida similar a M24_CambiarEstatusItinerario.
+        /// </summary>
         /// <summary>
         ///   Looks up a localized string similar to M24_EliminarCruceros.
         /// </summary>

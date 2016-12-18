@@ -8,6 +8,7 @@ namespace BOReserva.Models.gestion_cruceros
     public class CGestion_itinerario
     {
 
+
         public CGestion_itinerario()
         {
         }
@@ -45,6 +46,7 @@ namespace BOReserva.Models.gestion_cruceros
         {
             ConexionBD cbd = new ConexionBD();
             cbd.cambiarEstadoItinerario(fechaInicio, fkCrucero, fkRuta);
+
         }
     }
 }

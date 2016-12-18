@@ -310,7 +310,7 @@ namespace BOReserva.Models.gestion_cruceros
                 }
             }
             catch (Exception e)
-            { 
+            {
 
                 return false;
             }
@@ -320,6 +320,7 @@ namespace BOReserva.Models.gestion_cruceros
         {
             try
             {
+
                 Conectar();
                 using (comando = new SqlCommand(RecursosCruceros.AgregarItinerario, conexion))
                 {
@@ -368,6 +369,9 @@ namespace BOReserva.Models.gestion_cruceros
                     reader.Close();
                     conexion.Close();
                 }
+                return null;
+
+
             }
             catch (Exception e)
             {
