@@ -198,6 +198,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\gestion_diariosController.cs" />
+    <Compile Include="Controllers\gestion_reclamosController.cs" />
     <Compile Include="Controllers\gestion_reserva_cruceroController.cs" />
     <Compile Include="Controllers\gestion_planificacion_vacacionesController.cs" />
     <Compile Include="Controllers\gestion_reserva_autoController.cs" />
@@ -276,6 +277,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelDBReserva.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Reclamos\CAgregarReclamo.cs" />
     <Compile Include="Models\ReservaHabitacion\CCiudad.cs" />
     <Compile Include="Models\Hoteles\CHotel.cs" />
     <Compile Include="Models\ReservaHabitacion\CProcesoResultado.cs" />
@@ -3179,6 +3181,7 @@
     <Content Include="Views\registro_autenticacion\VerPerfil.cshtml" />
     <Content Include="Views\gestion_reserva_auto\M19_Accion_Reserva.cshtml" />
     <Content Include="Views\gestion_reserva_auto\M19_Busqueda_Autos.cshtml" />
+    <Content Include="Views\gestion_reclamos\M16_AgregarReclamo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
