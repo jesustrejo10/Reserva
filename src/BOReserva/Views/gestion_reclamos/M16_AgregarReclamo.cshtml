@@ -1,4 +1,4 @@
-﻿@model BOReserva.Models.gestion_reclamo.CAgregarReclamo
+﻿@model BOReserva.Models.gestion_reclamos.CAgregarReclamo
 
  <!---------------------- SECCION DE AGREGAR RECLAMO---------------->
 @using (Html.BeginForm("guardarAvion", "gestion_aviones", null, FormMethod.Post, new { @id = "formGuardarAvion", @class = "form-horizontal" }))
@@ -21,19 +21,17 @@
 
                                     </div>
                                     <div class="col-xs-6">
-                                        <label for="descripcionReclamo">Descripici&oacuten (Clase Turista):</label>
-                                        @Html.TextBoxFor(m => m._detalleReclamo, null, new { @class = "form-control", @id = "detalleReclamo"})
-
+                                        <label for="descripcionReclamo">Descripici&oacuten (<span style="color:red">*</span>):</label>
+                                        @Html.TextBoxFor(m => m._detalleReclamo, null, new { @class = "form-control input-lg", @id ="detalleReclamo" })
                                     </div>
                                 </div>
                             </div>
                          </div>
-
-                       
-                            <div class="col-md-12" style="margin-top:10px;">
-                                <button type="button" id="aceptarAvion" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
-                            </div>
-                        </div>
+                                             
+                       <div class="col-md-12" style="margin-top:10px;">
+                          <button type="button" id="aceptarAvion" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                       </div>
+                     </div>
                         <!-- /.col -->
                     </div>
                     <!-- /.row -->
@@ -41,8 +39,6 @@
                 <!-- /.box-body -->
             </div>
             <!-- /.box -->
-        </div>
-        <!-- /.col -->
     </div>
     <!-- /.row -->
 

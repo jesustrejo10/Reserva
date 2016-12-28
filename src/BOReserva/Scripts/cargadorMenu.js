@@ -600,6 +600,49 @@ jQuery(document).ready(function () {
 
     //Fin M04 Vuelos
 
+    // INICIO DE M16_GESTON_RECLAMO
+    $("#M16_AgregarReclamo").click(function (e) {
+        e.preventDefault();
+        alert('entro aqui karli');
+        var url = '/gestion_reclamos/M16_AgregarReclamo';
+        var method = 'GET';
+        var data = '';
+        $.ajax(
+           {
+               url: url,
+               type: method,
+               data: data,
+               success: function (data, textStatus, jqXHR) {
+                   $("#contenido").empty();
+                   $("#contenido").append(data);
+               },
+               error: function (jqXHR, textStatus, errorThrown) {
+                   alert(errorThrown);
+               }
+
+           });
+    });
+
+    $("#M16_VisualizarReclamo").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_reclamos/M16_VisualizarReclamo';
+        var method = 'GET';
+        var data = '';
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+    //FIN DE M16_GESTION_RECLAMO
 
 
     //M11 Gestion Ofertas y Paquetes
@@ -1011,49 +1054,7 @@ $("#m24_listaritinerario").click(function (e) {
 
 //Fin Modulo 24 Cruceros
 
-// INICIO DE M16_GESTON_RECLAMO
-$("#m16_AgregarReclamo").click(function (e) {
-    e.preventDefault();
-    var url = '/gestion_reclamo/M16_AgregarReclamo';
-    var method = 'GET';
-    var data = '';
-    $.ajax(
-       {
-           url: url,
-           type: method,
-           data: data,
-           success: function (data, textStatus, jqXHR) {
-               $("#contenido").empty();
-               $("#contenido").append(data);
-           },
-           error: function (jqXHR, textStatus, errorThrown) {
-               alert(errorThrown);
-           }
 
-       });
-});
-
-$("#m16_VisualizarReclamo").click(function (e) {
-    e.preventDefault();
-    var url = '/gestion_reclamo/M02_VisualizarReclamo';
-    var method = 'GET';
-    var data = '';
-    $.ajax(
-        {
-            url: url,
-            type: method,
-            data: data,
-            success: function (data, textStatus, jqXHR) {
-                $("#contenido").empty();
-                $("#contenido").append(data);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert(errorThrown);
-            }
-        });
-
-});
-//FIN DE M16_GESTION_RECLAMO
 
 
 

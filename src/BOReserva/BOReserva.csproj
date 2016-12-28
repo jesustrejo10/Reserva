@@ -212,6 +212,7 @@
     <Compile Include="Controllers\gestion_crucerosController.cs" />
     <Compile Include="Controllers\gestion_hotelesController.cs" />
     <Compile Include="Controllers\gestion_comida_vueloController.cs" />
+    <Compile Include="Controllers\gestion_reclamosController.cs" />
     <Compile Include="Controllers\gestion_seguridad_ingresoController.cs" />
     <Compile Include="Controllers\gestion_ofertasController.cs" />
     <Compile Include="Controllers\gestion_restaurantesController.cs" />
@@ -219,7 +220,6 @@
     <Compile Include="Controllers\gestion_ruta_comercialController.cs" />
     <Compile Include="Controllers\gestion_usuariosController.cs" />
     <Compile Include="Controllers\gestion_vueloController.cs" />
-    <Compile Include="Controllers\geston_reclamoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\List.cs" />
     <Compile Include="DataAccess\Model\Connection.cs" />
@@ -248,7 +248,7 @@
     <Compile Include="Models\gestion_cruceros\RecursosCruceros.Designer.cs" />
     <Compile Include="Models\gestion_cruceros\VistaListaCrucero.cs" />
     <Compile Include="Models\gestion_cruceros\VistaListaItinerario.cs" />
-    <Compile Include="Models\gestion_reclamo\CAgregarReclamo.cs" />
+    <Compile Include="Models\gestion_reclamos\CAgregarReclamo.cs" />
     <Compile Include="Models\gestion_ruta_comercial\VistaListaRuta.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cgestion_seguridad_ingreso.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cvalidar_bloqueo_exception.cs" />
