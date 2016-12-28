@@ -21,8 +21,10 @@
 
                                     </div>
                                     <div class="col-xs-6">
-                                        <label for="descripcionReclamo">Descripici&oacuten (<span style="color:red">*</span>):</label>
-                                        @Html.TextBoxFor(m => m._detalleReclamo, null, new { @class = "form-control input-lg", @id ="detalleReclamo" })
+                                        <label for="descripcionReclamo">Descripci&oacuten (<span style="color:red">*</span>):</label>
+                                        @*@Html.TextBoxFor(m => m._detalleReclamo, null, new { @class = "form-control", @id ="detalleReclamo" })*@
+                                        @Html.TextAreaFor(m => m._detalleReclamo, 3, 3, new { @class="form-control", @id="detalleReclamo"})
+                                        
                                     </div>
                                 </div>
                             </div>
