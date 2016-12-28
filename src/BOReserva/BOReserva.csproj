@@ -221,6 +221,11 @@
     <Compile Include="Controllers\gestion_vueloController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\List.cs" />
+    <Compile Include="DataAccess\Domain\Ciudad.cs" />
+    <Compile Include="DataAccess\Domain\Entidad.cs" />
+    <Compile Include="DataAccess\Domain\FabricaEntidad.cs" />
+    <Compile Include="DataAccess\Domain\Hotel.cs" />
+    <Compile Include="DataAccess\Domain\Pais.cs" />
     <Compile Include="DataAccess\Model\Connection.cs" />
     <Compile Include="DataAccess\Model\ConexionUtil.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -247,6 +252,7 @@
     <Compile Include="Models\gestion_cruceros\RecursosCruceros.Designer.cs" />
     <Compile Include="Models\gestion_cruceros\VistaListaCrucero.cs" />
     <Compile Include="Models\gestion_cruceros\VistaListaItinerario.cs" />
+    <Compile Include="Models\gestion_hoteles\CAgregarHotel.cs" />
     <Compile Include="Models\gestion_ruta_comercial\VistaListaRuta.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cgestion_seguridad_ingreso.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cvalidar_bloqueo_exception.cs" />
@@ -531,6 +537,7 @@
     <Content Include="Scripts\Scripts_Hoteles\editar_hotel.js" />
     <Content Include="Scripts\Scripts_CheckIn\M05_CheckIn.js" />
     <Content Include="Scripts\Scripts_ComidaVuelo\llamadas_generales.js" />
+    <Content Include="Scripts\Scripts_Hoteles\llamadas_comunes_hoteles.js" />
     <Content Include="Scripts\Scripts_Hoteles\llamadas_generales_hoteles.js" />
     <Content Include="Scripts\Scripts_Vuelos\llamadas_generales_Vuelos.js" />
     <Content Include="Views\dist\css\AdminLTE.css" />
@@ -1477,6 +1484,8 @@
     <Content Include="Views\gestion_cruceros\M24_ModificarCabinas.cshtml" />
     <Content Include="Views\gestion_cruceros\M24_ModificarCrucero.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarComidaVuelo.cshtml" />
+    <Content Include="Views\gestion_hoteles\M09_AgregarHotel.cshtml" />
+    <Content Include="Views\gestion_hoteles\M09_VisualizarHoteles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Visualizar.cshtml" />

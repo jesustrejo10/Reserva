@@ -238,13 +238,12 @@ jQuery(document).ready(function () {
     //FIN M06_Gestion_Comida
 
 
-    // INICIO DE HOTELES
-    $("#crearhotel").click(function (e) {
+    // Inicio M09_Gestion_Hoteles_Por_Ciudad
+    $("#M09_crear_hotel").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_hoteles/M09_GestionHoteles_Crear';
+        var url = '/gestion_hoteles/M09_AgregarHotel';
         var method = 'GET';
         var data = '';
-
         $.ajax(
             {
                 url: url,
@@ -260,7 +259,8 @@ jQuery(document).ready(function () {
                 }
             });
     });
-    $("#consultarhotel").click(function (e) {
+
+    $("#M09_consultar_hoteles").click(function (e) {
         e.preventDefault();
         var url = '/gestion_hoteles/M09_GestionHoteles_Visualizar';
         var method = 'GET';

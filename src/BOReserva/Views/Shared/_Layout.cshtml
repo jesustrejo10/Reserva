@@ -412,12 +412,15 @@
 
                             @foreach (string i in ((List<string>)Session["Permisos"]))
                             {
-                              if (i == "Crear Hoteles")
-                            {
-                            <li id="crearhotel"><a href="#">Agregar</a></li>}
-                              if (i == "Consultar Hotel")
-                            { 
-                            <li id="consultarhotel"><a href="#">Visualizar</a></li>}}
+                                if (i == "Crear Hoteles")
+                                {
+                                    <li id="M09_crear_hotel"><a href="#">Agregar</a></li>
+                                }
+                                if (i == "Consultar Hotel")
+                                {
+                                    <li id="M09_consultar_hoteles"><a href="#">Visualizar</a></li>
+                                }
+                            }
 
                     <!-- MODULO DE BOLETOS AEREOS Y CHECK-IN -->
                 </ul>
