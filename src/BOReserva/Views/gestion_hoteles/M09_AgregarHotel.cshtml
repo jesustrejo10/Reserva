@@ -140,7 +140,7 @@
 
             if (nombre && direccion && paginaWeb && email && clasificacion && pais && ciudad) {
                 $.ajax({
-                    url: "gestion_automoviles/saveVehicle",
+                    url: "gestion_hoteles/guardarHotel",
                     data: form.serialize(),
                     type: 'POST',
                     success: function (data) {

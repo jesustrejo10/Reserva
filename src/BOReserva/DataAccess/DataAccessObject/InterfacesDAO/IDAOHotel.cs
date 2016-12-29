@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace BOReserva.DataAccess.DAO
 {
-    interface IDAOHotel
+    interface IDAOHotel : IDAO
     {
+        //metodos detallados 
     }
 }

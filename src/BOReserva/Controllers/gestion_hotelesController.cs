@@ -8,6 +8,9 @@ using BOReserva.Servicio.Servicio_Hoteles;
 using System.Diagnostics;
 using System.Net;
 using BOReserva.Servicio;
+using BOReserva.DataAccess.Domain;
+using BOReserva.Controllers.PatronComando;
+using BOReserva.Controllers.PatronComando;
 
 namespace BOReserva.Controllers
 {
@@ -19,7 +22,6 @@ namespace BOReserva.Controllers
         public static String _ciudad;
         public static String _pais;
         public static String sciudad;
-
         public static String ciudad;
 
         /// <summary>
@@ -40,6 +42,7 @@ namespace BOReserva.Controllers
         [HttpPost]
         public ActionResult listaciudades(String pais)
         {
+            //Aca se debe llamar a un Comando
             List<String> objcity = new List<String>();
             _pais = pais;
             manejadorSQL listaciudades = new manejadorSQL();
@@ -56,8 +59,47 @@ namespace BOReserva.Controllers
         [HttpPost]
         public void getCity(String _ciudad)
         {
+            //Aca se debe llamar a un comando
             ciudad = _ciudad;
         }
+
+        /// <summary>
+        /// Método que se utiliza para guardar un vehículo ingresado
+        /// </summary>
+        /// <param name="model">Datos que provienen de un formulario de la vista parcial M08_AgregarAutomovil</param>
+        /// <returns>Retorna un JsonResult</returns>
+        [HttpPost]
+        public JsonResult guardarHotel(CAgregarHotel model)
+        {   
+            Entidad ciudadDestino = FabricaEntidad.InstanciarCiudad("nombre de la ciudad");
+            Entidad nuevoHotel = FabricaEntidad.InstanciarHotel(model, ciudadDestino);
+            //con la fabrica instancie al hotel.
+            Command comando = FabricaComando.crearM09AgregarHotel(nuevoHotel);
+            String agrego_si_no  = comando.ejecutar();
+
+            return (Json(agrego_si_no));
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         // GET: gestion_hoteles
@@ -222,7 +264,8 @@ namespace BOReserva.Controllers
 
             return _ciudades;
         }
-
+        /*METODO DE LAS GEMELAS*/
+        /*
         [HttpPost]
         public JsonResult guardarHotel(CHotel model)
         {
@@ -267,7 +310,7 @@ namespace BOReserva.Controllers
                 return Json(error);
             }
         }
-
+        */
         /// <summary>
         /// Metodo que carga la vista para modificar el Hotel 
         /// </summary>

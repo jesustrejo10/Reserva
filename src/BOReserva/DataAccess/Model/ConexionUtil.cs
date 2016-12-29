@@ -7,5 +7,6 @@ namespace BOReserva.DataAccess
 {
     public class ConexionUtil
     {
+        public String ConectionString { get; set; }
     }
 }

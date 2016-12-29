@@ -7,5 +7,8 @@ namespace BOReserva.DataAccess.DAO
 {
     public class FabricaDAO
     {
+        public static DAO instanciarDaoHotel() {
+            return new DAOHotel();
+        }
     }
 }

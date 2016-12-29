@@ -20,7 +20,16 @@ namespace BOReserva.DataAccess.Domain
         /// </summary>
         public Hotel() {
         }
-
+        public Hotel(String nombre, String direccion, String email, String paginaWeb, int clasificacion, int capacidad, Ciudad ciudad)
+        {
+            this._nombre = nombre;
+            this._direccion = direccion;
+            this._email = email;
+            this._paginaWeb = paginaWeb;
+            this._clasificacion = clasificacion;
+            this._capacidad = capacidad;
+            this._ciudad = ciudad;
+        }
         
         
     }
