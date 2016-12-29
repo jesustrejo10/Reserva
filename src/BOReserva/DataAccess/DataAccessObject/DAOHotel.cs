@@ -12,19 +12,12 @@ namespace BOReserva.DataAccess.DAO
     public class DAOHotel:  DAO, IDAOHotel {
 
         public DAOHotel() {}
-        protected Connection _connexion;
-        protected String _connexionString = "Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617a;";
-
-
-
-
 
 
         int IDAO.Agregar(Entidad e)
         {
-
             Hotel hotel = (Hotel)e;
-            SqlConnection conexion = new SqlConnection(_connexionString);
+            SqlConnection conexion = Connection.getInstance(_connexionString);
             try
             {
                 conexion.Open();
