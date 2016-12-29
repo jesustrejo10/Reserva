@@ -1,1 +1,57 @@
-﻿
+﻿@model FOReserva.Models.Reclamos.CAgregarReclamo
+
+
+@using (Html.BeginForm("buscarDestino", "gestion_planificacion_vacaciones", null, FormMethod.Post, new { @id = "formbuscarDestino", @class = "form-horizontal" }))
+{
+
+        <!-- FLIP BOX -->
+    <div class="box-light box-icon box-icon-center box-icon-round box-icon-large text-center nomargin">
+        <div class="front">
+            <div class="box1 noradius">
+                <div class="box-icon-title">
+                    <i class="fa fa-exclamation-circle"></i>
+                    <h2> REGISTRA UN RECLAMO </h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+        <!-- /FLIP BOX -->
+
+    <div class="box-light">
+        <!-- .box-light OR .box-dark -->
+
+        <div class="box-inner">
+            @Html.TextBoxFor(m => m._tituloReclamo, null, new { @class = "form-control", @placeholder = "Título del Reclamo", @id = "tituloReclamo" })
+            <label>
+
+            </label>
+         <div class="fancy-form">
+            @Html.TextAreaFor(m => m._detalleReclamo, new { @class = "form-control word count", @placeholder = "Escribe aquí el detalle del reclamo...", rows = 10, colums = 20, @id = "detalleReclamo" })
+           <span class="fancy-hint size-11 text-muted">
+                 <span class="pull-right"></span>
+             </span>
+         </div>
+          
+             @Html.TextBoxFor(m => m._fechaReclamo, null, new { @type = "date", @class = "form-control", @placeholder = "Fecha del Suceso", @id = "", @name = "fechaReclamo", min = "Date", max = "2032-12-31" })
+            <label>
+
+            </label>
+                <div class="text-right">
+                    <form id="form1" name="form1">
+                        <button id="aceptarItinerario" type="button" name="este2" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+                <div>
+                    <div class="divider"><!-- divider --></div>
+               </div>
+    </div>
+</div>
+
+
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/js/view/demo.shop.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/uniqueId.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatable/js/jquery.dataTables.min.js")"></script>
+
+}
+            

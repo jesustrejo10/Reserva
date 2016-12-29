@@ -9,5 +9,7 @@ namespace FOReserva.Models.Reclamos
     {
         public String _tituloReclamo { get; set; }
         public String _detalleReclamo { get; set; }
+
+        public String _fechaReclamo { get; set; }
     }
 }
