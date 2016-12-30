@@ -1,7 +1,7 @@
 ﻿@model FOReserva.Models.Reclamos.CAgregarReclamo
 
 
-@using (Html.BeginForm("buscarDestino", "gestion_planificacion_vacaciones", null, FormMethod.Post, new { @id = "formbuscarDestino", @class = "form-horizontal" }))
+@using (Html.BeginForm("M16_AgregarReclamo", "gestion_reclamos", null, FormMethod.Post, new { @id = "AgregarReclamo", @class = "form-horizontal" }))
 {
 
         <!-- FLIP BOX -->
@@ -39,7 +39,7 @@
             </label>
                 <div class="text-right">
                     <form id="form1" name="form1">
-                        <button id="aceptarItinerario" type="button" name="este2" class="btn btn-primary">Guardar</button>
+                        <button id="aceptarReclamo" type="button" name="este2" class="btn btn-primary">Guardar</button>
                     </form>
                 </div>
                 <div>

@@ -222,6 +222,7 @@
     <Compile Include="Controllers\gestion_vueloController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\List.cs" />
+    <Compile Include="DataAccess\Domain\Reclamo.cs" />
     <Compile Include="DataAccess\Model\Connection.cs" />
     <Compile Include="DataAccess\Model\ConexionUtil.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -249,6 +250,7 @@
     <Compile Include="Models\gestion_cruceros\VistaListaCrucero.cs" />
     <Compile Include="Models\gestion_cruceros\VistaListaItinerario.cs" />
     <Compile Include="Models\gestion_reclamos\CAgregarReclamo.cs" />
+    <Compile Include="Models\gestion_reclamos\CModificarReclamo.cs" />
     <Compile Include="Models\gestion_ruta_comercial\VistaListaRuta.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cgestion_seguridad_ingreso.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cvalidar_bloqueo_exception.cs" />
@@ -1481,6 +1483,7 @@
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarComidaVuelo.cshtml" />
     <Content Include="Views\gestion_reclamos\M16_AgregarReclamo.cshtml" />
     <Content Include="Views\gestion_reclamos\M16_VisualizarReclamo.cshtml" />
+    <Content Include="Views\gestion_reclamos\M16_ModificarReclamo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Visualizar.cshtml" />

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FOReserva.DataAccess.Domain;
 
 namespace FOReserva.Controllers
 {
@@ -17,6 +18,16 @@ namespace FOReserva.Controllers
         {
             CAgregarReclamo model = new CAgregarReclamo();
             return PartialView(model);
+        }
+        public ActionResult M16_VisualizarReclamo()
+        {
+            Reclamo reclamo1 = new Reclamo(1, "Maleta perdida", "no consigo mi maleta", "19/20/2016", "iniciado");
+            Reclamo reclamo2 = new Reclamo(2, "Perdí mi boleto", "necesito retornar", "20/20/2016", "procesado");
+            List<Reclamo> listaReclamos = new List<Reclamo>();
+            listaReclamos.Add(reclamo1);
+            listaReclamos.Add(reclamo2);
+
+            return PartialView(listaReclamos);
         }
 
     }

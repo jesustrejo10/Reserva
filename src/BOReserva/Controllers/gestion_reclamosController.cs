@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using BOReserva.Models.gestion_reclamos;
 using System.Net;
+using BOReserva.DataAccess.Domain;
 
 
 namespace BOReserva.Controllers
@@ -18,6 +19,24 @@ namespace BOReserva.Controllers
             CAgregarReclamo model = new CAgregarReclamo();
             return PartialView(model);
         }
+
+      public ActionResult M16_VisualizarReclamo()
+      {
+          Reclamo reclamo1 = new Reclamo(1,"Maleta perdida","no consigo mi maleta","19/20/2016","Iniciado");
+          Reclamo reclamo2 = new Reclamo(2,"Perdí mi boleto", "necesito retornar", "20/20/2016", "Iniciado");
+          List<Reclamo> listaReclamos = new List<Reclamo>();
+          listaReclamos.Add(reclamo1);
+          listaReclamos.Add(reclamo2);
+
+          return PartialView(listaReclamos);
+      }
+
+      public ActionResult M16_ModificarReclamo()
+      {
+          CModificarReclamo model = new CModificarReclamo();
+          return PartialView(model);
+
+      }
     }
 	
 }

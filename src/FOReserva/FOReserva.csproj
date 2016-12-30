@@ -209,6 +209,7 @@
     <Compile Include="Controllers\gestion_vuelosController.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\registro_autenticacionController.cs" />
+    <Compile Include="DataAccess\Domain\CReclamo.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -278,6 +279,7 @@
       <DependentUpon>ModelDBReserva.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Reclamos\CAgregarReclamo.cs" />
+    <Compile Include="Models\Reclamos\CVisualizarReclamo.cs" />
     <Compile Include="Models\ReservaHabitacion\CCiudad.cs" />
     <Compile Include="Models\Hoteles\CHotel.cs" />
     <Compile Include="Models\ReservaHabitacion\CProcesoResultado.cs" />
@@ -3182,6 +3184,7 @@
     <Content Include="Views\gestion_reserva_auto\M19_Accion_Reserva.cshtml" />
     <Content Include="Views\gestion_reserva_auto\M19_Busqueda_Autos.cshtml" />
     <Content Include="Views\gestion_reclamos\M16_AgregarReclamo.cshtml" />
+    <Content Include="Views\gestion_reclamos\M16_VisualizarReclamo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
