@@ -29,7 +29,7 @@ namespace BOReserva.DataAccess.DAO
             throw new NotImplementedException();
         }
 
-        public Entidad Consultar(Entidad e)
+        public Dictionary<int,Entidad> ConsultarTodos()
         {
             throw new NotImplementedException();
         }

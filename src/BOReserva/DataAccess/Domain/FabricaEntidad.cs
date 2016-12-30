@@ -19,7 +19,7 @@ namespace BOReserva.DataAccess.Domain
         public static Entidad InstanciarHotel(CAgregarHotel model, Entidad c)
         {
             Ciudad city = (Ciudad)c;
-
+            
             String nombre = model._nombre;
             String direccion = model._direccion;
             int clasificacion = model._clasificacion;

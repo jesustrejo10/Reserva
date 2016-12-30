@@ -224,6 +224,7 @@
     <Compile Include="Controllers\gestion_vueloController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\List.cs" />
+    <Compile Include="Controllers\PatronComando\M09_COVisualizarHoteles.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAO.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOHotel.cs" />
     <Compile Include="DataAccess\DataAccessObject\FabricaDAO.cs" />

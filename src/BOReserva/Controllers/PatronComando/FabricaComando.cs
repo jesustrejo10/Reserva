@@ -24,6 +24,17 @@ namespace BOReserva.Controllers.PatronComando
 
         }
 
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M09_COVisualizarHoteles
+        /// <returns>Retorna la instancia del comando M09_COVisualizarHoteles.</returns>
+        public static Command crearM09VisualizarHoteles()
+        {
+
+            return new M09_COVisualizarHoteles();
+
+        }
+
 
     }
 }
