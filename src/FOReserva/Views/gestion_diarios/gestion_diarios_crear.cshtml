@@ -5,6 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
+
 <div class="heading-title">
     <h3><span>Crear un Diario de Viaje</span></h3>
 </div>
@@ -26,23 +27,23 @@
                 <div class="panel panel-default col-sm-6">
                     <!-- Nombre que describe el diario de viaje -->
                     <div class="row">
-                        <div class="form-group">
+                        <div id="fgnombre" class="form-group">
                             <div class="col-md-12">
                                 <label>
                                     Título del Diario de Viaje
                                     <small class="text-muted">Requerido</small>
                                 </label>
                                 @Html.TextBoxFor(m => m.Nombre, null, new { @class = "form-control required", @placeholder = "Ejemplo: Ecuador Único", @id = "nombre" })
-                            </div>
-                            <div id="name_empty" style="display: none;" class="has-error error">
-                                <p><i class="fa fa-times-circle" aria-hidden="true"></i>Debe escribir un t&iacute;tulo</p>
-                            </div>
+                                <div id="name_empty" style="display: none;" class="has-error error">
+                                    <p><i class="fa fa-times-circle" aria-hidden="true"></i>Debe escribir un t&iacute;tulo</p>
+                                </div>
+                            </div>                            
                         </div>
                     </div>
 
                     <!-- Calificacion del viajero -->
                     <div class="row">
-                        <div class="form-group">
+                        <div id="fgcalif" class="form-group">
                             <div class="col-md-12">
                                 <label>
                                     Calificación de usuario
@@ -57,8 +58,11 @@
                                         new SelectListItem{Value = "3", Text = "3 estrellas"},
                                         new SelectListItem{Value = "4", Text = "4 estrellas"},
                                         new SelectListItem{Value = "5", Text = "5 estrellas"}
-                                    }, new { @class = "col-md-12", @id = "califD"
-                                })
+                                    }, new
+                                    {
+                                        @class = "col-md-12",
+                                        @id = "califD"
+                                    })
                                 <div id="calif_empty" style="display: none;" class="has-error error">
                                     <p><i class="fa fa-times-circle" aria-hidden="true"></i>Debe escoger una puntuaci&oacute;n</p>
                                 </div>
@@ -68,14 +72,14 @@
                                         
                     <!-- Descripción -->
                     <div class="row">
-                        <div class="form-group">
+                        <div id="fgtexa" class="form-group">
                             <div class="col-md-12 col-sm-12">
                                 <label>
                                     Contenido
                                     <small class="text-muted">Requerido</small>
                                 </label>
                                 <!-- textarea -->
-                                <div id="texa" class="fancy-form">
+                                <div class="fancy-form">
                                     <textarea rows="5" id="contenido" class="form-control required" maxlength="5000" placeholder="Escriba su experiencia..."></textarea>
 
                                     <i class="fa fa-comments"><!-- icon --></i>
@@ -88,18 +92,25 @@
                                     </span>
                                     <!-- Script para el contador de carcteres -->
                                     <script>
-                                            $(document).ready(function () {
-                                                var text_max = 5000;
-                                                $("#fecha_carga_diar").val("@DateTime.Today.ToString("yyyy-MM-dd")");
-                                                $('#contenido_feedback').html(text_max + ' caracteres restantes');
+                                        $(document).ready(function () {
+                                            var text_max = 5000;
+                                            $('#contenido_feedback').html(text_max + ' caracteres restantes');
 
-                                                $('#contenido').keyup(function () {
-                                                    var text_length = $('#contenido').val().length;
-                                                    var text_remaining = text_max - text_length;
+                                            $('#contenido').keyup(function () {
+                                                var text_length = $('#contenido').val().length;
+                                                var text_remaining = text_max - text_length;
 
-                                                    $('#contenido_feedback').html(text_remaining + ' caracteres restantes');
-                                                });
+                                                $('#contenido_feedback').html(text_remaining + ' caracteres restantes');
                                             });
+                                            //Seteo de fecha de carga
+                                            $("#fecha_carga_diar").val("@DateTime.Today.ToString("yyyy-MM-dd")");
+                                            //Seteo de dropdownlist de calificación
+                                            $("#califD").val(-1);
+                                            $("#lugares").val(-1);
+                                            //Seteo de parametros de fecha iniciales
+                                            $("#f_ini").val("@DateTime.Today.ToString("yyyy-MM-dd")");
+                                            $("#f_fin").val("@DateTime.Today.ToString("yyyy-MM-dd")");
+                                        });
                                     </script>
 
                                 </div>
@@ -108,6 +119,7 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
 
@@ -191,7 +203,7 @@
                                     Destino visitado
                                     <small class="text-muted">Requerido</small>
                                 </label>
-                                @Html.DropDownListFor(m => m.Destino, Model.Lugares(), new { @class = "col-md-12 form-control pointer required", @id = "lugares" })
+                                @Html.DropDownListFor(m => m.Destino, Model.Lugares(), new { @class = "col-md-12 form-control required", @id = "lugares" })
                                 <div id="lugar_empty" style="display: none;" class="has-error error">
                                     <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe seleccionar el destino</p>
                                 </div>
@@ -247,42 +259,43 @@
     <script>
         $("#nuevoDiario").on("click", function (e) {
             e.preventDefault();
+            
             var form = $("#formCrearDiarios");
             $("#desc").val($('#contenido').val());
             $("#fcarga").val("@DateTime.Today.ToString("yyyy-MM-dd")");
 
             $(".error").hide();
-            $("#nombre").removeClass("has-error");
-            $("#califD").removeClass("has-error");
-            $("#lugares").removeClass("has-error");
-            $("#texa").removeClass("has-error");
+            $("#fgnombre").removeClass("has-error");
+            $("#fgcalif").removeClass("has-error");
+            $("#fglugares").removeClass("has-error");
+            $("#fgtexa").removeClass("has-warning");
             var nombre = $("#nombre").val();
             var cali = $("#califD").val();
-            var desti = $("#lugares").val();
+            var lugares = $("#lugares").val();
             var descr = $("#contenido").val();
 
             var win = true;
 
             if (nombre == "" || nombre == undefined) {                                
-                $("#nombre").addClass("has-error");
+                $("#fgnombre").addClass("has-error");
                 $("#name_empty").fadeIn();
                 win = false;                
             }
             if (cali == -1) {
                 var win = false;
-                $("#califD").addClass("has-error");
+                $("#fgcalif").addClass("has-error");
                 $("#calif_empty").fadeIn();
                 win = false;
             }
 
             if (lugares == -1) {
                 var win = false;
-                $("#califD").addClass("has-error");
+                $("#fglugares").addClass("has-error");
                 $("#lugar_empty").fadeIn();
                 win = false;
             }
             if (descr == "" || descr == undefined) {
-                $("#texa").addClass("has-error");
+                $("#fgtexa").addClass("has-waring");
                 $("#desc_empty").fadeIn();
                 win = false;
             }
@@ -292,6 +305,7 @@
             }
             else
                 return false;
+            
             //alert(form.serialize());
             form.submit();
         }); //Evento general de submit (ej. presionar ENTER)

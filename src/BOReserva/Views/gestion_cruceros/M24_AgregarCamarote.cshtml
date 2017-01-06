@@ -18,18 +18,16 @@
                             SelectList list1 = ViewBag.ShowDropDown;
                         }
                         @*@Html.DropDownList("DROPDOWNID", list, "Cruceros", new { @id = "fk_id_crucero" })*@
-                        @Html.DropDownListFor(m => m._fkCrucero, list1, "Cruceros", new { @id = "fk_id_crucero", @style = "width:41% ; margin-left:2%"})
+                        @Html.DropDownListFor(m => m._fkCrucero, list1, "Cruceros", new { @id = "fk_id_crucero", @style = "width:41% ; margin-left:2%" })
                     </div>
                     <div class="form-group" style="margin-bottom:20px">
                         <label>Cabinas:</label>
                         @{
                             SelectList list = ViewBag.ShowDropDown;
                         }
-                        
-                        @*@Html.DropDownListFor(m => m._fkCabina, list, new { @id = "fk_id_cabina", @style = "width:41% ; margin-left:2%" })*@
-                        <select id="fk_id_cabina" name="_fkCabina" style="width: 41%;margin-left: 2.5%;">
 
-                        </select>
+                        @*@Html.DropDownListFor(m => m._fkCabina, list, new { @id = "fk_id_cabina", @style = "width:41% ; margin-left:2%" })*@
+                        <select id="fk_id_cabina" name="_fkCabina" style="width: 41%;margin-left: 2.5%;"></select>
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
@@ -44,10 +42,10 @@
                             <div class="form-group">
                                 <label>Tipo Cama:</label>
                                 @*<select>
-                                    <option>
+                                        <option>
 
-                                    </option>
-                                </select>*@
+                                        </option>
+                                    </select>*@
                                 @Html.TextBoxFor(m => m._tipoCama, null, new { @type = "text", @class = "form-control", @placeholder = "Introduce el nombre de la cabina", @id = "tipoCama" })
                             </div>
                         </div>

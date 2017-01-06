@@ -30,13 +30,31 @@
                                 <div class="col-md-5">
                                     <!-- select -->
                                     <label>País</label>
-                                    @Html.DropDownListFor(m => m._pais, Model._listapaises, new { @class = "form-control", @id = "country" })
+                                    @*@Html.DropDownListFor(m => m._pais, Model._listapaises, new { @class = "form-control", @id = "country" })*@
+                                  <!--  <label for="">Pa&is(<span style="color:red">*</span>)</label>-->
+                                    @*@Html.DropDownListFor(m => m._pais, BOReserva.Controllers.gestion_automovilesController.pais(), new { @class = "form-control", @placeholder = "Pais", @id = "vehi_pais", @onblur = "listadeciudades(this.value);"})*@
+                                    @{
+                                        List<SelectListItem> paises = BOReserva.Controllers.gestion_hotelesController.pais();
+                                        if (paises.First().Text.Length > 15)
+                                        {
+                                            Response.Write("<script>alert('" + paises.First().Text + "');</script>");
+                                            List<SelectListItem> error = new List<SelectListItem>();
+                                            @Html.DropDownListFor(m => m._pais, error, new { @class = "form-control", @placeholder = "Pais", @id = "hot_pais", @onblur = "listadeciudades(this.value);" });
+                                        }
+                                        else
+                                        {
+                                            @Html.DropDownListFor(m => m._pais, paises, new { @class = "form-control", @placeholder = "Pais", @id = "hot_pais", @onblur = "listadeciudades(this.value);" });
+                                        }
+                                    }
+
                                 </div><!--div col-xs-->
                                 <div class="col-md-1"></div>
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <label>Ciudad</label>
                                         <!--<select id="state"></select>-->
+                                        <select class="form-control" id="ciudades" name="ciudad" onblur="getciudad();"></select>
+                                       
                                     </div>
                                 </div>
                             </div> <!--/div row-->
@@ -100,3 +118,44 @@
         </div>
     </div>
 }
+
+
+    <script language="javascript" type="text/javascript">
+       function listadeciudades(_stateId) {
+           var procemessage = "<option value='0'> Espere un momento...</option>";
+           $("#ciudades").html(procemessage).show();
+           var url = "/gestion_hoteles/listaciudades";
+           var _pais = $('#hot_pais option:selected').text();
+           $.ajax({
+               url: url,
+               data: { pais: _pais },
+               cache: false,
+               type: "POST",
+               success: function (data) {
+                   markup = "";
+                   for (var x = 0; x < data.length; x++) {
+                       markup += "<option>" + data[x] + "</option>";
+                   }
+                   $("#ciudades").html(markup).show();
+               },
+               error: function (reponse) {
+                   alert("error : " + reponse);
+               }
+           });
+       }
+
+
+    function getciudad() {
+        var url = "/gestion_hoteles/getciudad";
+        var ciudad = $('#ciudades option:selected').text();
+        $.ajax({
+            url: url,
+            data: { _ciudad: ciudad },
+            cache: false,
+            type: "POST",
+            success: function (data) {
+
+            }
+        });
+    }
+</script>

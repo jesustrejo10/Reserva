@@ -108,6 +108,7 @@ namespace BOReserva.Controllers
             automovil._transmision = vehiculo._transmision;
             automovil._pais = vehiculo._pais;
             automovil._ciudad = vehiculo._ciudad;
+            ciudad = vehiculo._ciudad;
             return PartialView(automovil);
         }
 
@@ -225,7 +226,7 @@ namespace BOReserva.Controllers
             String transmision = model._transmision;
             Automovil carronuevo = new Automovil(matricula, modelo, fabricante, anio, tipovehiculo, kilometraje, 
                                              cantpasajeros, preciocompra, precioalquiler, penalidaddiaria, fecharegistro,
-                                             color, 1, transmision, pais, _ciudad);  //SE CREA EL VEHICULO
+                                             color, 1, transmision, pais, ciudad);  //SE CREA EL VEHICULO
             manejadorSQL buscarid = new manejadorSQL();
             int id_ciudad = buscarid.MBuscaridciudadBD(_ciudad, pais);
             String agrego_si_no = carronuevo.MAgregaraBD(carronuevo, id_ciudad); //SE AGREGA A LA BD RETORNA 1 SI SE AGREGA Y 0 SINO LO LOGRA
@@ -247,8 +248,9 @@ namespace BOReserva.Controllers
             int cantpasajeros = model._cantpasajeros;
             String color = model._color;
             String fabricante = model._fabricante;
-            DateTime fecharegistro = Convert.ToDateTime(model._fecharegistro);
-            double kilometraje = model._kilometraje;
+            DateTime fecharegistro = new DateTime();
+
+                double kilometraje = model._kilometraje;
             String modelo = model._modelo;
             String pais = _pais;
             String _ciudad = ciudad;

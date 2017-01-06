@@ -32,7 +32,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-xs-6" >
+                        <div class="col-xs-6">
                             <div class="form-group" style="margin-bottom:20px">
                                 <label>Fecha Inicio:</label>
                                 @Html.TextBoxFor(m => m._fechaInicio, null, new { @type = "date", @id = "fecha_inicio", @style = "width:39% ; margin-left:1%" })
@@ -40,20 +40,20 @@
                         </div>
                     </div>
                     <div class="row">
-                         <div class="col-xs-6">
-                             <div class="form-group" style="margin-bottom:20px">
-                                        <label>Fecha Fin:</label>
-                                        @Html.TextBoxFor(m => m._fechaFin, null, new { @type = "date", @id = "fecha_fin", @style = "width:39% ; margin-left:4%" })
-                             </div>
-                          </div>
-                     </div>
-                            <div class="col-md-6" style="margin-top:10px;">
-                                <button type="button" id="guardar_itinerario" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                        <div class="col-xs-6">
+                            <div class="form-group" style="margin-bottom:20px">
+                                <label>Fecha Fin:</label>
+                                @Html.TextBoxFor(m => m._fechaFin, null, new { @type = "date", @id = "fecha_fin", @style = "width:39% ; margin-left:4%" })
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-top:10px;">
+                        <button type="button" id="guardar_itinerario" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                    </div>
                 </section>
             </div>
             <div class="modal-body col-xs-12" id="bodyCruc" style="margin-left: 14.5%">
-              
+
             </div>
         </div>
 
@@ -94,4 +94,4 @@
             });
         });
     </script>
-}
+                            }

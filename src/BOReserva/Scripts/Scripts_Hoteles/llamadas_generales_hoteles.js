@@ -1,6 +1,9 @@
 ﻿
     //EVENTO PARA AGREGAR UN HOTEL
-    $("#aceptarhotel").click(function (e) {
+$("#aceptarhotel").click(function (e) {
+
+    var ciudad = $('#ciudades').val();
+
         console.log("hola!");
         e.preventDefault();
         var form = $("#formCrearHotel");
