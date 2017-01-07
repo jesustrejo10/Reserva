@@ -29,5 +29,15 @@ namespace BOReserva.Controllers.PatronComando
             return new M16_COAgregarReclamo((Reclamo)e);
         }
         
+
+
+        #region M04_Vuelo
+        public static Command crearVuelo(Entidad vuelo)
+        {
+            return new M04.M04_COAgregarVuelo();
+        }
+        #endregion
+
+
     }
 }
