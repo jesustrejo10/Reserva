@@ -205,6 +205,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\PatronComando\Command.cs" />
     <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
+    <Compile Include="Controllers\PatronComando\M04\M04_COAgregarVuelo.cs" />
     <Compile Include="Controllers\PatronComando\M09_COAgregarHotel.cs" />
     <Compile Include="Controllers\gestion_automovilesController.cs" />
     <Compile Include="Controllers\gestion_avionesController.cs">
@@ -234,8 +235,17 @@
     <Compile Include="DataAccess\Domain\FabricaEntidad.cs" />
     <Compile Include="DataAccess\Domain\Hotel.cs" />
     <Compile Include="DataAccess\Domain\Pais.cs" />
+    <Compile Include="DataAccess\Domain\M04\Vuelo.cs" />
     <Compile Include="DataAccess\Model\Connection.cs" />
     <Compile Include="DataAccess\Model\ConexionUtil.cs" />
+    <Compile Include="DataAccess\Model\ExceptionBD.cs" />
+    <Compile Include="DataAccess\Model\Parametro.cs" />
+    <Compile Include="DataAccess\Model\RecursoBD.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RecursoBD.resx</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\Model\ResultadoBD.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1613,6 +1623,10 @@
     <Content Include="Views\gestion_boletos\M05_DetalleBoletoReserva.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="DataAccess\Model\RecursoBD.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecursoBD.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Models\gestion_cruceros\RecursosCruceros.resx" />
     <EmbeddedResource Include="Models\gestion_usuarios\RecursoBD.resx">
       <Generator>ResXFileCodeGenerator</Generator>
