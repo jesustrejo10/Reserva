@@ -22,8 +22,8 @@ namespace BOReserva.Controllers
 
       public ActionResult M16_VisualizarReclamo()
       {
-          Reclamo reclamo1 = new Reclamo(1,"Maleta perdida","no consigo mi maleta","19/20/2016","Iniciado");
-          Reclamo reclamo2 = new Reclamo(2,"Perdí mi boleto", "necesito retornar", "20/20/2016", "Iniciado");
+          Reclamo reclamo1 = new Reclamo("Maleta perdida","no consigo mi maleta","19/20/2016","Iniciado");
+          Reclamo reclamo2 = new Reclamo("Perdí mi boleto", "necesito retornar", "20/20/2016", "Iniciado");
           List<Reclamo> listaReclamos = new List<Reclamo>();
           listaReclamos.Add(reclamo1);
           listaReclamos.Add(reclamo2);
