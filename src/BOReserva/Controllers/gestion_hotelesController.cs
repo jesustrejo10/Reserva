@@ -74,7 +74,7 @@ namespace BOReserva.Controllers
             Entidad ciudadDestino = FabricaEntidad.InstanciarCiudad("nombre de la ciudad");
             Entidad nuevoHotel = FabricaEntidad.InstanciarHotel(model, ciudadDestino);
             //con la fabrica instancie al hotel.
-            Command comando = FabricaComando.crearM09AgregarHotel(nuevoHotel);
+            Command<String> comando = FabricaComando.crearM09AgregarHotel(nuevoHotel);
             String agrego_si_no  = comando.ejecutar();
 
             return (Json(agrego_si_no));

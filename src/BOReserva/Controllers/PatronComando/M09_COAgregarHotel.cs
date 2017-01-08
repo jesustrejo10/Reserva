@@ -11,7 +11,7 @@ namespace BOReserva.Controllers.PatronComando
     /// Comando destinado a Realizar las respectivas operaciones necesarias
     /// para a;adir un hotel a la BD
     /// </summary>
-    public class M09_COAgregarHotel : Command
+    public class M09_COAgregarHotel : Command<String>
     {
         Hotel _hotel;
 

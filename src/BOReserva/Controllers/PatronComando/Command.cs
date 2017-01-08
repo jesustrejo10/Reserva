@@ -6,8 +6,8 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando
 {
-    abstract public class Command
+    abstract public class Command<T>
     {
-        abstract public String ejecutar();
+        abstract public T ejecutar();
     }
 }
