@@ -19,11 +19,9 @@ namespace BOReserva.Controllers
         /// <returns>Retorna un objeto para renderizar la vista parcial.</returns>
         public ActionResult M10_GestionRestaurantes_Ver()
         {
-            var modelo = new CRestauranteModeloVista();
-            var bd = new manejadorSQL();
-            modelo._listaRestaurantes = bd.consultarRestaurante();
-            modelo._listaCiudades = bd.consultarCiudad();
-            return PartialView(modelo);
+         //   System.Diagnostics.Debug.WriteLine("Valor del id "+id);
+         
+            return PartialView();
         }
 
         /// <summary>
@@ -32,33 +30,37 @@ namespace BOReserva.Controllers
         /// <returns>Retorna un objeto para renderizar la vista parcial.</returns>
         public ActionResult M10_GestionRestaurantes_Agregar()
         {
-            var modelo = new CRestauranteModeloVista();
-            var bd = new manejadorSQL();
-            modelo._listaRestaurantes = bd.consultarRestaurante();
-            modelo._listaCiudades = bd.consultarCiudad();
-            return PartialView(modelo);
+         
+            return PartialView();
         }
 
+
+
+        [HttpPost]
+        public ActionResult M10_GestionRestaurantes_Ver(int id)
+        {
+            System.Diagnostics.Debug.WriteLine("Estoy en metodo de combo id retornado: "+id);
+            return PartialView();
+        }
         /// <summary>
         /// Método para el acceso a la interfaz de modificación de restaurantes.
         /// </summary>
         /// <returns>Retorna un objeto para renderizar la vista parcial.</returns>
         public ActionResult M10_GestionRestaurantes_Modificar(int id)
         {
-            var bd = new manejadorSQL();
-            var respuesta = bd.consultarRestaurante(id);
-            var modelo = new CRestauranteModeloVista
+           
+            var modelo = new CRestauranteModelo
             {
-                _id = respuesta._id,
-                _idLugar = respuesta._idLugar,
-                _nombre = respuesta._nombre,
-                _direccion = respuesta._direccion,
-                _descripcion = respuesta._descripcion,
-                _horarioApertura = respuesta._horarioApertura,
-                _horarioCierre = respuesta._horarioCierre
+                //id = respuesta.Id,
+                //idLugar = respuesta.IdFKLugar,
+                //nombre = respuesta,
+                //direccion = respuesta._direccion,
+                //descripcion = respuesta._descripcion,
+                //horarioApertura = respuesta._horarioApertura,
+                //horarioCierre = respuesta._horarioCierre
             };
-            modelo._listaCiudades = bd.consultarCiudad();
-            return PartialView(modelo);
+            //modelo._listaCiudades = bd.consultarCiudad();
+            return PartialView();
         }
 
         /// <summary>
@@ -67,11 +69,9 @@ namespace BOReserva.Controllers
         /// <returns>Retorna un objeto para renderizar la vista parcial.</returns>
         public ActionResult M10_GestionRestaurantes_Eliminar()
         {
-            var modelo = new CRestauranteModeloVista();
-            var bd = new manejadorSQL();
-            modelo._listaRestaurantes = bd.consultarRestaurante();
-            modelo._listaCiudades = bd.consultarCiudad();
-            return PartialView(modelo);
+          
+    
+            return PartialView();
         }
 
         /// <summary>
@@ -92,15 +92,15 @@ namespace BOReserva.Controllers
             manejadorSQL sql = new manejadorSQL();
             var salida = new CRestauranteModelo
             {
-                _nombre = model._nombre,
-                _direccion = model._direccion,
-                _descripcion = model._descripcion,
-                _horarioApertura = model._horarioApertura,
-                _horarioCierre = model._horarioCierre,
-                _idLugar = model._idLugar
+                nombre = model._nombre,
+                direccion = model._direccion,
+                descripcion = model._descripcion,
+                horarioApertura = model._horarioApertura,
+                horarioCierre = model._horarioCierre,
+                idLugar = model._idLugar
             };
-            bool resultado = sql.insertarRestaurante(salida);
-            if (resultado)
+         
+            if (true)
             {
                 return (Json(true, JsonRequestBehavior.AllowGet));
             }
@@ -116,6 +116,8 @@ namespace BOReserva.Controllers
         /// Método para la modificación de restaurantes, tomando como parámetro un modelo de restaurante.
         /// </summary>
         /// <returns>Retorna un objecto tipo JsonResult que indica el éxito o fracaso de la operación.</returns>
+
+
         [HttpPost]
         public JsonResult modificarRestaurante(CRestauranteModeloVista model)
         {
@@ -130,16 +132,16 @@ namespace BOReserva.Controllers
             manejadorSQL sql = new manejadorSQL();
             var salida = new CRestauranteModelo
             {
-                _id = model._id,
-                _nombre = model._nombre,
-                _direccion = model._direccion,
-                _descripcion = model._descripcion,
-                _horarioApertura = model._horarioApertura,
-                _horarioCierre = model._horarioCierre,
-                _idLugar = model._idLugar
+                id = model._id,
+                nombre = model._nombre,
+                direccion = model._direccion,
+                descripcion = model._descripcion,
+                horarioApertura = model._horarioApertura,
+                horarioCierre = model._horarioCierre,
+                idLugar = model._idLugar
             };
-            bool resultado = sql.modificarRestaurante(salida);
-            if (resultado)
+          
+            if (true)
             {
                 return (Json(true, JsonRequestBehavior.AllowGet));
             }
@@ -165,9 +167,8 @@ namespace BOReserva.Controllers
                 string error = "Error, campo obligatorio vacío";
                 return Json(error);
             }
-            manejadorSQL sql = new manejadorSQL();
-            bool resultado = sql.eliminarRestaurante(id);
-            if (resultado)
+     
+            if (true)
             {
                 return (Json(true, JsonRequestBehavior.AllowGet));
             }
