@@ -39,6 +39,32 @@ namespace BOReserva.DataAccess.Domain
             return new Ciudad();
         }
 
+        #region M04_Vuelo
+        /// <summary>
+        /// Se crea una instancia de la clase Vuelo con todos sus atributos
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="codigoVuelo"></param>
+        /// <param name="ciudadOrigen"></param>
+        /// <param name="ciudadDestino"></param>
+        /// <param name="fechaDespegue"></param>
+        /// <param name="status"></param>
+        /// <param name="fechaAterrizaje"></param>
+        /// <param name="matriculaAvion"></param>
+        /// <returns>Retorna una instancia de la clase vuelo con todos sus atributos</returns>
+        public static Entidad crearVuelo(int id, String codigoVuelo, String ciudadOrigen, String ciudadDestino, 
+                                         String fechaDespegue, String status, String fechaAterrizaje, 
+                                         String matriculaAvion)
+        {
+            return new Vuelo(id, codigoVuelo, ciudadOrigen, ciudadDestino, fechaDespegue, status, fechaAterrizaje,
+                             matriculaAvion);
+        }
+        #endregion  
+    }
+}
+            return new Ciudad();
+        }
+
         public static Entidad InstanciarReclamo(String tituloReclamo, String detalleReclamo, String fechaReclamo, String estadoReclamo)
         {
             return new Reclamo();
@@ -71,11 +97,7 @@ namespace BOReserva.DataAccess.Domain
         public static Entidad crearVuelo(int id, String codigoVuelo, String ciudadOrigen, String ciudadDestino, 
                                          String fechaDespegue, String status, String fechaAterrizaje, 
                                          String matriculaAvion)
-        {
             return new Vuelo(id, codigoVuelo, ciudadOrigen, ciudadDestino, fechaDespegue, status, fechaAterrizaje,
                              matriculaAvion);
         }
         #endregion  
-
-    }
-}

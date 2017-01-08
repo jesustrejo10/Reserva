@@ -11,12 +11,11 @@ namespace BOReserva.DataAccess.Domain
 
         
         private String _codigoVuelo { get; set; }
-        private String _ciudadOrigen { get; set; }
-        private String _ciudadDestino { get; set; }
-        private String _fechaDespegue { get; set; }
+        private int _idRuta { get; set; }
+        private DateTime _fechaDespegue { get; set; }
         private String _statusVuelo { get; set; }
-        private String _fechaAterrizaje { get; set; }
-        private String _matriculaAvion { get; set; }
+        private DateTime _fechaAterrizaje { get; set; }
+        private int _idAvion { get; set; }
 
         #endregion
 
@@ -34,8 +33,34 @@ namespace BOReserva.DataAccess.Domain
         #endregion
 
         #region Constructores
+
         /// <summary>
-        /// Constructor de la clase Vuelo
+        /// Constructor de la clase Vuelo vacia
+        /// </summary>
+        public Vuelo() { }
+
+        /// <summary>
+        /// Constructor de la clase Vuelo sin el atributo id
+        /// </summary>
+        /// <param name="codigoVuelo"></param>
+        /// <param name="ruta"></param>
+        /// <param name="fechaDespegue"></param>
+        /// <param name="status"></param>
+        /// <param name="fechaAterrizaje"></param>
+        /// <param name="idAvion"></param>
+        public Vuelo(String codigoVuelo, int ruta, DateTime fechaDespegue, 
+                      String status, DateTime fechaAterrizaje, int idAvion)
+        {
+            _codigoVuelo = codigoVuelo;
+            _idRuta = ruta;
+            _fechaDespegue = fechaDespegue;
+            _statusVuelo = status;
+            _fechaAterrizaje = fechaAterrizaje;
+            _idAvion = idAvion;
+        }
+
+        /// <summary>
+        /// Constructor de la clase Vuelo con todos sus atributos inicializados
         /// </summary>
         /// <param name="id"></param>
         /// <param name="codigoVuelo"></param>
@@ -44,18 +69,17 @@ namespace BOReserva.DataAccess.Domain
         /// <param name="fechaDespegue"></param>
         /// <param name="status"></param>
         /// <param name="fechaAterrizaje"></param>
-        /// <param name="matriculaAvion"></param>
-        public Vuelo(int id, String codigoVuelo, String ciudadOrigen, String ciudadDestino, String fechaDespegue, 
-            String status, String fechaAterrizaje, String matriculaAvion)
+        /// <param name="idAvion"></param>
+        public Vuelo(int id, String codigoVuelo, int ruta, DateTime fechaDespegue, 
+            String status, DateTime fechaAterrizaje, int idAvion)
         {
             _id = id;
             _codigoVuelo = codigoVuelo;
-            _ciudadOrigen = ciudadOrigen;
-            _ciudadDestino = ciudadDestino;
+            _idRuta = ruta;
             _fechaDespegue = fechaDespegue;
             _statusVuelo = status;
             _fechaAterrizaje = fechaAterrizaje;
-            _matriculaAvion = matriculaAvion;
+            _idAvion = idAvion;
         }
         #endregion
 
