@@ -7,7 +7,7 @@ using BOReserva.DataAccess.Domain;
 
 namespace BOReserva.Controllers.PatronComando
 {
-    public class M16_COAgregarReclamo: Command
+    public class M16_COAgregarReclamo: Command<String>
     {
         Reclamo _reclamo;
 

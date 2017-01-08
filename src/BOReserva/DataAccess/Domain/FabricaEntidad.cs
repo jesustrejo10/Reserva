@@ -12,12 +12,13 @@ namespace BOReserva.DataAccess.Domain
     /// </summary>
     public class FabricaEntidad
     {
-        public static Entidad InstanciarHotel(String nombre, String direccion, int fkCiudad, int clasificacion, String webPage, String email, int capacidad){
+        public static Entidad InstanciarHotel(String nombre, String direccion, int fkCiudad, int clasificacion, String webPage, String email, int capacidad)
+        {
 
             return new Hotel();
         }
 
-         public static Entidad InstanciarHotel(CAgregarHotel model, Entidad c)
+        public static Entidad InstanciarHotel(CAgregarHotel model, Entidad c)
         {
             Ciudad city = (Ciudad)c;
 
@@ -28,40 +29,16 @@ namespace BOReserva.DataAccess.Domain
             String paginaWeb = model._paginaWeb;
             String email = model._email;
 
-            return new Hotel(nombre,direccion,email,paginaWeb,clasificacion,capacidad,city);
+            return new Hotel(nombre, direccion, email, paginaWeb, clasificacion, capacidad, city);
         }
 
-        public static Entidad InstanciarPais(String nombre) {
+        public static Entidad InstanciarPais(String nombre)
+        {
             return new Pais();
         }
 
-        public static Entidad InstanciarCiudad(String ciudad) { 
-            return new Ciudad();
-        }
-
-        #region M04_Vuelo
-        /// <summary>
-        /// Se crea una instancia de la clase Vuelo con todos sus atributos
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="codigoVuelo"></param>
-        /// <param name="ciudadOrigen"></param>
-        /// <param name="ciudadDestino"></param>
-        /// <param name="fechaDespegue"></param>
-        /// <param name="status"></param>
-        /// <param name="fechaAterrizaje"></param>
-        /// <param name="matriculaAvion"></param>
-        /// <returns>Retorna una instancia de la clase vuelo con todos sus atributos</returns>
-        public static Entidad crearVuelo(int id, String codigoVuelo, String ciudadOrigen, String ciudadDestino, 
-                                         String fechaDespegue, String status, String fechaAterrizaje, 
-                                         String matriculaAvion)
+        public static Entidad InstanciarCiudad(String ciudad)
         {
-            return new Vuelo(id, codigoVuelo, ciudadOrigen, ciudadDestino, fechaDespegue, status, fechaAterrizaje,
-                             matriculaAvion);
-        }
-        #endregion  
-    }
-}
             return new Ciudad();
         }
 
@@ -74,12 +51,10 @@ namespace BOReserva.DataAccess.Domain
             String titulo = model._tituloReclamo;
             String detalle = model._detalleReclamo;
             String fecha = model._fechaReclamo;
-            String estado=model._estadoReclamo;
-                       
-            return new Reclamo(titulo,detalle,fecha,estado);
-        }
+            String estado = model._estadoReclamo;
 
-      
+            return new Reclamo(titulo, detalle, fecha, estado);
+        }
 
         #region M04_Vuelo
         /// <summary>
@@ -92,12 +67,21 @@ namespace BOReserva.DataAccess.Domain
         /// <param name="fechaDespegue"></param>
         /// <param name="status"></param>
         /// <param name="fechaAterrizaje"></param>
-        /// <param name="matriculaAvion"></param>
+        /// <param name="idAvion"></param>
         /// <returns>Retorna una instancia de la clase vuelo con todos sus atributos</returns>
-        public static Entidad crearVuelo(int id, String codigoVuelo, String ciudadOrigen, String ciudadDestino, 
-                                         String fechaDespegue, String status, String fechaAterrizaje, 
-                                         String matriculaAvion)
-            return new Vuelo(id, codigoVuelo, ciudadOrigen, ciudadDestino, fechaDespegue, status, fechaAterrizaje,
-                             matriculaAvion);
+        public static Entidad crearVuelo(int id, String codigoVuelo, int ruta, DateTime fechaDespegue,
+                                          String status, DateTime fechaAterrizaje, int idAvion)
+        {
+            return new Vuelo(id, codigoVuelo, ruta, fechaDespegue, status, fechaAterrizaje,
+                             idAvion);
         }
-        #endregion  
+        #endregion
+    }
+}
+          
+
+        
+
+      
+
+       
