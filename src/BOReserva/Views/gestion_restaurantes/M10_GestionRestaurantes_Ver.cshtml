@@ -1,5 +1,7 @@
 ﻿@model BOReserva.Models.gestion_restaurantes.CRestauranteModelo
 
+
+
 <link href="@Url.Content("~/Scripts/select2/css/select2.min.css")" rel="stylesheet" />
 <script src="@Url.Content("~/Scripts/jquery-3.1.1.min.js")"></script>
 <script src="@Url.Content("~/Scripts/select2/js/select2.min.js")"></script>
@@ -22,13 +24,10 @@ $(document).ready(function() {
 });
 </script>
 
-<script type="text/javascript">
-    function CallChangefunc(val) {
-        window.location.href = "/gestion_restaurantes/M10_GestionRestaurantes_Ver?id="+val;
-    }
-</script>
+@{
 
-
+    var lugar = ViewData["Lugar"] as IEnumerable<SelectListItem>;
+ }
 
 @using (Html.BeginForm("M10_GestionRestaurantes_Ver", "gestion_restaurantes", null, FormMethod.Post, new { @id = "formConsultarRestaurante", @class = "form-horizontal" }))
 {
@@ -47,12 +46,8 @@ $(document).ready(function() {
                 <div class="col-xs-3" style="margin-left:262px">
                     &nbsp;
                     &nbsp;
-                    @Html.DropDownList("id", new List<SelectListItem>
-                           {
-                             new SelectListItem {Text = "Ciudad1", Value = "1" },
-                             new SelectListItem {Text = "Ciudad2", Value = "2" }
-                           }, new { @class = "form-control", required = "required", onchange = "this.form.submit();" }
-               )
+                    @Html.DropDownList("Ids", ViewBag.Ciudad as SelectList, "Ciudades", new { @class = "form-control", @required = "required", @onchange = "this.form.submit()" })
+               
                 </div>
             </div>
             <!-- /.box-header -->
@@ -65,47 +60,48 @@ $(document).ready(function() {
                             <th hidden="hidden">ID</th>
                             <th>Nombre</th>
                             <th>Dirección</th>
+                            <th>telefono</th>
                             <th>Descripción</th>
                             <th>Hora Apertura</th>
                             <th>Hora Cierre</th>
-                            <th>Ciudad</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         @try
                         {
-                            foreach (var item in Model._listaRestaurantes)
+                            foreach (var item in Model.listaRestaurantes)
                             {
-                                <tr id="@item._id">
-                                    <td hidden="hidden">@item._id</td>
-                                    <td>@item._nombre</td>
-                                    <td>@item._direccion</td>
-                                    <td>@item._descripcion</td>
-                                    <td>@item._horarioApertura</td>
-                                    <td>@item._horarioCierre</td>
-                                    <td>@Model._listaCiudades.FirstOrDefault(x => x._id == @item._idLugar)._nombre</td> <!-- Demasiado astuto para mi propio bien -->
+                                <tr id="_id">
+                                    <td hidden="hidden">@item.id</td>
+                                    <td>@item.nombre</td>
+                                    <td>@item.direccion</td>
+                                    <td>@item.Telefono</td>
+                                    <td>@item.descripcion</td>
+                                    <td>@item.horarioApertura</td>
+                                    <td>@item.horarioCierre</td>
+                                   
                                     <td>
                                         <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>
                                         <a href="#" title="Eliminar"><i class="fa fa-times eliminar"></i></a>
                                     </td>
                                 </tr>
+                                }
                             }
-                        }
-                        catch
-                        {
+                            catch
+                            {
 
-                        }
+                            }
 
                     <tfoot>
                         <tr>
                             <th hidden="hidden">ID</th>
                             <th>Nombre</th>
                             <th>Dirección</th>
+                            <th>telefono</th>
                             <th>Descripción</th>
                             <th>Hora Apertura</th>
                             <th>Hora Cierre</th>
-                            <th>Ciudad</th>
                             <th>Opciones</th>
                         </tr>
                     </tfoot>

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace BOReserva.LogicaReserva.Fabrica
 {
@@ -129,6 +130,13 @@ namespace BOReserva.LogicaReserva.Fabrica
             ELIMINAR,
             ACTUALIZAR,
             CONSULTAR
+        }
+
+        public static List<Lugar> listaLugares(Lugar lugar)
+        {
+            List<Lugar> lista = new List<Lugar>();
+            lista.Add(lugar);
+            return lista;
         }
         #endregion
     }

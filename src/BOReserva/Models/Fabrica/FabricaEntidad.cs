@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace BOReserva.Models.Fabrica
 {
@@ -56,7 +57,15 @@ namespace BOReserva.Models.Fabrica
             return new Lugar(idLugar, nombreLugar);
         }
 
+        public static List<Lugar> inicializarListaLugar()
+        {
+            return new List<Lugar>();
+        }
 
+        public static List<CRestauranteModelo> inicializarListaRestarant()
+        {
+            return new List<CRestauranteModelo>();
+        }
 
         #endregion
 
@@ -78,6 +87,7 @@ namespace BOReserva.Models.Fabrica
         {
             return new List<Entidad>();
         }
+
         #endregion
 
     }

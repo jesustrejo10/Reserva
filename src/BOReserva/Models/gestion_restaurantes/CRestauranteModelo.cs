@@ -19,6 +19,7 @@ namespace BOReserva.Models.gestion_restaurantes
         private string _descripcion;
         private string _horarioApertura;
         private string _horarioCierre;
+        private List<CRestauranteModelo> _listaRestaurantes;
         #endregion
 
         #region Constructores
@@ -96,6 +97,19 @@ namespace BOReserva.Models.gestion_restaurantes
         {
             get { return this._telefono; }
             set { this._telefono = value; }
+        }
+        
+        public List<CRestauranteModelo> listaRestaurantes
+        {
+            get
+            {
+                return _listaRestaurantes;
+            }
+
+            set
+            {
+                _listaRestaurantes = value;
+            }
         }
         #endregion
 

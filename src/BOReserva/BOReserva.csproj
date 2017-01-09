@@ -379,7 +379,6 @@
     </Compile>
     <Compile Include="Models\gestion_usuarios\ResultadoBD.cs" />
     <Compile Include="Models\Util.cs" />
-    <Compile Include="Models\gestion_restaurantes\CRestauranteModeloVista.cs" />
     <Compile Include="Models\gestion_restaurantes\CRestauranteModelo.cs" />
     <Compile Include="MySQLException.cs" />
     <Compile Include="Models\gestion_vuelo\CVuelo.cs" />
@@ -400,6 +399,7 @@
     <Compile Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx.designer.cs">
       <DependentUpon>GestionDeAutomoviles.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\gestion_restaurantes\Fabrica\FabricaVista.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />

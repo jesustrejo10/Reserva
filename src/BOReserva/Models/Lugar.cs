@@ -14,6 +14,7 @@ namespace BOReserva.Models
         private int _zonaHoraria;
         private string _abreviatura;
         private int _idFKLugar;
+        private List<Lugar> _listaCiudades;
         #endregion
 
         #region Constructores
@@ -134,6 +135,19 @@ namespace BOReserva.Models
             set
             {
                 _abreviatura = value;
+            }
+        }
+
+        public List<Lugar> ListaCiudades
+        {
+            get
+            {
+                return _listaCiudades;
+            }
+
+            set
+            {
+                _listaCiudades = value;
             }
         }
 
