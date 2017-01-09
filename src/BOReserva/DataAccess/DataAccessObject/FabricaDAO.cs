@@ -26,5 +26,14 @@ namespace BOReserva.DataAccess.DAO
             return new DAOVuelo();
         }
         #endregion
+
+        public static DAO instanciarDAORol()
+        {
+            return new DAORol();
+        }
+        public static DAORol instanciarDAORolPermiso()
+        {
+            return new DAORol();
+        }
     }
 }

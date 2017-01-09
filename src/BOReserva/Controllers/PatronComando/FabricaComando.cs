@@ -36,5 +36,20 @@ namespace BOReserva.Controllers.PatronComando
             return new M04.M04_COAgregarVuelo();
         }
         #endregion
+
+        public static Command<String> crearM13_AgregarRol(Entidad e)
+        {
+
+            return new M13_COAgregarRol((Rol)e);
+
+        }
+
+        public static Command<String> crearM13_AgregarRolPermiso(Entidad e)
+        {
+
+            return new M13_COAgregarRolPermiso((Rol)e);
+
+        }
+
     }
 }

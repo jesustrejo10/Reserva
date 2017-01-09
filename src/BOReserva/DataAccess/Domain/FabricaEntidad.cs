@@ -1,5 +1,6 @@
 ﻿using BOReserva.Models.gestion_hoteles;
 using BOReserva.Models.gestion_reclamos;
+using BOReserva.Models.gestion_roles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,6 +77,23 @@ namespace BOReserva.DataAccess.Domain
                              idAvion);
         }
         #endregion
+
+        public static Entidad InstanciarRol(CRoles model)
+        {
+            String nombre = model.Nombre_rol;
+
+            return new Rol(nombre);
+        }
+
+        public static Entidad InstanciarRolPermiso(String rol, String permiso)
+        {
+            return new Rol(rol, permiso);
+        }
+
+        public static Entidad InstanciarPermiso(String permiso)
+        {
+            return new Permiso();
+        }
     }
 }
           
