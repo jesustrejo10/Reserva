@@ -181,7 +181,8 @@ namespace BOReserva.Controllers
         public JsonResult asignarpermisos(string json)
         {
 
-            manejadorSQL sql = new manejadorSQL();
+            //manejadorSQL sql = new manejadorSQL();
+            String agrego_si_no = null;
 
             CListaGenerica<CModulo_detallado> listaPermisosAsignar = new CListaGenerica<CModulo_detallado>();
 
@@ -211,14 +212,12 @@ namespace BOReserva.Controllers
                 {
                     Entidad nuevoRol = FabricaEntidad.InstanciarRolPermiso(_permisos[0].ToString(), _permisos[i].ToString());
                     Command<String> comando = FabricaComando.crearM13_AgregarRolPermiso(nuevoRol);
-                    String agrego_si_no = comando.ejecutar();
-                    return (Json(agrego_si_no));
+                    agrego_si_no = comando.ejecutar(); 
                     //sql.insertarPermisosRol(_permisos[0].ToString(), _permisos[i].ToString());
-
-                    }
-                    
+                }
+             }
+                return (Json(agrego_si_no));
             }
-                         }
             catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
@@ -232,10 +231,8 @@ namespace BOReserva.Controllers
                 String error = "Error desconocido, contacte con el administrador.";
                 return Json(error);
             }
-            //envio el resultado de la consulta
-            return (Json(true, JsonRequestBehavior.AllowGet));
-
         }
+
         //Metodo para Eliminar permiso a un Rol
         [HttpPost]
         public JsonResult quitarPermisoRol(string _nombrerol, string _nombrepermiso)
@@ -346,7 +343,7 @@ namespace BOReserva.Controllers
             //coloco el nombre
             try{
                 //Realizo el consulto y Guardo la respuesta de mi metodo sql 
-                //permisos = sql.consultarPermisos(modulo);
+                permisos = sql.consultarPermisos(modulo);
 
             }
             catch (SqlException e)

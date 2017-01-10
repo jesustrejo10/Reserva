@@ -27,6 +27,7 @@ namespace BOReserva.DataAccess.DAO
         }
         #endregion
 
+        #region M13_Roles
         public static DAO instanciarDAORol()
         {
             return new DAORol();
@@ -35,5 +36,6 @@ namespace BOReserva.DataAccess.DAO
         {
             return new DAORol();
         }
+        #endregion
     }
 }
