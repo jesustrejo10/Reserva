@@ -1,3 +1,34 @@
+$('.combo').change(function () {
+    var idCiudad = $('#combo :selected').val();
+    var url = '/gestion_restaurantes/M10_GestionRestaurantes_Ver';
+    var method = 'GET';
+    alert(idCiudad);
+    $.ajax
+          ({
+              url: url,
+              type: method,
+              
+              data: { id: idCiudad },
+              success: function (data, textStatus, jqXHR) {
+
+                  //  $("#contenido").html(data);
+                  $("#contenido").empty();
+                  $("#contenido").append(data);
+              },
+              error: function (jqXHR, textStatus, errorThrown) {
+                  alert(errorThrown);
+              }
+          });
+
+});
+
+
+
+
+
+
+
+
 //EVENTO PARA AGREGAR UN RESTAURANTE
 $("#aceptarRestaurante").click(function (e) {
     console.log("Enviando...");

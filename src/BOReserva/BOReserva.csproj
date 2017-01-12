@@ -1543,7 +1543,7 @@
     <Content Include="Views\gestion_reclamos\M16_ModificarReclamo.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_AgregarHotel.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_VisualizarHoteles.cshtml" />
-    <Content Include="Views\gestion_restaurantes\M10_GestionRestaurant_Lista.cshtml" />
+    <Content Include="Views\gestion_restaurantes\M10_ListaRestaurant.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Visualizar.cshtml" />

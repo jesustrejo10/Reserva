@@ -16,17 +16,56 @@ namespace BOReserva.Controllers
 {
     public class gestion_restaurantesController : Controller
     {
+
+
+        private CRestauranteModelo restaurant;
+
+        public CRestauranteModelo Restaurant
+        {
+            get
+            {
+                return restaurant;
+            }
+
+            set
+            {
+                restaurant = value;
+            }
+        }
+
         // GET: gestion_restaurantes
 
         /// <summary>
         /// Método para el acceso a la interfaz de visualización de restaurantes.
         /// </summary>
         /// <returns>Retorna un objeto para renderizar la vista parcial.</returns>
-        public ActionResult M10_GestionRestaurantes_Ver()
+        public ActionResult M10_GestionRestaurantes_Ver(int id = 0)
         {
-            //   System.Diagnostics.Debug.WriteLine("Valor del id "+id);
-          
             ViewBag.Ciudad = FabricaVista.asignarItemsComboBox(cargarComboBoxLugar(), "Id", "Nombre");
+              
+
+            if (id != 0)
+            {
+                System.Diagnostics.Debug.WriteLine("el id del restaurant "+id);
+                Entidad _lugar = FabricaEntidad.inicializarLugar(id, "");//Aqui se envia la clave foranea de lugar para realizar la busqueda
+                Comando<List<Entidad>> comando = (Comando<List<Entidad>>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, _lugar);
+                List<Entidad> restaurantes = comando.Ejecutar();
+                CRestauranteModelo Restaurant = FabricaEntidad.inicializarRestaurant();
+                List<CRestauranteModelo> lista = FabricaEntidad.inicializarListaRestarant();
+
+                foreach (Entidad item in restaurantes)
+                {
+                    lista.Add((CRestauranteModelo)item);
+                    System.Diagnostics.Debug.WriteLine("el Nombre del restaurant " + ((CRestauranteModelo)item).nombre);
+                }
+
+                Restaurant.listaRestaurantes = lista;
+                System.Diagnostics.Debug.WriteLine("Salida Interna ");
+                return PartialView(Restaurant);
+            }
+
+
+            System.Diagnostics.Debug.WriteLine("Salida Externa ");
             return PartialView();
         }
 
@@ -42,14 +81,14 @@ namespace BOReserva.Controllers
 
 
 
-        [HttpPost]
-        public ActionResult M10_GestionRestaurantes_Ver(int ids)
+        [HttpGet]
+        public JsonResult verRestaurant(int id)
         {
-            ViewBag.Ciudad = FabricaVista.asignarItemsComboBox(cargarComboBoxLugar(), "Id", "Nombre");
-            Entidad _lugar = FabricaEntidad.inicializarLugar(ids, "");//Aqui se envia la clave foranea de lugar para realizar la busqueda
+          //  ViewBag.Ciudad = FabricaVista.asignarItemsComboBox(cargarComboBoxLugar(), "Id", "Nombre");
+            Entidad _lugar = FabricaEntidad.inicializarLugar(id, "");//Aqui se envia la clave foranea de lugar para realizar la busqueda
             Comando<List<Entidad>> comando = (Comando<List<Entidad>>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, _lugar);
             List<Entidad> restaurantes = comando.Ejecutar();
-            CRestauranteModelo rest = FabricaEntidad.inicializarRestaurant();
+            this.Restaurant = FabricaEntidad.inicializarRestaurant();
             List<CRestauranteModelo> lista = FabricaEntidad.inicializarListaRestarant();
 
             foreach (Entidad item in restaurantes)
@@ -57,10 +96,10 @@ namespace BOReserva.Controllers
                 lista.Add((CRestauranteModelo)item);
             }
 
-            rest.listaRestaurantes = lista;
-                   
-           
-            return PartialView("M10_GestionRestaurantes_Ver", rest);
+           this.Restaurant.listaRestaurantes = lista;
+
+
+            return (Json(true, JsonRequestBehavior.AllowGet)); 
         }
         /// <summary>
         /// Método para el acceso a la interfaz de modificación de restaurantes.
