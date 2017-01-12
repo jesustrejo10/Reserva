@@ -28,23 +28,23 @@
                             {
                                 BOReserva.DataAccess.Domain.Hotel c = (BOReserva.DataAccess.Domain.Hotel) item.Value;
                                 <tr id="@item.Key">
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>@c._nombre</td>
+                                    <td>@c._clasificacion</td>
+                                    <td>@c._ciudad._pais._nombre / @c._ciudad._nombre</td>
+                                    <td>@c._direccion</td>
                                     <td>
-                                        <a href="#" title="Visualizar vehículo"> <i class="fa fa-eye clasedeprueba"></i></a>
-                                        <a href="#" title="Modificar vehículo"><i class="fa fa-pencil modificar"></i></a>
-                                        <a href="#" title="Eliminar vehículo"><i class="fa fa-times eliminar"></i></a>
+                                        <a href="#" title="Visualizar hotel"> <i class="fa fa-eye visualizarHotel"></i></a>
+                                        <a href="#" title="Modificar hotel"><i class="fa fa-pencil modificar"></i></a>
+                                        <a href="#" title="Eliminar hotel"><i class="fa fa-times eliminar"></i></a>
                                         @{
-                                if (item.Key == 1)
-                                {
-                                    <a href="#" title="Activar/Desactivar vehículo"><i class="fa fa-toggle-on desactivar"></i></a>
-                                }
-                                if (item.Key == 0)
-                                {
-                                    <a href="#" title="Activar/Desactivar vehículo"><i class="fa fa-toggle-off activar"></i></a>
-                                }
+                                            if (c._disponibilidad )
+                                            {
+                                                <a href="#" title="Activar/Desactivar vehículo"><i class="fa fa-toggle-on desactivar"></i></a>
+                                            }
+                                            if (!c._disponibilidad)
+                                            {
+                                                <a href="#" title="Activar/Desactivar vehículo"><i class="fa fa-toggle-off activar"></i></a>
+                                            }
                                         }
                                     </td>
                                 </tr>
@@ -137,7 +137,7 @@
         //e.preventDefault();
 
 
-        $(".clasedeprueba").on("click", (function () {
+        $(".visualizarHotel").on("click", (function () {
 
             alert("Se esta procesando tu solicitud, por favor espere");
             var identificador = $(this).parent().parent().parent().attr("id");
