@@ -9,13 +9,12 @@ namespace BOReserva.DataAccess.Domain
     {
         #region Atributos
 
-        
-        private String _codigoVuelo { get; set; }
-        private int _idRuta { get; set; }
-        private DateTime _fechaDespegue { get; set; }
-        private String _statusVuelo { get; set; }
-        private DateTime _fechaAterrizaje { get; set; }
-        private int _idAvion { get; set; }
+        private String _codigoVuelo;
+        private int _idRuta;
+        private DateTime _fechaDespegue;
+        private String _statusVuelo;
+        private DateTime _fechaAterrizaje;
+        private int _idAvion;
 
         #endregion
 
@@ -30,6 +29,41 @@ namespace BOReserva.DataAccess.Domain
             set { _id = value; }
         }
 
+        public String CodigoVuelo
+        {
+            get { return _codigoVuelo; }
+            set { _codigoVuelo = value; }
+        }
+
+        public int IdRuta
+        {
+            get { return _idRuta; }
+            set { _idRuta = value; }
+        }
+
+        public DateTime FechaDespegue
+        {
+            get { return _fechaDespegue; }
+            set { _fechaDespegue = value; }
+        }
+
+        public String StatusVuelo
+        {
+            get { return _statusVuelo; }
+            set { _statusVuelo = value; }
+        }
+
+        public int IdAvion
+        {
+            get { return _idAvion; }
+            set { _idAvion = value; }
+        }
+
+        public DateTime FechaAterrizaje
+        {
+            get { return _fechaAterrizaje; }
+            set { _fechaAterrizaje = value; }
+        }
         #endregion
 
         #region Constructores

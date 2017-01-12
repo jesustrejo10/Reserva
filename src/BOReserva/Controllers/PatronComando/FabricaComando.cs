@@ -25,9 +25,14 @@ namespace BOReserva.Controllers.PatronComando
         }
 
         #region M04_Vuelo
-        public static Command<String> crearVuelo(Entidad vuelo)
+        public static Command<String> M04crearVuelo(Entidad vuelo)
         {
             return new M04.M04_COAgregarVuelo();
+        }
+
+        public static Command<List<Entidad>> M04consultarTodos()
+        {
+            return new M04.M04_COConsultarTodosVuelos();
         }
         #endregion
 

@@ -14,8 +14,8 @@ namespace BOReserva.Controllers.PatronComando.M04
             try
             {
                 IDAOVuelo daoVuelo = (IDAOVuelo)FabricaDAO.instanciarDAOVuelo();
-                List<Entidad> respuesta = daoVuelo.ConsultarTodos();
-                return respuesta;
+                List<Entidad> listaVuelos = daoVuelo.ConsultarTodos();
+                return listaVuelos;
             }
             catch (Exception e)
             {
