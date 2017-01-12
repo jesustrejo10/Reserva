@@ -60,7 +60,7 @@ namespace BOReserva.Controllers
             rest.listaRestaurantes = lista;
                    
            
-            return PartialView();
+            return PartialView("M10_GestionRestaurantes_Ver", rest);
         }
         /// <summary>
         /// Método para el acceso a la interfaz de modificación de restaurantes.
