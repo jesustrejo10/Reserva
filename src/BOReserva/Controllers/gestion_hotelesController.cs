@@ -7,14 +7,106 @@ using BOReserva.Models.gestion_hoteles;
 using BOReserva.Servicio.Servicio_Hoteles;
 using System.Diagnostics;
 using System.Net;
+using BOReserva.Servicio;
+using BOReserva.DataAccess.Domain;
+using BOReserva.Controllers.PatronComando;
+using BOReserva.Controllers.PatronComando;
 
 namespace BOReserva.Controllers
 {
+    /// <summary>
+    /// Clase Controladora del modulo 9, Gestion de Hoteles por ciudad
+    /// </summary>
     public class gestion_hotelesController : Controller
     {
         public static String _ciudad;
         public static String _pais;
         public static String sciudad;
+        public static String ciudad;
+
+        /// <summary>
+        /// Método de la vista parcial M09_AgregarHotel
+        /// </summary>
+        /// <returns>Retorna la vista parcial M09_AgregarHotel en conjunto del Modelo de dicha vista</returns>
+        public ActionResult M09_AgregarHotel()
+        {
+            CAgregarHotel model = new CAgregarHotel();
+            return PartialView(model);
+        }
+
+        /// <summary>
+        /// Método que retorna la lista de ciudades
+        /// </summary>
+        /// <param name="pais">Nombre del país del cual se desea conocer las ciudades disponibles</param>
+        /// <returns>Retorna un ActionResult que contiene las ciudades disponibles para el país solicitado</returns>
+        [HttpPost]
+        public ActionResult listaciudades(String pais)
+        {
+            //Aca se debe llamar a un Comando
+            List<String> objcity = new List<String>();
+            _pais = pais;
+            manejadorSQL listaciudades = new manejadorSQL();
+            int fk = listaciudades.MIdpaisesBD(pais);
+            objcity = listaciudades.MListarciudadesBD(fk);
+            ciudad = objcity.First();
+            return Json(objcity);
+        }
+
+        /// <summary>
+        /// Método que guarda en una variable la ciudad seleccionada
+        /// </summary>
+        /// <param name="_ciudad">Nombre de la ciudad a guardar</param>
+        [HttpPost]
+        public void getCity(String _ciudad)
+        {
+            //Aca se debe llamar a un comando
+            ciudad = _ciudad;
+        }
+
+        /// <summary>
+        /// Método que se utiliza para guardar un vehículo ingresado
+        /// </summary>
+        /// <param name="model">Datos que provienen de un formulario de la vista parcial M08_AgregarAutomovil</param>
+        /// <returns>Retorna un JsonResult</returns>
+        [HttpPost]
+        public JsonResult guardarHotel(CAgregarHotel model)
+        {   
+            Entidad ciudadDestino = FabricaEntidad.InstanciarCiudad("nombre de la ciudad");
+            ciudadDestino._id = 29;
+            Entidad nuevoHotel = FabricaEntidad.InstanciarHotel(model, ciudadDestino);
+            //con la fabrica instancie al hotel.
+            Command<String> comando = FabricaComando.crearM09AgregarHotel(nuevoHotel);
+            String agrego_si_no  = comando.ejecutar();
+
+            return (Json(agrego_si_no));
+        }
+
+        public ActionResult M09_VisualizarHoteles()
+        {
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM09VisualizarHoteles();
+            Dictionary<int, Entidad> listaHoteles = comando.ejecutar();
+            return PartialView(listaHoteles);
+        }
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // GET: gestion_hoteles
         public ActionResult M09_GestionHoteles_Crear()
@@ -31,7 +123,7 @@ namespace BOReserva.Controllers
         {
             CManejadorSQL_Hoteles buscarhotel = new CManejadorSQL_Hoteles();
             CHotel hot = buscarhotel.MMostrarhotelBD(id); //BUSCA EL HOTEL A MOSTRAR
-          
+
             //CHotel hotel = new CHotel();
             CGestionHoteles_EditarHotel hotel = new CGestionHoteles_EditarHotel();
             hotel._id = hot._id;
@@ -49,14 +141,15 @@ namespace BOReserva.Controllers
         }
 
         [HttpPost]
-        public JsonResult crearhotel(CHotel crear) {
+        public JsonResult crearhotel(CHotel crear)
+        {
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public JsonResult editarhotel(CGestionHoteles_EditarHotel model)
         {
-            Debug.WriteLine("El id del hotel es "+model._id);
+            Debug.WriteLine("El id del hotel es " + model._id);
             int id = model._id;
             String nombre = model._nombre;
             Debug.WriteLine("El nombre del hotel es " + model._nombre);
@@ -123,7 +216,7 @@ namespace BOReserva.Controllers
                     _pais.Add(new SelectListItem
                     {
                         Text = paises[i].ToString(),
-                        Value =paises[i].ToString()
+                        Value = paises[i].ToString()
 
                     });
                     i++;
@@ -135,14 +228,14 @@ namespace BOReserva.Controllers
             }
             return _pais;
         }
-
+        /*
         public ActionResult M09_GestionHoteles_Visualizar()
-        { 
+        {
             CManejadorSQL_Hoteles buscarhoteles = new CManejadorSQL_Hoteles();
             List<CHotel> listahoteles = buscarhoteles.MListarHotelesBD();  //AQUI SE BUSCAN TODO LOS HOTELES QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA       
             return PartialView(listahoteles);
         }
-
+        */
         public List<SelectListItem> ciudadalista(string pais)
         {
             Debug.WriteLine("CIUDAD A LISTA");
@@ -177,17 +270,18 @@ namespace BOReserva.Controllers
 
             return _ciudades;
         }
-
+        /*METODO DE LAS GEMELAS*/
+        /*
         [HttpPost]
         public JsonResult guardarHotel(CHotel model)
         {
-            
+
             Debug.WriteLine(model._direccion);
             Debug.WriteLine(model._email);
             Debug.WriteLine(model._estrellas.ToString());
             Debug.WriteLine(model._canthabitaciones.ToString());
             Debug.WriteLine(model._paginaweb);
-            Debug.WriteLine("Pais "+model._pais);
+            Debug.WriteLine("Pais " + model._pais);
             Debug.WriteLine(model._nombre);
             Debug.WriteLine(model._ciudad);
             model._ciudad = _ciudad;
@@ -196,7 +290,7 @@ namespace BOReserva.Controllers
 
             //Chequeo si los campos obligatorios estan vacios como medida de seguridad
             if ((model._canthabitaciones == 0) || (model._direccion == null) || (model._nombre == null)
-                || (model._email == null) || (model._estrellas == 0)  || (model._paginaweb == null) || (model._pais == null)) 
+                || (model._email == null) || (model._estrellas == 0) || (model._paginaweb == null) || (model._pais == null))
             {
                 //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
@@ -222,7 +316,7 @@ namespace BOReserva.Controllers
                 return Json(error);
             }
         }
-
+        */
         /// <summary>
         /// Metodo que carga la vista para modificar el Hotel 
         /// </summary>
@@ -271,52 +365,10 @@ namespace BOReserva.Controllers
         /// <param name="_ciudad">Nombre de la ciudad a guardar</param>
         [HttpPost]
         public void getciudad(String ciudad)
-         {
-            _ciudad=ciudad;
+        {
+            _ciudad = ciudad;
             Debug.WriteLine("DEBUG GET CIUDAD" + _ciudad);
         }
 
-        /// <summary>
-        /// Método que retorna la lista de ciudades
-        /// </summary>
-        /// <param name="pais">Nombre del país del cual se desea conocer las ciudades disponibles</param>
-        /// <returns>Retorna un ActionResult que contiene las ciudades disponibles para el país solicitado</returns>
-        [HttpPost]
-        public ActionResult listaciudades(String pais)
-        {
-            _pais = pais;
-            Debug.WriteLine(_pais);
-
-            List<String> objcity = new List<string>();
-
-           // List<SelectListItem> ciudadesItems;
-            CManejadorSQL_Hoteles listaciudades = new CManejadorSQL_Hoteles();
-
-            string[] ciudadesFiltradas = listaciudades.MListarciudadesBD(pais);
-
-            if (ciudadesFiltradas == null)
-                Debug.WriteLine("no trajo la ciudad");
-
-            Debug.WriteLine(ciudadesFiltradas.Length.ToString());
-
-            for (int i = 0; i < ciudadesFiltradas.Length; i++) {
-                if(ciudadesFiltradas[i]!=null)
-                    objcity.Add(ciudadesFiltradas[i]);
-        }
-
-            // objcity = new List<String>(ciudadesFiltradas);
-
-            _ciudad = objcity.First();
-
-            gestion_hotelesController._pais = pais;
-
-            gestion_hotelesController._ciudad = objcity.First();
-
-                
-
-           Debug.WriteLine("CIUDAD SELECCIONADA" + _ciudad);
-
-           return Json(objcity);
-        }
     }
 }

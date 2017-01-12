@@ -1,0 +1,308 @@
+﻿@model List<FOReserva.Models.Reclamos.CVisualizarReclamo>
+
+<!-- FLIP BOX -->
+<div class="box-light box-icon box-icon-center box-icon-round box-icon-large text-center nomargin">
+    <div class="front">
+        <div class="box1 noradius">
+            <div class="box-icon-title">
+                <i class="fa fa-ship"></i>
+                <h2>Mis Reclamos</h2>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- /FLIP BOX -->
+@{
+    if (Model == null)
+    {
+        <center>
+            <h1><i class="fa fa-exclamation-circle orange" aria-hidden="true"></i> Lo sentimos, ha habido un problema con la conexión!</h1>
+            <h2>Revise su conexión e intente de nuevo</h2>
+
+        </center>
+
+    }
+    else
+        if (Model.Count() == 0)
+        {
+            <div class="row">
+                <center>
+                    <h4><i class="fa fa-exclamation-circle orange" aria-hidden="true"></i> No posee reclamos</h4>
+
+                </center>
+
+            </div>
+        }
+        else
+        {
+
+            <div class="box-light">
+                <!-- .box-light OR .box-dark -->
+
+                <div class="box-inner">
+
+                    <h4>Mis Reclamos</h4>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover" id="sample_1">
+                            <thead>
+                                <tr>
+                                    <th>Fecha de Reclamo</th>
+                                    <th>Asunto</th>
+                                     <th>Status</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr id="@item._idReclamo">
+                                        <td class="text-center">@item._fechaReclamo</td>
+                                        <td class="titulo_table text-center" id="pasajeros_table">@item._tituloReclamo</td>
+                                        <td class="text-center">
+                                            @if (@item._estadoReclamo == "iniciado")
+                                            {
+                                                <span class="label label-success ">Iniciado</span>
+                                            }
+                                            @if (@item._estadoReclamo == "procesado")
+                                            {
+                                                <span class="label label-primary ">Procesado</span>
+                                            }
+                                            @if (@item._estadoReclamo == "culminado")
+                                            {
+                                                <span class="label label-warning ">Culminado</span>
+                                            }
+                                            @if (@item._estadoReclamo == "cerrado")
+                                            {
+                                                <span class="label label-danger ">Cerrado</span>
+                                            }
+                                        </td>
+                                        <td>
+                                         @*
+                                               @if (@item._status == "activo")
+                                            {
+                                                <a href="#ModalModificar" data-id="@item._id_reserva,@item._crucero,@item._cantidadPasajeros,@item._origen,@item._destino,@item._fecha_inicio,@item._fecha_fin,@item._status" data-toggle="modal" class="open-AddBookDialog btn btn-info btn-xs"><i class="fa fa-edit white"></i> Modificar </a>
+                                                <a id="eliminar" href="#ModalEliminar" name="eliminar" data-id="@item._id_reserva" data-toggle="modal" class="open-AddBookDialog btn btn-danger btn-xs"><i class="fa fa-times white"></i> Eliminar </a>
+                                            }
+                                            @if (@item._status == "inactivo")
+                                            {
+                                                <a id="eliminar" href="#ModalEliminar" name="eliminar" data-id="@item._id_reserva" data-toggle="modal" class="open-AddBookDialog btn btn-danger btn-xs"><i class="fa fa-times white"></i> Eliminar </a>
+                                            }
+                                             *@
+                                        </td>
+
+                                    </tr>}
+
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+
+        }
+}
+<div id="ModalEliminar" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Eliminar Reserva</h4>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro que desea eliminar esta reserva?</p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="aceptar_eliminar" value="0" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="ModalErrorEliminar" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header bg-danger modal-header-danger">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Eliminar Reserva</h4>
+            </div>
+            <div class="modal-body">
+                <p>Error al eliminar la reserva intente mas tarde</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="" value="0" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="ModalModificar" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modificar Reserva</h4>
+            </div>
+            <div class="modal-body">
+                <!-- NOMBRE  Y  VALIDACIONES-->
+                <div class="form-group">
+                    <label>Crucero </label>
+                    <input type="text" name="crucero" id="crucero" value="" class="form-control" data-format="" data-lang="en" data-rtl="false" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Origen</label>
+                    <input type="text" name="origen" id="origen" value="" class="form-control" data-format="" data-lang="en" data-rtl="false" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Destino </label>
+                    <input type="text" name="destino" id="destino" value="" class="form-control" data-format="" data-lang="en" data-rtl="false" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Fecha inicio </label>
+                    <input type="text" name="inicio" id="inicio" value="" class="form-control" data-format="" data-lang="en" data-rtl="false" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Fecha fin </label>
+                    <input type="text" name="fin" id="fin" value="" class="form-control" data-format="" data-lang="en" data-rtl="false" readonly>
+                </div>
+
+                <!-- CANTIDAD DE PERSONAS  Y  VALIDACIONES-->
+                <div class="form-group">
+                    <label>Numero de Pasajeros </label>
+                    <input type="number" name="pasajeros_num" id="pasajeros_num" value="" min="1" class="form-control" data-format="" data-lang="en" data-rtl="false" placeholder="Ingrese el numero de pasajeros">
+                </div>
+                <div id="pasajero_null" style="display: none;" class="has-error error">
+                    <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe ingresar la cantidad de pasajeros</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Estatus</label>
+                    <select name="status" id="status" class="form-control pointer">
+                        <option value="activo">Activa</option>
+                        <option value="inactivo">Inactiva</option>
+
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="aceptar_modificar" value="0" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+
+    $(document).on("click", ".open-AddBookDialog", function () {
+        var myBookId = $(this).data('id');
+        $(".modal-footer #aceptar_eliminar").val(myBookId);
+        var cruce = $(this).data('crucero');
+        $(".error").hide();
+        console.log(myBookId);
+        var valores = myBookId.split(",");
+
+        $('.modal-footer #aceptar_modificar').val(valores[0]);
+        $('#crucero').val(valores[1]);
+        $('#origen').val(valores[3]);
+        $('#destino').val(valores[4]);
+        $('#inicio').val(valores[5]);
+        $('#fin').val(valores[6]);
+        $('#pasajeros_num').val(valores[2]);
+        $('#status').val(valores[7]);
+
+    });
+    $(document).on('click', '#aceptar_eliminar', function () {
+        var id_fila = $(this).val();
+        console.log(id_fila);
+        $.ajax({
+            url: "/gestion_reserva_crucero/eliminarReservaCrucero/",
+            type: 'POST',
+            dataType: "json",
+            data: { id: id_fila }
+
+        }).done(function (data) {
+            $('#' + id_fila).remove();
+        })
+	    .fail(function (data) {
+	        $('#ModalErrorEliminar').modal('show');
+	        console.log("error");
+	    })
+	    .always(function (data) {
+	        console.log("complete");
+	    });
+    });
+
+    $("#aceptar_modificar").on("click", function () {
+        //clear errors
+        $(".error").hide();
+        $("#pasajero_null").removeClass("has-error");
+        var v1 = document.getElementById("status");
+        var valor1 = v1.options[v1.selectedIndex].value;
+        //find errors
+        var pasajeros = $("#pasajeros_num").val();
+
+        var win = true;
+        if (pasajeros == "") {
+            $("#pasajeros_num").addClass("has-error");
+            $("#pasajero_null").fadeIn();
+            win = false;
+        }
+
+        if (win) {
+            var id_reserva = $(this).val();
+            var pasajero = $("#pasajeros_num").val();
+            var status = valor1;
+            console.log(status);
+            console.log(pasajero);
+            console.log(id_reserva);
+            $.ajax({
+                url: "/gestion_reserva_crucero/modificarReservaCrucero/",
+                type: 'POST',
+                data: {
+                    id_reserva: id_reserva,
+                    cant_pasajero: pasajero,
+                    estatus: status
+
+                },
+
+            }).done(function () {
+                javascript: location.reload();
+            })
+            .fail(function () {
+                console.log("error");
+            })
+            .always(function () {
+                console.log("complete");
+            });
+        }
+        else
+            return false;
+    });
+
+
+</script>
+
+<script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/jquery.dataTables.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Contentassets/plugins/datatables/js/dataTables.tableTools.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Contentassets/plugins/datatables/js/dataTables.colReorder.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Contentassets/plugins/datatables/js/dataTables.scroller.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Contentassets/plugins/datatables/dataTables.bootstrap.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Contentassets/plugins/select2/js/select2.full.min.js")"></script>
+
+
+@{
+    ViewBag.Title = "M16_VisualizarReclamo";
+}
+
+<h2>M16_VisualizarReclamo</h2>
