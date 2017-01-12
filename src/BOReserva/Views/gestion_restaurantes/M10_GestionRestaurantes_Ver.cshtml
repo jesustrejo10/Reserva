@@ -30,6 +30,7 @@ $(document).ready(function() {
         $('#combo').change(function ()
         {
             var idCiudad = $('#combo :selected').val();
+            var posicion = $("#combo").get(0).selectedIndex;
             var url = '/gestion_restaurantes/M10_GestionRestaurantes_Ver';
             var method = 'GET';
            // alert(idCiudad);
@@ -46,6 +47,7 @@ $(document).ready(function() {
                         //  $("#tabla").html(data);
                           $("#contenido").empty();
                           $("#contenido").append(data);
+                          $("#combo").get(0).selectedIndex = posicion;
                       },
                       error: function (jqXHR, textStatus, errorThrown)
                       {
