@@ -54,6 +54,12 @@ namespace BOReserva.Controllers
             return PartialView(listaVuelos);
         }
 
+        [HttpGet]
+        public PartialViewResult M04_GestionVuelo_CrearW1()
+        {
+            CCrear_Vuelo model = new CCrear_Vuelo();
+            return PartialView(model);
+        }
         //VISTA-CREAR: dlstatusvuelo() sera el metodo para llenar el DropdownList del status de vuelo
         public string[] dlstatusvuelo()
         {
