@@ -207,7 +207,7 @@
     <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
     <Compile Include="Controllers\PatronComando\M04\M04_COAgregarVuelo.cs" />
     <Compile Include="Controllers\PatronComando\M04\M04_COConsultarTodosVuelos.cs" />
-    <Compile Include="Controllers\PatronComando\M09_COAgregarHotel.cs" />
+    <Compile Include="Controllers\PatronComando\M09\M09_COAgregarHotel.cs" />
     <Compile Include="Controllers\gestion_automovilesController.cs" />
     <Compile Include="Controllers\gestion_avionesController.cs">
       <SubType>Code</SubType>
@@ -227,7 +227,7 @@
     <Compile Include="Controllers\gestion_vueloController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\List.cs" />
-    <Compile Include="Controllers\PatronComando\M09_COVisualizarHoteles.cs" />
+    <Compile Include="Controllers\PatronComando\M09\M09_COVisualizarHoteles.cs" />
     <Compile Include="Controllers\PatronComando\M13_COAgregarRol.cs" />
     <Compile Include="Controllers\PatronComando\M13_COAgregarRolPermiso.cs" />
     <Compile Include="Controllers\PatronComando\M16_COAgregarReclamo.cs" />
