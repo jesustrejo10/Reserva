@@ -72,9 +72,10 @@ namespace BOReserva.Controllers
         public JsonResult guardarHotel(CAgregarHotel model)
         {   
             Entidad ciudadDestino = FabricaEntidad.InstanciarCiudad("nombre de la ciudad");
+            ciudadDestino._id = 29;
             Entidad nuevoHotel = FabricaEntidad.InstanciarHotel(model, ciudadDestino);
             //con la fabrica instancie al hotel.
-            Command comando = FabricaComando.crearM09AgregarHotel(nuevoHotel);
+            Command<String> comando = FabricaComando.crearM09AgregarHotel(nuevoHotel);
             String agrego_si_no  = comando.ejecutar();
 
             return (Json(agrego_si_no));
@@ -82,8 +83,8 @@ namespace BOReserva.Controllers
 
         public ActionResult M09_VisualizarHoteles()
         {
-            Command comando = FabricaComando.crearM09VisualizarHoteles();
-            Dictionary<int, Entidad> listaHoteles = comando.ejecutarComando();
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM09VisualizarHoteles();
+            Dictionary<int, Entidad> listaHoteles = comando.ejecutar();
             return PartialView(listaHoteles);
         }
             

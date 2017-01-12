@@ -11,7 +11,7 @@ namespace BOReserva.Controllers.PatronComando
     /// Comando destinado a Realizar las respectivas operaciones necesarias
     /// para a;adir un hotel a la BD
     /// </summary>
-    public class M09_COAgregarHotel : Command
+    public class M09_COAgregarHotel : Command<String>
     {
         Hotel _hotel;
 
@@ -24,9 +24,6 @@ namespace BOReserva.Controllers.PatronComando
             int test = daoHotel.Agregar(_hotel);
             return test.ToString();
         }
-        public override Dictionary<int, Entidad> ejecutarComando()
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

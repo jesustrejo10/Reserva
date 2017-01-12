@@ -39,27 +39,27 @@ namespace BOReserva.DataAccess.DAO
                 Debug.WriteLine("Ocurrio un SqlException");
                 Debug.WriteLine(ex.ToString());
                 conexion.Close();
-                return 0;
+                return 2;
             }
             catch (NullReferenceException ex) {
                 Debug.WriteLine("Ocurrio una NullReferenceException");
                 Debug.WriteLine(ex.ToString());
                 conexion.Close();
-                return 0;
+                return 3;
             }
             catch (ArgumentNullException ex)
             {
                 Debug.WriteLine("Ocurrio una ArgumentNullException");
                 Debug.WriteLine(ex.ToString());
                 conexion.Close();
-                return 0;
+                return 4;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("Ocurrio una Exception");
                 Debug.WriteLine(ex.ToString());
                 conexion.Close();
-                return 0;
+                return 5;
             }
         }
 
