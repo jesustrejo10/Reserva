@@ -44,7 +44,7 @@ $(document).ready(function() {
                       success: function (data, textStatus, jqXHR)
                       {
                        
-                        //  $("#tabla").html(data);
+                          $("#tabla").html(data);
                           $("#contenido").empty();
                           $("#contenido").append(data);
                           $("#combo").get(0).selectedIndex = posicion;
