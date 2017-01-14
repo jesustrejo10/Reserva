@@ -106,10 +106,10 @@ namespace BOReserva.Controllers
         /// </summary>
         /// <returns>Retorna un objecto tipo JsonResult que indica el éxito o fracaso de la operación.</returns>
         [HttpPost]
-        public JsonResult guardarRestaurante(String Nombre,String Direccion,String Descripcion, String Telefono,int idLugar,String HoraIni,String HoraFin)
+        public JsonResult guardarRestaurante(String Nombre,String Direccion,String Telefono, String Descripcion, int idLugar,String HoraIni,String HoraFin)
         {
-            System.Diagnostics.Debug.WriteLine("Hora del restaurant " + HoraIni);
-         
+          
+
             //Chequeo de campos obligatorios para el formulario
             //if ((model.nombre == null) || (model.direccion == null) 
             //    || (model.horarioApertura == null) || (model.horarioCierre == null) || (model.idLugar == -1))
@@ -118,18 +118,11 @@ namespace BOReserva.Controllers
             //    string error = "Error, campo obligatorio vacío";
             //    return Json(error);
             //}
-            manejadorSQL sql = new manejadorSQL();
-            var salida = new CRestauranteModelo
-            {
-                //nombre = model.nombre,
-                //direccion = model.direccion,
-                //descripcion = model.descripcion,
-                //horarioApertura = model.horarioApertura,
-                //horarioCierre = model.horarioCierre,
-                //idLugar = model.idLugar
-            };
+            Entidad _restaurant = FabricaEntidad.inicializarRestaurant(Nombre, Direccion, Descripcion,Telefono, HoraIni, HoraFin, idLugar);
+            Comando<Boolean> comando = (Comando<Boolean>)LogicaReserva.Fabrica.FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CREAR, _restaurant);
+                    
          
-            if (true)
+            if (comando.Ejecutar())
             {
                 return (Json(true, JsonRequestBehavior.AllowGet));
             }

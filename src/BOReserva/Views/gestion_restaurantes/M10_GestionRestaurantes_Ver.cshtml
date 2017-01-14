@@ -45,8 +45,8 @@ $(document).ready(function() {
                       {
                        
                           $("#tabla").html(data);
-                          $("#contenido").empty();
-                          $("#contenido").append(data);
+                          $("#tabla").empty();
+                          $("#tabla").append(data);
                           $("#combo").get(0).selectedIndex = posicion;
                       },
                       error: function (jqXHR, textStatus, errorThrown)
@@ -74,11 +74,11 @@ $(document).ready(function() {
 
                     <div class="col-xs-6">
                         <h2 class="box-title">Lista de Restaurantes </h2>
-                        @Html.DropDownList("combo", ViewBag.Ciudad as SelectList, "Ciudades", new { @class = "form-control" })
                     </div>
 
 
                     <div class="col-xs-3" style="margin-left:262px">
+                        @Html.DropDownList("combo", ViewBag.Ciudad as SelectList, "Ciudades", new { @class = "form-control" })
                         &nbsp;
                         &nbsp;
 

@@ -152,10 +152,7 @@ namespace BOReserva.Datos
                         }
                         else
                         {
-                            //throw new ParametroInvalidoException(
-                            //    RecursoGeneralDAO.Codigo_Parametro_Errado,
-                            //    RecursoGeneralDAO.Mensaje_Parametro_Errado,
-                            //    new ParametroInvalidoException());
+                       
                         }
                     }
                     return null; // Esto ocurre si el procedimiento a ejecutar es para insertar, actualizar o eliminar
@@ -166,21 +163,16 @@ namespace BOReserva.Datos
             catch (SqlException ex)
             {
                 throw;
-                //throw new ExceptionTGConBD(RecursoGeneralDAO.Codigo,
-                //    RecursoGeneralDAO.Mensaje, ex);
+               
             }
             //catch (ParametroInvalidoException ex)
             //{
-            //    throw new ParametroInvalidoException(
-            //                    RecursoGeneralDAO.Codigo_Parametro_Errado,
-            //                    RecursoGeneralDAO.Mensaje_Parametro_Errado,
-            //                    ex);
+            //  
             //}
             catch (Exception ex)
             {
                 throw;
-                //throw new ExceptionTGConBD(RecursoGeneralDAO.Codigo,
-                //    RecursoGeneralDAO.Mensaje, ex);
+       
             }
             finally
             {
@@ -228,21 +220,16 @@ namespace BOReserva.Datos
             }
             catch (SqlException ex)
             {
-                throw; //new ExceptionTGConBD(RecursoGeneralDAO.Codigo,
-                //    RecursoGeneralDAO.Mensaje, ex);
+                throw;
             }
             //catch (ParametroInvalidoException ex)
             //{
-            //    throw new ParametroInvalidoException(
-            //                    RecursoGeneralDAO.Codigo_Parametro_Errado,
-            //                    RecursoGeneralDAO.Mensaje_Parametro_Errado,
-            //                    ex);
+            //    
             //}
             catch (Exception ex)
             {
                 throw;
-                //throw new ExceptionTGConBD(RecursoGeneralDAO.Codigo,
-                //    RecursoGeneralDAO.Mensaje, ex);
+          
             }
             finally
             {
@@ -283,19 +270,13 @@ namespace BOReserva.Datos
                         }
                         else
                         {
-                            //throw new ParametroInvalidoException(
-                            //    RecursoGeneralDAO.Codigo_Parametro_Errado,
-                            //    RecursoGeneralDAO.Mensaje_Parametro_Errado,
-                            //    new ParametroInvalidoException());
+                             
                         }
                     }
                 }
                 else
                 {
-                    //throw new ParametroInvalidoException(
-                    //             RecursoGeneralDAO.Codigo_Parametro_Errado,
-                    //             RecursoGeneralDAO.Mensaje_Parametro_Errado,
-                    //             new ParametroInvalidoException());
+                           
                 }
 
             }
