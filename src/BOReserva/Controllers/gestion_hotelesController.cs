@@ -31,6 +31,9 @@ namespace BOReserva.Controllers
         public ActionResult M09_AgregarHotel()
         {
             CAgregarHotel model = new CAgregarHotel();
+            Command<Dictionary<int,Entidad>> comando = FabricaComando.crearM09ObtenerPaises();
+            model._paises = comando.ejecutar();
+
             //Aca puedo devolver
             return PartialView(model);
         }

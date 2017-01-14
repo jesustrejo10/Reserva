@@ -14,6 +14,7 @@ namespace BOReserva.DataAccess.Domain
     /// </summary>
     public class FabricaEntidad
     {
+        #region M09_Gestion_Hoteles_Por_Ciudad
         public static Entidad InstanciarHotel(String nombre, String direccion, int fkCiudad, int clasificacion, String webPage, String email, int capacidad)
         {
 
@@ -38,12 +39,22 @@ namespace BOReserva.DataAccess.Domain
         {
             return new Pais();
         }
+        public static Entidad InstanciarPais(int id, String nombre)
+        {
+            return new Pais(id, nombre);
+        }
 
         public static Entidad InstanciarCiudad(String ciudad)
         {
             return new Ciudad();
         }
 
+        public static Entidad InstanciarCiudad(int id, String nombre, int fkPais)
+        {
+            return new Ciudad(id,nombre,fkPais);
+        }
+
+        #endregion 
         public static Entidad InstanciarReclamo(String tituloReclamo, String detalleReclamo, String fechaReclamo, String estadoReclamo)
         {
             return new Reclamo();

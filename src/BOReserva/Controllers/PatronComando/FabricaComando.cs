@@ -1,4 +1,5 @@
-﻿using BOReserva.DataAccess.Domain;
+﻿using BOReserva.Controllers.PatronComando;
+using BOReserva.DataAccess.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace BOReserva.Controllers.PatronComando
     /// </summary>
     public class FabricaComando
     {
+        #region M09_Gestion_Hoteles_Por_Ciudad
+
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
         /// M09_COAgregarHotel
@@ -23,17 +26,35 @@ namespace BOReserva.Controllers.PatronComando
             return new M09_COAgregarHotel((Hotel)e);
 
         }
-
+       
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
         /// M09_COVisualizarHoteles
-        /// <returns>Retorna la instancia del comando M09_COVisualizarHoteles.</returns>
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M09_COVisualizarHoteles.
+        /// </returns>
         public static Command<Dictionary<int, Entidad>> crearM09VisualizarHoteles()
         {
 
             return new M09_COVisualizarHoteles();
 
         }
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M09_COObtenerPaises
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M09_COObtenerPaises.
+        /// </returns>
+        public static Command<Dictionary<int, Entidad>> crearM09ObtenerPaises()
+        {
+            return new M09_COObtenerPaises();
+        }
+
+
+        #endregion
 
         public static Command<String> crearM16_AgregarReclamo(Entidad e) 
         {
