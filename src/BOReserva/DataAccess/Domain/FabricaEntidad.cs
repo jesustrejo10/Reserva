@@ -79,6 +79,12 @@ namespace BOReserva.DataAccess.Domain
         }
         #endregion
 
+        #region M05_Boleto_y_checkin
+
+
+
+        #endregion
+
         public static Entidad InstanciarRol(CRoles model)
         {
             String nombre = model.Nombre_rol;
