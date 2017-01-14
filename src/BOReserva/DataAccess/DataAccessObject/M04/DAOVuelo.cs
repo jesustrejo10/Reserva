@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.DataAccess.DAO
+namespace BOReserva.DataAccess.DataAccessObject
 {
     public class DAOVuelo : DAO, IDAOVuelo
     {
