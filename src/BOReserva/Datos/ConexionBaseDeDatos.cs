@@ -1,6 +1,7 @@
 ﻿using BOReserva.Datos.Fabrica;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -23,17 +24,17 @@ namespace BOReserva.Datos
         /// <summary>
         /// Metodo para conectarse a la Base de Datos
         /// y se setea la variable conexion 
-        /// el string de coneccion se obtiene por el archivo de recurso 
-        /// RecursosBaseDeDatos.resx, en el mismo se encuentra el String
-        /// de conexion con la Bd de Remota
+        /// el string de coneccion se obtiene por el archivo de 
+        /// web.config, si es local debe cambierse en ese archivo 
+        /// el string. para este caso ConfigurationManager.ConnectionStrings["StringLocal"].ConnectionString
+        /// solo se cambia StringLocal si se usa ese, de lo contrario se coloca StringRemoto
         /// </summary>
         /// <returns>SqlConeection</returns>
         public SqlConnection conectarBD()
         {
             try
             {
-                this.StringDeConexion = RecursosBaseDeDatos.StringConexionLocal;
-
+                this.StringDeConexion = ConfigurationManager.ConnectionStrings["StringLocal"].ConnectionString;
                 this._conexion = FabricaDatosSql.asignarConexionSql(this.StringDeConexion);
             }
 

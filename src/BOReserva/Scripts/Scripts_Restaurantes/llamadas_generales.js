@@ -1,36 +1,3 @@
-       $('#combo').change(function ()
-        {
-            var idCiudad = $('#combo :selected').val();
-            var url = '/gestion_restaurantes/M10_GestionRestaurantes_Ver';
-            var method = 'GET';
-           // alert(idCiudad);
-            $.ajax
-                  ({
-                      url: url,
-                      type: method,
-                      cache: false,
-                      async: true,
-                      data: { id: idCiudad },
-                      success: function (data, textStatus, jqXHR)
-                      {
-                       
-                          $("#tabla").html(data);
-                          $("#contenido").empty();
-                          $("#contenido").append(data);
-                      },
-                      error: function (jqXHR, textStatus, errorThrown)
-                      {
-                          alert(errorThrown);
-                      }
-                  });
-
-        });
-    
-
-
-
-
-
 
 
 //EVENTO PARA AGREGAR UN RESTAURANTE
@@ -85,6 +52,7 @@ $("#aceptarRestaurante").click(function (e) {
 
 $(".modificar").click(function () {
     var identificador = $(this).parent().parent().parent().attr("id");
+    alert(identificador);
     jQuery.ajax({
         type: "GET",
         url: "/gestion_restaurantes/M10_GestionRestaurantes_Modificar",
