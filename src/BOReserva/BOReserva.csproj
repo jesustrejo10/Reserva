@@ -231,6 +231,7 @@
     <Compile Include="Controllers\PatronComando\M13_COAgregarRol.cs" />
     <Compile Include="Controllers\PatronComando\M13_COAgregarRolPermiso.cs" />
     <Compile Include="Controllers\PatronComando\M16_COAgregarReclamo.cs" />
+    <Compile Include="DataAccess\DataAccessObject\DAOHotel.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAORol.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReclamo.cs" />
@@ -238,7 +239,6 @@
     <Compile Include="DataAccess\Domain\Permiso.cs" />
     <Compile Include="DataAccess\Domain\Reclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAO.cs" />
-    <Compile Include="DataAccess\DataAccessObject\DAOHotel.cs" />
     <Compile Include="DataAccess\DataAccessObject\M04\DAOVuelo.cs" />
     <Compile Include="DataAccess\DataAccessObject\FabricaDAO.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAO.cs" />
@@ -273,7 +273,6 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\gestion_automoviles\CAgregarAutomovil.cs" />
-    <Compile Include="DataAccess\DataAccessObject\DAOAutomovil.cs" />
     <Compile Include="Models\gestion_automoviles\CModificarAutomovil.cs" />
     <Compile Include="Models\gestion_automoviles\CVisualizarAutomovil.cs" />
     <Compile Include="DataAccess\Domain\Automovil.cs" />
