@@ -44,29 +44,44 @@ namespace BOReserva.Controllers.PatronComando
 
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
-        /// M09_COVisualizarHoteles
+        /// M09_COConsultarHoteles
         /// </summary>
         /// <returns>
-        /// Retorna la instancia del comando M09_COVisualizarHoteles.
+        /// Retorna la instancia del comando M09_COConsultarHoteles.
         /// </returns>
-        public static M09_COConsultarHotel crearM09ConsultarHotel()
+        public static Command<Entidad> crearM09ConsultarHotel(int id)
         {
 
-            return new M09_COConsultarHotel();
+            return new M09_COConsultarHotel(id);
 
         }
 
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
-        /// M09_COVisualizarHoteles
+        /// M09_COModificarHoteles
         /// </summary>
         /// <returns>
-        /// Retorna la instancia del comando M09_COVisualizarHoteles.
+        /// Retorna la instancia del comando M09_COModificarHoteles.
         /// </returns>
         public static Command<String> crearM09ModificarHotel(Entidad hotel, int idmodificar)
         {
 
             return new M09_COModificarHotel(hotel, idmodificar);
+
+        }
+
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M09_COEliminarHoteles
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M09_COEliminarHoteles.
+        /// </returns>
+        public static Command<String> crearM09EliminarHotel(Entidad hotel, int ideliminar)
+        {
+
+            return new M09_COEliminarHotel(hotel, ideliminar);
 
         }
 

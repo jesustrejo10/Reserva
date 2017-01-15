@@ -178,13 +178,13 @@
             var identificador = $(this).parent().parent().parent().attr("id");
             jQuery.ajax({
                 type: "POST",
-                url: "/gestion_automoviles/deleteVehicle",
-                data: { matricula: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+                url: "/gestion_hoteles/deleteHotel",
+                data: { id: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
             }).done(function (data) {
                 if (data === "1") {
 
                     //$("#sdssss").append(data);
-                    var url1 = '/gestion_automoviles/M08_VisualizarAutomoviles';
+                    var url1 = '/gestion_hoteles/M09_VisualizarHoteles';
                     var method = 'GET';
                     var data1 = '';
 
@@ -197,14 +197,14 @@
 
                                 $("#contenido").empty();
                                 $("#contenido").append(data);
-                                alert("Se elimino exitosamente el vehiculo");
+                                alert("Se elimino exitosamente el hotel");
                             },
                             error: function (jqXHR, textStatus, errorThrown) {
                                 alert(errorThrown);
                             }
                         });
-                } else if (data.includes("Reserva_Automovil")) {
-                    alert("No se puede eliminar este vehiculo porque tiene una reserva");
+                } else if (data.includes("Reserva_Habitacion")) {
+                    alert("No se puede eliminar este hotel porque tiene una reservacion");
                 } else {
                     alert(data);
                 }

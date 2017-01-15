@@ -8,9 +8,14 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando.M09
 {
-    public class M09_COConsultarHotel
+    public class M09_COConsultarHotel: Command<Entidad>
     {
-        Hotel _hotel;
+        int valor;
+
+        public M09_COConsultarHotel(int value){
+            this.valor = value;
+        }
+
 
         ///// <summary>
         ///// Sobre escritura del metodo ejecutar de la clase Comando.
@@ -19,7 +24,7 @@ namespace BOReserva.Controllers.PatronComando.M09
         ///// <returns>
         ///// Retorna una Entidad
         ///// </returns>
-        public Entidad ejecutar(int valor)
+        public override Entidad ejecutar()
         {
             IDAO daoHotel = FabricaDAO.instanciarDaoHotel();
             Entidad hotel = daoHotel.Consultar(valor);

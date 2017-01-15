@@ -105,8 +105,8 @@ namespace BOReserva.Controllers
         /// <returns>Retorna la vista parcial M09_VisualizarHoteles en conjunto del Modelo de dicha vista</returns>
         public ActionResult M09_DetalleHotel(int id)
         {
-            BOReserva.Controllers.PatronComando.M09.M09_COConsultarHotel comando = FabricaComando.crearM09ConsultarHotel();
-            Entidad hotel = comando.ejecutar(id);
+            Command<Entidad> comando = FabricaComando.crearM09ConsultarHotel(id);
+            Entidad hotel = comando.ejecutar();
             Hotel hotelbuscado = (Hotel)hotel;
             idhotel = hotelbuscado._id;
             CVerHotel modelovista = new CVerHotel();
@@ -129,8 +129,8 @@ namespace BOReserva.Controllers
         /// <returns>Retorna la vista parcial M09_ModificarHotel en conjunto del Modelo de dicha vista</returns>
         public ActionResult M09_ModificarHotel(int id)
         {
-            BOReserva.Controllers.PatronComando.M09.M09_COConsultarHotel comando = FabricaComando.crearM09ConsultarHotel();
-            Entidad hotel = comando.ejecutar(id);
+            Command<Entidad> comando = FabricaComando.crearM09ConsultarHotel(id);
+            Entidad hotel = comando.ejecutar();
             Hotel hotelbuscado = (Hotel)hotel;
             idhotel = hotelbuscado._id;
             CModificarHotel modelovista = new CModificarHotel();
@@ -164,6 +164,39 @@ namespace BOReserva.Controllers
 
             return (Json(agrego_si_no));
         }
+
+
+        /// <summary>
+        /// Método que se utiliza para eliminar un hotel existente
+        /// </summary>
+        /// <param name="id">Identificador del hotel a eliminar</param>
+        /// <returns>Retorna un JsonResult</returns>
+        public JsonResult deleteHotel(int id)
+        {
+            Command<Entidad> comando = FabricaComando.crearM09ConsultarHotel(id);
+            Entidad hotel = comando.ejecutar();
+            Hotel hotelbuscado = (Hotel)hotel;
+            hotelbuscado._id = id;
+            Command<String> comando1 = FabricaComando.crearM09EliminarHotel(hotelbuscado, id);
+            String borro_si_no = comando1.ejecutar(); 
+            return (Json(borro_si_no));
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

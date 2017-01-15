@@ -232,5 +232,25 @@ namespace BOReserva.DataAccess.DataAccessObject
                 return null;
             }
         }
+
+        public String eliminarHotel(int id)
+        {
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            try
+            {
+                conexion.Open();
+                String sql = "DELETE FROM Hotel WHERE hot_id = " + id;
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                conexion.Close();
+                return "1";
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return ex.Message;
+            }
+        }
     }
 }
