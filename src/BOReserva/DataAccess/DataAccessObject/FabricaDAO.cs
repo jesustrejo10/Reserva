@@ -17,6 +17,16 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAOReclamo();
         }
 
+        # region M05_Boleto
+
+        public static DAO instanciarDAOBoleto()
+        {
+            return new DAOBoleto();
+        }
+
+        #endregion
+
+
         #region M04_Vuelos
         /// <summary>
         /// Método que crea la instancia de DAOVuelo

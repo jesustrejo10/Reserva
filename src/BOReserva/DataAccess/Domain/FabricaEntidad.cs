@@ -81,7 +81,10 @@ namespace BOReserva.DataAccess.Domain
 
         #region M05_Boleto_y_checkin
 
-
+        public static Entidad InstanciarBoleto()
+        {
+            return new Boleto();
+        }
 
         #endregion
 
