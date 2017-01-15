@@ -15,14 +15,18 @@ namespace BOReserva.DataAccess.Domain
         public double _costo { get; set; }
 
         public Lugar _origen { get; set; }
-
+        public int _idOrigen { get; set; }
+        
         public Lugar _destino { get; set; }
+        public int _idDestino { get; set; }
 
         public Pasajero _pasajero { get; set; }
+        public int _idPasajero { get; set; }
 
         public DateTime _fechaBoleto { get; set; }
 
         public List<Vuelo> _vuelos { get; set; }
+        public int _idVuelo { get; set; }
 
         public String _codigo { get; set; }
 
@@ -76,7 +80,19 @@ namespace BOReserva.DataAccess.Domain
             _vuelos = new List<Vuelo>();
 
         }
-        
+
+        public Boleto(int origen , int destino, int pasaporte, double monto, string tipo, int idVuelo, string fec)
+        {
+            this._idOrigen = origen;
+            this._idDestino = destino;
+            this._idPasajero = pasaporte;
+            this._costo = monto;
+            this._tipoBoleto = tipo;
+            this._idVuelo = idVuelo;
+            this._fechaBoleto = Convert.ToDateTime(fec);
+
+        }
+
         public Boleto(int id)
         {
             _id = id;
