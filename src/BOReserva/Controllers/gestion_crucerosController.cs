@@ -1,3 +1,5 @@
+using BOReserva.Controllers.PatronComando;
+using BOReserva.DataAccess.Domain;
 using BOReserva.Models.gestion_cruceros;
 using BOReserva.Models.gestion_ruta_comercial;
 using System;
@@ -18,6 +20,47 @@ namespace BOReserva.Controllers
         {
             return PartialView();
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public ActionResult M24_AgregarCabinas()
         {
@@ -102,6 +145,19 @@ namespace BOReserva.Controllers
 
         [HttpPost]
         public JsonResult guardarCrucero(CGestion_crucero model)
+        {
+            
+            Entidad nuevoCrucero = FabricaEntidad.InstanciarCrucero(model);
+            //con la fabrica instancie al hotel.
+            Command<String> comando = FabricaComando.crearM09AgregarHotel(nuevoCrucero);
+            String agrego_si_no = comando.ejecutar();
+
+            return (Json(agrego_si_no));
+        }
+   
+
+        [HttpPost]
+        public JsonResult guardaCrucero(CGestion_crucero model)
         {
             String _nombreCrucero = model._nombreCrucero;
             String _companiaCrucero = model._companiaCrucero;

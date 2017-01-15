@@ -9,5 +9,6 @@ namespace BOReserva.DataAccess.DAO
 {
     interface IDAOCruceros : IDAO
     {
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using BOReserva.Models.gestion_hoteles;
+﻿using BOReserva.Models.gestion_cruceros;
+using BOReserva.Models.gestion_hoteles;
 using BOReserva.Models.gestion_reclamos;
 using BOReserva.Models.gestion_roles;
 using System;
@@ -94,6 +95,12 @@ namespace BOReserva.DataAccess.Domain
         public static Entidad InstanciarPermiso(String permiso)
         {
             return new Permiso();
+        }
+
+        public static Entidad InstanciarCrucero(CGestion_crucero crucero)
+        {
+            
+            return new Crucero(crucero._nombreCrucero, crucero._companiaCrucero, crucero._capacidadCrucero, crucero._estatus);
         }
     }
 }
