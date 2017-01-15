@@ -99,6 +99,16 @@ namespace BOReserva.Controllers
             return PartialView(listaHoteles);
         }
 
+        /// <summary>
+        /// Método de la vista parcial M09_VisualizarHoteles
+        /// </summary>
+        /// <returns>Retorna la vista parcial M09_VisualizarHoteles en conjunto del Modelo de dicha vista</returns>
+        public ActionResult M09_DetalleHotel()
+        {
+            CVerHotel model = new CVerHotel();
+            return PartialView(model);
+        }
+
 
 
         /// <summary>
@@ -126,9 +136,9 @@ namespace BOReserva.Controllers
 
 
         /// <summary>
-        /// Método que se utiliza para guardar un vehículo ingresado
+        /// Método que se utiliza para modificar un hotel
         /// </summary>
-        /// <param name="model">Datos que provienen de un formulario de la vista parcial M08_AgregarAutomovil</param>
+        /// <param name="model">Datos que provienen de un formulario de la vista parcial M09_ModificarHotel</param>
         /// <returns>Retorna un JsonResult</returns>
         [HttpPost]
         public JsonResult modificarHotel(CModificarHotel model)
