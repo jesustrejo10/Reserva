@@ -102,7 +102,14 @@
                         </div>
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
-                            <button type="submit" id="modify_hotel" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-2">
+                                <button type="submit" id="modify_hotel" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                            </div>
+                            <div class="col-md-2">
+                                <button id="cancel_modification" type="button" class="btn btn-danger" style="display:block; margin-left:auto; margin-right:auto;">Cancelar</button>
+                            </div>
+                            <div class="col-md-4"></div> 
                         </div>
                     </div>
                     <!-- /.col -->
@@ -131,13 +138,31 @@
 
             if (nombre && direccion && paginaWeb && email && clasificacion) {
                 $.ajax({
-                    url: "gestion_hoteles/guardarHotel",
+                    url: "gestion_hoteles/modificarHotel",
                     data: form.serialize(),
                     type: 'POST',
                     success: function (data) {
                         if (data === "1") {
-                            alert("Se registro el Hotel exitosamente");
-                            $('#formmodifyVehicle')[0].reset();
+                            alert("Se modifico el hotel exitosamente, sera redirigido al listado de hoteles");
+                            //$('#formmodifyVehicle')[0].reset();
+                            var url1 = '/gestion_hoteles/M09_VisualizarHoteles';
+                            var method = 'GET';
+                            var data1 = '';
+
+                            $.ajax(
+                                {
+                                    url: url1,
+                                    type: method,
+                                    data: data,
+                                    success: function (data, textStatus, jqXHR) {
+
+                                        $("#contenido").empty();
+                                        $("#contenido").append(data);
+                                    },
+                                    error: function (jqXHR, textStatus, errorThrown) {
+                                        alert(errorThrown);
+                                    }
+                                });
                         } else {
                             alert(data);
                         }
@@ -175,6 +200,31 @@
                 }
             });
         }
+
+
+        $("#cancel_modification").click(function (e) {
+            e.preventDefault();
+            var url = '/gestion_hoteles/M09_VisualizarHoteles';
+            var method = 'GET';
+            var data = '';
+            alert("Espere un momento y sera redirigido");
+
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+        });
+
 
 
 

@@ -23,6 +23,7 @@ namespace BOReserva.Controllers
         public static String _pais;
         public static String sciudad;
         public static String ciudad;
+        private static int idhotel;
 
         /// <summary>
         /// Método de la vista parcial M09_AgregarHotel
@@ -86,6 +87,11 @@ namespace BOReserva.Controllers
             return (Json(agrego_si_no));
         }
 
+
+        /// <summary>
+        /// Método de la vista parcial M09_VisualizarHoteles
+        /// </summary>
+        /// <returns>Retorna la vista parcial M09_VisualizarHoteles en conjunto del Modelo de dicha vista</returns>
         public ActionResult M09_VisualizarHoteles()
         {
             Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM09VisualizarHoteles();
@@ -94,16 +100,17 @@ namespace BOReserva.Controllers
         }
 
 
-        //public ActionResult M09_ModificarHotel(/*int idhotel*/)
-        //{
 
-        //}
-
-        public ActionResult M09_ModificarHotel()
+        /// <summary>
+        /// Método de la vista parcial M09_ModificarHotel
+        /// </summary>
+        /// <returns>Retorna la vista parcial M09_ModificarHotel en conjunto del Modelo de dicha vista</returns>
+        public ActionResult M09_ModificarHotel(int id)
         {
             BOReserva.Controllers.PatronComando.M09.M09_COConsultarHotel comando = FabricaComando.crearM09ConsultarHotel();
-            Entidad hotel = comando.ejecutar(1);
+            Entidad hotel = comando.ejecutar(id);
             Hotel hotelbuscado = (Hotel)hotel;
+            idhotel = hotelbuscado._id;
             CModificarHotel modelovista = new CModificarHotel();
             modelovista._capacidadHabitacion = hotelbuscado._capacidad;
             modelovista._ciudad = hotelbuscado._ciudad._nombre;
@@ -115,10 +122,26 @@ namespace BOReserva.Controllers
             modelovista._pais = hotelbuscado._ciudad._pais._nombre;
             return PartialView(modelovista);
         }
-            
 
 
 
+        /// <summary>
+        /// Método que se utiliza para guardar un vehículo ingresado
+        /// </summary>
+        /// <param name="model">Datos que provienen de un formulario de la vista parcial M08_AgregarAutomovil</param>
+        /// <returns>Retorna un JsonResult</returns>
+        [HttpPost]
+        public JsonResult modificarHotel(CModificarHotel model)
+        {
+            Entidad ciudadDestino = FabricaEntidad.InstanciarCiudad("nombre");
+            ciudadDestino._id = 29;
+            Entidad modificarHotel = FabricaEntidad.InstanciarHotel(model, ciudadDestino);
+            //con la fabrica instancie al hotel.
+            Command<String> comando = FabricaComando.crearM09ModificarHotel(modificarHotel, idhotel);
+            String agrego_si_no = comando.ejecutar();
+
+            return (Json(agrego_si_no));
+        }
 
 
 

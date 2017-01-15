@@ -39,11 +39,11 @@
                                         @{
                                             if (c._disponibilidad )
                                             {
-                                                <a href="#" title="Activar/Desactivar vehículo"><i class="fa fa-toggle-on desactivar"></i></a>
+                                                <a href="#" title="Activar/Desactivar hotel"><i class="fa fa-toggle-on desactivar"></i></a>
                                             }
                                             if (!c._disponibilidad)
                                             {
-                                                <a href="#" title="Activar/Desactivar vehículo"><i class="fa fa-toggle-off activar"></i></a>
+                                                <a href="#" title="Activar/Desactivar hotel"><i class="fa fa-toggle-off activar"></i></a>
                                             }
                                         }
                                     </td>
@@ -161,8 +161,8 @@
             var identificador = $(this).parent().parent().parent().attr("id");
             jQuery.ajax({
                 type: "GET",
-                url: "/gestion_hoteles/M09_ModificarHotel"
-                //data: { matricula: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+                url: "/gestion_hoteles/M09_ModificarHotel",
+                data: { id: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
             }).done(function (data) {
                 //$("#sdssss").append(data);
 

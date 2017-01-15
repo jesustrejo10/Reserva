@@ -68,7 +68,30 @@ namespace BOReserva.DataAccess.DataAccessObject
 
         Entidad IDAO.Modificar(Entidad e)
         {
-            throw new NotImplementedException();
+            Hotel hotel = (Hotel)e;
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            try
+            {
+                conexion.Open();
+                String sql = "UPDATE Hotel SET hot_nombre = '" + hotel._nombre + "', hot_url_pagina = '" + hotel._paginaWeb +
+                            "', hot_email = '" + hotel._email + "', hot_cantidad_habitaciones = '" + hotel._capacidad + "', hot_direccion = '" + hotel._direccion +
+                            "', hot_estrellas = " + hotel._clasificacion +
+                            " WHERE hot_id = " + hotel._id;
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                conexion.Close();
+                hotel._nombre = "1";
+                Entidad resultado = hotel;
+                return resultado;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                hotel._nombre = ex.Message;
+                Entidad resultado = hotel;
+                return resultado;
+            }
         }
 
         Entidad IDAO.Consultar(int id)

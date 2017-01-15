@@ -58,6 +58,20 @@ namespace BOReserva.Controllers.PatronComando
 
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
+        /// M09_COVisualizarHoteles
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M09_COVisualizarHoteles.
+        /// </returns>
+        public static Command<String> crearM09ModificarHotel(Entidad hotel, int idmodificar)
+        {
+
+            return new M09_COModificarHotel(hotel, idmodificar);
+
+        }
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
         /// M09_COObtenerPaises
         /// </summary>
         /// <returns>
@@ -97,6 +111,7 @@ namespace BOReserva.Controllers.PatronComando
             return new M13_COAgregarRolPermiso((Rol)e);
 
         }
+
 
     }
 }
