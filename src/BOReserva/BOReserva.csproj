@@ -299,6 +299,7 @@
     <Compile Include="Models\gestion_cruceros\RecursosCruceros.Designer.cs" />
     <Compile Include="Models\gestion_cruceros\VistaListaCrucero.cs" />
     <Compile Include="Models\gestion_cruceros\VistaListaItinerario.cs" />
+    <Compile Include="Models\gestion_hoteles\CVerHotel.cs" />
     <Compile Include="Models\gestion_hoteles\CModifcarHotel.cs" />
     <Compile Include="Models\gestion_reclamos\CAgregarReclamo.cs" />
     <Compile Include="Models\gestion_reclamos\CModificarReclamo.cs" />
