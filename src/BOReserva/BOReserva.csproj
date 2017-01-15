@@ -1542,6 +1542,7 @@
     <Content Include="Views\gestion_hoteles\M09_AgregarHotel.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_VisualizarHoteles.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_ModificarHotel.cshtml" />
+    <Content Include="Views\gestion_hoteles\M09_DetalleHotel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Visualizar.cshtml" />

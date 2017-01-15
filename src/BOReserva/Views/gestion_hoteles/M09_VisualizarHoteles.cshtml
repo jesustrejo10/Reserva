@@ -143,8 +143,8 @@
             var identificador = $(this).parent().parent().parent().attr("id");
             jQuery.ajax({
                 type: "GET",
-                url: "/gestion_automoviles/M08_VisualizarAutomovil",
-                data: { matricula: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+                url: "/gestion_hoteles/M09_Detallehotel",
+               // data: { matricula: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
             }).done(function (data) {
                 $("#contenido").empty();
                 $("#contenido").append(data);
