@@ -18,8 +18,7 @@ namespace BOReserva.Controllers
     public class gestion_restaurantesController : Controller
     {
 
-
-      
+    
 
         #region Consultar Restaurantes por ciudad
         // GET: gestion_restaurantes
@@ -97,16 +96,7 @@ namespace BOReserva.Controllers
             return PartialView();
         }
 
-        /// <summary>
-        /// Método para el acceso a la interfaz de eliminación de restaurantes.
-        /// </summary>
-        /// <returns>Retorna un objeto para renderizar la vista parcial.</returns>
-        public ActionResult M10_GestionRestaurantes_Eliminar()
-        {
-          
-    
-            return PartialView();
-        }
+ 
 
         /// <summary>
         /// Método para el almacenado de restaurantes, tomando como parámetro un modelo de restaurante.
@@ -180,6 +170,11 @@ namespace BOReserva.Controllers
         [HttpGet]
         public JsonResult eliminarRestaurante(int id)
         {
+            System.Diagnostics.Debug.WriteLine("Id de resturant a eliminar "+id);
+
+            Entidad _restaurant = FabricaEntidad.inicializarRestaurant();
+            ((CRestauranteModelo)_restaurant).Id = id;
+            Comando<Boolean> comando = (Comando<Boolean>)LogicaReserva.Fabrica.FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.ELIMINAR, comandoRestaurant.NULO, _restaurant);
             //Chequeo de campos obligatorios para el formulario
             if ((id == -1))
             {
@@ -188,7 +183,7 @@ namespace BOReserva.Controllers
                 return Json(error);
             }
      
-            if (true)
+            if (comando.Ejecutar())
             {
                 return (Json(true, JsonRequestBehavior.AllowGet));
             }
@@ -202,6 +197,10 @@ namespace BOReserva.Controllers
         }
 
         #region Cargar Combobox ciudades
+        /// <summary>
+        /// Cargar combo de ciudades 
+        /// </summary>
+        /// <returns></returns>
         public List<Lugar> cargarComboBoxLugar()
         {
             Comando<List<Entidad>> comando = (Comando<List<Entidad>>)FabricaComando.comandosVistaRestaurant(FabricaComando.comandoVista.CARGAR_LUGAR);
@@ -218,6 +217,10 @@ namespace BOReserva.Controllers
         }
         #endregion
 
+        /// <summary>
+        /// Cargar combo de horarios
+        /// </summary>
+        /// <returns></returns>
         public List<String> cargarComboBoxHorario()
         {
             Comando<List<String>> comando = (Comando<List<String>>)FabricaComando.comandosVistaRestaurant(FabricaComando.comandoVista.CARGAR_HORA);

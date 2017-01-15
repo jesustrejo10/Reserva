@@ -53,7 +53,7 @@ $("#aceptarRestaurante").click(function (e) {
 $(".modificar").click(function () {
   
     var identificador = $(this).parent().parent().parent().attr("id");
-    alert(identificador);
+    
     jQuery.ajax({
         type: "GET",
         url: "/gestion_restaurantes/M10_GestionRestaurantes_Modificar",
