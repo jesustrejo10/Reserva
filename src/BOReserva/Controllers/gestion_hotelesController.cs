@@ -75,7 +75,8 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult guardarHotel(CAgregarHotel model)
         {   
-            Entidad ciudadDestino = FabricaEntidad.InstanciarCiudad("nombre de la ciudad");
+            //Entidad ciudadDestino = FabricaEntidad.InstanciarCiudad("nombre de la ciudad");
+            Entidad ciudadDestino = FabricaEntidad.InstanciarCiudad(_ciudad);
             ciudadDestino._id = 29;
             Entidad nuevoHotel = FabricaEntidad.InstanciarHotel(model, ciudadDestino);
             //con la fabrica instancie al hotel.
@@ -90,6 +91,29 @@ namespace BOReserva.Controllers
             Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM09VisualizarHoteles();
             Dictionary<int, Entidad> listaHoteles = comando.ejecutar();
             return PartialView(listaHoteles);
+        }
+
+
+        //public ActionResult M09_ModificarHotel(/*int idhotel*/)
+        //{
+
+        //}
+
+        public ActionResult M09_ModificarHotel()
+        {
+            BOReserva.Controllers.PatronComando.M09.M09_COConsultarHotel comando = FabricaComando.crearM09ConsultarHotel();
+            Entidad hotel = comando.ejecutar(1);
+            Hotel hotelbuscado = (Hotel)hotel;
+            CModificarHotel modelovista = new CModificarHotel();
+            modelovista._capacidadHabitacion = hotelbuscado._capacidad;
+            modelovista._ciudad = hotelbuscado._ciudad._nombre;
+            modelovista._clasificacion = hotelbuscado._clasificacion;
+            modelovista._direccion = hotelbuscado._direccion;
+            modelovista._email = hotelbuscado._email;
+            modelovista._nombre = hotelbuscado._nombre;
+            modelovista._paginaWeb = hotelbuscado._paginaWeb;
+            modelovista._pais = hotelbuscado._ciudad._pais._nombre;
+            return PartialView(modelovista);
         }
             
 

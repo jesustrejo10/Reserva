@@ -73,7 +73,69 @@ namespace BOReserva.DataAccess.DataAccessObject
 
         Entidad IDAO.Consultar(int id)
         {
-            throw new NotImplementedException();
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            Hotel hotel = new Hotel();
+            try
+            {
+                conexion.Open();
+                String sql = "SELECT H.*, C.lug_id as id_ciudad, C.lug_nombre as nombre_ciudad, P.lug_id as id_pais, P.lug_nombre as nombre_pais " +
+                             "FROM HOTEL H, LUGAR C, LUGAR P " +
+                             "WHERE H.hot_fk_ciudad = C.lug_id and C.lug_fk_lugar_id = P.lug_id AND H.HOT_ID = "+ id;
+
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    Pais pais;
+                    Ciudad ciudad;
+                    int idCiudad;
+                    String nombreCiudad;
+                    int idPais;
+                    String nombrePais;
+
+                    int idHotel;
+                    int capacidad;
+                    int clasificacion;
+                    String nombreHotel;
+                    String direccionHotel;
+                    String paginaWebHotel;
+                    String emailHotel;
+
+                    while (reader.Read())
+                    {
+                        //SE AGREGA CREA UN OBJECTO VEHICLE SE PASAN LOS ATRIBUTO ASI reader["<etiqueta de la columna en la tabla Automovil>"]
+                        //Y  SE AGREGA a listavehiculos
+                        //public Hotel(int id, String nombre, String direccion, String email, String paginaWeb, int clasificacion, int capacidad, Ciudad ciudad)
+                        idPais = Int32.Parse(reader["id_pais"].ToString());
+                        nombrePais = reader["nombre_pais"].ToString();
+                        pais = new Pais(idPais, nombrePais);
+
+                        idCiudad = Int32.Parse(reader["id_ciudad"].ToString());
+                        nombreCiudad = reader["nombre_ciudad"].ToString();
+                        ciudad = new Ciudad(idCiudad, nombreCiudad, pais);
+                        idHotel = Int32.Parse(reader["hot_id"].ToString());
+
+                        hotel = new Hotel(
+                            idHotel,
+                            reader["hot_nombre"].ToString(),
+                            reader["hot_direccion"].ToString(),
+                            reader["hot_email"].ToString(),
+                            reader["hot_url_pagina"].ToString(),
+                            Int32.Parse(reader["hot_estrellas"].ToString()),
+                            Int32.Parse(reader["hot_cantidad_habitaciones"].ToString()),
+                            ciudad
+                        );
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return hotel;
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+            }
         }
 
         Dictionary<int, Entidad> IDAO.ConsultarTodos()

@@ -228,6 +228,8 @@
     <Compile Include="Controllers\gestion_vueloController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\List.cs" />
+    <Compile Include="Controllers\PatronComando\M09\M09_COConsultarHotel.cs" />
+    <Compile Include="Controllers\PatronComando\M09\M09_COModificarHotel.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COObtenerPaises.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COVisualizarHoteles.cs" />
     <Compile Include="Controllers\PatronComando\M13_COAgregarRol.cs" />
@@ -297,6 +299,7 @@
     <Compile Include="Models\gestion_cruceros\RecursosCruceros.Designer.cs" />
     <Compile Include="Models\gestion_cruceros\VistaListaCrucero.cs" />
     <Compile Include="Models\gestion_cruceros\VistaListaItinerario.cs" />
+    <Compile Include="Models\gestion_hoteles\CModifcarHotel.cs" />
     <Compile Include="Models\gestion_reclamos\CAgregarReclamo.cs" />
     <Compile Include="Models\gestion_reclamos\CModificarReclamo.cs" />
     <Compile Include="Models\gestion_hoteles\CAgregarHotel.cs" />
@@ -584,6 +587,7 @@
     <Content Include="Scripts\Scripts_Hoteles\editar_hotel.js" />
     <Content Include="Scripts\Scripts_CheckIn\M05_CheckIn.js" />
     <Content Include="Scripts\Scripts_ComidaVuelo\llamadas_generales.js" />
+    <Content Include="Scripts\Scripts_Hoteles\llamadas_comunes_automoviles.js" />
     <Content Include="Scripts\Scripts_Hoteles\llamadas_comunes_hoteles.js" />
     <Content Include="Scripts\Scripts_Hoteles\llamadas_generales_hoteles.js" />
     <Content Include="Scripts\Scripts_Vuelos\llamadas_generales_Vuelos.js" />
@@ -1536,6 +1540,7 @@
     <Content Include="Views\gestion_reclamos\M16_ModificarReclamo.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_AgregarHotel.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_VisualizarHoteles.cshtml" />
+    <Content Include="Views\gestion_hoteles\M09_ModificarHotel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Visualizar.cshtml" />

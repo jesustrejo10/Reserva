@@ -1,4 +1,5 @@
 ﻿using BOReserva.Controllers.PatronComando;
+using BOReserva.Controllers.PatronComando.M09;
 using BOReserva.DataAccess.Domain;
 using System;
 using System.Collections.Generic;
@@ -38,6 +39,20 @@ namespace BOReserva.Controllers.PatronComando
         {
 
             return new M09_COVisualizarHoteles();
+
+        }
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M09_COVisualizarHoteles
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M09_COVisualizarHoteles.
+        /// </returns>
+        public static M09_COConsultarHotel crearM09ConsultarHotel()
+        {
+
+            return new M09_COConsultarHotel();
 
         }
 
