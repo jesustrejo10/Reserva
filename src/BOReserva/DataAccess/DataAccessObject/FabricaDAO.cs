@@ -28,6 +28,17 @@ namespace BOReserva.DataAccess.DataAccessObject
         }
         #endregion
 
+        #region M12_Usuarios
+        /// <summary>
+        /// Método que crea la instancia de DAOUsuarios
+        /// </summary>
+        /// <returns>Retorna la instancia a la clase DAOUsuarios</returns>
+        public static DAO instanciarDAOUsuarios()
+        {
+            return new DAOUsuarios();
+        }
+        #endregion
+
         #region M13_Roles
         public static DAO instanciarDAORol()
         {

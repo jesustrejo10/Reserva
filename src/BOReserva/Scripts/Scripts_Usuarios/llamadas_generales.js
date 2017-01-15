@@ -65,7 +65,7 @@ $(".agregarUsuario_form").submit(function (e) {
     e.preventDefault();
     var form = $(".agregarUsuario_form");
     $.ajax({
-        url: "gestion_usuarios/M12_AgregarUsuario",
+        url: "gestion_usuarios/M12_AgregarUsuario2",
         data: form.serialize(),
         type: 'POST',
         success: function (data) {

@@ -533,7 +533,7 @@ jQuery(document).ready(function () {
 
     $("#agregarUsuarios").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_usuarios/M12_AgregarUsuario';
+        var url = '/gestion_usuarios/M12_AgregarUsuario2';
         var method = 'GET';
         var data = '';
 

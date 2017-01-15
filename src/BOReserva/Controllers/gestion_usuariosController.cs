@@ -11,6 +11,13 @@ namespace BOReserva.Controllers
 {
     public class gestion_usuariosController : Controller
     {
+        /*public ActionResult M12_AgregarUsuario2()
+        {
+            CAgregarUsuario model = new CAgregarUsuario();
+            return PartialView(model);
+        }*/
+
+
         //
         // GET: /gestion_usuario/
         public ActionResult M12_Index()
@@ -38,7 +45,7 @@ namespace BOReserva.Controllers
         }
 
 
-        public ActionResult M12_AgregarUsuario()
+        public ActionResult M12_AgregarUsuario2()
         {
             try { 
                 PersistenciaUsuario p = new PersistenciaUsuario();
@@ -58,7 +65,7 @@ namespace BOReserva.Controllers
 
 
         [HttpPost]
-        public ActionResult M12_AgregarUsuario(AgregarUsuario usuario)
+        public ActionResult M12_AgregarUsuario2(AgregarUsuario usuario)
         {
             //Se resetea intentos en la Tabla Login MO1 Ingreso Seguridad
             Cgestion_seguridad_ingreso ingreso = new Cgestion_seguridad_ingreso();
