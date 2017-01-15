@@ -135,10 +135,7 @@
 <script language="javascript" type="text/javascript">
     $(document).ready(function () {
         //e.preventDefault();
-
-
-        $(".visualizarHotel").on("click", (function () {
-
+    $(".visualizarHotel").on("click", (function () {
             alert("Se esta procesando tu solicitud, por favor espere");
             var identificador = $(this).parent().parent().parent().attr("id");
             jQuery.ajax({
