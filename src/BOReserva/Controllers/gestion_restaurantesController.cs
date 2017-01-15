@@ -11,6 +11,7 @@ using BOReserva.Models;
 using BOReserva.LogicaReserva.Fabrica;
 using BOReserva.Views.gestion_restaurantes.Fabrica;
 using BOReserva.Models.Fabrica;
+using static BOReserva.LogicaReserva.Fabrica.FabricaComando;
 
 namespace BOReserva.Controllers
 {
@@ -35,7 +36,7 @@ namespace BOReserva.Controllers
             {
                
                 Entidad _lugar = FabricaEntidad.inicializarLugar(id, "");//Aqui se envia la clave foranea de lugar para realizar la busqueda
-                Comando<List<Entidad>> comando = (Comando<List<Entidad>>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, _lugar);
+                Comando<List<Entidad>> comando = (Comando<List<Entidad>>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, comandoRestaurant.NULO, _lugar);
                 List<Entidad> restaurantes = comando.Ejecutar();
                 CRestauranteModelo Restaurant = FabricaEntidad.inicializarRestaurant();
                 List<CRestauranteModelo> lista = FabricaEntidad.inicializarListaRestarant();
@@ -43,7 +44,7 @@ namespace BOReserva.Controllers
                 foreach (Entidad item in restaurantes)
                 {
                     lista.Add((CRestauranteModelo)item);
-                 
+                   
                 }
 
                 Restaurant.listaRestaurantes = lista;
@@ -78,17 +79,16 @@ namespace BOReserva.Controllers
 
             ViewBag.Ciudad = FabricaVista.asignarItemsComboBox(cargarComboBoxLugar(), "Id", "Nombre");
             ViewBag.Horarios = FabricaVista.asignarItemsComboBox(cargarComboBoxHorario(), "", "");
+            System.Diagnostics.Debug.WriteLine("Id del restaurant " + id);
 
-            var modelo = new CRestauranteModelo
-            {
-                //id = respuesta.Id,
-                //idLugar = respuesta.IdFKLugar,
-                //nombre = respuesta,
-                //direccion = respuesta._direccion,
-                //descripcion = respuesta._descripcion,
-                //horarioApertura = respuesta._horarioApertura,
-                //horarioCierre = respuesta._horarioCierre
-            };
+            Entidad _restaurant = FabricaEntidad.inicializarRestaurant();
+            ((CRestauranteModelo)_restaurant).Id = id;
+            Comando<Entidad> comando = (Comando<Entidad>)LogicaReserva.Fabrica.FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, comandoRestaurant.CONSULTAR_ID, _restaurant);
+            Entidad rest = comando.Ejecutar();
+
+            System.Diagnostics.Debug.WriteLine("Nombre del restaurant " + ((CRestauranteModelo)rest).nombre);
+
+            ViewBag.NombreRestaurant = ((CRestauranteModelo)rest).nombre;
             //modelo._listaCiudades = bd.consultarCiudad();
             return PartialView();
         }
@@ -122,7 +122,7 @@ namespace BOReserva.Controllers
             //    return Json(error);
             //}
             Entidad _restaurant = FabricaEntidad.inicializarRestaurant(Nombre, Direccion, Descripcion,Telefono, HoraIni, HoraFin, idLugar);
-            Comando<Boolean> comando = (Comando<Boolean>)LogicaReserva.Fabrica.FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CREAR, _restaurant);
+            Comando<Boolean> comando = (Comando<Boolean>)LogicaReserva.Fabrica.FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CREAR, comandoRestaurant.NULO, _restaurant);
                     
          
             if (comando.Ejecutar())
@@ -228,11 +228,6 @@ namespace BOReserva.Controllers
         {
             Comando<List<String>> comando = (Comando<List<String>>)FabricaComando.comandosVistaRestaurant(FabricaComando.comandoVista.CARGAR_HORA);
             List<String> horarios = comando.Ejecutar();
-
-            foreach (var item in horarios)
-            {
-                System.Diagnostics.Debug.WriteLine("Id del restaurant " + item);
-            }
             return horarios;
         }
     }

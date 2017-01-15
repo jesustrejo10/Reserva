@@ -10,5 +10,7 @@ namespace BOReserva.Datos.InterfazDao.gestion_restaurantes
     public interface IRestaurantDAO : IDAO
     {
         List<Entidad> ListarLugar();
+
+        Entidad consultarRestaurantId(Entidad objeto);
     }
 }

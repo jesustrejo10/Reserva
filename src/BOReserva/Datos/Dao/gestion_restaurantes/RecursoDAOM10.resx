@@ -209,4 +209,12 @@
     <value>@rst_id</value>
     <comment>Id del restaurant, Atributo procedimiento</comment>
   </data>
+  <data name="LugarIdFk" xml:space="preserve">
+    <value>fk_lugar</value>
+    <comment>Atributo Id (Clave Foranea) tabla Lugar</comment>
+  </data>
+  <data name="procedimientoConsultarRestaurantId" xml:space="preserve">
+    <value>M10_ConsultarRestauranteId</value>
+    <comment>Nombre del Procedimiento consultar en la Base de Datos tabla Restaurant por Id</comment>
+  </data>
 </root>

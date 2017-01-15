@@ -47,7 +47,7 @@ namespace BOReserva.LogicaReserva.Fabrica
         /// </summary>
         /// <param name="comando"></param>
         /// <returns>regresa un tipo Objecto que debe ser casteado segun sea el caso</returns>
-        public static Object comandosRestaurant(comandosGlobales comando, Entidad _objeto)
+        public static Object comandosRestaurant(comandosGlobales comando, comandoRestaurant comandoR, Entidad _objeto)
         {
             switch (comando)
             {
@@ -61,7 +61,16 @@ namespace BOReserva.LogicaReserva.Fabrica
                     return new comandoActualizarRestaurant(_objeto);
 
                 case comandosGlobales.CONSULTAR:
+
+                    switch (comandoR)
+                    {
+                        case comandoRestaurant.NULO:
+                            break;
+                        case comandoRestaurant.CONSULTAR_ID:
+                            return new comandoConsultarRestaurantId(_objeto);
+                    }
                     return new comandoConsultarRestaurant(_objeto);
+
                 default:
                     return new comandoConsultarRestaurant(_objeto);
             }
@@ -90,24 +99,12 @@ namespace BOReserva.LogicaReserva.Fabrica
             CARGAR_HORA
         }
 
-
-
-        //#region Crear Restaurant
-
-        //#endregion
-
-        //#region Actualizar Restaurant
-
-        //#endregion
-
-        //#region Eliminar Restaurant
-
-        //#endregion
-
-        //#region Consultar Restaurant
-
-        //#endregion
-
+        public enum comandoRestaurant
+        {
+            NULO,
+            CONSULTAR_ID
+        }
+        
         #endregion
 
         #region Modulo 11

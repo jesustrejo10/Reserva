@@ -279,6 +279,7 @@
     <Compile Include="LogicaReserva\Comando\gestion_restaurantes\comandoCargarHorario.cs" />
     <Compile Include="LogicaReserva\Comando\gestion_restaurantes\comandoConsultarLugar.cs" />
     <Compile Include="LogicaReserva\Comando\gestion_restaurantes\comandoConsultarRestaurant.cs" />
+    <Compile Include="LogicaReserva\Comando\gestion_restaurantes\comandoConsultarRestaurantId.cs" />
     <Compile Include="LogicaReserva\Comando\gestion_restaurantes\comandoCrearRestaurant.cs" />
     <Compile Include="LogicaReserva\Comando\gestion_restaurantes\comandoEliminarRestaurant.cs" />
     <Compile Include="LogicaReserva\Fabrica\FabricaComando.cs" />

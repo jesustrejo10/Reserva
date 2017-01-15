@@ -72,6 +72,64 @@ namespace BOReserva.Datos.Dao.gestion_restaurantes
         }
 
         /// <summary>
+        /// Metodo que retorna restauran segun el id
+        /// </summary>
+        /// <param name="_restaurant"></param>
+        /// <returns>Entidad</returns>
+        public Entidad consultarRestaurantId(Entidad _restaurant)
+        {
+            System.Diagnostics.Debug.WriteLine("Llego........ ");
+            //Se castea de tipo Entidad a tipo Restaurant
+            CRestauranteModelo rest = (CRestauranteModelo)_restaurant;
+            List<Parametro> listaParametro = FabricaDatosSql.asignarListaDeParametro();
+
+            //Atributos tabla Restaurant 
+            int idRestaurant;
+            String nombreRestaurant;
+            String descripcionRestaurant;
+            String direccionRestaurant;
+            String telefonoRestaurant;
+            String horaIni;
+            String horaFin;
+            String idLugar;
+            Entidad restaurant;
+
+            try
+            {
+                //Aqui se asignan los valores que recibe el procedimieto para realizar el select, se repite tantas veces como atributos
+                //se requiera en el where, para este caso solo el ID del restaurante @rst_id (parametro que recibe el store procedure)
+                //se coloca true en Input 
+                listaParametro.Add(FabricaDatosSql.asignarParametro(RecursoDAOM10.rst_id, SqlDbType.Int, rest.Id.ToString(), true, false));
+
+                //Se devuelve la fila del restaurante consultado segun el Id, para este caso solo se devuelve una fila
+                DataTable filarestaurant = EjecutarStoredProcedure(listaParametro, RecursoDAOM10.procedimientoConsultarRestaurantId);
+
+                //Se guarda la fila devuelta de la base de datos
+                DataRow Fila = filarestaurant.Rows[0];
+
+                //Se preinicializan los atrubutos de la clase restaurant 
+                idRestaurant = int.Parse(Fila[RecursoDAOM10.restaurantId].ToString());
+                nombreRestaurant = Fila[RecursoDAOM10.restaurantNombre].ToString();
+                descripcionRestaurant = Fila[RecursoDAOM10.restaurantDescripcion].ToString();
+                direccionRestaurant = Fila[RecursoDAOM10.restaurantDireccion].ToString();
+                telefonoRestaurant = Fila[RecursoDAOM10.restaurantTelefono].ToString();
+                horaIni = Fila[RecursoDAOM10.restaurantHoraApertura].ToString();
+                horaFin = Fila[RecursoDAOM10.restaurantHoraCierra].ToString();
+                idLugar = Fila[RecursoDAOM10.LugarIdFk].ToString();
+                restaurant = FabricaEntidad.inicializarRestaurant(idRestaurant, nombreRestaurant, direccionRestaurant, telefonoRestaurant, descripcionRestaurant, horaIni, horaFin, int.Parse(idLugar));
+
+                return restaurant;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+        }
+
+        /// <summary>
         /// Metodo para agregar restaurant
         /// </summary>
         /// <param name="_restaurant"></param>

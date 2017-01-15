@@ -88,6 +88,15 @@ namespace BOReserva.Datos.Dao.gestion_restaurantes {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to fk_lugar.
+        /// </summary>
+        internal static string LugarIdFk {
+            get {
+                return ResourceManager.GetString("LugarIdFk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to lug_nombre.
         /// </summary>
         internal static string LugarNombre {
@@ -129,6 +138,15 @@ namespace BOReserva.Datos.Dao.gestion_restaurantes {
         internal static string procedimientoConsultarLugar {
             get {
                 return ResourceManager.GetString("procedimientoConsultarLugar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M10_ConsultarRestauranteId.
+        /// </summary>
+        internal static string procedimientoConsultarRestaurantId {
+            get {
+                return ResourceManager.GetString("procedimientoConsultarRestaurantId", resourceCulture);
             }
         }
         

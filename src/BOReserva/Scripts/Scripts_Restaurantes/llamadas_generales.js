@@ -51,6 +51,7 @@ $("#aceptarRestaurante").click(function (e) {
 //EVENTO PARA LA MODIFICACIÓN DE RESTAURANTES
 
 $(".modificar").click(function () {
+  
     var identificador = $(this).parent().parent().parent().attr("id");
     alert(identificador);
     jQuery.ajax({
