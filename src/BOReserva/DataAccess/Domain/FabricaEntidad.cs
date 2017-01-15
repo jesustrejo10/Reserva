@@ -86,6 +86,13 @@ namespace BOReserva.DataAccess.Domain
             return new Boleto();
         }
 
+        public static Entidad InstanciarPasajero(int id, String nombre1, String nombre2, String apellido1, String apellido2, String sexo,
+         string fecha, String correo)
+        {
+            DateTime fecha_nac = Convert.ToDateTime(fecha);
+            return new Pasajero(id, nombre1, nombre2, apellido1, apellido2, sexo, fecha_nac, correo);
+        }
+
         #endregion
 
         public static Entidad InstanciarRol(CRoles model)
@@ -104,6 +111,11 @@ namespace BOReserva.DataAccess.Domain
         {
             return new Permiso();
         }
+
+        //internal static Entidad InstanciarPasajero(int pasaporte, string primernombre, string segundonombre, string primerapellido, string segundoapellido, string sexo, string fechanac, string correo)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
           

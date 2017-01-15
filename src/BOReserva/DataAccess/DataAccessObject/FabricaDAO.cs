@@ -17,15 +17,6 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAOReclamo();
         }
 
-        # region M05_Boleto
-
-        public static DAO instanciarDAOBoleto()
-        {
-            return new DAOBoleto();
-        }
-
-        #endregion
-
 
         #region M04_Vuelos
         /// <summary>
@@ -36,6 +27,16 @@ namespace BOReserva.DataAccess.DataAccessObject
         {
             return new DAOVuelo();
         }
+        #endregion
+
+
+        # region M05_Boleto
+
+        public static DAO instanciarDaoPasajero()
+        {
+            return new DAOPasajero();
+        }
+
         #endregion
 
         #region M13_Roles
