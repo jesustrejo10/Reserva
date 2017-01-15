@@ -16,7 +16,7 @@ namespace BOReserva.DataAccess.DataAccessObject
 
         public DAOBoleto() { }
 
-        int IDAOBoleto.Agregar(Entidad e)
+        int IDAO.Agregar(Entidad e)
         {
             Boleto boleto = (Boleto)e;
             SqlConnection conexion = Connection.getInstance(_connexionString);

@@ -403,12 +403,9 @@ namespace BOReserva.Controllers
         public ActionResult M05_VisualizarReservasPasajero(int pasaporte)
         {
 
-            System.Diagnostics.Debug.WriteLine("Llega al controller visualizarreservaspasajero");
             //SE BUSCAN TODOS LOS BOLETOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
             manejadorSQL_Boletos buscarboletos = new manejadorSQL_Boletos();
             List<CBoleto> listaboletos = buscarboletos.M05ListarReservasPasajeroBD(pasaporte);
-
-
 
             return PartialView(listaboletos);
         }
