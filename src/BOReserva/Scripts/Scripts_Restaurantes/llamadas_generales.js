@@ -113,10 +113,20 @@ $("#aceptarRestauranteModificacion").click(function (e) {
     console.log("Enviando...");
     e.preventDefault();
     e.stopImmediatePropagation();
-    var form = $("#formModificarRestaurante");
+
+    var id = $("#Id").val();
+    var nombre = $("#Nombre").val();
+    var descripcion = $("#Descripcion").val();
+    var direccion = $("#Direccion").val();
+    var telefono = $("#Telefono").val();
+    var idlugar = $('#ComboLugar :selected').val();
+    var horaini = $('#ComboHoraIni :selected').text();
+    var horafin = $('#ComboHoraFin :selected').text();
+  
     $.ajax({
         url: "gestion_restaurantes/modificarRestaurante",
-        data: form.serialize(),
+        data: {Id:id, Nombre: nombre, Descripcion: descripcion, Direccion: direccion, Telefono: telefono, idLugar: idlugar, HoraIni: horaini, HoraFin: horafin },
+        dataType: "json",
         type: 'POST',
         success: function (data) {
             alert("El restaurante se modifico con exito.");

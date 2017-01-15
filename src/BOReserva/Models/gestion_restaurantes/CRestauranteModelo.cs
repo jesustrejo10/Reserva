@@ -29,7 +29,7 @@ namespace BOReserva.Models.gestion_restaurantes
         {
             this._nombre = nombre;
             this._direccion = direccion;
-            this.Telefono = telefono;
+            this._telefono = telefono;
             this._descripcion = descripcion;
             this._horarioApertura = horarioApertura;
             this._horarioCierre = horarioCierre;
@@ -41,7 +41,7 @@ namespace BOReserva.Models.gestion_restaurantes
             this.Id = id;
             this._nombre = nombre;
             this._direccion = direccion;
-            this.Telefono = telefono;
+            this._telefono = telefono;
             this._descripcion = descripcion;
             this._horarioApertura = horarioApertura;
             this._horarioCierre = horarioCierre;

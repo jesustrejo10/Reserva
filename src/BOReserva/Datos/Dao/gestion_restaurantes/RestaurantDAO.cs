@@ -78,8 +78,7 @@ namespace BOReserva.Datos.Dao.gestion_restaurantes
         /// <returns>Entidad</returns>
         public Entidad consultarRestaurantId(Entidad _restaurant)
         {
-            System.Diagnostics.Debug.WriteLine("Llego........ ");
-            //Se castea de tipo Entidad a tipo Restaurant
+           //Se castea de tipo Entidad a tipo Restaurant
             CRestauranteModelo rest = (CRestauranteModelo)_restaurant;
             List<Parametro> listaParametro = FabricaDatosSql.asignarListaDeParametro();
 

@@ -212,6 +212,7 @@ namespace BOReserva.Datos
                     using (adaptadorDeDatos)
                     {
                         adaptadorDeDatos.Fill(tablaDeDatos);
+
                     }
 
                     return tablaDeDatos;
