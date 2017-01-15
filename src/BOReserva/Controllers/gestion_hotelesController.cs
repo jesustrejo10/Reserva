@@ -31,6 +31,7 @@ namespace BOReserva.Controllers
         public ActionResult M09_AgregarHotel()
         {
             CAgregarHotel model = new CAgregarHotel();
+            //Aca puedo devolver
             return PartialView(model);
         }
 

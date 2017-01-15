@@ -1,4 +1,6 @@
-﻿using BOReserva.DataAccess.Domain;
+﻿using BOReserva.DataAccess.DAO;
+using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
 using BOReserva.Models.gestion_roles;
 using System;
@@ -8,7 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.DataAccess.DAO
+namespace BOReserva.DataAccess.DataAccessObject
 {
     public class DAORol: DAO, IDAORol
     {
