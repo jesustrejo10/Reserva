@@ -37,6 +37,11 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAOPasajero();
         }
 
+        public static DAO instanciarDaoBoleto()
+        {
+            return new DAOBoleto();
+        }
+
         #endregion
 
         #region M13_Roles

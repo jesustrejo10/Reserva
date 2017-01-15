@@ -81,9 +81,9 @@ namespace BOReserva.DataAccess.Domain
 
         #region M05_Boleto_y_checkin
 
-        public static Entidad InstanciarBoleto()
+        public static Entidad InstanciarBoleto(int idorigen, int iddestino, int pasaporte, int monto, string tipo, int idvuelo, string fecha)
         {
-            return new Boleto();
+            return new Boleto(idorigen, iddestino, pasaporte, monto, tipo, idvuelo, fecha);
         }
 
         public static Entidad InstanciarPasajero(int id, String nombre1, String nombre2, String apellido1, String apellido2, String sexo,
@@ -118,10 +118,10 @@ namespace BOReserva.DataAccess.Domain
         //}
     }
 }
-          
 
-        
 
-      
 
-       
+
+
+
+

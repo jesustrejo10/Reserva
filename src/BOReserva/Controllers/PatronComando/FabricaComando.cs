@@ -68,6 +68,13 @@ namespace BOReserva.Controllers.PatronComando
 
         }
 
+        public static Command<String> crearM05CrearBoleto(Entidad e)
+        {
+            return new M05_COCrearBoleto((Boleto)e);
+
+        }
+        
+
         #endregion
     }
 }

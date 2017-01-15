@@ -20,17 +20,7 @@ namespace BOReserva.Controllers
         public ActionResult M05_DetalleBoleto(int idorigen, int iddestino, string fechadespegue, string fechaaterrizaje, int monto, string tipo, string primernombre, string segundonombre, string primerapellido, string segundoapellido, string fechanac, string sexo, int pasaporte, string correo, int idvuelo)
         {
             System.Diagnostics.Debug.WriteLine("Llega a controller de detalle boleto");
-            System.Diagnostics.Debug.WriteLine("origen: "+idorigen+", destino: "+iddestino+", despegue: "+fechadespegue+", aterrizaje: "+fechaaterrizaje+", monto: "+monto+", tipo: "+tipo+", primernombre: "+primernombre+", segundonombre: "+segundonombre+", primerapellido: "+primerapellido+", segundoapellido: "+segundoapellido+", fechanac: "+fechanac+", sexo: "+sexo+", pasaporte: "+pasaporte+", correo: "+correo);
-           
-            //CPasajero pasa = new CPasajero();
-            //pasa._primer_nombre = primernombre;
-            //pasa._segundo_nombre = segundonombre;
-            //pasa._primer_apellido = primerapellido;
-            //pasa._segundo_apellido = segundoapellido;nombre1
-            //pasa._fecha_nacimiento = fechanac;
-            //pasa._sexo = sexo;
-            //pasa._id = pasaporte;
-            //pasa._correo = correo;
+            System.Diagnostics.Debug.WriteLine("origen: " + idorigen + ", destino: " + iddestino + ", despegue: " + fechadespegue + ", aterrizaje: " + fechaaterrizaje + ", monto: " + monto + ", tipo: " + tipo + ", primernombre: " + primernombre + ", segundonombre: " + segundonombre + ", primerapellido: " + primerapellido + ", segundoapellido: " + segundoapellido + ", fechanac: " + fechanac + ", sexo: " + sexo + ", pasaporte: " + pasaporte + ", correo: " + correo);
 
             Pasajero nuevoPasajero = (Pasajero)FabricaEntidad.InstanciarPasajero(pasaporte, primernombre, segundonombre, primerapellido, segundoapellido, sexo, fechanac, correo);
 
@@ -53,7 +43,7 @@ namespace BOReserva.Controllers
 
             string flag = comando.ejecutar();
 
-           //sqlboletos.CrearPasajero(pasaporte,primernombre,segundonombre,primerapellido,segundoapellido,fechanac,sexo,correo);
+            //sqlboletos.CrearPasajero(pasaporte,primernombre,segundonombre,primerapellido,segundoapellido,fechanac,sexo,correo);
 
             return PartialView(bol);
         }
@@ -360,19 +350,16 @@ namespace BOReserva.Controllers
 
         public ActionResult M05_BoletoCreado(int idorigen, int iddestino, int pasaporte, int monto, string tipo, int idvuelo)
         {
-
-
-
-
-            manejadorSQL_Boletos sqlboleto = new manejadorSQL_Boletos();
             String fecha_bol = DateTime.Today.ToString("yyyy/MM/dd");
-            Console.WriteLine("FECHA: " + fecha_bol);
+           // Console.WriteLine("FECHA: " + fecha_bol);
 
-            sqlboleto.M05CrearBoletoBD(monto, idorigen, iddestino, pasaporte, fecha_bol, tipo, idvuelo);
+            Boleto nuevoBoleto = (Boleto)FabricaEntidad.InstanciarBoleto(idorigen, iddestino, pasaporte, monto, tipo, idvuelo, fecha_bol);
+           
+            Command<String> comando = FabricaComando.crearM05CrearBoleto(nuevoBoleto);
+           
+            //System.Diagnostics.Debug.WriteLine("Finaliza el controller");
 
-
-
-            System.Diagnostics.Debug.WriteLine("Finaliza el controller");
+            string flag = comando.ejecutar();
 
             return PartialView();
         }
@@ -381,7 +368,6 @@ namespace BOReserva.Controllers
 
         public ActionResult M05_DatosUsuario(int idorigen, int iddestino, string fechadespegue, string fechaaterrizaje, int monto, string tipo, int idvuelo)
         {
-
 
             CVisualizarBoleto vue = new CVisualizarBoleto();
 
@@ -485,9 +471,6 @@ namespace BOReserva.Controllers
 
             return PartialView(bol);
         }
-
-
-
 
 
         public ActionResult M05_ModificarBoleto(int id)
