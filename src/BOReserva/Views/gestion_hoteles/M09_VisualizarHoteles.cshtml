@@ -141,7 +141,7 @@
             jQuery.ajax({
                 type: "GET",
                 url: "/gestion_hoteles/M09_Detallehotel",
-               // data: { matricula: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+                data: { id: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
             }).done(function (data) {
                 $("#contenido").empty();
                 $("#contenido").append(data);

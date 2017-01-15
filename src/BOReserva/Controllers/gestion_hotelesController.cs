@@ -103,10 +103,22 @@ namespace BOReserva.Controllers
         /// Método de la vista parcial M09_VisualizarHoteles
         /// </summary>
         /// <returns>Retorna la vista parcial M09_VisualizarHoteles en conjunto del Modelo de dicha vista</returns>
-        public ActionResult M09_DetalleHotel()
+        public ActionResult M09_DetalleHotel(int id)
         {
-            CVerHotel model = new CVerHotel();
-            return PartialView(model);
+            BOReserva.Controllers.PatronComando.M09.M09_COConsultarHotel comando = FabricaComando.crearM09ConsultarHotel();
+            Entidad hotel = comando.ejecutar(id);
+            Hotel hotelbuscado = (Hotel)hotel;
+            idhotel = hotelbuscado._id;
+            CVerHotel modelovista = new CVerHotel();
+            modelovista._capacidadHabitacion = hotelbuscado._capacidad;
+            modelovista._ciudad = hotelbuscado._ciudad._nombre;
+            modelovista._clasificacion = hotelbuscado._clasificacion;
+            modelovista._direccion = hotelbuscado._direccion;
+            modelovista._email = hotelbuscado._email;
+            modelovista._nombre = hotelbuscado._nombre;
+            modelovista._paginaWeb = hotelbuscado._paginaWeb;
+            modelovista._pais = hotelbuscado._ciudad._pais._nombre;
+            return PartialView(modelovista);
         }
 
 
