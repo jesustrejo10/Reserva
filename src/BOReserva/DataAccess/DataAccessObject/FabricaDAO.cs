@@ -12,6 +12,11 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAOHotel();
         }
 
+        public static DAO instanciarDaoCrucero()
+        {
+            return new DAOCruceros();
+        }
+
         public static DAO instanciarDaoReclamo() 
         {
             return new DAOReclamo();

@@ -149,7 +149,7 @@ namespace BOReserva.Controllers
             
             Entidad nuevoCrucero = FabricaEntidad.InstanciarCrucero(model);
             //con la fabrica instancie al hotel.
-            Command<String> comando = FabricaComando.crearM09AgregarHotel(nuevoCrucero);
+            Command<String> comando = FabricaComando.crearM14AgregarCrucero(nuevoCrucero);
             String agrego_si_no = comando.ejecutar();
 
             return (Json(agrego_si_no));

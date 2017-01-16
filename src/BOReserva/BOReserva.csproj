@@ -230,6 +230,7 @@
     <Compile Include="Controllers\PatronComando\M09\M09_COVisualizarHoteles.cs" />
     <Compile Include="Controllers\PatronComando\M13_COAgregarRol.cs" />
     <Compile Include="Controllers\PatronComando\M13_COAgregarRolPermiso.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COAgregarCrucero.cs" />
     <Compile Include="Controllers\PatronComando\M16_COAgregarReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOCruceros.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOHotel.cs" />
