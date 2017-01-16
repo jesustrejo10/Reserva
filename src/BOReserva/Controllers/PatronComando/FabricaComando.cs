@@ -85,6 +85,21 @@ namespace BOReserva.Controllers.PatronComando
 
         }
 
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M09_CODisponibilidadHotel
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M09_CODisponibilidadHotel.
+        /// </returns>
+        public static Command<String> crearM09DisponibilidadHotel(Entidad hotel, int disponibilidad)
+        {
+
+            return new M09_CODisponibilidadHotel(hotel, disponibilidad);
+
+        }
+
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
         /// M09_COObtenerPaises

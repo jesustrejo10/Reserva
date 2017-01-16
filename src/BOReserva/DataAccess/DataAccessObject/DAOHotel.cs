@@ -216,7 +216,8 @@ namespace BOReserva.DataAccess.DataAccessObject
                             reader["hot_url_pagina"].ToString(),
                             Int32.Parse(reader["hot_estrellas"].ToString()),
                             Int32.Parse(reader["hot_cantidad_habitaciones"].ToString()),
-                            ciudad
+                            ciudad,
+                            Int32.Parse(reader["hot_disponibilidad"].ToString())
                         );
                         listaHoteles.Add(idHotel, hotel);
                     }
@@ -249,6 +250,32 @@ namespace BOReserva.DataAccess.DataAccessObject
             catch (SqlException ex)
             {
                 conexion.Close();
+                return ex.Message;
+            }
+        }
+
+        public String disponibilidadHotel(Entidad e, int disponibilidad)
+        {
+            Hotel hotel = (Hotel)e;
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            try
+            {
+                conexion.Open();
+                String sql = "UPDATE Hotel SET hot_disponibilidad = " + disponibilidad + 
+                            " WHERE hot_id = " + hotel._id;
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                conexion.Close();
+                hotel._nombre = "1";
+                Entidad resultado = hotel;
+                return "1";
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                hotel._nombre = ex.Message;
+                Entidad resultado = hotel;
                 return ex.Message;
             }
         }

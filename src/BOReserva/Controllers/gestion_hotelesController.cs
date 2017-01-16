@@ -183,6 +183,39 @@ namespace BOReserva.Controllers
         }
 
 
+        /// <summary>
+        /// Método que se utiliza para cambiar la disponibilidad de un hotel existente
+        /// </summary>
+        /// <param name="id">Identificador del hotel a eliminar</param>
+        /// <returns>Retorna un JsonResult</returns>
+        public JsonResult activateHotel(int id)
+        {
+            Command<Entidad> comando = FabricaComando.crearM09ConsultarHotel(id);
+            Entidad hotel = comando.ejecutar();
+            Hotel hotelbuscado = (Hotel)hotel;
+            hotelbuscado._id = id;
+            Command<String> comando1 = FabricaComando.crearM09DisponibilidadHotel(hotelbuscado, 1);
+            String borro_si_no = comando1.ejecutar();
+            return (Json(borro_si_no));
+        }
+
+
+        /// <summary>
+        /// Método que se utiliza para cambiar la disponibilidad de un hotel existente
+        /// </summary>
+        /// <param name="id">Identificador del hotel a eliminar</param>
+        /// <returns>Retorna un JsonResult</returns>
+        public JsonResult deactivateHotel(int id)
+        {
+            Command<Entidad> comando = FabricaComando.crearM09ConsultarHotel(id);
+            Entidad hotel = comando.ejecutar();
+            Hotel hotelbuscado = (Hotel)hotel;
+            hotelbuscado._id = id;
+            Command<String> comando1 = FabricaComando.crearM09DisponibilidadHotel(hotelbuscado, 0);
+            String borro_si_no = comando1.ejecutar();
+            return (Json(borro_si_no));
+        }
+
 
 
 
