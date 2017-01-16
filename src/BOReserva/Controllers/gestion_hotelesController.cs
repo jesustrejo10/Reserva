@@ -23,6 +23,7 @@ namespace BOReserva.Controllers
         public static String _pais;
         public static String sciudad;
         public static String ciudad;
+        private static int idhotel;
 
         /// <summary>
         /// Método de la vista parcial M09_AgregarHotel
@@ -31,6 +32,9 @@ namespace BOReserva.Controllers
         public ActionResult M09_AgregarHotel()
         {
             CAgregarHotel model = new CAgregarHotel();
+            Command<Dictionary<int,Entidad>> comando = FabricaComando.crearM09ObtenerPaises();
+            model._paises = comando.ejecutar();
+
             //Aca puedo devolver
             return PartialView(model);
         }
@@ -72,7 +76,8 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult guardarHotel(CAgregarHotel model)
         {   
-            Entidad ciudadDestino = FabricaEntidad.InstanciarCiudad("nombre de la ciudad");
+            //Entidad ciudadDestino = FabricaEntidad.InstanciarCiudad("nombre de la ciudad");
+            Entidad ciudadDestino = FabricaEntidad.InstanciarCiudad(_ciudad);
             ciudadDestino._id = 29;
             Entidad nuevoHotel = FabricaEntidad.InstanciarHotel(model, ciudadDestino);
             //con la fabrica instancie al hotel.
@@ -82,13 +87,146 @@ namespace BOReserva.Controllers
             return (Json(agrego_si_no));
         }
 
+
+        /// <summary>
+        /// Método de la vista parcial M09_VisualizarHoteles
+        /// </summary>
+        /// <returns>Retorna la vista parcial M09_VisualizarHoteles en conjunto del Modelo de dicha vista</returns>
         public ActionResult M09_VisualizarHoteles()
         {
             Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM09VisualizarHoteles();
             Dictionary<int, Entidad> listaHoteles = comando.ejecutar();
             return PartialView(listaHoteles);
         }
-            
+
+        /// <summary>
+        /// Método de la vista parcial M09_VisualizarHoteles
+        /// </summary>
+        /// <returns>Retorna la vista parcial M09_VisualizarHoteles en conjunto del Modelo de dicha vista</returns>
+        public ActionResult M09_DetalleHotel(int id)
+        {
+            Command<Entidad> comando = FabricaComando.crearM09ConsultarHotel(id);
+            Entidad hotel = comando.ejecutar();
+            Hotel hotelbuscado = (Hotel)hotel;
+            idhotel = hotelbuscado._id;
+            CVerHotel modelovista = new CVerHotel();
+            modelovista._capacidadHabitacion = hotelbuscado._capacidad;
+            modelovista._ciudad = hotelbuscado._ciudad._nombre;
+            modelovista._clasificacion = hotelbuscado._clasificacion;
+            modelovista._direccion = hotelbuscado._direccion;
+            modelovista._email = hotelbuscado._email;
+            modelovista._nombre = hotelbuscado._nombre;
+            modelovista._paginaWeb = hotelbuscado._paginaWeb;
+            modelovista._pais = hotelbuscado._ciudad._pais._nombre;
+            return PartialView(modelovista);
+        }
+
+
+
+        /// <summary>
+        /// Método de la vista parcial M09_ModificarHotel
+        /// </summary>
+        /// <returns>Retorna la vista parcial M09_ModificarHotel en conjunto del Modelo de dicha vista</returns>
+        public ActionResult M09_ModificarHotel(int id)
+        {
+            Command<Entidad> comando = FabricaComando.crearM09ConsultarHotel(id);
+            Entidad hotel = comando.ejecutar();
+            Hotel hotelbuscado = (Hotel)hotel;
+            idhotel = hotelbuscado._id;
+            CModificarHotel modelovista = new CModificarHotel();
+            modelovista._capacidadHabitacion = hotelbuscado._capacidad;
+            modelovista._ciudad = hotelbuscado._ciudad._nombre;
+            modelovista._clasificacion = hotelbuscado._clasificacion;
+            modelovista._direccion = hotelbuscado._direccion;
+            modelovista._email = hotelbuscado._email;
+            modelovista._nombre = hotelbuscado._nombre;
+            modelovista._paginaWeb = hotelbuscado._paginaWeb;
+            modelovista._pais = hotelbuscado._ciudad._pais._nombre;
+            return PartialView(modelovista);
+        }
+
+
+
+        /// <summary>
+        /// Método que se utiliza para modificar un hotel
+        /// </summary>
+        /// <param name="model">Datos que provienen de un formulario de la vista parcial M09_ModificarHotel</param>
+        /// <returns>Retorna un JsonResult</returns>
+        [HttpPost]
+        public JsonResult modificarHotel(CModificarHotel model)
+        {
+            Entidad ciudadDestino = FabricaEntidad.InstanciarCiudad("nombre");
+            ciudadDestino._id = 29;
+            Entidad modificarHotel = FabricaEntidad.InstanciarHotel(model, ciudadDestino);
+            //con la fabrica instancie al hotel.
+            Command<String> comando = FabricaComando.crearM09ModificarHotel(modificarHotel, idhotel);
+            String agrego_si_no = comando.ejecutar();
+
+            return (Json(agrego_si_no));
+        }
+
+
+        /// <summary>
+        /// Método que se utiliza para eliminar un hotel existente
+        /// </summary>
+        /// <param name="id">Identificador del hotel a eliminar</param>
+        /// <returns>Retorna un JsonResult</returns>
+        public JsonResult deleteHotel(int id)
+        {
+            Command<Entidad> comando = FabricaComando.crearM09ConsultarHotel(id);
+            Entidad hotel = comando.ejecutar();
+            Hotel hotelbuscado = (Hotel)hotel;
+            hotelbuscado._id = id;
+            Command<String> comando1 = FabricaComando.crearM09EliminarHotel(hotelbuscado, id);
+            String borro_si_no = comando1.ejecutar(); 
+            return (Json(borro_si_no));
+        }
+
+
+        /// <summary>
+        /// Método que se utiliza para cambiar la disponibilidad de un hotel existente
+        /// </summary>
+        /// <param name="id">Identificador del hotel a eliminar</param>
+        /// <returns>Retorna un JsonResult</returns>
+        public JsonResult activateHotel(int id)
+        {
+            Command<Entidad> comando = FabricaComando.crearM09ConsultarHotel(id);
+            Entidad hotel = comando.ejecutar();
+            Hotel hotelbuscado = (Hotel)hotel;
+            hotelbuscado._id = id;
+            Command<String> comando1 = FabricaComando.crearM09DisponibilidadHotel(hotelbuscado, 1);
+            String borro_si_no = comando1.ejecutar();
+            return (Json(borro_si_no));
+        }
+
+
+        /// <summary>
+        /// Método que se utiliza para cambiar la disponibilidad de un hotel existente
+        /// </summary>
+        /// <param name="id">Identificador del hotel a eliminar</param>
+        /// <returns>Retorna un JsonResult</returns>
+        public JsonResult deactivateHotel(int id)
+        {
+            Command<Entidad> comando = FabricaComando.crearM09ConsultarHotel(id);
+            Entidad hotel = comando.ejecutar();
+            Hotel hotelbuscado = (Hotel)hotel;
+            hotelbuscado._id = id;
+            Command<String> comando1 = FabricaComando.crearM09DisponibilidadHotel(hotelbuscado, 0);
+            String borro_si_no = comando1.ejecutar();
+            return (Json(borro_si_no));
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

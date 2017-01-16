@@ -8,6 +8,8 @@ namespace BOReserva.DataAccess.DataAccessObject
 {
     public class FabricaDAO
     {
+        #region M09_Gestion_Hoteles_Por_Ciudad
+        
         public static DAO instanciarDaoHotel() {
             return new DAOHotel();
         }
@@ -21,6 +23,16 @@ namespace BOReserva.DataAccess.DataAccessObject
         {
             return new DAOReclamo();
         }
+
+        public static DAO instanciarDaoPais() {
+            return new DAOPais();
+        }
+
+        public static DAO instanciarDaoCiudad()
+        {
+            return new DAOCiudad();
+        }
+        #endregion
 
         #region M04_Vuelos
         /// <summary>
