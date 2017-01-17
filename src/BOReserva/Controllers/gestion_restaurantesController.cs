@@ -11,7 +11,7 @@ using BOReserva.Models;
 using BOReserva.LogicaReserva.Fabrica;
 using BOReserva.Views.gestion_restaurantes.Fabrica;
 using BOReserva.Models.Fabrica;
-using static BOReserva.LogicaReserva.Fabrica.FabricaComando;
+
 
 namespace BOReserva.Controllers
 {
@@ -33,7 +33,7 @@ namespace BOReserva.Controllers
             {
                
                 Entidad _lugar = FabricaEntidad.inicializarLugar(id, "");//Aqui se envia la clave foranea de lugar para realizar la busqueda
-                Comando<List<Entidad>> comando = (Comando<List<Entidad>>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, comandoRestaurant.NULO, _lugar);
+                Comando<List<Entidad>> comando = (Comando<List<Entidad>>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, BOReserva.LogicaReserva.Fabrica.FabricaComando.comandoRestaurant.NULO, _lugar);
                 List<Entidad> restaurantes = comando.Ejecutar();
                 CRestauranteModelo Restaurant = FabricaEntidad.inicializarRestaurant();
                 List<CRestauranteModelo> lista = FabricaEntidad.inicializarListaRestarant();
@@ -77,7 +77,7 @@ namespace BOReserva.Controllers
             
             Entidad _restaurant = FabricaEntidad.inicializarRestaurant();
             ((CRestauranteModelo)_restaurant).Id = id;
-            Comando<Entidad> comando = (Comando<Entidad>)LogicaReserva.Fabrica.FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, comandoRestaurant.CONSULTAR_ID, _restaurant);
+            Comando<Entidad> comando = (Comando<Entidad>)LogicaReserva.Fabrica.FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, BOReserva.LogicaReserva.Fabrica.FabricaComando.comandoRestaurant.CONSULTAR_ID, _restaurant);
             Entidad rest = comando.Ejecutar();
 
             ViewBag.Id = ((CRestauranteModelo)rest).Id;
@@ -112,7 +112,7 @@ namespace BOReserva.Controllers
             //    return Json(error);
             //}
             Entidad _restaurant = FabricaEntidad.inicializarRestaurant(Nombre, Direccion,Telefono, Descripcion, HoraIni, HoraFin, idLugar);
-            Comando<Boolean> comando = (Comando<Boolean>)LogicaReserva.Fabrica.FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CREAR, comandoRestaurant.NULO, _restaurant);
+            Comando<Boolean> comando = (Comando<Boolean>)LogicaReserva.Fabrica.FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CREAR, BOReserva.LogicaReserva.Fabrica.FabricaComando.comandoRestaurant.NULO, _restaurant);
                     
          
             if (comando.Ejecutar())
@@ -145,7 +145,7 @@ namespace BOReserva.Controllers
             //    return Json(error);
             //}
             Entidad _restaurant = FabricaEntidad.inicializarRestaurant(Id,Nombre, Direccion, Telefono, Descripcion, HoraIni, HoraFin, idLugar);
-            Comando<Boolean> comando = (Comando<Boolean>)LogicaReserva.Fabrica.FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.ACTUALIZAR, comandoRestaurant.NULO, _restaurant);
+            Comando<Boolean> comando = (Comando<Boolean>)LogicaReserva.Fabrica.FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.ACTUALIZAR, BOReserva.LogicaReserva.Fabrica.FabricaComando.comandoRestaurant.NULO, _restaurant);
 
             if (comando.Ejecutar())
             {
@@ -170,7 +170,7 @@ namespace BOReserva.Controllers
 
             Entidad _restaurant = FabricaEntidad.inicializarRestaurant();
             ((CRestauranteModelo)_restaurant).Id = id;
-            Comando<Boolean> comando = (Comando<Boolean>)LogicaReserva.Fabrica.FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.ELIMINAR, comandoRestaurant.NULO, _restaurant);
+            Comando<Boolean> comando = (Comando<Boolean>)LogicaReserva.Fabrica.FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.ELIMINAR, BOReserva.LogicaReserva.Fabrica.FabricaComando.comandoRestaurant.NULO, _restaurant);
             //Chequeo de campos obligatorios para el formulario
             if ((id == -1))
             {
