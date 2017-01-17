@@ -9,7 +9,7 @@ using System.Web;
 
 namespace BOReserva.Datos
 {
-    public abstract class ConexionBaseDeDatos
+    public abstract class DAO
     {
 
         #region Atributos

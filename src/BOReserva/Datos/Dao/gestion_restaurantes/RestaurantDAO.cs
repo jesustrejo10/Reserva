@@ -11,7 +11,7 @@ using System.Web;
 
 namespace BOReserva.Datos.Dao.gestion_restaurantes
 {
-    public class RestaurantDAO : ConexionBaseDeDatos, IRestaurantDAO
+    public class RestaurantDAO : DAO, IRestaurantDAO
     {
 
         /// <summary>

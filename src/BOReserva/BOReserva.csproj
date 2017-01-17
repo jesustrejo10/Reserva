@@ -270,7 +270,7 @@
     </Compile>
     <Compile Include="DataAccess\Model\ResultadoBD.cs" />
     <Compile Include="Datos\Columna.cs" />
-    <Compile Include="Datos\ConexionBaseDeDatos.cs" />
+    <Compile Include="Datos\DAO.cs" />
     <Compile Include="Datos\Dao\gestion_restaurantes\RecursoDAOM10.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
