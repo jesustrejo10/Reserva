@@ -1,9 +1,10 @@
-﻿using System;
+﻿using BOReserva.DataAccess.DAO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.DataAccess.DAO
+namespace BOReserva.DataAccess.DataAccessObject
 {
     public class FabricaDAO
     {

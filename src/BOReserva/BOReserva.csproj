@@ -231,14 +231,16 @@
     <Compile Include="Controllers\PatronComando\M13_COAgregarRol.cs" />
     <Compile Include="Controllers\PatronComando\M13_COAgregarRolPermiso.cs" />
     <Compile Include="Controllers\PatronComando\M16_COAgregarReclamo.cs" />
+    <Compile Include="DataAccess\DataAccessObject\DAOHotel.cs" />
+    <Compile Include="DataAccess\DataAccessObject\DAOPais.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAORol.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPais.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORol.cs" />
     <Compile Include="DataAccess\Domain\Permiso.cs" />
     <Compile Include="DataAccess\Domain\Reclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAO.cs" />
-    <Compile Include="DataAccess\DataAccessObject\DAOHotel.cs" />
     <Compile Include="DataAccess\DataAccessObject\M04\DAOVuelo.cs" />
     <Compile Include="DataAccess\DataAccessObject\FabricaDAO.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAO.cs" />
@@ -267,13 +269,40 @@
       <DependentUpon>RecursoBD.resx</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\Model\ResultadoBD.cs" />
+    <Compile Include="Datos\Columna.cs" />
+    <Compile Include="Datos\DAO.cs" />
+    <Compile Include="Datos\Dao\gestion_restaurantes\RecursoDAOM10.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RecursoDAOM10.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Dao\gestion_restaurantes\RestaurantDAO.cs" />
+    <Compile Include="Datos\Fabrica\FabricaDatosSql.cs" />
+    <Compile Include="Datos\IDAO.cs" />
+    <Compile Include="Datos\InterfazDao\gestion_restaurantes\IRestaurantDAO.cs" />
+    <Compile Include="Datos\Parametro.cs" />
+    <Compile Include="Datos\RecursosBaseDeDatos1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RecursosBaseDeDatos.resx</DependentUpon>
+    </Compile>
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="LogicaReserva\Comando.cs" />
+    <Compile Include="LogicaReserva\Comando\gestion_restaurantes\comandoActualizarRestaurant.cs" />
+    <Compile Include="LogicaReserva\Comando\gestion_restaurantes\comandoCargarHorario.cs" />
+    <Compile Include="LogicaReserva\Comando\gestion_restaurantes\comandoConsultarLugar.cs" />
+    <Compile Include="LogicaReserva\Comando\gestion_restaurantes\comandoConsultarRestaurant.cs" />
+    <Compile Include="LogicaReserva\Comando\gestion_restaurantes\comandoConsultarRestaurantId.cs" />
+    <Compile Include="LogicaReserva\Comando\gestion_restaurantes\comandoCrearRestaurant.cs" />
+    <Compile Include="LogicaReserva\Comando\gestion_restaurantes\comandoEliminarRestaurant.cs" />
+    <Compile Include="LogicaReserva\Fabrica\FabricaComando.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Entidad.cs" />
+    <Compile Include="Models\Fabrica\FabricaEntidad.cs" />
     <Compile Include="Models\gestion_automoviles\CAgregarAutomovil.cs" />
-    <Compile Include="DataAccess\DataAccessObject\DAOAutomovil.cs" />
     <Compile Include="Models\gestion_automoviles\CModificarAutomovil.cs" />
     <Compile Include="Models\gestion_automoviles\CVisualizarAutomovil.cs" />
     <Compile Include="DataAccess\Domain\Automovil.cs" />
@@ -344,6 +373,7 @@
     <Compile Include="Models\gestion_ruta_comercial\CGestion_ruta.cs" />
     <Compile Include="Models\gestion_ruta_comercial\CRuta.cs" />
     <Compile Include="Models\gestion_usuarios\AgregarUsuario.cs" />
+    <Compile Include="Models\Lugar.cs" />
     <Compile Include="Servicio\Servicio_Usuarios\ConexionBD.cs" />
     <Compile Include="Models\gestion_usuarios\CUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\Encriptar.cs" />
@@ -365,7 +395,6 @@
     </Compile>
     <Compile Include="Models\gestion_usuarios\ResultadoBD.cs" />
     <Compile Include="Models\Util.cs" />
-    <Compile Include="Models\gestion_restaurantes\CRestauranteModeloVista.cs" />
     <Compile Include="Models\gestion_restaurantes\CRestauranteModelo.cs" />
     <Compile Include="MySQLException.cs" />
     <Compile Include="Models\gestion_vuelo\CVuelo.cs" />
@@ -386,6 +415,7 @@
     <Compile Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx.designer.cs">
       <DependentUpon>GestionDeAutomoviles.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\gestion_restaurantes\Fabrica\FabricaVista.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -538,6 +568,7 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Datos\Dao\gestion_restaurantes\Scripts de Procedures M10.sql" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\bootstrap\css\bootstrap.css" />
@@ -551,7 +582,6 @@
     <Content Include="Models\gestion_equipaje_perdido\placeholder.html" />
     <Content Include="Models\gestion_hoteles\placeholder.html" />
     <Content Include="Models\gestion_ofertas\placeholder.html" />
-    <Content Include="Models\gestion_restaurantes\placeholder.html" />
     <Content Include="Models\gestion_roles\placeholder.html" />
     <Content Include="Models\gestion_ruta_comercial\placeholder.html" />
     <Content Include="Models\gestion_usuarios\placeholder.html" />
@@ -580,6 +610,7 @@
     <Content Include="Scripts\Scripts_ComidaVuelo\llamadas_generales.js" />
     <Content Include="Scripts\Scripts_Hoteles\llamadas_comunes_hoteles.js" />
     <Content Include="Scripts\Scripts_Hoteles\llamadas_generales_hoteles.js" />
+    <Content Include="Scripts\Scripts_Restaurantes\ccs\M10.css" />
     <Content Include="Scripts\Scripts_Vuelos\llamadas_generales_Vuelos.js" />
     <Content Include="Views\dist\css\AdminLTE.css" />
     <Content Include="Views\dist\css\AdminLTE.min.css" />
@@ -644,6 +675,7 @@
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Deshabilitar.html" />
     <Content Include="Views\gestion_hoteles\placeholder.html" />
     <Content Include="Views\gestion_ofertas\placeholder.html" />
+    <Content Include="Views\gestion_restaurantes\ccs\M10.css" />
     <Content Include="Views\gestion_roles\M13_Roles.html" />
     <Content Include="Views\gestion_roles\placeholder.html" />
     <Content Include="Views\gestion_ruta_comercial\placeholder.html" />
@@ -1657,6 +1689,14 @@
     <EmbeddedResource Include="DataAccess\Model\RecursoBD.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoBD.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Datos\Dao\gestion_restaurantes\RecursoDAOM10.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecursoDAOM10.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Datos\RecursosBaseDeDatos.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecursosBaseDeDatos1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Models\gestion_cruceros\RecursosCruceros.resx" />
     <EmbeddedResource Include="Models\gestion_usuarios\RecursoBD.resx">

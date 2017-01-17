@@ -1,4 +1,5 @@
-﻿using BOReserva.DataAccess.Domain;
+﻿using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.DataAccess.DAO
+namespace BOReserva.DataAccess.DataAccessObject
 {
     abstract public class DAO : IDAO
     {
