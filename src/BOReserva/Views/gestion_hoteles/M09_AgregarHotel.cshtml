@@ -86,7 +86,7 @@
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <label for="">Pais(<span style="color:red">*</span>)</label>
-                                @{
+                                @{  
                                     List<SelectListItem> paises = BOReserva.Controllers.gestion_automovilesController.pais();
                                     if (paises.First().Text.Length > 15)
                                     {
