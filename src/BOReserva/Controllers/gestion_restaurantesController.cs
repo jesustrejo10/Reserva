@@ -21,8 +21,6 @@ namespace BOReserva.Controllers
     
 
         #region Consultar Restaurantes por ciudad
-        // GET: gestion_restaurantes
-
         /// <summary>
         /// Método para el acceso a la interfaz de visualización de restaurantes.
         /// </summary>
@@ -66,9 +64,7 @@ namespace BOReserva.Controllers
             return PartialView();
         }
 
-
-
- 
+         
         /// <summary>
         /// Método para el acceso a la interfaz de modificación de restaurantes.
         /// </summary>
