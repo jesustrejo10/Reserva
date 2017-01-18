@@ -1,5 +1,6 @@
 ﻿using BOReserva.DataAccess.Domain;
 using BOReserva.M10.Comando.gestion_restaurantes;
+using BOReserva.Controllers.PatronComando;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -72,6 +73,11 @@ namespace BOReserva.Controllers.PatronComando
         public static Command<String> crearM05CrearBoleto(Entidad e)
         {
             return new M05_COCrearBoleto((Boleto)e);
+        }
+
+        public static Command<String> buscarM05nombreCiudad(Entidad e)
+        {
+            return new M05_COBuscarnombreciudad(e);
         }
         #endregion
 

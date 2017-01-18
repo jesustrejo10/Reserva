@@ -42,6 +42,11 @@ namespace BOReserva.DataAccess.DataAccessObject
         {
             return new DAOBoleto();
 		}
+
+        public static DAO instanciarDaoLugar()
+        {
+            return new DAOLugar();
+        }
 		#endregion
 			
         #region Modulo 10

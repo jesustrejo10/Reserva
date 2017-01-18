@@ -25,7 +25,8 @@ namespace BOReserva.Controllers
             Pasajero nuevoPasajero = (Pasajero)FabricaEntidad.InstanciarPasajero(pasaporte, primernombre, segundonombre, primerapellido, segundoapellido, sexo, fechanac, correo);
 
             CVisualizarBoleto bol = new CVisualizarBoleto();
-            manejadorSQL_Boletos sqlboletos = new manejadorSQL_Boletos();
+            //manejadorSQL_Boletos sqlboletos = new manejadorSQL_Boletos();
+            
             bol._idOrigen = idorigen;
             bol._idDestino = iddestino;
             bol._fechaDespegueIda = fechadespegue;
@@ -34,9 +35,11 @@ namespace BOReserva.Controllers
             bol._tipoBoleto = tipo;
             bol._pasajero = nuevoPasajero;
             //COMANDO
-            bol._origen = sqlboletos.MBuscarnombreciudad(idorigen);
-            bol._destino = sqlboletos.MBuscarnombreciudad(iddestino);
+            //bol._origen = sqlboletos.MBuscarnombreciudad(idorigen);
+            //bol._destino = sqlboletos.MBuscarnombreciudad(iddestino);
             //
+            bol._origen = (FabricaComando.buscarM05nombreCiudad(new Entidad(idorigen))).ejecutar();
+            bol._destino = (FabricaComando.buscarM05nombreCiudad(new Entidad(iddestino))).ejecutar();
             bol._idVuelo = idvuelo;
 
             Command<String> comando = FabricaComando.crearM05AgregarPasajero(nuevoPasajero);

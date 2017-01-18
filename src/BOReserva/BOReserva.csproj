@@ -205,6 +205,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\PatronComando\Command.cs" />
     <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COBuscarnombreciudad.cs" />
     <Compile Include="Controllers\PatronComando\M10\comandoActualizarRestaurant.cs" />
     <Compile Include="Controllers\PatronComando\M10\comandoCargarHorario.cs" />
     <Compile Include="Controllers\PatronComando\M10\comandoConsultarLugar.cs" />
@@ -241,11 +242,13 @@
     <Compile Include="Controllers\PatronComando\M13_COAgregarRolPermiso.cs" />
     <Compile Include="Controllers\PatronComando\M16_COAgregarReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOBoleto.cs" />
+    <Compile Include="DataAccess\DataAccessObject\DAOLugar.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOPasajero.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOHotel.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOPais.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAORol.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOLugar.cs" />
     <Compile Include="DataAccess\DataAccessObject\M10\Columna.cs" />
     <Compile Include="DataAccess\DataAccessObject\M10\DAO.cs" />
     <Compile Include="DataAccess\DataAccessObject\M10\IDAO.cs" />
