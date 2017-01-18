@@ -1,5 +1,7 @@
-﻿using BOReserva.Models.gestion_hoteles;
+﻿using BOReserva.Models;
+using BOReserva.Models.gestion_hoteles;
 using BOReserva.Models.gestion_reclamos;
+using BOReserva.Models.gestion_restaurantes;
 using BOReserva.Models.gestion_roles;
 using System;
 using System.Collections.Generic;
@@ -78,6 +80,45 @@ namespace BOReserva.DataAccess.Domain
                              idAvion);
         }
         #endregion
+
+        #region Modulo 10
+        public static CRestauranteModelo inicializarRestaurant(string nombre, string direccion, string telefono, string descripcion, string horarioApertura, string horarioCierre, int idLugar)
+        {
+            return new CRestauranteModelo(nombre, direccion, telefono, descripcion, horarioApertura, horarioCierre, idLugar);
+        }
+
+        public static CRestauranteModelo inicializarRestaurant(int id, string nombre, string direccion, string telefono, string descripcion, string horarioApertura, string horarioCierre, int idLugar)
+        {
+            return new CRestauranteModelo(id, nombre, direccion, telefono, descripcion, horarioApertura, horarioCierre, idLugar);
+        }
+
+        public static CRestauranteModelo inicializarRestaurant()
+        {
+            return new CRestauranteModelo();
+        }
+
+        public static Lugar inicializarLugar(int idLugar, string nombreLugar)
+        {
+            return new Lugar(idLugar, nombreLugar);
+        }
+
+        public static List<Lugar> inicializarListaLugar()
+        {
+            return new List<Lugar>();
+        }
+
+        public static List<CRestauranteModelo> inicializarListaRestarant()
+        {
+            return new List<CRestauranteModelo>();
+        }
+
+        public static List<Entidad> asignarListaDeEntidades()
+        {
+            return new List<Entidad>();
+        }
+
+        #endregion
+
 
         public static Entidad InstanciarRol(CRoles model)
         {

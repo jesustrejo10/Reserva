@@ -1,14 +1,15 @@
-﻿using BOReserva.Datos.Fabrica;
-using BOReserva.Datos.InterfazDao.gestion_restaurantes;
+﻿using BOReserva.Controllers.PatronComando;
+using BOReserva.DataAccess.DataAccessObject;
+using BOReserva.DataAccess.Domain;
 using BOReserva.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.LogicaReserva.Comando.gestion_restaurantes
+namespace BOReserva.M10.Comando.gestion_restaurantes
 {
-    public class comandoConsultarRestaurant : Comando<List<Entidad>>
+    public class comandoConsultarRestaurant : Command<List<Entidad>>
     {
         #region Atributos
         Entidad _objeto;
@@ -19,11 +20,11 @@ namespace BOReserva.LogicaReserva.Comando.gestion_restaurantes
             this._objeto = _objeto;
         }
 
-        public override List<Entidad> Ejecutar()
+        public override List<Entidad> ejecutar()
         {
             try
             {
-                IRestaurantDAO restaurantDao = FabricaDatosSql.RestaurantBD();
+                IDAORestaurant restaurantDao = FabricaDAO.RestaurantBD();
                 return restaurantDao.Consultar(this._objeto);
             }
             catch (NotImplementedException)

@@ -1,20 +1,20 @@
-﻿using BOReserva.Datos.Fabrica;
-using BOReserva.Datos.InterfazDao.gestion_restaurantes;
-using BOReserva.Models;
+﻿using BOReserva.Controllers.PatronComando;
+using BOReserva.DataAccess.DataAccessObject;
+using BOReserva.DataAccess.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.LogicaReserva.Comando.gestion_restaurantes
+namespace BOReserva.M10.Comando.gestion_restaurantes
 {
-    public class comandoConsultarLugar : Comando<List<Entidad>>
+    public class comandoConsultarLugar : Command<List<Entidad>>
     {
-        public override List<Entidad> Ejecutar()
+        public override List<Entidad> ejecutar()
         {
             try
             {
-                IRestaurantDAO restaurantDao = FabricaDatosSql.RestaurantBD();
+                IDAORestaurant restaurantDao = FabricaDAO.RestaurantBD();
                 return restaurantDao.ListarLugar();
             }
             catch (NotImplementedException)

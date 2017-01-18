@@ -1,14 +1,14 @@
-﻿using BOReserva.Datos.Fabrica;
-using BOReserva.Datos.InterfazDao.gestion_restaurantes;
-using BOReserva.Models;
+﻿using BOReserva.Controllers.PatronComando;
+using BOReserva.DataAccess.DataAccessObject;
+using BOReserva.DataAccess.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.LogicaReserva.Comando.gestion_restaurantes
+namespace BOReserva.M10.Comando.gestion_restaurantes
 {
-    public class comandoActualizarRestaurant : Comando<Boolean>
+    public class comandoActualizarRestaurant : Command<Boolean>
     {
         #region Atributos
         Entidad _objeto;
@@ -19,11 +19,11 @@ namespace BOReserva.LogicaReserva.Comando.gestion_restaurantes
             this._objeto = _objeto;
         }
 
-        public override bool Ejecutar()
+        public override bool ejecutar()
         {
             try
             {
-                IRestaurantDAO restaurantDao = FabricaDatosSql.RestaurantBD();
+                IDAORestaurant restaurantDao = FabricaDAO.RestaurantBD();
                 restaurantDao.Modificar(this._objeto);
                 return true;
             }
@@ -32,7 +32,7 @@ namespace BOReserva.LogicaReserva.Comando.gestion_restaurantes
 
                 throw;
             }
-            System.Diagnostics.Debug.WriteLine("Metodo actualizar en fabrica en construccion");
+         
             return true;
         }
     }

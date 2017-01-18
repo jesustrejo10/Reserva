@@ -1,13 +1,13 @@
-﻿using BOReserva.Models;
+﻿using BOReserva.DataAccess.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BOReserva.Datos.InterfazDao.gestion_restaurantes
+namespace BOReserva.M10
 {
-    public interface IRestaurantDAO : IDAO
+    public interface IDAORestaurant : IDAO
     {
         List<Entidad> ListarLugar();
 

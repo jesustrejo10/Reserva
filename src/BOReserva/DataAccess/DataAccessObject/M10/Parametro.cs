@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.Datos
+namespace BOReserva.M10
 {
     public class Parametro
     {

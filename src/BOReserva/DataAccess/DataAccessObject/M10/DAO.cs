@@ -1,4 +1,4 @@
-﻿using BOReserva.Datos.Fabrica;
+﻿using BOReserva.DataAccess.DataAccessObject;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.Datos
+namespace BOReserva.M10
 {
     public abstract class DAO
     {
@@ -35,7 +35,7 @@ namespace BOReserva.Datos
             try
             {
                 this.StringDeConexion = ConfigurationManager.ConnectionStrings["StringLocal"].ConnectionString;
-                this._conexion = FabricaDatosSql.asignarConexionSql(this.StringDeConexion);
+                this._conexion = FabricaDAO.asignarConexionSql(this.StringDeConexion);
             }
 
             catch (Exception ex)
@@ -87,7 +87,7 @@ namespace BOReserva.Datos
 
                 using (this._conexion)
                 {
-                    this._comandoSql = FabricaDatosSql.asignarComandoSql(query, this._conexion);
+                    this._comandoSql = FabricaDAO.asignarComandoSql(query, this._conexion);
                     SqlDataReader lecturaDeDatos = this._comandoSql.ExecuteReader();
                     return lecturaDeDatos;
                 }
@@ -122,11 +122,11 @@ namespace BOReserva.Datos
             try
             {
                 conectarBD();
-                List<Columna> valorTabla = FabricaDatosSql.asignarListarColumnas();
+                List<Columna> valorTabla = FabricaDAO.asignarListarColumnas();
                 using (this._conexion)
                 {
 
-                    this._comandoSql = FabricaDatosSql.asignarComandoSql(query, this._conexion);
+                    this._comandoSql = FabricaDAO.asignarComandoSql(query, this._conexion);
                     this._comandoSql.CommandType = CommandType.StoredProcedure;
 
 
@@ -143,7 +143,7 @@ namespace BOReserva.Datos
 
                             if (parametro.Direction.Equals(ParameterDirection.Output))
                             {
-                                Columna valor = FabricaDatosSql.asignarValorColumna(parametro.ParameterName, parametro.Value.ToString());
+                                Columna valor = FabricaDAO.asignarValorColumna(parametro.ParameterName, parametro.Value.ToString());
                                 valorTabla.Add(valor);
                             }
                         }
@@ -194,20 +194,20 @@ namespace BOReserva.Datos
             try
             {
                 conectarBD();
-                DataTable tablaDeDatos = FabricaDatosSql.asignarTablaDeDatos();
+                DataTable tablaDeDatos = FabricaDAO.asignarTablaDeDatos();
                 SqlDataAdapter adaptadorDeDatos;
 
                 using (this._conexion)
                 {
 
-                    this._comandoSql = FabricaDatosSql.asignarComandoSql(query, this._conexion);
+                    this._comandoSql = FabricaDAO.asignarComandoSql(query, this._conexion);
                     this._comandoSql.CommandType = CommandType.StoredProcedure;
 
                     AsignarParametros(parametros);
 
                     this._conexion.Open();
 
-                    adaptadorDeDatos = FabricaDatosSql.asignarAdaptadorDeDatos(this._comandoSql);
+                    adaptadorDeDatos = FabricaDAO.asignarAdaptadorDeDatos(this._comandoSql);
 
                     using (adaptadorDeDatos)
                     {

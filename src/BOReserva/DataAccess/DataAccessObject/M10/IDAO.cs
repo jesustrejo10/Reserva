@@ -1,11 +1,12 @@
-﻿using BOReserva.Models;
+﻿using BOReserva.DataAccess.Domain;
+using BOReserva.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BOReserva.Datos
+namespace BOReserva.M10
 {
     /// <summary>
     /// Interface Metodos generales en Base de Datos 

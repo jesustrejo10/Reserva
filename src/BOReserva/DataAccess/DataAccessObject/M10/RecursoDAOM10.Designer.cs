@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BOReserva.Datos.Dao.gestion_restaurantes {
+namespace BOReserva.DataAccess.DataAccessObject.M10 {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace BOReserva.Datos.Dao.gestion_restaurantes {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BOReserva.Datos.Dao.gestion_restaurantes.RecursoDAOM10", typeof(RecursoDAOM10).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BOReserva.DataAccess.DataAccessObject.M10.RecursoDAOM10", typeof(RecursoDAOM10).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
