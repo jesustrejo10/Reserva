@@ -15,7 +15,7 @@ using BOReserva.Models.gestion_roles;
 using System.Diagnostics;
 using BOReserva.Models.gestion_automoviles;
 using BOReserva.Models.gestion_comida_vuelo;
-
+using System.Configuration;
 
 namespace BOReserva.Servicio
 {
@@ -24,7 +24,7 @@ namespace BOReserva.Servicio
         //Inicializo el string de conexion en el constructor
         public manejadorSQL()
         {
-            stringDeConexion = "Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617a;";
+            stringDeConexion = ConfigurationManager.ConnectionStrings["StringLocal"].ConnectionString;
         }
         //Atributo que ejecutara la conexion a la bd
         private SqlConnection conexion = null;
@@ -644,256 +644,256 @@ namespace BOReserva.Servicio
 
         }
 
-        /* INICIO DE FUNCIONES PARA MODULO 10 BO (RESTAURANTES) */
+        ///* INICIO DE FUNCIONES PARA MODULO 10 BO (RESTAURANTES) */
 
-        /// <summary>
-        /// //Método del Modulo 10 (Backoffice) para agregar restaurantes a la base de datos.
-        /// </summary>
-        /// <param name="model">Modelo de restaurante</param>
-        /// <returns>Un booleano que indica si la operación se terminó o no con éxito.</returns>
-        public Boolean insertarRestaurante(CRestauranteModelo model)
-        {
-            try
-            {
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                //uso el SqlCommand para realizar los querys
-                SqlCommand query = conexion.CreateCommand();
-                //ingreso la orden del query
-                query.CommandText = "INSERT INTO Restaurante VALUES (@nom, @dir, @desc, @horap, @horcie, @fklug)";
-                query.Parameters.AddWithValue("@nom", model._nombre);
-                query.Parameters.AddWithValue("@dir", model._direccion);
-                query.Parameters.AddWithValue("@desc", model._descripcion);
-                query.Parameters.AddWithValue("@horap", model._horarioApertura);
-                query.Parameters.AddWithValue("@horcie", model._horarioCierre);
-                query.Parameters.AddWithValue("@fklug", model._idLugar);
-                //creo un lector sql para la respuesta de la ejecucion del comando anterior
-                SqlDataReader lector = query.ExecuteReader();
-                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
-                conexion.Close();
-                return true;
-            }
-            catch (SqlException e)
-            {
-                conexion.Close();
-                Debug.WriteLine("Exception caught: {0}", e);
-                //throw e;
-                return false;
-            }
-            catch (Exception e)
-            {
-                conexion.Close();
-                Debug.WriteLine("Exception caught: {0}", e);
-                //throw e;
-                return false;
-            }
-        }
+        ///// <summary>
+        ///// //Método del Modulo 10 (Backoffice) para agregar restaurantes a la base de datos.
+        ///// </summary>
+        ///// <param name="model">Modelo de restaurante</param>
+        ///// <returns>Un booleano que indica si la operación se terminó o no con éxito.</returns>
+        //public Boolean insertarRestaurante(CRestauranteModelo model)
+        //{
+        //    try
+        //    {
+        //        //Inicializo la conexion con el string de conexion
+        //        conexion = new SqlConnection(stringDeConexion);
+        //        //INTENTO abrir la conexion
+        //        conexion.Open();
+        //        //uso el SqlCommand para realizar los querys
+        //        SqlCommand query = conexion.CreateCommand();
+        //        //ingreso la orden del query
+        //        query.CommandText = "INSERT INTO Restaurante VALUES (@nom, @dir, @desc, @horap, @horcie, @fklug)";
+        //        query.Parameters.AddWithValue("@nom", model._nombre);
+        //        query.Parameters.AddWithValue("@dir", model._direccion);
+        //        query.Parameters.AddWithValue("@desc", model._descripcion);
+        //        query.Parameters.AddWithValue("@horap", model._horarioApertura);
+        //        query.Parameters.AddWithValue("@horcie", model._horarioCierre);
+        //        query.Parameters.AddWithValue("@fklug", model._idLugar);
+        //        //creo un lector sql para la respuesta de la ejecucion del comando anterior
+        //        SqlDataReader lector = query.ExecuteReader();
+        //        //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+        //        conexion.Close();
+        //        return true;
+        //    }
+        //    catch (SqlException e)
+        //    {
+        //        conexion.Close();
+        //        Debug.WriteLine("Exception caught: {0}", e);
+        //        //throw e;
+        //        return false;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        conexion.Close();
+        //        Debug.WriteLine("Exception caught: {0}", e);
+        //        //throw e;
+        //        return false;
+        //    }
+        //}
 
-        /// <summary>
-        /// Método para la consulta de un sólo restaurante, dado un ID como parámetro, retornando un modelo del restaurante.
-        /// </summary>
-        /// <param name="id">El id del restaurante a consultar.</param>
-        /// <returns>Un modelo de Restaurante con los datos pedidos.</returns>
-        public CRestauranteModelo consultarRestaurante(int id)
-        {
-            try
-            {
-                CRestauranteModelo entrada = null;
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                //uso el SqlCommand para realizar los querys
-                SqlCommand query = conexion.CreateCommand();
-                //ingreso la orden del query
-                query.CommandText = "SELECT * FROM Restaurante WHERE rst_id = @id";
-                query.Parameters.AddWithValue("@id", id);
-                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
-                SqlDataReader lector = query.ExecuteReader();
-                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
-                while (lector.Read())
-                {
-                    entrada = new CRestauranteModelo
-                    {
-                        _id = (int)lector.GetSqlInt32(0),
-                        _nombre = lector.GetSqlString(1).ToString(),
-                        _direccion = lector.GetSqlString(2).ToString(),
-                        _descripcion = lector.GetSqlString(3).ToString(),
-                        _horarioApertura = lector.GetSqlString(4).ToString(),
-                        _horarioCierre = lector.GetSqlString(5).ToString(),
-                        _idLugar = (int)lector.GetSqlInt32(6)
-                    };
-                }
-                //cierro el lector
-                lector.Close();
-                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
-                conexion.Close();
-                return entrada;
-            }
-            catch (SqlException e)
-            {
-                conexion.Close();
-                Debug.WriteLine("Exception caught: {0}", e);
-                //throw e;
-                return null;
-            }
-            catch (Exception e)
-            {
-                conexion.Close();
-                Debug.WriteLine("Exception caught: {0}", e);
-                //throw e;
-                return null;
-            }
+        ///// <summary>
+        ///// Método para la consulta de un sólo restaurante, dado un ID como parámetro, retornando un modelo del restaurante.
+        ///// </summary>
+        ///// <param name="id">El id del restaurante a consultar.</param>
+        ///// <returns>Un modelo de Restaurante con los datos pedidos.</returns>
+        //public CRestauranteModelo consultarRestaurante(int id)
+        //{
+        //    try
+        //    {
+        //        CRestauranteModelo entrada = null;
+        //        //Inicializo la conexion con el string de conexion
+        //        conexion = new SqlConnection(stringDeConexion);
+        //        //INTENTO abrir la conexion
+        //        conexion.Open();
+        //        //uso el SqlCommand para realizar los querys
+        //        SqlCommand query = conexion.CreateCommand();
+        //        //ingreso la orden del query
+        //        query.CommandText = "SELECT * FROM Restaurante WHERE rst_id = @id";
+        //        query.Parameters.AddWithValue("@id", id);
+        //        //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+        //        SqlDataReader lector = query.ExecuteReader();
+        //        //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+        //        while (lector.Read())
+        //        {
+        //            entrada = new CRestauranteModelo
+        //            {
+        //                _id = (int)lector.GetSqlInt32(0),
+        //                _nombre = lector.GetSqlString(1).ToString(),
+        //                _direccion = lector.GetSqlString(2).ToString(),
+        //                _descripcion = lector.GetSqlString(3).ToString(),
+        //                _horarioApertura = lector.GetSqlString(4).ToString(),
+        //                _horarioCierre = lector.GetSqlString(5).ToString(),
+        //                _idLugar = (int)lector.GetSqlInt32(6)
+        //            };
+        //        }
+        //        //cierro el lector
+        //        lector.Close();
+        //        //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+        //        conexion.Close();
+        //        return entrada;
+        //    }
+        //    catch (SqlException e)
+        //    {
+        //        conexion.Close();
+        //        Debug.WriteLine("Exception caught: {0}", e);
+        //        //throw e;
+        //        return null;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        conexion.Close();
+        //        Debug.WriteLine("Exception caught: {0}", e);
+        //        //throw e;
+        //        return null;
+        //    }
 
-        }
+        //}
 
-        /// <summary>
-        /// Método para la consulta de todos los restaurantes, retornando una lista de modelos de restaurante.
-        /// </summary>
-        /// <returns>Una lista de modelos de Restaurante.</returns>
-        public List<CRestauranteModelo> consultarRestaurante()
-        {
-            try
-            {
-                var list = new List<CRestauranteModelo>();
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                //uso el SqlCommand para realizar los querys
-                SqlCommand query = conexion.CreateCommand();
-                //ingreso la orden del query
-                query.CommandText = "SELECT * FROM Restaurante";
-                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
-                SqlDataReader lector = query.ExecuteReader();
-                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
-                while (lector.Read())
-                {
-                    var entrada = new CRestauranteModelo
-                    {
-                        _id = (int)lector.GetSqlInt32(0),
-                        _nombre = lector.GetSqlString(1).ToString(),
-                        _direccion = lector.GetSqlString(2).ToString(),
-                        _descripcion = lector.GetSqlString(3).ToString(),
-                        _horarioApertura = lector.GetSqlString(4).ToString(),
-                        _horarioCierre = lector.GetSqlString(5).ToString(),
-                        _idLugar = (int)lector.GetSqlInt32(6)
-                    };
-                    list.Add(entrada);
-                }
-                //cierro el lector
-                lector.Close();
-                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
-                conexion.Close();
-                return list;
-            }
-            catch (SqlException e)
-            {
-                conexion.Close();
-                Debug.WriteLine("Exception caught: {0}", e);
-                //throw e;
-                return null;
-            }
-            catch (Exception e)
-            {
-                conexion.Close();
-                Debug.WriteLine("Exception caught: {0}", e);
-                //throw e;
-                return null;
-            }
-        }
+        ///// <summary>
+        ///// Método para la consulta de todos los restaurantes, retornando una lista de modelos de restaurante.
+        ///// </summary>
+        ///// <returns>Una lista de modelos de Restaurante.</returns>
+        //public List<CRestauranteModelo> consultarRestaurante()
+        //{
+        //    try
+        //    {
+        //        var list = new List<CRestauranteModelo>();
+        //        //Inicializo la conexion con el string de conexion
+        //        conexion = new SqlConnection(stringDeConexion);
+        //        //INTENTO abrir la conexion
+        //        conexion.Open();
+        //        //uso el SqlCommand para realizar los querys
+        //        SqlCommand query = conexion.CreateCommand();
+        //        //ingreso la orden del query
+        //        query.CommandText = "SELECT * FROM Restaurante";
+        //        //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+        //        SqlDataReader lector = query.ExecuteReader();
+        //        //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+        //        while (lector.Read())
+        //        {
+        //            var entrada = new CRestauranteModelo
+        //            {
+        //                _id = (int)lector.GetSqlInt32(0),
+        //                _nombre = lector.GetSqlString(1).ToString(),
+        //                _direccion = lector.GetSqlString(2).ToString(),
+        //                _descripcion = lector.GetSqlString(3).ToString(),
+        //                _horarioApertura = lector.GetSqlString(4).ToString(),
+        //                _horarioCierre = lector.GetSqlString(5).ToString(),
+        //                _idLugar = (int)lector.GetSqlInt32(6)
+        //            };
+        //            list.Add(entrada);
+        //        }
+        //        //cierro el lector
+        //        lector.Close();
+        //        //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+        //        conexion.Close();
+        //        return list;
+        //    }
+        //    catch (SqlException e)
+        //    {
+        //        conexion.Close();
+        //        Debug.WriteLine("Exception caught: {0}", e);
+        //        //throw e;
+        //        return null;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        conexion.Close();
+        //        Debug.WriteLine("Exception caught: {0}", e);
+        //        //throw e;
+        //        return null;
+        //    }
+        //}
 
-        /// <summary>
-        /// Método para la modificación de un restaurante.
-        /// </summary>
-        /// <param name="model">Modelo de restaurante a ser modificado.</param>
-        /// <returns>Un booleano que indica si la operación se terminó o no con éxito.</returns>
-        public Boolean modificarRestaurante(CRestauranteModelo model)
-        {
-            try
-            {
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                //uso el SqlCommand para realizar los querys
-                SqlCommand query = conexion.CreateCommand();
-                //ingreso la orden del query
-                query.CommandText = "UPDATE Restaurante SET rst_nombre = @nom, rst_direccion = @dir, rst_descripcion = @desc," +
-                    "rst_hora_apertura = @horap, rst_hora_cierre = @horcie, fk_lugar = @fklug WHERE rst_id = @id";
-                query.Parameters.AddWithValue("@id", model._id);
-                query.Parameters.AddWithValue("@nom", model._nombre);
-                query.Parameters.AddWithValue("@dir", model._direccion);
-                query.Parameters.AddWithValue("@desc", model._descripcion);
-                query.Parameters.AddWithValue("@horap", model._horarioApertura);
-                query.Parameters.AddWithValue("@horcie", model._horarioCierre);
-                query.Parameters.AddWithValue("@fklug", model._idLugar);
-                //creo un lector sql para la respuesta de la ejecucion del comando anterior
-                SqlDataReader lector = query.ExecuteReader();
-                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
-                conexion.Close();
-                return true;
-            }
-            catch (SqlException e)
-            {
-                conexion.Close();
-                Debug.WriteLine("Exception caught: {0}", e);
-                //throw e;
-                return false;
-            }
-            catch (Exception e)
-            {
-                conexion.Close();
-                Debug.WriteLine("Exception caught: {0}", e);
-                //throw e;
-                return false;
-            }
-        }
+        ///// <summary>
+        ///// Método para la modificación de un restaurante.
+        ///// </summary>
+        ///// <param name="model">Modelo de restaurante a ser modificado.</param>
+        ///// <returns>Un booleano que indica si la operación se terminó o no con éxito.</returns>
+        //public Boolean modificarRestaurante(CRestauranteModelo model)
+        //{
+        //    try
+        //    {
+        //        //Inicializo la conexion con el string de conexion
+        //        conexion = new SqlConnection(stringDeConexion);
+        //        //INTENTO abrir la conexion
+        //        conexion.Open();
+        //        //uso el SqlCommand para realizar los querys
+        //        SqlCommand query = conexion.CreateCommand();
+        //        //ingreso la orden del query
+        //        query.CommandText = "UPDATE Restaurante SET rst_nombre = @nom, rst_direccion = @dir, rst_descripcion = @desc," +
+        //            "rst_hora_apertura = @horap, rst_hora_cierre = @horcie, fk_lugar = @fklug WHERE rst_id = @id";
+        //        query.Parameters.AddWithValue("@id", model._id);
+        //        query.Parameters.AddWithValue("@nom", model._nombre);
+        //        query.Parameters.AddWithValue("@dir", model._direccion);
+        //        query.Parameters.AddWithValue("@desc", model._descripcion);
+        //        query.Parameters.AddWithValue("@horap", model._horarioApertura);
+        //        query.Parameters.AddWithValue("@horcie", model._horarioCierre);
+        //        query.Parameters.AddWithValue("@fklug", model._idLugar);
+        //        //creo un lector sql para la respuesta de la ejecucion del comando anterior
+        //        SqlDataReader lector = query.ExecuteReader();
+        //        //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+        //        conexion.Close();
+        //        return true;
+        //    }
+        //    catch (SqlException e)
+        //    {
+        //        conexion.Close();
+        //        Debug.WriteLine("Exception caught: {0}", e);
+        //        //throw e;
+        //        return false;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        conexion.Close();
+        //        Debug.WriteLine("Exception caught: {0}", e);
+        //        //throw e;
+        //        return false;
+        //    }
+        //}
 
-        //Método para la eliminación de un restaurante.
-        /// <summary>
-        /// Método para la eliminación de un restaurante.
-        /// </summary>
-        /// <param name="id">El id del restaurante a ser eliminado.</param>
-        /// <returns>Un booleano que indica si la operación se terminó o no con éxito.</returns>
-        public Boolean eliminarRestaurante(int id)
-        {
-            try
-            {
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                //uso el SqlCommand para realizar los querys
-                SqlCommand query = conexion.CreateCommand();
-                //ingreso la orden del query
-                query.CommandText = "DELETE FROM Restaurante WHERE rst_id = @id";
-                query.Parameters.AddWithValue("@id", id);
-                //creo un lector sql para la respuesta de la ejecucion del comando anterior
-                SqlDataReader lector = query.ExecuteReader();
-                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
-                conexion.Close();
-                return true;
-            }
-            catch (SqlException e)
-            {
-                conexion.Close();
-                Debug.WriteLine("Exception caught: {0}", e);
-                //throw e;
-                return false;
-            }
-            catch (Exception e)
-            {
-                conexion.Close();
-                Debug.WriteLine("Exception caught: {0}", e);
-                //throw e;
-                return false;
-            }
-        }
+        ////Método para la eliminación de un restaurante.
+        ///// <summary>
+        ///// Método para la eliminación de un restaurante.
+        ///// </summary>
+        ///// <param name="id">El id del restaurante a ser eliminado.</param>
+        ///// <returns>Un booleano que indica si la operación se terminó o no con éxito.</returns>
+        //public Boolean eliminarRestaurante(int id)
+        //{
+        //    try
+        //    {
+        //        //Inicializo la conexion con el string de conexion
+        //        conexion = new SqlConnection(stringDeConexion);
+        //        //INTENTO abrir la conexion
+        //        conexion.Open();
+        //        //uso el SqlCommand para realizar los querys
+        //        SqlCommand query = conexion.CreateCommand();
+        //        //ingreso la orden del query
+        //        query.CommandText = "DELETE FROM Restaurante WHERE rst_id = @id";
+        //        query.Parameters.AddWithValue("@id", id);
+        //        //creo un lector sql para la respuesta de la ejecucion del comando anterior
+        //        SqlDataReader lector = query.ExecuteReader();
+        //        //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+        //        conexion.Close();
+        //        return true;
+        //    }
+        //    catch (SqlException e)
+        //    {
+        //        conexion.Close();
+        //        Debug.WriteLine("Exception caught: {0}", e);
+        //        //throw e;
+        //        return false;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        conexion.Close();
+        //        Debug.WriteLine("Exception caught: {0}", e);
+        //        //throw e;
+        //        return false;
+        //    }
+        //}
 
-        /* FIN DE FUNCIONES PARA MODULO 10 BO (RESTAURANTES) */
+        ///* FIN DE FUNCIONES PARA MODULO 10 BO (RESTAURANTES) */
         /* INICIO DE FUNCIONES COMUNES */
 
         /// <summary>

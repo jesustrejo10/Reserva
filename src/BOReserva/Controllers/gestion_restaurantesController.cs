@@ -6,25 +6,50 @@ using System.Web.Mvc;
 using System.Net;
 using BOReserva.Servicio;
 using BOReserva.Models.gestion_restaurantes;
+using BOReserva.Views.gestion_restaurantes.Fabrica;
+using BOReserva.DataAccess.Domain;
+using BOReserva.Controllers.PatronComando;
+using static BOReserva.Controllers.PatronComando.FabricaComando;
 
 namespace BOReserva.Controllers
 {
     public class gestion_restaurantesController : Controller
     {
-        // GET: gestion_restaurantes
 
+    
+
+        #region Consultar Restaurantes por ciudad
         /// <summary>
         /// Método para el acceso a la interfaz de visualización de restaurantes.
         /// </summary>
         /// <returns>Retorna un objeto para renderizar la vista parcial.</returns>
-        public ActionResult M10_GestionRestaurantes_Ver()
+        public ActionResult M10_GestionRestaurantes_Ver(int id = 0)
         {
-            var modelo = new CRestauranteModeloVista();
-            var bd = new manejadorSQL();
-            modelo._listaRestaurantes = bd.consultarRestaurante();
-            modelo._listaCiudades = bd.consultarCiudad();
-            return PartialView(modelo);
+            ViewBag.Ciudad = FabricaVista.asignarItemsComboBox(cargarComboBoxLugar(), "Id", "Nombre");
+        
+            if (id != 0)
+            {
+               
+                Entidad _lugar = FabricaEntidad.inicializarLugar(id, "");//Aqui se envia la clave foranea de lugar para realizar la busqueda
+                Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, comandoRestaurant.NULO, _lugar);
+                List<Entidad> restaurantes = comando.ejecutar();
+                CRestauranteModelo Restaurant = FabricaEntidad.inicializarRestaurant();
+                List<CRestauranteModelo> lista = FabricaEntidad.inicializarListaRestarant();
+
+                foreach (Entidad item in restaurantes)
+                {
+                    lista.Add((CRestauranteModelo)item);
+                   
+                }
+
+                Restaurant.listaRestaurantes = lista;
+                return PartialView(Restaurant);
+            }
+
+            return PartialView();
         }
+
+        #endregion
 
         /// <summary>
         /// Método para el acceso a la interfaz de agregación de restaurantes.
@@ -32,75 +57,63 @@ namespace BOReserva.Controllers
         /// <returns>Retorna un objeto para renderizar la vista parcial.</returns>
         public ActionResult M10_GestionRestaurantes_Agregar()
         {
-            var modelo = new CRestauranteModeloVista();
-            var bd = new manejadorSQL();
-            modelo._listaRestaurantes = bd.consultarRestaurante();
-            modelo._listaCiudades = bd.consultarCiudad();
-            return PartialView(modelo);
+            ViewBag.Ciudad = FabricaVista.asignarItemsComboBox(cargarComboBoxLugar(), "Id", "Nombre");
+            ViewBag.Horarios = FabricaVista.asignarItemsComboBox(cargarComboBoxHorario(), "", "");
+            return PartialView();
         }
 
+         
         /// <summary>
         /// Método para el acceso a la interfaz de modificación de restaurantes.
         /// </summary>
         /// <returns>Retorna un objeto para renderizar la vista parcial.</returns>
         public ActionResult M10_GestionRestaurantes_Modificar(int id)
         {
-            var bd = new manejadorSQL();
-            var respuesta = bd.consultarRestaurante(id);
-            var modelo = new CRestauranteModeloVista
-            {
-                _id = respuesta._id,
-                _idLugar = respuesta._idLugar,
-                _nombre = respuesta._nombre,
-                _direccion = respuesta._direccion,
-                _descripcion = respuesta._descripcion,
-                _horarioApertura = respuesta._horarioApertura,
-                _horarioCierre = respuesta._horarioCierre
-            };
-            modelo._listaCiudades = bd.consultarCiudad();
-            return PartialView(modelo);
+
+            ViewBag.Ciudad = FabricaVista.asignarItemsComboBox(cargarComboBoxLugar(), "Id", "Nombre");
+            ViewBag.Horarios = FabricaVista.asignarItemsComboBox(cargarComboBoxHorario(), "", "");
+            
+            Entidad _restaurant = FabricaEntidad.inicializarRestaurant();
+            ((CRestauranteModelo)_restaurant)._id = id;
+            Command<Entidad> comando = (Command<Entidad>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, comandoRestaurant.CONSULTAR_ID, _restaurant);
+            Entidad rest = comando.ejecutar();
+
+            ViewBag.Id = ((CRestauranteModelo)rest)._id;
+            ViewBag.NombreRestaurant = ((CRestauranteModelo)rest).nombre;
+            ViewBag.DescripcionRestaurant = ((CRestauranteModelo)rest).descripcion;
+            ViewBag.DireccionRestaurant = ((CRestauranteModelo)rest).direccion;
+            ViewBag.TelefonoRestaurant = ((CRestauranteModelo)rest).Telefono;
+            ViewBag.IdLugarRestaurant = ((CRestauranteModelo)rest).idLugar;
+            ViewBag.HoraIniRestaurant = ((CRestauranteModelo)rest).horarioApertura;
+            ViewBag.HoraFinRestaurant = ((CRestauranteModelo)rest).horarioCierre;
+            
+            return PartialView();
         }
 
-        /// <summary>
-        /// Método para el acceso a la interfaz de eliminación de restaurantes.
-        /// </summary>
-        /// <returns>Retorna un objeto para renderizar la vista parcial.</returns>
-        public ActionResult M10_GestionRestaurantes_Eliminar()
-        {
-            var modelo = new CRestauranteModeloVista();
-            var bd = new manejadorSQL();
-            modelo._listaRestaurantes = bd.consultarRestaurante();
-            modelo._listaCiudades = bd.consultarCiudad();
-            return PartialView(modelo);
-        }
+ 
 
         /// <summary>
         /// Método para el almacenado de restaurantes, tomando como parámetro un modelo de restaurante.
         /// </summary>
         /// <returns>Retorna un objecto tipo JsonResult que indica el éxito o fracaso de la operación.</returns>
         [HttpPost]
-        public JsonResult guardarRestaurante(CRestauranteModeloVista model)
+        public JsonResult guardarRestaurante(String Nombre,String Direccion,String Telefono, String Descripcion, int idLugar,String HoraIni,String HoraFin)
         {
+          
+
             //Chequeo de campos obligatorios para el formulario
-            if ((model._nombre == null) || (model._direccion == null) 
-                || (model._horarioApertura == null) || (model._horarioCierre == null) || (model._idLugar == -1))
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                string error = "Error, campo obligatorio vacío";
-                return Json(error);
-            }
-            manejadorSQL sql = new manejadorSQL();
-            var salida = new CRestauranteModelo
-            {
-                _nombre = model._nombre,
-                _direccion = model._direccion,
-                _descripcion = model._descripcion,
-                _horarioApertura = model._horarioApertura,
-                _horarioCierre = model._horarioCierre,
-                _idLugar = model._idLugar
-            };
-            bool resultado = sql.insertarRestaurante(salida);
-            if (resultado)
+            //if ((model.nombre == null) || (model.direccion == null) 
+            //    || (model.horarioApertura == null) || (model.horarioCierre == null) || (model.idLugar == -1))
+            //{
+            //    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            //    string error = "Error, campo obligatorio vacío";
+            //    return Json(error);
+            //}
+            Entidad _restaurant = FabricaEntidad.inicializarRestaurant(Nombre, Direccion,Telefono, Descripcion, HoraIni, HoraFin, idLugar);
+            Command<Boolean> comando = (Command<Boolean>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CREAR, comandoRestaurant.NULO, _restaurant);
+                    
+         
+            if (comando.ejecutar())
             {
                 return (Json(true, JsonRequestBehavior.AllowGet));
             }
@@ -110,36 +123,29 @@ namespace BOReserva.Controllers
                 string error = "Error agregando el restaurante.";
                 return Json(error);
             }
+            
         }
 
         /// <summary>
         /// Método para la modificación de restaurantes, tomando como parámetro un modelo de restaurante.
         /// </summary>
         /// <returns>Retorna un objecto tipo JsonResult que indica el éxito o fracaso de la operación.</returns>
+
         [HttpPost]
-        public JsonResult modificarRestaurante(CRestauranteModeloVista model)
+        public JsonResult modificarRestaurante(int Id,String Nombre, String Direccion, String Telefono, String Descripcion, int idLugar, String HoraIni, String HoraFin)
         {
             //Chequeo de campos obligatorios para el formulario
-            if ((model._id == -1) || (model._nombre == null) || (model._direccion == null)
-                || (model._horarioApertura == null) || (model._horarioCierre == null) || (model._idLugar == -1))
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                string error = "Error, campo obligatorio vacío";
-                return Json(error);
-            }
-            manejadorSQL sql = new manejadorSQL();
-            var salida = new CRestauranteModelo
-            {
-                _id = model._id,
-                _nombre = model._nombre,
-                _direccion = model._direccion,
-                _descripcion = model._descripcion,
-                _horarioApertura = model._horarioApertura,
-                _horarioCierre = model._horarioCierre,
-                _idLugar = model._idLugar
-            };
-            bool resultado = sql.modificarRestaurante(salida);
-            if (resultado)
+            //if ((model.id == -1) || (model.nombre == null) || (model.direccion == null)
+            //    || (model.horarioApertura == null) || (model.horarioCierre == null) || (model.idLugar == -1))
+            //{
+            //    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            //    string error = "Error, campo obligatorio vacío";
+            //    return Json(error);
+            //}
+            Entidad _restaurant = FabricaEntidad.inicializarRestaurant(Id,Nombre, Direccion, Telefono, Descripcion, HoraIni, HoraFin, idLugar);
+            Command<Boolean> comando = (Command<Boolean>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.ACTUALIZAR, comandoRestaurant.NULO, _restaurant);
+
+            if (comando.ejecutar())
             {
                 return (Json(true, JsonRequestBehavior.AllowGet));
             }
@@ -158,6 +164,11 @@ namespace BOReserva.Controllers
         [HttpGet]
         public JsonResult eliminarRestaurante(int id)
         {
+            System.Diagnostics.Debug.WriteLine("Id de resturant a eliminar "+id);
+
+            Entidad _restaurant = FabricaEntidad.inicializarRestaurant();
+            ((CRestauranteModelo)_restaurant)._id = id;
+            Command<Boolean> comando = (Command<Boolean>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.ELIMINAR, comandoRestaurant.NULO, _restaurant);
             //Chequeo de campos obligatorios para el formulario
             if ((id == -1))
             {
@@ -165,9 +176,8 @@ namespace BOReserva.Controllers
                 string error = "Error, campo obligatorio vacío";
                 return Json(error);
             }
-            manejadorSQL sql = new manejadorSQL();
-            bool resultado = sql.eliminarRestaurante(id);
-            if (resultado)
+     
+            if (comando.ejecutar())
             {
                 return (Json(true, JsonRequestBehavior.AllowGet));
             }
@@ -177,6 +187,39 @@ namespace BOReserva.Controllers
                 string error = "Error eliminando el restaurante.";
                 return Json(error);
             }
+
+        }
+
+        #region Cargar Combobox ciudades
+        /// <summary>
+        /// Cargar combo de ciudades 
+        /// </summary>
+        /// <returns></returns>
+        public List<Lugar> cargarComboBoxLugar()
+        {
+            Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.comandosVistaRestaurant(FabricaComando.comandoVista.CARGAR_LUGAR);
+            List<Entidad> lugares = comando.ejecutar();
+            List<Lugar> lista = FabricaEntidad.inicializarListaLugar() ;
+            Lugar lug;
+            foreach (Entidad lugar in lugares)
+            {
+                lug = (Lugar)lugar;
+                lista.Add(lug);
+
+            }
+            return lista;
+        }
+        #endregion
+
+        /// <summary>
+        /// Cargar combo de horarios
+        /// </summary>
+        /// <returns></returns>
+        public List<String> cargarComboBoxHorario()
+        {
+            Command<List<String>> comando = (Command<List<String>>)FabricaComando.comandosVistaRestaurant(FabricaComando.comandoVista.CARGAR_HORA);
+            List<String> horarios = comando.ejecutar();
+            return horarios;
         }
     }
 }
