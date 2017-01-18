@@ -60,5 +60,24 @@ namespace BOReserva.DataAccess.DataAccessObject
                 return 5;
             }
         }
+
+        int IDAO.Eliminar(int id) {
+            try
+            {
+                SqlConnection conexion = Connection.getInstance(_connexionString);
+                conexion.Open();
+                String sql = "DELETE FROM Boleto WHERE bol_id = " + id + "";
+                System.Diagnostics.Debug.WriteLine(sql);
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                conexion.Close();
+                return 1;
+            }
+            catch (SqlException ex)
+            {
+                return 0;
+            }
+        }
     }
 }

@@ -205,6 +205,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\PatronComando\Command.cs" />
     <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COEliminarBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COBuscarnombreciudad.cs" />
     <Compile Include="Controllers\PatronComando\M10\comandoActualizarRestaurant.cs" />
     <Compile Include="Controllers\PatronComando\M10\comandoCargarHorario.cs" />

@@ -75,6 +75,11 @@ namespace BOReserva.Controllers.PatronComando
             return new M05_COCrearBoleto((Boleto)e);
         }
 
+        public static Command<String> crearM05EliminarBoleto(int id)
+        {
+            return new M05_COEliminarBoleto(id);
+        }
+
         public static Command<String> buscarM05nombreCiudad(Entidad e)
         {
             return new M05_COBuscarnombreciudad(e);

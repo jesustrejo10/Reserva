@@ -28,6 +28,11 @@ namespace BOReserva.DataAccess.DataAccessObject
             throw new NotImplementedException();
         }
 
+        public int Eliminar(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Entidad Consultar(int id)
         {
             throw new NotImplementedException();

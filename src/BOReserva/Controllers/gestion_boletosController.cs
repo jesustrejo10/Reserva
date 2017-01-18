@@ -547,9 +547,11 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult eliminarBoleto(int id)
         {
-            manejadorSQL_Boletos eliminar = new manejadorSQL_Boletos();
-            int modifico_si_no = eliminar.M05EliminarBoletoBD(id);
 
+            //manejadorSQL_Boletos eliminar = new manejadorSQL_Boletos();
+            //int modifico_si_no = eliminar.M05EliminarBoletoBD(id);
+            Command<String> comando = FabricaComando.crearM05EliminarBoleto(id);
+            String elimino_si_no = comando.ejecutar();
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
 
