@@ -15,6 +15,7 @@ using BOReserva.Models.gestion_roles;
 using System.Diagnostics;
 using BOReserva.Models.gestion_automoviles;
 using BOReserva.Models.gestion_comida_vuelo;
+using System.Configuration;
 
 
 namespace BOReserva.Servicio
@@ -24,7 +25,7 @@ namespace BOReserva.Servicio
         //Inicializo el string de conexion en el constructor
         public manejadorSQL()
         {
-            stringDeConexion = "Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617a;";
+            stringDeConexion = ConfigurationManager.ConnectionStrings["StringRemoto"].ConnectionString;
         }
         //Atributo que ejecutara la conexion a la bd
         private SqlConnection conexion = null;
