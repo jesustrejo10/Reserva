@@ -5,6 +5,8 @@ using BOReserva.Models.gestion_restaurantes;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+using BOReserva.DataAccess.Model;
 
 namespace BOReserva.M10
 {
@@ -13,7 +15,7 @@ namespace BOReserva.M10
     /// </summary>
     public class DAORestaurant : DAO, IDAORestaurant
     {
-
+      
         /// <summary>
         /// Metodo para consultar restaurant segun el id de Lugar
         /// </summary>
@@ -41,12 +43,11 @@ namespace BOReserva.M10
             {
                 //Aqui se asignan los valores que recibe el procedimieto para realizar el select, se repite tantas veces como atributos
                 //se requiera en el where, para este caso solo el ID de Lugar @lug_id (parametro que recibe el store procedure)
-                //se coloca true en Input 
-                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.lug_id, SqlDbType.Int, lugar._id.ToString(), true, false));
+                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.lug_id, SqlDbType.Int, lugar._id.ToString(), false));
 
                 //el metodo Ejecutar Store procedure recibe la lista de parametros como el query, este ultimo es el nombre del procedimietno en la BD
                 //e.g. dbo.M10_ConsultarRestarurante
-                tablaDeDatos = EjecutarStoredProcedure(parametro, RecursoDAOM10.procedimientoConsultar);
+                tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM10.procedimientoConsultar,parametro);
 
                 foreach (DataRow filarestaurant in tablaDeDatos.Rows)
                 {
@@ -101,10 +102,10 @@ namespace BOReserva.M10
                 //Aqui se asignan los valores que recibe el procedimieto para realizar el select, se repite tantas veces como atributos
                 //se requiera en el where, para este caso solo el ID del restaurante @rst_id (parametro que recibe el store procedure)
                 //se coloca true en Input 
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_id, SqlDbType.Int, rest._id.ToString(), true, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_id, SqlDbType.Int, rest._id.ToString(), false));
 
                 //Se devuelve la fila del restaurante consultado segun el Id, para este caso solo se devuelve una fila
-                DataTable filarestaurant = EjecutarStoredProcedure(listaParametro, RecursoDAOM10.procedimientoConsultarRestaurantId);
+                DataTable filarestaurant = EjecutarStoredProcedureTuplas(RecursoDAOM10.procedimientoConsultarRestaurantId, listaParametro);
 
                 //Se guarda la fila devuelta de la base de datos
                 DataRow Fila = filarestaurant.Rows[0];
@@ -132,6 +133,7 @@ namespace BOReserva.M10
 
         }
 
+     
         /// <summary>
         /// Metodo para agregar restaurant
         /// </summary>
@@ -151,13 +153,13 @@ namespace BOReserva.M10
                 // la tabla restaurant contiene siete columna incluyendo la clave foranea lugar por lo cual son siete lineas de codigo
                 //a;go importante de destacar es que si en la declaracion del store procedures el atributo varchar o cualquier otro
                 //que requiera longitud e.g. Varchar(50) solo se inserta el primer caracter, ya que solo por defecto la longitud es 1
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_nombre, SqlDbType.VarChar, rest.nombre, false, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_direccion, SqlDbType.VarChar, rest.direccion, false, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_descripcion, SqlDbType.VarChar, rest.descripcion, false, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_hora_apertura, SqlDbType.VarChar, rest.horarioApertura, false, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_hora_cierre, SqlDbType.VarChar, rest.horarioCierre, false, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_telefono, SqlDbType.VarChar, rest.Telefono, false, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.fk_lugar, SqlDbType.Int, rest.idLugar.ToString(), false, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_nombre, SqlDbType.VarChar, rest.nombre, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_direccion, SqlDbType.VarChar, rest.direccion, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_descripcion, SqlDbType.VarChar, rest.descripcion, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_hora_apertura, SqlDbType.VarChar, rest.horarioApertura, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_hora_cierre, SqlDbType.VarChar, rest.horarioCierre, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_telefono, SqlDbType.VarChar, rest.Telefono, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.fk_lugar, SqlDbType.Int, rest.idLugar.ToString(), false));
                 //el metodo Ejecutar Store procedure recibe la lista de parametros como el query, este ultimo es el nombre del procedimietno en la BD
                 //e.g. dbo.M10_AgregarRestarurante, importante ese nombre se coloco en un archivo de recursos por efectos practicos, pero se puede 
                 //como String "dbo.M10_AgregarRestarurante"
@@ -188,7 +190,7 @@ namespace BOReserva.M10
             {   //Aqui se asignan los valores que recibe el procedimieto para realizar el delete, se repite tantas veces como atributos
                 //se requiera en el where, para este caso solo el ID del restaurante @rst_id (parametro que recibe el store procedure)
                 //se coloca true en Input 
-                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_id, SqlDbType.Int, rest._id.ToString(), true, false));
+                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_id, SqlDbType.Int, rest._id.ToString(), false));
                 //el metodo Ejecutar Store procedure recibe la lista de parametros como el query, este ultimo es el nombre del procedimietno en la BD
                 //e.g. dbo.M10_EliminarrRestarurante, importante ese nombre se coloco en un archivo de recursos por efectos practicos, pero se puede 
                 //como String "dbo.M10_EliminarRestarurante"
@@ -217,7 +219,7 @@ namespace BOReserva.M10
 
             try
             {
-                tablaDeDatos = EjecutarStoredProcedure(parametro, RecursoDAOM10.procedimientoConsultarLugar);
+                tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM10.procedimientoConsultarLugar, parametro);
                 listaDeLugares.Add(FabricaEntidad.crearLugar(0, ""));
 
                 //ciclo que se encarga de listar cada uno de las filas de la base de datos con la informacion de las ciudades
@@ -256,7 +258,7 @@ namespace BOReserva.M10
                 //Aqui se asignan los valores que recibe el procedimieto para realizar el update, se repite tantas veces como atributos
                 //se requiera en el where, para este caso solo el ID del restaurante @rst_id (parametro que recibe el store procedure)
                 //se coloca true en Input 
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_id, SqlDbType.Int, rest._id.ToString(), true, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_id, SqlDbType.Int, rest._id.ToString(), false));
                 //Aqui se asignan los valores de cada uno de los atributos perteneciente a la tabla restaurant
                 //estas linea se repite por cada una de las columnas de la tabla, e.g. se tiene el atributo nombre de tipo varchar
                 //primero se obtiene por el archivo de recurso el nombre del parametro @nombre, luego el tipo de dato SQL
@@ -264,13 +266,13 @@ namespace BOReserva.M10
                 // la tabla restaurant contiene siete columna incluyendo la clave foranea lugar por lo cual son siete lineas de codigo
                 //a;go importante de destacar es que si en la declaracion del store procedures el atributo varchar o cualquier otro
                 //que requiera longitud e.g. Varchar(50) solo se inserta el primer caracter, ya que solo por defecto la longitud es 1
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_nombre, SqlDbType.VarChar, rest.nombre, false, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_direccion, SqlDbType.VarChar, rest.direccion, false, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_descripcion, SqlDbType.VarChar, rest.descripcion, false, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_hora_apertura, SqlDbType.VarChar, rest.horarioApertura, false, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_hora_cierre, SqlDbType.VarChar, rest.horarioCierre, false, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_telefono, SqlDbType.VarChar, rest.Telefono, false, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.fk_lugar, SqlDbType.Int, rest.idLugar.ToString(), false, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_nombre, SqlDbType.VarChar, rest.nombre, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_direccion, SqlDbType.VarChar, rest.direccion, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_descripcion, SqlDbType.VarChar, rest.descripcion, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_hora_apertura, SqlDbType.VarChar, rest.horarioApertura, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_hora_cierre, SqlDbType.VarChar, rest.horarioCierre, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_telefono, SqlDbType.VarChar, rest.Telefono, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.fk_lugar, SqlDbType.Int, rest.idLugar.ToString(), false));
                 //el metodo Ejecutar Store procedure recibe la lista de parametros como el query, este ultimo es el nombre del procedimietno en la BD
                 //e.g. dbo.M10_ActualizarRestaruranteimportante ese nombre se coloco en un archivo de recursos por efectos practicos, pero se puede 
                 //como String "dbo.M10_ActualizarrRestarurante"
@@ -284,5 +286,28 @@ namespace BOReserva.M10
 
             return true;
         }
+
+
+        #region Metodos No implementados
+        Entidad IDAO.Modificar(Entidad e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Dictionary<int, Entidad> ConsultarTodos()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Agregar(Entidad e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Entidad Consultar(int id)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
     }
 }

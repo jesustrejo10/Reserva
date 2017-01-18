@@ -255,16 +255,10 @@
     <Compile Include="DataAccess\DataAccessObject\DAORol.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCiudad.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPais.cs" />
-
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORol.cs" />
     <Compile Include="DataAccess\Domain\Contratos\ICiudad.cs" />
-
     <Compile Include="DataAccess\DataAccessObject\M09\DAOHotel.cs" />
-    <Compile Include="DataAccess\DataAccessObject\M10\Columna.cs" />
-    <Compile Include="DataAccess\DataAccessObject\M10\DAO.cs" />
-    <Compile Include="DataAccess\DataAccessObject\M10\IDAO.cs" />
-    <Compile Include="DataAccess\DataAccessObject\M10\Parametro.cs" />
     <Compile Include="DataAccess\DataAccessObject\M10\RecursoDAOM10.Designer.cs">
       <DependentUpon>RecursoDAOM10.resx</DependentUpon>
       <AutoGen>True</AutoGen>
