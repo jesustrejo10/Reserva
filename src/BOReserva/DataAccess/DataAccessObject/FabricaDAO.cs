@@ -8,12 +8,26 @@ using System.Linq;
 using System.Web;
 
 namespace BOReserva.DataAccess.DataAccessObject
+
 {
     public class FabricaDAO
     {
+         #region M09_Gestion_Hoteles_Por_Ciudad
+        
         public static DAO instanciarDaoHotel() {
             return new DAOHotel();
         }
+
+
+        public static DAO instanciarDaoPais() {
+            return new DAOPais();
+        }
+
+        public static DAO instanciarDaoCiudad()
+        {
+            return new DAOCiudad();
+        }
+        #endregion
 
         public static DAO instanciarDaoReclamo() 
         {
@@ -52,7 +66,7 @@ namespace BOReserva.DataAccess.DataAccessObject
         #region Modulo 10
         public static IDAORestaurant RestaurantBD()
         {
-            return new RestaurantDAO();
+            return new DAORestaurant();
 
         }
 

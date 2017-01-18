@@ -10,13 +10,13 @@ using System.Web;
 namespace BOReserva.M10.Comando.gestion_restaurantes
 {
   
-        public class comandoConsultarRestaurantId : Command<Entidad>
+        public class M10_COConsultarRestaurantId : Command<Entidad>
         {
             #region Atributos
             Entidad _objeto;
             #endregion
 
-            public comandoConsultarRestaurantId(Entidad _objeto)
+            public M10_COConsultarRestaurantId(Entidad _objeto)
             {
                 this._objeto = _objeto;
             }

@@ -8,13 +8,16 @@ using System.Data;
 
 namespace BOReserva.M10
 {
-    public class RestaurantDAO : DAO, IDAORestaurant
+    /// <summary>
+    /// Clase Dao restaurant para realizar los procedimientos de base de datos
+    /// </summary>
+    public class DAORestaurant : DAO, IDAORestaurant
     {
 
         /// <summary>
         /// Metodo para consultar restaurant segun el id de Lugar
         /// </summary>
-        /// <param name="_restaurant">Variable tipo en entidad que luego debe ser casteada a su tipo para metodos get y set</param>
+        /// <param name="_lugar">Variable tipo en entidad que luego debe ser casteada a su tipo para metodos get y set</param>
         /// <returns>Lista de Entidades, ya que se devuelve mas de una fila de la BD, se debe castear a su respectiva clase en el Modelo</returns>
         public List<Entidad> Consultar(Entidad _lugar)
         {
@@ -47,6 +50,7 @@ namespace BOReserva.M10
 
                 foreach (DataRow filarestaurant in tablaDeDatos.Rows)
                 {
+                    //Se preinicializan los atributos que componen la entidad restaurant
                     idRestaurant = int.Parse(filarestaurant[RecursoDAOM10.restaurantId].ToString());
                     nombreRestaurant = filarestaurant[RecursoDAOM10.restaurantNombre].ToString();
                     descripcionRestaurant = filarestaurant[RecursoDAOM10.restaurantDescripcion].ToString();
@@ -55,11 +59,13 @@ namespace BOReserva.M10
                     horaIni = filarestaurant[RecursoDAOM10.restaurantHoraApertura].ToString();
                     horaFin = filarestaurant[RecursoDAOM10.restaurantHoraCierra].ToString();
                     nombreLugar = filarestaurant[RecursoDAOM10.LugarNombre].ToString();
+                    //se crea el objeto restaurant
                     restaurant = FabricaEntidad.inicializarRestaurant(idRestaurant, nombreRestaurant, direccionRestaurant, telefonoRestaurant, descripcionRestaurant, horaIni, horaFin, 0);
+                    //se agregan los restaurantes a la lista
                     listaDeRestaurant.Add(restaurant);
                 }
 
-                return listaDeRestaurant;
+                return listaDeRestaurant; //se retorna la lista de restaurante a mostrar por la vista
             }
             catch (Exception)
             {
@@ -114,6 +120,7 @@ namespace BOReserva.M10
                 idLugar = Fila[RecursoDAOM10.LugarIdFk].ToString();
                 restaurant = FabricaEntidad.inicializarRestaurant(idRestaurant, nombreRestaurant, direccionRestaurant, telefonoRestaurant, descripcionRestaurant, horaIni, horaFin, int.Parse(idLugar));
 
+                //se retorna la entidad de restaurant a mostrar en la vista
                 return restaurant;
             }
             catch (Exception)
@@ -163,7 +170,6 @@ namespace BOReserva.M10
             }
 
 
-            System.Diagnostics.Debug.WriteLine(rest.nombre);
 
             return true;
         }
@@ -193,7 +199,7 @@ namespace BOReserva.M10
 
                 throw;
             }
-            return false;
+            return false; //se retorna falso en caso de no ser exitoso el procedimiento eliminar
         }
 
         /// <summary>
@@ -214,15 +220,19 @@ namespace BOReserva.M10
                 tablaDeDatos = EjecutarStoredProcedure(parametro, RecursoDAOM10.procedimientoConsultarLugar);
                 listaDeLugares.Add(FabricaEntidad.inicializarLugar(0, ""));
 
+                //ciclo que se encarga de listar cada uno de las filas de la base de datos con la informacion de las ciudades
                 foreach (DataRow filaLugar in tablaDeDatos.Rows)
                 {
+                    // se preinicializan los valores de lugar
                     idLugar = int.Parse(filaLugar[RecursoDAOM10.LugarId].ToString());
                     nombreLugar = filaLugar[RecursoDAOM10.LugarNombre].ToString();
                     lugar = FabricaEntidad.inicializarLugar(idLugar, nombreLugar);
+
+                    //se insertan en una lista para luego desplegarse en la vista
                     listaDeLugares.Add(lugar);
                 }
 
-                return listaDeLugares;
+                return listaDeLugares; //Se retornan la lista de lugares 
             }
             catch (Exception)
             {

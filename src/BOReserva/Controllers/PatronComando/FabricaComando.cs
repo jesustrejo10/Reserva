@@ -1,4 +1,6 @@
-﻿using BOReserva.DataAccess.Domain;
+﻿using BOReserva.Controllers.PatronComando;
+using BOReserva.Controllers.PatronComando.M09;
+using BOReserva.DataAccess.Domain;
 using BOReserva.M10.Comando.gestion_restaurantes;
 using BOReserva.Controllers.PatronComando;
 using System;
@@ -14,6 +16,8 @@ namespace BOReserva.Controllers.PatronComando
     /// </summary>
     public class FabricaComando
     {
+        #region M09_Gestion_Hoteles_Por_Ciudad
+
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
         /// M09_COAgregarHotel
@@ -25,17 +29,93 @@ namespace BOReserva.Controllers.PatronComando
             return new M09_COAgregarHotel((Hotel)e);
 
         }
-
+       
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
         /// M09_COVisualizarHoteles
-        /// <returns>Retorna la instancia del comando M09_COVisualizarHoteles.</returns>
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M09_COVisualizarHoteles.
+        /// </returns>
         public static Command<Dictionary<int, Entidad>> crearM09VisualizarHoteles()
         {
 
             return new M09_COVisualizarHoteles();
 
         }
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M09_COConsultarHoteles
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M09_COConsultarHoteles.
+        /// </returns>
+        public static Command<Entidad> crearM09ConsultarHotel(int id)
+        {
+
+            return new M09_COConsultarHotel(id);
+
+        }
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M09_COModificarHoteles
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M09_COModificarHoteles.
+        /// </returns>
+        public static Command<String> crearM09ModificarHotel(Entidad hotel, int idmodificar)
+        {
+
+            return new M09_COModificarHotel(hotel, idmodificar);
+
+        }
+
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M09_COEliminarHoteles
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M09_COEliminarHoteles.
+        /// </returns>
+        public static Command<String> crearM09EliminarHotel(Entidad hotel, int ideliminar)
+        {
+
+            return new M09_COEliminarHotel(hotel, ideliminar);
+
+        }
+
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M09_CODisponibilidadHotel
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M09_CODisponibilidadHotel.
+        /// </returns>
+        public static Command<String> crearM09DisponibilidadHotel(Entidad hotel, int disponibilidad)
+        {
+
+            return new M09_CODisponibilidadHotel(hotel, disponibilidad);
+
+        }
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M09_COObtenerPaises
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M09_COObtenerPaises.
+        /// </returns>
+        public static Command<Dictionary<int, Entidad>> crearM09ObtenerPaises()
+        {
+            return new M09_COObtenerPaises();
+        }
+
+
+        #endregion
 
         public static Command<String> crearM16_AgregarReclamo(Entidad e) 
         {
@@ -107,10 +187,10 @@ namespace BOReserva.Controllers.PatronComando
             switch (comando)
             {
                 case comandosGlobales.CREAR:
-                    return new comandoCrearRestaurant(_objeto);
+                    return new M10_COCrearRestaurant(_objeto);
 
                 case comandosGlobales.ELIMINAR:
-                    return new comandoEliminarRestaurant(_objeto);
+                    return new M10_COEliminarRestaurant(_objeto);
 
                 case comandosGlobales.ACTUALIZAR:
                     return new comandoActualizarRestaurant(_objeto);
@@ -122,12 +202,12 @@ namespace BOReserva.Controllers.PatronComando
                         case comandoRestaurant.NULO:
                             break;
                         case comandoRestaurant.CONSULTAR_ID:
-                            return new comandoConsultarRestaurantId(_objeto);
+                            return new M10_COConsultarRestaurantId(_objeto);
                     }
-                    return new comandoConsultarRestaurant(_objeto);
+                    return new M10_COConsultarRestaurant(_objeto);
 
                 default:
-                    return new comandoConsultarRestaurant(_objeto);
+                    return new M10_COConsultarRestaurant(_objeto);
             }
         }
         #endregion
@@ -137,11 +217,11 @@ namespace BOReserva.Controllers.PatronComando
             switch (comando)
             {
                 case comandoVista.CARGAR_LUGAR:
-                    return new comandoConsultarLugar();
+                    return new M10_COConsultarLugar();
                 case comandoVista.CARGAR_HORA:
-                    return new comandoCargarHorario();
+                    return new M10_COCargarHorario();
                 default:
-                    return new comandoConsultarLugar();
+                    return new M10_COConsultarLugar();
             }
 
         }
@@ -175,6 +255,7 @@ namespace BOReserva.Controllers.PatronComando
             return lista;
         }
         #endregion
+
 
     }
 }

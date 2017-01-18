@@ -12,6 +12,9 @@ using BOReserva.Controllers.PatronComando;
 
 namespace BOReserva.Controllers
 {
+    /// <summary>
+    /// Controlador vista restaurant
+    /// </summary>
     public class gestion_restaurantesController : Controller
     {
 
@@ -24,7 +27,7 @@ namespace BOReserva.Controllers
         /// <returns>Retorna un objeto para renderizar la vista parcial.</returns>
         public ActionResult M10_GestionRestaurantes_Ver(int id = 0)
         {
-            ViewBag.Ciudad = FabricaVista.asignarItemsComboBox(cargarComboBoxLugar(), "Id", "Nombre");
+            ViewBag.Ciudad = FabricaVista.asignarItemsComboBox(cargarComboBoxLugar(), "Id", "Name");
         
             if (id != 0)
             {
@@ -50,18 +53,19 @@ namespace BOReserva.Controllers
 
         #endregion
 
+        #region Agregar Restaurant
         /// <summary>
         /// Método para el acceso a la interfaz de agregación de restaurantes.
         /// </summary>
         /// <returns>Retorna un objeto para renderizar la vista parcial.</returns>
         public ActionResult M10_GestionRestaurantes_Agregar()
         {
-            ViewBag.Ciudad = FabricaVista.asignarItemsComboBox(cargarComboBoxLugar(), "Id", "Nombre");
+            ViewBag.Ciudad = FabricaVista.asignarItemsComboBox(cargarComboBoxLugar(), "Id", "Name");
             ViewBag.Horarios = FabricaVista.asignarItemsComboBox(cargarComboBoxHorario(), "", "");
             return PartialView();
         }
+        #endregion
 
-         
         /// <summary>
         /// Método para el acceso a la interfaz de modificación de restaurantes.
         /// </summary>
@@ -69,7 +73,7 @@ namespace BOReserva.Controllers
         public ActionResult M10_GestionRestaurantes_Modificar(int id)
         {
 
-            ViewBag.Ciudad = FabricaVista.asignarItemsComboBox(cargarComboBoxLugar(), "Id", "Nombre");
+            ViewBag.Ciudad = FabricaVista.asignarItemsComboBox(cargarComboBoxLugar(), "Id", "Name");
             ViewBag.Horarios = FabricaVista.asignarItemsComboBox(cargarComboBoxHorario(), "", "");
             
             Entidad _restaurant = FabricaEntidad.inicializarRestaurant();
@@ -126,7 +130,7 @@ namespace BOReserva.Controllers
         }
 
         /// <summary>
-        /// Método para la modificación de restaurantes, tomando como parámetro un modelo de restaurante.
+        /// Método para la modificación de restaurantes, tomando como parámetros los campos de la vista.
         /// </summary>
         /// <returns>Retorna un objecto tipo JsonResult que indica el éxito o fracaso de la operación.</returns>
 

@@ -54,7 +54,7 @@ namespace BOReserva.DataAccess.DataAccessObject
 
             try
             {
-                //conexion = Connection.getInstance(_connexionString);
+                conexion = Connection.getInstance(_connexionString);
             }
 
             catch (Exception ex)

@@ -5,6 +5,10 @@ using System.Web;
 
 namespace BOReserva.M10
 {
+    /// <summary>
+    /// clase que permite preinicializar las columnas provenientes de la base de datos
+    /// para luego crear el objeto al que le corresponda 
+    /// </summary>
     public class Columna
     {
         #region Atributos
@@ -13,6 +17,11 @@ namespace BOReserva.M10
         #endregion
 
         #region Constructor
+        /// <summary>
+        /// Constructor 
+        /// </summary>
+        /// <param name="_atributo"></param>
+        /// <param name="_valorAtributo"></param>
         public Columna(string _atributo, string _valorAtributo)
         {
             this._atributo = _atributo;
