@@ -89,6 +89,7 @@
       <HintPath>..\packages\Microsoft.Data.OData.5.6.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Web.WebPages.OAuth, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.OAuth.3.2.3\lib\net45\Microsoft.Web.WebPages.OAuth.dll</HintPath>
       <Private>True</Private>
@@ -205,6 +206,12 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\PatronComando\Command.cs" />
     <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
+    <Compile Include="Controllers\PatronComando\M08\M08_COActivarAutomovil.cs" />
+    <Compile Include="Controllers\PatronComando\M08\M08_COBuscarAutomovil.cs" />
+    <Compile Include="Controllers\PatronComando\M08\M08_COAgregarAutomovil.cs" />
+    <Compile Include="Controllers\PatronComando\M08\M08_CODesactivarAutomovil.cs" />
+    <Compile Include="Controllers\PatronComando\M08\M08_COListarAutomovil.cs" />
+    <Compile Include="Controllers\PatronComando\M08\M08_COModificarAutomovil.cs" />
     <Compile Include="Controllers\PatronComando\M10\M10_COActualizarRestaurant.cs" />
     <Compile Include="Controllers\PatronComando\M10\M10_COCargarHorario.cs" />
     <Compile Include="Controllers\PatronComando\M10\M10_COConsultarLugar.cs" />
