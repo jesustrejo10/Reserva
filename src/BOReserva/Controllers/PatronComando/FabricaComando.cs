@@ -84,6 +84,12 @@ namespace BOReserva.Controllers.PatronComando
         {
             return new M05_COBuscarnombreciudad(e);
         }
+
+        public static Command<String> modificarM05modificarPasajero(Entidad e)
+        {
+            return new M05_COModificarPasajero((Pasajero)e);
+        }
+
         #endregion
 
         #region Modulo 10 Gestion Restaurante

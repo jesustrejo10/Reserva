@@ -558,11 +558,13 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult modificarDatosPasajero(CModificarBoleto model)
         {
+            Pasajero pasajero = (Pasajero)FabricaEntidad.InstanciarPasajero(model._id, model._primer_nombre, model._segundo_nombre, model._primer_apellido, model._segundo_apellido, model._sexo, model._fecha_nac.ToString("yyyy/MM/dd"), model._correo);
+            Command<String> comando = FabricaComando.modificarM05modificarPasajero(pasajero);
+            String agrego_si_no = comando.ejecutar();
 
-            CPasajero pas = new CPasajero(model._id, model._primer_nombre, model._segundo_nombre, model._primer_apellido,
-                                          model._segundo_apellido, model._sexo, model._fecha_nac, model._correo);
+            /*CPasajero pas = new CPasajero(model._id, model._primer_nombre, model._segundo_nombre, model._primer_apellido, model._segundo_apellido, model._sexo, model._fecha_nac, model._correo);
             manejadorSQL_Boletos modificar = new manejadorSQL_Boletos();
-            int modifico_si_no = modificar.M05ModificarDatosPasajero(pas);
+            int modifico_si_no = modificar.M05ModificarDatosPasajero(pas);*/
 
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
