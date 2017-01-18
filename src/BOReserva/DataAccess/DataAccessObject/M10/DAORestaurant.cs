@@ -17,7 +17,7 @@ namespace BOReserva.M10
         /// <summary>
         /// Metodo para consultar restaurant segun el id de Lugar
         /// </summary>
-        /// <param name="_restaurant">Variable tipo en entidad que luego debe ser casteada a su tipo para metodos get y set</param>
+        /// <param name="_lugar">Variable tipo en entidad que luego debe ser casteada a su tipo para metodos get y set</param>
         /// <returns>Lista de Entidades, ya que se devuelve mas de una fila de la BD, se debe castear a su respectiva clase en el Modelo</returns>
         public List<Entidad> Consultar(Entidad _lugar)
         {
