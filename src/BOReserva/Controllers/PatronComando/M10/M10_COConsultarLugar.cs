@@ -22,12 +22,14 @@ namespace BOReserva.M10.Comando.gestion_restaurantes
                 // exception implementada debido a que puede darse el caso 
                 // en que algunos de los metodos  en la 
                 //interfaz IDAO no se implemente y se lance esta excepcion
+
                 throw;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                System.Diagnostics.Debug.WriteLine("La exception arrojada es " + e);
                 throw;
-
+               
             }
 
 

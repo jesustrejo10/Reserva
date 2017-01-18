@@ -193,7 +193,7 @@ namespace BOReserva.Controllers.PatronComando
                     return new M10_COEliminarRestaurant(_objeto);
 
                 case comandosGlobales.ACTUALIZAR:
-                    return new comandoActualizarRestaurant(_objeto);
+                    return new M10_COActualizarRestaurant(_objeto);
 
                 case comandosGlobales.CONSULTAR:
 
@@ -211,7 +211,13 @@ namespace BOReserva.Controllers.PatronComando
             }
         }
         #endregion
+
         #region comandos de las interfaces Restaurant
+        /// <summary>
+        /// Devuelve los objetos para inicializar los combobox de la vista restaurant
+        /// </summary>
+        /// <param name="comando"></param>
+        /// <returns></returns>
         public static Object comandosVistaRestaurant(comandoVista comando)
         {
             switch (comando)
