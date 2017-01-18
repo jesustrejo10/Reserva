@@ -97,33 +97,33 @@ namespace BOReserva.DataAccess.Domain
 		#endregion
 		
 		#region Modulo 10
-        public static CRestauranteModelo inicializarRestaurant(string nombre, string direccion, string telefono, string descripcion, string horarioApertura, string horarioCierre, int idLugar)
+        public static CRestauranteModelo crearRestaurant(string nombre, string direccion, string telefono, string descripcion, string horarioApertura, string horarioCierre, int idLugar)
         {
             return new CRestauranteModelo(nombre, direccion, telefono, descripcion, horarioApertura, horarioCierre, idLugar);
         }
 
-        public static CRestauranteModelo inicializarRestaurant(int id, string nombre, string direccion, string telefono, string descripcion, string horarioApertura, string horarioCierre, int idLugar)
+        public static CRestauranteModelo crearRestaurant(int id, string nombre, string direccion, string telefono, string descripcion, string horarioApertura, string horarioCierre, int idLugar)
         {
             return new CRestauranteModelo(id, nombre, direccion, telefono, descripcion, horarioApertura, horarioCierre, idLugar);
         }
 
-        public static CRestauranteModelo inicializarRestaurant()
+        public static CRestauranteModelo crearRestaurant()
         {
             return new CRestauranteModelo();
         }
-        #endregion
+       
 
-        public static Lugar inicializarLugar(int idLugar, string nombreLugar)
+        public static Lugar crearLugar(int idLugar, string nombreLugar)
         {
             return new Lugar(idLugar, nombreLugar);
         }
 
-        public static List<Lugar> inicializarListaLugar()
+        public static List<Lugar> crearListaLugar()
         {
             return new List<Lugar>();
         }
 
-        public static List<CRestauranteModelo> inicializarListaRestarant()
+        public static List<CRestauranteModelo> crearListaRestarant()
         {
             return new List<CRestauranteModelo>();
         }
@@ -132,6 +132,8 @@ namespace BOReserva.DataAccess.Domain
         {
             return new List<Entidad>();
         }
+
+        #endregion
 
         public static Entidad InstanciarRol(CRoles model)
         {

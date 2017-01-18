@@ -60,7 +60,7 @@ namespace BOReserva.M10
                     horaFin = filarestaurant[RecursoDAOM10.restaurantHoraCierra].ToString();
                     nombreLugar = filarestaurant[RecursoDAOM10.LugarNombre].ToString();
                     //se crea el objeto restaurant
-                    restaurant = FabricaEntidad.inicializarRestaurant(idRestaurant, nombreRestaurant, direccionRestaurant, telefonoRestaurant, descripcionRestaurant, horaIni, horaFin, 0);
+                    restaurant = FabricaEntidad.crearRestaurant(idRestaurant, nombreRestaurant, direccionRestaurant, telefonoRestaurant, descripcionRestaurant, horaIni, horaFin, 0);
                     //se agregan los restaurantes a la lista
                     listaDeRestaurant.Add(restaurant);
                 }
@@ -118,7 +118,7 @@ namespace BOReserva.M10
                 horaIni = Fila[RecursoDAOM10.restaurantHoraApertura].ToString();
                 horaFin = Fila[RecursoDAOM10.restaurantHoraCierra].ToString();
                 idLugar = Fila[RecursoDAOM10.LugarIdFk].ToString();
-                restaurant = FabricaEntidad.inicializarRestaurant(idRestaurant, nombreRestaurant, direccionRestaurant, telefonoRestaurant, descripcionRestaurant, horaIni, horaFin, int.Parse(idLugar));
+                restaurant = FabricaEntidad.crearRestaurant(idRestaurant, nombreRestaurant, direccionRestaurant, telefonoRestaurant, descripcionRestaurant, horaIni, horaFin, int.Parse(idLugar));
 
                 //se retorna la entidad de restaurant a mostrar en la vista
                 return restaurant;
@@ -218,7 +218,7 @@ namespace BOReserva.M10
             try
             {
                 tablaDeDatos = EjecutarStoredProcedure(parametro, RecursoDAOM10.procedimientoConsultarLugar);
-                listaDeLugares.Add(FabricaEntidad.inicializarLugar(0, ""));
+                listaDeLugares.Add(FabricaEntidad.crearLugar(0, ""));
 
                 //ciclo que se encarga de listar cada uno de las filas de la base de datos con la informacion de las ciudades
                 foreach (DataRow filaLugar in tablaDeDatos.Rows)
@@ -226,7 +226,7 @@ namespace BOReserva.M10
                     // se preinicializan los valores de lugar
                     idLugar = int.Parse(filaLugar[RecursoDAOM10.LugarId].ToString());
                     nombreLugar = filaLugar[RecursoDAOM10.LugarNombre].ToString();
-                    lugar = FabricaEntidad.inicializarLugar(idLugar, nombreLugar);
+                    lugar = FabricaEntidad.crearLugar(idLugar, nombreLugar);
 
                     //se insertan en una lista para luego desplegarse en la vista
                     listaDeLugares.Add(lugar);
