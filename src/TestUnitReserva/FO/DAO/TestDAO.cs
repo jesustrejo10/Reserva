@@ -11,7 +11,7 @@ namespace TestUnitReserva.FO.DAO
         [TestMethod]
         public void TestDAOExecuteQuery()
         {
-            var instanceDAO = new FOReserva.DataAccess.DataAccessObject.Common.DAOMSSQL();
+            var instanceDAO = new FOReserva.DataAccess.DataAccessObject.Common.DAO();
             DAOResult result = null;
 
             result = instanceDAO.OpenConnection();
@@ -35,7 +35,7 @@ namespace TestUnitReserva.FO.DAO
         [TestMethod]
         public void TestDAOExecuteNoQuery()
         {
-            var instanceDAO = new FOReserva.DataAccess.DataAccessObject.Common.DAOMSSQL();
+            var instanceDAO = new FOReserva.DataAccess.DataAccessObject.Common.DAO();
             DAOResult result = null;
 
             result = instanceDAO.OpenConnection();
@@ -55,7 +55,7 @@ namespace TestUnitReserva.FO.DAO
         [TestMethod]
         public void TestDAOExecuteStoreProcedure()
         {
-            var instanceDAO = new FOReserva.DataAccess.DataAccessObject.Common.DAOMSSQL();
+            var instanceDAO = new FOReserva.DataAccess.DataAccessObject.Common.DAO();
             DAOResult result = null;
 
             result = instanceDAO.OpenConnection();
@@ -75,7 +75,7 @@ namespace TestUnitReserva.FO.DAO
         [TestMethod]
         public void TestDAOExecuteStoreProcedureWithResult()
         {
-            var instanceDAO = new FOReserva.DataAccess.DataAccessObject.Common.DAOMSSQL();
+            var instanceDAO = new FOReserva.DataAccess.DataAccessObject.Common.DAO();
             DAOResult result = null;
 
             result = instanceDAO.OpenConnection();
