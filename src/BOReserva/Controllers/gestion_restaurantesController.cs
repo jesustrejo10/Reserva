@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using System.Net;
 using BOReserva.Servicio;
 using BOReserva.Models.gestion_restaurantes;
-using BOReserva.Models;
 using BOReserva.Views.gestion_restaurantes.Fabrica;
 using BOReserva.DataAccess.Domain;
 using BOReserva.Controllers.PatronComando;

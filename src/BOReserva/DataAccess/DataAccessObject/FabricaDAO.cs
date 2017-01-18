@@ -31,6 +31,19 @@ namespace BOReserva.DataAccess.DataAccessObject
         }
         #endregion
 
+        # region M05_Boleto
+
+        public static DAO instanciarDaoPasajero()
+        {
+            return new DAOPasajero();
+        }
+
+        public static DAO instanciarDaoBoleto()
+        {
+            return new DAOBoleto();
+		}
+		#endregion
+			
         #region Modulo 10
         public static IDAORestaurant RestaurantBD()
         {
@@ -47,6 +60,7 @@ namespace BOReserva.DataAccess.DataAccessObject
               "22:00", "23:00", "00:00"
             };
         }
+        #endregion
 
         public static SqlConnection asignarConexionSql(String stringDeConexion)
         {
@@ -92,8 +106,6 @@ namespace BOReserva.DataAccess.DataAccessObject
         {
             return new SqlDataAdapter(comandoSql);
         }
-
-        #endregion
 
         #region M13_Roles
         public static DAO instanciarDAORol()

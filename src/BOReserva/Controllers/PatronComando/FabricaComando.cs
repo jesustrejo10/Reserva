@@ -1,6 +1,5 @@
 ﻿using BOReserva.DataAccess.Domain;
 using BOReserva.M10.Comando.gestion_restaurantes;
-using BOReserva.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,6 +62,18 @@ namespace BOReserva.Controllers.PatronComando
             return new M13_COAgregarRolPermiso((Rol)e);
 
         }
+        #region M05_Boleto
+        public static Command<String> crearM05AgregarPasajero(Entidad e)
+        {
+            return new M05_COAgregarPasajero((Pasajero)e);
+
+        }
+
+        public static Command<String> crearM05CrearBoleto(Entidad e)
+        {
+            return new M05_COCrearBoleto((Boleto)e);
+        }
+        #endregion
 
         #region Modulo 10 Gestion Restaurante
 
@@ -147,7 +158,6 @@ namespace BOReserva.Controllers.PatronComando
             return lista;
         }
         #endregion
-
 
     }
 }

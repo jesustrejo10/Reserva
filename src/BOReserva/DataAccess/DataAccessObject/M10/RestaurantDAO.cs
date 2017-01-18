@@ -1,13 +1,10 @@
 ﻿using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.M10;
 using BOReserva.DataAccess.Domain;
-using BOReserva.Models;
 using BOReserva.Models.gestion_restaurantes;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
 
 namespace BOReserva.M10
 {
@@ -42,7 +39,7 @@ namespace BOReserva.M10
                 //Aqui se asignan los valores que recibe el procedimieto para realizar el select, se repite tantas veces como atributos
                 //se requiera en el where, para este caso solo el ID de Lugar @lug_id (parametro que recibe el store procedure)
                 //se coloca true en Input 
-                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.lug_id, SqlDbType.Int, lugar.Id.ToString(), true, false));
+                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.lug_id, SqlDbType.Int, lugar._id.ToString(), true, false));
 
                 //el metodo Ejecutar Store procedure recibe la lista de parametros como el query, este ultimo es el nombre del procedimietno en la BD
                 //e.g. dbo.M10_ConsultarRestarurante
