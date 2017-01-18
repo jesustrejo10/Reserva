@@ -10,7 +10,6 @@ using System.Net;
 using BOReserva.Servicio;
 using BOReserva.DataAccess.Domain;
 using BOReserva.Controllers.PatronComando;
-using BOReserva.Controllers.PatronComando;
 
 namespace BOReserva.Controllers
 {
@@ -31,6 +30,7 @@ namespace BOReserva.Controllers
         public ActionResult M09_AgregarHotel()
         {
             CAgregarHotel model = new CAgregarHotel();
+            //Aca puedo devolver
             return PartialView(model);
         }
 
@@ -72,6 +72,7 @@ namespace BOReserva.Controllers
         public JsonResult guardarHotel(CAgregarHotel model)
         {   
             Entidad ciudadDestino = FabricaEntidad.InstanciarCiudad("nombre de la ciudad");
+            ciudadDestino._id = 29;
             Entidad nuevoHotel = FabricaEntidad.InstanciarHotel(model, ciudadDestino);
             //con la fabrica instancie al hotel.
             Command<String> comando = FabricaComando.crearM09AgregarHotel(nuevoHotel);
@@ -80,8 +81,13 @@ namespace BOReserva.Controllers
             return (Json(agrego_si_no));
         }
 
-
-
+        public ActionResult M09_VisualizarHoteles()
+        {
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM09VisualizarHoteles();
+            Dictionary<int, Entidad> listaHoteles = comando.ejecutar();
+            return PartialView(listaHoteles);
+        }
+            
 
 
 
@@ -222,14 +228,14 @@ namespace BOReserva.Controllers
             }
             return _pais;
         }
-
+        /*
         public ActionResult M09_GestionHoteles_Visualizar()
         {
             CManejadorSQL_Hoteles buscarhoteles = new CManejadorSQL_Hoteles();
             List<CHotel> listahoteles = buscarhoteles.MListarHotelesBD();  //AQUI SE BUSCAN TODO LOS HOTELES QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA       
             return PartialView(listahoteles);
         }
-
+        */
         public List<SelectListItem> ciudadalista(string pais)
         {
             Debug.WriteLine("CIUDAD A LISTA");

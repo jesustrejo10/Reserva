@@ -42,6 +42,8 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
         
+
+        <link href="~/Views/gestion_restaurantes/ccs/M10.css" rel="stylesheet" />
         <!-- CIERRE DE SESION AUTOMATICO MODULO 1 INGRESO SEGURIDAD NO TOCAR-->
         <script src="../../Scripts/Scripts_Ingreso_Seguridad/Logout.js"></script>
 
@@ -344,7 +346,6 @@
                     </li>
                     <!-- FIN DE MODULO DE GESTION DE USUARIOS -->
                     <!-- MODULO DE GESTION DE ROLES -->
-
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-users"></i> <span>Gestión de Roles</span> <span class="pull-right-container">
@@ -414,18 +415,37 @@
                             {
                                 if (i == "Crear Hoteles")
                                 {
+
                                     <li id="M09_crear_hotel"><a href="#">Agregar</a></li>
                                 }
                                 if (i == "Consultar Hotel")
                                 {
-                                    <li id="M09_consultar_hoteles"><a href="#">Visualizar</a></li>
+                                    <li id="M09_visualizar_hoteles"><a href="#">Visualizar</a></li>
                                 }
                             }
+                            </ul>
+
+                            </li>
+
 
                     <!-- MODULO DE BOLETOS AEREOS Y CHECK-IN -->
-                </ul>
-
-            </section>
+                            <!-- MODULO DE RECLAMOS -->
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-exclamation-circle"></i> <span>Gestión de Reclamos</span> <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li id="M16_AgregarReclamo"><a href="#"> Agregar </a></li>                                
+                                    <li id="M16_VisualizarReclamo"><a href="#"> Visualizar </a></li>
+                                  
+                                </ul>
+                            </li>
+                            <!-- FIN MODULO DE RECLAMOS -->
+                
+               </ul>
+           </section>
             <!-- /.sidebar -->
         </aside>
 

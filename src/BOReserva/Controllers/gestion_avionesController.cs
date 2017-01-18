@@ -14,9 +14,7 @@ namespace BOReserva.Controllers
     /// Clase que emite las respuestas de los eventos AJAX
     /// </summary>
     public class gestion_avionesController : Controller
-    {
-       
-       
+    {    
         /// <summary>
         /// Metodo para guardar el avion, haciendo el insert en la base de datos 
         /// </summary>

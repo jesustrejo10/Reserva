@@ -1,4 +1,6 @@
 ﻿using BOReserva.DataAccess.DAO;
+using BOReserva.DataAccess.DataAccessObject;
+using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using System;
 using System.Collections.Generic;
@@ -20,11 +22,10 @@ namespace BOReserva.Controllers.PatronComando
         }
 
         public override String ejecutar(){
-            IDAO daoHotel = FabricaDAO.instanciarDaoHotel();
-            
-            daoHotel.Agregar(_hotel);
-            //Arranco
-            return "1";
+            IDAO daoHotel = FabricaDAO.instanciarDaoHotel();       
+            int test = daoHotel.Agregar(_hotel);
+            return test.ToString();
         }
+
     }
 }
