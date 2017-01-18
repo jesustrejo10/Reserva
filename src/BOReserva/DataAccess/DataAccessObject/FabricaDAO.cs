@@ -42,8 +42,16 @@ namespace BOReserva.DataAccess.DataAccessObject
         {
             return new DAOBoleto();
 		}
-		#endregion
-			
+        #endregion
+
+        #region Modulo 08
+
+        public static DAO CrearDaoAutomovil()
+        {
+            return new DAOAutomovil();
+        }
+        #endregion
+
         #region Modulo 10
         public static IDAORestaurant RestaurantBD()
         {
