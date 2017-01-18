@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using static FOReserva.DataAccess.DataAccessObject.DAORevision;
+//using FOReserva.DataAccess.DataAccessObject.DAORevision;
 
 namespace FOReserva.DataAccess.DataAccessObject.Common.Interface
 {
@@ -13,6 +13,6 @@ namespace FOReserva.DataAccess.DataAccessObject.Common.Interface
     {
         DAOResult AgregarRevision(CRevision revision, CHotel hotel);
         DAOResult AgregarRevision(CRevision revision, CRestaurantModel restaurante);
-        DAOResult AplicarValoracion(CRevision revision, TipoValoracion hotel);
+        //DAOResult AplicarValoracion(CRevision revision, TipoValoracion hotel);
     }
 }
