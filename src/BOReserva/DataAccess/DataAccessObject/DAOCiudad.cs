@@ -6,23 +6,18 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
-
 namespace BOReserva.DataAccess.DataAccessObject
 {
-    public class DAOPais : DAO , IDAOPais
+    public class DAOCiudad : DAO , IDAOCiudad
     {
-
         int IDAO.Agregar(Domain.Entidad e)
         {
-            //no aplica
             throw new NotImplementedException();
         }
 
         Domain.Entidad IDAO.Modificar(Domain.Entidad e)
         {
             throw new NotImplementedException();
-            //no aplica
-
         }
 
         Domain.Entidad IDAO.Consultar(int id)
@@ -32,12 +27,13 @@ namespace BOReserva.DataAccess.DataAccessObject
 
         Dictionary<int, Entidad> IDAO.ConsultarTodos()
         {
-            Dictionary<int, Entidad> listaPaises = new Dictionary<int, Entidad>();
+            Dictionary<int, Entidad> listaCiudades = new Dictionary<int, Entidad>();
             int id;
             String nombre;
+            int fk;
             SqlConnection conexion = Conectar();
             conexion.Open();
-            String sql = "select p.lug_id as id, p.lug_nombre as name FROM Lugar p where p.lug_tipo_lugar = 'pais';";
+            String sql = "select c.lug_id as id, c.lug_nombre as name , c.lug_FK_lugar_id as pais FROM Lugar c where c.lug_tipo_lugar = 'ciudad';";
             SqlCommand cmd = new SqlCommand(sql, conexion);
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
@@ -45,13 +41,14 @@ namespace BOReserva.DataAccess.DataAccessObject
                 {
                     id = int.Parse(reader[0].ToString());
                     nombre = reader[1].ToString();
-                    Entidad pais = FabricaEntidad.InstanciarPais(id, nombre);
-                    listaPaises.Add(id,pais);
+                    fk = int.Parse(reader[2].ToString());
+                    Entidad ciudad = FabricaEntidad.InstanciarCiudad(id, nombre,fk);
+                    listaCiudades.Add(id, ciudad);
                 }
             }
             cmd.Dispose();
             conexion.Close();
-            return listaPaises;
+            return listaCiudades;
         }
     }
 }

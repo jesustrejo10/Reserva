@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BO\gestion_hoteles\TestGestionHoteles.cs" />
+    <Compile Include="BO\gestion_hoteles\TestLugar.cs" />
     <Compile Include="BO\gestion_OfertasYPaquetes\testOfertasYPaquetes.cs" />
     <Compile Include="BO\gestion_roles\TestRoles.cs" />
     <Compile Include="BO\gestion_aviones\TestAviones.cs" />
