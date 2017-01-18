@@ -260,9 +260,9 @@ jQuery(document).ready(function () {
             });
     });
 
-    $("#M09_consultar_hoteles").click(function (e) {
+    $("#M09_visualizar_hoteles").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_hoteles/M09_GestionHoteles_Visualizar';
+        var url = '/gestion_hoteles/M09_VisualizarHoteles';
         var method = 'GET';
         var data = '';
 
@@ -282,28 +282,28 @@ jQuery(document).ready(function () {
             });
 
     });
-    $("#consultarhotel").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_hoteles/M09_GestionHoteles_Visualizar';
-        var method = 'GET';
-        var data = '';
+    //$("#consultarhotel").click(function (e) {
+    //    e.preventDefault();
+    //    var url = '/gestion_hoteles/M09_GestionHoteles_Visualizar';
+    //    var method = 'GET';
+    //    var data = '';
 
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
+    //    $.ajax(
+    //        {
+    //            url: url,
+    //            type: method,
+    //            data: data,
+    //            success: function (data, textStatus, jqXHR) {
 
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
+    //                $("#contenido").empty();
+    //                $("#contenido").append(data);
+    //            },
+    //            error: function (jqXHR, textStatus, errorThrown) {
+    //                alert(errorThrown);
+    //            }
+    //        });
 
-    });
+    //});
     // FIN DE HOTELES
 
     /* INICIO M10 RESTAURANTES BO */

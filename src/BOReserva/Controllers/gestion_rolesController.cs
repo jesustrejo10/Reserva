@@ -8,6 +8,8 @@ using BOReserva.Servicio;
 using System.Net;
 using Newtonsoft.Json.Linq;
 using System.Data.SqlClient;
+using BOReserva.DataAccess.Domain;
+using BOReserva.Controllers.PatronComando;
 
 namespace BOReserva.Controllers
 {
@@ -116,10 +118,10 @@ namespace BOReserva.Controllers
             }
             try
             {
-                //instancio el manejador de sql
-                manejadorSQL sql = new manejadorSQL();
-                //Realizo el insert y Guardo la respuesta de mi metodo sql en un bool
-                bool respuesta = sql.insertarRol(model);
+                Entidad nuevoRol = FabricaEntidad.InstanciarRol(model);
+                Command<String> comando = FabricaComando.crearM13_AgregarRol(nuevoRol);
+                String agrego_si_no = comando.ejecutar();
+                return (Json(agrego_si_no));
             }
             catch (SqlException e)
             {
@@ -133,12 +135,7 @@ namespace BOReserva.Controllers
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 String error = "Error desconocido, contacte con el administrador.";
                 return Json(error);
-            }
-
-            //envio una respuesta dependiendo del resultado del insert
-            return (Json(true, JsonRequestBehavior.AllowGet));
-
-        
+            }       
         }
         //Metodo para modifcar nombre roles
         [HttpPost]
@@ -184,7 +181,8 @@ namespace BOReserva.Controllers
         public JsonResult asignarpermisos(string json)
         {
 
-            manejadorSQL sql = new manejadorSQL();
+            //manejadorSQL sql = new manejadorSQL();
+            String agrego_si_no = null;
 
             CListaGenerica<CModulo_detallado> listaPermisosAsignar = new CListaGenerica<CModulo_detallado>();
 
@@ -212,13 +210,14 @@ namespace BOReserva.Controllers
 
                 for (int i=1; i < _permisos.Count(); i++)
                 {
-
-                    sql.insertarPermisosRol(_permisos[0].ToString(), _permisos[i].ToString());
-
+                    Entidad nuevoRol = FabricaEntidad.InstanciarRolPermiso(_permisos[0].ToString(), _permisos[i].ToString());
+                    Command<String> comando = FabricaComando.crearM13_AgregarRolPermiso(nuevoRol);
+                    agrego_si_no = comando.ejecutar(); 
+                    //sql.insertarPermisosRol(_permisos[0].ToString(), _permisos[i].ToString());
                 }
-                    
+             }
+                return (Json(agrego_si_no));
             }
-                         }
             catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
@@ -232,10 +231,8 @@ namespace BOReserva.Controllers
                 String error = "Error desconocido, contacte con el administrador.";
                 return Json(error);
             }
-            //envio el resultado de la consulta
-            return (Json(true, JsonRequestBehavior.AllowGet));
-
         }
+
         //Metodo para Eliminar permiso a un Rol
         [HttpPost]
         public JsonResult quitarPermisoRol(string _nombrerol, string _nombrepermiso)
@@ -345,9 +342,10 @@ namespace BOReserva.Controllers
             CListaGenerica<CModulo_detallado> permisos = new CListaGenerica<CModulo_detallado>();
             //coloco el nombre
             try{
-            //Realizo el consulto y Guardo la respuesta de mi metodo sql 
-             permisos = sql.consultarPermisos(modulo);
-                                    }
+                //Realizo el consulto y Guardo la respuesta de mi metodo sql 
+                permisos = sql.consultarPermisos(modulo);
+
+            }
             catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;

@@ -1,4 +1,5 @@
-﻿using BOReserva.DataAccess.Domain;
+﻿using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Linq;
 using System.Web;
 
 
-namespace BOReserva.DataAccess.DAO
+namespace BOReserva.DataAccess.DataAccessObject
 {
     public class DAOReclamo : DAO, IDAOReclamo
     {
@@ -17,9 +18,9 @@ namespace BOReserva.DataAccess.DAO
 
 
 
+
         int IDAO.Agregar(Entidad e)
         {
-
             Reclamo reclamo = (Reclamo)e;
             // SqlConnection conexion = Connection.getInstance(_connexionString);
             try
@@ -56,7 +57,7 @@ namespace BOReserva.DataAccess.DAO
             throw new NotImplementedException();
         }
 
-        Entidad IDAO.Consultar(Entidad e)
+        Dictionary<int, Entidad> IDAO.ConsultarTodos()
         {
             throw new NotImplementedException();
         }

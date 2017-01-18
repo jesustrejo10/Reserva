@@ -1,1 +1,305 @@
 ﻿
+
+
+<div class="row">
+    <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
+
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title" style="font-size:32px;">Lista de Hoteles</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Clasificacion</th>
+                            <th>Pais / ciudad</th>
+                            <th>Direccion</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @try
+                        {
+                            foreach (var item in Model)
+                            {
+                                BOReserva.DataAccess.Domain.Hotel c = (BOReserva.DataAccess.Domain.Hotel) item.Value;
+                                <tr id="@item.Key">
+                                    <td>@c._nombre</td>
+                                    <td>@c._clasificacion</td>
+                                    <td>@c._ciudad._pais._nombre / @c._ciudad._nombre</td>
+                                    <td>@c._direccion</td>
+                                    <td>
+                                        <a href="#" title="Visualizar hotel"> <i class="fa fa-eye visualizarHotel"></i></a>
+                                        <a href="#" title="Modificar hotel"><i class="fa fa-pencil modificar"></i></a>
+                                        <a href="#" title="Eliminar hotel"><i class="fa fa-times eliminar"></i></a>
+                                        @{
+                                            if (c._disponibilidad)
+                                            {
+                                                <a href="#" title="Disponible"><i class="fa fa-toggle-on desactivar"></i></a>
+                                            }
+                                            if (!c._disponibilidad)
+                                            {
+                                                <a href="#" title="No disponible"><i class="fa fa-toggle-off activar"></i></a>
+                                            }
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            Response.Write("<script>alert('No hay vehiculos para mostrar');</script>");
+                        }
+
+                    <tfoot>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Clasificacion</th>
+                            <th>Pais / ciudad</th>
+                            <th>Direccion</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<script>
+
+    $("#m08_VisualizarAutomovil").click(function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        var url = '/gestion_automoviles/M08_VisualizarAutomovil';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+
+    });
+
+
+    $("#m08_ModificarAutomovil").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_automoviles/M08_ModificarAutomovil';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+
+    });
+
+</script>
+
+<!-- DataTables -->
+<script src="../../Content/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        //e.preventDefault();
+    $(".visualizarHotel").on("click", (function () {
+            alert("Se esta procesando tu solicitud, por favor espere");
+            var identificador = $(this).parent().parent().parent().attr("id");
+            jQuery.ajax({
+                type: "GET",
+                url: "/gestion_hoteles/M09_Detallehotel",
+                data: { id: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+            }).done(function (data) {
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            }).fail(function () {
+                alert("Error, por favor refresque la pagina")
+            });
+        }));
+    });
+
+    $(document).ready(function () {
+        //e.preventDefault();
+        $(".modificar").click(function () {
+            alert("Se esta procesando tu solicitud, por favor espere");
+            var identificador = $(this).parent().parent().parent().attr("id");
+            jQuery.ajax({
+                type: "GET",
+                url: "/gestion_hoteles/M09_ModificarHotel",
+                data: { id: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+            }).done(function (data) {
+                //$("#sdssss").append(data);
+
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            }).fail(function () {
+                alert("Error, por favor refresque la pagina")
+            });
+        });
+    });
+
+    $(document).ready(function () {
+        //e.preventDefault();
+        $(".eliminar").click(function () {
+            alert("Se esta procesando tu solicitud, por favor espere");
+            var identificador = $(this).parent().parent().parent().attr("id");
+            jQuery.ajax({
+                type: "POST",
+                url: "/gestion_hoteles/deleteHotel",
+                data: { id: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+            }).done(function (data) {
+                if (data === "1") {
+
+                    //$("#sdssss").append(data);
+                    var url1 = '/gestion_hoteles/M09_VisualizarHoteles';
+                    var method = 'GET';
+                    var data1 = '';
+
+                    $.ajax(
+                        {
+                            url: url1,
+                            type: method,
+                            data: data,
+                            success: function (data, textStatus, jqXHR) {
+
+                                $("#contenido").empty();
+                                $("#contenido").append(data);
+                                alert("Se elimino exitosamente el hotel");
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert(errorThrown);
+                            }
+                        });
+                } else if (data.includes("Reserva_Habitacion")) {
+                    alert("No se puede eliminar este hotel porque tiene una reservacion");
+                } else {
+                    alert(data);
+                }
+            }).fail(function () {
+                alert("Error, por favor refresque la pagina")
+            });
+        });
+    });
+
+    $(document).ready(function () {
+        //e.preventDefault();
+        $(".activar").click(function () {
+            alert("Se esta procesando tu solicitud, por favor espere");
+            var identificador = $(this).parent().parent().parent().attr("id");
+            jQuery.ajax({
+                type: "POST",
+                url: "/gestion_hoteles/activateHotel",
+                data: { id: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+
+
+            }).done(function (data) {
+                if (data === "1") {
+
+                    //$("#sdssss").append(data);
+                    var url1 = '/gestion_hoteles/M09_VisualizarHoteles';
+                    var method = 'GET';
+                    var data1 = '';
+
+                    $.ajax(
+                        {
+                            url: url1,
+                            type: method,
+                            data: data,
+                            success: function (data, textStatus, jqXHR) {
+
+                                $("#contenido").empty();
+                                $("#contenido").append(data);
+                                alert("Se cambio exitosamente la disponibilidad del hotel");
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert(errorThrown);
+                            }
+                        });
+                } else {
+                    alert(data);
+                }
+            }).fail(function () {
+                alert("Error, por favor refresque la pagina")
+            });
+        });
+    });
+
+
+    $(document).ready(function () {
+        //e.preventDefault();
+        $(".desactivar").click(function () {
+            alert("Se esta procesando tu solicitud, por favor espere");
+            var identificador = $(this).parent().parent().parent().attr("id");
+            jQuery.ajax({
+                type: "POST",
+                url: "/gestion_hoteles/deactivateHotel",
+                data: { id: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+            }).done(function (data) {
+                if (data === "1") {
+
+                    //$("#sdssss").append(data);
+                    var url1 = '/gestion_hoteles/M09_VisualizarHoteles';
+                    var method = 'GET';
+                    var data1 = '';
+
+                    $.ajax(
+                        {
+                            url: url1,
+                            type: method,
+                            data: data,
+                            success: function (data, textStatus, jqXHR) {
+
+                                $("#contenido").empty();
+                                $("#contenido").append(data);
+                                alert("Se cambio exitosamente la disponibilidad del hotel");
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert(errorThrown);
+                            }
+                        });
+                } else {
+                    alert(data);
+                }
+            }).fail(function () {
+                alert("Error, por favor refresque la pagina")
+            });
+        });
+
+        table = $('#example1').DataTable();
+
+    });
+</script>
+

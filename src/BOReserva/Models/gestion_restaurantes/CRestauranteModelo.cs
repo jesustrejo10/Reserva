@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BOReserva.DataAccess.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,7 @@ namespace BOReserva.Models.gestion_restaurantes
     public class CRestauranteModelo: Entidad
     {
         #region Atributos
-        private int _id;
+        private int _Id;
         private int _idLugar;
         private string _nombre;
         private string _direccion;
@@ -38,7 +39,7 @@ namespace BOReserva.Models.gestion_restaurantes
 
         public CRestauranteModelo(int id, string nombre, string direccion, string telefono, string descripcion, string horarioApertura, string horarioCierre, int idLugar)
         {
-            this.Id = id;
+            this._id = id;
             this._nombre = nombre;
             this._direccion = direccion;
             this._telefono = telefono;

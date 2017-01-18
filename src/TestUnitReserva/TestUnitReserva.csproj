@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -58,6 +58,8 @@
     <Reference Include="System.Web.RegularExpressions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BO\gestion_hoteles\TestGestionHoteles.cs" />
+    <Compile Include="BO\gestion_hoteles\TestLugar.cs" />
     <Compile Include="BO\gestion_OfertasYPaquetes\testOfertasYPaquetes.cs" />
     <Compile Include="BO\gestion_roles\TestRoles.cs" />
     <Compile Include="BO\gestion_aviones\TestAviones.cs" />
@@ -67,6 +69,7 @@
     <Compile Include="BO\gestion_restaurantes\TestRestaurante.cs" />
     <Compile Include="BO\gestion_seguridad_ingreso\TestLogin.cs" />
     <Compile Include="BO\gestion_ruta_comercial\TestRutaComercial.cs" />
+    <Compile Include="FO\DAO\TestDAO.cs" />
     <Compile Include="FO\Diario\TestLugarDiario.cs" />
     <Compile Include="FO\Itinerario\TestPlanificacionVacacion.cs" />
     <Compile Include="BO\gestion_cruceros\TestCruceros.cs" />
@@ -75,6 +78,7 @@
     </Compile>
     <Compile Include="FO\Reserva restaurante\TestReservaRestaurante.cs" />
     <Compile Include="FO\Reserva_Cruceros\TestReservaCruceros.cs" />
+    <Compile Include="FO\Revision\TestRevision.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
