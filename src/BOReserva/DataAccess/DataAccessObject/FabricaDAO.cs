@@ -1,4 +1,5 @@
 ﻿using BOReserva.DataAccess.DAO;
+using BOReserva.DataAccess.DataAccessObject.M01;
 using BOReserva.M10;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,11 @@ namespace BOReserva.DataAccess.DataAccessObject
 {
     public class FabricaDAO
     {
+        public static DAO instanciarDaoLogin()
+        {
+            return new DAOLogin();
+        }
+
         public static DAO instanciarDaoHotel() {
             return new DAOHotel();
         }
