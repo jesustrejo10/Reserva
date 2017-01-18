@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BOReserva.DataAccess.Domain;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -19,5 +20,7 @@ namespace BOReserva.Models.gestion_hoteles
         public String _pais { get; set; }
         public int _clasificacion { get; set; }
         public int _capacidadHabitacion { get; set; }
+        public Dictionary<int, Entidad> _paises { get; set; }
+
     }
 }

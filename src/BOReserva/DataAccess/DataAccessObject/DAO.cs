@@ -1,27 +1,21 @@
-﻿using BOReserva.DataAccess.Domain;
+﻿using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
-using System.Data.SqlClient;
-using System.Data;
-using System.Configuration;
 
-
-
-namespace BOReserva.DataAccess.DAO
+namespace BOReserva.DataAccess.DataAccessObject
 {
     abstract public class DAO : IDAO
     {
-        //protected String _connexionString = "Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617a;";
-       
-        #region Atributos
+        protected String _connexionString = "Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617a;";
         private SqlConnection conexion;
         // El String de conexion se encuentra en el archivo Web.config
-        protected string _connexionString = ConfigurationManager.ConnectionStrings[RecursoBD.StringConexion].ConnectionString;
         private SqlCommand comando;
-        #endregion
 
         public int Agregar(Entidad e)
         {
@@ -38,12 +32,10 @@ namespace BOReserva.DataAccess.DAO
             throw new NotImplementedException();
         }
 
-        public Entidad Consultar(Entidad e)
+        public Dictionary<int, Entidad> ConsultarTodos()
         {
             throw new NotImplementedException();
         }
-
-       
 
         #region Conectar con la Base de Datos
         /// <summary>
@@ -56,7 +48,7 @@ namespace BOReserva.DataAccess.DAO
 
             try
             {
-                conexion = new SqlConnection(_connexionString);
+                //conexion = Connection.getInstance(_connexionString);
             }
 
             catch (Exception ex)
@@ -294,5 +286,59 @@ namespace BOReserva.DataAccess.DAO
             }
         }
         #endregion
+
     }
 }
+
+    /*
+﻿using BOReserva.DataAccess.Domain;
+using BOReserva.DataAccess.Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Data.SqlClient;
+using System.Data;
+using System.Configuration;
+
+
+
+namespace BOReserva.DataAccess.DAO
+{
+    abstract public class DAO : IDAO
+    {
+        //protected String _connexionString = "Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617a;";
+       
+        #region Atributos
+        private SqlConnection conexion;
+        // El String de conexion se encuentra en el archivo Web.config
+        protected string _connexionString = ConfigurationManager.ConnectionStrings[RecursoBD.StringConexion].ConnectionString;
+        private SqlCommand comando;
+        #endregion
+
+        public int Agregar(Entidad e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Entidad Modificar(Entidad e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Entidad Consultar(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Entidad Consultar(Entidad e)
+        {
+            throw new NotImplementedException();
+        }
+
+       
+
+        
+    }
+>>>>>>> Develop
+}*/

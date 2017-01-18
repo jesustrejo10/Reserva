@@ -260,9 +260,9 @@ jQuery(document).ready(function () {
             });
     });
 
-    $("#M09_consultar_hoteles").click(function (e) {
+    $("#M09_visualizar_hoteles").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_hoteles/M09_GestionHoteles_Visualizar';
+        var url = '/gestion_hoteles/M09_VisualizarHoteles';
         var method = 'GET';
         var data = '';
 
