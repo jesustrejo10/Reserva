@@ -1,6 +1,7 @@
 ﻿using BOReserva.Controllers.PatronComando;
 using BOReserva.Controllers.PatronComando.M09;
 using BOReserva.DataAccess.Domain;
+using BOReserva.M10.Comando.gestion_restaurantes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -141,6 +142,102 @@ namespace BOReserva.Controllers.PatronComando
             return new M13_COAgregarRolPermiso((Rol)e);
 
         }
+        #region M05_Boleto
+        public static Command<String> crearM05AgregarPasajero(Entidad e)
+        {
+            return new M05_COAgregarPasajero((Pasajero)e);
+
+        }
+
+        public static Command<String> crearM05CrearBoleto(Entidad e)
+        {
+            return new M05_COCrearBoleto((Boleto)e);
+        }
+        #endregion
+
+        #region Modulo 10 Gestion Restaurante
+
+        #region Comandos Generales 
+        /// <summary>
+        /// Metodo que recibe un comando para Crear, Actualizar, Eliminar o Consultar
+        /// la variable comando recibe comandosGlobales.CREAR, comandosGlobales.ELIMINAR
+        /// comandosGlobales.ACTUALIZAR, comandosGlobales.CONSULTAR 
+        /// </summary>
+        /// <param name="comando"></param>
+        /// <returns>regresa un tipo Objecto que debe ser casteado segun sea el caso</returns>
+        public static Object comandosRestaurant(comandosGlobales comando, comandoRestaurant comandoR, Entidad _objeto)
+        {
+            switch (comando)
+            {
+                case comandosGlobales.CREAR:
+                    return new M10_COCrearRestaurant(_objeto);
+
+                case comandosGlobales.ELIMINAR:
+                    return new M10_COEliminarRestaurant(_objeto);
+
+                case comandosGlobales.ACTUALIZAR:
+                    return new comandoActualizarRestaurant(_objeto);
+
+                case comandosGlobales.CONSULTAR:
+
+                    switch (comandoR)
+                    {
+                        case comandoRestaurant.NULO:
+                            break;
+                        case comandoRestaurant.CONSULTAR_ID:
+                            return new M10_COConsultarRestaurantId(_objeto);
+                    }
+                    return new M10_COConsultarRestaurant(_objeto);
+
+                default:
+                    return new M10_COConsultarRestaurant(_objeto);
+            }
+        }
+        #endregion
+        #region comandos de las interfaces Restaurant
+        public static Object comandosVistaRestaurant(comandoVista comando)
+        {
+            switch (comando)
+            {
+                case comandoVista.CARGAR_LUGAR:
+                    return new M10_COConsultarLugar();
+                case comandoVista.CARGAR_HORA:
+                    return new M10_COCargarHorario();
+                default:
+                    return new M10_COConsultarLugar();
+            }
+
+        }
+        #endregion
+
+
+        public enum comandoVista
+        {
+            CARGAR_LUGAR,
+            CARGAR_HORA
+        }
+
+        public enum comandoRestaurant
+        {
+            NULO,
+            CONSULTAR_ID
+        }
+
+        public enum comandosGlobales
+        {
+            CREAR,
+            ELIMINAR,
+            ACTUALIZAR,
+            CONSULTAR
+        }
+
+        public static List<Lugar> listaLugares(Lugar lugar)
+        {
+            List<Lugar> lista = new List<Lugar>();
+            lista.Add(lugar);
+            return lista;
+        }
+        #endregion
 
 
     }

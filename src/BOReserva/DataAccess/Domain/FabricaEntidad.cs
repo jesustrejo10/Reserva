@@ -1,5 +1,7 @@
-﻿using BOReserva.Models.gestion_hoteles;
+﻿using BOReserva.Models;
+using BOReserva.Models.gestion_hoteles;
 using BOReserva.Models.gestion_reclamos;
+using BOReserva.Models.gestion_restaurantes;
 using BOReserva.Models.gestion_roles;
 using System;
 using System.Collections.Generic;
@@ -104,6 +106,58 @@ namespace BOReserva.DataAccess.Domain
         }
         #endregion
 
+        #region M05_Boleto_y_checkin
+
+        public static Entidad InstanciarBoleto(int idorigen, int iddestino, int pasaporte, int monto, string tipo, int idvuelo, string fecha)
+        {
+            return new Boleto(idorigen, iddestino, pasaporte, monto, tipo, idvuelo, fecha);
+        }
+
+        public static Entidad InstanciarPasajero(int id, String nombre1, String nombre2, String apellido1, String apellido2, String sexo,
+         string fecha, String correo)
+        {
+            DateTime fecha_nac = Convert.ToDateTime(fecha);
+            return new Pasajero(id, nombre1, nombre2, apellido1, apellido2, sexo, fecha_nac, correo);
+		}
+		#endregion
+		
+		#region Modulo 10
+        public static CRestauranteModelo inicializarRestaurant(string nombre, string direccion, string telefono, string descripcion, string horarioApertura, string horarioCierre, int idLugar)
+        {
+            return new CRestauranteModelo(nombre, direccion, telefono, descripcion, horarioApertura, horarioCierre, idLugar);
+        }
+
+        public static CRestauranteModelo inicializarRestaurant(int id, string nombre, string direccion, string telefono, string descripcion, string horarioApertura, string horarioCierre, int idLugar)
+        {
+            return new CRestauranteModelo(id, nombre, direccion, telefono, descripcion, horarioApertura, horarioCierre, idLugar);
+        }
+
+        public static CRestauranteModelo inicializarRestaurant()
+        {
+            return new CRestauranteModelo();
+        }
+        #endregion
+
+        public static Lugar inicializarLugar(int idLugar, string nombreLugar)
+        {
+            return new Lugar(idLugar, nombreLugar);
+        }
+
+        public static List<Lugar> inicializarListaLugar()
+        {
+            return new List<Lugar>();
+        }
+
+        public static List<CRestauranteModelo> inicializarListaRestarant()
+        {
+            return new List<CRestauranteModelo>();
+        }
+
+        public static List<Entidad> asignarListaDeEntidades()
+        {
+            return new List<Entidad>();
+        }
+
         public static Entidad InstanciarRol(CRoles model)
         {
             String nombre = model.Nombre_rol;
@@ -120,12 +174,6 @@ namespace BOReserva.DataAccess.Domain
         {
             return new Permiso();
         }
+
     }
 }
-          
-
-        
-
-      
-
-       

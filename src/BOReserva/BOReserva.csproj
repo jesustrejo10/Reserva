@@ -205,9 +205,17 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\PatronComando\Command.cs" />
     <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
+    <Compile Include="Controllers\PatronComando\M10\M10_COActualizarRestaurant.cs" />
+    <Compile Include="Controllers\PatronComando\M10\M10_COCargarHorario.cs" />
+    <Compile Include="Controllers\PatronComando\M10\M10_COConsultarLugar.cs" />
+    <Compile Include="Controllers\PatronComando\M10\M10_COConsultarRestaurant.cs" />
+    <Compile Include="Controllers\PatronComando\M10\M10_COConsultarRestaurantId.cs" />
+    <Compile Include="Controllers\PatronComando\M10\M10_COCrearRestaurant.cs" />
+    <Compile Include="Controllers\PatronComando\M10\M10_COEliminarRestaurant.cs" />
     <Compile Include="Controllers\PatronComando\M04\M04_COAgregarVuelo.cs" />
     <Compile Include="Controllers\PatronComando\M04\M04_COConsultarTodosVuelos.cs" />
     <Compile Include="Controllers\PatronComando\M09\IM09_COObtenerPaises.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COCrearBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COAgregarHotel.cs" />
     <Compile Include="Controllers\gestion_automovilesController.cs" />
     <Compile Include="Controllers\gestion_avionesController.cs">
@@ -234,19 +242,41 @@
     <Compile Include="Controllers\PatronComando\M09\M09_COModificarHotel.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COObtenerPaises.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COVisualizarHoteles.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COAgregarPasajero.cs" />
     <Compile Include="Controllers\PatronComando\M13_COAgregarRol.cs" />
     <Compile Include="Controllers\PatronComando\M13_COAgregarRolPermiso.cs" />
     <Compile Include="Controllers\PatronComando\M16_COAgregarReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOCiudad.cs" />
+    <Compile Include="DataAccess\DataAccessObject\DAOBoleto.cs" />
+    <Compile Include="DataAccess\DataAccessObject\DAOPasajero.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOHotel.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOPais.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAORol.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCiudad.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPais.cs" />
+
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORol.cs" />
     <Compile Include="DataAccess\Domain\Contratos\ICiudad.cs" />
+
+    <Compile Include="DataAccess\DataAccessObject\M09\DAOHotel.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M10\Columna.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M10\DAO.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M10\IDAO.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M10\Parametro.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M10\RecursoDAOM10.Designer.cs">
+      <DependentUpon>RecursoDAOM10.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="DataAccess\DataAccessObject\M10\DAORestaurant.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORestaurant.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOBoleto.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPasajero.cs" />
+    <Compile Include="DataAccess\Domain\Boleto.cs" />
+    <Compile Include="DataAccess\Domain\Lugar.cs" />
+    <Compile Include="DataAccess\Domain\Pasajero.cs" />
     <Compile Include="DataAccess\Domain\Permiso.cs" />
     <Compile Include="DataAccess\Domain\Reclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAO.cs" />
@@ -356,6 +386,7 @@
     <Compile Include="Models\gestion_ruta_comercial\CGestion_ruta.cs" />
     <Compile Include="Models\gestion_ruta_comercial\CRuta.cs" />
     <Compile Include="Models\gestion_usuarios\AgregarUsuario.cs" />
+    <Compile Include="Models\lugar.cs" />
     <Compile Include="Servicio\Servicio_Usuarios\ConexionBD.cs" />
     <Compile Include="Models\gestion_usuarios\CUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\Encriptar.cs" />
@@ -377,7 +408,6 @@
     </Compile>
     <Compile Include="Models\gestion_usuarios\ResultadoBD.cs" />
     <Compile Include="Models\Util.cs" />
-    <Compile Include="Models\gestion_restaurantes\CRestauranteModeloVista.cs" />
     <Compile Include="Models\gestion_restaurantes\CRestauranteModelo.cs" />
     <Compile Include="MySQLException.cs" />
     <Compile Include="Models\gestion_vuelo\CVuelo.cs" />
@@ -398,6 +428,7 @@
     <Compile Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx.designer.cs">
       <DependentUpon>GestionDeAutomoviles.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\gestion_restaurantes\Fabrica\FabricaVista.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -550,6 +581,7 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="DataAccess\DataAccessObject\M10\Scripts de Procedures M10.sql" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\bootstrap\css\bootstrap.css" />
@@ -563,7 +595,6 @@
     <Content Include="Models\gestion_equipaje_perdido\placeholder.html" />
     <Content Include="Models\gestion_hoteles\placeholder.html" />
     <Content Include="Models\gestion_ofertas\placeholder.html" />
-    <Content Include="Models\gestion_restaurantes\placeholder.html" />
     <Content Include="Models\gestion_roles\placeholder.html" />
     <Content Include="Models\gestion_ruta_comercial\placeholder.html" />
     <Content Include="Models\gestion_usuarios\placeholder.html" />
@@ -593,6 +624,7 @@
     <Content Include="Scripts\Scripts_Hoteles\llamadas_comunes_automoviles.js" />
     <Content Include="Scripts\Scripts_Hoteles\llamadas_comunes_hoteles.js" />
     <Content Include="Scripts\Scripts_Hoteles\llamadas_generales_hoteles.js" />
+    <Content Include="Scripts\Scripts_Restaurantes\ccs\M10.css" />
     <Content Include="Scripts\Scripts_Vuelos\llamadas_generales_Vuelos.js" />
     <Content Include="Views\dist\css\AdminLTE.css" />
     <Content Include="Views\dist\css\AdminLTE.min.css" />
@@ -657,6 +689,7 @@
     <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Deshabilitar.html" />
     <Content Include="Views\gestion_hoteles\placeholder.html" />
     <Content Include="Views\gestion_ofertas\placeholder.html" />
+    <Content Include="Views\gestion_restaurantes\ccs\M10.css" />
     <Content Include="Views\gestion_roles\M13_Roles.html" />
     <Content Include="Views\gestion_roles\placeholder.html" />
     <Content Include="Views\gestion_ruta_comercial\placeholder.html" />
@@ -1665,6 +1698,10 @@
     <Content Include="Views\gestion_boletos\M05_DetalleBoletoReserva.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="DataAccess\DataAccessObject\M10\RecursoDAOM10.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecursoDAOM10.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="DataAccess\DataAccessObject\M04\RecursoVuelo.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoVuelo.Designer.cs</LastGenOutput>

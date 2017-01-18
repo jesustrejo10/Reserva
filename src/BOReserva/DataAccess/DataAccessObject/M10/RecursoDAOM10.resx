@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="fk_lugar" xml:space="preserve">
+    <value>@fk_lugar</value>
+    <comment>Clave foranea lugar del Restaurant, Atributo procedimiento</comment>
+  </data>
+  <data name="LugarId" xml:space="preserve">
+    <value>lug_id</value>
+    <comment>Lugar atributo Id clave primaria, Tabla Lugar </comment>
+  </data>
+  <data name="LugarNombre" xml:space="preserve">
+    <value>lug_nombre</value>
+    <comment>Lugar atributo nombre, Tabla Lugar</comment>
+  </data>
+  <data name="procedimientoActualizar" xml:space="preserve">
+    <value>M10_ActualizarRestaurante</value>
+    <comment>Nombre del Procedimiento Actualizar en la Base de Datos tabla Restaurant</comment>
+  </data>
+  <data name="procedimientoAgregar" xml:space="preserve">
+    <value>M10_AgregarRestaurante</value>
+    <comment>Nombre del Procedimiento Agregar Base de Datos Tabla Restaurant</comment>
+  </data>
+  <data name="procedimientoConsultar" xml:space="preserve">
+    <value>M10_ConsultarRestaurante</value>
+    <comment>Nombre del Procedimiento Consultar en la Base de Datos tabla Restaurant</comment>
+  </data>
+  <data name="procedimientoConsultarLugar" xml:space="preserve">
+    <value>M10_Consultar_Lugar</value>
+    <comment>Procedimiento Consultar Lugares en la Base de Datos</comment>
+  </data>
+  <data name="procedimientoEliminar" xml:space="preserve">
+    <value>M10_EliminarRestaurante</value>
+    <comment>Nombre del Procedimiento Eliminar en la Base de Datos tabla Restaurant</comment>
+  </data>
+  <data name="rst_descripcion" xml:space="preserve">
+    <value>@rst_descripcion</value>
+    <comment>Descripcion del Restaurant, Atributo procedimiento</comment>
+  </data>
+  <data name="rst_direccion" xml:space="preserve">
+    <value>@rst_direccion</value>
+    <comment>Direccion del Restaurant, Atributo procedimiento</comment>
+  </data>
+  <data name="rst_hora_apertura" xml:space="preserve">
+    <value>@rst_hora_apertura</value>
+    <comment>Hora Apertura del Restaurant, Atributo procedimiento</comment>
+  </data>
+  <data name="rst_hora_cierre" xml:space="preserve">
+    <value>@rst_hora_cierre</value>
+    <comment>Hora Cierre del Restaurant, Atributo procedimiento</comment>
+  </data>
+  <data name="rst_nombre" xml:space="preserve">
+    <value>@rst_nombre</value>
+    <comment>Nombre del Restaurant, Atributo procedimiento</comment>
+  </data>
+  <data name="rst_telefono" xml:space="preserve">
+    <value>@rst_telefono</value>
+    <comment>Telefono del Restaurant, Atributo procedimiento</comment>
+  </data>
+  <data name="lug_id" xml:space="preserve">
+    <value>@lug_id</value>
+    <comment>Id de Lugar, Atributo del Procedimiento</comment>
+  </data>
+  <data name="restaurantDescripcion" xml:space="preserve">
+    <value>rst_descripcion</value>
+    <comment>Atributo Descripcion tabla restaurant</comment>
+  </data>
+  <data name="restaurantDireccion" xml:space="preserve">
+    <value>rst_direccion</value>
+    <comment>Atributo Direccion tabla restaurant</comment>
+  </data>
+  <data name="restaurantHoraApertura" xml:space="preserve">
+    <value>rst_hora_apertura</value>
+    <comment>Atributo Hora Apertura tabla restaurant</comment>
+  </data>
+  <data name="restaurantHoraCierra" xml:space="preserve">
+    <value>rst_hora_cierre</value>
+    <comment>Atributo Hora CIerre tabla restaurant</comment>
+  </data>
+  <data name="restaurantId" xml:space="preserve">
+    <value>rst_id</value>
+    <comment>Atributo Id (Clave Primaria) tabla restaurant</comment>
+  </data>
+  <data name="restaurantNombre" xml:space="preserve">
+    <value>rst_nombre</value>
+    <comment>Atributo Nombre tabla restaurant</comment>
+  </data>
+  <data name="restaurantTelefono" xml:space="preserve">
+    <value>rst_telefono</value>
+    <comment>Atributo Telefono tabla restaurant</comment>
+  </data>
+  <data name="rst_id" xml:space="preserve">
+    <value>@rst_id</value>
+    <comment>Id del restaurant, Atributo procedimiento</comment>
+  </data>
+  <data name="LugarIdFk" xml:space="preserve">
+    <value>fk_lugar</value>
+    <comment>Atributo Id (Clave Foranea) tabla Lugar</comment>
+  </data>
+  <data name="procedimientoConsultarRestaurantId" xml:space="preserve">
+    <value>M10_ConsultarRestauranteId</value>
+    <comment>Nombre del Procedimiento consultar en la Base de Datos tabla Restaurant por Id</comment>
+  </data>
+</root>
