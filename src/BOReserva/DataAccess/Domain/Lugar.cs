@@ -14,5 +14,14 @@ namespace BOReserva.DataAccess.Domain
             this._id = id;
             Name = nombre;
         }
+
+       
+
+        public int Id
+        {
+            get { return this._id; }
+            set { this._id = value; }
+        }
+
     }
 }
