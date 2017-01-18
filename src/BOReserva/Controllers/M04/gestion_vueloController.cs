@@ -33,11 +33,11 @@ namespace BOReserva.Controllers
 
         public ActionResult M04_GestionVuelo_Visualizar()
         {
-            Command<List<Entidad>> comando = FabricaComando.M04consultarTodos();
-            List<Entidad> listaVuelos = comando.ejecutar();
+            List<Entidad> listaVuelos;
             try
             {
-                
+                Command<List<Entidad>> comando = FabricaComando.consultarM04_ConsultarTodos();
+                listaVuelos = comando.ejecutar();  
             }
             catch (SqlException e)
             {
@@ -647,6 +647,8 @@ namespace BOReserva.Controllers
 
         public JsonResult cargarDestinosModificar(string ciudadOMod)
         {
+            //Pruebas hasta que pasen los métodos
+
             CVueloModificar model = new CVueloModificar();
             List<CVueloModificar> resultado = new List<CVueloModificar>();
             manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
