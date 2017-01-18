@@ -35,6 +35,20 @@ namespace BOReserva.DataAccess.Domain
             return new Hotel(nombre, direccion, email, paginaWeb, clasificacion, capacidad, city);
         }
 
+        public static Entidad InstanciarHotel(CModificarHotel model, Entidad c)
+        {
+            Ciudad city = (Ciudad)c;
+
+            String nombre = model._nombre;
+            String direccion = model._direccion;
+            int clasificacion = model._clasificacion;
+            int capacidad = model._capacidadHabitacion;
+            String paginaWeb = model._paginaWeb;
+            String email = model._email;
+
+            return new Hotel(nombre, direccion, email, paginaWeb, clasificacion, capacidad, city);
+        }
+
         public static Entidad InstanciarPais(String nombre)
         {
             return new Pais();

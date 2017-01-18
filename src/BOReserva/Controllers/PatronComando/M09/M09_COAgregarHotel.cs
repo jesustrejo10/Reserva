@@ -17,7 +17,7 @@ namespace BOReserva.Controllers.PatronComando
     {
         Hotel _hotel;
 
-        public M09_COAgregarHotel(Hotel hotel ) { 
+        public M09_COAgregarHotel(Hotel hotel) { 
             this._hotel =hotel;
         }
 
