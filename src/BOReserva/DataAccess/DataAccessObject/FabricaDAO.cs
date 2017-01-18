@@ -47,7 +47,7 @@ namespace BOReserva.DataAccess.DataAccessObject
         #region Modulo 10
         public static IDAORestaurant RestaurantBD()
         {
-            return new RestaurantDAO();
+            return new DAORestaurant();
 
         }
 

@@ -90,10 +90,10 @@ namespace BOReserva.Controllers.PatronComando
             switch (comando)
             {
                 case comandosGlobales.CREAR:
-                    return new comandoCrearRestaurant(_objeto);
+                    return new M10_COCrearRestaurant(_objeto);
 
                 case comandosGlobales.ELIMINAR:
-                    return new comandoEliminarRestaurant(_objeto);
+                    return new M10_COEliminarRestaurant(_objeto);
 
                 case comandosGlobales.ACTUALIZAR:
                     return new comandoActualizarRestaurant(_objeto);
@@ -105,12 +105,12 @@ namespace BOReserva.Controllers.PatronComando
                         case comandoRestaurant.NULO:
                             break;
                         case comandoRestaurant.CONSULTAR_ID:
-                            return new comandoConsultarRestaurantId(_objeto);
+                            return new M10_COConsultarRestaurantId(_objeto);
                     }
-                    return new comandoConsultarRestaurant(_objeto);
+                    return new M10_COConsultarRestaurant(_objeto);
 
                 default:
-                    return new comandoConsultarRestaurant(_objeto);
+                    return new M10_COConsultarRestaurant(_objeto);
             }
         }
         #endregion
@@ -120,11 +120,11 @@ namespace BOReserva.Controllers.PatronComando
             switch (comando)
             {
                 case comandoVista.CARGAR_LUGAR:
-                    return new comandoConsultarLugar();
+                    return new M10_COConsultarLugar();
                 case comandoVista.CARGAR_HORA:
-                    return new comandoCargarHorario();
+                    return new M10_COCargarHorario();
                 default:
-                    return new comandoConsultarLugar();
+                    return new M10_COConsultarLugar();
             }
 
         }

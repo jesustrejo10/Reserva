@@ -7,7 +7,7 @@ using System.Web;
 
 namespace BOReserva.M10.Comando.gestion_restaurantes
 {
-    public class comandoCargarHorario : Command<List<String>>
+    public class M10_COCargarHorario : Command<List<String>>
     {
 
         public override List<string> ejecutar()

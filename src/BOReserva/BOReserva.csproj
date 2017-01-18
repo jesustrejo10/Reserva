@@ -205,13 +205,13 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\PatronComando\Command.cs" />
     <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
-    <Compile Include="Controllers\PatronComando\M10\comandoActualizarRestaurant.cs" />
-    <Compile Include="Controllers\PatronComando\M10\comandoCargarHorario.cs" />
-    <Compile Include="Controllers\PatronComando\M10\comandoConsultarLugar.cs" />
-    <Compile Include="Controllers\PatronComando\M10\comandoConsultarRestaurant.cs" />
-    <Compile Include="Controllers\PatronComando\M10\comandoConsultarRestaurantId.cs" />
-    <Compile Include="Controllers\PatronComando\M10\comandoCrearRestaurant.cs" />
-    <Compile Include="Controllers\PatronComando\M10\comandoEliminarRestaurant.cs" />
+    <Compile Include="Controllers\PatronComando\M10\M10_COActualizarRestaurant.cs" />
+    <Compile Include="Controllers\PatronComando\M10\M10_COCargarHorario.cs" />
+    <Compile Include="Controllers\PatronComando\M10\M10_COConsultarLugar.cs" />
+    <Compile Include="Controllers\PatronComando\M10\M10_COConsultarRestaurant.cs" />
+    <Compile Include="Controllers\PatronComando\M10\M10_COConsultarRestaurantId.cs" />
+    <Compile Include="Controllers\PatronComando\M10\M10_COCrearRestaurant.cs" />
+    <Compile Include="Controllers\PatronComando\M10\M10_COEliminarRestaurant.cs" />
     <Compile Include="Controllers\PatronComando\M04\M04_COAgregarVuelo.cs" />
     <Compile Include="Controllers\PatronComando\M04\M04_COConsultarTodosVuelos.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COCrearBoleto.cs" />
@@ -256,7 +256,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="DataAccess\DataAccessObject\M10\RestaurantDAO.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M10\DAORestaurant.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORestaurant.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPais.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReclamo.cs" />
