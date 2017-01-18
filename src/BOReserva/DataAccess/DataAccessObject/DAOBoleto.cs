@@ -23,7 +23,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             try
             {
                 conexion.Open();
-                String sql = "INSERT INTO Boleto (bol_escala,bol_ida_vuelta,bol_costo,bol_fk_lugar_origen,bol_fk_lugar_destino,bol_fk_pasajero,bol_fecha,bol_tipo_boleto) VALUES(0,1," + boleto._costo + "," + boleto._idOrigen + "," + boleto._idDestino + "," + boleto._idPasajero + ",'" + boleto._fechaBoleto + "','" + boleto._tipoBoleto + "')";
+                String sql = "INSERT INTO Boleto (bol_escala,bol_ida_vuelta,bol_costo,bol_fk_lugar_origen,bol_fk_lugar_destino,bol_fk_pasajero,bol_fecha,bol_tipo_boleto) VALUES(" + boleto._escala + "," + boleto._ida_vuelta + "," + boleto._costo + "," + boleto._idOrigen + "," + boleto._idDestino + "," + boleto._idPasajero + ",'" + boleto._fechaBoleto.ToString("yyyy/MM/dd") + "','" + boleto._tipoBoleto + "')";
                 Debug.WriteLine(sql);
                 SqlCommand cmd = new SqlCommand(sql, conexion);
                 cmd.ExecuteNonQuery();
