@@ -12,6 +12,8 @@ using BOReserva.Servicio.Servicio_Hoteles;
 using BOReserva.DataAccess.DAO;
 using BOReserva.DataAccess.Domain;
 using BOReserva.Controllers.PatronComando;
+using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+using BOReserva.DataAccess.DataAccessObject;
 
 namespace TestUnitReserva.BO.gestion_hoteles
 {
@@ -74,7 +76,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
         public void M09_ComandoConsultarTodos()
         {
             M09_COVisualizarHoteles comando = new M09_COVisualizarHoteles();
-            Dictionary<int, Entidad> hoteles = comando.ejecutarComando();
+            Dictionary<int, Entidad> hoteles = comando.ejecutar();
             Assert.NotNull(hoteles);
             Hotel e = (Hotel)hoteles[99];
             Assert.AreEqual(e._nombre, "hotelDePruebasUnitarias");

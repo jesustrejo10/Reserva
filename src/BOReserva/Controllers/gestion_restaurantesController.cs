@@ -6,15 +6,15 @@ using System.Web.Mvc;
 using System.Net;
 using BOReserva.Servicio;
 using BOReserva.Models.gestion_restaurantes;
-using BOReserva.LogicaReserva;
-using BOReserva.Models;
-using BOReserva.LogicaReserva.Fabrica;
 using BOReserva.Views.gestion_restaurantes.Fabrica;
-using BOReserva.Models.Fabrica;
-
+using BOReserva.DataAccess.Domain;
+using BOReserva.Controllers.PatronComando;
 
 namespace BOReserva.Controllers
 {
+    /// <summary>
+    /// Controlador vista restaurant
+    /// </summary>
     public class gestion_restaurantesController : Controller
     {
 
@@ -27,14 +27,14 @@ namespace BOReserva.Controllers
         /// <returns>Retorna un objeto para renderizar la vista parcial.</returns>
         public ActionResult M10_GestionRestaurantes_Ver(int id = 0)
         {
-            ViewBag.Ciudad = FabricaVista.asignarItemsComboBox(cargarComboBoxLugar(), "Id", "Nombre");
+            ViewBag.Ciudad = FabricaVista.asignarItemsComboBox(cargarComboBoxLugar(), "Id", "Name");
         
             if (id != 0)
             {
                
                 Entidad _lugar = FabricaEntidad.inicializarLugar(id, "");//Aqui se envia la clave foranea de lugar para realizar la busqueda
-                Comando<List<Entidad>> comando = (Comando<List<Entidad>>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, BOReserva.LogicaReserva.Fabrica.FabricaComando.comandoRestaurant.NULO, _lugar);
-                List<Entidad> restaurantes = comando.Ejecutar();
+                Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, BOReserva.Controllers.PatronComando.FabricaComando.comandoRestaurant.NULO, _lugar);
+                List<Entidad> restaurantes = comando.ejecutar();
                 CRestauranteModelo Restaurant = FabricaEntidad.inicializarRestaurant();
                 List<CRestauranteModelo> lista = FabricaEntidad.inicializarListaRestarant();
 
@@ -53,18 +53,19 @@ namespace BOReserva.Controllers
 
         #endregion
 
+        #region Agregar Restaurant
         /// <summary>
         /// Método para el acceso a la interfaz de agregación de restaurantes.
         /// </summary>
         /// <returns>Retorna un objeto para renderizar la vista parcial.</returns>
         public ActionResult M10_GestionRestaurantes_Agregar()
         {
-            ViewBag.Ciudad = FabricaVista.asignarItemsComboBox(cargarComboBoxLugar(), "Id", "Nombre");
+            ViewBag.Ciudad = FabricaVista.asignarItemsComboBox(cargarComboBoxLugar(), "Id", "Name");
             ViewBag.Horarios = FabricaVista.asignarItemsComboBox(cargarComboBoxHorario(), "", "");
             return PartialView();
         }
+        #endregion
 
-         
         /// <summary>
         /// Método para el acceso a la interfaz de modificación de restaurantes.
         /// </summary>
@@ -72,15 +73,15 @@ namespace BOReserva.Controllers
         public ActionResult M10_GestionRestaurantes_Modificar(int id)
         {
 
-            ViewBag.Ciudad = FabricaVista.asignarItemsComboBox(cargarComboBoxLugar(), "Id", "Nombre");
+            ViewBag.Ciudad = FabricaVista.asignarItemsComboBox(cargarComboBoxLugar(), "Id", "Name");
             ViewBag.Horarios = FabricaVista.asignarItemsComboBox(cargarComboBoxHorario(), "", "");
             
             Entidad _restaurant = FabricaEntidad.inicializarRestaurant();
-            ((CRestauranteModelo)_restaurant).Id = id;
-            Comando<Entidad> comando = (Comando<Entidad>)LogicaReserva.Fabrica.FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, BOReserva.LogicaReserva.Fabrica.FabricaComando.comandoRestaurant.CONSULTAR_ID, _restaurant);
-            Entidad rest = comando.Ejecutar();
+            ((CRestauranteModelo)_restaurant)._id = id;
+            Command<Entidad> comando = (Command<Entidad>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, BOReserva.Controllers.PatronComando.FabricaComando.comandoRestaurant.CONSULTAR_ID, _restaurant);
+            Entidad rest = comando.ejecutar();
 
-            ViewBag.Id = ((CRestauranteModelo)rest).Id;
+            ViewBag.Id = ((CRestauranteModelo)rest)._id;
             ViewBag.NombreRestaurant = ((CRestauranteModelo)rest).nombre;
             ViewBag.DescripcionRestaurant = ((CRestauranteModelo)rest).descripcion;
             ViewBag.DireccionRestaurant = ((CRestauranteModelo)rest).direccion;
@@ -112,10 +113,10 @@ namespace BOReserva.Controllers
             //    return Json(error);
             //}
             Entidad _restaurant = FabricaEntidad.inicializarRestaurant(Nombre, Direccion,Telefono, Descripcion, HoraIni, HoraFin, idLugar);
-            Comando<Boolean> comando = (Comando<Boolean>)LogicaReserva.Fabrica.FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CREAR, BOReserva.LogicaReserva.Fabrica.FabricaComando.comandoRestaurant.NULO, _restaurant);
+            Command<Boolean> comando = (Command<Boolean>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CREAR, BOReserva.Controllers.PatronComando.FabricaComando.comandoRestaurant.NULO, _restaurant);
                     
          
-            if (comando.Ejecutar())
+            if (comando.ejecutar())
             {
                 return (Json(true, JsonRequestBehavior.AllowGet));
             }
@@ -129,7 +130,7 @@ namespace BOReserva.Controllers
         }
 
         /// <summary>
-        /// Método para la modificación de restaurantes, tomando como parámetro un modelo de restaurante.
+        /// Método para la modificación de restaurantes, tomando como parámetros los campos de la vista.
         /// </summary>
         /// <returns>Retorna un objecto tipo JsonResult que indica el éxito o fracaso de la operación.</returns>
 
@@ -145,9 +146,9 @@ namespace BOReserva.Controllers
             //    return Json(error);
             //}
             Entidad _restaurant = FabricaEntidad.inicializarRestaurant(Id,Nombre, Direccion, Telefono, Descripcion, HoraIni, HoraFin, idLugar);
-            Comando<Boolean> comando = (Comando<Boolean>)LogicaReserva.Fabrica.FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.ACTUALIZAR, BOReserva.LogicaReserva.Fabrica.FabricaComando.comandoRestaurant.NULO, _restaurant);
+            Command<Boolean> comando = (Command<Boolean>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.ACTUALIZAR, BOReserva.Controllers.PatronComando.FabricaComando.comandoRestaurant.NULO, _restaurant);
 
-            if (comando.Ejecutar())
+            if (comando.ejecutar())
             {
                 return (Json(true, JsonRequestBehavior.AllowGet));
             }
@@ -169,8 +170,8 @@ namespace BOReserva.Controllers
             System.Diagnostics.Debug.WriteLine("Id de resturant a eliminar "+id);
 
             Entidad _restaurant = FabricaEntidad.inicializarRestaurant();
-            ((CRestauranteModelo)_restaurant).Id = id;
-            Comando<Boolean> comando = (Comando<Boolean>)LogicaReserva.Fabrica.FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.ELIMINAR, BOReserva.LogicaReserva.Fabrica.FabricaComando.comandoRestaurant.NULO, _restaurant);
+            ((CRestauranteModelo)_restaurant)._id = id;
+            Command<Boolean> comando = (Command<Boolean>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.ELIMINAR, BOReserva.Controllers.PatronComando.FabricaComando.comandoRestaurant.NULO, _restaurant);
             //Chequeo de campos obligatorios para el formulario
             if ((id == -1))
             {
@@ -179,7 +180,7 @@ namespace BOReserva.Controllers
                 return Json(error);
             }
      
-            if (comando.Ejecutar())
+            if (comando.ejecutar())
             {
                 return (Json(true, JsonRequestBehavior.AllowGet));
             }
@@ -199,8 +200,8 @@ namespace BOReserva.Controllers
         /// <returns></returns>
         public List<Lugar> cargarComboBoxLugar()
         {
-            Comando<List<Entidad>> comando = (Comando<List<Entidad>>)FabricaComando.comandosVistaRestaurant(FabricaComando.comandoVista.CARGAR_LUGAR);
-            List<Entidad> lugares = comando.Ejecutar();
+            Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.comandosVistaRestaurant(FabricaComando.comandoVista.CARGAR_LUGAR);
+            List<Entidad> lugares = comando.ejecutar();
             List<Lugar> lista = FabricaEntidad.inicializarListaLugar() ;
             Lugar lug;
             foreach (Entidad lugar in lugares)
@@ -219,8 +220,8 @@ namespace BOReserva.Controllers
         /// <returns></returns>
         public List<String> cargarComboBoxHorario()
         {
-            Comando<List<String>> comando = (Comando<List<String>>)FabricaComando.comandosVistaRestaurant(FabricaComando.comandoVista.CARGAR_HORA);
-            List<String> horarios = comando.Ejecutar();
+            Command<List<String>> comando = (Command<List<String>>)FabricaComando.comandosVistaRestaurant(FabricaComando.comandoVista.CARGAR_HORA);
+            List<String> horarios = comando.ejecutar();
             return horarios;
         }
     }

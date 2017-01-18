@@ -24,5 +24,6 @@ namespace BOReserva.Controllers.PatronComando
         /// Retorna cualquier tipo de objeto dependiendo de como sea implementado
         /// </returns>
         abstract public T ejecutar();
+        
     }
 }

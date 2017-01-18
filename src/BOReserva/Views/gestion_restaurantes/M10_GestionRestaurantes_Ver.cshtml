@@ -107,8 +107,8 @@ $(document).ready(function() {
 
                                 foreach (var item in Model.listaRestaurantes)
                                 {
-                                    <tr id="@item.Id" class="idRestaurant">
-                                        <td hidden="hidden">@item.Id</td>
+                                    <tr id="@item._id" class="idRestaurant">
+                                        <td hidden="hidden">@item._id</td>
                                         <td>@item.nombre</td>
                                         <td>@item.direccion</td>
                                         <td>@item.Telefono</td>

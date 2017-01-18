@@ -23,22 +23,22 @@
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <label for="placa">Nombre(<span style="color:red">*</span>)</label>
-                                @Html.TextBoxFor(m => m._nombre, null, new { @class = "form-control", @placeholder = "Gran Melia", @id = "hot_nombre", @maxlength = 15, @onblur = "checkTextField(this);" })
+                                @Html.TextBoxFor(m => m._nombre, null, new { @class = "form-control", @placeholder = "Gran Melia", @id = "hot_nombre", @maxlength = 30, @onblur = "checkTextField(this);" })
                             </div>
                             <div class="col-xs-6">
                                 <label for="modelo">Direccion(<span style="color:red">*</span>)</label>
-                                @Html.TextBoxFor(m => m._direccion, null, new { @class = "form-control", @placeholder = "Av Colombia, calle 4", @id = "hot_direccion", @maxlength = 25, @onblur = "checkTextField(this);" })
+                                @Html.TextBoxFor(m => m._direccion, null, new { @class = "form-control", @placeholder = "Av Colombia, Calle 4", @id = "hot_direccion", @maxlength = 120})
                             </div>
                         </div>
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <label for="modelo">Pagina web(<span style="color:red">*</span>)</label>
-                                @Html.TextBoxFor(m => m._paginaWeb, null, new { @class = "form-control", @placeholder = "www.GranMeliaccs.com", @id = "hot_web", @onblur = "checkTextModelo(this);", @maxlength = 15 })
+                                @Html.TextBoxFor(m => m._paginaWeb, null, new { @class = "form-control", @placeholder = "www.granmeliaccs.com", @id = "hot_web", @onblur = "checkpaginaweb(this);", @maxlength = 20 })
                             </div>
                             <div class="col-xs-6">
                                 <label for="anio">Correo electronico(<span style="color:red">*</span>)</label>
-                                @Html.TextBoxFor(m => m._email, null, new { @class = "form-control", @placeholder = "contacto@granmeliaccs.com", @id = "hot_email", @maxlength = 25, @onblur = "checkTextField(this);" })
+                                @Html.TextBoxFor(m => m._email, null, new { @class = "form-control", @placeholder = "contacto@granmeliaccs.com", @id = "hot_email", @maxlength = 25, @onblur = "checkcorreo(this);" })
                             </div>
                         </div>
                         <div>&nbsp;</div>
@@ -79,14 +79,14 @@
                             </div>
                             <div class="col-xs-6">
                                 <label for="capacidad">Capacidad(<span style="color:red">*</span>)</label>
-                                @Html.TextBoxFor(m => m._capacidadHabitacion, null, new { @type = "number", @class = "form-control", @placeholder = "28", @id = "hot_capacidad", min = "0" })
+                                @Html.TextBoxFor(m => m._capacidadHabitacion, null, new { @type = "number", @class = "form-control", @placeholder = "28", @id = "hot_capacidad", min = "0", @onblur = "checklargo(this);" })
                             </div>
                         </div>
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <label for="">Pais(<span style="color:red">*</span>)</label>
-                                @{
+                                @{  
                                     List<SelectListItem> paises = BOReserva.Controllers.gestion_automovilesController.pais();
                                     if (paises.First().Text.Length > 15)
                                     {
