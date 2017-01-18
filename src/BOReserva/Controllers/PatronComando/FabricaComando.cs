@@ -124,10 +124,26 @@ namespace BOReserva.Controllers.PatronComando
         
 
         #region M04_Vuelo
-        public static Command<String> crearVuelo(Entidad vuelo)
+        /// <summary>
+        /// Método para instanciar el comando M04_COAgregarVuelo
+        /// </summary>
+        /// <param name="vuelo"></param>
+        /// <returns>Instancia M04_COAgregarVuelo</returns>
+        public static Command<String> crearM04_AgregarVuelo(Entidad vuelo)
         {
             return new M04.M04_COAgregarVuelo();
         }
+
+        /// <summary>
+        /// Método para instanciar el comando M04_COConsultarTodos
+        /// </summary>
+        /// <param name="vuelo"></param>
+        /// <returns>Instancia M04_COConsultarTodosVuelos</returns>
+        public static Command<List<Entidad>> consultarM04_ConsultarTodos()
+        {
+            return new M04.M04_COConsultarTodosVuelos();
+        }
+
         #endregion
 
         public static Command<String> crearM13_AgregarRol(Entidad e)
