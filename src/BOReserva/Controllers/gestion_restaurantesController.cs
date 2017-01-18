@@ -6,10 +6,10 @@ using System.Web.Mvc;
 using System.Net;
 using BOReserva.Servicio;
 using BOReserva.Models.gestion_restaurantes;
+using BOReserva.Models;
 using BOReserva.Views.gestion_restaurantes.Fabrica;
 using BOReserva.DataAccess.Domain;
 using BOReserva.Controllers.PatronComando;
-using static BOReserva.Controllers.PatronComando.FabricaComando;
 
 namespace BOReserva.Controllers
 {
@@ -31,7 +31,7 @@ namespace BOReserva.Controllers
             {
                
                 Entidad _lugar = FabricaEntidad.inicializarLugar(id, "");//Aqui se envia la clave foranea de lugar para realizar la busqueda
-                Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, comandoRestaurant.NULO, _lugar);
+                Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, BOReserva.Controllers.PatronComando.FabricaComando.comandoRestaurant.NULO, _lugar);
                 List<Entidad> restaurantes = comando.ejecutar();
                 CRestauranteModelo Restaurant = FabricaEntidad.inicializarRestaurant();
                 List<CRestauranteModelo> lista = FabricaEntidad.inicializarListaRestarant();
@@ -75,7 +75,7 @@ namespace BOReserva.Controllers
             
             Entidad _restaurant = FabricaEntidad.inicializarRestaurant();
             ((CRestauranteModelo)_restaurant)._id = id;
-            Command<Entidad> comando = (Command<Entidad>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, comandoRestaurant.CONSULTAR_ID, _restaurant);
+            Command<Entidad> comando = (Command<Entidad>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, BOReserva.Controllers.PatronComando.FabricaComando.comandoRestaurant.CONSULTAR_ID, _restaurant);
             Entidad rest = comando.ejecutar();
 
             ViewBag.Id = ((CRestauranteModelo)rest)._id;
@@ -110,7 +110,7 @@ namespace BOReserva.Controllers
             //    return Json(error);
             //}
             Entidad _restaurant = FabricaEntidad.inicializarRestaurant(Nombre, Direccion,Telefono, Descripcion, HoraIni, HoraFin, idLugar);
-            Command<Boolean> comando = (Command<Boolean>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CREAR, comandoRestaurant.NULO, _restaurant);
+            Command<Boolean> comando = (Command<Boolean>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CREAR, BOReserva.Controllers.PatronComando.FabricaComando.comandoRestaurant.NULO, _restaurant);
                     
          
             if (comando.ejecutar())
@@ -143,7 +143,7 @@ namespace BOReserva.Controllers
             //    return Json(error);
             //}
             Entidad _restaurant = FabricaEntidad.inicializarRestaurant(Id,Nombre, Direccion, Telefono, Descripcion, HoraIni, HoraFin, idLugar);
-            Command<Boolean> comando = (Command<Boolean>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.ACTUALIZAR, comandoRestaurant.NULO, _restaurant);
+            Command<Boolean> comando = (Command<Boolean>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.ACTUALIZAR, BOReserva.Controllers.PatronComando.FabricaComando.comandoRestaurant.NULO, _restaurant);
 
             if (comando.ejecutar())
             {
@@ -168,7 +168,7 @@ namespace BOReserva.Controllers
 
             Entidad _restaurant = FabricaEntidad.inicializarRestaurant();
             ((CRestauranteModelo)_restaurant)._id = id;
-            Command<Boolean> comando = (Command<Boolean>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.ELIMINAR, comandoRestaurant.NULO, _restaurant);
+            Command<Boolean> comando = (Command<Boolean>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.ELIMINAR, BOReserva.Controllers.PatronComando.FabricaComando.comandoRestaurant.NULO, _restaurant);
             //Chequeo de campos obligatorios para el formulario
             if ((id == -1))
             {
