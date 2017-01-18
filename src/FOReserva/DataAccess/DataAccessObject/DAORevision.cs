@@ -1,23 +1,31 @@
 ﻿using FOReserva.DataAccess.DataAccessObject.Common;
+using FOReserva.DataAccess.DataAccessObject.Common.Interface;
+using FOReserva.Models.Hoteles;
 using FOReserva.Models.Revision;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using FOReserva.Models.Restaurantes;
 
 namespace FOReserva.DataAccess.DataAccessObject
 {
-    public class DAORevision : DAO
+    public class DAORevision : DAO, IDAORevision
     {
-        private static DAORevision instance = null;
+        #region Patron Singleton DAORevision.
+        private static IDAO instance = null;
 
-        public static DAORevision Singleton() {
+        private static IDAO Singleton()
+        {
             if (DAORevision.instance == null)
-                DAORevision.instance = FabricDAO.CreateDAORevicion();
+                DAORevision.instance = FabricDAO.CreateDAORevision();
             return DAORevision.instance;
         }
+        #endregion
 
-        public DAOResult AgregarRevicion(CRevision revision) {
+        #region Implementacion DAORevision.
+        public enum TipoValoracion { Positiva, Negativa };
+        public DAOResult AgregarRevicion(CRevision revision, CHotel hotel) {
             int status = -1;
             string message = String.Empty;
             DAOResult result = this.ExecuteStoreProcedureWithResult(
@@ -43,5 +51,21 @@ namespace FOReserva.DataAccess.DataAccessObject
             
             return result;
         }
+
+        public DAOResult AgregarRevision(CRevision revision, CHotel hotel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DAOResult AgregarRevision(CRevision revision, CRestaurantModel restaurante)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DAOResult AplicarValoracion(CRevision revision, TipoValoracion hotel)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
     }
 }
