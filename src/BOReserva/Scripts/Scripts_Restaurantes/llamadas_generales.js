@@ -1,12 +1,23 @@
+
+
 //EVENTO PARA AGREGAR UN RESTAURANTE
 $("#aceptarRestaurante").click(function (e) {
     console.log("Enviando...");
     e.preventDefault();
     e.stopImmediatePropagation();
-    var form = $("#formGuardarRestaurante");
+
+    var nombre = $("#Nombre").val();
+    var descripcion = $("#Descripcion").val();
+    var direccion = $("#Direccion").val();
+    var telefono = $("#Telefono").val();
+    var idlugar = $('#ComboLugar :selected').val();
+    var horaini = $('#ComboHoraIni :selected').text();
+    var horafin = $('#ComboHoraFin :selected').text();
+
     $.ajax({
         url: "gestion_restaurantes/guardarRestaurante",
-        data: form.serialize(),
+        data: { Nombre: nombre, Descripcion: descripcion, Direccion: direccion, Telefono: telefono, idLugar: idlugar, HoraIni: horaini, HoraFin: horafin },
+        dataType: "json",
         type: 'POST',
         success: function (data) {
             alert("El restaurante se agrego con exito.");
@@ -40,7 +51,9 @@ $("#aceptarRestaurante").click(function (e) {
 //EVENTO PARA LA MODIFICACIÓN DE RESTAURANTES
 
 $(".modificar").click(function () {
+  
     var identificador = $(this).parent().parent().parent().attr("id");
+    
     jQuery.ajax({
         type: "GET",
         url: "/gestion_restaurantes/M10_GestionRestaurantes_Modificar",
@@ -100,10 +113,20 @@ $("#aceptarRestauranteModificacion").click(function (e) {
     console.log("Enviando...");
     e.preventDefault();
     e.stopImmediatePropagation();
-    var form = $("#formModificarRestaurante");
+
+    var id = $("#Id").val();
+    var nombre = $("#Nombre").val();
+    var descripcion = $("#Descripcion").val();
+    var direccion = $("#Direccion").val();
+    var telefono = $("#Telefono").val();
+    var idlugar = $('#ComboLugar :selected').val();
+    var horaini = $('#ComboHoraIni :selected').text();
+    var horafin = $('#ComboHoraFin :selected').text();
+  
     $.ajax({
         url: "gestion_restaurantes/modificarRestaurante",
-        data: form.serialize(),
+        data: {Id:id, Nombre: nombre, Descripcion: descripcion, Direccion: direccion, Telefono: telefono, idLugar: idlugar, HoraIni: horaini, HoraFin: horafin },
+        dataType: "json",
         type: 'POST',
         success: function (data) {
             alert("El restaurante se modifico con exito.");
