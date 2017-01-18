@@ -9,6 +9,9 @@ using System.Web;
 
 namespace BOReserva.M10
 {
+    /// <summary>
+    /// clase para realizar transacciones en la base de datos
+    /// </summary>
     public abstract class DAO
     {
 
@@ -34,7 +37,9 @@ namespace BOReserva.M10
         {
             try
             {
+                //Se inicializa la variable string de conexion que se obtiene del archivo web.config
                 this.StringDeConexion = ConfigurationManager.ConnectionStrings["StringLocal"].ConnectionString;
+                //se crea por la fabrica Dao la conexion con la base de datos segun el String de conexion obtenido del archivo web.config 
                 this._conexion = FabricaDAO.asignarConexionSql(this.StringDeConexion);
             }
 
@@ -43,8 +48,8 @@ namespace BOReserva.M10
 
 
             }
-            System.Diagnostics.Debug.WriteLine("Conecta Correctamente");
-            return this._conexion;
+         
+            return this._conexion; //Se retorna la conexion de la base de datos
 
 
 
@@ -58,7 +63,7 @@ namespace BOReserva.M10
         {
 
             try
-            {
+            { //Se cierra la conexion de la base y se coloca en null
                 this._conexion.Close();
                 this._conexion = null;
             }
@@ -68,7 +73,7 @@ namespace BOReserva.M10
 
 
             }
-            System.Diagnostics.Debug.WriteLine("Desconecta Correctamente");
+       
         }
         #endregion
 
