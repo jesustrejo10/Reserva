@@ -3,6 +3,7 @@ using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace BOReserva.DataAccess.DataAccessObject
 {
     abstract public class DAO : IDAO
     {
-        protected String _connexionString = "Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User Id=DB_A1380A_reserva_admin;Password=ucabds1617a;";
+        protected String _connexionString = ConfigurationManager.ConnectionStrings["StringRemoto"].ConnectionString;
         private SqlConnection conexion;
         // El String de conexion se encuentra en el archivo Web.config
         private SqlCommand comando;
