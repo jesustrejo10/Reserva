@@ -210,6 +210,23 @@
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\registro_autenticacionController.cs" />
     <Compile Include="DataAccess\Domain\CReclamo.cs" />
+    <Compile Include="Datos\Columna.cs" />
+    <Compile Include="Datos\DAO.cs" />
+    <Compile Include="Datos\Dao\gestion_reserva_automovil\RecursoDAOM19.Designer.cs">
+      <DependentUpon>RecursoDAOM19.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Datos\Dao\gestion_reserva_automovil\ReservaAutomovilDAO.cs" />
+    <Compile Include="Datos\Fabrica\FabricaDatosSql.cs" />
+    <Compile Include="Datos\IDAO.cs" />
+    <Compile Include="Datos\InterfazDao\gestion_reserva_automovil\IReservaAutomovilDAO.cs" />
+    <Compile Include="Datos\Parametro.cs" />
+    <Compile Include="Datos\RecursosBaseDeDatos1.Designer.cs">
+      <DependentUpon>RecursosBaseDeDatos.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -228,10 +245,13 @@
     <Compile Include="Models\Diarios\CFoto_Diario.cs" />
     <Compile Include="Models\Diarios\CLugar.cs" />
     <Compile Include="Models\Diarios\CPuntuacion.cs" />
+    <Compile Include="Models\Entidad.cs" />
+    <Compile Include="Models\Fabrica\FabricaEntidad.cs" />
     <Compile Include="Models\Itinerario\CItinerario.cs" />
     <Compile Include="Models\Itinerario\Cvista_Itinerario.cs" />
     <Compile Include="Models\Itinerario\itinerario.cs" />
     <Compile Include="Models\Login\Login.cs" />
+    <Compile Include="Models\Lugar.cs" />
     <Compile Include="Models\ORM\DB.cs" />
     <Compile Include="Models\ORM\M20_ActualizarEstadoReservaHabitacion_Result.cs">
       <DependentUpon>ModelDBReserva.tt</DependentUpon>
@@ -3200,6 +3220,16 @@
     <None Include="ReservaDB.dbml.layout">
       <DependentUpon>ReservaDB.dbml</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Datos\Dao\gestion_reserva_automovil\RecursoDAOM19.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecursoDAOM19.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Datos\RecursosBaseDeDatos.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecursosBaseDeDatos1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
