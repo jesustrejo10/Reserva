@@ -209,6 +209,12 @@
     <Compile Include="Controllers\gestion_vuelosController.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\registro_autenticacionController.cs" />
+    <Compile Include="DataAccess\DataAccessObject\Common\DAO.cs" />
+    <Compile Include="DataAccess\DataAccessObject\Common\DAOException.cs" />
+    <Compile Include="DataAccess\DataAccessObject\Common\DAOResult.cs" />
+    <Compile Include="DataAccess\DataAccessObject\Common\FabricDAO.cs" />
+    <Compile Include="DataAccess\DataAccessObject\Common\Interface\IDAO.cs" />
+    <Compile Include="DataAccess\DataAccessObject\DAORevision.cs" />
     <Compile Include="DataAccess\Domain\CReclamo.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">

@@ -9,9 +9,11 @@ namespace FOReserva.DataAccess.DataAccessObject.Common.Interface
 {
     public interface IDAO
     {
-        DAOResult OpenConexion(string conexion);
-        DAOResult ExcecuteQuery(string query, ForEachRow doThis = null);
-        DAOResult ExcecuteNoQuery(string query);
-        DAOResult CloseConexion();
+        DAOResult OpenConnection();
+        DAOResult ExecuteQuery(string query, ForEachRow doThis = null);
+        DAOResult ExecuteNoQuery(string query);
+        DAOResult ExecuteStoreProcedure(string name, object parameters);
+        DAOResult ExecuteStoreProcedureWithResult(string name, object parameters, ForEachRow doThis = null);
+        DAOResult CloseConnection();
     }
 }
