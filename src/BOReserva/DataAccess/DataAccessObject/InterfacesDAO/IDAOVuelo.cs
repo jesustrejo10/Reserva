@@ -10,5 +10,9 @@ namespace BOReserva.DataAccess.DAO
     interface IDAOVuelo : IDAO
     {
         List<Entidad> ConsultarTodos();
+
+        bool Eliminar(Entidad entidad);
+
+        bool CambiarStatus(int vuelo);
     }
 }

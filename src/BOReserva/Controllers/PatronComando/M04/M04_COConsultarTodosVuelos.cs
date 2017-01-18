@@ -5,11 +5,19 @@ using System.Web;
 using BOReserva.DataAccess.DAO;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.DataAccessObject;
+using System.Data.SqlClient;
 
 namespace BOReserva.Controllers.PatronComando.M04
 {
+    /// <summary>
+    /// Clase patron comando consultar todos los vuelos
+    /// </summary>
     public class M04_COConsultarTodosVuelos : Command<List<Entidad>>
     {
+        /// <summary>
+        /// ejecuta el comando DAO.ConsultarTodos
+        /// </summary>
+        /// <returns>lista con todos los vuelos</returns>
         public override List<Entidad> ejecutar()
         {
             try
@@ -18,9 +26,13 @@ namespace BOReserva.Controllers.PatronComando.M04
                 List<Entidad> listaVuelos = daoVuelo.ConsultarTodos();
                 return listaVuelos;
             }
-            catch (Exception e)
+            catch (SqlException ex)
             {
-                throw new NotImplementedException();
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
             
         }

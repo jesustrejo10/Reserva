@@ -11,6 +11,7 @@ namespace BOReserva.Controllers.PatronComando.M04
 {
     public class M04_COAgregarVuelo : Command<String>
     {
+        
         private Entidad _vuelo;
 
         #region Constructores

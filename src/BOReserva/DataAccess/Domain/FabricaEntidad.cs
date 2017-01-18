@@ -71,13 +71,13 @@ namespace BOReserva.DataAccess.Domain
         /// <param name="fechaDespegue"></param>
         /// <param name="status"></param>
         /// <param name="fechaAterrizaje"></param>
-        /// <param name="idAvion"></param>
+        /// <param name="avion"></param>
         /// <returns>Retorna una instancia de la clase vuelo con todos sus atributos</returns>
-        public static Entidad crearVuelo(int id, String codigoVuelo, int ruta, DateTime fechaDespegue,
-                                          String status, DateTime fechaAterrizaje, int idAvion)
+        public static Entidad crearVuelo(int id, String codigoVuelo, Ruta ruta, DateTime fechaDespegue,
+                                          String status, DateTime fechaAterrizaje, Avion avion)
         {
             return new Vuelo(id, codigoVuelo, ruta, fechaDespegue, status, fechaAterrizaje,
-                             idAvion);
+                             avion);
         }
         #endregion
 

@@ -25,19 +25,17 @@ namespace BOReserva.Controllers
         public static String _destino;
         public static String _avion;
 
-        public ActionResult M04_listarVuelos()
-        {
-
-            return null;
-        }
-
+        /// <summary>
+        /// Metodo GET para la ventana de visualizar todos los vuelos
+        /// </summary>
+        /// <returns>Partial View con la lista de vuelos</returns>
         public ActionResult M04_GestionVuelo_Visualizar()
         {
-            Command<List<Entidad>> comando = FabricaComando.M04consultarTodos();
-            List<Entidad> listaVuelos = comando.ejecutar();
+            List<Entidad> listaVuelos;
             try
             {
-                
+                Command<List<Entidad>> comando = FabricaComando.consultarM04_ConsultarTodos();
+                listaVuelos = comando.ejecutar();  
             }
             catch (SqlException e)
             {
@@ -251,13 +249,13 @@ namespace BOReserva.Controllers
             CCrear_Vuelo model = new CCrear_Vuelo();
             string resultado = "";
             manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
-
-            
+            model._ciudadDestino = "aja";
+            model._ciudadOrigen = "yep";
 
             try
             {
                 //metodo para BD
-                resultado = sql.velocidadAvion(matriAvion);
+                //resultado = sql.velocidadAvion(matriAvion);
             }
             catch (SqlException e)
             {
@@ -272,7 +270,7 @@ namespace BOReserva.Controllers
                 return Json(error, JsonRequestBehavior.DenyGet);
             }
 
-            return (Json(resultado, JsonRequestBehavior.AllowGet)); 
+            return (Json(model, JsonRequestBehavior.AllowGet)); 
         }
 
 
@@ -523,45 +521,19 @@ namespace BOReserva.Controllers
         }
 
 
-        
-    public ActionResult M04_GestionVuelo_Desactivar(int id)
-    {
-        manejadorSQL_Vuelos desactivarvuelo = new manejadorSQL_Vuelos();
-        try
+
+
+    /// <summary>
+    /// Cambiar status del vuelo
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public ActionResult M04_Cambiar_Status(int idVuelo)
         {
-            Boolean vuelo = desactivarvuelo.MDesactivarVuelo(id);
-            //DESATIVANDO  EL VUELO 
-            //manejadorSQL_Vuelos buscarvuelos = new manejadorSQL_Vuelos();
-            //List<CVuelo> listavuelos = buscarvuelos.MListarvuelosBD(); 
-            //AQUI SE BUSCA TODO LOS VUELOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
-            //return PartialView(listavuelos);
-        }
-        catch (SqlException e)
-        {
-            Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            String error = "Error desactivando el vuelo en la base de datos.";
-            return Json(error);
-        }
-        catch (Exception e)
-        {
-            Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            String error = "Error desconocido desactivando el vuelo, contacte con el administrador.";
-            return Json(error);
-        }
-        
-            return null;
-    }
-    public ActionResult M04_GestionVuelo_Activar(int id)
-        {
-            manejadorSQL_Vuelos activarvuelo = new manejadorSQL_Vuelos();
             try
             {
-                Boolean vuelo = activarvuelo.MActivarVuelo(id);
-                //DESATIVANDO  EL VUELO 
-                //manejadorSQL_Vuelos buscarvuelos = new manejadorSQL_Vuelos();
-                //List<CVuelo> listavuelos = buscarvuelos.MListarvuelosBD(); 
-                //AQUI SE BUSCA TODO LOS VUELOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
-                //return PartialView(listavuelos);
+                Command<Boolean> comando = FabricaComando.M04_CambiarStatus(idVuelo);
+                comando.ejecutar();
             }
             catch (SqlException e)
             {
@@ -647,6 +619,8 @@ namespace BOReserva.Controllers
 
         public JsonResult cargarDestinosModificar(string ciudadOMod)
         {
+            //Pruebas hasta que pasen los métodos
+
             CVueloModificar model = new CVueloModificar();
             List<CVueloModificar> resultado = new List<CVueloModificar>();
             manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
