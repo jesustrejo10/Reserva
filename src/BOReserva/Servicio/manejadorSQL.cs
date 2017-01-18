@@ -21,10 +21,13 @@ namespace BOReserva.Servicio
 {
     public class manejadorSQL
     {
+        /// <summary>
+        /// ATENCIÓN: Esta clase no debería usarse más, se deja por motivos de compatibilidad para los grupos que aún no han migrado a DAO.
+        /// </summary>
         //Inicializo el string de conexion en el constructor
         public manejadorSQL()
         {
-            stringDeConexion = ConfigurationManager.ConnectionStrings["StringLocal"].ConnectionString;
+            stringDeConexion = ConfigurationManager.ConnectionStrings["StringRemoto"].ConnectionString;
         }
         //Atributo que ejecutara la conexion a la bd
         private SqlConnection conexion = null;
