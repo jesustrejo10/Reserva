@@ -6,7 +6,7 @@ using System.Web;
 
 namespace BOReserva.Models
 {
-    public class Lugar: Entidad
+    public class lugar: Entidad
     {
         #region Atributos
         private int _id;
@@ -15,21 +15,21 @@ namespace BOReserva.Models
         private int _zonaHoraria;
         private string _abreviatura;
         private int _idFKLugar;
-        private List<Lugar> _listaCiudades;
+        private List<lugar> _listaCiudades;
         #endregion
 
         #region Constructores
 
         /* Constructor por defecto */
 
-        public Lugar()
+        public lugar()
         {
 
         }
 
         /* Constructor completo */
 
-        public Lugar(int id, string nombre, string tipoLugar, int zonaHoraria, string abreviatura, int idFKLugar)
+        public lugar(int id, string nombre, string tipoLugar, int zonaHoraria, string abreviatura, int idFKLugar)
         {
             this.Id = id;
             this.Nombre = nombre;
@@ -41,7 +41,7 @@ namespace BOReserva.Models
 
         /* Constructor sin FK de Lugar */
 
-        public Lugar(int id, string nombre, string tipoLugar, int zonaHoraria, string abreviatura)
+        public lugar(int id, string nombre, string tipoLugar, int zonaHoraria, string abreviatura)
         {
             this.Id = id;
             this.Nombre = nombre;
@@ -51,7 +51,7 @@ namespace BOReserva.Models
             this.IdFKLugar = -1;
         }
 
-        public Lugar(int _id, string _nombre)
+        public lugar(int _id, string _nombre)
         {
             this.Id = _id;
             this._nombre = _nombre;
@@ -139,7 +139,7 @@ namespace BOReserva.Models
             }
         }
 
-        public List<Lugar> ListaCiudades
+        public List<lugar> ListaCiudades
         {
             get
             {
