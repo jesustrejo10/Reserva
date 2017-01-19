@@ -13,7 +13,7 @@ namespace BOReserva.DataAccess.DataAccessObject
 {
     abstract public class DAO : IDAO
     {
-        protected String _connexionString = ConfigurationManager.ConnectionStrings["StringLocal"].ConnectionString;
+        protected String _connexionString = ConfigurationManager.ConnectionStrings["StringRemoto"].ConnectionString;
         private SqlConnection conexion;
         // El String de conexion se encuentra en el archivo Web.config
         private SqlCommand comando;
@@ -28,17 +28,17 @@ namespace BOReserva.DataAccess.DataAccessObject
             throw new NotImplementedException();
         }
 
-        public int Eliminar(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public Entidad Consultar(int id)
         {
             throw new NotImplementedException();
         }
 
         public Dictionary<int, Entidad> ConsultarTodos()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Eliminar(int id)
         {
             throw new NotImplementedException();
         }
@@ -54,7 +54,8 @@ namespace BOReserva.DataAccess.DataAccessObject
 
             try
             {
-                conexion = Connection.getInstance(_connexionString);
+                conexion = new SqlConnection(_connexionString);//Connection.getInstance(_connexionString);
+               
             }
 
             catch (Exception ex)
@@ -78,7 +79,7 @@ namespace BOReserva.DataAccess.DataAccessObject
 
             try
             {
-                this.conexion.Close();
+                conexion.Close();
             }
 
             catch (Exception ex)

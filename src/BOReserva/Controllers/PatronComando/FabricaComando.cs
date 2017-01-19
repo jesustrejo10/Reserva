@@ -1,4 +1,4 @@
-﻿using BOReserva.Controllers.PatronComando;
+using BOReserva.Controllers.PatronComando;
 using BOReserva.Controllers.PatronComando.M09;
 using BOReserva.Controllers.PatronComando.M12;
 using BOReserva.DataAccess.Domain;
@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
 
 namespace BOReserva.Controllers.PatronComando
 {
@@ -119,6 +118,11 @@ namespace BOReserva.Controllers.PatronComando
 
         #endregion
 
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando M16_COAgregarReclamo
+        /// </summary>
+        /// <param name="e">Recibe la una entidad de tipo reclamo</param>
+        /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
         public static Command<String> crearM16_AgregarReclamo(Entidad e) 
         {
             return new M16_COAgregarReclamo((Reclamo)e);
@@ -186,6 +190,40 @@ namespace BOReserva.Controllers.PatronComando
         public static Command<String> modificarM05modificarPasajero(Entidad e)
         {
             return new M05_COModificarPasajero((Pasajero)e);
+        }
+
+        #endregion
+
+        #region M08_Automoviles
+
+        public static Command<String> activarAutomovil(Entidad e)
+        {
+            return new M08.M08_COActivarAutomovil(e);
+        }
+
+        public static Command<String> agregarAutomovil(Entidad e)
+        {
+            return new M08.M08_COAgregarAutomovil(e);
+        }
+
+        public static Command<String> buscarAutomovil(Entidad e)
+        {
+            return new M08.M08_COBuscarAutomovil(e);
+        }
+
+        public static Command<String> desactivarAutomovil(Entidad e)
+        {
+            return new M08.M08_CODesactivarAutomovil(e);
+        }
+
+        public static Command<String> listarAutomovil(Entidad e)
+        {
+            return new M08.M08_COListarAutomovil(e);
+        }
+
+        public static Command<String> modificarAutomovil(Entidad e)
+        {
+            return new M08.M08_COModificarAutomovil(e);
         }
 
         #endregion

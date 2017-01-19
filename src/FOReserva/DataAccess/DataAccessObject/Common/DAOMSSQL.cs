@@ -30,8 +30,9 @@ namespace FOReserva.DataAccess.DataAccessObject.Common
 
         public DAOResult ExecuteQuery(string query, DAO.ForEachRow doThis = null)
         {
-            DAOMSSQLCommand withCommand = new DAOMSSQLCommandExecuteQuery(this);
-            return withCommand.doThis(query, doThis);
+            //IDAOCommand withCommand = new DAOMSSQLCommandExecuteQuery(this);
+            //return withCommand.doThis(query, doThis);
+            return null;
         }
 
         public DAOResult ExecuteNoQuery(string query)

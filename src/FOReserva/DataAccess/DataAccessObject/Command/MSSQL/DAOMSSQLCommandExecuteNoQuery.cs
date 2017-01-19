@@ -15,7 +15,8 @@ namespace FOReserva.DataAccess.DataAccessObject.Command.MSSQL
 
         public override DAOResult doThis(params object[] args)
         {
-            var query = (String)args[0];            
+            var query = (String)args[0];
+            //var doThis = (DAO.ForEachRow)args[1];
             DAOResult result = FabricDAO.CreateDAOResult();
             try
             {
