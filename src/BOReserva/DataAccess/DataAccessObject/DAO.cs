@@ -49,7 +49,8 @@ namespace BOReserva.DataAccess.DataAccessObject
 
             try
             {
-                conexion = Connection.getInstance(_connexionString);
+                conexion = new SqlConnection(_connexionString);//Connection.getInstance(_connexionString);
+               
             }
 
             catch (Exception ex)
@@ -73,7 +74,7 @@ namespace BOReserva.DataAccess.DataAccessObject
 
             try
             {
-                this.conexion.Close();
+                conexion.Close();
             }
 
             catch (Exception ex)

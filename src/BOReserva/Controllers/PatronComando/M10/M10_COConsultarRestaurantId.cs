@@ -37,7 +37,8 @@ namespace BOReserva.M10.Comando.gestion_restaurantes
                 }
                 catch (Exception)
                 {
-                    throw;
+              
+                throw;
 
                 }
             }
