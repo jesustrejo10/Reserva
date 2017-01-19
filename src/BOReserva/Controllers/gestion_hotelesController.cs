@@ -52,9 +52,9 @@ namespace BOReserva.Controllers
         }
 
         /// <summary>
-        /// Método que se utiliza para guardar un vehículo ingresado
+        /// Método que se utiliza para guardar un Hotel ingresado
         /// </summary>
-        /// <param name="model">Datos que provienen de un formulario de la vista parcial M08_AgregarAutomovil</param>
+        /// <param name="model">Datos que provienen de un formulario de la vista parcial M09_AgregarHotel</param>
         /// <returns>Retorna un JsonResult</returns>
         [HttpPost]
         public JsonResult guardarHotel(CAgregarHotel model)
@@ -62,9 +62,7 @@ namespace BOReserva.Controllers
             //cable de precio mientras se agrega en la vista.
             int precio = 200;
             model._precioHabitacion = precio;
-            //Entidad ciudadDestino = FabricaEntidad.InstanciarCiudad("nombre de la ciudad");
             Entidad ciudadDestino = FabricaEntidad.InstanciarCiudad(ciudad);
-            //ciudadDestino._id = 29;
             M09_COObtenerPaises command = (M09_COObtenerPaises)FabricaComando.crearM09ObtenerPaises();
             ciudadDestino._id = command.obtenerIdentificadorCiudad(ciudad);
             Entidad nuevoHotel = FabricaEntidad.InstanciarHotel(model, ciudadDestino);
