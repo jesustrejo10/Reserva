@@ -1,6 +1,7 @@
 using BOReserva.Controllers.PatronComando.M09;
 using BOReserva.DataAccess.Domain;
 using BOReserva.M10.Comando.gestion_restaurantes;
+using BOReserva.Models.gestion_automoviles;
 using System;
 using System.Collections.Generic;
 
@@ -193,7 +194,7 @@ namespace BOReserva.Controllers.PatronComando
 
         public static Command<String> activarAutomovil(Entidad e)
         {
-            return new M08.M08_COActivarAutomovil(e);
+            return new M08.M08_COActivarAutomovil((Automovil)e);
         }
 
         public static Command<String> agregarAutomovil(Entidad e)
