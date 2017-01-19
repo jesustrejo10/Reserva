@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using BOReserva.Models.gestion_reclamos;
 using System.Net;
 using BOReserva.DataAccess.Domain;
+using BOReserva.Controllers.PatronComando;
 
 
 namespace BOReserva.Controllers
@@ -30,6 +31,15 @@ namespace BOReserva.Controllers
           listaReclamos.Add(reclamo2);
 
           return PartialView(listaReclamos);
+      }
+
+      [HttpPost]
+      public JsonResult guardarReclamo(CAgregarReclamo model)
+      {
+          Entidad nuevoReclamo = FabricaEntidad.InstanciarReclamo(model);
+          Command<String> comando = FabricaComando.crearM16AgregarReclamo(nuevoReclamo);
+          String verificacion = comando.ejecutar();
+          return (Json(verificacion));
       }
 
       public ActionResult M16_ModificarReclamo()

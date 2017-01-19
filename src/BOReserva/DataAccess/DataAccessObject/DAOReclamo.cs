@@ -19,7 +19,7 @@ namespace BOReserva.DataAccess.DataAccessObject
         public DAOReclamo() {}
 
         /// <summary>
-        /// Metodo para guardar un reclamo en la BD
+        /// Metodo para hacer el insert de un reclamo en la BD
         /// </summary>
         /// <param name="e">Entidad que posteriormente será casteada a Reclamo</param>
         /// <returns>Integer con el codigo de respuesta</returns>
@@ -31,8 +31,8 @@ namespace BOReserva.DataAccess.DataAccessObject
             {
                 conexion.Open();
                 String sql = "INSERT INTO Reclamo" + "(rec_id, rec_titulo, rec_detalle, rec_fecha, rec_estatus, rec_fk_usuario) " +
-                               "VALUES (NEXT VALUE FOR reclamo_sequence,'" + reclamo._tituloReclamo + "','" + reclamo._detalleReclamo + "','" 
-                               + reclamo._fechaReclamo + "','" + reclamo._estadoReclamo + "','" + reclamo._usuario + ");";
+                               "VALUES (NEXT VALUE FOR reclamo_sequence,'" + reclamo._tituloReclamo + "','" + reclamo._detalleReclamo + "'," 
+                               + reclamo._fechaReclamo + "," + 1 + "," + reclamo._usuario + ");";
                 Debug.WriteLine(sql);
                 SqlCommand cmd = new SqlCommand(sql, conexion);
                 cmd.ExecuteNonQuery();
@@ -85,4 +85,5 @@ namespace BOReserva.DataAccess.DataAccessObject
             throw new NotImplementedException();
         }
     }
+
 }

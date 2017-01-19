@@ -75,7 +75,7 @@ namespace BOReserva.DataAccess.Domain
         {
             return new Reclamo();
         }
-        public static Entidad InstanciarReclamo(CAgregarReclamo model, Entidad c)
+        public static Entidad InstanciarReclamo(CAgregarReclamo model)
         {
             String titulo = model._tituloReclamo;
             String detalle = model._detalleReclamo;
