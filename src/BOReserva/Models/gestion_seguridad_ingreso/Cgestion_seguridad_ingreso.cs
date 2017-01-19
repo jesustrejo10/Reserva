@@ -11,6 +11,8 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
 {
     public class Cgestion_seguridad_ingreso
     {
+        private int _idUsuario;
+        private int _rolUsuario;
         private String _correoCampoTexto;
         private String _claveCampoTexto;
         private String _nombreUsuarioTexto;
@@ -26,6 +28,17 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
             this.apellidoUsuarioTexto = apellido;
             this._usuarioEstatus = status;
 
+        }
+
+        public Cgestion_seguridad_ingreso(String correo, String clave, String nombre, String apellido, String status, int idUsuario, int rolUsuario)
+        {
+            this._correoCampoTexto = correo;
+            this._claveCampoTexto = clave;
+            this._nombreUsuarioTexto = nombre;
+            this.apellidoUsuarioTexto = apellido;
+            this._usuarioEstatus = status;
+            this._idUsuario = idUsuario;
+            this._rolUsuario = rolUsuario;
         }
 
         #region verificarUsuario
@@ -142,6 +155,18 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
         #endregion
 
         #region Get y Set
+        public int idUsuario
+        {
+            get { return this._idUsuario; }
+            set { this._idUsuario = value; }
+        }
+
+        public int rolUsuario
+        {
+            get { return this._rolUsuario; }
+            set { this._rolUsuario = value; }
+        }
+
         public String correoCampoTexto
         {
             get { return this._correoCampoTexto; }
