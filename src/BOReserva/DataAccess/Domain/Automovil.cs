@@ -9,7 +9,7 @@ namespace BOReserva.Models.gestion_automoviles
 {
 
     /// <summary>
-    /// Clase que maneja los vehículos que exiten en el sistema
+    /// Dominio del objeto autimovil del sistema
     /// </summary>
     public class Automovil : Entidad
     {

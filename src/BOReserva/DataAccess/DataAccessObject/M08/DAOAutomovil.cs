@@ -27,7 +27,7 @@ namespace BOReserva.DataAccess.DataAccessObject
         /// <returns>Se retorna true si fue exitoso</returns>
         public bool Agregar(Entidad _automovil)
         {
-            Automovil domain = (Automovil)_automovil;
+            Automovil automovil = (Automovil)_automovil;
             List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
 
             try
@@ -39,13 +39,21 @@ namespace BOReserva.DataAccess.DataAccessObject
                 // la tabla restaurant contiene siete columna incluyendo la clave foranea lugar por lo cual son siete lineas de codigo
                 //a;go importante de destacar es que si en la declaracion del store procedures el atributo varchar o cualquier otro
                 //que requiera longitud e.g. Varchar(50) solo se inserta el primer caracter, ya que solo por defecto la longitud es 1
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.rst_nombre,        SqlDbType.VarChar, domain.nombre,             false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.rst_direccion,     SqlDbType.VarChar, domain.direccion,          false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.rst_descripcion,   SqlDbType.VarChar, domain.descripcion,        false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.rst_hora_apertura, SqlDbType.VarChar, domain.horarioApertura,    false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.rst_hora_cierre,   SqlDbType.VarChar, domain.horarioCierre,      false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.rst_telefono,      SqlDbType.VarChar, domain.Telefono,           false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.fk_lugar,          SqlDbType.Int,     domain.idLugar.ToString(), false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.matricula,       SqlDbType.VarChar, automovil.matricula,          false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.modelo,          SqlDbType.VarChar, automovil.modelo,          false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.fabricante,      SqlDbType.VarChar, automovil.fabricante,        false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.anio,            SqlDbType.Int,     automovil.anio,    false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.kilometraje,     SqlDbType.VarChar, automovil.kilometraje,      false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.cantpasajero,    SqlDbType.Float,   automovil.cantpasajero,           false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.tipovehiculo,    SqlDbType.Int,     automovil.tipovehiculo, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.preciocompra,    SqlDbType.Float,   automovil.preciocompra, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.precioalquiler,  SqlDbType.Float,   automovil.precioalquiler, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.penalidaddiaria, SqlDbType.Float,   automovil.penalidaddiaria, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.fecharegistro,   SqlDbType.Date,    automovil.fecharegistro, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.color,           SqlDbType.VarChar, automovil.color, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.disponibilida,   SqlDbType.Int,     automovil.disponibilida, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.transmision,     SqlDbType.VarChar, automovil.transmision, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.fk_ciudad,       SqlDbType.Int,     automovil.idLugar.ToString(), false));
                 //el metodo Ejecutar Store procedure recibe la lista de parametros como el query, este ultimo es el nombre del procedimietno en la BD
                 //e.g. dbo.M10_AgregarRestarurante, importante ese nombre se coloco en un archivo de recursos por efectos practicos, pero se puede 
                 //como String "dbo.M10_AgregarRestarurante"
