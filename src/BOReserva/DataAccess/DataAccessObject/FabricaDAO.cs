@@ -1,4 +1,5 @@
 ﻿using BOReserva.DataAccess.DAO;
+using BOReserva.DataAccess.DataAccessObject.M01;
 using BOReserva.DataAccess.Model;
 using BOReserva.M10;
 using System;
@@ -13,6 +14,11 @@ namespace BOReserva.DataAccess.DataAccessObject
 {
     public class FabricaDAO
     {
+        public static DAO instanciarDaoLogin()
+        {
+            return new DAOLogin();
+        }
+
          #region M09_Gestion_Hoteles_Por_Ciudad
         
         public static DAO instanciarDaoHotel() {
