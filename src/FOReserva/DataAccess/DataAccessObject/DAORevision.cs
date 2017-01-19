@@ -10,7 +10,7 @@ using FOReserva.Models.Restaurantes;
 
 namespace FOReserva.DataAccess.DataAccessObject
 {
-    public class DAORevision : DAO, IDAORevision
+    public class DAORevision : FOReserva.DataAccess.DataAccessObject.Common.DAO, IDAORevision
     {
         #region Patron Singleton DAORevision.
         private static IDAO instance = null;
