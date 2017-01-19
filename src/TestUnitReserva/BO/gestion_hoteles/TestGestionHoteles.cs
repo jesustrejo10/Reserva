@@ -14,6 +14,7 @@ using BOReserva.DataAccess.Domain;
 using BOReserva.Controllers.PatronComando;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.DataAccessObject;
+using BOReserva.DataAccess.DataAccessObject.M09;
 
 namespace TestUnitReserva.BO.gestion_hoteles
 {
@@ -81,5 +82,18 @@ namespace TestUnitReserva.BO.gestion_hoteles
             Hotel e = (Hotel)hoteles[99];
             Assert.AreEqual(e._nombre, "hotelDePruebasUnitarias");
         }
+        [Test]
+        public void M09_DAOHAbitacionAgregar()
+        {
+            Entidad h1 = FabricaEntidad.InstanciarHabitacion(600, 99);
+            Entidad h2 = FabricaEntidad.InstanciarHabitacion(100, 99);
+            List<Entidad> habitaciones = new List<Entidad>();
+            habitaciones.Add(h1);
+            habitaciones.Add(h2);
+            //sequenceHabitacion
+            IDAOHabitacion dao = FabricaDAO.instanciarDaoHabitacion();
+
+        }
+
     }
 }
