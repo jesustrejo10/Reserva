@@ -211,6 +211,13 @@
     <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
     <Compile Include="Controllers\PatronComando\M16\M16_COAgregarReclamo.cs" />
     <Compile Include="Controllers\PatronComando\M16\M16_COConsultarReclamo.cs" />
+    <Compile Include="Controllers\PatronComando\M19\M19_COActualizarReserva.cs" />
+    <Compile Include="Controllers\PatronComando\M19\M19_COConsultarAutos.cs" />
+    <Compile Include="Controllers\PatronComando\M19\M19_COConsultarLugar.cs" />
+    <Compile Include="Controllers\PatronComando\M19\M19_COConsultarReserva.cs" />
+    <Compile Include="Controllers\PatronComando\M19\M19_COConsultarReservaId.cs" />
+    <Compile Include="Controllers\PatronComando\M19\M19_COCrearReserva.cs" />
+    <Compile Include="Controllers\PatronComando\M19\M19_COEliminarReserva.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOReclamo.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\registro_autenticacionController.cs" />
