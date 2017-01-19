@@ -71,7 +71,7 @@ namespace BOReserva.DataAccess.Domain
         }
 
         #endregion 
-        public static Entidad InstanciarReclamo(String tituloReclamo, String detalleReclamo, String fechaReclamo, String estadoReclamo, int usuario)
+        public static Entidad InstanciarReclamo(String tituloReclamo, String detalleReclamo, String fechaReclamo, int estadoReclamo, int usuario)
         {
             return new Reclamo();
         }
@@ -80,7 +80,7 @@ namespace BOReserva.DataAccess.Domain
             String titulo = model._tituloReclamo;
             String detalle = model._detalleReclamo;
             String fecha = model._fechaReclamo;
-            String estado = model._estadoReclamo;
+            int estado = model._estadoReclamo;
             int usuario = model._usuario;
 
             return new Reclamo(titulo, detalle, fecha, estado, usuario);
