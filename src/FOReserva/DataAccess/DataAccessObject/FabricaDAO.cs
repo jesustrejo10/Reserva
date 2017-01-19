@@ -1,4 +1,4 @@
-﻿using FOReserva.DataAccess.DAO;
+﻿using FOReserva.DataAccess;
 using FOReserva.DataAccess.Model;
 using System;
 using System.Collections.Generic;
@@ -12,6 +12,6 @@ namespace FOReserva.DataAccess.DataAccessObject
 {
     public class FabricaDAO
     {
-
+        
     }
 }

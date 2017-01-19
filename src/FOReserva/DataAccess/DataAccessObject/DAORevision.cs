@@ -18,7 +18,10 @@ namespace FOReserva.DataAccess.DataAccessObject
         private static IDAO Singleton()
         {
             if (DAORevision.instance == null)
-                DAORevision.instance = FabricDAO.CreateDAORevision();
+            {
+
+            }
+                //DAORevision.instance = FabricDAO.CreateDAORevision();
             return DAORevision.instance;
         }
         #endregion
@@ -28,26 +31,27 @@ namespace FOReserva.DataAccess.DataAccessObject
         public DAOResult AgregarRevicion(CRevision revision, CHotel hotel) {
             int status = -1;
             string message = String.Empty;
-            DAOResult result = this.ExecuteStoreProcedureWithResult(
-                name: "M20_AgregarRevision",
-                parameters: new
-                {
-                    @rev_fecha = revision.Fecha,
-                    @rev_mensaje = revision.Mensaje,
-                    @rev_tipo = revision.Tipo,
-                    @rev_puntuacion = revision.Puntuacion/*,
-                    @rev_referencia = revision.Hotel or revision.Restaurante
-                    */
-                },
-                doThis: (reader) => {
-                    status = reader.GetInt32(0);
-                    message = reader.GetString(1);                    
-                }
-            );
-            if (result.ProcessFinishCorrectly) { 
-                result.ProcessFinishCorrectly = status == 0;
-                result.Message = message;
-            }
+            DAOResult result = null;
+            //DAOResult result = this.ExecuteStoreProcedureWithResult(
+            //    name: "M20_AgregarRevision",
+            //    parameters: new
+            //    {
+            //        @rev_fecha = revision.Fecha,
+            //        @rev_mensaje = revision.Mensaje,
+            //        @rev_tipo = revision.Tipo,
+            //        @rev_puntuacion = revision.Puntuacion/*,
+            //        @rev_referencia = revision.Hotel or revision.Restaurante
+            //        */
+            //    },
+            //    doThis: (reader) => {
+            //        status = reader.GetInt32(0);
+            //        message = reader.GetString(1);                    
+            //    }
+            //);
+            //if (result.ProcessFinishCorrectly) { 
+            //    result.ProcessFinishCorrectly = status == 0;
+            //    result.Message = message;
+            //}
             
             return result;
         }
