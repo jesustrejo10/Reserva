@@ -38,23 +38,7 @@ namespace BOReserva.Controllers
             return PartialView(model);
         }
 
-        /// <summary>
-        /// Método que retorna la lista de ciudades
-        /// </summary>
-        /// <param name="pais">Nombre del país del cual se desea conocer las ciudades disponibles</param>
-        /// <returns>Retorna un ActionResult que contiene las ciudades disponibles para el país solicitado</returns>
-        [HttpPost]
-        public ActionResult listaciudades(String pais)
-        {
-            //Aca se debe llamar a un Comando
-            List<String> objcity = new List<String>();
-            _pais = pais;
-            manejadorSQL listaciudades = new manejadorSQL();
-            int fk = listaciudades.MIdpaisesBD(pais);
-            objcity = listaciudades.MListarciudadesBD(fk);
-            ciudad = objcity.First();
-            return Json(objcity);
-        }
+
 
         /// <summary>
         /// Método que guarda en una variable la ciudad seleccionada
@@ -216,6 +200,62 @@ namespace BOReserva.Controllers
         }
 
 
+        /// <summary>
+        /// Método que retorna la lista de países
+        /// </summary>
+        /// <returns>Retorna una lista de Items que contiene los países disponibles</returns>
+        public static List<SelectListItem> pais()
+        {
+            Command<Dictionary<int, Entidad>> commandpais = FabricaComando.crearM09ObtenerPaises();
+            Dictionary<int, Entidad> _paises = commandpais.ejecutar();
+            List<SelectListItem> __pais = new List<SelectListItem>();
+            int i = 0;
+            bool verdad = true;
+            foreach (var item in _paises)
+            {
+                Pais country = (Pais)item.Value;
+                __pais.Add(new SelectListItem
+                {
+                    Text = country._nombre,
+                    Value = Convert.ToString(country._id)
+                });
+            }
+            
+            return __pais;
+        }
+
+
+
+        /// <summary>
+        /// Método que retorna la lista de ciudades
+        /// </summary>
+        /// <param name="pais">Nombre del país del cual se desea conocer las ciudades disponibles</param>
+        /// <returns>Retorna un ActionResult que contiene las ciudades disponibles para el país solicitado</returns>
+        [HttpPost]
+        public ActionResult listaciudades(String pais)
+        {
+            Command<Dictionary<int, Entidad>> commandpais = FabricaComando.crearM09ObtenerPaises();
+            Dictionary<int, Entidad> _paises = commandpais.ejecutar();
+            List<String> objcity = new List<String>();
+            _pais = pais;
+            foreach (var item in _paises)
+            {
+                Pais country = (Pais)item.Value;
+                if (country._nombre.Equals(pais))
+                {
+                    foreach (var ite in country._ciudades)
+                    {
+                        Ciudad city = (Ciudad)ite.Value;
+                        objcity.Add(city._nombre);
+                    }
+                }
+            }
+            ciudad = objcity.First();
+            return Json(objcity);
+        }
+
+
+
 
 
 
@@ -247,15 +287,15 @@ namespace BOReserva.Controllers
 
 
         // GET: gestion_hoteles
-        public ActionResult M09_GestionHoteles_Crear()
-        {
-            CHotel crear = new CHotel()
-            {
-                _listapaises = new List<SelectListItem>(pais())
-            };
+        //public ActionResult M09_GestionHoteles_Crear()
+        //{
+        //    CHotel crear = new CHotel()
+        //    {
+        //        _listapaises = new List<SelectListItem>(pais())
+        //    };
 
-            return PartialView(crear);
-        }
+        //    return PartialView(crear);
+        //}
 
         public ActionResult M09_GestionHoteles_ModificarHotel(int id)
         {
@@ -333,7 +373,7 @@ namespace BOReserva.Controllers
             }
         }
 
-        public static List<SelectListItem> pais()
+        public static List<SelectListItem> pais1()
         {
             CManejadorSQL_Hoteles pais = new CManejadorSQL_Hoteles();
             List<SelectListItem> _pais = new List<SelectListItem>();
