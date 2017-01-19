@@ -12,8 +12,7 @@ using FOReserva.DataAccess.DataAccessObject;
 using System.Data.SqlClient;
 using System.Diagnostics;
 
-
-namespace FOReserva.Controllers.PatronComando.M16
+namespace FOReserva.DataAccess.DataAccessObject
 {
     public class DAOReclamo : DAO, IDAOReclamo
     {
@@ -22,6 +21,11 @@ namespace FOReserva.Controllers.PatronComando.M16
         /// </summary>
         public DAOReclamo(){}
 
+        /// <summary>
+        /// Metodo para guardar un reclamo en la BD
+        /// </summary>
+        /// <param name="e">Entidad que posteriormente será casteada a Reclamo</param>
+        /// <returns>Integer con el codigo de respuesta</returns>
         int IDAO.Agregar(Entidad e)
         {
             Reclamo reclamo = (Reclamo)e;
