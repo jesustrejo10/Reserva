@@ -24,7 +24,7 @@
                         {
                             foreach (BOReserva.DataAccess.Domain.Rol item in Model)
                             {
-                                <tr id="@item._idRol">
+                                <tr id="@item._nombreRol">
                                     <td>@item._nombreRol</td>
                                     @*<td>
                                         <table>
@@ -39,11 +39,11 @@
                                             @foreach (BOReserva.DataAccess.Domain.Permiso permisos in item.listapermisos)
                                             {
                                                 <tr>@permisos._nombre</tr>
-                                            }
+                                                <br>}
                                         </table>
                                     </td>
                                     <td class="center">
-                                        @if (@item._nombreRol != "Administrador")
+                                        @if (@item._nombreRol != "Administrador" )
                                         {
                                             <a href="#" title="Modificar Rol"><i class="fa fa-pencil modificar"></i></a>
                                         }
@@ -54,14 +54,13 @@
 
                                     </td>
                                 </tr>
-
+                          
                             }
-                        
                               <script>
                                            $(".eliminar").click(function () {
                                             var r = confirm("Esta función no podrá ser revertida, ¿Está seguro de que desea continuar?")
                                             if (r) {
-                                                var identificador = $(this).parent().parent().parent().attr("id");
+                                                var identificador = $(this).closest("tr").attr("id");;
                                                 jQuery.ajax({
                                                     type: "POST",
                                                     url: "/gestion_roles/eliminarRol",
@@ -103,6 +102,8 @@
                                             }).fail(function () {
                                                 alert(data);
                                             });
+
+
                                         });
 
                                         
@@ -115,13 +116,14 @@
                             </script>
                         }
 
-                    @*<tfoot>
+                    <tfoot>
                         <tr>
                             <th>Nombre</th>
                             <th>Modulo</th>
+
                             <th>Acceso a</th>
                         </tr>
-                    </tfoot>*@
+                    </tfoot>
                 </table>
             </div>
             <!-- /.box-body -->
@@ -133,13 +135,18 @@
 <!-- /.row -->
 
 
+
+
 <script src="~/Content/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="~/Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
 
 <script language="javascript" type="text/javascript">
+   
     table = $('#VisualizarRol').DataTable();
+
 </script>
 
 <style>
 .eliminarpermiso{float:right;}
+
 </style>
