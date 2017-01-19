@@ -51,7 +51,7 @@ namespace BOReserva.Servicio
                 SqlCommand query = conexion.CreateCommand();
                 //ingreso la orden del query
                 query.CommandText = "INSERT INTO Comida VALUES ('" + model._nombrePlato + "','" + model._tipoPlato + "',1,' " + model._descripcionPlato + "');";
-                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior
                 SqlDataReader lector = query.ExecuteReader();
                 //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
                 /*while(lector.Read())
@@ -320,7 +320,7 @@ namespace BOReserva.Servicio
                 conexion = new SqlConnection(stringDeConexion);
                 //INTENTO abrir la conexion
                 conexion.Open();
-                //indico que ejecutare un Stored Procedured en la BD 
+                //indico que ejecutare un Stored Procedured en la BD
                 SqlCommand cmd = new SqlCommand("M06_Pasajero_XClase", conexion);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 //le paso los parametros que espera el SP
@@ -328,7 +328,7 @@ namespace BOReserva.Servicio
                 cmd.Parameters["@MatriculaAvion"].Value = matriculaAvion;
 
 
-                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior
                 SqlDataReader dr = cmd.ExecuteReader();
 
                 while (dr.Read())
@@ -378,7 +378,7 @@ namespace BOReserva.Servicio
                 SqlCommand query = conexion.CreateCommand();
                 //ingreso la orden del query
                 query.CommandText = "INSERT INTO Avion VALUES ('" + model._matriculaAvion + "','" + model._modeloAvion + "'," + model._capacidadPasajerosTurista + " , " + model._capacidadPasajerosEjecutiva + "," + model._capacidadPasajerosVIP + ", " + model._capacidadEquipaje + ", " + model._distanciaMaximaVuelo + ", " + model._velocidadMaximaDeVuelo + ", " + model._capacidadMaximaCombustible + ", 1);";
-                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior
                 SqlDataReader lector = query.ExecuteReader();
                 //cierro el lector
                 lector.Close();
@@ -624,7 +624,7 @@ namespace BOReserva.Servicio
                 //ingreso la orden del query
                 query.CommandText = "INSERT INTO Hotel VALUES ('" + model._nombre + "','" + model._estrellas + "',"
                     + model._puntuacion + " , " + model._direccion + "," + model._paginaweb + ");";
-                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior
                 SqlDataReader lector = query.ExecuteReader();
                 //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
                 /*while(lector.Read())
@@ -714,7 +714,7 @@ namespace BOReserva.Servicio
         //        //ingreso la orden del query
         //        query.CommandText = "SELECT * FROM Restaurante WHERE rst_id = @id";
         //        query.Parameters.AddWithValue("@id", id);
-        //        //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+        //        //creo un lector sql para la respuesta de la ejecucion del comando anterior
         //        SqlDataReader lector = query.ExecuteReader();
         //        //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
         //        while (lector.Read())
@@ -770,7 +770,7 @@ namespace BOReserva.Servicio
         //        SqlCommand query = conexion.CreateCommand();
         //        //ingreso la orden del query
         //        query.CommandText = "SELECT * FROM Restaurante";
-        //        //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+        //        //creo un lector sql para la respuesta de la ejecucion del comando anterior
         //        SqlDataReader lector = query.ExecuteReader();
         //        //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
         //        while (lector.Read())
@@ -917,7 +917,7 @@ namespace BOReserva.Servicio
                 SqlCommand query = conexion.CreateCommand();
                 //ingreso la orden del query
                 query.CommandText = "SELECT * FROM Lugar";
-                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior
                 SqlDataReader lector = query.ExecuteReader();
                 //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
                 while (lector.Read())
@@ -973,7 +973,7 @@ namespace BOReserva.Servicio
                 SqlCommand query = conexion.CreateCommand();
                 //ingreso la orden del query
                 query.CommandText = "SELECT * FROM Lugar WHERE lug_tipo_lugar = 'ciudad'";
-                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior
                 SqlDataReader lector = query.ExecuteReader();
                 //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
                 while (lector.Read())
@@ -1023,7 +1023,7 @@ namespace BOReserva.Servicio
                 conexion = new SqlConnection(stringDeConexion);
                 //Abrir la conexion
                 conexion.Open();
-                //query es un string que me devolvera la consulta 
+                //query es un string que me devolvera la consulta
                 String query = "SELECT m.mod_gen_nombre as Modulo_Detallado FROM modulo_general m";
                 SqlCommand cmd = new SqlCommand(query, conexion);
                 SqlDataReader lector = cmd.ExecuteReader();
@@ -1061,7 +1061,7 @@ namespace BOReserva.Servicio
                 SqlConnection conexion2 = new SqlConnection(stringDeConexion);
                 //Abrir la conexion
                 conexion.Open();
-                //query es un string que me devolvera la consulta 
+                //query es un string que me devolvera la consulta
                 String query = "select rol_nombre,rol_id from rol";
                 SqlCommand cmd = new SqlCommand(query, conexion);
                 SqlDataReader lector = cmd.ExecuteReader();
@@ -1073,7 +1073,7 @@ namespace BOReserva.Servicio
                     string a = lector.GetSqlInt32(1).ToString();
                     //Abrir la conexion
                     conexion2.Open();
-                    //query es un string que me devolvera la consulta 
+                    //query es un string que me devolvera la consulta
                     String query2 = "select mod_det_nombre from Rol_Modulo_Detallado,Modulo_Detallado where " + lector.GetSqlInt32(1) + "=fk_rol_id and mod_det_id=fk_mod_det_id";
                     SqlCommand cmd2 = new SqlCommand(query2, conexion2);
                     SqlDataReader lector2 = cmd2.ExecuteReader();
@@ -1157,7 +1157,7 @@ namespace BOReserva.Servicio
                 conexion = new SqlConnection(stringDeConexion);
                 //Abrir la conexion
                 conexion.Open();
-                //query es un string que me devolvera la consulta 
+                //query es un string que me devolvera la consulta
                 String query = "select mod_det_nombre from modulo_detallado where mod_det_nombre not in(SELECT mod_det_nombre FROM modulo_detallado,rol_modulo_detallado,rol where mod_det_id=fk_mod_det_id AND fk_rol_id=rol_id and rol_nombre='" + _rol.Nombre_rol + "')";
                 SqlCommand cmd = new SqlCommand(query, conexion);
                 SqlDataReader lector = cmd.ExecuteReader();
@@ -1194,7 +1194,7 @@ namespace BOReserva.Servicio
                 conexion = new SqlConnection(stringDeConexion);
                 //Abrir la conexion
                 conexion.Open();
-                //query es un string que me devolvera la consulta 
+                //query es un string que me devolvera la consulta
                 String query = "SELECT mod_det_nombre FROM modulo_detallado,rol_modulo_detallado,rol where mod_det_id=fk_mod_det_id and fk_rol_id=rol_id and rol_nombre='" + _rol.Nombre_rol + "'";
                 SqlCommand cmd = new SqlCommand(query, conexion);
                 SqlDataReader lector = cmd.ExecuteReader();
@@ -1367,7 +1367,7 @@ namespace BOReserva.Servicio
                 return false;
             }
         }
-        //Meotodo del Modulo 13 para retornar lista de los 
+        //Meotodo del Modulo 13 para retornar lista de los
 
         public List<String> M13consultarRolesDeUnUsuario(String id)
         {
@@ -1436,7 +1436,7 @@ namespace BOReserva.Servicio
                 conexion = new SqlConnection(stringDeConexion);
                 //Abrir la conexion
                 conexion.Open();
-                //query es un string que me devolvera la consulta 
+                //query es un string que me devolvera la consulta
                 System.Diagnostics.Debug.WriteLine(modulo);
                 String query = "SELECT mod_det_nombre,mod_det_url FROM Modulo_Detallado,Modulo_general WHERE mod_gen_id=fk_mod_gen_id and mod_gen_nombre='" + modulo + "'";
                 SqlCommand cmd = new SqlCommand(query, conexion);
@@ -1550,7 +1550,7 @@ namespace BOReserva.Servicio
         }
 
 
-        //Metodo para insertar permisos de un rol 
+        //Metodo para insertar permisos de un rol
         public Boolean insertarPermisosRol(string rol, string permiso)
         {
             List<CAvion> aviones = new List<CAvion>();
@@ -2746,7 +2746,7 @@ namespace BOReserva.Servicio
             }
         }
 
-        //Metodo para mostrar paquetes 
+        //Metodo para mostrar paquetes
         public List<CPaquete> listarPaquetes()
         {
             List<CPaquete> paquetesList = new List<CPaquete>();
@@ -3135,7 +3135,7 @@ namespace BOReserva.Servicio
         //Fin modulo 11
 
 
-      
+
 
         public string stringDeConexions
         {
