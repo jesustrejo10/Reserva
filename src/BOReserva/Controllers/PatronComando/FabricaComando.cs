@@ -167,6 +167,20 @@ namespace BOReserva.Controllers.PatronComando
             return new M13_COConsultarRoles();
 
         }
+
+        public static Command<List<Entidad>> crearM13_ConsultarPermisos(int id)
+        {
+
+            return new M13_COConsultarPermisos(id);
+
+        }
+
+        public static Command<Entidad> crearM13_ConsultarModulos(int id)
+        {
+
+            return new M13_COConsultarModulos(id);
+
+        }
         #endregion
 
         #region M05_Boleto

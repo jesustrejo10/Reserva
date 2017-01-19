@@ -12,22 +12,28 @@ using System.Web;
 namespace BOReserva.Controllers.PatronComando
 {
     /// <summary>
-    /// Comando Visualizar Roles
+    /// Comando Visualizar Permisos
     /// </summary>
-    public class M13_COConsultarRoles : Command<List<Entidad>>
+    public class M13_COConsultarModulos : Command<Entidad>
     {
+        private int id;
+
+        public M13_COConsultarModulos(int idmodulo)
+        {
+            this.id = idmodulo;
+        }
 
         /// <summary>
         /// Sobre escritura del metodo ejecutar de la clase Comando.
         /// Se encarga de llamar al DAO y devolver la respuesta al controlador.
         /// </summary>
-        public override List<Entidad> ejecutar()
+        public override Entidad ejecutar()
         {
-            List<Entidad> listaroles;
+            Entidad modulo;
             try
             {
                 IDAORol daoRol = (IDAORol)FabricaDAO.instanciarDAORol();
-                listaroles = daoRol.ConsultarRoles();
+                modulo = daoRol.ConsultarModulos(id);
             }
             catch (SqlException ex)
             {
@@ -37,7 +43,7 @@ namespace BOReserva.Controllers.PatronComando
             {
                 throw ex;
             }
-            return listaroles;
+            return modulo;
         }
 
     }

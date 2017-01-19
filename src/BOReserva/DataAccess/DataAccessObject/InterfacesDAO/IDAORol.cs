@@ -12,5 +12,7 @@ namespace BOReserva.DataAccess.DAO
     {
         int AgregarRolPermiso(Entidad e);
         List<Entidad> ConsultarRoles();
+        List<Entidad> ConsultarPermisos(int id);
+        Entidad ConsultarModulos(int id);
     }
 }

@@ -208,6 +208,83 @@ namespace BOReserva.DataAccess.DataAccessObject
                 return null;
             }
         }
+
+        public List<Entidad> ConsultarPermisos(int idPermiso)
+        {
+            List<Entidad> listapermisos;
+            Entidad permiso;
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+
+            try
+            {
+                conexion.Close();
+                conexion.Open();
+                String sql = "select md.mod_det_nombre, md.mod_det_id from Modulo_Detallado md, Rol r, Rol_Modulo_Detallado rmd " +
+                    "where md.mod_det_id = rmd.fk_mod_det_id and r.rol_id = rmd.fk_rol_id and r.rol_id =" + idPermiso;
+
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    listapermisos = new List<Entidad>();
+                    while (reader.Read())
+                    {
+                        int _idPermiso = Int32.Parse(reader["mod_det_id"].ToString());
+                        String _nombrePermiso = reader["mod_det_nombre"].ToString();
+                        permiso = FabricaEntidad.crearPermiso(_idPermiso, _nombrePermiso);
+                        listapermisos.Add(permiso);
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return listapermisos;
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+            }
+        }
+
+        public Entidad ConsultarModulos(int idModulo)
+        {
+            List<Entidad> listamodulos;
+            Entidad modulo;
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+
+            try
+            {
+                conexion.Close();
+                conexion.Open();
+                String sql = "select distinct mg.mod_gen_nombre, mg.mod_gen_id "+
+                            "from Modulo_General mg, Modulo_Detallado md, Rol r, Rol_Modulo_Detallado rmd "+
+                            "where mg.mod_gen_id = md.fk_mod_gen_id and md.mod_det_id = rmd.fk_mod_det_id and r.rol_id = rmd.fk_rol_id " +
+                            "and md.mod_det_id = " + idModulo;
+
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    listamodulos = new List<Entidad>();
+                    while (reader.Read())
+                    {
+                        int _idmodulo = Int32.Parse(reader["mod_gen_id"].ToString());
+                        String _nombremodulo = reader["mod_gen_nombre"].ToString();
+                        modulo = FabricaEntidad.crearModulo(_idmodulo, _nombremodulo);
+                        listamodulos.Add(modulo);
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return listamodulos[0];
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+            }
+        }
+
         public Entidad Consultar(int id)
         {
             throw new NotImplementedException();

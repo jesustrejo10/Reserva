@@ -49,23 +49,24 @@ namespace BOReserva.Controllers
         /// <returns>returna la lista de roles</returns>
         public ActionResult M13_VisualizarRol()
         {
-            //manejadorSQL sql = new manejadorSQL();
+            List<Entidad> listaroles;
+            //List<Entidad> listapermisos;
+            List<Entidad> listamodulos;
             try
             {
-                //listaroles = sql.consultarListaroles();
-                List<Entidad> listaroles;
                 Command<List<Entidad>> comando = FabricaComando.crearM13_ConsultarRoles();
                 listaroles = comando.ejecutar();
 
                 foreach(Rol rol in listaroles)
                 {
-                    Console.WriteLine("hola " + rol._nombreRol);
+                    Command<List<Entidad>> comando_permisos = FabricaComando.crearM13_ConsultarPermisos(rol._idRol);
+                    rol.listapermisos = comando_permisos.ejecutar();
+                    //foreach (Permiso permiso in rol.listapermisos)
+                    //{
+                    //    Command<Entidad> comando_modulos = FabricaComando.crearM13_ConsultarModulos(permiso._id);
+                    //    permiso.modulo = (Modulo)comando_modulos.ejecutar();
+                    //}
                 }
-                return PartialView(listaroles);
-
-                //Entidad nuevoRol = FabricaEntidad.InstanciarRol(model);
-                //Command<String> comando = FabricaComando.crearM13_AgregarRol(nuevoRol);
-                //String agrego_si_no = comando.ejecutar();
             }
             catch (SqlException e)
             {
@@ -80,6 +81,7 @@ namespace BOReserva.Controllers
                 String error = "Error desconocido, contacte con el administrador.";
                 return Json(error);
             }
+            return PartialView(listaroles);
         }
         
         /// <summary>

@@ -248,6 +248,8 @@
     <Compile Include="Controllers\PatronComando\M05\M05_COAgregarPasajero.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COAgregarRol.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COAgregarRolPermiso.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COConsultarModulos.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COConsultarPermisos.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COConsultarRoles.cs" />
     <Compile Include="Controllers\PatronComando\M16_COAgregarReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOCiudad.cs" />
@@ -277,6 +279,7 @@
     <Compile Include="DataAccess\Domain\Avion.cs" />
     <Compile Include="DataAccess\Domain\Boleto.cs" />
     <Compile Include="DataAccess\Domain\Lugar.cs" />
+    <Compile Include="DataAccess\Domain\M13\Modulo.cs" />
     <Compile Include="DataAccess\Domain\Pasajero.cs" />
     <Compile Include="DataAccess\Domain\M13\Permiso.cs" />
     <Compile Include="DataAccess\Domain\Reclamo.cs" />

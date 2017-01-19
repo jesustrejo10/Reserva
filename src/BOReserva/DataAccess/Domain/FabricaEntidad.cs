@@ -182,6 +182,16 @@ namespace BOReserva.DataAccess.Domain
         {
             return new Rol(id, nombre);
         }
+
+        public static Entidad crearPermiso(int id, String nombre)
+        {
+            return new Permiso(id, nombre);
+        }
+
+        public static Entidad crearModulo(int id, String nombre)
+        {
+            return new Modulo(id, nombre);
+        }
         #endregion
 
     }

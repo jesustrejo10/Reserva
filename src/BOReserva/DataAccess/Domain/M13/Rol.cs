@@ -14,6 +14,7 @@ namespace BOReserva.DataAccess.Domain
         public String _nombreRol { get; set; }
         public Permiso _permiso { get; set; }
         public String _nombrePermiso { get; set; }
+        public List<Entidad> listapermisos { get; set; }
 
 
         /// <summary>
