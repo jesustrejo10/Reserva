@@ -10,13 +10,13 @@ namespace FOReserva.DataAccess.DataAccessObject.Common
     {
         public bool ProcessFinishCorrectly { get; set; }
         public string Message { get; set; }
-        public object Result { get; set; }
+        public object Exception { get; set; }
 
         public DAOResult()
         {
             ProcessFinishCorrectly = false;
             Message = "El proceso no culmino correctamente: ";
-            Result = null;
+            Exception = null;
         }
     }
 }

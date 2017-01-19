@@ -78,7 +78,7 @@ namespace BOReserva.Content.Controllers
             {
                 TempData["Mensaje"] = e.Message;
             }
-            catch (SqlException)
+            catch (SqlException e)
             {
                 TempData["Mensaje"] = "Conexion fallida a Base de Datos Contacte Administrador";
             }

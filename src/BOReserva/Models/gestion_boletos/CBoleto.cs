@@ -42,7 +42,6 @@ namespace BOReserva.Models.gestion_boletos
             _fechaBoleto = fechaBoleto;
             _tipoBoleto = tipoBol;
             _vuelos = new List<CVuelo>();
-
         }
 
         //Constructor usado para las reservas, ya que el único atributo extra en la tabla reserva es el código
