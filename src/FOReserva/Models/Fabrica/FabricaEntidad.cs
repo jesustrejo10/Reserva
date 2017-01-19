@@ -1,4 +1,4 @@
-﻿using FOReserva.Models.Autos;
+﻿using FOReserva.Models.gestion_reserva_automovil;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,21 +11,30 @@ namespace FOReserva.Models.Fabrica
     {
 
         #region Modulo 19
-       /* public static CRestauranteModelo inicializarRestaurant(string nombre, string direccion, string telefono, string descripcion, string horarioApertura, string horarioCierre, int idLugar)
+
+        public static List<CReservaAutomovilModelo> inicializarListaReserva()
         {
-            return new CRestauranteModelo(nombre, direccion, telefono, descripcion, horarioApertura, horarioCierre, idLugar);
+            return new List<CReservaAutomovilModelo>();
         }
 
-        public static CRestauranteModelo inicializarRestaurant(int id, string nombre, string direccion, string telefono, string descripcion, string horarioApertura, string horarioCierre, int idLugar)
+        public static CReservaAutomovilModelo inicializarReserva(string fecha_ini, string fecha_fin, string horario_ini,
+                                                                string horario_fin, int idUsuario, string idAuto, int idOri,
+                                                                int idDest,int estatus)
         {
-            return new CRestauranteModelo(id, nombre, direccion, telefono, descripcion, horarioApertura, horarioCierre, idLugar);
+            return new CReservaAutomovilModelo(fecha_ini, fecha_fin, horario_ini, horario_fin, idUsuario, idAuto, idOri, idDest,estatus);
         }
 
-        public static CRestauranteModelo inicializarRestaurant()
+        public static CReservaAutomovilModelo inicializarReserva(int id, string fecha_ini, string fecha_fin, string horario_ini,
+                                                                string horario_fin, int idUsuario, string idAuto, int idOri, int idDest,
+                                                                int estatus)
         {
-            return new CRestauranteModelo();
+            return new CReservaAutomovilModelo(id, fecha_ini, fecha_fin, horario_ini, horario_fin, idUsuario, idAuto, idOri, idDest, estatus);
         }
 
+        public static CReservaAutomovilModelo inicializarReserva()
+        {
+            return new CReservaAutomovilModelo();
+        }
         public static Lugar inicializarLugar(int idLugar, string nombreLugar)
         {
             return new Lugar(idLugar, nombreLugar);
@@ -36,10 +45,6 @@ namespace FOReserva.Models.Fabrica
             return new List<Lugar>();
         }
 
-        public static List<CRestauranteModelo> inicializarListaRestarant()
-        {
-            return new List<CRestauranteModelo>();
-        }*/
 
         #endregion
 

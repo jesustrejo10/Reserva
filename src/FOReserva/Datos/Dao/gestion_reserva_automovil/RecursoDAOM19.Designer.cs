@@ -61,24 +61,6 @@ namespace FOReserva.Datos.Dao.gestion_reserva_automovil {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a @fk_lugar.
-        /// </summary>
-        internal static string fk_lugar {
-            get {
-                return ResourceManager.GetString("fk_lugar", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a @lug_id.
-        /// </summary>
-        internal static string lug_id {
-            get {
-                return ResourceManager.GetString("lug_id", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Busca una cadena traducida similar a lug_id.
         /// </summary>
         internal static string LugarId {
@@ -106,7 +88,7 @@ namespace FOReserva.Datos.Dao.gestion_reserva_automovil {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a M10_ActualizarRestaurante.
+        ///   Busca una cadena traducida similar a M19_ActualizarReservaAutomovil.
         /// </summary>
         internal static string procedimientoActualizar {
             get {
@@ -115,7 +97,7 @@ namespace FOReserva.Datos.Dao.gestion_reserva_automovil {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a M10_AgregarRestaurante.
+        ///   Busca una cadena traducida similar a M19_AgregarReservaAutomovil.
         /// </summary>
         internal static string procedimientoAgregar {
             get {
@@ -124,7 +106,7 @@ namespace FOReserva.Datos.Dao.gestion_reserva_automovil {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a M10_ConsultarRestaurante.
+        ///   Busca una cadena traducida similar a M19_ConsultarReservaAutomovil.
         /// </summary>
         internal static string procedimientoConsultar {
             get {
@@ -133,7 +115,16 @@ namespace FOReserva.Datos.Dao.gestion_reserva_automovil {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a M10_Consultar_Lugar.
+        ///   Busca una cadena traducida similar a M19_ConsultarReservaAutomovilPorCiudad.
+        /// </summary>
+        internal static string procedimientoConsultarAutosCiudad {
+            get {
+                return ResourceManager.GetString("procedimientoConsultarAutosCiudad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a M19_Consultar_Lugar.
         /// </summary>
         internal static string procedimientoConsultarLugar {
             get {
@@ -142,16 +133,16 @@ namespace FOReserva.Datos.Dao.gestion_reserva_automovil {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a M10_ConsultarRestauranteId.
+        ///   Busca una cadena traducida similar a M19_ConsultarReservaAutomovilId.
         /// </summary>
-        internal static string procedimientoConsultarRestaurantId {
+        internal static string procedimientoConsultarReservaAutomovilId {
             get {
-                return ResourceManager.GetString("procedimientoConsultarRestaurantId", resourceCulture);
+                return ResourceManager.GetString("procedimientoConsultarReservaAutomovilId", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a M10_EliminarRestaurante.
+        ///   Busca una cadena traducida similar a M19_EliminarReservaAutomovil.
         /// </summary>
         internal static string procedimientoEliminar {
             get {
@@ -160,128 +151,182 @@ namespace FOReserva.Datos.Dao.gestion_reserva_automovil {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a rst_descripcion.
+        ///   Busca una cadena traducida similar a @raut_estatus.
         /// </summary>
-        internal static string restaurantDescripcion {
+        internal static string raut_estatus {
             get {
-                return ResourceManager.GetString("restaurantDescripcion", resourceCulture);
+                return ResourceManager.GetString("raut_estatus", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a rst_direccion.
+        ///   Busca una cadena traducida similar a @raut_fecha_fin.
         /// </summary>
-        internal static string restaurantDireccion {
+        internal static string raut_fecha_fin {
             get {
-                return ResourceManager.GetString("restaurantDireccion", resourceCulture);
+                return ResourceManager.GetString("raut_fecha_fin", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a rst_hora_apertura.
+        ///   Busca una cadena traducida similar a @raut_fecha_ini.
         /// </summary>
-        internal static string restaurantHoraApertura {
+        internal static string raut_fecha_ini {
             get {
-                return ResourceManager.GetString("restaurantHoraApertura", resourceCulture);
+                return ResourceManager.GetString("raut_fecha_ini", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a rst_hora_cierre.
+        ///   Busca una cadena traducida similar a @raut_fk_automovil.
         /// </summary>
-        internal static string restaurantHoraCierra {
+        internal static string raut_fk_automovil {
             get {
-                return ResourceManager.GetString("restaurantHoraCierra", resourceCulture);
+                return ResourceManager.GetString("raut_fk_automovil", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a rst_id.
+        ///   Busca una cadena traducida similar a @raut_fk_ciudad_devolucion.
         /// </summary>
-        internal static string restaurantId {
+        internal static string raut_fk_ciudad_devolucion {
             get {
-                return ResourceManager.GetString("restaurantId", resourceCulture);
+                return ResourceManager.GetString("raut_fk_ciudad_devolucion", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a rst_nombre.
+        ///   Busca una cadena traducida similar a @raut_fk_ciudad_entrega.
         /// </summary>
-        internal static string restaurantNombre {
+        internal static string raut_fk_ciudad_entrega {
             get {
-                return ResourceManager.GetString("restaurantNombre", resourceCulture);
+                return ResourceManager.GetString("raut_fk_ciudad_entrega", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a rst_telefono.
+        ///   Busca una cadena traducida similar a @raut_fk_usuario.
         /// </summary>
-        internal static string restaurantTelefono {
+        internal static string raut_fk_usuario {
             get {
-                return ResourceManager.GetString("restaurantTelefono", resourceCulture);
+                return ResourceManager.GetString("raut_fk_usuario", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a @rst_descripcion.
+        ///   Busca una cadena traducida similar a @raut_hora_fin.
         /// </summary>
-        internal static string rst_descripcion {
+        internal static string raut_hora_fin {
             get {
-                return ResourceManager.GetString("rst_descripcion", resourceCulture);
+                return ResourceManager.GetString("raut_hora_fin", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a @rst_direccion.
+        ///   Busca una cadena traducida similar a @raut_hora_ini.
         /// </summary>
-        internal static string rst_direccion {
+        internal static string raut_hora_ini {
             get {
-                return ResourceManager.GetString("rst_direccion", resourceCulture);
+                return ResourceManager.GetString("raut_hora_ini", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a @rst_hora_apertura.
+        ///   Busca una cadena traducida similar a @raut_id.
         /// </summary>
-        internal static string rst_hora_apertura {
+        internal static string raut_id {
             get {
-                return ResourceManager.GetString("rst_hora_apertura", resourceCulture);
+                return ResourceManager.GetString("raut_id", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a @rst_hora_cierre.
+        ///   Busca una cadena traducida similar a raut_fk_automovil.
         /// </summary>
-        internal static string rst_hora_cierre {
+        internal static string reservaAutomovilFk {
             get {
-                return ResourceManager.GetString("rst_hora_cierre", resourceCulture);
+                return ResourceManager.GetString("reservaAutomovilFk", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a @rst_id.
+        ///   Busca una cadena traducida similar a raut_fk_ciudad_devolucion.
         /// </summary>
-        internal static string rst_id {
+        internal static string reservaCiudadDevFk {
             get {
-                return ResourceManager.GetString("rst_id", resourceCulture);
+                return ResourceManager.GetString("reservaCiudadDevFk", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a @rst_nombre.
+        ///   Busca una cadena traducida similar a raut_fk_ciudad_entrega.
         /// </summary>
-        internal static string rst_nombre {
+        internal static string reservaCiudadEntFk {
             get {
-                return ResourceManager.GetString("rst_nombre", resourceCulture);
+                return ResourceManager.GetString("reservaCiudadEntFk", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a @rst_telefono.
+        ///   Busca una cadena traducida similar a raut_estatus.
         /// </summary>
-        internal static string rst_telefono {
+        internal static string reservaEstatus {
             get {
-                return ResourceManager.GetString("rst_telefono", resourceCulture);
+                return ResourceManager.GetString("reservaEstatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a raut_fecha_fin.
+        /// </summary>
+        internal static string reservaFechaFin {
+            get {
+                return ResourceManager.GetString("reservaFechaFin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a raut_fecha_ini.
+        /// </summary>
+        internal static string reservaFechaIni {
+            get {
+                return ResourceManager.GetString("reservaFechaIni", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a raut_hora_fin.
+        /// </summary>
+        internal static string reservaHoraFin {
+            get {
+                return ResourceManager.GetString("reservaHoraFin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a raut_hora_ini.
+        /// </summary>
+        internal static string reservaHoraIni {
+            get {
+                return ResourceManager.GetString("reservaHoraIni", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a raut_id.
+        /// </summary>
+        internal static string reservaId {
+            get {
+                return ResourceManager.GetString("reservaId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a raut_fk_usuario.
+        /// </summary>
+        internal static string reservaUsuarioFk {
+            get {
+                return ResourceManager.GetString("reservaUsuarioFk", resourceCulture);
             }
         }
     }

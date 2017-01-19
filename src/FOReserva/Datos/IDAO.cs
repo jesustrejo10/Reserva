@@ -18,6 +18,7 @@ namespace FOReserva.Datos
     {
         bool Crear(Entidad objeto);
         bool Eliminar(Entidad objeto);
+        bool Modificar(Entidad objeto);
         List<Entidad> Consultar(Entidad objeto);
     }
 }

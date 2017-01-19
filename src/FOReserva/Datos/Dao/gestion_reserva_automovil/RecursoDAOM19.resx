@@ -117,10 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="fk_lugar" xml:space="preserve">
-    <value>@fk_lugar</value>
-    <comment>Clave foranea lugar del Restaurant, Atributo procedimiento</comment>
-  </data>
   <data name="LugarId" xml:space="preserve">
     <value>lug_id</value>
     <comment>Lugar atributo Id clave primaria, Tabla Lugar </comment>
@@ -130,91 +126,115 @@
     <comment>Lugar atributo nombre, Tabla Lugar</comment>
   </data>
   <data name="procedimientoActualizar" xml:space="preserve">
-    <value>M10_ActualizarRestaurante</value>
-    <comment>Nombre del Procedimiento Actualizar en la Base de Datos tabla Restaurant</comment>
+    <value>M19_ActualizarReservaAutomovil</value>
+    <comment>Nombre del Procedimiento Actualizar en la Base de Datos tabla Reserva_Automovil</comment>
   </data>
   <data name="procedimientoAgregar" xml:space="preserve">
-    <value>M10_AgregarRestaurante</value>
-    <comment>Nombre del Procedimiento Agregar Base de Datos Tabla Restaurant</comment>
+    <value>M19_AgregarReservaAutomovil</value>
+    <comment>Nombre del Procedimiento Agregar Base de Datos Tabla ReservaAutomovil</comment>
   </data>
   <data name="procedimientoConsultar" xml:space="preserve">
-    <value>M10_ConsultarRestaurante</value>
-    <comment>Nombre del Procedimiento Consultar en la Base de Datos tabla Restaurant</comment>
+    <value>M19_ConsultarReservaAutomovil</value>
+    <comment>Nombre del Procedimiento Consultar en la Base de Datos tabla ReservaAutomovil</comment>
   </data>
   <data name="procedimientoConsultarLugar" xml:space="preserve">
-    <value>M10_Consultar_Lugar</value>
+    <value>M19_Consultar_Lugar</value>
     <comment>Procedimiento Consultar Lugares en la Base de Datos</comment>
   </data>
   <data name="procedimientoEliminar" xml:space="preserve">
-    <value>M10_EliminarRestaurante</value>
-    <comment>Nombre del Procedimiento Eliminar en la Base de Datos tabla Restaurant</comment>
-  </data>
-  <data name="rst_descripcion" xml:space="preserve">
-    <value>@rst_descripcion</value>
-    <comment>Descripcion del Restaurant, Atributo procedimiento</comment>
-  </data>
-  <data name="rst_direccion" xml:space="preserve">
-    <value>@rst_direccion</value>
-    <comment>Direccion del Restaurant, Atributo procedimiento</comment>
-  </data>
-  <data name="rst_hora_apertura" xml:space="preserve">
-    <value>@rst_hora_apertura</value>
-    <comment>Hora Apertura del Restaurant, Atributo procedimiento</comment>
-  </data>
-  <data name="rst_hora_cierre" xml:space="preserve">
-    <value>@rst_hora_cierre</value>
-    <comment>Hora Cierre del Restaurant, Atributo procedimiento</comment>
-  </data>
-  <data name="rst_nombre" xml:space="preserve">
-    <value>@rst_nombre</value>
-    <comment>Nombre del Restaurant, Atributo procedimiento</comment>
-  </data>
-  <data name="rst_telefono" xml:space="preserve">
-    <value>@rst_telefono</value>
-    <comment>Telefono del Restaurant, Atributo procedimiento</comment>
-  </data>
-  <data name="lug_id" xml:space="preserve">
-    <value>@lug_id</value>
-    <comment>Id de Lugar, Atributo del Procedimiento</comment>
-  </data>
-  <data name="restaurantDescripcion" xml:space="preserve">
-    <value>rst_descripcion</value>
-    <comment>Atributo Descripcion tabla restaurant</comment>
-  </data>
-  <data name="restaurantDireccion" xml:space="preserve">
-    <value>rst_direccion</value>
-    <comment>Atributo Direccion tabla restaurant</comment>
-  </data>
-  <data name="restaurantHoraApertura" xml:space="preserve">
-    <value>rst_hora_apertura</value>
-    <comment>Atributo Hora Apertura tabla restaurant</comment>
-  </data>
-  <data name="restaurantHoraCierra" xml:space="preserve">
-    <value>rst_hora_cierre</value>
-    <comment>Atributo Hora CIerre tabla restaurant</comment>
-  </data>
-  <data name="restaurantId" xml:space="preserve">
-    <value>rst_id</value>
-    <comment>Atributo Id (Clave Primaria) tabla restaurant</comment>
-  </data>
-  <data name="restaurantNombre" xml:space="preserve">
-    <value>rst_nombre</value>
-    <comment>Atributo Nombre tabla restaurant</comment>
-  </data>
-  <data name="restaurantTelefono" xml:space="preserve">
-    <value>rst_telefono</value>
-    <comment>Atributo Telefono tabla restaurant</comment>
-  </data>
-  <data name="rst_id" xml:space="preserve">
-    <value>@rst_id</value>
-    <comment>Id del restaurant, Atributo procedimiento</comment>
+    <value>M19_EliminarReservaAutomovil</value>
+    <comment>Nombre del Procedimiento Eliminar en la Base de Datos tabla ReservaAutomovil</comment>
   </data>
   <data name="LugarIdFk" xml:space="preserve">
     <value>fk_lugar</value>
     <comment>Atributo Id (Clave Foranea) tabla Lugar</comment>
   </data>
-  <data name="procedimientoConsultarRestaurantId" xml:space="preserve">
-    <value>M10_ConsultarRestauranteId</value>
-    <comment>Nombre del Procedimiento consultar en la Base de Datos tabla Restaurant por Id</comment>
+  <data name="procedimientoConsultarReservaAutomovilId" xml:space="preserve">
+    <value>M19_ConsultarReservaAutomovilId</value>
+    <comment>Nombre del Procedimiento consultar en la Base de Datos tabla ReservaAutomovil por Id</comment>
+  </data>
+  <data name="raut_estatus" xml:space="preserve">
+    <value>@raut_estatus</value>
+    <comment>Estatus de la reserva, Atributo procedimiento</comment>
+  </data>
+  <data name="raut_fecha_fin" xml:space="preserve">
+    <value>@raut_fecha_fin</value>
+    <comment>Fecha fin de la reserva, Atributo procedimiento</comment>
+  </data>
+  <data name="raut_fecha_ini" xml:space="preserve">
+    <value>@raut_fecha_ini</value>
+    <comment>Fecha ini de la reserva, Atributo procedimiento</comment>
+  </data>
+  <data name="raut_fk_automovil" xml:space="preserve">
+    <value>@raut_fk_automovil</value>
+    <comment>Automovil de la reserva, Atributo procedimiento</comment>
+  </data>
+  <data name="raut_fk_ciudad_devolucion" xml:space="preserve">
+    <value>@raut_fk_ciudad_devolucion</value>
+    <comment>Ciudad devolución de la reserva, Atributo procedimiento</comment>
+  </data>
+  <data name="raut_fk_ciudad_entrega" xml:space="preserve">
+    <value>@raut_fk_ciudad_entrega</value>
+    <comment>Ciudad Entrega de la reserva, Atributo procedimiento</comment>
+  </data>
+  <data name="raut_fk_usuario" xml:space="preserve">
+    <value>@raut_fk_usuario</value>
+    <comment>Usuario de la reserva, Atributo procedimiento</comment>
+  </data>
+  <data name="raut_hora_fin" xml:space="preserve">
+    <value>@raut_hora_fin</value>
+    <comment>Hora fin  de la reserva, Atributo procedimiento</comment>
+  </data>
+  <data name="raut_hora_ini" xml:space="preserve">
+    <value>@raut_hora_ini</value>
+    <comment>Hora ini de la reserva, Atributo procedimiento</comment>
+  </data>
+  <data name="raut_id" xml:space="preserve">
+    <value>@raut_id</value>
+    <comment>Id de la reserva, Atributo procedimiento</comment>
+  </data>
+  <data name="reservaAutomovilFk" xml:space="preserve">
+    <value>raut_fk_automovil</value>
+    <comment>Atributo Automovil tabla Reserva Automovil</comment>
+  </data>
+  <data name="reservaCiudadDevFk" xml:space="preserve">
+    <value>raut_fk_ciudad_devolucion</value>
+    <comment>Atributo Ciudad Devolución tabla Reserva Automovil</comment>
+  </data>
+  <data name="reservaCiudadEntFk" xml:space="preserve">
+    <value>raut_fk_ciudad_entrega</value>
+    <comment>Atributo Ciudad Entrega tabla Reserva Automovil</comment>
+  </data>
+  <data name="reservaEstatus" xml:space="preserve">
+    <value>raut_estatus</value>
+    <comment>Atributo estatus tabla Reserva Automovil</comment>
+  </data>
+  <data name="reservaFechaFin" xml:space="preserve">
+    <value>raut_fecha_fin</value>
+    <comment>Atributo fecha fin tabla Reserva Automovil</comment>
+  </data>
+  <data name="reservaFechaIni" xml:space="preserve">
+    <value>raut_fecha_ini</value>
+    <comment>Atributo fecha ini tabla Reserva Automovil</comment>
+  </data>
+  <data name="reservaHoraFin" xml:space="preserve">
+    <value>raut_hora_fin</value>
+    <comment>Atributo hora fin tabla Reserva Automovil</comment>
+  </data>
+  <data name="reservaHoraIni" xml:space="preserve">
+    <value>raut_hora_ini</value>
+    <comment>Atributo hora ini tabla Reserva Automovil</comment>
+  </data>
+  <data name="reservaId" xml:space="preserve">
+    <value>raut_id</value>
+    <comment>Atributo Id (Clave Primaria) tabla Reserva</comment>
+  </data>
+  <data name="reservaUsuarioFk" xml:space="preserve">
+    <value>raut_fk_usuario</value>
+    <comment>Atributo Usuario tabla Reserva Automovil</comment>
+  </data>
+  <data name="procedimientoConsultarAutosCiudad" xml:space="preserve">
+    <value>M19_ConsultarReservaAutomovilPorCiudad</value>
+    <comment>Procedimiento para consultar los autos disponibles</comment>
   </data>
 </root>
