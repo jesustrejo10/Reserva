@@ -12,8 +12,8 @@ using BOReserva.Servicio.Servicio_Hoteles;
 using BOReserva.DataAccess.DAO;
 using BOReserva.DataAccess.Domain;
 using BOReserva.Controllers.PatronComando;
-using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.DataAccessObject;
+using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.DataAccessObject.M09;
 
 namespace TestUnitReserva.BO.gestion_hoteles
@@ -24,7 +24,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
         private Pais mockPais;
         private Ciudad mockCiudad;
         private Hotel mockHotel;
-        IDAO daoHotel;
+        DAOHotel daoHotel;
 
         /// <summary>
         /// Metodo que se ejecuta antes que se ejecute cada prueba
@@ -36,7 +36,8 @@ namespace TestUnitReserva.BO.gestion_hoteles
             mockPais = new Pais(11, "Venezuela");
             mockCiudad = new Ciudad(12, "Caracas", mockPais);
             mockHotel = new Hotel("HOtel desde preuba unit3", "hotel", "hotel", "hotel", 1, 1, mockCiudad);
-            daoHotel = FabricaDAO.instanciarDaoHotel();
+            daoHotel = new DAOHotel();
+             
         }
         /// <summary>
         /// Método que se ejecuta cada vez que termina de correr una prueba;
