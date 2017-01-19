@@ -81,7 +81,7 @@ namespace BOReserva.Controllers
         {
             manejadorSQL sql = new manejadorSQL();
             var restauranteList = new List<CRestauranteModelo>();
-            restauranteList = sql.consultarRestaurante();
+           // restauranteList = sql.consultarRestaurante();
             return Json(restauranteList);
         }
 
