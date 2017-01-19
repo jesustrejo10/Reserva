@@ -63,8 +63,10 @@ namespace BOReserva.Controllers
             int precio = 200;
             model._precioHabitacion = precio;
             //Entidad ciudadDestino = FabricaEntidad.InstanciarCiudad("nombre de la ciudad");
-            Entidad ciudadDestino = FabricaEntidad.InstanciarCiudad(_ciudad);
-            ciudadDestino._id = 29;
+            Entidad ciudadDestino = FabricaEntidad.InstanciarCiudad(ciudad);
+            //ciudadDestino._id = 29;
+            M09_COObtenerPaises command = (M09_COObtenerPaises)FabricaComando.crearM09ObtenerPaises();
+            ciudadDestino._id = command.obtenerIdentificadorCiudad(ciudad);
             Entidad nuevoHotel = FabricaEntidad.InstanciarHotel(model, ciudadDestino);
             //con la fabrica instancie al hotel.
             Command<String> comando = FabricaComando.crearM09AgregarHotel(nuevoHotel);
