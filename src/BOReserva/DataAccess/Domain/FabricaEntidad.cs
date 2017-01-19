@@ -120,9 +120,22 @@ namespace BOReserva.DataAccess.Domain
             DateTime fecha_nac = Convert.ToDateTime(fecha);
             return new Pasajero(id, nombre1, nombre2, apellido1, apellido2, sexo, fecha_nac, correo);
 		}
-		#endregion
-		
-		#region Modulo 10
+        #endregion
+
+        #region M08_Automoviles
+        public static Entidad InstanciarAutomovil(String matricula, String modelo, String fabricante, int anio, String tipovehiculo, 
+                                                  double kilometraje, int cantpasajeros, double preciocompra, double precioalquiler,
+                                                  double penalidaddiaria, DateTime fecharegistro, String color, int disponibilidad,
+                                                  String transmision, String pais, String ciudad)
+        {
+            return new Automovil( matricula,  modelo, fabricante, anio, tipovehiculo,
+                                  kilometraje, cantpasajeros, preciocompra, precioalquiler,
+                                  penalidaddiaria, fecharegistro, color, disponibilidad,
+                                  transmision, pais, ciudad);
+        }
+        #endregion
+
+        #region Modulo 10
         public static CRestauranteModelo crearRestaurant(string nombre, string direccion, string telefono, string descripcion, string horarioApertura, string horarioCierre, int idLugar)
         {
             return new CRestauranteModelo(nombre, direccion, telefono, descripcion, horarioApertura, horarioCierre, idLugar);
