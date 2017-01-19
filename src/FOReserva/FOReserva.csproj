@@ -209,6 +209,8 @@
     <Compile Include="Controllers\gestion_vuelosController.cs" />
     <Compile Include="Controllers\PatronComando\Command.cs" />
     <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
+    <Compile Include="Controllers\PatronComando\M16\M16_COAgregarReclamo.cs" />
+    <Compile Include="Controllers\PatronComando\M16\M16_COConsultarReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOReclamo.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\registro_autenticacionController.cs" />
@@ -3224,7 +3226,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\PatronComando\M16\" />
     <Folder Include="DataAccess\DataAccessObject\M16\" />
   </ItemGroup>
   <ItemGroup>
