@@ -283,6 +283,11 @@ namespace BOReserva.Controllers.PatronComando
         }
         #endregion
 
+        public static Command<String> crearM16AgregarReclamo(Entidad e)
+        {
 
+            return new M16_COAgregarReclamo((Reclamo)e);
+
+        }
     }
 }
