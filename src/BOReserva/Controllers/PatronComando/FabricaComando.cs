@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using BOReserva.Controllers.PatronComando.M16;
 
 namespace BOReserva.Controllers.PatronComando
 {
@@ -287,6 +288,12 @@ namespace BOReserva.Controllers.PatronComando
         {
 
             return new M16_COAgregarReclamo((Reclamo)e);
+
+        }
+        public static Command<Dictionary<int, Entidad>> crearM16VisualizarReclamos()
+        {
+
+            return new M16_COConsultarReclamo();
 
         }
     }

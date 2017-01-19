@@ -24,18 +24,17 @@ namespace BOReserva.Controllers
 
       public ActionResult M16_VisualizarReclamo()
       {
-          Reclamo reclamo1 = new Reclamo("Maleta perdida","no consigo mi maleta","19/20/2016",1,1);
-          Reclamo reclamo2 = new Reclamo("Perdí mi boleto", "necesito retornar", "20/20/2016",1,2);
-          List<Reclamo> listaReclamos = new List<Reclamo>();
-          listaReclamos.Add(reclamo1);
-          listaReclamos.Add(reclamo2);
-
+          Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM16VisualizarReclamos();
+          Dictionary<int, Entidad> listaReclamos = comando.ejecutar();
           return PartialView(listaReclamos);
       }
 
       [HttpPost]
       public JsonResult guardarReclamo(CAgregarReclamo model)
       {
+          //ESTO ES TEMPORAL MIENTRAS SIMON PASA LA FUNCION
+          model._usuario = 1;
+          //RECUERDA QUE LO ANTERIOR DEBES CAMBIARLO KARLIANA SUAREZ
           Entidad nuevoReclamo = FabricaEntidad.InstanciarReclamo(model);
           Command<String> comando = FabricaComando.crearM16AgregarReclamo(nuevoReclamo);
           String verificacion = comando.ejecutar();
