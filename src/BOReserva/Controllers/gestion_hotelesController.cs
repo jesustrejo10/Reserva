@@ -10,8 +10,6 @@ using System.Net;
 using BOReserva.Servicio;
 using BOReserva.DataAccess.Domain;
 using BOReserva.Controllers.PatronComando;
-using BOReserva.Models;
-
 
 namespace BOReserva.Controllers
 {
