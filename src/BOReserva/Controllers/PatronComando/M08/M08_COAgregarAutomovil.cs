@@ -24,7 +24,12 @@ namespace BOReserva.Controllers.PatronComando.M08
         {
             this._objeto = _objeto;
         }
+
         #endregion
 
+        public override string ejecutar()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
