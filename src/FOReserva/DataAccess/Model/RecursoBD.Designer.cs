@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BOReserva.DataAccess.Model {
+namespace FOReserva.DataAccess.Model {
     using System;
     
     
