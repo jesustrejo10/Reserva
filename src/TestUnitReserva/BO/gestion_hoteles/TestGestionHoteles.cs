@@ -91,7 +91,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
             habitaciones.Add(h1);
             habitaciones.Add(h2);
             //sequenceHabitacion
-            IDAOHabitacion dao = FabricaDAO.instanciarDaoHabitacion();
+         //   IDAOHabitacion dao = FabricaDAO.instanciarDaoHabitacion();
 
         }
 
