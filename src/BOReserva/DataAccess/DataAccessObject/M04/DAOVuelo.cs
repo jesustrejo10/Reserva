@@ -33,6 +33,10 @@ namespace BOReserva.DataAccess.DataAccessObject
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Metodo para consultar todos los vuelos registrados en la base de datos
+        /// </summary>
+        /// <returns>Lista con todos los vuelos</returns>
         public List<Entidad> ConsultarTodos()
         {
             DataTable resultado;
