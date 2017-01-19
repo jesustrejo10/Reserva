@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.DataAccess.Model
+namespace FOReserva.DataAccess.Model
 {
     /// <summary>
     /// Clase Connection, es un singleton utilizado para solo realizar una sola instancia contra la coneccion de la BD

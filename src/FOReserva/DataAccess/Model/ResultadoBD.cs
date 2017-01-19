@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.DataAccess.Model
+namespace FOReserva.DataAccess.Model
 {
     public class ResultadoBD
     {
