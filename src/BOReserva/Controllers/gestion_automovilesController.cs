@@ -54,6 +54,7 @@ namespace BOReserva.Controllers
         /// <returns>Retorna la vista parcial M08_VisualizarAutomovil</returns>
         public ActionResult M08_VisualizarAutomovil(String matricula)
         {
+            
             manejadorSQL buscarvehiculo = new manejadorSQL();
             Automovil vehiculo = buscarvehiculo.MMostrarvehiculoBD(matricula); //BUSCA EL AUTOMOVIL A MOSTRAR
             //EN TODOS ESTOS METODOS HAY QUE USAR TRY CATCH
@@ -76,6 +77,7 @@ namespace BOReserva.Controllers
             automovil._pais = vehiculo._pais;
             automovil._ciudad = vehiculo._ciudad;
             return PartialView(automovil);
+            
         }
 
 
