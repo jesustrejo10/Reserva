@@ -117,6 +117,11 @@ namespace BOReserva.Controllers.PatronComando
 
         #endregion
 
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando M16_COAgregarReclamo
+        /// </summary>
+        /// <param name="e">Recibe la una entidad de tipo reclamo</param>
+        /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
         public static Command<String> crearM16_AgregarReclamo(Entidad e) 
         {
             return new M16_COAgregarReclamo((Reclamo)e);

@@ -12,6 +12,16 @@ namespace FOReserva.DataAccess.DataAccessObject
 {
     public class FabricaDAO
     {
-        
+        #region M16 Reclamos
+
+        /// <summary>
+        /// Metodo que instancia el DAO de reclamos
+        /// </summary>
+        /// <returns>una instancia del DAO de reclamos</returns>
+        public static DAO instanciarDaoReclamo()
+        {
+            return new DAOReclamo();
+        }
+        #endregion
     }
 }
