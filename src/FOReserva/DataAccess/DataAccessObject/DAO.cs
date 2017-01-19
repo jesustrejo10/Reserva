@@ -1,4 +1,5 @@
-﻿using FOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+﻿using FOReserva.DataAccess.Model;
+using FOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using FOReserva.DataAccess.Domain;
 using FOReserva.DataAccess.Model;
 using System;
@@ -11,6 +12,9 @@ using System.Web;
 
 namespace FOReserva.DataAccess.DataAccessObject
 {
+    /// <summary>
+    /// Manejador de la Base de datos, contiene todo lo necesario para una conexion inicial
+    /// </summary>
     abstract public class DAO : IDAO
     {
         protected String _connexionString = ConfigurationManager.ConnectionStrings["StringRemoto"].ConnectionString;

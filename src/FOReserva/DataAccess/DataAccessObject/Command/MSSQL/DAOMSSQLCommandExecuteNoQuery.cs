@@ -7,19 +7,16 @@ using System.Web;
 
 namespace FOReserva.DataAccess.DataAccessObject.Command.MSSQL
 {
-    public class DAOMSSQLCommandExecuteNoQuery : IDAOCommand
+    public class DAOMSSQLCommandExecuteNoQuery : DAOMSSQLCommand
     {
-        private DAOMSSQL instance;
-
-        public DAOMSSQLCommandExecuteNoQuery(DAOMSSQL instance)
+        public DAOMSSQLCommandExecuteNoQuery(DAOMSSQL instance) : base(instance)
         {
-            this.instance = instance;
         }
 
-        public DAOResult doThis(params object[] args)
+        public override DAOResult doThis(params object[] args)
         {
             var query = (String)args[0];
-            var doThis = (DAO.ForEachRow)args[1];
+            //var doThis = (DAO.ForEachRow)args[1];
             DAOResult result = FabricDAO.CreateDAOResult();
             try
             {

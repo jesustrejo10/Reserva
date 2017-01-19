@@ -1,5 +1,4 @@
-﻿using BOReserva.Controllers.PatronComando;
-using BOReserva.Controllers.PatronComando.M09;
+﻿using BOReserva.Controllers.PatronComando.M09;
 using BOReserva.DataAccess.Domain;
 using BOReserva.M10.Comando.gestion_restaurantes;
 using BOReserva.Controllers.PatronComando;
@@ -277,7 +276,6 @@ namespace BOReserva.Controllers.PatronComando
             return lista;
         }
         #endregion
-
-
     }
+
 }

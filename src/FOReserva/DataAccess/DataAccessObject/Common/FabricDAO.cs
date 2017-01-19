@@ -9,12 +9,12 @@ namespace FOReserva.DataAccess.DataAccessObject.Common
     public class FabricDAO
     {
 
-        #region M20
-        public static IDAO CreateDAORevision()
-        {
-            return new DAORevision();
-        }
-        #endregion
+        //#region M20
+        //public static IDAO CreateDAORevision()
+        //{
+        //    return new DAORevision();
+        //}
+        //#endregion
 
         #region Global
         public static String GetConnectionString(string name)

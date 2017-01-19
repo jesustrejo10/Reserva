@@ -13,7 +13,7 @@ namespace FOReserva.DataAccess.DataAccessObject.Command.MSSQL
         {
         }
 
-        public new DAOResult doThis(params object[] args)
+        public override DAOResult doThis(params object[] args)
         {
             var name = (string)args[0];
             var parameters = (object)args[1];
