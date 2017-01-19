@@ -21,47 +21,6 @@ namespace BOReserva.Controllers
             return PartialView();
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         public ActionResult M24_AgregarCabinas()
         {
             ConexionBD cbd = new ConexionBD();
@@ -150,9 +109,9 @@ namespace BOReserva.Controllers
             Entidad nuevoCrucero = FabricaEntidad.InstanciarCrucero(model);
             //con la fabrica instancie al hotel.
             Command<String> comando = FabricaComando.crearM14AgregarCrucero(nuevoCrucero);
-            String agrego_si_no = comando.ejecutar();
+            String result = comando.ejecutar();
 
-            return (Json(agrego_si_no));
+            return (Json(result));
         }
    
 

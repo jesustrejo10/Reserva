@@ -14,11 +14,6 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAOHotel();
         }
 
-        public static DAO instanciarDaoCrucero()
-        {
-            return new DAOCruceros();
-        }
-
         public static DAO instanciarDaoReclamo() 
         {
             return new DAOReclamo();
@@ -53,6 +48,13 @@ namespace BOReserva.DataAccess.DataAccessObject
         public static DAORol instanciarDAORolPermiso()
         {
             return new DAORol();
+        }
+        #endregion
+        
+        #region M14_Cruceros
+        public static DAO instanciarDaoCrucero()
+        {
+            return new DAOCruceros();
         }
         #endregion
     }

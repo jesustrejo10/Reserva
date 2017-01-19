@@ -5,9 +5,9 @@ using System.Web;
 
 namespace BOReserva.DataAccess.Domain
 {
-    public class Crucero : Entidad
+    public class Crucero : Transporte
     {
-        public int _idCrucero { get; set; }
+        //public int _idCrucero { get; set; }
 
         public String _nombreCrucero { get; set; }
 
