@@ -205,6 +205,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\PatronComando\Command.cs" />
     <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COModificarPasajero.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COEliminarBoleto.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COBuscarnombreciudad.cs" />
     <Compile Include="Controllers\PatronComando\M10\M10_COActualizarRestaurant.cs" />
     <Compile Include="Controllers\PatronComando\M10\M10_COCargarHorario.cs" />
     <Compile Include="Controllers\PatronComando\M10\M10_COConsultarLugar.cs" />
@@ -233,7 +236,7 @@
     <Compile Include="Controllers\gestion_rolesController.cs" />
     <Compile Include="Controllers\gestion_ruta_comercialController.cs" />
     <Compile Include="Controllers\gestion_usuariosController.cs" />
-    <Compile Include="Controllers\gestion_vueloController.cs" />
+    <Compile Include="Controllers\M04\gestion_vueloController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\List.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COConsultarHotel.cs" />
@@ -248,11 +251,13 @@
     <Compile Include="Controllers\PatronComando\M16_COAgregarReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOCiudad.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOBoleto.cs" />
+    <Compile Include="DataAccess\DataAccessObject\DAOLugar.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOPasajero.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOHotel.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOPais.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAORol.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOLugar.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCiudad.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPais.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReclamo.cs" />
@@ -268,6 +273,7 @@
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORestaurant.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOBoleto.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPasajero.cs" />
+    <Compile Include="DataAccess\Domain\Avion.cs" />
     <Compile Include="DataAccess\Domain\Boleto.cs" />
     <Compile Include="DataAccess\Domain\Lugar.cs" />
     <Compile Include="DataAccess\Domain\Pasajero.cs" />
@@ -290,8 +296,9 @@
     <Compile Include="DataAccess\Domain\Hotel.cs" />
     <Compile Include="DataAccess\Domain\Pais.cs" />
     <Compile Include="DataAccess\Domain\Rol.cs" />
+    <Compile Include="DataAccess\Domain\Ruta.cs" />
     <Compile Include="DataAccess\Domain\Usuario.cs" />
-    <Compile Include="DataAccess\Domain\M04\Vuelo.cs" />
+    <Compile Include="DataAccess\Domain\Vuelo.cs" />
     <Compile Include="DataAccess\Model\Connection.cs" />
     <Compile Include="DataAccess\Model\ConexionUtil.cs" />
     <Compile Include="DataAccess\Model\ExceptionBD.cs" />
@@ -1621,6 +1628,7 @@
     <Folder Include="Views\dist\js\pages\" />
     <Folder Include="Views\gestion_roles\css\" />
     <Folder Include="Views\gestion_roles\js\" />
+    <Folder Include="Views\M04_ListaDeVuelos\" />
     <Folder Include="Views\Prueba\" />
   </ItemGroup>
   <ItemGroup>

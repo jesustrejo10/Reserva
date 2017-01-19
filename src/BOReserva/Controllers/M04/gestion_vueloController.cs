@@ -8,6 +8,9 @@ using System.Data.SqlClient;
 using System.Text.RegularExpressions;
 using BOReserva.Models.gestion_vuelo;
 using BOReserva.Servicio.Servicio_Vuelos;
+using BOReserva.Controllers.PatronComando;
+using BOReserva.DataAccess.Model;
+using BOReserva.DataAccess.Domain;
 
 namespace BOReserva.Controllers
 {
@@ -22,15 +25,19 @@ namespace BOReserva.Controllers
         public static String _destino;
         public static String _avion;
 
+        public ActionResult M04_listarVuelos()
+        {
+
+            return null;
+        }
 
         public ActionResult M04_GestionVuelo_Visualizar()
         {
-            manejadorSQL_Vuelos buscarvuelos = new manejadorSQL_Vuelos();
-            List<CVuelo> listavuelos = new List<CVuelo>();
+            List<Entidad> listaVuelos;
             try
             {
-                //AQUI SE BUSCA TODO LOS VUELOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
-                listavuelos = buscarvuelos.MListarvuelosBD(); 
+                Command<List<Entidad>> comando = FabricaComando.consultarM04_ConsultarTodos();
+                listaVuelos = comando.ejecutar();  
             }
             catch (SqlException e)
             {
@@ -44,7 +51,7 @@ namespace BOReserva.Controllers
                 String error = "Error desconocido cargando la pagina visualizar, contacte con el administrador.";
                 return Json(error);
             }
-            return PartialView(listavuelos);
+            return PartialView(listaVuelos);
         }
 
         //VISTA-CREAR: dlstatusvuelo() sera el metodo para llenar el DropdownList del status de vuelo
@@ -640,6 +647,8 @@ namespace BOReserva.Controllers
 
         public JsonResult cargarDestinosModificar(string ciudadOMod)
         {
+            //Pruebas hasta que pasen los métodos
+
             CVueloModificar model = new CVueloModificar();
             List<CVueloModificar> resultado = new List<CVueloModificar>();
             manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
