@@ -6,16 +6,26 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using BOReserva.DataAccess.Domain;
+using BOReserva.Controllers.PatronComando;
 
 namespace BOReserva.Controllers
 {
     public class gestion_usuariosController : Controller
     {
-        /*public ActionResult M12_AgregarUsuario2()
+        /// <summary>
+        /// Método de la vista parcial M12_AgregarUsuario2
+        /// </summary>
+        /// <returns>Retorna la vista parcial M12_AgregarUsuario2 en conjunto del Modelo de dicha vista</returns>
+        public ActionResult M12_AgregarUsuario2()
         {
             CAgregarUsuario model = new CAgregarUsuario();
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM12ObtenerRoles();
+            model._rols = comando.ejecutar();
+            
             return PartialView(model);
-        }*/
+        }
+
 
 
         //
@@ -45,7 +55,7 @@ namespace BOReserva.Controllers
         }
 
 
-        public ActionResult M12_AgregarUsuario2()
+        public ActionResult M12_AgregarUsuario()
         {
             try { 
                 PersistenciaUsuario p = new PersistenciaUsuario();
@@ -65,7 +75,7 @@ namespace BOReserva.Controllers
 
 
         [HttpPost]
-        public ActionResult M12_AgregarUsuario2(AgregarUsuario usuario)
+        public ActionResult M12_AgregarUsuario(AgregarUsuario usuario)
         {
             //Se resetea intentos en la Tabla Login MO1 Ingreso Seguridad
             Cgestion_seguridad_ingreso ingreso = new Cgestion_seguridad_ingreso();

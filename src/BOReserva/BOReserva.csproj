@@ -245,8 +245,9 @@
     <Compile Include="Controllers\PatronComando\M09\M09_COModificarHotel.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COObtenerPaises.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COVisualizarHoteles.cs" />
-    <Compile Include="Controllers\PatronComando\M12\M12_COAgregarUsuario.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COAgregarPasajero.cs" />
+    <Compile Include="Controllers\PatronComando\M12\M12_COAgregarUsuario.cs" />
+    <Compile Include="Controllers\PatronComando\M12\M12_COObtenerRoles.cs" />
     <Compile Include="Controllers\PatronComando\M13_COAgregarRol.cs" />
     <Compile Include="Controllers\PatronComando\M13_COAgregarRolPermiso.cs" />
     <Compile Include="Controllers\PatronComando\M16_COAgregarReclamo.cs" />
@@ -260,10 +261,11 @@
     <Compile Include="DataAccess\DataAccessObject\DAORol.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOLugar.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCiudad.cs" />
-    <Compile Include="DataAccess\DataAccessObject\DAOUsuarios.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPais.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORol.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOUsuario.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M12\DAOUsuario.cs" />
     <Compile Include="DataAccess\Domain\Contratos\ICiudad.cs" />
     <Compile Include="DataAccess\DataAccessObject\M09\DAOHotel.cs" />
     <Compile Include="DataAccess\DataAccessObject\M10\RecursoDAOM10.Designer.cs">

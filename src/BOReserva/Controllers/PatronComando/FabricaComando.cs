@@ -1,5 +1,6 @@
 ﻿using BOReserva.Controllers.PatronComando;
 using BOReserva.Controllers.PatronComando.M09;
+using BOReserva.Controllers.PatronComando.M12;
 using BOReserva.DataAccess.Domain;
 using BOReserva.M10.Comando.gestion_restaurantes;
 using BOReserva.Controllers.PatronComando;
@@ -7,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+
 
 namespace BOReserva.Controllers.PatronComando
 {
@@ -278,6 +280,32 @@ namespace BOReserva.Controllers.PatronComando
         }
         #endregion
 
+        #region M12_Gestion_Usuarios
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M12_COAgregarUsuario
+        /// </summary>
+        /// <param name="e">Recibe la una entidad de tipo Usuario</param>
+        /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
+        public static Command<String> crearM12AgregarUsuario (Entidad e)
+        {
+            return new M12_COAgregarUsuario((Usuario)e);
+        }
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M12_COObtenerRoles
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M12_COObtenerRoles.
+        /// </returns>
+        public static Command<Dictionary<int, Entidad>> crearM12ObtenerRoles()
+        {
+            return new M12_COObtenerRoles();
+        }
+
+        #endregion
 
     }
 }

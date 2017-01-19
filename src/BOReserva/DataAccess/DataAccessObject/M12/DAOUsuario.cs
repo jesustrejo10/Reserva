@@ -10,9 +10,9 @@ using System.Web;
 
 namespace BOReserva.DataAccess.DataAccessObject
 {
-    public class DAOUsuarios : DAO, IDAOUsuarios
+    public class DAOUsuario : DAO, IDAOUsuario
     {
-        public DAOUsuarios()
+        public DAOUsuario()
         {
         }
 

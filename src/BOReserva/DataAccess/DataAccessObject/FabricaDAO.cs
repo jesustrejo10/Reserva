@@ -138,5 +138,14 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAORol();
         }
         #endregion
+
+        #region M12_Usuarios
+
+        public static DAO instanciarDaoUsuario()
+        {
+            return new DAOUsuario();
+        }
+        
+        #endregion
     }
 }
