@@ -26,9 +26,11 @@ namespace BOReserva.Controllers
       {
           Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM16VisualizarReclamos();
           Dictionary<int, Entidad> listaReclamos = comando.ejecutar();
-          return PartialView(listaReclamos);
+          List<Reclamo> lista = FabricaEntidad.InstanciarListaReclamo(listaReclamos);
+          return PartialView(lista);
       }
 
+      
       [HttpPost]
       public JsonResult guardarReclamo(CAgregarReclamo model)
       {

@@ -114,7 +114,7 @@ namespace BOReserva.DataAccess.DataAccessObject
 
                         Entidad reclamoE = FabricaEntidad.InstanciarReclamo(idReclamo, tituloReclamo, detalleReclamo, divisor[0], estadoReclamo, usuario);
                         Reclamo reclamo = (Reclamo)reclamoE;
-                        listaReclamos.Add(idReclamo,reclamo);
+                        listaReclamos.Add(idReclamo, reclamo);
                     }
                 }
                 cmd.Dispose();

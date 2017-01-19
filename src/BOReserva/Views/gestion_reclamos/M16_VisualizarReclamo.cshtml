@@ -24,16 +24,18 @@
 {
     foreach (var item in Model)
     {
-        BOReserva.DataAccess.Domain.Reclamo c = (BOReserva.DataAccess.Domain.Reclamo)item.Value;
-        <tr id="@c._id">
-            <td>@c._fechaReclamo</td>
-            <td>@c._tituloReclamo</td>
-            <td>@c._estadoReclamo</td>
+        <tr id="@item._id">
+            <td>@item._fechaReclamo</td>
+            <td>@item._tituloReclamo</td>
+            <td>@item._estadoReclamo</td>
             <td>
                 @*<a href="#"> <i class="fa fa-eye clasedeprueba"></i></a>*@
-                <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>
                 <a href="#" title="Ver detalle"><i class="fa fa-eye detalle"></i></a>
+                @if (item._usuario == item._usuario) 
+                { 
+                <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>
                 <a href="#" title="Eliminar"><i class="fa fa-times eliminar"></i></a>
+                }
 
             </td>
 

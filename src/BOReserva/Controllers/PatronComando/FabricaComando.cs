@@ -296,5 +296,12 @@ namespace BOReserva.Controllers.PatronComando
             return new M16_COConsultarReclamo();
 
         }
+        public static Command<String> crearM16ConsultarUsuario(Entidad e)
+        {
+
+            return new M16_COConsultarReclamoDetalle((Reclamo)e);
+
+        }
+
     }
 }
