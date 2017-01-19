@@ -17,10 +17,8 @@ namespace BOReserva.Controllers
     /// </summary>
     public class gestion_restaurantesController : Controller
     {
-
     
-
-        #region Consultar Restaurantes por ciudad
+        #region Cargar Vista Consultar Restaurantes por ciudad 
         /// <summary>
         /// Método para el acceso a la interfaz de visualización de restaurantes.
         /// </summary>
@@ -32,11 +30,11 @@ namespace BOReserva.Controllers
             if (id != 0)
             {
                
-                Entidad _lugar = FabricaEntidad.inicializarLugar(id, "");//Aqui se envia la clave foranea de lugar para realizar la busqueda
+                Entidad _lugar = FabricaEntidad.crearLugar(id, "");//Aqui se envia la clave foranea de lugar para realizar la busqueda
                 Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, BOReserva.Controllers.PatronComando.FabricaComando.comandoRestaurant.NULO, _lugar);
                 List<Entidad> restaurantes = comando.ejecutar();
-                CRestauranteModelo Restaurant = FabricaEntidad.inicializarRestaurant();
-                List<CRestauranteModelo> lista = FabricaEntidad.inicializarListaRestarant();
+                CRestauranteModelo Restaurant = FabricaEntidad.crearRestaurant();
+                List<CRestauranteModelo> lista = FabricaEntidad.crearListaRestarant();
 
                 foreach (Entidad item in restaurantes)
                 {
@@ -53,7 +51,7 @@ namespace BOReserva.Controllers
 
         #endregion
 
-        #region Agregar Restaurant
+        #region Cargar Vista Agregar Restaurant
         /// <summary>
         /// Método para el acceso a la interfaz de agregación de restaurantes.
         /// </summary>
@@ -66,6 +64,7 @@ namespace BOReserva.Controllers
         }
         #endregion
 
+        #region Cargar Vista Modificar 
         /// <summary>
         /// Método para el acceso a la interfaz de modificación de restaurantes.
         /// </summary>
@@ -76,7 +75,7 @@ namespace BOReserva.Controllers
             ViewBag.Ciudad = FabricaVista.asignarItemsComboBox(cargarComboBoxLugar(), "Id", "Name");
             ViewBag.Horarios = FabricaVista.asignarItemsComboBox(cargarComboBoxHorario(), "", "");
             
-            Entidad _restaurant = FabricaEntidad.inicializarRestaurant();
+            Entidad _restaurant = FabricaEntidad.crearRestaurant();
             ((CRestauranteModelo)_restaurant)._id = id;
             Command<Entidad> comando = (Command<Entidad>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, BOReserva.Controllers.PatronComando.FabricaComando.comandoRestaurant.CONSULTAR_ID, _restaurant);
             Entidad rest = comando.ejecutar();
@@ -92,11 +91,11 @@ namespace BOReserva.Controllers
             
             return PartialView();
         }
+        #endregion
 
- 
-
+        #region Agregar Restaurante
         /// <summary>
-        /// Método para el almacenado de restaurantes, tomando como parámetro un modelo de restaurante.
+        /// Método para el almacenado de restaurantes, tomando como parámetros los campos de la vista.
         /// </summary>
         /// <returns>Retorna un objecto tipo JsonResult que indica el éxito o fracaso de la operación.</returns>
         [HttpPost]
@@ -112,7 +111,7 @@ namespace BOReserva.Controllers
             //    string error = "Error, campo obligatorio vacío";
             //    return Json(error);
             //}
-            Entidad _restaurant = FabricaEntidad.inicializarRestaurant(Nombre, Direccion,Telefono, Descripcion, HoraIni, HoraFin, idLugar);
+            Entidad _restaurant = FabricaEntidad.crearRestaurant(Nombre, Direccion,Telefono, Descripcion, HoraIni, HoraFin, idLugar);
             Command<Boolean> comando = (Command<Boolean>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CREAR, BOReserva.Controllers.PatronComando.FabricaComando.comandoRestaurant.NULO, _restaurant);
                     
          
@@ -128,7 +127,9 @@ namespace BOReserva.Controllers
             }
             
         }
+        #endregion
 
+        #region modificar Restaurante
         /// <summary>
         /// Método para la modificación de restaurantes, tomando como parámetros los campos de la vista.
         /// </summary>
@@ -145,7 +146,7 @@ namespace BOReserva.Controllers
             //    string error = "Error, campo obligatorio vacío";
             //    return Json(error);
             //}
-            Entidad _restaurant = FabricaEntidad.inicializarRestaurant(Id,Nombre, Direccion, Telefono, Descripcion, HoraIni, HoraFin, idLugar);
+            Entidad _restaurant = FabricaEntidad.crearRestaurant(Id,Nombre, Direccion, Telefono, Descripcion, HoraIni, HoraFin, idLugar);
             Command<Boolean> comando = (Command<Boolean>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.ACTUALIZAR, BOReserva.Controllers.PatronComando.FabricaComando.comandoRestaurant.NULO, _restaurant);
 
             if (comando.ejecutar())
@@ -159,7 +160,9 @@ namespace BOReserva.Controllers
                 return Json(error);
             }
         }
+        #endregion
 
+        #region Eliminar Restaurante
         /// <summary>
         /// Método para la eliminación de restaurantes, tomando como parámetro un id de restaurante.
         /// </summary>
@@ -169,7 +172,7 @@ namespace BOReserva.Controllers
         {
             System.Diagnostics.Debug.WriteLine("Id de resturant a eliminar "+id);
 
-            Entidad _restaurant = FabricaEntidad.inicializarRestaurant();
+            Entidad _restaurant = FabricaEntidad.crearRestaurant();
             ((CRestauranteModelo)_restaurant)._id = id;
             Command<Boolean> comando = (Command<Boolean>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.ELIMINAR, BOReserva.Controllers.PatronComando.FabricaComando.comandoRestaurant.NULO, _restaurant);
             //Chequeo de campos obligatorios para el formulario
@@ -192,6 +195,7 @@ namespace BOReserva.Controllers
             }
 
         }
+        #endregion
 
         #region Cargar Combobox ciudades
         /// <summary>
@@ -202,7 +206,7 @@ namespace BOReserva.Controllers
         {
             Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.comandosVistaRestaurant(FabricaComando.comandoVista.CARGAR_LUGAR);
             List<Entidad> lugares = comando.ejecutar();
-            List<Lugar> lista = FabricaEntidad.inicializarListaLugar() ;
+            List<Lugar> lista = FabricaEntidad.crearListaLugar() ;
             Lugar lug;
             foreach (Entidad lugar in lugares)
             {
@@ -214,6 +218,7 @@ namespace BOReserva.Controllers
         }
         #endregion
 
+        #region cargar combobox Horarios
         /// <summary>
         /// Cargar combo de horarios
         /// </summary>
@@ -224,5 +229,6 @@ namespace BOReserva.Controllers
             List<String> horarios = comando.ejecutar();
             return horarios;
         }
+        #endregion
     }
 }
