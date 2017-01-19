@@ -3,26 +3,26 @@ using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using System;
 
-
 namespace BOReserva.Controllers.PatronComando
 {
     /// <summary>
     /// Comando destinado a Realizar las respectivas operaciones necesarias
-    /// para ingresar un pasajero
+    /// para agregar un boleto a la DB
     /// </summary>
-    public class M05_COAgregarPasajero : Command<String>
+    public class M05_COEliminarBoleto : Command<String>
     {
-        Pasajero _pasajero;
+        int _id;
 
-        public M05_COAgregarPasajero(Pasajero pasajero)
+
+        public M05_COEliminarBoleto(int id)
         {
-            this._pasajero = pasajero;
+            this._id = id;
         }
 
         public override String ejecutar()
         {
-            IDAO daoPasajero= FabricaDAO.instanciarDaoPasajero();
-            int test = daoPasajero.Agregar(_pasajero);
+            IDAO daoBoleto = FabricaDAO.instanciarDaoBoleto();
+            int test = daoBoleto.Eliminar(_id);
             return test.ToString();
         }
 

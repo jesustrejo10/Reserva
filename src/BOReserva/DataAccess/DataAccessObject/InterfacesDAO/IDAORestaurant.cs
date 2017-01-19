@@ -1,4 +1,5 @@
-﻿using BOReserva.DataAccess.Domain;
+﻿using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+using BOReserva.DataAccess.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,10 @@ namespace BOReserva.M10
         List<Entidad> ListarLugar();
 
         Entidad consultarRestaurantId(Entidad objeto);
+
+        bool Crear(Entidad objeto);
+        bool Modificar(Entidad objeto);
+        bool Eliminar(Entidad objeto);
+        List<Entidad> Consultar(Entidad objeto);
     }
 }

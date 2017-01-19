@@ -8,13 +8,13 @@ using System.Web;
 
 namespace BOReserva.M10.Comando.gestion_restaurantes
 {
-    public class comandoActualizarRestaurant : Command<Boolean>
+    public class M10_COActualizarRestaurant : Command<Boolean>
     {
         #region Atributos
         Entidad _objeto;
         #endregion
 
-        public comandoActualizarRestaurant(Entidad _objeto)
+        public M10_COActualizarRestaurant(Entidad _objeto)
         {
             this._objeto = _objeto;
         }

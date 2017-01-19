@@ -10,11 +10,11 @@ namespace BOReserva.Controllers.PatronComando
     /// Comando destinado a Realizar las respectivas operaciones necesarias
     /// para ingresar un pasajero
     /// </summary>
-    public class M05_COAgregarPasajero : Command<String>
+    public class M05_COModificarPasajero : Command<String>
     {
         Pasajero _pasajero;
 
-        public M05_COAgregarPasajero(Pasajero pasajero)
+        public M05_COModificarPasajero(Pasajero pasajero)
         {
             this._pasajero = pasajero;
         }
@@ -22,8 +22,8 @@ namespace BOReserva.Controllers.PatronComando
         public override String ejecutar()
         {
             IDAO daoPasajero= FabricaDAO.instanciarDaoPasajero();
-            int test = daoPasajero.Agregar(_pasajero);
-            return test.ToString();
+            Entidad test = daoPasajero.Modificar(_pasajero);
+            return "exito";
         }
 
     }
