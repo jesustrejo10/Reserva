@@ -7,19 +7,16 @@ using System.Data.SqlClient;
 
 namespace FOReserva.DataAccess.DataAccessObject.Command.MSSQL
 {
-    public class DAOMSSQLCommandExecuteQuery : IDAOCommand
+    public class DAOMSSQLCommandExecuteQuery : DAOMSSQLCommand
     {
-        private DAOMSSQL instance;
-
-        public DAOMSSQLCommandExecuteQuery(DAOMSSQL instance)
+        public DAOMSSQLCommandExecuteQuery(DAOMSSQL instance) : base(instance)
         {
-            this.instance = instance;
         }
 
-        public DAOResult doThis(params object[] args)
+        public override DAOResult doThis(params object[] args)
         {
             var query = (String)args[0];
-            var doThis = (DAO.ForEachRow)args[1];
+            var doThis = (FOReserva.DataAccess.DataAccessObject.Common.DAO.ForEachRow)args[1];
             DAOResult result = FabricDAO.CreateDAOResult();
             try
             {
