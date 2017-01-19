@@ -248,6 +248,7 @@
     <Compile Include="Controllers\PatronComando\M05\M05_COAgregarPasajero.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COAgregarRol.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COAgregarRolPermiso.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COConsultarRoles.cs" />
     <Compile Include="Controllers\PatronComando\M16_COAgregarReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOCiudad.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOBoleto.cs" />

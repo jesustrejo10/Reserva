@@ -172,6 +172,42 @@ namespace BOReserva.DataAccess.DataAccessObject
             throw new NotImplementedException();
         }
 
+        public List<Entidad> ConsultarRoles()
+        {
+            List<Entidad> listaroles;
+            Entidad rol;
+            //puedo usar Singleton
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+
+            try
+            {
+                conexion.Close();
+                conexion.Open();
+                String sql = "select r.rol_id, r.rol_nombre from Rol r";
+
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    listaroles = new List<Entidad>();
+                    while (reader.Read())
+                    {
+                        int _idRol = Int32.Parse(reader["rol_id"].ToString());
+                        String _nombreRol = reader["rol_nombre"].ToString();
+                        rol = FabricaEntidad.crearRol(_idRol, _nombreRol);
+                        listaroles.Add(rol);
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return listaroles;
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+            }
+        }
         public Entidad Consultar(int id)
         {
             throw new NotImplementedException();

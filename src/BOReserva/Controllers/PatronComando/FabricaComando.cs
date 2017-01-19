@@ -146,6 +146,7 @@ namespace BOReserva.Controllers.PatronComando
 
         #endregion
 
+        #region M13_Roles
         public static Command<String> crearM13_AgregarRol(Entidad e)
         {
 
@@ -159,6 +160,15 @@ namespace BOReserva.Controllers.PatronComando
             return new M13_COAgregarRolPermiso((Rol)e);
 
         }
+
+        public static Command<List<Entidad>> crearM13_ConsultarRoles()
+        {
+
+            return new M13_COConsultarRoles();
+
+        }
+        #endregion
+
         #region M05_Boleto
         public static Command<String> crearM05AgregarPasajero(Entidad e)
         {

@@ -160,6 +160,7 @@ namespace BOReserva.DataAccess.Domain
 
         #endregion
 
+        #region Modulo 13
         public static Entidad InstanciarRol(CRoles model)
         {
             String nombre = model.Nombre_rol;
@@ -176,6 +177,12 @@ namespace BOReserva.DataAccess.Domain
         {
             return new Permiso();
         }
+
+        public static Entidad crearRol(int id, String nombre)
+        {
+            return new Rol(id, nombre);
+        }
+        #endregion
 
     }
 }

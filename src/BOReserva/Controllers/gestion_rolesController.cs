@@ -49,16 +49,28 @@ namespace BOReserva.Controllers
         /// <returns>returna la lista de roles</returns>
         public ActionResult M13_VisualizarRol()
         {
-            manejadorSQL sql = new manejadorSQL();
-            List<CRoles> listaroles = new List<CRoles>();
+            //manejadorSQL sql = new manejadorSQL();
             try
             {
-            listaroles = sql.consultarListaroles();
-                                    }
+                //listaroles = sql.consultarListaroles();
+                List<Entidad> listaroles;
+                Command<List<Entidad>> comando = FabricaComando.crearM13_ConsultarRoles();
+                listaroles = comando.ejecutar();
+
+                foreach(Rol rol in listaroles)
+                {
+                    Console.WriteLine("hola " + rol._nombreRol);
+                }
+                return PartialView(listaroles);
+
+                //Entidad nuevoRol = FabricaEntidad.InstanciarRol(model);
+                //Command<String> comando = FabricaComando.crearM13_AgregarRol(nuevoRol);
+                //String agrego_si_no = comando.ejecutar();
+            }
             catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error insertando en la BD.";
+                String error = "Error consultando en la BD.";
                 return Json(error);
 
             }
@@ -68,7 +80,6 @@ namespace BOReserva.Controllers
                 String error = "Error desconocido, contacte con el administrador.";
                 return Json(error);
             }
-            return PartialView(listaroles);
         }
         
         /// <summary>

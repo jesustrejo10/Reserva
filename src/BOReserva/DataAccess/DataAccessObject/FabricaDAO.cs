@@ -133,10 +133,6 @@ namespace BOReserva.DataAccess.DataAccessObject
         {
             return new DAORol();
         }
-        public static DAORol instanciarDAORolPermiso()
-        {
-            return new DAORol();
-        }
         #endregion
     }
 }
