@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FOReserva.DataAccess.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,7 +9,7 @@ namespace FOReserva.Models.gestion_reserva_automovil
     /// <summary>
     /// Clase del modelo de reserva de automoviles
     /// </summary>
-    public class CReservaAutomovilModelo: Entidad
+    public class CReservaAutomovil: Entidad
     {
         #region Atributos
         public int _id { get; set; }
@@ -21,14 +22,14 @@ namespace FOReserva.Models.gestion_reserva_automovil
         public int _idLugarOri { get; set; }
         public int _idLugarDest { get; set; }
         public int _estatus { get; set; }
-        public List<CReservaAutomovilModelo> _listaReservas { get; set; }
+        public List<CReservaAutomovil> _listaReservas { get; set; }
 
         #endregion
 
         #region Constructores
-        public CReservaAutomovilModelo() { }
+        public CReservaAutomovil() { }
 
-        public CReservaAutomovilModelo(int id, string fecha_ini, string fecha_fin, string horario_ini, 
+        public CReservaAutomovil(int id, string fecha_ini, string fecha_fin, string horario_ini, 
                                        string horario_fin, int idUsuario, string idAuto, int idOri, int idDest,
                                        int estatus)
         {
@@ -44,7 +45,7 @@ namespace FOReserva.Models.gestion_reserva_automovil
             this._estatus = estatus;
         }
 
-        public CReservaAutomovilModelo(string fecha_ini, string fecha_fin, string horario_ini,
+        public CReservaAutomovil(string fecha_ini, string fecha_fin, string horario_ini,
                                string horario_fin, int idUsuario, string idAuto, int idOri, int idDest,
                                int estatus)
         {

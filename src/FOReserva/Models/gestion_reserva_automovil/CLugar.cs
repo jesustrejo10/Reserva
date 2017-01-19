@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FOReserva.DataAccess.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,7 +15,7 @@ namespace FOReserva.Models.gestion_reserva_automovil
         public int _zonaHoraria { get; set; }
         public string _abreviatura { get; set; }
         public int _idFKLugar { get; set; }
-        public List<Lugar> _listaCiudades { get; set; }
+        public List<CLugar> _listaCiudades { get; set; }
         #endregion
 
         #region Constructores

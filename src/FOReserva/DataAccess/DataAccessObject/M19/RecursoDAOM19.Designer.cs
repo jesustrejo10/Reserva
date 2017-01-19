@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FOReserva.Datos.Dao.gestion_reserva_automovil {
+namespace FOReserva.DataAccess.DataAccessObject.M19 {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace FOReserva.Datos.Dao.gestion_reserva_automovil {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FOReserva.Datos.Dao.gestion_reserva_automovil.RecursoDAOM19", typeof(RecursoDAOM19).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FOReserva.DataAccess.DataAccessObject.M19.RecursoDAOM19", typeof(RecursoDAOM19).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -117,13 +117,85 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="autAnio" xml:space="preserve">
+    <value>aut_anio</value>
+    <comment>Atributo en la tabla automovil</comment>
+  </data>
+  <data name="autCantpasajeros" xml:space="preserve">
+    <value>aut_cantpasajeros</value>
+    <comment>Atributo en la tabla automovil</comment>
+  </data>
+  <data name="autColor" xml:space="preserve">
+    <value>aut_color</value>
+    <comment>Atributo en la tabla automovil</comment>
+  </data>
+  <data name="autDisponibilidad" xml:space="preserve">
+    <value>aut_disponibilidad</value>
+    <comment>Atributo en la tabla automovil</comment>
+  </data>
+  <data name="autFabricante" xml:space="preserve">
+    <value>aut_fabricante</value>
+    <comment>Atributo en la tabla automovil</comment>
+  </data>
+  <data name="autFecharegistro" xml:space="preserve">
+    <value>aut_fecharegistro</value>
+    <comment>Atributo en la tabla automovil</comment>
+  </data>
+  <data name="autFk_ciudad" xml:space="preserve">
+    <value>aut_fk_ciudad</value>
+    <comment>Atributo en la tabla automovil</comment>
+  </data>
+  <data name="autKilometraje" xml:space="preserve">
+    <value>aut_kilometraje</value>
+    <comment>Atributo en la tabla automovil</comment>
+  </data>
+  <data name="autMatricula" xml:space="preserve">
+    <value>aut_matricula</value>
+    <comment>Atributo en la tabla automovil</comment>
+  </data>
+  <data name="autModelo" xml:space="preserve">
+    <value>aut_modelo</value>
+    <comment>Atributo en la tabla automovil</comment>
+  </data>
+  <data name="autPenalidaddiaria" xml:space="preserve">
+    <value>aut_penalidaddiaria</value>
+    <comment>Atributo en la tabla automovil</comment>
+  </data>
+  <data name="autPrecioalquiler" xml:space="preserve">
+    <value>aut_precioalquiler</value>
+    <comment>Atributo en la tabla automovil</comment>
+  </data>
+  <data name="autPreciocompra" xml:space="preserve">
+    <value>aut_preciocompra</value>
+    <comment>Atributo en la tabla automovil</comment>
+  </data>
+  <data name="autTipo" xml:space="preserve">
+    <value>aut_tipo</value>
+    <comment>Atributo en la tabla automovil</comment>
+  </data>
+  <data name="autTransmision" xml:space="preserve">
+    <value>aut_transmision</value>
+    <comment>Atributo en la tabla automovil</comment>
+  </data>
+  <data name="fk_lugar" xml:space="preserve">
+    <value>@fk_lugar</value>
+    <comment>Clave foranea lugar del Restaurant, Atributo procedimiento</comment>
+  </data>
   <data name="LugarId" xml:space="preserve">
     <value>lug_id</value>
     <comment>Lugar atributo Id clave primaria, Tabla Lugar </comment>
   </data>
+  <data name="LugarIdFk" xml:space="preserve">
+    <value>fk_lugar</value>
+    <comment>Atributo Id (Clave Foranea) tabla Lugar</comment>
+  </data>
   <data name="LugarNombre" xml:space="preserve">
     <value>lug_nombre</value>
     <comment>Lugar atributo nombre, Tabla Lugar</comment>
+  </data>
+  <data name="lug_id" xml:space="preserve">
+    <value>@lug_id</value>
+    <comment>Id de Lugar, Atributo del Procedimiento</comment>
   </data>
   <data name="procedimientoActualizar" xml:space="preserve">
     <value>M19_ActualizarReservaAutomovil</value>
@@ -137,21 +209,21 @@
     <value>M19_ConsultarReservaAutomovil</value>
     <comment>Nombre del Procedimiento Consultar en la Base de Datos tabla ReservaAutomovil</comment>
   </data>
+  <data name="procedimientoConsultarAutosCiudad" xml:space="preserve">
+    <value>M19_ConsultarReservaAutomovilPorCiudad</value>
+    <comment>Procedimiento para consultar los autos disponibles</comment>
+  </data>
   <data name="procedimientoConsultarLugar" xml:space="preserve">
     <value>M19_Consultar_Lugar</value>
     <comment>Procedimiento Consultar Lugares en la Base de Datos</comment>
   </data>
-  <data name="procedimientoEliminar" xml:space="preserve">
-    <value>M19_EliminarReservaAutomovil</value>
-    <comment>Nombre del Procedimiento Eliminar en la Base de Datos tabla ReservaAutomovil</comment>
-  </data>
-  <data name="LugarIdFk" xml:space="preserve">
-    <value>fk_lugar</value>
-    <comment>Atributo Id (Clave Foranea) tabla Lugar</comment>
-  </data>
   <data name="procedimientoConsultarReservaAutomovilId" xml:space="preserve">
     <value>M19_ConsultarReservaAutomovilId</value>
     <comment>Nombre del Procedimiento consultar en la Base de Datos tabla ReservaAutomovil por Id</comment>
+  </data>
+  <data name="procedimientoEliminar" xml:space="preserve">
+    <value>M19_EliminarReservaAutomovil</value>
+    <comment>Nombre del Procedimiento Eliminar en la Base de Datos tabla ReservaAutomovil</comment>
   </data>
   <data name="raut_estatus" xml:space="preserve">
     <value>@raut_estatus</value>
@@ -232,77 +304,5 @@
   <data name="reservaUsuarioFk" xml:space="preserve">
     <value>raut_fk_usuario</value>
     <comment>Atributo Usuario tabla Reserva Automovil</comment>
-  </data>
-  <data name="procedimientoConsultarAutosCiudad" xml:space="preserve">
-    <value>M19_ConsultarReservaAutomovilPorCiudad</value>
-    <comment>Procedimiento para consultar los autos disponibles</comment>
-  </data>
-  <data name="fk_lugar" xml:space="preserve">
-    <value>@fk_lugar</value>
-    <comment>Clave foranea lugar del Restaurant, Atributo procedimiento</comment>
-  </data>
-  <data name="lug_id" xml:space="preserve">
-    <value>@lug_id</value>
-    <comment>Id de Lugar, Atributo del Procedimiento</comment>
-  </data>
-  <data name="autAnio" xml:space="preserve">
-    <value>aut_anio</value>
-    <comment>Atributo en la tabla automovil</comment>
-  </data>
-  <data name="autCantpasajeros" xml:space="preserve">
-    <value>aut_cantpasajeros</value>
-    <comment>Atributo en la tabla automovil</comment>
-  </data>
-  <data name="autColor" xml:space="preserve">
-    <value>aut_color</value>
-    <comment>Atributo en la tabla automovil</comment>
-  </data>
-  <data name="autDisponibilidad" xml:space="preserve">
-    <value>aut_disponibilidad</value>
-    <comment>Atributo en la tabla automovil</comment>
-  </data>
-  <data name="autFabricante" xml:space="preserve">
-    <value>aut_fabricante</value>
-    <comment>Atributo en la tabla automovil</comment>
-  </data>
-  <data name="autFecharegistro" xml:space="preserve">
-    <value>aut_fecharegistro</value>
-    <comment>Atributo en la tabla automovil</comment>
-  </data>
-  <data name="autFk_ciudad" xml:space="preserve">
-    <value>aut_fk_ciudad</value>
-    <comment>Atributo en la tabla automovil</comment>
-  </data>
-  <data name="autKilometraje" xml:space="preserve">
-    <value>aut_kilometraje</value>
-    <comment>Atributo en la tabla automovil</comment>
-  </data>
-  <data name="autMatricula" xml:space="preserve">
-    <value>aut_matricula</value>
-    <comment>Atributo en la tabla automovil</comment>
-  </data>
-  <data name="autModelo" xml:space="preserve">
-    <value>aut_modelo</value>
-    <comment>Atributo en la tabla automovil</comment>
-  </data>
-  <data name="autPenalidaddiaria" xml:space="preserve">
-    <value>aut_penalidaddiaria</value>
-    <comment>Atributo en la tabla automovil</comment>
-  </data>
-  <data name="autPrecioalquiler" xml:space="preserve">
-    <value>aut_precioalquiler</value>
-    <comment>Atributo en la tabla automovil</comment>
-  </data>
-  <data name="autPreciocompra" xml:space="preserve">
-    <value>aut_preciocompra</value>
-    <comment>Atributo en la tabla automovil</comment>
-  </data>
-  <data name="autTipo" xml:space="preserve">
-    <value>aut_tipo</value>
-    <comment>Atributo en la tabla automovil</comment>
-  </data>
-  <data name="autTransmision" xml:space="preserve">
-    <value>aut_transmision</value>
-    <comment>Atributo en la tabla automovil</comment>
   </data>
 </root>

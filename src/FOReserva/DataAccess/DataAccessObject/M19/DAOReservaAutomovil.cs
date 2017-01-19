@@ -1,17 +1,18 @@
-﻿using FOReserva.Datos.Fabrica;
-using FOReserva.Datos.InterfazDao.gestion_reserva_automovil;
-using FOReserva.Models;
-using FOReserva.Models.Fabrica;
+﻿using FOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+using FOReserva.DataAccess.DataAccessObject;
+using FOReserva.DataAccess.Domain;
+using FOReserva.DataAccess.Model;
 using FOReserva.Models.gestion_reserva_automovil;
+using FOReserva.DataAccess.DataAccessObject.M19;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Web;
+using System.Data;
 
-namespace FOReserva.Datos.Dao.gestion_reserva_automovil
+namespace FOReserva.DataAccess.DataAccessObject.M19
 {
-    public class ReservaAutomovilDAO : DAO, IReservaAutomovilDAO
+    public class DAOReservaAutomovil : DAO, IDAOReservaAutomovil
     {
 
         /// <summary>
@@ -19,10 +20,10 @@ namespace FOReserva.Datos.Dao.gestion_reserva_automovil
         /// </summary>
         /// <param name="_restaurant">Variable tipo en entidad que luego debe ser casteada a su tipo para metodos get y set</param>
         /// <returns>Lista de Entidades, ya que se devuelve mas de una fila de la BD, se debe castear a su respectiva clase en el Modelo</returns>
-        
-        public List<Entidad>Consultar(Entidad _usuario)
+
+        public List<Entidad> Consultar(Entidad _usuario)
         {
-            List<Parametro> parametro = FabricaDatosSql.asignarListaDeParametro();
+            List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
             List<Entidad> listaDeReservas = FabricaEntidad.asignarListaDeEntidades();
             DataTable tablaDeDatos;
             Entidad reserva;
@@ -30,13 +31,13 @@ namespace FOReserva.Datos.Dao.gestion_reserva_automovil
 
             //Atributos tabla Reserva Automovil
             int _id;
-            string _fecha_ini;  
-            string _fecha_fin; 
+            string _fecha_ini;
+            string _fecha_fin;
             string _hora_ini;
             string _hora_fin;
             int _idUsuario;
-            string _idAutomovil; 
-            int _idLugarOri; 
+            string _idAutomovil;
+            int _idLugarOri;
             int _idLugarDest;
             int _estatus;
 
@@ -45,9 +46,9 @@ namespace FOReserva.Datos.Dao.gestion_reserva_automovil
                 //Aqui se asignan los valores que recibe el procedimieto para realizar el select, se repite tantas veces como atributos
                 //se requiera en el where, para este caso solo el ID de Lugar @lug_id (parametro que recibe el store procedure)
                 //se coloca true en Input 
-                parametro.Add(FabricaDatosSql.asignarParametro(RecursoDAOM19.raut_fk_usuario, SqlDbType.Int, usuario._id.ToString(), true, false));
+                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fk_usuario, SqlDbType.Int, usuario._id.ToString(), false));
 
-                tablaDeDatos = EjecutarStoredProcedure(parametro, RecursoDAOM19.procedimientoConsultar);
+                tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM19.procedimientoConsultar,parametro);
 
                 foreach (DataRow filareserva in tablaDeDatos.Rows)
                 {
@@ -61,8 +62,8 @@ namespace FOReserva.Datos.Dao.gestion_reserva_automovil
                     _idLugarOri = int.Parse(filareserva[RecursoDAOM19.reservaCiudadEntFk].ToString());
                     _idLugarDest = int.Parse(filareserva[RecursoDAOM19.reservaCiudadDevFk].ToString());
                     _estatus = int.Parse(filareserva[RecursoDAOM19.reservaEstatus].ToString());
-                    reserva = FabricaEntidad.inicializarReserva(_id,_fecha_ini, _fecha_fin, _hora_ini, _hora_fin,
-                                                                _idUsuario, _idAutomovil,_idLugarOri, _idLugarDest,
+                    reserva = FabricaEntidad.inicializarReserva(_id, _fecha_ini, _fecha_fin, _hora_ini, _hora_fin,
+                                                                _idUsuario, _idAutomovil, _idLugarOri, _idLugarDest,
                                                                 _estatus);
                     listaDeReservas.Add(reserva);
                 }
@@ -84,8 +85,8 @@ namespace FOReserva.Datos.Dao.gestion_reserva_automovil
         public Entidad consultarReservaId(Entidad _reserva)
         {
             //Se castea de tipo Entidad a tipo Reserva Automovil
-            CReservaAutomovilModelo resv = (CReservaAutomovilModelo)_reserva;
-            List<Parametro> listaParametro = FabricaDatosSql.asignarListaDeParametro();
+            CReservaAutomovil resv = (CReservaAutomovil)_reserva;
+            List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
 
             int idReserva;
             String fechaIni;
@@ -102,10 +103,10 @@ namespace FOReserva.Datos.Dao.gestion_reserva_automovil
             try
             {
                 //Aqui se asignan los valores que recibe el procedimieto para realizar el select
-                listaParametro.Add(FabricaDatosSql.asignarParametro(RecursoDAOM19.raut_id, SqlDbType.Int, resv._id.ToString(), true, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_id, SqlDbType.Int, resv._id.ToString(),false));
 
                 //Se devuelve la fila del restaurante consultado segun el Id, para este caso solo se devuelve una fila
-                DataTable filareserva = EjecutarStoredProcedure(listaParametro, RecursoDAOM19.procedimientoConsultarReservaAutomovilId);
+                DataTable filareserva = EjecutarStoredProcedureTuplas(RecursoDAOM19.procedimientoConsultarReservaAutomovilId,listaParametro);
 
                 //Se guarda la fila devuelta de la base de datos
                 DataRow Fila = filareserva.Rows[0];
@@ -142,7 +143,7 @@ namespace FOReserva.Datos.Dao.gestion_reserva_automovil
         /// <returns>Lista de Entidades, ya que se devuelve mas de una fila de la BD, se debe castear a su respectiva clase en el Modelo</returns>
         public List<Entidad> ConsultarAutosPorIdCiudad(Entidad _lugar)
         {
-            List<Parametro> parametro = FabricaDatosSql.asignarListaDeParametro();
+            List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
             List<Entidad> listaDeAutomovil = FabricaEntidad.asignarListaDeEntidades();
             DataTable tablaDeDatos;
             Entidad automovil;
@@ -168,10 +169,10 @@ namespace FOReserva.Datos.Dao.gestion_reserva_automovil
             try
             {
                 //Aqui se asignan los valores que recibe el procedimiento para realizar el select
-                parametro.Add(FabricaDatosSql.asignarParametro(RecursoDAOM19.raut_fk_ciudad_entrega, SqlDbType.Int, lugar._id.ToString(), true, false));
+                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fk_ciudad_entrega, SqlDbType.Int, lugar._id.ToString(), false));
 
                 //el metodo Ejecutar Store procedure recibe la lista de parametros como el query, este ultimo es el nombre del procedimietno en la BD
-                tablaDeDatos = EjecutarStoredProcedure(parametro, RecursoDAOM19.procedimientoConsultarAutosCiudad);
+                tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM19.procedimientoConsultarAutosCiudad,parametro);
 
                 foreach (DataRow filaautomovil in tablaDeDatos.Rows)
                 {
@@ -209,20 +210,20 @@ namespace FOReserva.Datos.Dao.gestion_reserva_automovil
         /// <returns>Se retorna true si fue exitoso</returns>
         public bool Crear(Entidad _reserva)
         {
-            CReservaAutomovilModelo res = (CReservaAutomovilModelo)_reserva;
-            List<Parametro> listaParametro = FabricaDatosSql.asignarListaDeParametro();
+            CReservaAutomovil res = (CReservaAutomovil)_reserva;
+            List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
 
             try
             {
-                listaParametro.Add(FabricaDatosSql.asignarParametro(RecursoDAOM19.raut_fecha_ini, SqlDbType.VarChar, res._fecha_ini, false, false));
-                listaParametro.Add(FabricaDatosSql.asignarParametro(RecursoDAOM19.raut_fecha_fin, SqlDbType.VarChar, res._fecha_fin, false, false));
-                listaParametro.Add(FabricaDatosSql.asignarParametro(RecursoDAOM19.raut_hora_ini, SqlDbType.VarChar, res._hora_ini, false, false));
-                listaParametro.Add(FabricaDatosSql.asignarParametro(RecursoDAOM19.raut_hora_fin, SqlDbType.VarChar, res._hora_fin, false, false));
-                listaParametro.Add(FabricaDatosSql.asignarParametro(RecursoDAOM19.raut_fk_usuario, SqlDbType.Int, res._idUsuario.ToString(), false, false));
-                listaParametro.Add(FabricaDatosSql.asignarParametro(RecursoDAOM19.raut_fk_automovil, SqlDbType.VarChar, res._idAutomovil, false, false));
-                listaParametro.Add(FabricaDatosSql.asignarParametro(RecursoDAOM19.raut_fk_ciudad_devolucion, SqlDbType.Int, res._idLugarDest.ToString(), false, false));
-                listaParametro.Add(FabricaDatosSql.asignarParametro(RecursoDAOM19.raut_fk_ciudad_entrega, SqlDbType.Int, res._idLugarOri.ToString(), false, false));
-                listaParametro.Add(FabricaDatosSql.asignarParametro(RecursoDAOM19.raut_estatus, SqlDbType.Int, res._estatus.ToString(), false, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fecha_ini, SqlDbType.VarChar, res._fecha_ini, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fecha_fin, SqlDbType.VarChar, res._fecha_fin, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_hora_ini, SqlDbType.VarChar, res._hora_ini, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_hora_fin, SqlDbType.VarChar, res._hora_fin, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fk_usuario, SqlDbType.Int, res._idUsuario.ToString(), false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fk_automovil, SqlDbType.VarChar, res._idAutomovil, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fk_ciudad_devolucion, SqlDbType.Int, res._idLugarDest.ToString(), false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fk_ciudad_entrega, SqlDbType.Int, res._idLugarOri.ToString(), false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_estatus, SqlDbType.Int, res._estatus.ToString(),false));
 
                 EjecutarStoredProcedure(RecursoDAOM19.procedimientoAgregar, listaParametro);
             }
@@ -244,12 +245,12 @@ namespace FOReserva.Datos.Dao.gestion_reserva_automovil
         /// <returns>Retorna true si fue exitoso</returns>
         public bool Eliminar(Entidad _reserva)
         {
-            CReservaAutomovilModelo res = (CReservaAutomovilModelo)_reserva;
-            List<Parametro> parametro = FabricaDatosSql.asignarListaDeParametro();
+            CReservaAutomovil res = (CReservaAutomovil)_reserva;
+            List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
 
             try
-            {   
-                parametro.Add(FabricaDatosSql.asignarParametro(RecursoDAOM19.raut_id, SqlDbType.Int, res._id.ToString(), true, false));
+            {
+                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_id, SqlDbType.Int, res._id.ToString(),false));
                 EjecutarStoredProcedure(RecursoDAOM19.procedimientoEliminar, parametro);
             }
             catch (Exception)
@@ -266,7 +267,7 @@ namespace FOReserva.Datos.Dao.gestion_reserva_automovil
         /// <returns>Se retorna una lista de entidad que luego debe ser casteada a su respectiva clase en el Modelo</returns>
         public List<Entidad> ListarLugar()
         {
-            List<Parametro> parametro = FabricaDatosSql.asignarListaDeParametro();
+            List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
             List<Entidad> listaDeLugares = FabricaEntidad.asignarListaDeEntidades();
             Entidad lugar;
             DataTable tablaDeDatos;
@@ -275,7 +276,7 @@ namespace FOReserva.Datos.Dao.gestion_reserva_automovil
 
             try
             {
-                tablaDeDatos = EjecutarStoredProcedure(parametro, RecursoDAOM19.procedimientoConsultarLugar);
+                tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM19.procedimientoConsultarLugar,parametro);
                 listaDeLugares.Add(FabricaEntidad.inicializarLugar(0, ""));
 
                 foreach (DataRow filaLugar in tablaDeDatos.Rows)
@@ -302,21 +303,21 @@ namespace FOReserva.Datos.Dao.gestion_reserva_automovil
         /// <returns>Se retorna true de ser exitoso</returns>
         public bool Modificar(Entidad _reserva)
         {
-            CReservaAutomovilModelo resv = (CReservaAutomovilModelo)_reserva;
-            List<Parametro> listaParametro = FabricaDatosSql.asignarListaDeParametro();
+            CReservaAutomovil resv = (CReservaAutomovil)_reserva;
+            List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
 
             try
             {
-                listaParametro.Add(FabricaDatosSql.asignarParametro(RecursoDAOM19.raut_id, SqlDbType.Int, resv._id.ToString(), true, false));
-                listaParametro.Add(FabricaDatosSql.asignarParametro(RecursoDAOM19.raut_fecha_ini, SqlDbType.VarChar, resv._fecha_ini, false, false));
-                listaParametro.Add(FabricaDatosSql.asignarParametro(RecursoDAOM19.raut_fecha_fin, SqlDbType.VarChar, resv._fecha_fin, false, false));
-                listaParametro.Add(FabricaDatosSql.asignarParametro(RecursoDAOM19.raut_hora_ini, SqlDbType.VarChar, resv._hora_ini, false, false));
-                listaParametro.Add(FabricaDatosSql.asignarParametro(RecursoDAOM19.raut_hora_fin, SqlDbType.VarChar, resv._hora_fin, false, false));
-                listaParametro.Add(FabricaDatosSql.asignarParametro(RecursoDAOM19.raut_fk_usuario, SqlDbType.Int, resv._idUsuario.ToString(), false, false));
-                listaParametro.Add(FabricaDatosSql.asignarParametro(RecursoDAOM19.raut_fk_automovil, SqlDbType.VarChar, resv._idAutomovil, false, false));
-                listaParametro.Add(FabricaDatosSql.asignarParametro(RecursoDAOM19.raut_fk_ciudad_devolucion, SqlDbType.Int, resv._idLugarOri.ToString(), false, false));
-                listaParametro.Add(FabricaDatosSql.asignarParametro(RecursoDAOM19.raut_fk_ciudad_entrega, SqlDbType.Int, resv._idLugarDest.ToString(), false, false));
-                listaParametro.Add(FabricaDatosSql.asignarParametro(RecursoDAOM19.raut_estatus, SqlDbType.Int, resv._estatus.ToString(), false, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_id, SqlDbType.Int, resv._id.ToString(), false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fecha_ini, SqlDbType.VarChar, resv._fecha_ini, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fecha_fin, SqlDbType.VarChar, resv._fecha_fin, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_hora_ini, SqlDbType.VarChar, resv._hora_ini, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_hora_fin, SqlDbType.VarChar, resv._hora_fin, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fk_usuario, SqlDbType.Int, resv._idUsuario.ToString(), false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fk_automovil, SqlDbType.VarChar, resv._idAutomovil, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fk_ciudad_devolucion, SqlDbType.Int, resv._idLugarOri.ToString(), false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fk_ciudad_entrega, SqlDbType.Int, resv._idLugarDest.ToString(), false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_estatus, SqlDbType.Int, resv._estatus.ToString(),false));
 
                 EjecutarStoredProcedure(RecursoDAOM19.procedimientoActualizar, listaParametro);
             }
@@ -328,5 +329,27 @@ namespace FOReserva.Datos.Dao.gestion_reserva_automovil
 
             return true;
         }
+
+        #region Metodos No implementados
+        Entidad IDAO.Modificar(Entidad e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Dictionary<int, Entidad> ConsultarTodos()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Agregar(Entidad e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Entidad Consultar(int id)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
     }
 }

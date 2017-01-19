@@ -214,22 +214,12 @@
     <Compile Include="DataAccess\DataAccessObject\DAOReclamo.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\registro_autenticacionController.cs" />
-    <Compile Include="Datos\Columna.cs" />
-    <Compile Include="Datos\DAO.cs" />
-    <Compile Include="Datos\Dao\gestion_reserva_automovil\RecursoDAOM19.Designer.cs">
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReservaAutomovil.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M19\DAOReservaAutomovil.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M19\RecursoDAOM19.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
       <DependentUpon>RecursoDAOM19.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Datos\Dao\gestion_reserva_automovil\ReservaAutomovilDAO.cs" />
-    <Compile Include="Datos\Fabrica\FabricaDatosSql.cs" />
-    <Compile Include="Datos\IDAO.cs" />
-    <Compile Include="Datos\InterfazDao\gestion_reserva_automovil\IReservaAutomovilDAO.cs" />
-    <Compile Include="Datos\Parametro.cs" />
-    <Compile Include="Datos\RecursosBaseDeDatos1.Designer.cs">
-      <DependentUpon>RecursosBaseDeDatos.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="DataAccess\DataAccessObject\Command\MSSQL\DAOMSSQLCommandCloseConnection.cs" />
     <Compile Include="DataAccess\DataAccessObject\Command\MSSQL\DAOMSSQLCommand.cs" />
@@ -283,11 +273,9 @@
     <Compile Include="Models\Diarios\CFoto_Diario.cs" />
     <Compile Include="Models\Diarios\CLugar.cs" />
     <Compile Include="Models\Diarios\CPuntuacion.cs" />
-    <Compile Include="Models\Entidad.cs" />
-    <Compile Include="Models\Fabrica\FabricaEntidad.cs" />
     <Compile Include="Models\gestion_reserva_automovil\CAutomovil.cs" />
     <Compile Include="Models\gestion_reserva_automovil\CLugar.cs" />
-    <Compile Include="Models\gestion_reserva_automovil\CReservaAutomovilModelo.cs" />
+    <Compile Include="Models\gestion_reserva_automovil\CReservaAutomovil.cs" />
     <Compile Include="Models\gestion_reserva_automovil\CUsuario.cs" />
     <Compile Include="Models\Itinerario\CItinerario.cs" />
     <Compile Include="Models\Itinerario\Cvista_Itinerario.cs" />
@@ -1628,7 +1616,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
-    <Content Include="Datos\Dao\gestion_reserva_automovil\Scripts de Procedures M19.sql" />
+    <Content Include="DataAccess\DataAccessObject\M19\Scripts de Procedures M19.sql" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\assets\fonts\et-line.eot" />
@@ -3265,13 +3253,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Datos\Dao\gestion_reserva_automovil\RecursoDAOM19.resx">
+    <EmbeddedResource Include="DataAccess\DataAccessObject\M19\RecursoDAOM19.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoDAOM19.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Datos\RecursosBaseDeDatos.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>RecursosBaseDeDatos1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
