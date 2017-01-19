@@ -12,10 +12,9 @@ namespace BOReserva.DataAccess.Domain
         public String _detalleReclamo { get; set; }
         public String _fechaReclamo { get; set; }
         public String _estadoReclamo { get; set; }
+        public int _usuario { get; set; }
 
-        public Reclamo() 
-        {
-        }
+        public Reclamo() {}
         /// <summary>
         /// Constructor de la clase
         /// </summary>
@@ -23,12 +22,13 @@ namespace BOReserva.DataAccess.Domain
         /// <param name="detalleReclamo"></param>
         /// <param name="fechaReclamo"></param>
         /// <param name="estadoReclamo"></param>
-        public Reclamo(String tituloReclamo, String detalleReclamo, String fechaReclamo, String estadoReclamo)
+        public Reclamo(String tituloReclamo, String detalleReclamo, String fechaReclamo, String estadoReclamo, int usuario)
         {           
             this._tituloReclamo = tituloReclamo;
             this._detalleReclamo = detalleReclamo;
             this._fechaReclamo = fechaReclamo;
             this._estadoReclamo = estadoReclamo;
+            this._usuario = usuario;
         }
        
     }

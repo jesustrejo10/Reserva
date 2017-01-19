@@ -12,6 +12,7 @@ namespace BOReserva.Controllers
 {
     public class gestion_reclamosController : Controller
     {
+        
         //
         // GET: /gestion_reclamos/
       public ActionResult M16_AgregarReclamo()
