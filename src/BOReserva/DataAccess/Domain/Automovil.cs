@@ -73,6 +73,8 @@ namespace BOReserva.Models.gestion_automoviles
             _pais = pais;
             _ciudad = ciudad;
         }
+
+        public Automovil() { }
         #endregion
 
         #region Metodos
