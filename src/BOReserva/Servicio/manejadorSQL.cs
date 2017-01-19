@@ -1619,6 +1619,7 @@ namespace BOReserva.Servicio
         {
             try
             {
+                /*
                 conexion = new SqlConnection(stringDeConexion);
                 conexion.Open();
                 String sql = "INSERT INTO Automovil VALUES ('" + vehiculo._matricula + "', '" + vehiculo._modelo + "', '" + vehiculo._fabricante + "', " + vehiculo._anio + ", " + vehiculo._kilometraje + ", " + vehiculo._cantpasajeros + ", '" + vehiculo._tipovehiculo +
@@ -1628,6 +1629,7 @@ namespace BOReserva.Servicio
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
                 conexion.Close();
+                */
                 return "1";
             }
             catch (SqlException ex)
@@ -1652,6 +1654,7 @@ namespace BOReserva.Servicio
         {
             try
             {
+                /*
                 conexion = new SqlConnection(stringDeConexion);
                 conexion.Open();
                 String sql = "UPDATE Automovil SET aut_kilometraje = " + vehiculo._kilometraje + ", aut_tipovehiculo = '" + vehiculo._tipovehiculo +
@@ -1661,6 +1664,7 @@ namespace BOReserva.Servicio
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
                 conexion.Close();
+                */
                 return "1";
             }
             catch (SqlException ex)
