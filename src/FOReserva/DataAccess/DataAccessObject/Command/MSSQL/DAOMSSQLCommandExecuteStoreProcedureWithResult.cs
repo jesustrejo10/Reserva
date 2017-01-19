@@ -13,11 +13,11 @@ namespace FOReserva.DataAccess.DataAccessObject.Command.MSSQL
         {
         }
 
-        public new DAOResult doThis(params object[] args)
+        public override DAOResult doThis(params object[] args)
         {
             var name = (string)args[0];
             var parameters = (object)args[1];
-            var doThis = (DAO.ForEachRow)args[2];
+            var doThis = (FOReserva.DataAccess.DataAccessObject.Common.DAO.ForEachRow)args[2];
             DAOResult result = FabricDAO.CreateDAOResult();
             try
             {
