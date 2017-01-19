@@ -1,12 +1,7 @@
-﻿using BOReserva.Controllers.PatronComando;
-using BOReserva.Controllers.PatronComando.M09;
 using BOReserva.DataAccess.Domain;
 using BOReserva.M10.Comando.gestion_restaurantes;
-using BOReserva.Controllers.PatronComando;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace BOReserva.Controllers.PatronComando
 {
@@ -189,6 +184,40 @@ namespace BOReserva.Controllers.PatronComando
         public static Command<String> modificarM05modificarPasajero(Entidad e)
         {
             return new M05_COModificarPasajero((Pasajero)e);
+        }
+
+        #endregion
+
+        #region M08_Automoviles
+
+        public static Command<String> activarAutomovil(Entidad e)
+        {
+            return new M08.M08_COActivarAutomovil(e);
+        }
+
+        public static Command<String> agregarAutomovil(Entidad e)
+        {
+            return new M08.M08_COAgregarAutomovil(e);
+        }
+
+        public static Command<String> buscarAutomovil(Entidad e)
+        {
+            return new M08.M08_COBuscarAutomovil(e);
+        }
+
+        public static Command<String> desactivarAutomovil(Entidad e)
+        {
+            return new M08.M08_CODesactivarAutomovil(e);
+        }
+
+        public static Command<String> listarAutomovil(Entidad e)
+        {
+            return new M08.M08_COListarAutomovil(e);
+        }
+
+        public static Command<String> modificarAutomovil(Entidad e)
+        {
+            return new M08.M08_COModificarAutomovil(e);
         }
 
         #endregion
