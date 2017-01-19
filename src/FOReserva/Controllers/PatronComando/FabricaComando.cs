@@ -13,6 +13,8 @@ namespace FOReserva.Controllers.PatronComando
     /// </summary>
     public class FabricaComando
     {
+        #region M16 GestionReclamos
 
+        #endregion
     }
 }
