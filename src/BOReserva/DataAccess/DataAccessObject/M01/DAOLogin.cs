@@ -1,4 +1,5 @@
 ﻿using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+using BOReserva.DataAccess.Domain;
 using BOReserva.Models.gestion_seguridad_ingreso;
 using BOReserva.Servicio;
 using System;
@@ -19,10 +20,12 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
         {
             this.stringDeConexion = bd.stringDeConexions;
         }
+        #region Métodos por convertir
 
         public Cgestion_seguridad_ingreso UsuarioEnBD(String usuario)
         {
             String usuarioBD = "", nombreBD = "", apellidoBD = "", claveBD = "", statusBD = "";
+            int idUsuario = 0, rolUsuario = 0;
             try
             {
                 //Inicializo la conexion con el string de conexion
@@ -31,7 +34,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
                 conexion.Open();
                 //SqlCommand cmd = new SqlCommand("Select usu_correo, usu_nombre, usu_apellido ,usu_contraseña, usu_activo from Usuario where usu_correo like @usu_correo AND usu_fk_rol IS NOT NULL", conexion);
                 //cmd.CommandType = CommandType.StoredProcedure;
-                SqlCommand cmd = new SqlCommand("Select usu_correo, usu_nombre, usu_apellido ,usu_contraseña, usu_activo from Usuario where usu_correo like @usu_correo AND usu_fk_rol NOT BETWEEN 2 AND 3", conexion);
+                SqlCommand cmd = new SqlCommand("Select usu_correo, usu_nombre, usu_apellido ,usu_contraseña, usu_activo, usu_id, usu_fk_rol from Usuario where usu_correo like @usu_correo AND usu_fk_rol NOT BETWEEN 2 AND 3", conexion);
                 cmd.Parameters.AddWithValue("@usu_correo", usuario);
                 SqlDataReader lector = cmd.ExecuteReader();
                 while (lector.Read())
@@ -44,11 +47,13 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
                     System.Diagnostics.Debug.WriteLine("Correo " + usuarioBD + " contrasena " + claveBD);
 
                     statusBD = lector.GetString(4);
+                    idUsuario = lector.GetInt32(5);
+                    rolUsuario = lector.GetInt32(6);
 
                 }
                 lector.Close();
                 conexion.Close();
-                return new Cgestion_seguridad_ingreso(usuarioBD, claveBD, nombreBD, apellidoBD, statusBD);
+                return new Cgestion_seguridad_ingreso(usuarioBD, claveBD, nombreBD, apellidoBD, statusBD, idUsuario, rolUsuario);
             }
             catch (SqlException e)
             {
@@ -60,7 +65,6 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
                 return null;
             }
         }
-
 
         public Boolean BloquearUsuario(String usuario)
         {
@@ -229,5 +233,31 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
                 return -1;
             }
         }
+
+        #endregion
+
+        #region Métodos por implementar
+
+        public int Agregar(Entidad e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Entidad Modificar(Entidad e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Entidad Consultar(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Entidad Consultar(Entidad e)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }
