@@ -1,8 +1,10 @@
 ﻿using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+using BOReserva.DataAccess.DataAccessObject.M08;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
@@ -25,7 +27,7 @@ namespace BOReserva.DataAccess.DataAccessObject
         /// <returns>Se retorna true si fue exitoso</returns>
         public bool Agregar(Entidad _automovil)
         {
-            CRestauranteModelo rest = (CRestauranteModelo)_restaurant;
+            Automovil domain = (Automovil)_automovil;
             List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
 
             try
@@ -37,17 +39,17 @@ namespace BOReserva.DataAccess.DataAccessObject
                 // la tabla restaurant contiene siete columna incluyendo la clave foranea lugar por lo cual son siete lineas de codigo
                 //a;go importante de destacar es que si en la declaracion del store procedures el atributo varchar o cualquier otro
                 //que requiera longitud e.g. Varchar(50) solo se inserta el primer caracter, ya que solo por defecto la longitud es 1
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_nombre, SqlDbType.VarChar, rest.nombre, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_direccion, SqlDbType.VarChar, rest.direccion, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_descripcion, SqlDbType.VarChar, rest.descripcion, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_hora_apertura, SqlDbType.VarChar, rest.horarioApertura, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_hora_cierre, SqlDbType.VarChar, rest.horarioCierre, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_telefono, SqlDbType.VarChar, rest.Telefono, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.fk_lugar, SqlDbType.Int, rest.idLugar.ToString(), false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.rst_nombre,        SqlDbType.VarChar, domain.nombre,             false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.rst_direccion,     SqlDbType.VarChar, domain.direccion,          false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.rst_descripcion,   SqlDbType.VarChar, domain.descripcion,        false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.rst_hora_apertura, SqlDbType.VarChar, domain.horarioApertura,    false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.rst_hora_cierre,   SqlDbType.VarChar, domain.horarioCierre,      false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.rst_telefono,      SqlDbType.VarChar, domain.Telefono,           false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.fk_lugar,          SqlDbType.Int,     domain.idLugar.ToString(), false));
                 //el metodo Ejecutar Store procedure recibe la lista de parametros como el query, este ultimo es el nombre del procedimietno en la BD
                 //e.g. dbo.M10_AgregarRestarurante, importante ese nombre se coloco en un archivo de recursos por efectos practicos, pero se puede 
                 //como String "dbo.M10_AgregarRestarurante"
-                EjecutarStoredProcedure(RecursoDAOM10.procedimientoAgregar, listaParametro);
+                EjecutarStoredProcedure(RecursoDAOM08.procedimientoAgregarAutomovil, listaParametro);
             }
             catch (Exception)
             {

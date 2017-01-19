@@ -13,23 +13,23 @@ namespace BOReserva.Models.gestion_automoviles
     /// </summary>
     public class Automovil : Entidad
     {
-        #region Atributos Getter and Setter
-        private String _matricula { get; set; }
-        private String _modelo { get; set; }
-        private String _fabricante { get; set; }
-        private int _anio { get; set; }
-        private String _tipovehiculo { get; set; }
-        private double _kilometraje { get; set; }
-        private int _cantpasajeros { get; set; }
-        private double _preciocompra { get; set; }
-        private double _precioalquiler { get; set; }
-        private double _penalidaddiaria { get; set; }
-        private DateTime _fecharegistro { get; set; }
-        private String _color { get; set; }
-        private int _disponibilidad { get; set; }
-        private String _transmision { get; set; }
-        private String _pais { get; set; }
-        private String _ciudad { get; set; }
+        #region Atributos
+        private String _matricula;
+        private String _modelo;
+        private String _fabricante;
+        private int _anio;
+        private String _tipovehiculo;
+        private double _kilometraje;
+        private int _cantpasajeros;
+        private double _preciocompra;
+        private double _precioalquiler;
+        private double _penalidaddiaria;
+        private DateTime _fecharegistro;
+        private String _color;
+        private int _disponibilidad;
+        private String _transmision;
+        private String _pais;
+        private String _ciudad;
         #endregion
 
         #region Constructores
@@ -72,6 +72,104 @@ namespace BOReserva.Models.gestion_automoviles
             _transmision = transmision;
             _pais = pais;
             _ciudad = ciudad;
+        }
+        #endregion
+
+        #region Get y Set
+        public String matricula
+        {
+            get { return this._matricula; }
+            set { this._matricula = value; }
+        }
+
+        public String modelo
+        {
+            get { return this._modelo; }
+            set { this._modelo = value; }
+        }
+
+        public String fabricante
+        {
+            get { return this._fabricante; }
+            set { this._fabricante = value; }
+        }
+
+        public int anio
+        {
+            get { return this._anio; }
+            set { this._anio = value; }
+        }
+
+        public String tipovehiculo
+        {
+            get { return this._tipovehiculo; }
+            set { this._tipovehiculo = value; }
+        }
+
+        public double kilometraje
+        {
+            get { return this._kilometraje; }
+            set { this._kilometraje = value; }
+        }
+
+        public int cantpasajeros
+        {
+            get { return this._cantpasajeros; }
+            set { this._cantpasajeros = value; }
+        }
+
+        public double preciocompra
+        {
+            get { return this._preciocompra; }
+            set { this._preciocompra = value; }
+        }
+ 
+        public double precioalquiler
+        {
+            get { return this._precioalquiler; }
+            set { this._precioalquiler = value; }
+        }
+
+        public double penalidaddiaria
+        {
+            get { return this._penalidaddiaria; }
+            set { this._penalidaddiaria = value; }
+        }
+
+        public DateTime fecharegistro
+        {
+            get { return this._fecharegistro; }
+            set { this._fecharegistro = value; }
+        }
+
+        public String color
+        {
+            get { return this._color; }
+            set { this._color = value; }
+        }
+
+        public int disponibilidad
+        {
+            get { return this._disponibilidad; }
+            set { this._disponibilidad = value; }
+        }
+        
+        public String transmision
+        {
+            get { return this._transmision; }
+            set { this._transmision = value; }
+        }
+
+        public String pais
+        {
+            get { return this._pais; }
+            set { this._pais = value; }
+        }
+
+        public String ciudad
+        {
+            get { return this._ciudad; }
+            set { this._ciudad = value; }
         }
         #endregion
 

@@ -117,27 +117,119 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="fk_lugar" xml:space="preserve">
-    <value>@fk_lugar</value>
-    <comment>Clave foranea lugar del Restaurant, Atributo procedimiento</comment>
+  <data name="anio" xml:space="preserve">
+    <value>aut_anio</value>
+    <comment>Atributo - año de lanzamiento del automovil</comment>
   </data>
-  <data name="LugarId" xml:space="preserve">
-    <value>lug_id</value>
-    <comment>Lugar atributo Id clave primaria, Tabla Lugar </comment>
+  <data name="aut_anio" xml:space="preserve">
+    <value>@aut_anio</value>
+    <comment>Procedimiento Atributo - año de lanzamiento del automovil</comment>
   </data>
-  <data name="LugarIdFk" xml:space="preserve">
-    <value>fk_lugar</value>
-    <comment>Atributo Id (Clave Foranea) tabla Lugar</comment>
+  <data name="aut_cantpasajero" xml:space="preserve">
+    <value>@aut_cantpasajero</value>
+    <comment>Procedimiento Atributo - cantidad de pasajeros del automovil</comment>
   </data>
-  <data name="LugarNombre" xml:space="preserve">
-    <value>lug_nombre</value>
-    <comment>Lugar atributo nombre, Tabla Lugar</comment>
+  <data name="aut_color" xml:space="preserve">
+    <value>@aut_color</value>
+    <comment>Procedimiento Atributo - colo de automovil</comment>
   </data>
-  <data name="lug_id" xml:space="preserve">
-    <value>@lug_id</value>
-    <comment>Id de Lugar, Atributo del Procedimiento</comment>
+  <data name="aut_disponibilida" xml:space="preserve">
+    <value>@aut_disponibilida</value>
+    <comment>Procedimiento Atributo - disponibilidad del automovil</comment>
   </data>
-  <data name="procedimientoAgregar" xml:space="preserve">
+  <data name="aut_fabricante" xml:space="preserve">
+    <value>@aut_fabricante</value>
+    <comment>Procedimiento Atributo - fabricante / marca del automovil</comment>
+  </data>
+  <data name="aut_fecharegistro" xml:space="preserve">
+    <value>@aut_fecharegistro</value>
+    <comment>Procedimiento Atributo - fecha de registro </comment>
+  </data>
+  <data name="aut_fk_ciudad" xml:space="preserve">
+    <value>@aut_fk_ciudad</value>
+    <comment>Procedimiento Atributo - ciudad en la que se encuentra el automovil</comment>
+  </data>
+  <data name="aut_kilometraje" xml:space="preserve">
+    <value>@aut_kilometraje</value>
+    <comment>Procedimiento Atributo - kilomertraje que posee el automovil</comment>
+  </data>
+  <data name="aut_matricula" xml:space="preserve">
+    <value>@aut_matricula</value>
+    <comment>Procedimiento Atributo - matricula del automovil</comment>
+  </data>
+  <data name="aut_modelo" xml:space="preserve">
+    <value>@aut_modelo</value>
+    <comment>Procedimiento Atributo - modelo del automovil</comment>
+  </data>
+  <data name="aut_penalidaddiaria" xml:space="preserve">
+    <value>@aut_penalidaddiaria</value>
+    <comment>Procedimiento Atributo - penalidad diaria por retraso en la entrega del automovil</comment>
+  </data>
+  <data name="aut_precioalquiler" xml:space="preserve">
+    <value>@aut_precioalquiler</value>
+    <comment>Procedimiento Atributo - precio de alquiler</comment>
+  </data>
+  <data name="aut_preciocompra" xml:space="preserve">
+    <value>@aut_preciocompra</value>
+    <comment>Procedimiento Atributo - precion de compra</comment>
+  </data>
+  <data name="aut_tipovehiculo" xml:space="preserve">
+    <value>@aut_tipovehiculo</value>
+    <comment>Procedimiento Atributo - tipo de automovil </comment>
+  </data>
+  <data name="aut_transmision" xml:space="preserve">
+    <value>@aut_transmision</value>
+    <comment>Procedimiento Atributo - tipo de transmision del automovil</comment>
+  </data>
+  <data name="cantpasajero" xml:space="preserve">
+    <value>aut_cantpasajero</value>
+    <comment>Atributo - cantidad de pasajeros del automovil</comment>
+  </data>
+  <data name="color" xml:space="preserve">
+    <value>aut_color</value>
+    <comment>Atributo - colo de automovil</comment>
+  </data>
+  <data name="disponibilida" xml:space="preserve">
+    <value>aut_disponibilida</value>
+    <comment>Atributo - disponibilidad del automovil</comment>
+  </data>
+  <data name="fabricante" xml:space="preserve">
+    <value>aut_fabricante</value>
+    <comment>Atributo - fabricante / marca del automovil</comment>
+  </data>
+  <data name="fecharegistro" xml:space="preserve">
+    <value>aut_fecharegistro</value>
+    <comment>Atributo - fecha de registro </comment>
+  </data>
+  <data name="fk_ciudad" xml:space="preserve">
+    <value>aut_fk_ciudad</value>
+    <comment>Atributo - ciudad en la que se encuentra el automovil</comment>
+  </data>
+  <data name="kilometraje" xml:space="preserve">
+    <value>aut_kilometraje</value>
+    <comment>Atributo - kilomertraje que posee el automovil</comment>
+  </data>
+  <data name="matricula" xml:space="preserve">
+    <value>aut_matricula</value>
+    <comment>Atributo - matricula del automovil</comment>
+  </data>
+  <data name="modelo" xml:space="preserve">
+    <value>aut_modelo</value>
+    <comment>Atributo - modelo del automovil</comment>
+  </data>
+  <data name="penalidaddiaria" xml:space="preserve">
+    <value>aut_penalidaddiaria</value>
+    <comment>Atributo - penalidad diaria por retraso en la entrega del automovil</comment>
+  </data>
+  <data name="precioalquiler" xml:space="preserve">
+    <value>aut_precioalquiler</value>
+    <comment>Atributo - precio de alquiler</comment>
+  </data>
+  <data name="preciocompra" xml:space="preserve">
+    <value>aut_preciocompra</value>
+    <comment>Atributo - precion de compra</comment>
+  </data>
+  <data name="procedimientoAgregarAutomovil" xml:space="preserve">
     <value>M08_AgregarAutomovil</value>
     <comment>Nombre del Procedimiento Agregar Base de Datos Tabla Automovil</comment>
   </data>
@@ -152,5 +244,21 @@
   <data name="procedimientoModificar" xml:space="preserve">
     <value>M08_ModificarAutomovil</value>
     <comment>Nombre del Procedimiento Modificar en Base de Datos Tabla Automovil</comment>
+  </data>
+  <data name="tipovehiculo" xml:space="preserve">
+    <value>aut_tipovehiculo</value>
+    <comment>Atributo - tipo de automovil </comment>
+  </data>
+  <data name="transmision" xml:space="preserve">
+    <value>aut_transmision</value>
+    <comment>Atributo - tipo de transmision del automovil</comment>
+  </data>
+  <data name="procedimientoConsultarAutomovilMatricula" xml:space="preserve">
+    <value>M08_ConsultarAutomovilMatricula</value>
+    <comment>Nombre del Procedimiento para consultar Base de Datos Tabla Automovil por matricula</comment>
+  </data>
+  <data name="procedimientoEliminarAutomovil" xml:space="preserve">
+    <value>M08_EliminarAutomovil</value>
+    <comment>Nombre del Procedimiento Eliminar de la Base de Datos Tabla Automovil</comment>
   </data>
 </root>
