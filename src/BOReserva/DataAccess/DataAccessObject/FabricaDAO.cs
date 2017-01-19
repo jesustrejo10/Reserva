@@ -1,5 +1,6 @@
 ﻿using BOReserva.DataAccess.DAO;
 using BOReserva.DataAccess.DataAccessObject.M09;
+using BOReserva.DataAccess.Model;
 using BOReserva.M10;
 using System;
 using System.Collections.Generic;
@@ -62,6 +63,11 @@ namespace BOReserva.DataAccess.DataAccessObject
         {
             return new DAOBoleto();
 		}
+
+        public static DAO instanciarDaoLugar()
+        {
+            return new DAOLugar();
+        }
 		#endregion
 			
         #region Modulo 10
@@ -80,21 +86,21 @@ namespace BOReserva.DataAccess.DataAccessObject
               "22:00", "23:00", "00:00"
             };
         }
-        #endregion
+       
 
         public static SqlConnection asignarConexionSql(String stringDeConexion)
         {
             return new SqlConnection(stringDeConexion);
         }
 
-        public static Parametro asignarParametro(string nombreAtributo, SqlDbType tipoDeDato, string valorAtributo, bool input, bool output)
+        public static Parametro asignarParametro(string nombreAtributo, SqlDbType tipoDeDato, string valorAtributo, bool output)
         {
-            return new Parametro(nombreAtributo, tipoDeDato, valorAtributo, input, output);
+            return new Parametro(nombreAtributo, tipoDeDato, valorAtributo, output);
         }
 
-        public static Parametro asignarParametro(string nombreAtributo, SqlDbType tipoDeDato, bool input, bool output)
+        public static Parametro asignarParametro(string nombreAtributo, SqlDbType tipoDeDato, bool output)
         {
-            return new Parametro(nombreAtributo, tipoDeDato, input, output);
+            return new Parametro(nombreAtributo, tipoDeDato, output);
         }
 
         public static List<Parametro> asignarListaDeParametro()
@@ -102,9 +108,9 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new List<Parametro>();
         }
 
-        public static List<Columna> asignarListarColumnas()
+        public static List<ResultadoBD> asignarListarColumnas()
         {
-            return new List<Columna>();
+            return new List<ResultadoBD>();
         }
 
         public static SqlCommand asignarComandoSql(String query, SqlConnection conexion)
@@ -112,9 +118,9 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new SqlCommand(query, conexion);
         }
 
-        public static Columna asignarValorColumna(String atributo, String valorAtributo)
+        public static ResultadoBD asignarValorColumna(String atributo, String valorAtributo)
         {
-            return new Columna(atributo, valorAtributo);
+            return new ResultadoBD(atributo, valorAtributo);
         }
 
         public static DataTable asignarTablaDeDatos()
@@ -126,6 +132,7 @@ namespace BOReserva.DataAccess.DataAccessObject
         {
             return new SqlDataAdapter(comandoSql);
         }
+        #endregion
 
         #region M13_Roles
         public static DAO instanciarDAORol()

@@ -76,7 +76,7 @@ namespace BOReserva.DataAccess.Domain
         }
 
         #endregion 
-        public static Entidad InstanciarReclamo(String tituloReclamo, String detalleReclamo, String fechaReclamo, String estadoReclamo)
+        public static Entidad InstanciarReclamo(String tituloReclamo, String detalleReclamo, String fechaReclamo, int estadoReclamo, int usuario)
         {
             return new Reclamo();
         }
@@ -85,9 +85,10 @@ namespace BOReserva.DataAccess.Domain
             String titulo = model._tituloReclamo;
             String detalle = model._detalleReclamo;
             String fecha = model._fechaReclamo;
-            String estado = model._estadoReclamo;
+            int estado = model._estadoReclamo;
+            int usuario = model._usuario;
 
-            return new Reclamo(titulo, detalle, fecha, estado);
+            return new Reclamo(titulo, detalle, fecha, estado, usuario);
         }
 
         #region M04_Vuelo
@@ -101,13 +102,13 @@ namespace BOReserva.DataAccess.Domain
         /// <param name="fechaDespegue"></param>
         /// <param name="status"></param>
         /// <param name="fechaAterrizaje"></param>
-        /// <param name="idAvion"></param>
+        /// <param name="avion"></param>
         /// <returns>Retorna una instancia de la clase vuelo con todos sus atributos</returns>
         public static Entidad crearVuelo(int id, String codigoVuelo, int ruta, DateTime fechaDespegue,
-                                          String status, DateTime fechaAterrizaje, int idAvion)
+                                          String status, DateTime fechaAterrizaje, int avion)
         {
             return new Vuelo(id, codigoVuelo, ruta, fechaDespegue, status, fechaAterrizaje,
-                             idAvion);
+                             avion);
         }
         #endregion
 
@@ -127,33 +128,33 @@ namespace BOReserva.DataAccess.Domain
 		#endregion
 		
 		#region Modulo 10
-        public static CRestauranteModelo inicializarRestaurant(string nombre, string direccion, string telefono, string descripcion, string horarioApertura, string horarioCierre, int idLugar)
+        public static CRestauranteModelo crearRestaurant(string nombre, string direccion, string telefono, string descripcion, string horarioApertura, string horarioCierre, int idLugar)
         {
             return new CRestauranteModelo(nombre, direccion, telefono, descripcion, horarioApertura, horarioCierre, idLugar);
         }
 
-        public static CRestauranteModelo inicializarRestaurant(int id, string nombre, string direccion, string telefono, string descripcion, string horarioApertura, string horarioCierre, int idLugar)
+        public static CRestauranteModelo crearRestaurant(int id, string nombre, string direccion, string telefono, string descripcion, string horarioApertura, string horarioCierre, int idLugar)
         {
             return new CRestauranteModelo(id, nombre, direccion, telefono, descripcion, horarioApertura, horarioCierre, idLugar);
         }
 
-        public static CRestauranteModelo inicializarRestaurant()
+        public static CRestauranteModelo crearRestaurant()
         {
             return new CRestauranteModelo();
         }
-        #endregion
+       
 
-        public static Lugar inicializarLugar(int idLugar, string nombreLugar)
+        public static Lugar crearLugar(int idLugar, string nombreLugar)
         {
             return new Lugar(idLugar, nombreLugar);
         }
 
-        public static List<Lugar> inicializarListaLugar()
+        public static List<Lugar> crearListaLugar()
         {
             return new List<Lugar>();
         }
 
-        public static List<CRestauranteModelo> inicializarListaRestarant()
+        public static List<CRestauranteModelo> crearListaRestarant()
         {
             return new List<CRestauranteModelo>();
         }
@@ -162,6 +163,8 @@ namespace BOReserva.DataAccess.Domain
         {
             return new List<Entidad>();
         }
+
+        #endregion
 
         public static Entidad InstanciarRol(CRoles model)
         {
