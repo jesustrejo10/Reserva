@@ -59,6 +59,9 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult guardarHotel(CAgregarHotel model)
         {   
+            //cable de precio mientras se agrega en la vista.
+            int precio = 200;
+            model._precioHabitacion = precio;
             //Entidad ciudadDestino = FabricaEntidad.InstanciarCiudad("nombre de la ciudad");
             Entidad ciudadDestino = FabricaEntidad.InstanciarCiudad(_ciudad);
             ciudadDestino._id = 29;

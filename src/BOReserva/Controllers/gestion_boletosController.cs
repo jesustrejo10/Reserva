@@ -25,7 +25,8 @@ namespace BOReserva.Controllers
             Pasajero nuevoPasajero = (Pasajero)FabricaEntidad.InstanciarPasajero(pasaporte, primernombre, segundonombre, primerapellido, segundoapellido, sexo, fechanac, correo);
 
             CVisualizarBoleto bol = new CVisualizarBoleto();
-            manejadorSQL_Boletos sqlboletos = new manejadorSQL_Boletos();
+            //manejadorSQL_Boletos sqlboletos = new manejadorSQL_Boletos();
+            
             bol._idOrigen = idorigen;
             bol._idDestino = iddestino;
             bol._fechaDespegueIda = fechadespegue;
@@ -34,9 +35,11 @@ namespace BOReserva.Controllers
             bol._tipoBoleto = tipo;
             bol._pasajero = nuevoPasajero;
             //COMANDO
-            bol._origen = sqlboletos.MBuscarnombreciudad(idorigen);
-            bol._destino = sqlboletos.MBuscarnombreciudad(iddestino);
+            //bol._origen = sqlboletos.MBuscarnombreciudad(idorigen);
+            //bol._destino = sqlboletos.MBuscarnombreciudad(iddestino);
             //
+            bol._origen = (FabricaComando.buscarM05nombreCiudad(new Entidad(idorigen))).ejecutar();
+            bol._destino = (FabricaComando.buscarM05nombreCiudad(new Entidad(iddestino))).ejecutar();
             bol._idVuelo = idvuelo;
 
             Command<String> comando = FabricaComando.crearM05AgregarPasajero(nuevoPasajero);
@@ -544,20 +547,24 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult eliminarBoleto(int id)
         {
-            manejadorSQL_Boletos eliminar = new manejadorSQL_Boletos();
-            int modifico_si_no = eliminar.M05EliminarBoletoBD(id);
 
+            //manejadorSQL_Boletos eliminar = new manejadorSQL_Boletos();
+            //int modifico_si_no = eliminar.M05EliminarBoletoBD(id);
+            Command<String> comando = FabricaComando.crearM05EliminarBoleto(id);
+            String elimino_si_no = comando.ejecutar();
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
 
         [HttpPost]
         public JsonResult modificarDatosPasajero(CModificarBoleto model)
         {
+            Pasajero pasajero = (Pasajero)FabricaEntidad.InstanciarPasajero(model._id, model._primer_nombre, model._segundo_nombre, model._primer_apellido, model._segundo_apellido, model._sexo, model._fecha_nac.ToString("yyyy/MM/dd"), model._correo);
+            Command<String> comando = FabricaComando.modificarM05modificarPasajero(pasajero);
+            String agrego_si_no = comando.ejecutar();
 
-            CPasajero pas = new CPasajero(model._id, model._primer_nombre, model._segundo_nombre, model._primer_apellido,
-                                          model._segundo_apellido, model._sexo, model._fecha_nac, model._correo);
+            /*CPasajero pas = new CPasajero(model._id, model._primer_nombre, model._segundo_nombre, model._primer_apellido, model._segundo_apellido, model._sexo, model._fecha_nac, model._correo);
             manejadorSQL_Boletos modificar = new manejadorSQL_Boletos();
-            int modifico_si_no = modificar.M05ModificarDatosPasajero(pas);
+            int modifico_si_no = modificar.M05ModificarDatosPasajero(pas);*/
 
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
