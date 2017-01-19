@@ -1,4 +1,5 @@
-﻿using BOReserva.Servicio;
+﻿using BOReserva.DataAccess.Domain;
+using BOReserva.Servicio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,27 +11,28 @@ namespace BOReserva.Models.gestion_automoviles
     /// <summary>
     /// Clase que maneja los vehículos que exiten en el sistema
     /// </summary>
-    public class Automovil
+    public class Automovil : Entidad
     {
+        #region Atributos Getter and Setter
+        private String _matricula { get; set; }
+        private String _modelo { get; set; }
+        private String _fabricante { get; set; }
+        private int _anio { get; set; }
+        private String _tipovehiculo { get; set; }
+        private double _kilometraje { get; set; }
+        private int _cantpasajeros { get; set; }
+        private double _preciocompra { get; set; }
+        private double _precioalquiler { get; set; }
+        private double _penalidaddiaria { get; set; }
+        private DateTime _fecharegistro { get; set; }
+        private String _color { get; set; }
+        private int _disponibilidad { get; set; }
+        private String _transmision { get; set; }
+        private String _pais { get; set; }
+        private String _ciudad { get; set; }
+        #endregion
 
-        public String _matricula { get; set; }
-        public String _modelo { get; set; }
-        public String _fabricante { get; set; }
-        public int _anio { get; set; }
-        public String _tipovehiculo { get; set; }
-        public double _kilometraje { get; set; }
-        public int _cantpasajeros { get; set; }
-        public double _preciocompra { get; set; }
-        public double _precioalquiler { get; set; }
-        public double _penalidaddiaria { get; set; }
-        public DateTime _fecharegistro { get; set; }
-        public String _color { get; set; }
-        public int _disponibilidad { get; set; }
-        public String _transmision { get; set; }
-        public String _pais { get; set; }
-        public String _ciudad { get; set; }
-
-
+        #region Constructores
         /// <summary>
         /// Constructor de la clase Automovil
         /// </summary>
@@ -71,31 +73,31 @@ namespace BOReserva.Models.gestion_automoviles
             _pais = pais;
             _ciudad = ciudad;
         }
+        #endregion
 
-
-
+        #region Metodos
         /// <summary>
         /// Método para agregar un vehículo
         /// </summary>
         /// <param name="vehiculo">Vehículo a agregar</param>
         /// <param name="id">Identificador de la ciudad donde se ubica</param>
         /// <returns>Retorna 1 se agrego correctamente y la excepcion si no puede</returns>
-        public String MAgregaraBD(Automovil vehiculo, int id)
-        {
-            manejadorSQL agregar = new manejadorSQL();
-            return agregar.MAgregarVehiculoBD(vehiculo, id);
-        }
+        //public String MAgregaraBD(Automovil vehiculo, int id)
+        //{
+        //    manejadorSQL agregar = new manejadorSQL();
+        //    return agregar.MAgregarVehiculoBD(vehiculo, id);
+        //}
 
 
         /// <summary>
         /// Método para retornar lista de vehículos 
         /// </summary>
         /// <returns>Retorna de una Lista de tipo Automovil</returns>
-        public List<Automovil> MListarvehiculos()
-        {
-            manejadorSQL listar = new manejadorSQL();
-            return listar.MListarvehiculosBD();
-        }
+        //public List<Automovil> MListarvehiculos()
+        //{
+        //    manejadorSQL listar = new manejadorSQL();
+        //    return listar.MListarvehiculosBD();
+        //}
 
 
         /// <summary>
@@ -103,11 +105,11 @@ namespace BOReserva.Models.gestion_automoviles
         /// </summary>
         /// <param name="matricula">Matrículo del vehículo a consultar</param>
         /// <returns>Retorna el vehículo de que se consulto</returns>
-        public Automovil MConsultarvehiculo(String matricula)
-        {
-            manejadorSQL consultar = new manejadorSQL();
-            return consultar.MMostrarvehiculoBD(matricula);
-        }
+        //public Automovil MConsultarvehiculo(String matricula)
+        //{
+        //    manejadorSQL consultar = new manejadorSQL();
+        //    return consultar.MMostrarvehiculoBD(matricula);
+        //}
 
 
 
@@ -117,11 +119,11 @@ namespace BOReserva.Models.gestion_automoviles
         /// <param name="matricula">Matrícula del vehículo del cual se cambiará el estatus</param>
         /// <param name="activar_o_desactivar">Estatus a colocar en el vehículo</param>
         /// <returns>Retorna si se logra modificar o no</returns>
-        public String MDisponibilidadVehiculoBD(String matricula, int activar_o_desactivar)
-        {
-            manejadorSQL consultar = new manejadorSQL();
-            return consultar.MDisponibilidadVehiculoBD(matricula, activar_o_desactivar);
-        }
+        //public String MDisponibilidadVehiculoBD(String matricula, int activar_o_desactivar)
+        //{
+        //    manejadorSQL consultar = new manejadorSQL();
+        //    return consultar.MDisponibilidadVehiculoBD(matricula, activar_o_desactivar);
+        //}
 
         /// <summary>
         /// Método para modificar un vehículo
@@ -129,11 +131,11 @@ namespace BOReserva.Models.gestion_automoviles
         /// <param name="vehiculo">Matrícula del vehículo que se modificará</param>
         /// <param name="id">Identificador de la ciudad donde se ubica el vehículo</param>
         /// <returns>Retorna si se logra modificar o no</returns>
-        public String MModificarvehiculoBD(Automovil vehiculo, int id)
-        {
-            manejadorSQL modificar = new manejadorSQL();
-            return modificar.MModificarVehiculoBD(vehiculo, id);
-        }
+        //public String MModificarvehiculoBD(Automovil vehiculo, int id)
+        //{
+        //    manejadorSQL modificar = new manejadorSQL();
+        //    return modificar.MModificarVehiculoBD(vehiculo, id);
+        //}
 
 
 
@@ -142,14 +144,12 @@ namespace BOReserva.Models.gestion_automoviles
         /// </summary>
         /// <param name="vehiculo">Mátricula del vehículo a eliminar</param>
         /// <returns>Retorna si se logra eliminar o no</returns>
-        public String MBorrarvehiculoBD(String vehiculo) //METODO PARA MODIFICAR UN VEHICULO
-        {
-            manejadorSQL modificar = new manejadorSQL();
-            return modificar.MBorrarvehiculoBD(vehiculo);
-        }
+        //public String MBorrarvehiculoBD(String vehiculo) //METODO PARA MODIFICAR UN VEHICULO
+        //{
+        //    manejadorSQL modificar = new manejadorSQL();
+        //    return modificar.MBorrarvehiculoBD(vehiculo);
+        //}
+        #endregion
 
-        public Automovil() 
-        {
-        }
     }
 }

@@ -44,7 +44,7 @@ namespace BOReserva.DataAccess.DataAccessObject
 		}
         #endregion
 
-        #region Modulo 08
+        #region M08_Automoviles
 
         public static DAO CrearDaoAutomovil()
         {

@@ -253,8 +253,7 @@
     <Compile Include="DataAccess\DataAccessObject\DAOPais.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAORol.cs" />
-    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOVehiculo.cs" />
-    <Compile Include="DataAccess\DataAccessObject\M08\DAOVehiculo.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOAutomovil.cs" />
     <Compile Include="DataAccess\DataAccessObject\M09\DAOHotel.cs" />
     <Compile Include="DataAccess\DataAccessObject\M10\Columna.cs" />
     <Compile Include="DataAccess\DataAccessObject\M10\DAO.cs" />
@@ -577,6 +576,7 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="DataAccess\DataAccessObject\M08\Scripts de Procedures M08.sql" />
     <Content Include="DataAccess\DataAccessObject\M10\Scripts de Procedures M10.sql" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
