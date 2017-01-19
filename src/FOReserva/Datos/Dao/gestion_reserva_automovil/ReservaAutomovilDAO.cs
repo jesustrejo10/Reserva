@@ -20,13 +20,13 @@ namespace FOReserva.Datos.Dao.gestion_reserva_automovil
         /// <param name="_restaurant">Variable tipo en entidad que luego debe ser casteada a su tipo para metodos get y set</param>
         /// <returns>Lista de Entidades, ya que se devuelve mas de una fila de la BD, se debe castear a su respectiva clase en el Modelo</returns>
         
-        public List<Entidad> Consultar(Entidad _usuario)
+        public List<Entidad>Consultar(Entidad _usuario)
         {
-          /*  List<Parametro> parametro = FabricaDatosSql.asignarListaDeParametro();
+            List<Parametro> parametro = FabricaDatosSql.asignarListaDeParametro();
             List<Entidad> listaDeReservas = FabricaEntidad.asignarListaDeEntidades();
             DataTable tablaDeDatos;
             Entidad reserva;
-            Usuario usuario = (Usuario)_usuario; //Se castea a tipo Usuario para poder utilizar sus metodos 
+            CUsuario usuario = (CUsuario)_usuario; //Se castea a tipo Usuario para poder utilizar sus metodos 
 
             //Atributos tabla Reserva Automovil
             int _id;
@@ -73,20 +73,135 @@ namespace FOReserva.Datos.Dao.gestion_reserva_automovil
             {
 
                 throw;
-            }*/
-            return null;
-        }
-        
-        /// <summary>
-        /// Metodo que retorna restauran segun el id
-        /// </summary>
-        /// <param name="_restaurant"></param>
-        /// <returns>Entidad</returns>
-        public Entidad consultarRestaurantId(Entidad _restaurant)
-        {
-            return null;
+            }
         }
 
+        /// <summary>
+        /// Metodo que retorna reserva segun el id
+        /// </summary>
+        /// <param name="_reserva"></param>
+        /// <returns>Entidad</returns>
+        public Entidad consultarReservaId(Entidad _reserva)
+        {
+            //Se castea de tipo Entidad a tipo Reserva Automovil
+            CReservaAutomovilModelo resv = (CReservaAutomovilModelo)_reserva;
+            List<Parametro> listaParametro = FabricaDatosSql.asignarListaDeParametro();
+
+            int idReserva;
+            String fechaIni;
+            String fechaFin;
+            String horaIni;
+            String horaFin;
+            int idUsuario;
+            String idAutomovil;
+            int ciudadDevo;
+            int ciudadEnt;
+            int estatus;
+            Entidad reserva;
+
+            try
+            {
+                //Aqui se asignan los valores que recibe el procedimieto para realizar el select
+                listaParametro.Add(FabricaDatosSql.asignarParametro(RecursoDAOM19.raut_id, SqlDbType.Int, resv._id.ToString(), true, false));
+
+                //Se devuelve la fila del restaurante consultado segun el Id, para este caso solo se devuelve una fila
+                DataTable filareserva = EjecutarStoredProcedure(listaParametro, RecursoDAOM19.procedimientoConsultarReservaAutomovilId);
+
+                //Se guarda la fila devuelta de la base de datos
+                DataRow Fila = filareserva.Rows[0];
+
+                //Se preinicializan los atributos de la clase reserva 
+                idReserva = int.Parse(Fila[RecursoDAOM19.reservaId].ToString());
+                fechaIni = Fila[RecursoDAOM19.reservaFechaIni].ToString();
+                fechaFin = Fila[RecursoDAOM19.reservaFechaFin].ToString();
+                horaIni = Fila[RecursoDAOM19.reservaHoraIni].ToString();
+                horaFin = Fila[RecursoDAOM19.reservaHoraFin].ToString();
+                idUsuario = int.Parse(Fila[RecursoDAOM19.reservaUsuarioFk].ToString());
+                idAutomovil = Fila[RecursoDAOM19.reservaAutomovilFk].ToString();
+                ciudadDevo = int.Parse(Fila[RecursoDAOM19.reservaCiudadDevFk].ToString());
+                ciudadEnt = int.Parse(Fila[RecursoDAOM19.reservaCiudadEntFk].ToString());
+                estatus = int.Parse(Fila[RecursoDAOM19.reservaEstatus].ToString());
+                reserva = FabricaEntidad.inicializarReserva(idReserva, fechaIni, fechaFin, horaIni, horaFin, idUsuario, idAutomovil, ciudadEnt, ciudadDevo, estatus);
+
+
+                return reserva;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        /// <summary>
+        /// Metodo para consultar automoviles segun el id de Lugar
+        /// </summary>
+        /// <param name="_automovil">Variable tipo en entidad que luego debe ser casteada a su tipo para metodos get y set</param>
+        /// <returns>Lista de Entidades, ya que se devuelve mas de una fila de la BD, se debe castear a su respectiva clase en el Modelo</returns>
+        public List<Entidad> ConsultarAutosPorIdCiudad(Entidad _lugar)
+        {
+            List<Parametro> parametro = FabricaDatosSql.asignarListaDeParametro();
+            List<Entidad> listaDeAutomovil = FabricaEntidad.asignarListaDeEntidades();
+            DataTable tablaDeDatos;
+            Entidad automovil;
+            CLugar lugar = (CLugar)_lugar; //Se castea a tipo Lugar para poder utilizar sus metodos 
+
+            //Atributos tabla Automovil 
+            String matricula;
+            String modelo;
+            String fabricante;
+            int anio;
+            double kilometraje;
+            int cantPasajeros;
+            String tipo;
+            double precioCompra;
+            double precioAlquiler;
+            double penalidadDiaria;
+            String fechaRegistro;
+            String color;
+            int disponibilidad;
+            String transmision;
+            int idCiudad;
+
+            try
+            {
+                //Aqui se asignan los valores que recibe el procedimiento para realizar el select
+                parametro.Add(FabricaDatosSql.asignarParametro(RecursoDAOM19.raut_fk_ciudad_entrega, SqlDbType.Int, lugar._id.ToString(), true, false));
+
+                //el metodo Ejecutar Store procedure recibe la lista de parametros como el query, este ultimo es el nombre del procedimietno en la BD
+                tablaDeDatos = EjecutarStoredProcedure(parametro, RecursoDAOM19.procedimientoConsultarAutosCiudad);
+
+                foreach (DataRow filaautomovil in tablaDeDatos.Rows)
+                {
+                    matricula = filaautomovil[RecursoDAOM19.autMatricula].ToString();
+                    modelo = filaautomovil[RecursoDAOM19.autModelo].ToString();
+                    fabricante = filaautomovil[RecursoDAOM19.autFabricante].ToString();
+                    anio = int.Parse(filaautomovil[RecursoDAOM19.autAnio].ToString());
+                    kilometraje = double.Parse(filaautomovil[RecursoDAOM19.autKilometraje].ToString());
+                    cantPasajeros = int.Parse(filaautomovil[RecursoDAOM19.autCantpasajeros].ToString());
+                    tipo = filaautomovil[RecursoDAOM19.autTipo].ToString();
+                    precioCompra = double.Parse(filaautomovil[RecursoDAOM19.autPreciocompra].ToString());
+                    precioAlquiler = double.Parse(filaautomovil[RecursoDAOM19.autPrecioalquiler].ToString());
+                    penalidadDiaria = double.Parse(filaautomovil[RecursoDAOM19.autPenalidaddiaria].ToString());
+                    fechaRegistro = filaautomovil[RecursoDAOM19.autFecharegistro].ToString();
+                    color = filaautomovil[RecursoDAOM19.autColor].ToString();
+                    disponibilidad = int.Parse(filaautomovil[RecursoDAOM19.autDisponibilidad].ToString());
+                    transmision = filaautomovil[RecursoDAOM19.autTransmision].ToString();
+                    idCiudad = int.Parse(filaautomovil[RecursoDAOM19.autFk_ciudad].ToString());
+                    automovil = FabricaEntidad.inicializarAutomovil(matricula, modelo, fabricante, anio, kilometraje, cantPasajeros, tipo, precioCompra, precioAlquiler, penalidadDiaria, fechaRegistro, color, disponibilidad, transmision, idCiudad);
+                    listaDeAutomovil.Add(automovil);
+                }
+
+                return listaDeAutomovil;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         /// <summary>
         /// Metodo para agregar reserva de automovil
         /// </summary>

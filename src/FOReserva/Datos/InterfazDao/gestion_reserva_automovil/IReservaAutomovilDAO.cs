@@ -11,7 +11,9 @@ namespace FOReserva.Datos.InterfazDao.gestion_reserva_automovil
     {
         List<Entidad> ListarLugar();
 
-        Entidad consultarRestaurantId(Entidad objeto);
+        Entidad consultarReservaId(Entidad objeto);
+
+        List<Entidad> ConsultarAutosPorIdCiudad(Entidad objeto);
     }
 
 }

@@ -1,13 +1,11 @@
-﻿using FOReserva.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-
-namespace FOReserva.Models
+namespace FOReserva.Models.gestion_reserva_automovil
 {
-    public class Usuario : Entidad
+    public class CUsuario : Entidad
     {
         #region Atributos
         public string _correo { get; set; }
@@ -17,11 +15,11 @@ namespace FOReserva.Models
         #endregion
 
         #region Constructores
-        public Usuario()
+        public CUsuario()
         {
         }
 
-        public Usuario(string nombre, string apellido, string correo, int id)
+        public CUsuario(string nombre, string apellido, string correo, int id)
         {
            this._correo = correo;
            this._nombre = nombre;
@@ -29,24 +27,11 @@ namespace FOReserva.Models
            this._id = id;
         }
 
-        public Usuario(int id)
+        public CUsuario(int id)
         {
             this._id = id;
         }
 
         #endregion
-
-         public int Id
-        {
-            get
-            {
-                return _id;
-            }
-
-            set
-            {
-                _id = value;
-            }
-        }
     }
 }

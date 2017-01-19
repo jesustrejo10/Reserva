@@ -61,6 +61,159 @@ namespace FOReserva.Datos.Dao.gestion_reserva_automovil {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a aut_anio.
+        /// </summary>
+        internal static string autAnio {
+            get {
+                return ResourceManager.GetString("autAnio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a aut_cantpasajeros.
+        /// </summary>
+        internal static string autCantpasajeros {
+            get {
+                return ResourceManager.GetString("autCantpasajeros", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a aut_color.
+        /// </summary>
+        internal static string autColor {
+            get {
+                return ResourceManager.GetString("autColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a aut_disponibilidad.
+        /// </summary>
+        internal static string autDisponibilidad {
+            get {
+                return ResourceManager.GetString("autDisponibilidad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a aut_fabricante.
+        /// </summary>
+        internal static string autFabricante {
+            get {
+                return ResourceManager.GetString("autFabricante", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a aut_fecharegistro.
+        /// </summary>
+        internal static string autFecharegistro {
+            get {
+                return ResourceManager.GetString("autFecharegistro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a aut_fk_ciudad.
+        /// </summary>
+        internal static string autFk_ciudad {
+            get {
+                return ResourceManager.GetString("autFk_ciudad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a aut_kilometraje.
+        /// </summary>
+        internal static string autKilometraje {
+            get {
+                return ResourceManager.GetString("autKilometraje", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a aut_matricula.
+        /// </summary>
+        internal static string autMatricula {
+            get {
+                return ResourceManager.GetString("autMatricula", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a aut_modelo.
+        /// </summary>
+        internal static string autModelo {
+            get {
+                return ResourceManager.GetString("autModelo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a aut_penalidaddiaria.
+        /// </summary>
+        internal static string autPenalidaddiaria {
+            get {
+                return ResourceManager.GetString("autPenalidaddiaria", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a aut_precioalquiler.
+        /// </summary>
+        internal static string autPrecioalquiler {
+            get {
+                return ResourceManager.GetString("autPrecioalquiler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a aut_preciocompra.
+        /// </summary>
+        internal static string autPreciocompra {
+            get {
+                return ResourceManager.GetString("autPreciocompra", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a aut_tipo.
+        /// </summary>
+        internal static string autTipo {
+            get {
+                return ResourceManager.GetString("autTipo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a aut_transmision.
+        /// </summary>
+        internal static string autTransmision {
+            get {
+                return ResourceManager.GetString("autTransmision", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a @fk_lugar.
+        /// </summary>
+        internal static string fk_lugar {
+            get {
+                return ResourceManager.GetString("fk_lugar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a @lug_id.
+        /// </summary>
+        internal static string lug_id {
+            get {
+                return ResourceManager.GetString("lug_id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a lug_id.
         /// </summary>
         internal static string LugarId {

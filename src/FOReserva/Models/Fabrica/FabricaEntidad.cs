@@ -35,16 +35,30 @@ namespace FOReserva.Models.Fabrica
         {
             return new CReservaAutomovilModelo();
         }
-        public static Lugar inicializarLugar(int idLugar, string nombreLugar)
+        public static CLugar inicializarLugar(int idLugar, string nombreLugar)
         {
-            return new Lugar(idLugar, nombreLugar);
+            return new CLugar(idLugar, nombreLugar);
         }
 
-        public static List<Lugar> inicializarListaLugar()
+        public static List<CLugar> inicializarListaLugar()
         {
-            return new List<Lugar>();
+            return new List<CLugar>();
         }
 
+        public static CUsuario inicializarUsuario(string nombre, string apellido, string correo, int id)
+        {
+            return new CUsuario(nombre,apellido,correo,id);
+        }
+
+        public static CUsuario inicializarUsuario(int id)
+        {
+            return new CUsuario(id);
+        }
+
+        public static CAutomovil inicializarAutomovil(string matricula, string modelo, string fabricante, int anio, double kilometraje, int cantPasajeros, string tipo, double precioCompra, double precioAlquiler, double penalidadDiaria, string fechaRegistro, string color, int disponibilidad, string transmision, int idCiudad)
+        {
+            return new CAutomovil(matricula, modelo, fabricante, anio, kilometraje, cantPasajeros, tipo, precioCompra, precioAlquiler, penalidadDiaria, fechaRegistro, color, disponibilidad, transmision, idCiudad);
+        }
 
         #endregion
 

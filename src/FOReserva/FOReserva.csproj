@@ -247,12 +247,14 @@
     <Compile Include="Models\Diarios\CPuntuacion.cs" />
     <Compile Include="Models\Entidad.cs" />
     <Compile Include="Models\Fabrica\FabricaEntidad.cs" />
+    <Compile Include="Models\gestion_reserva_automovil\CAutomovil.cs" />
+    <Compile Include="Models\gestion_reserva_automovil\CLugar.cs" />
     <Compile Include="Models\gestion_reserva_automovil\CReservaAutomovilModelo.cs" />
+    <Compile Include="Models\gestion_reserva_automovil\CUsuario.cs" />
     <Compile Include="Models\Itinerario\CItinerario.cs" />
     <Compile Include="Models\Itinerario\Cvista_Itinerario.cs" />
     <Compile Include="Models\Itinerario\itinerario.cs" />
     <Compile Include="Models\Login\Login.cs" />
-    <Compile Include="Models\Lugar.cs" />
     <Compile Include="Models\ORM\DB.cs" />
     <Compile Include="Models\ORM\M20_ActualizarEstadoReservaHabitacion_Result.cs">
       <DependentUpon>ModelDBReserva.tt</DependentUpon>
@@ -316,7 +318,6 @@
     <Compile Include="Models\Sesion\RegistroClienteException.cs" />
     <Compile Include="Models\Sesion\RespuestaErroneaException.cs" />
     <Compile Include="Models\Sesion\Seguridad.cs" />
-    <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\Usuarios\CUsuario.cs" />
     <Compile Include="Models\ReservaHabitacion\Cvista_BuscarHotel.cs" />
     <Compile Include="Models\ReservaHabitacion\Cvista_ReservarHabitacion.cs" />
