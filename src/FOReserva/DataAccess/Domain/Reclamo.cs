@@ -21,5 +21,13 @@ namespace FOReserva.DataAccess.Domain
             this._fechaReclamo = fechaReclamo;
             this._estadoReclamo = estadoReclamo;
         }
+
+        public Reclamo(String tituloReclamo, String detalleReclamo, String fechaReclamo, String estadoReclamo)
+        {
+            this._tituloReclamo = tituloReclamo;
+            this._detalleReclamo = detalleReclamo;
+            this._fechaReclamo = fechaReclamo;
+            this._estadoReclamo = estadoReclamo;
+        }
     }
 }
