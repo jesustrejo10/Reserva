@@ -10,7 +10,7 @@ namespace FOReserva.DataAccess.DataAccessObject.Common
     {
 
         #region M20
-        public static IDAO CreateDAORevision()
+        public static FOReserva.DataAccess.DataAccessObject.Common.DAO CreateDAORevision()
         {
             return new DAORevision();
         }

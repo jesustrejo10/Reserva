@@ -1,5 +1,4 @@
-﻿using FOReserva.DataAccess.DAO;
-using FOReserva.DataAccess.Model;
+﻿using FOReserva.DataAccess.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;

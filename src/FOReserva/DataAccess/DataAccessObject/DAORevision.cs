@@ -7,37 +7,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using FOReserva.Models.Restaurantes;
+using FOReserva.Models.Usuarios;
+using FOReserva.Models.ReservaHabitacion;
 
 namespace FOReserva.DataAccess.DataAccessObject
 {
     public class DAORevision : FOReserva.DataAccess.DataAccessObject.Common.DAO, IDAORevision
     {
         #region Patron Singleton DAORevision.
-        private static IDAO instance = null;
+        private static DAORevision instance = null;
 
-        private static IDAO Singleton()
+        public static DAORevision Singleton()
         {
             if (DAORevision.instance == null)
-                DAORevision.instance = FabricDAO.CreateDAORevision();
+                DAORevision.instance = (DAORevision)FabricDAO.CreateDAORevision();
             return DAORevision.instance;
         }
         #endregion
 
         #region Implementacion DAORevision.
         public enum TipoValoracion { Positiva, Negativa };
-        public DAOResult AgregarRevicion(CRevision revision, CHotel hotel) {
+        public enum TipoRevision { Restaurante = 1, Hotel = 2 };
+
+        private DAOResult GuardarRevicion(CRevision revision, int usuario_id, TipoRevision tipo, int referencia_id) {
             int status = -1;
             string message = String.Empty;
-            DAOResult result = this.ExecuteStoreProcedureWithResult(
-                name: "M20_AgregarRevision",
+            DAOResult result = null;
+            this.OpenConnection();
+            result = this.ExecuteStoreProcedureWithResult(
+                name: "M20_GuardarRevision",
                 parameters: new
                 {
-                    @rev_fecha = revision.Fecha,
+                    @rev_id = revision.Id,
                     @rev_mensaje = revision.Mensaje,
-                    @rev_tipo = revision.Tipo,
-                    @rev_puntuacion = revision.Puntuacion/*,
-                    @rev_referencia = revision.Hotel or revision.Restaurante
-                    */
+                    @rev_tipo = (int)tipo,
+                    @rev_puntuacion = revision.Puntuacion,
+                    @rev_FK_usu_id = usuario_id,
+                    @rev_FK_res_ref = referencia_id,
+
                 },
                 doThis: (reader) => {
                     status = reader.GetInt32(0);
@@ -48,21 +55,21 @@ namespace FOReserva.DataAccess.DataAccessObject
                 result.ProcessFinishCorrectly = status == 0;
                 result.Message = message;
             }
-            
+            this.CloseConnection();
             return result;
         }
 
-        public DAOResult AgregarRevision(CRevision revision, CHotel hotel)
+        public DAOResult GuardarRevision(CRevision revision, CUsuario usuario, CReservaHabitacion reservaHabitacion)
         {
-            throw new NotImplementedException();
+            return this.GuardarRevicion(revision, usuario.Codigo, TipoRevision.Hotel, reservaHabitacion.Codigo);
         }
 
-        public DAOResult AgregarRevision(CRevision revision, CRestaurantModel restaurante)
+        public DAOResult GuardarRevision(CRevision revision, CUsuario usuario, CRestaurantModel restaurante)
         {
-            throw new NotImplementedException();
+            return this.GuardarRevicion(revision, usuario.Codigo, TipoRevision.Restaurante, restaurante.Id);
         }
-
-        public DAOResult AplicarValoracion(CRevision revision, TipoValoracion hotel)
+                
+        public DAOResult AplicarValoracion(CRevision revision, TipoValoracion tipo)
         {
             throw new NotImplementedException();
         }
