@@ -28,6 +28,28 @@ BEGIN
 	AND U.usu_fk_rol IS NOT NULL
 END
 GO
+CREATE PROCEDURE [dbo].[M01_ActivarUsuario]
+@id int
+AS
+BEGIN
+	UPDATE [dbo].[Usuario]
+		SET
+			[usu_activo] = 'Activo'
+		WHERE
+			[usu_id] = @id
+END
+GO
+CREATE PROCEDURE [dbo].[M01_DesactivarUsuario]
+@id int
+AS
+BEGIN
+	UPDATE [dbo].[Usuario]
+		SET
+			[usu_activo] = 'Inactivo'
+		WHERE
+			[usu_id] = @id
+END
+GO
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON

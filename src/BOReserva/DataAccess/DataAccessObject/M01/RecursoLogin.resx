@@ -117,12 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ActivarUsuario" xml:space="preserve">
+    <value>M01_ActivarUsuario</value>
+    <comment>Referencia al procedimiento almacenado para la activación de usuario en la BD</comment>
+  </data>
   <data name="ConsultarUsuario" xml:space="preserve">
     <value>M01_ConsultarUsuario</value>
     <comment>Referencia al procedimiento almacenado para la consulta de usuario en la BD</comment>
   </data>
   <data name="correo" xml:space="preserve">
     <value>@correo</value>
-    <comment>Variable asignada a la consulta de usuario por correo</comment>
+    <comment>Variable asignada a la consulta o selección de usuario por correo</comment>
+  </data>
+  <data name="DesactivarUsuario" xml:space="preserve">
+    <value>M01_DesactivarUsuario</value>
+    <comment>Referencia al procedimiento almacenado para la desactivación de usuario en la BD</comment>
+  </data>
+  <data name="id" xml:space="preserve">
+    <value>@id</value>
+    <comment>Variable asignada a la consulta o selección de usuario por ID numérico</comment>
   </data>
 </root>

@@ -8,9 +8,9 @@ using System.Web.Mvc;
 using System.Data.SqlClient;
 using log4net;
 using log4net.Config;
+using BOReserva.DataAccess.Domain;
 
-
-namespace BOReserva.Content.Controllers
+namespace BOReserva.Controllers
 {
     public class gestion_seguridad_ingresoController : Controller
     {
@@ -89,17 +89,11 @@ namespace BOReserva.Content.Controllers
             return RedirectToAction("M01_Login", "gestion_seguridad_ingreso");
         }
 
-
-   
-
         public ActionResult M01_Logout()
         {
             Session.Clear();
             return RedirectToAction("Index", "Home");
         }
-
-
-
 
         public ActionResult M01_Login()
         {
@@ -119,7 +113,56 @@ namespace BOReserva.Content.Controllers
             return View("M01_Landing", "~/Views/Shared/_Layout.cshtml",model);
         }
 
+        #region Metodos Estaticos
 
-         
+        public static Usuario UsuarioActual()
+        {
+            var estado_sesion = System.Web.HttpContext.Current.Session["Cgestion_seguridad_ingreso"] as Cgestion_seguridad_ingreso;
+            if (estado_sesion != null)
+            {
+                var respuesta = new Usuario()
+                {
+                    id = estado_sesion.idUsuario,
+                    rol = estado_sesion.rolUsuario,
+                    nombre = estado_sesion.nombreUsuarioTexto,
+                    apellido = estado_sesion.apellidoUsuarioTexto,
+                    correo = estado_sesion.correoCampoTexto
+                };
+                return respuesta;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static int IDUsuarioActual()
+        {
+            var estado_sesion = System.Web.HttpContext.Current.Session["Cgestion_seguridad_ingreso"] as Cgestion_seguridad_ingreso;
+            if (estado_sesion != null)
+            {
+                return estado_sesion.idUsuario;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        public static int IDRolUsuarioActual()
+        {
+            var estado_sesion = System.Web.HttpContext.Current.Session["Cgestion_seguridad_ingreso"] as Cgestion_seguridad_ingreso;
+            if (estado_sesion != null)
+            {
+                return estado_sesion.rolUsuario;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        #endregion
+
     }
 }

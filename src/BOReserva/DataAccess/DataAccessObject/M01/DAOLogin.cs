@@ -24,7 +24,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
 
         public Cgestion_seguridad_ingreso UsuarioEnBD(String usuario)
         {
-            //Usar M12_ConsultarUsuario para reemplazar consulta directa
+            //Usar M01_ConsultarUsuario para reemplazar consulta directa
             String usuarioBD = "", nombreBD = "", apellidoBD = "", claveBD = "", statusBD = "";
             int idUsuario = 0, rolUsuario = 0;
             try
@@ -70,6 +70,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
 
         public Boolean BloquearUsuario(String usuario)
         {
+            //Usar M01_BloquearUsuario para reemplazar consulta directa
             try
             {
                 //Inicializo la conexion con el string de conexion

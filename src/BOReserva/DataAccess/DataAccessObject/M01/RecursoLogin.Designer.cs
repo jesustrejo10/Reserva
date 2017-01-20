@@ -61,6 +61,15 @@ namespace BOReserva.DataAccess.DataAccessObject.M01 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to M01_ActivarUsuario.
+        /// </summary>
+        internal static string ActivarUsuario {
+            get {
+                return ResourceManager.GetString("ActivarUsuario", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to M01_ConsultarUsuario.
         /// </summary>
         internal static string ConsultarUsuario {
@@ -75,6 +84,24 @@ namespace BOReserva.DataAccess.DataAccessObject.M01 {
         internal static string correo {
             get {
                 return ResourceManager.GetString("correo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M01_DesactivarUsuario.
+        /// </summary>
+        internal static string DesactivarUsuario {
+            get {
+                return ResourceManager.GetString("DesactivarUsuario", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @id.
+        /// </summary>
+        internal static string id {
+            get {
+                return ResourceManager.GetString("id", resourceCulture);
             }
         }
     }
