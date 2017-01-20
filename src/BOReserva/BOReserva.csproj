@@ -274,6 +274,7 @@
     <Compile Include="DataAccess\DataAccessObject\M06\RecursoM06.Designer.cs" />
     <Compile Include="DataAccess\DataAccessObject\M06\Resource1.Designer.cs" />
     <Compile Include="DataAccess\DataAccessObject\M08\DAOAutomovil.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M08\RecursoDAOM08.Designer.cs" />
     <Compile Include="DataAccess\DataAccessObject\M09\DAOHotel.cs" />
     <Compile Include="DataAccess\DataAccessObject\M10\RecursoDAOM10.Designer.cs">
       <DependentUpon>RecursoDAOM10.resx</DependentUpon>
@@ -1711,6 +1712,7 @@
     <Content Include="Views\gestion_boletos\M05_DetalleBoletoReserva.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="DataAccess\DataAccessObject\M08\RecursoDAOM08.resx" />
     <EmbeddedResource Include="DataAccess\DataAccessObject\M06\RecursoM06.resx" />
     <EmbeddedResource Include="DataAccess\DataAccessObject\M06\Resource1.resx" />
     <EmbeddedResource Include="DataAccess\DataAccessObject\M10\RecursoDAOM10.resx">
