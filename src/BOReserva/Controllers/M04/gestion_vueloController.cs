@@ -34,7 +34,7 @@ namespace BOReserva.Controllers
             List<Entidad> listaVuelos;
             try
             {
-                Command<List<Entidad>> comando = FabricaComando.consultarM04_ConsultarTodos();
+                Command<List<Entidad>> comando = FabricaComando.ConsultarM04_ConsultarTodos();
                 listaVuelos = comando.ejecutar();  
             }
             catch (SqlException e)
@@ -52,6 +52,8 @@ namespace BOReserva.Controllers
             return PartialView(listaVuelos);
         }
 
+      
+
         //VISTA-CREAR: dlstatusvuelo() sera el metodo para llenar el DropdownList del status de vuelo
         public string[] dlstatusvuelo()
         {
@@ -61,28 +63,18 @@ namespace BOReserva.Controllers
             return _listaEstados;
         }
 
-        //VISTA-CREAR: Abriendo la vista, aqui se cargan todos los valores antes de inicializarla
+        /// <summary>
+        /// GET vista M04_GestionVuelo_Crear
+        /// </summary>
+        /// <returns>Vista parcial</returns>
         public ActionResult M04_GestionVuelo_Crear()
         {
-            CCrear_Vuelo model = new CCrear_Vuelo();
-            //creo lista donde voy a almacener todas las ciudades de tipo origen en rutas aereas
-            List<CCrear_Vuelo> resultadoOrigenes = new List<CCrear_Vuelo>();
-            manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
-
-
+            List<Entidad> listaCiudadOrigen;
             try
             {
-                //hago llamado a metodo que llena la lista desde BD
-                  resultadoOrigenes = sql.cargarOrigenes();
-                //llenado dropdownlist de las ciudades origen en la vista crear
-                  if (resultadoOrigenes != null)
-                  {
-                      model._ciudadesOrigen = resultadoOrigenes.Select(x => new SelectListItem
-                      {
-                          Value = x._ciudadOrigen,
-                          Text = x._ciudadOrigen
-                      });
-                  }
+                Command<List<Entidad>> comando = FabricaComando.ConsularM04_LugarOrigen();
+                listaCiudadOrigen = comando.ejecutar();
+                
 
             }
             catch (SqlException e)
@@ -97,19 +89,7 @@ namespace BOReserva.Controllers
                 String error = "Error desconocido ingresando a la pagina agregar, contacte con el administrador.";
                 return Json(error);
             }
-
-
-            //paso la lista al formato de DropDownList
-            var listaEstados = dlstatusvuelo();
-            {
-                model._statusesVuelo = listaEstados.Select(x => new SelectListItem
-                {
-                    Value = x,
-                    Text = x
-                });
-            };
-
-            return PartialView(model);
+            return PartialView(FabricaEntidad.InstanciarVuelo());
         }
 
         //Evento POST de la view de crear vuelo
@@ -117,9 +97,9 @@ namespace BOReserva.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public JsonResult validarAviones(string ciudadO, string ciudadD)
         {
-            CCrear_Vuelo model = new CCrear_Vuelo();
+            CrearVueloMO model = new CrearVueloMO();
             //creo la lista que lleno con las matriculas de avion que cubren la ruta especificada
-            List<CCrear_Vuelo> resultado = new List<CCrear_Vuelo>();
+            List<CrearVueloMO> resultado = new List<CrearVueloMO>();
             manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
 
             try
@@ -157,7 +137,7 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult buscaModeloA(string matriAvion)
         {
-            CCrear_Vuelo model = new CCrear_Vuelo();
+            CrearVueloMO model = new CrearVueloMO();
             string resultado = "";
             manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
 
@@ -185,7 +165,7 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult buscaPasajerosA(string matriAvion)
         {
-            CCrear_Vuelo model = new CCrear_Vuelo();
+            CrearVueloMO model = new CrearVueloMO();
             string resultado = "";
             manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
 
@@ -216,7 +196,7 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult buscaDistanciaA(string matriAvion)
         {
-            CCrear_Vuelo model = new CCrear_Vuelo();
+            CrearVueloMO model = new CrearVueloMO();
             string resultado = "";
             manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
 
@@ -246,7 +226,7 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult buscaVelocidadA(string matriAvion)
         {
-            CCrear_Vuelo model = new CCrear_Vuelo();
+            CrearVueloMO model = new CrearVueloMO();
             string resultado = "";
             manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
             model._ciudadDestino = "aja";
@@ -276,11 +256,11 @@ namespace BOReserva.Controllers
 
 
 
-        [AcceptVerbs(HttpVerbs.Get)]
+        /*[AcceptVerbs(HttpVerbs.Get)]
         public JsonResult cargarDestinos(string ciudadO)
         {
-            CCrear_Vuelo model = new CCrear_Vuelo();
-            List<CCrear_Vuelo> resultado = new List<CCrear_Vuelo>();
+            CrearVueloViewModel model = new CrearVueloViewModel();
+            List<CrearVueloViewModel> resultado = new List<CrearVueloViewModel>();
             manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
 
             try
@@ -316,7 +296,7 @@ namespace BOReserva.Controllers
 
 
         [HttpPost]
-        public JsonResult guardarVuelo(CCrear_Vuelo model)
+        public JsonResult guardarVuelo(CrearVueloViewModel model)
         {
             manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
             if ((model._matriculaAvion == null) || (model._codigoVuelo == null) || (model._ciudadOrigen == null)
@@ -422,7 +402,7 @@ namespace BOReserva.Controllers
         public JsonResult buscaFechaA(string fechaDes, string horaDes, string ciudadO, string ciudadD, string matriAvion, int opcion)
         {
 
-            CCrear_Vuelo model = new CCrear_Vuelo();
+            CrearVueloViewModel model = new CrearVueloViewModel();
             string resultado = "";
             string fecha = "";
             manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
@@ -518,7 +498,7 @@ namespace BOReserva.Controllers
             }
                                                                   
             return PartialView(vuelo);
-        }
+        }*/
 
 
 

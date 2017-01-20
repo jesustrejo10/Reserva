@@ -48,7 +48,7 @@ namespace BOReserva.Controllers.PatronComando
         /// </summary>
         /// <param name="vuelo"></param>
         /// <returns>Instancia M04_COAgregarVuelo</returns>
-        public static Command<String> crearM04_AgregarVuelo(Entidad vuelo)
+        public static Command<String> CrearM04_AgregarVuelo(Entidad vuelo)
         {
             return new M04.M04_COAgregarVuelo();
         }
@@ -56,16 +56,29 @@ namespace BOReserva.Controllers.PatronComando
         /// <summary>
         /// Método para instanciar el comando M04_COConsultarTodos
         /// </summary>
-        /// <param name="vuelo"></param>
         /// <returns>Instancia M04_COConsultarTodosVuelos</returns>
-        public static Command<List<Entidad>> consultarM04_ConsultarTodos()
+        public static Command<List<Entidad>> ConsultarM04_ConsultarTodos()
         {
             return new M04.M04_COConsultarTodosVuelos();
         }
 
+        /// <summary>
+        /// Metodo para instanciar el comando cambiar status del modulo de vuelos
+        /// </summary>
+        /// <param name="vuelo">id del vuelo al que se le cambiara el status</param>
+        /// <returns>Instancia del M04_COCambiarStatus</returns>
         public static Command<Boolean> M04_CambiarStatus(int vuelo)
         {
             return new M04.M04_COCambiarStatus(vuelo);
+        }
+
+        /// <summary>
+        /// Metodo para instanciar el comando M04_LugarOrigen
+        /// </summary>
+        /// <returns>Instancia del metodo M04_COLugarOrigen</returns>
+        public static Command<List<Entidad>> ConsularM04_LugarOrigen()
+        {
+            return new M04.M04_COLugarOrigen();
         }
 
         #endregion

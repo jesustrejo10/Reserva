@@ -46,6 +46,17 @@ namespace BOReserva.DataAccess.Domain
             return new Ciudad();
         }
 
+        /// <summary>
+        /// Metodo que instancia la clase ciudad
+        /// </summary>
+        /// <param name="id">id de la ciudad</param>
+        /// <param name="ciudad">nombre de la ciudad</param>
+        /// <returns>Instancia de la clase ciudad</returns>
+        public static Entidad InstanciarCiudad(int id, String ciudad)
+        {
+            return new Ciudad();
+        }
+
         public static Entidad InstanciarReclamo(String tituloReclamo, String detalleReclamo, String fechaReclamo, String estadoReclamo)
         {
             return new Reclamo();
@@ -73,11 +84,20 @@ namespace BOReserva.DataAccess.Domain
         /// <param name="fechaAterrizaje"></param>
         /// <param name="avion"></param>
         /// <returns>Retorna una instancia de la clase vuelo con todos sus atributos</returns>
-        public static Entidad crearVuelo(int id, String codigoVuelo, Ruta ruta, DateTime fechaDespegue,
+        public static Entidad InstanciarVuelo(int id, String codigoVuelo, Ruta ruta, DateTime fechaDespegue,
                                           String status, DateTime fechaAterrizaje, Avion avion)
         {
             return new Vuelo(id, codigoVuelo, ruta, fechaDespegue, status, fechaAterrizaje,
                              avion);
+        }
+
+        /// <summary>
+        /// Instanciar vuelo sin ningun parametro
+        /// </summary>
+        /// <returns>Entidad vuelo vacia</returns>
+        public static Entidad InstanciarVuelo()
+        {
+            return new Vuelo();
         }
         #endregion
 

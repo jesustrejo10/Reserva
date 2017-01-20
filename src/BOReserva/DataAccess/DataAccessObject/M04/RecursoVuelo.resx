@@ -181,4 +181,8 @@
     <value>idOrigen</value>
     <comment>Id del lugar de origen de la ruta</comment>
   </data>
+  <data name="ListarLugarO" xml:space="preserve">
+    <value>M04_ListarLugarO</value>
+    <comment>Procedimiento de la BD que retorna una lista con todos los lugares que tienen rutas activas</comment>
+  </data>
 </root>

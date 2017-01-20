@@ -79,6 +79,15 @@ namespace BOReserva.DataAccess.DataAccessObject.M04 {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a M04_ListarLugarO.
+        /// </summary>
+        internal static string ListarLugarO {
+            get {
+                return ResourceManager.GetString("ListarLugarO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a M04_ListarVuelos.
         /// </summary>
         internal static string ListarVuelos {

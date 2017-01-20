@@ -1,5 +1,5 @@
 ﻿<!-- Indico que para esta vista, M04_GestionVuelo_Crear, utilizare el modelo Models/gestion_vuelo/CGestionVuelo-->
-@model BOReserva.Models.gestion_vuelo.CCrear_Vuelo
+@model BOReserva.Models.gestion_vuelo.CrearVueloViewModel
 
 
 <script src="~/Scripts/Scripts_Vuelos/llamadas_generales_Vuelos.js"></script>
@@ -33,8 +33,8 @@
                             <!-- DROPDOWN CIUDAD ORIGEN -->
                             <div class="col-xs-6">
                                 <label> Ciudad Origen (<span style="color: #d9534f">*</span>):</label>
-                                @Html.DropDownListFor(m => m._ciudadOrigen, new SelectList(Model._ciudadesOrigen as System.Collections.IEnumerable, "Value", "Text"),
-              "Seleccione una ciudad origen", new { @class = "form-control", @id = "ciudadO", @style = "width: 100%;" })
+                                @Html.DropDownListFor(m => m._ciudadOrigen, ViewBag.CiudadO as SelectList, "Seleccione una ciudad origen", new { @class = "form-control", required = "required" })
+                                
                             </div>
                             <!-- FIN CIUDAD ORIGEN -->
                             <!-- DROPDOWN CIUDAD DESTINO  -->
@@ -112,7 +112,8 @@
                                 <!-- DROPDOWNLISTFOR STATUS-->
                                 <label> Estado vuelo (<span style="color: #d9534f">*</span>):</label>
                                 <!--Solo puede ser de tipo "Activo" o "Inactivo"-->
-                                @Html.DropDownListFor(m => m._statusVuelo, new SelectList(Model._statusesVuelo, "Value", "Text"),
+                                @Html.DropDownListFor(m => m._statusVuelo, new[] { new SelectListItem() { Text = "Activo", Value = "Activo"}, new SelectListItem()
+                                        { Text = "Inactivo", Value = "Inactivo" } },
                                    "Seleccione el status", new { @style = "width: 100%;", @class = "form-control", @id = "estadoVuelo" })
                             </div>
                             <!-- FIN STATUS  -->

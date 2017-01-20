@@ -72,7 +72,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                                 0, 0, 0, 0, 0);
                         Ruta ruta = new Ruta(idRuta, ciudadO, ciudadD, null, null, 0);
                         //////////////////////////////////////////////////////////////////////////////////////
-                        objVuelo = FabricaEntidad.crearVuelo(id, codigoVuelo, ruta, fechaDespegue, status,
+                        objVuelo = FabricaEntidad.InstanciarVuelo(id, codigoVuelo, ruta, fechaDespegue, status,
                                                              fechaAterrizaje, avion);
                         lista.Add(objVuelo);
                     }
@@ -172,6 +172,49 @@ namespace BOReserva.DataAccess.DataAccessObject
             return true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public List<Entidad> ConsultarLugarOrigen()
+        {
+            DataTable resultado;
+            List<Entidad> lista;
+            try
+            {
+                resultado = EjecutarStoredProcedureTuplas(RecursoVuelo.ListarLugarO);
+                Conectar();
+                if (resultado != null)
+                {
+                    lista = new List<Entidad>();
+                    foreach (DataRow row in resultado.Rows)
+                    {
+                        int id = int.Parse(row[RecursoVuelo.ParametroIdOrigen].ToString());
+                        String ciudadO = row[RecursoVuelo.ParametroCOrigen].ToString();
+                        lista.Add(FabricaEntidad.InstanciarCiudad(id, ciudadO));
+                    }
+                    return lista;
+                }
+
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw ex;
+            }
+            catch (FormatException ex)
+            {
+                throw ex;
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return null;
+        }
 
     }
 }
