@@ -342,6 +342,11 @@
       <DependentUpon>RecursoBD.resx</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\Model\ResultadoBD.cs" />
+    <Compile Include="Excepciones\ExceptionReserva.cs" />
+    <Compile Include="Excepciones\Log.cs" />
+    <Compile Include="Excepciones\LogException.cs" />
+    <Compile Include="Excepciones\M10\ReservaExceptionM10.cs" />
+    <Compile Include="Excepciones\RecursoLog.Designer.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1741,6 +1746,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoBD.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Excepciones\RecursoLog.resx" />
     <EmbeddedResource Include="Models\gestion_cruceros\RecursosCruceros.resx" />
     <EmbeddedResource Include="Models\gestion_usuarios\RecursoBD.resx">
       <Generator>ResXFileCodeGenerator</Generator>
