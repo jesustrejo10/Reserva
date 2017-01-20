@@ -8,6 +8,7 @@ using System.Data;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Model;
 using System.Data.SqlClient;
+using BOReserva.Excepciones.M10;
 
 namespace BOReserva.M10
 {
@@ -72,27 +73,28 @@ namespace BOReserva.M10
             catch (ArgumentNullException ex)
             {
                 //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                //throw new ExceptionM4Tangerine("DS-404", "Ingreso de un argumento con valor invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Argumento con valor invalido", ex);
             }
             catch (FormatException ex)
             {
                 //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                //throw new ExceptionM4Tangerine("DS-404", "Ingreso de datos con un formato invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
             }
             catch (SqlException ex)
             {
                 //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                //throw new ExceptionM4Tangerine("DS-404", "Error al momento de realizar la conexion", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
             }
-            //catch (ExceptionTGConBD ex)
-            //{
-            //    Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-            //    throw new ExceptionM4Tangerine("DS-404", "Error al momento de realizar la conexion con la base de datos", ex);
-            //}
-            catch (Exception)
+            catch (ExceptionBD ex)
+            {
+              //  Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
             {
 
-                throw;
+               // Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error al realizar operacion ", ex);
             }
         }
 
@@ -148,27 +150,28 @@ namespace BOReserva.M10
             catch (ArgumentNullException ex)
             {
                 //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                //throw new ExceptionM4Tangerine("DS-404", "Ingreso de un argumento con valor invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Argumento con valor invalido", ex);
             }
             catch (FormatException ex)
             {
                 //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                //throw new ExceptionM4Tangerine("DS-404", "Ingreso de datos con un formato invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
             }
             catch (SqlException ex)
             {
                 //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                //throw new ExceptionM4Tangerine("DS-404", "Error al momento de realizar la conexion", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
             }
-            //catch (ExceptionTGConBD ex)
-            //{
-            //    Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-            //    throw new ExceptionM4Tangerine("DS-404", "Error al momento de realizar la conexion con la base de datos", ex);
-            //}
-            catch (Exception)
+            catch (ExceptionBD ex)
+            {
+                //  Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
             {
 
-                throw;
+                // Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error al realizar operacion ", ex);
             }
 
 
@@ -209,23 +212,28 @@ namespace BOReserva.M10
             catch (ArgumentNullException ex)
             {
                 //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                //throw new ExceptionM4Tangerine("DS-404", "Ingreso de un argumento con valor invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Argumento con valor invalido", ex);
             }
             catch (FormatException ex)
             {
                 //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                //throw new ExceptionM4Tangerine("DS-404", "Ingreso de datos con un formato invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
             }
             catch (SqlException ex)
             {
                 //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                //throw new ExceptionM4Tangerine("DS-404", "Compañia ya registrada dentro del sistema ", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
             }
-            catch (Exception)
+            catch (ExceptionBD ex)
             {
-                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                //throw new ExceptionM4Tangerine("DS-404", "Error al momento de realizar la operacion ", ex);
-                throw;
+                //  Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
+            {
+
+                // Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error al realizar operacion ", ex);
             }
 
 
@@ -256,27 +264,28 @@ namespace BOReserva.M10
             catch (ArgumentNullException ex)
             {
                 //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                //throw new ExceptionM4Tangerine("DS-404", "Ingreso de un argumento con valor invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Argumento con valor invalido", ex);
             }
             catch (FormatException ex)
             {
                 //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                //throw new ExceptionM4Tangerine("DS-404", "Ingreso de datos con un formato invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
             }
             catch (SqlException ex)
             {
                 //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                //throw new ExceptionM4Tangerine("DS-404", "Error al momento de realizar la conexion", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
             }
-            //catch (ExceptionTGConBD ex)
-            //{
-            //    Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-            //    throw new ExceptionM4Tangerine("DS-404", "Error al momento de realizar la conexion con la base de datos", ex);
-            //}
-            catch (Exception)
+            catch (ExceptionBD ex)
+            {
+                //  Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
             {
 
-                throw;
+                // Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error al realizar operacion ", ex);
             }
             return false; //se retorna falso en caso de no ser exitoso el procedimiento eliminar
         }
@@ -316,27 +325,28 @@ namespace BOReserva.M10
             catch (ArgumentNullException ex)
             {
                 //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                //throw new ExceptionM4Tangerine("DS-404", "Ingreso de un argumento con valor invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Argumento con valor invalido", ex);
             }
             catch (FormatException ex)
             {
                 //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                //throw new ExceptionM4Tangerine("DS-404", "Ingreso de datos con un formato invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
             }
             catch (SqlException ex)
             {
                 //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                //throw new ExceptionM4Tangerine("DS-404", "Error al momento de realizar la conexion", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
             }
-            //catch (ExceptionTGConBD ex)
-            //{
-            //    Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-            //    throw new ExceptionM4Tangerine("DS-404", "Error al momento de realizar la conexion con la base de datos", ex);
-            //}
-            catch (Exception)
+            catch (ExceptionBD ex)
+            {
+                //  Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
             {
 
-                throw;
+                // Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error al realizar operacion ", ex);
             }
         }
 
@@ -378,27 +388,28 @@ namespace BOReserva.M10
             catch (ArgumentNullException ex)
             {
                 //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                //throw new ExceptionM4Tangerine("DS-404", "Ingreso de un argumento con valor invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Argumento con valor invalido", ex);
             }
             catch (FormatException ex)
             {
                 //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                //throw new ExceptionM4Tangerine("DS-404", "Ingreso de datos con un formato invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
             }
             catch (SqlException ex)
             {
                 //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                //throw new ExceptionM4Tangerine("DS-404", "Error al momento de realizar la conexion", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
             }
-            //catch (ExceptionTGConBD ex)
-            //{
-            //    Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-            //    throw new ExceptionM4Tangerine("DS-404", "Error al momento de realizar la conexion con la base de datos", ex);
-            //}
-            catch (Exception)
+            catch (ExceptionBD ex)
+            {
+                //  Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
             {
 
-                throw;
+                // Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error al realizar operacion ", ex);
             }
 
             return true;

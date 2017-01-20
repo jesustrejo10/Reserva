@@ -1,11 +1,12 @@
-﻿using System;
+﻿using BOReserva.DataAccess.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace BOReserva.Excepciones.M10
 {
-    public class ReservaExceptionM10
+    public class ReservaExceptionM10 : ExceptionBD
     {
         public ReservaExceptionM10(): base()
         { }
