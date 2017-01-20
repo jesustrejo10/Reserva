@@ -71,7 +71,7 @@ namespace BOReserva.DataAccess.Domain
         }
 
         #endregion 
-        public static Entidad InstanciarReclamo(String tituloReclamo, String detalleReclamo, String fechaReclamo, String estadoReclamo)
+        public static Entidad InstanciarReclamo(String tituloReclamo, String detalleReclamo, String fechaReclamo, int estadoReclamo, int usuario)
         {
             return new Reclamo();
         }
@@ -80,9 +80,10 @@ namespace BOReserva.DataAccess.Domain
             String titulo = model._tituloReclamo;
             String detalle = model._detalleReclamo;
             String fecha = model._fechaReclamo;
-            String estado = model._estadoReclamo;
+            int estado = model._estadoReclamo;
+            int usuario = model._usuario;
 
-            return new Reclamo(titulo, detalle, fecha, estado);
+            return new Reclamo(titulo, detalle, fecha, estado, usuario);
         }
 
         #region M04_Vuelo
@@ -96,13 +97,13 @@ namespace BOReserva.DataAccess.Domain
         /// <param name="fechaDespegue"></param>
         /// <param name="status"></param>
         /// <param name="fechaAterrizaje"></param>
-        /// <param name="idAvion"></param>
+        /// <param name="avion"></param>
         /// <returns>Retorna una instancia de la clase vuelo con todos sus atributos</returns>
         public static Entidad crearVuelo(int id, String codigoVuelo, int ruta, DateTime fechaDespegue,
-                                          String status, DateTime fechaAterrizaje, int idAvion)
+                                          String status, DateTime fechaAterrizaje, int avion)
         {
             return new Vuelo(id, codigoVuelo, ruta, fechaDespegue, status, fechaAterrizaje,
-                             idAvion);
+                             avion);
         }
         #endregion
 

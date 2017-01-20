@@ -4,6 +4,16 @@
 @using (Html.BeginForm("modifyOferta", "gestion_ofertas", null, FormMethod.Post, new { @id = "modifyOfertaForm", @class = "form-horizontal" }))
 {
     <!-----------------SECCION CONSULTAR OFERTA-------------------->
+    <!--Plugins para usar los datepickers-->
+    <head>
+        <title></title>
+        <script src="~/Content/bootstrap/css/bootstrap.min.css"></script>
+        <script src="~/Content/plugins/jQuery/jquery-2.2.3.min.js"></script>
+        <script src="~/Content/plugins/datepicker/datepicker3.css"></script>
+        <script src="~/Content/plugins/datepicker/bootstrap-datepicker.js"></script>
+        <script src="~/Content/plugins/datepicker/locales/bootstrap-datepicker.es.js"></script>
+    </head>
+    <!---->
     <div class="row">
         <div class="col-md-12">
             <div class="box box">
@@ -367,5 +377,26 @@
         }
         return true;
     }
+
+    //Inicio de código nuevo
+    $(".fechaIniOferta").ready(function () {
+        $('#fechaIniOferta').datepicker({
+            format: 'dd/mm/yyyy',
+            pickTime: false,
+            autoclose: true,
+            language: 'es'
+        });
+    });
+    //Fin de código nuevo
+    //Inicio de código nuevo
+    $(".fechaFinOferta").ready(function () {
+        $('#fechaFinOferta').datepicker({
+            format: 'dd/mm/yyyy',
+            pickTime: false,
+            autoclose: true,
+            language: 'es'
+        });
+    });
+    //Fin de código nuevo
 </script>
 <!-----------------FIN SECCION CONSULTAR OFERTA-------------------->
