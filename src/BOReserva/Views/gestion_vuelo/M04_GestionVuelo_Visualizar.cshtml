@@ -1,4 +1,4 @@
-﻿@model List<BOReserva.Models.gestion_vuelo.CVuelo>
+﻿@model List<BOReserva.DataAccess.Domain.Entidad>
 
 <script src="~/Scripts/Scripts_Vuelos/llamadas_generales_Vuelos.js"></script>
 
@@ -28,31 +28,12 @@
                     <tbody>
                         @try
                         {
-                            foreach (BOReserva.Models.gestion_vuelo.CVuelo item in Model)
+                            foreach (BOReserva.DataAccess.Domain.Vuelo i in Model)
                             {
                               
-                                <tr id="@item._id">
-                                    <td>@item._codigoVuelo</td>
-                                    <td>@item._ciudadOrigen</td>
-                                    <td>@item._ciudadDestino</td>
-                                    <td>@item._fechaDespegue</td>
-                                    <td>@item._fechaAterrizaje</td>
-                                    <td>@item._statusVuelo</td>
-                                    <td>@item._matriculaAvion</td>
-                                    <td>
-                                        <a href="#"> <i class="fa fa-eye mostrar"></i></a>
-                                        <a href="#"><i class="fa fa-gear modificar"></i></a>
-                                        @{
-                                            if (item._statusVuelo == "activo")
-                                            {
-                                                <a href="#" title="Activar/Desactivar vuelo"><i class="fa fa-toggle-on desactivar"></i></a>
-                                            }
-                                            if (item._statusVuelo == "inactivo")
-                                            {
-                                                <a href="#" title="Activar/Desactivar vuelo"><i class="fa fa-toggle-off activar"></i></a>
-                                            }
-                                        }
-                                    </td>
+                                <tr id="@i._id">
+                                    <td>@i._id</td>
+                                    <td>@i.CodigoVuelo</td>
                                 </tr>
                             }
                         }

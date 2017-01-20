@@ -34,16 +34,16 @@ namespace BOReserva.Controllers
         /// Método de la vista parcial M08_VisualizarAutomoviles
         /// </summary>
         /// <returns>Retorna la vista parcial M08_VisualizarAutomoviles</returns>
-        public ActionResult M08_VisualizarAutomoviles()
-        {
-            //var companies = DataRepository.GetCompanies();
-            //List<CAutomovil> listavehiculos = new List<CAutomovil>();
-            manejadorSQL buscarvehiculos = new manejadorSQL();
-            List<Automovil> listavehiculos = buscarvehiculos.MListarvehiculosBD();  //AQUI SE BUSCA TODO LOS VEHICULOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
-            //CAutomovil test = new CAutomovil("AG234FC", "3", "Mazda", 2006, "Sedan", 1589.5, 5, 7550.0, 250.6, 290.4, DateTime.Parse("11/11/2016"), "Azul", 1, "Automatico", "Venezuela", "Distrito Capital", "Caracas");
-            //listavehiculos.Add(test);
-            return PartialView(listavehiculos);
-        }
+        //public ActionResult M08_VisualizarAutomoviles()
+        //{
+        //    //var companies = DataRepository.GetCompanies();
+        //    //List<CAutomovil> listavehiculos = new List<CAutomovil>();
+        //    manejadorSQL buscarvehiculos = new manejadorSQL();
+        //    //List<Automovil> listavehiculos = buscarvehiculos.MListarvehiculosBD();  //AQUI SE BUSCA TODO LOS VEHICULOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
+        //    //CAutomovil test = new CAutomovil("AG234FC", "3", "Mazda", 2006, "Sedan", 1589.5, 5, 7550.0, 250.6, 290.4, DateTime.Parse("11/11/2016"), "Azul", 1, "Automatico", "Venezuela", "Distrito Capital", "Caracas");
+        //    //listavehiculos.Add(test);
+        //    return PartialView(listavehiculos);
+        //}
 
 
 
@@ -54,6 +54,7 @@ namespace BOReserva.Controllers
         /// <returns>Retorna la vista parcial M08_VisualizarAutomovil</returns>
         public ActionResult M08_VisualizarAutomovil(String matricula)
         {
+            /*
             manejadorSQL buscarvehiculo = new manejadorSQL();
             Automovil vehiculo = buscarvehiculo.MMostrarvehiculoBD(matricula); //BUSCA EL AUTOMOVIL A MOSTRAR
             //EN TODOS ESTOS METODOS HAY QUE USAR TRY CATCH
@@ -76,6 +77,8 @@ namespace BOReserva.Controllers
             automovil._pais = vehiculo._pais;
             automovil._ciudad = vehiculo._ciudad;
             return PartialView(automovil);
+            */
+            return PartialView(null);
         }
 
 
@@ -87,6 +90,7 @@ namespace BOReserva.Controllers
         /// <returns>Retorna la vista parcial M08_ModificarAutomovil</returns>
         public ActionResult M08_ModificarAutomovil(String matricula)
         {
+            /*
             manejadorSQL buscarvehiculo = new manejadorSQL();
             Automovil vehiculo = buscarvehiculo.MMostrarvehiculoBD(matricula); //BUSCA EL AUTOMOVIL A MOSTRAR
             //EN TODOS ESTOS METODOS HAY QUE USAR TRY CATCH
@@ -110,6 +114,8 @@ namespace BOReserva.Controllers
             automovil._ciudad = vehiculo._ciudad;
             ciudad = vehiculo._ciudad;
             return PartialView(automovil);
+            */
+            return PartialView(null);
         }
 
 
@@ -208,6 +214,7 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult saveVehicle(CAgregarAutomovil model)
         {
+            /*
             String matricula = model._matricula.ToUpper();
             int anio = model._anio;
             int cantpasajeros = model._cantpasajeros;
@@ -230,8 +237,9 @@ namespace BOReserva.Controllers
             manejadorSQL buscarid = new manejadorSQL();
             int id_ciudad = buscarid.MBuscaridciudadBD(_ciudad, pais);
             String agrego_si_no = carronuevo.MAgregaraBD(carronuevo, id_ciudad); //SE AGREGA A LA BD RETORNA 1 SI SE AGREGA Y 0 SINO LO LOGRA
-            
-            return (Json(agrego_si_no));
+            */
+            //return (Json(agrego_si_no));
+            return (Json("no"));
         }
 
 
@@ -243,6 +251,7 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult modifyVehicle(CModificarAutomovil model)
         {
+            /*
             String matricula = model._matricula.ToUpper();
             int anio = model._anio;
             int cantpasajeros = model._cantpasajeros;
@@ -268,6 +277,8 @@ namespace BOReserva.Controllers
             String modifico_si_no = carro.MModificarvehiculoBD(carro, id_ciudad); //SE MODIFICA A LA BD RETORNA 1 SI SE  MODIFICO Y 0 SI NO LO LOGRA
             
             return (Json(modifico_si_no));
+            */
+            return (Json("no"));
         }
 
         /// <summary>
@@ -307,6 +318,7 @@ namespace BOReserva.Controllers
         /// <returns>Retorna un JsonResult</returns>
         public JsonResult deleteVehicle(String matricula)
         {
+            /*
             String _matricula = matricula;
             int anio = 0;
             int cantpasajeros = 0;
@@ -328,6 +340,8 @@ namespace BOReserva.Controllers
                                              color, 1, transmision, pais, ciudad);  //SE CREA EL VEHICULO
             String borro_si_no = carro.MBorrarvehiculoBD(_matricula); //SE BORRA LA BD RETORNA 1 SI SE  BORRA Y 0 SI NO LO LOGRA
             return (Json(borro_si_no));
+            */
+            return (Json("no"));
         }
 
 
@@ -386,6 +400,7 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult activateVehicle(String matricula)
         {
+            /*
             String _matricula = matricula;
             int anio = 0;
             int cantpasajeros = 0;
@@ -407,6 +422,8 @@ namespace BOReserva.Controllers
                                              color, 1, transmision, pais, ciudad);  //SE CREA EL VEHICULO
             String estatus_si_no = carro.MDisponibilidadVehiculoBD(_matricula, 1); //SE BORRA LA BD RETORNA 1 SI SE  BORRA Y 0 SI NO LO LOGRA
             return (Json(estatus_si_no));
+            */
+            return (Json("no"));
         }
 
         /// <summary>
@@ -417,6 +434,7 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult deactivateVehicle(String matricula)
         {
+            /*
             String _matricula = matricula;
             int anio = 0;
             int cantpasajeros = 0;
@@ -438,6 +456,8 @@ namespace BOReserva.Controllers
                                              color, 1, transmision, pais, ciudad);  //SE CREA EL VEHICULO
             String estatus_si_no = carro.MDisponibilidadVehiculoBD(_matricula, 0); //SE BORRA LA BD RETORNA 1 SI SE  BORRA Y 0 SI NO LO LOGRA
             return (Json(estatus_si_no));
+            */
+            return (Json("no"));
         }
 
         /// <summary>

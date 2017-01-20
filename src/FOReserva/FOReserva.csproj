@@ -207,9 +207,61 @@
     <Compile Include="Controllers\gestion_revisionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\gestion_vuelosController.cs" />
+    <Compile Include="Controllers\PatronComando\Command.cs" />
+    <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
+    <Compile Include="Controllers\PatronComando\M16\M16_COAgregarReclamo.cs" />
+    <Compile Include="Controllers\PatronComando\M16\M16_COConsultarReclamo.cs" />
+    <Compile Include="Controllers\PatronComando\M19\M19_COActualizarReserva.cs" />
+    <Compile Include="Controllers\PatronComando\M19\M19_COConsultarAutos.cs" />
+    <Compile Include="Controllers\PatronComando\M19\M19_COConsultarLugar.cs" />
+    <Compile Include="Controllers\PatronComando\M19\M19_COConsultarReserva.cs" />
+    <Compile Include="Controllers\PatronComando\M19\M19_COConsultarReservaId.cs" />
+    <Compile Include="Controllers\PatronComando\M19\M19_COCrearReserva.cs" />
+    <Compile Include="Controllers\PatronComando\M19\M19_COEliminarReserva.cs" />
+    <Compile Include="DataAccess\DataAccessObject\DAOReclamo.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\registro_autenticacionController.cs" />
-    <Compile Include="DataAccess\Domain\CReclamo.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReservaAutomovil.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M19\DAOReservaAutomovil.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M19\RecursoDAOM19.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RecursoDAOM19.resx</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\DataAccessObject\Command\MSSQL\DAOMSSQLCommandCloseConnection.cs" />
+    <Compile Include="DataAccess\DataAccessObject\Command\MSSQL\DAOMSSQLCommand.cs" />
+    <Compile Include="DataAccess\DataAccessObject\Command\MSSQL\DAOMSSQLCommandExecuteStoreProcedureWithResult.cs" />
+    <Compile Include="DataAccess\DataAccessObject\Command\MSSQL\DAOMSSQLCommandExecuteStoreProcedure.cs" />
+    <Compile Include="DataAccess\DataAccessObject\Command\MSSQL\DAOMSSQLCommandExecuteNoQuery.cs" />
+    <Compile Include="DataAccess\DataAccessObject\Command\MSSQL\DAOMSSQLCommandExecuteQuery.cs" />
+    <Compile Include="DataAccess\DataAccessObject\Command\MSSQL\DAOMSSQLCommandOpenConnection.cs" />
+    <Compile Include="DataAccess\DataAccessObject\Command\IDAOCommand.cs" />
+    <Compile Include="DataAccess\DataAccessObject\Common\DAO.cs" />
+    <Compile Include="DataAccess\DataAccessObject\Common\DAOMSSQL.cs" />
+    <Compile Include="DataAccess\DataAccessObject\Common\DAOException.cs" />
+    <Compile Include="DataAccess\DataAccessObject\Common\DAOResult.cs" />
+    <Compile Include="DataAccess\DataAccessObject\Common\DAOUtils.cs" />
+    <Compile Include="DataAccess\DataAccessObject\Common\FabricDAO.cs" />
+    <Compile Include="DataAccess\DataAccessObject\Common\Interface\IDAO.cs" />
+    <Compile Include="DataAccess\DataAccessObject\Common\Interface\IDAOReclamo.cs" />
+    <Compile Include="DataAccess\DataAccessObject\Common\Interface\IDAORevision.cs" />
+    <Compile Include="DataAccess\DataAccessObject\DAO.cs" />
+    <Compile Include="DataAccess\DataAccessObject\DAORevision.cs" />
+    <Compile Include="DataAccess\DataAccessObject\FabricaDAO.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAO.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReclamo.cs" />
+    <Compile Include="DataAccess\Domain\Entidad.cs" />
+    <Compile Include="DataAccess\Domain\FabricaEntidad.cs" />
+    <Compile Include="DataAccess\Domain\Reclamo.cs" />
+    <Compile Include="DataAccess\Model\Connection.cs" />
+    <Compile Include="DataAccess\Model\ExceptionBD.cs" />
+    <Compile Include="DataAccess\Model\Parametro.cs" />
+    <Compile Include="DataAccess\Model\RecursoBD.Designer.cs">
+      <DependentUpon>RecursoBD.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="DataAccess\Model\ResultadoBD.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -228,6 +280,10 @@
     <Compile Include="Models\Diarios\CFoto_Diario.cs" />
     <Compile Include="Models\Diarios\CLugar.cs" />
     <Compile Include="Models\Diarios\CPuntuacion.cs" />
+    <Compile Include="Models\gestion_reserva_automovil\CAutomovil.cs" />
+    <Compile Include="Models\gestion_reserva_automovil\CLugar.cs" />
+    <Compile Include="Models\gestion_reserva_automovil\CReservaAutomovil.cs" />
+    <Compile Include="Models\gestion_reserva_automovil\CUsuario.cs" />
     <Compile Include="Models\Itinerario\CItinerario.cs" />
     <Compile Include="Models\Itinerario\Cvista_Itinerario.cs" />
     <Compile Include="Models\Itinerario\itinerario.cs" />
@@ -1567,6 +1623,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="DataAccess\DataAccessObject\M19\Scripts de Procedures M19.sql" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\assets\fonts\et-line.eot" />
@@ -3188,6 +3245,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="DataAccess\DataAccessObject\M16\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -3200,6 +3258,18 @@
     <None Include="ReservaDB.dbml.layout">
       <DependentUpon>ReservaDB.dbml</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DataAccess\DataAccessObject\M19\RecursoDAOM19.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecursoDAOM19.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DataAccess\Model\RecursoBD.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecursoBD.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -3235,7 +3305,7 @@
     <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
   </Target>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
