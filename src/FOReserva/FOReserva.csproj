@@ -218,9 +218,11 @@
     <Compile Include="Controllers\PatronComando\M19\M19_COConsultarReservaId.cs" />
     <Compile Include="Controllers\PatronComando\M19\M19_COCrearReserva.cs" />
     <Compile Include="Controllers\PatronComando\M19\M19_COEliminarReserva.cs" />
+    <Compile Include="DataAccess\DataAccessObject\DAODiario.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOReclamo.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\registro_autenticacionController.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAODiario.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReservaAutomovil.cs" />
     <Compile Include="DataAccess\DataAccessObject\M19\DAOReservaAutomovil.cs" />
     <Compile Include="DataAccess\DataAccessObject\M19\RecursoDAOM19.Designer.cs">

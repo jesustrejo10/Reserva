@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using FOReserva.DataAccess.Domain;
 namespace FOReserva.Models.Diarios
 {
-    public class CDiarioModel : BaseEntity
+    public class CDiarioModel : Entidad
     {
         private string   _nombre;
         private DateTime _fecha_ini;
@@ -19,6 +19,11 @@ namespace FOReserva.Models.Diarios
         private int      _num_visita;
         private int      _fk_lugar;
         private int      _fk_usuario;
+        public int Id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
 
         //Para el formulario
         private int     _filtro;
@@ -39,7 +44,7 @@ namespace FOReserva.Models.Diarios
              int      fk_lugar,
              int      fk_usuario)
 
-            : base(id, name)
+            
         {
 
             this._nombre        = nombre;

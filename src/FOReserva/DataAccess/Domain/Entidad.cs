@@ -15,5 +15,6 @@ namespace FOReserva.DataAccess.Domain
         /// utilizado para acceder a cada registro.
         /// </summary>
         public int _id { get; set; }
+
     }
 }
