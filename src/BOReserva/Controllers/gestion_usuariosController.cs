@@ -54,6 +54,10 @@ namespace BOReserva.Controllers
             return (Json(agrego));
         }
 
+        /// <summary>
+        /// Método de la vista parcial M12_VisualizarUsuarios
+        /// </summary>
+        /// <returns>Retorna la vista parcial M12_VisualizarUsuarios en conjunto del Modelo de dicha vista</returns>
         public ActionResult M12_VisualizarUsuarios()
         {
             Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM12VisualizarUsuarios();

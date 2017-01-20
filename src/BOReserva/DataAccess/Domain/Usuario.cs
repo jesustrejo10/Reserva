@@ -5,7 +5,7 @@ using System.Web;
 
 namespace BOReserva.DataAccess.Domain
 {
-    public class Usuario :Entidad
+    public class Usuario : Entidad
     {
         public String _nombre { get; set; }
         public String _apellido { get; set; }

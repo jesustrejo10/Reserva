@@ -4,6 +4,7 @@ using BOReserva.Models.gestion_reclamos;
 using BOReserva.Models.gestion_restaurantes;
 using BOReserva.Models.gestion_roles;
 using BOReserva.Models.gestion_usuarios;
+using BOReserva.DataAccess.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -123,6 +124,19 @@ namespace BOReserva.DataAccess.Domain
 		}
 		#endregion
 		
+        #region M08_Automoviles
+        public static Entidad InstanciarAutomovil(String matricula, String modelo, String fabricante, String anio, String tipovehiculo,
+                                                  String kilometraje, String cantpasajeros, String preciocompra, String precioalquiler,
+                                                  String penalidaddiaria, String fecharegistro, String color, String disponibilidad,
+                                                  String transmision, String pais, String ciudad, String fk_ciudad)
+        {
+            return new Automovil( matricula,  modelo, fabricante, anio, tipovehiculo,
+                                  kilometraje, cantpasajeros, preciocompra, precioalquiler,
+                                  penalidaddiaria, fecharegistro, color, disponibilidad,
+                                  transmision, pais, ciudad, fk_ciudad);
+        }
+        #endregion
+
 		#region Modulo 10
         public static CRestauranteModelo crearRestaurant(string nombre, string direccion, string telefono, string descripcion, string horarioApertura, string horarioCierre, int idLugar)
         {
@@ -179,6 +193,15 @@ namespace BOReserva.DataAccess.Domain
             return new Permiso();
         }
 
+        #region M06 GESTION COMIDA
+
+        public static Entidad instanciarComida(string nombre, string tipo, int estatus, string descripcion)
+        {
+            return new Comida(nombre, tipo, estatus, descripcion);
+        }
+
+        #endregion
+
         #region M12_Usuarios 
         public static Entidad InstanciarUsuario(int id, string nombre, string apellido, string correo, string contrasena, int fkRol, DateTime fechaCreacion, string activo)
         {
@@ -192,7 +215,7 @@ namespace BOReserva.DataAccess.Domain
             string nombre = model._nombre;
             string apellido = model._apellido;
             string correo = model._correo;
-            string contrasena = model._contrasena;
+            string contrasena = model.contraseñaUsuario;
             DateTime fechaCreacion = model._fechaCreacion;
             string activo = model._activo;
 

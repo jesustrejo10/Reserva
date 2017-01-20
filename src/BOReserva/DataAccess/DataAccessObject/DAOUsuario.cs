@@ -19,17 +19,23 @@ namespace BOReserva.DataAccess.DataAccessObject
         int IDAO.Agregar(Entidad e)
         {
             Usuario usuario = (Usuario)e;
+            
             SqlConnection conexion = Connection.getInstance(_connexionString);
             try
             {
                 conexion.Open();
-                usuario._fechaCreacion = DateTime.Today;
-                String sql = "INSERT INTO Usuario VALUES ('" + usuario._nombre + "','" + usuario._apellido + "','" + usuario._correo + "','" + usuario._contrasena + "',1,'" + usuario._fechaCreacion + "','" + usuario._activo + "')";
+
+                usuario._fechaCreacion = DateTime.Now;
+
+                String sql = "INSERT INTO Usuario VALUES ('" + usuario._nombre + "','" + usuario._apellido + "','" + usuario._correo + "','" + usuario._contrasena + "',1,'" + usuario._fechaCreacion.ToString("yyyy-MM-dd") + "','" + usuario._activo + "')";
+                
                 Debug.WriteLine(sql);
                 SqlCommand cmd = new SqlCommand(sql, conexion);
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
+                
                 conexion.Close();
+                
                 return 1;
             }
             catch (SqlException ex)

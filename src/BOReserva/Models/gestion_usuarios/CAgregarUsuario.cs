@@ -15,7 +15,7 @@ namespace BOReserva.Models.gestion_usuarios
         public string _correo { get; set; }
         public string _nombre { get; set; }
         public string _apellido { get; set; }
-        public string _contrasena { get; set; }
+        private string _contrasena { get; set; }
         public int _rol { get; set; }
         public string _activo { get; set; }
         public int _id { get; set; }
@@ -23,14 +23,13 @@ namespace BOReserva.Models.gestion_usuarios
         public Dictionary<int, Entidad> _rols { get; set; }
 
         [NotMapped]
-        [Compare("_contrasena")]
+        [Compare("contraseñaUsuario")]
         public string _confirmarContraseña { get; set; }
 
-        public CUsuario toClass()
+        public string contraseñaUsuario
         {
-            CUsuario user = new CUsuario(_id, _nombre, _apellido, HashPassword(_contrasena), _correo, _activo, _fechaCreacion, _rol);
-            return user;
-
+            get { return HashPassword(_contrasena); }
+            set { _contrasena = value; }
         }
 
         private String HashPassword(String pass)
@@ -40,9 +39,5 @@ namespace BOReserva.Models.gestion_usuarios
             else return null;
         }
 
-        private void setFecha()
-        {
-            _fechaCreacion = DateTime.Now;
-        }
     }
 }

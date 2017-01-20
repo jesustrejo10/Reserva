@@ -80,7 +80,7 @@ $(document).ready(function() {
                                     <!-- Hora de apertura del Restaurant-->
                                     <div class="col-xs-6">
                                         <label for="horarioApertura">Hora Apertura(<span style="color:red">*</span>):</label>
-                                        @Html.DropDownList("ComboHoraIni", ViewBag.Horarios as SelectList, "Horario Inicio", new { @class = "form-control" })
+                                        @Html.DropDownList("ComboHoraIni", ViewBag.HorariosIni as SelectList, "Horario Inicio", new { @class = "form-control" })
                                     </div>
 
                                 </div>
@@ -92,7 +92,7 @@ $(document).ready(function() {
                                     <!-- Hora de cierre del Restaurant-->
                                     <div class="col-xs-6">
                                         <label for="horarioCierre">Hora Cierre(<span style="color:red">*</span>):</label>
-                                        @Html.DropDownList("ComboHoraFin", ViewBag.Horarios as SelectList, "Horario Fin", new { @class = "form-control" })
+                                        @Html.DropDownList("ComboHoraFin", ViewBag.HorariosFin as SelectList, "Horario Fin", new { @class = "form-control" })
                                     </div>
 
                                 </div>
