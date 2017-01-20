@@ -93,11 +93,18 @@ namespace BOReserva.Controllers
 
         public ActionResult M24_ListarCruceros()
         {
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14VisualizarCruceros();
+            Dictionary<int, Entidad> listaCruceros = comando.ejecutar();
+            return PartialView(listaCruceros);
+        }
+
+        /*public ActionResult M24_ListarCruceros()
+        {
             ConexionBD cbd = new ConexionBD();
             VistaListaCrucero vlc = new VistaListaCrucero();
             vlc.cruceros = cbd.listarCruceros();
             return PartialView("M24_ListarCruceros", vlc);
-        }
+        }*/
 
         [HttpPost]
         public JsonResult guardarCrucero(CGestion_crucero model)

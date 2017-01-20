@@ -111,72 +111,39 @@ namespace BOReserva.DataAccess.DataAccessObject
 
         Dictionary<int, Entidad> IDAO.ConsultarTodos()
         {
-            List<Crucero> listavehiculos = new List<Crucero>();
+            //List<Crucero> listavehiculos = new List<Crucero>();
             Dictionary<int, Entidad> listaCruceros = new Dictionary<int, Entidad>();
             //puedo usar Singleton
-            SqlConnection conexion = Connection.getInstance(_connexionString);
-
+            SqlConnection con = Connection.getInstance(_connexionString);
+            Crucero crucero;
             try
             {
-                conexion.Open();
-                String sql = "SELECT C.* " +
-                                "FROM CRUCERO C ";
+                con.Open();
 
-                SqlCommand cmd = new SqlCommand(sql, conexion);
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    Pais pais;
-                    Ciudad ciudad;
-                    Hotel hotel;
-                    int idCiudad;
-                    String nombreCiudad;
-                    int idPais;
-                    String nombrePais;
+                SqlCommand query = new SqlCommand("M24_ListarCruceros", con);
 
-                    int idHotel;
-                    int capacidad;
-                    int clasificacion;
-                    String nombreHotel;
-                    String direccionHotel;
-                    String paginaWebHotel;
-                    String emailHotel;
-
-                    while (reader.Read())
+                query.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = query.ExecuteReader();
+                int elemento = 0;
+                while (reader.Read())
                     {
-                        //SE AGREGA CREA UN OBJECTO VEHICLE SE PASAN LOS ATRIBUTO ASI reader["<etiqueta de la columna en la tabla Automovil>"]
-                        //Y  SE AGREGA a listavehiculos
-                        //public Hotel(int id, String nombre, String direccion, String email, String paginaWeb, int clasificacion, int capacidad, Ciudad ciudad)
-                        idPais = Int32.Parse(reader["id_pais"].ToString());
-                        nombrePais = reader["nombre_pais"].ToString();
-                        pais = new Pais(idPais, nombrePais);
-
-                        idCiudad = Int32.Parse(reader["id_ciudad"].ToString());
-                        nombreCiudad = reader["nombre_ciudad"].ToString();
-                        ciudad = new Ciudad(idCiudad, nombreCiudad, pais);
-                        idHotel = Int32.Parse(reader["hot_id"].ToString());
-
-                        hotel = new Hotel(
-                            idHotel,
-                            reader["hot_nombre"].ToString(),
-                            reader["hot_direccion"].ToString(),
-                            reader["hot_email"].ToString(),
-                            reader["hot_url_pagina"].ToString(),
-                            Int32.Parse(reader["hot_estrellas"].ToString()),
-                            Int32.Parse(reader["hot_cantidad_habitaciones"].ToString()),
-                            ciudad,
-                            Int32.Parse(reader["hot_disponibilidad"].ToString())
-                        );
-                        listaCruceros.Add(idHotel, hotel);
+                        crucero = new Crucero(
+                            reader["nombre"].ToString(),
+                            reader["compania"].ToString(),
+                            int.Parse(reader["capacidad"].ToString()),
+                            reader["estatus"].ToString());
+                        listaCruceros.Add(elemento,crucero);
+                        elemento++;
                     }
-                }
-                cmd.Dispose();
-                conexion.Close();
-                return listaCruceros;
+                    reader.Close();
+                    con.Close();
+                    return listaCruceros;
+
             }
             catch (SqlException ex)
             {
                 Debug.WriteLine(ex.ToString());
-                conexion.Close();
+                con.Close();
                 return null;
             }
         }
