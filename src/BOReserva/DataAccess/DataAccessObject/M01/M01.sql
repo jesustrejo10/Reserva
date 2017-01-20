@@ -6,7 +6,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 -- ----------------------------
--- AGREGAR COMIDA
+-- CONSULTAR USUARIO
 -- ----------------------------
 CREATE PROCEDURE [dbo].[M01_ConsultarUsuario]
 @correo 	VARCHAR(255)
@@ -28,6 +28,9 @@ BEGIN
 	AND U.usu_fk_rol IS NOT NULL
 END
 GO
+-- ----------------------------
+-- ACTIVAR USUARIO
+-- ----------------------------
 CREATE PROCEDURE [dbo].[M01_ActivarUsuario]
 @id int
 AS
@@ -39,6 +42,9 @@ BEGIN
 			[usu_id] = @id
 END
 GO
+-- ----------------------------
+-- DESACTIVAR USUARIO
+-- ----------------------------
 CREATE PROCEDURE [dbo].[M01_DesactivarUsuario]
 @id int
 AS
