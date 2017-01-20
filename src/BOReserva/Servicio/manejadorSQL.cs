@@ -2130,7 +2130,11 @@ namespace BOReserva.Servicio
                 conexion = new SqlConnection(stringDeConexion);
                 conexion.Open();
                 SqlCommand query = conexion.CreateCommand();
-                query.CommandText = "INSERT INTO Oferta VALUES ('" + model._nombreOferta + "','" + model.formatDate(model._fechaIniOferta) + "', '" + model.formatDate(model._fechaFinOferta) + "'," + model._porcentajeOferta + ",'" + model._estadoOferta + "');";
+                query.CommandText = "INSERT INTO Oferta VALUES ('" + model._nombreOferta + "','" 
+                                                                   + model.formatDate(model._fechaIniOferta) + "', '" 
+                                                                   + model.formatDate(model._fechaFinOferta) + "'," 
+                                                                   + model._porcentajeOferta + ",'" 
+                                                                   + model._estadoOferta + "');";
                 SqlDataReader lector = query.ExecuteReader();
                 lector.Close();
                 conexion.Close();

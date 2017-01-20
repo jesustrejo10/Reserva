@@ -113,7 +113,7 @@
     //Valida que el nombre y precio no esten vacios
     function validarCamposVacios() {
         if (($("#nombreOferta").val() == "") || ($("#porcentajeOferta").val() == "")) {
-            alert('Debes llenar el nombre y porcentaje de la Oferta!');
+            alert('Debe rellenar el nombre y porcentaje de la oferta');
             return false;
         }
         return true;
@@ -121,7 +121,7 @@
     //Compara todas las fechas introducidas
     function compararFechas() {
         if (!validarFechas($("#fInicio").val(), $("#fFin").val())) {
-            alert('La fecha fin debe ser mayor que la fecha inicio!');
+            alert('La fecha fin debe ser mayor que la fecha de inicio');
             return false;
         }
         return true;

@@ -1,11 +1,8 @@
-﻿using BOReserva.Controllers.PatronComando;
-using BOReserva.Controllers.PatronComando.M09;
+﻿using BOReserva.Controllers.PatronComando.M09;
 using BOReserva.DataAccess.Domain;
 using BOReserva.M10.Comando.gestion_restaurantes;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace BOReserva.Controllers.PatronComando
 {
@@ -245,6 +242,20 @@ namespace BOReserva.Controllers.PatronComando
         }
         #endregion
 
+        #region M11_AregarOferta
+
+        /// <summary>
+        /// Instancia el comando agregarOferta
+        /// </summary>
+        /// <param name="e">Recibe la una entidad de tipo Oferta</param>
+        /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
+        public static Command<String> crearM11AgregarOferta(Entidad e)
+        {
+
+            return new M11_COAgregarOferta((Oferta) e);
+
+        }
 
     }
+        #endregion
 }
