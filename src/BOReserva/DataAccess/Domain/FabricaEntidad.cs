@@ -197,6 +197,7 @@ namespace BOReserva.DataAccess.Domain
         #region M06 GESTION COMIDA
 
         public static Entidad instanciarComida(string nombre, string tipo, int estatus, string descripcion) {
+            
             return new Comida(nombre, tipo, estatus, descripcion);
         }
 
