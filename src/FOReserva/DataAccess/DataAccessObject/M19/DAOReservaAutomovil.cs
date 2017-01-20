@@ -106,8 +106,8 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
             String idAutomovil;
             String modelo;
             String fabricante;
-            String ciudadDevo;
-            String ciudadEnt;
+            string _LugarOri;
+            string _LugarDest;
             int estatus;
             Entidad reserva;
 
@@ -132,13 +132,13 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
                 idAutomovil = Fila[RecursoDAOM19.reservaAutomovilFk].ToString();
                 fabricante = Fila[RecursoDAOM19.autFabricante].ToString();
                 modelo = Fila[RecursoDAOM19.autModelo].ToString();
-                ciudadDevo = Fila[RecursoDAOM19.reservaCiudadDevFk].ToString();
-                ciudadEnt = Fila[RecursoDAOM19.reservaCiudadEntFk].ToString();
+                _LugarOri = Fila[RecursoDAOM19.origen].ToString();
+                _LugarDest = Fila[RecursoDAOM19.destino].ToString();
                 estatus = int.Parse(Fila[RecursoDAOM19.reservaEstatus].ToString());
 
                 CAutomovil automovil = FabricaEntidad.inicializarAutomovil(idAutomovil, modelo, fabricante);
-                CLugar ori = FabricaEntidad.inicializarLugar(ciudadEnt);
-                CLugar dest = FabricaEntidad.inicializarLugar(ciudadDevo);
+                CLugar ori = FabricaEntidad.inicializarLugar(_LugarOri);
+                CLugar dest = FabricaEntidad.inicializarLugar(_LugarDest);
 
                 // INICIALIZO LA RESERVA
                 reserva = FabricaEntidad.inicializarReserva(idReserva, fechaIni, fechaFin, horaIni, horaFin,

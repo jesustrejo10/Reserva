@@ -30,12 +30,12 @@
                         <tr>
                             <th>Fabricante</th>
                             <th>Modelo</th>
-                            <th>Origen</th>
-                            <th>Destino</th>
-                            <th>Fecha Recogida</th>
+                            <th>Lugar Entrega</th>
+                            <th>Lugar Devolución</th>
+                            <th>Fecha Entrega</th>
                             <th>Fecha Devolución</th>
-                            <th>Precio</th>
                             <th>Estatus</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,7 +48,6 @@
                                 <td>@reserva._LugarDest._nombre</td>
                                 <td>@reserva._fecha_ini</td>
                                 <td>@reserva._fecha_fin</td>
-                                <td>@reserva._auto._precioAlquiler</td>
                                 <td>
                                     @if (reserva._estatus == 1)
                                     {
@@ -59,6 +58,7 @@
                                         <span class="label label-danger">Cancelada</span>
                                     }
                                 </td>
+                                <td><button class="btn btn-info" type="button" onclick="cargarContenido('#CI', 'get', '/gestion_reserva_auto/M19_Detalle_reserva', @Newtonsoft.Json.JsonConvert.SerializeObject(reserva))"> Detalle </button></td>
                             </tr>
                         }
                     </tbody>

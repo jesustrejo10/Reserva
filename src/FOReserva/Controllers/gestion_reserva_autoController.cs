@@ -30,22 +30,15 @@ namespace FOReserva.Controllers
 
         public ActionResult M19_Reserva_Autos_Perfil()
         {
-
             var user_id = 1;
 
             if (Session["id_usuario"] != null && Session["id_usuario"] is int)
                 user_id = (int)Session["id_usuario"];
-            System.Diagnostics.Debug.WriteLine("El usuario actual es");
-            System.Diagnostics.Debug.WriteLine(user_id);
-
-           /* ManejadorSQLReservaAutomovil manejador = new ManejadorSQLReservaAutomovil();
-            List<CReserva_Autos_Perfil> lista = manejador.buscarReservas(user_id);
-            return PartialView(lista);*/
 
             Entidad _usuario = FabricaEntidad.inicializarUsuario(user_id);
             Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.comandosReservaAutomovil(FabricaComando.comandosGlobales.CONSULTAR, FabricaComando.comandoReservaAuto.NULO, _usuario);
             List<Entidad> reservas = comando.ejecutar();
-            // CReservaAutomovil ReservaAutomovil = FabricaEntidad.inicializarReserva();
+
             List<CReservaAutomovil> lista = FabricaEntidad.inicializarListaReserva();
 
             foreach (Entidad item in reservas)
@@ -53,9 +46,19 @@ namespace FOReserva.Controllers
                 lista.Add((CReservaAutomovil)item);
 
             }
-
-            //ReservaAutomovil._listaReservas = lista;
             return PartialView(lista);
+        }
+
+        [HttpGet]
+        public ActionResult M19_Detalle_reserva(CReservaAutomovil model)
+        {
+
+            Command<Entidad> comando = (Command<Entidad>)FabricaComando.comandosReservaAutomovil(FabricaComando.comandosGlobales.CONSULTAR, FabricaComando.comandoReservaAuto.CONSULTAR_ID,model);
+            Entidad reserva = comando.ejecutar();
+
+            // Se hace el casteo puesto que la vista utiliza el modelo CReservaAutomovil
+            CReservaAutomovil modelo_reserva = (CReservaAutomovil)reserva;
+            return PartialView(modelo_reserva);
         }
 
         public ActionResult M19_Busqueda_Autos()
