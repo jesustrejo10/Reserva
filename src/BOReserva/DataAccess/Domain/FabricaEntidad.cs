@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-﻿using BOReserva.Models.gestion_cruceros;
-=======
 ﻿using BOReserva.Models;
->>>>>>> Develop
+using BOReserva.Models.gestion_cruceros;
 using BOReserva.Models.gestion_hoteles;
 using BOReserva.Models.gestion_reclamos;
 using BOReserva.Models.gestion_restaurantes;
