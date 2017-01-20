@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using System.Data;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Model;
+using System.Data.SqlClient;
+using BOReserva.Excepciones.M10;
+using BOReserva.Excepciones;
 
 namespace BOReserva.M10
 {
@@ -23,6 +26,10 @@ namespace BOReserva.M10
         /// <returns>Lista de Entidades, ya que se devuelve mas de una fila de la BD, se debe castear a su respectiva clase en el Modelo</returns>
         public List<Entidad> Consultar(Entidad _lugar)
         {
+            //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
+            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+            RecursoDAOM10.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
             List<Entidad> listaDeRestaurant = FabricaEntidad.asignarListaDeEntidades();
             DataTable tablaDeDatos;
@@ -68,10 +75,31 @@ namespace BOReserva.M10
 
                 return listaDeRestaurant; //se retorna la lista de restaurante a mostrar por la vista
             }
-            catch (Exception)
+            catch (ArgumentNullException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+              //  Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
             {
 
-                throw;
+               // Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error al realizar operacion ", ex);
             }
         }
 
@@ -82,7 +110,11 @@ namespace BOReserva.M10
         /// <returns>Entidad</returns>
         public Entidad consultarRestaurantId(Entidad _restaurant)
         {
-           //Se castea de tipo Entidad a tipo Restaurant
+            //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
+            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+            RecursoDAOM10.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+            //Se castea de tipo Entidad a tipo Restaurant
             CRestauranteModelo rest = (CRestauranteModelo)_restaurant;
             List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
 
@@ -124,10 +156,31 @@ namespace BOReserva.M10
                 //se retorna la entidad de restaurant a mostrar en la vista
                 return restaurant;
             }
-            catch (Exception)
+            catch (ArgumentNullException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                //  Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
             {
 
-                throw;
+                // Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error al realizar operacion ", ex);
             }
 
 
@@ -141,6 +194,10 @@ namespace BOReserva.M10
         /// <returns>Se retorna true si fue exitoso</returns>
         public bool Crear(Entidad _restaurant)
         {
+            //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
+            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+            RecursoDAOM10.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             CRestauranteModelo rest = (CRestauranteModelo)_restaurant;
             List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
 
@@ -165,10 +222,31 @@ namespace BOReserva.M10
                 //como String "dbo.M10_AgregarRestarurante"
                 EjecutarStoredProcedure(RecursoDAOM10.procedimientoAgregar, listaParametro);
             }
-            catch (Exception)
+            catch (ArgumentNullException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                //  Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
             {
 
-                throw;
+                // Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error al realizar operacion ", ex);
             }
 
 
@@ -183,6 +261,10 @@ namespace BOReserva.M10
         /// <returns>Retorna true si fue exitso</returns>
         public bool Eliminar(Entidad _restaurant)
         {
+            //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
+            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+            RecursoDAOM10.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             CRestauranteModelo rest = (CRestauranteModelo)_restaurant;
             List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
 
@@ -196,10 +278,31 @@ namespace BOReserva.M10
                 //como String "dbo.M10_EliminarRestarurante"
                 EjecutarStoredProcedure(RecursoDAOM10.procedimientoEliminar, parametro);
             }
-            catch (Exception)
+            catch (ArgumentNullException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                //  Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
             {
 
-                throw;
+                // Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error al realizar operacion ", ex);
             }
             return false; //se retorna falso en caso de no ser exitoso el procedimiento eliminar
         }
@@ -210,6 +313,11 @@ namespace BOReserva.M10
         /// <returns>Se retorna una lista de entidad que luego debe ser casteada a su respectiva clase en el Modelo</returns>
         public List<Entidad> ListarLugar()
         {
+            //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
+            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+            RecursoDAOM10.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+            //Atributos del metodo
             List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
             List<Entidad> listaDeLugares = FabricaEntidad.asignarListaDeEntidades();
             Entidad lugar;
@@ -236,10 +344,31 @@ namespace BOReserva.M10
 
                 return listaDeLugares; //Se retornan la lista de lugares 
             }
-            catch (Exception)
+            catch (ArgumentNullException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                //  Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
             {
 
-                throw;
+                // Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error al realizar operacion ", ex);
             }
         }
 
@@ -278,10 +407,31 @@ namespace BOReserva.M10
                 //como String "dbo.M10_ActualizarrRestarurante"
                 EjecutarStoredProcedure(RecursoDAOM10.procedimientoActualizar, listaParametro);
             }
-            catch (Exception)
+            catch (ArgumentNullException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                //  Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
             {
 
-                throw;
+                // Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error al realizar operacion ", ex);
             }
 
             return true;

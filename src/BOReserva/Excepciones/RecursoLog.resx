@@ -117,116 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="fk_lugar" xml:space="preserve">
-    <value>@fk_lugar</value>
-    <comment>Clave foranea lugar del Restaurant, Atributo procedimiento</comment>
+  <data name="CodigoErrorLog" xml:space="preserve">
+    <value>TGE_ExcLog	</value>
+    <comment>Codigo de error de excepcion en el logger</comment>
   </data>
-  <data name="LugarId" xml:space="preserve">
-    <value>lug_id</value>
-    <comment>Lugar atributo Id clave primaria, Tabla Lugar </comment>
-  </data>
-  <data name="LugarNombre" xml:space="preserve">
-    <value>lug_nombre</value>
-    <comment>Lugar atributo nombre, Tabla Lugar</comment>
-  </data>
-  <data name="procedimientoActualizar" xml:space="preserve">
-    <value>M10_ActualizarRestaurante</value>
-    <comment>Nombre del Procedimiento Actualizar en la Base de Datos tabla Restaurant</comment>
-  </data>
-  <data name="procedimientoAgregar" xml:space="preserve">
-    <value>M10_AgregarRestaurante</value>
-    <comment>Nombre del Procedimiento Agregar Base de Datos Tabla Restaurant</comment>
-  </data>
-  <data name="procedimientoConsultar" xml:space="preserve">
-    <value>M10_ConsultarRestaurante</value>
-    <comment>Nombre del Procedimiento Consultar en la Base de Datos tabla Restaurant</comment>
-  </data>
-  <data name="procedimientoConsultarLugar" xml:space="preserve">
-    <value>M10_Consultar_Lugar</value>
-    <comment>Procedimiento Consultar Lugares en la Base de Datos</comment>
-  </data>
-  <data name="procedimientoEliminar" xml:space="preserve">
-    <value>M10_EliminarRestaurante</value>
-    <comment>Nombre del Procedimiento Eliminar en la Base de Datos tabla Restaurant</comment>
-  </data>
-  <data name="rst_descripcion" xml:space="preserve">
-    <value>@rst_descripcion</value>
-    <comment>Descripcion del Restaurant, Atributo procedimiento</comment>
-  </data>
-  <data name="rst_direccion" xml:space="preserve">
-    <value>@rst_direccion</value>
-    <comment>Direccion del Restaurant, Atributo procedimiento</comment>
-  </data>
-  <data name="rst_hora_apertura" xml:space="preserve">
-    <value>@rst_hora_apertura</value>
-    <comment>Hora Apertura del Restaurant, Atributo procedimiento</comment>
-  </data>
-  <data name="rst_hora_cierre" xml:space="preserve">
-    <value>@rst_hora_cierre</value>
-    <comment>Hora Cierre del Restaurant, Atributo procedimiento</comment>
-  </data>
-  <data name="rst_nombre" xml:space="preserve">
-    <value>@rst_nombre</value>
-    <comment>Nombre del Restaurant, Atributo procedimiento</comment>
-  </data>
-  <data name="rst_telefono" xml:space="preserve">
-    <value>@rst_telefono</value>
-    <comment>Telefono del Restaurant, Atributo procedimiento</comment>
-  </data>
-  <data name="lug_id" xml:space="preserve">
-    <value>@lug_id</value>
-    <comment>Id de Lugar, Atributo del Procedimiento</comment>
-  </data>
-  <data name="restaurantDescripcion" xml:space="preserve">
-    <value>rst_descripcion</value>
-    <comment>Atributo Descripcion tabla restaurant</comment>
-  </data>
-  <data name="restaurantDireccion" xml:space="preserve">
-    <value>rst_direccion</value>
-    <comment>Atributo Direccion tabla restaurant</comment>
-  </data>
-  <data name="restaurantHoraApertura" xml:space="preserve">
-    <value>rst_hora_apertura</value>
-    <comment>Atributo Hora Apertura tabla restaurant</comment>
-  </data>
-  <data name="restaurantHoraCierra" xml:space="preserve">
-    <value>rst_hora_cierre</value>
-    <comment>Atributo Hora CIerre tabla restaurant</comment>
-  </data>
-  <data name="restaurantId" xml:space="preserve">
-    <value>rst_id</value>
-    <comment>Atributo Id (Clave Primaria) tabla restaurant</comment>
-  </data>
-  <data name="restaurantNombre" xml:space="preserve">
-    <value>rst_nombre</value>
-    <comment>Atributo Nombre tabla restaurant</comment>
-  </data>
-  <data name="restaurantTelefono" xml:space="preserve">
-    <value>rst_telefono</value>
-    <comment>Atributo Telefono tabla restaurant</comment>
-  </data>
-  <data name="rst_id" xml:space="preserve">
-    <value>@rst_id</value>
-    <comment>Id del restaurant, Atributo procedimiento</comment>
-  </data>
-  <data name="LugarIdFk" xml:space="preserve">
-    <value>fk_lugar</value>
-    <comment>Atributo Id (Clave Foranea) tabla Lugar</comment>
-  </data>
-  <data name="procedimientoConsultarRestaurantId" xml:space="preserve">
-    <value>M10_ConsultarRestauranteId</value>
-    <comment>Nombre del Procedimiento consultar en la Base de Datos tabla Restaurant por Id</comment>
-  </data>
-  <data name="MensajeErrorFormato" xml:space="preserve">
-    <value>Error de Casteo</value>
-    <comment>Ocurre en caso de error en casteo</comment>
-  </data>
-  <data name="MensajeFinMetodoLogger" xml:space="preserve">
-    <value>Salida del Método</value>
-    <comment>Ocurre a la salida del metodo</comment>
-  </data>
-  <data name="MensajeInicioMetodoLogger" xml:space="preserve">
-    <value>Entrada en el Método</value>
-    <comment>Ocurre a la entrada del metodo</comment>
+  <data name="MensajeErrorLog" xml:space="preserve">
+    <value>Ocurrio un error escribiendo en el logger</value>
+    <comment>Mensaje de error</comment>
   </data>
 </root>

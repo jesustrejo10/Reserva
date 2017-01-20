@@ -30,9 +30,7 @@ namespace BOReserva.M10.Comando.gestion_restaurantes
                 }
                 catch (NotImplementedException)
                 {
-                    // exception implementada debido a que puede darse el caso 
-                    // en que algunos de los metodos  en la 
-                    //interfaz IDAO no se implemente y se lance esta excepcion
+                    // throw new ExceptionM4Tangerine("DS-404", "Metodo no implementado", e);
                     throw;
                 }
                 catch (Exception)

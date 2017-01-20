@@ -27,7 +27,7 @@ namespace BOReserva.M10.Comando.gestion_restaurantes
             }
             catch (Exception e)
             {
-                System.Diagnostics.Debug.WriteLine("La exception arrojada es " + e);
+                // throw new ExceptionM4Tangerine("DS-404", "Metodo no implementado", e);
                 throw;
                
             }
