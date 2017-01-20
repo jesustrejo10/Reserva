@@ -8,26 +8,23 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando.M11
 {
-    /// <summary>
-    /// Comando Modificar Paquetes
-    /// </summary>
-    public class M11_COModificarPaquete : Command<String>
+    public class M11_CODeshabilitarPaquete: Command<String>
     {
         Paquete _paquete;
         int _idmodificar;
 
-        public M11_COModificarPaquete(Entidad paquete, int id)
+
+        public M11_CODeshabilitarPaquete(Entidad paquete, int id)
         {
             this._paquete = (Paquete) paquete;
             this._paquete._id = id;
         }
+
      /*   public override String ejecutar()
         {
-            IDAO daoPaquete = FabricaDAO.instanciarDaoPaquete();
-            Entidad test = daoPaquete.Modificar(_paquete);
-            Paquete paquete = (Paquete)test;
-            return paquete._nombre;
-
-        }*/
+            DAOPaquete daoPaquete = (DAOPaquete)FabricaDAO.instanciarDaoPaquete();
+            String test = daoPaquete.eliminarPaquete(_paquete._id);
+            return test;
+        } */
     }
 }
