@@ -5,7 +5,7 @@ using System.Web;
 
 namespace BOReserva.DataAccess.Domain
 {
-    public class Crucero : Transporte
+    public class Crucero : Entidad
     {
         //public int _idCrucero { get; set; }
 
@@ -21,7 +21,8 @@ namespace BOReserva.DataAccess.Domain
 
         public Crucero() { }
 
-        public Crucero(String nombre, String compania, int capacidad, String estatus) {            
+        public Crucero(int id,String nombre, String compania, int capacidad, String estatus) {
+            this._id = id;
             this._nombreCrucero = nombre;
             this._companiaCrucero = compania;
             this._capacidadCrucero = capacidad;

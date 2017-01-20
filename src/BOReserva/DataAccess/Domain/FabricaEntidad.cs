@@ -198,7 +198,7 @@ namespace BOReserva.DataAccess.Domain
         public static Entidad InstanciarCrucero(CGestion_crucero crucero)
         {
             
-            return new Crucero(crucero._nombreCrucero, crucero._companiaCrucero, crucero._capacidadCrucero, crucero._estatus);
+            return new Crucero(crucero._idCrucero,crucero._nombreCrucero, crucero._companiaCrucero, crucero._capacidadCrucero, crucero._estatus);
         }    
 
 

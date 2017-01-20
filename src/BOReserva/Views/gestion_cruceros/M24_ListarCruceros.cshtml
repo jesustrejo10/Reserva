@@ -24,11 +24,12 @@
                         {
                             foreach (var crucero in Model)
                             {
-                                <tr id="@crucero._idCrucero">
-                                    <td>@crucero._nombreCrucero </td>
-                                    <td>@crucero._companiaCrucero </td>
-                                    <td>@crucero._capacidadCrucero <i class="fa fa-user"></i></td>
-                                    <td>@crucero._estatus </td>
+                                BOReserva.DataAccess.Domain.Crucero c = (BOReserva.DataAccess.Domain.Crucero)crucero.Value;
+                                <tr id="@crucero.Key">
+                                    <td>@c._nombreCrucero </td>
+                                    <td>@c._companiaCrucero </td>
+                                    <td>@c._capacidadCrucero <i class="fa fa-user"></i></td>
+                                    <td>@c._estatus </td>
                                     <td>
                                         <a href="#"> <i class="fa fa-eye m03DetalleRutas"></i></a>
                                         <a href="#"><i class="fa fa-pencil m03EditarRutas"></i></a>
