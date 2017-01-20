@@ -141,7 +141,7 @@ namespace BOReserva.Controllers.PatronComando
         /// <returns>
         /// Retorna la instancia del comando M09_COVisualizarHoteles.
         /// </returns>
-        public static Command<Dictionary<int, Entidad>> crearM09VisualizarCruceros()
+        public static Command<Dictionary<int, Entidad>> crearM14VisualizarCruceros()
         {
 
             return new M14_COVisualizarCruceros();
