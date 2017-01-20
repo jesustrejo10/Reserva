@@ -29,19 +29,6 @@ namespace BOReserva.Controllers.PatronComando
             return new M09_COAgregarHotel((Hotel)e);
 
         }
-       
-        /// <summary>
-        /// Metodo creado con la finalidad de instanciar el comando
-        /// M14_COAgregarCrucero
-        /// </summary>
-        /// <param name="e">Recibe la una entidad de tipo Crucero</param>
-        /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
-        public static Command<String> crearM14AgregarCrucero(Entidad e)
-        {
-
-            return new M14_COAgregarCrucero((Crucero)e);
-
-        }
 
 
 
@@ -129,6 +116,37 @@ namespace BOReserva.Controllers.PatronComando
             return new M09_COObtenerPaises();
         }
 
+
+        #endregion
+
+        #region M14_Gestion_Cruceros
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M14_COAgregarCrucero
+        /// </summary>
+        /// <param name="e">Recibe la una entidad de tipo Crucero</param>
+        /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
+        public static Command<String> crearM14AgregarCrucero(Entidad e)
+        {
+
+            return new M14_COAgregarCrucero((Crucero)e);
+
+        }
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M09_COVisualizarHoteles
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M09_COVisualizarHoteles.
+        /// </returns>
+        public static Command<Dictionary<int, Entidad>> crearM09VisualizarCruceros()
+        {
+
+            return new M14_COVisualizarCruceros();
+
+        }
 
         #endregion
 

@@ -19,6 +19,8 @@ namespace BOReserva.DataAccess.Domain
 
         public String _imagen { get; set; }
 
+        public Crucero() { }
+
         public Crucero(String nombre, String compania, int capacidad, String estatus) {            
             this._nombreCrucero = nombre;
             this._companiaCrucero = compania;
