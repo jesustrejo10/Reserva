@@ -41,8 +41,7 @@ namespace BOReserva.Excepciones
             /// <param name="metodo">metodo en la que se origino</param>
             public static void EscribirInfo(string clase, string mensaje, string metodo)
             {
-                if (clase != null && clase != "" && mensaje != null && mensaje != ""
-                    && metodo != null && metodo != "")
+                if (clase != null && clase != "" && mensaje != null && mensaje != "" && metodo != null && metodo != "")
                 {
                     XmlConfigurator.Configure();
                     ILog log = LogManager.GetLogger(clase);
@@ -62,11 +61,9 @@ namespace BOReserva.Excepciones
             /// <param name="clase">Clase en la que se llama</param>
             /// <param name="mensaje">mensaje a mostrar en el log</param>
             /// <param name="metodo">metodo en la que se origino</param>
-            public static void EscribirWarning(string clase, string mensaje,
-                string metodo)
+            public static void EscribirWarning(string clase, string mensaje, string metodo)
             {
-                if (clase != null && clase != "" && mensaje != null && mensaje != ""
-                    && metodo != null && metodo != "")
+                if (clase != null && clase != "" && mensaje != null && mensaje != "" && metodo != null && metodo != "")
                 {
                     XmlConfigurator.Configure();
                     ILog log = LogManager.GetLogger(clase);

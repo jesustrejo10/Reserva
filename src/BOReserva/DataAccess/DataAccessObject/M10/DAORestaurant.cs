@@ -9,6 +9,7 @@ using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Model;
 using System.Data.SqlClient;
 using BOReserva.Excepciones.M10;
+using BOReserva.Excepciones;
 
 namespace BOReserva.M10
 {
@@ -25,6 +26,10 @@ namespace BOReserva.M10
         /// <returns>Lista de Entidades, ya que se devuelve mas de una fila de la BD, se debe castear a su respectiva clase en el Modelo</returns>
         public List<Entidad> Consultar(Entidad _lugar)
         {
+            //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
+            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+            RecursoDAOM10.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
             List<Entidad> listaDeRestaurant = FabricaEntidad.asignarListaDeEntidades();
             DataTable tablaDeDatos;
@@ -105,7 +110,11 @@ namespace BOReserva.M10
         /// <returns>Entidad</returns>
         public Entidad consultarRestaurantId(Entidad _restaurant)
         {
-           //Se castea de tipo Entidad a tipo Restaurant
+            //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
+            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+            RecursoDAOM10.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+            //Se castea de tipo Entidad a tipo Restaurant
             CRestauranteModelo rest = (CRestauranteModelo)_restaurant;
             List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
 
@@ -185,6 +194,10 @@ namespace BOReserva.M10
         /// <returns>Se retorna true si fue exitoso</returns>
         public bool Crear(Entidad _restaurant)
         {
+            //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
+            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+            RecursoDAOM10.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             CRestauranteModelo rest = (CRestauranteModelo)_restaurant;
             List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
 
@@ -248,6 +261,10 @@ namespace BOReserva.M10
         /// <returns>Retorna true si fue exitso</returns>
         public bool Eliminar(Entidad _restaurant)
         {
+            //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
+            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+            RecursoDAOM10.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             CRestauranteModelo rest = (CRestauranteModelo)_restaurant;
             List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
 
@@ -296,6 +313,11 @@ namespace BOReserva.M10
         /// <returns>Se retorna una lista de entidad que luego debe ser casteada a su respectiva clase en el Modelo</returns>
         public List<Entidad> ListarLugar()
         {
+            //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
+            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+            RecursoDAOM10.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+            //Atributos del metodo
             List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
             List<Entidad> listaDeLugares = FabricaEntidad.asignarListaDeEntidades();
             Entidad lugar;
