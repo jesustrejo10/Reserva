@@ -1,6 +1,16 @@
 ﻿@model BOReserva.Models.gestion_ofertas.CPaquete
 
 <!---------------------- SECCION DE AGREGAR PAQUETE ---------------->
+<!--Plugins para usar los datepickers-->
+<head>
+    <title></title>
+    <script src="~/Content/bootstrap/css/bootstrap.min.css"></script>
+    <script src="~/Content/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="~/Content/plugins/datepicker/datepicker3.css"></script>
+    <script src="~/Content/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src="~/Content/plugins/datepicker/locales/bootstrap-datepicker.es.js"></script>
+</head>
+<!---->
 <div class="row">
     <div class="col-md-12">
         <div class="box box-default">
@@ -46,7 +56,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.TextBoxFor(m => m._fechaIniAuto, null, new { @class = "form-control", @name = "fechaIniAuto", @id = "fechaIniAuto", @placeholder = "dd/MM/AAAA", @disabled = "disabled" })
+                                    @Html.TextBoxFor(m => m._fechaIniAuto, "{0:dd/MM/yyyy}", new { @class = "form-control", @name = "fechaIniAuto", @id = "fechaIniAuto", @placeholder = "dd/MM/AAAA", @disabled = "disabled" })
                                     @*<input type="text" name="fechaIniAuto" value="" class="form-control datepicker required">*@
 
                                 </div>
@@ -60,7 +70,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.TextBoxFor(m => m._fechaFinAuto, null, new { @class = "form-control", @name = "fechaFinAuto", @id = "fechaFinAuto", @placeholder = "dd/MM/AAAA", @disabled = "disabled" })
+                                    @Html.TextBoxFor(m => m._fechaFinAuto, "{0:dd/MM/yyyy}", new { @class = "form-control", @name = "fechaFinAuto", @id = "fechaFinAuto", @placeholder = "dd/MM/AAAA", @disabled = "disabled" })
                                     @*<input type="text" name="fechaFinAuto" value="" class="form-control datepicker required">*@
 
                                 </div>
@@ -90,7 +100,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.TextBoxFor(m => m._fechaIniRest, null, new { @class = "form-control", @name = "fechaIniRest", @id = "fechaIniRest", @placeholder = "dd/MM/AAAA", @disabled = "disabled" })
+                                    @Html.TextBoxFor(m => m._fechaIniRest, "{0:dd/MM/yyyy}", new { @class = "form-control", @name = "fechaIniRest", @id = "fechaIniRest", @placeholder = "dd/MM/AAAA", @disabled = "disabled" })
                                     @*<input type="text" name="fechaIniRest" value="" class="form-control datepicker required">*@
 
                                 </div>
@@ -104,7 +114,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.TextBoxFor(m => m._fechaFinRest, null, new { @class = "form-control", @name = "fechaFinRest", @id = "fechaFinRest", @placeholder = "dd/MM/AAAA", @disabled = "disabled" })
+                                    @Html.TextBoxFor(m => m._fechaFinRest, "{0:dd/MM/yyyy}", new { @class = "form-control", @name = "fechaFinRest", @id = "fechaFinRest", @placeholder = "dd/MM/AAAA", @disabled = "disabled" })
                                     @*<input type="text" name="fechaFinRest" value="" class="form-control datepicker required">*@
 
                                 </div>
@@ -134,7 +144,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.TextBoxFor(m => m._fechaIniHabi, null, new { @class = "form-control ", @name = "fechaIniHabi", @id = "fechaIniHabi", @placeholder = "dd/MM/AAAA", @disabled = "disabled" })
+                                    @Html.TextBoxFor(m => m._fechaIniHabi, "{0:dd/MM/yyyy}", new { @class = "form-control ", @name = "fechaIniHabi", @id = "fechaIniHabi", @placeholder = "dd/MM/AAAA", @disabled = "disabled" })
                                     @*<input type="text" name="fechaIniHabi" value="" class="form-control datepicker required">*@
 
                                 </div>
@@ -148,7 +158,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.TextBoxFor(m => m._fechaFinHabi, null, new { @class = "form-control", @name = "fechaFinHabi", @id = "fechaFinHabi", @placeholder = "dd/MM/AAAA", @disabled = "disabled" })
+                                    @Html.TextBoxFor(m => m._fechaFinHabi, "{0:dd/MM/yyyy}", new { @class = "form-control", @name = "fechaFinHabi", @id = "fechaFinHabi", @placeholder = "dd/MM/AAAA", @disabled = "disabled" })
                                     @*<input type="text" name="fechaFinHabi" value="" class="form-control datepicker required">*@
 
                                 </div>
@@ -178,7 +188,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.TextBoxFor(m => m._fechaIniCruc, null, new { @class = "form-control", @name = "fechaIniCruc", @id = "fechaIniCruc", @placeholder = "dd/MM/AAAA", @disabled = "disabled" })
+                                    @Html.TextBoxFor(m => m._fechaIniCruc, "{0:dd/MM/yyyy}", new { @class = "form-control", @name = "fechaIniCruc", @id = "fechaIniCruc", @placeholder = "dd/MM/AAAA", @disabled = "disabled" })
                                     @*<input type="text" name="fechaIniCruc" value="" class="form-control datepicker required">*@
 
                                 </div>
@@ -192,7 +202,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.TextBoxFor(m => m._fechaFinCruc, null, new { @class = "form-control ", @name = "fechaFinCruc", @id = "fechaFinCruc", @placeholder = "dd/MM/AAAA", @disabled = "disabled" })
+                                    @Html.TextBoxFor(m => m._fechaFinCruc, "{0:dd/MM/yyyy}", new { @class = "form-control ", @name = "fechaFinCruc", @id = "fechaFinCruc", @placeholder = "dd/MM/AAAA", @disabled = "disabled" })
                                     @*<input type="text" name="fechaFinCruc" value="" class="form-control datepicker required">*@
 
                                 </div>
@@ -221,7 +231,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.TextBoxFor(m => m._fechaIniVuelo, null, new { @class = "form-control", @name = "fechaIniVuelo", @id = "fechaIniVuelo", @placeholder = "dd/MM/AAAA", @disabled = "disabled" })
+                                    @Html.TextBoxFor(m => m._fechaIniVuelo, "{0:dd/MM/yyyy}", new { @class = "form-control", @name = "fechaIniVuelo", @id = "fechaIniVuelo", @placeholder = "dd/MM/AAAA", @disabled = "disabled" })
                                     @*<input type="text" name="fechaIniVuelo" value="" class="form-control datepicker required">*@
 
                                 </div>
@@ -235,7 +245,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.TextBoxFor(m => m._fechaFinVuelo, null, new { @class = "form-control", @name = "fechaFinVuelo", @id = "fechaFinVuelo", @placeholder = "dd/MM/AAAA", @disabled = "disabled" })
+                                    @Html.TextBoxFor(m => m._fechaFinVuelo, "{0:dd/MM/yyyy}", new { @class = "form-control", @name = "fechaFinVuelo", @id = "fechaFinVuelo", @placeholder = "dd/MM/AAAA", @disabled = "disabled" })
                                     @*<input type="text" name="fechaFinVuelo" value="" class="form-control datepicker required">*@
 
                                 </div>
@@ -272,6 +282,7 @@
             <!-- /.col -->
         </div>
     </div>
+</div> <!--Agregando el div que faltaba-->
     <!-- /.row -->
     <!------------------- FIN DE SECCION DE AGREGAR PAQUETE ---------------->
     <script language="javascript" type="text/javascript">
@@ -731,4 +742,108 @@
                 });
         }
 
+        //Inicio de código nuevo
+        $(".fechaIniAuto").ready(function () {
+            $('#fechaIniAuto').datepicker({
+                format: 'dd/mm/yyyy',
+                //pickTime: false,
+                autoclose: true,
+                language: 'es'
+            });
+        });
+        //Fin de código nuevo
+        //Inicio de código nuevo
+        $(".fechaFinAuto").ready(function () {
+            $('#fechaFinAuto').datepicker({
+                format: 'dd/mm/yyyy',
+                //pickTime: false,
+                autoclose: true,
+                language: 'es'
+            });
+        });
+        //Fin de código nuevo
+
+        //Inicio de código nuevo
+        $(".fechaIniRest").ready(function () {
+            $('#fechaIniRest').datepicker({
+                format: 'dd/mm/yyyy',
+                //pickTime: false,
+                autoclose: true,
+                language: 'es'
+            });
+        });
+        //Fin de código nuevo
+        //Inicio de código nuevo
+        $(".fechaFinRest").ready(function () {
+            $('#fechaFinRest').datepicker({
+                format: 'dd/mm/yyyy',
+                //pickTime: false,
+                autoclose: true,
+                language: 'es'
+            });
+        });
+        //Fin de código nuevo
+
+        //Inicio de código nuevo
+        $(".fechaIniHabi").ready(function () {
+            $('#fechaIniHabi').datepicker({
+                format: 'dd/mm/yyyy',
+                //pickTime: false,
+                autoclose: true,
+                language: 'es'
+            });
+        });
+        //Fin de código nuevo
+        //Inicio de código nuevo
+        $(".fechaFinHabi").ready(function () {
+            $('#fechaFinHabi').datepicker({
+                format: 'dd/mm/yyyy',
+                //pickTime: false,
+                autoclose: true,
+                language: 'es'
+            });
+        });
+        //Fin de código nuevo
+
+        //Inicio de código nuevo
+        $(".fechaIniCruc").ready(function () {
+            $('#fechaIniCruc').datepicker({
+                format: 'dd/mm/yyyy',
+                //pickTime: false,
+                autoclose: true,
+                language: 'es'
+            });
+        });
+        //Fin de código nuevo
+        //Inicio de código nuevo
+        $(".fechaFinCruc").ready(function () {
+            $('#fechaFinCruc').datepicker({
+                format: 'dd/mm/yyyy',
+                //pickTime: false,
+                autoclose: true,
+                language: 'es'
+            });
+        });
+        //Fin de código nuevo
+
+        //Inicio de código nuevo
+        $(".fechaIniVuelo").ready(function () {
+            $('#fechaIniVuelo').datepicker({
+                format: 'dd/mm/yyyy',
+                //pickTime: false,
+                autoclose: true,
+                language: 'es'
+            });
+        });
+        //Fin de código nuevo
+        //Inicio de código nuevo
+        $(".fechaFinVuelo").ready(function () {
+            $('#fechaFinVuelo').datepicker({
+                format: 'dd/mm/yyyy',
+                //pickTime: false,
+                autoclose: true,
+                language: 'es'
+            });
+        });
+        //Fin de código nuevo 
     </script>
