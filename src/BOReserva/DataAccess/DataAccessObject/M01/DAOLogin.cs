@@ -24,10 +24,12 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
 
         public Cgestion_seguridad_ingreso UsuarioEnBD(String usuario)
         {
+            //Usar M12_ConsultarUsuario para reemplazar consulta directa
             String usuarioBD = "", nombreBD = "", apellidoBD = "", claveBD = "", statusBD = "";
             int idUsuario = 0, rolUsuario = 0;
             try
             {
+                Conectar();
                 //Inicializo la conexion con el string de conexion
                 conexion = new SqlConnection(stringDeConexion);
                 //INTENTO abrir la conexion
