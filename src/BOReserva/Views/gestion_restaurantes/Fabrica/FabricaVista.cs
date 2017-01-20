@@ -13,5 +13,10 @@ namespace BOReserva.Views.gestion_restaurantes.Fabrica
         {
            return new SelectList(lista,Text,Value); 
         }
+
+        public static SelectList asignarItemsComboBoxConPosicion(IEnumerable lista, String Text, String Value, Object posicion)
+        {
+            return new SelectList(lista, Text, Value, posicion);
+        }
     }
 }

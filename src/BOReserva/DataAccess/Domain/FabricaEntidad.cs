@@ -4,6 +4,7 @@ using BOReserva.Models.gestion_reclamos;
 using BOReserva.Models.gestion_restaurantes;
 using BOReserva.Models.gestion_roles;
 using BOReserva.Models.gestion_usuarios;
+using BOReserva.DataAccess.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -123,6 +124,19 @@ namespace BOReserva.DataAccess.Domain
 		}
 		#endregion
 		
+        #region M08_Automoviles
+        public static Entidad InstanciarAutomovil(String matricula, String modelo, String fabricante, String anio, String tipovehiculo,
+                                                  String kilometraje, String cantpasajeros, String preciocompra, String precioalquiler,
+                                                  String penalidaddiaria, String fecharegistro, String color, String disponibilidad,
+                                                  String transmision, String pais, String ciudad, String fk_ciudad)
+        {
+            return new Automovil( matricula,  modelo, fabricante, anio, tipovehiculo,
+                                  kilometraje, cantpasajeros, preciocompra, precioalquiler,
+                                  penalidaddiaria, fecharegistro, color, disponibilidad,
+                                  transmision, pais, ciudad, fk_ciudad);
+        }
+        #endregion
+
 		#region Modulo 10
         public static CRestauranteModelo crearRestaurant(string nombre, string direccion, string telefono, string descripcion, string horarioApertura, string horarioCierre, int idLugar)
         {

@@ -54,7 +54,7 @@ namespace BOReserva.DataAccess.DataAccessObject
 
             try
             {
-                conexion = new SqlConnection(_connexionString);//Connection.getInstance(_connexionString);
+                conexion = new SqlConnection(_connexionString);
                
             }
 
