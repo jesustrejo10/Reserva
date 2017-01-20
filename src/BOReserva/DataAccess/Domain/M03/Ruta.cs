@@ -12,16 +12,15 @@ namespace BOReserva.DataAccess.Domain.M03
         /// Declaracion de atributos
         /// </summary>
         #region Atributos
-        private int _idRuta { get; set; }
-        private int _distancia { get; set; }
-        private String _status { get; set; }
-        private String _tipo { get; set; }
-        private int _idOrigen { get; set; }
-        private int _idDestino { get; set; }
-
+        public int _idRuta { get; set; }
+        public int _distancia { get; set; }
+        public String _status { get; set; }
+        public String _tipo { get; set; }
+        public String _origenRuta { get; set; }
+        public String _destinoRuta { get; set; }
         #endregion
 
-         #region Constructores
+        #region Constructores
 
         /// <summary>
         /// Constructor de la clase Ruta vacio
@@ -31,16 +30,16 @@ namespace BOReserva.DataAccess.Domain.M03
         /// <summary>
         /// Constructor de la clase Ruta sin el atributo id
         /// </summary>
-        /// <param name="idOrigen"></param>
-        /// <param name="idDestino"></param>
+        /// <param name="origenRuta"></param>
+        /// <param name="destinoRuta"></param>
         /// <param name="tipo"></param>
         /// <param name="status"></param>
         /// <param name="distacia"></param>
-        public Ruta(int idOrigen, int idDestino, String tipo, 
+        public Ruta(String origenRuta, String destinoRuta, String tipo, 
                     String status, int distancia)
         {
-            _idOrigen = idOrigen;
-            _idDestino = idDestino;
+            _origenRuta = origenRuta;
+            _destinoRuta = destinoRuta;
             _tipo= tipo;
             _status = status;
             _distancia = distancia;
@@ -57,11 +56,11 @@ namespace BOReserva.DataAccess.Domain.M03
         /// <param name="status"></param>
         /// <param name="fechaAterrizaje"></param>
         /// <param name="idAvion"></param>
-        public Ruta(int idOrigen, int idDestino, String tipo,
+        public Ruta(String origenRuta, String destinoRuta, String tipo,
                     String status, int distancia, int idRuta)
         {
-            _idOrigen = idOrigen;
-            _idDestino = idDestino;
+            _origenRuta = origenRuta;
+            _destinoRuta = destinoRuta;
             _tipo = tipo;
             _status = status;
             _distancia = distancia;

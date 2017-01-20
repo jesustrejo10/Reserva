@@ -57,8 +57,6 @@ namespace BOReserva.Servicio.Servicio_Rutas
             }
         }
 
-
-
         public Boolean ValidarRuta(CAgregarRuta model)
         {
             try
@@ -104,7 +102,6 @@ namespace BOReserva.Servicio.Servicio_Rutas
                 return false;
             }
         }
-
 
         public Boolean InsertarRuta(CAgregarRuta model)
         {
