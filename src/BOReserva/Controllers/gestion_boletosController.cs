@@ -456,13 +456,10 @@ namespace BOReserva.Controllers
         //falta patrones
         public ActionResult M05_ModificarBoleto(int id)
         {
-            manejadorSQL_Boletos buscarboleto = new manejadorSQL_Boletos();
-            CBoleto boleto = buscarboleto.M05MostrarBoletoBD(id);
-
-            String hola = boleto._tipoBoleto;
-
-            CModificarBoleto bolView = new CModificarBoleto(boleto);
-            return PartialView(bolView);
+            Command<Entidad> comando = FabricaComando.mostrarM05boleto(id);
+            Boleto boleto = (Boleto)comando.ejecutar();
+            CModificarBoleto boletoView = new CModificarBoleto(boleto);
+            return PartialView(boletoView);
         }
 
         // POST
