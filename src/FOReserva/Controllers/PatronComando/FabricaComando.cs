@@ -28,6 +28,13 @@ namespace FOReserva.Controllers.PatronComando
             return new M16_COAgregarReclamo((Reclamo)e);
 
         }
+
+        public static Command<List<Reclamo>> consultarReclamosDeUsuario(int _idUsuario)
+        {
+
+            return new M16_COConsultarReclamos(_idUsuario);
+
+        }
         #endregion
 
         #region M19 Reserva Automovil

@@ -17,7 +17,11 @@ namespace FOReserva.Controllers
         /// <returns>Retorna un ActionResult que contiene los elementos de la vista </returns>
         public ActionResult M16_AgregarReclamo()
         {
+            //Esto sera estatico hasta que el modulo de gestion del login proporcione algun metodo para saber el id del usuario en sistema
+            int idUsuario = 1; 
             CAgregarReclamo model = new CAgregarReclamo();
+            Command<List<Reclamo>> comando = FabricaComando.consultarReclamosDeUsuario(idUsuario);
+            model._listaDeReclamos = comando.ejecutar();
             return PartialView(model);
         }
         public ActionResult M16_VisualizarReclamo()

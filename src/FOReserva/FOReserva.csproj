@@ -210,7 +210,7 @@
     <Compile Include="Controllers\PatronComando\Command.cs" />
     <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
     <Compile Include="Controllers\PatronComando\M16\M16_COAgregarReclamo.cs" />
-    <Compile Include="Controllers\PatronComando\M16\M16_COConsultarReclamo.cs" />
+    <Compile Include="Controllers\PatronComando\M16\M16_COConsultarReclamos.cs" />
     <Compile Include="Controllers\PatronComando\M19\M19_COActualizarReserva.cs" />
     <Compile Include="Controllers\PatronComando\M19\M19_COConsultarAutos.cs" />
     <Compile Include="Controllers\PatronComando\M19\M19_COConsultarLugar.cs" />

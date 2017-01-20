@@ -58,9 +58,37 @@
                             <th>Título</th>
                             <th>Detalle</th>
                             <th>Estado</th>
+                            <th>Opciones</th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody>
+                    @foreach (var item in Model._listaDeReclamos) {
+                        <tr id="@item._id">
+                            <td class ="text-center" > @item._fechaReclamo</td>
+                            <td class="text-center"> @item._tituloReclamo</td>
+                            <td class="text-center"> @item._detalleReclamo</td>
+                            <td class="text-center" valign="middle">
+                                @if (item._estadoReclamo == 1)
+                                {
+                                    <span class="label label-success" style="display: table-caption; margin-left: 24px; width: 100%;">Iniciado</span>
+                                }
+                                @if (item._estadoReclamo == 2)
+                                {
+                                    <span class="label label-primary" style="display: table-caption; margin-left: 18px; width: 100%;">En Proceso</span>
+                                }
+                                @if (item._estadoReclamo == 3)
+                                {
+                                    <span class="label label-warning" style="display: table-caption; margin-left: 19px; width: 100%;">Culminado</span>
+                                }
+                                @if (item._estadoReclamo == 4)
+                                {
+                                    <span class="label label-danger" style="display: table-caption; margin-left: 26px; width: 100%;">Cerrado</span>
+                                }
+                            </td>                                                            
+                            <td class="text-center"> Opciones</td>
+                        </tr>
+                    }
+                    </tbody>
                 </table>
                 <!--/div table-->
             </div>

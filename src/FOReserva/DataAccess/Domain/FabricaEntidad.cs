@@ -29,6 +29,21 @@ namespace FOReserva.DataAccess.Domain
             int _usuarioReclamo = reclamo._usuarioReclamo;
             return new Reclamo(_tituloReclamo, _detalleReclamo, _fechaReclamo, _estadoReclamo, _usuarioReclamo);
         }
+
+        public static Reclamo InstanciarReclamo ()
+        {
+            return new Reclamo();
+        }
+
+        public static Entidad InstanciarReclamo(int reclamo, String tituloReclamo, String detalleReclamo, String fechaReclamo, int estadoReclamo, int usuario)
+        {
+            return new Reclamo(reclamo, tituloReclamo, detalleReclamo, fechaReclamo, estadoReclamo, usuario);
+        }
+
+        public static List<Reclamo> instanciarListaReclamo ()
+        {
+            return new List<Reclamo>();
+        }
         #endregion
 
 
