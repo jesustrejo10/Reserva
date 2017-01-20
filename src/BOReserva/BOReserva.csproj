@@ -309,7 +309,6 @@
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPasajero.cs" />
     <Compile Include="DataAccess\Domain\Avion.cs" />
     <Compile Include="DataAccess\Domain\Boleto.cs" />
-    <Compile Include="DataAccess\Domain\Contratos\ICiudad.cs" />
     <Compile Include="DataAccess\Domain\Lugar.cs" />
     <Compile Include="DataAccess\Domain\M06\Comida.cs" />
     <Compile Include="DataAccess\Domain\Pasajero.cs" />
