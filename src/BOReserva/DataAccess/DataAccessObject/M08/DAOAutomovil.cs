@@ -88,9 +88,22 @@ namespace BOReserva.DataAccess.DataAccessObject
             throw new NotImplementedException();
         }
 
-        public int Eliminar(int id)
+        public bool Eliminar(Entidad _automovil)
         {
-            throw new NotImplementedException();
+            Automovil automovil = (Automovil)_automovil;
+            List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
+
+            try
+            {   
+                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.aut_matricula, SqlDbType.Int, automovil._id.ToString(), false));
+                EjecutarStoredProcedure(RecursoDAOM08.procedimientoEliminarAutomovil, parametro);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return false; //se retorna falso en caso de no ser exitoso el procedimiento eliminar
         }
 
         public Entidad Modificar(Entidad e)

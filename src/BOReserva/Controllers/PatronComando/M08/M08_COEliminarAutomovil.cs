@@ -9,21 +9,19 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando.M08
 {
-
-    public class M08_COAgregarAutomovil : Command<String>
+    public class M08_COEliminarAutomovil
     {
-
         #region Atributos
         Entidad _objeto;
         #endregion
 
         #region Constructor
-        public M08_COAgregarAutomovil()
+        public M08_COEliminarAutomovil()
         {
 
         }
 
-        public M08_COAgregarAutomovil(Entidad _objeto)
+        public M08_COEliminarAutomovil(Entidad _objeto)
         {
             this._objeto = _objeto;
         }
@@ -35,7 +33,7 @@ namespace BOReserva.Controllers.PatronComando.M08
         {
             DAO DaoAutomovil = FabricaDAO.CrearDaoAutomovil();
 
-            return DaoAutomovil.Agregar(this._objeto).ToString();
+            return DaoAutomovil.Eliminar(this._objeto._id).ToString();
         }
 
         #endregion

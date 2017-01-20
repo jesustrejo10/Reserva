@@ -245,14 +245,6 @@
     <value>M08_ModificarAutomovil</value>
     <comment>Nombre del Procedimiento Modificar en Base de Datos Tabla Automovil</comment>
   </data>
-  <data name="tipovehiculo" xml:space="preserve">
-    <value>aut_tipovehiculo</value>
-    <comment>Atributo - tipo de automovil </comment>
-  </data>
-  <data name="transmision" xml:space="preserve">
-    <value>aut_transmision</value>
-    <comment>Atributo - tipo de transmision del automovil</comment>
-  </data>
   <data name="procedimientoConsultarAutomovilMatricula" xml:space="preserve">
     <value>M08_ConsultarAutomovilMatricula</value>
     <comment>Nombre del Procedimiento para consultar Base de Datos Tabla Automovil por matricula</comment>
@@ -260,5 +252,13 @@
   <data name="procedimientoEliminarAutomovil" xml:space="preserve">
     <value>M08_EliminarAutomovil</value>
     <comment>Nombre del Procedimiento Eliminar de la Base de Datos Tabla Automovil</comment>
+  </data>
+  <data name="tipovehiculo" xml:space="preserve">
+    <value>aut_tipovehiculo</value>
+    <comment>Atributo - tipo de automovil </comment>
+  </data>
+  <data name="transmision" xml:space="preserve">
+    <value>aut_transmision</value>
+    <comment>Atributo - tipo de transmision del automovil</comment>
   </data>
 </root>

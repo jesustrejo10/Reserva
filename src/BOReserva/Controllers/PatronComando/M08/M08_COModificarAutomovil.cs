@@ -30,7 +30,9 @@ namespace BOReserva.Controllers.PatronComando.M08
 
         public override string ejecutar()
         {
-            throw new NotImplementedException();
+            DAO DaoAutomovil = FabricaDAO.CrearDaoAutomovil();
+
+            return DaoAutomovil.Modificar(this._objeto).ToString();
         }
 
         #endregion
