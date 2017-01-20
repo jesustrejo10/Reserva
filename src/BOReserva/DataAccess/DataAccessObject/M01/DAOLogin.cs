@@ -14,11 +14,11 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
     {
         private SqlConnection conexion = null;
         private string stringDeConexion = "";
-        private manejadorSQL bd = new manejadorSQL();
+        //private manejadorSQL bd = new manejadorSQL();
 
         public DAOLogin()
         {
-            this.stringDeConexion = bd.stringDeConexions;
+            this.stringDeConexion = _connexionString;
         }
         #region Métodos por convertir
 
