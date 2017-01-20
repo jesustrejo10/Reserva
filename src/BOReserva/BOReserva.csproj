@@ -1633,6 +1633,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="DataAccess\Domain\M04\" />
+    <Folder Include="Excepciones\M10\" />
     <Folder Include="Scripts\Scripts_Reclamo\" />
     <Folder Include="Views\dist\img\credit\" />
     <Folder Include="Views\dist\js\pages\" />
