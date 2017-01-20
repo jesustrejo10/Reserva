@@ -21,6 +21,7 @@ namespace BOReserva.Controllers.PatronComando.M11
             this._paquete = (Paquete) paquete;
             this._paquete._id = id;
         }
+
      /*   public override String ejecutar()
         {
             IDAO daoPaquete = FabricaDAO.instanciarDaoPaquete();
@@ -29,5 +30,12 @@ namespace BOReserva.Controllers.PatronComando.M11
             return paquete._nombre;
 
         }*/
+
+           public override String ejecutar()
+        {
+            
+            return null; //por ahora porque lo de arriba es lo que se debe descomentar
+
+        }
     }
 }

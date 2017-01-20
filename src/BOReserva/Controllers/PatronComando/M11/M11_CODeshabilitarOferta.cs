@@ -25,5 +25,11 @@ namespace BOReserva.Controllers.PatronComando.M11
             String test = daoOferta.eliminarOferta(_oferta._id);
             return test;
         } */
+
+        public override String ejecutar()
+        {
+
+            return null; //por ahora porque lo de arriba es lo que se debe descomentar
+        } 
     }
 }

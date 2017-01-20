@@ -19,12 +19,18 @@ namespace BOReserva.Controllers.PatronComando.M11
             this._paquete = (Paquete) paquete;
             this._paquete._id = id;
         }
-
+  
      /*   public override String ejecutar()
         {
             DAOPaquete daoPaquete = (DAOPaquete)FabricaDAO.instanciarDaoPaquete();
             String test = daoPaquete.eliminarPaquete(_paquete._id);
             return test;
         } */
+
+        public override String ejecutar()
+        {
+
+            return null;
+        } // por ahora porque lo de arriba es lo que se debe descomentar
     }
 }
