@@ -18,18 +18,27 @@ namespace BOReserva.Controllers.PatronComando.M08
         #endregion
 
         #region Constructor
-        public M08_COAgregarAutomovil() { }
+        public M08_COAgregarAutomovil()
+        {
+
+        }
 
         public M08_COAgregarAutomovil(Entidad _objeto)
         {
             this._objeto = _objeto;
         }
-
         #endregion
+
+        #region Ejecucion
 
         public override string ejecutar()
         {
-            throw new NotImplementedException();
+            DAO elDao = FabricaDAO.CrearDaoAutomovil();
+
+            return elDao.Agregar(this._objeto).ToString();
         }
+
+        #endregion
+
     }
 }
