@@ -209,6 +209,7 @@
     <Compile Include="Controllers\PatronComando\M05\M05_COBuscarnombreciudad.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COEliminarBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COModificarPasajero.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COConsultarBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M08\M08_COActivarAutomovil.cs" />
     <Compile Include="Controllers\PatronComando\M08\M08_COBuscarAutomovil.cs" />
     <Compile Include="Controllers\PatronComando\M08\M08_COAgregarAutomovil.cs" />
@@ -283,6 +284,7 @@
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOBoleto.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPasajero.cs" />
     <Compile Include="DataAccess\Domain\Boleto.cs" />
+    <Compile Include="DataAccess\Domain\BoletoVuelo.cs" />
     <Compile Include="DataAccess\Domain\Lugar.cs" />
     <Compile Include="DataAccess\Domain\Pasajero.cs" />
     <Compile Include="DataAccess\Domain\Permiso.cs" />
@@ -304,6 +306,7 @@
     <Compile Include="DataAccess\Domain\Hotel.cs" />
     <Compile Include="DataAccess\Domain\Pais.cs" />
     <Compile Include="DataAccess\Domain\Rol.cs" />
+    <Compile Include="DataAccess\Domain\RutaBoleto.cs" />
     <Compile Include="DataAccess\Domain\Usuario.cs" />
     <Compile Include="DataAccess\Domain\Vuelo.cs" />
     <Compile Include="DataAccess\Model\Connection.cs" />

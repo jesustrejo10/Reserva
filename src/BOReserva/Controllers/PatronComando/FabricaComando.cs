@@ -158,6 +158,7 @@ namespace BOReserva.Controllers.PatronComando
             return new M13_COAgregarRolPermiso((Rol)e);
 
         }
+        
         #region M05_Boleto
         public static Command<String> crearM05AgregarPasajero(Entidad e)
         {
@@ -183,6 +184,11 @@ namespace BOReserva.Controllers.PatronComando
         public static Command<String> modificarM05modificarPasajero(Entidad e)
         {
             return new M05_COModificarPasajero((Pasajero)e);
+        }
+
+        public static Command<Entidad> mostrarM05boleto(int id)
+        {
+            return new M05_COConsultarBoleto(id);
         }
 
         #endregion
