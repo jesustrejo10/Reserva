@@ -1,5 +1,6 @@
 ﻿using BOReserva.DataAccess.DAO;
 using BOReserva.DataAccess.DataAccessObject.M01;
+using BOReserva.DataAccess.DataAccessObject.M11;
 using BOReserva.DataAccess.Model;
 using BOReserva.M10;
 using System;
@@ -141,6 +142,17 @@ namespace BOReserva.DataAccess.DataAccessObject
         public static SqlDataAdapter asignarAdaptadorDeDatos(SqlCommand comandoSql)
         {
             return new SqlDataAdapter(comandoSql);
+        }
+        #endregion
+
+        #region M11_Gestion_Ofertas_Y_Paquetes
+        /// <summary>
+        /// Método que crea la instancia de DAOVuelo
+        /// </summary>
+        /// <returns>Retorna la instancia a la clase DAOVuelo</returns>
+        public static DAO instanciarDaoPaquete()
+        {
+            return new DAOPaquete(); 
         }
         #endregion
 
