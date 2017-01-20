@@ -70,15 +70,15 @@ namespace BOReserva.Controllers
         /// </summary>
         /// <returns>Retorna un objeto para renderizar la vista parcial.</returns>
         public ActionResult M10_GestionRestaurantes_Modificar(int id)
-        {
-
-            ViewBag.Ciudad = FabricaVista.asignarItemsComboBox(cargarComboBoxLugar(), "Id", "Name");
-            ViewBag.Horarios = FabricaVista.asignarItemsComboBox(cargarComboBoxHorario(), "", "");
-            
+        {    
             Entidad _restaurant = FabricaEntidad.crearRestaurant();
             ((CRestauranteModelo)_restaurant)._id = id;
             Command<Entidad> comando = (Command<Entidad>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, BOReserva.Controllers.PatronComando.FabricaComando.comandoRestaurant.CONSULTAR_ID, _restaurant);
             Entidad rest = comando.ejecutar();
+
+            ViewBag.Ciudad = FabricaVista.asignarItemsComboBoxConPosicion(cargarComboBoxLugar(), "Id", "Name",((CRestauranteModelo)rest).idLugar);
+            ViewBag.HorariosIni = FabricaVista.asignarItemsComboBoxConPosicion(cargarComboBoxHorario(), "", "", ((CRestauranteModelo)rest).horarioApertura);
+            ViewBag.HorariosFin = FabricaVista.asignarItemsComboBoxConPosicion(cargarComboBoxHorario(), "", "", ((CRestauranteModelo)rest).horarioCierre);
 
             ViewBag.Id = ((CRestauranteModelo)rest)._id;
             ViewBag.NombreRestaurant = ((CRestauranteModelo)rest).nombre;
