@@ -16,14 +16,12 @@ namespace BOReserva.DataAccess.DataAccessObject
             Comida comida = (Comida)entidad;
             List<Parametro> lista = FabricaDAO.asignarListaDeParametro();
 
-            Console.WriteLine("HOLISSSSSSSSSSSSSSSSS");
-            
             try
             {
                 lista.Add(FabricaDAO.asignarParametro(RecursoM06.com_nombre, SqlDbType.VarChar, comida._nombre, false));
                 lista.Add(FabricaDAO.asignarParametro(RecursoM06.com_tipo, SqlDbType.VarChar, comida._tipo, false));
-                lista.Add(FabricaDAO.asignarParametro(RecursoM06.com_estatus, SqlDbType.Int, comida._estatus.ToString(), false));
-                lista.Add(FabricaDAO.asignarParametro(RecursoM06.com_descripcion, SqlDbType.VarChar, comida._descripcion, false));
+                lista.Add(FabricaDAO.asignarParametro(RecursoM06.com_estatus, SqlDbType.Int, comida._nombre, false));
+                lista.Add(FabricaDAO.asignarParametro(RecursoM06.com_descripcion, SqlDbType.VarChar, comida._nombre, false));
 
                 EjecutarStoredProcedure(RecursoM06.procedimientoAgregarComida, lista);
             }
