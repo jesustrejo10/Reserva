@@ -74,11 +74,18 @@ namespace BOReserva.DataAccess.Domain
         }
 
         #endregion 
+
+        #region M16_GestionReclamos
         public static Entidad InstanciarReclamo(String tituloReclamo, String detalleReclamo, String fechaReclamo, int estadoReclamo, int usuario)
         {
-            return new Reclamo();
+            return new Reclamo(tituloReclamo, detalleReclamo, fechaReclamo, estadoReclamo, usuario);
         }
-        public static Entidad InstanciarReclamo(CAgregarReclamo model, Entidad c)
+
+        public static Entidad InstanciarReclamo(int reclamo , String tituloReclamo, String detalleReclamo, String fechaReclamo, int estadoReclamo, int usuario)
+        {
+            return new Reclamo(reclamo, tituloReclamo, detalleReclamo, fechaReclamo, estadoReclamo, usuario);
+        }
+        public static Entidad InstanciarReclamo(CAgregarReclamo model)
         {
             String titulo = model._tituloReclamo;
             String detalle = model._detalleReclamo;
@@ -88,6 +95,18 @@ namespace BOReserva.DataAccess.Domain
 
             return new Reclamo(titulo, detalle, fecha, estado, usuario);
         }
+        public static List<Reclamo> InstanciarListaReclamo(Dictionary<int, Entidad> listaEntidad) 
+        {
+            List<Reclamo> lista = new List<Reclamo>();
+            foreach(var e in listaEntidad)
+            {
+                Reclamo nuevoReclamo = (Reclamo)e.Value;
+                lista.Add(nuevoReclamo);
+
+            }
+            return lista;
+        }
+#endregion
 
         #region M04_Vuelo
         /// <summary>

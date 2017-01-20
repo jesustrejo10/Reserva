@@ -36,7 +36,7 @@ namespace FOReserva.DataAccess.DataAccessObject
                 String sql = "INSERT INTO Reclamo " +
                              "(rec_titulo, rec_descripcion, rec_fecha, rec_estatus , rec_fk_usuario) " +
                               "VALUES ('" + reclamo._tituloReclamo + "','" + reclamo._detalleReclamo + "','" + reclamo._fechaReclamo + "'," +
-                              "1,'" + reclamo._usuarioReclamo + ");";
+                              "1," + reclamo._usuarioReclamo + ");";
 
 
                 Debug.WriteLine(sql);
