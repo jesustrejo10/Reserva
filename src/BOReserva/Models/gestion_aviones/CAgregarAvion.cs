@@ -1,5 +1,7 @@
+using BOReserva.DataAccess.Domain;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -17,6 +19,7 @@ namespace BOReserva.Models.gestion_aviones
         public float _capacidadEquipaje { get; set; }
         public float _distanciaMaximaVuelo { get; set; }
         public float _velocidadMaximaDeVuelo { get; set; }
+        public int _disponibilidad { get; set; }
         
     }
 

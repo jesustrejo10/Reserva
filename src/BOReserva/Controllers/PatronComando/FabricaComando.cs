@@ -1,4 +1,5 @@
 using BOReserva.Controllers.PatronComando.M09;
+using BOReserva.Controllers.PatronComando;
 using BOReserva.DataAccess.Domain;
 using BOReserva.M10.Comando.gestion_restaurantes;
 using System;
@@ -12,6 +13,19 @@ namespace BOReserva.Controllers.PatronComando
     /// </summary>
     public class FabricaComando
     {
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M09_COAgregarHotel
+        /// </summary>
+        /// <param name="e">Recibe la una entidad de tipo Hotel</param>
+        /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
+        public static Command<String> crearM02AgregarAvion(Entidad e)
+        {
+
+            return new M02_COAgregarAvion((Avion)e);
+
+        }
+
         #region M09_Gestion_Hoteles_Por_Ciudad
 
         /// <summary>

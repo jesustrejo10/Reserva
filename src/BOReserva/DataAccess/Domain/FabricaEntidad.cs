@@ -3,6 +3,7 @@ using BOReserva.Models.gestion_hoteles;
 using BOReserva.Models.gestion_reclamos;
 using BOReserva.Models.gestion_restaurantes;
 using BOReserva.Models.gestion_roles;
+using BOReserva.Models.gestion_aviones;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -177,6 +178,36 @@ namespace BOReserva.DataAccess.Domain
         {
             return new Permiso();
         }
+
+        #region M02_Gestion_Avion
+
+        public static Entidad InstanciarAvion(int id, string matricula, string modelo, int capacidadTurista, int capacidadEjecutiva, int capacidadVIP, float capacidadEquipaje, float distanciaMaximaVuelo, float velocidadMaxima, float capacidadCombustible, int disponibilidad)
+            {
+           
+            return new Avion();
+        }
+
+        public static Entidad InstanciarAvion(CAgregarAvion model)
+        {
+
+         
+            string matricula = model._matriculaAvion;
+            string modelo = model._modeloAvion;
+            int capacidadturistica = model._capacidadPasajerosTurista;
+            int capacidadEjecutiva = model._capacidadPasajerosEjecutiva;
+            int capacidadVIP = model._capacidadPasajerosVIP;
+            float capacidadEquipaje = model._capacidadEquipaje;
+            float distanciaMaximaVuelo = model._distanciaMaximaVuelo;
+            float velocidadMaxima = model._velocidadMaximaDeVuelo;
+            float capacidadCombustible = model._capacidadMaximaCombustible;
+            int disponibilidad = model._disponibilidad;
+
+
+
+            return new Avion(matricula, modelo, capacidadturistica, capacidadEjecutiva, capacidadVIP, capacidadEquipaje, distanciaMaximaVuelo, velocidadMaxima, capacidadCombustible,disponibilidad);
+        }
+
+        #endregion
 
     }
 }

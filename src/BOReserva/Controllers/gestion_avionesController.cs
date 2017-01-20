@@ -5,8 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using BOReserva.Models.gestion_aviones;
 using System.Net;
+using System.Diagnostics;
 using BOReserva.Servicio;
 using System.Data.SqlClient;
+using BOReserva.DataAccess.Domain;
+using BOReserva.Controllers.PatronComando;
 
 namespace BOReserva.Controllers
 {
@@ -14,23 +17,44 @@ namespace BOReserva.Controllers
     /// Clase que emite las respuestas de los eventos AJAX
     /// </summary>
     public class gestion_avionesController : Controller
-    {    
+    {
         /// <summary>
         /// Metodo para guardar el avion, haciendo el insert en la base de datos 
         /// </summary>
         /// <returns>Retorna un ActionResult que contiene los elementos de la vista </returns>
-        public ActionResult M02_AgregarAvion()
+        public ActionResult M02_CrearAvion()
         {
             CAgregarAvion model = new CAgregarAvion();
             return PartialView(model);
         }
+
+        //PRUEBA A VER SI ESTO ES LO QUE FALTABA
+        /// <summary>
+        /// Método que se utiliza para guardar un vehículo ingresado
+        /// </summary>
+        /// <param name="model">Datos que provienen de un formulario de la vista parcial M08_AgregarAutomovil</param>
+        /// <returns>Retorna un JsonResult</returns>
+        [HttpPost]
+        public JsonResult guardarAvion(CAgregarAvion model)
+        {
+            //Entidad ciudadDestino = FabricaEntidad.InstanciarCiudad("nombre de la ciudad");
+            //ciudadDestino._id = 29;
+            Entidad nuevoAvion = FabricaEntidad.InstanciarAvion(model);
+            //con la fabrica instancie al hotel.
+            Command<String> comando = FabricaComando.crearM02AgregarAvion(nuevoAvion);
+            String agrego_si_no = comando.ejecutar();
+
+            return (Json(agrego_si_no));
+        }
+
+        //FIN DE LA PRUEBA 
 
         /// <summary>
         /// Metodo para modificar el avion, haciendo el insert en la base de datos si los datos son correctos
         /// </summary>
         /// <param name="model">CAgregarAvion</param>
         /// <returns> Json </returns>
-
+        /*
         [HttpPost]
         public JsonResult guardarAvion(CAgregarAvion model)
         {
@@ -75,19 +99,17 @@ namespace BOReserva.Controllers
 
             return (Json(true, JsonRequestBehavior.AllowGet));
 
-        }
+        }*/
 
 
 
-    
+
         /// <summary>
         /// Metodo para ver los aviones disponibles
         /// </summary>
         /// <returns>ActionResult que contiene una lista de los aviones en el sistema </returns>
         public ActionResult M02_VisualizarAviones()
         {
-            var usuario = Session["Cgestion_seguridad_ingreso"] as BOReserva.Models.gestion_seguridad_ingreso.Cgestion_seguridad_ingreso;
-            System.Diagnostics.Debug.WriteLine("ID: " + usuario.idUsuario);
             manejadorSQL sql = new manejadorSQL();
             List<CAvion> aviones = new List<CAvion>();
             try
@@ -143,7 +165,7 @@ namespace BOReserva.Controllers
                 return Json(error);
             }
         }
-       
+
         /// <summary>
         /// Metodo para que el avion NO este disponible para su uso
         /// </summary>
@@ -231,5 +253,5 @@ namespace BOReserva.Controllers
                 return Json(error);
             }
         }
-   }
+    }
 }
