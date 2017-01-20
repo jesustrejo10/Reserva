@@ -453,7 +453,7 @@ namespace BOReserva.Controllers
             return PartialView(bol);
         }
 
-        //falta patrones
+        
         public ActionResult M05_ModificarBoleto(int id)
         {
             Command<Entidad> comando = FabricaComando.mostrarM05boleto(id);
