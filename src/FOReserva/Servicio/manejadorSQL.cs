@@ -10,7 +10,7 @@ namespace FOReserva.Servicio
     public class manejadorSQL
     {
         /// <summary>
-        /// ATENCIÓN: Esta clase no debería usarse más, se deja por motivos de compatibilidad para los grupos que aún no han migrado a DAO.
+        /// ATENCIï¿½N: Esta clase no deberï¿½a usarse mï¿½s, se deja por motivos de compatibilidad para los grupos que aï¿½n no han migrado a DAO.
         /// </summary>
         //Inicializo el string de conexion en el constructor
         public manejadorSQL()
@@ -101,7 +101,7 @@ namespace FOReserva.Servicio
             {
                 aaa = aaa.Replace(p.ParameterName, p.Value.ToString());
             }
-            
+
             try
             {
                 tmp = execute.ExecuteReader();
