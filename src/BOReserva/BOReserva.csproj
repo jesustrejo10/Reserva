@@ -210,6 +210,10 @@
     <Compile Include="Controllers\M04\gestion_vueloController.cs" />
     <Compile Include="Controllers\PatronComando\Command.cs" />
     <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
+    <Compile Include="Controllers\PatronComando\M01\M01_COBloquearUsuario.cs" />
+    <Compile Include="Controllers\PatronComando\M01\M01_COLanding.cs" />
+    <Compile Include="Controllers\PatronComando\M01\M01_COLogout.cs" />
+    <Compile Include="Controllers\PatronComando\M01\M01_COLogin.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COBuscarnombreciudad.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COEliminarBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COModificarPasajero.cs" />
