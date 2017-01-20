@@ -286,6 +286,7 @@
     <Compile Include="DataAccess\DataAccessObject\M11\DAOOferta.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOBoleto.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPasajero.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M11\DAOPaquete.cs" />
     <Compile Include="DataAccess\Domain\Boleto.cs" />
     <Compile Include="DataAccess\Domain\Lugar.cs" />
     <Compile Include="DataAccess\Domain\Oferta.cs" />
