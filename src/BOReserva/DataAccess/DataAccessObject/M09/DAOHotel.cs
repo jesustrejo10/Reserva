@@ -42,7 +42,8 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
                 conexion.Close();
                 return 2;
             }
-            catch (NullReferenceException ex) {
+            catch (NullReferenceException ex)
+            {
                 Debug.WriteLine("Ocurrio una NullReferenceException");
                 Debug.WriteLine(ex.ToString());
                 conexion.Close();
@@ -66,12 +67,97 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
 
         Entidad IDAO.Modificar(Entidad e)
         {
-            throw new NotImplementedException();
+            Hotel hotel = (Hotel)e;
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            try
+            {
+                conexion.Open();
+                String sql = "UPDATE Hotel SET hot_nombre = '" + hotel._nombre + "', hot_url_pagina = '" + hotel._paginaWeb +
+                            "', hot_email = '" + hotel._email + "', hot_cantidad_habitaciones = '" + hotel._capacidad + "', hot_direccion = '" + hotel._direccion +
+                            "', hot_estrellas = " + hotel._clasificacion +
+                            " WHERE hot_id = " + hotel._id;
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                conexion.Close();
+                hotel._nombre = "1";
+                Entidad resultado = hotel;
+                return resultado;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                hotel._nombre = ex.Message;
+                Entidad resultado = hotel;
+                return resultado;
+            }
         }
 
         Entidad IDAO.Consultar(int id)
         {
-            throw new NotImplementedException();
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            Hotel hotel = new Hotel();
+            try
+            {
+                conexion.Open();
+                String sql = "SELECT H.*, C.lug_id as id_ciudad, C.lug_nombre as nombre_ciudad, P.lug_id as id_pais, P.lug_nombre as nombre_pais " +
+                             "FROM HOTEL H, LUGAR C, LUGAR P " +
+                             "WHERE H.hot_fk_ciudad = C.lug_id and C.lug_fk_lugar_id = P.lug_id AND H.HOT_ID = " + id;
+
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    Pais pais;
+                    Ciudad ciudad;
+                    int idCiudad;
+                    String nombreCiudad;
+                    int idPais;
+                    String nombrePais;
+
+                    int idHotel;
+                    int capacidad;
+                    int clasificacion;
+                    String nombreHotel;
+                    String direccionHotel;
+                    String paginaWebHotel;
+                    String emailHotel;
+
+                    while (reader.Read())
+                    {
+                        //SE AGREGA CREA UN OBJECTO VEHICLE SE PASAN LOS ATRIBUTO ASI reader["<etiqueta de la columna en la tabla Automovil>"]
+                        //Y  SE AGREGA a listavehiculos
+                        //public Hotel(int id, String nombre, String direccion, String email, String paginaWeb, int clasificacion, int capacidad, Ciudad ciudad)
+                        idPais = Int32.Parse(reader["id_pais"].ToString());
+                        nombrePais = reader["nombre_pais"].ToString();
+                        pais = new Pais(idPais, nombrePais);
+
+                        idCiudad = Int32.Parse(reader["id_ciudad"].ToString());
+                        nombreCiudad = reader["nombre_ciudad"].ToString();
+                        ciudad = new Ciudad(idCiudad, nombreCiudad, pais);
+                        idHotel = Int32.Parse(reader["hot_id"].ToString());
+
+                        hotel = new Hotel(
+                            idHotel,
+                            reader["hot_nombre"].ToString(),
+                            reader["hot_direccion"].ToString(),
+                            reader["hot_email"].ToString(),
+                            reader["hot_url_pagina"].ToString(),
+                            Int32.Parse(reader["hot_estrellas"].ToString()),
+                            Int32.Parse(reader["hot_cantidad_habitaciones"].ToString()),
+                            ciudad
+                        );
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return hotel;
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+            }
         }
 
         Dictionary<int, Entidad> IDAO.ConsultarTodos()
@@ -84,10 +170,10 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             try
             {
                 conexion.Open();
-                String sql =    "SELECT H.*, C.lug_id as id_ciudad, C.lug_nombre as nombre_ciudad, P.lug_id as id_pais, P.lug_nombre as nombre_pais "+
-                                "FROM HOTEL H, LUGAR C, LUGAR P "+
+                String sql = "SELECT H.*, C.lug_id as id_ciudad, C.lug_nombre as nombre_ciudad, P.lug_id as id_pais, P.lug_nombre as nombre_pais " +
+                                "FROM HOTEL H, LUGAR C, LUGAR P " +
                                 "WHERE H.hot_fk_ciudad = C.lug_id and C.lug_fk_lugar_id = P.lug_id";
-                
+
                 SqlCommand cmd = new SqlCommand(sql, conexion);
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -106,7 +192,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
                     String direccionHotel;
                     String paginaWebHotel;
                     String emailHotel;
-                    
+
                     while (reader.Read())
                     {
                         //SE AGREGA CREA UN OBJECTO VEHICLE SE PASAN LOS ATRIBUTO ASI reader["<etiqueta de la columna en la tabla Automovil>"]
@@ -114,11 +200,11 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
                         //public Hotel(int id, String nombre, String direccion, String email, String paginaWeb, int clasificacion, int capacidad, Ciudad ciudad)
                         idPais = Int32.Parse(reader["id_pais"].ToString());
                         nombrePais = reader["nombre_pais"].ToString();
-                        pais = new Pais(idPais,nombrePais);
+                        pais = new Pais(idPais, nombrePais);
 
                         idCiudad = Int32.Parse(reader["id_ciudad"].ToString());
-                        nombreCiudad = reader["nombre_ciudad"].ToString();                         
-                        ciudad = new Ciudad(idCiudad,nombreCiudad,pais);
+                        nombreCiudad = reader["nombre_ciudad"].ToString();
+                        ciudad = new Ciudad(idCiudad, nombreCiudad, pais);
                         idHotel = Int32.Parse(reader["hot_id"].ToString());
 
                         hotel = new Hotel(
@@ -129,9 +215,10 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
                             reader["hot_url_pagina"].ToString(),
                             Int32.Parse(reader["hot_estrellas"].ToString()),
                             Int32.Parse(reader["hot_cantidad_habitaciones"].ToString()),
-                            ciudad
+                            ciudad,
+                            Int32.Parse(reader["hot_disponibilidad"].ToString())
                         );
-                        listaHoteles.Add(idHotel, hotel);            
+                        listaHoteles.Add(idHotel, hotel);
                     }
                 }
                 cmd.Dispose();
@@ -143,6 +230,52 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
                 Debug.WriteLine(ex.ToString());
                 conexion.Close();
                 return null;
+            }
+        }
+
+        public String eliminarHotel(int id)
+        {
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            try
+            {
+                conexion.Open();
+                String sql = "DELETE FROM Hotel WHERE hot_id = " + id;
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                conexion.Close();
+                return "1";
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return ex.Message;
+            }
+        }
+
+        public String disponibilidadHotel(Entidad e, int disponibilidad)
+        {
+            Hotel hotel = (Hotel)e;
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            try
+            {
+                conexion.Open();
+                String sql = "UPDATE Hotel SET hot_disponibilidad = " + disponibilidad +
+                            " WHERE hot_id = " + hotel._id;
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                conexion.Close();
+                hotel._nombre = "1";
+                Entidad resultado = hotel;
+                return "1";
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                hotel._nombre = ex.Message;
+                Entidad resultado = hotel;
+                return ex.Message;
             }
         }
     }

@@ -282,6 +282,7 @@ jQuery(document).ready(function () {
             });
 
     });
+
     //$("#consultarhotel").click(function (e) {
     //    e.preventDefault();
     //    var url = '/gestion_hoteles/M09_GestionHoteles_Visualizar';

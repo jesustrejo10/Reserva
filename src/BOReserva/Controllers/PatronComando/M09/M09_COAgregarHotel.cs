@@ -23,8 +23,11 @@ namespace BOReserva.Controllers.PatronComando
 
         public override String ejecutar(){
             IDAO daoHotel = FabricaDAO.instanciarDaoHotel();       
-            int test = daoHotel.Agregar(_hotel);
-            return test.ToString();
+            int resultadoAgregarHotel = daoHotel.Agregar(_hotel);
+            if (resultadoAgregarHotel == 1) { 
+                //agrego las habitaciones.
+            }
+            return resultadoAgregarHotel.ToString();
         }
 
     }

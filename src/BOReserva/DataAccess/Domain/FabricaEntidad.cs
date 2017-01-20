@@ -36,8 +36,8 @@ namespace BOReserva.DataAccess.Domain
             int capacidad = model._capacidadHabitacion;
             String paginaWeb = model._paginaWeb;
             String email = model._email;
-
-            return new Hotel(nombre, direccion, email, paginaWeb, clasificacion, capacidad, city);
+            int precio = model._precioHabitacion;
+            return new Hotel(nombre, direccion, email, paginaWeb, clasificacion, capacidad, city,precio);
         }
 
         public static Entidad InstanciarHotel(CModificarHotel model, Entidad c)
@@ -71,6 +71,11 @@ namespace BOReserva.DataAccess.Domain
         public static Entidad InstanciarCiudad(int id, String nombre, int fkPais)
         {
             return new Ciudad(id,nombre,fkPais);
+        }
+
+        public static Entidad InstanciarHabitacion(int precio, int fkHotel)
+        {
+            return new Habitacion( precio, fkHotel);
         }
 
         #endregion 

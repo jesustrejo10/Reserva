@@ -1,4 +1,5 @@
 ﻿using BOReserva.DataAccess.DAO;
+using BOReserva.DataAccess.DataAccessObject.M09;
 using BOReserva.DataAccess.DataAccessObject.M01;
 using BOReserva.DataAccess.Model;
 using BOReserva.M10;
@@ -36,6 +37,11 @@ namespace BOReserva.DataAccess.DataAccessObject
         public static DAO instanciarDaoCiudad()
         {
             return new DAOCiudad();
+        }
+
+        public static DAO instanciarDaoHabitacion()
+        {
+            return new DAOHabitacion();
         }
         #endregion
 
