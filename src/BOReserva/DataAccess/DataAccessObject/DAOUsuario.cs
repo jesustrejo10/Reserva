@@ -23,7 +23,8 @@ namespace BOReserva.DataAccess.DataAccessObject
             try
             {
                 conexion.Open();
-                String sql = "INSERT INTO Usuario VALUES ('" + usuario._nombre + "','" + usuario._apellido + "','" + usuario._correo + "','" + usuario._contrasena + "'," + usuario._rol + ",'" + usuario._fechaCreacion + "','" + usuario._activo + "')";
+                usuario._fechaCreacion = DateTime.Today;
+                String sql = "INSERT INTO Usuario VALUES ('" + usuario._nombre + "','" + usuario._apellido + "','" + usuario._correo + "','" + usuario._contrasena + "',1,'" + usuario._fechaCreacion + "','" + usuario._activo + "')";
                 Debug.WriteLine(sql);
                 SqlCommand cmd = new SqlCommand(sql, conexion);
                 cmd.ExecuteNonQuery();

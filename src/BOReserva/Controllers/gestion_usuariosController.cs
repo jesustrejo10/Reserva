@@ -13,6 +13,8 @@ namespace BOReserva.Controllers
 {
     public class gestion_usuariosController : Controller
     {
+        public static int _rol;
+
         /// <summary>
         /// Método de la vista parcial M12_AgregarUsuario2
         /// </summary>
@@ -39,6 +41,19 @@ namespace BOReserva.Controllers
             }
 
         }
+
+        [HttpPost]
+        public JsonResult guardarUsuario(CAgregarUsuario model)
+        {
+            Entidad rol = FabricaEntidad.InstanciarRol(_rol);
+            rol._id = 1;
+            Entidad nuevoUsuario = FabricaEntidad.InstanciarUsuario(model, rol);
+            Command<string> comando = FabricaComando.crearM12AgregarUsuario(nuevoUsuario);
+            string agrego = comando.ejecutar();
+
+            return (Json(agrego));
+        }
+
 
 
 

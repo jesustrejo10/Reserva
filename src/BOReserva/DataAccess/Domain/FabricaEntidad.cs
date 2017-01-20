@@ -3,6 +3,7 @@ using BOReserva.Models.gestion_hoteles;
 using BOReserva.Models.gestion_reclamos;
 using BOReserva.Models.gestion_restaurantes;
 using BOReserva.Models.gestion_roles;
+using BOReserva.Models.gestion_usuarios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -177,6 +178,33 @@ namespace BOReserva.DataAccess.Domain
         {
             return new Permiso();
         }
+
+        #region M12_Usuarios 
+        public static Entidad InstanciarUsuario(int id, string nombre, string apellido, string correo, string contrasena, int fkRol, DateTime fechaCreacion, string activo)
+        {
+            return new Usuario();
+        }
+
+        public static Entidad InstanciarUsuario(CAgregarUsuario model, Entidad r)
+        {
+            Rol rol = (Rol)r;
+
+            string nombre = model._nombre;
+            string apellido = model._apellido;
+            string correo = model._correo;
+            string contrasena = model._contrasena;
+            DateTime fechaCreacion = model._fechaCreacion;
+            string activo = model._activo;
+
+            return new Usuario(nombre, apellido, correo, contrasena, rol, fechaCreacion, activo);
+        }
+
+        public static Entidad InstanciarRol(int rol)
+        {
+            return new Rol();
+        }
+
+        #endregion
 
     }
 }

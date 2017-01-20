@@ -284,7 +284,7 @@
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORol.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOBoleto.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPasajero.cs" />
-    <Compile Include="DataAccess\DataAccessObject\M12\DAOUsuario.cs" />
+    <Compile Include="DataAccess\DataAccessObject\DAOUsuario.cs" />
     <Compile Include="DataAccess\Domain\Boleto.cs" />
     <Compile Include="DataAccess\Domain\Lugar.cs" />
     <Compile Include="DataAccess\Domain\Pasajero.cs" />
@@ -1634,6 +1634,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="DataAccess\DataAccessObject\M09\" />
+    <Folder Include="DataAccess\DataAccessObject\M12\" />
     <Folder Include="DataAccess\Domain\M04\" />
     <Folder Include="Scripts\Scripts_Reclamo\" />
     <Folder Include="Views\dist\img\credit\" />
