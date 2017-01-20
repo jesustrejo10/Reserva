@@ -96,5 +96,49 @@ namespace TestUnitReserva.BO.gestion_hoteles
 
         }
 
+        /* 
+controller
+
+        IM09_COObtenerPaises
+        M09_COAgregarHabitaciones
+        M09_COAgregarHotel
+        M09_CocontultarHotel
+        M09_COdisponibilidadHotel
+        M09_COEliminarHotel
+        M09_COModificarHotel
+        M09_COObtenerCiudad
+        M09_COObtenerPaises
+
+dataAccess
+	DataAccessObject
+		M09 
+			DAOHbitacion
+			DaoHotel
+	Domain
+			Hotel
+Model
+	Gestion_hoteles
+		CAgregarHotel
+		CGestionHoteles_CrearHotel
+		CGestionHoteles_EditarHotel
+		CGestionHoteles_SelectCiudad
+		CGestionHoteles_SelectEstrellasModel
+		CGestionHoteles_SelectPaisModel
+		Chotel
+		CmodificarHotel
+		CverHotel
+Servicio
+	CManejadorSQL_Hoteles
+Views 
+	Gestion_Hoteles
+	M09_AgregarHotel
+	M09_DetalleHotel
+	M09_GestionHoteles_Crear
+	M09_GestionHoteles_desactivar
+	M09_GestionHoteles_ModificarHotel
+	M09_GestionHoteles_Visu
+         * */
+
+
     }
 }
