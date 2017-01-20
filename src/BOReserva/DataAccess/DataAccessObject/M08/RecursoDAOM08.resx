@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="anio" xml:space="preserve">
+    <value>aut_anio</value>
+    <comment>Atributo - año de lanzamiento del automovil</comment>
+  </data>
+  <data name="aut_anio" xml:space="preserve">
+    <value>@aut_anio</value>
+    <comment>Procedimiento Atributo - año de lanzamiento del automovil</comment>
+  </data>
+  <data name="aut_cantpasajero" xml:space="preserve">
+    <value>@aut_cantpasajero</value>
+    <comment>Procedimiento Atributo - cantidad de pasajeros del automovil</comment>
+  </data>
+  <data name="aut_color" xml:space="preserve">
+    <value>@aut_color</value>
+    <comment>Procedimiento Atributo - colo de automovil</comment>
+  </data>
+  <data name="aut_disponibilida" xml:space="preserve">
+    <value>@aut_disponibilida</value>
+    <comment>Procedimiento Atributo - disponibilidad del automovil</comment>
+  </data>
+  <data name="aut_fabricante" xml:space="preserve">
+    <value>@aut_fabricante</value>
+    <comment>Procedimiento Atributo - fabricante / marca del automovil</comment>
+  </data>
+  <data name="aut_fecharegistro" xml:space="preserve">
+    <value>@aut_fecharegistro</value>
+    <comment>Procedimiento Atributo - fecha de registro </comment>
+  </data>
+  <data name="aut_fk_ciudad" xml:space="preserve">
+    <value>@aut_fk_ciudad</value>
+    <comment>Procedimiento Atributo - ciudad en la que se encuentra el automovil</comment>
+  </data>
+  <data name="aut_kilometraje" xml:space="preserve">
+    <value>@aut_kilometraje</value>
+    <comment>Procedimiento Atributo - kilomertraje que posee el automovil</comment>
+  </data>
+  <data name="aut_matricula" xml:space="preserve">
+    <value>@aut_matricula</value>
+    <comment>Procedimiento Atributo - matricula del automovil</comment>
+  </data>
+  <data name="aut_modelo" xml:space="preserve">
+    <value>@aut_modelo</value>
+    <comment>Procedimiento Atributo - modelo del automovil</comment>
+  </data>
+  <data name="aut_penalidaddiaria" xml:space="preserve">
+    <value>@aut_penalidaddiaria</value>
+    <comment>Procedimiento Atributo - penalidad diaria por retraso en la entrega del automovil</comment>
+  </data>
+  <data name="aut_precioalquiler" xml:space="preserve">
+    <value>@aut_precioalquiler</value>
+    <comment>Procedimiento Atributo - precio de alquiler</comment>
+  </data>
+  <data name="aut_preciocompra" xml:space="preserve">
+    <value>@aut_preciocompra</value>
+    <comment>Procedimiento Atributo - precion de compra</comment>
+  </data>
+  <data name="aut_tipovehiculo" xml:space="preserve">
+    <value>@aut_tipovehiculo</value>
+    <comment>Procedimiento Atributo - tipo de automovil </comment>
+  </data>
+  <data name="aut_transmision" xml:space="preserve">
+    <value>@aut_transmision</value>
+    <comment>Procedimiento Atributo - tipo de transmision del automovil</comment>
+  </data>
+  <data name="cantpasajero" xml:space="preserve">
+    <value>aut_cantpasajero</value>
+    <comment>Atributo - cantidad de pasajeros del automovil</comment>
+  </data>
+  <data name="color" xml:space="preserve">
+    <value>aut_color</value>
+    <comment>Atributo - colo de automovil</comment>
+  </data>
+  <data name="disponibilida" xml:space="preserve">
+    <value>aut_disponibilida</value>
+    <comment>Atributo - disponibilidad del automovil</comment>
+  </data>
+  <data name="fabricante" xml:space="preserve">
+    <value>aut_fabricante</value>
+    <comment>Atributo - fabricante / marca del automovil</comment>
+  </data>
+  <data name="fecharegistro" xml:space="preserve">
+    <value>aut_fecharegistro</value>
+    <comment>Atributo - fecha de registro </comment>
+  </data>
+  <data name="fk_ciudad" xml:space="preserve">
+    <value>aut_fk_ciudad</value>
+    <comment>Atributo - ciudad en la que se encuentra el automovil</comment>
+  </data>
+  <data name="kilometraje" xml:space="preserve">
+    <value>aut_kilometraje</value>
+    <comment>Atributo - kilomertraje que posee el automovil</comment>
+  </data>
+  <data name="matricula" xml:space="preserve">
+    <value>aut_matricula</value>
+    <comment>Atributo - matricula del automovil</comment>
+  </data>
+  <data name="modelo" xml:space="preserve">
+    <value>aut_modelo</value>
+    <comment>Atributo - modelo del automovil</comment>
+  </data>
+  <data name="penalidaddiaria" xml:space="preserve">
+    <value>aut_penalidaddiaria</value>
+    <comment>Atributo - penalidad diaria por retraso en la entrega del automovil</comment>
+  </data>
+  <data name="precioalquiler" xml:space="preserve">
+    <value>aut_precioalquiler</value>
+    <comment>Atributo - precio de alquiler</comment>
+  </data>
+  <data name="preciocompra" xml:space="preserve">
+    <value>aut_preciocompra</value>
+    <comment>Atributo - precion de compra</comment>
+  </data>
+  <data name="procedimientoAgregarAutomovil" xml:space="preserve">
+    <value>M08_AgregarAutomovil</value>
+    <comment>Nombre del Procedimiento Agregar Base de Datos Tabla Automovil</comment>
+  </data>
+  <data name="procedimientoConsultarAutomovil" xml:space="preserve">
+    <value>M08_Consultar_Automovil</value>
+    <comment>Nombre del Procedimiento Consultar en Base de Datos Tabla Automovil</comment>
+  </data>
+  <data name="procedimientoConsultarLugar" xml:space="preserve">
+    <value>M08_Consultar_Lugar</value>
+    <comment>Nombre del Procedimiento Consultar en Base de Datos Tabla Lugar</comment>
+  </data>
+  <data name="procedimientoModificar" xml:space="preserve">
+    <value>M08_ModificarAutomovil</value>
+    <comment>Nombre del Procedimiento Modificar en Base de Datos Tabla Automovil</comment>
+  </data>
+  <data name="tipovehiculo" xml:space="preserve">
+    <value>aut_tipovehiculo</value>
+    <comment>Atributo - tipo de automovil </comment>
+  </data>
+  <data name="transmision" xml:space="preserve">
+    <value>aut_transmision</value>
+    <comment>Atributo - tipo de transmision del automovil</comment>
+  </data>
+  <data name="procedimientoConsultarAutomovilMatricula" xml:space="preserve">
+    <value>M08_ConsultarAutomovilMatricula</value>
+    <comment>Nombre del Procedimiento para consultar Base de Datos Tabla Automovil por matricula</comment>
+  </data>
+  <data name="procedimientoEliminarAutomovil" xml:space="preserve">
+    <value>M08_EliminarAutomovil</value>
+    <comment>Nombre del Procedimiento Eliminar de la Base de Datos Tabla Automovil</comment>
+  </data>
+</root>

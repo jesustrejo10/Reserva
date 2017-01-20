@@ -34,16 +34,16 @@ namespace BOReserva.Controllers
         /// Método de la vista parcial M08_VisualizarAutomoviles
         /// </summary>
         /// <returns>Retorna la vista parcial M08_VisualizarAutomoviles</returns>
-        public ActionResult M08_VisualizarAutomoviles()
-        {
-            //var companies = DataRepository.GetCompanies();
-            //List<CAutomovil> listavehiculos = new List<CAutomovil>();
-            manejadorSQL buscarvehiculos = new manejadorSQL();
-            List<Automovil> listavehiculos = buscarvehiculos.MListarvehiculosBD();  //AQUI SE BUSCA TODO LOS VEHICULOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
-            //CAutomovil test = new CAutomovil("AG234FC", "3", "Mazda", 2006, "Sedan", 1589.5, 5, 7550.0, 250.6, 290.4, DateTime.Parse("11/11/2016"), "Azul", 1, "Automatico", "Venezuela", "Distrito Capital", "Caracas");
-            //listavehiculos.Add(test);
-            return PartialView(listavehiculos);
-        }
+        //public ActionResult M08_VisualizarAutomoviles()
+        //{
+        //    //var companies = DataRepository.GetCompanies();
+        //    //List<CAutomovil> listavehiculos = new List<CAutomovil>();
+        //    manejadorSQL buscarvehiculos = new manejadorSQL();
+        //    //List<Automovil> listavehiculos = buscarvehiculos.MListarvehiculosBD();  //AQUI SE BUSCA TODO LOS VEHICULOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
+        //    //CAutomovil test = new CAutomovil("AG234FC", "3", "Mazda", 2006, "Sedan", 1589.5, 5, 7550.0, 250.6, 290.4, DateTime.Parse("11/11/2016"), "Azul", 1, "Automatico", "Venezuela", "Distrito Capital", "Caracas");
+        //    //listavehiculos.Add(test);
+        //    return PartialView(listavehiculos);
+        //}
 
 
 

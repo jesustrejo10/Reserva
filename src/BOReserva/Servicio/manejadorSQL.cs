@@ -1615,34 +1615,34 @@ namespace BOReserva.Servicio
         /// <param name="vehiculo">Vehículo a agregar a la base de datos</param>
         /// <param name="id">El id de la ciudad a donde será agregado</param>
         /// <returns>Retorna 1 si se agregó exitosamente y retorna la excepcion si no lo pudo hacer</returns>
-        public String MAgregarVehiculoBD(Automovil vehiculo, int id)
-        {
-            try
-            {
-                /*
-                conexion = new SqlConnection(stringDeConexion);
-                conexion.Open();
-                String sql = "INSERT INTO Automovil VALUES ('" + vehiculo._matricula + "', '" + vehiculo._modelo + "', '" + vehiculo._fabricante + "', " + vehiculo._anio + ", " + vehiculo._kilometraje + ", " + vehiculo._cantpasajeros + ", '" + vehiculo._tipovehiculo +
-                    "', " + vehiculo._preciocompra + ", " + vehiculo._precioalquiler + ", " + vehiculo._penalidaddiaria + ", CURRENT_TIMESTAMP, '" + vehiculo._color + "', " + 1 + ", '" + vehiculo._transmision + "', " + id + ")";
-                Debug.WriteLine(sql);
-                SqlCommand cmd = new SqlCommand(sql, conexion);
-                cmd.ExecuteNonQuery();
-                cmd.Dispose();
-                conexion.Close();
-                */
-                return "1";
-            }
-            catch (SqlException ex)
-            {
-                conexion.Close();
-                return ex.Message;
-            }
-            catch (NullReferenceException ex)
-            {
-                conexion.Close();
-                return ex.Message;
-            }
-        }
+        //public String MAgregarVehiculoBD(Automovil vehiculo, int id)
+        //{
+        //    try
+        //    {
+        //        /*
+        //        conexion = new SqlConnection(stringDeConexion);
+        //        conexion.Open();
+        //        String sql = "INSERT INTO Automovil VALUES ('" + vehiculo._matricula + "', '" + vehiculo._modelo + "', '" + vehiculo._fabricante + "', " + vehiculo._anio + ", " + vehiculo._kilometraje + ", " + vehiculo._cantpasajeros + ", '" + vehiculo._tipovehiculo +
+        //            "', " + vehiculo._preciocompra + ", " + vehiculo._precioalquiler + ", " + vehiculo._penalidaddiaria + ", CURRENT_TIMESTAMP, '" + vehiculo._color + "', " + 1 + ", '" + vehiculo._transmision + "', " + id + ")";
+        //        Debug.WriteLine(sql);
+        //        SqlCommand cmd = new SqlCommand(sql, conexion);
+        //        cmd.ExecuteNonQuery();
+        //        cmd.Dispose();
+        //        conexion.Close();
+        //        */
+        //        return "1";
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        conexion.Close();
+        //        return ex.Message;
+        //    }
+        //    catch (NullReferenceException ex)
+        //    {
+        //        conexion.Close();
+        //        return ex.Message;
+        //    }
+        //}
 
         /// <summary>
         /// Método que modifica un vehículo existente de la base de datos
@@ -1650,124 +1650,124 @@ namespace BOReserva.Servicio
         /// <param name="vehiculo">Vehículo a modificar de la base de datos</param>
         /// <param name="id">El id de la ciudad a donde se ubica</param>
         /// <returns>Retorna 1 si se modificó exitosamente y retorna la excepcion si no lo pudo hacer</returns>
-        public String MModificarVehiculoBD(Automovil vehiculo, int id)
-        {
-            try
-            {
-                /*
-                conexion = new SqlConnection(stringDeConexion);
-                conexion.Open();
-                String sql = "UPDATE Automovil SET aut_kilometraje = " + vehiculo._kilometraje + ", aut_tipovehiculo = '" + vehiculo._tipovehiculo +
-                    "', aut_precioalquiler = " + vehiculo._precioalquiler + ", aut_penalidaddiaria = " + vehiculo._penalidaddiaria + ", aut_color = '" + vehiculo._color + "', aut_fk_ciudad = " + id +
-                    " WHERE aut_matricula = '" + vehiculo._matricula + "'";
-                SqlCommand cmd = new SqlCommand(sql, conexion);
-                cmd.ExecuteNonQuery();
-                cmd.Dispose();
-                conexion.Close();
-                */
-                return "1";
-            }
-            catch (SqlException ex)
-            {
-                conexion.Close();
-                return ex.Message;
-            }
-            catch (NullReferenceException ex)
-            {
-                conexion.Close();
-                return ex.Message;
-            }
-        }
+        //public String MModificarVehiculoBD(Automovil vehiculo, int id)
+        //{
+        //    try
+        //    {
+        //        /*
+        //        conexion = new SqlConnection(stringDeConexion);
+        //        conexion.Open();
+        //        String sql = "UPDATE Automovil SET aut_kilometraje = " + vehiculo._kilometraje + ", aut_tipovehiculo = '" + vehiculo._tipovehiculo +
+        //            "', aut_precioalquiler = " + vehiculo._precioalquiler + ", aut_penalidaddiaria = " + vehiculo._penalidaddiaria + ", aut_color = '" + vehiculo._color + "', aut_fk_ciudad = " + id +
+        //            " WHERE aut_matricula = '" + vehiculo._matricula + "'";
+        //        SqlCommand cmd = new SqlCommand(sql, conexion);
+        //        cmd.ExecuteNonQuery();
+        //        cmd.Dispose();
+        //        conexion.Close();
+        //        */
+        //        return "1";
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        conexion.Close();
+        //        return ex.Message;
+        //    }
+        //    catch (NullReferenceException ex)
+        //    {
+        //        conexion.Close();
+        //        return ex.Message;
+        //    }
+        //}
 
         /// <summary>
         /// Método que lista todos los vehículos de la base de datos
         /// </summary>
         /// <returns>Retorna una lista de tipo Automovil</returns>
-        public List<Automovil> MListarvehiculosBD()
-        {
-            List<Automovil> listavehiculos = new List<Automovil>();
-            try
-            {
-                conexion = new SqlConnection(stringDeConexion);
-                conexion.Open();
-                String sql = "SELECT * FROM Automovil";
-                SqlCommand cmd = new SqlCommand(sql, conexion);
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        //SE AGREGA CREA UN OBJECTO VEHICLE SE PASAN LOS ATRIBUTO ASI reader["<etiqueta de la columna en la tabla Automovil>"]
-                        //Y  SE AGREGA a listavehiculos
-                        var fecha = reader["aut_fecharegistro"];
-                        DateTime fecharegistro = Convert.ToDateTime(fecha).Date;
-                        Automovil vehiculo = new Automovil(reader["aut_matricula"].ToString(), reader["aut_modelo"].ToString(), reader["aut_fabricante"].ToString(),
-                                               Int32.Parse(reader["aut_anio"].ToString()), reader["aut_tipovehiculo"].ToString(),
-                                               double.Parse(reader["aut_kilometraje"].ToString()), Int32.Parse(reader["aut_cantpasajeros"].ToString()),
-                                               double.Parse(reader["aut_preciocompra"].ToString()), double.Parse(reader["aut_precioalquiler"].ToString()),
-                                               double.Parse(reader["aut_penalidaddiaria"].ToString()), fecharegistro,
-                                               reader["aut_color"].ToString(), Int32.Parse(reader["aut_disponibilidad"].ToString()), reader["aut_transmision"].ToString(),
-                                               MBuscarnombreciudadBD(Int32.Parse(reader["aut_fk_ciudad"].ToString())), MBuscarnombrePaisBD(Int32.Parse(reader["aut_fk_ciudad"].ToString()))
-                                               );
-                        listavehiculos.Add(vehiculo);
-                    }
-                }
-                cmd.Dispose();
-                conexion.Close();
-                return listavehiculos;
-            }
-            catch (SqlException ex)
-            {
-                Debug.WriteLine(ex.ToString());
-                conexion.Close();
-                return null;
-            }
-        }
+        //public List<Automovil> MListarvehiculosBD()
+        //{
+        //    List<Automovil> listavehiculos = new List<Automovil>();
+        //    try
+        //    {
+        //        conexion = new SqlConnection(stringDeConexion);
+        //        conexion.Open();
+        //        String sql = "SELECT * FROM Automovil";
+        //        SqlCommand cmd = new SqlCommand(sql, conexion);
+        //        using (SqlDataReader reader = cmd.ExecuteReader())
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                ////SE AGREGA CREA UN OBJECTO VEHICLE SE PASAN LOS ATRIBUTO ASI reader["<etiqueta de la columna en la tabla Automovil>"]
+        //                ////Y  SE AGREGA a listavehiculos
+        //                //var fecha = reader["aut_fecharegistro"];
+        //                //DateTime fecharegistro = Convert.ToDateTime(fecha).Date;
+        //                //Automovil vehiculo = new Automovil(reader["aut_matricula"].ToString(), reader["aut_modelo"].ToString(), reader["aut_fabricante"].ToString(),
+        //                //                       Int32.Parse(reader["aut_anio"].ToString()), reader["aut_tipovehiculo"].ToString(),
+        //                //                       double.Parse(reader["aut_kilometraje"].ToString()), Int32.Parse(reader["aut_cantpasajeros"].ToString()),
+        //                //                       double.Parse(reader["aut_preciocompra"].ToString()), double.Parse(reader["aut_precioalquiler"].ToString()),
+        //                //                       double.Parse(reader["aut_penalidaddiaria"].ToString()), fecharegistro,
+        //                //                       reader["aut_color"].ToString(), Int32.Parse(reader["aut_disponibilidad"].ToString()), reader["aut_transmision"].ToString(),
+        //                //                       MBuscarnombreciudadBD(Int32.Parse(reader["aut_fk_ciudad"].ToString())), MBuscarnombrePaisBD(Int32.Parse(reader["aut_fk_ciudad"].ToString()))
+        //                //                       );
+        //                //listavehiculos.Add(vehiculo);
+        //            }
+        //        }
+        //        cmd.Dispose();
+        //        conexion.Close();
+        //        return listavehiculos;
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        Debug.WriteLine(ex.ToString());
+        //        conexion.Close();
+        //        return null;
+        //    }
+        //}
 
         /// <summary>
         /// Método para buscar un vehículo en particular de la base de datos
         /// </summary>
         /// <param name="matricula">La matrícula del vehículo a buscar</param>
         /// <returns>Retorna un objeto de tipo Automovil</returns>
-        public Automovil MMostrarvehiculoBD(String matricula)
-        {
-            Automovil vehiculo = null;
-            try
-            {
-                conexion = new SqlConnection(stringDeConexion);
-                conexion.Open();
-                String sql = "SELECT * FROM Automovil WHERE aut_matricula = '" + matricula + "'";
-                SqlCommand cmd = new SqlCommand(sql, conexion);
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        var fecha = reader["aut_fecharegistro"];
-                        DateTime fecharegistro = Convert.ToDateTime(fecha).Date;
-                        vehiculo = new Automovil(reader["aut_matricula"].ToString(), reader["aut_modelo"].ToString(), reader["aut_fabricante"].ToString(),
-                                                 Int32.Parse(reader["aut_anio"].ToString()), reader["aut_tipovehiculo"].ToString(),
-                                                 double.Parse(reader["aut_kilometraje"].ToString()), Int32.Parse(reader["aut_cantpasajeros"].ToString()),
-                                                 double.Parse(reader["aut_preciocompra"].ToString()), double.Parse(reader["aut_precioalquiler"].ToString()),
-                                                 double.Parse(reader["aut_penalidaddiaria"].ToString()), fecharegistro,
-                                                 reader["aut_color"].ToString(), Int32.Parse(reader["aut_disponibilidad"].ToString()), reader["aut_transmision"].ToString(),
-                                                 MBuscarnombrePaisBD(Int32.Parse(reader["aut_fk_ciudad"].ToString())), MBuscarnombreciudadBD(Int32.Parse(reader["aut_fk_ciudad"].ToString()))
-                                                 );
-                    }
-                    cmd.Dispose();
-                    conexion.Close();
-                    return vehiculo;
-                }
-            }
-            catch (SqlException ex)
-            {
-                conexion.Close();
-                return null;
-            }
-            catch (NullReferenceException ex)
-            {
-                conexion.Close();
-                return null;
-            }
-        }
+        //public Automovil MMostrarvehiculoBD(String matricula)
+        //{
+        //    Automovil vehiculo = null;
+        //    try
+        //    {
+        //        conexion = new SqlConnection(stringDeConexion);
+        //        conexion.Open();
+        //        String sql = "SELECT * FROM Automovil WHERE aut_matricula = '" + matricula + "'";
+        //        SqlCommand cmd = new SqlCommand(sql, conexion);
+        //        using (SqlDataReader reader = cmd.ExecuteReader())
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                //var fecha = reader["aut_fecharegistro"];
+        //                //DateTime fecharegistro = Convert.ToDateTime(fecha).Date;
+        //                //vehiculo = new Automovil(reader["aut_matricula"].ToString(), reader["aut_modelo"].ToString(), reader["aut_fabricante"].ToString(),
+        //                //                         Int32.Parse(reader["aut_anio"].ToString()), reader["aut_tipovehiculo"].ToString(),
+        //                //                         double.Parse(reader["aut_kilometraje"].ToString()), Int32.Parse(reader["aut_cantpasajeros"].ToString()),
+        //                //                         double.Parse(reader["aut_preciocompra"].ToString()), double.Parse(reader["aut_precioalquiler"].ToString()),
+        //                //                         double.Parse(reader["aut_penalidaddiaria"].ToString()), fecharegistro,
+        //                //                         reader["aut_color"].ToString(), Int32.Parse(reader["aut_disponibilidad"].ToString()), reader["aut_transmision"].ToString(),
+        //                //                         MBuscarnombrePaisBD(Int32.Parse(reader["aut_fk_ciudad"].ToString())), MBuscarnombreciudadBD(Int32.Parse(reader["aut_fk_ciudad"].ToString()))
+        //                //                         );
+        //            }
+        //            cmd.Dispose();
+        //            conexion.Close();
+        //            return vehiculo;
+        //        }
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        conexion.Close();
+        //        return null;
+        //    }
+        //    catch (NullReferenceException ex)
+        //    {
+        //        conexion.Close();
+        //        return null;
+        //    }
+        //}
 
         /// <summary>
         /// Método que busca en la base de datos el identificador de una ciudad
