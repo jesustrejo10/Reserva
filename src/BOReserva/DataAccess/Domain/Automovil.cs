@@ -19,17 +19,18 @@ namespace BOReserva.Models.gestion_automoviles
         private String _fabricante;
         private int _anio;
         private String _tipovehiculo;
-        private double _kilometraje;
+        private Decimal _kilometraje;
         private int _cantpasajeros;
-        private double _preciocompra;
-        private double _precioalquiler;
-        private double _penalidaddiaria;
+        private Decimal _preciocompra;
+        private Decimal _precioalquiler;
+        private Decimal _penalidaddiaria;
         private DateTime _fecharegistro;
         private String _color;
         private int _disponibilidad;
         private String _transmision;
         private String _pais;
         private String _ciudad;
+        private int _fk_ciudad;
         #endregion
 
         #region Constructores
@@ -52,26 +53,27 @@ namespace BOReserva.Models.gestion_automoviles
         /// <param name="transmision">Transmisión del vehículo</param>
         /// <param name="pais">País donde se ubica el vehículo</param>
         /// <param name="ciudad">Ciudad donde se ubica el vehículo</param>
-        public Automovil(String matricula, String modelo, String fabricante, int anio, String tipovehiculo, double kilometraje, int cantpasajeros,
-                       double preciocompra, double precioalquiler, double penalidaddiaria, DateTime fecharegistro, String color, int disponibilidad,
-                       String transmision, String pais, String ciudad)
+        public Automovil(String matricula, String modelo, String fabricante, String anio, String tipovehiculo, String kilometraje, String cantpasajeros,
+                       String preciocompra, String precioalquiler, String penalidaddiaria, String fecharegistro, String color, String disponibilidad,
+                       String transmision, String pais, String ciudad, String fk_ciudad)
         {
-            _matricula = matricula;
-            _modelo = modelo;
-            _fabricante = fabricante;
-            _anio = anio;
-            _tipovehiculo = tipovehiculo;
-            _kilometraje = kilometraje;
-            _cantpasajeros = cantpasajeros;
-            _preciocompra = preciocompra;
-            _precioalquiler = precioalquiler;
-            _penalidaddiaria = penalidaddiaria;
-            _fecharegistro = fecharegistro;
-            _color = color;
-            _disponibilidad = disponibilidad;
-            _transmision = transmision;
-            _pais = pais;
-            _ciudad = ciudad;
+            _matricula       = Convert.ToString(matricula);
+            _modelo          = Convert.ToString(modelo);
+            _fabricante      = Convert.ToString(fabricante);
+            _anio            = Convert.ToInt32(anio);
+            _tipovehiculo    = Convert.ToString(tipovehiculo);
+            _kilometraje     = Convert.ToDecimal(kilometraje);
+            _cantpasajeros   = Convert.ToInt32(cantpasajeros);
+            _preciocompra    = Convert.ToDecimal(preciocompra);
+            _precioalquiler  = Convert.ToDecimal(precioalquiler);
+            _penalidaddiaria = Convert.ToDecimal(penalidaddiaria);
+            _fecharegistro   = Convert.ToDateTime(fecharegistro);
+            _color           = Convert.ToString(color);
+            _disponibilidad  = Convert.ToInt32(disponibilidad);
+            _transmision     = Convert.ToString(transmision);
+            _pais            = Convert.ToString(pais);
+            _ciudad          = Convert.ToString(ciudad);
+            _fk_ciudad        = Convert.ToInt32(fk_ciudad);
         }
 
         public Automovil() { }
@@ -81,58 +83,58 @@ namespace BOReserva.Models.gestion_automoviles
         public String matricula
         {
             get { return this._matricula; }
-            set { this._matricula = value; }
+            set { this._matricula = Convert.ToString(value); }
         }
 
         public String modelo
         {
             get { return this._modelo; }
-            set { this._modelo = value; }
+            set { this._modelo = Convert.ToString(value); }
         }
 
         public String fabricante
         {
             get { return this._fabricante; }
-            set { this._fabricante = value; }
+            set { this._fabricante = Convert.ToString(value); }
         }
 
         public int anio
         {
             get { return this._anio; }
-            set { this._anio = value; }
+            set { this._anio = Convert.ToInt32(value); }
         }
 
         public String tipovehiculo
         {
             get { return this._tipovehiculo; }
-            set { this._tipovehiculo = value; }
+            set { this._tipovehiculo = Convert.ToString(value); }
         }
 
-        public double kilometraje
+        public Decimal kilometraje
         {
             get { return this._kilometraje; }
-            set { this._kilometraje = value; }
+            set { this._kilometraje = Convert.ToDecimal(value); }
         }
 
         public int cantpasajeros
         {
             get { return this._cantpasajeros; }
-            set { this._cantpasajeros = value; }
+            set { this._cantpasajeros = Convert.ToInt32(value); }
         }
 
-        public double preciocompra
+        public Decimal preciocompra
         {
             get { return this._preciocompra; }
-            set { this._preciocompra = value; }
+            set { this._preciocompra = Convert.ToDecimal(value); }
         }
  
-        public double precioalquiler
+        public Decimal precioalquiler
         {
             get { return this._precioalquiler; }
             set { this._precioalquiler = value; }
         }
 
-        public double penalidaddiaria
+        public Decimal penalidaddiaria
         {
             get { return this._penalidaddiaria; }
             set { this._penalidaddiaria = value; }
@@ -147,31 +149,36 @@ namespace BOReserva.Models.gestion_automoviles
         public String color
         {
             get { return this._color; }
-            set { this._color = value; }
+            set { this._color = Convert.ToString(value); }
         }
 
         public int disponibilidad
         {
             get { return this._disponibilidad; }
-            set { this._disponibilidad = value; }
+            set { this._disponibilidad = Convert.ToInt32(value); }
         }
         
         public String transmision
         {
             get { return this._transmision; }
-            set { this._transmision = value; }
+            set { this._transmision = Convert.ToString(value); }
         }
 
         public String pais
         {
             get { return this._pais; }
-            set { this._pais = value; }
+            set { this._pais = Convert.ToString(value); }
         }
 
         public String ciudad
         {
             get { return this._ciudad; }
-            set { this._ciudad = value; }
+            set { this._ciudad = Convert.ToString(value); }
+        }
+        public int fk_ciudad
+        {
+            get { return this._fk_ciudad; }
+            set { this._fk_ciudad = Convert.ToInt32(value); }
         }
         #endregion
 
