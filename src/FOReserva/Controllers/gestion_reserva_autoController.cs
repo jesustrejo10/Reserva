@@ -4,8 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FOReserva.Models.Autos;
-using System.Net;
 using FOReserva.Servicio;
+using System.Net;
+using FOReserva.DataAccess.Domain;
+using FOReserva.Models.gestion_reserva_automovil;
+using FOReserva.Controllers.PatronComando;
 
 namespace FOReserva.Controllers
 {
@@ -27,8 +30,31 @@ namespace FOReserva.Controllers
 
         public ActionResult M19_Reserva_Autos_Perfil()
         {
-            ManejadorSQLReservaAutomovil manejador = new ManejadorSQLReservaAutomovil();
-            List<CReserva_Autos_Perfil> lista = manejador.buscarReservas();
+
+            var user_id = 1;
+
+            if (Session["id_usuario"] != null && Session["id_usuario"] is int)
+                user_id = (int)Session["id_usuario"];
+            System.Diagnostics.Debug.WriteLine("El usuario actual es");
+            System.Diagnostics.Debug.WriteLine(user_id);
+
+           /* ManejadorSQLReservaAutomovil manejador = new ManejadorSQLReservaAutomovil();
+            List<CReserva_Autos_Perfil> lista = manejador.buscarReservas(user_id);
+            return PartialView(lista);*/
+
+            Entidad _usuario = FabricaEntidad.inicializarUsuario(user_id);
+            Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.comandosReservaAutomovil(FabricaComando.comandosGlobales.CONSULTAR, FabricaComando.comandoReservaAuto.NULO, _usuario);
+            List<Entidad> reservas = comando.ejecutar();
+            // CReservaAutomovil ReservaAutomovil = FabricaEntidad.inicializarReserva();
+            List<CReservaAutomovil> lista = FabricaEntidad.inicializarListaReserva();
+
+            foreach (Entidad item in reservas)
+            {
+                lista.Add((CReservaAutomovil)item);
+
+            }
+
+            //ReservaAutomovil._listaReservas = lista;
             return PartialView(lista);
         }
 

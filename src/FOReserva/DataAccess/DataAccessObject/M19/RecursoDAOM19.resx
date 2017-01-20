@@ -305,4 +305,12 @@
     <value>raut_fk_usuario</value>
     <comment>Atributo Usuario tabla Reserva Automovil</comment>
   </data>
+  <data name="destino" xml:space="preserve">
+    <value>destino</value>
+    <comment>Atributo en procedimiento</comment>
+  </data>
+  <data name="origen" xml:space="preserve">
+    <value>origen</value>
+    <comment>Atributo en procedimiento</comment>
+  </data>
 </root>

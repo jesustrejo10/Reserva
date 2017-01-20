@@ -39,7 +39,7 @@ namespace FOReserva.DataAccess.Model {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BOReserva.DataAccess.Model.RecursoBD", typeof(RecursoBD).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FOReserva.DataAccess.Model.RecursoBD", typeof(RecursoBD).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
