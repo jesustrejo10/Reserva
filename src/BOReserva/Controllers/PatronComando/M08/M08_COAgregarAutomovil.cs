@@ -29,10 +29,12 @@ namespace BOReserva.Controllers.PatronComando.M08
 
         #region Ejecucion
 
-        public override string ejecutar()
+        public override int ejecutar(Entidad automovil)
         {
-            throw new NotImplementedException();
 
+            DAO elDao = FabricaDAO.CrearDaoAutomovil();
+
+            return elDao.Agregar(automovil);
 
         }
 
