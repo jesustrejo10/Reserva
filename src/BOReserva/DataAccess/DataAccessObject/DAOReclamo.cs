@@ -73,7 +73,40 @@ namespace BOReserva.DataAccess.DataAccessObject
 
         Entidad IDAO.Consultar(int id)
         {
-            throw new NotImplementedException();
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+
+            Entidad reclamoE = FabricaEntidad.InstanciarReclamo();
+            Reclamo reclamo = (Reclamo)reclamoE;
+            try
+            {
+                conexion.Open();
+                String sql = "SELECT * FROM Reclamo WHERE rec_id = "+id;
+
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+
+                    while (reader.Read())
+                    {
+                        reclamo._id = Int32.Parse(reader["rec_id"].ToString());
+                        reclamo._tituloReclamo = reader["rec_titulo"].ToString();
+                        reclamo._detalleReclamo = reader["rec_descripcion"].ToString();
+                        String[] divisor = reader["rec_fecha"].ToString().Split(' '); //recortamos la fecha
+                        reclamo._fechaReclamo = divisor[0];
+                        reclamo._estadoReclamo = Int32.Parse(reader["rec_estatus"].ToString());
+                        reclamo._usuario = Int32.Parse(reader["rec_fK_usuario"].ToString());
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return reclamo;
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+            }
         }
         Entidad IDAO.Modificar(Entidad e)
         {

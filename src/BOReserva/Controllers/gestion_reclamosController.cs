@@ -34,13 +34,29 @@ namespace BOReserva.Controllers
       [HttpPost]
       public JsonResult guardarReclamo(CAgregarReclamo model)
       {
-          //ESTO ES TEMPORAL MIENTRAS SIMON PASA LA FUNCION
-          model._usuario = 1;
-          //RECUERDA QUE LO ANTERIOR DEBES CAMBIARLO KARLIANA SUAREZ
+          model._usuario = gestion_seguridad_ingresoController.IDUsuarioActual();
           Entidad nuevoReclamo = FabricaEntidad.InstanciarReclamo(model);
           Command<String> comando = FabricaComando.crearM16AgregarReclamo(nuevoReclamo);
           String verificacion = comando.ejecutar();
           return (Json(verificacion));
+      }
+
+      [HttpPost]
+      public JsonResult eliminarReclamo(int idReclamo)
+      {
+          int idUsuario = gestion_seguridad_ingresoController.IDUsuarioActual();
+          Entidad reclamoAVerificar = FabricaEntidad.InstanciarReclamo();
+          Command<Entidad> comando = FabricaComando.crearM16ConsultarUsuario(idReclamo);
+          Reclamo verificacion = (Reclamo) comando.ejecutar();
+          if(idUsuario!=verificacion._usuario)
+          {
+            Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            return (Json("No esta autorizado para eliminar este reclamo"));
+          }
+          else
+          {
+              return (Json("Logica de eliminar"));
+          }
       }
 
       public ActionResult M16_ModificarReclamo()

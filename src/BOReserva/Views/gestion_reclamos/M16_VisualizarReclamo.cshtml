@@ -130,12 +130,13 @@
                     event.stopPropagation();
                     event.stopImmediatePropagation();
                     var identificador = $(this).parent().parent().parent().attr("id");
+                    console.log(identificador);
                     jQuery.ajax({
                         type: "POST",
-                        url: "/gestion_aviones/eliminarAvion",
-                        data: { id: identificador }
+                        url: "/gestion_reclamos/eliminarReclamo",
+                        data: { idReclamo: identificador }
                     }).done(function (data) {
-                        var url = '/gestion_aviones/M02_VisualizarAviones';
+                        var url = '/gestion_reclamos/M16_VisualizarReclamo';
                         var method = 'GET';
                         var data = '';
                         $.ajax(
@@ -153,7 +154,8 @@
                                 }
                             });
                     }).fail(function (data) {
-                        alert(data);
+                        console.log(data);
+                        alert(data.responseText);
                     });
 
 
