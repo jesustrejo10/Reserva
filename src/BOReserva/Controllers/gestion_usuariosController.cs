@@ -54,35 +54,64 @@ namespace BOReserva.Controllers
             return (Json(agrego));
         }
 
-
+        public ActionResult M12_VisualizarUsuarios()
+        {
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM12VisualizarUsuarios();
+            Dictionary<int, Entidad> listaUsuarios = comando.ejecutar();
+            
+            return PartialView(listaUsuarios);
+        }
 
 
         //
         // GET: /gestion_usuario/
-        public ActionResult M12_Index()
-        {
-            PersistenciaUsuario p = new PersistenciaUsuario();
-            try
-            {
-                IEnumerable<ListarUsuario> lista = p.ListaUsuarios();
-                return PartialView("M12_Index", lista);
-            }
-            catch (ExceptionM12Reserva ex)
-            {
-                Response.Write("<script>alert('" + ex.Message + "');</script>");
-                Response.End();
-                IEnumerable<ListarUsuario> lista = new List<ListarUsuario>();
-                return PartialView("M12_Index", lista);
-            }
-            catch (Exception ex)
-            {
-                Response.Write("<script>alert('" + ex.Message + "');</script>");
-                Response.End();
-                IEnumerable<ListarUsuario> lista = new List<ListarUsuario>();
-                return PartialView("M12_Index", lista);
-            }
-        }
+        //public ActionResult M12_Index()
+        //{
+        //    PersistenciaUsuario p = new PersistenciaUsuario();
+        //    try
+        //    {
+        //        IEnumerable<ListarUsuario> lista = p.ListaUsuarios();
+        //        return PartialView("M12_Index", lista);
+        //    }
+        //    catch (ExceptionM12Reserva ex)
+        //    {
+        //        Response.Write("<script>alert('" + ex.Message + "');</script>");
+        //        Response.End();
+        //        IEnumerable<ListarUsuario> lista = new List<ListarUsuario>();
+        //        return PartialView("M12_Index", lista);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Response.Write("<script>alert('" + ex.Message + "');</script>");
+        //        Response.End();
+        //        IEnumerable<ListarUsuario> lista = new List<ListarUsuario>();
+        //        return PartialView("M12_Index", lista);
+        //    }
+        //}
 
+        //public ActionResult M12_VisualizarUsuarios()
+        //{
+        //    PersistenciaUsuario p = new PersistenciaUsuario();
+        //    try
+        //    {
+        //        IEnumerable<ListarUsuario> lista = p.ListaUsuarios();
+        //        return PartialView("M12_VisualizarUsuarios", lista);
+        //    }
+        //    catch (ExceptionM12Reserva ex)
+        //    {
+        //        Response.Write("<script>alert('" + ex.Message + "');</script>");
+        //        Response.End();
+        //        IEnumerable<ListarUsuario> lista = new List<ListarUsuario>();
+        //        return PartialView("M12_VisualizarUsuarios", lista);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Response.Write("<script>alert('" + ex.Message + "');</script>");
+        //        Response.End();
+        //        IEnumerable<ListarUsuario> lista = new List<ListarUsuario>();
+        //        return PartialView("M12_VisualizarUsuarios", lista);
+        //    }
+        //}
 
         public ActionResult M12_AgregarUsuario()
         {

@@ -343,6 +343,12 @@ namespace BOReserva.Controllers.PatronComando
             return new M12_COObtenerRoles();
         }
 
+        public static Command<Dictionary<int, Entidad>> crearM12VisualizarUsuarios()
+        {
+
+            return new M12_COVisualizarUsuarios();
+
+        }
         #endregion
 
     }

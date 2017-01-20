@@ -513,9 +513,11 @@ jQuery(document).ready(function () {
     // Comienzo M12 Usuarios
     $("#indexUsuarios").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_usuarios/M12_Index';
+        var url = '/gestion_usuarios/M12_VisualizarUsuarios';
         var method = 'GET';
         var data = '';
+        console.log("HOLA CHAMA");
+        console.log ("HABLAAA");
         $.ajax(
             {
                 url: url,

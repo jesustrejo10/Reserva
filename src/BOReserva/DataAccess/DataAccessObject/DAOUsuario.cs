@@ -61,5 +61,64 @@ namespace BOReserva.DataAccess.DataAccessObject
                 return 5;
             }
         }
+
+        Dictionary<int, Entidad> IDAO.ConsultarTodos()
+        {
+            Dictionary<int, Entidad> listaUsuarios = new Dictionary<int, Entidad>();
+            //puedo usar Singleton
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+
+            try
+            {
+                conexion.Open();
+                String sql = "Select usu_id as idusuario, usu_nombre as nombre , usu_apellido as apellido , usu_correo as correo , rol_nombre as rolnombre, rol_id as idrol, usu_fechacreacion as fecha , usu_activo as activo " +
+                     "FROM Usuario, Rol WHERE usu_fk_rol= rol_id";
+
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    Rol rol;
+                    Usuario usuario;
+                    int idRol;
+                    String nombreRol;
+                  
+
+                    int idUsuario;
+
+                    while (reader.Read())
+                    {
+                        //SE AGREGA CREA UN OBJECTO VEHICLE SE PASAN LOS ATRIBUTO ASI reader["<etiqueta de la columna en la tabla Automovil>"]
+                        //Y  SE AGREGA a listavehiculos
+                        //public Hotel(int id, String nombre, String direccion, String email, String paginaWeb, int clasificacion, int capacidad, Ciudad ciudad)
+                        idRol = Int32.Parse(reader["idrol"].ToString());
+                        nombreRol = reader["rolnombre"].ToString();
+                        rol = new Rol(idRol, nombreRol);
+
+                       idUsuario = Int32.Parse(reader["idusuario"].ToString());
+
+                        usuario = new Usuario(
+                            reader["nombre"].ToString(),
+                            reader["apellido"].ToString(), 
+                            reader["correo"].ToString(),
+                            rol,
+                            Convert.ToDateTime(reader["fecha"]),
+                            reader["activo"].ToString()
+                           
+                        );
+                        listaUsuarios.Add(idUsuario,usuario);
+                    
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return listaUsuarios;
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+            }
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿$("#cancelarModificacion").click(function (e) {
     e.preventDefault();
-    var url = '/gestion_usuarios/M12_Index';
+    var url = '/gestion_usuarios/M12_VisualizarUsuarios';
     var method = 'GET';
     var data = '';
 
@@ -39,8 +39,9 @@ $(".modificarUsuario_form").submit(function (e) {
     });
 });
 
+
 function toIndex() {
-    var url = '/gestion_usuarios/M12_Index';
+    var url = '/gestion_usuarios/M12_VisualizarUsuarios';
     var method = 'GET';
     var data = '';
 
@@ -126,7 +127,7 @@ $("#aceptarUsuario").click(function (e) {
 });
 
 function toIndexA() {
-    var url = '/gestion_usuarios/M12_Index';
+    var url = '/gestion_usuarios/M12_VisualizarUsuarios';
     var method = 'GET';
     var data = '';
 
