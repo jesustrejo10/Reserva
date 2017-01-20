@@ -201,16 +201,19 @@ namespace BOReserva.DataAccess.Domain
         #region M14 Cruceros
         public static Entidad InstanciarCrucero(CGestion_crucero crucero)
         {
-            
-            return new Crucero(crucero._nombreCrucero, crucero._companiaCrucero, crucero._capacidadCrucero, crucero._estatus);
-        }
+
+            return new Crucero(crucero._idCrucero, crucero._nombreCrucero, crucero._companiaCrucero, crucero._capacidadCrucero, crucero._estatus);
+        }    
 
         public static Entidad InstanciarCabina(CGestion_cabina cabina)
         {
 
-            return new Cabina();
+            return new Cabina(cabina._nombreCabina,cabina._precioCabina,cabina._estatus,cabina._fkCrucero);
         }
         #endregion
+
+            
+
 
 
         #region M06 GESTION COMIDA

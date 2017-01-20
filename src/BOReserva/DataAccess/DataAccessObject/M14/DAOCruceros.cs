@@ -89,7 +89,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                         //public Hotel(int id, String nombre, String direccion, String email, String paginaWeb, int clasificacion, int capacidad, Ciudad ciudad)
                         idCrucero = Int32.Parse(reader["cru_id"].ToString());
 
-                        crucero = new Crucero(
+                        crucero = new Crucero(id,
                             reader["cru_nombre"].ToString(),
                             reader["cru_compania"].ToString(),
                             Int32.Parse(reader["cru_capacidad"].ToString()),
@@ -124,16 +124,17 @@ namespace BOReserva.DataAccess.DataAccessObject
 
                 query.CommandType = CommandType.StoredProcedure;
                 SqlDataReader reader = query.ExecuteReader();
-                int elemento = 0;
+                //int elemento = 0;
                 while (reader.Read())
                     {
                         crucero = new Crucero(
+                            Int32.Parse(reader["id"].ToString()),
                             reader["nombre"].ToString(),
                             reader["compania"].ToString(),
                             int.Parse(reader["capacidad"].ToString()),
                             reader["estatus"].ToString());
-                        listaCruceros.Add(elemento,crucero);
-                        elemento++;
+                        listaCruceros.Add(Int32.Parse(reader["id"].ToString()), crucero);
+                        //elemento++;
                     }
                     reader.Close();
                     con.Close();

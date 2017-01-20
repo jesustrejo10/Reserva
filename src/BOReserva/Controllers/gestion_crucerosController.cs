@@ -132,7 +132,7 @@ namespace BOReserva.Controllers
         {
 
             Entidad nuevaCabina = FabricaEntidad.InstanciarCabina(model);
-            Command<String> comando = FabricaComando.crearM14AgregarCrucero(nuevaCabina);
+            Command<String> comando = FabricaComando.crearM14AgregarCabina(nuevaCabina);
             String result = comando.ejecutar();
             return (Json(result));
         }
