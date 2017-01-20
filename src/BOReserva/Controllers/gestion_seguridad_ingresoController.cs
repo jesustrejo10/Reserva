@@ -6,6 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.SqlClient;
+using log4net;
+using log4net.Config;
 
 
 namespace BOReserva.Content.Controllers
@@ -15,7 +17,8 @@ namespace BOReserva.Content.Controllers
         //
         // GET: /gestion_seguridad_ingreso/
 
-           
+        private static readonly ILog logger = LogManager.GetLogger(typeof(gestion_seguridad_ingresoController));
+
         [HttpPost]
         public ActionResult M01_Login(string correo, string contraseña)
         {
@@ -41,8 +44,8 @@ namespace BOReserva.Content.Controllers
 
             try
             {
-           
-                System.Diagnostics.Debug.WriteLine("Correo " + correo + " contrasena " + contraseña);
+                BasicConfigurator.Configure();
+                logger.Debug("Correo " + correo + " contrasena " + contraseña);
                 ingreso = ingreso.verificarUsuario(correo, contraseña);
                 System.Diagnostics.Debug.WriteLine(correo.Equals("reserva@reserva.com"));
                
