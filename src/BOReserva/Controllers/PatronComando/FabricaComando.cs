@@ -3,6 +3,7 @@ using BOReserva.DataAccess.Domain;
 using BOReserva.M10.Comando.gestion_restaurantes;
 using System;
 using System.Collections.Generic;
+using BOReserva.Controllers.PatronComando;
 
 namespace BOReserva.Controllers.PatronComando
 {
@@ -313,6 +314,26 @@ namespace BOReserva.Controllers.PatronComando
         }
         #endregion
 
+        #region M06 GESTION COMIDA
 
+        public enum comandosComida
+        {
+            CREAR,
+            ELIMINAR,
+            ACTUALIZAR,
+            CONSULTAR
+        }
+
+        public static object gestionComida(comandosComida _comando, Entidad _objeto)
+        {
+            switch (_comando)
+            {
+                case comandosComida.CREAR:
+                    return new M06_COAgregarComida(_objeto);
+                default:
+                    return new M06_COAgregarComida(_objeto);
+            }
+        }
+        #endregion
     }
 }

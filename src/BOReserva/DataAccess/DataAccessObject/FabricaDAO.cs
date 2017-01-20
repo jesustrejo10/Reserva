@@ -2,6 +2,7 @@
 using BOReserva.DataAccess.DataAccessObject.M01;
 using BOReserva.DataAccess.Model;
 using BOReserva.M10;
+using BOReserva.DataAccess.DataAccessObject;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -153,6 +154,16 @@ namespace BOReserva.DataAccess.DataAccessObject
         {
             return new DAORol();
         }
+        #endregion
+
+
+        #region M06 GESTION DE COMIDA
+
+        public static DAOComida instanciarComida()
+        {
+            return new DAOComida();
+        }
+
         #endregion
     }
 }
