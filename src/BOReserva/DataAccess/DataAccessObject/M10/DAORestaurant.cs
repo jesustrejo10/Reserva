@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Model;
+using System.Data.SqlClient;
 
 namespace BOReserva.M10
 {
@@ -68,6 +69,26 @@ namespace BOReserva.M10
 
                 return listaDeRestaurant; //se retorna la lista de restaurante a mostrar por la vista
             }
+            catch (ArgumentNullException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                //throw new ExceptionM4Tangerine("DS-404", "Ingreso de un argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                //throw new ExceptionM4Tangerine("DS-404", "Ingreso de datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                //throw new ExceptionM4Tangerine("DS-404", "Error al momento de realizar la conexion", ex);
+            }
+            //catch (ExceptionTGConBD ex)
+            //{
+            //    Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+            //    throw new ExceptionM4Tangerine("DS-404", "Error al momento de realizar la conexion con la base de datos", ex);
+            //}
             catch (Exception)
             {
 
@@ -124,6 +145,26 @@ namespace BOReserva.M10
                 //se retorna la entidad de restaurant a mostrar en la vista
                 return restaurant;
             }
+            catch (ArgumentNullException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                //throw new ExceptionM4Tangerine("DS-404", "Ingreso de un argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                //throw new ExceptionM4Tangerine("DS-404", "Ingreso de datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                //throw new ExceptionM4Tangerine("DS-404", "Error al momento de realizar la conexion", ex);
+            }
+            //catch (ExceptionTGConBD ex)
+            //{
+            //    Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+            //    throw new ExceptionM4Tangerine("DS-404", "Error al momento de realizar la conexion con la base de datos", ex);
+            //}
             catch (Exception)
             {
 
@@ -165,9 +206,25 @@ namespace BOReserva.M10
                 //como String "dbo.M10_AgregarRestarurante"
                 EjecutarStoredProcedure(RecursoDAOM10.procedimientoAgregar, listaParametro);
             }
+            catch (ArgumentNullException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                //throw new ExceptionM4Tangerine("DS-404", "Ingreso de un argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                //throw new ExceptionM4Tangerine("DS-404", "Ingreso de datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                //throw new ExceptionM4Tangerine("DS-404", "Compañia ya registrada dentro del sistema ", ex);
+            }
             catch (Exception)
             {
-
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                //throw new ExceptionM4Tangerine("DS-404", "Error al momento de realizar la operacion ", ex);
                 throw;
             }
 
@@ -196,6 +253,26 @@ namespace BOReserva.M10
                 //como String "dbo.M10_EliminarRestarurante"
                 EjecutarStoredProcedure(RecursoDAOM10.procedimientoEliminar, parametro);
             }
+            catch (ArgumentNullException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                //throw new ExceptionM4Tangerine("DS-404", "Ingreso de un argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                //throw new ExceptionM4Tangerine("DS-404", "Ingreso de datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                //throw new ExceptionM4Tangerine("DS-404", "Error al momento de realizar la conexion", ex);
+            }
+            //catch (ExceptionTGConBD ex)
+            //{
+            //    Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+            //    throw new ExceptionM4Tangerine("DS-404", "Error al momento de realizar la conexion con la base de datos", ex);
+            //}
             catch (Exception)
             {
 
@@ -236,6 +313,26 @@ namespace BOReserva.M10
 
                 return listaDeLugares; //Se retornan la lista de lugares 
             }
+            catch (ArgumentNullException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                //throw new ExceptionM4Tangerine("DS-404", "Ingreso de un argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                //throw new ExceptionM4Tangerine("DS-404", "Ingreso de datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                //throw new ExceptionM4Tangerine("DS-404", "Error al momento de realizar la conexion", ex);
+            }
+            //catch (ExceptionTGConBD ex)
+            //{
+            //    Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+            //    throw new ExceptionM4Tangerine("DS-404", "Error al momento de realizar la conexion con la base de datos", ex);
+            //}
             catch (Exception)
             {
 
@@ -278,6 +375,26 @@ namespace BOReserva.M10
                 //como String "dbo.M10_ActualizarrRestarurante"
                 EjecutarStoredProcedure(RecursoDAOM10.procedimientoActualizar, listaParametro);
             }
+            catch (ArgumentNullException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                //throw new ExceptionM4Tangerine("DS-404", "Ingreso de un argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                //throw new ExceptionM4Tangerine("DS-404", "Ingreso de datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                //Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                //throw new ExceptionM4Tangerine("DS-404", "Error al momento de realizar la conexion", ex);
+            }
+            //catch (ExceptionTGConBD ex)
+            //{
+            //    Logger.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+            //    throw new ExceptionM4Tangerine("DS-404", "Error al momento de realizar la conexion con la base de datos", ex);
+            //}
             catch (Exception)
             {
 

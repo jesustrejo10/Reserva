@@ -29,7 +29,7 @@ namespace BOReserva.M10.Comando.gestion_restaurantes
             }
             catch (NotImplementedException)
             {
-
+                // throw new ExceptionM4Tangerine("DS-404", "Metodo no implementado", e);
                 throw;
             }
 
