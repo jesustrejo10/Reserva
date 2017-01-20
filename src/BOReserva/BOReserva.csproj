@@ -255,11 +255,11 @@
     <Compile Include="DataAccess\DataAccessObject\DAORol.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCiudad.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPais.cs" />
-
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORol.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORuta.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M03\DAORuta.cs" />
     <Compile Include="DataAccess\Domain\Contratos\ICiudad.cs" />
-
     <Compile Include="DataAccess\DataAccessObject\M09\DAOHotel.cs" />
     <Compile Include="DataAccess\DataAccessObject\M10\Columna.cs" />
     <Compile Include="DataAccess\DataAccessObject\M10\DAO.cs" />
@@ -276,6 +276,7 @@
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPasajero.cs" />
     <Compile Include="DataAccess\Domain\Boleto.cs" />
     <Compile Include="DataAccess\Domain\Lugar.cs" />
+    <Compile Include="DataAccess\Domain\M03\Ruta.cs" />
     <Compile Include="DataAccess\Domain\Pasajero.cs" />
     <Compile Include="DataAccess\Domain\Permiso.cs" />
     <Compile Include="DataAccess\Domain\Reclamo.cs" />

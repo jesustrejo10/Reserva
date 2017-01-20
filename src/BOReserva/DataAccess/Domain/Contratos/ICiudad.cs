@@ -8,5 +8,6 @@ namespace BOReserva.DataAccess.Domain.Contratos
 {
     public interface ICiudad
     {
+
     }
 }
