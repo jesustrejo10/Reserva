@@ -1,11 +1,10 @@
-﻿using BOReserva.DataAccess.Domain;
-using BOReserva.Servicio;
+﻿using BOReserva.Servicio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.Models.gestion_automoviles
+namespace BOReserva.DataAccess.Domain
 {
 
     /// <summary>
