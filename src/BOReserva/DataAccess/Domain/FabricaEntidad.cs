@@ -193,6 +193,15 @@ namespace BOReserva.DataAccess.Domain
             return new Permiso();
         }
 
+        #region M06 GESTION COMIDA
+
+        public static Entidad instanciarComida(string nombre, string tipo, int estatus, string descripcion)
+        {
+            return new Comida(nombre, tipo, estatus, descripcion);
+        }
+
+        #endregion
+
         #region M12_Usuarios 
         public static Entidad InstanciarUsuario(int id, string nombre, string apellido, string correo, string contrasena, int fkRol, DateTime fechaCreacion, string activo)
         {
@@ -206,7 +215,7 @@ namespace BOReserva.DataAccess.Domain
             string nombre = model._nombre;
             string apellido = model._apellido;
             string correo = model._correo;
-            string contrasena = model._contrasena;
+            string contrasena = model.contraseñaUsuario;
             DateTime fechaCreacion = model._fechaCreacion;
             string activo = model._activo;
 
