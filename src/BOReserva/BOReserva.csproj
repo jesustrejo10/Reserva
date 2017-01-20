@@ -340,6 +340,7 @@
       <DependentUpon>RecursoBD.resx</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\Model\ResultadoBD.cs" />
+    <Compile Include="Excepciones\M10\ReservaExceptionM10.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
