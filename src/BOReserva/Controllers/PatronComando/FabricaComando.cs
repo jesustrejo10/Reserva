@@ -330,12 +330,12 @@ namespace BOReserva.Controllers.PatronComando
             return new M16_COConsultarReclamo();
 
         }
-        public static Command<String> crearM16ConsultarUsuario(Entidad e)
-        {
+        //public static Command<String> crearM16ConsultarUsuario(Entidad e)
+        //{
 
-            return new M16_COConsultarReclamoDetalle((Reclamo)e);
+        //    return new M16_COConsultarReclamoDetalle((Reclamo)e);
 
-        }
+        //}
 
         #region M06 GESTION COMIDA
 
