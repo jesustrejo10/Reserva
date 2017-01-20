@@ -163,9 +163,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAOCruceros();
         }
         #endregion
-    }
-
-
+    
 
         #region M06 GESTION DE COMIDA
 

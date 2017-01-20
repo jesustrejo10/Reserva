@@ -199,9 +199,7 @@ namespace BOReserva.DataAccess.Domain
         {
             
             return new Crucero(crucero._nombreCrucero, crucero._companiaCrucero, crucero._capacidadCrucero, crucero._estatus);
-        }
-    }
-}          
+        }    
 
 
         #region M06 GESTION COMIDA
