@@ -19,11 +19,25 @@ namespace BOReserva.Controllers
         /// <returns>Retorna la vista parcial M12_AgregarUsuario2 en conjunto del Modelo de dicha vista</returns>
         public ActionResult M12_AgregarUsuario2()
         {
-            CAgregarUsuario model = new CAgregarUsuario();
-            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM12ObtenerRoles();
-            model._rols = comando.ejecutar();
-            
-            return PartialView(model);
+            try
+            {
+                CAgregarUsuario model = new CAgregarUsuario();
+                //Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM12ObtenerRoles();
+                //model._rols = comando.ejecutar();
+
+                PersistenciaUsuario p = new PersistenciaUsuario();
+                List<ListaRoles> lista = p.ListarRoles();
+                ViewBag.Roles = new SelectList(lista, "rolID", "rolNombre");
+
+                return PartialView(model);
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('" + ex.Message + "');</script>");
+                Response.End();
+                return Json(ex.Message);
+            }
+
         }
 
 

@@ -9,12 +9,21 @@ namespace BOReserva.DataAccess.Domain
     public class Pais : Entidad
     {
         public String _nombre { get; set; }
+        public Dictionary<int, Entidad> _ciudades { get; set; }
 
         public Pais(int id, String nombre)
         {
             this._id = id;
             this._nombre = nombre;
         }
+
+        public Pais(int id, String nombre, Dictionary<int, Entidad> ciudades)
+        {
+            this._id = id;
+            this._nombre = nombre;
+            this._ciudades = ciudades;
+        }
+
 
         public Pais(SqlDataReader reader)
         {
@@ -31,7 +40,7 @@ namespace BOReserva.DataAccess.Domain
                 throw e;
             }
         }
-        
+
         public Pais() { }
     }
 }

@@ -10,8 +10,9 @@
 </script>
 @model BOReserva.Models.gestion_usuarios.CAgregarUsuario
 
+<script src="~/Scripts/Scripts_Usuarios/llamadas_generales.js"></script>
 
-@using (Html.BeginForm("agregarUsuario", "gestion_usuarios", null, FormMethod.Post, new { @id = "formAgregarUsuario", @class = "form-horizontal"}))
+@using (Html.BeginForm("M12_M12_AgregarUsuario", "gestion_usuarios", null, FormMethod.Post, new { @class = "agregarUsuario_form" }))
 {
     @Html.ValidationSummary()
 
@@ -109,7 +110,7 @@
                                         <div class="col-xs-6">
                                             <label for="_rol">Seleccione el rol del usuario (<span style="color:red">*</span>):</label>
 
-                                            @Html.DropDownListFor(c => c._rols, ViewBag.Roles as SelectList, "Seleccione una opcion", new { @class = "form-control", required = "required" })
+                                            @Html.DropDownListFor(c => c._rol, ViewBag.Roles as SelectList, "Seleccione una opcion", new { @class = "form-control", required = "required" })
 
                                         </div>
                                         <div class="col-xs-6">

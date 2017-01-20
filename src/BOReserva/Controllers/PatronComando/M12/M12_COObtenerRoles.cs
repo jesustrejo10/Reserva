@@ -5,7 +5,6 @@ using System.Web;
 using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
-using BOReserva.DataAccess.Domain.Contratos;
 
 namespace BOReserva.Controllers.PatronComando.M12
 {
