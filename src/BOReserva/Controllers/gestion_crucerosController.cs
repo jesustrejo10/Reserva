@@ -25,13 +25,10 @@ namespace BOReserva.Controllers
         {
             ConexionBD cbd = new ConexionBD();
             VistaListaCrucero vlc = new VistaListaCrucero();
-            CGestion_cabina cabina = new CGestion_cabina() { cabinas = new List<CGestion_cabina>() };
-            //CGestion_crucero crucero = new CGestion_crucero();
+            CGestion_cabina cabina = new CGestion_cabina() { cabinas = new List<CGestion_cabina>() };            
             vlc.cruceros = cbd.listarCruceros();
-            ViewBag.ShowDropDown = new SelectList(vlc.cruceros, "_idCrucero", "_nombreCrucero");
-            //cabina.cabinas = cbd.listarCabinas(crucero._idCrucero);
-            return PartialView("M24_AgregarCabinas", cabina);
-            //return PartialView();
+            ViewBag.ShowDropDown = new SelectList(vlc.cruceros, "_idCrucero", "_nombreCrucero");            
+            return PartialView("M24_AgregarCabinas", cabina);            
         }
 
         public ActionResult M24_AgregarItinerario()
@@ -106,26 +103,12 @@ namespace BOReserva.Controllers
         public JsonResult guardarCrucero(CGestion_crucero model)
         {
             
-            Entidad nuevoCrucero = FabricaEntidad.InstanciarCrucero(model);
-            //con la fabrica instancie al hotel.
+            Entidad nuevoCrucero = FabricaEntidad.InstanciarCrucero(model);            
             Command<String> comando = FabricaComando.crearM14AgregarCrucero(nuevoCrucero);
             String result = comando.ejecutar();
-
             return (Json(result));
         }
    
-
-        [HttpPost]
-        public JsonResult guardaCrucero(CGestion_crucero model)
-        {
-            String _nombreCrucero = model._nombreCrucero;
-            String _companiaCrucero = model._companiaCrucero;
-            int _capacidadCrucero = model._capacidadCrucero;
-            CGestion_crucero crucero = new CGestion_crucero(_nombreCrucero, _companiaCrucero, _capacidadCrucero);
-            crucero.AgregarCrucero(crucero);
-
-            return (Json(true, JsonRequestBehavior.AllowGet));
-        }
 
         [HttpPost]
         public JsonResult eliminarCrucero(int id_crucero)
@@ -136,8 +119,19 @@ namespace BOReserva.Controllers
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
 
+        
         [HttpPost]
         public JsonResult guardarCabina(CGestion_cabina model)
+        {
+
+            Entidad nuevaCabina = FabricaEntidad.InstanciarCabina(model);
+            Command<String> comando = FabricaComando.crearM14AgregarCrucero(nuevaCabina);
+            String result = comando.ejecutar();
+            return (Json(result));
+        }
+        
+        [HttpPost]
+        public JsonResult guardaCabina(CGestion_cabina model)
         {
             String _nombreCabina = model._nombreCabina;
             float _precioCabina = model._precioCabina;

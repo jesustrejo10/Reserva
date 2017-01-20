@@ -266,7 +266,7 @@
     <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarCruceros.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COAgregarCrucero.cs" />
     <Compile Include="Controllers\PatronComando\M16_COAgregarReclamo.cs" />
-    <Compile Include="DataAccess\DataAccessObject\DAOCruceros.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M14\DAOCruceros.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOBoleto.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOCiudad.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOLugar.cs" />
@@ -302,7 +302,8 @@
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORestaurant.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPais.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORol.cs" />
-    <Compile Include="DataAccess\Domain\Crucero.cs" />
+    <Compile Include="DataAccess\Domain\M14\Cabina.cs" />
+    <Compile Include="DataAccess\Domain\M14\Crucero.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReclamo.cs" />
     <Compile Include="DataAccess\Domain\FabricaTransporte.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOBoleto.cs" />

@@ -15,6 +15,12 @@ namespace BOReserva.DataAccess.DataAccessObject
         public DAOCruceros()
         { }
 
+        bool IDAOCruceros.ValidarCrucero(String nombre) {
+
+            return true;        
+        }
+
+        
         int IDAO.Agregar(Entidad e)
         {
             Crucero crucero = (Crucero)e;
