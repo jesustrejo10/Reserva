@@ -6,6 +6,10 @@ using System.Web.Mvc;
 using System.Net;
 using BOReserva.Models.gestion_boletos;
 using BOReserva.Servicio.Servicio_Boletos;
+using BOReserva.DataAccess.Domain;
+using BOReserva.Controllers.PatronComando;
+using BOReserva.Servicio;
+
 
 
 namespace BOReserva.Controllers
@@ -16,33 +20,33 @@ namespace BOReserva.Controllers
         public ActionResult M05_DetalleBoleto(int idorigen, int iddestino, string fechadespegue, string fechaaterrizaje, int monto, string tipo, string primernombre, string segundonombre, string primerapellido, string segundoapellido, string fechanac, string sexo, int pasaporte, string correo, int idvuelo)
         {
             System.Diagnostics.Debug.WriteLine("Llega a controller de detalle boleto");
-            System.Diagnostics.Debug.WriteLine("origen: "+idorigen+", destino: "+iddestino+", despegue: "+fechadespegue+", aterrizaje: "+fechaaterrizaje+", monto: "+monto+", tipo: "+tipo+", primernombre: "+primernombre+", segundonombre: "+segundonombre+", primerapellido: "+primerapellido+", segundoapellido: "+segundoapellido+", fechanac: "+fechanac+", sexo: "+sexo+", pasaporte: "+pasaporte+", correo: "+correo);
-            CPasajero pasa = new CPasajero();
-            pasa._primer_nombre = primernombre;
-            pasa._segundo_nombre = segundonombre;
-            pasa._primer_apellido = primerapellido;
-            pasa._segundo_apellido = segundoapellido;
-            pasa._fecha_nacimiento = fechanac;
-            pasa._sexo = sexo;
-            pasa._id = pasaporte;
-            pasa._correo = correo;
+            System.Diagnostics.Debug.WriteLine("origen: " + idorigen + ", destino: " + iddestino + ", despegue: " + fechadespegue + ", aterrizaje: " + fechaaterrizaje + ", monto: " + monto + ", tipo: " + tipo + ", primernombre: " + primernombre + ", segundonombre: " + segundonombre + ", primerapellido: " + primerapellido + ", segundoapellido: " + segundoapellido + ", fechanac: " + fechanac + ", sexo: " + sexo + ", pasaporte: " + pasaporte + ", correo: " + correo);
+
+            Pasajero nuevoPasajero = (Pasajero)FabricaEntidad.InstanciarPasajero(pasaporte, primernombre, segundonombre, primerapellido, segundoapellido, sexo, fechanac, correo);
 
             CVisualizarBoleto bol = new CVisualizarBoleto();
-            manejadorSQL_Boletos sqlboletos = new manejadorSQL_Boletos();
+            //manejadorSQL_Boletos sqlboletos = new manejadorSQL_Boletos();
+            
             bol._idOrigen = idorigen;
             bol._idDestino = iddestino;
             bol._fechaDespegueIda = fechadespegue;
             bol._fechaAterrizajeIda = fechaaterrizaje;
             bol._monto = monto;
             bol._tipoBoleto = tipo;
-            bol._pasajero = pasa;
-            bol._origen = sqlboletos.MBuscarnombreciudad(idorigen);
-            bol._destino = sqlboletos.MBuscarnombreciudad(iddestino);
+            bol._pasajero = nuevoPasajero;
+            //COMANDO
+            //bol._origen = sqlboletos.MBuscarnombreciudad(idorigen);
+            //bol._destino = sqlboletos.MBuscarnombreciudad(iddestino);
+            //
+            bol._origen = (FabricaComando.buscarM05nombreCiudad(new Entidad(idorigen))).ejecutar();
+            bol._destino = (FabricaComando.buscarM05nombreCiudad(new Entidad(iddestino))).ejecutar();
             bol._idVuelo = idvuelo;
 
-            sqlboletos.CrearPasajero(pasaporte,primernombre,segundonombre,primerapellido,segundoapellido,fechanac,sexo,correo);
+            Command<String> comando = FabricaComando.crearM05AgregarPasajero(nuevoPasajero);
 
+            string flag = comando.ejecutar();
 
+            //sqlboletos.CrearPasajero(pasaporte,primernombre,segundonombre,primerapellido,segundoapellido,fechanac,sexo,correo);
 
             return PartialView(bol);
         }
@@ -56,11 +60,11 @@ namespace BOReserva.Controllers
 
 
 
-        public ActionResult M05_DetalleVuelo(string origen,string destino,string fechasalida,string fechallegada,int idorigen,int iddestino,int monto, string tipo, int idvuelo)
+        public ActionResult M05_DetalleVuelo(string origen, string destino, string fechasalida, string fechallegada, int idorigen, int iddestino, int monto, string tipo, int idvuelo)
         {
 
             System.Diagnostics.Debug.WriteLine("Llega al controller de detalleVuelo");
-            System.Diagnostics.Debug.WriteLine("origen: " + origen + ", destino: " + destino + ", fecha salida: " + fechasalida + ", fecha llegada: " + fechallegada + ", id origen: " + idorigen + ", id destino: " + iddestino+", monto: "+monto+", tipo: "+tipo+", id vuelo: "+idvuelo);
+            System.Diagnostics.Debug.WriteLine("origen: " + origen + ", destino: " + destino + ", fecha salida: " + fechasalida + ", fecha llegada: " + fechallegada + ", id origen: " + idorigen + ", id destino: " + iddestino + ", monto: " + monto + ", tipo: " + tipo + ", id vuelo: " + idvuelo);
 
             CVisualizarBoleto vue = new CVisualizarBoleto();
 
@@ -79,7 +83,7 @@ namespace BOReserva.Controllers
             return PartialView(vue);
         }
 
-       
+
 
         public ActionResult M05_CrearBoleto()
         {
@@ -106,12 +110,12 @@ namespace BOReserva.Controllers
         {
 
             System.Diagnostics.Debug.WriteLine("Llega al controller de VerVuelos");
-            System.Diagnostics.Debug.WriteLine("DATOS CONTROLLER VERVUELOS: id_origen: "+idorigen+", id_destino: "+iddestino+", ida_vuelta: "+idavuelta+", tipo: "+tipo+", fecha ida: "+ fechaida+", fecha vuelta: "+fechavuelta);
+            System.Diagnostics.Debug.WriteLine("DATOS CONTROLLER VERVUELOS: id_origen: " + idorigen + ", id_destino: " + iddestino + ", ida_vuelta: " + idavuelta + ", tipo: " + tipo + ", fecha ida: " + fechaida + ", fecha vuelta: " + fechavuelta);
 
             manejadorSQL_Boletos sqlboletos = new manejadorSQL_Boletos();
             List<CVuelo> listavuelos = new List<CVuelo>();
             listavuelos = sqlboletos.M05ListarVuelosIdaBD(fechaida, fechavuelta, idorigen, iddestino, tipo);
-           // System.Diagnostics.Debug.WriteLine("DATOS CONTROLLER VERVUELOS: listavuelos: vuelos[0]: partida:  "+ listavuelos[0]._fechaPartida+", llegada: "+listavuelos[0]._fechaLlegada);
+            // System.Diagnostics.Debug.WriteLine("DATOS CONTROLLER VERVUELOS: listavuelos: vuelos[0]: partida:  "+ listavuelos[0]._fechaPartida+", llegada: "+listavuelos[0]._fechaLlegada);
 
 
             return PartialView(listavuelos);
@@ -120,7 +124,7 @@ namespace BOReserva.Controllers
         public ActionResult M05_DetalleVueloReserva(int id_reserva)
         {
 
-          
+
             System.Diagnostics.Debug.WriteLine("Llega al controller de detalleveuloreserva");
 
             //BUSCA LA RESERVA A MOSTRAR
@@ -175,7 +179,7 @@ namespace BOReserva.Controllers
             bol._pasaporte = reserva._pasajero._id;
             bol._correo = reserva._pasajero._correo;
             bol._idReserva = id_reserva;
-            
+
 
             System.Diagnostics.Debug.WriteLine("Origen: " + bol._origen + ", Destino: " + bol._destino + ", Monto: " + bol._monto + ", fecha despeje ida: " + bol._fechaDespegueIda + ", fecha aterrizaje ida: " + bol._fechaAterrizajeIda + ", fecha despeje vuelta: " + bol._fechaDespegueVuelta + ", fecha aterrizaje vuelta: " + bol._fechaAterrizajeVuelta);
 
@@ -312,7 +316,7 @@ namespace BOReserva.Controllers
             bol._correo = reserva._pasajero._correo;
             bol._idReserva = id_reserva;
 
-            
+
 
             System.Diagnostics.Debug.WriteLine("Origen: " + bol._origen + ", Destino: " + bol._destino + ", Monto: " + bol._monto + ", fecha despeje ida: " + bol._fechaDespegueIda + ", fecha aterrizaje ida: " + bol._fechaAterrizajeIda + ", fecha despeje vuelta: " + bol._fechaDespegueVuelta + ", fecha aterrizaje vuelta: " + bol._fechaAterrizajeVuelta);
 
@@ -322,55 +326,51 @@ namespace BOReserva.Controllers
             //(bol_id,bol_escala,bol_ida_vuelta,bol_costo,fk_origen,fk_destino,fk_pasajero,bol_fecha,tipo_boleto)
             manejadorSQL_Boletos sqlboleto = new manejadorSQL_Boletos();
 
-           
+
             int id_origen = int.Parse(reserva._origen.Id);
             int id_destino = int.Parse(reserva._destino.Id);
             double dcosto = reserva._costo;
-            int costo = (int) dcosto;
+            int costo = (int)dcosto;
 
-           
-            
+
+
             int id_vuelo = reserva._vuelos[0]._id;
             System.Diagnostics.Debug.WriteLine("EL ID DEL VUELO DE LA RESERVA ES: " + id_vuelo);
 
             String fecha_bol = DateTime.Today.ToString("yyyy/MM/dd");
-            Console.WriteLine("FECHA: "+ fecha_bol);
+            Console.WriteLine("FECHA: " + fecha_bol);
 
             System.Diagnostics.Debug.WriteLine("CREAR BOLETO --- escala: 0, ida_vuelta: " + reserva._ida_vuelta + ", costo: " + costo + ", id_origen: " + id_origen + ", id_destino: " + id_destino + ", id_pasajero: " + reserva._pasajero._id + ", fecha boleto: " + fecha_bol + ", tipo: " + reserva._tipoBoleto);
 
             sqlboleto.M05CrearBoletoReservaBD(0, reserva._ida_vuelta, costo, id_origen, id_destino, reserva._pasajero._id, fecha_bol, reserva._tipoBoleto, id_vuelo);
 
-            
-            
+
+
             System.Diagnostics.Debug.WriteLine("Finaliza el controller");
 
             return PartialView(bol);
         }
 
-        public ActionResult M05_BoletoCreado(int idorigen, int iddestino, int pasaporte, int monto, string tipo, int idvuelo )
+        public ActionResult M05_BoletoCreado(int idorigen, int iddestino, int pasaporte, int monto, string tipo, int idvuelo)
         {
-
-
-
-
-            manejadorSQL_Boletos sqlboleto = new manejadorSQL_Boletos();
             String fecha_bol = DateTime.Today.ToString("yyyy/MM/dd");
-            Console.WriteLine("FECHA: " + fecha_bol);
+           // Console.WriteLine("FECHA: " + fecha_bol);
 
-            sqlboleto.M05CrearBoletoBD(monto, idorigen, iddestino, pasaporte, fecha_bol, tipo, idvuelo);
+            Boleto nuevoBoleto = (Boleto)FabricaEntidad.InstanciarBoleto(idorigen, iddestino, pasaporte, monto, tipo, idvuelo, fecha_bol);
+           
+            Command<String> comando = FabricaComando.crearM05CrearBoleto(nuevoBoleto);
+           
+            //System.Diagnostics.Debug.WriteLine("Finaliza el controller");
 
-
-
-            System.Diagnostics.Debug.WriteLine("Finaliza el controller");
+            string flag = comando.ejecutar();
 
             return PartialView();
         }
 
 
 
-        public ActionResult M05_DatosUsuario(int idorigen, int iddestino, string fechadespegue, string fechaaterrizaje,int monto,string tipo, int idvuelo)
+        public ActionResult M05_DatosUsuario(int idorigen, int iddestino, string fechadespegue, string fechaaterrizaje, int monto, string tipo, int idvuelo)
         {
-
 
             CVisualizarBoleto vue = new CVisualizarBoleto();
 
@@ -390,15 +390,15 @@ namespace BOReserva.Controllers
         {
 
             return PartialView();
-            
+
         }
- 
+
 
         public ActionResult M05_VisualizarBoletos()
         {
             //SE BUSCAN TODOS LOS BOLETOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
-             manejadorSQL_Boletos buscarboletos = new manejadorSQL_Boletos();
-             List<CBoleto> listaboletos = buscarboletos.M05ListarBoletosBD();
+            manejadorSQL_Boletos buscarboletos = new manejadorSQL_Boletos();
+            List<CBoleto> listaboletos = buscarboletos.M05ListarBoletosBD();
             return PartialView(listaboletos);
         }
 
@@ -406,12 +406,9 @@ namespace BOReserva.Controllers
         public ActionResult M05_VisualizarReservasPasajero(int pasaporte)
         {
 
-            System.Diagnostics.Debug.WriteLine("Llega al controller visualizarreservaspasajero");
             //SE BUSCAN TODOS LOS BOLETOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
             manejadorSQL_Boletos buscarboletos = new manejadorSQL_Boletos();
             List<CBoleto> listaboletos = buscarboletos.M05ListarReservasPasajeroBD(pasaporte);
-
-
 
             return PartialView(listaboletos);
         }
@@ -447,7 +444,8 @@ namespace BOReserva.Controllers
                 bol._horaAterrizajeIda = time1;
                 bol._horaAterrizajeVuelta = "";
             }
-            else {
+            else
+            {
                 var time0 = vuelos[0]._fechaPartida.TimeOfDay.ToString();
                 var time1 = vuelos[0]._fechaLlegada.TimeOfDay.ToString();
                 var time2 = vuelos[1]._fechaPartida.TimeOfDay.ToString();
@@ -475,9 +473,6 @@ namespace BOReserva.Controllers
         }
 
 
-
-
-
         public ActionResult M05_ModificarBoleto(int id)
         {
             manejadorSQL_Boletos buscarboleto = new manejadorSQL_Boletos();
@@ -497,7 +492,7 @@ namespace BOReserva.Controllers
             String destino = model._destino;
             String fechaSalIda = model._fechaDespegueIda;
             String fechaSalVuelta = model._fechaDespegueVuelta;
-            String fechaLlegIda= model._fechaAterrizajeIda;
+            String fechaLlegIda = model._fechaAterrizajeIda;
             String fechaLlegVuelta = model._fechaAterrizajeVuelta;
             String horaSalIda = model._horaDespegueIda;
             String horaSalVuelta = model._horaDespegueVuelta;
@@ -552,20 +547,24 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult eliminarBoleto(int id)
         {
-            manejadorSQL_Boletos eliminar = new manejadorSQL_Boletos();
-            int modifico_si_no = eliminar.M05EliminarBoletoBD(id);
 
+            //manejadorSQL_Boletos eliminar = new manejadorSQL_Boletos();
+            //int modifico_si_no = eliminar.M05EliminarBoletoBD(id);
+            Command<String> comando = FabricaComando.crearM05EliminarBoleto(id);
+            String elimino_si_no = comando.ejecutar();
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
 
         [HttpPost]
         public JsonResult modificarDatosPasajero(CModificarBoleto model)
         {
+            Pasajero pasajero = (Pasajero)FabricaEntidad.InstanciarPasajero(model._id, model._primer_nombre, model._segundo_nombre, model._primer_apellido, model._segundo_apellido, model._sexo, model._fecha_nac.ToString("yyyy/MM/dd"), model._correo);
+            Command<String> comando = FabricaComando.modificarM05modificarPasajero(pasajero);
+            String agrego_si_no = comando.ejecutar();
 
-            CPasajero pas = new CPasajero(model._id, model._primer_nombre,model._segundo_nombre,model._primer_apellido,
-                                          model._segundo_apellido,model._sexo,model._fecha_nac,model._correo);
+            /*CPasajero pas = new CPasajero(model._id, model._primer_nombre, model._segundo_nombre, model._primer_apellido, model._segundo_apellido, model._sexo, model._fecha_nac, model._correo);
             manejadorSQL_Boletos modificar = new manejadorSQL_Boletos();
-            int modifico_si_no = modificar.M05ModificarDatosPasajero(pas);
+            int modifico_si_no = modificar.M05ModificarDatosPasajero(pas);*/
 
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
@@ -643,18 +642,22 @@ namespace BOReserva.Controllers
             List<CVuelo> lista = modificar.M05ListarVuelosBoleto(model._bol_id);
 
             int compara = String.Compare(tipoOri, tipo);
-            if (compara != 0) {
+            if (compara != 0)
+            {
 
                 // PRIMERO VEO SI ES IDA O IDA Y VUELTA
-                int ida_vuelta = modificar. MBuscarIdaVuelta(model._bol_id);
+                int ida_vuelta = modificar.MBuscarIdaVuelta(model._bol_id);
                 // EL BOLETO ES IDA 1
                 // EL BOLETO ES IDA Y VUELTA 2
-                if (ida_vuelta == 1) {
+                if (ida_vuelta == 1)
+                {
                     int codigo_vuelo1 = lista[0]._id;
 
                     disponibilidad = verificarDisponibilidad(codigo_vuelo1, tipo);
 
-                } else {
+                }
+                else
+                {
                     int codigo_vuelo_ida = lista[0]._id;
                     int codigo_vuelo_vuelta = lista[1]._id;
 
@@ -666,12 +669,15 @@ namespace BOReserva.Controllers
 
                 }
 
-                if (disponibilidad) {
+                if (disponibilidad)
+                {
 
                     // HACER EL UPDATE
                     int num = modificar.M05ModificarTipoBoleto(model._bol_id, tipo);
                     return (Json(true, JsonRequestBehavior.AllowGet));
-                } else {
+                }
+                else
+                {
                     //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
                     Response.StatusCode = (int)HttpStatusCode.BadRequest;
                     //Agrego mi error
@@ -680,7 +686,9 @@ namespace BOReserva.Controllers
                     return Json(error);
                 }
 
-            } else {
+            }
+            else
+            {
                 //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 //Agrego mi error

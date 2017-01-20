@@ -4,7 +4,7 @@ using System.Linq;
 using FOReserva.Models.Revision;
 using System.Data.SqlClient;
 using FOReserva.Models.Restaurantes;
-
+//using FOReserva.Models.Revision.CRevision;
 
 namespace FOReserva.Servicio
 {
