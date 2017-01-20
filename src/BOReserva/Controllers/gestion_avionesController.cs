@@ -86,6 +86,7 @@ namespace BOReserva.Controllers
         /// <returns>ActionResult que contiene una lista de los aviones en el sistema </returns>
         public ActionResult M02_VisualizarAviones()
         {
+            System.Diagnostics.Debug.WriteLine("ID: " + gestion_seguridad_ingresoController.IDUsuarioActual());
             manejadorSQL sql = new manejadorSQL();
             List<CAvion> aviones = new List<CAvion>();
             try

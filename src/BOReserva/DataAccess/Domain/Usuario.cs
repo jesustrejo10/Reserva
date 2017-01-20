@@ -8,6 +8,7 @@ namespace BOReserva.DataAccess.Domain
     public class Usuario :Entidad
     {
         public int id { get; set; }
+        public int rol { get; set; }
         public String nombre { get; set; }
         public String apellido { get; set; }
         public String correo { get; set; }

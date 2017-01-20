@@ -28,17 +28,17 @@ namespace BOReserva.DataAccess.DataAccessObject
             throw new NotImplementedException();
         }
 
-        public int Eliminar(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public Entidad Consultar(int id)
         {
             throw new NotImplementedException();
         }
 
         public Dictionary<int, Entidad> ConsultarTodos()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Eliminar(int id)
         {
             throw new NotImplementedException();
         }
@@ -54,7 +54,8 @@ namespace BOReserva.DataAccess.DataAccessObject
 
             try
             {
-                conexion = Connection.getInstance(_connexionString);
+                conexion = new SqlConnection(_connexionString);
+               
             }
 
             catch (Exception ex)
@@ -78,7 +79,7 @@ namespace BOReserva.DataAccess.DataAccessObject
 
             try
             {
-                this.conexion.Close();
+                conexion.Close();
             }
 
             catch (Exception ex)
@@ -291,6 +292,8 @@ namespace BOReserva.DataAccess.DataAccessObject
                 Desconectar();
             }
         }
+
+      
         #endregion
 
     }
