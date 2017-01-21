@@ -89,10 +89,19 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
             catch (SqlException ex)
             {
-              
-                hotel._nombre = ex.Message;
-                Entidad resultado = hotel;
-                return resultado;
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (NullReferenceException ex)
+            {
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
         }
 
@@ -210,7 +219,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
                     pais = new Pais(idPais, nombrePais);
 
                     idCiudad = Int32.Parse(row[RecursoDAOM09.id_ciudad].ToString());
-                    nombreCiudad = row[RecursoDAOM09.id_ciudad].ToString();
+                    nombreCiudad = row[RecursoDAOM09.nombre_ciudad].ToString();
                     ciudad = new Ciudad(idCiudad, nombreCiudad, pais);
 
                     idHotel = Int32.Parse(row["hot_id"].ToString());
@@ -232,12 +241,17 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
             catch (SqlException ex)
             {
-                /*ReservaExceptionM09 exception = new ReservaExceptionM09(ex.Message, ex);
-                Debug.WriteLine(ex.ToString());*/
                 throw new ReservaExceptionM09(ex.Message, ex);
-                //return null;
             }
-            catch (ExceptionBD ex)
+            catch (NullReferenceException ex)
+            {
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (Exception ex)
             {
                 throw new ReservaExceptionM09(ex.Message, ex);
             }
@@ -261,7 +275,19 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
             catch (SqlException ex)
             {
-                return ex.Message;
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (NullReferenceException ex)
+            {
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
         }
 
@@ -287,7 +313,19 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
             catch (SqlException ex)
             {
-                return ex.Message;
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (NullReferenceException ex)
+            {
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
         }
 

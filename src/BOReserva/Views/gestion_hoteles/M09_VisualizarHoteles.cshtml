@@ -146,8 +146,8 @@
             }).done(function (data) {
                 $("#contenido").empty();
                 $("#contenido").append(data);
-            }).fail(function (data) {
-                alert(data)
+            }).fail(function () {
+                alert(data);
             });
         }));
     });
@@ -167,7 +167,7 @@
                 $("#contenido").empty();
                 $("#contenido").append(data);
             }).fail(function () {
-                alert("Error, por favor refresque la pagina")
+                alert(data);
             });
         });
     });
@@ -204,8 +204,6 @@
                                 alert(errorThrown);
                             }
                         });
-                } else if (data.includes("Reserva_Habitacion")) {
-                    alert("No se puede eliminar este hotel porque tiene una reservacion");
                 } else {
                     alert(data);
                 }
