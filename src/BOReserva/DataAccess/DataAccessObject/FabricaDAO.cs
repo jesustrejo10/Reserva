@@ -22,14 +22,9 @@ namespace BOReserva.DataAccess.DataAccessObject
         
         public static DAO instanciarDaoHotel() {    
             return new DAOHotel();
-<<<<<<< HEAD
         }
-=======
-=======
-        }
->>>>>>> Develop
-        #region Lugar ( DAOLugar - DAOPais - DAOCiudad ) 
->>>>>>> Develop
+        
+        #region Lugar ( DAOLugar - DAOPais - DAOCiudad )
 
         public static DAO instanciarDaoLugar()
         {
