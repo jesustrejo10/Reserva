@@ -53,6 +53,7 @@
                                 <label for="Acceso">Tendra acceso a:</label>                                
                                 <!--se llena por javascript los permisos que del modulo cada vez que se cambia la seleccion de un elemento aqui --> 
                                 <div class="checkbox" id="listaPermisos">
+                                
                                 </div>
 
 
@@ -127,32 +128,36 @@
                 type: 'get',
                 dataType: '',
                 url: 'gestion_roles/Consultarpermisos',
-                data: data,
-                success: cargadorPermisos,
-                //realiza el metodo especificado en el url llevando como valor el elemento seleccionadoy devuelve las accesibilidades del modulo
+                //data: data,
+                success: function (response) {
+                    console.log(response);
+                    cargadorPermisos(response);
+                },
                 failure: function (response) {
                     alert("Error buscando permisos");
                 }
             });
-            function cargadorPermisos(response) {
 
+            function cargadorPermisos(response) {
                 var permisos = response;
                 var container = $('#listaPermisos');
-                container.empty();
                 //se vacia la lista de permisos para colocar los nuevos seleccionados
-                jQuery.each(permisos, function (i) {
-                var inputs = container.find('input');
-                var id = inputs.length + 1;
-                $('<input />', { type: 'checkbox', id: 'permiso' + id, value: permisos[i] }).appendTo(container);
-                $('<label />', { 'for': 'permiso' + id, text: permisos[i] }).appendTo(container);
-                $('<br>').appendTo(container)
+                container.empty();
+                jQuery.each(permisos, function (k, v) {
+                        $('<input/>', { type: 'checkbox', id: 'permiso' + v._idPermiso, value: v._nombre }).appendTo(container);
+                        $('<label/>', { 'for': 'permiso' + v._idPermiso, text: v._nombre }).appendTo(container);
+                        $('<br>').appendTo(container);
+                    //jQuery.each(v, function (i) {
+                    //    //var inputs = container.find('input');
+                    //    //var id = inputs.length + 1;
+                    //    $('<input/>', { type: 'checkbox', id: 'permiso' + v._idPermiso, value: v._nombre }).appendTo(container);
+                    //    $('<label/>', { 'for': 'permiso' + v._idPermiso, text: v._nombre }).appendTo(container);
+                    //    $('<br>').appendTo(container);
+                    //});              
                 });
-                //se agrega por cada elemento dentro de la lista un checkbox y un label con el valor del permiso
             }
-
         };
         consultarPermisos();
-        
     </script>
 
 }
