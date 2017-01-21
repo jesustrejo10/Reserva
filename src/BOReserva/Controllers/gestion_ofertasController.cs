@@ -70,11 +70,6 @@ namespace BOReserva.Controllers
             List<COferta> ofertas = new List<COferta>();
             ofertas = sql.listarOfertasEnBD();
             return PartialView(ofertas);
-            
-            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM09VisualizarHoteles();
-            Dictionary<int, Entidad> listaHoteles = comando.ejecutar();
-            return PartialView(listaHoteles);
-
             */
         }
 
@@ -115,13 +110,24 @@ namespace BOReserva.Controllers
 
         public ActionResult M11_ConsultarOferta(int id)
         {
-            manejadorSQL buscarOferta = new manejadorSQL();
-            COferta oferta = buscarOferta.MMostrarOfertaBD(id);
+            Debug.WriteLine("BOTON VISUALIZAR OFERTA");
+
+            Debug.WriteLine("ID EN LISTA" + id.ToString());
+
+            Command<Entidad> comando = FabricaComando.crearM11ConsultarOferta(id);
+            Entidad eOferta = comando.ejecutar();
+
+            /* 
+             manejadorSQL buscarOferta = new manejadorSQL();
+             COferta oferta = buscarOferta.MMostrarOfertaBD(id);*/
+
+            Oferta oferta = (Oferta)eOferta;
 
             String disponibilidad = "Inactivo";
             if (oferta._estadoOferta == true) { disponibilidad = "Activo"; } else { disponibilidad = "Inactivo"; }
 
-            CVisualizarOferta visualOferta = new CVisualizarOferta();
+            CVisualizarOferta visualOferta = new CVisualizarOferta();           
+
             visualOferta._idOferta = oferta._idOfertaa;
             visualOferta._nombreOferta = oferta._nombreOferta;
             visualOferta._nombrePaquete = oferta._nombrePaquete;

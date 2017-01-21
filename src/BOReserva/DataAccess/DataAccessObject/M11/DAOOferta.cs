@@ -79,12 +79,6 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
             throw new NotImplementedException();
         }
 
-        Entidad IDAO.Consultar(int id)
-        {
-            throw new NotImplementedException();
-
-        }
-
         /// <summary>
         /// Metodo implementado de IDAO para consultar los ofertas de la BD
         /// </summary>
@@ -95,7 +89,6 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
 
             List<Entidad> listaOfertas = FabricaEntidad.asignarListaDeEntidades();
             SqlConnection conexion = Connection.getInstance(_connexionString);
-            DateTime dt = new DateTime(2008, 3, 9, 16, 5, 7, 123);
             Entidad oferta;
 
             try
@@ -124,7 +117,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
 
                        // listaPaquetes = MBuscarNombrePaquetesDeOferta(Int32.Parse(reader["ofe_id"].ToString()));
                        
-                        oferta =  FabricaEntidad.InstanciarOferta(reader["idOferta"].ToString(), reader["nombreOferta"].ToString(), 
+                        oferta =  FabricaEntidad.InstanciarOferta(Int32.Parse(reader["idOferta"].ToString()), reader["nombreOferta"].ToString(), 
                                                                   listaPaquetes, float.Parse(reader["porcentaje"].ToString()),
                                                                   fechaInicio, fechaFin, disponibilidad);
                         listaOfertas.Add(oferta);
@@ -133,6 +126,98 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
                 cmd.Dispose();
                 conexion.Close();
                 return listaOfertas;
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine("Ocurrio un SqlException");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+            }
+            catch (NullReferenceException ex)
+            {
+                Debug.WriteLine("Ocurrio una NullReferenceException");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+            }
+            catch (ArgumentNullException ex)
+            {
+                Debug.WriteLine("Ocurrio una ArgumentNullException");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Ocurrio una Exception");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Procedimiento que consulta el detalle de una oferta en la base de datos
+        /// </summary>
+        /// <param name="id">Id de la oferta</param>
+        /// <returns>Una entidad del tipo oferta</returns>
+        Entidad IDAO.Consultar(int id)
+        {
+            Debug.WriteLine("LLEGÓ A DAO CONSULTAROFERTA");
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            Entidad oferta = null;
+            Int32 _id;
+            _id = id;
+                       
+            try
+            {
+                conexion.Open();
+                SqlCommand cmd = new SqlCommand("[dbo].[M11_ConsultarOferta]", conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                Debug.WriteLine("HIZO CONEXIÓN EN VISUAL");
+
+                Debug.WriteLine(id);
+                Debug.WriteLine(_id);
+
+                SqlParameter ParId = new SqlParameter();
+                ParId.ParameterName = "@ofer_id";
+                ParId.SqlDbType = SqlDbType.Int;
+                ParId.Value = id;
+                
+                //SqlCmd.Parameters.Add(ParNombre);
+                cmd.Parameters.Add(ParId);
+
+                Debug.WriteLine("HIZO LA PARTED E PARÁMETRO");
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    Debug.WriteLine("CMD.READER EN CONSULTAR");
+                    while (reader.Read())
+                    {
+                        var fechaInivar = reader["fechaIn"];
+                        var fechaFinvar = reader["fechaFin"];
+                        var estadovar = reader["estado"];
+
+                        DateTime fechaInicio = Convert.ToDateTime(fechaInivar).Date;
+                        DateTime fechaFin = Convert.ToDateTime(fechaFinvar).Date;
+                        Boolean disponibilidad = Convert.ToBoolean(estadovar);
+
+                        Debug.WriteLine("FECHAINI" + fechaInicio);
+
+                        List<String> listaPaquetes = new List<String>();
+
+                      //  listaPaquetes = MBuscarNombrePaquetesDeOferta(Int32.Parse(reader["ofe_ID"].ToString()));
+
+                        oferta = FabricaEntidad.InstanciarOferta(Int32.Parse(reader["idOferta"].ToString()), reader["nombreOferta"].ToString(),
+                                                                  listaPaquetes, float.Parse(reader["porcentaje"].ToString()),
+                                                                  fechaInicio, fechaFin, disponibilidad);
+                    }
+                    cmd.Dispose();
+                    conexion.Close();
+                    return oferta;
+                }
             }
             catch (SqlException ex)
             {

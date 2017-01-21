@@ -352,6 +352,20 @@ namespace BOReserva.Controllers.PatronComando
 
         }
 
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M11_COConsultarOferta
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M11_COConsultarOferta.
+        /// </returns>
+        public static Command<Entidad> crearM11ConsultarOferta(int id)
+        {
+
+            return new M11_COConsultarOferta(id);
+
+        }
+
     }
         #endregion
 }

@@ -75,30 +75,54 @@ namespace BOReserva.DataAccess.Domain
             }
 
         }
-/*
-        public Oferta MConsultarOferta(int id)
-        {
-            manejadorSQL consultar = new manejadorSQL();
-            return consultar.MMostrarOfertaBD(id);
-        }
 
-        public int MModificarOfertaBD(Oferta oferta, String id)
+        public Oferta(int idOferta, String nombreOferta, List<String> listaPaquetes, float porcentajeOferta,
+           DateTime fechaIniOferta, DateTime fechaFinOferta, Boolean estadoOferta)
         {
-            manejadorSQL modificar = new manejadorSQL();
-            return modificar.MModificarOfertaBD(oferta, id);
-        }
+            _idOferta = idOferta;
+            _nombreOferta = nombreOferta;
+            _porcentajeOferta = porcentajeOferta;
+            _fechaIniOferta = fechaIniOferta;
+            _fechaFinOferta = fechaFinOferta;
+            _estadoOferta = estadoOferta;
 
-        public List<CPaquete> MBuscarPaquetesAsociadosBD(String id)
-        {
-            manejadorSQL buscar = new manejadorSQL();
-            int idOferta = Int32.Parse(id);
-            return buscar.MBuscarPaquetesDeOferta(idOferta);
-        }
+            try
+            {
+                foreach (string item in listaPaquetes)  //por cada item en listapaquetes asiganar el 
+                {                                       //contenido a _nombrePaquete
+                    _nombrePaquete = _nombrePaquete + item;
+                }
+            }
+            catch (NullReferenceException e)
+            {
+                _nombrePaquete = "No tiene paquetes asociados";
+            }
 
-        public int MDesvincularPaqueteDeOfertaBD(int idPaquete) //METODO PARA MODIFICAR UN VEHICULO
-        {
-            manejadorSQL modificar = new manejadorSQL();
-            return modificar.MDesvincularPaqueteDeOfertaBD(idPaquete);
-        }*/
+        }
+        /*
+                public Oferta MConsultarOferta(int id)
+                {
+                    manejadorSQL consultar = new manejadorSQL();
+                    return consultar.MMostrarOfertaBD(id);
+                }
+
+                public int MModificarOfertaBD(Oferta oferta, String id)
+                {
+                    manejadorSQL modificar = new manejadorSQL();
+                    return modificar.MModificarOfertaBD(oferta, id);
+                }
+
+                public List<CPaquete> MBuscarPaquetesAsociadosBD(String id)
+                {
+                    manejadorSQL buscar = new manejadorSQL();
+                    int idOferta = Int32.Parse(id);
+                    return buscar.MBuscarPaquetesDeOferta(idOferta);
+                }
+
+                public int MDesvincularPaqueteDeOfertaBD(int idPaquete) //METODO PARA MODIFICAR UN VEHICULO
+                {
+                    manejadorSQL modificar = new manejadorSQL();
+                    return modificar.MDesvincularPaqueteDeOfertaBD(idPaquete);
+                }*/
     }
 }
