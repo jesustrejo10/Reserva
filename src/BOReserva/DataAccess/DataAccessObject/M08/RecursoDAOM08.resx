@@ -133,8 +133,8 @@
     <value>@aut_color</value>
     <comment>Procedimiento Atributo - colo de automovil</comment>
   </data>
-  <data name="aut_disponibilidad" xml:space="preserve">
-    <value>@aut_disponibilidad</value>
+  <data name="aut_disponibilida" xml:space="preserve">
+    <value>@aut_disponibilida</value>
     <comment>Procedimiento Atributo - disponibilidad del automovil</comment>
   </data>
   <data name="aut_fabricante" xml:space="preserve">
@@ -189,8 +189,8 @@
     <value>aut_color</value>
     <comment>Atributo - colo de automovil</comment>
   </data>
-  <data name="disponibilidad" xml:space="preserve">
-    <value>aut_disponibilidad</value>
+  <data name="disponibilida" xml:space="preserve">
+    <value>aut_disponibilida</value>
     <comment>Atributo - disponibilidad del automovil</comment>
   </data>
   <data name="fabricante" xml:space="preserve">
