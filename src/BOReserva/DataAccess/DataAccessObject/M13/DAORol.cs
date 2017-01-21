@@ -129,43 +129,43 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
         }
 
-        public CListaGenerica<CModulo_detallado> consultarPermisos(String modulo)
-        {
-            CListaGenerica<CModulo_detallado> modulo_detallado = new CListaGenerica<CModulo_detallado>();
-            SqlConnection conexion = Connection.getInstance(_connexionString);
-            try {
-                conexion.Close();
-                conexion.Open();
-                //query es un string que me devolvera la consulta 
-                System.Diagnostics.Debug.WriteLine(modulo);
-                String query = "SELECT mod_det_nombre,mod_det_url FROM Modulo_Detallado,Modulo_general WHERE mod_gen_id=fk_mod_gen_id and mod_gen_nombre='" + modulo + "'";
-                SqlCommand cmd = new SqlCommand(query, conexion);
-                SqlDataReader lector = cmd.ExecuteReader();
-                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
-                while (lector.Read())
-                {
-                    var entrada = new CModulo_detallado();
-                    entrada.Nombre = lector.GetSqlString(0).ToString();
-                    entrada.Url = lector.GetSqlString(1).ToString();
-                    modulo_detallado.agregarElemento(entrada);
+        //public CListaGenerica<CModulo_detallado> consultarPermisos(String modulo)
+        //{
+        //    CListaGenerica<CModulo_detallado> modulo_detallado = new CListaGenerica<CModulo_detallado>();
+        //    SqlConnection conexion = Connection.getInstance(_connexionString);
+        //    try {
+        //        conexion.Close();
+        //        conexion.Open();
+        //        //query es un string que me devolvera la consulta 
+        //        System.Diagnostics.Debug.WriteLine(modulo);
+        //        String query = "SELECT mod_det_nombre,mod_det_url FROM Modulo_Detallado,Modulo_general WHERE mod_gen_id=fk_mod_gen_id and mod_gen_nombre='" + modulo + "'";
+        //        SqlCommand cmd = new SqlCommand(query, conexion);
+        //        SqlDataReader lector = cmd.ExecuteReader();
+        //        //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+        //        while (lector.Read())
+        //        {
+        //            var entrada = new CModulo_detallado();
+        //            entrada.Nombre = lector.GetSqlString(0).ToString();
+        //            entrada.Url = lector.GetSqlString(1).ToString();
+        //            modulo_detallado.agregarElemento(entrada);
 
-                }
-                //cierro el lector
-                lector.Close();
-                //Cerrar la conexion
-                conexion.Close();
-                return modulo_detallado;
+        //        }
+        //        //cierro el lector
+        //        lector.Close();
+        //        //Cerrar la conexion
+        //        conexion.Close();
+        //        return modulo_detallado;
 
-            }
-            catch (SqlException e)
-            {
-                throw e;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
+        //    }
+        //    catch (SqlException e)
+        //    {
+        //        throw e;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw e;
+        //    }
+        //}
 
         public Entidad Consultar(Entidad e)
         {
@@ -209,7 +209,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
         }
 
-        public List<Entidad> ConsultarPermisos(int idPermiso)
+        public List<Entidad> ConsultarPermisos(int idRol)
         {
             List<Entidad> listapermisos;
             Entidad permiso;
@@ -220,7 +220,44 @@ namespace BOReserva.DataAccess.DataAccessObject
                 conexion.Close();
                 conexion.Open();
                 String sql = "select md.mod_det_nombre, md.mod_det_id from Modulo_Detallado md, Rol r, Rol_Modulo_Detallado rmd " +
-                    "where md.mod_det_id = rmd.fk_mod_det_id and r.rol_id = rmd.fk_rol_id and r.rol_id =" + idPermiso;
+                    "where md.mod_det_id = rmd.fk_mod_det_id and r.rol_id = rmd.fk_rol_id and r.rol_id =" + idRol;
+
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    listapermisos = new List<Entidad>();
+                    while (reader.Read())
+                    {
+                        int _idPermiso = Int32.Parse(reader["mod_det_id"].ToString());
+                        String _nombrePermiso = reader["mod_det_nombre"].ToString();
+                        permiso = FabricaEntidad.crearPermiso(_idPermiso, _nombrePermiso);
+                        listapermisos.Add(permiso);
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return listapermisos;
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+            }
+        }
+
+        public List<Entidad> ListarPermisos()
+        {
+            List<Entidad> listapermisos;
+            Entidad permiso;
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+
+            try
+            {
+                conexion.Close();
+                conexion.Open();
+                String sql = "select md.mod_det_nombre, md.mod_det_id from Modulo_Detallado md, Rol r, Rol_Modulo_Detallado rmd " +
+                    "where md.mod_det_id = rmd.fk_mod_det_id and r.rol_id = rmd.fk_rol_id";
 
                 SqlCommand cmd = new SqlCommand(sql, conexion);
                 using (SqlDataReader reader = cmd.ExecuteReader())
@@ -285,14 +322,129 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
         }
 
-        public Entidad Consultar(int id)
+        Entidad IDAO.Consultar(int id)
         {
-            throw new NotImplementedException();
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            Rol rol = new Rol();
+            try
+            {
+                conexion.Close();
+                conexion.Open();
+                String sql = "select r.rol_id, r.rol_nombre from Rol r where r.rol_id = " + id;
+
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    String nombreRol;
+                    int idRol;
+
+                    while (reader.Read())
+                    {
+                        idRol = Int32.Parse(reader["rol_id"].ToString());
+                        nombreRol = reader["rol_nombre"].ToString();
+
+                        rol = new Rol(
+                            idRol,
+                            reader["rol_nombre"].ToString()
+                        );
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return rol;
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+            }
         }
 
         public Entidad Modificar(Entidad e)
         {
             throw new NotImplementedException();
+        }
+
+        public String eliminarRol(int id)
+        {
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            try
+            {
+                conexion.Close();
+                eliminarPermiso(id);
+                conexion.Open();
+                String sql = "DELETE FROM Rol WHERE rol_id = " + id;
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                conexion.Close();
+                return "1";
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return ex.Message;
+            }
+        }
+
+        public String eliminarPermiso(int id)
+        {
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            try
+            {
+                conexion.Close();
+                conexion.Open();
+                String sql = "DELETE FROM Rol_Modulo_Detallado WHERE fk_rol_id in (SELECT rol_id from Rol where rol_id=" + id + ")";
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                conexion.Close();
+                return "1";
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return ex.Message;
+            }
+        }
+
+        public List<Entidad> consultarLosPermisosAsignados(int id)
+        {
+            List<Entidad> listapermisos;
+            Entidad permiso;
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            try
+            {
+                //Abrir la conexion
+                conexion.Open();
+                //query es un string que me devolvera la consulta 
+                String query = "SELECT mod_det_nombre FROM modulo_detallado,rol_modulo_detallado,rol where mod_det_id=fk_mod_det_id and fk_rol_id=rol_id and rol_nombre=" + id;
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                SqlDataReader reader = cmd.ExecuteReader();
+                listapermisos = new List<Entidad>();
+                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
+                while (reader.Read())
+                {
+                    int _idPermiso = Int32.Parse(reader["mod_det_id"].ToString());
+                    String _nombrePermiso = reader["mod_det_nombre"].ToString();
+                    permiso = FabricaEntidad.crearPermiso(_idPermiso, _nombrePermiso);
+                    listapermisos.Add(permiso);
+                }
+                //cierro el lector
+                reader.Close();
+                //Cerrar la conexion
+                conexion.Close();
+                return listapermisos;
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

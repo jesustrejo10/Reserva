@@ -9,12 +9,13 @@ namespace BOReserva.DataAccess.Domain
     {
         public String _nombre { get; set; }
 
-        public int _id { get; set; }
+        public int _idPermiso { get; set; }
 
         public Modulo modulo { get; set; }
 
-        public Permiso(int id, string nombre) : base(id)
+        public Permiso(int id, string nombre)
         {
+            this._idPermiso = id;
             this._nombre = nombre;
         }
 

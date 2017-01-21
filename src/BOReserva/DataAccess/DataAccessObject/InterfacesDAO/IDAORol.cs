@@ -14,5 +14,6 @@ namespace BOReserva.DataAccess.DAO
         List<Entidad> ConsultarRoles();
         List<Entidad> ConsultarPermisos(int id);
         Entidad ConsultarModulos(int id);
+        List<Entidad> ListarPermisos();
     }
 }

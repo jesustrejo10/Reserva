@@ -14,13 +14,11 @@ namespace BOReserva.Controllers.PatronComando
     /// <summary>
     /// Comando Visualizar Permisos
     /// </summary>
-    public class M13_COConsultarPermisos : Command<List<Entidad>>
+    public class M13_COListarPermisos : Command<List<Entidad>>
     {
-        private int id;
 
-        public M13_COConsultarPermisos(int idRol)
+        public M13_COListarPermisos()
         {
-            this.id = idRol;
         }
 
         /// <summary>
@@ -33,7 +31,7 @@ namespace BOReserva.Controllers.PatronComando
             try
             {
                 IDAORol daoRol = (IDAORol)FabricaDAO.instanciarDAORol();
-                listapermisos = daoRol.ConsultarPermisos(id);
+                listapermisos = daoRol.ListarPermisos();
             }
             catch (SqlException ex)
             {

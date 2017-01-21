@@ -24,7 +24,7 @@
                         {
                             foreach (BOReserva.DataAccess.Domain.Rol item in Model)
                             {
-                                <tr id="@item._nombreRol">
+                                <tr id="@item._idRol">
                                     <td>@item._nombreRol</td>
                                     @*<td>
                                         <table>
@@ -60,11 +60,11 @@
                                            $(".eliminar").click(function () {
                                             var r = confirm("Esta función no podrá ser revertida, ¿Está seguro de que desea continuar?")
                                             if (r) {
-                                                var identificador = $(this).closest("tr").attr("id");;
+                                                var identificador = $(this).closest("tr").attr("id");
                                                 jQuery.ajax({
                                                     type: "POST",
                                                     url: "/gestion_roles/eliminarRol",
-                                                    data: { _nombrerol: identificador }
+                                                    data: { _idRol: identificador }
                                                 }).done(function (data) {
                                                     var url = '/gestion_roles/M13_VisualizarRol';
                                                     var method = 'GET';
@@ -90,12 +90,12 @@
                                             }
                                         });
                                         $(".modificar").click(function () {
-                                            var identificador = $(this).parent().parent().parent().attr("id");
+                                            var identificador = $(this).closest("tr").attr("id");
                                             console.log(identificador);
                                             jQuery.ajax({
                                                 type: "GET",
                                                 url: "/gestion_roles/M13_ModificarRol",
-                                                data: { _rolnombre: identificador }
+                                                data: { _rolid: identificador }
                                             }).done(function (data) {
                                                 $("#contenido").empty();
                                                 $("#contenido").append(data);

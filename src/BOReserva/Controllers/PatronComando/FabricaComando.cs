@@ -156,30 +156,45 @@ namespace BOReserva.Controllers.PatronComando
 
         public static Command<String> crearM13_AgregarRolPermiso(Entidad e)
         {
-
             return new M13_COAgregarRolPermiso((Rol)e);
 
         }
-
         public static Command<List<Entidad>> crearM13_ConsultarRoles()
         {
-
             return new M13_COConsultarRoles();
 
         }
-
         public static Command<List<Entidad>> crearM13_ConsultarPermisos(int id)
         {
-
             return new M13_COConsultarPermisos(id);
-
         }
-
         public static Command<Entidad> crearM13_ConsultarModulos(int id)
         {
-
             return new M13_COConsultarModulos(id);
-
+        }
+        public static Command<List<Entidad>> crearM13_ListarPermisos()
+        {
+            return new M13_COListarPermisos();
+        }
+        public static Command<Entidad> crearM13_ConsultarRol(int id)
+        {
+            return new M13_COConsultarRol(id);
+        }
+        public static Command<String> crearM13_EliminarRol(Entidad rol, int id)
+        {
+            return new M13_COEliminarRol(rol, id);
+        }
+        public static Command<List<Entidad>> crearM13_ConsultarPermiso(int id)
+        {
+            return new M13_COConsultarPermiso(id);
+        }
+        public static Command<String> crearM13_EliminarPermisos(int id)
+        {
+            return new M13_COEliminarPermisos(id);
+        }
+        public static Command<String> crearM13_ConsultarPermisosAsignados(Entidad rol, int id)
+        {
+            return new M13_COConsultarPermisosAsociados(rol,id);
         }
         #endregion
 

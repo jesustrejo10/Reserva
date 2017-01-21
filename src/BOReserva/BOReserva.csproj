@@ -249,6 +249,12 @@
     <Compile Include="Controllers\PatronComando\M13\M13_COAgregarRol.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COAgregarRolPermiso.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COConsultarModulos.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COConsultarPermiso.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COConsultarPermisosAsociados.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COConsultarRol.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COEliminarPermisos.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COEliminarRol.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COListarPermisos.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COConsultarPermisos.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COConsultarRoles.cs" />
     <Compile Include="Controllers\PatronComando\M16_COAgregarReclamo.cs" />
