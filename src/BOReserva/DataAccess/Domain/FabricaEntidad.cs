@@ -3,7 +3,7 @@ using BOReserva.Models.gestion_hoteles;
 using BOReserva.Models.gestion_reclamos;
 using BOReserva.Models.gestion_restaurantes;
 using BOReserva.Models.gestion_roles;
-using BOReserva.DataAccess.Domain;
+using BOReserva.DataAccess.Domain.M06;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,8 +36,8 @@ namespace BOReserva.DataAccess.Domain
             int capacidad = model._capacidadHabitacion;
             String paginaWeb = model._paginaWeb;
             String email = model._email;
-
-            return new Hotel(nombre, direccion, email, paginaWeb, clasificacion, capacidad, city);
+            int precio = model._precioHabitacion;
+            return new Hotel(nombre, direccion, email, paginaWeb, clasificacion, capacidad, city,precio);
         }
 
         public static Entidad InstanciarHotel(CModificarHotel model, Entidad c)
@@ -71,6 +71,11 @@ namespace BOReserva.DataAccess.Domain
         public static Entidad InstanciarCiudad(int id, String nombre, int fkPais)
         {
             return new Ciudad(id,nombre,fkPais);
+        }
+
+        public static Entidad InstanciarHabitacion(int precio, int fkHotel)
+        {
+            return new Habitacion( precio, fkHotel);
         }
 
         #endregion 
@@ -201,11 +206,18 @@ namespace BOReserva.DataAccess.Domain
 
         #endregion
 
+        #region Modulo 13
         public static Entidad InstanciarRol(CRoles model)
         {
             String nombre = model.Nombre_rol;
 
             return new Rol(nombre);
+        }
+        public static Entidad InstanciarRolId(CRoles model)
+        {
+            int idRol = model.Id_Rol;
+
+            return new Rol(idRol);
         }
 
         public static Entidad InstanciarRolPermiso(String rol, String permiso)
@@ -218,10 +230,36 @@ namespace BOReserva.DataAccess.Domain
             return new Permiso();
         }
 
+        public static Entidad crearRol(int id, String nombre)
+        {
+            return new Rol(id, nombre);
+        }
+
+        public static Entidad crearPermiso(int id, String nombre)
+        {
+            return new Permiso(id, nombre);
+        }
+
+        public static Entidad crearModulo(int id, String nombre)
+        {
+            return new Modulo(id, nombre);
+        }
+        #endregion
+
         #region M06 GESTION COMIDA
 
         public static Entidad instanciarComida(string nombre, string tipo, int estatus, string descripcion) {
             return new Comida(nombre, tipo, estatus, descripcion);
+        }
+
+        public static Entidad instanciarComida()
+        {
+            return new Comida();
+        }
+
+        public static Entidad instanciarComidaVuelo(int id, string comida, string codigoVuelo, int cantidad)
+        {
+            return new ComidaVuelo(id, comida, codigoVuelo, cantidad);
         }
 
         #endregion
