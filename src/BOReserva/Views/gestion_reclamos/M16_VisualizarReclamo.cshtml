@@ -164,10 +164,13 @@
 
                                     $("#contenido").empty();
                                     $("#contenido").append(data);
+
                                 },
                                 error: function (jqXHR, textStatus, errorThrown) {
                                     alert(errorThrown);
                                 }
+                            }).done(function (data) {
+                                $('#' + id_fila).remove();
                             });
                     }).fail(function (data) {
                         console.log(data);

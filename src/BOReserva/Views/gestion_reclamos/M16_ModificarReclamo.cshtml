@@ -2,7 +2,7 @@
 
 <script src="~/Scripts/Scripts_Aviones/llamadas_generales.js"></script>
 
-@using (Html.BeginForm("guardarAvion", "gestion_aviones", null, FormMethod.Post, new { @id = "formGuardarAvion", @class = "form-horizontal" }))
+@using (Html.BeginForm("modificarReclamo", "gestion_reclamos", null, FormMethod.Post, new { @id = "formModificarReclamo", @class = "form-horizontal" }))
 {
 
     <div class="row">
@@ -100,20 +100,20 @@
     </div>
     <!-- /.row -->
 
-    @*<script>
-            $("#aceptarAvion").click(function (e) {
+    <script>
+            $("#modificarReclamo").click(function (e) {
                 e.preventDefault();
-                var form = $("#formGuardarAvion");
+                var form = $("#formModificarReclamo");
                 $.ajax({
-                    url: "gestion_aviones/guardarAvion",
+                    url: "gestion_reclamos/modificarReclamo",
                     data: form.serialize(),
                     type: 'POST',
                     success: function (data) {
-                        alert("Se guardo");
-                        $('#formGuardarAvion')[0].reset();
+                        alert("Se modificó el reclamo exitosamente");
+                        $('#formModificarReclamo')[0].reset();
                     }
                 });
             });
-        </script>*@
+        </script>
 }
-<!------------------- FIN DE SECCION DE AGREGAR AVION ---------------->
+<!------------------- FIN DE SECCION DE MODIFICAR RECLAMO---------------->

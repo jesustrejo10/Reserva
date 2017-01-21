@@ -124,33 +124,45 @@ namespace BOReserva.Controllers.PatronComando
         /// </summary>
         /// <param name="e">Recibe la una entidad de tipo reclamo</param>
         /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
-        public static Command<String> crearM16_AgregarReclamo(Entidad e) 
-        {
-            return new M16_COAgregarReclamo((Reclamo)e);
-        }
         public static Command<String> crearM16AgregarReclamo(Entidad e)
         {
-
             return new M16_COAgregarReclamo((Reclamo)e);
-
         }
+        /// <summary>
+        /// Método para instanciar el comando para consultar reclamos
+        /// </summary>
+        /// <returns>retorna el comando para consultar todos los reclamos</returns>
         public static Command<Dictionary<int, Entidad>> crearM16VisualizarReclamos()
         {
-
             return new M16_COConsultarReclamo();
-
         }
+        /// <summary>
+        /// Método para instanciar el comando Consultar Usuario
+        /// </summary>
+        /// <param name="idReclamo"> recibe como parámetro el id de un reclamo</param>
+        /// <returns>retorna el comando para consultar un reclamo a detalle</returns>
         public static Command<Entidad> crearM16ConsultarUsuario(int idReclamo)
         {
-
             return new M16_COConsultarReclamoDetalle(idReclamo);
-
         }
-
+        /// <summary>
+        /// Método para instanciar el comando M16_ModificarReclamo
+        /// </summary>
+        /// <param name="reclamo">recibe la entidad reclamo</param>
+        /// <param name="idReclamo">recibe el id de un reclamo</param>
+        /// <returns>retorna el comando para modificar un reclamo</returns>
+        public static Command<String> creaM16ModificarReclamo(Entidad reclamo, int idReclamo) 
+        {
+            return new M16_COModificarReclamo(reclamo, idReclamo);
+        }
+        /// <summary>
+        /// Método para instanciar el comando M16_EliminarReclamo
+        /// </summary>
+        /// <param name="id">recibe el id del reclamo</param>
+        /// <returns>retorna el comando para eliminar un reclamo</returns>
         public static Command<String> crearM16EliminarReclamo(int id)
         {
             return new M16_COEliminarReclamo(id); 
-
         }
 
         #endregion
