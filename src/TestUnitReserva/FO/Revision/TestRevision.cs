@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace TestUnitReserva.FO.Revision
 {
-    using CRevision = FOReserva.DataAccess.Domain.Revision;
+    using EntidadRevision = FOReserva.DataAccess.Domain.Revision;
     [TestClass]
     public class TestRevision
     {
@@ -24,7 +24,7 @@ namespace TestUnitReserva.FO.Revision
         [TestMethod]
         public void TestRevisionAgregarRevisionHotel()
         {
-            var revision = new CRevision
+            var revision = new EntidadRevision
             {
                 Id = 84,
                 Mensaje = "Test RHotel.",
