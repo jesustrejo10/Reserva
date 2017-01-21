@@ -386,5 +386,16 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         }
 
         public static string procedimientoModificarAutomovil { get; internal set; }
+
+        public static System.Data.DataColumn pais { get; set; }
+
+        public static System.Data.DataColumn ciudad { get; set; }
+
+        public static string MensajeInicioMetodoLogger { get; set; }
+
+        public static string MensajeFinMetodoLogger { get; set; }
+
+        public static string MensajeErrorFormato { get; set; }
+        public static string disponibilidad { get; internal set; }
     }
 }

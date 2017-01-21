@@ -21,6 +21,8 @@ namespace BOReserva.Controllers.PatronComando.M08
 
         #region Constructor
 
+        public M08_COAgregarAutomovil(){}
+
         public M08_COAgregarAutomovil(Entidad _objeto)
         {
             this._objeto = _objeto;
