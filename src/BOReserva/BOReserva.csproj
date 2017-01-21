@@ -211,6 +211,8 @@
     <Compile Include="Controllers\PatronComando\M05\M05_COEliminarBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COModificarPasajero.cs" />
     <Compile Include="Controllers\PatronComando\M06\M06_COAgregarComida.cs" />
+    <Compile Include="Controllers\PatronComando\M06\M06_COConsultarComidas.cs" />
+    <Compile Include="Controllers\PatronComando\M06\M06_COConsultarComidasVuelos.cs" />
     <Compile Include="Controllers\PatronComando\M08\M08_COActivarAutomovil.cs" />
     <Compile Include="Controllers\PatronComando\M08\M08_COBuscarAutomovil.cs" />
     <Compile Include="Controllers\PatronComando\M08\M08_COAgregarAutomovil.cs" />
@@ -294,6 +296,7 @@
     <Compile Include="DataAccess\Domain\Contratos\ICiudad.cs" />
     <Compile Include="DataAccess\Domain\Lugar.cs" />
     <Compile Include="DataAccess\Domain\M06\Comida.cs" />
+    <Compile Include="DataAccess\Domain\M06\ComidaVuelo.cs" />
     <Compile Include="DataAccess\Domain\Pasajero.cs" />
     <Compile Include="DataAccess\Domain\Permiso.cs" />
     <Compile Include="DataAccess\Domain\Reclamo.cs" />

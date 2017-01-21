@@ -319,22 +319,28 @@ namespace BOReserva.Controllers.PatronComando
 
         public enum comandosComida
         {
-            CREAR,
-            ELIMINAR,
-            ACTUALIZAR,
-            CONSULTAR
+            CREAR_COMIDA,
+            ELIMINAR_COMIDA,
+            ACTUALIZAR_COMIDA,
+            CONSULTAR_COMIDAS,
+            CONSULTAR_COMIDAS_VUELOS
         }
 
         public static object gestionComida(comandosComida _comando, Entidad _objeto)
         {
             switch (_comando)
             {
-                case comandosComida.CREAR:
+                case comandosComida.CREAR_COMIDA:
                     return new M06_COAgregarComida(_objeto);
+                case comandosComida.CONSULTAR_COMIDAS:
+                    return new M06_COConsultarComidas();
+                case comandosComida.CONSULTAR_COMIDAS_VUELOS:
+                    return new M06_COConsultarComidasVuelos();
                 default:
                     return new M06_COAgregarComida(_objeto);
             }
         }
+
         #endregion
     }
 }
