@@ -241,9 +241,17 @@
     <value>M08_Consultar_Lugar</value>
     <comment>Nombre del Procedimiento Consultar en Base de Datos Tabla Lugar</comment>
   </data>
-  <data name="procedimientoModificar" xml:space="preserve">
+  <data name="procedimientoModificarAutomovil" xml:space="preserve">
     <value>M08_ModificarAutomovil</value>
     <comment>Nombre del Procedimiento Modificar en Base de Datos Tabla Automovil</comment>
+  </data>
+  <data name="procedimientoConsultarAutomovilMatricula" xml:space="preserve">
+    <value>M08_ConsultarAutomovilMatricula</value>
+    <comment>Nombre del Procedimiento para consultar Base de Datos Tabla Automovil por matricula</comment>
+  </data>
+  <data name="procedimientoEliminarAutomovil" xml:space="preserve">
+    <value>M08_EliminarAutomovil</value>
+    <comment>Nombre del Procedimiento Eliminar de la Base de Datos Tabla Automovil</comment>
   </data>
   <data name="tipovehiculo" xml:space="preserve">
     <value>aut_tipovehiculo</value>
@@ -253,12 +261,8 @@
     <value>aut_transmision</value>
     <comment>Atributo - tipo de transmision del automovil</comment>
   </data>
-  <data name="procedimientoConsultarAutomovilMatricula" xml:space="preserve">
-    <value>M08_ConsultarAutomovilMatricula</value>
-    <comment>Nombre del Procedimiento para consultar Base de Datos Tabla Automovil por matricula</comment>
-  </data>
-  <data name="procedimientoEliminarAutomovil" xml:space="preserve">
-    <value>M08_EliminarAutomovil</value>
-    <comment>Nombre del Procedimiento Eliminar de la Base de Datos Tabla Automovil</comment>
+  <data name="procedimientoCambiarEstatus" xml:space="preserve">
+    <value>M08_CambiarEstatus</value>
+    <comment>Nombre del Procedimiento cambia en Base de Datos Tabla Automovil el estatus de la fila</comment>
   </data>
 </root>

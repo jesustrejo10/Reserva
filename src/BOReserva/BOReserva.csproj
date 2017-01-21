@@ -210,6 +210,7 @@
     <Compile Include="Controllers\M04\gestion_vueloController.cs" />
     <Compile Include="Controllers\PatronComando\Command.cs" />
     <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COConsultarBoletos.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COModificarBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COVerificarDisponibilidadBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COMostrarIdaVuelta.cs" />
@@ -230,7 +231,7 @@
     <Compile Include="Controllers\PatronComando\M08\M08_COActivarAutomovil.cs" />
     <Compile Include="Controllers\PatronComando\M08\M08_COBuscarAutomovil.cs" />
     <Compile Include="Controllers\PatronComando\M08\M08_COAgregarAutomovil.cs" />
-    <Compile Include="Controllers\PatronComando\M08\M08_CODesactivarAutomovil.cs" />
+    <Compile Include="Controllers\PatronComando\M08\M08_COEliminarAutomovil.cs" />
     <Compile Include="Controllers\PatronComando\M08\M08_COListarAutomovil.cs" />
     <Compile Include="Controllers\PatronComando\M08\M08_COModificarAutomovil.cs" />
     <Compile Include="Controllers\PatronComando\M09\IM09_COObtenerPaises.cs" />
@@ -268,17 +269,31 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\List.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COVisualizarHoteles.cs" />
-    <Compile Include="Controllers\PatronComando\M13_COAgregarRol.cs" />
-    <Compile Include="Controllers\PatronComando\M13_COAgregarRolPermiso.cs" />
+    <Compile Include="Controllers\PatronComando\M10\M10_COListarRestaurantId.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COModificarRol.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COAgregarRol.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COAgregarRolPermiso.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COConsultarModulos.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COConsultarPermiso.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COConsultarPermisosAsociados.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COConsultarRol.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COEliminarPermisos.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COEliminarRol.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COListarPermisos.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COConsultarPermisos.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COConsultarRoles.cs" />
     <Compile Include="Controllers\PatronComando\M16\M16_COAgregarReclamo.cs" />
     <Compile Include="Controllers\PatronComando\M16\M16_COConsultarReclamo.cs" />
+    <Compile Include="Controllers\PatronComando\M16\M16_COConsultarReclamoDetalle.cs" />
+    <Compile Include="Controllers\PatronComando\M16\M16_COActualizarReclamo.cs" />
+    <Compile Include="Controllers\PatronComando\M16\M16_COEliminarReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOBoleto.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOCiudad.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOLugar.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOPasajero.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOPais.cs" />
-    <Compile Include="DataAccess\DataAccessObject\DAOReclamo.cs" />
-    <Compile Include="DataAccess\DataAccessObject\DAORol.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M16\DAOReclamo.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M13\DAORol.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOAutomovil.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCiudad.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOHabitacion.cs" />
@@ -301,6 +316,11 @@
     <Compile Include="DataAccess\DataAccessObject\M08\DAOAutomovil.cs" />
     <Compile Include="DataAccess\DataAccessObject\M08\RecursoDAOM08.Designer.cs" />
     <Compile Include="DataAccess\DataAccessObject\M09\DAOHotel.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M09\RecursoDAOM09.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RecursoDAOM09.resx</DependentUpon>
+    </Compile>
     <Compile Include="DataAccess\DataAccessObject\M10\RecursoDAOM10.Designer.cs">
       <DependentUpon>RecursoDAOM10.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -310,15 +330,21 @@
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORestaurant.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOBoleto.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPasajero.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M16\M16Reclamos.Designer.cs">
+      <DependentUpon>M16Reclamos.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="DataAccess\Domain\Avion.cs" />
     <Compile Include="DataAccess\Domain\Boleto.cs" />
     <Compile Include="DataAccess\Domain\BoletoVuelo.cs" />
     <Compile Include="DataAccess\Domain\Habitacion.cs" />
     <Compile Include="DataAccess\Domain\Lugar.cs" />
+    <Compile Include="DataAccess\Domain\M13\Modulo.cs" />
     <Compile Include="DataAccess\Domain\M06\Comida.cs" />
     <Compile Include="DataAccess\Domain\M06\ComidaVuelo.cs" />
     <Compile Include="DataAccess\Domain\Pasajero.cs" />
-    <Compile Include="DataAccess\Domain\Permiso.cs" />
+    <Compile Include="DataAccess\Domain\M13\Permiso.cs" />
     <Compile Include="DataAccess\Domain\Reclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAO.cs" />
     <Compile Include="DataAccess\DataAccessObject\M04\DAOVuelo.cs" />
@@ -336,7 +362,7 @@
     <Compile Include="DataAccess\Domain\FabricaEntidad.cs" />
     <Compile Include="DataAccess\Domain\Hotel.cs" />
     <Compile Include="DataAccess\Domain\Pais.cs" />
-    <Compile Include="DataAccess\Domain\Rol.cs" />
+    <Compile Include="DataAccess\Domain\M13\Rol.cs" />
     <Compile Include="DataAccess\Domain\RutaBoleto.cs" />
     <Compile Include="DataAccess\Domain\Ruta.cs" />
     <Compile Include="DataAccess\Domain\Usuario.cs" />
@@ -1743,6 +1769,10 @@
     <EmbeddedResource Include="DataAccess\DataAccessObject\M08\RecursoDAOM08.resx" />
     <EmbeddedResource Include="DataAccess\DataAccessObject\M06\RecursoM06.resx" />
     <EmbeddedResource Include="DataAccess\DataAccessObject\M06\Resource1.resx" />
+    <EmbeddedResource Include="DataAccess\DataAccessObject\M09\RecursoDAOM09.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecursoDAOM09.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="DataAccess\DataAccessObject\M10\RecursoDAOM10.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoDAOM10.Designer.cs</LastGenOutput>
@@ -1750,6 +1780,10 @@
     <EmbeddedResource Include="DataAccess\DataAccessObject\M04\RecursoVuelo.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoVuelo.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataAccess\DataAccessObject\M16\M16Reclamos.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>M16Reclamos.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="DataAccess\Model\RecursoBD.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -1788,7 +1822,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:10209/</IISUrl>
+          <IISUrl>http://localhost:14139/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace FOReserva.Controllers.PatronComando.M16
+namespace BOReserva.DataAccess.Model
 {
-    public class M16_COConsultarReclamo
+    public class M09_Exception
     {
     }
 }

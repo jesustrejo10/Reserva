@@ -81,6 +81,11 @@ namespace BOReserva.DataAccess.Domain
         #endregion 
 
         #region M16_GestionReclamos
+
+        public static Entidad InstanciarReclamo()
+        {
+            return new Reclamo();
+        }
         public static Entidad InstanciarReclamo(String tituloReclamo, String detalleReclamo, String fechaReclamo, int estadoReclamo, int usuario)
         {
             return new Reclamo(tituloReclamo, detalleReclamo, fechaReclamo, estadoReclamo, usuario);
@@ -110,6 +115,15 @@ namespace BOReserva.DataAccess.Domain
 
             }
             return lista;
+        }
+
+        /// <summary>
+        /// Instanciacion para una lista vacia
+        /// </summary>
+        /// <returns>Lista de reclamos vacia</returns>
+        public static List<Reclamo> InstanciarListaReclamo()
+        {
+            return new List<Reclamo>();
         }
 #endregion
 
@@ -201,11 +215,18 @@ namespace BOReserva.DataAccess.Domain
 
         #endregion
 
+        #region Modulo 13
         public static Entidad InstanciarRol(CRoles model)
         {
             String nombre = model.Nombre_rol;
 
             return new Rol(nombre);
+        }
+        public static Entidad InstanciarRolId(CRoles model)
+        {
+            int idRol = model.Id_Rol;
+
+            return new Rol(idRol);
         }
 
         public static Entidad InstanciarRolPermiso(String rol, String permiso)
@@ -217,6 +238,22 @@ namespace BOReserva.DataAccess.Domain
         {
             return new Permiso();
         }
+
+        public static Entidad crearRol(int id, String nombre)
+        {
+            return new Rol(id, nombre);
+        }
+
+        public static Entidad crearPermiso(int id, String nombre)
+        {
+            return new Permiso(id, nombre);
+        }
+
+        public static Entidad crearModulo(int id, String nombre)
+        {
+            return new Modulo(id, nombre);
+        }
+        #endregion
 
         #region M06 GESTION COMIDA
 

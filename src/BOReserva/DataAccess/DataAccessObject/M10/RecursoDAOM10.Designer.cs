@@ -187,6 +187,15 @@ namespace BOReserva.DataAccess.DataAccessObject.M10 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to M10_ListarRestaurante.
+        /// </summary>
+        internal static string procedimientoListarRestaurante {
+            get {
+                return ResourceManager.GetString("procedimientoListarRestaurante", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to rst_descripcion.
         /// </summary>
         internal static string restaurantDescripcion {
