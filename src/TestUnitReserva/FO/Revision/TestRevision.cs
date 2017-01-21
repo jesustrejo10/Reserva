@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace TestUnitReserva.FO.Revision
 {
+    using CRevision = FOReserva.DataAccess.Domain.Revision;
     [TestClass]
     public class TestRevision
     {
@@ -23,7 +24,7 @@ namespace TestUnitReserva.FO.Revision
         [TestMethod]
         public void TestRevisionAgregarRevisionHotel()
         {
-            var revision = new FOReserva.DataAccess.Domain.Revision
+            var revision = new CRevision
             {
                 Id = 84,
                 Mensaje = "Test RHotel.",
@@ -33,9 +34,8 @@ namespace TestUnitReserva.FO.Revision
                 Referencia = new FOReserva.DataAccess.Domain.Entidad(37)
             };
 
-            //var result = DAORevision.Singleton().GuardarRevision(revision);
-            //Debug.WriteLine($"Message: {result.Message}");
-            //Assert.IsTrue(result.ProcessFinishCorrectly);
+            var result = DAORevision.Singleton().GuardarRevision(revision);
+            Assert.IsTrue(result);
         }
     }
 }

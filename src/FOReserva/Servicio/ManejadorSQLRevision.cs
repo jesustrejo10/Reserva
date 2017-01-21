@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using FOReserva.Models.Revision;
 using FOReserva.Models.Restaurantes;
 using System.Data.SqlClient;
-using static FOReserva.Models.Revision.CRevision;
-//using FOReserva.Models.Revision.CRevision;
 
 namespace FOReserva.Servicio
 {

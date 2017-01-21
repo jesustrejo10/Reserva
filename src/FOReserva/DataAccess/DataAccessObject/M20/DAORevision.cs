@@ -23,7 +23,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M20
         #endregion
 
         #region Implementacion DAORevision.        
-        public void GuardarRevision(Entidad revision)
+        public bool GuardarRevision(Entidad revision)
         {            
             List<Parametro> parametros = null;
             Revision iRevision = null;
@@ -43,16 +43,17 @@ namespace FOReserva.DataAccess.DataAccessObject.M20
                 parametros.Add(FabricaDAO.asignarParametro(RecursoDAOM20.parametroReferencia, SqlDbType.Int, $"{iRevision.Referencia._id}", false));                
                 
                 EjecutarStoredProcedure(RecursoDAOM20.procedimientoGuardarRevision, parametros);
-                
+                return true;
             }
             catch (Exception)
             {
 
                 throw;
             }
+            return false;
         }
 
-        public void AplicarValoracion(Entidad revision)
+        public bool AplicarValoracion(Entidad revision)
         {
             throw new NotImplementedException();
         }

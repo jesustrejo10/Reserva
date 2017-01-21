@@ -14,7 +14,7 @@ namespace FOReserva.DataAccess.DataAccessObject.Common.Interface
 {
     public interface IDAORevision
     {
-        void GuardarRevision(Entidad revision);
-        void AplicarValoracion(Entidad valoracion);
+        bool GuardarRevision(Entidad revision);
+        bool AplicarValoracion(Entidad valoracion);
     }
 }
