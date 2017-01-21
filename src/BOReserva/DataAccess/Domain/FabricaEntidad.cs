@@ -360,7 +360,7 @@ namespace BOReserva.DataAccess.Domain
         /// <param name="model"></param>
         /// <returns></returns>
 
-        public static Entidad InstanciarOferta(String idOferta, String nombreOferta, List<String> listaPaquetes, 
+        public static Entidad InstanciarOferta(int idOferta, String nombreOferta, List<String> listaPaquetes, 
                                                float porcentajeOferta, DateTime fechaIniOferta, DateTime fechaFinOferta, 
                                                Boolean estadoOferta)
         {

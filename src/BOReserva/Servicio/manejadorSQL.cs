@@ -2128,7 +2128,7 @@ namespace BOReserva.Servicio
         /* FIN MODULO 8 GESTION DE AUTOMOVILES*/
 
         //Procedimiento del Modulo 11 para agregar ofertas a la base de datos.
-        public Boolean agregarOferta(CAgregarOferta model)
+      /*  public Boolean agregarOferta(CAgregarOferta model)
         {
             try
             {
@@ -2154,7 +2154,7 @@ namespace BOReserva.Servicio
                 return false;
             }
 
-        }
+        } */
 
         //Procedimiento del Modulo 11 para agregar paquetes a la base de datos.
         public Boolean agregarPaquete(CPaquete paquete)
@@ -2265,7 +2265,7 @@ namespace BOReserva.Servicio
         }
 
 
-        public List<COferta> MListarOfertasBD()
+       /* public List<COferta> MListarOfertasBD()
         {
             List<COferta> listaofertas = new List<COferta>();
             try
@@ -2306,10 +2306,10 @@ namespace BOReserva.Servicio
                 conexion.Close();
                 return null;
             }
-        }
+        }*/
 
 
-        public COferta MMostrarOfertaBD(int id)
+        /*public COferta MMostrarOfertaBD(int id)
         {
             COferta oferta = null;
             try
@@ -2347,7 +2347,7 @@ namespace BOReserva.Servicio
                 conexion.Close();
                 return null;
             }
-        }
+        }*/
 
 
         public List<String> MBuscarNombrePaquetesDeOferta(int idOferta)
