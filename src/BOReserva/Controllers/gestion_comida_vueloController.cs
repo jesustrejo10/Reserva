@@ -44,28 +44,6 @@ namespace BOReserva.Controllers
             }
         }
 
-        [HttpPost]
-        public JsonResult guardarPlatoVuelo(CComida model)
-        {
-            int id = model._id;
-            Console.WriteLine(">>>>>>>>>>>>>>ID:"+id);
-            string nombrePlato = model._nombrePlato;
-            int cantidadPlatos = model._cantidad;
-            Entidad _comida = FabricaEntidad.instanciarComidaVuelo(id, nombrePlato, cantidadPlatos);
-            Command<bool> comando = (Command<bool>)FabricaComando.gestionComida(FabricaComando.comandosComida.CREAR_COMIDA_VUELO, _comida);
-
-            if (comando.ejecutar())
-            {
-                return (Json(true, JsonRequestBehavior.AllowGet));
-            }
-            else
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                string error = "Error agregando comida al vuelo.";
-                return Json(error);
-            }
-        }
-
         //--------------------------------------------------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------------------------------------------------
@@ -77,28 +55,6 @@ namespace BOReserva.Controllers
             List<CVuelo> vuelos = new List<CVuelo>();
             vuelos = sql.listarVuelosEnBD();
             return PartialView(vuelos);
-        }
-
-        public ActionResult M06_AgregarComidaVuelo(int id)
-        {
-            List<Entidad> listaComidas = null;
-
-            Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.gestionComida(FabricaComando.comandosComida.CONSULTAR_COMIDAS, null);
-
-            listaComidas = comando.ejecutar();
-
-            if (listaComidas != null)
-            {
-                ViewBag.idVuelo = id;
-                ViewBag.listaComidas = listaComidas;
-                return PartialView();
-            }
-            else
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                string error = "Error consultando comidas.";
-                return Json(error);
-            }
         }
 
         public ActionResult M06_ConsultarComida(int id)

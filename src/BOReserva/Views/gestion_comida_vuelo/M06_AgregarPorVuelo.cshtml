@@ -74,8 +74,8 @@
         var identificador = $(this).parent().parent().parent().attr("id");
         jQuery.ajax({
             type: "GET",
-            url: "/gestion_comida_vuelo/M06_AgregarComidaVuelo",
-            data: { id: identificador}
+            url: "/gestion_vuelo/M04_GestionVuelo_Visualizar",
+            data: { id: identificador }
         }).done(function (data) {
             $("#contenido").empty();
             $("#contenido").append(data);

@@ -342,7 +342,6 @@ namespace BOReserva.Controllers.PatronComando
         public enum comandosComida
         {
             CREAR_COMIDA,
-            CREAR_COMIDA_VUELO,
             ELIMINAR_COMIDA,
             ACTUALIZAR_COMIDA,
             CONSULTAR_COMIDAS,
@@ -355,8 +354,6 @@ namespace BOReserva.Controllers.PatronComando
             {
                 case comandosComida.CREAR_COMIDA:
                     return new M06_COAgregarComida(_objeto);
-                case comandosComida.CREAR_COMIDA_VUELO:
-                    return new M06_COAgregarComidaVuelo(_objeto);
                 case comandosComida.CONSULTAR_COMIDAS:
                     return new M06_COConsultarComidas();
                 case comandosComida.CONSULTAR_COMIDAS_VUELOS:

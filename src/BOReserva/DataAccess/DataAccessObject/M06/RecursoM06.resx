@@ -149,23 +149,13 @@
     <value>com_vue_cantidad</value>
     <comment>cantidad de comidas_vuelo</comment>
   </data>
-  <data name="com_vue_cantidad_insertar" xml:space="preserve">
-    <value>@com_vue_cantidad</value>
-  </data>
   <data name="com_vue_id" xml:space="preserve">
     <value>com_vue_id</value>
     <comment>id de la tabla comida_vuelo</comment>
   </data>
-  <data name="com_vue_id_insertar" xml:space="preserve">
-    <value>@com_vue_id</value>
-  </data>
   <data name="procedimientoAgregarComida" xml:space="preserve">
     <value>M06_AgregarComida</value>
     <comment>nombre del procedimiento de agregar comida desde la base de datos</comment>
-  </data>
-  <data name="procedimientoAgregarComidaVuelo" xml:space="preserve">
-    <value>M06_AgregarComidaVuelo</value>
-    <comment>agrega una comida a un vuelo</comment>
   </data>
   <data name="procedimientoConsultarComidas" xml:space="preserve">
     <value>M06_ConsultarComidas</value>
