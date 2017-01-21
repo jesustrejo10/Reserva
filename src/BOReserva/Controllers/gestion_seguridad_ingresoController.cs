@@ -6,16 +6,20 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.SqlClient;
+using log4net;
+using log4net.Config;
+using BOReserva.DataAccess.Domain;
+using BOReserva.Excepciones;
 
-
-namespace BOReserva.Content.Controllers
+namespace BOReserva.Controllers
 {
     public class gestion_seguridad_ingresoController : Controller
     {
         //
         // GET: /gestion_seguridad_ingreso/
 
-           
+        private static readonly ILog logger = LogManager.GetLogger(typeof(gestion_seguridad_ingresoController));
+
         [HttpPost]
         public ActionResult M01_Login(string correo, string contraseña)
         {
@@ -41,8 +45,8 @@ namespace BOReserva.Content.Controllers
 
             try
             {
-           
-                System.Diagnostics.Debug.WriteLine("Correo " + correo + " contrasena " + contraseña);
+                BasicConfigurator.Configure();
+                logger.Debug("Correo " + correo + " contrasena " + contraseña);
                 ingreso = ingreso.verificarUsuario(correo, contraseña);
                 System.Diagnostics.Debug.WriteLine(correo.Equals("reserva@reserva.com"));
                
@@ -65,6 +69,10 @@ namespace BOReserva.Content.Controllers
                 }
               
             }
+            catch(ExceptionReserva e)
+            {
+                TempData["Mensaje"] = e.Message;
+            }
             catch (Cvalidar_usuario_Exception e)
             {
                 TempData["Mensaje"] = e.Message;
@@ -82,21 +90,18 @@ namespace BOReserva.Content.Controllers
             {
                 TempData["Mensaje"] = "Conexion fallida a Base de Datos Contacte Administrador";
             }
-            catch (Exception e) { } 
+            catch (Exception e)
+            {
+                TempData["Mensaje"] = "Otra excepcion: " + e.Message;
+            } 
             return RedirectToAction("M01_Login", "gestion_seguridad_ingreso");
         }
-
-
-   
 
         public ActionResult M01_Logout()
         {
             Session.Clear();
             return RedirectToAction("Index", "Home");
         }
-
-
-
 
         public ActionResult M01_Login()
         {
@@ -116,7 +121,56 @@ namespace BOReserva.Content.Controllers
             return View("M01_Landing", "~/Views/Shared/_Layout.cshtml",model);
         }
 
+        #region Metodos Estaticos
 
-         
+        public static Usuario UsuarioActual()
+        {
+            var estado_sesion = System.Web.HttpContext.Current.Session["Cgestion_seguridad_ingreso"] as Cgestion_seguridad_ingreso;
+            if (estado_sesion != null)
+            {
+                var respuesta = new Usuario()
+                {
+                    id = estado_sesion.idUsuario,
+                    rol = estado_sesion.rolUsuario,
+                    nombre = estado_sesion.nombreUsuarioTexto,
+                    apellido = estado_sesion.apellidoUsuarioTexto,
+                    correo = estado_sesion.correoCampoTexto
+                };
+                return respuesta;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static int IDUsuarioActual()
+        {
+            var estado_sesion = System.Web.HttpContext.Current.Session["Cgestion_seguridad_ingreso"] as Cgestion_seguridad_ingreso;
+            if (estado_sesion != null)
+            {
+                return estado_sesion.idUsuario;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        public static int IDRolUsuarioActual()
+        {
+            var estado_sesion = System.Web.HttpContext.Current.Session["Cgestion_seguridad_ingreso"] as Cgestion_seguridad_ingreso;
+            if (estado_sesion != null)
+            {
+                return estado_sesion.rolUsuario;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        #endregion
+
     }
 }

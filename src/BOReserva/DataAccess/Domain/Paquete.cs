@@ -63,14 +63,16 @@ namespace BOReserva.DataAccess.Domain
         //_estadoPaquete nos indica si el paquete está activo o no
         public bool _estadoPaquete { get; set; } 
 
-       public Paquete (int idpaquete, String nombrepaquete, float preciopaquete, String idauto, int idrestaurante,
-                       int idhotel, int idcrucero, int idvuelo, DateTime fechainiauto, DateTime fechainirest,
-                       DateTime fechainihotel, DateTime fechainicruc, DateTime fechainivuelo, DateTime fechafinauto,
-                       DateTime fechafinrest, DateTime fechafinhotel, DateTime fechafincruc, 
-                       DateTime fechafinvuelo)
+        //Constructor de Paquete
+       public Paquete (int idpaquete, String nombrepaquete, float preciopaquete, String idauto, int? idrestaurante,
+                       int? idhotel, int? idcrucero, int? idvuelo, DateTime? fechainiauto, DateTime? fechainirest,
+                       DateTime? fechainihotel, DateTime? fechainicruc, DateTime? fechainivuelo, 
+                       DateTime? fechafinauto, DateTime? fechafinrest, DateTime? fechafinhotel, 
+                       DateTime? fechafincruc, DateTime? fechafinvuelo, bool estadoPaquete)
         {
 
             this._id = idpaquete;
+            this._precioPaquete = preciopaquete;
             this._nombrePaquete = nombrepaquete;
             this._idAuto = idauto;
             this._idRestaurante = idrestaurante;
@@ -87,7 +89,37 @@ namespace BOReserva.DataAccess.Domain
             this._fechaFinHotel = fechafinhotel;
             this._fechaFinCruc = fechafincruc;
             this._fechaFinVuelo = fechafinvuelo;
+            this._estadoPaquete = estadoPaquete;
            
         }
+
+       //Constructor de Paquete
+       public Paquete(String nombrepaquete, float preciopaquete, String idauto, int? idrestaurante,
+                       int? idhotel, int? idcrucero, int? idvuelo, DateTime? fechainiauto, DateTime? fechainirest,
+                       DateTime? fechainihotel, DateTime? fechainicruc, DateTime? fechainivuelo,
+                       DateTime? fechafinauto, DateTime? fechafinrest, DateTime? fechafinhotel,
+                       DateTime? fechafincruc, DateTime? fechafinvuelo, bool estadoPaquete)
+       {
+
+           this._nombrePaquete = nombrepaquete;
+           this._precioPaquete = preciopaquete;
+           this._idAuto = idauto;
+           this._idRestaurante = idrestaurante;
+           this._idHotel = idhotel;
+           this._idCrucero = idcrucero;
+           this._idVuelo = idvuelo;
+           this._fechaIniAuto = fechainiauto;
+           this._fechaIniRest = fechainirest;
+           this._fechaIniHotel = fechainihotel;
+           this._fechaIniCruc = fechainicruc;
+           this._fechaIniVuelo = fechainivuelo;
+           this._fechaFinAuto = fechafinauto;
+           this._fechaFinRest = fechainirest;
+           this._fechaFinHotel = fechafinhotel;
+           this._fechaFinCruc = fechafincruc;
+           this._fechaFinVuelo = fechafinvuelo;
+           this._estadoPaquete = estadoPaquete;
+
+       }
     }
 }

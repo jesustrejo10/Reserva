@@ -1,14 +1,17 @@
 ﻿using BOReserva.DataAccess.DAO;
+using BOReserva.DataAccess.DataAccessObject.M09;
 using BOReserva.DataAccess.DataAccessObject.M01;
 using BOReserva.DataAccess.DataAccessObject.M11;
 using BOReserva.DataAccess.Model;
 using BOReserva.M10;
+using BOReserva.DataAccess.DataAccessObject;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 
 namespace BOReserva.DataAccess.DataAccessObject
 
@@ -37,12 +40,24 @@ namespace BOReserva.DataAccess.DataAccessObject
         {
             return new DAOCiudad();
         }
+
+        public static DAO instanciarDaoHabitacion()
+        {
+            return new DAOHabitacion();
+        }
         #endregion
 
+        #region M16_Gestion_Reclamos
         public static DAO instanciarDaoReclamo() 
         {
             return new DAOReclamo();
         }
+
+        public static IDAOReclamo instanciarDaoReclamoPersonalizado()
+        {
+            return new DAOReclamo();
+        }
+        #endregion
 
         #region M04_Vuelos
         /// <summary>
@@ -82,67 +97,64 @@ namespace BOReserva.DataAccess.DataAccessObject
 
 			
         #region Modulo 10
+        /// <summary>
+        /// Inicializar IDAORestaurant
+        /// </summary>
+        /// <returns></returns>
         public static IDAORestaurant RestaurantBD()
         {
             return new DAORestaurant();
 
         }
-
+        /// <summary>
+        /// Valores de Horarios 
+        /// </summary>
+        /// <returns></returns>
         public static List<String> listarHorario()
         {
             return new List<String>
-            { "","07:00", "08:00", "09:00", "10:00", "11:00",
+            { "07:00", "08:00", "09:00", "10:00", "11:00",
               "12:00", "13:00", "14:00", "15:00", "16:00",
               "17:00", "18:00", "19:00", "20:00", "21:00",
               "22:00", "23:00", "00:00"
             };
         }
        
-
-        public static SqlConnection asignarConexionSql(String stringDeConexion)
-        {
-            return new SqlConnection(stringDeConexion);
-        }
-
+     
+        /// <summary>
+        /// Metodo para asignar parametros para el store procedured
+        /// </summary>
+        /// <param name="nombreAtributo"></param>
+        /// <param name="tipoDeDato"></param>
+        /// <param name="valorAtributo"></param>
+        /// <param name="output"></param>
+        /// <returns></returns>
         public static Parametro asignarParametro(string nombreAtributo, SqlDbType tipoDeDato, string valorAtributo, bool output)
         {
             return new Parametro(nombreAtributo, tipoDeDato, valorAtributo, output);
         }
 
+        /// <summary>
+        /// Metodo para asignar parametros para el store procedured
+        /// </summary>
+        /// <param name="nombreAtributo"></param>
+        /// <param name="tipoDeDato"></param>
+        /// <param name="output"></param>
+        /// <returns></returns>
         public static Parametro asignarParametro(string nombreAtributo, SqlDbType tipoDeDato, bool output)
         {
             return new Parametro(nombreAtributo, tipoDeDato, output);
         }
 
+        /// <summary>
+        /// Metodo para asignar parametros para el store procedured
+        /// </summary>
+        /// <returns></returns>
         public static List<Parametro> asignarListaDeParametro()
         {
             return new List<Parametro>();
         }
-
-        public static List<ResultadoBD> asignarListarColumnas()
-        {
-            return new List<ResultadoBD>();
-        }
-
-        public static SqlCommand asignarComandoSql(String query, SqlConnection conexion)
-        {
-            return new SqlCommand(query, conexion);
-        }
-
-        public static ResultadoBD asignarValorColumna(String atributo, String valorAtributo)
-        {
-            return new ResultadoBD(atributo, valorAtributo);
-        }
-
-        public static DataTable asignarTablaDeDatos()
-        {
-            return new DataTable();
-        }
-
-        public static SqlDataAdapter asignarAdaptadorDeDatos(SqlCommand comandoSql)
-        {
-            return new SqlDataAdapter(comandoSql);
-        }
+               
         #endregion
 
         #region M11_Gestion_Ofertas_Y_Paquetes
@@ -159,7 +171,7 @@ namespace BOReserva.DataAccess.DataAccessObject
         /// Método que crea la instancia de DAOOferta
         /// </summary>
         /// <returns>Retorna la instancia a la clase DAOOferta</returns>
-        public static DAO instanciarDaoOferta()
+        public static DAOOferta instanciarDaoOferta()
         {
             return new DAOOferta();
         }
@@ -170,10 +182,16 @@ namespace BOReserva.DataAccess.DataAccessObject
         {
             return new DAORol();
         }
-        public static DAORol instanciarDAORolPermiso()
+        #endregion
+
+
+        #region M06 GESTION DE COMIDA
+
+        public static DAOComida instanciarComida()
         {
-            return new DAORol();
+            return new DAOComida();
         }
+
         #endregion
 
     }

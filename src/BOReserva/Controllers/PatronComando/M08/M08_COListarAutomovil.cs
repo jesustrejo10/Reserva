@@ -27,9 +27,18 @@ namespace BOReserva.Controllers.PatronComando.M08
 
         #endregion
 
+        #region Ejecucion
+
         public override string ejecutar()
         {
-            throw new NotImplementedException();
+            DAO daoAutomovil = FabricaDAO.CrearDaoAutomovil();
+
+            //return daoAutomovil.ConsultarTodos(this._objeto);
+
+            return "";
         }
+
+        #endregion
+
     }
 }
