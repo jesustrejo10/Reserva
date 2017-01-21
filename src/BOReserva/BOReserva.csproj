@@ -1621,7 +1621,9 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\gestion_automoviles\M08_ModificarAutomovil.cshtml" />
     <Content Include="Views\gestion_automoviles\M08_VisualizarAutomoviles.cshtml" />
     <Content Include="Views\gestion_automoviles\M08_VisualizarAutomovil.cshtml" />
