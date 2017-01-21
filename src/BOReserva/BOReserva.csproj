@@ -596,6 +596,7 @@
     <Content Include="Content\dist\js\pages\dashboard2.js" />
     <Content Include="Content\M04_css\style_module.css" />
     <Content Include="Content\M24_css\style_module.css" />
+    <Content Include="Content\Preloader_2.gif" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -701,6 +702,7 @@
     <Content Include="Models\gestion_boletos\placeholder.html" />
     <Content Include="Models\gestion_vuelo\placeholder.html" />
     <Content Include="Scripts\cargadorMenu.js" />
+    <Content Include="Scripts\loader.js" />
     <Content Include="Scripts\Scripts_Boletos\DatosUsuario.js" />
     <Content Include="Scripts\Scripts_Boletos\DetalleBoleto.js" />
     <Content Include="Scripts\Scripts_Boletos\BuscarVuelo.js" />
