@@ -256,8 +256,10 @@
     <Compile Include="Controllers\PatronComando\M05\M05_COAgregarPasajero.cs" />
     <Compile Include="Controllers\PatronComando\M12\M12_COAgregarUsuario.cs" />
     <Compile Include="Controllers\PatronComando\M12\M12_COConsultarUsuario.cs" />
+    <Compile Include="Controllers\PatronComando\M12\M12_COEliminarUsuario.cs" />
     <Compile Include="Controllers\PatronComando\M12\M12_COModificarUsuario.cs" />
     <Compile Include="Controllers\PatronComando\M12\M12_COObtenerRoles.cs" />
+    <Compile Include="Controllers\PatronComando\M12\M12_COStatusUsuario.cs" />
     <Compile Include="Controllers\PatronComando\M12\M12_COVisualizarUsuarios.cs" />
     <Compile Include="Controllers\PatronComando\M13_COAgregarRol.cs" />
     <Compile Include="Controllers\PatronComando\M13_COAgregarRolPermiso.cs" />

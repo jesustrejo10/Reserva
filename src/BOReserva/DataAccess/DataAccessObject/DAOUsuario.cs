@@ -207,5 +207,51 @@ namespace BOReserva.DataAccess.DataAccessObject
                 return null;
             }
         }
+
+        public String eliminarUsuario(int id)
+        {
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            try
+            {
+                conexion.Open();
+                String sql = "DELETE FROM Usuario WHERE usu_id = " + id;
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                conexion.Close();
+                return "1";
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return ex.Message;
+            }
+        }
+
+        public String statusUsuario(Entidad e, string status)
+        {
+            Usuario usuario = (Usuario)e;
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            try
+            {
+                conexion.Open();
+                String sql = "UPDATE Usuario SET usu_activo = '" + status + "' WHERE usu_id = " + usuario._id;
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                conexion.Close();
+                usuario._nombre = "1";
+                Entidad resultado = usuario;
+                return "1";
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                usuario._nombre = ex.Message;
+                Entidad resultado = usuario;
+                return ex.Message;
+            }
+        }
+
     }
 }
