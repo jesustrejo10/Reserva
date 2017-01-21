@@ -275,6 +275,7 @@ namespace FOReserva.Controllers
             ///Se instancia un try para la consulta a la base de datos
             try
             {
+                Response.Write("aqui ");
                 manejadorSQLCrucero manejador = new manejadorSQLCrucero();
                 manejador.modificarReserva(id_reserva, cant_pasajero, estatus);
             }

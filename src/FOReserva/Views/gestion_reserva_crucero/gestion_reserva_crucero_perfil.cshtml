@@ -80,7 +80,7 @@ else
         </td>
         <td>
             @if (@item._status == "activo")
-{
+{<h1>@item._crucero,@item._cantidadPasajeros,@item._origen,@item._destino,@item._fecha_inicio,@item._fecha_fin,@item._status</h1>
     <a href="#ModalModificar" data-id="@item._id_reserva,@item._crucero,@item._cantidadPasajeros,@item._origen,@item._destino,@item._fecha_inicio,@item._fecha_fin,@item._status" data-toggle="modal" class="open-AddBookDialog btn btn-info btn-xs"><i class="fa fa-edit white"></i> Modificar </a>
     <a id="eliminar" href="#ModalEliminar" name="eliminar" data-id="@item._id_reserva" data-toggle="modal" class="open-AddBookDialog btn btn-danger btn-xs"><i class="fa fa-times white"></i> Eliminar </a>
 }
@@ -145,11 +145,11 @@ else
     </div>
 </div>
 <div id="ModalModificar" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+      <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>   
                 <h4 class="modal-title">Modificar Reserva</h4>
             </div>
             <div class="modal-body">
@@ -293,10 +293,10 @@ else
 </script>
 
 <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/jquery.dataTables.min.js")"></script>
-<script type="text/javascript" src="@Url.Content("~/Contentassets/plugins/datatables/js/dataTables.tableTools.min.js")"></script>
-<script type="text/javascript" src="@Url.Content("~/Contentassets/plugins/datatables/js/dataTables.colReorder.min.js")"></script>
-<script type="text/javascript" src="@Url.Content("~/Contentassets/plugins/datatables/js/dataTables.scroller.min.js")"></script>
-<script type="text/javascript" src="@Url.Content("~/Contentassets/plugins/datatables/dataTables.bootstrap.js")"></script>
-<script type="text/javascript" src="@Url.Content("~/Contentassets/plugins/select2/js/select2.full.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/dataTables.tableTools.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/dataTables.colReorder.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/dataTables.scroller.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/dataTables.bootstrap.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/select2/js/select2.full.min.js")"></script>
 
 
