@@ -38,6 +38,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             throw new NotImplementedException();
         }
 
+
         #region Conectar con la Base de Datos
         /// <summary>
         /// Metodo para realizar la conexion a la base de datos
@@ -49,7 +50,8 @@ namespace BOReserva.DataAccess.DataAccessObject
 
             try
             {
-                conexion = Connection.getInstance(_connexionString);
+                //conexion = Connection.getInstance(_connexionString);
+                conexion = new SqlConnection(_connexionString);
             }
 
             catch (Exception ex)

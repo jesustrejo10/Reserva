@@ -62,10 +62,27 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
         }
 
-        //Entidad IDAO.Modificar(Entidad e)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        Entidad IDAO.Modificar(Entidad e)
+        {
+            Pasajero pasajero = (Pasajero)e;
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            try
+            {
+                conexion.Open();
+                String sql = "UPDATE Pasajero SET pas_primer_nombre = '" + pasajero._primer_nombre + "' , pas_segundo_nombre = '" + pasajero._segundo_nombre + "' , pas_primer_apellido = '" + pasajero._primer_apellido + "' , pas_segundo_apellido = '" + pasajero._segundo_apellido + "' , pas_correo = '" + pasajero._correo + "' WHERE pas_id = " + pasajero._id + "";
+
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                conexion.Close();
+                return pasajero;
+            }
+            catch (SqlException ex)
+            {
+                return pasajero;
+            }
+            throw new NotImplementedException();
+        }
 
         //Entidad IDAO.Consultar(int id)
         //{

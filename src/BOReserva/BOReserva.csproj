@@ -431,7 +431,6 @@
     <Compile Include="Servicio\Servicio_Rutas\CManejadorSQL_Rutas.cs" />
     <Compile Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx.cs">
       <DependentUpon>GestionDeAutomoviles.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx.designer.cs">
       <DependentUpon>GestionDeAutomoviles.aspx</DependentUpon>

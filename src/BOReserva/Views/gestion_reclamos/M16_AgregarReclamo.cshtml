@@ -1,7 +1,7 @@
 ﻿@model BOReserva.Models.gestion_reclamos.CAgregarReclamo
 
  <!---------------------- SECCION DE AGREGAR RECLAMO---------------->
-@using (Html.BeginForm("guardarAvion", "gestion_aviones", null, FormMethod.Post, new { @id = "formGuardarAvion", @class = "form-horizontal" }))
+@using (Html.BeginForm("guardarReclamo", "gestion_reclamos", null, FormMethod.Post, new { @id = "formGuardarReclamo", @class = "form-horizontal" }))
 {
 
     <div class="row">
@@ -22,7 +22,7 @@
                                     </div>
                                     <div class="col-xs-6">
                                         <label for="fecharegistro">Fecha del Suceso (<span style="color:red">*</span>)</label>
-                                        @Html.TextBoxFor(m => m._fechaReclamo, null, new { @type = "date", @class = "form-control", @placeholder = "Fecha del Suceso", @id = "fechaReclamo", min = "2001-01-01", max = "2016-12-31", @onblur = "checkanio(this);" })
+                                        @Html.TextBoxFor(m => m._fechaReclamo, null, new { @type = "date", @class = "form-control", @placeholder = "Fecha del Suceso", @id = "fechaReclamo", min = "2001-01-01", max = "2017-01-22"})
                                      </div>
                                 </div>
                                 
@@ -31,14 +31,14 @@
                                 <div class="col-md-12">
                                     <div class="col-xs-6">
                                         <label for="descripcionReclamo">Descripci&oacuten (<span style="color:red">*</span>):</label>
-                                        @Html.TextAreaFor(m => m._detalleReclamo, 3, 3, new { @class = "form-control", @placeholder = "Escriba aquí el detalle del reclamo...", @id = "detalleReclamo" })
+                                        @Html.TextAreaFor(m => m._detalleReclamo, 3, 3, new { @class = "form-control", @placeholder = "Escriba aquí el detalle del reclamo...", @id = "detalleReclamo" , @style="max-width: 447px ;max-height: 200px;"})
                                     </div>
                                 </div>
                             </div>
                          </div>
                                              
                        <div class="col-md-12" style="margin-top:10px;">
-                          <button type="button" id="aceptarAvion" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                          <button type="button" id="guardarReclamo" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
                        </div>
                      </div>
                         <!-- /.col -->
@@ -53,4 +53,37 @@
 
    
 }
+
+<script>
+
+    $("#guardarReclamo").click(function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        var form = $("#formGuardarReclamo");
+        var tituloReclamo = $('#tituloReclamo').val();
+        var fechaReclamo = $('#fechaReclamo').val();
+        var detalleReclamo = $('#detalleReclamo').val();
+       
+        if (tituloReclamo && fechaReclamo && detalleReclamo) {
+            $.ajax({
+                url: "gestion_reclamos/guardarReclamo",
+                data: form.serialize(),
+                type: 'POST',
+                success: function (data) {
+                    if (data === "1") {
+                        alert("Se registró el reclamo exitosamente");
+                        $('#formGuardarReclamo')[0].reset();
+                    } else {
+                        alert(data);
+                    }
+                }
+            });
+        } else {
+            alert("Existen campos vacíos, por favor revise todos los campos");
+        }
+    });
+    
+</script>
+
 <!------------------- FIN DE SECCION DE AGREGAR RECLAMO ---------------->

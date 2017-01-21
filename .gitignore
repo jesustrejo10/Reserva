@@ -508,3 +508,6 @@ paket-files/
 *.sln.iml
 src/FOReserva/Servicio/manejadorSQL.cs
 src/FOReserva/Servicio/manejadorSQL.cs
+
+src/BOReserva/Log*
+src/FOReserva/Log*

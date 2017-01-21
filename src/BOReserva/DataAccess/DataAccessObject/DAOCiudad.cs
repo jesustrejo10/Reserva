@@ -50,5 +50,27 @@ namespace BOReserva.DataAccess.DataAccessObject
             conexion.Close();
             return listaCiudades;
         }
+
+        public int obtenerIDciudad(String ciudad)
+        {
+            int id = 0;
+            SqlConnection conexion = Conectar();
+            conexion.Open();
+            String sql = "select lug_id FROM Lugar  where lug_nombre = '"+ciudad+"';";
+            SqlCommand cmd = new SqlCommand(sql, conexion);
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    id = int.Parse(reader[0].ToString());
+                }
+            }
+            cmd.Dispose();
+            conexion.Close();
+            return id;
+        }
+
     }
+
+
 }

@@ -282,6 +282,7 @@ jQuery(document).ready(function () {
             });
 
     });
+
     //$("#consultarhotel").click(function (e) {
     //    e.preventDefault();
     //    var url = '/gestion_hoteles/M09_GestionHoteles_Visualizar';
@@ -311,7 +312,7 @@ jQuery(document).ready(function () {
         e.preventDefault();
         var url = '/gestion_restaurantes/M10_GestionRestaurantes_Ver';
         var method = 'GET';
-        var data = '';
+        var data = -1;
 
         $.ajax(
             {
@@ -558,7 +559,7 @@ jQuery(document).ready(function () {
     //Inicio M04 Vuelos
     $("#m04_crearvuelo").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_vuelo/M04_GestionVuelo_Crear';
+        var url = '/gestion_vuelo/M04_GestionVuelo_CW1';
         var method = 'GET';
         var data = '';
         $.ajax(

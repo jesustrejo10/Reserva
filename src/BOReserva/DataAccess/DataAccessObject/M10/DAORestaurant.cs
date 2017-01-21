@@ -5,6 +5,11 @@ using BOReserva.Models.gestion_restaurantes;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+using BOReserva.DataAccess.Model;
+using System.Data.SqlClient;
+using BOReserva.Excepciones.M10;
+using BOReserva.Excepciones;
 
 namespace BOReserva.M10
 {
@@ -13,7 +18,7 @@ namespace BOReserva.M10
     /// </summary>
     public class DAORestaurant : DAO, IDAORestaurant
     {
-
+      
         /// <summary>
         /// Metodo para consultar restaurant segun el id de Lugar
         /// </summary>
@@ -21,6 +26,10 @@ namespace BOReserva.M10
         /// <returns>Lista de Entidades, ya que se devuelve mas de una fila de la BD, se debe castear a su respectiva clase en el Modelo</returns>
         public List<Entidad> Consultar(Entidad _lugar)
         {
+            //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
+            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+            RecursoDAOM10.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
             List<Entidad> listaDeRestaurant = FabricaEntidad.asignarListaDeEntidades();
             DataTable tablaDeDatos;
@@ -41,12 +50,11 @@ namespace BOReserva.M10
             {
                 //Aqui se asignan los valores que recibe el procedimieto para realizar el select, se repite tantas veces como atributos
                 //se requiera en el where, para este caso solo el ID de Lugar @lug_id (parametro que recibe el store procedure)
-                //se coloca true en Input 
-                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.lug_id, SqlDbType.Int, lugar._id.ToString(), true, false));
+                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.lug_id, SqlDbType.Int, lugar._id.ToString(), false));
 
                 //el metodo Ejecutar Store procedure recibe la lista de parametros como el query, este ultimo es el nombre del procedimietno en la BD
                 //e.g. dbo.M10_ConsultarRestarurante
-                tablaDeDatos = EjecutarStoredProcedure(parametro, RecursoDAOM10.procedimientoConsultar);
+                tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM10.procedimientoConsultar,parametro);
 
                 foreach (DataRow filarestaurant in tablaDeDatos.Rows)
                 {
@@ -60,17 +68,37 @@ namespace BOReserva.M10
                     horaFin = filarestaurant[RecursoDAOM10.restaurantHoraCierra].ToString();
                     nombreLugar = filarestaurant[RecursoDAOM10.LugarNombre].ToString();
                     //se crea el objeto restaurant
-                    restaurant = FabricaEntidad.inicializarRestaurant(idRestaurant, nombreRestaurant, direccionRestaurant, telefonoRestaurant, descripcionRestaurant, horaIni, horaFin, 0);
+                    restaurant = FabricaEntidad.crearRestaurant(idRestaurant, nombreRestaurant, direccionRestaurant, telefonoRestaurant, descripcionRestaurant, horaIni, horaFin, 0);
                     //se agregan los restaurantes a la lista
                     listaDeRestaurant.Add(restaurant);
                 }
 
                 return listaDeRestaurant; //se retorna la lista de restaurante a mostrar por la vista
             }
-            catch (Exception)
+            catch (ArgumentNullException ex)
             {
-
-                throw;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error al realizar operacion ", ex);
             }
         }
 
@@ -81,7 +109,11 @@ namespace BOReserva.M10
         /// <returns>Entidad</returns>
         public Entidad consultarRestaurantId(Entidad _restaurant)
         {
-           //Se castea de tipo Entidad a tipo Restaurant
+            //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
+            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+            RecursoDAOM10.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+            //Se castea de tipo Entidad a tipo Restaurant
             CRestauranteModelo rest = (CRestauranteModelo)_restaurant;
             List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
 
@@ -101,10 +133,10 @@ namespace BOReserva.M10
                 //Aqui se asignan los valores que recibe el procedimieto para realizar el select, se repite tantas veces como atributos
                 //se requiera en el where, para este caso solo el ID del restaurante @rst_id (parametro que recibe el store procedure)
                 //se coloca true en Input 
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_id, SqlDbType.Int, rest._id.ToString(), true, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_id, SqlDbType.Int, rest._id.ToString(), false));
 
                 //Se devuelve la fila del restaurante consultado segun el Id, para este caso solo se devuelve una fila
-                DataTable filarestaurant = EjecutarStoredProcedure(listaParametro, RecursoDAOM10.procedimientoConsultarRestaurantId);
+                DataTable filarestaurant = EjecutarStoredProcedureTuplas(RecursoDAOM10.procedimientoConsultarRestaurantId, listaParametro);
 
                 //Se guarda la fila devuelta de la base de datos
                 DataRow Fila = filarestaurant.Rows[0];
@@ -118,20 +150,42 @@ namespace BOReserva.M10
                 horaIni = Fila[RecursoDAOM10.restaurantHoraApertura].ToString();
                 horaFin = Fila[RecursoDAOM10.restaurantHoraCierra].ToString();
                 idLugar = Fila[RecursoDAOM10.LugarIdFk].ToString();
-                restaurant = FabricaEntidad.inicializarRestaurant(idRestaurant, nombreRestaurant, direccionRestaurant, telefonoRestaurant, descripcionRestaurant, horaIni, horaFin, int.Parse(idLugar));
+                restaurant = FabricaEntidad.crearRestaurant(idRestaurant, nombreRestaurant, direccionRestaurant, telefonoRestaurant, descripcionRestaurant, horaIni, horaFin, int.Parse(idLugar));
 
                 //se retorna la entidad de restaurant a mostrar en la vista
                 return restaurant;
             }
-            catch (Exception)
+            catch (ArgumentNullException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
             {
 
-                throw;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error al realizar operacion ", ex);
             }
 
 
         }
 
+     
         /// <summary>
         /// Metodo para agregar restaurant
         /// </summary>
@@ -139,6 +193,11 @@ namespace BOReserva.M10
         /// <returns>Se retorna true si fue exitoso</returns>
         public bool Crear(Entidad _restaurant)
         {
+            //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
+            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+            RecursoDAOM10.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+            //Atributos del Metodo
             CRestauranteModelo rest = (CRestauranteModelo)_restaurant;
             List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
 
@@ -151,22 +210,42 @@ namespace BOReserva.M10
                 // la tabla restaurant contiene siete columna incluyendo la clave foranea lugar por lo cual son siete lineas de codigo
                 //a;go importante de destacar es que si en la declaracion del store procedures el atributo varchar o cualquier otro
                 //que requiera longitud e.g. Varchar(50) solo se inserta el primer caracter, ya que solo por defecto la longitud es 1
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_nombre, SqlDbType.VarChar, rest.nombre, false, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_direccion, SqlDbType.VarChar, rest.direccion, false, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_descripcion, SqlDbType.VarChar, rest.descripcion, false, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_hora_apertura, SqlDbType.VarChar, rest.horarioApertura, false, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_hora_cierre, SqlDbType.VarChar, rest.horarioCierre, false, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_telefono, SqlDbType.VarChar, rest.Telefono, false, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.fk_lugar, SqlDbType.Int, rest.idLugar.ToString(), false, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_nombre, SqlDbType.VarChar, rest.nombre, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_direccion, SqlDbType.VarChar, rest.direccion, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_descripcion, SqlDbType.VarChar, rest.descripcion, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_hora_apertura, SqlDbType.VarChar, rest.horarioApertura, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_hora_cierre, SqlDbType.VarChar, rest.horarioCierre, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_telefono, SqlDbType.VarChar, rest.Telefono, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.fk_lugar, SqlDbType.Int, rest.idLugar.ToString(), false));
                 //el metodo Ejecutar Store procedure recibe la lista de parametros como el query, este ultimo es el nombre del procedimietno en la BD
                 //e.g. dbo.M10_AgregarRestarurante, importante ese nombre se coloco en un archivo de recursos por efectos practicos, pero se puede 
                 //como String "dbo.M10_AgregarRestarurante"
                 EjecutarStoredProcedure(RecursoDAOM10.procedimientoAgregar, listaParametro);
             }
-            catch (Exception)
+            catch (ArgumentNullException ex)
             {
-
-                throw;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error al realizar operacion ", ex);
             }
 
 
@@ -181,6 +260,10 @@ namespace BOReserva.M10
         /// <returns>Retorna true si fue exitso</returns>
         public bool Eliminar(Entidad _restaurant)
         {
+            //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
+            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+            RecursoDAOM10.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             CRestauranteModelo rest = (CRestauranteModelo)_restaurant;
             List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
 
@@ -188,16 +271,36 @@ namespace BOReserva.M10
             {   //Aqui se asignan los valores que recibe el procedimieto para realizar el delete, se repite tantas veces como atributos
                 //se requiera en el where, para este caso solo el ID del restaurante @rst_id (parametro que recibe el store procedure)
                 //se coloca true en Input 
-                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_id, SqlDbType.Int, rest._id.ToString(), true, false));
+                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_id, SqlDbType.Int, rest._id.ToString(), false));
                 //el metodo Ejecutar Store procedure recibe la lista de parametros como el query, este ultimo es el nombre del procedimietno en la BD
                 //e.g. dbo.M10_EliminarrRestarurante, importante ese nombre se coloco en un archivo de recursos por efectos practicos, pero se puede 
                 //como String "dbo.M10_EliminarRestarurante"
                 EjecutarStoredProcedure(RecursoDAOM10.procedimientoEliminar, parametro);
             }
-            catch (Exception)
+            catch (ArgumentNullException ex)
             {
-
-                throw;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error al realizar operacion ", ex);
             }
             return false; //se retorna falso en caso de no ser exitoso el procedimiento eliminar
         }
@@ -208,6 +311,11 @@ namespace BOReserva.M10
         /// <returns>Se retorna una lista de entidad que luego debe ser casteada a su respectiva clase en el Modelo</returns>
         public List<Entidad> ListarLugar()
         {
+            //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
+            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+            RecursoDAOM10.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+            //Atributos del metodo
             List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
             List<Entidad> listaDeLugares = FabricaEntidad.asignarListaDeEntidades();
             Entidad lugar;
@@ -217,8 +325,8 @@ namespace BOReserva.M10
 
             try
             {
-                tablaDeDatos = EjecutarStoredProcedure(parametro, RecursoDAOM10.procedimientoConsultarLugar);
-                listaDeLugares.Add(FabricaEntidad.inicializarLugar(0, ""));
+                tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM10.procedimientoConsultarLugar, parametro);
+                listaDeLugares.Add(FabricaEntidad.crearLugar(0, "Ciudades"));
 
                 //ciclo que se encarga de listar cada uno de las filas de la base de datos con la informacion de las ciudades
                 foreach (DataRow filaLugar in tablaDeDatos.Rows)
@@ -226,7 +334,7 @@ namespace BOReserva.M10
                     // se preinicializan los valores de lugar
                     idLugar = int.Parse(filaLugar[RecursoDAOM10.LugarId].ToString());
                     nombreLugar = filaLugar[RecursoDAOM10.LugarNombre].ToString();
-                    lugar = FabricaEntidad.inicializarLugar(idLugar, nombreLugar);
+                    lugar = FabricaEntidad.crearLugar(idLugar, nombreLugar);
 
                     //se insertan en una lista para luego desplegarse en la vista
                     listaDeLugares.Add(lugar);
@@ -234,10 +342,30 @@ namespace BOReserva.M10
 
                 return listaDeLugares; //Se retornan la lista de lugares 
             }
-            catch (Exception)
+            catch (ArgumentNullException ex)
             {
-
-                throw;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error al realizar operacion ", ex);
             }
         }
 
@@ -246,7 +374,7 @@ namespace BOReserva.M10
         /// </summary>
         /// <param name="_restaurant"></param>
         /// <returns>Se retorna true de ser exitoso</returns>
-        public bool Modificar(Entidad _restaurant)
+        public Boolean Modificar(Entidad _restaurant)
         {
             CRestauranteModelo rest = (CRestauranteModelo)_restaurant;
             List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
@@ -256,7 +384,7 @@ namespace BOReserva.M10
                 //Aqui se asignan los valores que recibe el procedimieto para realizar el update, se repite tantas veces como atributos
                 //se requiera en el where, para este caso solo el ID del restaurante @rst_id (parametro que recibe el store procedure)
                 //se coloca true en Input 
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_id, SqlDbType.Int, rest._id.ToString(), true, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_id, SqlDbType.Int, rest._id.ToString(), false));
                 //Aqui se asignan los valores de cada uno de los atributos perteneciente a la tabla restaurant
                 //estas linea se repite por cada una de las columnas de la tabla, e.g. se tiene el atributo nombre de tipo varchar
                 //primero se obtiene por el archivo de recurso el nombre del parametro @nombre, luego el tipo de dato SQL
@@ -264,25 +392,153 @@ namespace BOReserva.M10
                 // la tabla restaurant contiene siete columna incluyendo la clave foranea lugar por lo cual son siete lineas de codigo
                 //a;go importante de destacar es que si en la declaracion del store procedures el atributo varchar o cualquier otro
                 //que requiera longitud e.g. Varchar(50) solo se inserta el primer caracter, ya que solo por defecto la longitud es 1
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_nombre, SqlDbType.VarChar, rest.nombre, false, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_direccion, SqlDbType.VarChar, rest.direccion, false, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_descripcion, SqlDbType.VarChar, rest.descripcion, false, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_hora_apertura, SqlDbType.VarChar, rest.horarioApertura, false, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_hora_cierre, SqlDbType.VarChar, rest.horarioCierre, false, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_telefono, SqlDbType.VarChar, rest.Telefono, false, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.fk_lugar, SqlDbType.Int, rest.idLugar.ToString(), false, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_nombre, SqlDbType.VarChar, rest.nombre, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_direccion, SqlDbType.VarChar, rest.direccion, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_descripcion, SqlDbType.VarChar, rest.descripcion, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_hora_apertura, SqlDbType.VarChar, rest.horarioApertura, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_hora_cierre, SqlDbType.VarChar, rest.horarioCierre, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_telefono, SqlDbType.VarChar, rest.Telefono, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.fk_lugar, SqlDbType.Int, rest.idLugar.ToString(), false));
                 //el metodo Ejecutar Store procedure recibe la lista de parametros como el query, este ultimo es el nombre del procedimietno en la BD
                 //e.g. dbo.M10_ActualizarRestaruranteimportante ese nombre se coloco en un archivo de recursos por efectos practicos, pero se puede 
                 //como String "dbo.M10_ActualizarrRestarurante"
                 EjecutarStoredProcedure(RecursoDAOM10.procedimientoActualizar, listaParametro);
             }
-            catch (Exception)
+            catch (ArgumentNullException ex)
             {
-
-                throw;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error al realizar operacion ", ex);
             }
 
             return true;
         }
+
+        /// <summary>
+        /// Metodo para retornar Lista de Restaurante con Nombre y Id 
+        /// Metodo solicitado por Modulo 11, pauqetes y Ofertas
+        /// </summary>
+        /// <returns>Se retorna una lista de entidades</returns>
+        public List<Entidad> ListarRestaurantes()
+        {
+            //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
+            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+            RecursoDAOM10.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+            //Atributos del metodo
+            List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
+            List<Entidad> listaDeRestaurantes = FabricaEntidad.asignarListaDeEntidades();
+            Entidad restaurant;
+            DataTable tablaDeDatos;
+            int idRestaurant;
+            String nombreRestaurant;
+
+            try
+            {
+                //Se ejecuta el Store Procedured para listar los restaurante con nombre y id
+                tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM10.procedimientoListarRestaurante, parametro);
+               
+                //Ciclo para devolver los restaurante de la base de datos
+                foreach (DataRow filaRestaurant in tablaDeDatos.Rows)
+                {
+                    idRestaurant = int.Parse(filaRestaurant[RecursoDAOM10.restaurantId].ToString());
+                    nombreRestaurant = filaRestaurant[RecursoDAOM10.restaurantNombre].ToString();
+                    restaurant = FabricaEntidad.crearRestaurant();
+                    ((CRestauranteModelo)restaurant).id = idRestaurant;
+                    ((CRestauranteModelo)restaurant).nombre = nombreRestaurant;
+                    listaDeRestaurantes.Add(restaurant);
+                }
+
+                return listaDeRestaurantes; //Se retorna la lista de lugares
+            }
+            catch (ArgumentNullException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM10("Reserva-404", "Error al realizar operacion ", ex);
+            }
+        }
+
+
+        #region Metodos No implementados
+        /// <summary>
+        /// Metodo no Implementado
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        Entidad IDAO.Modificar(Entidad e)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Metodo no Implementado
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<int, Entidad> ConsultarTodos()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Metodo no Implementado
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        public int Agregar(Entidad e)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Metodo no Implementado
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Entidad Consultar(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+       
+        #endregion
     }
 }

@@ -1,3 +1,4 @@
+using FOReserva.DataAccess.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,17 +9,19 @@ namespace FOReserva.Models.Revision
     /// <summary>
     /// Clase Valoracion Revision
     /// </summary>
-    public class CRevisionValoracion
+    public class CRevisionValoracion : Entidad
     {
         private int _positivo;
         private int _negativo;
+
+        public enum TipoValoracion { Positiva, Negativa };
 
         /// <summary>
         /// Builder Valoracion Revision
         /// </summary>
         /// <param name="positivo">Valoraciones positivas</param>
         /// <param name="negativo">Valoraciones negativas</param>
-         public CRevisionValoracion(int positivo, int negativo)
+        public CRevisionValoracion(int positivo, int negativo)
          {
              this._positivo = positivo;
              this._negativo = negativo;
