@@ -494,13 +494,6 @@
     <Compile Include="Servicio\Servicio_Boletos\manejadorSQL_Check.cs" />
     <Compile Include="Servicio\Servicio_Hoteles\CManejadorSQL_Hoteles.cs" />
     <Compile Include="Servicio\Servicio_Rutas\CManejadorSQL_Rutas.cs" />
-    <Compile Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx.cs">
-      <DependentUpon>GestionDeAutomoviles.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx.designer.cs">
-      <DependentUpon>GestionDeAutomoviles.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Views\gestion_restaurantes\Fabrica\FabricaVista.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -744,14 +737,8 @@
     <Content Include="Scripts\Scripts_Usuarios\llamadas_generales.js" />
     <Content Include="Views\dist\img\avatar5.png" />
     <Content Include="Views\gestion_automoviles\css\style_module.css" />
-    <Content Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx" />
-    <Content Include="Views\gestion_automoviles\GestionDeAutomoviles.html" />
     <Content Include="Views\gestion_automoviles\js\visualizarAutomovil.js" />
     <Content Include="Views\gestion_automoviles\js\module.js" />
-    <Content Include="Views\gestion_automoviles\M08_AgregarAutomovil.html" />
-    <Content Include="Views\gestion_automoviles\M08_ModificarAutomovil.html" />
-    <Content Include="Views\gestion_automoviles\M08_VisualizarAutomovil.html" />
-    <Content Include="Views\gestion_automoviles\M08_VisualizarAutomoviles.html" />
     <Content Include="Views\gestion_aviones\M02_GestionAviones.html" />
     <Content Include="Views\gestion_aviones\placeholder.html" />
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarPorVuelo.html" />

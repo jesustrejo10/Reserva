@@ -396,6 +396,6 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         public static string MensajeFinMetodoLogger { get; set; }
 
         public static string MensajeErrorFormato { get; set; }
-
+        public static string disponibilidad { get; internal set; }
     }
 }
