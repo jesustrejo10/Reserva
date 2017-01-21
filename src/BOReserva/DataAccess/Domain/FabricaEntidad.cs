@@ -1,13 +1,16 @@
 ﻿using BOReserva.Models;
+using BOReserva.Models.gestion_cruceros;
 using BOReserva.Models.gestion_hoteles;
 using BOReserva.Models.gestion_reclamos;
 using BOReserva.Models.gestion_restaurantes;
 using BOReserva.Models.gestion_roles;
-using BOReserva.DataAccess.Domain;
+using BOReserva.DataAccess.Domain.M06;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using BOReserva.DataAccess.Domain.M14;
+
 
 
 
@@ -16,9 +19,48 @@ namespace BOReserva.DataAccess.Domain
     /// <summary>
     /// Clase Creada con la finalidad de instanciar a cualquier objeto dentro del Dominio
 
-    /// </summary>
+    /// </summary>D:\UCAB\Desarrollo\Reserva\src\BOReserva\DataAccess\Domain\FabricaEntidad.cs
     public class FabricaEntidad
     {
+        #region M01_Login 
+        public static Usuario crearUsuario()
+        {
+            return new Usuario();
+        }
+
+        public static Usuario crearUsuario(String _correo)
+        {
+            return new Usuario()
+            {
+                correo = _correo
+            };
+        }
+
+        public static Usuario crearUsuario(String _correo, String _clave)
+        {
+            return new Usuario()
+            {
+                correo = _correo,
+                clave = _clave
+            };
+        }
+
+        public static Usuario crearUsuario(int _id, int _rol, String _nombre, String _apellido, String _correo, String _clave, String _fechaCreacion, String _activo)
+        {
+            return new Usuario()
+            {
+                id = _id,
+                rol = _rol,
+                nombre = _nombre,
+                apellido = _apellido,
+                correo = _correo,
+                clave = _clave,
+                fechaCreacion = _fechaCreacion,
+                activo = _activo
+            };
+        }
+        #endregion
+
         #region M09_Gestion_Hoteles_Por_Ciudad
         public static Entidad InstanciarHotel(String nombre, String direccion, int fkCiudad, int clasificacion, String webPage, String email, int capacidad)
         {
@@ -36,8 +78,8 @@ namespace BOReserva.DataAccess.Domain
             int capacidad = model._capacidadHabitacion;
             String paginaWeb = model._paginaWeb;
             String email = model._email;
-
-            return new Hotel(nombre, direccion, email, paginaWeb, clasificacion, capacidad, city);
+            int precio = model._precioHabitacion;
+            return new Hotel(nombre, direccion, email, paginaWeb, clasificacion, capacidad, city,precio);
         }
 
         public static Entidad InstanciarHotel(CModificarHotel model, Entidad c)
@@ -71,6 +113,11 @@ namespace BOReserva.DataAccess.Domain
         public static Entidad InstanciarCiudad(int id, String nombre, int fkPais)
         {
             return new Ciudad(id,nombre,fkPais);
+        }
+
+        public static Entidad InstanciarHabitacion(int precio, int fkHotel)
+        {
+            return new Habitacion( precio, fkHotel);
         }
 
         #endregion 
@@ -125,6 +172,15 @@ namespace BOReserva.DataAccess.Domain
             }
             return lista;
         }
+
+        /// <summary>
+        /// Instanciacion para una lista vacia
+        /// </summary>
+        /// <returns>Lista de reclamos vacia</returns>
+        public static List<Reclamo> InstanciarListaReclamo()
+        {
+            return new List<Reclamo>();
+        }
 #endregion
 
         #region M04_Vuelo
@@ -140,11 +196,37 @@ namespace BOReserva.DataAccess.Domain
         /// <param name="fechaAterrizaje"></param>
         /// <param name="avion"></param>
         /// <returns>Retorna una instancia de la clase vuelo con todos sus atributos</returns>
-        public static Entidad crearVuelo(int id, String codigoVuelo, int ruta, DateTime fechaDespegue,
-                                          String status, DateTime fechaAterrizaje, int avion)
+        public static Entidad InstanciarVuelo(int id, String codigoVuelo, Ruta ruta, DateTime fechaDespegue,
+                                          String status, DateTime fechaAterrizaje, Avion avion)
         {
             return new Vuelo(id, codigoVuelo, ruta, fechaDespegue, status, fechaAterrizaje,
                              avion);
+        }
+
+
+        /// <summary>
+        /// Instanciar vuelo sin ningun parametro
+        /// </summary>
+        /// <returns>Entidad vuelo vacia</returns>
+        public static Entidad InstanciarVuelo()
+        {
+            return new Vuelo();
+        }
+
+        /// <summary>
+        /// Instancia vuelo fecha de aterrizaje y avion
+        /// </summary>
+        /// <param name="fechaAterrizaje">fecha de Aterrizaje</param>
+        /// <param name="avion">clase avion</param>
+        /// <returns>Entidad Vuelo</returns>
+        public static Entidad InstanciarVuelo(DateTime fechaAterrizaje, Avion avion)
+        {
+            return new Vuelo(fechaAterrizaje, avion);
+        }
+
+        public static Entidad InstanciarCiudad(int id, String ciudadO)
+        {
+            return new Ciudad(id, ciudadO);
         }
         #endregion
 
@@ -215,11 +297,18 @@ namespace BOReserva.DataAccess.Domain
 
         #endregion
 
+        #region Modulo 13
         public static Entidad InstanciarRol(CRoles model)
         {
             String nombre = model.Nombre_rol;
 
             return new Rol(nombre);
+        }
+        public static Entidad InstanciarRolId(CRoles model)
+        {
+            int idRol = model.Id_Rol;
+
+            return new Rol(idRol);
         }
 
         public static Entidad InstanciarRolPermiso(String rol, String permiso)
@@ -232,10 +321,55 @@ namespace BOReserva.DataAccess.Domain
             return new Permiso();
         }
 
+        
+        
+        #region M14 Cruceros
+        public static Entidad InstanciarCrucero(CGestion_crucero crucero)
+        {
+
+            return new Crucero(crucero._idCrucero, crucero._nombreCrucero, crucero._companiaCrucero, crucero._capacidadCrucero, crucero._estatus);
+        }    
+
+        //instancia cabina con nombre de crucero, no con FK
+
+        public static Entidad InstanciarCabinaN(CGestion_cabina cabina)
+        {
+            return new Cabina(cabina._idCabina,cabina._nombreCabina,cabina._precioCabina,cabina._estatus,cabina._fkCrucero);
+        }
+        #endregion
+
+            
+
+        public static Entidad crearRol(int id, String nombre)
+        {
+            return new Rol(id, nombre);
+        }
+
+        public static Entidad crearPermiso(int id, String nombre)
+        {
+            return new Permiso(id, nombre);
+        }
+
+        public static Entidad crearModulo(int id, String nombre)
+        {
+            return new Modulo(id, nombre);
+        }
+        #endregion
+
         #region M06 GESTION COMIDA
 
         public static Entidad instanciarComida(string nombre, string tipo, int estatus, string descripcion) {
             return new Comida(nombre, tipo, estatus, descripcion);
+        }
+
+        public static Entidad instanciarComida()
+        {
+            return new Comida();
+        }
+
+        public static Entidad instanciarComidaVuelo(int id, string comida, string codigoVuelo, int cantidad)
+        {
+            return new ComidaVuelo(id, comida, codigoVuelo, cantidad);
         }
 
         #endregion

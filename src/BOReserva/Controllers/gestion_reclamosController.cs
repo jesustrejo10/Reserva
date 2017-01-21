@@ -74,7 +74,16 @@ namespace BOReserva.Controllers
               return (Json("Se eliminó el reclamo exitosamente"));
           }
       }
-      
+
+
+      [HttpPost]
+      public JsonResult actualizarReclamo(int idReclamo, int estado)
+      {
+          Command<String> comando = FabricaComando.crearM16ActualizarReclamo(idReclamo, estado);
+          String resultado = comando.ejecutar();
+          return (Json("Estado modificado"));
+      }
+
       public ActionResult M16_ModificarReclamo(int idReclamo)
       {
           int idUsuario = gestion_seguridad_ingresoController.IDUsuarioActual();

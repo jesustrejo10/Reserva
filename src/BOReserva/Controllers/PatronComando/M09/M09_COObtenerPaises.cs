@@ -71,5 +71,14 @@ namespace BOReserva.Controllers.PatronComando
 
             return ciudadesPorPais;
         }
+
+
+        public int obtenerIdentificadorCiudad(String ciudad)
+        {
+            int id;
+            DAOCiudad daoPais = (DAOCiudad)FabricaDAO.instanciarDaoCiudad();
+            id = daoPais.obtenerIDciudad(ciudad);
+            return id;
+        }
     }
 }

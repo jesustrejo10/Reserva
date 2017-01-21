@@ -12,8 +12,9 @@ using BOReserva.Servicio.Servicio_Hoteles;
 using BOReserva.DataAccess.DAO;
 using BOReserva.DataAccess.Domain;
 using BOReserva.Controllers.PatronComando;
-using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.DataAccessObject;
+using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+using BOReserva.DataAccess.DataAccessObject.M09;
 
 namespace TestUnitReserva.BO.gestion_hoteles
 {
@@ -23,7 +24,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
         private Pais mockPais;
         private Ciudad mockCiudad;
         private Hotel mockHotel;
-        IDAO daoHotel;
+        DAOHotel daoHotel;
 
         /// <summary>
         /// Metodo que se ejecuta antes que se ejecute cada prueba
@@ -35,7 +36,8 @@ namespace TestUnitReserva.BO.gestion_hoteles
             mockPais = new Pais(11, "Venezuela");
             mockCiudad = new Ciudad(12, "Caracas", mockPais);
             mockHotel = new Hotel("HOtel desde preuba unit3", "hotel", "hotel", "hotel", 1, 1, mockCiudad);
-            daoHotel = FabricaDAO.instanciarDaoHotel();
+            daoHotel = new DAOHotel();
+             
         }
         /// <summary>
         /// Método que se ejecuta cada vez que termina de correr una prueba;
@@ -81,5 +83,62 @@ namespace TestUnitReserva.BO.gestion_hoteles
             Hotel e = (Hotel)hoteles[99];
             Assert.AreEqual(e._nombre, "hotelDePruebasUnitarias");
         }
+        [Test]
+        public void M09_DAOHAbitacionAgregar()
+        {
+            Entidad h1 = FabricaEntidad.InstanciarHabitacion(600, 99);
+            Entidad h2 = FabricaEntidad.InstanciarHabitacion(100, 99);
+            List<Entidad> habitaciones = new List<Entidad>();
+            habitaciones.Add(h1);
+            habitaciones.Add(h2);
+            //sequenceHabitacion
+         //   IDAOHabitacion dao = FabricaDAO.instanciarDaoHabitacion();
+
+        }
+
+        /* 
+controller
+
+        IM09_COObtenerPaises
+        M09_COAgregarHabitaciones
+        M09_COAgregarHotel
+        M09_CocontultarHotel
+        M09_COdisponibilidadHotel
+        M09_COEliminarHotel
+        M09_COModificarHotel
+        M09_COObtenerCiudad
+        M09_COObtenerPaises
+
+dataAccess
+	DataAccessObject
+		M09 
+			DAOHbitacion
+			DaoHotel
+	Domain
+			Hotel
+Model
+	Gestion_hoteles
+		CAgregarHotel
+		CGestionHoteles_CrearHotel
+		CGestionHoteles_EditarHotel
+		CGestionHoteles_SelectCiudad
+		CGestionHoteles_SelectEstrellasModel
+		CGestionHoteles_SelectPaisModel
+		Chotel
+		CmodificarHotel
+		CverHotel
+Servicio
+	CManejadorSQL_Hoteles
+Views 
+	Gestion_Hoteles
+	M09_AgregarHotel
+	M09_DetalleHotel
+	M09_GestionHoteles_Crear
+	M09_GestionHoteles_desactivar
+	M09_GestionHoteles_ModificarHotel
+	M09_GestionHoteles_Visu
+         * */
+
+
     }
 }

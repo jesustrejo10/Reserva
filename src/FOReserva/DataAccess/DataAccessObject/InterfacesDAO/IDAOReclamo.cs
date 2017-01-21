@@ -13,7 +13,6 @@ namespace FOReserva.DataAccess.DataAccessObject.InterfacesDAO
     public interface IDAOReclamo : IDAO
     {
 
-        //Entidad consultarReservaId(Entidad objeto);
 
         List<Reclamo> ConsultarReclamosPorUsuario(int _idUsuario);
 

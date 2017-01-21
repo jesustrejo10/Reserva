@@ -1,8 +1,10 @@
 ﻿using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+using BOReserva.DataAccess.DataAccessObject.M16;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
@@ -11,6 +13,9 @@ using System.Web;
 
 namespace BOReserva.DataAccess.DataAccessObject
 {
+    /// <summary>
+    /// Clase encargada de las consultas a BD por parte del M16 
+    /// </summary>
     public class DAOReclamo : DAO, IDAOReclamo
     {
         /// <summary>
@@ -26,47 +31,41 @@ namespace BOReserva.DataAccess.DataAccessObject
         int IDAO.Agregar(Entidad e)
         {
             Reclamo reclamo = (Reclamo)e;
-            SqlConnection conexion = Connection.getInstance(_connexionString);
+            reclamo._estadoReclamo = 1;
+            List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
             try
             {
-                conexion.Open();
-                String sql = "INSERT INTO Reclamo " +
-                             "(rec_titulo, rec_descripcion, rec_fecha, rec_estatus , rec_fk_usuario) " +
-                              "VALUES ('" + reclamo._tituloReclamo + "','" + reclamo._detalleReclamo + "','" + reclamo._fechaReclamo + "'," +
-                              "1," + reclamo._usuario + ");";
-                Debug.WriteLine(sql);
-                SqlCommand cmd = new SqlCommand(sql, conexion);
-                cmd.ExecuteNonQuery();
-                cmd.Dispose();
-                conexion.Close();
+                listaParametro.Add(FabricaDAO.asignarParametro(M16Reclamos.rec_titulo, SqlDbType.VarChar, reclamo._tituloReclamo, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(M16Reclamos.rec_descripcion, SqlDbType.VarChar, reclamo._detalleReclamo, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(M16Reclamos.rec_fecha, SqlDbType.VarChar, reclamo._fechaReclamo, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(M16Reclamos.rec_estatus, SqlDbType.Int, reclamo._estadoReclamo.ToString(), false));
+                listaParametro.Add(FabricaDAO.asignarParametro(M16Reclamos.rec_fk_usuario, SqlDbType.Int, reclamo._usuario.ToString(), false));
+
+                EjecutarStoredProcedure(M16Reclamos.procedimientoAgregarReclamo, listaParametro);
                 return 1;
             }
             catch (SqlException ex)
             {
                 Debug.WriteLine("Ocurrio un SqlException");
                 Debug.WriteLine(ex.ToString());
-                conexion.Close();
                 return 2;
             }
             catch (NullReferenceException ex)
             {
                 Debug.WriteLine("Ocurrio una NullReferenceException");
                 Debug.WriteLine(ex.ToString());
-                conexion.Close();
                 return 3;
             }
             catch (ArgumentNullException ex)
             {
                 Debug.WriteLine("Ocurrio una ArgumentNullException");
                 Debug.WriteLine(ex.ToString());
-                conexion.Close();
                 return 4;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("Ocurrio una Exception");
                 Debug.WriteLine(ex.ToString());
-                conexion.Close();
                 return 5;
             }
         }
@@ -78,38 +77,36 @@ namespace BOReserva.DataAccess.DataAccessObject
         /// <returns> reclamo </returns>
         Entidad IDAO.Consultar(int id)
         {
-            SqlConnection conexion = Connection.getInstance(_connexionString);
-
+            List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
+            int rec_id, rec_estatus, rec_fk_usuario;
+            String rec_titulo, rec_descripcion, rec_fecha;
             Entidad reclamoE = FabricaEntidad.InstanciarReclamo();
             Reclamo reclamo = (Reclamo)reclamoE;
             try
             {
-                conexion.Open();
-                String sql = "SELECT * FROM Reclamo WHERE rec_id = "+id;
+                parametro.Add(FabricaDAO.asignarParametro(M16Reclamos.rec_id, SqlDbType.Int, id.ToString(), false));
+                DataTable filaReclamo = EjecutarStoredProcedureTuplas(M16Reclamos.procedimientoConsultarReclamoPorId, parametro);
+                DataRow Fila = filaReclamo.Rows[0];
 
-                SqlCommand cmd = new SqlCommand(sql, conexion);
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
+                rec_id = int.Parse(Fila[M16Reclamos.recId].ToString());
+                rec_estatus = int.Parse(Fila[M16Reclamos.recEstatus].ToString());
+                rec_fk_usuario = int.Parse(Fila[M16Reclamos.recFkUsuario].ToString());
+                rec_titulo = Fila[M16Reclamos.rectitulo].ToString();
+                rec_descripcion = Fila[M16Reclamos.recDescripcion].ToString();
+                String[] divisor = Fila[M16Reclamos.recFecha].ToString().Split(' ');
+                rec_fecha = divisor[0];
+                reclamo = (Reclamo)FabricaEntidad.InstanciarReclamo(rec_id, rec_titulo, rec_descripcion, rec_fecha, rec_estatus, rec_fk_usuario);
 
-                    while (reader.Read())
-                    {
-                        reclamo._id = Int32.Parse(reader["rec_id"].ToString());
-                        reclamo._tituloReclamo = reader["rec_titulo"].ToString();
-                        reclamo._detalleReclamo = reader["rec_descripcion"].ToString();
-                        String[] divisor = reader["rec_fecha"].ToString().Split(' '); //recortamos la fecha
-                        reclamo._fechaReclamo = divisor[0];
-                        reclamo._estadoReclamo = Int32.Parse(reader["rec_estatus"].ToString());
-                        reclamo._usuario = Int32.Parse(reader["rec_fK_usuario"].ToString());
-                    }
-                }
-                cmd.Dispose();
-                conexion.Close();
                 return reclamo;
             }
             catch (SqlException ex)
             {
                 Debug.WriteLine(ex.ToString());
-                conexion.Close();
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
                 return null;
             }
         }
@@ -121,27 +118,40 @@ namespace BOReserva.DataAccess.DataAccessObject
         /// <returns>retorna el reclamo</returns>
         Entidad IDAO.Modificar(Entidad e)
         {
-            Reclamo _reclamo = (Reclamo)e;
-            SqlConnection conexion = Connection.getInstance(_connexionString);
+            Reclamo reclamo = (Reclamo)e;
+            List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
             try
             {
-                conexion.Open();
-                String sql = "UPDATE reclamo SET rec_titulo = '" + _reclamo._tituloReclamo + "', rec_descripcion = '" + _reclamo._detalleReclamo +
-                             "', rec_estatus = '" + _reclamo._estadoReclamo + "', rec_fecha = '" + _reclamo._fechaReclamo +
-                             "WHERE rec_id = " + _reclamo._id;
-
-                SqlCommand cmd = new SqlCommand(sql, conexion);
-                cmd.ExecuteNonQuery();
-                cmd.Dispose();
-                conexion.Close();
-                Entidad resultado = _reclamo;
-                return resultado;
+                listaParametro.Add(FabricaDAO.asignarParametro(M16Reclamos.rec_titulo, SqlDbType.VarChar, reclamo._tituloReclamo, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(M16Reclamos.rec_descripcion, SqlDbType.VarChar, reclamo._detalleReclamo, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(M16Reclamos.rec_fecha, SqlDbType.VarChar, reclamo._fechaReclamo, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(M16Reclamos.rec_id, SqlDbType.Int, reclamo._id.ToString(), false));
+                EjecutarStoredProcedure(M16Reclamos.procedimientoModificarReclamo, listaParametro);
+                return reclamo;
             }
             catch (SqlException ex)
             {
-                conexion.Close();
-                Entidad resultado = _reclamo;
-                return resultado;
+                Debug.WriteLine("Ocurrio un SqlException");
+                Debug.WriteLine(ex.ToString());
+                return null;
+            }
+            catch (NullReferenceException ex)
+            {
+                Debug.WriteLine("Ocurrio una NullReferenceException");
+                Debug.WriteLine(ex.ToString());
+                return null;
+            }
+            catch (ArgumentNullException ex)
+            {
+                Debug.WriteLine("Ocurrio una ArgumentNullException");
+                Debug.WriteLine(ex.ToString());
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Ocurrio una Exception");
+                Debug.WriteLine(ex.ToString());
+                return null;
             }
         }
 
@@ -154,70 +164,117 @@ namespace BOReserva.DataAccess.DataAccessObject
             List<Reclamo> listareclamos = new List<Reclamo>();
             Dictionary<int, Entidad> listaReclamos = new Dictionary<int, Entidad>();
             SqlConnection conexion = Connection.getInstance(_connexionString);
+
+            List<Reclamo> reclamos = FabricaEntidad.InstanciarListaReclamo();
+            List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
+            DataTable tablaDeDatos;
+            int rec_id, rec_estatus, rec_fk_usuario;
+            String rec_titulo, rec_descripcion, rec_fecha;
+            int placeholder = 0;
             try
             {
-                conexion.Open();
-                String sql = "SELECT * FROM reclamo";
-                SqlCommand cmd = new SqlCommand(sql, conexion);
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                parametro.Add(FabricaDAO.asignarParametro(M16Reclamos.rec_id, SqlDbType.Int, placeholder.ToString(), false));
+                tablaDeDatos = EjecutarStoredProcedureTuplas(M16Reclamos.procedimientoConsultarReclamos, parametro);
+                foreach (DataRow filaReclamo in tablaDeDatos.Rows)
                 {
-                    int idReclamo;
-                    String tituloReclamo;
-                    String detalleReclamo;
-                    String fechaReclamo;
-                    int estadoReclamo;
-                    int editable;
-                    int usuario;
-                  
-                    while (reader.Read())
-                    {
-                        idReclamo = Int32.Parse(reader["rec_id"].ToString());
-                        tituloReclamo = reader["rec_titulo"].ToString();
-                        detalleReclamo = reader["rec_descripcion"].ToString();
-                        fechaReclamo = reader["rec_fecha"].ToString();
-                        estadoReclamo = Int32.Parse(reader["rec_estatus"].ToString());
-                        usuario = Int32.Parse(reader["rec_fk_usuario"].ToString());
-                        String[] divisor = fechaReclamo.Split(' '); //recortamos la fecha
-
-                        Entidad reclamoE = FabricaEntidad.InstanciarReclamo(idReclamo, tituloReclamo, detalleReclamo, divisor[0], estadoReclamo, usuario);
-                        Reclamo reclamo = (Reclamo)reclamoE;
-                        listaReclamos.Add(idReclamo, reclamo);
-                    }
+                    rec_id = int.Parse(filaReclamo[M16Reclamos.recId].ToString());
+                    rec_estatus = int.Parse(filaReclamo[M16Reclamos.recEstatus].ToString());
+                    rec_fk_usuario = int.Parse(filaReclamo[M16Reclamos.recFkUsuario].ToString());
+                    rec_titulo = filaReclamo[M16Reclamos.rectitulo].ToString();
+                    rec_descripcion = filaReclamo[M16Reclamos.recDescripcion].ToString();
+                    String[] divisor = filaReclamo[M16Reclamos.recFecha].ToString().Split(' ');
+                    rec_fecha = divisor[0];
+                    Reclamo reclamo = (Reclamo)FabricaEntidad.InstanciarReclamo(rec_id, rec_titulo, rec_descripcion, rec_fecha, rec_estatus, rec_fk_usuario);
+                    listaReclamos.Add(rec_id, reclamo);
                 }
-                cmd.Dispose();
-                conexion.Close();
                 return listaReclamos;
             }
             catch (SqlException ex)
             {
                 Debug.WriteLine(ex.ToString());
-                conexion.Close();
                 return null;
             }
         }
-
+           
         /// <summary>
         /// Método para eliminar reclamo 
         /// </summary>
         /// <param name="id">id del reclamo</param>
         /// <returns>retorna 1 si eliminó correctamente</returns>
-        int IDAO.Eliminar(int id)
+        public int Eliminar(int id)
         {
             try
             {
-                SqlConnection conexion = Connection.getInstance(_connexionString);
-                conexion.Open();
-                String sql = "DELETE FROM reclamo WHERE rec_id = " + id + "";
-                System.Diagnostics.Debug.WriteLine(sql);
-                SqlCommand cmd = new SqlCommand(sql, conexion);
-                cmd.ExecuteNonQuery();
-                cmd.Dispose();
-                conexion.Close();
+                List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
+                parametro.Add(FabricaDAO.asignarParametro(M16Reclamos.rec_id, SqlDbType.Int, id.ToString(), false));
+                EjecutarStoredProcedure(M16Reclamos.procedimientoEliminarReclamo, parametro);
                 return 1;
             }
             catch (SqlException ex)
             {
-                return 0;
+                Debug.WriteLine("Ocurrio un SqlException");
+                Debug.WriteLine(ex.ToString());
+                return 2;
+            }
+            catch (NullReferenceException ex)
+            {
+                Debug.WriteLine("Ocurrio una NullReferenceException");
+                Debug.WriteLine(ex.ToString());
+                return 3;
+            }
+            catch (ArgumentNullException ex)
+            {
+                Debug.WriteLine("Ocurrio una ArgumentNullException");
+                Debug.WriteLine(ex.ToString());
+                return 4;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Ocurrio una Exception");
+                Debug.WriteLine(ex.ToString());
+                return 5;
+            }
+        }
+
+        /// <summary>
+        /// Método para actualizar el estado de un reclamo
+        /// </summary>
+        /// <param name="id"> recibe el id del reclamo</param>
+        /// <param name="estado">recibe el estado del reclamo</param>
+        /// <returns>retorna un entero</returns>
+        public int modificarEstado(int id, int estado)
+        {
+            try
+            {
+                List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
+                parametro.Add(FabricaDAO.asignarParametro(M16Reclamos.rec_id, SqlDbType.Int, id.ToString(), false));
+                parametro.Add(FabricaDAO.asignarParametro(M16Reclamos.rec_estatus, SqlDbType.Int, estado.ToString(), false));
+                EjecutarStoredProcedure(M16Reclamos.procedimientoActualizarReclamo, parametro);
+                return 1;
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine("Ocurrio un SqlException");
+                Debug.WriteLine(ex.ToString());
+                return 2;
+            }
+            catch (NullReferenceException ex)
+            {
+                Debug.WriteLine("Ocurrio una NullReferenceException");
+                Debug.WriteLine(ex.ToString());
+                return 3;
+            }
+            catch (ArgumentNullException ex)
+            {
+                Debug.WriteLine("Ocurrio una ArgumentNullException");
+                Debug.WriteLine(ex.ToString());
+                return 4;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Ocurrio una Exception");
+                Debug.WriteLine(ex.ToString());
+                return 5;
             }
         }
       

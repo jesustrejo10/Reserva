@@ -37,6 +37,10 @@ namespace FOReserva.Controllers
             Command<Entidad> comando = FabricaComando.consultarReclamo(_idReclamo);
             reclamoAModificar = (Reclamo) comando.ejecutar();
             String[] fomateadorFecha = reclamoAModificar._fechaReclamo.Split('/');
+            if (int.Parse(fomateadorFecha[1])<=9)
+            {
+                fomateadorFecha[1] = "0" + fomateadorFecha[1];
+            }
             reclamoAModificar._fechaReclamo = fomateadorFecha[2] + "-" + fomateadorFecha[1] + "-" + fomateadorFecha[0];
             return PartialView("M16_ModificarReclamo", reclamoAModificar);
         }
