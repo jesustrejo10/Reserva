@@ -206,6 +206,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\PatronComando\Command.cs" />
     <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COModificarBoleto.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COVerificarDisponibilidadBoleto.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COMostrarIdaVuelta.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COBuscarnombreciudad.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COEliminarBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COModificarPasajero.cs" />

@@ -124,6 +124,144 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
         }
 
+        Entidad IDAO.Modificar(Entidad e) {
+            Boleto boleto = (Boleto)e;
+            try
+            {
+                SqlConnection con = new SqlConnection(_connexionString);
+                con.Open();
+                String sql = "UPDATE Boleto SET bol_tipo_boleto = '" + boleto._tipoBoleto + "' WHERE bol_id = " + boleto._id + "";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                con.Close();
+                return boleto;
+            }
+            catch (SqlException ex)
+            {
+                return null;
+            }
+        }
+
+        int IDAOBoleto.MBuscarIdaVuelta(int id) {
+            int _conteo = 0;
+            try
+            {
+                SqlConnection con = new SqlConnection(_connexionString);
+                con.Open();
+                String sql = "SELECT bol_ida_vuelta FROM Boleto WHERE bol_id =" + id + "";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        _conteo = reader.GetInt32(reader.GetOrdinal("bol_ida_vuelta")); ;
+                    }
+                }
+                cmd.Dispose();
+                con.Close();
+                return _conteo;
+            }
+            catch (SqlException ex)
+            {
+                return _conteo;
+            }
+        }
+
+        int IDAOBoleto.MConteoCategoria(int codigo_vuelo, String tipo)
+        {
+            int _conteo = 0;
+            try
+            {
+                SqlConnection con = new SqlConnection(_connexionString);
+                con.Open();
+                String sql = "SELECT COUNT(*) AS num " +
+                             "FROM Boleto_Vuelo B, Boleto C " +
+                             "WHERE B.bol_fk_vuelo = " + codigo_vuelo +
+                             " AND C.bol_id = B.bol_fk_boleto " +
+                             "AND UPPER(C.bol_tipo_boleto) = UPPER('" + tipo + "')";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        _conteo = reader.GetInt32(reader.GetOrdinal("num")); ;
+                    }
+                }
+                cmd.Dispose();
+                con.Close();
+                return _conteo;
+            }
+            catch (SqlException ex)
+            {
+                return _conteo;
+            }
+        }
+
+        int IDAOBoleto.MConteoCapacidad(int codigo_vuelo, String tipo)
+        {
+            
+            int _conteo = 0;
+            try
+            {
+                String sql;
+                SqlConnection con = new SqlConnection(_connexionString);
+                con.Open();
+                if(tipo=="Turista"){
+                    sql = "SELECT A.avi_pasajeros_turista num " +
+                           "FROM Vuelo V, Avion A " +
+                           "WHERE V.vue_id =" + codigo_vuelo +
+                           " AND V.vue_fk_avion = A.avi_id";
+                }
+                else if (tipo == "Ejecutivo")
+                {
+                     sql = "SELECT A.avi_pasajeros_ejecutiva num " +
+                          "FROM Vuelo V, Avion A " +
+                          "WHERE V.vue_id =" + codigo_vuelo +
+                          " AND V.vue_fk_avion = A.avi_id";
+
+                }
+                else {
+                    sql = "SELECT A.avi_pasajeros_vip num " +
+                           "FROM Vuelo V, Avion A " +
+                           "WHERE V.vue_id =" + codigo_vuelo +
+                           " AND V.vue_fk_avion = A.avi_id";
+                }
+           
+                SqlCommand cmd = new SqlCommand(sql, con);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        _conteo = reader.GetInt32(reader.GetOrdinal("num")); ;
+                    }
+                }
+                cmd.Dispose();
+                con.Close();
+                return _conteo;
+            }
+            catch (SqlException ex)
+            {
+                return _conteo;
+            }
+        }
+
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         public List<BoletoVuelo> M05ListarVuelosBoleto(int id_boleto)
         {
             List<BoletoVuelo> listavuelos = new List<BoletoVuelo>();

@@ -541,67 +541,6 @@ namespace BOReserva.Controllers
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
 
-        public bool verificarDisponibilidad(int codigo_vuelo, String tipo)
-        {
-            bool disponibilidad = false;
-            manejadorSQL_Boletos modificar = new manejadorSQL_Boletos();
-
-            int compara1 = String.Compare(tipo, "Turista");
-            int compara2 = String.Compare(tipo, "Ejecutivo");
-            int compara3 = String.Compare(tipo, "Vip");
-
-            if (compara1 == 0)
-            {
-
-                int conteo = modificar.MConteoTurista(codigo_vuelo);
-                int cap = modificar.MBuscarCapTurista(codigo_vuelo);
-                System.Diagnostics.Debug.WriteLine(conteo);
-                System.Diagnostics.Debug.WriteLine(cap);
-                if (conteo < cap)
-                {
-                    disponibilidad = true;
-                }
-                else
-                {
-                    disponibilidad = false;
-                }
-
-            }
-
-            if (compara2 == 0)
-            {
-                int conteo = modificar.MConteoEjecutivo(codigo_vuelo);
-                int cap = modificar.MBuscarCapEjecutivo(codigo_vuelo);
-                System.Diagnostics.Debug.WriteLine(conteo);
-                System.Diagnostics.Debug.WriteLine(cap);
-                if (conteo < cap)
-                {
-                    disponibilidad = true;
-                }
-                else
-                {
-                    disponibilidad = false;
-                }
-            }
-
-            if (compara3 == 0)
-            {
-
-                int conteo = modificar.MConteoVip(codigo_vuelo);
-                int cap = modificar.MBuscarCapVip(codigo_vuelo);
-                if (conteo < cap)
-                {
-                    disponibilidad = true;
-                }
-                else
-                {
-                    disponibilidad = false;
-                }
-            }
-
-            return disponibilidad;
-        }
-
 
         [HttpPost]
         public JsonResult modificarTipoBoleto(CModificarBoleto model)
@@ -609,33 +548,38 @@ namespace BOReserva.Controllers
             bool disponibilidad = false;
             String tipo = model._tipoBoleto;
 
+            Command<Entidad> comando = FabricaComando.mostrarM05boleto(model._bol_id);
+            Boleto boleto = (Boleto)comando.ejecutar();
+            List<BoletoVuelo> lista = boleto._vuelos;
+            String tipoOri = boleto._tipoBoleto;
+            
             manejadorSQL_Boletos modificar = new manejadorSQL_Boletos();
-            String tipoOri = modificar.MBuscarTipoBoletoOriginal(model._bol_id);
-            List<CVuelo> lista = modificar.M05ListarVuelosBoleto(model._bol_id);
+          
 
             int compara = String.Compare(tipoOri, tipo);
             if (compara != 0)
             {
 
                 // PRIMERO VEO SI ES IDA O IDA Y VUELTA
-                int ida_vuelta = modificar.MBuscarIdaVuelta(model._bol_id);
+                Command<int> comando2 = FabricaComando.mostrarM05idaVuelta(model._bol_id);
+                int ida_vuelta = comando2.ejecutar();
                 // EL BOLETO ES IDA 1
                 // EL BOLETO ES IDA Y VUELTA 2
                 if (ida_vuelta == 1)
                 {
                     int codigo_vuelo1 = lista[0]._id;
-
-                    disponibilidad = verificarDisponibilidad(codigo_vuelo1, tipo);
+                    Command<bool> comando3 = FabricaComando.verificarM05Boleto(codigo_vuelo1, tipo);
+                    disponibilidad =comando3.ejecutar();
 
                 }
                 else
                 {
                     int codigo_vuelo_ida = lista[0]._id;
                     int codigo_vuelo_vuelta = lista[1]._id;
-
-                    bool disp_ida = verificarDisponibilidad(codigo_vuelo_ida, tipo);
-                    bool disp_vuelta = verificarDisponibilidad(codigo_vuelo_vuelta, tipo);
-
+                    Command<bool> comando4 = FabricaComando.verificarM05Boleto(codigo_vuelo_ida, tipo);
+                    Command<bool> comando5 = FabricaComando.verificarM05Boleto(codigo_vuelo_vuelta, tipo);
+                    bool disp_ida = comando4.ejecutar();
+                    bool disp_vuelta = comando5.ejecutar();
                     disponibilidad = ((disp_ida) && (disp_vuelta));
                     System.Diagnostics.Debug.WriteLine(disponibilidad);
 
@@ -645,7 +589,9 @@ namespace BOReserva.Controllers
                 {
 
                     // HACER EL UPDATE
-                    int num = modificar.M05ModificarTipoBoleto(model._bol_id, tipo);
+                    boleto._tipoBoleto = tipo;
+                    Command<int> comando6 = FabricaComando.modificarM05modificarBoleto(boleto);
+                    int num = comando6.ejecutar();
                     return (Json(true, JsonRequestBehavior.AllowGet));
                 }
                 else

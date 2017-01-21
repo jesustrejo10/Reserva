@@ -191,6 +191,20 @@ namespace BOReserva.Controllers.PatronComando
             return new M05_COConsultarBoleto(id);
         }
 
+        public static Command<int> mostrarM05idaVuelta(int id)
+        {
+            return new M05_COMostrarIdaVuelta(id);
+        }
+
+        public static Command<bool> verificarM05Boleto(int codigo_vuelo, String tipo)
+        {
+            return new M05_COVerificarDisponibilidadBoleto(codigo_vuelo, tipo);
+        }
+
+        public static Command<int> modificarM05modificarBoleto(Entidad e)
+        {
+            return new M05_COModificarBoleto((Boleto)e);
+        }
         #endregion
 
         #region Modulo 10 Gestion Restaurante
