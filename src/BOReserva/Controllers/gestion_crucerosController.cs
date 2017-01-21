@@ -70,13 +70,34 @@ namespace BOReserva.Controllers
 
         public ActionResult M24_AgregarCamarote()
         {
-            ConexionBD cbd = new ConexionBD();
-            VistaListaCrucero vlc = new VistaListaCrucero();
-            CGestion_cabina cabina = new CGestion_cabina();
-            CGestion_camarote camarote = new CGestion_camarote() { camarote = new List<CGestion_camarote>() };            
-            vlc.cruceros = cbd.listarCruceros();
-            ViewBag.ShowDropDown = new SelectList(vlc.cruceros, "_idCrucero", "_nombreCrucero");            
-            return PartialView("M24_AgregarCamarote", camarote);
+            CGestion_camarote camarote = new CGestion_camarote();
+            List<String> lista = new List<string>();
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14VisualizarCruceros();
+            Dictionary<int, Entidad> listaCruceros = comando.ejecutar();
+
+            try
+            {
+                foreach (var crucero in listaCruceros)
+                {
+                    BOReserva.DataAccess.Domain.Crucero c = (BOReserva.DataAccess.Domain.Crucero)crucero.Value;
+                    lista.Add(c._nombreCrucero);
+                }
+                camarote._listaCruceros = lista.Select(x => new SelectListItem
+                {
+                    Value = x,
+                    Text = x
+                });
+                return PartialView(camarote);
+            }
+            catch (SqlException e)
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error, no se pudo conectar con la base de datos";
+                //Retorno el error
+                return PartialView(error);
+            }
             
         }
 
