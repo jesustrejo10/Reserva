@@ -276,6 +276,7 @@
     <Compile Include="Controllers\List.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COVisualizarHoteles.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COAgregarPasajero.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COConsultarPermisosUsuario.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarCabinas.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COAgregarCabina.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarCruceros.cs" />
@@ -353,7 +354,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>M13_DAOResources.resx</DependentUpon>
-	  </Compile>
+    </Compile>
     <Compile Include="DataAccess\DataAccessObject\M16\M16Reclamos.Designer.cs">
       <DependentUpon>M16Reclamos.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -1819,7 +1820,7 @@
     <EmbeddedResource Include="DataAccess\DataAccessObject\M13\M13_DAOResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>M13_DAOResources.Designer.cs</LastGenOutput>
-	  </EmbeddedResource>
+    </EmbeddedResource>
     <EmbeddedResource Include="DataAccess\DataAccessObject\M16\M16Reclamos.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>M16Reclamos.Designer.cs</LastGenOutput>

@@ -348,6 +348,11 @@ namespace BOReserva.Controllers.PatronComando
          return new M13_COModificarRol(rol, idmodificar);
         }
 
+        public static Command<List<String>> crearM13_ConsultarPermisosUsuario (int id)
+        {
+            return new M13_COConsultarPermisosUsuario(id);
+        }
+
         #endregion
 
         #region M05_Boleto
