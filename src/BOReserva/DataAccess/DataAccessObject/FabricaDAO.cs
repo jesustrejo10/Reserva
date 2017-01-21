@@ -22,8 +22,8 @@ namespace BOReserva.DataAccess.DataAccessObject
         }
         #endregion
 
-        #region M09_Gestion_Hoteles_Por_Ciudad
-
+         #region M09_Gestion_Hoteles_Por_Ciudad
+        
         public static DAO instanciarDaoHotel() {
             return new DAOHotel();
         }
@@ -66,8 +66,8 @@ namespace BOReserva.DataAccess.DataAccessObject
         {
             return new DAOBoleto();
 		}
-        #endregion
-
+		#endregion
+			
         #region M08_Automoviles
         public static DAO CrearDaoAutomovil()
         {
@@ -165,6 +165,15 @@ namespace BOReserva.DataAccess.DataAccessObject
         {
             return new DAORol();
         }
+        #endregion
+
+        #region M11_Ofertas
+
+        public static DAO instanciarDaoOferta()
+        {
+            return new DAOOferta();
+        }
+
         #endregion
     }
 }

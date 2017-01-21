@@ -313,6 +313,20 @@ namespace BOReserva.Controllers.PatronComando
         }
         #endregion
 
+        #region M11_AregarOferta
+
+        /// <summary>
+        /// Instancia el comando agregarOferta
+        /// </summary>
+        /// <param name="e">Recibe la una entidad de tipo Oferta</param>
+        /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
+        public static Command<String> crearM11AgregarOferta(Entidad e)
+        {
+
+            return new M11_COAgregarOferta((Oferta) e);
+
+        }
 
     }
+        #endregion
 }
