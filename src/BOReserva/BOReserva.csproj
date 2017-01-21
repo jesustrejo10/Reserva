@@ -224,7 +224,6 @@
     <Compile Include="Controllers\PatronComando\M05\M05_COBuscarnombreciudad.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COEliminarBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COModificarPasajero.cs" />
-    <Compile Include="Controllers\PatronComando\M05\M05_COAgregarPasajero.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COConsultarBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COCrearBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COAgregarHabitaciones.cs" />
@@ -276,6 +275,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\List.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COVisualizarHoteles.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COAgregarPasajero.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarCabinas.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COAgregarCabina.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarCruceros.cs" />
@@ -344,6 +344,8 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="DataAccess\DataAccessObject\M10\DAORestaurant.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORestaurant.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORol.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOItinerario.cs" />
     <Compile Include="DataAccess\Domain\M14\Cabina.cs" />
     <Compile Include="DataAccess\Domain\M14\Crucero.cs" />
