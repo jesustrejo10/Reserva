@@ -1,4 +1,6 @@
-﻿@model BOReserva.Models.gestion_restaurantes.CRestauranteModeloVista
+﻿@model BOReserva.Models.gestion_restaurantes.CRestauranteModelo
+
+
 
 <link href="@Url.Content("~/Scripts/select2/css/select2.min.css")" rel="stylesheet" />
 <script src="@Url.Content("~/Scripts/jquery-3.1.1.min.js")"></script>
@@ -8,13 +10,7 @@
 <!-- DataTables -->
 <script src="../../Content/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="../../Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
-<!-- SlimScroll -->
-<script src="../../Content/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-<!-- FastClick -->
-<script src="../../Content/plugins/fastclick/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="../../Content/dist/js/app.min.js"></script>
-<!-- page script -->
+
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -22,72 +18,130 @@ $(document).ready(function() {
 });
 </script>
 
-<div class="row">
-    <link rel="stylesheet" href="~/Content/plugins/datatables/dataTables.bootstrap.css">
+<script type="text/javascript">
+    $(document).ready(function ()
+    {
+        $('#combo').change(function ()
+        {
+            var idCiudad = $('#combo :selected').val();
+            var posicion = $("#combo").get(0).selectedIndex;
+            var url = '/gestion_restaurantes/M10_GestionRestaurantes_Ver';
+            var method = 'GET';
+           // alert(idCiudad);
+            $.ajax
+                  ({
+                      url: url,
+                      type: method,
+                      cache: false,
+                      async: true,
+                      data: { id: idCiudad },
+                      success: function (data, textStatus, jqXHR)
+                      {
+                       
+                          $("#tabla").html(data);
+                          $("#tabla").empty();
+                          $("#tabla").append(data);
+                          $("#combo").get(0).selectedIndex = posicion;
+                      },
+                      error: function (jqXHR, textStatus, errorThrown)
+                      {
+                          alert(errorThrown);
+                      }
+                  });
 
-    <div class="col-xs-12">
-        <div class="box">
-            <div class="box-header">
-                <h3 class="box-title">Lista de Restaurantes</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <table id="m10-ver-restaurantes" class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th hidden="hidden">ID</th>
-                            <th>Nombre</th>
-                            <th>Dirección</th>
-                            <th>Descripción</th>
-                            <th>Hora Apertura</th>
-                            <th>Hora Cierre</th>
-                            <th>Ciudad</th>
-                            <th>Opciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @try
-                        {
-                            foreach (var item in Model._listaRestaurantes)
+        });
+    });
+</script>
+
+
+
+
+
+<div id="tabla">
+   
+    <div class="row">
+        <link rel="stylesheet" href="~/Content/plugins/datatables/dataTables.bootstrap.css">
+
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="col-md-12">
+
+                    <div class="col-xs-6">
+                        <h2 class="box-title">Lista de Restaurantes </h2>
+                    </div>
+
+
+                    <div class="col-xs-3" style="margin-left:262px">
+                        &nbsp;
+                        &nbsp;
+                        @Html.DropDownList("combo", ViewBag.Ciudad as SelectList, null, new { @class = "form-control" })
+
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    &nbsp;
+                    &nbsp;
+                    <table id="m10-ver-restaurantes" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th hidden="hidden">ID</th>
+                                <th>Nombre</th>
+                                <th>Dirección</th>
+                                <th>Telefono</th>
+                                <th>Descripción</th>
+                                <th>Hora Apertura</th>
+                                <th>Hora Cierre</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @try
                             {
-                                <tr id="@item._id">
-                                    <td hidden="hidden">@item._id</td>
-                                    <td>@item._nombre</td>
-                                    <td>@item._direccion</td>
-                                    <td>@item._descripcion</td>
-                                    <td>@item._horarioApertura</td>
-                                    <td>@item._horarioCierre</td>
-                                    <td>@Model._listaCiudades.FirstOrDefault(x => x._id == @item._idLugar)._nombre</td> <!-- Demasiado astuto para mi propio bien -->
-                                    <td>
-                                        <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>
-                                        <a href="#" title="Eliminar"><i class="fa fa-times eliminar"></i></a>
-                                    </td>
-                                </tr>
+
+                                foreach (var item in Model.listaRestaurantes)
+                                {
+                                    <tr id="@item._id">
+                                        <td hidden="hidden">@item._id</td>
+                                        <td>@item.nombre</td>
+                                        <td>@item.direccion</td>
+                                        <td>@item.Telefono</td>
+                                        <td>@item.descripcion</td>
+                                        <td>@item.horarioApertura</td>
+                                        <td>@item.horarioCierre</td>
+
+
+                                        <td>
+                                            <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>
+                                            <a href="#" title="Eliminar"><i class="fa fa-times eliminar"></i></a>
+                                        </td>
+                                    </tr>
+                                }
                             }
-                        }
-                        catch
-                        {
+                            catch
+                            {
 
-                        }
+                            }
 
-                    <tfoot>
-                        <tr>
-                            <th hidden="hidden">ID</th>
-                            <th>Nombre</th>
-                            <th>Dirección</th>
-                            <th>Descripción</th>
-                            <th>Hora Apertura</th>
-                            <th>Hora Cierre</th>
-                            <th>Ciudad</th>
-                            <th>Opciones</th>
-                        </tr>
-                    </tfoot>
-                </table>
+                        <tfoot>
+                            <tr>
+                                <th hidden="hidden">ID</th>
+                                <th>Nombre</th>
+                                <th>Dirección</th>
+                                <th>Telefono</th>
+                                <th>Descripción</th>
+                                <th>Hora Apertura</th>
+                                <th>Hora Cierre</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.box-body -->
             </div>
-            <!-- /.box-body -->
+            <!-- /.box -->
         </div>
-        <!-- /.box -->
+        <!-- /.col -->
     </div>
-    <!-- /.col -->
+    <!-- /.row -->
 </div>
-<!-- /.row -->

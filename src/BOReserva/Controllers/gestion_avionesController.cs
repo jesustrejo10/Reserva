@@ -14,9 +14,7 @@ namespace BOReserva.Controllers
     /// Clase que emite las respuestas de los eventos AJAX
     /// </summary>
     public class gestion_avionesController : Controller
-    {
-       
-       
+    {    
         /// <summary>
         /// Metodo para guardar el avion, haciendo el insert en la base de datos 
         /// </summary>
@@ -88,6 +86,7 @@ namespace BOReserva.Controllers
         /// <returns>ActionResult que contiene una lista de los aviones en el sistema </returns>
         public ActionResult M02_VisualizarAviones()
         {
+            System.Diagnostics.Debug.WriteLine("ID: " + gestion_seguridad_ingresoController.IDUsuarioActual());
             manejadorSQL sql = new manejadorSQL();
             List<CAvion> aviones = new List<CAvion>();
             try

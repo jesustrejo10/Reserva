@@ -34,6 +34,7 @@
         $("#PeAutos").removeClass("active");
         $("#PeHabitaciones").removeClass("active");
         $("#PeRestaurantes").removeClass("active");
+        $("#PeReclamos").removeClass("active");
 
         var url = '/registro_autenticacion/CambiarClavePerfil';
         var method = 'GET';
@@ -66,6 +67,7 @@
         $("#PeAutos").removeClass("active");
         $("#PeHabitaciones").removeClass("active");
         $("#PeRestaurantes").removeClass("active");
+        $("#PeReclamos").removeClass("active");
 
         var url = '/registro_autenticacion/VerPerfil';
         var method = 'GET';
@@ -98,7 +100,7 @@
         $("#PeAutos").removeClass("active");
         $("#PeHabitaciones").removeClass("active");
         $("#PeRestaurantes").removeClass("active");
-
+        $("#PeReclamos").removeClass("active");
         var url = '/gestion_planificacion_vacaciones/M17_gestion_itinerario_Perfil';
         var method = 'GET';
         var data = '';
@@ -117,6 +119,39 @@
                 }
             });
     });
+
+    /* CARGADOR DE BOTON RECLAMOS */
+    $("#PeReclamos").click(function (e) {
+        e.preventDefault();
+        $("#peReclamos").addClass("active");
+
+        $("#PePerfil").removeClass("active");
+        $("#PeDiario").removeClass("active");
+        $("#PeVuelos").removeClass("active");
+        $("#PeCruceros").removeClass("active");
+        $("#PeAutos").removeClass("active");
+        $("#PeHabitaciones").removeClass("active");
+        $("#PeRestaurantes").removeClass("active");
+        $("#PeReclamos").removeClass("active");
+        var url = '/gestion_reclamos/M16_AgregarReclamo';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+                    $("#contenedorPerfil").empty();
+                    $("#contenedorPerfil").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
 
     /* CARGADOR DE BOTON DIARIO DE VIAJE */
     $("#PeDiario").click(function (e) {

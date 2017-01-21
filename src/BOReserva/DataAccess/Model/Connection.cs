@@ -12,7 +12,7 @@ namespace BOReserva.DataAccess.Model
     /// </summary>
     public class Connection
     {
-        private SqlConnection _connection;
+        public SqlConnection _connection;
         private static Connection _instance;
         /// <summary>
         ///     Constructor de la clase.
@@ -40,12 +40,11 @@ namespace BOReserva.DataAccess.Model
             catch (SqlException e)
             {
                 Debug.WriteLine("Ocurrio un SQL Exception"+e.ToString());
-
                 return null;
-                //imprimir mensjae y manejar error de conexion
             }
             catch (Exception e) 
             {
+                Debug.WriteLine("Ocurrio una Exception" + e.ToString());
                 return null;
             }
         }

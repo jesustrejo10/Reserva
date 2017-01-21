@@ -1,0 +1,212 @@
+﻿<!-- Indico que para esta vista, M08_AgregarAutomovil, utilizare el modelo Models/gestion_automoviles/CAgregarAutomovil-->
+@model BOReserva.Models.gestion_hoteles.CAgregarHotel
+
+<!--Indico que, estoy abriendo un formulario que tendra como accion del submit, el controlador gestion_automoviles"Controller",
+    utilizara el metodo guardarAutomovil
+    le pasara la informacion mediante un POST-->
+@using (Html.BeginForm("saveHotel", "gestion_hoteles", null, FormMethod.Post, new { @id = "formSaveHotel", @class = "form-horizontal" }))
+{
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h1 class="box-title" style="font-size:32px;"> Agregar Hotel</h1>
+                    <div class="box-tools pull-right">
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-4">
+                                <label for="placa">Nombre(<span style="color:red">*</span>)</label>
+                                @Html.TextBoxFor(m => m._nombre, null, new { @class = "form-control", @placeholder = "Gran Melia", @id = "hot_nombre", @maxlength = 30, @onblur = "checkTextField(this);" })
+                            </div>
+                            <div class="col-xs-2">
+                                &nbsp;
+                            </div>
+
+                            <div class="col-xs-4">
+                                <label for="modelo">Direccion(<span style="color:red">*</span>)</label>
+                                @Html.TextBoxFor(m => m._direccion, null, new { @class = "form-control", @placeholder = "Av Colombia, Calle 4", @id = "hot_direccion", @maxlength = 120})
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="modelo">Pagina web(<span style="color:red">*</span>)</label>
+                                @Html.TextBoxFor(m => m._paginaWeb, null, new { @class = "form-control", @placeholder = "www.granmeliaccs.com", @id = "hot_web", @onblur = "checkpaginaweb(this);", @maxlength = 20 })
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="anio">Correo electronico(<span style="color:red">*</span>)</label>
+                                @Html.TextBoxFor(m => m._email, null, new { @class = "form-control", @placeholder = "contacto@granmeliaccs.com", @id = "hot_email", @maxlength = 25, @onblur = "checkcorreo(this);" })
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="transmision">Clasificacion(<span style="color:red">*</span>)</label>
+                                @{
+                                    List<SelectListItem> _clasificacion = new List<SelectListItem>();
+
+                                    _clasificacion.Add(new SelectListItem
+                                    {
+                                        Text = "1 estrella",
+                                        Value = "1"
+                                    });
+                                    _clasificacion.Add(new SelectListItem
+                                    {
+                                        Text = "2 estrellas",
+                                        Value = "2"
+                                    });
+                                    _clasificacion.Add(new SelectListItem
+                                    {
+                                        Text = "3 estrellas",
+                                        Value = "3"
+                                    }); _clasificacion.Add(new SelectListItem
+                                    {
+                                        Text = "4 estrellas",
+                                        Value = "4"
+                                    });
+                                    _clasificacion.Add(new SelectListItem
+                                    {
+                                        Text = "5 estrellas",
+                                        Value = "5"
+                                    });
+                                }
+                                @Html.DropDownListFor(m => m._clasificacion, _clasificacion, new { @class = "form-control", @placeholder = "3 estrellas", @id = "hot_clasificacion" })
+
+    
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="capacidad">Capacidad(<span style="color:red">*</span>)</label>
+                                @Html.TextBoxFor(m => m._capacidadHabitacion, null, new { @type = "number", @class = "form-control", @placeholder = "28", @id = "hot_capacidad", min = "0", @onblur = "checklargo(this);" })
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="">Pais(<span style="color:red">*</span>)</label>
+                                @{  
+                                    List<SelectListItem> paises = BOReserva.Controllers.gestion_hotelesController.pais();
+                                    
+                                    if (paises.First().Text.Length > 15)
+                                    {
+                                        Response.Write("<script>alert('" + paises.First().Text + "');</script>");
+                                        List<SelectListItem> error = new List<SelectListItem>();
+                                        @Html.DropDownListFor(m => m._pais, error, new { @class = "form-control", @placeholder = "Pais", @id = "hot_pais", @onblur = "listadeciudades(this.value);" });
+                                    }
+                                    else
+                                    {
+                                        @Html.DropDownListFor(m => m._pais, paises, new { @class = "form-control", @placeholder = "Pais", @id = "hot_pais", @onblur = "listadeciudades(this.value);" });
+                                    }
+                                }
+                            </div>
+
+                            <div class="col-xs-6">
+                                <label for="Ciudad">Ciudad(<span style="color:red">*</span>)</label>
+                                <select class="form-control" id="ciudades" name="ciudad" onblur="getciudad();"></select>
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <button type="submit" id="save_hotel" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+
+    <script src="~/Scripts/Scripts_Hoteles/llamadas_comunes_hoteles.js"></script>
+
+    <script>
+
+        $("#save_hotel").click(function (e) {
+            e.preventDefault();
+            var form = $("#formSaveHotel");
+            var nombre = $('#hot_nombre').val();
+            var direccion = $('#hot_direccion').val();
+            var paginaWeb = $('#hot_web').val();
+            var email = $('#hot_email').val();
+            var clasificacion = $('#hot_clasificacion').val();
+            var pais = $('#hot_pais').val();
+            var ciudad = $('#ciudades').val();
+
+            if (nombre && direccion && paginaWeb && email && clasificacion && pais && ciudad) {
+                $.ajax({
+                    url: "gestion_hoteles/guardarHotel",
+                    data: form.serialize(),
+                    type: 'POST',
+                    success: function (data) {
+                        if (data === "1") {
+                            alert("Se registro el Hotel exitosamente");
+                            $('#formSaveVehicle')[0].reset();
+                        } else {
+                            alert(data);
+                        }
+                    }
+                });
+            } else {
+                alert("Existen campos vacios, por favor revise todos los campos");
+            }
+        });
+
+
+
+    </script>
+
+    <script language="javascript" type="text/javascript">
+        function listadeciudades(_stateId) {
+            var procemessage = "<option value='0'> Espere un momento...</option>";
+            $("#ciudades").html(procemessage).show();
+            var url = "/gestion_hoteles/listaciudades";
+            var _pais = $('#hot_pais option:selected').text();
+            $.ajax({
+                url: url,
+                data: { pais: _pais },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+                    markup = "";
+                    for (var x = 0; x < data.length; x++) {
+                        markup += "<option>" + data[x] + "</option>";
+                    }
+                    $("#ciudades").html(markup).show();
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+            });
+        }
+
+
+
+        function getciudad() {
+            var url = "/gestion_hoteles/getCity";
+            var ciudad = $('#ciudades option:selected').text();
+            $.ajax({
+                url: url,
+                data: { _ciudad: ciudad },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+
+                }
+            });
+
+        }
+
+    </script>
+
+}

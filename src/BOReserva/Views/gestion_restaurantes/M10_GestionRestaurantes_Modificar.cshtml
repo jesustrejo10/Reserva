@@ -1,10 +1,10 @@
-﻿@model BOReserva.Models.gestion_restaurantes.CRestauranteModeloVista
+﻿@model BOReserva.Models.gestion_restaurantes.CRestauranteModelo
 
 <script src="~/Scripts/Scripts_Restaurantes/llamadas_generales.js"></script>
 <link href="@Url.Content("~/Scripts/select2/css/select2.min.css")" rel="stylesheet" />
 <script src="@Url.Content("~/Scripts/jquery-3.1.1.min.js")"></script>
 <script src="@Url.Content("~/Scripts/select2/js/select2.min.js")"></script>
-
+<link href="~/Scripts/Scripts_Restaurantes/ccs/M10.css" rel="stylesheet" />
 <script type="text/javascript">
 $(document).ready(function() {
     $("#M10BOciudadDropdown").select2();
@@ -17,28 +17,30 @@ $(document).ready(function() {
 {
 
     <div class="row">
-        <div class="col-md-12">
-            <div class="box">
+        <div class="col-md-10">
+            <div class="Cajita">
 
                 <div class="box-body">
-                    <h2 class="box-title"> Modificar Restaurante</h2>
+                    <h2 class="box-title"> Agregar Restaurante</h2>
                     <div class="row">
                         <div class="col-md-12">
 
-                            @Html.TextBoxFor(m => m._id, null, new { @class = "hidden", @id = "id" })
-
                             <div>
                                 &nbsp;
                                 <div class="col-md-12">
+
+                                    @Html.TextBox("Id", ViewBag.Id is int, new { @class = "hidden"})
+                                    <!-- Nombre del Restaurant-->
                                     <div class="col-xs-6">
                                         <label for="nombre">Nombre del Restaurante(<span style="color:red">*</span>):</label>
-                                        @Html.TextBoxFor(m => m._nombre, null, new { @class = "form-control", @placeholder = "El Rincón de Chicho", @id = "nombre" })
+
+                                        @Html.TextBox("Nombre", ViewBag.NombreRestaurant as String, new { @class = "form-control", @type = "text", @placeholder = "Introduzca nombre e.g:Sabor y Sazon" })
 
                                     </div>
+                                    <!-- Descripcion del Restaurant-->
                                     <div class="col-xs-6">
                                         <label for="descripcion">Descripción del Restautante:</label>
-                                        @Html.TextBoxFor(m => m._descripcion, null, new { @class = "form-control", @placeholder = "Un restaurante para toda la familia", @id = "descripcion" })
-
+                                        @Html.TextBox("Descripcion", ViewBag.DescripcionRestaurant as String, new { @class = "form-control", @type = "text", @placeholder = "Introduzca Descripcion e.g: Disfrute de la mejor comida criolla" })
                                     </div>
                                 </div>
                             </div>
@@ -46,53 +48,66 @@ $(document).ready(function() {
                             <div>
                                 &nbsp;
                                 <div class="col-md-12">
+                                    <!-- Direccion del Restaurant-->
                                     <div class="col-xs-6">
                                         <label for="direccion">Dirección(<span style="color:red">*</span>):</label>
-                                        @Html.TextBoxFor(m => m._direccion, null, new { @class = "form-control", @placeholder = "169 Harold Ave. San Francisco, CA", @id = "direccion" })
-
+                                        @Html.TextBox("Direccion", ViewBag.DireccionRestaurant as String, new { @class = "form-control", @type = "text", @placeholder = "Introduzca Direccion e.g: 1362 La Vista NE, Atlanta GA" })
                                     </div>
+
+                                    <!-- Telefono del Restaurant-->
                                     <div class="col-xs-6">
-                                        <label for="ciudad">Ciudad(<span style="color:red">*</span>):</label>
-                                        @try
-                                        {
-                                            @Html.DropDownListFor(m => m._idLugar, new SelectList(Model._listaCiudades, "_id", "_nombre"), new { id = "M10BOciudadDropdown" })
-                                        }
-                                        catch
-                                        {
+                                        <label for="Telefono">
+                                            Telefono(<span style="color:red">*</span>):
 
-                                        }
-
+                                        </label>
+                                        @Html.TextBox("Telefono", ViewBag.TelefonoRestaurant as String, new { @class = "form-control", @type = "text", @placeholder = "Introduzca teléfono e.g: 0212-9774183", @maxlength = "12" })
 
                                     </div>
+
                                 </div>
                             </div>
 
                             <div>
                                 &nbsp;
                                 <div class="col-md-12">
+
+                                    <!-- Lista ciudad del Restaurant-->
+                                    <div class="col-xs-6">
+                                        <label for="ciudad">Ciudad(<span style="color:red">*</span>):</label>
+                                        @Html.DropDownList("ComboLugar", ViewBag.Ciudad as SelectList, null, new { @class = "form-control" })
+                                    </div>
+
+                                    <!-- Hora de apertura del Restaurant-->
                                     <div class="col-xs-6">
                                         <label for="horarioApertura">Hora Apertura(<span style="color:red">*</span>):</label>
-                                        @Html.DropDownListFor(m => m._horarioApertura, new SelectList(Model._horarioLista))
-                                        @*Html.TextBoxFor(m => m._horarioApertura, null, new { @class = "form-control", @id = "horarioApertura"})*@
-
+                                        @Html.DropDownList("ComboHoraIni", ViewBag.HorariosIni as SelectList, "Horario Inicio", new { @class = "form-control" })
                                     </div>
+
+                                </div>
+                            </div>
+
+                            <div>
+                                &nbsp;
+                                <div class="col-md-12">
+                                    <!-- Hora de cierre del Restaurant-->
                                     <div class="col-xs-6">
                                         <label for="horarioCierre">Hora Cierre(<span style="color:red">*</span>):</label>
-                                        @Html.DropDownListFor(m => m._horarioCierre, new SelectList(Model._horarioLista))
-                                        @*Html.TextBoxFor(m => m._horarioCierre, null, new { @class = "form-control", @id = "horarioCierre"})*@
-
+                                        @Html.DropDownList("ComboHoraFin", ViewBag.HorariosFin as SelectList, "Horario Fin", new { @class = "form-control" })
                                     </div>
-                                </div>
-                            </div>
 
-                            <div class="col-md-12" style="margin-top:10px;">
-                                <div class="col-md-2">
-                                    <button type="button" id="aceptarRestauranteModificacion" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
-                                </div>
-                                <div class="col-md-2">
-                                    <button id="cancelarRestauranteModificacion" type="button" class="btn btn-danger" style="display:block; margin-left:auto; margin-right:auto;">Cancelar</button>
                                 </div>
                             </div>
+                            &nbsp;
+                            <div class="col-md-12" style="margin-top:10px;">
+                                <div class="col-xs-6">
+                                    <button type="button" id="aceptarRestauranteModificacion" class="btn btn-success" style="margin-left:335px" >Guardar</button>
+                                </div>
+                                <div class="col-xs-6">
+                                    <button id="cancelarRestauranteModificacion" type="button" class="btn btn-danger" style="margin-right:325px" >Cancelar</button>
+
+                                </div>
+                            </div>
+                            
                         </div>
                         <!-- /.col -->
                     </div>
