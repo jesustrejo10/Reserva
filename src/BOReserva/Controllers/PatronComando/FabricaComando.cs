@@ -5,6 +5,9 @@ using BOReserva.Models.gestion_automoviles;
 using System;
 using System.Collections.Generic;
 using BOReserva.Controllers.PatronComando;
+using BOReserva.Controllers.PatronComando.M16;
+using System.Web;
+using System.Linq;
 
 namespace BOReserva.Controllers.PatronComando
 {
@@ -315,26 +318,51 @@ namespace BOReserva.Controllers.PatronComando
         }
         #endregion
 
+        public static Command<String> crearM16AgregarReclamo(Entidad e)
+        {
+
+            return new M16_COAgregarReclamo((Reclamo)e);
+
+        }
+        public static Command<Dictionary<int, Entidad>> crearM16VisualizarReclamos()
+        {
+
+            return new M16_COConsultarReclamo();
+
+        }
+        //public static Command<String> crearM16ConsultarUsuario(Entidad e)
+        //{
+
+        //    return new M16_COConsultarReclamoDetalle((Reclamo)e);
+
+        //}
+
         #region M06 GESTION COMIDA
 
         public enum comandosComida
         {
-            CREAR,
-            ELIMINAR,
-            ACTUALIZAR,
-            CONSULTAR
+            CREAR_COMIDA,
+            ELIMINAR_COMIDA,
+            ACTUALIZAR_COMIDA,
+            CONSULTAR_COMIDAS,
+            CONSULTAR_COMIDAS_VUELOS
         }
 
         public static object gestionComida(comandosComida _comando, Entidad _objeto)
         {
             switch (_comando)
             {
-                case comandosComida.CREAR:
+                case comandosComida.CREAR_COMIDA:
                     return new M06_COAgregarComida(_objeto);
+                case comandosComida.CONSULTAR_COMIDAS:
+                    return new M06_COConsultarComidas();
+                case comandosComida.CONSULTAR_COMIDAS_VUELOS:
+                    return new M06_COConsultarComidasVuelos();
                 default:
                     return new M06_COAgregarComida(_objeto);
             }
         }
+
         #endregion
     }
 }

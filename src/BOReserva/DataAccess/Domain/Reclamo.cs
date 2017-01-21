@@ -13,6 +13,7 @@ namespace BOReserva.DataAccess.Domain
         public String _fechaReclamo { get; set; }
         public int _estadoReclamo { get; set; }
         public int _usuario { get; set; }
+        public int _editable { get; set; }
 
         public Reclamo() {}
         /// <summary>
@@ -30,6 +31,17 @@ namespace BOReserva.DataAccess.Domain
             this._estadoReclamo = estadoReclamo;
             this._usuario = usuario;
         }
+
+        public Reclamo(int id, String tituloReclamo, String detalleReclamo, String fechaReclamo, int estadoReclamo, int usuario)
+        {
+            this._id = id;
+            this._tituloReclamo = tituloReclamo;
+            this._detalleReclamo = detalleReclamo;
+            this._fechaReclamo = fechaReclamo;
+            this._estadoReclamo = estadoReclamo;
+            this._usuario = usuario;
+        }
+       
        
     }
 
