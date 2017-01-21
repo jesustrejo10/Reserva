@@ -9,28 +9,33 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando.M08
 {
-    public class M08_CODesactivarAutomovil : Command<String>
+    public class M08_COEliminarAutomovil : Command<bool>
     {
-        
         #region Atributos
+
         Entidad _objeto;
+
         #endregion
 
         #region Constructor
-        public M08_CODesactivarAutomovil() { }
+        public M08_COEliminarAutomovil()
+        {
 
-        public M08_CODesactivarAutomovil(Entidad _objeto)
+        }
+
+        public M08_COEliminarAutomovil(Entidad _objeto)
         {
             this._objeto = _objeto;
         }
-
         #endregion
 
         #region Ejecucion
 
-        public override string ejecutar()
+        public override bool ejecutar()
         {
-            throw new NotImplementedException();
+            DAO Dao = FabricaDAO.CrearDaoAutomovil();
+            DAOAutomovil DaoAutomovil = (DAOAutomovil)Dao;
+            return DaoAutomovil.Eliminar(this._objeto);
         }
 
         #endregion

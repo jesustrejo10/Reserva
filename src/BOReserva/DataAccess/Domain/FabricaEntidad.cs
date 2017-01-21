@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+        
 
 
 
@@ -19,6 +20,45 @@ namespace BOReserva.DataAccess.Domain
     /// </summary>
     public class FabricaEntidad
     {
+        #region M01_Login 
+        public static Usuario crearUsuario()
+        {
+            return new Usuario();
+        }
+
+        public static Usuario crearUsuario(String _correo)
+        {
+            return new Usuario()
+            {
+                correo = _correo
+            };
+        }
+
+        public static Usuario crearUsuario(String _correo, String _clave)
+        {
+            return new Usuario()
+            {
+                correo = _correo,
+                clave = _clave
+            };
+        }
+
+        public static Usuario crearUsuario(int _id, int _rol, String _nombre, String _apellido, String _correo, String _clave, String _fechaCreacion, String _activo)
+        {
+            return new Usuario()
+            {
+                id = _id,
+                rol = _rol,
+                nombre = _nombre,
+                apellido = _apellido,
+                correo = _correo,
+                clave = _clave,
+                fechaCreacion = _fechaCreacion,
+                activo = _activo
+            };
+        }
+        #endregion
+
         #region M09_Gestion_Hoteles_Por_Ciudad
         public static Entidad InstanciarHotel(String nombre, String direccion, int fkCiudad, int clasificacion, String webPage, String email, int capacidad)
         {
@@ -140,11 +180,37 @@ namespace BOReserva.DataAccess.Domain
         /// <param name="fechaAterrizaje"></param>
         /// <param name="avion"></param>
         /// <returns>Retorna una instancia de la clase vuelo con todos sus atributos</returns>
-        public static Entidad crearVuelo(int id, String codigoVuelo, int ruta, DateTime fechaDespegue,
-                                          String status, DateTime fechaAterrizaje, int avion)
+        public static Entidad InstanciarVuelo(int id, String codigoVuelo, Ruta ruta, DateTime fechaDespegue,
+                                          String status, DateTime fechaAterrizaje, Avion avion)
         {
             return new Vuelo(id, codigoVuelo, ruta, fechaDespegue, status, fechaAterrizaje,
                              avion);
+        }
+
+
+        /// <summary>
+        /// Instanciar vuelo sin ningun parametro
+        /// </summary>
+        /// <returns>Entidad vuelo vacia</returns>
+        public static Entidad InstanciarVuelo()
+        {
+            return new Vuelo();
+        }
+
+        /// <summary>
+        /// Instancia vuelo fecha de aterrizaje y avion
+        /// </summary>
+        /// <param name="fechaAterrizaje">fecha de Aterrizaje</param>
+        /// <param name="avion">clase avion</param>
+        /// <returns>Entidad Vuelo</returns>
+        public static Entidad InstanciarVuelo(DateTime fechaAterrizaje, Avion avion)
+        {
+            return new Vuelo(fechaAterrizaje, avion);
+        }
+
+        public static Entidad InstanciarCiudad(int id, String ciudadO)
+        {
+            return new Ciudad(id, ciudadO);
         }
         #endregion
 

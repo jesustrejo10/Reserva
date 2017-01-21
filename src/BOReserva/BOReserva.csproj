@@ -210,6 +210,13 @@
     <Compile Include="Controllers\M04\gestion_vueloController.cs" />
     <Compile Include="Controllers\PatronComando\Command.cs" />
     <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
+    <Compile Include="Controllers\PatronComando\M04\M04_COCambiarStatus.cs" />
+    <Compile Include="Controllers\PatronComando\M04\M04_COEliminarVuelo.cs" />
+    <Compile Include="Controllers\PatronComando\M04\M04_COFechaAterrizaje.cs" />
+    <Compile Include="Controllers\PatronComando\M04\M04_COLugarDestino.cs" />
+    <Compile Include="Controllers\PatronComando\M04\M04_COModificarVuelo.cs" />
+    <Compile Include="Controllers\PatronComando\M04\M04_COLugarOrigen.cs" />
+    <Compile Include="Controllers\PatronComando\M04\M04_COBuscarAvionRuta.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COConsultarBoletos.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COModificarBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COVerificarDisponibilidadBoleto.cs" />
@@ -231,7 +238,7 @@
     <Compile Include="Controllers\PatronComando\M08\M08_COActivarAutomovil.cs" />
     <Compile Include="Controllers\PatronComando\M08\M08_COBuscarAutomovil.cs" />
     <Compile Include="Controllers\PatronComando\M08\M08_COAgregarAutomovil.cs" />
-    <Compile Include="Controllers\PatronComando\M08\M08_CODesactivarAutomovil.cs" />
+    <Compile Include="Controllers\PatronComando\M08\M08_COEliminarAutomovil.cs" />
     <Compile Include="Controllers\PatronComando\M08\M08_COListarAutomovil.cs" />
     <Compile Include="Controllers\PatronComando\M08\M08_COModificarAutomovil.cs" />
     <Compile Include="Controllers\PatronComando\M09\IM09_COObtenerPaises.cs" />
@@ -460,6 +467,8 @@
     <Compile Include="Models\gestion_ruta_comercial\CGestion_ruta.cs" />
     <Compile Include="Models\gestion_ruta_comercial\CRuta.cs" />
     <Compile Include="Models\gestion_usuarios\AgregarUsuario.cs" />
+    <Compile Include="Models\gestion_vuelo\FabricaViewModelVuelo.cs" />
+    <Compile Include="Models\gestion_vuelo\VueloViewModel.cs" />
     <Compile Include="Servicio\Servicio_Usuarios\ConexionBD.cs" />
     <Compile Include="Models\gestion_usuarios\CUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\Encriptar.cs" />
@@ -484,7 +493,7 @@
     <Compile Include="Models\gestion_restaurantes\CRestauranteModelo.cs" />
     <Compile Include="MySQLException.cs" />
     <Compile Include="Models\gestion_vuelo\CVuelo.cs" />
-    <Compile Include="Models\gestion_vuelo\CCrear_Vuelo.cs" />
+    <Compile Include="Models\gestion_vuelo\CrearVueloMO.cs" />
     <Compile Include="Models\gestion_vuelo\CVueloModificar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicio\manejadorSQL.cs" />
@@ -571,6 +580,7 @@
     <Content Include="Content\dist\js\demo.js" />
     <Content Include="Content\dist\js\pages\dashboard.js" />
     <Content Include="Content\dist\js\pages\dashboard2.js" />
+    <Content Include="Content\M04_css\style_module.css" />
     <Content Include="Content\M24_css\style_module.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -1642,6 +1652,9 @@
     <Content Include="Views\gestion_reclamos\M16_ModificarReclamo.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_AgregarHotel.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_VisualizarHoteles.cshtml" />
+    <Content Include="Views\gestion_vuelo\M04_GestionVuelo_CW1.cshtml" />
+    <Content Include="Views\gestion_vuelo\M04_GestionVuelo_CW2.cshtml" />
+    <Content Include="Views\gestion_vuelo\M04_GestionVuelo_CW3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_boletos\M05_VisualizarBoletos.cshtml" />
