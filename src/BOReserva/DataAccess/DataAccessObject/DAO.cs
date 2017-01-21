@@ -80,6 +80,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             try
             {
                 conexion.Close();
+                conexion = null;
             }
 
             catch (Exception ex)
@@ -272,8 +273,6 @@ namespace BOReserva.DataAccess.DataAccessObject
                     using (SqlDataAdapter dataAdapter = new SqlDataAdapter(comando))
                     {
                         dataAdapter.Fill(dataTable);
-                        System.Diagnostics.Debug.WriteLine(dataAdapter);
-                        System.Diagnostics.Debug.WriteLine(dataTable);
                     }
 
                     return dataTable;

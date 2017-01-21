@@ -11,5 +11,7 @@ namespace FOReserva.Models.Reclamos
         public String _detalleReclamo { get; set; }
 
         public String _fechaReclamo { get; set; }
+
+        public int _usuarioReclamo { get; set; }
     }
 }

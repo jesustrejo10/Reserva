@@ -57,6 +57,11 @@ namespace FOReserva.Models.gestion_reserva_automovil
             this._nombre = _nombre;
         }
 
+        public CLugar(string _nombre)
+        {
+            this._nombre = _nombre;
+        }
+
 
         #endregion
     }
