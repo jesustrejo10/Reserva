@@ -116,6 +116,15 @@ namespace BOReserva.DataAccess.Domain
             }
             return lista;
         }
+
+        /// <summary>
+        /// Instanciacion para una lista vacia
+        /// </summary>
+        /// <returns>Lista de reclamos vacia</returns>
+        public static List<Reclamo> InstanciarListaReclamo()
+        {
+            return new List<Reclamo>();
+        }
 #endregion
 
         #region M04_Vuelo

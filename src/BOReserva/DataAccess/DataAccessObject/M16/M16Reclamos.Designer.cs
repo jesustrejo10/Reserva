@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FOReserva.DataAccess.DataAccessObject.M16 {
+namespace BOReserva.DataAccess.DataAccessObject.M16 {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M16 {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FOReserva.DataAccess.DataAccessObject.M16.M16Reclamos", typeof(M16Reclamos).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BOReserva.DataAccess.DataAccessObject.M16.M16Reclamos", typeof(M16Reclamos).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -66,6 +66,15 @@ namespace FOReserva.DataAccess.DataAccessObject.M16 {
         internal static string procedimientoActualizarReclamo {
             get {
                 return ResourceManager.GetString("procedimientoActualizarReclamo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a M16_ConsultarReclamos.
+        /// </summary>
+        internal static string procedimientoActualizarReclamprocedimientoConsultarReclamos {
+            get {
+                return ResourceManager.GetString("procedimientoActualizarReclamprocedimientoConsultarReclamos", resourceCulture);
             }
         }
         
