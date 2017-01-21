@@ -217,7 +217,10 @@
     <Compile Include="Controllers\PatronComando\M04\M04_COModificarVuelo.cs" />
     <Compile Include="Controllers\PatronComando\M04\M04_COLugarOrigen.cs" />
     <Compile Include="Controllers\PatronComando\M04\M04_COBuscarAvionRuta.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COConsultarBoletoBD.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COConsultarBoletosPasajero.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COConsultarBoletos.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COListarPasajeros.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COModificarBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COVerificarDisponibilidadBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COMostrarIdaVuelta.cs" />
@@ -280,7 +283,9 @@
     <Compile Include="Controllers\PatronComando\M14\M14_COAgregarCabina.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarCruceros.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COAgregarCrucero.cs" />
+    <Compile Include="DataAccess\DataAccessObject\DAOChecking.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCabina.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCheckIn.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOItinerario.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCabina.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCruceros.cs" />
@@ -345,6 +350,7 @@
     </Compile>
     <Compile Include="DataAccess\DataAccessObject\M10\DAORestaurant.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOItinerario.cs" />
+    <Compile Include="DataAccess\Domain\BoardingPass.cs" />
     <Compile Include="DataAccess\Domain\BoletoDetalle.cs" />
     <Compile Include="DataAccess\Domain\M14\Cabina.cs" />
     <Compile Include="DataAccess\Domain\M14\Crucero.cs" />

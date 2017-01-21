@@ -50,10 +50,12 @@ namespace BOReserva.Controllers
             //SE BUSCAN TODOS LOS BOLETOS QUE ESTAN EN LA BASE DE DATOS
             // DE ESE PASAJERO EN PARTICULAR PARA MOSTRARLOS EN LA VISTA
 
-            manejadorSQL_Check buscarboletos = new manejadorSQL_Check();
-            List<CBoardingPass> listaboletos = buscarboletos.M05ListarPasesPasajero(pasaporte);
+            //manejadorSQL_Check buscarboletos = new manejadorSQL_Check();
+            //List<CBoardingPass> listaboletos = buscarboletos.M05ListarPasesPasajero(pasaporte);
 
-            return PartialView("M05_VerPasesAbordaje", listaboletos);
+            List<Entidad> listaBoletos = (FabricaComando.ConsultarPasajeros(pasaporte)).ejecutar();
+
+            return PartialView("M05_VerPasesAbordaje", listaBoletos);
         }
 
         // GET
