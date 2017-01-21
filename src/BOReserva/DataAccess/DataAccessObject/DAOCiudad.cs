@@ -51,7 +51,6 @@ namespace BOReserva.DataAccess.DataAccessObject
             return listaCiudades;
         }
 
-
         public int obtenerIDciudad(String ciudad)
         {
             int id = 0;
