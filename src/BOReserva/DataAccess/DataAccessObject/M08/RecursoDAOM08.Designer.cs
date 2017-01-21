@@ -27,7 +27,8 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
-        
+        internal static string procedimientoCambiarEstatus;
+
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal RecursoDAOM08() {
         }
@@ -383,5 +384,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
                 return ResourceManager.GetString("transmision", resourceCulture);
             }
         }
+
+        public static string procedimientoModificarAutomovil { get; internal set; }
     }
 }

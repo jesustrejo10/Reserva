@@ -209,8 +209,11 @@
     <Compile Include="Controllers\gestion_vuelosController.cs" />
     <Compile Include="Controllers\PatronComando\Command.cs" />
     <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
+    <Compile Include="Controllers\PatronComando\M16\M16_COModificarReclamo.cs" />
     <Compile Include="Controllers\PatronComando\M16\M16_COAgregarReclamo.cs" />
-    <Compile Include="Controllers\PatronComando\M16\M16_COConsultarReclamo.cs" />
+    <Compile Include="Controllers\PatronComando\M16\M16_COConsultarReclamoDetalle.cs" />
+    <Compile Include="Controllers\PatronComando\M16\M16_COConsultarReclamos.cs" />
+    <Compile Include="Controllers\PatronComando\M16\M16_COEliminarReclamo.cs" />
     <Compile Include="Controllers\PatronComando\M19\M19_COActualizarReserva.cs" />
     <Compile Include="Controllers\PatronComando\M19\M19_COConsultarAutos.cs" />
     <Compile Include="Controllers\PatronComando\M19\M19_COConsultarLugar.cs" />
@@ -222,6 +225,12 @@
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\registro_autenticacionController.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReservaAutomovil.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReservaHabitacion.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M16\M16Reclamos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>M16Reclamos.resx</DependentUpon>
+    </Compile>
     <Compile Include="DataAccess\DataAccessObject\M19\DAOReservaAutomovil.cs" />
     <Compile Include="DataAccess\DataAccessObject\M19\RecursoDAOM19.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -250,9 +259,14 @@
     <Compile Include="DataAccess\DataAccessObject\FabricaDAO.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAO.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReclamo.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M22\DAOReservaHabitacion.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M22\RecursoDAOM22.Designer.cs" />
     <Compile Include="DataAccess\Domain\Entidad.cs" />
     <Compile Include="DataAccess\Domain\FabricaEntidad.cs" />
+    <Compile Include="DataAccess\Domain\Habitacion.cs" />
     <Compile Include="DataAccess\Domain\Reclamo.cs" />
+    <Compile Include="DataAccess\Domain\ReservaHabitacion.cs" />
+    <Compile Include="DataAccess\Domain\Usuario.cs" />
     <Compile Include="DataAccess\Model\Connection.cs" />
     <Compile Include="DataAccess\Model\ExceptionBD.cs" />
     <Compile Include="DataAccess\Model\Parametro.cs" />
@@ -3242,11 +3256,11 @@
     <Content Include="Views\gestion_reserva_auto\M19_Busqueda_Autos.cshtml" />
     <Content Include="Views\gestion_reclamos\M16_AgregarReclamo.cshtml" />
     <Content Include="Views\gestion_reclamos\M16_VisualizarReclamo.cshtml" />
+    <Content Include="Views\gestion_reclamos\M16_ModificarReclamo.cshtml" />
     <Content Include="Views\gestion_reserva_auto\M19_Detalle_reserva.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="DataAccess\DataAccessObject\M16\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -3261,12 +3275,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="DataAccess\DataAccessObject\M16\M16Reclamos.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>M16Reclamos.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="DataAccess\DataAccessObject\M19\RecursoDAOM19.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoDAOM19.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="DataAccess\DataAccessObject\M22\RecursoDAOM22.resx" />
     <EmbeddedResource Include="DataAccess\Model\RecursoBD.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoBD.Designer.cs</LastGenOutput>

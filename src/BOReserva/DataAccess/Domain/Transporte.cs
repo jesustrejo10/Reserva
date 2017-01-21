@@ -5,8 +5,8 @@ using System.Web;
 
 namespace BOReserva.DataAccess.Domain
 {
-    public class Permiso : Entidad
+    public class Transporte : Entidad
     {
-        public String _nombre { get; set; }
+
     }
 }

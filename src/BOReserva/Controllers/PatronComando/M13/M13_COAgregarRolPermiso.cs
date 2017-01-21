@@ -19,7 +19,7 @@ namespace BOReserva.Controllers.PatronComando
 
         public override string ejecutar()
         {
-            IDAORol daoRol = FabricaDAO.instanciarDAORolPermiso();
+            IDAORol daoRol = (IDAORol)FabricaDAO.instanciarDAORol();
             daoRol.AgregarRolPermiso(_rol);
             return "1";
         }

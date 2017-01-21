@@ -9,15 +9,16 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando.M08
 {
-    public class M08_COModificarAutomovil : Command<String>
+    public class M08_COModificarAutomovil : Command<bool>
     {        
 
         #region Atributos
+
         Entidad _objeto;
+
         #endregion
 
         #region Constructor
-        public M08_COModificarAutomovil() { }
 
         public M08_COModificarAutomovil(Entidad _objeto)
         {
@@ -28,9 +29,11 @@ namespace BOReserva.Controllers.PatronComando.M08
 
         #region Ejecucion
 
-        public override string ejecutar()
+        public override bool ejecutar()
         {
-            throw new NotImplementedException();
+            DAO Dao = FabricaDAO.CrearDaoAutomovil();
+            DAOAutomovil DaoAutomovil = (DAOAutomovil)Dao;
+            return DaoAutomovil.Modificar(this._objeto);
         }
 
         #endregion

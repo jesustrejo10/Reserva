@@ -1,4 +1,5 @@
 ﻿using BOReserva.DataAccess.DataAccessObject;
+using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.DataAccessObject.M09;
 using BOReserva.DataAccess.Domain;
 using System;
@@ -20,7 +21,7 @@ namespace BOReserva.Controllers.PatronComando.M09
         }
 
         public override String ejecutar(){
-            DAOHotel daoHotel = (DAOHotel)FabricaDAO.instanciarDaoHotel();
+            IDAOHotel daoHotel = (DAOHotel)FabricaDAO.instanciarDaoHotel();
             String test = daoHotel.disponibilidadHotel(_hotel, _disponibilidad);
             return test;
         }

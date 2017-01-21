@@ -1,4 +1,13 @@
 @model BOReserva.Models.gestion_cruceros.CGestion_cabina
+
+@{
+
+    List<SelectListItem> listTipo = new List<SelectListItem>();
+    List<SelectListItem> listEstado = new List<SelectListItem>();
+    IEnumerable<SelectListItem> listCruceros = Model._listaCruceros;
+    
+
+}
 <script src="~/Scripts/Scripts_Cruceros/scripts_cruceros.js"></script>
 @using (Html.BeginForm("guardarCabina", "gestion_cruceros", null, FormMethod.Post, new { @id = "formGuardarCabina", @class = "form-horizontal" }))
 {
@@ -14,11 +23,9 @@
                 <section id="primeraParte">
                     <div class="form-group" style="margin-bottom:20px">
                         <label>Cruceros:</label>
-                        @{
-                            SelectList list = ViewBag.ShowDropDown;
-                        }
-                        @*@Html.DropDownList("DROPDOWNID", list, "Cruceros", new { @id = "fk_id_crucero" })*@
-                        @Html.DropDownListFor(m => m._fkCrucero, list, "Cruceros", new { @id = "fk_id_crucero", @style = "width:41% ; margin-left:2%" })
+                        @Html.DropDownListFor(m => m._cruceroNombre, new SelectList(Model._listaCruceros as System.Collections.IEnumerable, "Value", "Text"), 
+                        "Seleccione una crucero", new { @class = "form-control", @id = "crucero", @style = "width:41% ; margin-left:2%", @required = "true" })
+                        
                     </div>
                     <div class="row">
                         <div class="col-xs-6">

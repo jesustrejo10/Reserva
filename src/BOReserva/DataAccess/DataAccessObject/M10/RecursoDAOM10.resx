@@ -229,4 +229,8 @@
     <value>Entrada en el Método</value>
     <comment>Ocurre a la entrada del metodo</comment>
   </data>
+  <data name="procedimientoListarRestaurante" xml:space="preserve">
+    <value>M10_ListarRestaurante</value>
+    <comment>Procedimiento para listar todos los restaurantes por Id y nombre</comment>
+  </data>
 </root>
