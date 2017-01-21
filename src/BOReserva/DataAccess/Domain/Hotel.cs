@@ -27,7 +27,8 @@ namespace BOReserva.DataAccess.Domain
         public String _paginaWeb { get; set; }
         public int _clasificacion { get; set; }
         public int _capacidad { get; set; }
-        public Boolean _disponibilidad { get; set; } 
+        public Boolean _disponibilidad { get; set; }
+        public int _precio { get; set; }
         /// <summary>
         /// Constructor Vacio utilizado mientras se le da forma al proyecto
         /// </summary>
@@ -57,6 +58,20 @@ namespace BOReserva.DataAccess.Domain
             this._disponibilidad = true;
 
         }
+
+        public Hotel(String nombre, String direccion, String email, String paginaWeb, int clasificacion, int capacidad, Ciudad ciudad, int precio)
+        {
+            this._nombre = nombre;
+            this._direccion = direccion;
+            this._email = email;
+            this._paginaWeb = paginaWeb;
+            this._clasificacion = clasificacion;
+            this._capacidad = capacidad;
+            this._ciudad = ciudad;
+            this._disponibilidad = true;
+
+        }
+
 
         public Hotel(int idhotel, String nombre, String direccion, String email, String paginaWeb, int clasificacion, int capacidad, Ciudad ciudad, int disponibilidad)
         {
