@@ -1,10 +1,12 @@
 ﻿using BOReserva.DataAccess.DAO;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+using BOReserva.DataAccess.DataAccessObject.M13;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
 using BOReserva.Models.gestion_roles;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
@@ -23,15 +25,17 @@ namespace BOReserva.DataAccess.DataAccessObject
             {
                 conexion.Close();
                 conexion.Open();
-                String sql = "INSERT INTO Rol VALUES ('" + rol._nombreRol + "')";
-                Debug.WriteLine(sql);
-                SqlCommand cmd = new SqlCommand(sql, conexion);
-                cmd.ExecuteNonQuery();
-                cmd.Dispose();
-                conexion.Close();
-                return 1;
+                using (SqlCommand cmd = new SqlCommand(M13_DAOResources.AgregarRol, conexion))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@nombre", rol._nombreRol);
+                    cmd.ExecuteNonQuery();
+                    cmd.Dispose();
+                    conexion.Close();
+                    return 1;
+                }
             }
-            catch(SqlException ex)
+            catch (SqlException ex)
             {
                 Debug.WriteLine("ENTRO EN EL CATCH");
                 Debug.WriteLine(ex.ToString());
@@ -112,13 +116,16 @@ namespace BOReserva.DataAccess.DataAccessObject
                 idPermiso = MBuscarid_Permiso(rol._nombrePermiso);
                 conexion.Close();
                 conexion.Open();
-                String sql = "INSERT INTO Rol_Modulo_Detallado VALUES ('" + idRol + "','" + idPermiso + "')"; ;
-                Debug.WriteLine(sql);
-                SqlCommand cmd = new SqlCommand(sql, conexion);
-                cmd.ExecuteNonQuery();
-                cmd.Dispose();
-                conexion.Close();
-                return 1;
+                using (SqlCommand cmd = new SqlCommand(M13_DAOResources.AgregarPermisoRol, conexion))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idRol", idRol);
+                    cmd.Parameters.AddWithValue("@idPermiso", idPermiso);
+                    cmd.ExecuteNonQuery();
+                    cmd.Dispose();
+                    conexion.Close();
+                    return 1;
+                }
             }
             catch (SqlException ex)
             {
@@ -128,44 +135,6 @@ namespace BOReserva.DataAccess.DataAccessObject
                 return 0;
             }
         }
-
-        //public CListaGenerica<CModulo_detallado> consultarPermisos(String modulo)
-        //{
-        //    CListaGenerica<CModulo_detallado> modulo_detallado = new CListaGenerica<CModulo_detallado>();
-        //    SqlConnection conexion = Connection.getInstance(_connexionString);
-        //    try {
-        //        conexion.Close();
-        //        conexion.Open();
-        //        //query es un string que me devolvera la consulta 
-        //        System.Diagnostics.Debug.WriteLine(modulo);
-        //        String query = "SELECT mod_det_nombre,mod_det_url FROM Modulo_Detallado,Modulo_general WHERE mod_gen_id=fk_mod_gen_id and mod_gen_nombre='" + modulo + "'";
-        //        SqlCommand cmd = new SqlCommand(query, conexion);
-        //        SqlDataReader lector = cmd.ExecuteReader();
-        //        //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
-        //        while (lector.Read())
-        //        {
-        //            var entrada = new CModulo_detallado();
-        //            entrada.Nombre = lector.GetSqlString(0).ToString();
-        //            entrada.Url = lector.GetSqlString(1).ToString();
-        //            modulo_detallado.agregarElemento(entrada);
-
-        //        }
-        //        //cierro el lector
-        //        lector.Close();
-        //        //Cerrar la conexion
-        //        conexion.Close();
-        //        return modulo_detallado;
-
-        //    }
-        //    catch (SqlException e)
-        //    {
-        //        throw e;
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        throw e;
-        //    }
-        //}
 
         public Entidad Consultar(Entidad e)
         {
@@ -181,11 +150,9 @@ namespace BOReserva.DataAccess.DataAccessObject
 
             try
             {
-                conexion.Close();
-                conexion.Open();
-                String sql = "select r.rol_id, r.rol_nombre from Rol r";
-
-                SqlCommand cmd = new SqlCommand(sql, conexion);
+               conexion.Close();
+               conexion.Open();
+                SqlCommand cmd = new SqlCommand(M13_DAOResources.ConsultarRoles, conexion);
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     listaroles = new List<Entidad>();
@@ -219,13 +186,13 @@ namespace BOReserva.DataAccess.DataAccessObject
             {
                 conexion.Close();
                 conexion.Open();
-                String sql = "select md.mod_det_nombre, md.mod_det_id from Modulo_Detallado md, Rol r, Rol_Modulo_Detallado rmd " +
-                    "where md.mod_det_id = rmd.fk_mod_det_id and r.rol_id = rmd.fk_rol_id and r.rol_id =" + idRol;
-
-                SqlCommand cmd = new SqlCommand(sql, conexion);
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                using (SqlCommand cmd = new SqlCommand(M13_DAOResources.ConsultarPermisos, conexion))
                 {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@id", idRol);
+                    cmd.ExecuteNonQuery();
                     listapermisos = new List<Entidad>();
+                    SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
                         int _idPermiso = Int32.Parse(reader["mod_det_id"].ToString());
@@ -233,10 +200,10 @@ namespace BOReserva.DataAccess.DataAccessObject
                         permiso = FabricaEntidad.crearPermiso(_idPermiso, _nombrePermiso);
                         listapermisos.Add(permiso);
                     }
+                    cmd.Dispose();
+                    conexion.Close();
+                    return listapermisos;
                 }
-                cmd.Dispose();
-                conexion.Close();
-                return listapermisos;
             }
             catch (SqlException ex)
             {
@@ -256,10 +223,8 @@ namespace BOReserva.DataAccess.DataAccessObject
             {
                 conexion.Close();
                 conexion.Open();
-                String sql = "select distinct md.mod_det_nombre, md.mod_det_id from Modulo_Detallado md, Rol r, Rol_Modulo_Detallado rmd " +
-                    "where md.mod_det_id = rmd.fk_mod_det_id and r.rol_id = rmd.fk_rol_id";
 
-                SqlCommand cmd = new SqlCommand(sql, conexion);
+                SqlCommand cmd = new SqlCommand(M13_DAOResources.ListarPermisos, conexion);
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     listapermisos = new List<Entidad>();
@@ -283,45 +248,6 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
         }
 
-        public Entidad ConsultarModulos(int idModulo)
-        {
-            List<Entidad> listamodulos;
-            Entidad modulo;
-            SqlConnection conexion = Connection.getInstance(_connexionString);
-
-            try
-            {
-                conexion.Close();
-                conexion.Open();
-                String sql = "select distinct mg.mod_gen_nombre, mg.mod_gen_id "+
-                            "from Modulo_General mg, Modulo_Detallado md, Rol r, Rol_Modulo_Detallado rmd "+
-                            "where mg.mod_gen_id = md.fk_mod_gen_id and md.mod_det_id = rmd.fk_mod_det_id and r.rol_id = rmd.fk_rol_id " +
-                            "and md.mod_det_id = " + idModulo;
-
-                SqlCommand cmd = new SqlCommand(sql, conexion);
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    listamodulos = new List<Entidad>();
-                    while (reader.Read())
-                    {
-                        int _idmodulo = Int32.Parse(reader["mod_gen_id"].ToString());
-                        String _nombremodulo = reader["mod_gen_nombre"].ToString();
-                        modulo = FabricaEntidad.crearModulo(_idmodulo, _nombremodulo);
-                        listamodulos.Add(modulo);
-                    }
-                }
-                cmd.Dispose();
-                conexion.Close();
-                return listamodulos[0];
-            }
-            catch (SqlException ex)
-            {
-                Debug.WriteLine(ex.ToString());
-                conexion.Close();
-                return null;
-            }
-        }
-
         Entidad IDAO.Consultar(int id)
         {
             SqlConnection conexion = Connection.getInstance(_connexionString);
@@ -330,14 +256,14 @@ namespace BOReserva.DataAccess.DataAccessObject
             {
                 conexion.Close();
                 conexion.Open();
-                String sql = "select r.rol_id, r.rol_nombre from Rol r where r.rol_id = " + id;
-
-                SqlCommand cmd = new SqlCommand(sql, conexion);
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                using (SqlCommand cmd = new SqlCommand(M13_DAOResources.ConsultarRol, conexion))
                 {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
                     String nombreRol;
                     int idRol;
-
+                    SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
                         idRol = Int32.Parse(reader["rol_id"].ToString());
@@ -348,10 +274,10 @@ namespace BOReserva.DataAccess.DataAccessObject
                             reader["rol_nombre"].ToString()
                         );
                     }
+                    cmd.Dispose();
+                    conexion.Close();
+                    return rol;
                 }
-                cmd.Dispose();
-                conexion.Close();
-                return rol;
             }
             catch (SqlException ex)
             {
@@ -394,12 +320,15 @@ namespace BOReserva.DataAccess.DataAccessObject
                 conexion.Close();
                 eliminarPermiso(id);
                 conexion.Open();
-                String sql = "DELETE FROM Rol WHERE rol_id = " + id;
-                SqlCommand cmd = new SqlCommand(sql, conexion);
-                cmd.ExecuteNonQuery();
-                cmd.Dispose();
-                conexion.Close();
-                return "1";
+                using (SqlCommand cmd = new SqlCommand(M13_DAOResources.EliminarRol, conexion))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
+                    cmd.Dispose();
+                    conexion.Close();
+                    return "1";
+                }
             }
             catch (SqlException ex)
             {
@@ -415,12 +344,15 @@ namespace BOReserva.DataAccess.DataAccessObject
             {
                 conexion.Close();
                 conexion.Open();
-                String sql = "DELETE FROM Rol_Modulo_Detallado WHERE fk_rol_id in (SELECT rol_id from Rol where rol_id=" + id + ")";
-                SqlCommand cmd = new SqlCommand(sql, conexion);
-                cmd.ExecuteNonQuery();
-                cmd.Dispose();
-                conexion.Close();
-                return "1";
+                using (SqlCommand cmd = new SqlCommand(M13_DAOResources.EliminarPermisos, conexion))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
+                    cmd.Dispose();
+                    conexion.Close();
+                    return "1";
+                }
             }
             catch (SqlException ex)
             {
@@ -436,26 +368,25 @@ namespace BOReserva.DataAccess.DataAccessObject
             SqlConnection conexion = Connection.getInstance(_connexionString);
             try
             {
-                //Abrir la conexion
-                conexion.Open();
-                //query es un string que me devolvera la consulta 
-                String query = "SELECT mod_det_nombre, mod_det_id FROM modulo_detallado,rol_modulo_detallado,rol where mod_det_id=fk_mod_det_id and fk_rol_id=rol_id and rol_id=" + id;
-                SqlCommand cmd = new SqlCommand(query, conexion);
-                SqlDataReader reader = cmd.ExecuteReader();
-                listapermisos = new List<Entidad>();
-                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
-                while (reader.Read())
-                {
-                    int _idPermiso = Int32.Parse(reader["mod_det_id"].ToString());
-                    String _nombrePermiso = reader["mod_det_nombre"].ToString();
-                    permiso = FabricaEntidad.crearPermiso(_idPermiso, _nombrePermiso);
-                    listapermisos.Add(permiso);
-                }
-                //cierro el lector
-                reader.Close();
-                //Cerrar la conexion
                 conexion.Close();
-                return listapermisos;
+                conexion.Open();
+                SqlCommand cmd = new SqlCommand(M13_DAOResources.ConsultarPermisosAsociados, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    listapermisos = new List<Entidad>();
+                    while (reader.Read())
+                    {
+                        int _idPermiso = Int32.Parse(reader["mod_det_id"].ToString());
+                        String _nombrePermiso = reader["mod_det_nombre"].ToString();
+                        permiso = FabricaEntidad.crearPermiso(_idPermiso, _nombrePermiso);
+                        listapermisos.Add(permiso);
+                    }
+                    //cierro el lector
+                    reader.Close();
+                    //Cerrar la conexion
+                    conexion.Close();
+                    return listapermisos;
+                }
             }
             catch (SqlException e)
             {
