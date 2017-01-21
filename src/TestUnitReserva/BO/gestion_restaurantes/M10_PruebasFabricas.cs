@@ -42,19 +42,14 @@ namespace TestUnitReserva.BO.gestion_restaurantes
         public void M10_PruebaListarHorario()
         {
         List<String> lista = new List<String>
-            { "","07:00", "08:00", "09:00", "10:00", "11:00",
+            { "07:00", "08:00", "09:00", "10:00", "11:00",
               "12:00", "13:00", "14:00", "15:00", "16:00",
               "17:00", "18:00", "19:00", "20:00", "21:00",
               "22:00", "23:00", "00:00" };
         Assert.AreEqual(lista, FabricaDAO.listarHorario());
         }
 
-        [Test]
-        public void M10_PruebaAsignarConexionSql()
-        {
-            SqlConnection sql = new SqlConnection("localhost");
-            Assert.AreEqual(sql, FabricaDAO.asignarConexionSql("localhost"));
-        }
+       
 
         [Test]
         public void M10_PruebaAsignarParametro()
@@ -76,26 +71,9 @@ namespace TestUnitReserva.BO.gestion_restaurantes
             Assert.IsInstanceOf(typeof(List<Parametro>), FabricaDAO.asignarListaDeParametro());
         }
 
-        [Test]
-        public void M10_PruebaAsignarListarColumnas()
-        {
-            Assert.IsInstanceOf(typeof(List<ResultadoBD>), FabricaDAO.asignarListarColumnas());
-        }
+      
 
-        [Test]
-        public void M10_PruebaAsignarComandoSql()
-        {
-            SqlConnection sql = new SqlConnection("localhost");
-            SqlCommand procedure = new SqlCommand("query",sql);
-            Assert.AreEqual(procedure, FabricaDAO.asignarComandoSql("query",sql));
-        }
-
-        [Test]
-        public void M10_PruebaAsignarValorColumna()
-        {
-            ResultadoBD result = new ResultadoBD("Numero","32");
-            Assert.AreEqual(result, FabricaDAO.asignarValorColumna("Numero", "32"));
-        }
+     
         /*
         [Test]
         public void M10_PruebaAsignarTablaDeDatos()
@@ -103,14 +81,7 @@ namespace TestUnitReserva.BO.gestion_restaurantes
            Assert.IsInstanceOf(typeof(DataTable), FabricaDAO.asignarTablaDeDatos());
         }*/
 
-        [Test]
-        public void M10_PruebaAsignarAdaptadorDeDatos()
-        {
-            SqlConnection sql = new SqlConnection("localhost");
-            SqlCommand procedure = new SqlCommand("query", sql);
-            Assert.AreEqual(new SqlDataAdapter(procedure),
-                FabricaDAO.asignarAdaptadorDeDatos(procedure));
-        }
+      
 
         #endregion
     }

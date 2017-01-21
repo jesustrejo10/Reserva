@@ -453,6 +453,7 @@
     <Compile Include="Models\gestion_ruta_comercial\CGestion_ruta.cs" />
     <Compile Include="Models\gestion_ruta_comercial\CRuta.cs" />
     <Compile Include="Models\gestion_usuarios\AgregarUsuario.cs" />
+    <Compile Include="PruebasUnitarias\M10_TestDaoRestaurant.cs" />
     <Compile Include="Servicio\Servicio_Usuarios\ConexionBD.cs" />
     <Compile Include="Models\gestion_usuarios\CUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\Encriptar.cs" />
@@ -1792,6 +1793,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

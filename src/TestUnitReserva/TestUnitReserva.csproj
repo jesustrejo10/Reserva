@@ -61,7 +61,9 @@
     <Compile Include="BO\gestion_hoteles\TestGestionHoteles.cs" />
     <Compile Include="BO\gestion_hoteles\TestLugar.cs" />
     <Compile Include="BO\gestion_OfertasYPaquetes\testOfertasYPaquetes.cs" />
+    <Compile Include="BO\gestion_restaurantes\M10_PruebaComandos.cs" />
     <Compile Include="BO\gestion_restaurantes\M10_PruebasFabricas.cs" />
+    <Compile Include="BO\gestion_restaurantes\M10_TestDaoRestaurant.cs" />
     <Compile Include="BO\gestion_roles\TestRoles.cs" />
     <Compile Include="BO\gestion_aviones\TestAviones.cs" />
     <Compile Include="BO\gestion_usuario\TestUsuario.cs" />
