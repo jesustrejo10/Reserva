@@ -1,10 +1,7 @@
-﻿@{
-    var message = TempData["message"] ?? string.Empty;
-}
-<script src="~/Scripts/Scripts_Usuarios/llamadas_generales.js"></script>
+﻿<script src="~/Scripts/Scripts_Usuarios/llamadas_generales.js"></script>
 <link href="~/Content/Canvas/Box.css" rel="stylesheet" />
 @model BOReserva.Models.gestion_usuarios.CModificarUsuario
-@using (Html.BeginForm("modificarUsuario", "gestion_usuarios", FormMethod.Post, new { @class = "modificarUsuario_form" }))
+@using (Html.BeginForm("modificarUsuario", "gestion_usuarios", null, FormMethod.Post, new { id = "modificarUsuario_form", @class = "form-horizontal" }))
 {
     <div class="row">
         <div class="col-md-10">
@@ -50,7 +47,7 @@
                                             @Html.TextBoxFor(c => c._apellido, null, new
                                {
                                    @class = "form-control",
-                                   @id = "nombreUsuario",
+                                   @id = "apellidoUsuario",
                                    required = "required",
                                    maxlength = "50",
                                    oninput = "setCustomValidity('')",
@@ -68,7 +65,7 @@
                                             @Html.TextBoxFor(c => c.contraseñaUsuario, null, new
                                    {
                                        @class = "form-control",
-                                       @id = "contraseñaUsuario",
+                                       @id = "contrasena",
                                        @placeholder = "Ingrese una contraseña si desea cambiarla",
                                        oninvalid = "setCustomValidity('Campo obligatorio. De 6 a 12 caracteres. Debe contener al menos un digito y una letra. No puede contener caracteres especiales')",
                                        type = "password",
@@ -110,7 +107,7 @@
                                     <br />
                                     <div class="col-md-4"></div>
                                     <div class="col-md-2">
-                                        <button type="submit" id="modificarUsuario" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar Cambios</button>
+                                        <button type="button" id="modificarUsuario" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar Cambios</button>
                                     </div>
                                     <div class="col-md-2">
                                         <button id="cancelarModificacion" type="button" class="btn btn-danger" style="display:block; margin-left:auto; margin-right:auto;">Cancelar</button>
@@ -125,7 +122,7 @@
         </div>
     </div>
     <script language="javascript">
-        var password = document.getElementById("contraseñaUsuario")
+        var password = document.getElementById("contrasena")
         , confirm_password = document.getElementById("confContraseña");
 
         function validatePassword() {
@@ -139,6 +136,69 @@
         password.onchange = validatePassword;
         confirm_password.onkeyup = validatePassword;
     </script>
+    
+    <script>
+        $("#modificarUsuario").click(function (e) {
+            e.preventDefault();
+            var form = $("#modificarUsuario_form");
+
+            var correo = $('#correoUsuario').val();
+            var nombre = $('#nombreUsuario').val();
+            var apellido = $('#apellidoUsuario').val();
+            var contrasena = $('#contrasena').val();
+            var confContrasena = $('#confContraseña').val();
+            var rol = $('#rolUsuario').val();
+            var activo = $('#activoUsuario').val();
+
+            console.log(correo);
+            console.log(nombre);
+            console.log(apellido);
+            console.log(contrasena);
+            console.log(confContrasena);
+            console.log(rol);
+            console.log(activo);
+
+            if (correo && nombre && apellido && contrasena && confContrasena && rol && activo) {
+                $.ajax({
+                    url: "gestion_usuarios/modificarUsuario",
+                    data: form.serialize(),
+                    type: 'POST',
+                    success: function (data) {
+                        console.log("hola");
+                        if (data === "1") {
+                            console.log("entra");
+                            alert("Se modifico el Usuario exitosamente");
+
+                            var url1 = '/gestion_usuarios/M12_VisualizarUsuarios';
+                            var method = 'GET';
+                            var data1 = '';
+
+                            $.ajax(
+                                {
+                                    url: url1,
+                                    type: method,
+                                    data: data,
+                                    success: function (data, textStatus, jqXHR) {
+
+                                        $("#contenido").empty();
+                                        $("#contenido").append(data);
+                                    },
+                                    error: function (jqXHR, textStatus, errorThrown) {
+                                        alert(errorThrown);
+                                    }
+                                });
+                        } else {
+                            alert(data);
+                        }
+                    }
+                });
+                } 
+            else {
+                alert("Existen campos vacios");
+            }
+        });
+
+        </script>
 }
 
 
