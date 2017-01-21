@@ -209,7 +209,6 @@
     <Compile Include="Controllers\PatronComando\M05\M05_COModificarPasajero.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COEliminarBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COBuscarnombreciudad.cs" />
-    <Compile Include="Controllers\PatronComando\M09\M09_COObtenerCiudad.cs" />
     <Compile Include="Controllers\PatronComando\M10\M10_COActualizarRestaurant.cs" />
     <Compile Include="Controllers\PatronComando\M10\M10_COCargarHorario.cs" />
     <Compile Include="Controllers\PatronComando\M10\M10_COConsultarLugar.cs" />
@@ -687,11 +686,6 @@
     <Content Include="Views\gestion_comida_vuelo\placeholder.html" />
     <Content Include="Views\gestion_cruceros\js\module.js" />
     <Content Include="Views\gestion_equipaje_perdido\placeholder.html" />
-    <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Actualizar.html" />
-    <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Agregar.html" />
-    <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Consultar_Servicios.html" />
-    <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Deshabilitar.html" />
-    <Content Include="Views\gestion_hoteles\placeholder.html" />
     <Content Include="Views\gestion_ofertas\placeholder.html" />
     <Content Include="Views\gestion_restaurantes\ccs\M10.css" />
     <Content Include="Views\gestion_roles\M13_Roles.html" />
@@ -1542,9 +1536,6 @@
     <Content Include="Views\gestion_automoviles\M08_VisualizarAutomoviles.cshtml" />
     <Content Include="Views\gestion_automoviles\M08_VisualizarAutomovil.cshtml" />
     <Content Include="Views\gestion_automoviles\M08_AgregarAutomovil.cshtml" />
-    <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Crear.cshtml" />
-    <Content Include="Views\gestion_hoteles\M09_GestionHoteles_ModificarHotel.cshtml" />
-    <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Desactivar.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarPorVuelo.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_EditarComida.cshtml" />
     <Content Include="Views\gestion_seguridad_ingreso\M01_Login.cshtml" />
@@ -1557,7 +1548,6 @@
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Visualizar.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Mostrar.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Modificar.cshtml" />
-    <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Visualizar.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -1584,7 +1574,6 @@
     <Content Include="Views\gestion_hoteles\M09_DetalleHotel.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Visualizar.cshtml" />
     <Content Include="Views\gestion_boletos\M05_VisualizarBoletos.cshtml" />
     <Content Include="Views\gestion_boletos\M05_VerReserva.cshtml" />
     <Content Include="Views\gestion_check_in\M05_CheckIn.cshtml" />

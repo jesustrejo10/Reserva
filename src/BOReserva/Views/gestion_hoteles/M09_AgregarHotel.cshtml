@@ -21,11 +21,15 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-12" style="margin-top:10px;">
-                            <div class="col-xs-6">
+                            <div class="col-xs-4">
                                 <label for="placa">Nombre(<span style="color:red">*</span>)</label>
                                 @Html.TextBoxFor(m => m._nombre, null, new { @class = "form-control", @placeholder = "Gran Melia", @id = "hot_nombre", @maxlength = 30, @onblur = "checkTextField(this);" })
                             </div>
-                            <div class="col-xs-6">
+                            <div class="col-xs-2">
+                                &nbsp;
+                            </div>
+
+                            <div class="col-xs-4">
                                 <label for="modelo">Direccion(<span style="color:red">*</span>)</label>
                                 @Html.TextBoxFor(m => m._direccion, null, new { @class = "form-control", @placeholder = "Av Colombia, Calle 4", @id = "hot_direccion", @maxlength = 120})
                             </div>
