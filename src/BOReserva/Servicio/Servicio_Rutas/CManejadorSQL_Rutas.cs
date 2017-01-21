@@ -11,7 +11,13 @@ namespace BOReserva.Servicio.Servicio_Rutas
 {
     public class CManejadorSQL_Rutas
     {
-        private String connectionString = @"Data Source=sql5032.smarterasp.net;Initial Catalog=DB_A1380A_reserva;User ID=DB_A1380A_reserva_admin;Password = ucabds1617a"; //No supe cual es el string de conexion jejejeps
+        private String connectionString = "";
+        private manejadorSQL bd = new manejadorSQL(); 
+
+
+        public CManejadorSQL_Rutas() {
+            this.connectionString = bd.stringDeConexions;
+        }
 
         private SqlConnection con = null;
 
@@ -20,49 +26,6 @@ namespace BOReserva.Servicio.Servicio_Rutas
             con = new SqlConnection(connectionString);
             con.Open();
         }
-
-        public Boolean MAgregarRuta(CAgregarRuta model)
-        {
-            try
-            {
-
-                String[] strDes = model._destinoRuta.Split(new[] { " - " }, StringSplitOptions.None);
-                String[] strOri = model._origenRuta.Split(new[] { " - " }, StringSplitOptions.None);
-
-                con = new SqlConnection(connectionString);
-                con.Open();
-
-                SqlCommand query = new SqlCommand("M03_AgregarRuta", con);
-                query.CommandType = CommandType.StoredProcedure;
-
-                query.Parameters.Add("@ciudadOrigenRuta", SqlDbType.VarChar).Value = strOri[0];
-                query.Parameters.Add("@paisOrigenRuta", SqlDbType.VarChar).Value = strOri[1];
-                query.Parameters.Add("@ciudadDestinoRuta", SqlDbType.VarChar).Value = strDes[0];
-                query.Parameters.Add("@paisDestinoRuta", SqlDbType.VarChar).Value = strDes[1];
-                query.Parameters.Add("@tipoRuta", SqlDbType.VarChar).Value = model._tipoRuta;
-                query.Parameters.Add("@estadoRuta", SqlDbType.VarChar).Value = model._estadoRuta;
-                query.Parameters.Add("@distanciaRuta", SqlDbType.Int).Value = model._distanciaRuta;
-
-                query.ExecuteNonQuery();
-
-                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
-                SqlDataReader lector = query.ExecuteReader();
-
-                lector.Close();
-
-                return true;
-
-            }
-            catch (SqlException e)
-            {
-                return false;
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
-        }           
-
 
         public List<CRuta> MListarRutasBD()
         {
@@ -90,7 +53,7 @@ namespace BOReserva.Servicio.Servicio_Rutas
             catch (SqlException ex)
             {
                 con.Close();
-                return null;
+                throw ex;
             }
         }
 
@@ -133,7 +96,8 @@ namespace BOReserva.Servicio.Servicio_Rutas
             }
             catch (SqlException e)
             {
-                return false;
+                con.Close();
+                throw e;
             }
             catch (Exception e)
             {
@@ -183,7 +147,7 @@ namespace BOReserva.Servicio.Servicio_Rutas
             }
             catch (SqlException e)
             {
-                return false;
+                throw e; ;
             }
             catch (Exception e)
             {
@@ -212,7 +176,7 @@ namespace BOReserva.Servicio.Servicio_Rutas
             }
             catch (SqlException e)
             {
-                return false;
+                throw e;
             }
             catch (Exception e)
             {
@@ -325,9 +289,60 @@ namespace BOReserva.Servicio.Servicio_Rutas
             catch (SqlException ex)
             {
                 con.Close();
-                return null;
+                throw ex;
             }
         }
+
+        public Boolean deshabilitarRuta(int id)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                con = new SqlConnection(connectionString);
+                //INTENTO abrir la conexion
+                con.Open();
+                String query = "UPDATE Ruta SET rut_status_ruta='Inactiva' where rut_id='" + id + "'";
+                SqlCommand cmd = new SqlCommand(query, con);
+                SqlDataReader lector = cmd.ExecuteReader();
+                con.Close();
+                return true;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public Boolean habilitarRuta(int id)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                con = new SqlConnection(connectionString);
+                //INTENTO abrir la conexion
+                con.Open();
+                String query = "UPDATE Ruta SET rut_status_ruta='Activa' where rut_id='" + id + "'";
+                SqlCommand cmd = new SqlCommand(query, con);
+                SqlDataReader lector = cmd.ExecuteReader();
+                con.Close();
+                return true;
+
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
 
     }
 }

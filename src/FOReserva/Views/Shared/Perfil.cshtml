@@ -1,4 +1,7 @@
-﻿<head>
+﻿@{ 
+    Layout= "~/Views/Shared/_Layout2.cshtml";
+}}
+<head>
     <meta charset="utf-8" />
     <title>Reserva</title>
     <meta name="keywords" content="HTML5,CSS3,Template" />
@@ -37,8 +40,8 @@
         <div class="col-lg-3 col-md-3 col-sm-4">
 
             <div class="thumbnail text-center">
-                <h2 class="size-18 margin-top-10 margin-bottom-0">Felica Doe</h2>
-                <h3 class="size-11 margin-top-0 margin-bottom-10 text-muted">DEVELOPER</h3>
+                <h2 class="size-18 margin-top-10 margin-bottom-0">@Session["nombre"] @Session["apellido"]</h2>
+                <h3 class="size-11 margin-top-0 margin-bottom-10 text-muted">CLIENTE</h3>
             </div>
             <!-- SIDE NAV -->
             <ul class="side-nav list-group margin-bottom-60" id="sidebar-nav">
@@ -48,7 +51,7 @@
                 <li class="list-group-item" id="PeVuelos"><a href=" "> MIS VUELOS</a></li>
                 <li class="list-group-item" id="PeCruceros"><a href=" "> MIS CRUCEROS</a></li>
                 <li class="list-group-item" id="PeAutos"><a href=" "> MIS AUTOS</a></li>
-                <li class="list-group-item" id="PeHabitaciones"><a href=" "> MIS HABITACIONES</a></li>
+                <li class="list-group-item"><a onclick="cargarContenido('#CI', 'get', '/gestion_reserva_habitaciones/mis_reservas', null, this)" href="#"> MIS HABITACIONES</a></li>
                 <li class="list-group-item" id="PeRestaurantes"><a href=" "> MIS RESTAURANTES</a></li>
             </ul>
             <!-- /SIDE NAV -->
@@ -58,7 +61,7 @@
         <!-- RIGHT -->
         <div class="col-lg-9 col-md-9 col-sm-8">
             <div id="contenedorPerfil">
-
+               
             </div>
         </div>
 

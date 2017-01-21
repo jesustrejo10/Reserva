@@ -177,10 +177,10 @@ jQuery(document).ready(function () {
             });
     });
 
-    $("#editarComida").click(function (e) {
-        //M06_EditarComida
+    $("#visualizarVuelosComidas").click(function (e) {
+        //M06_VisualizarVuelosComidas
         e.preventDefault();
-        var url = '/gestion_comida_vuelo/M06_EditarComida';
+        var url = '/gestion_comida_vuelo/M06_VisualizarVuelosComidas';
         var method = 'GET';
         var data = '';
         $.ajax(
@@ -310,6 +310,23 @@ jQuery(document).ready(function () {
     $("#verRestaurantes").click(function (e) {
         e.preventDefault();
         var url = '/gestion_restaurantes/M10_GestionRestaurantes_Ver';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
     });
     $("#agregarRestaurantes").click(function (e) {
         e.preventDefault();
@@ -425,72 +442,6 @@ jQuery(document).ready(function () {
 
       });
     //FIN M05
-
-    $("#m24_agregarcrucero").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_cruceros/M24_GestionCruceros';
-        var method = 'GET';
-        var data = '';
-
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-    });
-
-    $("#m24_listarcrucero").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_cruceros/M24_ListarCruceros';
-        var method = 'GET';
-        var data = '';
-
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-    });
-
-    $("#m24_agregarcabina").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_cruceros/M24_AgregarCabinas';
-        var method = 'GET';
-        var data = '';
-        console.log("x");
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-    });
 
     //M13 ROLES
     $("#m13VisualizarRol").click(function (e) {
@@ -786,9 +737,279 @@ jQuery(document).ready(function () {
 
     //Fin M11
 
+    //Inicio Modulo 24 Cruceros
+    $("#m24_agregarcrucero").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_cruceros/M24_GestionCruceros';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
+    $("#m24_listarcrucero").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_cruceros/M24_ListarCruceros';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
+    $("#m24_agregarcabina").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_cruceros/M24_AgregarCabinas';
+        var method = 'GET';
+        var data = '';
+        console.log("x");
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
+    $("#m24_agregarcamarote").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_cruceros/M24_AgregarCamarote';
+        var method = 'GET';
+        var data = '';
+        console.log("xjjj");
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
+    $("#m24_agregaritinerario").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_cruceros/M24_AgregarItinerario';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
+    $("#m24_listaritinerario").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_cruceros/M24_ListarItinerario';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
+
+    //Fin Modulo 24 Cruceros
 
 });
 
+//Inicio Modulo 24 Cruceros
+$("#m24_agregarcrucero").click(function (e) {
+    e.preventDefault();
+    var url = '/gestion_cruceros/M24_GestionCruceros';
+    var method = 'GET';
+    var data = '';
+
+    $.ajax(
+        {
+            url: url,
+            type: method,
+            data: data,
+            success: function (data, textStatus, jqXHR) {
+
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+});
+
+$("#m24_listarcrucero").click(function (e) {
+    e.preventDefault();
+    var url = '/gestion_cruceros/M24_ListarCruceros';
+    var method = 'GET';
+    var data = '';
+
+    $.ajax(
+        {
+            url: url,
+            type: method,
+            data: data,
+            success: function (data, textStatus, jqXHR) {
+
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+});
+
+$("#m24_agregarcabina").click(function (e) {
+    e.preventDefault();
+    var url = '/gestion_cruceros/M24_AgregarCabinas';
+    var method = 'GET';
+    var data = '';
+    console.log("x");
+    $.ajax(
+        {
+            url: url,
+            type: method,
+            data: data,
+            success: function (data, textStatus, jqXHR) {
+
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+});
+
+$("#m24_agregarcamarote").click(function (e) {
+    e.preventDefault();
+    var url = '/gestion_cruceros/M24_AgregarCamarote';
+    var method = 'GET';
+    var data = '';
+    console.log("xjjj");
+    $.ajax(
+        {
+            url: url,
+            type: method,
+            data: data,
+            success: function (data, textStatus, jqXHR) {
+
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+});
+
+$("#m24_agregaritinerario").click(function (e) {
+    e.preventDefault();
+    var url = '/gestion_cruceros/M24_AgregarItinerario';
+    var method = 'GET';
+    var data = '';
+
+    $.ajax(
+        {
+            url: url,
+            type: method,
+            data: data,
+            success: function (data, textStatus, jqXHR) {
+
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+});
+
+$("#m24_listaritinerario").click(function (e) {
+    e.preventDefault();
+    var url = '/gestion_cruceros/M24_ListarItinerario';
+    var method = 'GET';
+    var data = '';
+
+    $.ajax(
+        {
+            url: url,
+            type: method,
+            data: data,
+            success: function (data, textStatus, jqXHR) {
+
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+});
+
+
+//Fin Modulo 24 Cruceros
 
 
 

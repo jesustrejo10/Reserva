@@ -59,7 +59,11 @@ namespace BOReserva.Controllers
 
         public ActionResult M06_AgregarPorVuelo()
         {
-           return PartialView();
+            manejadorSQL sql = new manejadorSQL();
+            //manejadorSQL sqlPasajero = new manejadorSQL();
+            List<CVuelo> vuelos = new List<CVuelo>();
+            vuelos = sql.listarVuelosEnBD();
+            return PartialView(vuelos);
         }
 
         public ActionResult M06_ConsultarComida(int id)
@@ -80,6 +84,66 @@ namespace BOReserva.Controllers
             //return PartialView();
         }
 
+        public ActionResult M06_VisualizarVuelosComidas()
+        {
+            manejadorSQL sql = new manejadorSQL();
+            List<CVueloComida> comidas = new List<CVueloComida>();
+            comidas = sql.listarVuelosComidaEnBD();
+            return PartialView(comidas);
+            //return PartialView();
+        }
+
+        /// <summary>
+        /// Metodo para que el lato este disponible para su uso
+        /// </summary>
+        /// <param name="id"> int </param>
+        /// <returns> JsonResult booleano conteniendo la respuesta del sistema </returns>
+        [HttpPost]
+        public JsonResult habilitarPlato(int id)
+        {
+            manejadorSQL sql = new manejadorSQL();
+            Boolean resultado = sql.habilitarPlato(id);
+            if (resultado)
+            {
+                return (Json(true, JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)  
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error  
+                String error = "Error en la base de datos";
+                //Retorno el error  
+                return Json(error);
+            }
+        }
+
+        /// <summary>
+        /// Metodo para que el lato NO este disponible para su uso
+        /// </summary>
+        /// <param name="id"> int </param>
+        /// <returns> JsonResult booleano conteniendo la respuesta del sistema</returns>
+        [HttpPost]
+        public JsonResult deshabilitarPlato(int id)
+        {
+            manejadorSQL sql = new manejadorSQL();
+            Boolean resultado = sql.deshabilitarPlato(id);
+            if (resultado)
+            {
+                return (Json(true, JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)  
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error  
+                String error = "Error en la base de datos";
+                //Retorno el error  
+                return Json(error);
+            }
+        }
+
+        }
        
 	}
-}
+

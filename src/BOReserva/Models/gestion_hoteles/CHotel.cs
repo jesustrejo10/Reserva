@@ -21,6 +21,7 @@ namespace BOReserva.Models.gestion_hoteles
         public float _puntuacion { get; set; }
         public int _disponibilidad { get; set; }
         public List<SelectListItem> _listapaises { get; set;}
+        public List<SelectListItem> _listaciudades { get; set; }
 
         public CHotel() { }
 

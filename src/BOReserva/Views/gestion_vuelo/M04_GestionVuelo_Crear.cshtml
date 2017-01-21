@@ -24,7 +24,7 @@
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <label style="display:block; margin-left:auto; margin-right:auto;">Codigo de vuelo (<span style="color: #d9534f">*</span>):</label>   
-                                @Html.TextBoxFor(m => m._codigoVuelo, null, new { @class = "form-control", @placeholder = "Ej: AA 2254", @id = "codigoVuelo", @allign = "center" })
+                                @Html.TextBoxFor(m => m._codigoVuelo, null, new { @class = "form-control", @placeholder = "Ej: AA2254", @id = "codigoVuelo", @allign = "center", @onblur = "checkTextCodigo(this);" })
                             </div>
                         </div>
                         <!-- FIN CODIGO DE VUELO -->
@@ -51,13 +51,13 @@
                             <div class="col-xs-6">
                                 <!-- DATE FECHA DESPEGUE  -->
                                 <label> Fecha Despegue (<span style="color: #d9534f">*</span>):</label>
-                                @Html.TextBoxFor(m => m._fechaDespegue, null, new {  @class = "datepicker", @type = "date", @id = "fechaDespegue", @style = "width: 100%;" })
+                                @Html.TextBoxFor(m => m._fechaDespegue, null, new { @class = "datepicker", @type = "date", @id = "fechaDespegue", @style = "width: 100%;", @value = "2016/12/25" })
                             </div>
                             <!-- FIN FECHA DESPEGUE -->
                             <div class="col-xs-6">
                                 <!-- TIME HORA DESPEGUE  -->
                                 <label> Hora Despegue (<span style="color: #d9534f">*</span>):</label>
-                                @Html.TextBoxFor(m => m._horaDespegue, null, new { @class = "datepicker", @type = "time", @id = "horaDespegue", @style = "width: 100%;" })
+                                @Html.TextBoxFor(m => m._horaDespegue, null, new { @class = "datepicker", @type = "time", @id = "horaDespegue", @style = "width: 100%;"})
                             </div>
                             <!-- FIN HORA DESPEGUE -->
                         </div>

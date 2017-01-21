@@ -10,13 +10,14 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="VisualizarRol" class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>Nombre</th>
                             <th>Modulo</th>
 
                             <th>Acceso a</th>
+                            <th>Accion</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,7 +32,7 @@
                                         <table>
                                             @foreach (var item2 in item.Menu)
                                             {
-                                                <tr>@item2.Nombre</tr>
+                                                <tr>@item2.Nombre    </tr>
                                                 <br>}
                                         </table>
                                     </td>
@@ -39,22 +40,85 @@
                                         <table>
                                             @foreach (var item2 in item.Permisos)
                                             {
-                                                <tr>@item2.Nombre</tr>
+                                                <tr>@item2.Nombre 
+                                            <!--<a href="#" id="@item2.Nombre" title="Eliminar Permiso" class="eliminarpermiso"><i class="fa fa-times eliminarpermiso"></i></a>--></tr>
                                                 <br>}
                                         </table>
                                     </td>
-                                    <td>
-
-                                        <a href="#" onclick="Eliminar()" title="Eliminar Rol" id="@item.Nombre_rol"><i class="fa fa-times eliminar"></i></a>
-
+                                    <td class="center">
+                                        @if (@item.Nombre_rol != "Administrador" )
+                                        {
+                                            <a href="#" title="Modificar Rol"><i class="fa fa-pencil modificar"></i></a>
+                                        }
+                                        @if (@item.Nombre_rol != "Administrador" && @item.Nombre_rol != "Cargador" && @item.Nombre_rol != "Operador" && @item.Nombre_rol != "Cliente" && @item.Nombre_rol != "Anonimo")
+                                        {
+                                        <a href="#"  title="Eliminar Rol"><i class="fa fa-times eliminar"></i></a>
+                                        }
 
                                     </td>
+                                    
+
                                 </tr>
+                          
                             }
+                              <script>
+                                           $(".eliminar").click(function () {
+                                            var r = confirm("Esta función no podrá ser revertida, ¿Está seguro de que desea continuar?")
+                                            if (r) {
+                                                var identificador = $(this).parent().parent().parent().attr("id");
+                                                jQuery.ajax({
+                                                    type: "POST",
+                                                    url: "/gestion_roles/eliminarRol",
+                                                    data: { _nombrerol: identificador }
+                                                }).done(function (data) {
+                                                    var url = '/gestion_roles/M13_VisualizarRol';
+                                                    var method = 'GET';
+                                                    var data = '';
+                                                    $.ajax(
+                                                        {
+                                                            url: url,
+                                                            type: method,
+                                                            data: data,
+                                                            success: function (data, textStatus, jqXHR) {
+
+                                                                $("#contenido").empty();
+                                                                $("#contenido").append(data);
+                                                            },
+                                                            error: function (jqXHR, textStatus, errorThrown) {
+                                                                alert(errorThrown);
+                                                            }
+                                                        });
+                                                }).fail(function (data) {
+                                                    alert(data);
+                                                });
+
+                                            }
+                                        });
+                                        $(".modificar").click(function () {
+                                            var identificador = $(this).parent().parent().parent().attr("id");
+                                            console.log(identificador);
+                                            jQuery.ajax({
+                                                type: "GET",
+                                                url: "/gestion_roles/M13_ModificarRol",
+                                                data: { _rolnombre: identificador }
+                                            }).done(function (data) {
+                                                $("#contenido").empty();
+                                                $("#contenido").append(data);
+                                            }).fail(function () {
+                                                alert(data);
+                                            });
+
+
+                                        });
+
+                                        
+                                    </script>
                         }
                         catch
                         {
-
+                            <script>
+                                alert("Error en el listado, por favor intente acceder nuevamente");
+                            </script>
                         }
 
                     <tfoot>
@@ -76,39 +140,18 @@
 <!-- /.row -->
 
 
+
+
+<script src="~/Content/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
 <script language="javascript" type="text/javascript">
+   
+    table = $('#VisualizarRol').DataTable();
 
-    $(".eliminar").click(function () {
-        var identificador = $(this).parent().parent().parent().attr("id");
-        jQuery.ajax({
-            type: "POST",
-            url: "/gestion_roles/eliminarRol",
-            data: { _nombrerol: identificador }
-        }).done(function (data) {
-            var url = '/gestion_roles/M13_VisualizarRol';
-            var method = 'GET';
-            var data = '';
-            $.ajax(
-                {
-                    url: url,
-                    type: method,
-                    data: data,
-                    success: function (data, textStatus, jqXHR) {
-
-                        $("#contenido").empty();
-                        $("#contenido").append(data);
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        alert(errorThrown);
-                    }
-                });
-        }).fail(function (data) {
-            alert(data);
-        });
-    });
 </script>
 
 <style>
-
+.eliminarpermiso{float:right;}
 
 </style>

@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
-<!--[if IE 8]>			<html class="ie ie8"> <![endif]-->
-<!--[if IE 9]>			<html class="ie ie9"> <![endif]-->
+<!--[if IE 8]>          <html class="ie ie8"> <![endif]-->
+<!--[if IE 9]>          <html class="ie ie9"> <![endif]-->
 <!--[if gt IE 9]><!-->
 <html>
 <!--<![endif]-->
@@ -22,7 +22,6 @@
     <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/bootstrap/js/bootstrap.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/bootstrap.daterangepicker/moment.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/bootstrap.datepicker/js/bootstrap-datepicker.min.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/imagesloaded/imagesloaded.pkgd.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/masonry.pkgd.min.js")"></script>
     <!-- CORE CSS -->
     <link href="@Url.Content("~/Content/assets/plugins/bootstrap/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
@@ -37,7 +36,8 @@
     <link href="@Url.Content("~/Content/assets/css/custom.css")" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/bootstrap.daterangepicker/daterangepicker.js")"></script>
     <link href="@Url.Content("~/Content/assets/plugins/bootstrap.daterangepicker/daterangepicker.css")" rel="stylesheet" type="text/css" />
-
+    
+    <link href="@Url.Content("~/Content/assets/css/layout-datatables.css")" rel="stylesheet" type="text/css" />  
 
     <!-- PAGE LEVEL SCRIPTS -->
     <link href="@Url.Content("~/Content/assets/css/header-1.css")" rel="stylesheet" type="text/css" />
@@ -104,11 +104,11 @@
                                 </li>
                                 <li>
                                     <!-- INICIAR SESIÓN -->
-                                        @Html.ActionLink("INICIAR SESIÓN", "Perfil", "Perfil")
+                                    @Html.ActionLink("INICIAR SESIÓN", "Login", "registro_autenticacion")
                                 </li>
                                 <li>
                                     <!-- REGISTRARSE -->
-                                    <a onclick="cargarContenido('#CP', 'get', '/gestion_vuelos/gestion_vuelos', null, this)" href="#"> REGISTRARSE </a>
+                                    @Html.ActionLink("REGISTRARSE", "Registro", "registro_autenticacion")
                                 </li>
                             </ul>
 

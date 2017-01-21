@@ -55,7 +55,7 @@ $("#modificarPlato").click(function (e) {
     });
 });
 
-$("#cancelarModificacion").click(function (e) {
+$("#guardarPlatoVuelo").click(function (e) {
     e.preventDefault();
     var url = '/gestion_comida_vuelo/M06_VisualizarComidas';
     var method = 'GET';
@@ -75,5 +75,4 @@ $("#cancelarModificacion").click(function (e) {
                 alert(errorThrown);
             }
         });
-
 });

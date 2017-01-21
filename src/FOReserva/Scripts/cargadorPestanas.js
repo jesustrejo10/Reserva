@@ -1,4 +1,4 @@
-function mostrarContenedor(posicion) {
+﻿function mostrarContenedor(posicion) {
 
     $(".contenedor").hide();
     if (posicion > 0 && posicion <= $(".contenedor").length) {
@@ -18,9 +18,9 @@ function cargarContenido(seccion, tipo, url, data, boton) {
 
     if (seccion == '#MD' || seccion == '#MI') {
         mostrarContenedor(1)
-    } else if (seccion == '#CI') {
+    }/* else if (seccion == '#CI') {
         mostrarContenedor(3)
-    } else if (seccion == '#CP') {
+    }*/ else if (seccion == '#CP') {
         mostrarContenedor(2)
     }
 
@@ -28,6 +28,8 @@ function cargarContenido(seccion, tipo, url, data, boton) {
         seccion = "#contenedor"
     else if (seccion == "#MI")
         seccion = "#contenedorImagenes"
+    else if (seccion == "#CI")
+        seccion = "#contenedorPerfil"
 
     $(seccion)
         .empty()
@@ -116,6 +118,9 @@ jQuery(document).ready(function () {
         $("#LiRestaurantes").removeClass("active");
         $("#LiCruceros").removeClass("active");
         $("#LiDiarios").removeClass("active");
+
+        $("#contenedor").html('<div class="text-center">Cargando...</div>');
+
         var url = '/gestion_vuelos/gestion_vuelos';
         var method = 'GET';
         var data = '';
@@ -186,7 +191,7 @@ jQuery(document).ready(function () {
                     $("#contenedor").append(data);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
+                    $("#contenedor").html('<div class="text-center">No se pudo cargar la data</div>');
                 }
             });
 
@@ -238,6 +243,9 @@ jQuery(document).ready(function () {
         $("#LiAutos").removeClass("active");
         $("#LiCruceros").removeClass("active");
         $("#LiDiarios").removeClass("active");
+
+        $("#contenedor").html('<div class="text-center">Cargando...</div>');
+
         var url = '/gestion_reserva_restaurante/gestion_reserva_restaurante';
         var method = 'GET';
         var data = '';
@@ -288,6 +296,10 @@ jQuery(document).ready(function () {
         $("#LiHoteles").removeClass("active");
         $("#LiRestaurantes").removeClass("active");
         $("#LiAutos").removeClass("active");
+        $("#LiDiarios").removeClass("active");
+
+        $("#contenedor").html('<div class="text-center">Cargando...</div>');
+
         var url = '/gestion_reserva_crucero/gestion_reserva_crucero';
         var method = 'GET';
         var data = '';
@@ -303,7 +315,7 @@ jQuery(document).ready(function () {
                     $("#contenedor").append(data);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
+                    $("#contenedor").html('<div class="text-center">No se pudo Cargar los datos...</div>');
                 }
             });
 
@@ -339,6 +351,9 @@ jQuery(document).ready(function () {
         $("#LiRestaurantes").removeClass("active");
         $("#LiAutos").removeClass("active");
         $("#LiCruceros").removeClass("active");
+
+        $("#contenedor").html('<div class="text-center">Cargando...</div>');
+
         var url = '/gestion_diarios/gestion_diarios';
         var method = 'GET';
         var data = '';
@@ -361,7 +376,7 @@ jQuery(document).ready(function () {
                 }
             });
 
-        var url = '/gestion_vuelos/gestion_vuelosImagenes';
+        var url = '/gestion_diarios/gestion_diariosImagenes';
         var method = 'GET';
         var data = '';
 
@@ -382,4 +397,3 @@ jQuery(document).ready(function () {
 
     });
 });
-
