@@ -19,6 +19,21 @@ namespace BOReserva.Controllers.PatronComando
     /// </summary>
     public class FabricaComando
     {
+
+        # region Lugar ( COLugar - COPais - COCiudad ) 
+
+        public static Command<Dictionary<int, Entidad>> consultarTodosPais(Entidad e)
+        {
+            return new GeneralLugar.COConsultarTodosPais(e);
+        }
+
+        public static Command<Dictionary<int, Entidad>> consultarTodosCiudad(Entidad e)
+        {
+            return new GeneralLugar.COConsultarTodosCiudad(e);
+        }
+
+        #endregion
+
         #region M09_Gestion_Hoteles_Por_Ciudad
 
         /// <summary>
@@ -418,12 +433,12 @@ namespace BOReserva.Controllers.PatronComando
             return new M08.M08_COAgregarAutomovil(e);
         }
 
-        public static Command<String> buscarAutomovil(Entidad e)
+        public static Command<Entidad> buscarAutomovil(Entidad e)
         {
             return new M08.M08_COBuscarAutomovil(e);
         }
 
-        public static Command<String> listarAutomovil(Entidad e)
+        public static Command<List<Entidad>> listarAutomovil(Entidad e)
         {
             return new M08.M08_COListarAutomovil(e);
         }
@@ -438,7 +453,7 @@ namespace BOReserva.Controllers.PatronComando
         #region Modulo 10 Gestion Restaurante
 
         #region Comandos Generales 
-    
+
         /// <summary>
         /// Metodo que recibe un comando para Crear, Actualizar, Eliminar o Consultar
         /// la variable comando recibe comandosGlobales.CREAR, comandosGlobales.ELIMINAR
@@ -574,6 +589,4 @@ namespace BOReserva.Controllers.PatronComando
         #endregion
     }
         
-
-
 }
