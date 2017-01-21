@@ -17,11 +17,12 @@ namespace FOReserva.DataAccess.DataAccessObject.InterfacesDAO
 
         List<Reclamo> ConsultarReclamosPorUsuario(int _idUsuario);
 
+        int EliminarReclamo(int _idReclamo);
         //bool Crear(Entidad objeto);
 
-        //bool Modificar(Entidad objeto);
+        int ModificarReclamo(Reclamo reclamo);
 
-        //bool Eliminar(Entidad objeto);
+        //
 
         //List<Entidad> Consultar(Entidad objeto);
     }

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using BOReserva.Controllers.PatronComando;
 
 namespace FOReserva.Controllers.PatronComando
 {
@@ -33,6 +34,23 @@ namespace FOReserva.Controllers.PatronComando
         {
 
             return new M16_COConsultarReclamos(_idUsuario);
+
+        }
+
+        public static Command<int> modificarReclamo(Reclamo reclamo)
+        {
+            return new M16_COModificarReclamo(reclamo);
+        }
+
+        public static Command<int> eliminarReclamo(int _idReclamo)
+        {
+            return new M16_COEliminarReclamo(_idReclamo);
+        }
+
+        public static Command<Entidad> consultarReclamo(int idReclamo)
+        {
+
+            return new M16_COConsultarReclamoDetalle(idReclamo);
 
         }
         #endregion
