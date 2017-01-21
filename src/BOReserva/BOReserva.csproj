@@ -347,9 +347,6 @@
     </Compile>
     <Compile Include="DataAccess\DataAccessObject\M10\DAORestaurant.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORestaurant.cs" />
-    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPais.cs" />
-    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReclamo.cs" />
-    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORol.cs" />
     <Compile Include="DataAccess\DataAccessObject\M11\DAOOferta.cs" />
     <Compile Include="DataAccess\DataAccessObject\M11\DAOPaquete.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOBoleto.cs" />
