@@ -176,14 +176,6 @@ namespace BOReserva.Controllers
             return PartialView(listaCabinas);
         }
 
-        /*public ActionResult M24_ListarCruceros()
-        {
-            ConexionBD cbd = new ConexionBD();
-            VistaListaCrucero vlc = new VistaListaCrucero();
-            vlc.cruceros = cbd.listarCruceros();
-            return PartialView("M24_ListarCruceros", vlc);
-        }*/
-
         [HttpPost]
         public JsonResult guardarCrucero(CGestion_crucero model)
         {
