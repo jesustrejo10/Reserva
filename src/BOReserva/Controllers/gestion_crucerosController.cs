@@ -123,7 +123,7 @@ namespace BOReserva.Controllers
                     Value = x,
                     Text = x
                 });
-                return PartialView(camarote);
+                return Json(camarote);
             }
             catch (SqlException e)
             {

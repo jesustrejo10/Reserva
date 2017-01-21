@@ -1670,6 +1670,7 @@
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_CW1.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_CW2.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_CW3.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_ListarCabinas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_boletos\M05_VisualizarBoletos.cshtml" />
