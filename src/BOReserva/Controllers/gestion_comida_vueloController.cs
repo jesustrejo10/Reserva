@@ -6,56 +6,47 @@ using System.Web.Mvc;
 using BOReserva.Models.gestion_comida_vuelo;
 using System.Net;
 using BOReserva.Servicio;
+using BOReserva.DataAccess.Domain;
+using BOReserva.Controllers.PatronComando;
 
 namespace BOReserva.Controllers
 {
     public class gestion_comida_vueloController : Controller
     {
-        // GET: /gestion_comida_vuelo/
         public ActionResult M06_AgregarComida()
         {
             CAgregarComida model = new CAgregarComida();
             return PartialView(model);
         }
+
         [HttpPost]
         public JsonResult guardarPlato(CAgregarComida model)
         {
-           // string nombrePlato = model._nombrePlato;
-           // string descripcionPlato = model._descripcionPlato;
-           // string tipoPlato = model._tipoPlato;
-           // string estatusPlato = model._estatusPlato;
-           // return(Json(true, JsonRequestBehavior.AllowGet));
-          
-            //Chequeo si los campos obligatorios estan vacios como medida de seguridad
             if ((model._nombrePlato == null) || (model._tipoPlato == null) || (model._estatusPlato == null) || (model._descripcionPlato == null))
             {
-                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                //Agrego mi error
                 String error = "Error, campo obligatorio vacio";
-                //Retorno el error
                 return Json(error);
             }
-           
-                //return (Json(true, JsonRequestBehavior.AllowGet));
-                //AGREGAR EL USING DEL MANEJADOR SQL ANTES (using BOReserva.Servicio; o using FOReserva.Servicio;)
-            //instancio el manejador de sql
-            manejadorSQL sql = new manejadorSQL();
-            //realizo el insert
-            bool resultado = sql.insertarPlato(model);
-            //envio una respuesta dependiendo del resultado del insert
-            if (resultado)
+
+            Entidad _comida = FabricaEntidad.instanciarComida(model._nombrePlato, model._tipoPlato, model._estatusPlato, model._descripcionPlato);
+            Command<bool> comando = (Command<bool>)FabricaComando.gestionComida(FabricaComando.comandosComida.CREAR, _comida);
+
+            if (comando.ejecutar())
             {
                 return (Json(true, JsonRequestBehavior.AllowGet));
             }
             else
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error insertando en la BD";
+                string error = "Error agregando comida.";
                 return Json(error);
             }
         }
 
+        //--------------------------------------------------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------------------------------------------------
 
         public ActionResult M06_AgregarPorVuelo()
         {

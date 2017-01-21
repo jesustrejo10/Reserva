@@ -1,4 +1,5 @@
 
+using BOReserva.DataAccess.DataAccessObject.M01;
 using BOReserva.Models.gestion_usuarios;
 using BOReserva.Servicio;
 using System;
@@ -11,6 +12,8 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
 {
     public class Cgestion_seguridad_ingreso
     {
+        private int _idUsuario;
+        private int _rolUsuario;
         private String _correoCampoTexto;
         private String _claveCampoTexto;
         private String _nombreUsuarioTexto;
@@ -28,6 +31,17 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
 
         }
 
+        public Cgestion_seguridad_ingreso(String correo, String clave, String nombre, String apellido, String status, int idUsuario, int rolUsuario)
+        {
+            this._correoCampoTexto = correo;
+            this._claveCampoTexto = clave;
+            this._nombreUsuarioTexto = nombre;
+            this.apellidoUsuarioTexto = apellido;
+            this._usuarioEstatus = status;
+            this._idUsuario = idUsuario;
+            this._rolUsuario = rolUsuario;
+        }
+
         #region verificarUsuario
         /// <summary>
         /// Funcion que verifica credenciales de usuario, se conecta con el modulo de usuario 
@@ -38,8 +52,7 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
         /// <returns>Retorna true or false segun verificacion de credenciales</returns>
         public Cgestion_seguridad_ingreso verificarUsuario(String _correoCampoTexto, String _claveCampoTexto)
         {
-
-            M01SQL bd = new M01SQL();
+            DAOLogin bd = new DAOLogin();
             String clave = Encriptar.CrearHash(_claveCampoTexto);//metodo implementado por MOD 12 USUARIO
 
             Cgestion_seguridad_ingreso verificacion = bd.UsuarioEnBD(_correoCampoTexto);
@@ -91,7 +104,7 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
         /// <returns>Retorna true bloqueado false si no esta bloqueado</returns>
         public Boolean BloquearUsuario()
         {
-            M01SQL bd = new M01SQL();
+            DAOLogin bd = new DAOLogin();
             if (bd.BloquearUsuario(this._correoCampoTexto))
             {
                 return true;
@@ -110,7 +123,7 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
         /// <returns>Retorna true si el ingreso de contraseña fue correcto false caso contrario</returns>
         public Boolean ResetearIntentos()
         {
-            M01SQL bd = new M01SQL();
+            DAOLogin bd = new DAOLogin();
             if (bd.ResetearIntentos(this._correoCampoTexto))
             {
                 return true;
@@ -130,18 +143,29 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
         /// <returns>Retorna true fue bloqueado false caso contrario</returns>
         public Boolean VerificarIntentos()
         {
-            M01SQL bd = new M01SQL();
+            DAOLogin bd = new DAOLogin();
             int intentos = bd.NumeroIntentos(this._correoCampoTexto);
             if (intentos < 3)
                 return true;
             else
                 throw new Cvalidar_bloqueo_exception("Usuario Bloqueado Contacte administrador");
-            return false;
         }
 
         #endregion
 
         #region Get y Set
+        public int idUsuario
+        {
+            get { return this._idUsuario; }
+            set { this._idUsuario = value; }
+        }
+
+        public int rolUsuario
+        {
+            get { return this._rolUsuario; }
+            set { this._rolUsuario = value; }
+        }
+
         public String correoCampoTexto
         {
             get { return this._correoCampoTexto; }

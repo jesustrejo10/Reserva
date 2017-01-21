@@ -1,7 +1,9 @@
 ﻿using BOReserva.DataAccess.DAO;
 using BOReserva.DataAccess.DataAccessObject.M09;
+using BOReserva.DataAccess.DataAccessObject.M01;
 using BOReserva.DataAccess.Model;
 using BOReserva.M10;
+using BOReserva.DataAccess.DataAccessObject;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,8 +16,15 @@ namespace BOReserva.DataAccess.DataAccessObject
 {
     public class FabricaDAO
     {
-         #region M09_Gestion_Hoteles_Por_Ciudad
-        
+        #region M01_Login
+        public static DAO instanciarDaoLogin()
+        {
+            return new DAOLogin();
+        }
+        #endregion
+
+        #region M09_Gestion_Hoteles_Por_Ciudad
+
         public static DAO instanciarDaoHotel() {
             return new DAOHotel();
         }
@@ -63,12 +72,20 @@ namespace BOReserva.DataAccess.DataAccessObject
         {
             return new DAOBoleto();
 		}
+        #endregion
+
+        #region M08_Automoviles
+        public static DAO CrearDaoAutomovil()
+        {
+            return new DAOAutomovil();
+        }
+        #endregion
 
         public static DAO instanciarDaoLugar()
         {
             return new DAOLugar();
         }
-		#endregion
+
 			
         #region Modulo 10
         public static IDAORestaurant RestaurantBD()
@@ -143,6 +160,16 @@ namespace BOReserva.DataAccess.DataAccessObject
         {
             return new DAORol();
         }
+        #endregion
+
+
+        #region M06 GESTION DE COMIDA
+
+        public static DAOComida instanciarComida()
+        {
+            return new DAOComida();
+        }
+
         #endregion
     }
 }
