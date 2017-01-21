@@ -254,9 +254,14 @@
     <Compile Include="Controllers\PatronComando\M05\M05_COAgregarPasajero.cs" />
     <Compile Include="Controllers\PatronComando\M11\M11_COAgregarOferta.cs" />
     <Compile Include="Controllers\PatronComando\M11\M11_COAgregarPaquete.cs" />
+    <Compile Include="Controllers\PatronComando\M11\M11_COConsultarOferta.cs" />
+    <Compile Include="Controllers\PatronComando\M11\M11_COConsultarPaquete.cs" />
     <Compile Include="Controllers\PatronComando\M11\M11_CODeshabilitarOferta.cs" />
     <Compile Include="Controllers\PatronComando\M11\M11_CODeshabilitarPaquete.cs" />
+    <Compile Include="Controllers\PatronComando\M11\M11_COModificarOferta.cs" />
     <Compile Include="Controllers\PatronComando\M11\M11_COModificarPaquete.cs" />
+    <Compile Include="Controllers\PatronComando\M11\M11_COVisualizarOfertas.cs" />
+    <Compile Include="Controllers\PatronComando\M11\M11_COVisualizarPaquetes.cs" />
     <Compile Include="Controllers\PatronComando\M13_COAgregarRol.cs" />
     <Compile Include="Controllers\PatronComando\M13_COAgregarRolPermiso.cs" />
     <Compile Include="Controllers\PatronComando\M16_COAgregarReclamo.cs" />

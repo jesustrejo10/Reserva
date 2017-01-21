@@ -147,12 +147,21 @@ namespace BOReserva.DataAccess.DataAccessObject
 
         #region M11_Gestion_Ofertas_Y_Paquetes
         /// <summary>
-        /// Método que crea la instancia de DAOVuelo
+        /// Método que crea la instancia de DAOPaquete
         /// </summary>
-        /// <returns>Retorna la instancia a la clase DAOVuelo</returns>
+        /// <returns>Retorna la instancia a la clase DAOPaquete</returns>
         public static DAO instanciarDaoPaquete()
         {
             return new DAOPaquete(); 
+        }
+
+        /// <summary>
+        /// Método que crea la instancia de DAOOferta
+        /// </summary>
+        /// <returns>Retorna la instancia a la clase DAOOferta</returns>
+        public static DAO instanciarDaoOferta()
+        {
+            return new DAOOferta();
         }
         #endregion
 
@@ -167,13 +176,5 @@ namespace BOReserva.DataAccess.DataAccessObject
         }
         #endregion
 
-        #region M11_Ofertas
-
-        public static DAO instanciarDaoOferta()
-        {
-            return new DAOOferta();
-        }
-
-        #endregion
     }
 }
