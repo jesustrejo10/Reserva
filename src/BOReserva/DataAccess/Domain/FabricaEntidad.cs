@@ -167,6 +167,12 @@ namespace BOReserva.DataAccess.Domain
 
             return new Rol(nombre);
         }
+        public static Entidad InstanciarRolId(CRoles model)
+        {
+            int idRol = model._idRol;
+
+            return new Rol(idRol);
+        }
 
         public static Entidad InstanciarRolPermiso(String rol, String permiso)
         {

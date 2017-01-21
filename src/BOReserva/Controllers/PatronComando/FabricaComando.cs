@@ -192,9 +192,15 @@ namespace BOReserva.Controllers.PatronComando
         {
             return new M13_COEliminarPermisos(id);
         }
-        public static Command<String> crearM13_ConsultarPermisosAsignados(Entidad rol, int id)
+        public static Command<List<Entidad>> crearM13_ConsultarPermisosAsignados(Entidad rol, int id)
         {
             return new M13_COConsultarPermisosAsociados(rol,id);
+        }
+        public static Command<String> crearM13_ModificarRol(Entidad rol, int idmodificar)
+        {
+
+            return new M13_COModificarRol(rol, idmodificar);
+
         }
         #endregion
 

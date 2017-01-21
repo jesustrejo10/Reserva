@@ -361,9 +361,29 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
         }
 
-        public Entidad Modificar(Entidad e)
+        Entidad IDAO.Modificar(Entidad e)
         {
-            throw new NotImplementedException();
+            Rol rol = (Rol)e;
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            try
+            {
+                conexion.Open();
+                String sql = "update Rol set rol_nombre = "+ "'"+ rol._nombreRol +"'" + "where rol_id = " + rol._idRol;
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                conexion.Close();
+                rol._nombreRol = "1";
+                Entidad resultado = rol;
+                return resultado;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                rol._nombreRol = ex.Message;
+                Entidad resultado = rol;
+                return resultado;
+            }
         }
 
         public String eliminarRol(int id)

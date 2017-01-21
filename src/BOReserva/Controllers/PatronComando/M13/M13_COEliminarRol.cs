@@ -11,7 +11,7 @@ namespace BOReserva.Controllers.PatronComando
     public class M13_COEliminarRol : Command<String>
     {
         Rol _rol;
-        int _idEliminar;
+        int _idRol;
 
         public M13_COEliminarRol(Entidad rol, int id)
         {

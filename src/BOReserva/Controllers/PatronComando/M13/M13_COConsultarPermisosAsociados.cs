@@ -7,11 +7,11 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando
 {
-    public class M13_COConsultarPermisosAsociados : Command<String>
+    public class M13_COConsultarPermisosAsociados : Command<List<Entidad>>
     {
 
         Rol _rol;
-        int _idEliminar;
+        int _idRol;
 
         public M13_COConsultarPermisosAsociados(Entidad rol, int id)
         {
@@ -19,10 +19,10 @@ namespace BOReserva.Controllers.PatronComando
             this._rol._idRol = id;
         }
 
-        public override String ejecutar()
+        public override List<Entidad> ejecutar()
         {
             DAORol daoRol = (DAORol)FabricaDAO.instanciarDAORol();
-            String test = daoRol.eliminarRol(_rol._idRol);
+            List<Entidad> test = daoRol.consultarLosPermisosAsignados(_rol._idRol);
             return test;
         }
     }

@@ -16,7 +16,6 @@ namespace BOReserva.DataAccess.Domain
         public String _nombrePermiso { get; set; }
         public List<Entidad> listapermisos { get; set; }
 
-
         /// <summary>
         /// Constructor vacio de Roles
         /// </summary>
@@ -48,6 +47,11 @@ namespace BOReserva.DataAccess.Domain
         {
             this._nombreRol = nombre;
             this._nombrePermiso = permiso;
+        }
+
+        public Rol(int id)
+        {
+            this._idRol = id;
         }
     }
 
