@@ -282,28 +282,29 @@ jQuery(document).ready(function () {
             });
 
     });
-    $("#consultarhotel").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_hoteles/M09_GestionHoteles_Visualizar';
-        var method = 'GET';
-        var data = '';
 
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
+    //$("#consultarhotel").click(function (e) {
+    //    e.preventDefault();
+    //    var url = '/gestion_hoteles/M09_GestionHoteles_Visualizar';
+    //    var method = 'GET';
+    //    var data = '';
 
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
+    //    $.ajax(
+    //        {
+    //            url: url,
+    //            type: method,
+    //            data: data,
+    //            success: function (data, textStatus, jqXHR) {
 
-    });
+    //                $("#contenido").empty();
+    //                $("#contenido").append(data);
+    //            },
+    //            error: function (jqXHR, textStatus, errorThrown) {
+    //                alert(errorThrown);
+    //            }
+    //        });
+
+    //});
     // FIN DE HOTELES
 
     /* INICIO M10 RESTAURANTES BO */
@@ -311,7 +312,7 @@ jQuery(document).ready(function () {
         e.preventDefault();
         var url = '/gestion_restaurantes/M10_GestionRestaurantes_Ver';
         var method = 'GET';
-        var data = '';
+        var data = -1;
 
         $.ajax(
             {

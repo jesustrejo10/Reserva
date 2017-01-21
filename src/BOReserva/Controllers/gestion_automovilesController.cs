@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using BOReserva.Models.gestion_automoviles;
 using System.Diagnostics;
 using BOReserva.Servicio;
+using BOReserva.DataAccess.Domain;
+
 namespace BOReserva.Controllers
 {
     /// <summary>
@@ -14,7 +16,7 @@ namespace BOReserva.Controllers
     public class gestion_automovilesController : Controller
     {
         
-        public static String ciudad;
+        public static String _ciudad;
         public static String _pais;
 
 
@@ -37,12 +39,30 @@ namespace BOReserva.Controllers
         public ActionResult M08_VisualizarAutomoviles()
         {
             //var companies = DataRepository.GetCompanies();
-            //List<CAutomovil> listavehiculos = new List<CAutomovil>();
-            manejadorSQL buscarvehiculos = new manejadorSQL();
-            List<Automovil> listavehiculos = buscarvehiculos.MListarvehiculosBD();  //AQUI SE BUSCA TODO LOS VEHICULOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
-            //CAutomovil test = new CAutomovil("AG234FC", "3", "Mazda", 2006, "Sedan", 1589.5, 5, 7550.0, 250.6, 290.4, DateTime.Parse("11/11/2016"), "Azul", 1, "Automatico", "Venezuela", "Distrito Capital", "Caracas");
-            //listavehiculos.Add(test);
-            return PartialView(listavehiculos);
+            List<CVisualizarAutomovil> listaAutomoviles = new List<CVisualizarAutomovil>();
+            //manejadorSQL buscarvehiculos = new manejadorSQL();
+            //List<Automovil> listaAutomoviles = buscarvehiculos.MListarvehiculosBD();  //AQUI SE BUSCA TODO LOS VEHICULOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
+            Automovil vehiculo = (Automovil)FabricaEntidad.InstanciarAutomovil("AG234FC", "3", "Mazda", "2006", "Sedan", "1589.5", "5", "7550.0", "250.6", "290.4", "11/11/2016", "Azul", "1", "Automatico", "Venezuela", "Caracas", "1");
+            CVisualizarAutomovil automovil = new CVisualizarAutomovil();
+            automovil._matricula = vehiculo.matricula.ToUpper();
+            automovil._modelo = vehiculo.modelo;
+            automovil._fabricante = vehiculo.fabricante;
+            automovil._anio = vehiculo.anio;
+            automovil._tipovehiculo = vehiculo.tipovehiculo;
+            automovil._kilometraje = Convert.ToDouble(vehiculo.kilometraje.ToString());
+            automovil._cantpasajeros = vehiculo.cantpasajeros;
+            automovil._preciocompra = Convert.ToDouble(vehiculo.preciocompra.ToString());
+            automovil._precioalquiler = Convert.ToDouble(vehiculo.precioalquiler.ToString());
+            automovil._penalidaddiaria = Convert.ToDouble(vehiculo.penalidaddiaria.ToString());
+            automovil._fecharegistro = vehiculo.fecharegistro.ToString();
+            automovil._color = vehiculo.color;
+            automovil._disponibilidad = vehiculo.disponibilidad;
+            automovil._transmision = vehiculo.transmision;
+            automovil._pais = vehiculo.pais;
+            automovil._ciudad = vehiculo.ciudad;
+            listaAutomoviles.Add(automovil);
+            
+            return PartialView(listaAutomoviles);
         }
 
 
@@ -54,28 +74,31 @@ namespace BOReserva.Controllers
         /// <returns>Retorna la vista parcial M08_VisualizarAutomovil</returns>
         public ActionResult M08_VisualizarAutomovil(String matricula)
         {
-            manejadorSQL buscarvehiculo = new manejadorSQL();
-            Automovil vehiculo = buscarvehiculo.MMostrarvehiculoBD(matricula); //BUSCA EL AUTOMOVIL A MOSTRAR
+
+            //manejadorSQL buscarvehiculo = new manejadorSQL();
+            //Automovil vehiculo = buscarvehiculo.MMostrarvehiculoBD(matricula); //BUSCA EL AUTOMOVIL A MOSTRAR
             //EN TODOS ESTOS METODOS HAY QUE USAR TRY CATCH
-            //CAutomovil test = new CAutomovil("AG234FC", "3", "Mazda", 2006, "Sedan", 1589.5, 5, 7550.0, 250.6, 290.4, DateTime.Parse("11/11/2016"), "Azul", 1, "Automatico", "Venezuela", "Distrito Capital", "Caracas");
+            Automovil vehiculo = (Automovil)FabricaEntidad.InstanciarAutomovil("AG234FC", "3", "Mazda", "2006", "Sedan", "1589.5", "5", "7550.0", "250.6", "290.4", "11/11/2016", "Azul", "1", "Automatico", "Venezuela", "Caracas", "1");
             CVisualizarAutomovil automovil = new CVisualizarAutomovil();
-            automovil._matricula = vehiculo._matricula.ToUpper();
-            automovil._modelo = vehiculo._modelo ;
-            automovil._fabricante = vehiculo._fabricante ;
-            automovil._anio = vehiculo._anio ;
-            automovil._tipovehiculo = vehiculo._tipovehiculo ;
-            automovil._kilometraje = vehiculo._kilometraje;
-            automovil._cantpasajeros = vehiculo._cantpasajeros;
-            automovil._preciocompra = vehiculo._preciocompra;
-            automovil._precioalquiler = vehiculo._precioalquiler ;
-            automovil._penalidaddiaria = vehiculo. _penalidaddiaria;
-            automovil._fecharegistro = vehiculo._fecharegistro.Month + "/" + vehiculo._fecharegistro.Day + "/" + vehiculo._fecharegistro.Year;
-            automovil._color = vehiculo._color ;
-            automovil._disponibilidad = vehiculo._disponibilidad;
-            automovil._transmision = vehiculo._transmision;
-            automovil._pais = vehiculo._pais;
-            automovil._ciudad = vehiculo._ciudad;
+            automovil._matricula = vehiculo.matricula.ToUpper();
+            automovil._modelo = vehiculo.modelo ;
+            automovil._fabricante = vehiculo.fabricante ;
+            automovil._anio = vehiculo.anio ;
+            automovil._tipovehiculo = vehiculo.tipovehiculo ;
+            automovil._kilometraje = Convert.ToDouble( vehiculo.kilometraje.ToString() );
+            automovil._cantpasajeros = vehiculo.cantpasajeros;
+            automovil._preciocompra = Convert.ToDouble(vehiculo.preciocompra.ToString());
+            automovil._precioalquiler = Convert.ToDouble(vehiculo.precioalquiler.ToString());
+            automovil._penalidaddiaria = Convert.ToDouble(vehiculo.penalidaddiaria.ToString());
+            automovil._fecharegistro = vehiculo.fecharegistro.ToString();
+            automovil._color = vehiculo.color ;
+            automovil._disponibilidad = vehiculo.disponibilidad;
+            automovil._transmision = vehiculo.transmision;
+            automovil._pais = vehiculo.pais;
+            automovil._ciudad = vehiculo.ciudad;
             return PartialView(automovil);
+            
+            return PartialView(null);
         }
 
 
@@ -87,29 +110,31 @@ namespace BOReserva.Controllers
         /// <returns>Retorna la vista parcial M08_ModificarAutomovil</returns>
         public ActionResult M08_ModificarAutomovil(String matricula)
         {
-            manejadorSQL buscarvehiculo = new manejadorSQL();
-            Automovil vehiculo = buscarvehiculo.MMostrarvehiculoBD(matricula); //BUSCA EL AUTOMOVIL A MOSTRAR
+
+            //manejadorSQL buscarvehiculo = new manejadorSQL();
+            //Automovil vehiculo = buscarvehiculo.MMostrarvehiculoBD(matricula); //BUSCA EL AUTOMOVIL A MOSTRAR
             //EN TODOS ESTOS METODOS HAY QUE USAR TRY CATCH
-            //CAutomovil test = new CAutomovil("AG234FC", "3", "Mazda", 2006, "Sedan", 1589.5, 5, 7550.0, 250.6, 290.4, DateTime.Parse("11/11/2016"), "Azul", 1, "Automatico", "Venezuela", "Distrito Capital", "Caracas");
+            Automovil vehiculo = (Automovil)FabricaEntidad.InstanciarAutomovil("AG234FC", "3", "Mazda", "2006", "Sedan", "1589.5", "5", "7550.0", "250.6", "290.4", "11/11/2016", "Azul", "1", "Automatico", "Venezuela", "Caracas","1");
             CModificarAutomovil automovil = new CModificarAutomovil();
-            automovil._matricula = vehiculo._matricula;
-            automovil._modelo = vehiculo._modelo;
-            automovil._fabricante = vehiculo._fabricante;
-            automovil._anio = vehiculo._anio;
-            automovil._tipovehiculo = vehiculo._tipovehiculo;
-            automovil._kilometraje = vehiculo._kilometraje;
-            automovil._cantpasajeros = vehiculo._cantpasajeros;
-            automovil._preciocompra = vehiculo._preciocompra;
-            automovil._precioalquiler = vehiculo._precioalquiler;
-            automovil._penalidaddiaria = vehiculo._penalidaddiaria;
-            automovil._fecharegistro = vehiculo._fecharegistro.Month + "/" + vehiculo._fecharegistro.Day + "/" + vehiculo._fecharegistro.Year;
-            automovil._color = vehiculo._color;
-            automovil._disponibilidad = vehiculo._disponibilidad;
-            automovil._transmision = vehiculo._transmision;
-            automovil._pais = vehiculo._pais;
-            automovil._ciudad = vehiculo._ciudad;
-            ciudad = vehiculo._ciudad;
+            automovil._matricula = vehiculo.matricula.ToUpper();
+            automovil._modelo = vehiculo.modelo;
+            automovil._fabricante = vehiculo.fabricante;
+            automovil._anio = vehiculo.anio;
+            automovil._tipovehiculo = vehiculo.tipovehiculo;
+            automovil._kilometraje = Convert.ToDouble(vehiculo.kilometraje.ToString());
+            automovil._cantpasajeros = vehiculo.cantpasajeros;
+            automovil._preciocompra = Convert.ToDouble(vehiculo.preciocompra.ToString());
+            automovil._precioalquiler = Convert.ToDouble(vehiculo.precioalquiler.ToString());
+            automovil._penalidaddiaria = Convert.ToDouble(vehiculo.penalidaddiaria.ToString());
+            automovil._fecharegistro = vehiculo.fecharegistro.ToString();
+            automovil._color = vehiculo.color;
+            automovil._disponibilidad = vehiculo.disponibilidad;
+            automovil._transmision = vehiculo.transmision;
+            automovil._pais = vehiculo.pais;
+            automovil._ciudad = vehiculo.ciudad;
             return PartialView(automovil);
+            
+            return PartialView(null);
         }
 
 
@@ -197,7 +222,7 @@ namespace BOReserva.Controllers
         [HttpPost]
         public void getCity(String _ciudad)
         {
-            ciudad = _ciudad;
+            gestion_automovilesController._ciudad = _ciudad;
         }
 
         /// <summary>
@@ -208,30 +233,34 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult saveVehicle(CAgregarAutomovil model)
         {
+            
             String matricula = model._matricula.ToUpper();
-            int anio = model._anio;
-            int cantpasajeros = model._cantpasajeros;
-            String _ciudad = ciudad;
+            String anio = model._anio.ToString();
+            String cantpasajeros = model._cantpasajeros.ToString();
+            String ciudad = gestion_automovilesController._ciudad;
             String color = model._color;
-            bool disponibilidad = model._disponibilidad;
+            //String disponibilidad = model._disponibilidad.ToString();
             String fabricante = model._fabricante;
-            DateTime fecharegistro = model._fecharegistro;
-            double kilometraje = model._kilometraje;
+            String fecharegistro = model._fecharegistro.ToString();
+            String kilometraje = model._kilometraje.ToString();
             String modelo = model._modelo;
-            String pais = _pais;
-            double penalidaddiaria = model._penalidaddiaria;
-            double precioalquiler = model._precioalquiler;
-            double preciocompra = model._preciocompra;
+            String pais = gestion_automovilesController._pais;
+            String penalidaddiaria = model._penalidaddiaria.ToString();
+            String precioalquiler = model._precioalquiler.ToString();
+            String preciocompra = model._preciocompra.ToString();
             String tipovehiculo = model._tipovehiculo;
             String transmision = model._transmision;
-            Automovil carronuevo = new Automovil(matricula, modelo, fabricante, anio, tipovehiculo, kilometraje, 
-                                             cantpasajeros, preciocompra, precioalquiler, penalidaddiaria, fecharegistro,
-                                             color, 1, transmision, pais, ciudad);  //SE CREA EL VEHICULO
-            manejadorSQL buscarid = new manejadorSQL();
-            int id_ciudad = buscarid.MBuscaridciudadBD(_ciudad, pais);
-            String agrego_si_no = carronuevo.MAgregaraBD(carronuevo, id_ciudad); //SE AGREGA A LA BD RETORNA 1 SI SE AGREGA Y 0 SINO LO LOGRA
+            String disponibilidad = "1";
+            String fk_ciudad = "0";
+            Entidad carronuevo = FabricaEntidad.InstanciarAutomovil(matricula, modelo, fabricante, anio, tipovehiculo, kilometraje, 
+                                                                     cantpasajeros, preciocompra, precioalquiler, penalidaddiaria, fecharegistro,
+                                                                     color, disponibilidad, transmision, pais, ciudad,fk_ciudad);  //SE CREA EL VEHICULO
+            //manejadorSQL buscarid = new manejadorSQL();
+            //int id_ciudad = buscarid.MBuscaridciudadBD(_ciudad, pais);
+            //String agrego_si_no = carronuevo.MAgregaraBD(carronuevo, id_ciudad); //SE AGREGA A LA BD RETORNA 1 SI SE AGREGA Y 0 SINO LO LOGRA
             
-            return (Json(agrego_si_no));
+            //return (Json(agrego_si_no));
+            return (Json("no"));
         }
 
 
@@ -243,31 +272,37 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult modifyVehicle(CModificarAutomovil model)
         {
-            String matricula = model._matricula.ToUpper();
-            int anio = model._anio;
-            int cantpasajeros = model._cantpasajeros;
-            String color = model._color;
-            String fabricante = model._fabricante;
-            DateTime fecharegistro = new DateTime();
 
-                double kilometraje = model._kilometraje;
+            String matricula = model._matricula.ToUpper();
+            String anio = model._anio.ToString();
+            String cantpasajeros = model._cantpasajeros.ToString();
+            String color = model._color;
+            //String disponibilidad = model._disponibilidad.ToString();
+            String fabricante = model._fabricante;
+            String fecharegistro = Convert.ToString(new DateTime());
+            String kilometraje = model._kilometraje.ToString();
             String modelo = model._modelo;
-            String pais = _pais;
-            String _ciudad = ciudad;
-            double penalidaddiaria = model._penalidaddiaria;
-            double precioalquiler = model._precioalquiler;
-            double preciocompra = model._preciocompra;
+            
+            String penalidaddiaria = model._penalidaddiaria.ToString();
+            String precioalquiler = model._precioalquiler.ToString();
+            String preciocompra = model._preciocompra.ToString();
             String tipovehiculo = model._tipovehiculo;
             String transmision = model._transmision;
+            String disponibilidad = "1";
+            String fk_ciudad = "0";
+            String pais = gestion_automovilesController._pais;
+            String ciudad = gestion_automovilesController._ciudad;
 
-            Automovil carro = new Automovil(matricula, modelo, fabricante, anio, tipovehiculo, kilometraje, 
-                                             cantpasajeros, preciocompra, precioalquiler, penalidaddiaria, fecharegistro, 
-                                             color, 1, transmision, pais, _ciudad);  //SE CREA EL VEHICULO
-            manejadorSQL buscarid = new manejadorSQL();
-            int id_ciudad = buscarid.MBuscaridciudadBD(_ciudad, pais);
-            String modifico_si_no = carro.MModificarvehiculoBD(carro, id_ciudad); //SE MODIFICA A LA BD RETORNA 1 SI SE  MODIFICO Y 0 SI NO LO LOGRA
-            
-            return (Json(modifico_si_no));
+            Entidad carronuevo = FabricaEntidad.InstanciarAutomovil(matricula, modelo, fabricante, anio, tipovehiculo, kilometraje,
+                                                                     cantpasajeros, preciocompra, precioalquiler, penalidaddiaria, fecharegistro,
+                                                                     color, disponibilidad, transmision, pais, ciudad, fk_ciudad);  //SE CREA EL VEHICULO
+            //manejadorSQL buscarid = new manejadorSQL();
+            //int id_ciudad = buscarid.MBuscaridciudadBD(_ciudad, pais);
+            //String modifico_si_no = carro.MModificarvehiculoBD(carro, id_ciudad); //SE MODIFICA A LA BD RETORNA 1 SI SE  MODIFICO Y 0 SI NO LO LOGRA
+
+            //return (Json(modifico_si_no));
+
+            return (Json("no"));
         }
 
         /// <summary>
@@ -307,6 +342,7 @@ namespace BOReserva.Controllers
         /// <returns>Retorna un JsonResult</returns>
         public JsonResult deleteVehicle(String matricula)
         {
+            /*
             String _matricula = matricula;
             int anio = 0;
             int cantpasajeros = 0;
@@ -328,6 +364,8 @@ namespace BOReserva.Controllers
                                              color, 1, transmision, pais, ciudad);  //SE CREA EL VEHICULO
             String borro_si_no = carro.MBorrarvehiculoBD(_matricula); //SE BORRA LA BD RETORNA 1 SI SE  BORRA Y 0 SI NO LO LOGRA
             return (Json(borro_si_no));
+            */
+            return (Json("no"));
         }
 
 
@@ -370,11 +408,11 @@ namespace BOReserva.Controllers
         public ActionResult listaciudades(String pais)
         {
             List<String> objcity = new List<String>();
-            _pais = pais;
+            gestion_automovilesController._pais = pais;
             manejadorSQL listaciudades = new manejadorSQL();
             int fk = listaciudades.MIdpaisesBD(pais);
             objcity = listaciudades.MListarciudadesBD(fk);
-            ciudad = objcity.First();
+            gestion_automovilesController._ciudad = objcity.First();
             return Json(objcity);
         }
 
@@ -386,6 +424,7 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult activateVehicle(String matricula)
         {
+            /*
             String _matricula = matricula;
             int anio = 0;
             int cantpasajeros = 0;
@@ -407,6 +446,8 @@ namespace BOReserva.Controllers
                                              color, 1, transmision, pais, ciudad);  //SE CREA EL VEHICULO
             String estatus_si_no = carro.MDisponibilidadVehiculoBD(_matricula, 1); //SE BORRA LA BD RETORNA 1 SI SE  BORRA Y 0 SI NO LO LOGRA
             return (Json(estatus_si_no));
+            */
+            return (Json("ACTIVAR/DESACTIVAR"));
         }
 
         /// <summary>
@@ -417,6 +458,7 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult deactivateVehicle(String matricula)
         {
+            /*
             String _matricula = matricula;
             int anio = 0;
             int cantpasajeros = 0;
@@ -438,6 +480,8 @@ namespace BOReserva.Controllers
                                              color, 1, transmision, pais, ciudad);  //SE CREA EL VEHICULO
             String estatus_si_no = carro.MDisponibilidadVehiculoBD(_matricula, 0); //SE BORRA LA BD RETORNA 1 SI SE  BORRA Y 0 SI NO LO LOGRA
             return (Json(estatus_si_no));
+            */
+            return (Json("no"));
         }
 
         /// <summary>
@@ -448,9 +492,9 @@ namespace BOReserva.Controllers
         [HttpPost]
         public ActionResult checkplaca(String matricula)
         {
-            manejadorSQL placa = new manejadorSQL();
-            int existe = placa.MPlacarepetidaBD(matricula); 
-            return Json(existe);
+            //manejadorSQL placa = new manejadorSQL();
+            //int existe = placa.MPlacarepetidaBD(matricula); 
+            return (Json("no"));
         } 
 
     }

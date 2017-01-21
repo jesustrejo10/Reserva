@@ -8,10 +8,11 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 
 namespace BOReserva.DataAccess.DataAccessObject
 {
-    public class DAOVuelo : DAO, IDAOVuelo
+    public class DAOVuelo : DAO, IDAOVuelo, IDAO
     {
         public int Agregar(Entidad e)
         {
@@ -376,5 +377,6 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
             return null;
         }
+        
     }
 }
