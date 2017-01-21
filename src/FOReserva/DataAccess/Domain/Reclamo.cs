@@ -13,6 +13,8 @@ namespace FOReserva.DataAccess.Domain
         public String _fechaReclamo { get; set; }
         public int _estadoReclamo { get; set; }
         public int _usuarioReclamo{get; set;}
+
+        public List<Reclamo> _listaDeReclamos { get; set; }
         public Reclamo(int id, String tituloReclamo, String detalleReclamo, String fechaReclamo, int estadoReclamo, int _usuarioReclamo)
         {
             this._idReclamo = id;
@@ -28,6 +30,9 @@ namespace FOReserva.DataAccess.Domain
             this._detalleReclamo = detalleReclamo;
             this._fechaReclamo = fechaReclamo;
             this._estadoReclamo = estadoReclamo;
+            this._usuarioReclamo = _usuarioReclamo;
         }
+
+        public Reclamo() { }
     }
 }

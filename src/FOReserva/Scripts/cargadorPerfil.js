@@ -123,7 +123,6 @@
     /* CARGADOR DE BOTON RECLAMOS */
     $("#PeReclamos").click(function (e) {
         e.preventDefault();
-        alert("entro aqui karli");
         $("#peReclamos").addClass("active");
 
         $("#PePerfil").removeClass("active");

@@ -85,7 +85,7 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult M11_ListarAutomoviles()
         {
-            Automovil automovil = new Automovil();
+            //Automovil automovil = new Automovil();
             //return Json(automovil.MListarvehiculos());
             return null;
         }
@@ -139,7 +139,7 @@ namespace BOReserva.Controllers
         }
 
 
-        public ActionResult M11_ModificarOferta(int id)
+      /*  public ActionResult M11_ModificarOferta(int id)
         {
             manejadorSQL buscarOferta = new manejadorSQL();
             COferta oferta = buscarOferta.MMostrarOfertaBD(id);
@@ -171,7 +171,7 @@ namespace BOReserva.Controllers
             }
 
             return PartialView(modificarOferta);
-        }
+        }*/
 
 
         //Carga paquetes en el multiselect de agregar oferta
