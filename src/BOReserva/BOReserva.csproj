@@ -307,6 +307,9 @@
     <Compile Include="DataAccess\DataAccessObject\DAOPasajero.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOPais.cs" />
     <Compile Include="DataAccess\DataAccessObject\M13\M13_DAOResources.Designer.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M14\DAOCabina.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M14\DAOCruceros.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M14\DAOItinerario.cs" />
     <Compile Include="DataAccess\DataAccessObject\M16\DAOReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\M13\DAORol.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOAutomovil.cs" />
