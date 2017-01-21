@@ -588,7 +588,7 @@ namespace BOReserva.Controllers.PatronComando
         }
             #endregion
 
-        #region M03_Ruta
+            #region M03_Ruta
             public static Command<String> crearM03_AgregarRuta(Entidad e)
             {
 
@@ -641,4 +641,5 @@ namespace BOReserva.Controllers.PatronComando
 
             #endregion
         }
+        
 }
