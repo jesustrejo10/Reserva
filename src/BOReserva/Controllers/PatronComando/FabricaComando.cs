@@ -473,4 +473,43 @@ namespace BOReserva.Controllers.PatronComando
         }
         #endregion
     }
+        /// <summary>
+        /// Metodo para instanciar el comando cambiar status del modulo de vuelos
+        /// </summary>
+        /// <param name="vuelo">id del vuelo al que se le cambiara el status</param>
+        /// <returns>Instancia del M04_COCambiarStatus</returns>
+        public static Command<Boolean> M04_CambiarStatus(int vuelo)
+        {
+            return new M04.M04_COCambiarStatus(vuelo);
+        }
+
+        /// <summary>
+        /// Metodo para instanciar el comando M04_LugarOrigen
+        /// </summary>
+        /// <returns>Instancia del metodo M04_COLugarOrigen</returns>
+        public static Command<List<Entidad>> ConsularM04_LugarOrigen()
+        {
+            return new M04.M04_COLugarOrigen();
+        }
+
+        /// <summary>
+        /// Metodo para instanciar el comando M04_LugarOrigen
+        /// </summary>
+        /// <param name="ciudadO">id de la ciudad origen</param>
+        /// <returns>lista con las ciudades destino</returns>
+        public static Command<List<Entidad>> ConsultarM04_LugarDestino(int ciudadO)
+        {
+            return new M04.M04_COLugarDestino(ciudadO);
+        }
+
+        /// <summary>
+        /// Metodo para instanciar el comando M04_LugarOrigen
+        /// </summary>
+        /// <param name="idRuta">id de la ruta</param>
+        /// <returns>lista con los aviones disponibles para la ruta seleccionada</returns>
+        public static Command<List<Entidad>> ConsultarM04_BuscarAvionRuta(int idRuta)
+        {
+            return new M04.M04_COBuscarAvionRuta(idRuta);
+        }
+
 }

@@ -8,6 +8,25 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+        /// <summary>
+        /// Instanciar vuelo sin ningun parametro
+        /// </summary>
+        /// <returns>Entidad vuelo vacia</returns>
+        public static Entidad InstanciarVuelo()
+        {
+            return new Vuelo();
+        }
+
+        /// <summary>
+        /// Instancia vuelo fecha de aterrizaje y avion
+        /// </summary>
+        /// <param name="fechaAterrizaje">fecha de Aterrizaje</param>
+        /// <param name="avion">clase avion</param>
+        /// <returns>Entidad Vuelo</returns>
+        public static Entidad InstanciarVuelo(DateTime fechaAterrizaje, Avion avion)
+        {
+            return new Vuelo(fechaAterrizaje, avion);
+        }
 
 
 

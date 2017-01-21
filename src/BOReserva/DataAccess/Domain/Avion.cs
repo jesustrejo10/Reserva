@@ -5,7 +5,7 @@ using System.Web;
 
 namespace BOReserva.DataAccess.Domain
 {
-    public class Avion
+    public class Avion : Entidad
     {
         public int _id { get; set; }
         public string _matricula { get; set; }
