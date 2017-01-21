@@ -30,7 +30,7 @@ namespace BOReserva.Controllers
             }
 
             Entidad _comida = FabricaEntidad.instanciarComida(model._nombrePlato, model._tipoPlato, model._estatusPlato, model._descripcionPlato);
-            Command<bool> comando = (Command<bool>)FabricaComando.gestionComida(FabricaComando.comandosComida.CREAR, _comida);
+            Command<bool> comando = (Command<bool>)FabricaComando.gestionComida(FabricaComando.comandosComida.CREAR_COMIDA, _comida);
 
             if (comando.ejecutar())
             {
@@ -68,19 +68,44 @@ namespace BOReserva.Controllers
 
         public ActionResult M06_VisualizarComidas()
         {
-            manejadorSQL sql = new manejadorSQL();
-            List<CComida> comidas = new List<CComida>();
-            comidas = sql.listarPlatosEnBD();
-            return PartialView(comidas);
-            //return PartialView();
+            List<Entidad> listaComidas = null;
+
+            Command<List<Entidad>> comando = (Command<List<Entidad>>) FabricaComando.gestionComida(FabricaComando.comandosComida.CONSULTAR_COMIDAS, null);
+
+            listaComidas = comando.ejecutar();
+
+            if (listaComidas != null)
+            {
+                return PartialView(listaComidas);
+            }
+            else
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                string error = "Error consultando comidas.";
+                return Json(error);
+            }
         }
 
         public ActionResult M06_VisualizarVuelosComidas()
         {
-            manejadorSQL sql = new manejadorSQL();
-            List<CVueloComida> comidas = new List<CVueloComida>();
-            comidas = sql.listarVuelosComidaEnBD();
-            return PartialView(comidas);
+            List<Entidad> listaComidasVuelos = null;
+
+            Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.gestionComida(FabricaComando.comandosComida.CONSULTAR_COMIDAS_VUELOS, null);
+
+            listaComidasVuelos = comando.ejecutar();
+
+            if (listaComidasVuelos != null)
+            {
+                return PartialView(listaComidasVuelos);
+            }
+            else
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                string error = "Error consultando vuelos y comidas.";
+                return Json(error);
+            }
+
+            return PartialView(listaComidasVuelos);
             //return PartialView();
         }
 
