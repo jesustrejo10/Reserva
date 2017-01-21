@@ -2,9 +2,10 @@
 
 <div class="row">
     <link rel="stylesheet" href="~/Content/plugins/datatables/dataTables.bootstrap.css">
+    <link href="~/Content/Canvas/Box.css" rel="stylesheet" />
 
-    <div class="col-xs-12">
-        <div class="box">
+    <div class="col-xs-10">
+        <div class="Cajita">
             <div class="box-header">
                 <h3 class="box-title">Lista de Aviones</h3>
             </div>
@@ -43,8 +44,8 @@
                                     <td>@c._capacidadCombustible</td>
                                     <td>@disponibilidad</td>
                                     <td>
-                                        <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>
-                                        <a href="#" title="Eliminar avión"><i class="fa fa-times eliminar"></i></a>
+                                        <a href="#" title="Modificar" class="wait"><i class="fa fa-pencil modificar"></i></a>
+                                        <a href="#" title="Eliminar avión" class="wait"><i class="fa fa-times eliminar"></i></a>
                                         @if (c._disponibilidad == 1)
                                         {
                                             <a href="#" title="Deshabilitar"><i class="fa fa-toggle-on desactivar"></i></a>

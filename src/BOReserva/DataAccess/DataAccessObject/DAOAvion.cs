@@ -263,7 +263,8 @@ namespace BOReserva.DataAccess.DataAccessObject
         /// <summary>
         /// Metodo de DAO para eliminar Avion
         /// </summary>
-        public String EliminarAvion(int id)
+        string IDAOAvion.eliminarAvion(int id)
+        //public String EliminarAvion(int id)
         {
             SqlConnection conexion = Connection.getInstance(_connexionString);
             try

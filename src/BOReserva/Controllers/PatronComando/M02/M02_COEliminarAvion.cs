@@ -32,8 +32,9 @@ namespace BOReserva.Controllers.PatronComando.M02
         ///// Retorna una Entidad
         ///// </returns>
         public override String ejecutar(){
-            DAOAvion daoAvion = (DAOAvion)FabricaDAO.instanciarDaoAvion();
-            String test = daoAvion.EliminarAvion(_avion._id);
+            IDAOAvion daoAvion = (DAOAvion)FabricaDAO.instanciarDaoAvion();
+            //String test = daoAvion.EliminarAvion(_avion._id);
+            String test = daoAvion.eliminarAvion(_avion._id);
             return test;
         } 
     }

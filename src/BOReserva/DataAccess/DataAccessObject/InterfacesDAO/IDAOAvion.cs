@@ -9,6 +9,8 @@ namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
     interface IDAOAvion : IDAO
     {
         //metodos detallados
-        int Eliminar(int id);
+        //int Eliminar(int id);
+        String eliminarAvion(int id);
+
     }
 }
