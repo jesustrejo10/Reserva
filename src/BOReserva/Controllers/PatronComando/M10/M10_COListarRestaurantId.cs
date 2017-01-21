@@ -1,35 +1,21 @@
-﻿using BOReserva.Controllers.PatronComando;
-using BOReserva.DataAccess.DataAccessObject;
+﻿using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.Domain;
 using BOReserva.Excepciones;
-using BOReserva.Models;
+using BOReserva.M10;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.M10.Comando.gestion_restaurantes
+namespace BOReserva.Controllers.PatronComando.M10
 {
     /// <summary>
-    /// Clase comando consultar Restaurant segun las Ciudades
+    /// Metodo solicitado por M11 Paquetes y Ofertas 
     /// </summary>
-    public class M10_COConsultarRestaurant : Command<List<Entidad>>
+    public class M10_COListarRestaurantId : Command<List<Entidad>>
     {
-        #region Atributos
-        Entidad _objeto;
-        #endregion
-
         /// <summary>
-        /// Constructor metodo consultar
-        /// </summary>
-        /// <param name="_objeto"></param>
-        public M10_COConsultarRestaurant(Entidad _objeto)
-        {
-            this._objeto = _objeto;
-        }
-
-        /// <summary>
-        /// Metodo para consultar en la base de datos los restaurante segun la ciudad elegida 
+        /// Constructor lista de resturantes
         /// </summary>
         /// <returns></returns>
         public override List<Entidad> ejecutar()
@@ -37,7 +23,7 @@ namespace BOReserva.M10.Comando.gestion_restaurantes
             try
             {
                 IDAORestaurant restaurantDao = FabricaDAO.RestaurantBD();
-                return restaurantDao.Consultar(this._objeto);
+                return restaurantDao.ListarRestaurantes();
             }
             catch (NotImplementedException e)
             {
@@ -47,7 +33,6 @@ namespace BOReserva.M10.Comando.gestion_restaurantes
             {
                 throw new ExceptionReserva("Reserva-404", "Error al Realizar Operacion", e);
             }
-
         }
     }
 }

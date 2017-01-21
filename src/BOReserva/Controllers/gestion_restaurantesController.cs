@@ -38,7 +38,6 @@ namespace BOReserva.Controllers
                 foreach (Entidad item in restaurantes)
                 {
                     lista.Add((CRestauranteModelo)item);
-                   
                 }
 
                 Restaurant.listaRestaurantes = lista;
@@ -68,15 +67,18 @@ namespace BOReserva.Controllers
         /// <returns>Retorna un objeto para renderizar la vista parcial.</returns>
         public ActionResult M10_GestionRestaurantes_Modificar(int id)
         {    
+            //Atributos del metodo
             Entidad _restaurant = FabricaEntidad.crearRestaurant();
             ((CRestauranteModelo)_restaurant)._id = id;
             Command<Entidad> comando = (Command<Entidad>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, BOReserva.Controllers.PatronComando.FabricaComando.comandoRestaurant.CONSULTAR_ID, _restaurant);
             Entidad rest = comando.ejecutar();
 
+            //Cargar la ciudad donde se encuentra el restaurant registrado en la base de datos
             ViewBag.Ciudad = FabricaVista.asignarItemsComboBoxConPosicion(cargarComboBoxLugar(), "Id", "Name",((CRestauranteModelo)rest).idLugar);
             ViewBag.HorariosIni = FabricaVista.asignarItemsComboBoxConPosicion(cargarComboBoxHorario(), "", "", ((CRestauranteModelo)rest).horarioApertura);
             ViewBag.HorariosFin = FabricaVista.asignarItemsComboBoxConPosicion(cargarComboBoxHorario(), "", "", ((CRestauranteModelo)rest).horarioCierre);
-
+            
+            //Elementos a cargar en la Ventana
             ViewBag.Id = ((CRestauranteModelo)rest)._id;
             ViewBag.NombreRestaurant = ((CRestauranteModelo)rest).nombre;
             ViewBag.DescripcionRestaurant = ((CRestauranteModelo)rest).descripcion;
@@ -222,6 +224,10 @@ namespace BOReserva.Controllers
         /// <returns></returns>
         public List<String> cargarComboBoxHorario()
         {
+            //Metodos para M11 Probados 
+            Command<List<Entidad>> comandos = (Command<List<Entidad>>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, FabricaComando.comandoRestaurant.LISTAR_RESTAURANT, null);
+            List<Entidad> restaurantes = comandos.ejecutar();
+
             Command<List<String>> comando = (Command<List<String>>)FabricaComando.comandosVistaRestaurant(FabricaComando.comandoVista.CARGAR_HORA);
             List<String> horarios = comando.ejecutar();
             return horarios;
