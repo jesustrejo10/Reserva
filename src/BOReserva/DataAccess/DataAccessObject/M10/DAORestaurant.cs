@@ -435,7 +435,7 @@ namespace BOReserva.M10
 
         /// <summary>
         /// Metodo para retornar Lista de Restaurante con Nombre y Id 
-        /// Metodo solicitado por Modulo 11, pauqetes y Ofertas
+        /// Metodo solicitado por Modulo 11, paquetes y Ofertas
         /// </summary>
         /// <returns>Se retorna una lista de entidades</returns>
         public List<Entidad> ListarRestaurantes()

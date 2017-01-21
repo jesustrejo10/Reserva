@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using static FOReserva.Models.Revision.CRevision;
+
 
 namespace FOReserva.DataAccess.DataAccessObject.Common.Interface
 {

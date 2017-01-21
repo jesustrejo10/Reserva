@@ -7,11 +7,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.Controllers.PatronComando.M08
+namespace BOReserva.Controllers.PatronComando.GeneralLugar
 {
-    public class M08_COBuscarAutomovil : Command<Entidad>
+    public class COConsultarTodosCiudad : Command<Dictionary<int, Entidad>>
     {
-                
+
         #region Atributos
 
         Entidad _objeto;
@@ -20,7 +20,7 @@ namespace BOReserva.Controllers.PatronComando.M08
 
         #region Constructor
 
-        public M08_COBuscarAutomovil(Entidad _objeto)
+        public COConsultarTodosCiudad(Entidad _objeto)
         {
             this._objeto = _objeto;
         }
@@ -29,11 +29,11 @@ namespace BOReserva.Controllers.PatronComando.M08
 
         #region Ejecucion
 
-        public override Entidad ejecutar()
+        public override Dictionary<int, Entidad> ejecutar()
         {
-            DAO Dao = FabricaDAO.CrearDaoAutomovil();
-            DAOAutomovil DaoAutomovil = (DAOAutomovil)Dao;
-            return DaoAutomovil.Consultar(this._objeto);
+            DAO Dao = FabricaDAO.instanciarDaoCiudad();
+
+            return Dao.ConsultarTodos();
         }
 
         #endregion

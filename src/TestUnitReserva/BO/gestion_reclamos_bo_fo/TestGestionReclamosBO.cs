@@ -15,6 +15,9 @@ using BOReserva.Controllers.PatronComando;
 using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.DataAccessObject.M09;
+using FOReserva.Models.Reclamos;
+using System.Web.Mvc;
+using BOReserva.Controllers;
 
 namespace TestUnitReserva.BO.gestion_reclamos_bo_fo
 {
@@ -28,7 +31,10 @@ namespace TestUnitReserva.BO.gestion_reclamos_bo_fo
         DAOHotel daoHotel;
         IDAO daoReclamo;
         IDAOReclamo daoPersonalizado;
-
+        String tituloReclamo = "prueba";
+        String detalleReclamo = "prueba";
+        String fechaReclamo = "2017-01-21";
+        BOReserva.Controllers.gestion_reclamosController controlador = new BOReserva.Controllers.gestion_reclamosController();
         /// <summary>
         /// Metodo que se ejecuta antes que se ejecute cada prueba
         /// Esta encargado de instanciar el manejadorSQL
@@ -39,6 +45,10 @@ namespace TestUnitReserva.BO.gestion_reclamos_bo_fo
             mockReclamo = new Reclamo(1, "Reclamo mock", "detalle mock reclamo", "2017-01-21", 1, 1);
             daoReclamo = FabricaDAO.instanciarDaoReclamo();
             daoPersonalizado = FabricaDAO.instanciarDaoReclamoPersonalizado();
+            tituloReclamo = "prueba";
+            detalleReclamo = "prueba";
+            fechaReclamo = "2017-01-21";
+
         }
         /// <summary>
         /// Método que se ejecuta cada vez que termina de correr una prueba;
@@ -53,7 +63,7 @@ namespace TestUnitReserva.BO.gestion_reclamos_bo_fo
             mockHotel = null;
             daoHotel = null;
         }
-
+        #region Pruebas del DAO
         [Test]
         public void M16_DaoReclamoInsertarReclamo()
         {
@@ -105,6 +115,53 @@ namespace TestUnitReserva.BO.gestion_reclamos_bo_fo
             Assert.AreEqual(resultadomodificar, 1);
         }
 
+        #endregion
+        #region Pruebas de la fabrica
+        [Test]
+        public void M16_Fabricas()
+        {
 
+
+            int estadoReclamo = 1;
+            int usuario = 1;
+            //constructor vacio
+            Entidad prueba = FabricaEntidad.InstanciarReclamo();
+            Assert.IsInstanceOf(typeof(Entidad),prueba);
+            //constructor con parametros
+            prueba = FabricaEntidad.InstanciarReclamo(tituloReclamo,detalleReclamo,fechaReclamo,estadoReclamo,usuario);
+            Assert.IsInstanceOf(typeof(Entidad), prueba);
+            //constructor con asignandole una id
+            prueba = FabricaEntidad.InstanciarReclamo(1, tituloReclamo, detalleReclamo, fechaReclamo, estadoReclamo, usuario);
+            Assert.IsInstanceOf(typeof(Entidad), prueba);
+
+            ////Parte de la fabrica de comandos
+            Command<String> comando = FabricaComando.crearM16AgregarReclamo(prueba);
+            Assert.NotNull(comando);
+            Command<Entidad> comando2 = FabricaComando.crearM16ConsultarUsuario(11);
+            Assert.NotNull(comando2);
+            Command<String> comando3 = FabricaComando.crearM16EliminarReclamo(11);
+            Assert.NotNull(comando3);
+            Command<String> comando4 = FabricaComando.crearM16ActualizarReclamo(11, 1);
+            Assert.NotNull(comando4);
+            Command<Dictionary<int, Entidad>> comando5 = FabricaComando.crearM16VisualizarReclamos();
+            Assert.NotNull(comando5);
+
+
+
+        }
+        #endregion
+        #region Pruebas del controlador
+        [Test]
+        public void M16_PruebasControlador()
+        {
+            CAgregarReclamo model = new CAgregarReclamo();
+            model._tituloReclamo = tituloReclamo;
+            model._detalleReclamo = detalleReclamo;
+            model._fechaReclamo = fechaReclamo;
+            Assert.IsInstanceOf(typeof(ActionResult), controlador.M16_AgregarReclamo());
+            Assert.IsInstanceOf(typeof(ActionResult), controlador.M16_VisualizarReclamo());
+            Assert.IsInstanceOf(typeof(JsonResult), controlador.actualizarReclamo(11,1));
+        }
+        #endregion
     }
 }

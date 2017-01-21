@@ -88,15 +88,15 @@ namespace BOReserva.Controllers
 
         public ActionResult M05_VerDetalleBoleto(int id)
         {
-            System.Diagnostics.Debug.WriteLine(id);
-            manejadorSQL_Check buscarboleto = new manejadorSQL_Check();
-            CBoleto boleto = buscarboleto.M05MostrarBoletoBD(id);
 
-            String hola = boleto._tipoBoleto;
+            //manejadorSQL_Check buscarboleto = new manejadorSQL_Check();
+            //CBoleto boleto = buscarboleto.M05MostrarBoletoBD(id);
+            Command<Entidad> co = FabricaComando.mostrarM05boleto(id);
+            Boleto boleto = (Boleto) co.ejecutar();
+            BoletoDetalle bolView = (BoletoDetalle) FabricaEntidad.InstanciarDetalleBoleto(boleto);
 
-            CDetalleBoleto bolView = new CDetalleBoleto(boleto);
             return PartialView(bolView);
-            //return PartialView();
+
         }
 
         public ActionResult Equipaje(int id)
