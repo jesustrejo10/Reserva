@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.DataAccess.Domain
+namespace BOReserva.DataAccess.Domain.M06
 {
     public class ComidaVuelo:Entidad
     {
@@ -17,13 +17,6 @@ namespace BOReserva.DataAccess.Domain
             this._id = id;
             this._comida = comida;
             this._codigoVuelo = codigoVuelo;
-            this._cantidad = cantidad;
-        }
-
-        public ComidaVuelo(int id, string comida, int cantidad)
-        {
-            this._id = id;
-            this._comida = comida;
             this._cantidad = cantidad;
         }
     }
