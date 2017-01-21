@@ -8,6 +8,7 @@ using BOReserva.Controllers.PatronComando;
 using BOReserva.Controllers.PatronComando.M16;
 using System.Web;
 using System.Linq;
+using BOReserva.Controllers.PatronComando.M10;
 
 namespace BOReserva.Controllers.PatronComando
 {
@@ -231,12 +232,15 @@ namespace BOReserva.Controllers.PatronComando
         #region Modulo 10 Gestion Restaurante
 
         #region Comandos Generales 
+    
         /// <summary>
         /// Metodo que recibe un comando para Crear, Actualizar, Eliminar o Consultar
         /// la variable comando recibe comandosGlobales.CREAR, comandosGlobales.ELIMINAR
-        /// comandosGlobales.ACTUALIZAR, comandosGlobales.CONSULTAR 
+        /// comandosGlobales.ACTUALIZAR, comandosGlobales.CONSULTAR  
         /// </summary>
         /// <param name="comando"></param>
+        /// <param name="comandoR"></param>
+        /// <param name="_objeto"></param>
         /// <returns>regresa un tipo Objecto que debe ser casteado segun sea el caso</returns>
         public static Object comandosRestaurant(comandosGlobales comando, comandoRestaurant comandoR, Entidad _objeto)
         {
@@ -259,11 +263,13 @@ namespace BOReserva.Controllers.PatronComando
                             break;
                         case comandoRestaurant.CONSULTAR_ID:
                             return new M10_COConsultarRestaurantId(_objeto);
+                        case comandoRestaurant.LISTAR_RESTAURANT:
+                            return new M10_COListarRestaurantId();
                     }
                     return new M10_COConsultarRestaurant(_objeto);
 
                 default:
-                    return new M10_COConsultarRestaurant(_objeto);
+                    return null;
             }
         }
         #endregion
@@ -289,19 +295,28 @@ namespace BOReserva.Controllers.PatronComando
         }
         #endregion
 
-
+        /// <summary>
+        /// Comandos para cargar hora y lugar ciudades
+        /// </summary>
         public enum comandoVista
         {
             CARGAR_LUGAR,
             CARGAR_HORA
         }
 
+        /// <summary>
+        /// Comando para consultas adicionales de restaurante
+        /// </summary>
         public enum comandoRestaurant
         {
             NULO,
-            CONSULTAR_ID
+            CONSULTAR_ID,
+            LISTAR_RESTAURANT
         }
 
+        /// <summary>
+        /// Comandos globales para hacer CRUD
+        /// </summary>
         public enum comandosGlobales
         {
             CREAR,
@@ -310,6 +325,11 @@ namespace BOReserva.Controllers.PatronComando
             CONSULTAR
         }
 
+        /// <summary>
+        /// Metodo para listar los lugares (Ciudades)
+        /// </summary>
+        /// <param name="lugar"></param>
+        /// <returns></returns>
         public static List<Lugar> listaLugares(Lugar lugar)
         {
             List<Lugar> lista = new List<Lugar>();
