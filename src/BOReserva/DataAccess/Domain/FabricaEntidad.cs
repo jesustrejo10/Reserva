@@ -10,7 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using BOReserva.DataAccess.Domain.M14;
 
 
 
@@ -224,16 +223,22 @@ namespace BOReserva.DataAccess.Domain
             return new Boleto(idorigen, iddestino, pasaporte, monto, tipo, idvuelo, fecha);
         }
 
+        public static Entidad InstanciarDetalleBoleto(Entidad boleto)
+        {
+            return new BoletoDetalle((Boleto) boleto);
+        }
+
         public static Entidad InstanciarPasajero(int id, String nombre1, String nombre2, String apellido1, String apellido2, String sexo,
          string fecha, String correo)
         {
             DateTime fecha_nac = Convert.ToDateTime(fecha);
             return new Pasajero(id, nombre1, nombre2, apellido1, apellido2, sexo, fecha_nac, correo);
 		}
-		#endregion
-		
+        #endregion
+
         #region M08_Automoviles
-        public static Entidad InstanciarAutomovil(String matricula, String modelo, String fabricante, String anio, String tipovehiculo,
+
+        public static Entidad CrearAutomovil(String matricula, String modelo, String fabricante, String anio, String tipovehiculo,
                                                   String kilometraje, String cantpasajeros, String preciocompra, String precioalquiler,
                                                   String penalidaddiaria, String fecharegistro, String color, String disponibilidad,
                                                   String transmision, String pais, String ciudad, String fk_ciudad)
@@ -243,9 +248,10 @@ namespace BOReserva.DataAccess.Domain
                                   penalidaddiaria, fecharegistro, color, disponibilidad,
                                   transmision, pais, ciudad, fk_ciudad);
         }
+
         #endregion
 
-		#region Modulo 10
+        #region Modulo 10
         public static CRestauranteModelo crearRestaurant(string nombre, string direccion, string telefono, string descripcion, string horarioApertura, string horarioCierre, int idLugar)
         {
             return new CRestauranteModelo(nombre, direccion, telefono, descripcion, horarioApertura, horarioCierre, idLugar);
@@ -311,18 +317,18 @@ namespace BOReserva.DataAccess.Domain
         
         
         #region M14 Cruceros
-        public static Entidad InstanciarCrucero(CGestion_crucero crucero)
-        {
+        //public static Entidad InstanciarCrucero(CGestion_crucero crucero)
+        //{
 
-            return new Crucero(crucero._idCrucero, crucero._nombreCrucero, crucero._companiaCrucero, crucero._capacidadCrucero, crucero._estatus);
-        }    
+        //    return new Crucero(crucero._idCrucero, crucero._nombreCrucero, crucero._companiaCrucero, crucero._capacidadCrucero, crucero._estatus);
+        //}    
 
         //instancia cabina con nombre de crucero, no con FK
 
-        public static Entidad InstanciarCabinaN(CGestion_cabina cabina)
-        {
-            return new Cabina(cabina._idCabina,cabina._nombreCabina,cabina._precioCabina,cabina._estatus,cabina._fkCrucero);
-        }
+        //public static Entidad InstanciarCabinaN(CGestion_cabina cabina)
+        //{
+        //    return new Cabina(cabina._idCabina,cabina._nombreCabina,cabina._precioCabina,cabina._estatus,cabina._fkCrucero);
+        //}
         #endregion
 
             
@@ -397,14 +403,29 @@ namespace BOReserva.DataAccess.Domain
             return new Comida(nombre, tipo, estatus, descripcion);
         }
 
+        public static Entidad instanciarComida(int id,string nombre, string tipo, int estatus, string descripcion)
+        {
+            return new Comida(id, nombre, tipo, estatus, descripcion);
+        }
+
         public static Entidad instanciarComida()
         {
             return new Comida();
         }
 
+        public static Entidad instanciarComida(int id)
+        {
+            return new Comida(id);
+        }
+
         public static Entidad instanciarComidaVuelo(int id, string comida, string codigoVuelo, int cantidad)
         {
             return new ComidaVuelo(id, comida, codigoVuelo, cantidad);
+        }
+
+        public static Entidad instanciarComidaVuelo(int id, string comida, int cantidad)
+        {
+            return  new ComidaVuelo(id, comida, cantidad);
         }
 
         #endregion
