@@ -9,32 +9,26 @@ using System.Web;
 
 namespace FOReserva.Controllers.PatronComando.M16
 {
-    public class M16_COConsultarReclamos: Command<List<Reclamo>>
+    public class M16_COEliminarReclamo : Command<int>
     {
-        #region Atributos
-        int _idUsuario;
-        #endregion
+        int _idReclamo;
 
-        public M16_COConsultarReclamos(int _idUsuario)
+        public M16_COEliminarReclamo(int _idReclamo)
         {
-            this._idUsuario = _idUsuario;
+            this._idReclamo = _idReclamo;
         }
 
-
-               
-        public override List<Reclamo> ejecutar()
+        public override int ejecutar()
         {
             try
             {
                 IDAOReclamo reclamoDao = FabricaDAO.reclamoPersonalizado();
-                return reclamoDao.ConsultarReclamosPorUsuario(_idUsuario);
+                return reclamoDao.EliminarReclamo(_idReclamo);
             }
             catch (NotImplementedException)
             {
-
                 throw;
             }
-
         }
     }
 }
