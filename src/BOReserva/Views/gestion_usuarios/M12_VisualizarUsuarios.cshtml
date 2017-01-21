@@ -6,7 +6,7 @@
     if (message)
         alert(message);
 </script>*@
-
+<link href="~/Content/Canvas/Box.css" rel="stylesheet" />
 <section class="content">
     <form role="form" name="consultar" id="consultar">
         <script language="javascript">
@@ -32,8 +32,8 @@
         </script>
         <div class="row">
             <link rel="stylesheet" href="~/Content/plugins/datatables/dataTables.bootstrap.css">
-            <div class="col-xs-12">
-                <div class="box">
+            <div class="col-xs-10">
+                <div class="Cajita">
                     <div class="box-header">
                         <h3 class="box-title">Lista de Usuarios</h3>
                     </div>
@@ -72,8 +72,8 @@
                                             <td>@c._rol._nombreRol</td>
                                             <td>@c._activo</td>
                                             <td>
-                                                <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>
-                                                <a href="#" title="Eliminar"><i class="fa fa-times eliminar"></i></a>
+                                                <a href="#" title="Modificar" class="wait"><i class="fa fa-pencil modificar"></i></a>
+                                                <a href="#" title="Eliminar" class="wait"><i class="fa fa-times eliminar"></i></a>
                                                 @{
                                         if (c._activo.Equals("Activo"))
                                         {

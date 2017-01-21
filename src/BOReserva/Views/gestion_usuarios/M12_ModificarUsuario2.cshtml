@@ -1,10 +1,11 @@
 ﻿<script src="~/Scripts/Scripts_Usuarios/llamadas_generales.js"></script>
+<link href="~/Content/Canvas/Box.css" rel="stylesheet" />
 @model BOReserva.Models.gestion_usuarios.CModificarUsuario
 @using (Html.BeginForm("modificarUsuario", "gestion_usuarios", null, FormMethod.Post, new { id = "modificarUsuario_form", @class = "form-horizontal" }))
 {
     <div class="row">
-        <div class="col-md-12">
-            <div class="box">
+        <div class="col-md-10">
+            <div class="Cajita">
                 <div class="box-body">
                     <h2 class="box-title">Modificar Usuario</h2>
                     <div class="row">

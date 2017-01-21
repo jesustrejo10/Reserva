@@ -9,14 +9,15 @@
 @model BOReserva.Models.gestion_usuarios.CAgregarUsuario
 
 <script src="~/Scripts/Scripts_Usuarios/llamadas_generales.js"></script>
+<link href="~/Content/Canvas/Box.css" rel="stylesheet" />
 
 @using (Html.BeginForm("M12_M12_AgregarUsuario", "gestion_usuarios", null, FormMethod.Post, new { @class = "agregarUsuario_form" }))
 {
     @Html.ValidationSummary()
 
     <div class="row">
-        <div class="col-md-12">
-            <div class="box">
+        <div class="col-md-10">
+            <div class="Cajita">
                 <div class="box-body">
                     <h2 class="box-title">Agregar Usuario</h2>
                     <div class="row">
