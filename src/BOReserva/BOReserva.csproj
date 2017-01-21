@@ -349,6 +349,11 @@
     <Compile Include="DataAccess\Domain\M14\Crucero.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOBoleto.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPasajero.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M13\M13_DAOResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>M13_DAOResources.resx</DependentUpon>
+	  </Compile>
     <Compile Include="DataAccess\DataAccessObject\M16\M16Reclamos.Designer.cs">
       <DependentUpon>M16Reclamos.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -1811,6 +1816,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoVuelo.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="DataAccess\DataAccessObject\M13\M13_DAOResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>M13_DAOResources.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
     <EmbeddedResource Include="DataAccess\DataAccessObject\M16\M16Reclamos.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>M16Reclamos.Designer.cs</LastGenOutput>
