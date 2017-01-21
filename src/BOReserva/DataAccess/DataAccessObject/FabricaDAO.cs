@@ -1,4 +1,5 @@
 ﻿using BOReserva.DataAccess.DAO;
+using BOReserva.DataAccess.DataAccessObject.M03;
 using BOReserva.DataAccess.DataAccessObject.M09;
 using BOReserva.DataAccess.DataAccessObject.M01;
 using BOReserva.DataAccess.Model;
@@ -17,6 +18,11 @@ namespace BOReserva.DataAccess.DataAccessObject
 {
     public class FabricaDAO
     {
+         #region M09_Gestion_Hoteles_Por_Ciudad
+        
+        public static DAO instanciarDaoHotel() {    
+            return new DAOHotel();
+        }
         #region Lugar ( DAOLugar - DAOPais - DAOCiudad ) 
 
         public static DAO instanciarDaoLugar()
@@ -187,6 +193,17 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAOComida();
         }
 
+        #endregion
+
+        #region M03_Ruta
+        /// <summary>
+        /// Método que crea la instancia de DAORuta
+        /// </summary>
+        /// <returns>Retorna la instancia a la clase DAORuta</returns>
+        public static DAO instanciarDAORuta()
+        {
+            return new DAORuta();
+        }
         #endregion
     }
 
