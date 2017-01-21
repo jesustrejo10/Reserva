@@ -367,6 +367,34 @@ namespace BOReserva.Controllers.PatronComando
         {
             return new M12_COModificarUsuario(usuario, idModificar);
         }
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M12_COEliminarUsuario
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M12_COEliminarUsuario.
+        /// </returns>
+        public static Command<String> crearM12EliminarUsuario(Entidad usuario, int ideliminar)
+        {
+
+            return new M12_COEliminarUsuario(usuario, ideliminar);
+
+        }
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M12_COStatusUsuario
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M12_COStatusUsuario.
+        /// </returns>
+        public static Command<String> crearM12StatusUsuario(Entidad usuario, string status)
+        {
+
+            return new M12_COStatusUsuario(usuario, status);
+
+        }
         #endregion
 
         #region M06 GESTION COMIDA
