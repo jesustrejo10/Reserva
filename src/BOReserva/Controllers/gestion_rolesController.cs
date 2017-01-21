@@ -94,6 +94,8 @@ namespace BOReserva.Controllers
 
             Rol rolbuscado;
             CRoles modelovista = new CRoles();
+            CListaGenerica<CModulo_detallado> md = new CListaGenerica<CModulo_detallado>();
+            CModulo_detallado entrada = new CModulo_detallado();
             //CRoles _rol = new CRoles();
             //_rol.Id_Rol = _idRol;
             //manejadorSQL sql = new manejadorSQL();
@@ -105,9 +107,16 @@ namespace BOReserva.Controllers
                 rolbuscado._id = _idRol;
                 Command<List<Entidad>> comando1 = FabricaComando.crearM13_ConsultarPermisosAsignados(rolbuscado, _idRol);
                 rolbuscado.listapermisos = comando1.ejecutar(); 
+                foreach (Permiso item in rolbuscado.listapermisos)
+                {
+                    entrada.Nombre = item._nombre;
+                    entrada.Id = item._idPermiso;
+                    md.agregarElemento(entrada);
+                }
+
                 modelovista.Id_Rol = rolbuscado._idRol;
                 modelovista.Nombre_rol = rolbuscado._nombreRol;
-             //   modelovista.Permisos = rolbuscado.listapermisos;
+                modelovista.Permisos = md;
                 //_rol.Permisos = sql.consultarLosPermisosAsignados(_rol);
             }
             catch (SqlException e)
