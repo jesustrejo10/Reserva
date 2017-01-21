@@ -6,7 +6,7 @@ using FOReserva.DataAccess.DataAccessObject.Common;
 
 namespace FOReserva.DataAccess.DataAccessObject.Command.MSSQL
 {
-    public class DAOMSSQLCommand : IDAOCommand
+    public abstract class DAOMSSQLCommand : IDAOCommand
     {
         protected DAOMSSQL instance;
 
@@ -15,9 +15,6 @@ namespace FOReserva.DataAccess.DataAccessObject.Command.MSSQL
             this.instance = instance;
         }
 
-        public DAOResult doThis(params object[] args)
-        {
-            throw new DAOException("This command is not implement.");
-        }
+        public abstract DAOResult doThis(params object[] args);
     }
 }

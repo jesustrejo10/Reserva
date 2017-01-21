@@ -1,4 +1,4 @@
-﻿using BOReserva.Controllers.PatronComando.M09;
+using BOReserva.Controllers.PatronComando.M09;
 using BOReserva.DataAccess.Domain;
 using BOReserva.M10.Comando.gestion_restaurantes;
 using System;
@@ -113,6 +113,11 @@ namespace BOReserva.Controllers.PatronComando
 
         #endregion
 
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando M16_COAgregarReclamo
+        /// </summary>
+        /// <param name="e">Recibe la una entidad de tipo reclamo</param>
+        /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
         public static Command<String> crearM16_AgregarReclamo(Entidad e) 
         {
             return new M16_COAgregarReclamo((Reclamo)e);
@@ -120,10 +125,26 @@ namespace BOReserva.Controllers.PatronComando
         
 
         #region M04_Vuelo
-        public static Command<String> crearVuelo(Entidad vuelo)
+        /// <summary>
+        /// Método para instanciar el comando M04_COAgregarVuelo
+        /// </summary>
+        /// <param name="vuelo"></param>
+        /// <returns>Instancia M04_COAgregarVuelo</returns>
+        public static Command<String> crearM04_AgregarVuelo(Entidad vuelo)
         {
             return new M04.M04_COAgregarVuelo();
         }
+
+        /// <summary>
+        /// Método para instanciar el comando M04_COConsultarTodos
+        /// </summary>
+        /// <param name="vuelo"></param>
+        /// <returns>Instancia M04_COConsultarTodosVuelos</returns>
+        public static Command<List<Entidad>> consultarM04_ConsultarTodos()
+        {
+            return new M04.M04_COConsultarTodosVuelos();
+        }
+
         #endregion
 
         public static Command<String> crearM13_AgregarRol(Entidad e)
@@ -150,6 +171,56 @@ namespace BOReserva.Controllers.PatronComando
         {
             return new M05_COCrearBoleto((Boleto)e);
         }
+
+        public static Command<String> crearM05EliminarBoleto(int id)
+        {
+            return new M05_COEliminarBoleto(id);
+        }
+
+        public static Command<String> buscarM05nombreCiudad(Entidad e)
+        {
+            return new M05_COBuscarnombreciudad(e);
+        }
+
+        public static Command<String> modificarM05modificarPasajero(Entidad e)
+        {
+            return new M05_COModificarPasajero((Pasajero)e);
+        }
+
+        #endregion
+
+        #region M08_Automoviles
+
+        public static Command<String> activarAutomovil(Entidad e)
+        {
+            return new M08.M08_COActivarAutomovil(e);
+        }
+
+        public static Command<String> agregarAutomovil(Entidad e)
+        {
+            return new M08.M08_COAgregarAutomovil(e);
+        }
+
+        public static Command<String> buscarAutomovil(Entidad e)
+        {
+            return new M08.M08_COBuscarAutomovil(e);
+        }
+
+        public static Command<String> desactivarAutomovil(Entidad e)
+        {
+            return new M08.M08_CODesactivarAutomovil(e);
+        }
+
+        public static Command<String> listarAutomovil(Entidad e)
+        {
+            return new M08.M08_COListarAutomovil(e);
+        }
+
+        public static Command<String> modificarAutomovil(Entidad e)
+        {
+            return new M08.M08_COModificarAutomovil(e);
+        }
+
         #endregion
 
         #region Modulo 10 Gestion Restaurante

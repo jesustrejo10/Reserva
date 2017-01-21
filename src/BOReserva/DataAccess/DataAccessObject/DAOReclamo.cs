@@ -22,27 +22,25 @@ namespace BOReserva.DataAccess.DataAccessObject
         int IDAO.Agregar(Entidad e)
         {
             Reclamo reclamo = (Reclamo)e;
-            // SqlConnection conexion = Connection.getInstance(_connexionString);
+            SqlConnection conexion = Connection.getInstance(_connexionString);
             try
             {
-                //    conexion.Open();
-                //String sql = "INSERT INTO Reclamo" +
-                //                   "(rec_id, rec_titulo, rec_detalle, rec_fecha, rec_estado, rec_fk_usuario) " +
-                //                 "VALUES (NEXT VALUE FOR reclamo_sequence,'" + rec._nombre + "','" +  + ",0,1,15);";
-
-
-                // Debug.WriteLine(sql);
-                //SqlCommand cmd = new SqlCommand(sql, conexion);
-                //cmd.ExecuteNonQuery();
-                //cmd.Dispose();
-                //conexion.Close();
+                conexion.Open();
+                String sql = "INSERT INTO Reclamo" + "(rec_id, rec_titulo, rec_detalle, rec_fecha, rec_estatus, rec_fk_usuario) " +
+                               "VALUES (NEXT VALUE FOR reclamo_sequence,'" + reclamo._tituloReclamo + "','" + reclamo._detalleReclamo + "','" 
+                               + reclamo._fechaReclamo + "','" + reclamo._estadoReclamo + "','" + reclamo._usuario + ");";
+                Debug.WriteLine(sql);
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                conexion.Close();
                 return 1;
             }
             catch (SqlException ex)
             {
-                // Debug.WriteLine("ENTRO EN EL CATCH");
-                //Debug.WriteLine(ex.ToString());
-                //  conexion.Close();
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
                 return 0;
             }
         }

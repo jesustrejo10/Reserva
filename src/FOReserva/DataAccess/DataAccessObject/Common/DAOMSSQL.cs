@@ -23,36 +23,37 @@ namespace FOReserva.DataAccess.DataAccessObject.Common
         public SqlCommand Command { get; internal set; }
         
         public DAOResult OpenConnection() {
-            IDAOCommand withCommand = new DAOMSSQLCommandOpenConnection(this);
+            DAOMSSQLCommand withCommand = new DAOMSSQLCommandOpenConnection(this);
             return withCommand.doThis();
         }
 
 
         public DAOResult ExecuteQuery(string query, DAO.ForEachRow doThis = null)
         {
-            IDAOCommand withCommand = new DAOMSSQLCommandExecuteQuery(this);
-            return withCommand.doThis(query, doThis);
+            //IDAOCommand withCommand = new DAOMSSQLCommandExecuteQuery(this);
+            //return withCommand.doThis(query, doThis);
+            return null;
         }
 
         public DAOResult ExecuteNoQuery(string query)
         {
-            IDAOCommand withCommand = new DAOMSSQLCommandExecuteNoQuery(this);
+            DAOMSSQLCommand withCommand = new DAOMSSQLCommandExecuteNoQuery(this);
             return withCommand.doThis(query);
         }
 
         public DAOResult ExecuteStoreProcedure(string name, object parameters) {
-            IDAOCommand withCommand = new DAOMSSQLCommandExecuteStoreProcedure(this);
+            DAOMSSQLCommand withCommand = new DAOMSSQLCommandExecuteStoreProcedure(this);
             return withCommand.doThis(name, parameters);
         }
 
         public DAOResult ExecuteStoreProcedureWithResult(string name, object parameters, DAO.ForEachRow doThis = null) {
-            IDAOCommand withCommand = new DAOMSSQLCommandExecuteStoreProcedure(this);
+            DAOMSSQLCommand withCommand = new DAOMSSQLCommandExecuteStoreProcedureWithResult(this);
             return withCommand.doThis(name, parameters, doThis);
         }
 
         public DAOResult CloseConnection()
         {
-            IDAOCommand withCommand = new DAOMSSQLCommandExecuteStoreProcedure(this);
+            IDAOCommand withCommand = new DAOMSSQLCommandCloseConnection(this);
             return withCommand.doThis();
         }
     }

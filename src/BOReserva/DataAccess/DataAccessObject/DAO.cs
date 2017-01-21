@@ -38,6 +38,11 @@ namespace BOReserva.DataAccess.DataAccessObject
             throw new NotImplementedException();
         }
 
+        public int Eliminar(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         #region Conectar con la Base de Datos
         /// <summary>
         /// Metodo para realizar la conexion a la base de datos
@@ -287,6 +292,8 @@ namespace BOReserva.DataAccess.DataAccessObject
                 Desconectar();
             }
         }
+
+      
         #endregion
 
     }

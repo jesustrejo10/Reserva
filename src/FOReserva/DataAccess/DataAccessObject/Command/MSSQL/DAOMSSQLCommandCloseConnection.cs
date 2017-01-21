@@ -12,7 +12,7 @@ namespace FOReserva.DataAccess.DataAccessObject.Command.MSSQL
         {
         }
 
-        public new DAOResult doThis(params object[] args)
+        public override DAOResult doThis(params object[] args)
         {
             DAOResult result = FabricDAO.CreateDAOResult();
             try

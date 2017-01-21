@@ -13,11 +13,11 @@ namespace FOReserva.DataAccess.DataAccessObject.Command.MSSQL
         {
         }
 
-        public new DAOResult doThis(params object[] args)
+        public override DAOResult doThis(params object[] args)
         {
             var name = (string)args[0];
             var parameters = (object)args[1];
-            var doThis = (DAO.ForEachRow)args[2];
+            //var doThis = (DAO.ForEachRow)args[2];
             DAOResult result = FabricDAO.CreateDAOResult();
             try
             {
@@ -28,12 +28,12 @@ namespace FOReserva.DataAccess.DataAccessObject.Command.MSSQL
                     this.instance.Command.SetParametersByObject(parameters);
                     using (SqlDataReader reader = this.instance.Command.ExecuteReader())
                     {
-                        while (reader.Read())
-                        {
-                            if (doThis == null)
-                                break;
-                            doThis(reader);
-                        }
+                        //while (reader.Read())
+                        //{
+                        //    if (doThis == null)
+                        //        break;
+                        //    doThis(reader);
+                        //}
                     }
                     this.instance.Command.Dispose();
                     result.ProcessFinishCorrectly = true;
