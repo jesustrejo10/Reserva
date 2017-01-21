@@ -21,10 +21,14 @@ namespace BOReserva.Controllers.PatronComando
 
         public override String ejecutar()
         {
+            return "Eliminar Esto";
+        }
+        /*public override String ejecutar()
+        {
             IDAO daoBoleto = FabricaDAO.instanciarDaoBoleto();
             int test = daoBoleto.Eliminar(_id);
             return test.ToString();
-        }
+        }*/
 
     }
 }

@@ -334,6 +334,12 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
             throw new NotImplementedException();
         }
 
+        public Entidad Consultar(Entidad e)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
+
     }
 }
