@@ -48,7 +48,6 @@ namespace BOReserva.Controllers
         public JsonResult guardarPlatoVuelo(CComida model)
         {
             int id = model._id;
-            Console.WriteLine(">>>>>>>>>>>>>>ID:"+id);
             string nombrePlato = model._nombrePlato;
             int cantidadPlatos = model._cantidad;
             Entidad _comida = FabricaEntidad.instanciarComidaVuelo(id, nombrePlato, cantidadPlatos);
@@ -72,11 +71,23 @@ namespace BOReserva.Controllers
 
         public ActionResult M06_AgregarPorVuelo()
         {
-            manejadorSQL sql = new manejadorSQL();
-            //manejadorSQL sqlPasajero = new manejadorSQL();
-            List<CVuelo> vuelos = new List<CVuelo>();
-            vuelos = sql.listarVuelosEnBD();
-            return PartialView(vuelos);
+            List<Entidad> listaVuelos = null;
+
+            Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.gestionComida(FabricaComando.comandosComida.CONSULTAR_VUELOS, null);
+
+            listaVuelos = comando.ejecutar();
+
+            if (listaVuelos != null)
+            {
+                ViewBag.listaVuelos = listaVuelos;
+                return PartialView();
+            }
+            else
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                string error = "Error consultando Vuelos.";
+                return Json(error);
+            } 
         }
 
         public ActionResult M06_AgregarComidaVuelo(int id)

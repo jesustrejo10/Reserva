@@ -19,25 +19,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @try
-                        {
-                            foreach (var item in Model)
+                        @{
+                            foreach (var item in ViewBag.listaVuelos)
                             {
-                                    <tr id="@item._id">
-                                    <td>@item._codigoVuelo</td>
-                                    <td>@item._ciudadOrigen</td>
-                                    <td>@item._ciudadDestino</td>
-                                    <td>@item._capacidadTurista / @item._capacidadEjecutiva / @item._capacidadVip</td>
+                                    <tr id="@item.IdVuelo">
+                                    <td>@item.CodigoVuelo</td>
+                                    <td>@item.getRuta.origenRuta</td>
+                                    <td>@item.getRuta.destinoRuta</td>
+                                    <td>@item.getAvion._capacidadTurista / @item.getAvion._capacidadEjecutiva / @item.getAvion._capacidadVIP</td>
                                     <td>
                                         <a href="#" title="Agregar comida"><i class="fa fa-plus agregarvuelo"></i></a>
                                     </td>
                                 </tr>
                             }
-                        }
-                        catch (Exception e)
-                        {
-
-                        }
+                        }   
 
                     <tfoot>
                         <tr>

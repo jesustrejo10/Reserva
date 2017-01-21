@@ -550,7 +550,8 @@ namespace BOReserva.Controllers.PatronComando
             ELIMINAR_COMIDA,
             ACTUALIZAR_COMIDA,
             CONSULTAR_COMIDAS,
-            CONSULTAR_COMIDAS_VUELOS
+            CONSULTAR_COMIDAS_VUELOS,
+            CONSULTAR_VUELOS
         }
 
 
@@ -566,6 +567,8 @@ namespace BOReserva.Controllers.PatronComando
                     return new M06_COConsultarComidas();
                 case comandosComida.CONSULTAR_COMIDAS_VUELOS:
                     return new M06_COConsultarComidasVuelos();
+                case comandosComida.CONSULTAR_VUELOS:
+                    return new M06_COConsultarVuelos();
                 default:
                     return new M06_COAgregarComida(_objeto);
             }
