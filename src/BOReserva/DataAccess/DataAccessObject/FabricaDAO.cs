@@ -154,6 +154,11 @@ namespace BOReserva.DataAccess.DataAccessObject
         {
             return new DAOPaquete(); 
         }
+
+        public static DAO instanciarDaoOferta()
+        {
+            return new DAOOferta();
+        }
         #endregion
 
         #region M13_Roles

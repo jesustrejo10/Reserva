@@ -8,6 +8,9 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando.M11
 {
+    /// <summary>
+    /// Comando Deshabilitar Oferta
+    /// </summary>
     public class M11_CODeshabilitarOferta: Command<String>
     {
         Oferta _oferta;

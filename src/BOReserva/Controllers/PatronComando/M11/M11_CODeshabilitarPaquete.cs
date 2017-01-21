@@ -8,6 +8,9 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando.M11
 {
+    /// <summary>
+    /// Comando Deshabilitar Paquete
+    /// </summary>
     public class M11_CODeshabilitarPaquete: Command<String>
     {
         Paquete _paquete;
