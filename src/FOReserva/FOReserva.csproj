@@ -3261,6 +3261,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\PatronComando\M22\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

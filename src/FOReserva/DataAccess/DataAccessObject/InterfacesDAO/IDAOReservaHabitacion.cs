@@ -11,9 +11,9 @@ namespace FOReserva.DataAccess.DataAccessObject.InterfacesDAO
     {
         String eliminarReservaHabitacion(int id);
 
-        public List<Entidad> ConsultarHotelesPorIdCiudad(Entidad _lugar);
+         List<Entidad> ConsultarHotelesPorIdCiudad(Entidad _lugar);
 
-        public List<Entidad> ObtenerCiudades(Entidad _lugar);
+         List<Entidad> ObtenerCiudades(Entidad _lugar);
 
     }
 }
