@@ -308,34 +308,29 @@ namespace BOReserva.Controllers.PatronComando
 
         #region M08_Automoviles
 
-        public static Command<String> activarAutomovil(Entidad e)
+        public static Command<bool> activarAutomovil(Entidad e)
         {
-            return new M08.M08_COActivarAutomovil((Automovil)e);
+            return new M08.M08_COActivarAutomovil(e);
         }
 
-        public static Command<String> agregarAutomovil(Entidad e)
+        public static Command<bool> agregarAutomovil(Entidad e)
         {
-            return new M08.M08_COAgregarAutomovil((Automovil)e);
+            return new M08.M08_COAgregarAutomovil(e);
         }
 
         public static Command<String> buscarAutomovil(Entidad e)
         {
-            return new M08.M08_COBuscarAutomovil((Automovil)e);
-        }
-
-        public static Command<String> desactivarAutomovil(Entidad e)
-        {
-            return new M08.M08_CODesactivarAutomovil((Automovil)e);
+            return new M08.M08_COBuscarAutomovil(e);
         }
 
         public static Command<String> listarAutomovil(Entidad e)
         {
-            return new M08.M08_COListarAutomovil((Automovil)e);
+            return new M08.M08_COListarAutomovil(e);
         }
 
-        public static Command<String> modificarAutomovil(Entidad e)
+        public static Command<bool> modificarAutomovil(Entidad e)
         {
-            return new M08.M08_COModificarAutomovil((Automovil)e);
+            return new M08.M08_COModificarAutomovil(e);
         }
 
         #endregion
