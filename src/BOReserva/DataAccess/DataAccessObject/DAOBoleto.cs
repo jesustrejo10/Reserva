@@ -5,9 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Diagnostics;
-using System.Linq;
-using System.Web;
-using BOReserva.Models.gestion_ruta_comercial;
+
 
 
 namespace BOReserva.DataAccess.DataAccessObject
