@@ -28,6 +28,10 @@ namespace FOReserva.Controllers
             return PartialView();
         }
 
+        /// <summary>
+        /// Método para visualizar todas las reservas del usuario logueado
+        /// </summary>
+        /// <returns></returns>
         public ActionResult M19_Reserva_Autos_Perfil()
         {
             var user_id = 1;
@@ -49,6 +53,11 @@ namespace FOReserva.Controllers
             return PartialView(lista);
         }
 
+        /// <summary>
+        /// Método para ver el detalle de la reserva
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult M19_Detalle_reserva(CReservaAutomovil model)
         {
@@ -59,6 +68,36 @@ namespace FOReserva.Controllers
             // Se hace el casteo puesto que la vista utiliza el modelo CReservaAutomovil
             CReservaAutomovil modelo_reserva = (CReservaAutomovil)reserva;
             return PartialView(modelo_reserva);
+        }
+        
+        /// <summary>
+        /// Método para eliminar reserva, lo que se hace es actualizar el estado a cancelada
+        /// </summary>
+        /// <param name="reserva"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult M19_Eliminar_reserva(CReservaAutomovil reserva)
+        {
+            var id = reserva._id;
+            Command<Boolean> comando = (Command<Boolean>)FabricaComando.comandosReservaAutomovil(FabricaComando.comandosGlobales.ELIMINAR, FabricaComando.comandoReservaAuto.NULO,reserva);
+            //Chequeo de campos obligatorios para el formulario
+            if ((reserva._id == -1))
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                string error = "Error, no se tiene la identificación de la reserva";
+                return Json(error);
+            }
+
+            if (comando.ejecutar())
+            {
+                return (Json(true, JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                string error = "Error al tratar de eliminar la reserva.";
+                return Json(error);
+            }
         }
 
         public ActionResult M19_Busqueda_Autos()
@@ -105,36 +144,6 @@ namespace FOReserva.Controllers
             lista = manejador.buscarAutosCiudad(res_entrega, res_destino, fechaini, fechafin, horaini, horafin);
             return lista;
         }
-
-        [System.Web.Services.WebMethod]
-        public JsonResult eliminarReservaAuto(int id)
-        {///Se instancia un try para la consulta a la base de datos
-            try
-            {
-                ManejadorSQLReservaAutomovil manejador = new ManejadorSQLReservaAutomovil();
-                manejador.eliminarReserva(id);
-            }
-            ///Se atrapa las Exception de Tipo ManejadorSQL Exception
-            catch (ManejadorSQLException e)
-            {
-
-                return null;
-            }
-            ///Se atrapa las Exception de Tipo Invalid ManejadorSQL Exception
-            catch (InvalidManejadorSQLException e)
-            {
-                return null;
-            }
-            ///Se atrapa las Exception de Tipo Exception
-            catch (Exception e)
-            {
-             
-            }
-            return Json("exito");
-        }
-
-       
-
        
     }
 }

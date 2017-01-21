@@ -1,6 +1,9 @@
 @model FOReserva.Models.gestion_reserva_automovil.CReservaAutomovil
 @{var reserva = Model; }
 
+<script src="~/Scripts/jquery-2.2.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+
 <!-- FLIP BOX -->
 <div class="box-light box-icon box-icon-center box-icon-round box-icon-large text-center nomargin">
     <div class="front">
@@ -37,7 +40,7 @@
                             <!-- header modal -->
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <span class="modal-title" id="mySmallModalLabel">&#191;Esta seguro que desea cancelar la reserva&#63;</span>
+                                <span class="modal-title" id="mySmallModalLabel">&#191;Está seguro que desea cancelar la reserva&#63;</span>
                             </div>
 
                             <!-- body modal -->
@@ -129,20 +132,18 @@
 
                         function cancelarReserva(boton, rha_id) {
                             $(".bs-example-modal-sm").modal('hide');
-                            var reserva = JSON.parse('@Html.Raw(@Newtonsoft.Json.JsonConvert.SerializeObject(reserva))');
+                            var reserva_auto = JSON.parse('@Html.Raw(@Newtonsoft.Json.JsonConvert.SerializeObject(reserva))');
 
                             $.ajax({
-                                url: "/gestion_reserva_habitaciones/cancelar_reserva",
-                                data: reserva,
+                                url: "/gestion_reserva_auto/M19_Eliminar_reserva",
+                                data: reserva_auto,
                                 type: 'POST',
-                                success: function (proceso) {
-                                    if (proceso.CulminoCorrectamente) {
-                                        alert(proceso.Mensaje);
-                                        cargarContenido('#CI', 'get', '/gestion_reserva_habitaciones/mis_reservas', null, this)
-                                    } else {
-                                        alert(proceso.Mensaje);
-                                    }
-
+                                success: function (data) {
+                                        alert("Se canceló la reserva");
+                                        cargarContenido('#CI', 'get', '/gestion_reserva_auto/M19_Reserva_Autos_Perfil', null, this)
+                                },
+                                fail: function (data) {
+                                    alert("No se pudo cancelar la reserva");
                                 }
                             });
                         }
