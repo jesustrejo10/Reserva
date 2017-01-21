@@ -276,6 +276,7 @@
     <Compile Include="Controllers\List.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COVisualizarHoteles.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COAgregarPasajero.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarItinerario.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarCabinas.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COAgregarCabina.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarCruceros.cs" />

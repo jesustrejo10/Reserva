@@ -10,6 +10,7 @@ using System.Linq;
 using BOReserva.Controllers.PatronComando.M10;
 using BOReserva.Controllers.PatronComando.M16;
 using BOReserva.DataAccess.Domain.M14;
+using BOReserva.Controllers.PatronComando.M14;
 
 namespace BOReserva.Controllers.PatronComando
 {
@@ -193,10 +194,10 @@ namespace BOReserva.Controllers.PatronComando
 
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
-        /// M09_COVisualizarHoteles
+        /// M14_COVisualizarCruceros
         /// </summary>
         /// <returns>
-        /// Retorna la instancia del comando M09_COVisualizarHoteles.
+        /// Retorna la instancia del comando M14_COVisualizarCruceros.
         /// </returns>
         public static Command<Dictionary<int, Entidad>> crearM14VisualizarCruceros()
         {
@@ -205,22 +206,19 @@ namespace BOReserva.Controllers.PatronComando
 
         }
 
-
-
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
-        /// M09_COVisualizarHoteles
+        /// M14_COVisualizarItinerario
         /// </summary>
         /// <returns>
-        /// Retorna la instancia del comando M09_COVisualizarHoteles.
+        /// Retorna la instancia del comando M14_COVisualizarItinerario.
         /// </returns>
-        public static Command<Dictionary<int, Entidad>> crearM14VisualizarCabinasCrucero()
+        public static Command<Dictionary<int, Entidad>> crearM14Visualizaritinerario()
         {
 
-            return new M14_COVisualizarCruceros();
+            return new M14_COVisualizarItinerario();
 
         }
-
 
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
