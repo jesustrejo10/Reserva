@@ -13,7 +13,7 @@ namespace BOReserva.Controllers.PatronComando.M16
         Reclamo _reclamo;
         int _idReclamo;
 
-        public M16_COModificarReclamo(Entidad _reclamo, int _idReclamo)
+        public M16_COModificarReclamo(Entidad _reclamo,int _idReclamo)
         {
             this._reclamo = (Reclamo) _reclamo;
             this._reclamo._id = _idReclamo;

@@ -85,6 +85,10 @@ namespace BOReserva.DataAccess.Domain
         {
             return new Reclamo(tituloReclamo, detalleReclamo, fechaReclamo, estadoReclamo, usuario);
         }
+        public static Entidad InstanciarReclamo(String tituloReclamo, String detalleReclamo, String fechaReclamo, int estadoReclamo)
+        {
+            return new Reclamo(tituloReclamo, detalleReclamo, fechaReclamo, estadoReclamo);
+        }
 
         public static Entidad InstanciarReclamo(int reclamo , String tituloReclamo, String detalleReclamo, String fechaReclamo, int estadoReclamo, int usuario)
         {
@@ -99,6 +103,16 @@ namespace BOReserva.DataAccess.Domain
             int usuario = model._usuario;
 
             return new Reclamo(titulo, detalle, fecha, estado, usuario);
+        }
+
+        public static Entidad InstanciarReclamo(CModificarReclamo model)
+        {
+            String titulo = model._tituloReclamo;
+            String detalle = model._detalleReclamo;
+            String fecha = model._fechaReclamo;
+            int estado = model._estadoReclamo;
+
+            return new Reclamo(titulo, detalle, fecha, estado);
         }
         public static List<Reclamo> InstanciarListaReclamo(Dictionary<int, Entidad> listaEntidad) 
         {

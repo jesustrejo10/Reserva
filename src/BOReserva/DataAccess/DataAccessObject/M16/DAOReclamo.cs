@@ -127,8 +127,8 @@ namespace BOReserva.DataAccess.DataAccessObject
             {
                 conexion.Open();
                 String sql = "UPDATE reclamo SET rec_titulo = '" + _reclamo._tituloReclamo + "', rec_descripcion = '" + _reclamo._detalleReclamo +
-                            "', rec_fecha = '" + _reclamo._fechaReclamo +
-                            " WHERE rec_id = " + _reclamo._id;
+                             "', rec_estatus = '" + _reclamo._estadoReclamo + "', rec_fecha = '" + _reclamo._fechaReclamo +
+                             "WHERE rec_id = " + _reclamo._id;
 
                 SqlCommand cmd = new SqlCommand(sql, conexion);
                 cmd.ExecuteNonQuery();

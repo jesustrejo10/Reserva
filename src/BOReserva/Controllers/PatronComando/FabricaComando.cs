@@ -151,9 +151,9 @@ namespace BOReserva.Controllers.PatronComando
         /// <param name="reclamo">recibe la entidad reclamo</param>
         /// <param name="idReclamo">recibe el id de un reclamo</param>
         /// <returns>retorna el comando para modificar un reclamo</returns>
-        public static Command<String> creaM16ModificarReclamo(Entidad reclamo, int idReclamo) 
+        public static Command<String> crearM16ModificarReclamo(Entidad reclamo,int idReclamo) 
         {
-            return new M16_COModificarReclamo(reclamo, idReclamo);
+            return new M16_COModificarReclamo(reclamo,idReclamo);
         }
         /// <summary>
         /// Método para instanciar el comando M16_EliminarReclamo

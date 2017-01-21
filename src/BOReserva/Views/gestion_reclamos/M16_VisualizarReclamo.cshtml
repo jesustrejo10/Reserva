@@ -130,7 +130,7 @@
                     jQuery.ajax({
                         type: "GET",
                         url: "/gestion_reclamos/M16_ModificarReclamo",
-                        data: { id: identificador }
+                        data: { idReclamo: identificador }
                     }).done(function (data) {
                         $("#contenido").empty();
                         $("#contenido").append(data);

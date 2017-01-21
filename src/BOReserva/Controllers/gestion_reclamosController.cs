@@ -11,8 +11,12 @@ using BOReserva.Controllers.PatronComando;
 
 namespace BOReserva.Controllers
 {
+    /// <summary>
+    /// Clase controladora del módulo de Gestión de Reclamos
+    /// </summary>
     public class gestion_reclamosController : Controller
     {
+        private static int idReclamo;
         
         //
         // GET: /gestion_reclamos/
@@ -42,6 +46,16 @@ namespace BOReserva.Controllers
       }
 
       [HttpPost]
+      public JsonResult modificarReclamo(CModificarReclamo model)
+      {
+          Entidad reclamo = FabricaEntidad.InstanciarReclamo(model);
+          //con la fabrica instancie el reclamo.
+          Command<String> comando = FabricaComando.crearM16ModificarReclamo(reclamo, idReclamo);
+          String verificacion = comando.ejecutar();
+          return (Json("Se modificó el reclamo exitosamente"));
+      }
+
+      [HttpPost]
       public JsonResult eliminarReclamo(int idReclamo)
       {
           int idUsuario = gestion_seguridad_ingresoController.IDUsuarioActual();
@@ -60,12 +74,27 @@ namespace BOReserva.Controllers
               return (Json("Se eliminó el reclamo exitosamente"));
           }
       }
-
-      public ActionResult M16_ModificarReclamo()
+      
+      public ActionResult M16_ModificarReclamo(int idReclamo)
       {
-          CModificarReclamo model = new CModificarReclamo();
-          return PartialView(model);
-
+          int idUsuario = gestion_seguridad_ingresoController.IDUsuarioActual();
+          Command<Entidad> comando = FabricaComando.crearM16ConsultarUsuario(idReclamo);
+          Reclamo reclamo = (Reclamo)comando.ejecutar();
+          //if (idUsuario != reclamo._usuario)
+          //{
+              //Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            // return ("No está autorizado para eliminar este reclamo");
+          //}
+        //  else
+          //{
+              CModificarReclamo model = new CModificarReclamo();
+              model._idReclamo = reclamo._id;
+              model._tituloReclamo = reclamo._tituloReclamo;
+              model._detalleReclamo = reclamo._detalleReclamo;
+              model._fechaReclamo = reclamo._fechaReclamo;
+              model._estadoReclamo = reclamo._estadoReclamo;
+              return PartialView(model);
+          //}
       }
     }
 	
