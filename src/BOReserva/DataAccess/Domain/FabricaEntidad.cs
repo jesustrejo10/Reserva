@@ -1,7 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ﻿using BOReserva.DataAccess.Domain.M03;
 using BOReserva.Models;
 =======
+=======
+﻿using BOReserva.DataAccess.Domain.M03;
+>>>>>>> Develop
 ﻿using BOReserva.Models;
 using BOReserva.Models.gestion_cruceros;
 >>>>>>> Develop
@@ -319,6 +323,9 @@ namespace BOReserva.DataAccess.Domain
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Develop
         #region M03_Ruta
         /// <summary>
         /// Se crea una instancia de la clase ruta con todos sus atributos
