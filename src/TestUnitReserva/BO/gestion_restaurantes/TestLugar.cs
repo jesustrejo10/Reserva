@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using BOReserva.Models.gestion_lugares;
-using BOReserva.Servicio;
 using System.Diagnostics;
 
 namespace TestUnitReserva.BO.gestion_restaurantes
