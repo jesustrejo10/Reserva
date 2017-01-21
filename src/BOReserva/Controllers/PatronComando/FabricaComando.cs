@@ -188,7 +188,8 @@ namespace BOReserva.Controllers.PatronComando
         public static Command<String> crearM14AgregarCrucero(Entidad e)
         {
 
-            return new M14_COAgregarCrucero((Crucero)e);
+            //return new M14_COAgregarCrucero((Crucero)e);
+            return new M14_COAgregarCrucero(e);
 
         }
 
@@ -201,8 +202,8 @@ namespace BOReserva.Controllers.PatronComando
         public static Command<String> crearM14AgregarCabina(Entidad e)
         {
 
-            return new M14_COAgregarCabina((Cabina) e);
-
+            //return new M14_COAgregarCabina((Cabina) e);
+            return new M14_COAgregarCabina(e);
         }
 
         /// <summary>

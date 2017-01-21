@@ -19,12 +19,15 @@ namespace BOReserva.Controllers.PatronComando
         /// <returns>
         /// Retorna un Identity map, de tipo int, Entidad
         /// </returns>
+        //public override Dictionary<int, Entidad> ejecutar()
+        //{
+        //    IDAO daoCrucero = FabricaDAO.instanciarDaoCrucero();
+        //    Dictionary<int, Entidad> mapCruceros = daoCrucero.ConsultarTodos();
+        //    return mapCruceros;
+        //}
         public override Dictionary<int, Entidad> ejecutar()
         {
-            IDAO daoCrucero = FabricaDAO.instanciarDaoCrucero();
-            Dictionary<int, Entidad> mapCruceros = daoCrucero.ConsultarTodos();
-            return mapCruceros;
+            throw new NotImplementedException();
         }
-
     }
 }
