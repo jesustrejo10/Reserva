@@ -21,10 +21,8 @@ namespace BOReserva.Controllers.PatronComando
         public override String ejecutar()
         {
             IDAO daoReclamo = FabricaDAO.instanciarDaoReclamo();
-
-            daoReclamo.Agregar(_reclamo);
-            int test = daoReclamo.Agregar(_reclamo);
-            return test.ToString();
+            int respuesta = daoReclamo.Agregar(_reclamo);
+            return respuesta.ToString();
         }
     }
 }

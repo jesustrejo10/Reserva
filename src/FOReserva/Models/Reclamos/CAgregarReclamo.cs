@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FOReserva.DataAccess.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,5 +14,7 @@ namespace FOReserva.Models.Reclamos
         public String _fechaReclamo { get; set; }
 
         public int _usuarioReclamo { get; set; }
+
+        public List<Reclamo> _listaDeReclamos {get; set;}
     }
 }

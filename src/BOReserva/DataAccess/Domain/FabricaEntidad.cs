@@ -81,6 +81,11 @@ namespace BOReserva.DataAccess.Domain
         #endregion 
 
         #region M16_GestionReclamos
+
+        public static Entidad InstanciarReclamo()
+        {
+            return new Reclamo();
+        }
         public static Entidad InstanciarReclamo(String tituloReclamo, String detalleReclamo, String fechaReclamo, int estadoReclamo, int usuario)
         {
             return new Reclamo(tituloReclamo, detalleReclamo, fechaReclamo, estadoReclamo, usuario);

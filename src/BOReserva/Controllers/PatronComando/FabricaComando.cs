@@ -8,6 +8,7 @@ using BOReserva.Controllers.PatronComando;
 using System.Web;
 using System.Linq;
 using BOReserva.Controllers.PatronComando.M10;
+using BOReserva.Controllers.PatronComando.M16;
 
 namespace BOReserva.Controllers.PatronComando
 {
@@ -118,6 +119,7 @@ namespace BOReserva.Controllers.PatronComando
 
         #endregion
 
+        #region M16_GESTION_RECLAMOS
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando M16_COAgregarReclamo
         /// </summary>
@@ -127,7 +129,33 @@ namespace BOReserva.Controllers.PatronComando
         {
             return new M16_COAgregarReclamo((Reclamo)e);
         }
-        
+        public static Command<String> crearM16AgregarReclamo(Entidad e)
+        {
+
+            return new M16_COAgregarReclamo((Reclamo)e);
+
+        }
+        public static Command<Dictionary<int, Entidad>> crearM16VisualizarReclamos()
+        {
+
+            return new M16_COConsultarReclamo();
+
+        }
+        public static Command<Entidad> crearM16ConsultarUsuario(int idReclamo)
+        {
+
+            return new M16_COConsultarReclamoDetalle(idReclamo);
+
+        }
+
+        public static Command<String> crearM16EliminarReclamo(int id)
+        {
+            return new M16_COEliminarReclamo(id); 
+
+        }
+
+        #endregion
+
 
         #region M04_Vuelo
         /// <summary>
@@ -414,25 +442,6 @@ namespace BOReserva.Controllers.PatronComando
             return lista;
         }
         #endregion
-
-        public static Command<String> crearM16AgregarReclamo(Entidad e)
-        {
-
-            return new M16_COAgregarReclamo((Reclamo)e);
-
-        }
-        public static Command<Dictionary<int, Entidad>> crearM16VisualizarReclamos()
-        {
-
-            return new M16_COConsultarReclamo();
-
-        }
-        //public static Command<String> crearM16ConsultarUsuario(Entidad e)
-        //{
-
-        //    return new M16_COConsultarReclamoDetalle((Reclamo)e);
-
-        //}
 
         #region M06 GESTION COMIDA
 

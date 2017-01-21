@@ -71,17 +71,84 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
         }
 
+        /// <summary>
+        /// Método para consultar un reclamo en la BD
+        /// </summary>
+        /// <param name="id">id del reclamo</param>
+        /// <returns> reclamo </returns>
         Entidad IDAO.Consultar(int id)
         {
-            throw new NotImplementedException();
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+
+            Entidad reclamoE = FabricaEntidad.InstanciarReclamo();
+            Reclamo reclamo = (Reclamo)reclamoE;
+            try
+            {
+                conexion.Open();
+                String sql = "SELECT * FROM Reclamo WHERE rec_id = "+id;
+
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+
+                    while (reader.Read())
+                    {
+                        reclamo._id = Int32.Parse(reader["rec_id"].ToString());
+                        reclamo._tituloReclamo = reader["rec_titulo"].ToString();
+                        reclamo._detalleReclamo = reader["rec_descripcion"].ToString();
+                        String[] divisor = reader["rec_fecha"].ToString().Split(' '); //recortamos la fecha
+                        reclamo._fechaReclamo = divisor[0];
+                        reclamo._estadoReclamo = Int32.Parse(reader["rec_estatus"].ToString());
+                        reclamo._usuario = Int32.Parse(reader["rec_fK_usuario"].ToString());
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return reclamo;
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+            }
         }
+
+        /// <summary>
+        /// Método para modificar un reclamo
+        /// </summary>
+        /// <param name="e">Entidad que posteriormente será casteada a Reclamo</param>
+        /// <returns>retorna el reclamo</returns>
         Entidad IDAO.Modificar(Entidad e)
         {
-            throw new NotImplementedException();
+            Reclamo _reclamo = (Reclamo)e;
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            try
+            {
+                conexion.Open();
+                String sql = "UPDATE reclamo SET rec_titulo = '" + _reclamo._tituloReclamo + "', rec_descripcion = '" + _reclamo._detalleReclamo +
+                            "', rec_fecha = '" + _reclamo._fechaReclamo +
+                            " WHERE rec_id = " + _reclamo._id;
+
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                conexion.Close();
+                Entidad resultado = _reclamo;
+                return resultado;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                Entidad resultado = _reclamo;
+                return resultado;
+            }
         }
 
-      
-
+        /// <summary>
+        /// Método para consultar todos los reclamos en la BD
+        /// </summary>
+        /// <returns> Lista de reclamos</returns>
         Dictionary<int, Entidad> IDAO.ConsultarTodos()
         {
             List<Reclamo> listareclamos = new List<Reclamo>();
@@ -126,6 +193,31 @@ namespace BOReserva.DataAccess.DataAccessObject
                 Debug.WriteLine(ex.ToString());
                 conexion.Close();
                 return null;
+            }
+        }
+
+        /// <summary>
+        /// Método para eliminar reclamo 
+        /// </summary>
+        /// <param name="id">id del reclamo</param>
+        /// <returns>retorna 1 si eliminó correctamente</returns>
+        int IDAO.Eliminar(int id)
+        {
+            try
+            {
+                SqlConnection conexion = Connection.getInstance(_connexionString);
+                conexion.Open();
+                String sql = "DELETE FROM reclamo WHERE rec_id = " + id + "";
+                System.Diagnostics.Debug.WriteLine(sql);
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                conexion.Close();
+                return 1;
+            }
+            catch (SqlException ex)
+            {
+                return 0;
             }
         }
       

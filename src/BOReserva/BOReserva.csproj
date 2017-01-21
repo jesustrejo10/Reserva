@@ -285,12 +285,13 @@
     <Compile Include="Controllers\PatronComando\M16\M16_COAgregarReclamo.cs" />
     <Compile Include="Controllers\PatronComando\M16\M16_COConsultarReclamo.cs" />
     <Compile Include="Controllers\PatronComando\M16\M16_COConsultarReclamoDetalle.cs" />
+    <Compile Include="Controllers\PatronComando\M16\M16_COEliminarReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOBoleto.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOCiudad.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOLugar.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOPasajero.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOPais.cs" />
-    <Compile Include="DataAccess\DataAccessObject\DAOReclamo.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M16\DAOReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\M13\DAORol.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOAutomovil.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCiudad.cs" />
