@@ -200,6 +200,17 @@ namespace BOReserva.DataAccess.DataAccessObject.M06 {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to M06_AgregarComidaVuelo.
+        /// </summary>
+        internal static string procedimientoAgregarComidaVuelo
+        {
+            get
+            {
+                return ResourceManager.GetString("procedimientoAgregarComidaVuelo", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to M06_ConsultarComidas.
         /// </summary>
         internal static string procedimientoConsultarComidas{

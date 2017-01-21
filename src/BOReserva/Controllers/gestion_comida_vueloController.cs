@@ -90,6 +90,38 @@ namespace BOReserva.Controllers
             } 
         }
 
+        public ActionResult M06_AgregarComidaVuelo(int id)
+        {
+            List<Entidad> listaComidas = null;
+
+            Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.gestionComida(FabricaComando.comandosComida.CONSULTAR_COMIDAS, null);
+
+            listaComidas = comando.ejecutar();
+
+            if (listaComidas != null)
+            {
+                ViewBag.idVuelo = id;
+                ViewBag.listaComidas = listaComidas;
+                return PartialView();
+            }
+            else
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                string error = "Error consultando comidas.";
+                return Json(error);
+            }
+        }
+
+        public ActionResult M06_ConsultarComida(int id)
+        {
+            manejadorSQL sql = new manejadorSQL();
+            CComida comida = new CComida();
+            comida = sql.consultarComida(id);
+            CEditarComida modelo = new CEditarComida(comida);
+            return PartialView("M06_EditarComida", modelo);
+        }
+
+
         public ActionResult M06_VisualizarComidas()
         {
             List<Entidad> listaComidas = null;

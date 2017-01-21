@@ -22,7 +22,7 @@
                         @{
                             foreach (var item in ViewBag.listaVuelos)
                             {
-                                    <tr id="@item.IdVuelo">
+                                <tr id="@item.IdVuelo">
                                     <td>@item.CodigoVuelo</td>
                                     <td>@item.getRuta.origenRuta</td>
                                     <td>@item.getRuta.destinoRuta</td>
@@ -32,7 +32,7 @@
                                     </td>
                                 </tr>
                             }
-                        }   
+                        }
 
                     <tfoot>
                         <tr>
@@ -69,8 +69,8 @@
         var identificador = $(this).parent().parent().parent().attr("id");
         jQuery.ajax({
             type: "GET",
-            url: "/gestion_vuelo/M04_GestionVuelo_Visualizar",
-            data: { id: identificador }
+            url: "/gestion_comida_vuelo/M06_AgregarComidaVuelo",
+            data: { id: identificador}
         }).done(function (data) {
             $("#contenido").empty();
             $("#contenido").append(data);

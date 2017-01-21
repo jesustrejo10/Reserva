@@ -163,6 +163,9 @@
     <value>M06_AgregarComida</value>
     <comment>nombre del procedimiento de agregar comida desde la base de datos</comment>
   </data>
+  <data name="procedimientoAgregarComidaVuelo" xml:space="preserve">
+    <value>M06_AgregarComidaVuelo</value>
+  </data>
   <data name="procedimientoCambiarEstatusComida" xml:space="preserve">
     <value>M06_CambiarEstatusComida</value>
   </data>
