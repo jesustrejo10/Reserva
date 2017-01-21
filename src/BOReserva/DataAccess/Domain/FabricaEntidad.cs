@@ -216,9 +216,10 @@ namespace BOReserva.DataAccess.Domain
             DateTime? fechaFinHotel = paquete._fechaFinHabi; //Fecha fin para el hotel
             DateTime? fechaFinCruc = paquete._fechaFinCruc;
             DateTime? fechaFinVuelo = paquete._fechaFinVuelo;
+            bool estadoPaquete = paquete._estadoPaquete;
             return new Paquete(nombrePaquete, precioPaquete, idAuto, idRestaurante, idHotel, idCrucero, idVuelo, 
                                fechaIniAuto, fechaIniRest, fechaIniHotel, fechaIniCruc, fechaIniVuelo, fechaFinAuto,
-                               fechaFinRest, fechaFinHotel, fechaFinCruc, fechaFinVuelo);
+                               fechaFinRest, fechaFinHotel, fechaFinCruc, fechaFinVuelo, estadoPaquete);
 
         }
         #endregion

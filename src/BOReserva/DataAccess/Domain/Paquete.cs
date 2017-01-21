@@ -68,7 +68,7 @@ namespace BOReserva.DataAccess.Domain
                        int? idhotel, int? idcrucero, int? idvuelo, DateTime? fechainiauto, DateTime? fechainirest,
                        DateTime? fechainihotel, DateTime? fechainicruc, DateTime? fechainivuelo, 
                        DateTime? fechafinauto, DateTime? fechafinrest, DateTime? fechafinhotel, 
-                       DateTime? fechafincruc, DateTime? fechafinvuelo)
+                       DateTime? fechafincruc, DateTime? fechafinvuelo, bool estadoPaquete)
         {
 
             this._id = idpaquete;
@@ -89,6 +89,7 @@ namespace BOReserva.DataAccess.Domain
             this._fechaFinHotel = fechafinhotel;
             this._fechaFinCruc = fechafincruc;
             this._fechaFinVuelo = fechafinvuelo;
+            this._estadoPaquete = estadoPaquete;
            
         }
 
@@ -97,7 +98,7 @@ namespace BOReserva.DataAccess.Domain
                        int? idhotel, int? idcrucero, int? idvuelo, DateTime? fechainiauto, DateTime? fechainirest,
                        DateTime? fechainihotel, DateTime? fechainicruc, DateTime? fechainivuelo,
                        DateTime? fechafinauto, DateTime? fechafinrest, DateTime? fechafinhotel,
-                       DateTime? fechafincruc, DateTime? fechafinvuelo)
+                       DateTime? fechafincruc, DateTime? fechafinvuelo, bool estadoPaquete)
        {
 
            this._nombrePaquete = nombrepaquete;
@@ -117,6 +118,7 @@ namespace BOReserva.DataAccess.Domain
            this._fechaFinHotel = fechafinhotel;
            this._fechaFinCruc = fechafincruc;
            this._fechaFinVuelo = fechafinvuelo;
+           this._estadoPaquete = estadoPaquete;
 
        }
     }
