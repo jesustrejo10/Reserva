@@ -8,6 +8,7 @@ using BOReserva.Controllers.PatronComando;
 using System.Web;
 using System.Linq;
 using BOReserva.Controllers.PatronComando.M10;
+using BOReserva.Controllers.PatronComando.M16;
 
 namespace BOReserva.Controllers.PatronComando
 {
@@ -441,25 +442,6 @@ namespace BOReserva.Controllers.PatronComando
             return lista;
         }
         #endregion
-
-        public static Command<String> crearM16AgregarReclamo(Entidad e)
-        {
-
-            return new M16_COAgregarReclamo((Reclamo)e);
-
-        }
-        public static Command<Dictionary<int, Entidad>> crearM16VisualizarReclamos()
-        {
-
-            return new M16_COConsultarReclamo();
-
-        }
-        //public static Command<String> crearM16ConsultarUsuario(Entidad e)
-        //{
-
-        //    return new M16_COConsultarReclamoDetalle((Reclamo)e);
-
-        //}
 
         #region M06 GESTION COMIDA
 
