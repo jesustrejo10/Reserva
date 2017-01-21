@@ -221,7 +221,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M22
         /// <summary>
         /// Metodo para consultar hoteles segun el id de Lugar
         /// </summary>
-        /// <param name="_automovil">Variable tipo en entidad que luego debe ser casteada a su tipo para metodos get y set</param>
+        /// <param name="">Variable tipo en entidad que luego debe ser casteada a su tipo para metodos get y set</param>
         /// <returns>Lista de Entidades, ya que se devuelve mas de una fila de la BD, se debe castear a su respectiva clase en el Modelo</returns>
          List<Entidad> IDAOReservaHabitacion.ConsultarHotelesPorIdCiudad(Entidad _lugar)
         {
@@ -264,43 +264,23 @@ namespace FOReserva.DataAccess.DataAccessObject.M22
                 throw;
             }
         }
-
-         List<Entidad> IDAOReservaHabitacion.ObtenerCiudades(Entidad _lugar)
+         /*
+         List<Entidad> IDAOReservaHabitacion.ObtenerCiudades()
         {
 
             DataTable tablaDeDatos;
             List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
             List<Entidad> listaDeLugares = FabricaEntidad.asignarListaDeEntidades();
-            CCiudad lugar = (CCiudad)_lugar;
-            //Entidad lugar;
+           
+            Entidad lugar;
 
             int idLugar;
             String nombreLugar;
 
-            /*
-              try
-            {
-                //Aqui se asignan los valores que recibe el procedimiento para realizar el select
-                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM22.id_lugar, SqlDbType.Int, lugar.Codigo.ToString(), false));
-
-                //el metodo Ejecutar Store procedure recibe la lista de parametros como el query, este ultimo es el nombre del procedimietno en la BD
-                tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM22.ProcedimientoListarCiudades, parametro);
-
-                foreach (DataRow Fila in tablaDeDatos.Rows)
-                {
-                    cod = int.Parse(Fila[RecursoDAOM22.id_lugar].ToString());
-                    name = Fila[RecursoDAOM22.nombre_lugar].ToString();
-
-                    lugar = new CCiudad(cod,name);
-                    listaCiudades.Add(lugar);
-                }
-                    return listaCiudades;
-            }
-             */
             try
             {
                 //Aqui se asignan los valores que recibe el procedimiento para realizar el select
-                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM22.id_lugar, SqlDbType.Int, lugar.Codigo.ToString(), false));
+                //parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM22.id_lugar, SqlDbType.Int,lugar._id.ToString(), false));
                 tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM22.ProcedimientoListarCiudades, parametro);
 
 
@@ -320,7 +300,42 @@ namespace FOReserva.DataAccess.DataAccessObject.M22
 
                 throw;
             }
+        }*/
+
+         Dictionary<int, Entidad> IDAOReservaHabitacion.ObtenerCiudades()
+         {
+             Dictionary<int, Entidad> listaCiudades = new Dictionary<int, Entidad>();
+             DataTable tablaDeDatos;
+             List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
+
+             ReservaHabitacion reserva;
+             int id_lugar;
+
+             try
+             {
+
+                 tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM22.ProcedimientoListarCiudades,parametro);
+
+                 foreach (DataRow row in tablaDeDatos.Rows)
+                 {
+
+                     id_lugar = Int32.Parse(row["lug_id"].ToString());
+                     reserva = new ReservaHabitacion(
+                             row["lug_nombre"].ToString()
+                             );
+                     listaCiudades.Add(id_lugar, reserva);
+
+                 }
+                 return listaCiudades;
+             }
+             catch (SqlException ex)
+             {
+                 Debug.WriteLine(ex.ToString());
+                 return null;
+             }
+         }
+
         }
-        }
+
 
     }

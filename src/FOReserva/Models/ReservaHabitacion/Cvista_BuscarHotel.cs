@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using FOReserva.DataAccess.Domain;
 
 namespace FOReserva.Models.ReservaHabitacion
 {

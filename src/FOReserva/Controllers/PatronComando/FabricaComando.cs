@@ -2,6 +2,7 @@
 using FOReserva.Controllers.PatronComando.M16;
 using FOReserva.DataAccess.Domain;
 using FOReserva.Controllers.PatronComando.M19;
+using FOReserva.Controllers.PatronComando.M22;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -143,6 +144,14 @@ namespace FOReserva.Controllers.PatronComando
             lista.Add(lugar);
             return lista;
         }
+        #endregion
+        #region M22 Reserva Habitacion
+     
+        public static Command<Dictionary<int,Entidad>> obtenerCiudades()
+        {
+            return new M22_COObtenerCiudad();
+        }
+
         #endregion
     }
 }

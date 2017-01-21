@@ -60,5 +60,10 @@ namespace FOReserva.DataAccess.Domain
             this._cantidad = cant_habitaciones;
         }
 
+        public ReservaHabitacion(String lugar) 
+        {
+            this._lugar = lugar;
+        }
+
     }
 }

@@ -2,6 +2,7 @@
 using FOReserva.DataAccess.Model;
 using FOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using FOReserva.DataAccess.DataAccessObject.M19;
+using FOReserva.DataAccess.DataAccessObject.M22;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -80,6 +81,14 @@ namespace FOReserva.DataAccess.DataAccessObject
         {
             return new SqlDataAdapter(comandoSql);
         }
+        #endregion
+
+        #region M22_Gestion_Reserva_Habitacion
+        public static IDAOReservaHabitacion instanciarDaoReservaHabitacion()
+        {
+            return new DAOReservaHabitacion();
+        }
+
         #endregion
     }
 }

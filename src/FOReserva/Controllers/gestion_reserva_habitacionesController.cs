@@ -1,4 +1,5 @@
-﻿
+﻿using FOReserva.DataAccess.Domain;
+using FOReserva.Controllers.PatronComando;
 using FOReserva.Models.ReservaHabitacion;
 using System;
 using System.Collections.Generic;
@@ -27,12 +28,11 @@ namespace FOReserva.Controllers
         [HttpGet]
         public ActionResult buscar_hoteles(Cvista_BuscarHotel model)
         {
+
             if (Session["RHACiudades"] == null)
                 Session["RHACiudades"] = CReservaHabitacion.ObtenerCiudades();
-
             if (model.Ciudades == null)
                 model.Ciudades = (List<CCiudad>)Session["RHACiudades"];
-
             if (model.FechaLlegada.Ticks == 0)
                 model.FechaLlegada = DateTime.Now.AddDays(1);
 
