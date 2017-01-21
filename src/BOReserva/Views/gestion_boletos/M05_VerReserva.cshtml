@@ -11,15 +11,18 @@
                 <div class="row">
                     <div class="col-md-12" style="margin-top:10px;">
                         <label>El usuario posee reserva:</label>
-                        <select name="detalle" onchange="reservaOnChange(this)" class="form-control select2">
-                            <option selected="selected" value="no">No</option>
-                            <option value="si">Si</option>
+                        <select id="tipo" name="detalle" onchange="reservaOnChange(this)" class="form-control select2">
+                            <option value="0">Seleccione</option>
+                            <option value="1">No</option>
+                            <option value="2">Si</option>
                         </select>
-
+                        <label id="tipo_empty" class="control-label has-error none">
+                            <i class="fa fa-times-circle-o"></i> Seleccione una opción
+                        </label>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12" id="reserva" style="margin-top:10px;">
+                    <div class="col-md-12" id="reserva" style="margin-top:10px; display: none;">
                         <label id="numreserva">Pasaporte(*):</label>
                         <input type="text" id="pasaporte" class="form-control" placeholder="Ej. 90909133">
                         <label id="pass_empty" class="control-label has-error none">
@@ -41,36 +44,74 @@
 </div>
 <!-- /.row -->
 
-<script>
-
-    $("#reserva").css("display", "none");
-
+<script type="text/javascript">
+    //Funcion para el cambio del dropdown
     function reservaOnChange(sel) {
+        $(".none").hide();
+        $("#reserva").hide();
 
-        $("#reserva").css("display", "none");
-        var carnum = /^[0-9]+$/;
 
 
-        if (sel.value == "si") {
-            $("#reserva").css("display", "block");
+        if (sel.value == 2) {
 
-            $("#m05CrearBoleto").click(function (e) {
-                e.preventDefault();
-                $(".none").hide();
-               
-                var numpasaporte = document.getElementById("pasaporte").value;
+            $("#reserva").fadeIn();
+        }
+    }
+    $(document).ready(function () {
+        //Funcion para el submit del formulario
+        $("#m05CrearBoleto").click(function (e) {
+            e.preventDefault();
+            $(".none").hide();
+            $(".form-control").removeClass("has-error");
+            var tipo = $("#tipo").val();
 
-                if (numpasaporte == "" || numpasaporte == undefined || !numpasaporte.match(carnum)) {
 
-                    $("#pasaporte").addClass("has-error");
-                    $("#pass_empty").fadeIn();
+            if (tipo == 0) {
+                $("#tipo").addClass("has-error");
+                $("#tipo_empty").fadeIn();
+            }
+            else {
+                //SI
+                if (tipo == 2) {
+                    var carnum = /^[0-9]+$/;
+                    var numpasaporte = document.getElementById("pasaporte").value;
+
+                    if (numpasaporte == "" || numpasaporte == undefined || !numpasaporte.match(carnum)) {
+
+                        $("#pasaporte").addClass("has-error");
+                        $("#pass_empty").fadeIn();
+                    }
+
+                    else {
+                        $("#loading").show();
+                        var url = '/gestion_boletos/M05_VisualizarReservasPasajero';
+                        var method = 'GET';
+                        var data = { pasaporte: numpasaporte };
+
+                        $.ajax(
+                            {
+                                url: url,
+                                type: method,
+                                data: data,
+                                success: function (data, textStatus, jqXHR) {
+
+                                    $("#contenido").empty();
+                                    $("#contenido").append(data);
+                                },
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    alert(errorThrown);
+
+                                }
+                            });
+                    }
+
                 }
-
-                else {
+                else if (tipo == 1) {
+                    //NO
                     $("#loading").show();
-                    var url = '/gestion_boletos/M05_VisualizarReservasPasajero';
+                    var url = '/gestion_boletos/M05_CrearBoleto';
                     var method = 'GET';
-                    var data = { pasaporte: numpasaporte };
+                    var data = '';
 
                     $.ajax(
                         {
@@ -78,7 +119,6 @@
                             type: method,
                             data: data,
                             success: function (data, textStatus, jqXHR) {
-
                                 $("#contenido").empty();
                                 $("#contenido").append(data);
                             },
@@ -88,35 +128,8 @@
                             }
                         });
                 }
-
-            });
-
-
-        } else if (sel.value == "no") {
-
-            $("#m05CrearBoleto").click(function (e) {
-                e.preventDefault();
-                $("#loading").show();
-                var url = '/gestion_boletos/M05_CrearBoleto';
-                var method = 'GET';
-                var data = '';
-
-                $.ajax(
-                    {
-                        url: url,
-                        type: method,
-                        data: data,
-                        success: function (data, textStatus, jqXHR) {
-                            $("#contenido").empty();
-                            $("#contenido").append(data);
-                        },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            alert(errorThrown);
-
-                        }
-                    });
-            });
-
-        }
-    }
+                //NULL
+            }
+        });
+    });
 </script>
