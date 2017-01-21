@@ -1,4 +1,5 @@
 ﻿using BOReserva.Models;
+using BOReserva.Models.gestion_cruceros;
 using BOReserva.Models.gestion_hoteles;
 using BOReserva.Models.gestion_reclamos;
 using BOReserva.Models.gestion_restaurantes;
@@ -8,7 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-        
+using BOReserva.DataAccess.Domain.M14;
+
 
 
 
@@ -17,7 +19,7 @@ namespace BOReserva.DataAccess.Domain
     /// <summary>
     /// Clase Creada con la finalidad de instanciar a cualquier objeto dentro del Dominio
 
-    /// </summary>
+    /// </summary>D:\UCAB\Desarrollo\Reserva\src\BOReserva\DataAccess\Domain\FabricaEntidad.cs
     public class FabricaEntidad
     {
         #region M01_Login 
@@ -304,6 +306,25 @@ namespace BOReserva.DataAccess.Domain
         {
             return new Permiso();
         }
+
+        
+        
+        #region M14 Cruceros
+        public static Entidad InstanciarCrucero(CGestion_crucero crucero)
+        {
+
+            return new Crucero(crucero._idCrucero, crucero._nombreCrucero, crucero._companiaCrucero, crucero._capacidadCrucero, crucero._estatus);
+        }    
+
+        //instancia cabina con nombre de crucero, no con FK
+
+        public static Entidad InstanciarCabinaN(CGestion_cabina cabina)
+        {
+            return new Cabina(cabina._idCabina,cabina._nombreCabina,cabina._precioCabina,cabina._estatus,cabina._fkCrucero);
+        }
+        #endregion
+
+            
 
         public static Entidad crearRol(int id, String nombre)
         {

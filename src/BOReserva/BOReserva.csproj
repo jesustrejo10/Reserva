@@ -224,7 +224,6 @@
     <Compile Include="Controllers\PatronComando\M05\M05_COBuscarnombreciudad.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COEliminarBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COModificarPasajero.cs" />
-    <Compile Include="Controllers\PatronComando\M05\M05_COAgregarPasajero.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COConsultarBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COCrearBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COAgregarHabitaciones.cs" />
@@ -276,6 +275,15 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\List.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COVisualizarHoteles.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COAgregarPasajero.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarCabinas.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COAgregarCabina.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarCruceros.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COAgregarCrucero.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCabina.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOItinerario.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M14\DAOCabina.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M14\DAOCruceros.cs" />
     <Compile Include="Controllers\PatronComando\M10\M10_COListarRestaurantId.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COModificarRol.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COAgregarRol.cs" />
@@ -299,14 +307,16 @@
     <Compile Include="DataAccess\DataAccessObject\DAOLugar.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOPasajero.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOPais.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCruceros.cs" />
     <Compile Include="DataAccess\DataAccessObject\M16\DAOReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\M13\DAORol.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOAutomovil.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCiudad.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOHabitacion.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPais.cs" />
-    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReclamo.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORestaurant.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORol.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\M09\DAOHabitacion.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOComida.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOLogin.cs" />
@@ -334,7 +344,9 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="DataAccess\DataAccessObject\M10\DAORestaurant.cs" />
-    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORestaurant.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M14\DAOItinerario.cs" />
+    <Compile Include="DataAccess\Domain\M14\Cabina.cs" />
+    <Compile Include="DataAccess\Domain\M14\Crucero.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOBoleto.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPasajero.cs" />
     <Compile Include="DataAccess\DataAccessObject\M16\M16Reclamos.Designer.cs">
@@ -349,6 +361,7 @@
     <Compile Include="DataAccess\Domain\Lugar.cs" />
     <Compile Include="DataAccess\Domain\M13\Modulo.cs" />
     <Compile Include="DataAccess\Domain\M06\Comida.cs" />
+    <Compile Include="DataAccess\Domain\M14\Itinerario.cs" />
     <Compile Include="DataAccess\Domain\M06\ComidaVuelo.cs" />
     <Compile Include="DataAccess\Domain\Pasajero.cs" />
     <Compile Include="DataAccess\Domain\M13\Permiso.cs" />
@@ -369,6 +382,7 @@
     <Compile Include="DataAccess\Domain\FabricaEntidad.cs" />
     <Compile Include="DataAccess\Domain\Hotel.cs" />
     <Compile Include="DataAccess\Domain\Pais.cs" />
+    <Compile Include="DataAccess\Domain\Transporte.cs" />
     <Compile Include="DataAccess\Domain\M13\Rol.cs" />
     <Compile Include="DataAccess\Domain\RutaBoleto.cs" />
     <Compile Include="DataAccess\Domain\Ruta.cs" />
@@ -693,6 +707,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Scripts\Scripts_Boletos\DetalleVuelo.js" />
+    <None Include="Properties\PublishProfiles\hjkj.pubxml" />
     <None Include="Properties\PublishProfiles\Webdeploy Smarterasp.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
