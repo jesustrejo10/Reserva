@@ -197,6 +197,7 @@ namespace BOReserva.M10
             Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
             RecursoDAOM10.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
 
+            //Atributos del Metodo
             CRestauranteModelo rest = (CRestauranteModelo)_restaurant;
             List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
 
@@ -373,7 +374,7 @@ namespace BOReserva.M10
         /// </summary>
         /// <param name="_restaurant"></param>
         /// <returns>Se retorna true de ser exitoso</returns>
-        public bool Modificar(Entidad _restaurant)
+        public Boolean Modificar(Entidad _restaurant)
         {
             CRestauranteModelo rest = (CRestauranteModelo)_restaurant;
             List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
