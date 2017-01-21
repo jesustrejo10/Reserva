@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
 {
-    interface IDAOPaquete : IDAO 
+    interface IDAOPaquete : IDAO
     {
         //Métodos propios para los paquetes
     }
