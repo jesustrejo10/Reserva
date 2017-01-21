@@ -8,11 +8,7 @@ using System.Web;
 namespace BOReserva.Models.gestion_hoteles
 {
     /// <summary>
-<<<<<<< HEAD
-    /// Clase del modelo de la vista parcial M08_AgregarHoteles
-=======
-    /// Clase del modelo de la vista parcial M09_AgregarHotel
->>>>>>> 22c1980369f519eaca5fa02a9a7352070445db73
+    /// Clase del modelo de la vista parcial M09_AgregarHoteles
     /// </summary>
     public class CAgregarHotel
     {
