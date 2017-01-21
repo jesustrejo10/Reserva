@@ -21,8 +21,5 @@ namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
         Entidad MMostrarRutaBD(int idRuta);
         Boolean MModificarRuta(Entidad e);
 
-
-
-
     }
 }

@@ -18,7 +18,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M03
 
         public DAORuta() { }
 
-        Boolean IDAORuta.ValidarRuta(Entidad e)
+        public Boolean ValidarRuta(Entidad e)
         {
             Ruta ruta = (Ruta)e;
             SqlConnection conexion = Connection.getInstance(_connexionString);
@@ -65,7 +65,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M03
                 return false;
             }
         }
-        Boolean IDAORuta.habilitarRuta(int id)
+        public Boolean habilitarRuta(int id)
         {
             SqlConnection conexion = Connection.getInstance(_connexionString);
             try
@@ -89,7 +89,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M03
                 throw e;
             }
         }
-        Boolean IDAORuta.deshabilitarRuta(int id)
+        public Boolean deshabilitarRuta(int id)
         {
             SqlConnection conexion = Connection.getInstance(_connexionString);
             try
@@ -112,7 +112,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M03
                 throw e;
             }
         }
-        Dictionary<int, Entidad> IDAORuta.listarLugares()
+        public Dictionary<int, Entidad> listarLugares()
         {
 
             List<String> lugares = new List<String>();
@@ -153,7 +153,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M03
                 throw e;
             }
         }
-        Dictionary<int, Entidad> IDAORuta.consultarDestinos(string origen)
+        public Dictionary<int, Entidad> consultarDestinos(string origen)
         {
             String[] strOri = origen.Split(new[] { " - " }, StringSplitOptions.None);
             var lugares = new List<String>();
@@ -190,7 +190,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M03
                 throw e;
             }
         }
-        Entidad IDAORuta.MMostrarRutaBD(int idRuta)
+        public Entidad MMostrarRutaBD(int idRuta)
         {
             Ruta ruta = new Ruta();
             SqlConnection conexion = Connection.getInstance(_connexionString);
@@ -272,8 +272,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M03
                 throw ex;
             }
         }
-
-        Boolean IDAORuta.MModificarRuta(Entidad e)
+        public Boolean MModificarRuta(Entidad e)
         {
             Ruta ruta = (Ruta)e;
             SqlConnection conexion = Connection.getInstance(_connexionString);

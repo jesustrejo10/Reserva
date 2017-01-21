@@ -205,6 +205,14 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\PatronComando\Command.cs" />
     <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
+    <Compile Include="Controllers\PatronComando\M03\M03_COAgregarRuta.cs" />
+    <Compile Include="Controllers\PatronComando\M03\M03_CODeshabilitarRuta.cs" />
+    <Compile Include="Controllers\PatronComando\M03\M03_COHabilitarRuta.cs" />
+    <Compile Include="Controllers\PatronComando\M03\M03_COConsultarDestinos.cs" />
+    <Compile Include="Controllers\PatronComando\M03\M03_COMostrarRuta.cs" />
+    <Compile Include="Controllers\PatronComando\M03\M03_COValidarRuta.cs" />
+    <Compile Include="Controllers\PatronComando\M03\M03_COModificarRuta.cs" />
+    <Compile Include="Controllers\PatronComando\M03\M03_COListarLugares.cs" />
     <Compile Include="Controllers\PatronComando\M10\M10_COActualizarRestaurant.cs" />
     <Compile Include="Controllers\PatronComando\M10\M10_COCargarHorario.cs" />
     <Compile Include="Controllers\PatronComando\M10\M10_COConsultarLugar.cs" />

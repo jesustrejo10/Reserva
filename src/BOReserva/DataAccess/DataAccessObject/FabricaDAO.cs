@@ -1,4 +1,5 @@
 ﻿using BOReserva.DataAccess.DAO;
+using BOReserva.DataAccess.DataAccessObject.M03;
 using BOReserva.M10;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace BOReserva.DataAccess.DataAccessObject
     {
          #region M09_Gestion_Hoteles_Por_Ciudad
         
-        public static DAO instanciarDaoHotel() {
+        public static DAO instanciarDaoHotel() {    
             return new DAOHotel();
         }
 
@@ -129,6 +130,17 @@ namespace BOReserva.DataAccess.DataAccessObject
         public static DAORol instanciarDAORolPermiso()
         {
             return new DAORol();
+        }
+        #endregion
+
+        #region M03_Ruta
+        /// <summary>
+        /// Método que crea la instancia de DAORuta
+        /// </summary>
+        /// <returns>Retorna la instancia a la clase DAORuta</returns>
+        public static DAO instanciarDAORuta()
+        {
+            return new DAORuta();
         }
         #endregion
     }
