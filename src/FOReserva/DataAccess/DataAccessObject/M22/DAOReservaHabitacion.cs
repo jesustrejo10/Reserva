@@ -223,7 +223,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M22
         /// </summary>
         /// <param name="_automovil">Variable tipo en entidad que luego debe ser casteada a su tipo para metodos get y set</param>
         /// <returns>Lista de Entidades, ya que se devuelve mas de una fila de la BD, se debe castear a su respectiva clase en el Modelo</returns>
-        public List<Entidad> IDAOReservaHabitacion.ConsultarHotelesPorIdCiudad(Entidad _lugar)
+         List<Entidad> IDAOReservaHabitacion.ConsultarHotelesPorIdCiudad(Entidad _lugar)
         {
             List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
             List<Entidad> listaHoteles = FabricaEntidad.asignarListaDeEntidades();
@@ -265,7 +265,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M22
             }
         }
 
-        public List<Entidad> IDAOReservaHabitacion.ObtenerCiudades(Entidad _lugar)
+         List<Entidad> IDAOReservaHabitacion.ObtenerCiudades(Entidad _lugar)
         {
 
             DataTable tablaDeDatos;
