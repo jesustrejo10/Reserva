@@ -154,6 +154,12 @@ namespace BOReserva.Controllers.PatronComando
 
         }
 
+        public static Command<String> crearM16ActualizarReclamo(int id, int estado)
+        {
+            return new M16_COActualizarReclamo(id, estado);
+
+        }
+
         #endregion
 
 

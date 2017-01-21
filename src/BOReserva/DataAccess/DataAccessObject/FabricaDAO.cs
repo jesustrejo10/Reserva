@@ -10,6 +10,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 
 namespace BOReserva.DataAccess.DataAccessObject
 
@@ -45,10 +46,17 @@ namespace BOReserva.DataAccess.DataAccessObject
         }
         #endregion
 
+        #region M16_Gestion_Reclamos
         public static DAO instanciarDaoReclamo() 
         {
             return new DAOReclamo();
         }
+
+        public static IDAOReclamo instanciarDaoReclamoPersonalizado()
+        {
+            return new DAOReclamo();
+        }
+        #endregion
 
         #region M04_Vuelos
         /// <summary>

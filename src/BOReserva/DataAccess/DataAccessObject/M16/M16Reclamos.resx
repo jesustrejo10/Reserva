@@ -189,6 +189,10 @@
     <value>@rec_titulo</value>
     <comment>titulo del reclamo en los stored procedure</comment>
   </data>
+  <data name="procedimientoActualizarReclamprocedimientoConsultarReclamos" xml:space="preserve">
+    <value>M16_ConsultarReclamos</value>
+    <comment>procedimiento para consultar los reclamos totales en la bd</comment>
+  </data>
   <data name="procedimientoConsultarReclamos" xml:space="preserve">
     <value>M16_ConsultarReclamos</value>
     <comment>procedimiento para consultar los reclamos totales en la bd</comment>

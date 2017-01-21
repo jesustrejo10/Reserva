@@ -61,6 +61,14 @@ namespace BOReserva.Controllers
           }
       }
 
+      [HttpPost]
+      public JsonResult actualizarReclamo(int idReclamo, int estado)
+      {
+          Command<String> comando = FabricaComando.crearM16ActualizarReclamo(idReclamo, estado);
+          String resultado = comando.ejecutar();
+          return (Json("Estado modificado"));
+      }
+
       public ActionResult M16_ModificarReclamo()
       {
           CModificarReclamo model = new CModificarReclamo();

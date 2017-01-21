@@ -56,71 +56,6 @@
             </td>
 
             <script>
-                $(".activar").click(function (event) {
-                    console.log("hola");
-                    event.preventDefault();
-                    event.stopPropagation();
-                    event.stopImmediatePropagation();
-                    var identificador = $(this).parent().parent().parent().attr("id");
-                    jQuery.ajax({
-                        type: "POST",
-                        url: "/gestion_aviones/habilitarAvion",
-                        data: { id: identificador }
-                    }).done(function (data) {
-                        var url = '/gestion_aviones/M02_VisualizarAviones';
-                        var method = 'GET';
-                        var data = '';
-                        $.ajax(
-                            {
-                                url: url,
-                                type: method,
-                                data: data,
-                                success: function (data, textStatus, jqXHR) {
-
-                                    $("#contenido").empty();
-                                    $("#contenido").append(data);
-                                },
-                                error: function (jqXHR, textStatus, errorThrown) {
-                                    alert(errorThrown);
-                                }
-                            });
-                    }).fail(function () {
-                        alert("Error en la base de datos");
-                    });
-                });
-
-                $(".desactivar").click(function (event) {
-                    console.log("hola");
-                    event.preventDefault();
-                    event.stopPropagation();
-                    event.stopImmediatePropagation();
-                    var identificador = $(this).parent().parent().parent().attr("id");
-                    jQuery.ajax({
-                        type: "POST",
-                        url: "/gestion_aviones/deshabilitarAvion",
-                        data: { id: identificador }
-                    }).done(function (data) {
-                        var url = '/gestion_aviones/M02_VisualizarAviones';
-                        var method = 'GET';
-                        var data = '';
-                        $.ajax(
-                            {
-                                url: url,
-                                type: method,
-                                data: data,
-                                success: function (data, textStatus, jqXHR) {
-
-                                    $("#contenido").empty();
-                                    $("#contenido").append(data);
-                                },
-                                error: function (jqXHR, textStatus, errorThrown) {
-                                    alert(errorThrown);
-                                }
-                            });
-                    }).fail(function () {
-                        alert("Error en la base de datos");
-                    });
-                });
 
                 $(".modificar").click(function (event) {
                     event.preventDefault();
@@ -151,6 +86,118 @@
                         type: "POST",
                         url: "/gestion_reclamos/eliminarReclamo",
                         data: { idReclamo: identificador }
+                    }).done(function (data) {
+                        var url = '/gestion_reclamos/M16_VisualizarReclamo';
+                        var method = 'GET';
+                        var data = '';
+                        $.ajax(
+                            {
+                                url: url,
+                                type: method,
+                                data: data,
+                                success: function (data, textStatus, jqXHR) {
+
+                                    $("#contenido").empty();
+                                    $("#contenido").append(data);
+                                },
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    alert(errorThrown);
+                                }
+                            });
+                    }).fail(function (data) {
+                        console.log(data);
+                        alert(data.responseText);
+                    });
+
+
+                });
+
+
+                $(".label-success").click(function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    event.stopImmediatePropagation();
+                    var identificador = $(this).parent().parent().attr("id");
+                    var cambioEstado = 2;
+                    console.log(identificador);
+                    jQuery.ajax({
+                        type: "POST",
+                        url: "/gestion_reclamos/actualizarReclamo",
+                        data: { idReclamo: identificador, estado: cambioEstado}
+                    }).done(function (data) {
+                        var url = '/gestion_reclamos/M16_VisualizarReclamo';
+                        var method = 'GET';
+                        var data = '';
+                        $.ajax(
+                            {
+                                url: url,
+                                type: method,
+                                data: data,
+                                success: function (data, textStatus, jqXHR) {
+
+                                    $("#contenido").empty();
+                                    $("#contenido").append(data);
+                                },
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    alert(errorThrown);
+                                }
+                            });
+                    }).fail(function (data) {
+                        console.log(data);
+                        alert(data.responseText);
+                    });
+
+
+                });
+
+                $(".label-primary").click(function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    event.stopImmediatePropagation();
+                    var identificador = $(this).parent().parent().attr("id");
+                    var cambioEstado = 3;
+                    console.log(identificador);
+                    jQuery.ajax({
+                        type: "POST",
+                        url: "/gestion_reclamos/actualizarReclamo",
+                        data: { idReclamo: identificador, estado: cambioEstado }
+                    }).done(function (data) {
+                        var url = '/gestion_reclamos/M16_VisualizarReclamo';
+                        var method = 'GET';
+                        var data = '';
+                        $.ajax(
+                            {
+                                url: url,
+                                type: method,
+                                data: data,
+                                success: function (data, textStatus, jqXHR) {
+
+                                    $("#contenido").empty();
+                                    $("#contenido").append(data);
+                                },
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    alert(errorThrown);
+                                }
+                            });
+                    }).fail(function (data) {
+                        console.log(data);
+                        alert(data.responseText);
+                    });
+
+
+                });
+
+                $(".label-warning").click(function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    event.stopImmediatePropagation();
+                    var identificador = $(this).parent().parent().attr("id");
+                    var cambioEstado = 4;
+                    console.log(identificador);
+                    jQuery.ajax({
+                        type: "POST",
+                        url: "/gestion_reclamos/actualizarReclamo",
+                        data: { idReclamo: identificador, estado: cambioEstado }
                     }).done(function (data) {
                         var url = '/gestion_reclamos/M16_VisualizarReclamo';
                         var method = 'GET';
