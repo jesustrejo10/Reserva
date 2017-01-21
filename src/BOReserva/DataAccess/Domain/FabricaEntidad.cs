@@ -3,6 +3,7 @@ using BOReserva.Models.gestion_hoteles;
 using BOReserva.Models.gestion_reclamos;
 using BOReserva.Models.gestion_restaurantes;
 using BOReserva.Models.gestion_roles;
+using BOReserva.Models.gestion_ofertas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -177,6 +178,14 @@ namespace BOReserva.DataAccess.Domain
         {
             return new Permiso();
         }
+
+        #region M11_AgregarOferta
+
+        public static Entidad InstanciarOferta(CAgregarOferta model) {
+            return new Oferta(model._nombreOferta, model._porcentajeOferta, model._fechaIniOferta,
+                              model._fechaFinOferta, model._estadoOferta);
+        }
+        #endregion
 
     }
 }

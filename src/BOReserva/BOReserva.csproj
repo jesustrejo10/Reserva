@@ -254,6 +254,7 @@
     <Compile Include="Controllers\PatronComando\M05\M05_COAgregarPasajero.cs" />
     <Compile Include="Controllers\PatronComando\M11\M11_COConsultarOferta.cs" />
     <Compile Include="Controllers\PatronComando\M11\M11_COConsultarPaquete.cs" />
+	  <Compile Include="Controllers\PatronComando\M11\M11_COAgregarOferta.cs" />
     <Compile Include="Controllers\PatronComando\M11\M11_CODeshabilitarOferta.cs" />
     <Compile Include="Controllers\PatronComando\M11\M11_CODeshabilitarPaquete.cs" />
     <Compile Include="Controllers\PatronComando\M11\M11_COModificarOferta.cs" />

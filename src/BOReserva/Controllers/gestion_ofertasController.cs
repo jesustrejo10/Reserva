@@ -9,6 +9,8 @@ using BOReserva.Servicio;
 using BOReserva.Models.gestion_automoviles;
 using BOReserva.Models.gestion_restaurantes;
 using System.Collections.Specialized;
+using BOReserva.DataAccess.Domain;
+using BOReserva.Controllers.PatronComando;
 
 namespace BOReserva.Controllers
 {
@@ -425,6 +427,7 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult guardarOferta(CAgregarOferta model, string estadoOferta)
         {
+            
 
             if (estadoOferta == "1")
                 model._estadoOferta = true;
@@ -447,11 +450,18 @@ namespace BOReserva.Controllers
             if (model._fechaFinOferta.Date < model._fechaIniOferta.Date)
             {
                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-             String Error = "Error: La fecha de Inicio no puede ser igual a la fecha Fin";
-            return Json(Error);
+               String Error = "Error: La fecha de Inicio no puede ser igual a la fecha Fin";
+               return Json(Error);
             }
 
-            //AGREGAR EL USING DEL MANEJADOR SQL ANTES (using BOReserva.Servicio; o using FOReserva.Servicio;)
+            Entidad nuevaOferta = FabricaEntidad.InstanciarOferta(model);
+            //con la fabrica instancie la oferta.
+            Command<String> comando = FabricaComando.crearM11AgregarOferta(nuevaOferta);
+            String agrego_si_no = comando.ejecutar();
+
+            return (Json(agrego_si_no));
+
+           /* //AGREGAR EL USING DEL MANEJADOR SQL ANTES (using BOReserva.Servicio; o using FOReserva.Servicio;)
             //instancio el manejador de sql
             manejadorSQL sql = new manejadorSQL();
             //realizo el insert
@@ -466,7 +476,7 @@ namespace BOReserva.Controllers
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 String error = "Error insertando en la BD";
                 return Json(error);
-            }
+            }*/
         }
 
         [HttpPost]
