@@ -27,16 +27,32 @@
         <tr id="@item._id">
             <td>@item._fechaReclamo</td>
             <td>@item._tituloReclamo</td>
-            <td>@item._estadoReclamo</td>
             <td>
-                @*<a href="#"> <i class="fa fa-eye clasedeprueba"></i></a>*@
+                @if (@item._estadoReclamo == 1)
+                {
+                    <span class="label label-success ">Iniciado</span>
+                }
+                @if (@item._estadoReclamo == 2)
+                {
+                    <span class="label label-primary ">Procesado</span>
+                }
+                @if (@item._estadoReclamo == 3)
+                {
+                    <span class="label label-warning ">Culminado</span>
+                }
+                @if (@item._estadoReclamo == 4)
+                {
+                    <span class="label label-danger ">Cerrado</span>
+                }            
+            </td>
+
+            <td>
                 <a href="#" title="Ver detalle"><i class="fa fa-eye detalle"></i></a>
                 @if (item._usuario == item._usuario) 
                 { 
                 <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>
                 <a href="#" title="Eliminar"><i class="fa fa-times eliminar"></i></a>
                 }
-
             </td>
 
             <script>

@@ -38,24 +38,26 @@ namespace BOReserva.Controllers
           Entidad nuevoReclamo = FabricaEntidad.InstanciarReclamo(model);
           Command<String> comando = FabricaComando.crearM16AgregarReclamo(nuevoReclamo);
           String verificacion = comando.ejecutar();
-          return (Json(verificacion));
+          return (Json("Se guardó su reclamo exitosamente"));
       }
 
       [HttpPost]
       public JsonResult eliminarReclamo(int idReclamo)
       {
           int idUsuario = gestion_seguridad_ingresoController.IDUsuarioActual();
-          Entidad reclamoAVerificar = FabricaEntidad.InstanciarReclamo();
           Command<Entidad> comando = FabricaComando.crearM16ConsultarUsuario(idReclamo);
           Reclamo verificacion = (Reclamo) comando.ejecutar();
           if(idUsuario!=verificacion._usuario)
           {
             Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            return (Json("No esta autorizado para eliminar este reclamo"));
+            return (Json("No está autorizado para eliminar este reclamo"));
           }
           else
           {
-              return (Json("Logica de eliminar"));
+              Command<String> comando1 = FabricaComando.crearM16EliminarReclamo(idReclamo);
+              String borro_si_no = comando1.ejecutar();
+              Response.StatusCode = (int)HttpStatusCode.BadRequest;
+              return (Json("Se eliminó el reclamo exitosamente"));
           }
       }
 

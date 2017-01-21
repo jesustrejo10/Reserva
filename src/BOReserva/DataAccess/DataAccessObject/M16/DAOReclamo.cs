@@ -71,6 +71,11 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
         }
 
+        /// <summary>
+        /// Método para consultar un reclamo en la BD
+        /// </summary>
+        /// <param name="id">id del reclamo</param>
+        /// <returns> reclamo </returns>
         Entidad IDAO.Consultar(int id)
         {
             SqlConnection conexion = Connection.getInstance(_connexionString);
@@ -108,13 +113,42 @@ namespace BOReserva.DataAccess.DataAccessObject
                 return null;
             }
         }
+
+        /// <summary>
+        /// Método para modificar un reclamo
+        /// </summary>
+        /// <param name="e">Entidad que posteriormente será casteada a Reclamo</param>
+        /// <returns>retorna el reclamo</returns>
         Entidad IDAO.Modificar(Entidad e)
         {
-            throw new NotImplementedException();
+            Reclamo _reclamo = (Reclamo)e;
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            try
+            {
+                conexion.Open();
+                String sql = "UPDATE reclamo SET rec_titulo = '" + _reclamo._tituloReclamo + "', rec_descripcion = '" + _reclamo._detalleReclamo +
+                            "', rec_fecha = '" + _reclamo._fechaReclamo +
+                            " WHERE rec_id = " + _reclamo._id;
+
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                conexion.Close();
+                Entidad resultado = _reclamo;
+                return resultado;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                Entidad resultado = _reclamo;
+                return resultado;
+            }
         }
 
-      
-
+        /// <summary>
+        /// Método para consultar todos los reclamos en la BD
+        /// </summary>
+        /// <returns> Lista de reclamos</returns>
         Dictionary<int, Entidad> IDAO.ConsultarTodos()
         {
             List<Reclamo> listareclamos = new List<Reclamo>();
@@ -159,6 +193,31 @@ namespace BOReserva.DataAccess.DataAccessObject
                 Debug.WriteLine(ex.ToString());
                 conexion.Close();
                 return null;
+            }
+        }
+
+        /// <summary>
+        /// Método para eliminar reclamo 
+        /// </summary>
+        /// <param name="id">id del reclamo</param>
+        /// <returns>retorna 1 si eliminó correctamente</returns>
+        int IDAO.Eliminar(int id)
+        {
+            try
+            {
+                SqlConnection conexion = Connection.getInstance(_connexionString);
+                conexion.Open();
+                String sql = "DELETE FROM reclamo WHERE rec_id = " + id + "";
+                System.Diagnostics.Debug.WriteLine(sql);
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                conexion.Close();
+                return 1;
+            }
+            catch (SqlException ex)
+            {
+                return 0;
             }
         }
       
