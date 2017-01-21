@@ -3,10 +3,13 @@ using BOReserva.Models.gestion_hoteles;
 using BOReserva.Models.gestion_reclamos;
 using BOReserva.Models.gestion_restaurantes;
 using BOReserva.Models.gestion_roles;
+using BOReserva.DataAccess.Domain.M06;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+
+
 
 namespace BOReserva.DataAccess.Domain
 {
@@ -33,8 +36,8 @@ namespace BOReserva.DataAccess.Domain
             int capacidad = model._capacidadHabitacion;
             String paginaWeb = model._paginaWeb;
             String email = model._email;
-
-            return new Hotel(nombre, direccion, email, paginaWeb, clasificacion, capacidad, city);
+            int precio = model._precioHabitacion;
+            return new Hotel(nombre, direccion, email, paginaWeb, clasificacion, capacidad, city,precio);
         }
 
         public static Entidad InstanciarHotel(CModificarHotel model, Entidad c)
@@ -70,20 +73,45 @@ namespace BOReserva.DataAccess.Domain
             return new Ciudad(id,nombre,fkPais);
         }
 
-        #endregion 
-        public static Entidad InstanciarReclamo(String tituloReclamo, String detalleReclamo, String fechaReclamo, String estadoReclamo)
+        public static Entidad InstanciarHabitacion(int precio, int fkHotel)
         {
-            return new Reclamo();
+            return new Habitacion( precio, fkHotel);
         }
-        public static Entidad InstanciarReclamo(CAgregarReclamo model, Entidad c)
+
+        #endregion 
+
+        #region M16_GestionReclamos
+        public static Entidad InstanciarReclamo(String tituloReclamo, String detalleReclamo, String fechaReclamo, int estadoReclamo, int usuario)
+        {
+            return new Reclamo(tituloReclamo, detalleReclamo, fechaReclamo, estadoReclamo, usuario);
+        }
+
+        public static Entidad InstanciarReclamo(int reclamo , String tituloReclamo, String detalleReclamo, String fechaReclamo, int estadoReclamo, int usuario)
+        {
+            return new Reclamo(reclamo, tituloReclamo, detalleReclamo, fechaReclamo, estadoReclamo, usuario);
+        }
+        public static Entidad InstanciarReclamo(CAgregarReclamo model)
         {
             String titulo = model._tituloReclamo;
             String detalle = model._detalleReclamo;
             String fecha = model._fechaReclamo;
-            String estado = model._estadoReclamo;
+            int estado = model._estadoReclamo;
+            int usuario = model._usuario;
 
-            return new Reclamo(titulo, detalle, fecha, estado);
+            return new Reclamo(titulo, detalle, fecha, estado, usuario);
         }
+        public static List<Reclamo> InstanciarListaReclamo(Dictionary<int, Entidad> listaEntidad) 
+        {
+            List<Reclamo> lista = new List<Reclamo>();
+            foreach(var e in listaEntidad)
+            {
+                Reclamo nuevoReclamo = (Reclamo)e.Value;
+                lista.Add(nuevoReclamo);
+
+            }
+            return lista;
+        }
+#endregion
 
         #region M04_Vuelo
         /// <summary>
@@ -119,9 +147,22 @@ namespace BOReserva.DataAccess.Domain
             DateTime fecha_nac = Convert.ToDateTime(fecha);
             return new Pasajero(id, nombre1, nombre2, apellido1, apellido2, sexo, fecha_nac, correo);
 		}
-		#endregion
-		
-		#region Modulo 10
+        #endregion
+
+        #region M08_Automoviles
+        public static Entidad InstanciarAutomovil(String matricula, String modelo, String fabricante, String anio, String tipovehiculo,
+                                                  String kilometraje, String cantpasajeros, String preciocompra, String precioalquiler,
+                                                  String penalidaddiaria, String fecharegistro, String color, String disponibilidad,
+                                                  String transmision, String pais, String ciudad, String fk_ciudad)
+        {
+            return new Automovil( matricula,  modelo, fabricante, anio, tipovehiculo,
+                                  kilometraje, cantpasajeros, preciocompra, precioalquiler,
+                                  penalidaddiaria, fecharegistro, color, disponibilidad,
+                                  transmision, pais, ciudad, fk_ciudad);
+        }
+        #endregion
+
+        #region Modulo 10
         public static CRestauranteModelo crearRestaurant(string nombre, string direccion, string telefono, string descripcion, string horarioApertura, string horarioCierre, int idLugar)
         {
             return new CRestauranteModelo(nombre, direccion, telefono, descripcion, horarioApertura, horarioCierre, idLugar);
@@ -198,6 +239,24 @@ namespace BOReserva.DataAccess.Domain
         {
             return new Modulo(id, nombre);
         }
+        #endregion
+
+        #region M06 GESTION COMIDA
+
+        public static Entidad instanciarComida(string nombre, string tipo, int estatus, string descripcion) {
+            return new Comida(nombre, tipo, estatus, descripcion);
+        }
+
+        public static Entidad instanciarComida()
+        {
+            return new Comida();
+        }
+
+        public static Entidad instanciarComidaVuelo(int id, string comida, string codigoVuelo, int cantidad)
+        {
+            return new ComidaVuelo(id, comida, codigoVuelo, cantidad);
+        }
+
         #endregion
 
     }

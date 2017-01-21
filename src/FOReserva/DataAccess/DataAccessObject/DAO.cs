@@ -1,6 +1,6 @@
-﻿using FOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+﻿using FOReserva.DataAccess.Model;
+using FOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using FOReserva.DataAccess.Domain;
-using FOReserva.DataAccess.Model;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -11,9 +11,13 @@ using System.Web;
 
 namespace FOReserva.DataAccess.DataAccessObject
 {
+    /// <summary>
+    /// Manejador de la Base de datos, contiene todo lo necesario para una conexion inicial
+    /// </summary>
     abstract public class DAO : IDAO
     {
         protected String _connexionString = ConfigurationManager.ConnectionStrings["StringRemoto"].ConnectionString;
+
         private SqlConnection conexion;
         // El String de conexion se encuentra en el archivo Web.config
         private SqlCommand comando;
@@ -49,7 +53,7 @@ namespace FOReserva.DataAccess.DataAccessObject
 
             try
             {
-                conexion = Connection.getInstance(_connexionString);
+                conexion = new SqlConnection(_connexionString);
             }
 
             catch (Exception ex)
@@ -270,6 +274,7 @@ namespace FOReserva.DataAccess.DataAccessObject
 
                     return dataTable;
                 }
+                
 
 
             }

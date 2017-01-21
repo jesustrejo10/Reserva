@@ -2,7 +2,6 @@
 using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
-using BOReserva.DataAccess.Domain.Contratos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -71,6 +70,15 @@ namespace BOReserva.Controllers.PatronComando
             }
 
             return ciudadesPorPais;
+        }
+
+
+        public int obtenerIdentificadorCiudad(String ciudad)
+        {
+            int id;
+            DAOCiudad daoPais = (DAOCiudad)FabricaDAO.instanciarDaoCiudad();
+            id = daoPais.obtenerIDciudad(ciudad);
+            return id;
         }
     }
 }
