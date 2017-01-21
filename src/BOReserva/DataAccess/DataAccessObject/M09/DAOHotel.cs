@@ -57,6 +57,10 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             {
                 throw new ReservaExceptionM09(ex.Message, ex);
             }
+            catch (ExceptionBD ex)
+            {
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
             catch (Exception ex)
             {
                 throw new ReservaExceptionM09(ex.Message, ex);
@@ -96,6 +100,10 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
                 throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (ArgumentNullException ex)
+            {
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (ExceptionBD ex)
             {
                 throw new ReservaExceptionM09(ex.Message, ex);
             }
@@ -181,6 +189,10 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             {
                 throw new ReservaExceptionM09(ex.Message, ex);
             }
+            catch (ExceptionBD ex)
+            {
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
             catch (Exception ex)
             {
                 throw new ReservaExceptionM09(ex.Message, ex);
@@ -251,6 +263,10 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             {
                 throw new ReservaExceptionM09(ex.Message, ex);
             }
+            catch (ExceptionBD ex)
+            {
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
             catch (Exception ex)
             {
                 throw new ReservaExceptionM09(ex.Message, ex);
@@ -282,6 +298,10 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
                 throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (ArgumentNullException ex)
+            {
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (ExceptionBD ex)
             {
                 throw new ReservaExceptionM09(ex.Message, ex);
             }
@@ -320,6 +340,10 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
                 throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (ArgumentNullException ex)
+            {
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (ExceptionBD ex)
             {
                 throw new ReservaExceptionM09(ex.Message, ex);
             }
