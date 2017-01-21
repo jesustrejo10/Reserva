@@ -23,7 +23,8 @@ namespace BOReserva.Controllers.PatronComando
             IDAO daoReclamo = FabricaDAO.instanciarDaoReclamo();
 
             daoReclamo.Agregar(_reclamo);
-            return "1";
+            int test = daoReclamo.Agregar(_reclamo);
+            return test.ToString();
         }
     }
 }

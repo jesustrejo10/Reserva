@@ -23,12 +23,11 @@ namespace BOReserva.Controllers
         /// Método para el acceso a la interfaz de visualización de restaurantes.
         /// </summary>
         /// <returns>Retorna un objeto para renderizar la vista parcial.</returns>
-        public ActionResult M10_GestionRestaurantes_Ver(int id = 0)
+        public ActionResult M10_GestionRestaurantes_Ver(int id = -1)
         {
+
             ViewBag.Ciudad = FabricaVista.asignarItemsComboBox(cargarComboBoxLugar(), "Id", "Name");
-        
-            if (id != 0)
-            {
+            
                
                 Entidad _lugar = FabricaEntidad.crearLugar(id, "");//Aqui se envia la clave foranea de lugar para realizar la busqueda
                 Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, BOReserva.Controllers.PatronComando.FabricaComando.comandoRestaurant.NULO, _lugar);
@@ -44,9 +43,7 @@ namespace BOReserva.Controllers
 
                 Restaurant.listaRestaurantes = lista;
                 return PartialView(Restaurant);
-            }
-
-            return PartialView();
+            
         }
 
         #endregion

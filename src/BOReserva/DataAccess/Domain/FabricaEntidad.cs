@@ -36,8 +36,8 @@ namespace BOReserva.DataAccess.Domain
             int capacidad = model._capacidadHabitacion;
             String paginaWeb = model._paginaWeb;
             String email = model._email;
-
-            return new Hotel(nombre, direccion, email, paginaWeb, clasificacion, capacidad, city);
+            int precio = model._precioHabitacion;
+            return new Hotel(nombre, direccion, email, paginaWeb, clasificacion, capacidad, city,precio);
         }
 
         public static Entidad InstanciarHotel(CModificarHotel model, Entidad c)
@@ -73,12 +73,24 @@ namespace BOReserva.DataAccess.Domain
             return new Ciudad(id,nombre,fkPais);
         }
 
+        public static Entidad InstanciarHabitacion(int precio, int fkHotel)
+        {
+            return new Habitacion( precio, fkHotel);
+        }
+
         #endregion 
+
+        #region M16_GestionReclamos
         public static Entidad InstanciarReclamo(String tituloReclamo, String detalleReclamo, String fechaReclamo, int estadoReclamo, int usuario)
         {
-            return new Reclamo();
+            return new Reclamo(tituloReclamo, detalleReclamo, fechaReclamo, estadoReclamo, usuario);
         }
-        public static Entidad InstanciarReclamo(CAgregarReclamo model, Entidad c)
+
+        public static Entidad InstanciarReclamo(int reclamo , String tituloReclamo, String detalleReclamo, String fechaReclamo, int estadoReclamo, int usuario)
+        {
+            return new Reclamo(reclamo, tituloReclamo, detalleReclamo, fechaReclamo, estadoReclamo, usuario);
+        }
+        public static Entidad InstanciarReclamo(CAgregarReclamo model)
         {
             String titulo = model._tituloReclamo;
             String detalle = model._detalleReclamo;
@@ -88,6 +100,18 @@ namespace BOReserva.DataAccess.Domain
 
             return new Reclamo(titulo, detalle, fecha, estado, usuario);
         }
+        public static List<Reclamo> InstanciarListaReclamo(Dictionary<int, Entidad> listaEntidad) 
+        {
+            List<Reclamo> lista = new List<Reclamo>();
+            foreach(var e in listaEntidad)
+            {
+                Reclamo nuevoReclamo = (Reclamo)e.Value;
+                lista.Add(nuevoReclamo);
+
+            }
+            return lista;
+        }
+#endregion
 
         #region M04_Vuelo
         /// <summary>
