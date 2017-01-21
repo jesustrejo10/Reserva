@@ -14,12 +14,22 @@ namespace BOReserva.DataAccess.Domain.M14
         public String _estatus { get; set; }        
         public int _fkCrucero { get; set; }
 
+        public string _nombreCrucero { get; set; }
+
         public Cabina(String nombre, float precio, String estatus, int crucero)
         {
             _nombreCabina = nombre;
             _precioCabina = precio;
             _estatus = estatus;
             _fkCrucero = crucero;
+        }
+
+        public Cabina(String nombre, float precio, String estatus, string nomcrucero)
+        {
+            _nombreCabina = nombre;
+            _precioCabina = precio;
+            _estatus = estatus;
+            _nombreCrucero = nomcrucero;
         }
     }
 }
