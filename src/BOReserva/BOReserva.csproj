@@ -359,6 +359,7 @@
     <Compile Include="Excepciones\ExceptionReserva.cs" />
     <Compile Include="Excepciones\Log.cs" />
     <Compile Include="Excepciones\LogException.cs" />
+    <Compile Include="Excepciones\M09\ReservaExceptionM09.cs" />
     <Compile Include="Excepciones\M10\ReservaExceptionM10.cs" />
     <Compile Include="Excepciones\RecursoLog.Designer.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />

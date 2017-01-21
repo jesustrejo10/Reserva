@@ -1,6 +1,7 @@
 ﻿using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
+using BOReserva.Excepciones.M09;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -229,8 +230,14 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
             catch (SqlException ex)
             {
-                Debug.WriteLine(ex.ToString());
-                return null;
+                /*ReservaExceptionM09 exception = new ReservaExceptionM09(ex.Message, ex);
+                Debug.WriteLine(ex.ToString());*/
+                throw new ReservaExceptionM09(ex.Message, ex);
+                //return null;
+            }
+            catch (ExceptionBD ex)
+            {
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
         }
 
