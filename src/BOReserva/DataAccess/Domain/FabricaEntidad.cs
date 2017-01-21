@@ -169,7 +169,7 @@ namespace BOReserva.DataAccess.Domain
         }
         public static Entidad InstanciarRolId(CRoles model)
         {
-            int idRol = model._idRol;
+            int idRol = model.Id_Rol;
 
             return new Rol(idRol);
         }

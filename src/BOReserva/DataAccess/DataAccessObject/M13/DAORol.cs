@@ -256,7 +256,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             {
                 conexion.Close();
                 conexion.Open();
-                String sql = "select md.mod_det_nombre, md.mod_det_id from Modulo_Detallado md, Rol r, Rol_Modulo_Detallado rmd " +
+                String sql = "select distinct md.mod_det_nombre, md.mod_det_id from Modulo_Detallado md, Rol r, Rol_Modulo_Detallado rmd " +
                     "where md.mod_det_id = rmd.fk_mod_det_id and r.rol_id = rmd.fk_rol_id";
 
                 SqlCommand cmd = new SqlCommand(sql, conexion);

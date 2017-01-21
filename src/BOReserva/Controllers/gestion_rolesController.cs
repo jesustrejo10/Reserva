@@ -178,7 +178,7 @@ namespace BOReserva.Controllers
                 //bool respuesta = sql.ModificarrRol(rol, nombrerolnuevo);
                 Entidad modificarRol = FabricaEntidad.InstanciarRolId(model);
                 //con la fabrica instancie al hotel.
-                Command<String> comando = FabricaComando.crearM13_ModificarRol(modificarRol, model._idRol);
+                Command<String> comando = FabricaComando.crearM13_ModificarRol(modificarRol, model.Id_Rol);
                 agrego_si_no = comando.ejecutar();
             }
             catch (SqlException e)

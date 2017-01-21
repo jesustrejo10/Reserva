@@ -12,12 +12,11 @@ namespace BOReserva.Models.gestion_roles
         private string _nombre_rol;
         private CListaGenerica<CModulo_general> _menu;
         private CListaGenerica<CModulo_detallado> _permisos;
-        private int idRol;
+        private int _idRol;
 
         public CRoles()
         {
             this._nombre_rol = "";
-            this._idRol = 0;
             this._menu = new CListaGenerica<CModulo_general>();
             this._permisos = new CListaGenerica<CModulo_detallado>();
         }
@@ -35,7 +34,7 @@ namespace BOReserva.Models.gestion_roles
             set { _nombre_rol = value; }
         }
 
-        public int _idRol
+        public int Id_Rol
         {
             get { return _idRol; }
             set { _idRol = value; }
