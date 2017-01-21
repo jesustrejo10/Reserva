@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using BOReserva.DataAccess.Domain.M14;
 
 
 
@@ -222,6 +221,11 @@ namespace BOReserva.DataAccess.Domain
             return new Boleto(idorigen, iddestino, pasaporte, monto, tipo, idvuelo, fecha);
         }
 
+        public static Entidad InstanciarDetalleBoleto(Entidad boleto)
+        {
+            return new BoletoDetalle((Boleto) boleto);
+        }
+
         public static Entidad InstanciarPasajero(int id, String nombre1, String nombre2, String apellido1, String apellido2, String sexo,
          string fecha, String correo)
         {
@@ -231,16 +235,18 @@ namespace BOReserva.DataAccess.Domain
         #endregion
 
         #region M08_Automoviles
-        public static Entidad InstanciarAutomovil(String matricula, String modelo, String fabricante, String anio, String tipovehiculo,
-                                                  String kilometraje, String cantpasajeros, String preciocompra, String precioalquiler,
-                                                  String penalidaddiaria, String fecharegistro, String color, String disponibilidad,
-                                                  String transmision, String pais, String ciudad, String fk_ciudad)
+
+        public static Entidad CrearAutomovil(String matricula, String modelo, String fabricante, String anio, String tipovehiculo,
+                                             String kilometraje, String cantpasajeros, String preciocompra, String precioalquiler,
+                                             String penalidaddiaria, String fecharegistro, String color, String disponibilidad,
+                                             String transmision, String pais, String ciudad, String fk_ciudad)
         {
             return new Automovil( matricula,  modelo, fabricante, anio, tipovehiculo,
                                   kilometraje, cantpasajeros, preciocompra, precioalquiler,
                                   penalidaddiaria, fecharegistro, color, disponibilidad,
                                   transmision, pais, ciudad, fk_ciudad);
         }
+
         #endregion
 
         #region Modulo 10
@@ -309,18 +315,18 @@ namespace BOReserva.DataAccess.Domain
         
         
         #region M14 Cruceros
-        public static Entidad InstanciarCrucero(CGestion_crucero crucero)
-        {
+        //public static Entidad InstanciarCrucero(CGestion_crucero crucero)
+        //{
 
-            return new Crucero(crucero._idCrucero, crucero._nombreCrucero, crucero._companiaCrucero, crucero._capacidadCrucero, crucero._estatus);
-        }    
+        //    return new Crucero(crucero._idCrucero, crucero._nombreCrucero, crucero._companiaCrucero, crucero._capacidadCrucero, crucero._estatus);
+        //}    
 
         //instancia cabina con nombre de crucero, no con FK
 
-        public static Entidad InstanciarCabinaN(CGestion_cabina cabina)
-        {
-            return new Cabina(cabina._idCabina,cabina._nombreCabina,cabina._precioCabina,cabina._estatus,cabina._fkCrucero);
-        }
+        //public static Entidad InstanciarCabinaN(CGestion_cabina cabina)
+        //{
+        //    return new Cabina(cabina._idCabina,cabina._nombreCabina,cabina._precioCabina,cabina._estatus,cabina._fkCrucero);
+        //}
         #endregion
 
             
