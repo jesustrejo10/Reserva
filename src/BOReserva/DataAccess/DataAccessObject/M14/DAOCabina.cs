@@ -22,13 +22,13 @@ namespace BOReserva.DataAccess.DataAccessObject.M14
             {
                 con.Open();
 
-                SqlCommand query = new SqlCommand("M24_AgregarCabina", con);
+                SqlCommand query = new SqlCommand("M24_AgregarCabinas", con);
 
                 query.CommandType = CommandType.StoredProcedure;
 
                 query.Parameters.AddWithValue("@nombrecabina", cabina._nombreCabina);
                 query.Parameters.AddWithValue("@precio", cabina._precioCabina);
-                query.Parameters.AddWithValue("@fk_id_crucero", cabina._fkCrucero);
+                query.Parameters.AddWithValue("@crucero", cabina._nombreCrucero);
                 
 
                 query.ExecuteNonQuery();
@@ -87,6 +87,5 @@ namespace BOReserva.DataAccess.DataAccessObject.M14
                 return null;
             }
         }
-
      }
     }

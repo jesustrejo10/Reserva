@@ -205,9 +205,10 @@ namespace BOReserva.DataAccess.Domain
             return new Crucero(crucero._idCrucero, crucero._nombreCrucero, crucero._companiaCrucero, crucero._capacidadCrucero, crucero._estatus);
         }    
 
-        public static Entidad InstanciarCabina(CGestion_cabina cabina)
-        {
+        //instancia cabina con nombre de crucero, no con FK
 
+        public static Entidad InstanciarCabinaN(CGestion_cabina cabina)
+        {
             return new Cabina(cabina._idCabina,cabina._nombreCabina,cabina._precioCabina,cabina._estatus,cabina._fkCrucero);
         }
         #endregion

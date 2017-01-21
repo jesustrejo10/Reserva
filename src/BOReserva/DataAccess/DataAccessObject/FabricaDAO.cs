@@ -168,6 +168,7 @@ namespace BOReserva.DataAccess.DataAccessObject
         {
             return new DAOCabina();
         }
+
         #endregion
     
 
