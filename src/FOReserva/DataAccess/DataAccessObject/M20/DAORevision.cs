@@ -1,19 +1,11 @@
-﻿using FOReserva.DataAccess.DataAccessObject.Common;
-using FOReserva.DataAccess.DataAccessObject.Common.Interface;
-using FOReserva.Models.Hoteles;
-using FOReserva.Models.Revision;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using FOReserva.Models.Restaurantes;
-using FOReserva.Models.Usuarios;
-using FOReserva.Models.ReservaHabitacion;
 using FOReserva.DataAccess.Model;
 using FOReserva.DataAccess.Domain;
-using FOReserva.DataAccess.DataAccessObject.M20;
 using System.Data;
-using static FOReserva.Models.Revision.CRevision;
+using FOReserva.DataAccess.DataAccessObject.Common.Interface;
 
 namespace FOReserva.DataAccess.DataAccessObject.M20
 {
@@ -31,16 +23,16 @@ namespace FOReserva.DataAccess.DataAccessObject.M20
         #endregion
 
         #region Implementacion DAORevision.        
-        public void GuardarRevision(Entidad revision)
+        public bool GuardarRevision(Entidad revision)
         {            
             List<Parametro> parametros = null;
-            CRevision iRevision = null;
+            Revision iRevision = null;
             try
             {
-                if (!(revision is CRevision))
-                    throw new DAOM20Exception("La entidad revision debe ser de tipo CRevision.");
+                if (!(revision is Revision))
+                    throw new DAOM20Exception("La entidad revision debe ser de tipo Revision.");
 
-                iRevision = (CRevision)revision;
+                iRevision = (Revision)revision;
 
                 parametros = FabricaDAO.asignarListaDeParametro();
                 parametros.Add(FabricaDAO.asignarParametro(RecursoDAOM20.parametroRevisionID, SqlDbType.Int, $"{iRevision._id}", false));
@@ -51,16 +43,17 @@ namespace FOReserva.DataAccess.DataAccessObject.M20
                 parametros.Add(FabricaDAO.asignarParametro(RecursoDAOM20.parametroReferencia, SqlDbType.Int, $"{iRevision.Referencia._id}", false));                
                 
                 EjecutarStoredProcedure(RecursoDAOM20.procedimientoGuardarRevision, parametros);
-                
+                return true;
             }
             catch (Exception)
             {
 
                 throw;
             }
+            return false;
         }
 
-        public void AplicarValoracion(Entidad revision)
+        public bool AplicarValoracion(Entidad revision)
         {
             throw new NotImplementedException();
         }

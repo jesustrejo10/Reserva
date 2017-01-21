@@ -1,4 +1,3 @@
-using FOReserva.DataAccess.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,17 +9,12 @@ namespace FOReserva.Models.Revision
     /// Clase Revision
     /// </summary>
     public class CRevision : BaseEntity
-    {        
+    {
         private int _puntuacion;
         private string _mensaje;
         private int _tipo;
         private DateTime _fecha;
         private CRevisionValoracion _valoracion;
-        
-        private Entidad _referencia;
-        private Entidad _usuario;
-        
-        public enum TipoRevision { Restaurante = 1, Hotel = 2 };
 
         /// <summary>
         /// Builder Revision
@@ -36,17 +30,17 @@ namespace FOReserva.Models.Revision
         public CRevision(int id, string name, DateTime fecha, string mensaje, int puntuacion, int tipo)
             : base(id, name)
         {
-             this._fecha = fecha;
-             this._mensaje = mensaje;
-             this._puntuacion = puntuacion;
-             this._tipo = tipo;
-             this._valoracion = new CRevisionValoracion(0,0);
+            this._fecha = fecha;
+            this._mensaje = mensaje;
+            this._puntuacion = puntuacion;
+            this._tipo = tipo;
+            this._valoracion = new CRevisionValoracion(0, 0);
         }
 
         /// <summary>
         /// Builder Revision Vacio
         /// </summary>
-        public CRevision() : base(){}
+        public CRevision() : base() { }
 
         public DateTime Fecha
         {
@@ -63,22 +57,10 @@ namespace FOReserva.Models.Revision
             get { return _puntuacion; }
             set { _puntuacion = value; }
         }
-
-        public Entidad Usuario
+        public int Tipo
         {
-            get { return _usuario; }
-            set { _usuario= value; }
+            get { return _tipo; }
+            set { _tipo = value; }
         }
-
-        public Entidad Referencia
-        {
-            get { return _referencia; }
-            set { _referencia = value; }
-        }
-
-        public TipoRevision Tipo {
-            get { return (TipoRevision)_tipo; }
-            set { _tipo = (int)value; }
-        }        
     }
 }

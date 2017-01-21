@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BOReserva.DataAccess.Domain;
+using BOReserva.Controllers.PatronComando;
 using BOReserva.Models.gestion_check_in;
 using BOReserva.Servicio.Servicio_Boletos;
 using System.Net;
@@ -31,8 +33,12 @@ namespace BOReserva.Controllers
             int pasaporte = model._pasaporte;
             //SE BUSCAN TODOS LOS BOLETOS QUE ESTAN EN LA BASE DE DATOS
             // DE ESE PASAJERO EN PARTICULAR PARA MOSTRARLOS EN LA VISTA
-            manejadorSQL_Check buscarboletos = new manejadorSQL_Check();
-            List<CBoleto> listaboletos = buscarboletos.M05ListarBoletosPasajero(pasaporte);
+
+            //manejadorSQL_Check buscarboletos = new manejadorSQL_Check();
+            //List<CBoleto> listaboletos = buscarboletos.M05ListarBoletosPasajero(pasaporte);
+
+            List<Entidad> listaboletos = (FabricaComando.ConsultarBoletos(pasaporte)).ejecutar();
+
             return PartialView("M05_VerBoletosCheckIn",listaboletos);
         }
 
@@ -43,8 +49,10 @@ namespace BOReserva.Controllers
             int pasaporte = model._pasaporte;
             //SE BUSCAN TODOS LOS BOLETOS QUE ESTAN EN LA BASE DE DATOS
             // DE ESE PASAJERO EN PARTICULAR PARA MOSTRARLOS EN LA VISTA
+
             manejadorSQL_Check buscarboletos = new manejadorSQL_Check();
             List<CBoardingPass> listaboletos = buscarboletos.M05ListarPasesPasajero(pasaporte);
+
             return PartialView("M05_VerPasesAbordaje", listaboletos);
         }
 

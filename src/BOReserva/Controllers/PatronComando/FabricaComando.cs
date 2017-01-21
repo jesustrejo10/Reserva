@@ -399,7 +399,10 @@ namespace BOReserva.Controllers.PatronComando
         {
             return new M05_COConsultarBoletos();
         }
-
+        public static Command<List<Entidad>> ConsultarBoletos(int id)
+        {
+            return new M05_COConsultarBoletos( id );
+        }
 
         #endregion
 
