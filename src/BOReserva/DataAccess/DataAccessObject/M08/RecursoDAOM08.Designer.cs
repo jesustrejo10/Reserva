@@ -98,11 +98,11 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @aut_disponibilida.
+        ///   Looks up a localized string similar to @aut_disponibilidad.
         /// </summary>
-        internal static string aut_disponibilida {
+        internal static string aut_disponibilidad {
             get {
-                return ResourceManager.GetString("aut_disponibilida", resourceCulture);
+                return ResourceManager.GetString("aut_disponibilidad", resourceCulture);
             }
         }
         
@@ -224,11 +224,11 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to aut_disponibilida.
+        ///   Looks up a localized string similar to aut_disponibilidad.
         /// </summary>
-        internal static string disponibilida {
+        internal static string disponibilidad {
             get {
-                return ResourceManager.GetString("disponibilida", resourceCulture);
+                return ResourceManager.GetString("disponibilidad", resourceCulture);
             }
         }
         

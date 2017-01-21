@@ -1,15 +1,15 @@
-﻿using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
-using BOReserva.Models.gestion_automoviles;
+﻿using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.M08;
 using BOReserva.DataAccess.Domain;
-using BOReserva.DataAccess.Model;
+using BOReserva.Models.gestion_restaurantes;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+using BOReserva.DataAccess.Model;
 using System.Data.SqlClient;
-using System.Diagnostics;
-using System.Linq;
-using System.Web;
+//using BOReserva.Excepciones.M08;
+using BOReserva.Excepciones;
 
 namespace BOReserva.DataAccess.DataAccessObject
 {
@@ -53,7 +53,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.penalidaddiaria,   SqlDbType.Decimal,  automovil.penalidaddiaria.ToString(),   false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.fecharegistro,     SqlDbType.Date,     automovil.fecharegistro.ToString(),     false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.color,             SqlDbType.VarChar,  automovil.color,                        false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.disponibilida,     SqlDbType.Int,      automovil.disponibilidad.ToString(),    false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.disponibilidad,     SqlDbType.Int,     automovil.disponibilidad.ToString(),    false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.transmision,       SqlDbType.VarChar,  automovil.transmision,                  false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.fk_ciudad,         SqlDbType.Int,      automovil.ciudad.ToString(),            false));
 
@@ -72,75 +72,95 @@ namespace BOReserva.DataAccess.DataAccessObject
         public Entidad Consultar(Entidad e)
         {
             //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
-            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
-            RecursoDAOM10.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+            //Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+            //RecursoDAOM08.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
 
             //Se castea de tipo Entidad a tipo Restaurant
-            CRestauranteModelo rest = (CRestauranteModelo)_restaurant;
-            List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
+            Automovil automovil = (Automovil)e;
+            List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
 
             //Atributos tabla Restaurant 
-            int idRestaurant;
-            String nombreRestaurant;
-            String descripcionRestaurant;
-            String direccionRestaurant;
-            String telefonoRestaurant;
-            String horaIni;
-            String horaFin;
-            String idLugar;
-            Entidad restaurant;
+            String matricula;
+            String modelo;
+            String fabricante;
+            String anio;
+            String kilometraje;
+            String cantpasajero; 
+            String tipovehiculo;
+            String preciocompra;
+            String precioalquiler;
+            String penalidaddiaria;
+            String fecharegistro;
+            String color;      
+            String disponibilidad;
+            String transmision;
+            String fk_ciudad;
+            Entidad auto;
 
             try
             {
                 //Aqui se asignan los valores que recibe el procedimieto para realizar el select, se repite tantas veces como atributos
                 //se requiera en el where, para este caso solo el ID del restaurante @rst_id (parametro que recibe el store procedure)
                 //se coloca true en Input 
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.rst_id, SqlDbType.Int, rest._id.ToString(), false));
+                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.matricula, SqlDbType.Int, automovil.matricula, false));
 
                 //Se devuelve la fila del restaurante consultado segun el Id, para este caso solo se devuelve una fila
-                DataTable filarestaurant = EjecutarStoredProcedureTuplas(RecursoDAOM10.procedimientoConsultarRestaurantId, listaParametro);
+                DataTable filaAuto = EjecutarStoredProcedureTuplas(RecursoDAOM08.procedimientoConsultarAutomovilMatricula, parametro);
 
                 //Se guarda la fila devuelta de la base de datos
-                DataRow Fila = filarestaurant.Rows[0];
+                DataRow Fila = filaAuto.Rows[0];
 
-                //Se preinicializan los atrubutos de la clase restaurant 
-                idRestaurant = int.Parse(Fila[RecursoDAOM10.restaurantId].ToString());
-                nombreRestaurant = Fila[RecursoDAOM10.restaurantNombre].ToString();
-                descripcionRestaurant = Fila[RecursoDAOM10.restaurantDescripcion].ToString();
-                direccionRestaurant = Fila[RecursoDAOM10.restaurantDireccion].ToString();
-                telefonoRestaurant = Fila[RecursoDAOM10.restaurantTelefono].ToString();
-                horaIni = Fila[RecursoDAOM10.restaurantHoraApertura].ToString();
-                horaFin = Fila[RecursoDAOM10.restaurantHoraCierra].ToString();
-                idLugar = Fila[RecursoDAOM10.LugarIdFk].ToString();
-                restaurant = FabricaEntidad.crearRestaurant(idRestaurant, nombreRestaurant, direccionRestaurant, telefonoRestaurant, descripcionRestaurant, horaIni, horaFin, int.Parse(idLugar));
+                //Se preinicializan los atrubutos de la clase restaurant
+                matricula = Fila[RecursoDAOM08.matricula].ToString();
+                modelo = Fila[RecursoDAOM08.modelo].ToString();
+                fabricante = Fila[RecursoDAOM08.fabricante].ToString();
+                anio = Fila[RecursoDAOM08.anio].ToString();
+                kilometraje = Fila[RecursoDAOM08.kilometraje].ToString();
+                cantpasajero = Fila[RecursoDAOM08.cantpasajero].ToString();
+                tipovehiculo = Fila[RecursoDAOM08.tipovehiculo].ToString();
+                preciocompra = Fila[RecursoDAOM08.preciocompra].ToString();
+                precioalquiler = Fila[RecursoDAOM08.precioalquiler].ToString();
+                penalidaddiaria = Fila[RecursoDAOM08.penalidaddiaria].ToString();
+                fecharegistro = Fila[RecursoDAOM08.fecharegistro].ToString();
+                color = Fila[RecursoDAOM08.color].ToString();
+                disponibilidad = Fila[RecursoDAOM08.disponibilidad].ToString();
+                transmision = Fila[RecursoDAOM08.transmision].ToString();
+                fk_ciudad = Fila[RecursoDAOM08.fk_ciudad].ToString();
 
+                auto = FabricaEntidad.InstanciarAutomovil(matricula, modelo, fabricante, anio, kilometraje, cantpasajero, tipovehiculo, preciocompra, precioalquiler, penalidaddiaria, fecharegistro, color, disponibilidad, transmision, "", "", fk_ciudad);
+                
                 //se retorna la entidad de restaurant a mostrar en la vista
-                return restaurant;
+                return auto;
             }
-            catch (ArgumentNullException ex)
+            /*catch (ArgumentNullException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM10("Reserva-404", "Argumento con valor invalido", ex);
+                throw new RecursoDAOM08("Reserva-404", "Argumento con valor invalido", ex);
             }
             catch (FormatException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
+                throw new RecursoDAOM08("Reserva-404", "Datos con un formato invalido", ex);
             }
             catch (SqlException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+                throw new RecursoDAOM08("Reserva-404", "Error Conexion Base de Datos", ex);
             }
             catch (ExceptionBD ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+                throw new RecursoDAOM08("Reserva-404", "Error Conexion Base de Datos", ex);
             }
             catch (Exception ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM10("Reserva-404", "Error al realizar operacion ", ex);
+                throw new RecursoDAOM08("Reserva-404", "Error al realizar operacion ", ex);
+            }*/
+            catch (Exception ex)
+            {
+                throw;
             }
         }
 
@@ -148,46 +168,53 @@ namespace BOReserva.DataAccess.DataAccessObject
         public List<Entidad> ConsultarTodos()
         {
             //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
-            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
-            RecursoDAOM10.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            //Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+            //RecursoDAOM10.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
 
             List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
-            List<Entidad> listaDeRestaurant = FabricaEntidad.asignarListaDeEntidades();
+            List<Entidad> listaDeAutomoviles = FabricaEntidad.asignarListaDeEntidades();
             DataTable tablaDeDatos;
-            Entidad restaurant;
-            Lugar lugar = (Lugar)_lugar; //Se castea a tipo Lugar para poder utilizar sus metodos 
+            Entidad automovil;
 
             //Atributos tabla Restaurant 
-            int idRestaurant;
-            String nombreRestaurant;
-            String descripcionRestaurant;
-            String direccionRestaurant;
-            String telefonoRestaurant;
-            String horaIni;
-            String horaFin;
-            String nombreLugar;
+            String matricula;
+            String modelo;
+            String fabricante;
+            String anio;
+            String kilometraje;
+            String cantpasajero;
+            String tipovehiculo;
+            String preciocompra;
+            String precioalquiler;
+            String penalidaddiaria;
+            String fecharegistro;
+            String color;
+            String disponibilidad;
+            String transmision;
+            String fk_ciudad;
+            Entidad auto;
 
             try
             {
                 //Aqui se asignan los valores que recibe el procedimieto para realizar el select, se repite tantas veces como atributos
                 //se requiera en el where, para este caso solo el ID de Lugar @lug_id (parametro que recibe el store procedure)
-                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM10.lug_id, SqlDbType.Int, lugar._id.ToString(), false));
+                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.lug_id, SqlDbType.Int, lugar._id.ToString(), false));
 
                 //el metodo Ejecutar Store procedure recibe la lista de parametros como el query, este ultimo es el nombre del procedimietno en la BD
                 //e.g. dbo.M10_ConsultarRestarurante
-                tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM10.procedimientoConsultar, parametro);
+                tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM08.procedimientoConsultarAutomovil, "");
 
                 foreach (DataRow filarestaurant in tablaDeDatos.Rows)
                 {
                     //Se preinicializan los atributos que componen la entidad restaurant
-                    idRestaurant = int.Parse(filarestaurant[RecursoDAOM10.restaurantId].ToString());
-                    nombreRestaurant = filarestaurant[RecursoDAOM10.restaurantNombre].ToString();
-                    descripcionRestaurant = filarestaurant[RecursoDAOM10.restaurantDescripcion].ToString();
-                    direccionRestaurant = filarestaurant[RecursoDAOM10.restaurantDireccion].ToString();
-                    telefonoRestaurant = filarestaurant[RecursoDAOM10.restaurantTelefono].ToString();
-                    horaIni = filarestaurant[RecursoDAOM10.restaurantHoraApertura].ToString();
-                    horaFin = filarestaurant[RecursoDAOM10.restaurantHoraCierra].ToString();
-                    nombreLugar = filarestaurant[RecursoDAOM10.LugarNombre].ToString();
+                    idRestaurant = int.Parse(filarestaurant[RecursoDAOM08.restaurantId].ToString());
+                    nombreRestaurant = filarestaurant[RecursoDAOM08.restaurantNombre].ToString();
+                    descripcionRestaurant = filarestaurant[RecursoDAOM08.restaurantDescripcion].ToString();
+                    direccionRestaurant = filarestaurant[RecursoDAOM08.restaurantDireccion].ToString();
+                    telefonoRestaurant = filarestaurant[RecursoDAOM08.restaurantTelefono].ToString();
+                    horaIni = filarestaurant[RecursoDAOM08.restaurantHoraApertura].ToString();
+                    horaFin = filarestaurant[RecursoDAOM08.restaurantHoraCierra].ToString();
+                    nombreLugar = filarestaurant[RecursoDAOM08.LugarNombre].ToString();
                     //se crea el objeto restaurant
                     restaurant = FabricaEntidad.crearRestaurant(idRestaurant, nombreRestaurant, direccionRestaurant, telefonoRestaurant, descripcionRestaurant, horaIni, horaFin, 0);
                     //se agregan los restaurantes a la lista
