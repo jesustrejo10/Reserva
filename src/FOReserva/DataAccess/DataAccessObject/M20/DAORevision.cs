@@ -35,12 +35,12 @@ namespace FOReserva.DataAccess.DataAccessObject.M20
                 iRevision = (Revision)revision;
 
                 parametros = FabricaDAO.asignarListaDeParametro();
-                parametros.Add(FabricaDAO.asignarParametro(RecursoDAOM20.parametroRevisionID, SqlDbType.Int, $"{iRevision._id}", false));
+                parametros.Add(FabricaDAO.asignarParametro(RecursoDAOM20.parametroRevisionID, SqlDbType.Int, iRevision._id.ToString(), false));
                 parametros.Add(FabricaDAO.asignarParametro(RecursoDAOM20.parametroRevisionMensaje, SqlDbType.VarChar, iRevision.Mensaje.ToString(), false));
-                parametros.Add(FabricaDAO.asignarParametro(RecursoDAOM20.parametroRevisionTipo, SqlDbType.Int, $"{(int)iRevision.Tipo}", false));
-                parametros.Add(FabricaDAO.asignarParametro(RecursoDAOM20.parametroRevisionPuntuacion, SqlDbType.Int, $"{iRevision.Puntuacion}", false));
-                parametros.Add(FabricaDAO.asignarParametro(RecursoDAOM20.parametroRevisionIDUsuario, SqlDbType.Int, $"{iRevision.Usuario._id}", false));
-                parametros.Add(FabricaDAO.asignarParametro(RecursoDAOM20.parametroReferencia, SqlDbType.Int, $"{iRevision.Referencia._id}", false));                
+                parametros.Add(FabricaDAO.asignarParametro(RecursoDAOM20.parametroRevisionTipo, SqlDbType.Int, ((int)iRevision.Tipo).ToString(), false));
+                parametros.Add(FabricaDAO.asignarParametro(RecursoDAOM20.parametroRevisionPuntuacion, SqlDbType.Int, iRevision.Puntuacion.ToString(), false));
+                parametros.Add(FabricaDAO.asignarParametro(RecursoDAOM20.parametroRevisionIDUsuario, SqlDbType.Int, iRevision.Usuario._id.ToString(), false));
+                parametros.Add(FabricaDAO.asignarParametro(RecursoDAOM20.parametroReferencia, SqlDbType.Int, iRevision.Referencia._id.ToString(), false));                
                 
                 EjecutarStoredProcedure(RecursoDAOM20.procedimientoGuardarRevision, parametros);
                 return true;
