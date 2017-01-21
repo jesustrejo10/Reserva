@@ -11,6 +11,9 @@ using System.Web;
 
 namespace BOReserva.DataAccess.DataAccessObject
 {
+    /// <summary>
+    /// Clase abstracta que maneja la conexion a la BD
+    /// </summary>
     abstract public class DAO : IDAO
     {
         protected String _connexionString = ConfigurationManager.ConnectionStrings["StringRemoto"].ConnectionString;

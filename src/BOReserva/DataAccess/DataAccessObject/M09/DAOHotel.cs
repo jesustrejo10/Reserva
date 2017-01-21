@@ -11,11 +11,20 @@ using System.Web;
 
 namespace BOReserva.DataAccess.DataAccessObject.M09
 {
+    /// <summary>
+    /// Clase para el manejo de los hoteles en la BD
+    /// </summary>
     public class DAOHotel:  DAO, IDAOHotel {
-
+        /// <summary>
+        /// Constructor del metodo
+        /// </summary>
         public DAOHotel() {}
 
-
+        /// <summary>
+        /// Metodo implementado de IDAO para agregar hoteles a la BD
+        /// </summary>
+        /// <param name="e">Hotel a agregar</param>
+        /// <returns>Retorna un valor entero</returns>
         int IDAO.Agregar(Entidad e)
         {
             List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
@@ -62,6 +71,11 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
         }
 
+        /// <summary>
+        /// Metodo implementado de IDAO para modificar hoteles de la BD
+        /// </summary>
+        /// <param name="e">Hotel a modificar</param>
+        /// <returns>Retorna el hotel</returns>
         Entidad IDAO.Modificar(Entidad e)
         {
             Hotel hotel = (Hotel)e;
@@ -90,6 +104,11 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
         }
 
+        /// <summary>
+        /// Metodo implementado de IDAO para consultar un hotel de la BD
+        /// </summary>
+        /// <param name="id">Id del hotel a buscar</param>
+        /// <returns>Retorna el hotel</returns>
         Entidad IDAO.Consultar(int id)
         {
             DataTable tablaDeDatos;
@@ -156,6 +175,10 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
         }
 
+        /// <summary>
+        /// Metodo implementado de IDAO para consultar los hoteles de la BD
+        /// </summary>
+        /// <returns>Retorna el listado de hoteles</returns>
         Dictionary<int, Entidad> IDAO.ConsultarTodos()
         {
             Dictionary<int, Entidad> listaHoteles = new Dictionary<int, Entidad>();
@@ -211,6 +234,11 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
         }
 
+        /// <summary>
+        /// Metodo implementado de IDAO para eliminar hoteles de la BD
+        /// </summary>
+        /// <param name="id">Id del hotel a eliminar</param>
+        /// <returns>Retorna un string</returns>
         string IDAOHotel.eliminarHotel(int id)
         {
             List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
@@ -228,6 +256,12 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
         }
 
+        /// <summary>
+        /// Metodo implementado de IDAO para cambiar la disponibilidad de los hoteles de la BD
+        /// </summary>
+        /// <param name="e">Hotel a modificar</param>
+        /// <param name="disponibilidad">Estatus nuevo</param>
+        /// <returns></returns>
         string IDAOHotel.disponibilidadHotel(Entidad e, int disponibilidad)
         {
             Hotel hotel = (Hotel)e;

@@ -10,14 +10,14 @@ using System.Web;
 namespace BOReserva.Controllers.PatronComando
 {
     /// <summary>
-    /// 
+    /// Clase para el comando de obtencion de paises
     /// </summary>
     public class M09_COObtenerPaises : Command<Dictionary<int,Entidad>> , IM09_COObtenerPaises
     {
         /// <summary>
-        /// 
+        /// Metodo implementado proveniente de la clase abstracta Command
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Dictionary<int,Entidad></returns>
         public override Dictionary<int,Entidad> ejecutar()
         {
             IDAO daoPais = FabricaDAO.instanciarDaoPais();
@@ -39,7 +39,10 @@ namespace BOReserva.Controllers.PatronComando
         }
 
 
-
+        /// <summary>
+        /// Metodo implementado proveniente de la interfaz IM09_COObtenerPaises
+        /// </summary>
+        /// <returns>Dictionary<int,Entidad></returns>
         Dictionary<int, Entidad> IM09_COObtenerPaises.obtenerCiudadesPorPais(Dictionary<int, Entidad> ciudades, int fkPais)
         {
             Dictionary<int, Entidad> ciudadesPorPais = new Dictionary<int, Entidad>();
@@ -56,6 +59,10 @@ namespace BOReserva.Controllers.PatronComando
             return ciudadesPorPais;
         }
 
+        /// <summary>
+        /// Metodo para obtener las ciudades por pais
+        /// </summary>
+        /// <returns>Dictionary<int,Entidad></returns>
         private Dictionary<int, Entidad> obtenerCiudadesPorPais(Dictionary<int, Entidad> ciudades, int fkPais)
         {
             Dictionary<int, Entidad> ciudadesPorPais = new Dictionary<int, Entidad>();
@@ -72,7 +79,11 @@ namespace BOReserva.Controllers.PatronComando
             return ciudadesPorPais;
         }
 
-
+        /// <summary>
+        /// Metodo ipara obtener el identificador de una ciudad
+        /// </summary>
+        /// <param name="ciudad">Ciudad a buscar</param>
+        /// <returns>Retorna un valor entero</returns>
         public int obtenerIdentificadorCiudad(String ciudad)
         {
             int id;

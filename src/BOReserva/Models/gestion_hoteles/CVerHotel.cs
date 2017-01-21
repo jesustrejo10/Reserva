@@ -7,6 +7,9 @@ using System.Web;
 
 namespace BOReserva.Models.gestion_hoteles
 {
+    /// <summary>
+    /// Clase del modelo de la vista parcial M09_DetalleHotel
+    /// </summary>
     public class CVerHotel
     {
         [Required]

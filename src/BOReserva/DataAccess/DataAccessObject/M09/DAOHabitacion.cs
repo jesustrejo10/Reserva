@@ -14,31 +14,61 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
     public class DAOHabitacion : DAO, IDAOHabitacion
     {
 
+        /// <summary>
+        /// Metodo proveniente de IDAO (No aplica)
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns>Retorna NotImplementedException()</returns>
         int IDAO.Agregar(Entidad e)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Metodo proveniente de IDAO (No aplica)
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns>Retorna NotImplementedException()</returns>
         Entidad IDAO.Modificar(Entidad e)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Metodo proveniente de IDAO (No aplica)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Retorna NotImplementedException()</returns>
         Entidad IDAO.Consultar(int id)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Metodo proveniente de IDAO (No aplica)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Retorna NotImplementedException()</returns>
         int IDAO.Eliminar(int id)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Metodo proveniente de IDAO (No aplica)
+        /// </summary>
+        /// <returns>Retorna NotImplementedException()</returns>
         Dictionary<int, Entidad> IDAO.ConsultarTodos()
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Implementacion del metodo proveniente de IDAOHabitacion para agregar habitaciones a la BD
+        /// </summary>
+        /// <param name="hotel">Hotel al cual se le agregaran habitaciones</param>
+        /// <param name="precio">Precio por habitacion</param>
+        /// <returns>Retorna un string</returns>
         string IDAOHabitacion.Agregarhab(Hotel hotel, int precio)
         {
             SqlConnection conexion = Connection.getInstance(_connexionString);

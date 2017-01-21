@@ -14,6 +14,9 @@ using System.Web;
 namespace BOReserva.DataAccess.DataAccessObject
 
 {
+    /// <summary>
+    /// Clase que fabrica los distintos DAO
+    /// </summary>
     public class FabricaDAO
     {
         #region M01_Login
@@ -25,20 +28,35 @@ namespace BOReserva.DataAccess.DataAccessObject
 
         #region M09_Gestion_Hoteles_Por_Ciudad
 
+        /// <summary>
+        /// Metodo que instacia DAOHotel
+        /// </summary>
+        /// <returns>Retorna DAOHotel</returns>
         public static DAO instanciarDaoHotel() {
             return new DAOHotel();
         }
 
-
+        /// <summary>
+        /// Metodo que instacia DAOPais
+        /// </summary>
+        /// <returns>Retorna DAOPais</returns>
         public static DAO instanciarDaoPais() {
             return new DAOPais();
         }
 
+        /// <summary>
+        /// Metodo que instacia DAOCiudad
+        /// </summary>
+        /// <returns>Retorna DAOCiudad</returns>
         public static DAO instanciarDaoCiudad()
         {
             return new DAOCiudad();
         }
 
+        /// <summary>
+        /// Metodo que instacia DAOHabitacion
+        /// </summary>
+        /// <returns>Retorna DAOHabitacion</returns>
         public static DAO instanciarDaoHabitacion()
         {
             return new DAOHabitacion();

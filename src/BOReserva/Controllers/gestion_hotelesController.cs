@@ -82,9 +82,9 @@ namespace BOReserva.Controllers
         }
 
         /// <summary>
-        /// Método de la vista parcial M09_VisualizarHoteles
+        /// Método de la vista parcial M09_DetalleHotel
         /// </summary>
-        /// <returns>Retorna la vista parcial M09_VisualizarHoteles en conjunto del Modelo de dicha vista</returns>
+        /// <returns>Retorna la vista parcial M09_DetalleHotel en conjunto del Modelo de dicha vista</returns>
         public ActionResult M09_DetalleHotel(int id)
         {
             Command<Entidad> comando = FabricaComando.crearM09ConsultarHotel(id);
@@ -170,7 +170,7 @@ namespace BOReserva.Controllers
         /// <summary>
         /// Método que se utiliza para cambiar la disponibilidad de un hotel existente
         /// </summary>
-        /// <param name="id">Identificador del hotel a eliminar</param>
+        /// <param name="id">Identificador del hotel a cambiar</param>
         /// <returns>Retorna un JsonResult</returns>
         public JsonResult activateHotel(int id)
         {
@@ -187,7 +187,7 @@ namespace BOReserva.Controllers
         /// <summary>
         /// Método que se utiliza para cambiar la disponibilidad de un hotel existente
         /// </summary>
-        /// <param name="id">Identificador del hotel a eliminar</param>
+        /// <param name="id">Identificador del hotel a cambiar</param>
         /// <returns>Retorna un JsonResult</returns>
         public JsonResult deactivateHotel(int id)
         {
