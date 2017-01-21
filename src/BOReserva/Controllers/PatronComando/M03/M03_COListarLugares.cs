@@ -8,7 +8,7 @@ using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.Domain.M03;
 using BOReserva.DataAccess.DataAccessObject.M03;
 
-namespace BOReserva.Controllers.PatronComando.M04
+namespace BOReserva.Controllers.PatronComando.M03
 {/// <summary>
  /// Comando Listar Lugares
  /// </summary>

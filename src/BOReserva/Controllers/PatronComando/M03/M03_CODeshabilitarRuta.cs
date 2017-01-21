@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.Controllers.PatronComando.M09
+namespace BOReserva.Controllers.PatronComando.M03
 {
     /// <summary>
     /// Comando Deshabilitar Rutas

@@ -7,7 +7,7 @@ using BOReserva.DataAccess.DAO;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.DataAccessObject;
 
-namespace BOReserva.Controllers.PatronComando.M04
+namespace BOReserva.Controllers.PatronComando.M03
 {
     /// <summary>
     /// Comando destinado a Realizar las respectivas operaciones necesarias

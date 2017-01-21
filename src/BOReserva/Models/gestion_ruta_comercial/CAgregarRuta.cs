@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web;
+using BOReserva.DataAccess.Domain;
+
 namespace BOReserva.Models.gestion_ruta_comercial
 {
     public class CAgregarRuta
@@ -14,7 +16,7 @@ namespace BOReserva.Models.gestion_ruta_comercial
 
         public String _destinoRuta { get; set; }
 
-        public IEnumerable<SelectListItem> _lorigenRuta { get; set; }
+        public Dictionary<int, Entidad> _lorigenRuta { get; set; }
 
         public IEnumerable<SelectListItem> _ldestinoRuta { get; set; }
 

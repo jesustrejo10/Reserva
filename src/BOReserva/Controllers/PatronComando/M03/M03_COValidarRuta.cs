@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.Controllers.PatronComando.M09
+namespace BOReserva.Controllers.PatronComando.M03
 {
     /// <summary>
     /// Comando Validar Rutas
@@ -18,7 +18,8 @@ namespace BOReserva.Controllers.PatronComando.M09
         Ruta _ruta;
         int _idmodificar;
 
-        public M03_COValidarRuta(int id) { 
+        public M03_COValidarRuta(Entidad ruta,int id) {
+            this._ruta = (Ruta) ruta;
             this._ruta._id = id;
         }
 

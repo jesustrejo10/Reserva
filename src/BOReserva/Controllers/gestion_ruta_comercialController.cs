@@ -7,6 +7,8 @@ using BOReserva.Models.gestion_ruta_comercial;
 using BOReserva.Servicio.Servicio_Rutas;
 using System.Net;
 using System.Data.SqlClient;
+using BOReserva.Controllers.PatronComando;
+using BOReserva.DataAccess.Domain;
 
 namespace BOReserva.Controllers
 {
@@ -16,21 +18,24 @@ namespace BOReserva.Controllers
         // GET: gestion_ruta_comercial/AgregarRutasComerciales
         public ActionResult AgregarRutasComerciales()
         {
-            List<String> lista = new List<string>();
+            //List<String> lista = new List<string>();
             
             CAgregarRuta ruta = new CAgregarRuta();
-            
-            CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();
+
+            //CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();
 
             try
             {
-                lista = sql.listarLugares();
+                //lista = sql.listarLugares();
 
-                ruta._lorigenRuta = lista.Select(x => new SelectListItem
-                {
-                    Value = x,
-                    Text = x
-                });
+                //ruta._lorigenRuta = lista.Select(x => new SelectListItem
+                //{
+                //    Value = x,
+                //    Text = x
+                //});
+
+                Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM03_ListarLugares();
+                ruta._lorigenRuta = comando.ejecutar();
                 return PartialView(ruta);
             }
             catch (SqlException e)
@@ -104,11 +109,11 @@ namespace BOReserva.Controllers
 
                 lista = sql.listarLugares();
 
-                Route._lorigenRuta = lista.Select(x => new SelectListItem
-                {
-                    Value = x,
-                    Text = x
-                });
+                //Route._lorigenRuta = lista.Select(x => new SelectListItem
+                //{
+                //    Value = x,
+                //    Text = x
+                //});
                 return PartialView(Route);
             }
             catch (SqlException e)
