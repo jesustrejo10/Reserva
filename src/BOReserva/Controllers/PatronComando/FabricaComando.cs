@@ -9,7 +9,6 @@ using System.Web;
 using System.Linq;
 using BOReserva.Controllers.PatronComando.M10;
 using BOReserva.Controllers.PatronComando.M16;
-using BOReserva.DataAccess.Domain.M14;
 
 namespace BOReserva.Controllers.PatronComando
 {
@@ -189,7 +188,8 @@ namespace BOReserva.Controllers.PatronComando
         public static Command<String> crearM14AgregarCrucero(Entidad e)
         {
 
-            return new M14_COAgregarCrucero((Crucero)e);
+            //return new M14_COAgregarCrucero((Crucero)e);
+            return new M14_COAgregarCrucero(e);
 
         }
 
@@ -202,8 +202,8 @@ namespace BOReserva.Controllers.PatronComando
         public static Command<String> crearM14AgregarCabina(Entidad e)
         {
 
-            return new M14_COAgregarCabina((Cabina) e);
-
+            //return new M14_COAgregarCabina((Cabina) e);
+            return new M14_COAgregarCabina(e);
         }
 
         /// <summary>

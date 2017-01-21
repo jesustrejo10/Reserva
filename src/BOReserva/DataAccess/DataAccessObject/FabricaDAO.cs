@@ -10,7 +10,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
-using BOReserva.DataAccess.DataAccessObject.M14;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 
 namespace BOReserva.DataAccess.DataAccessObject
@@ -168,15 +167,16 @@ namespace BOReserva.DataAccess.DataAccessObject
         #endregion
         
         #region M14_Cruceros
-        public static DAO instanciarDaoCrucero()
-        {
-            return new DAOCruceros();
-        }
+        //public static DAO instanciarDaoCrucero()
+        //{
+        //    //return new DAOCruceros();
+        //    return new DAOCrucero();
+        //}
 
-        public static DAOCabina instanciarDaoCabina()
-        {
-            return new DAOCabina();
-        }
+        //public static DAOCabina instanciarDaoCabina()
+        //{
+        //    return new DAOCabina();
+        //}
 
         #endregion
     

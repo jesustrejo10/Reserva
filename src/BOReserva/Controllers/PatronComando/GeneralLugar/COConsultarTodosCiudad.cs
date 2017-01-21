@@ -25,6 +25,8 @@ namespace BOReserva.Controllers.PatronComando.GeneralLugar
             this._objeto = _objeto;
         }
 
+        #endregion
+
         #region Ejecucion
 
         public override Dictionary<int, Entidad> ejecutar()
