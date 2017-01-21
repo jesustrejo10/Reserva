@@ -1,3 +1,4 @@
+using FOReserva.DataAccess.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,11 @@ namespace FOReserva.Models.Revision
         private int _tipo;
         private DateTime _fecha;
         private CRevisionValoracion _valoracion;
+        
+        private Entidad _referencia;
+        private Entidad _usuario;
+        
+        public enum TipoRevision { Restaurante = 1, Hotel = 2 };
 
         /// <summary>
         /// Builder Revision
@@ -57,10 +63,22 @@ namespace FOReserva.Models.Revision
             get { return _puntuacion; }
             set { _puntuacion = value; }
         }
-        public int Tipo
+
+        public Entidad Usuario
         {
-            get { return _tipo; }
-            set { _tipo = value; }
+            get { return _usuario; }
+            set { _usuario= value; }
         }
+
+        public Entidad Referencia
+        {
+            get { return _referencia; }
+            set { _referencia = value; }
+        }
+
+        public TipoRevision Tipo {
+            get { return (TipoRevision)_tipo; }
+            set { _tipo = (int)value; }
+        }        
     }
 }

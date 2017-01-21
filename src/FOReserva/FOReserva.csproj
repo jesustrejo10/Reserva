@@ -237,25 +237,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RecursoDAOM19.resx</DependentUpon>
     </Compile>
-    <Compile Include="DataAccess\DataAccessObject\Command\MSSQL\DAOMSSQLCommandCloseConnection.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Command\MSSQL\DAOMSSQLCommand.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Command\MSSQL\DAOMSSQLCommandExecuteStoreProcedureWithResult.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Command\MSSQL\DAOMSSQLCommandExecuteStoreProcedure.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Command\MSSQL\DAOMSSQLCommandExecuteNoQuery.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Command\MSSQL\DAOMSSQLCommandExecuteQuery.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Command\MSSQL\DAOMSSQLCommandOpenConnection.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Command\IDAOCommand.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Common\DAO.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Common\DAOMSSQL.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Common\DAOException.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Common\DAOResult.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Common\DAOUtils.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Common\FabricDAO.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Common\Interface\IDAO.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Common\Interface\IDAOReclamo.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Common\Interface\IDAORevision.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAO.cs" />
-    <Compile Include="DataAccess\DataAccessObject\DAORevision.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M20\DAOM20Exception.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M20\DAORevision.cs" />
+	<Compile Include="DataAccess\DataAccessObject\M20\RecursoDAOM20.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RecursoDAOM20.resx</DependentUpon>
+    </Compile>
     <Compile Include="DataAccess\DataAccessObject\FabricaDAO.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAO.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReclamo.cs" />
@@ -3261,7 +3250,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\PatronComando\M22\" />
+	<Folder Include="DataAccess\DataAccessObject\M16\" />    
+	<Folder Include="Controllers\PatronComando\M22\" />	
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -3286,6 +3276,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+	<EmbeddedResource Include="DataAccess\DataAccessObject\M20\RecursoDAOM20.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecursoDAOM20.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="DataAccess\DataAccessObject\M22\RecursoDAOM22.resx" />
     <EmbeddedResource Include="DataAccess\Model\RecursoBD.resx">
       <Generator>ResXFileCodeGenerator</Generator>

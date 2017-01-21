@@ -4,6 +4,7 @@ using System.Linq;
 using FOReserva.Models.Revision;
 using System.Data.SqlClient;
 using FOReserva.Models.Restaurantes;
+using static FOReserva.Models.Revision.CRevision;
 //using FOReserva.Models.Revision.CRevision;
 
 namespace FOReserva.Servicio
@@ -32,7 +33,7 @@ namespace FOReserva.Servicio
                     CRevision rev = new CRevision();
                     rev.Id = id;
                     rev.Name = nombre;
-                    rev.Tipo = int.Parse(tipo);
+                    rev.Tipo = (TipoRevision)int.Parse(tipo);
                     lista_rev.Add(rev);
                 }
             }
@@ -55,7 +56,7 @@ namespace FOReserva.Servicio
                     CRevision rev = new CRevision();
                     rev.Id = id;
                     rev.Name = nombre;
-                    rev.Tipo = int.Parse(tipo);
+                    rev.Tipo = (TipoRevision)int.Parse(tipo);
                     lista_rev.Add(rev);
                 }
             }
@@ -78,7 +79,7 @@ namespace FOReserva.Servicio
                     CRevision rev = new CRevision();
                     rev.Id = id;
                     rev.Name = nombre;
-                    rev.Tipo = int.Parse(tipo);
+                    rev.Tipo = (TipoRevision)int.Parse(tipo);
                     lista_rev.Add(rev);
                 }
             }
@@ -101,7 +102,7 @@ namespace FOReserva.Servicio
                     CRevision rev = new CRevision();
                     rev.Id = id;
                     rev.Name = nombre;
-                    rev.Tipo = int.Parse(tipo);
+                    rev.Tipo = (TipoRevision)int.Parse(tipo);
                     lista_rev.Add(rev);
                 }
             }
