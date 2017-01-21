@@ -62,7 +62,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
         }
 
-        int IDAO.Eliminar(int id) {
+        public int Eliminar(int id) {
             try
             {
                 SqlConnection conexion = Connection.getInstance(_connexionString);
