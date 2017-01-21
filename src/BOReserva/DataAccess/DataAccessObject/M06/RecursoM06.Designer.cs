@@ -97,13 +97,23 @@ namespace BOReserva.DataAccess.DataAccessObject.M06 {
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to @com_id.
+        ///   Looks up a localized string similar to com_vue_id.
         /// </summary>
         internal static string com_vue_id
         {
             get
             {
                 return ResourceManager.GetString("com_vue_id", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Looks up a localized string similar to @com_vue_id.
+        /// </summary>
+        internal static string com_vue_id_insertar
+        {
+            get
+            {
+                return ResourceManager.GetString("@com_vue_id", resourceCulture);
             }
         }
 
@@ -119,13 +129,24 @@ namespace BOReserva.DataAccess.DataAccessObject.M06 {
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to @com_vue_cantidad.
+        ///   Looks up a localized string similar to com_vue_cantidad.
         /// </summary>
         internal static string com_vue_cantidad
         {
             get
             {
                 return ResourceManager.GetString("com_vue_cantidad", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to @com_vue_cantidad.
+        /// </summary>
+        internal static string com_vue_cantidad_insertar
+        {
+            get
+            {
+                return ResourceManager.GetString("@com_vue_cantidad", resourceCulture);
             }
         }
 
@@ -176,6 +197,17 @@ namespace BOReserva.DataAccess.DataAccessObject.M06 {
         internal static string procedimientoAgregarComida {
             get {
                 return ResourceManager.GetString("procedimientoAgregarComida", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to M06_AgregarComidaVuelo.
+        /// </summary>
+        internal static string procedimientoAgregarComidaVuelo
+        {
+            get
+            {
+                return ResourceManager.GetString("procedimientoAgregarComidaVuelo", resourceCulture);
             }
         }
 

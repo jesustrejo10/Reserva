@@ -34,6 +34,30 @@ namespace BOReserva.DataAccess.DataAccessObject
             return true;
         }
 
+
+        //AGREGA UNA COMIDA A UN VUELO
+        public bool agregarComidaVuelo(Entidad entidad)
+        {
+            ComidaVuelo comida = (ComidaVuelo)entidad;
+            List<Parametro> lista = FabricaDAO.asignarListaDeParametro();
+
+            try
+            {
+                lista.Add(FabricaDAO.asignarParametro("@com_vue_id", SqlDbType.Int, comida._id.ToString(), false));
+                lista.Add(FabricaDAO.asignarParametro(RecursoM06.com_nombre, SqlDbType.VarChar, comida._comida, false));
+                lista.Add(FabricaDAO.asignarParametro("@com_vue_cantidad", SqlDbType.Int, comida._cantidad.ToString(), false));
+
+                EjecutarStoredProcedure(RecursoM06.procedimientoAgregarComidaVuelo, lista);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
+
+
         //CONSULTA TODAS LAS COMIDAS DISPONIBLES Y NO DISPONIBLES
         public List<Entidad> consultarComidas()
         {
