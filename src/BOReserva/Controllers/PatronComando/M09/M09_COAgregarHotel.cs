@@ -1,6 +1,7 @@
 ﻿using BOReserva.DataAccess.DAO;
 using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+using BOReserva.DataAccess.DataAccessObject.M09;
 using BOReserva.DataAccess.Domain;
 using System;
 using System.Collections.Generic;
@@ -17,17 +18,25 @@ namespace BOReserva.Controllers.PatronComando
     {
         Hotel _hotel;
 
-        public M09_COAgregarHotel(Hotel hotel) { 
-            this._hotel =hotel;
+        public M09_COAgregarHotel(Hotel hotel, int precio) { 
+            this._hotel = hotel;
+            _hotel._precio = precio;
         }
 
         public override String ejecutar(){
             IDAO daoHotel = FabricaDAO.instanciarDaoHotel();       
             int resultadoAgregarHotel = daoHotel.Agregar(_hotel);
-            if (resultadoAgregarHotel == 1) { 
-                //agrego las habitaciones.
+            if (resultadoAgregarHotel == 1) {
+                String add = agregarhabitaciones(_hotel, _hotel._precio);
             }
             return resultadoAgregarHotel.ToString();
+        }
+
+        public String agregarhabitaciones(Hotel hotel, int precio)
+        {
+            IDAOHabitacion habdao = (IDAOHabitacion)FabricaDAO.instanciarDaoHabitacion();
+            String resp = habdao.Agregarhab(hotel, precio);
+            return resp;
         }
 
     }

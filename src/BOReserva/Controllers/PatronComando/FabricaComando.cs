@@ -23,9 +23,9 @@ namespace BOReserva.Controllers.PatronComando
         /// </summary>
         /// <param name="e">Recibe la una entidad de tipo Hotel</param>
         /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
-        public static Command<String> crearM09AgregarHotel(Entidad e) {
+        public static Command<String> crearM09AgregarHotel(Entidad e, int precio) {
 
-            return new M09_COAgregarHotel((Hotel)e);
+            return new M09_COAgregarHotel((Hotel)e, precio);
 
         }
        

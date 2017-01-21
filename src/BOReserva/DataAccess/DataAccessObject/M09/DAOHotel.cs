@@ -97,12 +97,12 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
 
             Pais pais;
             Ciudad ciudad;
-            Hotel hotel;
+            Hotel hotel = null;
             int idCiudad;
             String nombreCiudad;
             int idPais;
             String nombrePais;
-
+            int preciohab;
             int idHotel;
 
             try
@@ -135,9 +135,19 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
                             Int32.Parse(row["hot_disponibilidad"].ToString())
                             );
 
-                    return hotel;
+                    
                 }
-                return null;
+                parametro = FabricaDAO.asignarListaDeParametro();
+                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_id, SqlDbType.Int, id.ToString(), false));
+
+                tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM09.ProcedimientoConsultarHabitacion, parametro);
+
+                foreach (DataRow row in tablaDeDatos.Rows)
+                {
+                    preciohab = Int32.Parse(row[RecursoDAOM09.hab_precio].ToString());
+                    hotel._precio = preciohab;
+                }
+                return hotel;
             }
             catch (SqlException ex)
             {

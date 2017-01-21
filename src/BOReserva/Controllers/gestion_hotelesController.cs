@@ -59,17 +59,13 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult guardarHotel(CAgregarHotel model)
         {   
-            //cable de precio mientras se agrega en la vista.
-            int precio = 200;
-            model._precioHabitacion = precio;
             Entidad ciudadDestino = FabricaEntidad.InstanciarCiudad(ciudad);
             M09_COObtenerPaises command = (M09_COObtenerPaises)FabricaComando.crearM09ObtenerPaises();
             ciudadDestino._id = command.obtenerIdentificadorCiudad(ciudad);
             Entidad nuevoHotel = FabricaEntidad.InstanciarHotel(model, ciudadDestino);
             //con la fabrica instancie al hotel.
-            Command<String> comando = FabricaComando.crearM09AgregarHotel(nuevoHotel);
-            String agrego_si_no  = comando.ejecutar();
-
+            Command<String> comando = FabricaComando.crearM09AgregarHotel(nuevoHotel, model._precioHabitacion);
+            String agrego_si_no = comando.ejecutar();
             return (Json(agrego_si_no));
         }
 
@@ -104,6 +100,7 @@ namespace BOReserva.Controllers
             modelovista._nombre = hotelbuscado._nombre;
             modelovista._paginaWeb = hotelbuscado._paginaWeb;
             modelovista._pais = hotelbuscado._ciudad._pais._nombre;
+            modelovista._precioHabitacion = hotelbuscado._precio;
             return PartialView(modelovista);
         }
 
@@ -128,6 +125,7 @@ namespace BOReserva.Controllers
             modelovista._nombre = hotelbuscado._nombre;
             modelovista._paginaWeb = hotelbuscado._paginaWeb;
             modelovista._pais = hotelbuscado._ciudad._pais._nombre;
+            modelovista._precioHabitacion = hotelbuscado._precio;
             return PartialView(modelovista);
         }
 

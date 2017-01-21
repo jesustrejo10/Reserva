@@ -19,5 +19,6 @@ namespace BOReserva.Models.gestion_hoteles
         public int _clasificacion { get; set; }
         public int _capacidadHabitacion { get; set; }
         public Dictionary<int, Entidad> _paises { get; set; }
+        public int _precioHabitacion { get; set; }
     }
 }

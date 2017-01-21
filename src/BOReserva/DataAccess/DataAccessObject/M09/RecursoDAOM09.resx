@@ -185,4 +185,16 @@
     <value>M09_ModificarHotel</value>
     <comment>Nombre del Procedimiento Modificar Hotel en la  Base de Datos</comment>
   </data>
+  <data name="hab_precio" xml:space="preserve">
+    <value>hab_precio</value>
+    <comment>Nombre del atributo en Base de datos del precio por habitacion</comment>
+  </data>
+  <data name="ProcedimientoAgregarHabitacion" xml:space="preserve">
+    <value>M09_AgregarHabitacion</value>
+    <comment>Nombre del Procedimiento Agregar Habitacion en la Base de Datos</comment>
+  </data>
+  <data name="ProcedimientoConsultarHabitacion" xml:space="preserve">
+    <value>M09_ConsultarHabitacion</value>
+    <comment>Nombre del Procedimiento Consultar Habitacion en la Base de Datos</comment>
+  </data>
 </root>

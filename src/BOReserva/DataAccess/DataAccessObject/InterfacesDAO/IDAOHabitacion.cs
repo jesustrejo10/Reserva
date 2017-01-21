@@ -9,7 +9,7 @@ namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
 {
     interface IDAOHabitacion : IDAO
     {
-        int Agregar(List<Entidad> e);
+        string Agregarhab(Hotel hotel, int precio);
 
     }
 }
