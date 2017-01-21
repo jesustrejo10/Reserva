@@ -35,9 +35,9 @@ namespace BOReserva.DataAccess.Domain.M03
         /// <param name="tipo"></param>
         /// <param name="status"></param>
         /// <param name="distacia"></param>
-        public Ruta(String origenRuta, String destinoRuta, String tipo, 
-                    String status, int distancia)
+        public Ruta(int idRuta, int distancia,String status,String tipo,String origenRuta, String destinoRuta)
         {
+            _idRuta = idRuta;
             _origenRuta = origenRuta;
             _destinoRuta = destinoRuta;
             _tipo= tipo;
