@@ -17,6 +17,25 @@ namespace BOReserva.DataAccess.DataAccessObject
 {
     public class FabricaDAO
     {
+        #region Lugar ( DAOLugar - DAOPais - DAOCiudad ) 
+
+        public static DAO instanciarDaoLugar()
+        {
+            return new DAOLugar();
+        }
+
+        public static DAO instanciarDaoPais()
+        {
+            return new DAOLugar();
+        }
+
+        public static DAO instanciarDaoCiudad()
+        {
+            return new DAOLugar();
+        }
+
+        #endregion
+
         #region M01_Login
         public static DAO instanciarDaoLogin()
         {
@@ -28,16 +47,6 @@ namespace BOReserva.DataAccess.DataAccessObject
 
         public static DAO instanciarDaoHotel() {
             return new DAOHotel();
-        }
-
-
-        public static DAO instanciarDaoPais() {
-            return new DAOPais();
-        }
-
-        public static DAO instanciarDaoCiudad()
-        {
-            return new DAOCiudad();
         }
 
         public static DAO instanciarDaoHabitacion()
@@ -88,12 +97,6 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAOAutomovil();
         }
         #endregion
-
-        public static DAO instanciarDaoLugar()
-        {
-            return new DAOLugar();
-        }
-
 			
         #region Modulo 10
         /// <summary>
@@ -162,7 +165,6 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAORol();
         }
         #endregion
-
 
         #region M06 GESTION DE COMIDA
 

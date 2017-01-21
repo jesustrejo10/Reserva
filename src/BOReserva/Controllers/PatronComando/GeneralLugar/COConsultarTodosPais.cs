@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.Controllers.PatronComando.Lugar
+namespace BOReserva.Controllers.PatronComando.GeneralLugar
 {
-    public class COConsultarTodosLugar : Command<bool>
+    public class COConsultarTodosPais : Command<Dictionary<int, Entidad>>
     {
         
         #region Atributos
@@ -20,7 +20,7 @@ namespace BOReserva.Controllers.PatronComando.Lugar
 
         #region Constructor
 
-        public COConsultarTodosLugar(Entidad _objeto)
+        public COConsultarTodosPais(Entidad _objeto)
         {
             this._objeto = _objeto;
         }
@@ -29,11 +29,11 @@ namespace BOReserva.Controllers.PatronComando.Lugar
 
         #region Ejecucion
 
-        public override bool ejecutar()
+        public override Dictionary<int, Entidad> ejecutar()
         {
-            DAO Dao = FabricaDAO.CrearDaoAutomovil();
-            DAOAutomovil DaoAutomovil = (DAOAutomovil)Dao;
-            return DaoAutomovil.ActivarDesactivar(this._objeto);
+            DAO Dao = FabricaDAO.instanciarDaoPais();
+
+            return Dao.ConsultarTodos();
         }
 
         #endregion
