@@ -10,15 +10,16 @@ using System.Web;
 namespace BOReserva.Controllers.PatronComando.M08
 {
 
-    public class M08_COAgregarAutomovil : Command<String>
+    public class M08_COAgregarAutomovil : Command<bool>
     {
 
         #region Atributos
+
         Entidad _objeto;
+
         #endregion
 
         #region Constructor
-        public M08_COAgregarAutomovil() { }
 
         public M08_COAgregarAutomovil(Entidad _objeto)
         {
@@ -27,9 +28,16 @@ namespace BOReserva.Controllers.PatronComando.M08
 
         #endregion
 
-        public override string ejecutar()
+        #region Ejecucion
+
+        public override bool ejecutar()
         {
-            throw new NotImplementedException();
+            DAO Dao = FabricaDAO.CrearDaoAutomovil();
+            DAOAutomovil DaoAutomovil = (DAOAutomovil)Dao;
+            return DaoAutomovil.Agregar(this._objeto);
         }
+
+        #endregion
+
     }
 }

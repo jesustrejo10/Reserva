@@ -1,6 +1,9 @@
+using BOReserva.Controllers.PatronComando;
+using BOReserva.DataAccess.Domain;
 using BOReserva.Models.gestion_cruceros;
 using BOReserva.Models.gestion_ruta_comercial;
 using System;
+using System.Net;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -21,15 +24,35 @@ namespace BOReserva.Controllers
 
         public ActionResult M24_AgregarCabinas()
         {
-            ConexionBD cbd = new ConexionBD();
-            VistaListaCrucero vlc = new VistaListaCrucero();
-            CGestion_cabina cabina = new CGestion_cabina() { cabinas = new List<CGestion_cabina>() };
-            //CGestion_crucero crucero = new CGestion_crucero();
-            vlc.cruceros = cbd.listarCruceros();
-            ViewBag.ShowDropDown = new SelectList(vlc.cruceros, "_idCrucero", "_nombreCrucero");
-            //cabina.cabinas = cbd.listarCabinas(crucero._idCrucero);
-            return PartialView("M24_AgregarCabinas", cabina);
-            //return PartialView();
+
+            CGestion_cabina cabina = new CGestion_cabina();
+            List<String> lista = new List<string>();
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14VisualizarCruceros();
+            Dictionary<int, Entidad> listaCruceros = comando.ejecutar();
+
+            try
+            {
+                foreach (var crucero in listaCruceros)
+                {
+                    BOReserva.DataAccess.Domain.Crucero c = (BOReserva.DataAccess.Domain.Crucero)crucero.Value;
+                    lista.Add(c._nombreCrucero);
+                }
+                cabina._listaCruceros = lista.Select(x => new SelectListItem
+                {
+                    Value = x,
+                    Text = x
+                }); 
+                return PartialView(cabina);
+            }
+            catch (SqlException e)
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error, no se pudo conectar con la base de datos";
+                //Retorno el error
+                return PartialView(error);
+            }
         }
 
         public ActionResult M24_AgregarItinerario()
@@ -37,14 +60,12 @@ namespace BOReserva.Controllers
             ConexionBD cbd = new ConexionBD();
             VistaListaCrucero vlc = new VistaListaCrucero();
             VistaListaRuta vlr = new VistaListaRuta();
-            CGestion_itinerario itinerario = new CGestion_itinerario() { itinerarios = new List<CGestion_itinerario>() };
-            //  CGestion_crucero crucero = new CGestion_crucero();
+            CGestion_itinerario itinerario = new CGestion_itinerario() { itinerarios = new List<CGestion_itinerario>() };            
             vlc.cruceros = cbd.listarCruceros();
             vlr.rutas = cbd.listarRutas();
             ViewBag.ShowDropDown = new SelectList(vlc.cruceros, "_idCrucero", "_nombreCrucero");
             ViewBag.ShowDropDown2 = new SelectList(vlr.rutas, "_idRuta", "_rutaCrucero");
-            return PartialView("M24_AgregarItinerario", itinerario);
-            //return PartialView();
+            return PartialView("M24_AgregarItinerario", itinerario);            
         }
 
         public ActionResult M24_AgregarCamarote()
@@ -52,18 +73,14 @@ namespace BOReserva.Controllers
             ConexionBD cbd = new ConexionBD();
             VistaListaCrucero vlc = new VistaListaCrucero();
             CGestion_cabina cabina = new CGestion_cabina();
-            CGestion_camarote camarote = new CGestion_camarote() { camarote = new List<CGestion_camarote>() };
-            //CGestion_crucero crucero = new CGestion_crucero();
+            CGestion_camarote camarote = new CGestion_camarote() { camarote = new List<CGestion_camarote>() };            
             vlc.cruceros = cbd.listarCruceros();
-            ViewBag.ShowDropDown = new SelectList(vlc.cruceros, "_idCrucero", "_nombreCrucero");
-            //cabina.cabinas = cbd.listarCabinas(crucero._idCrucero);
-            //ViewBag.ShowDropDown = new SelectList(cabina.cabinas, "_idCabina", "_nombreCabina");
-            //cabina.cabinas = cbd.listarCabinas(crucero._idCrucero);
+            ViewBag.ShowDropDown = new SelectList(vlc.cruceros, "_idCrucero", "_nombreCrucero");            
             return PartialView("M24_AgregarCamarote", camarote);
-            //return PartialView();
+            
         }
 
-        public JsonResult M24_ListarCabinas(int id)
+        /*public JsonResult M24_ListarCabinas(int id)
         {
             ConexionBD cbd = new ConexionBD();
             //VistaListaCrucero vlc = new VistaListaCrucero();
@@ -76,6 +93,11 @@ namespace BOReserva.Controllers
             return (Json(listaCabinas, JsonRequestBehavior.AllowGet));
             //return PartialView();
         }
+            ConexionBD cbd = new ConexionBD();            
+            var listaCabinas = cbd.listarCabinas(id);            
+            return (Json(listaCabinas, JsonRequestBehavior.AllowGet));            
+        }*/
+
 
         public JsonResult M24_ListarCamarotes(int id)
         {
@@ -92,25 +114,46 @@ namespace BOReserva.Controllers
             return PartialView("M24_ListarItinerario", vlc);
         }
 
+        /// <summary>
+        /// Método de la vista parcial M24ListarCruceros
+        /// </summary>
+        /// <returns>Retorna la vista parcial M24_ListarCruceros en conjunto del Modelo de dicha vista</returns>
         public ActionResult M24_ListarCruceros()
+        {
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14VisualizarCruceros();
+            Dictionary<int, Entidad> listaCruceros = comando.ejecutar();
+            return PartialView(listaCruceros);
+        }
+
+        /// <summary>
+        /// Método de la vista parcial M24ListarCabinas
+        /// </summary>
+        /// <returns>Retorna la vista parcial M24_ListarCcabinas en conjunto del Modelo de dicha vista</returns>
+        public ActionResult M24_ListarCabinas(int id)
+        {
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14VisualizarCabinas(id);
+            Dictionary<int, Entidad> listaCabinas = comando.ejecutar();
+            return PartialView(listaCabinas);
+        }
+
+        /*public ActionResult M24_ListarCruceros()
         {
             ConexionBD cbd = new ConexionBD();
             VistaListaCrucero vlc = new VistaListaCrucero();
             vlc.cruceros = cbd.listarCruceros();
             return PartialView("M24_ListarCruceros", vlc);
-        }
+        }*/
 
         [HttpPost]
         public JsonResult guardarCrucero(CGestion_crucero model)
         {
-            String _nombreCrucero = model._nombreCrucero;
-            String _companiaCrucero = model._companiaCrucero;
-            int _capacidadCrucero = model._capacidadCrucero;
-            CGestion_crucero crucero = new CGestion_crucero(_nombreCrucero, _companiaCrucero, _capacidadCrucero);
-            crucero.AgregarCrucero(crucero);
-
-            return (Json(true, JsonRequestBehavior.AllowGet));
+            
+            Entidad nuevoCrucero = FabricaEntidad.InstanciarCrucero(model);            
+            Command<String> comando = FabricaComando.crearM14AgregarCrucero(nuevoCrucero);
+            String result = comando.ejecutar();
+            return (Json(result));
         }
+   
 
         [HttpPost]
         public JsonResult eliminarCrucero(int id_crucero)
@@ -121,8 +164,19 @@ namespace BOReserva.Controllers
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
 
+        
         [HttpPost]
         public JsonResult guardarCabina(CGestion_cabina model)
+        {
+
+            Entidad nuevaCabina = FabricaEntidad.InstanciarCabinaN(model);
+            Command<String> comando = FabricaComando.crearM14AgregarCabina(nuevaCabina);
+            String result = comando.ejecutar();
+            return (Json(result));
+        }
+        
+        [HttpPost]
+        public JsonResult guardaCabina(CGestion_cabina model)
         {
             String _nombreCabina = model._nombreCabina;
             float _precioCabina = model._precioCabina;

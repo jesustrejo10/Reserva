@@ -196,6 +196,15 @@ namespace FOReserva.DataAccess.DataAccessObject.M19 {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a destino.
+        /// </summary>
+        internal static string destino {
+            get {
+                return ResourceManager.GetString("destino", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a @fk_lugar.
         /// </summary>
         internal static string fk_lugar {
@@ -237,6 +246,15 @@ namespace FOReserva.DataAccess.DataAccessObject.M19 {
         internal static string LugarNombre {
             get {
                 return ResourceManager.GetString("LugarNombre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a origen.
+        /// </summary>
+        internal static string origen {
+            get {
+                return ResourceManager.GetString("origen", resourceCulture);
             }
         }
         

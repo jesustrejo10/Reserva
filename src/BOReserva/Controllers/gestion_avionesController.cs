@@ -19,7 +19,7 @@ namespace BOReserva.Controllers
     /// /// Clase Controladora del modulo 2, Gestion de Aviones
     /// </summary>
     public class gestion_avionesController : Controller
-    {
+    {    
         private static int idavion;
         #region M02_AgregarAvion
         /// <summary>
@@ -42,7 +42,7 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult guardarAvion(CAgregarAvion model)
         {
-            
+
             Entidad nuevoAvion = FabricaEntidad.InstanciarAvion(model);
             //con la fabrica instancie al avion
             Command<String> comando = FabricaComando.crearM02AgregarAvion(nuevoAvion);
@@ -76,7 +76,7 @@ namespace BOReserva.Controllers
             modelovista._disponibilidad = avionbuscado._disponibilidad;
 
             return PartialView(modelovista);
-        }
+            }
         #endregion
 
         #region M02_ModificarAvion
@@ -113,7 +113,7 @@ namespace BOReserva.Controllers
         /// <returns>Retorna un JsonResult</returns>
         [HttpPost]
         public JsonResult modificarAvion(CModificarAvion model)
-        {
+            {
           
             Entidad modificarAvion = FabricaEntidad.InstanciarAvion(model);
             //con la fabrica instancie al avion.
@@ -123,7 +123,7 @@ namespace BOReserva.Controllers
             return (Json(agrego_si_no));
         }
         #endregion
-
+       
         #region deleteAvion
         /// <summary>
         /// Método que se utiliza para eliminar un avion existente
@@ -131,7 +131,7 @@ namespace BOReserva.Controllers
         /// <param name="id">Identificador del avion a eliminar</param>
         /// <returns>Retorna un JsonResult</returns>
         public JsonResult deleteAvion(int id)
-        {
+            {
             Command<Entidad> comando = FabricaComando.crearM02ConsultarAvion(id);
             Entidad avion = comando.ejecutar();
             Avion avionbuscado = (Avion)avion;
@@ -139,7 +139,7 @@ namespace BOReserva.Controllers
             Command<String> comando1 = FabricaComando.crearM02EliminarAvion(avionbuscado, id);
             String borro_si_no = comando1.ejecutar();
             return (Json(borro_si_no));
-        }
+            }
         #endregion
 
         #region M02_VisualizarAviones
@@ -148,7 +148,7 @@ namespace BOReserva.Controllers
         /// </summary>
         /// <returns>Retorna la vista parcial M02_VisualizarAvion en conjunto del Modelo de dicha vista</returns>
         public ActionResult M02_VisualizarAviones()
-        {
+            {
             Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM02VisualizarAviones();
             Dictionary<int, Entidad> listaAviones = comando.ejecutar();
             return PartialView(listaAviones);
@@ -163,7 +163,7 @@ namespace BOReserva.Controllers
         /// <returns>Retorna un JsonResult</returns>
         [HttpPost]
         public JsonResult activateAvion(int id)
-        {
+            {
             Command<Entidad> comando = FabricaComando.crearM02ConsultarAvion(id);
             Entidad avion = comando.ejecutar();
             Avion avionbuscado = (Avion)avion;
@@ -182,7 +182,7 @@ namespace BOReserva.Controllers
         /// <returns>Retorna un JsonResult</returns>
         [HttpPost]
         public JsonResult deactivateAvion(int id)
-        {
+            {
            Command<Entidad> comando = FabricaComando.crearM02ConsultarAvion(id);
            Entidad avion = comando.ejecutar();
            Avion avionbuscado = (Avion)avion;
@@ -192,5 +192,5 @@ namespace BOReserva.Controllers
            return (Json(borro_si_no));
         }
         #endregion
-    }
+   }
 }
