@@ -205,6 +205,12 @@ namespace BOReserva.Controllers.PatronComando
         {
             return new M05_COModificarBoleto((Boleto)e);
         }
+
+        public static Command<List<Entidad>> ConsultarBoletos()
+        {
+            return new M05_COConsultarBoletos();
+        }
+
         #endregion
 
         #region Modulo 10 Gestion Restaurante

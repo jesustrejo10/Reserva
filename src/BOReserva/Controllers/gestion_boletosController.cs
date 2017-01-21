@@ -104,9 +104,7 @@ namespace BOReserva.Controllers
             manejadorSQL_Boletos sqlboletos = new manejadorSQL_Boletos();
             List<CVuelo> listavuelos = new List<CVuelo>();
             listavuelos = sqlboletos.M05ListarVuelosIdaBD(fechaida, fechavuelta, idorigen, iddestino, tipo);
-            // System.Diagnostics.Debug.WriteLine("DATOS CONTROLLER VERVUELOS: listavuelos: vuelos[0]: partida:  "+ listavuelos[0]._fechaPartida+", llegada: "+listavuelos[0]._fechaLlegada);
-
-
+            
             return PartialView(listavuelos);
         }
 
@@ -382,9 +380,11 @@ namespace BOReserva.Controllers
         public ActionResult M05_VisualizarBoletos()
         {
             //SE BUSCAN TODOS LOS BOLETOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
-            manejadorSQL_Boletos buscarboletos = new manejadorSQL_Boletos();
-            List<CBoleto> listaboletos = buscarboletos.M05ListarBoletosBD();
-            return PartialView(listaboletos);
+            //manejadorSQL_Boletos buscarboletos = new manejadorSQL_Boletos();
+            //List<CBoleto> listaboletos = buscarboletos.M05ListarBoletosBD();
+            Command<List<Entidad>> comando = FabricaComando.ConsultarBoletos();
+            List<Entidad> listaBoletos = comando.ejecutar();
+            return PartialView(listaBoletos);
         }
 
         //falta patrones
