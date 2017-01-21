@@ -203,7 +203,7 @@ namespace BOReserva.DataAccess.DataAccessObject
         /// </summary>
         /// <param name="id">id del reclamo</param>
         /// <returns>retorna 1 si eliminó correctamente</returns>
-        int Eliminar(int id)
+        public int Eliminar(int id)
         {
             try
             {
