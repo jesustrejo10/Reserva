@@ -80,6 +80,9 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\lib\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Data.Edm, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Data.Edm.5.6.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
@@ -207,10 +210,23 @@
     <Compile Include="Controllers\M04\gestion_vueloController.cs" />
     <Compile Include="Controllers\PatronComando\Command.cs" />
     <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COModificarBoleto.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COVerificarDisponibilidadBoleto.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COMostrarIdaVuelta.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COBuscarnombreciudad.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COEliminarBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COModificarPasajero.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COAgregarPasajero.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COConsultarBoleto.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COCrearBoleto.cs" />
+    <Compile Include="Controllers\PatronComando\M09\M09_COAgregarHabitaciones.cs" />
+    <Compile Include="Controllers\PatronComando\M01\M01_COBloquearUsuario.cs" />
+    <Compile Include="Controllers\PatronComando\M01\M01_COLanding.cs" />
+    <Compile Include="Controllers\PatronComando\M01\M01_COLogout.cs" />
+    <Compile Include="Controllers\PatronComando\M01\M01_COLogin.cs" />
     <Compile Include="Controllers\PatronComando\M06\M06_COAgregarComida.cs" />
+    <Compile Include="Controllers\PatronComando\M06\M06_COConsultarComidas.cs" />
+    <Compile Include="Controllers\PatronComando\M06\M06_COConsultarComidasVuelos.cs" />
     <Compile Include="Controllers\PatronComando\M08\M08_COActivarAutomovil.cs" />
     <Compile Include="Controllers\PatronComando\M08\M08_COBuscarAutomovil.cs" />
     <Compile Include="Controllers\PatronComando\M08\M08_COAgregarAutomovil.cs" />
@@ -232,7 +248,6 @@
     <Compile Include="Controllers\PatronComando\M10\M10_COEliminarRestaurant.cs" />
     <Compile Include="Controllers\PatronComando\M04\M04_COAgregarVuelo.cs" />
     <Compile Include="Controllers\PatronComando\M04\M04_COConsultarTodosVuelos.cs" />
-    <Compile Include="Controllers\PatronComando\M05\M05_COCrearBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COAgregarHotel.cs" />
     <Compile Include="Controllers\gestion_automovilesController.cs" />
     <Compile Include="Controllers\gestion_avionesController.cs">
@@ -253,24 +268,33 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\List.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COVisualizarHoteles.cs" />
-    <Compile Include="Controllers\PatronComando\M05\M05_COAgregarPasajero.cs" />
     <Compile Include="Controllers\PatronComando\M13_COAgregarRol.cs" />
     <Compile Include="Controllers\PatronComando\M13_COAgregarRolPermiso.cs" />
-    <Compile Include="Controllers\PatronComando\M16_COAgregarReclamo.cs" />
+    <Compile Include="Controllers\PatronComando\M16\M16_COAgregarReclamo.cs" />
+    <Compile Include="Controllers\PatronComando\M16\M16_COConsultarReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOBoleto.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOCiudad.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOLugar.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOPasajero.cs" />
-    <Compile Include="DataAccess\DataAccessObject\DAOHotel.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOPais.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAORol.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOAutomovil.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCiudad.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOHabitacion.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPais.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReclamo.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORol.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M09\DAOHabitacion.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOComida.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOLogin.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOLugar.cs" />
     <Compile Include="DataAccess\DataAccessObject\M01\DAOLogin.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M01\RecursoLogin.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RecursoLogin.resx</DependentUpon>
+    </Compile>
     <Compile Include="DataAccess\DataAccessObject\M06\DAOComida.cs" />
     <Compile Include="DataAccess\DataAccessObject\M06\RecursoM06.Designer.cs" />
     <Compile Include="DataAccess\DataAccessObject\M06\Resource1.Designer.cs" />
@@ -284,16 +308,15 @@
     </Compile>
     <Compile Include="DataAccess\DataAccessObject\M10\DAORestaurant.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORestaurant.cs" />
-    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPais.cs" />
-    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReclamo.cs" />
-    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORol.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOBoleto.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPasajero.cs" />
     <Compile Include="DataAccess\Domain\Avion.cs" />
     <Compile Include="DataAccess\Domain\Boleto.cs" />
-    <Compile Include="DataAccess\Domain\Contratos\ICiudad.cs" />
+    <Compile Include="DataAccess\Domain\BoletoVuelo.cs" />
+    <Compile Include="DataAccess\Domain\Habitacion.cs" />
     <Compile Include="DataAccess\Domain\Lugar.cs" />
     <Compile Include="DataAccess\Domain\M06\Comida.cs" />
+    <Compile Include="DataAccess\Domain\M06\ComidaVuelo.cs" />
     <Compile Include="DataAccess\Domain\Pasajero.cs" />
     <Compile Include="DataAccess\Domain\Permiso.cs" />
     <Compile Include="DataAccess\Domain\Reclamo.cs" />
@@ -314,6 +337,7 @@
     <Compile Include="DataAccess\Domain\Hotel.cs" />
     <Compile Include="DataAccess\Domain\Pais.cs" />
     <Compile Include="DataAccess\Domain\Rol.cs" />
+    <Compile Include="DataAccess\Domain\RutaBoleto.cs" />
     <Compile Include="DataAccess\Domain\Ruta.cs" />
     <Compile Include="DataAccess\Domain\Usuario.cs" />
     <Compile Include="DataAccess\Domain\Vuelo.cs" />
@@ -327,6 +351,11 @@
       <DependentUpon>RecursoBD.resx</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\Model\ResultadoBD.cs" />
+    <Compile Include="Excepciones\ExceptionReserva.cs" />
+    <Compile Include="Excepciones\Log.cs" />
+    <Compile Include="Excepciones\LogException.cs" />
+    <Compile Include="Excepciones\M10\ReservaExceptionM10.cs" />
+    <Compile Include="Excepciones\RecursoLog.Designer.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -432,7 +461,6 @@
     <Compile Include="Models\gestion_vuelo\CCrear_Vuelo.cs" />
     <Compile Include="Models\gestion_vuelo\CVueloModificar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Servicio\M01SQL.cs" />
     <Compile Include="Servicio\manejadorSQL.cs" />
     <Compile Include="Servicio\Servicio_Vuelos\manejadorSQL_Vuelos.cs" />
     <Compile Include="Servicio\Servicio_Boletos\manejadorSQL_Boletos.cs" />
@@ -451,6 +479,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Canvas\Box.css" />
     <Content Include="Content\dist\css\AdminLTE.css" />
     <Content Include="Content\dist\css\AdminLTE.min.css" />
     <Content Include="Content\dist\css\skins\skin-black-light.css" />
@@ -599,6 +628,7 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="DataAccess\DataAccessObject\M01\M01.sql" />
     <Content Include="DataAccess\DataAccessObject\M06\M06.sql" />
     <Content Include="DataAccess\DataAccessObject\M08\Scripts de Procedures M08.sql" />
     <Content Include="DataAccess\DataAccessObject\M10\Scripts de Procedures M10.sql" />
@@ -702,11 +732,6 @@
     <Content Include="Views\gestion_comida_vuelo\placeholder.html" />
     <Content Include="Views\gestion_cruceros\js\module.js" />
     <Content Include="Views\gestion_equipaje_perdido\placeholder.html" />
-    <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Actualizar.html" />
-    <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Agregar.html" />
-    <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Consultar_Servicios.html" />
-    <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Deshabilitar.html" />
-    <Content Include="Views\gestion_hoteles\placeholder.html" />
     <Content Include="Views\gestion_ofertas\placeholder.html" />
     <Content Include="Views\gestion_restaurantes\ccs\M10.css" />
     <Content Include="Views\gestion_roles\M13_Roles.html" />
@@ -1557,9 +1582,6 @@
     <Content Include="Views\gestion_automoviles\M08_VisualizarAutomoviles.cshtml" />
     <Content Include="Views\gestion_automoviles\M08_VisualizarAutomovil.cshtml" />
     <Content Include="Views\gestion_automoviles\M08_AgregarAutomovil.cshtml" />
-    <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Crear.cshtml" />
-    <Content Include="Views\gestion_hoteles\M09_GestionHoteles_ModificarHotel.cshtml" />
-    <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Desactivar.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarPorVuelo.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_EditarComida.cshtml" />
     <Content Include="Views\gestion_seguridad_ingreso\M01_Login.cshtml" />
@@ -1572,7 +1594,6 @@
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Visualizar.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Mostrar.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Modificar.cshtml" />
-    <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Visualizar.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -1597,7 +1618,6 @@
     <Content Include="Views\gestion_hoteles\M09_VisualizarHoteles.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\gestion_hoteles\M09_GestionHoteles_Visualizar.cshtml" />
     <Content Include="Views\gestion_boletos\M05_VisualizarBoletos.cshtml" />
     <Content Include="Views\gestion_boletos\M05_VerReserva.cshtml" />
     <Content Include="Views\gestion_check_in\M05_CheckIn.cshtml" />
@@ -1716,6 +1736,10 @@
     <Content Include="Views\gestion_boletos\M05_DetalleBoletoReserva.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="DataAccess\DataAccessObject\M01\RecursoLogin.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecursoLogin.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="DataAccess\DataAccessObject\M08\RecursoDAOM08.resx" />
     <EmbeddedResource Include="DataAccess\DataAccessObject\M06\RecursoM06.resx" />
     <EmbeddedResource Include="DataAccess\DataAccessObject\M06\Resource1.resx" />
@@ -1731,6 +1755,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoBD.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Excepciones\RecursoLog.resx" />
     <EmbeddedResource Include="Models\gestion_cruceros\RecursosCruceros.resx" />
     <EmbeddedResource Include="Models\gestion_usuarios\RecursoBD.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -1763,7 +1788,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:6580/</IISUrl>
+          <IISUrl>http://localhost:10209/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

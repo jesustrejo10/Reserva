@@ -28,6 +28,7 @@ namespace FOReserva.DataAccess.Domain
             this._detalleReclamo = detalleReclamo;
             this._fechaReclamo = fechaReclamo;
             this._estadoReclamo = estadoReclamo;
+            this._usuarioReclamo = _usuarioReclamo;
         }
     }
 }

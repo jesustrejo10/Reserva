@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FOReserva.DataAccess.Domain;
+using FOReserva.Controllers.PatronComando;
 
 namespace FOReserva.Controllers
 {
@@ -28,6 +29,23 @@ namespace FOReserva.Controllers
             //listaReclamos.Add(reclamo2);
 
             return PartialView(listaReclamos);
+        }
+
+
+        /// <summary>
+        /// Método que se utiliza para guardar un reclamo ingresado
+        /// </summary>
+        /// <param name="model">Datos que provienen de un formulario de la vista parcial M16_AgregarReclamo</param>
+        /// <returns>Retorna un JsonResult</returns>
+        [HttpPost]
+        public JsonResult guardarReclamo(CAgregarReclamo model)
+        {
+            model._usuarioReclamo = 1;
+            Entidad nuevoReclamo = FabricaEntidad.InstanciarReclamo(model);
+            Command<String> comando = FabricaComando.crearM16AgregarReclamo(nuevoReclamo);
+            String agrego_si_no = comando.ejecutar();
+
+            return (Json(agrego_si_no));
         }
 
     }

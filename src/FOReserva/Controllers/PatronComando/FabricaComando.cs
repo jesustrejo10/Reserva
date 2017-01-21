@@ -1,4 +1,5 @@
 ﻿using FOReserva.Controllers.PatronComando;
+using FOReserva.Controllers.PatronComando.M16;
 using FOReserva.DataAccess.Domain;
 using FOReserva.Controllers.PatronComando.M19;
 using System;
@@ -15,7 +16,18 @@ namespace FOReserva.Controllers.PatronComando
     public class FabricaComando
     {
         #region M16 GestionReclamos
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M09_COAgregarReclamo
+        /// </summary>
+        /// <param name="e">Recibe la una entidad de tipo Reclamo</param>
+        /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
+        public static Command<String> crearM16AgregarReclamo(Entidad e)
+        {
 
+            return new M16_COAgregarReclamo((Reclamo)e);
+
+        }
         #endregion
 
         #region M19 Reserva Automovil
