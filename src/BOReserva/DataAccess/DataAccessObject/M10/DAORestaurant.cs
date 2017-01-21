@@ -434,21 +434,40 @@ namespace BOReserva.M10
 
 
         #region Metodos No implementados
+        /// <summary>
+        /// Metodo no Implementado
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns></returns>
         Entidad IDAO.Modificar(Entidad e)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Metodo no Implementado
+        /// </summary>
+        /// <returns></returns>
         public Dictionary<int, Entidad> ConsultarTodos()
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Metodo no Implementado
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns></returns>
         public int Agregar(Entidad e)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Metodo no Implementado
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Entidad Consultar(int id)
         {
             throw new NotImplementedException();
