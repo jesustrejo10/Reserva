@@ -18,7 +18,7 @@ namespace BOReserva.DataAccess.Domain
         public String _idAuto { get; set; }
 
         //Declara una propiedad _idRestaurante de tipo int
-        public int _idRestaurante { get; set; }
+        public int? _idRestaurante { get; set; }
 
         //Declara una propiedad id_Hotel de tipo int
         public int? _idHotel { get; set; }
@@ -64,11 +64,11 @@ namespace BOReserva.DataAccess.Domain
         public bool _estadoPaquete { get; set; } 
 
         //Constructor de Paquete
-       public Paquete (int idpaquete, String nombrepaquete, float preciopaquete, String idauto, int idrestaurante,
-                       int idhotel, int idcrucero, int idvuelo, DateTime fechainiauto, DateTime fechainirest,
-                       DateTime fechainihotel, DateTime fechainicruc, DateTime fechainivuelo, DateTime fechafinauto,
-                       DateTime fechafinrest, DateTime fechafinhotel, DateTime fechafincruc, 
-                       DateTime fechafinvuelo)
+       public Paquete (int idpaquete, String nombrepaquete, float preciopaquete, String idauto, int? idrestaurante,
+                       int? idhotel, int? idcrucero, int? idvuelo, DateTime? fechainiauto, DateTime? fechainirest,
+                       DateTime? fechainihotel, DateTime? fechainicruc, DateTime? fechainivuelo, 
+                       DateTime? fechafinauto, DateTime? fechafinrest, DateTime? fechafinhotel, 
+                       DateTime? fechafincruc, DateTime? fechafinvuelo)
         {
 
             this._id = idpaquete;
@@ -93,11 +93,11 @@ namespace BOReserva.DataAccess.Domain
         }
 
        //Constructor de Paquete
-       public Paquete(String nombrepaquete, float preciopaquete, String idauto, int idrestaurante,
-                      int idhotel, int idcrucero, int idvuelo, DateTime fechainiauto, DateTime fechainirest,
-                      DateTime fechainihotel, DateTime fechainicruc, DateTime fechainivuelo, DateTime fechafinauto,
-                      DateTime fechafinrest, DateTime fechafinhotel, DateTime fechafincruc,
-                      DateTime fechafinvuelo)
+       public Paquete(String nombrepaquete, float preciopaquete, String idauto, int? idrestaurante,
+                       int? idhotel, int? idcrucero, int? idvuelo, DateTime? fechainiauto, DateTime? fechainirest,
+                       DateTime? fechainihotel, DateTime? fechainicruc, DateTime? fechainivuelo,
+                       DateTime? fechafinauto, DateTime? fechafinrest, DateTime? fechafinhotel,
+                       DateTime? fechafincruc, DateTime? fechafinvuelo)
        {
 
            this._nombrePaquete = nombrepaquete;
