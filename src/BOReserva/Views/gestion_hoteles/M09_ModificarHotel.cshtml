@@ -27,7 +27,7 @@
                             </div>
                             <div class="col-xs-6">
                                 <label for="modelo">Direccion(<span style="color:red">*</span>)</label>
-                                @Html.TextBoxFor(m => m._direccion, null, new { @class = "form-control", @placeholder = "Av Colombia, Calle 4", @id = "hot_direccion", @maxlength = 120 })
+                                @Html.TextBoxFor(m => m._direccion, null, new { @class = "form-control", @placeholder = "Av Colombia, Calle 4", @id = "hot_direccion", @onblur = "checkdireccion(this);", @maxlength = 120 })
 
 
                             </div>
@@ -81,24 +81,28 @@
                             </div>
                             <div class="col-xs-6">
                                 <label for="capacidad">Capacidad(<span style="color:red">*</span>)</label>                                
-                                @Html.TextBoxFor(m => m._capacidadHabitacion, null, new { @type = "number", @class = "form-control", @placeholder = "28", @id = "hot_capacidad", min = "0", @onblur = "checklargo(this);" })
+                                @Html.TextBoxFor(m => m._capacidadHabitacion, null, new { @type = "number", @class = "form-control", @placeholder = "28", @id = "hot_capacidad", min = "0", @onblur = "checklargo(this);", @readonly = "readonly" })
 
                             </div>
                         </div>
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="">Precio por habitacion($)</label>
+                                @Html.TextBoxFor(m => m._precioHabitacion, null, new { @class = "form-control", @placeholder = "28", @id = "hot_pais", @readonly = "readonly" })
+                            </div>
                             <div class="col-xs-6">
                                 <label for="">Pais</label>
                                 @Html.TextBoxFor(m => m._pais, null, new { @class = "form-control", @placeholder = "28", @id = "hot_pais", @readonly = "readonly" })
                             </div>
 
-                            <div class="col-xs-6">
-                                <label for="Ciudad">Ciudad</label>                               
-                                @Html.TextBoxFor(m => m._ciudad, null, new { @class = "form-control", @placeholder = "28", @id = "hot_pais", @readonly = "readonly" })
-                            </div>
                         </div>
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="Ciudad">Ciudad</label>
+                                @Html.TextBoxFor(m => m._ciudad, null, new { @class = "form-control", @placeholder = "28", @id = "hot_pais", @readonly = "readonly" })
+                            </div>
                         </div>
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">

@@ -11,11 +11,20 @@ using System.Web;
 
 namespace BOReserva.DataAccess.DataAccessObject.M09
 {
+    /// <summary>
+    /// Clase para el manejo de los hoteles en la BD
+    /// </summary>
     public class DAOHotel:  DAO, IDAOHotel {
-
+        /// <summary>
+        /// Constructor del metodo
+        /// </summary>
         public DAOHotel() {}
 
-
+        /// <summary>
+        /// Metodo implementado de IDAO para agregar hoteles a la BD
+        /// </summary>
+        /// <param name="e">Hotel a agregar</param>
+        /// <returns>Retorna un valor entero</returns>
         int IDAO.Agregar(Entidad e)
         {
             List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
@@ -23,7 +32,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
 
             try
             {
-                //listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_nombre, SqlDbType.VarChar, hotel._nombre, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_nombre, SqlDbType.VarChar, hotel._nombre, false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_pagina, SqlDbType.VarChar, hotel._paginaWeb, false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_email, SqlDbType.VarChar, hotel._email, false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_cantidad_habitaciones, SqlDbType.Int, hotel._capacidad.ToString(), false));
@@ -37,7 +46,11 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
             catch (SqlException ex)
             {
+<<<<<<< HEAD
                // M09_Exception exception = new M09_Exception(ex, M09_Exception.messageHelper(ex), this.GetType().ToString());
+=======
+                //M09_Exception exception = new M09_Exception(ex, M09_Exception.messageHelper(ex), this.GetType().ToString());
+>>>>>>> 22c1980369f519eaca5fa02a9a7352070445db73
                 Debug.WriteLine("Ocurrio un SqlException");
                 Debug.WriteLine(ex.ToString());
                 return 2;
@@ -62,6 +75,11 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
         }
 
+        /// <summary>
+        /// Metodo implementado de IDAO para modificar hoteles de la BD
+        /// </summary>
+        /// <param name="e">Hotel a modificar</param>
+        /// <returns>Retorna el hotel</returns>
         Entidad IDAO.Modificar(Entidad e)
         {
             Hotel hotel = (Hotel)e;
@@ -90,6 +108,11 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
         }
 
+        /// <summary>
+        /// Metodo implementado de IDAO para consultar un hotel de la BD
+        /// </summary>
+        /// <param name="id">Id del hotel a buscar</param>
+        /// <returns>Retorna el hotel</returns>
         Entidad IDAO.Consultar(int id)
         {
             DataTable tablaDeDatos;
@@ -97,12 +120,12 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
 
             Pais pais;
             Ciudad ciudad;
-            Hotel hotel;
+            Hotel hotel = null;
             int idCiudad;
             String nombreCiudad;
             int idPais;
             String nombrePais;
-
+            int preciohab;
             int idHotel;
 
             try
@@ -135,9 +158,19 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
                             Int32.Parse(row["hot_disponibilidad"].ToString())
                             );
 
-                    return hotel;
+                    
                 }
-                return null;
+                parametro = FabricaDAO.asignarListaDeParametro();
+                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_id, SqlDbType.Int, id.ToString(), false));
+
+                tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM09.ProcedimientoConsultarHabitacion, parametro);
+
+                foreach (DataRow row in tablaDeDatos.Rows)
+                {
+                    preciohab = Int32.Parse(row[RecursoDAOM09.hab_precio].ToString());
+                    hotel._precio = preciohab;
+                }
+                return hotel;
             }
             catch (SqlException ex)
             {
@@ -146,6 +179,10 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
         }
 
+        /// <summary>
+        /// Metodo implementado de IDAO para consultar los hoteles de la BD
+        /// </summary>
+        /// <returns>Retorna el listado de hoteles</returns>
         Dictionary<int, Entidad> IDAO.ConsultarTodos()
         {
             Dictionary<int, Entidad> listaHoteles = new Dictionary<int, Entidad>();
@@ -201,6 +238,11 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
         }
 
+        /// <summary>
+        /// Metodo implementado de IDAO para eliminar hoteles de la BD
+        /// </summary>
+        /// <param name="id">Id del hotel a eliminar</param>
+        /// <returns>Retorna un string</returns>
         string IDAOHotel.eliminarHotel(int id)
         {
             List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
@@ -218,6 +260,12 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
         }
 
+        /// <summary>
+        /// Metodo implementado de IDAO para cambiar la disponibilidad de los hoteles de la BD
+        /// </summary>
+        /// <param name="e">Hotel a modificar</param>
+        /// <param name="disponibilidad">Estatus nuevo</param>
+        /// <returns></returns>
         string IDAOHotel.disponibilidadHotel(Entidad e, int disponibilidad)
         {
             Hotel hotel = (Hotel)e;

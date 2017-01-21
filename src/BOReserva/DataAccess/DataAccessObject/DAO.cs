@@ -11,6 +11,9 @@ using System.Web;
 
 namespace BOReserva.DataAccess.DataAccessObject
 {
+    /// <summary>
+    /// Clase abstracta que maneja la conexion a la BD
+    /// </summary>
     abstract public class DAO : IDAO
     {
         protected String _connexionString = ConfigurationManager.ConnectionStrings["StringRemoto"].ConnectionString;
@@ -80,6 +83,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             try
             {
                 conexion.Close();
+                conexion = null;
             }
 
             catch (Exception ex)
@@ -235,11 +239,13 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
             catch (SqlException ex)
             {
+                Console.WriteLine(ex.Message);
                 throw new ExceptionBD(RecursoBD.Cod_Error_General, RecursoBD.Error_General, ex);
             }
 
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 throw new ExceptionBD(RecursoBD.Cod_Error_General, RecursoBD.Error_General, ex);
             }
             finally
@@ -270,8 +276,6 @@ namespace BOReserva.DataAccess.DataAccessObject
                     using (SqlDataAdapter dataAdapter = new SqlDataAdapter(comando))
                     {
                         dataAdapter.Fill(dataTable);
-                        System.Diagnostics.Debug.WriteLine(dataAdapter);
-                        System.Diagnostics.Debug.WriteLine(dataTable);
                     }
 
                     return dataTable;

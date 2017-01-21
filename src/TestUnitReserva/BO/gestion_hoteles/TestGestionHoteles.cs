@@ -241,7 +241,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
 
         public void M09_AgregarHotel()
         {
-            M09_COAgregarHotel prueba = new M09_COAgregarHotel(mockHotel);
+            M09_COAgregarHotel prueba = new M09_COAgregarHotel(mockHotel,200);
            String  prueba1= prueba.ejecutar();
       
         }

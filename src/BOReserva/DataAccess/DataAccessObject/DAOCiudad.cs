@@ -8,23 +8,45 @@ using System.Web;
 
 namespace BOReserva.DataAccess.DataAccessObject
 {
+    /// <summary>
+    /// Clase para el manejo de las ciudades en la BD
+    /// </summary>
     public class DAOCiudad : DAO , IDAOCiudad
     {
+        /// <summary>
+        /// Metodo proveniente de IDAO (No aplica)
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns>Retorna NotImplementedException()</returns>
         int IDAO.Agregar(Domain.Entidad e)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Metodo proveniente de IDAO (No aplica)
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns>Retorna NotImplementedException()</returns>
         Domain.Entidad IDAO.Modificar(Domain.Entidad e)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Metodo proveniente de IDAO (No aplica)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Retorna NotImplementedException()</returns>
         Domain.Entidad IDAO.Consultar(int id)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Metodo para consultar todas las ciudad
+        /// </summary>
+        /// <returns>Retorna un listado de ciudades</returns>
         Dictionary<int, Entidad> IDAO.ConsultarTodos()
         {
             Dictionary<int, Entidad> listaCiudades = new Dictionary<int, Entidad>();

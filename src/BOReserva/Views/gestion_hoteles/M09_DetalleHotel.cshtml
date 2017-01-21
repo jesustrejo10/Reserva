@@ -60,17 +60,21 @@
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
+                                <label for="">Precio por habitacion($)</label>
+                                @Html.TextBoxFor(m => m._precioHabitacion, null, new { @class = "form-control", @placeholder = "28", @id = "hot_pais", @readonly = "readonly" })
+                            </div>
+                            <div class="col-xs-6">
                                 <label for="">Pais</label>
                                 @Html.TextBoxFor(m => m._pais, null, new { @class = "form-control", @placeholder = "28", @id = "hot_pais", @readonly = "readonly" })
                             </div>
 
-                            <div class="col-xs-6">
-                                <label for="Ciudad">Ciudad</label>                               
-                                @Html.TextBoxFor(m => m._ciudad, null, new { @class = "form-control", @placeholder = "28", @id = "hot_pais", @readonly = "readonly" })
-                            </div>
                         </div>
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="Ciudad">Ciudad</label>
+                                @Html.TextBoxFor(m => m._ciudad, null, new { @class = "form-control", @placeholder = "28", @id = "hot_pais", @readonly = "readonly" })
+                            </div>
                         </div>
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
