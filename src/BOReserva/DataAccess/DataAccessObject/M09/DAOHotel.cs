@@ -23,7 +23,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
 
             try
             {
-                //listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_nombre, SqlDbType.VarChar, hotel._nombre, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_nombre, SqlDbType.VarChar, hotel._nombre, false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_pagina, SqlDbType.VarChar, hotel._paginaWeb, false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_email, SqlDbType.VarChar, hotel._email, false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_cantidad_habitaciones, SqlDbType.Int, hotel._capacidad.ToString(), false));
@@ -37,7 +37,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
             catch (SqlException ex)
             {
-                M09_Exception exception = new M09_Exception(ex, M09_Exception.messageHelper(ex), this.GetType().ToString());
+                //M09_Exception exception = new M09_Exception(ex, M09_Exception.messageHelper(ex), this.GetType().ToString());
                 Debug.WriteLine("Ocurrio un SqlException");
                 Debug.WriteLine(ex.ToString());
                 return 2;
