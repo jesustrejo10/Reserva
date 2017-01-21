@@ -146,14 +146,7 @@
                 jQuery.each(permisos, function (k, v) {
                         $('<input/>', { type: 'checkbox', id: 'permiso' + v._idPermiso, value: v._nombre }).appendTo(container);
                         $('<label/>', { 'for': 'permiso' + v._idPermiso, text: v._nombre }).appendTo(container);
-                        $('<br>').appendTo(container);
-                    //jQuery.each(v, function (i) {
-                    //    //var inputs = container.find('input');
-                    //    //var id = inputs.length + 1;
-                    //    $('<input/>', { type: 'checkbox', id: 'permiso' + v._idPermiso, value: v._nombre }).appendTo(container);
-                    //    $('<label/>', { 'for': 'permiso' + v._idPermiso, text: v._nombre }).appendTo(container);
-                    //    $('<br>').appendTo(container);
-                    //});              
+                        $('<br>').appendTo(container);                       
                 });
             }
         };
