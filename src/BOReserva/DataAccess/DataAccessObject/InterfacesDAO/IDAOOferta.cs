@@ -11,5 +11,6 @@ namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
     interface IDAOOferta : IDAO
     {
         //Aquí van los métodos propios para las ofertas
+        List<Entidad> ConsultarTodos();
     }
 }

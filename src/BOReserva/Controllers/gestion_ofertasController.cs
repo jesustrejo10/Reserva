@@ -11,6 +11,7 @@ using BOReserva.Models.gestion_restaurantes;
 using System.Collections.Specialized;
 using BOReserva.DataAccess.Domain;
 using BOReserva.Controllers.PatronComando;
+using System.Diagnostics;
 
 namespace BOReserva.Controllers
 {
@@ -57,11 +58,26 @@ namespace BOReserva.Controllers
 
         public ActionResult M11_VisualizarOferta()
         {
-            manejadorSQL sql = new manejadorSQL();
+
+            Debug.WriteLine("BOTON VISUALIZAR OFERTA");
+
+            Command<List<Entidad>> comando = FabricaComando.crearM11VisualizarOfertas();
+            List<Entidad> listaOfertas = comando.ejecutar();
+            return PartialView(listaOfertas);
+
+
+            /*manejadorSQL sql = new manejadorSQL();
             List<COferta> ofertas = new List<COferta>();
             ofertas = sql.listarOfertasEnBD();
             return PartialView(ofertas);
+            
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM09VisualizarHoteles();
+            Dictionary<int, Entidad> listaHoteles = comando.ejecutar();
+            return PartialView(listaHoteles);
+
+            */
         }
+
 
         public List<COferta> M11_PaquetesPorOferta()
         {
@@ -253,6 +269,7 @@ namespace BOReserva.Controllers
             return Json(oferta);
         }
 
+        
 
         [HttpPost]
         public JsonResult desasociarPaquetesModificar(int[] idsPaquetes,int idOferta)

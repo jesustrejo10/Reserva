@@ -31,6 +31,18 @@ namespace BOReserva.DataAccess.Domain
             _estadoOferta = estadoOferta;
         }
 
+        public Oferta(int idOferta, String nombreOferta, float porcentajeOferta, DateTime fechaIniOferta,
+                     DateTime fechaFinOferta, Boolean estadoOferta)
+        {
+            _idOferta = idOferta;
+            _nombreOferta = nombreOferta;
+            _nombrePaquete = "";
+            _porcentajeOferta = porcentajeOferta;
+            _fechaIniOferta = fechaIniOferta;
+            _fechaFinOferta = fechaFinOferta;
+            _estadoOferta = estadoOferta;
+        }
+
         public Oferta(String nombre, float porcentaje, DateTime fInicio, DateTime fFin, bool estado)
         {
             _nombreOferta = nombre;

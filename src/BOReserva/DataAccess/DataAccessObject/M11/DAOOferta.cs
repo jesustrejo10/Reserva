@@ -1,8 +1,10 @@
 ﻿using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
+using BOReserva.Models.gestion_ofertas;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
@@ -13,7 +15,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
 {
     public class DAOOferta : DAO, IDAOOferta
     {
-        public DAOOferta() { } 
+        public DAOOferta() { }
 
         /// <summary>
         /// Agregar Oferta a la BAse de Datos
@@ -31,9 +33,9 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
             try
             {
                 conexion.Open();
-                String querySql = "INSERT INTO Oferta VALUES ('" 
-                                  + oferta._nombreOferta + "','" + oferta._fechaIniOferta.ToString("MM-dd-yyyy") 
-                                  + "', '" + oferta._fechaFinOferta.ToString("MM-dd-yyyy") + "'," 
+                String querySql = "INSERT INTO Oferta VALUES ('"
+                                  + oferta._nombreOferta + "','" + oferta._fechaIniOferta.ToString("MM-dd-yyyy")
+                                  + "', '" + oferta._fechaFinOferta.ToString("MM-dd-yyyy") + "',"
                                   + oferta._porcentajeOferta + ",'" + oferta._estadoOferta + "');";
                 Debug.WriteLine(querySql);
                 SqlCommand cmd = new SqlCommand(querySql, conexion);
@@ -83,11 +85,61 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
 
         }
 
-        Dictionary<int, Entidad> ConsultarTodos()
+        /// <summary>
+        /// Metodo implementado de IDAO para consultar los ofertas de la BD
+        /// </summary>
+        /// <returns>Retorna el listado de hoteles</returns>
+        List<Entidad> IDAOOferta.ConsultarTodos()
         {
-            return null;
+            Debug.WriteLine("LLEGÓ A DAO OFERTA");
+
+            List<Entidad> listaOfertas = FabricaEntidad.asignarListaDeEntidades();
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            DateTime dt = new DateTime(2008, 3, 9, 16, 5, 7, 123);
+            Entidad oferta;
+
+            try
+            {
+                conexion.Open();                                
+                SqlCommand cmd = new SqlCommand("[dbo].[M11_ConsultarOfertas]", conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                Debug.WriteLine("HIZO CONEXIÓN");
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    Debug.WriteLine("CMD.READER");
+
+                    while (reader.Read())
+                    {
+
+                        var fechaInivar = reader["fechaIn"];
+                        var fechaFinvar = reader["fechaFin"];
+                        var estadovar = reader["estado"];
+
+                        DateTime fechaInicio = Convert.ToDateTime(fechaInivar).Date;
+                        DateTime fechaFin = Convert.ToDateTime(fechaFinvar).Date;
+                        Boolean disponibilidad = Convert.ToBoolean(estadovar);
+
+                        List<String> listaPaquetes = new List<String>();
+
+                       // listaPaquetes = MBuscarNombrePaquetesDeOferta(Int32.Parse(reader["ofe_id"].ToString()));
+                       
+                        oferta =  FabricaEntidad.InstanciarOferta(reader["idOferta"].ToString(), reader["nombreOferta"].ToString(), 
+                                                                  listaPaquetes, float.Parse(reader["porcentaje"].ToString()),
+                                                                  fechaInicio, fechaFin, disponibilidad);
+                        listaOfertas.Add(oferta);
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return listaOfertas;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return null;
+            }
         }
-        
-           
     }
+        
 }
