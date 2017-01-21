@@ -37,7 +37,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
             catch (SqlException ex)
             {
-                M09_Exception exception = new M09_Exception(ex, M09_Exception.messageHelper(ex), this.GetType().ToString());
+               // M09_Exception exception = new M09_Exception(ex, M09_Exception.messageHelper(ex), this.GetType().ToString());
                 Debug.WriteLine("Ocurrio un SqlException");
                 Debug.WriteLine(ex.ToString());
                 return 2;
