@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.Controllers.PatronComando.M14
+namespace BOReserva.Controllers.PatronComando
 {
     public class M14_COAgregarCabina : Command<String>
     {
