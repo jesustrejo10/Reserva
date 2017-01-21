@@ -192,6 +192,23 @@ namespace BOReserva.DataAccess.Domain
             return new Oferta(model._nombreOferta, model._porcentajeOferta, model._fechaIniOferta,
                               model._fechaFinOferta, model._estadoOferta);
         }
+
+        /// <summary>
+        /// Agregar oferta
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+
+        public static Entidad InstanciarOferta(String idOferta, String nombreOferta, List<String> listaPaquetes, 
+                                               float porcentajeOferta, DateTime fechaIniOferta, DateTime fechaFinOferta, 
+                                               Boolean estadoOferta)
+        {
+            return new Oferta(idOferta, nombreOferta, listaPaquetes , porcentajeOferta, fechaIniOferta, fechaFinOferta, 
+                               estadoOferta);
+        }
+
+
+
         /// <summary>
         /// Para la parte de agregar paquete necesitamos instancias un paquete primero
         /// </summary>

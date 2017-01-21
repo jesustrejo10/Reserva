@@ -327,11 +327,28 @@ namespace BOReserva.Controllers.PatronComando
             return new M11_COAgregarOferta((Oferta) e);
 
         }
-
+        /// <summary>
+        /// Método que instancia Agregar Paquete
+        /// </summary>
+        /// <param name="e">Parámetro del tipo Paquete</param>
+        /// <returns>Instancia del comando Agregar Paquete</returns>
         public static Command<String> crearM11AgregarPaquete(Entidad e)
         {
 
             return new M11_COAgregarPaquete((Paquete)e);
+
+        }
+
+        /// <summary>
+        /// Instancia el comando VisualizarOfertas
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M11_COVisualizarOferta
+        /// </returns>
+        public static Command<List<Entidad>> crearM11VisualizarOfertas()
+        {
+
+            return new M11_COVisualizarOfertas();
 
         }
 

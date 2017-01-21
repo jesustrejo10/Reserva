@@ -159,7 +159,7 @@ namespace BOReserva.DataAccess.DataAccessObject
         /// Método que crea la instancia de DAOOferta
         /// </summary>
         /// <returns>Retorna la instancia a la clase DAOOferta</returns>
-        public static DAO instanciarDaoOferta()
+        public static DAOOferta instanciarDaoOferta()
         {
             return new DAOOferta();
         }

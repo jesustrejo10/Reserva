@@ -1,6 +1,7 @@
 ﻿using BOReserva.DataAccess.DAO;
 using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+using BOReserva.DataAccess.DataAccessObject.M11;
 using BOReserva.DataAccess.Domain;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace BOReserva.Controllers.PatronComando.M11
     /// <summary>
     /// Comando Visualizar Ofertas
     /// </summary>
-    public class M11_COVisualizarOfertas: Command<Dictionary<int, Entidad>>
+    public class M11_COVisualizarOfertas: Command<List<Entidad>>
     {
         /// <summary>
         /// Sobreescritura del metodo ejecutar de la clase Comando.
@@ -21,10 +22,10 @@ namespace BOReserva.Controllers.PatronComando.M11
         /// <returns>
         /// Retorna un Identity map, de tipo int, Entidad
         /// </returns>
-        public override Dictionary<int, Entidad> ejecutar()
+        public override List<Entidad> ejecutar()
         {
-            IDAO daoOferta = FabricaDAO.instanciarDaoOferta();
-            Dictionary<int, Entidad> mapOfertas = daoOferta.ConsultarTodos();
+            IDAOOferta daoOferta = FabricaDAO.instanciarDaoOferta();
+            List<Entidad> mapOfertas = daoOferta.ConsultarTodos();
             return mapOfertas;
         }
     }
