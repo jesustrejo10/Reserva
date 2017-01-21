@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using FOReserva.Models.Revision;
 using FOReserva.Models.Restaurantes;
 using System.Data.SqlClient;
+using static FOReserva.Models.Revision.CRevision;
 //using FOReserva.Models.Revision.CRevision;
 
 namespace FOReserva.Servicio
@@ -38,7 +39,7 @@ namespace FOReserva.Servicio
                     CRevision rev = new CRevision();
                     rev.Id = id;
                     rev.Name = nombre;
-                    rev.Tipo = tipo;
+                    rev.Tipo = (TipoRevision)tipo;
                     lista_rev.Add(rev);
                 }
             }
@@ -83,7 +84,7 @@ namespace FOReserva.Servicio
                     CRevision rev = new CRevision();
                     rev.Id = id;
                     rev.Name = nombre;
-                    rev.Tipo = tipo;
+                    rev.Tipo = (TipoRevision)tipo;
                     lista_rev.Add(rev);
                 }
             }

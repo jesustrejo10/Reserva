@@ -5,6 +5,9 @@ using System.Web;
 
 namespace BOReserva.Excepciones
 {
+    /// <summary>
+    /// Excepcion General del Proyecto Reserva
+    /// </summary>
     public class ExceptionReserva: Exception
     {
         #region Atributos

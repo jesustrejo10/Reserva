@@ -10,6 +10,7 @@ namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
         int MBuscarIdaVuelta(int id);
         int MConteoCategoria(int codigo_vuelo, String tipo);
         int MConteoCapacidad(int codigo_vuelo, String tipo);
+        int EliminarBoleto(int id);
         List<Entidad> ConsultarBoletos();
     }
 }
