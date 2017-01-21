@@ -1,13 +1,13 @@
-﻿using FOReserva.Models.ReservaHabitacion;
-using FOReserva.Models.Revision;
-using FOReserva.Models.Usuarios;
+﻿using BOReserva.DataAccess.Domain;
+using FOReserva.DataAccess.DataAccessObject.M20;
+using FOReserva.DataAccess.Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static FOReserva.Models.Revision.CRevision;
 
 namespace TestUnitReserva.FO.Revision
 {
@@ -23,24 +23,17 @@ namespace TestUnitReserva.FO.Revision
         [TestMethod]
         public void TestRevisionAgregarRevisionHotel()
         {
-            var revision = new CRevision
+            var revision = new FOReserva.DataAccess.Domain.Revision
             {
                 Id = 84,
                 Mensaje = "Test RHotel.",
                 Puntuacion = 0,
                 Tipo = TipoRevision.Hotel,
-                Usuario = new CUsuario
-                {
-                    ID = 1,
-                    Nombre = "Usuari Prueba"
-                },
-                Referencia = new CReservaHabitacion
-                {
-                    ID = 37
-                }
+                Usuario = new FOReserva.DataAccess.Domain.Entidad(1),
+                Referencia = new FOReserva.DataAccess.Domain.Entidad(37)
             };
 
-            var result = DAORevision.Singleton().GuardarRevision(revision, usuario, reservaHabitacion);
+            var result = DAORevision.Singleton().GuardarRevision(revision);
             Debug.WriteLine($"Message: {result.Message}");
             Assert.IsTrue(result.ProcessFinishCorrectly);
         }
