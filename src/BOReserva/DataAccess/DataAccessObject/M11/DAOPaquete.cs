@@ -32,6 +32,10 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
 
             SqlConnection conexion = Connection.getInstance(_connexionString);  //Para obtener la conexión a la 
                                                                                 //base de datos
+
+            SqlDataReader lector = null;  //La clase SqlDataReader ofrece una manera de leer un
+                                         //flujo de filas de solo avance desde una base de 
+                                        //datos de SQL Server.
             try
             {
                 conexion.Open();
@@ -65,13 +69,51 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
                 query.Parameters.AddWithValue("@ffc", (object)paquete._fechaFinCruc ?? DBNull.Value);
                 query.Parameters.AddWithValue("@ffb", (object)paquete._fechaFinVuelo ?? DBNull.Value);
                 query.Parameters.AddWithValue("@pe", estado);
+
+                lector = query.ExecuteReader();               //El método ExecuteReader() envía la propiedad 
+                                                              //CommandText a Connection y crea un objeto 
+                                                              //SqlDataReader.
+                                                              
+                lector.Close();   //Se cierra el lector
+                conexion.Close(); //Se cierra la conexión
+                return 1; //Este método retorna el valor 1 si se pudo agregar el paquete a la tabla Paquete de la 
+                          //base de datos.
+                                                              
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
-                
-                throw;
+                Debug.WriteLine("Ocurrió una SqlException ");
+                Debug.WriteLine(ex.ToString());
+                lector.Close();
+                conexion.Close();
+                return 2;
             }
-            return 0;
+            catch (NullReferenceException ex)
+            {
+                Debug.WriteLine("Ocurrió una NullReferenceException ");
+                Debug.WriteLine(ex.ToString());
+                lector.Close();
+                conexion.Close();
+                return 3;
+            }
+            catch (ArgumentNullException ex)
+            {
+                Debug.WriteLine("Ocurrió una ArgumentNullException ");
+                Debug.WriteLine(ex.ToString());
+                lector.Close();
+                conexion.Close();
+                return 4;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Ocurrió una Exception ");
+                Debug.WriteLine(ex.ToString());
+                lector.Close();
+                conexion.Close();
+                return 5;
+            }
+            
+            
         }
     }
 }
