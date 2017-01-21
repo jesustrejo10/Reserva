@@ -5,7 +5,7 @@
 
 
 <!---------------------- SECCION DE AGREGAR AVION ---------------->
-@using (Html.BeginForm("guardarAvion", "gestion_aviones", null, FormMethod.Post, new { @id = "formGuardarAvion", @class = "form-horizontal" }))
+@using (Html.BeginForm("guardarAvion", "gestion_aviones", null, FormMethod.Post, new { @id = "formmodifyAvion", @class = "form-horizontal" }))
 {
 
     <div class="row">
@@ -103,23 +103,13 @@
                             <div class="col-md-12" style="margin-top:10px;">
                                 <div class="col-md-4"></div>
                                 <div class="col-md-2">
-                                    <button type="button" id="modificarAvion" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Modificar</button>
+                                    <button type="button" id="modify_avion" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Modificar</button>
                                 </div>
                                 <div class="col-md-2">
                                     <button id="cancelarModificacion" type="button" class="btn btn-danger" style="display:block; margin-left:auto; margin-right:auto;">Cancelar</button>
                                 </div>
                                 <div class="col-md-4"></div>
                             </div>
-
-
-                            @*<div class="col-md-12" style="margin-top:10px;">
-                                <div class="col-md-2">
-                                    <button type="button" id="modificarAvion" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar Cambios</button>
-                                </div>
-                                <div class="col-md-2">
-                                    <button id="cancelarModificacion" type="button" class="btn btn-danger" style="display:block; margin-left:auto; margin-right:auto;">Cancelar</button>
-                                </div>
-                            </div>*@
                         </div>
                         <!-- /.col -->
                     </div>
@@ -132,21 +122,74 @@
         <!-- /.col -->
     </div>
     <!-- /.row -->
-
-    @*<script>
-            $("#aceptarAvion").click(function (e) {
-                e.preventDefault();
-                var form = $("#formGuardarAvion");
-                $.ajax({
-                    url: "gestion_aviones/guardarAvion",
-                    data: form.serialize(),
-                    type: 'POST',
-                    success: function (data) {
-                        alert("Se guardo");
-                        $('#formGuardarAvion')[0].reset();
-                    }
-                });
-            });
-        </script>*@
 }
 <!------------------- FIN DE SECCION DE AGREGAR AVION ---------------->
+
+<script>
+
+    /// <summary>
+    /// Evento para modificar Avion
+    /// </summary>
+    $("#modify_avion").click(function (e) {
+        e.preventDefault();
+        var form = $("#formmodifyAvion");
+        var matricula = $('#matriculaAvion').val();
+        var modelo = $('#modeloAvion').val();
+        var capacidadturista = $('#capacidadTuristas').val();
+        var capacidadejecutiva = $('#capacidadEjecutiva').val();
+        var capacidadvip = $('#capacidadVIP').val();
+        var capacidadequipaje = $('#capacidadEquipaje').val();
+        var distanciamaxvuelo = $('#distanciaMaximaVuelo').val();
+        var velocidadmaxvuelo = $('#velocidadMaximaDeVuelo').val();
+        var capacidadcombustible = $('#capacidadCombustible').val();
+        console.log(matricula);
+        console.log(modelo);
+        console.log(capacidadturista);
+        console.log(capacidadejecutiva);
+        console.log(capacidadvip);
+        console.log(capacidadequipaje);
+        console.log(distanciamaxvuelo);
+        console.log(capacidadcombustible);
+
+        /// <summary>
+        /// Evento para validar que los campos no esten vacios
+        /// </summary>
+        if (matricula && modelo && capacidadturista && capacidadejecutiva && capacidadvip && capacidadequipaje && distanciamaxvuelo && capacidadcombustible) {
+            $.ajax({
+                url: "gestion_aviones/modificarAvion",
+                data: form.serialize(),
+                type: 'POST',
+                success: function (data) {
+                    if (data === "1") {
+                        alert("Se modifico el avion exitosamente, sera redirigido al listado de aviones");
+                        //$('#formmodifyVehicle')[0].reset();
+                        var url1 = '/gestion_aviones/M02_VisualizarAviones';
+                        var method = 'GET';
+                        var data1 = '';
+
+                        $.ajax(
+                            {
+                                url: url1,
+                                type: method,
+                                data: data,
+                                success: function (data, textStatus, jqXHR) {
+
+                                    $("#contenido").empty();
+                                    $("#contenido").append(data);
+                                },
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    alert(errorThrown);
+                                }
+                            });
+                    } else {
+                        alert(data);
+                    }
+                }
+            });
+        } else {
+            alert("Existen campos vacios, por favor revise todos los campos");
+        }
+    });
+
+</script>
+    

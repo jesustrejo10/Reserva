@@ -16,8 +16,6 @@
                             <th>Matrícula</th>
                             <th>Modelo</th>
                             <th>Capacidad Turista/Ejecutiva/VIP</th>
-                            @*<th>Capacidad Clase Ejecutiva</th>
-                                <th>Capacidad Clase VIP</th>*@
                             <th>Equipaje (Kg)</th>
                             <th>Dist. Max(Km)</th>
                             <th>Vel. Max(Km/h)</th>
@@ -31,25 +29,23 @@
                         {
                             foreach (var item in Model)
                             {
+                                BOReserva.DataAccess.Domain.Avion c = (BOReserva.DataAccess.Domain.Avion)item.Value;
                                 String disponibilidad;
-                                if (item._disponibilidad == 1) { disponibilidad = "Disponible"; } else { disponibilidad = "No disponible"; }
-
-                                <tr id="@item._id">
-                                    <td>@item._matricula</td>
-                                    <td>@item._modelo</td>
-                                    <td>@item._capacidadTurista / @item._capacidadEjecutiva / @item._capacidadVIP </td>
-                                    @*<td>@item._capacidadEjecutiva</td>
-                                        <td>@item._capacidadVIP</td>*@
-                                    <td>@item._capacidadEquipaje</td>
-                                    <td>@item._distanciaMaximaVuelo</td>
-                                    <td>@item._velocidadMaxima</td>
-                                    <td>@item._capacidadCombustible</td>
+                                if (c._disponibilidad == 1) { disponibilidad = "Disponible"; } else { disponibilidad = "No disponible"; }
+                                
+                                <tr id="@item.Key">
+                                    <td>@c._matricula</td>
+                                    <td>@c._modelo</td>
+                                    <td>@c._capacidadTurista / @c._capacidadEjecutiva / @c._capacidadVIP </td>
+                                    <td>@c._capacidadEquipaje</td>
+                                    <td>@c._distanciaMaximaVuelo</td>
+                                    <td>@c._velocidadMaxima</td>
+                                    <td>@c._capacidadCombustible</td>
                                     <td>@disponibilidad</td>
                                     <td>
-                                        @*<a href="#"> <i class="fa fa-eye clasedeprueba"></i></a>*@
                                         <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>
                                         <a href="#" title="Eliminar avión"><i class="fa fa-times eliminar"></i></a>
-                                        @if (item._disponibilidad == 1)
+                                        @if (c._disponibilidad == 1)
                                         {
                                             <a href="#" title="Deshabilitar"><i class="fa fa-toggle-on desactivar"></i></a>
                                         }
@@ -58,16 +54,22 @@
                                             <a href="#" title="Habilitar"><i class="fa fa-toggle-off activar"></i></a>
                                         }
                                     </td>
+
                                     <script>
+
+                                        /// <summary>
+                                        /// Evento para Activar un avion
+                                        /// </summary>
                                         $(".activar").click(function (event) {
                                             console.log("hola");
                                             event.preventDefault();
                                             event.stopPropagation();
                                             event.stopImmediatePropagation();
+                                            alert("Avion Activado");
                                             var identificador = $(this).parent().parent().parent().attr("id");
                                             jQuery.ajax({
                                                 type: "POST",
-                                                url: "/gestion_aviones/habilitarAvion",
+                                                url: "/gestion_aviones/activateAvion",
                                                 data: { id: identificador }
                                             }).done(function (data) {
                                                 var url = '/gestion_aviones/M02_VisualizarAviones';
@@ -92,15 +94,19 @@
                                             });
                                         });
 
+                                        /// <summary>
+                                        /// Evento para desactivar un avion
+                                        /// </summary>
                                         $(".desactivar").click(function (event) {
                                             console.log("hola");
                                             event.preventDefault();
                                             event.stopPropagation();
                                             event.stopImmediatePropagation();
+                                            alert("Avion Desactivado");
                                             var identificador = $(this).parent().parent().parent().attr("id");
                                             jQuery.ajax({
                                                 type: "POST",
-                                                url: "/gestion_aviones/deshabilitarAvion",
+                                                url: "/gestion_aviones/deactivateAvion",
                                                 data: { id: identificador }
                                             }).done(function (data) {
                                                 var url = '/gestion_aviones/M02_VisualizarAviones';
@@ -125,6 +131,9 @@
                                             });
                                         });
 
+                                        /// <summary>
+                                        /// Evento para modificar un avion
+                                        /// </summary>
                                         $(".modificar").click(function (event) {
                                             event.preventDefault();
                                             event.stopPropagation();
@@ -132,18 +141,20 @@
                                             var identificador = $(this).parent().parent().parent().attr("id");
                                             jQuery.ajax({
                                                 type: "GET",
-                                                url: "/gestion_aviones/M02_ConsultarAvion",
+                                                url: "/gestion_aviones/M02_ModificarAvion",
                                                 data: { id: identificador }
                                             }).done(function (data) {
+                                                console.log(identificador);
                                                 $("#contenido").empty();
                                                 $("#contenido").append(data);
                                             }).fail(function () {
                                                 alert(data);
                                             });
-
-
                                         });
 
+                                        /// <summary>
+                                        /// Evento para eliminar un avion
+                                        /// </summary>
                                         $(".eliminar").click(function (event) {
                                             event.preventDefault();
                                             event.stopPropagation();
@@ -151,7 +162,7 @@
                                             var identificador = $(this).parent().parent().parent().attr("id");
                                             jQuery.ajax({
                                                 type: "POST",
-                                                url: "/gestion_aviones/eliminarAvion",
+                                                url: "/gestion_aviones/deleteAvion",
                                                 data: { id: identificador }
                                             }).done(function (data) {
                                                 var url = '/gestion_aviones/M02_VisualizarAviones';
@@ -166,6 +177,7 @@
 
                                                             $("#contenido").empty();
                                                             $("#contenido").append(data);
+                                                            alert("Se Elimino Exitosamente el Avion");
                                                         },
                                                         error: function (jqXHR, textStatus, errorThrown) {
                                                             alert(errorThrown);
@@ -194,8 +206,6 @@
                             <th>Matrícula</th>
                             <th>Modelo</th>
                             <th>Capacidad Turista/Ejecutiva/VIP</th>
-                            @*<th>Capacidad Clase Ejecutiva</th>
-                                <th>Capacidad Clase VIP</th>*@
                             <th>Equipaje (Kg)</th>
                             <th>Dist. Max(Km)</th>
                             <th>Vel. Max(Km/h)</th>
@@ -222,4 +232,5 @@
     table = $('#example1').DataTable();
 
 </script>
+
 

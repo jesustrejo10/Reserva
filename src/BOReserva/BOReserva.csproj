@@ -207,6 +207,11 @@
     <Compile Include="Controllers\PatronComando\Command.cs" />
     <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
     <Compile Include="Controllers\PatronComando\M02\M02_COAgregarAvion.cs" />
+    <Compile Include="Controllers\PatronComando\M02\M02_COConsultarAvion.cs" />
+    <Compile Include="Controllers\PatronComando\M02\M02_CODisponibilidadAvion.cs" />
+    <Compile Include="Controllers\PatronComando\M02\M02_COEliminarAvion.cs" />
+    <Compile Include="Controllers\PatronComando\M02\M02_COModificarAvion.cs" />
+    <Compile Include="Controllers\PatronComando\M02\M02_COVisualizarAvion.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COBuscarnombreciudad.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COEliminarBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COModificarPasajero.cs" />
@@ -332,6 +337,7 @@
     <Compile Include="Models\gestion_aviones\CAgregarAvion.cs" />
     <Compile Include="Models\gestion_aviones\CAvion.cs" />
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
+    <Compile Include="Models\gestion_aviones\CVerAvion.cs" />
     <Compile Include="Models\gestion_comida_vuelo\CAgregarVuelo.cs" />
     <Compile Include="Models\gestion_comida_vuelo\CVuelo.cs" />
     <Compile Include="Models\gestion_comida_vuelo\CVueloComida.cs" />

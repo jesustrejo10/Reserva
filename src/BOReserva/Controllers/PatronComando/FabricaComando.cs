@@ -1,5 +1,5 @@
 using BOReserva.Controllers.PatronComando.M09;
-using BOReserva.Controllers.PatronComando;
+using BOReserva.Controllers.PatronComando.M02;
 using BOReserva.DataAccess.Domain;
 using BOReserva.M10.Comando.gestion_restaurantes;
 using System;
@@ -13,6 +13,8 @@ namespace BOReserva.Controllers.PatronComando
     /// </summary>
     public class FabricaComando
     {
+        #region M02_Gestion_Avion
+        #region crearM02AgregarAvion
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
         /// M09_COAgregarHotel
@@ -25,6 +27,70 @@ namespace BOReserva.Controllers.PatronComando
             return new M02_COAgregarAvion((Avion)e);
 
         }
+
+        #endregion
+        #region crearM02VisualizarAvion
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M09_COVisualizarHoteles
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M09_COVisualizarHoteles.
+        /// </returns>
+        public static Command<Dictionary<int, Entidad>> crearM02VisualizarAviones()
+        {
+
+            return new M02_COVisualizarAvion();
+
+        }
+
+        #endregion
+        #region crearM02ConsultarAvion
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M09_COConsultarHoteles
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M09_COConsultarHoteles.
+        /// </returns>
+        public static Command<Entidad> crearM02ConsultarAvion(int id)
+        {
+
+            return new M02_COConsultarAvion(id);
+
+        }
+
+        #endregion
+        #region crearM02ModificarAvion
+        public static Command<string> crearM02ModificarAvion(Entidad avion, int idmodificar)
+        {
+
+            return new M02_COModificarAvion(avion, idmodificar);
+
+        }
+        #endregion
+        #region crearM02EliminarAvion
+        public static Command<string> crearM02EliminarAvion(Entidad avion,int ideliminar)
+        {
+            return new M02_COEliminarAvion(avion,ideliminar);
+        }
+        #endregion
+        #region crearM02DisponibilidadAvion
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M09_CODisponibilidadHotel
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M09_CODisponibilidadHotel.
+        /// </returns>
+        public static Command<String> crearM02DisponibilidadAvion(Entidad avion, int disponibilidad)
+        {
+
+            return new M02_CODisponibilidadAvion(avion, disponibilidad);
+
+        }
+        #endregion
+        #endregion
 
         #region M09_Gestion_Hoteles_Por_Ciudad
 

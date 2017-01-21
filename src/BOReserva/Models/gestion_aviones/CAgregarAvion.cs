@@ -7,7 +7,10 @@ using System.Web;
 
 namespace BOReserva.Models.gestion_aviones
 {
-    
+
+    /// <summary>
+    /// Clase modelo de Avion, usado para el agregarAvion 
+    /// </summary>
     public class CAgregarAvion
     {
         public String _matriculaAvion { get; set; }

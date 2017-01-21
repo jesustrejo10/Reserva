@@ -12,7 +12,7 @@ namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
         int Agregar(Entidad e);
         Entidad Modificar(Entidad e);
         Entidad Consultar(int id);
-        int Eliminar(int id);
+        //int Eliminar(int id);
         Dictionary<int,Entidad> ConsultarTodos();
 
     }

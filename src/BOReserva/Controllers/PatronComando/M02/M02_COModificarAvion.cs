@@ -1,5 +1,4 @@
-﻿using BOReserva.DataAccess.DAO;
-using BOReserva.DataAccess.DataAccessObject;
+﻿using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using System;
@@ -7,21 +6,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-
-
-namespace BOReserva.Controllers.PatronComando
+namespace BOReserva.Controllers.PatronComando.M02
 {
-    /// <summary>
-    /// Comando destinado a Realizar las respectivas operaciones necesarias
-    /// para agregar un a avion a la BD
-    /// </summary>
-    public class M02_COAgregarAvion : Command<String>
-    {
-        Avion _avion;
 
-        public M02_COAgregarAvion(Avion avion)
-        {
-            this._avion = avion;
+    /// <summary>
+    /// Comando Modificar Avion
+    /// </summary>
+    public class M02_COModificarAvion : Command<String>
+    {
+
+          Avion _avion;
+        int _idmodificar;
+
+        public M02_COModificarAvion(Entidad avion, int id) { 
+            this._avion = (Avion) avion;
+            this._avion._id = id;
         }
 
         ///// <summary>
@@ -31,13 +30,11 @@ namespace BOReserva.Controllers.PatronComando
         ///// <returns>
         ///// Retorna una Entidad
         ///// </returns>
-        public override String ejecutar()
-        {
+        public override string ejecutar(){
             IDAO daoAvion = FabricaDAO.instanciarDaoAvion();
-            int test = daoAvion.Agregar(_avion);
-            return test.ToString();
+            Entidad test = daoAvion.Modificar(_avion);
+            Avion avion = (Avion)test;
+            return avion._matricula;
         }
-
     }
-
 }

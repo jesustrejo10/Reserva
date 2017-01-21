@@ -207,6 +207,24 @@ namespace BOReserva.DataAccess.Domain
             return new Avion(matricula, modelo, capacidadturistica, capacidadEjecutiva, capacidadVIP, capacidadEquipaje, distanciaMaximaVuelo, velocidadMaxima, capacidadCombustible,disponibilidad);
         }
 
+        public static Entidad InstanciarAvion(CModificarAvion model)
+        {
+
+            string matricula = model._matriculaAvion;
+            string modelo = model._modeloAvion;
+            int capacidadturistica = model._capacidadPasajerosTurista;
+            int capacidadEjecutiva = model._capacidadPasajerosEjecutiva;
+            int capacidadVIP = model._capacidadPasajerosVIP;
+            float capacidadEquipaje = model._capacidadEquipaje;
+            float distanciaMaximaVuelo = model._distanciaMaximaVuelo;
+            float velocidadMaxima = model._velocidadMaximaDeVuelo;
+            float capacidadCombustible = model._capacidadMaximaCombustible;
+            int disponibilidad = model._disponibilidad;
+
+
+            return new Avion(matricula, modelo, capacidadturistica, capacidadEjecutiva, capacidadVIP, capacidadEquipaje, distanciaMaximaVuelo, velocidadMaxima, capacidadCombustible, disponibilidad);
+       
+        }
         #endregion
 
     }

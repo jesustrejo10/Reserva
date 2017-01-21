@@ -6,13 +6,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.Controllers.PatronComando.M09
+namespace BOReserva.Controllers.PatronComando.M02
 {
-    public class M09_COConsultarHotel: Command<Entidad>
+
+    /// Comando destinado a Realizar las respectivas operaciones necesarias
+    /// para consultar un a avion a la BD
+    /// </summary>
+    public class M02_COConsultarAvion : Command<Entidad>
     {
         int valor;
 
-        public M09_COConsultarHotel(int value){
+        public M02_COConsultarAvion(int value){
             this.valor = value;
         }
 
@@ -25,9 +29,9 @@ namespace BOReserva.Controllers.PatronComando.M09
         ///// </returns>
         public override Entidad ejecutar()
         {
-            IDAO daoHotel = FabricaDAO.instanciarDaoHotel();
-            Entidad hotel = daoHotel.Consultar(valor);
-            return hotel;
+            IDAO daoAvion = FabricaDAO.instanciarDaoAvion();
+            Entidad avion = daoAvion.Consultar(valor);
+            return avion;
         }
     }
 }
