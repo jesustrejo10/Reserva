@@ -95,7 +95,7 @@ namespace BOReserva.Controllers
             Rol rolbuscado;
             CRoles modelovista = new CRoles();
             CListaGenerica<CModulo_detallado> md = new CListaGenerica<CModulo_detallado>();
-            CModulo_detallado entrada = new CModulo_detallado();
+            //CModulo_detallado entrada = new CModulo_detallado();
             //CRoles _rol = new CRoles();
             //_rol.Id_Rol = _idRol;
             //manejadorSQL sql = new manejadorSQL();
@@ -109,6 +109,7 @@ namespace BOReserva.Controllers
                 rolbuscado.listapermisos = comando1.ejecutar(); 
                 foreach (Permiso item in rolbuscado.listapermisos)
                 {
+                    CModulo_detallado entrada = new CModulo_detallado();
                     entrada.Nombre = item._nombre;
                     entrada.Id = item._idPermiso;
                     md.agregarElemento(entrada);
