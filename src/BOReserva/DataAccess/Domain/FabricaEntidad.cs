@@ -3,6 +3,7 @@ using BOReserva.Models.gestion_hoteles;
 using BOReserva.Models.gestion_reclamos;
 using BOReserva.Models.gestion_restaurantes;
 using BOReserva.Models.gestion_roles;
+using BOReserva.DataAccess.Domain.M06;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,8 +36,8 @@ namespace BOReserva.DataAccess.Domain
             int capacidad = model._capacidadHabitacion;
             String paginaWeb = model._paginaWeb;
             String email = model._email;
-
-            return new Hotel(nombre, direccion, email, paginaWeb, clasificacion, capacidad, city);
+            int precio = model._precioHabitacion;
+            return new Hotel(nombre, direccion, email, paginaWeb, clasificacion, capacidad, city,precio);
         }
 
         public static Entidad InstanciarHotel(CModificarHotel model, Entidad c)
@@ -72,12 +73,29 @@ namespace BOReserva.DataAccess.Domain
             return new Ciudad(id,nombre,fkPais);
         }
 
+        public static Entidad InstanciarHabitacion(int precio, int fkHotel)
+        {
+            return new Habitacion( precio, fkHotel);
+        }
+
         #endregion 
-        public static Entidad InstanciarReclamo(String tituloReclamo, String detalleReclamo, String fechaReclamo, int estadoReclamo, int usuario)
+
+        #region M16_GestionReclamos
+
+        public static Entidad InstanciarReclamo()
         {
             return new Reclamo();
         }
-        public static Entidad InstanciarReclamo(CAgregarReclamo model, Entidad c)
+        public static Entidad InstanciarReclamo(String tituloReclamo, String detalleReclamo, String fechaReclamo, int estadoReclamo, int usuario)
+        {
+            return new Reclamo(tituloReclamo, detalleReclamo, fechaReclamo, estadoReclamo, usuario);
+        }
+
+        public static Entidad InstanciarReclamo(int reclamo , String tituloReclamo, String detalleReclamo, String fechaReclamo, int estadoReclamo, int usuario)
+        {
+            return new Reclamo(reclamo, tituloReclamo, detalleReclamo, fechaReclamo, estadoReclamo, usuario);
+        }
+        public static Entidad InstanciarReclamo(CAgregarReclamo model)
         {
             String titulo = model._tituloReclamo;
             String detalle = model._detalleReclamo;
@@ -87,6 +105,27 @@ namespace BOReserva.DataAccess.Domain
 
             return new Reclamo(titulo, detalle, fecha, estado, usuario);
         }
+        public static List<Reclamo> InstanciarListaReclamo(Dictionary<int, Entidad> listaEntidad) 
+        {
+            List<Reclamo> lista = new List<Reclamo>();
+            foreach(var e in listaEntidad)
+            {
+                Reclamo nuevoReclamo = (Reclamo)e.Value;
+                lista.Add(nuevoReclamo);
+
+            }
+            return lista;
+        }
+
+        /// <summary>
+        /// Instanciacion para una lista vacia
+        /// </summary>
+        /// <returns>Lista de reclamos vacia</returns>
+        public static List<Reclamo> InstanciarListaReclamo()
+        {
+            return new List<Reclamo>();
+        }
+#endregion
 
         #region M04_Vuelo
         /// <summary>
@@ -176,11 +215,18 @@ namespace BOReserva.DataAccess.Domain
 
         #endregion
 
+        #region Modulo 13
         public static Entidad InstanciarRol(CRoles model)
         {
             String nombre = model.Nombre_rol;
 
             return new Rol(nombre);
+        }
+        public static Entidad InstanciarRolId(CRoles model)
+        {
+            int idRol = model.Id_Rol;
+
+            return new Rol(idRol);
         }
 
         public static Entidad InstanciarRolPermiso(String rol, String permiso)
@@ -192,6 +238,40 @@ namespace BOReserva.DataAccess.Domain
         {
             return new Permiso();
         }
+
+        public static Entidad crearRol(int id, String nombre)
+        {
+            return new Rol(id, nombre);
+        }
+
+        public static Entidad crearPermiso(int id, String nombre)
+        {
+            return new Permiso(id, nombre);
+        }
+
+        public static Entidad crearModulo(int id, String nombre)
+        {
+            return new Modulo(id, nombre);
+        }
+        #endregion
+
+        #region M06 GESTION COMIDA
+
+        public static Entidad instanciarComida(string nombre, string tipo, int estatus, string descripcion) {
+            return new Comida(nombre, tipo, estatus, descripcion);
+        }
+
+        public static Entidad instanciarComida()
+        {
+            return new Comida();
+        }
+
+        public static Entidad instanciarComidaVuelo(int id, string comida, string codigoVuelo, int cantidad)
+        {
+            return new ComidaVuelo(id, comida, codigoVuelo, cantidad);
+        }
+
+        #endregion
 
     }
 }

@@ -11,5 +11,9 @@ namespace BOReserva.DataAccess.DAO
     interface IDAORol : IDAO
     {
         int AgregarRolPermiso(Entidad e);
+        List<Entidad> ConsultarRoles();
+        List<Entidad> ConsultarPermisos(int id);
+        Entidad ConsultarModulos(int id);
+        List<Entidad> ListarPermisos();
     }
 }

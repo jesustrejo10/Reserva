@@ -1,4 +1,4 @@
-@model List<BOReserva.Models.gestion_roles.CRoles>
+@model List<BOReserva.DataAccess.Domain.Entidad>
 
 <div class="row">
     <link rel="stylesheet" href="~/Content/plugins/datatables/dataTables.bootstrap.css">
@@ -14,8 +14,7 @@
                     <thead>
                         <tr>
                             <th>Nombre</th>
-                            <th>Modulo</th>
-
+                            @*<th>Modulo</th>*@
                             <th>Acceso a</th>
                             <th>Accion</th>
                         </tr>
@@ -23,41 +22,37 @@
                     <tbody>
                         @try
                         {
-                            foreach (var item in Model)
+                            foreach (BOReserva.DataAccess.Domain.Rol item in Model)
                             {
-                                <tr id="@item.Nombre_rol">
-                                    <td>@item.Nombre_rol</td>
-                                    <!---<td>  falta el arroba           item.Menu.obtenerUnObjetoDeLaLista(0)</td>-->
-                                    <td>
+                                <tr id="@item._idRol">
+                                    <td>@item._nombreRol</td>
+                                    @*<td>
                                         <table>
-                                            @foreach (var item2 in item.Menu)
+                                            @foreach (var item2 in item.listapermisos)
                                             {
-                                                <tr>@item2.Nombre    </tr>
+                                                <tr>@item2.Nombre </tr>
                                                 <br>}
                                         </table>
-                                    </td>
+                                    </td>*@
                                     <td>
                                         <table>
-                                            @foreach (var item2 in item.Permisos)
+                                            @foreach (BOReserva.DataAccess.Domain.Permiso permisos in item.listapermisos)
                                             {
-                                                <tr>@item2.Nombre 
-                                            <!--<a href="#" id="@item2.Nombre" title="Eliminar Permiso" class="eliminarpermiso"><i class="fa fa-times eliminarpermiso"></i></a>--></tr>
+                                                <tr>@permisos._nombre</tr>
                                                 <br>}
                                         </table>
                                     </td>
                                     <td class="center">
-                                        @if (@item.Nombre_rol != "Administrador" )
+                                        @if (@item._nombreRol != "Administrador" )
                                         {
                                             <a href="#" title="Modificar Rol"><i class="fa fa-pencil modificar"></i></a>
                                         }
-                                        @if (@item.Nombre_rol != "Administrador" && @item.Nombre_rol != "Cargador" && @item.Nombre_rol != "Operador" && @item.Nombre_rol != "Cliente" && @item.Nombre_rol != "Anonimo")
+                                        @if (@item._nombreRol != "Administrador" && @item._nombreRol != "Cargador" && @item._nombreRol != "Operador" && @item._nombreRol != "Cliente" && @item._nombreRol != "Anonimo")
                                         {
                                         <a href="#"  title="Eliminar Rol"><i class="fa fa-times eliminar"></i></a>
                                         }
 
                                     </td>
-                                    
-
                                 </tr>
                           
                             }
@@ -65,11 +60,11 @@
                                            $(".eliminar").click(function () {
                                             var r = confirm("Esta función no podrá ser revertida, ¿Está seguro de que desea continuar?")
                                             if (r) {
-                                                var identificador = $(this).parent().parent().parent().attr("id");
+                                                var identificador = $(this).closest("tr").attr("id");
                                                 jQuery.ajax({
                                                     type: "POST",
                                                     url: "/gestion_roles/eliminarRol",
-                                                    data: { _nombrerol: identificador }
+                                                    data: { _idRol: identificador }
                                                 }).done(function (data) {
                                                     var url = '/gestion_roles/M13_VisualizarRol';
                                                     var method = 'GET';
@@ -95,12 +90,12 @@
                                             }
                                         });
                                         $(".modificar").click(function () {
-                                            var identificador = $(this).parent().parent().parent().attr("id");
+                                            var identificador = $(this).closest("tr").attr("id");
                                             console.log(identificador);
                                             jQuery.ajax({
                                                 type: "GET",
                                                 url: "/gestion_roles/M13_ModificarRol",
-                                                data: { _rolnombre: identificador }
+                                                data: { _rolid: identificador }
                                             }).done(function (data) {
                                                 $("#contenido").empty();
                                                 $("#contenido").append(data);

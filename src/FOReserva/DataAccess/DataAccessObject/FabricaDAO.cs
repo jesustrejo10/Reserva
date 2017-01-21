@@ -24,6 +24,11 @@ namespace FOReserva.DataAccess.DataAccessObject
         {
             return new DAOReclamo();
         }
+
+        public static IDAOReclamo reclamoPersonalizado()
+        {
+            return new DAOReclamo();
+        }
         #endregion
 
         #region Modulo 19

@@ -1,4 +1,5 @@
 
+using BOReserva.DataAccess.DataAccessObject.M01;
 using BOReserva.Models.gestion_usuarios;
 using BOReserva.Servicio;
 using System;
@@ -51,8 +52,7 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
         /// <returns>Retorna true or false segun verificacion de credenciales</returns>
         public Cgestion_seguridad_ingreso verificarUsuario(String _correoCampoTexto, String _claveCampoTexto)
         {
-
-            M01SQL bd = new M01SQL();
+            DAOLogin bd = new DAOLogin();
             String clave = Encriptar.CrearHash(_claveCampoTexto);//metodo implementado por MOD 12 USUARIO
 
             Cgestion_seguridad_ingreso verificacion = bd.UsuarioEnBD(_correoCampoTexto);
@@ -104,7 +104,7 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
         /// <returns>Retorna true bloqueado false si no esta bloqueado</returns>
         public Boolean BloquearUsuario()
         {
-            M01SQL bd = new M01SQL();
+            DAOLogin bd = new DAOLogin();
             if (bd.BloquearUsuario(this._correoCampoTexto))
             {
                 return true;
@@ -123,7 +123,7 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
         /// <returns>Retorna true si el ingreso de contraseña fue correcto false caso contrario</returns>
         public Boolean ResetearIntentos()
         {
-            M01SQL bd = new M01SQL();
+            DAOLogin bd = new DAOLogin();
             if (bd.ResetearIntentos(this._correoCampoTexto))
             {
                 return true;
@@ -143,13 +143,12 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
         /// <returns>Retorna true fue bloqueado false caso contrario</returns>
         public Boolean VerificarIntentos()
         {
-            M01SQL bd = new M01SQL();
+            DAOLogin bd = new DAOLogin();
             int intentos = bd.NumeroIntentos(this._correoCampoTexto);
             if (intentos < 3)
                 return true;
             else
                 throw new Cvalidar_bloqueo_exception("Usuario Bloqueado Contacte administrador");
-            return false;
         }
 
         #endregion
