@@ -295,6 +295,11 @@
     <Compile Include="DataAccess\DataAccessObject\M08\DAOAutomovil.cs" />
     <Compile Include="DataAccess\DataAccessObject\M08\RecursoDAOM08.Designer.cs" />
     <Compile Include="DataAccess\DataAccessObject\M09\DAOHotel.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M09\RecursoDAOM09.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RecursoDAOM09.resx</DependentUpon>
+    </Compile>
     <Compile Include="DataAccess\DataAccessObject\M10\RecursoDAOM10.Designer.cs">
       <DependentUpon>RecursoDAOM10.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -1729,6 +1734,10 @@
     <EmbeddedResource Include="DataAccess\DataAccessObject\M08\RecursoDAOM08.resx" />
     <EmbeddedResource Include="DataAccess\DataAccessObject\M06\RecursoM06.resx" />
     <EmbeddedResource Include="DataAccess\DataAccessObject\M06\Resource1.resx" />
+    <EmbeddedResource Include="DataAccess\DataAccessObject\M09\RecursoDAOM09.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecursoDAOM09.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="DataAccess\DataAccessObject\M10\RecursoDAOM10.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoDAOM10.Designer.cs</LastGenOutput>
