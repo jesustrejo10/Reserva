@@ -4,7 +4,6 @@ using BOReserva.Models.gestion_hoteles;
 using BOReserva.Models.gestion_reclamos;
 using BOReserva.Models.gestion_restaurantes;
 using BOReserva.Models.gestion_roles;
-using BOReserva.DataAccess.Domain.M06;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -354,14 +353,29 @@ namespace BOReserva.DataAccess.Domain
             return new Comida(nombre, tipo, estatus, descripcion);
         }
 
+        public static Entidad instanciarComida(int id,string nombre, string tipo, int estatus, string descripcion)
+        {
+            return new Comida(id, nombre, tipo, estatus, descripcion);
+        }
+
         public static Entidad instanciarComida()
         {
             return new Comida();
         }
 
+        public static Entidad instanciarComida(int id)
+        {
+            return new Comida(id);
+        }
+
         public static Entidad instanciarComidaVuelo(int id, string comida, string codigoVuelo, int cantidad)
         {
             return new ComidaVuelo(id, comida, codigoVuelo, cantidad);
+        }
+
+        public static Entidad instanciarComidaVuelo(int id, string comida, int cantidad)
+        {
+            return  new ComidaVuelo(id, comida, cantidad);
         }
 
         #endregion
