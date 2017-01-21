@@ -9,11 +9,12 @@
     <script src="~/Content/plugins/datepicker/datepicker3.css"></script>
     <script src="~/Content/plugins/datepicker/bootstrap-datepicker.js"></script>
     <script src="~/Content/plugins/datepicker/locales/bootstrap-datepicker.es.js"></script>
+    <link href="~/Content/Canvas/Box.css" rel="stylesheet" />
 </head>
 <!---->
 <div class="row">
-    <div class="col-md-12">
-        <div class="box box-default">
+    <div class="col-md-10">
+        <div class="Cajita">
             <div class="box-header with-border">
                 <h1 class="box-title"> Modificar Paquete</h1>
                 @Html.TextBoxFor(m => m._idPaquete, null, new { @style = "display:none;", @id = "idPaquete" })

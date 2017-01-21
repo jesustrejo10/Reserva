@@ -1,6 +1,7 @@
 ﻿@model BOReserva.Models.gestion_ofertas.CAgregarOferta
 
 <script src="~/Scripts/Scripts_Ofertas/llamadas_generales.js"></script>
+<link href="~/Content/Canvas/Box.css" rel="stylesheet" />
 <!-----------------SECCION AGREGAR OFERTA-------------------->
 @using (Html.BeginForm("guardarOferta", "gestion_ofertas", null, FormMethod.Post, new { @id = "formGuardarOferta", @class = "form-horizontal" }))
 {
@@ -15,8 +16,8 @@
     </head>
     <!---->
 <div class="row">
-    <div class="col-md-12">
-        <div class="box box">
+    <div class="col-md-10">
+        <div class="Cajita">
             <div class="box-header with-border">
                 <h1 class="box-title"> Agregar Oferta</h1>
                 <div class="box-tools pull-right">
