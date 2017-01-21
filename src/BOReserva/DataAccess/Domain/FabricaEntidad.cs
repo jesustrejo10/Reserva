@@ -19,6 +19,45 @@ namespace BOReserva.DataAccess.Domain
     /// </summary>
     public class FabricaEntidad
     {
+        #region M01_Login
+        public static Usuario crearUsuario()
+        {
+            return new Usuario();
+        }
+
+        public static Usuario crearUsuario(String _correo)
+        {
+            return new Usuario()
+            {
+                correo = _correo
+            };
+        }
+
+        public static Usuario crearUsuario(String _correo, String _clave)
+        {
+            return new Usuario()
+            {
+                correo = _correo,
+                clave = _clave
+            };
+        }
+
+        public static Usuario crearUsuario(int _id, int _rol, String _nombre, String _apellido, String _correo, String _clave, String _fechaCreacion, String _activo)
+        {
+            return new Usuario()
+            {
+                id = _id,
+                rol = _rol,
+                nombre = _nombre,
+                apellido = _apellido,
+                correo = _correo,
+                clave = _clave,
+                fechaCreacion = _fechaCreacion,
+                activo = _activo
+            };
+        }
+        #endregion
+
         #region M09_Gestion_Hoteles_Por_Ciudad
         public static Entidad InstanciarHotel(String nombre, String direccion, int fkCiudad, int clasificacion, String webPage, String email, int capacidad)
         {
