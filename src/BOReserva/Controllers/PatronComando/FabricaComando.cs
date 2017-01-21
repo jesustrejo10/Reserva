@@ -18,6 +18,12 @@ namespace BOReserva.Controllers.PatronComando
     /// </summary>
     public class FabricaComando
     {
+        #region Comandos de Lugar
+
+        
+
+        #endregion
+
         #region M09_Gestion_Hoteles_Por_Ciudad
 
         /// <summary>
@@ -161,7 +167,6 @@ namespace BOReserva.Controllers.PatronComando
         }
 
         #endregion
-
 
         #region M04_Vuelo
         /// <summary>
@@ -318,12 +323,12 @@ namespace BOReserva.Controllers.PatronComando
             return new M08.M08_COAgregarAutomovil(e);
         }
 
-        public static Command<String> buscarAutomovil(Entidad e)
+        public static Command<Entidad> buscarAutomovil(Entidad e)
         {
             return new M08.M08_COBuscarAutomovil(e);
         }
 
-        public static Command<String> listarAutomovil(Entidad e)
+        public static Command<List<Entidad>> listarAutomovil(Entidad e)
         {
             return new M08.M08_COListarAutomovil(e);
         }
