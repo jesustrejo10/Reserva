@@ -9,11 +9,17 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando
 {
-
+    /// <summary>
+    /// Metodo que se encarga de consultar los detalles de un reclamo en la BD
+    /// </summary>
     public class M16_COConsultarReclamoDetalle : Command<Entidad>
     {
         int valor;
 
+        /// <summary>
+        /// Metodo constructor del comando
+        /// </summary>
+        /// <param name="idReclamo">Id del reclamo a editar</param>
         public M16_COConsultarReclamoDetalle(int idReclamo)
         {
             this.valor = idReclamo;
