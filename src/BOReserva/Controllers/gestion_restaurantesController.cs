@@ -23,12 +23,11 @@ namespace BOReserva.Controllers
         /// Método para el acceso a la interfaz de visualización de restaurantes.
         /// </summary>
         /// <returns>Retorna un objeto para renderizar la vista parcial.</returns>
-        public ActionResult M10_GestionRestaurantes_Ver(int id = 0)
+        public ActionResult M10_GestionRestaurantes_Ver(int id = -1)
         {
+
             ViewBag.Ciudad = FabricaVista.asignarItemsComboBox(cargarComboBoxLugar(), "Id", "Name");
-        
-            if (id != 0)
-            {
+            
                
                 Entidad _lugar = FabricaEntidad.crearLugar(id, "");//Aqui se envia la clave foranea de lugar para realizar la busqueda
                 Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, BOReserva.Controllers.PatronComando.FabricaComando.comandoRestaurant.NULO, _lugar);
@@ -44,9 +43,7 @@ namespace BOReserva.Controllers
 
                 Restaurant.listaRestaurantes = lista;
                 return PartialView(Restaurant);
-            }
-
-            return PartialView();
+            
         }
 
         #endregion
@@ -70,15 +67,15 @@ namespace BOReserva.Controllers
         /// </summary>
         /// <returns>Retorna un objeto para renderizar la vista parcial.</returns>
         public ActionResult M10_GestionRestaurantes_Modificar(int id)
-        {
-
-            ViewBag.Ciudad = FabricaVista.asignarItemsComboBox(cargarComboBoxLugar(), "Id", "Name");
-            ViewBag.Horarios = FabricaVista.asignarItemsComboBox(cargarComboBoxHorario(), "", "");
-            
+        {    
             Entidad _restaurant = FabricaEntidad.crearRestaurant();
             ((CRestauranteModelo)_restaurant)._id = id;
             Command<Entidad> comando = (Command<Entidad>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, BOReserva.Controllers.PatronComando.FabricaComando.comandoRestaurant.CONSULTAR_ID, _restaurant);
             Entidad rest = comando.ejecutar();
+
+            ViewBag.Ciudad = FabricaVista.asignarItemsComboBoxConPosicion(cargarComboBoxLugar(), "Id", "Name",((CRestauranteModelo)rest).idLugar);
+            ViewBag.HorariosIni = FabricaVista.asignarItemsComboBoxConPosicion(cargarComboBoxHorario(), "", "", ((CRestauranteModelo)rest).horarioApertura);
+            ViewBag.HorariosFin = FabricaVista.asignarItemsComboBoxConPosicion(cargarComboBoxHorario(), "", "", ((CRestauranteModelo)rest).horarioCierre);
 
             ViewBag.Id = ((CRestauranteModelo)rest)._id;
             ViewBag.NombreRestaurant = ((CRestauranteModelo)rest).nombre;

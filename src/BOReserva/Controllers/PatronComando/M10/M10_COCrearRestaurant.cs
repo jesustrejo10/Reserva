@@ -1,6 +1,7 @@
 ﻿using BOReserva.Controllers.PatronComando;
 using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.Domain;
+using BOReserva.Excepciones;
 using BOReserva.Models;
 using System;
 using System.Collections.Generic;
@@ -16,14 +17,21 @@ namespace BOReserva.M10.Comando.gestion_restaurantes
         #endregion
 
         #region Constructor
-        public M10_COCrearRestaurant() { }
-
+      
+        /// <summary>
+        /// Constructor del comando crear nuevo resstaurante
+        /// </summary>
+        /// <param name="_objeto"></param>
         public M10_COCrearRestaurant(Entidad _objeto)
         {
             this._objeto = _objeto;
         }
         #endregion
 
+        /// <summary>
+        /// Metodo para crear un restaurant en la Base de Datos
+        /// </summary>
+        /// <returns></returns>
         public override bool ejecutar()
         {
             try
@@ -32,17 +40,13 @@ namespace BOReserva.M10.Comando.gestion_restaurantes
                 restaurantDao.Crear(this._objeto);
                 return true;
             }
-            catch (NotImplementedException)
+            catch (NotImplementedException e)
             {
-                // exception implementada debido a que puede darse el caso 
-                // en que algunos de los metodos de implementados en la 
-                //interfaz IDAO no se implemente y se lance esta excepcion
-                throw;
+                throw new ExceptionReserva("Reserva-404", "Metodo no implementado", e);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
-
+                throw new ExceptionReserva("Reserva-404", "Error al Realizar Operacion", e);
             }
 
 

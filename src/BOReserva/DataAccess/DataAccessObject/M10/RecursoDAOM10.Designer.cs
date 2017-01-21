@@ -106,6 +106,33 @@ namespace BOReserva.DataAccess.DataAccessObject.M10 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error de Casteo.
+        /// </summary>
+        internal static string MensajeErrorFormato {
+            get {
+                return ResourceManager.GetString("MensajeErrorFormato", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Salida del Método.
+        /// </summary>
+        internal static string MensajeFinMetodoLogger {
+            get {
+                return ResourceManager.GetString("MensajeFinMetodoLogger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entrada en el Método.
+        /// </summary>
+        internal static string MensajeInicioMetodoLogger {
+            get {
+                return ResourceManager.GetString("MensajeInicioMetodoLogger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to M10_ActualizarRestaurante.
         /// </summary>
         internal static string procedimientoActualizar {

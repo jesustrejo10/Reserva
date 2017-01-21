@@ -296,6 +296,47 @@ namespace BOReserva.Controllers.PatronComando
             return lista;
         }
         #endregion
+		
+		public static Command<String> crearM16AgregarReclamo(Entidad e)
+        {
+
+            return new M16_COAgregarReclamo((Reclamo)e);
+
+        }
+        public static Command<Dictionary<int, Entidad>> crearM16VisualizarReclamos()
+        {
+
+            return new M16_COConsultarReclamo();
+
+        }
+
+        #region M06 GESTION COMIDA
+
+        public enum comandosComida
+        {
+            CREAR_COMIDA,
+            ELIMINAR_COMIDA,
+            ACTUALIZAR_COMIDA,
+            CONSULTAR_COMIDAS,
+            CONSULTAR_COMIDAS_VUELOS
+        }
+
+        public static object gestionComida(comandosComida _comando, Entidad _objeto)
+        {
+            switch (_comando)
+            {
+                case comandosComida.CREAR_COMIDA:
+                    return new M06_COAgregarComida(_objeto);
+                case comandosComida.CONSULTAR_COMIDAS:
+                    return new M06_COConsultarComidas();
+                case comandosComida.CONSULTAR_COMIDAS_VUELOS:
+                    return new M06_COConsultarComidasVuelos();
+                default:
+                    return new M06_COAgregarComida(_objeto);
+            }
+        }
+
+        #endregion
     }
 
 }

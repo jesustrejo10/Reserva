@@ -33,7 +33,7 @@
                 </span>
             </div>
 
-            @Html.TextBoxFor(m => m._fechaReclamo, null, new { @type = "date", @class = "form-control", @placeholder = "Fecha del Suceso", @id = "", @name = "fechaReclamo", min = "Date", max = "2032-12-31" })
+            @Html.TextBoxFor(m => m._fechaReclamo, null, new { @type = "date", @class = "form-control", @placeholder = "Fecha del Suceso", @id = "fechaReclamo", @name = "fechaReclamo", min = "Date", max = "2032-12-31" })
             <label>
                 Fecha del incidente
             </label>
@@ -57,8 +57,6 @@
                             <th>Fecha del incidente</th>
                             <th>Título</th>
                             <th>Detalle</th>
-                            <th>Atendido Por</th>
-                            <th>Respuesta</th>
                             <th>Estado</th>
                         </tr>
                     </thead>
@@ -70,6 +68,41 @@
         </div>
         <!--box light-->
     </div>
+
+
+    <script>
+
+        $("#aceptarReclamo").click(function (e) {
+            e.preventDefault();
+            var form = $("#AgregarReclamo");
+            var titulo = $('#tituloReclamo').val();
+            var detalle = $('#detalleReclamo').val();
+            var fecha = $('#fechaReclamo').val();
+            console.log(titulo);
+            console.log(detalle);
+            console.log(fecha);
+            if (titulo && detalle && fecha) {
+                $.ajax({
+                    url: "../gestion_reclamos/guardarReclamo",
+                    data: form.serialize(),
+                    type: 'POST',
+                    success: function (data) {
+                        if (data === "1") {
+                            alert("Se registro el reclamo exitosamente");
+                            $('#aceptarReclamo')[0].reset();
+                        } else {
+                            alert(data);
+                        }
+                    }
+                });
+            } else {
+                alert("Existen campos vacios, por favor revise todos los campos");
+            }
+        });
+
+
+
+    </script>
 
 
     <script type="text/javascript" src="@Url.Content("~/Content/assets/js/view/demo.shop.js")"></script>

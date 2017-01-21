@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BOReserva.DataAccess.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,5 @@ namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
 {
     interface IDAOReclamo : IDAO
     {
-        //Aquí van los métodos propios
     }
 }
