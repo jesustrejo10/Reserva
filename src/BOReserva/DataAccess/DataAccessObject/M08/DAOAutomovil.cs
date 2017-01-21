@@ -8,7 +8,7 @@ using System.Data;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Model;
 using System.Data.SqlClient;
-//using BOReserva.Excepciones.M08;
+using BOReserva.Excepciones.M08;
 using BOReserva.Excepciones;
 
 namespace BOReserva.DataAccess.DataAccessObject
@@ -27,11 +27,31 @@ namespace BOReserva.DataAccess.DataAccessObject
 
                 return true;
             }
-            catch (Exception)
+            catch (ArgumentNullException ex)
             {
-                throw;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM08("Reserva-404", "Argumento con valor invalido", ex);
             }
-            return false; 
+            catch (FormatException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM08("Reserva-404", "Datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM08("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM08("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM08("Reserva-404", "Error al realizar operacion ", ex);
+            }
         }
 
 
@@ -53,7 +73,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.penalidaddiaria,   SqlDbType.Decimal,  automovil.penalidaddiaria.ToString(),   false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.fecharegistro,     SqlDbType.Date,     automovil.fecharegistro.ToString(),     false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.color,             SqlDbType.VarChar,  automovil.color,                        false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.disponibilidad,     SqlDbType.Int,     automovil.disponibilidad.ToString(),    false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.disponibilidad,    SqlDbType.Int,     automovil.disponibilidad.ToString(),    false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.transmision,       SqlDbType.VarChar,  automovil.transmision,                  false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.fk_ciudad,         SqlDbType.Int,      automovil.ciudad.ToString(),            false));
 
@@ -61,11 +81,31 @@ namespace BOReserva.DataAccess.DataAccessObject
 
                 return true;
             }
-            catch (Exception)
+            catch (ArgumentNullException ex)
             {
-                throw;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM08("Reserva-404", "Argumento con valor invalido", ex);
             }
-            return false;
+            catch (FormatException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM08("Reserva-404", "Datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM08("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM08("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM08("Reserva-404", "Error al realizar operacion ", ex);
+            }
         }
 
 
@@ -73,8 +113,8 @@ namespace BOReserva.DataAccess.DataAccessObject
         {
             //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
 
-            //Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
-            //RecursoDAOM08.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+            RecursoDAOM08.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
 
             //Se castea de tipo Entidad a tipo Restaurant
             Automovil automovil = (Automovil)e;
@@ -96,6 +136,8 @@ namespace BOReserva.DataAccess.DataAccessObject
             String disponibilidad;
             String transmision;
             String fk_ciudad;
+            String ciudad;
+            String pais;
             Entidad auto;
 
             try
@@ -126,41 +168,40 @@ namespace BOReserva.DataAccess.DataAccessObject
                 color = Fila[RecursoDAOM08.color].ToString();
                 disponibilidad = Fila[RecursoDAOM08.disponibilidad].ToString();
                 transmision = Fila[RecursoDAOM08.transmision].ToString();
+                pais = Fila[RecursoDAOM08.pais].ToString();
+                ciudad = Fila[RecursoDAOM08.ciudad].ToString();
                 fk_ciudad = Fila[RecursoDAOM08.fk_ciudad].ToString();
 
-                auto = FabricaEntidad.InstanciarAutomovil(matricula, modelo, fabricante, anio, kilometraje, cantpasajero, tipovehiculo, preciocompra, precioalquiler, penalidaddiaria, fecharegistro, color, disponibilidad, transmision, "", "", fk_ciudad);
+
+                auto = FabricaEntidad.InstanciarAutomovil(matricula, modelo, fabricante, anio, kilometraje, cantpasajero, tipovehiculo, preciocompra, precioalquiler, penalidaddiaria, fecharegistro, color, disponibilidad, transmision, pais, ciudad, fk_ciudad);
                 
                 //se retorna la entidad de restaurant a mostrar en la vista
                 return auto;
             }
-            /*catch (ArgumentNullException ex)
+            catch (ArgumentNullException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new RecursoDAOM08("Reserva-404", "Argumento con valor invalido", ex);
+                throw new ReservaExceptionM08("Reserva-404", "Argumento con valor invalido", ex);
             }
             catch (FormatException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new RecursoDAOM08("Reserva-404", "Datos con un formato invalido", ex);
+                throw new ReservaExceptionM08("Reserva-404", "Datos con un formato invalido", ex);
             }
             catch (SqlException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new RecursoDAOM08("Reserva-404", "Error Conexion Base de Datos", ex);
+                throw new ReservaExceptionM08("Reserva-404", "Error Conexion Base de Datos", ex);
             }
             catch (ExceptionBD ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new RecursoDAOM08("Reserva-404", "Error Conexion Base de Datos", ex);
+                throw new ReservaExceptionM08("Reserva-404", "Error Conexion Base de Datos", ex);
             }
             catch (Exception ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new RecursoDAOM08("Reserva-404", "Error al realizar operacion ", ex);
-            }*/
-            catch (Exception ex)
-            {
-                throw;
+                throw new ReservaExceptionM08("Reserva-404", "Error al realizar operacion ", ex);
             }
         }
 
@@ -192,61 +233,68 @@ namespace BOReserva.DataAccess.DataAccessObject
             String disponibilidad;
             String transmision;
             String fk_ciudad;
+            String ciudad;
+            String pais;
             Entidad auto;
 
             try
             {
-                //Aqui se asignan los valores que recibe el procedimieto para realizar el select, se repite tantas veces como atributos
-                //se requiera en el where, para este caso solo el ID de Lugar @lug_id (parametro que recibe el store procedure)
-                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.lug_id, SqlDbType.Int, lugar._id.ToString(), false));
-
                 //el metodo Ejecutar Store procedure recibe la lista de parametros como el query, este ultimo es el nombre del procedimietno en la BD
                 //e.g. dbo.M10_ConsultarRestarurante
-                tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM08.procedimientoConsultarAutomovil, "");
+                tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM08.procedimientoConsultarAutomovil);
 
-                foreach (DataRow filarestaurant in tablaDeDatos.Rows)
+                foreach (DataRow Fila in tablaDeDatos.Rows)
                 {
-                    //Se preinicializan los atributos que componen la entidad restaurant
-                    idRestaurant = int.Parse(filarestaurant[RecursoDAOM08.restaurantId].ToString());
-                    nombreRestaurant = filarestaurant[RecursoDAOM08.restaurantNombre].ToString();
-                    descripcionRestaurant = filarestaurant[RecursoDAOM08.restaurantDescripcion].ToString();
-                    direccionRestaurant = filarestaurant[RecursoDAOM08.restaurantDireccion].ToString();
-                    telefonoRestaurant = filarestaurant[RecursoDAOM08.restaurantTelefono].ToString();
-                    horaIni = filarestaurant[RecursoDAOM08.restaurantHoraApertura].ToString();
-                    horaFin = filarestaurant[RecursoDAOM08.restaurantHoraCierra].ToString();
-                    nombreLugar = filarestaurant[RecursoDAOM08.LugarNombre].ToString();
+                    //Se preinicializan los atrubutos de la clase restaurant
+                    matricula = Fila[RecursoDAOM08.matricula].ToString();
+                    modelo = Fila[RecursoDAOM08.modelo].ToString();
+                    fabricante = Fila[RecursoDAOM08.fabricante].ToString();
+                    anio = Fila[RecursoDAOM08.anio].ToString();
+                    kilometraje = Fila[RecursoDAOM08.kilometraje].ToString();
+                    cantpasajero = Fila[RecursoDAOM08.cantpasajero].ToString();
+                    tipovehiculo = Fila[RecursoDAOM08.tipovehiculo].ToString();
+                    preciocompra = Fila[RecursoDAOM08.preciocompra].ToString();
+                    precioalquiler = Fila[RecursoDAOM08.precioalquiler].ToString();
+                    penalidaddiaria = Fila[RecursoDAOM08.penalidaddiaria].ToString();
+                    fecharegistro = Fila[RecursoDAOM08.fecharegistro].ToString();
+                    color = Fila[RecursoDAOM08.color].ToString();
+                    disponibilidad = Fila[RecursoDAOM08.disponibilidad].ToString();
+                    transmision = Fila[RecursoDAOM08.transmision].ToString();
+                    pais = Fila[RecursoDAOM08.pais].ToString();
+                    ciudad = Fila[RecursoDAOM08.ciudad].ToString();
+                    fk_ciudad = Fila[RecursoDAOM08.fk_ciudad].ToString();
                     //se crea el objeto restaurant
-                    restaurant = FabricaEntidad.crearRestaurant(idRestaurant, nombreRestaurant, direccionRestaurant, telefonoRestaurant, descripcionRestaurant, horaIni, horaFin, 0);
+                    auto = FabricaEntidad.InstanciarAutomovil(matricula, modelo, fabricante, anio, kilometraje, cantpasajero, tipovehiculo, preciocompra, precioalquiler, penalidaddiaria, fecharegistro, color, disponibilidad, transmision, pais, ciudad, fk_ciudad);
                     //se agregan los restaurantes a la lista
-                    listaDeRestaurant.Add(restaurant);
+                    listaDeAutomoviles.Add(auto);
                 }
 
-                return listaDeRestaurant; //se retorna la lista de restaurante a mostrar por la vista
+                return listaDeAutomoviles; //se retorna la lista de restaurante a mostrar por la vista
             }
             catch (ArgumentNullException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM10("Reserva-404", "Argumento con valor invalido", ex);
+                throw new ReservaExceptionM08("Reserva-404", "Argumento con valor invalido", ex);
             }
             catch (FormatException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
+                throw new ReservaExceptionM08("Reserva-404", "Datos con un formato invalido", ex);
             }
             catch (SqlException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+                throw new ReservaExceptionM08("Reserva-404", "Error Conexion Base de Datos", ex);
             }
             catch (ExceptionBD ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM10("Reserva-404", "Error Conexion Base de Datos", ex);
+                throw new ReservaExceptionM08("Reserva-404", "Error Conexion Base de Datos", ex);
             }
             catch (Exception ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM10("Reserva-404", "Error al realizar operacion ", ex);
+                throw new ReservaExceptionM08("Reserva-404", "Error al realizar operacion ", ex);
             }
         }
 
@@ -263,11 +311,31 @@ namespace BOReserva.DataAccess.DataAccessObject
 
                 return true;
             }
-            catch (Exception)
+            catch (ArgumentNullException ex)
             {
-                throw;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM08("Reserva-404", "Argumento con valor invalido", ex);
             }
-            return false;
+            catch (FormatException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM08("Reserva-404", "Datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM08("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM08("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM08("Reserva-404", "Error al realizar operacion ", ex);
+            }
         }
 
 
@@ -289,7 +357,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.penalidaddiaria, SqlDbType.Decimal, automovil.penalidaddiaria.ToString(), false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.fecharegistro, SqlDbType.Date, automovil.fecharegistro.ToString(), false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.color, SqlDbType.VarChar, automovil.color, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.disponibilida, SqlDbType.Int, automovil.disponibilidad.ToString(), false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.disponibilidad, SqlDbType.Int, automovil.disponibilidad.ToString(), false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.transmision, SqlDbType.VarChar, automovil.transmision, false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.fk_ciudad, SqlDbType.Int, automovil.ciudad.ToString(), false));
 
@@ -297,11 +365,31 @@ namespace BOReserva.DataAccess.DataAccessObject
 
                 return true;
             }
-            catch (Exception)
+            catch (ArgumentNullException ex)
             {
-                throw;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM08("Reserva-404", "Argumento con valor invalido", ex);
             }
-            return false;
+            catch (FormatException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM08("Reserva-404", "Datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM08("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM08("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM08("Reserva-404", "Error al realizar operacion ", ex);
+            }
         }
     }
 }
