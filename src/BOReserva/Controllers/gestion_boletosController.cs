@@ -8,7 +8,6 @@ using BOReserva.Models.gestion_boletos;
 using BOReserva.Servicio.Servicio_Boletos;
 using BOReserva.DataAccess.Domain;
 using BOReserva.Controllers.PatronComando;
-using BOReserva.Servicio;
 
 
 
