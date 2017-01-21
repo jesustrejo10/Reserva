@@ -95,18 +95,15 @@
 
     $(".modificar").click(function () {
         var identificador = $(this).closest("tr").attr("id");
-        console.log(identificador);
+
         $.ajax({
-            type: "POST",
+            type: "GET",
             url: "/gestion_roles/M13_ModificarRol",
             data: { _idRol: identificador },
-            success: function (response) {
-                console.log(response);
-            },
-            done: function () {
+            success: function(data){
                 $("#contenido").empty();
                 $("#contenido").append(data);
-            },
+            },          
             failure: function () {
                 alert(data);
             }
