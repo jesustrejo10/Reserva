@@ -1,15 +1,8 @@
 ﻿using BOReserva.DataAccess.DAO;
-<<<<<<< HEAD
-<<<<<<< HEAD
 using BOReserva.DataAccess.DataAccessObject.M03;
-=======
-=======
-using BOReserva.DataAccess.DataAccessObject.M03;
->>>>>>> Develop
 using BOReserva.DataAccess.DataAccessObject.M09;
 using BOReserva.DataAccess.DataAccessObject.M01;
 using BOReserva.DataAccess.Model;
->>>>>>> Develop
 using BOReserva.M10;
 using BOReserva.DataAccess.DataAccessObject;
 using System;
@@ -25,10 +18,6 @@ namespace BOReserva.DataAccess.DataAccessObject
 {
     public class FabricaDAO
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Develop
          #region M09_Gestion_Hoteles_Por_Ciudad
         
         public static DAO instanciarDaoHotel() {    

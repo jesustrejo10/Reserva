@@ -1,14 +1,6 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 ﻿using BOReserva.DataAccess.Domain.M03;
 using BOReserva.Models;
-=======
-=======
-﻿using BOReserva.DataAccess.Domain.M03;
->>>>>>> Develop
-﻿using BOReserva.Models;
 using BOReserva.Models.gestion_cruceros;
->>>>>>> Develop
 using BOReserva.Models.gestion_hoteles;
 using BOReserva.Models.gestion_reclamos;
 using BOReserva.Models.gestion_restaurantes;
@@ -322,10 +314,6 @@ namespace BOReserva.DataAccess.Domain
             return new Permiso();
         }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Develop
         #region M03_Ruta
         /// <summary>
         /// Se crea una instancia de la clase ruta con todos sus atributos
@@ -343,8 +331,6 @@ namespace BOReserva.DataAccess.Domain
             return new Ruta(_idRuta, _distancia, _status, _tipo, _origenRuta, _destinoRuta);
         }
         #endregion
-=======
-        
         
         #region M14 Cruceros
         //public static Entidad InstanciarCrucero(CGestion_crucero crucero)
@@ -397,6 +383,5 @@ namespace BOReserva.DataAccess.Domain
 
         #endregion
 
->>>>>>> Develop
     }
 }
