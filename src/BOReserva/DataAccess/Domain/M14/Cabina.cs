@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.DataAccess.Domain.M14
+namespace BOReserva.DataAccess.Domain
 {
     public class Cabina : Entidad
     {

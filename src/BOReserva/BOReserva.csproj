@@ -276,14 +276,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\List.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COVisualizarHoteles.cs" />
-    <Compile Include="Controllers\PatronComando\M05\M05_COAgregarPasajero.cs" />
-    <Compile Include="Controllers\PatronComando\M13_COAgregarRol.cs" />
-    <Compile Include="Controllers\PatronComando\M13_COAgregarRolPermiso.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarCabinas.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COAgregarCabina.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarCruceros.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COAgregarCrucero.cs" />
-    <Compile Include="Controllers\PatronComando\M16_COAgregarReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCabina.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOItinerario.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCabina.cs" />
@@ -320,8 +316,9 @@
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCiudad.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOHabitacion.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPais.cs" />
-    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReclamo.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORestaurant.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORol.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\M09\DAOHabitacion.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOComida.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOLogin.cs" />
@@ -349,13 +346,9 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="DataAccess\DataAccessObject\M10\DAORestaurant.cs" />
-    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORestaurant.cs" />
-    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPais.cs" />
-    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORol.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOItinerario.cs" />
     <Compile Include="DataAccess\Domain\M14\Cabina.cs" />
     <Compile Include="DataAccess\Domain\M14\Crucero.cs" />
-    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOBoleto.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPasajero.cs" />
     <Compile Include="DataAccess\DataAccessObject\M16\M16Reclamos.Designer.cs">
