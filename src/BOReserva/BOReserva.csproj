@@ -212,7 +212,6 @@
     <Compile Include="Controllers\PatronComando\M08\M08_COActivarAutomovil.cs" />
     <Compile Include="Controllers\PatronComando\M08\M08_COBuscarAutomovil.cs" />
     <Compile Include="Controllers\PatronComando\M08\M08_COAgregarAutomovil.cs" />
-    <Compile Include="Controllers\PatronComando\M08\M08_CODesactivarAutomovil.cs" />
     <Compile Include="Controllers\PatronComando\M08\M08_COEliminarAutomovil.cs" />
     <Compile Include="Controllers\PatronComando\M08\M08_COListarAutomovil.cs" />
     <Compile Include="Controllers\PatronComando\M08\M08_COModificarAutomovil.cs" />

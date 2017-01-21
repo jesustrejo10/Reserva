@@ -15,31 +15,31 @@ namespace BOReserva.DataAccess.DataAccessObject
 {
     public class DAOAutomovil : DAO, IDAOAutomovil
     {
-        public int Activar(Entidad e)
+        public bool ActivarDesactivar(Entidad e)
         {
-            throw new NotImplementedException();
-        }
-
-
-        /// <summary>
-        /// Metodo para agregar automovil
-        /// </summary>
-        /// <param name="_automovil"></param>
-        /// <returns>Se retorna true si fue exitoso</returns>
-        public bool Agregar(Entidad _automovil)
-        {
-            Automovil automovil = (Automovil)_automovil;
-            List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
-
+            Automovil automovil = (Automovil)e;
+            List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
             try
             {
-                //Aqui se asignan los valores de cada uno de los atributos perteneciente a la tabla restaurant
-                //estas linea se repite por cada una de las columnas de la tabla, e.g. se tiene el atributo nombre de tipo varchar
-                //primero se obtiene por el archivo de recurso el nombre del parametro @nombre, luego el tipo de dato SQL
-                // varchar, despues el valor a insertar Sabor y Sazon, finalmente el booliano para input (envio de parametro al store procedure)y output(recibir parametro del store procedure) para este caso falso 
-                // la tabla restaurant contiene siete columna incluyendo la clave foranea lugar por lo cual son siete lineas de codigo
-                //a;go importante de destacar es que si en la declaracion del store procedures el atributo varchar o cualquier otro
-                //que requiera longitud e.g. Varchar(50) solo se inserta el primer caracter, ya que solo por defecto la longitud es 1
+                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.aut_matricula, SqlDbType.VarChar, automovil.matricula, false));
+
+                EjecutarStoredProcedure(RecursoDAOM08.procedimientoCambiarEstatus, parametro);
+
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return false; 
+        }
+
+        public bool Agregar(Entidad e)
+        {
+            Automovil automovil = (Automovil)e;
+            List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
+            try
+            {
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.matricula,         SqlDbType.VarChar,  automovil.matricula,                    false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.modelo,            SqlDbType.VarChar,  automovil.modelo,                       false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.fabricante,        SqlDbType.VarChar,  automovil.fabricante,                   false));
@@ -55,23 +55,17 @@ namespace BOReserva.DataAccess.DataAccessObject
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.disponibilida,     SqlDbType.Int,      automovil.disponibilidad.ToString(),    false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.transmision,       SqlDbType.VarChar,  automovil.transmision,                  false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.fk_ciudad,         SqlDbType.Int,      automovil.ciudad.ToString(),            false));
-                //el metodo Ejecutar Store procedure recibe la lista de parametros como el query, este ultimo es el nombre del procedimietno en la BD
-                //e.g. dbo.M10_AgregarRestarurante, importante ese nombre se coloco en un archivo de recursos por efectos practicos, pero se puede 
-                //como String "dbo.M10_AgregarRestarurante"
+
                 EjecutarStoredProcedure(RecursoDAOM08.procedimientoAgregarAutomovil, listaParametro);
+
+                return true;
             }
             catch (Exception)
             {
-
                 throw;
             }
-
-
-
-            return true;
+            return false;
         }
-
-
 
         public Entidad Consultar(int id)
         {
@@ -83,32 +77,57 @@ namespace BOReserva.DataAccess.DataAccessObject
             throw new NotImplementedException();
         }
 
-        public int Desactivar(Entidad e)
+        public bool Eliminar(Entidad e)
         {
-            throw new NotImplementedException();
-        }
-
-        public bool Eliminar(Entidad _automovil)
-        {
-            Automovil automovil = (Automovil)_automovil;
+            Automovil automovil = (Automovil)e;
             List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
-
             try
-            {   
-                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.aut_matricula, SqlDbType.Int, automovil._id.ToString(), false));
+            {
+                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.aut_matricula, SqlDbType.VarChar, automovil.matricula, false));
+
                 EjecutarStoredProcedure(RecursoDAOM08.procedimientoEliminarAutomovil, parametro);
+
+                return true;
             }
             catch (Exception)
             {
-
                 throw;
             }
-            return false; //se retorna falso en caso de no ser exitoso el procedimiento eliminar
+            return false;
         }
 
-        public Entidad Modificar(Entidad e)
+        public bool Modificar(Entidad e)
         {
-            throw new NotImplementedException();
+            Automovil automovil = (Automovil)e;
+            List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
+            try
+            {
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.matricula, SqlDbType.VarChar, automovil.matricula, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.modelo, SqlDbType.VarChar, automovil.modelo, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.fabricante, SqlDbType.VarChar, automovil.fabricante, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.anio, SqlDbType.Int, automovil.anio.ToString(), false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.kilometraje, SqlDbType.VarChar, automovil.kilometraje.ToString(), false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.cantpasajero, SqlDbType.Decimal, automovil.cantpasajeros.ToString(), false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.tipovehiculo, SqlDbType.Int, automovil.tipovehiculo, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.preciocompra, SqlDbType.Decimal, automovil.preciocompra.ToString(), false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.precioalquiler, SqlDbType.Decimal, automovil.precioalquiler.ToString(), false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.penalidaddiaria, SqlDbType.Decimal, automovil.penalidaddiaria.ToString(), false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.fecharegistro, SqlDbType.Date, automovil.fecharegistro.ToString(), false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.color, SqlDbType.VarChar, automovil.color, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.disponibilida, SqlDbType.Int, automovil.disponibilidad.ToString(), false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.transmision, SqlDbType.VarChar, automovil.transmision, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.fk_ciudad, SqlDbType.Int, automovil.ciudad.ToString(), false));
+
+                EjecutarStoredProcedure(RecursoDAOM08.procedimientoModificarAutomovil, listaParametro);
+
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return false;
         }
+
     }
 }

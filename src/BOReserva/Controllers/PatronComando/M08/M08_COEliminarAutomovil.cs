@@ -9,10 +9,12 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando.M08
 {
-    public class M08_COEliminarAutomovil
+    public class M08_COEliminarAutomovil : Command<bool>
     {
         #region Atributos
+
         Entidad _objeto;
+
         #endregion
 
         #region Constructor
@@ -29,11 +31,11 @@ namespace BOReserva.Controllers.PatronComando.M08
 
         #region Ejecucion
 
-        public override string ejecutar()
+        public override bool ejecutar()
         {
-            DAO DaoAutomovil = FabricaDAO.CrearDaoAutomovil();
-
-            return DaoAutomovil.Eliminar(this._objeto._id).ToString();
+            DAO Dao = FabricaDAO.CrearDaoAutomovil();
+            DAOAutomovil DaoAutomovil = (DAOAutomovil)Dao;
+            return DaoAutomovil.Eliminar(this._objeto);
         }
 
         #endregion

@@ -13,11 +13,12 @@ namespace BOReserva.Controllers.PatronComando.M08
     {
                 
         #region Atributos
+
         Entidad _objeto;
+
         #endregion
 
         #region Constructor
-        public M08_COBuscarAutomovil() { }
 
         public M08_COBuscarAutomovil(Entidad _objeto)
         {
