@@ -21,25 +21,25 @@
                             foreach (var item in Model)
                             {
                                 String estatus;
-                                if (item._estatusPlato == 1) { estatus = "Disponible"; } else { estatus = "No disponible"; }
+                                if (item._estatus == 1) { estatus = "Disponible"; } else { estatus = "No disponible"; }
                                 
                                 <tr id="@item._id">
-                                    <td>@item._nombrePlato</td>
-                                    <td>@item._tipoPlato</td>
+                                    <td>@item._nombre</td>
+                                    <td>@item._tipo</td>
                                     <td>@estatus</td>
-                                    <td>@item._descripcionPlato</td>
+                                    <td>@item._descripcion</td>
                                     <td>
                                         @*<a href="#" title="Consultar"> <i class="fa fa-eye consultar"></i></a>*@
                                         @*  <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>*@
                                         @*<a href="#" title="Agregar"><i class="fa fa-plus agregarvuelo"></i></a>*@
                                         @{
                                 
-                                            if (item._estatusPlato == 1)
+                                            if (item._estatus == 1)
                                         {
                                                 
                                             <a href="#" title="Activar/Desactivar Plato"><i class="fa fa-toggle-on desactivar" ></i></a>
                                         }
-                                            if (item._estatusPlato == 0)
+                                            if (item._estatus == 0)
                                         {
                                             <a href="#" title="Activar/Desactivar Plato"><i class="fa fa-toggle-off activar"></i></a>
                                         }

@@ -23,3 +23,39 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+
+-- ----------------------------
+-- CONSULTAR COMIDAS
+-- ----------------------------
+CREATE PROCEDURE [dbo].[M06_ConsultarComidas]
+
+AS
+BEGIN
+	select @com_nombre, @com_tipo, @com_estatus, @com_referencia from Comida;
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- ----------------------------
+-- CONSULTAR COMIDAS EN VUELOS
+-- ----------------------------
+CREATE PROCEDURE [dbo].[M06_ConsultarComidasVuelos]
+
+AS
+BEGIN
+	SELECT com_vue_id, com_nombre, vue_codigo, com_vue_cantidad FROM Comida_Vuelo, Comida, Vuelo WHERE com_id = com_vue_fk_comida AND vue_id = com_vue_fk_vuelo
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+/*
+DROP PROCEDURE dbo.M06_ConsultarComidas;
+GO
+*/

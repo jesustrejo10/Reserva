@@ -415,6 +415,7 @@ namespace BOReserva.Servicio
                 SqlDataReader lector = cmd.ExecuteReader();
                 while (lector.Read())
                 {
+
                     CAvion avion = new CAvion(Int32.Parse(lector["avi_id"].ToString()), lector["avi_matricula"].ToString(),
                     lector["avi_modelo"].ToString(), Int32.Parse(lector["avi_pasajeros_turista"].ToString()),
                     Int32.Parse(lector["avi_pasajeros_ejecutiva"].ToString()), Int32.Parse(lector["avi_pasajeros_vip"].ToString()),
