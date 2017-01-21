@@ -6,10 +6,8 @@ using BOReserva.DataAccess.Model;
 
 namespace BOReserva.DataAccess.Domain
 {
-    public class BoletoVuelo
+    public class BoletoVuelo : Entidad
     {
-        public int _id { get; set; }
-
         public RutaBoleto _ruta { get; set; }
 
         public DateTime _fechaPartida { get; set; }

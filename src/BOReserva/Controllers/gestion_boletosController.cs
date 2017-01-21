@@ -552,10 +552,7 @@ namespace BOReserva.Controllers
             Boleto boleto = (Boleto)comando.ejecutar();
             List<BoletoVuelo> lista = boleto._vuelos;
             String tipoOri = boleto._tipoBoleto;
-            
-            manejadorSQL_Boletos modificar = new manejadorSQL_Boletos();
           
-
             int compara = String.Compare(tipoOri, tipo);
             if (compara != 0)
             {
