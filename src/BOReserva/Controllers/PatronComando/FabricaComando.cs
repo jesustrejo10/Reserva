@@ -569,7 +569,6 @@ namespace BOReserva.Controllers.PatronComando
         #endregion
 }
         
-  }
 
 
    
