@@ -1,5 +1,6 @@
 ﻿<!-- Indico que para esta vista, M08_ModificarAutomovil, utilizare el modelo Models/gestion_automoviles/CModificarAutomovil-->
 @model BOReserva.Models.gestion_hoteles.CModificarHotel
+<link href="~/Content/Canvas/Box.css" rel="stylesheet" />
 
 <!--Indico que, estoy abriendo un formulario que tendra como accion del submit, el controlador gestion_automoviles"Controller",
     utilizara el metodo guardarAutomovil
@@ -10,8 +11,8 @@
         <meta charset="UTF-8">
     </head>
     <div class="row">
-        <div class="col-md-12">
-            <div class="box">
+        <div class="col-md-10">
+            <div class="Cajita">
                 <div class="box-header with-border">
                     <h1 class="box-title" style="font-size:32px;">Modificar Hotel</h1>
                     <div class="box-tools pull-right">
@@ -22,7 +23,7 @@
                     <div class="row">
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
-                                <label for="placa">Nombre(<span style="color:red">*</span>)</label>                               
+                                <label for="placa">Nombre(<span style="color:red">*</span>)</label>
                                 @Html.TextBoxFor(m => m._nombre, null, new { @class = "form-control", @placeholder = "Gran Melia", @id = "hot_nombre", @maxlength = 30, @onblur = "checkTextField(this);" })
                             </div>
                             <div class="col-xs-6">
@@ -39,8 +40,8 @@
                                 @Html.TextBoxFor(m => m._paginaWeb, null, new { @class = "form-control", @placeholder = "www.granmeliaccs.com", @id = "hot_web", @onblur = "checkpaginaweb(this);", @maxlength = 20 })
                             </div>
                             <div class="col-xs-6">
-                                <label for="anio">Correo electronico(<span style="color:red">*</span>)</label>                               
-                                 @Html.TextBoxFor(m => m._email, null, new { @class = "form-control", @placeholder = "contacto@granmeliaccs.com", @id = "hot_email", @maxlength = 25, @onblur = "checkcorreo(this);" })
+                                <label for="anio">Correo electronico(<span style="color:red">*</span>)</label>
+                                @Html.TextBoxFor(m => m._email, null, new { @class = "form-control", @placeholder = "contacto@granmeliaccs.com", @id = "hot_email", @maxlength = 25, @onblur = "checkcorreo(this);" })
                             </div>
                         </div>
                         <div>&nbsp;</div>
@@ -48,39 +49,39 @@
                             <div class="col-xs-6">
                                 <label for="transmision">Clasificacion(<span style="color:red">*</span>)</label>
                                 @{
-                                    List<SelectListItem> _clasificacion = new List<SelectListItem>();
+    List<SelectListItem> _clasificacion = new List<SelectListItem>();
 
-                                    _clasificacion.Add(new SelectListItem
-                                    {
-                                        Text = "1 estrella",
-                                        Value = "1"
-                                    });
-                                    _clasificacion.Add(new SelectListItem
-                                    {
-                                        Text = "2 estrellas",
-                                        Value = "2"
-                                    });
-                                    _clasificacion.Add(new SelectListItem
-                                    {
-                                        Text = "3 estrellas",
-                                        Value = "3"
-                                    }); _clasificacion.Add(new SelectListItem
-                                    {
-                                        Text = "4 estrellas",
-                                        Value = "4"
-                                    });
-                                    _clasificacion.Add(new SelectListItem
-                                    {
-                                        Text = "5 estrellas",
-                                        Value = "5"
-                                    });
-                                }                               
+    _clasificacion.Add(new SelectListItem
+    {
+        Text = "1 estrella",
+        Value = "1"
+    });
+    _clasificacion.Add(new SelectListItem
+    {
+        Text = "2 estrellas",
+        Value = "2"
+    });
+    _clasificacion.Add(new SelectListItem
+    {
+        Text = "3 estrellas",
+        Value = "3"
+    }); _clasificacion.Add(new SelectListItem
+    {
+        Text = "4 estrellas",
+        Value = "4"
+    });
+    _clasificacion.Add(new SelectListItem
+    {
+        Text = "5 estrellas",
+        Value = "5"
+    });
+                                }
                                 @Html.DropDownListFor(m => m._clasificacion, _clasificacion, new { @class = "form-control", @placeholder = "3 estrellas", @id = "hot_clasificacion" })
 
-    
+
                             </div>
                             <div class="col-xs-6">
-                                <label for="capacidad">Capacidad(<span style="color:red">*</span>)</label>                                
+                                <label for="capacidad">Capacidad(<span style="color:red">*</span>)</label>
                                 @Html.TextBoxFor(m => m._capacidadHabitacion, null, new { @type = "number", @class = "form-control", @placeholder = "28", @id = "hot_capacidad", min = "0", @onblur = "checklargo(this);", @readonly = "readonly" })
 
                             </div>
@@ -108,12 +109,12 @@
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-md-4"></div>
                             <div class="col-md-2">
-                                <button type="submit" id="modify_hotel" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
-                            </div>
-                            <div class="col-md-2">
                                 <button id="cancel_modification" type="button" class="btn btn-danger" style="display:block; margin-left:auto; margin-right:auto;">Cancelar</button>
                             </div>
-                            <div class="col-md-4"></div> 
+                            <div class="col-md-2">
+                                <button type="submit" id="modify_hotel" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                            </div>
+                            <div class="col-md-4"></div>
                         </div>
                     </div>
                     <!-- /.col -->

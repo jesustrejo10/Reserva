@@ -57,7 +57,7 @@ namespace BOReserva.DataAccess.DataAccessObject
         /// Metodo que instacia DAOHabitacion
         /// </summary>
         /// <returns>Retorna DAOHabitacion</returns>
-        public static DAO instanciarDaoHabitacion()
+        public static DAOHabitacion instanciarDaoHabitacion()
         {
             return new DAOHabitacion();
         }

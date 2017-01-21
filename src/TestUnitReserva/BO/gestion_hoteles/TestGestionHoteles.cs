@@ -394,7 +394,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
             JsonResult probar = prueba.modificarHotel(model);
             Assert.IsInstanceOf(typeof(JsonResult),probar);
         }
-        
+        [Test]        
         public void M09_DaoHotelConsultarTodos() {
             Dictionary<int,Entidad> hoteles = daoHotel.ConsultarTodos();
             Assert.NotNull(hoteles);

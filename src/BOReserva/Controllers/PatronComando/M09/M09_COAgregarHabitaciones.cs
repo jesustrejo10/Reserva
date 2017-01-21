@@ -41,8 +41,8 @@ namespace BOReserva.Controllers.PatronComando.M09
             catch (ReservaExceptionM09 ex)
             {
                 throw ex;
+                //pilas aca
             }
-
         }
 
     }
