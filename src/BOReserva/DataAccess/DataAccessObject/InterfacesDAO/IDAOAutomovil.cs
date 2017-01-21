@@ -13,7 +13,7 @@ namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
         bool Agregar(Entidad e);
         bool Modificar(Entidad e);
         bool Eliminar(Entidad e);
-        Entidad Consultar(int id);
-        Dictionary<int, Entidad> ConsultarTodos();
+        Entidad Consultar(Entidad e);
+        List<Entidad> ConsultarTodos();
     }
 }

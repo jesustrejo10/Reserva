@@ -260,7 +260,7 @@ namespace BOReserva.Controllers
             //String agrego_si_no = carronuevo.MAgregaraBD(carronuevo, id_ciudad); //SE AGREGA A LA BD RETORNA 1 SI SE AGREGA Y 0 SINO LO LOGRA
             
             //return (Json(agrego_si_no));
-            return (Json("no"));
+            return (Json("GUARDADO"));
         }
 
 
