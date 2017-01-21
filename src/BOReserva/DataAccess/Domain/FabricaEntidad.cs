@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using BOReserva.DataAccess.Domain.M14;
 
 
 
@@ -317,18 +316,18 @@ namespace BOReserva.DataAccess.Domain
         
         
         #region M14 Cruceros
-        public static Entidad InstanciarCrucero(CGestion_crucero crucero)
-        {
+        //public static Entidad InstanciarCrucero(CGestion_crucero crucero)
+        //{
 
-            return new Crucero(crucero._idCrucero, crucero._nombreCrucero, crucero._companiaCrucero, crucero._capacidadCrucero, crucero._estatus);
-        }    
+        //    return new Crucero(crucero._idCrucero, crucero._nombreCrucero, crucero._companiaCrucero, crucero._capacidadCrucero, crucero._estatus);
+        //}    
 
         //instancia cabina con nombre de crucero, no con FK
 
-        public static Entidad InstanciarCabinaN(CGestion_cabina cabina)
-        {
-            return new Cabina(cabina._idCabina,cabina._nombreCabina,cabina._precioCabina,cabina._estatus,cabina._fkCrucero);
-        }
+        //public static Entidad InstanciarCabinaN(CGestion_cabina cabina)
+        //{
+        //    return new Cabina(cabina._idCabina,cabina._nombreCabina,cabina._precioCabina,cabina._estatus,cabina._fkCrucero);
+        //}
         #endregion
 
             
