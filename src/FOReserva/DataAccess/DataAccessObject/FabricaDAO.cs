@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using FOReserva.DataAccess.DataAccessObject.M20;
 
 namespace FOReserva.DataAccess.DataAccessObject
 
@@ -35,7 +36,7 @@ namespace FOReserva.DataAccess.DataAccessObject
         {
             return new SqlConnection(stringDeConexion);
         }
-
+                
         public static Parametro asignarParametro(string nombreAtributo, SqlDbType tipoDeDato, string valorAtributo, bool output)
         {
             return new Parametro(nombreAtributo, tipoDeDato, valorAtributo, output);
@@ -74,6 +75,13 @@ namespace FOReserva.DataAccess.DataAccessObject
         public static SqlDataAdapter asignarAdaptadorDeDatos(SqlCommand comandoSql)
         {
             return new SqlDataAdapter(comandoSql);
+        }
+        #endregion
+
+        #region Modulo 20
+        public static DAORevision CreateDAORevision()
+        {
+            return new DAORevision();
         }
         #endregion
     }
