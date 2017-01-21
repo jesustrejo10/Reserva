@@ -39,7 +39,7 @@ namespace FOReserva.Servicio
                     CRevision rev = new CRevision();
                     rev.Id = id;
                     rev.Name = nombre;
-                    rev.Tipo = (TipoRevision)tipo;
+                    rev.Tipo = tipo;
                     lista_rev.Add(rev);
                 }
             }
@@ -84,7 +84,7 @@ namespace FOReserva.Servicio
                     CRevision rev = new CRevision();
                     rev.Id = id;
                     rev.Name = nombre;
-                    rev.Tipo = (TipoRevision)tipo;
+                    rev.Tipo = tipo;
                     lista_rev.Add(rev);
                 }
             }

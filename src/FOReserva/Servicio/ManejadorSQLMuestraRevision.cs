@@ -33,7 +33,7 @@ namespace FOReserva.Servicio
                     CRevision rev = new CRevision();
                     rev.Id = id;
                     rev.Name = nombre;
-                    rev.Tipo = (TipoRevision)int.Parse(tipo);
+                    rev.Tipo = int.Parse(tipo);
                     lista_rev.Add(rev);
                 }
             }
@@ -56,7 +56,7 @@ namespace FOReserva.Servicio
                     CRevision rev = new CRevision();
                     rev.Id = id;
                     rev.Name = nombre;
-                    rev.Tipo = (TipoRevision)int.Parse(tipo);
+                    rev.Tipo = int.Parse(tipo);
                     lista_rev.Add(rev);
                 }
             }
@@ -79,7 +79,7 @@ namespace FOReserva.Servicio
                     CRevision rev = new CRevision();
                     rev.Id = id;
                     rev.Name = nombre;
-                    rev.Tipo = (TipoRevision)int.Parse(tipo);
+                    rev.Tipo = int.Parse(tipo);
                     lista_rev.Add(rev);
                 }
             }
@@ -102,7 +102,7 @@ namespace FOReserva.Servicio
                     CRevision rev = new CRevision();
                     rev.Id = id;
                     rev.Name = nombre;
-                    rev.Tipo = (TipoRevision)int.Parse(tipo);
+                    rev.Tipo = int.Parse(tipo);
                     lista_rev.Add(rev);
                 }
             }
