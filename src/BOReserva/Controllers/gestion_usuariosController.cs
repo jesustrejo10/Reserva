@@ -14,6 +14,7 @@ namespace BOReserva.Controllers
     public class gestion_usuariosController : Controller
     {
         public static int _rol;
+        public static int idUsuario;
 
         /// <summary>
         /// Método de la vista parcial M12_AgregarUsuario2
@@ -65,6 +66,65 @@ namespace BOReserva.Controllers
             
             return PartialView(listaUsuarios);
         }
+
+
+        public ActionResult M12_DetalleUsuario(int id)
+        {
+            Command<Entidad> comando = FabricaComando.crearM12ConsultarUsuario(id);
+            Entidad usuario = comando.ejecutar();
+            Usuario usuarioBuscado = (Usuario) usuario;
+            idUsuario = usuarioBuscado._id;
+
+            CModificarUsuario modelovista = new CModificarUsuario();
+            modelovista._correo = usuarioBuscado._correo;
+            modelovista._nombre = usuarioBuscado._nombre;
+            modelovista._apellido = usuarioBuscado._apellido;
+            modelovista.contraseñaUsuario = usuarioBuscado._contrasena;
+            modelovista._rol = usuarioBuscado._rol._idRol;
+            modelovista._activo = usuarioBuscado._activo;
+
+            return PartialView(modelovista);
+        }
+
+        public ActionResult M12_ModificarUsuario2(int id)
+        {
+            PersistenciaUsuario p = new PersistenciaUsuario();
+            List<ListaRoles> lista = p.ListarRoles();
+            ViewBag.Roles = new SelectList(lista, "rolID", "rolNombre");
+
+            Command<Entidad> comando = FabricaComando.crearM12ConsultarUsuario(id);
+            Entidad usuario = comando.ejecutar();
+            Usuario usuarioBuscado = (Usuario)usuario;
+            idUsuario = usuarioBuscado._id;
+
+            CModificarUsuario modelovista = new CModificarUsuario();
+            modelovista._correo = usuarioBuscado._correo;
+            modelovista._nombre = usuarioBuscado._nombre;
+            modelovista._apellido = usuarioBuscado._apellido;
+            modelovista.contraseñaUsuario = usuarioBuscado._contrasena;
+            modelovista._rol = usuarioBuscado._rol._idRol;
+            modelovista._activo = usuarioBuscado._activo;
+
+            return PartialView(modelovista);
+        }
+
+        [HttpPost]
+        public JsonResult modificarUsuario(CModificarUsuario model)
+        {
+            Entidad rol = FabricaEntidad.InstanciarRol(_rol);
+            rol._id = 1;
+            Entidad modificarUsuario = FabricaEntidad.InstanciarUsuario(model, rol);
+            Command<string> comando = FabricaComando.crearM12ModificarUsuario(modificarUsuario, idUsuario);
+            string agrego = comando.ejecutar();
+
+            return (Json(agrego));
+
+        }
+
+
+
+
+
 
 
         //
@@ -173,72 +233,72 @@ namespace BOReserva.Controllers
         }
 
 
-       [HttpPost]
-        public ActionResult M12_ModificarUsuario(AgregarUsuario usuario)
-        {
-            //Se resetea intentos en la Tabla Login MO1 Ingreso Seguridad
-            Cgestion_seguridad_ingreso ingreso = new Cgestion_seguridad_ingreso();
-            ingreso.correoCampoTexto = usuario.correoUsuario;
-            if (ModelState.IsValid)
-            {
-                PersistenciaUsuario p = new PersistenciaUsuario();
-                try
-                {
-                    p.ModificarUsuario(usuario.toClass(), usuario.idUsuario);
-                    ingreso.ResetearIntentos();//Metodo M01_Ingreso_Seguridad
-                    TempData["message"] = RecursoUsuario.MensajeModificado;
-                    //return RedirectToAction("M12_Index");
-                }
-                catch (ExceptionM12Reserva ex)
-                {
-                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                    return Json(ex.Message);
-                    //return View("M12_ModificarUsuario", usuario);
-                }
-                catch (Exception ex)
-                {
-                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                    return Json(ex.Message);
-                    //return View("M12_ModificarUsuario", usuario);
-                }
-            } 
-            return Json("true");
-            //return RedirectToAction("M12_Index");
-            //return PartialView("M12_Index", "_Layout");
-        }
+       //[HttpPost]
+       // public ActionResult M12_ModificarUsuario(AgregarUsuario usuario)
+       // {
+       //     //Se resetea intentos en la Tabla Login MO1 Ingreso Seguridad
+       //     Cgestion_seguridad_ingreso ingreso = new Cgestion_seguridad_ingreso();
+       //     ingreso.correoCampoTexto = usuario.correoUsuario;
+       //     if (ModelState.IsValid)
+       //     {
+       //         PersistenciaUsuario p = new PersistenciaUsuario();
+       //         try
+       //         {
+       //             p.ModificarUsuario(usuario.toClass(), usuario.idUsuario);
+       //             ingreso.ResetearIntentos();//Metodo M01_Ingreso_Seguridad
+       //             TempData["message"] = RecursoUsuario.MensajeModificado;
+       //             //return RedirectToAction("M12_Index");
+       //         }
+       //         catch (ExceptionM12Reserva ex)
+       //         {
+       //             Response.StatusCode = (int)HttpStatusCode.BadRequest;
+       //             return Json(ex.Message);
+       //             //return View("M12_ModificarUsuario", usuario);
+       //         }
+       //         catch (Exception ex)
+       //         {
+       //             Response.StatusCode = (int)HttpStatusCode.BadRequest;
+       //             return Json(ex.Message);
+       //             //return View("M12_ModificarUsuario", usuario);
+       //         }
+       //     } 
+       //     return Json("true");
+       //     //return RedirectToAction("M12_Index");
+       //     //return PartialView("M12_Index", "_Layout");
+       // }
 
  
        
-       public ActionResult ModificarUsuario(int? usuID)
-        {
-            //Se resetea intentos en la Tabla Login MO1 Ingreso Seguridad
-            Cgestion_seguridad_ingreso ingreso = new Cgestion_seguridad_ingreso();
+       //public ActionResult ModificarUsuario(int? usuID)
+       // {
+       //     //Se resetea intentos en la Tabla Login MO1 Ingreso Seguridad
+       //     Cgestion_seguridad_ingreso ingreso = new Cgestion_seguridad_ingreso();
             
 
-            if (usuID.HasValue)
-            {
-                try
-                {
-                    PersistenciaUsuario p = new PersistenciaUsuario();
-                    AgregarUsuario  usuario = new AgregarUsuario(p.consultarUsuario(usuID.Value));
-                    ingreso.correoCampoTexto = usuario.correoUsuario;//Metodo M01_Ingreso_Seguridad
-                    p = new PersistenciaUsuario();
-                    List<ListaRoles> lista = p.ListarRoles();
-                    ViewBag.Roles = new SelectList(lista, "rolID", "rolNombre");
-                    ingreso.ResetearIntentos();//Metodo M01_Ingreso_Seguridad
-                    return PartialView("M12_ModificarUsuario", usuario);
-                }
-                catch (Exception ex)
-                {
-                    Response.Write("<script>alert('" + ex.Message + "');</script>");
-                    Response.End();
-                    return Json(ex.Message);
-                }
-            }
-            else
-                return RedirectToAction("M12_Index");
+       //     if (usuID.HasValue)
+       //     {
+       //         try
+       //         {
+       //             PersistenciaUsuario p = new PersistenciaUsuario();
+       //             AgregarUsuario  usuario = new AgregarUsuario(p.consultarUsuario(usuID.Value));
+       //             ingreso.correoCampoTexto = usuario.correoUsuario;//Metodo M01_Ingreso_Seguridad
+       //             p = new PersistenciaUsuario();
+       //             List<ListaRoles> lista = p.ListarRoles();
+       //             ViewBag.Roles = new SelectList(lista, "rolID", "rolNombre");
+       //             ingreso.ResetearIntentos();//Metodo M01_Ingreso_Seguridad
+       //             return PartialView("M12_ModificarUsuario", usuario);
+       //         }
+       //         catch (Exception ex)
+       //         {
+       //             Response.Write("<script>alert('" + ex.Message + "');</script>");
+       //             Response.End();
+       //             return Json(ex.Message);
+       //         }
+       //     }
+       //     else
+       //         return RedirectToAction("M12_Index");
 
-        }
+       // }
 
         
         public RedirectToRouteResult EliminarUsuario(int usuID)

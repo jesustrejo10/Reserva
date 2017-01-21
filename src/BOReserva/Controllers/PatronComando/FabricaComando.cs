@@ -344,11 +344,28 @@ namespace BOReserva.Controllers.PatronComando
             return new M12_COObtenerRoles();
         }
 
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M12_COVisuailizarUsuarios
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M12_COVisuailizarUsuarios.
+        /// </returns>
         public static Command<Dictionary<int, Entidad>> crearM12VisualizarUsuarios()
         {
 
             return new M12_COVisualizarUsuarios();
 
+        }
+
+        public static Command<Entidad> crearM12ConsultarUsuario(int id)
+        {
+            return new M12_COConsultarUsuario(id);
+        }
+
+        public static Command<string> crearM12ModificarUsuario(Entidad usuario, int idModificar)
+        {
+            return new M12_COModificarUsuario(usuario, idModificar);
         }
         #endregion
 

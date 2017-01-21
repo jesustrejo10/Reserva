@@ -126,5 +126,86 @@ namespace BOReserva.DataAccess.DataAccessObject
                 return null;
             }
         }
+
+        Entidad IDAO.Modificar(Entidad e)
+        {
+            Usuario usuario = (Usuario)e;
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            try
+            {
+                conexion.Open();
+                String sql = "UPDATE Usuario " +
+                                "SET usu_nombre = '"+ usuario._nombre +"', usu_apellido = '"+ usuario._apellido +"', usu_correo = '"+ usuario._correo +"', usu_contraseña = '"+ usuario._contrasena +"', usu_fk_rol = "+ usuario._rol._id +", usu_activo = '"+ usuario._activo+"' where usu_id = "+ usuario._id;
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                
+                conexion.Close();
+                
+                usuario._nombre = "1";
+                Entidad resultado = usuario;
+                
+                return resultado;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                usuario._nombre = ex.Message;
+                Entidad resultado = usuario;
+                return resultado;
+            }
+        }
+
+        Entidad IDAO.Consultar(int id)
+        {
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            Usuario usuario = new Usuario();
+            try
+            {
+                conexion.Open();
+                String sql = "SELECT usu_nombre as nombre, usu_apellido as apellido, usu_correo as email, usu_contraseña as Contraseña, rol_nombre as rol, rol_id as id_rol, usu_activo as status FROM Usuario, Rol WHERE rol_id=usu_fk_rol and usu_id=" + id;
+
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    Rol rol;
+                    int idRol;
+                    String nombreRol;
+
+                    int idUsuario = id;
+
+                    while (reader.Read())
+                    {
+                        //SE AGREGA CREA UN OBJECTO VEHICLE SE PASAN LOS ATRIBUTO ASI reader["<etiqueta de la columna en la tabla Automovil>"]
+                        //Y  SE AGREGA a listavehiculos
+                        //public Hotel(int id, String nombre, String direccion, String email, String paginaWeb, int clasificacion, int capacidad, Ciudad ciudad)
+                        idRol = Int32.Parse(reader["id_rol"].ToString());
+                        nombreRol = reader["rol"].ToString();
+                        rol = new Rol(idRol, nombreRol);
+
+
+                        usuario = new Usuario(
+                            idUsuario,
+                            reader["nombre"].ToString(),
+                            reader["apellido"].ToString(),
+                            reader["email"].ToString(),
+                            reader["Contraseña"].ToString(),
+                            rol,
+                            reader["status"].ToString()
+                        );
+                    }
+                }
+                
+                cmd.Dispose();
+                conexion.Close();
+                return usuario;
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+            }
+        }
     }
 }
