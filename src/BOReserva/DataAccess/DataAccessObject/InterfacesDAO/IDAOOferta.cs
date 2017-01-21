@@ -8,8 +8,12 @@ using System.Threading.Tasks;
 
 namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
 {
+    /// <summary>
+    /// Interfaz que posee los metodos eliminarOferta
+    /// </summary>
     interface IDAOOferta : IDAO
     {
-        //Aquí van los métodos propios para las ofertas
+        
+        String eliminarOferta(int id);
     }
 }
