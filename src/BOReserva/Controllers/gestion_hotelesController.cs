@@ -123,7 +123,7 @@ namespace BOReserva.Controllers
             catch (ReservaExceptionM09 ex)
             {
                 CVerHotel modelovista = new CVerHotel();
-                return (Json(ex.Mensaje));
+                return (JavaScript(ex.Mensaje));
             }
         }
 

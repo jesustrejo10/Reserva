@@ -130,7 +130,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
                     pais = new Pais(idPais, nombrePais);
 
                     idCiudad = Int32.Parse(row[RecursoDAOM09.id_ciudad].ToString());
-                    nombreCiudad = row[RecursoDAOM09.id_ciudad].ToString();
+                    nombreCiudad = row[RecursoDAOM09.nombre_ciudad].ToString();
                     ciudad = new Ciudad(idCiudad, nombreCiudad, pais);
 
                     idHotel = Int32.Parse(row["hot_id"].ToString());
