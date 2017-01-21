@@ -46,5 +46,47 @@ namespace BOReserva.DataAccess.DataAccessObject.M14
                 return 0;
             }
         }
+
+        Dictionary<int, Entidad> IDAOCabina.ConsultarTodos(int id)
+        {
+            //List<Crucero> listavehiculos = new List<Crucero>();
+            Dictionary<int, Entidad> listaCabinas = new Dictionary<int, Entidad>();
+            //puedo usar Singleton
+            SqlConnection con = Connection.getInstance(_connexionString);
+            Cabina cabina;
+            try
+            {
+                con.Open();
+
+                SqlCommand query = new SqlCommand("M24_ListarCabinas", con);
+
+                query.CommandType = CommandType.StoredProcedure;
+                query.Parameters.AddWithValue("@idCrucero", id);
+                SqlDataReader reader = query.ExecuteReader();
+                //int elemento = 0;
+                while (reader.Read())
+                {
+                    cabina = new Cabina(
+                        Int32.Parse(reader["id"].ToString()),
+                        reader["nombre"].ToString(),
+                        float.Parse(reader["precio"].ToString()),
+                        reader["estatus"].ToString(),
+                        int.Parse(reader["capacidad"].ToString()));
+                    listaCabinas.Add(Int32.Parse(reader["id"].ToString()), cabina);
+                    //elemento++;
+                }
+                reader.Close();
+                con.Close();
+                return listaCabinas;
+
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                con.Close();
+                return null;
+            }
+        }
+
      }
     }

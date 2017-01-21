@@ -5,16 +5,16 @@ using System.Web;
 
 namespace BOReserva.DataAccess.Domain.M14
 {
-    public class Cabina : Entidad
+    public class Itinerario : Entidad
     {
-        public Cabina() { }        
+        public Itinerario() { }        
 
         public String _nombreCabina { get; set; }
         public float _precioCabina { get; set; }
         public String _estatus { get; set; }        
         public int _fkCrucero { get; set; }
 
-        public Cabina(int id,String nombre, float precio, String estatus, int crucero)
+        public Itinerario(int id,String nombre, float precio, String estatus, int crucero)
         {
             _nombreCabina = nombre;
             _precioCabina = precio;

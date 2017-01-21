@@ -208,7 +208,7 @@ namespace BOReserva.DataAccess.Domain
         public static Entidad InstanciarCabina(CGestion_cabina cabina)
         {
 
-            return new Cabina(cabina._nombreCabina,cabina._precioCabina,cabina._estatus,cabina._fkCrucero);
+            return new Cabina(cabina._idCabina,cabina._nombreCabina,cabina._precioCabina,cabina._estatus,cabina._fkCrucero);
         }
         #endregion
 

@@ -164,7 +164,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAOCruceros();
         }
 
-        public static DAO instanciarDaoCabina()
+        public static DAOCabina instanciarDaoCabina()
         {
             return new DAOCabina();
         }

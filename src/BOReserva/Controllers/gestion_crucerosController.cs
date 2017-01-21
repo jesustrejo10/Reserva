@@ -62,7 +62,7 @@ namespace BOReserva.Controllers
             //return PartialView();
         }
 
-        public JsonResult M24_ListarCabinas(int id)
+        /*public JsonResult M24_ListarCabinas(int id)
         {
             ConexionBD cbd = new ConexionBD();
             //VistaListaCrucero vlc = new VistaListaCrucero();
@@ -74,7 +74,7 @@ namespace BOReserva.Controllers
             //return Json (new { cabinas = listaCabinas });
             return (Json(listaCabinas, JsonRequestBehavior.AllowGet));
             //return PartialView();
-        }
+        }*/
 
         public JsonResult M24_ListarCamarotes(int id)
         {
@@ -91,11 +91,26 @@ namespace BOReserva.Controllers
             return PartialView("M24_ListarItinerario", vlc);
         }
 
+        /// <summary>
+        /// Método de la vista parcial M24ListarCruceros
+        /// </summary>
+        /// <returns>Retorna la vista parcial M24_ListarCruceros en conjunto del Modelo de dicha vista</returns>
         public ActionResult M24_ListarCruceros()
         {
             Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14VisualizarCruceros();
             Dictionary<int, Entidad> listaCruceros = comando.ejecutar();
             return PartialView(listaCruceros);
+        }
+
+        /// <summary>
+        /// Método de la vista parcial M24ListarCabinas
+        /// </summary>
+        /// <returns>Retorna la vista parcial M24_ListarCcabinas en conjunto del Modelo de dicha vista</returns>
+        public ActionResult M24_ListarCabinas(int id)
+        {
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14VisualizarCabinas(id);
+            Dictionary<int, Entidad> listaCabinas = comando.ejecutar();
+            return PartialView(listaCabinas);
         }
 
         /*public ActionResult M24_ListarCruceros()
