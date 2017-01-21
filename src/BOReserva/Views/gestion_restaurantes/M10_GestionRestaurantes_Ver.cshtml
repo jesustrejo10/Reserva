@@ -10,13 +10,7 @@
 <!-- DataTables -->
 <script src="../../Content/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="../../Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
-<!-- SlimScroll -->
-<script src="../../Content/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-<!-- FastClick -->
-<script src="../../Content/plugins/fastclick/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="../../Content/dist/js/app.min.js"></script>
-<!-- page script -->
+
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -80,7 +74,7 @@ $(document).ready(function() {
                     <div class="col-xs-3" style="margin-left:262px">
                         &nbsp;
                         &nbsp;
-                        @Html.DropDownList("combo", ViewBag.Ciudad as SelectList, "Ciudades", new { @class = "form-control" })
+                        @Html.DropDownList("combo", ViewBag.Ciudad as SelectList, null, new { @class = "form-control" })
 
                     </div>
                 </div>
@@ -107,7 +101,7 @@ $(document).ready(function() {
 
                                 foreach (var item in Model.listaRestaurantes)
                                 {
-                                    <tr id="@item._id" class="idRestaurant">
+                                    <tr id="@item._id">
                                         <td hidden="hidden">@item._id</td>
                                         <td>@item.nombre</td>
                                         <td>@item.direccion</td>

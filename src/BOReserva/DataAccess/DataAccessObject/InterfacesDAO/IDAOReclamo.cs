@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BOReserva.DataAccess.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
 {
-    interface IDAOReclamo : IDAO
+    public interface IDAOReclamo : IDAO
     {
-        //Aquí van los métodos propios
+        int modificarEstado(int id, int estado);
     }
 }

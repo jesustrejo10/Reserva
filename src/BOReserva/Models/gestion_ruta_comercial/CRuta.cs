@@ -24,6 +24,7 @@ namespace BOReserva.Models.gestion_ruta_comercial
             _distancia = distancia;
         }
 
+
         public int idRuta
         {
             get { return _id; }

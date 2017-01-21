@@ -13,11 +13,12 @@ namespace BOReserva.Controllers.PatronComando.M08
     {
                 
         #region Atributos
+
         Entidad _objeto;
+
         #endregion
 
         #region Constructor
-        public M08_COBuscarAutomovil() { }
 
         public M08_COBuscarAutomovil(Entidad _objeto)
         {
@@ -26,9 +27,16 @@ namespace BOReserva.Controllers.PatronComando.M08
 
         #endregion
 
+        #region Ejecucion
+
         public override string ejecutar()
         {
-            throw new NotImplementedException();
+            DAO DaoAutomovil = FabricaDAO.CrearDaoAutomovil();
+
+            return DaoAutomovil.Consultar(this._objeto._id).ToString();
         }
+
+        #endregion
+
     }
 }
