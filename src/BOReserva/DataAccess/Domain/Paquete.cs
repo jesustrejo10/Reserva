@@ -18,7 +18,7 @@ namespace BOReserva.DataAccess.Domain
         public String _idAuto { get; set; }
 
         //Declara una propiedad _idRestaurante de tipo int
-        public int? _idRestaurante { get; set; }
+        public int _idRestaurante { get; set; }
 
         //Declara una propiedad id_Hotel de tipo int
         public int? _idHotel { get; set; }
@@ -63,6 +63,7 @@ namespace BOReserva.DataAccess.Domain
         //_estadoPaquete nos indica si el paquete está activo o no
         public bool _estadoPaquete { get; set; } 
 
+        //Constructor de Paquete
        public Paquete (int idpaquete, String nombrepaquete, float preciopaquete, String idauto, int idrestaurante,
                        int idhotel, int idcrucero, int idvuelo, DateTime fechainiauto, DateTime fechainirest,
                        DateTime fechainihotel, DateTime fechainicruc, DateTime fechainivuelo, DateTime fechafinauto,
@@ -71,6 +72,7 @@ namespace BOReserva.DataAccess.Domain
         {
 
             this._id = idpaquete;
+            this._precioPaquete = preciopaquete;
             this._nombrePaquete = nombrepaquete;
             this._idAuto = idauto;
             this._idRestaurante = idrestaurante;
@@ -89,5 +91,33 @@ namespace BOReserva.DataAccess.Domain
             this._fechaFinVuelo = fechafinvuelo;
            
         }
+
+       //Constructor de Paquete
+       public Paquete(String nombrepaquete, float preciopaquete, String idauto, int idrestaurante,
+                      int idhotel, int idcrucero, int idvuelo, DateTime fechainiauto, DateTime fechainirest,
+                      DateTime fechainihotel, DateTime fechainicruc, DateTime fechainivuelo, DateTime fechafinauto,
+                      DateTime fechafinrest, DateTime fechafinhotel, DateTime fechafincruc,
+                      DateTime fechafinvuelo)
+       {
+
+           this._nombrePaquete = nombrepaquete;
+           this._precioPaquete = preciopaquete;
+           this._idAuto = idauto;
+           this._idRestaurante = idrestaurante;
+           this._idHotel = idhotel;
+           this._idCrucero = idcrucero;
+           this._idVuelo = idvuelo;
+           this._fechaIniAuto = fechainiauto;
+           this._fechaIniRest = fechainirest;
+           this._fechaIniHotel = fechainihotel;
+           this._fechaIniCruc = fechainicruc;
+           this._fechaIniVuelo = fechainivuelo;
+           this._fechaFinAuto = fechafinauto;
+           this._fechaFinRest = fechainirest;
+           this._fechaFinHotel = fechafinhotel;
+           this._fechaFinCruc = fechafincruc;
+           this._fechaFinVuelo = fechafinvuelo;
+
+       }
     }
 }

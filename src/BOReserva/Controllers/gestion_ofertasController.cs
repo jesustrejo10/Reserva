@@ -485,7 +485,7 @@ namespace BOReserva.Controllers
                                           String fiCrucero, String ffCrucero,String fiRestaurante, String ffRestaurante,
                                           String fiVuelo, String ffVuelo, String precio, String estado)
         {
-            manejadorSQL sql = new manejadorSQL();
+           // manejadorSQL sql = new manejadorSQL();
             CPaquete paquete = new CPaquete();
             if (estado == "1")
                 paquete._estadoPaquete = true;
@@ -556,9 +556,14 @@ namespace BOReserva.Controllers
 
                 paquete._idAuto = idAuto;
                 paquete._precioPaquete = float.Parse(precio);
-                sql.agregarPaquete(paquete);
+                //sql.agregarPaquete(paquete);
 
-            return Json(true);
+            //return Json(true);
+                Entidad nuevoPaquete = FabricaEntidad.InstanciarPaquete(paquete);
+                //Con la fábrica se instancia el paquete.
+                Command<String> comando = FabricaComando.crearM11AgregarPaquete(nuevoPaquete);
+                String agrego_si_no = comando.ejecutar();
+               return (Json(agrego_si_no));
         }
 
         [HttpPost]

@@ -179,11 +179,36 @@ namespace BOReserva.DataAccess.Domain
             return new Permiso();
         }
 
-        #region M11_AgregarOferta
+        #region M11 Gestión de ofertas y Paquetes
 
+        //Agregar oferta
         public static Entidad InstanciarOferta(CAgregarOferta model) {
             return new Oferta(model._nombreOferta, model._porcentajeOferta, model._fechaIniOferta,
                               model._fechaFinOferta, model._estadoOferta);
+        }
+        public static Entidad InstanciarPaquete(CPaquete paquete)
+        {
+            String nombrePaquete = paquete._nombrePaquete;
+            float precioPaquete = paquete._precioPaquete;
+            String idAuto = paquete._idAuto;
+            int idRestaurante =  (int) paquete._idRestaurante;
+            int idHotel = (int) paquete._idHabitacion; //En realidad es el id del hotel
+            int idCrucero = (int) paquete._idCrucero;
+            int idVuelo = (int) paquete._idVuelo;
+            DateTime fechaIniAuto = (DateTime) paquete._fechaIniAuto;
+            DateTime fechaIniRest = (DateTime) paquete._fechaIniRest;
+            DateTime fechaIniHotel = (DateTime)paquete._fechaIniHabi; //Fecha de inicio para el hotel
+            DateTime fechaIniCruc = (DateTime) paquete._fechaIniCruc;
+            DateTime fechaIniVuelo = (DateTime)paquete._fechaIniVuelo;
+            DateTime fechaFinAuto = (DateTime)paquete._fechaFinAuto;
+            DateTime fechaFinRest = (DateTime) paquete._fechaFinRest;
+            DateTime fechaFinHotel = (DateTime)paquete._fechaFinHabi; //Fecha fin para el hotel
+            DateTime fechaFinCruc = (DateTime)paquete._fechaFinCruc;
+            DateTime fechaFinVuelo = (DateTime)paquete._fechaFinVuelo;
+            return new Paquete(nombrePaquete, precioPaquete, idAuto, idRestaurante, idHotel, idCrucero, idVuelo, 
+                               fechaIniAuto, fechaIniRest, fechaIniHotel, fechaIniCruc, fechaIniVuelo, fechaFinAuto,
+                               fechaFinRest, fechaFinHotel, fechaFinCruc, fechaFinVuelo);
+
         }
         #endregion
 

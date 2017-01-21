@@ -1,4 +1,5 @@
 using BOReserva.Controllers.PatronComando.M09;
+using BOReserva.Controllers.PatronComando.M11;
 using BOReserva.DataAccess.Domain;
 using BOReserva.M10.Comando.gestion_restaurantes;
 using System;
@@ -313,8 +314,8 @@ namespace BOReserva.Controllers.PatronComando
         }
         #endregion
 
-        #region M11_AregarOferta
-
+        #region M11 Gestión de ofertas y paquetes
+        //Agregar oferta
         /// <summary>
         /// Instancia el comando agregarOferta
         /// </summary>
@@ -324,6 +325,13 @@ namespace BOReserva.Controllers.PatronComando
         {
 
             return new M11_COAgregarOferta((Oferta) e);
+
+        }
+
+        public static Command<String> crearM11AgregarPaquete(Entidad e)
+        {
+
+            return new M11_COAgregarPaquete((Paquete)e);
 
         }
 

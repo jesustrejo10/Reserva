@@ -252,7 +252,8 @@
     <Compile Include="Controllers\List.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COVisualizarHoteles.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COAgregarPasajero.cs" />
-	<Compile Include="Controllers\PatronComando\M11\M11_COAgregarOferta.cs" />
+    <Compile Include="Controllers\PatronComando\M11\M11_COAgregarOferta.cs" />
+    <Compile Include="Controllers\PatronComando\M11\M11_COAgregarPaquete.cs" />
     <Compile Include="Controllers\PatronComando\M11\M11_CODeshabilitarOferta.cs" />
     <Compile Include="Controllers\PatronComando\M11\M11_CODeshabilitarPaquete.cs" />
     <Compile Include="Controllers\PatronComando\M11\M11_COModificarPaquete.cs" />
