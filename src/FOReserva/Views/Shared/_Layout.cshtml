@@ -1,0 +1,217 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8]>          <html class="ie ie8"> <![endif]-->
+<!--[if IE 9]>          <html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html>
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <meta name="description" content="Reservas" />
+    <meta name="Author" content="DS1617A" />
+    <!-- mobile settings -->
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
+    <title>Reserva</title>
+
+    <link rel="shortcut icon" type="image/png" href="@Url.Content("~/Content/assets/images/favicon.ico")" />
+    <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+    <!-- WEB FONTS : use %7C instead of | (pipe) -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400%7CRaleway:300,400,500,600,700%7CLato:300,400,400italic,600,700" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/jquery/jquery-2.1.4.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/customValidator.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/bootstrap/js/bootstrap.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/bootstrap.daterangepicker/moment.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/bootstrap.datepicker/js/bootstrap-datepicker.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/masonry.pkgd.min.js")"></script>
+    <!-- CORE CSS -->
+    <link href="@Url.Content("~/Content/assets/plugins/bootstrap/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/assets/plugins/bootstrap.datepicker/css/bootstrap-datepicker3.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/assets/plugins/datatable/css/jquery.dataTables.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/assets/plugins/bootstrap.datepicker/css/bootstrap-datepicker.min.css")" rel="stylesheet" type="text/css" />
+    <!-- THEME CSS -->
+
+    <link href="@Url.Content("~/Content/assets/css/essentials.css")" rel="stylesheet" type="text/css" />
+
+    <link href="@Url.Content("~/Content/assets/css/layout.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/assets/css/custom.css")" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/bootstrap.daterangepicker/daterangepicker.js")"></script>
+    <link href="@Url.Content("~/Content/assets/plugins/bootstrap.daterangepicker/daterangepicker.css")" rel="stylesheet" type="text/css" />
+    
+    <link href="@Url.Content("~/Content/assets/css/layout-datatables.css")" rel="stylesheet" type="text/css" />  
+
+    <!-- PAGE LEVEL SCRIPTS -->
+    <link href="@Url.Content("~/Content/assets/css/header-1.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/assets/css/layout-shop.css")" rel=" stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/assets/css/color_scheme/green.css")" rel="stylesheet" type="text/css" id="color_scheme" />
+
+    <link href="@Url.Content("~/Content/assets/css/global.css")" rel="stylesheet" />
+</head>
+
+<body class="smoothscroll enable-animation">
+
+    <!-- SLIDE TOP -->
+    <div id="slidetop">
+
+        <div class="container">
+
+
+        </div>
+
+    </div>
+    <!-- /SLIDE TOP -->
+    <!-- wrapper -->
+    <div id="wrapper">
+
+        <div id="header" class="sticky clearfix">
+
+            <!-- TOP NAV -->
+            <header id="topNav">
+                <div class="container">
+
+                    <!-- Mobile Menu Button -->
+                    <button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Logo -->
+                    <a onclick="cargarContenido('#MD', 'get', '/gestion_vuelos/gestion_vuelos', null, this)" class="logo pull-left" href="/">
+                        <img src="@Url.Content("~/Content/assets/images/logo_final.png")" alt=" " />
+                    </a>
+
+                    <!--
+                        Top Nav
+
+                        AVAILABLE CLASSES:
+                        submenu-dark = dark sub menu
+                    -->
+                    <div class="navbar-collapse pull-right nav-main-collapse collapse">
+                        <nav class="nav-main">
+
+                            <!--
+                                NOTE
+
+                                For a regular link, remove "dropdown" class from LI tag and "dropdown-toggle" class from the href.
+                                Direct Link Example:
+
+                                <li>
+                                    <a href="#">HOME</a>
+                                </li>
+                            -->
+                            <ul id="topMain" class="nav nav-pills nav-main">
+                                <li class="active">
+                                    <!-- HOME -->
+                                    <a onclick="cargarContenido('#MD', 'get', '/gestion_vuelos/gestion_vuelos', null, this)" href="#"> INICIO </a>
+                                </li>
+                                <li>
+                                    <!-- INICIAR SESIÓN -->
+                                    @Html.ActionLink("INICIAR SESIÓN", "Login", "registro_autenticacion")
+                                </li>
+                                <li>
+                                    <!-- REGISTRARSE -->
+                                    @Html.ActionLink("REGISTRARSE", "Registro", "registro_autenticacion")
+                                </li>
+                            </ul>
+
+                        </nav>
+                    </div>
+
+                </div>
+            </header>
+            <!-- /Top Nav -->
+
+        </div>
+
+        <!-- FEATURED GRID -->
+        <section class="featured-grid">
+            <div class="container">
+                @RenderBody()
+            </div>
+        </section>
+        <!-- /FEATURED GRID -->
+        <!-- FOOTER -->
+        <footer id="footer">
+            <div class="container">
+
+                <div class="row margin-top-10 margin-bottom-10 size-13">
+
+                    <!-- col #1 -->
+                    <div class="col-md-8 col-sm-8">
+
+
+                        <!-- Social Icons -->
+                        <div class="clearfix">
+
+                            <a href="#" class="social-icon social-icon-sm social-icon-border social-facebook pull-left" data-toggle="tooltip" data-placement="top" title="Facebook">
+                                <i class="icon-facebook"></i>
+                                <i class="icon-facebook"></i>
+                            </a>
+
+                            <a href="#" class="social-icon social-icon-sm social-icon-border social-twitter pull-left" data-toggle="tooltip" data-placement="top" title="Twitter">
+                                <i class="icon-twitter"></i>
+                                <i class="icon-twitter"></i>
+                            </a>
+
+                            <a href="#" class="social-icon social-icon-sm social-icon-border social-instagram pull-left" data-toggle="tooltip" data-placement="top" title="Instagram">
+                                <i class="icon-instagram"></i>
+                                <i class="icon-instagram"></i>
+                            </a>
+
+                        </div>
+                        <!-- /Social Icons -->
+
+                    </div>
+                    <!-- /col #1 -->
+
+                </div>
+
+            </div>
+
+            <div class="copyright">
+                <div class="container">
+                    <!--
+                    <ul class="pull-right nomargin list-inline mobile-block">
+                        <li><a href="#">Terms &amp; Conditions</a></li>
+                        <li>&bull;</li>
+                        <li><a href="#">Privacy</a></li>
+                    </ul>
+                    -->
+                    &copy; Reserva, 2016
+                </div>
+            </div>
+
+        </footer>
+        <!-- /FOOTER -->
+
+
+    </div>
+    <!-- /wrapper -->
+    <!-- PRELOADER -->
+    <div id="preloader">
+        <div class="inner">
+            <span class="loader"></span>
+        </div>
+    </div><!-- /PRELOADER -->
+    <!-- JAVASCRIPT FILES -->
+    <script type="text/javascript">var plugin_path = "@Url.Content("~/Content/assets/plugins/")";</script>
+    <!-- JS DATATABLES -->
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/jquery.dataTables.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/dataTables.tableTools.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/dataTables.colReorder.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/dataTables.scroller.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/dataTables.bootstrap.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/select2/js/select2.full.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/js/scripts.js")"></script>
+
+    @*<script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/bootstrap/js/bootstrap.min.js")"></script>*@
+    @*<script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/bootstrap.datepicker/js/bootstrap-datepicker.min.js")"></script>*@
+
+<!--CONTROLADOR DE LA VISTA PARCIAL-->
+    <script type="text/javascript" src="@Url.Content("~/Scripts/cargadorPestanas.js")"></script>
+
+    <!-- PAGE LEVEL SCRIPTS -->
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/js/view/demo.shop.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/uniqueId.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatable/js/jquery.dataTables.min.js")"></script>
+
+</body>
+</html>
