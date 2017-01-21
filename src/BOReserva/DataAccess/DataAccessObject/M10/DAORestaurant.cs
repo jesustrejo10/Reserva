@@ -97,7 +97,6 @@ namespace BOReserva.M10
             }
             catch (Exception ex)
             {
-
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw new ReservaExceptionM10("Reserva-404", "Error al realizar operacion ", ex);
             }
@@ -244,7 +243,6 @@ namespace BOReserva.M10
             }
             catch (Exception ex)
             {
-
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw new ReservaExceptionM10("Reserva-404", "Error al realizar operacion ", ex);
             }
@@ -300,7 +298,6 @@ namespace BOReserva.M10
             }
             catch (Exception ex)
             {
-
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw new ReservaExceptionM10("Reserva-404", "Error al realizar operacion ", ex);
             }

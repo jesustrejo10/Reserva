@@ -9,7 +9,10 @@ namespace BOReserva.M10.Comando.gestion_restaurantes
 {
     public class M10_COCargarHorario : Command<List<String>>
     {
-
+        /// <summary>
+        /// Metodo para cargar horarios en el combobox
+        /// </summary>
+        /// <returns></returns>
         public override List<string> ejecutar()
         {
             return FabricaDAO.listarHorario();
