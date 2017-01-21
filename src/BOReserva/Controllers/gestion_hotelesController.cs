@@ -10,6 +10,8 @@ using System.Net;
 using BOReserva.Servicio;
 using BOReserva.DataAccess.Domain;
 using BOReserva.Controllers.PatronComando;
+using BOReserva.Excepciones.M09;
+using System.Data.SqlClient;
 
 namespace BOReserva.Controllers
 {
@@ -58,15 +60,21 @@ namespace BOReserva.Controllers
         /// <returns>Retorna un JsonResult</returns>
         [HttpPost]
         public JsonResult guardarHotel(CAgregarHotel model)
-        {   
-            Entidad ciudadDestino = FabricaEntidad.InstanciarCiudad(ciudad);
-            M09_COObtenerPaises command = (M09_COObtenerPaises)FabricaComando.crearM09ObtenerPaises();
-            ciudadDestino._id = command.obtenerIdentificadorCiudad(ciudad);
-            Entidad nuevoHotel = FabricaEntidad.InstanciarHotel(model, ciudadDestino);
-            //con la fabrica instancie al hotel.
-            Command<String> comando = FabricaComando.crearM09AgregarHotel(nuevoHotel, model._precioHabitacion);
-            String agrego_si_no = comando.ejecutar();
-            return (Json(agrego_si_no));
+        {
+            try
+            {
+                Entidad ciudadDestino = FabricaEntidad.InstanciarCiudad(ciudad);
+                M09_COObtenerPaises command = (M09_COObtenerPaises)FabricaComando.crearM09ObtenerPaises();
+                ciudadDestino._id = command.obtenerIdentificadorCiudad(ciudad);
+                Entidad nuevoHotel = FabricaEntidad.InstanciarHotel(model, ciudadDestino);
+                //con la fabrica instancie al hotel.
+                Command<String> comando = FabricaComando.crearM09AgregarHotel(nuevoHotel, model._precioHabitacion);
+                String agrego_si_no = comando.ejecutar();
+                return (Json(agrego_si_no));
+            }
+            catch (ReservaExceptionM09 ex){
+                return (Json(ex.Mensaje));
+            }
         }
 
 
@@ -76,9 +84,16 @@ namespace BOReserva.Controllers
         /// <returns>Retorna la vista parcial M09_VisualizarHoteles en conjunto del Modelo de dicha vista</returns>
         public ActionResult M09_VisualizarHoteles()
         {
-            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM09VisualizarHoteles();
-            Dictionary<int, Entidad> listaHoteles = comando.ejecutar();
-            return PartialView(listaHoteles);
+            try
+            {
+                Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM09VisualizarHoteles();
+                Dictionary<int, Entidad> listaHoteles = comando.ejecutar();
+                return PartialView(listaHoteles);
+            }
+            catch (ReservaExceptionM09 ex)
+            {
+                return PartialView(ex);
+            }
         }
 
         /// <summary>
@@ -87,21 +102,29 @@ namespace BOReserva.Controllers
         /// <returns>Retorna la vista parcial M09_DetalleHotel en conjunto del Modelo de dicha vista</returns>
         public ActionResult M09_DetalleHotel(int id)
         {
-            Command<Entidad> comando = FabricaComando.crearM09ConsultarHotel(id);
-            Entidad hotel = comando.ejecutar();
-            Hotel hotelbuscado = (Hotel)hotel;
-            idhotel = hotelbuscado._id;
-            CVerHotel modelovista = new CVerHotel();
-            modelovista._capacidadHabitacion = hotelbuscado._capacidad;
-            modelovista._ciudad = hotelbuscado._ciudad._nombre;
-            modelovista._clasificacion = hotelbuscado._clasificacion;
-            modelovista._direccion = hotelbuscado._direccion;
-            modelovista._email = hotelbuscado._email;
-            modelovista._nombre = hotelbuscado._nombre;
-            modelovista._paginaWeb = hotelbuscado._paginaWeb;
-            modelovista._pais = hotelbuscado._ciudad._pais._nombre;
-            modelovista._precioHabitacion = hotelbuscado._precio;
-            return PartialView(modelovista);
+            try
+            {
+                Command<Entidad> comando = FabricaComando.crearM09ConsultarHotel(id);
+                Entidad hotel = comando.ejecutar();
+                Hotel hotelbuscado = (Hotel)hotel;
+                idhotel = hotelbuscado._id;
+                CVerHotel modelovista = new CVerHotel();
+                modelovista._capacidadHabitacion = hotelbuscado._capacidad;
+                modelovista._ciudad = hotelbuscado._ciudad._nombre;
+                modelovista._clasificacion = hotelbuscado._clasificacion;
+                modelovista._direccion = hotelbuscado._direccion;
+                modelovista._email = hotelbuscado._email;
+                modelovista._nombre = hotelbuscado._nombre;
+                modelovista._paginaWeb = hotelbuscado._paginaWeb;
+                modelovista._pais = hotelbuscado._ciudad._pais._nombre;
+                modelovista._precioHabitacion = hotelbuscado._precio;
+                return PartialView(modelovista);
+            }
+            catch (ReservaExceptionM09 ex)
+            {
+                CVerHotel modelovista = new CVerHotel();
+                return (Json(ex.Mensaje));
+            }
         }
 
 

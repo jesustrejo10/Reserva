@@ -50,9 +50,10 @@
                                 </tr>
                             }
                         }
-                        catch (Exception e)
+                        catch (Exception ex)
                         {
-                            Response.Write("<script>alert('No hay vehiculos para mostrar');</script>");
+                            var item = (BOReserva.Excepciones.M09.ReservaExceptionM09)Model;
+                            Response.Write("<script>alert('"+item.Mensaje+"');</script>");
                         }
 
                     <tfoot>
@@ -95,7 +96,7 @@
                     $("#contenido").append(data);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
+                    alert(data);
                 }
             });
 
@@ -145,8 +146,8 @@
             }).done(function (data) {
                 $("#contenido").empty();
                 $("#contenido").append(data);
-            }).fail(function () {
-                alert("Error, por favor refresque la pagina")
+            }).fail(function (data) {
+                alert(data)
             });
         }));
     });

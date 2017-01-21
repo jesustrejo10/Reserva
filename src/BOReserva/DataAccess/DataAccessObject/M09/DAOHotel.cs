@@ -47,27 +47,19 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
             catch (SqlException ex)
             {
-                Debug.WriteLine("Ocurrio un SqlException");
-                Debug.WriteLine(ex.ToString());
-                return 2;
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (NullReferenceException ex)
             {
-                Debug.WriteLine("Ocurrio una NullReferenceException");
-                Debug.WriteLine(ex.ToString());
-                return 3;
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (ArgumentNullException ex)
             {
-                Debug.WriteLine("Ocurrio una ArgumentNullException");
-                Debug.WriteLine(ex.ToString());
-                return 4;
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Ocurrio una Exception");
-                Debug.WriteLine(ex.ToString());
-                return 5;
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
         }
 
@@ -170,8 +162,19 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
             catch (SqlException ex)
             {
-                Debug.WriteLine(ex.ToString());
-                return null;
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (NullReferenceException ex)
+            {
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
         }
 

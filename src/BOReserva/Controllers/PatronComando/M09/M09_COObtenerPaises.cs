@@ -2,8 +2,10 @@
 using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
+using BOReserva.Excepciones.M09;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
@@ -86,10 +88,17 @@ namespace BOReserva.Controllers.PatronComando
         /// <returns>Retorna un valor entero</returns>
         public int obtenerIdentificadorCiudad(String ciudad)
         {
-            int id;
-            DAOCiudad daoPais = (DAOCiudad)FabricaDAO.instanciarDaoCiudad();
-            id = daoPais.obtenerIDciudad(ciudad);
-            return id;
+            try
+            {
+                int id;
+                DAOCiudad daoPais = (DAOCiudad)FabricaDAO.instanciarDaoCiudad();
+                id = daoPais.obtenerIDciudad(ciudad);
+                return id;
+            }
+            catch (ReservaExceptionM09 ex)
+            {
+                throw ex;
+            }
         }
     }
 }
