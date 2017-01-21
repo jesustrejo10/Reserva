@@ -224,9 +224,19 @@ namespace BOReserva.DataAccess.Domain
             return new Comida(nombre, tipo, estatus, descripcion);
         }
 
+        public static Entidad instanciarComida(int id,string nombre, string tipo, int estatus, string descripcion)
+        {
+            return new Comida(id, nombre, tipo, estatus, descripcion);
+        }
+
         public static Entidad instanciarComida()
         {
             return new Comida();
+        }
+
+        public static Entidad instanciarComida(int id)
+        {
+            return new Comida(id);
         }
 
         public static Entidad instanciarComidaVuelo(int id, string comida, string codigoVuelo, int cantidad)

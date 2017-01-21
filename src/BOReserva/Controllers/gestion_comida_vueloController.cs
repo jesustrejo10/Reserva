@@ -44,10 +44,6 @@ namespace BOReserva.Controllers
             }
         }
 
-        //--------------------------------------------------------------------------------------------------------------------------------------------
-        //--------------------------------------------------------------------------------------------------------------------------------------------
-        //--------------------------------------------------------------------------------------------------------------------------------------------
-
         public ActionResult M06_AgregarPorVuelo()
         {
             manejadorSQL sql = new manejadorSQL();
@@ -55,15 +51,6 @@ namespace BOReserva.Controllers
             List<CVuelo> vuelos = new List<CVuelo>();
             vuelos = sql.listarVuelosEnBD();
             return PartialView(vuelos);
-        }
-
-        public ActionResult M06_ConsultarComida(int id)
-        {
-            manejadorSQL sql = new manejadorSQL();
-            CComida comida = new CComida();
-            comida = sql.consultarComida(id);
-            CEditarComida modelo = new CEditarComida(comida);
-            return PartialView("M06_EditarComida", modelo);
         }
 
         public ActionResult M06_VisualizarComidas()
@@ -117,9 +104,9 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult habilitarPlato(int id)
         {
-            manejadorSQL sql = new manejadorSQL();
-            Boolean resultado = sql.habilitarPlato(id);
-            if (resultado)
+            Entidad _comida = FabricaEntidad.instanciarComida(id);
+            Command<bool> comando = (Command<bool>)FabricaComando.gestionComida(FabricaComando.comandosComida.HABILITAR_COMIDA, _comida);
+            if (comando.ejecutar())
             {
                 return (Json(true, JsonRequestBehavior.AllowGet));
             }
@@ -142,9 +129,10 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult deshabilitarPlato(int id)
         {
-            manejadorSQL sql = new manejadorSQL();
-            Boolean resultado = sql.deshabilitarPlato(id);
-            if (resultado)
+            Entidad _comida = FabricaEntidad.instanciarComida(id);
+            Command<bool> comando = (Command<bool>)FabricaComando.gestionComida(FabricaComando.comandosComida.DESHABILITAR_COMIDA, _comida);
+
+            if (comando.ejecutar())
             {
                 return (Json(true, JsonRequestBehavior.AllowGet));
             }
@@ -159,7 +147,24 @@ namespace BOReserva.Controllers
             }
         }
 
+        public ActionResult M06_EditarPlato(int id)
+        {
+            Entidad _comida = FabricaEntidad.instanciarComida(id);
+            Command<Entidad> comando = (Command<Entidad>)FabricaComando.gestionComida(FabricaComando.comandosComida.RELLENAR_COMIDA, _comida);
+
+            Entidad comida = comando.ejecutar();
+            return PartialView(comida);
         }
+
+        public JsonResult editarPlatoComida(int id, string nombre, string tipo, int estatus, string descripcion) {
+
+            Entidad _comida = FabricaEntidad.instanciarComida(id, nombre, tipo, estatus, descripcion);
+            Command<bool> comando = (Command<bool>)FabricaComando.gestionComida(FabricaComando.comandosComida.EDITAR_COMIDA, _comida);
+            bool resultado = comando.ejecutar();
+
+            return Json(resultado); 
+        }
+    }
        
 	}
 

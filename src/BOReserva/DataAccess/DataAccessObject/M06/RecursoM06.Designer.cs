@@ -97,13 +97,33 @@ namespace BOReserva.DataAccess.DataAccessObject.M06 {
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to @com_id.
+        ///   Looks up a localized string similar to @com_vue_id.
         /// </summary>
         internal static string com_vue_id
         {
             get
             {
                 return ResourceManager.GetString("com_vue_id", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Looks up a localized string similar to @com_vue_id.
+        /// </summary>
+        internal static string com_id
+        {
+            get
+            {
+                return ResourceManager.GetString("com_id", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Looks up a localized string similar to @com_vue_id.
+        /// </summary>
+        internal static string com_id_consultar
+        {
+            get
+            {
+                return ResourceManager.GetString("com_id_consultar", resourceCulture);
             }
         }
 
@@ -186,6 +206,39 @@ namespace BOReserva.DataAccess.DataAccessObject.M06 {
             get
             {
                 return ResourceManager.GetString("procedimientoConsultarComidas", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to M06_ConsultarComidas.
+        /// </summary>
+        internal static string procedimientoEditarComida
+        {
+            get
+            {
+                return ResourceManager.GetString("procedimientoEditarComida", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to M06_ConsultarComidas.
+        /// </summary>
+        internal static string procedimientoConsultarDatosComida
+        {
+            get
+            {
+                return ResourceManager.GetString("procedimientoConsultarDatosComida", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to M06_ConsultarComidas.
+        /// </summary>
+        internal static string procedimientoCambiarEstatusComida
+        {
+            get
+            {
+                return ResourceManager.GetString("procedimientoCambiarEstatusComida", resourceCulture);
             }
         }
 

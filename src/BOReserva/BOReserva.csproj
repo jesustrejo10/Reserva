@@ -210,6 +210,9 @@
     <Compile Include="Controllers\M04\gestion_vueloController.cs" />
     <Compile Include="Controllers\PatronComando\Command.cs" />
     <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
+    <Compile Include="Controllers\PatronComando\M06\M06_COCambiarEstatusComida.cs" />
+    <Compile Include="Controllers\PatronComando\M06\M06_COEditarComida.cs" />
+    <Compile Include="Controllers\PatronComando\M06\M06_CORellenarComida.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COAgregarHabitaciones.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COModificarPasajero.cs" />
     <Compile Include="Controllers\PatronComando\M01\M01_COBloquearUsuario.cs" />
@@ -293,7 +296,6 @@
     </Compile>
     <Compile Include="DataAccess\DataAccessObject\M06\DAOComida.cs" />
     <Compile Include="DataAccess\DataAccessObject\M06\RecursoM06.Designer.cs" />
-    <Compile Include="DataAccess\DataAccessObject\M06\Resource1.Designer.cs" />
     <Compile Include="DataAccess\DataAccessObject\M08\DAOAutomovil.cs" />
     <Compile Include="DataAccess\DataAccessObject\M08\RecursoDAOM08.Designer.cs" />
     <Compile Include="DataAccess\DataAccessObject\M09\DAOHotel.cs" />
@@ -722,7 +724,6 @@
     <Content Include="Views\gestion_aviones\M02_GestionAviones.html" />
     <Content Include="Views\gestion_aviones\placeholder.html" />
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarPorVuelo.html" />
-    <Content Include="Views\gestion_comida_vuelo\M06_ConsultarComidas.html" />
     <Content Include="Views\gestion_comida_vuelo\placeholder.html" />
     <Content Include="Views\gestion_cruceros\js\module.js" />
     <Content Include="Views\gestion_equipaje_perdido\placeholder.html" />
@@ -1610,6 +1611,7 @@
     <Content Include="Views\gestion_reclamos\M16_ModificarReclamo.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_AgregarHotel.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_VisualizarHoteles.cshtml" />
+    <Content Include="Views\gestion_comida_vuelo\M06_EditarPlato.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_boletos\M05_VisualizarBoletos.cshtml" />
@@ -1736,7 +1738,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataAccess\DataAccessObject\M08\RecursoDAOM08.resx" />
     <EmbeddedResource Include="DataAccess\DataAccessObject\M06\RecursoM06.resx" />
-    <EmbeddedResource Include="DataAccess\DataAccessObject\M06\Resource1.resx" />
     <EmbeddedResource Include="DataAccess\DataAccessObject\M10\RecursoDAOM10.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoDAOM10.Designer.cs</LastGenOutput>

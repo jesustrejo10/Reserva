@@ -11,5 +11,8 @@ namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
         bool crear(Entidad comida);
         List<Entidad> consultarComidas();
         List<Entidad> consultarComidasVuelos();
+        bool cambiarEstadoComida(Entidad comida);
+        Entidad rellenarComida(Entidad comida);
+        bool editarComida(Entidad comida);
     }
 }

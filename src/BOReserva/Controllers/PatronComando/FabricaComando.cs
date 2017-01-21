@@ -345,7 +345,11 @@ namespace BOReserva.Controllers.PatronComando
             ELIMINAR_COMIDA,
             ACTUALIZAR_COMIDA,
             CONSULTAR_COMIDAS,
-            CONSULTAR_COMIDAS_VUELOS
+            CONSULTAR_COMIDAS_VUELOS,
+            DESHABILITAR_COMIDA,
+            HABILITAR_COMIDA,
+            RELLENAR_COMIDA,
+            EDITAR_COMIDA
         }
 
         public static object gestionComida(comandosComida _comando, Entidad _objeto)
@@ -354,10 +358,25 @@ namespace BOReserva.Controllers.PatronComando
             {
                 case comandosComida.CREAR_COMIDA:
                     return new M06_COAgregarComida(_objeto);
+
                 case comandosComida.CONSULTAR_COMIDAS:
                     return new M06_COConsultarComidas();
+
                 case comandosComida.CONSULTAR_COMIDAS_VUELOS:
                     return new M06_COConsultarComidasVuelos();
+
+                case comandosComida.DESHABILITAR_COMIDA:
+                    return new M06_COCambiarEstatusComida(_objeto, 0);
+
+                case comandosComida.HABILITAR_COMIDA:
+                    return new M06_COCambiarEstatusComida(_objeto, 1);
+
+                case comandosComida.RELLENAR_COMIDA:
+                    return new M06_CORellenarComida(_objeto);
+
+                case comandosComida.EDITAR_COMIDA:
+                    return new M06_COEditarComida(_objeto);
+
                 default:
                     return new M06_COAgregarComida(_objeto);
             }
