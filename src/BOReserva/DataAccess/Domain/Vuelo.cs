@@ -135,6 +135,17 @@ namespace BOReserva.DataAccess.Domain
             _fechaAterrizaje = fechaAterrizaje;
             _avion = avion;
         }
+
+        /// <summary>
+        /// Constructor de la clase Vuelo
+        /// </summary>
+        /// <param name="fechaAterrizaje"></param>
+        /// <param name="avion"></param>
+        public Vuelo(DateTime fechaAterrizaje, Avion avion)
+        {
+            _fechaAterrizaje = fechaAterrizaje;
+            _avion = avion;
+        }
         #endregion
 
     }

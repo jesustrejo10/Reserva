@@ -15,10 +15,8 @@ namespace BOReserva.Models.gestion_vuelo
         /// </summary>
         /// <param name="ciudadesOrigen"> lista de ciudades con rutas areas activas</param>
         /// <param name="combo">Lista de los valors del combo de status del vuelo</param>
-        public CrearVueloMO(IEnumerable<SelectListItem> ciudadesOrigen, IEnumerable<SelectListItem> comboStatus)
+        public CrearVueloMO()
         {
-            this._ciudadesOrigen = ciudadesOrigen;
-            this._comboStatus = comboStatus;
         }
     }
 }

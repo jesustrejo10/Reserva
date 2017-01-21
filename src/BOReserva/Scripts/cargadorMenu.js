@@ -558,7 +558,7 @@ jQuery(document).ready(function () {
     //Inicio M04 Vuelos
     $("#m04_crearvuelo").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_vuelo/M04_GestionVuelo_Crear';
+        var url = '/gestion_vuelo/M04_GestionVuelo_CW1';
         var method = 'GET';
         var data = '';
         $.ajax(

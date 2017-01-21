@@ -54,7 +54,7 @@ namespace BOReserva.DataAccess.Domain
         /// <returns>Instancia de la clase ciudad</returns>
         public static Entidad InstanciarCiudad(int id, String ciudad)
         {
-            return new Ciudad();
+            return new Ciudad(id, ciudad);
         }
 
         public static Entidad InstanciarReclamo(String tituloReclamo, String detalleReclamo, String fechaReclamo, String estadoReclamo)
@@ -98,6 +98,17 @@ namespace BOReserva.DataAccess.Domain
         public static Entidad InstanciarVuelo()
         {
             return new Vuelo();
+        }
+
+        /// <summary>
+        /// Instancia vuelo fecha de aterrizaje y avion
+        /// </summary>
+        /// <param name="fechaAterrizaje">fecha de Aterrizaje</param>
+        /// <param name="avion">clase avion</param>
+        /// <returns>Entidad Vuelo</returns>
+        public static Entidad InstanciarVuelo(DateTime fechaAterrizaje, Avion avion)
+        {
+            return new Vuelo(fechaAterrizaje, avion);
         }
         #endregion
 

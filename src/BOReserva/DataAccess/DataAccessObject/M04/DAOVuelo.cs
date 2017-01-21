@@ -173,9 +173,9 @@ namespace BOReserva.DataAccess.DataAccessObject
         }
 
         /// <summary>
-        /// 
+        /// Metodo para consultar las ciudades origen con rutas activas
         /// </summary>
-        /// <returns></returns>
+        /// <returns>lista de ciudades origen con rutas activas</returns>
         public List<Entidad> ConsultarLugarOrigen()
         {
             DataTable resultado;
@@ -216,5 +216,165 @@ namespace BOReserva.DataAccess.DataAccessObject
             return null;
         }
 
+        /// <summary>
+        /// Metodo que busca los lugares destino para un lugar origen especifico
+        /// </summary>
+        /// <returns>lista de lugares</returns>
+        public List<Entidad> ConsultarLugarDestino(int lugarO)
+        {
+            DataTable resultado;
+            List<Entidad> lista;
+            Parametro parametro;
+            try
+            {
+                List<Parametro> parametros = new List<Parametro>();
+                parametro = new Parametro(RecursoVuelo.ParametroIdOrigen, SqlDbType.VarChar, lugarO.ToString(), false);
+                parametros.Add(parametro);
+                resultado = EjecutarStoredProcedureTuplas(RecursoVuelo.ListarLugarD, parametros);
+                Conectar();
+                if (resultado != null)
+                {
+                    lista = new List<Entidad>();
+                    foreach (DataRow row in resultado.Rows)
+                    {
+                        int id = int.Parse(row[RecursoVuelo.ParametroIdRuta].ToString());
+                        String ciudadO = row[RecursoVuelo.ParametroCDestino].ToString();
+                        lista.Add(FabricaEntidad.InstanciarCiudad(id, ciudadO));
+                    }
+                    return lista;
+                }
+
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw ex;
+            }
+            catch (FormatException ex)
+            {
+                throw ex;
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Busca los aviones capaces de volar la ruta escogida
+        /// </summary>
+        /// <param name="idRuta"></param>
+        /// <returns></returns>
+        public List<Entidad> ConsultarAvionRuta(int idRuta)
+        {
+            DataTable resultado;
+            List<Entidad> lista;
+            Parametro parametro;
+            Avion avion;
+            try
+            {
+                List<Parametro> parametros = new List<Parametro>();
+                parametro = new Parametro(RecursoVuelo.ParametroIdRuta, SqlDbType.VarChar, idRuta.ToString(), false);
+                parametros.Add(parametro);
+                resultado = EjecutarStoredProcedureTuplas(RecursoVuelo.BuscarAvionRuta, parametros);
+                Conectar();
+                if (resultado != null)
+                {
+                    lista = new List<Entidad>();
+                    foreach (DataRow row in resultado.Rows)
+                    {
+                        int id = int.Parse(row[RecursoVuelo.ParametroIdAvion].ToString());
+                        String modelo = row[RecursoVuelo.ParametroAModelo].ToString();
+                        String matricula = row[RecursoVuelo.ParametroaAMatricula].ToString();
+                        float velMaxima = float.Parse(row[RecursoVuelo.ParametroVelMaxima].ToString());
+                        //CAMBIAR POR FABRICA AVION
+                        avion = new Avion(id, matricula, modelo, 0, 0, 0, 0, 0, velMaxima, 0, 0);
+                        lista.Add(avion);
+                    }
+                    return lista;
+                }
+
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw ex;
+            }
+            catch (FormatException ex)
+            {
+                throw ex;
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Busca los datos del avion y la fecha de aterriaje para un avion y ruta determinado
+        /// </summary>
+        /// <param name="idRuta"></param>
+        /// <returns></returns>
+        public Entidad ConsultarDatosAterrizaje(int idRuta, DateTime fechaTiempo, int idAvion)
+        {
+            DataTable resultado;
+            Entidad entidad;
+            Parametro parametro;
+            Avion avion;
+            try
+            {
+                List<Parametro> parametros = new List<Parametro>();
+                parametro = new Parametro(RecursoVuelo.ParametroIdRuta, SqlDbType.VarChar, idRuta.ToString(), false);
+                parametros.Add(parametro);
+                parametro = new Parametro(RecursoVuelo.ParametroFechaDespegue, SqlDbType.Date, fechaTiempo.ToString(), false);
+                parametros.Add(parametro);
+                parametro = new Parametro(RecursoVuelo.ParametroIdAvion, SqlDbType.VarChar, idAvion.ToString(), false);
+                parametros.Add(parametro);
+                resultado = EjecutarStoredProcedureTuplas(RecursoVuelo.BuscarAvionRuta, parametros);
+                Conectar();
+                if (resultado != null)
+                {
+                    foreach (DataRow row in resultado.Rows)
+                    {
+                        DateTime fechaAterrizaje = DateTime.Parse(row[RecursoVuelo.ParametroFechaAterrizaje].ToString());
+                        int aCapMax = int.Parse(row[RecursoVuelo.ParametroCapacidadMaxima].ToString());
+                        String modelo = row[RecursoVuelo.ParametroAModelo].ToString();
+                        float velMaxima = float.Parse(row[RecursoVuelo.ParametroVelMaxima].ToString());
+                        float aMaxDist = float.Parse(row[RecursoVuelo.ParametroVelMaxima].ToString());
+                        //CAMBIAR POR FABRICA AVION
+                        avion = new Avion(0,"",modelo,0,0,0,0,aMaxDist,velMaxima,0,0);
+                        //
+                        entidad = FabricaEntidad.InstanciarVuelo(fechaAterrizaje, avion);
+                        return entidad;
+                    }
+                }
+
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw ex;
+            }
+            catch (FormatException ex)
+            {
+                throw ex;
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return null;
+        }
     }
 }

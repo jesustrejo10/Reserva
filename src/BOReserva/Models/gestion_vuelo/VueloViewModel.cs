@@ -31,6 +31,10 @@ namespace BOReserva.Models.gestion_vuelo
         /// <summary>
         /// 
         /// </summary>
+        public int  _idRuta { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public String _ciudadOrigen { get; set; }
         /// <summary>
         /// 
@@ -76,5 +80,11 @@ namespace BOReserva.Models.gestion_vuelo
         /// 
         /// </summary>
         public IEnumerable<SelectListItem> _comboStatus { get; set; }
+
+        public int _idCiudadOrigen { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public int _idAvion { get; set; }
     }
 }

@@ -185,4 +185,24 @@
     <value>M04_ListarLugarO</value>
     <comment>Procedimiento de la BD que retorna una lista con todos los lugares que tienen rutas activas</comment>
   </data>
+  <data name="ListarLugarD" xml:space="preserve">
+    <value>M04_ListarLugarD</value>
+    <comment>Procedimiento de la BD que devuelve una lista con todos los lugares destino para cierto lugar origen</comment>
+  </data>
+  <data name="BuscarAvionRuta" xml:space="preserve">
+    <value>M04_BuscarAvionRuta</value>
+    <comment>Procedimiento de la BD que busca un avion que este en la capacidad de cubrir la ruta determinada</comment>
+  </data>
+  <data name="ParametroVelMaxima" xml:space="preserve">
+    <value>aVelMax</value>
+    <comment>Velocidad maxima del avion</comment>
+  </data>
+  <data name="ParametroCapacidadMaxima" xml:space="preserve">
+    <value>aCapMax</value>
+    <comment>Capacidad maxima de pasajeros del avion</comment>
+  </data>
+  <data name="ParametroDistMaxima" xml:space="preserve">
+    <value>aDistMax</value>
+    <comment>Distancia maxima del avion</comment>
+  </data>
 </root>

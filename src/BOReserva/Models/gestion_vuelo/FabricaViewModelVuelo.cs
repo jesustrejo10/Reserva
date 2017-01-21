@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using BOReserva.DataAccess.Model;
+using BOReserva.DataAccess.Domain;
 
 namespace BOReserva.Models.gestion_vuelo
 {
@@ -12,7 +14,7 @@ namespace BOReserva.Models.gestion_vuelo
         /// </summary>
         public static VueloViewModel instanciarCrearVueloVM()
         {
-            return new
+            return new CrearVueloMO();
         }
     }
 }

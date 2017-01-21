@@ -61,6 +61,15 @@ namespace BOReserva.DataAccess.DataAccessObject.M04 {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a M04_BuscarAvionRuta.
+        /// </summary>
+        internal static string BuscarAvionRuta {
+            get {
+                return ResourceManager.GetString("BuscarAvionRuta", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a M04_CambiarStatus.
         /// </summary>
         internal static string CambiarStatus {
@@ -75,6 +84,15 @@ namespace BOReserva.DataAccess.DataAccessObject.M04 {
         internal static string EliminarVuelo {
             get {
                 return ResourceManager.GetString("EliminarVuelo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a M04_ListarLugarD.
+        /// </summary>
+        internal static string ListarLugarD {
+            get {
+                return ResourceManager.GetString("ListarLugarD", resourceCulture);
             }
         }
         
@@ -115,6 +133,15 @@ namespace BOReserva.DataAccess.DataAccessObject.M04 {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a aCapMax.
+        /// </summary>
+        internal static string ParametroCapacidadMaxima {
+            get {
+                return ResourceManager.GetString("ParametroCapacidadMaxima", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a cDestino.
         /// </summary>
         internal static string ParametroCDestino {
@@ -138,6 +165,15 @@ namespace BOReserva.DataAccess.DataAccessObject.M04 {
         internal static string ParametroCOrigen {
             get {
                 return ResourceManager.GetString("ParametroCOrigen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a aDistMax.
+        /// </summary>
+        internal static string ParametroDistMaxima {
+            get {
+                return ResourceManager.GetString("ParametroDistMaxima", resourceCulture);
             }
         }
         
@@ -210,6 +246,15 @@ namespace BOReserva.DataAccess.DataAccessObject.M04 {
         internal static string ParametroStatus {
             get {
                 return ResourceManager.GetString("ParametroStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a aVelMax.
+        /// </summary>
+        internal static string ParametroVelMaxima {
+            get {
+                return ResourceManager.GetString("ParametroVelMaxima", resourceCulture);
             }
         }
     }

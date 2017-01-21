@@ -81,6 +81,26 @@ namespace BOReserva.Controllers.PatronComando
             return new M04.M04_COLugarOrigen();
         }
 
+        /// <summary>
+        /// Metodo para instanciar el comando M04_LugarOrigen
+        /// </summary>
+        /// <param name="ciudadO">id de la ciudad origen</param>
+        /// <returns>lista con las ciudades destino</returns>
+        public static Command<List<Entidad>> ConsultarM04_LugarDestino(int ciudadO)
+        {
+            return new M04.M04_COLugarDestino(ciudadO);
+        }
+
+        /// <summary>
+        /// Metodo para instanciar el comando M04_LugarOrigen
+        /// </summary>
+        /// <param name="idRuta">id de la ruta</param>
+        /// <returns>lista con los aviones disponibles para la ruta seleccionada</returns>
+        public static Command<List<Entidad>> ConsultarM04_BuscarAvionRuta(int idRuta)
+        {
+            return new M04.M04_COBuscarAvionRuta(idRuta);
+        }
+
         #endregion
 
         public static Command<String> crearM13_AgregarRol(Entidad e)
