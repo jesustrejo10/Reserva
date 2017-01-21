@@ -39,10 +39,10 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <div style="float: right; padding-top: 5px;">
+                        @*<div style="float: right; padding-top: 5px;">
                             <a style="margin-right: 10px;">Buscador</a>
                             <input id="searchTerm" type="text" onkeyup="doSearch()" />
-                        </div>
+                        </div>*@
                         <br />
                         <br />
                         <table id="example2" class="table table-bordered table-striped">
@@ -108,6 +108,7 @@
                                 </tr>
                             </tfoot>
                         </table>
+
                         <div style="text-align: center;">
                             </div>
                         </div>
@@ -271,6 +272,17 @@
     });
 
 </script>
+
+<script src="~/Content/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+<script language="javascript" type="text/javascript">
+
+    table = $('#example2').DataTable();
+
+</script>
+
+
 
 
 
