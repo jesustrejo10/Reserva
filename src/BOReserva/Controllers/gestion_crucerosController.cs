@@ -101,23 +101,42 @@ namespace BOReserva.Controllers
             
         }
 
-        /*public JsonResult M24_ListarCabinas(int id)
+
+
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult cargarDestinos(string ciudadO)
         {
-            ConexionBD cbd = new ConexionBD();
-            //VistaListaCrucero vlc = new VistaListaCrucero();
-            //CGestion_cabina cabina = new CGestion_cabina();
-            ////CGestion_crucero crucero = new CGestion_crucero();
-            //vlc.cruceros = cbd.listarCruceros();
-            //ViewBag.ShowDropDown = new SelectList(vlc.cruceros, "_idCrucero", "_nombreCrucero");
-            var listaCabinas = cbd.listarCabinas(id);
-            //return Json (new { cabinas = listaCabinas });
-            return (Json(listaCabinas, JsonRequestBehavior.AllowGet));
-            //return PartialView();
+            CGestion_camarote camarote = new CGestion_camarote();
+            List<String> lista = new List<string>();
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14VisualizarCruceros();
+            Dictionary<int, Entidad> listaCruceros = comando.ejecutar();
+
+            try
+            {
+                foreach (var crucero in listaCruceros)
+                {
+                    BOReserva.DataAccess.Domain.Crucero c = (BOReserva.DataAccess.Domain.Crucero)crucero.Value;
+                    lista.Add(c._nombreCrucero);
+                }
+                camarote._listaCruceros = lista.Select(x => new SelectListItem
+                {
+                    Value = x,
+                    Text = x
+                });
+                return PartialView(camarote);
+            }
+            catch (SqlException e)
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error, no se pudo conectar con la base de datos";
+                //Retorno el error
+                return Json(error);
+            }
+
+
         }
-            ConexionBD cbd = new ConexionBD();            
-            var listaCabinas = cbd.listarCabinas(id);            
-            return (Json(listaCabinas, JsonRequestBehavior.AllowGet));            
-        }*/
 
 
         public JsonResult M24_ListarCamarotes(int id)
