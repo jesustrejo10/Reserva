@@ -213,6 +213,25 @@
                     </li>
 
                     <!-- FIN MODULO DE BOLETOS AEREOS Y CHECK-IN -->
+                      <!-- MODULO DE RESTAURANTES -->
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-cutlery"></i> <span>Gestión de Restaurantes</span> <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                        @foreach (string i in ((List<string>)Session["Permisos"]))
+                            {
+                                if (i == "Gestion restaurantes")
+                                {
+                            <li id="agregarRestaurantes"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar Restaurante</a></li>}
+                                if (i == "Ver restaurantes")
+                                {
+                            <li id="verRestaurantes"><a href="#"><i class="fa fa-eye"></i>Visualizar Restaurantes</a></li>}}
+                        </ul>
+                    </li>
+                    <!-- FIN DE MODULO DE RESTAURANTES -->
                     <!-- MODULO DE COMIDA POR VUELO -->
                     <li class="treeview">
                         <a href="#">
@@ -247,25 +266,7 @@
                         </ul>
                     </li>
                     <!-- FIN DE MODULO DE COMIDA POR VUELO -->
-                    <!-- MODULO DE RESTAURANTES -->
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-cutlery"></i> <span>Gestión de Restaurantes</span> <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                        @foreach (string i in ((List<string>)Session["Permisos"]))
-                            {
-                                if (i == "Gestion restaurantes")
-                                {
-                            <li id="agregarRestaurantes"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar Restaurante</a></li>}
-                                if (i == "Ver restaurantes")
-                                {
-                            <li id="verRestaurantes"><a href="#"><i class="fa fa-eye"></i>Visualizar Restaurantes</a></li>}}
-                        </ul>
-                    </li>
-                    <!-- FIN DE MODULO DE RESTAURANTES -->
+                  
                     <!-- MODULO DE EXTRAVIO DE EQUIPAJE -->
                             @foreach (string i in ((List<string>)Session["Permisos"]))
                             {

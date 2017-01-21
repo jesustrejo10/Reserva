@@ -88,12 +88,19 @@ namespace BOReserva.DataAccess.DataAccessObject
 
 			
         #region Modulo 10
+        /// <summary>
+        /// Inicializar IDAORestaurant
+        /// </summary>
+        /// <returns></returns>
         public static IDAORestaurant RestaurantBD()
         {
             return new DAORestaurant();
 
         }
-
+        /// <summary>
+        /// Valores de Horarios 
+        /// </summary>
+        /// <returns></returns>
         public static List<String> listarHorario()
         {
             return new List<String>
@@ -104,51 +111,41 @@ namespace BOReserva.DataAccess.DataAccessObject
             };
         }
        
-
-        public static SqlConnection asignarConexionSql(String stringDeConexion)
-        {
-            return new SqlConnection(stringDeConexion);
-        }
-
+     
+        /// <summary>
+        /// Metodo para asignar parametros para el store procedured
+        /// </summary>
+        /// <param name="nombreAtributo"></param>
+        /// <param name="tipoDeDato"></param>
+        /// <param name="valorAtributo"></param>
+        /// <param name="output"></param>
+        /// <returns></returns>
         public static Parametro asignarParametro(string nombreAtributo, SqlDbType tipoDeDato, string valorAtributo, bool output)
         {
             return new Parametro(nombreAtributo, tipoDeDato, valorAtributo, output);
         }
 
+        /// <summary>
+        /// Metodo para asignar parametros para el store procedured
+        /// </summary>
+        /// <param name="nombreAtributo"></param>
+        /// <param name="tipoDeDato"></param>
+        /// <param name="output"></param>
+        /// <returns></returns>
         public static Parametro asignarParametro(string nombreAtributo, SqlDbType tipoDeDato, bool output)
         {
             return new Parametro(nombreAtributo, tipoDeDato, output);
         }
 
+        /// <summary>
+        /// Metodo para asignar parametros para el store procedured
+        /// </summary>
+        /// <returns></returns>
         public static List<Parametro> asignarListaDeParametro()
         {
             return new List<Parametro>();
         }
-
-        public static List<ResultadoBD> asignarListarColumnas()
-        {
-            return new List<ResultadoBD>();
-        }
-
-        public static SqlCommand asignarComandoSql(String query, SqlConnection conexion)
-        {
-            return new SqlCommand(query, conexion);
-        }
-
-        public static ResultadoBD asignarValorColumna(String atributo, String valorAtributo)
-        {
-            return new ResultadoBD(atributo, valorAtributo);
-        }
-
-        public static DataTable asignarTablaDeDatos()
-        {
-            return new DataTable();
-        }
-
-        public static SqlDataAdapter asignarAdaptadorDeDatos(SqlCommand comandoSql)
-        {
-            return new SqlDataAdapter(comandoSql);
-        }
+               
         #endregion
 
         #region M13_Roles

@@ -19,14 +19,10 @@ namespace BOReserva.Controllers
 
         public ActionResult M05_DetalleBoleto(int idorigen, int iddestino, string fechadespegue, string fechaaterrizaje, int monto, string tipo, string primernombre, string segundonombre, string primerapellido, string segundoapellido, string fechanac, string sexo, int pasaporte, string correo, int idvuelo)
         {
-            System.Diagnostics.Debug.WriteLine("Llega a controller de detalle boleto");
-            System.Diagnostics.Debug.WriteLine("origen: " + idorigen + ", destino: " + iddestino + ", despegue: " + fechadespegue + ", aterrizaje: " + fechaaterrizaje + ", monto: " + monto + ", tipo: " + tipo + ", primernombre: " + primernombre + ", segundonombre: " + segundonombre + ", primerapellido: " + primerapellido + ", segundoapellido: " + segundoapellido + ", fechanac: " + fechanac + ", sexo: " + sexo + ", pasaporte: " + pasaporte + ", correo: " + correo);
+           
 
             Pasajero nuevoPasajero = (Pasajero)FabricaEntidad.InstanciarPasajero(pasaporte, primernombre, segundonombre, primerapellido, segundoapellido, sexo, fechanac, correo);
-
             CVisualizarBoleto bol = new CVisualizarBoleto();
-            //manejadorSQL_Boletos sqlboletos = new manejadorSQL_Boletos();
-            
             bol._idOrigen = idorigen;
             bol._idDestino = iddestino;
             bol._fechaDespegueIda = fechadespegue;
@@ -34,20 +30,12 @@ namespace BOReserva.Controllers
             bol._monto = monto;
             bol._tipoBoleto = tipo;
             bol._pasajero = nuevoPasajero;
-            //COMANDO
-            //bol._origen = sqlboletos.MBuscarnombreciudad(idorigen);
-            //bol._destino = sqlboletos.MBuscarnombreciudad(iddestino);
-            //
             bol._origen = (FabricaComando.buscarM05nombreCiudad(new Entidad(idorigen))).ejecutar();
             bol._destino = (FabricaComando.buscarM05nombreCiudad(new Entidad(iddestino))).ejecutar();
             bol._idVuelo = idvuelo;
 
             Command<String> comando = FabricaComando.crearM05AgregarPasajero(nuevoPasajero);
-
             string flag = comando.ejecutar();
-
-            //sqlboletos.CrearPasajero(pasaporte,primernombre,segundonombre,primerapellido,segundoapellido,fechanac,sexo,correo);
-
             return PartialView(bol);
         }
 
@@ -106,6 +94,7 @@ namespace BOReserva.Controllers
 
         }
 
+        //falta patrones
         public ActionResult M05_VerVuelos(int idorigen, int iddestino, string idavuelta, string tipo, string fechaida, string fechavuelta)
         {
 
@@ -121,6 +110,7 @@ namespace BOReserva.Controllers
             return PartialView(listavuelos);
         }
 
+        //falta patrones
         public ActionResult M05_DetalleVueloReserva(int id_reserva)
         {
 
@@ -189,7 +179,7 @@ namespace BOReserva.Controllers
         }
 
 
-
+        //falta patrones
         public ActionResult M05_DetalleBoletoReserva(int id_reserva)
         {
 
@@ -257,6 +247,7 @@ namespace BOReserva.Controllers
             return PartialView(bol);
         }
 
+        //falta patrones
         public ActionResult M05_BoletoCreadoReserva(int id_reserva)
         {
 
@@ -354,14 +345,8 @@ namespace BOReserva.Controllers
         public ActionResult M05_BoletoCreado(int idorigen, int iddestino, int pasaporte, int monto, string tipo, int idvuelo)
         {
             String fecha_bol = DateTime.Today.ToString("yyyy/MM/dd");
-           // Console.WriteLine("FECHA: " + fecha_bol);
-
             Boleto nuevoBoleto = (Boleto)FabricaEntidad.InstanciarBoleto(idorigen, iddestino, pasaporte, monto, tipo, idvuelo, fecha_bol);
-           
             Command<String> comando = FabricaComando.crearM05CrearBoleto(nuevoBoleto);
-           
-            //System.Diagnostics.Debug.WriteLine("Finaliza el controller");
-
             string flag = comando.ejecutar();
 
             return PartialView();
@@ -393,7 +378,7 @@ namespace BOReserva.Controllers
 
         }
 
-
+        //falta patrones
         public ActionResult M05_VisualizarBoletos()
         {
             //SE BUSCAN TODOS LOS BOLETOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
@@ -402,7 +387,7 @@ namespace BOReserva.Controllers
             return PartialView(listaboletos);
         }
 
-
+        //falta patrones
         public ActionResult M05_VisualizarReservasPasajero(int pasaporte)
         {
 
@@ -417,17 +402,13 @@ namespace BOReserva.Controllers
         public ActionResult M05_VisualizarBoleto(int id)
         {
 
-            System.Diagnostics.Debug.WriteLine("llega al controller");
 
             //BUSCA EL BOLETO A MOSTRAR
-            manejadorSQL_Boletos buscarboleto = new manejadorSQL_Boletos();
-            CBoleto boleto = buscarboleto.M05MostrarBoletoBD(id);
-
+            Command<Entidad> comando = FabricaComando.mostrarM05boleto(id);
+            Boleto boleto = (Boleto)comando.ejecutar();
             // EL/LOS VUELOS DEL BOLETO ESTAN EN UNA LISTA
             // NO SOPORTA ESCALAS
-
-            List<CVuelo> vuelos = boleto._vuelos;
-
+            List<BoletoVuelo> vuelos = boleto._vuelos;
             CVisualizarBoleto bol = new CVisualizarBoleto();
 
 
@@ -472,16 +453,13 @@ namespace BOReserva.Controllers
             return PartialView(bol);
         }
 
-
+        
         public ActionResult M05_ModificarBoleto(int id)
         {
-            manejadorSQL_Boletos buscarboleto = new manejadorSQL_Boletos();
-            CBoleto boleto = buscarboleto.M05MostrarBoletoBD(id);
-
-            String hola = boleto._tipoBoleto;
-
-            CModificarBoleto bolView = new CModificarBoleto(boleto);
-            return PartialView(bolView);
+            Command<Entidad> comando = FabricaComando.mostrarM05boleto(id);
+            Boleto boleto = (Boleto)comando.ejecutar();
+            CModificarBoleto boletoView = new CModificarBoleto(boleto);
+            return PartialView(boletoView);
         }
 
         // POST
@@ -548,8 +526,6 @@ namespace BOReserva.Controllers
         public JsonResult eliminarBoleto(int id)
         {
 
-            //manejadorSQL_Boletos eliminar = new manejadorSQL_Boletos();
-            //int modifico_si_no = eliminar.M05EliminarBoletoBD(id);
             Command<String> comando = FabricaComando.crearM05EliminarBoleto(id);
             String elimino_si_no = comando.ejecutar();
             return (Json(true, JsonRequestBehavior.AllowGet));
@@ -562,72 +538,7 @@ namespace BOReserva.Controllers
             Command<String> comando = FabricaComando.modificarM05modificarPasajero(pasajero);
             String agrego_si_no = comando.ejecutar();
 
-            /*CPasajero pas = new CPasajero(model._id, model._primer_nombre, model._segundo_nombre, model._primer_apellido, model._segundo_apellido, model._sexo, model._fecha_nac, model._correo);
-            manejadorSQL_Boletos modificar = new manejadorSQL_Boletos();
-            int modifico_si_no = modificar.M05ModificarDatosPasajero(pas);*/
-
             return (Json(true, JsonRequestBehavior.AllowGet));
-        }
-
-        public bool verificarDisponibilidad(int codigo_vuelo, String tipo)
-        {
-            bool disponibilidad = false;
-            manejadorSQL_Boletos modificar = new manejadorSQL_Boletos();
-
-            int compara1 = String.Compare(tipo, "Turista");
-            int compara2 = String.Compare(tipo, "Ejecutivo");
-            int compara3 = String.Compare(tipo, "Vip");
-
-            if (compara1 == 0)
-            {
-
-                int conteo = modificar.MConteoTurista(codigo_vuelo);
-                int cap = modificar.MBuscarCapTurista(codigo_vuelo);
-                System.Diagnostics.Debug.WriteLine(conteo);
-                System.Diagnostics.Debug.WriteLine(cap);
-                if (conteo < cap)
-                {
-                    disponibilidad = true;
-                }
-                else
-                {
-                    disponibilidad = false;
-                }
-
-            }
-
-            if (compara2 == 0)
-            {
-                int conteo = modificar.MConteoEjecutivo(codigo_vuelo);
-                int cap = modificar.MBuscarCapEjecutivo(codigo_vuelo);
-                System.Diagnostics.Debug.WriteLine(conteo);
-                System.Diagnostics.Debug.WriteLine(cap);
-                if (conteo < cap)
-                {
-                    disponibilidad = true;
-                }
-                else
-                {
-                    disponibilidad = false;
-                }
-            }
-
-            if (compara3 == 0)
-            {
-
-                int conteo = modificar.MConteoVip(codigo_vuelo);
-                int cap = modificar.MBuscarCapVip(codigo_vuelo);
-                if (conteo < cap)
-                {
-                    disponibilidad = true;
-                }
-                else
-                {
-                    disponibilidad = false;
-                }
-            }
-
-            return disponibilidad;
         }
 
 
@@ -637,33 +548,38 @@ namespace BOReserva.Controllers
             bool disponibilidad = false;
             String tipo = model._tipoBoleto;
 
+            Command<Entidad> comando = FabricaComando.mostrarM05boleto(model._bol_id);
+            Boleto boleto = (Boleto)comando.ejecutar();
+            List<BoletoVuelo> lista = boleto._vuelos;
+            String tipoOri = boleto._tipoBoleto;
+            
             manejadorSQL_Boletos modificar = new manejadorSQL_Boletos();
-            String tipoOri = modificar.MBuscarTipoBoletoOriginal(model._bol_id);
-            List<CVuelo> lista = modificar.M05ListarVuelosBoleto(model._bol_id);
+          
 
             int compara = String.Compare(tipoOri, tipo);
             if (compara != 0)
             {
 
                 // PRIMERO VEO SI ES IDA O IDA Y VUELTA
-                int ida_vuelta = modificar.MBuscarIdaVuelta(model._bol_id);
+                Command<int> comando2 = FabricaComando.mostrarM05idaVuelta(model._bol_id);
+                int ida_vuelta = comando2.ejecutar();
                 // EL BOLETO ES IDA 1
                 // EL BOLETO ES IDA Y VUELTA 2
                 if (ida_vuelta == 1)
                 {
                     int codigo_vuelo1 = lista[0]._id;
-
-                    disponibilidad = verificarDisponibilidad(codigo_vuelo1, tipo);
+                    Command<bool> comando3 = FabricaComando.verificarM05Boleto(codigo_vuelo1, tipo);
+                    disponibilidad =comando3.ejecutar();
 
                 }
                 else
                 {
                     int codigo_vuelo_ida = lista[0]._id;
                     int codigo_vuelo_vuelta = lista[1]._id;
-
-                    bool disp_ida = verificarDisponibilidad(codigo_vuelo_ida, tipo);
-                    bool disp_vuelta = verificarDisponibilidad(codigo_vuelo_vuelta, tipo);
-
+                    Command<bool> comando4 = FabricaComando.verificarM05Boleto(codigo_vuelo_ida, tipo);
+                    Command<bool> comando5 = FabricaComando.verificarM05Boleto(codigo_vuelo_vuelta, tipo);
+                    bool disp_ida = comando4.ejecutar();
+                    bool disp_vuelta = comando5.ejecutar();
                     disponibilidad = ((disp_ida) && (disp_vuelta));
                     System.Diagnostics.Debug.WriteLine(disponibilidad);
 
@@ -673,7 +589,9 @@ namespace BOReserva.Controllers
                 {
 
                     // HACER EL UPDATE
-                    int num = modificar.M05ModificarTipoBoleto(model._bol_id, tipo);
+                    boleto._tipoBoleto = tipo;
+                    Command<int> comando6 = FabricaComando.modificarM05modificarBoleto(boleto);
+                    int num = comando6.ejecutar();
                     return (Json(true, JsonRequestBehavior.AllowGet));
                 }
                 else
