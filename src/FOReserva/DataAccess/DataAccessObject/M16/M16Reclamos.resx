@@ -117,28 +117,76 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="procedimientoActualizarReclamo" xml:space="preserve">
+    <value>M16_ActualizarReclamo</value>
+    <comment>procedimiento en la bd para actualizar el reclamo (cambiar de estado)</comment>
+  </data>
+  <data name="procedimientoAgregarReclamo" xml:space="preserve">
+    <value>M16_AgregarReclamo</value>
+    <comment>procedimiento en la bd para agregar reclamo</comment>
+  </data>
+  <data name="procedimientoConsultarReclamoPorId" xml:space="preserve">
+    <value>M16_ConsultarReclamosPorId</value>
+    <comment>procedimiento en la bd para obtener el reclamo por id</comment>
+  </data>
+  <data name="procedimientoConsultarReclamosUsuario" xml:space="preserve">
+    <value>M16_ConsultarReclamosPorUsuario</value>
+    <comment>procedimiento en la bd para obtener todos los reclamos de un usuario</comment>
+  </data>
+  <data name="procedimientoEliminarReclamo" xml:space="preserve">
+    <value>M16_EliminarReclamo</value>
+    <comment>procedimiento en la bd para eliminar el reclamo</comment>
+  </data>
+  <data name="procedimientoModificarReclamo" xml:space="preserve">
+    <value>M16_ModificarReclamo</value>
+    <comment>procedimiento en la bd para modificar reclamo</comment>
+  </data>
   <data name="recDescripcion" xml:space="preserve">
     <value>rec_descripcion</value>
-    <comment>Descripcion del reclamo</comment>
+    <comment>Descripcion del reclamo en la tabla</comment>
   </data>
   <data name="recEstatus" xml:space="preserve">
     <value>rec_estatus</value>
-    <comment>Estatus del reclamo</comment>
+    <comment>Estatus del reclamo en la tabla</comment>
   </data>
   <data name="recFecha" xml:space="preserve">
     <value>rec_fecha</value>
-    <comment>Fecha del reclamo</comment>
+    <comment>Fecha del reclamo en la tabla</comment>
   </data>
   <data name="recFkUsuario" xml:space="preserve">
     <value>rec_fk_usuario</value>
-    <comment>Usuario asociado a reclamo</comment>
+    <comment>Usuario asociado a reclamo en la tabla</comment>
   </data>
   <data name="recId" xml:space="preserve">
     <value>rec_id</value>
-    <comment>Id del reclamo</comment>
+    <comment>Id del reclamo en la tabla</comment>
   </data>
   <data name="rectitulo" xml:space="preserve">
     <value>rec_titulo</value>
-    <comment>Titulo del reclamo</comment>
+    <comment>Titulo del reclamo en la tabla</comment>
+  </data>
+  <data name="rec_descripcion" xml:space="preserve">
+    <value>@rec_descripcion</value>
+    <comment>descripcion del reclamo en los stored procedure</comment>
+  </data>
+  <data name="rec_estatus" xml:space="preserve">
+    <value>@rec_estatus</value>
+    <comment>estatus del reclamo en los stored procedure</comment>
+  </data>
+  <data name="rec_fecha" xml:space="preserve">
+    <value>@rec_fecha</value>
+    <comment>fecha del reclamo en los stored procedure</comment>
+  </data>
+  <data name="rec_fk_usuario" xml:space="preserve">
+    <value>@rec_fk_usuario</value>
+    <comment>usuario que realizo el reclamo en los stored procedure</comment>
+  </data>
+  <data name="rec_id" xml:space="preserve">
+    <value>@rec_id</value>
+    <comment>id del reclamo en los stored procedure</comment>
+  </data>
+  <data name="rec_titulo" xml:space="preserve">
+    <value>@rec_titulo</value>
+    <comment>titulo del reclamo en los stored procedure</comment>
   </data>
 </root>

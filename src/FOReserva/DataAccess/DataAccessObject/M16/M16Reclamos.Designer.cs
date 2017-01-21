@@ -61,6 +61,114 @@ namespace FOReserva.DataAccess.DataAccessObject.M16 {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a M16_ActualizarReclamo.
+        /// </summary>
+        internal static string procedimientoActualizarReclamo {
+            get {
+                return ResourceManager.GetString("procedimientoActualizarReclamo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a M16_AgregarReclamo.
+        /// </summary>
+        internal static string procedimientoAgregarReclamo {
+            get {
+                return ResourceManager.GetString("procedimientoAgregarReclamo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a M16_ConsultarReclamosPorId.
+        /// </summary>
+        internal static string procedimientoConsultarReclamoPorId {
+            get {
+                return ResourceManager.GetString("procedimientoConsultarReclamoPorId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a M16_ConsultarReclamosPorUsuario.
+        /// </summary>
+        internal static string procedimientoConsultarReclamosUsuario {
+            get {
+                return ResourceManager.GetString("procedimientoConsultarReclamosUsuario", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a M16_EliminarReclamo.
+        /// </summary>
+        internal static string procedimientoEliminarReclamo {
+            get {
+                return ResourceManager.GetString("procedimientoEliminarReclamo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a M16_ModificarReclamo.
+        /// </summary>
+        internal static string procedimientoModificarReclamo {
+            get {
+                return ResourceManager.GetString("procedimientoModificarReclamo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a @rec_descripcion.
+        /// </summary>
+        internal static string rec_descripcion {
+            get {
+                return ResourceManager.GetString("rec_descripcion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a @rec_estatus.
+        /// </summary>
+        internal static string rec_estatus {
+            get {
+                return ResourceManager.GetString("rec_estatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a @rec_fecha.
+        /// </summary>
+        internal static string rec_fecha {
+            get {
+                return ResourceManager.GetString("rec_fecha", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a @rec_fk_usuario.
+        /// </summary>
+        internal static string rec_fk_usuario {
+            get {
+                return ResourceManager.GetString("rec_fk_usuario", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a @rec_id.
+        /// </summary>
+        internal static string rec_id {
+            get {
+                return ResourceManager.GetString("rec_id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a @rec_titulo.
+        /// </summary>
+        internal static string rec_titulo {
+            get {
+                return ResourceManager.GetString("rec_titulo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a rec_descripcion.
         /// </summary>
         internal static string recDescripcion {
