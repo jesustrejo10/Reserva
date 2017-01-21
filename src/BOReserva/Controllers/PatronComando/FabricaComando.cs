@@ -9,6 +9,7 @@ using System.Web;
 using System.Linq;
 using BOReserva.Controllers.PatronComando.M10;
 using BOReserva.Controllers.PatronComando.M16;
+using BOReserva.DataAccess.Domain.M14;
 
 namespace BOReserva.Controllers.PatronComando
 {
@@ -18,6 +19,7 @@ namespace BOReserva.Controllers.PatronComando
     /// </summary>
     public class FabricaComando
     {
+
         # region Lugar ( COLugar - COPais - COCiudad ) 
 
         public static Command<Dictionary<int, Entidad>> consultarTodosPais(Entidad e)
@@ -176,6 +178,64 @@ namespace BOReserva.Controllers.PatronComando
 
         #endregion
 
+        #region M14_Gestion_Cruceros
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M14_COAgregarCrucero
+        /// </summary>
+        /// <param name="e">Recibe la una entidad de tipo Crucero</param>
+        /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
+        public static Command<String> crearM14AgregarCrucero(Entidad e)
+        {
+
+            return new M14_COAgregarCrucero((Crucero)e);
+
+        }
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M14_COAgregarCrucero
+        /// </summary>
+        /// <param name="e">Recibe la una entidad de tipo Crucero</param>
+        /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
+        public static Command<String> crearM14AgregarCabina(Entidad e)
+        {
+
+            return new M14_COAgregarCabina((Cabina) e);
+
+        }
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M09_COVisualizarHoteles
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M09_COVisualizarHoteles.
+        /// </returns>
+        public static Command<Dictionary<int, Entidad>> crearM14VisualizarCruceros()
+        {
+
+            return new M14_COVisualizarCruceros();
+
+        }
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M14_COVisualizarCabinas
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M14_COVisualizarCabinas.
+        /// </returns>
+        public static Command<Dictionary<int, Entidad>> crearM14VisualizarCabinas(int id)
+        {
+
+            return new M14_COVisualizarCabinas(id);
+
+        }
+
+        #endregion
+
         #region M04_Vuelo
         /// <summary>
         /// Método para instanciar el comando M04_COAgregarVuelo
@@ -192,9 +252,48 @@ namespace BOReserva.Controllers.PatronComando
         /// </summary>
         /// <param name="vuelo"></param>
         /// <returns>Instancia M04_COConsultarTodosVuelos</returns>
-        public static Command<List<Entidad>> consultarM04_ConsultarTodos()
+        public static Command<List<Entidad>> ConsultarM04_ConsultarTodos()
         {
             return new M04.M04_COConsultarTodosVuelos();
+        }
+
+        /// <summary>
+        /// Metodo para instanciar el comando cambiar status del modulo de vuelos
+        /// </summary>
+        /// <param name="vuelo">id del vuelo al que se le cambiara el status</param>
+        /// <returns>Instancia del M04_COCambiarStatus</returns>
+        public static Command<Boolean> M04_CambiarStatus(int vuelo)
+        {
+            return new M04.M04_COCambiarStatus(vuelo);
+        }
+
+        /// <summary>
+        /// Metodo para instanciar el comando M04_LugarOrigen
+        /// </summary>
+        /// <returns>Instancia del metodo M04_COLugarOrigen</returns>
+        public static Command<List<Entidad>> ConsularM04_LugarOrigen()
+        {
+            return new M04.M04_COLugarOrigen();
+        }
+
+        /// <summary>
+        /// Metodo para instanciar el comando M04_LugarOrigen
+        /// </summary>
+        /// <param name="ciudadO">id de la ciudad origen</param>
+        /// <returns>lista con las ciudades destino</returns>
+        public static Command<List<Entidad>> ConsultarM04_LugarDestino(int ciudadO)
+        {
+            return new M04.M04_COLugarDestino(ciudadO);
+        }
+
+        /// <summary>
+        /// Metodo para instanciar el comando M04_LugarOrigen
+        /// </summary>
+        /// <param name="idRuta">id de la ruta</param>
+        /// <returns>lista con los aviones disponibles para la ruta seleccionada</returns>
+        public static Command<List<Entidad>> ConsultarM04_BuscarAvionRuta(int idRuta)
+        {
+            return new M04.M04_COBuscarAvionRuta(idRuta);
         }
 
         #endregion
@@ -315,7 +414,10 @@ namespace BOReserva.Controllers.PatronComando
         {
             return new M05_COConsultarBoletos();
         }
-
+        public static Command<List<Entidad>> ConsultarBoletos(int id)
+        {
+            return new M05_COConsultarBoletos( id );
+        }
 
         #endregion
 
@@ -351,7 +453,7 @@ namespace BOReserva.Controllers.PatronComando
         #region Modulo 10 Gestion Restaurante
 
         #region Comandos Generales 
-    
+
         /// <summary>
         /// Metodo que recibe un comando para Crear, Actualizar, Eliminar o Consultar
         /// la variable comando recibe comandosGlobales.CREAR, comandosGlobales.ELIMINAR
@@ -486,4 +588,5 @@ namespace BOReserva.Controllers.PatronComando
         }
         #endregion
     }
+        
 }

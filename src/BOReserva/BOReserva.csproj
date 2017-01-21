@@ -210,6 +210,9 @@
     <Compile Include="Controllers\M04\gestion_vueloController.cs" />
     <Compile Include="Controllers\PatronComando\Command.cs" />
     <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
+    <Compile Include="Controllers\PatronComando\GeneralLugar\COConsultarTodosCiudad.cs" />
+    <Compile Include="Controllers\PatronComando\GeneralLugar\COConsultarTodosLugar.cs" />
+    <Compile Include="Controllers\PatronComando\GeneralLugar\COConsultarTodosPais.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COConsultarBoletos.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COModificarBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COVerificarDisponibilidadBoleto.cs" />
