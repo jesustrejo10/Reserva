@@ -265,4 +265,24 @@
     <value>M08_CambiarDisponibilidadAutomovil</value>
     <comment>Nombre del Procedimiento cambia en Base de Datos Tabla Automovil el estatus de la fila</comment>
   </data>
+  <data name="ciudad" xml:space="preserve">
+    <value>aut_ciudad</value>
+    <comment>Atributo - nombre de la ciudad del automovil</comment>
+  </data>
+  <data name="MensajeErrorFormato" xml:space="preserve">
+    <value>Error de Casteo</value>
+    <comment>Ocurre en caso de error en casteo</comment>
+  </data>
+  <data name="MensajeFinMetodoLogger" xml:space="preserve">
+    <value>Salida del Método</value>
+    <comment>Ocurre a la salida del metodo</comment>
+  </data>
+  <data name="MensajeInicioMetodoLogger" xml:space="preserve">
+    <value>Entrada en el Método</value>
+    <comment>Ocurre a la entrada del metodo</comment>
+  </data>
+  <data name="pais" xml:space="preserve">
+    <value>aut_pais</value>
+    <comment>Atributo - nombre del pais del automovil</comment>
+  </data>
 </root>
