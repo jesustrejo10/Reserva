@@ -56,7 +56,7 @@ namespace FOReserva.Controllers
         /// Método que se utiliza para guardar un reclamo ingresado
         /// </summary>
         /// <param name="model">Datos que provienen de un formulario de la vista parcial M16_AgregarReclamo</param>
-        /// <returns>Retorna un JsonResult</returns>
+        /// <returns>Retorna un JsonResult que contiene la respuesta del sistema</returns>
         [HttpPost]
         public JsonResult guardarReclamo(CAgregarReclamo model)
         {
@@ -74,7 +74,7 @@ namespace FOReserva.Controllers
         /// Método que se utiliza para eliminar un reclamo 
         /// </summary>
         /// <param name="seleccion">id del reclamo que se desea eliminar</param>
-        /// <returns>Retorna un JsonResult</returns>
+        /// <returns>Retorna un JsonResult que contiene la respuesta del sistema</returns>
         [HttpPost]
         public JsonResult eliminarReclamo(int seleccion)
         {
@@ -95,7 +95,14 @@ namespace FOReserva.Controllers
             return (Json(respuesta));
         }
 
-
+        /// <summary>
+        /// Metodo que modifica el reclamo
+        /// </summary>
+        /// <param name="titulo"> titulo del reclamo</param>
+        /// <param name="detalle">detalle del reclamo</param>
+        /// <param name="fecha"> Fecha del reclamo</param>
+        /// <param name="id"> id del reclamo</param>
+        /// <returns>Retorna un JsonResult que contiene la respuesta del sistema</returns>
         [HttpPost]
         public JsonResult guardarModificacionReclamo(String titulo, String detalle, String fecha, int id)
         {

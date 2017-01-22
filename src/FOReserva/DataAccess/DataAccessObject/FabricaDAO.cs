@@ -13,6 +13,9 @@ using FOReserva.DataAccess.DataAccessObject.M20;
 namespace FOReserva.DataAccess.DataAccessObject
 
 {
+    /// <summary>
+    /// Clase encargada de instanciar los DAO respectivos para cada modulo
+    /// </summary>
     public class FabricaDAO
     {
         #region M16 Reclamos

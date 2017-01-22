@@ -18,9 +18,13 @@ using BOReserva.Controllers;
 
 namespace TestUnitReserva.BO.gestion_reclamos_bo_fo
 {
+    /// <summary>
+    /// Clase encargada de realizar las pruebas unitarios del modulo reclamos en BO
+    /// </summary>
     [TestFixture]
     class TestGestionReclamosBO
     {
+       
         private Reclamo mockReclamo;
   
         IDAO daoReclamo;
@@ -54,6 +58,9 @@ namespace TestUnitReserva.BO.gestion_reclamos_bo_fo
             mockReclamo = null;
         }
         #region Pruebas del DAO
+        /// <summary>
+        /// Metodo que prueba que pueda insertar un reclamo
+        /// </summary>
         [Test]
         public void M16_DaoReclamoInsertarReclamo()
         {
@@ -64,12 +71,17 @@ namespace TestUnitReserva.BO.gestion_reclamos_bo_fo
             //Probando caso de fallo
             Assert.Throws<NullReferenceException>(() => daoReclamo.Agregar(null));
         }
-
+        /// <summary>
+        /// Metodo que prueba que se puedan consultar todos los reclamos
+        /// </summary>
         [Test]
         public void M16_DaoReclamoConsultarTodos() {
             Dictionary<int, Entidad> reclamos = daoReclamo.ConsultarTodos();
             Assert.NotNull(reclamos);
         }
+        /// <summary>
+        /// Metodo que prueba que se puedan consultar los reclamos por un id
+        /// </summary>
 
         [Test]
         public void M16_DaoReclamoConsultarPorId()
@@ -77,7 +89,9 @@ namespace TestUnitReserva.BO.gestion_reclamos_bo_fo
             Assert.NotNull(daoReclamo.Consultar(11));
         }
 
-
+        /// <summary>
+        /// Metodo que prueba que se puede modificar un reclamo
+        /// </summary>
         [Test]
         public void M16_DaoReclamoModificar()
         {
@@ -86,7 +100,9 @@ namespace TestUnitReserva.BO.gestion_reclamos_bo_fo
             //prueba de que falla al pasarle un parametro invaliddo
             Assert.IsNull(daoReclamo.Modificar(null));
         }
-
+        /// <summary>
+        /// Metodo que prueba que se pueda eliminar un reclamo
+        /// </summary>
         [Test]
         public void M16_DaoReclamoEliminarReclamo()
         {
@@ -96,6 +112,9 @@ namespace TestUnitReserva.BO.gestion_reclamos_bo_fo
             Assert.AreEqual(resultadoEliminar, 1);
         }
 
+        /// <summary>
+        /// Metodo que prueba que se pueda cambiar el estado de un reclamo
+        /// </summary>
         [Test]
         public void M16_DaoReclamoActualizarReclamo()
         {
@@ -107,6 +126,9 @@ namespace TestUnitReserva.BO.gestion_reclamos_bo_fo
 
         #endregion
         #region Pruebas de la fabrica
+        /// <summary>
+        /// Metodo que prueba el funcionamiento de entidades y metodos
+        /// </summary>
         [Test]
         public void M16_Fabricas()
         {
@@ -141,6 +163,9 @@ namespace TestUnitReserva.BO.gestion_reclamos_bo_fo
         }
         #endregion
         #region Pruebas del controlador
+        /// <summary>
+        /// Metodo que prueba el funcionamiento del controlador
+        /// </summary>
         [Test]
         public void M16_PruebasControlador()
         {

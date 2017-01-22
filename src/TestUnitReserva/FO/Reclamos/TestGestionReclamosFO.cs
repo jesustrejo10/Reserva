@@ -17,6 +17,9 @@ using FOReserva.Controllers;
 
 namespace TestUnitReserva.FO.TestGestionReclamosFO
 {
+    /// <summary>
+    /// Clase encargada de realizar las pruebas unitarios del modulo reclamos en FO
+    /// </summary>
     [TestFixture]
     class TestGestionReclamosFO
     {
@@ -53,6 +56,9 @@ namespace TestUnitReserva.FO.TestGestionReclamosFO
             mockReclamo = null;
         }
         #region Pruebas del DAO
+        /// <summary>
+        /// Metodo que prueba que se pueda insertar un reclamo 
+        /// </summary>
         [Test]
         public void M16_DaoReclamoInsertarReclamoFO()
         {
@@ -63,20 +69,26 @@ namespace TestUnitReserva.FO.TestGestionReclamosFO
             //Probando caso de fallo
             Assert.AreEqual(daoReclamo.Agregar(null), 3);
         }
-
+        /// <summary>
+        /// Metodo que prueba que se pueda consultar todos los reclamo de un usuario
+        /// </summary>
         [Test]
         public void M16_DaoReclamoConsultar() {
             List<Reclamo> reclamos = daoPersonalizado.ConsultarReclamosPorUsuario(1);
             Assert.NotNull(reclamos);
         }
-
+        /// <summary>
+        /// Metodo que prueba que se pueda consultar un reclamo por id
+        /// </summary>
         [Test]
         public void M16_DaoReclamoConsultarPorIdFO()
         {
             Assert.NotNull(daoReclamo.Consultar(11));
         }
 
-
+        /// <summary>
+        /// Metodo que prueba que se pueda modificar un reclamo
+        /// </summary>
         [Test]
         public void M16_DaoReclamoModificarFO()
         {
@@ -86,6 +98,10 @@ namespace TestUnitReserva.FO.TestGestionReclamosFO
             //prueba de que falla al pasarle un parametro invaliddo
             Assert.AreEqual(daoPersonalizado.ModificarReclamo(null), 3);
         }
+
+        /// <summary>
+        /// Metodo que prueba que se pueda eliminar un reclamo
+        /// </summary>
 
         [Test]
         public void M16_DaoReclamoEliminarReclamoFO()
@@ -99,6 +115,9 @@ namespace TestUnitReserva.FO.TestGestionReclamosFO
 
         #endregion
         #region Pruebas de la fabrica
+        /// <summary>
+        /// Metodo que prueba el funcionamiento de entidades y metodos
+        /// </summary>
         [Test]
         public void M16_FabricasFO()
         {
@@ -132,6 +151,9 @@ namespace TestUnitReserva.FO.TestGestionReclamosFO
         }
         #endregion
         #region Pruebas del controlador
+        /// <summary>
+        /// Metodo que prueba el funcionamiento del controlador
+        /// </summary>
         [Test]
         public void M16_PruebasControladorFO()
         {
