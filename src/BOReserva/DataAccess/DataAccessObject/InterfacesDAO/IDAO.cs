@@ -30,7 +30,6 @@ namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
         /// <param name="id">Recibe el Id de la entidad que va a retornar</param>
         /// <returns>Retorna la entidad encontrada en Bd</returns>
         Entidad Consultar(int id);
-
         /// <summary>
         /// Consultar todos los registros de una tabla en BD
         /// </summary>

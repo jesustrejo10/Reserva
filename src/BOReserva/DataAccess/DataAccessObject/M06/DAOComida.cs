@@ -34,6 +34,27 @@ namespace BOReserva.DataAccess.DataAccessObject
             return true;
         }
 
+        //AGREGA UNA COMIDA A UN VUELO
+        public bool agregarComidaVuelo(Entidad entidad)
+        {
+            ComidaVuelo comida = (ComidaVuelo)entidad;
+            List<Parametro> lista = FabricaDAO.asignarListaDeParametro();
+
+            try
+            {
+                lista.Add(FabricaDAO.asignarParametro("@com_vue_id", SqlDbType.Int, comida._id.ToString(), false));
+                lista.Add(FabricaDAO.asignarParametro(RecursoM06.com_nombre, SqlDbType.VarChar, comida._comida, false));
+                lista.Add(FabricaDAO.asignarParametro("@com_vue_cantidad", SqlDbType.Int, comida._cantidad.ToString(), false));
+
+                EjecutarStoredProcedure(RecursoM06.procedimientoAgregarComidaVuelo, lista);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
         //CONSULTA TODAS LAS COMIDAS DISPONIBLES Y NO DISPONIBLES
         public List<Entidad> consultarComidas()
         {
@@ -51,12 +72,13 @@ namespace BOReserva.DataAccess.DataAccessObject
 
                     foreach (DataRow row in resultado.Rows)
                     {
+                        int id = Int32.Parse(row[RecursoM06.com_id_consultar].ToString());
                         string nombre = row[RecursoM06.com_nombre_consultar].ToString();
                         string tipo = row[RecursoM06.com_tipo_consultar].ToString();
                         int estatus = Int32.Parse(row[RecursoM06.com_estatus_consultar].ToString());
                         string descripcion = row[RecursoM06.com_descripcion_consultar].ToString();
 
-                        comida = FabricaEntidad.instanciarComida(nombre, tipo, estatus, descripcion);
+                        comida = FabricaEntidad.instanciarComida(id, nombre, tipo, estatus, descripcion);
 
                         listaComidas.Add(comida);
                     }
@@ -81,7 +103,6 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
             return null;
         }
-
 
         //CONSULTA TODAS LAS COMIDAS Y SUS RESPECTIVOS VUELOS
         public List<Entidad> consultarComidasVuelos()
@@ -132,7 +153,86 @@ namespace BOReserva.DataAccess.DataAccessObject
             return null;
         }
 
+        //CAMBIAR ESTADO ESTATUS COMIDA
+        public bool cambiarEstadoComida(Entidad entidad) {
+            Comida comida = (Comida)entidad;
+            bool resultado = false;
+            List<Parametro> lista = FabricaDAO.asignarListaDeParametro();
+            
+            try
+            {
+                lista.Add(FabricaDAO.asignarParametro(RecursoM06.com_id, SqlDbType.Int, comida._id.ToString(), false));
+                lista.Add(FabricaDAO.asignarParametro(RecursoM06.com_estatus, SqlDbType.Int, comida._estatus.ToString(), false));
 
+                EjecutarStoredProcedure(RecursoM06.procedimientoCambiarEstatusComida, lista);
+                return true;
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+
+            return false;
+        }
+
+        //RELLENAR COMIDA
+        public Entidad rellenarComida(Entidad entidad)
+        {
+            Comida comida = (Comida)entidad;
+            List<Parametro> lista = FabricaDAO.asignarListaDeParametro();
+            DataTable resultado;
+            try
+            {
+                lista.Add(FabricaDAO.asignarParametro(RecursoM06.com_id, SqlDbType.Int, comida._id.ToString(), false));
+
+                resultado = EjecutarStoredProcedureTuplas(RecursoM06.procedimientoConsultarDatosComida, lista);
+
+                if (resultado != null)
+                {
+                    foreach (DataRow row in resultado.Rows)
+                    {
+                        comida._nombre = row[RecursoM06.com_nombre_consultar].ToString();
+                        comida._tipo = row[RecursoM06.com_tipo_consultar].ToString();
+                        comida._estatus = Int32.Parse(row[RecursoM06.com_estatus_consultar].ToString());
+                        comida._descripcion = row[RecursoM06.com_descripcion_consultar].ToString();
+                    }
+                    return comida;
+                }
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return null;
+        }
+
+        //EDITAR COMIDA
+        public bool editarComida(Entidad entidad)
+        {
+            Comida comida = (Comida)entidad;
+            List<Parametro> lista = FabricaDAO.asignarListaDeParametro();
+            
+            try
+            {
+                lista.Add(FabricaDAO.asignarParametro(RecursoM06.com_id, SqlDbType.Int, comida._id.ToString(), false));
+                lista.Add(FabricaDAO.asignarParametro(RecursoM06.com_nombre, SqlDbType.VarChar, comida._nombre, false));
+                lista.Add(FabricaDAO.asignarParametro(RecursoM06.com_tipo, SqlDbType.VarChar, comida._tipo, false));
+                lista.Add(FabricaDAO.asignarParametro(RecursoM06.com_estatus, SqlDbType.Int, comida._estatus.ToString(), false));
+                lista.Add(FabricaDAO.asignarParametro(RecursoM06.com_descripcion, SqlDbType.VarChar, comida._descripcion, false));
+
+                EjecutarStoredProcedure(RecursoM06.procedimientoEditarComida, lista);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return false;
+        }
 
     }
 }

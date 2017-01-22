@@ -10,22 +10,16 @@ namespace BOReserva.Controllers.PatronComando
 {
     public class M14_COAgregarCrucero : Command<String>
     {
-        //Crucero _crucero;
+        Crucero _crucero;
 
-        //public M14_COAgregarCrucero(Crucero crucero ) { 
-        //    this._crucero = crucero;
-        //}
-        Entidad _crucero;
-
-        public M14_COAgregarCrucero(Entidad crucero)
-        {
+        public M14_COAgregarCrucero(Crucero crucero ) { 
             this._crucero = crucero;
-        }
+        }        
+                
         public override String ejecutar(){
-            //IDAO daoCrucero = FabricaDAO.instanciarDaoCrucero();       
-            //int test = daoCrucero.Agregar(_crucero);
-            //return test.ToString();
-            return "falla";
+            IDAO daoCrucero = FabricaDAO.instanciarDaoCrucero();       
+            int test = daoCrucero.Agregar(_crucero);
+            return test.ToString();            
         }
 
     }

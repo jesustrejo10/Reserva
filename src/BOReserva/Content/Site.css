@@ -755,6 +755,7 @@ tr.pager td {
         }
 }
 
+
 #loader {
     display: none;
     width: 100%;
@@ -771,4 +772,33 @@ tr.pager td {
     height: 100px;
     margin: auto;
     background: url('Preloader_2.gif') center no-repeat;
+}
+
+.form-control.has-error {
+    border: solid 1px #dd4b39 !important;
+}
+
+.has-error {
+    color: #dd4b39;
+}
+
+.none {
+    display: none;
+}
+
+.refresh-animate {
+    color: #00a65a;
+    -animation: spin .7s infinite linear;
+    -webkit-animation: spin2 .7s infinite linear;
+    font-size: 24px !important;
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
 }
