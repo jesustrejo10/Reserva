@@ -245,6 +245,8 @@ jQuery(document).ready(function () {
         var method = 'GET';
         var data = '';
         $.ajax(
+
+            alert("Se esta procesando tu solicitud, por favor espere"),
             {
                 url: url,
                 type: method,
@@ -267,6 +269,8 @@ jQuery(document).ready(function () {
         var data = '';
 
         $.ajax(
+
+            alert("Se esta procesando tu solicitud, por favor espere"),
             {
                 url: url,
                 type: method,
@@ -514,9 +518,11 @@ jQuery(document).ready(function () {
     // Comienzo M12 Usuarios
     $("#indexUsuarios").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_usuarios/M12_Index';
+        var url = '/gestion_usuarios/M12_VisualizarUsuarios';
         var method = 'GET';
         var data = '';
+        console.log("HOLA CHAMA");
+        console.log ("HABLAAA");
         $.ajax(
             {
                 url: url,
@@ -534,7 +540,7 @@ jQuery(document).ready(function () {
 
     $("#agregarUsuarios").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_usuarios/M12_AgregarUsuario';
+        var url = '/gestion_usuarios/M12_AgregarUsuario2';
         var method = 'GET';
         var data = '';
 

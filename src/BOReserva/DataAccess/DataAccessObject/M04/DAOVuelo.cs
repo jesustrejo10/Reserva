@@ -71,7 +71,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                         //ATENCIÓN, CAMBIAR POR FABRICA CUANDO MANDEN EL METODO///////////////////////////////
                         Avion avion = new Avion(idAvion, matAvion, modAvion, 0, 0, 0,
                                 0, 0, 0, 0, 0);
-                        Ruta ruta = new Ruta(idRuta, ciudadO, ciudadD, null, null, 0);
+                        Ruta ruta = new Ruta(idRuta, 0, null, null, ciudadO, ciudadD);
                         //////////////////////////////////////////////////////////////////////////////////////
                         objVuelo = FabricaEntidad.InstanciarVuelo(id, codigoVuelo, ruta, fechaDespegue, status,
                                                              fechaAterrizaje, avion);
