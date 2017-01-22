@@ -122,8 +122,7 @@ namespace BOReserva.Controllers
             }
             catch (ReservaExceptionM09 ex)
             {
-                CVerHotel modelovista = new CVerHotel();
-                return (JavaScript(ex.Mensaje));
+                return (Content("<script>alert('" + ex.Mensaje + "');</script>"));
             }
         }
 
@@ -135,22 +134,28 @@ namespace BOReserva.Controllers
         /// <returns>Retorna la vista parcial M09_ModificarHotel en conjunto del Modelo de dicha vista</returns>
         public ActionResult M09_ModificarHotel(int id)
         {
-            //aca deberiamos hacer reflection y meter try catch
-            Command<Entidad> comando = FabricaComando.crearM09ConsultarHotel(id);
-            Entidad hotel = comando.ejecutar();
-            Hotel hotelbuscado = (Hotel)hotel;
-            idhotel = hotelbuscado._id;
-            CModificarHotel modelovista = new CModificarHotel();
-            modelovista._capacidadHabitacion = hotelbuscado._capacidad;
-            modelovista._ciudad = hotelbuscado._ciudad._nombre;
-            modelovista._clasificacion = hotelbuscado._clasificacion;
-            modelovista._direccion = hotelbuscado._direccion;
-            modelovista._email = hotelbuscado._email;
-            modelovista._nombre = hotelbuscado._nombre;
-            modelovista._paginaWeb = hotelbuscado._paginaWeb;
-            modelovista._pais = hotelbuscado._ciudad._pais._nombre;
-            modelovista._precioHabitacion = hotelbuscado._precio;
-            return PartialView(modelovista);
+            try
+            {
+                Command<Entidad> comando = FabricaComando.crearM09ConsultarHotel(id);
+                Entidad hotel = comando.ejecutar();
+                Hotel hotelbuscado = (Hotel)hotel;
+                idhotel = hotelbuscado._id;
+                CModificarHotel modelovista = new CModificarHotel();
+                modelovista._capacidadHabitacion = hotelbuscado._capacidad;
+                modelovista._ciudad = hotelbuscado._ciudad._nombre;
+                modelovista._clasificacion = hotelbuscado._clasificacion;
+                modelovista._direccion = hotelbuscado._direccion;
+                modelovista._email = hotelbuscado._email;
+                modelovista._nombre = hotelbuscado._nombre;
+                modelovista._paginaWeb = hotelbuscado._paginaWeb;
+                modelovista._pais = hotelbuscado._ciudad._pais._nombre;
+                modelovista._precioHabitacion = hotelbuscado._precio;
+                return PartialView(modelovista);
+            }
+            catch (ReservaExceptionM09 ex)
+            {
+                return (Content("<script>alert('" + ex.Mensaje + "');</script>"));
+            }
         }
 
 
@@ -163,14 +168,21 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult modificarHotel(CModificarHotel model)
         {
-            Entidad ciudadDestino = FabricaEntidad.InstanciarCiudad("nombre");
-            ciudadDestino._id = 29;
-            Entidad modificarHotel = FabricaEntidad.InstanciarHotel(model, ciudadDestino);
-            //con la fabrica instancie al hotel.
-            Command<String> comando = FabricaComando.crearM09ModificarHotel(modificarHotel, idhotel);
-            String agrego_si_no = comando.ejecutar();
+            try
+            {
+                Entidad ciudadDestino = FabricaEntidad.InstanciarCiudad("nombre");
+                ciudadDestino._id = 29;
+                Entidad modificarHotel = FabricaEntidad.InstanciarHotel(model, ciudadDestino);
+                //con la fabrica instancie al hotel.
+                Command<String> comando = FabricaComando.crearM09ModificarHotel(modificarHotel, idhotel);
+                String agrego_si_no = comando.ejecutar();
 
-            return (Json(agrego_si_no));
+                return (Json(agrego_si_no));
+            }
+            catch (ReservaExceptionM09 ex)
+            {
+                return (Json(ex.Mensaje));
+            }
         }
 
 
@@ -181,13 +193,20 @@ namespace BOReserva.Controllers
         /// <returns>Retorna un JsonResult</returns>
         public JsonResult deleteHotel(int id)
         {
-            Command<Entidad> comando = FabricaComando.crearM09ConsultarHotel(id);
-            Entidad hotel = comando.ejecutar();
-            Hotel hotelbuscado = (Hotel)hotel;
-            hotelbuscado._id = id;
-            Command<String> comando1 = FabricaComando.crearM09EliminarHotel(hotelbuscado, id);
-            String borro_si_no = comando1.ejecutar(); 
-            return (Json(borro_si_no));
+            try
+            {
+                Command<Entidad> comando = FabricaComando.crearM09ConsultarHotel(id);
+                Entidad hotel = comando.ejecutar();
+                Hotel hotelbuscado = (Hotel)hotel;
+                hotelbuscado._id = id;
+                Command<String> comando1 = FabricaComando.crearM09EliminarHotel(hotelbuscado, id);
+                String borro_si_no = comando1.ejecutar();
+                return (Json(borro_si_no));
+            }
+            catch (ReservaExceptionM09 ex)
+            {
+                return (Json(ex.Mensaje));
+            }
         }
 
 
@@ -198,13 +217,20 @@ namespace BOReserva.Controllers
         /// <returns>Retorna un JsonResult</returns>
         public JsonResult activateHotel(int id)
         {
-            Command<Entidad> comando = FabricaComando.crearM09ConsultarHotel(id);
-            Entidad hotel = comando.ejecutar();
-            Hotel hotelbuscado = (Hotel)hotel;
-            hotelbuscado._id = id;
-            Command<String> comando1 = FabricaComando.crearM09DisponibilidadHotel(hotelbuscado, 1);
-            String borro_si_no = comando1.ejecutar();
-            return (Json(borro_si_no));
+            try
+            {
+                Command<Entidad> comando = FabricaComando.crearM09ConsultarHotel(id);
+                Entidad hotel = comando.ejecutar();
+                Hotel hotelbuscado = (Hotel)hotel;
+                hotelbuscado._id = id;
+                Command<String> comando1 = FabricaComando.crearM09DisponibilidadHotel(hotelbuscado, 1);
+                String borro_si_no = comando1.ejecutar();
+                return (Json(borro_si_no));
+            }
+            catch (ReservaExceptionM09 ex)
+            {
+                return (Json(ex.Mensaje));
+            }
         }
 
 
@@ -215,13 +241,20 @@ namespace BOReserva.Controllers
         /// <returns>Retorna un JsonResult</returns>
         public JsonResult deactivateHotel(int id)
         {
-            Command<Entidad> comando = FabricaComando.crearM09ConsultarHotel(id);
-            Entidad hotel = comando.ejecutar();
-            Hotel hotelbuscado = (Hotel)hotel;
-            hotelbuscado._id = id;
-            Command<String> comando1 = FabricaComando.crearM09DisponibilidadHotel(hotelbuscado, 0);
-            String borro_si_no = comando1.ejecutar();
-            return (Json(borro_si_no));
+            try
+            {
+                Command<Entidad> comando = FabricaComando.crearM09ConsultarHotel(id);
+                Entidad hotel = comando.ejecutar();
+                Hotel hotelbuscado = (Hotel)hotel;
+                hotelbuscado._id = id;
+                Command<String> comando1 = FabricaComando.crearM09DisponibilidadHotel(hotelbuscado, 0);
+                String borro_si_no = comando1.ejecutar();
+                return (Json(borro_si_no));
+            }
+            catch (ReservaExceptionM09 ex)
+            {
+                return (Json(ex.Mensaje));
+            }
         }
 
 

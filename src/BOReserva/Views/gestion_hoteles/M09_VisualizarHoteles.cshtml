@@ -29,7 +29,29 @@
                                 BOReserva.DataAccess.Domain.Hotel c = (BOReserva.DataAccess.Domain.Hotel) item.Value;
                                 <tr id="@item.Key">
                                     <td>@c._nombre</td>
-                                    <td>@c._clasificacion</td>
+                                    <td>@{
+                                            if (c._clasificacion >= 1)
+                                            {
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                            }
+                                            if (c._clasificacion >= 2)
+                                            {
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                            }
+                                            if (c._clasificacion >= 3)
+                                            {
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                            }
+                                            if (c._clasificacion >= 4)
+                                            {
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                            }
+                                            if (c._clasificacion >= 5)
+                                            {
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                            }
+                                        }
+                                    </td>
                                     <td>@c._ciudad._pais._nombre / @c._ciudad._nombre</td>
                                     <td>@c._direccion</td>
                                     <td>
@@ -56,6 +78,8 @@
                             Response.Write("<script>alert('"+item.Mensaje+"');</script>");
                         }
 
+                    
+                    </tbody>
                     <tfoot>
                         <tr>
                             <th>Nombre</th>
@@ -146,8 +170,8 @@
             }).done(function (data) {
                 $("#contenido").empty();
                 $("#contenido").append(data);
-            }).fail(function (data) {
-                alert(data)
+            }).fail(function () {
+                alert(data);
             });
         }));
     });
@@ -167,7 +191,7 @@
                 $("#contenido").empty();
                 $("#contenido").append(data);
             }).fail(function () {
-                alert("Error, por favor refresque la pagina")
+                alert(data);
             });
         });
     });
@@ -204,8 +228,6 @@
                                 alert(errorThrown);
                             }
                         });
-                } else if (data.includes("Reserva_Habitacion")) {
-                    alert("No se puede eliminar este hotel porque tiene una reservacion");
                 } else {
                     alert(data);
                 }

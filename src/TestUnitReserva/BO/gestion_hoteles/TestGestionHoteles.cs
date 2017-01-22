@@ -27,13 +27,9 @@ namespace TestUnitReserva.BO.gestion_hoteles
         private Pais mockPais;
         private Ciudad mockCiudad;
         private Hotel mockHotel;
-<<<<<<< HEAD
-        private DAOHotel daoHotel;
-=======
         private Hotel mockHotell;
         DAOHotel daoHotel;
         IDAO prueba;
->>>>>>> 570cb468cf76c84b56480a21498cd1e432e8a43d
 
         /// <summary>
         /// Metodo que se ejecuta antes que se ejecute cada prueba
@@ -398,7 +394,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
             JsonResult probar = prueba.modificarHotel(model);
             Assert.IsInstanceOf(typeof(JsonResult),probar);
         }
-        
+        [Test]        
         public void M09_DaoHotelConsultarTodos() {
             Dictionary<int,Entidad> hoteles = daoHotel.ConsultarTodos();
             Assert.NotNull(hoteles);
