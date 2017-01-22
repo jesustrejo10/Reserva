@@ -14,6 +14,7 @@ using BOReserva.Controllers.PatronComando.M10;
 using BOReserva.Controllers.PatronComando.M16;
 using BOReserva.Controllers.PatronComando.M12;
 using BOReserva.DataAccess.Domain.M14;
+using BOReserva.Controllers.PatronComando.M07;
 
 namespace BOReserva.Controllers.PatronComando
 {
@@ -993,6 +994,112 @@ namespace BOReserva.Controllers.PatronComando
 
             return new M03_COValidarRuta((Ruta)e, id);
 
+        }
+
+        #endregion
+
+        #region M07_Gestion_Equipaje
+
+        /// <summary>
+        /// Instanciar el comando M07_COAgregarEquipaje
+        /// </summary>
+        /// <param name="e">Recibe una entidad equipaje</param>
+        /// <returns>Retorna un comando con el parametro</returns>
+        public static Command<String> crearM07_AgregarEquipaje(Entidad e)
+        {
+            return new M07_COAgregarEquipaje((Equipaje)e);
+        }
+        public static Command<String> crearM07AgregarEquipaje(Entidad e)
+        {
+            return new M07_COAgregarEquipaje((Equipaje)e);
+        }
+
+        /// <summary>
+        /// Método para instanciar el comando para consultar equipaje
+        /// </summary>
+        /// <returns>retorna el comando para consultar todos equipaje</returns>
+        public static Command<Dictionary<int, Entidad>> crearM07VisualizarEquipajes()
+        {
+            return new M07_COConsultarEquipaje();
+        }
+
+        /// <summary>
+        /// Método para instanciar el comando Consultar un equipaje por ID
+        /// </summary>
+        /// <param name="idEquipaje"> recibe como parámetro el id de un equipaje</param>
+        /// <returns>retorna el comando para consultar un equipaje a detalle</returns>
+        public static Command<Entidad> crearM07ConsultarEquipaje(int idEquipaje)
+        {
+            return new M07_COConsultarEquipajeID(idEquipaje);
+        }
+
+        /// <summary>
+        /// Método para instanciar el comando M07_EliminarEquipaje
+        /// </summary>
+        /// <param name="id">recibe el id del equipaje</param>
+        /// <returns>retorna el comando para eliminar un equipaje</returns>
+        public static Command<String> crearM07EliminarEquipaje(int id)
+        {
+            return new M07_COEliminarEquipaje(id);
+        }
+
+        #endregion
+
+        #region M07_Reclamos_Equipaje
+
+        /// <summary>
+        /// Instancia el comando M07_COAgregarReclamoEquipaje
+        /// </summary>
+        /// <param name="e">Recibe la una entidad de tipo reclamo</param>
+        /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
+        public static Command<String> crearM07_AgregarReclamoEquipaje(Entidad e)
+        {
+            return new M07_COAgregarReclamoEquipaje((ReclamoEquipaje)e);
+        }
+        public static Command<String> crearM07AgregarReclamoEquipaje(Entidad e)
+        {
+            return new M07_COAgregarReclamoEquipaje((ReclamoEquipaje)e);
+        }
+
+        /// <summary>
+        /// Instancia el comando para consultar reclamos equipaje
+        /// </summary>
+        /// <returns>retorna el comando para consultar todos los reclamos de equipaje</returns>
+        public static Command<Dictionary<int, Entidad>> crearM07VisualizarReclamosEquipaje()
+        {
+            return new M07_COConsultarReclamoEquipaje();
+        }
+
+        /// <summary>
+        /// Instanciar el comando Consultar un reclamo de equipaje por ID 
+        /// </summary>
+        /// <param name="idReclamoE"> recibe como parámetro el id de un reclamo equipaje</param>
+        /// <returns>retorna el comando para consultar un reclamo a detalle</returns>
+        public static Command<Entidad> crearM07ConsultarReclamoEquipaje(int idReclamoE)
+        {
+            return new M07_COConsultarReclamoEquipajeID(idReclamoE);
+        }
+
+        /// <summary>
+        /// Instancia el comando M07_EliminarReclamoEquipaje
+        /// </summary>
+        /// <param name="id">recibe el id del reclamo equipaje a eliminar</param>
+        /// <returns>retorna el comando para eliminar un reclamo equipaje</returns>
+        public static Command<String> crearM07EliminarReclamoEquipaje(int id)
+        {
+            return new M07_COEliminarReclamoEquipaje(id);
+
+        }
+
+        /// <summary>
+        /// Instancia comando Editar Reclamo Equipaje
+        /// </summary>
+        /// <param name="id">ID Reclamo a editar</param>
+        /// <param name="status">Status nuevo</param>
+        /// <returns>retorna el comando para editar</returns>
+        public static Command<String> crearM07EditarReclamoEquipaje(int id, string status)
+        {
+            return new M07_COEditarReclamoEquipaje(id, status);
         }
 
         #endregion

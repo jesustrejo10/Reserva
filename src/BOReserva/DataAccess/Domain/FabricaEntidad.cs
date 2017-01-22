@@ -568,7 +568,7 @@ namespace BOReserva.DataAccess.Domain
 
         #endregion
 
-        #region M07_ReclamosEquipaje
+        #region M07_Reclamos_Equipaje
 
         /// <summary>
         /// Instancia Reclamo de Equipaje sin parametros
@@ -650,12 +650,13 @@ namespace BOReserva.DataAccess.Domain
 
         #endregion
 
-        #region M07 GESTION EQUIPAJE
+        #region M07_Equipaje
+
         /// <summary>
         /// Instanciar Equipaje
         /// </summary>
         /// <returns>Entidad Instanciada</returns>
-        public static Entidad instanciarEquipaje()
+        public static Entidad InstanciarEquipaje()
         {
             return new Equipaje();
         }
@@ -666,9 +667,34 @@ namespace BOReserva.DataAccess.Domain
         /// <param name="peso">Peso equipaje</param>
         /// <param name="abordaje">Pase Abordaje asociado</param>
         /// <returns>Entidad instanciada con parametros</returns>
-        public static Entidad instanciarEquipaje(int peso, int abordaje)
+        public static Entidad InstanciarEquipaje(int id, int peso, int abordaje)
         {
-            return new Equipaje(peso, abordaje);
+            return new Equipaje(id, peso, abordaje);
+        }
+
+        /// <summary>
+        /// Instancia lista de equipaje
+        /// </summary>
+        /// <param name="listaEntidad">Lista a instanciar</param>
+        /// <returns>Lista de equipajes</returns>
+        public static List<Equipaje> InstanciarListaEquipaje(Dictionary<int, Entidad> listaEntidad)
+        {
+            List<Equipaje> lista = new List<Equipaje>();
+            foreach (var e in listaEntidad)
+            {
+                Equipaje nuevoReclamo = (Equipaje)e.Value;
+                lista.Add(nuevoReclamo);
+            }
+            return lista;
+        }
+
+        /// <summary>
+        /// Instanciacion para una lista vacia
+        /// </summary>
+        /// <returns>Lista de reclamos de equipaje vacia</returns>
+        public static List<Equipaje> InstanciarListaEquipaje()
+        {
+            return new List<Equipaje>();
         }
 
         #endregion
