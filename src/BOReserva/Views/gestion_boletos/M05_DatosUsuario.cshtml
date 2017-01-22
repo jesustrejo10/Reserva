@@ -203,9 +203,9 @@
         // alert("primer nombre: "+primer_nombre+", segundo nombre: "+segundo_nombre+", primer apellido: "+primer_apellido+", segundo aoellido: "+segundo_apellido+", fecha nac: "+fecha_nac+", pos: "+posicion+", sexo: "+sexo+", pasaporte: "+pasaporte+", correo: "+correo);
         var carnum = /^[0-9]+$/;
         var caralf = /^[a-zA-Z]+$/;
-        var caremail = /^[a-zA-Z]+$/;
 
 
+        //Validaciones para los campos vacios y caracteres correctos
         if (primer_nombre == "" || primer_nombre == undefined || !primer_nombre.match(caralf)) {
 
             $("#primer_nombre").addClass("has-error");
@@ -255,6 +255,7 @@
             $("#correo_empty").fadeIn();
             win = false;
         }
+        //Creación del boleto con los detalles del pasajero
         if (win) {
 
             $("#loading").show();
