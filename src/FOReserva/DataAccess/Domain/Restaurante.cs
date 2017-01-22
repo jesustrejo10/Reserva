@@ -20,6 +20,8 @@ namespace FOReserva.DataAccess.Domain
             _open = open;
             _close = close;
             _city = city;
+ 
+
         }
     }
 }
