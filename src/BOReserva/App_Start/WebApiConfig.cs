@@ -5,6 +5,9 @@ using System.Web.Http;
 
 namespace BOReserva
 {
+    /// <summary>
+    /// WebApiConfig
+    /// </summary>
     public static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)

@@ -90,13 +90,13 @@ namespace FOReserva.Controllers
                 }
 
             }
-            catch (SqlException e)
+            catch (SqlException)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 String error = "Error insertando en la BD.";
                 return Json(error);
             }
-            catch (Exception e)
+            catch (Exception )
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 String error = "Error inesperado.";

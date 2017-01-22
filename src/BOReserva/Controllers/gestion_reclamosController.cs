@@ -11,8 +11,12 @@ using BOReserva.Controllers.PatronComando;
 
 namespace BOReserva.Controllers
 {
+    /// <summary>
+    /// Clase controladora del módulo de Gestión de Reclamos
+    /// </summary>
     public class gestion_reclamosController : Controller
     {
+        private static int idReclamo;
         
         //
         // GET: /gestion_reclamos/
@@ -42,6 +46,24 @@ namespace BOReserva.Controllers
       }
 
       [HttpPost]
+      public JsonResult modificarReclamo(CModificarReclamo model)
+      {
+          int idUsuario = gestion_seguridad_ingresoController.IDUsuarioActual();
+          String[] formateadorFecha = model._fechaReclamo.Split('/');
+          model._fechaReclamo = formateadorFecha[2] + "-" + formateadorFecha[1] + "-" + formateadorFecha[0];
+          Entidad reclamo = FabricaEntidad.InstanciarReclamo(model);
+          Command<Entidad> comando = FabricaComando.crearM16ConsultarUsuario(idReclamo);
+          Reclamo verificacion = (Reclamo)comando.ejecutar();
+          //con la fabrica instancie el reclamo.
+
+          Command<String> comandoMod = FabricaComando.crearM16ModificarReclamo(reclamo, model._idReclamo);
+          String resultado = comandoMod.ejecutar();
+          return (Json("Se modificó el reclamo exitosamente"));
+          
+
+      }
+
+      [HttpPost]
       public JsonResult eliminarReclamo(int idReclamo)
       {
           int idUsuario = gestion_seguridad_ingresoController.IDUsuarioActual();
@@ -61,6 +83,7 @@ namespace BOReserva.Controllers
           }
       }
 
+
       [HttpPost]
       public JsonResult actualizarReclamo(int idReclamo, int estado)
       {
@@ -69,11 +92,25 @@ namespace BOReserva.Controllers
           return (Json("Estado modificado"));
       }
 
-      public ActionResult M16_ModificarReclamo()
+      public ActionResult M16_ModificarReclamo(int idReclamo)
       {
-          CModificarReclamo model = new CModificarReclamo();
-          return PartialView(model);
-
+          int idUsuario = gestion_seguridad_ingresoController.IDUsuarioActual();
+          Command<Entidad> comando = FabricaComando.crearM16ConsultarUsuario(idReclamo);
+          Reclamo reclamo = (Reclamo)comando.ejecutar();
+          if (idUsuario != reclamo._usuario)
+          {
+              return PartialView("M16_AlertaError",null);
+          }
+          else
+          {
+              CModificarReclamo model = new CModificarReclamo();
+              model._idReclamo = reclamo._id;
+              model._tituloReclamo = reclamo._tituloReclamo;
+              model._detalleReclamo = reclamo._detalleReclamo;
+              model._fechaReclamo = reclamo._fechaReclamo;
+              model._estadoReclamo = reclamo._estadoReclamo;
+              return PartialView(model);
+          }
       }
     }
 	

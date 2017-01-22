@@ -1,6 +1,8 @@
 ﻿<!-- Indico que para esta vista, M08_AgregarAutomovil, utilizare el modelo Models/gestion_automoviles/CAgregarAutomovil-->
 @model BOReserva.Models.gestion_hoteles.CAgregarHotel
 
+<link href="~/Content/Canvas/Box.css" rel="stylesheet" />
+
 <!--Indico que, estoy abriendo un formulario que tendra como accion del submit, el controlador gestion_automoviles"Controller",
     utilizara el metodo guardarAutomovil
     le pasara la informacion mediante un POST-->
@@ -10,8 +12,8 @@
         <meta charset="UTF-8">
     </head>
     <div class="row">
-        <div class="col-md-12">
-            <div class="box">
+        <div class="col-md-10">
+            <div class="Cajita">
                 <div class="box-header with-border">
                     <h1 class="box-title" style="font-size:32px;"> Agregar Hotel</h1>
                     <div class="box-tools pull-right">
@@ -21,28 +23,24 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-12" style="margin-top:10px;">
-                            <div class="col-xs-4">
+                            <div class="col-xs-6">
                                 <label for="placa">Nombre(<span style="color:red">*</span>)</label>
                                 @Html.TextBoxFor(m => m._nombre, null, new { @class = "form-control", @placeholder = "Gran Melia", @id = "hot_nombre", @maxlength = 30, @onblur = "checkTextField(this);" })
                             </div>
-                            <div class="col-xs-2">
-                                &nbsp;
-                            </div>
-
-                            <div class="col-xs-4">
+                            <div class="col-xs-6">
                                 <label for="modelo">Direccion(<span style="color:red">*</span>)</label>
-                                @Html.TextBoxFor(m => m._direccion, null, new { @class = "form-control", @placeholder = "Av Colombia, Calle 4", @id = "hot_direccion", @maxlength = 120})
+                                @Html.TextBoxFor(m => m._direccion, null, new { @class = "form-control", @placeholder = "Av Colombia, Calle 4", @id = "hot_direccion", @onblur = "checkdireccion(this);", @maxlength = 120})
                             </div>
                         </div>
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <label for="modelo">Pagina web(<span style="color:red">*</span>)</label>
-                                @Html.TextBoxFor(m => m._paginaWeb, null, new { @class = "form-control", @placeholder = "www.granmeliaccs.com", @id = "hot_web", @onblur = "checkpaginaweb(this);", @maxlength = 20 })
+                                @Html.TextBoxFor(m => m._paginaWeb, null, new { @class = "form-control", @placeholder = "www.granmeliaccs.com", @id = "hot_web", @onblur = "checkpaginaweb(this);", @maxlength = 30 })
                             </div>
                             <div class="col-xs-6">
                                 <label for="anio">Correo electronico(<span style="color:red">*</span>)</label>
-                                @Html.TextBoxFor(m => m._email, null, new { @class = "form-control", @placeholder = "contacto@granmeliaccs.com", @id = "hot_email", @maxlength = 25, @onblur = "checkcorreo(this);" })
+                                @Html.TextBoxFor(m => m._email, null, new { @class = "form-control", @placeholder = "contacto@granmeliaccs.com", @id = "hot_email", @maxlength = 30, @onblur = "checkcorreo(this);" })
                             </div>
                         </div>
                         <div>&nbsp;</div>
@@ -83,11 +81,15 @@
                             </div>
                             <div class="col-xs-6">
                                 <label for="capacidad">Capacidad(<span style="color:red">*</span>)</label>
-                                @Html.TextBoxFor(m => m._capacidadHabitacion, null, new { @type = "number", @class = "form-control", @placeholder = "28", @id = "hot_capacidad", min = "0", @onblur = "checklargo(this);" })
+                                @Html.TextBoxFor(m => m._capacidadHabitacion, null, new { @type = "number", @class = "form-control", @placeholder = "28", @id = "hot_capacidad", min = "0", @onblur = "checklargo(this, 99);" })
                             </div>
                         </div>
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="capacidad">Precio por habitacion($)(<span style="color:red">*</span>)</label>
+                                @Html.TextBoxFor(m => m._precioHabitacion, null, new { @type = "number", @class = "form-control", @placeholder = "28", @id = "hot_capacidad", min = "0", @onblur = "checklargo(this, 99999);" })
+                            </div>
                             <div class="col-xs-6">
                                 <label for="">Pais(<span style="color:red">*</span>)</label>
                                 @{  
@@ -105,14 +107,13 @@
                                     }
                                 }
                             </div>
-
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <label for="Ciudad">Ciudad(<span style="color:red">*</span>)</label>
                                 <select class="form-control" id="ciudades" name="ciudad" onblur="getciudad();"></select>
                             </div>
-                        </div>
-                        <div>&nbsp;</div>
-                        <div class="col-md-12" style="margin-top:10px;">
                         </div>
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
@@ -150,8 +151,8 @@
                     type: 'POST',
                     success: function (data) {
                         if (data === "1") {
-                            alert("Se registro el Hotel exitosamente");
-                            $('#formSaveVehicle')[0].reset();
+                            alert("Se registro el hotel exitosamente");
+                            $('#formSaveHotel')[0].reset();
                         } else {
                             alert(data);
                         }
