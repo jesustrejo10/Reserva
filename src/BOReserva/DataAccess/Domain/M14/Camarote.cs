@@ -9,11 +9,13 @@ namespace BOReserva.DataAccess.Domain.M14
     {
         public Camarote() { }
         
-        public int _cantidadCama;
-        public string _tipoCama;
-        public string _estatus;
-        public int _fkCabina;
-        public String _nombrecabina { get; set; }
+
+        public int _cantidadCama { get; set; }
+        public String _tipoCama { get; set; }
+        public String _estatus { get; set; }        
+        public int _fkCabina { get; set; }
+        public String _nombreCabina { get; set; }
+
 
         public Camarote(int id,int cantidadcama, String tipocama, String estatus, int cabina)
         {
@@ -25,15 +27,15 @@ namespace BOReserva.DataAccess.Domain.M14
             
         }
 
-        public Camarote(int id, int cantidadcama, string tipocama, String estatus, String cabina)
+        public Camarote(int id,int cantidadcama, String tipocama, String estatus, String cabina)
         {
             _id = id;
-            _cantidadCama = cantidadcama;
+            _cantidadCama= cantidadcama;
             _tipoCama = tipocama;
             _estatus = estatus;
-            _nombrecabina = cabina;
-
-        }
+            _nombreCabina = cabina;
+            
+        }        
 
     }
 }

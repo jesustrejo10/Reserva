@@ -10,6 +10,10 @@ using System.Diagnostics;
 
 namespace BOReserva.DataAccess.DataAccessObject
 {
+
+    /// <summary>
+    /// Clase Dao crucceros para realizar los procedimientos de base de datos
+    /// </summary>
     public class DAOCruceros : DAO, IDAOCruceros
     {
         public DAOCruceros()
@@ -20,7 +24,6 @@ namespace BOReserva.DataAccess.DataAccessObject
             return true;        
         }
 
-        
         int IDAO.Agregar(Entidad e)
         {
             Crucero crucero = (Crucero)e;
@@ -73,9 +76,6 @@ namespace BOReserva.DataAccess.DataAccessObject
 
                     while (reader.Read())
                     {
-                        //SE AGREGA CREA UN OBJECTO VEHICLE SE PASAN LOS ATRIBUTO ASI reader["<etiqueta de la columna en la tabla Automovil>"]
-                        //Y  SE AGREGA a listavehiculos
-                        //public Hotel(int id, String nombre, String direccion, String email, String paginaWeb, int clasificacion, int capacidad, Ciudad ciudad)
                         idCrucero = Int32.Parse(reader["cru_id"].ToString());
 
                         crucero = new Crucero(id,

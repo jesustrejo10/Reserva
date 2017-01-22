@@ -9,6 +9,11 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando
 {
+ 
+    /// <summary>
+    /// Comando destinado a Realizar las respectivas operaciones necesarias
+    /// para Visualizar los cruceros a la BD
+    /// </summary>
     public class M14_COVisualizarCruceros : Command<Dictionary<int, Entidad>>
     {
 

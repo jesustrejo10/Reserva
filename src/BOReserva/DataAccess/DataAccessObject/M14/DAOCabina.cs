@@ -12,6 +12,10 @@ using System.Web;
 
 namespace BOReserva.DataAccess.DataAccessObject.M14
 {
+
+    /// <summary>
+    /// Clase Dao cabina para realizar los procedimientos de base de datos
+    /// </summary>
     public class DAOCabina : DAO, IDAOCabina
     {
         int IDAO.Agregar(Entidad e)

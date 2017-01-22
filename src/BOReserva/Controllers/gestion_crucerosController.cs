@@ -22,6 +22,10 @@ namespace BOReserva.Controllers
             return PartialView();
         }
 
+        /// <summary>
+        /// Método de la vista parcial M24_AgregarCabinas
+        /// </summary>
+        /// <returns>Retorna la vista parcial M24_AgregarCabinas en conjunto del Modelo de dicha vista</returns>
         public ActionResult M24_AgregarCabinas()
         {
 
@@ -68,6 +72,10 @@ namespace BOReserva.Controllers
             return PartialView("M24_AgregarItinerario", itinerario);            
         }
 
+        /// <summary>
+        /// Método de la vista parcial M24_AgregarCamarote
+        /// </summary>
+        /// <returns>Retorna la vista parcial M24_AgregarCamarote en conjunto del Modelo de dicha vista</returns>
         public ActionResult M24_AgregarCamarote()
         {
             CGestion_camarote camarote = new CGestion_camarote();
@@ -149,12 +157,12 @@ namespace BOReserva.Controllers
         }
 
 
-        /*public JsonResult M24_ListarCamarotes(int id)
+        public JsonResult M24_ListarCamarotes(int id)
         {
             ConexionBD cbd = new ConexionBD();
             var listaCamarotes = cbd.listarCamarotes(id);
             return (Json(listaCamarotes, JsonRequestBehavior.AllowGet));
-        }*/
+        }
 
         /// <summary>
         /// Método de la vista parcial M24ListarCruceros
@@ -168,9 +176,9 @@ namespace BOReserva.Controllers
         }
 
         /// <summary>
-        /// Método de la vista parcial M24ListarCruceros
+        /// Método de la vista parcial M24ListarItinerarios
         /// </summary>
-        /// <returns>Retorna la vista parcial M24_ListarCruceros en conjunto del Modelo de dicha vista</returns>
+        /// <returns>Retorna la vista parcial M24_ListarItinerarios en conjunto del Modelo de dicha vista</returns>
         public ActionResult M24_ListarItinerario()
         {
             Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14Visualizaritinerario();
@@ -187,17 +195,6 @@ namespace BOReserva.Controllers
             Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14VisualizarCabinas(id);
             Dictionary<int, Entidad> listaCabinas = comando.ejecutar();
             return PartialView(listaCabinas);
-        }
-
-        /// <summary>
-        /// Método de la vista parcial M24_ListarCamarotes
-        /// </summary>
-        /// <returns>Retorna la vista parcial M24_ListarCamarotes en conjunto del Modelo de dicha vista</returns>
-        public ActionResult M24_ListarCamarotes(int id)
-        {
-            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14VisualizarCamarotes(id);
-            Dictionary<int, Entidad> listaCamarotes = comando.ejecutar();
-            return PartialView(listaCamarotes);
         }
 
         [HttpPost]
