@@ -293,6 +293,11 @@
     <Compile Include="Controllers\PatronComando\M13\M13_COConsultarPermisosUsuario.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCabina.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOItinerario.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M02\RecursoDAOM02.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RecursoDAOM02.resx</DependentUpon>
+    </Compile>
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCabina.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCruceros.cs" />
     <Compile Include="Controllers\PatronComando\M10\M10_COListarRestaurantId.cs" />
@@ -418,6 +423,7 @@
     <Compile Include="Excepciones\ExceptionReserva.cs" />
     <Compile Include="Excepciones\Log.cs" />
     <Compile Include="Excepciones\LogException.cs" />
+    <Compile Include="Excepciones\M02\ReservaExceptionM02.cs" />
     <Compile Include="Excepciones\M08\ReservaExceptionM08.cs" />
     <Compile Include="Excepciones\M10\ReservaExceptionM10.cs" />
     <Compile Include="Excepciones\RecursoLog.Designer.cs" />
@@ -1797,6 +1803,10 @@
     <EmbeddedResource Include="DataAccess\DataAccessObject\M01\RecursoLogin.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoLogin.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataAccess\DataAccessObject\M02\RecursoDAOM02.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecursoDAOM02.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="DataAccess\DataAccessObject\M08\RecursoDAOM08.resx" />
     <EmbeddedResource Include="DataAccess\DataAccessObject\M06\RecursoM06.resx" />
