@@ -474,9 +474,9 @@ namespace BOReserva.Controllers
 
 
         /// <summary>
-        /// Método que retorna la lista de países
+        /// 
         /// </summary>
-        /// <returns>Retorna una lista de Items que contiene los países disponibles</returns>
+        /// <returns></returns>
         public static List<SelectListItem> pais()
         {
             manejadorSQL pais = new manejadorSQL();
@@ -506,7 +506,7 @@ namespace BOReserva.Controllers
         /// <summary>
         /// Método que retorna la lista de ciudades
         /// </summary>
-        /// <param name="pais">Nombre del país del cual se desea conocer las ciudades disponibles</param>
+        /// <param name="ciudad">Nombre del país del cual se desea conocer las ciudades disponibles</param>
         /// <returns>Retorna un ActionResult que contiene las ciudades disponibles para el país solicitado</returns>
         [HttpPost]
         public ActionResult listaciudades(String pais)

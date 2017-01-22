@@ -9,6 +9,7 @@ using System.Web;
 using System.Linq;
 using BOReserva.Controllers.PatronComando.M10;
 using BOReserva.Controllers.PatronComando.M16;
+using System.Web.Mvc;
 
 namespace BOReserva.Controllers.PatronComando
 {
@@ -423,6 +424,8 @@ namespace BOReserva.Controllers.PatronComando
 
         #region M08_Automoviles
 
+        #region Comandos Generales de Automovil
+
         public static Command<bool> activarAutomovil(Entidad e)
         {
             return new M08.M08_COActivarAutomovil(e);
@@ -447,6 +450,32 @@ namespace BOReserva.Controllers.PatronComando
         {
             return new M08.M08_COModificarAutomovil(e);
         }
+
+        public static Command<bool> existeMatriculaAutomovil(Entidad e)
+        {
+            return new M08.M08_COExisteMatriculaAutomovil(e);
+        }
+
+        #endregion
+
+        #region Comandos de Utilidad
+
+        public static Command<List<SelectListItem>> listarAniosAutomovil(Entidad e)
+        {
+            return new M08.M08_COListarAniosAutomovil(e);
+        }
+
+        public static Command<List<SelectListItem>> listarCantidadAutomovil(Entidad e)
+        {
+            return new M08.M08_COListarCantidadAutomovil(e);
+        }
+
+        public static Command<List<SelectListItem>> listarColoresAutomovil(Entidad e)
+        {
+            return new M08.M08_COListarColoresAutomovil(e);
+        }
+
+        #endregion
 
         #endregion
 

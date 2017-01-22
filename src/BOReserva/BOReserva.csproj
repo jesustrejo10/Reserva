@@ -230,6 +230,10 @@
     <Compile Include="Controllers\PatronComando\M05\M05_COAgregarPasajero.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COConsultarBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COCrearBoleto.cs" />
+    <Compile Include="Controllers\PatronComando\M08\M08_COExisteMatriculaAutomovil.cs" />
+    <Compile Include="Controllers\PatronComando\M08\M08_COListarAniosAutomovil.cs" />
+    <Compile Include="Controllers\PatronComando\M08\M08_COListarCantidadAutomovil.cs" />
+    <Compile Include="Controllers\PatronComando\M08\M08_COListarColoresAutomovil.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COAgregarHabitaciones.cs" />
     <Compile Include="Controllers\PatronComando\M01\M01_COBloquearUsuario.cs" />
     <Compile Include="Controllers\PatronComando\M01\M01_COLanding.cs" />
