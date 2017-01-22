@@ -193,4 +193,8 @@
     <value>M13_ValidacionRol</value>
     <comment>Revisa si el rol tiene usuarios asociados</comment>
   </data>
+  <data name="ModificarRol" xml:space="preserve">
+    <value>M13_ModificarRol</value>
+    <comment>Modifica el nombre de un rol</comment>
+  </data>
 </root>
