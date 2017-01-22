@@ -1,13 +1,17 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace BOReserva.DataAccess.Domain
 {
-    //Clase Paquete que hereda de la clase Entidad
+    /// <summary>
+    /// Clase Paquete que hereda de la clase Entidad
+    /// </summary>
+
     public class Paquete : Entidad
     {
+        public int _idPaquete { get; set; }
         //Declara una propiedad _nombrePaquete de tipo String
         public String _nombrePaquete { get; set; }
 
@@ -118,6 +122,16 @@ namespace BOReserva.DataAccess.Domain
            this._fechaFinHotel = fechafinhotel;
            this._fechaFinCruc = fechafincruc;
            this._fechaFinVuelo = fechafinvuelo;
+           this._estadoPaquete = estadoPaquete;
+
+       }
+
+       //Constructor de Paquete
+       public Paquete(int idpaquete, String nombrepaquete, float preciopaquete, bool estadoPaquete)
+       {
+           this._idPaquete = idpaquete;
+           this._nombrePaquete = nombrepaquete;
+           this._precioPaquete = preciopaquete;
            this._estadoPaquete = estadoPaquete;
 
        }

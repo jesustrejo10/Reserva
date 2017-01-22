@@ -1,4 +1,5 @@
-﻿using BOReserva.DataAccess.DAO;
+using BOReserva.DataAccess.DataAccessObject.M11;
+using BOReserva.DataAccess.DAO;
 using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
@@ -12,7 +13,7 @@ namespace BOReserva.Controllers.PatronComando.M11
     /// <summary>
     /// Comando Visualizar Paquetes
     /// </summary>
-    public class M11_COVisualizarPaquetes : Command<Dictionary<int, Entidad>>
+    public class M11_COVisualizarPaquetes : Command<List<Entidad>>
     {
 
         /// <summary>
@@ -22,11 +23,12 @@ namespace BOReserva.Controllers.PatronComando.M11
         /// <returns>
         /// Retorna un Identity map, de tipo int, Entidad
         /// </returns>
-        public override Dictionary<int, Entidad> ejecutar()
+        public override List<Entidad> ejecutar()
         {
-            IDAO daoPaquete = FabricaDAO.instanciarDaoPaquete();
-            Dictionary<int, Entidad> mapPaquetes = daoPaquete.ConsultarTodos();
+            IDAOPaquete daoPaquete = FabricaDAO.instanciarDaoPaquete();
+            List<Entidad> mapPaquetes = daoPaquete.ConsultarTodos();
             return mapPaquetes;
+            //Aquí se puede poner una excepción
         }
     }
 }
