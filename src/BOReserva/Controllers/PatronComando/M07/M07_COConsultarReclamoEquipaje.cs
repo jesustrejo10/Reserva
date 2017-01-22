@@ -8,8 +8,9 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando.M07
 {
-    public class M07_COConsultarReclamoEquipaje : Command<Dictionary<int, Entidad>>
+    public class M07_COConsultarReclamoEquipaje // : Command<Dictionary<int, Entidad>>
     {
+        /*
         /// <summary>
         /// Sobrescritura del metodo ejecutar de la clase Comando.
         /// Se encarga de llamar al DAO y devolver la respuesta al controlador.
@@ -23,5 +24,6 @@ namespace BOReserva.Controllers.PatronComando.M07
             Dictionary<int, Entidad> mapReclamos = daoReclamoE.ConsultarTodos();
             return mapReclamos;
         }
-    }
+        
+         */ }
 }

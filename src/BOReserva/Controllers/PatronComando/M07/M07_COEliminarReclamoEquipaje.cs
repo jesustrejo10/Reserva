@@ -8,8 +8,8 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando.M07
 {
-    public class M07_COEliminarReclamoEquipaje: Command<String>
-    {
+    public class M07_COEliminarReclamoEquipaje //: Command<String>
+    {/*
         Reclamo _reclamo;
         int _idReclamo;
 
@@ -24,5 +24,7 @@ namespace BOReserva.Controllers.PatronComando.M07
             int respuesta = daoReclamoE.Eliminar(_idReclamo);
             return respuesta.ToString();
         }
+    
+      */
     }
 }
