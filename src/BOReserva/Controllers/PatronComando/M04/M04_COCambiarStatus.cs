@@ -1,4 +1,5 @@
-﻿using BOReserva.DataAccess.DataAccessObject;
+﻿using BOReserva.DataAccess.DAO;
+using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using System;
@@ -35,7 +36,7 @@ namespace BOReserva.Controllers.PatronComando.M04
         {
             try
             {
-                DAOVuelo exec = (DAOVuelo)FabricaDAO.instanciarDAOVuelo();
+                IDAOVuelo exec = (IDAOVuelo)FabricaDAO.instanciarDAOVuelo();
                 exec.CambiarStatus(_vuelo);
                 return true;
             }
