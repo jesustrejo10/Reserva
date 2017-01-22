@@ -266,29 +266,6 @@ namespace BOReserva.Controllers
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         // GET: gestion_hoteles
         //public ActionResult M09_GestionHoteles_Crear()
         //{

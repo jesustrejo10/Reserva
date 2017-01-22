@@ -14,8 +14,7 @@
             <div class="box">
                 <div class="box-header with-border">
                     <h1 class="box-title" style="font-size:32px;">Detalle Hotel</h1>
-                    <div class="box-tools pull-right">
-                    </div>
+                    <div class="box-tools pull-right"></div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -49,7 +48,6 @@
                                 <label for="transmision">Clasificacion</label>                      
                                 @Html.TextBoxFor(m => m._clasificacion, null, new { @class = "form-control", @placeholder = "3 estrellas", @id = "hot_clasificacion", @readonly = "readonly" })
 
-    
                             </div>
                             <div class="col-xs-6">
                                 <label for="capacidad">Capacidad</label>                                
@@ -63,15 +61,13 @@
                                 <label for="">Pais</label>
                                 @Html.TextBoxFor(m => m._pais, null, new { @class = "form-control", @placeholder = "28", @id = "hot_pais", @readonly = "readonly" })
                             </div>
-
                             <div class="col-xs-6">
                                 <label for="Ciudad">Ciudad</label>                               
                                 @Html.TextBoxFor(m => m._ciudad, null, new { @class = "form-control", @placeholder = "28", @id = "hot_pais", @readonly = "readonly" })
                             </div>
                         </div>
                         <div>&nbsp;</div>
-                        <div class="col-md-12" style="margin-top:10px;">
-                        </div>
+                        <div class="col-md-12" style="margin-top:10px;"></div>
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
                             <button type="submit" id="return" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Regresar</button>
