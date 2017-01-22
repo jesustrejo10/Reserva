@@ -162,7 +162,7 @@ namespace BOReserva.DataAccess.DataAccessObject
         /// Método que crea la instancia de DAOPaquete
         /// </summary>
         /// <returns>Retorna la instancia a la clase DAOPaquete</returns>
-        public static DAO instanciarDaoPaquete()
+        public static DAOPaquete instanciarDaoPaquete()
         {
             return new DAOPaquete(); 
         }

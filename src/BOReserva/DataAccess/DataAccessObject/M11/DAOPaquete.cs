@@ -3,6 +3,7 @@ using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
@@ -113,6 +114,63 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
                 return 5;
             }
             
+            
+        }
+
+        /// <summary>
+        /// Metodo implementado de IDAO para consultar los paquetes de la BD
+        /// </summary>
+        /// <returns>Retorna el listado de paquetes</returns>
+        List<Entidad> IDAOPaquete.ConsultarTodos()
+        {
+            Debug.WriteLine("LLEGÓ A DAO PAQUETE");
+            List<Entidad> listaPaquetes = FabricaEntidad.asignarListaDeEntidades();
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            DateTime dt = new DateTime(2008, 3, 9, 16, 5, 7, 123);
+            Entidad paquete;
+            try
+            {
+                conexion.Open();
+                SqlCommand cmd = new SqlCommand("[dbo].[M11_ConsultarPaquetes]", conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                Debug.WriteLine("HIZO CONEXIÓN");
+                Debug.WriteLine("CMD.READER");
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                { 
+                      while (reader.Read())
+                    {
+                        String estado = reader["estado"].ToString();
+                        bool estadoPaquete;
+                        if (estado == "True")
+                            estadoPaquete = true;
+                        else
+                            estadoPaquete = false;
+                        /*var estadovar = reader["estado"];
+                        Boolean disponibilidad = Convert.ToBoolean(estadovar);*/
+                      
+                        paquete =  FabricaEntidad.InstanciarPaquete(Int32.Parse(reader["idPaquete"].ToString()), 
+                                                                    reader["nombrePaquete"].ToString(), 
+                                                                    float.Parse(reader["precio"].ToString()),
+                                                                    estadoPaquete);
+                          
+                        listaPaquetes.Add(paquete);
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                Debug.WriteLine("RETORNANDO LA LISTA DE PAQUETES");
+                return listaPaquetes;
+                
+                }
+            
+            catch (SqlException ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                Debug.WriteLine("UNA EXCEPCIÓN");
+                return null;
+            }
             
         }
     }

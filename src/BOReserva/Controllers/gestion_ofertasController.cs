@@ -29,13 +29,19 @@ namespace BOReserva.Controllers
         {
             return PartialView();
         }
-
+         /// <summary>
+        /// Método de la vista parcial M11_VisualizarPaquete
+         /// </summary>
+        /// <returns>Retorna la vista parcial M11_VisualizarPaquetes en conjunto del Modelo de dicha vista</returns>
         public ActionResult M11_VisualizarPaquete()
         {
-            manejadorSQL sql = new manejadorSQL();
+            Command<List<Entidad>> comando = FabricaComando.crearM11VisualizarPaquetes();
+            List<Entidad> listaPaquetes = comando.ejecutar();
+            return PartialView(listaPaquetes);
+            /*manejadorSQL sql = new manejadorSQL();
             List<CPaquete> paquetes = new List<CPaquete>();
             paquetes = sql.listarPaquetes();
-            return PartialView(paquetes);
+            return PartialView(paquetes);*/
         }
 
         public ActionResult M11_DetallePaquete(String paqueteIdStr)

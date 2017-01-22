@@ -550,6 +550,16 @@ namespace BOReserva.Controllers.PatronComando
             return new M11_COVisualizarOfertas();
 
         }
+        /// <summary>
+        /// Instancia el comando VisualizarPaquete
+        /// </summary>
+        /// <returns>Retorna la instancia del comando M11_COVisualizarPaquetes(); </returns>
+        public static Command<List<Entidad>> crearM11VisualizarPaquetes()
+        {
+
+            return new M11_COVisualizarPaquetes();
+
+        }
         #endregion
     }
         
