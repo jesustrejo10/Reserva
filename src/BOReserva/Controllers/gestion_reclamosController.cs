@@ -140,8 +140,7 @@ namespace BOReserva.Controllers
           {
               Command<String> comando1 = FabricaComando.crearM16EliminarReclamo(idReclamo);
               String borro_si_no = comando1.ejecutar();
-              Response.StatusCode = (int)HttpStatusCode.BadRequest;
-              return (Json("Se eliminó el reclamo exitosamente"));
+              return (Json("1"));
           }
       }
         /// <summary>
