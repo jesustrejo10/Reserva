@@ -83,6 +83,13 @@ namespace FOReserva.DataAccess.DataAccessObject
         }
         #endregion
 
+        #region Modulo 20
+        public static DAORevision CreateDAORevision()
+        {
+            return new DAORevision();
+        }
+        #endregion
+
         #region M22_Gestion_Reserva_Habitacion
         public static IDAOReservaHabitacion instanciarDaoReservaHabitacion()
         {
