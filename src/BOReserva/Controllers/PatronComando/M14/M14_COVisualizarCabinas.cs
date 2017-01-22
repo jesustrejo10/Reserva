@@ -12,15 +12,14 @@ namespace BOReserva.Controllers.PatronComando
     public class M14_COVisualizarCabinas : Command<Dictionary<int, Entidad>>
     {
 
-        int valor;
-
+        int valor;        
         public M14_COVisualizarCabinas(int value){
             this.valor = value;
-        }
+        }       
 
-        public override Dictionary<int, Entidad> ejecutar()
+        public M14_COVisualizarCabinas()
         {
-            throw new NotImplementedException();
+            // TODO: Complete member initialization
         }
 
         /// <summary>
@@ -30,12 +29,12 @@ namespace BOReserva.Controllers.PatronComando
         /// <returns>
         /// Retorna un Identity map, de tipo int, Entidad
         /// </returns>
-        //public override Dictionary<int, Entidad> ejecutar()
-        //{
-        //    IDAOCabina daoCabina = FabricaDAO.instanciarDaoCabina();
-        //    Dictionary<int, Entidad> mapCruceros = daoCabina.ConsultarTodos(valor);
-        //    return mapCruceros;
-        //}
+        public override Dictionary<int, Entidad> ejecutar()
+        {
+            IDAOCabina daoCabina = (IDAOCabina) FabricaDAO.instanciarDaoCabina();
+            Dictionary<int, Entidad> mapCruceros = daoCabina.ConsultarTodos(valor);
+            return mapCruceros;
+        }
 
     }
 }

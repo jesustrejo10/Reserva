@@ -1,5 +1,4 @@
-﻿using BOReserva.DataAccess.DAO;
-using BOReserva.DataAccess.DataAccessObject;
+﻿using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using System;
@@ -7,10 +6,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.Controllers.PatronComando
+namespace BOReserva.Controllers.PatronComando.M14
 {
-    public class M14_COVisualizarCruceros : Command<Dictionary<int, Entidad>>
+    public class M14_COListarCabinaCrucero : Command<Dictionary<int, Entidad>>
     {
+        string valor;
+
+        public M14_COListarCabinaCrucero(string crucero)
+        {
+            this.valor = crucero;
+        }
 
         /// <summary>
         /// Sobre escritura del metodo ejecutar de la clase Comando.
@@ -21,10 +26,10 @@ namespace BOReserva.Controllers.PatronComando
         /// </returns>
         public override Dictionary<int, Entidad> ejecutar()
         {
-            IDAO daoCrucero = FabricaDAO.instanciarDaoCrucero();
-            Dictionary<int, Entidad> mapCruceros = daoCrucero.ConsultarTodos();
+            IDAOCabina daoCabina = (IDAOCabina) FabricaDAO.instanciarDaoCabina();
+            Dictionary<int, Entidad> mapCruceros = daoCabina.ConsultarCabinasCrucero(valor);
             return mapCruceros;
         }
-        
+
     }
 }

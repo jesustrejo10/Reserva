@@ -77,7 +77,6 @@ namespace BOReserva.Excepciones
                     throw new LogException(RecursoLog.CodigoErrorLog, RecursoLog.MensajeErrorLog, new LogException());
                 }
             }
-
         }
     
 }

@@ -1,6 +1,8 @@
 ﻿using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
+using BOReserva.Excepciones;
+using BOReserva.Excepciones.M09;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,11 +15,20 @@ using System.Web;
 namespace BOReserva.DataAccess.DataAccessObject.M09
 
 {
+    /// <summary>
+    /// Clase para el manejo de los hoteles en la BD
+    /// </summary>
     public class DAOHotel:  DAO, IDAOHotel {
-
+        /// <summary>
+        /// Constructor del metodo
+        /// </summary>
         public DAOHotel() {}
 
-
+        /// <summary>
+        /// Metodo implementado de IDAO para agregar hoteles a la BD
+        /// </summary>
+        /// <param name="e">Hotel a agregar</param>
+        /// <returns>Retorna un valor entero</returns>
         int IDAO.Agregar(Entidad e)
         {
             List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
@@ -39,31 +50,56 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
             catch (SqlException ex)
             {
-                //M09_Exception exception = new M09_Exception(ex, M09_Exception.messageHelper(ex), this.GetType().ToString());
-                Debug.WriteLine("Ocurrio un SqlException");
-                Debug.WriteLine(ex.ToString());
-                return 2;
+                try{ Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (NullReferenceException ex)
             {
-                Debug.WriteLine("Ocurrio una NullReferenceException");
-                Debug.WriteLine(ex.ToString());
-                return 3;
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (ArgumentNullException ex)
             {
-                Debug.WriteLine("Ocurrio una ArgumentNullException");
-                Debug.WriteLine(ex.ToString());
-                return 4;
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Ocurrio una Exception");
-                Debug.WriteLine(ex.ToString());
-                return 5;
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
         }
 
+        /// <summary>
+        /// Metodo implementado de IDAO para modificar hoteles de la BD
+        /// </summary>
+        /// <param name="e">Hotel a modificar</param>
+        /// <returns>Retorna el hotel</returns>
         Entidad IDAO.Modificar(Entidad e)
         {
             Hotel hotel = (Hotel)e;
@@ -85,13 +121,56 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
             catch (SqlException ex)
             {
-              
-                hotel._nombre = ex.Message;
-                Entidad resultado = hotel;
-                return resultado;
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (NullReferenceException ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (ArgumentNullException ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (Exception ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
         }
 
+        /// <summary>
+        /// Metodo implementado de IDAO para consultar un hotel de la BD
+        /// </summary>
+        /// <param name="id">Id del hotel a buscar</param>
+        /// <returns>Retorna el hotel</returns>
         Entidad IDAO.Consultar(int id)
         {
             DataTable tablaDeDatos;
@@ -99,12 +178,12 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
 
             Pais pais;
             Ciudad ciudad;
-            Hotel hotel;
+            Hotel hotel = null;
             int idCiudad;
             String nombreCiudad;
             int idPais;
             String nombrePais;
-
+            int preciohab;
             int idHotel;
 
             try
@@ -121,7 +200,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
                     pais = new Pais(idPais, nombrePais);
 
                     idCiudad = Int32.Parse(row[RecursoDAOM09.id_ciudad].ToString());
-                    nombreCiudad = row[RecursoDAOM09.id_ciudad].ToString();
+                    nombreCiudad = row[RecursoDAOM09.nombre_ciudad].ToString();
                     ciudad = new Ciudad(idCiudad, nombreCiudad, pais);
 
                     idHotel = Int32.Parse(row["hot_id"].ToString());
@@ -137,17 +216,71 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
                             Int32.Parse(row["hot_disponibilidad"].ToString())
                             );
 
-                    return hotel;
+                    
                 }
-                return null;
+                parametro = FabricaDAO.asignarListaDeParametro();
+                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_id, SqlDbType.Int, id.ToString(), false));
+
+                tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM09.ProcedimientoConsultarHabitacion, parametro);
+
+                foreach (DataRow row in tablaDeDatos.Rows)
+                {
+                    preciohab = Int32.Parse(row[RecursoDAOM09.hab_precio].ToString());
+                    hotel._precio = preciohab;
+                }
+                return hotel;
             }
             catch (SqlException ex)
             {
-                Debug.WriteLine(ex.ToString());
-                return null;
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (NullReferenceException ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (ArgumentNullException ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (Exception ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
         }
 
+        /// <summary>
+        /// Metodo implementado de IDAO para consultar los hoteles de la BD
+        /// </summary>
+        /// <returns>Retorna el listado de hoteles</returns>
         Dictionary<int, Entidad> IDAO.ConsultarTodos()
         {
             Dictionary<int, Entidad> listaHoteles = new Dictionary<int, Entidad>();
@@ -176,7 +309,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
                     pais = new Pais(idPais, nombrePais);
 
                     idCiudad = Int32.Parse(row[RecursoDAOM09.id_ciudad].ToString());
-                    nombreCiudad = row[RecursoDAOM09.id_ciudad].ToString();
+                    nombreCiudad = row[RecursoDAOM09.nombre_ciudad].ToString();
                     ciudad = new Ciudad(idCiudad, nombreCiudad, pais);
 
                     idHotel = Int32.Parse(row["hot_id"].ToString());
@@ -198,11 +331,56 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
             catch (SqlException ex)
             {
-                Debug.WriteLine(ex.ToString());
-                return null;
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (NullReferenceException ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (ArgumentNullException ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (Exception ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
         }
 
+        /// <summary>
+        /// Metodo implementado de IDAO para eliminar hoteles de la BD
+        /// </summary>
+        /// <param name="id">Id del hotel a eliminar</param>
+        /// <returns>Retorna un string</returns>
         string IDAOHotel.eliminarHotel(int id)
         {
             List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
@@ -216,10 +394,57 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
             catch (SqlException ex)
             {
-                return ex.Message;
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (NullReferenceException ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (ArgumentNullException ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (Exception ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
         }
 
+        /// <summary>
+        /// Metodo implementado de IDAO para cambiar la disponibilidad de los hoteles de la BD
+        /// </summary>
+        /// <param name="e">Hotel a modificar</param>
+        /// <param name="disponibilidad">Estatus nuevo</param>
+        /// <returns></returns>
         string IDAOHotel.disponibilidadHotel(Entidad e, int disponibilidad)
         {
             Hotel hotel = (Hotel)e;
@@ -236,7 +461,48 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
             catch (SqlException ex)
             {
-                return ex.Message;
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (NullReferenceException ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (ArgumentNullException ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (Exception ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
         }
 
