@@ -697,6 +697,26 @@ namespace BOReserva.Controllers
                 return (Json(borro_si_no));
         }
 
+        public JsonResult activarPaquete(int id)
+        {
+                Command<Entidad> comando = FabricaComando.crearM11ConsultarPaquete(id);
+                Entidad paquete = comando.ejecutar();
+                Paquete paquetebuscado = (Paquete)paquete;
+                paquetebuscado._id = id;
+                Command<String> comando1 = FabricaComando.crearM11DisponibilidadPaquete(paquetebuscado, 1);
+                String borro_si_no = comando1.ejecutar();
+                return (Json(borro_si_no));
+        }
 
+        public JsonResult desactivarPaquete(int id)
+        {
+                Command<Entidad> comando = FabricaComando.crearM11ConsultarPaquete(id);
+                Entidad paquete = comando.ejecutar();
+                Paquete paquetebuscado = (Paquete)paquete;
+                paquetebuscado._id = id;
+                Command<String> comando1 = FabricaComando.crearM11DisponibilidadPaquete(paquetebuscado, 0);
+                String borro_si_no = comando1.ejecutar();
+                return (Json(borro_si_no));     
+        }
 	}
 }

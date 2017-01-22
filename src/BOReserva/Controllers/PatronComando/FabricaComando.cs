@@ -583,6 +583,21 @@ namespace BOReserva.Controllers.PatronComando
 
         }
 
+
+        public static Command<Entidad> crearM11ConsultarPaquete(int id)
+        {
+
+            return new M11_COConsultarPaquete(id);
+
+        }
+
+        public static Command<String> crearM11DisponibilidadPaquete(Entidad paquete, int disponibilidad)
+        {
+
+            return new M11_CODeshabilitarPaquete(paquete, disponibilidad);
+
+        }
+
         #endregion
 
     }
