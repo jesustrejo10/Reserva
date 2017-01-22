@@ -445,7 +445,7 @@ namespace BOReserva.Controllers
             }
         }*/
 
-        [HttpPost]
+      /*  [HttpPost]
         public JsonResult activarOferta(String ofertaIdStr)
         {
             int ofertaId = Int32.Parse(ofertaIdStr);
@@ -465,9 +465,9 @@ namespace BOReserva.Controllers
                 String error = "Error procesando la petición";
                 return Json(error);
             }
-        }
+        }*/
 
-        [HttpPost]
+     /*   [HttpPost]
         public JsonResult desactivarPaquete(String ofertaIdStr)
         {
             int paqueteId = Int32.Parse(ofertaIdStr);
@@ -487,9 +487,9 @@ namespace BOReserva.Controllers
                 String error = "Error procesando la petición";
                 return Json(error);
             }
-        }
+        }*/
 
-        [HttpPost]
+        /*[HttpPost]
         public JsonResult activarPaquete(String ofertaIdStr)
         {
             int paqueteId = Int32.Parse(ofertaIdStr);
@@ -509,7 +509,7 @@ namespace BOReserva.Controllers
                 String error = "Error procesando la petición";
                 return Json(error);
             }
-        }
+        }*/
 
 
         [HttpPost]
@@ -770,6 +770,39 @@ namespace BOReserva.Controllers
             Command<String> comando1 = FabricaComando.crearM11DisponibilidadOferta(ofertabuscada, 0);
             String borro_si_no = comando1.ejecutar();
             return (Json(borro_si_no));
+        }
+
+        public JsonResult activarOferta(int id)
+        {
+                Command<Entidad> comando = FabricaComando.crearM11ConsultarOferta(id);
+                Entidad oferta = comando.ejecutar();
+                Oferta ofertabuscada = (Oferta)oferta;
+                ofertabuscada._id = id;
+                Command<String> comando1 = FabricaComando.crearM11DisponibilidadOferta(ofertabuscada, 1);
+                String borro_si_no = comando1.ejecutar();
+                return (Json(borro_si_no));
+        }
+
+        public JsonResult activarPaquete(int id)
+        {
+                Command<Entidad> comando = FabricaComando.crearM11ConsultarPaquete(id);
+                Entidad paquete = comando.ejecutar();
+                Paquete paquetebuscado = (Paquete)paquete;
+                paquetebuscado._id = id;
+                Command<String> comando1 = FabricaComando.crearM11DisponibilidadPaquete(paquetebuscado, 1);
+                String borro_si_no = comando1.ejecutar();
+                return (Json(borro_si_no));
+        }
+
+        public JsonResult desactivarPaquete(int id)
+        {
+                Command<Entidad> comando = FabricaComando.crearM11ConsultarPaquete(id);
+                Entidad paquete = comando.ejecutar();
+                Paquete paquetebuscado = (Paquete)paquete;
+                paquetebuscado._id = id;
+                Command<String> comando1 = FabricaComando.crearM11DisponibilidadPaquete(paquetebuscado, 0);
+                String borro_si_no = comando1.ejecutar();
+                return (Json(borro_si_no));     
         }
 	}
 }

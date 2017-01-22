@@ -18,14 +18,11 @@ namespace BOReserva.Controllers.PatronComando.M16
             this._idReclamo = id;
         }
 
-        public override String ejecutar()
-        {
-            return "Eliminar Esto";
-        }
-        /*public override String ejecutar(){
-            IDAO daoReclamo = FabricaDAO.instanciarDaoReclamo();
+
+        public override String ejecutar(){
+            IDAOReclamo daoReclamo =  FabricaDAO.instanciarDaoReclamoPersonalizado();
             int respuesta = daoReclamo.Eliminar(_idReclamo);
             return respuesta.ToString();
-        }*/
+        }
     }
 }

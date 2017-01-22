@@ -321,7 +321,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
         /// </summary>
         /// <param name="_reserva"></param>
         /// <returns>Se retorna true de ser exitoso</returns>
-        public bool Modificar(Entidad _reserva)
+        public new bool Modificar(Entidad _reserva)
         {
             CReservaAutomovil resv = (CReservaAutomovil)_reserva;
             List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
@@ -337,7 +337,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fk_automovil, SqlDbType.VarChar, resv._idAutomovil, false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fk_ciudad_devolucion, SqlDbType.Int, resv._idLugarOri.ToString(), false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fk_ciudad_entrega, SqlDbType.Int, resv._idLugarDest.ToString(), false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_estatus, SqlDbType.Int, resv._estatus.ToString(),false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_estatus, SqlDbType.Int, resv._estatus.ToString(), false));
 
                 EjecutarStoredProcedure(RecursoDAOM19.procedimientoActualizar, listaParametro);
             }
@@ -356,17 +356,17 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
             throw new NotImplementedException();
         }
 
-        public Dictionary<int, Entidad> ConsultarTodos()
+        public new Dictionary<int, Entidad> ConsultarTodos()
         {
             throw new NotImplementedException();
         }
 
-        public int Agregar(Entidad e)
+        public new int Agregar(Entidad e)
         {
             throw new NotImplementedException();
         }
 
-        public Entidad Consultar(int id)
+        public Entidad onsultar(int id)
         {
             throw new NotImplementedException();
         }

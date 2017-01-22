@@ -11,14 +11,15 @@ namespace FOReserva.Models.ReservaHabitacion
     using Usuario = CUsuario;
     using Hotel = CHotel;
     using ORM;
+    using DataAccess.Domain;
 
-    public class CReservaHabitacion
+    public class CReservaHabitacion : Entidad
     {
         public enum EstadoReserva { Ocupando, Activo, Expiro, Cancelo, Revocado }
 
         public Hotel Hotel { get; set; }
         public Usuario Usuario { get; set; }
-        public int Codigo { get; set; }
+        public int ID { get { return this._id;  } set { this._id = value; } }
         public int Habitacion { get; set; }
         public System.DateTime FechaLlegada { get; set; }
 
@@ -53,36 +54,38 @@ namespace FOReserva.Models.ReservaHabitacion
             return null;
         }
 
-        public static CResultadoProceso GenerarReserva(Cvista_ReservarHabitacion reserva)
-        {
-            try
-            {
-                var resultado = from datos in DB.Singleton().M20_GenerarReservaHabitacion(reserva.HotId, reserva.UsuId, reserva.CantidadDias, reserva.FechaLlegada)
-                                select new CResultadoProceso {
-                                   CulminoCorrectamente = datos.Estatus == 0,
-                                   Estatus = datos.Referencia ?? -1,
-                                   Mensaje = datos.Mensaje,
-                                   Referencia = datos.Referencia ?? 0
-                                };
+        //public static CResultadoProceso GenerarReserva(Cvista_ReservarHabitacion reserva)
+        //{
+        //    try
+        //    {
+        //        var resultado = from datos in DB.Singleton().M20_GenerarReservaHabitacion(reserva.HotId, reserva.UsuId, reserva.CantidadDias, reserva.FechaLlegada)
+        //                        select new CResultadoProceso
+        //                        {
+        //                            CulminoCorrectamente = datos.Estatus == 0,
+        //                            Estatus = datos.Referencia ?? -1,
+        //                            Mensaje = datos.Mensaje,
+        //                            Referencia = datos.Referencia ?? 0
+        //                        };
 
-                return resultado.First();
-            }
-            catch (Exception ex)
-            {
-                Utilidad.RegistrarLog(new ReservaHabitacionException("Ocurrio un problema al obtener los hoteles.", ex));
-            }
-            return new CResultadoProceso {
-                CulminoCorrectamente = false,
-                Mensaje = "No se pudo ejecutar su solicitud.",
-                Referencia = 0
-            };
-        }
+        //        return resultado.First();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Utilidad.RegistrarLog(new ReservaHabitacionException("Ocurrio un problema al obtener los hoteles.", ex));
+        //    }
+        //    return new CResultadoProceso
+        //    {
+        //        CulminoCorrectamente = false,
+        //        Mensaje = "No se pudo ejecutar su solicitud.",
+        //        Referencia = 0
+        //    };
+        //}
 
         public static CResultadoProceso CancelarReserva(CReservaHabitacion reserva)
         {
             try
             {
-                var resultado = from datos in DB.Singleton().M20_ActualizarEstadoReservaHabitacion(reserva.Codigo, (int)EstadoReserva.Cancelo)
+                var resultado = from datos in DB.Singleton().M20_ActualizarEstadoReservaHabitacion(reserva.ID, (int)EstadoReserva.Cancelo)
                                 select new CResultadoProceso
                                 {
                                     CulminoCorrectamente = datos.Estatus == 0,
@@ -140,10 +143,10 @@ namespace FOReserva.Models.ReservaHabitacion
                                     },
                                     Usuario = new Usuario
                                     {
-                                        Codigo = datos.usu_id,
+                                        ID = datos.usu_id,
                                         Nombre = datos.fullname
                                     },
-                                    Codigo = datos.rha_id,
+                                    ID = datos.rha_id,
                                     Habitacion = datos.rha_habitacion,
                                     CantidadDias = datos.rha_cantidad_dias,
                                     FechaLlegada = datos.rha_fecha_llegada,
@@ -174,10 +177,10 @@ namespace FOReserva.Models.ReservaHabitacion
                                     },
                                     Usuario = new Usuario
                                     {
-                                        Codigo = datos.usu_id,
+                                        ID = datos.usu_id,
                                         Nombre = datos.fullname
                                     },
-                                    Codigo = datos.rha_id,
+                                    ID = datos.rha_id,
                                     Habitacion = datos.rha_habitacion,
                                     CantidadDias = datos.rha_cantidad_dias,
                                     FechaLlegada = datos.rha_fecha_llegada,
@@ -198,9 +201,9 @@ namespace FOReserva.Models.ReservaHabitacion
         {
             try
             {
-                if (this.Codigo < 1)
+                if (this.ID < 1)
                     throw new ReservaHabitacionException("Se requiere el Id de la reserva para cargar la informacion de la base de datos.");
-                var registro = from data in DB.Singleton().M20_DetalleReservaHabitacion(id_reserva: Codigo)
+                var registro = from data in DB.Singleton().M20_DetalleReservaHabitacion(id_reserva: ID)
                                select data;
                 var datos = registro.First();
                 if (datos != null)
@@ -212,7 +215,7 @@ namespace FOReserva.Models.ReservaHabitacion
                     };
                     this.Usuario = new Usuario
                     {
-                        Codigo = datos.usu_id,
+                        ID = datos.usu_id,
                         Nombre = datos.fullname
                     };
                     this.Habitacion = datos.rha_habitacion;
@@ -224,7 +227,7 @@ namespace FOReserva.Models.ReservaHabitacion
             }
             catch (Exception ex)
             {
-                Utilidad.RegistrarLog(new ReservaHabitacionException(String.Format("Ocurrio un problema al obtener la reserva con id ({0}).", Codigo), ex));
+                Utilidad.RegistrarLog(new ReservaHabitacionException(String.Format("Ocurrio un problema al obtener la reserva con id ({0}).", ID), ex));
             }
         }
 

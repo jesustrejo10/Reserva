@@ -42,6 +42,7 @@ namespace FOReserva.Servicio
             }
             CloseConnection();
         }
+
         public void ValidacionRegistroCliente(Ccliente cliente)
         {
             try
@@ -171,11 +172,11 @@ namespace FOReserva.Servicio
             }
             catch (ExisteUsuarioCorreoException e)
             {
-                throw new ExisteUsuarioCorreoException();
+                throw new ExisteUsuarioCorreoException(e);
             }
             catch (ClavesDiferentesException e)
             {
-                throw new ClavesDiferentesException();
+                throw new ClavesDiferentesException(e);
             }
             catch (SqlException S)
             {
@@ -349,12 +350,12 @@ namespace FOReserva.Servicio
                 System.Diagnostics.Debug.WriteLine(mapa["id_usuario"]);
             }
             catch (ExisteUsuarioCorreoException e) {
-                throw new ExisteUsuarioCorreoException();
+                throw new ExisteUsuarioCorreoException(e);
             }
             catch (SqlException e) {
                 throw e;
             }
-            catch (Exception e) {
+            catch (Exception) {
                 throw new Exception();
             }
 

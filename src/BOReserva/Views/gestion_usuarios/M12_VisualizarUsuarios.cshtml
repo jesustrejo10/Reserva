@@ -1,0 +1,279 @@
+﻿@*@{
+    var message = TempData["message"] ?? string.Empty;
+}
+<script>
+    var message = '@message';
+    if (message)
+        alert(message);
+</script>*@
+<link href="~/Content/Canvas/Box.css" rel="stylesheet" />
+<section class="content">
+    <form role="form" name="consultar" id="consultar">
+        <script language="javascript">
+            function doSearch() {
+                var tableReg = document.getElementById('example2');
+                var searchText = document.getElementById('searchTerm').value.toLowerCase();
+                for (var i = 1; i < tableReg.rows.length; i++) {
+                    var cellsOfRow = tableReg.rows[i].getElementsByTagName('td');
+                    var found = false;
+                    for (var j = 0; j < cellsOfRow.length && !found; j++) {
+                        var compareWith = cellsOfRow[j].innerHTML.toLowerCase();
+                        if (searchText.length == 0 || (compareWith.indexOf(searchText) > -1)) {
+                            found = true;
+                        }
+                    }
+                    if (found) {
+                        tableReg.rows[i].style.display = '';
+                    } else {
+                        tableReg.rows[i].style.display = 'none';
+                    }
+                }
+            }
+        </script>
+        <div class="row">
+            <link rel="stylesheet" href="~/Content/plugins/datatables/dataTables.bootstrap.css">
+            <div class="col-xs-10">
+                <div class="Cajita">
+                    <div class="box-header">
+                        <h3 class="box-title">Lista de Usuarios</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        @*<div style="float: right; padding-top: 5px;">
+                            <a style="margin-right: 10px;">Buscador</a>
+                            <input id="searchTerm" type="text" onkeyup="doSearch()" />
+                        </div>*@
+                        <table id="example2" class="table table-bordered table-striped">
+                            <thead>
+                                <tr style="font-size: 16px;">
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Email</th>
+                                    <th>Fecha de Creación</th>
+                                    <th>Rol</th>
+                                    <th>Status</th>
+                                    <th>Acciones</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @try
+                                {
+                                    foreach (var item in Model)
+                                    {
+                                        BOReserva.DataAccess.Domain.Usuario c = (BOReserva.DataAccess.Domain.Usuario) item.Value;
+                                        <tr id="@item.Key">
+                                            <td>@c.nombre</td>
+                                            <td>@c.apellido</td>
+                                            <td>@c.correo</td>
+                                            <td>@c.getDate()</td>
+                                            <td>@c.rolr._nombreRol</td>
+                                            <td>@c.activo</td>
+                                            <td>
+                                                <a href="#" title="Modificar" class="wait"><i class="fa fa-pencil modificar"></i></a>
+                                                <a href="#" title="Eliminar" class="wait"><i class="fa fa-times eliminar"></i></a>
+                                                @{
+                                        if (c.activo.Equals("Activo"))
+                                        {
+                                                        <a href="#" title="Inactivar Usuario" ><i class="fa fa-toggle-on desactivar"></i></a>
+                                        }
+                                        if (c.activo.Equals("Inactivo"))
+                                        {
+                                                        <a href="#" title="Activar Usuario"><i class="fa fa-toggle-off activar"></i></a>
+                                        }
+                                                }
+
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                catch
+                                {
+                                    <script>
+                                        alert("Error en el listado");
+                                     </script> 
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Email</th>
+                                    <th>Fecha de Creación</th>
+                                    <th>Rol</th>
+                                    <th>Status</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                        <div style="text-align: center;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $(".modificar").click(function () {
+            alert("Se esta procesando tu solicitud, por favor espere");
+            var identificador = $(this).parent().parent().parent().attr("id");
+            jQuery.ajax({
+                type: "GET",
+                url: "/gestion_usuarios/M12_ModificarUsuario2",
+                data: { id: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+            }).done(function (data) {
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            }).fail(function () {
+                alert("Error, por favor refresque la pagina")
+            });
+        });
+    });
+
+    $(document).ready(function () {
+        $(".eliminar").click(function () {
+            alert("Se esta procesando tu solicitud, por favor espere");
+            var identificador = $(this).parent().parent().parent().attr("id");
+            jQuery.ajax({
+                type: "POST",
+                url: "/gestion_usuarios/eliminarUsuario",
+                data: { usuID: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+            }).done(function (data) {
+                if (data === "1") {
+                    var url1 = '/gestion_usuarios/M12_VisualizarUsuarios';
+                    var method = 'GET';
+                    var data1 = '';
+
+                    $.ajax(
+                        {
+                            url: url1,
+                            type: method,
+                            data: data,
+                            success: function (data, textStatus, jqXHR) {
+                                $("#contenido").empty();
+                                $("#contenido").append(data);
+                                alert("Se elimino exitosamente el usuario");
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert(errorThrown);
+                            }
+                        });
+                } else if (data.includes("Reserva_Automovil")) {
+                    alert("No se puede eliminar este usuario");
+                } else {
+                    alert(data);
+                }
+            }).fail(function () {
+                alert("Error, por favor refresque la pagina")
+            });
+        });
+    });
+
+    $(document).ready(function () {
+        //e.preventDefault();
+        $(".activar").click(function () {
+            alert("Se esta procesando tu solicitud, por favor espere");
+            var identificador = $(this).parent().parent().parent().attr("id");
+            var status = "Activo";
+            jQuery.ajax({
+                type: "POST",
+                url: "/gestion_usuarios/inactivarUsuario",
+                data: { id: identificador, activo: status}//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+
+
+            }).done(function (data) {
+                if (data === "1") {
+
+                    //$("#sdssss").append(data);
+                    var url1 = '/gestion_usuarios/M12_VisualizarUsuarios';
+                    var method = 'GET';
+                    var data1 = '';
+
+                    $.ajax(
+                        {
+                            url: url1,
+                            type: method,
+                            data: data,
+                            success: function (data, textStatus, jqXHR) {
+
+                                $("#contenido").empty();
+                                $("#contenido").append(data);
+                                alert("Se cambio exitosamente el estatus del usuario");
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert(errorThrown);
+                            }
+                        });
+                } else {
+                    alert(data);
+                }
+            }).fail(function () {
+                alert("Error, por favor refresque la pagina")
+            });
+        });
+    });
+
+
+    $(document).ready(function () {
+        //e.preventDefault();
+        $(".desactivar").click(function () {
+            alert("Se esta procesando tu solicitud, por favor espere");
+            var identificador = $(this).parent().parent().parent().attr("id");
+            var status = "Inactivo";
+            jQuery.ajax({
+                type: "POST",
+                url: "/gestion_usuarios/activarUsuario",
+                data: { id: identificador, activo: status}//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+
+
+            }).done(function (data) {
+                if (data === "1") {
+
+                    //$("#sdssss").append(data);
+                    var url1 = '/gestion_usuarios/M12_VisualizarUsuarios';
+                    var method = 'GET';
+                    var data1 = '';
+
+                    $.ajax(
+                        {
+                            url: url1,
+                            type: method,
+                            data: data,
+                            success: function (data, textStatus, jqXHR) {
+
+                                $("#contenido").empty();
+                                $("#contenido").append(data);
+                                alert("Se cambio exitosamente el estatus del usuario");
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert(errorThrown);
+                            }
+                        });
+                } else {
+                    alert(data);
+                }
+            }).fail(function () {
+                alert("Error, por favor refresque la pagina")
+            });
+        });
+    });
+
+</script>
+
+<script src="~/Content/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+<script language="javascript" type="text/javascript">
+
+    table = $('#example2').DataTable();
+
+</script>
+
+
+
+
+

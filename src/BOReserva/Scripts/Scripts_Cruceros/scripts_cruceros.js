@@ -31,6 +31,29 @@ $("#fk_id_crucero").change(function (e) {
     });
 });
 
+//Función para cascade dropdown de camarote
+$("#crucero").change(function () {
+    var cID = $(crucero).val();
+    $.getJSON("gestion_cruceros/cargarCabinas", { crucero: cID },
+           function (data) {
+               var select = $("#cabina");
+               select.empty();
+               select.append($('<option/>', {
+                   value: 0,
+                   text: "Seleccione una cabina"
+               }));
+               $.each(data, function (index, itemData) {
+                   select.append($('<option/>', {
+                       value: itemData.Value,
+                       text: itemData.Text
+                   }));
+               });
+           });
+});
+
+
+
+
 //Funcion para cargar cb de cabinas
 $("#fk_id_crucero").change(function (e) {
     e.preventDefault();
