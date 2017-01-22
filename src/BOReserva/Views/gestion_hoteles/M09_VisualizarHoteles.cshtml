@@ -117,10 +117,14 @@
                 url: "/gestion_hoteles/M09_Detallehotel",
                 data: { id: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
             }).done(function (data) {
-                $("#contenido").empty();
-                $("#contenido").append(data);
+                if (!data.includes("Reserva-404")) {
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                } else {
+                    alert(data);
+                }
             }).fail(function () {
-                alert(data);
+                alert("Error, por favor refresque la pagina")
             });
         }));
     });
@@ -135,12 +139,14 @@
                 url: "/gestion_hoteles/M09_ModificarHotel",
                 data: { id: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
             }).done(function (data) {
-                //$("#sdssss").append(data);
-
-                $("#contenido").empty();
-                $("#contenido").append(data);
+                if (!data.includes("Reserva-404")) {
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                } else {
+                    alert(data);
+                }
             }).fail(function () {
-                alert(data);
+                alert("Error, por favor refresque la pagina")
             });
         });
     });
