@@ -16,6 +16,17 @@ namespace BOReserva.DataAccess.DataAccessObject
     public class DAOAutomovil : DAO, IDAOAutomovil
     {
 
+        #region Patron Singleton DAOAutomovil.
+        private static DAOAutomovil instance = null;
+
+        public static DAOAutomovil Singleton()
+        {
+            if (DAOAutomovil.instance == null)
+                DAOAutomovil.instance = (DAOAutomovil)FabricaDAO.CrearDaoAutomovil();
+            return DAOAutomovil.instance;
+        }
+        #endregion
+
         #region Generales de Automovil
 
         public bool ActivarDesactivar(Entidad e)
