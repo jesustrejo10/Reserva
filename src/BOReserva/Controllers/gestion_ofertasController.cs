@@ -302,7 +302,7 @@ namespace BOReserva.Controllers
             return Json("");
         }
 
-        [HttpPost]
+      /*  [HttpPost]
         public JsonResult desactivarOferta(String ofertaIdStr)
         {
             int ofertaId = Int32.Parse(ofertaIdStr);
@@ -322,7 +322,7 @@ namespace BOReserva.Controllers
                 String error = "Error procesando la petición";
                 return Json(error);
             }
-        }
+        }*/
 
         [HttpPost]
         public JsonResult activarOferta(String ofertaIdStr)
@@ -666,6 +666,18 @@ namespace BOReserva.Controllers
             sql.modificarPaquete(paquete);
 
             return Json(true);
+        }
+
+        [HttpPost]
+        public JsonResult desactivarOferta(int id)
+        {
+            Command<Entidad> comando = FabricaComando.crearM11ConsultarOferta(id);
+            Entidad oferta = comando.ejecutar();
+            Oferta ofertabuscada = (Oferta)oferta;
+            ofertabuscada._id = id;
+            Command<String> comando1 = FabricaComando.crearM11DisponibilidadOferta(ofertabuscada, 0);
+            String borro_si_no = comando1.ejecutar();
+            return (Json(borro_si_no));
         }
 	}
 }

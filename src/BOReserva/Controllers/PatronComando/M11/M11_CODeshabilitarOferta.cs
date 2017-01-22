@@ -15,18 +15,18 @@ namespace BOReserva.Controllers.PatronComando.M11
     public class M11_CODeshabilitarOferta: Command<String>
     {
         Oferta _oferta;
-        int _idmodificar;
+        int _estadoOferta;
 
-        public M11_CODeshabilitarOferta(Entidad oferta, int id)
+        public M11_CODeshabilitarOferta(Entidad oferta, int estadoOferta)
         { 
             this._oferta = (Oferta) oferta;
-            this._oferta._id = id;
+            this._estadoOferta = estadoOferta;
         }
 
         public override String ejecutar()
         {
-            DAOOferta daoOferta = (DAOOferta)FabricaDAO.instanciarDaoOferta();
-            String test = daoOferta.eliminarOferta(_oferta._id);
+            IDAOOferta daoOferta = (DAOOferta)FabricaDAO.instanciarDaoOferta();
+            String test = daoOferta.disponibilidadOferta(_oferta, _estadoOferta);
             return test;
         } 
 
