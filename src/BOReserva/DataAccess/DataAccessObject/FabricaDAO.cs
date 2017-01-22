@@ -101,7 +101,7 @@ namespace BOReserva.DataAccess.DataAccessObject
         }
         #endregion
 
-        # region M05_Boleto
+        # region M05_Boleto y checkIn
 
         public static DAO instanciarDaoPasajero()
         {
@@ -112,6 +112,11 @@ namespace BOReserva.DataAccess.DataAccessObject
         {
             return new DAOBoleto();
 		}
+
+        public static DAO instanciarDaoCheckIn()
+        {
+            return new DAOChecking();
+        }
         #endregion
 
         #region M08_Automoviles
