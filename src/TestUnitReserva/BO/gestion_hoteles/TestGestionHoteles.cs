@@ -28,6 +28,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
         private Ciudad mockCiudad;
         private Hotel mockHotel;
         private Hotel mockHotell;
+        private Hotel mockHotel2;
         DAOHotel daoHotel;
         
 
@@ -91,7 +92,8 @@ namespace TestUnitReserva.BO.gestion_hoteles
        public void M09_DaoHotelEliminar()
         {
 
-            IDAO pruebadao = (IDAO)daoHotel;
+            IDAOHotel pruebadao = (IDAOHotel)daoHotel;
+            
 
             /*
 >>>>>>> fc35b8d09d2d782b82e3c6aaccec715a86f7b23d
@@ -291,30 +293,38 @@ namespace TestUnitReserva.BO.gestion_hoteles
         public void CVerHotel()
         {
             CVerHotel prueba = new CVerHotel();
-            //seguir 
+            prueba._capacidadHabitacion = 4;
+            prueba._ciudad = "Caracas";
+            prueba._clasificacion = 5;
+            prueba._direccion = "prueba";
+            prueba._email = "email@email.com";
+            prueba._nombre = "prueba";
+            prueba._paginaWeb = "www.prueba.com";
+            prueba._pais = "venezuela";
+            prueba._precioHabitacion = 200;
+            Assert.AreEqual(prueba._capacidadHabitacion, 4);
+            Assert.AreEqual(prueba._ciudad, "Caracas");
+            Assert.AreEqual(prueba._nombre, "prueba");
+            Assert.AreEqual(prueba._paginaWeb, "www.prueba.com");
+            Assert.AreEqual(prueba._email, "email@gmail.com");
+            Assert.AreEqual(prueba._direccion, "prueba");
+            Assert.AreEqual(prueba._clasificacion, 5);
+            Assert.AreEqual(prueba._pais, "Venezuela");
             
         }
          //controller/patron comando/M09
 
-        [Test]
-        public void IM09_COObtenerPaises()
-        {
-                
-                
-        }
 
-
-        [Test]
-        public void M09COAgregarHanitacion()
-        {
-                        
-        }
         [Test]
 
         public void M09_AgregarHotel()
         {
-            M09_COAgregarHotel prueba = new M09_COAgregarHotel(mockHotel,200);
-           String  prueba1= prueba.ejecutar();
+            M09_COAgregarHotel prueba = new M09_COAgregarHotel(mockHotell,200);
+          
+            String  prueba1= prueba.ejecutar();
+           //probar
+            M09_COEliminarHotel pruebaf = new M09_COEliminarHotel(mockHotell, 999);
+            pruebaf.ejecutar();
       
         }
         [Test]
@@ -322,12 +332,16 @@ namespace TestUnitReserva.BO.gestion_hoteles
         {
             M09_COConsultarHotel prueba = new M09_COConsultarHotel(10);
             Entidad hotel =prueba.ejecutar();
+            Assert.AreEqual(hotel, "1");
+            //prueba fallida
         }
         [Test]
         public void M09_CODisponibilidadHotel()
         {
             M09_CODisponibilidadHotel prueba = new M09_CODisponibilidadHotel(mockHotel,0);
             String test =  prueba.ejecutar();
+            Assert.AreEqual(test, "1");
+            //fallida
 
         }
         [Test]
@@ -336,6 +350,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
             daoHotel.Agregar(mockHotell);
             M09_COEliminarHotel prueba = new M09_COEliminarHotel(mockHotell,999);
             String test =  prueba.ejecutar();
+            Assert.AreEqual(test, "1");
 
         
         }
@@ -343,11 +358,20 @@ namespace TestUnitReserva.BO.gestion_hoteles
         public void M09_COModificarHotel()
         { 
             daoHotel.Agregar(mockHotell);
-            M09_COModificarHotel prueba = new M09_COModificarHotel(mockHotell, 999);
+            mockHotel2 = new Hotel(999, "HOtel desde p", "hotel", "hotel", "hotel", 1, 1, mockCiudad);
+            M09_COModificarHotel prueba = new M09_COModificarHotel(mockHotel2, 999);
             String nombre =prueba.ejecutar();
+            Assert.AreEqual(nombre, "1");
+
             M09_COEliminarHotel prueba1 = new M09_COEliminarHotel(mockHotell, 999);
             prueba1.ejecutar();
         }
+        //Faltaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+
+        /// <summary>
+        /// 
+        /// </summary>
         [Test]
         public void M09_COObtenerpaises()
         {
@@ -360,6 +384,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
         {
             M09_COVisualizarHoteles prueba = new M09_COVisualizarHoteles();
             Dictionary<int, Entidad> mapHoteles = prueba.ejecutar();
+           // Assert.True();
         
         }
         //controller 
