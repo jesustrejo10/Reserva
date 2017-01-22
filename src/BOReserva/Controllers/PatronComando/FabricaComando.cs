@@ -299,6 +299,23 @@ namespace BOReserva.Controllers.PatronComando
             return new M14_COAgregarCrucero((Crucero) e);
         }
 
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M09_COModificarHoteles
+        /// </summary>
+        /// <param name="hotel">Hotel a modificar</param>
+        /// <param name="idmodificar">Identificador del hotel a modificar</param>
+        /// <returns>
+        /// Retorna la instancia del comando M09_COModificarHoteles.
+        /// </returns>
+        public static Command<String> crearM14ModificarCrucero(Entidad hotel, int idmodificar)
+        {
+
+            return new M14_COModificarCrucero(hotel, idmodificar);
+
+        }
+
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
         /// M14_COAgregarCrucero

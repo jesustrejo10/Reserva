@@ -411,5 +411,29 @@ namespace BOReserva.Controllers
                 return null;
             }
         }
+
+        /// <summary>
+        /// Método que se utiliza para modificar un hotel
+        /// </summary>
+        /// <param name="model">Datos que provienen de un formulario de la vista parcial M09_ModificarHotel</param>
+        /// <returns>Retorna un JsonResult</returns>
+        [HttpPost]
+        public JsonResult modificarCrucero(CGestion_crucero model)
+        {
+            try
+            {
+                Entidad modificarCrucero = FabricaEntidad.InstanciarCrucero(model);
+                //con la fabrica instancie al Crucero.
+                Command<String> comando = FabricaComando.crearM14ModificarCrucero(modificarCrucero, idCrucero);
+                String agrego_si_no = comando.ejecutar();
+
+                return (Json(agrego_si_no));
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
     }
 }

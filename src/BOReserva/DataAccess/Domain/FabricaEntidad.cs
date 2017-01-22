@@ -367,32 +367,6 @@ namespace BOReserva.DataAccess.Domain
             return new Permiso();
         }
 
-        
-        
-        #region M14 Cruceros
-        public static Entidad InstanciarCrucero(CGestion_crucero crucero)
-        {
-
-            return new Crucero(crucero._idCrucero, crucero._nombreCrucero, crucero._companiaCrucero, crucero._capacidadCrucero, crucero._estatus);
-        }    
-
-        //instancia cabina con nombre de crucero, no con FK
-
-        public static Entidad InstanciarCabinaN(CGestion_cabina cabina)
-        {
-            return new Cabina(cabina._idCabina,cabina._nombreCabina,cabina._precioCabina,cabina._estatus,cabina._fkCrucero);
-        }
-
-        public static Entidad InstanciarCamaroteN(CGestion_camarote camarote)
-        {
-            return new Camarote(camarote._idCamarote,camarote._cantidadCama,camarote._tipoCama,camarote._estatus,camarote._cabinaNombre);
-        }
-
-
-        #endregion
-
-            
-
         public static Entidad crearRol(int id, String nombre)
         {
             return new Rol(id, nombre);
@@ -455,6 +429,35 @@ namespace BOReserva.DataAccess.Domain
         {
             return new Modulo(id, nombre);
         }
+        #endregion
+
+        #region M14 Cruceros
+
+        /// <summary>
+        /// Clase que instacia un Crucero
+        /// </summary>
+        /// <param name="model">Modelo proveniente de la vista M14_AgregarCrucero y M14_modificarCrucero</param>
+        /// <param name="c">Modelo del Crucero</param>
+        /// <returns></returns>
+        public static Entidad InstanciarCrucero(CGestion_crucero crucero)
+        {
+
+            return new Crucero(crucero._idCrucero, crucero._nombreCrucero, crucero._companiaCrucero, crucero._capacidadCrucero, crucero._estatus);
+        }
+
+        //instancia cabina con nombre de crucero, no con FK
+
+        public static Entidad InstanciarCabinaN(CGestion_cabina cabina)
+        {
+            return new Cabina(cabina._idCabina, cabina._nombreCabina, cabina._precioCabina, cabina._estatus, cabina._fkCrucero);
+        }
+
+        public static Entidad InstanciarCamaroteN(CGestion_camarote camarote)
+        {
+            return new Camarote(camarote._idCamarote, camarote._cantidadCama, camarote._tipoCama, camarote._estatus, camarote._cabinaNombre);
+        }
+
+
         #endregion
 
         #region M06 GESTION COMIDA

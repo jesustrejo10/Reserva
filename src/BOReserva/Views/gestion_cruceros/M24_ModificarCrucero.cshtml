@@ -34,11 +34,11 @@
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <label for="modelo">Capacidad(<span style="color:red">*</span>)</label>
-                                @Html.TextBoxFor(m => m._capacidadCrucero, Model._capacidadCrucero.ToString(), new { @class = "form-control", @id = "cru_nombre" })
+                                @Html.TextBoxFor(m => m._capacidadCrucero, Model._capacidadCrucero.ToString(), new { @class = "form-control", @id = "cru_capacidad" })
                             </div>
                             <div class="col-xs-6">
                                 <label for="anio">Estado(<span style="color:red">*</span>)</label>
-                                @Html.TextBoxFor(m => m._estatus, Model._estatus, new { @class = "form-control", @id = "cru_nombre" })
+                                @Html.TextBoxFor(m => m._estatus, Model._estatus, new { @class = "form-control", @id = "cru_estado" })
                             </div>
                         </div>
                         <div>&nbsp;</div>
@@ -48,7 +48,7 @@
                                 <button id="cancel_modification" type="button" class="btn btn-danger" style="display:block; margin-left:auto; margin-right:auto;">Cancelar</button>
                             </div>
                             <div class="col-md-2">
-                                <button type="submit" id="modify_hotel" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                                <button type="submit" id="modificar_crucero" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
                             </div>
                             <div class="col-md-4"></div>
                         </div>

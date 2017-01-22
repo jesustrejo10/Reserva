@@ -92,6 +92,43 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
         }
 
+
+        /// <summary>
+        /// Metodo implementado de IDAO para modificar cruceros de la BD
+        /// </summary>
+        /// <param name="e">Crucero a modificar</param>
+        /// <returns>Retorna el Crucero</returns>
+        Entidad IDAO.Modificar(Entidad e)
+        {
+            SqlConnection con = Connection.getInstance(_connexionString);
+            Crucero crucero = (Crucero)e;
+
+            try
+            {
+                con.Open();
+
+                SqlCommand query = new SqlCommand("M24_ModificarCrucero", con);
+
+                query.CommandType = CommandType.StoredProcedure;
+                    query.Parameters.AddWithValue("@idCrucero", crucero._id);
+                query.Parameters.AddWithValue("@nombrecrucero", crucero._nombreCrucero);
+                query.Parameters.AddWithValue("@compania", crucero._companiaCrucero);
+                query.Parameters.AddWithValue("@capacidad", crucero._capacidadCrucero);
+
+                query.ExecuteNonQuery();
+
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                SqlDataReader lector = query.ExecuteReader();
+                lector.Close();
+                con.Close();
+                return crucero;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
         Dictionary<int, Entidad> IDAO.ConsultarTodos()
         {
             //List<Crucero> listavehiculos = new List<Crucero>();
