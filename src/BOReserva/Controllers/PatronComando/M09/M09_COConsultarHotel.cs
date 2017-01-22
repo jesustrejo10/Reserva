@@ -16,7 +16,6 @@ namespace BOReserva.Controllers.PatronComando.M09
             this.valor = value;
         }
 
-
         ///// <summary>
         ///// Sobre escritura del metodo ejecutar de la clase Comando.
         ///// Se encarga de llamar al DAO y devolver la respuesta al controlador.

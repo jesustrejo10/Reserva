@@ -5,6 +5,11 @@ using System.Web;
 
 namespace BOReserva.Models.gestion_aviones
 {
+
+
+    /// <summary>
+    /// Clase de tipo Avion
+    /// </summary>
     public class CAvion
     {
         public int _id { get; set; }
@@ -20,7 +25,14 @@ namespace BOReserva.Models.gestion_aviones
         public int _disponibilidad { get; set; }
 
 
+        /// <summary>
+        /// Constructor de la clase
+        /// </summary>
         public CAvion() { }
+
+        /// <summary>
+        /// Constructor de la clase para almacenar objeto
+        /// </summary>
         public CAvion (int id, string matricula, string modelo, int capacidadTurista, int capacidadEjecutiva, int capacidadVIP, float capacidadEquipaje, float distanciaMaximaVuelo, float velocidadMaxima, float capacidadCombustible, int disponibilidad)
         {
             _id = id;
