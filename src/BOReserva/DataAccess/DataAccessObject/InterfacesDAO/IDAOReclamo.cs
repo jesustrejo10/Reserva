@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
 {
-    interface IDAOReclamo : IDAO
+    public interface IDAOReclamo : IDAO
     {
+        int modificarEstado(int id, int estado);
+        int Eliminar(int id);
     }
 }

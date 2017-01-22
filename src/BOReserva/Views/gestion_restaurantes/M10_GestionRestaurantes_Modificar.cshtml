@@ -74,7 +74,7 @@ $(document).ready(function() {
                                     <!-- Lista ciudad del Restaurant-->
                                     <div class="col-xs-6">
                                         <label for="ciudad">Ciudad(<span style="color:red">*</span>):</label>
-                                        @Html.DropDownList("ComboLugar", ViewBag.Ciudad as SelectList, "Ciudades", new { @class = "form-control" })
+                                        @Html.DropDownList("ComboLugar", ViewBag.Ciudad as SelectList, null, new { @class = "form-control" })
                                     </div>
 
                                     <!-- Hora de apertura del Restaurant-->

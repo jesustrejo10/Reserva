@@ -62,7 +62,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
         }
 
-        int IDAO.Eliminar(int id) {
+        int IDAOBoleto.EliminarBoleto(int id) {
             try
             {
                 SqlConnection conexion = Connection.getInstance(_connexionString);
@@ -246,21 +246,50 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
         }
 
-       
+        List<Entidad> IDAOBoleto.ConsultarBoletos(int _id)
+        {
+            List<Entidad> listaboletos = new List<Entidad>();
+            SqlConnection conexion = null;
+            try
+            {
+                conexion = Connection.getInstance(_connexionString);
+                conexion.Open();
+                String sql;
+                if (_id == -1)
+                     sql = "SELECT * FROM Boleto";
+                else
+                    sql = "SELECT * FROM Boleto WHERE bol_fk_pasajero = " + _id + "";
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var fecha = reader["bol_fecha"];
+                        DateTime fechaboleto = Convert.ToDateTime(fecha).Date;
+                        Boleto boleto = new Boleto(Int32.Parse(reader["bol_id"].ToString()), Int32.Parse(reader["bol_ida_vuelta"].ToString()),
+                                               Int32.Parse(reader["bol_escala"].ToString()), double.Parse(reader["bol_costo"].ToString()),
+                                               MBuscarnombreciudad(Int32.Parse(reader["bol_fk_lugar_origen"].ToString())),
+                                               MBuscarnombreciudad(Int32.Parse(reader["bol_fk_lugar_destino"].ToString())),
+                                               MBuscarnombrepasajero(Int32.Parse(reader["bol_fk_pasajero"].ToString())),
+                                               MBuscarapellidopasajero(Int32.Parse(reader["bol_fk_pasajero"].ToString())), fechaboleto,
+                                               Int32.Parse(reader["bol_fk_pasajero"].ToString()), reader.GetInt32(reader.GetOrdinal("bol_fk_lugar_origen")),
+                                               reader.GetInt32(reader.GetOrdinal("bol_fk_lugar_destino")),
+                                               reader["bol_tipo_boleto"].ToString(),
+                                               MBuscarcorreopasajero(Int32.Parse(reader["bol_fk_pasajero"].ToString())));
+                        listaboletos.Add(boleto);
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return listaboletos;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return null;
+            }
+        }
 
         public List<BoletoVuelo> M05ListarVuelosBoleto(int id_boleto)
         {
@@ -355,7 +384,6 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
         }
 
-
         public Pasajero MBuscarDatosPasajero(int id)
         {
             Pasajero pas = null;
@@ -388,6 +416,84 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
         }
 
+        public String MBuscarnombrepasajero(int id)
+        {
+            String _nombre = "";
+            try
+            {
+                SqlConnection con = new SqlConnection(_connexionString);
+                con.Open();
+                String sql = "SELECT pas_primer_nombre FROM Pasajero WHERE pas_id = '" + id + "'";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        _nombre = reader[0].ToString();
+                    }
+                }
+                cmd.Dispose();
+                con.Close();
+                return _nombre;
+            }
+            catch (SqlException)
+            {
+                return _nombre;
+            }
+        }
+
+        public String MBuscarapellidopasajero(int id)
+        {
+            String _apellido = "";
+            try
+            {
+                SqlConnection con = new SqlConnection(_connexionString);
+                con.Open();
+                String sql = "SELECT pas_primer_apellido FROM Pasajero WHERE pas_id = '" + id + "'";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        _apellido = reader[0].ToString();
+                    }
+                }
+                cmd.Dispose();
+                con.Close();
+                return _apellido;
+            }
+            catch (SqlException)
+            {
+                return _apellido;
+            }
+        }
+
+        public String MBuscarcorreopasajero(int id)
+        {
+            String _correo = "";
+            try
+            {
+                SqlConnection con = new SqlConnection(_connexionString);
+                con.Open();
+                String sql = "SELECT pas_correo FROM Pasajero WHERE pas_id = '" + id + "'";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        _correo = reader[0].ToString();
+                    }
+                }
+                cmd.Dispose();
+                con.Close();
+                return _correo;
+            }
+            catch (SqlException ex)
+            {
+                return _correo;
+            }
+        }
+
         public String MBuscarnombreciudad(int id)
         {
             String _ciudad = "No aplica";
@@ -408,19 +514,11 @@ namespace BOReserva.DataAccess.DataAccessObject
                 con.Close();
                 return _ciudad;
             }
-            catch (SqlException ex)
+            catch (SqlException)
             {
                 return _ciudad;
             }
         }
-
-
-
-
-
-
-
-
 
     }
 }

@@ -10,6 +10,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 
 namespace BOReserva.DataAccess.DataAccessObject
 
@@ -19,6 +20,33 @@ namespace BOReserva.DataAccess.DataAccessObject
     /// </summary>
     public class FabricaDAO
     {
+        #region Lugar ( DAOLugar - DAOPais - DAOCiudad ) 
+
+        public static DAO instanciarDaoLugar()
+        {
+            return new DAOLugar();
+        }
+
+        /// <summary>
+        /// Metodo que instacia DAOPais
+        /// </summary>
+        /// <returns>Retorna DAOPais</returns>
+        public static DAO instanciarDaoPais()
+        {
+            return new DAOPais();
+        }
+
+        /// <summary>
+        /// Metodo que instacia DAOCiudad
+        /// </summary>
+        /// <returns>Retorna DAOCiudad</returns>
+        public static DAO instanciarDaoCiudad()
+        {
+            return new DAOCiudad();
+        }
+
+        #endregion
+
         #region M01_Login
         public static DAO instanciarDaoLogin()
         {
@@ -36,37 +64,30 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAOHotel();
         }
 
-        /// <summary>
-        /// Metodo que instacia DAOPais
-        /// </summary>
-        /// <returns>Retorna DAOPais</returns>
-        public static DAO instanciarDaoPais() {
-            return new DAOPais();
-        }
-
-        /// <summary>
-        /// Metodo que instacia DAOCiudad
-        /// </summary>
-        /// <returns>Retorna DAOCiudad</returns>
-        public static DAO instanciarDaoCiudad()
-        {
-            return new DAOCiudad();
-        }
+        
 
         /// <summary>
         /// Metodo que instacia DAOHabitacion
         /// </summary>
         /// <returns>Retorna DAOHabitacion</returns>
         public static DAOHabitacion instanciarDaoHabitacion()
+
         {
             return new DAOHabitacion();
         }
         #endregion
 
+        #region M16_Gestion_Reclamos
         public static DAO instanciarDaoReclamo() 
         {
             return new DAOReclamo();
         }
+
+        public static IDAOReclamo instanciarDaoReclamoPersonalizado()
+        {
+            return new DAOReclamo();
+        }
+        #endregion
 
         #region M04_Vuelos
         /// <summary>
@@ -98,12 +119,6 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAOAutomovil();
         }
         #endregion
-
-        public static DAO instanciarDaoLugar()
-        {
-            return new DAOLugar();
-        }
-
 			
         #region Modulo 10
         /// <summary>
@@ -122,7 +137,7 @@ namespace BOReserva.DataAccess.DataAccessObject
         public static List<String> listarHorario()
         {
             return new List<String>
-            { "","07:00", "08:00", "09:00", "10:00", "11:00",
+            { "07:00", "08:00", "09:00", "10:00", "11:00",
               "12:00", "13:00", "14:00", "15:00", "16:00",
               "17:00", "18:00", "19:00", "20:00", "21:00",
               "22:00", "23:00", "00:00"
@@ -171,13 +186,22 @@ namespace BOReserva.DataAccess.DataAccessObject
         {
             return new DAORol();
         }
-        public static DAORol instanciarDAORolPermiso()
-        {
-            return new DAORol();
-        }
         #endregion
+        
+        #region M14_Cruceros
+        //public static DAO instanciarDaoCrucero()
+        //{
+        //    //return new DAOCruceros();
+        //    return new DAOCrucero();
+        //}
 
+        //public static DAOCabina instanciarDaoCabina()
+        //{
+        //    return new DAOCabina();
+        //}
 
+        #endregion
+    
         #region M06 GESTION DE COMIDA
 
         public static DAOComida instanciarComida()
@@ -186,5 +210,15 @@ namespace BOReserva.DataAccess.DataAccessObject
         }
 
         #endregion
+
+        #region M02_Gestion_Avion
+
+        public static DAO instanciarDaoAvion()
+        {
+            return new DAOAvion();
+        }
+
+        #endregion
     }
+
 }

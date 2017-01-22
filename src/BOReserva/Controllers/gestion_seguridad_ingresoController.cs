@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using log4net;
 using log4net.Config;
 using BOReserva.DataAccess.Domain;
+using BOReserva.Excepciones;
 
 namespace BOReserva.Controllers
 {
@@ -68,6 +69,10 @@ namespace BOReserva.Controllers
                 }
               
             }
+            catch(ExceptionReserva e)
+            {
+                TempData["Mensaje"] = e.Message;
+            }
             catch (Cvalidar_usuario_Exception e)
             {
                 TempData["Mensaje"] = e.Message;
@@ -85,7 +90,10 @@ namespace BOReserva.Controllers
             {
                 TempData["Mensaje"] = "Conexion fallida a Base de Datos Contacte Administrador";
             }
-            catch (Exception e) { } 
+            catch (Exception e)
+            {
+                TempData["Mensaje"] = "Otra excepcion: " + e.Message;
+            } 
             return RedirectToAction("M01_Login", "gestion_seguridad_ingreso");
         }
 

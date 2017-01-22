@@ -7,6 +7,9 @@ using System.Web;
 
 namespace BOReserva.M10.Comando.gestion_restaurantes
 {
+    /// <summary>
+    /// Clase comando para cargar los Horarios de los Restaurante
+    /// </summary>
     public class M10_COCargarHorario : Command<List<String>>
     {
         /// <summary>

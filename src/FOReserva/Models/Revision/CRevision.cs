@@ -9,7 +9,7 @@ namespace FOReserva.Models.Revision
     /// Clase Revision
     /// </summary>
     public class CRevision : BaseEntity
-    {        
+    {
         private int _puntuacion;
         private string _mensaje;
         private int _tipo;
@@ -30,17 +30,17 @@ namespace FOReserva.Models.Revision
         public CRevision(int id, string name, DateTime fecha, string mensaje, int puntuacion, int tipo)
             : base(id, name)
         {
-             this._fecha = fecha;
-             this._mensaje = mensaje;
-             this._puntuacion = puntuacion;
-             this._tipo = tipo;
-             this._valoracion = new CRevisionValoracion(0,0);
+            this._fecha = fecha;
+            this._mensaje = mensaje;
+            this._puntuacion = puntuacion;
+            this._tipo = tipo;
+            this._valoracion = new CRevisionValoracion(0, 0);
         }
 
         /// <summary>
         /// Builder Revision Vacio
         /// </summary>
-        public CRevision() : base(){}
+        public CRevision() : base() { }
 
         public DateTime Fecha
         {

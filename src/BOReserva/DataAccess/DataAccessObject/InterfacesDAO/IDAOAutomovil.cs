@@ -9,7 +9,11 @@ namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
 {
     interface IDAOAutomovil : IDAO
     {
-        int Activar(Entidad e);
-        int Desactivar(Entidad e);
+        bool ActivarDesactivar(Entidad e);
+        bool Agregar(Entidad e);
+        bool Modificar(Entidad e);
+        bool Eliminar(Entidad e);
+        Entidad Consultar(Entidad e);
+        List<Entidad> ConsultarTodos();
     }
 }

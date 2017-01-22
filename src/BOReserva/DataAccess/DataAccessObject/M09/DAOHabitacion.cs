@@ -44,15 +44,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Metodo proveniente de IDAO (No aplica)
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>Retorna NotImplementedException()</returns>
-        int IDAO.Eliminar(int id)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         /// <summary>
         /// Metodo proveniente de IDAO (No aplica)
@@ -120,5 +112,6 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
                 return ex.Message;
             }
         }
+
     }
 }

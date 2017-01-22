@@ -5,7 +5,7 @@ using System.Web;
 
 namespace BOReserva.DataAccess.Domain
 {
-    public class Usuario :Entidad
+    public class Usuario : Entidad
     {
         public int id { get; set; }
         public int rol { get; set; }
@@ -14,6 +14,7 @@ namespace BOReserva.DataAccess.Domain
         public String correo { get; set; }
         public String clave { get; set; }
         public String fechaCreacion { get; set; }
+        public String activo { get; set; }
 
         public Usuario()
         {

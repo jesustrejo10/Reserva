@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.Controllers.PatronComando.M09
+namespace BOReserva.Controllers.PatronComando
 {
     public class M05_COConsultarBoleto: Command<Entidad>
     {
@@ -16,8 +16,7 @@ namespace BOReserva.Controllers.PatronComando.M09
         {
             this.valor = value;
         }
-
-
+        
         ///// <summary>
         ///// Sobre escritura del metodo ejecutar de la clase Comando.
         ///// Se encarga de llamar al DAO y devolver la respuesta al controlador.
