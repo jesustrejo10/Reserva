@@ -245,8 +245,7 @@ namespace BOReserva.DataAccess.Domain
         /// </summary>
         /// <param name="id"></param>
         /// <param name="codigoVuelo"></param>
-        /// <param name="ciudadOrigen"></param>
-        /// <param name="ciudadDestino"></param>
+        /// <param name="ruta"></param>
         /// <param name="fechaDespegue"></param>
         /// <param name="status"></param>
         /// <param name="fechaAterrizaje"></param>

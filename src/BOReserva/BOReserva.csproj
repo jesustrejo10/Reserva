@@ -243,6 +243,8 @@
     <Compile Include="Controllers\PatronComando\GeneralLugar\COConsultarTodosLugar.cs" />
     <Compile Include="Controllers\PatronComando\GeneralLugar\COConsultarTodosPais.cs" />
     <Compile Include="Controllers\PatronComando\M04\M04_COBuscarAvionRuta.cs" />
+    <Compile Include="Controllers\PatronComando\M04\M04_COBuscarCodigoVuelo.cs" />
+    <Compile Include="Controllers\PatronComando\M04\M04_COBuscarVuelo.cs" />
     <Compile Include="Controllers\PatronComando\M04\M04_COCambiarStatus.cs" />
     <Compile Include="Controllers\PatronComando\M04\M04_COModificarVuelo.cs" />
     <Compile Include="Controllers\PatronComando\M04\M04_COEliminarVuelo.cs" />
@@ -483,6 +485,7 @@
     <Compile Include="Excepciones\LogException.cs" />
     <Compile Include="Excepciones\M08\ReservaExceptionM08.cs" />
     <Compile Include="Excepciones\M09\ReservaExceptionM09.cs" />
+    <Compile Include="Excepciones\M04\ReservaExceptionM04.cs" />
     <Compile Include="Excepciones\M10\ReservaExceptionM10.cs" />
     <Compile Include="Excepciones\RecursoLog.Designer.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -575,6 +578,11 @@
     <Compile Include="Servicio\Servicio_Extravios\CManejadorSQL_Extravios.cs" />
     <Compile Include="Models\gestion_vuelo\CrearVueloMO.cs" />
     <Compile Include="Models\gestion_vuelo\FabricaViewModelVuelo.cs" />
+    <Compile Include="Models\gestion_vuelo\RecursoAvionCO.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RecursoAvionCO.resx</DependentUpon>
+    </Compile>
     <Compile Include="Models\gestion_vuelo\VueloViewModel.cs" />
     <Compile Include="Servicio\Servicio_Usuarios\ConexionBD.cs" />
     <Compile Include="Models\gestion_usuarios\CUsuario.cs" />
@@ -1751,6 +1759,9 @@
     <Content Include="Views\gestion_aviones\M02_CrearAvion.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_DetalleHotel.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_ModificarHotel.cshtml" />
+    <Content Include="Views\gestion_vuelo\M04_GestionVuelo_MW1.cshtml" />
+    <Content Include="Views\gestion_vuelo\M04_GestionVuelo_MW2.cshtml" />
+    <Content Include="Views\gestion_vuelo\M04_GestionVuelo_MW3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_boletos\M05_VisualizarBoletos.cshtml" />
@@ -1916,6 +1927,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoUsuario.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\gestion_vuelo\RecursoAvionCO.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecursoAvionCO.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

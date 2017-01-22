@@ -11,6 +11,7 @@ using BOReserva.Servicio.Servicio_Vuelos;
 using BOReserva.Controllers.PatronComando;
 using BOReserva.DataAccess.Model;
 using BOReserva.DataAccess.Domain;
+using BOReserva.Excepciones.M04;
 
 namespace BOReserva.Controllers
 {
@@ -35,7 +36,8 @@ namespace BOReserva.Controllers
             try
             {
                 Command<List<Entidad>> comando = FabricaComando.ConsultarM04_ConsultarTodos();
-                listaVuelos = comando.ejecutar();  
+                listaVuelos = comando.ejecutar();
+                return PartialView(listaVuelos);
             }
             catch (SqlException e)
             {
@@ -52,7 +54,7 @@ namespace BOReserva.Controllers
             return PartialView(listaVuelos);
         }
 
-      
+
 
         //VISTA-CREAR: dlstatusvuelo() sera el metodo para llenar el DropdownList del status de vuelo
         public string[] dlstatusvuelo()
@@ -73,15 +75,15 @@ namespace BOReserva.Controllers
             VueloViewModel modelo;
             try
             {
-                Command<List<Entidad>> comando = FabricaComando.ConsularM04_LugarOrigen();
+                Command<List<Entidad>> comando = FabricaComando.ConsultarM04_LugarOrigen();
                 listaCiudadOrigen = comando.ejecutar();
-                modelo =  FabricaViewModelVuelo.instanciarCrearVueloVM();
+                modelo = FabricaViewModelVuelo.instanciarCrearVueloVM();
                 modelo._ciudadesOrigen = listaCiudadOrigen.Select(x => new SelectListItem
                                         {
                                             Value = x._id.ToString(),
                                             Text = ((Ciudad)x)._nombre
                                         });
-    
+
             }
             catch (SqlException e)
             {
@@ -109,9 +111,14 @@ namespace BOReserva.Controllers
             List<Entidad> rutaAviones;
             try
             {
+                model.setFechaDespegue();
                 comando = FabricaComando.ConsultarM04_BuscarAvionRuta(model._idRuta);
                 rutaAviones = comando.ejecutar();
-                model._matriculasAvion = new SelectList(rutaAviones, "_id ", "_matricula");
+                model._matriculasAvion = new SelectList(rutaAviones,
+                                                        RecursoAvionCO.ParametroIdSelect,
+                                                        RecursoAvionCO.ParametroMatSelect
+                                                        );
+                return PartialView(RecursoAvionCO.PartialViewCW2, model);
             }
             catch (SqlException e)
             {
@@ -126,7 +133,7 @@ namespace BOReserva.Controllers
                 return Json(error);
             }
 
-            return PartialView("M04_GestionVuelo_CW2", model);
+            return PartialView(RecursoAvionCO.PartialViewCW2, model);
         }
 
         /// <summary>
@@ -136,11 +143,54 @@ namespace BOReserva.Controllers
         /// <returns></returns>
         public ActionResult M04_GestionVuelo_CW3(CrearVueloMO model)
         {
-            Command<List<Entidad>> comando;
-            List<Entidad> rutaAviones;
+            Command<Entidad> comando;
+            Vuelo dataAterrizaje;
             try
             {
-                
+                model.setFechaDespegue();
+                comando = FabricaComando.ConsultarM04_DatosAterrizaje(model._idAvion, model._idRuta, model.fechaDespegue);
+                dataAterrizaje = (Vuelo)comando.ejecutar();
+                model._fechaDespegue = model.fechaDespegue.ToString(RecursoAvionCO.FormatoFecha);
+                model._fechaAterrizaje = dataAterrizaje.FechaAterrizaje.ToString(RecursoAvionCO.FormatoFecha);
+                model._horaAterrizaje = dataAterrizaje.FechaAterrizaje.ToString(RecursoAvionCO.FormatoHora);
+            }
+            catch (SqlException e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error consultando los aviones disponibles para la ruta.";
+                return Json(error);
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido consultando los aviones disponibles, contacte con el administrador.";
+                return Json(error);
+            }
+
+            return PartialView("M04_GestionVuelo_CW3", model);
+        }
+
+        public ActionResult M04_GuardarVuelo(CrearVueloMO model)
+        {
+            Command<Boolean> comando;
+            Entidad vuelo;
+            Entidad avion;
+            Ruta ruta;
+            try
+            {
+                model.setFechaDespegue();
+                avion = FabricaEntidad.InstanciarAvion(model._idAvion, "", "", 0, 0, 0, 0, 0, 0, 0, 0);
+                //Fabrica Ruta no funciona
+                ruta = new Ruta(model._idRuta, 0,"","","","");
+                vuelo = FabricaEntidad.InstanciarVuelo(model._idAvion,
+                                                       model._codigoVuelo,
+                                                       ruta,
+                                                       model.fechaDespegue,
+                                                       model._statusVuelo,
+                                                       model.getFechaAterrizaje(),
+                                                       (Avion)avion);
+                comando = FabricaComando.crearM04_AgregarVuelo(vuelo);
+                comando.ejecutar();
             }
             catch (SqlException e)
             {
@@ -160,6 +210,191 @@ namespace BOReserva.Controllers
 
 
 
+        /// <summary>
+        /// GET vista M04_GestionVuelo_MW1
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>La primera vista del wizzard modificar</returns>
+        public ActionResult M04_GestionVuelo_MW1(int id)
+        {
+            List<Entidad> listaCiudadOrigen;
+            CrearVueloMO vModelo;
+            Entidad vuelo;
+            try
+            {
+                Command<List<Entidad>> comando = FabricaComando.ConsultarM04_LugarOrigen();
+                listaCiudadOrigen = comando.ejecutar();
+                Command<Entidad> coBuscar = FabricaComando.ConsultarM04_Vuelo(id);
+                vuelo = coBuscar.ejecutar();
+                vModelo = (CrearVueloMO)FabricaViewModelVuelo.instanciarCrearVueloVM();
+                vModelo._ciudadesOrigen = listaCiudadOrigen.Select(x => new SelectListItem
+                {
+                    Value = x._id.ToString(),
+                    Text = ((Ciudad)x)._nombre,
+                });
+                vModelo._ciudadOrigen = ((Vuelo)vuelo).getRuta._origenRuta;
+                vModelo._ciudadDestino = ((Vuelo)vuelo).getRuta._destinoRuta;
+                vModelo._codigoVuelo = ((Vuelo)vuelo).CodigoVuelo;
+                vModelo._idRuta = ((Vuelo)vuelo).getRuta._idRuta;
+                vModelo._fechaDespegue = ((Vuelo)vuelo).FechaDespegue.ToString(RecursoAvionCO.FormatoFecha);
+                vModelo._horaDespegue = ((Vuelo)vuelo).FechaDespegue.ToString(RecursoAvionCO.FormatoHora);
+                vModelo._idAvion = ((Vuelo)vuelo).getAvion._id;
+                vModelo._idVuelo = id;
+            }
+            catch (SqlException e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error ingresando a la base de datos para la pagina agregar.";
+                return Json(error);
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido ingresando a la pagina agregar, contacte con el administrador.";
+                return Json(error);
+            }
+            return PartialView("M04_GestionVuelo_MW1", vModelo);
+
+        }
+
+        /// <summary>
+        /// Action result que llama al Wizzard Crear 2
+        /// </summary>
+        /// <param name="model">modelo de la vista crear 1</param>
+        /// <returns>partial view a la vista crear 2</returns>
+        public ActionResult M04_GestionVuelo_MW2(CrearVueloMO model)
+        {
+            Command<List<Entidad>> comando;
+            List<Entidad> rutaAviones;
+            try
+            {
+                model.setFechaDespegue();
+                comando = FabricaComando.ConsultarM04_BuscarAvionRuta(model._idRuta);
+                rutaAviones = comando.ejecutar();
+                model._matriculasAvion = new SelectList(rutaAviones, "_id ", "_matricula");
+                return PartialView("M04_GestionVuelo_MW2", model);
+            }
+            catch (SqlException e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error consultando los aviones disponibles para la ruta.";
+                return Json(error);
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido consultando los aviones disponibles, contacte con el administrador.";
+                return Json(error);
+            }
+
+            return PartialView("M04_GestionVuelo_MW2", model);
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public ActionResult M04_GestionVuelo_MW3(CrearVueloMO model)
+        {
+            Command<Entidad> comando;
+            Vuelo dataAterrizaje;
+            try
+            {
+                model.setFechaDespegue();
+                comando = FabricaComando.ConsultarM04_DatosAterrizaje(model._idAvion, model._idRuta, model.fechaDespegue);
+                dataAterrizaje = (Vuelo)comando.ejecutar();
+                model._fechaAterrizaje = dataAterrizaje.FechaAterrizaje.ToString("dd/MM/yyyy");
+                model._horaAterrizaje = dataAterrizaje.FechaAterrizaje.ToString("HH:mm");
+            }
+            catch (SqlException e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error consultando los aviones disponibles para la ruta.";
+                return Json(error);
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido consultando los aviones disponibles, contacte con el administrador.";
+                return Json(error);
+            }
+
+            return PartialView("M04_GestionVuelo_MW3", model);
+        }
+
+
+        public ActionResult M04_ModificarVuelo(CrearVueloMO model)
+        {
+            Command<Entidad> comando;
+            Entidad vuelo;
+            Entidad avion;
+            Ruta ruta;
+            try
+            {
+                model.setFechaDespegue();
+                avion = new Avion(model._idAvion, "", "", 0, 0, 0, 0, 0, 0, 0, 0);
+                ruta = new Ruta(model._idRuta, 0, "", "", "", "");
+                vuelo = FabricaEntidad.InstanciarVuelo(model._idVuelo,
+                                                       model._codigoVuelo,
+                                                       ruta,
+                                                       model.fechaDespegue,
+                                                       model._statusVuelo,
+                                                       model.getFechaAterrizaje(),
+                                                       (Avion)avion);
+                comando = FabricaComando.ModificarM04_ModificarVuelo(vuelo);
+                comando.ejecutar();
+            }
+            catch (ReservaExceptionM04 ex)
+            {
+                TempData["message"] = ex.Message;
+            }
+            catch (SqlException e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error consultando los aviones disponibles para la ruta.";
+                return Json(error);
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido consultando los aviones disponibles, contacte con el administrador.";
+                return Json(error);
+            }
+
+            return PartialView("M04_GestionVuelo_CW3", model);
+        }
+
+
+
+
+
+        //eliminar si hay que hacerlo
+        public ActionResult M04_DatosAterrizaje(int idAvion)
+        {
+            Entidad vuelo;
+            try
+            {
+                /*model.setFechaDespegue();
+                Command<Entidad> comando = FabricaComando.ConsultarM04_DatosAterrizaje(model._idAvion, model._idRuta, model.fechaDespegue);
+                vuelo = comando.ejecutar();*/
+
+            }
+            catch (SqlException e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error ingresando a la base de datos para la pagina agregar.";
+                return Json(error);
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido ingresando a la pagina agregar, contacte con el administrador.";
+                return Json(error);
+            }
+            return (Json(idAvion, JsonRequestBehavior.AllowGet));
+        }
 
 
 
@@ -209,13 +444,12 @@ namespace BOReserva.Controllers
                 comando = FabricaComando.ConsultarM04_BuscarAvionRuta(idRuta);
                 rutaAviones = comando.ejecutar();
                 model._matriculasAvion = new SelectList(rutaAviones, "_id ", "_matricula");
-
+                return (Json(model._matriculasAvion, JsonRequestBehavior.AllowGet));
             }
-            catch (SqlException e)
+            catch (ReservaExceptionM04 ex)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error consultando los aviones disponibles para la ruta.";
-                return Json(error);
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
@@ -223,182 +457,29 @@ namespace BOReserva.Controllers
                 String error = "Error desconocido consultando los aviones disponibles, contacte con el administrador.";
                 return Json(error);
             }
-
-                return (Json(model._matriculasAvion, JsonRequestBehavior.AllowGet));
         }
 
-        /*
-        [HttpPost]
-        public JsonResult buscaModeloA(string matriAvion)
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult validarCodigo(String codVuelo)
         {
-            CrearVueloMO model = new CrearVueloMO();
-            string resultado = "";
-            manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
-
             try
             {
-                //metodo para BD
-                resultado = sql.modeloAvion(matriAvion);
+                Command<Boolean> comando = FabricaComando.ConsultarM04_CodigoVuelo(codVuelo);
+                return Json(comando.ejecutar());
             }
-            catch (SqlException e)
+            catch (ReservaExceptionM04 ex)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error consultando el modelo del avion.";
-                return Json(error);
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido consultando el modelo del avion, contacte con el administrador.";
+                String error = "Error desconocido consultando los aviones disponibles, contacte con el administrador.";
                 return Json(error);
             }
-                
-            return (Json(resultado, JsonRequestBehavior.AllowGet));
         }
 
-        [HttpPost]
-        public JsonResult buscaPasajerosA(string matriAvion)
-        {
-            CrearVueloMO model = new CrearVueloMO();
-            string resultado = "";
-            manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
-
-            try
-            {
-                //metodo para BD
-                resultado = sql.pasajerosAvion(matriAvion);
-            }
-            catch (SqlException e)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error consultando la cantidad de pasajeros.";
-                return Json(error);
-            }
-            catch (Exception e)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido consultando la cantidad de pasajeros, contacte con el administrador.";
-                return Json(error);
-            }
-
-            return (Json(resultado, JsonRequestBehavior.AllowGet)); 
-
-        }
-
-
-
-        [HttpPost]
-        public JsonResult buscaDistanciaA(string matriAvion)
-        {
-            CrearVueloMO model = new CrearVueloMO();
-            string resultado = "";
-            manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
-
-            
-            try
-            {
-                //metodo para BD
-                resultado = sql.distanciaAvion(matriAvion);
-            }
-            catch (SqlException e)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error consultando la distancia maxima del avion.";
-                return Json(error);
-            }
-            catch (Exception e)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido consultando la distancia maxima del avion, contacte con el administrador.";
-                return Json(error);
-            }
-
-            return (Json(resultado, JsonRequestBehavior.AllowGet)); 
-        }
-
-
-        [HttpPost]
-        public JsonResult buscaVelocidadA(string matriAvion)
-        {
-            CrearVueloMO model = new CrearVueloMO();
-            string resultado = "";
-            manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
-            model._ciudadDestino = "aja";
-            model._ciudadOrigen = "yep";
-
-            try
-            {
-                //metodo para BD
-                //resultado = sql.velocidadAvion(matriAvion);
-            }
-            catch (SqlException e)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error consultando la velocidad del avion.";
-                return Json(error,JsonRequestBehavior.DenyGet);
-            }
-            catch (Exception e)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido consultando la velocidad del avion, contacte con el administrador.";
-                return Json(error, JsonRequestBehavior.DenyGet);
-            }
-
-            return (Json(model, JsonRequestBehavior.AllowGet)); 
-        }*/
-
-        [HttpPost]
-        public JsonResult buscaFechaA(string fechaDes, string horaDes, int ruta, int idAvion)
-        {
-            
-            string resultado = "";
-            string fecha = "";
-            manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
-            /*
-            if ((fechaDes == null) || (horaDes == null))
-            {
-                //Agrego mi error
-                String error = "Error en el calculo de la fecha de aterrizaje. Por favor intente nuevamente y complete los campos obligatorios";
-                //Retorno el error
-                return Json(error);
-            }
-
-            try
-            {
-                //llamo a metodo para calcular fecha de aterrizaje segun datos introducidos en la vista
-                resultado = sql.fechaVuelo(fechaDes, horaDes, ciudadO, ciudadD, matriAvion);
-                //separo el resultado del metodo para poner enviar a TextBoxes diferentes
-                if (resultado != null)
-                {
-                    string[] separando = resultado.Split(' ');
-                    // si opcion es igual a "0" obtengo fecha, si es igual a "1" obtengo hora
-                    fecha = separando[opcion];
-                    //elimino caracteres sobrantes para la vista 
-                    if (opcion == 1)
-                    {
-                        //elimino caracteres sobrantes para la vista
-                        fecha = Regex.Replace(fecha, ":00", "");
-                    }
-                }
-            }
-            catch (SqlException e)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error calculando la fecha de aterrizaje en la base de datos.";
-                return Json(error);
-            }
-            catch (Exception e)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido calculando la fecha de aterrizaje, contacte con el administrador.";
-                return Json(error);
-            }*/
-            return (Json(fecha, JsonRequestBehavior.AllowGet));
-            
-        }
-
-
-        
 
         /*
         [HttpPost]
@@ -506,32 +587,7 @@ namespace BOReserva.Controllers
 
         
 
-        public ActionResult M04_GestionVuelo_Modificar(int id)
-        {
-            manejadorSQL_Vuelos buscarvuelo = new manejadorSQL_Vuelos();
-            CVueloModificar vuelo = new CVueloModificar();
-            try
-            {
-                vuelo = buscarvuelo.MModificarBD(id); //BUSCA EL VUELO A MOSTRAR
-                
-            }
-            catch (SqlException e)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error cargando la vista de modificar desde la base de datos.";
-                return Json(error);
-            }
-            catch (Exception e)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido cargando la vista modificar, contacte con el administrador.";
-                return Json(error);
-            }
-                                                                   
-            return PartialView(vuelo);
-        }
-
-
+      
 
         public ActionResult M04_GestionVuelo_Mostrar(int id)
         {
@@ -560,12 +616,12 @@ namespace BOReserva.Controllers
 
 
 
-    /// <summary>
-    /// Cambiar status del vuelo
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    public ActionResult M04_Cambiar_Status(int idVuelo)
+        /// <summary>
+        /// Cambiar status del vuelo
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult M04_Cambiar_Status(int idVuelo)
         {
             try
             {
@@ -588,110 +644,7 @@ namespace BOReserva.Controllers
             return null;
         }
 
-        public static List<SelectListItem> ciudadesorigen( string CiudadO)
-        {
-           manejadorSQL_Vuelos ciudadorigen = new manejadorSQL_Vuelos();
-            List<SelectListItem> _ciudadorigenes = new List<SelectListItem>();
-            String[] origenes = ciudadorigen.MListarciudadesOrigenBD();
-            int i = 0;
-            bool verdad = true;
-            while (verdad == true)
-            {
-                try
-                {
-                    _ciudadorigenes.Add(new SelectListItem
-                    {
-                        Text = origenes[i].ToString(),
-                        Value = origenes[i].ToString()
 
-                    });
-                    if (origenes[i].Equals(CiudadO)) {
-                        _origen = origenes[i];
-                    }
-                    i++;
-                }
-                catch (Exception e)
-                {
-                    verdad = false;
-                }
-            }
-            return _ciudadorigenes;
-        }
-
-
-
-
-        public static List<SelectListItem> ciudadesdestino(String COrigen,String CDestino)
-        {
-            manejadorSQL_Vuelos ciudaddestino = new manejadorSQL_Vuelos();
-            List<SelectListItem> _ciudaddestinos = new List<SelectListItem>();
-            String[] destinos = ciudaddestino.MListarciudadesDestinoBD(COrigen);
-            int i = 0;
-           _destino = destinos[0];
-            bool verdad = true;
-            while (verdad == true)
-            {
-                try
-                {
-                    _ciudaddestinos.Add(new SelectListItem
-                    {
-                        Text = destinos[i].ToString(),
-                        Value = destinos[i].ToString()
-                    });
-                    if (destinos[i].Equals(CDestino))
-                    {
-                        _destino = destinos[i];
-                    }
-                        i++;
-                }
-                catch (Exception e)
-                {
-                    verdad = false;
-                }
-            }
-            return _ciudaddestinos;
-        }
-
-
-
-        public JsonResult cargarDestinosModificar(string ciudadOMod)
-        {
-            //Pruebas hasta que pasen los métodos
-
-            CVueloModificar model = new CVueloModificar();
-            List<CVueloModificar> resultado = new List<CVueloModificar>();
-            manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
-
-            try
-            {
-                //metodo para BD que llenara lista
-                resultado = sql.consultarDestinosModificar(ciudadOMod);
-                //paso la lista a formato de DropDownList para la vista
-                if (resultado != null)
-                {
-                    model._ciudadesDestino = resultado.Select(m => new SelectListItem
-                    {
-                        Value = m._ciudadDestino,
-                        Text = m._ciudadDestino
-                    });
-                }
-
-            }
-            catch (SqlException e)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error ingresando a la base de datos para cargar los detinos.";
-                return Json(error);
-            }
-            catch (Exception e)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido cargando los destinos, contacte con el administrador.";
-                return Json(error);
-            }
-
-            return (Json(model._ciudadesDestino, JsonRequestBehavior.AllowGet));
-        }
 
 
         [HttpPost]
@@ -701,7 +654,7 @@ namespace BOReserva.Controllers
             int existe = 0;
             try
             {
-               existe = sql.codVueloUnico(codVuelo);
+                existe = sql.codVueloUnico(codVuelo);
             }
             catch (SqlException e)
             {
@@ -716,81 +669,7 @@ namespace BOReserva.Controllers
                 return Json(error);
             }
             return Json(existe);
-        } 
-
-        public static List<SelectListItem> avionesvalidados(String COrigen, String CDestino, String Avion)
-        {
-            manejadorSQL_Vuelos avionvalidado = new manejadorSQL_Vuelos();
-            List<SelectListItem> _avionesvalidados = new List<SelectListItem>();
-            String[] aviones = avionvalidado.MListaravionesValidadosBD(COrigen, CDestino);
-            int i = 0;
-            _avion = aviones[0];
-            bool verdad = true;
-            while (verdad == true)
-            {
-                try
-                {
-                    _avionesvalidados.Add(new SelectListItem
-                    {
-                        Text = aviones[i].ToString(),
-                        Value = aviones[i].ToString()
-                    });
-                    if (aviones[i].Equals(Avion))
-                    {
-                        _avion = aviones[i];
-                    }
-                    i++;
-                }
-                catch (Exception e)
-                {
-                    verdad = false;
-                }
-            }
-            return _avionesvalidados;
         }
 
-        [AcceptVerbs(HttpVerbs.Get)]
-        public JsonResult validarAvionesModificar(string ciudadO, string ciudadD)
-        {
-            if (ciudadO.Equals("")) {
-
-                ciudadO = _origen;
-
-            }
-            CVueloModificar model = new CVueloModificar();
-            //creo la lista que lleno con las matriculas de avion que cubren la ruta especificada
-            List<CVueloModificar> resultado = new List<CVueloModificar>();
-            manejadorSQL_Vuelos sql = new manejadorSQL_Vuelos();
-
-            try
-            {
-                //llamo a metodo que llena la lista con BD
-                resultado = sql.buscarAvionesModificar(ciudadO, ciudadD);
-
-                if (resultado != null)
-                {
-                    //paso la lista al formato de DropDownList
-                    model._matriculaAviones = resultado.Select(m => new SelectListItem
-                    {
-                        Value = m._matriculaAvion,
-                        Text = m._matriculaAvion
-                    });
-                }
-            }
-            catch (SqlException e)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error consultando los aviones disponibles para la ruta.";
-                return Json(error);
-            }
-            catch (Exception e)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
-                return Json(error);
-            }
-
-            return (Json(model._matriculaAviones, JsonRequestBehavior.AllowGet));
-        }
-    }
+    } 
 }
