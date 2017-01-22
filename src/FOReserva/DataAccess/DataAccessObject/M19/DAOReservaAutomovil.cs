@@ -58,7 +58,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
                 // Parametro de entrada para la consulta: el id del usuario
                 parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fk_usuario, SqlDbType.Int, usuario._id.ToString(), false));
 
-                tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM19.procedimientoConsultar,parametro);
+                tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM19.procedimientoConsultar, parametro);
 
                 foreach (DataRow filareserva in tablaDeDatos.Rows)
                 {
@@ -76,12 +76,12 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
                     _estatus = int.Parse(filareserva[RecursoDAOM19.reservaEstatus].ToString());
 
                     CAutomovil automovil = FabricaEntidad.inicializarAutomovil(_idAutomovil, modelo, fabricante);
-                    CLugar ori= FabricaEntidad.inicializarLugar(_LugarOri);
+                    CLugar ori = FabricaEntidad.inicializarLugar(_LugarOri);
                     CLugar dest = FabricaEntidad.inicializarLugar(_LugarDest);
 
                     // INICIALIZO LA RESERVA
                     reserva = FabricaEntidad.inicializarReserva(_id, _fecha_ini, _fecha_fin, _hora_ini, _hora_fin,
-                                                                _idUsuario,_estatus, automovil, ori, dest);
+                                                                _idUsuario, _estatus, automovil, ori, dest);
                     listaDeReservas.Add(reserva);
                 }
 
@@ -146,10 +146,10 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
             try
             {
                 //Aqui se asignan los valores que recibe el procedimieto para realizar el select
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_id, SqlDbType.Int, resv._id.ToString(),false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_id, SqlDbType.Int, resv._id.ToString(), false));
 
                 //Se devuelve la fila de la reserva de automovil consultado segun el Id, para este caso solo se devuelve una fila
-                DataTable filareserva = EjecutarStoredProcedureTuplas(RecursoDAOM19.procedimientoConsultarReservaAutomovilId,listaParametro);
+                DataTable filareserva = EjecutarStoredProcedureTuplas(RecursoDAOM19.procedimientoConsultarReservaAutomovilId, listaParametro);
 
                 //Se guarda la fila devuelta de la base de datos
                 DataRow Fila = filareserva.Rows[0];
@@ -248,7 +248,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
                 parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fk_ciudad_entrega, SqlDbType.Int, lugar._id.ToString(), false));
 
                 //el metodo Ejecutar Store procedure recibe la lista de parametros como el query, este ultimo es el nombre del procedimietno en la BD
-                tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM19.procedimientoConsultarAutosCiudad,parametro);
+                tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM19.procedimientoConsultarAutosCiudad, parametro);
 
                 foreach (DataRow Fila in tablaDeDatos.Rows)
                 {
@@ -325,7 +325,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fk_automovil, SqlDbType.VarChar, res._idAutomovil, false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fk_ciudad_devolucion, SqlDbType.Int, res._idLugarDest.ToString(), false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fk_ciudad_entrega, SqlDbType.Int, res._idLugarOri.ToString(), false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_estatus, SqlDbType.Int, res._estatus.ToString(),false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_estatus, SqlDbType.Int, res._estatus.ToString(), false));
 
                 EjecutarStoredProcedure(RecursoDAOM19.procedimientoAgregar, listaParametro);
             }
@@ -377,7 +377,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
 
             try
             {
-                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_id, SqlDbType.Int, res._id.ToString(),false));
+                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_id, SqlDbType.Int, res._id.ToString(), false));
                 EjecutarStoredProcedure(RecursoDAOM19.procedimientoEliminar, parametro);
             }
             catch (ArgumentNullException ex)
@@ -428,7 +428,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
 
             try
             {
-                tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM19.procedimientoConsultarLugar,parametro);
+                tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM19.procedimientoConsultarLugar, parametro);
                 listaDeLugares.Add(FabricaEntidad.inicializarLugar(0, ""));
 
                 foreach (DataRow filaLugar in tablaDeDatos.Rows)
@@ -474,7 +474,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
         /// </summary>
         /// <param name="_reserva"></param>
         /// <returns>Se retorna true de ser exitoso</returns>
-        public new bool Modificar(Entidad _reserva)
+        public bool Modificar(Entidad _reserva)
         {
             //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
             Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
@@ -486,15 +486,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
             try
             {
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_id, SqlDbType.Int, resv._id.ToString(), false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fecha_ini, SqlDbType.VarChar, resv._fecha_ini, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fecha_fin, SqlDbType.VarChar, resv._fecha_fin, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_hora_ini, SqlDbType.VarChar, resv._hora_ini, false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_hora_fin, SqlDbType.VarChar, resv._hora_fin, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fk_usuario, SqlDbType.Int, resv._idUsuario.ToString(), false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fk_automovil, SqlDbType.VarChar, resv._idAutomovil, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fk_ciudad_devolucion, SqlDbType.Int, resv._idLugarOri.ToString(), false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fk_ciudad_entrega, SqlDbType.Int, resv._idLugarDest.ToString(), false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_estatus, SqlDbType.Int, resv._estatus.ToString(), false));
 
                 EjecutarStoredProcedure(RecursoDAOM19.procedimientoActualizar, listaParametro);
             }
@@ -534,17 +526,17 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
             throw new NotImplementedException();
         }
 
-        public new Dictionary<int, Entidad> ConsultarTodos()
+        public Dictionary<int, Entidad> ConsultarTodos()
         {
             throw new NotImplementedException();
         }
 
-        public new int Agregar(Entidad e)
+        public int Agregar(Entidad e)
         {
             throw new NotImplementedException();
         }
 
-        public Entidad onsultar(int id)
+        public Entidad Consultar(int id)
         {
             throw new NotImplementedException();
         }
