@@ -76,7 +76,6 @@
         //Método para consultar boletos
         $(".consultar").click(function () {
             loader();
-
             var identificador = $(this).parent().parent().parent().attr("id");
             jQuery.ajax({
                 type: "GET",

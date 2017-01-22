@@ -153,14 +153,20 @@
                     </div>
 
                 </div>
-                <div class="row">
-                    <div id="loading" class="col-lg-12" style=" display: none; text-align:center; margin-top: 15px;"><span class="fa fa-spinner refresh-animate "></span></div>
-                </div>
+
             </div>
         </div>
     </div>
 }
 <script>
+
+    function loader() {
+        $("#loader").fadeIn("slow");
+        $(window).ajaxComplete(function () {
+            // Se oculta el loader animado
+            $("#loader").hide();
+        });
+    }
     $("#siguiente").click(function (e) {
         e.preventDefault();
         $(".none").hide();
@@ -258,7 +264,7 @@
         //Creación del boleto con los detalles del pasajero
         if (win) {
 
-            $("#loading").show();
+            loader();
             var url = '/gestion_boletos/M05_DetalleBoleto';
             var method = 'GET';
             var data = { idorigen: id_origen, iddestino: id_destino, fechadespegue: fecha_despegue, fechaaterrizaje: fecha_aterrizaje, monto: monto, tipo: tipo, primernombre: primer_nombre, segundonombre: segundo_nombre, primerapellido: primer_apellido, segundoapellido: segundo_apellido, fechanac: fecha_nac, sexo: sexo, pasaporte: pasaporte, correo: correo, idvuelo: id_vuelo };

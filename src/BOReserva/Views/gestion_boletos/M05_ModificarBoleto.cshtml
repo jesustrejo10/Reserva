@@ -266,7 +266,8 @@
     //Modifiar datos del pasajero
     $("#modificar").click(function (e) {
         e.preventDefault();
-  
+        $(".none").hide();
+        $(".form-control").removeClass("has-error");
         var win = true;
         var caralf = /^[a-zA-Z]+$/;
         var boleto_origen = document.getElementById("boleto_origen").value;
