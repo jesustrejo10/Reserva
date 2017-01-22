@@ -1,6 +1,7 @@
 ﻿using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
+using BOReserva.Excepciones.M09;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -46,28 +47,19 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
             catch (SqlException ex)
             {
-                //M09_Exception exception = new M09_Exception(ex, M09_Exception.messageHelper(ex), this.GetType().ToString());
-                Debug.WriteLine("Ocurrio un SqlException");
-                Debug.WriteLine(ex.ToString());
-                return 2;
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (NullReferenceException ex)
             {
-                Debug.WriteLine("Ocurrio una NullReferenceException");
-                Debug.WriteLine(ex.ToString());
-                return 3;
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (ArgumentNullException ex)
             {
-                Debug.WriteLine("Ocurrio una ArgumentNullException");
-                Debug.WriteLine(ex.ToString());
-                return 4;
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Ocurrio una Exception");
-                Debug.WriteLine(ex.ToString());
-                return 5;
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
         }
 
@@ -138,7 +130,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
                     pais = new Pais(idPais, nombrePais);
 
                     idCiudad = Int32.Parse(row[RecursoDAOM09.id_ciudad].ToString());
-                    nombreCiudad = row[RecursoDAOM09.id_ciudad].ToString();
+                    nombreCiudad = row[RecursoDAOM09.nombre_ciudad].ToString();
                     ciudad = new Ciudad(idCiudad, nombreCiudad, pais);
 
                     idHotel = Int32.Parse(row["hot_id"].ToString());
@@ -170,8 +162,19 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
             catch (SqlException ex)
             {
-                Debug.WriteLine(ex.ToString());
-                return null;
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (NullReferenceException ex)
+            {
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
         }
 
@@ -229,8 +232,14 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
             catch (SqlException ex)
             {
-                Debug.WriteLine(ex.ToString());
-                return null;
+                /*ReservaExceptionM09 exception = new ReservaExceptionM09(ex.Message, ex);
+                Debug.WriteLine(ex.ToString());*/
+                throw new ReservaExceptionM09(ex.Message, ex);
+                //return null;
+            }
+            catch (ExceptionBD ex)
+            {
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
         }
 

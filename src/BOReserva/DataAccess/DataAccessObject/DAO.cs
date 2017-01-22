@@ -1,6 +1,7 @@
 ﻿using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
+using BOReserva.Excepciones.M09;
 using System;
 using System.Collections.Generic;
 using System.Configuration;

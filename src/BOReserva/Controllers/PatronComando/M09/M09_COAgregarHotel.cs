@@ -3,6 +3,7 @@ using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.DataAccessObject.M09;
 using BOReserva.DataAccess.Domain;
+using BOReserva.Excepciones.M09;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,13 +32,21 @@ namespace BOReserva.Controllers.PatronComando
         /// </summary>
         /// <returns>Retorna un String</returns>
         public override String ejecutar(){
-            IDAO daoHotel = FabricaDAO.instanciarDaoHotel();       
-            int resultadoAgregarHotel = daoHotel.Agregar(_hotel);
-            if (resultadoAgregarHotel == 1) {
-                Command<int> agregarHabitaciones = FabricaComando.crearM09AgregarHabitaciones(_hotel, _hotel._precio);
-                int ad = agregarHabitaciones.ejecutar();
+            try
+            {
+                IDAO daoHotel = FabricaDAO.instanciarDaoHotel();
+                int resultadoAgregarHotel = daoHotel.Agregar(_hotel);
+                if (resultadoAgregarHotel == 1)
+                {
+                    Command<int> add = FabricaComando.crearM09AgregarHabitaciones(_hotel, _hotel._precio);
+                    int ad = add.ejecutar();
+                }
+                return resultadoAgregarHotel.ToString();
             }
-            return resultadoAgregarHotel.ToString();
+            catch (ReservaExceptionM09 ex)
+            {
+                return ex.Mensaje;
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
+using BOReserva.Excepciones.M09;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -73,24 +74,35 @@ namespace BOReserva.DataAccess.DataAccessObject
             return listaCiudades;
         }
 
-
+        /// <summary>
+        /// Metodo usado para obtener el ID de una ciudad
+        /// </summary>
+        /// <param name="ciudad">Ciudad a buscar</param>
+        /// <returns>Retorna un valor entero</returns>
         public int obtenerIDciudad(String ciudad)
         {
-            int id = 0;
-            SqlConnection conexion = Conectar();
-            conexion.Open();
-            String sql = "select lug_id FROM Lugar  where lug_nombre = '"+ciudad+"';";
-            SqlCommand cmd = new SqlCommand(sql, conexion);
-            using (SqlDataReader reader = cmd.ExecuteReader())
+            try
             {
-                while (reader.Read())
+                int id = 0;
+                SqlConnection conexion = Conectar();
+                conexion.Open();
+                String sql = "select lug_id FROM Lugar  where lug_nombre = '" + ciudad + "';";
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    id = int.Parse(reader[0].ToString());
+                    while (reader.Read())
+                    {
+                        id = int.Parse(reader[0].ToString());
+                    }
                 }
+                cmd.Dispose();
+                conexion.Close();
+                return id;
             }
-            cmd.Dispose();
-            conexion.Close();
-            return id;
+            catch (SqlException ex)
+            {
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
         }
     }
 }
