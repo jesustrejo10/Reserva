@@ -16,7 +16,7 @@ namespace FOReserva.DataAccess.DataAccessObject.InterfacesDAO
 
         bool Crear(Entidad objeto);
 
-        bool Modificar(Entidad objeto);
+        new bool Modificar(Entidad objeto);
 
         bool Eliminar(Entidad objeto);
 
