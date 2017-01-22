@@ -18,6 +18,7 @@ using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.DataAccessObject.M09;
 using System.Web.Mvc;
+using BOReserva.Excepciones.M09;
 
 namespace TestUnitReserva.BO.gestion_hoteles
 {
@@ -28,7 +29,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
         private Ciudad mockCiudad;
         private Hotel mockHotel;
         private Hotel mockHotell;
-        DAOHotel daoHotel;
+        IDAOHotel daoHotel;
         
 
         /// <summary>
@@ -66,9 +67,12 @@ namespace TestUnitReserva.BO.gestion_hoteles
             //Probando caso de exito de la prueba
             int resultadoAgregar = daoHotel.Agregar(mockHotel);
             Assert.AreEqual(resultadoAgregar, 1);
-            //Probando caso de fallo
-            int resultadoAgregarIncorrecto = daoHotel.Agregar(null);
-            Assert.AreEqual(resultadoAgregarIncorrecto, 0);
+        }
+        [Test]
+        public void M09_DaoHotelInsertarHotelFallido()
+        {
+            Assert.Throws<ReservaExceptionM09>(() => daoHotel.Agregar(null));
+
         }
 
         /// <summary>
@@ -79,10 +83,13 @@ namespace TestUnitReserva.BO.gestion_hoteles
         {
             Entidad modificar = daoHotel.Modificar(mockHotel);
             Assert.AreEqual(modificar, mockHotel);
-            Entidad resultadoincorrecto = daoHotel.Modificar(null);
-            Assert.AreEqual(resultadoincorrecto, 0);
+        }
 
-       
+        [Test]
+        public void M09_DaoHotelModificarHotelFallido()
+        {
+            Assert.Throws<ReservaExceptionM09>(() => daoHotel.Modificar(null));
+
         }
         /// <summary>
         /// 
