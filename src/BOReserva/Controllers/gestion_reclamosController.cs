@@ -48,12 +48,19 @@ namespace BOReserva.Controllers
       [HttpPost]
       public JsonResult modificarReclamo(CModificarReclamo model)
       {
+          int idUsuario = gestion_seguridad_ingresoController.IDUsuarioActual();
+          String[] formateadorFecha = model._fechaReclamo.Split('/');
+          model._fechaReclamo = formateadorFecha[2] + "-" + formateadorFecha[1] + "-" + formateadorFecha[0];
           Entidad reclamo = FabricaEntidad.InstanciarReclamo(model);
+          Command<Entidad> comando = FabricaComando.crearM16ConsultarUsuario(idReclamo);
+          Reclamo verificacion = (Reclamo)comando.ejecutar();
           //con la fabrica instancie el reclamo.
-          int id = reclamo._id;
-          Command<String> comando = FabricaComando.crearM16ModificarReclamo(reclamo, id);
-          String verificacion = comando.ejecutar();
+
+          Command<String> comandoMod = FabricaComando.crearM16ModificarReclamo(reclamo, model._idReclamo);
+          String resultado = comandoMod.ejecutar();
           return (Json("Se modificó el reclamo exitosamente"));
+          
+
       }
 
       [HttpPost]
@@ -90,13 +97,12 @@ namespace BOReserva.Controllers
           int idUsuario = gestion_seguridad_ingresoController.IDUsuarioActual();
           Command<Entidad> comando = FabricaComando.crearM16ConsultarUsuario(idReclamo);
           Reclamo reclamo = (Reclamo)comando.ejecutar();
-          //if (idUsuario != reclamo._usuario)
-          //{
-              //Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            // return ("No está autorizado para eliminar este reclamo");
-          //}
-        //  else
-          //{
+          if (idUsuario != reclamo._usuario)
+          {
+              return PartialView("M16_AlertaError",null);
+          }
+          else
+          {
               CModificarReclamo model = new CModificarReclamo();
               model._idReclamo = reclamo._id;
               model._tituloReclamo = reclamo._tituloReclamo;
@@ -104,7 +110,7 @@ namespace BOReserva.Controllers
               model._fechaReclamo = reclamo._fechaReclamo;
               model._estadoReclamo = reclamo._estadoReclamo;
               return PartialView(model);
-          //}
+          }
       }
     }
 	

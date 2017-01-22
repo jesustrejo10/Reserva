@@ -1653,6 +1653,7 @@
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_CW1.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_CW2.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_CW3.cshtml" />
+    <Content Include="Views\gestion_reclamos\M16_AlertaError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_boletos\M05_VisualizarBoletos.cshtml" />
