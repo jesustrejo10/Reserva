@@ -519,6 +519,15 @@ namespace BOReserva.Controllers.PatronComando
         {
             return new M04.M04_COBuscarCodigoVuelo(codigo);
         }
+
+        /// <summary>
+        /// Metodo para instanciar el comando M04_LugarOrigen
+        /// </summary>
+        /// <returns>Instancia del metodo M04_COLugarOrigen</returns>
+        public static Command<List<Entidad>> ConsularM04_LugarOrigen()
+        {
+            return new M04.M04_COLugarOrigen();
+        }
         #endregion
 
 
@@ -673,6 +682,25 @@ namespace BOReserva.Controllers.PatronComando
             return new M05_COConsultarListaVuelo(fechaida, fechavuelta, idorigen, iddestino, tipo);
         }
 
+        public static Command<int> conteoM05maletas(int id)
+        {
+            return new M05_COConteoMaletas(id);
+        }
+
+        public static Command<int> crearM05maletas(int id, int peso)
+        {
+            return new M05_COCrearMaletas(id, peso);
+        }
+
+        public static Command<int> conteoM05Boarding(int num_bol, int num_vue)
+        {
+            return new M05_COConteoBoarding(num_bol, num_vue);
+        }
+
+        public static Command<int> crearM05CrearBoarding(Entidad e)
+        {
+            return new M05_COCrearBoarding((BoardingPass)e);
+        }
 
         #endregion
 
@@ -704,7 +732,7 @@ namespace BOReserva.Controllers.PatronComando
         }
 
         #endregion
-
+        
         #region Modulo 10 Gestion Restaurante
 
         #region Comandos Generales 
