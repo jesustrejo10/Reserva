@@ -18,16 +18,15 @@ namespace BOReserva.Controllers.PatronComando.M03
         Ruta _ruta;
         int _id;
 
-        public M03_COMostrarRuta(Entidad ruta, int id)
+        public M03_COMostrarRuta(int id)
         {
-            this._ruta = (Ruta)ruta;
-            this._ruta._id = id;
+            this._id = id;
         }
 
         public override Entidad ejecutar()
         {
             DAORuta daoRuta = (DAORuta)FabricaDAO.instanciarDAORuta();
-            Entidad test = daoRuta.MMostrarRutaBD(_ruta._id);
+            Entidad test = daoRuta.MMostrarRutaBD(_id);
             return test;
         }
 

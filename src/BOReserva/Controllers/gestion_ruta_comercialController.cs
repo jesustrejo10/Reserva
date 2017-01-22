@@ -101,24 +101,33 @@ namespace BOReserva.Controllers
         // GET: gestion_ruta_comercial/ModificarRutasComerciales
         public ActionResult ModificarRutasComerciales(int idRuta)
         {
-            
-            CManejadorSQL_Rutas buscarRuta = new CManejadorSQL_Rutas();
+
+            Command<Entidad> comando = FabricaComando.crearM03_MostrarRuta(idRuta);
+            Ruta buscarRuta = (Ruta)comando.ejecutar();
+            CAgregarRuta Route = new CAgregarRuta();
+            Route._idRuta = idRuta;
+            Route._destinoRuta = buscarRuta._destinoRuta;
+            Route._distanciaRuta = buscarRuta._distancia;
+            Route._estadoRuta = buscarRuta._status;
+            Route._origenRuta = buscarRuta._origenRuta;
+            Route._tipoRuta = buscarRuta._tipo;
+            List<String> lista = new List<string>();
+            Command<Dictionary<int, Entidad>> comando2 = FabricaComando.crearM03_ListarLugares();
+            Dictionary<int, Entidad> listaLugares = comando2.ejecutar();
+
             try
             {
-                CAgregarRuta Route = buscarRuta.MMostrarRutaBD(idRuta);
-                Route._idRuta = idRuta;
-                CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();
-                List<String> lista = new List<string>();
-
-
-
-                lista = sql.listarLugares();
-
-                //Route._lorigenRuta = lista.Select(x => new SelectListItem
-                //{
-                //    Value = x,
-                //    Text = x
-                //});
+                foreach (var origen in listaLugares)
+                {
+                    BOReserva.DataAccess.Domain.Ruta r = (BOReserva.DataAccess.Domain.Ruta)origen.Value;
+                    lista.Add(r._origenRuta);
+                }
+                //lista = sql.listarLugares();
+                Route._lorigenRuta = lista.Select(x => new SelectListItem
+                {
+                    Value = x,
+                    Text = x
+                });
                 return PartialView(Route);
             }
             catch (SqlException e)
@@ -130,18 +139,34 @@ namespace BOReserva.Controllers
                 //Retorno el error
                 return PartialView(error);
             }
-            
         }
+            
+        
 
 
         // GET: gestion_ruta_comercial/VisualizarRutasComerciales
         public PartialViewResult VisualizarRutasComerciales()
         {
-            
-            CManejadorSQL_Rutas ruta = new CManejadorSQL_Rutas();
+            List<CRuta> listarutas = new List<CRuta>();
+            // CManejadorSQL_Rutas ruta = new CManejadorSQL_Rutas();
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM03_MListarRutasBD();
+            Dictionary<int, Entidad> listaRutas = comando.ejecutar();
             try
             {
-                List<CRuta> listarutas = ruta.MListarRutasBD();
+                foreach (var ruta in listaRutas)
+                {
+                    BOReserva.DataAccess.Domain.Ruta r = (BOReserva.DataAccess.Domain.Ruta)ruta.Value;
+                    CRuta rutaV = new CRuta();
+                    rutaV.idRuta = r._idRuta;
+                    rutaV.estadoRuta = r._status;
+                    rutaV.tipoRuta = r._tipo;
+                    rutaV.origenRuta = r._origenRuta;
+                    rutaV.destinoRuta = r._destinoRuta;
+                    rutaV.distanciaRuta = r._distancia;
+                    listarutas.Add(rutaV);
+                }
+
+               // List<CRuta> listarutas = ruta.MListarRutasBD();
                 return PartialView(listarutas);
             }
             catch (SqlException e)
@@ -160,11 +185,19 @@ namespace BOReserva.Controllers
         // GET: gestion_ruta_comercial/DetalleRutasComerciales
         public ActionResult DetalleRutasComerciales(int idRuta)
         {
-            CManejadorSQL_Rutas buscarRuta = new CManejadorSQL_Rutas();
+   //         CManejadorSQL_Rutas buscarRuta = new CManejadorSQL_Rutas();
+
             try 
             {
-                CAgregarRuta Route = buscarRuta.MMostrarRutaBD(idRuta);
+                Command<Entidad> comando = FabricaComando.crearM03_MostrarRuta(idRuta);
+                Ruta buscarRuta = (Ruta)comando.ejecutar();
+                CAgregarRuta Route = new CAgregarRuta();
                 Route._idRuta = idRuta;
+                Route._destinoRuta = buscarRuta._destinoRuta;
+                Route._distanciaRuta = buscarRuta._distancia;
+                Route._estadoRuta = buscarRuta._status;
+                Route._origenRuta = buscarRuta._origenRuta;
+                Route._tipoRuta = buscarRuta._tipo;
                 return PartialView(Route);
  
             }
@@ -245,7 +278,7 @@ namespace BOReserva.Controllers
         public JsonResult modificarRuta(CAgregarRuta model)
         {
 
-            CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();
+            //CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();
             //realizo el insert
 
 
@@ -264,9 +297,17 @@ namespace BOReserva.Controllers
                      try
                     {
 
-                       bool resultado = sql.MModificarRuta(model);
-                       if (resultado)
-                       {
+                        Ruta rutaM = new Ruta();
+                        rutaM._idRuta = model._idRuta;
+                        rutaM._status = model._estadoRuta;
+                        rutaM._tipo = model._tipoRuta;
+                        rutaM._distancia = model._distanciaRuta;
+                        rutaM._destinoRuta = model._destinoRuta;
+                        rutaM._origenRuta = model._origenRuta;
+                        Command<Boolean> comando = FabricaComando.crearM03_ModificarRuta(rutaM, rutaM._idRuta);
+                        Boolean resultado = comando.ejecutar();
+                        if (resultado)
+                       {     
                            return null;
                        }
                        else
@@ -303,10 +344,11 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult HabilitarRuta(int idRuta)
         {
-            CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();
             try
             {
-                Boolean resultado = sql.habilitarRuta(idRuta);
+                Command<Boolean> comando = FabricaComando.crearM03_HabilitarRuta(idRuta);
+                Boolean resultado = comando.ejecutar();
+
                 if (resultado)
                 {
                     return (Json(true, JsonRequestBehavior.AllowGet));
@@ -340,10 +382,10 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult InhabilitarRuta(int idRuta)
         {
-            CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();
             try
             {
-                Boolean resultado = sql.deshabilitarRuta(idRuta);
+                Command<Boolean> comando = FabricaComando.crearM03_DeshabilitarRuta(idRuta);
+                Boolean resultado = comando.ejecutar();
                 if (resultado)
                 {
                     return (Json(true, JsonRequestBehavior.AllowGet));

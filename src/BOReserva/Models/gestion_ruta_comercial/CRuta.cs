@@ -14,6 +14,7 @@ namespace BOReserva.Models.gestion_ruta_comercial
         private String _tipo;
         private int _distancia;
 
+        public CRuta() { }
         public CRuta(int id,String origen, String destino, String estado, String tipo, int distancia)
         {
             _id = id;

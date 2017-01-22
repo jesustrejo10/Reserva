@@ -17,7 +17,37 @@ namespace BOReserva.DataAccess.DataAccessObject.M03
     {
 
         public DAORuta() { }
-
+        public Dictionary<int, Entidad> MListarRutasBD()
+        {
+            List<CRuta> listarutas = new List<CRuta>();
+            Dictionary<int, Entidad> listarRutas = new Dictionary<int, Entidad>();
+            //puedo usar Singleton
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            try
+            {
+                conexion.Open();
+                String sql = "SELECT r.rut_id as IRuta, lO.lug_nombre as PaisO, lD.lug_nombre as PaisD,  a.lug_nombre AS NOrigen,b.lug_nombre AS NDestino,r.rut_tipo_ruta AS TRuta,r.rut_distancia AS DRuta,r.rut_status_ruta AS SRuta FROM Ruta r, Lugar a, Lugar b, Lugar lO, Lugar lD WHERE r.rut_FK_lugar_origen=a.lug_id AND r.rut_FK_lugar_destino=b.lug_id AND a.lug_FK_lugar_id=lO.lug_id AND b.lug_FK_lugar_id=lD.lug_id";
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        //SE AGREGA CREA UN OBJECTO RUTA SE PASAN LOS ATRIBUTO ASI reader["<etiqueta de la columna en la tabla Rutas>"]
+                        //Y  SE AGREGA a listarutas
+                        Ruta ruta = new Ruta(Int32.Parse(reader["IRuta"].ToString()), Int32.Parse(reader["DRuta"].ToString()), reader["SRuta"].ToString(), reader["TRuta"].ToString(),
+                            reader["NOrigen"].ToString() + " - " + reader["PaisO"].ToString(), reader["NDestino"].ToString() + " - " + reader["PaisD"].ToString());
+                        listarRutas.Add(ruta._idRuta,ruta);
+                    }
+                }
+                conexion.Close();
+                return listarRutas;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                throw ex;
+            }
+        }
         public Boolean ValidarRuta(Entidad e)
         {
             Ruta ruta = (Ruta)e;
@@ -177,6 +207,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M03
                 while (lector.Read())
                 {
                     lugar = lector["ciudad"].ToString() + " - " + lector["pais"].ToString();
+
                     lugares.Add(lugar);
                 }
                 //cierro el lector
@@ -201,6 +232,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M03
             SqlConnection conexion = Connection.getInstance(_connexionString);
             try
             {
+                conexion.Open();
                 String sql = "SELECT a.lug_nombre AS NOrigen, lO.lug_nombre as PaisO, lD.lug_nombre as PaisD,b.lug_nombre AS NDestino,r.rut_tipo_ruta AS TRuta,r.rut_distancia AS DRuta,r.rut_status_ruta AS SRuta FROM Ruta r, Lugar a, Lugar b, Lugar lO, Lugar lD WHERE r.rut_FK_lugar_origen=a.lug_id AND r.rut_FK_lugar_destino=b.lug_id AND a.lug_FK_lugar_id=lO.lug_id AND b.lug_FK_lugar_id=lD.lug_id AND r.rut_id = '" + idRuta + "'";
                 SqlCommand cmd = new SqlCommand(sql, conexion);
 
@@ -294,7 +326,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M03
                 SqlDataReader lector = cmd.ExecuteReader();
 
                 lector.Close();
-
+                conexion.Close();
                 return true;
 
             }

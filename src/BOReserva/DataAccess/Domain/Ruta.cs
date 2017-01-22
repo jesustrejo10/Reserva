@@ -46,7 +46,7 @@ namespace BOReserva.DataAccess.Domain
         }
 
         /// <summary>
-        /// Constructor de la clase Vuelo con todos sus atributos inicializados
+        /// Constructor de la clase Ruta con todos sus atributos inicializados
         /// </summary>
         /// <param name="id"></param>
         /// <param name="codigoVuelo"></param>
@@ -54,8 +54,6 @@ namespace BOReserva.DataAccess.Domain
         /// <param name="ciudadDestino"></param>
         /// <param name="fechaDespegue"></param>
         /// <param name="status"></param>
-        /// <param name="fechaAterrizaje"></param>
-        /// <param name="idAvion"></param>
         public Ruta(String origenRuta, String destinoRuta, String tipo,
                     String status, int distancia, int idRuta)
         {

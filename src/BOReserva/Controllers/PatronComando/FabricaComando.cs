@@ -722,6 +722,12 @@ namespace BOReserva.Controllers.PatronComando
         }
         #endregion
         #region M03_Ruta
+        public static Command<Dictionary<int, Entidad>> crearM03_MListarRutasBD()
+        {
+
+            return new M03_COVisualizarRutas();
+
+        }
         public static Command<String> crearM03_AgregarRuta(Entidad e)
         {
 
@@ -758,10 +764,10 @@ namespace BOReserva.Controllers.PatronComando
             return new M03_COModificarRuta((Ruta)e, id);
 
         }
-        public static Command<Entidad> crearM03_MostrarRuta(Entidad e, int id)
+        public static Command<Entidad> crearM03_MostrarRuta(int id)
         {
 
-            return new M03_COMostrarRuta((Ruta)e, id);
+            return new M03_COMostrarRuta(id);
 
         }
 
