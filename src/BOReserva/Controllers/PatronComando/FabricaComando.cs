@@ -994,7 +994,7 @@ namespace BOReserva.Controllers.PatronComando
         {
 
             return new M03_COValidarRuta((Ruta)e, id);
-
+        }
 
         #region M11 Gestión de ofertas y paquetes
         //Agregar oferta
@@ -1022,7 +1022,7 @@ namespace BOReserva.Controllers.PatronComando
     }
         
         #endregion
-    }
+    
         /// <summary>
         /// Instancia el comando VisualizarOfertas
         /// </summary>

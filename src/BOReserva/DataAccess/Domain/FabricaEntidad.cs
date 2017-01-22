@@ -22,7 +22,6 @@ namespace BOReserva.DataAccess.Domain
 {
     /// <summary>
     /// Clase Creada con la finalidad de instanciar a cualquier objeto dentro del Dominio
-
     /// </summary>D:\UCAB\Desarrollo\Reserva\src\BOReserva\DataAccess\Domain\FabricaEntidad.cs
     public class FabricaEntidad
     {

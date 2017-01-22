@@ -277,6 +277,9 @@
     <Compile Include="Controllers\PatronComando\M06\M06_COAgregarComida.cs" />
     <Compile Include="Controllers\PatronComando\M06\M06_COConsultarComidas.cs" />
     <Compile Include="Controllers\PatronComando\M06\M06_COConsultarComidasVuelos.cs" />
+	<Compile Include="Controllers\PatronComando\M06\M06_COCambiarEstatusComida.cs" />
+    <Compile Include="Controllers\PatronComando\M06\M06_COEditarComida.cs" />
+    <Compile Include="Controllers\PatronComando\M06\M06_CORellenarComida.cs" />
     <Compile Include="Controllers\PatronComando\M08\M08_COActivarAutomovil.cs" />
     <Compile Include="Controllers\PatronComando\M08\M08_COBuscarAutomovil.cs" />
     <Compile Include="Controllers\PatronComando\M08\M08_COAgregarAutomovil.cs" />
@@ -349,6 +352,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>M07ReclamoEquipaje.resx</DependentUpon>
     </Compile>
+	
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCabina.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCamarotes.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCruceros.cs" />
