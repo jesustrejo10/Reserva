@@ -347,7 +347,6 @@ namespace BOReserva.DataAccess.Domain
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-
         public static Entidad InstanciarOferta(CAgregarOferta model)
         {
             return new Oferta(model._nombreOferta, model._porcentajeOferta, model._fechaIniOferta,
@@ -399,6 +398,17 @@ namespace BOReserva.DataAccess.Domain
                                fechaIniAuto, fechaIniRest, fechaIniHotel, fechaIniCruc, fechaIniVuelo, fechaFinAuto,
                                fechaFinRest, fechaFinHotel, fechaFinCruc, fechaFinVuelo, estadoPaquete);
 
+        }
+
+        /// <summary>
+        ///Instanciar Oferta con model CModificarOferta
+        /// </summary>
+        /// <param name="model">del tipo CModificarOferta</param>
+        /// <returns></returns>
+        public static Entidad InstanciarOferta(CModificarOferta model, Boolean estadoOferta, int id)
+        {
+            return new Oferta(id, model._nombreOferta, model._porcentajeOferta, model._fechaIniOferta,
+                              model._fechaFinOferta, estadoOferta);
         }
 
         public static Entidad InstanciarPaquete(int idpaquete, String nombrepaquete, float preciopaquete, 

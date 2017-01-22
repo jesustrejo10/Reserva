@@ -17,10 +17,10 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
         public DAOOferta() { }
 
         /// <summary>
-        /// Agregar Oferta a la BAse de Datos
+        /// Modificar Oferta en la BAse de Datos
         /// </summary>
         /// <param name="e">Entidad del tipo oferta</param>
-        /// <returns></returns>
+        /// <returns>1 si agregó y cero si no</returns>
         int IDAO.Agregar(Entidad e)
         {
             Oferta oferta = (Oferta)e;
@@ -32,16 +32,54 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
             try
             {
                 conexion.Open();
-                String querySql = "INSERT INTO Oferta VALUES ('"
-                                  + oferta._nombreOferta + "','" + oferta._fechaIniOferta.ToString("MM-dd-yyyy")
-                                  + "', '" + oferta._fechaFinOferta.ToString("MM-dd-yyyy") + "',"
-                                  + oferta._porcentajeOferta + ",'" + oferta._estadoOferta + "');";
-                Debug.WriteLine(querySql);
-                SqlCommand cmd = new SqlCommand(querySql, conexion);
-                cmd.ExecuteNonQuery();
-                cmd.Dispose();
-                conexion.Close();
-                return 1;
+                SqlCommand cmd = new SqlCommand("[dbo].[M11_AgregarOferta]", conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                Debug.WriteLine("HIZO CONEXIÓN EN VISUAL");
+
+                SqlParameter ParNombre = new SqlParameter();
+                ParNombre.ParameterName = "@ofe_nombre";
+                ParNombre.SqlDbType = SqlDbType.VarChar;
+                ParNombre.Value = oferta._nombreOferta;
+                cmd.Parameters.Add(ParNombre);
+
+                SqlParameter ParFechaIni = new SqlParameter();
+                ParFechaIni.ParameterName = "@ofe_fechaInicio";
+                ParFechaIni.SqlDbType = SqlDbType.Date;
+                ParFechaIni.Value = oferta._fechaIniOferta.ToString("yyyy-MM-dd");
+                cmd.Parameters.Add(ParFechaIni);
+
+                SqlParameter ParFechaFin = new SqlParameter();
+                ParFechaFin.ParameterName = "@ofe_fechaFin";
+                ParFechaFin.SqlDbType = SqlDbType.Date;
+                ParFechaFin.Value = oferta._fechaFinOferta.ToString("yyyy-MM-dd");
+                cmd.Parameters.Add(ParFechaFin);
+
+                SqlParameter ParPorcentaje = new SqlParameter();
+                ParPorcentaje.ParameterName = "@ofe_porcentaje";
+                ParPorcentaje.SqlDbType = SqlDbType.Float;
+                ParPorcentaje.Value = oferta._porcentajeOferta;
+                cmd.Parameters.Add(ParPorcentaje);
+
+                SqlParameter ParEstado = new SqlParameter();
+                ParEstado.ParameterName = "@ofe_estado";
+                ParEstado.SqlDbType = SqlDbType.Bit;
+
+                if (oferta._estadoOferta == true)
+                    ParEstado.Value = 1;
+                else
+                    ParEstado.Value = 0;
+
+                cmd.Parameters.Add(ParEstado);
+
+                Debug.WriteLine("HIZO LA PARTED DE PARÁMETRO");
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    cmd.Dispose();
+                    conexion.Close();
+                    return 1;
+                }
             }
             catch (SqlException ex)
             {
@@ -73,11 +111,104 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
             }
         }
 
-        Entidad IDAO.Modificar(Entidad e)
+        int IDAOOferta.Modificar(Entidad e, int idOferta)
         {
-            throw new NotImplementedException();
-        }
+            Debug.WriteLine("LLEGÓ A MODIFICAROFERTA");
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            Oferta oferta = (Oferta)e;
 
+            Debug.WriteLine("LLEGÓ A MODIFICAROFERTA" + idOferta);
+            Debug.WriteLine("LLEGÓ A MODIFICAROFERTA" + oferta._nombreOferta);
+
+            try
+            {
+                conexion.Open();
+                SqlCommand cmd = new SqlCommand("[dbo].[M11_ModificarOferta]", conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                Debug.WriteLine("HIZO CONEXIÓN EN VISUAL");
+
+                SqlParameter ParId = new SqlParameter();
+                ParId.ParameterName = "@ofe_id";
+                ParId.SqlDbType = SqlDbType.Int;
+                ParId.Value = idOferta;
+                cmd.Parameters.Add(ParId);
+
+                
+                SqlParameter ParNombre = new SqlParameter();
+                ParNombre.ParameterName = "@ofe_nombre";
+                ParNombre.SqlDbType = SqlDbType.VarChar;
+                ParNombre.Value = oferta._nombreOferta;
+                cmd.Parameters.Add(ParNombre);
+
+                SqlParameter ParFechaIni = new SqlParameter();
+                ParFechaIni.ParameterName = "@ofe_fechaInicio";
+                ParFechaIni.SqlDbType = SqlDbType.Date;
+                ParFechaIni.Value = oferta._fechaIniOferta.ToString("yyyy-MM-dd");
+                cmd.Parameters.Add(ParFechaIni);
+
+                SqlParameter ParFechaFin = new SqlParameter();
+                ParFechaFin.ParameterName = "@ofe_fechaFin";
+                ParFechaFin.SqlDbType = SqlDbType.Date;
+                ParFechaFin.Value = oferta._fechaFinOferta.ToString("yyyy-MM-dd");
+                cmd.Parameters.Add(ParFechaFin);
+
+                SqlParameter ParPorcentaje = new SqlParameter();
+                ParPorcentaje.ParameterName = "@ofe_porcentaje";
+                ParPorcentaje.SqlDbType = SqlDbType.Float;
+                ParPorcentaje.Value = oferta._porcentajeOferta;
+                cmd.Parameters.Add(ParPorcentaje);
+
+                SqlParameter ParEstado = new SqlParameter();
+                ParEstado.ParameterName = "@ofe_estado";
+                ParEstado.SqlDbType = SqlDbType.Bit;
+
+                if (oferta._estadoOferta == true)
+                    ParEstado.Value = 1;
+                else
+                    ParEstado.Value = 0;
+
+                cmd.Parameters.Add(ParEstado);
+
+                Debug.WriteLine("HIZO LA PARTED DE PARÁMETRO");
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    cmd.Dispose();
+                    conexion.Close();
+                    return 1;
+                }
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine("Ocurrio un SqlException");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return 0;
+            }
+            catch (NullReferenceException ex)
+            {
+                Debug.WriteLine("Ocurrio una NullReferenceException");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return 0;
+            }
+            catch (ArgumentNullException ex)
+            {
+                Debug.WriteLine("Ocurrio una ArgumentNullException");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Ocurrio una Exception");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return 0;
+            }
+        }
+    
         /// <summary>
         /// Metodo implementado de IDAO para consultar los ofertas de la BD
         /// </summary>

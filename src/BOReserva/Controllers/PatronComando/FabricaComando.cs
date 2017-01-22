@@ -565,6 +565,20 @@ namespace BOReserva.Controllers.PatronComando
 
         }
 
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M11_COModificarOferta
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M11_COModificarOferta.
+        /// </returns>
+        public static Command<String> crearM11ModificarOferta(Entidad oferta, int id)
+        {
+
+            return new M11_COModificarOferta(oferta, id);
+
+        }
+
         public static Command<String> crearM11DisponibilidadOferta(Entidad oferta, int disponibilidad)
         {
 
@@ -586,6 +600,7 @@ namespace BOReserva.Controllers.PatronComando
         {
 
             return new M11_COModificarPaquete(paquete, idmodificar);
+
 
         }
         #endregion
