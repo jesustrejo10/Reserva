@@ -17,6 +17,28 @@ using BOReserva.Controllers.PatronComando.M12;
 using BOReserva.DataAccess.Domain.M14;
 using BOReserva.Controllers.PatronComando.M09;
 using BOReserva.Controllers.PatronComando.M11;
+using BOReserva.Controllers.PatronComando.M01;
+        #region M01_Login
+        public static Command<Entidad> M01ConsultarUsuario(Entidad _usuario)
+        {
+            return new M01_COConsultarUsuario(_usuario);
+        }
+
+        public static Command<Boolean> M01BloquearUsuario(Entidad _usuario)
+        {
+            return new M01_COBloquearUsuario(_usuario);
+        }
+
+        public static Command<Boolean> M01ResetearIntentos(Entidad _usuario)
+        {
+            return new M01_COResetearIntentos(_usuario);
+        }
+
+        public static Command<Boolean> M01IncrementarIntentos(Entidad _usuario)
+        {
+            return new M01_COIncrementarIntentos(_usuario);
+        }
+        #endregion
 
 namespace BOReserva.Controllers.PatronComando
 {
