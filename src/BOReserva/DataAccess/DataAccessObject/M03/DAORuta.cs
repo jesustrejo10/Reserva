@@ -125,7 +125,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M03
                 //Inicializo la conexion con el string de conexion
                 //INTENTO abrir la conexion
                 conexion.Open();
-                String query = "SELECT l.lug_nombre as ciudad, ll.lug_nombre as pais from Lugar l, Lugar ll where l.lug_FK_lugar_id = ll.lug_id";
+                String query = "SELECT l.lug_nombre as ciudad, ll.lug_nombre as pais,r.rut_id as idruta from Lugar l, Lugar ll,ruta r where l.lug_FK_lugar_id = ll.lug_id and r.rut_FK_lugar_origen = l.lug_id";
 
                 SqlCommand cmd = new SqlCommand(query, conexion);
 
@@ -135,7 +135,12 @@ namespace BOReserva.DataAccess.DataAccessObject.M03
                 while (lector.Read())
                 {
                     lugar = lector["ciudad"].ToString() + " - " + lector["pais"].ToString();
-                    lugares.Add(lugar);
+                    int id = Int32.Parse(lector["idruta"].ToString());
+                    Ruta lugarO = new Ruta();
+                    lugarO._origenRuta = lugar;
+                    lugarO._idRuta = id;
+
+                    listaLugares.Add(lugarO._idRuta,lugarO);
                 }
                 //cierro el lector
                 lector.Close();
