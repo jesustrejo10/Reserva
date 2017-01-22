@@ -416,7 +416,7 @@ namespace BOReserva.Controllers.PatronComando
 
         public static Command<List<Entidad>> ConsultarPasajeros(int id)
         {
-            return new M05_COConsultarBoletos(id);
+            return new M05_COConsultarBoletosPasajero(id);
         }
 
         #endregion
