@@ -209,6 +209,11 @@
     <Compile Include="Controllers\gestion_vuelosController.cs" />
     <Compile Include="Controllers\PatronComando\Command.cs" />
     <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COIniciarSesione.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COModificarPerfil.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COAgregarUsuario.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COConsultarUsuario.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COVerificarCorreo.cs" />
     <Compile Include="Controllers\PatronComando\M16\M16_COModificarReclamo.cs" />
     <Compile Include="Controllers\PatronComando\M16\M16_COAgregarReclamo.cs" />
     <Compile Include="Controllers\PatronComando\M16\M16_COConsultarReclamoDetalle.cs" />
@@ -231,9 +236,16 @@
     <Compile Include="DataAccess\DataAccessObject\DAOReclamo.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\registro_autenticacionController.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORegistroU.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReservaAutomovil.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReservaHabitacion.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORevision.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M14\DAORegistroU.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M14\RecursoDAOM14.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RecursoDAOM14.resx</DependentUpon>
+    </Compile>
     <Compile Include="DataAccess\DataAccessObject\M16\M16Reclamos.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -269,6 +281,7 @@
     <Compile Include="DataAccess\Domain\Revision.cs" />
     <Compile Include="DataAccess\Domain\RevisionValoracion.cs" />
     <Compile Include="DataAccess\Domain\Usuario.cs" />
+    <Compile Include="DataAccess\Domain\Usuario1.cs" />
     <Compile Include="DataAccess\Model\Connection.cs" />
     <Compile Include="DataAccess\Model\ExceptionBD.cs" />
     <Compile Include="DataAccess\Model\Parametro.cs" />
@@ -357,6 +370,7 @@
     <Compile Include="Models\ReservaHabitacion\CProcesoResultado.cs" />
     <Compile Include="Models\ReservaHabitacion\CReservaHabitacion.cs" />
     <Compile Include="Models\Restaurantes\Cvista_restaurante.cs" />
+    <Compile Include="Models\Sesion\CAgregarUsuario.cs" />
     <Compile Include="Models\Sesion\Ccliente.cs" />
     <Compile Include="Models\Sesion\Ccodigo_Temporal.cs" />
     <Compile Include="Models\Sesion\Ccontrasena.cs" />
@@ -3277,6 +3291,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="DataAccess\DataAccessObject\M14\RecursoDAOM14.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecursoDAOM14.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="DataAccess\DataAccessObject\M16\M16Reclamos.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>M16Reclamos.Designer.cs</LastGenOutput>

@@ -8,6 +8,9 @@
     }
 }
 
+
+
+alert("ALERTTTTTTTTTT");
 /* Cargador Generico */
 function cargarContenido(seccion, tipo, url, data, boton) {
 
@@ -56,6 +59,8 @@ function cargarContenido(seccion, tipo, url, data, boton) {
             }
         });
 };
+
+
 
 
 jQuery(document).ready(function () {

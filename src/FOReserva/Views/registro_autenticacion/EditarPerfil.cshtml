@@ -184,3 +184,42 @@
         </div>
     }
 </div>
+
+<script>
+
+    $("#btn-envio").click(function (e) {
+        e.preventDefault();
+        var form = $("#formularioRegistro");
+        var nombre = $('#nombre').val();
+        var apellido = $('#apellido').val();
+        var genero = $('#genero').val();
+        var cod_telefono = $('#cod_telefono').val();
+        var num_telefono = $('#num-telefono').val();
+
+        if (nombre && apellido && genero && cod_telefono && num_telefono) {
+            $.ajax({
+                url: "registro_autenticacion/EditarPerfil",
+                data: form.serialize(),
+                type: 'POST',
+                success: function (data) {
+                    if (data === 1) {
+                        alert("Se edito el perfil exitosamente");
+                        //$('#formSaveVehicle')[0].reset();
+                    } else {
+                        alert(data);
+                    }
+                }
+            });
+        } else {
+            alert("Ocurrio un error al editar perfil");
+        }
+    });
+
+
+
+</script>
+
+
+
+
+

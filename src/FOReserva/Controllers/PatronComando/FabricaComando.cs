@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using BOReserva.Controllers.PatronComando;
+using FOReserva.Controllers.PatronComando.M14;
 
 namespace FOReserva.Controllers.PatronComando
 {
@@ -169,6 +170,56 @@ namespace FOReserva.Controllers.PatronComando
         public static Command<String> modificarReservaUsuario(int id, int cant_dias)
         {
             return new M22_COModificarReserva(id,cant_dias);
+        }
+        #endregion
+
+
+
+        #region M14 Registro
+
+        public static Command<String> crearM14AgregarUsuario(Entidad e)
+        {
+
+            return new M14_COAgregarUsuario((Usuario1)e);
+
+        }
+
+        public static Command<String> M14VerificarCorreo(Entidad e)
+        {
+
+            return new M14_COVerificarCorreo((Usuario1)e);
+
+        }
+
+        public enum comandosGeneralesAutenticacion
+        {
+            CREAR,
+            ELIMINAR,
+            ACTUALIZAR,
+            CONSULTAR,
+            INICIARSESION,
+            BUSCARUSUARIO
+        }
+
+        public static Object comandosAutenticacion(comandosGeneralesAutenticacion comando, Entidad _objeto)
+        {
+            switch (comando)
+            {
+                case comandosGeneralesAutenticacion.ACTUALIZAR:
+                    return new M14_COModificarPerfil(_objeto);
+
+                case comandosGeneralesAutenticacion.CONSULTAR:
+                    return new M14_COModificarPerfil(_objeto);
+
+                case comandosGeneralesAutenticacion.INICIARSESION:
+                    return new M14_COIniciarSesion(_objeto);
+
+                case comandosGeneralesAutenticacion.BUSCARUSUARIO:
+                    return new M14_COConsultarUsuario(_objeto);
+
+                default:
+                    return new M14_COModificarPerfil(_objeto);
+            }
         }
         #endregion
     }

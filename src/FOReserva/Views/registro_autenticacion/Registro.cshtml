@@ -3,100 +3,19 @@
     ViewBag.Title = "Registro";
 }
 
-@model FOReserva.Models.Sesion.Ccliente
+@model FOReserva.Models.Sesion.CAgregarUsuario
 
-<script>
-    function validaCaracteres(e) {
-        key = e.keyCode || e.which;
-        tecla = String.fromCharCode(key).toLowerCase();
-        letras = " abcdefghijklmnñopqrstuvwxyz0123456789";
-        especiales = [45, 46, 95, 8];
-
-
-        tecla_especial = false
-        for (var i in especiales) {
-            if (key == especiales[i]) {
-                tecla_especial = true;
-                break;
-            }
-        }
-
-        if (letras.indexOf(tecla) == -1 && !tecla_especial)
-            return false;
-    }
-
-    function validaLetras(e) {
-        key = e.keyCode || e.which;
-        tecla = String.fromCharCode(key).toLowerCase();
-        letras = "abcdefghijklmnñopqrstuvwxyz";
-        especiales = [8];
-
-
-        tecla_especial = false
-        for (var i in especiales) {
-            if (key == especiales[i]) {
-                tecla_especial = true;
-                break;
-            }
-        }
-
-        if (letras.indexOf(tecla) == -1 && !tecla_especial)
-            return false;
-    }
-
-    function validaLetrasYEspacio(e) {
-        key = e.keyCode || e.which;
-        tecla = String.fromCharCode(key).toLowerCase();
-        letras = " abcdefghijklmnñopqrstuvwxyz0123456789";
-        especiales = [8];
-
-
-        tecla_especial = false
-        for (var i in especiales) {
-            if (key == especiales[i]) {
-                tecla_especial = true;
-                break;
-            }
-        }
-
-        if (letras.indexOf(tecla) == -1 && !tecla_especial)
-            return false;
-    }
-
-    function validaCorreo(e) {
-        key = e.keyCode || e.which;
-        tecla = String.fromCharCode(key).toLowerCase();
-        letras = " abcdefghijklmnñopqrstuvwxyz0123456789";
-        especiales = [45, 46, 95, 64, 8];
-
-        tecla_especial = false
-        for (var i in especiales) {
-            if (key == especiales[i]) {
-                tecla_especial = true;
-                break;
-            }
-        }
-
-        if (letras.indexOf(tecla) == -1 && !tecla_especial)
-            return false;
-    }
-
-    var error = '@ViewData["error"]';
-    if (error.length > 3) {
-        alert('@ViewData["error"]');
-    }
-</script>
 
 <div class="container">
     <div class="row container-form">
         <div class="col-md-6 col-md-offset-3">
-            @using (Html.BeginForm("Registro", "registro_autenticacion", FormMethod.Post, new { @class = "nomargin sky-form", @id = "formularioRegistro" }))
+            @using (Html.BeginForm("guardarUsuario", "registro_autenticacion", FormMethod.Post, new { @class = "nomargin sky-form", @id = "formularioRegistro", @name = "formularioRegistro" }))
             {
                 <fieldset>
                     <div class="row">
-                        <dic class="col-md-12">
+                        <div class="col-md-12">
                             <h2>Registrarse</h2>
-                        </dic>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="form-group">
@@ -365,7 +284,7 @@
                 </fieldset>
                 <div class="row">
                     <div class="col-md-12 text-right">
-                        <button type="submit" id="regBotonSubmit" class="btn btn-primary"><i class="fa fa-check"></i>Registrarse</button>
+                        <button type="buttom" id="regBotonSubmit" class="btn btn-primary"><i class="fa fa-check"></i>Registrarse</button>
                     </div>
                     <!-- DIV OCULTOS  PARA VALIDACIONES-->
                     <div id="regErrorEnFormulario" style="display: none;" class="has-error error">
@@ -380,3 +299,145 @@
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<script>
+
+    $("#regBotonSubmit").click(function (e) {
+        e.preventDefault();
+       
+        var form = $("#formularioRegistro");
+        var nombre = $('#regNombre').val();
+        var apellido = $('#regApellido').val();
+        var correo = $('#regCorreo').val();
+        var clave = $('#regClave').val();
+
+        var pregunta1 = $('#regPregunta0').val();
+        var respuesta1 = $('#regRespuesta0').val();
+        var pregunta2 = $('#regPregunta1').val();
+        var respuesta2 = $('#regRespuesta1').val();
+        var pregunta3 = $('#regPregunta2').val();
+        var respuesta3 = $('#regRespuesta2').val();
+
+        if (nombre.length > 0 && apellido.length > 0 && corre.length > 0 && clave.length > 0 && respuesta1.length > 0 && respuesta2.length > 0 && respuesta3.length > 0) {
+            document.forms['formularioRegistro'].submit();
+
+        } else {
+            alert("Existen campos vacios, por favor revise todos los campos");
+        }
+
+
+        //-----------------------------------------------------
+        //$.ajax({
+        //    url: "/registro_autenticacion/guardarUsuario",
+        //    data: form.serialize(),
+        //    type: 'POST',
+
+        //    success: function (data) {
+        //        console.log("esta es la data:" + data);
+        //        if (data == "1") {
+        //            alert("Se registro el Usuario exitosamente");
+        //            window.location = '/registro_autenticacion/Login';
+        //        } else {
+        //            alert(data);
+        //        }
+        //    },
+        //    error: function (jqXHR, exception) { if (jqXHR.status === 0) { alert('Not connect.\n Verify Network.'); } else if (jqXHR.status == 404) { alert('Requested page not found. [404]'); } else if (jqXHR.status == 500) { alert('Internal Server Error [500].'); } else if (exception === 'parsererror') { alert('Requested JSON parse failed.'); } else if (exception === 'timeout') { alert('Time out error.'); } else if (exception === 'abort') { alert('Ajax request aborted.'); } else { alert('Uncaught Error.\n' + jqXHR.responseText); } }
+
+        //});
+        //var form = $("#formularioRegistro");
+        //var nombre = $('#regNombre').val();
+        //var apellido = $('#regApellido').val();
+        //var correo = $('#regCorreo').val();
+        //var clave= $('#regClave').val();
+     
+        //alert("antes del if ");
+        //if (nombre && apellido && correo && clave) {
+        //    alert("despues del if");
+           
+        //} else {
+        //    alert("Existen campos vacios, por favor revise todos los campos");
+    }
+    });
+
+    function validaCaracteres(e) {
+        key = e.keyCode || e.which;
+        tecla = String.fromCharCode(key).toLowerCase();
+        letras = " abcdefghijklmnñopqrstuvwxyz0123456789";
+        especiales = [45, 46, 95, 8];
+
+
+        tecla_especial = false
+        for (var i in especiales) {
+            if (key == especiales[i]) {
+                tecla_especial = true;
+                break;
+            }
+        }
+
+        if (letras.indexOf(tecla) == -1 && !tecla_especial)
+            return false;
+    }
+
+    function validaLetras(e) {
+        key = e.keyCode || e.which;
+        tecla = String.fromCharCode(key).toLowerCase();
+        letras = "abcdefghijklmnñopqrstuvwxyz";
+        especiales = [8];
+
+
+        tecla_especial = false
+        for (var i in especiales) {
+            if (key == especiales[i]) {
+                tecla_especial = true;
+                break;
+            }
+        }
+
+        if (letras.indexOf(tecla) == -1 && !tecla_especial)
+            return false;
+    }
+
+    function validaLetrasYEspacio(e) {
+        key = e.keyCode || e.which;
+        tecla = String.fromCharCode(key).toLowerCase();
+        letras = " abcdefghijklmnñopqrstuvwxyz0123456789";
+        especiales = [8];
+
+
+        tecla_especial = false
+        for (var i in especiales) {
+            if (key == especiales[i]) {
+                tecla_especial = true;
+                break;
+            }
+        }
+
+        if (letras.indexOf(tecla) == -1 && !tecla_especial)
+            return false;
+    }
+
+    function validaCorreo(e) {
+        key = e.keyCode || e.which;
+        tecla = String.fromCharCode(key).toLowerCase();
+        letras = " abcdefghijklmnñopqrstuvwxyz0123456789";
+        especiales = [45, 46, 95, 64, 8];
+
+        tecla_especial = false
+        for (var i in especiales) {
+            if (key == especiales[i]) {
+                tecla_especial = true;
+                break;
+            }
+        }
+
+        if (letras.indexOf(tecla) == -1 && !tecla_especial)
+            return false;
+    }
+
+    var error = '@ViewData["error"]';
+    if (error.length > 3) {
+        alert('@ViewData["error"]');
+    }
+</script>

@@ -10,6 +10,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using FOReserva.DataAccess.DataAccessObject.M20;
+using FOReserva.DataAccess.DataAccessObject.M14;
 
 namespace FOReserva.DataAccess.DataAccessObject
 
@@ -98,6 +99,18 @@ namespace FOReserva.DataAccess.DataAccessObject
         public static IDAOReservaHabitacion instanciarDaoReservaHabitacion()
         {
             return new DAOReservaHabitacion();
+        }
+
+        #endregion
+
+
+        #region M14_RegistroUsuario
+
+
+
+        public static DAORegistroU instanciarDaoUsuario()
+        {
+            return new DAORegistroU();
         }
 
         #endregion
