@@ -152,8 +152,8 @@
                 url: "gestion_roles/modificarrol",
                 data: { id_rol: id_rol, nuevo_rol: nuevo_rol },
                 type: 'POST',
-                success: function () {
-                    alert("Se cambio exitosamente el nombre del rol");
+                success: function (response) {
+                    console.log(response);
                     asignarPermisos();
                 }
             });

@@ -200,6 +200,8 @@ namespace BOReserva.Controllers
                 //con la fabrica instancie al hotel.
                 Command<String> comando = FabricaComando.crearM13_ModificarRol(modificarRol, model.Id_Rol);
                 agrego_si_no = comando.ejecutar();
+                //envio una respuesta dependiendo del resultado del insert
+                return (Json(true, JsonRequestBehavior.AllowGet));
             }
             catch (SqlException e)
             {
@@ -214,10 +216,6 @@ namespace BOReserva.Controllers
                 String error = "Error desconocido, contacte con el administrador.";
                 return Json(error);
             }
-            //envio una respuesta dependiendo del resultado del insert
-            return (Json(true, JsonRequestBehavior.AllowGet));
-
-
         }
 
         ///<summary>
@@ -316,6 +314,10 @@ namespace BOReserva.Controllers
                 rolbuscado._id = _idRol;
                 Command<String> comando1 = FabricaComando.crearM13_EliminarRol(rolbuscado, _idRol);
                 borro_si_no = comando1.ejecutar();
+                if (borro_si_no != "1")
+                {
+                    throw new Exception("No se pudo procesar la operación");
+                }
             }
             catch (SqlException e)
             {
