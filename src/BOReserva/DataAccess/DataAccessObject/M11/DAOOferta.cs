@@ -32,16 +32,54 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
             try
             {
                 conexion.Open();
-                String querySql = "INSERT INTO Oferta VALUES ('"
-                                  + oferta._nombreOferta + "','" + oferta._fechaIniOferta.ToString("MM-dd-yyyy")
-                                  + "', '" + oferta._fechaFinOferta.ToString("MM-dd-yyyy") + "',"
-                                  + oferta._porcentajeOferta + ",'" + oferta._estadoOferta + "');";
-                Debug.WriteLine(querySql);
-                SqlCommand cmd = new SqlCommand(querySql, conexion);
-                cmd.ExecuteNonQuery();
-                cmd.Dispose();
-                conexion.Close();
-                return 1;
+                SqlCommand cmd = new SqlCommand("[dbo].[M11_AgregarOferta]", conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                Debug.WriteLine("HIZO CONEXIÓN EN VISUAL");
+
+                SqlParameter ParNombre = new SqlParameter();
+                ParNombre.ParameterName = "@ofe_nombre";
+                ParNombre.SqlDbType = SqlDbType.VarChar;
+                ParNombre.Value = oferta._nombreOferta;
+                cmd.Parameters.Add(ParNombre);
+
+                SqlParameter ParFechaIni = new SqlParameter();
+                ParFechaIni.ParameterName = "@ofe_fechaInicio";
+                ParFechaIni.SqlDbType = SqlDbType.Date;
+                ParFechaIni.Value = oferta._fechaIniOferta.ToString("yyyy-MM-dd");
+                cmd.Parameters.Add(ParFechaIni);
+
+                SqlParameter ParFechaFin = new SqlParameter();
+                ParFechaFin.ParameterName = "@ofe_fechaFin";
+                ParFechaFin.SqlDbType = SqlDbType.Date;
+                ParFechaFin.Value = oferta._fechaFinOferta.ToString("yyyy-MM-dd");
+                cmd.Parameters.Add(ParFechaFin);
+
+                SqlParameter ParPorcentaje = new SqlParameter();
+                ParPorcentaje.ParameterName = "@ofe_porcentaje";
+                ParPorcentaje.SqlDbType = SqlDbType.Float;
+                ParPorcentaje.Value = oferta._porcentajeOferta;
+                cmd.Parameters.Add(ParPorcentaje);
+
+                SqlParameter ParEstado = new SqlParameter();
+                ParEstado.ParameterName = "@ofe_estado";
+                ParEstado.SqlDbType = SqlDbType.Bit;
+
+                if (oferta._estadoOferta == true)
+                    ParEstado.Value = 1;
+                else
+                    ParEstado.Value = 0;
+
+                cmd.Parameters.Add(ParEstado);
+
+                Debug.WriteLine("HIZO LA PARTED DE PARÁMETRO");
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    cmd.Dispose();
+                    conexion.Close();
+                    return 1;
+                }
             }
             catch (SqlException ex)
             {
@@ -106,13 +144,13 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
                 SqlParameter ParFechaIni = new SqlParameter();
                 ParFechaIni.ParameterName = "@ofe_fechaInicio";
                 ParFechaIni.SqlDbType = SqlDbType.Date;
-                ParFechaIni.Value = oferta._fechaIniOferta.ToString("MM-dd-yyyy");
+                ParFechaIni.Value = oferta._fechaIniOferta.ToString("yyyy-MM-dd");
                 cmd.Parameters.Add(ParFechaIni);
 
                 SqlParameter ParFechaFin = new SqlParameter();
                 ParFechaFin.ParameterName = "@ofe_fechaFin";
                 ParFechaFin.SqlDbType = SqlDbType.Date;
-                ParFechaFin.Value = oferta._fechaFinOferta.ToString("MM-dd-yyyy");
+                ParFechaFin.Value = oferta._fechaFinOferta.ToString("yyyy-MM-dd");
                 cmd.Parameters.Add(ParFechaFin);
 
                 SqlParameter ParPorcentaje = new SqlParameter();
