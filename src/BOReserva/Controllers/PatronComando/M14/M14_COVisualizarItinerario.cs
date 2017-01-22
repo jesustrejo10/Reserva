@@ -7,8 +7,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.Controllers.PatronComando
+namespace BOReserva.Controllers.PatronComando.M14
 {
+
+    /// <summary>
+    /// Comando destinado a Realizar las respectivas operaciones necesarias
+    /// para Visualizar los Itinerarios a la BD
+    /// </summary>
     public class M14_COVisualizarItinerario : Command<Dictionary<int, Entidad>>
     {
 

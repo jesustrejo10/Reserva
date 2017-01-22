@@ -22,6 +22,10 @@ namespace BOReserva.Controllers
             return PartialView();
         }
 
+        /// <summary>
+        /// Método de la vista parcial M24_AgregarCabinas
+        /// </summary>
+        /// <returns>Retorna la vista parcial M24_AgregarCabinas en conjunto del Modelo de dicha vista</returns>
         public ActionResult M24_AgregarCabinas()
         {
 
@@ -68,6 +72,10 @@ namespace BOReserva.Controllers
             return PartialView("M24_AgregarItinerario", itinerario);            
         }
 
+        /// <summary>
+        /// Método de la vista parcial M24_AgregarCamarote
+        /// </summary>
+        /// <returns>Retorna la vista parcial M24_AgregarCamarote en conjunto del Modelo de dicha vista</returns>
         public ActionResult M24_AgregarCamarote()
         {
             CGestion_camarote camarote = new CGestion_camarote();
@@ -118,7 +126,7 @@ namespace BOReserva.Controllers
                     BOReserva.DataAccess.Domain.Cabina c = (BOReserva.DataAccess.Domain.Cabina) cabina.Value;
                     lista.Add(c._nombreCabina);
                 }
-                camarote._listaCabinas = lista.Select(x => new SelectListItem
+                camarote._listaCruceros = lista.Select(x => new SelectListItem
                 {
                     Value = x,
                     Text = x
@@ -149,12 +157,12 @@ namespace BOReserva.Controllers
         }
 
 
-        /*public JsonResult M24_ListarCamarotes(int id)
+        public JsonResult M24_ListarCamarotes(int id)
         {
             ConexionBD cbd = new ConexionBD();
             var listaCamarotes = cbd.listarCamarotes(id);
             return (Json(listaCamarotes, JsonRequestBehavior.AllowGet));
-        }*/
+        }
 
         /// <summary>
         /// Método de la vista parcial M24ListarCruceros
@@ -168,9 +176,9 @@ namespace BOReserva.Controllers
         }
 
         /// <summary>
-        /// Método de la vista parcial M24ListarCruceros
+        /// Método de la vista parcial M24ListarItinerarios
         /// </summary>
-        /// <returns>Retorna la vista parcial M24_ListarCruceros en conjunto del Modelo de dicha vista</returns>
+        /// <returns>Retorna la vista parcial M24_ListarItinerarios en conjunto del Modelo de dicha vista</returns>
         public ActionResult M24_ListarItinerario()
         {
             Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14Visualizaritinerario();
@@ -187,17 +195,6 @@ namespace BOReserva.Controllers
             Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14VisualizarCabinas(id);
             Dictionary<int, Entidad> listaCabinas = comando.ejecutar();
             return PartialView(listaCabinas);
-        }
-
-        /// <summary>
-        /// Método de la vista parcial M24_ListarCamarotes
-        /// </summary>
-        /// <returns>Retorna la vista parcial M24_ListarCamarotes en conjunto del Modelo de dicha vista</returns>
-        public ActionResult M24_ListarCamarotes(int id)
-        {
-            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14VisualizarCamarotes(id);
-            Dictionary<int, Entidad> listaCamarotes = comando.ejecutar();
-            return PartialView(listaCamarotes);
         }
 
         [HttpPost]
@@ -228,9 +225,21 @@ namespace BOReserva.Controllers
             Entidad nuevaCabina = FabricaEntidad.InstanciarCabinaN(model);
             Command<String> comando = FabricaComando.crearM14AgregarCabina(nuevaCabina);
             String result = comando.ejecutar();
-            return (Json(result));
-        }       
+            return (Json(result));            
+        }
         
+        [HttpPost]
+        public JsonResult guardaCabina(CGestion_cabina model)
+        {
+            String _nombreCabina = model._nombreCabina;
+            float _precioCabina = model._precioCabina;
+            int _fkCrucero = model._fkCrucero;
+
+            CGestion_cabina cabina = new CGestion_cabina(_nombreCabina, _precioCabina, _fkCrucero);
+            cabina.AgregarCabinas(cabina);
+
+            return (Json(true, JsonRequestBehavior.AllowGet));
+        }
 
         [HttpPost]
         public JsonResult guardarCamarote(CGestion_camarote model)
@@ -239,11 +248,10 @@ namespace BOReserva.Controllers
             String _tipoCama = model._tipoCama;
             int _fkCabina = model._fkCabina;
 
-            Entidad nuevoCamarote = FabricaEntidad.InstanciarCamaroteN(model);
-            Command<String> comando = FabricaComando.crearM14AgregarCamarote(nuevoCamarote);
-            String result = comando.ejecutar();
-            return (Json(result));
-            
+            CGestion_camarote camarote = new CGestion_camarote(_cantidadCama, _tipoCama, _fkCabina);
+            camarote.AgregarCamarote(camarote);
+
+            return (Json(true, JsonRequestBehavior.AllowGet));
         }
 
 

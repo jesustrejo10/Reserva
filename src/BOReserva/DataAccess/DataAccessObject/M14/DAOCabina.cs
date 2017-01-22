@@ -12,6 +12,10 @@ using System.Web;
 
 namespace BOReserva.DataAccess.DataAccessObject.M14
 {
+
+    /// <summary>
+    /// Clase Dao cabina para realizar los procedimientos de base de datos
+    /// </summary>
     public class DAOCabina : DAO, IDAOCabina
     {
         int IDAO.Agregar(Entidad e)
@@ -62,7 +66,8 @@ namespace BOReserva.DataAccess.DataAccessObject.M14
 
                 query.CommandType = CommandType.StoredProcedure;
                 query.Parameters.AddWithValue("@crucero", nombreCrucero);
-                SqlDataReader reader = query.ExecuteReader();                
+                SqlDataReader reader = query.ExecuteReader();
+                //int elemento = 0;
                 while (reader.Read())
                 {
                     cabina = new Cabina(
@@ -70,9 +75,9 @@ namespace BOReserva.DataAccess.DataAccessObject.M14
                         reader["nombre"].ToString(),
                         float.Parse(reader["precio"].ToString()),
                         reader["estatus"].ToString(),
-                        int.Parse(reader["crucero"].ToString()));
+                        int.Parse(reader["capacidad"].ToString()));
                     listaCabinas.Add(Int32.Parse(reader["id"].ToString()), cabina);
-                    
+                    //elemento++;
                 }
                 reader.Close();
                 con.Close();

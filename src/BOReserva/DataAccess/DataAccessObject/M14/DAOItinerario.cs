@@ -15,6 +15,10 @@ namespace BOReserva.DataAccess.DataAccessObject.M14
     public class DAOItinerario : DAO, IDAOItinerario
     {
 
+        /// <summary>
+        /// Clase Dao itinerario para realizar los procedimientos de base de datos
+        /// </summary>
+
         Dictionary<int, Entidad> IDAO.ConsultarTodos()
         {
             //List<Crucero> listavehiculos = new List<Crucero>();
