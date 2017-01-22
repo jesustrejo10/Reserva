@@ -35,7 +35,7 @@ namespace BOReserva.Controllers.PatronComando.M09
             IDAO daoHotel = FabricaDAO.instanciarDaoHotel();
             Entidad test = daoHotel.Modificar(_hotel);
             Hotel hotel = (Hotel)test;
-            return hotel._nombre;
+            return "Se modifico el hotel exitosamente, sera redirigido al listado de hoteles";
         }
             catch (ReservaExceptionM09 ex)
             {

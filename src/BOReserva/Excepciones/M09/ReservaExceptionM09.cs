@@ -53,8 +53,21 @@ namespace BOReserva.Excepciones.M09
         /// <param name="inner">Excepcion SqlException</param>
         public ReservaExceptionM09(string mensaje, SqlException inner)
         {
-            _Mensaje = "Reserva-404: Ha ocurrido un problema con la base de datos. Para mayor detalle revisar el Log de errores";
-            _Excepcion = inner;
+            if ((inner.Message.Contains("paq_fk_hotel")))
+            {
+                _Mensaje = "Reserva-404: No se puede eliminar el hotel porque tiene paquetes vacacionales asociados. Para mayor detalle revisar el Log de errores";
+                _Excepcion = inner;
+            }
+            else if (inner.Message.Contains("rha_fk_hot_id"))
+                {
+                    _Mensaje = "Reserva-404: No se puede eliminar el hotel porque tiene reservaciones de habitaciones asocidas. Para mayor detalle revisar el Log de errores";
+                    _Excepcion = inner;
+                }
+            else
+            {
+                _Mensaje = "Reserva-404: Ha ocurrido un problema con la base de datos. Para mayor detalle revisar el Log de errores";
+                _Excepcion = inner;
+            }
         }
 
 

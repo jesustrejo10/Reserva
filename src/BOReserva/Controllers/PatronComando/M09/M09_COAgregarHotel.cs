@@ -41,7 +41,14 @@ namespace BOReserva.Controllers.PatronComando
                     Command<int> add = FabricaComando.crearM09AgregarHabitaciones(_hotel, _hotel._precio);
                     int ad = add.ejecutar();
                 }
-                return resultadoAgregarHotel.ToString();
+                if (resultadoAgregarHotel == 1)
+                {
+                    return "Se registro el hotel exitosamente";
+                }
+                else
+                {
+                    return "Hubo un error";
+                }
             }
             catch (ReservaExceptionM09 ex)
             {
