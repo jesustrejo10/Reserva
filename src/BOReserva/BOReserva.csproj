@@ -208,7 +208,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\gestion_equipajeController.cs" />
-    <Compile Include="Controllers\gestion_extravioController.cs" />
     <Compile Include="Controllers\gestion_reclamosEquipajeController.cs" />
     <Compile Include="Controllers\M04\gestion_vueloController.cs" />
     <Compile Include="Controllers\PatronComando\Command.cs" />
