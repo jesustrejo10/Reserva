@@ -5,9 +5,8 @@ using System.Web;
 
 namespace BOReserva.DataAccess.Domain
 {
-    public class Ruta
+    public class Ruta : Entidad
     {
-        private int _id;
         private String _origen;
         private String _destino;
         private String _estado;

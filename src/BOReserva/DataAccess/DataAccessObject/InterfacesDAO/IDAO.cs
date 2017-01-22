@@ -31,12 +31,6 @@ namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
         /// <returns>Retorna la entidad encontrada en Bd</returns>
         Entidad Consultar(int id);
         /// <summary>
-        /// Eliminar un registro de BD
-        /// </summary>
-        /// <param name="id">Recibe el Id del registro a eliminar</param>
-        /// <returns>Retorna 1, si fue eliminado correctamente y 0 no fue eliminado</returns>
-        int Eliminar(int id);
-        /// <summary>
         /// Consultar todos los registros de una tabla en BD
         /// </summary>
         /// <returns>Devuelve un Map, indicando todos los registros de una tabla de BD</returns>

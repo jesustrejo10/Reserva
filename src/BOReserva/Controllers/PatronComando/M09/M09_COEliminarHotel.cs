@@ -49,6 +49,7 @@ namespace BOReserva.Controllers.PatronComando.M09
             }
             catch (ReservaExceptionM09 ex)
             {
+                //este throw esta incorrecto
                 throw ex;
             }
         }

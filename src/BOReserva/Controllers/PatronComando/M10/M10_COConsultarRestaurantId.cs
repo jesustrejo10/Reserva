@@ -10,7 +10,9 @@ using System.Web;
 
 namespace BOReserva.M10.Comando.gestion_restaurantes
 {
-
+    /// <summary>
+    /// Clase Comando Consultar Restaurant segun el Id
+    /// </summary>
     public class M10_COConsultarRestaurantId : Command<Entidad>
     {
         #region Atributos

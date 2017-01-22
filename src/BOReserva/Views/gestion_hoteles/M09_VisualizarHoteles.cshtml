@@ -99,58 +99,7 @@
 </div>
 <!-- /.row -->
 
-<script>
 
-    $("#m08_VisualizarAutomovil").click(function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-        var url = '/gestion_automoviles/M08_VisualizarAutomovil';
-        var method = 'GET';
-        var data = '';
-
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(data);
-                }
-            });
-
-    });
-
-
-    $("#m08_ModificarAutomovil").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_automoviles/M08_ModificarAutomovil';
-        var method = 'GET';
-        var data = '';
-
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-
-    });
-
-</script>
 
 <!-- DataTables -->
 <script src="../../Content/plugins/datatables/jquery.dataTables.min.js"></script>

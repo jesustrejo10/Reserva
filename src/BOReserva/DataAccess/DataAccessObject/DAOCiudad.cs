@@ -79,6 +79,7 @@ namespace BOReserva.DataAccess.DataAccessObject
         /// </summary>
         /// <param name="ciudad">Ciudad a buscar</param>
         /// <returns>Retorna un valor entero</returns>
+
         public int obtenerIDciudad(String ciudad)
         {
             try
@@ -105,4 +106,6 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
         }
     }
+
+
 }

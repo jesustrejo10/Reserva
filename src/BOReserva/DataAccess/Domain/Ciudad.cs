@@ -39,6 +39,17 @@ namespace BOReserva.DataAccess.Domain
             this._fkPais = fkPais;
         }
 
+
+        /// <summary>
+        /// Constructor con id y nombre
+        /// </summary>
+        /// <param name="id">id de la ciudad</param>
+        /// <param name="nombre">nombre de la ciudad</param>
+        public Ciudad(int id, String nombre)
+        {
+            this._id = id;
+            this._nombre = nombre;
+        }
         /// <summary>
         /// Constructor vacio
         /// </summary>

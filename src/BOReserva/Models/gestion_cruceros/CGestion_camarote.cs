@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace BOReserva.Models.gestion_cruceros
 {
@@ -9,6 +10,13 @@ namespace BOReserva.Models.gestion_cruceros
     {
         public int _fkCabina { get; set; }
         public int _fkCrucero { get; set; }
+
+        public IEnumerable<SelectListItem> _listaCruceros { get; set; }
+        public IEnumerable<SelectListItem> _listaCabinas { get; set; }
+
+        public string _cruceroNombre { get; set; }
+        public string _cabinaNombre { get; set; }
+
         internal List<CGestion_camarote> camarote;
 
         public CGestion_camarote(int _cantidadCama, string _tipoCama, int _fkCabina)

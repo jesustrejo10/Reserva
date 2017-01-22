@@ -22,7 +22,7 @@ jQuery(document).ready(function () {
     });
     $("#m02_agregaravion").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_aviones/M02_AgregarAvion';
+        var url = '/gestion_aviones/M02_CrearAvion';
         var method = 'GET';
         var data = '';
         $.ajax(
@@ -563,7 +563,7 @@ jQuery(document).ready(function () {
     //Inicio M04 Vuelos
     $("#m04_crearvuelo").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_vuelo/M04_GestionVuelo_Crear';
+        var url = '/gestion_vuelo/M04_GestionVuelo_CW1';
         var method = 'GET';
         var data = '';
         $.ajax(
@@ -852,6 +852,28 @@ jQuery(document).ready(function () {
             });
     });
 
+    $("#m24_listarcabinas").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_cruceros/M24_ListarCabinas';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
     $("#m24_agregarcamarote").click(function (e) {
         e.preventDefault();
         var url = '/gestion_cruceros/M24_AgregarCamarote';
@@ -873,6 +895,29 @@ jQuery(document).ready(function () {
                 }
             });
     });
+
+    $("#m24_listarcamarotes").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_cruceros/M24_ListarCamarotes';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
 
     $("#m24_agregaritinerario").click(function (e) {
         e.preventDefault();

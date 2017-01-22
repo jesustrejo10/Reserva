@@ -9,6 +9,9 @@ using System.Web;
 
 namespace BOReserva.M10.Comando.gestion_restaurantes
 {
+    /// <summary>
+    /// Clase comando para Listar las ciudades de la base de datos
+    /// </summary>
     public class M10_COConsultarLugar : Command<List<Entidad>>
     {
         /// <summary>
