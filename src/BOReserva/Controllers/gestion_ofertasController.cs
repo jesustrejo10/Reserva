@@ -12,6 +12,7 @@ using System.Collections.Specialized;
 using BOReserva.DataAccess.Domain;
 using BOReserva.Controllers.PatronComando;
 using System.Diagnostics;
+using BOReserva.Excepciones.M09;
 
 namespace BOReserva.Controllers
 {
@@ -55,6 +56,11 @@ namespace BOReserva.Controllers
             return PartialView(paquetes);*/
         }
 
+        /// <summary>
+        /// Detalle Paquete con ID Striing
+        /// </summary>
+        /// <param name="paqueteIdStr"></param>
+        /// <returns></returns>
         public ActionResult M11_DetallePaquete(String paqueteIdStr)
         {
             int paqueteId = Int32.Parse(paqueteIdStr);
@@ -64,6 +70,11 @@ namespace BOReserva.Controllers
             return PartialView(paquete);
         }
 
+        /// <summary>
+        /// Detalle Paquetes.
+        /// </summary>
+        /// <param name="paqueteIdStr"></param>
+        /// <returns></returns>
         public JsonResult infoPaquete(String paqueteIdStr)
         {
             int paqueteId = Int32.Parse(paqueteIdStr);
@@ -77,18 +88,18 @@ namespace BOReserva.Controllers
         /// Método para Visalizar la lista de Ofertas.
         /// </summary>
         /// <returns>Vista Parcial con la Lista de Ofertas disponibles</returns>
-
         public ActionResult M11_VisualizarOferta()
         {
-
             Debug.WriteLine("BOTON VISUALIZAR OFERTA");
-
             Command<List<Entidad>> comando = FabricaComando.crearM11VisualizarOfertas();
             List<Entidad> listaOfertas = comando.ejecutar();
             return PartialView(listaOfertas);
         }
 
-
+        /// <summary>
+        /// Lista de Paquetes por Oferta.
+        /// </summary>
+        /// <returns></returns>
         public List<COferta> M11_PaquetesPorOferta()
         {
             manejadorSQL sql = new manejadorSQL();
@@ -97,6 +108,10 @@ namespace BOReserva.Controllers
             return (ofertas);
         }
         
+        /// <summary>
+        /// Lista de Automóviles disponibles
+        /// </summary>
+        /// <returns>Lista de Automóviles</returns>
         [HttpPost]
         public JsonResult M11_ListarAutomoviles()
         {
@@ -105,6 +120,10 @@ namespace BOReserva.Controllers
             return null;
         }
 
+        /// <summary>
+        /// Lista de Restaurantes
+        /// </summary>
+        /// <returns>La Lista de Restaurantes</returns>
         [HttpPost]
         public JsonResult M11_ListarRestaurantes()
         {
@@ -121,7 +140,6 @@ namespace BOReserva.Controllers
             {
                 rest = (CRestauranteModelo)re;
                 lista.Add(rest);
-
             }*/
             CRestauranteModelo Restaurant = FabricaEntidad.crearRestaurant();
             List<CRestauranteModelo> lista = FabricaEntidad.crearListaRestarant();
@@ -134,10 +152,13 @@ namespace BOReserva.Controllers
             return Json(lista);
         }
 
+        /// <summary>
+        /// Modificar la vista Modificar Paquete
+        /// </summary>
+        /// <param name="paqueteIdStr"></param>
+        /// <returns></returns>
         public ActionResult M11_ModificarPaquete(String paqueteIdStr)
-        {
-            
-            
+        {           
             int paqueteId = Int32.Parse(paqueteIdStr);
             /*Command<Entidad> comando = FabricaComando.crearM11ConsultarPaquete(paqueteId);
             Entidad paquete = comando.ejecutar();
@@ -353,14 +374,14 @@ namespace BOReserva.Controllers
             return Json("");
         }
 
-        [HttpPost]
+     /*   [HttpPost]
         public JsonResult obtenerOferta(int idOferta)
         {
             manejadorSQL sql = new manejadorSQL();
             COferta oferta = new COferta();
             oferta = sql.obtenerOferta(idOferta);
             return Json(oferta);
-        }
+        }*/
 
         
 
@@ -477,7 +498,7 @@ namespace BOReserva.Controllers
             }
         }
 
-
+/*
         [HttpPost]
         public JsonResult ConsultarDetalleOferta(String ofertaIdStr)
         {
@@ -498,7 +519,7 @@ namespace BOReserva.Controllers
                 String error = "Error procesando la petición";
                 return Json(error);
             }
-        }
+        }*/
 
         public JsonResult deletePaquete(String idPaquete)
         {
@@ -524,8 +545,7 @@ namespace BOReserva.Controllers
         /// <returns>Resultado del Guardado n BD</returns>
         [HttpPost]
         public JsonResult guardarOferta(CAgregarOferta model, string estadoOferta)
-        {
-            
+        {            
 
             if (estadoOferta == "1")
                 model._estadoOferta = true;
@@ -726,16 +746,23 @@ namespace BOReserva.Controllers
             return Json(true);
         }
 
-        [HttpPost]
         public JsonResult desactivarOferta(int id)
         {
-            Command<Entidad> comando = FabricaComando.crearM11ConsultarOferta(id);
-            Entidad oferta = comando.ejecutar();
-            Oferta ofertabuscada = (Oferta)oferta;
-            ofertabuscada._id = id;
-            Command<String> comando1 = FabricaComando.crearM11DisponibilidadOferta(ofertabuscada, 0);
-            String borro_si_no = comando1.ejecutar();
-            return (Json(borro_si_no));
+            Debug.WriteLine("DESACTIVAR OFERTA " + id);
+            try
+            {
+                Command<Entidad> comando = FabricaComando.crearM11ConsultarOferta(id);
+                Entidad oferta = comando.ejecutar();
+                Oferta ofertaBuscada = (Oferta)oferta;
+                ofertaBuscada._id = id;
+                Command<String> comando1 = FabricaComando.crearM11DisponibilidadOferta(ofertaBuscada, 0);
+                String borro_si_no = comando1.ejecutar();
+                return (Json(borro_si_no));
+            }
+            catch (ReservaExceptionM09 ex)
+            {
+                return (Json(ex.Mensaje));
+            }
         }
-	}
+    }
 }
