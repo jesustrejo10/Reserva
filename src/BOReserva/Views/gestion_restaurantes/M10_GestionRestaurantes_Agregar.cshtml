@@ -7,11 +7,11 @@
 <script src="@Url.Content("~/Scripts/jquery-3.1.1.min.js")"></script>
 <script src="@Url.Content("~/Scripts/select2/js/select2.min.js")"></script>
 <link href="~/Content/Canvas/Box.css" rel="stylesheet" />
-
+<script src="~/Scripts/Scripts_Restaurantes/ValidacionFormulario.js"></script>
 
 
 <!---------------------- SECCION DE AGREGAR RESTAURANTE ---------------->
-@using (Html.BeginForm("M10_GestionRestaurantes_Agregar", "gestion_restaurantes", null, FormMethod.Post, new { @id = "formAgregarRestaurante", @class = "form-horizontal" }))
+@using (Html.BeginForm("M10_GestionRestaurantes_Agregar", "gestion_restaurantes", null, FormMethod.Post, new {@id = "formAgregarRestaurante", @class = "form-horizontal"}))
 {
 
     <div class="row">
@@ -30,7 +30,7 @@
                                     <!-- Nombre del Restaurant-->
                                     <div class="col-xs-6">
                                         <label for="nombre">Nombre del Restaurante(<span style="color:red">*</span>):</label>
-                                    
+                                        <div id="Nombre_Error"></div>
                                         @Html.TextBox("Nombre", "", new { @class="form-control", @type="text", @placeholder= "Introduzca nombre e.g:Sabor y Sazon" })
                                          
                                     </div>
@@ -48,15 +48,15 @@
                                     <!-- Direccion del Restaurant-->
                                     <div class="col-xs-6">
                                         <label for="direccion">Dirección(<span style="color:red">*</span>):</label>
-                                        @Html.TextBox("Direccion", "", new { @class="form-control", @type="text", @placeholder="Introduzca Direccion e.g: 1362 La Vista NE, Atlanta GA" })
+                                        <div id="Direccion_Error"></div>
+                                         @Html.TextBox("Direccion", "", new { @class="form-control", @type="text", @placeholder="Introduzca Direccion e.g: 1362 La Vista NE, Atlanta GA" })
                                         </div>
 
                                     <!-- Telefono del Restaurant-->
                                     <div class="col-xs-6">
-                                        <label for="Telefono">
-                                            Telefono(<span style="color:red">*</span>):
-                                           
-                                        </label>
+
+                                        <label for="Telefono"> Telefono(<span style="color:red">*</span>):</label>
+                                        <div id="Telefono_Error"></div>
                                         @Html.TextBox("Telefono", "", new { @class="form-control" ,@type="text" ,@placeholder="Introduzca teléfono e.g: 0212-9774183" ,@maxlength="12" })
                                       
                                     </div>
@@ -71,13 +71,15 @@
                                     <!-- Lista ciudad del Restaurant-->
                                     <div class="col-xs-6">
                                         <label for="ciudad">Ciudad(<span style="color:red">*</span>):</label>
-                                        @Html.DropDownList("ComboLugar", ViewBag.Ciudad as SelectList, "Ciudades", new { @class = "form-control" })
+                                        <div id="Ciudad_Error"></div>
+                                        @Html.DropDownList("ComboLugar", ViewBag.Ciudad as SelectList, null, new { @class = "form-control" })
                                     </div>
 
                                     <!-- Hora de apertura del Restaurant-->
                                     <div class="col-xs-6">
                                         <label for="horarioApertura">Hora Apertura(<span style="color:red">*</span>):</label>
-                                        @Html.DropDownList("ComboHoraIni", ViewBag.Horarios as SelectList, "Horario Inicio", new { @class = "form-control" })
+                                        <div id="Hor_Ini_Error"></div>
+                                         @Html.DropDownList("ComboHoraIni", ViewBag.Horarios as SelectList, "Horario Inicio", new { @class = "form-control" })
                                     </div>
 
                                 </div>
@@ -89,6 +91,7 @@
                                     <!-- Hora de cierre del Restaurant-->
                                     <div class="col-xs-6">
                                         <label for="horarioCierre">Hora Cierre(<span style="color:red">*</span>):</label>
+                                        <div id="Hora_Fin_Error"></div>
                                         @Html.DropDownList("ComboHoraFin", ViewBag.Horarios as SelectList, "Horario Fin", new { @class = "form-control" })
                                     </div>
 
@@ -96,7 +99,7 @@
                             </div>
                             &nbsp;
                             <div class="col-md-12" style="margin-top:10px;">
-                                <button type="button" id="aceptarRestaurante" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                                <button type="button" id="aceptarRestaurante" onclick = "validarCampos();" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
                             </div>
                         </div>
                         <!-- /.col -->

@@ -114,17 +114,16 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult guardarRestaurante(String Nombre,String Direccion,String Telefono, String Descripcion, int idLugar,String HoraIni,String HoraFin)
         {
-          
+
 
             //Chequeo de campos obligatorios para el formulario
-            //if ((model.nombre == null) || (model.direccion == null) 
-            //    || (model.horarioApertura == null) || (model.horarioCierre == null) || (model.idLugar == -1))
-            //{
-            //    Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            //    string error = "Error, campo obligatorio vacío";
-            //    return Json(error);
-            //}
-           
+            if ((Nombre == "") || (Direccion == "")|| (HoraIni == "Horario Inicio") || (Telefono == "") || (HoraFin == "Horario Fin") || (idLugar == 0))
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                string error = "Error, existen campos vacios";
+                return Json(error);
+            }
+
             try
             {
                 Entidad _restaurant = FabricaEntidad.crearRestaurant(Nombre, Direccion, Telefono, Descripcion, HoraIni, HoraFin, idLugar);
@@ -162,13 +161,13 @@ namespace BOReserva.Controllers
         public JsonResult modificarRestaurante(int Id,String Nombre, String Direccion, String Telefono, String Descripcion, int idLugar, String HoraIni, String HoraFin)
         {
             //Chequeo de campos obligatorios para el formulario
-            //if ((model.id == -1) || (model.nombre == null) || (model.direccion == null)
-            //    || (model.horarioApertura == null) || (model.horarioCierre == null) || (model.idLugar == -1))
-            //{
-            //    Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            //    string error = "Error, campo obligatorio vacío";
-            //    return Json(error);
-            //}
+            if ((Nombre == "") || (Direccion == "") || (HoraIni == "Horario Inicio") || (Telefono == "") || (HoraFin == "Horario Fin") || (idLugar == 0))
+            {
+                
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                string error = "Error, campo obligatorio vacío";
+                return Json(error);
+            }
 
             try
             {

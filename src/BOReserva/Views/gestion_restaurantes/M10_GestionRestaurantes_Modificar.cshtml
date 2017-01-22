@@ -5,6 +5,8 @@
 <script src="@Url.Content("~/Scripts/jquery-3.1.1.min.js")"></script>
 <script src="@Url.Content("~/Scripts/select2/js/select2.min.js")"></script>
 <link href="~/Scripts/Scripts_Restaurantes/ccs/M10.css" rel="stylesheet" />
+<script src="~/Scripts/Scripts_Restaurantes/ValidacionFormulario.js"></script>
+
 <script type="text/javascript">
 $(document).ready(function() {
     $("#M10BOciudadDropdown").select2();
@@ -21,19 +23,19 @@ $(document).ready(function() {
             <div class="Cajita">
 
                 <div class="box-body">
-                    <h2 class="box-title"> Agregar Restaurante</h2>
+                    <h2 class="box-title"> Modificar Restaurante</h2>
                     <div class="row">
                         <div class="col-md-12">
 
                             <div>
                                 &nbsp;
                                 <div class="col-md-12">
-
+                                   
                                     @Html.TextBox("Id", ViewBag.Id is int, new { @class = "hidden"})
                                     <!-- Nombre del Restaurant-->
                                     <div class="col-xs-6">
                                         <label for="nombre">Nombre del Restaurante(<span style="color:red">*</span>):</label>
-
+                                        <div id="Nombre_Error"></div>
                                         @Html.TextBox("Nombre", ViewBag.NombreRestaurant as String, new { @class = "form-control", @type = "text", @placeholder = "Introduzca nombre e.g:Sabor y Sazon" })
 
                                     </div>
@@ -51,16 +53,16 @@ $(document).ready(function() {
                                     <!-- Direccion del Restaurant-->
                                     <div class="col-xs-6">
                                         <label for="direccion">Dirección(<span style="color:red">*</span>):</label>
-                                        @Html.TextBox("Direccion", ViewBag.DireccionRestaurant as String, new { @class = "form-control", @type = "text", @placeholder = "Introduzca Direccion e.g: 1362 La Vista NE, Atlanta GA" })
+                                        <div id="Direccion_Error"></div>
+                                         @Html.TextBox("Direccion", ViewBag.DireccionRestaurant as String, new { @class = "form-control", @type = "text", @placeholder = "Introduzca Direccion e.g: 1362 La Vista NE, Atlanta GA" })
                                     </div>
 
                                     <!-- Telefono del Restaurant-->
                                     <div class="col-xs-6">
-                                        <label for="Telefono">
-                                            Telefono(<span style="color:red">*</span>):
-
-                                        </label>
-                                        @Html.TextBox("Telefono", ViewBag.TelefonoRestaurant as String, new { @class = "form-control", @type = "text", @placeholder = "Introduzca teléfono e.g: 0212-9774183", @maxlength = "12" })
+                                        
+                                        <label for="Telefono">Telefono(<span style="color:red">*</span>):</label>
+                                        <div id="Telefono_Error"></div>
+                                         @Html.TextBox("Telefono", ViewBag.TelefonoRestaurant as String, new { @class = "form-control", @type = "text", @placeholder = "Introduzca teléfono e.g: 0212-9774183", @maxlength = "12" })
 
                                     </div>
 
@@ -74,12 +76,14 @@ $(document).ready(function() {
                                     <!-- Lista ciudad del Restaurant-->
                                     <div class="col-xs-6">
                                         <label for="ciudad">Ciudad(<span style="color:red">*</span>):</label>
+                                        <div id="Ciudad_Error"></div>
                                         @Html.DropDownList("ComboLugar", ViewBag.Ciudad as SelectList, null, new { @class = "form-control" })
                                     </div>
 
                                     <!-- Hora de apertura del Restaurant-->
                                     <div class="col-xs-6">
                                         <label for="horarioApertura">Hora Apertura(<span style="color:red">*</span>):</label>
+                                        <div id="Hor_Ini_Error"></div>
                                         @Html.DropDownList("ComboHoraIni", ViewBag.HorariosIni as SelectList, "Horario Inicio", new { @class = "form-control" })
                                     </div>
 
@@ -91,7 +95,8 @@ $(document).ready(function() {
                                 <div class="col-md-12">
                                     <!-- Hora de cierre del Restaurant-->
                                     <div class="col-xs-6">
-                                        <label for="horarioCierre">Hora Cierre(<span style="color:red">*</span>):</label>
+                                         <label for="horarioCierre">Hora Cierre(<span style="color:red">*</span>):</label>
+                                        <div id="Hora_Fin_Error"></div>
                                         @Html.DropDownList("ComboHoraFin", ViewBag.HorariosFin as SelectList, "Horario Fin", new { @class = "form-control" })
                                     </div>
 
@@ -100,7 +105,7 @@ $(document).ready(function() {
                             &nbsp;
                             <div class="col-md-12" style="margin-top:10px;">
                                 <div class="col-xs-6">
-                                    <button type="button" id="aceptarRestauranteModificacion" class="btn btn-success" style="margin-left:335px" >Guardar</button>
+                                    <button type="button" id="aceptarRestauranteModificacion"  onclick = "validarCampos();" class="btn btn-success" style="margin-left:335px" >Guardar</button>
                                 </div>
                                 <div class="col-xs-6">
                                     <button id="cancelarRestauranteModificacion" type="button" class="btn btn-danger" style="margin-right:325px" >Cancelar</button>
