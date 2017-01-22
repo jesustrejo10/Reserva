@@ -66,6 +66,23 @@ namespace BOReserva.DataAccess.Domain
             _distancia = distancia;
             _idRuta = idRuta;
         }
+        /// <summary>
+        /// Constructor de la clase Ruta sin id
+        /// </summary>
+        /// <param name="distanciaRuta"></param>
+        /// <param name="status"></param>
+        /// <param name="tipo"></param>
+        /// <param name="Origen"></param>
+        /// <param name="Destino"></param>
+
+        public Ruta(int distancia, String status, String tipo, String origenRuta, String destinoRuta)
+        {
+            _origenRuta = origenRuta;
+            _destinoRuta = destinoRuta;
+            _tipo = tipo;
+            _status = status;
+            _distancia = distancia;
+        }
         #endregion
 
 

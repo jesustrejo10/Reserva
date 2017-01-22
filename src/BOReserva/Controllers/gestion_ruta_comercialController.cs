@@ -30,8 +30,8 @@ namespace BOReserva.Controllers
             {
                 foreach (var origen in listaLugares)
                 {
-                    BOReserva.DataAccess.Domain.Ruta r = (BOReserva.DataAccess.Domain.Ruta)origen.Value;
-                    lista.Add(r._origenRuta);
+                    BOReserva.DataAccess.Domain.Ciudad r = (BOReserva.DataAccess.Domain.Ciudad)origen.Value;
+                    lista.Add(r._nombre);
                 }
                 //lista = sql.listarLugares();
 
@@ -59,23 +59,31 @@ namespace BOReserva.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public JsonResult cargarDestinos(string ciudadO)
         {
-            CAgregarRuta model = new CAgregarRuta();
-            List<String> resultado = new List<String>();
-            CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();                       
+           
+            CAgregarRuta ruta = new CAgregarRuta();
+            List<String> lista = new List<String>();
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM03_ConsultarDestinos();
+            Dictionary<int, Entidad> listaLugares = comando.ejecutar();
+            //CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();                       
 
             try
             {
-                resultado = sql.consultarDestinos(ciudadO);
-
-                model._ldestinoRuta = resultado.Select(m => new SelectListItem
+                foreach (var destino in listaLugares)
                 {
-                    Value = m,
-                    Text = m
+                    BOReserva.DataAccess.Domain.Ciudad r = (BOReserva.DataAccess.Domain.Ciudad)destino.Value;
+                    lista.Add(r._nombre);
+                }
+                //lista = sql.listarLugares();
+
+                ruta._ldestinoRuta = lista.Select(x => new SelectListItem
+                {
+                    Value = x,
+                    Text = x
                 });
 
-                if (resultado != null)
+                if (lista != null)
                 {
-                    return (Json(model._ldestinoRuta, JsonRequestBehavior.AllowGet));
+                    return (Json(ruta._ldestinoRuta, JsonRequestBehavior.AllowGet));
                 }
                 else
                 {
@@ -83,6 +91,7 @@ namespace BOReserva.Controllers
                     String error = "Error accediendo a la BD";
                     return Json(error);
                 }
+                
             }
             catch (SqlException e)
             {
@@ -93,7 +102,7 @@ namespace BOReserva.Controllers
                 //Retorno el error
                 return Json(error);
             }
-
+            
             
         }
 
@@ -182,13 +191,13 @@ namespace BOReserva.Controllers
 
 
         [HttpPost]
-        public JsonResult guardarRuta(CAgregarRuta model)
+        public JsonResult guardarRuta(CAgregarRuta ruta)
         {
             
-            CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();
+           // CManejadorSQL_Rutas sql = new CManejadorSQL_Rutas();
             //realizo el insert
             
-                if (model._origenRuta == null || model._destinoRuta == null)
+                if (ruta._origenRuta == null || ruta._destinoRuta == null)
                 {
                     //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
                     Response.StatusCode = (int)HttpStatusCode.BadRequest;
@@ -198,7 +207,7 @@ namespace BOReserva.Controllers
                     return Json(error);
 
                 }
-                else if (model._distanciaRuta <= 0 || model._distanciaRuta == 999999 || model._distanciaRuta == null)
+                else if (ruta._distanciaRuta <= 0 || ruta._distanciaRuta == 999999 || ruta._distanciaRuta == null)
                 {
                     //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
                     Response.StatusCode = (int)HttpStatusCode.BadRequest;
@@ -211,8 +220,14 @@ namespace BOReserva.Controllers
                 {
                      try
                     {
-                       bool resultado = sql.InsertarRuta(model);
-                       if (resultado)
+                        Entidad nuevaRuta = FabricaEntidad.InstanciarRuta(ruta);
+
+                        Command<String> comando = FabricaComando.crearM03_AgregarRuta(nuevaRuta);
+                        String agrego_si_no = comando.ejecutar();
+
+                        return (Json(agrego_si_no));
+                       /*
+                         if (resultado)
                        {
                            return (Json(true, JsonRequestBehavior.AllowGet));
                        }
@@ -225,6 +240,7 @@ namespace BOReserva.Controllers
                            //Retorno el error
                            return Json(error);
                        }
+                        */
                     }
                      catch (SqlException e)
                      {
