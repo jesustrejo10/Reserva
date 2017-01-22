@@ -292,6 +292,7 @@
     <Compile Include="Controllers\PatronComando\M09\M09_COVisualizarHoteles.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COAgregarPasajero.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COAgregarCamarote.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarCamarotes.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarItinerario.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarCabinas.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COListarCabinaCrucero.cs" />
@@ -1691,6 +1692,7 @@
     <Content Include="Views\gestion_comida_vuelo\M06_EditarPlato.cshtml" />
     <Content Include="Views\gestion_cruceros\M24_ListarCabinas.cshtml" />
     <Content Include="Views\gestion_aviones\M02_CrearAvion.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_ListarCamarotes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_boletos\M05_VisualizarBoletos.cshtml" />

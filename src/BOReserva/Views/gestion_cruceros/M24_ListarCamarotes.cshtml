@@ -5,7 +5,7 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title"><b>Lista de Cabinas</b></h3>
+                <h3 class="box-title"><b>Lista de Camarotes</b></h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -13,7 +13,8 @@
                     <thead>
                         <tr>
                             <th>Nombre</th>
-                            <th>Precio</th>
+                            <th>Cantidad de Camas</th>
+                            <th>Tipo de Camas</th>
                             <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
@@ -21,17 +22,17 @@
                     <tbody>
                         @try
                         {
-                            foreach (var cabina in Model)
+                            foreach (var camarote in Model)
                             {
-                                BOReserva.DataAccess.Domain.Cabina c = (BOReserva.DataAccess.Domain.Cabina)cabina.Value;
-                                <tr id="@cabina.Key">
-                                    <td>@c._nombreCabina </td>
-                                    <td>@c._precioCabina </td>
+                                BOReserva.DataAccess.Domain.M14.Camarote c = (BOReserva.DataAccess.Domain.M14.Camarote)camarote.Value;
+                                <tr id="@camarote.Key">
+                                    <td>@c._nombrecabina </td>
+                                    <td>@c._cantidadCama </td>
+                                    <td>@c._tipoCama </td>
                                     <td>@c._estatus </td>
-                                    <td>
+                                    <td>S
                                         <a href="#"> <i class="fa fa-eye m03DetalleRutas"></i></a>
                                         <a href="#"><i class="fa fa-pencil m03EditarRutas"></i></a>
-                                        <a href="#"><i class="fa fa-eye m24ListarCamarotes"></i></a>
                                     </td>
                                 </tr>
 
@@ -78,26 +79,6 @@
                 console.log(data);
             }
         });
-    });
-</script>
-
-<script language="javascript" type="text/javascript">
-    $(document).ready(function () {
-        //e.preventDefault();
-        $(".m24ListarCamarotes").on("click", (function () {
-            alert("Se esta procesando tu solicitud, por favor espere");
-            var identificador = $(this).parent().parent().parent().attr("id");
-            jQuery.ajax({
-                type: "GET",
-                url: "/gestion_cruceros/M24_ListarCamarotes",
-                data: { id: identificador }//id = es el id q recibes en el método es decir public ActionResult M24_ListarCamarotes(int id)
-            }).done(function (data) {
-                $("#contenido").empty();
-                $("#contenido").append(data);
-            }).fail(function () {
-                alert("Error, por favor refresque la pagina")
-            });
-        }));
     });
 </script>
 

@@ -149,12 +149,12 @@ namespace BOReserva.Controllers
         }
 
 
-        public JsonResult M24_ListarCamarotes(int id)
+        /*public JsonResult M24_ListarCamarotes(int id)
         {
             ConexionBD cbd = new ConexionBD();
             var listaCamarotes = cbd.listarCamarotes(id);
             return (Json(listaCamarotes, JsonRequestBehavior.AllowGet));
-        }
+        }*/
 
         /// <summary>
         /// Método de la vista parcial M24ListarCruceros
@@ -187,6 +187,17 @@ namespace BOReserva.Controllers
             Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14VisualizarCabinas(id);
             Dictionary<int, Entidad> listaCabinas = comando.ejecutar();
             return PartialView(listaCabinas);
+        }
+
+        /// <summary>
+        /// Método de la vista parcial M24_ListarCamarotes
+        /// </summary>
+        /// <returns>Retorna la vista parcial M24_ListarCamarotes en conjunto del Modelo de dicha vista</returns>
+        public ActionResult M24_ListarCamarotes(int id)
+        {
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14VisualizarCamarotes(id);
+            Dictionary<int, Entidad> listaCamarotes = comando.ejecutar();
+            return PartialView(listaCamarotes);
         }
 
         [HttpPost]
