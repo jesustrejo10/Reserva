@@ -5,9 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Diagnostics;
-using System.Linq;
-using System.Web;
-using BOReserva.Models.gestion_ruta_comercial;
+
 
 
 namespace BOReserva.DataAccess.DataAccessObject
@@ -246,7 +244,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
         }
 
-        List<Entidad> IDAOBoleto.ConsultarBoletos()
+        List<Entidad> IDAOBoleto.ConsultarBoletos(int _id)
         {
             List<Entidad> listaboletos = new List<Entidad>();
             SqlConnection conexion = null;
@@ -254,7 +252,12 @@ namespace BOReserva.DataAccess.DataAccessObject
             {
                 conexion = Connection.getInstance(_connexionString);
                 conexion.Open();
-                String sql = "SELECT * FROM Boleto";
+                String sql;
+                if (_id == -1)
+                     sql = "SELECT * FROM Boleto";
+                else
+                    sql = "SELECT * FROM Boleto WHERE bol_fk_pasajero = " + _id + "";
+
                 SqlCommand cmd = new SqlCommand(sql, conexion);
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -648,14 +651,6 @@ namespace BOReserva.DataAccess.DataAccessObject
                 return _ciudad;
             }
         }
-
-
-
-
-
-
-
-
 
     }
 }

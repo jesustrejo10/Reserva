@@ -223,6 +223,11 @@ namespace BOReserva.DataAccess.Domain
             return new Boleto(idorigen, iddestino, pasaporte, monto, tipo, idvuelo, fecha);
         }
 
+        public static Entidad InstanciarDetalleBoleto(Entidad boleto)
+        {
+            return new BoletoDetalle((Boleto) boleto);
+        }
+
         public static Entidad InstanciarPasajero(int id, String nombre1, String nombre2, String apellido1, String apellido2, String sexo,
          string fecha, String correo)
         {
