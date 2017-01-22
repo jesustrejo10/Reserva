@@ -4,50 +4,50 @@
     var usuario = Session["Cgestion_seguridad_ingreso"] as Cgestion_seguridad_ingreso;
     String nombre = usuario.nombreUsuarioTexto;
     String apellido = usuario.apellidoUsuarioTexto;
-}
+ }
 
 
 <!DOCTYPE html>
 <html lang="es">
-<head>
+    <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta charset="utf-8" />
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+        <meta charset="utf-8" />
+       <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
 
 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Sistema BackOffice Reserva</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.6 -->
-    <link href="~/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- jvectormap -->
-    <link rel="stylesheet" href="~/Content/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="~/Content/dist/css/AdminLTE.min.css">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-    folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="~/Content/dist/css/skins/_all-skins.min.css">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Sistema BackOffice Reserva</title>
+        <!-- Tell the browser to be responsive to screen width -->
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <!-- Bootstrap 3.3.6 -->
+        <link href="~/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+        <!-- jvectormap -->
+        <link rel="stylesheet" href="~/Content/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="~/Content/dist/css/AdminLTE.min.css">
+        <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+        <link rel="stylesheet" href="~/Content/dist/css/skins/_all-skins.min.css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+        
 
+        <link href="~/Views/gestion_restaurantes/ccs/M10.css" rel="stylesheet" />
+        <!-- CIERRE DE SESION AUTOMATICO MODULO 1 INGRESO SEGURIDAD NO TOCAR-->
+        <script src="../../Scripts/Scripts_Ingreso_Seguridad/Logout.js"></script>
 
-    <link href="~/Views/gestion_restaurantes/ccs/M10.css" rel="stylesheet" />
-    <!-- CIERRE DE SESION AUTOMATICO MODULO 1 INGRESO SEGURIDAD NO TOCAR-->
-    <script src="../../Scripts/Scripts_Ingreso_Seguridad/Logout.js"></script>
-
-</head>
+    </head>
 
 
 
@@ -87,7 +87,7 @@
 
                                     <div class="pull-right"> @Html.ActionLink("Cerrar Sesion", "M01_Logout", "gestion_seguridad_ingreso", null, new { @class = "btn btn-default btn-flat" })  </div>
 
-                                </li>
+                               </li>
                             </ul>
                         </li>
                         <!-- Control Sidebar Toggle Button -->
@@ -102,11 +102,11 @@
             <section class="sidebar">
                 <!-- Sidebar user panel -->
                 @*<div class="user-panel">
-                        <div class="pull-left image"> <img src="/Content/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"> </div>
-                        <div class="pull-left info">
-                            <p>@nombre @apellido</p> <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                        </div>
-                    </div>*@
+                    <div class="pull-left image"> <img src="/Content/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"> </div>
+                    <div class="pull-left info">
+                        <p>@nombre @apellido</p> <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    </div>
+                </div>*@
                 <!-- FIN MODULO LOGIN -->
 
                 <ul class="sidebar-menu">
@@ -118,18 +118,17 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            @foreach (string i in ((List<string>)Session["Permisos"]))
+                            @*foreach (string i in ((List<string>)Session["Permisos"]))
                             {
                                 if (i == "Agregar aviones")
                                 {
-                                    <li id="m02_agregaravion"><a href="#"> Agregar </a></li>}
+                            <li id="m02_agregaravion"><a href="#"> Agregar </a></li>}
 
                                 if (i == "Visualizar aviones")
                                 {
-                                    <li id="m02_VisualizarAvion"><a href="#"> Visualizar </a></li>}
-                            }
-                            @*<li id="m02_consultaravion"><a href="#"> Consultar </a></li>
-                                <li id="m02_modificaravion"><a href="#"> Modificar </a></li>*@
+                            <li id="m02_VisualizarAvion"><a href="#"> Visualizar </a></li>}}*@
+                            <li id="m02_agregaravion"><a href="#" class="wait"><i class="fa fa-plus-square-o"></i> Agregar </a></li>
+                            <li id="m02_VisualizarAvion"><a href="#" class="wait"><i class="fa fa-eye"></i>Visualizar </a></li>
                         </ul>
                     </li>
                     <!-- FIN MODULO DE AVIONES -->
@@ -145,11 +144,11 @@
                             {
                                 if (i == "Agregar rutas")
                                 {
-                                    <li id="m03AgregarRuta"><a href="#"><i class="fa fa-plus-square-o"></i>Crear</a></li>}
+                            <li id="m03AgregarRuta"><a href="#"><i class="fa fa-plus-square-o"></i>Crear</a></li>}
                                 if (i == "Visualizar rutas")
                                 {
-                                    <li id="m03VisualizarRutas"><a href="#"><i class="fa fa-eye"></i>Visualizar</a></li>}
-
+                            <li id="m03VisualizarRutas"><a href="#"><i class="fa fa-eye"></i>Visualizar</a></li>}
+                            
                             }
                         </ul>
                     </li>
@@ -167,7 +166,7 @@
                             {
                                 if (i == "Crear vuelo")
                                 {
-                                    <li id="m04_crearvuelo"><a href="#"> Crear </a></li>}
+                            <li id="m04_crearvuelo"><a href="#"> Crear </a></li>}
                                 if (i == "Visualizar Vuelo")
                                 {
                                     <li id="m04_visualizarvuelo"><a href="#"> Visualizar </a></li>}
@@ -189,10 +188,10 @@
                             {
                                 if (i == "Crear Boleto")
                                 {
-                                    <li id="m05VerReserva"><a href="#">Agregar</a></li>}
+                            <li id="m05VerReserva"><a href="#">Agregar</a></li>}
 
                                 if (i == "Visualizar boletos")
-                                {
+                                {                                               
                                     <li id="m05VisualizarBoletos"><a href="#">Visualizar</a></li>}
                             }
                         </ul>
@@ -211,7 +210,7 @@
                             {
                                 if (i == "Check in")
                                 {
-                                    <li id="m05CheckIn"><a href="#">Pase Abordaje</a></li>}
+                            <li id="m05CheckIn"><a href="#">Pase Abordaje</a></li>}
                                 if (i == "Registro equipaje")
                                 {
                                     <li id="m05RegistroEquipaje"><a href="#">Equipaje</a></li>}
@@ -220,7 +219,7 @@
                     </li>
 
                     <!-- FIN MODULO DE BOLETOS AEREOS Y CHECK-IN -->
-                    <!-- MODULO DE RESTAURANTES -->
+                      <!-- MODULO DE RESTAURANTES -->
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-cutlery"></i> <span>Gestión de Restaurantes</span> <span class="pull-right-container">
@@ -232,7 +231,7 @@
                             {
                                 if (i == "Gestion restaurantes")
                                 {
-                                    <li id="agregarRestaurantes"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar Restaurante</a></li>}
+                            <li id="agregarRestaurantes"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar Restaurante</a></li>}
                                 if (i == "Ver restaurantes")
                                 {
                                     <li id="verRestaurantes"><a href="#"><i class="fa fa-eye"></i>Visualizar Restaurantes</a></li>}
@@ -253,20 +252,20 @@
                             {
                                 if (i == "Gestion comida")
                                 {
-                                    <li id="gestionComida"><a href="#">Agregar</a></li>
+                            <li id="gestionComida"><a href="#">Agregar</a></li>
 
-                                }
+                            }
 
 
 
-                                @*<li id="editarComida"><a href="#"><i class="fa fa-edit"></i>Editar</a></li>
-                                    <li id="gestionComidaVuelo"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar por Vuelo</a></li>*@
+                          @*<li id="editarComida"><a href="#"><i class="fa fa-edit"></i>Editar</a></li>
+                            <li id="gestionComidaVuelo"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar por Vuelo</a></li>*@
                             if (i == "Editar comida")
-                            {
-
-                                <li id="gestionComidaVuelo"><a href="#">Agregar a Vuelo</a></li>
-                                <li id="visualizarVuelosComidas"><a href="#">Visualizar Vuelos-Comidas</a></li>
-                                <li id="visualizarComidas"><a href="#">Visualizar</a></li>
+                                {
+                                   
+                                 <li id="gestionComidaVuelo"><a href="#">Agregar a Vuelo</a></li>
+                                 <li id="visualizarVuelosComidas"><a href="#">Visualizar Vuelos-Comidas</a></li>
+                                 <li id="visualizarComidas"><a href="#">Visualizar</a></li>
 
                                 }
                             }
@@ -276,10 +275,10 @@
                     <!-- FIN DE MODULO DE COMIDA POR VUELO -->
                     <!-- MODULO DE EXTRAVIO DE EQUIPAJE -->
                     @foreach (string i in ((List<string>)Session["Permisos"]))
-                    {
-                        if (i == "Gestion equipaje")
-                        {
-                            <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Equipaje</a></li>}
+                            {
+                                if (i == "Gestion equipaje")
+                                {
+                    <li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Gestion De Equipaje</a></li>}
                     }
                     <!-- FIN DE MODULO DE EXTRAVIO DE EQUIPAJE -->
                     <!-- MODULO DE AUTOMOVILES -->
@@ -294,17 +293,17 @@
                             {
                                 if (i == "Agregar automovil")
                                 {
-                                    <li id="m08AgregarAutomovil"><a href="#">Agregar</a></li>}
+                            <li id="m08AgregarAutomovil"><a href="#">Agregar</a></li>}
                                 if (i == "Visualizar automovil")
-                                {
+                                {                                                     
                                     <li id="m08VisualizarAutomoviles"><a href="#">Visualizar</a></li>}
                             }
-                        </ul>
+                         </ul>
                     </li>
                     <!-- FIN DE MODULO DE AUTOMOVILES -->
                     <!-- MODULO DE OFERTAS Y PAQUETES -->
                     @*<li id="gestionAviones"><a href="#"><i class="fa fa-plane"></i>Ofertas y Paquetes</a>
-                        </li>*@
+                    </li>*@
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-plane"></i> <span>Ofertas y Paquetes</span> <span class="pull-right-container">
@@ -317,13 +316,13 @@
                             {
                                 if (i == "Agregar ofertas")
                                 {
-                                    <li id="agregarOferta"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar Oferta</a></li>}
+                            <li id="agregarOferta"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar Oferta</a></li>}
                                 if (i == "Agregar paquete")
-                                {
-                                    <li id="agregarPaquete"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar Paquete</a></li>}
+                                {                                                                                       
+                            <li id="agregarPaquete"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar Paquete</a></li>}
                                 if (i == "Consultar ofertas")
                                 {
-                                    <li id="consultarOferta"><a href="#"><i class="fa fa-eye"></i>Visualizar Oferta</a></li>}
+                            <li id="consultarOferta"><a href="#"><i class="fa fa-eye"></i>Visualizar Oferta</a></li>}
                                 if (i == "Modificar paquete")
                                 {
                                     <li id="consultarPaquete"><a href="#"><i class="fa fa-eye"></i>Visualizar Paquete</a></li>}
@@ -341,14 +340,14 @@
                         </a>
                         <ul class="treeview-menu">
                             @foreach (string i in ((List<string>)Session["Permisos"]))
-                            {
-                                if (i == "Agregar usuario")
-                                {
-                                    <li id="agregarUsuarios"><a href="#">Agregar</a></li>}
+                        {
+                            if (i == "Agregar usuario")
+                        {
+                                                <li id="agregarUsuarios"><a href="#">Agregar</a></li>}
 
-                                if (i == "Visualizar usuario")
-                                {
-
+                            if (i == "Visualizar usuario")
+                                                    {
+                                                                          
                                     <li id="indexUsuarios"><a href="#">Visualizar</a></li>}
                             }
 
@@ -364,14 +363,14 @@
                         </a>
                         <ul class="treeview-menu">
                             @foreach (string i in ((List<string>)Session["Permisos"]))
+                         {
+                            if (i == "Agregar Rol")
                             {
-                                if (i == "Agregar Rol")
-                                {
 
-                                    <li id="m13AgregarRol"><a href="#">Agregar</a></li>}
-                                if (i == "Visualizar Rol")
-                                {
-                                    <li id="m13VisualizarRol"><a href="#">Visualizar</a></li>}
+                            <li id="m13AgregarRol"><a href="#">Agregar</a></li>}
+                            if (i == "Visualizar Rol")
+                            {
+                            <li id="m13VisualizarRol"><a href="#">Visualizar</a></li>}
                             }
                         </ul>
                     </li>
@@ -385,24 +384,24 @@
                         </a>
                         <ul class="treeview-menu">
                             @foreach (string i in ((List<string>)Session["Permisos"]))
+                          {
+                              if (i == "Visualiza crucero")
                             {
-                                if (i == "Visualiza crucero")
+                            <li id="m24_listarcrucero"><a href="#"> Visualizar </a></li>}
+                              if (i == "Agregar crucero")
+                            {
+                            <li id="m24_agregarcrucero"><a href="#"> Agregar Crucero </a></li>}
+                           if (i == "Agregar cabina")
                                 {
-                                    <li id="m24_listarcrucero"><a href="#"> Visualizar </a></li>}
-                                if (i == "Agregar crucero")
+                                 <li id="m24_agregarcabina"><a href="#"> Agregar Cabina </a></li>}
+                            @*  if (i == "Agregar camarote")
                                 {
-                                    <li id="m24_agregarcrucero"><a href="#"> Agregar Crucero </a></li>}
-                                if (i == "Agregar cabina")
-                                {
-                                    <li id="m24_agregarcabina"><a href="#"> Agregar Cabina </a></li>}
-                                @*  if (i == "Agregar camarote")
-                                    {
-                                    <li id="m24_agregarcamarote"><a href="#"> Agregar Camarote </a></li>}
-                                      if (i == "Agregar itinerario")
-                                     {
-                                    <li id="m24_agregaritinerario"><a href="#"> Agregar Itinerario </a></li>}
-                                      if (i == "Visualizar itinerario")
-                                     {
+                                <li id="m24_agregarcamarote"><a href="#"> Agregar Camarote </a></li>}
+                                  if (i == "Agregar itinerario")
+                                 {
+                                <li id="m24_agregaritinerario"><a href="#"> Agregar Itinerario </a></li>}
+                                  if (i == "Visualizar itinerario")
+                                 {
                                     <li id="m24_listaritinerario"><a href="#"> Visualizar Itinerario </a></li>}*@
                             }
                             <li id="m24_agregarcamarote"><a href="#"> Agregar Camarote </a></li>
@@ -433,29 +432,29 @@
                                     <li id="M09_visualizar_hoteles"><a href="#">Visualizar</a></li>
                                 }
                             }
-                        </ul>
+                            </ul>
 
-                    </li>
+                            </li>
 
 
                     <!-- MODULO DE BOLETOS AEREOS Y CHECK-IN -->
-                    <!-- MODULO DE RECLAMOS -->
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-exclamation-circle"></i> <span>Gestión de Reclamos</span> <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li id="M16_AgregarReclamo"><a href="#"> Agregar </a></li>
-                            <li id="M16_VisualizarReclamo"><a href="#"> Visualizar </a></li>
-
-                        </ul>
-                    </li>
-                    <!-- FIN MODULO DE RECLAMOS -->
-
-                </ul>
-            </section>
+                            <!-- MODULO DE RECLAMOS -->
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-exclamation-circle"></i> <span>Gestión de Reclamos</span> <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li id="M16_AgregarReclamo"><a href="#"> Agregar </a></li>                                
+                                    <li id="M16_VisualizarReclamo"><a href="#"> Visualizar </a></li>
+                                  
+                                </ul>
+                            </li>
+                            <!-- FIN MODULO DE RECLAMOS -->
+                
+               </ul>
+           </section>
             <!-- /.sidebar -->
         </aside>
 
@@ -483,8 +482,8 @@
         </footer>
 
         @*<footer class="main-footer">
-                <div class="pull-right hidden-xs"> <b>Version</b> 2.3.7 </div> <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
-            </footer>*@
+            <div class="pull-right hidden-xs"> <b>Version</b> 2.3.7 </div> <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
+        </footer>*@
 
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
@@ -635,9 +634,9 @@
                         </div>
                         <!-- /.form-group -->
                     </form>
-</div>
-                <!-- /.tab-pane -->
                 </div>
+                <!-- /.tab-pane -->
+            </div>
                 </div>
 
                 <div clas
@@ -645,7 +644,7 @@
 
             </div>
 
-            <div class="control-sidebar-bg"></div>
+        <div class="control-sidebar-bg"></div>
     </div>
 
     <!--

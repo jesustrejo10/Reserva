@@ -228,6 +228,12 @@
     <Compile Include="Controllers\PatronComando\M05\M05_COModificarBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COVerificarDisponibilidadBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COMostrarIdaVuelta.cs" />
+    <Compile Include="Controllers\PatronComando\M02\M02_COAgregarAvion.cs" />
+    <Compile Include="Controllers\PatronComando\M02\M02_COConsultarAvion.cs" />
+    <Compile Include="Controllers\PatronComando\M02\M02_CODisponibilidadAvion.cs" />
+    <Compile Include="Controllers\PatronComando\M02\M02_COEliminarAvion.cs" />
+    <Compile Include="Controllers\PatronComando\M02\M02_COModificarAvion.cs" />
+    <Compile Include="Controllers\PatronComando\M02\M02_COVisualizarAvion.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COBuscarnombreciudad.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COEliminarBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COModificarPasajero.cs" />
@@ -312,6 +318,7 @@
     <Compile Include="Controllers\PatronComando\M16\M16_COConsultarReclamoDetalle.cs" />
     <Compile Include="Controllers\PatronComando\M16\M16_COActualizarReclamo.cs" />
     <Compile Include="Controllers\PatronComando\M16\M16_COEliminarReclamo.cs" />
+    <Compile Include="DataAccess\DataAccessObject\DAOAvion.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOBoleto.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOCiudad.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOLugar.cs" />
@@ -320,6 +327,7 @@
     <Compile Include="DataAccess\DataAccessObject\M16\DAOReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\M13\DAORol.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOAutomovil.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOAvion.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCiudad.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOHabitacion.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPais.cs" />
@@ -426,6 +434,7 @@
     <Compile Include="Models\gestion_aviones\CAgregarAvion.cs" />
     <Compile Include="Models\gestion_aviones\CAvion.cs" />
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
+    <Compile Include="Models\gestion_aviones\CVerAvion.cs" />
     <Compile Include="Models\gestion_comida_vuelo\CAgregarVuelo.cs" />
     <Compile Include="Models\gestion_comida_vuelo\CVuelo.cs" />
     <Compile Include="Models\gestion_comida_vuelo\CVueloComida.cs" />
@@ -1674,7 +1683,7 @@
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_CW2.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_CW3.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_EditarPlato.cshtml" />
-
+    <Content Include="Views\gestion_aviones\M02_CrearAvion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_boletos\M05_VisualizarBoletos.cshtml" />
