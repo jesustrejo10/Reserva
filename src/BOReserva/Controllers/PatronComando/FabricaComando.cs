@@ -336,6 +336,20 @@ namespace BOReserva.Controllers.PatronComando
 
         }
 
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M14_COVisualizarCabinas
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M14_COVisualizarCabinas.
+        /// </returns>
+        public static Command<Dictionary<int, Entidad>> crearM14VisualizarCamarotes(int id)
+        {
+
+            return new M14_COVisualizarCamarotes(id);
+
+        }
+
         #endregion
 
         #region M04_Vuelo

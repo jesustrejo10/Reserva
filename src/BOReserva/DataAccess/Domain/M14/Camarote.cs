@@ -13,6 +13,7 @@ namespace BOReserva.DataAccess.Domain.M14
         public string _tipoCama;
         public string _estatus;
         public int _fkCabina;
+        public String _nombrecabina { get; set; }
 
         public Camarote(int id,int cantidadcama, string tipocama, String estatus, int cabina)
         {
@@ -23,5 +24,16 @@ namespace BOReserva.DataAccess.Domain.M14
             _fkCabina = cabina;
             
         }
+
+        public Camarote(int id, int cantidadcama, string tipocama, String estatus, String cabina)
+        {
+            _id = id;
+            _cantidadCama = cantidadcama;
+            _tipoCama = tipocama;
+            _estatus = estatus;
+            _nombrecabina = cabina;
+
+        }
+
     }
 }
