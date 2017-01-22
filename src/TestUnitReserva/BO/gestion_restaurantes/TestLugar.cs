@@ -11,8 +11,8 @@ namespace TestUnitReserva.BO.gestion_restaurantes
     [TestFixture]
     class TestLugar
     {
-        manejadorSQL sql = new manejadorSQL();
-
+        //manejadorSQL sql = new manejadorSQL();
+        /*
         [Test]
         public void TestConsultarLugares()
         {
@@ -34,5 +34,6 @@ namespace TestUnitReserva.BO.gestion_restaurantes
                 Debug.WriteLine("Encontrada ciudad: " + item._nombre);
             }
         }
+         */ 
     }
 }

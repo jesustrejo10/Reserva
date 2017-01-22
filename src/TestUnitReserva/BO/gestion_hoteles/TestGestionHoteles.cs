@@ -90,11 +90,15 @@ namespace TestUnitReserva.BO.gestion_hoteles
         [Test]
        public void M09_DaoHotelEliminar()
         {
+
             IDAO pruebadao = (IDAO)daoHotel;
+
+            /*
+>>>>>>> fc35b8d09d2d782b82e3c6aaccec715a86f7b23d
             int resultadoAgregar = daoHotel.Agregar(mockHotell);
             //int eliminar = pruebadao.;
             Assert.AreEqual(eliminar, "1");
-
+            */
 
         }
         /// <summary>
@@ -106,10 +110,16 @@ namespace TestUnitReserva.BO.gestion_hoteles
             int resultadoAgregar = daoHotel.Agregar(mockHotell);
             Entidad consulta = daoHotel.Consultar(999);
             Assert.AreEqual(consulta, mockHotell);
+            /*
             daoHotel.Eliminar(999);
             Assert.NotNull(daoHotel.Agregar(null));
+<<<<<<< HEAD
 
         }*/
+
+      
+   
+
         /// <summary>
         /// 
         /// </summary>

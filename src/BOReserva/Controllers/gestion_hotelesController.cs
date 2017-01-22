@@ -120,7 +120,7 @@ namespace BOReserva.Controllers
             }
             catch (ReservaExceptionM09 ex)
             {
-                return (Content("<script>alert('" + ex.Mensaje + "');</script>"));
+                return (Content(ex.Mensaje));
             }
         }
 
@@ -152,7 +152,7 @@ namespace BOReserva.Controllers
             }
             catch (ReservaExceptionM09 ex)
             {
-                return (Content("<script>alert('" + ex.Mensaje + "');</script>"));
+                return (Content(ex.Mensaje));
             }
         }
 
