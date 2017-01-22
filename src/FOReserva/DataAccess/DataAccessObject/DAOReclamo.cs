@@ -17,6 +17,9 @@ using FOReserva.DataAccess.DataAccessObject.M16;
 
 namespace FOReserva.DataAccess.DataAccessObject
 {
+    /// <summary>
+    /// Clase encargada de las consultas a la BD relacionada con los reclamos
+    /// </summary>
     public class DAOReclamo : DAO, IDAOReclamo
     {
         /// <summary>
