@@ -67,111 +67,111 @@ namespace BOReserva.Models.gestion_usuarios
         /// Método para listar todos los usuarios del BO
         /// </summary>
         /// <returns>Retorna una lista con los usuarios</returns>
-        public List<ListarUsuario> ListaUsuarios()
-        {
-            DataTable resultado;
-            ListarUsuario usuario;
-            List<ListarUsuario> lista;
-            try
-            {
-                resultado = EjecutarStoredProcedureTuplas(RecursoUsuario.ListarUsuarios);
-                Conectar();
-                if (resultado != null)
-                {
-                    lista = new List<ListarUsuario>();
-                    foreach (DataRow row in resultado.Rows)
-                    {
-                        DateTime usuFecha = DateTime.Parse(row[RecursoUsuario.FechaUsuario].ToString());
-                        string usuAct = row[RecursoUsuario.ActivoUsuario].ToString();
-                        string usuRol = row[RecursoUsuario.RolUsuario].ToString();
-                        string usuApe = row[RecursoUsuario.ApellidoUsuario].ToString();
-                        string usuNom= row[RecursoUsuario.NombreUsuario].ToString();
-                        string usuCor = row[RecursoUsuario.CorreoUsuario].ToString();
-                        int usuIDRol = int.Parse(row[RecursoUsuario.RolIDUsuario].ToString());
-                        int usuID = int.Parse(row[RecursoUsuario.IDUsuario].ToString());
-                        usuario = new ListarUsuario();
-                        usuario._fechaCreacion = usuFecha;
-                        usuario._activo = usuAct;
-                        usuario._nombre = usuNom;
-                        usuario._apellido = usuApe;
-                        usuario._rol = usuRol;
-                        usuario._id = usuID;
-                        usuario._correo = usuCor;
-                        lista.Add(usuario);
+        //public List<ListarUsuario> ListaUsuarios()
+        //{
+        //    DataTable resultado;
+        //    ListarUsuario usuario;
+        //    List<ListarUsuario> lista;
+        //    try
+        //    {
+        //        resultado = EjecutarStoredProcedureTuplas(RecursoUsuario.ListarUsuarios);
+        //        Conectar();
+        //        if (resultado != null)
+        //        {
+        //            lista = new List<ListarUsuario>();
+        //            foreach (DataRow row in resultado.Rows)
+        //            {
+        //                DateTime usuFecha = DateTime.Parse(row[RecursoUsuario.FechaUsuario].ToString());
+        //                string usuAct = row[RecursoUsuario.ActivoUsuario].ToString();
+        //                string usuRol = row[RecursoUsuario.RolUsuario].ToString();
+        //                string usuApe = row[RecursoUsuario.ApellidoUsuario].ToString();
+        //                string usuNom= row[RecursoUsuario.NombreUsuario].ToString();
+        //                string usuCor = row[RecursoUsuario.CorreoUsuario].ToString();
+        //                int usuIDRol = int.Parse(row[RecursoUsuario.RolIDUsuario].ToString());
+        //                int usuID = int.Parse(row[RecursoUsuario.IDUsuario].ToString());
+        //                usuario = new ListarUsuario();
+        //                usuario._fechaCreacion = usuFecha;
+        //                usuario._activo = usuAct;
+        //                usuario._nombre = usuNom;
+        //                usuario._apellido = usuApe;
+        //                usuario._rol = usuRol;
+        //                usuario._id = usuID;
+        //                usuario._correo = usuCor;
+        //                lista.Add(usuario);
 
-                    }
-                    return lista;
-                }
+        //            }
+        //            return lista;
+        //        }
                 
-            }
-            catch (ArgumentNullException ex)
-            {
-                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.ArgumentoInvalido, ex);
-            }
-            catch (FormatException ex)
-            {
-                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.FormatoInvalido, ex);
-            }
-            catch (SqlException ex)
-            {
-                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.BDError, ex);
-            }
-            catch (Exception ex)
-            {
-                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.OtroError, ex);
-            }
-            return null;
+        //    }
+        //    catch (ArgumentNullException ex)
+        //    {
+        //        throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.ArgumentoInvalido, ex);
+        //    }
+        //    catch (FormatException ex)
+        //    {
+        //        throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.FormatoInvalido, ex);
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.BDError, ex);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.OtroError, ex);
+        //    }
+        //    return null;
 
-        }
+        //}
 
         /// <summary>
         /// Listar todos los roles del BackOffice
         /// </summary>
         /// <returns>Retorna una lista con los roles del sistema</returns>
-        public List<ListaRoles> ListarRoles()
-        {
-            DataTable resultado;
-            ListaRoles rol;
-            List<ListaRoles> lista;
-            try
-            {
-                resultado = EjecutarStoredProcedureTuplas(RecursoUsuario.ListarRoles);
-                Conectar();
-                if (resultado != null)
-                {
-                    lista = new List<ListaRoles>();
-                    foreach (DataRow row in resultado.Rows)
-                    {
-                        string usuRol = row[RecursoUsuario.RolUsuario].ToString();
-                        int usuIDRol = int.Parse(row[RecursoUsuario.RolIDUsuario].ToString());
-                        rol = new ListaRoles();
-                        rol.rolID = usuIDRol;
-                        rol.rolNombre = usuRol;
-                        lista.Add(rol);
-                    }
-                    return lista;
-                }
+        //public List<ListaRoles> ListarRoles()
+        //{
+        //    DataTable resultado;
+        //    ListaRoles rol;
+        //    List<ListaRoles> lista;
+        //    try
+        //    {
+        //        resultado = EjecutarStoredProcedureTuplas(RecursoUsuario.ListarRoles);
+        //        Conectar();
+        //        if (resultado != null)
+        //        {
+        //            lista = new List<ListaRoles>();
+        //            foreach (DataRow row in resultado.Rows)
+        //            {
+        //                string usuRol = row[RecursoUsuario.RolUsuario].ToString();
+        //                int usuIDRol = int.Parse(row[RecursoUsuario.RolIDUsuario].ToString());
+        //                rol = new ListaRoles();
+        //                rol.rolID = usuIDRol;
+        //                rol.rolNombre = usuRol;
+        //                lista.Add(rol);
+        //            }
+        //            return lista;
+        //        }
 
-            }
-            catch (ArgumentNullException ex)
-            {
-                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.ArgumentoInvalido, ex);
-            }
-            catch (FormatException ex)
-            {
-                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.FormatoInvalido, ex);
-            }
-            catch (SqlException ex)
-            {
-                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.BDError, ex);
-            }
-            catch (Exception ex)
-            {
-                throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.OtroError, ex);
-            }
-            return null;
+        //    }
+        //    catch (ArgumentNullException ex)
+        //    {
+        //        throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.ArgumentoInvalido, ex);
+        //    }
+        //    catch (FormatException ex)
+        //    {
+        //        throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.FormatoInvalido, ex);
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.BDError, ex);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new ExceptionM12Reserva(RecursoUsuario.ExceptionM12, RecursoUsuario.OtroError, ex);
+        //    }
+        //    return null;
 
-        }
+        //}
 
         /// <summary>
         /// Borrar usuario por el Id de un usuario
