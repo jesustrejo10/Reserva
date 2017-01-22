@@ -9,13 +9,13 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando.M07
 {
-    public class M07_COEditarReclamoEquipaje : Command<String>
+    public class M07_COEditarEquipaje : Command<String>
     {
         Equipaje _equipaje;
         int _idEquipaje;
         int _peso;
 
-        public M07_COEditarReclamoEquipaje(int id, int estado)
+        public M07_COEditarEquipaje(int id, int estado)
         { 
             this._idReclamo = id;
             this._estado = estado;
