@@ -50,7 +50,8 @@ namespace BOReserva.Controllers
       {
           Entidad reclamo = FabricaEntidad.InstanciarReclamo(model);
           //con la fabrica instancie el reclamo.
-          Command<String> comando = FabricaComando.crearM16ModificarReclamo(reclamo, idReclamo);
+          int id = reclamo._id;
+          Command<String> comando = FabricaComando.crearM16ModificarReclamo(reclamo, id);
           String verificacion = comando.ejecutar();
           return (Json("Se modificó el reclamo exitosamente"));
       }

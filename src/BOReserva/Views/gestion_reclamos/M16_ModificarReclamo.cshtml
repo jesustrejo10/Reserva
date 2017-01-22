@@ -16,6 +16,9 @@
                             <div>
                                 &nbsp;
                                 <div class="col-md-12">
+                                    @Html.TextAreaFor(m => m._idReclamo, 3, 3, new { @class = "form-control", @type="hidden", @id = "idReclamo" })
+
+
                                     <div class="col-xs-6">
                                         <label for="tituloReclamo">T&iacutetulo (<span style="color:red">*</span>):</label>
                                         @Html.TextBoxFor(m => m._tituloReclamo, null, new { @class = "form-control", @placeholder = "Reclamo de una maleta", @id = "tituloReclamo"})
@@ -69,10 +72,10 @@
                                 <div class="col-md-2">
                                     <button type="button" id="modificarReclamo" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Modificar</button>
                                 </div>
-                                <div class="col-md-4"></div>
                                 <div class="col-md-2">
                                     <button id="cancelarModificarReclamo" type="button" class="btn btn-danger" style="display:block; margin-left:auto; margin-right:auto;">Cancelar</button>
                                 </div>
+                                <div class="col-md-4"></div>
                             </div>
                         </div>
                         <!-- /.col -->

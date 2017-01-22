@@ -14,6 +14,7 @@ namespace BOReserva.DataAccess.Domain
         public int _estadoReclamo { get; set; }
         public int _usuario { get; set; }
         public int _editable { get; set; }
+        
 
         /// <summary>
         /// constructor de la clase sin parámetros
@@ -43,6 +44,23 @@ namespace BOReserva.DataAccess.Domain
         /// <param name="estadoReclamo"></param>
         public Reclamo(String tituloReclamo, String detalleReclamo, String fechaReclamo, int estadoReclamo)
         {
+            this._tituloReclamo = tituloReclamo;
+            this._detalleReclamo = detalleReclamo;
+            this._fechaReclamo = fechaReclamo;
+            this._estadoReclamo = estadoReclamo;
+        }
+
+        /// <summary>
+        /// constructor de la clase con el id del reclamo y sin el id del usuario
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="tituloReclamo"></param>
+        /// <param name="detalleReclamo"></param>
+        /// <param name="fechaReclamo"></param>
+        /// <param name="estadoReclamo"></param>
+        public Reclamo(int id, String tituloReclamo, String detalleReclamo, String fechaReclamo, int estadoReclamo)
+        {
+            this._id = id;
             this._tituloReclamo = tituloReclamo;
             this._detalleReclamo = detalleReclamo;
             this._fechaReclamo = fechaReclamo;

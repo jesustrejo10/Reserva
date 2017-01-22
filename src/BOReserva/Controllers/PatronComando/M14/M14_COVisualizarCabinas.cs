@@ -18,6 +18,11 @@ namespace BOReserva.Controllers.PatronComando
             this.valor = value;
         }
 
+        public override Dictionary<int, Entidad> ejecutar()
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Sobre escritura del metodo ejecutar de la clase Comando.
         /// Se encarga de llamar al DAO y devolver la respuesta al controlador.
@@ -25,12 +30,12 @@ namespace BOReserva.Controllers.PatronComando
         /// <returns>
         /// Retorna un Identity map, de tipo int, Entidad
         /// </returns>
-        public override Dictionary<int, Entidad> ejecutar()
-        {
-            IDAOCabina daoCabina = FabricaDAO.instanciarDaoCabina();
-            Dictionary<int, Entidad> mapCruceros = daoCabina.ConsultarTodos(valor);
-            return mapCruceros;
-        }
+        //public override Dictionary<int, Entidad> ejecutar()
+        //{
+        //    IDAOCabina daoCabina = FabricaDAO.instanciarDaoCabina();
+        //    Dictionary<int, Entidad> mapCruceros = daoCabina.ConsultarTodos(valor);
+        //    return mapCruceros;
+        //}
 
     }
 }

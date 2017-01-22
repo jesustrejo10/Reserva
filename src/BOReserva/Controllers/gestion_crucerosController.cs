@@ -34,8 +34,8 @@ namespace BOReserva.Controllers
             {
                 foreach (var crucero in listaCruceros)
                 {
-                    BOReserva.DataAccess.Domain.Crucero c = (BOReserva.DataAccess.Domain.Crucero)crucero.Value;
-                    lista.Add(c._nombreCrucero);
+                    //BOReserva.DataAccess.Domain.Crucero c = (BOReserva.DataAccess.Domain.Crucero)crucero.Value;
+                    //lista.Add(c._nombreCrucero);
                 }
                 cabina._listaCruceros = lista.Select(x => new SelectListItem
                 {
@@ -148,10 +148,11 @@ namespace BOReserva.Controllers
         public JsonResult guardarCrucero(CGestion_crucero model)
         {
             
-            Entidad nuevoCrucero = FabricaEntidad.InstanciarCrucero(model);            
-            Command<String> comando = FabricaComando.crearM14AgregarCrucero(nuevoCrucero);
-            String result = comando.ejecutar();
-            return (Json(result));
+            //Entidad nuevoCrucero = FabricaEntidad.InstanciarCrucero(model);            
+            //Command<String> comando = FabricaComando.crearM14AgregarCrucero(nuevoCrucero);
+            //String result = comando.ejecutar();
+            //return (Json(result));
+            return (Json("falla"));
         }
    
 
@@ -169,10 +170,11 @@ namespace BOReserva.Controllers
         public JsonResult guardarCabina(CGestion_cabina model)
         {
 
-            Entidad nuevaCabina = FabricaEntidad.InstanciarCabinaN(model);
-            Command<String> comando = FabricaComando.crearM14AgregarCabina(nuevaCabina);
-            String result = comando.ejecutar();
-            return (Json(result));
+            //Entidad nuevaCabina = FabricaEntidad.InstanciarCabinaN(model);
+            //Command<String> comando = FabricaComando.crearM14AgregarCabina(nuevaCabina);
+            //String result = comando.ejecutar();
+            //return (Json(result));
+            return (Json("falla"));
         }
         
         [HttpPost]

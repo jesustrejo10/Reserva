@@ -225,8 +225,8 @@ namespace BOReserva.Controllers
         public List<String> cargarComboBoxHorario()
         {
             //Metodos para M11 Probados 
-            Command<List<Entidad>> comandos = (Command<List<Entidad>>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, FabricaComando.comandoRestaurant.LISTAR_RESTAURANT, null);
-            List<Entidad> restaurantes = comandos.ejecutar();
+            //Command<List<Entidad>> comandos = (Command<List<Entidad>>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, FabricaComando.comandoRestaurant.LISTAR_RESTAURANT, null);
+            //List<Entidad> restaurantes = comandos.ejecutar();
 
             Command<List<String>> comando = (Command<List<String>>)FabricaComando.comandosVistaRestaurant(FabricaComando.comandoVista.CARGAR_HORA);
             List<String> horarios = comando.ejecutar();

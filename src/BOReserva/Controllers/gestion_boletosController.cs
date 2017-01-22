@@ -8,7 +8,6 @@ using BOReserva.Models.gestion_boletos;
 using BOReserva.Servicio.Servicio_Boletos;
 using BOReserva.DataAccess.Domain;
 using BOReserva.Controllers.PatronComando;
-using BOReserva.Servicio;
 
 
 
@@ -50,12 +49,7 @@ namespace BOReserva.Controllers
 
         public ActionResult M05_DetalleVuelo(string origen, string destino, string fechasalida, string fechallegada, int idorigen, int iddestino, int monto, string tipo, int idvuelo)
         {
-
-            System.Diagnostics.Debug.WriteLine("Llega al controller de detalleVuelo");
-            System.Diagnostics.Debug.WriteLine("origen: " + origen + ", destino: " + destino + ", fecha salida: " + fechasalida + ", fecha llegada: " + fechallegada + ", id origen: " + idorigen + ", id destino: " + iddestino + ", monto: " + monto + ", tipo: " + tipo + ", id vuelo: " + idvuelo);
-
             CVisualizarBoleto vue = new CVisualizarBoleto();
-
 
             vue._origen = origen;
             vue._destino = destino;
@@ -70,8 +64,6 @@ namespace BOReserva.Controllers
 
             return PartialView(vue);
         }
-
-
 
         public ActionResult M05_CrearBoleto()
         {
@@ -98,9 +90,6 @@ namespace BOReserva.Controllers
         public ActionResult M05_VerVuelos(int idorigen, int iddestino, string idavuelta, string tipo, string fechaida, string fechavuelta)
         {
 
-            System.Diagnostics.Debug.WriteLine("Llega al controller de VerVuelos");
-            System.Diagnostics.Debug.WriteLine("DATOS CONTROLLER VERVUELOS: id_origen: " + idorigen + ", id_destino: " + iddestino + ", ida_vuelta: " + idavuelta + ", tipo: " + tipo + ", fecha ida: " + fechaida + ", fecha vuelta: " + fechavuelta);
-
             manejadorSQL_Boletos sqlboletos = new manejadorSQL_Boletos();
             List<CVuelo> listavuelos = new List<CVuelo>();
             listavuelos = sqlboletos.M05ListarVuelosIdaBD(fechaida, fechavuelta, idorigen, iddestino, tipo);
@@ -111,15 +100,10 @@ namespace BOReserva.Controllers
         //falta patrones
         public ActionResult M05_DetalleVueloReserva(int id_reserva)
         {
-
-
-            System.Diagnostics.Debug.WriteLine("Llega al controller de detalleveuloreserva");
-
             //BUSCA LA RESERVA A MOSTRAR
             manejadorSQL_Boletos buscarboleto = new manejadorSQL_Boletos();
             //Uso CBoleto ya que tiene los mismos atributos de reserva_boleto
             CBoleto reserva = buscarboleto.M05MostrarReservaBD(id_reserva);
-
 
             // EL/LOS VUELOS DEL BOLETO ESTAN EN UNA LISTA
             // NO SOPORTA ESCALAS
@@ -496,8 +480,6 @@ namespace BOReserva.Controllers
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
 
-
-
         // POST
         [HttpPost]
         public JsonResult verReserva(CVisualizarBoleto model)
@@ -552,10 +534,7 @@ namespace BOReserva.Controllers
             Boleto boleto = (Boleto)comando.ejecutar();
             List<BoletoVuelo> lista = boleto._vuelos;
             String tipoOri = boleto._tipoBoleto;
-            
-            manejadorSQL_Boletos modificar = new manejadorSQL_Boletos();
           
-
             int compara = String.Compare(tipoOri, tipo);
             if (compara != 0)
             {
@@ -617,8 +596,6 @@ namespace BOReserva.Controllers
 
 
         }
-
-
 
     }
 }
