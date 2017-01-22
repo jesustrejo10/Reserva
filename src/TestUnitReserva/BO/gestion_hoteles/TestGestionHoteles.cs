@@ -258,8 +258,10 @@ namespace TestUnitReserva.BO.gestion_hoteles
             Assert.AreEqual(prueba._direccion, "prueba");
             Assert.AreEqual(prueba._disponibilidad, 1);
             Assert.AreEqual(prueba._pais, "Venezuela");
-
+            CManejadorSQL_Hoteles listar = new CManejadorSQL_Hoteles();
            List<CHotel> pru=  prueba.MListarHoteles();
+           Assert.AreEqual(pru, listar.MListarHotelesBD());
+
 
         }
         [Test]
