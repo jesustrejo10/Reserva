@@ -146,12 +146,30 @@ namespace FOReserva.Controllers.PatronComando
         }
         #endregion
         #region M22 Reserva Habitacion
-     
-        public static Command<Dictionary<int,Entidad>> obtenerCiudades()
+        public static Command<List<CiudadHab>> obtenerCiudades()
         {
             return new M22_COObtenerCiudad();
         }
-
+        public static Command<Dictionary<int,Entidad>> obtenerHotelCiudad(int id)
+        {
+            return new M22_COConsultarIdCiudad(id);
+        }
+        public static Command<String> agregarReservaHabitacion(Entidad e)
+        {
+            return new M22_COAgregarRerserva((ReservaHabitacion)e);
+        }
+        public static Command<Dictionary<int, Entidad>> mostrarReservaUsuario(int id)
+        {
+            return new M22_COConsultarTodasReservas(id);
+        }
+        public static Command<String> eliminarReservaUsuario(int id)
+        {
+            return new M22_COEliminarReserva(id);
+        }
+        public static Command<String> modificarReservaUsuario(int id, int cant_dias)
+        {
+            return new M22_COModificarReserva(id,cant_dias);
+        }
         #endregion
     }
 }

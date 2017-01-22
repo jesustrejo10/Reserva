@@ -9,9 +9,9 @@ using System.Web;
 
 namespace FOReserva.Controllers.PatronComando.M22
 {
-    public class M22_COObtenerCiudad : Command<Dictionary<int, Entidad>>
+    public class M22_COObtenerCiudad : Command<List<CiudadHab>>
     {
-        public override Dictionary<int,Entidad> ejecutar()
+        public override List<CiudadHab> ejecutar()
         {
             try
             {

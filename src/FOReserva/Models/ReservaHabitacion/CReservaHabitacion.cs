@@ -53,30 +53,32 @@ namespace FOReserva.Models.ReservaHabitacion
             return null;
         }
 
-        public static CResultadoProceso GenerarReserva(Cvista_ReservarHabitacion reserva)
-        {
-            try
-            {
-                var resultado = from datos in DB.Singleton().M20_GenerarReservaHabitacion(reserva.HotId, reserva.UsuId, reserva.CantidadDias, reserva.FechaLlegada)
-                                select new CResultadoProceso {
-                                   CulminoCorrectamente = datos.Estatus == 0,
-                                   Estatus = datos.Referencia ?? -1,
-                                   Mensaje = datos.Mensaje,
-                                   Referencia = datos.Referencia ?? 0
-                                };
+        //public static CResultadoProceso GenerarReserva(Cvista_ReservarHabitacion reserva)
+        //{
+        //    try
+        //    {
+        //        var resultado = from datos in DB.Singleton().M20_GenerarReservaHabitacion(reserva.HotId, reserva.UsuId, reserva.CantidadDias, reserva.FechaLlegada)
+        //                        select new CResultadoProceso
+        //                        {
+        //                            CulminoCorrectamente = datos.Estatus == 0,
+        //                            Estatus = datos.Referencia ?? -1,
+        //                            Mensaje = datos.Mensaje,
+        //                            Referencia = datos.Referencia ?? 0
+        //                        };
 
-                return resultado.First();
-            }
-            catch (Exception ex)
-            {
-                Utilidad.RegistrarLog(new ReservaHabitacionException("Ocurrio un problema al obtener los hoteles.", ex));
-            }
-            return new CResultadoProceso {
-                CulminoCorrectamente = false,
-                Mensaje = "No se pudo ejecutar su solicitud.",
-                Referencia = 0
-            };
-        }
+        //        return resultado.First();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Utilidad.RegistrarLog(new ReservaHabitacionException("Ocurrio un problema al obtener los hoteles.", ex));
+        //    }
+        //    return new CResultadoProceso
+        //    {
+        //        CulminoCorrectamente = false,
+        //        Mensaje = "No se pudo ejecutar su solicitud.",
+        //        Referencia = 0
+        //    };
+        //}
 
         public static CResultadoProceso CancelarReserva(CReservaHabitacion reserva)
         {
