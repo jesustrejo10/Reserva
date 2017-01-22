@@ -5,21 +5,11 @@ using System.Web;
 
 namespace BOReserva.DataAccess.Domain
 {
+    /// <summary>
+    /// Clase para el manejo de los hoteles
+    /// </summary>
     public class Hotel : Entidad
     {
-        private object p1;
-        private string p2;
-        private string p3;
-        private string p4;
-        private string p5;
-        private object p6;
-        private object p7;
-        private Ciudad ciudad;
-        private int idHotel;
-        private int p8;
-        private int p9;
-        private int p10;
-
         public String _nombre { get; set; }
         public String _direccion { get; set; }
         public Ciudad _ciudad { get; set; }
@@ -29,11 +19,24 @@ namespace BOReserva.DataAccess.Domain
         public int _capacidad { get; set; }
         public Boolean _disponibilidad { get; set; }
         public int _precio { get; set; }
+
+
         /// <summary>
         /// Constructor Vacio utilizado mientras se le da forma al proyecto
         /// </summary>
         public Hotel() {
         }
+        /// <summary>
+        /// Contructor de la clase
+        /// </summary>
+        /// <param name="id">Id del hotel/param>
+        /// <param name="nombre">Nombre del hotel</param>
+        /// <param name="direccion">Ubicacion del hotel</param>
+        /// <param name="email">Email del hotel</param>
+        /// <param name="paginaWeb">Pagina web del hotel</param>
+        /// <param name="clasificacion">Clasificacion del hotel</param>
+        /// <param name="capacidad">Capacidad del hotel</param>
+        /// <param name="ciudad">Ciudad donde se ubica el hotel</param>
         public Hotel(int id, String nombre, String direccion, String email, String paginaWeb, int clasificacion, int capacidad, Ciudad ciudad)
         {
             this._id = id;
@@ -46,6 +49,16 @@ namespace BOReserva.DataAccess.Domain
             this._ciudad = ciudad;
             this._disponibilidad = true;
         }
+        /// <summary>
+        /// Constructor de la clase
+        /// </summary>
+        /// <param name="nombre">Nombre del hotel</param>
+        /// <param name="direccion">Direccion del hotel</param>
+        /// <param name="email">Email del hotel</param>
+        /// <param name="paginaWeb">Pagina web del hotel</param>
+        /// <param name="clasificacion">Clasificacion del hotel</param>
+        /// <param name="capacidad">Capacidad del hotel</param>
+        /// <param name="ciudad">Ciudad donde se ubica el hotel</param>
         public Hotel(String nombre, String direccion, String email, String paginaWeb, int clasificacion, int capacidad, Ciudad ciudad)
         {
             this._nombre = nombre;
@@ -59,6 +72,17 @@ namespace BOReserva.DataAccess.Domain
 
         }
 
+        /// <summary>
+        /// Constructor de la clase
+        /// </summary>
+        /// <param name="nombre">Nombre del hotel</param>
+        /// <param name="direccion">Direccion del hotel</param>
+        /// <param name="email">Email del hotel</param>
+        /// <param name="paginaWeb">Pagina web del hotel</param>
+        /// <param name="clasificacion">Clasificacion del hotel</param>
+        /// <param name="capacidad">Capacidad del hotel</param>
+        /// <param name="ciudad">Ciudad donde se ubica el hotel</param>
+        /// <param name="precio">Precio de las habitaciones</param>
         public Hotel(String nombre, String direccion, String email, String paginaWeb, int clasificacion, int capacidad, Ciudad ciudad, int precio)
         {
             this._nombre = nombre;
@@ -72,7 +96,18 @@ namespace BOReserva.DataAccess.Domain
 
         }
 
-
+        /// <summary>
+        /// Constructor de la clase
+        /// </summary>
+        /// <param name="idhotel">Id del hotel</param>
+        /// <param name="nombre">Nombre del hotel</param>
+        /// <param name="direccion">Direccion del hotel</param>
+        /// <param name="email">Email del hotel</param>
+        /// <param name="paginaWeb">Pagina web del hotel</param>
+        /// <param name="clasificacion">Clasificacion del hotel</param>
+        /// <param name="capacidad">Capacidad del hotel</param>
+        /// <param name="ciudad">Ciudad donde se ubica el hotel</param>
+        /// <param name="disponibilidad">Disponibilidad del hotel</param>
         public Hotel(int idhotel, String nombre, String direccion, String email, String paginaWeb, int clasificacion, int capacidad, Ciudad ciudad, int disponibilidad)
         {
             this._id = idhotel;

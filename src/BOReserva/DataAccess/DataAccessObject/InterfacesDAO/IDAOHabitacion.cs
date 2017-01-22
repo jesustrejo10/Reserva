@@ -7,9 +7,12 @@ using System.Threading.Tasks;
 
 namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
 {
+    /// <summary>
+    /// Interfaz que tiene el metodo Agregarhab
+    /// </summary>
     interface IDAOHabitacion : IDAO
     {
-        int Agregar(List<Entidad> e);
+        string Agregarhab(Hotel hotel, int precio);
 
     }
 }

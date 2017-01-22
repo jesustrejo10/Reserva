@@ -2,6 +2,7 @@
 using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
+using BOReserva.Excepciones.M09;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +25,14 @@ namespace BOReserva.Controllers.PatronComando
         /// </returns>
         public override Dictionary<int, Entidad> ejecutar()
         {
-            IDAO daoHotel = FabricaDAO.instanciarDaoHotel();
-            Dictionary<int, Entidad> mapHoteles = daoHotel.ConsultarTodos();
-            return mapHoteles;
+            try
+            {
+                IDAO daoHotel = FabricaDAO.instanciarDaoHotel();
+                Dictionary<int, Entidad> mapHoteles = daoHotel.ConsultarTodos();
+                return mapHoteles;
+            }catch (ReservaExceptionM09 ex){
+                throw ex;
+            }
         }
 
     }

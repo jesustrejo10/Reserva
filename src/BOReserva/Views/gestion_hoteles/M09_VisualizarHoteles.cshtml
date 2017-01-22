@@ -29,7 +29,29 @@
                                 BOReserva.DataAccess.Domain.Hotel c = (BOReserva.DataAccess.Domain.Hotel) item.Value;
                                 <tr id="@item.Key">
                                     <td>@c._nombre</td>
-                                    <td>@c._clasificacion</td>
+                                    <td>@{
+                                            if (c._clasificacion >= 1)
+                                            {
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                            }
+                                            if (c._clasificacion >= 2)
+                                            {
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                            }
+                                            if (c._clasificacion >= 3)
+                                            {
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                            }
+                                            if (c._clasificacion >= 4)
+                                            {
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                            }
+                                            if (c._clasificacion >= 5)
+                                            {
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                            }
+                                        }
+                                    </td>
                                     <td>@c._ciudad._pais._nombre / @c._ciudad._nombre</td>
                                     <td>@c._direccion</td>
                                     <td>
@@ -50,11 +72,14 @@
                                 </tr>
                             }
                         }
-                        catch (Exception e)
+                        catch (Exception ex)
                         {
-                            Response.Write("<script>alert('No hay vehiculos para mostrar');</script>");
+                            var item = (BOReserva.Excepciones.M09.ReservaExceptionM09)Model;
+                            Response.Write("<script>alert('"+item.Mensaje+"');</script>");
                         }
 
+                    
+                    </tbody>
                     <tfoot>
                         <tr>
                             <th>Nombre</th>
@@ -74,58 +99,7 @@
 </div>
 <!-- /.row -->
 
-<script>
 
-    $("#m08_VisualizarAutomovil").click(function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-        var url = '/gestion_automoviles/M08_VisualizarAutomovil';
-        var method = 'GET';
-        var data = '';
-
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-
-    });
-
-
-    $("#m08_ModificarAutomovil").click(function (e) {
-        e.preventDefault();
-        var url = '/gestion_automoviles/M08_ModificarAutomovil';
-        var method = 'GET';
-        var data = '';
-
-        $.ajax(
-            {
-                url: url,
-                type: method,
-                data: data,
-                success: function (data, textStatus, jqXHR) {
-
-                    $("#contenido").empty();
-                    $("#contenido").append(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            });
-
-    });
-
-</script>
 
 <!-- DataTables -->
 <script src="../../Content/plugins/datatables/jquery.dataTables.min.js"></script>
@@ -146,7 +120,7 @@
                 $("#contenido").empty();
                 $("#contenido").append(data);
             }).fail(function () {
-                alert("Error, por favor refresque la pagina")
+                alert(data);
             });
         }));
     });
@@ -166,7 +140,7 @@
                 $("#contenido").empty();
                 $("#contenido").append(data);
             }).fail(function () {
-                alert("Error, por favor refresque la pagina")
+                alert(data);
             });
         });
     });
@@ -203,8 +177,6 @@
                                 alert(errorThrown);
                             }
                         });
-                } else if (data.includes("Reserva_Habitacion")) {
-                    alert("No se puede eliminar este hotel porque tiene una reservacion");
                 } else {
                     alert(data);
                 }

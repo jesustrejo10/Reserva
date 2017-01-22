@@ -10,6 +10,9 @@ using System.Web;
 
 namespace BOReserva.M10.Comando.gestion_restaurantes
 {
+    /// <summary>
+    /// Clase comando eliminar Restaurant
+    /// </summary>
     public class M10_COEliminarRestaurant : Command<Boolean>
     {
         #region Atributos
