@@ -59,5 +59,6 @@ namespace BOReserva.M10
         /// </summary>
         /// <returns></returns>
         List<Entidad> ListarRestaurantes();
+        string ConectionString();
     }
 }
