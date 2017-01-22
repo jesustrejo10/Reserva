@@ -6,10 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace BOReserva.Controllers.PatronComando.GeneralLugar
 {
-    public class COConsultarTodosPais : Command<Dictionary<int, Entidad>>
+    public class COConsultarTodosPais : Command<List<SelectListItem>>
     {
         
         #region Atributos
@@ -29,11 +30,11 @@ namespace BOReserva.Controllers.PatronComando.GeneralLugar
 
         #region Ejecucion
 
-        public override Dictionary<int, Entidad> ejecutar()
+        public override List<SelectListItem> ejecutar()
         {
-            DAO Dao = FabricaDAO.instanciarDaoPais();
+            DAOPais Dao = (DAOPais)FabricaDAO.instanciarDaoPais();
 
-            return Dao.ConsultarTodos();
+            return Dao.listarPaises();
         }
 
         #endregion

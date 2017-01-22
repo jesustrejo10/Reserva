@@ -38,5 +38,22 @@ namespace BOReserva.DataAccess.Domain
             _nombreDest = nombre2;
             _vuelo = vuelo;
         }
+        public BoardingPass(int vuelo, DateTime fechaPartida, DateTime fechaLlegada, String horaPartida, int origen, int destino, 
+            String nombreOri, String nombreDest, int boleto, String asiento, String nombre, String apellido)
+        {
+            _vuelo = vuelo;
+            _fechaPartida = fechaPartida;
+            _fechaLlegada = _fechaLlegada;
+            _horaPartida = _horaPartida;
+            _origen = origen;
+            _destino = destino;
+            _nombreOri = nombreOri;
+            _nombreDest = nombreDest;
+            _boleto = boleto;
+            _asiento = asiento;
+            _nombre = nombre;
+            _apellido = apellido;
+
+        }
     }
 }

@@ -71,11 +71,11 @@ namespace BOReserva.Models.gestion_ofertas
 
         }
 
-        public COferta MConsultarOferta(int id)
+   /*     public COferta MConsultarOferta(int id)
         {
             manejadorSQL consultar = new manejadorSQL();
             return consultar.MMostrarOfertaBD(id);
-        }
+        }*/
 
         public int MModificarOfertaBD(COferta oferta, String id)
         {

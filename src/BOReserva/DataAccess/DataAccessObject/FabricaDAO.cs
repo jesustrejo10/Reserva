@@ -3,6 +3,7 @@ using BOReserva.DataAccess.DataAccessObject.M14;
 using BOReserva.DataAccess.DataAccessObject.M09;
 using BOReserva.DataAccess.DataAccessObject.M01;
 using BOReserva.DataAccess.DataAccessObject.M03;
+using BOReserva.DataAccess.DataAccessObject.M11;
 using BOReserva.DataAccess.Model;
 using BOReserva.M10;
 using BOReserva.DataAccess.DataAccessObject;
@@ -70,7 +71,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAOHotel();
         }
 
-        
+
 
         /// <summary>
         /// Metodo que instacia DAOHabitacion
@@ -155,7 +156,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             };
         }
        
-
+     
         /// <summary>
         /// Metodo para asignar parametros para el store procedured
         /// </summary>
@@ -189,7 +190,27 @@ namespace BOReserva.DataAccess.DataAccessObject
         {
             return new List<Parametro>();
         }
+               
+        #endregion
 
+        #region M11_Gestion_Ofertas_Y_Paquetes
+        /// <summary>
+        /// Método que crea la instancia de DAOPaquete
+        /// </summary>
+        /// <returns>Retorna la instancia a la clase DAOPaquete</returns>
+        public static DAOPaquete instanciarDaoPaquete()
+        {
+            return new DAOPaquete(); 
+        }
+
+        /// <summary>
+        /// Método que crea la instancia de DAOOferta
+        /// </summary>
+        /// <returns>Retorna la instancia a la clase DAOOferta</returns>
+        public static DAOOferta instanciarDaoOferta()
+        {
+            return new DAOOferta();
+        }
         #endregion
 
         #region M13_Roles
@@ -263,7 +284,7 @@ namespace BOReserva.DataAccess.DataAccessObject
         public static DAO instanciarDaoUsuario()
         {
             return new DAOUsuario();
-        }
+    }
         
         #endregion
     }
