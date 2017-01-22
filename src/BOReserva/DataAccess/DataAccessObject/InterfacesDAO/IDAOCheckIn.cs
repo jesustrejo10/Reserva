@@ -7,5 +7,6 @@ namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
     interface IDAOCheckIn : IDAO
     {
         List<Entidad> ListarPasesPasajero(int pasaporte);
+        List<Entidad> M05ListarVuelosBoleto(int pasaporte);
     }
 }

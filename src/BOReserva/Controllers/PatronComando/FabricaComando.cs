@@ -419,6 +419,10 @@ namespace BOReserva.Controllers.PatronComando
             return new M05_COConsultarBoletosPasajero(id);
         }
 
+        public static Command<List<Entidad>> consultarM05listaVuelos(int id)
+        {
+            return new M05_COConsultarBoletosVuelo(id);
+        }
         #endregion
 
         #region M08_Automoviles

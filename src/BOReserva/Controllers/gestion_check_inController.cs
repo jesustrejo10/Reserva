@@ -107,7 +107,7 @@ namespace BOReserva.Controllers
             CEquipaje equi = new CEquipaje(id);
             return PartialView("M05_Equipaje",equi);
         }
-
+        //faltapatrones
         [HttpPost]
         public ActionResult generarBoardingPass(CDetalleBoleto model)
         {
@@ -121,7 +121,8 @@ namespace BOReserva.Controllers
                 manejadorSQL_Check modificar = new manejadorSQL_Check();
 
                 // OBTENGO EL /LOS VUELOS DEL BOLETO
-
+                Command<List<Entidad>> comando = FabricaComando.consultarM05listaVuelos(model._bol_id);
+                List<Entidad> lista2 = comando.ejecutar();
                 List<CVuelo> lista = modificar.M05ListarVuelosBoleto(model._bol_id);
 
                 // PRIMERO VEO SI ES IDA O IDA Y VUELTA
@@ -200,7 +201,7 @@ namespace BOReserva.Controllers
                 return Json(error);
             }
         }
-
+        //faltapatrones
         [HttpPost]
         public ActionResult insertarEquipaje(CEquipaje model)
         {
