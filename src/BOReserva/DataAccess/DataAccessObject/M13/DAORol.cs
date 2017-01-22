@@ -14,10 +14,21 @@ using System.Web;
 
 namespace BOReserva.DataAccess.DataAccessObject
 {
+    ///<summary>
+    ///Clase DAO del modulo de roles, hereda de DAO e implementa la interfaz IDAORol
+    ///</summary>
     public class DAORol: DAO, IDAORol
     {
+        ///<summary>
+        ///Constructor vacio de la clase DAORol
+        ///</summary>
         public DAORol() { }
-        int IDAO.Agregar(Entidad e)
+
+        ///<summary>
+        ///Metodo para agregar un rol a la base de datos
+        ///</summary>
+        ///<returns>int</returns>
+        public new int Agregar(Entidad e)
         {
             Rol rol = (Rol)e;
             SqlConnection conexion = Connection.getInstance(_connexionString);
@@ -42,8 +53,19 @@ namespace BOReserva.DataAccess.DataAccessObject
                 conexion.Close();
                 return 0;
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return 0;
+            }
         }
 
+        ///<summary>
+        ///Metodo para buscar el id de un rol
+        ///</summary>
+        ///<returns>String</returns>
         public String MBuscarid_IdRol(String rolBuscar)
         {
 
@@ -73,6 +95,10 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
         }
 
+        ///<summary>
+        ///Metodo para buscar el id de un permiso
+        ///</summary>
+        ///<returns>String</returns>
         public String MBuscarid_Permiso(String permisoBucar)
         {
 
@@ -101,6 +127,10 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
         }
 
+        ///<summary>
+        ///Metodo para agregar permisos a un rol ya existente
+        ///</summary>
+        ///<returns>Entero</returns>
         public int AgregarRolPermiso(Entidad e)
         {
             Rol rol = (Rol)e;
@@ -134,13 +164,19 @@ namespace BOReserva.DataAccess.DataAccessObject
                 conexion.Close();
                 return 0;
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return 0;
+            }
         }
 
-        public Entidad Consultar(Entidad e)
-        {
-            throw new NotImplementedException();
-        }
-
+        ///<summary>
+        ///Metodo para consultar roles
+        ///</summary>
+        ///<returns>Lista de Entidad</returns>
         public List<Entidad> ConsultarRoles()
         {
             List<Entidad> listaroles;
@@ -174,8 +210,19 @@ namespace BOReserva.DataAccess.DataAccessObject
                 conexion.Close();
                 return null;
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+            }
         }
 
+        ///<summary>
+        ///Metodo para consultar permisos
+        ///</summary>
+        ///<returns>Lista de Entidad</returns>
         public List<Entidad> ConsultarPermisos(int idRol)
         {
             List<Entidad> listapermisos;
@@ -211,8 +258,19 @@ namespace BOReserva.DataAccess.DataAccessObject
                 conexion.Close();
                 return null;
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+            }
         }
 
+        ///<summary>
+        ///Metodo para listar los permisos en general
+        ///</summary>
+        ///<returns>Lista de Entidad</returns>
         public List<Entidad> ListarPermisos()
         {
             List<Entidad> listapermisos;
@@ -246,8 +304,19 @@ namespace BOReserva.DataAccess.DataAccessObject
                 conexion.Close();
                 return null;
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+            }
         }
 
+        ///<summary>
+        ///Metodo para consultar un rol especifico
+        ///</summary>
+        ///<returns>Entidad</returns>
         Entidad IDAO.Consultar(int id)
         {
             SqlConnection conexion = Connection.getInstance(_connexionString);
@@ -285,8 +354,19 @@ namespace BOReserva.DataAccess.DataAccessObject
                 conexion.Close();
                 return null;
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+            }
         }
 
+        ///<summary>
+        ///Metodo para modificar el nombre de un rol existente
+        ///</summary>
+        ///<returns>Entidad</returns>
         Entidad IDAO.Modificar(Entidad e)
         {
             Rol rol = (Rol)e;
@@ -305,13 +385,24 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
             catch (SqlException ex)
             {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
                 conexion.Close();
-                rol._nombreRol = ex.Message;
-                Entidad resultado = rol;
-                return resultado;
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
             }
         }
 
+        ///<summary>
+        ///Metodo para eliminar un rol 
+        ///</summary>
+        ///<returns>String</returns>
         public String eliminarRol(int id)
         {
             SqlConnection conexion = Connection.getInstance(_connexionString);
@@ -335,8 +426,19 @@ namespace BOReserva.DataAccess.DataAccessObject
                 conexion.Close();
                 return ex.Message;
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return ex.Message;
+            }
         }
 
+        ///<summary>
+        ///Metodo para eliminar permiso a un rol existente
+        ///</summary>
+        ///<returns>String</returns>
         public String eliminarPermiso(int id)
         {
             SqlConnection conexion = Connection.getInstance(_connexionString);
@@ -359,8 +461,19 @@ namespace BOReserva.DataAccess.DataAccessObject
                 conexion.Close();
                 return ex.Message;
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return ex.Message;
+            }
         }
 
+        ///<summary>
+        ///Metodo para consultar los permisos asignados a un rol
+        ///</summary>
+        ///<returns>Lista de Entidad</returns>
         public List<Entidad> consultarLosPermisosAsignados(int id)
         {
             List<Entidad> listapermisos;
@@ -428,17 +541,73 @@ namespace BOReserva.DataAccess.DataAccessObject
                     reader.Close();
                     //Cerrar la conexion
                     conexion.Close();
-                    return listapermisos;
                 }
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+            }
+            return listapermisos;
+        }
+ 
+
+        ///<summary>
+        ///Metodo para consultar los permisos que tiene un usuario
+        ///</summary>
+        ///<returns>Lista de String</returns>
+        public List<String> consultarPermisosUsuario(int idUsuario)
+        {
+            List<String> listapermisos = new List<String>();
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            try
+            {
+                conexion.Open();
+                using (SqlCommand cmd = new SqlCommand(M13_DAOResources.ConsultarPermisosUsuario, conexion))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@id", idUsuario);
+                    cmd.ExecuteNonQuery();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    int i = 0;
+                    while (reader.Read())
+                    {
+                        Debug.WriteLine("id del usuario nombre " + reader["usu_nombre"].ToString());
+                        Debug.WriteLine("id del id rol " + reader["rol_nombre"].ToString());
+                        Debug.WriteLine("id del id rol " + reader["mod_det_nombre"].ToString());
+                        i += 1;
+                        Debug.WriteLine("id del usuario " + i);
+                        listapermisos.Add(reader["mod_det_nombre"].ToString());
+                    }
+                    //cierro el lector
+                    reader.Close();
+                }
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return listapermisos;
             }
             catch (SqlException e)
             {
-                throw e;
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
             }
             catch (Exception e)
             {
-                throw e;
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
             }
+
         }
     }
 }

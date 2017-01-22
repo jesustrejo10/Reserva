@@ -100,8 +100,16 @@ namespace BOReserva.DataAccess.DataAccessObject.M13 {
         ///   Looks up a localized string similar to M13_ConsultarPermisosNoAsociados.
         /// </summary>
         internal static string ConsultarPermisosNoAsociados {
-            get {
+            get
+            {
                 return ResourceManager.GetString("ConsultarPermisosNoAsociados", resourceCulture);
+            }
+        }
+        ///   Looks up a localized string similar to M13_ConsultarPermisosUsuario.
+        /// </summary>
+        internal static string ConsultarPermisosUsuario {
+            get {
+                return ResourceManager.GetString("ConsultarPermisosUsuario", resourceCulture);
             }
         }
         

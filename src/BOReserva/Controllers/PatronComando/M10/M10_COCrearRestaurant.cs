@@ -10,6 +10,10 @@ using System.Web;
 
 namespace BOReserva.M10.Comando.gestion_restaurantes
 {
+
+    /// <summary>
+    /// Clase Comando Crear nuevo Restaurant
+    /// </summary>
     public class M10_COCrearRestaurant : Command<Boolean>
     {
         #region Atributos

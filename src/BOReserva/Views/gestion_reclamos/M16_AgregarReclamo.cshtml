@@ -58,6 +58,8 @@
 
     $("#guardarReclamo").click(function (e) {
         e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
         var form = $("#formGuardarReclamo");
         var tituloReclamo = $('#tituloReclamo').val();
         var fechaReclamo = $('#fechaReclamo').val();

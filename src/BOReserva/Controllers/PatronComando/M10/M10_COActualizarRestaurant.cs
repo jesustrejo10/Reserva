@@ -9,6 +9,9 @@ using System.Web;
 
 namespace BOReserva.M10.Comando.gestion_restaurantes
 {
+    /// <summary>
+    /// Clase comando para actualizar Restaurante
+    /// </summary>
     public class M10_COActualizarRestaurant : Command<Boolean>
     {
         #region Atributos

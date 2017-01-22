@@ -104,5 +104,77 @@ namespace BOReserva.DataAccess.DataAccessObject.M01 {
                 return ResourceManager.GetString("id", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to activo.
+        /// </summary>
+        internal static string usuarioActivo {
+            get {
+                return ResourceManager.GetString("usuarioActivo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to apellido.
+        /// </summary>
+        internal static string usuarioApellido {
+            get {
+                return ResourceManager.GetString("usuarioApellido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to contrasena.
+        /// </summary>
+        internal static string usuarioClave {
+            get {
+                return ResourceManager.GetString("usuarioClave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to correo.
+        /// </summary>
+        internal static string usuarioCorreo {
+            get {
+                return ResourceManager.GetString("usuarioCorreo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to fecha.
+        /// </summary>
+        internal static string usuarioFechaCreacion {
+            get {
+                return ResourceManager.GetString("usuarioFechaCreacion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to usuID.
+        /// </summary>
+        internal static string usuarioID {
+            get {
+                return ResourceManager.GetString("usuarioID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to rolID.
+        /// </summary>
+        internal static string usuarioIDRol {
+            get {
+                return ResourceManager.GetString("usuarioIDRol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to nombre.
+        /// </summary>
+        internal static string usuarioNombre {
+            get {
+                return ResourceManager.GetString("usuarioNombre", resourceCulture);
+            }
+        }
     }
 }
