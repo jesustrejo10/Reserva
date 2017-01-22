@@ -2,6 +2,7 @@ using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
 using BOReserva.Models.gestion_ofertas;
+using BOReserva.Models.gestion_restaurantes;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,6 +10,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
+using BOReserva.Models.gestion_automoviles;
 
 namespace BOReserva.DataAccess.DataAccessObject.M11
 {
@@ -196,6 +198,232 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
                 conexion.Close();
                 return ex.Message;
 
+            }
+
+        }
+
+        //Método para consultar los cruceros para llevarlos al select list de la vista agregar paquete
+        public List<CConsultar> listarCrucerosM11()
+        {
+            List<CConsultar> listcruceros = new List<CConsultar>();
+            SqlConnection conexion = Connection.getInstance(_connexionString);  //Para obtener la conexión a la 
+                                                                                //base de datos
+            try
+            {
+                conexion.Open();
+                SqlCommand query = conexion.CreateCommand();
+                query.CommandText = "SELECT * FROM Crucero";
+                SqlDataReader lector = query.ExecuteReader();
+                while (lector.Read())
+                {
+                    CConsultar consulta = new CConsultar();
+                    consulta._id = Int32.Parse(lector["cru_id"].ToString());
+                    consulta._nombre = lector["cru_nombre"].ToString();
+                    listcruceros.Add(consulta);
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return listcruceros;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+
+        }
+
+        //Método modulo 11 para consultar todos los hoteles
+        public List<CConsultar> listarHotelesM11()
+        {
+            SqlConnection conexion = Connection.getInstance(_connexionString);  //Para obtener la conexión a la 
+                                                                                //base de datos
+            try
+            {
+                List<CConsultar> listHoteles = new List<CConsultar>();
+                conexion.Open();
+                SqlCommand query = conexion.CreateCommand();
+                query.CommandText = "SELECT * FROM Hotel";
+                SqlDataReader lector = query.ExecuteReader();
+                while (lector.Read())
+                {
+                    CConsultar consulta = new CConsultar();
+                    consulta._id = Int32.Parse(lector["hot_id"].ToString());
+                    consulta._nombre = lector["hot_nombre"].ToString();
+                    listHoteles.Add(consulta);
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return listHoteles;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+
+        }
+
+        //Método modulo 11 para consultar todos los vuelos
+        public List<CConsultar> listarVuelosM11()
+        {
+            SqlConnection conexion = Connection.getInstance(_connexionString);  //Para obtener la conexión a la 
+                                                                                //base de datos
+            try
+            {
+                List<CConsultar> listVuelos = new List<CConsultar>();
+                conexion.Open();
+                SqlCommand query = conexion.CreateCommand();
+                query.CommandText =
+                    "SELECT v.vue_id, v.vue_codigo, l1.lug_nombre, l2.lug_nombre " +
+                    "FROM vuelo v, ruta r, lugar l1, lugar l2 " +
+                    "WHERE v.vue_fk_ruta = r.rut_id and r.rut_fk_lugar_origen = l1.lug_id and r.rut_fk_lugar_destino = l2.lug_id";
+                SqlDataReader lector = query.ExecuteReader();
+                var columns = new List<string>();
+                for (int i = 0; i < lector.FieldCount; i++)
+                {
+                    columns.Add(lector.GetName(i));
+                }
+                while (lector.Read())
+                {
+                    CConsultar consulta = new CConsultar();
+                    consulta._id = Int32.Parse(lector["vue_id"].ToString());
+                    consulta._codigoVuelo = lector["vue_codigo"].ToString();
+                    consulta._nombreSalida = lector["lug_nombre"].ToString();
+                    consulta._nombreLlegada = lector.GetValue(3).ToString();
+                    listVuelos.Add(consulta);
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return listVuelos;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+
+        }
+
+        //Método para la consulta de todos los restaurantes, retornando una lista de modelos de restaurante.
+        public List<CConsultar> consultarRestaurante()
+        {
+            SqlConnection conexion = Connection.getInstance(_connexionString);  //Para obtener la conexión a la 
+                                                                               //base de datos
+            try
+            {
+                List<CConsultar> lista = new List<CConsultar>();
+                //Inicializo la conexion con el string de conexion
+                //INTENTO abrir la conexion
+                conexion.Open();
+                //uso el SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "SELECT * FROM Restaurante";
+                SqlDataReader lector = query.ExecuteReader(); //creo un lector sql para la respuesta de la 
+                                                              //ejecucion del comando anterior 
+                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un 
+                //procedimiento de la bd
+                while (lector.Read())
+                {
+                    CConsultar consulta = new CConsultar();
+                    consulta._id = Int32.Parse(lector["rst_id"].ToString());
+                    consulta._nombre = lector["rst_nombre"].ToString();
+                    lista.Add(consulta);   
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return lista;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+        }
+
+        public List<CVisualizarAutomovil> consultarAutos()
+        {
+            SqlConnection conexion = Connection.getInstance(_connexionString);  //Para obtener la conexión a la 
+            //base de datos
+            try
+            {
+                List<CVisualizarAutomovil> listAutos = new List<CVisualizarAutomovil>();
+                conexion.Open();
+                SqlCommand query = conexion.CreateCommand();
+                query.CommandText = "SELECT * FROM Automovil";
+                SqlDataReader lector = query.ExecuteReader();
+                while (lector.Read())
+                {
+                    CVisualizarAutomovil consulta = new CVisualizarAutomovil();
+                    consulta._matricula = lector["aut_matricula"].ToString();
+                    consulta._fabricante = lector["aut_fabricante"].ToString();
+                    consulta._modelo = lector["aut_modelo"].ToString();
+                    listAutos.Add(consulta);
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return listAutos;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
             }
 
         }

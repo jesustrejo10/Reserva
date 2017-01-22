@@ -12,6 +12,7 @@ using System.Collections.Specialized;
 using BOReserva.DataAccess.Domain;
 using BOReserva.Controllers.PatronComando;
 using System.Diagnostics;
+using BOReserva.DataAccess.DataAccessObject.M11;
 
 
 namespace BOReserva.Controllers
@@ -101,20 +102,27 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult M11_ListarAutomoviles()
         {
-            //Automovil automovil = new Automovil();
-            //return Json(automovil.MListarvehiculos());
-            return null;
+            DAOPaquete daopaq = new DAOPaquete();
+            List<CVisualizarAutomovil> listAutos = new List<CVisualizarAutomovil>();
+            listAutos = daopaq.consultarAutos();
+            return Json(listAutos);
+            /*Automovil automovil = new Automovil();
+            return Json(automovil.MListarvehiculos());
+            return null;*/
         }
 
         [HttpPost]
         public JsonResult M11_ListarRestaurantes()
         {
             //manejadorSQL sql = new manejadorSQL();
-            //var restauranteList = new List<CRestauranteModelo>();
-           // restauranteList = sql.consultarRestaurante();
+            DAOPaquete daopaq = new DAOPaquete();
+            List<CConsultar> listRestaurante = new List<CConsultar>();
+            listRestaurante = daopaq.consultarRestaurante();
+            return Json(listRestaurante);
             //Metodos para M11 Probados 
-            Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, FabricaComando.comandoRestaurant.LISTAR_RESTAURANT, null);
+           /* Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, FabricaComando.comandoRestaurant.LISTAR_RESTAURANT, null);
             List <Entidad> restaurantes = comando.ejecutar();
+            //esto ya no se usa
             //return Json(restauranteList);
             /*List<CRestauranteModelo> lista = FabricaEntidad.crearListaRestarant();
             CRestauranteModelo rest;
@@ -123,7 +131,7 @@ namespace BOReserva.Controllers
                 rest = (CRestauranteModelo)re;
                 lista.Add(rest);
 
-            }*/
+            }
             CRestauranteModelo Restaurant = FabricaEntidad.crearRestaurant();
             List<CRestauranteModelo> lista = FabricaEntidad.crearListaRestarant();
 
@@ -131,8 +139,8 @@ namespace BOReserva.Controllers
             {
                 lista.Add((CRestauranteModelo)item);
             }
-
-            return Json(lista);
+            */
+            
         }
 
         public ActionResult M11_ModificarPaquete(String paqueteIdStr)
@@ -283,20 +291,23 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult M11_ListarHoteles()
         {
-            manejadorSQL sql = new manejadorSQL();
+            //manejadorSQL sql = new manejadorSQL();
+            DAOPaquete daopaq = new DAOPaquete();
             List<CConsultar> listHoteles = new List<CConsultar>();
-            listHoteles = sql.listarHotelesM11();
+            listHoteles = daopaq.listarHotelesM11();
             return Json(listHoteles);
         }
 
         [HttpPost]
         public JsonResult M11_ListarCruceros()
         {
-            manejadorSQL sql = new manejadorSQL();
+            //manejadorSQL sql = new manejadorSQL();
+            DAOPaquete daopaq = new DAOPaquete();
             List<CConsultar> listCruceros = new List<CConsultar>();
-            listCruceros = sql.listarCrucerosM11();
+            listCruceros = daopaq.listarCrucerosM11();
             return Json(listCruceros);
 
+            //Código nuevo para la segunda entrega
             /*List<String> lista = new List<string>();
             Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14VisualizarCruceros();
             Dictionary<int, Entidad> listaCruceros = comando.ejecutar();
@@ -304,15 +315,18 @@ namespace BOReserva.Controllers
             {
                     BOReserva.DataAccess.Domain.Crucero c = (BOReserva.DataAccess.Domain.Crucero)crucero.Value;
                     lista.Add(c._nombreCrucero);
-            }*/
+                    Debug.WriteLine("Crucero: " + c._nombreCrucero);
+            }
+            return Json(lista);*/
         }
 
         [HttpPost]
         public JsonResult M11_ListarVuelos()
         {
-            manejadorSQL sql = new manejadorSQL();
+            //manejadorSQL sql = new manejadorSQL();
+            DAOPaquete daopaq = new DAOPaquete();
             List<CConsultar> listVuelos = new List<CConsultar>();
-            listVuelos = sql.listarVuelosM11();
+            listVuelos = daopaq.listarVuelosM11();
             return Json(listVuelos);
 
             //Código nuevo para la segunda entrega
