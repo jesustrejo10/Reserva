@@ -100,6 +100,36 @@ namespace FOReserva.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult M19_Modificar_reserva(CReservaAutomovil reserva)
+        {
+            var id = reserva._id;
+            var hora = reserva._hora_fin;
+
+            Command<Boolean> comando = (Command<Boolean>)FabricaComando.comandosReservaAutomovil(FabricaComando.comandosGlobales.ACTUALIZAR, FabricaComando.comandoReservaAuto.NULO, reserva);
+            //Chequeo de campos obligatorios para el formulario
+            if ((reserva._id == -1))
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                string error = "Error, no se tiene la identificación de la reserva";
+                return Json(error);
+            }
+
+            if (comando.ejecutar())
+            {
+                return (Json(true, JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                string error = "Error al tratar de modificar la reserva.";
+                return Json(error);
+            }
+        }
+
+
+
+
         public ActionResult M19_Busqueda_Autos()
         {
             try { 
@@ -114,7 +144,7 @@ namespace FOReserva.Controllers
                 List<CReserva_Autos_Perfil> lista = busqueda(res_entrega, res_destino, fechaIni, fechaFin, horaIni, horaFin);
                 return View(lista);
             }
-            catch (Exception Error)
+            catch (Exception)
             {
                 return View();
             }
@@ -131,7 +161,7 @@ namespace FOReserva.Controllers
                 manejador.InsertarReservaAuto(reserva);
                 return View(reserva);
             }
-            catch (ManejadorSQLException AgregarError)
+            catch (ManejadorSQLException)
             {
                 return View();
             }

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.Controllers.PatronComando
+namespace BOReserva.Controllers.PatronComando.M14
 {
     public class M14_COVisualizarCabinas : Command<Dictionary<int, Entidad>>
     {
@@ -32,8 +32,8 @@ namespace BOReserva.Controllers.PatronComando
         public override Dictionary<int, Entidad> ejecutar()
         {
             IDAOCabina daoCabina = (IDAOCabina) FabricaDAO.instanciarDaoCabina();
-            Dictionary<int, Entidad> mapCruceros = daoCabina.ConsultarTodos(valor);
-            return mapCruceros;
+            Dictionary<int, Entidad> mapCabinas = daoCabina.ConsultarTodos(valor);
+            return mapCabinas;
         }
 
     }

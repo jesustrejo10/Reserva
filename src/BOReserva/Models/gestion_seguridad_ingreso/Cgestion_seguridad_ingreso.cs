@@ -62,7 +62,7 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
             var verificacion = (Usuario)bd.Consultar(usuarioAConsultar); //Asigna valor de retorno luego de consulta a BD
 
             Boolean Usuario = verificacion.correo.Equals(_correoCampoTexto.ToLower());
-            Boolean Contraseña = verificacion.clave.Equals(clave);
+            Boolean Contraseña = verificacion.contrasena.Equals(clave);
             System.Diagnostics.Debug.WriteLine("Correo " + Usuario + " contrasena " + Contraseña);
 
             if (Usuario && Contraseña)

@@ -1,15 +1,11 @@
-﻿@{
-    var message = TempData["message"] ?? string.Empty;
-} 
-<script src="~/Scripts/Scripts_Usuarios/llamadas_generales.js"></script>
-@model BOReserva.Models.gestion_usuarios.AgregarUsuario
-@using (Html.BeginForm("M12_ModificarUsuario", "gestion_usuarios", FormMethod.Post, new { @class = "modificarUsuario_form" }))
+﻿<script src="~/Scripts/Scripts_Usuarios/llamadas_generales.js"></script>
+<link href="~/Content/Canvas/Box.css" rel="stylesheet" />
+@model BOReserva.Models.gestion_usuarios.CModificarUsuario
+@using (Html.BeginForm("modificarUsuario", "gestion_usuarios", null, FormMethod.Post, new { id = "modificarUsuario_form", @class = "form-horizontal" }))
 {
-    @Html.ValidationSummary()
-    @Html.HiddenFor(c => c.idUsuario)
     <div class="row">
-        <div class="col-md-12">
-            <div class="box">
+        <div class="col-md-10">
+            <div class="Cajita">
                 <div class="box-body">
                     <h2 class="box-title">Modificar Usuario</h2>
                     <div class="row">
@@ -19,7 +15,7 @@
                                 <div class="col-md-12">
                                     <div class="col-xs-12">
                                         <label for="_correo">Inserte el Correo Electronico del usuario (<span style="color:red">*</span>):</label>
-                                        @Html.TextBoxFor(c => c.correoUsuario, null, new
+                                        @Html.TextBoxFor(c => c._correo, null, new
                                    {
                                        value = "@Model._correo",
                                        @class = "form-control",
@@ -34,7 +30,7 @@
                                     <div class="col-md-12">
                                         <div class="col-xs-6">
                                             <label for="nombreUsuario">Inserte el Nombre del Usuario (<span style="color:red">*</span>):</label>
-                                            @Html.TextBoxFor(c => c.nombreUsuario, null,
+                                            @Html.TextBoxFor(c => c._nombre, null,
                                     new
                                     {
                                         @class = "form-control",
@@ -48,10 +44,10 @@
                                         </div>
                                         <div class="col-xs-6">
                                             <label for="apellidoUsuario">Inserte el Apellido del Usuario (<span style="color:red">*</span>):</label>
-                                            @Html.TextBoxFor(c => c.apellidoUsuario, null, new
+                                            @Html.TextBoxFor(c => c._apellido, null, new
                                {
                                    @class = "form-control",
-                                   @id = "nombreUsuario",
+                                   @id = "apellidoUsuario",
                                    required = "required",
                                    maxlength = "50",
                                    oninput = "setCustomValidity('')",
@@ -69,7 +65,7 @@
                                             @Html.TextBoxFor(c => c.contraseñaUsuario, null, new
                                    {
                                        @class = "form-control",
-                                       @id = "contraseñaUsuario",
+                                       @id = "contrasena",
                                        @placeholder = "Ingrese una contraseña si desea cambiarla",
                                        oninvalid = "setCustomValidity('Campo obligatorio. De 6 a 12 caracteres. Debe contener al menos un digito y una letra. No puede contener caracteres especiales')",
                                        type = "password",
@@ -96,42 +92,28 @@
                                     <div class="col-md-12">
                                         <div class="col-xs-6">
                                             <label for="_rol">Seleccione el rol del usuario (<span style="color:red">*</span>):</label>
-                                            @Html.DropDownListFor(c => c.rolUsuario, ViewBag.Roles as SelectList, "Seleccione una opcion", new { @class = "form-control", required = "required" })
-                                           @*@Html.DropDownListFor(c => c.rolUsuario, new[] { new SelectListItem() { Text = "Administrador", Value = "1"}}, 
-                                                "Seleccione una opcion", new { @class = "form-control", required = "required" })*@
+                                            @Html.DropDownListFor(c => c._rol, ViewBag.Roles as SelectList, "Seleccione una opcion", new { @class = "form-control", required = "required", id = "rolUsuario" })
 
                                         </div>
                                         <div class="col-xs-6">
                                             <label for="_activo">Estado del usuario (<span style="color:red">*</span>):</label>
-                                            @Html.DropDownListFor(c => c.activoUsuario, new[] { new SelectListItem() { Text = "Activo", Value = "Activo"}, new SelectListItem()
-                                                { Text = "Inactivo", Value = "Inactivo" } }, "Seleccione una opcion", new { @class = "form-control", required = "required" })
+                                            @Html.DropDownListFor(c => c._activo, new[] { new SelectListItem() { Text = "Activo", Value = "Activo"}, new SelectListItem()
+                                                { Text = "Inactivo", Value = "Inactivo" } }, "Seleccione una opcion", new { @class = "form-control", required = "required", id = "activoUsuario" })
                                         </div>
                                     </div>
                                 </div>
-                               
+
                                 <div class="col-md-12" style="margin-top:10px;">
                                     <br />
                                     <div class="col-md-4"></div>
                                     <div class="col-md-2">
-                                        <button type="submit" id="modificarUsuario" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar Cambios</button>
-                                       <!-- <button type="submit" class="btn btn-success" value="M12_ModificarUsuario" id="modificarUsuario"
-                                                style="display:block; margin-left:auto; margin-right:auto;">
-                                            Guardar
-                                        </button> -->
-
+                                        <button type="button" id="modificarUsuario" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar Cambios</button>
                                     </div>
                                     <div class="col-md-2">
                                         <button id="cancelarModificacion" type="button" class="btn btn-danger" style="display:block; margin-left:auto; margin-right:auto;">Cancelar</button>
-                                        <!--<button type="button" style="display:block; margin-left:auto; margin-right:auto;" class="btn btn-danger"
-                                                onclick="location.href='@Url.Action("M12_Index", "gestion_usuarios")'">Cancelar</button>-->
-                                            
                                     </div>
                                     <div class="col-md-4"></div>
                                 </div>
-                                <!-- <div class="col-md-12" style="margin-top:10px;">
-                                     <input type="button" value="Create" class="btn btn-success" onclick=" return confirm('¿Seguro que desea crear este usuario?');" /> 
-                                    
-                                </div>-->
                             </div>
                         </div>
                     </div>
@@ -140,7 +122,7 @@
         </div>
     </div>
     <script language="javascript">
-        var password = document.getElementById("contraseñaUsuario")
+        var password = document.getElementById("contrasena")
         , confirm_password = document.getElementById("confContraseña");
 
         function validatePassword() {
@@ -153,11 +135,72 @@
 
         password.onchange = validatePassword;
         confirm_password.onkeyup = validatePassword;
-
-        
-                
     </script>
+    
+    <script>
+        $("#modificarUsuario").click(function (e) {
+            e.preventDefault();
+            var form = $("#modificarUsuario_form");
+
+            var correo = $('#correoUsuario').val();
+            var nombre = $('#nombreUsuario').val();
+            var apellido = $('#apellidoUsuario').val();
+            var contrasena = $('#contrasena').val();
+            var confContrasena = $('#confContraseña').val();
+            var rol = $('#rolUsuario').val();
+            var activo = $('#activoUsuario').val();
+
+            console.log(correo);
+            console.log(nombre);
+            console.log(apellido);
+            console.log(contrasena);
+            console.log(confContrasena);
+            console.log(rol);
+            console.log(activo);
+
+            if (correo && nombre && apellido && contrasena && confContrasena && rol && activo) {
+                $.ajax({
+                    url: "gestion_usuarios/modificarUsuario",
+                    data: form.serialize(),
+                    type: 'POST',
+                    success: function (data) {
+                        console.log("hola");
+                        if (data === "1") {
+                            console.log("entra");
+                            alert("Se modifico el Usuario exitosamente");
+
+                            var url1 = '/gestion_usuarios/M12_VisualizarUsuarios';
+                            var method = 'GET';
+                            var data1 = '';
+
+                            $.ajax(
+                                {
+                                    url: url1,
+                                    type: method,
+                                    data: data,
+                                    success: function (data, textStatus, jqXHR) {
+
+                                        $("#contenido").empty();
+                                        $("#contenido").append(data);
+                                    },
+                                    error: function (jqXHR, textStatus, errorThrown) {
+                                        alert(errorThrown);
+                                    }
+                                });
+                        } else {
+                            alert(data);
+                        }
+                    }
+                });
+                } 
+            else {
+                alert("Existen campos vacios");
+            }
+        });
+
+        </script>
 }
+
 
 
 
