@@ -74,7 +74,8 @@ namespace BOReserva.DataAccess.DataAccessObject.M14
 
                 SqlCommand query = new SqlCommand("M24_ListarRutas", con);
 
-                query.CommandType = CommandType.StoredProcedure;
+                query.CommandType = CommandType.StoredProcedure;                
+
                 SqlDataReader reader = query.ExecuteReader();
                 //int elemento = 0;
                 while (reader.Read())
@@ -87,6 +88,53 @@ namespace BOReserva.DataAccess.DataAccessObject.M14
                         Int32.Parse(reader["distancia"].ToString()),
                         Int32.Parse(reader["id"].ToString()));
                     listaRuta.Add(Int32.Parse(reader["id"].ToString()), ruta);
+                    //elemento++;
+                }
+                reader.Close();
+                con.Close();
+                return listaRuta;
+
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                con.Close();
+                return null;
+            }
+        }
+
+
+        Dictionary<int, Entidad> IDAOItinerario.ConsultarRutasRutas(string ruta)
+        {
+
+            Dictionary<int, Entidad> listaRuta = new Dictionary<int, Entidad>();
+            SqlConnection con = Connection.getInstance(_connexionString);
+            String[] strOri = ruta.Split(new[] { " - " }, StringSplitOptions.None);
+            Ruta _ruta;
+            try
+            {
+                con.Open();
+
+                SqlCommand query = new SqlCommand("M24_ListarRutasD", con);
+
+                query.CommandType = CommandType.StoredProcedure;
+                query.Parameters.AddWithValue("@rutaCiudad", strOri[0]);
+                query.Parameters.AddWithValue("@rutaPais", strOri[1]);
+
+                query.ExecuteNonQuery();
+
+
+                SqlDataReader reader = query.ExecuteReader();                
+                while (reader.Read())
+                {
+                    _ruta = new Ruta(
+                        Int32.Parse(reader["id"].ToString()),
+                        0,
+                        null,
+                        null,
+                        ruta,
+                        reader["destino"].ToString());
+                    listaRuta.Add(Int32.Parse(reader["id"].ToString()), _ruta);
                     //elemento++;
                 }
                 reader.Close();

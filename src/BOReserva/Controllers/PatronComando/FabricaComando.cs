@@ -368,6 +368,13 @@ namespace BOReserva.Controllers.PatronComando
             return new M14_COListarRutasCrucero();
         }
 
+        public static Command<Dictionary<int, Entidad>> crearM14VisualizarRutasCrucero(string rutas)
+        {
+
+            return new M14_COListarRutasRutas(rutas);
+        }
+
+
 
 
 

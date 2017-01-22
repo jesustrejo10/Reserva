@@ -67,6 +67,8 @@ namespace BOReserva.Controllers
         {
             CGestion_itinerario itinerario = new CGestion_itinerario();
             List<String> lista = new List<string>();
+            List<String> listal = new List<string>();
+            listal.Add("Seleccione una ruta origen");
             Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14VisualizarCruceros();
             Dictionary<int, Entidad> listaCruceros = comando.ejecutar();
 
@@ -82,11 +84,11 @@ namespace BOReserva.Controllers
                     Value = x,
                     Text = x
                 });
-
-
-
-
-
+                itinerario._listaOrigen = listal    .Select(x => new SelectListItem
+                {
+                    Value = x,
+                    Text = x
+                });
 
                 return PartialView(itinerario);
             }
@@ -159,7 +161,7 @@ namespace BOReserva.Controllers
                     BOReserva.DataAccess.Domain.Cabina c = (BOReserva.DataAccess.Domain.Cabina) cabina.Value;
                     lista.Add(c._nombreCabina);
                 }
-                camarote._listaCruceros = lista.Select(x => new SelectListItem
+                camarote._listaCabinas = lista.Select(x => new SelectListItem
                 {
                     Value = x,
                     Text = x
@@ -204,7 +206,7 @@ namespace BOReserva.Controllers
                     BOReserva.DataAccess.Domain.Ruta c = (BOReserva.DataAccess.Domain.Ruta)ruta.Value;                    
                     lista.Add(c._origenRuta);
                 }                
-                itinerario._listaDestino = lista.Select(x => new SelectListItem
+                itinerario._listaOrigen = lista.Select(x => new SelectListItem
                 {
                     Value = x,
                     Text = x
@@ -236,7 +238,50 @@ namespace BOReserva.Controllers
 
 
 
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult cargarRutasD(string ciudadO)
+        {
+            CGestion_itinerario itinerario = new CGestion_itinerario();
+            List<String> lista = new List<string>();
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14VisualizarRutasCrucero(ciudadO);
+            Dictionary<int, Entidad> listaRutas = comando.ejecutar();
 
+            try
+            {
+                foreach (var rutas in listaRutas)
+                {
+                    BOReserva.DataAccess.Domain.Ruta c = (BOReserva.DataAccess.Domain.Ruta)rutas.Value;
+                    lista.Add(c._destinoRuta);
+                }
+                itinerario._listaDestino = lista.Select(x => new SelectListItem
+                {
+                    Value = x,
+                    Text = x
+                });
+                if (lista != null)
+                {
+                    return (Json(itinerario._listaDestino, JsonRequestBehavior.AllowGet));
+                }
+                else
+                {
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    String error = "Error accediendo a la BD";
+                    return Json(error);
+                }
+
+            }
+            catch (SqlException e)
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error, no se pudo conectar con la base de datos";
+                //Retorno el error
+                return Json(error);
+            }
+
+
+        }
 
 
 
@@ -313,30 +358,15 @@ namespace BOReserva.Controllers
             return (Json(result));            
         }
         
-        [HttpPost]
-        public JsonResult guardaCabina(CGestion_cabina model)
-        {
-            String _nombreCabina = model._nombreCabina;
-            float _precioCabina = model._precioCabina;
-            int _fkCrucero = model._fkCrucero;
-
-            CGestion_cabina cabina = new CGestion_cabina(_nombreCabina, _precioCabina, _fkCrucero);
-            cabina.AgregarCabinas(cabina);
-
-            return (Json(true, JsonRequestBehavior.AllowGet));
-        }
+        
 
         [HttpPost]
         public JsonResult guardarCamarote(CGestion_camarote model)
         {
-            int _cantidadCama = model._cantidadCama;
-            String _tipoCama = model._tipoCama;
-            int _fkCabina = model._fkCabina;
-
-            CGestion_camarote camarote = new CGestion_camarote(_cantidadCama, _tipoCama, _fkCabina);
-            camarote.AgregarCamarote(camarote);
-
-            return (Json(true, JsonRequestBehavior.AllowGet));
+            Entidad nuevoCamarote= FabricaEntidad.InstanciarCamaroteN(model);
+            Command<String> comando = FabricaComando.crearM14AgregarCamarote(nuevoCamarote);
+            String result = comando.ejecutar();
+            return (Json(result));
         }
 
 

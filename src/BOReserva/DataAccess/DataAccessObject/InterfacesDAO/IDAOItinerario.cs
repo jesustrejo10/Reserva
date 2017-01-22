@@ -11,5 +11,7 @@ namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
     {
         Dictionary<int, Entidad> ConsultarRutasCrucero();
 
+        Dictionary<int, Entidad> ConsultarRutasRutas(string ruta);
+
     }
 }
