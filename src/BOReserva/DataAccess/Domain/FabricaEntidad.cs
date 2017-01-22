@@ -6,13 +6,12 @@ using BOReserva.Models.gestion_restaurantes;
 using BOReserva.Models.gestion_roles;
 //using BOReserva.DataAccess.Domain.M06;
 using BOReserva.Models.gestion_aviones;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
-
-
+using BOReserva.Models.gestion_reclamo_equipaje;
 
 namespace BOReserva.DataAccess.Domain
 {
@@ -430,5 +429,101 @@ namespace BOReserva.DataAccess.Domain
 
         #endregion
 
+        #region M07_ReclamosEquipaje
+
+        /// <summary>
+        /// Instancia Reclamo de Equipaje sin parametros
+        /// </summary>
+        /// <returns>Entidad instanciada</returns>
+        public static Entidad InstanciarReclamoEquipaje()
+        {
+            return new ReclamoEquipaje();
+        }
+        /// <summary>
+        /// Instancia Reclamo con parametros
+        /// </summary>
+        /// <param name="descripcionReclamo">Descripcion del reclamo</param>
+        /// <param name="fechaReclamo">Fecha del reclamo</param>
+        /// <param name="estadoReclamo">Estado del reclamo (abierto, cerrado)</param>
+        /// <param name="pasajero">Pasajero involucrado</param>
+        /// <param name="equipaje">Equipaje extraviado</param>
+        /// <returns>Entidad instanciada</returns>
+        public static Entidad InstanciarReclamoEquipaje(String descripcionReclamo, String fechaReclamo, String estadoReclamo, int pasajero, int equipaje)
+        {
+            return new ReclamoEquipaje(descripcionReclamo, fechaReclamo, estadoReclamo, pasajero, equipaje);
+        }
+
+        /// <summary>
+        /// Instancia Reclamo con parametros segun id enviado
+        /// </summary>
+        /// <param name="idreclamo">ID Reclamo</param>
+        /// <param name="descripcionReclamo">Descripcion del reclamo</param>
+        /// <param name="fechaReclamo">Fecha del reclamo</param>
+        /// <param name="estadoReclamo">Estado del reclamo (abierto, cerrado)</param>
+        /// <param name="pasajero">Pasajero involucrado</param>
+        /// <param name="equipaje">Equipaje extraviado</param>
+        /// <returns>Entidad instanciada</returns>
+        public static Entidad InstanciarReclamoEquipaje(int idreclamo, String descripcionReclamo, String fechaReclamo, String estadoReclamo, int pasajero, int equipaje)
+        {
+            return new ReclamoEquipaje(idreclamo, descripcionReclamo, fechaReclamo, estadoReclamo, pasajero, equipaje);
+        }
+
+        /// <summary>
+        /// Instancia en modelo el Reclamo Equipaje
+        /// </summary>
+        /// <param name="model">Modelo a instanciar</param>
+        /// <returns>Entidad instanciada</returns>
+        public static Entidad InstanciarReclamoEquipaje(CAgregarReclamoEquipaje model)
+        {
+            String descripcion = model._descripcionReclamo;
+            String fecha = model._fechaReclamo;
+            String status = model._estadoReclamo;
+            int pasajero = model._pasajero;
+            int equipaje = model._equipaje;
+
+            return new ReclamoEquipaje(descripcion, fecha, status, pasajero, equipaje);
+        }
+
+        /// <summary>
+        /// Instancia lista de reclamos de equipaje
+        /// </summary>
+        /// <param name="listaEntidad">Lista a instanciar</param>
+        /// <returns>Lista de reclamos</returns>
+        public static List<ReclamoEquipaje> InstanciarListaReclamoEquipaje(Dictionary<int, Entidad> listaEntidad)
+        {
+            List<ReclamoEquipaje> lista = new List<ReclamoEquipaje>();
+            foreach (var e in listaEntidad)
+            {
+                ReclamoEquipaje nuevoReclamo = (ReclamoEquipaje)e.Value;
+                lista.Add(nuevoReclamo);
+
+            }
+            return lista;
+        }
+
+        /// <summary>
+        /// Instanciacion para una lista vacia
+        /// </summary>
+        /// <returns>Lista de reclamos de equipaje vacia</returns>
+        public static List<ReclamoEquipaje> InstanciarListaReclamoEquipaje()
+        {
+            return new List<ReclamoEquipaje>();
+        }
+
+        #endregion
+
+        #region M07 GESTION EQUIPAJE
+
+        public static Entidad instanciarEquipaje()
+        {
+            return new Equipaje();
+        }
+
+        public static Entidad instanciarEquipaje(int peso, int abordaje)
+        {
+            return new Equipaje(peso, abordaje);
+        }
+
+        #endregion
     }
 }
