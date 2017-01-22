@@ -2,9 +2,8 @@
 
 <script src="~/Scripts/Scripts_Aviones/llamadas_generales.js"></script>
 
-@using (Html.BeginForm("guardarAvion", "gestion_aviones", null, FormMethod.Post, new { @id = "formGuardarAvion", @class = "form-horizontal" }))
+@using (Html.BeginForm("modificarReclamo", "gestion_reclamos", null, FormMethod.Post, new { @id = "formModificarReclamo", @class = "form-horizontal" }))
 {
-
     <div class="row">
         <div class="col-md-12">
             <div class="box">
@@ -17,52 +16,53 @@
                             <div>
                                 &nbsp;
                                 <div class="col-md-12">
+                                    @Html.TextAreaFor(m => m._idReclamo, 3, 3, new { @class = "form-control", @type="hidden", @id = "idReclamo" })
+
+
                                     <div class="col-xs-6">
                                         <label for="tituloReclamo">T&iacutetulo (<span style="color:red">*</span>):</label>
-                                        @Html.TextBoxFor(m => m._tituloReclamo, null, new { @class = "form-control", @placeholder = "Reclamo de una maleta", @id = "tituloReclamo", @readonly = "readonly" })
+                                        @Html.TextBoxFor(m => m._tituloReclamo, null, new { @class = "form-control", @placeholder = "Reclamo de una maleta", @id = "tituloReclamo"})
                                     </div>
                                     <div class="col-xs-6">
                                         <label for="fecharegistro">Fecha del Suceso (<span style="color:red">*</span>)</label>
-                                        @Html.TextBoxFor(m => m._fechaReclamo, null, new { @type = "date", @class = "form-control", @placeholder = "Fecha del Suceso", @id = "fechaReclamo", min = "2001-01-01", max = "2016-12-31", @onblur = "checkanio(this);", @readonly = "readonly" })
-                                    </div>                                </div>
+                                        @Html.TextBoxFor(m => m._fechaReclamo, null, new { @class = "form-control", @placeholder = "Fecha del Suceso", @id = "fechaReclamo", @readonly = "readonly"})
+                                    </div>                               
+                                 </div>
                             </div>
-
                             &nbsp;
-
                             <div class="col-md-12">
                                 <div class="col-xs-6">
                                     <label for="descripcionReclamo">Descripci&oacuten (<span style="color:red">*</span>):</label>
                                     @Html.TextAreaFor(m => m._detalleReclamo, 3, 3, new { @class = "form-control", @placeholder = "Escriba aquí el detalle del reclamo...", @id = "detalleReclamo" })
                                 </div>
+
+                                <div class="col-xs-6">
+                                    <label for="estadoReclamo">Estado(<span style="color:red">*</span>)</label>
+                                    @{    List<SelectListItem> _estadoReclamo = new List<SelectListItem>();
+                                            _estadoReclamo.Add(new SelectListItem
+                                                {
+                                                    Text = "Procesado",
+                                                    Value = "procesado"
+                                                });
+                                            _estadoReclamo.Add(new SelectListItem
+                                            {
+                                                Text = "Culminado",
+                                                Value = "culminado"
+                                            });
+                                            _estadoReclamo.Add(new SelectListItem
+                                            {
+                                                Text = "Cerrado",
+                                                Value = "cerrado"
+                                            });
+                                      }
+                                    @Html.DropDownListFor(m => m._estadoReclamo, _estadoReclamo, new { @class = "form-control", @placeholder = "Estado", @id = "estadoReclamo" })
+                                </div>
+                                
                             </div>
 
                             <div>
                                 &nbsp;
-                                <div class="col-md-12">
-
-                                    <div class="col-xs-6">
-                                        <label for="estadoReclamo">Estado(<span style="color:red">*</span>)</label>
-                                        @{
-                                                                List<SelectListItem> _estadoReclamo = new List<SelectListItem>();
-                                                                _estadoReclamo.Add(new SelectListItem
-                                                                    {
-                                                                        Text = "Procesado",
-                                                                        Value = "procesado"
-                                                                    });
-                                                                _estadoReclamo.Add(new SelectListItem
-                                                                {
-                                                                Text = "Culminado",
-                                                                Value = "culminado"
-                                                                });
-                                                                _estadoReclamo.Add(new SelectListItem
-                                                                {
-                                                                Text = "Cerrado",
-                                                                Value = "cerrado"
-                                                                });                                                       
-                                         }
-                                        @Html.DropDownListFor(m => m._estadoReclamo, _estadoReclamo, new { @class = "form-control", @placeholder = "Estado", @id = "estadoReclamo" })
-                                    </div>
-                                </div>
+                                <div class="col-md-12"> </div>
                               </div>
                             </div>
 
@@ -73,20 +73,10 @@
                                     <button type="button" id="modificarReclamo" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Modificar</button>
                                 </div>
                                 <div class="col-md-2">
-                                    <button id="cancelarModificacion" type="button" class="btn btn-danger" style="display:block; margin-left:auto; margin-right:auto;">Cancelar</button>
+                                    <button id="cancelarModificarReclamo" type="button" class="btn btn-danger" style="display:block; margin-left:auto; margin-right:auto;">Cancelar</button>
                                 </div>
                                 <div class="col-md-4"></div>
                             </div>
-
-
-                            @*<div class="col-md-12" style="margin-top:10px;">
-                                    <div class="col-md-2">
-                                        <button type="button" id="modificarAvion" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar Cambios</button>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <button id="cancelarModificacion" type="button" class="btn btn-danger" style="display:block; margin-left:auto; margin-right:auto;">Cancelar</button>
-                                    </div>
-                                </div>*@
                         </div>
                         <!-- /.col -->
                     </div>
@@ -96,24 +86,41 @@
             </div>
             <!-- /.box -->
         </div>
-        <!-- /.col -->
-    </div>
-    <!-- /.row -->
+     
+  
+    <script>
+    $("#modificarReclamo").click(function (e) {
+        e.preventDefault();
+        var form = $("#formModificarReclamo");
 
-    @*<script>
-            $("#aceptarAvion").click(function (e) {
-                e.preventDefault();
-                var form = $("#formGuardarAvion");
-                $.ajax({
-                    url: "gestion_aviones/guardarAvion",
-                    data: form.serialize(),
-                    type: 'POST',
-                    success: function (data) {
-                        alert("Se guardo");
-                        $('#formGuardarAvion')[0].reset();
-                    }
-                });
-            });
-        </script>*@
+        //if (tarifadiaria && penalidaddiaria) {
+        $.ajax({
+            url: "gestion_reclamos/modificarReclamo",
+            data: form.serialize(),
+            type: 'POST',
+            success: function (data) {
+                alert("Se ha modificado exitosamente su reclamo");
+                //$('#formModifyVehicle')[0].reset();
+                var url1 = '/gestion_reclamos/M16_VisualizarReclamo';
+                var method = 'GET';
+                var data1 = '';
+
+                $.ajax(
+                    {
+                        url: url1,
+                        type: method,
+                        data: data,
+                        success: function (data, textStatus, jqXHR) {
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+            }
+        });
+    });
+     </script>
 }
-<!------------------- FIN DE SECCION DE AGREGAR AVION ---------------->
+<!------------------- FIN DE SECCION DE MODIFICAR RECLAMO---------------->

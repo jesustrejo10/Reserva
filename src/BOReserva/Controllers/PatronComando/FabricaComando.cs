@@ -135,6 +135,7 @@ namespace BOReserva.Controllers.PatronComando
         #endregion
 
         #region M16_GESTION_RECLAMOS
+       
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando M16_COAgregarReclamo
         /// </summary>
@@ -146,29 +147,56 @@ namespace BOReserva.Controllers.PatronComando
         }
         public static Command<String> crearM16AgregarReclamo(Entidad e)
         {
-
             return new M16_COAgregarReclamo((Reclamo)e);
-
         }
+
+        /// <summary>
+        /// Método para instanciar el comando para consultar reclamos
+        /// </summary>
+        /// <returns>retorna el comando para consultar todos los reclamos</returns>
         public static Command<Dictionary<int, Entidad>> crearM16VisualizarReclamos()
         {
-
             return new M16_COConsultarReclamo();
-
         }
+
+         /// <summary>
+        /// Método para instanciar el comando Consultar un reclamo por ID con el que luego tomamos el usuario
+        /// </summary>
+        /// <param name="idReclamo"> recibe como parámetro el id de un reclamo</param>
+        /// <returns>retorna el comando para consultar un reclamo a detalle</returns>
         public static Command<Entidad> crearM16ConsultarUsuario(int idReclamo)
         {
-
             return new M16_COConsultarReclamoDetalle(idReclamo);
-
         }
 
+        /// <summary>
+        /// Método para instanciar el comando M16_EliminarReclamo
+        /// </summary>
+        /// <param name="id">recibe el id del reclamo</param>
+        /// <returns>retorna el comando para eliminar un reclamo</returns>
         public static Command<String> crearM16EliminarReclamo(int id)
         {
             return new M16_COEliminarReclamo(id); 
 
         }
 
+        /// <summary>
+        /// Método para editar un reclamo
+        /// </summary>
+        /// <param name="reclamo">recibe como parámetro una entidad reclamo</param>
+        /// <param name="idReclamo">recibe el id del reclamo</param>
+        /// <returns>retorna el comando</returns>
+        public static Command<String> crearM16ModificarReclamo (Entidad reclamo, int id)
+        {
+            return new M16_COModificarReclamo(reclamo,id);
+        }
+
+        /// <summary>
+        /// Método para instanciar el comando M16_ModificarReclamo
+        /// </summary>
+        /// <param name="reclamo">recibe la entidad reclamo</param>
+        /// <param name="idReclamo">recibe el id de un reclamo</param>
+        /// <returns>retorna el comando para modificar un reclamo</returns>
         public static Command<String> crearM16ActualizarReclamo(int id, int estado)
         {
             return new M16_COActualizarReclamo(id, estado);
@@ -237,6 +265,7 @@ namespace BOReserva.Controllers.PatronComando
         #endregion
 
         #region M04_Vuelo
+
         /// <summary>
         /// Método para instanciar el comando M04_COAgregarVuelo
         /// </summary>

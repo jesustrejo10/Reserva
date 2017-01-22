@@ -301,6 +301,7 @@
     <Compile Include="Controllers\PatronComando\M16\M16_COConsultarReclamoDetalle.cs" />
     <Compile Include="Controllers\PatronComando\M16\M16_COActualizarReclamo.cs" />
     <Compile Include="Controllers\PatronComando\M16\M16_COEliminarReclamo.cs" />
+    <Compile Include="Controllers\PatronComando\M16\M16_COModificarReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOBoleto.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOCiudad.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOLugar.cs" />
@@ -1649,6 +1650,9 @@
     <Content Include="Views\gestion_reclamos\M16_ModificarReclamo.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_AgregarHotel.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_VisualizarHoteles.cshtml" />
+    <Content Include="Views\gestion_vuelo\M04_GestionVuelo_CW1.cshtml" />
+    <Content Include="Views\gestion_vuelo\M04_GestionVuelo_CW2.cshtml" />
+    <Content Include="Views\gestion_vuelo\M04_GestionVuelo_CW3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_boletos\M05_VisualizarBoletos.cshtml" />
@@ -1833,7 +1837,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:14139/</IISUrl>
+          <IISUrl>http://localhost:2736/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
