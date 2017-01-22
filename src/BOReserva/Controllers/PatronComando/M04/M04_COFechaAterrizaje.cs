@@ -16,9 +16,11 @@ namespace BOReserva.Controllers.PatronComando.M04
 
 
         /// <summary>
-        /// Constructor que recibe un parametro del tipo entidad
+        /// Constructor del comando Fecha Aterrizaje
         /// </summary>
-        /// <param name="vuelo">Es el objeto al que se le quiere cambiar el status</param>
+        /// <param name="idRuta">id de la ruta</param>
+        /// <param name="idAvion">id del avion</param>
+        /// <param name="fechaDespegue">fecha de despegue</param>
         public M04_COFechaAterrizaje(int idRuta, int idAvion, DateTime fechaDespegue)
         {
             _fechaDespegue = fechaDespegue;

@@ -1712,14 +1712,18 @@ namespace BOReserva.Servicio
         /* FIN MODULO 8 GESTION DE AUTOMOVILES*/
 
         //Procedimiento del Modulo 11 para agregar ofertas a la base de datos.
-        public Boolean agregarOferta(CAgregarOferta model)
+      /*  public Boolean agregarOferta(CAgregarOferta model)
         {
             try
             {
                 conexion = new SqlConnection(stringDeConexion);
                 conexion.Open();
                 SqlCommand query = conexion.CreateCommand();
-                query.CommandText = "INSERT INTO Oferta VALUES ('" + model._nombreOferta + "','" + model.formatDate(model._fechaIniOferta) + "', '" + model.formatDate(model._fechaFinOferta) + "'," + model._porcentajeOferta + ",'" + model._estadoOferta + "');";
+                query.CommandText = "INSERT INTO Oferta VALUES ('" + model._nombreOferta + "','" 
+                                                                   + model.formatDate(model._fechaIniOferta) + "', '" 
+                                                                   + model.formatDate(model._fechaFinOferta) + "'," 
+                                                                   + model._porcentajeOferta + ",'" 
+                                                                   + model._estadoOferta + "');";
                 SqlDataReader lector = query.ExecuteReader();
                 lector.Close();
                 conexion.Close();
@@ -1734,7 +1738,7 @@ namespace BOReserva.Servicio
                 return false;
             }
 
-        }
+        } */
 
         //Procedimiento del Modulo 11 para agregar paquetes a la base de datos.
         public Boolean agregarPaquete(CPaquete paquete)
@@ -1845,7 +1849,7 @@ namespace BOReserva.Servicio
         }
 
 
-        public List<COferta> MListarOfertasBD()
+       /* public List<COferta> MListarOfertasBD()
         {
             List<COferta> listaofertas = new List<COferta>();
             try
@@ -1886,10 +1890,10 @@ namespace BOReserva.Servicio
                 conexion.Close();
                 return null;
             }
-        }
+        }*/
 
 
-        public COferta MMostrarOfertaBD(int id)
+        /*public COferta MMostrarOfertaBD(int id)
         {
             COferta oferta = null;
             try
@@ -1927,7 +1931,7 @@ namespace BOReserva.Servicio
                 conexion.Close();
                 return null;
             }
-        }
+        }*/
 
 
         public List<String> MBuscarNombrePaquetesDeOferta(int idOferta)

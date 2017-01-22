@@ -1,6 +1,7 @@
 ﻿using BOReserva.DataAccess.DAO;
 using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.Domain;
+using BOReserva.Excepciones.M04;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -39,6 +40,10 @@ namespace BOReserva.Controllers.PatronComando.M04
                 IDAOVuelo daoVuelo = (IDAOVuelo)FabricaDAO.instanciarDAOVuelo();
                 List<Entidad> listaVuelos = daoVuelo.ConsultarAvionRuta(_idRuta);
                 return listaVuelos;
+            }
+            catch (ReservaExceptionM04 ex)
+            {
+                throw ex;
             }
             catch (SqlException ex)
             {

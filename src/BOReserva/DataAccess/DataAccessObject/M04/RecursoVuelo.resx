@@ -205,4 +205,41 @@
     <value>aDistMax</value>
     <comment>Distancia maxima del avion</comment>
   </data>
+  <data name="FechaAterrizaje" xml:space="preserve">
+    <value>M04_CalcularFechaAterrizaje</value>
+    <comment>Procedimiento de la bd que determina la fecha de aterrizaje segun ciertos parametros</comment>
+  </data>
+  <data name="CrearVuelo" xml:space="preserve">
+    <value>M04_CrearVuelo</value>
+    <comment>Procedimiento de la BD para crear un vuelo</comment>
+  </data>
+  <data name="BuscaVueloID" xml:space="preserve">
+    <value>M04_BuscaVuelo</value>
+    <comment>Procedimiento de la BD que busca la informacion de un vuelo por su id</comment>
+  </data>
+  <data name="ModificarVuelo" xml:space="preserve">
+    <value>M04_ModificarVuelo</value>
+    <comment>Procedimiento de la BD que modifica un vuelo</comment>
+  </data>
+  <data name="ErrorAvionRuta" xml:space="preserve">
+    <value>No hay aviones disponibles para cubrir la ruta seleccionada</value>
+  </data>
+  <data name="ErrorDaoVuelo" xml:space="preserve">
+    <value>Reserva-404</value>
+    <comment>Error metodos DAO</comment>
+  </data>
+  <data name="ErrorMensajeArgumento" xml:space="preserve">
+    <value>Argumento nulo</value>
+  </data>
+  <data name="ErrorMensajeFormato" xml:space="preserve">
+    <value>Formato invalido</value>
+  </data>
+  <data name="BuscarCodigo" xml:space="preserve">
+    <value>M04_BuscarCodigo</value>
+    <comment>Procedimiento que busca un codigo de vuelo en la bd</comment>
+  </data>
+  <data name="ErrorCodigoDuplicado" xml:space="preserve">
+    <value>El codigo de vuelo ya se encuentra registrado</value>
+    <comment>Error de la BD</comment>
+  </data>
 </root>

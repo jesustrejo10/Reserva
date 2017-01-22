@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.Controllers.PatronComando
+namespace BOReserva.Controllers.PatronComando.M14
 {
     public class M14_COAgregarCrucero : Command<String>
     {

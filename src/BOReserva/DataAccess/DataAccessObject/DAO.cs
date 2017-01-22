@@ -54,7 +54,8 @@ namespace BOReserva.DataAccess.DataAccessObject
 
             try
             {
-               conexion = new SqlConnection(_connexionString);
+                //conexion = Connection.getInstance(_connexionString);
+                conexion = new SqlConnection(_connexionString);
             }
 
             catch (Exception ex)
@@ -207,11 +208,7 @@ namespace BOReserva.DataAccess.DataAccessObject
         #endregion
 
         #region Ejecutar Stored Procedure Multiples Tuplas
-        /// <summary>
-        ///  Metodo para ejecutar un procedimiento almacenado en la bd que devuelve un DataTable
-        /// </summary>
-        /// <param name="query"></param>
-        /// <returns></returns>
+
         public DataTable EjecutarStoredProcedureTuplas(string query)
         {
             try
