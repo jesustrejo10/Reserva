@@ -254,8 +254,10 @@
     <Compile Include="DataAccess\Domain\Entidad.cs" />
     <Compile Include="DataAccess\Domain\FabricaEntidad.cs" />
     <Compile Include="DataAccess\Domain\Habitacion.cs" />
+    <Compile Include="DataAccess\Domain\Hotel.cs" />
     <Compile Include="DataAccess\Domain\Reclamo.cs" />
     <Compile Include="DataAccess\Domain\ReservaHabitacion.cs" />
+    <Compile Include="DataAccess\Domain\Restaurante.cs" />
     <Compile Include="DataAccess\Domain\Revision.cs" />
     <Compile Include="DataAccess\Domain\RevisionValoracion.cs" />
     <Compile Include="DataAccess\Domain\Usuario.cs" />
@@ -1629,6 +1631,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="DataAccess\DataAccessObject\M19\Scripts de Procedures M19.sql" />
+    <Content Include="DataAccess\DataAccessObject\M20\ProcedimientosDAOM20.sql" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\assets\fonts\et-line.eot" />

@@ -13,7 +13,7 @@ namespace FOReserva.DataAccess.Domain
         public String _cant_dias { get; set; }
         public String _fk_habitacion { get; set; }
         public String _fk_usuario { get; set; }
-        public String _id { get; set; }
+        public new String _id { get; set; }
         public int _idR { get; set; }
         public String _lugar { get; set; }
         public String _hotel { get; set; }

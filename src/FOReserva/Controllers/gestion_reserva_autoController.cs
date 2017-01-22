@@ -144,7 +144,7 @@ namespace FOReserva.Controllers
                 List<CReserva_Autos_Perfil> lista = busqueda(res_entrega, res_destino, fechaIni, fechaFin, horaIni, horaFin);
                 return View(lista);
             }
-            catch (Exception Error)
+            catch (Exception)
             {
                 return View();
             }
@@ -161,7 +161,7 @@ namespace FOReserva.Controllers
                 manejador.InsertarReservaAuto(reserva);
                 return View(reserva);
             }
-            catch (ManejadorSQLException AgregarError)
+            catch (ManejadorSQLException)
             {
                 return View();
             }

@@ -8,7 +8,7 @@ namespace FOReserva.DataAccess.Domain
     public class Usuario : Entidad
     {
         public int Codigo { get; set; }
-        public int _id { get; set; }
+                
         public string Nombre { get; set; }
 
         public Usuario(int id, String name)
