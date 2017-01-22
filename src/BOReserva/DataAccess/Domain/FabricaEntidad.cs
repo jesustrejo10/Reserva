@@ -287,6 +287,13 @@ namespace BOReserva.DataAccess.Domain
             DateTime fecha_nac = Convert.ToDateTime(fecha);
             return new Pasajero(id, nombre1, nombre2, apellido1, apellido2, sexo, fecha_nac, correo);
 		}
+
+        public static Entidad InstanciarBoardingPass(int vuelo, DateTime fechaPartida, DateTime fechaLlegada, String horaPartida, int origen, int destino,
+            String nombreOri, String nombreDest, int boleto, String asiento, String nombre, String apellido)
+        {
+            return new BoardingPass(vuelo, fechaPartida, fechaLlegada, horaPartida, origen, destino,
+              nombreOri, nombreDest, boleto, asiento, nombre, apellido);
+        }
         #endregion
 
         #region M08_Automoviles
