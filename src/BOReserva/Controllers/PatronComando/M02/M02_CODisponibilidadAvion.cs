@@ -17,6 +17,11 @@ namespace BOReserva.Controllers.PatronComando.M02
         Avion _avion;
         int _disponibilidad;
 
+        /// <summary>
+        /// Constructor del comando Disponibilidad
+        /// </summary>
+        /// <param name="avion"></param>
+        /// <param name="disponibilidad"></param>
         public M02_CODisponibilidadAvion(Entidad avion,int disponibilidad)
         { 
             this._avion = (Avion) avion;

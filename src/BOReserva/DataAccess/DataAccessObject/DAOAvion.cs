@@ -2,6 +2,8 @@
 using BOReserva.DataAccess.DataAccessObject.M02;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
+using BOReserva.Excepciones;
+using BOReserva.Excepciones.M02;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -43,28 +45,50 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
             catch (SqlException ex)
             {
-                Debug.WriteLine("Ocurrio un SqlException");
-                Debug.WriteLine(ex.ToString());
-                return 2;
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM02(ex.Message, exi); }
+
+                throw new ReservaExceptionM02(ex.Message, ex);
             }
             catch (NullReferenceException ex)
             {
-                Debug.WriteLine("Ocurrio una NullReferenceException");
-                Debug.WriteLine(ex.ToString());
-                return 3;
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM02(ex.Message, exi); }
+
+                throw new ReservaExceptionM02(ex.Message, ex);
             }
             catch (ArgumentNullException ex)
             {
-                Debug.WriteLine("Ocurrio una ArgumentNullException");
-                Debug.WriteLine(ex.ToString());
-                return 4;
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM02(ex.Message, exi); }
+
+                throw new ReservaExceptionM02(ex.Message, ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM02(ex.Message, exi); }
+
+                throw new ReservaExceptionM02(ex.Message, ex);
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Ocurrio una Exception");
-                Debug.WriteLine(ex.ToString());
-                return 5;
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM02(ex.Message, exi); }
+
+                throw new ReservaExceptionM02(ex.Message, ex);
             }
+        
         }
         #endregion
 
@@ -96,10 +120,48 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
             catch (SqlException ex)
             {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
 
-                avion._matricula = ex.Message;
-                Entidad resultado = avion;
-                return resultado;
+                catch (LogException exi)
+                { throw new ReservaExceptionM02(ex.Message, exi); }
+
+                throw new ReservaExceptionM02(ex.Message, ex);
+            }
+            catch (NullReferenceException ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM02(ex.Message, exi); }
+
+                throw new ReservaExceptionM02(ex.Message, ex);
+            }
+            catch (ArgumentNullException ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM02(ex.Message, exi); }
+
+                throw new ReservaExceptionM02(ex.Message, ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM02(ex.Message, exi); }
+
+                throw new ReservaExceptionM02(ex.Message, ex);
+            }
+            catch (Exception ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM02(ex.Message, exi); }
+
+                throw new ReservaExceptionM02(ex.Message, ex);
             }
         }
         #endregion
@@ -142,8 +204,48 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
             catch (SqlException ex)
             {
-                Debug.WriteLine(ex.ToString());
-                return null;
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM02(ex.Message, exi); }
+
+                throw new ReservaExceptionM02(ex.Message, ex);
+            }
+            catch (NullReferenceException ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM02(ex.Message, exi); }
+
+                throw new ReservaExceptionM02(ex.Message, ex);
+            }
+            catch (ArgumentNullException ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM02(ex.Message, exi); }
+
+                throw new ReservaExceptionM02(ex.Message, ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM02(ex.Message, exi); }
+
+                throw new ReservaExceptionM02(ex.Message, ex);
+            }
+            catch (Exception ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM02(ex.Message, exi); }
+
+                throw new ReservaExceptionM02(ex.Message, ex);
             }
         }
         #endregion
@@ -187,10 +289,49 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
             catch (SqlException ex)
             {
-                Debug.WriteLine(ex.ToString());
-                return null;
-            }
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
 
+                catch (LogException exi)
+                { throw new ReservaExceptionM02(ex.Message, exi); }
+
+                throw new ReservaExceptionM02(ex.Message, ex);
+            }
+            catch (NullReferenceException ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM02(ex.Message, exi); }
+
+                throw new ReservaExceptionM02(ex.Message, ex);
+            }
+            catch (ArgumentNullException ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM02(ex.Message, exi); }
+
+                throw new ReservaExceptionM02(ex.Message, ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM02(ex.Message, exi); }
+
+                throw new ReservaExceptionM02(ex.Message, ex);
+            }
+            catch (Exception ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM02(ex.Message, exi); }
+
+                throw new ReservaExceptionM02(ex.Message, ex);
+            }
         }
         #endregion
 
@@ -235,7 +376,48 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
             catch (SqlException ex)
             {
-                return ex.Message;
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM02(ex.Message, exi); }
+
+                throw new ReservaExceptionM02(ex.Message, ex);
+            }
+            catch (NullReferenceException ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM02(ex.Message, exi); }
+
+                throw new ReservaExceptionM02(ex.Message, ex);
+            }
+            catch (ArgumentNullException ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM02(ex.Message, exi); }
+
+                throw new ReservaExceptionM02(ex.Message, ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM02(ex.Message, exi); }
+
+                throw new ReservaExceptionM02(ex.Message, ex);
+            }
+            catch (Exception ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM02(ex.Message, exi); }
+
+                throw new ReservaExceptionM02(ex.Message, ex);
             }
         }
         #endregion

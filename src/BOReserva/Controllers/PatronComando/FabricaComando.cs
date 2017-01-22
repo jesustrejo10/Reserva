@@ -35,6 +35,7 @@ namespace BOReserva.Controllers.PatronComando
         }
 
         #endregion
+
         #region crearM02VisualizarAvion
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
@@ -51,6 +52,7 @@ namespace BOReserva.Controllers.PatronComando
         }
 
         #endregion
+
         #region crearM02ConsultarAvion
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
@@ -67,6 +69,7 @@ namespace BOReserva.Controllers.PatronComando
         }
 
         #endregion
+
         #region crearM02ModificarAvion
         public static Command<string> crearM02ModificarAvion(Entidad avion, int idmodificar)
         {
@@ -75,12 +78,14 @@ namespace BOReserva.Controllers.PatronComando
 
         }
         #endregion
+
         #region crearM02EliminarAvion
         public static Command<string> crearM02EliminarAvion(Entidad avion,int ideliminar)
         {
             return new M02_COEliminarAvion(avion,ideliminar);
         }
         #endregion
+
         #region crearM02DisponibilidadAvion
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
@@ -97,7 +102,6 @@ namespace BOReserva.Controllers.PatronComando
         }
         #endregion
         #endregion
-
 
         # region Lugar ( COLugar - COPais - COCiudad ) 
 
