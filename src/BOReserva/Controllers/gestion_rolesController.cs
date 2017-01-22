@@ -193,6 +193,7 @@ namespace BOReserva.Controllers
                 //con la fabrica instancie al hotel.
                 Command<String> comando = FabricaComando.crearM13_ModificarRol(modificarRol, model.Id_Rol);
                 agrego_si_no = comando.ejecutar();
+                //envio una respuesta dependiendo del resultado del insert
             }
             catch (SqlException e)
             {

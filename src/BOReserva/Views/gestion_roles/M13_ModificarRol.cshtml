@@ -152,24 +152,9 @@
                 url: "gestion_roles/modificarrol",
                 data: { id_rol: id_rol, nuevo_rol: nuevo_rol },
                 type: 'POST',
-                success: function () {
-                    if (permisos.lenght > 1) {
-                        asignarPermisos();
-                    }
-                    else {
-                        $.ajax({
-                            url: '/gestion_roles/M13_VisualizarRol',
-                            type: 'GET',
-                            success: function (data, textStatus, jqXHR) {
-                                $("#contenido").empty();
-                                $("#contenido").append(data);
-                            },
-                            error: function (jqXHR, textStatus, errorThrown) {
-                                console.log("error");
-                                alert(errorThrown);
-                            }
-                        });
-                    }
+                success: function (response) {
+                    console.log(response);
+                    asignarPermisos();
                 }
             });
         }
