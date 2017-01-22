@@ -26,7 +26,7 @@ namespace BOReserva.Controllers.PatronComando.M12
             Entidad test = daoUsuario.Modificar(_usuario);
             Usuario usuario = (Usuario)test;
 
-            return usuario._nombre;
+            return usuario.nombre;
         }
 
     }

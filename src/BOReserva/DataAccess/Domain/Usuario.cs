@@ -7,13 +7,17 @@ namespace BOReserva.DataAccess.Domain
 {
     public class Usuario : Entidad
     {
-        public String _nombre { get; set; }
-        public String _apellido { get; set; }
-        public String _correo { get; set; }
-        public String _contrasena { get; set; }
-        public Rol _rol { get; set; }
-        public DateTime _fechaCreacion { get; set; }
-        public String _activo { get; set; }
+        public int id { get; set; }
+        public String nombre { get; set; }
+        public String apellido { get; set; }
+        public String correo { get; set; }
+        public String contrasena { get; set; }
+        public String clave { get; set; }
+        public int rol { get; set; }
+        public Rol rolr { get; set; }
+        public string fechaCreacion { get; set; }
+        public DateTime fechaCreacionf { get; set; }
+        public String activo { get; set; }
 
         public Usuario()
         {
@@ -23,50 +27,50 @@ namespace BOReserva.DataAccess.Domain
         public Usuario(int id, String nombre, String apellido, String correo, String contrasena, Rol rol, DateTime fechaCreacion, String activo)
         {
             this._id = id;
-            this._nombre = nombre;
-            this._apellido = apellido;
-            this._correo = correo;
-            this._contrasena = contrasena;
-            this._rol = rol;
-            this._fechaCreacion = fechaCreacion;
-            this._activo = activo;
+            this.nombre = nombre;
+            this.apellido = apellido;
+            this.correo = correo;
+            this.contrasena = contrasena;
+            this.rolr = rol;
+            this.fechaCreacionf = fechaCreacion;
+            this.activo = activo;
         }
 
         public Usuario(String nombre, String apellido, String correo, String contrasena, Rol rol, DateTime fechaCreacion, String activo)
         {
-            this._nombre = nombre;
-            this._apellido = apellido;
-            this._correo = correo;
-            this._contrasena = contrasena;
-            this._rol = rol;
-            this._fechaCreacion = fechaCreacion;
-            this._activo = activo;
+            this.nombre = nombre;
+            this.apellido = apellido;
+            this.correo = correo;
+            this.contrasena = contrasena;
+            this.rolr = rol;
+            this.fechaCreacionf = fechaCreacion;
+            this.activo = activo;
         }
 
         public Usuario(String nombre, String apellido, String correo, Rol rol, DateTime fechaCreacion, String activo)
         {
-            this._nombre = nombre;
-            this._apellido = apellido;
-            this._correo = correo;
-            this._rol = rol;
-            this._fechaCreacion = fechaCreacion;
-            this._activo = activo;
+            this.nombre = nombre;
+            this.apellido = apellido;
+            this.correo = correo;
+            this.rolr = rol;
+            this.fechaCreacionf = fechaCreacion;
+            this.activo = activo;
         }
 
         public Usuario(int id, String nombre, String apellido, String correo, String contrasena, Rol rol, String activo)
         {
             this._id = id;
-            this._nombre = nombre;
-            this._apellido = apellido;
-            this._correo = correo;
-            this._contrasena = contrasena;
-            this._rol = rol;
-            this._activo = activo;
+            this.nombre = nombre;
+            this.apellido = apellido;
+            this.correo = correo;
+            this.contrasena = contrasena;
+            this.rolr = rol;
+            this.activo = activo;
         }
 
         public String getDate()
         {
-            return _fechaCreacion.ToString("dd/MM/yyyy");
+            return fechaCreacionf.ToString("dd/MM/yyyy");
         }
 
     }

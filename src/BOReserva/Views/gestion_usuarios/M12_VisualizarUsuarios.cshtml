@@ -63,21 +63,21 @@
                                     {
                                         BOReserva.DataAccess.Domain.Usuario c = (BOReserva.DataAccess.Domain.Usuario) item.Value;
                                         <tr id="@item.Key">
-                                            <td>@c._nombre</td>
-                                            <td>@c._apellido</td>
-                                            <td>@c._correo</td>
+                                            <td>@c.nombre</td>
+                                            <td>@c.apellido</td>
+                                            <td>@c.correo</td>
                                             <td>@c.getDate()</td>
-                                            <td>@c._rol._nombreRol</td>
-                                            <td>@c._activo</td>
+                                            <td>@c.rolr._nombreRol</td>
+                                            <td>@c.activo</td>
                                             <td>
                                                 <a href="#" title="Modificar" class="wait"><i class="fa fa-pencil modificar"></i></a>
                                                 <a href="#" title="Eliminar" class="wait"><i class="fa fa-times eliminar"></i></a>
                                                 @{
-                                        if (c._activo.Equals("Activo"))
+                                        if (c.activo.Equals("Activo"))
                                         {
                                                         <a href="#" title="Inactivar Usuario" ><i class="fa fa-toggle-on desactivar"></i></a>
                                         }
-                                        if (c._activo.Equals("Inactivo"))
+                                        if (c.activo.Equals("Inactivo"))
                                         {
                                                         <a href="#" title="Activar Usuario"><i class="fa fa-toggle-off activar"></i></a>
                                         }

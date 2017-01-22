@@ -15,5 +15,9 @@ namespace BOReserva.DataAccess.Domain
         /// utilizado para acceder a cada registro.
         /// </summary>
         public int _id { get; set; }
+
+        public Entidad() { }
+
+        public Entidad(int id) { this._id = id; }
     }
 }

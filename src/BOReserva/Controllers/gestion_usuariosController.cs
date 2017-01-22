@@ -76,12 +76,12 @@ namespace BOReserva.Controllers
             idUsuario = usuarioBuscado._id;
 
             CModificarUsuario modelovista = new CModificarUsuario();
-            modelovista._correo = usuarioBuscado._correo;
-            modelovista._nombre = usuarioBuscado._nombre;
-            modelovista._apellido = usuarioBuscado._apellido;
-            modelovista.contraseñaUsuario = usuarioBuscado._contrasena;
-            modelovista._rol = usuarioBuscado._rol._idRol;
-            modelovista._activo = usuarioBuscado._activo;
+            modelovista._correo = usuarioBuscado.correo;
+            modelovista._nombre = usuarioBuscado.nombre;
+            modelovista._apellido = usuarioBuscado.apellido;
+            modelovista.contraseñaUsuario = usuarioBuscado.contrasena;
+            modelovista._rol = usuarioBuscado.rolr._idRol;
+            modelovista._activo = usuarioBuscado.activo;
 
             return PartialView(modelovista);
         }
@@ -98,12 +98,12 @@ namespace BOReserva.Controllers
             idUsuario = usuarioBuscado._id;
 
             CModificarUsuario modelovista = new CModificarUsuario();
-            modelovista._correo = usuarioBuscado._correo;
-            modelovista._nombre = usuarioBuscado._nombre;
-            modelovista._apellido = usuarioBuscado._apellido;
-            modelovista.contraseñaUsuario = usuarioBuscado._contrasena;
-            modelovista._rol = usuarioBuscado._rol._idRol;
-            modelovista._activo = usuarioBuscado._activo;
+            modelovista._correo = usuarioBuscado.correo;
+            modelovista._nombre = usuarioBuscado.nombre;
+            modelovista._apellido = usuarioBuscado.apellido;
+            modelovista.contraseñaUsuario = usuarioBuscado.contrasena;
+            modelovista._rol = usuarioBuscado.rolr._idRol;
+            modelovista._activo = usuarioBuscado.activo;
 
             return PartialView(modelovista);
         }

@@ -40,7 +40,7 @@ namespace BOReserva.DataAccess.Domain
             return new Usuario()
             {
                 correo = _correo,
-                clave = _clave
+                contrasena = _clave
             };
         }
 
@@ -53,7 +53,7 @@ namespace BOReserva.DataAccess.Domain
                 nombre = _nombre,
                 apellido = _apellido,
                 correo = _correo,
-                clave = _clave,
+                contrasena = _clave,
                 fechaCreacion = _fechaCreacion,
                 activo = _activo
             };

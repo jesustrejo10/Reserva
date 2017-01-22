@@ -25,9 +25,9 @@ namespace BOReserva.DataAccess.DataAccessObject
             {
                 conexion.Open();
 
-                usuario._fechaCreacion = DateTime.Now;
+                usuario.fechaCreacionf = DateTime.Now;
 
-                String sql = "INSERT INTO Usuario VALUES ('" + usuario._nombre + "','" + usuario._apellido + "','" + usuario._correo + "','" + usuario._contrasena + "',1,'" + usuario._fechaCreacion.ToString("yyyy-MM-dd") + "','" + usuario._activo + "')";
+                String sql = "INSERT INTO Usuario VALUES ('" + usuario.nombre + "','" + usuario.apellido + "','" + usuario.correo + "','" + usuario.contrasena + "',1,'" + usuario.fechaCreacionf.ToString("yyyy-MM-dd") + "','" + usuario.activo + "')";
                 
                 Debug.WriteLine(sql);
                 SqlCommand cmd = new SqlCommand(sql, conexion);
@@ -135,14 +135,14 @@ namespace BOReserva.DataAccess.DataAccessObject
             {
                 conexion.Open();
                 String sql = "UPDATE Usuario " +
-                                "SET usu_nombre = '"+ usuario._nombre +"', usu_apellido = '"+ usuario._apellido +"', usu_correo = '"+ usuario._correo +"', usu_contraseña = '"+ usuario._contrasena +"', usu_fk_rol = "+ usuario._rol._id +", usu_activo = '"+ usuario._activo+"' where usu_id = "+ usuario._id;
+                                "SET usu_nombre = '"+ usuario.nombre +"', usu_apellido = '"+ usuario.apellido +"', usu_correo = '"+ usuario.correo +"', usu_contraseña = '"+ usuario.contrasena +"', usu_fk_rol = "+ usuario.rolr._id +", usu_activo = '"+ usuario.activo+"' where usu_id = "+ usuario._id;
                 SqlCommand cmd = new SqlCommand(sql, conexion);
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
                 
                 conexion.Close();
                 
-                usuario._nombre = "1";
+                usuario.nombre = "1";
                 Entidad resultado = usuario;
                 
                 return resultado;
@@ -150,7 +150,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             catch (SqlException ex)
             {
                 conexion.Close();
-                usuario._nombre = ex.Message;
+                usuario.nombre = ex.Message;
                 Entidad resultado = usuario;
                 return resultado;
             }
@@ -241,14 +241,14 @@ namespace BOReserva.DataAccess.DataAccessObject
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
                 conexion.Close();
-                usuario._nombre = "1";
+                usuario.nombre = "1";
                 Entidad resultado = usuario;
                 return "1";
             }
             catch (SqlException ex)
             {
                 conexion.Close();
-                usuario._nombre = ex.Message;
+                usuario.nombre = ex.Message;
                 Entidad resultado = usuario;
                 return ex.Message;
             }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using BOReserva.DataAccess.Domain;
 
 namespace BOReserva.Models.gestion_boletos
 {
@@ -28,7 +29,7 @@ namespace BOReserva.Models.gestion_boletos
         public int _idOrigen { get; set; }
 
         public int _idDestino { get; set; }
-        public CPasajero _pasajero { get; set; }
+        public Pasajero _pasajero { get; set; }
 
         public int _idVuelo { get; set; }
         public List<CVuelo> _vuelos { get; set; }
