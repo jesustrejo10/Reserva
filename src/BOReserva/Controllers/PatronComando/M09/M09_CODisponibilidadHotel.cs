@@ -35,10 +35,10 @@ namespace BOReserva.Controllers.PatronComando.M09
         public override String ejecutar(){
             try
             {
-                IDAOHotel daoHotel = (DAOHotel)FabricaDAO.instanciarDaoHotel();
-                String test = daoHotel.disponibilidadHotel(_hotel, _disponibilidad);
-                return test;
-            }
+            IDAOHotel daoHotel = (DAOHotel)FabricaDAO.instanciarDaoHotel();
+            String test = daoHotel.disponibilidadHotel(_hotel, _disponibilidad);
+            return test;
+        }
             catch (ReservaExceptionM09 ex)
             {
                 throw ex;

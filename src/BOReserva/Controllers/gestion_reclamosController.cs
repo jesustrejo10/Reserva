@@ -158,6 +158,6 @@ namespace BOReserva.Controllers
           return (Json("Estado modificado"));
       }
 
-    }
+      }
 	
 }

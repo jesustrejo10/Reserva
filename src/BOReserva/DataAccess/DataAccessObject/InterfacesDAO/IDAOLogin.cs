@@ -17,6 +17,6 @@ namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
         Boolean BloquearUsuario(Entidad _usuario);
         Boolean IncrementarIntentos(Entidad _usuario);
         Boolean ResetearIntentos(Entidad _usuario);
-        
+
     }
 }

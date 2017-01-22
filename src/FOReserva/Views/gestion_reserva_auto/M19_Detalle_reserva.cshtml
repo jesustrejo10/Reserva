@@ -214,8 +214,8 @@
                                 data: reserva_auto,
                                 type: 'POST',
                                 success: function (data) {
-                                    alert("Se canceló la reserva");
-                                    cargarContenido('#CI', 'get', '/gestion_reserva_auto/M19_Reserva_Autos_Perfil', null, this)
+                                        alert("Se canceló la reserva");
+                                        cargarContenido('#CI', 'get', '/gestion_reserva_auto/M19_Reserva_Autos_Perfil', null, this)
                                 },
                                 fail: function (data) {
                                     alert("No se pudo cancelar la reserva");
@@ -244,7 +244,7 @@
                             }
                         });
                     }
-</script>
+                </script>
             }
             else
             {
