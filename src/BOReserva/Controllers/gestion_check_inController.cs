@@ -183,8 +183,10 @@ namespace BOReserva.Controllers
                 }
 
                 // TENGO QUE BUSCAR EL ID DEL PASE DE ABORDAJE CREADO
-                
-                int num_boarding = modificar.IdBoardingPass(pase._boleto, pase._vuelo);
+                Command<int> comando5 = FabricaComando.IdM05paseAbordaje(pase._boleto, pase._vuelo);
+
+                //int num_boarding = modificar.IdBoardingPass(pase._boleto, pase._vuelo);
+                int num_boarding = comando5.ejecutar();
                 pase._id = num_boarding;
                 // TENGO QUE INSTANCIAR AL MODELO DE VER BOARDING PASS
                 return PartialView("M05_VerBoardingPass", pase);

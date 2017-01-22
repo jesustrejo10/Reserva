@@ -655,6 +655,10 @@ namespace BOReserva.Controllers.PatronComando
         {
             return new M05_COConsultarBoletosPasajeroChekin(id);
         }
+        public static Command<int> IdM05paseAbordaje(int id_1,int id_2)
+        {
+            return new M05_COBusquedaIdBoarding(id_1,id_2);
+        }
 
         #endregion
 

@@ -11,5 +11,6 @@ namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
         int MConteoMaletas(int pase);
         int CrearEquipaje(int id, int peso);
         int MConteoBoarding(int num_bol, int num_vue);
+        int IdBoardingPass(int num_bol, int num_vue);
     }
 }

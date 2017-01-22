@@ -223,6 +223,7 @@
     <Compile Include="Controllers\PatronComando\M03\M03_COModificarRutacs.cs" />
     <Compile Include="Controllers\PatronComando\M03\M03_COMostrarRuta.cs" />
     <Compile Include="Controllers\PatronComando\M03\M03_COValidarRuta.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COBusquedaIdBoarding.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COConsultarBoletosPasajeroChekin.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COCrearBoarding.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COConteoBoarding.cs" />
