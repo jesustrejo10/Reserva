@@ -4,21 +4,21 @@ using BOReserva.DataAccess.DataAccessObject.M01;
 using BOReserva.DataAccess.Domain;
 using System;
 
-namespace BOReserva.Controllers.PatronComando.M01
+namespace BOReserva.Controllers.PatronComando
 {
-    public class M01_COBloquearUsuario : Command<Boolean>
+    internal class M01_CONumeroIntentos : Command<int>
     {
         private Entidad usuario;
 
-        public M01_COBloquearUsuario(Entidad _usuario)
+        public M01_CONumeroIntentos(Entidad _usuario)
         {
             this.usuario = _usuario;
         }
 
-        public override Boolean ejecutar()
+        public override int ejecutar()
         {
             IDAOLogin dao = (DAOLogin)FabricaDAO.instanciarDaoLogin();
-            var respuesta = dao.BloquearUsuario(usuario);
+            var respuesta = dao.NumeroIntentos(usuario);
             return respuesta;
         }
     }
