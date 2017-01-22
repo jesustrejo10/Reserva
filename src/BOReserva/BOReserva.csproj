@@ -538,6 +538,7 @@
     <Compile Include="Models\gestion_hoteles\CModifcarHotel.cs" />
     <Compile Include="Models\gestion_hoteles\CVerHotel.cs" />
     <Compile Include="Models\gestion_reclamos\CAgregarReclamo.cs" />
+    <Compile Include="Models\gestion_reclamos\CConsultarReclamo.cs" />
     <Compile Include="Models\gestion_reclamos\CModificarReclamo.cs" />
     <Compile Include="Models\gestion_hoteles\CAgregarHotel.cs" />
     <Compile Include="Models\gestion_reclamo_equipaje\CAgregarReclamoEquipaje.cs" />
@@ -1782,6 +1783,13 @@
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_MW1.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_MW2.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_MW3.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_ListarCamarotes.cshtml" />
+    <Content Include="Views\gestion_usuarios\M12_AgregarUsuario2.cshtml" />
+    <Content Include="Views\gestion_usuarios\M12_VisualizarUsuarios.cshtml" />
+    <Content Include="Views\gestion_usuarios\M12_ModificarUsuario2.cshtml" />
+    <Content Include="Views\gestion_reclamos\M16_AlertaError.cshtml" />
+    <Content Include="Views\gestion_reclamos\M16_ConsultarReclamo.cshtml" />
+    <Content Include="Views\gestion_reclamos\M16_DetalleReclamo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_boletos\M05_VisualizarBoletos.cshtml" />

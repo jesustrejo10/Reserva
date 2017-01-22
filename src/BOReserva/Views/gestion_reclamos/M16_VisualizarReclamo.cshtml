@@ -46,7 +46,7 @@
                                                 }
                                     </td>
                                     <td>
-                                        <a href="#" title="Ver detalle"><i class="fa fa-eye detalle"></i></a>
+                                        <a href="#" title="Consultar"><i class="fa fa-eye detalle"></i></a>
                                         @if (item._usuario == item._usuario)
                                         {
                                             <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>
@@ -55,7 +55,8 @@
                                     </td>
 
          <script>
-
+                
+             
                 $(".modificar").click(function (event) {
                     event.preventDefault();
                     event.stopPropagation();
@@ -75,6 +76,28 @@
 
 
                 });
+
+                $(".detalle").click(function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    event.stopImmediatePropagation();
+                    var identificador = $(this).parent().parent().parent().attr("id");
+                    alert("Entro aqui en el detalle");
+                    jQuery.ajax({
+                        type: "GET",
+                        url: "/gestion_reclamos/M16_DetalleReclamo",
+                        data: { idReclamo: identificador }
+                    }).done(function (data) {
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                        alert("ahora estoy aqui ");
+                    }).fail(function (data) {
+                        alert(data);
+                        console.log(data);
+                    });
+                });
+
+
 
                 $(".eliminar").click(function (event) {
                     event.preventDefault();

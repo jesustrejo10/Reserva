@@ -250,6 +250,33 @@ namespace FOReserva.DataAccess.DataAccessObject.M19 {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Error de Casteo.
+        /// </summary>
+        internal static string MensajeErrorFormato {
+            get {
+                return ResourceManager.GetString("MensajeErrorFormato", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Salida del Método.
+        /// </summary>
+        internal static string MensajeFinMetodoLogger {
+            get {
+                return ResourceManager.GetString("MensajeFinMetodoLogger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Entrada en el Método.
+        /// </summary>
+        internal static string MensajeInicioMetodoLogger {
+            get {
+                return ResourceManager.GetString("MensajeInicioMetodoLogger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a origen.
         /// </summary>
         internal static string origen {
