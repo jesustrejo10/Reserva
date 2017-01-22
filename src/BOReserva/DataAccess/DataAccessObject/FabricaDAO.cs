@@ -1,4 +1,5 @@
 ﻿using BOReserva.DataAccess.DAO;
+using BOReserva.DataAccess.DataAccessObject.M14;
 using BOReserva.DataAccess.DataAccessObject.M09;
 using BOReserva.DataAccess.DataAccessObject.M01;
 using BOReserva.DataAccess.Model;
@@ -189,16 +190,21 @@ namespace BOReserva.DataAccess.DataAccessObject
         #endregion
         
         #region M14_Cruceros
-        //public static DAO instanciarDaoCrucero()
-        //{
-        //    //return new DAOCruceros();
-        //    return new DAOCrucero();
-        //}
+        public static DAO instanciarDaoCrucero()
+        {
+            return new DAOCruceros();
+            
+        }
 
-        //public static DAOCabina instanciarDaoCabina()
-        //{
-        //    return new DAOCabina();
-        //}
+        public static DAO instanciarDaoCabina()
+        {
+            return new DAOCabina();
+        }
+
+        public static DAO instanciarDaoItinerario()
+        {
+            return new DAOItinerario();
+        }
 
         #endregion
     

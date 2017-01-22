@@ -34,8 +34,8 @@ namespace BOReserva.Controllers
             {
                 foreach (var crucero in listaCruceros)
                 {
-                    //BOReserva.DataAccess.Domain.Crucero c = (BOReserva.DataAccess.Domain.Crucero)crucero.Value;
-                    //lista.Add(c._nombreCrucero);
+                    BOReserva.DataAccess.Domain.Crucero c = (BOReserva.DataAccess.Domain.Crucero)crucero.Value;
+                    lista.Add(c._nombreCrucero);
                 }
                 cabina._listaCruceros = lista.Select(x => new SelectListItem
                 {
@@ -70,33 +70,83 @@ namespace BOReserva.Controllers
 
         public ActionResult M24_AgregarCamarote()
         {
-            ConexionBD cbd = new ConexionBD();
-            VistaListaCrucero vlc = new VistaListaCrucero();
-            CGestion_cabina cabina = new CGestion_cabina();
-            CGestion_camarote camarote = new CGestion_camarote() { camarote = new List<CGestion_camarote>() };            
-            vlc.cruceros = cbd.listarCruceros();
-            ViewBag.ShowDropDown = new SelectList(vlc.cruceros, "_idCrucero", "_nombreCrucero");            
-            return PartialView("M24_AgregarCamarote", camarote);
+            CGestion_camarote camarote = new CGestion_camarote();
+            List<String> lista = new List<string>();
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14VisualizarCruceros();
+            Dictionary<int, Entidad> listaCruceros = comando.ejecutar();
+
+            try
+            {
+                foreach (var crucero in listaCruceros)
+                {
+                    BOReserva.DataAccess.Domain.Crucero c = (BOReserva.DataAccess.Domain.Crucero)crucero.Value;
+                    lista.Add(c._nombreCrucero);
+                }
+                camarote._listaCruceros = lista.Select(x => new SelectListItem
+                {
+                    Value = x,
+                    Text = x
+                });
+                return PartialView(camarote);
+            }
+            catch (SqlException e)
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error, no se pudo conectar con la base de datos";
+                //Retorno el error
+                return PartialView(error);
+            }
             
         }
 
-        /*public JsonResult M24_ListarCabinas(int id)
+
+
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult cargarCabinas(string crucero)
         {
-            ConexionBD cbd = new ConexionBD();
-            //VistaListaCrucero vlc = new VistaListaCrucero();
-            //CGestion_cabina cabina = new CGestion_cabina();
-            ////CGestion_crucero crucero = new CGestion_crucero();
-            //vlc.cruceros = cbd.listarCruceros();
-            //ViewBag.ShowDropDown = new SelectList(vlc.cruceros, "_idCrucero", "_nombreCrucero");
-            var listaCabinas = cbd.listarCabinas(id);
-            //return Json (new { cabinas = listaCabinas });
-            return (Json(listaCabinas, JsonRequestBehavior.AllowGet));
-            //return PartialView();
+            CGestion_camarote camarote = new CGestion_camarote();
+            List<String> lista = new List<string>();
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14VisualizarCabinasCrucero(crucero);
+            Dictionary<int, Entidad> listaCabinas = comando.ejecutar();
+
+            try
+            {
+                foreach (var cabina in listaCabinas)
+                {
+                    BOReserva.DataAccess.Domain.Cabina c = (BOReserva.DataAccess.Domain.Cabina) cabina.Value;
+                    lista.Add(c._nombreCabina);
+                }
+                camarote._listaCruceros = lista.Select(x => new SelectListItem
+                {
+                    Value = x,
+                    Text = x
+                });
+                if (lista != null)
+                {
+                    return (Json(camarote._listaCabinas, JsonRequestBehavior.AllowGet));
+                }
+                else
+                {
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    String error = "Error accediendo a la BD";
+                    return Json(error);
+                }
+
+            }
+            catch (SqlException e)
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error, no se pudo conectar con la base de datos";
+                //Retorno el error
+                return Json(error);
+            }
+
+
         }
-            ConexionBD cbd = new ConexionBD();            
-            var listaCabinas = cbd.listarCabinas(id);            
-            return (Json(listaCabinas, JsonRequestBehavior.AllowGet));            
-        }*/
 
 
         public JsonResult M24_ListarCamarotes(int id)
@@ -104,14 +154,6 @@ namespace BOReserva.Controllers
             ConexionBD cbd = new ConexionBD();
             var listaCamarotes = cbd.listarCamarotes(id);
             return (Json(listaCamarotes, JsonRequestBehavior.AllowGet));
-        }
-
-        public ActionResult M24_ListarItinerario()
-        {
-            ConexionBD cbd = new ConexionBD();
-            VistaListaItinerario vlc = new VistaListaItinerario();
-            vlc.itinerarios = cbd.listarItinerario();
-            return PartialView("M24_ListarItinerario", vlc);
         }
 
         /// <summary>
@@ -126,6 +168,17 @@ namespace BOReserva.Controllers
         }
 
         /// <summary>
+        /// Método de la vista parcial M24ListarCruceros
+        /// </summary>
+        /// <returns>Retorna la vista parcial M24_ListarCruceros en conjunto del Modelo de dicha vista</returns>
+        public ActionResult M24_ListarItinerario()
+        {
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14Visualizaritinerario();
+            Dictionary<int, Entidad> listaItinerario = comando.ejecutar();
+            return PartialView(listaItinerario);
+        }
+
+        /// <summary>
         /// Método de la vista parcial M24ListarCabinas
         /// </summary>
         /// <returns>Retorna la vista parcial M24_ListarCcabinas en conjunto del Modelo de dicha vista</returns>
@@ -136,23 +189,14 @@ namespace BOReserva.Controllers
             return PartialView(listaCabinas);
         }
 
-        /*public ActionResult M24_ListarCruceros()
-        {
-            ConexionBD cbd = new ConexionBD();
-            VistaListaCrucero vlc = new VistaListaCrucero();
-            vlc.cruceros = cbd.listarCruceros();
-            return PartialView("M24_ListarCruceros", vlc);
-        }*/
-
         [HttpPost]
         public JsonResult guardarCrucero(CGestion_crucero model)
         {
             
-            //Entidad nuevoCrucero = FabricaEntidad.InstanciarCrucero(model);            
-            //Command<String> comando = FabricaComando.crearM14AgregarCrucero(nuevoCrucero);
-            //String result = comando.ejecutar();
-            //return (Json(result));
-            return (Json("falla"));
+            Entidad nuevoCrucero = FabricaEntidad.InstanciarCrucero(model);            
+            Command<String> comando = FabricaComando.crearM14AgregarCrucero(nuevoCrucero);
+            String result = comando.ejecutar();
+            return (Json(result));            
         }
    
 
@@ -170,11 +214,10 @@ namespace BOReserva.Controllers
         public JsonResult guardarCabina(CGestion_cabina model)
         {
 
-            //Entidad nuevaCabina = FabricaEntidad.InstanciarCabinaN(model);
-            //Command<String> comando = FabricaComando.crearM14AgregarCabina(nuevaCabina);
-            //String result = comando.ejecutar();
-            //return (Json(result));
-            return (Json("falla"));
+            Entidad nuevaCabina = FabricaEntidad.InstanciarCabinaN(model);
+            Command<String> comando = FabricaComando.crearM14AgregarCabina(nuevaCabina);
+            String result = comando.ejecutar();
+            return (Json(result));            
         }
         
         [HttpPost]

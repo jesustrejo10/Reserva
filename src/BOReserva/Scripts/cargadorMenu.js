@@ -852,6 +852,28 @@ jQuery(document).ready(function () {
             });
     });
 
+    $("#m24_listarcabinas").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_cruceros/M24_ListarCabinas';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
     $("#m24_agregarcamarote").click(function (e) {
         e.preventDefault();
         var url = '/gestion_cruceros/M24_AgregarCamarote';
@@ -873,6 +895,29 @@ jQuery(document).ready(function () {
                 }
             });
     });
+
+    $("#m24_listarcamarotes").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_cruceros/M24_ListarCamarotes';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
 
     $("#m24_agregaritinerario").click(function (e) {
         e.preventDefault();

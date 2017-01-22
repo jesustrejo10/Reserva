@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
 {
-    interface IDAOItinerario : IDAO
+    interface IDAOCamarote : IDAO
     {
     }
 }
