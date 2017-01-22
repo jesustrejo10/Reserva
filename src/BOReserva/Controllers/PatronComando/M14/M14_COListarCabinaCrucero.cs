@@ -26,7 +26,7 @@ namespace BOReserva.Controllers.PatronComando.M14
         /// </returns>
         public override Dictionary<int, Entidad> ejecutar()
         {
-            IDAOCabina daoCabina = FabricaDAO.instanciarDaoCabina();
+            IDAOCabina daoCabina = (IDAOCabina) FabricaDAO.instanciarDaoCabina();
             Dictionary<int, Entidad> mapCruceros = daoCabina.ConsultarCabinasCrucero(valor);
             return mapCruceros;
         }

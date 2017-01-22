@@ -47,10 +47,9 @@ namespace BOReserva.DataAccess.DataAccessObject.M14
             }
         }
 
-        
-        Dictionary<int, Entidad> ConsultarCabinasCrucero(string nombreCrucero)
+        Dictionary<int, Entidad> IDAOCabina.ConsultarCabinasCrucero(string nombreCrucero)
         {
-            //List<Crucero> listavehiculos = new List<Crucero>();
+            
             Dictionary<int, Entidad> listaCabinas = new Dictionary<int, Entidad>();
             //puedo usar Singleton
             SqlConnection con = Connection.getInstance(_connexionString);
@@ -92,7 +91,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M14
 
         Dictionary<int, Entidad> IDAOCabina.ConsultarTodos(int id)
         {
-            //List<Crucero> listavehiculos = new List<Crucero>();
+            
             Dictionary<int, Entidad> listaCabinas = new Dictionary<int, Entidad>();
             //puedo usar Singleton
             SqlConnection con = Connection.getInstance(_connexionString);

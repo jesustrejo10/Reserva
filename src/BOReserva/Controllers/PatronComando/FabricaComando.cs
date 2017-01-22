@@ -10,7 +10,6 @@ using System.Linq;
 using BOReserva.Controllers.PatronComando.M14;
 using BOReserva.Controllers.PatronComando.M10;
 using BOReserva.Controllers.PatronComando.M16;
-using BOReserva.DataAccess.Domain.M14;
 
 namespace BOReserva.Controllers.PatronComando
 {
@@ -20,6 +19,21 @@ namespace BOReserva.Controllers.PatronComando
     /// </summary>
     public class FabricaComando
     {
+
+        # region Lugar ( COLugar - COPais - COCiudad ) 
+
+        public static Command<Dictionary<int, Entidad>> consultarTodosPais(Entidad e)
+        {
+            return new GeneralLugar.COConsultarTodosPais(e);
+        }
+
+        public static Command<Dictionary<int, Entidad>> consultarTodosCiudad(Entidad e)
+        {
+            return new GeneralLugar.COConsultarTodosCiudad(e);
+        }
+
+        #endregion
+
         #region M09_Gestion_Hoteles_Por_Ciudad
 
         /// <summary>
@@ -175,7 +189,8 @@ namespace BOReserva.Controllers.PatronComando
         public static Command<String> crearM14AgregarCrucero(Entidad e)
         {
 
-            return new M14_COAgregarCrucero((Crucero)e);
+            return new M14_COAgregarCrucero((Crucero) e);
+            
 
         }
 
@@ -189,7 +204,7 @@ namespace BOReserva.Controllers.PatronComando
         {
 
             return new M14_COAgregarCabina((Cabina) e);
-
+            
         }
 
         /// <summary>
@@ -366,6 +381,11 @@ namespace BOReserva.Controllers.PatronComando
          return new M13_COModificarRol(rol, idmodificar);
         }
 
+        public static Command<List<String>> crearM13_ConsultarPermisosUsuario (int id)
+        {
+            return new M13_COConsultarPermisosUsuario(id);
+        }
+
         #endregion
 
         #region M05_Boleto
@@ -417,7 +437,10 @@ namespace BOReserva.Controllers.PatronComando
         {
             return new M05_COConsultarBoletos();
         }
-
+        public static Command<List<Entidad>> ConsultarBoletos(int id)
+        {
+            return new M05_COConsultarBoletos( id );
+        }
 
         #endregion
 
@@ -433,12 +456,12 @@ namespace BOReserva.Controllers.PatronComando
             return new M08.M08_COAgregarAutomovil(e);
         }
 
-        public static Command<String> buscarAutomovil(Entidad e)
+        public static Command<Entidad> buscarAutomovil(Entidad e)
         {
             return new M08.M08_COBuscarAutomovil(e);
         }
 
-        public static Command<String> listarAutomovil(Entidad e)
+        public static Command<List<Entidad>> listarAutomovil(Entidad e)
         {
             return new M08.M08_COListarAutomovil(e);
         }
@@ -453,7 +476,7 @@ namespace BOReserva.Controllers.PatronComando
         #region Modulo 10 Gestion Restaurante
 
         #region Comandos Generales 
-    
+
         /// <summary>
         /// Metodo que recibe un comando para Crear, Actualizar, Eliminar o Consultar
         /// la variable comando recibe comandosGlobales.CREAR, comandosGlobales.ELIMINAR
@@ -564,10 +587,16 @@ namespace BOReserva.Controllers.PatronComando
         public enum comandosComida
         {
             CREAR_COMIDA,
+            CREAR_COMIDA_VUELO,
             ELIMINAR_COMIDA,
             ACTUALIZAR_COMIDA,
             CONSULTAR_COMIDAS,
-            CONSULTAR_COMIDAS_VUELOS
+            CONSULTAR_COMIDAS_VUELOS,
+            CONSULTAR_VUELOS,
+            DESHABILITAR_COMIDA,
+            HABILITAR_COMIDA,
+            RELLENAR_COMIDA,
+            EDITAR_COMIDA
         }
 
 
@@ -577,10 +606,30 @@ namespace BOReserva.Controllers.PatronComando
             {
                 case comandosComida.CREAR_COMIDA:
                     return new M06_COAgregarComida(_objeto);
+
+                case comandosComida.CREAR_COMIDA_VUELO:
+                    return new M06_COAgregarComidaVuelo(_objeto);
+
                 case comandosComida.CONSULTAR_COMIDAS:
                     return new M06_COConsultarComidas();
+
                 case comandosComida.CONSULTAR_COMIDAS_VUELOS:
                     return new M06_COConsultarComidasVuelos();
+                case comandosComida.CONSULTAR_VUELOS:
+                    return new M06_COConsultarVuelos();
+
+                case comandosComida.DESHABILITAR_COMIDA:
+                    return new M06_COCambiarEstatusComida(_objeto, 0);
+
+                case comandosComida.HABILITAR_COMIDA:
+                    return new M06_COCambiarEstatusComida(_objeto, 1);
+
+                case comandosComida.RELLENAR_COMIDA:
+                    return new M06_CORellenarComida(_objeto);
+
+                case comandosComida.EDITAR_COMIDA:
+                    return new M06_COEditarComida(_objeto);
+
                 default:
                     return new M06_COAgregarComida(_objeto);
             }
@@ -589,6 +638,4 @@ namespace BOReserva.Controllers.PatronComando
         #endregion
     }
         
-
-
 }

@@ -1,4 +1,5 @@
 ﻿using BOReserva.DataAccess.DAO;
+using BOReserva.DataAccess.DataAccessObject.M14;
 using BOReserva.DataAccess.DataAccessObject.M09;
 using BOReserva.DataAccess.DataAccessObject.M01;
 using BOReserva.DataAccess.Model;
@@ -10,7 +11,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
-using BOReserva.DataAccess.DataAccessObject.M14;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 
 namespace BOReserva.DataAccess.DataAccessObject
@@ -18,6 +18,25 @@ namespace BOReserva.DataAccess.DataAccessObject
 {
     public class FabricaDAO
     {
+        #region Lugar ( DAOLugar - DAOPais - DAOCiudad ) 
+
+        public static DAO instanciarDaoLugar()
+        {
+            return new DAOLugar();
+        }
+
+        public static DAO instanciarDaoPais()
+        {
+            return new DAOLugar();
+        }
+
+        public static DAO instanciarDaoCiudad()
+        {
+            return new DAOLugar();
+        }
+
+        #endregion
+
         #region M01_Login
         public static DAO instanciarDaoLogin()
         {
@@ -29,16 +48,6 @@ namespace BOReserva.DataAccess.DataAccessObject
 
         public static DAO instanciarDaoHotel() {
             return new DAOHotel();
-        }
-
-
-        public static DAO instanciarDaoPais() {
-            return new DAOPais();
-        }
-
-        public static DAO instanciarDaoCiudad()
-        {
-            return new DAOCiudad();
         }
 
         public static DAO instanciarDaoHabitacion()
@@ -89,12 +98,6 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAOAutomovil();
         }
         #endregion
-
-        public static DAO instanciarDaoLugar()
-        {
-            return new DAOLugar();
-        }
-
 			
         #region Modulo 10
         /// <summary>
@@ -163,22 +166,21 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAORol();
         }
         #endregion
-
         
         #region M14_Cruceros
         public static DAO instanciarDaoCrucero()
         {
             return new DAOCruceros();
+            
         }
 
-        public static DAOCabina instanciarDaoCabina()
+        public static DAO instanciarDaoCabina()
         {
             return new DAOCabina();
         }
 
         #endregion
     
-
         #region M06 GESTION DE COMIDA
 
         public static DAOComida instanciarComida()

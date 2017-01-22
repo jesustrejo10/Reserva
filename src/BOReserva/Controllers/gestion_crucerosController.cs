@@ -184,14 +184,7 @@ namespace BOReserva.Controllers
             Dictionary<int, Entidad> listaCabinas = comando.ejecutar();
             return PartialView(listaCabinas);
         }
-
-        /*public ActionResult M24_ListarCruceros()
-        {
-            ConexionBD cbd = new ConexionBD();
-            VistaListaCrucero vlc = new VistaListaCrucero();
-            vlc.cruceros = cbd.listarCruceros();
-            return PartialView("M24_ListarCruceros", vlc);
-        }*/
+        
 
         [HttpPost]
         public JsonResult guardarCrucero(CGestion_crucero model)
@@ -200,7 +193,7 @@ namespace BOReserva.Controllers
             Entidad nuevoCrucero = FabricaEntidad.InstanciarCrucero(model);            
             Command<String> comando = FabricaComando.crearM14AgregarCrucero(nuevoCrucero);
             String result = comando.ejecutar();
-            return (Json(result));
+            return (Json(result));            
         }
    
 
@@ -221,7 +214,7 @@ namespace BOReserva.Controllers
             Entidad nuevaCabina = FabricaEntidad.InstanciarCabinaN(model);
             Command<String> comando = FabricaComando.crearM14AgregarCabina(nuevaCabina);
             String result = comando.ejecutar();
-            return (Json(result));
+            return (Json(result));            
         }
         
         [HttpPost]

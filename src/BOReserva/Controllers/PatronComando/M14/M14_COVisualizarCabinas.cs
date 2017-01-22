@@ -14,9 +14,14 @@ namespace BOReserva.Controllers.PatronComando
 
         int valor;
 
+        public M14_COVisualizarCabinas()
+        {
+            
+        }
+
         public M14_COVisualizarCabinas(int value){
             this.valor = value;
-        }
+        }       
 
         /// <summary>
         /// Sobre escritura del metodo ejecutar de la clase Comando.
@@ -27,7 +32,7 @@ namespace BOReserva.Controllers.PatronComando
         /// </returns>
         public override Dictionary<int, Entidad> ejecutar()
         {
-            IDAOCabina daoCabina = FabricaDAO.instanciarDaoCabina();
+            IDAOCabina daoCabina = (IDAOCabina) FabricaDAO.instanciarDaoCabina();
             Dictionary<int, Entidad> mapCruceros = daoCabina.ConsultarTodos(valor);
             return mapCruceros;
         }

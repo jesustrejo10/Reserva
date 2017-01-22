@@ -1,7 +1,6 @@
 ﻿using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
-using BOReserva.DataAccess.Domain.M14;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +15,7 @@ namespace BOReserva.Controllers.PatronComando
         public M14_COAgregarCabina(Cabina cabina) { 
             this._cabina = cabina;
         }
+        
 
         public override String ejecutar(){
             IDAO daoCabina = FabricaDAO.instanciarDaoCabina();       
