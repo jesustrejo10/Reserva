@@ -16,8 +16,13 @@ namespace BOReserva.Controllers
     /// </summary>
     public class gestion_automovilesController : Controller
     {
-
+        /// <summary>
+        /// Atributo ciudad.
+        /// </summary>
         public static String _ciudad;
+        /// <summary>
+        /// Atributo pais.
+        /// </summary>
         public static String _pais;
 
 

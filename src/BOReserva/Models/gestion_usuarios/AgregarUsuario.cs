@@ -24,7 +24,7 @@ namespace BOReserva.Models.gestion_usuarios
             this._activo = usuario.activoUsuario;
             this._id = usuario.idUsuario;
         }
-        
+
         #region Atributos
         /// <summary>
         /// TextBox de correo
@@ -155,19 +155,15 @@ namespace BOReserva.Models.gestion_usuarios
             set;
 
         }
-       #endregion
+        #endregion
 
 
-       
-
-
-        public CUsuario toClass(){
+        public CUsuario toClass()
+        {
             CUsuario user = new CUsuario(_id, _nombre, _apellido, HashPassword(_contraseña), _correo, _activo, _fechaCreacion, _rol);
             return user;
 
         }
-
-        
 
         private String HashPassword(String pass)
         {

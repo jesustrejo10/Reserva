@@ -398,5 +398,51 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
         }
 
+        public List<String> consultarPermisosUsuario(int idUsuario)
+        {
+            List<String> listapermisos = new List<String>();
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            try
+            {
+                conexion.Open();
+                using (SqlCommand cmd = new SqlCommand(M13_DAOResources.ConsultarPermisosUsuario, conexion))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@id", idUsuario);
+                    cmd.ExecuteNonQuery();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    int i = 0;
+                    while (reader.Read())
+                    {
+                        Debug.WriteLine("id del usuario nombre " + reader["usu_nombre"].ToString());
+                        Debug.WriteLine("id del id rol " + reader["rol_nombre"].ToString());
+                        Debug.WriteLine("id del id rol " + reader["mod_det_nombre"].ToString());
+                        i += 1;
+                        Debug.WriteLine("id del usuario " + i);
+                        listapermisos.Add(reader["mod_det_nombre"].ToString());
+                    }
+                    //cierro el lector
+                    reader.Close();
+                }
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return listapermisos;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+
+        }
     }
 }

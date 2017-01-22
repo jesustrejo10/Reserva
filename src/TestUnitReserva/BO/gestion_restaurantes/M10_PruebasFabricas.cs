@@ -51,18 +51,28 @@ namespace TestUnitReserva.BO.gestion_restaurantes
 
        
 
-        [Test]
+ [Test]
         public void M10_PruebaAsignarParametro()
         {
             Parametro p = new Parametro("Numero", SqlDbType.Int, "32", false);
-            Assert.AreEqual(p, FabricaDAO.asignarParametro("Numero", SqlDbType.Int, "32", false));
+            Parametro p2 = FabricaDAO.asignarParametro("Numero", SqlDbType.Int, "32", false);
+            bool igual = false;
+            if ((p.etiqueta.Equals(p2.etiqueta)) && (p.tipoDato.Equals(p2.tipoDato))
+                && (p.valor.Equals(p2.valor)) && (p.esOutput.Equals(p2.esOutput)))
+                igual = true;
+            Assert.IsTrue(igual);
         }
 
         [Test]
         public void M10_PruebaAsignarParametroSinValor()
         {
             Parametro p = new Parametro("Numero", SqlDbType.Int, false);
-            Assert.AreEqual(p, FabricaDAO.asignarParametro("Numero", SqlDbType.Int, false));
+            Parametro p2 = FabricaDAO.asignarParametro("Numero", SqlDbType.Int, false);
+            bool igual = false;
+            if ((p.etiqueta.Equals(p2.etiqueta)) && (p.tipoDato.Equals(p2.tipoDato))
+                 && (p.esOutput.Equals(p2.esOutput)))
+                igual = true;
+            Assert.IsTrue(igual);
         }
 
         [Test]
