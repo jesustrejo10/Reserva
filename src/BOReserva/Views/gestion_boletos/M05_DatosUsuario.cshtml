@@ -3,7 +3,6 @@
 
 @using (Html.BeginForm("verBoleto", "gestion_boletos", null, FormMethod.Post, new { @id = "verBoleto", @class = "form-horizontal" }))
 {
-
     <div class="row">
         <div class="col-md-12">
             <div class="box box-success">
@@ -15,20 +14,21 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-12" style="margin-top:10px;">
-
-
-
                             <div class="col-xs-6">
                                 <label>Primer nombre(*):</label>
                                 <input id="primer_nombre" type="text" class="form-control" placeholder="Ej. Juan">
-
+                                <label id="pn_empty" class="control-label has-error none">
+                                    <i class="fa fa-times-circle-o"></i> Este campo es requerido y solo debe contener caracteres alfabéticos
+                                </label>
                             </div>
 
                             <div class="col-xs-6">
 
                                 <label>Segundo nombre(*):</label>
                                 <input id="segundo_nombre" type="text" class="form-control" placeholder="Ej. Lionel">
-
+                                <label id="sn_empty" class="control-label has-error none">
+                                    <i class="fa fa-times-circle-o"></i> Este campo es requerido y solo debe contener caracteres alfabéticos
+                                </label>
                             </div>
 
                         </div>
@@ -40,14 +40,18 @@
 
                                 <label>Primer apellido(*):</label>
                                 <input id="primer_apellido" type="text" class="form-control" placeholder="Ej. Jimenez">
-
+                                <label id="pa_empty" class="control-label has-error none">
+                                    <i class="fa fa-times-circle-o"></i> Este campo es requerido y solo debe contener caracteres alfabéticos
+                                </label>
                             </div>
 
                             <div class="col-md-6">
 
                                 <label>Segundo apellido(*):</label>
                                 <input id="segundo_apellido" type="text" class="form-control" placeholder="Ej. Arango">
-
+                                <label id="sa_empty" class="control-label has-error none">
+                                    <i class="fa fa-times-circle-o"></i> Este campo es requerido y solo debe contener caracteres alfabéticos
+                                </label>
                             </div>
 
                         </div>
@@ -57,23 +61,26 @@
 
                         <div class="col-md-12" style="margin-top:10px;">
 
-
-
                             <div class="col-xs-6">
 
                                 <label>Fecha de nacimiento(*):</label>
                                 <input id="fecha_nac" type="date" class="form-control">
-
+                                <label id="fn_empty" class="control-label has-error none">
+                                    <i class="fa fa-times-circle-o"></i> Este campo es requerido
+                                </label>
                             </div>
 
                             <div class="col-xs-6">
 
                                 <label>Sexo(*):</label>
                                 <select id="sexo" class="form-control select2" style="width: 100%;">
-                                    <option selected="selected"> </option>
+                                    <option value="0"> Seleccione...</option>
                                     <option value="Masculino">Masculino</option>
                                     <option value="Femenino">Femenino</option>
                                 </select>
+                                <label id="sexo_empty" class="control-label has-error none">
+                                    <i class="fa fa-times-circle-o"></i> Este campo es requerido
+                                </label>
 
                             </div>
 
@@ -83,13 +90,13 @@
                         <div>&nbsp;</div>
 
                         <div class="col-md-12" style="margin-top:10px;">
-
-
-
                             <div class="col-xs-6">
 
                                 <label>Número de pasaporte(*):</label>
                                 <input id="pasaporte" type="text" class="form-control" placeholder="Ej. 237690944">
+                                <label id="pas_empty" class="control-label has-error none">
+                                    <i class="fa fa-times-circle-o"></i> Este campo es requerido y solo debe contener caracteres numéricos
+                                </label>
 
                             </div>
 
@@ -97,7 +104,9 @@
 
                                 <label>Correo electrónico(*):</label>
                                 <input id="correo" type="text" class="form-control" placeholder="Ej. pepitoperez@gmail.com">
-
+                                <label id="correo_empty" class="control-label has-error none">
+                                    <i class="fa fa-times-circle-o"></i> Este campo es requerido y debe introducir un correo válido
+                                </label>
                             </div>
 
                         </div>
@@ -105,7 +114,7 @@
                         <div>&nbsp;</div>
 
 
-                        <div class="col-md-12" style="margin-top:0px;">
+                        <div class="col-md-12" style="margin-top:0;">
                             <div class="col-md-2">
                                 @Html.TextBoxFor(m => m._idOrigen, null, new { @class = "form-control", @placeholder = "", @id = "id_origen", @disabled = "disabled", @readonly = "readonly", style = "display: none;" })
                             </div>
@@ -130,7 +139,7 @@
 
                         </div>
 
-                        <div class="col-md-12" style="margin-top:0px;">
+                        <div class="col-md-12" style="margin-top:0;">
 
                             <div class="col-md-2">
                                 @Html.TextBoxFor(m => m._idVuelo, null, new { @class = "form-control", @placeholder = "", @id = "id_vuelo", @disabled = "disabled", @readonly = "readonly", style = "display: none;" })
@@ -138,67 +147,120 @@
 
                         </div>
 
-
-
-
-
-
-
-
-                            <div class="col-md-12" style="margin-top:10px;">
-                                <button type="button" id="siguiente" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Siguiente</button>
-                            </div>
-
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <button type="button" id="siguiente" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Siguiente</button>
                         </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div id="loading" class="col-lg-12" style=" display: none; text-align:center; margin-top: 15px;"><span class="fa fa-spinner refresh-animate "></span></div>
                 </div>
             </div>
         </div>
     </div>
+}
+<script>
+    $("#siguiente").click(function (e) {
+        e.preventDefault();
+        $(".none").hide();
+        $(".form-control").removeClass("has-error");
+        var win = true;
 
-    <script>
-        $("#siguiente").click(function (e) {
-            e.preventDefault();
+        var id_origen = document.getElementById("id_origen").value;
+        // alert("Id origen: " + id_origen);
+        var id_destino = document.getElementById("id_destino").value;
+        //alert("Id destino: " + id_destino);
+        var fecha_despegue = document.getElementById("fechasalida").value;
+        //alert("despegue: " + fecha_despegue);
+        var fecha_aterrizaje = document.getElementById("fechallegada").value;
+        //alert("aterrizaje: " + tipo);
+        var monto = document.getElementById("monto").value;
+        //alert("monto: " + monto);
+        var tipo = document.getElementById("tipo").value;
+        //alert("tipo: " + tipo);
+        // alert("id origen: " + id_origen+", id destino: "+id_destino+", fecha despegue: "+fecha_despegue+", fecha aterrizaje: "+fecha_aterrizaje+", monto: "+monto+", tipo: "+tipo);
 
-            var id_origen = document.getElementById("id_origen").value;
-           // alert("Id origen: " + id_origen);
-            var id_destino = document.getElementById("id_destino").value;
-            //alert("Id destino: " + id_destino);
-            var fecha_despegue = document.getElementById("fechasalida").value;
-            //alert("despegue: " + fecha_despegue);
-            var fecha_aterrizaje = document.getElementById("fechallegada").value;
-            //alert("aterrizaje: " + tipo);
-            var monto = document.getElementById("monto").value;
-            //alert("monto: " + monto);
-            var tipo = document.getElementById("tipo").value;
-            //alert("tipo: " + tipo);
-          // alert("id origen: " + id_origen+", id destino: "+id_destino+", fecha despegue: "+fecha_despegue+", fecha aterrizaje: "+fecha_aterrizaje+", monto: "+monto+", tipo: "+tipo);
+        var primer_nombre = document.getElementById("primer_nombre").value;
+        // alert("primer nombre: "+primer_nombre);
+        var segundo_nombre = document.getElementById("segundo_nombre").value;
+        //alert("segundo nombre: " + segundo_nombre);
+        var primer_apellido = document.getElementById("primer_apellido").value;
+        //alert("primer apellido: " + primer_apellido);
+        var segundo_apellido = document.getElementById("segundo_apellido").value;
+        //alert("segundo apellido: " + segundo_apellido);
+        var fecha_nac = document.getElementById("fecha_nac").value;
+        //alert("fecha nac: " + fecha_nac);
+        var sexo = document.getElementById("sexo").value;
+        //alert("sexo: " + sexo);
+        var pasaporte = document.getElementById("pasaporte").value;
+        //alert("pasaporte: " + pasaporte);
+        var correo = document.getElementById("correo").value;
+        //alert("correo: " + correo);
+        var id_vuelo = document.getElementById("id_vuelo").value;
+        // alert("ID VUELO: "+id_vuelo);
 
-           var primer_nombre = document.getElementById("primer_nombre").value;
-          // alert("primer nombre: "+primer_nombre);
-           var segundo_nombre = document.getElementById("segundo_nombre").value;
-           //alert("segundo nombre: " + segundo_nombre);
-           var primer_apellido = document.getElementById("primer_apellido").value;
-           //alert("primer apellido: " + primer_apellido);
-           var segundo_apellido = document.getElementById("segundo_apellido").value;
-           //alert("segundo apellido: " + segundo_apellido);
-           var fecha_nac = document.getElementById("fecha_nac").value;
-           //alert("fecha nac: " + fecha_nac);
-           var sexo = document.getElementById("sexo").value;
-           //alert("sexo: " + sexo);
-           var pasaporte = document.getElementById("pasaporte").value;
-           //alert("pasaporte: " + pasaporte);
-           var correo = document.getElementById("correo").value;
-            //alert("correo: " + correo);
-           var id_vuelo = document.getElementById("id_vuelo").value;
-          // alert("ID VUELO: "+id_vuelo);
-
-           // alert("primer nombre: "+primer_nombre+", segundo nombre: "+segundo_nombre+", primer apellido: "+primer_apellido+", segundo aoellido: "+segundo_apellido+", fecha nac: "+fecha_nac+", pos: "+posicion+", sexo: "+sexo+", pasaporte: "+pasaporte+", correo: "+correo);
-
+        // alert("primer nombre: "+primer_nombre+", segundo nombre: "+segundo_nombre+", primer apellido: "+primer_apellido+", segundo aoellido: "+segundo_apellido+", fecha nac: "+fecha_nac+", pos: "+posicion+", sexo: "+sexo+", pasaporte: "+pasaporte+", correo: "+correo);
+        var carnum = /^[0-9]+$/;
+        var caralf = /^[a-zA-Z]+$/;
+        var caremail = /^[a-zA-Z]+$/;
 
 
+        if (primer_nombre == "" || primer_nombre == undefined || !primer_nombre.match(caralf)) {
+
+            $("#primer_nombre").addClass("has-error");
+            $("#pn_empty").fadeIn();
+            win = false;
+        }
+        if (segundo_nombre == "" || segundo_nombre == undefined || !segundo_nombre.match(caralf)) {
+            $("#segundo_nombre").addClass("has-error");
+            $("#sn_empty").fadeIn();
+            win = false;
+        }
+
+        if (primer_apellido == "" || primer_apellido == undefined || !primer_apellido.match(caralf)) {
+
+            $("#primer_apellido").addClass("has-error");
+            $("#pa_empty").fadeIn();
+            win = false;
+        }
+        if (segundo_apellido == "" || segundo_apellido == undefined || !segundo_apellido.match(caralf)) {
+
+            $("#segundo_apellido").addClass("has-error");
+            $("#sa_empty").fadeIn();
+            win = false;
+        }
+        if (segundo_nombre == "" || segundo_nombre == undefined || !segundo_nombre.match(caralf)) {
+            $("#segundo_nombre").addClass("has-error");
+            $("#sn_empty").fadeIn();
+            win = false;
+        }
+        if (fecha_nac == "") {
+            $("#fecha_nac").addClass("has-error");
+            $("#fn_empty").fadeIn();
+            win = false;
+        }
+        if (sexo == 0) {
+            $("#sexo").addClass("has-error");
+            $("#sexo_empty").fadeIn();
+            win = false;
+        }
+        if (pasaporte == "" || pasaporte == undefined || !pasaporte.match(carnum)) {
+            $("#pasaporte").addClass("has-error");
+            $("#pass_empty").fadeIn();
+            win = false;
+        }
+        if (correo == "" || correo == undefined) {
+            $("#correo").addClass("has-error");
+            $("#correo_empty").fadeIn();
+            win = false;
+        }
+        if (win) {
+
+            $("#loading").show();
             var url = '/gestion_boletos/M05_DetalleBoleto';
             var method = 'GET';
-            var data = { idorigen: id_origen, iddestino: id_destino, fechadespegue: fecha_despegue, fechaaterrizaje: fecha_aterrizaje, monto: monto, tipo : tipo, primernombre : primer_nombre, segundonombre : segundo_nombre, primerapellido : primer_apellido, segundoapellido : segundo_apellido, fechanac : fecha_nac, sexo : sexo, pasaporte : pasaporte, correo : correo, idvuelo : id_vuelo };
+            var data = { idorigen: id_origen, iddestino: id_destino, fechadespegue: fecha_despegue, fechaaterrizaje: fecha_aterrizaje, monto: monto, tipo: tipo, primernombre: primer_nombre, segundonombre: segundo_nombre, primerapellido: primer_apellido, segundoapellido: segundo_apellido, fechanac: fecha_nac, sexo: sexo, pasaporte: pasaporte, correo: correo, idvuelo: id_vuelo };
 
             $.ajax(
                 {
@@ -214,6 +276,8 @@
                         alert(errorThrown);
                     }
                 });
-        });
-    </script>
-}
+        }
+
+
+    });
+</script>
