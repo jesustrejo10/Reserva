@@ -7,7 +7,7 @@ namespace BOReserva.Models.gestion_ofertas
 {
     public class CModificarOferta
     {
-        public String _idOferta { get; set; }
+        public int _idOferta { get; set; }
 
         public String _nombreOferta { get; set; }
 
