@@ -8,6 +8,9 @@ using BOReserva.DataAccess.Model;
 
 namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
 {
+    /// <summary>
+    /// Interfaz propia de Login
+    /// </summary>
     interface IDAOLogin : IDAO
     {
         Entidad Consultar(Entidad _usuario);

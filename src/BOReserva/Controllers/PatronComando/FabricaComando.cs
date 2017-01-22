@@ -14,6 +14,7 @@ using BOReserva.Controllers.PatronComando.M10;
 using BOReserva.Controllers.PatronComando.M16;
 using BOReserva.Controllers.PatronComando.M12;
 using BOReserva.DataAccess.Domain.M14;
+using BOReserva.Controllers.PatronComando.M01;
 
 namespace BOReserva.Controllers.PatronComando
 {
@@ -23,6 +24,28 @@ namespace BOReserva.Controllers.PatronComando
     /// </summary>
     public class FabricaComando
     {
+        #region M01_Login
+        public static Command<Entidad> M01ConsultarUsuario(Entidad _usuario)
+        {
+            return new M01_COConsultarUsuario(_usuario);
+        }
+
+        public static Command<Boolean> M01BloquearUsuario(Entidad _usuario)
+        {
+            return new M01_COBloquearUsuario(_usuario);
+        }
+
+        public static Command<Boolean> M01ResetearIntentos(Entidad _usuario)
+        {
+            return new M01_COResetearIntentos(_usuario);
+        }
+
+        public static Command<Boolean> M01IncrementarIntentos(Entidad _usuario)
+        {
+            return new M01_COIncrementarIntentos(_usuario);
+        }
+        #endregion
+
         #region M02_Gestion_Avion
         #region crearM02AgregarAvion
         /// <summary>
@@ -101,7 +124,6 @@ namespace BOReserva.Controllers.PatronComando
         }
         #endregion
         #endregion
-
 
         # region Lugar ( COLugar - COPais - COCiudad ) 
 

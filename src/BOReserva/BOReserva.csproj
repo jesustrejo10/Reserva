@@ -210,6 +210,8 @@
     <Compile Include="Controllers\M04\gestion_vueloController.cs" />
     <Compile Include="Controllers\PatronComando\Command.cs" />
     <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
+    <Compile Include="Controllers\PatronComando\M01\M01_COResetearIntentos.cs" />
+    <Compile Include="Controllers\PatronComando\M01\M01_COIncrementarIntentos.cs" />
     <Compile Include="Controllers\PatronComando\M03\M03_COAgregarRuta.cs" />
     <Compile Include="Controllers\PatronComando\M03\M03_COConsultarDestinos.cs" />
     <Compile Include="Controllers\PatronComando\M03\M03_CODeshabilitarRuta.cs" />
