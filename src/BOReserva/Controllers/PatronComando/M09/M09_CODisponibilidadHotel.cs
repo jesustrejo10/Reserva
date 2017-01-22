@@ -37,7 +37,7 @@ namespace BOReserva.Controllers.PatronComando.M09
             {
                 IDAOHotel daoHotel = (DAOHotel)FabricaDAO.instanciarDaoHotel();
                 String test = daoHotel.disponibilidadHotel(_hotel, _disponibilidad);
-                return test;
+                return "Se cambio exitosamente la disponibilidad del hotel";
             }
             catch (ReservaExceptionM09 ex)
             {

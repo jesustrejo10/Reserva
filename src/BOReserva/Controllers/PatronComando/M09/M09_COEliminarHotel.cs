@@ -45,11 +45,10 @@ namespace BOReserva.Controllers.PatronComando.M09
             {
                 IDAOHotel daoHotel = (DAOHotel)FabricaDAO.instanciarDaoHotel();
                 String test = daoHotel.eliminarHotel(_hotel._id);
-                return test;
+                return "Se elimino exitosamente el hotel";
             }
             catch (ReservaExceptionM09 ex)
             {
-                //este throw esta incorrecto
                 throw ex;
             }
         }
