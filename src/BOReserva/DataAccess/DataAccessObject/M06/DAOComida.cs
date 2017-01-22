@@ -10,10 +10,16 @@ using System.Data.SqlClient;
 
 namespace BOReserva.DataAccess.DataAccessObject
 {
+    /// <summary>
+    /// Clase destinada a conectar con la base de datos y ejecutar los Procedure
+    /// </summary>
     public class DAOComida : DAO, IDAOComida 
     {
 
-        //CREA UNA COMIDA
+        /// <summary>
+        /// Método que crea una comida
+        /// </summary>
+        /// <returns>Retorna un booleano true si insertó correctamente, sino false</returns>
         public bool crear(Entidad entidad) {
             Comida comida = (Comida)entidad;
             List<Parametro> lista = FabricaDAO.asignarListaDeParametro();
@@ -34,7 +40,10 @@ namespace BOReserva.DataAccess.DataAccessObject
             return true;
         }
 
-        //AGREGA UNA COMIDA A UN VUELO
+        /// <summary>
+        /// Método que agrega una comida a un vuelo
+        /// </summary>
+        /// <returns>Retorna un booleano true si insertó correctamente, sino false</returns>
         public bool agregarComidaVuelo(Entidad entidad)
         {
             ComidaVuelo comida = (ComidaVuelo)entidad;
@@ -55,7 +64,10 @@ namespace BOReserva.DataAccess.DataAccessObject
             return true;
         }
 
-        //CONSULTA TODAS LAS COMIDAS DISPONIBLES Y NO DISPONIBLES
+        /// <summary>
+        /// Método que consulta comidas
+        /// </summary>
+        /// <returns>Retorna una lista de comidas</returns>
         public List<Entidad> consultarComidas()
         {
             List<Entidad> listaComidas;
@@ -104,7 +116,10 @@ namespace BOReserva.DataAccess.DataAccessObject
             return null;
         }
 
-        //CONSULTA TODAS LAS COMIDAS Y SUS RESPECTIVOS VUELOS
+        /// <summary>
+        /// Método que consulta comidas de los vuelos
+        /// </summary>
+        /// <returns>Retorna una lista de comidas</returns>
         public List<Entidad> consultarComidasVuelos()
         {
             List<Entidad> listaComidasVuelos;
@@ -153,7 +168,10 @@ namespace BOReserva.DataAccess.DataAccessObject
             return null;
         }
 
-        //CAMBIAR ESTADO ESTATUS COMIDA
+        /// <summary>
+        /// Método que cambia el estado de la comida entre disponible y no disponible
+        /// </summary>
+        /// <returns>Retorna un booleano true si fue exitoso, sino false</returns>
         public bool cambiarEstadoComida(Entidad entidad) {
             Comida comida = (Comida)entidad;
             bool resultado = false;
@@ -174,7 +192,10 @@ namespace BOReserva.DataAccess.DataAccessObject
             return false;
         }
 
-        //RELLENAR COMIDA
+        /// <summary>
+        /// Método que lee los datos de una comida para editarla
+        /// </summary>
+        /// <returns>Retorna una comida</returns>
         public Entidad rellenarComida(Entidad entidad)
         {
             Comida comida = (Comida)entidad;
@@ -208,7 +229,10 @@ namespace BOReserva.DataAccess.DataAccessObject
             return null;
         }
 
-        //EDITAR COMIDA
+        /// <summary>
+        /// Método que edita una comida
+        /// </summary>
+        /// <returns>Retorna un booleano true si se editó correctamente, sino false</returns>
         public bool editarComida(Entidad entidad)
         {
             Comida comida = (Comida)entidad;
