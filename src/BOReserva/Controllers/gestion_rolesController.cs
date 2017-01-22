@@ -13,14 +13,17 @@ using BOReserva.Controllers.PatronComando;
 
 namespace BOReserva.Controllers
 {
+    ///<summary>
+    ///Clase que posee los controladores necesarios
+    ///para el funcionamiento del modulo de roles
+    ///</summary>
+    ///<returns>Lista de Entidad</returns>
     public class gestion_rolesController : Controller
     {
-        //
-        // GET: /gestion_roles/
         /// <summary>
         /// Metodo para llamar la vista parcial M13_AgregarRol
         /// </summary>
-        /// <returns>return un objeto de tipo CRoles</returns>
+        /// <returns>La vista parcial con el modelo CRoles</returns>
         public ActionResult M13_AgregarRol()
         {
             manejadorSQL sql = new manejadorSQL();
@@ -44,14 +47,13 @@ namespace BOReserva.Controllers
             }
             return PartialView(rol);
         }
+
         /// <summary>
         /// Metodo para llamar la vista parcial M13_VisualizarRol
-        /// <returns>returna la lista de roles</returns>
+        /// <returns>retorna la lista de roles</returns>
         public ActionResult M13_VisualizarRol()
         {
             List<Entidad> listaroles;
-            //List<Entidad> listapermisos;
-            //List<Entidad> listamodulos;
             try
             {
                 Command<List<Entidad>> comando = FabricaComando.crearM13_ConsultarRoles();
@@ -61,11 +63,6 @@ namespace BOReserva.Controllers
                 {
                     Command<List<Entidad>> comando_permisos = FabricaComando.crearM13_ConsultarPermisos(rol._idRol);
                     rol.listapermisos = comando_permisos.ejecutar();
-                    //foreach (Permiso permiso in rol.listapermisos)
-                    //{
-                    //    Command<Entidad> comando_modulos = FabricaComando.crearM13_ConsultarModulos(permiso._id);
-                    //    permiso.modulo = (Modulo)comando_modulos.ejecutar();
-                    //}
                 }
             }
             catch (SqlException e)
@@ -95,10 +92,6 @@ namespace BOReserva.Controllers
             Rol rolbuscado;
             CRoles modelovista = new CRoles();
             CListaGenerica<CModulo_detallado> md = new CListaGenerica<CModulo_detallado>();
-            //CModulo_detallado entrada = new CModulo_detallado();
-            //CRoles _rol = new CRoles();
-            //_rol.Id_Rol = _idRol;
-            //manejadorSQL sql = new manejadorSQL();
             try
             {
                 Command<Entidad> comando = FabricaComando.crearM13_ConsultarRol(_idRol);
@@ -118,7 +111,6 @@ namespace BOReserva.Controllers
                 modelovista.Id_Rol = rolbuscado._idRol;
                 modelovista.Nombre_rol = rolbuscado._nombreRol;
                 modelovista.Permisos = md;
-                //_rol.Permisos = sql.consultarLosPermisosAsignados(_rol);
             }
             catch (SqlException e)
             {
@@ -135,7 +127,11 @@ namespace BOReserva.Controllers
             }
             return PartialView(modelovista);
         }
-        //Metodo para agregar roles
+
+        ///<summary>
+        ///Metodo para agregar roles
+        ///</summary>
+        ///<returns>JsonResult</returns>
         [HttpPost]
         public JsonResult agregarrol(CRoles model)
         {
@@ -170,7 +166,11 @@ namespace BOReserva.Controllers
                 return Json(error);
             }       
         }
-        //Metodo para modifcar nombre roles
+
+        ///<summary>
+        ///Metodo para modificar roles
+        ///</summary>
+        ///<returns>Lista de Entidad</returns>
         [HttpPost]
         public JsonResult modificarrol(CRoles model)
         {
@@ -215,35 +215,23 @@ namespace BOReserva.Controllers
 
 
         }
-        //Metodo para asignar permisos a los roles
+
+        ///<summary>
+        ///Metodo para asignar permisos a roles
+        ///</summary>
+        ///<returns>JsonResult</returns>
         [HttpPost]
         public JsonResult asignarpermisos(string json)
         {
-
-            //manejadorSQL sql = new manejadorSQL();
             String agrego_si_no = null;
-
             CListaGenerica<CModulo_detallado> listaPermisosAsignar = new CListaGenerica<CModulo_detallado>();
-
-            // creo un item para guardar el Json 
             var _permisos=JArray.Parse(json);
-
-                       
-            //La posicion 0 devolvera el Rol a insertar
-
-            //Verifico que todos los campos no sean nulos
             if (_permisos == null)
             {
-                //Creo el codigo de error de respuesta
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                //Agrego mi error               
-                String error = "Error, campo obligatorio vacio";
-                //Retorno el error                
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;          
+                String error = "Error, campo obligatorio vacio";           
                 return Json(error);
             }
-            
-            //La posicion 0 devolvera el Rol a insertar
-            // Si es mayor que uno , Significa que hay al menos un permiso 
             try{
             if (_permisos.Count() >= 1) {
 
@@ -252,7 +240,6 @@ namespace BOReserva.Controllers
                     Entidad nuevoRol = FabricaEntidad.InstanciarRolPermiso(_permisos[0].ToString(), _permisos[i].ToString());
                     Command<String> comando = FabricaComando.crearM13_AgregarRolPermiso(nuevoRol);
                     agrego_si_no = comando.ejecutar(); 
-                    //sql.insertarPermisosRol(_permisos[0].ToString(), _permisos[i].ToString());
                 }
              }
                 return (Json(agrego_si_no));
@@ -272,7 +259,10 @@ namespace BOReserva.Controllers
             }
         }
 
-        //Metodo para Eliminar permiso a un Rol
+        ///<summary>
+        ///Metodo para eliminarle permisos a un rol
+        ///</summary>
+        ///<returns>String</returns>
         [HttpPost]
         public String quitarPermisoRol(int idRol)
         {
@@ -304,10 +294,12 @@ namespace BOReserva.Controllers
                 return null;
             }
             return "1";
+        }
 
-
-        }       
-        //Metodo para Eliminar roles
+        ///<summary>
+        ///Metodo para eliminar roles
+        ///</summary>
+        ///<returns>JsonResult</returns>
         [HttpPost]
         public JsonResult eliminarRol(int _idRol)
         {
@@ -336,7 +328,11 @@ namespace BOReserva.Controllers
             }
             return (Json(borro_si_no));
         }
-        //Metodo para consultar permisos de modulo
+
+        ///<summary>
+        ///Metodo para listar permisos
+        ///</summary>
+        ///<returns>JsonResult</returns>
         public JsonResult Consultarpermisos()
         {
             List<Entidad> listapermisos;
@@ -367,7 +363,10 @@ namespace BOReserva.Controllers
              return (Json(listapermisos, JsonRequestBehavior.AllowGet)); ;
         }
 
-        //Metodo para consultar permisos que no tiene asignado el rol
+        ///<summary>
+        ///Metodo para consultar los permisos que no tiene asignado un rol
+        ///</summary>
+        ///<returns>JsonResult</returns>
         [HttpPost]
         public JsonResult consultarLosPermisosNoAsignados(string nombre_rol)
         {
