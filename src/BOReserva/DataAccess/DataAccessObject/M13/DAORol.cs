@@ -645,5 +645,45 @@ namespace BOReserva.DataAccess.DataAccessObject
                 return ex.Message;
             }
         }
+        ///<summary>
+        ///Metodo para eliminar un rol 
+        ///</summary>
+        ///<returns>String</returns>
+        public List<int> validacionRol(int id)
+        {
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            List<int> listausuarios;
+            try
+            {
+                conexion.Close();
+                conexion.Open();
+                using (SqlCommand cmd = new SqlCommand(M13_DAOResources.ValidacionRol, conexion))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
+                    listausuarios = new List<int>();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        int idUsuario = Int32.Parse(reader["usu_id"].ToString());
+                        listausuarios.Add(idUsuario);
+                    }
+                    return listausuarios;
+                }
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+            }
+        }
     }
 }

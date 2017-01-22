@@ -88,6 +88,15 @@ namespace BOReserva.DataAccess.DataAccessObject.M13 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to M13_ConsultarListaPermisos.
+        /// </summary>
+        internal static string ConsultarListaPermisos {
+            get {
+                return ResourceManager.GetString("ConsultarListaPermisos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to M13_ConsultarPermisos.
         /// </summary>
         internal static string ConsultarPermisos {
@@ -151,6 +160,15 @@ namespace BOReserva.DataAccess.DataAccessObject.M13 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to M13_EliminarPermisoSeleccionado.
+        /// </summary>
+        internal static string EliminarPermisoSeleccionado {
+            get {
+                return ResourceManager.GetString("EliminarPermisoSeleccionado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to M13_EliminarRol.
         /// </summary>
         internal static string EliminarRol {
@@ -174,6 +192,24 @@ namespace BOReserva.DataAccess.DataAccessObject.M13 {
         internal static string QuitarPermiso {
             get {
                 return ResourceManager.GetString("QuitarPermiso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M13_ValidacionPermiso.
+        /// </summary>
+        internal static string ValidacionPermiso {
+            get {
+                return ResourceManager.GetString("ValidacionPermiso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M13_ValidacionRol.
+        /// </summary>
+        internal static string ValidacionRol {
+            get {
+                return ResourceManager.GetString("ValidacionRol", resourceCulture);
             }
         }
     }

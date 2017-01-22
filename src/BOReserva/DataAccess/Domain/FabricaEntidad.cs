@@ -312,25 +312,6 @@ namespace BOReserva.DataAccess.Domain
             return new Permiso(_nombre, url);
         }
 
-        
-        
-        #region M14 Cruceros
-        //public static Entidad InstanciarCrucero(CGestion_crucero crucero)
-        //{
-
-        //    return new Crucero(crucero._idCrucero, crucero._nombreCrucero, crucero._companiaCrucero, crucero._capacidadCrucero, crucero._estatus);
-        //}    
-
-        //instancia cabina con nombre de crucero, no con FK
-
-        //public static Entidad InstanciarCabinaN(CGestion_cabina cabina)
-        //{
-        //    return new Cabina(cabina._idCabina,cabina._nombreCabina,cabina._precioCabina,cabina._estatus,cabina._fkCrucero);
-        //}
-        #endregion
-
-            
-
         public static Entidad crearRol(int id, String nombre)
         {
             return new Rol(id, nombre);
@@ -340,16 +321,16 @@ namespace BOReserva.DataAccess.Domain
         {
             return new Permiso(id, nombre);
         }
-
-        public static Entidad crearModulo(int id, String nombre)
-        {
-            return new Modulo(id, nombre);
-        }
         public static Entidad InstanciarRolIdNombre(CRoles model)
         {
             int idRol = model.Id_Rol;
             String nombreRol = model.Nombre_rol;
             return new Rol(idRol, nombreRol);
+        }
+
+        public static Entidad crearPermiso(int id, String nombre, String url)
+        {
+            return new Permiso(id, nombre, url);
         }
         #endregion
 
@@ -384,6 +365,22 @@ namespace BOReserva.DataAccess.Domain
             return  new ComidaVuelo(id, comida, cantidad);
         }
 
+        #endregion
+
+
+        #region M14 Cruceros
+        //public static Entidad InstanciarCrucero(CGestion_crucero crucero)
+        //{
+
+        //    return new Crucero(crucero._idCrucero, crucero._nombreCrucero, crucero._companiaCrucero, crucero._capacidadCrucero, crucero._estatus);
+        //}    
+
+        //instancia cabina con nombre de crucero, no con FK
+
+        //public static Entidad InstanciarCabinaN(CGestion_cabina cabina)
+        //{
+        //    return new Cabina(cabina._idCabina,cabina._nombreCabina,cabina._precioCabina,cabina._estatus,cabina._fkCrucero);
+        //}
         #endregion
 
     }

@@ -276,15 +276,15 @@ namespace BOReserva.Controllers
             catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error insertando en la BD.";
-                return null;
+                String error = "Error eliminando de la BD.";
+                return error;
 
             }
             catch (Exception e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 String error = "Error desconocido, contacte con el administrador.";
-                return null;
+                return error;
             }
             return "1";
         }
@@ -296,15 +296,26 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult eliminarRol(int _idRol)
         {
-            String borro_si_no;
+            String borro_si_no = null;
+            List<int> listausuarios;
             try
             {
-                Command<Entidad> comando = FabricaComando.crearM13_ConsultarRol(_idRol);
-                Entidad rol = comando.ejecutar();
-                Rol rolbuscado = (Rol)rol;
-                rolbuscado._id = _idRol;
-                Command<String> comando1 = FabricaComando.crearM13_EliminarRol(rolbuscado, _idRol);
-                borro_si_no = comando1.ejecutar();
+                Command<List<int>> comando2 = FabricaComando.crearM13_ValidacionRol(_idRol);
+                listausuarios = comando2.ejecutar();
+                if (listausuarios.Count == 0)
+                {
+                    Command<Entidad> comando = FabricaComando.crearM13_ConsultarRol(_idRol);
+                    Entidad rol = comando.ejecutar();
+                    Rol rolbuscado = (Rol)rol;
+                    rolbuscado._id = _idRol;
+                    Command<String> comando1 = FabricaComando.crearM13_EliminarRol(rolbuscado, _idRol);
+                    borro_si_no = comando1.ejecutar();
+                }
+                else
+                {
+                    String error = "Error eliminando de la BD.";
+                    return Json(error);
+                }
             }
             catch (SqlException e)
             {
@@ -337,15 +348,15 @@ namespace BOReserva.Controllers
             catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error insertando en la BD.";
-                return null;
+                String error = "Error consultando en la BD.";
+                return Json(error);
 
             }
             catch (Exception e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 String error = "Error desconocido, contacte con el administrador.";
-                return null;
+                return Json(error);
             }
             var _nombrePermiso = new List<object>();
             foreach (var permiso in listapermisos)
@@ -414,28 +425,31 @@ namespace BOReserva.Controllers
             catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error insertando en la BD.";
-                return null;
+                String error = "Error eliminando de la BD.";
+                return error;
 
             }
             catch (Exception e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 String error = "Error desconocido, contacte con el administrador.";
-                return null;
+                return error;
             }
             return borro_si_no;
         }
 
         /// <summary>
-        /// Metodo para llamar la vista parcial M13_AgregarRol
+        /// Metodo para llamar la vista parcial M13_AgregarPermiso
         /// </summary>
-        /// <returns>La vista parcial con el modelo CRoles</returns>
+        /// <returns>La vista parcial con el modelo CModeloDetallado</returns>
         public ActionResult M13_AgregarPermiso()
         {
             return PartialView();
         }
 
+        /// <summary>
+        /// Metodo para aregar un permiso nuevo
+        /// <returns>retorna JsonResult</returns>
         public JsonResult agregarpermiso(CModulo_detallado model)
         {
             //Verifico que todos los campos no sean nulos
@@ -468,6 +482,73 @@ namespace BOReserva.Controllers
                 String error = "Error desconocido, contacte con el administrador.";
                 return Json(error);
             }
+        }
+
+        /// <summary>
+        /// Metodo para llamar la vista parcial M13_VisualizarPermiso
+        /// <returns>retorna la lista de roles</returns>
+        public ActionResult M13_VisualizarPermiso()
+        {
+            List<Entidad> listapermisos;
+            try
+            {
+                Command<List<Entidad>> comando = FabricaComando.crearM13_ConsultarListaPermisos();
+                listapermisos = comando.ejecutar();
+            }
+            catch (SqlException e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error consultando en la BD.";
+                return Json(error);
+
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
+                return Json(error);
+            }
+            return PartialView(listapermisos);
+        }
+
+        ///<summary>
+        ///Metodo para eliminar roles
+        ///</summary>
+        ///<returns>JsonResult</returns>
+        [HttpPost]
+        public JsonResult eliminarPermisoSeleccionado(int _idPermiso)
+        {
+            String borro_si_no;
+            List<int> listaroles;
+            try
+            {
+                Command<List<int>> comando1 = FabricaComando.crearM13_ValidacionPermiso(_idPermiso);
+                listaroles = comando1.ejecutar();
+                if (listaroles.Count == 0)
+                {
+                    Command<String> comando = FabricaComando.crearM13_EliminarPermiso(_idPermiso);
+                    borro_si_no = comando.ejecutar();
+                }
+                else
+                {
+                    String error = "Este permiso tiene roles asociados";
+                    return Json(error);
+                }
+            }
+            catch (SqlException e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error eliminando de la BD.";
+                return Json(error);
+
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
+                return Json(error);
+            }
+            return (Json(borro_si_no));
         }
 
     }

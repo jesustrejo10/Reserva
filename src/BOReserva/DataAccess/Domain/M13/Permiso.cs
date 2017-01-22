@@ -38,5 +38,10 @@ namespace BOReserva.DataAccess.Domain
         {
             this.url = url;
         }
+
+        public Permiso(int id, string nombre, string url) : this(id, nombre)
+        {
+            this.url = url;
+        }
     }
 }

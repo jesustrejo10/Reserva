@@ -1,0 +1,106 @@
+@model List<BOReserva.DataAccess.Domain.Entidad>
+
+<div class="row">
+    <link rel="stylesheet" href="~/Content/plugins/datatables/dataTables.bootstrap.css">
+
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Lista de Roles</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="VisualizarPermiso" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Url</th>
+                            <th>Accion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (BOReserva.DataAccess.Domain.Permiso item in Model)
+                        {
+                            <tr id="@item._idPermiso">
+                                <td>@item._nombre</td>                               
+                                <td>@item.url</td>
+                                <td>
+                                        <a href="#" title="Modificar Rol"><i class="fa fa-pencil modificar"></i></a>
+                                        <a href="#" title="Eliminar Rol"><i class="fa fa-times eliminar"></i></a>
+                                </td>
+                            </tr>
+                        }                       
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<script src="~/Content/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+<script language="javascript" type="text/javascript">
+    table = $('#VisualizarPermiso').DataTable({
+        "pageLength": 100
+    });
+
+    $(".eliminar").click(function () {
+        var r = confirm("Esta función no podrá ser revertida, ¿Está seguro de que desea continuar?")
+        if (r) {
+            var identificador = $(this).closest("tr").attr("id");
+            jQuery.ajax({
+                type: "POST",
+                url: "/gestion_roles/eliminarPermisoSeleccionado",
+                data: { _idPermiso: identificador }
+            }).done(function (data) {
+                var url = '/gestion_roles/M13_VisualizarPermiso';
+                var method = 'GET';
+                var data = '';
+                $.ajax(
+                    {
+                        url: url,
+                        type: method,
+                        data: data,
+                        success: function (data, textStatus, jqXHR) {
+
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+            }).fail(function (data) {
+                alert(data);
+            });
+        }
+    });
+
+    $(".modificar").click(function () {
+        var identificador = $(this).closest("tr").attr("id");
+
+        $.ajax({
+            type: "POST",
+            url: "/gestion_roles/M13_ModificarRol",
+            data: { _idRol: identificador },
+            success: function(data){
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            },          
+            failure: function () {
+                alert(data);
+            }
+        });
+    });
+</script>
+
+<style>
+    .eliminarpermiso {
+        float: right;
+    }
+</style>

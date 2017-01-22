@@ -129,6 +129,10 @@
     <value>M13_AgregarRol</value>
     <comment>Agrega un rol</comment>
   </data>
+  <data name="ConsultarListaPermisos" xml:space="preserve">
+    <value>M13_ConsultarListaPermisos</value>
+    <comment>Lista los permisos con su url</comment>
+  </data>
   <data name="ConsultarPermisos" xml:space="preserve">
     <value>M13_ConsultarPermisos</value>
     <comment>Lista de los permisos que posee un rol en especifico</comment>
@@ -157,6 +161,10 @@
     <value>M13_EliminarPermisos</value>
     <comment>Elimina los permisos de un rol especifico</comment>
   </data>
+  <data name="EliminarPermisoSeleccionado" xml:space="preserve">
+    <value>M13_EliminarPermisoSeleccionado</value>
+    <comment>Elimina el permiso de la base de datos</comment>
+  </data>
   <data name="EliminarRol" xml:space="preserve">
     <value>M13_EliminarRol</value>
     <comment>Eliminar un rol por su id</comment>
@@ -168,5 +176,13 @@
   <data name="QuitarPermiso" xml:space="preserve">
     <value>M13_QuitarPermiso</value>
     <comment>Elimina un permiso de un rol</comment>
+  </data>
+  <data name="ValidacionPermiso" xml:space="preserve">
+    <value>M13_ValidacionPermiso</value>
+    <comment>Revisa si el permiso tiene roles asignados</comment>
+  </data>
+  <data name="ValidacionRol" xml:space="preserve">
+    <value>M13_ValidacionRol</value>
+    <comment>Revisa si el rol tiene usuarios asociados</comment>
   </data>
 </root>
