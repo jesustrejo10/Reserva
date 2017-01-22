@@ -70,16 +70,16 @@ namespace FOReserva.Controllers
                 {
                     _manejador.ValidarPreguntaRespuesta(Int32.Parse(Session["id_usuario_ref"].ToString()), Session["value_pregunta"].ToString(), Request.Form["respuesta"]);
                 }
-                catch (RespuestaErroneaException e) {
+                catch (RespuestaErroneaException) {
                     Session["error"] = "Error, la respuesta es incorrecto.";
                     return RedirectToAction("OlvidarClave", this);
                 }
-                catch (SqlException e)
+                catch (SqlException )
                 {
                     Session["error"] = "Error, a la conectarse a la BD.";
                     return RedirectToAction("OlvidarClave", this);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     Session["error"] = "Error, a la conectarse a la BD.";
                     return RedirectToAction("OlvidarClave", this);
@@ -212,17 +212,17 @@ namespace FOReserva.Controllers
                     _manejador.ValidacionUsuarioCorreo(cliente.Correo);
                     _manejador.ValidacionRegistroCliente(cliente);
                 }
-                catch (SqlException e)
+                catch (SqlException)
                 {
                     ViewData["error"] = "error en la conexion con la BD"; // error en la conexion con la BD 
                     return View();
                 }
-                catch (ExisteUsuarioCorreoException e)
+                catch (ExisteUsuarioCorreoException )
                 {
                     ViewData["error"] = "Error, el correo ya existe."; // Error SI existe usuario
                     return View();
                 }
-                catch (Exception e)
+                catch (Exception )
                 {
                     ViewData["error"] = "error en la conexion con la BD"; // error en la conexion con la BD
                     return View();
@@ -269,22 +269,22 @@ namespace FOReserva.Controllers
                     Session["nombre"] = cliente.Nombre;
                     Session["apellido"] = cliente.Apellido;
                 }
-                catch (ExisteUsuarioCorreoException e)
+                catch (ExisteUsuarioCorreoException )
                 {
                     ViewData["error"] = "Error, el correo no esta registrado."; // Error NO existe usuario
                     return View(cliente);
                 }
-                catch (ClavesDiferentesException e)
+                catch (ClavesDiferentesException )
                 {
                     ViewData["error"] = "Error, el al ingresar la clave."; // Error NO existe usuario
                     return View(cliente);
                 }
-                catch (SqlException e)
+                catch (SqlException )
                 {
                     ViewData["error"] = "Error, al conectarse a la BD.";
                     return View(cliente);
                 }
-                catch (Exception e)
+                catch (Exception )
                 {
                     ViewData["error"] = "Error, al conectarse a la BD.";
                     return View(cliente);
@@ -307,16 +307,16 @@ namespace FOReserva.Controllers
             {
                 mapa = _manejador.BuscarIdPregunta(Request.Form["correo"]); // devuelve id_usuario && value_pregunta(random)
             }
-            catch (ExisteUsuarioCorreoException e) {
+            catch (ExisteUsuarioCorreoException ) {
                 Session["error"] = "Error, el usuario no se encuentra registrado."; // el usuario no se encuentra registrado
                 return RedirectToAction("OlvidarClave", this);
             }
-            catch (SqlException e)
+            catch (SqlException )
             {
                 Session["error"] = "Error, al conectarse a la BD"; // Error al conectarse a la BD
                 return RedirectToAction("OlvidarClave", this);
             }
-            catch (Exception e)
+            catch (Exception )
             {
                 Session["error"] = "Error, al conectarse a la BD"; // Error al conectarse a la BD
                 return RedirectToAction("OlvidarClave", this);
@@ -374,17 +374,17 @@ namespace FOReserva.Controllers
                 ViewData["Telefono"] = cliente.Telefono;
                 ViewData["Correo"] = cliente.Correo;
             }
-            catch (ExisteUsuarioCorreoException e)
+            catch (ExisteUsuarioCorreoException )
             {
                 ViewData["error"] = "No existe el usuario";
                 return RedirectToAction("Perfil", this);
             }
-            catch (SqlException e)
+            catch (SqlException )
             {
                 ViewData["error"] = "Error, al conectarse a la BD."; // Error al conectarse a la BD
                 return RedirectToAction("Perfil", this);
             }
-            catch (Exception e)
+            catch (Exception )
             {
                 ViewData["error"] = "Error, al conectarse a la BD."; // Error al conectarse a la BD
                 return RedirectToAction("Perfil", this);
@@ -446,12 +446,12 @@ namespace FOReserva.Controllers
                     cliente.Correo = Session["correo"].ToString();
                     _manejador.EditarCliente(cliente);
                 }
-                catch (SqlException e)
+                catch (SqlException )
                 {
                     ViewData["error"] = "Error, al conectarse a la BD."; // Error al conectarse a la BD
                     return RedirectToAction("Perfil", this);
                 }
-                catch (Exception e)
+                catch (Exception )
                 {
                     ViewData["error"] = "Error, al conectarse a la BD."; // Error al conectarse a la BD
                     return RedirectToAction("Perfil", this);
@@ -490,12 +490,12 @@ namespace FOReserva.Controllers
                     {
                         _manejador.CambiarClave(int.Parse(Session["id_usuario"].ToString()), Request.Form["clave0"]);
                     }
-                    catch (SqlException e)
+                    catch (SqlException )
                     {
                         ViewData["error"] = "Error, al conectarse a la BD."; // Error, al conectarse a la BD.
                         return RedirectToAction("Perfil", this);
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         ViewData["error"] = "Error, al conectarse a la BD."; // Error, al conectarse a la BD.
                         return RedirectToAction("Perfil", this);

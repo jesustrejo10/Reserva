@@ -78,7 +78,7 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -221,6 +221,13 @@
     <Compile Include="Controllers\PatronComando\M19\M19_COConsultarReservaId.cs" />
     <Compile Include="Controllers\PatronComando\M19\M19_COCrearReserva.cs" />
     <Compile Include="Controllers\PatronComando\M19\M19_COEliminarReserva.cs" />
+    <Compile Include="Controllers\PatronComando\M22\M22_COObtenerCiudad.cs" />
+    <Compile Include="Controllers\PatronComando\M22\M22_COConsultarIdCiudad.cs" />
+    <Compile Include="Controllers\PatronComando\M22\M22_COConsultarTodasReservas.cs" />
+    <Compile Include="Controllers\PatronComando\M22\M22_COConsultarReserva.cs" />
+    <Compile Include="Controllers\PatronComando\M22\M22_COEliminarReserva.cs" />
+    <Compile Include="Controllers\PatronComando\M22\M22_COModificarReserva.cs" />
+    <Compile Include="Controllers\PatronComando\M22\M22_COAgregarRerserva.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOReclamo.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\registro_autenticacionController.cs" />
@@ -251,11 +258,14 @@
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\M22\DAOReservaHabitacion.cs" />
     <Compile Include="DataAccess\DataAccessObject\M22\RecursoDAOM22.Designer.cs" />
+    <Compile Include="DataAccess\Domain\CiudadHab.cs" />
     <Compile Include="DataAccess\Domain\Entidad.cs" />
     <Compile Include="DataAccess\Domain\FabricaEntidad.cs" />
     <Compile Include="DataAccess\Domain\Habitacion.cs" />
+    <Compile Include="DataAccess\Domain\Hotel.cs" />
     <Compile Include="DataAccess\Domain\Reclamo.cs" />
     <Compile Include="DataAccess\Domain\ReservaHabitacion.cs" />
+    <Compile Include="DataAccess\Domain\Restaurante.cs" />
     <Compile Include="DataAccess\Domain\Revision.cs" />
     <Compile Include="DataAccess\Domain\RevisionValoracion.cs" />
     <Compile Include="DataAccess\Domain\Usuario.cs" />
@@ -1629,6 +1639,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="DataAccess\DataAccessObject\M19\Scripts de Procedures M19.sql" />
+    <Content Include="DataAccess\DataAccessObject\M20\ProcedimientosDAOM20.sql" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\assets\fonts\et-line.eot" />
@@ -3252,7 +3263,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\PatronComando\M22\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

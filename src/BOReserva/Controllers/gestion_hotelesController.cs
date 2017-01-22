@@ -49,7 +49,6 @@ namespace BOReserva.Controllers
         [HttpPost]
         public void getCity(String _ciudad)
         {
-            //Aca se debe llamar a un comando
             ciudad = _ciudad;
         }
 
@@ -67,7 +66,6 @@ namespace BOReserva.Controllers
                 M09_COObtenerPaises command = (M09_COObtenerPaises)FabricaComando.crearM09ObtenerPaises();
                 ciudadDestino._id = command.obtenerIdentificadorCiudad(ciudad);
                 Entidad nuevoHotel = FabricaEntidad.InstanciarHotel(model, ciudadDestino);
-                //con la fabrica instancie al hotel.
                 Command<String> comando = FabricaComando.crearM09AgregarHotel(nuevoHotel, model._precioHabitacion);
                 String agrego_si_no = comando.ejecutar();
                 return (Json(agrego_si_no));
@@ -122,7 +120,7 @@ namespace BOReserva.Controllers
             }
             catch (ReservaExceptionM09 ex)
             {
-                return (Content("<script>alert('" + ex.Mensaje + "');</script>"));
+                return (Content(ex.Mensaje));
             }
         }
 
@@ -154,7 +152,7 @@ namespace BOReserva.Controllers
             }
             catch (ReservaExceptionM09 ex)
             {
-                return (Content("<script>alert('" + ex.Mensaje + "');</script>"));
+                return (Content(ex.Mensaje));
             }
         }
 

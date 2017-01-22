@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BOReserva.DataAccess.Domain;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace BOReserva.Models.gestion_usuarios
         private String _activo;
         private int _rol;
         private int _id;
-        private string _rolS;
+        private String _rolS;
 
         #region Constructores
         public CUsuario()
@@ -154,7 +155,7 @@ namespace BOReserva.Models.gestion_usuarios
         /// Get y Set del atributo _rolS
         /// </summary>
         /// <returns>string del rol del usuario/returns>
-        public string rolSUsuario
+        public String rolSUsuario
         {
             get { return _rolS; }
             set { _rolS = value; }
