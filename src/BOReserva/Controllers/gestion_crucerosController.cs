@@ -104,26 +104,35 @@ namespace BOReserva.Controllers
 
 
         [AcceptVerbs(HttpVerbs.Get)]
-        public JsonResult cargarDestinos(string ciudadO)
+        public JsonResult cargarCabinas(string crucero)
         {
             CGestion_camarote camarote = new CGestion_camarote();
             List<String> lista = new List<string>();
-            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14VisualizarCruceros();
-            Dictionary<int, Entidad> listaCruceros = comando.ejecutar();
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14VisualizarCabinasCrucero(crucero);
+            Dictionary<int, Entidad> listaCabinas = comando.ejecutar();
 
             try
             {
-                foreach (var crucero in listaCruceros)
+                foreach (var cabina in listaCabinas)
                 {
-                    BOReserva.DataAccess.Domain.Crucero c = (BOReserva.DataAccess.Domain.Crucero)crucero.Value;
-                    lista.Add(c._nombreCrucero);
+                    BOReserva.DataAccess.Domain.Cabina c = (BOReserva.DataAccess.Domain.Cabina) cabina.Value;
+                    lista.Add(c._nombreCabina);
                 }
                 camarote._listaCruceros = lista.Select(x => new SelectListItem
                 {
                     Value = x,
                     Text = x
                 });
-                return PartialView(camarote);
+                if (lista != null)
+                {
+                    return (Json(camarote._listaCabinas, JsonRequestBehavior.AllowGet));
+                }
+                else
+                {
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    String error = "Error accediendo a la BD";
+                    return Json(error);
+                }
             }
             catch (SqlException e)
             {

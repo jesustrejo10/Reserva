@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using BOReserva.Controllers.PatronComando;
 using System.Web;
 using System.Linq;
+using BOReserva.Controllers.PatronComando.M14;
 using BOReserva.Controllers.PatronComando.M10;
 using BOReserva.Controllers.PatronComando.M16;
 using BOReserva.DataAccess.Domain.M14;
@@ -214,10 +215,10 @@ namespace BOReserva.Controllers.PatronComando
         /// <returns>
         /// Retorna la instancia del comando M09_COVisualizarHoteles.
         /// </returns>
-        public static Command<Dictionary<int, Entidad>> crearM14VisualizarCabinasCrucero()
+        public static Command<Dictionary<int, Entidad>> crearM14VisualizarCabinasCrucero(string crucero)
         {
 
-            return new M14_COVisualizarCruceros();
+            return new M14_COListarCabinaCrucero(crucero);
 
         }
 

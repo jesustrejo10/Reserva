@@ -280,9 +280,12 @@
     <Compile Include="Controllers\PatronComando\M14\M14_COAgregarCabina.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarCruceros.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COAgregarCrucero.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COListarCabinaCrucero.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCabina.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCamarote.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOItinerario.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCabina.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M14\DAOCamarotes.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCruceros.cs" />
     <Compile Include="Controllers\PatronComando\M10\M10_COListarRestaurantId.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COModificarRol.cs" />
@@ -346,6 +349,7 @@
     <Compile Include="DataAccess\DataAccessObject\M10\DAORestaurant.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOItinerario.cs" />
     <Compile Include="DataAccess\Domain\M14\Cabina.cs" />
+    <Compile Include="DataAccess\Domain\M14\Camarote.cs" />
     <Compile Include="DataAccess\Domain\M14\Crucero.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOBoleto.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPasajero.cs" />
