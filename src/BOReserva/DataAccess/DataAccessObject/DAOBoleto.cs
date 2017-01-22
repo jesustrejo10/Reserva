@@ -10,9 +10,14 @@ using System.Diagnostics;
 
 namespace BOReserva.DataAccess.DataAccessObject
 {
+    /// <summary>
+    /// Clase encargada del Acceso a DB para el objeto Boleto
+    /// </summary>
     public class DAOBoleto : DAO, IDAOBoleto
     {
-
+        /// <summary>
+        /// Constructor Vacio
+        /// </summary>
         public DAOBoleto() { }
 
         int IDAO.Agregar(Entidad e)
