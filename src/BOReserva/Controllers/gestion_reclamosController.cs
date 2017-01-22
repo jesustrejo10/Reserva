@@ -96,7 +96,7 @@ namespace BOReserva.Controllers
           Entidad nuevoReclamo = FabricaEntidad.InstanciarReclamo(model);
           Command<String> comando = FabricaComando.crearM16AgregarReclamo(nuevoReclamo);
           String verificacion = comando.ejecutar();
-          return (Json("Se guardó su reclamo exitosamente"));
+          return (Json("1"));
       }
         /// <summary>
         /// Controlador para el boton de modificar un reclamo 
