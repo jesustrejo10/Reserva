@@ -1,4 +1,5 @@
-﻿
+﻿using FOReserva.DataAccess.Domain;
+using FOReserva.Controllers.PatronComando;
 using FOReserva.Models.ReservaHabitacion;
 using System;
 using System.Collections.Generic;
@@ -15,26 +16,31 @@ namespace FOReserva.Controllers
         [HttpGet]
         public ActionResult mis_reservas()
         {
-            var user_id = 1;
+            var user_id = 207;
 
             if (Session["id_usuario"] != null && Session["id_usuario"] is int)
                 user_id = (int)Session["id_usuario"];
 
-            var model = CReservaHabitacion.ReservasDeUsuario(usu_id: user_id);
-            return PartialView(model);
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.mostrarReservaUsuario(user_id);
+            Dictionary<int, Entidad> listareserva = comando.ejecutar();
+            return PartialView(listareserva);
         }
 
         [HttpGet]
         public ActionResult buscar_hoteles(Cvista_BuscarHotel model)
         {
+            Command<List<CiudadHab>> comando = FabricaComando.obtenerCiudades();
+            List<CiudadHab> listaciudad = comando.ejecutar();
             if (Session["RHACiudades"] == null)
-                Session["RHACiudades"] = CReservaHabitacion.ObtenerCiudades();
+                Session["RHACiudades"] = listaciudad;
 
             if (model.Ciudades == null)
-                model.Ciudades = (List<CCiudad>)Session["RHACiudades"];
+                model.Ciudades = (List<CiudadHab>)Session["RHACiudades"];
 
             if (model.FechaLlegada.Ticks == 0)
+            {
                 model.FechaLlegada = DateTime.Now.AddDays(1);
+            }
 
             if (model.CantidadDias < 1)
                 model.CantidadDias = 1;
@@ -45,8 +51,11 @@ namespace FOReserva.Controllers
         [HttpGet]
         public ActionResult hoteles_con_habitaciones(Cvista_BuscarHotel datos)
         {
-            var model = CReservaHabitacion.BuscarHoteles(datos.LugId, datos.FechaLlegada, datos.CantidadDias);
-            return PartialView(model);
+          
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.obtenerHotelCiudad(datos.LugId);
+            Dictionary<int, Entidad> listaHoteles = comando.ejecutar();
+           
+            return PartialView(listaHoteles);
         }
 
         [HttpGet]
@@ -65,15 +74,25 @@ namespace FOReserva.Controllers
                 user_id = (int)Session["id_usuario"];
 
             reserva.UsuId = user_id; // Usuario Actual
-            var resultado = CReservaHabitacion.GenerarReserva(reserva);
-            return Json(resultado, JsonRequestBehavior.AllowGet);
+            ReservaHabitacion Habitacion = new ReservaHabitacion(reserva.CantidadDias, reserva.FechaLlegada, reserva.HotId, reserva.UsuId);
+            Command<string> comando = FabricaComando.agregarReservaHabitacion(Habitacion);
+            string agrego = comando.ejecutar();
+            return Json(agrego,JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public ActionResult cancelar_reserva(CReservaHabitacion reserva)
+        public ActionResult cancelar_reserva(int seleccion)
         {
-            var resultado = CReservaHabitacion.CancelarReserva(reserva);
-            return Json(resultado, JsonRequestBehavior.AllowGet);
+            Command<String> comando = FabricaComando.eliminarReservaUsuario(seleccion);
+            string agrego = comando.ejecutar();
+            return Json(agrego, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult modificar_reserva(int id_reserva, int cant_dias)
+        {
+            Command<String> comando = FabricaComando.modificarReservaUsuario(id_reserva, cant_dias);
+            String agrego = comando.ejecutar();
+            return Json(agrego, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -50,10 +50,12 @@ namespace BOReserva.Controllers
             //SE BUSCAN TODOS LOS BOLETOS QUE ESTAN EN LA BASE DE DATOS
             // DE ESE PASAJERO EN PARTICULAR PARA MOSTRARLOS EN LA VISTA
 
-            manejadorSQL_Check buscarboletos = new manejadorSQL_Check();
-            List<CBoardingPass> listaboletos = buscarboletos.M05ListarPasesPasajero(pasaporte);
+            //manejadorSQL_Check buscarboletos = new manejadorSQL_Check();
+            //List<CBoardingPass> listaboletos = buscarboletos.M05ListarPasesPasajero(pasaporte);
 
-            return PartialView("M05_VerPasesAbordaje", listaboletos);
+            List<Entidad> listaBoletos = (FabricaComando.ConsultarPasajeros(pasaporte)).ejecutar();
+
+            return PartialView("M05_VerPasesAbordaje", listaBoletos);
         }
 
         // GET
@@ -105,7 +107,7 @@ namespace BOReserva.Controllers
             CEquipaje equi = new CEquipaje(id);
             return PartialView("M05_Equipaje",equi);
         }
-
+        //faltapatrones
         [HttpPost]
         public ActionResult generarBoardingPass(CDetalleBoleto model)
         {
@@ -119,7 +121,8 @@ namespace BOReserva.Controllers
                 manejadorSQL_Check modificar = new manejadorSQL_Check();
 
                 // OBTENGO EL /LOS VUELOS DEL BOLETO
-
+                Command<List<Entidad>> comando = FabricaComando.consultarM05listaVuelos(model._bol_id);
+                List<Entidad> lista2 = comando.ejecutar();
                 List<CVuelo> lista = modificar.M05ListarVuelosBoleto(model._bol_id);
 
                 // PRIMERO VEO SI ES IDA O IDA Y VUELTA
@@ -198,7 +201,7 @@ namespace BOReserva.Controllers
                 return Json(error);
             }
         }
-
+        //faltapatrones
         [HttpPost]
         public ActionResult insertarEquipaje(CEquipaje model)
         {

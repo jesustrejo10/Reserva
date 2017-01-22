@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace BOReserva.Controllers.PatronComando.M09
 {
+    /// <summary>
+    /// Interfaz que posee el metodo de obtenerCiudaddesPorPais
+    /// </summary>
     public interface IM09_COObtenerPaises
     {
         Dictionary<int, Entidad> obtenerCiudadesPorPais(Dictionary<int, Entidad> ciudades, int fkPais);

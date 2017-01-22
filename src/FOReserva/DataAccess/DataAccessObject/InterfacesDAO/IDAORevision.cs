@@ -6,15 +6,22 @@ using FOReserva.Models.Revision;
 using FOReserva.Models.Usuarios;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 
 
-namespace FOReserva.DataAccess.DataAccessObject.Common.Interface
+namespace FOReserva.DataAccess.DataAccessObject.M20
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IDAORevision
     {
         bool GuardarRevision(Entidad revision);
-        bool AplicarValoracion(Entidad valoracion);
+        bool GuardarValoracion(Entidad valoracion);
+        bool BorrarRevision(Entidad revision);
+        DataTable ObtenerRevisionesPorReferencia(Entidad referencia);
+        DataTable ObtenerValoracionPorReferencia(Entidad referencia);
     }
 }
