@@ -7,14 +7,14 @@ namespace BOReserva.Models.gestion_roles
 {
 
 
-    public class CRoles
+    public class Prueba
     {
         private string _nombre_rol;
         private CListaGenerica<CModulo_general> _menu;
 
 
 
-        public CRoles(string nombre)
+        public Prueba(string nombre)
         {
             this._nombre_rol = nombre;
             this._menu = new CListaGenerica<CModulo_general>();
