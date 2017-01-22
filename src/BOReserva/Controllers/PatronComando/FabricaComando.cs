@@ -14,6 +14,8 @@ using BOReserva.Controllers.PatronComando.M10;
 using BOReserva.Controllers.PatronComando.M16;
 using BOReserva.Controllers.PatronComando.M12;
 using BOReserva.DataAccess.Domain.M14;
+using BOReserva.Controllers.PatronComando.M09;
+using BOReserva.Controllers.PatronComando.M11;
 
 namespace BOReserva.Controllers.PatronComando
 {
@@ -992,10 +994,106 @@ namespace BOReserva.Controllers.PatronComando
         {
 
             return new M03_COValidarRuta((Ruta)e, id);
+        }
+
+        #region M11 Gestión de ofertas y paquetes
+        //Agregar oferta
+        /// <summary>
+        /// Instancia el comando agregarOferta
+        /// </summary>
+        /// <param name="e">Recibe la una entidad de tipo Oferta</param>
+        /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
+        public static Command<String> crearM11AgregarOferta(Entidad e)
+        {
+
+            return new M11_COAgregarOferta((Oferta) e);
+
+        }
+        /// <summary>
+        /// Método que instancia Agregar Paquete
+        /// </summary>
+        /// <param name="e">Parámetro del tipo Paquete</param>
+        /// <returns>Instancia del comando Agregar Paquete</returns>
+        public static Command<String> crearM11AgregarPaquete(Entidad e)
+        {
+
+            return new M11_COAgregarPaquete((Paquete)e);
+
+    }
+        
+        #endregion
+    
+        /// <summary>
+        /// Instancia el comando VisualizarOfertas
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M11_COVisualizarOferta
+        /// </returns>
+        public static Command<List<Entidad>> crearM11VisualizarOfertas()
+        {
+
+            return new M11_COVisualizarOfertas();
+
+}
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M11_COConsultarOferta
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M11_COConsultarOferta.
+        /// </returns>
+        public static Command<Entidad> crearM11ConsultarOferta(int id)
+        {
+
+            return new M11_COConsultarOferta(id);
 
         }
 
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M11_COModificarOferta
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M11_COModificarOferta.
+        /// </returns>
+        public static Command<String> crearM11ModificarOferta(Entidad oferta, int id)
+        {
+
+            return new M11_COModificarOferta(oferta, id);
+
+        }
+
+        public static Command<String> crearM11DisponibilidadOferta(Entidad oferta, int disponibilidad)
+        {
+
+            return new M11_CODeshabilitarOferta(oferta, disponibilidad);
+
+        }
+
+        /// <summary>
+        /// Instancia el comando VisualizarPaquete
+        /// </summary>
+        /// <returns>Retorna la instancia del comando M11_COVisualizarPaquetes(); </returns>
+        public static Command<List<Entidad>> crearM11VisualizarPaquetes()
+        {
+
+            return new M11_COVisualizarPaquetes();
+
+        }
+        public static Command<String> crearM11ModificarPaquetes(Entidad paquete, int idmodificar)
+        {
+
+            return new M11_COModificarPaquete(paquete, idmodificar);
+
+
+        }
         #endregion
+
     }
-        
+       
 }
+        
+
+
+   
