@@ -57,7 +57,7 @@ $("#cruceroR").change(function () {
     var cID = $(crucero).val();
     $.getJSON("gestion_cruceros/cargarRutasO", { crucero: cID },
            function (data) {
-               var select = $("#ruta");
+               var select = $("#ciudadO");
                select.empty();
                select.append($('<option/>', {
                    value: 0,
