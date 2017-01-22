@@ -7,13 +7,15 @@ using System.Threading.Tasks;
 
 namespace FOReserva.DataAccess.DataAccessObject.InterfacesDAO
 {
-    interface IDAOReservaHabitacion : IDAO
+   public interface IDAOReservaHabitacion : IDAO
     {
         String eliminarReservaHabitacion(int id);
+        String modificarReservaHabitacion(int reserva, int cant_dias);
+        Dictionary<int, Entidad> ConsultarTodosHabitacion(int id); 
 
-         List<Entidad> ConsultarHotelesPorIdCiudad(Entidad _lugar);
+        Dictionary<int,Entidad> ConsultarHotelesPorIdCiudad(int _lugar);
 
-         List<Entidad> ObtenerCiudades(Entidad _lugar);
+        List<CiudadHab> ObtenerCiudades();
 
     }
 }
