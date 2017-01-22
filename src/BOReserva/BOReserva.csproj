@@ -275,6 +275,10 @@
     <Compile Include="Controllers\PatronComando\M07\M07_COEliminarEquipaje.cs" />
     <Compile Include="Controllers\PatronComando\M07\M07_COConsultarEquipaje.cs" />
     <Compile Include="Controllers\PatronComando\M07\M07_COEditarReclamoEquipaje.cs" />
+    <Compile Include="Controllers\PatronComando\M08\M08_COExisteMatriculaAutomovil.cs" />
+    <Compile Include="Controllers\PatronComando\M08\M08_COListarAniosAutomovil.cs" />
+    <Compile Include="Controllers\PatronComando\M08\M08_COListarCantidadAutomovil.cs" />
+    <Compile Include="Controllers\PatronComando\M08\M08_COListarColoresAutomovil.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COAgregarHabitaciones.cs" />
     <Compile Include="Controllers\PatronComando\M01\M01_COBloquearUsuario.cs" />
     <Compile Include="Controllers\PatronComando\M01\M01_COLanding.cs" />

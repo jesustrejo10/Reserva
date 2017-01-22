@@ -12,6 +12,7 @@ using System.Web;
 using System.Linq;
 using BOReserva.Controllers.PatronComando.M10;
 using BOReserva.Controllers.PatronComando.M16;
+using System.Web.Mvc;
 using BOReserva.Controllers.PatronComando.M12;
 using BOReserva.DataAccess.Domain.M14;
 using BOReserva.Controllers.PatronComando.M09;
@@ -107,14 +108,14 @@ namespace BOReserva.Controllers.PatronComando
 
         # region Lugar ( COLugar - COPais - COCiudad ) 
 
-        public static Command<Dictionary<int, Entidad>> consultarTodosPais(Entidad e)
+        public static Command<List<SelectListItem>> consultarTodosPais(Entidad e)
         {
             return new GeneralLugar.COConsultarTodosPais(e);
         }
 
-        public static Command<Dictionary<int, Entidad>> consultarTodosCiudad(Entidad e)
+        public static Command<List<String>> consultarTodosCiudad(Entidad e,String pais)
         {
-            return new GeneralLugar.COConsultarTodosCiudad(e);
+            return new GeneralLugar.COConsultarTodosCiudad(e,pais);
         }
 
         #endregion
@@ -711,6 +712,8 @@ namespace BOReserva.Controllers.PatronComando
 
         #region M08_Automoviles
 
+        #region Comandos Generales de Automovil
+
         public static Command<bool> activarAutomovil(Entidad e)
         {
             return new M08.M08_COActivarAutomovil(e);
@@ -735,6 +738,32 @@ namespace BOReserva.Controllers.PatronComando
         {
             return new M08.M08_COModificarAutomovil(e);
         }
+
+        public static Command<bool> existeMatriculaAutomovil(Entidad e)
+        {
+            return new M08.M08_COExisteMatriculaAutomovil(e);
+        }
+
+        #endregion
+
+        #region Comandos de Utilidad
+
+        public static Command<List<SelectListItem>> listarAniosAutomovil(Entidad e)
+        {
+            return new M08.M08_COListarAniosAutomovil(e);
+        }
+
+        public static Command<List<SelectListItem>> listarCantidadAutomovil(Entidad e, int cantidad)
+        {
+            return new M08.M08_COListarCantidadAutomovil(e, cantidad);
+        }
+
+        public static Command<List<SelectListItem>> listarColoresAutomovil(Entidad e)
+        {
+            return new M08.M08_COListarColoresAutomovil(e);
+        }
+
+        #endregion
 
         #endregion
         

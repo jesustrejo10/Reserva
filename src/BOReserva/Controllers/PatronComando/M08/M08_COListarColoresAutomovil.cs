@@ -8,11 +8,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace BOReserva.Controllers.PatronComando.GeneralLugar
+namespace BOReserva.Controllers.PatronComando.M08
 {
-    public class COConsultarTodosPais : Command<List<SelectListItem>>
+    public class M08_COListarColoresAutomovil : Command<List<SelectListItem>>
     {
-        
+
         #region Atributos
 
         Entidad _objeto;
@@ -21,7 +21,9 @@ namespace BOReserva.Controllers.PatronComando.GeneralLugar
 
         #region Constructor
 
-        public COConsultarTodosPais(Entidad _objeto)
+        public M08_COListarColoresAutomovil(){}
+
+        public M08_COListarColoresAutomovil(Entidad _objeto)
         {
             this._objeto = _objeto;
         }
@@ -32,9 +34,9 @@ namespace BOReserva.Controllers.PatronComando.GeneralLugar
 
         public override List<SelectListItem> ejecutar()
         {
-            DAOPais Dao = (DAOPais)FabricaDAO.instanciarDaoPais();
-
-            return Dao.listarPaises();
+            DAO Dao = FabricaDAO.CrearDaoAutomovil();
+            DAOAutomovil DaoAutomovil = (DAOAutomovil)Dao;
+            return DaoAutomovil.listarColores();
         }
 
         #endregion

@@ -8,22 +8,27 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace BOReserva.Controllers.PatronComando.GeneralLugar
+namespace BOReserva.Controllers.PatronComando.M08
 {
-    public class COConsultarTodosPais : Command<List<SelectListItem>>
+    public class M08_COListarCantidadAutomovil : Command<List<SelectListItem>>
     {
-        
+
         #region Atributos
 
         Entidad _objeto;
+
+        int _cantidad;
 
         #endregion
 
         #region Constructor
 
-        public COConsultarTodosPais(Entidad _objeto)
+        public M08_COListarCantidadAutomovil(){}
+
+        public M08_COListarCantidadAutomovil(Entidad _objeto, int _cantidad)
         {
             this._objeto = _objeto;
+            this._cantidad = _cantidad;
         }
 
         #endregion
@@ -32,9 +37,9 @@ namespace BOReserva.Controllers.PatronComando.GeneralLugar
 
         public override List<SelectListItem> ejecutar()
         {
-            DAOPais Dao = (DAOPais)FabricaDAO.instanciarDaoPais();
-
-            return Dao.listarPaises();
+            DAO Dao = FabricaDAO.CrearDaoAutomovil();
+            DAOAutomovil DaoAutomovil = (DAOAutomovil)Dao;
+            return DaoAutomovil.listarCantidad(this._cantidad);
         }
 
         #endregion
