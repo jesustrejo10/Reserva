@@ -13,6 +13,7 @@ using BOReserva.DataAccess.Domain;
 using BOReserva.Controllers.PatronComando;
 using System.Diagnostics;
 
+
 namespace BOReserva.Controllers
 {
     public class gestion_ofertasController : Controller
@@ -295,6 +296,15 @@ namespace BOReserva.Controllers
             List<CConsultar> listCruceros = new List<CConsultar>();
             listCruceros = sql.listarCrucerosM11();
             return Json(listCruceros);
+
+            /*List<String> lista = new List<string>();
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14VisualizarCruceros();
+            Dictionary<int, Entidad> listaCruceros = comando.ejecutar();
+            foreach (var crucero in listaCruceros)
+            {
+                    BOReserva.DataAccess.Domain.Crucero c = (BOReserva.DataAccess.Domain.Crucero)crucero.Value;
+                    lista.Add(c._nombreCrucero);
+            }*/
         }
 
         [HttpPost]
@@ -304,6 +314,30 @@ namespace BOReserva.Controllers
             List<CConsultar> listVuelos = new List<CConsultar>();
             listVuelos = sql.listarVuelosM11();
             return Json(listVuelos);
+
+            //Código nuevo para la segunda entrega
+            /*List<String> lista = new List<String>();
+            List<CConsultar> listVuelos2 = new List<CConsultar>();
+            CConsultar consulta = new CConsultar();
+            List<Entidad> listaVuelos;
+            Command<List<Entidad>> comando = FabricaComando.ConsultarM04_ConsultarTodos();
+            listaVuelos = comando.ejecutar();
+            foreach (Entidad vuelo in listaVuelos)
+            {
+                Vuelo v = (Vuelo)vuelo;
+                Ruta ruta = v.getRuta;
+                String origen = ruta.origenRuta;
+                String destino = ruta.destinoRuta;
+                String origen_destino = origen + "-" + destino;
+                Debug.WriteLine("La ruta es: "+origen_destino);
+                consulta._id = v.IdVuelo;
+                consulta._codigoVuelo = v.CodigoVuelo;
+                consulta._nombreSalida = origen;
+                consulta._nombreLlegada = destino;
+                listVuelos2.Add(consulta);
+               // lista.Add(origen_destino);
+            }
+            return Json(listVuelos2);*/
         }
 
 
