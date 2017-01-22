@@ -19,6 +19,7 @@ using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.DataAccessObject.M09;
 using System.Web.Mvc;
 using BOReserva.Excepciones.M09;
+using BOReserva.DataAccess.Model;
 
 namespace TestUnitReserva.BO.gestion_hoteles
 {
@@ -29,6 +30,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
         private Ciudad mockCiudad;
         private Hotel mockHotel;
         private Hotel mockHotell;
+        private Hotel mock;
 
         private Hotel mockHotel2;
         // DAOHotel daoHotel;
@@ -49,6 +51,8 @@ namespace TestUnitReserva.BO.gestion_hoteles
             mockHotel = new Hotel("HOtel desde preuba unit3", "hotel", "hotel", "hotel", 1, 1, mockCiudad);
             mockHotell = new Hotel(999, "HOtel desde pr", "hotel", "hotel", "hotel", 1, 1, mockCiudad);
             daoHotel = new DAOHotel();
+
+            mock = new Hotel(959, "HOtel", "hotel", "hotel", "prueba", 1, 1, mockCiudad, 0);
 
 
         }
@@ -162,9 +166,25 @@ namespace TestUnitReserva.BO.gestion_hoteles
         [Test]
         public void M09_DaoDisponibilidadHotel()
         {
-            ////////////////   
+
+
+
+            String prueba = daoHotel.disponibilidadHotel(mock, 1);
+            Assert.AreEqual(prueba,"1");
+
         }
-        ///Esta biene ste?????????????????????????????????????????????????????????
+        /// <summary>
+        /// Metodo para verificar la exepcion de disponibilidad
+        /// </summary>
+        [Test]
+        public void M09_DaoDisponibilidadHotelerror()
+        {
+
+
+            Assert.Throws<ReservaExceptionM09>(() => daoHotel.disponibilidadHotel(null, 1));
+
+        }
+
         /// <summary>
         /// Metodo que prueba cada metodo de overload Hotel
         /// </summary>
@@ -380,9 +400,21 @@ namespace TestUnitReserva.BO.gestion_hoteles
             M09_COAgregarHotel prueba = new M09_COAgregarHotel(mockHotell, 200);
 
             String prueba1 = prueba.ejecutar();
+            Assert.AreEqual(prueba1, "Se registro el hotel exitosamente");
             //probar
             M09_COEliminarHotel pruebaf = new M09_COEliminarHotel(mockHotell, 999);
             pruebaf.ejecutar();
+
+        }
+        /// <summary>
+        /// Metodo que verifica Error al Agregar en el controller
+        /// </summary>
+        [Test]
+        public void M09_AgregarHotelerror()
+        {
+            M09_COAgregarHotel prueba = new M09_COAgregarHotel(null, 200);
+            Assert.Throws<ReservaExceptionM09>(() => prueba.ejecutar());
+
 
         }
         /// <summary>
@@ -393,9 +425,21 @@ namespace TestUnitReserva.BO.gestion_hoteles
         {
             M09_COConsultarHotel prueba = new M09_COConsultarHotel(10);
             Entidad hotel = prueba.ejecutar();
-            Assert.AreEqual(hotel, "1");
-            //prueba fallida
+            Assert.IsInstanceOf(typeof(Entidad),hotel);
+
         }
+        /// <summary>
+        /// Metodo que verifica controller consulta de hotel
+        /// </summary>
+        [Test]
+        public void M09_COCOnsultarHotelerror()
+        {
+            M09_COConsultarHotel prueba = new M09_COConsultarHotel(87897987);
+            Assert.Throws<ReservaExceptionM09>(() => prueba.ejecutar());
+
+
+        }
+
         /// <summary>
         /// Metodo que prueba disponiblididad un hotel, instanciando  Patron comando
         /// </summary>
@@ -404,8 +448,21 @@ namespace TestUnitReserva.BO.gestion_hoteles
         {
             M09_CODisponibilidadHotel prueba = new M09_CODisponibilidadHotel(mockHotel, 0);
             String test = prueba.ejecutar();
-            Assert.AreEqual(test, "1");
+            Assert.AreEqual(test, "Se cambio exitosamente la disponibilidad del hotel");
             //fallida
+
+        }
+
+        /// <summary>
+        /// Metodo que prueba disponiblididad un hotel, instanciando  Patron comando
+        /// </summary>
+        [Test]
+        public void M09_CODisponibilidadHotelerror()
+        {
+            M09_CODisponibilidadHotel prueba = new M09_CODisponibilidadHotel(null, 0);
+            Assert.Throws<ReservaExceptionM09>(() => prueba.ejecutar());
+
+
 
         }
         /// <summary>
@@ -417,8 +474,22 @@ namespace TestUnitReserva.BO.gestion_hoteles
             daoHotel.Agregar(mockHotell);
             M09_COEliminarHotel prueba = new M09_COEliminarHotel(mockHotell, 999);
             String test = prueba.ejecutar();
-            Assert.AreEqual(test, "1");
+            Assert.AreEqual(test, "Se elimino exitosamente el hotel");
             ///fallida
+
+
+        }
+
+        /// <summary>
+        /// Metodo que prueba Eliminar un hotel fallido, instanciando  Patron comando
+        /// </summary>
+        [Test]
+        public void M09_COEliminarHotelerror()
+        {
+
+            M09_COEliminarHotel prueba = new M09_COEliminarHotel(null, 999);
+            Assert.Throws<ReservaExceptionM09>(() => prueba.ejecutar());
+
 
 
         }
@@ -428,15 +499,29 @@ namespace TestUnitReserva.BO.gestion_hoteles
         [Test]
         public void M09_COModificarHotel()
         {
-            daoHotel.Agregar(mockHotell);
+
             mockHotel2 = new Hotel(999, "HOtel desde p", "hotel", "hotel", "hotel", 1, 1, mockCiudad);
             M09_COModificarHotel prueba = new M09_COModificarHotel(mockHotel2, 999);
             String nombre = prueba.ejecutar();
-            Assert.AreEqual(nombre, "1");
+            Assert.AreEqual(nombre, "Se modifico el hotel exitosamente, sera redirigido al listado de hoteles");
 
-            M09_COEliminarHotel prueba1 = new M09_COEliminarHotel(mockHotell, 999);
+            M09_COEliminarHotel prueba1 = new M09_COEliminarHotel(mockHotel2, 999);
             prueba1.ejecutar();
         }
+
+        /// <summary>
+        /// Metodo que prueba Modificar un hotel fallida, instanciando  Patron comando
+        /// </summary>
+        [Test]
+        public void M09_COModificarHotelerror()
+        {
+
+
+            M09_COModificarHotel prueba = new M09_COModificarHotel(null, 999);
+            Assert.Throws<ReservaExceptionM09>(() => prueba.ejecutar());
+        }
+
+
         //Faltaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
         /// <summary>
         /// Metodo que Obtiene la lista de paises
@@ -446,6 +531,8 @@ namespace TestUnitReserva.BO.gestion_hoteles
         {
             M09_COObtenerPaises prueba = new M09_COObtenerPaises();
             Dictionary<int, Entidad> prueb1 = prueba.ejecutar();
+            Assert.NotNull(prueb1);
+            Assert.IsInstanceOf(typeof(Dictionary<int, Entidad>), prueb1);
 
         }
         /// <summary>
@@ -456,7 +543,8 @@ namespace TestUnitReserva.BO.gestion_hoteles
         {
             M09_COVisualizarHoteles prueba = new M09_COVisualizarHoteles();
             Dictionary<int, Entidad> mapHoteles = prueba.ejecutar();
-            //// dalta
+            Assert.NotNull(mapHoteles);
+            Assert.IsInstanceOf(typeof(Dictionary<int, Entidad>), mapHoteles);
 
         }
         //controller 
@@ -520,12 +608,15 @@ namespace TestUnitReserva.BO.gestion_hoteles
             prueba.deleteHotel(999);
         }
         /// <summary>
-        /// Método que verifica si se retorna un Result de la lista de paises
+        /// Método que verifica si se retorna una lista de paises
         /// </summary>
         [Test]
         public void pais()
         {
-            // List<SelectListItem> pais()
+
+            List<SelectListItem> hola = BOReserva.Controllers.gestion_hotelesController.pais();
+            Assert.NotNull(hola);
+            Assert.IsInstanceOf(typeof(List<SelectListItem>), hola);
         }
 
         /// <summary>
@@ -631,21 +722,46 @@ namespace TestUnitReserva.BO.gestion_hoteles
             //   IDAOHabitacion dao = FabricaDAO.instanciarDaoHabitacion();
 
         }
-        ///Servico
-
+        //Cache
         /// <summary>
-        /// Método de verificacion del manejador SQL
+        /// Metodo que verifica si se retorna  el ID del hotel
         /// </summary>
+
         [Test]
-        public void CManejadorSQL_Hoteles()
+        public void retornarHotelPorId()
         {
-            CManejadorSQL_Hoteles prueba = new CManejadorSQL_Hoteles();
-
-
-
-
+            Entidad Reserva = BOReserva.DataAccess.Model.Cache.retornarHotelPorId(1);
+            Assert.AreEqual(Reserva._id, 1);
         }
 
+        /// <summary>
+        /// Metodo que verifica si al dar un id erroneo entre en el catch 
+        /// </summary>
+        [Test]
+        public void retornarHotelPorIderror()
+        {
+            Entidad Reserva = BOReserva.DataAccess.Model.Cache.retornarHotelPorId(999999);
+            Assert.IsNull(Reserva._id);
+        }
+        /// <summary>
+        /// metodo que verifica si un hotel realmente esta en cache
+        /// </summary>
+        [Test]
+        public void estaEnCache()
+        {
+            Boolean Reserva = BOReserva.DataAccess.Model.Cache.estaEnCache(1);
+            Assert.AreEqual(Reserva, true);
+        }
+        /// <summary>
+        /// Metodo que verifica si al colocar un id no existente lo agarre el catch
+        /// 
+        /// </summary>
+        [Test]
+        public void estaEnCacheerror()
+        {
+            Boolean Reserva = BOReserva.DataAccess.Model.Cache.estaEnCache(9999991);
+            Assert.AreEqual(Reserva, false);
+        }
 
 
         /* 
