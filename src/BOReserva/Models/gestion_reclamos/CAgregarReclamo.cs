@@ -15,5 +15,6 @@ namespace BOReserva.Models.gestion_reclamos
         public String _fechaReclamo { get; set; }
         public int _estadoReclamo { get; set; }
         public int _usuario { get; set; }
+        public int _editable { get; set; }
     }
 }

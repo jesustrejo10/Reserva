@@ -9,7 +9,7 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando.M08
 {
-    public class M08_COListarAutomovil : Command<String>
+    public class M08_COListarAutomovil : Command<List<Entidad>>
     {
         
         #region Atributos
@@ -29,9 +29,12 @@ namespace BOReserva.Controllers.PatronComando.M08
 
         #region Ejecucion
 
-        public override string ejecutar()
+        public override List<Entidad> ejecutar()
         {
-            throw new NotImplementedException();
+            DAO Dao = FabricaDAO.CrearDaoAutomovil();
+            DAOAutomovil DaoAutomovil = (DAOAutomovil)Dao;
+            return DaoAutomovil.ConsultarTodos();
+
         }
 
         #endregion

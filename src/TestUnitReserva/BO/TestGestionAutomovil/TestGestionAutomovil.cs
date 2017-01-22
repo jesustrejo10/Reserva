@@ -11,7 +11,7 @@ using BOReserva.Servicio;
 using BOReserva.Controllers;
 using System.Web;
 using System.Web.Mvc;
-
+using BOReserva.DataAccess.Domain;
 
 namespace TestUnitReserva.BO.TestGestionAutomovil
 {
@@ -21,7 +21,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
     [TestFixture]
     public class TestGestionAutomovil
     {
-
+        /*
         //DAOAutomovil daoAutomovil;
         manejadorSQL _manejadorSql;
         Automovil _automovil;
@@ -560,5 +560,6 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
             ActionResult probarjsonresult = _controlador.listaciudades("Venezuela");
             Assert.IsInstanceOf(typeof(ActionResult), probarjsonresult);
         }
+        */
     }
 }﻿

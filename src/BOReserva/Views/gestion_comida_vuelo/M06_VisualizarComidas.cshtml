@@ -1,7 +1,7 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Lista de Platos</h3>
+                <h3 class="box-title">Lista de Platossss</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -12,7 +12,8 @@
                             <th>Tipo</th>
                             <th>Estatus</th>
                             <th>Descripcion</th>
-                            <th>Opciones</th>
+                            <th>Habilitar</th>
+                            <th>Editar</th>  
                         </tr>
                     </thead>
                     <tbody>
@@ -21,30 +22,32 @@
                             foreach (var item in Model)
                             {
                                 String estatus;
-                                if (item._estatusPlato == 1) { estatus = "Disponible"; } else { estatus = "No disponible"; }
+                                if (item._estatus == 1) { estatus = "Disponible"; } else { estatus = "No disponible"; }
                                 
                                 <tr id="@item._id">
-                                    <td>@item._nombrePlato</td>
-                                    <td>@item._tipoPlato</td>
+                                    <td>@item._nombre</td>
+                                    <td>@item._tipo</td>
                                     <td>@estatus</td>
-                                    <td>@item._descripcionPlato</td>
+                                    <td>@item._descripcion</td>
                                     <td>
                                         @*<a href="#" title="Consultar"> <i class="fa fa-eye consultar"></i></a>*@
                                         @*  <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>*@
                                         @*<a href="#" title="Agregar"><i class="fa fa-plus agregarvuelo"></i></a>*@
                                         @{
                                 
-                                            if (item._estatusPlato == 1)
+                                            if (item._estatus == 1)
                                         {
                                                 
-                                            <a href="#" title="Activar/Desactivar Plato"><i class="fa fa-toggle-on desactivar" ></i></a>
+                                            <a id="@item._id" href="#" title="Activar/Desactivar Plato" class="desactivar"><i class="fa fa-toggle-on" ></i></a>
                                         }
-                                            if (item._estatusPlato == 0)
+                                            if (item._estatus == 0)
                                         {
-                                            <a href="#" title="Activar/Desactivar Plato"><i class="fa fa-toggle-off activar"></i></a>
+                                            <a id="@item._id" href="#" title="Activar/Desactivar Plato" class="activar"><i class="fa fa-toggle-off"></i></a>
                                         }
                                         }
                                     </td>
+                                    <td><a class="editar" onclick="editar(@item._id)" style="cursor:pointer; color:#000000"><i class="fa fa-pencil-square-o"></i></a></td>
+
                                 </tr>
                             }
                         }
@@ -82,7 +85,7 @@
     $(document).ready(function () {
         //e.preventDefault();
         table = $('#example1').DataTable();
-            
+
 
         $(".clasedeprueba").on("click", (function () {
 
@@ -103,9 +106,10 @@
         }));
     });
 
-    $(".desactivar").click(function () {
+    $(".desactivar").click(function (e) {
         console.log("desactivando una comida");
-        var identificador = $(this).parent().parent().parent().attr("id");
+        var identificador = $(this).attr("id");
+
         jQuery.ajax({
             type: "POST",
             url: "/gestion_comida_vuelo/deshabilitarPlato",
@@ -135,8 +139,8 @@
 
 
     $(".activar").click(function () {
-        console.log("hola");
-        var identificador = $(this).parent().parent().parent().attr("id");
+        var identificador = $(this).attr("id");
+
         jQuery.ajax({
             type: "POST",
             url: "/gestion_comida_vuelo/habilitarPlato",
@@ -178,13 +182,26 @@
         }).fail(function () {
 
         });
-
-
     });
 
 
+    function editar(identificador) {
+        $("#contenido").empty();
+        jQuery.ajax({
+            type: "GET",
+            url: "/gestion_comida_vuelo/M06_EditarPlato",
+            data: { id: identificador }
+        }).done(function (data) {
+            $("#contenido").empty();
+            $("#contenido").append(data);
+        }).fail(function () {
+
+        });
+    }
+
+
     $(".nodisponible").click(function () {
-        console.log("hola");
+
         var identificador = $(this).parent().parent().parent().attr("id");
         jQuery.ajax({
             type: "POST",

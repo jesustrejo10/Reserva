@@ -17,14 +17,17 @@ namespace BOReserva.Controllers.PatronComando
     {
         Hotel _hotel;
 
-        public M09_COAgregarHotel(Hotel hotel ) { 
+        public M09_COAgregarHotel(Hotel hotel) { 
             this._hotel =hotel;
         }
 
         public override String ejecutar(){
             IDAO daoHotel = FabricaDAO.instanciarDaoHotel();       
-            int test = daoHotel.Agregar(_hotel);
-            return test.ToString();
+            int resultadoAgregarHotel = daoHotel.Agregar(_hotel);
+            if (resultadoAgregarHotel == 1) { 
+                //agrego las habitaciones.
+            }
+            return resultadoAgregarHotel.ToString();
         }
 
     }

@@ -95,7 +95,101 @@ namespace BOReserva.DataAccess.DataAccessObject.M06 {
                 return ResourceManager.GetString("com_tipo", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to @com_vue_id.
+        /// </summary>
+        internal static string com_vue_id
+        {
+            get
+            {
+                return ResourceManager.GetString("com_vue_id", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Looks up a localized string similar to @com_vue_id.
+        /// </summary>
+        internal static string com_id
+        {
+            get
+            {
+                return ResourceManager.GetString("com_id", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Looks up a localized string similar to @com_vue_id.
+        /// </summary>
+        internal static string com_id_consultar
+        {
+            get
+            {
+                return ResourceManager.GetString("com_id_consultar", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to @vue_codigo.
+        /// </summary>
+        internal static string vue_codigo
+        {
+            get
+            {
+                return ResourceManager.GetString("vue_codigo", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to @com_vue_cantidad.
+        /// </summary>
+        internal static string com_vue_cantidad
+        {
+            get
+            {
+                return ResourceManager.GetString("com_vue_cantidad", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to @com_nombre_consultar.
+        /// </summary>
+        internal static string com_nombre_consultar
+        {
+            get
+            {
+                return ResourceManager.GetString("com_nombre_consultar", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Looks up a localized string similar to @com_tipo_consultar.
+        /// </summary>
+        internal static string com_tipo_consultar
+        {
+            get
+            {
+                return ResourceManager.GetString("com_tipo_consultar", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Looks up a localized string similar to @com_estatus_consultar.
+        /// </summary>
+        internal static string com_estatus_consultar
+        {
+            get
+            {
+                return ResourceManager.GetString("com_estatus_consultar", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Looks up a localized string similar to @com_descripcion_consultar.
+        /// </summary>
+        internal static string com_descripcion_consultar
+        {
+            get
+            {
+                return ResourceManager.GetString("com_descripcion_consultar", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to M06_AgregarComida.
         /// </summary>
@@ -104,5 +198,71 @@ namespace BOReserva.DataAccess.DataAccessObject.M06 {
                 return ResourceManager.GetString("procedimientoAgregarComida", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to M06_AgregarComidaVuelo.
+        /// </summary>
+        internal static string procedimientoAgregarComidaVuelo
+        {
+            get
+            {
+                return ResourceManager.GetString("procedimientoAgregarComidaVuelo", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to M06_ConsultarComidas.
+        /// </summary>
+        internal static string procedimientoConsultarComidas{
+            get
+            {
+                return ResourceManager.GetString("procedimientoConsultarComidas", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to M06_ConsultarComidas.
+        /// </summary>
+        internal static string procedimientoEditarComida
+        {
+            get
+            {
+                return ResourceManager.GetString("procedimientoEditarComida", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to M06_ConsultarComidas.
+        /// </summary>
+        internal static string procedimientoConsultarDatosComida
+        {
+            get
+            {
+                return ResourceManager.GetString("procedimientoConsultarDatosComida", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to M06_ConsultarComidas.
+        /// </summary>
+        internal static string procedimientoCambiarEstatusComida
+        {
+            get
+            {
+                return ResourceManager.GetString("procedimientoCambiarEstatusComida", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to M06_ConsultarComidasVuelos.
+        /// </summary>
+        internal static string procedimientoConsultarComidasVuelos
+        {
+            get
+            {
+                return ResourceManager.GetString("procedimientoConsultarComidasVuelos", resourceCulture);
+            }
+        }
+
     }
 }

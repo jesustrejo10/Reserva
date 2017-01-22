@@ -42,6 +42,7 @@ namespace FOReserva.Servicio
             }
             CloseConnection();
         }
+
         public void ValidacionRegistroCliente(Ccliente cliente)
         {
             try

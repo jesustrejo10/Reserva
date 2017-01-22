@@ -28,11 +28,11 @@ namespace BOReserva.DataAccess.Domain
         public int _clasificacion { get; set; }
         public int _capacidad { get; set; }
         public Boolean _disponibilidad { get; set; }
+        public int _precio { get; set; }
         /// <summary>
         /// Constructor Vacio utilizado mientras se le da forma al proyecto
         /// </summary>
-        public Hotel()
-        {
+        public Hotel() {
         }
         public Hotel(int id, String nombre, String direccion, String email, String paginaWeb, int clasificacion, int capacidad, Ciudad ciudad)
         {
@@ -59,6 +59,20 @@ namespace BOReserva.DataAccess.Domain
 
         }
 
+        public Hotel(String nombre, String direccion, String email, String paginaWeb, int clasificacion, int capacidad, Ciudad ciudad, int precio)
+        {
+            this._nombre = nombre;
+            this._direccion = direccion;
+            this._email = email;
+            this._paginaWeb = paginaWeb;
+            this._clasificacion = clasificacion;
+            this._capacidad = capacidad;
+            this._ciudad = ciudad;
+            this._disponibilidad = true;
+
+        }
+
+
         public Hotel(int idhotel, String nombre, String direccion, String email, String paginaWeb, int clasificacion, int capacidad, Ciudad ciudad, int disponibilidad)
         {
             this._id = idhotel;
@@ -69,8 +83,7 @@ namespace BOReserva.DataAccess.Domain
             this._clasificacion = clasificacion;
             this._capacidad = capacidad;
             this._ciudad = ciudad;
-            if (disponibilidad == 1)
-            {
+            if (disponibilidad == 1){
                 this._disponibilidad = true;
             }
             else
