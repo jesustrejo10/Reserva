@@ -383,5 +383,23 @@ namespace BOReserva.DataAccess.Domain
 
         #endregion
 
+        #region M03_Ruta
+        /// <summary>
+        /// Se crea una instancia de la clase Ruta con todos sus atributos
+        /// </summary>
+        /// <param name="_idRuta"></param>
+        /// <param name="_distancia"></param>
+        /// <param name="_status"></param>
+        /// <param name="_tipo"></param>
+        /// <param name="_origenRuta"></param>
+        /// <param name="_destinoRuta"></param>
+        /// <returns>Retorna una instancia de la clase ruta con todos sus atributos</returns>
+        public static Entidad InstanciarRuta(int _idRuta, int _distancia, String _status, String _tipo,
+                                          String _origenRuta, String _destinoRuta)
+        {
+            return new Ruta(_idRuta, _distancia, _status, _tipo, _origenRuta, _destinoRuta);
+        }
+
+
     }
 }
