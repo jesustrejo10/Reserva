@@ -59,18 +59,51 @@ namespace BOReserva.Controllers
             }
         }
 
+
+
+
+
         public ActionResult M24_AgregarItinerario()
         {
-            ConexionBD cbd = new ConexionBD();
-            VistaListaCrucero vlc = new VistaListaCrucero();
-            VistaListaRuta vlr = new VistaListaRuta();
-            CGestion_itinerario itinerario = new CGestion_itinerario() { itinerarios = new List<CGestion_itinerario>() };            
-            vlc.cruceros = cbd.listarCruceros();
-            vlr.rutas = cbd.listarRutas();
-            ViewBag.ShowDropDown = new SelectList(vlc.cruceros, "_idCrucero", "_nombreCrucero");
-            ViewBag.ShowDropDown2 = new SelectList(vlr.rutas, "_idRuta", "_rutaCrucero");
-            return PartialView("M24_AgregarItinerario", itinerario);            
+            CGestion_itinerario itinerario = new CGestion_itinerario();
+            List<String> lista = new List<string>();
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14VisualizarCruceros();
+            Dictionary<int, Entidad> listaCruceros = comando.ejecutar();
+
+            try
+            {
+                foreach (var crucero in listaCruceros)
+                {
+                    BOReserva.DataAccess.Domain.Crucero c = (BOReserva.DataAccess.Domain.Crucero)crucero.Value;
+                    lista.Add(c._nombreCrucero);
+                }
+                itinerario._listaCruceros = lista.Select(x => new SelectListItem
+                {
+                    Value = x,
+                    Text = x
+                });
+
+
+
+
+
+
+                return PartialView(itinerario);
+            }
+            catch (SqlException e)
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error, no se pudo conectar con la base de datos";
+                //Retorno el error
+                return PartialView(error);
+            } 
         }
+
+
+
+
 
         /// <summary>
         /// Método de la vista parcial M24_AgregarCamarote
@@ -152,9 +185,61 @@ namespace BOReserva.Controllers
                 //Retorno el error
                 return Json(error);
             }
+        }
+
+
+
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult cargarRutasO(string crucero)
+        {
+            CGestion_itinerario itinerario = new CGestion_itinerario();            
+            List<String> lista = new List<string>();
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14VisualizarRutasCrucero();
+            Dictionary<int, Entidad> listaRutas = comando.ejecutar();
+
+            try
+            {
+                foreach (var ruta in listaRutas)
+                {
+                    BOReserva.DataAccess.Domain.Ruta c = (BOReserva.DataAccess.Domain.Ruta)ruta.Value;                    
+                    lista.Add(c._origenRuta);
+                }                
+                itinerario._listaDestino = lista.Select(x => new SelectListItem
+                {
+                    Value = x,
+                    Text = x
+                });
+                if (lista != null)
+                {
+                    return (Json(itinerario._listaOrigen, JsonRequestBehavior.AllowGet));
+                }
+                else
+                {
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    String error = "Error accediendo a la BD";
+                    return Json(error);
+                }
+
+            }
+            catch (SqlException e)
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error, no se pudo conectar con la base de datos";
+                //Retorno el error
+                return Json(error);
+            }
 
 
         }
+
+
+
+
+
+
+
 
 
         public JsonResult M24_ListarCamarotes(int id)

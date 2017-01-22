@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BOReserva.DataAccess.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,7 @@ namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
 {
     interface IDAOItinerario : IDAO
     {
+        Dictionary<int, Entidad> ConsultarRutasCrucero();
+
     }
 }

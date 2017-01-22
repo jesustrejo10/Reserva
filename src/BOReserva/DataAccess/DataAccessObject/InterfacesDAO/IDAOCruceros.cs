@@ -11,5 +11,6 @@ namespace BOReserva.DataAccess.DAO
     interface IDAOCruceros : IDAO
     {
         bool ValidarCrucero(String nombre);
+
     }
 }

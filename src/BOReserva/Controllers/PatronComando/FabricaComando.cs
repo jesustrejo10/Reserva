@@ -360,6 +360,17 @@ namespace BOReserva.Controllers.PatronComando
             return new M14_COListarCabinaCrucero(crucero);
         }
 
+
+
+        public static Command<Dictionary<int, Entidad>> crearM14VisualizarRutasCrucero()
+        {
+
+            return new M14_COListarRutasCrucero();
+        }
+
+
+
+
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
         /// M14_COVisualizarCabinas

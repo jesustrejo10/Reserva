@@ -52,6 +52,27 @@ $("#crucero").change(function () {
 });
 
 
+//Función para cascade dropdown de camarote
+$("#cruceroR").change(function () {
+    var cID = $(crucero).val();
+    $.getJSON("gestion_cruceros/cargarRutasO", { crucero: cID },
+           function (data) {
+               var select = $("#ruta");
+               select.empty();
+               select.append($('<option/>', {
+                   value: 0,
+                   text: "Seleccione una ruta"
+               }));
+               $.each(data, function (index, itemData) {
+                   select.append($('<option/>', {
+                       value: itemData.Value,
+                       text: itemData.Text
+                   }));
+               });
+           });
+});
+
+
 
 
 //Funcion para cargar cb de cabinas
