@@ -538,10 +538,8 @@ namespace BOReserva.DataAccess.Domain
             return new Usuario();
         }
 
-        public static Entidad InstanciarUsuario(CAgregarUsuario model, Entidad r)
+        public static Entidad InstanciarUsuario(CAgregarUsuario model, int idRol)
         {
-            Rol rol = (Rol)r;
-
             string nombre = model._nombre;
             string apellido = model._apellido;
             string correo = model._correo;
@@ -549,13 +547,11 @@ namespace BOReserva.DataAccess.Domain
             DateTime fechaCreacion = model._fechaCreacion;
             string activo = model._activo;
 
-            return new Usuario(nombre, apellido, correo, contrasena, rol, fechaCreacion, activo);
+            return new Usuario(nombre, apellido, correo, contrasena, idRol, fechaCreacion, activo);
         }
 
-        public static Entidad InstanciarUsuario(CModificarUsuario model, Entidad r)
+        public static Entidad InstanciarUsuario(CModificarUsuario model, int idRol)
         {
-            Rol rol = (Rol)r;
-
             string nombre = model._nombre;
             string apellido = model._apellido;
             string correo = model._correo;
@@ -563,7 +559,7 @@ namespace BOReserva.DataAccess.Domain
             DateTime fechaCreacion = model._fechaCreacion;
             string activo = model._activo;
 
-            return new Usuario(nombre, apellido, correo, contrasena, rol, fechaCreacion, activo);
+            return new Usuario(nombre, apellido, correo, contrasena, idRol, fechaCreacion, activo);
         }
 
         public static Entidad InstanciarRol(int rol)

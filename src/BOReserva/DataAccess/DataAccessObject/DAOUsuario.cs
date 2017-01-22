@@ -27,7 +27,7 @@ namespace BOReserva.DataAccess.DataAccessObject
 
                 usuario.fechaCreacionf = DateTime.Now;
 
-                String sql = "INSERT INTO Usuario VALUES ('" + usuario.nombre + "','" + usuario.apellido + "','" + usuario.correo + "','" + usuario.contrasena + "',1,'" + usuario.fechaCreacionf.ToString("yyyy-MM-dd") + "','" + usuario.activo + "')";
+                String sql = "INSERT INTO Usuario VALUES ('" + usuario.nombre + "','" + usuario.apellido + "','" + usuario.correo + "','" + usuario.contrasena + "','"+ usuario.rol +"','" + usuario.fechaCreacionf.ToString("yyyy-MM-dd") + "','" + usuario.activo + "')";
                 
                 Debug.WriteLine(sql);
                 SqlCommand cmd = new SqlCommand(sql, conexion);
@@ -135,7 +135,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             {
                 conexion.Open();
                 String sql = "UPDATE Usuario " +
-                                "SET usu_nombre = '"+ usuario.nombre +"', usu_apellido = '"+ usuario.apellido +"', usu_correo = '"+ usuario.correo +"', usu_contraseña = '"+ usuario.contrasena +"', usu_fk_rol = "+ usuario.rolr._id +", usu_activo = '"+ usuario.activo+"' where usu_id = "+ usuario._id;
+                                "SET usu_nombre = '"+ usuario.nombre +"', usu_apellido = '"+ usuario.apellido +"', usu_correo = '"+ usuario.correo +"', usu_contraseña = '"+ usuario.contrasena +"', usu_fk_rol = "+ usuario.rol +", usu_activo = '"+ usuario.activo+"' where usu_id = "+ usuario._id;
                 SqlCommand cmd = new SqlCommand(sql, conexion);
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
