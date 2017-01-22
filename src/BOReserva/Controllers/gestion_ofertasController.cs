@@ -99,10 +99,30 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult M11_ListarRestaurantes()
         {
-            manejadorSQL sql = new manejadorSQL();
-            var restauranteList = new List<CRestauranteModelo>();
+            //manejadorSQL sql = new manejadorSQL();
+            //var restauranteList = new List<CRestauranteModelo>();
            // restauranteList = sql.consultarRestaurante();
-            return Json(restauranteList);
+            //Metodos para M11 Probados 
+            Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, FabricaComando.comandoRestaurant.LISTAR_RESTAURANT, null);
+            List <Entidad> restaurantes = comando.ejecutar();
+            //return Json(restauranteList);
+            /*List<CRestauranteModelo> lista = FabricaEntidad.crearListaRestarant();
+            CRestauranteModelo rest;
+            foreach (Entidad re in restaurantes)
+            {
+                rest = (CRestauranteModelo)re;
+                lista.Add(rest);
+
+            }*/
+            CRestauranteModelo Restaurant = FabricaEntidad.crearRestaurant();
+            List<CRestauranteModelo> lista = FabricaEntidad.crearListaRestarant();
+
+            foreach (Entidad item in restaurantes)
+            {
+                lista.Add((CRestauranteModelo)item);
+            }
+
+            return Json(lista);
         }
 
         public ActionResult M11_ModificarPaquete(String paqueteIdStr)
