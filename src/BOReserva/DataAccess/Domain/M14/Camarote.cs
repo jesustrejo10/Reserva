@@ -15,7 +15,7 @@ namespace BOReserva.DataAccess.Domain.M14
         public int _fkCabina;
         public String _nombrecabina { get; set; }
 
-        public Camarote(int id,int cantidadcama, string tipocama, String estatus, int cabina)
+        public Camarote(int id,int cantidadcama, String tipocama, String estatus, int cabina)
         {
             _id = id;
             _cantidadCama= cantidadcama;
