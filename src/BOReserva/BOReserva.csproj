@@ -217,6 +217,7 @@
     <Compile Include="Controllers\PatronComando\M04\M04_COModificarVuelo.cs" />
     <Compile Include="Controllers\PatronComando\M04\M04_COLugarOrigen.cs" />
     <Compile Include="Controllers\PatronComando\M04\M04_COBuscarAvionRuta.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COConsultarListaVuelo.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COConsultarBoletosVuelo.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COConsultarBoletoBD.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COConsultarBoletosPasajero.cs" />
