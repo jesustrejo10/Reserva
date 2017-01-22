@@ -13,11 +13,13 @@ namespace FOReserva.DataAccess.Domain
         public String _cant_dias { get; set; }
         public String _fk_habitacion { get; set; }
         public String _fk_usuario { get; set; }
-        public String _id { get; set; }
+        public new String _id { get; set; }
         public int _idR { get; set; }
         public String _lugar { get; set; }
         public String _hotel { get; set; }
+        public int _id_hotel { get; set; }
         public int _cantidad { get; set; }
+        public int _id_usuario { get; set; }
 
         public ReservaHabitacion() { }
 
@@ -58,6 +60,31 @@ namespace FOReserva.DataAccess.Domain
             this._lugar = nombre_lugar;
             this._hotel = nombre_hotel;
             this._cantidad = cant_habitaciones;
+        }
+
+        public ReservaHabitacion(int idlugar,String lugar) 
+        {
+            this._idR = idlugar;
+            this._lugar = lugar;
+        }
+
+        public ReservaHabitacion(int cant_dias, String fecha_llegada, int hotel, int usuario )
+        {
+            this._cantidad = cant_dias;
+            this._fecha_llegada = fecha_llegada;
+            this._id_hotel = hotel;
+            this._id_usuario = usuario;
+
+        }
+
+        public ReservaHabitacion(String cant_dias, String fecha_reserva, String fecha_llegada, String estado, String name)
+        {
+            this._cant_dias = cant_dias; 
+            this._fecha_reserva = fecha_reserva;
+            this._fecha_llegada = fecha_llegada;
+            this._estado = estado;            
+            this._fk_habitacion = name;
+
         }
 
     }

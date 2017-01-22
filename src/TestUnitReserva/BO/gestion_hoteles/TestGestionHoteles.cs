@@ -426,7 +426,6 @@ namespace TestUnitReserva.BO.gestion_hoteles
 
         /* 
 controller
-
         IM09_COObtenerPaises
         M09_COAgregarHabitaciones
         M09_COAgregarHotel
@@ -436,7 +435,6 @@ controller
         M09_COModificarHotel
         M09_COObtenerCiudad
         M09_COObtenerPaises
-
 dataAccess
 	DataAccessObject
 		M09 
