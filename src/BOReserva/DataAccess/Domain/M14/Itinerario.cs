@@ -9,17 +9,19 @@ namespace BOReserva.DataAccess.Domain.M14
     {
         public Itinerario() { }        
 
-        public String _nombreCabina { get; set; }
-        public float _precioCabina { get; set; }
+        public DateTime _FechaInicio { get; set; }
+        public DateTime _FechaFin { get; set; }
         public String _estatus { get; set; }        
-        public int _fkCrucero { get; set; }
+        public String _Crucero { get; set; }
+        public String _Ruta { get; set; }
 
-        public Itinerario(int id,String nombre, float precio, String estatus, int crucero)
+        public Itinerario(int id,DateTime fechainicio, DateTime fechafin, String estatus, String ruta, String crucero)
         {
-            _nombreCabina = nombre;
-            _precioCabina = precio;
+            _FechaInicio = fechainicio;
+            _FechaFin = fechafin;
             _estatus = estatus;
-            _fkCrucero = crucero;
+            _Crucero = crucero;
+            _Ruta = ruta;
             _id = id;
         }
     }

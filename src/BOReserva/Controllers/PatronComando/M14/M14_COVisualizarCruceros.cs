@@ -25,6 +25,6 @@ namespace BOReserva.Controllers.PatronComando
             Dictionary<int, Entidad> mapCruceros = daoCrucero.ConsultarTodos();
             return mapCruceros;
         }
-
+        
     }
 }

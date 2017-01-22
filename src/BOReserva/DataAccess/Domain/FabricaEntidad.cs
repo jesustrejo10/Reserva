@@ -4,12 +4,12 @@ using BOReserva.Models.gestion_hoteles;
 using BOReserva.Models.gestion_reclamos;
 using BOReserva.Models.gestion_restaurantes;
 using BOReserva.Models.gestion_roles;
-using BOReserva.DataAccess.Domain.M06;
+//using BOReserva.DataAccess.Domain.M06;
+using BOReserva.Models.gestion_aviones;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using BOReserva.DataAccess.Domain.M14;
 
 
 
@@ -62,12 +62,29 @@ namespace BOReserva.DataAccess.Domain
         #endregion
 
         #region M09_Gestion_Hoteles_Por_Ciudad
+        /// <summary>
+        /// Clase que retorna la instacia de un hotel
+        /// </summary>
+        /// <param name="nombre">Nombre del hotel</param>
+        /// <param name="direccion">Direccion del hotel</param>
+        /// <param name="fkCiudad">Ciudad donde esta el hotel</param>
+        /// <param name="clasificacion">Clasificacion del hotel</param>
+        /// <param name="webPage">Pagina web del hotel</param>
+        /// <param name="email">Email del hotel</param>
+        /// <param name="capacidad">Capacidad del hotel</param>
+        /// <returns>Retorna una entidad</returns>
         public static Entidad InstanciarHotel(String nombre, String direccion, int fkCiudad, int clasificacion, String webPage, String email, int capacidad)
         {
 
             return new Hotel();
         }
 
+        /// <summary>
+        /// Clase que instacia un hotel
+        /// </summary>
+        /// <param name="model">Modelo proveniente de la vista M09_AgregarHotel</param>
+        /// <param name="c">Ciudad donde esta el hotel</param>
+        /// <returns></returns>
         public static Entidad InstanciarHotel(CAgregarHotel model, Entidad c)
         {
             Ciudad city = (Ciudad)c;
@@ -82,6 +99,12 @@ namespace BOReserva.DataAccess.Domain
             return new Hotel(nombre, direccion, email, paginaWeb, clasificacion, capacidad, city,precio);
         }
 
+        /// <summary>
+        /// Clase que instacia un hotel
+        /// </summary>
+        /// <param name="model">Modelo proveniente de la vista M09_ModificarHotel</param>
+        /// <param name="c">Ciudad donde esta el hotel</param>
+        /// <returns></returns>
         public static Entidad InstanciarHotel(CModificarHotel model, Entidad c)
         {
             Ciudad city = (Ciudad)c;
@@ -92,29 +115,59 @@ namespace BOReserva.DataAccess.Domain
             int capacidad = model._capacidadHabitacion;
             String paginaWeb = model._paginaWeb;
             String email = model._email;
-
-            return new Hotel(nombre, direccion, email, paginaWeb, clasificacion, capacidad, city);
+            int precio = model._precioHabitacion;
+            return new Hotel(nombre, direccion, email, paginaWeb, clasificacion, capacidad, city, precio);
         }
 
+        /// <summary>
+        /// Clase que instancia un pais
+        /// </summary>
+        /// <param name="nombre">Nombre del pais</param>
+        /// <returns></returns>
         public static Entidad InstanciarPais(String nombre)
         {
             return new Pais();
         }
+
+        /// <summary>
+        /// Clase que instancia un pais
+        /// </summary>
+        /// <param name="id">Id del pais</param>
+        /// <param name="nombre">Nombre del pais</param>
+        /// <returns></returns>
         public static Entidad InstanciarPais(int id, String nombre)
         {
             return new Pais(id, nombre);
         }
 
+        /// <summary>
+        /// Clase que instancia una ciudad
+        /// </summary>
+        /// <param name="ciudad">Nombre de la ciudad</param>
+        /// <returns></returns>
         public static Entidad InstanciarCiudad(String ciudad)
         {
             return new Ciudad();
         }
 
+        /// <summary>
+        /// Clase que instancia una ciudad
+        /// </summary>
+        /// <param name="id">Id de la ciudad</param>
+        /// <param name="nombre">Nombre de la ciudad</param>
+        /// <param name="fkPais">Pais al cual pertenece</param>
+        /// <returns></returns>
         public static Entidad InstanciarCiudad(int id, String nombre, int fkPais)
         {
             return new Ciudad(id,nombre,fkPais);
         }
 
+        /// <summary>
+        /// Clase que instancia una habitacion
+        /// </summary>
+        /// <param name="precio">Precio de la habitacion</param>
+        /// <param name="fkHotel">Hotel al cual pertenece</param>
+        /// <returns></returns>
         public static Entidad InstanciarHabitacion(int precio, int fkHotel)
         {
             return new Habitacion( precio, fkHotel);
@@ -237,7 +290,8 @@ namespace BOReserva.DataAccess.Domain
         #endregion
 
         #region M08_Automoviles
-        public static Entidad InstanciarAutomovil(String matricula, String modelo, String fabricante, String anio, String tipovehiculo,
+
+        public static Entidad CrearAutomovil(String matricula, String modelo, String fabricante, String anio, String tipovehiculo,
                                                   String kilometraje, String cantpasajeros, String preciocompra, String precioalquiler,
                                                   String penalidaddiaria, String fecharegistro, String color, String disponibilidad,
                                                   String transmision, String pais, String ciudad, String fk_ciudad)
@@ -247,6 +301,7 @@ namespace BOReserva.DataAccess.Domain
                                   penalidaddiaria, fecharegistro, color, disponibilidad,
                                   transmision, pais, ciudad, fk_ciudad);
         }
+
         #endregion
 
         #region Modulo 10
@@ -341,6 +396,54 @@ namespace BOReserva.DataAccess.Domain
             return new Permiso(id, nombre);
         }
 
+        #region M02_Gestion_Avion
+
+        public static Entidad InstanciarAvion(int id, string matricula, string modelo, int capacidadTurista, int capacidadEjecutiva, int capacidadVIP, float capacidadEquipaje, float distanciaMaximaVuelo, float velocidadMaxima, float capacidadCombustible, int disponibilidad)
+            {
+           
+            return new Avion();
+        }
+
+        public static Entidad InstanciarAvion(CAgregarAvion model)
+        {
+
+         
+            string matricula = model._matriculaAvion;
+            string modelo = model._modeloAvion;
+            int capacidadturistica = model._capacidadPasajerosTurista;
+            int capacidadEjecutiva = model._capacidadPasajerosEjecutiva;
+            int capacidadVIP = model._capacidadPasajerosVIP;
+            float capacidadEquipaje = model._capacidadEquipaje;
+            float distanciaMaximaVuelo = model._distanciaMaximaVuelo;
+            float velocidadMaxima = model._velocidadMaximaDeVuelo;
+            float capacidadCombustible = model._capacidadMaximaCombustible;
+            int disponibilidad = model._disponibilidad;
+
+
+
+            return new Avion(matricula, modelo, capacidadturistica, capacidadEjecutiva, capacidadVIP, capacidadEquipaje, distanciaMaximaVuelo, velocidadMaxima, capacidadCombustible,disponibilidad);
+        }
+
+        public static Entidad InstanciarAvion(CModificarAvion model)
+        {
+
+            string matricula = model._matriculaAvion;
+            string modelo = model._modeloAvion;
+            int capacidadturistica = model._capacidadPasajerosTurista;
+            int capacidadEjecutiva = model._capacidadPasajerosEjecutiva;
+            int capacidadVIP = model._capacidadPasajerosVIP;
+            float capacidadEquipaje = model._capacidadEquipaje;
+            float distanciaMaximaVuelo = model._distanciaMaximaVuelo;
+            float velocidadMaxima = model._velocidadMaximaDeVuelo;
+            float capacidadCombustible = model._capacidadMaximaCombustible;
+            int disponibilidad = model._disponibilidad;
+
+
+            return new Avion(matricula, modelo, capacidadturistica, capacidadEjecutiva, capacidadVIP, capacidadEquipaje, distanciaMaximaVuelo, velocidadMaxima, capacidadCombustible, disponibilidad);
+       
+        }
+        #endregion
+
         public static Entidad crearModulo(int id, String nombre)
         {
             return new Modulo(id, nombre);
@@ -353,14 +456,29 @@ namespace BOReserva.DataAccess.Domain
             return new Comida(nombre, tipo, estatus, descripcion);
         }
 
+        public static Entidad instanciarComida(int id,string nombre, string tipo, int estatus, string descripcion)
+        {
+            return new Comida(id, nombre, tipo, estatus, descripcion);
+        }
+
         public static Entidad instanciarComida()
         {
             return new Comida();
         }
 
+        public static Entidad instanciarComida(int id)
+        {
+            return new Comida(id);
+        }
+
         public static Entidad instanciarComidaVuelo(int id, string comida, string codigoVuelo, int cantidad)
         {
             return new ComidaVuelo(id, comida, codigoVuelo, cantidad);
+        }
+
+        public static Entidad instanciarComidaVuelo(int id, string comida, int cantidad)
+        {
+            return  new ComidaVuelo(id, comida, cantidad);
         }
 
         #endregion

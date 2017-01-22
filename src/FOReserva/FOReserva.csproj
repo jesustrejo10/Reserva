@@ -381,7 +381,6 @@
     <Compile Include="Servicio\manejadorSQLCrucero.cs" />
     <Compile Include="Servicio\ManejadorSQLDiarios.cs" />
     <Compile Include="Servicio\ManejadorSQLMuestraRevision.cs" />
-    <Compile Include="Servicio\ManejadorSQLRevision.cs" />
     <Compile Include="Servicio\ManejadorSQLException.cs" />
     <Compile Include="Servicio\ManejadorSQLItinerario.cs" />
     <Compile Include="Servicio\ManejadorSQLReservaAutomovil.cs" />
