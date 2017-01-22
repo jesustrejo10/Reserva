@@ -302,6 +302,8 @@
     <Compile Include="Controllers\List.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COVisualizarHoteles.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COAgregarPasajero.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COAgregarCamarote.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarCamarotes.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COConsultarPermisosUsuario.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COListarCabinaCrucero.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarCabinas.cs" />
@@ -312,11 +314,13 @@
     <Compile Include="DataAccess\DataAccessObject\DAOChecking.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOAvion.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCabina.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCamarote.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCheckIn.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOItinerario.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORuta.cs" />
     <Compile Include="DataAccess\DataAccessObject\M03\DAORuta.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCabina.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M14\DAOCamarotes.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCruceros.cs" />
     <Compile Include="Controllers\PatronComando\M10\M10_COListarRestaurantId.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COModificarRol.cs" />
@@ -336,6 +340,7 @@
     <Compile Include="Controllers\PatronComando\M16\M16_COConsultarReclamoDetalle.cs" />
     <Compile Include="Controllers\PatronComando\M16\M16_COActualizarReclamo.cs" />
     <Compile Include="Controllers\PatronComando\M16\M16_COEliminarReclamo.cs" />
+    <Compile Include="Controllers\PatronComando\M16\M16_COModificarReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOAvion.cs" />
     <Compile Include="Controllers\PatronComando\M12\M12_COAgregarUsuario.cs" />
     <Compile Include="Controllers\PatronComando\M12\M12_COConsultarUsuario.cs" />
@@ -391,6 +396,7 @@
     <Compile Include="DataAccess\Domain\BoardingPass.cs" />
     <Compile Include="DataAccess\Domain\BoletoDetalle.cs" />
     <Compile Include="DataAccess\Domain\M14\Cabina.cs" />
+    <Compile Include="DataAccess\Domain\M14\Camarote.cs" />
     <Compile Include="DataAccess\Domain\M14\Crucero.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOBoleto.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPasajero.cs" />
@@ -1724,9 +1730,11 @@
     <Content Include="Views\gestion_comida_vuelo\M06_EditarPlato.cshtml" />
     <Content Include="Views\gestion_cruceros\M24_ListarCabinas.cshtml" />
     <Content Include="Views\gestion_aviones\M02_CrearAvion.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_ListarCamarotes.cshtml" />
     <Content Include="Views\gestion_usuarios\M12_AgregarUsuario2.cshtml" />
     <Content Include="Views\gestion_usuarios\M12_VisualizarUsuarios.cshtml" />
     <Content Include="Views\gestion_usuarios\M12_ModificarUsuario2.cshtml" />
+    <Content Include="Views\gestion_reclamos\M16_AlertaError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_boletos\M05_VisualizarBoletos.cshtml" />
@@ -1912,7 +1920,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:14139/</IISUrl>
+          <IISUrl>http://localhost:2736/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

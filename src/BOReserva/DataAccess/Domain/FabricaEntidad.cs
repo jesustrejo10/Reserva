@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using BOReserva.DataAccess.Domain.M14;
 
 namespace BOReserva.DataAccess.Domain
 {
@@ -184,6 +185,10 @@ namespace BOReserva.DataAccess.Domain
         {
             return new Reclamo(tituloReclamo, detalleReclamo, fechaReclamo, estadoReclamo, usuario);
         }
+        public static Entidad InstanciarReclamo(String tituloReclamo, String detalleReclamo, String fechaReclamo, int estadoReclamo)
+        {
+            return new Reclamo(tituloReclamo, detalleReclamo, fechaReclamo, estadoReclamo);
+        }
 
         public static Entidad InstanciarReclamo(int reclamo , String tituloReclamo, String detalleReclamo, String fechaReclamo, int estadoReclamo, int usuario)
         {
@@ -198,6 +203,17 @@ namespace BOReserva.DataAccess.Domain
             int usuario = model._usuario;
 
             return new Reclamo(titulo, detalle, fecha, estado, usuario);
+        }
+
+        public static Entidad InstanciarReclamo(CModificarReclamo model)
+        {
+            int id = model._idReclamo;
+            String titulo = model._tituloReclamo;
+            String detalle = model._detalleReclamo;
+            String fecha = model._fechaReclamo;
+            int estado = model._estadoReclamo;
+            Reclamo r = new Reclamo(id, titulo, detalle, fecha, estado);
+            return r;
         }
         public static List<Reclamo> InstanciarListaReclamo(Dictionary<int, Entidad> listaEntidad) 
         {
@@ -381,6 +397,13 @@ namespace BOReserva.DataAccess.Domain
         {
             return new Cabina(cabina._idCabina,cabina._nombreCabina,cabina._precioCabina,cabina._estatus,cabina._fkCrucero);
         }
+
+        public static Entidad InstanciarCamaroteN(CGestion_camarote camarote)
+        {
+            return new Camarote(camarote._idCamarote,camarote._cantidadCama,camarote._tipoCama,camarote._estatus,camarote._cabinaNombre);
+        }
+
+
         #endregion
 
             
