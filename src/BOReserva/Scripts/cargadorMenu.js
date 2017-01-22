@@ -22,7 +22,7 @@ jQuery(document).ready(function () {
     });
     $("#m02_agregaravion").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_aviones/M02_AgregarAvion';
+        var url = '/gestion_aviones/M02_CrearAvion';
         var method = 'GET';
         var data = '';
         $.ajax(
