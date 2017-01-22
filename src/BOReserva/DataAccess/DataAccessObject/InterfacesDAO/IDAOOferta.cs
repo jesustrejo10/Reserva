@@ -15,7 +15,7 @@ namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
         //Aquí van los métodos propios para las ofertas
         List<Entidad> ConsultarTodos();
 
-        String eliminarOferta(int id);
+        String disponibilidadOferta(Entidad e, int disponibilidad);
     }
 }
 

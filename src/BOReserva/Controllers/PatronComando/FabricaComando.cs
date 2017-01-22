@@ -565,6 +565,13 @@ namespace BOReserva.Controllers.PatronComando
 
         }
 
+        public static Command<String> crearM11DisponibilidadOferta(Entidad oferta, int disponibilidad)
+        {
+
+            return new M11_CODeshabilitarOferta(oferta, disponibilidad);
+
+        }
+
         /// <summary>
         /// Instancia el comando VisualizarPaquete
         /// </summary>
@@ -575,6 +582,7 @@ namespace BOReserva.Controllers.PatronComando
             return new M11_COVisualizarPaquetes();
 
         }
+
         #endregion
 
     }

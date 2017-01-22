@@ -10,7 +10,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web;
 
-
 namespace BOReserva.DataAccess.DataAccessObject.M11
 {
     public class DAOOferta : DAO, IDAOOferta
@@ -244,6 +243,35 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
                 conexion.Close();
                 return ex.Message;
             }
+        }
+
+        string IDAOOferta.disponibilidadOferta(Entidad e, int disponibilidad) 
+        {
+            Oferta oferta = (Oferta)e;
+            int  ofertaId = oferta._idOferta;
+            SqlConnection conexion = new SqlConnection(_connexionString);
+            try
+            {           
+                conexion.Open();
+                SqlCommand query = conexion.CreateCommand();
+                query.CommandText = "UPDATE Oferta SET ofe_estado = disponibilidad WHERE ofe_id=" + ofertaId;
+                SqlDataReader lector = query.ExecuteReader();
+                lector.Close();
+                SqlCommand query1 = conexion.CreateCommand();
+                query1.CommandText = "UPDATE Paquete SET paq_fk_oferta = null WHERE paq_fk_oferta=" + ofertaId;
+                SqlDataReader lector1 = query1.ExecuteReader();
+                lector1.Close();
+                conexion.Close();
+                return "1";
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine("Entre en excepcion sql de IDAOOferta");
+                conexion.Close();
+                return ex.Message;
+                
+            }
+            
         }
         
     }
