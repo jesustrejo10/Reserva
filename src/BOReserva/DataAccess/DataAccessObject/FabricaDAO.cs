@@ -26,12 +26,12 @@ namespace BOReserva.DataAccess.DataAccessObject
 
         public static DAO instanciarDaoPais()
         {
-            return new DAOLugar();
+            return new DAOPais();
         }
 
         public static DAO instanciarDaoCiudad()
         {
-            return new DAOLugar();
+            return new DAOCiudad();
         }
 
         #endregion

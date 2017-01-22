@@ -22,14 +22,14 @@ namespace BOReserva.Controllers.PatronComando
 
         # region Lugar ( COLugar - COPais - COCiudad ) 
 
-        public static Command<Dictionary<int, Entidad>> consultarTodosPais(Entidad e)
+        public static Command<List<SelectListItem>> consultarTodosPais(Entidad e)
         {
             return new GeneralLugar.COConsultarTodosPais(e);
         }
 
-        public static Command<Dictionary<int, Entidad>> consultarTodosCiudad(Entidad e)
+        public static Command<List<String>> consultarTodosCiudad(Entidad e,String pais)
         {
-            return new GeneralLugar.COConsultarTodosCiudad(e);
+            return new GeneralLugar.COConsultarTodosCiudad(e,pais);
         }
 
         #endregion
@@ -465,9 +465,9 @@ namespace BOReserva.Controllers.PatronComando
             return new M08.M08_COListarAniosAutomovil(e);
         }
 
-        public static Command<List<SelectListItem>> listarCantidadAutomovil(Entidad e)
+        public static Command<List<SelectListItem>> listarCantidadAutomovil(Entidad e, int cantidad)
         {
-            return new M08.M08_COListarCantidadAutomovil(e);
+            return new M08.M08_COListarCantidadAutomovil(e, cantidad);
         }
 
         public static Command<List<SelectListItem>> listarColoresAutomovil(Entidad e)

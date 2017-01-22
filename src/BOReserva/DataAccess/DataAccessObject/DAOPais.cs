@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
-
+using System.Web.Mvc;
 
 namespace BOReserva.DataAccess.DataAccessObject
 {
@@ -52,6 +52,34 @@ namespace BOReserva.DataAccess.DataAccessObject
             cmd.Dispose();
             conexion.Close();
             return listaPaises;
+        }
+
+
+        public List<SelectListItem> listarPaises()
+        {
+            List<SelectListItem> lista = new List<SelectListItem>();
+            int id;
+            String nombre;
+            SqlConnection conexion = Conectar();
+            conexion.Open();
+            String sql = "select p.lug_id as id, p.lug_nombre as name FROM Lugar p where p.lug_tipo_lugar = 'pais';";
+            SqlCommand cmd = new SqlCommand(sql, conexion);
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    id = int.Parse(reader[0].ToString());
+                    nombre = reader[1].ToString();
+                    lista.Add(new SelectListItem
+                    {
+                        Text = nombre,
+                        Value = id.ToString()
+                    });
+                }
+            }
+            cmd.Dispose();
+            conexion.Close();
+            return lista;
         }
 
     }

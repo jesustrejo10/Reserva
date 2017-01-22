@@ -248,6 +248,13 @@ namespace BOReserva.DataAccess.Domain
                                   transmision, pais, ciudad, fk_ciudad);
         }
 
+        public static Entidad CrearAutomovil(String matricula)
+        {
+            Automovil automovil = new Automovil();
+            automovil.matricula = matricula;
+            return automovil;
+        }
+
         #endregion
 
         #region Modulo 10
