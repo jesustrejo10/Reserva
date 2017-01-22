@@ -18,7 +18,7 @@ using FOReserva.Controllers;
 namespace TestUnitReserva.FO.TestGestionReclamosFO
 {
     [TestFixture]
-    class TestGestionReclamosBO
+    class TestGestionReclamosFO
     {
         private Reclamo mockReclamo;
       
@@ -35,8 +35,8 @@ namespace TestUnitReserva.FO.TestGestionReclamosFO
         [SetUp]
         public void Before()
         {
-            mockReclamo = new Reclamo(1, "Reclamo mock", "detalle mock reclamo", "2017-01-21", 1, 1);
-            daoReclamo = FabricaDAO.instanciarDaoReclamo();
+            mockReclamo = new Reclamo(1, "Reclamo mock", "detalle mock reclamo", "2017-01-21", 1, 73);
+            daoReclamo = (DAOReclamo) FabricaDAO.instanciarDaoReclamo();
             daoPersonalizado = FabricaDAO.reclamoPersonalizado();
             tituloReclamo = "prueba";
             detalleReclamo = "prueba";
@@ -56,17 +56,17 @@ namespace TestUnitReserva.FO.TestGestionReclamosFO
         [Test]
         public void M16_DaoReclamoInsertarReclamoFO()
         {
-           
+            mockReclamo._usuarioReclamo = 1;
             //Probando caso de exito de la prueba
             int resultadoAgregar = daoReclamo.Agregar(mockReclamo);
             Assert.AreEqual(resultadoAgregar, 1);
             //Probando caso de fallo
-            Assert.Throws<NullReferenceException>(() => daoReclamo.Agregar(null));
+            Assert.AreEqual(daoReclamo.Agregar(null), 3);
         }
 
         [Test]
-        public void M16_DaoReclamoConsultarTodosFO() {
-            Dictionary<int, Entidad> reclamos = daoReclamo.ConsultarTodos();
+        public void M16_DaoReclamoConsultar() {
+            List<Reclamo> reclamos = daoPersonalizado.ConsultarReclamosPorUsuario(1);
             Assert.NotNull(reclamos);
         }
 
@@ -80,10 +80,11 @@ namespace TestUnitReserva.FO.TestGestionReclamosFO
         [Test]
         public void M16_DaoReclamoModificarFO()
         {
+            mockReclamo._idReclamo = 9;
             //prueba de que lo hace
-            Assert.NotNull(daoReclamo.Modificar(mockReclamo));
+            Assert.AreEqual(daoPersonalizado.ModificarReclamo(mockReclamo), 1);
             //prueba de que falla al pasarle un parametro invaliddo
-            Assert.IsNull(daoReclamo.Modificar(null));
+            Assert.AreEqual(daoPersonalizado.ModificarReclamo(null), 3);
         }
 
         [Test]

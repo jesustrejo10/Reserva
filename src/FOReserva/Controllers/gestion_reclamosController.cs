@@ -10,6 +10,9 @@ using System.Net;
 
 namespace FOReserva.Controllers
 {
+    /// <summary>
+    /// Clase encargada de controlar la comunicacion entre la vista y el controlador
+    /// </summary>
     public class gestion_reclamosController : Controller
     {
         /// <summary>
