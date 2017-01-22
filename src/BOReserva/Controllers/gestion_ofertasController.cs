@@ -19,6 +19,7 @@ namespace BOReserva.Controllers
     {
         //
         // GET: /gestion_ofertas/
+        private static int idpaquete;
         public ActionResult M11_AgregarPaquete()
         {
             CAgregarPaquete model = new CAgregarPaquete();
@@ -127,11 +128,27 @@ namespace BOReserva.Controllers
 
         public ActionResult M11_ModificarPaquete(String paqueteIdStr)
         {
+            
+            
             int paqueteId = Int32.Parse(paqueteIdStr);
+            /*Command<Entidad> comando = FabricaComando.crearM11ConsultarPaquete(paqueteId);
+            Entidad paquete = comando.ejecutar();
+            Paquete paquetebuscado = (Paquete)paquete;
+            idpaquete = paquetebuscado._id;
+            CPaquete modelopaquete = new CPaquete();
+            modelopaquete._idAuto = paquetebuscado._idAuto;
+            modelopaquete._idCrucero = paquetebuscado._idCrucero;
+            modelopaquete._idHabitacion = paquetebuscado._idHotel;
+            modelopaquete._idRestaurante = paquetebuscado._idRestaurante;*/
+            //todavía falta
+
+            //Comentar estas 4 líneas siguientes que funcionaban antes de esta entrega
+            //Descimentándolas mientras se adapta a patrones
             manejadorSQL sql = new manejadorSQL();
             CPaquete paquete;
             paquete = sql.detallePaquete(paqueteId);
             return PartialView(paquete);
+            //
         }
 
         public ActionResult M11_ConsultarOferta(int id)

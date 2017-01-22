@@ -582,7 +582,12 @@ namespace BOReserva.Controllers.PatronComando
             return new M11_COVisualizarPaquetes();
 
         }
+        public static Command<String> crearM11ModificarPaquetes(Entidad paquete, int idmodificar)
+        {
 
+            return new M11_COModificarPaquete(paquete, idmodificar);
+
+        }
         #endregion
 
     }
