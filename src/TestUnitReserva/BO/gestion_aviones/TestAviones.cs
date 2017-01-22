@@ -56,7 +56,7 @@ namespace TestUnitReserva.BO.gestion_aviones
         [Test]
         public void M02_DaoAvionInsertarAvion()
         {
-           
+
             //Probando caso de exito de la prueba
             int resultadoAgregar = daoAvion.Agregar(mockAvion);
             Assert.AreEqual(resultadoAgregar, 1);

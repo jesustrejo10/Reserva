@@ -61,6 +61,15 @@ namespace BOReserva.DataAccess.DataAccessObject.M13 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to M13_AgregarPermiso.
+        /// </summary>
+        internal static string AgregarPermiso {
+            get {
+                return ResourceManager.GetString("AgregarPermiso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to M13_AgregarPermisosRol.
         /// </summary>
         internal static string AgregarPermisoRol {
@@ -79,6 +88,24 @@ namespace BOReserva.DataAccess.DataAccessObject.M13 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to M13_ConsultarListaPermisos.
+        /// </summary>
+        internal static string ConsultarListaPermisos {
+            get {
+                return ResourceManager.GetString("ConsultarListaPermisos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M13_ConsultarPermiso.
+        /// </summary>
+        internal static string ConsultarPermiso {
+            get {
+                return ResourceManager.GetString("ConsultarPermiso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to M13_ConsultarPermisos.
         /// </summary>
         internal static string ConsultarPermisos {
@@ -93,6 +120,15 @@ namespace BOReserva.DataAccess.DataAccessObject.M13 {
         internal static string ConsultarPermisosAsociados {
             get {
                 return ResourceManager.GetString("ConsultarPermisosAsociados", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M13_ConsultarPermisosNoAsociados.
+        /// </summary>
+        internal static string ConsultarPermisosNoAsociados {
+            get {
+                return ResourceManager.GetString("ConsultarPermisosNoAsociados", resourceCulture);
             }
         }
         
@@ -133,6 +169,15 @@ namespace BOReserva.DataAccess.DataAccessObject.M13 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to M13_EliminarPermisoSeleccionado.
+        /// </summary>
+        internal static string EliminarPermisoSeleccionado {
+            get {
+                return ResourceManager.GetString("EliminarPermisoSeleccionado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to M13_EliminarRol.
         /// </summary>
         internal static string EliminarRol {
@@ -147,6 +192,42 @@ namespace BOReserva.DataAccess.DataAccessObject.M13 {
         internal static string ListarPermisos {
             get {
                 return ResourceManager.GetString("ListarPermisos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M13_ModificarPermiso.
+        /// </summary>
+        internal static string ModificarPermiso {
+            get {
+                return ResourceManager.GetString("ModificarPermiso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M13_QuitarPermiso.
+        /// </summary>
+        internal static string QuitarPermiso {
+            get {
+                return ResourceManager.GetString("QuitarPermiso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M13_ValidacionPermiso.
+        /// </summary>
+        internal static string ValidacionPermiso {
+            get {
+                return ResourceManager.GetString("ValidacionPermiso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M13_ValidacionRol.
+        /// </summary>
+        internal static string ValidacionRol {
+            get {
+                return ResourceManager.GetString("ValidacionRol", resourceCulture);
             }
         }
     }

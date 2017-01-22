@@ -30,19 +30,19 @@ namespace FOReserva.Controllers
             return PartialView(model);
             }
                 ///Se atrapa las Exception de Tipo NullReference
-            catch (NullReferenceException e)
+            catch (NullReferenceException)
             {
 
                 return PartialView(model);
             }
             ///Se atrapa las Exception de Tipo ManejadorSQL Exception
-            catch (ManejadorSQLException f)
+            catch (ManejadorSQLException )
             {
 
                 return View("gestion_reserva_crucero_error_conexion");
             }
             ///Se atrapa las Exception de Tipo Exception
-            catch (Exception g)
+            catch (Exception )
             {
               
                 return PartialView(model);
@@ -75,18 +75,18 @@ namespace FOReserva.Controllers
                 return View();
             }
             ///Se atrapa las Exception de Tipo NullReference
-            catch (NullReferenceException e)
+            catch (NullReferenceException )
             {
 
                 return View();
             }
             ///Se atrapa las Exception de Tipo ManejadorSQL Exception
-            catch (ManejadorSQLException f)
+            catch (ManejadorSQLException )
             {
                 return View("gestion_reserva_crucero_error_conexion");
             }
             ///Se atrapa las Exception de Tipo Exception
-            catch (Exception g)
+            catch (Exception )
             {
 
             }
@@ -125,18 +125,18 @@ namespace FOReserva.Controllers
                  return View(Model);
             }
             ///Se atrapa las Exception de Tipo NullReference
-              catch (NullReferenceException e)
+              catch (NullReferenceException )
             {
                 List<CReserva_Cruceros> Model = null;
                 return View(Model);
             }
             ///Se atrapa las Exception de Tipo ManejadorSQL Exception
-            catch (ManejadorSQLException f)
+            catch (ManejadorSQLException )
             {
                 return View("gestion_reserva_crucero_error_conexion");
             }
             ///Se atrapa las Exception de Tipo Exception
-            catch (Exception g)
+            catch (Exception )
             {
                 List<CReserva_Cruceros> Model = null;
                 return View(Model);
@@ -175,13 +175,13 @@ namespace FOReserva.Controllers
             return View(reserva);
              }
              ///Se atrapa las Exception de Tipo NullReference
-              catch (NullReferenceException e)
+              catch (NullReferenceException )
             {
                 CReserva_Cruceros reserva = null;
                 return View(reserva);
             }
              ///Se atrapa las Exception de Tipo ManejadorSQL Exception
-            catch (ManejadorSQLException f)
+            catch (ManejadorSQLException )
             {
                 return View("gestion_reserva_crucero_error_conexion");
             }
@@ -219,18 +219,18 @@ namespace FOReserva.Controllers
                 return View(reserva);
             }
             ///Se atrapa las Exception de Tipo NullReference
-            catch (ManejadorSQLException e)
+            catch (ManejadorSQLException )
             {
                 return View("gestion_reserva_crucero_error_conexion");
             }
             ///Se atrapa las Exception de Tipo ManejadorSQL Exception
-            catch (InvalidManejadorSQLException f)
+            catch (InvalidManejadorSQLException )
             {
                 reserva = null;
                 return View(reserva);
             }
             ///Se atrapa las Exception de Tipo Exception
-            catch (Exception e)
+            catch (Exception )
             {
                 reserva = null;
                 return View(reserva);
@@ -249,18 +249,18 @@ namespace FOReserva.Controllers
                 manejador.eliminarReserva(id);
             }
             ///Se atrapa las Exception de Tipo ManejadorSQL Exception
-            catch (ManejadorSQLException e)
+            catch (ManejadorSQLException) 
             {
 
                 return null;
             }
             ///Se atrapa las Exception de Tipo Invalid ManejadorSQL Exception
-            catch (InvalidManejadorSQLException e)
+            catch (InvalidManejadorSQLException )
             {
                 return null;
             }
             ///Se atrapa las Exception de Tipo Exception
-            catch (Exception e)
+            catch (Exception )
             {
              
             }
@@ -279,18 +279,18 @@ namespace FOReserva.Controllers
                 manejador.modificarReserva(id_reserva, cant_pasajero, estatus);
             }
             ///Se atrapa las Exception de Tipo Invalid ManejadorSQL Exception
-            catch (ManejadorSQLException e)
+            catch (ManejadorSQLException )
             {
                
                 return null;
             }
             ///Se atrapa las Exception de Tipo Invalid ManejadorSQL Exception
-            catch (InvalidManejadorSQLException e)
+            catch (InvalidManejadorSQLException )
             {
                
             }
             ///Se atrapa las Exception de Tipo Exception
-            catch (Exception e)
+            catch (Exception )
             {
              
                 return null;

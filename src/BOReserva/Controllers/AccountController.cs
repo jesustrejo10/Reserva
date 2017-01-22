@@ -13,6 +13,9 @@ using BOReserva.Models;
 
 namespace BOReserva.Controllers
 {
+    /// <summary>
+    /// AccountController
+    /// </summary>
     [Authorize]
     [InitializeSimpleMembership]
     public class AccountController : Controller

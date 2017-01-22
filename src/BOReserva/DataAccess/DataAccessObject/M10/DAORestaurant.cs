@@ -191,7 +191,7 @@ namespace BOReserva.M10
         /// </summary>
         /// <param name="_restaurant"></param>
         /// <returns>Se retorna true si fue exitoso</returns>
-        public bool Crear(Entidad _restaurant)
+        public Boolean Crear(Entidad _restaurant)
         {
             //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
             Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
@@ -258,7 +258,7 @@ namespace BOReserva.M10
         /// </summary>
         /// <param name="_restaurant"></param>
         /// <returns>Retorna true si fue exitso</returns>
-        public bool Eliminar(Entidad _restaurant)
+        public Boolean Eliminar(Entidad _restaurant)
         {
             //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
             Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
@@ -302,7 +302,7 @@ namespace BOReserva.M10
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw new ReservaExceptionM10("Reserva-404", "Error al realizar operacion ", ex);
             }
-            return false; //se retorna falso en caso de no ser exitoso el procedimiento eliminar
+            return true; //se retorna true en caso de ser exitoso el procedimiento eliminar
         }
 
         /// <summary>
@@ -497,6 +497,18 @@ namespace BOReserva.M10
             }
         }
 
+        #region Get String conexion para fines de pruebas Unitarias, NO FUNCIONA EN EL SISTEMA
+        /// <summary>
+        /// Metodo get para efectos de pruebas Unitarias no se usa Aqui en 
+        /// en DaoRestaurant solo para ser llamado por las pruebas unitarias
+        /// para efectos de conseguir el ultimo id del regitro prueba y poder 
+        /// eliminarlo
+        /// </summary>
+        public string ConectionString()
+        {
+           return this._connexionString;
+        }
+        #endregion
 
         #region Metodos No implementados
         /// <summary>

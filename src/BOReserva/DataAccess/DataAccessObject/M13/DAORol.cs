@@ -14,10 +14,21 @@ using System.Web;
 
 namespace BOReserva.DataAccess.DataAccessObject
 {
+    ///<summary>
+    ///Clase DAO del modulo de roles, hereda de DAO e implementa la interfaz IDAORol
+    ///</summary>
     public class DAORol: DAO, IDAORol
     {
+        ///<summary>
+        ///Constructor vacio de la clase DAORol
+        ///</summary>
         public DAORol() { }
-        int IDAO.Agregar(Entidad e)
+
+        ///<summary>
+        ///Metodo para agregar un rol a la base de datos
+        ///</summary>
+        ///<returns>int</returns>
+        public new int Agregar(Entidad e)
         {
             Rol rol = (Rol)e;
             SqlConnection conexion = Connection.getInstance(_connexionString);
@@ -42,8 +53,19 @@ namespace BOReserva.DataAccess.DataAccessObject
                 conexion.Close();
                 return 0;
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return 0;
+        }
         }
 
+        ///<summary>
+        ///Metodo para buscar el id de un rol
+        ///</summary>
+        ///<returns>String</returns>
         public String MBuscarid_IdRol(String rolBuscar)
         {
 
@@ -73,6 +95,10 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
         }
 
+        ///<summary>
+        ///Metodo para buscar el id de un permiso
+        ///</summary>
+        ///<returns>String</returns>
         public String MBuscarid_Permiso(String permisoBucar)
         {
 
@@ -101,6 +127,10 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
         }
 
+        ///<summary>
+        ///Metodo para agregar permisos a un rol ya existente
+        ///</summary>
+        ///<returns>Entero</returns>
         public int AgregarRolPermiso(Entidad e)
         {
             Rol rol = (Rol)e;
@@ -134,13 +164,19 @@ namespace BOReserva.DataAccess.DataAccessObject
                 conexion.Close();
                 return 0;
             }
-        }
-
-        public Entidad Consultar(Entidad e)
+            catch (Exception ex)
         {
-            throw new NotImplementedException();
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return 0;
+        }
         }
 
+        ///<summary>
+        ///Metodo para consultar roles
+        ///</summary>
+        ///<returns>Lista de Entidad</returns>
         public List<Entidad> ConsultarRoles()
         {
             List<Entidad> listaroles;
@@ -174,8 +210,19 @@ namespace BOReserva.DataAccess.DataAccessObject
                 conexion.Close();
                 return null;
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+        }
         }
 
+        ///<summary>
+        ///Metodo para consultar permisos
+        ///</summary>
+        ///<returns>Lista de Entidad</returns>
         public List<Entidad> ConsultarPermisos(int idRol)
         {
             List<Entidad> listapermisos;
@@ -211,8 +258,19 @@ namespace BOReserva.DataAccess.DataAccessObject
                 conexion.Close();
                 return null;
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+        }
         }
 
+        ///<summary>
+        ///Metodo para listar los permisos en general
+        ///</summary>
+        ///<returns>Lista de Entidad</returns>
         public List<Entidad> ListarPermisos()
         {
             List<Entidad> listapermisos;
@@ -246,8 +304,19 @@ namespace BOReserva.DataAccess.DataAccessObject
                 conexion.Close();
                 return null;
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+        }
         }
 
+        ///<summary>
+        ///Metodo para consultar un rol especifico
+        ///</summary>
+        ///<returns>Entidad</returns>
         Entidad IDAO.Consultar(int id)
         {
             SqlConnection conexion = Connection.getInstance(_connexionString);
@@ -285,8 +354,19 @@ namespace BOReserva.DataAccess.DataAccessObject
                 conexion.Close();
                 return null;
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+        }
         }
 
+        ///<summary>
+        ///Metodo para modificar el nombre de un rol existente
+        ///</summary>
+        ///<returns>Entidad</returns>
         Entidad IDAO.Modificar(Entidad e)
         {
             Rol rol = (Rol)e;
@@ -305,13 +385,24 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
             catch (SqlException ex)
             {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
                 conexion.Close();
-                rol._nombreRol = ex.Message;
-                Entidad resultado = rol;
-                return resultado;
+                return null;
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+        }
         }
 
+        ///<summary>
+        ///Metodo para eliminar un rol 
+        ///</summary>
+        ///<returns>String</returns>
         public String eliminarRol(int id)
         {
             SqlConnection conexion = Connection.getInstance(_connexionString);
@@ -335,8 +426,19 @@ namespace BOReserva.DataAccess.DataAccessObject
                 conexion.Close();
                 return ex.Message;
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return ex.Message;
+        }
         }
 
+        ///<summary>
+        ///Metodo para eliminar permiso a un rol existente
+        ///</summary>
+        ///<returns>String</returns>
         public String eliminarPermiso(int id)
         {
             SqlConnection conexion = Connection.getInstance(_connexionString);
@@ -359,8 +461,19 @@ namespace BOReserva.DataAccess.DataAccessObject
                 conexion.Close();
                 return ex.Message;
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return ex.Message;
+        }
         }
 
+        ///<summary>
+        ///Metodo para consultar los permisos asignados a un rol
+        ///</summary>
+        ///<returns>Lista de Entidad</returns>
         public List<Entidad> consultarLosPermisosAsignados(int id)
         {
             List<Entidad> listapermisos;
@@ -370,10 +483,13 @@ namespace BOReserva.DataAccess.DataAccessObject
             {
                 conexion.Close();
                 conexion.Open();
-                SqlCommand cmd = new SqlCommand(M13_DAOResources.ConsultarPermisosAsociados, conexion);
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                using (SqlCommand cmd = new SqlCommand(M13_DAOResources.ConsultarPermisosAsociados, conexion))
                 {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
                     listapermisos = new List<Entidad>();
+                    SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
                         int _idPermiso = Int32.Parse(reader["mod_det_id"].ToString());
@@ -398,6 +514,55 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
         }
 
+        public List<Entidad> consultarPermisosNoAsignados(int id)
+        {
+            List<Entidad> listapermisos;
+            Entidad permiso;
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            try
+            {
+                conexion.Close();
+                conexion.Open();
+                using (SqlCommand cmd = new SqlCommand(M13_DAOResources.ConsultarPermisosNoAsociados, conexion))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
+                    listapermisos = new List<Entidad>();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        int _idPermiso = Int32.Parse(reader["mod_det_id"].ToString());
+                        String _nombrePermiso = reader["mod_det_nombre"].ToString();
+                        permiso = FabricaEntidad.crearPermiso(_idPermiso, _nombrePermiso);
+                        listapermisos.Add(permiso);
+                    }
+                    //cierro el lector
+                    reader.Close();
+                    //Cerrar la conexion
+                    conexion.Close();
+                }
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+            }
+            return listapermisos;
+        }
+
+
+        ///<summary>
+        ///Metodo para consultar los permisos que tiene un usuario
+        ///</summary>
+        ///<returns>Lista de String</returns>
         public List<String> consultarPermisosUsuario(int idUsuario)
         {
             List<String> listapermisos = new List<String>();
@@ -443,6 +608,82 @@ namespace BOReserva.DataAccess.DataAccessObject
                 return null;
             }
 
+        }
+
+        ///<summary>
+        ///Metodo para eliminar permiso a un rol existente
+        ///</summary>
+        ///<returns>String</returns>
+        public String quitarPermiso(int idRol, int idPermiso)
+        {
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            try
+            {
+                conexion.Close();
+                conexion.Open();
+                using (SqlCommand cmd = new SqlCommand(M13_DAOResources.QuitarPermiso, conexion))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idRol", idRol);
+                    cmd.Parameters.AddWithValue("@idPermiso", idPermiso);
+                    cmd.ExecuteNonQuery();
+                    cmd.Dispose();
+                    conexion.Close();
+                    return "1";
+                }
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return ex.Message;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return ex.Message;
+            }
+        }
+        ///<summary>
+        ///Metodo para eliminar un rol 
+        ///</summary>
+        ///<returns>String</returns>
+        public List<int> validacionRol(int id)
+        {
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            List<int> listausuarios;
+            try
+            {
+                conexion.Close();
+                conexion.Open();
+                using (SqlCommand cmd = new SqlCommand(M13_DAOResources.ValidacionRol, conexion))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
+                    listausuarios = new List<int>();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        int idUsuario = Int32.Parse(reader["usu_id"].ToString());
+                        listausuarios.Add(idUsuario);
+                    }
+                    return listausuarios;
+                }
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+            }
         }
     }
 }

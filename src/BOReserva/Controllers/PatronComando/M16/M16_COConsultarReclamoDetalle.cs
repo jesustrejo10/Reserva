@@ -12,7 +12,6 @@ namespace BOReserva.Controllers.PatronComando
     public class M16_COConsultarReclamoDetalle : Command<Entidad>
     {
         int valor;
-
         public M16_COConsultarReclamoDetalle(int idReclamo)
         {
             this.valor = idReclamo;
@@ -21,9 +20,7 @@ namespace BOReserva.Controllers.PatronComando
         /// Sobre escritura del metodo ejecutar de la clase Comando.
         /// Se encarga de llamar al DAO y devolver la respuesta al controlador.
         /// </summary>
-        /// <returns>
-        /// Retorna una Entidad
-        /// </returns>
+        /// <returns> Retorna una Entidad </returns>
         public override Entidad ejecutar()
         {
             IDAO daoReclamo = FabricaDAO.instanciarDaoReclamo();
@@ -31,5 +28,4 @@ namespace BOReserva.Controllers.PatronComando
             return reclamo;
         }
     }
-
 }
