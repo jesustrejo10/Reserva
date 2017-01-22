@@ -22,7 +22,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
     public class TestGestionAutomovil
     {
 
-        //DAOAutomovil daoAutomovil;
+       /* //DAOAutomovil daoAutomovil;
         manejadorSQL _manejadorSql;
         Automovil _automovil;
         String _matriculaPrueba = Util.RandomString(7);
@@ -559,6 +559,6 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
         {
             ActionResult probarjsonresult = _controlador.listaciudades("Venezuela");
             Assert.IsInstanceOf(typeof(ActionResult), probarjsonresult);
-        }
+        }*/
     }
 }﻿

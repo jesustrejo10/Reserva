@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data;
+using FOReserva.Servicio;
 
 namespace FOReserva.DataAccess.DataAccessObject.M19
 {
@@ -154,12 +155,11 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
             }
 
         }
-
         /// <summary>
-        /// Metodo para consultar automoviles segun el id de Lugar
+        /// MEtodo para consultar autos por ciudad
         /// </summary>
-        /// <param name="_automovil">Variable tipo en entidad que luego debe ser casteada a su tipo para metodos get y set</param>
-        /// <returns>Lista de Entidades, ya que se devuelve mas de una fila de la BD, se debe castear a su respectiva clase en el Modelo</returns>
+        /// <param name="_lugar"></param>
+        /// <returns></returns>
         public List<Entidad> ConsultarAutosPorIdCiudad(Entidad _lugar)
         {
             List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
@@ -191,7 +191,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
                 parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fk_ciudad_entrega, SqlDbType.Int, lugar._id.ToString(), false));
 
                 //el metodo Ejecutar Store procedure recibe la lista de parametros como el query, este ultimo es el nombre del procedimietno en la BD
-                tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM19.procedimientoConsultarAutosCiudad,parametro);
+                tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM19.procedimientoConsultarAutosCiudad, parametro);
 
                 foreach (DataRow Fila in tablaDeDatos.Rows)
                 {
@@ -212,6 +212,120 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
                     idCiudad = int.Parse(Fila[RecursoDAOM19.autFk_ciudad].ToString());
                     automovil = FabricaEntidad.inicializarAutomovil(matricula, modelo, fabricante, anio, kilometraje, cantPasajeros, tipo, precioCompra, precioAlquiler, penalidadDiaria, fechaRegistro, color, disponibilidad, transmision, idCiudad);
                     listaDeAutomovil.Add(automovil);
+                }
+
+                return listaDeAutomovil;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Metodo para consultar automoviles segun el id de Lugar
+        /// </summary>
+        /// <param name="_automovil">Variable tipo en entidad que luego debe ser casteada a su tipo para metodos get y set</param>
+        /// <returns>Lista de Entidades, ya que se devuelve mas de una fila de la BD, se debe castear a su respectiva clase en el Modelo</returns>
+        public List<Entidad> ConsultarAutosPorIdCiudades(Entidad _datos)
+        {
+
+            System.Diagnostics.Debug.WriteLine("LLEGA AL DAO");
+            CVistaReservaAuto obj = (CVistaReservaAuto)_datos;
+            System.Diagnostics.Debug.WriteLine("ATRIBUTOS DEL OBJETO ---- idorigen: " + obj._ciudadOrigen + ", iddestino: " + obj._ciudadDestino + ", fechaini: " + obj._fechaini + ", fechafin: " + obj._fechafin + ", horaini: " + obj._horaIni + ", horafin: " + obj._horaFin);
+            
+            List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
+            List<Entidad> listaDeAutomovil = FabricaEntidad.asignarListaDeEntidades();
+            DataTable tablaDeDatos;
+            Entidad automovil;
+            CVistaReservaAuto datos = (CVistaReservaAuto)_datos; //Se castea a tipo Lugar para poder utilizar sus metodos 
+
+            //Atributos tabla Automovil 
+            String matricula;
+            String modelo;
+            String fabricante;
+            int anio;
+            int cantPasajeros;
+            String tipo;
+            double precioAquiler;
+            String color;
+            int disponibilidad;
+            String transmision;
+            int idCiudad;
+
+            try
+            {
+                //Aqui se asignan los valores que recibe el procedimiento para realizar el select
+                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fk_ciudad_entrega, SqlDbType.Int, datos._ciudadOrigen.ToString(), false));
+
+                //el metodo Ejecutar Store procedure recibe la lista de parametros como el query, este ultimo es el nombre del procedimietno en la BD
+                tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM19.procedimientoConsultarACiudad, parametro);
+
+                System.Diagnostics.Debug.WriteLine("PASA EL STORED PROCEDURE TUPLAS");
+
+
+                // For each row, print the values of each column.
+                foreach (DataRow row in tablaDeDatos.Rows)
+                {
+                    foreach (DataColumn column in tablaDeDatos.Columns)
+                    {
+                        System.Diagnostics.Debug.WriteLine(row[column]);
+                    }
+                }
+
+                foreach (DataRow Fila in tablaDeDatos.Rows)
+                {
+
+                    System.Diagnostics.Debug.WriteLine("ENTRA EN EL FOREACH");
+                    System.Diagnostics.Debug.WriteLine("----------------");
+
+                    matricula = Fila[RecursoDAOM19.autMatricula].ToString();
+                    System.Diagnostics.Debug.WriteLine("TOMA MATRICULA: "+matricula);
+
+                    modelo = Fila[RecursoDAOM19.autModelo].ToString();
+                    System.Diagnostics.Debug.WriteLine("TOMA MODELO: " + modelo);
+
+                    fabricante = Fila[RecursoDAOM19.autFabricante].ToString();
+                    System.Diagnostics.Debug.WriteLine("TOMA FABRICANTE: " + fabricante);
+
+                    tipo = Fila[RecursoDAOM19.autTipo].ToString();
+                    System.Diagnostics.Debug.WriteLine("TOMA TIPO: " + tipo);
+
+                    color = Fila[RecursoDAOM19.autColor].ToString();
+                    System.Diagnostics.Debug.WriteLine("TOMA COLOR: " + color);
+
+                    transmision = Fila[RecursoDAOM19.autTransmision].ToString();
+                    System.Diagnostics.Debug.WriteLine("TOMA TRANSMISIÓN: " + transmision);
+
+                    idCiudad = int.Parse(Fila[RecursoDAOM19.autFk_ciudad].ToString());
+                    System.Diagnostics.Debug.WriteLine("TOMA CIUDAD: " + idCiudad);
+
+                    precioAquiler = double.Parse(Fila[RecursoDAOM19.autPrecioalquiler].ToString());
+                    System.Diagnostics.Debug.WriteLine("TOMA PRECIO ALQUILER: " + precioAquiler);
+
+                    anio = int.Parse(Fila[RecursoDAOM19.autAnio].ToString());
+                    System.Diagnostics.Debug.WriteLine("TOMA AÑO: " + anio);
+
+                    cantPasajeros = int.Parse(Fila[RecursoDAOM19.autCantpasajeros].ToString());
+                    System.Diagnostics.Debug.WriteLine("TOMA PASAJEROS: " + cantPasajeros);
+
+                    disponibilidad = int.Parse(Fila[RecursoDAOM19.autDisponibilidad].ToString());
+                    System.Diagnostics.Debug.WriteLine("TOMA DISPONIBILIDAD: " + disponibilidad);
+
+
+
+
+
+
+
+
+                    automovil = FabricaEntidad.inicializarAutomovil(matricula, modelo, fabricante, tipo, color, transmision, idCiudad, precioAquiler, anio, cantPasajeros, disponibilidad);
+
+                    System.Diagnostics.Debug.WriteLine("CREA OBJETO DE CAUTOMOVIL");
+                    
+                    listaDeAutomovil.Add(automovil);
+
                 }
 
                 return listaDeAutomovil;
@@ -325,6 +439,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
         {
             CReservaAutomovil resv = (CReservaAutomovil)_reserva;
             List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
+            
 
             try
             {
@@ -339,7 +454,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fk_ciudad_entrega, SqlDbType.Int, resv._idLugarDest.ToString(), false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_estatus, SqlDbType.Int, resv._estatus.ToString(),false));
 
-                EjecutarStoredProcedure(RecursoDAOM19.procedimientoActualizar, listaParametro);
+                
             }
             catch (Exception)
             {
@@ -350,6 +465,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
             return true;
         }
 
+       
         #region Metodos No implementados
         Entidad IDAO.Modificar(Entidad e)
         {

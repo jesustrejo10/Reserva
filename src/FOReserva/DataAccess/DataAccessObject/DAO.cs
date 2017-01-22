@@ -254,6 +254,10 @@ namespace FOReserva.DataAccess.DataAccessObject
         /// <param name="query">Cadena con el query a ejecutar</param>
         public DataTable EjecutarStoredProcedureTuplas(string query, List<Parametro> parametros)
         {
+            System.Diagnostics.Debug.WriteLine("LLEGA A EJECUTAR PROCEDURE TUPLAS");
+            System.Diagnostics.Debug.WriteLine("query que recibe: "+query);
+            System.Diagnostics.Debug.WriteLine("parámetro que recibe: " + parametros[0].ToString());
+
             try
             {
                 Conectar();

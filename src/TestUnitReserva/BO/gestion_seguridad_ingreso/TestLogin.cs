@@ -16,7 +16,7 @@ namespace TestUnitReserva.BO.gestion_seguridad_ingreso
     [TestFixture]
     class TestLogin
     {
-        M01SQL bd;
+      /*  M01SQL bd;
         Cgestion_seguridad_ingreso modelo;
         
 
@@ -123,6 +123,7 @@ namespace TestUnitReserva.BO.gestion_seguridad_ingreso
             bd = null;
             modelo = null;
         }
+       * */
         
     }
 }

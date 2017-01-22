@@ -75,6 +75,16 @@ namespace FOReserva.DataAccess.DataAccessObject
         {
             return new SqlDataAdapter(comandoSql);
         }
+
+        public static DAO instanciarDaoPais()
+        {
+            return new DAOPais();
+        }
+
+        public static DAO instanciarDaoCiudad()
+        {
+            return new DAOCiudad();
+        }
         #endregion
     }
 }
