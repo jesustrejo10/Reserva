@@ -162,9 +162,6 @@
   <data name="rha_fecha_reservacion" xml:space="preserve">
     <value>@rha_fecha_res</value>
   </data>
-  <data name="rha_fk_hab_id" xml:space="preserve">
-    <value>@rha_fk_hab</value>
-  </data>
   <data name="rha_fk_usu_id" xml:space="preserve">
     <value>@rha_fk_usu</value>
   </data>
@@ -185,5 +182,8 @@
   </data>
   <data name="id_lugar" xml:space="preserve">
     <value>id_lugar</value>
+  </data>
+  <data name="rha_fk_hab_id" xml:space="preserve">
+    <value>@rha_fk_hot</value>
   </data>
 </root>

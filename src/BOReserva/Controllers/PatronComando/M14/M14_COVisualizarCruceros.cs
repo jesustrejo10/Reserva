@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.Controllers.PatronComando
+namespace BOReserva.Controllers.PatronComando.M14
 {
     public class M14_COVisualizarCruceros : Command<Dictionary<int, Entidad>>
     {
@@ -19,15 +19,12 @@ namespace BOReserva.Controllers.PatronComando
         /// <returns>
         /// Retorna un Identity map, de tipo int, Entidad
         /// </returns>
-        //public override Dictionary<int, Entidad> ejecutar()
-        //{
-        //    IDAO daoCrucero = FabricaDAO.instanciarDaoCrucero();
-        //    Dictionary<int, Entidad> mapCruceros = daoCrucero.ConsultarTodos();
-        //    return mapCruceros;
-        //}
         public override Dictionary<int, Entidad> ejecutar()
         {
-            throw new NotImplementedException();
+            IDAO daoCrucero = FabricaDAO.instanciarDaoCrucero();
+            Dictionary<int, Entidad> mapCruceros = daoCrucero.ConsultarTodos();
+            return mapCruceros;
         }
+        
     }
 }

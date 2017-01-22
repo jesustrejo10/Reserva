@@ -1,5 +1,6 @@
-﻿@model List<FOReserva.Models.Hoteles.CHotel>
-@{ var hoteles = Model; }
+﻿
+
+
 @if (Model != null)
 {
 
@@ -10,8 +11,7 @@
         </div>
     </div>
 
-    if (hoteles.Count > 0)
-    {
+   
     <!-- HTML DATATABLES -->
         <table class="table table-striped table-bordered table-hover" id="sample_1">
             <thead>
@@ -22,9 +22,12 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var hotel in hoteles)
+                @try
+                { 
+                foreach (var item in Model)
                 {
-                    <tr>
+                    FOReserva.Models.Hoteles.CHotel hotel = (FOReserva.Models.Hoteles.CHotel)item.Value;
+                    <tr id="@item.Key">
                         <td>@hotel.Nombre</td>
                         <td>
                             <span class="label label-@(
@@ -36,14 +39,20 @@
                         <td>
                             @if (hotel.CantidadHabitacionesDisponible>0)
                             {
-                                <button class="btn btn-info" type="button" onclick="realizarReserva(this, @hotel.Codigo)"> Reservar </button>
+                                <button class="btn btn-info" type="button" onclick="realizarReserva(this, @item.Key)"> Reservar </button>
                             }
                         </td>
                     </tr>
                 }
+                    }
+                    catch{
+                        <script>alert("Error en el Listado")</script>
+                }
+             
             </tbody>
+                     
         </table>
-
+                   
         <!-- JS DATATABLES -->
         <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/jquery.dataTables.min.js")"></script>
         <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/dataTables.tableTools.min.js")"></script>
@@ -71,12 +80,12 @@
                     type: 'POST',
                     success: function (proceso) {
                         console.log(0)
-                        if (proceso.CulminoCorrectamente) {
-                            alert(proceso.Mensaje);
+                       if (proceso){
+                            alert("Se agrego con Exito");
                             //cargarContenido('#CI', 'get', '/gestion_reserva_habitaciones/detalle_reserva', { "Codigo": proceso.Referencia })
                             $("#regresarBuscador").trigger("click")
                         }else{
-                            alert(proceso.Mensaje);
+                            alert(proceso);
                         }
 
                     }
@@ -168,23 +177,11 @@
             initTable1();
         </script>
     }
-    else
-    {
-        <div class="text-center">
-            <p>No hay hoteles con habitaciones disponible.</p>
-            <script>
-                $("#regresarBuscador").click(function () {
-                    $("#buscador").show();
-                    $("#resultado").hide();
-                    console.log("ok")
-                });
-            </script>
-        </div>
-    }
-}
+
 else
 {
     <div class="text-center">
         <p>No se pudo cargar el contenido.</p>
     </div>
+}
 }

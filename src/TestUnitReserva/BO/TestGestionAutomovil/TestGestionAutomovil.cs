@@ -18,7 +18,8 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
     /// <summary>
     /// Clase que realiza pruebas unitarias
     /// </summary>
-    [TestFixture]
+    //[TestFixture]
+    /*
     public class TestGestionAutomovil
     {
         /*
@@ -560,6 +561,7 @@ namespace TestUnitReserva.BO.TestGestionAutomovil
             ActionResult probarjsonresult = _controlador.listaciudades("Venezuela");
             Assert.IsInstanceOf(typeof(ActionResult), probarjsonresult);
         }
+
         */
-    }
+    //}
 }﻿
