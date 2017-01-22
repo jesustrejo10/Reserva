@@ -210,6 +210,7 @@
     <Compile Include="Controllers\M04\gestion_vueloController.cs" />
     <Compile Include="Controllers\PatronComando\Command.cs" />
     <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
+    <Compile Include="Controllers\PatronComando\M04\M04_COBuscarCodigoVuelo.cs" />
     <Compile Include="Controllers\PatronComando\M04\M04_COBuscarVuelo.cs" />
     <Compile Include="Controllers\PatronComando\M04\M04_COCambiarStatus.cs" />
     <Compile Include="Controllers\PatronComando\M04\M04_COEliminarVuelo.cs" />

@@ -42,6 +42,10 @@ namespace BOReserva.DataAccess.DataAccessObject
                 List<ResultadoBD> results = EjecutarStoredProcedure(RecursoVuelo.CrearVuelo, parametros);
                 Conectar();
             }
+            catch (ExceptionBD ex)
+            {
+                throw ex;
+            }
             catch (ArgumentNullException ex)
             {
                 throw ex;
@@ -88,6 +92,10 @@ namespace BOReserva.DataAccess.DataAccessObject
                 parametros.Add(parametro);
                 List<ResultadoBD> results = EjecutarStoredProcedure(RecursoVuelo.ModificarVuelo, parametros);
                 Conectar();
+            }
+            catch (ExceptionBD ex)
+            {
+                throw ex;
             }
             catch (ArgumentNullException ex)
             {
@@ -155,21 +163,27 @@ namespace BOReserva.DataAccess.DataAccessObject
                 }
 
             }
+            catch (ExceptionBD ex)
+            {
+                throw ex;
+            }
             catch (ArgumentNullException ex)
             {
-
+                throw ex;
             }
             catch (FormatException ex)
             {
+                throw ex;
             }
             catch (SqlException ex)
             {
+                throw ex;
             }
             catch (Exception ex)
             {
+                throw ex;
             }
             return null;
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -228,6 +242,10 @@ namespace BOReserva.DataAccess.DataAccessObject
                     return lista;
                 }
 
+            }
+            catch (ExceptionBD ex)
+            {
+                throw ex;
             }
             catch (ArgumentNullException ex)
             {
@@ -302,6 +320,10 @@ namespace BOReserva.DataAccess.DataAccessObject
                 List<ResultadoBD> results = EjecutarStoredProcedure(RecursoVuelo.CambiarStatus, parametros);
                 Conectar();
             }
+            catch (ExceptionBD ex)
+            {
+                throw ex;
+            }
             catch (ArgumentNullException ex)
             {
                 throw ex;
@@ -345,6 +367,10 @@ namespace BOReserva.DataAccess.DataAccessObject
                     return lista;
                 }
 
+            }
+            catch (ExceptionBD ex)
+            {
+                throw ex;
             }
             catch (ArgumentNullException ex)
             {
@@ -515,6 +541,10 @@ namespace BOReserva.DataAccess.DataAccessObject
                 }
 
             }
+            catch (ExceptionBD ex)
+            {
+                throw ex;
+            }
             catch (ArgumentNullException ex)
             {
                 throw ex;
@@ -532,6 +562,48 @@ namespace BOReserva.DataAccess.DataAccessObject
                 throw ex;
             }
             return null;
+        }
+
+        /// <summary>
+        /// Borrar vuelo por id
+        /// </summary>
+        /// <param name="vueID">Es el ID del vuelo a eliminar/param>
+        /// <returns>Retorna true si es elimanado exitosamente</returns>
+        public bool BuscarCodigo(String codigo)
+        {
+            Parametro parametro = new Parametro();
+            try
+            {
+                List<Parametro> parametros = new List<Parametro>();
+                parametro = new Parametro(RecursoVuelo.ParametroCodVuelo, SqlDbType.VarChar, codigo.ToString(), false);
+                parametros.Add(parametro);
+                List<ResultadoBD> resultado = EjecutarStoredProcedure(RecursoVuelo.BuscarCodigo, parametros);
+            }
+            catch (ExceptionBD ex)
+            {
+                throw ex;
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw ex;
+            }
+            catch (FormatException ex)
+            {
+                throw ex;
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 55567)
+                    throw new ReservaExceptionM04(RecursoVuelo.ErrorDaoVuelo, RecursoVuelo.ErrorAvionRuta, ex);
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return true;
+
         }
         
     }

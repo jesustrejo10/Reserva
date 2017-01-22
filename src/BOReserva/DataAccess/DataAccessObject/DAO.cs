@@ -151,8 +151,8 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
             catch (SqlException ex)
             {
-                //throw new ExceptionBD(RecursoBD.Cod_Error_General, RecursoBD.Error_General, ex);
                 throw ex;
+                throw new ExceptionBD(RecursoBD.Cod_Error_General, RecursoBD.Error_General, ex);
             }
             catch (Exception ex)
             {

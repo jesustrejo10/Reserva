@@ -70,6 +70,15 @@ namespace BOReserva.DataAccess.DataAccessObject.M04 {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a M04_BuscarCodigo.
+        /// </summary>
+        internal static string BuscarCodigo {
+            get {
+                return ResourceManager.GetString("BuscarCodigo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a M04_BuscaVuelo.
         /// </summary>
         internal static string BuscaVueloID {
@@ -111,6 +120,15 @@ namespace BOReserva.DataAccess.DataAccessObject.M04 {
         internal static string ErrorAvionRuta {
             get {
                 return ResourceManager.GetString("ErrorAvionRuta", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El codigo de vuelo ya se encuentra registrado.
+        /// </summary>
+        internal static string ErrorCodigoDuplicado {
+            get {
+                return ResourceManager.GetString("ErrorCodigoDuplicado", resourceCulture);
             }
         }
         

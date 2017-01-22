@@ -1,7 +1,7 @@
-﻿using BOReserva.DataAccess.DataAccessObject;
+﻿using BOReserva.DataAccess.DAO;
+using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
-using BOReserva.DataAccess.Domain;
-using BOReserva.DataAccess.Model;
+using BOReserva.Excepciones.M04;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,24 +9,21 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando.M04
 {
-    public class M04_COBuscarVuelo : Command<Entidad>
+    public class M04_COBuscarCodigoVuelo : Command<Boolean>
     {
-        private int _id;
+
+        private String _codigo;
 
         #region Constructores
 
-        /// <summary>
-        /// Constructor simple
-        /// </summary>
-        public M04_COBuscarVuelo() {}
 
         /// <summary>
         /// Constructor que recibe un parametro del tipo entidad
         /// </summary>
         /// <param name="vuelo">Es el objeto que se quiere agregar</param>
-        public M04_COBuscarVuelo(int id)
+        public M04_COBuscarCodigoVuelo(String codigo)
         {
-            _id = id; 
+            _codigo = codigo; 
         }
         #endregion
 
@@ -36,14 +33,14 @@ namespace BOReserva.Controllers.PatronComando.M04
         /// Método para crear la instancia de la clase DaoUsuario y usar el método Agregar
         /// </summary>
         /// <returns>Retorna una instancia del tipo DaoUsuario</returns>
-        public override Entidad ejecutar()
+        public override Boolean ejecutar()
         {
             try
             {
-                IDAO buscarVuelo = FabricaDAO.instanciarDAOVuelo();
-                return(buscarVuelo.Consultar(_id));
+                IDAOVuelo buscarVuelo = (DAOVuelo)FabricaDAO.instanciarDAOVuelo();
+                return(buscarVuelo.BuscarCodigo(_codigo));
             }
-            catch (ExceptionBD ex)
+            catch (ReservaExceptionM04 ex)
             {
                 throw ex;
             }

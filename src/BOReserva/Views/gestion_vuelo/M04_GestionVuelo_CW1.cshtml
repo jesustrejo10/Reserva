@@ -79,7 +79,11 @@
                             <div class="col-xs-6">
                                 <!-- DATE FECHA DESPEGUE  -->
                                 <label> Fecha Despegue (<span style="color: #d9534f">*</span>):</label>
-                                @Html.TextBoxFor(m => m._fechaDespegue, null, new { @class = "datepicker", @type = "date", @id = "fechaDespegue", @style = "width: 100%;" })
+                                @Html.TextBoxFor(m => m._fechaDespegue, null, new { @class = "datepicker", @type = "date", @id = "fechaDespegue",
+                                                                                    min = "2016-01-01",
+                                                                                    max = "2020-01-22",
+                                                                                    @style = "width: 100%;"
+                           })
                             </div>
                             <!-- FIN FECHA DESPEGUE -->
                             <div class="col-xs-6">

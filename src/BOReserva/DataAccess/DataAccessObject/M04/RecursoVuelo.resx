@@ -234,4 +234,12 @@
   <data name="ErrorMensajeFormato" xml:space="preserve">
     <value>Formato invalido</value>
   </data>
+  <data name="BuscarCodigo" xml:space="preserve">
+    <value>M04_BuscarCodigo</value>
+    <comment>Procedimiento que busca un codigo de vuelo en la bd</comment>
+  </data>
+  <data name="ErrorCodigoDuplicado" xml:space="preserve">
+    <value>El codigo de vuelo ya se encuentra registrado</value>
+    <comment>Error de la BD</comment>
+  </data>
 </root>

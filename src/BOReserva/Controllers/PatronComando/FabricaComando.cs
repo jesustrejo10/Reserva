@@ -253,6 +253,15 @@ namespace BOReserva.Controllers.PatronComando
             return new M04.M04_COBuscarVuelo(idVuelo);
         }
 
+        /// <summary>
+        /// Metodo para instanciar el comando M04_COBuscarCodigoVuelo
+        /// </summary>
+        /// <param name="codigo"></param>
+        /// <returns>M04_COBuscarCodigoVuelo</returns>
+        public static Command<Boolean> ConsultarM04_CodigoVuelo(String codigo)
+        {
+            return new M04.M04_COBuscarCodigoVuelo(codigo);
+        }
         #endregion
 
         #region M13_Roles

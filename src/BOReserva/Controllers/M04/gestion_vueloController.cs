@@ -36,7 +36,7 @@ namespace BOReserva.Controllers
             try
             {
                 Command<List<Entidad>> comando = FabricaComando.ConsultarM04_ConsultarTodos();
-                listaVuelos = comando.ejecutar();  
+                listaVuelos = comando.ejecutar();
             }
             catch (SqlException e)
             {
@@ -53,7 +53,7 @@ namespace BOReserva.Controllers
             return PartialView(listaVuelos);
         }
 
-      
+
 
         //VISTA-CREAR: dlstatusvuelo() sera el metodo para llenar el DropdownList del status de vuelo
         public string[] dlstatusvuelo()
@@ -76,13 +76,13 @@ namespace BOReserva.Controllers
             {
                 Command<List<Entidad>> comando = FabricaComando.ConsultarM04_LugarOrigen();
                 listaCiudadOrigen = comando.ejecutar();
-                modelo =  FabricaViewModelVuelo.instanciarCrearVueloVM();
+                modelo = FabricaViewModelVuelo.instanciarCrearVueloVM();
                 modelo._ciudadesOrigen = listaCiudadOrigen.Select(x => new SelectListItem
                                         {
                                             Value = x._id.ToString(),
                                             Text = ((Ciudad)x)._nombre
                                         });
-    
+
             }
             catch (SqlException e)
             {
@@ -113,8 +113,8 @@ namespace BOReserva.Controllers
                 model.setFechaDespegue();
                 comando = FabricaComando.ConsultarM04_BuscarAvionRuta(model._idRuta);
                 rutaAviones = comando.ejecutar();
-                model._matriculasAvion = new SelectList(rutaAviones, 
-                                                        RecursoAvionCO.ParametroIdSelect, 
+                model._matriculasAvion = new SelectList(rutaAviones,
+                                                        RecursoAvionCO.ParametroIdSelect,
                                                         RecursoAvionCO.ParametroMatSelect
                                                         );
                 return PartialView(RecursoAvionCO.PartialViewCW2, model);
@@ -178,14 +178,14 @@ namespace BOReserva.Controllers
             try
             {
                 model.setFechaDespegue();
-                avion = new Avion(model._idAvion,"","",0,0,0,0,0,0,0,0);
-                ruta = new Ruta(model._idRuta,"","","","",0);
-                vuelo = FabricaEntidad.InstanciarVuelo(model._idAvion, 
-                                                       model._codigoVuelo, 
-                                                       ruta, 
-                                                       model.fechaDespegue, 
-                                                       model._statusVuelo, 
-                                                       model.getFechaAterrizaje(), 
+                avion = new Avion(model._idAvion, "", "", 0, 0, 0, 0, 0, 0, 0, 0);
+                ruta = new Ruta(model._idRuta, "", "", "", "", 0);
+                vuelo = FabricaEntidad.InstanciarVuelo(model._idAvion,
+                                                       model._codigoVuelo,
+                                                       ruta,
+                                                       model.fechaDespegue,
+                                                       model._statusVuelo,
+                                                       model.getFechaAterrizaje(),
                                                        (Avion)avion);
                 comando = FabricaComando.crearM04_AgregarVuelo(vuelo);
                 comando.ejecutar();
@@ -344,7 +344,7 @@ namespace BOReserva.Controllers
                 comando = FabricaComando.ModificarM04_ModificarVuelo(vuelo);
                 comando.ejecutar();
             }
-            catch(ReservaExceptionM04 ex)
+            catch (ReservaExceptionM04 ex)
             {
                 TempData["message"] = ex.Message;
             }
@@ -455,8 +455,27 @@ namespace BOReserva.Controllers
                 String error = "Error desconocido consultando los aviones disponibles, contacte con el administrador.";
                 return Json(error);
             }
+        }
 
-            return null;
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult validarCodigo(String codVuelo)
+        {
+            try
+            {
+                Command<Boolean> comando = FabricaComando.ConsultarM04_CodigoVuelo(codVuelo);
+                return Json(comando.ejecutar());
+            }
+            catch (ReservaExceptionM04 ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido consultando los aviones disponibles, contacte con el administrador.";
+                return Json(error);
+            }
         }
 
 
@@ -595,12 +614,12 @@ namespace BOReserva.Controllers
 
 
 
-    /// <summary>
-    /// Cambiar status del vuelo
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    public ActionResult M04_Cambiar_Status(int idVuelo)
+        /// <summary>
+        /// Cambiar status del vuelo
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult M04_Cambiar_Status(int idVuelo)
         {
             try
             {
@@ -624,7 +643,7 @@ namespace BOReserva.Controllers
         }
 
 
-        
+
 
         [HttpPost]
         public ActionResult revisarCodVuelo(String codVuelo)
@@ -633,7 +652,7 @@ namespace BOReserva.Controllers
             int existe = 0;
             try
             {
-               existe = sql.codVueloUnico(codVuelo);
+                existe = sql.codVueloUnico(codVuelo);
             }
             catch (SqlException e)
             {
@@ -648,7 +667,7 @@ namespace BOReserva.Controllers
                 return Json(error);
             }
             return Json(existe);
-        } 
+        }
 
-        
+    } 
 }

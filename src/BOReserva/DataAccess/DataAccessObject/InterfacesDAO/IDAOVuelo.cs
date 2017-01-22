@@ -17,5 +17,13 @@ namespace BOReserva.DataAccess.DAO
 
         List<Entidad> ConsultarAvionRuta(int idRuta);
 
+        bool BuscarCodigo(String Codigo);
+
+        Entidad ConsultarDatosAterrizaje(int idRuta, DateTime fechaTiempo, int idAvion);
+        
+        List<Entidad> ConsultarLugarDestino(int lugarO);
+
+        List<Entidad> ConsultarLugarOrigen();
+
     }
 }

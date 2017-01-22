@@ -1,6 +1,7 @@
 // Evento para agregar un vuelo a la BD CREAR
 $("#formGuardarVuelo").submit(function (e) {
     e.preventDefault();
+    checkTextCodigo2();
     var form = $("#formGuardarVuelo");
     var selectedCO = $("#ciudadO option:selected").text();
     var selectedCD = $("#ciudadD option:selected").text();
@@ -247,13 +248,10 @@ $("#ciudadD").change(function () {
                });
            })
         .error(function (xhr, textStatus, exceptionThrown) {
-        alert(xhr.responseText);
+            alert(xhr.responseText);
+            $('#ciudadD').val(0);
         });
 });
-
-
-
-
 
 //evento para el boton de return de la vista VISUALIZAR-->MOSTRAR
 $("#return").click(function (e) {
@@ -278,11 +276,8 @@ $("#return").click(function (e) {
                 });
         });
 
-
-
 //verificar campo de CodigoVuelo
-
-        function checkTextCodigo(field) {
+function checkTextCodigo(field) {
             var codVuelo = $('#codigoVuelo').val();
             // verificar que el campo de Codigo Vuelo no tenga caracteres especiales ni espacios
             if (/[^a-z0-9]/gi.test(codVuelo)) {// Validando 
@@ -309,7 +304,7 @@ $("#return").click(function (e) {
         }
 
 // VISTA VISUALIZAR = Funcion que llamara a la vista de mostrar y le pasa el id del vuelo seleccionado
-        $(".mostrar").click(function () {
+$(".mostrar").click(function () {
             var identificador = $(this).parent().parent().parent().attr("id");
             jQuery.ajax({
                 type: "GET",
@@ -343,9 +338,8 @@ $("#return").click(function (e) {
 
         });
 
-
 // VISTA VISUALIZAR = Funcion que llamara a la vista de modificar y mostara el vuelo seleciconado a modificar
-        $(".modificar").click(function () {
+ $(".modificar").click(function () {
             var identificador = $(this).parent().parent().parent().attr("id");
             jQuery.ajax({
                 type: "GET",
@@ -364,7 +358,7 @@ $("#return").click(function (e) {
 
 
 //VISTA VISUALIZAR= funcion que tomara el ID de la tupla seleccionada en la tabla y procedera a desactivara en la BD
-        $(".desactivar").click(function () {
+ $(".desactivar").click(function () {
             var identificador = $(this).parent().parent().parent().attr("id");
             jQuery.ajax({
                 type: "GET",
@@ -394,7 +388,7 @@ $("#return").click(function (e) {
         });
 
 // VISTA VISUALIZAR= Funcion que procedera a activar un vuelo en estado inactivo
-        $(".activar").click(function () {
+$(".activar").click(function () {
             var identificador = $(this).parent().parent().parent().attr("id");
             jQuery.ajax({
                 type: "GET",
@@ -458,6 +452,7 @@ $("#return").click(function (e) {
                     text: "Seleccione un avion"
                     , error: function (xhr, textStatus, exceptionThrown) {
                         alert(xhr.responseText);
+                        select.value(0);
                     }
                 }));
                 $.each(data, function (index, itemData) {
@@ -520,3 +515,49 @@ $("#return").click(function (e) {
 
  }
 
+//Validaciones de campo
+
+ $('#codigoVuelo').keyup(function () {
+     var matricula = $('#codigoVuelo').val();
+     if (/[^a-z0-9/-]/gi.test(matricula)) {  // Valido que no tenga caracteres especiales ni espacios
+         alert("El codigo de vuelo no puede tener caracteres especiales ni espacios");
+         $('#codigoVuelo').val('');
+     }
+ });
+
+ function checkTextCodigo2() {
+     var codVuelo = $('#codigoVuelo').val(); 
+     var url = "/gestion_vuelo/validarCodigo";
+    $.ajax({
+        url: url,
+        data: { codVuelo: codVuelo },
+        cache: false,
+        type: "GET",
+        success: function (data) {
+        },
+        error:(function (xhr, textStatus, exceptionThrown) {
+            alert(xhr.responseText);
+        }),
+    });
+}
+
+ $('#fechaDespegue').keyup(function () {
+     var matricula = $('#fechaDespegue').val();
+     if (/[^a-z0-9/-]/gi.test(matricula)) {  // Valido que no tenga caracteres especiales ni espacios
+         alert("El codigo de vuelo no puede tener caracteres especiales ni espacios");
+         $('#codigoVuelo').val('');
+     }
+ });
+ function isDateSelected() {
+     var today = new Date();
+     var inputDate = new Date(document.interestForm.bday.value);
+     if (inputDate.value == " ") {
+         return false;
+     } else if (inputDate > today) {
+         return false;
+     } else {
+         return true;
+     }
+ }
+
+ $("#fechaDespegue").keypress(function (event) { event.preventDefault(); });
