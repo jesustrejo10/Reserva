@@ -609,5 +609,41 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
 
         }
+
+        ///<summary>
+        ///Metodo para eliminar permiso a un rol existente
+        ///</summary>
+        ///<returns>String</returns>
+        public String quitarPermiso(int idRol, int idPermiso)
+        {
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            try
+            {
+                conexion.Close();
+                conexion.Open();
+                using (SqlCommand cmd = new SqlCommand(M13_DAOResources.QuitarPermiso, conexion))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idRol", idRol);
+                    cmd.Parameters.AddWithValue("@idPermiso", idPermiso);
+                    cmd.ExecuteNonQuery();
+                    cmd.Dispose();
+                    conexion.Close();
+                    return "1";
+                }
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return ex.Message;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return ex.Message;
+            }
+        }
     }
 }

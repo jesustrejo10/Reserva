@@ -136,7 +136,7 @@
   <data name="ConsultarPermisosNoAsociados" xml:space="preserve">
     <value>M13_ConsultarPermisosNoAsociados</value>
     <comment>Consulta los permisos que no estan asociados al rol</comment>
-</data>
+  </data>
   <data name="ConsultarPermisosUsuario" xml:space="preserve">
     <value>M13_ConsultarPermisosUsuario</value>
     <comment>Lista de los permisos del usuario para iniciar la sesion</comment>
@@ -160,5 +160,9 @@
   <data name="ListarPermisos" xml:space="preserve">
     <value>M13_ListarPermisos</value>
     <comment>Lista de los permisos en general</comment>
+  </data>
+  <data name="QuitarPermiso" xml:space="preserve">
+    <value>M13_QuitarPermiso</value>
+    <comment>Elimina un permiso de un rol</comment>
   </data>
 </root>

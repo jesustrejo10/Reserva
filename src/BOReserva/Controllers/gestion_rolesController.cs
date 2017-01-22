@@ -107,7 +107,6 @@ namespace BOReserva.Controllers
                     entrada.Id = item._idPermiso;
                     md.agregarElemento(entrada);
                 }
-
                 modelovista.Id_Rol = rolbuscado._idRol;
                 modelovista.Nombre_rol = rolbuscado._nombreRol;
                 modelovista.Permisos = md;
@@ -170,29 +169,13 @@ namespace BOReserva.Controllers
         ///<summary>
         ///Metodo para modificar roles
         ///</summary>
-        ///<returns>Lista de Entidad</returns>
+        ///<returns>JsonResult</returns>
         [HttpPost]
-        //public JsonResult modificarrol(CRoles model)
         public JsonResult modificarrol(int id_rol, String nuevo_rol)
         {
-
-
-            //if (rol == null && nombrerolnuevo == null)
-            //{
-            //    //Creo el codigo de error de respuesta
-            //    Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            //    //Agrego mi error               
-            //    String error = "Error, campo obligatorio vacio";
-            //    //Retorno el error                
-            //    return Json(error);
-            //}
             String agrego_si_no;
             try
             {
-                ////instancio el manejador de sql
-                //manejadorSQL sql = new manejadorSQL();
-                ////Realizo el insert y Guardo la respuesta de mi metodo sql en un bool
-                //bool respuesta = sql.ModificarrRol(rol, nombrerolnuevo);
                 CRoles model = new CRoles();
                 model.Id_Rol = id_rol;
                 model.Nombre_rol = nuevo_rol;
@@ -214,10 +197,7 @@ namespace BOReserva.Controllers
                 String error = "Error desconocido, contacte con el administrador.";
                 return Json(error);
             }
-            //envio una respuesta dependiendo del resultado del insert
             return (Json(true, JsonRequestBehavior.AllowGet));
-
-
         }
 
         ///<summary>
@@ -237,15 +217,14 @@ namespace BOReserva.Controllers
                 return Json(error);
             }
             try{
-            if (_permisos.Count() >= 1) {
-
-                for (int i=1; i < _permisos.Count(); i++)
-                {
-                    Entidad nuevoRol = FabricaEntidad.InstanciarRolPermiso(_permisos[0].ToString(), _permisos[i].ToString());
-                    Command<String> comando = FabricaComando.crearM13_AgregarRolPermiso(nuevoRol);
-                    agrego_si_no = comando.ejecutar(); 
+                if (_permisos.Count() > 1) {
+                    for (int i=1; i < _permisos.Count(); i++)
+                    {
+                        Entidad nuevoRol = FabricaEntidad.InstanciarRolPermiso(_permisos[0].ToString(), _permisos[i].ToString());
+                        Command<String> comando = FabricaComando.crearM13_AgregarRolPermiso(nuevoRol);
+                        agrego_si_no = comando.ejecutar(); 
+                    }
                 }
-             }
                 return (Json(agrego_si_no));
             }
             catch (SqlException e)
@@ -406,5 +385,37 @@ namespace BOReserva.Controllers
             return (Json(listapermisos, JsonRequestBehavior.AllowGet));
         }
 
-	}
+        ///<summary>
+        ///Metodo para eliminarle permisos a un rol
+        ///</summary>
+        ///<returns>String</returns>
+        [HttpPost]
+        public String eliminarPermisoRol(int idRol, int idPermiso)
+        {
+            String borro_si_no;
+            try
+            {
+                Command<Entidad> comando = FabricaComando.crearM13_ConsultarRol(idRol);
+                Entidad rol = comando.ejecutar();
+                Rol rolbuscado = (Rol)rol;
+                Command<String> comando_permisos = FabricaComando.crearM13_QuitarPermisos(idRol, idPermiso);
+                borro_si_no = comando_permisos.ejecutar();
+            }
+            catch (SqlException e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error insertando en la BD.";
+                return null;
+
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
+                return null;
+            }
+            return borro_si_no;
+        }
+
+    }
 }

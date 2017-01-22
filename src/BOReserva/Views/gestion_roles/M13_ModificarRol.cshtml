@@ -40,8 +40,8 @@
 
                                 @foreach (var item in Model.Permisos)
                                 {
-                                    <a href="#" title="Eliminar Permiso" id="@item.Nombre" class="@Model.Nombre_rol"><i class=" fa fa-times eliminarpermiso"></i></a>
-                                    <option class="modificar" value="@item.Nombre">@item.Nombre </option> <br>
+                                    <a href="#" title="Eliminar Permiso" id="@item.Id" class="@Model.Nombre_rol"><i class=" fa fa-times eliminarpermiso"></i></a>
+                                    <option class="modificar" value="@item.Id">@item.Nombre </option> <br>
                                 }
                             </div>
                         </div>
@@ -78,17 +78,17 @@
         var r = confirm("Esta función no podrá ser revertida, ¿Está seguro de que desea continuar?");
         if (r) {
             var nombreRol = $(".eliminarpermiso").parent().attr("class");
-            var idRol = $(".eliminarpermiso").parent().attr("class");
-            var nombrePermiso = $(this).parent().attr("id");
-            console.log(nombreRol + nombrePermiso);
+            var id_rol = $("#rol_id").val();
+            var idPermiso = $(this).parent().attr("id");
+            console.log(id_rol + idPermiso);
             jQuery.ajax({
                 type: "POST",
-                url: "/gestion_roles/quitarPermisoRol",
-                data: { _nombrerol: nombreRol, _nombrepermiso: nombrePermiso }
+                url: "/gestion_roles/eliminarPermisoRol",
+                data: { idRol: id_rol, idPermiso: idPermiso }
             }).done(function (data) {
-                var url = '/gestion_roles/M13_VisualizarRol';
-                var method = 'GET';
-                var data = '';
+                var url = '/gestion_roles/M13_ModificarRol';
+                var method = 'POST';
+                var data = { _idRol: id_rol };
                 $.ajax(
                     {
                         url: url,
@@ -153,20 +153,37 @@
                 data: { id_rol: id_rol, nuevo_rol: nuevo_rol },
                 type: 'POST',
                 success: function () {
-                    alert("Se cambio exitosamente el nombre del rol");
-                    asignarPermisos();
+                    if (permisos.lenght > 1) {
+                        asignarPermisos();
+                    }
+                    else {
+                        $.ajax({
+                            url: '/gestion_roles/M13_VisualizarRol',
+                            type: 'GET',
+                            success: function (data, textStatus, jqXHR) {
+                                $("#contenido").empty();
+                                $("#contenido").append(data);
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                console.log("error");
+                                alert(errorThrown);
+                            }
+                        });
+                    }
                 }
             });
         }
     });
 
     function asignarPermisos() {
+        console.log("asignandopermisos");
         $.ajax({
             type: 'post',
             dataType: 'json',
             url: 'gestion_roles/asignarpermisos',
             data: { json: JSON.stringify(permisos) },
             success: function (data) {
+                console.log("primer success");
                 $.ajax({
                     url: '/gestion_roles/M13_VisualizarRol',
                     type: 'GET',
@@ -175,12 +192,16 @@
                         $("#contenido").append(data);
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
+                        console.log("error");
                         alert(errorThrown);
                     }
                 });
             },
             failure: function (response) {
                 alert("No se pudo asignar permisos");
+            },
+            done: function () {
+                console.log("done");
             }
         });
     }

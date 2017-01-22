@@ -286,6 +286,7 @@
     <Compile Include="Controllers\PatronComando\M09\M09_COVisualizarHoteles.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COConsultarPermisosNoAsociados.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COConsultarPermisosUsuario.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COQuitarPermiso.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCabina.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOItinerario.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCabina.cs" />

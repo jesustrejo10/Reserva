@@ -9,6 +9,7 @@ using System.Web;
 using System.Linq;
 using BOReserva.Controllers.PatronComando.M10;
 using BOReserva.Controllers.PatronComando.M16;
+using BOReserva.Controllers.PatronComando.M13;
 
 namespace BOReserva.Controllers.PatronComando
 {
@@ -370,7 +371,10 @@ namespace BOReserva.Controllers.PatronComando
         {
             return new M13_COConsultarPermisosUsuario(id);
         }
-
+        public static Command<String> crearM13_QuitarPermisos(int idRol, int idPermiso)
+        {
+            return new M13_COQuitarPermiso(idRol, idPermiso);
+        }
         #endregion
 
         #region M05_Boleto
