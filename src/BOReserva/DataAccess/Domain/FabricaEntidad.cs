@@ -411,6 +411,15 @@ namespace BOReserva.DataAccess.Domain
                               model._fechaFinOferta, estadoOferta);
         }
 
+        public static Entidad InstanciarPaquete(int idpaquete, String nombrepaquete, float preciopaquete, 
+                                                    bool estadopaquete)
+        {   
+
+        
+            return new Paquete(idpaquete, nombrepaquete, preciopaquete, estadopaquete);
+
+        }
+
         #endregion
     }
 }

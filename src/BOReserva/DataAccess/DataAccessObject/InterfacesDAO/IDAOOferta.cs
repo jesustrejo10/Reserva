@@ -1,4 +1,6 @@
-﻿using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+using BOReserva.DataAccess.Domain;
+using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using System;
 using System.Collections.Generic;
@@ -24,5 +26,8 @@ namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
         /// <param name="e">Entidad para modificar en la bd</param>
         /// <returns>1 si modificó, 0 si no.</returns>
         int Modificar(Entidad e, int id);
+
+        String disponibilidadOferta(Entidad e, int disponibilidad);
     }
 }
+

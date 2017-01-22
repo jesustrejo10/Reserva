@@ -37,13 +37,19 @@ namespace BOReserva.Controllers
         {
             return PartialView();
         }
-
+         /// <summary>
+        /// Método de la vista parcial M11_VisualizarPaquete
+         /// </summary>
+        /// <returns>Retorna la vista parcial M11_VisualizarPaquetes en conjunto del Modelo de dicha vista</returns>
         public ActionResult M11_VisualizarPaquete()
         {
-            manejadorSQL sql = new manejadorSQL();
+            Command<List<Entidad>> comando = FabricaComando.crearM11VisualizarPaquetes();
+            List<Entidad> listaPaquetes = comando.ejecutar();
+            return PartialView(listaPaquetes);
+            /*manejadorSQL sql = new manejadorSQL();
             List<CPaquete> paquetes = new List<CPaquete>();
             paquetes = sql.listarPaquetes();
-            return PartialView(paquetes);
+            return PartialView(paquetes);*/
         }
 
         public ActionResult M11_DetallePaquete(String paqueteIdStr)
@@ -99,10 +105,30 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult M11_ListarRestaurantes()
         {
-            manejadorSQL sql = new manejadorSQL();
-            var restauranteList = new List<CRestauranteModelo>();
+            //manejadorSQL sql = new manejadorSQL();
+            //var restauranteList = new List<CRestauranteModelo>();
            // restauranteList = sql.consultarRestaurante();
-            return Json(restauranteList);
+            //Metodos para M11 Probados 
+            Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, FabricaComando.comandoRestaurant.LISTAR_RESTAURANT, null);
+            List <Entidad> restaurantes = comando.ejecutar();
+            //return Json(restauranteList);
+            /*List<CRestauranteModelo> lista = FabricaEntidad.crearListaRestarant();
+            CRestauranteModelo rest;
+            foreach (Entidad re in restaurantes)
+            {
+                rest = (CRestauranteModelo)re;
+                lista.Add(rest);
+
+            }*/
+            CRestauranteModelo Restaurant = FabricaEntidad.crearRestaurant();
+            List<CRestauranteModelo> lista = FabricaEntidad.crearListaRestarant();
+
+            foreach (Entidad item in restaurantes)
+            {
+                lista.Add((CRestauranteModelo)item);
+            }
+
+            return Json(lista);
         }
 
         public ActionResult M11_ModificarPaquete(String paqueteIdStr)
@@ -344,7 +370,7 @@ namespace BOReserva.Controllers
             return Json("");
         }
 
-        [HttpPost]
+      /*  [HttpPost]
         public JsonResult desactivarOferta(String ofertaIdStr)
         {
             int ofertaId = Int32.Parse(ofertaIdStr);
@@ -364,7 +390,7 @@ namespace BOReserva.Controllers
                 String error = "Error procesando la petición";
                 return Json(error);
             }
-        }
+        }*/
 
         [HttpPost]
         public JsonResult activarOferta(String ofertaIdStr)
@@ -679,6 +705,18 @@ namespace BOReserva.Controllers
             sql.modificarPaquete(paquete);
 
             return Json(true);
+        }
+
+        [HttpPost]
+        public JsonResult desactivarOferta(int id)
+        {
+            Command<Entidad> comando = FabricaComando.crearM11ConsultarOferta(id);
+            Entidad oferta = comando.ejecutar();
+            Oferta ofertabuscada = (Oferta)oferta;
+            ofertabuscada._id = id;
+            Command<String> comando1 = FabricaComando.crearM11DisponibilidadOferta(ofertabuscada, 0);
+            String borro_si_no = comando1.ejecutar();
+            return (Json(borro_si_no));
         }
 	}
 }
