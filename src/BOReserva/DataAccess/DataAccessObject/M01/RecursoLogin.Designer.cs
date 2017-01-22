@@ -97,6 +97,15 @@ namespace BOReserva.DataAccess.DataAccessObject.M01 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to M01_EliminarLogin.
+        /// </summary>
+        internal static string EliminarLogin {
+            get {
+                return ResourceManager.GetString("EliminarLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @id.
         /// </summary>
         internal static string id {
@@ -111,6 +120,15 @@ namespace BOReserva.DataAccess.DataAccessObject.M01 {
         internal static string IncrementarIntentos {
             get {
                 return ResourceManager.GetString("IncrementarIntentos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M01_InsertarLogin.
+        /// </summary>
+        internal static string InsertarLogin {
+            get {
+                return ResourceManager.GetString("InsertarLogin", resourceCulture);
             }
         }
         
