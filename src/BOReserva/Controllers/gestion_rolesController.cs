@@ -172,7 +172,8 @@ namespace BOReserva.Controllers
         }
         //Metodo para modifcar nombre roles
         [HttpPost]
-        public JsonResult modificarrol(CRoles model)
+        //public JsonResult modificarrol(CRoles model)
+        public JsonResult modificarrol(int id_rol, String nuevo_rol)
         {
 
 
@@ -192,7 +193,10 @@ namespace BOReserva.Controllers
                 //manejadorSQL sql = new manejadorSQL();
                 ////Realizo el insert y Guardo la respuesta de mi metodo sql en un bool
                 //bool respuesta = sql.ModificarrRol(rol, nombrerolnuevo);
-                Entidad modificarRol = FabricaEntidad.InstanciarRolId(model);
+                CRoles model = new CRoles();
+                model.Id_Rol = id_rol;
+                model.Nombre_rol = nuevo_rol;
+                Entidad modificarRol = FabricaEntidad.InstanciarRolIdNombre(model);
                 //con la fabrica instancie al hotel.
                 Command<String> comando = FabricaComando.crearM13_ModificarRol(modificarRol, model.Id_Rol);
                 agrego_si_no = comando.ejecutar();
@@ -369,36 +373,30 @@ namespace BOReserva.Controllers
 
         //Metodo para consultar permisos que no tiene asignado el rol
         [HttpPost]
-        public JsonResult consultarLosPermisosNoAsignados(string nombre_rol)
+        public JsonResult consultarLosPermisosNoAsignados(int _idRol)
         {
-            //Verifico que todos los campos no sean nulos
-            if (nombre_rol == null)
+            if (_idRol == null)
             {
-                //Creo el codigo de error de respuesta
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                //Agrego mi error               
-                String error = "Error, campo obligatorio vacio";
-                //Retorno el error                
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;         
+                String error = "Error, campo obligatorio vacio";                
                 return Json(error);
             }
-            //instancio el manejador de sql
-            manejadorSQL sql = new manejadorSQL();
-            
-            //Instancio y coloco el nombre en el objeto
-            CRoles _rol = new CRoles();
-            _rol.Nombre_rol = nombre_rol;
-            //Instancio y coloco el nombre en el objeto
-            CListaGenerica<CModulo_detallado> _permisos= new CListaGenerica<CModulo_detallado>();
-            try{
-            //Realizo la consulta y Guardo la respuesta de mi metodo sql 
-            _permisos = sql.consultarLosPermisosNoAsignados(_rol);
-                                    }
+            Rol rolbuscado;
+            List<Entidad> listapermisos;
+            try
+            {
+                Command<Entidad> comando = FabricaComando.crearM13_ConsultarRol(_idRol);
+                Entidad rol = comando.ejecutar();
+                rolbuscado = (Rol)rol;
+                rolbuscado._id = _idRol;
+                Command<List<Entidad>> comando1 = FabricaComando.crearM13_ConsultarPermisosNoAsociados(rolbuscado, rolbuscado._idRol);
+                listapermisos = comando1.ejecutar();
+            }
             catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 String error = "Error insertando en la BD.";
                 return Json(error);
-
             }
             catch (Exception e)
             {
@@ -406,14 +404,7 @@ namespace BOReserva.Controllers
                 String error = "Error desconocido, contacte con el administrador.";
                 return Json(error);
             }
-            var _nombrePermiso = new List<object>();
-            foreach (var permiso in _permisos)
-            {
-                _nombrePermiso.Add(permiso.Nombre);
-
-            }
-            //envio el resultado de la consulta
-            return (Json(_nombrePermiso, JsonRequestBehavior.AllowGet));
+            return (Json(listapermisos, JsonRequestBehavior.AllowGet));
         }
 
 	}

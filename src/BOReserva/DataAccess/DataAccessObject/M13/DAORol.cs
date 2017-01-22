@@ -370,10 +370,53 @@ namespace BOReserva.DataAccess.DataAccessObject
             {
                 conexion.Close();
                 conexion.Open();
-                SqlCommand cmd = new SqlCommand(M13_DAOResources.ConsultarPermisosAsociados, conexion);
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                using (SqlCommand cmd = new SqlCommand(M13_DAOResources.ConsultarPermisosAsociados, conexion))
                 {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
                     listapermisos = new List<Entidad>();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        int _idPermiso = Int32.Parse(reader["mod_det_id"].ToString());
+                        String _nombrePermiso = reader["mod_det_nombre"].ToString();
+                        permiso = FabricaEntidad.crearPermiso(_idPermiso, _nombrePermiso);
+                        listapermisos.Add(permiso);
+                    }
+                    //cierro el lector
+                    reader.Close();
+                    //Cerrar la conexion
+                    conexion.Close();
+                    return listapermisos;
+                }
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public List<Entidad> consultarPermisosNoAsignados(int id)
+        {
+            List<Entidad> listapermisos;
+            Entidad permiso;
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            try
+            {
+                conexion.Close();
+                conexion.Open();
+                using (SqlCommand cmd = new SqlCommand(M13_DAOResources.ConsultarPermisosNoAsociados, conexion))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
+                    listapermisos = new List<Entidad>();
+                    SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
                         int _idPermiso = Int32.Parse(reader["mod_det_id"].ToString());

@@ -269,6 +269,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\List.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COVisualizarHoteles.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COConsultarPermisosNoAsociados.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COModificarRol.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COAgregarRol.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COAgregarRolPermiso.cs" />

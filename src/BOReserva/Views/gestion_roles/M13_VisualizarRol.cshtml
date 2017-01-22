@@ -97,7 +97,7 @@
         var identificador = $(this).closest("tr").attr("id");
 
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: "/gestion_roles/M13_ModificarRol",
             data: { _idRol: identificador },
             success: function(data){

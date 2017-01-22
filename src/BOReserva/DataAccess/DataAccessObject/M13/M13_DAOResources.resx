@@ -133,6 +133,10 @@
     <value>M13_ConsultarPermisosAsociados</value>
     <comment>Consulta permisos asignados a un rol</comment>
   </data>
+  <data name="ConsultarPermisosNoAsociados" xml:space="preserve">
+    <value>M13_ConsultarPermisosNoAsociados</value>
+    <comment>Consulta los permisos que no estan asociados al rol</comment>
+  </data>
   <data name="ConsultarRol" xml:space="preserve">
     <value>M13_ConsultarRol</value>
     <comment>Consulta un rol particular</comment>
