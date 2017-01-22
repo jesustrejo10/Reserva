@@ -65,8 +65,16 @@ namespace BOReserva.Excepciones.M09
         /// <param name="inner">Excepcion ExceptionBD</param>
         public ReservaExceptionM09(string mensaje, ExceptionBD inner)
         {
-            _Mensaje = "Reserva-404: Ha ocurrido un problema con la base de datos. Para mayor detalle revisar el Log de errores";
-            _Excepcion = inner;
+            if (inner.InnerException.Message.Contains("Reserva_Habitacion"))
+            {
+                _Mensaje = "Reserva-404: Ese hotel tiene reservaciones, por ende no se puede eliminar del sistema";
+                _Excepcion = inner;
+            }
+            else
+            {
+                _Mensaje = "Reserva-404: Ha ocurrido un problema con la base de datos. Para mayor detalle revisar el Log de errores";
+                _Excepcion = inner;
+            }
         }
 
 
@@ -102,6 +110,17 @@ namespace BOReserva.Excepciones.M09
         public ReservaExceptionM09(string mensaje, Exception inner)
         {
             _Mensaje = "Reserva-404: Ha ocurrido un error desconocido. Para mayor detalle revisar el Log de errores";
+            _Excepcion = inner;
+        }
+
+        /// <summary>
+        /// Constructor de la clase
+        /// </summary>
+        /// <param name="mensaje">Mensaje de la excepcion</param>
+        /// <param name="inner">Excepcion Exception</param>
+        public ReservaExceptionM09(string mensaje, LogException inner)
+        {
+            _Mensaje = "Reserva-404: Ha ocurrido un error al escribir el log";
             _Excepcion = inner;
         }
     }
