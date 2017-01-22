@@ -18,6 +18,15 @@ using BOReserva.DataAccess.Domain.M14;
 using BOReserva.Controllers.PatronComando.M09;
 using BOReserva.Controllers.PatronComando.M11;
 using BOReserva.Controllers.PatronComando.M01;
+
+namespace BOReserva.Controllers.PatronComando
+{
+    /// <summary>
+    /// Fabrica de todos los comandos de la aplicacion.
+    /// Esta clase es utilizada para instanciar a los comandos
+    /// </summary>
+    public class FabricaComando
+    {
         #region M01_Login
         public static Command<Entidad> M01ConsultarUsuario(Entidad _usuario)
         {
@@ -40,14 +49,6 @@ using BOReserva.Controllers.PatronComando.M01;
         }
         #endregion
 
-namespace BOReserva.Controllers.PatronComando
-{
-    /// <summary>
-    /// Fabrica de todos los comandos de la aplicacion.
-    /// Esta clase es utilizada para instanciar a los comandos
-    /// </summary>
-    public class FabricaComando
-    {
         #region M02_Gestion_Avion
         #region crearM02AgregarAvion
         /// <summary>
@@ -126,7 +127,6 @@ namespace BOReserva.Controllers.PatronComando
         }
         #endregion
         #endregion
-
 
         # region Lugar ( COLugar - COPais - COCiudad ) 
 
