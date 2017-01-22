@@ -20,7 +20,7 @@ namespace BOReserva.Controllers.PatronComando.M12
         }
 
         public override String ejecutar(){
-            DAOUsuario daoUsuario = (DAOUsuario)FabricaDAO.instanciarDaoUsuario();
+            IDAOUsuario daoUsuario = (DAOUsuario)FabricaDAO.instanciarDaoUsuario();
             String test = daoUsuario.eliminarUsuario(_usuario._id);
             return test;
         }

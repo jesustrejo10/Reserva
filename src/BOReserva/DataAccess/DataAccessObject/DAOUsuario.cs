@@ -208,7 +208,8 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
         }
 
-        public String eliminarUsuario(int id)
+       // public String eliminarUsuario(int id)
+        string IDAOUsuario.eliminarUsuario(int id)
         {
             SqlConnection conexion = Connection.getInstance(_connexionString);
             try

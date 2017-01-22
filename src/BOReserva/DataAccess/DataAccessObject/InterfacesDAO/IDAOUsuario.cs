@@ -8,6 +8,6 @@ namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
 {
     interface IDAOUsuario : IDAO
     {
-        //metodos detallados 
+        String eliminarUsuario(int id);
     }
 }

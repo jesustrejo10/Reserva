@@ -10,6 +10,8 @@ using System.Web;
 using System.Linq;
 using BOReserva.Controllers.PatronComando.M10;
 using BOReserva.Controllers.PatronComando.M16;
+using BOReserva.Controllers.PatronComando.M12;
+
 
 namespace BOReserva.Controllers.PatronComando
 {
