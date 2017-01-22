@@ -130,12 +130,12 @@ namespace BOReserva.DataAccess.DataAccessObject
                     String nombrePais;*/
 
                     int idAvion;
-                   /* int capacidad;
-                    int clasificacion;
-                    String nombreHotel;
-                    String direccionHotel;
-                    String paginaWebHotel;
-                    String emailHotel;*/
+                    /* int capacidad;
+                     int clasificacion;
+                     String nombreHotel;
+                     String direccionHotel;
+                     String paginaWebHotel;
+                     String emailHotel;*/
 
                     while (reader.Read())
                     {
@@ -145,7 +145,6 @@ namespace BOReserva.DataAccess.DataAccessObject
                         /*idPais = Int32.Parse(reader["id_pais"].ToString());
                         nombrePais = reader["nombre_pais"].ToString();
                         pais = new Pais(idPais, nombrePais);
-
                         idCiudad = Int32.Parse(reader["id_ciudad"].ToString());
                         nombreCiudad = reader["nombre_ciudad"].ToString();
                         ciudad = new Ciudad(idCiudad, nombreCiudad, pais);
@@ -158,8 +157,8 @@ namespace BOReserva.DataAccess.DataAccessObject
                    Int32.Parse(reader["pejecutiva"].ToString()), Int32.Parse(reader["pvip"].ToString()),
                    float.Parse(reader["equipaje"].ToString()), float.Parse(reader["maxdistancia"].ToString()),
                    float.Parse(reader["maxvelocidad"].ToString()), float.Parse(reader["maxcombustible"].ToString()));
-                   //Int32.Parse(reader["avi_disponibilidad"].ToString()));
-                        
+                        //Int32.Parse(reader["avi_disponibilidad"].ToString()));
+
                     }
                 }
                 cmd.Dispose();
@@ -206,31 +205,30 @@ namespace BOReserva.DataAccess.DataAccessObject
                     Avion avion;
 
                     int idAvion;
-                   /* int capacidad;
-                    int clasificacion;
-                    String nombreHotel;
-                    String direccionHotel;
-                    String paginaWebHotel;
-                    String emailHotel;*/
+                    /* int capacidad;
+                     int clasificacion;
+                     String nombreHotel;
+                     String direccionHotel;
+                     String paginaWebHotel;
+                     String emailHotel;*/
 
                     while (reader.Read())
                     {
                         //SE AGREGA CREA UN OBJECTO VEHICLE SE PASAN LOS ATRIBUTO ASI reader["<etiqueta de la columna en la tabla Automovil>"]
                         //Y  SE AGREGA a listavehiculos
                         //public Hotel(int id, String nombre, String direccion, String email, String paginaWeb, int clasificacion, int capacidad, Ciudad ciudad)
-                       /* idPais = Int32.Parse(reader["id_pais"].ToString());
-                        nombrePais = reader["nombre_pais"].ToString();
-                        pais = new Pais(idPais, nombrePais);
-
-                        idCiudad = Int32.Parse(reader["id_ciudad"].ToString());
-                        nombreCiudad = reader["nombre_ciudad"].ToString();
-                        ciudad = new Ciudad(idCiudad, nombreCiudad, pais);
-                        idHotel = Int32.Parse(reader["hot_id"].ToString());*/
+                        /* idPais = Int32.Parse(reader["id_pais"].ToString());
+                         nombrePais = reader["nombre_pais"].ToString();
+                         pais = new Pais(idPais, nombrePais);
+                         idCiudad = Int32.Parse(reader["id_ciudad"].ToString());
+                         nombreCiudad = reader["nombre_ciudad"].ToString();
+                         ciudad = new Ciudad(idCiudad, nombreCiudad, pais);
+                         idHotel = Int32.Parse(reader["hot_id"].ToString());*/
                         idAvion = Int32.Parse(reader["avi_id"].ToString());
 
                         avion = new Avion(
                    idAvion, reader["avi_matricula"].ToString(),
-                   reader["avi_modelo"].ToString(), 
+                   reader["avi_modelo"].ToString(),
                    Int32.Parse(reader["avi_pasajeros_turista"].ToString()),
                    Int32.Parse(reader["avi_pasajeros_ejecutiva"].ToString()),
                    Int32.Parse(reader["avi_pasajeros_vip"].ToString()),
@@ -239,11 +237,11 @@ namespace BOReserva.DataAccess.DataAccessObject
                    float.Parse(reader["avi_max_vel"].ToString()),
                    float.Parse(reader["avi_max_comb"].ToString()),
                    Int32.Parse(reader["avi_disponibilidad"].ToString()));
-                            
+
                         listaAviones.Add(idAvion, avion);
 
-                     
-                        
+
+
                     }
                 }
                 cmd.Dispose();
@@ -283,20 +281,20 @@ namespace BOReserva.DataAccess.DataAccessObject
                 return ex.Message;
             }
         }
-#endregion
+        #endregion
 
         #region disponiblidadAvion
         /// <summary>
         /// Metodo de DAO para cambiar disponibilidad del Avion
         /// </summary>
-        public String disponibilidadAvion(Entidad e,int disponibilidad)
+        public String disponibilidadAvion(Entidad e, int disponibilidad)
         {
             Avion avion = (Avion)e;
             SqlConnection conexion = Connection.getInstance(_connexionString);
             try
             {
                 conexion.Open();
-                
+
                 String sql = "UPDATE Avion SET avi_disponibilidad = " + disponibilidad +
                             " WHERE avi_id = " + avion._id;
                 /*String sql = "UPDATE Avion SET avi_disponibilidad = " + disponibilidad +
