@@ -133,6 +133,7 @@ namespace BOReserva.Controllers
                     String error = "Error accediendo a la BD";
                     return Json(error);
                 }
+
             }
             catch (SqlException e)
             {
@@ -155,14 +156,6 @@ namespace BOReserva.Controllers
             return (Json(listaCamarotes, JsonRequestBehavior.AllowGet));
         }
 
-        public ActionResult M24_ListarItinerario()
-        {
-            ConexionBD cbd = new ConexionBD();
-            VistaListaItinerario vlc = new VistaListaItinerario();
-            vlc.itinerarios = cbd.listarItinerario();
-            return PartialView("M24_ListarItinerario", vlc);
-        }
-
         /// <summary>
         /// Método de la vista parcial M24ListarCruceros
         /// </summary>
@@ -175,6 +168,17 @@ namespace BOReserva.Controllers
         }
 
         /// <summary>
+        /// Método de la vista parcial M24ListarCruceros
+        /// </summary>
+        /// <returns>Retorna la vista parcial M24_ListarCruceros en conjunto del Modelo de dicha vista</returns>
+        public ActionResult M24_ListarItinerario()
+        {
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14Visualizaritinerario();
+            Dictionary<int, Entidad> listaItinerario = comando.ejecutar();
+            return PartialView(listaItinerario);
+        }
+
+        /// <summary>
         /// Método de la vista parcial M24ListarCabinas
         /// </summary>
         /// <returns>Retorna la vista parcial M24_ListarCcabinas en conjunto del Modelo de dicha vista</returns>
@@ -184,7 +188,6 @@ namespace BOReserva.Controllers
             Dictionary<int, Entidad> listaCabinas = comando.ejecutar();
             return PartialView(listaCabinas);
         }
-        
 
         [HttpPost]
         public JsonResult guardarCrucero(CGestion_crucero model)

@@ -179,6 +179,11 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAOCabina();
         }
 
+        public static DAO instanciarDaoItinerario()
+        {
+            return new DAOItinerario();
+        }
+
         #endregion
     
         #region M06 GESTION DE COMIDA

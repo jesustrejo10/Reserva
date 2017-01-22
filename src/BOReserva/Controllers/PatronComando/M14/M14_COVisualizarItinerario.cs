@@ -7,20 +7,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.Controllers.PatronComando
+namespace BOReserva.Controllers.PatronComando.M14
 {
-    public class M14_COVisualizarCabinas : Command<Dictionary<int, Entidad>>
+    public class M14_COVisualizarItinerario : Command<Dictionary<int, Entidad>>
     {
-
-        int valor;        
-        public M14_COVisualizarCabinas(int value){
-            this.valor = value;
-        }       
-
-        public M14_COVisualizarCabinas()
-        {
-            // TODO: Complete member initialization
-        }
 
         /// <summary>
         /// Sobre escritura del metodo ejecutar de la clase Comando.
@@ -31,9 +21,9 @@ namespace BOReserva.Controllers.PatronComando
         /// </returns>
         public override Dictionary<int, Entidad> ejecutar()
         {
-            IDAOCabina daoCabina = (IDAOCabina) FabricaDAO.instanciarDaoCabina();
-            Dictionary<int, Entidad> mapCruceros = daoCabina.ConsultarTodos(valor);
-            return mapCruceros;
+            IDAO daoItinerario = FabricaDAO.instanciarDaoItinerario();
+            Dictionary<int, Entidad> mapItinerario = daoItinerario.ConsultarTodos();
+            return mapItinerario;
         }
 
     }

@@ -113,7 +113,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M14
                         reader["nombre"].ToString(),
                         float.Parse(reader["precio"].ToString()),
                         reader["estatus"].ToString(),
-                        int.Parse(reader["capacidad"].ToString()));
+                        int.Parse(reader["crucero"].ToString()));
                     listaCabinas.Add(Int32.Parse(reader["id"].ToString()), cabina);
                     //elemento++;
                 }

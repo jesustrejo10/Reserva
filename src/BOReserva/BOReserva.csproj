@@ -230,7 +230,6 @@
     <Compile Include="Controllers\PatronComando\M05\M05_COBuscarnombreciudad.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COEliminarBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COModificarPasajero.cs" />
-    <Compile Include="Controllers\PatronComando\M05\M05_COAgregarPasajero.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COConsultarBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COCrearBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M06\M06_COAgregarComidaVuelo.cs" />
@@ -284,6 +283,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\List.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COVisualizarHoteles.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COAgregarPasajero.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarItinerario.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarCabinas.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COListarCabinaCrucero.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COConsultarPermisosUsuario.cs" />
@@ -380,6 +381,7 @@
     <Compile Include="DataAccess\Domain\M13\Modulo.cs" />
     <Compile Include="DataAccess\Domain\M06\Comida.cs" />
     <Compile Include="DataAccess\Domain\M06\ComidaVuelo.cs" />
+    <Compile Include="DataAccess\Domain\M14\Itinerario.cs" />
     <Compile Include="DataAccess\Domain\Pasajero.cs" />
     <Compile Include="DataAccess\Domain\M13\Permiso.cs" />
     <Compile Include="DataAccess\Domain\Reclamo.cs" />
@@ -1672,6 +1674,7 @@
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_CW2.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_CW3.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_EditarPlato.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_ListarCabinas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_boletos\M05_VisualizarBoletos.cshtml" />
