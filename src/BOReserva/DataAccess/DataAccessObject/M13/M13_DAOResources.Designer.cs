@@ -61,6 +61,15 @@ namespace BOReserva.DataAccess.DataAccessObject.M13 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to M13_AgregarPermiso.
+        /// </summary>
+        internal static string AgregarPermiso {
+            get {
+                return ResourceManager.GetString("AgregarPermiso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to M13_AgregarPermisosRol.
         /// </summary>
         internal static string AgregarPermisoRol {

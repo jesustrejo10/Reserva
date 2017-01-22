@@ -375,6 +375,10 @@ namespace BOReserva.Controllers.PatronComando
         {
             return new M13_COQuitarPermiso(idRol, idPermiso);
         }
+        public static Command<String> crearM13_AgregarPermiso(Entidad e)
+        {
+            return new M13_COAgregarPermiso((Permiso)e);
+        }
         #endregion
 
         #region M05_Boleto

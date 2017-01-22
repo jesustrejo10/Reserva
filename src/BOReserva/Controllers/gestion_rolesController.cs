@@ -26,12 +26,22 @@ namespace BOReserva.Controllers
         /// <returns>La vista parcial con el modelo CRoles</returns>
         public ActionResult M13_AgregarRol()
         {
-            manejadorSQL sql = new manejadorSQL();
             CRoles rol = new CRoles();
+            List<Entidad> listapermisos;
+            CListaGenerica<CModulo_detallado> listamd = new CListaGenerica<CModulo_detallado>();
             try
             {
-            rol.Permisos = sql.consultarPermisos(rol.Nombre_rol);
-                                    }
+                Command<List<Entidad>> comando1 = FabricaComando.crearM13_ListarPermisos();
+                listapermisos = comando1.ejecutar();
+                foreach (Permiso permiso in listapermisos)
+                {
+                    CModulo_detallado md = new CModulo_detallado();
+                    md.Nombre = permiso._nombre;
+                    md.Id = permiso._idPermiso;
+                    listamd.agregarElemento(md);
+                }
+                rol.Permisos = listamd;
+            }
             catch (SqlException e)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
@@ -415,6 +425,49 @@ namespace BOReserva.Controllers
                 return null;
             }
             return borro_si_no;
+        }
+
+        /// <summary>
+        /// Metodo para llamar la vista parcial M13_AgregarRol
+        /// </summary>
+        /// <returns>La vista parcial con el modelo CRoles</returns>
+        public ActionResult M13_AgregarPermiso()
+        {
+            return PartialView();
+        }
+
+        public JsonResult agregarpermiso(CModulo_detallado model)
+        {
+            //Verifico que todos los campos no sean nulos
+            if (model.Nombre == null && model.Url == null)
+            {
+                //Creo el codigo de error de respuesta
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error               
+                String error = "Error, campos obligatorios vacios";
+                //Retorno el error                
+                return Json(error);
+            }
+            try
+            {
+                Entidad nuevoPermiso = FabricaEntidad.InstanciarPermiso(model);
+                Command<String> comando = FabricaComando.crearM13_AgregarPermiso(nuevoPermiso);
+                String agrego_si_no = comando.ejecutar();
+                return (Json(agrego_si_no));
+            }
+            catch (SqlException e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error insertando en la BD.";
+                return Json(error);
+
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
+                return Json(error);
+            }
         }
 
     }

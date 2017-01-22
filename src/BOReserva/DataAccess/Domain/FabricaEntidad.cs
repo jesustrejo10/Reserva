@@ -305,9 +305,11 @@ namespace BOReserva.DataAccess.Domain
             return new Rol(rol, permiso);
         }
 
-        public static Entidad InstanciarPermiso(String permiso)
+        public static Entidad InstanciarPermiso(CModulo_detallado model)
         {
-            return new Permiso();
+            String _nombre = model.Nombre;
+            String url = model.Url;
+            return new Permiso(_nombre, url);
         }
 
         

@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AgregarPermiso" xml:space="preserve">
+    <value>M13_AgregarPermiso</value>
+    <comment>Agrega un permiso nuevo a la base de datos</comment>
+  </data>
   <data name="AgregarPermisoRol" xml:space="preserve">
     <value>M13_AgregarPermisosRol</value>
     <comment>Agrega un permiso a un rol</comment>

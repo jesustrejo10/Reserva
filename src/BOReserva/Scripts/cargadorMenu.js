@@ -509,6 +509,27 @@ jQuery(document).ready(function () {
                 }
             });
     });
+    $("#m13AgregarPermiso").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_roles/M13_AgregarPermiso';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
     //FIN M13 ROLES
 
     // Comienzo M12 Usuarios

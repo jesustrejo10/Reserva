@@ -164,8 +164,13 @@ namespace BOReserva.DataAccess.DataAccessObject
         {
             return new DAORol();
         }
+
+        public static DAO instanciarDAOPermiso()
+        {
+            return new DAOPermiso();
+        }
         #endregion
-        
+
         #region M14_Cruceros
         //public static DAO instanciarDaoCrucero()
         //{
@@ -179,7 +184,7 @@ namespace BOReserva.DataAccess.DataAccessObject
         //}
 
         #endregion
-    
+
         #region M06 GESTION DE COMIDA
 
         public static DAOComida instanciarComida()

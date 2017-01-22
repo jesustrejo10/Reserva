@@ -284,11 +284,14 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\List.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COVisualizarHoteles.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COAgregarPermiso.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COConsultarPermisosNoAsociados.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COConsultarPermisosUsuario.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COQuitarPermiso.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCabina.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOItinerario.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPermiso.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M13\DAOPermiso.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCabina.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCruceros.cs" />
     <Compile Include="Controllers\PatronComando\M10\M10_COListarRestaurantId.cs" />
@@ -1666,6 +1669,7 @@
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_CW2.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_CW3.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_EditarPlato.cshtml" />
+    <Content Include="Views\gestion_roles\M13_AgregarPermiso.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_boletos\M05_VisualizarBoletos.cshtml" />
