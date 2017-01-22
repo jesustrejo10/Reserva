@@ -213,6 +213,11 @@
     <Compile Include="Controllers\M04\gestion_vueloController.cs" />
     <Compile Include="Controllers\PatronComando\Command.cs" />
     <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
+    <Compile Include="Controllers\PatronComando\M02\M02_COConsultarAvion.cs" />
+    <Compile Include="Controllers\PatronComando\M02\M02_CODisponibilidadAvion.cs" />
+    <Compile Include="Controllers\PatronComando\M02\M02_COEliminarAvion.cs" />
+    <Compile Include="Controllers\PatronComando\M02\M02_COModificarAvion.cs" />
+    <Compile Include="Controllers\PatronComando\M02\M02_COVisualizarAvion.cs" />
     <Compile Include="Controllers\PatronComando\M03\M03_COAgregarRuta.cs" />
     <Compile Include="Controllers\PatronComando\M03\M03_COConsultarDestinos.cs" />
     <Compile Include="Controllers\PatronComando\M03\M03_CODeshabilitarRuta.cs" />
@@ -221,6 +226,10 @@
     <Compile Include="Controllers\PatronComando\M03\M03_COModificarRutacs.cs" />
     <Compile Include="Controllers\PatronComando\M03\M03_COMostrarRuta.cs" />
     <Compile Include="Controllers\PatronComando\M03\M03_COValidarRuta.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COCrearBoarding.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COConteoBoarding.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COCrearMaletas.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COConteoMaletas.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COConsultarListaVuelo.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COConsultarBoletosVuelo.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COConsultarBoletoBD.cs" />
