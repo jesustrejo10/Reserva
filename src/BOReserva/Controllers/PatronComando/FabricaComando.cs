@@ -314,7 +314,7 @@ namespace BOReserva.Controllers.PatronComando
 
         }
 
-        #endregion
+       #endregion
 
         #region M14_Gestion_Cruceros
 
@@ -341,6 +341,11 @@ namespace BOReserva.Controllers.PatronComando
             return new M14_COAgregarCabina((Cabina) e);
             
         }
+
+        #endregion
+
+        #region M14_Gestion_Cruceros
+
 
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
