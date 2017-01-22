@@ -12,6 +12,7 @@ namespace BOReserva.Models.gestion_comida_vuelo
         public String _tipoPlato { get; set; }
         public int _estatusPlato { get; set; }
         public String _descripcionPlato { get; set; }
+        public int _cantidad { get; set; }
 
             public CComida() { }
             public CComida(int id,string nombre,string tipo,int estatus,string descripcion)

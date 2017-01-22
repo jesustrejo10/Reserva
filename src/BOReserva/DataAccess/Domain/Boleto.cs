@@ -25,7 +25,7 @@ namespace BOReserva.DataAccess.Domain
 
         public DateTime _fechaBoleto { get; set; }
 
-        public List<Vuelo> _vuelos { get; set; }
+        public List<BoletoVuelo> _vuelos { get; set; }
         public int _idVuelo { get; set; }
 
         public String _codigo { get; set; }
@@ -43,7 +43,7 @@ namespace BOReserva.DataAccess.Domain
             _destino = new Lugar(idDestino, destino);
             _fechaBoleto = fechaBoleto;
             _tipoBoleto = tipoBol;
-            _vuelos = new List<Vuelo>();
+            _vuelos = new List<BoletoVuelo>();
         }
 
         //Constructor usado para las reservas, ya que el único atributo extra en la tabla reserva es el código
@@ -60,7 +60,7 @@ namespace BOReserva.DataAccess.Domain
             _destino = new Lugar(idDestino, destino);
             _fechaBoleto = fechaBoleto;
             _tipoBoleto = tipoBol;
-            _vuelos = new List<Vuelo>();
+            _vuelos = new List<BoletoVuelo>();
             _codigo = codigo;
 
         }
@@ -77,7 +77,7 @@ namespace BOReserva.DataAccess.Domain
             _destino = new Lugar(idDestino, destino);
             _fechaBoleto = fechaBoleto;
             _tipoBoleto = tipoBol;
-            _vuelos = new List<Vuelo>();
+            _vuelos = new List<BoletoVuelo>();
 
         }
 

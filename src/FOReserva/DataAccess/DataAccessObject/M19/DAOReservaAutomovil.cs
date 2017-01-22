@@ -37,8 +37,10 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
             string _hora_fin;
             int _idUsuario;
             string _idAutomovil;
-            int _idLugarOri;
-            int _idLugarDest;
+            string fabricante;
+            string modelo;
+            string _LugarOri;
+            string _LugarDest;
             int _estatus;
 
             try
@@ -59,21 +61,28 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
                     _hora_fin = filareserva[RecursoDAOM19.reservaHoraFin].ToString();
                     _idUsuario = int.Parse(filareserva[RecursoDAOM19.reservaUsuarioFk].ToString());
                     _idAutomovil = filareserva[RecursoDAOM19.reservaAutomovilFk].ToString();
-                    _idLugarOri = int.Parse(filareserva[RecursoDAOM19.reservaCiudadEntFk].ToString());
-                    _idLugarDest = int.Parse(filareserva[RecursoDAOM19.reservaCiudadDevFk].ToString());
+                    fabricante = filareserva[RecursoDAOM19.autFabricante].ToString();
+                    modelo = filareserva[RecursoDAOM19.autModelo].ToString();
+                    _LugarOri = filareserva[RecursoDAOM19.origen].ToString();
+                    _LugarDest = filareserva[RecursoDAOM19.destino].ToString();
                     _estatus = int.Parse(filareserva[RecursoDAOM19.reservaEstatus].ToString());
+
+                    CAutomovil automovil = FabricaEntidad.inicializarAutomovil(_idAutomovil, modelo, fabricante);
+                    CLugar ori= FabricaEntidad.inicializarLugar(_LugarOri);
+                    CLugar dest = FabricaEntidad.inicializarLugar(_LugarDest);
+
+                    // INICIALIZO LA RESERVA
                     reserva = FabricaEntidad.inicializarReserva(_id, _fecha_ini, _fecha_fin, _hora_ini, _hora_fin,
-                                                                _idUsuario, _idAutomovil, _idLugarOri, _idLugarDest,
-                                                                _estatus);
+                                                                _idUsuario,_estatus, automovil, ori, dest);
                     listaDeReservas.Add(reserva);
                 }
 
                 return listaDeReservas;
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
-                throw;
+                throw e;
             }
         }
 
@@ -95,8 +104,10 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
             String horaFin;
             int idUsuario;
             String idAutomovil;
-            int ciudadDevo;
-            int ciudadEnt;
+            String modelo;
+            String fabricante;
+            string _LugarOri;
+            string _LugarDest;
             int estatus;
             Entidad reserva;
 
@@ -119,11 +130,19 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
                 horaFin = Fila[RecursoDAOM19.reservaHoraFin].ToString();
                 idUsuario = int.Parse(Fila[RecursoDAOM19.reservaUsuarioFk].ToString());
                 idAutomovil = Fila[RecursoDAOM19.reservaAutomovilFk].ToString();
-                ciudadDevo = int.Parse(Fila[RecursoDAOM19.reservaCiudadDevFk].ToString());
-                ciudadEnt = int.Parse(Fila[RecursoDAOM19.reservaCiudadEntFk].ToString());
+                fabricante = Fila[RecursoDAOM19.autFabricante].ToString();
+                modelo = Fila[RecursoDAOM19.autModelo].ToString();
+                _LugarOri = Fila[RecursoDAOM19.origen].ToString();
+                _LugarDest = Fila[RecursoDAOM19.destino].ToString();
                 estatus = int.Parse(Fila[RecursoDAOM19.reservaEstatus].ToString());
-                reserva = FabricaEntidad.inicializarReserva(idReserva, fechaIni, fechaFin, horaIni, horaFin, idUsuario, idAutomovil, ciudadEnt, ciudadDevo, estatus);
 
+                CAutomovil automovil = FabricaEntidad.inicializarAutomovil(idAutomovil, modelo, fabricante);
+                CLugar ori = FabricaEntidad.inicializarLugar(_LugarOri);
+                CLugar dest = FabricaEntidad.inicializarLugar(_LugarDest);
+
+                // INICIALIZO LA RESERVA
+                reserva = FabricaEntidad.inicializarReserva(idReserva, fechaIni, fechaFin, horaIni, horaFin,
+                                                            idUsuario, estatus, automovil, ori, dest);
 
                 return reserva;
 
@@ -174,23 +193,23 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
                 //el metodo Ejecutar Store procedure recibe la lista de parametros como el query, este ultimo es el nombre del procedimietno en la BD
                 tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM19.procedimientoConsultarAutosCiudad,parametro);
 
-                foreach (DataRow filaautomovil in tablaDeDatos.Rows)
+                foreach (DataRow Fila in tablaDeDatos.Rows)
                 {
-                    matricula = filaautomovil[RecursoDAOM19.autMatricula].ToString();
-                    modelo = filaautomovil[RecursoDAOM19.autModelo].ToString();
-                    fabricante = filaautomovil[RecursoDAOM19.autFabricante].ToString();
-                    anio = int.Parse(filaautomovil[RecursoDAOM19.autAnio].ToString());
-                    kilometraje = double.Parse(filaautomovil[RecursoDAOM19.autKilometraje].ToString());
-                    cantPasajeros = int.Parse(filaautomovil[RecursoDAOM19.autCantpasajeros].ToString());
-                    tipo = filaautomovil[RecursoDAOM19.autTipo].ToString();
-                    precioCompra = double.Parse(filaautomovil[RecursoDAOM19.autPreciocompra].ToString());
-                    precioAlquiler = double.Parse(filaautomovil[RecursoDAOM19.autPrecioalquiler].ToString());
-                    penalidadDiaria = double.Parse(filaautomovil[RecursoDAOM19.autPenalidaddiaria].ToString());
-                    fechaRegistro = filaautomovil[RecursoDAOM19.autFecharegistro].ToString();
-                    color = filaautomovil[RecursoDAOM19.autColor].ToString();
-                    disponibilidad = int.Parse(filaautomovil[RecursoDAOM19.autDisponibilidad].ToString());
-                    transmision = filaautomovil[RecursoDAOM19.autTransmision].ToString();
-                    idCiudad = int.Parse(filaautomovil[RecursoDAOM19.autFk_ciudad].ToString());
+                    matricula = Fila[RecursoDAOM19.autMatricula].ToString();
+                    modelo = Fila[RecursoDAOM19.autModelo].ToString();
+                    fabricante = Fila[RecursoDAOM19.autFabricante].ToString();
+                    anio = int.Parse(Fila[RecursoDAOM19.autAnio].ToString());
+                    kilometraje = double.Parse(Fila[RecursoDAOM19.autKilometraje].ToString());
+                    cantPasajeros = int.Parse(Fila[RecursoDAOM19.autCantpasajeros].ToString());
+                    tipo = Fila[RecursoDAOM19.autTipo].ToString();
+                    precioCompra = double.Parse(Fila[RecursoDAOM19.autPreciocompra].ToString());
+                    precioAlquiler = double.Parse(Fila[RecursoDAOM19.autPrecioalquiler].ToString());
+                    penalidadDiaria = double.Parse(Fila[RecursoDAOM19.autPenalidaddiaria].ToString());
+                    fechaRegistro = Fila[RecursoDAOM19.autFecharegistro].ToString();
+                    color = Fila[RecursoDAOM19.autColor].ToString();
+                    disponibilidad = int.Parse(Fila[RecursoDAOM19.autDisponibilidad].ToString());
+                    transmision = Fila[RecursoDAOM19.autTransmision].ToString();
+                    idCiudad = int.Parse(Fila[RecursoDAOM19.autFk_ciudad].ToString());
                     automovil = FabricaEntidad.inicializarAutomovil(matricula, modelo, fabricante, anio, kilometraje, cantPasajeros, tipo, precioCompra, precioAlquiler, penalidadDiaria, fechaRegistro, color, disponibilidad, transmision, idCiudad);
                     listaDeAutomovil.Add(automovil);
                 }
@@ -203,6 +222,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
                 throw;
             }
         }
+
         /// <summary>
         /// Metodo para agregar reserva de automovil
         /// </summary>
@@ -309,15 +329,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
             try
             {
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_id, SqlDbType.Int, resv._id.ToString(), false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fecha_ini, SqlDbType.VarChar, resv._fecha_ini, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fecha_fin, SqlDbType.VarChar, resv._fecha_fin, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_hora_ini, SqlDbType.VarChar, resv._hora_ini, false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_hora_fin, SqlDbType.VarChar, resv._hora_fin, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fk_usuario, SqlDbType.Int, resv._idUsuario.ToString(), false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fk_automovil, SqlDbType.VarChar, resv._idAutomovil, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fk_ciudad_devolucion, SqlDbType.Int, resv._idLugarOri.ToString(), false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fk_ciudad_entrega, SqlDbType.Int, resv._idLugarDest.ToString(), false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_estatus, SqlDbType.Int, resv._estatus.ToString(),false));
 
                 EjecutarStoredProcedure(RecursoDAOM19.procedimientoActualizar, listaParametro);
             }

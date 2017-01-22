@@ -37,6 +37,11 @@ namespace BOReserva.DataAccess.Domain
             this._descripcion = comida._descripcion;
         }
 
+        public Comida(int id)
+        {
+            this._id = id;
+        }
+
         public Comida()
         {
             this._id = 0;

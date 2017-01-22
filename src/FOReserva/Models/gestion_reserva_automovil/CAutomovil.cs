@@ -55,6 +55,18 @@ namespace FOReserva.Models.gestion_reserva_automovil
             
         }
 
+        public CAutomovil(string matricula, string modelo, string fabricante)
+        {
+
+            _matricula = matricula;
+            _modelo = modelo;
+            _fabricante = fabricante;
+        }
+        public CAutomovil(string matricula)
+        {
+            _matricula = matricula;
+        }
+
         #endregion
 
     }

@@ -8,10 +8,14 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using FOReserva.DataAccess.DataAccessObject.M20;
 
 namespace FOReserva.DataAccess.DataAccessObject
 
 {
+    /// <summary>
+    /// Clase encargada de instanciar los DAO respectivos para cada modulo
+    /// </summary>
     public class FabricaDAO
     {
         #region M16 Reclamos
@@ -21,6 +25,11 @@ namespace FOReserva.DataAccess.DataAccessObject
         /// </summary>
         /// <returns>una instancia del DAO de reclamos</returns>
         public static DAO instanciarDaoReclamo()
+        {
+            return new DAOReclamo();
+        }
+
+        public static IDAOReclamo reclamoPersonalizado()
         {
             return new DAOReclamo();
         }
@@ -74,6 +83,13 @@ namespace FOReserva.DataAccess.DataAccessObject
         public static SqlDataAdapter asignarAdaptadorDeDatos(SqlCommand comandoSql)
         {
             return new SqlDataAdapter(comandoSql);
+        }
+        #endregion
+
+        #region Modulo 20
+        public static DAORevision CreateDAORevision()
+        {
+            return new DAORevision();
         }
         #endregion
     }

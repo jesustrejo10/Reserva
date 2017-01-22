@@ -21,7 +21,7 @@ namespace BOReserva.Controllers.PatronComando
 
         public override String ejecutar()
         {
-            IDAO daoPasajero= FabricaDAO.instanciarDaoPasajero();
+            IDAO daoPasajero = FabricaDAO.instanciarDaoPasajero();
             int test = daoPasajero.Agregar(_pasajero);
             return test.ToString();
         }

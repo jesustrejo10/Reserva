@@ -1,6 +1,7 @@
 ﻿using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
+using BOReserva.Excepciones.M09;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -11,6 +12,9 @@ using System.Web;
 
 namespace BOReserva.DataAccess.DataAccessObject
 {
+    /// <summary>
+    /// Clase abstracta que maneja la conexion a la BD
+    /// </summary>
     abstract public class DAO : IDAO
     {
         protected String _connexionString = ConfigurationManager.ConnectionStrings["StringRemoto"].ConnectionString;
@@ -38,10 +42,6 @@ namespace BOReserva.DataAccess.DataAccessObject
             throw new NotImplementedException();
         }
 
-        public int Eliminar(int id)
-        {
-            throw new NotImplementedException();
-        }
 
         #region Conectar con la Base de Datos
         /// <summary>
@@ -54,8 +54,8 @@ namespace BOReserva.DataAccess.DataAccessObject
 
             try
             {
+                //conexion = Connection.getInstance(_connexionString);
                 conexion = new SqlConnection(_connexionString);
-               
             }
 
             catch (Exception ex)
@@ -79,8 +79,7 @@ namespace BOReserva.DataAccess.DataAccessObject
 
             try
             {
-                conexion.Close();
-                conexion = null;
+                this.conexion.Close();
             }
 
             catch (Exception ex)
@@ -271,6 +270,8 @@ namespace BOReserva.DataAccess.DataAccessObject
                     using (SqlDataAdapter dataAdapter = new SqlDataAdapter(comando))
                     {
                         dataAdapter.Fill(dataTable);
+                        System.Diagnostics.Debug.WriteLine(dataAdapter);
+                        System.Diagnostics.Debug.WriteLine(dataTable);
                     }
 
                     return dataTable;
@@ -291,8 +292,6 @@ namespace BOReserva.DataAccess.DataAccessObject
                 Desconectar();
             }
         }
-
-      
         #endregion
 
     }
