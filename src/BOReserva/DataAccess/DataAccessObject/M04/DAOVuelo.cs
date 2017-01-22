@@ -29,7 +29,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                 List<Parametro> parametros = new List<Parametro>();
                 parametro = new Parametro(RecursoVuelo.ParametroCodVuelo, SqlDbType.VarChar, ((Vuelo)vuelo).CodigoVuelo.ToString(), false);
                 parametros.Add(parametro);
-                parametro = new Parametro(RecursoVuelo.ParametroIdRuta, SqlDbType.Int, ((Vuelo)vuelo).getRuta.idRuta.ToString(), false);
+                parametro = new Parametro(RecursoVuelo.ParametroIdRuta, SqlDbType.Int, ((Vuelo)vuelo).getRuta._idRuta.ToString(), false);
                 parametros.Add(parametro);
                 parametro = new Parametro(RecursoVuelo.ParametroFechaDespegue, SqlDbType.DateTime, ((Vuelo)vuelo).FechaDespegue.ToString(), false);
                 parametros.Add(parametro);
@@ -80,7 +80,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                 parametros.Add(parametro);
                 parametro = new Parametro(RecursoVuelo.ParametroCodVuelo, SqlDbType.VarChar, ((Vuelo)vuelo).CodigoVuelo.ToString(), false);
                 parametros.Add(parametro);
-                parametro = new Parametro(RecursoVuelo.ParametroIdRuta, SqlDbType.Int, ((Vuelo)vuelo).getRuta.idRuta.ToString(), false);
+                parametro = new Parametro(RecursoVuelo.ParametroIdRuta, SqlDbType.Int, ((Vuelo)vuelo).getRuta._idRuta.ToString(), false);
                 parametros.Add(parametro);
                 parametro = new Parametro(RecursoVuelo.ParametroFechaDespegue, SqlDbType.DateTime, ((Vuelo)vuelo).FechaDespegue.ToString(), false);
                 parametros.Add(parametro);
@@ -129,6 +129,7 @@ namespace BOReserva.DataAccess.DataAccessObject
         {
             DataTable resultado;
             Entidad vuelo;
+            Entidad avion;
             Parametro parametro;
             try
             {
@@ -152,11 +153,11 @@ namespace BOReserva.DataAccess.DataAccessObject
                         int idAvion= int.Parse(row[RecursoVuelo.ParametroIdAvion].ToString());
                         string ciudadD = row[RecursoVuelo.ParametroCDestino].ToString();
                         //cambiar
-                        Avion avion = new Avion(idAvion, aviMatricula, "", 0, 0, 0, 0, 0, 0, 0, 0);
-                        Ruta ruta = new Ruta(idRuta, ciudadO, ciudadD, "", "", 0);
-                        //
-                        vuelo = (Vuelo)FabricaEntidad.InstanciarVuelo(id, codVuelo, ruta, fechaDespegue, 
-                                                                        status, fechaAterrizaje, avion);
+                        avion = FabricaEntidad.InstanciarAvion(idAvion, aviMatricula, "", 0, 0, 0, 0, 0, 0, 0, 0);
+                        //ATENCIÓN, FABRICA DE RUTA NO FUNCIONA
+                        Ruta ruta = new Ruta(idRuta, 0, "", "", ciudadO, ciudadD);
+                        vuelo = (Vuelo)FabricaEntidad.InstanciarVuelo(id, codVuelo, ruta, fechaDespegue, status, fechaAterrizaje, 
+                                                                      (Avion)avion);
                         return vuelo;
                     }
 
@@ -233,7 +234,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                         //ATENCIÓN, CAMBIAR POR FABRICA CUANDO MANDEN EL METODO///////////////////////////////
                         Avion avion = new Avion(idAvion, matAvion, modAvion, 0, 0, 0,
                                 0, 0, 0, 0, 0);
-                        Ruta ruta = new Ruta(idRuta, ciudadO, ciudadD, null, null, 0);
+                        Ruta ruta = new Ruta(idRuta, 0, null, null, ciudadO, ciudadD);
                         //////////////////////////////////////////////////////////////////////////////////////
                         objVuelo = FabricaEntidad.InstanciarVuelo(id, codigoVuelo, ruta, fechaDespegue, status,
                                                              fechaAterrizaje, avion);

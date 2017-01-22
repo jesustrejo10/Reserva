@@ -14,116 +14,37 @@
                     <thead>
                         <tr>
                             <th>Nombre</th>
-                            @*<th>Modulo</th>*@
                             <th>Acceso a</th>
                             <th>Accion</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @try
+                        @foreach (BOReserva.DataAccess.Domain.Rol item in Model)
                         {
-                            foreach (BOReserva.DataAccess.Domain.Rol item in Model)
-                            {
-                                <tr id="@item._idRol">
-                                    <td>@item._nombreRol</td>
-                                    @*<td>
-                                        <table>
-                                            @foreach (var item2 in item.listapermisos)
-                                            {
-                                                <tr>@item2.Nombre </tr>
-                                                <br>}
-                                        </table>
-                                    </td>*@
-                                    <td>
-                                        <table>
-                                            @foreach (BOReserva.DataAccess.Domain.Permiso permisos in item.listapermisos)
-                                            {
-                                                <tr>@permisos._nombre</tr>
-                                                <br>}
-                                        </table>
-                                    </td>
-                                    <td class="center">
-                                        @if (@item._nombreRol != "Administrador" )
+                            <tr id="@item._idRol">
+                                <td>@item._nombreRol</td>                               
+                                <td>
+                                    <table>
+                                        @foreach (BOReserva.DataAccess.Domain.Permiso permisos in item.listapermisos)
                                         {
-                                            <a href="#" title="Modificar Rol"><i class="fa fa-pencil modificar"></i></a>
+                                            <tr>@permisos._nombre</tr>
+                                            <br>
                                         }
-                                        @if (@item._nombreRol != "Administrador" && @item._nombreRol != "Cargador" && @item._nombreRol != "Operador" && @item._nombreRol != "Cliente" && @item._nombreRol != "Anonimo")
-                                        {
-                                        <a href="#"  title="Eliminar Rol"><i class="fa fa-times eliminar"></i></a>
-                                        }
-
-                                    </td>
-                                </tr>
-                          
-                            }
-                              <script>
-                                           $(".eliminar").click(function () {
-                                            var r = confirm("Esta función no podrá ser revertida, ¿Está seguro de que desea continuar?")
-                                            if (r) {
-                                                var identificador = $(this).closest("tr").attr("id");
-                                                jQuery.ajax({
-                                                    type: "POST",
-                                                    url: "/gestion_roles/eliminarRol",
-                                                    data: { _idRol: identificador }
-                                                }).done(function (data) {
-                                                    var url = '/gestion_roles/M13_VisualizarRol';
-                                                    var method = 'GET';
-                                                    var data = '';
-                                                    $.ajax(
-                                                        {
-                                                            url: url,
-                                                            type: method,
-                                                            data: data,
-                                                            success: function (data, textStatus, jqXHR) {
-
-                                                                $("#contenido").empty();
-                                                                $("#contenido").append(data);
-                                                            },
-                                                            error: function (jqXHR, textStatus, errorThrown) {
-                                                                alert(errorThrown);
-                                                            }
-                                                        });
-                                                }).fail(function (data) {
-                                                    alert(data);
-                                                });
-
-                                            }
-                                        });
-                                        $(".modificar").click(function () {
-                                            var identificador = $(this).closest("tr").attr("id");
-                                            console.log(identificador);
-                                            jQuery.ajax({
-                                                type: "GET",
-                                                url: "/gestion_roles/M13_ModificarRol",
-                                                data: { _rolid: identificador }
-                                            }).done(function (data) {
-                                                $("#contenido").empty();
-                                                $("#contenido").append(data);
-                                            }).fail(function () {
-                                                alert(data);
-                                            });
-
-
-                                        });
-
-                                        
-                                    </script>
-                        }
-                        catch
-                        {
-                            <script>
-                                alert("Error en el listado, por favor intente acceder nuevamente");
-                            </script>
-                        }
-
-                    <tfoot>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Modulo</th>
-
-                            <th>Acceso a</th>
-                        </tr>
-                    </tfoot>
+                                    </table>
+                                </td>
+                                <td>
+                                    @if (@item._nombreRol != "Administrador")
+                                    {
+                                        <a href="#" title="Modificar Rol"><i class="fa fa-pencil modificar"></i></a>
+                                    }
+                                    @if (@item._nombreRol != "Administrador" && @item._nombreRol != "Cargador" && @item._nombreRol != "Operador" && @item._nombreRol != "Cliente" && @item._nombreRol != "Anonimo")
+                                    {
+                                        <a href="#" title="Eliminar Rol"><i class="fa fa-times eliminar"></i></a>
+                                    }
+                                </td>
+                            </tr>
+                        }                       
+                    </tbody>
                 </table>
             </div>
             <!-- /.box-body -->
@@ -134,19 +55,64 @@
 </div>
 <!-- /.row -->
 
-
-
-
 <script src="~/Content/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="~/Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
 
 <script language="javascript" type="text/javascript">
-   
     table = $('#VisualizarRol').DataTable();
 
+    $(".eliminar").click(function () {
+        var r = confirm("Esta función no podrá ser revertida, ¿Está seguro de que desea continuar?")
+        if (r) {
+            var identificador = $(this).closest("tr").attr("id");
+            jQuery.ajax({
+                type: "POST",
+                url: "/gestion_roles/eliminarRol",
+                data: { _idRol: identificador }
+            }).done(function (data) {
+                var url = '/gestion_roles/M13_VisualizarRol';
+                var method = 'GET';
+                var data = '';
+                $.ajax(
+                    {
+                        url: url,
+                        type: method,
+                        data: data,
+                        success: function (data, textStatus, jqXHR) {
+
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+            }).fail(function (data) {
+                alert(data);
+            });
+        }
+    });
+
+    $(".modificar").click(function () {
+        var identificador = $(this).closest("tr").attr("id");
+
+        $.ajax({
+            type: "GET",
+            url: "/gestion_roles/M13_ModificarRol",
+            data: { _idRol: identificador },
+            success: function(data){
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            },          
+            failure: function () {
+                alert(data);
+            }
+        });
+    });
 </script>
 
 <style>
-.eliminarpermiso{float:right;}
-
+    .eliminarpermiso {
+        float: right;
+    }
 </style>

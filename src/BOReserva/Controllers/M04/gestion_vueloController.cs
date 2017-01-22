@@ -37,6 +37,7 @@ namespace BOReserva.Controllers
             {
                 Command<List<Entidad>> comando = FabricaComando.ConsultarM04_ConsultarTodos();
                 listaVuelos = comando.ejecutar();
+                return PartialView(listaVuelos);
             }
             catch (SqlException e)
             {
@@ -178,8 +179,9 @@ namespace BOReserva.Controllers
             try
             {
                 model.setFechaDespegue();
-                avion = new Avion(model._idAvion, "", "", 0, 0, 0, 0, 0, 0, 0, 0);
-                ruta = new Ruta(model._idRuta, "", "", "", "", 0);
+                avion = FabricaEntidad.InstanciarAvion(model._idAvion, "", "", 0, 0, 0, 0, 0, 0, 0, 0);
+                //Fabrica Ruta no funciona
+                ruta = new Ruta(model._idRuta, 0,"","","","");
                 vuelo = FabricaEntidad.InstanciarVuelo(model._idAvion,
                                                        model._codigoVuelo,
                                                        ruta,
@@ -230,10 +232,10 @@ namespace BOReserva.Controllers
                     Value = x._id.ToString(),
                     Text = ((Ciudad)x)._nombre,
                 });
-                vModelo._ciudadOrigen = ((Vuelo)vuelo).getRuta.origenRuta;
-                vModelo._ciudadDestino = ((Vuelo)vuelo).getRuta.destinoRuta;
+                vModelo._ciudadOrigen = ((Vuelo)vuelo).getRuta._origenRuta;
+                vModelo._ciudadDestino = ((Vuelo)vuelo).getRuta._destinoRuta;
                 vModelo._codigoVuelo = ((Vuelo)vuelo).CodigoVuelo;
-                vModelo._idRuta = ((Vuelo)vuelo).getRuta.idRuta;
+                vModelo._idRuta = ((Vuelo)vuelo).getRuta._idRuta;
                 vModelo._fechaDespegue = ((Vuelo)vuelo).FechaDespegue.ToString(RecursoAvionCO.FormatoFecha);
                 vModelo._horaDespegue = ((Vuelo)vuelo).FechaDespegue.ToString(RecursoAvionCO.FormatoHora);
                 vModelo._idAvion = ((Vuelo)vuelo).getAvion._id;
@@ -333,7 +335,7 @@ namespace BOReserva.Controllers
             {
                 model.setFechaDespegue();
                 avion = new Avion(model._idAvion, "", "", 0, 0, 0, 0, 0, 0, 0, 0);
-                ruta = new Ruta(model._idRuta, "", "", "", "", 0);
+                ruta = new Ruta(model._idRuta, 0, "", "", "", "");
                 vuelo = FabricaEntidad.InstanciarVuelo(model._idVuelo,
                                                        model._codigoVuelo,
                                                        ruta,

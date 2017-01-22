@@ -7,8 +7,7 @@ namespace FOReserva.Models.Sesion
 {
     public class ClavesDiferentesException:Exception
     {
-        public ClavesDiferentesException():base() {
-            
-        }
+        public ClavesDiferentesException() : base("Las clasves son diferentes.") { }
+        public ClavesDiferentesException(Exception interna) : base("Las clasves son diferentes.", interna) { }
     }
 }

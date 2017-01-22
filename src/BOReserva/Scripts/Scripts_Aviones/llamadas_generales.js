@@ -1,4 +1,7 @@
-//EVENTO PARA AGREGAR UN AVION
+
+/// <summary>
+/// Evento para agregar un avion
+/// </summary>
 $("#aceptarAvion").click(function (e) {
     console.log("hola!");
     e.preventDefault();
@@ -18,7 +21,9 @@ $("#aceptarAvion").click(function (e) {
     });
 });
 
-
+/// <summary>
+/// evento para aceptar el avion al agregar
+/// </summary>
 $("#aceptarAvion").click(function (e) {
     e.preventDefault();
     var form = $("#formGuardarAvion");
@@ -33,6 +38,9 @@ $("#aceptarAvion").click(function (e) {
     var VIP = $('#capacidadVIP').val();
 });
 
+/// <summary>
+/// validacion de caracteres para el atributo matricula
+/// </summary>
 $('#matriculaAvion').keyup(function () {
     var matricula = $('#matriculaAvion').val();
     if (/[^a-z0-9/-]/gi.test(matricula)) {  // Valido que no tenga caracteres especiales ni espacios
@@ -41,6 +49,9 @@ $('#matriculaAvion').keyup(function () {
     }
 });
 
+/// <summary>
+/// validacion de caracteres para el atributo modelo avion
+/// </summary>
 $('#modeloAvion').keyup(function () {
     var modelo = $('#modeloAvion').val();
     if (/[^a-z0-9/-]/gi.test(modelo)) {
@@ -49,11 +60,17 @@ $('#modeloAvion').keyup(function () {
     }
 });
 
+/// <summary>
+/// validacion de caracteres para el atributo capacidad turistica
+/// </summary>
 $('#capacidadTurista').keyup(function () {
     var numbers = $(this).val();
     $(this).val(numbers.replace(/\D/, ''));
 });
 
+/// <summary>
+/// validacion de caracteres para el atributo capacidad turista
+/// </summary>
 $('#capacidadTurista').focusout(function () {
     var numbers = $(this).val();
     if (numbers > 999999999) {
@@ -66,11 +83,17 @@ $('#capacidadTurista').focusout(function () {
     }
 });
 
+/// <summary>
+/// validacion de caracteres para el atributo capacidad ejecutiva
+/// </summary>
 $('#capacidadEjecutiva').keyup(function () {
     var numbers = $(this).val();
     $(this).val(numbers.replace(/\D/, ''));
 });
 
+/// <summary>
+/// validacion de caracteres para el atributo capacidad ejecutiva
+/// </summary>
 $('#capacidadEjecutiva').focusout(function () {
     var numbers = $(this).val();
     if (numbers > 999999999) {
@@ -83,11 +106,17 @@ $('#capacidadEjecutiva').focusout(function () {
     }
 });
 
+/// <summary>
+/// validacion de caracteres para el atributo capacidad VIP
+/// </summary>
 $('#capacidadVIP').keyup(function () {
     var numbers = $(this).val();
     $(this).val(numbers.replace(/\D/, ''));
 });
 
+/// <summary>
+/// validacion de caracteres para el atributo capacidad VIP
+/// </summary>
 $('#capacidadVIP').focusout(function () {
     var numbers = $(this).val();
     if (numbers > 999999999) {
@@ -100,11 +129,17 @@ $('#capacidadVIP').focusout(function () {
     }
 });
 
+/// <summary>
+/// validacion de caracteres para el atributo velocidad maxima de vuelo
+/// </summary>
 $('#velocidadMaximaDeVuelo').keyup(function () {
     var numbers = $(this).val();
     $(this).val(numbers.replace(/\D/, ''));
 });
 
+/// <summary>
+/// validacion de caracteres para el atributo velocidad maxima de vuelo
+/// </summary>
 $('#velocidadMaximaDeVuelo').focusout(function () {
     var numbers = $(this).val();
     if (numbers > 999999999) {
@@ -117,11 +152,17 @@ $('#velocidadMaximaDeVuelo').focusout(function () {
     }
 });
 
+/// <summary>
+/// validacion de caracteres para el atributo distancia maxima de vuelo
+/// </summary>
 $('#distanciaMaximaDeVuelo').keyup(function () {
     var numbers = $(this).val();
     $(this).val(numbers.replace(/\D/, ''));
 });
 
+/// <summary>
+/// validacion de caracteres para el atributo distancia maxima de vuelo
+/// </summary>
 $('#distanciaMaximaDeVuelo').focusout(function () {
     var numbers = $(this).val();
     if (numbers > 999999999) {
@@ -134,11 +175,17 @@ $('#distanciaMaximaDeVuelo').focusout(function () {
     }
 });
 
+/// <summary>
+/// validacion de caracteres para el atributo capacidad Combustible
+/// </summary>
 $('#capacidadCombustible').keyup(function () {
     var numbers = $(this).val();
     $(this).val(numbers.replace(/\D/, ''));
 });
 
+/// <summary>
+/// validacion de caracteres para el atributo capacidad Combustible
+/// </summary>
 $('#capacidadCombustible').focusout(function () {
     var numbers = $(this).val();
     if (numbers > 999999999) {
@@ -151,18 +198,15 @@ $('#capacidadCombustible').focusout(function () {
     }
 });
 
-
-
+/// <summary>
+/// validacion de la capacidad maxima caracteres a introducir para el atributo capacidad turista
+/// </summary>
 function NumeroEntero(field) {
     if (field != '') {
         var turista = $('#capacidadTurista').keyup(function () {
             var numbers = $(this).val();
             $(this).val(numbers.replace(/\D/, ''));
         });
-        // if (/[0-9]/gi.test(turista)) {  // solo numeros
-        //   alert("Este campo solo admite valores enteros");
-        // field.value = '';
-        //}
         if (field.value > 9999999999) { //limite de digitos
             alert("No puede exceder los 10 digitos");
             field.value = '';
@@ -170,6 +214,9 @@ function NumeroEntero(field) {
     }
 }
 
+/// <summary>
+/// validacion de la capacidad maxima caracteres a introducir
+/// </summary>
 function checkLimite(field) {
     if (field != '') {
         alert("entro aqui en validacion de limite");
@@ -177,7 +224,6 @@ function checkLimite(field) {
             alert("Debe introducir un valor válido");
             field.value = '';
         }
-        //var velocidad = $('#velocidadMaximaVuelo').val();
         if (field.value > 9999999999) {
             alert("No puede exceder los 10 digitos");
             field.value = '';
@@ -185,14 +231,9 @@ function checkLimite(field) {
     }
 }
 
-
-
-
-
-
-
-
-
+/// <summary>
+/// Evento para modificar avion
+/// </summary>
 $("#modificarAvion").click(function (e) {
     console.log("hola!");
     e.preventDefault();
@@ -231,6 +272,9 @@ $("#modificarAvion").click(function (e) {
     });
 });
 
+/// <summary>
+/// evento para cancelar el modificar avion
+/// </summary>
 $("#cancelarModificacion").click(function (e) {
     e.preventDefault();
     var url = '/gestion_aviones/M02_VisualizarAviones';
