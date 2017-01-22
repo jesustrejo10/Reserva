@@ -10,7 +10,7 @@ namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
     /// <summary>
     /// Interfaz que posee los metodos eliminarHotel y disponibilidadHotel
     /// </summary>
-    interface IDAOHotel : IDAO
+    public interface IDAOHotel : IDAO
     {
         String eliminarHotel(int id);
 

@@ -61,56 +61,20 @@ namespace FOReserva.DataAccess.DataAccessObject.M20 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to rev_FK_res_ref.
+        ///   Looks up a localized string similar to rev_estrellas.
         /// </summary>
-        internal static string parametroReferencia {
+        internal static string parametroRevisionEstrellas {
             get {
-                return ResourceManager.GetString("parametroReferencia", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to rev_fecha.
-        /// </summary>
-        internal static string parametroRevisionFecha {
-            get {
-                return ResourceManager.GetString("parametroRevisionFecha", resourceCulture);
+                return ResourceManager.GetString("parametroRevisionEstrellas", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to rev_id.
         /// </summary>
-        internal static string parametroRevisionID {
+        internal static string parametroRevisionId {
             get {
-                return ResourceManager.GetString("parametroRevisionID", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to rev_FK_res_hot_id.
-        /// </summary>
-        internal static string parametroRevisionIDReservaHabitacion {
-            get {
-                return ResourceManager.GetString("parametroRevisionIDReservaHabitacion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to rev_FK_res_res_id.
-        /// </summary>
-        internal static string parametroRevisionIDReservaRestaurante {
-            get {
-                return ResourceManager.GetString("parametroRevisionIDReservaRestaurante", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to rev_FK_usu_id.
-        /// </summary>
-        internal static string parametroRevisionIDUsuario {
-            get {
-                return ResourceManager.GetString("parametroRevisionIDUsuario", resourceCulture);
+                return ResourceManager.GetString("parametroRevisionId", resourceCulture);
             }
         }
         
@@ -124,11 +88,20 @@ namespace FOReserva.DataAccess.DataAccessObject.M20 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to rev_puntuacion.
+        ///   Looks up a localized string similar to rev_fk_propietario.
         /// </summary>
-        internal static string parametroRevisionPuntuacion {
+        internal static string parametroRevisionPropietario {
             get {
-                return ResourceManager.GetString("parametroRevisionPuntuacion", resourceCulture);
+                return ResourceManager.GetString("parametroRevisionPropietario", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to rev_fk_referencia.
+        /// </summary>
+        internal static string parametroRevisionReferencia {
+            get {
+                return ResourceManager.GetString("parametroRevisionReferencia", resourceCulture);
             }
         }
         
@@ -142,47 +115,47 @@ namespace FOReserva.DataAccess.DataAccessObject.M20 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to rv_fecha.
+        ///   Looks up a localized string similar to val_id.
         /// </summary>
-        internal static string parametroValaloracionFecha {
+        internal static string parametroValoracionId {
             get {
-                return ResourceManager.GetString("parametroValaloracionFecha", resourceCulture);
+                return ResourceManager.GetString("parametroValoracionId", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to rv_id.
+        ///   Looks up a localized string similar to val_fk_propietario.
         /// </summary>
-        internal static string parametroValaloracionID {
+        internal static string parametroValoracionPropietario {
             get {
-                return ResourceManager.GetString("parametroValaloracionID", resourceCulture);
+                return ResourceManager.GetString("parametroValoracionPropietario", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to rv_val_neg.
+        ///   Looks up a localized string similar to val_punto.
         /// </summary>
-        internal static string parametroValaloracionNegativa {
+        internal static string parametroValoracionPunto {
             get {
-                return ResourceManager.GetString("parametroValaloracionNegativa", resourceCulture);
+                return ResourceManager.GetString("parametroValoracionPunto", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to rv_val_pos.
+        ///   Looks up a localized string similar to val_fk_revision.
         /// </summary>
-        internal static string parametroValaloracionPositiva {
+        internal static string parametroValoracionRevision {
             get {
-                return ResourceManager.GetString("parametroValaloracionPositiva", resourceCulture);
+                return ResourceManager.GetString("parametroValoracionRevision", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to rv_FK_rev.
+        ///   Looks up a localized string similar to M20_BorrarRevision.
         /// </summary>
-        internal static string parametroValaloracionRevision {
+        internal static string procedimientoBorrarRevision {
             get {
-                return ResourceManager.GetString("parametroValaloracionRevision", resourceCulture);
+                return ResourceManager.GetString("procedimientoBorrarRevision", resourceCulture);
             }
         }
         
@@ -192,6 +165,33 @@ namespace FOReserva.DataAccess.DataAccessObject.M20 {
         internal static string procedimientoGuardarRevision {
             get {
                 return ResourceManager.GetString("procedimientoGuardarRevision", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M20_GuardarValoracion.
+        /// </summary>
+        internal static string procedimientoGuardarValoracion {
+            get {
+                return ResourceManager.GetString("procedimientoGuardarValoracion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M20_ObtenerRevisionesPorReferencia.
+        /// </summary>
+        internal static string procedimientoObtenerRevisionesPorReferencia {
+            get {
+                return ResourceManager.GetString("procedimientoObtenerRevisionesPorReferencia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M20_ObtenerValoracionPorReferencia.
+        /// </summary>
+        internal static string procedimientoObtenerValoracionPorReferencia {
+            get {
+                return ResourceManager.GetString("procedimientoObtenerValoracionPorReferencia", resourceCulture);
             }
         }
     }

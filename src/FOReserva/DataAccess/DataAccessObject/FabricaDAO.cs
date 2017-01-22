@@ -2,6 +2,7 @@
 using FOReserva.DataAccess.Model;
 using FOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using FOReserva.DataAccess.DataAccessObject.M19;
+using FOReserva.DataAccess.DataAccessObject.M22;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,6 +14,9 @@ using FOReserva.DataAccess.DataAccessObject.M20;
 namespace FOReserva.DataAccess.DataAccessObject
 
 {
+    /// <summary>
+    /// Clase encargada de instanciar los DAO respectivos para cada modulo
+    /// </summary>
     public class FabricaDAO
     {
         #region M16 Reclamos
@@ -89,5 +93,14 @@ namespace FOReserva.DataAccess.DataAccessObject
             return new DAORevision();
         }
         #endregion
+
+        #region M22_Gestion_Reserva_Habitacion
+        public static IDAOReservaHabitacion instanciarDaoReservaHabitacion()
+        {
+            return new DAOReservaHabitacion();
+        }
+
+        #endregion
+
     }
 }

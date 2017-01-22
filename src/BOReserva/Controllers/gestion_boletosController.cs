@@ -90,9 +90,12 @@ namespace BOReserva.Controllers
         public ActionResult M05_VerVuelos(int idorigen, int iddestino, string idavuelta, string tipo, string fechaida, string fechavuelta)
         {
 
-            manejadorSQL_Boletos sqlboletos = new manejadorSQL_Boletos();
+            /*manejadorSQL_Boletos sqlboletos = new manejadorSQL_Boletos();
             List<CVuelo> listavuelos = new List<CVuelo>();
-            listavuelos = sqlboletos.M05ListarVuelosIdaBD(fechaida, fechavuelta, idorigen, iddestino, tipo);
+            listavuelos = sqlboletos.M05ListarVuelosIdaBD(fechaida, fechavuelta, idorigen, iddestino, tipo);*/
+            Command<List<Entidad>> comando = FabricaComando.consultarM05listaVuelosBD(fechaida, fechavuelta, idorigen, iddestino, tipo);
+            List<Entidad> listavuelos = comando.ejecutar();
+
             
             return PartialView(listavuelos);
         }
@@ -212,7 +215,7 @@ namespace BOReserva.Controllers
             return PartialView(bol);
         }
 
-        //falta patrones
+       
         public ActionResult M05_BoletoCreadoReserva(int id_reserva)
         {
 

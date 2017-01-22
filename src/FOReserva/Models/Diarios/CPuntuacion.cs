@@ -8,8 +8,8 @@ namespace FOReserva.Models.Diarios
 {
     public class CPuntuacion : BaseEntity
     {
-        private String _tipo;
-        private int _fk_usuario;
+        //private string _tipo;
+        //private int _fk_usuario;
     }
 
            
