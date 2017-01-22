@@ -392,10 +392,23 @@ namespace BOReserva.Controllers.PatronComando
         /// <returns>
         /// Retorna la instancia del comando M14_COVisualizarCabinas.
         /// </returns>
-        public static Command<Dictionary<int, Entidad>> crearM14VisualizarCamarotes(int id)
+        public static Command<Dictionary<int, Entidad>> crearM14VisualizarCamarote(int id)
         {
 
-            return new M14_COVisualizarCamarotes(id);
+            return new M14_COVisualizarCamarote(id);
+
+        }
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M14_COConsultarCrucero
+        /// </summary>
+        /// <param name="id">Identificador del Crucero a consultar</param>
+        /// <returns>Retorna la instancia del comando M14_COConsultarCrucero.</returns>
+        public static Command<Entidad> crearM14ConsultarCrucero(int id)
+        {
+
+            return new M14_COConsultarCrucero(id);
 
         }
 

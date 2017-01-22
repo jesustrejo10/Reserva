@@ -58,26 +58,21 @@ namespace BOReserva.DataAccess.DataAccessObject
 
         Entidad IDAO.Consultar(int id)
         {
-            SqlConnection conexion = Connection.getInstance(_connexionString);
+            SqlConnection con = Connection.getInstance(_connexionString);
             Crucero crucero = new Crucero();
             try
             {
-                conexion.Open();
-                String sql = "SELECT C.* " +
-                             "FROM CRUCERO C " +
-                             "WHERE C.CRU_ID = " + id;
+                con.Open();
 
-                SqlCommand cmd = new SqlCommand(sql, conexion);
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
+                SqlCommand query = new SqlCommand("M24_ConsultarCruceroID", con);
 
-                    int idCrucero;
-                    
+                query.CommandType = CommandType.StoredProcedure;
+                query.Parameters.AddWithValue("@id", id);
+                query.ExecuteNonQuery();
+                SqlDataReader reader = query.ExecuteReader();
 
                     while (reader.Read())
                     {
-                        idCrucero = Int32.Parse(reader["cru_id"].ToString());
-
                         crucero = new Crucero(id,
                             reader["cru_nombre"].ToString(),
                             reader["cru_compania"].ToString(),
@@ -85,15 +80,14 @@ namespace BOReserva.DataAccess.DataAccessObject
                             reader["cru_estatus"].ToString()
                         );
                     }
-                }
-                cmd.Dispose();
-                conexion.Close();
+                    reader.Close();
+                con.Close();
                 return crucero;
             }
             catch (SqlException ex)
             {
                 Debug.WriteLine(ex.ToString());
-                conexion.Close();
+                con.Close();
                 return null;
             }
         }

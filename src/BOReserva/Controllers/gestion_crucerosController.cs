@@ -16,6 +16,9 @@ namespace BOReserva.Controllers
 {
     public class gestion_crucerosController : Controller
     {
+
+        private static int idCrucero;
+
         // GET: gestion_cruceros
         public ActionResult M24_GestionCruceros()
         {
@@ -234,21 +237,6 @@ namespace BOReserva.Controllers
 
         }
 
-
-
-
-
-
-
-
-
-        public JsonResult M24_ListarCamarotes(int id)
-        {
-            ConexionBD cbd = new ConexionBD();
-            var listaCamarotes = cbd.listarCamarotes(id);
-            return (Json(listaCamarotes, JsonRequestBehavior.AllowGet));
-        }
-
         /// <summary>
         /// Método de la vista parcial M24ListarCruceros
         /// </summary>
@@ -280,6 +268,18 @@ namespace BOReserva.Controllers
             Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14VisualizarCabinas(id);
             Dictionary<int, Entidad> listaCabinas = comando.ejecutar();
             return PartialView(listaCabinas);
+        }
+
+
+        /// <summary>
+        /// Método de la vista parcial M24ListarCabinas
+        /// </summary>
+        /// <returns>Retorna la vista parcial M24_ListarCcabinas en conjunto del Modelo de dicha vista</returns>
+        public ActionResult M24_ListarCamarotes(int id)
+        {
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14VisualizarCamarote(id);
+            Dictionary<int, Entidad> listaCamarotes = comando.ejecutar();
+            return PartialView(listaCamarotes);
         }
 
         [HttpPost]
@@ -386,32 +386,29 @@ namespace BOReserva.Controllers
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
 
-        [HttpPost]
-        public JsonResult modificarCrucero(CGestion_crucero model)
-        {
-            int _idCrucero = model._idCrucero;
-            String _nombreCrucero = model._nombreCrucero;
-            String _companiaCrucero = model._companiaCrucero;
-            int _capacidadCrucero = model._capacidadCrucero;
-            CGestion_crucero crucero = new CGestion_crucero(_idCrucero, _nombreCrucero, _companiaCrucero, _capacidadCrucero);
-            crucero.ModificarCrucero(crucero);
 
-            return (Json(crucero, JsonRequestBehavior.AllowGet));
-        }
-
+        // <summary>
+        /// Método de la vista parcial M09_ModificarHotel
+        /// </summary>
+        /// <returns>Retorna la vista parcial M09_ModificarHotel en conjunto del Modelo de dicha vista</returns>
         public ActionResult M24_ModificarCrucero(int id)
         {
             try
             {
-                ConexionBD cbd = new ConexionBD();
-                CGestion_crucero crucero = new CGestion_crucero();
-                crucero = cbd.consultarCruceroID(id);
-                //crucero.cabinas = cbd.listarCabinas(id);
-                return PartialView("M24_ModificarCrucero", crucero);
+                Command<Entidad> comando = FabricaComando.crearM14ConsultarCrucero(id);
+                Entidad Crucero = comando.ejecutar();
+                Crucero CruceroB = (Crucero)Crucero;
+                idCrucero = CruceroB._id;
+                CGestion_crucero modelovista = new CGestion_crucero();
+                modelovista._nombreCrucero = CruceroB._nombreCrucero;
+                modelovista._companiaCrucero = CruceroB._companiaCrucero;
+                modelovista._capacidadCrucero = CruceroB._capacidadCrucero;
+                modelovista._estatus = CruceroB._estatus;
+                return PartialView(modelovista);
             }
             catch (Exception ex)
             {
-                return PartialView("M24_ModificarCrucero");
+                return null;
             }
         }
     }
