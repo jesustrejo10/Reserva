@@ -211,7 +211,7 @@
     <Compile Include="Controllers\gestion_reclamosEquipajeController.cs" />
     <Compile Include="Controllers\M04\gestion_vueloController.cs" />
     <Compile Include="Controllers\PatronComando\Command.cs" />
-    <Compile Include="Controllers\PatronComando\FabricaComando.cs" />	
+    <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
     <Compile Include="Controllers\PatronComando\M01\M01_COConsultarUsuario.cs" />
     <Compile Include="Controllers\PatronComando\M01\M01_COResetearIntentos.cs" />
     <Compile Include="Controllers\PatronComando\M01\M01_COIncrementarIntentos.cs" />
@@ -367,6 +367,11 @@
       <DependentUpon>M07ReclamoEquipaje.resx</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\DataAccessObject\M13\DAOPermiso.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M02\RecursoDAOM02.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RecursoDAOM02.resx</DependentUpon>
+    </Compile>
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCabina.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCamarotes.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCruceros.cs" />
@@ -517,6 +522,7 @@
     <Compile Include="Excepciones\ExceptionReserva.cs" />
     <Compile Include="Excepciones\Log.cs" />
     <Compile Include="Excepciones\LogException.cs" />
+    <Compile Include="Excepciones\M02\ReservaExceptionM02.cs" />
     <Compile Include="Excepciones\M08\ReservaExceptionM08.cs" />
     <Compile Include="Excepciones\M09\ReservaExceptionM09.cs" />
     <Compile Include="Excepciones\M04\ReservaExceptionM04.cs" />
@@ -1934,6 +1940,10 @@
     <EmbeddedResource Include="DataAccess\DataAccessObject\M07\M07ReclamoEquipaje.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>M07ReclamoEquipaje.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataAccess\DataAccessObject\M02\RecursoDAOM02.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecursoDAOM02.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="DataAccess\DataAccessObject\M08\RecursoDAOM08.resx" />
     <EmbeddedResource Include="DataAccess\DataAccessObject\M06\RecursoM06.resx" />

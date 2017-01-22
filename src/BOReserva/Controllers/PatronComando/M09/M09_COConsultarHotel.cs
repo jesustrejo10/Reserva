@@ -34,10 +34,10 @@ namespace BOReserva.Controllers.PatronComando.M09
         {
             try
             {
-                IDAO daoHotel = FabricaDAO.instanciarDaoHotel();
-                Entidad hotel = daoHotel.Consultar(valor);
-                return hotel;
-            }
+            IDAO daoHotel = FabricaDAO.instanciarDaoHotel();
+            Entidad hotel = daoHotel.Consultar(valor);
+            return hotel;
+        }
             catch (ReservaExceptionM09 ex)
             {
                 throw ex;

@@ -57,14 +57,14 @@
                                         <a href="#" title="Modificar hotel"><i class="fa fa-pencil modificar"></i></a>
                                         <a href="#" title="Eliminar hotel"><i class="fa fa-times eliminar"></i></a>
                                         @{
-                                if (c._disponibilidad)
-                                {
-                                    <a href="#" title="Disponible"><i class="fa fa-toggle-on desactivar"></i></a>
-                                }
-                                if (!c._disponibilidad)
-                                {
-                                    <a href="#" title="No disponible"><i class="fa fa-toggle-off activar"></i></a>
-                                }
+                                            if (c._disponibilidad)
+                                            {
+                                                <a href="#" title="Disponible"><i class="fa fa-toggle-on desactivar"></i></a>
+                                            }
+                                            if (!c._disponibilidad)
+                                            {
+                                                <a href="#" title="No disponible"><i class="fa fa-toggle-off activar"></i></a>
+                                            }
                                         }
                                     </td>
                                 </tr>
@@ -155,7 +155,7 @@
 <script language="javascript" type="text/javascript">
     $(document).ready(function () {
         //e.preventDefault();
-        $(".visualizarHotel").on("click", (function () {
+    $(".visualizarHotel").on("click", (function () {
             alert("Se esta procesando tu solicitud, por favor espere");
             var identificador = $(this).parent().parent().parent().attr("id");
             jQuery.ajax({

@@ -43,10 +43,10 @@ namespace BOReserva.Controllers.PatronComando.M09
         public override String ejecutar(){
             try
             {
-                IDAOHotel daoHotel = (DAOHotel)FabricaDAO.instanciarDaoHotel();
-                String test = daoHotel.eliminarHotel(_hotel._id);
-                return test;
-            }
+            IDAOHotel daoHotel = (DAOHotel)FabricaDAO.instanciarDaoHotel();
+            String test = daoHotel.eliminarHotel(_hotel._id);
+            return test;
+        }
             catch (ReservaExceptionM09 ex)
             {
                 //este throw esta incorrecto

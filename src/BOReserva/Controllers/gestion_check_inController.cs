@@ -129,7 +129,7 @@ namespace BOReserva.Controllers
                 if (lista.Count == 2) {
                     lista2 = (BoletoVuelo)lista[1]; 
                 }
-               
+
                 // PRIMERO VEO SI ES IDA O IDA Y VUELTA
                 //int ida_vuelta = modificar.MBuscarIdaVuelta(model._bol_id);
                 Command<int> comando2 = FabricaComando.mostrarM05idaVuelta(model._bol_id);
@@ -140,7 +140,7 @@ namespace BOReserva.Controllers
                 // DATOS PARA INSERTAR EN PASE DE ABORDAJE
                 CBoardingPass pase2 = new CBoardingPass();
                 BoardingPass pase;
-               
+
                 if (ida_vuelta == 1)
                 {
                     pase = (BoardingPass)FabricaEntidad.InstanciarBoardingPass(lista1._id, lista1._fechaPartida, lista1._fechaLlegada, lista1._fechaPartida.TimeOfDay.ToString(), lista1._ruta._origen, lista1._ruta._destino, lista1._ruta._nomOrigen, lista1._ruta._nomDestino, model._bol_id, "A12", model._primer_nombre, model._primer_apellido);
@@ -173,7 +173,7 @@ namespace BOReserva.Controllers
                 //int resultado1 = modificar.MConteoBoarding(pase._boleto, pase._vuelo);
                 Command<int> comando3 = FabricaComando.conteoM05Boarding(pase._boleto, pase._vuelo);
                 int resultado1 = comando3.ejecutar();
-                
+
                 if (resultado1 == 0)
                 {
                     // HACER EL INSERT DE PASE DE ABORDAJE
@@ -197,7 +197,7 @@ namespace BOReserva.Controllers
                 return Json(error);
             }
         }
-       
+
         [HttpPost]
         public ActionResult insertarEquipaje(CEquipaje model)
         {
@@ -226,7 +226,7 @@ namespace BOReserva.Controllers
 
                 int resultado1 = -1;
                 int resultado2 = -1;
-                
+
                 if (peso1 != 0)
                 {
                     

@@ -189,7 +189,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
             Usuario usuario = (Usuario)_usuario; //Cast explicito
             List<Model.Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
             try
-            {
+                {
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoLogin.correo, SqlDbType.VarChar, usuario.correo.ToString(), false));
 
                 EjecutarStoredProcedureTuplas(RecursoLogin.InsertarLogin, listaParametro); //Para luego ejecutar el procedimiento
@@ -233,7 +233,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
             {
                 throw e;
             }
-        }
+                }
 
         /// <summary>
         /// Método para la consulta de número de intentos de un Login al sistema
@@ -303,12 +303,12 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
                 //INTENTO abrir la conexion
                 conexion.Open();
                 SqlCommand cmd = new SqlCommand("Update Login set log_intentos=log_intentos+1 where log_idusuario=(Select usu_id from Usuario where usu_correo like @usu_correo)", conexion);
-                //cmd.CommandType = CommandType.StoredProcedure;              
+                //cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@usu_correo", usuario);
                 if (cmd.ExecuteNonQuery() < 1)
                 {
                     InsertarLogin(usuario);
-                    cmd.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
                 }
                 conexion.Close();
                 return true;
@@ -334,7 +334,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
                 //INTENTO abrir la conexion
                 conexion.Open();
                 SqlCommand cmd = new SqlCommand("Update Login set log_intentos=0 where log_idusuario=(Select usu_id from Usuario where usu_correo like @usu_correo)", conexion);
-                //cmd.CommandType = CommandType.StoredProcedure;              
+                //cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@usu_correo", usuario);
                 cmd.ExecuteNonQuery();
                 conexion.Close();
@@ -359,9 +359,9 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
                 //INTENTO abrir la conexion
                 conexion.Open();
                 SqlCommand cmd = new SqlCommand("Insert into Login(log_idusuario,log_sesion,log_intentos) values((Select usu_id from Usuario where usu_correo like @usu_correo),0,0);", conexion);
-                //cmd.CommandType = CommandType.StoredProcedure;
+                //cmd.CommandType = CommandType.StoredProcedure;              
                 cmd.Parameters.AddWithValue("@usu_correo", usuario);
-                cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
                 conexion.Close();
                 return true;
             }
@@ -388,7 +388,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
                 //INTENTO abrir la conexion
                 conexion.Open();
                 SqlCommand cmd = new SqlCommand("DELETE from Login WHERE log_idusuario=1", conexion);
-                //cmd.CommandType = CommandType.StoredProcedure;
+                //cmd.CommandType = CommandType.StoredProcedure;              
                 cmd.Parameters.AddWithValue("@usu_correo", usuario);
                 cmd.ExecuteNonQuery();
                 conexion.Close();
