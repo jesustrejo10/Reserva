@@ -235,9 +235,6 @@
     <Compile Include="Controllers\PatronComando\M05\M05_COConsultarBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COCrearBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COListarPasajeros.cs" />
-    <Compile Include="Controllers\PatronComando\M06\M06_COCambiarEstatusComida.cs" />
-    <Compile Include="Controllers\PatronComando\M06\M06_COEditarComida.cs" />
-    <Compile Include="Controllers\PatronComando\M06\M06_CORellenarComida.cs" />
     <Compile Include="Controllers\PatronComando\GeneralLugar\COConsultarTodosCiudad.cs" />
     <Compile Include="Controllers\PatronComando\GeneralLugar\COConsultarTodosLugar.cs" />
     <Compile Include="Controllers\PatronComando\GeneralLugar\COConsultarTodosPais.cs" />
@@ -256,8 +253,14 @@
     <Compile Include="Controllers\PatronComando\M02\M02_COEliminarAvion.cs" />
     <Compile Include="Controllers\PatronComando\M02\M02_COModificarAvion.cs" />
     <Compile Include="Controllers\PatronComando\M02\M02_COVisualizarAvion.cs" />
+    <Compile Include="Controllers\PatronComando\M06\M06_COAgregarComida.cs" />
     <Compile Include="Controllers\PatronComando\M06\M06_COAgregarComidaVuelo.cs" />
+    <Compile Include="Controllers\PatronComando\M06\M06_COCambiarEstatusComida.cs" />
+    <Compile Include="Controllers\PatronComando\M06\M06_COConsultarComidas.cs" />
+    <Compile Include="Controllers\PatronComando\M06\M06_COConsultarComidasVuelos.cs" />
     <Compile Include="Controllers\PatronComando\M06\M06_COConsultarVuelos.cs" />
+    <Compile Include="Controllers\PatronComando\M06\M06_COEditarComida.cs" />
+    <Compile Include="Controllers\PatronComando\M06\M06_CORellenarComida.cs" />
     <Compile Include="Controllers\PatronComando\M07\M07_COAgregarReclamoEquipaje.cs" />
     <Compile Include="Controllers\PatronComando\M07\M07_COConsultarReclamoEquipajeID.cs" />
     <Compile Include="Controllers\PatronComando\M07\M07_COConsultarEquipajeID.cs" />
@@ -273,12 +276,6 @@
     <Compile Include="Controllers\PatronComando\M01\M01_COLanding.cs" />
     <Compile Include="Controllers\PatronComando\M01\M01_COLogout.cs" />
     <Compile Include="Controllers\PatronComando\M01\M01_COLogin.cs" />
-    <Compile Include="Controllers\PatronComando\M06\M06_COAgregarComida.cs" />
-    <Compile Include="Controllers\PatronComando\M06\M06_COConsultarComidas.cs" />
-    <Compile Include="Controllers\PatronComando\M06\M06_COConsultarComidasVuelos.cs" />
-	<Compile Include="Controllers\PatronComando\M06\M06_COCambiarEstatusComida.cs" />
-    <Compile Include="Controllers\PatronComando\M06\M06_COEditarComida.cs" />
-    <Compile Include="Controllers\PatronComando\M06\M06_CORellenarComida.cs" />
     <Compile Include="Controllers\PatronComando\M08\M08_COActivarAutomovil.cs" />
     <Compile Include="Controllers\PatronComando\M08\M08_COBuscarAutomovil.cs" />
     <Compile Include="Controllers\PatronComando\M08\M08_COAgregarAutomovil.cs" />
@@ -351,7 +348,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>M07ReclamoEquipaje.resx</DependentUpon>
     </Compile>
-	
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCabina.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCamarotes.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCruceros.cs" />
@@ -451,6 +447,8 @@
     <Compile Include="DataAccess\Domain\Boleto.cs" />
     <Compile Include="DataAccess\Domain\BoletoDetalle.cs" />
     <Compile Include="DataAccess\Domain\BoletoVuelo.cs" />
+    <Compile Include="DataAccess\Domain\M06\Comida.cs" />
+    <Compile Include="DataAccess\Domain\M06\ComidaVuelo.cs" />
     <Compile Include="DataAccess\Domain\M14\Cabina.cs" />
     <Compile Include="DataAccess\Domain\M14\Camarote.cs" />
     <Compile Include="DataAccess\Domain\M14\Crucero.cs" />
@@ -462,8 +460,6 @@
     <Compile Include="DataAccess\Domain\Oferta.cs" />
     <Compile Include="DataAccess\Domain\Paquete.cs" />
     <Compile Include="DataAccess\Domain\M13\Modulo.cs" />
-    <Compile Include="DataAccess\Domain\M06\Comida.cs" />
-    <Compile Include="DataAccess\Domain\M06\ComidaVuelo.cs" />
     <Compile Include="DataAccess\Domain\Pasajero.cs" />
     <Compile Include="DataAccess\Domain\M13\Permiso.cs" />
     <Compile Include="DataAccess\Domain\Reclamo.cs" />
