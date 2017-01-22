@@ -1,4 +1,4 @@
-﻿<div class="row">
+<div class="row">
     <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
 
     <div class="col-xs-12">
@@ -55,9 +55,18 @@
 
 <script language="javascript" type="text/javascript">
     table = $('#example').DataTable();
+    function loader() {
+        $("#loader").fadeIn("slow");
+        $(window).ajaxComplete(function () {
+            // Se oculta el loader animado
+            $("#loader").hide();
+        });
+    }
+
     $(document).ready(function () {
         //e.preventDefault();
         $(".modificar").click(function () {
+            loader();
             var identificador = $(this).parent().parent().parent().attr("id");
             jQuery.ajax({
                 type: "GET",
@@ -76,5 +85,3 @@
 
     });
 </script>
-
-
