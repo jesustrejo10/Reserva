@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace TestUnitReserva.BO.gestion_restaurantes
 {
+    /// <summary>
+    /// Clase para pruebas unitarias de Patron Comando M10
+    /// </summary>
     [TestFixture]
     class M10_PruebaComandos
     {
@@ -20,7 +23,6 @@ namespace TestUnitReserva.BO.gestion_restaurantes
         Entidad lugar;
         Entidad restaurant;
         Entidad restaurante;
-        List<Entidad> ListaRestaurant;
         Boolean Resultado;
         IDAORestaurant restaurantDao;
         #endregion
