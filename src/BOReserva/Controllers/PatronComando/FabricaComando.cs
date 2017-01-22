@@ -729,7 +729,7 @@ namespace BOReserva.Controllers.PatronComando
         /// <returns>
         /// Retorna la instancia del comando M12_COObtenerRoles.
         /// </returns>
-        public static Command<Dictionary<int, Entidad>> crearM12ObtenerRoles()
+        public static Command<List<Entidad>> crearM12ObtenerRoles()
         {
             return new M12_COObtenerRoles();
         }

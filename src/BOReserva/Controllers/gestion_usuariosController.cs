@@ -25,12 +25,10 @@ namespace BOReserva.Controllers
             try
             {
                 CAgregarUsuario model = new CAgregarUsuario();
-                //Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM12ObtenerRoles();
-                //model._rols = comando.ejecutar();
 
-                PersistenciaUsuario p = new PersistenciaUsuario();
-                List<ListaRoles> lista = p.ListarRoles();
-                ViewBag.Roles = new SelectList(lista, "rolID", "rolNombre");
+                Command<List<Entidad>> comandrol = FabricaComando.crearM13_ConsultarRoles();
+                List<Entidad> roles = comandrol.ejecutar();
+                ViewBag.Roles = new SelectList(roles, "_idRol", "_nombreRol");
 
                 return PartialView(model);
             }
@@ -43,22 +41,25 @@ namespace BOReserva.Controllers
 
         }
 
+        /// <summary>
+        /// Método que se utiliza para agregar un usuario existente
+        /// </summary>
+        /// <param name="model">Identificador del usuario a agregar </param>
+        /// <returns>Retorna un JsonResult</returns>
         [HttpPost]
         public JsonResult guardarUsuario(CAgregarUsuario model)
         {
-            Entidad rol = FabricaEntidad.InstanciarRol(_rol);
-            rol._id = 1;
-            Entidad nuevoUsuario = FabricaEntidad.InstanciarUsuario(model, rol);
+            Entidad nuevoUsuario = FabricaEntidad.InstanciarUsuario(model, model._rol);
             Command<string> comando = FabricaComando.crearM12AgregarUsuario(nuevoUsuario);
             string agrego = comando.ejecutar();
-
+    
             return (Json(agrego));
         }
 
         /// <summary>
         /// Método de la vista parcial M12_VisualizarUsuarios
         /// </summary>
-        /// <returns>Retorna la vista parcial M12_VisualizarUsuarios en conjunto del Modelo de dicha vista</returns>
+        /// <returns>Retorna la vista parcial M12_VisualizarUsuarios con la lista de usuarios</returns>
         public ActionResult M12_VisualizarUsuarios()
         {
             Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM12VisualizarUsuarios();
@@ -67,30 +68,19 @@ namespace BOReserva.Controllers
             return PartialView(listaUsuarios);
         }
 
-
-        public ActionResult M12_DetalleUsuario(int id)
-        {
-            Command<Entidad> comando = FabricaComando.crearM12ConsultarUsuario(id);
-            Entidad usuario = comando.ejecutar();
-            Usuario usuarioBuscado = (Usuario) usuario;
-            idUsuario = usuarioBuscado._id;
-
-            CModificarUsuario modelovista = new CModificarUsuario();
-            modelovista._correo = usuarioBuscado.correo;
-            modelovista._nombre = usuarioBuscado.nombre;
-            modelovista._apellido = usuarioBuscado.apellido;
-            modelovista.contraseñaUsuario = usuarioBuscado.contrasena;
-            modelovista._rol = usuarioBuscado.rolr._idRol;
-            modelovista._activo = usuarioBuscado.activo;
-
-            return PartialView(modelovista);
-        }
-
+        /// <summary>
+        /// Método de la vista parcial M12_ModificarUsuario2
+        /// </summary>
+        /// <returns>Retorna la vista parcial M12_ModificarUsuario2 en conjunto del Modelo de dicha vista</returns>
         public ActionResult M12_ModificarUsuario2(int id)
         {
-            PersistenciaUsuario p = new PersistenciaUsuario();
-            List<ListaRoles> lista = p.ListarRoles();
-            ViewBag.Roles = new SelectList(lista, "rolID", "rolNombre");
+            //PersistenciaUsuario p = new PersistenciaUsuario();
+            //List<ListaRoles> lista = p.ListarRoles();
+            //ViewBag.Roles = new SelectList(lista, "rolID", "rolNombre");
+
+            Command<List<Entidad>> comandrol = FabricaComando.crearM13_ConsultarRoles();
+            List<Entidad> roles = comandrol.ejecutar();
+            ViewBag.Roles = new SelectList(roles, "_idRol", "_nombreRol");
 
             Command<Entidad> comando = FabricaComando.crearM12ConsultarUsuario(id);
             Entidad usuario = comando.ejecutar();
@@ -101,81 +91,28 @@ namespace BOReserva.Controllers
             modelovista._correo = usuarioBuscado.correo;
             modelovista._nombre = usuarioBuscado.nombre;
             modelovista._apellido = usuarioBuscado.apellido;
-            modelovista.contraseñaUsuario = usuarioBuscado.contrasena;
             modelovista._rol = usuarioBuscado.rolr._idRol;
             modelovista._activo = usuarioBuscado.activo;
 
             return PartialView(modelovista);
         }
 
+
+        /// <summary>
+        /// Método que se utiliza para modificar un usuario existente
+        /// </summary>
+        /// <param name="id">Identificador del usuario a modificar</param>
+        /// <returns>Retorna un JsonResult</returns>
         [HttpPost]
         public JsonResult modificarUsuario(CModificarUsuario model)
         {
-            Entidad rol = FabricaEntidad.InstanciarRol(_rol);
-            rol._id = 1;
-            Entidad modificarUsuario = FabricaEntidad.InstanciarUsuario(model, rol);
+            Entidad modificarUsuario = FabricaEntidad.InstanciarUsuario(model, model._rol);
             Command<string> comando = FabricaComando.crearM12ModificarUsuario(modificarUsuario, idUsuario);
             string agrego = comando.ejecutar();
 
             return (Json(agrego));
 
         }
-
-        public ActionResult M12_AgregarUsuario()
-        {
-            try { 
-                PersistenciaUsuario p = new PersistenciaUsuario();
-                List<ListaRoles> lista = p.ListarRoles();
-                ViewBag.Roles = new SelectList(lista, "rolID", "rolNombre");
-                return PartialView();
-            }
-            catch (Exception ex)
-            {
-                Response.Write("<script>alert('" + ex.Message + "');</script>");
-                Response.End();
-                return Json(ex.Message);
-            }
-            
-        }
-
-
-
-        [HttpPost]
-        public ActionResult M12_AgregarUsuario(AgregarUsuario usuario)
-        {
-            //Se resetea intentos en la Tabla Login MO1 Ingreso Seguridad
-            Cgestion_seguridad_ingreso ingreso = new Cgestion_seguridad_ingreso();
-            ingreso.correoCampoTexto = usuario.correoUsuario;
-            
-            if (ModelState.IsValid) 
-            {
-                PersistenciaUsuario p = new PersistenciaUsuario();
-                try
-                {
-                    p.AgregarUsuario(usuario.toClass());
-                    ingreso.ResetearIntentos();//Metodo M01_Ingreso_Seguridad
-                    TempData["message"] = RecursoUsuario.MensajeAgregado;
-                    //return RedirectToAction("M12_Index");
-                }
-                catch (ExceptionM12Reserva ex)
-                {
-                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                    return Json(ex.Message);
-                }
-                catch (Exception ex)
-                {
-                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                    return Json(ex.Message);
-                }
-            }
-            return Json("true");
-            //return RedirectToAction("M12_Index");
-            //return View("M12_AgregarUsuario", "_Layout");    
-            
- 
-            
-        }
-
 
         /// <summary>
         /// Método que se utiliza para eliminar un usuario existente
@@ -224,6 +161,7 @@ namespace BOReserva.Controllers
             String borro_si_no = comando1.ejecutar();
             return (Json(borro_si_no));
         }
+
         
     }
 }

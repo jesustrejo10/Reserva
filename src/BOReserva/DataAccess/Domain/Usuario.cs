@@ -68,6 +68,17 @@ namespace BOReserva.DataAccess.Domain
             this.activo = activo;
         }
 
+        public Usuario(String nombre, String apellido, String correo, String contrasena, int _rol, DateTime fechaCreacion, String activo)
+        {
+            this._id = id;
+            this.nombre = nombre;
+            this.apellido = apellido;
+            this.correo = correo;
+            this.contrasena = contrasena;
+            this.rol = _rol;
+            this.activo = activo;
+        }
+
         public String getDate()
         {
             return fechaCreacionf.ToString("dd/MM/yyyy");

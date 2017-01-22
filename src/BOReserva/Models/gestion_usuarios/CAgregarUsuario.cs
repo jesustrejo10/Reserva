@@ -20,6 +20,7 @@ namespace BOReserva.Models.gestion_usuarios
         public string _activo { get; set; }
         public int _id { get; set; }
         public DateTime _fechaCreacion { get; set; }
+        public List<Entidad> _roles { get; set; }
         public Dictionary<int, Entidad> _rols { get; set; }
 
         [NotMapped]

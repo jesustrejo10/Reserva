@@ -517,6 +517,32 @@ namespace BOReserva.DataAccess.Domain
             return new Usuario(nombre, apellido, correo, contrasena, rol, fechaCreacion, activo);
         }
 
+        public static Entidad InstanciarUsuario(CAgregarUsuario model, int idRol)
+        {
+
+            string nombre = model._nombre;
+            string apellido = model._apellido;
+            string correo = model._correo;
+            string contrasena = model.contraseñaUsuario;
+            DateTime fechaCreacion = model._fechaCreacion;
+            string activo = model._activo;
+
+            return new Usuario(nombre, apellido, correo, contrasena, idRol, fechaCreacion, activo);
+        }
+
+        public static Entidad InstanciarUsuario(CModificarUsuario model, int idRol)
+        {
+
+            string nombre = model._nombre;
+            string apellido = model._apellido;
+            string correo = model._correo;
+            string contrasena = model.contraseñaUsuario;
+            DateTime fechaCreacion = model._fechaCreacion;
+            string activo = model._activo;
+
+            return new Usuario(nombre, apellido, correo, contrasena, idRol, fechaCreacion, activo);
+        }
+
         public static Entidad InstanciarRol(int rol)
         {
             return new Rol();

@@ -5,24 +5,19 @@ using System.Web;
 using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
+using BOReserva.DataAccess.DAO;
 
 namespace BOReserva.Controllers.PatronComando.M12
 {
-    public class M12_COObtenerRoles : Command<Dictionary<int, Entidad>>
+    public class M12_COObtenerRoles : Command<List<Entidad>>
     {
-        public override Dictionary<int, Entidad> ejecutar()
+        public override List<Entidad> ejecutar()
         {
-            IDAO daoRol = FabricaDAO.instanciarDAORol();
-            Dictionary<int, Entidad> roles = daoRol.ConsultarTodos();
-            Dictionary<int, Entidad> listaRoles = new Dictionary<int, Entidad>();
+            IDAORol daoRol = (IDAORol)FabricaDAO.instanciarDAORol();
+            List<Entidad> roles;
+            roles = daoRol.ConsultarRoles();
 
-            foreach (var rol in roles)
-            {
-                Rol r = (Rol)rol.Value;
-                listaRoles.Add(rol.Key, r);
-            }
-
-            return listaRoles;
+            return roles;
         }
     }
 }

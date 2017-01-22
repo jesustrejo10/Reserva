@@ -117,10 +117,33 @@
     </section>
 <script type="text/javascript">
 
+    function toIndexB() {
+        var url = '/gestion_usuarios/M12_VisualizarUsuarios';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    };
+
     $(document).ready(function () {
         $(".modificar").click(function () {
-            alert("Se esta procesando tu solicitud, por favor espere");
+            //alert("Se esta procesando tu solicitud, por favor espere");
+            $("#contenido").html('<div class="text-center">Cargando...</div>');
             var identificador = $(this).parent().parent().parent().attr("id");
+
             jQuery.ajax({
                 type: "GET",
                 url: "/gestion_usuarios/M12_ModificarUsuario2",
@@ -128,6 +151,7 @@
             }).done(function (data) {
                 $("#contenido").empty();
                 $("#contenido").append(data);
+                
             }).fail(function () {
                 alert("Error, por favor refresque la pagina")
             });
@@ -136,7 +160,8 @@
 
     $(document).ready(function () {
         $(".eliminar").click(function () {
-            alert("Se esta procesando tu solicitud, por favor espere");
+            //alert("Se esta procesando tu solicitud, por favor espere");
+            $("#contenido").html('<div class="text-center">Cargando...</div>');
             var identificador = $(this).parent().parent().parent().attr("id");
             jQuery.ajax({
                 type: "POST",
@@ -162,8 +187,12 @@
                                 alert(errorThrown);
                             }
                         });
-                } else if (data.includes("Reserva_Automovil")) {
+                } else if (data.includes("Perfil")) {
                     alert("No se puede eliminar este usuario");
+                    toIndexB();
+                } else if (data.includes("Login")) {
+                    alert("No se puede eliminar este usuario");
+                    toIndexB();
                 } else {
                     alert(data);
                 }
@@ -176,7 +205,8 @@
     $(document).ready(function () {
         //e.preventDefault();
         $(".activar").click(function () {
-            alert("Se esta procesando tu solicitud, por favor espere");
+            //alert("Se esta procesando tu solicitud, por favor espere");
+            $("#contenido").html('<div class="text-center">Cargando...</div>');
             var identificador = $(this).parent().parent().parent().attr("id");
             var status = "Activo";
             jQuery.ajax({
@@ -221,7 +251,8 @@
     $(document).ready(function () {
         //e.preventDefault();
         $(".desactivar").click(function () {
-            alert("Se esta procesando tu solicitud, por favor espere");
+            //alert("Se esta procesando tu solicitud, por favor espere");
+            $("#contenido").html('<div class="text-center">Cargando...</div>');
             var identificador = $(this).parent().parent().parent().attr("id");
             var status = "Inactivo";
             jQuery.ajax({

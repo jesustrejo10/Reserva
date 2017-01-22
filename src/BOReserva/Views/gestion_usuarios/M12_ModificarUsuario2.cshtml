@@ -138,8 +138,10 @@
     </script>
     
     <script>
+
         $("#modificarUsuario").click(function (e) {
             e.preventDefault();
+            $("#contenido").html('<div class="text-center">Cargando...</div>');
             var form = $("#modificarUsuario_form");
 
             var correo = $('#correoUsuario').val();
