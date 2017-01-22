@@ -93,6 +93,13 @@ namespace TestUnitReserva.BO.gestion_roles
             Assert.AreNotEqual(daoRol.ConsultarPermisos(0), null);
         }
 
-
+        [Test]
+        public void M13_DAOTestListarPermisos()
+        {
+            //Caso de exito
+            Assert.AreNotEqual(daoRol.ListarPermisos(), null);
+            //Caso de exito
+            Assert.AreNotEqual(daoRol.ListarPermisos().Count, 0);
+        }
     }
 }
