@@ -9,9 +9,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data;
+using FOReserva.Excepciones.M19;
+using FOReserva.Excepciones;
+using System.Data.SqlClient;
 
 namespace FOReserva.DataAccess.DataAccessObject.M19
 {
+    /// <summary>
+    /// Clase Dao Reserva Automovil para realizar los procedimientos de base de datos
+    /// </summary>
     public class DAOReservaAutomovil : DAO, IDAOReservaAutomovil
     {
 
@@ -45,9 +51,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
 
             try
             {
-                //Aqui se asignan los valores que recibe el procedimieto para realizar el select, se repite tantas veces como atributos
-                //se requiera en el where, para este caso solo el ID de Lugar @lug_id (parametro que recibe el store procedure)
-                //se coloca true en Input 
+                // Parametro de entrada para la consulta: el id del usuario
                 parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fk_usuario, SqlDbType.Int, usuario._id.ToString(), false));
 
                 tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM19.procedimientoConsultar,parametro);
@@ -79,10 +83,30 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
 
                 return listaDeReservas;
             }
-            catch (Exception e)
+            catch (ArgumentNullException ex)
             {
-
-                throw e;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Error al realizar operacion ", ex);
             }
         }
 
@@ -116,7 +140,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
                 //Aqui se asignan los valores que recibe el procedimieto para realizar el select
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_id, SqlDbType.Int, resv._id.ToString(),false));
 
-                //Se devuelve la fila del restaurante consultado segun el Id, para este caso solo se devuelve una fila
+                //Se devuelve la fila de la reserva de automovil consultado segun el Id, para este caso solo se devuelve una fila
                 DataTable filareserva = EjecutarStoredProcedureTuplas(RecursoDAOM19.procedimientoConsultarReservaAutomovilId,listaParametro);
 
                 //Se guarda la fila devuelta de la base de datos
@@ -147,10 +171,31 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
                 return reserva;
 
             }
-            catch (Exception)
+            catch (ArgumentNullException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
             {
 
-                throw;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Error al realizar operacion ", ex);
             }
 
         }
@@ -216,10 +261,31 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
 
                 return listaDeAutomovil;
             }
-            catch (Exception)
+            catch (ArgumentNullException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
             {
 
-                throw;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Error al realizar operacion ", ex);
             }
         }
 
@@ -247,10 +313,31 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
 
                 EjecutarStoredProcedure(RecursoDAOM19.procedimientoAgregar, listaParametro);
             }
-            catch (Exception)
+            catch (ArgumentNullException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
             {
 
-                throw;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Error al realizar operacion ", ex);
             }
             System.Diagnostics.Debug.WriteLine(res._fecha_ini);
 
@@ -259,7 +346,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
 
         /// <summary>
         /// Metodo para eliminar reserva de automovil
-        /// Se encarga de eliminar la reserva de automovil por su identificador
+        /// Se encarga de cambiar el estatus de la reserva a cancelada
         /// </summary>
         /// <param name="_reserva"></param>
         /// <returns>Retorna true si fue exitoso</returns>
@@ -273,10 +360,31 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
                 parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_id, SqlDbType.Int, res._id.ToString(),false));
                 EjecutarStoredProcedure(RecursoDAOM19.procedimientoEliminar, parametro);
             }
-            catch (Exception)
+            catch (ArgumentNullException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
             {
 
-                throw;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Error al realizar operacion ", ex);
             }
             return false;
         }
@@ -309,10 +417,31 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
 
                 return listaDeLugares;
             }
-            catch (Exception)
+            catch (ArgumentNullException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
             {
 
-                throw;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Error al realizar operacion ", ex);
             }
         }
 
@@ -333,10 +462,31 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
 
                 EjecutarStoredProcedure(RecursoDAOM19.procedimientoActualizar, listaParametro);
             }
-            catch (Exception)
+            catch (ArgumentNullException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
             {
 
-                throw;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Error al realizar operacion ", ex);
             }
 
             return true;
