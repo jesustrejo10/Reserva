@@ -10,5 +10,7 @@ namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
     interface IDAOCabina : IDAO
     {
         Dictionary<int, Entidad> ConsultarTodos(int idCrucero);
+
+        Dictionary<int, Entidad> ConsultarCabinasCrucero(string nombreCrucero);
     }
 }

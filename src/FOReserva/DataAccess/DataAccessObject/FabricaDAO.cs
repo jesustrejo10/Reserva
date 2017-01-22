@@ -44,7 +44,7 @@ namespace FOReserva.DataAccess.DataAccessObject
         {
             return new SqlConnection(stringDeConexion);
         }
-                
+
         public static Parametro asignarParametro(string nombreAtributo, SqlDbType tipoDeDato, string valorAtributo, bool output)
         {
             return new Parametro(nombreAtributo, tipoDeDato, valorAtributo, output);

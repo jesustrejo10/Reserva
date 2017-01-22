@@ -902,6 +902,7 @@ namespace BOReserva.Servicio.Servicio_Boletos
 
 
                String sql = "INSERT INTO Boleto (bol_escala,bol_ida_vuelta,bol_costo,bol_fk_lugar_origen,bol_fk_lugar_destino,bol_fk_pasajero,bol_fecha,bol_tipo_boleto) VALUES("+escala+","+idaVuelta+","+costo+","+fkOrigen+","+fkDestino+","+fkPasajero+",'"+fecha+"','"+tipo+"')";
+               
                System.Diagnostics.Debug.WriteLine(sql);
                SqlCommand cmd = new SqlCommand(sql, con);
                cmd.ExecuteNonQuery();
