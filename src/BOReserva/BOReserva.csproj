@@ -207,7 +207,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+<<<<<<< HEAD
+    <Compile Include="Controllers\gestion_extravioController.cs" />
+=======
     <Compile Include="Controllers\M04\gestion_vueloController.cs" />
+>>>>>>> refs/remotes/origin/Develop
     <Compile Include="Controllers\PatronComando\Command.cs" />
     <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
     <Compile Include="Controllers\PatronComando\M06\M06_COCambiarEstatusComida.cs" />
@@ -436,6 +440,7 @@
     <Compile Include="Models\gestion_cruceros\RecursosCruceros.Designer.cs" />
     <Compile Include="Models\gestion_cruceros\VistaListaCrucero.cs" />
     <Compile Include="Models\gestion_cruceros\VistaListaItinerario.cs" />
+    <Compile Include="Models\gestion_extravio\CGestionExtravio.cs" />
     <Compile Include="Models\gestion_hoteles\CModifcarHotel.cs" />
     <Compile Include="Models\gestion_hoteles\CVerHotel.cs" />
     <Compile Include="Models\gestion_reclamos\CAgregarReclamo.cs" />
@@ -491,9 +496,13 @@
     <Compile Include="Models\gestion_ruta_comercial\CGestion_ruta.cs" />
     <Compile Include="Models\gestion_ruta_comercial\CRuta.cs" />
     <Compile Include="Models\gestion_usuarios\AgregarUsuario.cs" />
+<<<<<<< HEAD
+    <Compile Include="Servicio\Servicio_Extravios\CManejadorSQL_Extravios.cs" />
+=======
     <Compile Include="Models\gestion_vuelo\CrearVueloMO.cs" />
     <Compile Include="Models\gestion_vuelo\FabricaViewModelVuelo.cs" />
     <Compile Include="Models\gestion_vuelo\VueloViewModel.cs" />
+>>>>>>> refs/remotes/origin/Develop
     <Compile Include="Servicio\Servicio_Usuarios\ConexionBD.cs" />
     <Compile Include="Models\gestion_usuarios\CUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\Encriptar.cs" />
@@ -1660,10 +1669,15 @@
     <Content Include="Views\gestion_reclamos\M16_ModificarReclamo.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_AgregarHotel.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_VisualizarHoteles.cshtml" />
+<<<<<<< HEAD
+    <Content Include="Views\gestion_extravio\M07_GestionExtravio_Agregar.cshtml" />
+    <Content Include="Views\gestion_extravio\M07_GestionExtravio_Visualizar.cshtml" />
+=======
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_CW1.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_CW2.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_CW3.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_EditarPlato.cshtml" />
+>>>>>>> refs/remotes/origin/Develop
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_boletos\M05_VisualizarBoletos.cshtml" />
