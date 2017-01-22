@@ -211,7 +211,7 @@
     <Compile Include="Controllers\gestion_reclamosEquipajeController.cs" />
     <Compile Include="Controllers\M04\gestion_vueloController.cs" />
     <Compile Include="Controllers\PatronComando\Command.cs" />
-    <Compile Include="Controllers\PatronComando\FabricaComando.cs" />	
+    <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
     <Compile Include="Controllers\PatronComando\M02\M02_COAgregarAvion.cs" />
     <Compile Include="Controllers\PatronComando\M02\M02_COConsultarAvion.cs" />
     <Compile Include="Controllers\PatronComando\M02\M02_CODisponibilidadAvion.cs" />
@@ -332,7 +332,16 @@
     <Compile Include="Controllers\PatronComando\M12\M12_COObtenerRoles.cs" />
     <Compile Include="Controllers\PatronComando\M12\M12_COStatusUsuario.cs" />
     <Compile Include="Controllers\PatronComando\M12\M12_COVisualizarUsuarios.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COAgregarPermiso.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COConsultarListaPermisos.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COConsultarPermisoSeleccionado.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COConsultarPermisosNoAsociados.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COConsultarPermisosUsuario.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COEliminarPermiso.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COModificarPermiso.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COQuitarPermiso.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COValidacionPermiso.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COValidacionRol.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_CoAgregarCamarote.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COListarCabinaCrucero.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarCamarotes.cs" />
@@ -346,6 +355,7 @@
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCruceros.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOEquipaje.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOItinerario.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPermiso.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReclamoEquipaje.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORuta.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOUsuario.cs" />
@@ -356,6 +366,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>M07ReclamoEquipaje.resx</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\DataAccessObject\M13\DAOPermiso.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCabina.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCamarotes.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCruceros.cs" />
@@ -547,6 +558,7 @@
     <Compile Include="Models\gestion_hoteles\CAgregarHotel.cs" />
     <Compile Include="Models\gestion_reclamo_equipaje\CAgregarReclamoEquipaje.cs" />
     <Compile Include="Models\gestion_reclamo_equipaje\CModificarReclamoEquipaje.cs" />
+    <Compile Include="Models\gestion_roles\CRolModulo.cs" />
     <Compile Include="Models\gestion_ruta_comercial\VistaListaRuta.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cgestion_seguridad_ingreso.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cvalidar_bloqueo_exception.cs" />
@@ -1794,6 +1806,9 @@
     <Content Include="Views\gestion_reclamos\M16_AlertaError.cshtml" />
     <Content Include="Views\gestion_reclamos\M16_ConsultarReclamo.cshtml" />
     <Content Include="Views\gestion_reclamos\M16_DetalleReclamo.cshtml" />
+    <Content Include="Views\gestion_roles\M13_AgregarPermiso.cshtml" />
+    <Content Include="Views\gestion_roles\M13_ModificarPermiso.cshtml" />
+    <Content Include="Views\gestion_roles\M13_VisualizarPermiso.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_boletos\M05_VisualizarBoletos.cshtml" />

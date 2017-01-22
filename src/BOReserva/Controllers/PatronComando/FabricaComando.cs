@@ -17,6 +17,7 @@ using BOReserva.Controllers.PatronComando.M12;
 using BOReserva.DataAccess.Domain.M14;
 using BOReserva.Controllers.PatronComando.M09;
 using BOReserva.Controllers.PatronComando.M11;
+using BOReserva.Controllers.PatronComando.M13;
 
 namespace BOReserva.Controllers.PatronComando
 {
@@ -568,7 +569,7 @@ namespace BOReserva.Controllers.PatronComando
 
         public static Command<List<Entidad>> crearM13_ListarPermisos()
         {
-          return new M13_COListarPermisos();
+            return new M13_COListarPermisos();
         }
 
         public static Command<Entidad> crearM13_ConsultarRol(int id)
@@ -599,14 +600,48 @@ namespace BOReserva.Controllers.PatronComando
 
         public static Command<String> crearM13_ModificarRol(Entidad rol, int idmodificar)
         {
-         return new M13_COModificarRol(rol, idmodificar);
+            return new M13_COModificarRol(rol, idmodificar);
         }
-
-        public static Command<List<String>> crearM13_ConsultarPermisosUsuario (int id)
+        public static Command<List<Entidad>> crearM13_ConsultarPermisosNoAsociados(Entidad rol, int id)
+        {
+            return new M13_COConsultarPermisosNoAsociados(rol, id);
+        }
+        public static Command<List<String>> crearM13_ConsultarPermisosUsuario(int id)
         {
             return new M13_COConsultarPermisosUsuario(id);
         }
-
+        public static Command<String> crearM13_QuitarPermisos(int idRol, int idPermiso)
+        {
+            return new M13_COQuitarPermiso(idRol, idPermiso);
+        }
+        public static Command<String> crearM13_AgregarPermiso(Entidad e)
+        {
+            return new M13_COAgregarPermiso((Permiso)e);
+        }
+        public static Command<List<Entidad>> crearM13_ConsultarListaPermisos()
+        {
+            return new M13_COConsultarListaPermisos();
+        }
+        public static Command<String> crearM13_EliminarPermiso(int id)
+        {
+            return new M13_COEliminarPermiso(id);
+        }
+        public static Command<List<int>> crearM13_ValidacionPermiso(int id)
+        {
+            return new M13_COValidacionPermiso(id);
+        }
+        public static Command<List<int>> crearM13_ValidacionRol(int id)
+        {
+            return new M13_COValidacionRol(id);
+        }
+        public static Command<Entidad> crearM13_ConsultarPermisoSeleccionado(int id)
+        {
+            return new M13_COConsultarPermisoSeleccionado(id);
+        }
+        public static Command<String> crearM13_ModificarPermiso(Entidad permiso, int idmodificar)
+        {
+            return new M13_COModificarPermiso(permiso, idmodificar);
+        }
         #endregion
 
         #region M05_Boleto
