@@ -4,15 +4,14 @@ using BOReserva.Models.gestion_hoteles;
 using BOReserva.Models.gestion_reclamos;
 using BOReserva.Models.gestion_restaurantes;
 using BOReserva.Models.gestion_roles;
-//using BOReserva.DataAccess.Domain.M06;
+using BOReserva.DataAccess.Domain;
 using BOReserva.Models.gestion_aviones;
+using BOReserva.Models.gestion_usuarios;
+using BOReserva.DataAccess.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
-
-
 
 namespace BOReserva.DataAccess.Domain
 {
@@ -41,7 +40,7 @@ namespace BOReserva.DataAccess.Domain
             return new Usuario()
             {
                 correo = _correo,
-                clave = _clave
+                contrasena = _clave
             };
         }
 
@@ -54,7 +53,7 @@ namespace BOReserva.DataAccess.Domain
                 nombre = _nombre,
                 apellido = _apellido,
                 correo = _correo,
-                clave = _clave,
+                contrasena = _clave,
                 fechaCreacion = _fechaCreacion,
                 activo = _activo
             };
@@ -452,7 +451,8 @@ namespace BOReserva.DataAccess.Domain
 
         #region M06 GESTION COMIDA
 
-        public static Entidad instanciarComida(string nombre, string tipo, int estatus, string descripcion) {
+        public static Entidad instanciarComida(string nombre, string tipo, int estatus, string descripcion)
+        {
             return new Comida(nombre, tipo, estatus, descripcion);
         }
 
@@ -479,6 +479,66 @@ namespace BOReserva.DataAccess.Domain
         public static Entidad instanciarComidaVuelo(int id, string comida, int cantidad)
         {
             return  new ComidaVuelo(id, comida, cantidad);
+        }
+
+        #endregion
+
+        #region M03_Ruta
+        /// <summary>
+        /// Se crea una instancia de la clase Ruta con todos sus atributos
+        /// </summary>
+        /// <param name="_idRuta"></param>
+        /// <param name="_distancia"></param>
+        /// <param name="_status"></param>
+        /// <param name="_tipo"></param>
+        /// <param name="_origenRuta"></param>
+        /// <param name="_destinoRuta"></param>
+        /// <returns>Retorna una instancia de la clase ruta con todos sus atributos</returns>
+        public static Entidad InstanciarRuta(int _idRuta, int _distancia, String _status, String _tipo,
+                                          String _origenRuta, String _destinoRuta)
+        {
+            return new Ruta(_idRuta, _distancia, _status, _tipo, _origenRuta, _destinoRuta);
+        }
+
+        #endregion
+
+        #region M12_Usuarios 
+        public static Entidad InstanciarUsuario(int id, string nombre, string apellido, string correo, string contrasena, int fkRol, DateTime fechaCreacion, string activo)
+        {
+            return new Usuario();
+        }
+
+        public static Entidad InstanciarUsuario(CAgregarUsuario model, Entidad r)
+        {
+            Rol rol = (Rol)r;
+
+            string nombre = model._nombre;
+            string apellido = model._apellido;
+            string correo = model._correo;
+            string contrasena = model.contraseñaUsuario;
+            DateTime fechaCreacion = model._fechaCreacion;
+            string activo = model._activo;
+
+            return new Usuario(nombre, apellido, correo, contrasena, rol, fechaCreacion, activo);
+        }
+
+        public static Entidad InstanciarUsuario(CModificarUsuario model, Entidad r)
+        {
+            Rol rol = (Rol)r;
+
+            string nombre = model._nombre;
+            string apellido = model._apellido;
+            string correo = model._correo;
+            string contrasena = model.contraseñaUsuario;
+            DateTime fechaCreacion = model._fechaCreacion;
+            string activo = model._activo;
+
+            return new Usuario(nombre, apellido, correo, contrasena, rol, fechaCreacion, activo);
+        }
+
+        public static Entidad InstanciarRol(int rol)
+        {
+            return new Rol();
         }
 
         #endregion
