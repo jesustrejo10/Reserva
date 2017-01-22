@@ -29,7 +29,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
         private Hotel mockHotel;
         private Hotel mockHotell;
         DAOHotel daoHotel;
-        IDAO prueba;
+        
 
         /// <summary>
         /// Metodo que se ejecuta antes que se ejecute cada prueba
@@ -43,6 +43,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
             mockHotel = new Hotel("HOtel desde preuba unit3", "hotel", "hotel", "hotel", 1, 1, mockCiudad);
             mockHotell = new Hotel(999,"HOtel desde pr", "hotel", "hotel", "hotel", 1, 1, mockCiudad);
             daoHotel = new DAOHotel();
+            
              
         }
         /// <summary>
@@ -87,10 +88,11 @@ namespace TestUnitReserva.BO.gestion_hoteles
         /// 
         /// </summary>
         [Test]
-        public void M09_DaoHotelEliminar()
+       public void M09_DaoHotelEliminar()
         {
+            IDAO pruebadao = (IDAO)daoHotel;
             int resultadoAgregar = daoHotel.Agregar(mockHotell);
-            int eliminar = daoHotel.Eliminar(999);
+            //int eliminar = pruebadao.;
             Assert.AreEqual(eliminar, "1");
 
 
@@ -98,7 +100,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
         /// <summary>
         /// 
         /// </summary>
-        [Test]
+       /* [Test]
         public void M09_DaoContultaSimple()
         {
             int resultadoAgregar = daoHotel.Agregar(mockHotell);
@@ -107,7 +109,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
             daoHotel.Eliminar(999);
             Assert.NotNull(daoHotel.Agregar(null));
 
-        }
+        }*/
         /// <summary>
         /// 
         /// </summary>
@@ -130,6 +132,8 @@ namespace TestUnitReserva.BO.gestion_hoteles
             Assert.AreEqual(prueba3._nombre, "HOtel3");
         }
         //model
+
+
         [Test]
         public void CAgregarHotel()
         {
@@ -141,8 +145,16 @@ namespace TestUnitReserva.BO.gestion_hoteles
             prueba._nombre = "Cosita";
             prueba._paginaWeb = "www.hola.com";
             prueba._pais = "Venezuela";
-           // prueba._paises;
+           
             prueba._precioHabitacion = 200;
+            Assert.AreEqual(prueba._email, "hola@gmail.com");
+            Assert.AreEqual(prueba._capacidadHabitacion,3);
+            Assert.AreEqual(prueba._clasificacion,5);
+            Assert.AreEqual(prueba._direccion,"prueba");
+            Assert.AreEqual(prueba._email, "hola@gmail.com");
+            Assert.AreEqual(prueba._paginaWeb, "www.hola.com");
+            Assert.AreEqual(prueba._pais, "Venezuela");
+
         }
         [Test]
         public void CGestionHoteles_CrearHotel()
@@ -153,14 +165,22 @@ namespace TestUnitReserva.BO.gestion_hoteles
             prueba._direccion="Prueba";
             prueba._email = "email@email.com";
             prueba._estrellas = 5;
-            prueba._id = 150;
-       
-            //prueba._listaciudades.Add
-            //prueba._listapaises;
+            prueba._id = 150;      
             prueba._nombre = "prueba";
             prueba._paginaweb = "www.prueba.com";
             prueba._pais = "Venezuela";
             prueba._puntuacion = 4;
+
+            Assert.AreEqual(prueba._canthabitaciones, 4);
+            Assert.AreEqual(prueba._ciudad, "Caracas");
+            Assert.AreEqual(prueba._estrellas, 5);
+            Assert.AreEqual(prueba._id, 150);
+            Assert.AreEqual(prueba._nombre, "prueba");
+            Assert.AreEqual(prueba._paginaweb, "www.prueba.com");
+            Assert.AreEqual(prueba._email, "email@gmail.com");        
+            Assert.AreEqual(prueba._direccion, "prueba");
+            Assert.AreEqual(prueba._email, "email@email.com");
+            Assert.AreEqual(prueba._pais, "Venezuela");
         }
         [Test]
         public void CgestionHoteles_EditarHotel()
@@ -172,42 +192,65 @@ namespace TestUnitReserva.BO.gestion_hoteles
             prueba._disponibilidad = 1;
             prueba._email = "email@email.com";
             prueba._estrellas = 5;
-            prueba._id = 150;
-            
-            //prueba._listapaises.Add("Venezuela");
+            prueba._id = 150;      
             prueba._nombre = "prueba";
             prueba._paginaweb = "www.prueba.com";
             prueba._pais = "Venezuela";
             prueba._puntuacion = 4;
+            Assert.AreEqual(prueba._canthabitaciones, 4);
+            Assert.AreEqual(prueba._ciudad, "Caracas");
+            Assert.AreEqual(prueba._estrellas, 5);
+            Assert.AreEqual(prueba._id, 150);
+            Assert.AreEqual(prueba._nombre, "prueba");
+            Assert.AreEqual(prueba._paginaweb, "www.prueba.com");
+            Assert.AreEqual(prueba._email, "email@gmail.com");
+            Assert.AreEqual(prueba._direccion, "prueba");
+
+            Assert.AreEqual(prueba._pais, "Venezuela");
             
         }
-        [Test]
-        public void CGestionHoteles_SelectCiudadModel()
-        {
-            CGestionHoteles_SelectCiudadModel prueba = new CGestionHoteles_SelectCiudadModel();
-            
-            
-        }
+        
+     
         [Test]
         public void CGestionHoteles_SelectEstrellalsModel()
         {
             CGestionHoteles_SelectEstrellasModel prueba = new CGestionHoteles_SelectEstrellasModel();
-            //prueba._Categories
+        
             prueba._CategoryId =new int[10];
-        }
-        [Test]
-        public void CGestionHoteles_SelectPaisModel()
-        {
-            CGestionHoteles_SelectPaisModel prueba = new CGestionHoteles_SelectPaisModel();
-            //comprobar lista de paises 
-           
+            prueba._CategoryId[1] = 1;
+            Assert.AreEqual(prueba._CategoryId[1], 1);
 
         }
+       
         [Test]
         public void CHotel()
         {
             CHotel prueba = new CHotel();
-           //seguir 
+            prueba._canthabitaciones =4;
+            prueba._ciudad="Caracas";
+            prueba._direccion="prueba";
+            prueba._disponibilidad=1;
+            prueba._email="email@email.com";
+            prueba._estrellas=5;
+            prueba._id=5;
+          
+            prueba._nombre="prueba";
+            prueba._paginaweb="www.prueba.com";
+            prueba._pais="Venezuela";
+            prueba._puntuacion=5;
+            Assert.AreEqual(prueba._canthabitaciones, 4);
+            Assert.AreEqual(prueba._ciudad, "Caracas");
+            Assert.AreEqual(prueba._estrellas, 5);
+            Assert.AreEqual(prueba._id, 5);
+            Assert.AreEqual(prueba._nombre, "prueba");
+            Assert.AreEqual(prueba._paginaweb, "www.prueba.com");
+            Assert.AreEqual(prueba._email, "email@gmail.com");
+            Assert.AreEqual(prueba._direccion, "prueba");
+            Assert.AreEqual(prueba._disponibilidad, 1);
+            Assert.AreEqual(prueba._pais, "Venezuela");
+
+           List<CHotel> pru=  prueba.MListarHoteles();
+
         }
         [Test]
         public void CModificarHotel()
