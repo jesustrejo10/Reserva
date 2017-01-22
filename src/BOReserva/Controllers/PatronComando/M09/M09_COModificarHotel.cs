@@ -38,7 +38,7 @@ namespace BOReserva.Controllers.PatronComando.M09
             Hotel hotel = (Hotel)test;
             //Actualice un Hotel en BD. necesito refrescarlo en Cache
             Cache.actualizarMapHoteles(hotel);
-            return "Se modifico el hotel exitosamente, sera redirigido al listado de hoteles";
+            return ResourceM09Command.ModificoCorrectamente;
         }
             catch (ReservaExceptionM09 ex)
             {

@@ -47,7 +47,7 @@ namespace BOReserva.Controllers.PatronComando.M09
                 IDAOHotel daoHotel = (DAOHotel)FabricaDAO.instanciarDaoHotel();
                 String test = daoHotel.eliminarHotel(_hotel._id);
                 Cache.eliminarHotelMap(_hotel._id);
-                return "Se elimino exitosamente el hotel";
+                return ResourceM09Command.EliminoCorrectamente;
             }
             catch (ReservaExceptionM09 ex)
             {
