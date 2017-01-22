@@ -31,6 +31,7 @@
                                     <td>
                                         <a href="#"> <i class="fa fa-eye m03DetalleRutas"></i></a>
                                         <a href="#"><i class="fa fa-pencil m03EditarRutas"></i></a>
+                                        <a href="#"><i class="fa fa-eye m24ListarCamarotes"></i></a>
                                     </td>
                                 </tr>
 
@@ -77,6 +78,26 @@
                 console.log(data);
             }
         });
+    });
+</script>
+
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        //e.preventDefault();
+        $(".m24ListarCamarotes").on("click", (function () {
+            alert("Se esta procesando tu solicitud, por favor espere");
+            var identificador = $(this).parent().parent().parent().attr("id");
+            jQuery.ajax({
+                type: "GET",
+                url: "/gestion_cruceros/M24_ListarCamarotes",
+                data: { id: identificador }//id = es el id q recibes en el método es decir public ActionResult M24_ListarCamarotes(int id)
+            }).done(function (data) {
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            }).fail(function () {
+                alert("Error, por favor refresque la pagina")
+            });
+        }));
     });
 </script>
 

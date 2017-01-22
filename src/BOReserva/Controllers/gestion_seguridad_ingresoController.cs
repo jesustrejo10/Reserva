@@ -58,6 +58,7 @@ namespace BOReserva.Controllers
 
                         ingreso.ResetearIntentos();
                         Session["Cgestion_seguridad_ingreso"] = ingreso;
+                        System.Diagnostics.Debug.WriteLine("Logueado con ID: " + IDUsuarioActual());
                         return RedirectToAction("Index", "Home");
                     }
                     else

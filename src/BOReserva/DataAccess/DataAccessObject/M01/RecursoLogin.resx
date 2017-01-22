@@ -129,7 +129,7 @@
     <value>@correo</value>
     <comment>Variable asignada a la consulta o selección de usuario por correo</comment>
   </data>
-  <data name="DesactivarUsuario" xml:space="preserve">
+  <data name="BloquearUsuario" xml:space="preserve">
     <value>M01_DesactivarUsuario</value>
     <comment>Referencia al procedimiento almacenado para la desactivación de usuario en la BD</comment>
   </data>
@@ -160,5 +160,11 @@
   </data>
   <data name="usuarioNombre" xml:space="preserve">
     <value>nombre</value>
+  </data>
+  <data name="IncrementarIntentos" xml:space="preserve">
+    <value>M01_IncrementarIntentos</value>
+  </data>
+  <data name="ResetearIntentos" xml:space="preserve">
+    <value>M01_ResetearIntentos</value>
   </data>
 </root>

@@ -2,6 +2,7 @@
 using BOReserva.DataAccess.DataAccessObject.M14;
 using BOReserva.DataAccess.DataAccessObject.M09;
 using BOReserva.DataAccess.DataAccessObject.M01;
+using BOReserva.DataAccess.DataAccessObject.M03;
 using BOReserva.DataAccess.Model;
 using BOReserva.M10;
 using BOReserva.DataAccess.DataAccessObject;
@@ -125,7 +126,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAOAutomovil();
         }
         #endregion
-			
+
         #region Modulo 10
         /// <summary>
         /// Inicializar IDAORestaurant
@@ -150,7 +151,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             };
         }
        
-     
+
         /// <summary>
         /// Metodo para asignar parametros para el store procedured
         /// </summary>
@@ -184,7 +185,7 @@ namespace BOReserva.DataAccess.DataAccessObject
         {
             return new List<Parametro>();
         }
-               
+
         #endregion
 
         #region M13_Roles
@@ -193,7 +194,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAORol();
         }
         #endregion
-        
+
         #region M14_Cruceros
         public static DAO instanciarDaoCrucero()
         {
@@ -206,13 +207,23 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAOCabina();
         }
 
+        public static DAO instanciarDaoCamarote()
+        {
+            return new DAOCamarotes();
+        }
+
         public static DAO instanciarDaoItinerario()
         {
             return new DAOItinerario();
         }
 
+        public static DAO instanciarDaoCamarotes()
+        {
+            return new DAOCamarotes();
+        }
+
         #endregion
-    
+
         #region M06 GESTION DE COMIDA
 
         public static DAOComida instanciarComida()
@@ -229,6 +240,27 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAOAvion();
         }
 
+        #endregion
+
+        #region M03_Ruta
+        /// <summary>
+        /// Método que crea la instancia de DAORuta
+        /// </summary>
+        /// <returns>Retorna la instancia a la clase DAORuta</returns>
+        public static DAO instanciarDAORuta()
+        {
+            return new DAORuta();
+        }
+
+        #endregion
+
+        #region M12_Usuarios
+
+        public static DAO instanciarDaoUsuario()
+        {
+            return new DAOUsuario();
+        }
+        
         #endregion
     }
 

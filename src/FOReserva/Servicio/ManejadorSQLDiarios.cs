@@ -14,7 +14,7 @@ namespace FOReserva.Servicio
     public class ManejadorSQLDiarios : manejadorSQL
     {
         StringBuilder sb;
-        SqlCommand cmd;
+        //SqlCommand cmd;
         /*Constructor de manejadorSQL*/
         public ManejadorSQLDiarios() : base() { }
 

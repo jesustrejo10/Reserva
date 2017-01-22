@@ -29,7 +29,7 @@ namespace FOReserva.Controllers
                 List<CRestaurantModel> lista = busqueda(search_val, name_rest);
                 return View(lista);
             }
-            catch (NullReferenceException e)
+            catch (NullReferenceException)
             {
                 //Ventana de error al buscar
                 //No se puede usar el mensaje de la excepcion "e.mensaje"
@@ -37,13 +37,13 @@ namespace FOReserva.Controllers
                 //como son caracteres especiales y de mas
                 return View();
             }
-            catch (ManejadorSQLException f)
+            catch (ManejadorSQLException )
             {
                 //Ventana de error no conecto a la db
                 //Se puede usar el mensaje de la excepcion "e.mensaje"
                 return View("error_conexion");
             }
-            catch (Exception g)
+            catch (Exception )
             {
 
             }
@@ -83,7 +83,7 @@ namespace FOReserva.Controllers
                 restaurante = manejador.buscarRest(id_rest);
                 return View(restaurante);
             }
-            catch (ManejadorSQLException f)
+            catch (ManejadorSQLException )
             {
 
                 return View("gestion_reserva_crucero_error_conexion");
@@ -113,13 +113,13 @@ namespace FOReserva.Controllers
                 manejador.CrearReserva(reserva);
                 return View(reserva);
             }
-            catch (ManejadorSQLException e)
+            catch (ManejadorSQLException )
             {
                 //Ventana de error no conecto a la db
                 //Se puede usar el mensaje de la excepcion "e.mensaje"
                 return View("error_conexion");
             }
-            catch (InvalidManejadorSQLException f)
+            catch (InvalidManejadorSQLException )
             {
                 reserva = null;
                 ViewBag.Message = "Lo sentimos, la reserva no pudo ser realizada debido a un error del sistema";
@@ -144,7 +144,7 @@ namespace FOReserva.Controllers
                 List<CReservation_Restaurant> lista = manejador.buscarReservas();
                 return View(lista);
             }
-            catch (ManejadorSQLException f)
+            catch (ManejadorSQLException )
             {
                 //Ventana de error no conecto a la db
                 //Se puede usar el mensaje de la excepcion "f.mensaje"
@@ -171,13 +171,13 @@ namespace FOReserva.Controllers
                 ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
                 manejador.eliminarReserva(id);
             }
-            catch (ManejadorSQLException e)
+            catch (ManejadorSQLException )
             {
                 //Ventana de error no conecto a la db
                 //Se puede usar el mensaje de la excepcion "e.mensaje"
                 return null;
             }
-            catch (InvalidManejadorSQLException e)
+            catch (InvalidManejadorSQLException )
             {
                 //Ventana de error al eliminar la reserva
                 //Esto se causa por una sitaxis erronea del sql
@@ -232,19 +232,19 @@ namespace FOReserva.Controllers
                 ManejadorSQLReservaRestaurant manejador = new ManejadorSQLReservaRestaurant();
                 manejador.actualizarReserva(tmp);
             }
-            catch (ManejadorSQLException e)
+            catch (ManejadorSQLException )
             {
                 //Ventana de error no conecto a la db
                 //Se puede usar el mensaje de la excepcion "e.mensaje"
                 return null;
             }
-            catch (InvalidManejadorSQLException e)
+            catch (InvalidManejadorSQLException )
             {
                 //Ventana de error al eliminar la reserva
                 //Esto se causa por una sitaxis erronea del sql
                 //como son caracteres especiales o demas
             }
-            catch (Exception e)
+            catch (Exception )
             {
                 // Error desconocido del sistema
                 return null;
