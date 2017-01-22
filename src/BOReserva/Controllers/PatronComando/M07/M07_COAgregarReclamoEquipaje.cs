@@ -8,8 +8,9 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando.M07
 {
-    public class M07_COAgregarReclamoEquipaje
+    public class M07_COAgregarReclamoEquipaje 
     {
+        /*
         ReclamoEquipaje _reclamoE;
 
         public M07_COAgregarReclamoEquipaje(ReclamoEquipaje reclamoe)
@@ -23,5 +24,6 @@ namespace BOReserva.Controllers.PatronComando.M07
             int result = reclamoEDAO.Agregar(_reclamoE);
             return result.ToString();
         }
+         */
     }
 }

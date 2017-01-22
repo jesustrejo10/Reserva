@@ -10,8 +10,9 @@ using System;
 
 namespace BOReserva.Controllers.PatronComando
 {
-    public class M07_COAgregarEquipaje : Command<bool>
+    public class M07_COAgregarEquipaje //: Command<bool>
     {
+        /*
         Equipaje _equipaje;
 
         public M07_COAgregarEquipaje(Equipaje equipaje)
@@ -23,7 +24,9 @@ namespace BOReserva.Controllers.PatronComando
         {
             IDAO reclamoEDAO = FabricaDAO.instanciarDAOEquipaje();
             int result = reclamoEDAO.Agregar(_equipaje);
+            
             return result.ToString();
         }
+         */
     }
 }

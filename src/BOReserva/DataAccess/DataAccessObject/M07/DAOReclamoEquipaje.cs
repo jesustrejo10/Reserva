@@ -16,8 +16,10 @@ namespace BOReserva.DataAccess.DataAccessObject
     /// <summary>
     /// Clase encargada de las consultas a BD de Reclamo Equipaje
     /// </summary>
-    public class DAOReclamoEquipaje : DAO, IDAOReclamo
+    public class DAOReclamoEquipaje //: DAO, IDAOReclamo
     {
+        /*
+         *
         /// <summary>
         /// Constructor por defecto de la clase
         /// </summary>
@@ -280,6 +282,14 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
         }
 
-    }
 
+        public int modificarEstado(int id, int estado)
+        {
+            throw new NotImplementedException();
+        }
+    
+         */
+    }
+        
+    
 }

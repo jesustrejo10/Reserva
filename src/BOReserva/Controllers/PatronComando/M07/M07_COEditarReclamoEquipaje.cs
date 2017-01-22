@@ -9,8 +9,9 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando.M07
 {
-    public class M07_COEditarReclamoEquipaje : Command<String>
+    public class M07_COEditarReclamoEquipaje  //: Command<String>
     {
+        /*
         ReclamoEquipaje _reclamo;
         int _idReclamo;
         int _estado;
@@ -26,6 +27,6 @@ namespace BOReserva.Controllers.PatronComando.M07
             int respuesta = daoReclamo.modificarEstado(_idReclamo,_estado);
             return respuesta.ToString();
         }
-    
+    */
     }
 }
