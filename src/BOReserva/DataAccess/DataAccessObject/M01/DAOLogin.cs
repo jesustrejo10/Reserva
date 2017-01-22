@@ -44,35 +44,24 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
 
                 tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoLogin.ConsultarUsuario, listaParametro);
 
-                if(tablaDeDatos.Rows.Count > 1) throw new ExceptionReserva("Reserva-404", "Se esperaba solo una fila", new ArgumentException());
-                else if(tablaDeDatos.Rows.Count == 0) throw new Cvalidar_usuario_Exception("Usuario o contraseña incorrecto");
+                if (tablaDeDatos.Rows.Count > 1) throw new ExceptionReserva("Reserva-404", "Se esperaba solo una fila", new ArgumentException());
+                else if (tablaDeDatos.Rows.Count == 0) throw new Cvalidar_usuario_Exception("Usuario o contraseña incorrecto");
 
                 foreach (DataRow filausuario in tablaDeDatos.Rows) //Solo debería haber uno
                 {
-                    //usuarioSalida = FabricaEntidad.crearUsuario(int.Parse(filausuario[RecursoLogin.usuarioID].ToString()),
-                    //    int.Parse(filausuario[RecursoLogin.usuarioIDRol].ToString()),
-                    //    filausuario[RecursoLogin.usuarioNombre].ToString(),
-                    //    filausuario[RecursoLogin.usuarioApellido].ToString(),
-                    //    filausuario[RecursoLogin.usuarioCorreo].ToString(),
-                    //    filausuario[RecursoLogin.usuarioClave].ToString(),
-                    //    filausuario[RecursoLogin.usuarioFechaCreacion].ToString(),
-                    //    filausuario[RecursoLogin.usuarioActivo].ToString()
-                    //    );
-                    usuarioSalida = new Usuario()
-                    {
-                        nombre = filausuario[RecursoLogin.usuarioNombre].ToString(),
-                        apellido = filausuario[RecursoLogin.usuarioApellido].ToString(),
-                        correo = filausuario[RecursoLogin.usuarioCorreo].ToString(),
-                        clave = filausuario[RecursoLogin.usuarioClave].ToString(),
-                        rol = int.Parse(filausuario[RecursoLogin.usuarioIDRol].ToString()),
-                        fechaCreacion = filausuario[RecursoLogin.usuarioFechaCreacion].ToString(),
-                        activo = filausuario[RecursoLogin.usuarioActivo].ToString(),
-                        id = int.Parse(filausuario[RecursoLogin.usuarioID].ToString())
-                    };
+                    usuarioSalida = FabricaEntidad.crearUsuario(int.Parse(filausuario[RecursoLogin.usuarioID].ToString()),
+                        int.Parse(filausuario[RecursoLogin.usuarioIDRol].ToString()),
+                        filausuario[RecursoLogin.usuarioNombre].ToString(),
+                        filausuario[RecursoLogin.usuarioApellido].ToString(),
+                        filausuario[RecursoLogin.usuarioCorreo].ToString(),
+                        filausuario[RecursoLogin.usuarioClave].ToString(),
+                        filausuario[RecursoLogin.usuarioFechaCreacion].ToString(),
+                        filausuario[RecursoLogin.usuarioActivo].ToString()
+                        );
                 }
                 return usuarioSalida;
             }
-            catch(Cvalidar_usuario_Exception ex)
+            catch (Cvalidar_usuario_Exception ex)
             {
                 throw ex;
             }
@@ -104,7 +93,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
         /// </summary>
         /// <param name="_usuario">Representa un objeto Usuario</param>
         /// <returns>Evalua como True en caso de éxito, SqlException en fallos a la base de datos,
-        /// False en cualquier otro caso</returns>
+        /// False en cualquier otro caso.</returns>
         public Boolean BloquearUsuario(Entidad _usuario)
         {
             Usuario usuario = (Usuario)_usuario; //Cast explicito
@@ -129,21 +118,27 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
             }
         }
 
+        /// <summary>
+        /// Método que incrementa en uno los intentos de inicio de sesión de un usuario.
+        /// </summary>
+        /// <param name="_usuario">Representa un objeto Usuario</param>
+        /// <returns>Evalua como True en caso de éxito, False en caso de ocurrir algún problema en la base de datos,
+        /// arrojando excepciones de cualquier otro tipo.</returns>
         public Boolean IncrementarIntentos(Entidad _usuario)
         {
             Usuario usuario = (Usuario)_usuario; //Cast explicito
-            DataTable tablaDeDatos;
+            int filasAfectadas;
             List<Model.Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
             try
             {
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoLogin.correo, SqlDbType.VarChar, usuario.correo.ToString(), false));
 
-                tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoLogin.IncrementarIntentos, listaParametro); //Validar que retorne el numero de columnas afectadas
+                filasAfectadas = EjecutarStoredProcedureTuplasFilasAfectadas(RecursoLogin.IncrementarIntentos, listaParametro);
 
-                if(tablaDeDatos.Rows.Count < 1)
+                if (filasAfectadas < 1)
                 {
                     InsertarLogin(usuario.correo);
-                    tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoLogin.IncrementarIntentos, listaParametro);
+                    EjecutarStoredProcedureTuplasFilasAfectadas(RecursoLogin.IncrementarIntentos, listaParametro);
                 }
                 return true;
             }
@@ -159,6 +154,12 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
             }
         }
 
+        /// <summary>
+        /// Método que reinicia el número de intentos de inicio de sesión de un usuario.
+        /// </summary>
+        /// <param name="_usuario">Representa un objeto Usuario</param>
+        /// <returns>Evalua como True en caso de éxito, False en caso de ocurrir algún problema en la base de datos,
+        /// arrojando excepciones de cualquier otro tipo.</returns>
         public Boolean ResetearIntentos(Entidad _usuario)
         {
             Usuario usuario = (Usuario)_usuario; //Cast explicito
@@ -423,5 +424,44 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
 
         #endregion
 
+        #region Metodos Auxiliares
+
+        public int EjecutarStoredProcedureTuplasFilasAfectadas(string query, List<Parametro> parametros)
+        {
+            SqlCommand comando;
+            try
+            {
+                Conectar();
+                DataTable dataTable = new DataTable();
+                using (conexion)
+                {
+
+                    comando = new SqlCommand(query, conexion);
+                    comando.CommandType = CommandType.StoredProcedure;
+                    AsignarParametros(parametros);
+                    conexion.Open();
+                    using (SqlDataAdapter dataAdapter = new SqlDataAdapter(comando))
+                    {
+                        return dataAdapter.Fill(dataTable);
+                    }
+                }
+
+
+            }
+            catch (SqlException ex)
+            {
+                throw new ExceptionBD(RecursoBD.Cod_Error_General, RecursoBD.Error_General, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ExceptionBD(RecursoBD.Cod_Error_General, RecursoBD.Error_General, ex);
+            }
+            finally
+            {
+                Desconectar();
+            }
+
+        }
+        #endregion
     }
 }
