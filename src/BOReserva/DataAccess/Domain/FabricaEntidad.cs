@@ -4,7 +4,7 @@ using BOReserva.Models.gestion_hoteles;
 using BOReserva.Models.gestion_reclamos;
 using BOReserva.Models.gestion_restaurantes;
 using BOReserva.Models.gestion_roles;
-//using BOReserva.DataAccess.Domain.M06;
+using BOReserva.DataAccess.Domain;
 using BOReserva.Models.gestion_aviones;
 using System;
 using System.Collections.Generic;
@@ -426,6 +426,25 @@ namespace BOReserva.DataAccess.Domain
         public static Entidad instanciarComidaVuelo(int id, string comida, int cantidad)
         {
             return  new ComidaVuelo(id, comida, cantidad);
+        }
+
+        #endregion
+
+        #region M03_Ruta
+        /// <summary>
+        /// Se crea una instancia de la clase Ruta con todos sus atributos
+        /// </summary>
+        /// <param name="_idRuta"></param>
+        /// <param name="_distancia"></param>
+        /// <param name="_status"></param>
+        /// <param name="_tipo"></param>
+        /// <param name="_origenRuta"></param>
+        /// <param name="_destinoRuta"></param>
+        /// <returns>Retorna una instancia de la clase ruta con todos sus atributos</returns>
+        public static Entidad InstanciarRuta(int _idRuta, int _distancia, String _status, String _tipo,
+                                          String _origenRuta, String _destinoRuta)
+        {
+            return new Ruta(_idRuta, _distancia, _status, _tipo, _origenRuta, _destinoRuta);
         }
 
         #endregion

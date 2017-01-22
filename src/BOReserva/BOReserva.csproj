@@ -211,6 +211,14 @@
     <Compile Include="Controllers\M04\gestion_vueloController.cs" />
     <Compile Include="Controllers\PatronComando\Command.cs" />
     <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
+    <Compile Include="Controllers\PatronComando\M03\M03_COAgregarRuta.cs" />
+    <Compile Include="Controllers\PatronComando\M03\M03_COConsultarDestinos.cs" />
+    <Compile Include="Controllers\PatronComando\M03\M03_CODeshabilitarRuta.cs" />
+    <Compile Include="Controllers\PatronComando\M03\M03_COHabilitarRuta.cs" />
+    <Compile Include="Controllers\PatronComando\M03\M03_COListarLugares.cs" />
+    <Compile Include="Controllers\PatronComando\M03\M03_COModificarRutacs.cs" />
+    <Compile Include="Controllers\PatronComando\M03\M03_COMostrarRuta.cs" />
+    <Compile Include="Controllers\PatronComando\M03\M03_COValidarRuta.cs" />
     <Compile Include="Controllers\PatronComando\M06\M06_COCambiarEstatusComida.cs" />
     <Compile Include="Controllers\PatronComando\M06\M06_COEditarComida.cs" />
     <Compile Include="Controllers\PatronComando\M06\M06_CORellenarComida.cs" />
@@ -299,6 +307,8 @@
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCamarote.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCruceros.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOItinerario.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORuta.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M03\DAORuta.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCabina.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCamarotes.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCruceros.cs" />
@@ -411,8 +421,8 @@
     <Compile Include="DataAccess\Domain\Hotel.cs" />
     <Compile Include="DataAccess\Domain\Pais.cs" />
     <Compile Include="DataAccess\Domain\M13\Rol.cs" />
-    <Compile Include="DataAccess\Domain\RutaBoleto.cs" />
     <Compile Include="DataAccess\Domain\Ruta.cs" />
+    <Compile Include="DataAccess\Domain\RutaBoleto.cs" />
     <Compile Include="DataAccess\Domain\Transporte.cs" />
     <Compile Include="DataAccess\Domain\Usuario.cs" />
     <Compile Include="DataAccess\Domain\Vuelo.cs" />
@@ -512,13 +522,10 @@
     <Compile Include="Models\gestion_ruta_comercial\CGestion_ruta.cs" />
     <Compile Include="Models\gestion_ruta_comercial\CRuta.cs" />
     <Compile Include="Models\gestion_usuarios\AgregarUsuario.cs" />
-
     <Compile Include="Servicio\Servicio_Extravios\CManejadorSQL_Extravios.cs" />
-
     <Compile Include="Models\gestion_vuelo\CrearVueloMO.cs" />
     <Compile Include="Models\gestion_vuelo\FabricaViewModelVuelo.cs" />
     <Compile Include="Models\gestion_vuelo\VueloViewModel.cs" />
-
     <Compile Include="Servicio\Servicio_Usuarios\ConexionBD.cs" />
     <Compile Include="Models\gestion_usuarios\CUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\Encriptar.cs" />
@@ -1685,10 +1692,8 @@
     <Content Include="Views\gestion_reclamos\M16_ModificarReclamo.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_AgregarHotel.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_VisualizarHoteles.cshtml" />
-
     <Content Include="Views\gestion_extravio\M07_GestionExtravio_Agregar.cshtml" />
     <Content Include="Views\gestion_extravio\M07_GestionExtravio_Visualizar.cshtml" />
-
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_CW1.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_CW2.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_CW3.cshtml" />

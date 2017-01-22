@@ -2,6 +2,7 @@
 using BOReserva.DataAccess.DataAccessObject.M14;
 using BOReserva.DataAccess.DataAccessObject.M09;
 using BOReserva.DataAccess.DataAccessObject.M01;
+using BOReserva.DataAccess.DataAccessObject.M03;
 using BOReserva.DataAccess.Model;
 using BOReserva.M10;
 using BOReserva.DataAccess.DataAccessObject;
@@ -202,6 +203,16 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAOAvion();
         }
 
+        #endregion
+        #region M03_Ruta
+        /// <summary>
+        /// Método que crea la instancia de DAORuta
+        /// </summary>
+        /// <returns>Retorna la instancia a la clase DAORuta</returns>
+        public static DAO instanciarDAORuta()
+        {
+            return new DAORuta();
+        }
         #endregion
     }
 
