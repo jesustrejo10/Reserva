@@ -29,6 +29,10 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
 
         public List<Entidad> Consultar(Entidad _usuario)
         {
+            //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
+            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+            RecursoDAOM19.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
             List<Entidad> listaDeReservas = FabricaEntidad.asignarListaDeEntidades();
             DataTable tablaDeDatos;
@@ -117,6 +121,10 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
         /// <returns>Entidad</returns>
         public Entidad consultarReservaId(Entidad _reserva)
         {
+            //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
+            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+            RecursoDAOM19.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             //Se castea de tipo Entidad a tipo Reserva Automovil
             CReservaAutomovil resv = (CReservaAutomovil)_reserva;
             List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
@@ -207,6 +215,10 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
         /// <returns>Lista de Entidades, ya que se devuelve mas de una fila de la BD, se debe castear a su respectiva clase en el Modelo</returns>
         public List<Entidad> ConsultarAutosPorIdCiudad(Entidad _lugar)
         {
+            //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
+            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+            RecursoDAOM19.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
             List<Entidad> listaDeAutomovil = FabricaEntidad.asignarListaDeEntidades();
             DataTable tablaDeDatos;
@@ -296,6 +308,10 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
         /// <returns>Se retorna true si fue exitoso</returns>
         public bool Crear(Entidad _reserva)
         {
+            //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
+            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+            RecursoDAOM19.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             CReservaAutomovil res = (CReservaAutomovil)_reserva;
             List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
 
@@ -352,6 +368,10 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
         /// <returns>Retorna true si fue exitoso</returns>
         public bool Eliminar(Entidad _reserva)
         {
+            //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
+            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+            RecursoDAOM19.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             CReservaAutomovil res = (CReservaAutomovil)_reserva;
             List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
 
@@ -395,6 +415,10 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
         /// <returns>Se retorna una lista de entidad que luego debe ser casteada a su respectiva clase en el Modelo</returns>
         public List<Entidad> ListarLugar()
         {
+            //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
+            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+            RecursoDAOM19.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
             List<Entidad> listaDeLugares = FabricaEntidad.asignarListaDeEntidades();
             Entidad lugar;
@@ -452,6 +476,10 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
         /// <returns>Se retorna true de ser exitoso</returns>
         public bool Modificar(Entidad _reserva)
         {
+            //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
+            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+            RecursoDAOM19.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             CReservaAutomovil resv = (CReservaAutomovil)_reserva;
             List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
 
