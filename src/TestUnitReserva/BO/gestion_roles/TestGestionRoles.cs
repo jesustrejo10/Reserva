@@ -22,7 +22,10 @@ namespace TestUnitReserva.BO.gestion_roles
     class TestGestionRoles
     {
         private Rol mockRol;
+        private Rol mockRolPermiso;
+        private Rol mockIdRol;
         private Permiso mockPermiso;
+        private int idAdministrador;
         DAORol daoRol;
 
         /// <summary>
@@ -32,7 +35,9 @@ namespace TestUnitReserva.BO.gestion_roles
         public void Before()
         {
             mockRol = new Rol("SuperAdmin");
-            mockPermiso = new Permiso(90,"Permiso 1");
+            mockRolPermiso = new Rol("SuperAdmin", "Gestion de aviones");
+            mockIdRol = new Rol(1, "Administrador");
+            idAdministrador = 1;
             daoRol = new DAORol();
 
         }
@@ -44,19 +49,50 @@ namespace TestUnitReserva.BO.gestion_roles
         public void After()
         {
             mockRol = null;
-            mockPermiso = null;
+            mockRolPermiso = null;
             daoRol = null;
         }
 
         [Test]
         public void M13_DAOTestAgregar()
         {
-            //Probando caso de exito de la prueba
+            //Caso de exito
             int resultadoAgregar = daoRol.Agregar(mockRol);
             Assert.AreEqual(resultadoAgregar, 1);
             //Probando caso de fallo
             int resultadoAgregarIncorrecto = daoRol.Agregar(null);
             Assert.AreEqual(resultadoAgregarIncorrecto, 0);
         }
+
+        [Test]
+        public void M13_DAOTestAgregarPermisosRol()
+        {
+            //Caso de exito
+            int resultadoAgregar = daoRol.AgregarRolPermiso(mockRolPermiso);
+            Assert.AreEqual(resultadoAgregar, 1);
+            //Caso de fallo
+            int resultadoAgregarIncorrecto = daoRol.AgregarRolPermiso(null);
+            Assert.AreEqual(resultadoAgregarIncorrecto, 0);
+        }
+
+        [Test]
+        public void M13_DAOTestConsultarRol()
+        {
+            //Caso de exito
+            Assert.AreNotEqual(daoRol.ConsultarRoles(), null);
+        }
+
+        [Test]
+        public void M13_DAOTestConsultarPermisos()
+        {
+            //Caso de exito        
+            Assert.AreNotEqual(daoRol.ConsultarPermisos(1), null);
+            //Caso de exito
+            Assert.AreNotEqual(daoRol.ConsultarPermisos(1).Count, 0);
+            //Caso de fallo
+            Assert.AreNotEqual(daoRol.ConsultarPermisos(0), null);
+        }
+
+
     }
 }

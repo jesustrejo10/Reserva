@@ -28,7 +28,7 @@ namespace BOReserva.DataAccess.DataAccessObject
         ///Metodo para agregar un rol a la base de datos
         ///</summary>
         ///<returns>int</returns>
-        int IDAO.Agregar(Entidad e)
+        public new int Agregar(Entidad e)
         {
             Rol rol = (Rol)e;
             SqlConnection conexion = Connection.getInstance(_connexionString);
@@ -47,6 +47,13 @@ namespace BOReserva.DataAccess.DataAccessObject
                 }
             }
             catch (SqlException ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return 0;
+            }
+            catch (Exception ex)
             {
                 Debug.WriteLine("ENTRO EN EL CATCH");
                 Debug.WriteLine(ex.ToString());
@@ -157,6 +164,13 @@ namespace BOReserva.DataAccess.DataAccessObject
                 conexion.Close();
                 return 0;
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return 0;
+            }
         }
 
         ///<summary>
@@ -192,6 +206,13 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
             catch (SqlException ex)
             {
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
                 Debug.WriteLine(ex.ToString());
                 conexion.Close();
                 return null;
@@ -237,6 +258,13 @@ namespace BOReserva.DataAccess.DataAccessObject
                 conexion.Close();
                 return null;
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+            }
         }
 
         ///<summary>
@@ -272,6 +300,13 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
             catch (SqlException ex)
             {
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
                 Debug.WriteLine(ex.ToString());
                 conexion.Close();
                 return null;
@@ -319,6 +354,13 @@ namespace BOReserva.DataAccess.DataAccessObject
                 conexion.Close();
                 return null;
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+            }
         }
 
         ///<summary>
@@ -343,10 +385,17 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
             catch (SqlException ex)
             {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
                 conexion.Close();
-                rol._nombreRol = ex.Message;
-                Entidad resultado = rol;
-                return resultado;
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
             }
         }
 
@@ -377,6 +426,13 @@ namespace BOReserva.DataAccess.DataAccessObject
                 conexion.Close();
                 return ex.Message;
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return ex.Message;
+            }
         }
 
         ///<summary>
@@ -402,6 +458,13 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
             catch (SqlException ex)
             {
+                conexion.Close();
+                return ex.Message;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
                 conexion.Close();
                 return ex.Message;
             }
@@ -435,18 +498,23 @@ namespace BOReserva.DataAccess.DataAccessObject
                     reader.Close();
                     //Cerrar la conexion
                     conexion.Close();
-                    return listapermisos;
                 }
             }
-            catch (SqlException e)
+            catch (SqlException ex)
             {
-                throw e;
+                conexion.Close();
+                return null;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw e;
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
             }
+            return listapermisos;
         }
+ 
 
         ///<summary>
         ///Metodo para consultar los permisos que tiene un usuario
