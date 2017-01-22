@@ -3,14 +3,14 @@
 
 <script src="~/Scripts/Scripts_Vuelos/llamadas_generales_Vuelos.js"></script>
 <link rel="stylesheet" href="~/Content/M04_css/style_module.css" type="text/css" />
-@using (Html.BeginForm("guardarVuelo", "gestion_vuelo", null, FormMethod.Post, new { @id = "formGuardarVuelo3", @class = "form-horizontal" }))
+@using (Html.BeginForm("guardarVuelo", "gestion_vuelo", null, FormMethod.Post, new { @id = "formModificarVuelo3", @class = "form-horizontal" }))
 {
     
     <div class="row">
         <div class="col-md-12">
             <h1>
                 Gestion de vuelos
-                <small>Crear un vuelo</small>
+                <small>Modificar un vuelo</small>
             </h1>
             <div class="box box-solid">
                 <div class="box box-solid">
@@ -117,7 +117,7 @@
                             <!-- FIN CAMPOS FORMULARIO-->
                             <!-- BOTON GUARDAR-->
                             <div class="col-md-12" style="margin-top:10px;">
-                                <button type="submit" id="agregarAW3" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                                <button type="submit" id="agregarAW3" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Modificar</button>
                             </div>
                             <!--FIN BOTON GUARDAR-->
                         </div>
@@ -138,4 +138,5 @@
     @Html.HiddenFor(m => m._idRuta)
     @Html.HiddenFor(m => m._fechaAterrizaje)
     @Html.HiddenFor(m => m._horaAterrizaje)
+    @Html.HiddenFor(m => m._idVuelo)
 }

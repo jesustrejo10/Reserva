@@ -1,33 +1,32 @@
-﻿using BOReserva.DataAccess.Domain;
+﻿using BOReserva.DataAccess.DataAccessObject;
+using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+using BOReserva.DataAccess.Domain;
+using BOReserva.DataAccess.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using BOReserva.DataAccess.DAO;
-using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
-using BOReserva.DataAccess.DataAccessObject;
 
 namespace BOReserva.Controllers.PatronComando.M04
 {
-    public class M04_COAgregarVuelo : Command<Boolean>
+    public class M04_COBuscarVuelo : Command<Entidad>
     {
-        
-        private Entidad _vuelo;
+        private int _id;
 
         #region Constructores
 
         /// <summary>
         /// Constructor simple
         /// </summary>
-        public M04_COAgregarVuelo() {}
+        public M04_COBuscarVuelo() {}
 
         /// <summary>
         /// Constructor que recibe un parametro del tipo entidad
         /// </summary>
         /// <param name="vuelo">Es el objeto que se quiere agregar</param>
-        public M04_COAgregarVuelo(Entidad vuelo)
+        public M04_COBuscarVuelo(int id)
         {
-            _vuelo = vuelo; 
+            _id = id; 
         }
         #endregion
 
@@ -37,17 +36,20 @@ namespace BOReserva.Controllers.PatronComando.M04
         /// Método para crear la instancia de la clase DaoUsuario y usar el método Agregar
         /// </summary>
         /// <returns>Retorna una instancia del tipo DaoUsuario</returns>
-        public override Boolean ejecutar()
+        public override Entidad ejecutar()
         {
             try
             {
-                IDAO vueloAdd = FabricaDAO.instanciarDAOVuelo();
-                vueloAdd.Agregar(_vuelo);
-                return true;
+                IDAO buscarVuelo = FabricaDAO.instanciarDAOVuelo();
+                return(buscarVuelo.Consultar(_id));
+            }
+            catch (ExceptionBD ex)
+            {
+                throw ex;
             }
             catch (Exception ex)
             {
-                throw new NotImplementedException();
+                throw ex;
             }
             
         }

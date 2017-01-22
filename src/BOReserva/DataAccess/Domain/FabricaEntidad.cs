@@ -7,6 +7,8 @@ using BOReserva.Models.gestion_roles;
 using BOReserva.DataAccess.Domain;
 using BOReserva.Models.gestion_aviones;
 using BOReserva.Models.gestion_usuarios;
+
+using BOReserva.DataAccess.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -244,8 +246,7 @@ namespace BOReserva.DataAccess.Domain
         /// </summary>
         /// <param name="id"></param>
         /// <param name="codigoVuelo"></param>
-        /// <param name="ciudadOrigen"></param>
-        /// <param name="ciudadDestino"></param>
+        /// <param name="ruta"></param>
         /// <param name="fechaDespegue"></param>
         /// <param name="status"></param>
         /// <param name="fechaAterrizaje"></param>
@@ -634,7 +635,6 @@ namespace BOReserva.DataAccess.Domain
             {
                 ReclamoEquipaje nuevoReclamo = (ReclamoEquipaje)e.Value;
                 lista.Add(nuevoReclamo);
-
             }
             return lista;
         }
@@ -651,12 +651,21 @@ namespace BOReserva.DataAccess.Domain
         #endregion
 
         #region M07 GESTION EQUIPAJE
-
+        /// <summary>
+        /// Instanciar Equipaje
+        /// </summary>
+        /// <returns>Entidad Instanciada</returns>
         public static Entidad instanciarEquipaje()
         {
             return new Equipaje();
         }
 
+        /// <summary>
+        /// Instanciar Equipaje con parametros
+        /// </summary>
+        /// <param name="peso">Peso equipaje</param>
+        /// <param name="abordaje">Pase Abordaje asociado</param>
+        /// <returns>Entidad instanciada con parametros</returns>
         public static Entidad instanciarEquipaje(int peso, int abordaje)
         {
             return new Equipaje(peso, abordaje);
