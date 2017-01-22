@@ -213,7 +213,6 @@
     <Compile Include="Controllers\M04\gestion_vueloController.cs" />
     <Compile Include="Controllers\PatronComando\Command.cs" />
     <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
-    <Compile Include="Controllers\PatronComando\M02\M02_COAgregarAvion.cs" />
     <Compile Include="Controllers\PatronComando\M02\M02_COConsultarAvion.cs" />
     <Compile Include="Controllers\PatronComando\M02\M02_CODisponibilidadAvion.cs" />
     <Compile Include="Controllers\PatronComando\M02\M02_COEliminarAvion.cs" />
