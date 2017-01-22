@@ -1,4 +1,5 @@
 ﻿using BOReserva.DataAccess.DAO;
+using BOReserva.DataAccess.DataAccessObject.M14;
 using BOReserva.DataAccess.DataAccessObject.M09;
 using BOReserva.DataAccess.DataAccessObject.M01;
 using BOReserva.DataAccess.Model;
@@ -15,8 +16,38 @@ using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 namespace BOReserva.DataAccess.DataAccessObject
 
 {
+    /// <summary>
+    /// Clase que fabrica los distintos DAO
+    /// </summary>
     public class FabricaDAO
     {
+        #region Lugar ( DAOLugar - DAOPais - DAOCiudad ) 
+
+        public static DAO instanciarDaoLugar()
+        {
+            return new DAOLugar();
+        }
+
+        /// <summary>
+        /// Metodo que instacia DAOPais
+        /// </summary>
+        /// <returns>Retorna DAOPais</returns>
+        public static DAO instanciarDaoPais()
+        {
+            return new DAOPais();
+        }
+
+        /// <summary>
+        /// Metodo que instacia DAOCiudad
+        /// </summary>
+        /// <returns>Retorna DAOCiudad</returns>
+        public static DAO instanciarDaoCiudad()
+        {
+            return new DAOCiudad();
+        }
+
+        #endregion
+
         #region M01_Login
         public static DAO instanciarDaoLogin()
         {
@@ -26,21 +57,22 @@ namespace BOReserva.DataAccess.DataAccessObject
 
         #region M09_Gestion_Hoteles_Por_Ciudad
 
+        /// <summary>
+        /// Metodo que instacia DAOHotel
+        /// </summary>
+        /// <returns>Retorna DAOHotel</returns>
         public static DAO instanciarDaoHotel() {
             return new DAOHotel();
         }
 
+        
 
-        public static DAO instanciarDaoPais() {
-            return new DAOPais();
-        }
+        /// <summary>
+        /// Metodo que instacia DAOHabitacion
+        /// </summary>
+        /// <returns>Retorna DAOHabitacion</returns>
+        public static DAOHabitacion instanciarDaoHabitacion()
 
-        public static DAO instanciarDaoCiudad()
-        {
-            return new DAOCiudad();
-        }
-
-        public static DAO instanciarDaoHabitacion()
         {
             return new DAOHabitacion();
         }
@@ -88,12 +120,6 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAOAutomovil();
         }
         #endregion
-
-        public static DAO instanciarDaoLugar()
-        {
-            return new DAOLugar();
-        }
-
 			
         #region Modulo 10
         /// <summary>
@@ -162,8 +188,26 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAORol();
         }
         #endregion
+        
+        #region M14_Cruceros
+        public static DAO instanciarDaoCrucero()
+        {
+            return new DAOCruceros();
+            
+        }
 
+        public static DAO instanciarDaoCabina()
+        {
+            return new DAOCabina();
+        }
 
+        public static DAO instanciarDaoItinerario()
+        {
+            return new DAOItinerario();
+        }
+
+        #endregion
+    
         #region M06 GESTION DE COMIDA
 
         public static DAOComida instanciarComida()
@@ -172,5 +216,15 @@ namespace BOReserva.DataAccess.DataAccessObject
         }
 
         #endregion
+
+        #region M02_Gestion_Avion
+
+        public static DAO instanciarDaoAvion()
+        {
+            return new DAOAvion();
+        }
+
+        #endregion
     }
+
 }

@@ -1,6 +1,7 @@
 ﻿using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
+using BOReserva.Excepciones.M09;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -11,6 +12,9 @@ using System.Web;
 
 namespace BOReserva.DataAccess.DataAccessObject
 {
+    /// <summary>
+    /// Clase abstracta que maneja la conexion a la BD
+    /// </summary>
     abstract public class DAO : IDAO
     {
         protected String _connexionString = ConfigurationManager.ConnectionStrings["StringRemoto"].ConnectionString;
@@ -292,4 +296,3 @@ namespace BOReserva.DataAccess.DataAccessObject
 
     }
 }
-

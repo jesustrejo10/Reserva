@@ -33,7 +33,7 @@ namespace BOReserva.Controllers.PatronComando
             try
             {
                 IDAORol daoRol = (IDAORol)FabricaDAO.instanciarDAORol();
-                modulo = daoRol.ConsultarModulos(id);
+            //    modulo = daoRol.ConsultarModulos(id);
             }
             catch (SqlException ex)
             {
@@ -43,7 +43,7 @@ namespace BOReserva.Controllers.PatronComando
             {
                 throw ex;
             }
-            return modulo;
+            return null;
         }
 
     }

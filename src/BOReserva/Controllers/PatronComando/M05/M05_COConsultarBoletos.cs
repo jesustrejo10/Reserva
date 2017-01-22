@@ -7,9 +7,9 @@ namespace BOReserva.Controllers.PatronComando
 {
     public class M05_COConsultarBoletos : Command<List<Entidad>>
     {
-
+        private int _id = -1;
         public M05_COConsultarBoletos() {}
-
+        public M05_COConsultarBoletos(int id) { this._id = id; }
         ///// <summary>
         ///// Sobre escritura del metodo ejecutar de la clase Comando.
         ///// Se encarga de llamar al DAO y devolver la respuesta al controlador.
@@ -20,7 +20,7 @@ namespace BOReserva.Controllers.PatronComando
         public override List<Entidad> ejecutar()
         {
             IDAOBoleto daoBoleto = (IDAOBoleto) FabricaDAO.instanciarDaoBoleto();
-            List<Entidad> boletos = daoBoleto.ConsultarBoletos();
+            List<Entidad> boletos = daoBoleto.ConsultarBoletos(_id);
             return boletos;
         }
     }

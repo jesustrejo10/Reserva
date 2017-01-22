@@ -1,4 +1,5 @@
 using BOReserva.Controllers.PatronComando.M09;
+using BOReserva.Controllers.PatronComando.M02;
 using BOReserva.DataAccess.Domain;
 using BOReserva.M10.Comando.gestion_restaurantes;
 using BOReserva.Models.gestion_automoviles;
@@ -7,8 +8,10 @@ using System.Collections.Generic;
 using BOReserva.Controllers.PatronComando;
 using System.Web;
 using System.Linq;
+using BOReserva.Controllers.PatronComando.M14;
 using BOReserva.Controllers.PatronComando.M10;
 using BOReserva.Controllers.PatronComando.M16;
+using BOReserva.DataAccess.Domain.M14;
 
 namespace BOReserva.Controllers.PatronComando
 {
@@ -18,6 +21,100 @@ namespace BOReserva.Controllers.PatronComando
     /// </summary>
     public class FabricaComando
     {
+        #region M02_Gestion_Avion
+        #region crearM02AgregarAvion
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M09_COAgregarHotel
+        /// </summary>
+        /// <param name="e">Recibe la una entidad de tipo Hotel</param>
+        /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
+        public static Command<String> crearM02AgregarAvion(Entidad e)
+        {
+
+            return new M02_COAgregarAvion((Avion)e);
+
+        }
+
+        #endregion
+        #region crearM02VisualizarAvion
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M09_COVisualizarHoteles
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M09_COVisualizarHoteles.
+        /// </returns>
+        public static Command<Dictionary<int, Entidad>> crearM02VisualizarAviones()
+        {
+
+            return new M02_COVisualizarAvion();
+
+        }
+
+        #endregion
+        #region crearM02ConsultarAvion
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M09_COConsultarHoteles
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M09_COConsultarHoteles.
+        /// </returns>
+        public static Command<Entidad> crearM02ConsultarAvion(int id)
+        {
+
+            return new M02_COConsultarAvion(id);
+
+        }
+
+        #endregion
+        #region crearM02ModificarAvion
+        public static Command<string> crearM02ModificarAvion(Entidad avion, int idmodificar)
+        {
+
+            return new M02_COModificarAvion(avion, idmodificar);
+
+        }
+        #endregion
+        #region crearM02EliminarAvion
+        public static Command<string> crearM02EliminarAvion(Entidad avion,int ideliminar)
+        {
+            return new M02_COEliminarAvion(avion,ideliminar);
+        }
+        #endregion
+        #region crearM02DisponibilidadAvion
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M09_CODisponibilidadHotel
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M09_CODisponibilidadHotel.
+        /// </returns>
+        public static Command<String> crearM02DisponibilidadAvion(Entidad avion, int disponibilidad)
+        {
+
+            return new M02_CODisponibilidadAvion(avion, disponibilidad);
+
+        }
+        #endregion
+        #endregion
+
+
+        # region Lugar ( COLugar - COPais - COCiudad ) 
+
+        public static Command<Dictionary<int, Entidad>> consultarTodosPais(Entidad e)
+        {
+            return new GeneralLugar.COConsultarTodosPais(e);
+        }
+
+        public static Command<Dictionary<int, Entidad>> consultarTodosCiudad(Entidad e)
+        {
+            return new GeneralLugar.COConsultarTodosCiudad(e);
+        }
+
+        #endregion
+
         #region M09_Gestion_Hoteles_Por_Ciudad
 
         /// <summary>
@@ -25,10 +122,11 @@ namespace BOReserva.Controllers.PatronComando
         /// M09_COAgregarHotel
         /// </summary>
         /// <param name="e">Recibe la una entidad de tipo Hotel</param>
+        /// <param name="precio">Precio por habitacion/param>
         /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
-        public static Command<String> crearM09AgregarHotel(Entidad e) {
+        public static Command<String> crearM09AgregarHotel(Entidad e, int precio) {
 
-            return new M09_COAgregarHotel((Hotel)e);
+            return new M09_COAgregarHotel((Hotel)e, precio);
 
         }
        
@@ -46,13 +144,13 @@ namespace BOReserva.Controllers.PatronComando
 
         }
 
+
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
         /// M09_COConsultarHoteles
         /// </summary>
-        /// <returns>
-        /// Retorna la instancia del comando M09_COConsultarHoteles.
-        /// </returns>
+        /// <param name="id">Identificador del hotel a consultar</param>
+        /// <returns>Retorna la instancia del comando M09_COConsultarHoteles.</returns>
         public static Command<Entidad> crearM09ConsultarHotel(int id)
         {
 
@@ -64,6 +162,8 @@ namespace BOReserva.Controllers.PatronComando
         /// Metodo creado con la finalidad de instanciar el comando
         /// M09_COModificarHoteles
         /// </summary>
+        /// <param name="hotel">Hotel a modificar</param>
+        /// <param name="idmodificar">Identificador del hotel a modificar</param>
         /// <returns>
         /// Retorna la instancia del comando M09_COModificarHoteles.
         /// </returns>
@@ -79,6 +179,8 @@ namespace BOReserva.Controllers.PatronComando
         /// Metodo creado con la finalidad de instanciar el comando
         /// M09_COEliminarHoteles
         /// </summary>
+        /// <param name="hotel">Hotel a eliminar</param>
+        /// <param name="ideliminar">Identificador del hotel a eliminar</param>
         /// <returns>
         /// Retorna la instancia del comando M09_COEliminarHoteles.
         /// </returns>
@@ -94,6 +196,8 @@ namespace BOReserva.Controllers.PatronComando
         /// Metodo creado con la finalidad de instanciar el comando
         /// M09_CODisponibilidadHotel
         /// </summary>
+        /// <param name="hotel">Hotel a modificar disponibilidad</param>
+        /// <param name="disponibilidad">Nuevo estado de disponibilidad</param>
         /// <returns>
         /// Retorna la instancia del comando M09_CODisponibilidadHotel.
         /// </returns>
@@ -103,6 +207,24 @@ namespace BOReserva.Controllers.PatronComando
             return new M09_CODisponibilidadHotel(hotel, disponibilidad);
 
         }
+
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M09_COAgregarHabitaciones
+        /// </summary>
+        /// <param name="hotel">Hotel al cual se le añadiran las habitaciones</param>
+        /// <param name="precio">Precio por habitacion</param>
+        /// <returns>
+        /// Retorna la instancia del comando M09_COAgregarHabitaciones.
+        /// </returns>
+        public static Command<int> crearM09AgregarHabitaciones(Entidad hotel, int precio)
+        {
+
+            return new M09_COAgregarHabitaciones((Hotel)hotel, precio);
+
+        }
+
 
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
@@ -162,6 +284,84 @@ namespace BOReserva.Controllers.PatronComando
 
         #endregion
 
+        #region M14_Gestion_Cruceros
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M14_COAgregarCrucero
+        /// </summary>
+        /// <param name="e">Recibe la una entidad de tipo Crucero</param>
+        /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
+        public static Command<String> crearM14AgregarCrucero(Entidad e)
+        {
+
+            return new M14_COAgregarCrucero((Crucero) e);
+            
+
+        }
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M14_COAgregarCrucero
+        /// </summary>
+        /// <param name="e">Recibe la una entidad de tipo Crucero</param>
+        /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
+        public static Command<String> crearM14AgregarCabina(Entidad e)
+        {
+
+            return new M14_COAgregarCabina((Cabina) e);
+            
+        }
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M14_COVisualizarCruceros
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M14_COVisualizarCruceros.
+        /// </returns>
+        public static Command<Dictionary<int, Entidad>> crearM14VisualizarCruceros()
+        {
+
+            return new M14_COVisualizarCruceros();
+
+        }
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M14_COVisualizarItinerario
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M14_COVisualizarItinerario.
+        /// </returns>       
+        public static Command<Dictionary<int, Entidad>> crearM14Visualizaritinerario()
+        {
+
+            return new M14_COVisualizarItinerario();
+        }
+
+
+        public static Command<Dictionary<int, Entidad>> crearM14VisualizarCabinasCrucero(string crucero)
+        {
+
+            return new M14_COListarCabinaCrucero(crucero);
+        }
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M14_COVisualizarCabinas
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M14_COVisualizarCabinas.
+        /// </returns>
+        public static Command<Dictionary<int, Entidad>> crearM14VisualizarCabinas(int id)
+        {
+
+            return new M14_COVisualizarCabinas(id);
+
+        }
+
+        #endregion
 
         #region M04_Vuelo
         /// <summary>
@@ -290,6 +490,11 @@ namespace BOReserva.Controllers.PatronComando
          return new M13_COModificarRol(rol, idmodificar);
         }
 
+        public static Command<List<String>> crearM13_ConsultarPermisosUsuario (int id)
+        {
+            return new M13_COConsultarPermisosUsuario(id);
+        }
+
         #endregion
 
         #region M05_Boleto
@@ -341,7 +546,10 @@ namespace BOReserva.Controllers.PatronComando
         {
             return new M05_COConsultarBoletos();
         }
-
+        public static Command<List<Entidad>> ConsultarBoletos(int id)
+        {
+            return new M05_COConsultarBoletos( id );
+        }
 
         #endregion
 
@@ -357,12 +565,12 @@ namespace BOReserva.Controllers.PatronComando
             return new M08.M08_COAgregarAutomovil(e);
         }
 
-        public static Command<String> buscarAutomovil(Entidad e)
+        public static Command<Entidad> buscarAutomovil(Entidad e)
         {
             return new M08.M08_COBuscarAutomovil(e);
         }
 
-        public static Command<String> listarAutomovil(Entidad e)
+        public static Command<List<Entidad>> listarAutomovil(Entidad e)
         {
             return new M08.M08_COListarAutomovil(e);
         }
@@ -488,10 +696,16 @@ namespace BOReserva.Controllers.PatronComando
         public enum comandosComida
         {
             CREAR_COMIDA,
+            CREAR_COMIDA_VUELO,
             ELIMINAR_COMIDA,
             ACTUALIZAR_COMIDA,
             CONSULTAR_COMIDAS,
-            CONSULTAR_COMIDAS_VUELOS
+            CONSULTAR_COMIDAS_VUELOS,
+            CONSULTAR_VUELOS,
+            DESHABILITAR_COMIDA,
+            HABILITAR_COMIDA,
+            RELLENAR_COMIDA,
+            EDITAR_COMIDA
         }
 
 
@@ -501,10 +715,30 @@ namespace BOReserva.Controllers.PatronComando
             {
                 case comandosComida.CREAR_COMIDA:
                     return new M06_COAgregarComida(_objeto);
+
+                case comandosComida.CREAR_COMIDA_VUELO:
+                    return new M06_COAgregarComidaVuelo(_objeto);
+
                 case comandosComida.CONSULTAR_COMIDAS:
                     return new M06_COConsultarComidas();
+
                 case comandosComida.CONSULTAR_COMIDAS_VUELOS:
                     return new M06_COConsultarComidasVuelos();
+                case comandosComida.CONSULTAR_VUELOS:
+                    return new M06_COConsultarVuelos();
+
+                case comandosComida.DESHABILITAR_COMIDA:
+                    return new M06_COCambiarEstatusComida(_objeto, 0);
+
+                case comandosComida.HABILITAR_COMIDA:
+                    return new M06_COCambiarEstatusComida(_objeto, 1);
+
+                case comandosComida.RELLENAR_COMIDA:
+                    return new M06_CORellenarComida(_objeto);
+
+                case comandosComida.EDITAR_COMIDA:
+                    return new M06_COEditarComida(_objeto);
+
                 default:
                     return new M06_COAgregarComida(_objeto);
             }
@@ -513,5 +747,4 @@ namespace BOReserva.Controllers.PatronComando
         #endregion
     }
         
-
 }
