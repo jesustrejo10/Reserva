@@ -30,10 +30,12 @@ namespace BOReserva.Controllers.PatronComando.M09
         /// <returns>Retorna un valor entero</returns>
         public override int ejecutar()
         {
-            IDAOHabitacion habdao = (IDAOHabitacion)FabricaDAO.instanciarDaoHabitacion();
-            String resp = habdao.Agregarhab(_hotel, _hotel._precio);
-            if (resp.Equals("1")) return 1;
-            else return 0;
+            IDAOHabitacion daoHabitacion = FabricaDAO.instanciarDaoHabitacion();
+            String resp = daoHabitacion.Agregarhab(_hotel, _hotel._precio);
+            if (resp.Equals("1")) 
+                return 1;
+            else 
+                return 0;
         }
 
     }

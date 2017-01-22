@@ -54,3 +54,59 @@
 2017-01-20 19:24:47,062 INFO  DAORestaurant - Clase: DAORestaurant
 2017-01-20 19:24:47,062 INFO  DAORestaurant - Mensaje: Entrada en el Método
 2017-01-20 19:24:47,062 INFO  DAORestaurant - Metodo: ListarLugar
+2017-01-21 18:20:52,386 INFO  DAORestaurant - *******************************************************
+2017-01-21 18:20:52,394 INFO  DAORestaurant - Clase: DAORestaurant
+2017-01-21 18:20:52,395 INFO  DAORestaurant - Mensaje: Entrada en el Método
+2017-01-21 18:20:52,395 INFO  DAORestaurant - Metodo: ListarLugar
+2017-01-21 18:20:54,623 INFO  DAORestaurant - *******************************************************
+2017-01-21 18:20:54,623 INFO  DAORestaurant - Clase: DAORestaurant
+2017-01-21 18:20:54,623 INFO  DAORestaurant - Mensaje: Entrada en el Método
+2017-01-21 18:20:54,623 INFO  DAORestaurant - Metodo: ListarLugar
+2017-01-21 18:32:00,866 INFO  DAORestaurant - *******************************************************
+2017-01-21 18:32:00,869 INFO  DAORestaurant - Clase: DAORestaurant
+2017-01-21 18:32:00,869 INFO  DAORestaurant - Mensaje: Entrada en el Método
+2017-01-21 18:32:00,869 INFO  DAORestaurant - Metodo: ListarLugar
+2017-01-21 18:32:01,624 INFO  DAORestaurant - *******************************************************
+2017-01-21 18:32:01,624 INFO  DAORestaurant - Clase: DAORestaurant
+2017-01-21 18:32:01,624 INFO  DAORestaurant - Mensaje: Entrada en el Método
+2017-01-21 18:32:01,624 INFO  DAORestaurant - Metodo: Consultar
+2017-01-21 18:32:03,834 INFO  DAORestaurant - *******************************************************
+2017-01-21 18:32:03,834 INFO  DAORestaurant - Clase: DAORestaurant
+2017-01-21 18:32:03,834 INFO  DAORestaurant - Mensaje: Entrada en el Método
+2017-01-21 18:32:03,834 INFO  DAORestaurant - Metodo: ListarLugar
+2017-01-21 18:32:04,015 INFO  DAORestaurant - *******************************************************
+2017-01-21 18:32:04,015 INFO  DAORestaurant - Clase: DAORestaurant
+2017-01-21 18:32:04,015 INFO  DAORestaurant - Mensaje: Entrada en el Método
+2017-01-21 18:32:04,015 INFO  DAORestaurant - Metodo: Consultar
+2017-01-21 18:32:04,670 INFO  DAORestaurant - *******************************************************
+2017-01-21 18:32:04,670 INFO  DAORestaurant - Clase: DAORestaurant
+2017-01-21 18:32:04,670 INFO  DAORestaurant - Mensaje: Entrada en el Método
+2017-01-21 18:32:04,670 INFO  DAORestaurant - Metodo: ListarLugar
+2017-01-21 18:32:05,240 INFO  DAORestaurant - *******************************************************
+2017-01-21 18:32:05,240 INFO  DAORestaurant - Clase: DAORestaurant
+2017-01-21 18:32:05,240 INFO  DAORestaurant - Mensaje: Entrada en el Método
+2017-01-21 18:32:05,240 INFO  DAORestaurant - Metodo: ListarLugar
+2017-01-21 18:32:11,522 INFO  DAORestaurant - *******************************************************
+2017-01-21 18:32:11,523 INFO  DAORestaurant - Clase: DAORestaurant
+2017-01-21 18:32:11,523 INFO  DAORestaurant - Mensaje: Entrada en el Método
+2017-01-21 18:32:11,523 INFO  DAORestaurant - Metodo: ListarLugar
+2017-01-21 18:32:11,723 INFO  DAORestaurant - *******************************************************
+2017-01-21 18:32:11,723 INFO  DAORestaurant - Clase: DAORestaurant
+2017-01-21 18:32:11,723 INFO  DAORestaurant - Mensaje: Entrada en el Método
+2017-01-21 18:32:11,723 INFO  DAORestaurant - Metodo: ListarLugar
+2017-01-21 18:32:14,147 INFO  DAORestaurant - *******************************************************
+2017-01-21 18:32:14,147 INFO  DAORestaurant - Clase: DAORestaurant
+2017-01-21 18:32:14,147 INFO  DAORestaurant - Mensaje: Entrada en el Método
+2017-01-21 18:32:14,147 INFO  DAORestaurant - Metodo: ListarLugar
+2017-01-21 18:32:14,338 INFO  DAORestaurant - *******************************************************
+2017-01-21 18:32:14,338 INFO  DAORestaurant - Clase: DAORestaurant
+2017-01-21 18:32:14,338 INFO  DAORestaurant - Mensaje: Entrada en el Método
+2017-01-21 18:32:14,338 INFO  DAORestaurant - Metodo: Consultar
+2017-01-21 18:32:14,587 INFO  DAORestaurant - *******************************************************
+2017-01-21 18:32:14,587 INFO  DAORestaurant - Clase: DAORestaurant
+2017-01-21 18:32:14,587 INFO  DAORestaurant - Mensaje: Entrada en el Método
+2017-01-21 18:32:14,587 INFO  DAORestaurant - Metodo: ListarLugar
+2017-01-21 18:32:14,767 INFO  DAORestaurant - *******************************************************
+2017-01-21 18:32:14,767 INFO  DAORestaurant - Clase: DAORestaurant
+2017-01-21 18:32:14,767 INFO  DAORestaurant - Mensaje: Entrada en el Método
+2017-01-21 18:32:14,767 INFO  DAORestaurant - Metodo: Consultar

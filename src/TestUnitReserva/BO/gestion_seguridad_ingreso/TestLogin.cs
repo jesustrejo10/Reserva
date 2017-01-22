@@ -12,7 +12,7 @@ using System.Data.SqlClient;
 
 
 namespace TestUnitReserva.BO.gestion_seguridad_ingreso
-{
+{/*
     [TestFixture]
     class TestLogin
     {
@@ -125,4 +125,5 @@ namespace TestUnitReserva.BO.gestion_seguridad_ingreso
         }
         
     }
+*/
 }

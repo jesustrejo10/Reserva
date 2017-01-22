@@ -24,7 +24,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
         private Pais mockPais;
         private Ciudad mockCiudad;
         private Hotel mockHotel;
-        DAOHotel daoHotel;
+        private DAOHotel daoHotel;
 
         /// <summary>
         /// Metodo que se ejecuta antes que se ejecute cada prueba

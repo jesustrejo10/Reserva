@@ -112,6 +112,7 @@ namespace BOReserva.Controllers
         /// <returns>Retorna la vista parcial M09_ModificarHotel en conjunto del Modelo de dicha vista</returns>
         public ActionResult M09_ModificarHotel(int id)
         {
+            //aca deberiamos hacer reflection y meter try catch
             Command<Entidad> comando = FabricaComando.crearM09ConsultarHotel(id);
             Entidad hotel = comando.ejecutar();
             Hotel hotelbuscado = (Hotel)hotel;

@@ -75,14 +75,21 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             List<Parametro> listaParametro;
             try
             {
-                for (int i = 1; i <= hotel._capacidad; i++)
+                if (hotel._capacidad < 100)
                 {
-                    listaParametro = FabricaDAO.asignarListaDeParametro();
-                    listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_nombre, SqlDbType.VarChar, hotel._nombre, false));
-                    listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hab_precio, SqlDbType.Int, Convert.ToString(precio), false));
-                    EjecutarStoredProcedure(RecursoDAOM09.ProcedimientoAgregarHabitacion, listaParametro);
+                    for (int i = 1; i <= hotel._capacidad; i++)
+                    {
+                        listaParametro = FabricaDAO.asignarListaDeParametro();
+                        listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_nombre, SqlDbType.VarChar, hotel._nombre, false));
+                        listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hab_precio, SqlDbType.Int, Convert.ToString(precio), false));
+                        EjecutarStoredProcedure(RecursoDAOM09.ProcedimientoAgregarHabitacion, listaParametro);
+                    }
+                    return "1";
                 }
-                return "1";
+                else
+                {
+                    return "0";
+                }
             }
             catch (SqlException ex)
             {
