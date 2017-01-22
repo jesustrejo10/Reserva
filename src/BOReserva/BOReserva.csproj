@@ -229,6 +229,8 @@
     <Compile Include="Controllers\PatronComando\M03\M03_COModificarRutacs.cs" />
     <Compile Include="Controllers\PatronComando\M03\M03_COMostrarRuta.cs" />
     <Compile Include="Controllers\PatronComando\M03\M03_COValidarRuta.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COBusquedaIdBoarding.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COConsultarBoletosPasajeroChekin.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COCrearBoarding.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COConteoBoarding.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COCrearMaletas.cs" />
@@ -656,8 +658,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicio\manejadorSQL.cs" />
     <Compile Include="Servicio\Servicio_Vuelos\manejadorSQL_Vuelos.cs" />
-    <Compile Include="Servicio\Servicio_Boletos\manejadorSQL_Boletos.cs" />
-    <Compile Include="Servicio\Servicio_Boletos\manejadorSQL_Check.cs" />
     <Compile Include="Servicio\Servicio_Hoteles\CManejadorSQL_Hoteles.cs" />
     <Compile Include="Servicio\Servicio_Rutas\CManejadorSQL_Rutas.cs" />
     <Compile Include="Views\gestion_restaurantes\Fabrica\FabricaVista.cs" />
@@ -732,6 +732,7 @@
     <Content Include="Content\dist\js\pages\dashboard.js" />
     <Content Include="Content\dist\js\pages\dashboard2.js" />
     <Content Include="Content\M24_css\style_module.css" />
+    <Content Include="Content\Preloader_2.gif" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -837,6 +838,7 @@
     <Content Include="Models\gestion_boletos\placeholder.html" />
     <Content Include="Models\gestion_vuelo\placeholder.html" />
     <Content Include="Scripts\cargadorMenu.js" />
+    <Content Include="Scripts\loader.js" />
     <Content Include="Scripts\Scripts_Boletos\DatosUsuario.js" />
     <Content Include="Scripts\Scripts_Boletos\DetalleBoleto.js" />
     <Content Include="Scripts\Scripts_Boletos\BuscarVuelo.js" />
@@ -1859,6 +1861,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="DataAccess\Domain\M04\" />
     <Folder Include="Scripts\Scripts_Reclamo\" />
+    <Folder Include="Servicio\Servicio_Boletos\" />
     <Folder Include="Views\dist\img\credit\" />
     <Folder Include="Views\dist\js\pages\" />
     <Folder Include="Views\gestion_roles\css\" />
