@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using System.Net;
 using BOReserva.Models.gestion_boletos;
-using BOReserva.Servicio.Servicio_Boletos;
 using BOReserva.DataAccess.Domain;
 using BOReserva.Controllers.PatronComando;
 
@@ -89,7 +88,7 @@ namespace BOReserva.Controllers
       
         public ActionResult M05_VerVuelos(int idorigen, int iddestino, string idavuelta, string tipo, string fechaida, string fechavuelta)
         {
-             manejadorSQL_Boletos sqlboletos = new manejadorSQL_Boletos();
+             //manejadorSQL_Boletos sqlboletos = new manejadorSQL_Boletos();
             
             //List<CVuelo> listavuelos = new List<CVuelo>();
             //listavuelos = sqlboletos.M05ListarVuelosIdaBD(fechaida, fechavuelta, idorigen, iddestino, tipo);

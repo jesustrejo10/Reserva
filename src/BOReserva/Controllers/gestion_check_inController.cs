@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using BOReserva.DataAccess.Domain;
 using BOReserva.Controllers.PatronComando;
 using BOReserva.Models.gestion_check_in;
-using BOReserva.Servicio.Servicio_Boletos;
 using System.Net;
 
 namespace BOReserva.Controllers
@@ -119,7 +118,7 @@ namespace BOReserva.Controllers
             {
                 int id_bol = model._bol_id;
 
-                manejadorSQL_Check modificar = new manejadorSQL_Check();
+                //manejadorSQL_Check modificar = new manejadorSQL_Check();
 
                 // OBTENGO EL /LOS VUELOS DEL BOLETO
                 Command<List<Entidad>> comando = FabricaComando.consultarM05listaVuelos(model._bol_id);
