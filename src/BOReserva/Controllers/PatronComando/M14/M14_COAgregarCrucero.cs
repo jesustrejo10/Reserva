@@ -14,12 +14,12 @@ namespace BOReserva.Controllers.PatronComando
 
         public M14_COAgregarCrucero(Crucero crucero ) { 
             this._crucero = crucero;
-        }
-
+        }        
+                
         public override String ejecutar(){
             IDAO daoCrucero = FabricaDAO.instanciarDaoCrucero();       
             int test = daoCrucero.Agregar(_crucero);
-            return test.ToString();
+            return test.ToString();            
         }
 
     }

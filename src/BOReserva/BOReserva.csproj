@@ -210,6 +210,15 @@
     <Compile Include="Controllers\M04\gestion_vueloController.cs" />
     <Compile Include="Controllers\PatronComando\Command.cs" />
     <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
+    <Compile Include="Controllers\PatronComando\GeneralLugar\COConsultarTodosCiudad.cs" />
+    <Compile Include="Controllers\PatronComando\GeneralLugar\COConsultarTodosLugar.cs" />
+    <Compile Include="Controllers\PatronComando\GeneralLugar\COConsultarTodosPais.cs" />
+    <Compile Include="Controllers\PatronComando\M02\M02_COAgregarAvion.cs" />
+    <Compile Include="Controllers\PatronComando\M02\M02_COConsultarAvion.cs" />
+    <Compile Include="Controllers\PatronComando\M02\M02_CODisponibilidadAvion.cs" />
+    <Compile Include="Controllers\PatronComando\M02\M02_COEliminarAvion.cs" />
+    <Compile Include="Controllers\PatronComando\M02\M02_COModificarAvion.cs" />
+    <Compile Include="Controllers\PatronComando\M02\M02_COVisualizarAvion.cs" />
     <Compile Include="Controllers\PatronComando\M04\M04_COCambiarStatus.cs" />
     <Compile Include="Controllers\PatronComando\M04\M04_COEliminarVuelo.cs" />
     <Compile Include="Controllers\PatronComando\M04\M04_COFechaAterrizaje.cs" />
@@ -230,6 +239,11 @@
     <Compile Include="Controllers\PatronComando\M05\M05_COModificarPasajero.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COConsultarBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COCrearBoleto.cs" />
+    <Compile Include="Controllers\PatronComando\M06\M06_COAgregarComidaVuelo.cs" />
+    <Compile Include="Controllers\PatronComando\M06\M06_COCambiarEstatusComida.cs" />
+    <Compile Include="Controllers\PatronComando\M06\M06_COConsultarVuelos.cs" />
+    <Compile Include="Controllers\PatronComando\M06\M06_COEditarComida.cs" />
+    <Compile Include="Controllers\PatronComando\M06\M06_CORellenarComida.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COAgregarHabitaciones.cs" />
     <Compile Include="Controllers\PatronComando\M01\M01_COBloquearUsuario.cs" />
     <Compile Include="Controllers\PatronComando\M01\M01_COLanding.cs" />
@@ -280,11 +294,16 @@
     <Compile Include="Controllers\List.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COVisualizarHoteles.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COAgregarPasajero.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COConsultarPermisosUsuario.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COListarCabinaCrucero.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarCabinas.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COAgregarCabina.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarCruceros.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COAgregarCrucero.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarItinerario.cs" />
+    <Compile Include="DataAccess\DataAccessObject\DAOAvion.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOChecking.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOAvion.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCabina.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCheckIn.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOItinerario.cs" />
@@ -335,7 +354,6 @@
     </Compile>
     <Compile Include="DataAccess\DataAccessObject\M06\DAOComida.cs" />
     <Compile Include="DataAccess\DataAccessObject\M06\RecursoM06.Designer.cs" />
-    <Compile Include="DataAccess\DataAccessObject\M06\Resource1.Designer.cs" />
     <Compile Include="DataAccess\DataAccessObject\M08\DAOAutomovil.cs" />
     <Compile Include="DataAccess\DataAccessObject\M08\RecursoDAOM08.Designer.cs" />
     <Compile Include="DataAccess\DataAccessObject\M09\DAOHotel.cs" />
@@ -414,6 +432,8 @@
     <Compile Include="Excepciones\ExceptionReserva.cs" />
     <Compile Include="Excepciones\Log.cs" />
     <Compile Include="Excepciones\LogException.cs" />
+    <Compile Include="Excepciones\M08\ReservaExceptionM08.cs" />
+    <Compile Include="Excepciones\M09\ReservaExceptionM09.cs" />
     <Compile Include="Excepciones\M10\ReservaExceptionM10.cs" />
     <Compile Include="Excepciones\RecursoLog.Designer.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -428,6 +448,7 @@
     <Compile Include="Models\gestion_aviones\CAgregarAvion.cs" />
     <Compile Include="Models\gestion_aviones\CAvion.cs" />
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
+    <Compile Include="Models\gestion_aviones\CVerAvion.cs" />
     <Compile Include="Models\gestion_comida_vuelo\CAgregarVuelo.cs" />
     <Compile Include="Models\gestion_comida_vuelo\CVuelo.cs" />
     <Compile Include="Models\gestion_comida_vuelo\CVueloComida.cs" />
@@ -529,13 +550,6 @@
     <Compile Include="Servicio\Servicio_Boletos\manejadorSQL_Check.cs" />
     <Compile Include="Servicio\Servicio_Hoteles\CManejadorSQL_Hoteles.cs" />
     <Compile Include="Servicio\Servicio_Rutas\CManejadorSQL_Rutas.cs" />
-    <Compile Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx.cs">
-      <DependentUpon>GestionDeAutomoviles.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx.designer.cs">
-      <DependentUpon>GestionDeAutomoviles.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Views\gestion_restaurantes\Fabrica\FabricaVista.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -783,8 +797,6 @@
     <Content Include="Scripts\Scripts_Usuarios\llamadas_generales.js" />
     <Content Include="Views\dist\img\avatar5.png" />
     <Content Include="Views\gestion_automoviles\css\style_module.css" />
-    <Content Include="Views\gestion_automoviles\GestionDeAutomoviles.aspx" />
-    <Content Include="Views\gestion_automoviles\GestionDeAutomoviles.html" />
     <Content Include="Views\gestion_automoviles\js\visualizarAutomovil.js" />
     <Content Include="Views\gestion_automoviles\js\module.js" />
     <Content Include="Views\gestion_automoviles\M08_AgregarAutomovil.html" />

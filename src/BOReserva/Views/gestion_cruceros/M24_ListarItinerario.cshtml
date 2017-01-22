@@ -21,13 +21,14 @@
                     <tbody>
                         @try
                         {
-                            foreach (var itinerario in Model.itinerarios)
+                            foreach (var itinerario in Model)
                             {
-                                <tr id="@itinerario._fechaInicio">
-                                    <td>@itinerario._crucero </td>
-                                    <td>@itinerario._ItinerarioCrucero </td>
-                                    <td>@itinerario._fechaInicio </td>
-                                    <td>@itinerario._fechaFin </td>
+                                BOReserva.DataAccess.Domain.M14.Itinerario i = (BOReserva.DataAccess.Domain.M14.Itinerario)itinerario.Value;
+                                <tr id="@itinerario.Key">
+                                    <td>@i._Crucero </td>
+                                    <td>@i._Ruta </td>
+                                    <td>@i._FechaInicio </td>
+                                    <td>@i._FechaFin </td>
                                 </tr>
 
                             }
