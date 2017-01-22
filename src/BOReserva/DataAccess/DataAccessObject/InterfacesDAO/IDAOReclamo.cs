@@ -10,5 +10,6 @@ namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
     public interface IDAOReclamo : IDAO
     {
         int modificarEstado(int id, int estado);
+        int Eliminar(int id);
     }
 }

@@ -91,18 +91,34 @@ namespace BOReserva.Controllers
         /// <returns>Devuelve el objeto del Tipo CRoles</returns>
         public ActionResult M13_ModificarRol(int _idRol)
         {
+
             Rol rolbuscado;
-            CRoles _rol = new CRoles();
-            manejadorSQL sql = new manejadorSQL();
+            CRoles modelovista = new CRoles();
+            CListaGenerica<CModulo_detallado> md = new CListaGenerica<CModulo_detallado>();
+            //CModulo_detallado entrada = new CModulo_detallado();
+            //CRoles _rol = new CRoles();
+            //_rol.Id_Rol = _idRol;
+            //manejadorSQL sql = new manejadorSQL();
             try
             {
-                //Command<Entidad> comando = FabricaComando.crearM13_ConsultarRol(_idRol);
-                //Entidad rol = comando.ejecutar();
-                //rolbuscado = (Rol)rol;
-                //rolbuscado._id = _idRol;
-                //Command<List<Entidad>> comando1 = FabricaComando.crearM13_ConsultarPermisosAsignados(rolbuscado, _idRol);
-                //rolbuscado.listapermisos = comando1.ejecutar();
-                _rol.Permisos = sql.consultarLosPermisosAsignados(_rol);
+                Command<Entidad> comando = FabricaComando.crearM13_ConsultarRol(_idRol);
+                Entidad rol = comando.ejecutar();
+                rolbuscado = (Rol)rol;
+                rolbuscado._id = _idRol;
+                Command<List<Entidad>> comando1 = FabricaComando.crearM13_ConsultarPermisosAsignados(rolbuscado, _idRol);
+                rolbuscado.listapermisos = comando1.ejecutar(); 
+                foreach (Permiso item in rolbuscado.listapermisos)
+                {
+                    CModulo_detallado entrada = new CModulo_detallado();
+                    entrada.Nombre = item._nombre;
+                    entrada.Id = item._idPermiso;
+                    md.agregarElemento(entrada);
+                }
+
+                modelovista.Id_Rol = rolbuscado._idRol;
+                modelovista.Nombre_rol = rolbuscado._nombreRol;
+                modelovista.Permisos = md;
+                //_rol.Permisos = sql.consultarLosPermisosAsignados(_rol);
             }
             catch (SqlException e)
             {
@@ -117,7 +133,7 @@ namespace BOReserva.Controllers
                 String error = "Error desconocido, contacte con el administrador.";
                 return Json(error);
             }
-            return PartialView(_rol);
+            return PartialView(modelovista);
         }
         //Metodo para agregar roles
         [HttpPost]

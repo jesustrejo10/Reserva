@@ -2,9 +2,7 @@
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Diagnostics;
 
 namespace BOReserva.Controllers.PatronComando.M11
 {
@@ -14,24 +12,33 @@ namespace BOReserva.Controllers.PatronComando.M11
     public class M11_COModificarOferta : Command<String>
     {
         Oferta _oferta;
-        int _idmodificar;
+        int valor;
 
+        /// <summary>
+        /// Se asignan los parámetros a la entidad que será modificada
+        /// </summary>
+        /// <param name="oferta">La entidad que se va a modificar</param>
+        /// <param name="id">El id de la entidad que se va a modificar</param>
         public M11_COModificarOferta(Entidad oferta, int id)
         {
             this._oferta = (Oferta)oferta;
-            this._oferta._id = id;
+            this.valor = id;
         }
 
-        /*    public override String ejecutar(){
-                IDAO daoOferta = FabricaDAO.instanciarDaoOferta();
-                Entidad test = daoOferta.Modificar(_oferta);
-                Oferta oferta = (Oferta)test;
-                return oferta._nombre;
-        }*/
+        public override String ejecutar()
+        {
+            Debug.WriteLine("ENTRÓ A EJECUTAR");
+            Debug.WriteLine("ENTRÓ A EJECUTAR " + _oferta._nombreOferta);
+            Debug.WriteLine("ENTRÓ A EJECUTAR " + valor);
 
-            public override String ejecutar(){
+            IDAOOferta daoOferta = FabricaDAO.instanciarDaoOferta();
+            int test = daoOferta.Modificar(_oferta, valor);
+            return test.ToString();
+         }
+
+           /* public override String ejecutar(){
 
                 return null; //por ahora porque lo de arriba es lo que se debe descomentar
-        }
+        }*/
     }
 }

@@ -5,6 +5,8 @@
 <link rel="stylesheet" href="~/Content/M04_css/style_module.css" type="text/css" />
 @using (Html.BeginForm("guardarVuelo", "gestion_vuelo", null, FormMethod.Post, new { @id = "formGuardarVuelo2", @class = "form-horizontal" }))
 {
+    
+    @Html.HiddenFor(m => m._codigoVuelo)
     <div class="row">
         <div class="col-md-12">
             <h1>
@@ -41,7 +43,7 @@
                             <div class="col-xs-6">
                                 <!-- DROPDOWN ELEGIR MATRICULA AVION -->
                                 <label> Elegir avion (<span style="color: #d9534f">*</span>):</label>
-                                @Html.DropDownListFor(m => m._matriculaAvion, Model._matriculasAvion, "Seleccione la matricula del Avión",
+                                @Html.DropDownListFor(m => m._idAvion, Model._matriculasAvion, "Seleccione la matricula del Avión",
                                     new { @class = "form-control", @id = "matAvion", @style = "width: 100%;" })
                             </div>
                             <!-- FIN ELEGIR MATRICULA AVION -->
@@ -81,8 +83,17 @@
                             <div>&nbsp;</div>
                             <!-- FIN TEXTBOXFOR VELOCIDAD MAXIMA VUELO AVION -->
                             <!-- BOTON GUARDAR-->
+                            <!-- <div class="col-md-12" style="margin-top:10px;">
+                            </div>-->
                             <div class="col-md-12" style="margin-top:10px;">
-                                <button type="submit" id="agregarAW1" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Siguiente</button>
+                                <br />
+                                <div class="col-md-4"></div>
+                                <div class="col-md-2">
+                                    <button id="cancelarModificacion" type="button" class="btn btn-danger" style="display:block; margin-left:auto; margin-right:auto;">  Atras  </button>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="submit" id="agregarAW2" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Siguiente</button>
+                                </div>
                             </div>
                             <!--FIN BOTON GUARDAR-->
                         </div>
@@ -97,6 +108,12 @@
         </div>
         <!-- /.box -->
     </div>
+    @Html.HiddenFor(m => m._fechaDespegue)
+    @Html.HiddenFor(m => m._horaDespegue)
+    @Html.HiddenFor(m => m._idRuta)
+    @Html.HiddenFor(m => m._ciudadDestino)
+    @Html.HiddenFor(m => m._ciudadOrigen)
+   
 }
 
 

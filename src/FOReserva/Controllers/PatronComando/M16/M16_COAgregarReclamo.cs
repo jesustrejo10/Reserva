@@ -8,6 +8,9 @@ using System.Web;
 
 namespace FOReserva.Controllers.PatronComando.M16
 {
+    /// <summary>
+    /// Comando que se encarga de agregar los reclamos a la BD
+    /// </summary>
     public class M16_COAgregarReclamo : Command<String>
     {
         Reclamo _reclamo;

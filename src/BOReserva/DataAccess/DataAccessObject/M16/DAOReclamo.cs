@@ -195,15 +195,13 @@ namespace BOReserva.DataAccess.DataAccessObject
                 return null;
             }
         }
-
-        
-
+           
         /// <summary>
         /// Método para eliminar reclamo 
         /// </summary>
         /// <param name="id">id del reclamo</param>
         /// <returns>retorna 1 si eliminó correctamente</returns>
-        int Eliminar(int id)
+        public int Eliminar(int id)
         {
             try
             {
@@ -238,6 +236,12 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
         }
 
+        /// <summary>
+        /// Método para actualizar el estado de un reclamo
+        /// </summary>
+        /// <param name="id"> recibe el id del reclamo</param>
+        /// <param name="estado">recibe el estado del reclamo</param>
+        /// <returns>retorna un entero</returns>
         public int modificarEstado(int id, int estado)
         {
             try
