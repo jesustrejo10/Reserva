@@ -258,22 +258,19 @@ namespace BOReserva.Controllers
                         Command<String> comando = FabricaComando.crearM03_AgregarRuta(nuevaRuta);
                         String agrego_si_no = comando.ejecutar();
 
+                        if (agrego_si_no == "1")
                         return (Json(agrego_si_no));
-                       /*
-                         if (resultado)
-                       {
-                           return (Json(true, JsonRequestBehavior.AllowGet));
-                       }
-                       else
-                       {
-                           //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
-                           Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                           //Agrego mi error
-                           String error = "Error, ruta existente";
-                           //Retorno el error
-                           return Json(error);
-                       }
-                        */
+                        else
+                        {
+                            //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                            Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                            //Agrego mi error
+                            String error = "Error en la insercion en la base de datos";
+                            //Retorno el error
+                            return Json(error);
+                        }
+
+                      
                     }
                      catch (SqlException e)
                      {
