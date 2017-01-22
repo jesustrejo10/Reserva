@@ -8,7 +8,7 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando.M07
 {
-    public class M07_COEditarReclamoEquipaje : Command<Dictionary<int, Entidad>>
+    public class M07_COConsultarEquipaje : Command<Dictionary<int, Entidad>>
     {
         /// <summary>
         /// Sobrescritura del metodo ejecutar de la clase Comando.

@@ -8,10 +8,10 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando.M07
 {
-    public class M07_COConsultarReclamoEquipajeID : Command<Entidad>
+    public class M07_COConsultarEquipajeID : Command<Entidad>
     {
         int valor;
-        public M07_COConsultarReclamoEquipajeID(int id)
+        public M07_COConsultarEquipajeID(int id)
         {
             this.valor = id;
         }
