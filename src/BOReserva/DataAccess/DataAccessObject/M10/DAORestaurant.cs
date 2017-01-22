@@ -83,7 +83,7 @@ namespace BOReserva.M10
             catch (FormatException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos formato invalido", ex);
             }
             catch (SqlException ex)
             {
@@ -163,7 +163,7 @@ namespace BOReserva.M10
             catch (FormatException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos con formato invalido", ex);
             }
             catch (SqlException ex)
             {
@@ -230,7 +230,7 @@ namespace BOReserva.M10
             catch (FormatException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos un formato invalido", ex);
             }
             catch (SqlException ex)
             {
@@ -285,7 +285,7 @@ namespace BOReserva.M10
             catch (FormatException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos con formato invalido", ex);
             }
             catch (SqlException ex)
             {
@@ -350,7 +350,7 @@ namespace BOReserva.M10
             catch (FormatException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos con formato invalido", ex);
             }
             catch (SqlException ex)
             {
@@ -412,7 +412,7 @@ namespace BOReserva.M10
             catch (FormatException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos con formato invalido", ex);
             }
             catch (SqlException ex)
             {
@@ -478,7 +478,7 @@ namespace BOReserva.M10
             catch (FormatException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos con formato invalido", ex);
             }
             catch (SqlException ex)
             {
