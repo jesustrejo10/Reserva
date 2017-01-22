@@ -2,10 +2,9 @@
 
 <div class="row">
     <link rel="stylesheet" href="~/Content/plugins/datatables/dataTables.bootstrap.css">
-    <link href="~/Content/Canvas/Box.css" rel="stylesheet" />
 
-    <div class="col-xs-10">
-        <div class="Cajita">
+    <div class="col-xs-12">
+        <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Lista de Aviones</h3>
             </div>
@@ -62,11 +61,12 @@
                                         /// Evento para Activar un avion
                                         /// </summary>
                                         $(".activar").click(function (event) {
+                                            $("#contenido").html('<div class="text-center">Cargando...</div>');
                                             console.log("hola");
                                             event.preventDefault();
                                             event.stopPropagation();
                                             event.stopImmediatePropagation();
-                                            alert("Avion Activado");
+                                            //alert("Avion Activado");
                                             var identificador = $(this).parent().parent().parent().attr("id");
                                             jQuery.ajax({
                                                 type: "POST",
@@ -85,6 +85,8 @@
 
                                                             $("#contenido").empty();
                                                             $("#contenido").append(data);
+                                                            alert("Avion Activado");
+
                                                         },
                                                         error: function (jqXHR, textStatus, errorThrown) {
                                                             alert(errorThrown);
@@ -100,10 +102,10 @@
                                         /// </summary>
                                         $(".desactivar").click(function (event) {
                                             console.log("hola");
+                                            $("#contenido").html('<div class="text-center">Cargando...</div>');
                                             event.preventDefault();
                                             event.stopPropagation();
                                             event.stopImmediatePropagation();
-                                            alert("Avion Desactivado");
                                             var identificador = $(this).parent().parent().parent().attr("id");
                                             jQuery.ajax({
                                                 type: "POST",
@@ -122,6 +124,7 @@
 
                                                             $("#contenido").empty();
                                                             $("#contenido").append(data);
+                                                            alert("Avion Desactivado");
                                                         },
                                                         error: function (jqXHR, textStatus, errorThrown) {
                                                             alert(errorThrown);
@@ -136,6 +139,7 @@
                                         /// Evento para modificar un avion
                                         /// </summary>
                                         $(".modificar").click(function (event) {
+                                            $("#contenido").html('<div class="text-center">Cargando...</div>');
                                             event.preventDefault();
                                             event.stopPropagation();
                                             event.stopImmediatePropagation();
@@ -157,6 +161,7 @@
                                         /// Evento para eliminar un avion
                                         /// </summary>
                                         $(".eliminar").click(function (event) {
+                                            $("#contenido").html('<div class="text-center">Cargando...</div>');
                                             event.preventDefault();
                                             event.stopPropagation();
                                             event.stopImmediatePropagation();
