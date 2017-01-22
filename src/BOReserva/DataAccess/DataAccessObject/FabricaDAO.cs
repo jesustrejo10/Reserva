@@ -4,6 +4,7 @@ using BOReserva.DataAccess.DataAccessObject.M09;
 using BOReserva.DataAccess.DataAccessObject.M01;
 using BOReserva.DataAccess.DataAccessObject.M03;
 using BOReserva.DataAccess.DataAccessObject.M11;
+using BOReserva.DataAccess.DataAccessObject.M12;
 using BOReserva.DataAccess.Model;
 using BOReserva.M10;
 using BOReserva.DataAccess.DataAccessObject;
