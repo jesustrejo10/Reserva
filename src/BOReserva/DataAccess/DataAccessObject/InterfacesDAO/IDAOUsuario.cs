@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
 {
-    interface IDAOCiudad : IDAO
+    interface IDAOUsuario : IDAO
     {
-        //metodods detallados
+        String eliminarUsuario(int id);
     }
 }

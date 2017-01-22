@@ -32,11 +32,11 @@ namespace BOReserva.Controllers.PatronComando.M09
         public override String ejecutar(){
             try
             {
-                IDAO daoHotel = FabricaDAO.instanciarDaoHotel();
-                Entidad test = daoHotel.Modificar(_hotel);
-                Hotel hotel = (Hotel)test;
-                return hotel._nombre;
-            }
+            IDAO daoHotel = FabricaDAO.instanciarDaoHotel();
+            Entidad test = daoHotel.Modificar(_hotel);
+            Hotel hotel = (Hotel)test;
+            return hotel._nombre;
+        }
             catch (ReservaExceptionM09 ex)
             {
                 throw ex;

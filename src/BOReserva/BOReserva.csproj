@@ -309,7 +309,6 @@
     <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarCruceros.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COAgregarCrucero.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarItinerario.cs" />
-    <Compile Include="DataAccess\DataAccessObject\DAOAvion.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOChecking.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOAvion.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCabina.cs" />
@@ -337,12 +336,21 @@
     <Compile Include="Controllers\PatronComando\M16\M16_COConsultarReclamoDetalle.cs" />
     <Compile Include="Controllers\PatronComando\M16\M16_COActualizarReclamo.cs" />
     <Compile Include="Controllers\PatronComando\M16\M16_COEliminarReclamo.cs" />
+    <Compile Include="DataAccess\DataAccessObject\DAOAvion.cs" />
+    <Compile Include="Controllers\PatronComando\M12\M12_COAgregarUsuario.cs" />
+    <Compile Include="Controllers\PatronComando\M12\M12_COConsultarUsuario.cs" />
+    <Compile Include="Controllers\PatronComando\M12\M12_COEliminarUsuario.cs" />
+    <Compile Include="Controllers\PatronComando\M12\M12_COModificarUsuario.cs" />
+    <Compile Include="Controllers\PatronComando\M12\M12_COObtenerRoles.cs" />
+    <Compile Include="Controllers\PatronComando\M12\M12_COStatusUsuario.cs" />
+    <Compile Include="Controllers\PatronComando\M12\M12_COVisualizarUsuarios.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOBoleto.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOCiudad.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOLugar.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOPasajero.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOPais.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCruceros.cs" />
+    <Compile Include="DataAccess\DataAccessObject\DAOUsuario.cs" />
     <Compile Include="DataAccess\DataAccessObject\M16\DAOReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\M13\DAORol.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOAutomovil.cs" />
@@ -356,6 +364,7 @@
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOComida.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOLogin.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOLugar.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOUsuario.cs" />
     <Compile Include="DataAccess\DataAccessObject\M01\DAOLogin.cs" />
     <Compile Include="DataAccess\DataAccessObject\M01\RecursoLogin.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -529,6 +538,9 @@
     <Compile Include="Models\gestion_vuelo\CrearVueloMO.cs" />
     <Compile Include="Models\gestion_vuelo\FabricaViewModelVuelo.cs" />
     <Compile Include="Models\gestion_vuelo\VueloViewModel.cs" />
+    <Compile Include="Models\gestion_usuarios\CAgregarUsuario.cs" />
+    <Compile Include="Models\gestion_usuarios\CModificarUsuario.cs" />
+    <Compile Include="Models\gestion_usuarios\CVerUsuario.cs" />
     <Compile Include="Servicio\Servicio_Usuarios\ConexionBD.cs" />
     <Compile Include="Models\gestion_usuarios\CUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\Encriptar.cs" />
@@ -1677,9 +1689,6 @@
     <Content Include="Views\gestion_comida_vuelo\M06_EditarComida.cshtml" />
     <Content Include="Views\gestion_seguridad_ingreso\M01_Login.cshtml" />
     <Content Include="Views\gestion_seguridad_ingreso\M01_RecuperarContrasenna.cshtml" />
-    <Content Include="Views\gestion_usuarios\M12_Index.cshtml" />
-    <Content Include="Views\gestion_usuarios\M12_AgregarUsuario.cshtml" />
-    <Content Include="Views\gestion_usuarios\M12_ModificarUsuario.cshtml" />
     <Content Include="Views\gestion_usuarios\_Layout.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Crear.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Visualizar.cshtml" />
@@ -1712,6 +1721,12 @@
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_CW1.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_CW2.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_CW3.cshtml" />
+    <Content Include="Views\gestion_comida_vuelo\M06_EditarPlato.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_ListarCabinas.cshtml" />
+    <Content Include="Views\gestion_aviones\M02_CrearAvion.cshtml" />
+    <Content Include="Views\gestion_usuarios\M12_AgregarUsuario2.cshtml" />
+    <Content Include="Views\gestion_usuarios\M12_VisualizarUsuarios.cshtml" />
+    <Content Include="Views\gestion_usuarios\M12_ModificarUsuario2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_boletos\M05_VisualizarBoletos.cshtml" />
@@ -1756,6 +1771,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="DataAccess\DataAccessObject\M12\" />
     <Folder Include="DataAccess\Domain\M04\" />
     <Folder Include="Scripts\Scripts_Reclamo\" />
     <Folder Include="Views\dist\img\credit\" />
