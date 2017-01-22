@@ -563,9 +563,9 @@ namespace BOReserva.DataAccess.DataAccessObject
         ///Metodo para consultar los permisos que tiene un usuario
         ///</summary>
         ///<returns>Lista de String</returns>
-        public List<String> consultarPermisosUsuario(int idUsuario)
+        public List<int> consultarPermisosUsuario(int idUsuario)
         {
-            List<String> listapermisos = new List<String>();
+            List<int> listapermisos = new List<int>();
             SqlConnection conexion = Connection.getInstance(_connexionString);
             try
             {
@@ -584,7 +584,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                         Debug.WriteLine("id del id rol " + reader["mod_det_nombre"].ToString());
                         i += 1;
                         Debug.WriteLine("id del usuario " + i);
-                        listapermisos.Add(reader["mod_det_nombre"].ToString());
+                        listapermisos.Add(Int32.Parse(reader["mod_det_id"].ToString()));
                     }
                     //cierro el lector
                     reader.Close();

@@ -606,7 +606,7 @@ namespace BOReserva.Controllers.PatronComando
         {
             return new M13_COConsultarPermisosNoAsociados(rol, id);
         }
-        public static Command<List<String>> crearM13_ConsultarPermisosUsuario(int id)
+        public static Command<List<int>> crearM13_ConsultarPermisosUsuario(int id)
         {
             return new M13_COConsultarPermisosUsuario(id);
         }
