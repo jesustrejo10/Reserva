@@ -31,15 +31,15 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12" style="margin-top:10px;">
-                        <button type="button" id="m05CrearBoleto" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Siguiente</button>
-                    </div>
-                </div>
-                <div class="row">
-                    <div id="loading" class="col-lg-12" style=" display: none; text-align:center; margin-top: 15px;"><span class="fa fa-spinner refresh-animate "></span></div>
+                <div class="col-md-12" style="margin-top:10px;">
+                    <button type="button" id="m05CrearBoleto" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Siguiente</button>
                 </div>
             </div>
+                <div class="row">
+                    <div id="loading" class="col-lg-12" style=" display: none; text-align:center; margin-top: 15px;"><span class="fa fa-spinner refresh-animate "></span></div>
         </div>
+    </div>
+</div>
     </div>
 </div>
 <!-- /.row -->
@@ -50,7 +50,7 @@
         $(".none").hide();
         $("#reserva").hide();
         if (sel.value == 2) {
-
+        
             $("#reserva").fadeIn();
         }
     }
@@ -81,52 +81,52 @@
 
                     else {
                         $("#loading").show();
-                        var url = '/gestion_boletos/M05_VisualizarReservasPasajero';
-                        var method = 'GET';
-                        var data = { pasaporte: numpasaporte };
+                var url = '/gestion_boletos/M05_VisualizarReservasPasajero';
+                var method = 'GET';
+                var data = { pasaporte: numpasaporte };
 
-                        $.ajax(
-                            {
-                                url: url,
-                                type: method,
-                                data: data,
-                                success: function (data, textStatus, jqXHR) {
+                $.ajax(
+                    {
+                        url: url,
+                        type: method,
+                        data: data,
+                        success: function (data, textStatus, jqXHR) {
 
-                                    $("#contenido").empty();
-                                    $("#contenido").append(data);
-                                },
-                                error: function (jqXHR, textStatus, errorThrown) {
-                                    alert(errorThrown);
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
 
-                                }
-                            });
+                        }
+                    });
                     }
 
                 }
                 else if (tipo == 1) {
                     //NO
                     $("#loading").show();
-                    var url = '/gestion_boletos/M05_CrearBoleto';
-                    var method = 'GET';
-                    var data = '';
+                var url = '/gestion_boletos/M05_CrearBoleto';
+                var method = 'GET';
+                var data = '';
 
-                    $.ajax(
-                        {
-                            url: url,
-                            type: method,
-                            data: data,
-                            success: function (data, textStatus, jqXHR) {
-                                $("#contenido").empty();
-                                $("#contenido").append(data);
-                            },
-                            error: function (jqXHR, textStatus, errorThrown) {
-                                alert(errorThrown);
+                $.ajax(
+                    {
+                        url: url,
+                        type: method,
+                        data: data,
+                        success: function (data, textStatus, jqXHR) {
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
 
-                            }
-                        });
-                }
+                        }
+                    });
+        }
                 //NULL
-            }
+    }
         });
     });
 </script>

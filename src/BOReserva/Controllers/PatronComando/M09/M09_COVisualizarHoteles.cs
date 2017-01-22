@@ -27,9 +27,9 @@ namespace BOReserva.Controllers.PatronComando
         {
             try
             {
-                IDAO daoHotel = FabricaDAO.instanciarDaoHotel();
-                Dictionary<int, Entidad> mapHoteles = daoHotel.ConsultarTodos();
-                return mapHoteles;
+            IDAO daoHotel = FabricaDAO.instanciarDaoHotel();
+            Dictionary<int, Entidad> mapHoteles = daoHotel.ConsultarTodos();
+            return mapHoteles;
             }catch (ReservaExceptionM09 ex){
                 throw ex;
             }

@@ -59,7 +59,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                 Debug.WriteLine(ex.ToString());
                 conexion.Close();
                 return 0;
-            }
+        }
         }
 
         ///<summary>
@@ -165,12 +165,12 @@ namespace BOReserva.DataAccess.DataAccessObject
                 return 0;
             }
             catch (Exception ex)
-            {
+        {
                 Debug.WriteLine("ENTRO EN EL CATCH");
                 Debug.WriteLine(ex.ToString());
                 conexion.Close();
                 return 0;
-            }
+        }
         }
 
         ///<summary>
@@ -216,7 +216,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                 Debug.WriteLine(ex.ToString());
                 conexion.Close();
                 return null;
-            }
+        }
         }
 
         ///<summary>
@@ -264,7 +264,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                 Debug.WriteLine(ex.ToString());
                 conexion.Close();
                 return null;
-            }
+        }
         }
 
         ///<summary>
@@ -310,7 +310,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                 Debug.WriteLine(ex.ToString());
                 conexion.Close();
                 return null;
-            }
+        }
         }
 
         ///<summary>
@@ -360,7 +360,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                 Debug.WriteLine(ex.ToString());
                 conexion.Close();
                 return null;
-            }
+        }
         }
 
         ///<summary>
@@ -396,7 +396,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                 Debug.WriteLine(ex.ToString());
                 conexion.Close();
                 return null;
-            }
+        }
         }
 
         ///<summary>
@@ -432,7 +432,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                 Debug.WriteLine(ex.ToString());
                 conexion.Close();
                 return ex.Message;
-            }
+        }
         }
 
         ///<summary>
@@ -467,7 +467,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                 Debug.WriteLine(ex.ToString());
                 conexion.Close();
                 return ex.Message;
-            }
+        }
         }
 
         ///<summary>
@@ -557,7 +557,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
             return listapermisos;
         }
- 
+
 
         ///<summary>
         ///Metodo para consultar los permisos que tiene un usuario

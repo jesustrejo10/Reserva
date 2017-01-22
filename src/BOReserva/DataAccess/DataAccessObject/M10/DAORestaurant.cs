@@ -18,7 +18,7 @@ namespace BOReserva.M10
     /// </summary>
     public class DAORestaurant : DAO, IDAORestaurant
     {
-        
+      
         /// <summary>
         /// Metodo para consultar restaurant segun el id de Lugar
         /// </summary>

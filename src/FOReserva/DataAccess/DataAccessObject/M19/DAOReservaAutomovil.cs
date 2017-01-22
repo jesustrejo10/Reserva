@@ -106,7 +106,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw new ReservaExceptionM19("Reserva-404", "Error Conexion Base de Datos", ex);
-            }
+        }
             catch (Exception ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);

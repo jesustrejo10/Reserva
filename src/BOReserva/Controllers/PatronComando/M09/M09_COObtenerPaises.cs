@@ -90,11 +90,11 @@ namespace BOReserva.Controllers.PatronComando
         {
             try
             {
-                int id;
-                DAOCiudad daoPais = (DAOCiudad)FabricaDAO.instanciarDaoCiudad();
-                id = daoPais.obtenerIDciudad(ciudad);
-                return id;
-            }
+            int id;
+            DAOCiudad daoPais = (DAOCiudad)FabricaDAO.instanciarDaoCiudad();
+            id = daoPais.obtenerIDciudad(ciudad);
+            return id;
+        }
             catch (ReservaExceptionM09 ex)
             {
                 throw ex;

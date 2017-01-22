@@ -34,15 +34,15 @@ namespace BOReserva.Controllers.PatronComando
         public override String ejecutar(){
             try
             {
-                IDAO daoHotel = FabricaDAO.instanciarDaoHotel();
-                int resultadoAgregarHotel = daoHotel.Agregar(_hotel);
+            IDAO daoHotel = FabricaDAO.instanciarDaoHotel();       
+            int resultadoAgregarHotel = daoHotel.Agregar(_hotel);
                 if (resultadoAgregarHotel == 1)
                 {
                     Command<int> add = FabricaComando.crearM09AgregarHabitaciones(_hotel, _hotel._precio);
                     int ad = add.ejecutar();
-                }
-                return resultadoAgregarHotel.ToString();
             }
+            return resultadoAgregarHotel.ToString();
+        }
             catch (ReservaExceptionM09 ex)
             {
                 return ex.Mensaje;
