@@ -1,4 +1,5 @@
 ﻿using BOReserva.DataAccess.DAO;
+using BOReserva.DataAccess.DataAccessObject.M14;
 using BOReserva.DataAccess.DataAccessObject.M09;
 using BOReserva.DataAccess.DataAccessObject.M01;
 using BOReserva.DataAccess.Model;
@@ -15,6 +16,9 @@ using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 namespace BOReserva.DataAccess.DataAccessObject
 
 {
+    /// <summary>
+    /// Clase que fabrica los distintos DAO
+    /// </summary>
     public class FabricaDAO
     {
         #region Lugar ( DAOLugar - DAOPais - DAOCiudad ) 
@@ -24,14 +28,22 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAOLugar();
         }
 
+        /// <summary>
+        /// Metodo que instacia DAOPais
+        /// </summary>
+        /// <returns>Retorna DAOPais</returns>
         public static DAO instanciarDaoPais()
         {
-            return new DAOLugar();
+            return new DAOPais();
         }
 
+        /// <summary>
+        /// Metodo que instacia DAOCiudad
+        /// </summary>
+        /// <returns>Retorna DAOCiudad</returns>
         public static DAO instanciarDaoCiudad()
         {
-            return new DAOLugar();
+            return new DAOCiudad();
         }
 
         #endregion
@@ -45,11 +57,22 @@ namespace BOReserva.DataAccess.DataAccessObject
 
         #region M09_Gestion_Hoteles_Por_Ciudad
 
+        /// <summary>
+        /// Metodo que instacia DAOHotel
+        /// </summary>
+        /// <returns>Retorna DAOHotel</returns>
         public static DAO instanciarDaoHotel() {
             return new DAOHotel();
         }
 
-        public static DAO instanciarDaoHabitacion()
+        
+
+        /// <summary>
+        /// Metodo que instacia DAOHabitacion
+        /// </summary>
+        /// <returns>Retorna DAOHabitacion</returns>
+        public static DAOHabitacion instanciarDaoHabitacion()
+
         {
             return new DAOHabitacion();
         }
@@ -78,7 +101,7 @@ namespace BOReserva.DataAccess.DataAccessObject
         }
         #endregion
 
-        # region M05_Boleto
+        # region M05_Boleto y checkIn
 
         public static DAO instanciarDaoPasajero()
         {
@@ -89,6 +112,11 @@ namespace BOReserva.DataAccess.DataAccessObject
         {
             return new DAOBoleto();
 		}
+
+        public static DAO instanciarDaoCheckIn()
+        {
+            return new DAOChecking();
+        }
         #endregion
 
         #region M08_Automoviles
@@ -167,16 +195,21 @@ namespace BOReserva.DataAccess.DataAccessObject
         #endregion
         
         #region M14_Cruceros
-        //public static DAO instanciarDaoCrucero()
-        //{
-        //    //return new DAOCruceros();
-        //    return new DAOCrucero();
-        //}
+        public static DAO instanciarDaoCrucero()
+        {
+            return new DAOCruceros();
+            
+        }
 
-        //public static DAOCabina instanciarDaoCabina()
-        //{
-        //    return new DAOCabina();
-        //}
+        public static DAO instanciarDaoCabina()
+        {
+            return new DAOCabina();
+        }
+
+        public static DAO instanciarDaoItinerario()
+        {
+            return new DAOItinerario();
+        }
 
         #endregion
     
