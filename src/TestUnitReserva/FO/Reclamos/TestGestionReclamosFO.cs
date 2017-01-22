@@ -54,7 +54,7 @@ namespace TestUnitReserva.FO.TestGestionReclamosFO
         }
         #region Pruebas del DAO
         [Test]
-        public void M16_DaoReclamoInsertarReclamo()
+        public void M16_DaoReclamoInsertarReclamoFO()
         {
            
             //Probando caso de exito de la prueba
@@ -65,20 +65,20 @@ namespace TestUnitReserva.FO.TestGestionReclamosFO
         }
 
         [Test]
-        public void M16_DaoReclamoConsultarTodos() {
+        public void M16_DaoReclamoConsultarTodosFO() {
             Dictionary<int, Entidad> reclamos = daoReclamo.ConsultarTodos();
             Assert.NotNull(reclamos);
         }
 
         [Test]
-        public void M16_DaoReclamoConsultarPorId()
+        public void M16_DaoReclamoConsultarPorIdFO()
         {
             Assert.NotNull(daoReclamo.Consultar(11));
         }
 
 
         [Test]
-        public void M16_DaoReclamoModificar()
+        public void M16_DaoReclamoModificarFO()
         {
             //prueba de que lo hace
             Assert.NotNull(daoReclamo.Modificar(mockReclamo));
@@ -87,7 +87,7 @@ namespace TestUnitReserva.FO.TestGestionReclamosFO
         }
 
         [Test]
-        public void M16_DaoReclamoEliminarReclamo()
+        public void M16_DaoReclamoEliminarReclamoFO()
         {
             //HAY QUE CAMBIAR EL NUMERO DE ID QUE SE ELIMINA MANUALMENTE
             //Probando caso de exito de la prueba
@@ -99,7 +99,7 @@ namespace TestUnitReserva.FO.TestGestionReclamosFO
         #endregion
         #region Pruebas de la fabrica
         [Test]
-        public void M16_Fabricas()
+        public void M16_FabricasFO()
         {
 
 
@@ -132,7 +132,7 @@ namespace TestUnitReserva.FO.TestGestionReclamosFO
         #endregion
         #region Pruebas del controlador
         [Test]
-        public void M16_PruebasControlador()
+        public void M16_PruebasControladorFO()
         {
             CAgregarReclamo model = new CAgregarReclamo();
             model._tituloReclamo = tituloReclamo;
