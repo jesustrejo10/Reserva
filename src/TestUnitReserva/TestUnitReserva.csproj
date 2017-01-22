@@ -58,6 +58,7 @@
     <Reference Include="System.Web.RegularExpressions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BO\gestion_automoviles\TestAutomoviles.cs" />
     <Compile Include="BO\gestion_aviones\TestAviones.cs" />
     <Compile Include="BO\gestion_comida_vuelo\TestComidaVuelo.cs" />
     <Compile Include="BO\gestion_cruceros\TestCruceros.cs" />

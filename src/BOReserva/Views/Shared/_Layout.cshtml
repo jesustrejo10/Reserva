@@ -363,14 +363,19 @@
                         </a>
                         <ul class="treeview-menu">
                             @foreach (string i in ((List<string>)Session["Permisos"]))
-                         {
-                            if (i == "Agregar Rol")
                             {
-
-                            <li id="m13AgregarRol"><a href="#">Agregar</a></li>}
-                            if (i == "Visualizar Rol")
-                            {
-                            <li id="m13VisualizarRol"><a href="#">Visualizar</a></li>}
+                                if (i == "Agregar Rol")
+                                {
+                                    <li id="m13AgregarRol"><a href="#">Agregar Rol</a></li>}
+                                if (i == "Visualizar Rol")
+                                {
+                                    <li id="m13VisualizarRol"><a href="#">Visualizar Roles</a></li>}
+                                if (i == "Agregar Permiso")
+                                {
+                                    <li id="m13AgregarPermiso"><a href="#">Agregar Permiso</a></li>}
+                                if (i == "Visualizar Permisos")
+                                {
+                                    <li id="m13VisualizarPermiso"><a href="#">Visualizar Permisos</a></li>}
                             }
                         </ul>
                     </li>

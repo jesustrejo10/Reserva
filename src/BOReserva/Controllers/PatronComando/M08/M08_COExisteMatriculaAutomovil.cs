@@ -6,13 +6,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
 
-namespace BOReserva.Controllers.PatronComando.GeneralLugar
+namespace BOReserva.Controllers.PatronComando.M08
 {
-    public class COConsultarTodosPais : Command<List<SelectListItem>>
+    public class M08_COExisteMatriculaAutomovil : Command<bool>
     {
-        
+
         #region Atributos
 
         Entidad _objeto;
@@ -21,7 +20,9 @@ namespace BOReserva.Controllers.PatronComando.GeneralLugar
 
         #region Constructor
 
-        public COConsultarTodosPais(Entidad _objeto)
+        public M08_COExisteMatriculaAutomovil(){}
+
+        public M08_COExisteMatriculaAutomovil(Entidad _objeto)
         {
             this._objeto = _objeto;
         }
@@ -30,11 +31,11 @@ namespace BOReserva.Controllers.PatronComando.GeneralLugar
 
         #region Ejecucion
 
-        public override List<SelectListItem> ejecutar()
+        public override bool ejecutar()
         {
-            DAOPais Dao = (DAOPais)FabricaDAO.instanciarDaoPais();
-
-            return Dao.listarPaises();
+            DAO Dao = FabricaDAO.CrearDaoAutomovil();
+            DAOAutomovil DaoAutomovil = (DAOAutomovil)Dao;
+            return DaoAutomovil.existeMatricula(this._objeto);
         }
 
         #endregion
