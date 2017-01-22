@@ -153,7 +153,7 @@ namespace TestUnitReserva.BO.gestion_aviones
         //}
 
         ///// <summary>
-        ///// Prueba que evalua al controlador si se pasa un valor nulo a la funcion guardarAvion
+        ///// Prueba que evalua al controlador si se pasa un idHotel nulo a la funcion guardarAvion
         ///// </summary>
         //[Test]
         //public void pruebaGuardarAvionNulo()
@@ -162,7 +162,7 @@ namespace TestUnitReserva.BO.gestion_aviones
         //}
 
         ///// <summary>
-        ///// Prueba que evalua al controlador si se pasa un valor valido a la funcion guardarAvion
+        ///// Prueba que evalua al controlador si se pasa un idHotel valido a la funcion guardarAvion
         ///// </summary>
         //[Test]
         //public void pruebaGuardarAvion()

@@ -57,7 +57,7 @@ namespace TestUnitReserva.FO.Diario_Viaje
             diario.Destino=24;
         
 
-            //Realizando la comprobacion del valor de retorno
+            //Realizando la comprobacion del idHotel de retorno
 
             int crearnuevodiario =test.CrearDiario(diario);
             Assert.AreEqual(crearnuevodiario, 0);

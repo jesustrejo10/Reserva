@@ -151,7 +151,7 @@ namespace BOReserva.Controllers.PatronComando
         /// Metodo creado con la finalidad de instanciar el comando
         /// M09_COConsultarHoteles
         /// </summary>
-        /// <param name="id">Identificador del hotel a consultar</param>
+        /// <param name="id">Identificador del hotelConNuevosCampos a consultar</param>
         /// <returns>Retorna la instancia del comando M09_COConsultarHoteles.</returns>
         public static Command<Entidad> crearM09ConsultarHotel(int id)
         {
@@ -164,8 +164,8 @@ namespace BOReserva.Controllers.PatronComando
         /// Metodo creado con la finalidad de instanciar el comando
         /// M09_COModificarHoteles
         /// </summary>
-        /// <param name="hotel">Hotel a modificar</param>
-        /// <param name="idmodificar">Identificador del hotel a modificar</param>
+        /// <param name="hotelConNuevosCampos">Hotel a modificar</param>
+        /// <param name="idmodificar">Identificador del hotelConNuevosCampos a modificar</param>
         /// <returns>
         /// Retorna la instancia del comando M09_COModificarHoteles.
         /// </returns>
@@ -181,8 +181,8 @@ namespace BOReserva.Controllers.PatronComando
         /// Metodo creado con la finalidad de instanciar el comando
         /// M09_COEliminarHoteles
         /// </summary>
-        /// <param name="hotel">Hotel a eliminar</param>
-        /// <param name="ideliminar">Identificador del hotel a eliminar</param>
+        /// <param name="hotelConNuevosCampos">Hotel a eliminar</param>
+        /// <param name="ideliminar">Identificador del hotelConNuevosCampos a eliminar</param>
         /// <returns>
         /// Retorna la instancia del comando M09_COEliminarHoteles.
         /// </returns>
@@ -198,7 +198,7 @@ namespace BOReserva.Controllers.PatronComando
         /// Metodo creado con la finalidad de instanciar el comando
         /// M09_CODisponibilidadHotel
         /// </summary>
-        /// <param name="hotel">Hotel a modificar disponibilidad</param>
+        /// <param name="hotelConNuevosCampos">Hotel a modificar disponibilidad</param>
         /// <param name="disponibilidad">Nuevo estado de disponibilidad</param>
         /// <returns>
         /// Retorna la instancia del comando M09_CODisponibilidadHotel.
@@ -215,7 +215,7 @@ namespace BOReserva.Controllers.PatronComando
         /// Metodo creado con la finalidad de instanciar el comando
         /// M09_COAgregarHabitaciones
         /// </summary>
-        /// <param name="hotel">Hotel al cual se le añadiran las habitaciones</param>
+        /// <param name="hotelConNuevosCampos">Hotel al cual se le añadiran las habitaciones</param>
         /// <param name="precio">Precio por habitacion</param>
         /// <returns>
         /// Retorna la instancia del comando M09_COAgregarHabitaciones.

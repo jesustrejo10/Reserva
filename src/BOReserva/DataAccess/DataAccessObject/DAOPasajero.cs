@@ -108,13 +108,13 @@ namespace BOReserva.DataAccess.DataAccessObject
         //        {
         //            Pais pais;
         //            Ciudad ciudad;
-        //            Hotel hotel;
+        //            Hotel hotelConNuevosCampos;
         //            int idCiudad;
         //            String nombreCiudad;
         //            int idPais;
         //            String nombrePais;
 
-        //            int idHotel;
+        //            int _idHotel;
         //            int capacidad;
         //            int clasificacion;
         //            String nombreHotel;
@@ -134,10 +134,10 @@ namespace BOReserva.DataAccess.DataAccessObject
         //                idCiudad = Int32.Parse(reader["id_ciudad"].ToString());
         //                nombreCiudad = reader["nombre_ciudad"].ToString();
         //                ciudad = new Ciudad(idCiudad, nombreCiudad, pais);
-        //                idHotel = Int32.Parse(reader["hot_id"].ToString());
+        //                _idHotel = Int32.Parse(reader["hot_id"].ToString());
 
-        //                hotel = new Hotel(
-        //                    idHotel,
+        //                hotelConNuevosCampos = new Hotel(
+        //                    _idHotel,
         //                    reader["hot_nombre"].ToString(),
         //                    reader["hot_direccion"].ToString(),
         //                    reader["hot_email"].ToString(),
@@ -146,7 +146,7 @@ namespace BOReserva.DataAccess.DataAccessObject
         //                    Int32.Parse(reader["hot_cantidad_habitaciones"].ToString()),
         //                    ciudad
         //                );
-        //                listaHoteles.Add(idHotel, hotel);
+        //                listaHoteles.Add(_idHotel, hotelConNuevosCampos);
         //            }
         //        }
         //        cmd.Dispose();

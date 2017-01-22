@@ -193,7 +193,7 @@ namespace BOReserva.Controllers
                 ////Realizo el insert y Guardo la respuesta de mi metodo sql en un bool
                 //bool respuesta = sql.ModificarrRol(rol, nombrerolnuevo);
                 Entidad modificarRol = FabricaEntidad.InstanciarRolId(model);
-                //con la fabrica instancie al hotel.
+                //con la fabrica instancie al hotelConNuevosCampos.
                 Command<String> comando = FabricaComando.crearM13_ModificarRol(modificarRol, model.Id_Rol);
                 agrego_si_no = comando.ejecutar();
             }

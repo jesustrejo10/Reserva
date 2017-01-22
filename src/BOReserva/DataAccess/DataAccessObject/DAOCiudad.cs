@@ -78,7 +78,7 @@ namespace BOReserva.DataAccess.DataAccessObject
         /// Metodo usado para obtener el ID de una ciudad
         /// </summary>
         /// <param name="ciudad">Ciudad a buscar</param>
-        /// <returns>Retorna un valor entero</returns>
+        /// <returns>Retorna un idHotel entero</returns>
 
         public int obtenerIDciudad(String ciudad)
         {

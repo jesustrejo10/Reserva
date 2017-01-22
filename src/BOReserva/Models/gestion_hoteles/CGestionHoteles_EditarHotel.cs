@@ -23,19 +23,19 @@ namespace BOReserva.Models.gestion_hoteles
         /*
         public CGestionHoteles_EditarHotel() { }
 
-        public CGestionHoteles_EditarHotel(CHotel hotel)
+        public CGestionHoteles_EditarHotel(CHotel hotelConNuevosCampos)
         {
-            _id = hotel._id;
-            _nombre = hotel._nombre;
-            _paginaweb = hotel._paginaweb;
-            _email = hotel._email;
-            _canthabitaciones = hotel._canthabitaciones;
-            _pais = hotel._pais;
-            _ciudad = hotel._ciudad;
-            _direccion = hotel._direccion;
-            _estrellas = hotel._estrellas;
-            _puntuacion = hotel._puntuacion;
-            _disponibilidad = hotel._disponibilidad;
+            _id = hotelConNuevosCampos._id;
+            _nombre = hotelConNuevosCampos._nombre;
+            _paginaweb = hotelConNuevosCampos._paginaweb;
+            _email = hotelConNuevosCampos._email;
+            _canthabitaciones = hotelConNuevosCampos._canthabitaciones;
+            _pais = hotelConNuevosCampos._pais;
+            _ciudad = hotelConNuevosCampos._ciudad;
+            _direccion = hotelConNuevosCampos._direccion;
+            _estrellas = hotelConNuevosCampos._estrellas;
+            _puntuacion = hotelConNuevosCampos._puntuacion;
+            _disponibilidad = hotelConNuevosCampos._disponibilidad;
         }
         */
     }

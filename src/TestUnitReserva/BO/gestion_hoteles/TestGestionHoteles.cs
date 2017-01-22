@@ -46,8 +46,8 @@ namespace TestUnitReserva.BO.gestion_hoteles
         {
             mockPais = new Pais(11, "Venezuela");
             mockCiudad = new Ciudad(12, "Caracas", mockPais);
-            mockHotel = new Hotel("HOtel desde preuba unit3", "hotel", "hotel", "hotel", 1, 1, mockCiudad);
-            mockHotell = new Hotel(999, "HOtel desde pr", "hotel", "hotel", "hotel", 1, 1, mockCiudad);
+            mockHotel = new Hotel("HOtel desde preuba unit3", "hotelConNuevosCampos", "hotelConNuevosCampos", "hotelConNuevosCampos", 1, 1, mockCiudad);
+            mockHotell = new Hotel(999, "HOtel desde pr", "hotelConNuevosCampos", "hotelConNuevosCampos", "hotelConNuevosCampos", 1, 1, mockCiudad);
             daoHotel = new DAOHotel();
 
 
@@ -68,7 +68,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
         //dataacces
 
         /// <summary>
-        /// Metedo caso de exitido de insertar hotel, Dao
+        /// Metedo caso de exitido de insertar hotelConNuevosCampos, Dao
         /// </summary>
         [Test]
         public void M09_DaoHotelInsertarHotel()
@@ -80,7 +80,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
 
         }
         /// <summary>
-        /// Metedo caso fallido de insertar hotel, Dao
+        /// Metedo caso fallido de insertar hotelConNuevosCampos, Dao
         /// </summary>
         [Test]
         public void M09_DaoHotelInsertarHotelFallido()
@@ -90,18 +90,18 @@ namespace TestUnitReserva.BO.gestion_hoteles
         }
 
         /// <summary>
-        /// Metodo caso modificar hotel,dao
+        /// Metodo caso modificar hotelConNuevosCampos,dao
         /// </summary>
         [Test]
         public void M09_DaoHotelModificarHotel()
         {
-            mockHotel = new Hotel("HOtel desde preuba u", "hotel", "hotel", "hotel", 1, 1, mockCiudad);
+            mockHotel = new Hotel("HOtel desde preuba u", "hotelConNuevosCampos", "hotelConNuevosCampos", "hotelConNuevosCampos", 1, 1, mockCiudad);
             Entidad modificar = daoHotel.Modificar(mockHotel);
             Assert.AreEqual(modificar, mockHotel);
 
         }
         /// <summary>
-        /// Metodo caso modificar hotel,dao,fallido
+        /// Metodo caso modificar hotelConNuevosCampos,dao,fallido
         /// </summary>
         [Test]
         public void M09_DaoHotelModificarHotelFallido()
@@ -110,7 +110,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
 
         }
         /// <summary>
-        /// Metodod caso eliminar hotel, dao
+        /// Metodod caso eliminar hotelConNuevosCampos, dao
         /// </summary>
         [Test]
         public void M09_DaoHotelEliminar()
@@ -157,7 +157,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
 
 
         /// <summary>
-        /// Metodo que verifica la disponiblididad del hotel
+        /// Metodo que verifica la disponiblididad del hotelConNuevosCampos
         /// </summary>
         [Test]
         public void M09_DaoDisponibilidadHotel()
@@ -172,10 +172,10 @@ namespace TestUnitReserva.BO.gestion_hoteles
         public void DomainHotel()
         {
 
-            Hotel prueba = new Hotel("HOtel", "hotel", "hotel", "hotel", 1, 1, mockCiudad);
-            Hotel prueba1 = new Hotel(1, "HOtel1", "hotel", "hotel", "hotel", 1, 1, mockCiudad);
-            Hotel prueba2 = new Hotel("HOtel2", "hotel", "hotel", "hotel", 1, 1, mockCiudad, 200);
-            Hotel prueba3 = new Hotel(1, "HOtel3", "hotel", "hotel", "hotel", 1, 1, mockCiudad, 0);
+            Hotel prueba = new Hotel("HOtel", "hotelConNuevosCampos", "hotelConNuevosCampos", "hotelConNuevosCampos", 1, 1, mockCiudad);
+            Hotel prueba1 = new Hotel(1, "HOtel1", "hotelConNuevosCampos", "hotelConNuevosCampos", "hotelConNuevosCampos", 1, 1, mockCiudad);
+            Hotel prueba2 = new Hotel("HOtel2", "hotelConNuevosCampos", "hotelConNuevosCampos", "hotelConNuevosCampos", 1, 1, mockCiudad, 200);
+            Hotel prueba3 = new Hotel(1, "HOtel3", "hotelConNuevosCampos", "hotelConNuevosCampos", "hotelConNuevosCampos", 1, 1, mockCiudad, 0);
             Assert.AreEqual(prueba._nombre, "HOtel");
             Assert.AreEqual(prueba1._nombre, "HOtel1");
             Assert.AreEqual(prueba2._nombre, "HOtel2");
@@ -184,7 +184,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
         //model
 
         /// <summary>
-        /// Metodo Agregar hotel
+        /// Metodo Agregar hotelConNuevosCampos
         /// </summary>
         [Test]
         public void CAgregarHotel()
@@ -238,7 +238,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
             Assert.AreEqual(prueba._pais, "Venezuela");
         }
         /// <summary>
-        /// Metodo Que edita un hotel existente
+        /// Metodo Que edita un hotelConNuevosCampos existente
         /// </summary>
         [Test]
         public void CgestionHoteles_EditarHotel()
@@ -317,7 +317,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
 
         }
         /// <summary>
-        /// Metodo que verifica la modificacion del hotel, asigna en las variables
+        /// Metodo que verifica la modificacion del hotelConNuevosCampos, asigna en las variables
         /// </summary>
         [Test]
         public void CModificarHotel()
@@ -371,7 +371,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
         //controller/patron comando/M09
 
         /// <summary>
-        /// Metodo que prueba Agregar un hotel, instanciando  Patron comando
+        /// Metodo que prueba Agregar un hotelConNuevosCampos, instanciando  Patron comando
         /// </summary>
         [Test]
 
@@ -386,7 +386,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
 
         }
         /// <summary>
-        /// Metodo que prueba consultar un hotel, instanciando  Patron comando
+        /// Metodo que prueba consultar un hotelConNuevosCampos, instanciando  Patron comando
         /// </summary>
         [Test]
         public void M09_COCOnsultarHotel()
@@ -397,7 +397,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
             //prueba fallida
         }
         /// <summary>
-        /// Metodo que prueba disponiblididad un hotel, instanciando  Patron comando
+        /// Metodo que prueba disponiblididad un hotelConNuevosCampos, instanciando  Patron comando
         /// </summary>
         [Test]
         public void M09_CODisponibilidadHotel()
@@ -409,7 +409,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
 
         }
         /// <summary>
-        /// Metodo que prueba Eliminar un hotel, instanciando  Patron comando
+        /// Metodo que prueba Eliminar un hotelConNuevosCampos, instanciando  Patron comando
         /// </summary>
         [Test]
         public void M09_COEliminarHotel()
@@ -423,13 +423,13 @@ namespace TestUnitReserva.BO.gestion_hoteles
 
         }
         /// <summary>
-        /// Metodo que prueba Modificar un hotel, instanciando  Patron comando
+        /// Metodo que prueba Modificar un hotelConNuevosCampos, instanciando  Patron comando
         /// </summary>
         [Test]
         public void M09_COModificarHotel()
         {
             daoHotel.Agregar(mockHotell);
-            mockHotel2 = new Hotel(999, "HOtel desde p", "hotel", "hotel", "hotel", 1, 1, mockCiudad);
+            mockHotel2 = new Hotel(999, "HOtel desde p", "hotelConNuevosCampos", "hotelConNuevosCampos", "hotelConNuevosCampos", 1, 1, mockCiudad);
             M09_COModificarHotel prueba = new M09_COModificarHotel(mockHotel2, 999);
             String nombre = prueba.ejecutar();
             Assert.AreEqual(nombre, "1");
@@ -461,7 +461,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
         }
         //controller 
         /// <summary>
-        /// Método que verifica si se retorna un JasonResult cuando se guarda un hotel
+        /// Método que verifica si se retorna un JasonResult cuando se guarda un hotelConNuevosCampos
         /// </summary>
         [Test]
         public void M09_guardarHotel()
@@ -483,7 +483,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
             Assert.IsInstanceOf(typeof(JsonResult), probarjsonresult);
         }
         /// <summary>
-        /// Método que verifica si se retorna un JsonResult cuando se borra un hotel
+        /// Método que verifica si se retorna un JsonResult cuando se borra un hotelConNuevosCampos
         /// </summary>
         [Test]
         public void deleteHotel()
@@ -494,7 +494,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
             Assert.IsInstanceOf(typeof(JsonResult), probar);
         }
         /// <summary>
-        /// Método que verifica si se retorna un JsonResult cuando se activa un hotel
+        /// Método que verifica si se retorna un JsonResult cuando se activa un hotelConNuevosCampos
         /// </summary>
         [Test]
 
@@ -508,7 +508,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
 
         }
         /// <summary>
-        /// Método que verifica si se retorna un JsonResult cuando se desactiva un hotel
+        /// Método que verifica si se retorna un JsonResult cuando se desactiva un hotelConNuevosCampos
         /// </summary>
         [Test]
         public void deactivateHotel()
@@ -552,7 +552,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
             Assert.IsInstanceOf(typeof(PartialViewResult), probar);
         }
         /// <summary>
-        /// Método que verifica si se retorna un ActionResult en detalle del hotel
+        /// Método que verifica si se retorna un ActionResult en detalle del hotelConNuevosCampos
         /// </summary>
         [Test]
         public void M09_DetalleHotel()
@@ -562,7 +562,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
             Assert.IsInstanceOf(typeof(PartialViewResult), probar);
         }
         /// <summary>
-        /// Método que verifica si se retorna un ActionResult en modificar un hotel
+        /// Método que verifica si se retorna un ActionResult en modificar un hotelConNuevosCampos
         /// </summary>
         [Test]
         public void M09_ModificarHotel()

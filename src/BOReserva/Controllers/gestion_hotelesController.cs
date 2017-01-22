@@ -159,7 +159,7 @@ namespace BOReserva.Controllers
 
 
         /// <summary>
-        /// Método que se utiliza para modificar un hotel
+        /// Método que se utiliza para modificar un hotelConNuevosCampos
         /// </summary>
         /// <param name="model">Datos que provienen de un formulario de la vista parcial M09_ModificarHotel</param>
         /// <returns>Retorna un JsonResult</returns>
@@ -171,7 +171,7 @@ namespace BOReserva.Controllers
                 Entidad ciudadDestino = FabricaEntidad.InstanciarCiudad("nombre");
                 ciudadDestino._id = 29;
                 Entidad modificarHotel = FabricaEntidad.InstanciarHotel(model, ciudadDestino);
-                //con la fabrica instancie al hotel.
+                //con la fabrica instancie al hotelConNuevosCampos.
                 Command<String> comando = FabricaComando.crearM09ModificarHotel(modificarHotel, idhotel);
                 String agrego_si_no = comando.ejecutar();
 
@@ -185,9 +185,9 @@ namespace BOReserva.Controllers
 
 
         /// <summary>
-        /// Método que se utiliza para eliminar un hotel existente
+        /// Método que se utiliza para eliminar un hotelConNuevosCampos existente
         /// </summary>
-        /// <param name="id">Identificador del hotel a eliminar</param>
+        /// <param name="id">Identificador del hotelConNuevosCampos a eliminar</param>
         /// <returns>Retorna un JsonResult</returns>
         public JsonResult deleteHotel(int id)
         {
@@ -209,9 +209,9 @@ namespace BOReserva.Controllers
 
 
         /// <summary>
-        /// Método que se utiliza para cambiar la disponibilidad de un hotel existente
+        /// Método que se utiliza para cambiar la disponibilidad de un hotelConNuevosCampos existente
         /// </summary>
-        /// <param name="id">Identificador del hotel a cambiar</param>
+        /// <param name="id">Identificador del hotelConNuevosCampos a cambiar</param>
         /// <returns>Retorna un JsonResult</returns>
         public JsonResult activateHotel(int id)
         {
@@ -233,9 +233,9 @@ namespace BOReserva.Controllers
 
 
         /// <summary>
-        /// Método que se utiliza para cambiar la disponibilidad de un hotel existente
+        /// Método que se utiliza para cambiar la disponibilidad de un hotelConNuevosCampos existente
         /// </summary>
-        /// <param name="id">Identificador del hotel a cambiar</param>
+        /// <param name="id">Identificador del hotelConNuevosCampos a cambiar</param>
         /// <returns>Retorna un JsonResult</returns>
         public JsonResult deactivateHotel(int id)
         {

@@ -293,7 +293,7 @@ namespace BOReserva.Servicio.Servicio_Vuelos
 
                  while (dr.Read())
                 {
-                     //tomo un unico valor como esperado segun comportamiento del SP
+                     //tomo un unico idHotel como esperado segun comportamiento del SP
                     matri = dr.GetSqlString(0).ToString();
                 }
                 //cierro el lector
@@ -336,7 +336,7 @@ namespace BOReserva.Servicio.Servicio_Vuelos
 
                  while (dr.Read())
                  {
-                     //tomo un unico valor como esperado segun comportamiento del SP
+                     //tomo un unico idHotel como esperado segun comportamiento del SP
                      matri = dr.GetSqlString(0).ToString();
                  }
                  //cierro el lector
@@ -390,7 +390,7 @@ namespace BOReserva.Servicio.Servicio_Vuelos
 
                  while (dr.Read())
                  {
-                     //tomo un unico valor como esperado segun comportamiento del SP
+                     //tomo un unico idHotel como esperado segun comportamiento del SP
                      fechaA = dr.GetSqlDateTime(0).ToString();
                  }
                  //cierro el lector
@@ -435,7 +435,7 @@ namespace BOReserva.Servicio.Servicio_Vuelos
 
                  while (dr.Read())
                  {
-                     //tomo un unico valor como esperado segun comportamiento del SP
+                     //tomo un unico idHotel como esperado segun comportamiento del SP
                      dist = dr.GetSqlString(0).ToString();
                  }
                  //cierro el lector
@@ -480,7 +480,7 @@ namespace BOReserva.Servicio.Servicio_Vuelos
 
                  while (dr.Read())
                  {
-                     //tomo un unico valor como esperado segun comportamiento del SP
+                     //tomo un unico idHotel como esperado segun comportamiento del SP
                      dist = dr.GetSqlString(0).ToString();
                  }
                  //cierro el lector

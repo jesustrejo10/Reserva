@@ -13,7 +13,7 @@ namespace BOReserva.Controllers.PatronComando
 {
     /// <summary>
     /// Comando destinado a Realizar las respectivas operaciones necesarias
-    /// para añadir un hotel a la BD
+    /// para añadir un hotelConNuevosCampos a la BD
     /// </summary>
     public class M09_COAgregarHotel : Command<String>
     {
@@ -21,7 +21,7 @@ namespace BOReserva.Controllers.PatronComando
         /// <summary>
         /// Contructor de la clase
         /// </summary>
-        /// <param name="hotel">Hotel a agregar</param>
+        /// <param name="hotelConNuevosCampos">Hotel a agregar</param>
         /// <param name="precio">Precio de las habitaciones del mismo</param>
         public M09_COAgregarHotel(Hotel hotel, int precio) { 
             this._hotel = hotel;

@@ -67,7 +67,7 @@ namespace BOReserva.Excepciones.M09
         {
             if (inner.InnerException.Message.Contains("Reserva_Habitacion"))
             {
-                _Mensaje = "Reserva-404: Ese hotel tiene reservaciones, por ende no se puede eliminar del sistema";
+                _Mensaje = "Reserva-404: Ese hotelConNuevosCampos tiene reservaciones, por ende no se puede eliminar del sistema";
                 _Excepcion = inner;
             }
             else

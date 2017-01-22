@@ -58,7 +58,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
         /// <summary>
         /// Implementacion del metodo proveniente de IDAOHabitacion para agregar habitaciones a la BD
         /// </summary>
-        /// <param name="hotel">Hotel al cual se le agregaran habitaciones</param>
+        /// <param name="hotelConNuevosCampos">Hotel al cual se le agregaran habitaciones</param>
         /// <param name="precio">Precio por habitacion</param>
         /// <returns>Retorna un string</returns>
         string IDAOHabitacion.Agregarhab(Hotel hotel, int precio)

@@ -427,25 +427,25 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="DataAccess\Domain\Avion.cs" />
-    <Compile Include="DataAccess\Domain\BoardingPass.cs" />
-    <Compile Include="DataAccess\Domain\Boleto.cs" />
-    <Compile Include="DataAccess\Domain\BoletoDetalle.cs" />
-    <Compile Include="DataAccess\Domain\BoletoVuelo.cs" />
-    <Compile Include="DataAccess\Domain\M14\Cabina.cs" />
-    <Compile Include="DataAccess\Domain\M14\Camarote.cs" />
-    <Compile Include="DataAccess\Domain\M14\Crucero.cs" />
-    <Compile Include="DataAccess\Domain\M14\Itinerario.cs" />
-    <Compile Include="DataAccess\Domain\ReclamoEquipaje.cs" />
-    <Compile Include="DataAccess\Domain\Equipaje.cs" />
-    <Compile Include="DataAccess\Domain\Habitacion.cs" />
-    <Compile Include="DataAccess\Domain\Lugar.cs" />
-    <Compile Include="DataAccess\Domain\M13\Modulo.cs" />
-    <Compile Include="DataAccess\Domain\M06\Comida.cs" />
-    <Compile Include="DataAccess\Domain\M06\ComidaVuelo.cs" />
-    <Compile Include="DataAccess\Domain\Pasajero.cs" />
-    <Compile Include="DataAccess\Domain\M13\Permiso.cs" />
-    <Compile Include="DataAccess\Domain\Reclamo.cs" />
+    <Compile Include="DataAccess\Model\Domain\Avion.cs" />
+    <Compile Include="DataAccess\Model\Domain\BoardingPass.cs" />
+    <Compile Include="DataAccess\Model\Domain\Boleto.cs" />
+    <Compile Include="DataAccess\Model\Domain\BoletoDetalle.cs" />
+    <Compile Include="DataAccess\Model\Domain\BoletoVuelo.cs" />
+    <Compile Include="DataAccess\Model\Domain\M14\Cabina.cs" />
+    <Compile Include="DataAccess\Model\Domain\M14\Camarote.cs" />
+    <Compile Include="DataAccess\Model\Domain\M14\Crucero.cs" />
+    <Compile Include="DataAccess\Model\Domain\M14\Itinerario.cs" />
+    <Compile Include="DataAccess\Model\Domain\ReclamoEquipaje.cs" />
+    <Compile Include="DataAccess\Model\Domain\Equipaje.cs" />
+    <Compile Include="DataAccess\Model\Domain\Habitacion.cs" />
+    <Compile Include="DataAccess\Model\Domain\Lugar.cs" />
+    <Compile Include="DataAccess\Model\Domain\M13\Modulo.cs" />
+    <Compile Include="DataAccess\Model\Domain\M06\Comida.cs" />
+    <Compile Include="DataAccess\Model\Domain\M06\ComidaVuelo.cs" />
+    <Compile Include="DataAccess\Model\Domain\Pasajero.cs" />
+    <Compile Include="DataAccess\Model\Domain\M13\Permiso.cs" />
+    <Compile Include="DataAccess\Model\Domain\Reclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAO.cs" />
     <Compile Include="DataAccess\DataAccessObject\M04\DAOVuelo.cs" />
     <Compile Include="DataAccess\DataAccessObject\FabricaDAO.cs" />
@@ -457,17 +457,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RecursoVuelo.resx</DependentUpon>
     </Compile>
-    <Compile Include="DataAccess\Domain\Ciudad.cs" />
-    <Compile Include="DataAccess\Domain\Entidad.cs" />
-    <Compile Include="DataAccess\Domain\FabricaEntidad.cs" />
-    <Compile Include="DataAccess\Domain\Hotel.cs" />
-    <Compile Include="DataAccess\Domain\Pais.cs" />
-    <Compile Include="DataAccess\Domain\M13\Rol.cs" />
-    <Compile Include="DataAccess\Domain\RutaBoleto.cs" />
-    <Compile Include="DataAccess\Domain\Ruta.cs" />
-    <Compile Include="DataAccess\Domain\Transporte.cs" />
-    <Compile Include="DataAccess\Domain\Usuario.cs" />
-    <Compile Include="DataAccess\Domain\Vuelo.cs" />
+    <Compile Include="DataAccess\Model\Domain\Ciudad.cs" />
+    <Compile Include="DataAccess\Model\Domain\Entidad.cs" />
+    <Compile Include="DataAccess\Model\Domain\FabricaEntidad.cs" />
+    <Compile Include="DataAccess\Model\Domain\Hotel.cs" />
+    <Compile Include="DataAccess\Model\Domain\Pais.cs" />
+    <Compile Include="DataAccess\Model\Domain\M13\Rol.cs" />
+    <Compile Include="DataAccess\Model\Domain\RutaBoleto.cs" />
+    <Compile Include="DataAccess\Model\Domain\Ruta.cs" />
+    <Compile Include="DataAccess\Model\Domain\Transporte.cs" />
+    <Compile Include="DataAccess\Model\Domain\Usuario.cs" />
+    <Compile Include="DataAccess\Model\Domain\Vuelo.cs" />
+    <Compile Include="DataAccess\Model\Cache.cs" />
     <Compile Include="DataAccess\Model\Connection.cs" />
     <Compile Include="DataAccess\Model\ConexionUtil.cs" />
     <Compile Include="DataAccess\Model\ExceptionBD.cs" />
@@ -493,7 +494,7 @@
     <Compile Include="Models\gestion_automoviles\CAgregarAutomovil.cs" />
     <Compile Include="Models\gestion_automoviles\CModificarAutomovil.cs" />
     <Compile Include="Models\gestion_automoviles\CVisualizarAutomovil.cs" />
-    <Compile Include="DataAccess\Domain\Automovil.cs" />
+    <Compile Include="DataAccess\Model\Domain\Automovil.cs" />
     <Compile Include="Models\gestion_aviones\CAgregarAvion.cs" />
     <Compile Include="Models\gestion_aviones\CAvion.cs" />
     <Compile Include="Models\gestion_aviones\CGestion_avion.cs" />
@@ -1795,7 +1796,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="DataAccess\Domain\M04\" />
+    <Folder Include="DataAccess\Model\Domain\M04\" />
     <Folder Include="Scripts\Scripts_Reclamo\" />
     <Folder Include="Views\dist\img\credit\" />
     <Folder Include="Views\dist\js\pages\" />

@@ -28,7 +28,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
         /// Metodo implementado de IDAO para agregar hoteles a la BD
         /// </summary>
         /// <param name="e">Hotel a agregar</param>
-        /// <returns>Retorna un valor entero</returns>
+        /// <returns>Retorna un _idHotel entero</returns>
         int IDAO.Agregar(Entidad e)
         {
             List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
@@ -83,7 +83,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
         /// Metodo implementado de IDAO para modificar hoteles de la BD
         /// </summary>
         /// <param name="e">Hotel a modificar</param>
-        /// <returns>Retorna el hotel</returns>
+        /// <returns>Retorna el hotelConNuevosCampos</returns>
         Entidad IDAO.Modificar(Entidad e)
         {
             Hotel hotel = (Hotel)e;
@@ -100,7 +100,6 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
 
                 EjecutarStoredProcedure(RecursoDAOM09.ProcedimientoModificarHotel, listaParametro);
 
-                hotel._nombre = "1";
                 return hotel;
             }
             catch (SqlException ex)
@@ -131,10 +130,10 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
         }
 
         /// <summary>
-        /// Metodo implementado de IDAO para consultar un hotel de la BD
+        /// Metodo implementado de IDAO para consultar un hotelConNuevosCampos de la BD
         /// </summary>
-        /// <param name="id">Id del hotel a buscar</param>
-        /// <returns>Retorna el hotel</returns>
+        /// <param name="id">Id del hotelConNuevosCampos a buscar</param>
+        /// <returns>Retorna el hotelConNuevosCampos</returns>
         Entidad IDAO.Consultar(int id)
         {
             DataTable tablaDeDatos;
@@ -343,7 +342,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
         /// <summary>
         /// Metodo implementado de IDAO para eliminar hoteles de la BD
         /// </summary>
-        /// <param name="id">Id del hotel a eliminar</param>
+        /// <param name="id">Id del hotelConNuevosCampos a eliminar</param>
         /// <returns>Retorna un string</returns>
         string IDAOHotel.eliminarHotel(int id)
         {
@@ -409,7 +408,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
         /// <param name="e">Hotel a modificar</param>
         /// <param name="disponibilidad">Estatus nuevo</param>
         /// <returns></returns>
-        string IDAOHotel.disponibilidadHotel(Entidad e, int disponibilidad)
+        Entidad IDAOHotel.disponibilidadHotel(Entidad e, int disponibilidad)
         {
             Hotel hotel = (Hotel)e;
             List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
@@ -421,7 +420,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
 
                 EjecutarStoredProcedure(RecursoDAOM09.ProcedimientoCambiarDisponibilidad, listaParametro);
 
-                return "1";
+                return hotel;
             }
             catch (SqlException ex)
             {

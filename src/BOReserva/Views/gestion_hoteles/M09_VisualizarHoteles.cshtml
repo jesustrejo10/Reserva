@@ -27,29 +27,29 @@
                                 <tr id="@item.Key">
                                     <td>@c._nombre</td>
                                     <td>
-                                    @{
-                                        if (c._clasificacion >= 1)
-                                        {
-                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                        @{
+                                            if (c._clasificacion >= 1)
+                                            {
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                            }
+                                            if (c._clasificacion >= 2)
+                                            {
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                            }
+                                            if (c._clasificacion >= 3)
+                                            {
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                            }
+                                            if (c._clasificacion >= 4)
+                                            {
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                            }
+                                            if (c._clasificacion >= 5)
+                                            {
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                            }
                                         }
-                                        if (c._clasificacion >= 2)
-                                        {
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                        }
-                                        if (c._clasificacion >= 3)
-                                        {
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                        }
-                                        if (c._clasificacion >= 4)
-                                        {
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                        }
-                                        if (c._clasificacion >= 5)
-                                        {
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                        }
-                                    }
-                                    @c._clasificacion</td>
+                                    </td>
                                     <td>@c._ciudad._pais._nombre / @c._ciudad._nombre</td>
                                     <td>@c._direccion</td>
                                     <td>

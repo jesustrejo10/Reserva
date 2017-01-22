@@ -18,7 +18,7 @@ namespace BOReserva.Controllers.PatronComando.M09
         /// <summary>
         /// Constructor de la clase 
         /// </summary>
-        /// <param name="hotel">Hotel que posee las habitaciones a agregar</param>
+        /// <param name="hotelConNuevosCampos">Hotel que posee las habitaciones a agregar</param>
         /// <param name="precio">Precio de las habitaciones del mismo</param>
         public M09_COAgregarHabitaciones(Hotel hotel, int precio)
         {
@@ -28,7 +28,7 @@ namespace BOReserva.Controllers.PatronComando.M09
         /// <summary>
         /// Implementacion del metodo ejecutar de la clase abstracta Command para esta situacion
         /// </summary>
-        /// <returns>Retorna un valor entero</returns>
+        /// <returns>Retorna un idHotel entero</returns>
         public override int ejecutar()
         {
             try

@@ -21,7 +21,7 @@ namespace BOReserva.Controllers.PatronComando.M09
         /// <summary>
         /// Constructor  del Comando Eliminar Hotel
         /// </summary>
-        /// <param name="hotel">
+        /// <param name="hotelConNuevosCampos">
         /// Recibe el Hotel que se va a eliminar
         /// </param>
         /// <param name="id">

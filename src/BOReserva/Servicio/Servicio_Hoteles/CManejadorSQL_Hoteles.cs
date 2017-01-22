@@ -243,7 +243,7 @@ namespace BOReserva.Servicio.Servicio_Hoteles
                 {
                     while (reader.Read())
                     {
-                        //SE AGREGA CREA UN OBJETO hotel SE PASAN LOS ATRIBUTOS ASI reader["<etiqueta de la columna en la tabla Hotel>"]
+                        //SE AGREGA CREA UN OBJETO hotelConNuevosCampos SE PASAN LOS ATRIBUTOS ASI reader["<etiqueta de la columna en la tabla Hotel>"]
                         //Y  SE AGREGA a listavehiculos
 
                         CHotel hotel = new CHotel(Int32.Parse(reader["hot_id"].ToString()),
@@ -275,7 +275,7 @@ namespace BOReserva.Servicio.Servicio_Hoteles
         /// Procedimiento del Modulo 2 para retornar un objeto del tipo CHotel buscado por su respectiva id
         /// </summary>
         /// <param name="id"> int </param>
-        /// <returns> CHotel el hotel buscado</returns>
+        /// <returns> CHotel el hotelConNuevosCampos buscado</returns>
         public CHotel consultarHotel(int id)
         {
             Debug.WriteLine("CONSULTAR HOTEL BD");
@@ -423,7 +423,7 @@ namespace BOReserva.Servicio.Servicio_Hoteles
         public String MModificarhotelBD(CHotel hotel, String nombre, String paginaweb)
         {
             try
-            {   Debug.WriteLine("El id del hotel es "+hotel._id);
+            {   Debug.WriteLine("El id del hotelConNuevosCampos es "+hotel._id);
                 conexion = new SqlConnection(stringDeConexion);
                 conexion.Open();
                 String sql = "UPDATE Hotel SET hot_nombre ='" + hotel._nombre + "', hot_url_pagina = '" + hotel._paginaweb + 

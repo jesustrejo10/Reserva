@@ -65,15 +65,15 @@ namespace BOReserva.DataAccess.Domain
 
         #region M09_Gestion_Hoteles_Por_Ciudad
         /// <summary>
-        /// Clase que retorna la instacia de un hotel
+        /// Clase que retorna la instacia de un hotelConNuevosCampos
         /// </summary>
-        /// <param name="nombre">Nombre del hotel</param>
-        /// <param name="direccion">Direccion del hotel</param>
-        /// <param name="fkCiudad">Ciudad donde esta el hotel</param>
-        /// <param name="clasificacion">Clasificacion del hotel</param>
-        /// <param name="webPage">Pagina web del hotel</param>
-        /// <param name="email">Email del hotel</param>
-        /// <param name="capacidad">Capacidad del hotel</param>
+        /// <param name="nombre">Nombre del hotelConNuevosCampos</param>
+        /// <param name="direccion">Direccion del hotelConNuevosCampos</param>
+        /// <param name="fkCiudad">Ciudad donde esta el hotelConNuevosCampos</param>
+        /// <param name="clasificacion">Clasificacion del hotelConNuevosCampos</param>
+        /// <param name="webPage">Pagina web del hotelConNuevosCampos</param>
+        /// <param name="email">Email del hotelConNuevosCampos</param>
+        /// <param name="capacidad">Capacidad del hotelConNuevosCampos</param>
         /// <returns>Retorna una entidad</returns>
         public static Entidad InstanciarHotel(String nombre, String direccion, int fkCiudad, int clasificacion, String webPage, String email, int capacidad)
         {
@@ -82,10 +82,10 @@ namespace BOReserva.DataAccess.Domain
         }
 
         /// <summary>
-        /// Clase que instacia un hotel
+        /// Clase que instacia un hotelConNuevosCampos
         /// </summary>
         /// <param name="model">Modelo proveniente de la vista M09_AgregarHotel</param>
-        /// <param name="c">Ciudad donde esta el hotel</param>
+        /// <param name="c">Ciudad donde esta el hotelConNuevosCampos</param>
         /// <returns></returns>
         public static Entidad InstanciarHotel(CAgregarHotel model, Entidad c)
         {
@@ -102,10 +102,10 @@ namespace BOReserva.DataAccess.Domain
         }
 
         /// <summary>
-        /// Clase que instacia un hotel
+        /// Clase que instacia un hotelConNuevosCampos
         /// </summary>
         /// <param name="model">Modelo proveniente de la vista M09_ModificarHotel</param>
-        /// <param name="c">Ciudad donde esta el hotel</param>
+        /// <param name="c">Ciudad donde esta el hotelConNuevosCampos</param>
         /// <returns></returns>
         public static Entidad InstanciarHotel(CModificarHotel model, Entidad c)
         {

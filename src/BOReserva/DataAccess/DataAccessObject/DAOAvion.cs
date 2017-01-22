@@ -78,10 +78,10 @@ namespace BOReserva.DataAccess.DataAccessObject
             {
                 conexion.Open();
                 String sql = "UPDATE Avion SET avi_modelo='" + avion._modelo + "', avi_pasajeros_turista=" + avion._capacidadTurista + ", avi_pasajeros_ejecutiva=" + avion._capacidadEjecutiva + ", avi_pasajeros_vip='" + avion._capacidadVIP + "', avi_cap_equipaje=" + avion._capacidadEquipaje + ", avi_max_dist=" + avion._distanciaMaximaVuelo + ", avi_max_vel=" + avion._velocidadMaxima + ", avi_max_comb=" + avion._capacidadCombustible + " WHERE (avi_matricula='" + avion._matricula + "')";
-                /* String sql = "UPDATE Hotel SET hot_nombre = '" + hotel._nombre + "', hot_url_pagina = '" + hotel._paginaWeb +
-                            "', hot_email = '" + hotel._email + "', hot_cantidad_habitaciones = '" + hotel._capacidad + "', hot_direccion = '" + hotel._direccion +
-                            "', hot_estrellas = " + hotel._clasificacion +
-                            " WHERE hot_id = " + hotel._id;*/
+                /* String sql = "UPDATE Hotel SET hot_nombre = '" + hotelConNuevosCampos._nombre + "', hot_url_pagina = '" + hotelConNuevosCampos._paginaWeb +
+                            "', hot_email = '" + hotelConNuevosCampos._email + "', hot_cantidad_habitaciones = '" + hotelConNuevosCampos._capacidad + "', hot_direccion = '" + hotelConNuevosCampos._direccion +
+                            "', hot_estrellas = " + hotelConNuevosCampos._clasificacion +
+                            " WHERE hot_id = " + hotelConNuevosCampos._id;*/
                 SqlCommand cmd = new SqlCommand(sql, conexion);
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
@@ -148,7 +148,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                         idCiudad = Int32.Parse(reader["id_ciudad"].ToString());
                         nombreCiudad = reader["nombre_ciudad"].ToString();
                         ciudad = new Ciudad(idCiudad, nombreCiudad, pais);
-                        idHotel = Int32.Parse(reader["hot_id"].ToString());*/
+                        _idHotel = Int32.Parse(reader["hot_id"].ToString());*/
                         idAvion = Int32.Parse(reader["id"].ToString());
 
                         avion = new Avion(
@@ -197,7 +197,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                 {
                     /*Pais pais;
                     Ciudad ciudad;
-                    Hotel hotel;
+                    Hotel hotelConNuevosCampos;
                     int idCiudad;
                     String nombreCiudad;
                     int idPais;
@@ -223,7 +223,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                          idCiudad = Int32.Parse(reader["id_ciudad"].ToString());
                          nombreCiudad = reader["nombre_ciudad"].ToString();
                          ciudad = new Ciudad(idCiudad, nombreCiudad, pais);
-                         idHotel = Int32.Parse(reader["hot_id"].ToString());*/
+                         _idHotel = Int32.Parse(reader["hot_id"].ToString());*/
                         idAvion = Int32.Parse(reader["avi_id"].ToString());
 
                         avion = new Avion(

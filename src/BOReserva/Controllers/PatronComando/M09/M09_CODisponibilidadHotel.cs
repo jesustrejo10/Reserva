@@ -2,6 +2,7 @@
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.DataAccessObject.M09;
 using BOReserva.DataAccess.Domain;
+using BOReserva.DataAccess.Model;
 using BOReserva.Excepciones.M09;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using System.Web;
 namespace BOReserva.Controllers.PatronComando.M09
 {
     /// <summary>
-    /// Clase del comando de cambiar la disponibilidad de un hotel
+    /// Clase del comando de cambiar la disponibilidad de un hotelConNuevosCampos
     /// </summary>
     public class M09_CODisponibilidadHotel: Command<String>
     {
@@ -20,7 +21,7 @@ namespace BOReserva.Controllers.PatronComando.M09
         /// <summary>
         /// Constructor de la clase
         /// </summary>
-        /// <param name="hotel">Hotel a moficar</param>
+        /// <param name="hotelConNuevosCampos">Hotel a moficar</param>
         /// <param name="disponibilidad">Estatus nuevo</param>
         public M09_CODisponibilidadHotel(Entidad hotel, int disponibilidad)
         { 
@@ -36,8 +37,9 @@ namespace BOReserva.Controllers.PatronComando.M09
             try
             {
                 IDAOHotel daoHotel = (DAOHotel)FabricaDAO.instanciarDaoHotel();
-                String test = daoHotel.disponibilidadHotel(_hotel, _disponibilidad);
-                return test;
+                Entidad ent = daoHotel.disponibilidadHotel(_hotel, _disponibilidad);
+                Cache.actualizarMapHotelesDisponibilidad(ent._id, _disponibilidad);
+                return "1";
             }
             catch (ReservaExceptionM09 ex)
             {
