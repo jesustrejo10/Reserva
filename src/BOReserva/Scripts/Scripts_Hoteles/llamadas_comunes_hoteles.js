@@ -31,12 +31,41 @@ function checkpaginaweb(field) {
 
 function checkTextField(field) {
     var nombre = $('#hot_nombre').val();
-    if (/[^a-z0-9_ ]/gi.test(nombre)) {
+    if (/[^a-z0-9_ ']/gi.test(nombre)) {
         alert("No puede contener caracteres especiales");
         field.value = '';
     } 
 }
 
+
+function CheckForRepeat(originalString, charToCheck) {
+    var repeatCount = 0;
+    for (var i = 0; i < originalString.length; i++) {
+        if (originalString.charAt(i) == charToCheck) {
+            repeatCount++;
+        } else {
+            repeatCount = 0;
+        }
+        if (repeatCount == 2) {
+            return 1;
+        }
+    }
+    return 0;
+}
+function checkdireccion(field) {
+    var nombre = $('#hot_direccion').val();
+    if (/[^a-z0-9_ .,]/gi.test(nombre)) {
+        alert("No puede contener caracteres especiales");
+        field.value = '';
+    } else {
+        var pruebapuntos = CheckForRepeat(nombre, ".");
+        var pruebacoma = CheckForRepeat(nombre, ",");
+        if ((pruebacoma == 1) || (pruebapuntos == 1)) {
+            alert("No puedes poner 2 o mas comas o puntos de forma consecutiva");
+            field.value = '';
+        }
+    }
+}
 
 function validateEmail(email) {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -57,58 +86,16 @@ function checkcorreo(field) {
 
 
 
-function checklargo(field) {
+function checklargo(field, numero) {
     if (field.value != '') {
         if (field.value < 0) {
             alert("No puedes colocar numeros negativos");
             field.value = '';
         }
-        if (field.value > 999999999) {
-            alert("No puedes exceder los 10 digitos");
+        if (field.value > numero) {
+            alert("No puedes exceder los " + numero.toString().length + " digitos");
             field.value = '';
         }
-    }
-}
-
-
-
-function checktarifapenalidad(field) {
-    if (field.value != '') {
-        if (field.value <= 0) {
-            alert("No puedes colocar numeros negativos o que sea igual a cero");
-            field.value = '';
-        }
-        if (field.value > 9999) {
-            alert("No puedes colocar un precio mayor a 4 digitos");
-            field.value = '';
-        }
-    }
-}
-
-
-
-function checkprecio(field) {
-    if (field.value != '') {
-        if (field.value <= 0) {
-            alert("No puedes colocar numeros negativos o que sea igual a cero");
-            field.value = '';
-        }
-        if (field.value > 999999999) {
-            alert("No puedes exceder los 10 digitos");
-            field.value = '';
-        }
-    }
-}
-
-
-
-function checkanio(field) {
-    var str = $('#vehi_registro').val();
-    var date = new Date(str);
-    var year = date.getFullYear();
-    if ((year <= 1999) || (year > 2016)) {
-        alert('El valor ingresado no es valido');
-        $("#vehi_registro").val("");
     }
 }
 

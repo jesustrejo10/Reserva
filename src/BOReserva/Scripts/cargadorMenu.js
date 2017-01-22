@@ -245,6 +245,8 @@ jQuery(document).ready(function () {
         var method = 'GET';
         var data = '';
         $.ajax(
+
+            alert("Se esta procesando tu solicitud, por favor espere"),
             {
                 url: url,
                 type: method,
@@ -267,6 +269,8 @@ jQuery(document).ready(function () {
         var data = '';
 
         $.ajax(
+
+            alert("Se esta procesando tu solicitud, por favor espere"),
             {
                 url: url,
                 type: method,

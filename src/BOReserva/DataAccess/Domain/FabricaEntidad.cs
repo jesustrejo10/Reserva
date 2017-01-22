@@ -62,12 +62,29 @@ namespace BOReserva.DataAccess.Domain
         #endregion
 
         #region M09_Gestion_Hoteles_Por_Ciudad
+        /// <summary>
+        /// Clase que retorna la instacia de un hotel
+        /// </summary>
+        /// <param name="nombre">Nombre del hotel</param>
+        /// <param name="direccion">Direccion del hotel</param>
+        /// <param name="fkCiudad">Ciudad donde esta el hotel</param>
+        /// <param name="clasificacion">Clasificacion del hotel</param>
+        /// <param name="webPage">Pagina web del hotel</param>
+        /// <param name="email">Email del hotel</param>
+        /// <param name="capacidad">Capacidad del hotel</param>
+        /// <returns>Retorna una entidad</returns>
         public static Entidad InstanciarHotel(String nombre, String direccion, int fkCiudad, int clasificacion, String webPage, String email, int capacidad)
         {
 
             return new Hotel();
         }
 
+        /// <summary>
+        /// Clase que instacia un hotel
+        /// </summary>
+        /// <param name="model">Modelo proveniente de la vista M09_AgregarHotel</param>
+        /// <param name="c">Ciudad donde esta el hotel</param>
+        /// <returns></returns>
         public static Entidad InstanciarHotel(CAgregarHotel model, Entidad c)
         {
             Ciudad city = (Ciudad)c;
@@ -82,6 +99,12 @@ namespace BOReserva.DataAccess.Domain
             return new Hotel(nombre, direccion, email, paginaWeb, clasificacion, capacidad, city,precio);
         }
 
+        /// <summary>
+        /// Clase que instacia un hotel
+        /// </summary>
+        /// <param name="model">Modelo proveniente de la vista M09_ModificarHotel</param>
+        /// <param name="c">Ciudad donde esta el hotel</param>
+        /// <returns></returns>
         public static Entidad InstanciarHotel(CModificarHotel model, Entidad c)
         {
             Ciudad city = (Ciudad)c;
@@ -92,29 +115,59 @@ namespace BOReserva.DataAccess.Domain
             int capacidad = model._capacidadHabitacion;
             String paginaWeb = model._paginaWeb;
             String email = model._email;
-
-            return new Hotel(nombre, direccion, email, paginaWeb, clasificacion, capacidad, city);
+            int precio = model._precioHabitacion;
+            return new Hotel(nombre, direccion, email, paginaWeb, clasificacion, capacidad, city, precio);
         }
 
+        /// <summary>
+        /// Clase que instancia un pais
+        /// </summary>
+        /// <param name="nombre">Nombre del pais</param>
+        /// <returns></returns>
         public static Entidad InstanciarPais(String nombre)
         {
             return new Pais();
         }
+
+        /// <summary>
+        /// Clase que instancia un pais
+        /// </summary>
+        /// <param name="id">Id del pais</param>
+        /// <param name="nombre">Nombre del pais</param>
+        /// <returns></returns>
         public static Entidad InstanciarPais(int id, String nombre)
         {
             return new Pais(id, nombre);
         }
 
+        /// <summary>
+        /// Clase que instancia una ciudad
+        /// </summary>
+        /// <param name="ciudad">Nombre de la ciudad</param>
+        /// <returns></returns>
         public static Entidad InstanciarCiudad(String ciudad)
         {
             return new Ciudad();
         }
 
+        /// <summary>
+        /// Clase que instancia una ciudad
+        /// </summary>
+        /// <param name="id">Id de la ciudad</param>
+        /// <param name="nombre">Nombre de la ciudad</param>
+        /// <param name="fkPais">Pais al cual pertenece</param>
+        /// <returns></returns>
         public static Entidad InstanciarCiudad(int id, String nombre, int fkPais)
         {
             return new Ciudad(id,nombre,fkPais);
         }
 
+        /// <summary>
+        /// Clase que instancia una habitacion
+        /// </summary>
+        /// <param name="precio">Precio de la habitacion</param>
+        /// <param name="fkHotel">Hotel al cual pertenece</param>
+        /// <returns></returns>
         public static Entidad InstanciarHabitacion(int precio, int fkHotel)
         {
             return new Habitacion( precio, fkHotel);
