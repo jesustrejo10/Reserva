@@ -4,302 +4,154 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using BOReserva.Models.gestion_aviones;
 using BOReserva.Servicio;
 using System.Diagnostics;
 using System.Data.SqlClient;
-using System.Web;
+using BOReserva.DataAccess.DAO;
+using BOReserva.DataAccess.Domain;
+using BOReserva.Controllers.PatronComando;
+using BOReserva.Controllers.PatronComando.M02;
+using BOReserva.DataAccess.DataAccessObject;
+using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+using BOReserva.DataAccess.DataAccessObject.M02;
+using BOReserva.Models.gestion_aviones;
 using System.Web.Mvc;
+using BOReserva.Controllers;
 
 namespace TestUnitReserva.BO.gestion_aviones
 {
+    /// <summary>
+    /// Clase encargada de realizar las pruebas unitarios del modulo reclamos en BO
+    /// </summary>
     [TestFixture]
     class TestAviones
     {
-        manejadorSQL prueba = new manejadorSQL();
+        private Avion mockAvion;
+        private Avion mockAvion2;
+        IDAO daoAvion;
+        IDAO prueba;
         BOReserva.Controllers.gestion_avionesController controlador = new BOReserva.Controllers.gestion_avionesController();
         /// <summary>
-        /// Pruebas para insertar un avión en la base de datos
-        /// Creo el avión y se lo paso como parámetro a la función
-        /// el resultado lo guardo en un variable 
-        /// la primera prueba es verificar que efectivamente inserta el avión, es decir, la función devuelve true
-        /// la segunda prueba es pasar null a la función y que la misma retorne false
-        /// la tercera prueba es asignarle null a la matrícula, lo cual no está permitido entonces debe retornar false
-        /// la cuarta prueba es pasarle a la función un avión repetido, la misma debe retorna false
+        /// Metodo que se ejecuta antes que se ejecute cada prueba
+        /// Esta encargado de instanciar el manejadorSQL
         /// </summary>
-        [Test]
-        public void M02_InsertarAvion()
+        [SetUp]
+        public void Before()
         {
-            CAgregarAvion avion = new CAgregarAvion();
-            avion._matriculaAvion = BOReserva.Models.Util.RandomString(7);
-            avion._modeloAvion = "Boeing700";
-            avion._capacidadPasajerosTurista = 100;
-            avion._capacidadPasajerosEjecutiva = 100;
-            avion._capacidadPasajerosVIP = 100;
-            avion._capacidadEquipaje = 100;
-            avion._distanciaMaximaVuelo = 200;
-            avion._velocidadMaximaDeVuelo = 1000;
-            avion._capacidadMaximaCombustible = 100;
-            //Aquí pruebo que al insertar un avión de manera correcta la función devuelva true
-            Boolean resultadoconavion = prueba.insertarAvion(avion);
-            Assert.AreEqual(resultadoconavion, true);
-            //Aquí pruebo que el insertar avión no me deje agregar vacío
-            Boolean resultadoconnull = prueba.insertarPlato(null);
-            Assert.AreEqual(resultadoconnull, false);
-            //Pruebo que no me deje insertar una matrícula en null
-            avion._matriculaAvion = null;
-            Boolean resultadosinmatricula = prueba.insertarAvion(avion);
-            Assert.AreEqual(resultadosinmatricula, false);
-            //Aquí pruebo que no me deje insertar una matricula repetida
-            avion._matriculaAvion = "Hk900";
-            Boolean resultadomatricularepetida = prueba.insertarAvion(avion);
-            Assert.AreEqual(resultadomatricularepetida, false);
+            mockAvion = new Avion("HK-1799","Boeing747",50,50,50,50,50,50,50);
+            daoAvion = FabricaDAO.instanciarDaoAvion();
         }
         /// <summary>
-        /// Pruebas para verificar que la lista que se muestra en el visualizar no venga vacía
-        /// Creo la variable respuesta de tipo List<> y le asigno lo que retorna la función listar aviones
-        /// Compruebo que la variable respuesta sea distinta a null
+        /// Método que se ejecuta cada vez que termina de correr una prueba;
+        /// Se encanga de limpiar las variables utilizadas en la prueba
         /// </summary>
-        [Test]
-        public void M02_ListarAvionesEnBd()
+        [TearDown]
+        public void After()
         {
-            //pruebo que la lista no retorne vacía
-            List<CAvion> respuesta = prueba.listarAvionesEnBD();
-            Assert.IsNotNull(respuesta);
+            mockAvion = null;
         }
         /// <summary>
-        /// Prueba del método consultar avión pasando un número inválido
+        /// Metodo que prueba que pueda insertar un reclamo
         /// </summary>
         [Test]
-        public void consultarAvionIdInvalida()
+        public void M02_DaoAvionInsertarAvion()
         {
-            int numeroNulo = 31211;
-            Assert.IsNotInstanceOf(typeof(CAvion), prueba.consultarAvion(numeroNulo));
+           
+            //Probando caso de exito de la prueba
+            int resultadoAgregar = daoAvion.Agregar(mockAvion);
+            Assert.AreEqual(resultadoAgregar, 1);
+            //Probando caso de fallo
+            int resultadoAgregarIncorrecto = daoAvion.Agregar(null);
+            Assert.AreEqual(resultadoAgregarIncorrecto,3);
         }
         /// <summary>
-        /// Prueba del método consultar avión pasando un número válido
+        /// Metodo que prueba que se puedan consultar todos los reclamos
         /// </summary>
         [Test]
-        public void consultarAvionIdValida()
+        public void M02_DaoAvionConsultarTodos()
         {
-            int numeroValido = 1;
-            Assert.IsInstanceOf(typeof(CAvion), prueba.consultarAvion(numeroValido));
-        }
-
-        /// <summary>
-        /// Prueba del método modificar con un avión que no existe
-        /// </summary>
-        [Test]
-        public void modificarAvionInexistente()
-        {
-            CModificarAvion avion = new CModificarAvion();
-            avion._matriculaAvion = "HK-45";
-            avion._modeloAvion = "Boeing700";
-            avion._capacidadPasajerosTurista = 100;
-            avion._capacidadPasajerosEjecutiva = 100;
-            avion._capacidadPasajerosVIP = 100;
-            avion._capacidadEquipaje = 100;
-            avion._distanciaMaximaVuelo = 200;
-            avion._velocidadMaximaDeVuelo = 1000;
-            avion._capacidadMaximaCombustible = 100;
-            Boolean resultadoModificar = prueba.modificarAvion(avion);
-            Assert.AreEqual(resultadoModificar, true);
+            Dictionary<int, Entidad> reclamos = daoAvion.ConsultarTodos();
+            Assert.NotNull(reclamos);
         }
         /// <summary>
-        /// Prueba para la verificación del método Deshabilitar un avión
+        /// Metodo que prueba que se puedan consultar los reclamos por un id
         /// </summary>
         [Test]
-        public void verificarDeshabilitarAvion()
+        public void M02_DaoAvionConsultarPorId()
         {
-            Boolean resultado = prueba.deshabilitarAvion(1);
-            Assert.AreEqual(resultado, true);
+            Assert.NotNull(daoAvion.Consultar(314));
         }
         /// <summary>
-        /// Prueba para verificar el método Habilitar un avión
+        /// Metodo que prueba que se puede modificar un reclamo
         /// </summary>
         [Test]
-        public void verificarHabilitarAvion()
+        public void M02_DaoAvionModificar()
         {
-            Boolean resultado = prueba.habilitarAvion(1);
-            Assert.AreEqual(resultado, true);
+            daoAvion.Agregar(mockAvion);
+            M02_COModificarAvion prueba = new M02_COModificarAvion(mockAvion, 315);
+            string test = prueba.ejecutar();
         }
         /// <summary>
-        /// Prueba para ver verificar el método Eliminar avión 
+        /// Metodo que prueba que se pueda eliminar un reclamo
         /// </summary>
         [Test]
-        public void verificarEliminarAvion()
+        public void M02_DaoAvionEliminarAvion()
         {
-            int id = 65; //suponiendo que quiero eliminar el avion 65 si es que existe
-            Boolean resultado = prueba.eliminarAvion(id);
-            Assert.AreEqual(resultado, true);
+            daoAvion.Agregar(mockAvion);
+            M02_COEliminarAvion prueba = new M02_COEliminarAvion(mockAvion, 316);
+            string test = prueba.ejecutar();
         }
-
-        /// <summary>
-        /// Prueba que se encarga de verificar que se produzca una excepcion si se pasa el parametro nulo
-        /// </summary>
         [Test]
-        public void modificarAvionNulo()
+        public void deleteAvion()
         {
-            Assert.That(() => prueba.modificarAvion(null), Throws.TypeOf<NullReferenceException>());
+            daoAvion.Agregar(mockAvion);
+            gestion_avionesController prueba = new gestion_avionesController();
+            JsonResult probar = prueba.deleteAvion(316);
+            Assert.IsInstanceOf(typeof(JsonResult), probar);
         }
-
-        /// <summary>
-        /// Prueba que evalua la llamada al controlador de AgregarAvion de gestion_avionesController
-        /// </summary>
         [Test]
-        public void pruebaControladorAgregar()
+        public void M02_DaoAvionDsiponibilidadAvion()
         {
-            Assert.IsInstanceOf(typeof(ActionResult), controlador.M02_AgregarAvion());
+            M02_CODisponibilidadAvion prueba = new M02_CODisponibilidadAvion(mockAvion2, 0);
         }
-
-        /// <summary>
-        /// Prueba que evalua al controlador si se pasa un valor nulo a la funcion guardarAvion
-        /// </summary>
         [Test]
-        public void pruebaGuardarAvionNulo()
+        public void activateAvion()
         {
-            Assert.That(() => controlador.guardarAvion(null), Throws.TypeOf<NullReferenceException>());
+            daoAvion.Agregar(mockAvion);
+            gestion_avionesController prueba = new gestion_avionesController();
+            JsonResult probar = prueba.activateAvion(315);
+            Assert.IsInstanceOf(typeof(JsonResult), probar);
         }
-
-        /// <summary>
-        /// Prueba que evalua al controlador si se pasa un valor valido a la funcion guardarAvion
-        /// </summary>
         [Test]
-        public void pruebaGuardarAvion()
+        public void deactivateAvion()
         {
-            CAgregarAvion model = new CAgregarAvion();
-            model._matriculaAvion = BOReserva.Models.Util.RandomString(7);
-            model._modeloAvion = "Boeing700";
-            model._capacidadPasajerosTurista = 100;
-            model._capacidadPasajerosEjecutiva = 100;
-            model._capacidadPasajerosVIP = 100;
-            model._capacidadEquipaje = 100;
-            model._distanciaMaximaVuelo = 200;
-            model._velocidadMaximaDeVuelo = 1000;
-            model._capacidadMaximaCombustible = 100;
-            Assert.IsInstanceOf(typeof(JsonResult), controlador.guardarAvion(model));
+            daoAvion.Agregar(mockAvion);
+            gestion_avionesController prueba = new gestion_avionesController();
+            JsonResult probar = prueba.deactivateAvion(314);
+            Assert.IsInstanceOf(typeof(JsonResult), probar);
         }
-
-        /// <summary>
-        /// Prueba que evalua que la respuesta del controlador en la funcion M02_VisualizarAviones
-        /// sea un objeto del tipo ActionResult
-        /// </summary>
         [Test]
-        public void pruebaControladorVisualizar()
+        public void M02_VisualizarAvion()
         {
-            Assert.IsInstanceOf(typeof(ActionResult), controlador.M02_VisualizarAviones());
+            M02_COVisualizarAvion prueba = new M02_COVisualizarAvion();
+            Dictionary<int, Entidad> mapAvion = prueba.ejecutar();
         }
-
-        /// <summary>
-        /// Prueba que evalua que la respuesta del controlador en la funcion M02_ConsultarAvion
-        /// sea un objeto del tipo ActionResult
-        /// </summary>
         [Test]
-        public void pruebaControladorConsultarValido()
+        public void M02_guardarAvion()
         {
-            Assert.IsInstanceOf(typeof(ActionResult), controlador.M02_ConsultarAvion(1));
-        }
-
-        /// <summary>
-        /// Prueba que evalua que se dispare la excepcion si se consulta un avion invalido
-        /// </summary>
-        [Test]
-        public void pruebaControladorConsultarInvalido()
-        {
-            Assert.That(() => controlador.M02_ConsultarAvion(0), Throws.TypeOf<NullReferenceException>());
-        }
-
-        /// <summary>
-        /// Prueba unitaria que prueba habilitar un avion que no exista, a pesar de que no exista
-        /// igual retornara una respuesta vacia del tipo JsonResult.
-        /// </summary>
-        [Test]
-        public void pruebaControladorHabilitarInvalido()
-        {
-            Assert.IsInstanceOf(typeof(JsonResult), controlador.habilitarAvion(0));
-        }
-
-
-        /// <summary>
-        /// Prueba que evalua que la respuesta del controlador en la funcion habilitarAvion
-        /// sea un objeto del tipo JsonResult
-        /// </summary>
-        [Test]
-        public void pruebaControladorHabilitarValido()
-        {
-            Assert.IsInstanceOf(typeof(JsonResult), controlador.habilitarAvion(1));
-        }
-
-        /// <summary>
-        /// Prueba unitaria que prueba deshabilitar un avion que no exista, a pesar de que no exista
-        /// igual retornara una respuesta vacia del tipo jsonresult.
-        /// </summary>
-        [Test]
-        public void pruebaControladorDeshabilitarInvalido()
-        {
-            Assert.IsInstanceOf(typeof(JsonResult), controlador.deshabilitarAvion(0));
-        }
-
-
-        /// <summary>
-        /// Prueba unitaria que prueba deshabilitar un avion que exista y retorne una respuesta
-        /// de tipo JsonResult
-        /// </summary>
-        [Test]
-        public void pruebaControladorDeshabilitarValido()
-        {
-            Assert.IsInstanceOf(typeof(JsonResult), controlador.deshabilitarAvion(1));
-        }
-
-        /// <summary>
-        /// Prueba unitaria que prueba eliminar un avion que no exista, a pesar de que no exista
-        /// igual retornara una respuesta vacia del tipo jsonresult.
-        /// </summary>
-        [Test]
-        public void pruebaControladorEliminarInvalido()
-        {
-            Assert.IsInstanceOf(typeof(JsonResult), controlador.eliminarAvion(0));
-        }
-
-        /// <summary>
-        /// Prueba unitaria que prueba eliminar un avion que exista y retorne una respuesta
-        /// de tipo JsonResult
-        /// </summary>
-        [Test]
-        public void pruebaControladorEliminarValido()
-        {
-            //suponiendo que el avion con id 76 exista
-            Assert.IsInstanceOf(typeof(JsonResult), controlador.eliminarAvion(76));
-        }
-
-        /// <summary>
-        /// Prueba unitaria que prueba modificar un avion que exista y retorne una respuesta
-        /// de tipo JsonResult
-        /// </summary>
-        [Test]
-        public void pruebaModificarAvion()
-        {
-            CModificarAvion model = new CModificarAvion();
-            model._matriculaAvion = "PEIAMRD";
-            model._modeloAvion = "Boeing700";
-            model._capacidadPasajerosTurista = 100;
-            model._capacidadPasajerosEjecutiva = 100;
-            model._capacidadPasajerosVIP = 100;
-            model._capacidadEquipaje = 100;
-            model._distanciaMaximaVuelo = 200;
-            model._velocidadMaximaDeVuelo = 1000;
-            model._capacidadMaximaCombustible = 100;
-            Assert.IsInstanceOf(typeof(JsonResult), controlador.modificarAvion(model));
-        }
-
-
-        /// <summary>
-        /// Prueba unitaria que prueba modificar un avion nulo y dispare la excepcion de tipo NullReferenceException
-        /// </summary>
-        [Test]
-        public void pruebaModificarAvionNulo()
-        {
-            Assert.That(() => controlador.modificarAvion(null), Throws.TypeOf<NullReferenceException>());
+            CAgregarAvion model = new BOReserva.Models.gestion_aviones.CAgregarAvion();
+            model._matriculaAvion = "HK-1800";
+            model._modeloAvion = "Boeing747";
+            model._capacidadPasajerosTurista = 70;
+            model._capacidadPasajerosEjecutiva = 70;
+            model._capacidadPasajerosVIP = 70;
+            model._capacidadEquipaje = 70;
+            model._distanciaMaximaVuelo = 70;
+            model._velocidadMaximaDeVuelo = 70;
+            model._capacidadMaximaCombustible = 70;
+            gestion_avionesController prueba = new gestion_avionesController();
+            JsonResult probarjsonresult= prueba.guardarAvion(model);
+            Assert.IsInstanceOf(typeof(JsonResult),probarjsonresult);
         }
     }
 }
