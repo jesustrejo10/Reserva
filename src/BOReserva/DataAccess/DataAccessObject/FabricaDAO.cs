@@ -125,7 +125,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAOAutomovil();
         }
         #endregion
-			
+
         #region Modulo 10
         /// <summary>
         /// Inicializar IDAORestaurant
@@ -150,7 +150,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             };
         }
        
-     
+
         /// <summary>
         /// Metodo para asignar parametros para el store procedured
         /// </summary>
@@ -184,7 +184,7 @@ namespace BOReserva.DataAccess.DataAccessObject
         {
             return new List<Parametro>();
         }
-               
+
         #endregion
 
         #region M13_Roles
@@ -193,7 +193,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAORol();
         }
         #endregion
-        
+
         #region M14_Cruceros
         public static DAO instanciarDaoCrucero()
         {
@@ -212,7 +212,7 @@ namespace BOReserva.DataAccess.DataAccessObject
         }
 
         #endregion
-    
+
         #region M06 GESTION DE COMIDA
 
         public static DAOComida instanciarComida()
@@ -229,6 +229,15 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAOAvion();
         }
 
+        #endregion
+
+        #region M12_Usuarios
+
+        public static DAO instanciarDaoUsuario()
+        {
+            return new DAOUsuario();
+        }
+        
         #endregion
     }
 
