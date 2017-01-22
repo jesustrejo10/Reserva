@@ -53,7 +53,7 @@ namespace BOReserva.Controllers
             //manejadorSQL_Check buscarboletos = new manejadorSQL_Check();
             //List<CBoardingPass> listaboletos = buscarboletos.M05ListarPasesPasajero(pasaporte);
 
-            List<Entidad> listaBoletos = (FabricaComando.ConsultarPasajeros(pasaporte)).ejecutar();
+            List<Entidad> listaBoletos = (FabricaComando.ConsultarPasajerosCheckin(pasaporte)).ejecutar();
 
             return PartialView("M05_VerPasesAbordaje", listaBoletos);
         }
@@ -97,7 +97,7 @@ namespace BOReserva.Controllers
             Boleto boleto = (Boleto) co.ejecutar();
             BoletoDetalle bolView = (BoletoDetalle) FabricaEntidad.InstanciarDetalleBoleto(boleto);
 
-            return PartialView(boleto);
+            return PartialView(bolView);
 
         }
 
@@ -183,6 +183,7 @@ namespace BOReserva.Controllers
                 }
 
                 // TENGO QUE BUSCAR EL ID DEL PASE DE ABORDAJE CREADO
+                
                 int num_boarding = modificar.IdBoardingPass(pase._boleto, pase._vuelo);
                 pase._id = num_boarding;
                 // TENGO QUE INSTANCIAR AL MODELO DE VER BOARDING PASS

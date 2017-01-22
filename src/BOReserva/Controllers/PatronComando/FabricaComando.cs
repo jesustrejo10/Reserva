@@ -651,6 +651,10 @@ namespace BOReserva.Controllers.PatronComando
         {
             return new M05_COCrearBoarding((BoardingPass)e);
         }
+        public static Command<List<Entidad>> ConsultarPasajerosCheckin(int id)
+        {
+            return new M05_COConsultarBoletosPasajeroChekin(id);
+        }
 
         #endregion
 
