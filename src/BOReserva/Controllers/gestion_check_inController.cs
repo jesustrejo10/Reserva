@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using BOReserva.DataAccess.Domain;
 using BOReserva.Controllers.PatronComando;
 using BOReserva.Models.gestion_check_in;
-using BOReserva.Servicio.Servicio_Boletos;
 using System.Net;
 
 namespace BOReserva.Controllers
@@ -53,7 +52,7 @@ namespace BOReserva.Controllers
             //manejadorSQL_Check buscarboletos = new manejadorSQL_Check();
             //List<CBoardingPass> listaboletos = buscarboletos.M05ListarPasesPasajero(pasaporte);
 
-            List<Entidad> listaBoletos = (FabricaComando.ConsultarPasajeros(pasaporte)).ejecutar();
+            List<Entidad> listaBoletos = (FabricaComando.ConsultarPasajerosCheckin(pasaporte)).ejecutar();
 
             return PartialView("M05_VerPasesAbordaje", listaBoletos);
         }
@@ -97,7 +96,7 @@ namespace BOReserva.Controllers
             Boleto boleto = (Boleto) co.ejecutar();
             BoletoDetalle bolView = (BoletoDetalle) FabricaEntidad.InstanciarDetalleBoleto(boleto);
 
-            return PartialView(boleto);
+            return PartialView(bolView);
 
         }
 
@@ -119,7 +118,7 @@ namespace BOReserva.Controllers
             {
                 int id_bol = model._bol_id;
 
-                manejadorSQL_Check modificar = new manejadorSQL_Check();
+                //manejadorSQL_Check modificar = new manejadorSQL_Check();
 
                 // OBTENGO EL /LOS VUELOS DEL BOLETO
                 Command<List<Entidad>> comando = FabricaComando.consultarM05listaVuelos(model._bol_id);
@@ -183,7 +182,10 @@ namespace BOReserva.Controllers
                 }
 
                 // TENGO QUE BUSCAR EL ID DEL PASE DE ABORDAJE CREADO
-                int num_boarding = modificar.IdBoardingPass(pase._boleto, pase._vuelo);
+                Command<int> comando5 = FabricaComando.IdM05paseAbordaje(pase._boleto, pase._vuelo);
+
+                //int num_boarding = modificar.IdBoardingPass(pase._boleto, pase._vuelo);
+                int num_boarding = comando5.ejecutar();
                 pase._id = num_boarding;
                 // TENGO QUE INSTANCIAR AL MODELO DE VER BOARDING PASS
                 return PartialView("M05_VerBoardingPass", pase);

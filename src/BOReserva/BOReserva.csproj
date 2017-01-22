@@ -223,6 +223,8 @@
     <Compile Include="Controllers\PatronComando\M03\M03_COModificarRutacs.cs" />
     <Compile Include="Controllers\PatronComando\M03\M03_COMostrarRuta.cs" />
     <Compile Include="Controllers\PatronComando\M03\M03_COValidarRuta.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COBusquedaIdBoarding.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COConsultarBoletosPasajeroChekin.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COCrearBoarding.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COConteoBoarding.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COCrearMaletas.cs" />
@@ -608,8 +610,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicio\manejadorSQL.cs" />
     <Compile Include="Servicio\Servicio_Vuelos\manejadorSQL_Vuelos.cs" />
-    <Compile Include="Servicio\Servicio_Boletos\manejadorSQL_Boletos.cs" />
-    <Compile Include="Servicio\Servicio_Boletos\manejadorSQL_Check.cs" />
     <Compile Include="Servicio\Servicio_Hoteles\CManejadorSQL_Hoteles.cs" />
     <Compile Include="Servicio\Servicio_Rutas\CManejadorSQL_Rutas.cs" />
     <Compile Include="Views\gestion_restaurantes\Fabrica\FabricaVista.cs" />
@@ -1803,6 +1803,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="DataAccess\Domain\M04\" />
     <Folder Include="Scripts\Scripts_Reclamo\" />
+    <Folder Include="Servicio\Servicio_Boletos\" />
     <Folder Include="Views\dist\img\credit\" />
     <Folder Include="Views\dist\js\pages\" />
     <Folder Include="Views\gestion_roles\css\" />
