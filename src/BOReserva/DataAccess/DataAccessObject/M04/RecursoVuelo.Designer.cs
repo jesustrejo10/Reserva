@@ -70,6 +70,15 @@ namespace BOReserva.DataAccess.DataAccessObject.M04 {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a M04_BuscaVuelo.
+        /// </summary>
+        internal static string BuscaVueloID {
+            get {
+                return ResourceManager.GetString("BuscaVueloID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a M04_CambiarStatus.
         /// </summary>
         internal static string CambiarStatus {
@@ -79,11 +88,65 @@ namespace BOReserva.DataAccess.DataAccessObject.M04 {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a M04_CrearVuelo.
+        /// </summary>
+        internal static string CrearVuelo {
+            get {
+                return ResourceManager.GetString("CrearVuelo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a M04_EliminarVuelo.
         /// </summary>
         internal static string EliminarVuelo {
             get {
                 return ResourceManager.GetString("EliminarVuelo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No hay aviones disponibles para cubrir la ruta seleccionada.
+        /// </summary>
+        internal static string ErrorAvionRuta {
+            get {
+                return ResourceManager.GetString("ErrorAvionRuta", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Reserva-404.
+        /// </summary>
+        internal static string ErrorDaoVuelo {
+            get {
+                return ResourceManager.GetString("ErrorDaoVuelo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Argumento nulo.
+        /// </summary>
+        internal static string ErrorMensajeArgumento {
+            get {
+                return ResourceManager.GetString("ErrorMensajeArgumento", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Formato invalido.
+        /// </summary>
+        internal static string ErrorMensajeFormato {
+            get {
+                return ResourceManager.GetString("ErrorMensajeFormato", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a M04_CalcularFechaAterrizaje.
+        /// </summary>
+        internal static string FechaAterrizaje {
+            get {
+                return ResourceManager.GetString("FechaAterrizaje", resourceCulture);
             }
         }
         
@@ -111,6 +174,15 @@ namespace BOReserva.DataAccess.DataAccessObject.M04 {
         internal static string ListarVuelos {
             get {
                 return ResourceManager.GetString("ListarVuelos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a M04_ModificarVuelo.
+        /// </summary>
+        internal static string ModificarVuelo {
+            get {
+                return ResourceManager.GetString("ModificarVuelo", resourceCulture);
             }
         }
         

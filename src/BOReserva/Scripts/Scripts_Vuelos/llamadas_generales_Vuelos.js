@@ -1,25 +1,11 @@
 // Evento para agregar un vuelo a la BD CREAR
-$("#agregarAW3").click(function (e) {
-    e.preventDefault();
-    var form = $("#formGuardarVuelo");
-    $.ajax({
-        url: "gestion_vuelo/M04_GestionVuelo_CW2",
-        data: form.serialize(),
-        type: 'POST',
-        success: function (data) {
-            alert("Se guardo el vuelo exitosamente");
-            $('formGuardarVuelo')[0].reset();
-        }
-        , error: function (xhr, textStatus, exceptionThrown) {
-            alert(xhr.responseText);
-        }
-    });
-});
-
 $("#formGuardarVuelo").submit(function (e) {
-    console.log("hola!");
     e.preventDefault();
     var form = $("#formGuardarVuelo");
+    var selectedCO = $("#ciudadO option:selected").text();
+    var selectedCD = $("#ciudadD option:selected").text();
+    $("#_ciudadOrigen").val(selectedCO);
+    $("#_ciudadDestino").val(selectedCD);
     $.ajax({
         url: "gestion_vuelo/M04_GestionVuelo_CW2",
         data: form.serialize(),
@@ -40,7 +26,6 @@ $("#formGuardarVuelo").submit(function (e) {
 });
 
 $("#formGuardarVuelo2").submit(function (e) {
-    console.log("hola!");
     e.preventDefault();
     var form = $("#formGuardarVuelo2");
     $.ajax({
@@ -60,6 +45,144 @@ $("#formGuardarVuelo2").submit(function (e) {
         alert(xhr.responseText);
     }
     });
+});
+
+$("#formGuardarVuelo3").submit(function (e) {
+    e.preventDefault();
+    var form = $("#formGuardarVuelo3");
+    $.ajax({
+        url: "gestion_vuelo/M04_GuardarVuelo",
+        data: form.serialize(),
+        type: 'POST',
+        success: function (data, textStatus, jqXHR) {
+
+            $("#contenido").empty();
+            $("#contenido").append(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+        }
+    , error: function (xhr, textStatus, exceptionThrown) {
+        //muestro el texto del error
+        alert(xhr.responseText);
+    }
+    });
+});
+
+$("#formModificarVuelo").submit(function (e) {
+    e.preventDefault();
+    var form = $("#formModificarVuelo");
+    var selectedCO = $("#ciudadO option:selected").text();
+    var selectedCD = $("#ciudadD option:selected").text();
+    $("#_ciudadOrigen").val(selectedCO);
+    $("#_ciudadDestino").val(selectedCD);
+    $.ajax({
+        url: "gestion_vuelo/M04_GestionVuelo_MW2",
+        data: form.serialize(),
+        type: 'POST',
+        success: function (data, textStatus, jqXHR) {
+
+            $("#contenido").empty();
+            $("#contenido").append(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+        }
+    , error: function (xhr, textStatus, exceptionThrown) {
+        //muestro el texto del error
+        alert(xhr.responseText);
+    }
+    });
+});
+
+$("#formModificarVuelo2").submit(function (e) {
+    e.preventDefault();
+    var form = $("#formModificarVuelo2");
+    $.ajax({
+        url: "gestion_vuelo/M04_GestionVuelo_MW3",
+        data: form.serialize(),
+        type: 'POST',
+        success: function (data, textStatus, jqXHR) {
+
+            $("#contenido").empty();
+            $("#contenido").append(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+        }
+    , error: function (xhr, textStatus, exceptionThrown) {
+        //muestro el texto del error
+        alert(xhr.responseText);
+    }
+    });
+});
+
+$("#formModificarVuelo3").submit(function (e) {
+    e.preventDefault();
+    var form = $("#formModificarVuelo3");
+    $.ajax({
+        url: "gestion_vuelo/M04_ModificarVuelo",
+        data: form.serialize(),
+        type: 'POST',
+        success: function (data, textStatus, jqXHR) {
+
+            $("#contenido").empty();
+            $("#contenido").append(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+        }
+    , error: function (xhr, textStatus, exceptionThrown) {
+        //muestro el texto del error
+        alert(xhr.responseText);
+    }
+    });
+});
+//al cambiar la matricula del avion carga toda la info del aterrizaje
+$("#matAvion").change(function(e){
+    e.preventDefault();
+    var formulario = $(matAvion).val();
+    var url = "gestion_vuelo/M04_DatosAterrizaje";
+    if (formulario != 0) {
+        $.ajax({
+            url: url,
+            data: { idAvion: formulario },
+            cache: false,
+            type: 'POST',
+            success: function (data) {
+                $("#modeloAvion").val(data);
+
+            }
+            , error: function (xhr, textStatus, exceptionThrown) {
+                alert(xhr.responseText);
+            }
+        });
+    }
+
+});
+
+$("#matAvion2").change(function () {
+    var formulario = $(matAvion).val();
+    $.getJSON("gestion_vuelo/M04_DatosAterrizaje", { idAvion: formulario },
+           function (data) {
+               var select = $("#ciudadD");
+               select.empty();
+               select.append($('<option/>', {
+                   value: 0,
+                   text: "Seleccione la Ciudad de Destino"
+                   , error: function (xhr, textStatus, exceptionThrown) {
+                       alert(xhr.responseText);
+                   }
+               }));
+               $.each(data, function (index, itemData) {
+                   select.append($('<option/>', {
+                       value: itemData.Value,
+                       text: itemData.Text
+                   }));
+
+               });
+
+           });
 });
 
 //evento para cargar los destinos disponibles segun el origen seleccionado en la vista CREAR
@@ -104,15 +227,16 @@ $("#ciudadO").change(function () {
 //evento para cargar los aviones que puedan cubrir la distancia de la ruta seleccionada en la vista CREAR
 $("#ciudadD").change(function () {
     var dID = $(ciudadD).val();
-    $.getJSON("gestion_vuelo/validarAviones", { idRuta : dID },
+ 
+    $.getJSON("gestion_vuelo/validarAviones", { idRuta: dID },
            function (data) {
                var select = $("#matAvion");
                select.empty();
                select.append($('<option/>', {
                    value: 0,
                    text: "Seleccione un avion"
-                   , error: function (xhr, textStatus, exceptionThrown) {
-                       alert(xhr.responseText);
+                   , error: function (jqXHR, textStatus, errorThrown) {
+                       alert(jqXHR);
                    }
                }));
                $.each(data, function (index, itemData) {
@@ -121,57 +245,18 @@ $("#ciudadD").change(function () {
                        text: itemData.Text
                    }));
                });
-           });
+           })
+        .error(function (xhr, textStatus, exceptionThrown) {
+        alert(xhr.responseText);
+        });
 });
 
 
 
-//evento para luego de haber seleccionado el estado del vuelo, se calcule la fecha del aterrizaje en la vista CREAR
-$("#estadoVuelo").click(function (e) {
-    e.preventDefault();
-    var fID = $(fechaDespegue).val();
-    var hID = $(horaDespegue).val();
-    var dID = $(ciudadD).val();
-    var mID = $(matAvion).val();
-    var url = "gestion_vuelo/buscaFechaA";
-    $.ajax({
-        url: url,
-        data: { fechaDes: fID, horaDes: hID, ciudadO: oID, ciudadD: dID, matriAvion: mID, opcion: 0 },
-        cache: false,
-        type: 'POST',
-        success: function (data) {
-            $("#fechaAterrizaje").val(data);
-        }
-        , error: function (xhr, textStatus, exceptionThrown) {
-            alert(xhr.responseText);
-        }
-    });
-});
 
-//evento para luego de haber seleccionado el estado del vuelo, se calcule la hora del aterrizaje en la vista CREAR
-$("#estadoVuelo").click(function (e) {
-    e.preventDefault();
-    var fID = $(fechaDespegue).val();
-    var hID = $(horaDespegue).val();
-    var oID = $(ciudadO).val();
-    var dID = $(ciudadD).val();
-    var mID = $(matAvion).val();
-    var url = "gestion_vuelo/buscaFechaA";
-    $.ajax({
-        url: url,
-        data: { fechaDes: fID, horaDes: hID, ciudadO: oID, ciudadD: dID, matriAvion: mID, opcion: 1 },
-        cache: false,
-        type: 'POST',
-        success: function (data) {
-            $("#horaAterrizaje").val(data);
-        }
-        , error: function (xhr, textStatus, exceptionThrown) {
-            alert(xhr.responseText);
-        }
-    });
-});
+
 //evento para el boton de return de la vista VISUALIZAR-->MOSTRAR
-    $("#return").click(function (e) {
+$("#return").click(function (e) {
             e.preventDefault();
             var url = '/gestion_vuelo/M04_GestionVuelo_Visualizar';
             var method = 'GET';
@@ -264,7 +349,7 @@ $("#estadoVuelo").click(function (e) {
             var identificador = $(this).parent().parent().parent().attr("id");
             jQuery.ajax({
                 type: "GET",
-                url: "/gestion_vuelo/M04_GestionVuelo_Modificar", 
+                url: "/gestion_vuelo/M04_GestionVuelo_MW1",
                 data: { id: identificador }
             }).done(function (data) {
                 $("#contenido").empty();
@@ -383,3 +468,55 @@ $("#estadoVuelo").click(function (e) {
                 });
             });
  });
+
+ function setSelectByTextSimple(text) { //Loop through sequentially//
+     var select = $("#matAvion");
+     select.value = text
+ }
+
+ function setSelectByText(text, text2) { //Loop through sequentially//
+     $("#ciudadO option").each(function () {
+         if ($(this).text() == text) {
+             $(this).attr('selected', 'selected');
+         }
+     });
+
+     var cID = $(ciudadO).val();
+     var select1 = $("#ciudadD");
+     if (cID == 0) {
+         select1.empty();
+         select1.append($('<option/>', {
+             value: 0,
+             text: "Seleccione la Ciudad de Destino"
+             , error: function (xhr, textStatus, exceptionThrown) {
+                 alert(xhr.responseText);
+             }
+         }));
+     }
+     else {
+
+     }
+     $.getJSON("gestion_vuelo/cargarDestinos", { ciudadO: cID },
+            function (data) {
+                var select = $("#ciudadD");
+                select.empty();
+                select.append($('<option/>', {
+                    value: 0,
+                    text: "Seleccione la Ciudad de Destino"
+                    , error: function (xhr, textStatus, exceptionThrown) {
+                        alert(xhr.responseText);
+                    }
+                }));
+                $.each(data, function (index, itemData) {
+                    select.append($('<option/>', {
+                        value: itemData.Value,
+                        text: itemData.Text
+                    }));
+                });
+                select.val(text2)
+                
+            });
+
+
+ }
+

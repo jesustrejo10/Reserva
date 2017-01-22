@@ -1,25 +1,15 @@
 ﻿<!-- Indico que para esta vista, M04_GestionVuelo_Crear, utilizare el modelo Models/gestion_vuelo/CGestionVuelo-->
 @model BOReserva.Models.gestion_vuelo.CrearVueloMO
-@{
-    ViewBag.Title = "Operation List";
-    string alert = "Your custom error message";
 
-    if (ViewBag.AlertMessage != null)
-    {
-        alert = (string)ViewBag.AlertMessage;
-    }
-}
 <script src="~/Scripts/Scripts_Vuelos/llamadas_generales_Vuelos.js"></script>
 <link rel="stylesheet" href="~/Content/M04_css/style_module.css" type="text/css" />
-@using (Html.BeginForm("M04_GestionVuelo_CW2", "gestion_vuelo", null, FormMethod.Post, new { @id = "formGuardarVuelo", @class = "form-horizontal" }))
+@using (Html.BeginForm("M04_GestionVuelo_CW2", "gestion_vuelo", null, FormMethod.Post, new { @id = "formModificarVuelo", @class = "form-horizontal" }))
 {
-    @Html.HiddenFor(m => m._ciudadOrigen, new { @id = "_ciudadOrigen" })
-    @Html.HiddenFor(m => m._ciudadDestino, new { @id = "_ciudadDestino" })
     <div class="row">
         <div class="col-md-12">
             <h1>
                 Gestion de vuelos
-                <small>Crear un vuelo</small>
+                <small>Modificar un vuelo</small>
             </h1>
             <div class="box box-solid">
                 <div class="box box-solid">
@@ -79,7 +69,11 @@
                             <div class="col-xs-6">
                                 <!-- DATE FECHA DESPEGUE  -->
                                 <label> Fecha Despegue (<span style="color: #d9534f">*</span>):</label>
-                                @Html.TextBoxFor(m => m._fechaDespegue, null, new { @class = "datepicker", @type = "date", @id = "fechaDespegue", @style = "width: 100%;" })
+                                @Html.TextBoxFor(m => m._fechaDespegue, "{0:dd/MM/yyyy}", 
+                                                                                    new { @type = "date",
+                                                                                    @id = "fechaDespegue",
+                                                                                    @style = "width: 100%;",
+                                })
                             </div>
                             <!-- FIN FECHA DESPEGUE -->
                             <div class="col-xs-6">
@@ -93,7 +87,7 @@
                         <!-- FIN CAMPOS FORMULARIO-->
                         <!-- BOTON GUARDAR-->
                         <div class="col-md-12" style="margin-top:10px;">
-                            <button type="submit" id="agregarAW1" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Siguiente</button>
+                            <button type="submit" id="modificarW1" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Siguiente</button>
                         </div>
                         <!--FIN BOTON GUARDAR-->
                     </div>
@@ -105,6 +99,17 @@
         </div>
         <!-- /.box -->
     </div>
+    @Html.HiddenFor(m => m._idAvion, new { @id = "_idAvion" })
+    @Html.HiddenFor(m => m._ciudadOrigen, new { @id = "_ciudadOrigen" })
+    @Html.HiddenFor(m => m._ciudadDestino, new { @id = "_ciudadDestino" })
+    @Html.HiddenFor(m => m._idVuelo)
+    <script type="text/javascript">
+        setSelectByText('@Model._ciudadOrigen', '@Model._idRuta')
+    </script>
+   
+    
 }
+
+
 
 

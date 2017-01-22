@@ -3,15 +3,16 @@
 
 <script src="~/Scripts/Scripts_Vuelos/llamadas_generales_Vuelos.js"></script>
 <link rel="stylesheet" href="~/Content/M04_css/style_module.css" type="text/css" />
-@using (Html.BeginForm("guardarVuelo", "gestion_vuelo", null, FormMethod.Post, new { @id = "formGuardarVuelo2", @class = "form-horizontal" }))
+@using (Html.BeginForm("guardarVuelo", "gestion_vuelo", null, FormMethod.Post, new { @id = "formModificarVuelo2", @class = "form-horizontal" }))
 {
     
     @Html.HiddenFor(m => m._codigoVuelo)
+    @Html.HiddenFor(m => m._idVuelo)
     <div class="row">
         <div class="col-md-12">
             <h1>
                 Gestion de vuelos
-                <small>Crear un vuelo</small>
+                <small>Modificar un vuelo</small>
             </h1>
             <div class="box box-solid">
                 <div class="box box-solid">
@@ -92,7 +93,7 @@
                                     <button id="cancelarModificacion" type="button" class="btn btn-danger" style="display:block; margin-left:auto; margin-right:auto;">  Atras  </button>
                                 </div>
                                 <div class="col-md-2">
-                                    <button type="submit" id="agregarAW2" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Siguiente</button>
+                                    <button type="submit" id="modificarAW2" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Siguiente</button>
                                 </div>
                             </div>
                             <!--FIN BOTON GUARDAR-->
@@ -113,7 +114,9 @@
     @Html.HiddenFor(m => m._idRuta)
     @Html.HiddenFor(m => m._ciudadDestino)
     @Html.HiddenFor(m => m._ciudadOrigen)
-   
+   <script type="text/javascript">
+        setSelectByTextSimple('@Model._idAvion')
+    </script>
 }
 
 
