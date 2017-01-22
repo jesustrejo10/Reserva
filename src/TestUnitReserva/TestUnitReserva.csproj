@@ -73,6 +73,7 @@
     <Compile Include="FO\Diario\TestLugarDiario.cs" />
     <Compile Include="FO\Itinerario\TestPlanificacionVacacion.cs" />
     <Compile Include="BO\gestion_cruceros\TestCruceros.cs" />
+    <Compile Include="FO\Reclamos\TestGestionReclamosFO.cs" />
     <Compile Include="FO\Reserva restaurante\TestInsertReserva.cs">
       <SubType>Code</SubType>
     </Compile>
