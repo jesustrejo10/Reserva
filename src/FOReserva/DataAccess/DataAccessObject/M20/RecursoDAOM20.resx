@@ -117,64 +117,64 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="parametroRevisionFecha" xml:space="preserve">
-    <value>rev_fecha</value>
-    <comment>Atributo en la tabla Revision.</comment>
+  <data name="parametroRevisionId" xml:space="preserve">
+    <value>rev_id</value>
+    <comment>Parametro usado en los procedimientos almacenados.</comment>
   </data>
   <data name="parametroRevisionMensaje" xml:space="preserve">
     <value>rev_mensaje</value>
-    <comment>Atributo en la tabla Revision.</comment>
-  </data>
-  <data name="parametroRevisionID" xml:space="preserve">
-    <value>rev_id</value>
-    <comment>Atributo en la tabla Revision.</comment>
-  </data>
-  <data name="parametroRevisionIDReservaHabitacion" xml:space="preserve">
-    <value>rev_FK_res_hot_id</value>
-    <comment>Atributo en la tabla Revision.</comment>
-  </data>
-  <data name="parametroRevisionIDReservaRestaurante" xml:space="preserve">
-    <value>rev_FK_res_res_id</value>
-    <comment>Atributo en la tabla Revision.</comment>
-  </data>
-  <data name="parametroRevisionIDUsuario" xml:space="preserve">
-    <value>rev_FK_usu_id</value>
-    <comment>Atributo en la tabla Revision.</comment>
-  </data>
-  <data name="parametroRevisionPuntuacion" xml:space="preserve">
-    <value>rev_puntuacion</value>
-    <comment>Atributo en la tabla Revision.</comment>
+    <comment>Parametro usado en los procedimientos almacenados.</comment>
   </data>
   <data name="parametroRevisionTipo" xml:space="preserve">
     <value>rev_tipo</value>
-    <comment>Atributo en la tabla Revision.</comment>
+    <comment>Parametro usado en los procedimientos almacenados.</comment>
   </data>
-  <data name="parametroValaloracionFecha" xml:space="preserve">
-    <value>rv_fecha</value>
-    <comment>Atributo en la tabla Revision_Valoracion.</comment>
+  <data name="parametroRevisionPropietario" xml:space="preserve">
+    <value>rev_fk_propietario</value>
+    <comment>Parametro usado en los procedimientos almacenados.</comment>
   </data>
-  <data name="parametroValaloracionID" xml:space="preserve">
-    <value>rv_id</value>
-    <comment>Atributo en la tabla Revision_Valoracion.</comment>
+  <data name="parametroRevisionReferencia" xml:space="preserve">
+    <value>rev_fk_referencia</value>
+    <comment>Parametro usado en los procedimientos almacenados.</comment>
   </data>
-  <data name="parametroValaloracionNegativa" xml:space="preserve">
-    <value>rv_val_neg</value>
-    <comment>Atributo en la tabla Revision_Valoracion.</comment>
+  <data name="parametroRevisionEstrellas" xml:space="preserve">
+    <value>rev_estrellas</value>
+    <comment>Parametro usado en los procedimientos almacenados.</comment>
   </data>
-  <data name="parametroValaloracionPositiva" xml:space="preserve">
-    <value>rv_val_pos</value>
-    <comment>Atributo en la tabla Revision_Valoracion.</comment>
+  <data name="parametroValoracionId" xml:space="preserve">
+    <value>val_id</value>
+    <comment>Parametro usado en los procedimientos almacenados.</comment>
   </data>
-  <data name="parametroValaloracionRevision" xml:space="preserve">
-    <value>rv_FK_rev</value>
-    <comment>Atributo en la tabla Revision_Valoracion.</comment>
+  <data name="parametroValoracionRevision" xml:space="preserve">
+    <value>val_fk_revision</value>
+    <comment>Parametro usado en los procedimientos almacenados.</comment>
+  </data>
+  <data name="parametroValoracionPunto" xml:space="preserve">
+    <value>val_punto</value>
+    <comment>Parametro usado en los procedimientos almacenados.</comment>
+  </data>
+  <data name="parametroValoracionPropietario" xml:space="preserve">
+    <value>val_fk_propietario</value>
+    <comment>Parametro usado en los procedimientos almacenados.</comment>
+  </data>
+  <data name="procedimientoBorrarRevision" xml:space="preserve">
+    <value>M20_BorrarRevision</value>
+    <comment>Procedimiento para borrar una revision.</comment>
   </data>
   <data name="procedimientoGuardarRevision" xml:space="preserve">
     <value>M20_GuardarRevision</value>
-    <comment>Procedimiento para agregar y actualizar un registro de revision.</comment>
+    <comment>Procedimiento para guardar o modificar una revision.</comment>
   </data>
-  <data name="parametroReferencia" xml:space="preserve">
-    <value>rev_FK_res_ref</value>
-    <comment>Parametro usado para generalizar entre hotel y restaurante.</comment>
+  <data name="procedimientoGuardarValoracion" xml:space="preserve">
+    <value>M20_GuardarValoracion</value>
+    <comment>Procedimiento para guardar o modificar una valoracion.</comment>
+  </data>
+  <data name="procedimientoObtenerRevisionesPorReferencia" xml:space="preserve">
+    <value>M20_ObtenerRevisionesPorReferencia</value>
+    <comment>Procedimiento para obtener las revisiones de una referencia.</comment>
+  </data>
+  <data name="procedimientoObtenerValoracionPorReferencia" xml:space="preserve">
+    <value>M20_ObtenerValoracionPorReferencia</value>
+    <comment>Procedimiento para obtener la valoracion de una referencia.</comment>
   </data>
 </root>
