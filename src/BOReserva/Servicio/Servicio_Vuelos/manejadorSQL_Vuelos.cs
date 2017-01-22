@@ -119,11 +119,11 @@ namespace BOReserva.Servicio.Servicio_Vuelos
         }
         //fin idRutaVuelo
 
-        public List<CCrear_Vuelo> consultarDestinos(String Origen)
+        public List<CrearVueloMO> consultarDestinos(String Origen)
         {
             try
             {
-                var list = new List<CCrear_Vuelo>();
+                var list = new List<CrearVueloMO>();
                 //Inicializo la conexion con el string de conexion
                 conexion = new SqlConnection(stringDeConexion);
                 //INTENTO abrir la conexion
@@ -141,7 +141,7 @@ namespace BOReserva.Servicio.Servicio_Vuelos
 
                 while (dr.Read())
                 {
-                    var destinos = new CCrear_Vuelo
+                    var destinos = new CrearVueloMO
                     {
                         //leo los diferentes valores que cargaran la lista ya que espero varios resultados
                         _ciudadDestino = dr.GetSqlString(0).ToString(),
@@ -169,11 +169,11 @@ namespace BOReserva.Servicio.Servicio_Vuelos
 
 
 
-        public List<CCrear_Vuelo> buscarAviones(String Origen, String Destino)
+        public List<CrearVueloMO> buscarAviones(String Origen, String Destino)
         {
             try
             {
-                var list = new List<CCrear_Vuelo>();
+                var list = new List<CrearVueloMO>();
                 //Inicializo la conexion con el string de conexion
                 conexion = new SqlConnection(stringDeConexion);
                 //INTENTO abrir la conexion
@@ -194,7 +194,7 @@ namespace BOReserva.Servicio.Servicio_Vuelos
 
                 while (dr.Read())
                 {
-                    var matriculas = new CCrear_Vuelo
+                    var matriculas = new CrearVueloMO
                     {
                         //leo los diferentes valores que cargaran la lista ya que espero varios resultados
                         _matriculaAvion = dr.GetSqlString(0).ToString(),
@@ -221,11 +221,11 @@ namespace BOReserva.Servicio.Servicio_Vuelos
         //fin buscarAviones
 
 
-         public List<CCrear_Vuelo> cargarOrigenes()
+         public List<CrearVueloMO> cargarOrigenes()
         {
             try
             {
-                var list = new List<CCrear_Vuelo>();
+                var list = new List<CrearVueloMO>();
                 //Inicializo la conexion con el string de conexion
                 conexion = new SqlConnection(stringDeConexion);
                 //INTENTO abrir la conexion
@@ -241,7 +241,7 @@ namespace BOReserva.Servicio.Servicio_Vuelos
 
                 while (dr.Read())
                 {
-                    var destinos = new CCrear_Vuelo
+                    var destinos = new CrearVueloMO
                     {
                         //leo los diferentes valores que cargaran la lista ya que espero varios resultados
                         _ciudadOrigen = dr.GetSqlString(0).ToString(),

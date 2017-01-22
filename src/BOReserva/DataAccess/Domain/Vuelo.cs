@@ -13,11 +13,11 @@ namespace BOReserva.DataAccess.Domain
         #region Atributos
 
         private String _codigoVuelo;
-        private int _ruta;
+        private Ruta _ruta;
         private DateTime _fechaDespegue;
         private String _statusVuelo;
         private DateTime _fechaAterrizaje;
-        private int _avion;
+        private Avion _avion;
 
         #endregion
 
@@ -44,7 +44,7 @@ namespace BOReserva.DataAccess.Domain
         /// <summary>
         /// 
         /// </summary>
-        public int IdRuta
+        public Ruta getRuta
         {
             get { return _ruta; }
             set { _ruta = value; }
@@ -71,7 +71,7 @@ namespace BOReserva.DataAccess.Domain
         /// <summary>
         /// Get y Set del atributo _Avion
         /// </summary>
-        public int IdAvion
+        public Avion getAvion
         {
             get { return _avion; }
             set { _avion = value; }
@@ -103,8 +103,8 @@ namespace BOReserva.DataAccess.Domain
         /// <param name="status"></param>
         /// <param name="fechaAterrizaje"></param>
         /// <param name="avion"></param>
-        public Vuelo(String codigoVuelo, int ruta, DateTime fechaDespegue, 
-                      String status, DateTime fechaAterrizaje, int avion)
+        public Vuelo(String codigoVuelo, Ruta ruta, DateTime fechaDespegue, 
+                      String status, DateTime fechaAterrizaje, Avion avion)
         {
             _codigoVuelo = codigoVuelo;
             _ruta = ruta;
@@ -124,14 +124,25 @@ namespace BOReserva.DataAccess.Domain
         /// <param name="status"></param>
         /// <param name="fechaAterrizaje"></param>
         /// <param name="avion"></param>
-        public Vuelo(int id, String codigoVuelo, int ruta, DateTime fechaDespegue, 
-            String status, DateTime fechaAterrizaje, int avion)
+        public Vuelo(int id, String codigoVuelo, Ruta ruta, DateTime fechaDespegue, 
+            String status, DateTime fechaAterrizaje, Avion avion)
         {
             _id = id;
             _codigoVuelo = codigoVuelo;
             _ruta = ruta;
             _fechaDespegue = fechaDespegue;
             _statusVuelo = status;
+            _fechaAterrizaje = fechaAterrizaje;
+            _avion = avion;
+        }
+
+        /// <summary>
+        /// Constructor de la clase Vuelo
+        /// </summary>
+        /// <param name="fechaAterrizaje"></param>
+        /// <param name="avion"></param>
+        public Vuelo(DateTime fechaAterrizaje, Avion avion)
+        {
             _fechaAterrizaje = fechaAterrizaje;
             _avion = avion;
         }

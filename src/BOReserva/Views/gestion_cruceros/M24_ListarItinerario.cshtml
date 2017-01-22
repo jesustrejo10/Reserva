@@ -1,82 +1,91 @@
-﻿@model BOReserva.Models.gestion_cruceros.VistaListaItinerario
-<div class="box">
-    <div class="box-body">
-        <div class="box-header with-border">
-            <h1 class="box-title"> Listado de Itinerarios</h1>
-            <div class="row">
-                <div class="col-xs-20">
-                    <table style="width:100%;">
-                        <thead>
-                            <tr class="itinerario crTitles" id="listaItinerarios">
-                                <th class="itiNombre">Crucero</th>
-                                <th class="itiItinerario"><b>Ruta</b></th>
-                                <th class="itiFechaI"><b>Fecha Inicio</b></th>
-                                <th class="itiFechaF"><b>Fecha Fin</b></th>
-                            </tr>
-                        </thead>
-                        <tbody class="listItine itinerario">
-                            @{
-                                foreach (var itinerario in Model.itinerarios)
-                                {
-                                    <tr id="@itinerario._fechaInicio">
-                                        <td id=" itinerario." class="itiNombre">@itinerario._crucero </td>
-                                        <td class="itiItinerario">@itinerario._ItinerarioCrucero </td>
-                                        <td class="itiFechaI">@itinerario._fechaInicio </td>
-                                        <td class="itiItinerario">@itinerario._fechaFin </td>
-                                    </tr>
+﻿
+<div class="row">
+    <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
 
-                                }
-                            }
-
-                        </tbody>
-                    </table>
-                </div>
-
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title"><b>Lista de Itinerario</b></h3>
             </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Crucero</th>
+                            <th><b>Ruta</b></th>
+                            <th><b>Fecha Inicio</b></th>
+                            <th><b>Fecha Fin</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @try
+                        {
+                            foreach (var itinerario in Model.itinerarios)
+                            {
+                                <tr id="@itinerario._fechaInicio">
+                                    <td>@itinerario._crucero </td>
+                                    <td>@itinerario._ItinerarioCrucero </td>
+                                    <td>@itinerario._fechaInicio </td>
+                                    <td>@itinerario._fechaFin </td>
+                                </tr>
+
+                            }
+                        }
+                        catch
+                        {
+
+                        }
+
+                </table>
+            </div>
+            <!-- /.box-body -->
         </div>
-        @*<div class="col-xs-2">
-                <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#createCruiser">
-                    <span><i class="fa fa-ship" style="font-size:20px"></i></span>
-                    <br> Crear crucero
-                </button>
-            </div>*@
+        <!-- /.box -->
     </div>
+    <!-- /.col -->
 </div>
 
+<script src="~/Content/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+<script language="javascript" type="text/javascript">
+    table = $('#example1').DataTable();
+</script>
 
 <script>
     $(".cambioItinerario").click(function (e) {
-            e.preventDefault();
-            var fechaInicio = $(this).closest('tr').attr('id');
-            var fkCrucero = $(this).closest('tr').attr('id');
-            var fkRuta = $(this).closest('tr').attr('id');
-            console.log("crucero");
-            console.log(fkCrucero);
-            $.ajax({
-                url: "gestion_cruceros/cambiarEstatusItinerario",
-                data: {
-                    fecha_inicio: fechaInicio,
-                    fk_crucero: fkCrucero,
-                    fk_ruta: fkRuta
-                },
-                type: 'POST',
-                success: function (data) {
-                    $.ajax({
-                        url: '/gestion_cruceros/M24_ListarItinerarios',
-                        type: 'GET',
-                        data: '',
-                        success: function (data, textStatus, jqXHR) {
-                            $("#contenido").empty();
-                            $("#contenido").append(data);
-                        },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            alert(errorThrown);
-                        }
-                    });
-                },
-                error: function (data) {
-                    console.log(data);
-                }
-            });
+        e.preventDefault();
+        var fechaInicio = $(this).closest('tr').attr('id');
+        var fkCrucero = $(this).closest('tr').attr('id');
+        var fkRuta = $(this).closest('tr').attr('id');
+        console.log("crucero");
+        console.log(fkCrucero);
+        $.ajax({
+            url: "gestion_cruceros/cambiarEstatusItinerario",
+            data: {
+                fecha_inicio: fechaInicio,
+                fk_crucero: fkCrucero,
+                fk_ruta: fkRuta
+            },
+            type: 'POST',
+            success: function (data) {
+                $.ajax({
+                    url: '/gestion_cruceros/M24_ListarItinerarios',
+                    type: 'GET',
+                    data: '',
+                    success: function (data, textStatus, jqXHR) {
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+            },
+            error: function (data) {
+                console.log(data);
+            }
         });
+    });
 </script>
