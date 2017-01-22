@@ -423,45 +423,5 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
         }
 
         #endregion
-
-        #region Metodos Auxiliares
-
-        public int EjecutarStoredProcedureTuplasFilasAfectadas(string query, List<Parametro> parametros)
-        {
-            SqlCommand comando;
-            try
-            {
-                Conectar();
-                DataTable dataTable = new DataTable();
-                using (conexion)
-                {
-
-                    comando = new SqlCommand(query, conexion);
-                    comando.CommandType = CommandType.StoredProcedure;
-                    AsignarParametros(parametros);
-                    conexion.Open();
-                    using (SqlDataAdapter dataAdapter = new SqlDataAdapter(comando))
-                    {
-                        return dataAdapter.Fill(dataTable);
-                    }
-                }
-
-
-            }
-            catch (SqlException ex)
-            {
-                throw new ExceptionBD(RecursoBD.Cod_Error_General, RecursoBD.Error_General, ex);
-            }
-            catch (Exception ex)
-            {
-                throw new ExceptionBD(RecursoBD.Cod_Error_General, RecursoBD.Error_General, ex);
-            }
-            finally
-            {
-                Desconectar();
-            }
-
-        }
-        #endregion
     }
 }

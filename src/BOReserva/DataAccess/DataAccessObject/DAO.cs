@@ -292,6 +292,49 @@ namespace BOReserva.DataAccess.DataAccessObject
                 Desconectar();
             }
         }
+
+
+        /// <summary>
+        /// Metodo para ejecular un procedimiento almacenado en la bd y retornar el numero de filas afectadas
+        /// </summary>
+        /// <param name="query">Cadena con el query a ejecutar</param>
+        /// <param name="parametros">Lista de parametros que se le va a asociar</param>
+        /// <returns></returns>
+        public int EjecutarStoredProcedureTuplasFilasAfectadas(string query, List<Parametro> parametros)
+        {
+            try
+            {
+                Conectar();
+                DataTable dataTable = new DataTable();
+                using (conexion)
+                {
+                    comando = new SqlCommand(query, conexion);
+                    comando.CommandType = CommandType.StoredProcedure;
+                    AsignarParametros(parametros);
+                    conexion.Open();
+                    using (SqlDataAdapter dataAdapter = new SqlDataAdapter(comando))
+                    {
+                        dataAdapter.Fill(dataTable);
+                        return dataAdapter.Update(dataTable); //SIEMPRE retorna 0 por alguna razón
+                    }
+                }
+
+
+            }
+            catch (SqlException ex)
+            {
+                throw new ExceptionBD(RecursoBD.Cod_Error_General, RecursoBD.Error_General, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ExceptionBD(RecursoBD.Cod_Error_General, RecursoBD.Error_General, ex);
+            }
+            finally
+            {
+                Desconectar();
+            }
+
+        }
         #endregion
 
     }
