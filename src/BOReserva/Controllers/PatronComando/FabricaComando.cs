@@ -395,6 +395,14 @@ namespace BOReserva.Controllers.PatronComando
         {
             return new M13_COValidacionRol(id);
         }
+        public static Command<Entidad> crearM13_ConsultarPermisoSeleccionado(int id)
+        {
+            return new M13_COConsultarPermisoSeleccionado(id);
+        }
+        public static Command<String> crearM13_ModificarPermiso(Entidad permiso, int idmodificar)
+        {
+            return new M13_COModificarPermiso(permiso, idmodificar);
+        }
         #endregion
 
         #region M05_Boleto

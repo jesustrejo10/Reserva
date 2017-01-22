@@ -1,4 +1,5 @@
 ﻿using BOReserva.DataAccess.DAO;
+using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.DataAccessObject.M13;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
@@ -163,6 +164,95 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
             catch (SqlException ex)
             {
+                conexion.Close();
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+            }
+        }
+
+        ///<summary>
+        ///Metodo para consultar un permiso especifico
+        ///</summary>
+        ///<returns>Entidad</returns>
+        Entidad IDAO.Consultar(int id)
+        {
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            Permiso permiso = new Permiso();
+            try
+            {
+                conexion.Close();
+                conexion.Open();
+                using (SqlCommand cmd = new SqlCommand(M13_DAOResources.ConsultarPermiso, conexion))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
+                    String nombre;
+                    int idPermiso;
+                    String url;
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        idPermiso = Int32.Parse(reader["mod_det_id"].ToString());
+                        nombre = reader["mod_det_nombre"].ToString();
+                        url = reader["mod_det_url"].ToString();
+                        permiso = new Permiso(idPermiso, nombre, url);
+                    }
+                    cmd.Dispose();
+                    conexion.Close();
+                    return permiso;
+                }
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return null;
+            }
+        }
+
+        ///<summary>
+        ///Metodo para modificar el nombre de un rol existente
+        ///</summary>
+        ///<returns>Entidad</returns>
+        Entidad IDAO.Modificar(Entidad e)
+        {
+            Permiso permiso = (Permiso)e;
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            try
+            {
+                conexion.Open();
+                using (SqlCommand cmd = new SqlCommand(M13_DAOResources.ModificarPermiso, conexion))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@id", permiso._id);
+                    cmd.Parameters.AddWithValue("@nombre", permiso.nombrePermiso);
+                    cmd.Parameters.AddWithValue("@url", permiso.url);
+                    cmd.ExecuteNonQuery();
+                    cmd.Dispose();
+                    conexion.Close();
+                    permiso.nombrePermiso = "1";
+                    Entidad resultado = permiso;
+                    return resultado;
+                }
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine("ENTRO EN EL CATCH");
+                Debug.WriteLine(ex.ToString());
                 conexion.Close();
                 return null;
             }

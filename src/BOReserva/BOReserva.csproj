@@ -285,9 +285,11 @@
     <Compile Include="Controllers\List.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COVisualizarHoteles.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COAgregarPermiso.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COConsultarPermisoSeleccionado.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COConsultarPermisosNoAsociados.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COConsultarPermisosUsuario.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COConsultarListaPermisos.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COModificarPermiso.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COValidacionRol.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COValidacionPermiso.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COEliminarPermiso.cs" />
@@ -1675,6 +1677,7 @@
     <Content Include="Views\gestion_comida_vuelo\M06_EditarPlato.cshtml" />
     <Content Include="Views\gestion_roles\M13_AgregarPermiso.cshtml" />
     <Content Include="Views\gestion_roles\M13_VisualizarPermiso.cshtml" />
+    <Content Include="Views\gestion_roles\M13_ModificarPermiso.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_boletos\M05_VisualizarBoletos.cshtml" />

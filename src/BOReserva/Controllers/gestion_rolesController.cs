@@ -551,5 +551,73 @@ namespace BOReserva.Controllers
             return (Json(borro_si_no));
         }
 
+        /// <summary>
+        /// Metodo para llamar la vista parcial M13_ModificarPermiso
+        /// </summary>
+        /// <param name="idPermiso">pasa el id del permiso</param>
+        /// <returns>Devuelve el objeto del Tipo CModulo_Detallado</returns>
+        public ActionResult M13_ModificarPermiso(int idPermiso)
+        {
+
+            Permiso permiso;
+            CModulo_detallado modelovista = new CModulo_detallado();
+            try
+            {
+                Command<Entidad> comando1 = FabricaComando.crearM13_ConsultarPermisoSeleccionado(idPermiso);
+                permiso = (Permiso)comando1.ejecutar();
+
+                modelovista.Nombre = permiso._nombre;
+                modelovista.Url = permiso.url;
+                modelovista.Id = permiso._idPermiso;
+            }
+            catch (SqlException e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error insertando en la BD.";
+                return Json(error);
+
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
+                return Json(error);
+            }
+            return PartialView(modelovista);
+        }
+
+        ///<summary>
+        ///Metodo para modificar roles
+        ///</summary>
+        ///<returns>JsonResult</returns>
+        [HttpPost]
+        public JsonResult ModificarPermiso(int idPermiso, String nombrePermiso, String urlPermiso)
+        {
+            String agrego_si_no;
+            try
+            {
+                CModulo_detallado model = new CModulo_detallado();
+                model.Id = idPermiso;
+                model.Nombre = nombrePermiso;
+                model.Url = urlPermiso;
+                Entidad modificarPermiso = FabricaEntidad.InstanciarPermiso(model);
+                Command<String> comando = FabricaComando.crearM13_ModificarPermiso(modificarPermiso, model.Id);
+                agrego_si_no = comando.ejecutar();
+            }
+            catch (SqlException e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error insertando en la BD.";
+                return Json(error);
+
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                String error = "Error desconocido, contacte con el administrador.";
+                return Json(error);
+            }
+            return (Json(true, JsonRequestBehavior.AllowGet));
+        }
     }
 }

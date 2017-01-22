@@ -133,6 +133,10 @@
     <value>M13_ConsultarListaPermisos</value>
     <comment>Lista los permisos con su url</comment>
   </data>
+  <data name="ConsultarPermiso" xml:space="preserve">
+    <value>M13_ConsultarPermiso</value>
+    <comment>Consulta los datos de un permiso</comment>
+  </data>
   <data name="ConsultarPermisos" xml:space="preserve">
     <value>M13_ConsultarPermisos</value>
     <comment>Lista de los permisos que posee un rol en especifico</comment>
@@ -172,6 +176,10 @@
   <data name="ListarPermisos" xml:space="preserve">
     <value>M13_ListarPermisos</value>
     <comment>Lista de los permisos en general</comment>
+  </data>
+  <data name="ModificarPermiso" xml:space="preserve">
+    <value>M13_ModificarPermiso</value>
+    <comment>Modifica un permiso</comment>
   </data>
   <data name="QuitarPermiso" xml:space="preserve">
     <value>M13_QuitarPermiso</value>

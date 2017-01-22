@@ -97,6 +97,15 @@ namespace BOReserva.DataAccess.DataAccessObject.M13 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to M13_ConsultarPermiso.
+        /// </summary>
+        internal static string ConsultarPermiso {
+            get {
+                return ResourceManager.GetString("ConsultarPermiso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to M13_ConsultarPermisos.
         /// </summary>
         internal static string ConsultarPermisos {
@@ -183,6 +192,15 @@ namespace BOReserva.DataAccess.DataAccessObject.M13 {
         internal static string ListarPermisos {
             get {
                 return ResourceManager.GetString("ListarPermisos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M13_ModificarPermiso.
+        /// </summary>
+        internal static string ModificarPermiso {
+            get {
+                return ResourceManager.GetString("ModificarPermiso", resourceCulture);
             }
         }
         
