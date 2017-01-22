@@ -87,8 +87,8 @@ namespace BOReserva.DataAccess.Domain
                 var time1 = vuelos[0]._fechaLlegada.TimeOfDay.ToString();
                 if (vuelos.Count == 2)
                 {
-                    var time2 = vuelos[1]._fechaPartida.TimeOfDay.ToString();
-                    var time3 = vuelos[1]._fechaLlegada.TimeOfDay.ToString();
+                var time2 = vuelos[1]._fechaPartida.TimeOfDay.ToString();
+                var time3 = vuelos[1]._fechaLlegada.TimeOfDay.ToString();
                     _fechaDespegueVuelta = vuelos[1]._fechaPartida.Day + "/" + vuelos[1]._fechaPartida.Month + "/" + vuelos[1]._fechaPartida.Year;
                     _fechaAterrizajeVuelta = vuelos[1]._fechaLlegada.Day + "/" + vuelos[1]._fechaLlegada.Month + "/" + vuelos[1]._fechaLlegada.Year;
                     _horaAterrizajeIda = time2;

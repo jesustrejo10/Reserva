@@ -36,7 +36,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                 query.Parameters.AddWithValue("@compania", crucero._companiaCrucero);
                 query.Parameters.AddWithValue("@capacidad", crucero._capacidadCrucero);
                 query.Parameters.AddWithValue("@imagen", "");
-                
+
                 query.ExecuteNonQuery();
                 
                 //creo un lector sql para la respuesta de la ejecucion del comando anterior               
@@ -63,13 +63,13 @@ namespace BOReserva.DataAccess.DataAccessObject
                 String sql = "SELECT C.* " +
                              "FROM CRUCERO C " +
                              "WHERE C.CRU_ID = " + id;
-
+                
                 SqlCommand cmd = new SqlCommand(sql, conexion);
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
 
                     int idCrucero;
-                    
+
 
                     while (reader.Read())
                     {

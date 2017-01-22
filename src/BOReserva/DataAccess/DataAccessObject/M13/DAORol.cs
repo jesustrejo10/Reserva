@@ -739,7 +739,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
             return listapermisos;
         }
- 
+
 
         ///<summary>
         ///Metodo para consultar los permisos que tiene un usuario

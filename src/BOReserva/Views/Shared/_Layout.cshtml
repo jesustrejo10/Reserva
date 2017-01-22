@@ -118,16 +118,15 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            foreach (int i in ((List
-                            <int>
-                                )Session["Permisos"]))
+                            @foreach (int i in ((List<int>)Session["Permisos"]))
                                 {
                                 if (i == 7)
                                 {
-                                <li id="m02_agregaravion"><a href="#"> Agregar </a></li>}
+                                <li id="m02_agregaravion"><a href="#"><i class="fa fa-plus-square-o"></i> Agregar </a></li>}
                                 if (i == 8)
                                 {
-                                <li id="m02_VisualizarAvion"><a href="#"> Visualizar </a></li>}}
+                                <li id="m02_VisualizarAvion"><a href="#"><i class="fa fa-eye"></i> Visualizar </a></li>}
+                            }
                                 @*<li id="m02_agregaravion"><a href="#" class="wait"><i class="fa fa-plus-square-o"></i> Agregar </a></li>
                                     <li id="m02_VisualizarAvion"><a href="#" class="wait"><i class="fa fa-eye"></i>Visualizar </a></li>*@
                         </ul>

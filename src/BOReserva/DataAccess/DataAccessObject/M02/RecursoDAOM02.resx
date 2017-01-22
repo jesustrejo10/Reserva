@@ -117,64 +117,72 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="parametroRevisionId" xml:space="preserve">
-    <value>rev_id</value>
-    <comment>Parametro usado en los procedimientos almacenados.</comment>
+  <data name="avi_cap_equipaje" xml:space="preserve">
+    <value>@avi_cap_equipaje</value>
+    <comment>Nombre del Atributo en la Base de Datos: Capacidad Equipaje</comment>
   </data>
-  <data name="parametroRevisionMensaje" xml:space="preserve">
-    <value>rev_mensaje</value>
-    <comment>Parametro usado en los procedimientos almacenados.</comment>
+  <data name="avi_disponibilidad" xml:space="preserve">
+    <value>@avi_disponibilidad</value>
+    <comment>Nombre del Atributo en la Base de Datos: Disponible</comment>
   </data>
-  <data name="parametroRevisionTipo" xml:space="preserve">
-    <value>rev_tipo</value>
-    <comment>Parametro usado en los procedimientos almacenados.</comment>
+  <data name="avi_id" xml:space="preserve">
+    <value>@avi_id</value>
+    <comment>Nombre del Atributo en la Base de Datos: ID</comment>
   </data>
-  <data name="parametroRevisionPropietario" xml:space="preserve">
-    <value>rev_fk_propietario</value>
-    <comment>Parametro usado en los procedimientos almacenados.</comment>
+  <data name="avi_matricula" xml:space="preserve">
+    <value>@avi_matricula</value>
+    <comment>Nombre del Atributo en la Base de Datos: Matricula</comment>
   </data>
-  <data name="parametroRevisionReferencia" xml:space="preserve">
-    <value>rev_fk_referencia</value>
-    <comment>Parametro usado en los procedimientos almacenados.</comment>
+  <data name="avi_max_comb" xml:space="preserve">
+    <value>@avi_max_comb</value>
+    <comment>Nombre del Atributo en la Base de Datos: Maximo Combustible</comment>
   </data>
-  <data name="parametroRevisionEstrellas" xml:space="preserve">
-    <value>rev_estrellas</value>
-    <comment>Parametro usado en los procedimientos almacenados.</comment>
+  <data name="avi_max_dist" xml:space="preserve">
+    <value>@avi_max_dist</value>
+    <comment>Nombre del Atributo en la Base de Datos: Maxima Distancia</comment>
   </data>
-  <data name="parametroValoracionId" xml:space="preserve">
-    <value>val_id</value>
-    <comment>Parametro usado en los procedimientos almacenados.</comment>
+  <data name="avi_max_vel" xml:space="preserve">
+    <value>@avi_max_vel</value>
+    <comment>Nombre del Atributo en la Base de Datos: Maxima Velocidad</comment>
   </data>
-  <data name="parametroValoracionRevision" xml:space="preserve">
-    <value>val_fk_revision</value>
-    <comment>Parametro usado en los procedimientos almacenados.</comment>
+  <data name="avi_modelo" xml:space="preserve">
+    <value>@avi_modelo</value>
+    <comment>Nombre del Atributo en la Base de Datos: Modelo</comment>
   </data>
-  <data name="parametroValoracionPunto" xml:space="preserve">
-    <value>val_punto</value>
-    <comment>Parametro usado en los procedimientos almacenados.</comment>
+  <data name="avi_pasajeros_ejecutiva" xml:space="preserve">
+    <value>@avi_pasajeros_ejecutiva</value>
+    <comment>Nombre del Atributo en la Base de Datos: Pasajeros Ejecutiva</comment>
   </data>
-  <data name="parametroValoracionPropietario" xml:space="preserve">
-    <value>val_fk_propietario</value>
-    <comment>Parametro usado en los procedimientos almacenados.</comment>
+  <data name="avi_pasajeros_turista" xml:space="preserve">
+    <value>@avi_pasajeros_turista</value>
+    <comment>Nombre del Atributo en la Base de Datos: Pasajeros Turista</comment>
   </data>
-  <data name="procedimientoBorrarRevision" xml:space="preserve">
-    <value>M20_BorrarRevision</value>
-    <comment>Procedimiento para borrar una revision.</comment>
+  <data name="avi_pasajeros_vip" xml:space="preserve">
+    <value>@avi_pasajeros_vip</value>
+    <comment>Nombre del Atributo en la Base de Datos: Pasajeros VIP</comment>
   </data>
-  <data name="procedimientoGuardarRevision" xml:space="preserve">
-    <value>M20_GuardarRevision</value>
-    <comment>Procedimiento para guardar o modificar una revision.</comment>
+  <data name="ProcedimientoAgregarAvion" xml:space="preserve">
+    <value>M02_AgregarAvion</value>
+    <comment>Nombre del Procedimiento para Agregar Avion</comment>
   </data>
-  <data name="procedimientoGuardarValoracion" xml:space="preserve">
-    <value>M20_GuardarValoracion</value>
-    <comment>Procedimiento para guardar o modificar una valoracion.</comment>
+  <data name="ProcedimientoConsultarAvion" xml:space="preserve">
+    <value>M02_ConsultarAvion</value>
+    <comment>Nombre del Procedimiento para ConsultarAvion</comment>
   </data>
-  <data name="procedimientoObtenerRevisionesPorReferencia" xml:space="preserve">
-    <value>M20_ObtenerRevisionesPorReferencia</value>
-    <comment>Procedimiento para obtener las revisiones de una referencia.</comment>
+  <data name="ProcedimientoDisponibilidad" xml:space="preserve">
+    <value>M02_Disponibilidad</value>
+    <comment>Nombre del Procedimiento para Disponibilidad</comment>
   </data>
-  <data name="procedimientoObtenerValoracionPorReferencia" xml:space="preserve">
-    <value>M20_ObtenerValoracionPorReferencia</value>
-    <comment>Procedimiento para obtener la valoracion de una referencia.</comment>
+  <data name="ProcedimientoEliminarAvion" xml:space="preserve">
+    <value>M02_EliminarAvion</value>
+    <comment>Nombre del Procedimiento para EliminarAvion</comment>
+  </data>
+  <data name="ProcedimientoModificarAvion" xml:space="preserve">
+    <value>M02_ModificarAvion</value>
+    <comment>Nombre del Procedimiento para Modificar</comment>
+  </data>
+  <data name="ProcedimientoConsultarID" xml:space="preserve">
+    <value>M02_ConsultarID</value>
+    <comment>Nombre del Procedimiento para ConsultaID</comment>
   </data>
 </root>
