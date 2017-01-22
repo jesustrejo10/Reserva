@@ -15,7 +15,7 @@ namespace BOReserva.DataAccess.Domain
         public int _fkCrucero { get; set; }
         public String _nombreCrucero { get; set; }
 
-        public Cabina(int id,String nombre, float precio, String estatus, int crucero)
+        public Cabina(int id, String nombre, float precio, String estatus, int crucero)
         {
             _nombreCabina = nombre;
             _precioCabina = precio;

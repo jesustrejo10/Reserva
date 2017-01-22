@@ -3,92 +3,84 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BOReserva.DataAccess.DAO;
+using BOReserva.DataAccess.Domain;
+using BOReserva.DataAccess.Domain.M14;
 using BOReserva.Models.gestion_cruceros;
+using BOReserva.DataAccess.DataAccessObject;
+using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+using BOReserva.DataAccess.DataAccessObject.M14;
 using NUnit.Framework;
+using BOReserva.Controllers.PatronComando;
 
 namespace TestUnitReserva.BO.gestion_cruceros
 {
     [TestFixture]
     class TestCruceros
     {
-        ConexionBD prueba = new ConexionBD();
-        BOReserva.Controllers.gestion_crucerosController controlador = new BOReserva.Controllers.gestion_crucerosController();
+        private Camarote mockCamarote;
+        private Cabina mockCabina;
+        private Crucero mockCrucero;
+        private Itinerario mockItinerario;
+        DAOCruceros daoCruceros;
 
-        //<summary>
-        // Pruebas para insertar un crucero en la base de datos
-        // Se crea el crucero y es pasado como parámetro a la función    
-        //</summary>
+        /// <summary>
+        /// Metodo que se ejecuta antes que se ejecute cada prueba
+        /// Esta encargado de instanciar el manejadorSQL
+        /// </summary>
+        [SetUp]
+        public void Before()
+        {
+            mockCamarote = new Camarote(400, 2, "Individual", "activo", 15);
+            mockCabina = new Cabina(400,"Interior",99,"activo",2);
+            mockCrucero = new Crucero();
+            daoCruceros = new DAOCruceros();
+
+        }
+        /// <summary>
+        /// Método que se ejecuta cada vez que termina de correr una prueba;
+        /// Se encanga de limpiar las variables utilizadas en la prueba
+        /// </summary>
+        [TearDown]
+        public void After()
+        {
+            mockCamarote = null;
+            mockCabina = null;
+            mockCrucero = null;
+            daoCruceros = null;
+        }
+
+
+
 
         [Test]
-        public void insertarCrucerosTest()
+        public void M14_DaoCruceroInsertarCrucero()
         {
-            CGestion_crucero crucero = new CGestion_crucero();
-            crucero._nombreCrucero = "ABP Travel";
-            crucero._companiaCrucero = "Royal Caribbean";
-            crucero._capacidadCrucero = 1000;
-            //Prueba que al insertar un crucero de la forma correcta, retorna true
-            Boolean insertoCrucero = prueba.insertarCruceros(crucero);
-            Assert.AreEqual(insertoCrucero, true);
+            //Probando caso de exito de la prueba
+            int resultadoAgregar = daoCruceros.Agregar(mockCrucero);
+            Assert.AreEqual(resultadoAgregar, 1);
+            //Probando caso de fallo
+            int resultadoAgregarIncorrecto = daoCruceros.Agregar(null);
+            Assert.AreEqual(resultadoAgregarIncorrecto, 0);
         }
 
-        //<summary>
-        // Pruebas para insertar una cabina en la base de datos
-        // Se crea la cabina y es pasado como parámetro a la función    
-        //</summary>
-        public void insertarCabinaTest()
+        [Test]
+        public void M14_DaoCruceroConsultarTodos()
         {
-            CGestion_cabina cabina = new CGestion_cabina();
-            cabina._nombreCabina = "Ocean View";
-            cabina._precioCabina= 100;
-            cabina._fkCrucero = 1;
-            //Prueba que al insertar una cabina de la forma correcta, retorna true
-            Boolean insertoCabina = prueba.insertarCabinas(cabina);
-            Assert.AreEqual(insertoCabina, true);
+            Dictionary<int, Entidad> Cruceros = daoCruceros.ConsultarTodos();
+            Assert.NotNull(Cruceros);
+            Crucero e = (Crucero)Cruceros[51];
+            Assert.AreEqual(e._nombreCrucero, "Crucero Dev");
         }
 
-        //<summary>
-        // Pruebas para insertar un camarote en la base de datos
-        // Se crea el camarote y es pasado como parámetro a la función    
-        //</summary>
-        public void insertarCamaroteTest()
+        [Test]
+        public void M14_ComandoConsultarTodos()
         {
-            CGestion_camarote camarote = new CGestion_camarote();
-            camarote._tipoCama = "Individual";
-            camarote._cantidadCama = 2;
-            camarote._fkCabina = 1;
-            //Prueba que al insertar un camarote de la forma correcta, retorna true
-            Boolean insertoCabina = prueba.insertarCamarote(camarote);
-            Assert.AreEqual(insertoCabina, true);
-        }
-
-        //<summary>
-        // Pruebas para insertar un itinerario en la base de datos
-        // Se crea el camarote y es pasado como parámetro a la función    
-        //</summary>
-        public void insertarItinerarioTest()
-        {
-            CGestion_itinerario itinerario = new CGestion_itinerario();
-            itinerario._fkCrucero = 1;
-            itinerario._fkRuta = 2;
-            itinerario._fechaInicio = DateTime.Parse("2016-08-12");
-            itinerario._fechaFin = DateTime.Parse("2016-12-12");
-            //Prueba que al insertar un itinerario de la forma correcta, retorna true
-            Boolean insertoCabina = prueba.insertarItinerario(itinerario);
-            Assert.AreEqual(insertoCabina, true);
-        }
-
-        //<summary>
-        // Prueba que se retorne una lista con un crucero agregado
-        //</summary>
-        public void listarCrucerosTest()
-        {
-            List<CGestion_crucero> listaCruceros = new List<CGestion_crucero>();
-            CGestion_crucero crucero = new CGestion_crucero();
-            crucero._nombreCrucero = "Good travel";
-            crucero._companiaCrucero = "MGS";
-            crucero._capacidadCrucero = 2;
-            listaCruceros.Add(crucero);
-            Assert.AreEqual(listaCruceros, prueba.listarCruceros());
+            M14_COVisualizarCruceros comando = new M14_COVisualizarCruceros();
+            Dictionary<int, Entidad> cruceros = comando.ejecutar();
+            Assert.NotNull(cruceros);
+            Crucero e = (Crucero)cruceros[51];
+            Assert.AreEqual(e._nombreCrucero, "Crucero Dev");
         }
     }
 }
