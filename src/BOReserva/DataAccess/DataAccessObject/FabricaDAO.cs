@@ -194,6 +194,15 @@ namespace BOReserva.DataAccess.DataAccessObject
         }
 
         #endregion
+
+        #region M02_Gestion_Avion
+
+        public static DAO instanciarDaoAvion()
+        {
+            return new DAOAvion();
+        }
+
+        #endregion
     }
 
 }

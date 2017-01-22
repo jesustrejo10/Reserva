@@ -4,6 +4,8 @@ using BOReserva.Models.gestion_hoteles;
 using BOReserva.Models.gestion_reclamos;
 using BOReserva.Models.gestion_restaurantes;
 using BOReserva.Models.gestion_roles;
+//using BOReserva.DataAccess.Domain.M06;
+using BOReserva.Models.gestion_aviones;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -237,9 +239,9 @@ namespace BOReserva.DataAccess.Domain
         #region M08_Automoviles
 
         public static Entidad CrearAutomovil(String matricula, String modelo, String fabricante, String anio, String tipovehiculo,
-                                             String kilometraje, String cantpasajeros, String preciocompra, String precioalquiler,
-                                             String penalidaddiaria, String fecharegistro, String color, String disponibilidad,
-                                             String transmision, String pais, String ciudad, String fk_ciudad)
+                                                  String kilometraje, String cantpasajeros, String preciocompra, String precioalquiler,
+                                                  String penalidaddiaria, String fecharegistro, String color, String disponibilidad,
+                                                  String transmision, String pais, String ciudad, String fk_ciudad)
         {
             return new Automovil( matricula,  modelo, fabricante, anio, tipovehiculo,
                                   kilometraje, cantpasajeros, preciocompra, precioalquiler,
@@ -340,6 +342,54 @@ namespace BOReserva.DataAccess.Domain
         {
             return new Permiso(id, nombre);
         }
+
+        #region M02_Gestion_Avion
+
+        public static Entidad InstanciarAvion(int id, string matricula, string modelo, int capacidadTurista, int capacidadEjecutiva, int capacidadVIP, float capacidadEquipaje, float distanciaMaximaVuelo, float velocidadMaxima, float capacidadCombustible, int disponibilidad)
+            {
+           
+            return new Avion();
+        }
+
+        public static Entidad InstanciarAvion(CAgregarAvion model)
+        {
+
+         
+            string matricula = model._matriculaAvion;
+            string modelo = model._modeloAvion;
+            int capacidadturistica = model._capacidadPasajerosTurista;
+            int capacidadEjecutiva = model._capacidadPasajerosEjecutiva;
+            int capacidadVIP = model._capacidadPasajerosVIP;
+            float capacidadEquipaje = model._capacidadEquipaje;
+            float distanciaMaximaVuelo = model._distanciaMaximaVuelo;
+            float velocidadMaxima = model._velocidadMaximaDeVuelo;
+            float capacidadCombustible = model._capacidadMaximaCombustible;
+            int disponibilidad = model._disponibilidad;
+
+
+
+            return new Avion(matricula, modelo, capacidadturistica, capacidadEjecutiva, capacidadVIP, capacidadEquipaje, distanciaMaximaVuelo, velocidadMaxima, capacidadCombustible,disponibilidad);
+        }
+
+        public static Entidad InstanciarAvion(CModificarAvion model)
+        {
+
+            string matricula = model._matriculaAvion;
+            string modelo = model._modeloAvion;
+            int capacidadturistica = model._capacidadPasajerosTurista;
+            int capacidadEjecutiva = model._capacidadPasajerosEjecutiva;
+            int capacidadVIP = model._capacidadPasajerosVIP;
+            float capacidadEquipaje = model._capacidadEquipaje;
+            float distanciaMaximaVuelo = model._distanciaMaximaVuelo;
+            float velocidadMaxima = model._velocidadMaximaDeVuelo;
+            float capacidadCombustible = model._capacidadMaximaCombustible;
+            int disponibilidad = model._disponibilidad;
+
+
+            return new Avion(matricula, modelo, capacidadturistica, capacidadEjecutiva, capacidadVIP, capacidadEquipaje, distanciaMaximaVuelo, velocidadMaxima, capacidadCombustible, disponibilidad);
+       
+        }
+        #endregion
 
         public static Entidad crearModulo(int id, String nombre)
         {
