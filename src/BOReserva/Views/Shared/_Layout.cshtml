@@ -41,16 +41,6 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-<<<<<<< HEAD
-=======
-
-
-    <link href="~/Views/gestion_restaurantes/ccs/M10.css" rel="stylesheet" />
-    <!-- CIERRE DE SESION AUTOMATICO MODULO 1 INGRESO SEGURIDAD NO TOCAR-->
-    <script src="../../Scripts/Scripts_Ingreso_Seguridad/Logout.js"></script>
-
-</head>
->>>>>>> 447ed41e335bfed37c27187ff94407374b6cf4f2
 
 
     <link href="~/Views/gestion_restaurantes/ccs/M10.css" rel="stylesheet" />
@@ -134,6 +124,7 @@
                                     if (i == "Agregar aviones")
                                     {
                                 <li id="m02_agregaravion"><a href="#"> Agregar </a></li>}
+
                                     if (i == "Visualizar aviones")
                                     {
                                 <li id="m02_VisualizarAvion"><a href="#"> Visualizar </a></li>}}*@
@@ -150,14 +141,14 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            @foreach (int i in ((List<int>)Session["Permisos"]))
+                            @foreach (string i in ((List<string>)Session["Permisos"]))
                             {
-                                if (i == 9)
+                                if (i == "Agregar rutas")
                                 {
-                                    <li id="m03AgregarRuta"><a href="#"><i class="fa fa-plus-square-o"></i>Crear</a></li>}
-                                if (i == 10)
+                            <li id="m03AgregarRuta"><a href="#"><i class="fa fa-plus-square-o"></i>Crear</a></li>}
+                                if (i == "Visualizar rutas")
                                 {
-                                    <li id="m03VisualizarRutas"><a href="#"><i class="fa fa-eye"></i>Visualizar</a></li>}
+                            <li id="m03VisualizarRutas"><a href="#"><i class="fa fa-eye"></i>Visualizar</a></li>}
 
                             }
                         </ul>
@@ -172,12 +163,12 @@
                         </a>
                         <ul class="treeview-menu">
 
-                            @foreach (int i in ((List<int>)Session["Permisos"]))
+                            @foreach (string i in ((List<string>)Session["Permisos"]))
                             {
-                                if (i == 31)
+                                if (i == "Crear vuelo")
                                 {
-                                    <li id="m04_crearvuelo"><a href="#"> Crear </a></li>}
-                                if (i == 32)
+                            <li id="m04_crearvuelo"><a href="#"> Crear </a></li>}
+                                if (i == "Visualizar Vuelo")
                                 {
                             <li id="m04_visualizarvuelo"><a href="#"> Visualizar </a></li>}
                             }
@@ -194,9 +185,9 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            @foreach (int i in ((List<int>)Session["Permisos"]))
+                            @foreach (string i in ((List<string>)Session["Permisos"]))
                             {
-                                if (i == 33)
+                                if (i == "Crear Boleto")
                                 {
                             <li id="m05VerReserva"><a href="#" class="wait">Agregar</a></li>}
 
@@ -216,9 +207,9 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            @foreach (int i in ((List<int>)Session["Permisos"]))
+                            @foreach (string i in ((List<string>)Session["Permisos"]))
                             {
-                                if (i == 27)
+                                if (i == "Check in")
                                 {
                             <li id="m05CheckIn"><a href="#" class="wait">Pase Abordaje</a></li>}
                                 if (i == "Registro equipaje")
@@ -237,12 +228,12 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            @foreach (int i in ((List<int>)Session["Permisos"]))
+                            @foreach (string i in ((List<string>)Session["Permisos"]))
                             {
-                                if (i == 25)
+                                if (i == "Gestion restaurantes")
                                 {
-                                    <li id="agregarRestaurantes"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar Restaurante</a></li>}
-                                if (i == 24)
+                            <li id="agregarRestaurantes"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar Restaurante</a></li>}
+                                if (i == "Ver restaurantes")
                                 {
                             <li id="verRestaurantes"><a href="#"><i class="fa fa-eye"></i>Visualizar Restaurantes</a></li>}
                             }
@@ -258,11 +249,10 @@
                         </a>
                         <ul class="treeview-menu">
 
-                            @foreach (int i in ((List<int>)Session["Permisos"]))
+                            @foreach (string i in ((List<string>)Session["Permisos"]))
                             {
-                                if (i == 13)
+                                if (i == "Gestion comida")
                                 {
-
                             <li id="gestionComida"><a href="#">Agregar</a></li>
 
                                 }
@@ -278,13 +268,6 @@
                             <li id="visualizarVuelosComidas"><a href="#">Visualizar Vuelos-Comidas</a></li>
                             <li id="visualizarComidas"><a href="#">Visualizar</a></li>
 
-                                @*<li id="editarComida"><a href="#"><i class="fa fa-edit"></i>Editar</a></li>
-                                    <li id="gestionComidaVuelo"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar por Vuelo</a></li>*@
-                            if (i == 14)
-                            {
-                                <li id="gestionComidaVuelo"><a href="#">Agregar a Vuelo</a></li>
-                                <li id="visualizarVuelosComidas"><a href="#">Visualizar Vuelos-Comidas</a></li>
-                                <li id="visualizarComidas"><a href="#">Visualizar</a></li>
                                 }
                             }
 
@@ -307,12 +290,9 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            @foreach (int i in ((List<int>)Session["Permisos"]))
+                            @foreach (string i in ((List<string>)Session["Permisos"]))
                             {
-                                if (i == 11)
-                                {
-                                    <li id="m08AgregarAutomovil"><a href="#">Agregar</a></li>}
-                                if (i == 12)
+                                if (i == "Agregar automovil")
                                 {
                             <li id="m08AgregarAutomovil"><a href="#">Agregar</a></li>}
                                 if (i == "Visualizar automovil")
@@ -333,12 +313,9 @@
                         </a>
                         <ul class="treeview-menu">
 
-                            @foreach (int i in ((List<int>)Session["Permisos"]))
+                            @foreach (string i in ((List<string>)Session["Permisos"]))
                             {
-                                if (i == 18)
-                                {
-                                    <li id="agregarOferta"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar Oferta</a></li>}
-                                if (i == 21)
+                                if (i == "Agregar ofertas")
                                 {
                             <li id="agregarOferta"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar Oferta</a></li>}
                                 if (i == "Agregar paquete")
@@ -346,8 +323,8 @@
                             <li id="agregarPaquete"><a href="#"><i class="fa fa-plus-square-o"></i>Agregar Paquete</a></li>}
                                 if (i == "Consultar ofertas")
                                 {
-                                    <li id="consultarOferta"><a href="#"><i class="fa fa-eye"></i>Visualizar Oferta</a></li>}
-                                if (i == 22)
+                            <li id="consultarOferta"><a href="#"><i class="fa fa-eye"></i>Visualizar Oferta</a></li>}
+                                if (i == "Modificar paquete")
                                 {
                             <li id="consultarPaquete"><a href="#"><i class="fa fa-eye"></i>Visualizar Paquete</a></li>}
                             }
@@ -386,21 +363,15 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            @foreach (int i in ((List<int>)Session["Permisos"]))
+                            @foreach (string i in ((List<string>)Session["Permisos"]))
                             {
-                                if (i == 29)
+                                if (i == "Agregar Rol")
                                 {
-                                    <li id="m13AgregarRol"><a href="#">Agregar Rol</a></li>}
-                                if (i == 30)
+
+                            <li id="m13AgregarRol"><a href="#">Agregar</a></li>}
+                                if (i == "Visualizar Rol")
                                 {
-                                    <li id="m13VisualizarRol"><a href="#">Visualizar Roles</a></li>}
-                                if (i == 47)
-                                {
-                                    <li id="m13AgregarPermiso"><a href="#">Agregar Permiso</a></li>}
-                                if (i == 49)
-                                {
-                                    <li id="m13VisualizarPermiso"><a href="#">Visualizar Permisos</a></li>
-								}
+                            <li id="m13VisualizarRol"><a href="#">Visualizar</a></li>}
                             }
                         </ul>
                     </li>
@@ -444,7 +415,7 @@
                             <li id="m24_agregarcamarote"><a href="#"> Agregar Camarote </a></li>
                             <li id="m24_listarcamarotes"><a href="#"> Visualizar Camarote</a></li>
                             <li id="m24_agregaritinerario"><a href="#"> Agregar Itinerario </a></li>
-                            <li id="m24_listaritinerario"><a href="#"> Visualizar Itinerarios </a></li>*@
+                            <li id="m24_listaritinerario"><a href="#"> Visualizar Itinerarios </a></li>
 
                         </ul>
                     </li>
@@ -458,14 +429,14 @@
                         </a>
                         <ul class="treeview-menu">
 
-                            @foreach (int i in ((List<int>)Session["Permisos"]))
+                            @foreach (string i in ((List<string>)Session["Permisos"]))
                             {
-                                if (i == 16)
+                                if (i == "Crear Hoteles")
                                 {
 
                             <li id="M09_crear_hotel"><a href="#">Agregar</a></li>
                                 }
-                                if (i == 41)
+                                if (i == "Consultar Hotel")
                                 {
                             <li id="M09_visualizar_hoteles"><a href="#">Visualizar</a></li>
                                 }
