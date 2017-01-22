@@ -43,7 +43,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             try
             {
                 lista.Add(FabricaDAO.asignarParametro("@com_vue_id", SqlDbType.Int, comida._id.ToString(), false));
-                lista.Add(FabricaDAO.asignarParametro(RecursoM06.com_nombre, SqlDbType.VarChar, comida._comida, false));
+                lista.Add(FabricaDAO.asignarParametro(RecursoM06.com_vue_fk_comida, SqlDbType.Int, comida._comida, false));
                 lista.Add(FabricaDAO.asignarParametro("@com_vue_cantidad", SqlDbType.Int, comida._cantidad.ToString(), false));
 
                 EjecutarStoredProcedure(RecursoM06.procedimientoAgregarComidaVuelo, lista);

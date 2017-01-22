@@ -149,6 +149,18 @@ namespace BOReserva.DataAccess.DataAccessObject.M06 {
             }
         }
 
+
+        /// <summary>
+        ///   Looks up a localized string similar to @com_vue_fk_comida.
+        /// </summary>
+        internal static string com_vue_fk_comida
+        {
+            get
+            {
+                return ResourceManager.GetString("com_vue_fk_comida", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to @com_nombre_consultar.
         /// </summary>
