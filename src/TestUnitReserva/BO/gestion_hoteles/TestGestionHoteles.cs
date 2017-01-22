@@ -265,15 +265,34 @@ namespace TestUnitReserva.BO.gestion_hoteles
             Assert.AreEqual(prueba._direccion, "prueba");
             Assert.AreEqual(prueba._disponibilidad, 1);
             Assert.AreEqual(prueba._pais, "Venezuela");
-
+            CManejadorSQL_Hoteles listar = new CManejadorSQL_Hoteles();
            List<CHotel> pru=  prueba.MListarHoteles();
+           Assert.AreEqual(pru, listar.MListarHotelesBD());
+
 
         }
         [Test]
         public void CModificarHotel()
         {
-            CModificarHotel pruena = new CModificarHotel();
-            //seguir 
+            CModificarHotel prueba = new CModificarHotel();
+            prueba._capacidadHabitacion = 4;
+            prueba._ciudad = "Caracas";
+            prueba._clasificacion = 5;
+            prueba._direccion="prueba";
+            prueba._email = "email@email.com";
+            prueba._nombre="prueba";
+            prueba._paginaWeb="www.prueba.com";
+            prueba._pais="venezuela";
+            prueba._precioHabitacion=200;
+            Assert.AreEqual(prueba._capacidadHabitacion, 4);
+            Assert.AreEqual(prueba._ciudad, "Caracas"); 
+            Assert.AreEqual(prueba._nombre, "prueba");
+            Assert.AreEqual(prueba._paginaWeb, "www.prueba.com");
+            Assert.AreEqual(prueba._email, "email@gmail.com");
+            Assert.AreEqual(prueba._direccion, "prueba");
+            Assert.AreEqual(prueba._clasificacion, 5);
+            Assert.AreEqual(prueba._pais, "Venezuela");
+
         }
         [Test]
         public void CVerHotel()
