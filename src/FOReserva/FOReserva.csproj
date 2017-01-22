@@ -238,7 +238,9 @@
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReclamo.cs" />
     <Compile Include="DataAccess\Domain\Entidad.cs" />
     <Compile Include="DataAccess\Domain\FabricaEntidad.cs" />
+    <Compile Include="DataAccess\Domain\Lugar.cs" />
     <Compile Include="DataAccess\Domain\Reclamo.cs" />
+    <Compile Include="DataAccess\Domain\Restaurante.cs" />
     <Compile Include="DataAccess\Model\Connection.cs" />
     <Compile Include="DataAccess\Model\ExceptionBD.cs" />
     <Compile Include="DataAccess\Model\Parametro.cs" />

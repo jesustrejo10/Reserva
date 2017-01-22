@@ -17,5 +17,12 @@ namespace FOReserva.DataAccess.Domain
             return new List<Entidad>();
         }
 
+        #region M21_Reserva_Restaurant
+
+        public static Entidad InstanciarRestaurante(string direccion, string descripcion, string apertura, string cierre, Lugar ciudad){
+            return new Restaurante(direccion, descripcion, apertura, cierre, ciudad);
+        }
+
+        #endregion
     }
 }
