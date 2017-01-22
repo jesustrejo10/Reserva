@@ -254,11 +254,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M03
 
                 if (rutas.ValidarRuta(ruta))
                 {
-                  //  con.Open();
-                  //  SqlCommand query = new SqlCommand("M03_AgregarRuta", con);
-                  //  query.CommandType = CommandType.StoredProcedure;
 
-                    //INTENTO abrir la conexion
                     conexion.Open();
                     SqlCommand cmd = new SqlCommand("M03_AgregarRuta", conexion);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -280,18 +276,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M03
                     SqlDataReader lector = cmd.ExecuteReader();
 
 
-                  //  query.Parameters.Add("@ciudadOrigenRuta", SqlDbType.VarChar).Value = strOri[0];
-                  //  query.Parameters.Add("@paisOrigenRuta", SqlDbType.VarChar).Value = strOri[1];
-                  //  query.Parameters.Add("@ciudadDestinoRuta", SqlDbType.VarChar).Value = strDes[0];
-                  //  query.Parameters.Add("@paisDestinoRuta", SqlDbType.VarChar).Value = strDes[1];
-                  //  query.Parameters.Add("@tipoRuta", SqlDbType.VarChar).Value = ruta._tipo;
-                  //  query.Parameters.Add("@estadoRuta", SqlDbType.VarChar).Value = ruta._status;
-                  //  query.Parameters.Add("@distanciaRuta", SqlDbType.Int).Value = ruta._distancia;
-
-                  //  query.ExecuteNonQuery();
-
-                    //creo un lector sql para la respuesta de la ejecucion del comando anterior               
-                   // SqlDataReader lector = query.ExecuteReader();
+                  
 
                     lector.Close();
                     conexion.Close();
