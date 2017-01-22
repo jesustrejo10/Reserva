@@ -1,4 +1,4 @@
-﻿using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
 using System;

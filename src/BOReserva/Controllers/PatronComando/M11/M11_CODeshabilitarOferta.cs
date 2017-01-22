@@ -1,5 +1,6 @@
 using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+using BOReserva.DataAccess.DataAccessObject.M11;
 using BOReserva.DataAccess.Domain;
 using System;
 using System.Collections.Generic;
@@ -22,17 +23,17 @@ namespace BOReserva.Controllers.PatronComando.M11
             this._oferta._id = id;
         }
 
-      /*  public override String ejecutar()
+        public override String ejecutar()
         {
             DAOOferta daoOferta = (DAOOferta)FabricaDAO.instanciarDaoOferta();
             String test = daoOferta.eliminarOferta(_oferta._id);
             return test;
-        } */
+        } 
 
-        public override String ejecutar()
+    /*    public override String ejecutar()
         {
 
             return null; //por ahora porque lo de arriba es lo que se debe descomentar
-        } 
+        } */
     }
 }

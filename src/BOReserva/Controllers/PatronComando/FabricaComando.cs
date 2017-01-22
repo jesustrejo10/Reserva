@@ -132,7 +132,7 @@ namespace BOReserva.Controllers.PatronComando
         }
         public static Command<String> crearM16AgregarReclamo(Entidad e)
         {
-
+        
             return new M16_COAgregarReclamo((Reclamo)e);
 
         }
@@ -382,7 +382,7 @@ namespace BOReserva.Controllers.PatronComando
         /// <summary>
         /// Metodo que recibe un comando para Crear, Actualizar, Eliminar o Consultar
         /// la variable comando recibe comandosGlobales.CREAR, comandosGlobales.ELIMINAR
-        /// comandosGlobales.ACTUALIZAR, comandosGlobales.CONSULTAR  
+        /// comandosGlobales.ACTUALIZAR, comandosGlobales.CONSULTAR 
         /// </summary>
         /// <param name="comando"></param>
         /// <param name="comandoR"></param>
@@ -550,6 +550,21 @@ namespace BOReserva.Controllers.PatronComando
             return new M11_COVisualizarOfertas();
 
         }
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M11_COConsultarOferta
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M11_COConsultarOferta.
+        /// </returns>
+        public static Command<Entidad> crearM11ConsultarOferta(int id)
+        {
+
+            return new M11_COConsultarOferta(id);
+
+        }
+
         /// <summary>
         /// Instancia el comando VisualizarPaquete
         /// </summary>
@@ -561,9 +576,11 @@ namespace BOReserva.Controllers.PatronComando
 
         }
         #endregion
+
     }
+       
+}
         
-  }
 
 
    
