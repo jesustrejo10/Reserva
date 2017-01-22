@@ -76,12 +76,22 @@ namespace BOReserva.DataAccess.DataAccessObject.M03
                 //creo un lector sql para la respuesta de la ejecucion del comando anterior               
                 SqlDataReader lector = query.ExecuteReader();
 
-                if (!lector.HasRows)
-                    return true;
-                else
-                    return false;
 
-                lector.Close();
+                if (!lector.HasRows)
+                {
+                    conexion.Close();
+                    lector.Close();
+                    return true;
+
+                }
+                else
+                {
+                    conexion.Close();
+                    lector.Close();
+                    return false;
+                }
+
+                
 
 
             }
@@ -155,7 +165,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M03
                 //Inicializo la conexion con el string de conexion
                 //INTENTO abrir la conexion
                 conexion.Open();
-                String query = "SELECT l.lug_nombre as ciudad, ll.lug_nombre as pais,r.rut_id as idruta from Lugar l, Lugar ll,ruta r where l.lug_FK_lugar_id = ll.lug_id and r.rut_FK_lugar_origen = l.lug_id";
+                String query = "SELECT l.lug_nombre as ciudad, ll.lug_nombre as pais, l.lug_id as idlugar from Lugar l, Lugar ll where l.lug_FK_lugar_id = ll.lug_id ";
 
                 SqlCommand cmd = new SqlCommand(query, conexion);
 
@@ -165,12 +175,12 @@ namespace BOReserva.DataAccess.DataAccessObject.M03
                 while (lector.Read())
                 {
                     lugar = lector["ciudad"].ToString() + " - " + lector["pais"].ToString();
-                    int id = Int32.Parse(lector["idruta"].ToString());
-                    Ruta lugarO = new Ruta();
-                    lugarO._origenRuta = lugar;
-                    lugarO._idRuta = id;
+                    int id = Int32.Parse(lector["idlugar"].ToString());
+                    Ciudad lugarO = new Ciudad();
+                    lugarO._nombre = lugar;
+                    lugarO._id = id;
 
-                    listaLugares.Add(lugarO._idRuta,lugarO);
+                    listaLugares.Add(lugarO._id,lugarO);
                 }
                 //cierro el lector
                 lector.Close();
@@ -188,12 +198,10 @@ namespace BOReserva.DataAccess.DataAccessObject.M03
                 throw e;
             }
         }
-        public Dictionary<int, Entidad> consultarDestinos(string origen)
+        public Dictionary<int, Entidad> consultarDestinos()
         {
-            String[] strOri = origen.Split(new[] { " - " }, StringSplitOptions.None);
             var lugares = new List<String>();
-            Dictionary<int, Entidad> listaLugares = new Dictionary<int, Entidad>();
-            //puedo usar Singleton
+            Dictionary<int, Entidad> listaDestinos = new Dictionary<int, Entidad>();
             SqlConnection conexion = Connection.getInstance(_connexionString);
             String lugar;
             try
@@ -201,7 +209,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M03
                 //Inicializo la conexion con el string de conexion
                 //INTENTO abrir la conexion
                 conexion.Open();
-                String query = "SELECT l.lug_nombre as ciudad, ll.lug_nombre as pais from Lugar l, Lugar ll where l.lug_FK_lugar_id = ll.lug_id  and l.lug_nombre != '" + strOri[0] + "'";
+                String query = "SELECT l.lug_nombre as ciudad, ll.lug_nombre as pais, l.lug_id as idciudad from Lugar l, Lugar ll where l.lug_FK_lugar_id = ll.lug_id ";
                 SqlCommand cmd = new SqlCommand(query, conexion);
                 SqlDataReader lector = cmd.ExecuteReader();
                 while (lector.Read())
@@ -209,12 +217,18 @@ namespace BOReserva.DataAccess.DataAccessObject.M03
                     lugar = lector["ciudad"].ToString() + " - " + lector["pais"].ToString();
 
                     lugares.Add(lugar);
+                    int id = Int32.Parse(lector["idciudad"].ToString());
+                    Ciudad lugarD = new Ciudad();
+                    lugarD._nombre = lugar;
+                    lugarD._id = id;
+
+                    listaDestinos.Add(lugarD._id, lugarD);
                 }
                 //cierro el lector
                 lector.Close();
                 //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
                 conexion.Close();
-                return listaLugares;
+                return listaDestinos;
 
             }
             catch (SqlException e)
@@ -269,30 +283,36 @@ namespace BOReserva.DataAccess.DataAccessObject.M03
                 String[] strDes = ruta._destinoRuta.Split(new[] { " - " }, StringSplitOptions.None);
                 String[] strOri = ruta._origenRuta.Split(new[] { " - " }, StringSplitOptions.None);
 
-                conexion.Open();
-
-                SqlCommand query = new SqlCommand("M03_AgregarRuta", conexion);
 
 
                 if (rutas.ValidarRuta(ruta))
                 {
 
-                    query.CommandType = CommandType.StoredProcedure;
+                    conexion.Open();
+                    SqlCommand cmd = new SqlCommand("M03_AgregarRuta", conexion);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@ciudadOrigenRuta", System.Data.SqlDbType.VarChar, 100);
+                    cmd.Parameters["@ciudadOrigenRuta"].Value = strOri[0];
+                    cmd.Parameters.Add("@paisOrigenRuta", System.Data.SqlDbType.VarChar, 100);
+                    cmd.Parameters["@paisOrigenRuta"].Value = strOri[1];
+                    cmd.Parameters.Add("@ciudadDestinoRuta", System.Data.SqlDbType.VarChar, 100);
+                    cmd.Parameters["@ciudadDestinoRuta"].Value = strDes[0];
+                    cmd.Parameters.Add("@paisDestinoRuta", System.Data.SqlDbType.VarChar, 100);
+                    cmd.Parameters["@paisDestinoRuta"].Value = strDes[1];
+                    cmd.Parameters.Add("@tipoRuta", System.Data.SqlDbType.VarChar, 10);
+                    cmd.Parameters["@tipoRuta"].Value = ruta._tipo;
+                    cmd.Parameters.Add("@estadoRuta", System.Data.SqlDbType.VarChar, 10);
+                    cmd.Parameters["@estadoRuta"].Value = ruta._status;
+                    cmd.Parameters.Add("@distanciaRuta", System.Data.SqlDbType.Int, 100);
+                    cmd.Parameters["@distanciaRuta"].Value = ruta._distancia;
 
-                    query.Parameters.Add("@ciudadOrigenRuta", SqlDbType.VarChar).Value = strOri[0];
-                    query.Parameters.Add("@paisOrigenRuta", SqlDbType.VarChar).Value = strOri[1];
-                    query.Parameters.Add("@ciudadDestinoRuta", SqlDbType.VarChar).Value = strDes[0];
-                    query.Parameters.Add("@paisDestinoRuta", SqlDbType.VarChar).Value = strDes[1];
-                    query.Parameters.Add("@tipoRuta", SqlDbType.VarChar).Value = ruta._tipo;
-                    query.Parameters.Add("@estadoRuta", SqlDbType.VarChar).Value = ruta._status;
-                    query.Parameters.Add("@distanciaRuta", SqlDbType.Int).Value = ruta._distancia;
+                    SqlDataReader lector = cmd.ExecuteReader();
 
-                    query.ExecuteNonQuery();
 
-                    //creo un lector sql para la respuesta de la ejecucion del comando anterior               
-                    SqlDataReader lector = query.ExecuteReader();
+                  
 
                     lector.Close();
+                    conexion.Close();
 
                     return 1;
                 }

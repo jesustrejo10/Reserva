@@ -734,10 +734,10 @@ namespace BOReserva.Controllers.PatronComando
             return new M03_COAgregarRuta((Ruta)e);
 
         }
-        public static Command<Dictionary<int, Entidad>> crearM03_ConsultarDestinos(String origen)
+        public static Command<Dictionary<int, Entidad>> crearM03_ConsultarDestinos()
         {
 
-            return new M03_COConsultarDestinos(origen);
+            return new M03_COConsultarDestinos();
 
         }
         public static Command<Boolean> crearM03_DeshabilitarRuta(int id)
@@ -758,6 +758,7 @@ namespace BOReserva.Controllers.PatronComando
             return new M03_COListarLugares();
 
         }
+
         public static Command<Boolean> crearM03_ModificarRuta(Entidad e, int id)
         {
 
