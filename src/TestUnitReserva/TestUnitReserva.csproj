@@ -58,20 +58,17 @@
     <Reference Include="System.Web.RegularExpressions" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="BO\gestion_automoviles\TestAutomoviles.cs" />
-=======
     <Compile Include="BO\gestion_aviones\TestAviones.cs" />
     <Compile Include="BO\gestion_comida_vuelo\TestComidaVuelo.cs" />
     <Compile Include="BO\gestion_cruceros\TestCruceros.cs" />
->>>>>>> Develop
     <Compile Include="BO\gestion_hoteles\TestGestionHoteles.cs" />
     <Compile Include="BO\gestion_hoteles\TestLugar.cs" />
     <Compile Include="BO\gestion_reclamos_bo_fo\TestGestionReclamosBO.cs" />
     <Compile Include="BO\gestion_restaurantes\M10_PruebaComandos.cs" />
     <Compile Include="BO\gestion_restaurantes\M10_PruebasFabricas.cs" />
     <Compile Include="BO\gestion_restaurantes\M10_TestDaoRestaurant.cs" />
-    <Compile Include="BO\gestion_roles\TestRoles.cs" />
+    <Compile Include="BO\gestion_roles\TestGestionRoles.cs" />
     <Compile Include="BO\gestion_ruta_comercial\TestRutaComercial.cs" />
     <Compile Include="BO\gestion_seguridad_ingreso\TestLogin.cs" />
     <Compile Include="BO\gestion_usuarios\UnitTest1.cs" />

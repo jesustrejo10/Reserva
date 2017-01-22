@@ -17,6 +17,7 @@ using BOReserva.Controllers.PatronComando.M12;
 using BOReserva.DataAccess.Domain.M14;
 using BOReserva.Controllers.PatronComando.M09;
 using BOReserva.Controllers.PatronComando.M11;
+using BOReserva.Controllers.PatronComando.M01;
 using BOReserva.Controllers.PatronComando.M13;
 
 namespace BOReserva.Controllers.PatronComando
@@ -27,6 +28,28 @@ namespace BOReserva.Controllers.PatronComando
     /// </summary>
     public class FabricaComando
     {
+        #region M01_Login
+        public static Command<Entidad> M01ConsultarUsuario(Entidad _usuario)
+        {
+            return new M01_COConsultarUsuario(_usuario);
+        }
+
+        public static Command<Boolean> M01BloquearUsuario(Entidad _usuario)
+        {
+            return new M01_COBloquearUsuario(_usuario);
+        }
+
+        public static Command<Boolean> M01ResetearIntentos(Entidad _usuario)
+        {
+            return new M01_COResetearIntentos(_usuario);
+        }
+
+        public static Command<Boolean> M01IncrementarIntentos(Entidad _usuario)
+        {
+            return new M01_COIncrementarIntentos(_usuario);
+        }
+        #endregion
+
         #region M02_Gestion_Avion
         #region crearM02AgregarAvion
         /// <summary>
@@ -105,7 +128,6 @@ namespace BOReserva.Controllers.PatronComando
         }
         #endregion
         #endregion
-
 
         # region Lugar ( COLugar - COPais - COCiudad ) 
 
@@ -606,7 +628,7 @@ namespace BOReserva.Controllers.PatronComando
         {
             return new M13_COConsultarPermisosNoAsociados(rol, id);
         }
-        public static Command<List<String>> crearM13_ConsultarPermisosUsuario(int id)
+        public static Command<List<int>> crearM13_ConsultarPermisosUsuario(int id)
         {
             return new M13_COConsultarPermisosUsuario(id);
         }

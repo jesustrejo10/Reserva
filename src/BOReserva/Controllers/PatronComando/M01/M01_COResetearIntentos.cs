@@ -9,11 +9,11 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando.M01
 {
-    public class M01_COBloquearUsuario : Command<Boolean>
+    public class M01_COResetearIntentos : Command<Boolean>
     {
         private Entidad usuario;
 
-        public M01_COBloquearUsuario(Entidad _usuario)
+        public M01_COResetearIntentos(Entidad _usuario)
         {
             this.usuario = _usuario;
         }
@@ -21,7 +21,7 @@ namespace BOReserva.Controllers.PatronComando.M01
         public override Boolean ejecutar()
         {
             IDAOLogin dao = (DAOLogin)FabricaDAO.instanciarDaoLogin();
-            var respuesta = dao.BloquearUsuario(usuario);
+            var respuesta = dao.ResetearIntentos(usuario);
             return respuesta;
         }
     }
