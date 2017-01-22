@@ -38,10 +38,6 @@ namespace BOReserva.DataAccess.DataAccessObject
             throw new NotImplementedException();
         }
 
-        public int Eliminar(int id)
-        {
-            throw new NotImplementedException();
-        }
 
         #region Conectar con la Base de Datos
         /// <summary>
@@ -54,8 +50,8 @@ namespace BOReserva.DataAccess.DataAccessObject
 
             try
             {
-                conexion = new SqlConnection(_connexionString);//Connection.getInstance(_connexionString);
-               
+                //conexion = Connection.getInstance(_connexionString);
+                conexion = new SqlConnection(_connexionString);
             }
 
             catch (Exception ex)
@@ -79,7 +75,7 @@ namespace BOReserva.DataAccess.DataAccessObject
 
             try
             {
-                conexion.Close();
+                this.conexion.Close();
             }
 
             catch (Exception ex)
@@ -292,8 +288,6 @@ namespace BOReserva.DataAccess.DataAccessObject
                 Desconectar();
             }
         }
-
-      
         #endregion
 
     }

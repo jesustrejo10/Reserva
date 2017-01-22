@@ -1,19 +1,41 @@
 ﻿using BOReserva.DataAccess.DAO;
+using BOReserva.DataAccess.DataAccessObject.M09;
 using BOReserva.DataAccess.DataAccessObject.M01;
 using BOReserva.DataAccess.Model;
 using BOReserva.M10;
+using BOReserva.DataAccess.DataAccessObject;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 
 namespace BOReserva.DataAccess.DataAccessObject
 
 {
     public class FabricaDAO
     {
+        #region Lugar ( DAOLugar - DAOPais - DAOCiudad ) 
+
+        public static DAO instanciarDaoLugar()
+        {
+            return new DAOLugar();
+        }
+
+        public static DAO instanciarDaoPais()
+        {
+            return new DAOLugar();
+        }
+
+        public static DAO instanciarDaoCiudad()
+        {
+            return new DAOLugar();
+        }
+
+        #endregion
+
         #region M01_Login
         public static DAO instanciarDaoLogin()
         {
@@ -27,21 +49,23 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAOHotel();
         }
 
-
-        public static DAO instanciarDaoPais() {
-            return new DAOPais();
-        }
-
-        public static DAO instanciarDaoCiudad()
+        public static DAO instanciarDaoHabitacion()
         {
-            return new DAOCiudad();
+            return new DAOHabitacion();
         }
         #endregion
 
+        #region M16_Gestion_Reclamos
         public static DAO instanciarDaoReclamo() 
         {
             return new DAOReclamo();
         }
+
+        public static IDAOReclamo instanciarDaoReclamoPersonalizado()
+        {
+            return new DAOReclamo();
+        }
+        #endregion
 
         #region M04_Vuelos
         /// <summary>
@@ -73,75 +97,66 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAOAutomovil();
         }
         #endregion
-
-        public static DAO instanciarDaoLugar()
-        {
-            return new DAOLugar();
-        }
-
 			
         #region Modulo 10
+        /// <summary>
+        /// Inicializar IDAORestaurant
+        /// </summary>
+        /// <returns></returns>
         public static IDAORestaurant RestaurantBD()
         {
             return new DAORestaurant();
 
         }
-
+        /// <summary>
+        /// Valores de Horarios 
+        /// </summary>
+        /// <returns></returns>
         public static List<String> listarHorario()
         {
             return new List<String>
-            { "","07:00", "08:00", "09:00", "10:00", "11:00",
+            { "07:00", "08:00", "09:00", "10:00", "11:00",
               "12:00", "13:00", "14:00", "15:00", "16:00",
               "17:00", "18:00", "19:00", "20:00", "21:00",
               "22:00", "23:00", "00:00"
             };
         }
        
-
-        public static SqlConnection asignarConexionSql(String stringDeConexion)
-        {
-            return new SqlConnection(stringDeConexion);
-        }
-
+     
+        /// <summary>
+        /// Metodo para asignar parametros para el store procedured
+        /// </summary>
+        /// <param name="nombreAtributo"></param>
+        /// <param name="tipoDeDato"></param>
+        /// <param name="valorAtributo"></param>
+        /// <param name="output"></param>
+        /// <returns></returns>
         public static Parametro asignarParametro(string nombreAtributo, SqlDbType tipoDeDato, string valorAtributo, bool output)
         {
             return new Parametro(nombreAtributo, tipoDeDato, valorAtributo, output);
         }
 
+        /// <summary>
+        /// Metodo para asignar parametros para el store procedured
+        /// </summary>
+        /// <param name="nombreAtributo"></param>
+        /// <param name="tipoDeDato"></param>
+        /// <param name="output"></param>
+        /// <returns></returns>
         public static Parametro asignarParametro(string nombreAtributo, SqlDbType tipoDeDato, bool output)
         {
             return new Parametro(nombreAtributo, tipoDeDato, output);
         }
 
+        /// <summary>
+        /// Metodo para asignar parametros para el store procedured
+        /// </summary>
+        /// <returns></returns>
         public static List<Parametro> asignarListaDeParametro()
         {
             return new List<Parametro>();
         }
-
-        public static List<ResultadoBD> asignarListarColumnas()
-        {
-            return new List<ResultadoBD>();
-        }
-
-        public static SqlCommand asignarComandoSql(String query, SqlConnection conexion)
-        {
-            return new SqlCommand(query, conexion);
-        }
-
-        public static ResultadoBD asignarValorColumna(String atributo, String valorAtributo)
-        {
-            return new ResultadoBD(atributo, valorAtributo);
-        }
-
-        public static DataTable asignarTablaDeDatos()
-        {
-            return new DataTable();
-        }
-
-        public static SqlDataAdapter asignarAdaptadorDeDatos(SqlCommand comandoSql)
-        {
-            return new SqlDataAdapter(comandoSql);
-        }
+               
         #endregion
 
         #region M13_Roles
@@ -149,10 +164,30 @@ namespace BOReserva.DataAccess.DataAccessObject
         {
             return new DAORol();
         }
-        public static DAORol instanciarDAORolPermiso()
+        #endregion
+        
+        #region M14_Cruceros
+        //public static DAO instanciarDaoCrucero()
+        //{
+        //    //return new DAOCruceros();
+        //    return new DAOCrucero();
+        //}
+
+        //public static DAOCabina instanciarDaoCabina()
+        //{
+        //    return new DAOCabina();
+        //}
+
+        #endregion
+    
+        #region M06 GESTION DE COMIDA
+
+        public static DAOComida instanciarComida()
         {
-            return new DAORol();
+            return new DAOComida();
         }
+
         #endregion
     }
+
 }

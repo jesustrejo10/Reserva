@@ -6,64 +6,110 @@ using System.Web.Mvc;
 using BOReserva.Models.gestion_comida_vuelo;
 using System.Net;
 using BOReserva.Servicio;
+using BOReserva.DataAccess.Domain;
+using BOReserva.Controllers.PatronComando;
 
 namespace BOReserva.Controllers
 {
     public class gestion_comida_vueloController : Controller
     {
-        // GET: /gestion_comida_vuelo/
         public ActionResult M06_AgregarComida()
         {
             CAgregarComida model = new CAgregarComida();
             return PartialView(model);
         }
+
         [HttpPost]
         public JsonResult guardarPlato(CAgregarComida model)
         {
-           // string nombrePlato = model._nombrePlato;
-           // string descripcionPlato = model._descripcionPlato;
-           // string tipoPlato = model._tipoPlato;
-           // string estatusPlato = model._estatusPlato;
-           // return(Json(true, JsonRequestBehavior.AllowGet));
-          
-            //Chequeo si los campos obligatorios estan vacios como medida de seguridad
             if ((model._nombrePlato == null) || (model._tipoPlato == null) || (model._estatusPlato == null) || (model._descripcionPlato == null))
             {
-                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                //Agrego mi error
                 String error = "Error, campo obligatorio vacio";
-                //Retorno el error
                 return Json(error);
             }
-           
-                //return (Json(true, JsonRequestBehavior.AllowGet));
-                //AGREGAR EL USING DEL MANEJADOR SQL ANTES (using BOReserva.Servicio; o using FOReserva.Servicio;)
-            //instancio el manejador de sql
-            manejadorSQL sql = new manejadorSQL();
-            //realizo el insert
-            bool resultado = sql.insertarPlato(model);
-            //envio una respuesta dependiendo del resultado del insert
-            if (resultado)
+
+            Entidad _comida = FabricaEntidad.instanciarComida(model._nombrePlato, model._tipoPlato, model._estatusPlato, model._descripcionPlato);
+            Command<bool> comando = (Command<bool>)FabricaComando.gestionComida(FabricaComando.comandosComida.CREAR_COMIDA, _comida);
+
+            if (comando.ejecutar())
             {
                 return (Json(true, JsonRequestBehavior.AllowGet));
             }
             else
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error insertando en la BD";
+                string error = "Error agregando comida.";
                 return Json(error);
             }
         }
 
+        [HttpPost]
+        public JsonResult guardarPlatoVuelo(CComida model)
+        {
+            int id = model._id;
+            string nombrePlato = model._nombrePlato;
+            int cantidadPlatos = model._cantidad;
+            Entidad _comida = FabricaEntidad.instanciarComidaVuelo(id, nombrePlato, cantidadPlatos);
+            Command<bool> comando = (Command<bool>)FabricaComando.gestionComida(FabricaComando.comandosComida.CREAR_COMIDA_VUELO, _comida);
+
+            if (comando.ejecutar())
+            {
+                return (Json(true, JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                string error = "Error agregando comida al vuelo.";
+                return Json(error);
+            }
+        }
+
+        //--------------------------------------------------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------------------------------------------------
 
         public ActionResult M06_AgregarPorVuelo()
         {
-            manejadorSQL sql = new manejadorSQL();
-            //manejadorSQL sqlPasajero = new manejadorSQL();
-            List<CVuelo> vuelos = new List<CVuelo>();
-            vuelos = sql.listarVuelosEnBD();
-            return PartialView(vuelos);
+            List<Entidad> listaVuelos = null;
+
+            Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.gestionComida(FabricaComando.comandosComida.CONSULTAR_VUELOS, null);
+
+            listaVuelos = comando.ejecutar();
+
+            if (listaVuelos != null)
+            {
+                ViewBag.listaVuelos = listaVuelos;
+                return PartialView();
+            }
+            else
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                string error = "Error consultando Vuelos.";
+                return Json(error);
+            } 
+        }
+
+        public ActionResult M06_AgregarComidaVuelo(int id)
+        {
+            List<Entidad> listaComidas = null;
+
+            Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.gestionComida(FabricaComando.comandosComida.CONSULTAR_COMIDAS, null);
+
+            listaComidas = comando.ejecutar();
+
+            if (listaComidas != null)
+            {
+                ViewBag.idVuelo = id;
+                ViewBag.listaComidas = listaComidas;
+                return PartialView();
+            }
+            else
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                string error = "Error consultando comidas.";
+                return Json(error);
+            }
         }
 
         public ActionResult M06_ConsultarComida(int id)
@@ -75,21 +121,47 @@ namespace BOReserva.Controllers
             return PartialView("M06_EditarComida", modelo);
         }
 
+
         public ActionResult M06_VisualizarComidas()
         {
-            manejadorSQL sql = new manejadorSQL();
-            List<CComida> comidas = new List<CComida>();
-            comidas = sql.listarPlatosEnBD();
-            return PartialView(comidas);
-            //return PartialView();
+            List<Entidad> listaComidas = null;
+
+            Command<List<Entidad>> comando = (Command<List<Entidad>>) FabricaComando.gestionComida(FabricaComando.comandosComida.CONSULTAR_COMIDAS, null);
+
+            listaComidas = comando.ejecutar();
+
+            if (listaComidas != null)
+            {
+                return PartialView(listaComidas);
+            }
+            else
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                string error = "Error consultando comidas.";
+                return Json(error);
+            }
         }
 
         public ActionResult M06_VisualizarVuelosComidas()
         {
-            manejadorSQL sql = new manejadorSQL();
-            List<CVueloComida> comidas = new List<CVueloComida>();
-            comidas = sql.listarVuelosComidaEnBD();
-            return PartialView(comidas);
+            List<Entidad> listaComidasVuelos = null;
+
+            Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.gestionComida(FabricaComando.comandosComida.CONSULTAR_COMIDAS_VUELOS, null);
+
+            listaComidasVuelos = comando.ejecutar();
+
+            if (listaComidasVuelos != null)
+            {
+                return PartialView(listaComidasVuelos);
+            }
+            else
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                string error = "Error consultando vuelos y comidas.";
+                return Json(error);
+            }
+
+            return PartialView(listaComidasVuelos);
             //return PartialView();
         }
 
@@ -101,9 +173,9 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult habilitarPlato(int id)
         {
-            manejadorSQL sql = new manejadorSQL();
-            Boolean resultado = sql.habilitarPlato(id);
-            if (resultado)
+            Entidad _comida = FabricaEntidad.instanciarComida(id);
+            Command<bool> comando = (Command<bool>)FabricaComando.gestionComida(FabricaComando.comandosComida.HABILITAR_COMIDA, _comida);
+            if (comando.ejecutar())
             {
                 return (Json(true, JsonRequestBehavior.AllowGet));
             }
@@ -126,9 +198,10 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult deshabilitarPlato(int id)
         {
-            manejadorSQL sql = new manejadorSQL();
-            Boolean resultado = sql.deshabilitarPlato(id);
-            if (resultado)
+            Entidad _comida = FabricaEntidad.instanciarComida(id);
+            Command<bool> comando = (Command<bool>)FabricaComando.gestionComida(FabricaComando.comandosComida.DESHABILITAR_COMIDA, _comida);
+
+            if (comando.ejecutar())
             {
                 return (Json(true, JsonRequestBehavior.AllowGet));
             }
@@ -143,7 +216,24 @@ namespace BOReserva.Controllers
             }
         }
 
+        public ActionResult M06_EditarPlato(int id)
+        {
+            Entidad _comida = FabricaEntidad.instanciarComida(id);
+            Command<Entidad> comando = (Command<Entidad>)FabricaComando.gestionComida(FabricaComando.comandosComida.RELLENAR_COMIDA, _comida);
+
+            Entidad comida = comando.ejecutar();
+            return PartialView(comida);
         }
+
+        public JsonResult editarPlatoComida(int id, string nombre, string tipo, int estatus, string descripcion) {
+
+            Entidad _comida = FabricaEntidad.instanciarComida(id, nombre, tipo, estatus, descripcion);
+            Command<bool> comando = (Command<bool>)FabricaComando.gestionComida(FabricaComando.comandosComida.EDITAR_COMIDA, _comida);
+            bool resultado = comando.ejecutar();
+
+            return Json(resultado); 
+        }
+    }
        
 	}
 

@@ -32,11 +32,11 @@
                     <span class="pull-right"></span>
                 </span>
             </div>
-
-            @Html.TextBoxFor(m => m._fechaReclamo, null, new { @type = "date", @class = "form-control", @placeholder = "Fecha del Suceso", @id = "", @name = "fechaReclamo", min = "Date", max = "2032-12-31" })
             <label>
                 Fecha del incidente
             </label>
+            @Html.TextBoxFor(m => m._fechaReclamo, null, new { @type = "date", @class = "form-control", @placeholder = "Fecha del Suceso", @id = "fechaReclamo", @name = "fechaReclamo", min = "Date", max = "2032-12-31" })
+
             <div class="text-right">
                 <form id="form1" name="form1">
                     <button id="aceptarReclamo" type="button" name="este2" class="btn btn-primary">Guardar</button>
@@ -57,12 +57,41 @@
                             <th>Fecha del incidente</th>
                             <th>Título</th>
                             <th>Detalle</th>
-                            <th>Atendido Por</th>
-                            <th>Respuesta</th>
                             <th>Estado</th>
+                            <th>Opciones</th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody>
+                    @foreach (var item in Model._listaDeReclamos) {
+                        <tr id="@item._idReclamo">
+                            <td class ="text-center" > @item._fechaReclamo</td>
+                            <td class="text-center"> @item._tituloReclamo</td>
+                            <td class="text-center"> @item._detalleReclamo</td>
+                            <td class="text-center" valign="middle">
+                                @if (item._estadoReclamo == 1)
+                                {
+                                    <span class="label label-success" style="display: table-caption; margin-left: 25%; margin-top: 15px; width: 100%;">Iniciado</span>
+                                }
+                                @if (item._estadoReclamo == 2)
+                                {
+                                    <span class="label label-primary" style="display: table-caption; margin-left: 7%; margin-top: 15px; width: 100%;">En Proceso</span>
+                                }
+                                @if (item._estadoReclamo == 3)
+                                {
+                                    <span class="label label-warning" style="display: table-caption; margin-left: 7%;; margin-top: 15px; width: 100%; ">Culminado</span>
+                                }
+                                @if (item._estadoReclamo == 4)
+                                {
+                                    <span class="label label-danger" style="display: table-caption; margin-left: 22%; margin-top: 15px; width: 100%;">Cerrado</span>
+                                }
+                            </td>                                                            
+                            <td class="text-center">
+                                <span class="label label-danger eliminar" style="display: table-caption; margin-left: 8%; width: 100%;">Eliminar</span>
+                                <span class="label label-primary modificar" style="display: table-caption; margin-left: 8%; margin-top: 10px; width: 100%;">Modificar</span>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
                 </table>
                 <!--/div table-->
             </div>
@@ -70,6 +99,98 @@
         </div>
         <!--box light-->
     </div>
+
+
+    <script>
+
+        $("#aceptarReclamo").click(function (e) {
+            e.preventDefault();
+            var form = $("#AgregarReclamo");
+            var titulo = $('#tituloReclamo').val();
+            var detalle = $('#detalleReclamo').val();
+            var fecha = $('#fechaReclamo').val();
+            console.log(titulo);
+            console.log(detalle);
+            console.log(fecha);
+            if (titulo && detalle && fecha) {
+                $.ajax({
+                    url: "../gestion_reclamos/guardarReclamo",
+                    data: form.serialize(),
+                    type: 'POST',
+                    success: function (data) {
+                        if (data === "1") {
+                            alert("Se registro el reclamo exitosamente");
+                            $('#AgregarReclamo')[0].reset();
+                        } else {
+                            alert(data);
+                        }
+                    }
+                });
+            } else {
+                alert("Existen campos vacios, por favor revise todos los campos");
+            }
+        });
+
+
+
+        $(".eliminar").click(function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+            var identificador = $(this).parent().parent().attr("id");
+            console.log(identificador);
+            jQuery.ajax({
+                type: "POST",
+                url: "../gestion_reclamos/eliminarReclamo",
+                data: { seleccion: identificador }
+            }).done(function (data) {
+                alert(data);
+                var url = '../gestion_reclamos/M16_AgregarReclamo';
+                var method = 'GET';
+                var data = '';
+                $.ajax(
+                    {
+                        url: url,
+                        type: method,
+                        data: data,
+                        success: function (data, textStatus, jqXHR) {
+
+                            $("#contenedorPerfil").empty();
+                            $("#contenedorPerfil").append(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+            }).fail(function (data) {
+                console.log(data);
+                alert(data.responseText);
+            });
+
+
+        });
+
+        $(".modificar").click(function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+            var identificador = $(this).parent().parent().attr("id");
+            jQuery.ajax({
+                type: "GET",
+                url: "../gestion_reclamos/M16_ModificarReclamo",
+                data: { _idReclamo: identificador }
+            }).done(function (data) {
+                $("#contenedorPerfil").empty();
+                $("#contenedorPerfil").append(data);
+            }).fail(function (data) {
+                console.log(data.responseText);
+            });
+
+
+        });
+
+
+    </script>
 
 
     <script type="text/javascript" src="@Url.Content("~/Content/assets/js/view/demo.shop.js")"></script>
