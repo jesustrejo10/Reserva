@@ -1,5 +1,6 @@
 using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+using BOReserva.DataAccess.DataAccessObject.M11;
 using BOReserva.DataAccess.Domain;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace BOReserva.Controllers.PatronComando.M11
     public class M11_CODeshabilitarPaquete: Command<String>
     {
         Paquete _paquete;
-        int _idmodificar;
+        int _disponibilidad;
 
 
         public M11_CODeshabilitarPaquete(Entidad paquete, int id)
@@ -23,17 +24,10 @@ namespace BOReserva.Controllers.PatronComando.M11
             this._paquete._id = id;
         }
   
-     /*   public override String ejecutar()
-        {
-            DAOPaquete daoPaquete = (DAOPaquete)FabricaDAO.instanciarDaoPaquete();
-            String test = daoPaquete.eliminarPaquete(_paquete._id);
-            return test;
-        } */
-
-        public override String ejecutar()
-        {
-
-            return null;
-        } // por ahora porque lo de arriba es lo que se debe descomentar
+        public override String ejecutar(){
+                IDAOPaquete daoPaquete = (DAOPaquete)FabricaDAO.instanciarDaoPaquete();
+                String test = daoPaquete.disponibilidadPaquete(_paquete, _disponibilidad);
+                return test;
+            }
     }
 }

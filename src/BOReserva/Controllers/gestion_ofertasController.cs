@@ -14,6 +14,7 @@ using BOReserva.Controllers.PatronComando;
 using System.Diagnostics;
 using BOReserva.Excepciones.M09;
 
+
 namespace BOReserva.Controllers
 {
     public class gestion_ofertasController : Controller
@@ -158,7 +159,7 @@ namespace BOReserva.Controllers
         /// <param name="paqueteIdStr"></param>
         /// <returns></returns>
         public ActionResult M11_ModificarPaquete(String paqueteIdStr)
-        {           
+        {
             int paqueteId = Int32.Parse(paqueteIdStr);
             /*Command<Entidad> comando = FabricaComando.crearM11ConsultarPaquete(paqueteId);
             Entidad paquete = comando.ejecutar();
@@ -316,6 +317,15 @@ namespace BOReserva.Controllers
             List<CConsultar> listCruceros = new List<CConsultar>();
             listCruceros = sql.listarCrucerosM11();
             return Json(listCruceros);
+
+            /*List<String> lista = new List<string>();
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14VisualizarCruceros();
+            Dictionary<int, Entidad> listaCruceros = comando.ejecutar();
+            foreach (var crucero in listaCruceros)
+            {
+                    BOReserva.DataAccess.Domain.Crucero c = (BOReserva.DataAccess.Domain.Crucero)crucero.Value;
+                    lista.Add(c._nombreCrucero);
+            }*/
         }
 
         [HttpPost]
@@ -325,6 +335,30 @@ namespace BOReserva.Controllers
             List<CConsultar> listVuelos = new List<CConsultar>();
             listVuelos = sql.listarVuelosM11();
             return Json(listVuelos);
+
+            //Código nuevo para la segunda entrega
+            /*List<String> lista = new List<String>();
+            List<CConsultar> listVuelos2 = new List<CConsultar>();
+            CConsultar consulta = new CConsultar();
+            List<Entidad> listaVuelos;
+            Command<List<Entidad>> comando = FabricaComando.ConsultarM04_ConsultarTodos();
+            listaVuelos = comando.ejecutar();
+            foreach (Entidad vuelo in listaVuelos)
+            {
+                Vuelo v = (Vuelo)vuelo;
+                Ruta ruta = v.getRuta;
+                String origen = ruta.origenRuta;
+                String destino = ruta.destinoRuta;
+                String origen_destino = origen + "-" + destino;
+                Debug.WriteLine("La ruta es: "+origen_destino);
+                consulta._id = v.IdVuelo;
+                consulta._codigoVuelo = v.CodigoVuelo;
+                consulta._nombreSalida = origen;
+                consulta._nombreLlegada = destino;
+                listVuelos2.Add(consulta);
+               // lista.Add(origen_destino);
+        }
+            return Json(listVuelos2);*/
         }
 
 
@@ -432,7 +466,7 @@ namespace BOReserva.Controllers
             }
         }*/
 
-        [HttpPost]
+      /*  [HttpPost]
         public JsonResult activarOferta(String ofertaIdStr)
         {
             int ofertaId = Int32.Parse(ofertaIdStr);
@@ -452,9 +486,9 @@ namespace BOReserva.Controllers
                 String error = "Error procesando la petición";
                 return Json(error);
             }
-        }
+        }*/
 
-        [HttpPost]
+     /*   [HttpPost]
         public JsonResult desactivarPaquete(String ofertaIdStr)
         {
             int paqueteId = Int32.Parse(ofertaIdStr);
@@ -474,9 +508,9 @@ namespace BOReserva.Controllers
                 String error = "Error procesando la petición";
                 return Json(error);
             }
-        }
+        }*/
 
-        [HttpPost]
+        /*[HttpPost]
         public JsonResult activarPaquete(String ofertaIdStr)
         {
             int paqueteId = Int32.Parse(ofertaIdStr);
@@ -496,7 +530,7 @@ namespace BOReserva.Controllers
                 String error = "Error procesando la petición";
                 return Json(error);
             }
-        }
+        }*/
 
 /*
         [HttpPost]
@@ -545,8 +579,8 @@ namespace BOReserva.Controllers
         /// <returns>Resultado del Guardado n BD</returns>
         [HttpPost]
         public JsonResult guardarOferta(CAgregarOferta model, string estadoOferta)
-        {            
-
+        {
+            
             if (estadoOferta == "1")
                 model._estadoOferta = true;
             else
@@ -751,18 +785,51 @@ namespace BOReserva.Controllers
             Debug.WriteLine("DESACTIVAR OFERTA " + id);
             try
             {
-                Command<Entidad> comando = FabricaComando.crearM11ConsultarOferta(id);
-                Entidad oferta = comando.ejecutar();
+            Command<Entidad> comando = FabricaComando.crearM11ConsultarOferta(id);
+            Entidad oferta = comando.ejecutar();
                 Oferta ofertaBuscada = (Oferta)oferta;
                 ofertaBuscada._id = id;
                 Command<String> comando1 = FabricaComando.crearM11DisponibilidadOferta(ofertaBuscada, 0);
+            String borro_si_no = comando1.ejecutar();
+            return (Json(borro_si_no));
+        }
+
+        public JsonResult activarOferta(int id)
+        {
+                Command<Entidad> comando = FabricaComando.crearM11ConsultarOferta(id);
+                Entidad oferta = comando.ejecutar();
+                Oferta ofertabuscada = (Oferta)oferta;
+                ofertabuscada._id = id;
+                Command<String> comando1 = FabricaComando.crearM11DisponibilidadOferta(ofertabuscada, 1);
                 String borro_si_no = comando1.ejecutar();
                 return (Json(borro_si_no));
-            }
+        }
+
+        public JsonResult activarPaquete(int id)
+        {
+                Command<Entidad> comando = FabricaComando.crearM11ConsultarPaquete(id);
+                Entidad paquete = comando.ejecutar();
+                Paquete paquetebuscado = (Paquete)paquete;
+                paquetebuscado._id = id;
+                Command<String> comando1 = FabricaComando.crearM11DisponibilidadPaquete(paquetebuscado, 1);
+                String borro_si_no = comando1.ejecutar();
+                return (Json(borro_si_no));
+        }
+
+        public JsonResult desactivarPaquete(int id)
+        {
+                Command<Entidad> comando = FabricaComando.crearM11ConsultarPaquete(id);
+                Entidad paquete = comando.ejecutar();
+                Paquete paquetebuscado = (Paquete)paquete;
+                paquetebuscado._id = id;
+                Command<String> comando1 = FabricaComando.crearM11DisponibilidadPaquete(paquetebuscado, 0);
+                String borro_si_no = comando1.ejecutar();
+                return (Json(borro_si_no));     
+        }
             catch (ReservaExceptionM09 ex)
             {
                 return (Json(ex.Mensaje));
             }
         }
-    }
+	}
 }

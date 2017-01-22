@@ -1,6 +1,7 @@
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
+using BOReserva.Models.gestion_ofertas;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -172,6 +173,31 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
                 return null;
             }
             
+        }
+
+        string IDAOPaquete.disponibilidadPaquete(Entidad e, int disponibilidad)
+        {
+            Paquete paquete = (Paquete)e;
+            int paqueteId = paquete._idPaquete;
+            SqlConnection conexion = new SqlConnection(_connexionString);
+            try
+            {
+                conexion.Open();
+                SqlCommand query = conexion.CreateCommand();
+                query.CommandText = "UPDATE Paquete SET paq_estado = disponibilidad WHERE paq_id=" + paqueteId;
+                SqlDataReader lector = query.ExecuteReader();
+                lector.Close();
+                conexion.Close();
+                return "1";
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine("Entre en excepcion sql de IDAOPaquete");
+                conexion.Close();
+                return ex.Message;
+
+            }
+
         }
     }
 }

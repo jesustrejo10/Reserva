@@ -1034,7 +1034,7 @@ namespace BOReserva.Controllers.PatronComando
 
             return new M11_COVisualizarOfertas();
 
-}
+         }
 
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
@@ -1086,8 +1086,22 @@ namespace BOReserva.Controllers.PatronComando
 
             return new M11_COModificarPaquete(paquete, idmodificar);
 
+        }
+
+        public static Command<Entidad> crearM11ConsultarPaquete(int id)
+        {
+
+            return new M11_COConsultarPaquete(id);
 
         }
+
+        public static Command<String> crearM11DisponibilidadPaquete(Entidad paquete, int disponibilidad)
+        {
+
+            return new M11_CODeshabilitarPaquete(paquete, disponibilidad);
+
+        }
+
         #endregion
 
     }
