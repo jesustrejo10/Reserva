@@ -6,139 +6,156 @@
 
     <div class="row">
         <div class="col-md-12">
-                <div class="box box-success">
-                    <div class="box-header with-border">
-                        <h1 class="box-title">Crear Boleto</h1>
-                        <div class="box-tools pull-right">
-                        </div>
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h1 class="box-title">Crear Boleto</h1>
+                    <div class="box-tools pull-right">
                     </div>
-                    <div class="box-body">
+                </div>
+                <div class="box-body">
 
-                        <div class="row">
-                            <div class="col-md-12" style="margin-top:10px;">
-                                <div class="col-md-6">
-                                        <label>Salir de(*):</label>
-                                        @Html.DropDownListFor(m => m.SelectedCiudadIdOrigen, Model.CiudadesOrigen, new { @class = "form-control select2", @id = "id_origen" })
-                                </div>
-                                <div class="col-md-6">
-                                        <label>Llegar a(*):</label>
-                                        @Html.DropDownListFor(m => m.SelectedCiudadIdDestino, Model.CiudadesDestino, new { @class = "form-control select2", @id = "id_destino" })
-                                </div>
-
-                                <!-- /.row -->
-                            </div>
-                        </div>
-                        <div>&nbsp;</div>
-
-                        <div class="row">
-                            <div class="col-md-12" style="margin-top:10px;">
-                                <div class="col-md-6">
-                                        <label>Detalle(*):</label>
-                                        <select id="ida_vuelta" name="detalle" onchange="idavueltaOnChange(this)" class="form-control select2" style="width: 100%;">
-                                            <option value="ida" selected="selected">Solo ida</option>
-                                        </select>
-                                </div>
-
-                                <div class="col-md-6">
-                                        <label>Tipo(*):</label>
-                                        <select id="tipo" name="detalle" onchange="idavueltaOnChange(this)" class="form-control select2" style="width: 100%;">
-                                            <option selected="selected">Turista</option>
-                                            <option>Ejecutivo</option>
-                                            <option>Vip</option>
-                                        </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div>&nbsp;</div>
-
-                        <div class="row">
-                            <div class="col-md-12" style="margin-top:10px;">
-                                <div class="col-md-6">
-                                        <label id="idalbl">Fecha ida(*):</label>
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-clock-o"></i>
-                                            </div>
-                                            @Html.TextBoxFor(m => m._ida, null, new { @type = "date", @class = "form-control pull-right", @id = "fecha_ida" })
-                                        </div>
-                                        <!-- /.input group -->
-                                </div>
-
-                                <div class="col-md-6" id="divvuelta">
-                                        <label id="vueltalbl">Fecha vuelta(*):</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-clock-o"></i>
-                                            </div>
-                                            @Html.TextBoxFor(m => m._vuelta, null, new { @type = "date", @class = "form-control pull-right", @id = "fecha_vuelta" })
-
-                                        </div>
-                                        <!-- /.input group -->
-                                </div>
-                            </div>
-                        </div>
-                        <div>&nbsp;</div>
+                    <div class="row">
                         <div class="col-md-12" style="margin-top:10px;">
-                            <button type="button" id="buscarVuelos" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Ver vuelos disponibles</button>
-                        </div>
-
-                        <!-- ./box-body -->
-                        <div class="box-footer">
+                            <div class="col-md-6">
+                                <label>Salir de(*):</label>
+                                @Html.DropDownListFor(m => m.SelectedCiudadIdOrigen, Model.CiudadesOrigen, new { @class = "form-control select2", @id = "id_origen" })
+                            </div>
+                            <div class="col-md-6">
+                                <label>Llegar a(*):</label>
+                                @Html.DropDownListFor(m => m.SelectedCiudadIdDestino, Model.CiudadesDestino, new { @class = "form-control select2", @id = "id_destino" })
+                            </div>
 
                             <!-- /.row -->
                         </div>
-                        <!-- /.box-footer -->
                     </div>
-                    <!-- /.box -->
+                    <div>&nbsp;</div>
+
+                    <div class="row">
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-md-6">
+                                <label>Detalle(*):</label>
+                                <select id="ida_vuelta" name="detalle" onchange="idavueltaOnChange(this)" class="form-control select2" style="width: 100%;">
+                                    <option value="ida" selected="selected">Solo ida</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label>Tipo(*):</label>
+                                <select id="tipo" name="detalle" onchange="idavueltaOnChange(this)" class="form-control select2" style="width: 100%;">
+                                    <option selected="selected">Turista</option>
+                                    <option>Ejecutivo</option>
+                                    <option>Vip</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div>&nbsp;</div>
+
+                    <div class="row">
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-md-6">
+                                <label id="idalbl">Fecha ida(*):</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                    @Html.TextBoxFor(m => m._ida, null, new { @type = "date", @class = "form-control pull-right", @id = "fecha_ida" })
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+
+                            <div class="col-md-6" id="divvuelta">
+                                <label id="vueltalbl">Fecha vuelta(*):</label>
+
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                    @Html.TextBoxFor(m => m._vuelta, null, new { @type = "date", @class = "form-control pull-right", @id = "fecha_vuelta" })
+
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+                        </div>
+                    </div>
+                    <div>&nbsp;</div>
+                    <div class="row">
+                        <div class="col-md-12" style="text-align:center;">
+                            <label id="drop_empty" class="control-label has-error none">
+                                <i class="fa fa-times-circle-o"></i> Debe completar TODOS los campos requeridos
+                            </label>
+                        </div>
+                    </div>
+                    <div>&nbsp;</div>
+                    <div class="row">
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <button type="button" id="buscarVuelos" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Ver vuelos disponibles</button>
+                        </div>
+                    </div>
+                    <div>&nbsp;</div>
+                    <div class="row">
+                        <div id="loading" class="col-lg-12" style=" display: none; text-align:center; margin-top: 15px;"><span class="fa fa-spinner refresh-animate "></span></div>
+                    </div>
+                    <!-- ./box-body -->
+                    <div class="box-footer">
+
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.box-footer -->
                 </div>
-                <!-- /.col -->
+                <!-- /.box -->
             </div>
-            <!-- /.row -->
+            <!-- /.col -->
         </div>
+        <!-- /.row -->
+    </div>
         <!-- /.row -->
 
     <script>
         $("#buscarVuelos").click(function (e) {
             e.preventDefault();
-
-
+            $(".none").hide();
 
             var id_origen = document.getElementById("id_origen").value;
-            // alert("Id origen: " + id_origen);
+          // alert("Id origen: " + id_origen);
             var id_destino = document.getElementById("id_destino").value;
-           // alert("Id destino: " + id_destino);
+          // alert("Id destino: " + id_destino);
             var ida_vuelta = document.getElementById("ida_vuelta").value;
             //alert("Ida y/o vuelta: " + ida_vuelta);
             var tipo = document.getElementById("tipo").value;
             //alert("Tipo: " + tipo);
             var fecha_ida = document.getElementById("fecha_ida").value;
-            //alert("Fecha ida: " + fecha_ida);
+          //alert("Fecha ida: " + fecha_ida);
             var fecha_vuelta = document.getElementById("fecha_vuelta").value;
             //alert("Fecha vuelta: " + fecha_vuelta);
+            if (id_origen == -1 || id_destino == -1 || fecha_ida == 0) {
+                $("#drop_empty").fadeIn();
+            }
+            else {
+                $("#loading").show();
+                var url = '/gestion_boletos/M05_VerVuelos';
+                var method = 'GET';
+                var data = { idorigen: id_origen, iddestino: id_destino, idavuelta: ida_vuelta, tipo: tipo, fechaida: fecha_ida, fechavuelta: fecha_vuelta };
 
+                $.ajax(
+                    {
+                        url: url,
+                        type: method,
+                        data: data,
+                        success: function (data, textStatus, jqXHR) {
 
-            var url = '/gestion_boletos/M05_VerVuelos';
-            var method = 'GET';
-            var data = { idorigen : id_origen, iddestino : id_destino, idavuelta : ida_vuelta, tipo : tipo, fechaida : fecha_ida, fechavuelta : fecha_vuelta };
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+            }
 
-            $.ajax(
-                {
-                    url: url,
-                    type: method,
-                    data: data,
-                    success: function (data, textStatus, jqXHR) {
-
-                        $("#contenido").empty();
-                        $("#contenido").append(data);
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        alert(errorThrown);
-                    }
-                });
 
         });
-        </script>
+    </script>
 }
 
 <script>
