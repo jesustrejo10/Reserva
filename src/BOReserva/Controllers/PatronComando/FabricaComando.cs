@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using BOReserva.Controllers.PatronComando;
 using System.Web;
 using System.Linq;
-using BOReserva.Controllers.PatronComando.M14;
 using BOReserva.Controllers.PatronComando.M10;
 using BOReserva.Controllers.PatronComando.M16;
 using BOReserva.DataAccess.Domain.M14;
@@ -551,6 +550,25 @@ namespace BOReserva.Controllers.PatronComando
             return new M05_COConsultarBoletos( id );
         }
 
+        public static Command<List<Entidad>> ConsultarBoletosPasajero(int id)
+        {
+            return new M05_COConsultarBoletosPasajero(id);
+        }
+
+        public static Command<Entidad> consultarM05BoletopasajeroBD(int id)
+        {
+            return new M05_COConsultarBoletoBD(id);
+        }
+
+        public static Command<List<Entidad>> ConsultarPasajeros(int id)
+        {
+            return new M05_COConsultarBoletosPasajero(id);
+        }
+
+        public static Command<List<Entidad>> consultarM05listaVuelos(int id)
+        {
+            return new M05_COConsultarBoletosVuelo(id);
+        }
         #endregion
 
         #region M08_Automoviles
