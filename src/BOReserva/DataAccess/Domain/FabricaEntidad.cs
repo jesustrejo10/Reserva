@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using BOReserva.DataAccess.Domain.M14;
 
 
 
@@ -329,6 +330,13 @@ namespace BOReserva.DataAccess.Domain
         {
             return new Cabina(cabina._idCabina,cabina._nombreCabina,cabina._precioCabina,cabina._estatus,cabina._fkCrucero);
         }
+
+        public static Entidad InstanciarCamaroteN(CGestion_camarote camarote)
+        {
+            return new Camarote(camarote._idCamarote,camarote._cantidadCama,camarote._tipoCama,camarote._estatus,camarote._cabinaNombre);
+        }
+
+
         #endregion
 
             

@@ -118,7 +118,7 @@ namespace BOReserva.Controllers
                     BOReserva.DataAccess.Domain.Cabina c = (BOReserva.DataAccess.Domain.Cabina) cabina.Value;
                     lista.Add(c._nombreCabina);
                 }
-                camarote._listaCruceros = lista.Select(x => new SelectListItem
+                camarote._listaCabinas = lista.Select(x => new SelectListItem
                 {
                     Value = x,
                     Text = x
@@ -217,21 +217,9 @@ namespace BOReserva.Controllers
             Entidad nuevaCabina = FabricaEntidad.InstanciarCabinaN(model);
             Command<String> comando = FabricaComando.crearM14AgregarCabina(nuevaCabina);
             String result = comando.ejecutar();
-            return (Json(result));            
-        }
+            return (Json(result));
+        }       
         
-        [HttpPost]
-        public JsonResult guardaCabina(CGestion_cabina model)
-        {
-            String _nombreCabina = model._nombreCabina;
-            float _precioCabina = model._precioCabina;
-            int _fkCrucero = model._fkCrucero;
-
-            CGestion_cabina cabina = new CGestion_cabina(_nombreCabina, _precioCabina, _fkCrucero);
-            cabina.AgregarCabinas(cabina);
-
-            return (Json(true, JsonRequestBehavior.AllowGet));
-        }
 
         [HttpPost]
         public JsonResult guardarCamarote(CGestion_camarote model)
@@ -240,10 +228,11 @@ namespace BOReserva.Controllers
             String _tipoCama = model._tipoCama;
             int _fkCabina = model._fkCabina;
 
-            CGestion_camarote camarote = new CGestion_camarote(_cantidadCama, _tipoCama, _fkCabina);
-            camarote.AgregarCamarote(camarote);
-
-            return (Json(true, JsonRequestBehavior.AllowGet));
+            Entidad nuevoCamarote = FabricaEntidad.InstanciarCamaroteN(model);
+            Command<String> comando = FabricaComando.crearM14AgregarCamarote(nuevoCamarote);
+            String result = comando.ejecutar();
+            return (Json(result));
+            
         }
 
 

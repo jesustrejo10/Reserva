@@ -179,6 +179,11 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAOCabina();
         }
 
+        public static DAO instanciarDaoCamarote()
+        {
+            return new DAOCamarotes();
+        }
+
         public static DAO instanciarDaoItinerario()
         {
             return new DAOItinerario();

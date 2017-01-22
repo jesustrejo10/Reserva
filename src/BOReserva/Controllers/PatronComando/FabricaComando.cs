@@ -268,11 +268,8 @@ namespace BOReserva.Controllers.PatronComando
         /// <param name="e">Recibe la una entidad de tipo Crucero</param>
         /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
         public static Command<String> crearM14AgregarCrucero(Entidad e)
-        {
-
+        {   
             return new M14_COAgregarCrucero((Crucero) e);
-            
-
         }
 
         /// <summary>
@@ -287,6 +284,20 @@ namespace BOReserva.Controllers.PatronComando
             return new M14_COAgregarCabina((Cabina) e);
             
         }
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M14_COAgregarCrucero
+        /// </summary>
+        /// <param name="e">Recibe la una entidad de tipo Crucero</param>
+        /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
+        public static Command<String> crearM14AgregarCamarote(Entidad e)
+        {
+
+            return new M14_COAgregarCamarote((Camarote)e);
+
+        }
+
 
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
