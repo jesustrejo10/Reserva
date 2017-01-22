@@ -242,4 +242,12 @@
     <value>El codigo de vuelo ya se encuentra registrado</value>
     <comment>Error de la BD</comment>
   </data>
+  <data name="ErrorCampoVacio" xml:space="preserve">
+    <value>Campos Obligatorios Vacios</value>
+    <comment>Mensaje de Error</comment>
+  </data>
+  <data name="ErrorGeneralBD" xml:space="preserve">
+    <value>Error en la conexión con la Base de Datos</value>
+    <comment>Mensaje de Error</comment>
+  </data>
 </root>

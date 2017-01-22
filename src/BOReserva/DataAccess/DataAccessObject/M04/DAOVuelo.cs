@@ -16,6 +16,51 @@ namespace BOReserva.DataAccess.DataAccessObject
 {
     public class DAOVuelo : DAO, IDAOVuelo, IDAO
     {
+        #region override DAO
+        /// <summary>
+        /// Metodo para ejecutar un procedimiento almacenado en la bd que devuelve un DataTable
+        /// </summary>
+        /// <param name="parametros">Lista de parametros que se le va a asociar</param>
+        /// <param name="query">Cadena con el query a ejecutar</param>
+        public new DataTable EjecutarStoredProcedureTuplas(string query, List<Parametro> parametros)
+        {
+            try
+            {
+                Conectar();
+                DataTable dataTable = new DataTable();
+                using (conexion)
+                {
+
+                    comando = new SqlCommand(query, conexion);
+                    comando.CommandType = CommandType.StoredProcedure;
+                    AsignarParametros(parametros);
+                    conexion.Open();
+                    using (SqlDataAdapter dataAdapter = new SqlDataAdapter(comando))
+                    {
+                        dataAdapter.Fill(dataTable);
+                        System.Diagnostics.Debug.WriteLine(dataAdapter);
+                        System.Diagnostics.Debug.WriteLine(dataTable);
+                    }
+
+                    return dataTable;
+                }
+
+
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw new ExceptionBD(RecursoBD.Cod_Error_General, RecursoBD.Error_General, ex);
+            }
+            finally
+            {
+                Desconectar();
+            }
+        }
+        #endregion
         /// <summary>
         /// Agrega una entidad vuelo en la bd
         /// </summary>
@@ -44,23 +89,19 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
             catch (ExceptionBD ex)
             {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw ex;
-            }
-            catch (ArgumentNullException ex)
-            {
-                throw ex;
-            }
-            catch (FormatException ex)
-            {
-                throw ex;
+
             }
             catch (SqlException ex)
             {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw ex;
             }
             catch (Exception ex)
             {
-                throw ex;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM04(RecursoVuelo.ErrorDaoVuelo, RecursoVuelo.ErrorGeneralBD, ex);
             }
             return 1;
         }
@@ -95,6 +136,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
             catch (ExceptionBD ex)
             {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw ex;
             }
             catch (ArgumentNullException ex)
@@ -130,6 +172,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             DataTable resultado;
             Entidad vuelo;
             Entidad avion;
+            Entidad ruta;
             Parametro parametro;
             try
             {
@@ -154,9 +197,10 @@ namespace BOReserva.DataAccess.DataAccessObject
                         string ciudadD = row[RecursoVuelo.ParametroCDestino].ToString();
                         //cambiar
                         avion = FabricaEntidad.InstanciarAvion(idAvion, aviMatricula, "", 0, 0, 0, 0, 0, 0, 0, 0);
-                        //ATENCIÓN, FABRICA DE RUTA NO FUNCIONA
-                        Ruta ruta = new Ruta(idRuta, 0, "", "", ciudadO, ciudadD);
-                        vuelo = (Vuelo)FabricaEntidad.InstanciarVuelo(id, codVuelo, ruta, fechaDespegue, status, fechaAterrizaje, 
+                        avion._id = idAvion;
+                        ((Avion)avion)._matricula = aviMatricula;
+                        ruta = FabricaEntidad.InstanciarRuta(idRuta, 0, "", "", ciudadO, ciudadD);
+                        vuelo = (Vuelo)FabricaEntidad.InstanciarVuelo(id, codVuelo, (Ruta)ruta, fechaDespegue, status, fechaAterrizaje, 
                                                                       (Avion)avion);
                         return vuelo;
                     }
@@ -166,23 +210,18 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
             catch (ExceptionBD ex)
             {
-                throw ex;
-            }
-            catch (ArgumentNullException ex)
-            {
-                throw ex;
-            }
-            catch (FormatException ex)
-            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw ex;
             }
             catch (SqlException ex)
             {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw ex;
             }
             catch (Exception ex)
             {
-                throw ex;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM04(RecursoVuelo.ErrorDaoVuelo, RecursoVuelo.ErrorGeneralBD, ex);
             }
             return null;
         }
@@ -248,21 +287,13 @@ namespace BOReserva.DataAccess.DataAccessObject
             {
                 throw ex;
             }
-            catch (ArgumentNullException ex)
-            {
-                throw ex;
-            }
-            catch (FormatException ex)
-            {
-                throw ex;
-            }
             catch (SqlException ex)
             {
                 throw ex;
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new ReservaExceptionM04(RecursoVuelo.ErrorDaoVuelo, RecursoVuelo.ErrorGeneralBD, ex);
             }
             return null;
         }
@@ -282,14 +313,6 @@ namespace BOReserva.DataAccess.DataAccessObject
                 parametros.Add(parametro);
                 List<ResultadoBD> resultado = EjecutarStoredProcedure(RecursoVuelo.EliminarVuelo, parametros);
             }
-            catch (ArgumentNullException ex)
-            {
-                throw ex;
-            }
-            catch (FormatException ex)
-            {
-                throw ex;
-            }
             catch (SqlException ex)
             {
                 if (ex.Number == 547)
@@ -298,7 +321,8 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
             catch (Exception ex)
             {
-                throw ex;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM04(RecursoVuelo.ErrorDaoVuelo, RecursoVuelo.ErrorGeneralBD, ex);
             }
 
             return true;
@@ -323,23 +347,18 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
             catch (ExceptionBD ex)
             {
-                throw ex;
-            }
-            catch (ArgumentNullException ex)
-            {
-                throw ex;
-            }
-            catch (FormatException ex)
-            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw ex;
             }
             catch (SqlException ex)
             {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw ex;
             }
             catch (Exception ex)
             {
-                throw ex;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM04(RecursoVuelo.ErrorDaoVuelo, RecursoVuelo.ErrorGeneralBD, ex);
             }
             return true;
         }
@@ -371,23 +390,18 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
             catch (ExceptionBD ex)
             {
-                throw ex;
-            }
-            catch (ArgumentNullException ex)
-            {
-                throw ex;
-            }
-            catch (FormatException ex)
-            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw ex;
             }
             catch (SqlException ex)
             {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw ex;
             }
             catch (Exception ex)
             {
-                throw ex;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM04(RecursoVuelo.ErrorDaoVuelo, RecursoVuelo.ErrorGeneralBD, ex);
             }
             return null;
         }
@@ -421,21 +435,15 @@ namespace BOReserva.DataAccess.DataAccessObject
                 }
 
             }
-            catch (ArgumentNullException ex)
-            {
-                throw ex;
-            }
-            catch (FormatException ex)
-            {
-                throw ex;
-            }
             catch (SqlException ex)
             {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw ex;
             }
             catch (Exception ex)
             {
-                throw ex;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM04(RecursoVuelo.ErrorDaoVuelo, RecursoVuelo.ErrorGeneralBD, ex);
             }
             return null;
         }
@@ -468,7 +476,11 @@ namespace BOReserva.DataAccess.DataAccessObject
                         String matricula = row[RecursoVuelo.ParametroaAMatricula].ToString();
                         float velMaxima = float.Parse(row[RecursoVuelo.ParametroVelMaxima].ToString());
                         //CAMBIAR POR FABRICA AVION
-                        avion = new Avion(id, matricula, modelo, 0, 0, 0, 0, 0, velMaxima, 0, 0);
+                        avion = (Avion)FabricaEntidad.InstanciarAvion(0,"","",0,0,0,0,0,0,0,0);
+                        avion._modelo = modelo;
+                        avion._matricula = matricula;
+                        avion._velocidadMaxima = velMaxima;
+                        avion._id = id;
                         lista.Add(avion);
                     }
                     return lista;
@@ -477,25 +489,19 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
             catch (ExceptionBD ex)
             {
-                throw ex;
-            }
-            catch (ArgumentNullException ex)
-            {
-                throw ex;
-            }
-            catch (FormatException ex)
-            {
-
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw ex;
             }
             catch (SqlException ex)
             {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 if (ex.Number == 55567)
                     throw new ReservaExceptionM04(RecursoVuelo.ErrorDaoVuelo, RecursoVuelo.ErrorAvionRuta, ex);
             }
             catch (Exception ex)
             {
-                throw ex;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM04(RecursoVuelo.ErrorDaoVuelo, RecursoVuelo.ErrorGeneralBD, ex);
             }
             return null;
         }
@@ -529,13 +535,8 @@ namespace BOReserva.DataAccess.DataAccessObject
                     foreach (DataRow row in resultado.Rows)
                     {
                         DateTime fechaAterrizaje = DateTime.Parse(row[0].ToString());
-                        /*int aCapMax = int.Parse(row[RecursoVuelo.ParametroCapacidadMaxima].ToString());
-                        String modelo = row[RecursoVuelo.ParametroAModelo].ToString();
-                        float velMaxima = float.Parse(row[RecursoVuelo.ParametroVelMaxima].ToString());
-                        float aMaxDist = float.Parse(row[RecursoVuelo.ParametroVelMaxima].ToString());*/
-                        //CAMBIAR POR FABRICA AVION
-                        avion = new Avion(idAvion,"","",0,0,0,0,0,0,0,0);
-                        //
+                        avion = (Avion)FabricaEntidad.InstanciarAvion(0, "", "", 0, 0, 0, 0, 0, 0, 0, 0);
+                        avion._id = idAvion;
                         entidad = FabricaEntidad.InstanciarVuelo(fechaAterrizaje, avion);
                         return entidad;
                     }
@@ -544,23 +545,28 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
             catch (ExceptionBD ex)
             {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw ex;
             }
             catch (ArgumentNullException ex)
             {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw ex;
             }
             catch (FormatException ex)
             {
-                throw ex;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM04(RecursoVuelo.ErrorDaoVuelo, RecursoVuelo.ErrorCampoVacio, ex);
             }
             catch (SqlException ex)
             {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw ex;
             }
             catch (Exception ex)
             {
-                throw ex;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM04(RecursoVuelo.ErrorDaoVuelo, RecursoVuelo.ErrorGeneralBD, ex);
             }
             return null;
         }
@@ -582,25 +588,22 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
             catch (ExceptionBD ex)
             {
-                throw ex;
-            }
-            catch (ArgumentNullException ex)
-            {
-                throw ex;
-            }
-            catch (FormatException ex)
-            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw ex;
             }
             catch (SqlException ex)
             {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 if (ex.Number == 55567)
                     throw new ReservaExceptionM04(RecursoVuelo.ErrorDaoVuelo, RecursoVuelo.ErrorAvionRuta, ex);
+                if (ex.Number == 55566)
+                    throw new ReservaExceptionM04(RecursoVuelo.ErrorDaoVuelo, RecursoVuelo.ErrorCodigoDuplicado, ex);
                 throw ex;
             }
             catch (Exception ex)
             {
-                throw ex;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM04(RecursoVuelo.ErrorDaoVuelo, RecursoVuelo.ErrorGeneralBD, ex);
             }
 
             return true;

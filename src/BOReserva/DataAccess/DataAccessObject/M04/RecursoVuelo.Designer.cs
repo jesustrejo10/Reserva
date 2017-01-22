@@ -124,6 +124,15 @@ namespace BOReserva.DataAccess.DataAccessObject.M04 {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Campos Obligatorios Vacios.
+        /// </summary>
+        internal static string ErrorCampoVacio {
+            get {
+                return ResourceManager.GetString("ErrorCampoVacio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a El codigo de vuelo ya se encuentra registrado.
         /// </summary>
         internal static string ErrorCodigoDuplicado {
@@ -138,6 +147,15 @@ namespace BOReserva.DataAccess.DataAccessObject.M04 {
         internal static string ErrorDaoVuelo {
             get {
                 return ResourceManager.GetString("ErrorDaoVuelo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error en la conexión con la Base de Datos.
+        /// </summary>
+        internal static string ErrorGeneralBD {
+            get {
+                return ResourceManager.GetString("ErrorGeneralBD", resourceCulture);
             }
         }
         

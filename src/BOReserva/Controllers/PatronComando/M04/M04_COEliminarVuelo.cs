@@ -35,7 +35,7 @@ namespace BOReserva.Controllers.PatronComando.M04
         {
             try
             {
-                DAOVuelo vueloDel= (DAOVuelo)FabricaDAO.instanciarDAOVuelo();
+                IDAOVuelo vueloDel= (IDAOVuelo)FabricaDAO.instanciarDAOVuelo();
                 vueloDel.Eliminar(_vuelo);
                 return true;
             }
