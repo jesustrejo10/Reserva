@@ -20,9 +20,17 @@ namespace BOReserva.Controllers
     /// </summary>
     public class gestion_hotelesController : Controller
     {
-        public static String _ciudad;
+        /// <summary>
+        /// Variable Publica Estatica utilizada para guardar en algunos casos el Id del pais al que pertenece el hotel
+        /// </summary>
         public static String _pais;
+        /// <summary>
+        /// Variable Publica Estatica utilizada para guardar en algunos casos el Id de la ciudad al que pertenece el hotel
+        /// </summary>
         public static String ciudad;
+        /// <summary>
+        /// Variable Publica Estatica utilizada para guardar en algunos casos el Id del hotel
+        /// </summary>
         private static int _idhotel;
 
         /// <summary>

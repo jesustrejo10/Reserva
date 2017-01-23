@@ -2,6 +2,7 @@
 using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
+using BOReserva.Excepciones;
 using BOReserva.Excepciones.M09;
 using System;
 using System.Collections.Generic;
@@ -22,22 +23,27 @@ namespace BOReserva.Controllers.PatronComando
         /// <returns>Dictionary<int,Entidad></returns>
         public override Dictionary<int,Entidad> ejecutar()
         {
-            IDAO daoPais = FabricaDAO.instanciarDaoPais();
-            Dictionary<int, Entidad> paisesSinCiudad = daoPais.ConsultarTodos();
-            IDAO daoCiudad = FabricaDAO.instanciarDaoCiudad();
-            Dictionary<int, Entidad> ciudades = daoCiudad.ConsultarTodos();
-            Dictionary<int, Entidad> paisesConCiudad = new Dictionary<int,Entidad>();
-
-            foreach (var pais in paisesSinCiudad)
+            try
             {
-                Pais p = (Pais) pais.Value;
-                p._ciudades = obtenerCiudadesPorPais(ciudades,p._id);
-                paisesConCiudad.Add(pais.Key, p);
+                IDAO daoPais = FabricaDAO.instanciarDaoPais();
+                Dictionary<int, Entidad> paisesSinCiudad = daoPais.ConsultarTodos();
+                IDAO daoCiudad = FabricaDAO.instanciarDaoCiudad();
+                Dictionary<int, Entidad> ciudades = daoCiudad.ConsultarTodos();
+                Dictionary<int, Entidad> paisesConCiudad = new Dictionary<int, Entidad>();
+
+                foreach (var pais in paisesSinCiudad)
+                {
+                    Pais p = (Pais)pais.Value;
+                    p._ciudades = obtenerCiudadesPorPais(ciudades, p._id);
+                    paisesConCiudad.Add(pais.Key, p);
+                }
+
+                return paisesConCiudad;
             }
-
-
-
-            return paisesConCiudad;
+            catch (Exception ex) {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw ex;
+            }
         }
 
 
@@ -47,18 +53,26 @@ namespace BOReserva.Controllers.PatronComando
         /// <returns>Dictionary<int,Entidad></returns>
         Dictionary<int, Entidad> IM09_COObtenerPaises.obtenerCiudadesPorPais(Dictionary<int, Entidad> ciudades, int fkPais)
         {
-            Dictionary<int, Entidad> ciudadesPorPais = new Dictionary<int, Entidad>();
-            foreach (var item in ciudades)
+            try
             {
-                Ciudad ciudad = (Ciudad)item.Value;
-                if (ciudad._fkPais == fkPais)
+                Dictionary<int, Entidad> ciudadesPorPais = new Dictionary<int, Entidad>();
+                foreach (var item in ciudades)
                 {
-                    ciudadesPorPais.Add(item.Key, item.Value);
+                    Ciudad ciudad = (Ciudad)item.Value;
+                    if (ciudad._fkPais == fkPais)
+                    {
+                        ciudadesPorPais.Add(item.Key, item.Value);
+                    }
+                    // do something with entry.Value or entry.Key
                 }
-                // do something with entry.Value or entry.Key
-            }
 
-            return ciudadesPorPais;
+                return ciudadesPorPais;
+            }
+            catch (Exception e) 
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, e);
+                throw e;
+            }
         }
 
         /// <summary>
@@ -67,18 +81,27 @@ namespace BOReserva.Controllers.PatronComando
         /// <returns>Dictionary<int,Entidad></returns>
         private Dictionary<int, Entidad> obtenerCiudadesPorPais(Dictionary<int, Entidad> ciudades, int fkPais)
         {
-            Dictionary<int, Entidad> ciudadesPorPais = new Dictionary<int, Entidad>();
-            foreach (var item in ciudades)
+            try
             {
-                Ciudad ciudad = (Ciudad)item.Value;
-                if (ciudad._fkPais == fkPais)
+                Dictionary<int, Entidad> ciudadesPorPais = new Dictionary<int, Entidad>();
+                foreach (var item in ciudades)
                 {
-                    ciudadesPorPais.Add(item.Key, item.Value);
+                    Ciudad ciudad = (Ciudad)item.Value;
+                    if (ciudad._fkPais == fkPais)
+                    {
+                        ciudadesPorPais.Add(item.Key, item.Value);
+                    }
+                    // do something with entry.Value or entry.Key
                 }
-                // do something with entry.Value or entry.Key
-            }
 
-            return ciudadesPorPais;
+                return ciudadesPorPais;
+            }
+            catch(Exception e) 
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, e);
+                throw e;
+
+            }
         }
 
         /// <summary>
@@ -90,11 +113,11 @@ namespace BOReserva.Controllers.PatronComando
         {
             try
             {
-            int id;
-            DAOCiudad daoPais = (DAOCiudad)FabricaDAO.instanciarDaoCiudad();
-            id = daoPais.obtenerIDciudad(ciudad);
-            return id;
-        }
+                int id;
+                DAOCiudad daoPais = (DAOCiudad)FabricaDAO.instanciarDaoCiudad();
+                id = daoPais.obtenerIDciudad(ciudad);
+                return id;
+            }
             catch (ReservaExceptionM09 ex)
             {
                 throw ex;
