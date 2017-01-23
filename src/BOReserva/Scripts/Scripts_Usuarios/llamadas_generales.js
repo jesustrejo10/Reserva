@@ -52,6 +52,7 @@ $("#aceptarUsuario").click(function (e) {
         type: 'POST',
         success: function (data) {
             alert("Se registro el Usuario exitosamente");
+            $("#contenido").html('<div class="text-center">Cargando...</div>');
             toIndexA();
         }
     , error: function (xhr, textStatus, exceptionThrown) {
