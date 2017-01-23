@@ -155,6 +155,9 @@
     <value>com_vue_cantidad</value>
     <comment>cantidad de comidas_vuelo</comment>
   </data>
+  <data name="com_vue_fk_comida" xml:space="preserve">
+    <value>@com_vue_fk_comida</value>
+  </data>
   <data name="com_vue_id" xml:space="preserve">
     <value>com_vue_id</value>
     <comment>id de la tabla comida_vuelo</comment>
