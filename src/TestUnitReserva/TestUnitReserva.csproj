@@ -72,7 +72,7 @@
     <Compile Include="BO\gestion_restaurantes\M10_TestDaoRestaurant.cs" />
     <Compile Include="BO\gestion_roles\TestGestionRoles.cs" />
     <Compile Include="BO\gestion_ruta_comercial\TestRutaComercial.cs" />
-    <Compile Include="BO\gestion_seguridad_ingreso\M01_TestLogin.cs" />
+    <Compile Include="BO\gestion_seguridad_ingreso\TestLogin.cs" />
     <Compile Include="BO\gestion_usuarios\UnitTest1.cs" />
     <Compile Include="BO\gestion_usuario\TestUsuario.cs" />
     <Compile Include="BO\gestion_vuelos\TestVuelo.cs" />
@@ -88,6 +88,7 @@
     </Compile>
     <Compile Include="FO\Reserva restaurante\TestReservaRestaurante.cs" />
     <Compile Include="FO\Reserva_Cruceros\TestReservaCruceros.cs" />
+    <Compile Include="FO\Reserva_Habitacion\TestGestionReservaHabitacion.cs" />
     <Compile Include="FO\Revision\TestRevision.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

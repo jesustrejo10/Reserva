@@ -51,25 +51,27 @@ $("#formGuardarVuelo2").submit(function (e) {
 //Formulario 3 Crear vuelo
 $("#formGuardarVuelo3").submit(function (e) {
     e.preventDefault();
-    var form = $("#formGuardarVuelo3");
-    $.ajax({
-        url: "gestion_vuelo/M04_GuardarVuelo",
-        data: form.serialize(),
-        type: 'POST',
-        success: function (data, textStatus, jqXHR) {
+    if (validateForm2() != false) {
+        var form = $("#formGuardarVuelo3");
+        $.ajax({
+            url: "gestion_vuelo/M04_GuardarVuelo",
+            data: form.serialize(),
+            type: 'POST',
+            success: function (data, textStatus, jqXHR) {
 
-            $("#contenido").empty();
-            $("#contenido").append(data);
-            alert("Vuelo Registrado Exitosamente")
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert(errorThrown);
+                $("#contenido").empty();
+                $("#contenido").append(data);
+                alert("Vuelo Registrado Exitosamente")
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        , error: function (xhr, textStatus, exceptionThrown) {
+            //muestro el texto del error
+            alert(xhr.responseText);
         }
-    , error: function (xhr, textStatus, exceptionThrown) {
-        //muestro el texto del error
-        alert(xhr.responseText);
-    }
-    });
+        });
+    };
 });
 //Formulario 1 Modificar Vuelo
 $("#formModificarVuelo").submit(function (e) {
@@ -124,25 +126,27 @@ $("#formModificarVuelo2").submit(function (e) {
 //Formulario 3 Modificar Vuelo
 $("#formModificarVuelo3").submit(function (e) {
     e.preventDefault();
-    var form = $("#formModificarVuelo3");
-    $.ajax({
-        url: "gestion_vuelo/M04_ModificarVuelo",
-        data: form.serialize(),
-        type: 'POST',
-        success: function (data, textStatus, jqXHR) {
+    if (validateForm2() != false) {
+        var form = $("#formModificarVuelo3");
+        $.ajax({
+            url: "gestion_vuelo/M04_ModificarVuelo",
+            data: form.serialize(),
+            type: 'POST',
+            success: function (data, textStatus, jqXHR) {
 
-            $("#contenido").empty();
-            $("#contenido").append(data);
-            alert("Vuelo Modificado Exitosamente")
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert(errorThrown);
-        }
-    , error: function (xhr, textStatus, exceptionThrown) {
-        //muestro el texto del error
-        alert(xhr.responseText);
+                $("#contenido").empty();
+                $("#contenido").append(data);
+                alert("Vuelo Modificado Exitosamente")
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        , error: function (xhr, textStatus, exceptionThrown) {
+            //muestro el texto del error
+            alert(xhr.responseText);
     }
     });
+    };
 });
 //al cambiar la matricula del avion carga toda la info del aterrizaje
 $("#matAvion").change(function(e){
@@ -560,6 +564,14 @@ $(".activar").click(function () {
          return false;
      }
  }
+ function validateForm2() {
+     if (( document.getElementById("estadoVuelo").value == 0)) {
+         alert("Campos Obligatorios Vacios");
+         return false;
+     }
+ }
+
+
 
 $(".eliminar").click(function () {
     var id = $(this).parent().parent().parent().attr("id");

@@ -102,6 +102,11 @@ namespace BOReserva.Models.gestion_vuelo
         /// _idVuelo
         /// </summary>
         public int _idVuelo { get; set; }
+        
+        /// <summary>
+        /// _modelo
+        /// </summary>
+        public String _modelo { get; set; }
 
         /// <summary>
         /// Constructor con ciudadesOrigen y comboVuelo

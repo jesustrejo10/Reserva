@@ -9,7 +9,7 @@ using System.Web;
 
 namespace FOReserva.Controllers.PatronComando.M19
 {
-    public class M19_COCrearReserva: Command<Boolean>
+    public class M19_COCrearReserva : Command<Boolean>
     {
         #region Atributos
         Entidad _objeto;
@@ -20,6 +20,8 @@ namespace FOReserva.Controllers.PatronComando.M19
 
         public M19_COCrearReserva(Entidad _objeto)
         {
+
+            System.Diagnostics.Debug.WriteLine("LLEGA A COCREARRESERVA");
             this._objeto = _objeto;
         }
         #endregion
@@ -28,6 +30,8 @@ namespace FOReserva.Controllers.PatronComando.M19
         {
             try
             {
+
+                System.Diagnostics.Debug.WriteLine("LLEGA A EJECUTAR");
                 IDAOReservaAutomovil reservaAutomovilDao = FabricaDAO.ReservaAutomovilBD();
                 reservaAutomovilDao.Crear(this._objeto);
                 return true;
