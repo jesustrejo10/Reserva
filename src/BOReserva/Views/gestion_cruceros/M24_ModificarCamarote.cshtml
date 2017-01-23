@@ -1,0 +1,150 @@
+﻿<!-- Indico que para esta vista, M08_ModificarAutomovil, utilizare el modelo Models/gestion_automoviles/CModificarAutomovil-->
+@model BOReserva.Models.gestion_cruceros.CGestion_camarote
+<link href="~/Content/Canvas/Box.css" rel="stylesheet" />
+
+@using (Html.BeginForm("modificarCamarote", "gestion_cruceros", null, FormMethod.Post, new { @id = "formModificarCamarote", @class = "form-horizontal" }))
+{
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="Cajita">
+                <div class="box-header with-border">
+                    <h1 class="box-title" style="font-size:32px;">Modificar Camarote</h1>
+                    <div class="box-tools pull-right">
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="placa">Nombre(<span style="color:red">*</span>)</label>
+                                @Html.TextBoxFor(m => m._cabinaNombre, Model._cabinaNombre, new { @class = "form-control",  @id = "cam_nombre",  @disabled = "disabled"  })
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="modelo">Cantidad de Camas(<span style="color:red">*</span>)</label>
+                                @Html.TextBoxFor(m => m._cantidadCama, Model._cantidadCama.ToString(), new { @class = "form-control", @id = "cam_cantCam" })
+
+
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="modelo">Tipo de Cama(<span style="color:red">*</span>)</label>
+                                @Html.TextBoxFor(m => m._tipoCama, Model._tipoCama, new { @class = "form-control", @id = "cam_tipCam" })
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="anio">Estado(<span style="color:red">*</span>)</label>
+                                @Html.TextBoxFor(m => m._estatus, Model._estatus, new { @class = "form-control", @id = "cam_Estado" })
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-2">
+                                <button id="cancel_modification" type="button" class="btn btn-danger" style="display:block; margin-left:auto; margin-right:auto;">Cancelar</button>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" id="modificar_camarote" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+
+
+
+    <script>
+        $("#modificar_camarote").click(function (e) {
+        e.preventDefault();
+        var form = $("#formModificarCamarote");
+        var Cantidad = $('#cam_cantCam').val();
+        var Tipo = $('#cam_tipCam').val();
+        var estado = $('#cam_Estado').val();
+        if (Cantidad && Tipo && estado) {
+            $.ajax({
+                url: "gestion_cruceros/modificarCamarote",
+                data: form.serialize(),
+                type: 'POST',
+                success: function (data) {
+                    alert("Se modifico el camarote exitosamente, sera redirigido al listado de cruceros");
+                    //$('#formmodifyVehicle')[0].reset();
+                    var url1 = '/gestion_cruceros/M24_ListarCruceros';
+                    var method = 'GET';
+                    var data1 = '';
+
+                    $.ajax(
+                        {
+                            url: url1,
+                            type: method,
+                            data: data1,
+                            success: function (data, textStatus, jqXHR) {
+
+                                $("#contenido").empty();
+                                $("#contenido").append(data);
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert(errorThrown);
+                            }
+                        });
+                }
+            });
+        } else {
+            alert("Existen campos vacios, por favor revise todos los campos");
+        }
+    });
+    </script>
+
+    
+
+    <script>
+
+        function cambioCabina(cabina_id) {
+            $.ajax({
+                url: "gestion_cruceros/cambioEstatusCabina",
+                data: { "id_cabina": cabina_id },
+                type: 'POST',
+                success: function (data) {
+                    $.ajax({
+                        url: "gestion_cruceros/M24_ListarCabinas/" + $("#fk_id_crucero").val(),
+                        data: null,
+                        type: 'GET',
+                        success: function (data) {
+                            console.log(data)
+                            $("#tablaCabinas").empty();
+                            for (var index = 0; index < data.length; index++) {
+                                console.log(data[index])
+
+                                var statusHTML = data[index]._estatus == "activo" ? "<td class='crStatus'><i class='fa fa-circle started'></i></td>" +
+                                                        "<td class='crAcciones'><i class='fa fa-pencil'></i> <i class='fa fa-times' onclick='cambioCabina(" + data[index]._idCabina + ")'></i></td>" : "<td class='crStatus'><i class='fa fa-circle paused'></i></td><td class='crAcciones'><i class='fa fa-pencil'></i> <i class='fa fa-check' onclick='cambioCabina(" + data[index]._idCabina + ")'></i></td>";
+
+
+                                console.log(statusHTML)
+                                html = "<tr id='" + data[index]._idCabina + "'><td style='text-align:center'>" + data[index]._nombreCabina + "</td><td style='text-align:center'>" + data[index]._precioCabina + "</td>" + statusHTML + "</tr>";
+                                console.log(html)
+                                $("#tablaCabinas").append(html);
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        }
+
+    </script>
+}

@@ -1,24 +1,19 @@
-using BOReserva.Controllers.PatronComando;
-using BOReserva.Controllers.PatronComando.M09;
+using BOReserva.Controllers.PatronComando.M01;
 using BOReserva.Controllers.PatronComando.M02;
 using BOReserva.Controllers.PatronComando.M03;
+using BOReserva.Controllers.PatronComando.M09;
+using BOReserva.Controllers.PatronComando.M10;
+using BOReserva.Controllers.PatronComando.M11;
+using BOReserva.Controllers.PatronComando.M12;
+using BOReserva.Controllers.PatronComando.M13;
 using BOReserva.Controllers.PatronComando.M14;
+using BOReserva.Controllers.PatronComando.M16;
 using BOReserva.DataAccess.Domain;
+using BOReserva.DataAccess.Domain.M14;
 using BOReserva.M10.Comando.gestion_restaurantes;
-using BOReserva.Models.gestion_automoviles;
 using System;
 using System.Collections.Generic;
-using System.Web;
-using System.Linq;
-using BOReserva.Controllers.PatronComando.M10;
-using BOReserva.Controllers.PatronComando.M16;
 using System.Web.Mvc;
-using BOReserva.Controllers.PatronComando.M12;
-using BOReserva.DataAccess.Domain.M14;
-using BOReserva.Controllers.PatronComando.M09;
-using BOReserva.Controllers.PatronComando.M11;
-using BOReserva.Controllers.PatronComando.M01;
-using BOReserva.Controllers.PatronComando.M13;
 
 namespace BOReserva.Controllers.PatronComando
 {
@@ -206,7 +201,9 @@ namespace BOReserva.Controllers.PatronComando
         /// </summary>
         /// <param name="e">Recibe la una entidad de tipo Hotel</param>
         /// <param name="precio">Precio por habitacion/param>
-        /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
+        /// <returns>
+        /// Retorna un comando con el parametro adjuntado como atributo.
+        /// </returns>
         public static Command<String> crearM09AgregarHotel(Entidad e, int precio)
         {
 
@@ -577,6 +574,37 @@ namespace BOReserva.Controllers.PatronComando
 
         }
 
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M14_COModificarCamarote
+        /// </summary>
+        /// <param name="hotel">Hotel a modificar</param>
+        /// <param name="idmodificar">Identificador del hotel a modificar</param>
+        /// <returns>
+        /// Retorna la instancia del comando M14_COModificarCamarote.
+        /// </returns>
+        public static Command<String> crearM14ModificarCamarote(Entidad camarote, int idmodificar, int idfk)
+        {
+
+            return new M14_COModificarCamarote(camarote, idmodificar, idfk);
+        }
+
+
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M14_COConsultarCamarote
+        /// </summary>
+        /// <param name="id">Identificador del Crucero a consultar</param>
+        /// <returns>Retorna la instancia del comando M14_COConsultarCamarote.</returns>
+        public static Command<Entidad> crearM14ConsultarCamarote(int id)
+        {
+
+            return new M14_COConsultarCamarote(id);
+
+        }
+
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
         /// M14_COConsultarCrucero
@@ -714,8 +742,8 @@ namespace BOReserva.Controllers.PatronComando
 
         #endregion
 
-       
- 
+
+
 
 
 
@@ -1137,11 +1165,26 @@ namespace BOReserva.Controllers.PatronComando
 
         }
 
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M12_COConsultarUsuario
+        /// </summary>
+        /// <param name="id">Identificador del usuario a consultar</param>
+        /// <returns>Retorna la instancia del comando M12_COConsultarUsuario.</returns>
         public static Command<Entidad> crearM12ConsultarUsuario(int id)
         {
             return new M12_COConsultarUsuario(id);
         }
 
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M12_COModificarUsuario
+        /// </summary>
+        /// <param name="usuario">Usuario a modificar</param>
+        /// <param name="idModificar">Identificador del usuario a modificar</param>
+        /// <returns>
+        /// Retorna la instancia del comando M12_COModificarUsuario.
+        /// </returns>
         public static Command<string> crearM12ModificarUsuario(Entidad usuario, int idModificar)
         {
             return new M12_COModificarUsuario(usuario, idModificar);
@@ -1230,6 +1273,7 @@ namespace BOReserva.Controllers.PatronComando
 
         }
         #endregion
+
         #region M03_Ruta
         public static Command<String> crearM03_AgregarRuta(Entidad e)
         {
@@ -1370,8 +1414,22 @@ namespace BOReserva.Controllers.PatronComando
 
             return new M11_COModificarPaquete(paquete, idmodificar);
 
+        }
+
+        public static Command<Entidad> crearM11ConsultarPaquete(int id)
+        {
+
+            return new M11_COConsultarPaquete(id);
 
         }
+
+        public static Command<String> crearM11DisponibilidadPaquete(Entidad paquete, int disponibilidad)
+        {
+
+            return new M11_CODeshabilitarPaquete(paquete, disponibilidad);
+
+        }
+
         #endregion
 
     }
