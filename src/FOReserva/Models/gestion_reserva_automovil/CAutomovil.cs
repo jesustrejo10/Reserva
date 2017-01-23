@@ -55,6 +55,39 @@ namespace FOReserva.Models.gestion_reserva_automovil
             
         }
 
+        public CAutomovil(string matricula, string modelo, string fabricante, string tipo, string color, string transmision, int idCiudad, double precioAlquiler, int anio, int cantPasajeros, int disponibilidad)
+        {
+
+            _matricula = matricula;
+            _modelo = modelo;
+            _fabricante = fabricante;
+            _anio = anio;
+            _cantPasajeros = cantPasajeros;
+            _tipo = tipo;
+            _precioCompra = _precioCompra;
+            _precioAlquiler = precioAlquiler;
+            _color = color;
+            _disponibilidad = disponibilidad;
+            _transmision = transmision;
+            _idCiudad = idCiudad;
+            _listaAutomoviles = new List<CAutomovil>();
+
+        }
+
+        public CAutomovil(string matricula, string modelo, string fabricante)
+        {
+
+            _matricula = matricula;
+            _modelo = modelo;
+            _fabricante = fabricante;
+        }
+        public CAutomovil(string matricula)
+        {
+            _matricula = matricula;
+        }
+
+      
+
         #endregion
 
     }

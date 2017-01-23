@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
-using BOReserva.Models.gestion_lugares;
-using BOReserva.Servicio;
-using System.Diagnostics;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
+//using NUnit.Framework;
+//using System.Diagnostics;
 
 namespace TestUnitReserva.BO.gestion_restaurantes
 {
     [TestFixture]
     class TestLugar
     {
-        manejadorSQL sql = new manejadorSQL();
-
+        //manejadorSQL sql = new manejadorSQL();
+        /*
         [Test]
         public void TestConsultarLugares()
         {
@@ -36,5 +34,6 @@ namespace TestUnitReserva.BO.gestion_restaurantes
                 Debug.WriteLine("Encontrada ciudad: " + item._nombre);
             }
         }
+         */ 
     }
 }

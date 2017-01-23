@@ -6,11 +6,13 @@ using System.Web;
 using BOReserva.DataAccess.DAO;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.DataAccessObject;
+using BOReserva.Excepciones;
 
 namespace BOReserva.Controllers.PatronComando.M04
 {
-    public class M04_COAgregarVuelo : Command<String>
+    public class M04_COAgregarVuelo : Command<Boolean>
     {
+        
         private Entidad _vuelo;
 
         #region Constructores
@@ -36,17 +38,18 @@ namespace BOReserva.Controllers.PatronComando.M04
         /// Método para crear la instancia de la clase DaoUsuario y usar el método Agregar
         /// </summary>
         /// <returns>Retorna una instancia del tipo DaoUsuario</returns>
-        public override String ejecutar()
+        public override Boolean ejecutar()
         {
             try
             {
                 IDAO vueloAdd = FabricaDAO.instanciarDAOVuelo();
                 vueloAdd.Agregar(_vuelo);
-                return "1";
+                return true;
             }
             catch (Exception ex)
             {
-                throw new NotImplementedException();
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw ex;
             }
             
         }

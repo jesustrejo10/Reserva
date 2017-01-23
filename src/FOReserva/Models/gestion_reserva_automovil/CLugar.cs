@@ -9,7 +9,6 @@ namespace FOReserva.Models.gestion_reserva_automovil
     public class CLugar : Entidad
     {
         #region Atributos
-        public int _id { get; set; }
         public string _nombre { get; set; }
         public string _tipoLugar { get; set; }
         public int _zonaHoraria { get; set; }
@@ -54,6 +53,11 @@ namespace FOReserva.Models.gestion_reserva_automovil
         public CLugar(int _id, string _nombre)
         {
             this._id = _id;
+            this._nombre = _nombre;
+        }
+
+        public CLugar(string _nombre)
+        {
             this._nombre = _nombre;
         }
 

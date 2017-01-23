@@ -1,0 +1,105 @@
+﻿<!-- Indico que para esta vista, M04_GestionVuelo_Crear, utilizare el modelo Models/gestion_vuelo/CGestionVuelo-->
+@model BOReserva.Models.gestion_vuelo.CrearVueloMO
+@{
+    ViewBag.Title = "Operation List";
+    string alert = "Your custom error message";
+
+    if (ViewBag.AlertMessage != null)
+    {
+        alert = (string)ViewBag.AlertMessage;
+    }
+}
+<script src="~/Scripts/Scripts_Vuelos/llamadas_generales_Vuelos.js"></script>
+<link rel="stylesheet" href="~/Content/M04_css/style_module.css" type="text/css" />
+@using (Html.BeginForm("M04_GestionVuelo_CW2", "gestion_vuelo", null, FormMethod.Post, new { @id = "formGuardarVuelo", @class = "form-horizontal" }))
+{
+    @Html.HiddenFor(m => m._ciudadOrigen, new { @id = "_ciudadOrigen" })
+    @Html.HiddenFor(m => m._ciudadDestino, new { @id = "_ciudadDestino" })
+    <div class="row">
+        <div class="col-md-12">
+            <h1>
+                Gestion de vuelos
+                <small>Crear un vuelo</small>
+            </h1>
+            <div class="box box-solid">
+                <div class="box box-solid">
+                    <div class="box-tools pull-right">
+                        
+                    </div>
+                </div>
+                <div>&nbsp;</div>
+               
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <!-- TEXTBOX CODIGO DE VUELO -->
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label style="display:block; margin-left:auto; margin-right:auto;">Codigo de vuelo (<span style="color: #d9534f">*</span>):</label>
+                                @Html.TextBoxFor(m => m._codigoVuelo, null, new { @class = "form-control", 
+                                                                                  @placeholder = "Ej: AA2254", 
+                                                                                  @id = "codigoVuelo", 
+                                                                                  @allign = "center", 
+                                                                                  @onblur = "checkTextCodigo(this);",
+                                                                                  @maxlength = "20"
+                                                                                  })
+                            </div>
+                        </div>
+                        <!-- FIN CODIGO DE VUELO -->
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <!-- DROPDOWN CIUDAD ORIGEN -->
+                            <div class="col-xs-6">
+                                <label> Ciudad Origen (<span style="color: #d9534f">*</span>):</label>
+                                @Html.DropDownListFor(m => m._idCiudadOrigen, Model._ciudadesOrigen, "Seleccione la Ciudad de Origen",
+                                    new { @class = "form-control", @id = "ciudadO", @style = "width: 100%;" })
+
+                            </div>
+                            <!-- FIN CIUDAD ORIGEN -->
+                            <!-- DROPDOWN CIUDAD DESTINO  -->
+                            <div class="col-xs-6">
+                                <label> Ciudad Destino (<span style="color: #d9534f">*</span>):</label>
+                                <!--Enumerable empty por que lleno con script-->
+                                @Html.DropDownListFor(m => m._idRuta, new SelectList(Enumerable.Empty<SelectListItem>(), "Value", "Text"),
+                                    "Seleccione la Ciudad de Destino", new { @class = "form-control", @id = "ciudadD", @style = "width: 100%;" })
+                            </div>
+                            <!-- FIN CIUDAD DESTINO  -->
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <!-- DATE FECHA DESPEGUE  -->
+                                <label> Fecha Despegue (<span style="color: #d9534f">*</span>):</label>
+                                @Html.TextBoxFor(m => m._fechaDespegue, null, new { @class = "datepicker", @type = "date", @id = "fechaDespegue",
+                                                                                    min = "2016-01-01",
+                                                                                    max = "2020-01-22",
+                                                                                    @style = "width: 100%;"
+                           })
+                            </div>
+                            <!-- FIN FECHA DESPEGUE -->
+                            <div class="col-xs-6">
+                                <!-- TIME HORA DESPEGUE  -->
+                                <label> Hora Despegue (<span style="color: #d9534f">*</span>):</label>
+                                @Html.TextBoxFor(m => m._horaDespegue, null, new { @class = "datepicker", @type = "time", @id = "horaDespegue", @style = "width: 100%;" })
+                            </div>
+                            <!-- FIN HORA DESPEGUE -->
+                        </div>
+                        <div>&nbsp;</div>
+                        <!-- FIN CAMPOS FORMULARIO-->
+                        <!-- BOTON GUARDAR-->
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <button type="submit" id="agregarAW1" class="btn btn-success  wait" style="display:block; margin-left:auto; margin-right:auto;">Siguiente</button>
+                        </div>
+                        <!--FIN BOTON GUARDAR-->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+}
+
+

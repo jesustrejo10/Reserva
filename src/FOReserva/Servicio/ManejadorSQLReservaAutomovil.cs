@@ -1,4 +1,4 @@
-﻿using FOReserva.Models.Autos;
+﻿using FOReserva.Models.gestion_reserva_automovil;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -31,7 +31,7 @@ namespace FOReserva.Servicio
                     {
                         var text = reader.GetString(reader.GetOrdinal("lug_nombre"));
                         var id = reader.GetInt32(reader.GetOrdinal("lug_id"));
-                        ciudades.Add(new CLugar(id.ToString(), text));
+                        ciudades.Add(new CLugar(id, text));
                     }
                     CloseConnection();
                 }
@@ -117,11 +117,11 @@ namespace FOReserva.Servicio
         }
 
         // Listar las Reservas de un usuario
-        public List<CReserva_Autos_Perfil> buscarReservas()
+        public List<CReserva_Autos_Perfil> buscarReservas(int id_usu)
         {
 
            
-                string consulta = "SELECT raut_id, aut_fabricante, aut_modelo, raut_fecha_ini, raut_fecha_fin, lugarEntrega.lug_nombre, lugarDevolucion.lug_nombre, raut_estatus FROM Automovil, Reserva_Automovil, Usuario, Lugar lugarEntrega, Lugar lugarDevolucion WHERE usu_id=1 and raut_fk_usuario=usu_id and raut_fk_automovil=aut_matricula and raut_fk_ciudad_entrega=lugarEntrega.lug_id and raut_fk_ciudad_devolucion=lugarDevolucion.lug_id ";
+            string consulta = "SELECT raut_id, aut_fabricante, aut_modelo, raut_fecha_ini, raut_fecha_fin, lugarEntrega.lug_nombre, lugarDevolucion.lug_nombre, raut_estatus FROM Automovil, Reserva_Automovil, Usuario, Lugar lugarEntrega, Lugar lugarDevolucion WHERE usu_id="+id_usu+" and raut_fk_usuario=usu_id and raut_fk_automovil=aut_matricula and raut_fk_ciudad_entrega=lugarEntrega.lug_id and raut_fk_ciudad_devolucion=lugarDevolucion.lug_id ";
             SqlDataReader leer = Executer(consulta);
             List<CReserva_Autos_Perfil> lista_misreservas = new List<CReserva_Autos_Perfil>();
             

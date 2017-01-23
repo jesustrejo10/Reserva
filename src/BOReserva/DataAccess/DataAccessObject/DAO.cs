@@ -1,6 +1,7 @@
 ﻿using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
+using BOReserva.Excepciones.M09;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -11,12 +12,15 @@ using System.Web;
 
 namespace BOReserva.DataAccess.DataAccessObject
 {
+    /// <summary>
+    /// Clase abstracta que maneja la conexion a la BD
+    /// </summary>
     abstract public class DAO : IDAO
     {
         protected String _connexionString = ConfigurationManager.ConnectionStrings["StringRemoto"].ConnectionString;
-        private SqlConnection conexion;
+        protected SqlConnection conexion { set;  get; }
         // El String de conexion se encuentra en el archivo Web.config
-        private SqlCommand comando;
+        protected SqlCommand comando { set;  get; }
 
         public int Agregar(Entidad e)
         {
@@ -38,10 +42,6 @@ namespace BOReserva.DataAccess.DataAccessObject
             throw new NotImplementedException();
         }
 
-        public int Eliminar(int id)
-        {
-            throw new NotImplementedException();
-        }
 
         #region Conectar con la Base de Datos
         /// <summary>
@@ -54,8 +54,8 @@ namespace BOReserva.DataAccess.DataAccessObject
 
             try
             {
+                //conexion = Connection.getInstance(_connexionString);
                 conexion = new SqlConnection(_connexionString);
-               
             }
 
             catch (Exception ex)
@@ -79,7 +79,7 @@ namespace BOReserva.DataAccess.DataAccessObject
 
             try
             {
-                conexion.Close();
+                this.conexion.Close();
             }
 
             catch (Exception ex)
@@ -292,9 +292,8 @@ namespace BOReserva.DataAccess.DataAccessObject
                 Desconectar();
             }
         }
-
-      
         #endregion
 
     }
 }
+

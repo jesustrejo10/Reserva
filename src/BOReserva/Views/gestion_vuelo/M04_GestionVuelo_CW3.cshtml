@@ -1,0 +1,126 @@
+﻿<!-- Indico que para esta vista, M04_GestionVuelo_Crear, utilizare el modelo Models/gestion_vuelo/CGestionVuelo-->
+@model BOReserva.Models.gestion_vuelo.CrearVueloMO
+
+<script src="~/Scripts/Scripts_Vuelos/llamadas_generales_Vuelos.js"></script>
+<link rel="stylesheet" href="~/Content/M04_css/style_module.css" type="text/css" />
+@using (Html.BeginForm("guardarVuelo", "gestion_vuelo", null, FormMethod.Post, new { @id = "formGuardarVuelo3", @class = "form-horizontal" }))
+{
+    
+    <div class="row">
+        <div class="col-md-12">
+            <h1>
+                Gestion de vuelos
+                <small>Crear un vuelo</small>
+            </h1>
+            <div class="box box-solid">
+                <div class="box box-solid">
+                    <div class="box-tools pull-right">
+
+                    </div>
+                </div>
+                <div>&nbsp;</div>
+                
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <!-- DROPDOWN CIUDAD ORIGEN -->
+                            <div class="col-xs-6">
+                                <label> Ciudad Origen:</label>
+                                @Html.TextBoxFor(m => m._ciudadOrigen, null, new { @class = "form-control", @id = "ciudadO2", @disabled = "disabled" })
+                            </div>
+                            <!-- FIN CIUDAD ORIGEN -->
+                            <!-- DROPDOWN CIUDAD DESTINO  -->
+                            <div class="col-xs-6">
+                                <label> Ciudad Destino:</label>
+                                @Html.TextBoxFor(m => m._ciudadDestino, null, new { @class = "form-control", @id = "ciudadD2", @disabled = "disabled" })
+                            </div>
+                            <!-- FIN CIUDAD DESTINO  -->
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <!-- DATE FECHA Despegue  -->
+                                <label> Fecha Despegue:</label>
+                                <!--desabilitado por que lleno con script que calcula segun ruta y avion-->
+                                @Html.TextBoxFor(m => m._fechaDespegue, null, new { @class = "form-control", @placeholder = "dd/mm/yyyy", @id = "fechaAterrizaje", @style = "width: 100%;", @disabled = "disabled" })
+                            </div>
+                            <!-- FIN FECHA Despegue  -->
+                            <div class="col-xs-6">
+                                <label> Hora Despegue:</label>
+                                <!--desabilitado por que lleno con script que calcula segun ruta y avion-->
+                                @Html.TextBoxFor(m => m._horaDespegue, null, new { @class = "form-control", @placeholder = "--:--", @id = "horaAterrizaje", @style = "width: 100%;", @disabled = "disabled" })
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <!-- DATE FECHA ATERRIZAJE  -->
+                                <label> Fecha Aterrizaje:</label>
+                                <!--desabilitado por que lleno con script que calcula segun ruta y avion-->
+                                @Html.TextBoxFor(m => m._fechaAterrizaje, null, new { @class = "form-control", @placeholder = "dd/mm/yyyy", @id = "fechaAterrizaje", @style = "width: 100%;", @disabled = "disabled" })
+                            </div>
+                            <!-- FIN FECHA ATERRIZAJE  -->
+                            <div class="col-xs-6">
+                                <label> Hora Aterrizaje:</label>
+                                <!--desabilitado por que lleno con script que calcula segun ruta y avion-->
+                                @Html.TextBoxFor(m => m._horaAterrizaje, null, new { @class = "form-control", @placeholder = "--:--", @id = "horaAterrizaje", @style = "width: 100%;", @disabled = "disabled" })
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <!-- TEXTBOXFOR CANTIDAD PASAJEROS -->
+                                <label>Matricula avión:</label>
+                                <!--desabilitado por que lleno con script y pertenece a otra tabla-->
+                                @Html.TextBoxFor(m => m._matriculaAvion, null, new { @class = "form-control", @id = "pasajerosAvion", @disabled = "disabled" })
+                            </div>
+                            <div class="col-xs-6">
+                                <!-- TEXTBOXFOR MODELO AVION -->
+                                <label> Modelo avion:</label>
+                                <!--desabilitado por que lleno con script y pertenece a otra tabla-->
+                                @Html.TextBoxFor(m => m._modeloAvion, null, new { @class = "form-control", @id = "modelossAvion", @disabled = "disabled" })
+                            </div>
+                            <!-- FIN MODELO AVION -->
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <!-- DROPDOWNLISTFOR STATUS-->
+                                <label> Estado vuelo (<span style="color: #d9534f">*</span>):</label>
+                                <!--Solo puede ser de tipo "Activo" o "Inactivo"-->
+                                @Html.DropDownListFor(m => m._statusVuelo, new[] { new SelectListItem() { Text = "Activo", Value = "activo"}, new SelectListItem()
+                                        { Text = "Inactivo", Value = "inactivo" } },
+                                   "Seleccione el status", new { @style = "width: 100%;", @class = "form-control", @id = "estadoVuelo" })
+                            </div>
+                            <!-- FIN STATUS  -->
+                        </div>
+                        <div>&nbsp;</div>
+                        
+                            <!-- FIN TEXTBOXFOR VELOCIDAD MAXIMA VUELO AVION -->
+                        
+                            <!-- FIN CAMPOS FORMULARIO-->
+                            <!-- BOTON GUARDAR-->
+                            <div class="col-md-12" style="margin-top:10px;">
+                                <button type="submit" id="agregarAW3" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                            </div>
+                            <!--FIN BOTON GUARDAR-->
+                        </div>
+
+                        <div>&nbsp;</div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    @Html.HiddenFor(m => m._idAvion)
+    @Html.HiddenFor(m => m._fechaDespegue)
+    @Html.HiddenFor(m => m._horaDespegue)
+    @Html.HiddenFor(m => m._codigoVuelo)
+    @Html.HiddenFor(m => m._idRuta)
+    @Html.HiddenFor(m => m._fechaAterrizaje)
+    @Html.HiddenFor(m => m._horaAterrizaje)
+}

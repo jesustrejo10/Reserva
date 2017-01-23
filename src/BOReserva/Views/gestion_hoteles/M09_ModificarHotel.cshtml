@@ -1,5 +1,6 @@
 ﻿<!-- Indico que para esta vista, M08_ModificarAutomovil, utilizare el modelo Models/gestion_automoviles/CModificarAutomovil-->
 @model BOReserva.Models.gestion_hoteles.CModificarHotel
+<link href="~/Content/Canvas/Box.css" rel="stylesheet" />
 
 <!--Indico que, estoy abriendo un formulario que tendra como accion del submit, el controlador gestion_automoviles"Controller",
     utilizara el metodo guardarAutomovil
@@ -10,8 +11,8 @@
         <meta charset="UTF-8">
     </head>
     <div class="row">
-        <div class="col-md-12">
-            <div class="box">
+        <div class="col-md-10">
+            <div class="Cajita">
                 <div class="box-header with-border">
                     <h1 class="box-title" style="font-size:32px;">Modificar Hotel</h1>
                     <div class="box-tools pull-right">
@@ -27,7 +28,7 @@
                             </div>
                             <div class="col-xs-6">
                                 <label for="modelo">Direccion(<span style="color:red">*</span>)</label>
-                                @Html.TextBoxFor(m => m._direccion, null, new { @class = "form-control", @placeholder = "Av Colombia, Calle 4", @id = "hot_direccion", @maxlength = 120 })
+                                @Html.TextBoxFor(m => m._direccion, null, new { @class = "form-control", @placeholder = "Av Colombia, Calle 4", @id = "hot_direccion", @onblur = "checkdireccion(this);", @maxlength = 120 })
 
 
                             </div>
@@ -81,17 +82,24 @@
                             </div>
                             <div class="col-xs-6">
                                 <label for="capacidad">Capacidad(<span style="color:red">*</span>)</label>                                
-                                @Html.TextBoxFor(m => m._capacidadHabitacion, null, new { @type = "number", @class = "form-control", @placeholder = "28", @id = "hot_capacidad", min = "0", @onblur = "checklargo(this);" })
+                                @Html.TextBoxFor(m => m._capacidadHabitacion, null, new { @type = "number", @class = "form-control", @placeholder = "28", @id = "hot_capacidad", min = "0", @onblur = "checklargo(this);", @readonly = "readonly" })
 
                             </div>
                         </div>
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
+                                <label for="">Precio por habitacion($)</label>
+                                @Html.TextBoxFor(m => m._precioHabitacion, null, new { @class = "form-control", @placeholder = "28", @id = "hot_pais", @readonly = "readonly" })
+                            </div>
+                            <div class="col-xs-6">
                                 <label for="">Pais</label>
                                 @Html.TextBoxFor(m => m._pais, null, new { @class = "form-control", @placeholder = "28", @id = "hot_pais", @readonly = "readonly" })
                             </div>
 
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <label for="Ciudad">Ciudad</label>                               
                                 @Html.TextBoxFor(m => m._ciudad, null, new { @class = "form-control", @placeholder = "28", @id = "hot_pais", @readonly = "readonly" })
@@ -99,15 +107,12 @@
                         </div>
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
-                        </div>
-                        <div>&nbsp;</div>
-                        <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-md-4"></div>
                             <div class="col-md-2">
-                                <button type="submit" id="modify_hotel" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                                <button id="cancel_modification" type="button" class="btn btn-danger" style="display:block; margin-left:auto; margin-right:auto;">Cancelar</button>
                             </div>
                             <div class="col-md-2">
-                                <button id="cancel_modification" type="button" class="btn btn-danger" style="display:block; margin-left:auto; margin-right:auto;">Cancelar</button>
+                                <button type="submit" id="modify_hotel" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
                             </div>
                             <div class="col-md-4"></div> 
                         </div>
@@ -142,8 +147,8 @@
                     data: form.serialize(),
                     type: 'POST',
                     success: function (data) {
-                        if (data === "1") {
-                            alert("Se modifico el hotel exitosamente, sera redirigido al listado de hoteles");
+                        if (data === "Se modifico el hotel exitosamente, sera redirigido al listado de hoteles") {
+                            alert(data);
                             //$('#formmodifyVehicle')[0].reset();
                             var url1 = '/gestion_hoteles/M09_VisualizarHoteles';
                             var method = 'GET';

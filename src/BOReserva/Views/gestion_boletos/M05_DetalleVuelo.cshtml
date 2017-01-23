@@ -1,4 +1,4 @@
-﻿<!-- Indico que para esta vista, M05_VisualizarBoleto, utilizare el modelo Models/gestion_boletos/CVisualizarBoleto-->
+<!-- Indico que para esta vista, M05_VisualizarBoleto, utilizare el modelo Models/gestion_boletos/CVisualizarBoleto-->
 @model BOReserva.Models.gestion_boletos.CVisualizarBoleto
 
 @using (Html.BeginForm("verBoleto", "gestion_boletos", null, FormMethod.Post, new { @id = "verBoleto", @class = "form-horizontal" }))
@@ -45,7 +45,7 @@
 
                         </div>
 
-                        
+
                         <div>&nbsp;</div>
 
                         <div class="col-md-12" style="margin-top:10px;">
@@ -81,16 +81,14 @@
 
                         </div>
 
-
-
-
-
-
-
-                            <div class="col-md-12" style="margin-top:10px;">
-                                <button type="button" id="siguiente" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Siguiente</button>
-                            </div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <button type="button" id="siguiente" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Siguiente</button>
                         </div>
+                    </div>
+                    <div>&nbsp;</div>
+                    <div class="row">
+                        <div id="loading" class="col-lg-12" style=" display: none; text-align:center; margin-top: 15px;"><span class="fa fa-spinner refresh-animate "></span></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -98,11 +96,11 @@
     <script>
         $("#siguiente").click(function (e) {
             e.preventDefault();
-
+            $("#loading").show();
             var id_origen = document.getElementById("id_origen").value;
             // alert("Id origen: " + id_origen);
             var id_destino = document.getElementById("id_destino").value;
-           // alert("Id destino: " + id_destino);
+            // alert("Id destino: " + id_destino);
             var fecha_despegue = document.getElementById("fechaDespegueIda").value;
             //alert("Ida y/o vuelta: " + ida_vuelta);
             var fecha_aterrizaje = document.getElementById("fechaAterrizajeIda").value;
@@ -119,7 +117,7 @@
 
             var url = '/gestion_boletos/M05_DatosUsuario';
             var method = 'GET';
-            var data = { idorigen : id_origen, iddestino : id_destino, fechadespegue : fecha_despegue, fechaaterrizaje : fecha_aterrizaje, monto :monto, tipo : tipo, idvuelo : id_vuelo };
+            var data = { idorigen: id_origen, iddestino: id_destino, fechadespegue: fecha_despegue, fechaaterrizaje: fecha_aterrizaje, monto: monto, tipo: tipo, idvuelo: id_vuelo };
 
             $.ajax(
                 {

@@ -1,85 +1,74 @@
-﻿@model BOReserva.Models.gestion_comida_vuelo.CAgregarVuelo
+﻿@model BOReserva.Models.gestion_comida_vuelo.CComida
 <script src="~/Scripts/Scripts_ComidaVuelo/llamadas_generales.js"></script>
 @using (Html.BeginForm("guardarPlatoVuelo", "gestion_comida_vuelo", null, FormMethod.Post, new { @id = "formGuardarPlatoVuelo", @class = "form-horizontal" }))
 {
     <a href="~/Views/gestion_comida_vuelo/M06_AgregarComidaVuelo.cshtml"></a>
 
 
-<div class="row">
-    <!-- Agregar Comida  -->
-    <div class="col-xs-6"> 
-        <div class="box-header with-border">
-            <h1 class="box-title"> Agregar Comida-Bebida a Vuelo</h1>
-            <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"></button>
-            </div>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-12">
-                        <label for="nombrePlato">Codigo Vuelo:</label>
-                        
-                        <label for="descripcionPlato">Descripcion (<span style="color:red">*</span>):</label>
-                        
-                         </div>
+    <div class="row">
+        <!-- Agregar Comida  -->
+        <div class="col-xs-6">
+            <div class="box-header with-border">
+                <h1 class="box-title"> Agregar Comida-Bebida a Vuelo</h1>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"></button>
                 </div>
-                <!-- /.box-body -->
             </div>
-    </div>
-   
-    </div>
-    <div class="col-xs-6">
-        <div class="box-header with-border">
-            <h1 class="box-title"></h1>
-            <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"></button>
-            </div>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-            <div class="row">
-                <div class="col-md-12">
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="row">
                     <div class="col-md-12">
-                        <label for="tipoPlato">Tipo (<span style="color:red">*</span>):</label>
-                         
-                         </div>
+
+                        @{
+                            List<SelectListItem> listItems = new List<SelectListItem>();
+                            foreach (var comida in ViewBag.listaComidas)
+                            {
+                                listItems.Add(new SelectListItem
+                                {
+                                    Text = comida._nombre,
+                                    Value = comida._id.ToString()
+                                });
+                            }
+                        }
+                        @Html.TextBoxFor(m => m._id, new { @Value = ViewBag.idVuelo, @id = "id", @type = "hidden" })
+                        <label for="nombrePlato">Nombre del Plato (<span style="color:red">*</span>):</label>
+                        @Html.DropDownListFor(m => m._nombrePlato, listItems, new { @class = "form-control", @placeholder = "--Elija una comida--", @id = "nombrePlato" })
+                        <br />
+                        <label for="cantidadPlatos">Cantidad de platos (<span style="color:red">*</span>):</label>
+                        @Html.TextBoxFor(m => m._cantidad, null, new { @class = "form-control", @placeholder = "Cantidad de platos", @id = "cantidad", @type = "number", onkeypress = "return isNumberKey(event)" })
+                    </div>
+                    <!-- /.box-body -->
                 </div>
-                <!-- /.box-body -->
+            </div>
+
+        </div>
+        <div class="col-xs-6">
+            <div class="box-header with-border">
+                <h1 class="box-title"></h1>
+                <div class="box-tools pull-right">
+                    <button type="submit" class="btn btn-box-tool" data-widget="collapse"></button>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- Fin Agregar Comida  -->
-    
-    <!-- Botón Guardar -->
-    <div>&nbsp;</div>
-    <div class="col-md-12" style="margin-top:10px;">
-        <button type="button" id="guardarPlatoVuelo" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
-    </div>
+        <!-- Fin Agregar Comida  -->
+        <!-- Botón Guardar -->
+        <div>&nbsp;</div>
+        <div class="col-md-12" style="margin-top:10px;">
+            <button type="button" id="guardarPlatoVuelo" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+        </div>
 
-   @* <script>
-        $("#aceptarPlato").click(function (e) {
-            console.log("hola!");
-            e.preventDefault();
-            var form = $("#formGuardarPlato");
-            $.ajax({
-                url: "gestion_comida_vuelo/guardarPlato",
-                data: form.serialize(),
-                type: 'POST',
-                success: function (data) {
-                    alert("Se guardo");
-                    $('#formGuardarPlato')[0].reset();
-                }
-                , error: function (xhr, textStatus, exceptionThrown) {
-                    //muestro el texto del error
-                    alert(xhr.responseText);
-                }
-            });
-        });
-    </script>*@
+        <script>
 
+        function isNumberKey(evt)
+        {
+                  var charCode = (evt.which) ? evt.which : event.keyCode;
+                  if (charCode != 46 && charCode > 31
+                    && (charCode < 48 || charCode > 57))
+                     return false;
+
+                  return true;
+        }
+        </script>
 
     </div>
-}
-
+                            }

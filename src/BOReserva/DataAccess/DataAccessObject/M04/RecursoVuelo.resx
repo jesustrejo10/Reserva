@@ -117,27 +117,27 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="codVuelo" xml:space="preserve">
+  <data name="ParametroCodVuelo" xml:space="preserve">
     <value>codVuelo</value>
     <comment>Codigo del Vuelo</comment>
   </data>
-  <data name="fechaAterrizaje" xml:space="preserve">
+  <data name="ParametroFechaAterrizaje" xml:space="preserve">
     <value>fechaAterrizajeVuelo</value>
     <comment>Fecha programada para el aterrizaje del vuelo</comment>
   </data>
-  <data name="fechaDespegue" xml:space="preserve">
+  <data name="ParametroFechaDespegue" xml:space="preserve">
     <value>fechaDespegueVuelo</value>
     <comment>Fecha programada para el despegue del vuelo</comment>
   </data>
-  <data name="idAvion" xml:space="preserve">
+  <data name="ParametroIdAvion" xml:space="preserve">
     <value>idAvion</value>
     <comment>ID del avion que realizara el vuelo</comment>
   </data>
-  <data name="idRuta" xml:space="preserve">
+  <data name="ParametroIdRuta" xml:space="preserve">
     <value>idRuta</value>
     <comment>ID de la Ruta que cubre el vuelo</comment>
   </data>
-  <data name="idVuelo" xml:space="preserve">
+  <data name="ParametroIdVuelo" xml:space="preserve">
     <value>idVuelo</value>
     <comment>ID del Vuelo</comment>
   </data>
@@ -145,8 +145,125 @@
     <value>M04_ListarVuelos</value>
     <comment>Procedimiento de la BD que devuelve una lista con todos los vuelos</comment>
   </data>
-  <data name="status" xml:space="preserve">
+  <data name="ParametroStatus" xml:space="preserve">
     <value>statusVuelo</value>
     <comment>Status del vuelo Activo o Inactivo</comment>
+  </data>
+  <data name="CambiarStatus" xml:space="preserve">
+    <value>M04_CambiarStatus</value>
+    <comment>Procedimiento de la BD que cambia el status del vuelo de activo a inactivo y viceversa</comment>
+  </data>
+  <data name="EliminarVuelo" xml:space="preserve">
+    <value>M04_EliminarVuelo</value>
+    <comment>Procedimiento de la BD que elimina un vuelo por id</comment>
+  </data>
+  <data name="ParametroaAMatricula" xml:space="preserve">
+    <value>aMatricula</value>
+    <comment>Matricula del Avion</comment>
+  </data>
+  <data name="ParametroAModelo" xml:space="preserve">
+    <value>aModelo</value>
+    <comment>Modelo del Avion</comment>
+  </data>
+  <data name="ParametroCDestino" xml:space="preserve">
+    <value>cDestino</value>
+    <comment>Ciudad de destino de la ruta</comment>
+  </data>
+  <data name="ParametroCOrigen" xml:space="preserve">
+    <value>cOrigen</value>
+    <comment>Ciudad de origen de la ruta</comment>
+  </data>
+  <data name="ParametroIdDestino" xml:space="preserve">
+    <value>idDestino</value>
+    <comment>Id del lugar de destino de la ruta</comment>
+  </data>
+  <data name="ParametroIdOrigen" xml:space="preserve">
+    <value>idOrigen</value>
+    <comment>Id del lugar de origen de la ruta</comment>
+  </data>
+  <data name="ListarLugarO" xml:space="preserve">
+    <value>M04_ListarLugarO</value>
+    <comment>Procedimiento de la BD que retorna una lista con todos los lugares que tienen rutas activas</comment>
+  </data>
+  <data name="ListarLugarD" xml:space="preserve">
+    <value>M04_ListarLugarD</value>
+    <comment>Procedimiento de la BD que devuelve una lista con todos los lugares destino para cierto lugar origen</comment>
+  </data>
+  <data name="BuscarAvionRuta" xml:space="preserve">
+    <value>M04_BuscarAvionRuta</value>
+    <comment>Procedimiento de la BD que busca un avion que este en la capacidad de cubrir la ruta determinada</comment>
+  </data>
+  <data name="ParametroVelMaxima" xml:space="preserve">
+    <value>aVelMax</value>
+    <comment>Velocidad maxima del avion</comment>
+  </data>
+  <data name="ParametroCapacidadMaxima" xml:space="preserve">
+    <value>aCapMax</value>
+    <comment>Capacidad maxima de pasajeros del avion</comment>
+  </data>
+  <data name="ParametroDistMaxima" xml:space="preserve">
+    <value>aDistMax</value>
+    <comment>Distancia maxima del avion</comment>
+  </data>
+  <data name="FechaAterrizaje" xml:space="preserve">
+    <value>M04_CalcularFechaAterrizaje</value>
+    <comment>Procedimiento de la bd que determina la fecha de aterrizaje segun ciertos parametros</comment>
+  </data>
+  <data name="CrearVuelo" xml:space="preserve">
+    <value>M04_CrearVuelo</value>
+    <comment>Procedimiento de la BD para crear un vuelo</comment>
+  </data>
+  <data name="BuscaVueloID" xml:space="preserve">
+    <value>M04_BuscaVuelo</value>
+    <comment>Procedimiento de la BD que busca la informacion de un vuelo por su id</comment>
+  </data>
+  <data name="ModificarVuelo" xml:space="preserve">
+    <value>M04_ModificarVuelo</value>
+    <comment>Procedimiento de la BD que modifica un vuelo</comment>
+  </data>
+  <data name="ErrorAvionRuta" xml:space="preserve">
+    <value>No hay aviones disponibles para cubrir la ruta seleccionada</value>
+  </data>
+  <data name="ErrorDaoVuelo" xml:space="preserve">
+    <value>Reserva-404</value>
+    <comment>Error metodos DAO</comment>
+  </data>
+  <data name="ErrorMensajeArgumento" xml:space="preserve">
+    <value>Argumento nulo</value>
+  </data>
+  <data name="ErrorMensajeFormato" xml:space="preserve">
+    <value>Formato invalido</value>
+  </data>
+  <data name="BuscarCodigo" xml:space="preserve">
+    <value>M04_BuscarCodigo</value>
+    <comment>Procedimiento que busca un codigo de vuelo en la bd</comment>
+  </data>
+  <data name="ErrorCodigoDuplicado" xml:space="preserve">
+    <value>El codigo de vuelo ya se encuentra registrado</value>
+    <comment>Error de la BD</comment>
+  </data>
+  <data name="ErrorCampoVacio" xml:space="preserve">
+    <value>Campos Obligatorios Vacios</value>
+    <comment>Mensaje de Error</comment>
+  </data>
+  <data name="ErrorGeneralBD" xml:space="preserve">
+    <value>Error en la conexión con la Base de Datos</value>
+    <comment>Mensaje de Error</comment>
+  </data>
+  <data name="ErrorMensajeDependencia" xml:space="preserve">
+    <value>Error: Existen registros asociados a este vuelo</value>
+    <comment>Error registros asociados</comment>
+  </data>
+  <data name="ParametroCapacidadEjecutiva" xml:space="preserve">
+    <value>capEje</value>
+    <comment>Capacidad Ejecutiva</comment>
+  </data>
+  <data name="ParametroCapacidadTurista" xml:space="preserve">
+    <value>capTur</value>
+    <comment>Capacidad Turista</comment>
+  </data>
+  <data name="ParametroCapacidadVIP" xml:space="preserve">
+    <value>capVip</value>
+    <comment>Capacidad vip</comment>
   </data>
 </root>

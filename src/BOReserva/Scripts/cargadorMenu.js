@@ -22,7 +22,7 @@ jQuery(document).ready(function () {
     });
     $("#m02_agregaravion").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_aviones/M02_AgregarAvion';
+        var url = '/gestion_aviones/M02_CrearAvion';
         var method = 'GET';
         var data = '';
         $.ajax(
@@ -245,6 +245,8 @@ jQuery(document).ready(function () {
         var method = 'GET';
         var data = '';
         $.ajax(
+
+            alert("Se esta procesando tu solicitud, por favor espere"),
             {
                 url: url,
                 type: method,
@@ -267,6 +269,8 @@ jQuery(document).ready(function () {
         var data = '';
 
         $.ajax(
+
+            alert("Se esta procesando tu solicitud, por favor espere"),
             {
                 url: url,
                 type: method,
@@ -312,7 +316,7 @@ jQuery(document).ready(function () {
         e.preventDefault();
         var url = '/gestion_restaurantes/M10_GestionRestaurantes_Ver';
         var method = 'GET';
-        var data = '';
+        var data = -1;
 
         $.ajax(
             {
@@ -466,7 +470,6 @@ jQuery(document).ready(function () {
                 }
             });
     });
-    //M13 ROLES
     $("#m13ModificarRol").click(function (e) {
         e.preventDefault();
         var url = '/gestion_roles/M13_ModificarRol';
@@ -509,14 +512,58 @@ jQuery(document).ready(function () {
                 }
             });
     });
+    $("#m13AgregarPermiso").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_roles/M13_AgregarPermiso';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+    $("#m13VisualizarPermiso").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_roles/M13_VisualizarPermiso';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
     //FIN M13 ROLES
 
     // Comienzo M12 Usuarios
     $("#indexUsuarios").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_usuarios/M12_Index';
+        var url = '/gestion_usuarios/M12_VisualizarUsuarios';
         var method = 'GET';
         var data = '';
+        console.log("HOLA CHAMA");
+        console.log ("HABLAAA");
         $.ajax(
             {
                 url: url,
@@ -534,7 +581,7 @@ jQuery(document).ready(function () {
 
     $("#agregarUsuarios").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_usuarios/M12_AgregarUsuario';
+        var url = '/gestion_usuarios/M12_AgregarUsuario2';
         var method = 'GET';
         var data = '';
 
@@ -559,7 +606,7 @@ jQuery(document).ready(function () {
     //Inicio M04 Vuelos
     $("#m04_crearvuelo").click(function (e) {
         e.preventDefault();
-        var url = '/gestion_vuelo/M04_GestionVuelo_Crear';
+        var url = '/gestion_vuelo/M04_GestionVuelo_CW1';
         var method = 'GET';
         var data = '';
         $.ajax(
@@ -604,7 +651,6 @@ jQuery(document).ready(function () {
     // INICIO DE M16_GESTON_RECLAMO
     $("#M16_AgregarReclamo").click(function (e) {
         e.preventDefault();
-        alert('entro aqui karli');
         var url = '/gestion_reclamos/M16_AgregarReclamo';
         var method = 'GET';
         var data = '';
@@ -848,6 +894,28 @@ jQuery(document).ready(function () {
             });
     });
 
+    $("#m24_listarcabinas").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_cruceros/M24_ListarCabinas';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
     $("#m24_agregarcamarote").click(function (e) {
         e.preventDefault();
         var url = '/gestion_cruceros/M24_AgregarCamarote';
@@ -869,6 +937,29 @@ jQuery(document).ready(function () {
                 }
             });
     });
+
+    $("#m24_listarcamarotes").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_cruceros/M24_ListarCamarotes';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
 
     $("#m24_agregaritinerario").click(function (e) {
         e.preventDefault();

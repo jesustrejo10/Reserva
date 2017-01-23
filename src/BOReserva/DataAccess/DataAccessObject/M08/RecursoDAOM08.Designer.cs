@@ -27,7 +27,8 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
-        
+        internal static string procedimientoCambiarEstatus;
+
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal RecursoDAOM08() {
         }
@@ -383,5 +384,20 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
                 return ResourceManager.GetString("transmision", resourceCulture);
             }
         }
+
+        public static string procedimientoModificarAutomovil { get; internal set; }
+
+        public static System.Data.DataColumn pais { get; set; }
+
+        public static System.Data.DataColumn ciudad { get; set; }
+
+        public static string MensajeInicioMetodoLogger { get; set; }
+
+        public static string MensajeFinMetodoLogger { get; set; }
+
+        public static string MensajeErrorFormato { get; set; }
+        public static string disponibilidad { get; internal set; }
+
+        public static string procedimientoExisteMatriculaAutomovil { get; set; }
     }
 }

@@ -23,13 +23,14 @@ namespace BOReserva.Controllers
         /// Método para el acceso a la interfaz de visualización de restaurantes.
         /// </summary>
         /// <returns>Retorna un objeto para renderizar la vista parcial.</returns>
-        public ActionResult M10_GestionRestaurantes_Ver(int id = 0)
+        public ActionResult M10_GestionRestaurantes_Ver(int id = -1)
         {
-            ViewBag.Ciudad = FabricaVista.asignarItemsComboBox(cargarComboBoxLugar(), "Id", "Name");
-        
-            if (id != 0)
+            //Carga Inicial de la vista ver se coloca por defecto un -1 debido a que no hay una ciudad seleccionada por defecto
+            try
             {
-               
+                ViewBag.Ciudad = FabricaVista.asignarItemsComboBox(cargarComboBoxLugar(), "Id", "Name");
+
+
                 Entidad _lugar = FabricaEntidad.crearLugar(id, "");//Aqui se envia la clave foranea de lugar para realizar la busqueda
                 Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, BOReserva.Controllers.PatronComando.FabricaComando.comandoRestaurant.NULO, _lugar);
                 List<Entidad> restaurantes = comando.ejecutar();
@@ -39,14 +40,15 @@ namespace BOReserva.Controllers
                 foreach (Entidad item in restaurantes)
                 {
                     lista.Add((CRestauranteModelo)item);
-                   
                 }
 
                 Restaurant.listaRestaurantes = lista;
                 return PartialView(Restaurant);
             }
-
-            return PartialView();
+            catch (Exception)
+            {
+                return PartialView();
+            }
         }
 
         #endregion
@@ -71,25 +73,36 @@ namespace BOReserva.Controllers
         /// <returns>Retorna un objeto para renderizar la vista parcial.</returns>
         public ActionResult M10_GestionRestaurantes_Modificar(int id)
         {    
-            Entidad _restaurant = FabricaEntidad.crearRestaurant();
-            ((CRestauranteModelo)_restaurant)._id = id;
-            Command<Entidad> comando = (Command<Entidad>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, BOReserva.Controllers.PatronComando.FabricaComando.comandoRestaurant.CONSULTAR_ID, _restaurant);
-            Entidad rest = comando.ejecutar();
+            try
+            {
+                //Atributos del metodo
+                Entidad _restaurant = FabricaEntidad.crearRestaurant();
+                ((CRestauranteModelo)_restaurant)._id = id;
+                Command<Entidad> comando = (Command<Entidad>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, BOReserva.Controllers.PatronComando.FabricaComando.comandoRestaurant.CONSULTAR_ID, _restaurant);
+                Entidad rest = comando.ejecutar();
 
-            ViewBag.Ciudad = FabricaVista.asignarItemsComboBoxConPosicion(cargarComboBoxLugar(), "Id", "Name",((CRestauranteModelo)rest).idLugar);
-            ViewBag.HorariosIni = FabricaVista.asignarItemsComboBoxConPosicion(cargarComboBoxHorario(), "", "", ((CRestauranteModelo)rest).horarioApertura);
-            ViewBag.HorariosFin = FabricaVista.asignarItemsComboBoxConPosicion(cargarComboBoxHorario(), "", "", ((CRestauranteModelo)rest).horarioCierre);
+                //Cargar la ciudad donde se encuentra el restaurant registrado en la base de datos
+                ViewBag.Ciudad = FabricaVista.asignarItemsComboBoxConPosicion(cargarComboBoxLugar(), "Id", "Name", ((CRestauranteModelo)rest).idLugar);
+                ViewBag.HorariosIni = FabricaVista.asignarItemsComboBoxConPosicion(cargarComboBoxHorario(), "", "", ((CRestauranteModelo)rest).horarioApertura);
+                ViewBag.HorariosFin = FabricaVista.asignarItemsComboBoxConPosicion(cargarComboBoxHorario(), "", "", ((CRestauranteModelo)rest).horarioCierre);
 
-            ViewBag.Id = ((CRestauranteModelo)rest)._id;
-            ViewBag.NombreRestaurant = ((CRestauranteModelo)rest).nombre;
-            ViewBag.DescripcionRestaurant = ((CRestauranteModelo)rest).descripcion;
-            ViewBag.DireccionRestaurant = ((CRestauranteModelo)rest).direccion;
-            ViewBag.TelefonoRestaurant = ((CRestauranteModelo)rest).Telefono;
-            ViewBag.IdLugarRestaurant = ((CRestauranteModelo)rest).idLugar;
-            ViewBag.HoraIniRestaurant = ((CRestauranteModelo)rest).horarioApertura;
-            ViewBag.HoraFinRestaurant = ((CRestauranteModelo)rest).horarioCierre;
-            
-            return PartialView();
+                //Elementos a cargar en la Ventana
+                ViewBag.Id = ((CRestauranteModelo)rest)._id;
+                ViewBag.NombreRestaurant = ((CRestauranteModelo)rest).nombre;
+                ViewBag.DescripcionRestaurant = ((CRestauranteModelo)rest).descripcion;
+                ViewBag.DireccionRestaurant = ((CRestauranteModelo)rest).direccion;
+                ViewBag.TelefonoRestaurant = ((CRestauranteModelo)rest).Telefono;
+                ViewBag.IdLugarRestaurant = ((CRestauranteModelo)rest).idLugar;
+                ViewBag.HoraIniRestaurant = ((CRestauranteModelo)rest).horarioApertura;
+                ViewBag.HoraFinRestaurant = ((CRestauranteModelo)rest).horarioCierre;
+
+                return PartialView();
+            }
+            catch (Exception)
+            {
+
+                return PartialView();
+            }
         }
         #endregion
 
@@ -101,28 +114,37 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult guardarRestaurante(String Nombre,String Direccion,String Telefono, String Descripcion, int idLugar,String HoraIni,String HoraFin)
         {
-          
+           //Las variables se reciben de esta forma para asemejar los mas posible a la Arquitectura MVC tradicional
 
             //Chequeo de campos obligatorios para el formulario
-            //if ((model.nombre == null) || (model.direccion == null) 
-            //    || (model.horarioApertura == null) || (model.horarioCierre == null) || (model.idLugar == -1))
-            //{
-            //    Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            //    string error = "Error, campo obligatorio vacío";
-            //    return Json(error);
-            //}
-            Entidad _restaurant = FabricaEntidad.crearRestaurant(Nombre, Direccion,Telefono, Descripcion, HoraIni, HoraFin, idLugar);
-            Command<Boolean> comando = (Command<Boolean>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CREAR, BOReserva.Controllers.PatronComando.FabricaComando.comandoRestaurant.NULO, _restaurant);
-                    
-         
-            if (comando.ejecutar())
-            {
-                return (Json(true, JsonRequestBehavior.AllowGet));
-            }
-            else
+            if ((Nombre == "") || (Direccion == "")|| (HoraIni == "Horario Inicio") || (Telefono == "") || (HoraFin == "Horario Fin") || (idLugar == 0))
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                string error = "Error agregando el restaurante.";
+                string error = "Error, existen campos vacios";
+                return Json(error);
+            }
+
+            try
+            {
+                Entidad _restaurant = FabricaEntidad.crearRestaurant(Nombre, Direccion, Telefono, Descripcion, HoraIni, HoraFin, idLugar);
+                Command<Boolean> comando = (Command<Boolean>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CREAR, BOReserva.Controllers.PatronComando.FabricaComando.comandoRestaurant.NULO, _restaurant);
+
+
+                if (comando.ejecutar())
+                {
+                    return (Json(true, JsonRequestBehavior.AllowGet));
+                }
+                else
+                {
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    string error = "Error agregando el restaurante.";
+                    return Json(error);
+                }
+            }
+            catch (Exception)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                string error = "Error de Conexion BD";
                 return Json(error);
             }
             
@@ -138,26 +160,39 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult modificarRestaurante(int Id,String Nombre, String Direccion, String Telefono, String Descripcion, int idLugar, String HoraIni, String HoraFin)
         {
-            //Chequeo de campos obligatorios para el formulario
-            //if ((model.id == -1) || (model.nombre == null) || (model.direccion == null)
-            //    || (model.horarioApertura == null) || (model.horarioCierre == null) || (model.idLugar == -1))
-            //{
-            //    Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            //    string error = "Error, campo obligatorio vacío";
-            //    return Json(error);
-            //}
-            Entidad _restaurant = FabricaEntidad.crearRestaurant(Id,Nombre, Direccion, Telefono, Descripcion, HoraIni, HoraFin, idLugar);
-            Command<Boolean> comando = (Command<Boolean>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.ACTUALIZAR, BOReserva.Controllers.PatronComando.FabricaComando.comandoRestaurant.NULO, _restaurant);
+            //Las variables se reciben de esta forma para asemejar los mas posible a la Arquitectura MVC tradicional
 
-            if (comando.ejecutar())
+            //Chequeo de campos obligatorios para el formulario
+            if ((Nombre == "") || (Direccion == "") || (HoraIni == "Horario Inicio") || (Telefono == "") || (HoraFin == "Horario Fin") || (idLugar == 0))
             {
-                return (Json(true, JsonRequestBehavior.AllowGet));
+                
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                string error = "Error, campo obligatorio vacío";
+                return Json(error);
             }
-            else
+
+            try
+            {
+                Entidad _restaurant = FabricaEntidad.crearRestaurant(Id, Nombre, Direccion, Telefono, Descripcion, HoraIni, HoraFin, idLugar);
+                Command<Boolean> comando = (Command<Boolean>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.ACTUALIZAR, BOReserva.Controllers.PatronComando.FabricaComando.comandoRestaurant.NULO, _restaurant);
+
+                if (comando.ejecutar())
+                {
+                    return (Json(true, JsonRequestBehavior.AllowGet));
+                }
+                else
+                {
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    string error = "Error modificando el restaurante.";
+                    return Json(error);
+                }
+            }
+            catch (Exception)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                string error = "Error modificando el restaurante.";
+                string error = "Error de Conexion BD";
                 return Json(error);
+
             }
         }
         #endregion
@@ -170,27 +205,36 @@ namespace BOReserva.Controllers
         [HttpGet]
         public JsonResult eliminarRestaurante(int id)
         {
-            System.Diagnostics.Debug.WriteLine("Id de resturant a eliminar "+id);
+            try
+            {
 
-            Entidad _restaurant = FabricaEntidad.crearRestaurant();
-            ((CRestauranteModelo)_restaurant)._id = id;
-            Command<Boolean> comando = (Command<Boolean>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.ELIMINAR, BOReserva.Controllers.PatronComando.FabricaComando.comandoRestaurant.NULO, _restaurant);
-            //Chequeo de campos obligatorios para el formulario
-            if ((id == -1))
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                string error = "Error, campo obligatorio vacío";
-                return Json(error);
+                Entidad _restaurant = FabricaEntidad.crearRestaurant();
+                ((CRestauranteModelo)_restaurant)._id = id;
+                Command<Boolean> comando = (Command<Boolean>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.ELIMINAR, BOReserva.Controllers.PatronComando.FabricaComando.comandoRestaurant.NULO, _restaurant);
+                //Chequeo de campos obligatorios para el formulario
+                if ((id == -1))
+                {
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    string error = "Error, campo obligatorio vacío";
+                    return Json(error);
+                }
+
+                if (comando.ejecutar())
+                {
+                    return (Json(true, JsonRequestBehavior.AllowGet));
+                }
+                else
+                {
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    string error = "Error eliminando el restaurante.";
+                    return Json(error);
+                }
             }
-     
-            if (comando.ejecutar())
+            catch (Exception)
             {
-                return (Json(true, JsonRequestBehavior.AllowGet));
-            }
-            else
-            {
+
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                string error = "Error eliminando el restaurante.";
+                string error = "Error de Conexion BD";
                 return Json(error);
             }
 
@@ -204,17 +248,27 @@ namespace BOReserva.Controllers
         /// <returns></returns>
         public List<Lugar> cargarComboBoxLugar()
         {
-            Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.comandosVistaRestaurant(FabricaComando.comandoVista.CARGAR_LUGAR);
-            List<Entidad> lugares = comando.ejecutar();
-            List<Lugar> lista = FabricaEntidad.crearListaLugar() ;
-            Lugar lug;
-            foreach (Entidad lugar in lugares)
+            List<Lugar> lista2 = FabricaEntidad.crearListaLugar();
+            lista2.Add(FabricaEntidad.crearLugar(0,"Error en Carga BD"));
+            try
             {
-                lug = (Lugar)lugar;
-                lista.Add(lug);
+                Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.comandosVistaRestaurant(FabricaComando.comandoVista.CARGAR_LUGAR);
+                List<Entidad> lugares = comando.ejecutar();
+                List<Lugar> lista = FabricaEntidad.crearListaLugar();
+                Lugar lug;
+                foreach (Entidad lugar in lugares)
+                {
+                    lug = (Lugar)lugar;
+                    lista.Add(lug);
 
+                }
+                return lista;
             }
-            return lista;
+            catch (Exception)
+            {
+
+                return lista2;
+            }
         }
         #endregion
 

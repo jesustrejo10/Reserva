@@ -11,14 +11,27 @@ using BOReserva.Controllers.PatronComando;
 
 namespace BOReserva.Controllers
 {
+    /// <summary>
+    /// Clase que emite las respuestas de los eventos AJAX
+    /// /// Clase Controladora del modulo 6, Gestion de Comidas
+    /// </summary>
     public class gestion_comida_vueloController : Controller
     {
+        /// <summary>
+        /// Metodo para devolver la vista de agregar comida
+        /// </summary>
+        /// <returns>Retorna un ActionResult que contiene la vista </returns>
         public ActionResult M06_AgregarComida()
         {
             CAgregarComida model = new CAgregarComida();
             return PartialView(model);
         }
 
+
+        /// <summary>
+        /// Metodo para guardar un plato, haciendo el insert en la base de datos 
+        /// </summary>
+        /// <returns>Retorna un JsonResult que contiene los elementos de la vista </returns>
         [HttpPost]
         public JsonResult guardarPlato(CAgregarComida model)
         {
@@ -30,7 +43,7 @@ namespace BOReserva.Controllers
             }
 
             Entidad _comida = FabricaEntidad.instanciarComida(model._nombrePlato, model._tipoPlato, model._estatusPlato, model._descripcionPlato);
-            Command<bool> comando = (Command<bool>)FabricaComando.gestionComida(FabricaComando.comandosComida.CREAR, _comida);
+            Command<bool> comando = (Command<bool>)FabricaComando.gestionComida(FabricaComando.comandosComida.CREAR_COMIDA, _comida);
 
             if (comando.ejecutar())
             {
@@ -44,57 +57,151 @@ namespace BOReserva.Controllers
             }
         }
 
+
+        /// <summary>
+        /// Metodo para asociar una comida a un vuelo, haciendo el insert en la base de datos 
+        /// </summary>
+        /// <returns>Retorna un JsonResult que contiene los elementos de la vista </returns>
+        [HttpPost]
+        public JsonResult guardarPlatoVuelo(CComida model)
+        {
+            int id = model._id;
+            string idPlato = model._nombrePlato;
+            int cantidadPlatos = model._cantidad;
+            Entidad _comida = FabricaEntidad.instanciarComidaVuelo(id, idPlato, cantidadPlatos);
+            Command<bool> comando = (Command<bool>)FabricaComando.gestionComida(FabricaComando.comandosComida.CREAR_COMIDA_VUELO, _comida);
+
+            if (comando.ejecutar())
+            {
+                return (Json(true, JsonRequestBehavior.AllowGet));
+            }
+            else
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                string error = "Error agregando comida al vuelo.";
+                return Json(error);
+            }
+        }
+
         //--------------------------------------------------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------------------------------------------------
 
+
+        /// <summary>
+        /// Metodo que lee los vuelos de la base de datos para mostrarlos en agregar comida por vuelo
+        /// </summary>
+        /// <returns>Retorna un ActionResult que contiene los elementos de la vista </returns>
         public ActionResult M06_AgregarPorVuelo()
         {
-            manejadorSQL sql = new manejadorSQL();
-            //manejadorSQL sqlPasajero = new manejadorSQL();
-            List<CVuelo> vuelos = new List<CVuelo>();
-            vuelos = sql.listarVuelosEnBD();
-            return PartialView(vuelos);
+            List<Entidad> listaVuelos = null;
+
+            Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.gestionComida(FabricaComando.comandosComida.CONSULTAR_VUELOS, null);
+
+            listaVuelos = comando.ejecutar();
+
+            if (listaVuelos != null)
+            {
+                ViewBag.listaVuelos = listaVuelos;
+                return PartialView();
+            }
+            else
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                string error = "Error consultando Vuelos.";
+                return Json(error);
+            } 
         }
 
-        public ActionResult M06_ConsultarComida(int id)
+
+        /// <summary>
+        /// Metodo que retorna la vista para asociar comidas a un vuelo
+        /// </summary>
+        /// <returns>Retorna un ActionResult que contiene los elementos de la vista </returns>
+        public ActionResult M06_AgregarComidaVuelo(int id)
         {
-            manejadorSQL sql = new manejadorSQL();
-            CComida comida = new CComida();
-            comida = sql.consultarComida(id);
-            CEditarComida modelo = new CEditarComida(comida);
-            return PartialView("M06_EditarComida", modelo);
+            List<Entidad> listaComidas = null;
+
+            Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.gestionComida(FabricaComando.comandosComida.CONSULTAR_COMIDAS, null);
+
+            listaComidas = comando.ejecutar();
+
+            if (listaComidas != null)
+            {
+                ViewBag.idVuelo = id;
+                ViewBag.listaComidas = listaComidas;
+                return PartialView();
+            }
+            else
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                string error = "Error consultando comidas.";
+                return Json(error);
+            }
         }
 
+        /// <summary>
+        /// Metodo para visualizar las comidas y bebidas
+        /// </summary>
+        /// <returns>Retorna un ActionResult que contiene los elementos de la vista </returns>
         public ActionResult M06_VisualizarComidas()
         {
-            manejadorSQL sql = new manejadorSQL();
-            List<CComida> comidas = new List<CComida>();
-            comidas = sql.listarPlatosEnBD();
-            return PartialView(comidas);
-            //return PartialView();
+            List<Entidad> listaComidas = null;
+
+            Command<List<Entidad>> comando = (Command<List<Entidad>>) FabricaComando.gestionComida(FabricaComando.comandosComida.CONSULTAR_COMIDAS, null);
+
+            listaComidas = comando.ejecutar();
+
+            if (listaComidas != null)
+            {
+                return PartialView(listaComidas);
+            }
+            else
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                string error = "Error consultando comidas.";
+                return Json(error);
+            }
         }
 
+        /// <summary>
+        /// Metodo para visualizar las comidas asociadas a los vuelos
+        /// </summary>
+        /// <returns>Retorna un ActionResult que contiene los elementos de la vista </returns>
         public ActionResult M06_VisualizarVuelosComidas()
         {
-            manejadorSQL sql = new manejadorSQL();
-            List<CVueloComida> comidas = new List<CVueloComida>();
-            comidas = sql.listarVuelosComidaEnBD();
-            return PartialView(comidas);
+            List<Entidad> listaComidasVuelos = null;
+
+            Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.gestionComida(FabricaComando.comandosComida.CONSULTAR_COMIDAS_VUELOS, null);
+
+            listaComidasVuelos = comando.ejecutar();
+
+            if (listaComidasVuelos != null)
+            {
+                return PartialView(listaComidasVuelos);
+            }
+            else
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                string error = "Error consultando vuelos y comidas.";
+                return Json(error);
+            }
+
+            return PartialView(listaComidasVuelos);
             //return PartialView();
         }
 
         /// <summary>
-        /// Metodo para que el lato este disponible para su uso
+        /// Metodo para que el plato este disponible para su uso
         /// </summary>
         /// <param name="id"> int </param>
         /// <returns> JsonResult booleano conteniendo la respuesta del sistema </returns>
         [HttpPost]
         public JsonResult habilitarPlato(int id)
         {
-            manejadorSQL sql = new manejadorSQL();
-            Boolean resultado = sql.habilitarPlato(id);
-            if (resultado)
+            Entidad _comida = FabricaEntidad.instanciarComida(id);
+            Command<bool> comando = (Command<bool>)FabricaComando.gestionComida(FabricaComando.comandosComida.HABILITAR_COMIDA, _comida);
+            if (comando.ejecutar())
             {
                 return (Json(true, JsonRequestBehavior.AllowGet));
             }
@@ -110,16 +217,17 @@ namespace BOReserva.Controllers
         }
 
         /// <summary>
-        /// Metodo para que el lato NO este disponible para su uso
+        /// Metodo para que el plato NO este disponible para su uso
         /// </summary>
         /// <param name="id"> int </param>
         /// <returns> JsonResult booleano conteniendo la respuesta del sistema</returns>
         [HttpPost]
         public JsonResult deshabilitarPlato(int id)
         {
-            manejadorSQL sql = new manejadorSQL();
-            Boolean resultado = sql.deshabilitarPlato(id);
-            if (resultado)
+            Entidad _comida = FabricaEntidad.instanciarComida(id);
+            Command<bool> comando = (Command<bool>)FabricaComando.gestionComida(FabricaComando.comandosComida.DESHABILITAR_COMIDA, _comida);
+
+            if (comando.ejecutar())
             {
                 return (Json(true, JsonRequestBehavior.AllowGet));
             }
@@ -134,7 +242,33 @@ namespace BOReserva.Controllers
             }
         }
 
+        /// <summary>
+        /// Metodo que retorna la vista para editar el plato
+        /// </summary>
+        /// <returns>Retorna un ActionResult que contiene los elementos de la vista </returns>
+        public ActionResult M06_EditarPlato(int id)
+        {
+            Entidad _comida = FabricaEntidad.instanciarComida(id);
+            Command<Entidad> comando = (Command<Entidad>)FabricaComando.gestionComida(FabricaComando.comandosComida.RELLENAR_COMIDA, _comida);
+
+            Entidad comida = comando.ejecutar();
+            return PartialView(comida);
         }
+
+
+        /// <summary>
+        /// Metodo que edita los datos de un plato
+        /// </summary>
+        /// <returns>Retorna un JsonResult que contiene los elementos de la vista </returns>
+        public JsonResult editarPlatoComida(int id, string nombre, string tipo, int estatus, string descripcion) {
+
+            Entidad _comida = FabricaEntidad.instanciarComida(id, nombre, tipo, estatus, descripcion);
+            Command<bool> comando = (Command<bool>)FabricaComando.gestionComida(FabricaComando.comandosComida.EDITAR_COMIDA, _comida);
+            bool resultado = comando.ejecutar();
+
+            return Json(resultado); 
+        }
+    }
        
 	}
 

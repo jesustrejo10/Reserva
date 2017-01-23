@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="hot_cantidad_habitaciones" xml:space="preserve">
+    <value>@hot_cantidad_habitaciones</value>
+    <comment>Nombre del atributo en Base de datos Cantidad habitaciones</comment>
+  </data>
+  <data name="hot_direccion" xml:space="preserve">
+    <value>@hot_direccion</value>
+    <comment>Nombre del atributo en Base de datos Direccion</comment>
+  </data>
+  <data name="hot_disponible" xml:space="preserve">
+    <value>@hot_disponible</value>
+  </data>
+  <data name="hot_email" xml:space="preserve">
+    <value>@hot_email</value>
+    <comment>Nombre del atributo en Base de datos Email</comment>
+  </data>
+  <data name="hot_estrellas" xml:space="preserve">
+    <value>@hot_estrellas</value>
+    <comment>Nombre del atributo en Base de datos Estrellas</comment>
+  </data>
+  <data name="hot_fk_ciudad" xml:space="preserve">
+    <value>@hot_fk_ciudad</value>
+    <comment>Nombre del atributo en Base de datos Fk ciudad</comment>
+  </data>
+  <data name="hot_id" xml:space="preserve">
+    <value>@hot_id</value>
+    <comment>Nombre del atributo en Base de datos Id</comment>
+  </data>
+  <data name="hot_nombre" xml:space="preserve">
+    <value>@hot_nombre</value>
+    <comment>Nombre del atributo en Base de datos Nombre</comment>
+  </data>
+  <data name="hot_pagina" xml:space="preserve">
+    <value>@hot_pagina</value>
+    <comment>Nombre del atributo en Base de datos Pagina</comment>
+  </data>
+  <data name="id_ciudad" xml:space="preserve">
+    <value>id_ciudad</value>
+  </data>
+  <data name="id_pais" xml:space="preserve">
+    <value>id_pais</value>
+  </data>
+  <data name="nombre_ciudad" xml:space="preserve">
+    <value>nombre_ciudad</value>
+  </data>
+  <data name="nombre_pais" xml:space="preserve">
+    <value>nombre_pais</value>
+  </data>
+  <data name="ProcedimientoAgregarHotel" xml:space="preserve">
+    <value>M09_AgregarHotel</value>
+    <comment>Nombre del Procedimiento Agregar Hotel en la  Base de Datos </comment>
+  </data>
+  <data name="ProcedimientoCambiarDisponibilidad" xml:space="preserve">
+    <value>M09_CambiarStatusHotel</value>
+  </data>
+  <data name="ProcedimientoConsultarHotel" xml:space="preserve">
+    <value>M09_ConsultarHotel</value>
+  </data>
+  <data name="ProcedimientoConsultarTodos" xml:space="preserve">
+    <value>M09_ConsultarHoteles</value>
+  </data>
+  <data name="ProcedimientoEliminarHotel" xml:space="preserve">
+    <value>M09_EliminarHotel</value>
+    <comment>Nombre del Procedimiento Eliminar Hotel en la  Base de Datos</comment>
+  </data>
+  <data name="ProcedimientoModificarHotel" xml:space="preserve">
+    <value>M09_ModificarHotel</value>
+    <comment>Nombre del Procedimiento Modificar Hotel en la  Base de Datos</comment>
+  </data>
+  <data name="hab_precio" xml:space="preserve">
+    <value>hab_precio</value>
+    <comment>Nombre del atributo en Base de datos del precio por habitacion</comment>
+  </data>
+  <data name="ProcedimientoAgregarHabitacion" xml:space="preserve">
+    <value>M09_AgregarHabitacion</value>
+    <comment>Nombre del Procedimiento Agregar Habitacion en la Base de Datos</comment>
+  </data>
+  <data name="ProcedimientoConsultarHabitacion" xml:space="preserve">
+    <value>M09_ConsultarHabitacion</value>
+    <comment>Nombre del Procedimiento Consultar Habitacion en la Base de Datos</comment>
+  </data>
+</root>

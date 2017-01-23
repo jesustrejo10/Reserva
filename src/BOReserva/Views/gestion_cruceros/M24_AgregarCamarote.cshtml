@@ -1,4 +1,12 @@
 ﻿@model BOReserva.Models.gestion_cruceros.CGestion_camarote
+<script src="~/Scripts\Scripts_Cruceros\scripts_cruceros.js"></script>
+
+@{
+    
+    IEnumerable<SelectListItem> listCruceros = Model._listaCruceros; 
+
+
+}
 <script src="~/Scripts/Scripts_Cruceros/scripts_cruceros.js"></script>
 @using (Html.BeginForm("guardarCamarote", "gestion_cruceros", null, FormMethod.Post, new { @id = "formGuardarCamarote", @class = "form-horizontal" }))
 {
@@ -10,24 +18,17 @@
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"></button>
                 </div>
             </div>
-            <div class="modal-body col-xs-12" id="bodyCruc" style="margin-left:24% ; height:300px">
+            <div class="modal-body col-xs-12" id="bodyCruc" style="margin-left:24% ; height:400px">
                 <section id="primeraParte">
                     <div class="form-group" style="margin-bottom:20px">
-                        <label>Cruceros:</label>
-                        @{
-                            SelectList list1 = ViewBag.ShowDropDown;
-                        }
-                        @*@Html.DropDownList("DROPDOWNID", list, "Cruceros", new { @id = "fk_id_crucero" })*@
-                        @Html.DropDownListFor(m => m._fkCrucero, list1, "Cruceros", new { @id = "fk_id_crucero", @style = "width:41% ; margin-left:2%" })
+                        <label>Cruceros:</label>                        
+                        @Html.DropDownListFor(m => m._cruceroNombre, new SelectList(Model._listaCruceros as System.Collections.IEnumerable, "Value", "Text"),
+              "Seleccione un crucero", new { @class = "form-control", @id = "crucero", @style = "width: 50%;", @required = "true" })
                     </div>
                     <div class="form-group" style="margin-bottom:20px">
-                        <label>Cabinas:</label>
-                        @{
-                            SelectList list = ViewBag.ShowDropDown;
-                        }
-
-                        @*@Html.DropDownListFor(m => m._fkCabina, list, new { @id = "fk_id_cabina", @style = "width:41% ; margin-left:2%" })*@
-                        <select id="fk_id_cabina" name="_fkCabina" style="width: 41%;margin-left: 2.5%;"></select>
+                        <label>Cabinas:</label>                        
+                        @Html.DropDownListFor(m => m._cabinaNombre, new SelectList(Enumerable.Empty<SelectListItem>(), "Value", "Text"),
+                                "Seleccione una cabina", new { @class = "form-control", @id = "cabina", @style = "width: 50%;", @required = "true" })
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
@@ -40,12 +41,7 @@
                     <div class="row">
                         <div class="col-xs-6">
                             <div class="form-group">
-                                <label>Tipo Cama:</label>
-                                @*<select>
-                                        <option>
-
-                                        </option>
-                                    </select>*@
+                                <label>Tipo Cama:</label>                                
                                 @Html.TextBoxFor(m => m._tipoCama, null, new { @type = "text", @class = "form-control", @placeholder = "Introduce el nombre de la cabina", @id = "tipoCama" })
                             </div>
                         </div>
@@ -54,70 +50,14 @@
                         <button type="button" id="guardar_camarote" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
                     </div>
                 </section>
-            </div>
-            <div class="modal-body col-xs-12" id="bodyCruc" style="margin-left: 14.5%">
-                <table>
-                    <thead>
-                        <tr class="crucero crTitles" id="listaCruceros">
-                            <th style="width:170px;height: 40px;text-align: center">Cantidad de camas</th>
-                            <th style="width:170px;height: 40px;text-align: center"> <b>Tipo de camas</b></th>
-                            <th style="width:170px;height: 40px;text-align: center"><b>Estado</b></th>
-                            <th style="width:170px;height: 40px;text-align: center"><b>Acciones</b></th>
-                        </tr>
-                    </thead>
-                    <tbody id="tablaCamarote" class="">
-                        @*@{
-                                foreach (var cabina in Model.cabinas)
-                                {
-                                    <tr id="@cabina._idCabina ">
-                                        <td class="crNombre">@cabina._nombreCabina</td>
-                                        <td class="crCompania">@cabina._precioCabina</td>
-                                        @if (@cabina._estatus == "activo")
-                                        {
-                                            <td class="crStatus"><i class="fa fa-circle started"></i></td>
-                                            <td class="crAcciones"><i class="fa fa-eye"></i> <i class="fa fa-pencil"></i> <i class="fa fa-times"></i> <i class="fa fa-trash eliminar_crucero"></i></td>
-                                        }
-                                        else {
-                                            <td class="crStatus"><i class="fa fa-circle paused"></i></td>
-                                            <td class="crAcciones"><i class="fa fa-eye"></i> <i class="fa fa-pencil"></i> <i class="fa fa-check"></i> <i class="fa fa-trash"></i></td>
-                                        }
-                                    </tr>
-
-                                }
-                            }*@
-                    </tbody>
-                </table>
-            </div>
+            </div>            
         </div>
 
     </div>
 
 
 
-    <script>
-        $("#guardar_camarote").click(function (e) {
-            e.preventDefault();
-            var form = $("#formGuardarCamarote");
-            $.ajax({
-                url: "gestion_cruceros/guardarCamarote",
-                data: form.serialize(),
-                type: 'POST',
-                success: function (data) {
-                    var statusHTML = "<td class='crStatus'><i class='fa fa-circle started'></i></td><td class='crAcciones'> <i class='fa fa-times' onclick='cambioCamarote(" + $("#idCamarote").val() + ")'></i></td>";
-                    html = "<tr><td style='text-align:center'>" + $("#cantidadCama").val() + "</td><td style='text-align:center'>" + $("#tipoCama").val() + "</td>" + statusHTML + "</tr>";
-                    console.log(html)
-                    $("#tablaCamarote").append(html);
-                    //$("#tablaCamarote").append("<tr><td>" + $("#cantidadCama").val() + "</td><td>" + $("#tipoCama").val() + "</td></tr>");
-                },
-                error: function (data) {
-                    console.log(data);
-                    $('#formGuardarCamarote')[0].reset();
-                }
-            });
-        });
-    </script>
-
-    <script>
+        <script>
 
         function cambioCamarote(camarote_id) {
             $.ajax({

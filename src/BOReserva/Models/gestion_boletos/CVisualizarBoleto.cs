@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using BOReserva.DataAccess.Domain;
 
-
 namespace BOReserva.Models.gestion_boletos
 {
     public class CVisualizarBoleto

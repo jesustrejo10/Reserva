@@ -70,6 +70,15 @@ namespace BOReserva.DataAccess.DataAccessObject.M01 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to M01_DesactivarUsuario.
+        /// </summary>
+        internal static string BloquearUsuario {
+            get {
+                return ResourceManager.GetString("BloquearUsuario", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to M01_ConsultarUsuario.
         /// </summary>
         internal static string ConsultarUsuario {
@@ -88,11 +97,11 @@ namespace BOReserva.DataAccess.DataAccessObject.M01 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to M01_DesactivarUsuario.
+        ///   Looks up a localized string similar to M01_EliminarLogin.
         /// </summary>
-        internal static string DesactivarUsuario {
+        internal static string EliminarLogin {
             get {
-                return ResourceManager.GetString("DesactivarUsuario", resourceCulture);
+                return ResourceManager.GetString("EliminarLogin", resourceCulture);
             }
         }
         
@@ -102,6 +111,114 @@ namespace BOReserva.DataAccess.DataAccessObject.M01 {
         internal static string id {
             get {
                 return ResourceManager.GetString("id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M01_IncrementarIntentos.
+        /// </summary>
+        internal static string IncrementarIntentos {
+            get {
+                return ResourceManager.GetString("IncrementarIntentos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M01_InsertarLogin.
+        /// </summary>
+        internal static string InsertarLogin {
+            get {
+                return ResourceManager.GetString("InsertarLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M01_NumeroIntentos.
+        /// </summary>
+        internal static string NumeroIntentos {
+            get {
+                return ResourceManager.GetString("NumeroIntentos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M01_ResetearIntentos.
+        /// </summary>
+        internal static string ResetearIntentos {
+            get {
+                return ResourceManager.GetString("ResetearIntentos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to activo.
+        /// </summary>
+        internal static string usuarioActivo {
+            get {
+                return ResourceManager.GetString("usuarioActivo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to apellido.
+        /// </summary>
+        internal static string usuarioApellido {
+            get {
+                return ResourceManager.GetString("usuarioApellido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to contrasena.
+        /// </summary>
+        internal static string usuarioClave {
+            get {
+                return ResourceManager.GetString("usuarioClave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to correo.
+        /// </summary>
+        internal static string usuarioCorreo {
+            get {
+                return ResourceManager.GetString("usuarioCorreo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to fecha.
+        /// </summary>
+        internal static string usuarioFechaCreacion {
+            get {
+                return ResourceManager.GetString("usuarioFechaCreacion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to usuID.
+        /// </summary>
+        internal static string usuarioID {
+            get {
+                return ResourceManager.GetString("usuarioID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to rolID.
+        /// </summary>
+        internal static string usuarioIDRol {
+            get {
+                return ResourceManager.GetString("usuarioIDRol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to nombre.
+        /// </summary>
+        internal static string usuarioNombre {
+            get {
+                return ResourceManager.GetString("usuarioNombre", resourceCulture);
             }
         }
     }
