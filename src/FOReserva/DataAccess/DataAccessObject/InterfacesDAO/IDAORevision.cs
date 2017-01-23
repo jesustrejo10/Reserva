@@ -21,7 +21,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M20
         bool GuardarRevision(Entidad revision);
         bool GuardarValoracion(Entidad valoracion);
         bool BorrarRevision(Entidad revision);
-        DataTable ObtenerRevisionesPorReferencia(Entidad referencia);
-        DataTable ObtenerValoracionPorReferencia(Entidad referencia);
+        List<Revision> ObtenerRevisionesPorReferencia(Entidad referencia);
+        ReferenciaValorada ObtenerValoracionPorReferencia(Entidad referencia);
     }
 }

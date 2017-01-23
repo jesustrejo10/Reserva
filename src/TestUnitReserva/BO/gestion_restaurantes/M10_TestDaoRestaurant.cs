@@ -53,7 +53,7 @@ namespace TestUnitReserva.BO.gestion_restaurantes
         /// Metodo consultar restaurant por id de ciudad
         /// </summary>
         [Test]
-        public void DaoConsultarRestaurant()
+        public void M10_DaoConsultarRestaurant()
         {
             restaurantDao = FabricaDAO.RestaurantBD();
             ListaRestaurant = restaurantDao.Consultar(lugar);
@@ -78,7 +78,7 @@ namespace TestUnitReserva.BO.gestion_restaurantes
         /// Metodo consultar restaurant por Id
         /// </summary>
         [Test]
-        public void DaoConsultarRestaurantId()
+        public void M10_DaoConsultarRestaurantId()
         {
             restaurantDao = FabricaDAO.RestaurantBD();
             restaurant._id = 1;
@@ -98,7 +98,7 @@ namespace TestUnitReserva.BO.gestion_restaurantes
         /// Metodo para probar que ha sido creado en la base de datos 
         /// </summary>
         [Test]
-        public void DaoCrear()
+        public void M10_DaoCrear()
         {
             restaurantDao = FabricaDAO.RestaurantBD();
 
@@ -120,7 +120,7 @@ namespace TestUnitReserva.BO.gestion_restaurantes
         /// Metodo para modificar datos del restaurant
         /// </summary>
         [Test]
-        public void DaoModificar()
+        public void M10_DaoModificar()
         {
             restaurantDao = FabricaDAO.RestaurantBD();
 
@@ -148,7 +148,7 @@ namespace TestUnitReserva.BO.gestion_restaurantes
         /// Metodo para verificar que se listan los restauntes nombre y id
         /// </summary>
         [Test]
-        public void DaoListarRestaurantes()
+        public void M10_DaoListarRestaurantes()
         {
             restaurantDao = FabricaDAO.RestaurantBD();
             ListaRestaurant = restaurantDao.ListarRestaurantes();
@@ -166,7 +166,7 @@ namespace TestUnitReserva.BO.gestion_restaurantes
         /// Metodo para verificar que se elimina registro de restaurant de la Base de Datos
         /// </summary>
         [Test]
-        public void DaoEliminar()
+        public void M10_DaoEliminar()
         {
             restaurantDao = FabricaDAO.RestaurantBD();
             //Parametros para crear el nuevo registro en la base de datos
