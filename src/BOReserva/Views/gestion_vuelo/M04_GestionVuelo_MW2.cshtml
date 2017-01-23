@@ -21,22 +21,7 @@
                     </div>
                 </div>
                 <div>&nbsp;</div>
-                <div class="stepwizard">
-                    <div class="stepwizard-row setup-panel">
-                        <div class="stepwizard-step">
-                            <a href="#" type="button" class="btn btn-default btn-circle" disabled="disabled" onclick="return false;">1</a>
-                            <p>Vuelo</p>
-                        </div>
-                        <div class="stepwizard-step">
-                            <a href="#" type="button" class="btn btn-primary btn-circle" onclick="return false;">2</a>
-                            <p>Avión</p>
-                        </div>
-                        <div class="stepwizard-step">
-                            <a href="#" type="button" class="btn btn-default btn-circle" disabled="disabled" onclick="return false;">3</a>
-                            <p>Detalles</p>
-                        </div>
-                    </div>
-                </div>
+               
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div class="row">
@@ -87,14 +72,7 @@
                             <!-- <div class="col-md-12" style="margin-top:10px;">
                             </div>-->
                             <div class="col-md-12" style="margin-top:10px;">
-                                <br />
-                                <div class="col-md-4"></div>
-                                <div class="col-md-2">
-                                    <button id="cancelarModificacion" type="button" class="btn btn-danger" style="display:block; margin-left:auto; margin-right:auto;">  Atras  </button>
-                                </div>
-                                <div class="col-md-2">
-                                    <button type="submit" id="modificarAW2" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Siguiente</button>
-                                </div>
+                                <button type="submit" id="modificarAW2" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Siguiente</button>
                             </div>
                             <!--FIN BOTON GUARDAR-->
                         </div>
@@ -114,6 +92,10 @@
     @Html.HiddenFor(m => m._idRuta)
     @Html.HiddenFor(m => m._ciudadDestino)
     @Html.HiddenFor(m => m._ciudadOrigen)
+    @Html.HiddenFor(m => m._pasajerosAvion)
+    @Html.HiddenFor(m => m._modeloAvion)
+    @Html.HiddenFor(m => m._velocidadMaxima)
+    @Html.HiddenFor(m => m._distanciaMaxima)
    <script type="text/javascript">
         setSelectByTextSimple('@Model._idAvion')
     </script>

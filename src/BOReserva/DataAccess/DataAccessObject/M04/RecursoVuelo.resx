@@ -242,4 +242,28 @@
     <value>El codigo de vuelo ya se encuentra registrado</value>
     <comment>Error de la BD</comment>
   </data>
+  <data name="ErrorCampoVacio" xml:space="preserve">
+    <value>Campos Obligatorios Vacios</value>
+    <comment>Mensaje de Error</comment>
+  </data>
+  <data name="ErrorGeneralBD" xml:space="preserve">
+    <value>Error en la conexión con la Base de Datos</value>
+    <comment>Mensaje de Error</comment>
+  </data>
+  <data name="ErrorMensajeDependencia" xml:space="preserve">
+    <value>Error: Existen registros asociados a este vuelo</value>
+    <comment>Error registros asociados</comment>
+  </data>
+  <data name="ParametroCapacidadEjecutiva" xml:space="preserve">
+    <value>capEje</value>
+    <comment>Capacidad Ejecutiva</comment>
+  </data>
+  <data name="ParametroCapacidadTurista" xml:space="preserve">
+    <value>capTur</value>
+    <comment>Capacidad Turista</comment>
+  </data>
+  <data name="ParametroCapacidadVIP" xml:space="preserve">
+    <value>capVip</value>
+    <comment>Capacidad vip</comment>
+  </data>
 </root>
