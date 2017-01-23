@@ -232,6 +232,8 @@
     <Compile Include="Controllers\PatronComando\M03\M03_COModificarRutacs.cs" />
     <Compile Include="Controllers\PatronComando\M03\M03_COMostrarRuta.cs" />
     <Compile Include="Controllers\PatronComando\M03\M03_COValidarRuta.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COBusquedaIdBoarding.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COConsultarBoletosPasajeroChekin.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COCrearBoarding.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COConteoBoarding.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COCrearMaletas.cs" />
@@ -335,7 +337,16 @@
     <Compile Include="Controllers\PatronComando\M12\M12_COObtenerRoles.cs" />
     <Compile Include="Controllers\PatronComando\M12\M12_COStatusUsuario.cs" />
     <Compile Include="Controllers\PatronComando\M12\M12_COVisualizarUsuarios.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COAgregarPermiso.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COConsultarListaPermisos.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COConsultarPermisoSeleccionado.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COConsultarPermisosNoAsociados.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COConsultarPermisosUsuario.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COEliminarPermiso.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COModificarPermiso.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COQuitarPermiso.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COValidacionPermiso.cs" />
+    <Compile Include="Controllers\PatronComando\M13\M13_COValidacionRol.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_CoAgregarCamarote.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COListarCabinaCrucero.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarCamarotes.cs" />
@@ -349,6 +360,7 @@
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCruceros.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOEquipaje.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOItinerario.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPermiso.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReclamoEquipaje.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORuta.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOUsuario.cs" />
@@ -359,6 +371,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>M07ReclamoEquipaje.resx</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\DataAccessObject\M13\DAOPermiso.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCabina.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCamarotes.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCruceros.cs" />
@@ -550,6 +563,7 @@
     <Compile Include="Models\gestion_hoteles\CAgregarHotel.cs" />
     <Compile Include="Models\gestion_reclamo_equipaje\CAgregarReclamoEquipaje.cs" />
     <Compile Include="Models\gestion_reclamo_equipaje\CModificarReclamoEquipaje.cs" />
+    <Compile Include="Models\gestion_roles\CRolModulo.cs" />
     <Compile Include="Models\gestion_ruta_comercial\VistaListaRuta.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cgestion_seguridad_ingreso.cs" />
     <Compile Include="Models\gestion_seguridad_ingreso\Cvalidar_bloqueo_exception.cs" />
@@ -640,8 +654,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicio\manejadorSQL.cs" />
     <Compile Include="Servicio\Servicio_Vuelos\manejadorSQL_Vuelos.cs" />
-    <Compile Include="Servicio\Servicio_Boletos\manejadorSQL_Boletos.cs" />
-    <Compile Include="Servicio\Servicio_Boletos\manejadorSQL_Check.cs" />
     <Compile Include="Servicio\Servicio_Hoteles\CManejadorSQL_Hoteles.cs" />
     <Compile Include="Servicio\Servicio_Rutas\CManejadorSQL_Rutas.cs" />
     <Compile Include="Views\gestion_restaurantes\Fabrica\FabricaVista.cs" />
@@ -716,6 +728,7 @@
     <Content Include="Content\dist\js\pages\dashboard.js" />
     <Content Include="Content\dist\js\pages\dashboard2.js" />
     <Content Include="Content\M24_css\style_module.css" />
+    <Content Include="Content\Preloader_2.gif" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -821,6 +834,7 @@
     <Content Include="Models\gestion_boletos\placeholder.html" />
     <Content Include="Models\gestion_vuelo\placeholder.html" />
     <Content Include="Scripts\cargadorMenu.js" />
+    <Content Include="Scripts\loader.js" />
     <Content Include="Scripts\Scripts_Boletos\DatosUsuario.js" />
     <Content Include="Scripts\Scripts_Boletos\DetalleBoleto.js" />
     <Content Include="Scripts\Scripts_Boletos\BuscarVuelo.js" />
@@ -1748,9 +1762,6 @@
     <Content Include="Views\gestion_comida_vuelo\M06_EditarComida.cshtml" />
     <Content Include="Views\gestion_seguridad_ingreso\M01_Login.cshtml" />
     <Content Include="Views\gestion_seguridad_ingreso\M01_RecuperarContrasenna.cshtml" />
-    <Content Include="Views\gestion_usuarios\M12_Index.cshtml" />
-    <Content Include="Views\gestion_usuarios\M12_AgregarUsuario.cshtml" />
-    <Content Include="Views\gestion_usuarios\M12_ModificarUsuario.cshtml" />
     <Content Include="Views\gestion_usuarios\_Layout.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Crear.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Visualizar.cshtml" />
@@ -1797,6 +1808,9 @@
     <Content Include="Views\gestion_reclamos\M16_AlertaError.cshtml" />
     <Content Include="Views\gestion_reclamos\M16_ConsultarReclamo.cshtml" />
     <Content Include="Views\gestion_reclamos\M16_DetalleReclamo.cshtml" />
+    <Content Include="Views\gestion_roles\M13_AgregarPermiso.cshtml" />
+    <Content Include="Views\gestion_roles\M13_ModificarPermiso.cshtml" />
+    <Content Include="Views\gestion_roles\M13_VisualizarPermiso.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_boletos\M05_VisualizarBoletos.cshtml" />
@@ -1843,6 +1857,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="DataAccess\Domain\M04\" />
     <Folder Include="Scripts\Scripts_Reclamo\" />
+    <Folder Include="Servicio\Servicio_Boletos\" />
     <Folder Include="Views\dist\img\credit\" />
     <Folder Include="Views\dist\js\pages\" />
     <Folder Include="Views\gestion_roles\css\" />

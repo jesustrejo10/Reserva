@@ -218,6 +218,11 @@ namespace BOReserva.DataAccess.DataAccessObject
         {
             return new DAORol();
         }
+
+        public static DAO instanciarDAOPermiso()
+        {
+            return new DAOPermiso();
+        }
         #endregion
 
         #region M14_Cruceros

@@ -229,6 +229,8 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
                 System.Diagnostics.Debug.WriteLine("Error al eliminar login");
                 System.Diagnostics.Debug.WriteLine(e.ToString());
                 return false;
+                //throw e;
+
             }
             catch (Exception e)
             {
@@ -236,6 +238,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
                 System.Diagnostics.Debug.WriteLine(e.ToString());
                 throw e;
             }
+
         }
 
         /// <summary>

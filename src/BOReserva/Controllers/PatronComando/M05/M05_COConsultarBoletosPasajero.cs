@@ -22,9 +22,9 @@ namespace BOReserva.Controllers.PatronComando
         ///// </returns>
         public override List<Entidad> ejecutar()
         {
-            IDAOCheckIn daoCheckIn = (IDAOCheckIn) FabricaDAO.instanciarDaoCheckIn();
-            List<Entidad> checkIn = daoCheckIn.ListarPasesPasajero(_id);
-            return checkIn;
+            IDAOBoleto daoBoleto = (IDAOBoleto)FabricaDAO.instanciarDaoBoleto();
+            List<Entidad> resultado = daoBoleto.ConsultarBoletosPasajero( _id);
+            return resultado;
         }
     }
 }
