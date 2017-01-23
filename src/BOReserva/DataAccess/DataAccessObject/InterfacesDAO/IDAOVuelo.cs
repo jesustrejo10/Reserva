@@ -5,7 +5,7 @@ using System.Web;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 
-namespace BOReserva.DataAccess.DAO
+namespace BOReserva.DataAccess.DAO.InterfacesDAO
 {
     interface IDAOVuelo : IDAO
     {
