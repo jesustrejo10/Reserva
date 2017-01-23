@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
 {
@@ -15,5 +16,9 @@ namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
         bool Eliminar(Entidad e);
         Entidad Consultar(Entidad e);
         List<Entidad> ConsultarTodos();
+        bool existeMatricula(Entidad e);
+        List<SelectListItem> listarAnios();
+        List<SelectListItem> listarCantidad(int cant);
+        List<SelectListItem> listarColores();
     }
 }

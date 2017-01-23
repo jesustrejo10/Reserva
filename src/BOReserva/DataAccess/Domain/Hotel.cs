@@ -99,7 +99,7 @@ namespace BOReserva.DataAccess.Domain
         /// <summary>
         /// Constructor de la clase
         /// </summary>
-        /// <param name="idhotel">Id del hotel</param>
+        /// <param name="_idhotel">Id del hotel</param>
         /// <param name="nombre">Nombre del hotel</param>
         /// <param name="direccion">Direccion del hotel</param>
         /// <param name="email">Email del hotel</param>

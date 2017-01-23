@@ -9,10 +9,15 @@ using System.Web.Mvc;
 
 namespace FOReserva.Controllers
 {
+    /// <summary>
+    /// Clase encargada de controlar la comunicacion entre la vista y el controlador
+    /// </summary>
     public class gestion_reserva_habitacionesController : Controller
     {
-        //
-        // GET: /gestion_reserva_habitaciones/
+        /// <summary>
+        /// Metodo para cargar las reservas
+        /// </summary>
+        /// <returns>Retorna un ActionResult que contiene los elementos de la vista </returns>
         [HttpGet]
         public ActionResult mis_reservas()
         {
@@ -25,7 +30,10 @@ namespace FOReserva.Controllers
             Dictionary<int, Entidad> listareserva = comando.ejecutar();
             return PartialView(listareserva);
         }
-
+        /// <summary>
+        /// Metodo para cargar la ventana de Buscar hoteles 
+        /// </summary>
+        /// <returns>Retorna un ActionResult que contiene los elementos de la vista </returns>
         [HttpGet]
         public ActionResult buscar_hoteles(Cvista_BuscarHotel model)
         {
@@ -47,7 +55,10 @@ namespace FOReserva.Controllers
 
             return PartialView(model);
         }
-
+        /// <summary>
+        /// Metodo para cargar la ventana de Hoteles con Habitaciones
+        /// </summary>
+        /// <returns>Retorna un ActionResult que contiene los elementos de la vista </returns>
         [HttpGet]
         public ActionResult hoteles_con_habitaciones(Cvista_BuscarHotel datos)
         {
@@ -57,18 +68,14 @@ namespace FOReserva.Controllers
            
             return PartialView(listaHoteles);
         }
-
-        [HttpGet]
-        public ActionResult detalle_reserva(CReservaHabitacion model)
-        {
-            model.CargarDesdeDB();
-            return PartialView(model);
-        }
-
+        /// <summary>
+        /// Metodo para cargar la ventana de Realizar Reserva
+        /// </summary>
+        /// <returns>Retorna un ActionResult que contiene los elementos de la vista </returns>
         [HttpPost]
         public ActionResult realizar_reserva(Cvista_ReservarHabitacion reserva)
         {
-            var user_id = 1;
+            var user_id = 207;
 
             if (Session["id_usuario"] != null && Session["id_usuario"] is int)
                 user_id = (int)Session["id_usuario"];
@@ -79,7 +86,10 @@ namespace FOReserva.Controllers
             string agrego = comando.ejecutar();
             return Json(agrego,JsonRequestBehavior.AllowGet);
         }
-
+        /// <summary>
+        /// Metodo para cargar la ventana de Cancelar Reserva
+        /// </summary>
+        /// <returns>Retorna un ActionResult que contiene los elementos de la vista </returns>
         [HttpPost]
         public ActionResult cancelar_reserva(int seleccion)
         {
@@ -87,6 +97,10 @@ namespace FOReserva.Controllers
             string agrego = comando.ejecutar();
             return Json(agrego, JsonRequestBehavior.AllowGet);
         }
+        /// <summary>
+        /// Metodo para cargar la ventana de Modificar Reserva
+        /// </summary>
+        /// <returns>Retorna un ActionResult que contiene los elementos de la vista </returns>
         [HttpPost]
         public ActionResult modificar_reserva(int id_reserva, int cant_dias)
         {
