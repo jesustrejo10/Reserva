@@ -84,6 +84,7 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
         {
             String clave = Encriptar.CrearHash(_claveCampoTexto);//metodo implementado por MOD 12 USUARIO
             var usuarioAConsultar = FabricaEntidad.crearUsuario(_correoCampoTexto);
+
             Command<Entidad> comando = FabricaComando.M01ConsultarUsuario(usuarioAConsultar);
             var verificacion = (Usuario)comando.ejecutar(); //Asigna valor de retorno luego de consulta a BD
 

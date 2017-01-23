@@ -301,6 +301,11 @@
     <Compile Include="Controllers\PatronComando\M09\M09_COEliminarHotel.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COModificarHotel.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COObtenerPaises.cs" />
+    <Compile Include="Controllers\PatronComando\M09\ResourceM09Command.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResourceM09Command.resx</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\PatronComando\M10\M10_COActualizarRestaurant.cs" />
     <Compile Include="Controllers\PatronComando\M10\M10_COCargarHorario.cs" />
     <Compile Include="Controllers\PatronComando\M10\M10_COConsultarLugar.cs" />
@@ -372,6 +377,11 @@
       <DependentUpon>M07ReclamoEquipaje.resx</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\DataAccessObject\M13\DAOPermiso.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M02\RecursoDAOM02.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RecursoDAOM02.resx</DependentUpon>
+    </Compile>
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCabina.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCamarotes.cs" />
     <Compile Include="DataAccess\DataAccessObject\M14\DAOCruceros.cs" />
@@ -509,6 +519,7 @@
     <Compile Include="DataAccess\Domain\Transporte.cs" />
     <Compile Include="DataAccess\Domain\Usuario.cs" />
     <Compile Include="DataAccess\Domain\Vuelo.cs" />
+    <Compile Include="DataAccess\Model\Cache.cs" />
     <Compile Include="DataAccess\Model\Connection.cs" />
     <Compile Include="DataAccess\Model\ConexionUtil.cs" />
     <Compile Include="DataAccess\Model\ExceptionBD.cs" />
@@ -522,11 +533,13 @@
     <Compile Include="Excepciones\ExceptionReserva.cs" />
     <Compile Include="Excepciones\Log.cs" />
     <Compile Include="Excepciones\LogException.cs" />
+    <Compile Include="Excepciones\M02\ReservaExceptionM02.cs" />
     <Compile Include="Excepciones\M08\ReservaExceptionM08.cs" />
     <Compile Include="Excepciones\M09\ReservaExceptionM09.cs" />
     <Compile Include="Excepciones\M04\ReservaExceptionM04.cs" />
     <Compile Include="Excepciones\M10\ReservaExceptionM10.cs" />
     <Compile Include="Excepciones\M11\ReservaExceptionM11.cs" />
+    <Compile Include="Excepciones\M13\ReservaExceptionM13.cs" />
     <Compile Include="Excepciones\RecursoLog.Designer.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -1932,6 +1945,10 @@
     <Content Include="Views\gestion_boletos\M05_DetalleBoletoReserva.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controllers\PatronComando\M09\ResourceM09Command.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourceM09Command.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="DataAccess\DataAccessObject\M01\RecursoLogin.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoLogin.Designer.cs</LastGenOutput>
@@ -1939,6 +1956,10 @@
     <EmbeddedResource Include="DataAccess\DataAccessObject\M07\M07ReclamoEquipaje.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>M07ReclamoEquipaje.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataAccess\DataAccessObject\M02\RecursoDAOM02.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecursoDAOM02.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="DataAccess\DataAccessObject\M08\RecursoDAOM08.resx" />
     <EmbeddedResource Include="DataAccess\DataAccessObject\M06\RecursoM06.resx" />

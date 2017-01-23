@@ -10,6 +10,7 @@ using Newtonsoft.Json.Linq;
 using System.Data.SqlClient;
 using BOReserva.DataAccess.Domain;
 using BOReserva.Controllers.PatronComando;
+using BOReserva.Excepciones.M13;
 
 namespace BOReserva.Controllers
 {
@@ -42,18 +43,9 @@ namespace BOReserva.Controllers
                 }
                 rol.Permisos = listamd;
             }
-            catch (SqlException e)
+            catch (ReservaExceptionM13 ex)
             {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error insertando en la BD.";
-                return Json(error);
-
-            }
-            catch (Exception e)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
-                return Json(error);
+                return (Json(new { error = ex.Mensaje }));
             }
             return PartialView(rol);
         }
@@ -75,18 +67,9 @@ namespace BOReserva.Controllers
                     rol.listapermisos = comando_permisos.ejecutar();
                 }
             }
-            catch (SqlException e)
+            catch (ReservaExceptionM13 ex)
             {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error consultando en la BD.";
-                return Json(error);
-
-            }
-            catch (Exception e)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
-                return Json(error);
+                return (Json(new {error = ex.Mensaje}));
             }
             return PartialView(listaroles);
         }
@@ -121,18 +104,9 @@ namespace BOReserva.Controllers
                 modelovista.Nombre_rol = rolbuscado._nombreRol;
                 modelovista.Permisos = md;
             }
-            catch (SqlException e)
+            catch (ReservaExceptionM13 ex)
             {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error insertando en la BD.";
-                return Json(error);
-
-            }
-            catch (Exception e)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
-                return Json(error);
+                return (Json(new { error = ex.Mensaje }));
             }
             return PartialView(modelovista);
         }
@@ -161,18 +135,9 @@ namespace BOReserva.Controllers
                 String agrego_si_no = comando.ejecutar();
                 return (Json(agrego_si_no));
             }
-            catch (SqlException e)
+            catch (ReservaExceptionM13 ex)
             {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error insertando en la BD.";
-                return Json(error);
-
-            }
-            catch (Exception e)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
-                return Json(error);
+                return (Json(ex.Mensaje));
             }
         }
 
@@ -190,23 +155,12 @@ namespace BOReserva.Controllers
                 model.Id_Rol = id_rol;
                 model.Nombre_rol = nuevo_rol;
                 Entidad modificarRol = FabricaEntidad.InstanciarRolIdNombre(model);
-                //con la fabrica instancie al hotel.
                 Command<String> comando = FabricaComando.crearM13_ModificarRol(modificarRol, model.Id_Rol);
                 agrego_si_no = comando.ejecutar();
-                //envio una respuesta dependiendo del resultado del insert
             }
-            catch (SqlException e)
+            catch (ReservaExceptionM13 ex)
             {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error insertando en la BD.";
-                return Json(error);
-
-            }
-            catch (Exception e)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
-                return Json(error);
+                return (Json(ex.Mensaje));
             }
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
@@ -240,18 +194,9 @@ namespace BOReserva.Controllers
                 }
                 return (Json(agrego_si_no));
             }
-            catch (SqlException e)
+            catch (ReservaExceptionM13 ex)
             {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error insertando en la BD.";
-                return Json(error);
-
-            }
-            catch (Exception e)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
-                return Json(error);
+                return (Json(ex.Mensaje));
             }
         }
 
@@ -260,7 +205,7 @@ namespace BOReserva.Controllers
         ///</summary>
         ///<returns>String</returns>
         [HttpPost]
-        public String quitarPermisoRol(int idRol)
+        public JsonResult quitarPermisoRol(int idRol)
         {
             String borro_si_no;
             try
@@ -276,20 +221,11 @@ namespace BOReserva.Controllers
                     borro_si_no = comando1.ejecutar();
                 }
             }
-            catch (SqlException e)
+            catch (ReservaExceptionM13 ex)
             {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error eliminando de la BD.";
-                return error;
-
+                return (Json(ex.Mensaje));
             }
-            catch (Exception e)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
-                return error;
-            }
-            return "1";
+            return (Json("1"));
         }
 
         ///<summary>
@@ -320,18 +256,9 @@ namespace BOReserva.Controllers
                     return Json(error);
                 }
             }
-            catch (SqlException e)
+            catch (ReservaExceptionM13 ex)
             {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error eliminando de la BD.";
-                return Json(error);
-
-            }
-            catch (Exception e)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
-                return Json(error);
+                return (Json(ex.Mensaje));
             }
             return (Json(borro_si_no));
         }
@@ -348,18 +275,9 @@ namespace BOReserva.Controllers
                 Command<List<Entidad>> comando = FabricaComando.crearM13_ListarPermisos();
                 listapermisos = comando.ejecutar();
             }
-            catch (SqlException e)
+            catch (ReservaExceptionM13 ex)
             {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error consultando en la BD.";
-                return Json(error);
-
-            }
-            catch (Exception e)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
-                return Json(error);
+                return (Json(ex.Mensaje));
             }
             var _nombrePermiso = new List<object>();
             foreach (var permiso in listapermisos)
@@ -394,17 +312,9 @@ namespace BOReserva.Controllers
                 Command<List<Entidad>> comando1 = FabricaComando.crearM13_ConsultarPermisosNoAsociados(rolbuscado, rolbuscado._idRol);
                 listapermisos = comando1.ejecutar();
             }
-            catch (SqlException e)
+            catch (ReservaExceptionM13 ex)
             {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error insertando en la BD.";
-                return Json(error);
-            }
-            catch (Exception e)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
-                return Json(error);
+                return (Json(ex.Mensaje));
             }
             return (Json(listapermisos, JsonRequestBehavior.AllowGet));
         }
@@ -414,7 +324,7 @@ namespace BOReserva.Controllers
         ///</summary>
         ///<returns>String</returns>
         [HttpPost]
-        public String eliminarPermisoRol(int idRol, int idPermiso)
+        public JsonResult eliminarPermisoRol(int idRol, int idPermiso)
         {
             String borro_si_no;
             try
@@ -425,20 +335,11 @@ namespace BOReserva.Controllers
                 Command<String> comando_permisos = FabricaComando.crearM13_QuitarPermisos(idRol, idPermiso);
                 borro_si_no = comando_permisos.ejecutar();
             }
-            catch (SqlException e)
+            catch (ReservaExceptionM13 ex)
             {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error eliminando de la BD.";
-                return error;
-
+                return (Json(ex.Mensaje));
             }
-            catch (Exception e)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
-                return error;
-            }
-            return borro_si_no;
+            return (Json(borro_si_no));
         }
 
         /// <summary>
@@ -472,18 +373,9 @@ namespace BOReserva.Controllers
                 String agrego_si_no = comando.ejecutar();
                 return (Json(agrego_si_no));
             }
-            catch (SqlException e)
+            catch (ReservaExceptionM13 ex)
             {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error insertando en la BD.";
-                return Json(error);
-
-            }
-            catch (Exception e)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
-                return Json(error);
+                return (Json(ex.Mensaje));
             }
         }
 
@@ -498,18 +390,9 @@ namespace BOReserva.Controllers
                 Command<List<Entidad>> comando = FabricaComando.crearM13_ConsultarListaPermisos();
                 listapermisos = comando.ejecutar();
             }
-            catch (SqlException e)
+            catch (ReservaExceptionM13 ex)
             {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error consultando en la BD.";
-                return Json(error);
-
-            }
-            catch (Exception e)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
-                return Json(error);
+                return (Json(ex.Mensaje));
             }
             return PartialView(listapermisos);
         }
@@ -538,18 +421,9 @@ namespace BOReserva.Controllers
                     return Json(error);
                 }
             }
-            catch (SqlException e)
+            catch (ReservaExceptionM13 ex)
             {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error eliminando de la BD.";
-                return Json(error);
-
-            }
-            catch (Exception e)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
-                return Json(error);
+                return (Json(ex.Mensaje));
             }
             return (Json(borro_si_no));
         }
@@ -573,18 +447,9 @@ namespace BOReserva.Controllers
                 modelovista.Url = permiso.url;
                 modelovista.Id = permiso._idPermiso;
             }
-            catch (SqlException e)
+            catch (ReservaExceptionM13 ex)
             {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error insertando en la BD.";
-                return Json(error);
-
-            }
-            catch (Exception e)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
-                return Json(error);
+                return (Json(ex.Mensaje));
             }
             return PartialView(modelovista);
         }
@@ -607,18 +472,9 @@ namespace BOReserva.Controllers
                 Command<String> comando = FabricaComando.crearM13_ModificarPermiso(modificarPermiso, model.Id);
                 agrego_si_no = comando.ejecutar();
             }
-            catch (SqlException e)
+            catch (ReservaExceptionM13 ex)
             {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error insertando en la BD.";
-                return Json(error);
-
-            }
-            catch (Exception e)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error desconocido, contacte con el administrador.";
-                return Json(error);
+                return (Json(ex.Mensaje));
             }
             return (Json(true, JsonRequestBehavior.AllowGet));
         }

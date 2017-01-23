@@ -67,7 +67,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
             }
             catch (ArgumentNullException ex)
             {
-                throw new ExceptionReserva("Reserva-404", "Argumento con valor invalido", ex);
+                throw new ExceptionReserva("Reserva-404", "Argumento con _idHotel invalido", ex);
             }
             catch (FormatException ex)
             {
@@ -189,7 +189,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
             Usuario usuario = (Usuario)_usuario; //Cast explicito
             List<Model.Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
             try
-            {
+                {
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoLogin.correo, SqlDbType.VarChar, usuario.correo.ToString(), false));
 
                 EjecutarStoredProcedureTuplas(RecursoLogin.InsertarLogin, listaParametro); //Para luego ejecutar el procedimiento

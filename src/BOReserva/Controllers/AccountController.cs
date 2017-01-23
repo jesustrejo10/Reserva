@@ -381,19 +381,19 @@ namespace BOReserva.Controllers
                     return "Ya existe un nombre de usuario para esa dirección de correo electrónico. Escriba una dirección de correo electrónico diferente.";
 
                 case MembershipCreateStatus.InvalidPassword:
-                    return "La contraseña especificada no es válida. Escriba un valor de contraseña válido.";
+                    return "La contraseña especificada no es válida. Escriba un _idHotel de contraseña válido.";
 
                 case MembershipCreateStatus.InvalidEmail:
-                    return "La dirección de correo electrónico especificada no es válida. Compruebe el valor e inténtelo de nuevo.";
+                    return "La dirección de correo electrónico especificada no es válida. Compruebe el _idHotel e inténtelo de nuevo.";
 
                 case MembershipCreateStatus.InvalidAnswer:
-                    return "La respuesta de recuperación de la contraseña especificada no es válida. Compruebe el valor e inténtelo de nuevo.";
+                    return "La respuesta de recuperación de la contraseña especificada no es válida. Compruebe el _idHotel e inténtelo de nuevo.";
 
                 case MembershipCreateStatus.InvalidQuestion:
-                    return "La pregunta de recuperación de la contraseña especificada no es válida. Compruebe el valor e inténtelo de nuevo.";
+                    return "La pregunta de recuperación de la contraseña especificada no es válida. Compruebe el _idHotel e inténtelo de nuevo.";
 
                 case MembershipCreateStatus.InvalidUserName:
-                    return "El nombre de usuario especificado no es válido. Compruebe el valor e inténtelo de nuevo.";
+                    return "El nombre de usuario especificado no es válido. Compruebe el _idHotel e inténtelo de nuevo.";
 
                 case MembershipCreateStatus.ProviderError:
                     return "El proveedor de autenticación devolvió un error. Compruebe los datos especificados e inténtelo de nuevo. Si el problema continúa, póngase en contacto con el administrador del sistema.";

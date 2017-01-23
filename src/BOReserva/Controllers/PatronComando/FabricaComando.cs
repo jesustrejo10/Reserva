@@ -116,6 +116,7 @@ namespace BOReserva.Controllers.PatronComando
         }
 
         #endregion
+
         #region crearM02VisualizarAvion
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
@@ -132,6 +133,7 @@ namespace BOReserva.Controllers.PatronComando
         }
 
         #endregion
+
         #region crearM02ConsultarAvion
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
@@ -148,6 +150,7 @@ namespace BOReserva.Controllers.PatronComando
         }
 
         #endregion
+
         #region crearM02ModificarAvion
         public static Command<string> crearM02ModificarAvion(Entidad avion, int idmodificar)
         {
@@ -156,12 +159,14 @@ namespace BOReserva.Controllers.PatronComando
 
         }
         #endregion
+
         #region crearM02EliminarAvion
         public static Command<string> crearM02EliminarAvion(Entidad avion,int ideliminar)
         {
             return new M02_COEliminarAvion(avion,ideliminar);
         }
         #endregion
+
         #region crearM02DisponibilidadAvion
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
@@ -388,7 +393,7 @@ namespace BOReserva.Controllers.PatronComando
 
         }
 
-       #endregion
+        #endregion
 
         #region M14_Gestion_Cruceros
 
@@ -399,7 +404,7 @@ namespace BOReserva.Controllers.PatronComando
         /// <param name="e">Recibe la una entidad de tipo Crucero</param>
         /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
         public static Command<String> crearM14AgregarCrucero(Entidad e)
-        {   
+        {
             return new M14_COAgregarCrucero((Crucero) e);
         }
 
@@ -641,7 +646,7 @@ namespace BOReserva.Controllers.PatronComando
 
         public static Command<List<Entidad>> crearM13_ListarPermisos()
         {
-            return new M13_COListarPermisos();
+          return new M13_COListarPermisos();
         }
 
         public static Command<Entidad> crearM13_ConsultarRol(int id)
@@ -672,13 +677,13 @@ namespace BOReserva.Controllers.PatronComando
 
         public static Command<String> crearM13_ModificarRol(Entidad rol, int idmodificar)
         {
-            return new M13_COModificarRol(rol, idmodificar);
+         return new M13_COModificarRol(rol, idmodificar);
         }
         public static Command<List<Entidad>> crearM13_ConsultarPermisosNoAsociados(Entidad rol, int id)
         {
             return new M13_COConsultarPermisosNoAsociados(rol, id);
         }
-        public static Command<List<String>> crearM13_ConsultarPermisosUsuario(int id)
+        public static Command<List<int>> crearM13_ConsultarPermisosUsuario(int id)
         {
             return new M13_COConsultarPermisosUsuario(id);
         }
@@ -1196,7 +1201,7 @@ namespace BOReserva.Controllers.PatronComando
 
             return new M11_COAgregarPaquete((Paquete)e);
 
-    }
+        }
         
         #endregion
     
@@ -1211,8 +1216,8 @@ namespace BOReserva.Controllers.PatronComando
 
             return new M11_COVisualizarOfertas();
 
-}
-
+    }
+        
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
         /// M11_COConsultarOferta
@@ -1225,7 +1230,7 @@ namespace BOReserva.Controllers.PatronComando
 
             return new M11_COConsultarOferta(id);
 
-        }
+}
 
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando

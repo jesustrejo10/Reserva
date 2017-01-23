@@ -41,7 +41,6 @@ namespace BOReserva.Controllers
         /// <returns></returns>
         public ActionResult M05_DetalleBoleto(int idorigen, int iddestino, string fechadespegue, string fechaaterrizaje, int monto, string tipo, string primernombre, string segundonombre, string primerapellido, string segundoapellido, string fechanac, string sexo, int pasaporte, string correo, int idvuelo)
         {
-           
             Pasajero nuevoPasajero = (Pasajero)FabricaEntidad.InstanciarPasajero(pasaporte, primernombre, segundonombre, primerapellido, segundoapellido, sexo, fechanac, correo);
             CVisualizarBoleto bol = new CVisualizarBoleto();
             bol._idOrigen = idorigen;
@@ -69,7 +68,6 @@ namespace BOReserva.Controllers
 
             return PartialView();
         }
-
 
         /// <summary>
         ///  Genera el boleto con los datos 
@@ -215,11 +213,8 @@ namespace BOReserva.Controllers
         }
 
 
-       /// <summary>
-       ///  Muestra el detalle del boleto con el pasaporte con reserva
-       /// </summary>
-       /// <param name="id_reserva"></param>
-       /// <returns></returns>
+
+       
         public ActionResult M05_DetalleBoletoReserva(int id_reserva)
         {
             //BUSCA LA RESERVA A MOSTRA
@@ -278,6 +273,7 @@ namespace BOReserva.Controllers
             return PartialView(bol);
         }
 
+
         /// <summary>
         ///  Genera el Boleto de la reserva
         /// </summary>
@@ -285,8 +281,6 @@ namespace BOReserva.Controllers
         /// <returns></returns>
         public ActionResult M05_BoletoCreadoReserva(int id_reserva)
         {
-
-         
             //BUSCA LA RESERVA A MOSTRA
             //Uso Boleto ya que tiene los mismos atributos de reserva_bolet
             Command<Entidad> comando = FabricaComando.consultarM05BoletopasajeroBD(id_reserva);
@@ -343,13 +337,11 @@ namespace BOReserva.Controllers
             //Tomo todos los datos de bol para crear el boleto
             //Creo método para crear el boleto en el servicio y le paso por parámetro los atributos
             //(bol_id,bol_escala,bol_ida_vuelta,bol_costo,fk_origen,fk_destino,fk_pasajero,bol_fecha,tipo_boleto)
-           
 
             int id_vuelo = reserva._vuelos[0]._id;
             System.Diagnostics.Debug.WriteLine("EL ID DEL VUELO DE LA RESERVA ES: " + id_vuelo);
             String fecha_bol = DateTime.Today.ToString("yyyy/MM/dd");
-           
-         
+
             Boleto nuevoBoleto = (Boleto)FabricaEntidad.InstanciarBoleto(id_origen, id_destino, reserva._pasajero._id, costo, reserva._tipoBoleto, id_vuelo, fecha_bol);
             Command<String> comando2 = FabricaComando.crearM05CrearBoleto(nuevoBoleto);
             string flag = comando2.ejecutar();
@@ -378,7 +370,6 @@ namespace BOReserva.Controllers
 
             return PartialView();
         }
-
 
         /// <summary>
         ///  Datos del Boleto para mostrar
@@ -558,6 +549,7 @@ namespace BOReserva.Controllers
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
 
+
         /// <summary>
         ///  Ver reserva
         /// </summary>
@@ -613,6 +605,7 @@ namespace BOReserva.Controllers
 
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
+
 
         /// <summary>
         /// Modifico el tipo de boleto

@@ -333,7 +333,7 @@ namespace BOReserva.Servicio
 
                 while (dr.Read())
                 {
-                    //tomo un unico valor como esperado segun comportamiento del SP
+                    //tomo un unico _idHotel como esperado segun comportamiento del SP
                     pasajeros[0] = dr.GetSqlString(0).ToString();
                     pasajeros[1] = dr.GetSqlString(1).ToString();
                     pasajeros[2] = dr.GetSqlString(2).ToString();
@@ -929,7 +929,7 @@ namespace BOReserva.Servicio
                         _nombre = lector.GetSqlString(1).ToString(),
                         _tipoLugar = lector.GetSqlString(2).ToString(),
                         _zonaHoraria = (int)lector.GetSqlInt32(3),
-                        _idFKLugar = lector.IsDBNull(4) ? -1 : (int)lector.GetSqlInt32(4), //Pregunta si el campo es null, dando valor por defecto en caso que lo sea
+                        _idFKLugar = lector.IsDBNull(4) ? -1 : (int)lector.GetSqlInt32(4), //Pregunta si el campo es null, dando _idHotel por defecto en caso que lo sea
                         _abreviatura = lector.GetSqlString(5).ToString()
 
                     };
@@ -985,7 +985,7 @@ namespace BOReserva.Servicio
                         _nombre = lector.GetSqlString(1).ToString(),
                         _tipoLugar = lector.GetSqlString(2).ToString(),
                         _zonaHoraria = (int)lector.GetSqlInt32(3),
-                        _idFKLugar = lector.IsDBNull(4) ? -1 : (int)lector.GetSqlInt32(4), //Pregunta si el campo es null, dando valor por defecto en caso que lo sea
+                        _idFKLugar = lector.IsDBNull(4) ? -1 : (int)lector.GetSqlInt32(4), //Pregunta si el campo es null, dando _idHotel por defecto en caso que lo sea
                         _abreviatura = lector.GetSqlString(5).ToString()
 
                     };

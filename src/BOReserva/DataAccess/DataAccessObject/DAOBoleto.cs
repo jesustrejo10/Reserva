@@ -6,8 +6,6 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Diagnostics;
 
-
-
 namespace BOReserva.DataAccess.DataAccessObject
 {
     /// <summary>
@@ -312,8 +310,6 @@ namespace BOReserva.DataAccess.DataAccessObject
                 {
                     while (reader.Read())
                     {
-                       
-
                         var fecha = reader["reb_fecha_reservado"];
                         DateTime fechaboleto = Convert.ToDateTime(fecha).Date;
                         Boleto boleto = new Boleto(Int32.Parse(reader["reb_id"].ToString()), Int32.Parse(reader["reb_ida_vuelta"].ToString()),
@@ -496,13 +492,6 @@ namespace BOReserva.DataAccess.DataAccessObject
                 return _conteo;
             }
         }
-
-
-
-
-
-
-
 
         public List<BoletoVuelo> M05ListarVuelosReserva(int id_reserva)
         {
