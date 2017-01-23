@@ -46,7 +46,7 @@ namespace TestUnitReserva.BO.gestion_ruta_comercial
         }
 
         [Test]
-        public void TestConsultarDestino()
+        public void M03_TestConsultarDestino()
         {
             Dictionary<int, Entidad> listaDestinos = daoRuta.consultarDestinos();
             Assert.NotNull(listaDestinos);
@@ -56,21 +56,21 @@ namespace TestUnitReserva.BO.gestion_ruta_comercial
         }
         
         [Test]
-        public void TestValidarRuta()
+        public void M03_TestValidarRuta()
         {
             Boolean ValidarRuta = daoRuta.ValidarRuta(mockRuta);
              Assert.IsTrue(ValidarRuta);
         }
 
         [Test]
-        public void TestHabilitarRuta()
+        public void M03_TestHabilitarRuta()
         {
             int prueba = 42;
             Assert.IsTrue(daoRuta.habilitarRuta(prueba));
 
         }
 
-        public void TestM03_DaoRutaInsertarRuta()
+        public void M03_TestInsertarRuta()
         {
             //Probando caso de exito de la prueba
             int resultadoAgregar = daoRuta.Agregar(mockRuta);
@@ -81,7 +81,7 @@ namespace TestUnitReserva.BO.gestion_ruta_comercial
         }
 
         [Test]
-        public void TestdeshabilitarRuta()
+        public void M03_TestdeshabilitarRuta()
         {
             int prueba = 5;
             Assert.IsTrue(daoRuta.deshabilitarRuta(prueba));
@@ -92,7 +92,7 @@ namespace TestUnitReserva.BO.gestion_ruta_comercial
       
 
         [Test]
-        public void TestMostrarRuta()
+        public void M03_TestMostrarRuta()
         {
             
             Command<Entidad> comando = FabricaComando.crearM03_MostrarRuta(5);
@@ -105,14 +105,14 @@ namespace TestUnitReserva.BO.gestion_ruta_comercial
         }
 
         [Test]
-        public void TestInhabilitarRuta()
+        public void M03_TestInhabilitarRuta()
         {
             int prueba = 44;
             Assert.IsTrue(daoRuta.deshabilitarRuta(prueba));
         }
 
         [Test]
-        public void TestM03_MListarRutasBD()
+        public void M03_TestMListarRutasBD()
         {
             List<CRuta> listarutas = new List<CRuta>();
             Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM03_MListarRutasBD();
@@ -121,7 +121,7 @@ namespace TestUnitReserva.BO.gestion_ruta_comercial
         }
 
         [Test]
-        public void TestM03_ListarLugares()
+        public void M03_TestListarLugares()
         {
             List<String> lista = new List<string>();
             Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM03_ListarLugares();
