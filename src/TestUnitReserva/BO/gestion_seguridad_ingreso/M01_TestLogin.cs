@@ -16,6 +16,7 @@ using BOReserva.DataAccess.Model;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.DataAccessObject.M01;
 using BOReserva.Controllers.PatronComando;
+using BOReserva.Excepciones;
 
 namespace TestUnitReserva.BO.gestion_seguridad_ingreso
 {
@@ -25,7 +26,6 @@ namespace TestUnitReserva.BO.gestion_seguridad_ingreso
         Cgestion_seguridad_ingreso modelo;
         Usuario usuarioAConsultar;
         
-
         [SetUp]
         public void TestSetUp()
         {
@@ -33,13 +33,6 @@ namespace TestUnitReserva.BO.gestion_seguridad_ingreso
                 "12345", "pruebaNombre", "pruebaApellido", "activo");
             usuarioAConsultar = FabricaEntidad.crearUsuario("the.wise.mage@gmail.com");
         }
-
-
-        //[Test]
-        //public void ExcepcionSQL()
-        //{
-        //    Assert.Throws<SqlException>(() => bd.UsuarioEnBD(null));
-        //}
 
         #region Pruebas Fábrica
         [Test]
@@ -78,14 +71,51 @@ namespace TestUnitReserva.BO.gestion_seguridad_ingreso
 
         #endregion
 
-        #region Pruebas DAO
+        #region Pruebas Modelo
 
+        /// <summary>
+        /// Dado la información de login, verificar que se retorne un objeto de estado de sesión completo.
+        /// </summary>
+        [Test]
+        public void M01_ModeloVerificarUsuario()
+        {
+            var prueba = modelo.verificarUsuario("the.wise.mage@gmail.com", "reserva321");
+            Assert.IsNotNull(prueba);
+        }
 
+        /// <summary>
+        /// Dado un inicio de sesión válido, verificar si un usuario está activo o no.
+        /// </summary>
+        [Test]
+        public void M01_ModeloVerificacionEstatus()
+        {
+            Command<String> comandoResetUsuario = FabricaComando.crearM12StatusUsuario(usuarioAConsultar, "Activo");
+            comandoResetUsuario.ejecutar();
+            var prueba = modelo.verificarUsuario("the.wise.mage@gmail.com", "reserva321");
+            Assert.IsTrue(prueba.EstaActivo());
+        }
+
+        /// <summary>
+        /// Valida el chequeo de intentos de contraseña en modelo
+        /// </summary>
+        [Test]
+        public void M01_ModeloVerificarIntentos()
+        {
+            Command<Boolean> comandoResetearIntentos = FabricaComando.M01ResetearIntentos(usuarioAConsultar);
+            Command<int> comandoNumeroIntentos = FabricaComando.M01NumeroIntentos(usuarioAConsultar);
+            Boolean resultado = (Boolean)comandoResetearIntentos.ejecutar();
+            int resultado2 = (int)comandoNumeroIntentos.ejecutar();
+            var prueba = modelo.verificarUsuario("the.wise.mage@gmail.com", "reserva321");
+            Assert.IsTrue(prueba.VerificarIntentos());
+        }
 
         #endregion
 
         #region Pruebas Comandos
 
+        /// <summary>
+        /// Se realiza una consulta a la BD del usuario dado por el correo.
+        /// </summary>
         [Test]
         public void M01_PruebaConsultarUsuario()
         {
@@ -94,8 +124,12 @@ namespace TestUnitReserva.BO.gestion_seguridad_ingreso
             Assert.AreEqual("the.wise.mage@gmail.com", resultado.correo);
         }
 
+        /// <summary>
+        /// Se resetean el numero de intentos de inicio de sesión, luego se procede a incrementarlos en 1 y
+        /// a validad el resultado.
+        /// </summary>
         [Test]
-        public void M01_PruebaIncrementarIntentos()
+        public void M01_PruebaIncrementarYNumeroIntentos()
         {
             Command<Boolean> comandoResetearIntentos = FabricaComando.M01ResetearIntentos(usuarioAConsultar);
             Command<Boolean> comandoIncrementarIntentos = FabricaComando.M01IncrementarIntentos(usuarioAConsultar);
@@ -107,6 +141,9 @@ namespace TestUnitReserva.BO.gestion_seguridad_ingreso
             Assert.AreEqual(1, resultado2);
         }
 
+        /// <summary>
+        /// Se resetean el numero de intentos y luego se verifican los resultados.
+        /// </summary>
         [Test]
         public void M01_PruebaResetearIntentos()
         {
@@ -114,98 +151,83 @@ namespace TestUnitReserva.BO.gestion_seguridad_ingreso
             Command<int> comandoNumeroIntentos = FabricaComando.M01NumeroIntentos(usuarioAConsultar);
             Boolean resultado = (Boolean)comandoResetearIntentos.ejecutar();
             int resultado2 = (int)comandoNumeroIntentos.ejecutar();
-            Assert.AreEqual(true, resultado);
+            Assert.IsTrue(resultado);
             Assert.AreEqual(0, resultado2);
+        }
+
+        /// <summary>
+        /// Se elimina el login de un usuario existente, para luego insertarse.
+        /// </summary>
+        [Test]
+        public void M01_PruebaInsertarLogin()
+        {
+            Command<Boolean> comandoEliminarLogin = FabricaComando.M01EliminarLogin(usuarioAConsultar);
+            Command<Boolean> comandoInsertarLogin = FabricaComando.M01InsertarLogin(usuarioAConsultar);
+            comandoEliminarLogin.ejecutar();
+            Boolean resultado = (Boolean)comandoInsertarLogin.ejecutar();
+            Assert.IsTrue(resultado);
+        }
+
+        /// <summary>
+        /// Se valida el comportamiento adecuado si se intentase crear un login para un usuario
+        /// existente.
+        /// </summary>
+        [Test]
+        public void M01_PruebaInsertarLoginYaExistente()
+        {
+            Command<Boolean> comandoEliminarLogin = FabricaComando.M01EliminarLogin(usuarioAConsultar);
+            Command<Boolean> comandoInsertarLogin = FabricaComando.M01InsertarLogin(usuarioAConsultar);
+            comandoEliminarLogin.ejecutar();
+            comandoInsertarLogin.ejecutar();
+            Boolean resultado = (Boolean)comandoInsertarLogin.ejecutar();
+            Assert.IsFalse(resultado);
+        }
+
+        /// <summary>
+        /// Se elimina el login de un usuario existente y se valida el comportamiento correcto.
+        /// </summary>
+        [Test]
+        public void M01_PruebaEliminarLogin()
+        {
+            Command<Boolean> comandoEliminarLogin = FabricaComando.M01EliminarLogin(usuarioAConsultar);
+            Command<Boolean> comandoInsertarLogin = FabricaComando.M01InsertarLogin(usuarioAConsultar);
+            comandoInsertarLogin.ejecutar();
+            Boolean resultado = (Boolean)comandoEliminarLogin.ejecutar();
+            Assert.IsTrue(resultado);
         }
 
         #endregion
 
-        ////Test de que no hubieron problemas en conectarse a la bd
-        ////Querys que retornen null no significan que no retornan true
-        ////El true solo significa que no hubo probelmas en el query
-        //[Test]
-        //public void PruebaUsuarioEnBD()
-        //{
-        //    var usuario = bd.UsuarioEnBD("drbr@reserva.com");
-        //    Assert.IsInstanceOf(typeof(Cgestion_seguridad_ingreso), usuario);
-        //    Assert.IsNotNull(usuario.correoCampoTexto);
-        //    Assert.That(usuario.correoCampoTexto, Is.EqualTo("drbr@reserva.com"));
+        #region Pruebas Excepciones
 
-        //}
+        /// <summary>
+        /// Se valida que se esté tratando un usuario inexistente con una excepción personalizada.
+        /// </summary>
+        [Test]
+        public void M01_PruebaUsuarioInexistente()
+        {
+            Usuario prueba = new Usuario();
+            Command<Entidad> comandoConsultarUsuario = FabricaComando.M01ConsultarUsuario(prueba);
+            Assert.That(() => comandoConsultarUsuario.ejecutar(), Throws.TypeOf<ExceptionReserva>());
+        }
 
-        //[Test]
-        //public void PruebaResetearIntentos()
-        //{    
-        //    Assert.IsTrue(bd.ResetearIntentos("drbr@reserva.com"));    
-        //}
+        /// <summary>
+        /// Se simula la acción del inicio de sesión con un nombre de usuario y contraseña inválidos.
+        /// </summary>
+        [Test]
+        public void M01_LoginInvalido()
+        {
+            Assert.That(() => modelo.verificarUsuario("usuario@noexiste.com", "1234"), 
+                Throws.TypeOf<Cvalidar_usuario_Exception>());
+        }
+        #endregion
 
-        //[Test]       
-        //public void PruebaIncrementarIntentos()
-        //{
-        //    Assert.IsTrue(bd.IncrementarIntentos("drbr@reserva.com"));            
-        //}
-
-        //[Test]
-        //public void PruebaBloqueoUsuario()
-        //{
-
-        //    Assert.IsTrue(bd.BloquearUsuario("drbr@reserva.com"));
-        //}
-
-        //[Test]
-        //public void PruebaInsertarLogin()
-        //{
-        //    Boolean insertar = bd.InsertarLogin("prueba@reserva.com");
-        //    if (!insertar)
-        //    {
-        //        bd.EliminarLogin("prueba@reserva.com");
-        //        Assert.IsTrue(bd.InsertarLogin("prueba@reserva.com"));
-        //    }
-        //    else
-        //    {
-        //        Assert.IsTrue(insertar);
-        //    }
-
-        //}
-
-
-
-        //[Test]
-        //public void PruebaNumeroIntentos()
-        //{
-        //    bd.ResetearIntentos("drbr@reserva.com");
-        //    Assert.AreEqual(bd.NumeroIntentos("drbr@reserva.com"),0);
-        //}
-        ////Fin pruebas SQL
-
-        ////Pruebas de modelo
-
-        //[Test]
-        //public void PruebaTipoModelo()
-        //{
-
-        //    Assert.IsInstanceOf<Cgestion_seguridad_ingreso>(modelo);
-        //    Assert.IsNotNull(modelo);
-
-        //}
-
-        //[Test]
-        //public void PruebaActivo()
-        //{
-
-        //    Assert.IsTrue(modelo.EstaActivo());
-        //    Assert.IsNotNull(modelo);
-        //}
-
-
-        ////Fin de pruebas de modelo
-
-        //[TearDown]
-        //public void TestTearDown()
-        //{
-        //    bd = null;
-        //    modelo = null;
-        //}
+        [TearDown]
+        public void TestTearDown()
+        {
+            modelo = null;
+            usuarioAConsultar = null;
+        }
 
     }
 }
