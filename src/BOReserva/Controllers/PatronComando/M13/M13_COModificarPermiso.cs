@@ -15,13 +15,19 @@ namespace BOReserva.Controllers.PatronComando
     public class M13_COModificarPermiso : Command<String>
     {
         Permiso _permiso;
-        int _idmodificar;
 
+        ///<summary>
+        ///Constructor
+        ///</summary>
         public M13_COModificarPermiso(Entidad permiso, int id) { 
             this._permiso = (Permiso)permiso;
             this._permiso._id = id;
         }
 
+        ///<summary>
+        ///Metodo que ejecuta el comando
+        ///</summary>
+        ///<returns>String</returns>
         public override String ejecutar(){
             IDAOPermiso daoPermiso = (IDAOPermiso)FabricaDAO.instanciarDAOPermiso();
             Entidad test = daoPermiso.Modificar(_permiso);

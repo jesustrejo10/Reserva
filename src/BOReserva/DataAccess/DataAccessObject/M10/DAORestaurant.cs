@@ -78,12 +78,12 @@ namespace BOReserva.M10
             catch (ArgumentNullException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM10("Reserva-404", "Argumento con valor invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Argumento con _idHotel invalido", ex);
             }
             catch (FormatException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos formato invalido", ex);
             }
             catch (SqlException ex)
             {
@@ -158,12 +158,12 @@ namespace BOReserva.M10
             catch (ArgumentNullException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM10("Reserva-404", "Argumento con valor invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Argumento con _idHotel invalido", ex);
             }
             catch (FormatException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos con formato invalido", ex);
             }
             catch (SqlException ex)
             {
@@ -206,7 +206,7 @@ namespace BOReserva.M10
                 //Aqui se asignan los valores de cada uno de los atributos perteneciente a la tabla restaurant
                 //estas linea se repite por cada una de las columnas de la tabla, e.g. se tiene el atributo nombre de tipo varchar
                 //primero se obtiene por el archivo de recurso el nombre del parametro @nombre, luego el tipo de dato SQL
-                // varchar, despues el valor a insertar Sabor y Sazon, finalmente el booliano para input (envio de parametro al store procedure)y output(recibir parametro del store procedure) para este caso falso 
+                // varchar, despues el _idHotel a insertar Sabor y Sazon, finalmente el booliano para input (envio de parametro al store procedure)y output(recibir parametro del store procedure) para este caso falso 
                 // la tabla restaurant contiene siete columna incluyendo la clave foranea lugar por lo cual son siete lineas de codigo
                 //a;go importante de destacar es que si en la declaracion del store procedures el atributo varchar o cualquier otro
                 //que requiera longitud e.g. Varchar(50) solo se inserta el primer caracter, ya que solo por defecto la longitud es 1
@@ -225,12 +225,12 @@ namespace BOReserva.M10
             catch (ArgumentNullException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM10("Reserva-404", "Argumento con valor invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Argumento con _idHotel invalido", ex);
             }
             catch (FormatException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos un formato invalido", ex);
             }
             catch (SqlException ex)
             {
@@ -280,12 +280,12 @@ namespace BOReserva.M10
             catch (ArgumentNullException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM10("Reserva-404", "Argumento con valor invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Argumento con _idHotel invalido", ex);
             }
             catch (FormatException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos con formato invalido", ex);
             }
             catch (SqlException ex)
             {
@@ -345,12 +345,12 @@ namespace BOReserva.M10
             catch (ArgumentNullException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM10("Reserva-404", "Argumento con valor invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Argumento con _idHotel invalido", ex);
             }
             catch (FormatException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos con formato invalido", ex);
             }
             catch (SqlException ex)
             {
@@ -388,7 +388,7 @@ namespace BOReserva.M10
                 //Aqui se asignan los valores de cada uno de los atributos perteneciente a la tabla restaurant
                 //estas linea se repite por cada una de las columnas de la tabla, e.g. se tiene el atributo nombre de tipo varchar
                 //primero se obtiene por el archivo de recurso el nombre del parametro @nombre, luego el tipo de dato SQL
-                // varchar, despues el valor a modificar Sabor y Sazon, finalmente el booliano para input (envio de parametro al store procedure)y output(recibir parametro del store procedure) para este caso falso 
+                // varchar, despues el _idHotel a modificar Sabor y Sazon, finalmente el booliano para input (envio de parametro al store procedure)y output(recibir parametro del store procedure) para este caso falso 
                 // la tabla restaurant contiene siete columna incluyendo la clave foranea lugar por lo cual son siete lineas de codigo
                 //a;go importante de destacar es que si en la declaracion del store procedures el atributo varchar o cualquier otro
                 //que requiera longitud e.g. Varchar(50) solo se inserta el primer caracter, ya que solo por defecto la longitud es 1
@@ -407,12 +407,12 @@ namespace BOReserva.M10
             catch (ArgumentNullException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM10("Reserva-404", "Argumento con valor invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Argumento con _idHotel invalido", ex);
             }
             catch (FormatException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos con formato invalido", ex);
             }
             catch (SqlException ex)
             {
@@ -473,12 +473,12 @@ namespace BOReserva.M10
             catch (ArgumentNullException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM10("Reserva-404", "Argumento con valor invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Argumento con _idHotel invalido", ex);
             }
             catch (FormatException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM10("Reserva-404", "Datos con un formato invalido", ex);
+                throw new ReservaExceptionM10("Reserva-404", "Datos con formato invalido", ex);
             }
             catch (SqlException ex)
             {

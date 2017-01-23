@@ -37,7 +37,7 @@ namespace BOReserva.Controllers.PatronComando.M04
         {
             try
             {
-                IDAOVuelo buscarVuelo = (DAOVuelo)FabricaDAO.instanciarDAOVuelo();
+                IDAOVuelo buscarVuelo = (IDAOVuelo)FabricaDAO.instanciarDAOVuelo();
                 return(buscarVuelo.BuscarCodigo(_codigo));
             }
             catch (ReservaExceptionM04 ex)

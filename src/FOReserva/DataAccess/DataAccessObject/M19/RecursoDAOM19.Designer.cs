@@ -178,7 +178,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M19 {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a aut_tipo.
+        ///   Busca una cadena traducida similar a aut_tipovehiculo.
         /// </summary>
         internal static string autTipo {
             get {
@@ -309,6 +309,15 @@ namespace FOReserva.DataAccess.DataAccessObject.M19 {
         internal static string procedimientoConsultar {
             get {
                 return ResourceManager.GetString("procedimientoConsultar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a M19_ConsultarReservaAPorCiudad.
+        /// </summary>
+        internal static string procedimientoConsultarACiudad {
+            get {
+                return ResourceManager.GetString("procedimientoConsultarACiudad", resourceCulture);
             }
         }
         

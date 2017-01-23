@@ -61,6 +61,60 @@ namespace BOReserva.DataAccess.DataAccessObject.M07 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @equ_fk_pase_abordaje.
+        /// </summary>
+        internal static string equ_fk_pase_abordaje {
+            get {
+                return ResourceManager.GetString("equ_fk_pase_abordaje", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @equ_id.
+        /// </summary>
+        internal static string equ_id {
+            get {
+                return ResourceManager.GetString("equ_id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @equ_peso.
+        /// </summary>
+        internal static string equ_peso {
+            get {
+                return ResourceManager.GetString("equ_peso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to equ_fk_pase_abordaje.
+        /// </summary>
+        internal static string equFkPaseAbordaje {
+            get {
+                return ResourceManager.GetString("equFkPaseAbordaje", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to equ_id.
+        /// </summary>
+        internal static string equID {
+            get {
+                return ResourceManager.GetString("equID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to equ_peso.
+        /// </summary>
+        internal static string equPeso {
+            get {
+                return ResourceManager.GetString("equPeso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to M07_AgregarEquipaje.
         /// </summary>
         internal static string procedimientoAgregarEquipaje {
@@ -102,114 +156,6 @@ namespace BOReserva.DataAccess.DataAccessObject.M07 {
         internal static string procedimientoEditarEquipaje {
             get {
                 return ResourceManager.GetString("procedimientoEditarEquipaje", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @rec_descripcion.
-        /// </summary>
-        internal static string rec_descripcion {
-            get {
-                return ResourceManager.GetString("rec_descripcion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @rec_fecha.
-        /// </summary>
-        internal static string rec_fecha {
-            get {
-                return ResourceManager.GetString("rec_fecha", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @rec_fk_equipaje.
-        /// </summary>
-        internal static string rec_fk_equipaje {
-            get {
-                return ResourceManager.GetString("rec_fk_equipaje", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @rec_fk_pasajero.
-        /// </summary>
-        internal static string rec_fk_pasajero {
-            get {
-                return ResourceManager.GetString("rec_fk_pasajero", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @rec_id.
-        /// </summary>
-        internal static string rec_id {
-            get {
-                return ResourceManager.GetString("rec_id", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @rec_status.
-        /// </summary>
-        internal static string rec_status {
-            get {
-                return ResourceManager.GetString("rec_status", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to rec_descripcion.
-        /// </summary>
-        internal static string recDescripcion {
-            get {
-                return ResourceManager.GetString("recDescripcion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to rec_fecha.
-        /// </summary>
-        internal static string recFecha {
-            get {
-                return ResourceManager.GetString("recFecha", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to rec_fk_equipaje.
-        /// </summary>
-        internal static string recFkEquipaje {
-            get {
-                return ResourceManager.GetString("recFkEquipaje", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to rec_fk_pasajero.
-        /// </summary>
-        internal static string recFkPasajero {
-            get {
-                return ResourceManager.GetString("recFkPasajero", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to rec_id.
-        /// </summary>
-        internal static string recId {
-            get {
-                return ResourceManager.GetString("recId", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to rec_status.
-        /// </summary>
-        internal static string recStatus {
-            get {
-                return ResourceManager.GetString("recStatus", resourceCulture);
             }
         }
     }

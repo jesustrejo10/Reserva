@@ -133,6 +133,15 @@ namespace BOReserva.DataAccess.DataAccessObject.M01 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to M01_NumeroIntentos.
+        /// </summary>
+        internal static string NumeroIntentos {
+            get {
+                return ResourceManager.GetString("NumeroIntentos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to M01_ResetearIntentos.
         /// </summary>
         internal static string ResetearIntentos {

@@ -1,4 +1,4 @@
-﻿using FOReserva.Models.Autos;
+﻿using FOReserva.Models.gestion_reserva_automovil;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -31,7 +31,7 @@ namespace FOReserva.Servicio
                     {
                         var text = reader.GetString(reader.GetOrdinal("lug_nombre"));
                         var id = reader.GetInt32(reader.GetOrdinal("lug_id"));
-                        ciudades.Add(new CLugar(id.ToString(), text));
+                        ciudades.Add(new CLugar(id, text));
                     }
                     CloseConnection();
                 }

@@ -205,6 +205,15 @@ namespace BOReserva.DataAccess.DataAccessObject.M13 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to M13_ModificarRol.
+        /// </summary>
+        internal static string ModificarRol {
+            get {
+                return ResourceManager.GetString("ModificarRol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to M13_QuitarPermiso.
         /// </summary>
         internal static string QuitarPermiso {
