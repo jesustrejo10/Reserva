@@ -71,7 +71,7 @@
     <Compile Include="BO\gestion_restaurantes\M10_TestDaoRestaurant.cs" />
     <Compile Include="BO\gestion_roles\TestGestionRoles.cs" />
     <Compile Include="BO\gestion_ruta_comercial\TestRutaComercial.cs" />
-    <Compile Include="BO\gestion_seguridad_ingreso\TestLogin.cs" />
+    <Compile Include="BO\gestion_seguridad_ingreso\M01_TestLogin.cs" />
     <Compile Include="BO\gestion_usuarios\UnitTest1.cs" />
     <Compile Include="BO\gestion_usuario\TestUsuario.cs" />
     <Compile Include="BO\gestión_OfertasYPaquetes\TestOfertasYPaquetes.cs" />
