@@ -95,6 +95,10 @@ namespace FOReserva.DataAccess.DataAccessObject
         #endregion
 
         #region M22_Gestion_Reserva_Habitacion
+        /// <summary>
+        /// Metodo que instancia el DAO de Reserva de Habitacion
+        /// </summary>
+        /// <returns>Una instancia del DAO de Reserva de Habitacion</returns>
         public static IDAOReservaHabitacion instanciarDaoReservaHabitacion()
         {
             return new DAOReservaHabitacion();
