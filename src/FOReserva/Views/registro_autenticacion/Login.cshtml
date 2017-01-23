@@ -4,7 +4,7 @@
 
 }
 
-@model FOReserva.Models.Sesion.Ccliente
+@model FOReserva.DataAccess.Domain.Usuario1
       
     <script>
         function validaCaracteres(e) {
@@ -66,7 +66,7 @@
             alert('@ViewData["error"]');
         }
 
-        
+
 
     </script>
 
@@ -83,7 +83,7 @@
                         <label>Correo</label>
                         <label class="input margin-bottom-10">
                             <i class="ico-append fa fa-user"></i>
-                            @Html.TextBoxFor(m => m.Correo, new { @required=true, @placeholder= "Ingrese su correo", @id = "logCorreo", oncontextmenu = "return false", onkeypress = "return validaCorreo(event);" })
+                            @Html.TextBoxFor(m => m.correo, new { @required=true, @placeholder= "Ingrese su correo", @id = "logCorreo", oncontextmenu = "return false", onkeypress = "return validaCorreo(event);" })
                         </label>
                         <script>
                             document.getElementById("logCorreo").value = "";
@@ -102,7 +102,7 @@
                         <label>Clave</label>
                         <label class="input margin-bottom-10">
                             <i class="ico-append fa fa-lock"></i>
-                            @Html.PasswordFor(m => m.Clave0, new { @required = true, @placeholder = "Ingrese su clave", @id = "logClave", oncontextmenu = "return false", onkeypress = "return validaCaracteres(event)"})
+                            @Html.PasswordFor(m => m.clave0, new { @required = true, @placeholder = "Ingrese su clave", @id = "logClave", oncontextmenu = "return false", onkeypress = "return validaCaracteres(event)"})
                         </label>
                         
                         <!-- DIV OCULTOS  PARA VALIDACIONES-->
@@ -136,4 +136,3 @@
         </div>
     </div>
 </div>
-
