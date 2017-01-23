@@ -2,8 +2,11 @@
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
+using BOReserva.Excepciones;
+using BOReserva.Excepciones.M04;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
@@ -43,12 +46,19 @@ namespace BOReserva.Controllers.PatronComando.M04
                 IDAO buscarVuelo = FabricaDAO.instanciarDAOVuelo();
                 return(buscarVuelo.Consultar(_id));
             }
-            catch (ExceptionBD ex)
+            catch (ReservaExceptionM04 ex)
             {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw ex;
+            }
+            catch (SqlException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw ex;
             }
             catch (Exception ex)
             {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw ex;
             }
             

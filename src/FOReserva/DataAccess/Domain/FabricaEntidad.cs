@@ -150,5 +150,22 @@ namespace FOReserva.DataAccess.Domain
 
         #endregion
 
+
+        #region Modulo 22 ReservaCrucero
+        public static Entidad InstanciarReservaCrucero(DateTime fechaReserva, int cantidadPasajeros, int usuario, int crucero, int ruta, DateTime fechaInicio, String status)
+        {
+            return new ReservaCrucero(fechaReserva,cantidadPasajeros,usuario,crucero,ruta,fechaInicio,status);
+        }
+
+        public static Entidad InstanciarReservaCrucero(int id, DateTime fechaReserva, int cantidadPasajeros, int usuario, int crucero, int ruta, DateTime fechaInicio, String status)
+        {
+            return new ReservaCrucero(id, fechaReserva, cantidadPasajeros, usuario, crucero, ruta, fechaInicio, status);
+        }
+
+        public static Entidad InstanciarReservaCrucero(int cantidadPasajeros, int usuario, int crucero, int ruta, DateTime fechaInicio, String status)
+        {
+            return new ReservaCrucero(cantidadPasajeros, usuario, crucero, ruta, fechaInicio, status);
+        }
+        #endregion
     }
 }

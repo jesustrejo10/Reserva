@@ -1,6 +1,7 @@
 ﻿using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
+using BOReserva.Excepciones;
 using BOReserva.Excepciones.M09;
 using System;
 using System.Collections.Generic;
@@ -35,12 +36,15 @@ namespace BOReserva.Controllers.PatronComando.M09
             {
                 IDAOHabitacion habdao = (IDAOHabitacion)FabricaDAO.instanciarDaoHabitacion();
                 String resp = habdao.Agregarhab(_hotel, _hotel._precio);
-                if (resp.Equals("1")) return 1;
-                else return 0;
+                if (resp.Equals("1"))
+                    return 1;
+                else 
+                    return 0;
             }
             catch (ReservaExceptionM09 ex)
             {
-                throw ex;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                return 0;
             }
 
         }

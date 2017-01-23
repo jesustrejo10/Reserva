@@ -12,5 +12,7 @@ namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
     {
         //Métodos propios para los paquetes
         List<Entidad> ConsultarTodos();
+
+        String disponibilidadPaquete(Entidad e, int disponibilidad);
     }
 }

@@ -5,9 +5,9 @@ using System.Web;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 
-namespace BOReserva.DataAccess.DAO
+namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
 {
-    interface IDAOVuelo : IDAO
+    public interface IDAOVuelo : IDAO
     {
         List<Entidad> ConsultarTodos();
 

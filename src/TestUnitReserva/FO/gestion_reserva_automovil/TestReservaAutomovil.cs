@@ -129,19 +129,6 @@ namespace TestUnitReserva.FO.gestion_reserva_automovil
             Assert.NotNull(comando);
         }
 
-        //Prueba para visualizar los autos 
-        [Test]
-        public void M19_VisualizarAutos()
-        {
-            Command<Boolean> comando = (Command<Boolean>)FabricaComando.comandosVistaReservaAutomovil(FabricaComando.comandoVista.CARGAR_AUTOS, mockAutomovil);
-
-            bool test = comando.ejecutar();
-
-            Assert.IsTrue(test);
-
-
-        }
-
         // Prueba para probar el controlador de gestion_reserva_autoController
         [Test]
         public void M19_PruebasDelControlador()

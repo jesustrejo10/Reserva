@@ -188,16 +188,20 @@ namespace BOReserva.Controllers
             {
                 var time0 = vuelos[0]._fechaPartida.TimeOfDay.ToString();
                 var time1 = vuelos[0]._fechaLlegada.TimeOfDay.ToString();
-                var time2 = vuelos[1]._fechaPartida.TimeOfDay.ToString();
-                var time3 = vuelos[1]._fechaLlegada.TimeOfDay.ToString();
+				if(vuelos.Count > 1)
+				{
+					var time2 = vuelos[1]._fechaPartida.TimeOfDay.ToString();
+					var time3 = vuelos[1]._fechaLlegada.TimeOfDay.ToString();
+					bol._fechaDespegueVuelta = vuelos[1]._fechaPartida.Day + "/" + vuelos[1]._fechaPartida.Month + "/" + vuelos[1]._fechaPartida.Year;
+					bol._fechaAterrizajeVuelta = vuelos[1]._fechaLlegada.Day + "/" + vuelos[1]._fechaLlegada.Month + "/" + vuelos[1]._fechaLlegada.Year;
+					bol._horaAterrizajeIda = time2;
+					bol._horaAterrizajeVuelta = time3;
+				}
                 bol._fechaDespegueIda = vuelos[0]._fechaPartida.Day + "/" + vuelos[0]._fechaPartida.Month + "/" + vuelos[0]._fechaPartida.Year;
-                bol._fechaDespegueVuelta = vuelos[1]._fechaPartida.Day + "/" + vuelos[1]._fechaPartida.Month + "/" + vuelos[1]._fechaPartida.Year;
                 bol._fechaAterrizajeIda = vuelos[0]._fechaLlegada.Day + "/" + vuelos[0]._fechaLlegada.Month + "/" + vuelos[0]._fechaLlegada.Year;
-                bol._fechaAterrizajeVuelta = vuelos[1]._fechaLlegada.Day + "/" + vuelos[1]._fechaLlegada.Month + "/" + vuelos[1]._fechaLlegada.Year;
                 bol._horaDespegueIda = time0;
                 bol._horaDespegueVuelta = time1;
-                bol._horaAterrizajeIda = time2;
-                bol._horaAterrizajeVuelta = time3;
+
             }
 
             bol._origen = reserva._origen.Name;
@@ -474,16 +478,20 @@ namespace BOReserva.Controllers
             {
                 var time0 = vuelos[0]._fechaPartida.TimeOfDay.ToString();
                 var time1 = vuelos[0]._fechaLlegada.TimeOfDay.ToString();
-                var time2 = vuelos[1]._fechaPartida.TimeOfDay.ToString();
-                var time3 = vuelos[1]._fechaLlegada.TimeOfDay.ToString();
+                if (vuelos.Count > 1)
+                { 
+                    var time2 = vuelos[1]._fechaPartida.TimeOfDay.ToString();
+                    var time3 = vuelos[1]._fechaLlegada.TimeOfDay.ToString();
+                    bol._fechaDespegueVuelta = vuelos[1]._fechaPartida.Day + "/" + vuelos[1]._fechaPartida.Month + "/" + vuelos[1]._fechaPartida.Year;
+                    bol._fechaAterrizajeVuelta = vuelos[1]._fechaLlegada.Day + "/" + vuelos[1]._fechaLlegada.Month + "/" + vuelos[1]._fechaLlegada.Year;
+                    bol._horaDespegueVuelta = time2;
+                    bol._horaAterrizajeVuelta = time3;
+                }
                 bol._fechaDespegueIda = vuelos[0]._fechaPartida.Day + "/" + vuelos[0]._fechaPartida.Month + "/" + vuelos[0]._fechaPartida.Year;
-                bol._fechaDespegueVuelta = vuelos[1]._fechaPartida.Day + "/" + vuelos[1]._fechaPartida.Month + "/" + vuelos[1]._fechaPartida.Year;
                 bol._fechaAterrizajeIda = vuelos[0]._fechaLlegada.Day + "/" + vuelos[0]._fechaLlegada.Month + "/" + vuelos[0]._fechaLlegada.Year;
-                bol._fechaAterrizajeVuelta = vuelos[1]._fechaLlegada.Day + "/" + vuelos[1]._fechaLlegada.Month + "/" + vuelos[1]._fechaLlegada.Year;
                 bol._horaDespegueIda = time0;
                 bol._horaAterrizajeIda = time1;
-                bol._horaDespegueVuelta = time2;
-                bol._horaAterrizajeVuelta = time3;
+
             }
 
             bol._origen = boleto._origen.Name;

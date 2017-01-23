@@ -228,6 +228,7 @@
     <Compile Include="Controllers\PatronComando\M03\M03_COConsultarDestinos.cs" />
     <Compile Include="Controllers\PatronComando\M03\M03_CODeshabilitarRuta.cs" />
     <Compile Include="Controllers\PatronComando\M03\M03_COHabilitarRuta.cs" />
+    <Compile Include="Controllers\PatronComando\M03\M03_COVisualizarRutas.cs" />
     <Compile Include="Controllers\PatronComando\M03\M03_COListarLugares.cs" />
     <Compile Include="Controllers\PatronComando\M03\M03_COModificarRutacs.cs" />
     <Compile Include="Controllers\PatronComando\M03\M03_COMostrarRuta.cs" />
@@ -389,6 +390,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>M07ReclamoEquipaje.resx</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\DataAccessObject\M12\RecursoDAOM12.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RecursoDAOM12.resx</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\DataAccessObject\M13\DAOPermiso.cs" />
     <Compile Include="DataAccess\DataAccessObject\M02\RecursoDAOM02.Designer.cs">
@@ -555,6 +561,7 @@
     <Compile Include="Excepciones\M11\ReservaExceptionM11.cs" />
     <Compile Include="Excepciones\M16\ReservaExceptionM16.cs" />
     <Compile Include="Excepciones\M13\ReservaExceptionM13.cs" />
+    <Compile Include="Excepciones\M12\ReservaExceptionM12.cs" />
     <Compile Include="Excepciones\RecursoLog.Designer.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -620,12 +627,6 @@
     <Compile Include="Models\gestion_check_in\CVuelo.cs" />
     <Compile Include="Models\gestion_comida_vuelo\CComida.cs" />
     <Compile Include="Models\gestion_comida_vuelo\CEditarComida.cs" />
-    <Compile Include="Models\gestion_hoteles\CGestionHoteles_CrearHotel.cs" />
-    <Compile Include="Models\gestion_hoteles\CGestionHoteles_EditarHotel.cs" />
-    <Compile Include="Models\gestion_hoteles\CGestionHoteles_SelectCiudadModel.cs" />
-    <Compile Include="Models\gestion_hoteles\CGestionHoteles_SelectEstrellasModel.cs" />
-    <Compile Include="Models\gestion_hoteles\CGestionHoteles_SelectPaisModel.cs" />
-    <Compile Include="Models\gestion_hoteles\CHotel.cs" />
     <Compile Include="Models\gestion_lugares\CLugarModelo.cs" />
     <Compile Include="Models\gestion_ofertas\CAgregarOferta.cs" />
     <Compile Include="Models\gestion_ofertas\CAgregarPaquete.cs" />
@@ -678,7 +679,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicio\manejadorSQL.cs" />
     <Compile Include="Servicio\Servicio_Vuelos\manejadorSQL_Vuelos.cs" />
-    <Compile Include="Servicio\Servicio_Hoteles\CManejadorSQL_Hoteles.cs" />
     <Compile Include="Servicio\Servicio_Rutas\CManejadorSQL_Rutas.cs" />
     <Compile Include="Views\gestion_restaurantes\Fabrica\FabricaVista.cs" />
   </ItemGroup>
@@ -1774,9 +1774,6 @@
     <Content Include="Views\gestion_cruceros\M24_ModificarCabina.cshtml" />
     <Content Include="Views\gestion_cruceros\M24_ModificarCrucero.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarComidaVuelo.cshtml" />
-    <Content Include="Views\gestion_restaurantes\gestion_reclamos\M16_AgregarReclamo.cshtml" />
-    <Content Include="Views\gestion_restaurantes\gestion_reclamos\M16_VisualizarReclamo.cshtml" />
-    <Content Include="Views\gestion_restaurantes\gestion_reclamos\M16_ModificarReclamo.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_AgregarHotel.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_VisualizarHoteles.cshtml" />
     <Content Include="Views\gestion_equipaje\M07_GestionEquipaje_Agregar.cshtml" />
@@ -1960,6 +1957,10 @@
     <EmbeddedResource Include="DataAccess\DataAccessObject\M04\RecursoVuelo.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoVuelo.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataAccess\DataAccessObject\M12\RecursoDAOM12.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecursoDAOM12.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="DataAccess\DataAccessObject\M13\M13_DAOResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

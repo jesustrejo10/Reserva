@@ -1,5 +1,4 @@
-﻿using BOReserva.DataAccess.Domain;
-using FOReserva.DataAccess.DataAccessObject.M20;
+﻿using FOReserva.DataAccess.DataAccessObject.M20;
 using FOReserva.DataAccess.Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;

@@ -1,6 +1,7 @@
 ﻿using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
+using BOReserva.Excepciones;
 using BOReserva.Excepciones.M16;
 using System;
 using System.Collections.Generic;
@@ -9,8 +10,15 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando.M16
 {
+    /// <summary>
+    /// Comando destinado a realizar las respectivas operaciones necesarias
+    /// para actualizar el estado de un reclamo
+    /// </summary>
     public class M16_COActualizarReclamo : Command<String>
     {
+        /// <summary>
+        /// Atributos de la clase
+        /// </summary>
         Reclamo _reclamo;
         int _idReclamo;
         int _estado;
@@ -40,6 +48,7 @@ namespace BOReserva.Controllers.PatronComando.M16
             }
             catch (ReservaExceptionM16 ex) 
             {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw ex;
             }
         }

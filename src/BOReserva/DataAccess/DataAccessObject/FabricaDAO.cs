@@ -4,6 +4,7 @@ using BOReserva.DataAccess.DataAccessObject.M09;
 using BOReserva.DataAccess.DataAccessObject.M01;
 using BOReserva.DataAccess.DataAccessObject.M03;
 using BOReserva.DataAccess.DataAccessObject.M11;
+using BOReserva.DataAccess.DataAccessObject.M12;
 using BOReserva.DataAccess.Model;
 using BOReserva.M10;
 using BOReserva.DataAccess.DataAccessObject;
@@ -214,11 +215,16 @@ namespace BOReserva.DataAccess.DataAccessObject
         #endregion
 
         #region M13_Roles
+        ///<summary>
+        ///Instancia DAORol
+        ///</summary>
         public static DAO instanciarDAORol()
         {
             return new DAORol();
         }
-
+        ///<summary>
+        ///Instancia DAOPermiso
+        ///</summary>
         public static DAO instanciarDAOPermiso()
         {
             return new DAOPermiso();

@@ -1,12 +1,12 @@
 ﻿@model BOReserva.Models.gestion_reclamos.CModificarReclamo
-
+<link href="~/Content/Canvas/Box.css" rel="stylesheet" />
 <script src="~/Scripts/Scripts_Aviones/llamadas_generales.js"></script>
 
 @using (Html.BeginForm("modificarReclamo", "gestion_reclamos", null, FormMethod.Post, new { @id = "formModificarReclamo", @class = "form-horizontal" }))
 {
     <div class="row">
-        <div class="col-md-12">
-            <div class="box">
+        <div class="col-md-10">
+            <div class="Cajita">
 
                 <div class="box-body">
                     <h2 class="box-title"> Modificar Reclamo</h2>
