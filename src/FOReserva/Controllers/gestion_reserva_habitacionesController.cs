@@ -23,8 +23,8 @@ namespace FOReserva.Controllers
         {
             var user_id = 207;
 
-            if (Session["id_usuario"] != null && Session["id_usuario"] is int)
-                user_id = (int)Session["id_usuario"];
+            //if (Session["id_usuario"] != null && Session["id_usuario"] is int)
+            //    user_id = (int)Session["id_usuario"];
 
             Command<Dictionary<int, Entidad>> comando = FabricaComando.mostrarReservaUsuario(user_id);
             Dictionary<int, Entidad> listareserva = comando.ejecutar();
@@ -62,10 +62,10 @@ namespace FOReserva.Controllers
         [HttpGet]
         public ActionResult hoteles_con_habitaciones(Cvista_BuscarHotel datos)
         {
-          
+
             Command<Dictionary<int, Entidad>> comando = FabricaComando.obtenerHotelCiudad(datos.LugId);
             Dictionary<int, Entidad> listaHoteles = comando.ejecutar();
-           
+
             return PartialView(listaHoteles);
         }
         /// <summary>
@@ -84,7 +84,7 @@ namespace FOReserva.Controllers
             ReservaHabitacion Habitacion = new ReservaHabitacion(reserva.CantidadDias, reserva.FechaLlegada, reserva.HotId, reserva.UsuId);
             Command<string> comando = FabricaComando.agregarReservaHabitacion(Habitacion);
             string agrego = comando.ejecutar();
-            return Json(agrego,JsonRequestBehavior.AllowGet);
+            return Json(agrego, JsonRequestBehavior.AllowGet);
         }
         /// <summary>
         /// Metodo para cargar la ventana de Cancelar Reserva

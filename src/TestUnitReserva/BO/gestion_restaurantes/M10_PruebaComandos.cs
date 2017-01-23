@@ -74,7 +74,7 @@ namespace TestUnitReserva.BO.gestion_restaurantes
 
             }
         }
-
+        /*
         /// <summary>
         /// Metodo consultar restaurant por Id
         /// </summary>
@@ -94,7 +94,7 @@ namespace TestUnitReserva.BO.gestion_restaurantes
             Assert.AreEqual(((CRestauranteModelo)rest).horarioCierre, "21:00");
             Assert.AreEqual(((CRestauranteModelo)rest).idLugar, 12);
         }
-
+        */
         /// <summary>
         /// Metodo para probar que ha sido creado en la base de datos 
         /// </summary>
