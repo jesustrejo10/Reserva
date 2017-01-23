@@ -61,7 +61,6 @@
     <Compile Include="BO\gestion_automoviles\TestAutomoviles.cs" />
     <Compile Include="BO\gestion_aviones\TestAviones.cs" />
     <Compile Include="BO\gestion_comida_vuelo\TestComida.cs" />
-    <Compile Include="BO\gestion_comida_vuelo\TestComidaVuelo.cs" />
     <Compile Include="BO\gestion_cruceros\TestCruceros.cs" />
     <Compile Include="BO\gestion_hoteles\Mocksdeayuda.cs" />
     <Compile Include="BO\gestion_hoteles\TestGestionHoteles.cs" />
@@ -77,6 +76,7 @@
     <Compile Include="BO\gestion_usuario\TestUsuario.cs" />
     <Compile Include="BO\gestion_vuelos\TestVuelo.cs" />
     <Compile Include="BO\gestión_OfertasYPaquetes\TestDaoOfertas.cs" />
+    <Compile Include="BO\gestión_OfertasYPaquetes\TestOfertasYPaquetes.cs" />
     <Compile Include="BO\TestGestionAutomovil\TestGestionAutomovil.cs" />
     <Compile Include="FO\Diario\TestLugarDiario.cs" />
     <Compile Include="FO\gestion_reserva_automovil\TestReservaAutomovil.cs" />

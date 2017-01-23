@@ -26,6 +26,7 @@ namespace BOReserva.Servicio
         //ESTA CLASE ESTA ACA DEBIDO A QUE EL MODULO 11 AUN REFERENCIA ESTA CLASE
         //ES EL UNICO MODULO QUE LO HACE.
         
+
         /// <summary>
         /// ATENCIÓN: Esta clase no debería usarse más, se deja por motivos de compatibilidad para los grupos que aún no han migrado a DAO.
         /// </summary>
