@@ -7,9 +7,13 @@ using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.Excepciones.M16;
+using BOReserva.Excepciones;
 
 namespace BOReserva.Controllers.PatronComando
 {
+    /// <summary>
+    /// Comando para agregar un reclamo a la base de datos
+    /// </summary>
     public class M16_COAgregarReclamo: Command<String>
     {
         Reclamo _reclamo;
@@ -36,6 +40,7 @@ namespace BOReserva.Controllers.PatronComando
             }
             catch(ReservaExceptionM16 ex)
             {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 return ex.Mensaje;
             }
         }
