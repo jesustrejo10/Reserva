@@ -24,8 +24,9 @@ namespace BOReserva.DataAccess.Domain
             _id = id;
         }
 
-        public Cabina(String nombre, float precio, String estatus, String nomcrucero)
+        public Cabina(int id, String nombre, float precio, String estatus, String nomcrucero)
         {
+            _id = id;
             _nombreCabina = nombre;
             _precioCabina = precio;
             _estatus = estatus;

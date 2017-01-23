@@ -345,6 +345,21 @@ namespace BOReserva.Controllers.PatronComando
             
         }
 
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M14_COAgregarCrucero
+        /// </summary>
+        /// <param name="e">Recibe la una entidad de tipo Crucero</param>
+        /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
+        public static Command<String> crearM14AgregaItinerario(Entidad e)
+        {
+
+            return new M14_COAgregarItinerario((Itinerario)e);
+
+        }
+
+
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
         /// M14_COAgregarCrucero
@@ -400,6 +415,13 @@ namespace BOReserva.Controllers.PatronComando
 
             return new M14_COListarRutasCrucero();
         }
+
+        public static Command<Dictionary<int, Entidad>> crearM14VisualizarRutasCrucero(string rutas)
+        {
+
+            return new M14_COListarRutasRutas(rutas);
+        }
+
 
 
 

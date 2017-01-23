@@ -365,8 +365,9 @@ namespace BOReserva.DataAccess.Domain
         public static Entidad InstanciarPermiso(String permiso)
         {
             return new Permiso();
-        }
-
+        }      
+        
+                  
         public static Entidad crearRol(int id, String nombre)
         {
             return new Rol(id, nombre);
@@ -433,6 +434,13 @@ namespace BOReserva.DataAccess.Domain
 
         #region M14 Cruceros
 
+        //instancia cabina con nombre de crucero, no con FK
+
+        public static Entidad InstanciarCabinaN(CGestion_cabina cabina)
+        {
+            return new Cabina(cabina._idCabina, cabina._nombreCabina, cabina._precioCabina, cabina._estatus, cabina._cruceroNombre);
+        }
+
         /// <summary>
         /// Clase que instacia un Crucero
         /// </summary>
@@ -446,7 +454,6 @@ namespace BOReserva.DataAccess.Domain
         }
 
         //instancia cabina con nombre de crucero, no con FK
-
         public static Entidad InstanciarCabina(CGestion_cabina cabina)
         {
             return new Cabina(cabina._idCabina, cabina._nombreCabina, cabina._precioCabina, cabina._estatus, cabina._fkCrucero);
@@ -455,6 +462,11 @@ namespace BOReserva.DataAccess.Domain
         public static Entidad InstanciarCamaroteN(CGestion_camarote camarote)
         {
             return new Camarote(camarote._idCamarote, camarote._cantidadCama, camarote._tipoCama, camarote._estatus, camarote._cabinaNombre);
+        }
+
+        public static Entidad InstanciarItinerarioN(CGestion_itinerario itinerario)
+        {
+            return new Itinerario(itinerario._id,itinerario._fechaInicio,itinerario._fechaFin,itinerario._estatus,itinerario._origen,itinerario._destino,itinerario._crucero);
         }
 
 

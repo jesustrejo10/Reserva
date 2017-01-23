@@ -1,5 +1,14 @@
 ﻿@model BOReserva.Models.gestion_cruceros.CGestion_itinerario
 <script src="~/Scripts/Scripts_Cruceros/scripts_cruceros.js"></script>
+@{
+
+    IEnumerable<SelectListItem> listOrigen = Model._listaOrigen;
+    
+    
+
+
+}
+
 @using (Html.BeginForm("guardarItinerario", "gestion_cruceros", null, FormMethod.Post, new { @id = "formGuardarItinerario", @class = "form-horizontal" }))
 {
     <div class="box">
@@ -20,13 +29,13 @@
                     </div>
                     <div class="form-group" style="margin-bottom:20px">                        
                         <label>Elegir Origen de la Ruta (<span style="color:red">*</span>):</label>
-                        @Html.DropDownListFor(m => m._origen, new SelectList(Enumerable.Empty<SelectListItem>(), "Value", "Text"),
-              "Seleccione una ciudad origen", new { @class = "form-control", @id = "ciudadO", @style = "width: 100%;", @required = "true" })
+                        @Html.DropDownListFor(m => m._origen, new SelectList(Model._listaOrigen as System.Collections.IEnumerable, "Value", "Text"),
+              "Seleccione una ruta origen", new { @class = "form-control", @id = "ciudadO", @style = "width: 50%;", @required = "true" })
 
                         <br />
                         <label>Elegir Destino de la Ruta (<span style="color:red">*</span>):</label>
                         @Html.DropDownListFor(m => m._destino, new SelectList(Enumerable.Empty<SelectListItem>(), "Value", "Text"),
-                                "Seleccione una ciudad destino", new { @class = "form-control", @id = "ciudadD", @style = "width: 100%;", @required = "true" })
+                                "Seleccione una ruta destino", new { @class = "form-control", @id = "ciudadD", @style = "width: 50%;", @required = "true" })
 
                     </div>
 
@@ -34,7 +43,7 @@
                         <div class="col-xs-6">
                             <div class="form-group" style="margin-bottom:20px">
                                 <label>Fecha Inicio:</label>
-                                @Html.TextBoxFor(m => m._fechaInicio, null, new { @type = "date", @id = "fecha_inicio", @style = "width:39% ; margin-left:1%" })
+                                @Html.TextBoxFor(m => m._fechaInicio, null, new { @type = "date", @id = "fecha_inicio", @style = "width:50%" })
                             </div>
                         </div>
                     </div>
@@ -42,7 +51,7 @@
                         <div class="col-xs-6">
                             <div class="form-group" style="margin-bottom:20px">
                                 <label>Fecha Fin:</label>
-                                @Html.TextBoxFor(m => m._fechaFin, null, new { @type = "date", @id = "fecha_fin", @style = "width:39% ; margin-left:4%" })
+                                @Html.TextBoxFor(m => m._fechaFin, null, new { @type = "date", @id = "fecha_inicio", @style = "width:50%" })
                             </div>
                         </div>
                     </div>

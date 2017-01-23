@@ -65,7 +65,7 @@
             var nombre = $('#cab_nombre').val();
             var precio = $('#cab_precio').val();
             var estado = $('#cab_estado').val();
-            if (nombre && precio && capacidad && estado) {
+            if (nombre && precio && estado) {
                 $.ajax({
                     url: "gestion_cruceros/modificarCabina",
                     data: form.serialize(),
