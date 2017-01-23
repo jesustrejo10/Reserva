@@ -9,6 +9,9 @@ namespace BOReserva
 {
     public static class AuthConfig
     {
+        /// <summary>
+        /// Método de Microsoft
+        /// </summary>
         public static void RegisterAuth()
         {
             // Para permitir que los usuarios de este sitio inicien sesión con sus cuentas de otros sitios como, por ejemplo, Microsoft, Facebook y Twitter,
