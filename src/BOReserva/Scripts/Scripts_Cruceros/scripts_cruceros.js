@@ -104,11 +104,11 @@ $("#guardar_camarote").click(function (e) {
             data: form.serialize(),
             type: 'POST',
             success: function (data) {
-                alert("Agregando camarote, por favor espere");
+                alert("Camarote agregado exitosamente");
                 $('#formGuardarCamarote')[0].reset();
             },
             error: function (data) {
-                alert("Error agregando cabina, intente de nuevo");                
+                alert("Error agregando camarote, intente de nuevo");                
             }
         });
     }
@@ -133,7 +133,7 @@ $("#guardar_cabina").click(function (e) {
                 alert("Error agregando cabina, intente de nuevo");                
             }
         });
-}
+    }
 });
 
 
@@ -154,9 +154,10 @@ $("#guardar_crucero").click(function (e) {
                     success: function (data, textStatus, jqXHR) {
                         $("#contenido").empty();
                         $("#contenido").append(data);
+                        alert("Crucero agregado exitosamente");
                     },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        alert(errorThrown);
+                    error: function (jqXHR, textStatus, errorThrown) {                        
+                        alert("No se pudo agregar el crucero, intente de nuevo");
                     }
                 });
                 $('#formGuardarCrucero')[0].reset();

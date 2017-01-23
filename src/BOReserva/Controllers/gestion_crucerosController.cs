@@ -335,11 +335,31 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult guardarCrucero(CGestion_crucero model)
         {
-            
-            Entidad nuevoCrucero = FabricaEntidad.InstanciarCrucero(model);            
-            Command<String> comando = FabricaComando.crearM14AgregarCrucero(nuevoCrucero);
-            String result = comando.ejecutar();
-            return (Json(result));            
+            if (model._nombreCrucero == null || model._companiaCrucero == null)
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error, debe suministrar un nombre de crucero/compañia";
+                //Retorno el error
+                return Json(error);
+            }
+            else if (model._capacidadCrucero <= 0 || model._capacidadCrucero > 100000)
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error, capacidad de crucero invalida";
+                //Retorno el error
+                return Json(error);
+            }
+            else
+            {
+                Entidad nuevoCrucero = FabricaEntidad.InstanciarCrucero(model);
+                Command<String> comando = FabricaComando.crearM14AgregarCrucero(nuevoCrucero);
+                String result = comando.ejecutar();
+                return (Json(result));
+            }
         }        
         
         [HttpPost]
@@ -350,7 +370,7 @@ namespace BOReserva.Controllers
                     //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
                     Response.StatusCode = (int)HttpStatusCode.BadRequest;
                     //Agrego mi error
-                    String error = "Error, no ha seleccionado un origen/destino valido";
+                    String error = "Error, debe suministrar un nombre de crucero/cabina";
                     //Retorno el error
                     return Json(error);
                 }
@@ -365,7 +385,6 @@ namespace BOReserva.Controllers
             }
             else
             {
-
                 Entidad nuevaCabina = FabricaEntidad.InstanciarCabinaN(model);
                 Command<String> comando = FabricaComando.crearM14AgregarCabina(nuevaCabina);
                 String result = comando.ejecutar();
@@ -379,10 +398,39 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult guardarCamarote(CGestion_camarote model)
         {
-            Entidad nuevoCamarote= FabricaEntidad.InstanciarCamaroteN(model);
-            Command<String> comando = FabricaComando.crearM14AgregarCamarote(nuevoCamarote);
-            String result = comando.ejecutar();
-            return (Json(result));
+           if  (model._cabinaNombre == null || model._cruceroNombre == null)
+                {
+                    //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    //Agrego mi error
+                    String error = "Error, elija una cabina/crucero valida";
+                    //Retorno el error
+                    return Json(error);
+                }
+            else if (model._cantidadCama <= 0 || model._cantidadCama >= 200)
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error, cantidad de camas invalida";
+                //Retorno el error
+                return Json(error);
+            }
+           else if (model._tipoCama == null){
+               //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error, asigne un tipo de cama valido";
+                //Retorno el error
+                return Json(error);
+               }
+            else
+            {
+                Entidad nuevoCamarote= FabricaEntidad.InstanciarCamaroteN(model);
+                Command<String> comando = FabricaComando.crearM14AgregarCamarote(nuevoCamarote);
+                String result = comando.ejecutar();
+                return (Json(result));
+            }
         }
 
 
