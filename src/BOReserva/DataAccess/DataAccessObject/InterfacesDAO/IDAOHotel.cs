@@ -14,6 +14,6 @@ namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
     {
         String eliminarHotel(int id);
 
-        String disponibilidadHotel(Entidad e, int disponibilidad);
+        Entidad disponibilidadHotel(Entidad e, int disponibilidad);
     }
 }

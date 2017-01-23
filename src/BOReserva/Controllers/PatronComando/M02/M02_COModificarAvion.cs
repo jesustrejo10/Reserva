@@ -17,7 +17,12 @@ namespace BOReserva.Controllers.PatronComando.M02
 
           Avion _avion;
         int _idmodificar;
-
+        
+        /// <summary>
+        /// Constructor del comando modificar
+        /// </summary>
+        /// <param name="avion"></param>
+        /// <param name="id"></param>
         public M02_COModificarAvion(Entidad avion, int id) { 
             this._avion = (Avion) avion;
             this._avion._id = id;

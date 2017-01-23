@@ -1,173 +1,183 @@
-﻿<!-- Indico que para esta vista, M05_VisualizarBoleto, utilizare el modelo Models/gestion_boletos/CVisualizarBoleto-->
+<!-- Indico que para esta vista, M05_VisualizarBoleto, utilizare el modelo Models/gestion_boletos/CVisualizarBoleto-->
 @model BOReserva.Models.gestion_boletos.CVisualizarBoleto
 
 @using (Html.BeginForm("verBoleto", "gestion_boletos", null, FormMethod.Post, new { @id = "verBoleto", @class = "form-horizontal" }))
 {
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="box box-success">
-            <div class="box-header with-border">
-                <h1 class="box-title">Detalle Boleto</h1>
-                <div class="box-tools pull-right">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h1 class="box-title">Detalle Boleto</h1>
+                    <div class="box-tools pull-right">
+                    </div>
                 </div>
-            </div>
-            <div class="box-body">
-                <div class="row">
-                    <div class="col-md-12" style="margin-top:10px;">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12" style="margin-top:10px;">
 
-                        <div class="col-xs-6">
-                            <label>Origen:</label>
-                            @Html.TextBoxFor(m => m._origen, null, new { @class = "form-control", @placeholder = "", @id = "boleto_origen", @disabled = "disabled", @readonly = "readonly" })
+                            <div class="col-xs-6">
+                                <label>Origen:</label>
+                                @Html.TextBoxFor(m => m._origen, null, new { @class = "form-control", @placeholder = "", @id = "boleto_origen", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+
+                            <div class="col-xs-6">
+                                <label>Destino:</label>
+                                @Html.TextBoxFor(m => m._destino, null, new { @class = "form-control", @placeholder = "", @id = "boleto_destino", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+
                         </div>
 
-                        <div class="col-xs-6">
-                            <label>Destino:</label>
-                            @Html.TextBoxFor(m => m._destino, null, new { @class = "form-control", @placeholder = "", @id = "boleto_destino", @disabled = "disabled", @readonly = "readonly" })
+                        <div>&nbsp;</div>
+
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-md-6">
+                                <label>Fecha salida (IDA):</label>
+                                @Html.TextBoxFor(m => m._fechaDespegueIda, null, new { @class = "form-control", @placeholder = "", @id = "boleto_fechaDespegueIda", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+
+                            <div class="col-md-6">
+                                <label>Fecha llegada (IDA):</label>
+                                @Html.TextBoxFor(m => m._fechaAterrizajeIda, null, new { @class = "form-control", @placeholder = "", @id = "boleto_fechaAterrizajeIda", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+
                         </div>
 
+                        <div>&nbsp;</div>
+
+                        <div class="col-md-12" style="margin-top:10px;">
+
+                            <div class="col-md-6">
+                                <label>Hora salida (IDA):</label>
+                                @Html.TextBoxFor(m => m._horaDespegueIda, null, new { @class = "form-control", @placeholder = "", @id = "boleto_horaDespegueIda", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+
+                            <div class="col-md-6">
+                                <label>Hora llegada (IDA):</label>
+                                @Html.TextBoxFor(m => m._horaAterrizajeIda, null, new { @class = "form-control", @placeholder = "", @id = "boleto_horaDespegueIda", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+                        </div>
+
+                        <div>&nbsp;</div>
+
+
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-md-6">
+                                <label>Fecha salida (VUELTA):</label>
+                                @Html.TextBoxFor(m => m._fechaDespegueVuelta, null, new { @class = "form-control", @placeholder = "", @id = "boleto_fechaDespegueVuelta", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+
+                            <div class="col-md-6">
+                                <label>Fecha llegada (VUELTA):</label>
+                                @Html.TextBoxFor(m => m._fechaAterrizajeVuelta, null, new { @class = "form-control", @placeholder = "", @id = "boleto_fechaAterrizajeVuelta", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+                        </div>
+
+                        <div>&nbsp;</div>
+
+                        <div class="col-md-12" style="margin-top:10px;">
+
+                            <div class="col-md-6">
+                                <label>Hora salida (VUELTA):</label>
+                                @Html.TextBoxFor(m => m._horaDespegueVuelta, null, new { @class = "form-control", @placeholder = "", @id = "boleto_horaDespegueVuelta", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+
+                            <div class="col-md-6">
+                                <label>Hora llegada (VUELTA):</label>
+                                @Html.TextBoxFor(m => m._horaAterrizajeVuelta, null, new { @class = "form-control", @placeholder = "", @id = "boleto_horaAterrizajeVuelta", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+
+                        </div>
+
+                        <div>&nbsp;</div>
+
+                        <div class="col-md-12" style="margin-top:10px;">
+
+                            <div class="col-md-6">
+                                <label>Monto:</label>
+                                @Html.TextBoxFor(m => m._monto, null, new { @class = "form-control", @placeholder = "", @id = "boleto_monto", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+
+                            <div class="col-md-6">
+                                <label>Tipo Boleto:</label>
+                                @Html.TextBoxFor(m => m._tipoBoleto, null, new { @class = "form-control", @placeholder = "", @id = "boleto_tipoBoleto", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+
+                        </div>
+
+                        <div>&nbsp;</div>
+
+                        <div class="col-md-12" style="margin-top:10px;">
+
+                            <div class="col-md-6">
+                                <label>Nombre:</label>
+                                @Html.TextBoxFor(m => m._nombre, null, new { @class = "form-control", @placeholder = "", @id = "boleto_nombre", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+
+                            <div class="col-md-6">
+                                <label>Apellido:</label>
+                                @Html.TextBoxFor(m => m._apellido, null, new { @class = "form-control", @placeholder = "", @id = "boleto_apellido", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+
+                        </div>
+
+                        <div>&nbsp;</div>
+
+
+                        <div class="col-md-12" style="margin-top:10px;">
+
+                            <div class="col-md-6">
+                                <label>Número de pasaporte:</label>
+                                @Html.TextBoxFor(m => m._pasaporte, null, new { @class = "form-control", @placeholder = "", @id = "boleto_pasaporte", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+
+                            <div class="col-md-6">
+                                <label>Correo:</label>
+                                @Html.TextBoxFor(m => m._correo, null, new { @class = "form-control", @placeholder = "", @id = "boleto_correo", @disabled = "disabled", @readonly = "readonly" })
+                            </div>
+
+                        </div>
+
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <button type="button" id="return" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Regresar</button>
+                        </div>
                     </div>
 
-                    <div>&nbsp;</div>
-
-                    <div class="col-md-12" style="margin-top:10px;">
-                        <div class="col-md-6">
-                            <label>Fecha salida (IDA):</label>
-                            @Html.TextBoxFor(m => m._fechaDespegueIda, null, new { @class = "form-control", @placeholder = "", @id = "boleto_fechaDespegueIda", @disabled = "disabled", @readonly = "readonly" })
-                        </div>
-
-                        <div class="col-md-6">
-                            <label>Fecha llegada (IDA):</label>
-                            @Html.TextBoxFor(m => m._fechaAterrizajeIda, null, new { @class = "form-control", @placeholder = "", @id = "boleto_fechaAterrizajeIda", @disabled = "disabled", @readonly = "readonly" })
-                        </div>
-
-                    </div>
-
-                    <div>&nbsp;</div>
-
-                    <div class="col-md-12" style="margin-top:10px;">
-
-                        <div class="col-md-6">
-                            <label>Hora salida (IDA):</label>
-                            @Html.TextBoxFor(m => m._horaDespegueIda, null, new { @class = "form-control", @placeholder = "", @id = "boleto_horaDespegueIda", @disabled = "disabled", @readonly = "readonly" })
-                        </div>
-
-                        <div class="col-md-6">
-                            <label>Hora llegada (IDA):</label>
-                            @Html.TextBoxFor(m => m._horaAterrizajeIda, null, new { @class = "form-control", @placeholder = "", @id = "boleto_horaDespegueIda", @disabled = "disabled", @readonly = "readonly" })
-                        </div>
-                    </div>
-
-                    <div>&nbsp;</div>
-
-
-                    <div class="col-md-12" style="margin-top:10px;">
-                        <div class="col-md-6">
-                            <label>Fecha salida (VUELTA):</label>
-                            @Html.TextBoxFor(m => m._fechaDespegueVuelta, null, new { @class = "form-control", @placeholder = "", @id = "boleto_fechaDespegueVuelta", @disabled = "disabled", @readonly = "readonly" })
-                        </div>
-
-                        <div class="col-md-6">
-                            <label>Fecha llegada (VUELTA):</label>
-                            @Html.TextBoxFor(m => m._fechaAterrizajeVuelta, null, new { @class = "form-control", @placeholder = "", @id = "boleto_fechaAterrizajeVuelta", @disabled = "disabled", @readonly = "readonly" })
-                        </div>
-                    </div>
-
-                    <div>&nbsp;</div>
-
-                    <div class="col-md-12" style="margin-top:10px;">
-
-                        <div class="col-md-6">
-                            <label>Hora salida (VUELTA):</label>
-                            @Html.TextBoxFor(m => m._horaDespegueVuelta, null, new { @class = "form-control", @placeholder = "", @id = "boleto_horaDespegueVuelta", @disabled = "disabled", @readonly = "readonly" })
-                        </div>
-
-                        <div class="col-md-6">
-                            <label>Hora llegada (VUELTA):</label>
-                            @Html.TextBoxFor(m => m._horaAterrizajeVuelta, null, new { @class = "form-control", @placeholder = "", @id = "boleto_horaAterrizajeVuelta", @disabled = "disabled", @readonly = "readonly" })
-                        </div>
-
-                    </div>
-
-                    <div>&nbsp;</div>
-
-                    <div class="col-md-12" style="margin-top:10px;">
-
-                        <div class="col-md-6">
-                            <label>Monto:</label>
-                            @Html.TextBoxFor(m => m._monto, null, new { @class = "form-control", @placeholder = "", @id = "boleto_monto", @disabled = "disabled", @readonly = "readonly" })
-                        </div>
-
-                        <div class="col-md-6">
-                            <label>Tipo Boleto:</label>
-                            @Html.TextBoxFor(m => m._tipoBoleto, null, new { @class = "form-control", @placeholder = "", @id = "boleto_tipoBoleto", @disabled = "disabled", @readonly = "readonly" })
-                        </div>
-
-                    </div>
-
-                    <div>&nbsp;</div>
-
-                    <div class="col-md-12" style="margin-top:10px;">
-
-                        <div class="col-md-6">
-                            <label>Nombre:</label>
-                            @Html.TextBoxFor(m => m._nombre, null, new { @class = "form-control", @placeholder = "", @id = "boleto_nombre", @disabled = "disabled", @readonly = "readonly" })
-                        </div>
-
-                        <div class="col-md-6">
-                            <label>Apellido:</label>
-                            @Html.TextBoxFor(m => m._apellido, null, new { @class = "form-control", @placeholder = "", @id = "boleto_apellido", @disabled = "disabled", @readonly = "readonly" })
-                        </div>
-
-                    </div>
-
-                    <div>&nbsp;</div>
-
-
-                    <div class="col-md-12" style="margin-top:10px;">
-
-                        <div class="col-md-6">
-                            <label>Número de pasaporte:</label>
-                            @Html.TextBoxFor(m => m._pasaporte, null, new { @class = "form-control", @placeholder = "", @id = "boleto_pasaporte", @disabled = "disabled", @readonly = "readonly" })
-                        </div>
-
-                        <div class="col-md-6">
-                            <label>Correo:</label>
-                            @Html.TextBoxFor(m => m._correo, null, new { @class = "form-control", @placeholder = "", @id = "boleto_correo", @disabled = "disabled", @readonly = "readonly" })
-                        </div>
-
-                    </div>
-
-                    <div>&nbsp;</div>
-                    <div class="col-md-12" style="margin-top:10px;">
-                        <button type="button" id="return" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Regresar</button>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-    <script>
-        $("#return").click(function (e) {
-            e.preventDefault();
-            var url = '/gestion_boletos/M05_VisualizarBoletos';
-            var method = 'GET';
-            var data = '';
-
-            $.ajax(
-                {
-                    url: url,
-                    type: method,
-                    data: data,
-                    success: function (data, textStatus, jqXHR) {
-
-                        $("#contenido").empty();
-                        $("#contenido").append(data);
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        alert(errorThrown);
-                    }
-                });
-        });
-    </script>
 }
+<script>
+    function loader() {
+        $("#loader").fadeIn("slow");
+        $(window).ajaxComplete(function () {
+            // Se oculta el loader animado
+            $("#loader").hide();
+        });
+    }
+    //Regresa a la lista de visualizar Boletos
+    $("#return").click(function (e) {
+        e.preventDefault();
+        loader();
+        var url = '/gestion_boletos/M05_VisualizarBoletos';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+</script>

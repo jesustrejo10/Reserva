@@ -5,13 +5,13 @@ using System.Web;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 
-namespace BOReserva.DataAccess.DAO
+namespace BOReserva.DataAccess.DAO.InterfacesDAO
 {
     interface IDAOVuelo : IDAO
     {
         List<Entidad> ConsultarTodos();
 
-        bool Eliminar(Entidad entidad);
+        bool Eliminar(int entidad);
 
         bool CambiarStatus(int vuelo);
 

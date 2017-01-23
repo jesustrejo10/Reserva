@@ -1,4 +1,4 @@
-﻿using FOReserva.DataAccess;
+﻿using FOReserva.DataAccess.DataAccessObject;
 using FOReserva.DataAccess.Model;
 using FOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using FOReserva.DataAccess.DataAccessObject.M19;
@@ -10,6 +10,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using FOReserva.DataAccess.DataAccessObject.M20;
+using FOReserva.DataAccess.DataAccessObject.M22Cruceros;
 
 namespace FOReserva.DataAccess.DataAccessObject
 
@@ -45,7 +46,7 @@ namespace FOReserva.DataAccess.DataAccessObject
         {
             return new SqlConnection(stringDeConexion);
         }
-
+                
         public static Parametro asignarParametro(string nombreAtributo, SqlDbType tipoDeDato, string valorAtributo, bool output)
         {
             return new Parametro(nombreAtributo, tipoDeDato, valorAtributo, output);
@@ -85,6 +86,16 @@ namespace FOReserva.DataAccess.DataAccessObject
         {
             return new SqlDataAdapter(comandoSql);
         }
+
+        public static DAO instanciarDaoPais()
+        {
+            return new DAOPais();
+        }
+
+        public static DAO instanciarDaoCiudad()
+        {
+            return new DAOCiudad();
+        }
         #endregion
 
         #region Modulo 20
@@ -92,15 +103,39 @@ namespace FOReserva.DataAccess.DataAccessObject
         {
             return new DAORevision();
         }
+
         #endregion
 
+
+        #region Modulo 22 ReservaCrucero
+        public static DAO instanciarDaoReservaCrucero()
+        {
+            return new DAOReservaCrucero();
+        }
+
+
+        
+        public static Parametro asignar(string nombreAtributo, SqlDbType tipoDeDato, string valorAtributo, bool output)
+        {
+            return new Parametro(nombreAtributo, tipoDeDato, valorAtributo, output);
+        }
+
+        
+        #endregion
+
+
         #region M22_Gestion_Reserva_Habitacion
+        /// <summary>
+        /// Metodo que instancia el DAO de Reserva de Habitacion
+        /// </summary>
+        /// <returns>Una instancia del DAO de Reserva de Habitacion</returns>
         public static IDAOReservaHabitacion instanciarDaoReservaHabitacion()
         {
             return new DAOReservaHabitacion();
         }
 
         #endregion
+
 
     }
 }

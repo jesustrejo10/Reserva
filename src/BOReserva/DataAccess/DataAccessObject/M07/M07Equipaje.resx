@@ -117,6 +117,30 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="equFkPaseAbordaje" xml:space="preserve">
+    <value>equ_fk_pase_abordaje</value>
+    <comment>Abordaje asociado al Equipaje</comment>
+  </data>
+  <data name="equID" xml:space="preserve">
+    <value>equ_id</value>
+    <comment>ID del Equipaje</comment>
+  </data>
+  <data name="equPeso" xml:space="preserve">
+    <value>equ_peso</value>
+    <comment>Peso del Equipaje</comment>
+  </data>
+  <data name="equ_fk_pase_abordaje" xml:space="preserve">
+    <value>@equ_fk_pase_abordaje</value>
+    <comment>Abordaje asociado al Equipaje</comment>
+  </data>
+  <data name="equ_id" xml:space="preserve">
+    <value>@equ_id</value>
+    <comment>ID del Equipaje</comment>
+  </data>
+  <data name="equ_peso" xml:space="preserve">
+    <value>@equ_peso</value>
+    <comment>Peso del Equipaje</comment>
+  </data>
   <data name="procedimientoAgregarEquipaje" xml:space="preserve">
     <value>M07_AgregarEquipaje</value>
     <comment>Agrega Equipaje</comment>
@@ -136,57 +160,5 @@
   <data name="procedimientoEditarEquipaje" xml:space="preserve">
     <value>M07_EditarEquipaje</value>
     <comment>Edita Equipaje</comment>
-  </data>
-  <data name="procedimientoEditarReclamoEstado" xml:space="preserve">
-    <value>M07_EditarReclamoEstado</value>
-    <comment>Edita el status de un reclamo</comment>
-  </data>
-  <data name="recDescripcion" xml:space="preserve">
-    <value>rec_descripcion</value>
-    <comment>Descripcion del reclamo en la tabla</comment>
-  </data>
-  <data name="recFecha" xml:space="preserve">
-    <value>rec_fecha</value>
-    <comment>Fecha del reclamo en la tabla</comment>
-  </data>
-  <data name="recFkEquipaje" xml:space="preserve">
-    <value>rec_fk_equipaje</value>
-    <comment>Equipaje asociado a reclamo en la tabla</comment>
-  </data>
-  <data name="recFkPasajero" xml:space="preserve">
-    <value>rec_fk_pasajero</value>
-    <comment>Pasajero asociado a reclamo en la tabla</comment>
-  </data>
-  <data name="recId" xml:space="preserve">
-    <value>rec_id</value>
-    <comment>Id del reclamo en la tabla</comment>
-  </data>
-  <data name="recStatus" xml:space="preserve">
-    <value>rec_status</value>
-    <comment>Estatus del reclamo en la tabla</comment>
-  </data>
-  <data name="rec_descripcion" xml:space="preserve">
-    <value>@rec_descripcion</value>
-    <comment>Descripcion del Reclamo</comment>
-  </data>
-  <data name="rec_fecha" xml:space="preserve">
-    <value>@rec_fecha</value>
-    <comment>Fecha del Reclamo</comment>
-  </data>
-  <data name="rec_fk_equipaje" xml:space="preserve">
-    <value>@rec_fk_equipaje</value>
-    <comment>Equipaje Perdido</comment>
-  </data>
-  <data name="rec_fk_pasajero" xml:space="preserve">
-    <value>@rec_fk_pasajero</value>
-    <comment>Pasajero que Reclama</comment>
-  </data>
-  <data name="rec_id" xml:space="preserve">
-    <value>@rec_id</value>
-    <comment>id del reclamo en los stored procedure</comment>
-  </data>
-  <data name="rec_status" xml:space="preserve">
-    <value>@rec_status</value>
-    <comment>Estatus del Reclamo</comment>
   </data>
 </root>

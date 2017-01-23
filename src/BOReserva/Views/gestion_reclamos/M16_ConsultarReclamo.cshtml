@@ -1,0 +1,89 @@
+﻿@model BOReserva.Models.gestion_reclamos.CConsultarReclamo
+
+<script src="~/Scripts/Scripts_Aviones/llamadas_generales.js"></script>
+
+@using (Html.BeginForm("consultarReclamo", "gestion_reclamos", null, FormMethod.Post, new { @id = "formConsultarReclamo", @class = "form-horizontal" }))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+
+                <div class="box-body">
+                    <h2 class="box-title"> Consultar Reclamo</h2>
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div>
+                                &nbsp;
+                                <div class="col-md-12">
+                                    <div class="col-xs-6">
+                                        <label for="tituloReclamo">T&iacutetulo (<span style="color:red">*</span>):</label>
+                                        @Html.TextBoxFor(m => m._tituloReclamo, null, new { @class = "form-control", @placeholder = "Reclamo de una maleta", @id = "tituloReclamo", @readonly= "readonly" })
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <label for="fecharegistro">Fecha del Suceso (<span style="color:red">*</span>)</label>
+                                        @Html.TextBoxFor(m => m._fechaReclamo, null, new { @class = "form-control", @placeholder = "Fecha del Suceso", @id = "fechaReclamo", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                            </div>
+                            &nbsp;
+                            <div class="col-md-12">
+                                <div class="col-xs-6">
+                                    <label for="descripcionReclamo">Descripci&oacuten (<span style="color:red">*</span>):</label>
+                                    @Html.TextAreaFor(m => m._detalleReclamo, 3, 3, new { @class = "form-control", @placeholder = "Escriba aquí el detalle del reclamo...", @id = "detalleReclamo", @readonly= "readonly" })
+                                </div>
+                             </div>
+
+                            <div>
+                                &nbsp;
+                                <div class="col-md-12"> </div>
+                            </div>
+                        </div>
+
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-2">
+                                <button type="button" id="volver" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Volver</button>
+                            </div>
+                           
+                             <!----div class="col-md-2">
+                                <button id="cancelarModificarReclamo" type="button" class="btn btn-danger" style="display:block; margin-left:auto; margin-right:auto;">Cancelar</button>
+                            </!--div>
+                            <!--/.--->
+                            <div class="col-md-4"></div>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+
+
+    <script>
+        $("#volver").click(function (e) {
+            e.preventDefault();
+            var url = '/gestion_reclamos/M16_VisualizarReclamo';
+            var method = 'GET';
+            var data = '';
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+        });
+    </script>
+}
+<!------------------- FIN DE SECCION DE CONSULTAR RECLAMO---------------->

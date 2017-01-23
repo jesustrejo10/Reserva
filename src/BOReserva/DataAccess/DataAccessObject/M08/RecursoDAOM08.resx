@@ -285,4 +285,7 @@
     <value>aut_pais</value>
     <comment>Atributo - nombre del pais del automovil</comment>
   </data>
+  <data name="procedimientoExisteMatriculaAutomovil" xml:space="preserve">
+    <value>M08_ConsulExisteMatriculaAutomovil</value>
+  </data>
 </root>

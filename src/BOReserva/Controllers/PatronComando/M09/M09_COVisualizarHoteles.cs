@@ -2,6 +2,8 @@
 using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
+using BOReserva.DataAccess.Model;
+using BOReserva.Excepciones;
 using BOReserva.Excepciones.M09;
 using System;
 using System.Collections.Generic;
@@ -27,13 +29,18 @@ namespace BOReserva.Controllers.PatronComando
         {
             try
             {
-                IDAO daoHotel = FabricaDAO.instanciarDaoHotel();
-                Dictionary<int, Entidad> mapHoteles = daoHotel.ConsultarTodos();
-                return mapHoteles;
-            }catch (ReservaExceptionM09 ex){
+                if (Cache.mapHoteles.Count == 0)
+                {
+                    IDAO daoHotel = FabricaDAO.instanciarDaoHotel();
+                    Cache.mapHoteles = daoHotel.ConsultarTodos();
+                }
+                return Cache.mapHoteles;
+            }
+            catch (ReservaExceptionM09 ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);               
                 throw ex;
             }
         }
-
     }
 }

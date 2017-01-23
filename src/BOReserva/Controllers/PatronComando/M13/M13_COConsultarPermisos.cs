@@ -18,6 +18,9 @@ namespace BOReserva.Controllers.PatronComando
     {
         private int id;
 
+        ///<summary>
+        ///Constructor
+        ///</summary>
         public M13_COConsultarPermisos(int idRol)
         {
             this.id = idRol;

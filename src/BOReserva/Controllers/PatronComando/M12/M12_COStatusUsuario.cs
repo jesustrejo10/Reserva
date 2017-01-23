@@ -1,4 +1,6 @@
 ﻿using BOReserva.DataAccess.DataAccessObject;
+using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+using BOReserva.DataAccess.DataAccessObject.M12;
 using BOReserva.DataAccess.Domain;
 using System;
 using System.Collections.Generic;
@@ -20,7 +22,7 @@ namespace BOReserva.Controllers.PatronComando.M12
 
         public override String ejecutar()
         {
-            DAOUsuario daoUsuario = (DAOUsuario)FabricaDAO.instanciarDaoUsuario();
+            IDAOUsuario daoUsuario = (DAOUsuario)FabricaDAO.instanciarDaoUsuario();
             String test = daoUsuario.statusUsuario(_usuario, _status);
             return test;
         }

@@ -765,6 +765,8 @@ tr.pager td {
     position: absolute;
     top: 0;
     left: 0;
+    text-align: center; 
+    padding-top: 25%;
 }
 
 .se-pre-con {
@@ -791,6 +793,14 @@ tr.pager td {
     -animation: spin .7s infinite linear;
     -webkit-animation: spin2 .7s infinite linear;
     font-size: 24px !important;
+}
+
+
+.refresh-animateb {
+    color: #00a65a;
+    -animation: spin .7s infinite linear;
+    -webkit-animation: spin2 .7s infinite linear;
+    font-size: 40pt !important;
 }
 
 @-webkit-keyframes spin2 {

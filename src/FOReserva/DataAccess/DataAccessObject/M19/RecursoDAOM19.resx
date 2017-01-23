@@ -170,7 +170,7 @@
     <comment>Atributo en la tabla automovil</comment>
   </data>
   <data name="autTipo" xml:space="preserve">
-    <value>aut_tipo</value>
+    <value>aut_tipovehiculo</value>
     <comment>Atributo en la tabla automovil</comment>
   </data>
   <data name="autTransmision" xml:space="preserve">
@@ -312,5 +312,21 @@
   <data name="origen" xml:space="preserve">
     <value>origen</value>
     <comment>Atributo en procedimiento</comment>
+  </data>
+  <data name="MensajeErrorFormato" xml:space="preserve">
+    <value>Error de Casteo</value>
+    <comment>Ocurre en caso de error en casteo</comment>
+  </data>
+  <data name="MensajeFinMetodoLogger" xml:space="preserve">
+    <value>Salida del Método</value>
+    <comment>Ocurre a la salida del metodo</comment>
+  </data>
+  <data name="MensajeInicioMetodoLogger" xml:space="preserve">
+    <value>Entrada en el Método</value>
+    <comment>Ocurre a la entrada del metodo</comment>
+  </data>
+  <data name="procedimientoConsultarACiudad" xml:space="preserve">
+    <value>M19_ConsultarReservaAPorCiudad</value>
+    <comment>procedimiento para consultar autos</comment>
   </data>
 </root>

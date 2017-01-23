@@ -25,13 +25,17 @@ namespace TestUnitReserva.BO.gestion_hoteles
     {
         private Oferta mockOfertaInt;
         private Oferta mockOfertaString;
+        private Paquete mockPaquete;
         private List<String> mockListaPaquetes;
         private List<Paquete> mockListaPaquetesP;
-        private List<CPaquete> mockListaPaquetesCP;
-        private Paquete mockPaquete;
+        private List<CPaquete> mockListaPaquetesCP;        
         DAOOferta daoOferta;
+        DAOPaquete daoPaquete;
         IDAO prueba;
         CModificarOferta mockCModificarOferta;
+        int idPruebas;
+
+
 
         /// <summary>
         /// Metodo que se ejecuta antes que se ejecute cada prueba
@@ -48,6 +52,9 @@ namespace TestUnitReserva.BO.gestion_hoteles
             mockListaPaquetesP = new List<Paquete>();
             mockListaPaquetesCP = new List<CPaquete>();            
             daoOferta = new DAOOferta();
+            daoPaquete = new DAOPaquete();
+            mockPaquete = new Paquete(24,"Paquete de Prueba",1384000, true);
+            idPruebas = 25;
 
         }
         /// <summary>
@@ -60,6 +67,12 @@ namespace TestUnitReserva.BO.gestion_hoteles
 
             mockOfertaInt = null;
             mockOfertaString = null;
+            daoOferta = null;
+
+           
+            mockListaPaquetes = null;
+            mockListaPaquetesP = null;
+            mockListaPaquetesCP = null;
             daoOferta = null;
         }
 
@@ -77,6 +90,22 @@ namespace TestUnitReserva.BO.gestion_hoteles
             //Probando caso de fallo
             int resultadoAgregarIncorrecto = daoOferta.Agregar(null);
             Assert.AreEqual(resultadoAgregarIncorrecto, 0);
+        }
+
+        /// <summary>
+        /// Método para probar la inserción de la oferta en la
+        /// Base de Datos.
+        /// Prueba que no se haya pasado una entidad nula.
+        /// </summary>
+        [Test]
+        public void DaoPaqueteModificarPaquete()
+        {
+             //Probando caso de exito de la prueba
+            Entidad resultadoModificar = daoPaquete.Modificar(mockPaquete);
+            Assert.AreEqual(resultadoModificar, mockPaquete);
+            //Probando caso de fallo
+            Entidad resultadoModificarIncorrecto = daoPaquete.Modificar(null);
+            Assert.AreEqual(resultadoModificarIncorrecto, null);
         }
 
         /// <summary>

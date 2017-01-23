@@ -140,6 +140,7 @@
     <script>
         $("#modificarUsuario").click(function (e) {
             e.preventDefault();
+           // $("#contenido").html('<div class="text-center">Cargando...</div>');
             var form = $("#modificarUsuario_form");
 
             var correo = $('#correoUsuario').val();
@@ -169,6 +170,8 @@
                             console.log("entra");
                             alert("Se modifico el Usuario exitosamente");
 
+                            $("#contenido").html('<div class="text-center">Cargando...</div>');
+
                             var url1 = '/gestion_usuarios/M12_VisualizarUsuarios';
                             var method = 'GET';
                             var data1 = '';
@@ -194,7 +197,8 @@
                 });
                 } 
             else {
-                alert("Existen campos vacios");
+                alert("Error al modificar usuario");
+                toIndexA();
             }
         });
 

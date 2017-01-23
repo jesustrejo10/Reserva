@@ -1,7 +1,6 @@
 @model FOReserva.Models.gestion_reserva_automovil.CReservaAutomovil
 @{var reserva = Model; }
 
-<script src="~/Scripts/jquery-2.2.1.min.js"></script>
 <script src="~/Scripts/bootstrap.min.js"></script>
 
 <!-- FLIP BOX -->
@@ -10,7 +9,7 @@
         <div class="box1 noradius">
             <div class="box-icon-title">
                 <i class="fa fa-automobile"></i>
-                <h2> Reserva de Automóvil</h2>
+                <h2> Reserva de Automï¿½vil</h2>
             </div>
             <p>Detalle de reserva</p>
         </div>
@@ -33,7 +32,7 @@
                     <button type="button" class="btn btn-danger pull-right" onclick="mostrarCuadroDialogo(this)">Cancelar</button>
                     <button type="button" class="btn btn-default pull-right" onclick="editar()">Modificar</button>
                 }
-                <button type="button" class="btn btn-default pull-right" onclick="cargarContenido('#CI', 'get', '/gestion_reserva_auto/M19_Reserva_Autos_Perfil', null, this)"> Ver Reservas de Automóviles</button>
+                <button type="button" class="btn btn-default pull-right" onclick="cargarContenido('#CI', 'get', '/gestion_reserva_auto/M19_Reserva_Autos_Perfil', null, this)"> Ver Reservas de Automï¿½viles</button>
                 <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-sm">
                         <div class="modal-content">
@@ -41,7 +40,7 @@
                             <!-- header modal -->
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <span class="modal-title" id="mySmallModalLabel">&#191;Está seguro que desea cancelar la reserva&#63;</span>
+                                <span class="modal-title" id="mySmallModalLabel">&#191;Estï¿½ seguro que desea cancelar la reserva&#63;</span>
                             </div>
 
                             <!-- body modal -->
@@ -59,7 +58,7 @@
                 
                 <div>
                     <div class="col-xs-10 col-xs-offset-1">
-                        <h3 class="color-gris-oscuro">Datos del Automóvil</h3>
+                        <h3 class="color-gris-oscuro">Datos del Automï¿½vil</h3>
                         <div class="row">
                             <div class="form-group">
                                 <div class="col-md-4 col-sm-4">
@@ -104,11 +103,11 @@
                                     <p>@reserva._hora_ini </p>
                                 </div>
                                 <div class="col-md-4 col-sm-4">
-                                    <label>Fecha Devolución</label>
+                                    <label>Fecha Devoluciï¿½n</label>
                                     <p>@reserva._fecha_fin</p>
                                 </div>
                                 <div class="col-md-4 col-sm-4">
-                                    <label>Hora Devolución</label>
+                                    <label>Hora Devoluciï¿½n</label>
                                     @{
                                     List<SelectListItem> _tipos = new List<SelectListItem>();
                                     _tipos.Add(new SelectListItem
@@ -173,7 +172,7 @@
                                     <p>@reserva._LugarOri._nombre</p>
                                 </div>
                                 <div class="col-md-4 col-sm-4">
-                                    <label>Lugar Devolución</label>
+                                    <label>Lugar Devoluciï¿½n</label>
                                     <p>@reserva._LugarDest._nombre</p>
                                 </div>
                                 <div class="col-md-4 col-sm-4">
@@ -214,7 +213,7 @@
                                 data: reserva_auto,
                                 type: 'POST',
                                 success: function (data) {
-                                    alert("Se canceló la reserva");
+                                    alert("Se cancelï¿½ la reserva");
                                     cargarContenido('#CI', 'get', '/gestion_reserva_auto/M19_Reserva_Autos_Perfil', null, this)
                                 },
                                 fail: function (data) {
@@ -236,15 +235,254 @@
                             data: reserva,
                             type: 'POST',
                             success: function (data) {
-                                alert("Se modificó la hora de devolución del auto");
+                                alert("Se modificï¿½ la hora de devoluciï¿½n del auto");
                                 cargarContenido('#CI', 'get', '/gestion_reserva_auto/M19_Reserva_Autos_Perfil', null, this)
                             },
                             fail: function (data) {
-                                alert("No se pudo modificar la hora de devolución");
+                                alert("No se pudo modificar la hora de devoluciï¿½n");
                             }
                         });
                     }
 </script>
+            }
+            else
+            {
+                <p>No se pudo cargar el contenido.</p>
+            }
+        </div>
+
+    </div>
+
+</div>
+<!-- /FLIP BOX -->
+
+
+<div class="box-light">
+    <!-- .box-light OR .box-dark -->
+
+    <div class="box-inner">
+
+        <h4>Detalle de reserva de automovil</h4>
+        <div class="table-responsive">
+            @if (Model != null)
+            {
+                if (Model._estatus == 1)
+                {
+                    <button type="button" class="btn btn-danger pull-right" onclick="mostrarCuadroDialogo(this)">Cancelar</button>
+                    <button type="button" class="btn btn-default pull-right" onclick="editar()">Modificar</button>
+                }
+                <button type="button" class="btn btn-default pull-right" onclick="cargarContenido('#CI', 'get', '/gestion_reserva_auto/M19_Reserva_Autos_Perfil', null, this)"> Ver Reservas de Automï¿½viles</button>
+                <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+
+                            <!-- header modal -->
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <span class="modal-title" id="mySmallModalLabel">&#191;Estï¿½ seguro que desea cancelar la reserva&#63;</span>
+                            </div>
+
+                            <!-- body modal -->
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-xs-12 centrado">
+                                        <button type="button" class="btn btn-success" onclick="cancelarReserva(this, @reserva._id)">Seguro</button>
+                                        <button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-sm">Cancelar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="col-xs-10 col-xs-offset-1">
+                        <h3 class="color-gris-oscuro">Datos del Automï¿½vil</h3>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-4 col-sm-4">
+                                    <label>Fabricante</label>
+                                    <p>@reserva._auto._fabricante</p>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <label>Modelo</label>
+                                    <p>@reserva._auto._modelo</p>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <label>Placa</label>
+                                    <p>@reserva._auto._matricula</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-xs-10 col-xs-offset-1">
+                        <h3 class="color-gris-oscuro">Datos de Reserva</h3>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-4 col-sm-4">
+                                    <label>Estado </label>
+                                    @if (reserva._estatus == 1)
+                                    {
+                                        <p>Activa</p>
+                                    }
+                                    else
+                                    {
+                                        <p>Cancelada</p>
+                                    }
+
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <label>Fecha Entrega</label>
+                                    <p>@reserva._fecha_ini </p>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <label>Hora Entrega</label>
+                                    <p>@reserva._hora_ini </p>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <label>Fecha Devoluciï¿½n</label>
+                                    <p>@reserva._fecha_fin</p>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <label>Hora Devoluciï¿½n</label>
+                                    @{
+                                    List<SelectListItem> _tipos = new List<SelectListItem>();
+                                    _tipos.Add(new SelectListItem
+                                            {
+                                                Text = "8:00",
+                                                Value = "8:00"
+                                            });
+                                    _tipos.Add(new SelectListItem
+                                    {
+                                        Text = "9:00",
+                                        Value = "9:00"
+                                    });
+                                    _tipos.Add(new SelectListItem
+                                    {
+                                        Text = "10:00",
+                                        Value = "10:00"
+                                    });
+                                    _tipos.Add(new SelectListItem
+                                    {
+                                        Text = "11:00",
+                                        Value = "11:00"
+                                    });
+                                    _tipos.Add(new SelectListItem
+                                    {
+                                        Text = "12:00",
+                                        Value = "12:00"
+                                    });
+                                    _tipos.Add(new SelectListItem
+                                    {
+                                        Text = "13:00",
+                                        Value = "13:00"
+                                    });
+                                    _tipos.Add(new SelectListItem
+                                    {
+                                        Text = "14:00",
+                                        Value = "14:00"
+                                    });
+                                    _tipos.Add(new SelectListItem
+                                    {
+                                        Text = "15:00",
+                                        Value = "15:00"
+                                    });
+                                    _tipos.Add(new SelectListItem
+                                    {
+                                        Text = "16:00",
+                                        Value = "16:00"
+                                    });
+                                    _tipos.Add(new SelectListItem
+                                    {
+                                        Text = "17:00",
+                                        Value = "17:00"
+                                    });
+                                    }
+                                    @Html.DropDownListFor(m => m._hora_fin, _tipos, new { @class = "form-control", @id= "hora", @placeholder = "Tipo" })
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <label>Precio Alquiler</label>
+                                    <p>@reserva._auto._precioAlquiler</p>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <label>Lugar Entrega</label>
+                                    <p>@reserva._LugarOri._nombre</p>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <label>Lugar Devoluciï¿½n</label>
+                                    <p>@reserva._LugarDest._nombre</p>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <button type="button" id="btn-envio" class="btn btn-success" onclick="modificarReserva(this, @reserva._id)">Guardar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    var bandera = false;
+                    $('#btn-envio').hide();
+                    $('#hora').prop('disabled', true);
+
+                    function editar() {
+                        $('#hora').prop('disabled', bandera);
+
+                        if (bandera) {
+                            $('#btn-envio').hide();
+                        }
+                        else {
+                            $('#btn-envio').show();
+                        }
+
+                        bandera = !bandera;
+                    }
+
+                        function mostrarCuadroDialogo(boton) {
+                            $(".bs-example-modal-sm").modal('show');
+                        }
+
+                        function cancelarReserva(boton, rha_id) {
+                            $(".bs-example-modal-sm").modal('hide');
+                            var reserva_auto = JSON.parse('@Html.Raw(@Newtonsoft.Json.JsonConvert.SerializeObject(reserva))');
+
+                            $.ajax({
+                                url: "/gestion_reserva_auto/M19_Eliminar_reserva",
+                                data: reserva_auto,
+                                type: 'POST',
+                                success: function (data) {
+                                        alert("Se cancelï¿½ la reserva");
+                                        cargarContenido('#CI', 'get', '/gestion_reserva_auto/M19_Reserva_Autos_Perfil', null, this)
+                                },
+                                fail: function (data) {
+                                    alert("No se pudo cancelar la reserva");
+                                }
+                            });
+                        }
+
+                    function modificarReserva(boton, rha_id) {
+
+                        var hora_nueva = $("#hora option:selected").val();
+                        var reserva = {
+                            "_id": rha_id,
+                            "_hora_fin": hora_nueva
+                        }
+
+                        $.ajax({
+                            url: "/gestion_reserva_auto/M19_Modificar_reserva",
+                            data: reserva,
+                            type: 'POST',
+                            success: function (data) {
+                                alert("Se modificï¿½ la hora de devoluciï¿½n del auto");
+                                cargarContenido('#CI', 'get', '/gestion_reserva_auto/M19_Reserva_Autos_Perfil', null, this)
+                            },
+                            fail: function (data) {
+                                alert("No se pudo modificar la hora de devoluciï¿½n");
+                            }
+                        });
+                    }
+                </script>
             }
             else
             {

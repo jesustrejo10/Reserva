@@ -9,9 +9,8 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando.M07
 {
-    public class M07_COEditarEquipaje //: Command<String>
+    public class M07_COEditarEquipaje: Command<String>
     {
-        /*
         Equipaje _equipaje;
         int _idEquipaje;
         int _peso;
@@ -28,5 +27,5 @@ namespace BOReserva.Controllers.PatronComando.M07
             return respuesta.ToString();
         }
     
-         */ }
+    }
 }

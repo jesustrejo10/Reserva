@@ -10,8 +10,8 @@ namespace BOReserva.DataAccess.Domain
     /// </summary>
     public class Equipaje : Entidad
     {
-        private int _peso { get; set; }
-        private int _abordaje { get; set; }
+        public int _peso { get; set; }
+        public int _abordaje { get; set; }
 
 
         /// <summary>
@@ -20,12 +20,25 @@ namespace BOReserva.DataAccess.Domain
         public Equipaje() { }
 
         /// <summary>
-        /// Constructor con parametros
+        /// Constructor con 2 parametros
         /// </summary>
         /// <param name="peso">peso del equipaje</param>
         /// <param name="abordaje">abordaje asociado</param>
         public Equipaje(int peso, int abordaje)
         {
+            this._peso = peso;
+            this._abordaje = abordaje;
+        }
+
+        /// <summary>
+        /// Constructor con 3 parametros
+        /// </summary>
+        /// <param name="id">id del equipaje</param>
+        /// <param name="peso">peso del equipaje</param>
+        /// <param name="abordaje">abordaje asociado</param>
+        public Equipaje(int id, int peso, int abordaje)
+        {
+            this._id = id;
             this._peso = peso;
             this._abordaje = abordaje;
         }
