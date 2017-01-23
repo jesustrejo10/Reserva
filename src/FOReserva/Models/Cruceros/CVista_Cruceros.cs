@@ -26,9 +26,9 @@ namespace FOReserva.Models.Cruceros
             {
                 
                 Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.crearM22ReservaCruceroTodos();
-                List<Entidad> cruceros = comando.ejecutar();
-
-                return DefaultCruceroItem.Concat(new SelectList(cruceros, "Id", "Name"));
+                var cruceros = comando.ejecutar();
+                
+                return DefaultCruceroItem.Concat(new SelectList(cruceros, "_id", "_nombre"));
                
 
             }

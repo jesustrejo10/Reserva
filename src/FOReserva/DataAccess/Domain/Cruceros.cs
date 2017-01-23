@@ -7,7 +7,7 @@ namespace FOReserva.DataAccess.Domain
 {
     public class Cruceros : Entidad
     {
-        public int _id { get; set; }
+        //public int _id { get; set; }
         public string _nombre { get; set; }
 
         public Cruceros()
