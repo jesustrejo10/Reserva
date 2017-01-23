@@ -1,7 +1,11 @@
-﻿using BOReserva.DataAccess.DataAccessObject;
+﻿using BOReserva.DataAccess.DAO.InterfacesDAO;
+using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.Domain;
+using BOReserva.Excepciones;
+using BOReserva.Excepciones.M04;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
@@ -16,9 +20,11 @@ namespace BOReserva.Controllers.PatronComando.M04
 
 
         /// <summary>
-        /// Constructor que recibe un parametro del tipo entidad
+        /// Constructor del comando Fecha Aterrizaje
         /// </summary>
-        /// <param name="vuelo">Es el objeto al que se le quiere cambiar el status</param>
+        /// <param name="idRuta">id de la ruta</param>
+        /// <param name="idAvion">id del avion</param>
+        /// <param name="fechaDespegue">fecha de despegue</param>
         public M04_COFechaAterrizaje(int idRuta, int idAvion, DateTime fechaDespegue)
         {
             _fechaDespegue = fechaDespegue;
@@ -37,11 +43,22 @@ namespace BOReserva.Controllers.PatronComando.M04
         {
             try
             {
-                DAOVuelo exec = (DAOVuelo)FabricaDAO.instanciarDAOVuelo();
+                IDAOVuelo exec = (IDAOVuelo)FabricaDAO.instanciarDAOVuelo();
                 return (exec.ConsultarDatosAterrizaje(_idRuta, _fechaDespegue, _idAvion));
+            }
+            catch (ReservaExceptionM04 ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw ex;
+            }
+            catch (SqlException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw ex;
             }
             catch (Exception ex)
             {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw ex;
             }
             

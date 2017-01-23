@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using System.Net;
 using BOReserva.Models.gestion_boletos;
-using BOReserva.Servicio.Servicio_Boletos;
 using BOReserva.DataAccess.Domain;
 using BOReserva.Controllers.PatronComando;
 
@@ -13,13 +12,35 @@ using BOReserva.Controllers.PatronComando;
 
 namespace BOReserva.Controllers
 {
+
+    /// <summary>
+    ///  Clase encargada de controlar el proceso de los Boletos entre la view y el model
+    ///  Crear, Modificar, Eliminar, Visualizar
+    /// </summary>
     public class gestion_boletosController : Controller
     {
 
+        /// <summary>
+        ///  Crea el Detalle del Boleto
+        /// </summary>
+        /// <param name="idorigen"></param>
+        /// <param name="iddestino"></param>
+        /// <param name="fechadespegue"></param>
+        /// <param name="fechaaterrizaje"></param>
+        /// <param name="monto"></param>
+        /// <param name="tipo"></param>
+        /// <param name="primernombre"></param>
+        /// <param name="segundonombre"></param>
+        /// <param name="primerapellido"></param>
+        /// <param name="segundoapellido"></param>
+        /// <param name="fechanac"></param>
+        /// <param name="sexo"></param>
+        /// <param name="pasaporte"></param>
+        /// <param name="correo"></param>
+        /// <param name="idvuelo"></param>
+        /// <returns></returns>
         public ActionResult M05_DetalleBoleto(int idorigen, int iddestino, string fechadespegue, string fechaaterrizaje, int monto, string tipo, string primernombre, string segundonombre, string primerapellido, string segundoapellido, string fechanac, string sexo, int pasaporte, string correo, int idvuelo)
         {
-           
-
             Pasajero nuevoPasajero = (Pasajero)FabricaEntidad.InstanciarPasajero(pasaporte, primernombre, segundonombre, primerapellido, segundoapellido, sexo, fechanac, correo);
             CVisualizarBoleto bol = new CVisualizarBoleto();
             bol._idOrigen = idorigen;
@@ -38,15 +59,29 @@ namespace BOReserva.Controllers
             return PartialView(bol);
         }
 
-
+        /// <summary>
+        ///  Genera la view para la reserva
+        /// </summary>
+        /// <returns></returns>
         public ActionResult M05_VerReserva()
         {
 
             return PartialView();
         }
 
-
-
+        /// <summary>
+        ///  Genera el boleto con los datos 
+        /// </summary>
+        /// <param name="origen"></param>
+        /// <param name="destino"></param>
+        /// <param name="fechasalida"></param>
+        /// <param name="fechallegada"></param>
+        /// <param name="idorigen"></param>
+        /// <param name="iddestino"></param>
+        /// <param name="monto"></param>
+        /// <param name="tipo"></param>
+        /// <param name="idvuelo"></param>
+        /// <returns></returns>
         public ActionResult M05_DetalleVuelo(string origen, string destino, string fechasalida, string fechallegada, int idorigen, int iddestino, int monto, string tipo, int idvuelo)
         {
             CVisualizarBoleto vue = new CVisualizarBoleto();
@@ -65,6 +100,10 @@ namespace BOReserva.Controllers
             return PartialView(vue);
         }
 
+        /// <summary>
+        ///  Genera la partialView del buscador de vuelo
+        /// </summary>
+        /// <returns></returns>
         public ActionResult M05_CrearBoleto()
         {
 
@@ -74,6 +113,11 @@ namespace BOReserva.Controllers
             return PartialView(model);
         }
 
+        /// <summary>
+        ///  Busca un vuelo
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public JsonResult buscarVuelos(CBuscarVuelo model)
         {
@@ -86,30 +130,44 @@ namespace BOReserva.Controllers
 
         }
 
-        //falta patrones
+        /// <summary>
+        ///  Busca todos los vuelos con los datos seleccionados
+        /// </summary>
+        /// <param name="idorigen"></param>
+        /// <param name="iddestino"></param>
+        /// <param name="idavuelta"></param>
+        /// <param name="tipo"></param>
+        /// <param name="fechaida"></param>
+        /// <param name="fechavuelta"></param>
+        /// <returns></returns>
         public ActionResult M05_VerVuelos(int idorigen, int iddestino, string idavuelta, string tipo, string fechaida, string fechavuelta)
         {
+             //manejadorSQL_Boletos sqlboletos = new manejadorSQL_Boletos();
+            
+            //List<CVuelo> listavuelos = new List<CVuelo>();
+            //listavuelos = sqlboletos.M05ListarVuelosIdaBD(fechaida, fechavuelta, idorigen, iddestino, tipo);
+            Command<List<Entidad>> comando = FabricaComando.consultarM05listaVuelosBD(fechaida, fechavuelta, idorigen, iddestino, tipo);
+            List<Entidad> listavuelos = comando.ejecutar();
 
-            manejadorSQL_Boletos sqlboletos = new manejadorSQL_Boletos();
-            List<CVuelo> listavuelos = new List<CVuelo>();
-            listavuelos = sqlboletos.M05ListarVuelosIdaBD(fechaida, fechavuelta, idorigen, iddestino, tipo);
             
             return PartialView(listavuelos);
         }
 
-        //falta patrones
+        /// <summary>
+        ///  Muestra el detalle del vuelo con el pasaporte de la reserva
+        /// </summary>
+        /// <param name="id_reserva"></param>
+        /// <returns></returns>
         public ActionResult M05_DetalleVueloReserva(int id_reserva)
         {
-            //BUSCA LA RESERVA A MOSTRAR
-            manejadorSQL_Boletos buscarboleto = new manejadorSQL_Boletos();
-            //Uso CBoleto ya que tiene los mismos atributos de reserva_boleto
-            CBoleto reserva = buscarboleto.M05MostrarReservaBD(id_reserva);
 
+            //BUSCA LA RESERVA A MOSTRA
+            //Uso Boleto ya que tiene los mismos atributos de reserva_bolet
+            Command<Entidad> comando = FabricaComando.consultarM05BoletopasajeroBD(id_reserva);
+            Boleto reserva = (Boleto)comando.ejecutar();
             // EL/LOS VUELOS DEL BOLETO ESTAN EN UNA LISTA
             // NO SOPORTA ESCALAS
-
-            List<CVuelo> vuelos = reserva._vuelos;
-
+            List<BoletoVuelo> vuelos = reserva._vuelos;
             CVisualizarBoleto bol = new CVisualizarBoleto();
 
 
@@ -130,16 +188,20 @@ namespace BOReserva.Controllers
             {
                 var time0 = vuelos[0]._fechaPartida.TimeOfDay.ToString();
                 var time1 = vuelos[0]._fechaLlegada.TimeOfDay.ToString();
-                var time2 = vuelos[1]._fechaPartida.TimeOfDay.ToString();
-                var time3 = vuelos[1]._fechaLlegada.TimeOfDay.ToString();
+				if(vuelos.Count > 1)
+				{
+					var time2 = vuelos[1]._fechaPartida.TimeOfDay.ToString();
+					var time3 = vuelos[1]._fechaLlegada.TimeOfDay.ToString();
+					bol._fechaDespegueVuelta = vuelos[1]._fechaPartida.Day + "/" + vuelos[1]._fechaPartida.Month + "/" + vuelos[1]._fechaPartida.Year;
+					bol._fechaAterrizajeVuelta = vuelos[1]._fechaLlegada.Day + "/" + vuelos[1]._fechaLlegada.Month + "/" + vuelos[1]._fechaLlegada.Year;
+					bol._horaAterrizajeIda = time2;
+					bol._horaAterrizajeVuelta = time3;
+				}
                 bol._fechaDespegueIda = vuelos[0]._fechaPartida.Day + "/" + vuelos[0]._fechaPartida.Month + "/" + vuelos[0]._fechaPartida.Year;
-                bol._fechaDespegueVuelta = vuelos[1]._fechaPartida.Day + "/" + vuelos[1]._fechaPartida.Month + "/" + vuelos[1]._fechaPartida.Year;
                 bol._fechaAterrizajeIda = vuelos[0]._fechaLlegada.Day + "/" + vuelos[0]._fechaLlegada.Month + "/" + vuelos[0]._fechaLlegada.Year;
-                bol._fechaAterrizajeVuelta = vuelos[1]._fechaLlegada.Day + "/" + vuelos[1]._fechaLlegada.Month + "/" + vuelos[1]._fechaLlegada.Year;
                 bol._horaDespegueIda = time0;
                 bol._horaDespegueVuelta = time1;
-                bol._horaAterrizajeIda = time2;
-                bol._horaAterrizajeVuelta = time3;
+
             }
 
             bol._origen = reserva._origen.Name;
@@ -151,35 +213,21 @@ namespace BOReserva.Controllers
             bol._pasaporte = reserva._pasajero._id;
             bol._correo = reserva._pasajero._correo;
             bol._idReserva = id_reserva;
-
-
-            System.Diagnostics.Debug.WriteLine("Origen: " + bol._origen + ", Destino: " + bol._destino + ", Monto: " + bol._monto + ", fecha despeje ida: " + bol._fechaDespegueIda + ", fecha aterrizaje ida: " + bol._fechaAterrizajeIda + ", fecha despeje vuelta: " + bol._fechaDespegueVuelta + ", fecha aterrizaje vuelta: " + bol._fechaAterrizajeVuelta);
-
-            System.Diagnostics.Debug.WriteLine("Finaliza el controller");
-
             return PartialView(bol);
         }
 
 
-        //falta patrones
+
+       
         public ActionResult M05_DetalleBoletoReserva(int id_reserva)
         {
-
-
-            System.Diagnostics.Debug.WriteLine("Llega al controller detalleBoletoReserva");
-
-            //BUSCA LA RESERVA A MOSTRAR
-            manejadorSQL_Boletos buscarboleto = new manejadorSQL_Boletos();
-            //Uso CBoleto ya que tiene los mismos atributos de reserva_boleto
-            CBoleto reserva = buscarboleto.M05MostrarReservaBD(id_reserva);
-
+            //BUSCA LA RESERVA A MOSTRA
+            //Uso Boleto ya que tiene los mismos atributos de reserva_bolet
+            Command<Entidad> comando = FabricaComando.consultarM05BoletopasajeroBD(id_reserva);
+            Boleto reserva = (Boleto)comando.ejecutar();
             // EL/LOS VUELOS DEL BOLETO ESTAN EN UNA LISTA
             // NO SOPORTA ESCALAS
-
-            List<CVuelo> vuelos = reserva._vuelos;
-
-            System.Diagnostics.Debug.WriteLine("vuelos[0]: " + vuelos[0]._fechaPartida + ", " + vuelos[0]._fechaLlegada);
-
+            List<BoletoVuelo> vuelos = reserva._vuelos;
             CVisualizarBoleto bol = new CVisualizarBoleto();
 
 
@@ -229,24 +277,21 @@ namespace BOReserva.Controllers
             return PartialView(bol);
         }
 
-        //falta patrones
+
+        /// <summary>
+        ///  Genera el Boleto de la reserva
+        /// </summary>
+        /// <param name="id_reserva"></param>
+        /// <returns></returns>
         public ActionResult M05_BoletoCreadoReserva(int id_reserva)
         {
-
-            System.Diagnostics.Debug.WriteLine("Llega al controller de boletocreadoreserva");
-
-            //BUSCA LA RESERVA A MOSTRAR
-            manejadorSQL_Boletos buscarboleto = new manejadorSQL_Boletos();
-            //Uso CBoleto ya que tiene los mismos atributos de reserva_boleto
-            CBoleto reserva = buscarboleto.M05MostrarReservaBD(id_reserva);
-
+            //BUSCA LA RESERVA A MOSTRA
+            //Uso Boleto ya que tiene los mismos atributos de reserva_bolet
+            Command<Entidad> comando = FabricaComando.consultarM05BoletopasajeroBD(id_reserva);
+            Boleto reserva = (Boleto)comando.ejecutar();
             // EL/LOS VUELOS DEL BOLETO ESTAN EN UNA LISTA
             // NO SOPORTA ESCALAS
-
-            List<CVuelo> vuelos = reserva._vuelos;
-
-            System.Diagnostics.Debug.WriteLine("vuelos[0]: " + vuelos[0]._fechaPartida + ", " + vuelos[0]._fechaLlegada);
-
+            List<BoletoVuelo> vuelos = reserva._vuelos;
             CVisualizarBoleto bol = new CVisualizarBoleto();
 
 
@@ -288,42 +333,38 @@ namespace BOReserva.Controllers
             bol._pasaporte = reserva._pasajero._id;
             bol._correo = reserva._pasajero._correo;
             bol._idReserva = id_reserva;
-
-
-
-            System.Diagnostics.Debug.WriteLine("Origen: " + bol._origen + ", Destino: " + bol._destino + ", Monto: " + bol._monto + ", fecha despeje ida: " + bol._fechaDespegueIda + ", fecha aterrizaje ida: " + bol._fechaAterrizajeIda + ", fecha despeje vuelta: " + bol._fechaDespegueVuelta + ", fecha aterrizaje vuelta: " + bol._fechaAterrizajeVuelta);
-
+            int id_origen = reserva._origen.Id;
+            int id_destino = reserva._destino.Id;
+            double dcosto = reserva._costo;
+            int costo = (int)dcosto;
 
             //Tomo todos los datos de bol para crear el boleto
             //Creo método para crear el boleto en el servicio y le paso por parámetro los atributos
             //(bol_id,bol_escala,bol_ida_vuelta,bol_costo,fk_origen,fk_destino,fk_pasajero,bol_fecha,tipo_boleto)
-            manejadorSQL_Boletos sqlboleto = new manejadorSQL_Boletos();
-
-
-            int id_origen = int.Parse(reserva._origen.Id);
-            int id_destino = int.Parse(reserva._destino.Id);
-            double dcosto = reserva._costo;
-            int costo = (int)dcosto;
-
-
 
             int id_vuelo = reserva._vuelos[0]._id;
             System.Diagnostics.Debug.WriteLine("EL ID DEL VUELO DE LA RESERVA ES: " + id_vuelo);
-
             String fecha_bol = DateTime.Today.ToString("yyyy/MM/dd");
-            Console.WriteLine("FECHA: " + fecha_bol);
 
-            System.Diagnostics.Debug.WriteLine("CREAR BOLETO --- escala: 0, ida_vuelta: " + reserva._ida_vuelta + ", costo: " + costo + ", id_origen: " + id_origen + ", id_destino: " + id_destino + ", id_pasajero: " + reserva._pasajero._id + ", fecha boleto: " + fecha_bol + ", tipo: " + reserva._tipoBoleto);
-
-            sqlboleto.M05CrearBoletoReservaBD(0, reserva._ida_vuelta, costo, id_origen, id_destino, reserva._pasajero._id, fecha_bol, reserva._tipoBoleto, id_vuelo);
-
-
+            Boleto nuevoBoleto = (Boleto)FabricaEntidad.InstanciarBoleto(id_origen, id_destino, reserva._pasajero._id, costo, reserva._tipoBoleto, id_vuelo, fecha_bol);
+            Command<String> comando2 = FabricaComando.crearM05CrearBoleto(nuevoBoleto);
+            string flag = comando2.ejecutar();
 
             System.Diagnostics.Debug.WriteLine("Finaliza el controller");
 
             return PartialView(bol);
         }
 
+        /// <summary>
+        ///  Genero el Boleto de la persona sin una reserva
+        /// </summary>
+        /// <param name="idorigen"></param>
+        /// <param name="iddestino"></param>
+        /// <param name="pasaporte"></param>
+        /// <param name="monto"></param>
+        /// <param name="tipo"></param>
+        /// <param name="idvuelo"></param>
+        /// <returns></returns>
         public ActionResult M05_BoletoCreado(int idorigen, int iddestino, int pasaporte, int monto, string tipo, int idvuelo)
         {
             String fecha_bol = DateTime.Today.ToString("yyyy/MM/dd");
@@ -334,8 +375,17 @@ namespace BOReserva.Controllers
             return PartialView();
         }
 
-
-
+        /// <summary>
+        ///  Datos del Boleto para mostrar
+        /// </summary>
+        /// <param name="idorigen"></param>
+        /// <param name="iddestino"></param>
+        /// <param name="fechadespegue"></param>
+        /// <param name="fechaaterrizaje"></param>
+        /// <param name="monto"></param>
+        /// <param name="tipo"></param>
+        /// <param name="idvuelo"></param>
+        /// <returns></returns>
         public ActionResult M05_DatosUsuario(int idorigen, int iddestino, string fechadespegue, string fechaaterrizaje, int monto, string tipo, int idvuelo)
         {
 
@@ -353,6 +403,11 @@ namespace BOReserva.Controllers
             return PartialView(vue);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id_reserva"></param>
+        /// <returns></returns>
         public ActionResult M05_DetallePrueba(int id_reserva)
         {
 
@@ -360,7 +415,10 @@ namespace BOReserva.Controllers
 
         }
 
-        //falta patrones
+        /// <summary>
+        ///  Visualiza todos los boletos
+        /// </summary>
+        /// <returns></returns>
         public ActionResult M05_VisualizarBoletos()
         {
             //SE BUSCAN TODOS LOS BOLETOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
@@ -371,18 +429,25 @@ namespace BOReserva.Controllers
             return PartialView(listaBoletos);
         }
 
-        //falta patrones
+        /// <summary>
+        /// Visualiza al pasajero o dueno del boleto
+        /// </summary>
+        /// <param name="pasaporte"></param>
+        /// <returns></returns>
         public ActionResult M05_VisualizarReservasPasajero(int pasaporte)
         {
 
             //SE BUSCAN TODOS LOS BOLETOS QUE ESTAN EN LA BASE DE DATOS PARA MOSTRARLOS EN LA VISTA
-            manejadorSQL_Boletos buscarboletos = new manejadorSQL_Boletos();
-            List<CBoleto> listaboletos = buscarboletos.M05ListarReservasPasajeroBD(pasaporte);
-
-            return PartialView(listaboletos);
+            Command<List<Entidad>> comando = FabricaComando.ConsultarBoletosPasajero(pasaporte);
+            List<Entidad> listaBoletos = comando.ejecutar();
+            return PartialView(listaBoletos);
         }
 
-        // GET
+        /// <summary>
+        ///  Busco el boleto por el id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult M05_VisualizarBoleto(int id)
         {
 
@@ -413,16 +478,20 @@ namespace BOReserva.Controllers
             {
                 var time0 = vuelos[0]._fechaPartida.TimeOfDay.ToString();
                 var time1 = vuelos[0]._fechaLlegada.TimeOfDay.ToString();
-                var time2 = vuelos[1]._fechaPartida.TimeOfDay.ToString();
-                var time3 = vuelos[1]._fechaLlegada.TimeOfDay.ToString();
+                if (vuelos.Count > 1)
+                { 
+                    var time2 = vuelos[1]._fechaPartida.TimeOfDay.ToString();
+                    var time3 = vuelos[1]._fechaLlegada.TimeOfDay.ToString();
+                    bol._fechaDespegueVuelta = vuelos[1]._fechaPartida.Day + "/" + vuelos[1]._fechaPartida.Month + "/" + vuelos[1]._fechaPartida.Year;
+                    bol._fechaAterrizajeVuelta = vuelos[1]._fechaLlegada.Day + "/" + vuelos[1]._fechaLlegada.Month + "/" + vuelos[1]._fechaLlegada.Year;
+                    bol._horaDespegueVuelta = time2;
+                    bol._horaAterrizajeVuelta = time3;
+                }
                 bol._fechaDespegueIda = vuelos[0]._fechaPartida.Day + "/" + vuelos[0]._fechaPartida.Month + "/" + vuelos[0]._fechaPartida.Year;
-                bol._fechaDespegueVuelta = vuelos[1]._fechaPartida.Day + "/" + vuelos[1]._fechaPartida.Month + "/" + vuelos[1]._fechaPartida.Year;
                 bol._fechaAterrizajeIda = vuelos[0]._fechaLlegada.Day + "/" + vuelos[0]._fechaLlegada.Month + "/" + vuelos[0]._fechaLlegada.Year;
-                bol._fechaAterrizajeVuelta = vuelos[1]._fechaLlegada.Day + "/" + vuelos[1]._fechaLlegada.Month + "/" + vuelos[1]._fechaLlegada.Year;
                 bol._horaDespegueIda = time0;
                 bol._horaAterrizajeIda = time1;
-                bol._horaDespegueVuelta = time2;
-                bol._horaAterrizajeVuelta = time3;
+
             }
 
             bol._origen = boleto._origen.Name;
@@ -437,7 +506,11 @@ namespace BOReserva.Controllers
             return PartialView(bol);
         }
 
-        
+        /// <summary>
+        ///  Modifico los datos del boleto
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult M05_ModificarBoleto(int id)
         {
             Command<Entidad> comando = FabricaComando.mostrarM05boleto(id);
@@ -446,7 +519,11 @@ namespace BOReserva.Controllers
             return PartialView(boletoView);
         }
 
-        // POST
+        /// <summary>
+        /// Veo el Boleto
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public JsonResult verBoleto(CVisualizarBoleto model)
         {
@@ -480,7 +557,12 @@ namespace BOReserva.Controllers
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
 
-        // POST
+
+        /// <summary>
+        ///  Ver reserva
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public JsonResult verReserva(CVisualizarBoleto model)
         {
@@ -503,7 +585,11 @@ namespace BOReserva.Controllers
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
 
-        // POST
+        /// <summary>
+        /// Eliminar un boleto seleccionado
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         public JsonResult eliminarBoleto(int id)
         {
@@ -513,6 +599,11 @@ namespace BOReserva.Controllers
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
 
+        /// <summary>
+        /// Modifico los datos del pasajero
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public JsonResult modificarDatosPasajero(CModificarBoleto model)
         {
@@ -524,6 +615,11 @@ namespace BOReserva.Controllers
         }
 
 
+        /// <summary>
+        /// Modifico el tipo de boleto
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public JsonResult modificarTipoBoleto(CModificarBoleto model)
         {

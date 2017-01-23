@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="~/Content/M04_css/style_module.css" type="text/css" />
 @using (Html.BeginForm("guardarVuelo", "gestion_vuelo", null, FormMethod.Post, new { @id = "formGuardarVuelo2", @class = "form-horizontal" }))
 {
+    @Html.HiddenFor(m => m._codigoVuelo)
     <div class="row">
         <div class="col-md-12">
             <h1>
@@ -18,22 +19,7 @@
                     </div>
                 </div>
                 <div>&nbsp;</div>
-                <div class="stepwizard">
-                    <div class="stepwizard-row setup-panel">
-                        <div class="stepwizard-step">
-                            <a href="#" type="button" class="btn btn-default btn-circle" disabled="disabled" onclick="return false;">1</a>
-                            <p>Vuelo</p>
-                        </div>
-                        <div class="stepwizard-step">
-                            <a href="#" type="button" class="btn btn-primary btn-circle" onclick="return false;">2</a>
-                            <p>Avión</p>
-                        </div>
-                        <div class="stepwizard-step">
-                            <a href="#" type="button" class="btn btn-default btn-circle" disabled="disabled" onclick="return false;">3</a>
-                            <p>Detalles</p>
-                        </div>
-                    </div>
-                </div>
+                
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div class="row">
@@ -41,7 +27,7 @@
                             <div class="col-xs-6">
                                 <!-- DROPDOWN ELEGIR MATRICULA AVION -->
                                 <label> Elegir avion (<span style="color: #d9534f">*</span>):</label>
-                                @Html.DropDownListFor(m => m._matriculaAvion, Model._matriculasAvion, "Seleccione la matricula del Avión",
+                                @Html.DropDownListFor(m => m._idAvion, Model._matriculasAvion, "Seleccione la matricula del Avión",
                                     new { @class = "form-control", @id = "matAvion", @style = "width: 100%;" })
                             </div>
                             <!-- FIN ELEGIR MATRICULA AVION -->
@@ -52,6 +38,7 @@
                                 <!-- TEXTBOXFOR MODELO AVION -->
                                 <label> Modelo avion:</label>
                                 <!--desabilitado por que lleno con script y pertenece a otra tabla-->
+                                @Html.HiddenFor(m => m._modeloAvion)
                                 @Html.TextBoxFor(m => m._modeloAvion, null, new { @id = "modeloAvion", @class = "form-control", @disabled = "disabled" })
                             </div>
                             <!-- FIN MODELO AVION -->
@@ -59,6 +46,7 @@
                                 <!-- TEXTBOXFOR CANTIDAD PASAJEROS -->
                                 <label>Capacidad de pasajeros del avion:</label>
                                 <!--desabilitado por que lleno con script y pertenece a otra tabla-->
+                                @Html.HiddenFor(m => m._pasajerosAvion)
                                 @Html.TextBoxFor(m => m._pasajerosAvion, null, new { @class = "form-control", @id = "pasajerosAvion", @disabled = "disabled" })
                             </div>
                         </div>
@@ -69,6 +57,7 @@
                             <div class="col-xs-6">
                                 <label>Distancia maxima de vuelo:</label>
                                 <!--desabilitado por que lleno con script y pertenece a otra tabla-->
+                                @Html.HiddenFor(m => m._distanciaMaxima)
                                 @Html.TextBoxFor(m => m._distanciaMaxima, null, new { @class = "form-control", @id = "distanciaMaxima", @disabled = "disabled" })
                             </div>
                             <!-- FIN DISTANCIA MAXIMA VUELO AVION -->
@@ -76,13 +65,16 @@
                             <div class="col-xs-6">
                                 <label>Velocidad maxima:</label>
                                 <!--desabilitado por que lleno con script y pertenece a otra tabla-->
+                                @Html.HiddenFor(m => m._velocidadMaxima)
                                 @Html.TextBoxFor(m => m._velocidadMaxima, null, new { @class = "form-control", @id = "velocidadMaxima", @disabled = "disabled" })
                             </div>
                             <div>&nbsp;</div>
                             <!-- FIN TEXTBOXFOR VELOCIDAD MAXIMA VUELO AVION -->
                             <!-- BOTON GUARDAR-->
+                            <!-- <div class="col-md-12" style="margin-top:10px;">
+                            </div>-->
                             <div class="col-md-12" style="margin-top:10px;">
-                                <button type="submit" id="agregarAW1" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Siguiente</button>
+                                <button type="submit" id="agregarAW2" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Siguiente</button>
                             </div>
                             <!--FIN BOTON GUARDAR-->
                         </div>
@@ -97,6 +89,12 @@
         </div>
         <!-- /.box -->
     </div>
+    @Html.HiddenFor(m => m._fechaDespegue)
+    @Html.HiddenFor(m => m._horaDespegue)
+    @Html.HiddenFor(m => m._idRuta)
+    @Html.HiddenFor(m => m._ciudadDestino)
+    @Html.HiddenFor(m => m._ciudadOrigen)
+   
 }
 
 

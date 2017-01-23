@@ -5,7 +5,7 @@ using System.Data.Entity;
 namespace FOReserva.Models
 {
     /*Clase Base para manejo de ID y nombre*/
-    public class BaseEntity : Entidad
+    public class BaseEntity
     {
         /*id del objeto en BD*/
         private int _id;

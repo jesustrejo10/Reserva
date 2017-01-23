@@ -1,4 +1,4 @@
-﻿@model BOReserva.Models.gestion_boletos.CModificarBoleto
+@model BOReserva.Models.gestion_boletos.CModificarBoleto
 
 @using (Html.BeginForm("modificarDatosPasajero", "gestion_boletos", null, FormMethod.Post, new { @id = "formModificarBoleto", @class = "form-horizontal" }))
 {
@@ -52,71 +52,71 @@
                                             </div>
                                         </div>
 
-                                            <div>&nbsp;</div>
+                                        <div>&nbsp;</div>
 
-                                            <div class="col-md-12" style="margin-top:10px;">
-                                                <div class="col-md-6">
-                                                    <label>Fecha salida (IDA):</label>
-                                                    @Html.TextBoxFor(m => m._fechaDespegueIda, null, new { @class = "form-control", @placeholder = "", @readonly = "readonly" })
-                                                </div>
+                                        <div class="col-md-12" style="margin-top:10px;">
+                                            <div class="col-md-6">
+                                                <label>Fecha salida (IDA):</label>
+                                                @Html.TextBoxFor(m => m._fechaDespegueIda, null, new { @class = "form-control", @placeholder = "", @readonly = "readonly" })
+                                            </div>
 
 
-                                                <div class="col-md-6">
-                                                    <label>Hora salida (IDA):</label>
-                                                    @Html.TextBoxFor(m => m._fechaAterrizajeIda, null, new { @class = "form-control", @placeholder = "", @readonly = "readonly" })
-                                                </div>
+                                            <div class="col-md-6">
+                                                <label>Hora salida (IDA):</label>
+                                                @Html.TextBoxFor(m => m._fechaAterrizajeIda, null, new { @class = "form-control", @placeholder = "", @readonly = "readonly" })
+                                            </div>
+
+                                        </div>
+
+                                        <div>&nbsp;</div>
+
+                                        <div class="col-md-12" style="margin-top:10px;">
+                                            <div class="col-md-6">
+                                                <label>Fecha salida (VUELTA):</label>
+                                                @Html.TextBoxFor(m => m._fechaDespegueVuelta, null, new { @class = "form-control", @placeholder = "", @readonly = "readonly" })
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label>Hora salida (VUELTA):</label>
+                                                @Html.TextBoxFor(m => m._fechaAterrizajeVuelta, null, new { @class = "form-control", @placeholder = "", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+
+                                        <div>&nbsp;</div>
+
+                                        <div class="col-md-12" style="margin-top:10px;">
+
+                                            <div class="col-md-6">
+                                                <label>Tipo Boleto:</label>
+
+                                                @{
+    List<SelectListItem> _tipos = new List<SelectListItem>();
+    _tipos.Add(new SelectListItem
+    {
+        Text = "",
+        Value = ""
+    });
+    _tipos.Add(new SelectListItem
+            {
+                Text = "Turista",
+                Value = "Turista"
+            });
+    _tipos.Add(new SelectListItem
+    {
+        Text = "Ejecutivo",
+        Value = "Ejecutivo"
+    });
+    _tipos.Add(new SelectListItem
+    {
+        Text = "Vip",
+        Value = "Vip"
+    });
+                                                }
+                                                @Html.DropDownListFor(m => m._tipoBoleto, _tipos, new { @class = "form-control", @placeholder = "Tipo" })
 
                                             </div>
 
-                                            <div>&nbsp;</div>
-
-                                            <div class="col-md-12" style="margin-top:10px;">
-                                                <div class="col-md-6">
-                                                    <label>Fecha salida (VUELTA):</label>
-                                                    @Html.TextBoxFor(m => m._fechaDespegueVuelta, null, new { @class = "form-control", @placeholder = "", @readonly = "readonly" })
-                                                </div>
-
-                                                <div class="col-md-6">
-                                                    <label>Hora salida (VUELTA):</label>
-                                                    @Html.TextBoxFor(m => m._fechaAterrizajeVuelta, null, new { @class = "form-control", @placeholder = "", @readonly = "readonly" })
-                                                </div>
-                                            </div>
-
-                                            <div>&nbsp;</div>
-
-                                            <div class="col-md-12" style="margin-top:10px;">
-
-                                                <div class="col-md-6">
-                                                    <label>Tipo Boleto:</label>
-
-                                                    @{
-                                                    List<SelectListItem> _tipos = new List<SelectListItem>();
-                                                    _tipos.Add(new SelectListItem
-                                                    {
-                                                        Text = "",
-                                                        Value = ""
-                                                    });
-                                                    _tipos.Add(new SelectListItem
-                                                            {
-                                                                Text = "Turista",
-                                                                Value = "Turista"
-                                                            });
-                                                    _tipos.Add(new SelectListItem
-                                                    {
-                                                        Text = "Ejecutivo",
-                                                        Value = "Ejecutivo"
-                                                    });
-                                                    _tipos.Add(new SelectListItem
-                                                    {
-                                                        Text = "Vip",
-                                                        Value = "Vip"
-                                                    });
-                                                    }
-                                                    @Html.DropDownListFor(m => m._tipoBoleto, _tipos, new { @class = "form-control", @placeholder = "Tipo"})
-                        
-                                                </div>
-
-                                            </div>
+                                        </div>
                                         <div>&nbsp;</div>
                                         <div class="col-md-12" style="margin-top:10px;">
                                             <div class="col-md-4"></div>
@@ -129,12 +129,13 @@
                                             <div class="col-md-4"></div>
                                         </div>
 
-                                        </div>
-
                                     </div>
+
+
                                 </div>
                             </div>
                         </div>
+                    </div>
 
                     <!-------------------- INICIO SECCIÓN DATOS DEL PASAJERO ------------------------------>
                     <div class="row">
@@ -159,7 +160,7 @@
 
                                             <div class="col-md-6">
                                                 <label>Fecha Nacimiento:</label>
-                                                @Html.TextBoxFor(m => m._fecha_nac, "{0:dd/MM/yyy}", new { @class = "form-control", @readonly = "readonly"})
+                                                @Html.TextBoxFor(m => m._fecha_nac, "{0:dd/MM/yyy}", new { @class = "form-control", @readonly = "readonly" })
                                             </div>
                                         </div>
 
@@ -169,12 +170,19 @@
 
                                             <div class="col-xs-6">
                                                 <label>Primer Nombre:</label>
-                                                @Html.TextBoxFor(m => m._primer_nombre, null, new { @class = "form-control", @placeholder = "", @id = "boleto_origen"})
+                                                @Html.TextBoxFor(m => m._primer_nombre, null, new { @class = "form-control", @placeholder = "", @id = "boleto_origen" })
+                                                <label id="pn_empty" class="control-label has-error none">
+                                                    <i class="fa fa-times-circle-o"></i> Este campo es requerido y solo debe contener caracteres alfabéticos
+                                                </label>
                                             </div>
 
                                             <div class="col-xs-6">
                                                 <label>Segundo Nombre:</label>
                                                 @Html.TextBoxFor(m => m._segundo_nombre, null, new { @class = "form-control", @placeholder = "", @id = "boleto_destino" })
+
+                                                <label id="sn_empty" class="control-label has-error none">
+                                                    <i class="fa fa-times-circle-o"></i> Este campo es requerido y solo debe contener caracteres alfabéticos
+                                                </label>
                                             </div>
 
                                         </div>
@@ -184,12 +192,20 @@
                                         <div class="col-md-12" style="margin-top:10px;">
                                             <div class="col-md-6">
                                                 <label>Primer Apellido:</label>
-                                                @Html.TextBoxFor(m => m._primer_apellido, null, new { @class = "form-control", @placeholder = "", @id = "boleto_fechaDespegueIda"})
+                                                @Html.TextBoxFor(m => m._primer_apellido, null, new { @class = "form-control", @placeholder = "", @id = "boleto_fechaDespegueIda" })
+                                                <label id="pa_empty" class="control-label has-error none">
+                                                    <i class="fa fa-times-circle-o"></i> Este campo es requerido y solo debe contener caracteres alfabéticos
+                                                </label>
                                             </div>
 
                                             <div class="col-md-6">
-                                                <label>Segundo Apellido:</label>
+                                                <label>Segundo Apellido:</label>  <label id="pn_empty" class="control-label has-error none">
+                                                    <i class="fa fa-times-circle-o"></i> Este campo es requerido y solo debe contener caracteres alfabéticos
+                                                </label>
                                                 @Html.TextBoxFor(m => m._segundo_apellido, null, new { @class = "form-control", @placeholder = "", @id = "boleto_fechaAterrizajeIda" })
+                                                <label id="sa_empty" class="control-label has-error none">
+                                                    <i class="fa fa-times-circle-o"></i> Este campo es requerido y solo debe contener caracteres alfabéticos
+                                                </label>
                                             </div>
 
                                         </div>
@@ -205,7 +221,10 @@
 
                                             <div class="col-md-6">
                                                 <label>Correo:</label>
-                                                @Html.TextBoxFor(m => m._correo, null, new { @class = "form-control", @placeholder = ""})
+                                                @Html.TextBoxFor(m => m._correo, null, new { @class = "form-control", @id = "correo", @placeholder = "" })
+                                                <label id="correo_empty" class="control-label has-error none">
+                                                    <i class="fa fa-times-circle-o"></i> Este campo es requerido y solo debe contener caracteres alfabéticos
+                                                </label>
                                             </div>
 
                                         </div>
@@ -223,6 +242,7 @@
                                         </div>
 
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -234,40 +254,96 @@
 }
 
 <script>
+
+    function loader() {
+        $("#loader").fadeIn("slow");
+        $(window).ajaxComplete(function () {
+            // Se oculta el loader animado
+            $("#loader").hide();
+        });
+    }
+
+    //Modifiar datos del pasajero
     $("#modificar").click(function (e) {
         e.preventDefault();
-        var form = $("#formModificarBoleto");
-        $.ajax({
-            url: "gestion_boletos/modificarDatosPasajero",
-            data: form.serialize(),
-            type: 'POST',
-            success: function (data) {
-                alert("Se ha modificado exitosamente");
+        $(".none").hide();
+        $(".form-control").removeClass("has-error");
+        var win = true;
+        var caralf = /^[a-zA-Z]+$/;
+        var boleto_origen = document.getElementById("boleto_origen").value;
+        var boleto_destino = document.getElementById("boleto_destino").value;
+        var boleto_fechaDespegueIda = document.getElementById("boleto_fechaDespegueIda").value;
+        var boleto_fechaAterrizajeIda = document.getElementById("boleto_fechaAterrizajeIda").value;
+        var correo = document.getElementById("correo").value;
 
-                var url1 = '/gestion_boletos/M05_VisualizarBoletos';
-                var method = 'GET';
-                var data1 = '';
+        //Validaciones para los campos vacios y caracteres correctos
+        if (boleto_origen == "" || boleto_origen == undefined || !boleto_origen.match(caralf)) {
 
-                $.ajax(
-                    {
-                        url: url1,
-                        type: method,
-                        data: data,
-                        success: function (data, textStatus, jqXHR) {
+            $("#boleto_origen").addClass("has-error");
+            $("#pn_empty").fadeIn();
+            win = false;
+        }
+        if (boleto_destino == "" || boleto_destino == undefined || !boleto_destino.match(caralf)) {
+            $("#boleto_destino").addClass("has-error");
+            $("#sn_empty").fadeIn();
+            win = false;
+        }
 
-                            $("#contenido").empty();
-                            $("#contenido").append(data);
-                        },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            alert(errorThrown);
-                        }
-                    });
-            }
-        });
+        if (boleto_fechaDespegueIda == "" || boleto_fechaDespegueIda == undefined || !boleto_fechaDespegueIda.match(caralf)) {
+
+            $("#boleto_fechaDespegueIda").addClass("has-error");
+            $("#pa_empty").fadeIn();
+            win = false;
+        }
+        if (boleto_fechaAterrizajeIda == "" || boleto_fechaAterrizajeIda == undefined || !boleto_fechaAterrizajeIda.match(caralf)) {
+
+            $("#boleto_fechaAterrizajeIda").addClass("has-error");
+            $("#sa_empty").fadeIn();
+            win = false;
+        }
+
+        if (correo == "" || correo == undefined) {
+            $("#correo").addClass("has-error");
+            $("#correo_empty").fadeIn();
+            win = false;
+        }
+        if (win) {
+            loader();
+            var form = $("#formModificarBoleto");
+            $.ajax({
+                url: "gestion_boletos/modificarDatosPasajero",
+                data: form.serialize(),
+                type: 'POST',
+                success: function (data) {
+                    alert("Se ha modificado exitosamente");
+                    var url1 = '/gestion_boletos/M05_VisualizarBoletos';
+                    var method = 'GET';
+                    var data1 = '';
+
+                    $.ajax(
+                        {
+                            url: url1,
+                            type: method,
+                            data: data,
+                            success: function (data, textStatus, jqXHR) {
+
+                                $("#contenido").empty();
+                                $("#contenido").append(data);
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert(errorThrown);
+                            }
+                        });
+                }
+            });
+        }
     });
 
+    //Cancelar cambios datos del pasajero
     $("#cancel").click(function (e) {
         e.preventDefault();
+        loader();
+
         var url = '/gestion_boletos/M05_VisualizarBoletos';
         var method = 'GET';
         var data = '';
@@ -288,8 +364,11 @@
             });
     });
 
+    //Modifiar tipo de boleto
     $("#modificar_tipo_boleto").click(function (e) {
         e.preventDefault();
+        loader();
+
         var form = $("#formModificarBoleto");
         $.ajax({
             url: "gestion_boletos/modificarTipoBoleto",
@@ -316,7 +395,7 @@
                             alert(errorThrown);
                         }
                     });
-            }            
+            }
             , error: function (xhr, textStatus, exceptionThrown) {
                 //muestro el texto del error
                 alert(xhr.responseText);
@@ -324,8 +403,10 @@
         });
     });
 
+    //Cancelar cambios en tipo de boleto
     $("#cancel_tipo").click(function (e) {
         e.preventDefault();
+        loader();
         var url = '/gestion_boletos/M05_VisualizarBoletos';
         var method = 'GET';
         var data = '';
@@ -346,10 +427,3 @@
             });
     });
 </script>
-
-
-
-
-
-
-

@@ -19,6 +19,10 @@ namespace BOReserva.Controllers.PatronComando
     {
         Avion _avion;
 
+        /// <summary>
+        /// Constructor del comando Agregar
+        /// </summary>
+        /// <param name="avion"></param>
         public M02_COAgregarAvion(Avion avion)
         {
             this._avion = avion;

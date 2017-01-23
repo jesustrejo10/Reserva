@@ -21,8 +21,8 @@ $("#aceptarRestaurante").click(function (e) {
         type: 'POST',
         success: function (data) {
             alert("El restaurante se agrego con exito.");
-            $('#formGuardarRestaurante')[0].reset();
-
+        
+          
             var url = '/gestion_restaurantes/M10_GestionRestaurantes_Ver';
             var method = 'GET';
             var data = '';
@@ -179,3 +179,6 @@ $("#cancelarRestauranteModificacion").click(function (e) {
             }
         });
 });
+
+
+

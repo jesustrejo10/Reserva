@@ -12,11 +12,11 @@ namespace FOReserva.DataAccess.DataAccessObject.InterfacesDAO
 
         Entidad consultarReservaId(Entidad objeto);
 
-        List<Entidad> ConsultarAutosPorIdCiudad(Entidad objeto);
+        List<Entidad> ConsultarAutosPorIdCiudades(Entidad objeto);
 
         bool Crear(Entidad objeto);
 
-        bool Modificar(Entidad objeto);
+        new bool Modificar(Entidad objeto);
 
         bool Eliminar(Entidad objeto);
 

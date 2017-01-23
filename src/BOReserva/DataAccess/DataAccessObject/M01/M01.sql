@@ -29,28 +29,85 @@ GO
 -- ACTIVAR USUARIO
 -- ----------------------------
 CREATE PROCEDURE [dbo].[M01_ActivarUsuario]
-@id int
+@correo VARCHAR(255)
 AS
 BEGIN
 	UPDATE [dbo].[Usuario]
 		SET
 			[usu_activo] = 'Activo'
 		WHERE
-			[usu_id] = @id
+			[usu_correo] LIKE @correo
 END
 GO
 -- ----------------------------
 -- DESACTIVAR USUARIO
 -- ----------------------------
 CREATE PROCEDURE [dbo].[M01_DesactivarUsuario]
-@id int
+@correo VARCHAR(255)
 AS
 BEGIN
 	UPDATE [dbo].[Usuario]
 		SET
 			[usu_activo] = 'Inactivo'
 		WHERE
-			[usu_id] = @id
+			[usu_correo] LIKE @correo
+END
+GO
+-- ----------------------------
+-- INCREMENTAR INTENTOS
+-- ----------------------------
+CREATE PROCEDURE [dbo].[M01_IncrementarIntentos]
+@correo VARCHAR(255)
+AS
+BEGIN
+Update Login
+	set log_intentos=log_intentos+1 
+	where log_idusuario=(Select usu_id from Usuario where usu_correo like @correo)
+END
+GO
+-- ----------------------------
+-- RESETEAR INTENTOS
+-- ----------------------------
+CREATE PROCEDURE [dbo].[M01_ResetearIntentos]
+@correo VARCHAR(255)
+AS
+BEGIN
+Update Login 
+	set log_intentos=0 
+	where log_idusuario=(Select usu_id from Usuario where usu_correo like @correo)
+END
+GO
+-- ----------------------------
+-- INSERTAR LOGIN
+-- ----------------------------
+CREATE PROCEDURE [dbo].[M01_InsertarLogin]
+@correo VARCHAR(255)
+AS
+BEGIN
+Insert into Login(log_idusuario,log_sesion,log_intentos)
+values((Select usu_id from Usuario where usu_correo like @correo),0,0)
+END
+GO
+-- ----------------------------
+-- ELIMINAR LOGIN
+-- ----------------------------
+CREATE PROCEDURE [dbo].[M01_EliminarLogin]
+@correo VARCHAR(255)
+AS
+BEGIN
+DELETE from Login WHERE log_idusuario=(Select usu_id from Usuario where usu_correo = @correo)
+END
+GO
+-- ----------------------------
+-- NUMERO INTENTOS
+-- ----------------------------
+CREATE PROCEDURE [dbo].[M01_NumeroIntentos]
+@correo VARCHAR(255)
+AS
+BEGIN
+	Select log_intentos 
+	from Login 
+	where log_idusuario=(Select usu_id from Usuario where usu_correo like @correo)
 END
 GO
 SET ANSI_NULLS ON

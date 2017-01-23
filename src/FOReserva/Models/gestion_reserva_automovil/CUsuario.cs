@@ -12,7 +12,6 @@ namespace FOReserva.Models.gestion_reserva_automovil
         public string _correo { get; set; }
         public string _nombre { get; set; }
         public string _apellido { get; set; }
-        public int _id;
         #endregion
 
         #region Constructores

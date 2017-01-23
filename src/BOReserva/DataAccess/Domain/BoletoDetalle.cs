@@ -85,16 +85,19 @@ namespace BOReserva.DataAccess.Domain
             {
                 var time0 = vuelos[0]._fechaPartida.TimeOfDay.ToString();
                 var time1 = vuelos[0]._fechaLlegada.TimeOfDay.ToString();
+                if (vuelos.Count == 2)
+                {
                 var time2 = vuelos[1]._fechaPartida.TimeOfDay.ToString();
                 var time3 = vuelos[1]._fechaLlegada.TimeOfDay.ToString();
+                    _fechaDespegueVuelta = vuelos[1]._fechaPartida.Day + "/" + vuelos[1]._fechaPartida.Month + "/" + vuelos[1]._fechaPartida.Year;
+                    _fechaAterrizajeVuelta = vuelos[1]._fechaLlegada.Day + "/" + vuelos[1]._fechaLlegada.Month + "/" + vuelos[1]._fechaLlegada.Year;
+                    _horaAterrizajeIda = time2;
+                    _horaAterrizajeVuelta = time3;
+                }
                 _fechaDespegueIda = vuelos[0]._fechaPartida.Day + "/" + vuelos[0]._fechaPartida.Month + "/" + vuelos[0]._fechaPartida.Year;
-                _fechaDespegueVuelta = vuelos[1]._fechaPartida.Day + "/" + vuelos[1]._fechaPartida.Month + "/" + vuelos[1]._fechaPartida.Year;
                 _fechaAterrizajeIda = vuelos[0]._fechaLlegada.Day + "/" + vuelos[0]._fechaLlegada.Month + "/" + vuelos[0]._fechaLlegada.Year;
-                _fechaAterrizajeVuelta = vuelos[1]._fechaLlegada.Day + "/" + vuelos[1]._fechaLlegada.Month + "/" + vuelos[1]._fechaLlegada.Year;
                 _horaDespegueIda = time0;
                 _horaDespegueVuelta = time1;
-                _horaAterrizajeIda = time2;
-                _horaAterrizajeVuelta = time3;
                 _tipos.Add(new SelectListItem
                 {
                     Text = "Seleccione",

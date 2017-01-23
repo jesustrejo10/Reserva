@@ -1,10 +1,10 @@
-﻿
+﻿<link href="~/Content/Canvas/Box.css" rel="stylesheet" />
 
 <div class="row">
     <link rel="stylesheet" href="~/Content/plugins/datatables/dataTables.bootstrap.css">
 
-    <div class="col-xs-12">
-        <div class="box">
+    <div class="col-xs-10">
+        <div class="Cajita">
             <div class="box-header">
                 <h3 class="box-title">Lista de Ofertas</h3>
             </div>
@@ -98,8 +98,6 @@
         }).fail(function () {
 
         });
-
-
     });
 
     $(".detalle").click(function () {
@@ -114,74 +112,87 @@
         }).fail(function () {
 
         });
-
-
     });
 
 
-    $(".desactivar").click(function () {
-        var idOferta = $(this).parent().parent().parent().attr("id");
-        var r = confirm("Está seguro que desea desactivar la oferta?");
-        if (r == true) {
+    $(document).ready(function () {
+        //e.preventDefault();
+        $(".desactivar").click(function () {
+            alert("Se esta procesando tu solicitud, por favor espere");
+            var identificador = $(this).parent().parent().parent().attr("id");
             jQuery.ajax({
-                        type: "POST",
-                        url: "/gestion_ofertas/desactivarOferta",
-                        data: { ofertaIdStr : idOferta}
-                    }).done(function (data) {
-                        var url = '/gestion_ofertas/M11_VisualizarOferta';
-                        var method = 'GET';
-                        var data = '';
-                        $.ajax(
-                            {
-                                url: url,
-                                type: method,
-                                data: data,
-                                success: function (data, textStatus, jqXHR) {
-                                    $("#contenido").empty();
-                                    $("#contenido").append(data);
-                                },
-                                error: function (jqXHR, textStatus, errorThrown) {
-                                    alert(errorThrown);
-                                }
-                            });
-                    }).fail(function () {
-                        alert("Error en la base de datos");
-                    });
-        }        
-    });
+                type: "POST",
+                url: "/gestion_ofertas/desactivarOferta",
+                data: { id: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+            }).done(function (data) {
+                if (data === "1") {
+
+                    //$("#sdssss").append(data);
+                    var url1 = '/gestion_ofertas/M11_VisualizarOfertas';
+                    var method = 'GET';
+                    var data1 = '';
+
+                    $.ajax(
+                        {
+                            url: url1,
+                            type: method,
+                            data: data,
+                            success: function (data, textStatus, jqXHR) {
+
+                                $("#contenido").empty();
+                                $("#contenido").append(data);
+                                alert("Se cambio exitosamente. Actualice la Página.");
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert(errorThrown);
+                            }
+                        });
+                } else {
+                    alert(data);
+                }
+            }).fail(function () {
+                alert("Error, por favor refresque la pagina")
+            });
+        });
 
     $(".activar").click(function () {
-        var idOferta = $(this).parent().parent().parent().attr("id");
-        var r = confirm("Esta seguro que desea activar la oferta?");
-        if (r == true) {
-            jQuery.ajax({
-                        type: "POST",
-                        url: "/gestion_ofertas/activarOferta",
-                        data: { ofertaIdStr: idOferta }
-                    }).done(function (data) {
-                        var url = '/gestion_ofertas/M11_VisualizarOferta';
-                        var method = 'GET';
-                        var data = '';
-                        $.ajax(
-                            {
-                                url: url,
-                                type: method,
-                                data: data,
-                                success: function (data, textStatus, jqXHR) {
+        alert("Se esta procesando tu solicitud, por favor espere");
+        var identificador = $(this).parent().parent().parent().attr("id");
+        jQuery.ajax({
+            type: "POST",
+            url: "/gestion_ofertas/activarOferta",
+            data: { id: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+        }).done(function (data) {
+            if (data === "1") {
 
-                                    $("#contenido").empty();
-                                    $("#contenido").append(data);
-                                },
-                                error: function (jqXHR, textStatus, errorThrown) {
-                                    alert(errorThrown);
-                                }
-                            });
-                    }).fail(function () {
-                        alert("Error en la base de datos");
+                //$("#sdssss").append(data);
+                var url1 = '/gestion_ofertas/M11_VisualizarOfertas';
+                var method = 'GET';
+                var data1 = '';
+
+                $.ajax(
+                    {
+                        url: url1,
+                        type: method,
+                        data: data,
+                        success: function (data, textStatus, jqXHR) {
+
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                            alert("Se habilitó exitosamente. Actualice la Página.");
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
                     });
-        }
+            } else {
+                alert(data);
+            }
+        }).fail(function () {
+            alert("Error, por favor refresque la pagina")
+        });
     });
 
-
+    });
 </script>
 

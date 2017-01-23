@@ -1,5 +1,4 @@
 ﻿
-
 <div class="row">
     <link rel="stylesheet" href="~/Content/plugins/datatables/dataTables.bootstrap.css">
 
@@ -22,6 +21,7 @@
                     <tbody>
                         @try
 {
+                            
     foreach (var item in Model)
     {
         <tr id="@item._id">
@@ -45,9 +45,8 @@
                     <span class="label label-danger ">Cerrado</span>
                 }            
             </td>
-
             <td>
-                <a href="#" title="Ver detalle"><i class="fa fa-eye detalle"></i></a>
+                                        <a href="#" title="Consultar"><i class="fa fa-eye detalle"></i></a>
                 @if (item._usuario == item._usuario) 
                 { 
                 <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>
@@ -57,6 +56,7 @@
 
             <script>
 
+             
                 $(".modificar").click(function (event) {
                     event.preventDefault();
                     event.stopPropagation();
@@ -65,16 +65,37 @@
                     jQuery.ajax({
                         type: "GET",
                         url: "/gestion_reclamos/M16_ModificarReclamo",
-                        data: { id: identificador }
+                        data: { idReclamo: identificador }
                     }).done(function (data) {
                         $("#contenido").empty();
                         $("#contenido").append(data);
-                    }).fail(function () {
+                    }).fail(function (data) {
                         alert(data);
+                        console.log(data);
                     });
 
 
                 });
+
+                $(".detalle").click(function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    event.stopImmediatePropagation();
+                    var identificador = $(this).parent().parent().parent().attr("id");
+                    jQuery.ajax({
+                        type: "GET",
+                        url: "/gestion_reclamos/M16_DetalleReclamo",
+                        data: { idReclamo: identificador }
+                    }).done(function (data) {
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    }).fail(function (data) {
+                        alert(data);
+                        console.log(data);
+                    });
+                });
+
+
 
                 $(".eliminar").click(function (event) {
                     event.preventDefault();
@@ -111,7 +132,6 @@
 
 
                 });
-
 
                 $(".label-success").click(function (event) {
                     event.preventDefault();
@@ -211,10 +231,13 @@
 
                                     $("#contenido").empty();
                                     $("#contenido").append(data);
+
                                 },
                                 error: function (jqXHR, textStatus, errorThrown) {
                                     alert(errorThrown);
                                 }
+                            }).done(function (data) {
+                                $('#' + id_fila).remove();
                             });
                     }).fail(function (data) {
                         console.log(data);
@@ -223,6 +246,7 @@
 
 
                 });
+
             </script>
 
         </tr>
@@ -231,7 +255,7 @@
 catch
 {
                             <script>
-                                alert("Error en el listado, por favor intente acceder nuevamente");
+                                   alert("Error en el listado, por favor intente nuevamente");
                             </script>
                         }
 
@@ -252,6 +276,7 @@ catch
     <!-- /.col -->
 </div>
 <!-- /.row -->
+
 
 <script src="~/Content/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="~/Content/plugins/datatables/dataTables.bootstrap.min.js"></script>

@@ -7,10 +7,13 @@ using System.Threading.Tasks;
 
 namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
 {
-    interface IDAOHotel : IDAO
+    /// <summary>
+    /// Interfaz que posee los metodos eliminarHotel y disponibilidadHotel
+    /// </summary>
+    public interface IDAOHotel : IDAO
     {
         String eliminarHotel(int id);
 
-        String disponibilidadHotel(Entidad e, int disponibilidad);
+        Entidad disponibilidadHotel(Entidad e, int disponibilidad);
     }
 }

@@ -1,17 +1,21 @@
 ﻿using BOReserva.DataAccess.DAO;
+using BOReserva.DataAccess.DAO.InterfacesDAO;
 using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
+using BOReserva.Excepciones;
+using BOReserva.Excepciones.M04;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
 namespace BOReserva.Controllers.PatronComando.M04
 {
-    public class M04_COEliminarVuelo : Command<bool>
+    public class M04_COEliminarVuelo : Command<Boolean>
     {
-        private Entidad _vuelo;
+        private int _idVuelo;
 
         #region Constructores
 
@@ -20,9 +24,9 @@ namespace BOReserva.Controllers.PatronComando.M04
         /// Constructor que recibe un parametro del tipo entidad
         /// </summary>
         /// <param name="vuelo">Es el objeto que se quiere agregar</param>
-        public M04_COEliminarVuelo (Entidad vuelo)
+        public M04_COEliminarVuelo (int idVuelo)
         {
-            _vuelo = vuelo; 
+            _idVuelo = idVuelo; 
         }
         #endregion
 
@@ -35,12 +39,23 @@ namespace BOReserva.Controllers.PatronComando.M04
         {
             try
             {
-                DAOVuelo vueloDel= (DAOVuelo)FabricaDAO.instanciarDAOVuelo();
-                vueloDel.Eliminar(_vuelo);
+                IDAOVuelo vueloDel= (IDAOVuelo)FabricaDAO.instanciarDAOVuelo();
+                vueloDel.Eliminar(_idVuelo);
                 return true;
+            }
+            catch (ReservaExceptionM04 ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw ex;
+            }
+            catch (SqlException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw ex;
             }
             catch (Exception ex)
             {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw ex;
             }
             

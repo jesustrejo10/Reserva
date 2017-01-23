@@ -14,14 +14,22 @@ namespace BOReserva.Controllers.PatronComando
     {
         Pasajero _pasajero;
 
+        /// <summary>
+        /// Constructor del comando Agregar Pasajero
+        /// </summary>
+        /// <param name="pasajero"></param>
         public M05_COAgregarPasajero(Pasajero pasajero)
         {
             this._pasajero = pasajero;
         }
 
+        /// <summary>
+        /// Ejecutar comando Agregar un pasajero a la DB
+        /// </summary>
+        /// <returns></returns>
         public override String ejecutar()
         {
-            IDAO daoPasajero= FabricaDAO.instanciarDaoPasajero();
+            IDAO daoPasajero = FabricaDAO.instanciarDaoPasajero();
             int test = daoPasajero.Agregar(_pasajero);
             return test.ToString();
         }

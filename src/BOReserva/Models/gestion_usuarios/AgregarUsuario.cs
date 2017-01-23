@@ -7,13 +7,24 @@ using System.Web;
 
 namespace BOReserva.Models.gestion_usuarios
 {
+    /// <summary>
+    /// 
+    /// Clase del modelo de la vista parcial M12_AgregarUsuario
+    /// </summary>
     public class AgregarUsuario
     {
+        /// <summary>
+        /// Constructor de la clase
+        /// </summary>
         public AgregarUsuario()
         {
             setFecha();
         }
 
+        /// <summary>
+        /// Constructor de la clase
+        /// </summary>
+        /// <param name="usuario">Usuario a agregarn</param>
         public AgregarUsuario(CUsuario usuario)
         {
             this._correo = usuario.correoUsuario;
@@ -24,7 +35,7 @@ namespace BOReserva.Models.gestion_usuarios
             this._activo = usuario.activoUsuario;
             this._id = usuario.idUsuario;
         }
-        
+
         #region Atributos
         /// <summary>
         /// TextBox de correo
@@ -155,20 +166,22 @@ namespace BOReserva.Models.gestion_usuarios
             set;
 
         }
-       #endregion
+        #endregion
 
-
-       
-
-
-        public CUsuario toClass(){
+        /// <summary>
+        /// Constructor CUsuario, retorna un user
+        /// </summary>
+        public CUsuario toClass()
+        {
             CUsuario user = new CUsuario(_id, _nombre, _apellido, HashPassword(_contraseña), _correo, _activo, _fechaCreacion, _rol);
             return user;
 
         }
 
-        
-
+        /// <summary>
+        /// Constructor de la clase
+        /// </summary>
+        /// <param name="pass">Password</param>
         private String HashPassword(String pass)
         {
             if (pass != null)
@@ -176,6 +189,9 @@ namespace BOReserva.Models.gestion_usuarios
             else return null;
         }
 
+        /// <summary>
+        /// Constructor de la clase para obtener fecha
+        /// </summary>
         private void setFecha()
         {
             _fechaCreacion = DateTime.Now;
