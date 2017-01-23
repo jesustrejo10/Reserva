@@ -21,7 +21,6 @@ namespace BOReserva.Controllers
 {
     public class gestion_ofertasController : Controller
     {
-
         //
         // GET: /gestion_ofertas/
         private static int idpaquete;
@@ -164,7 +163,7 @@ namespace BOReserva.Controllers
                 lista.Add((CRestauranteModelo)item);
             }
             */
-            
+
         }
 
         /// <summary>
@@ -282,16 +281,15 @@ namespace BOReserva.Controllers
 
             COferta coferta = new COferta();
 
-         /*   //llena la lista de los paquetes asociados a la oferta
-            try
+       /*     try
             {
-                modificarOferta._listaPaquetes = coferta.MBuscarPaquetesAsociadosBD(idOferta.ToString());
+                visualOferta._listaPaquetes = coferta.MBuscarPaquetesAsociadosBD(idOferta.ToString());
             }
             catch (NullReferenceException e)
             {
-                return PartialView(modificarOferta);
-            }*/
-
+                return PartialView(visualOferta);
+            }
+            */
             return PartialView(visualOferta); //Es del tipo modificarOerta
         }
 
@@ -485,116 +483,6 @@ namespace BOReserva.Controllers
             return Json("");
         }
 
-      /*  [HttpPost]
-        public JsonResult desactivarOferta(String ofertaIdStr)
-        {
-            int ofertaId = Int32.Parse(ofertaIdStr);
-            //AGREGAR EL USING DEL MANEJADOR SQL ANTES (using BOReserva.Servicio; o using FOReserva.Servicio;)
-            //instancio el manejador de sql
-            manejadorSQL sql = new manejadorSQL();
-            //realizo el insert
-            bool resultado = sql.desactivarOferta(ofertaId);
-            //envio una respuesta dependiendo del resultado del insert
-            if (resultado)
-            {
-                return (Json(true, JsonRequestBehavior.AllowGet));
-            }
-            else
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error procesando la petición";
-                return Json(error);
-            }
-        }*/
-
-      /*  [HttpPost]
-        public JsonResult activarOferta(String ofertaIdStr)
-        {
-            int ofertaId = Int32.Parse(ofertaIdStr);
-            //AGREGAR EL USING DEL MANEJADOR SQL ANTES (using BOReserva.Servicio; o using FOReserva.Servicio;)
-            //instancio el manejador de sql
-            manejadorSQL sql = new manejadorSQL();
-            //realizo el insert
-            bool resultado = sql.activarOferta(ofertaId);
-            //envio una respuesta dependiendo del resultado del insert
-            if (resultado)
-            {
-                return (Json(true, JsonRequestBehavior.AllowGet));
-            }
-            else
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error procesando la petición";
-                return Json(error);
-            }
-        }*/
-
-     /*   [HttpPost]
-        public JsonResult desactivarPaquete(String ofertaIdStr)
-        {
-            int paqueteId = Int32.Parse(ofertaIdStr);
-            //AGREGAR EL USING DEL MANEJADOR SQL ANTES (using BOReserva.Servicio; o using FOReserva.Servicio;)
-            //instancio el manejador de sql
-            manejadorSQL sql = new manejadorSQL();
-            //realizo el insert
-            bool resultado = sql.desactivarPaquete(paqueteId);
-            //envio una respuesta dependiendo del resultado del insert
-            if (resultado)
-            {
-                return (Json(true, JsonRequestBehavior.AllowGet));
-            }
-            else
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error procesando la petición";
-                return Json(error);
-            }
-        }*/
-
-        /*[HttpPost]
-        public JsonResult activarPaquete(String ofertaIdStr)
-        {
-            int paqueteId = Int32.Parse(ofertaIdStr);
-            //AGREGAR EL USING DEL MANEJADOR SQL ANTES (using BOReserva.Servicio; o using FOReserva.Servicio;)
-            //instancio el manejador de sql
-            manejadorSQL sql = new manejadorSQL();
-            //realizo el insert
-            bool resultado = sql.activarPaquete(paqueteId);
-            //envio una respuesta dependiendo del resultado del insert
-            if (resultado)
-            {
-                return (Json(true, JsonRequestBehavior.AllowGet));
-            }
-            else
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error procesando la petición";
-                return Json(error);
-            }
-        }*/
-
-/*
-        [HttpPost]
-        public JsonResult ConsultarDetalleOferta(String ofertaIdStr)
-        {
-            int ofertaId = Int32.Parse(ofertaIdStr);
-            //AGREGAR EL USING DEL MANEJADOR SQL ANTES (using BOReserva.Servicio; o using FOReserva.Servicio;)
-            //instancio el manejador de sql
-            manejadorSQL sql = new manejadorSQL();
-            //realizo el insert
-            bool resultado = sql.activarOferta(ofertaId);
-            //envio una respuesta dependiendo del resultado del insert
-            if (resultado)
-            {
-                return (Json(true, JsonRequestBehavior.AllowGet));
-            }
-            else
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error procesando la petición";
-                return Json(error);
-            }
-        }*/
 
         public JsonResult deletePaquete(String idPaquete)
         {
@@ -831,6 +719,11 @@ namespace BOReserva.Controllers
             return (Json(agrego_si_no));
         }
 
+        /// <summary>
+        /// Cambia el estado de una oferta a inactiva.
+        /// </summary>
+        /// <param name="id">Id de la oferta a desactivar.</param>
+        /// <returns>Resultado de la actualización.</returns>
         public JsonResult desactivarOferta(int id)
         {
             Debug.WriteLine("DESACTIVAR OFERTA " + id);
@@ -851,6 +744,11 @@ namespace BOReserva.Controllers
             }            
         }
 
+        /// <summary>
+        /// Cambia el estado de una oferta a activa.
+        /// </summary>
+        /// <param name="id">Id de la oferta a activar.</param>
+        /// <returns>Resultado de la actualización.</returns>
         public JsonResult activarOferta(int id)
         {
             Debug.WriteLine("ACTIVAR OFERTA " + id);
@@ -871,27 +769,58 @@ namespace BOReserva.Controllers
             }
         }
 
+        /// <summary>
+        /// Cambia el estado de una PAQUETE a activO.
+        /// </summary>
+        /// <param name="id">Id del paquete a activar.</param>
+        /// <returns>Resultado de la actualización.</returns>
         public JsonResult activarPaquete(int id)
         {
+            Debug.WriteLine("ACTIVAR PAQUETE " + id);
+            idpaquete = id;
+            try
+            {
                 Command<Entidad> comando = FabricaComando.crearM11ConsultarPaquete(id);
                 Entidad paquete = comando.ejecutar();
-                Paquete paquetebuscado = (Paquete)paquete;
-                paquetebuscado._id = id;
-                Command<String> comando1 = FabricaComando.crearM11DisponibilidadPaquete(paquetebuscado, 1);
+                Paquete paqueteBuscado = (Paquete)paquete;
+                paqueteBuscado._id = id;
+                Debug.WriteLine("DESACTIVAR PAQUETE " + paqueteBuscado._nombrePaquete);
+                Debug.WriteLine("DESACTIVAR PAQUETE " + paqueteBuscado._id);
+                Command<String> comando1 = FabricaComando.crearM11DisponibilidadPaquete(paqueteBuscado, 1);
                 String borro_si_no = comando1.ejecutar();
                 return (Json(borro_si_no));
         }
+            catch (ReservaExceptionM09 ex)
+            {
+                return (Json(ex.Mensaje));
+            }
+        }
 
+        /// <summary>
+        /// Cambia el estado de una oferta a inactiva.
+        /// </summary>
+        /// <param name="id">Id de la oferta a desactivar.</param>
+        /// <returns>Resultado de la actualización.</returns>
         public JsonResult desactivarPaquete(int id)
         {
+            Debug.WriteLine("DESACTIVAR PAQUETE " + id);
+            try
+            {
                 Command<Entidad> comando = FabricaComando.crearM11ConsultarPaquete(id);
                 Entidad paquete = comando.ejecutar();
-                Paquete paquetebuscado = (Paquete)paquete;
-                paquetebuscado._id = id;
-                Command<String> comando1 = FabricaComando.crearM11DisponibilidadPaquete(paquetebuscado, 0);
+                Paquete paqueteBuscado = (Paquete)paquete;
+                paqueteBuscado._id = id;
+                Debug.WriteLine("DESACTIVAR PAQUETE " + paqueteBuscado._nombrePaquete);
+                Debug.WriteLine("DESACTIVAR PAQUETE " + paqueteBuscado._id);
+                Command<String> comando1 = FabricaComando.crearM11DisponibilidadPaquete(paqueteBuscado, 0);
                 String borro_si_no = comando1.ejecutar();
                 return (Json(borro_si_no));     
 
         }            
+            catch (ReservaExceptionM09 ex)
+            {
+                return (Json(ex.Mensaje));
+            }
+        }
 	}
 }
