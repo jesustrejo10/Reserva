@@ -21,7 +21,7 @@ using BOReserva.Controllers;
 namespace TestUnitReserva.BO.gestion_aviones
 {
     /// <summary>
-    /// Clase encargada de realizar las pruebas unitarios del modulo reclamos en BO
+    /// Clase encargada de realizar las pruebas unitarios del modulo Avion en BO
     /// </summary>
     [TestFixture]
     class TestAviones
@@ -38,7 +38,7 @@ namespace TestUnitReserva.BO.gestion_aviones
         [SetUp]
         public void Before()
         {
-            mockAvion = new Avion("HK-1799","Boeing747",50,50,50,50,50,50,50);
+            mockAvion = new Avion("HK-5000", "Boeing9999", 50, 50, 50, 50, 50, 50, 50);
             daoAvion = FabricaDAO.instanciarDaoAvion();
         }
         /// <summary>
@@ -51,30 +51,30 @@ namespace TestUnitReserva.BO.gestion_aviones
             mockAvion = null;
         }
         /// <summary>
-        /// Metodo que prueba que pueda insertar un reclamo
+        /// Metodo que prueba que pueda insertar un avion
         /// </summary>
         [Test]
         public void M02_DaoAvionInsertarAvion()
         {
-           
+
             //Probando caso de exito de la prueba
             int resultadoAgregar = daoAvion.Agregar(mockAvion);
             Assert.AreEqual(resultadoAgregar, 1);
             //Probando caso de fallo
             int resultadoAgregarIncorrecto = daoAvion.Agregar(null);
-            Assert.AreEqual(resultadoAgregarIncorrecto,3);
+            Assert.AreEqual(resultadoAgregarIncorrecto, 3);
         }
         /// <summary>
-        /// Metodo que prueba que se puedan consultar todos los reclamos
+        /// Metodo que prueba que se puedan consultar todos los avion
         /// </summary>
         [Test]
         public void M02_DaoAvionConsultarTodos()
         {
-            Dictionary<int, Entidad> reclamos = daoAvion.ConsultarTodos();
-            Assert.NotNull(reclamos);
+            Dictionary<int, Entidad> avion = daoAvion.ConsultarTodos();
+            Assert.NotNull(avion);
         }
         /// <summary>
-        /// Metodo que prueba que se puedan consultar los reclamos por un id
+        /// Metodo que prueba que se puedan consultar los avion por un id
         /// </summary>
         [Test]
         public void M02_DaoAvionConsultarPorId()
@@ -82,60 +82,78 @@ namespace TestUnitReserva.BO.gestion_aviones
             Assert.NotNull(daoAvion.Consultar(314));
         }
         /// <summary>
-        /// Metodo que prueba que se puede modificar un reclamo
+        /// Metodo que prueba que se puede modificar un avion
         /// </summary>
         [Test]
         public void M02_DaoAvionModificar()
         {
             daoAvion.Agregar(mockAvion);
-            M02_COModificarAvion prueba = new M02_COModificarAvion(mockAvion, 315);
+            M02_COModificarAvion prueba = new M02_COModificarAvion(mockAvion, 393);
             string test = prueba.ejecutar();
         }
         /// <summary>
-        /// Metodo que prueba que se pueda eliminar un reclamo
+        /// Metodo que prueba que se pueda eliminar un avion
         /// </summary>
         [Test]
         public void M02_DaoAvionEliminarAvion()
         {
             daoAvion.Agregar(mockAvion);
-            M02_COEliminarAvion prueba = new M02_COEliminarAvion(mockAvion, 316);
+            M02_COEliminarAvion prueba = new M02_COEliminarAvion(mockAvion, 393);
             string test = prueba.ejecutar();
         }
+        /// <summary>
+        /// Metodo que prueba que se pueda eliminar un avion
+        /// </summary>
         [Test]
-        public void deleteAvion()
+        public void M02_deleteAvion()
         {
             daoAvion.Agregar(mockAvion);
             gestion_avionesController prueba = new gestion_avionesController();
-            JsonResult probar = prueba.deleteAvion(316);
+            JsonResult probar = prueba.deleteAvion(393);
             Assert.IsInstanceOf(typeof(JsonResult), probar);
         }
+        /// <summary>
+        /// Metodo que prueba que se pueda probar la disponibilidad un avion
+        /// </summary>
         [Test]
         public void M02_DaoAvionDsiponibilidadAvion()
         {
             M02_CODisponibilidadAvion prueba = new M02_CODisponibilidadAvion(mockAvion2, 0);
         }
+        /// <summary>
+        /// Metodo que prueba que se pueda probar el activar un avion
+        /// </summary>
         [Test]
-        public void activateAvion()
+        public void M02_activateAvion()
         {
             daoAvion.Agregar(mockAvion);
             gestion_avionesController prueba = new gestion_avionesController();
-            JsonResult probar = prueba.activateAvion(315);
+            JsonResult probar = prueba.activateAvion(389);
             Assert.IsInstanceOf(typeof(JsonResult), probar);
         }
+        /// <summary>
+        /// Metodo que prueba que se pueda probar el desactivar un avion
+        /// </summary>
         [Test]
-        public void deactivateAvion()
+        public void M02_deactivateAvion()
         {
             daoAvion.Agregar(mockAvion);
             gestion_avionesController prueba = new gestion_avionesController();
-            JsonResult probar = prueba.deactivateAvion(314);
+            JsonResult probar = prueba.deactivateAvion(389);
             Assert.IsInstanceOf(typeof(JsonResult), probar);
         }
+        /// <summary>
+        /// Metodo que prueba que se pueda probar la vizualizacion de aviones
+        /// </summary>
         [Test]
         public void M02_VisualizarAvion()
         {
             M02_COVisualizarAvion prueba = new M02_COVisualizarAvion();
             Dictionary<int, Entidad> mapAvion = prueba.ejecutar();
         }
+        /// <summary>
+        /// Metodo que prueba que se pueda probar guardar avion
+        /// </summary>
         [Test]
         public void M02_guardarAvion()
         {
@@ -150,8 +168,12 @@ namespace TestUnitReserva.BO.gestion_aviones
             model._velocidadMaximaDeVuelo = 70;
             model._capacidadMaximaCombustible = 70;
             gestion_avionesController prueba = new gestion_avionesController();
-            JsonResult probarjsonresult= prueba.guardarAvion(model);
-            Assert.IsInstanceOf(typeof(JsonResult),probarjsonresult);
+            JsonResult probarjsonresult = prueba.guardarAvion(model);
+            Assert.IsInstanceOf(typeof(JsonResult), probarjsonresult);
         }
+      
+        }
+       
+
+
     }
-}
