@@ -70,7 +70,7 @@ namespace TestUnitReserva.BO.gestion_ruta_comercial
 
         }
 
-        public void M03_DaoHotelInsertarHotel()
+        public void TestM03_DaoRutaInsertarRuta()
         {
             //Probando caso de exito de la prueba
             int resultadoAgregar = daoRuta.Agregar(mockRuta);
@@ -119,6 +119,15 @@ namespace TestUnitReserva.BO.gestion_ruta_comercial
             Dictionary<int, Entidad> listaRutas = comando.ejecutar();
             Assert.IsNotNull(listarutas);
         }
-       
+
+        [Test]
+        public void TestM03_ListarLugares()
+        {
+            List<String> lista = new List<string>();
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM03_ListarLugares();
+            Dictionary<int, Entidad> listaLugares = comando.ejecutar();
+            Assert.IsNotNull(listaLugares);
+        }
+
     }
 }
