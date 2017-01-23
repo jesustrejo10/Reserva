@@ -45,7 +45,7 @@ namespace BOReserva.Controllers
             }
             catch (ReservaExceptionM13 ex)
             {
-                return (Json(new { error = ex.Mensaje }));
+                return (Json(ex.Mensaje));
             }
             return PartialView(rol);
         }
@@ -69,7 +69,7 @@ namespace BOReserva.Controllers
             }
             catch (ReservaExceptionM13 ex)
             {
-                return (Json(new {error = ex.Mensaje}));
+                return (Json(ex.Mensaje));
             }
             return PartialView(listaroles);
         }
@@ -106,7 +106,7 @@ namespace BOReserva.Controllers
             }
             catch (ReservaExceptionM13 ex)
             {
-                return (Json(new { error = ex.Mensaje }));
+                return (Json(ex.Mensaje));
             }
             return PartialView(modelovista);
         }
@@ -137,7 +137,7 @@ namespace BOReserva.Controllers
             }
             catch (ReservaExceptionM13 ex)
             {
-                return (Json(ex.Mensaje));
+                return (Json(new { error = ex.Mensaje }));
             }
         }
 
@@ -252,8 +252,7 @@ namespace BOReserva.Controllers
                 }
                 else
                 {
-                    String error = "Error eliminando de la BD.";
-                    return Json(error);
+                    return Json(new { error = "Rol no puede ser eliminado ya que está asignado a un usuario" });
                 }
             }
             catch (ReservaExceptionM13 ex)
@@ -417,8 +416,7 @@ namespace BOReserva.Controllers
                 }
                 else
                 {
-                    String error = "Este permiso tiene roles asociados";
-                    return Json(error);
+                    return Json(new { error = "Permiso no puede ser eliminado ya que está asociado a un rol" });
                 }
             }
             catch (ReservaExceptionM13 ex)

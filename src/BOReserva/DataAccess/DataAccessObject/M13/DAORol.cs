@@ -61,7 +61,13 @@ namespace BOReserva.DataAccess.DataAccessObject
             catch (SqlException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM13("Reserva-404", "Error Conexion Base de Datos", ex);
+                if (ex.Number == 2627){
+                    throw new ReservaExceptionM13("Reserva-404", "Rol ya existe en la base de datos", ex);
+                }
+                else{
+                    throw new ReservaExceptionM13("Reserva-404", "Error Conexion Base de Datos", ex);
+                }
+               
             }
             catch (ExceptionBD ex)
             {
