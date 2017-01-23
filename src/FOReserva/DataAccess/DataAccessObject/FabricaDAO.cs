@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using FOReserva.DataAccess.DataAccessObject.M20;
+using FOReserva.DataAccess.DataAccessObject.M22Cruceros;
 
 namespace FOReserva.DataAccess.DataAccessObject
 
@@ -92,5 +93,23 @@ namespace FOReserva.DataAccess.DataAccessObject
             return new DAORevision();
         }
         #endregion
+
+
+        #region Modulo 22 ReservaCrucero
+        public static DAO instanciarDaoReservaCrucero()
+        {
+            return new DAOReservaCrucero();
+        }
+        #endregion
+
+        internal static Parametro asignarParametro(string p1, SqlDbType sqlDbType, DateTime dateTime, bool p2)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static Parametro asignarParametro(string p1, SqlDbType sqlDbType, int p2, bool p3)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -66,6 +66,8 @@ namespace FOReserva.Controllers
         public ActionResult gestion_reserva_crucero_confirmar(string id_crucero, string id_origen, string id_destino, string id_inicio, string id_fin, string pasajeros_num, string fk_ruta, string fk_crucero)
         {
             CReserva_Cruceros reserva = new CReserva_Cruceros(id_crucero, id_origen, id_destino, fk_crucero, id_inicio, id_fin, pasajeros_num, fk_ruta);
+           
+            
             manejadorSQLCrucero manejador = new manejadorSQLCrucero();
             ///Se instancia un try para la consulta a la base de datos
             try
