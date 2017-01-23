@@ -167,12 +167,15 @@ namespace TestUnitReserva.BO.gestion_roles
             Assert.AreNotEqual(daoRol.consultarPermisosUsuario(34), null);
         }
 
-        //[Test]
-        //public void M13_DAOQuitarPermisoRol()
-        //{
-        //    mockRolPermiso._idRol;
-        //    mockRolPermiso.listapermisos
-        //    Assert.AreEqual(daoRol.eliminarPermiso(mockRol._idRol), "1");
-        //}
+        [Test]
+        public void M13_DAOQuitarPermisoRol()
+        {
+            int idPermiso = 0;
+            foreach (var item in mockRolPermiso.listapermisos)
+            {
+                idPermiso = item._id;
+            }
+            Assert.AreEqual(daoRol.quitarPermiso(mockRolPermiso._idRol, idPermiso), "1");
+        }
     }
 }
