@@ -162,7 +162,7 @@ namespace TestUnitReserva.FO.TestGestionReclamosFO
             model._detalleReclamo = detalleReclamo;
             model._fechaReclamo = fechaReclamo;
             Assert.IsInstanceOf(typeof(ActionResult), controlador.M16_AgregarReclamo());
-            Assert.IsInstanceOf(typeof(ActionResult), controlador.M16_ModificarReclamo(11));
+            Assert.IsInstanceOf(typeof(ActionResult), controlador.M16_ModificarReclamo(50));
             Assert.IsInstanceOf(typeof(JsonResult), controlador.guardarReclamo(model));
             Assert.IsInstanceOf(typeof(JsonResult), controlador.eliminarReclamo(1));
             Assert.IsInstanceOf(typeof(JsonResult), controlador.guardarModificacionReclamo(model._tituloReclamo,model._detalleReclamo,model._fechaReclamo,19));

@@ -15,7 +15,6 @@ using System.Diagnostics;
 using System.Data.SqlClient;
 using System.Web.Mvc;
 using FOReserva.DataAccess.DataAccessObject.M22;
-using FOReserva.Models.ReservaHabitacion;
 
 namespace TestUnitReserva.FO.Reserva_Habitacion
 {
@@ -28,12 +27,6 @@ namespace TestUnitReserva.FO.Reserva_Habitacion
         DAOReservaHabitacion daoReservaHabitacion;
         IDAOReservaHabitacion personalizado;
         private ReservaHabitacion mockReserva;
-        Cvista_ReservarHabitacion mockVistaHabitacion;
-        int cant;
-        String fecha;
-        int hotel;
-        int usuario;
-        int prueba;
 
         /// <summary>
         /// Metodo que se ejecuta antes que se ejecute cada prueba
@@ -42,13 +35,7 @@ namespace TestUnitReserva.FO.Reserva_Habitacion
         [SetUp]
         public void Before()
         {
-            cant = 1;
-            fecha="2017-01-23";
-            hotel=1;
-            usuario=1;
-            prueba = 1;
-            mockReserva = new ReservaHabitacion(cant,fecha,hotel,usuario);
-            mockVistaHabitacion = new Cvista_ReservarHabitacion();
+            mockReserva = new ReservaHabitacion();
             daoReservaHabitacion= new DAOReservaHabitacion();
         }
 
@@ -64,103 +51,20 @@ namespace TestUnitReserva.FO.Reserva_Habitacion
 
         //Patron Comando
 
-        [Test]
-        public void M22_AgregarReservaHabitacion()
+        /*[Test]
+        public void M22_AgregarReserva()
         {
-            M22_COAgregarRerserva prueba = new M22_COAgregarRerserva(mockReserva);
+            M22_COAgregarReserva prueba = new M22_COAgregarReserva(mockReserva);
             String prueba1 = prueba.ejecutar();
-        }
 
-        [Test]
-        public void M22_COEliminarReservaHabitacion()
-        {
-            M22_COEliminarReserva prueba = new M22_COEliminarReserva(1);
-            String test = prueba.ejecutar();
-        }
-
-        [Test]
-        public void M22_COModificarReservaHabitacion()
-        {
-            M22_COModificarReserva prueba = new M22_COModificarReserva(1, 1);
-            String nombre = prueba.ejecutar();
-        }
-
-        [Test]
-        public void M22_C0ConsultarReservasHabitacion()
-        {
-            M22_COConsultarTodasReservas prueba = new M22_COConsultarTodasReservas(1);
-            Dictionary<int, Entidad> mapHoteles = prueba.ejecutar();
-        }
-
-        [Test]
-        public void M22_COObtenerCiudadesReservaHabitacion()
-        {
-            M22_COObtenerCiudad prueba = new M22_COObtenerCiudad();
-            List<CiudadHab> prueb1 = prueba.ejecutar();
-        }
-
-        [Test]
-        public void M22_COConsultarCiudadReservaHabitacion()
-        {
-            M22_COConsultarIdCiudad prueba = new M22_COConsultarIdCiudad(1);
-            Dictionary<int, Entidad> prueb1 = prueba.ejecutar();
-        }
+        }*/
 
         //Controller
-        /*
-        [Test]
-        public void realizarReserva()
-        {
-            gestion_reserva_habitacionesController prueba = new gestion_reserva_habitacionesController();
-            ActionResult probarjsonresult = prueba.realizar_reserva(mockVistaHabitacion);
-            Assert.IsInstanceOf(typeof(ActionResult), probarjsonresult);
-        }
-        */
 
-        [Test]
-        public void M22_CancelarReservaHabitacion()
-        {
-            gestion_reserva_habitacionesController prueba = new gestion_reserva_habitacionesController();
-            ActionResult probar = prueba.cancelar_reserva(1);
-            Assert.IsInstanceOf(typeof(ActionResult), probar);
-        }
 
-        [Test]
-        public void M22_ModificarReservaHabitacion()
-        {
-            gestion_reserva_habitacionesController prueba = new gestion_reserva_habitacionesController();
-            ActionResult probar = prueba.modificar_reserva(1,1);
-            Assert.IsInstanceOf(typeof(ActionResult), probar);
-        }
-        /*
-        [Test]
-        public void M22_MisResevasReservaHabitacion()
-        {
-            gestion_reserva_habitacionesController prueba = new gestion_reserva_habitacionesController();
-            ActionResult probar = prueba.mis_reservas();
-            Assert.IsInstanceOf(typeof(PartialViewResult), probar);
-        }
-        */
-        /*
-        [Test]
-        public void M22_BuscarHotelesReservaHabitacion()
-        {
-            gestion_reserva_habitacionesController prueba = new gestion_reserva_habitacionesController();
-            ActionResult probar = prueba.buscar_hoteles();
-            Assert.IsInstanceOf(typeof(PartialViewResult), probar);
-        }
-        */
-        /*
-        [Test]
-        public void M22_DetalleReservaReservaHabitacion()
-        {
-            gestion_reserva_habitacionesController prueba = new gestion_reserva_habitacionesController();
-            ActionResult probar = prueba.detalle_reserva();
-            Assert.IsInstanceOf(typeof(PartialViewResult), probar);
-        }
-        */
+
         //DAO
-        /*
+
         [Test]
         public void M22_DAOReservaHabitacionAgregar()
         {
@@ -168,10 +72,9 @@ namespace TestUnitReserva.FO.Reserva_Habitacion
             int resultadoAgregar = daoReservaHabitacion.Agregar(mockReserva);
             Assert.AreEqual(resultadoAgregar, 1);
             //Probando caso de fallo
-            //int resultadoAgregarIncorrecto = daoReservaHabitacion.Agregar(null);
-            //Assert.AreEqual(resultadoAgregarIncorrecto, 0);
+            int resultadoAgregarIncorrecto = daoReservaHabitacion.Agregar(null);
+            Assert.AreEqual(resultadoAgregarIncorrecto, 0);
         }
-        */
         /*
         /// <summary>
         /// Metodo que prueba que se pueda consultar todas las reservas de habitacion de un usuario

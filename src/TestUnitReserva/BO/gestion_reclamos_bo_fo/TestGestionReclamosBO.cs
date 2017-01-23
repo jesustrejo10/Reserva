@@ -15,6 +15,7 @@ using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.Models.gestion_reclamos;
 using System.Web.Mvc;
 using BOReserva.Controllers;
+using BOReserva.Excepciones.M16;
 
 namespace TestUnitReserva.BO.gestion_reclamos_bo_fo
 {
@@ -86,7 +87,9 @@ namespace TestUnitReserva.BO.gestion_reclamos_bo_fo
         [Test]
         public void M16_DaoReclamoConsultarPorId()
         {
-            Assert.NotNull(daoReclamo.Consultar(11));
+            //siempre debe haber un reclamo valido
+            Assert.NotNull(daoReclamo.Consultar(70));
+            Assert.Throws<ReservaExceptionM16>(() => daoReclamo.Consultar(11));
         }
 
         /// <summary>
@@ -98,7 +101,8 @@ namespace TestUnitReserva.BO.gestion_reclamos_bo_fo
             //prueba de que lo hace
             Assert.NotNull(daoReclamo.Modificar(mockReclamo));
             //prueba de que falla al pasarle un parametro invaliddo
-            Assert.IsNull(daoReclamo.Modificar(null));
+            Assert.Throws<ReservaExceptionM16>(() => daoReclamo.Modificar(null));
+           
         }
         /// <summary>
         /// Metodo que prueba que se pueda eliminar un reclamo

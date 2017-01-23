@@ -61,11 +61,29 @@ namespace FOReserva.DataAccess.DataAccessObject.M20 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ref_estrellas.
+        /// </summary>
+        internal static string parametroReferenciaEstrellas {
+            get {
+                return ResourceManager.GetString("parametroReferenciaEstrellas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to rev_estrellas.
         /// </summary>
         internal static string parametroRevisionEstrellas {
             get {
                 return ResourceManager.GetString("parametroRevisionEstrellas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to rev_fecha.
+        /// </summary>
+        internal static string parametroRevisionFecha {
+            get {
+                return ResourceManager.GetString("parametroRevisionFecha", resourceCulture);
             }
         }
         
@@ -88,11 +106,38 @@ namespace FOReserva.DataAccess.DataAccessObject.M20 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to rev_negativos.
+        /// </summary>
+        internal static string parametroRevisionNegativos {
+            get {
+                return ResourceManager.GetString("parametroRevisionNegativos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to rev_positivos.
+        /// </summary>
+        internal static string parametroRevisionPositivos {
+            get {
+                return ResourceManager.GetString("parametroRevisionPositivos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to rev_fk_propietario.
         /// </summary>
         internal static string parametroRevisionPropietario {
             get {
                 return ResourceManager.GetString("parametroRevisionPropietario", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to rev_propietario_nombre.
+        /// </summary>
+        internal static string parametroRevisionPropietarioNombre {
+            get {
+                return ResourceManager.GetString("parametroRevisionPropietarioNombre", resourceCulture);
             }
         }
         

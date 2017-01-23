@@ -137,7 +137,7 @@ namespace BOReserva.Controllers
                 model._fechaDespegue = model.fechaDespegue.ToString(RecursoAvionCO.FormatoFecha);
                 model._fechaAterrizaje = ((Vuelo)dataAterrizaje).FechaAterrizaje.ToString(RecursoAvionCO.FormatoFecha);
                 model._horaAterrizaje = ((Vuelo)dataAterrizaje).FechaAterrizaje.ToString(RecursoAvionCO.FormatoHora);
-                model._modeloAvion = ((Avion)avion)._modelo;
+                model._modelo = ((Avion)avion)._modelo;
             }
             catch (ReservaExceptionM04 ex)
             {
@@ -300,7 +300,7 @@ namespace BOReserva.Controllers
                 model._matriculaAvion = ((Avion)avion)._matricula;
                 model._fechaAterrizaje = ((Vuelo)dataAterrizaje).FechaAterrizaje.ToString(RecursoAvionCO.FormatoFecha);
                 model._horaAterrizaje = ((Vuelo)dataAterrizaje).FechaAterrizaje.ToString(RecursoAvionCO.FormatoHora);
-                model._modeloAvion = ((Avion)avion)._modelo;
+                model._modelo = ((Avion)avion)._modelo;
                 model._matriculaAvion = ((Avion)avion)._matricula;
             }
             catch (ReservaExceptionM04 ex)

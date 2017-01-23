@@ -48,10 +48,11 @@ namespace TestUnitReserva.BO.gestion_usuarios
         [SetUp]
         public void Before()
         {
-            DateTime fecha = DateTime.Now;
+            DateTime fecha = new DateTime(2017, 06, 12, 11, 11, 11);
+
 
             mockRol = new Rol(1, "Administrador");
-            mockUsuario = new Usuario("Ana", "Duran", "ana@reserva.com", "12345a", mockRol, fecha, "Activo");
+            mockUsuario = new Usuario("Ana", "Duran", "ana@reserva.com", "12345a", 1, fecha.Date, "Activo");
             //mockUsuario2 = new Usuario(999, "Ana", "Duran", "ana@reserva.com", "12345a", mockRol,null, "Activo");
 
             daoUsuario = new DAOUsuario();
@@ -78,14 +79,12 @@ namespace TestUnitReserva.BO.gestion_usuarios
         /// Metodo que prueba que se inserte un ususario a la BD
         /// </summary>
         [Test]
-        public void M12_DaoUsuarioInsertarUsuario()
+        public void M12_DaoUsuarioInsertarUsuario2()
         {
             //Probando caso de exito de la prueba
             int resultadoAgregar = daoUsuario.Agregar(mockUsuario);
             Assert.AreEqual(resultadoAgregar, 1);
-            //Probando caso de fallo
-            int resultadoAgregarIncorrecto = daoUsuario.Agregar(null);
-            Assert.AreEqual(resultadoAgregarIncorrecto, 0);
+
         }
 
 
@@ -96,7 +95,7 @@ namespace TestUnitReserva.BO.gestion_usuarios
         public void M12_DaoUsuarioModificar()
         {
             daoUsuario.Agregar(mockUsuario);
-            M12_COModificarUsuario prueba = new M12_COModificarUsuario(mockUsuario, 434);
+            M12_COModificarUsuario prueba = new M12_COModificarUsuario(mockUsuario, 156);
             string test = prueba.ejecutar();
         }
 
@@ -107,7 +106,7 @@ namespace TestUnitReserva.BO.gestion_usuarios
         public void M12_DaoUsuarioEliminarUsuario()
         {
             daoUsuario.Agregar(mockUsuario);
-            M12_COEliminarUsuario prueba = new M12_COEliminarUsuario(mockUsuario, 434);
+            M12_COEliminarUsuario prueba = new M12_COEliminarUsuario(mockUsuario, 164);
             string test = prueba.ejecutar();
         }
 
@@ -131,7 +130,7 @@ namespace TestUnitReserva.BO.gestion_usuarios
         {
             daoUsuario.Agregar(mockUsuario);
             gestion_usuariosController prueba = new gestion_usuariosController();
-            JsonResult probar = prueba.activarUsuario(434, "Activo");
+            JsonResult probar = prueba.activarUsuario(118, "Activo");
             Assert.IsInstanceOf(typeof(JsonResult), probar);
         }
 
@@ -144,7 +143,7 @@ namespace TestUnitReserva.BO.gestion_usuarios
         {
             daoUsuario.Agregar(mockUsuario);
             gestion_usuariosController prueba = new gestion_usuariosController();
-            JsonResult probar = prueba.activarUsuario(434, "Inactivo");
+            JsonResult probar = prueba.activarUsuario(118, "Inactivo");
             Assert.IsInstanceOf(typeof(JsonResult), probar);
         }
 
@@ -167,6 +166,7 @@ namespace TestUnitReserva.BO.gestion_usuarios
         public void M12_guardarUsuario()
         {
             DateTime fecha = DateTime.Now;
+
             //Dictionary openWith = new Dictionary<int, Entidad>();
             CAgregarUsuario model = new BOReserva.Models.gestion_usuarios.CAgregarUsuario();
             model._nombre = "Maria";
@@ -174,8 +174,8 @@ namespace TestUnitReserva.BO.gestion_usuarios
             model._correo = "maria@reserva.com";
             model.contraseñaUsuario = ("12345a");
             model._activo = "activo";
-            model._fechaCreacion = fecha;
-            // model._rols = openWith;
+            model._fechaCreacion = fecha.Date;
+
 
 
             gestion_usuariosController prueba = new gestion_usuariosController();

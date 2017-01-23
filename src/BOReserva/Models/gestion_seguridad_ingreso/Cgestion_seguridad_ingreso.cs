@@ -1,4 +1,3 @@
-
 using BOReserva.Controllers.PatronComando;
 using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.M01;
@@ -9,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using BOReserva.Excepciones;
 
 
 namespace BOReserva.Models.gestion_seguridad_ingreso
@@ -90,10 +90,15 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
 
             Boolean Usuario = verificacion.correo.Equals(_correoCampoTexto.ToLower());
             Boolean Contraseña = verificacion.contrasena.Equals(clave);
-            System.Diagnostics.Debug.WriteLine("Validación usuario: " + Usuario + " Validación Contraseña: " + Contraseña);
+            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, 
+                "Validación usuario: " + Usuario + " Validación Contraseña: " + Contraseña, 
+                System.Reflection.MethodBase.GetCurrentMethod().Name);
 
             if (Usuario && Contraseña)
             {
+                Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, 
+                    " Inicio de sesión de usuario: " + _correoCampoTexto.ToLower(), 
+                    System.Reflection.MethodBase.GetCurrentMethod().Name);
                 return new Cgestion_seguridad_ingreso() //Usar el constructor nuevo
                 {
                     idUsuario = verificacion.id,
@@ -110,6 +115,9 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
             {
                 if (verificacion != null && !verificacion.correo.Equals(""))
                 {
+                    Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+                        " Contraseña inválida del usuario " + _correoCampoTexto.ToLower() + " Intento " + FabricaComando.M01NumeroIntentos(usuarioAConsultar).ejecutar(), 
+                        System.Reflection.MethodBase.GetCurrentMethod().Name);
                     FabricaComando.M01IncrementarIntentos(usuarioAConsultar).ejecutar();
                 }
                 throw new Cvalidar_usuario_Exception("Usuario o contraseña incorrecto");
@@ -189,10 +197,15 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
             var usuarioAConsultar = FabricaEntidad.crearUsuario(_correoCampoTexto);
             Command<int> comando = FabricaComando.M01NumeroIntentos(usuarioAConsultar);
             var intentos = (int)comando.ejecutar(); //Asigna valor de retorno luego de consulta a BD
-            if (intentos < 3)
+            if (intentos < 10)
                 return true;
             else
+            {
+                Log.EscribirWarning(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+                    " Bloqueo de usuario " + _correoCampoTexto.ToLower(), 
+                    System.Reflection.MethodBase.GetCurrentMethod().Name);
                 throw new Cvalidar_bloqueo_exception("Usuario Bloqueado Contacte administrador");
+            }
         }
 
         #endregion

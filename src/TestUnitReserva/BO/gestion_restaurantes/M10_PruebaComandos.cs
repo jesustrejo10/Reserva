@@ -53,7 +53,7 @@ namespace TestUnitReserva.BO.gestion_restaurantes
         /// Metodo consultar restaurant por id de ciudad
         /// </summary>
         [Test]
-        public void ComandoConsultarRestaurant()
+        public void M10_ComandoConsultarRestaurant()
         {
           
             Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, BOReserva.Controllers.PatronComando.FabricaComando.comandoRestaurant.NULO, lugar);
@@ -79,7 +79,7 @@ namespace TestUnitReserva.BO.gestion_restaurantes
         /// Metodo consultar restaurant por Id
         /// </summary>
         [Test]
-        public void ComandoConsultarRestaurantId()
+        public void M10_ComandoConsultarRestaurantId()
         {
             restaurant._id = 1;
             Command<Entidad> comando = (Command<Entidad>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, BOReserva.Controllers.PatronComando.FabricaComando.comandoRestaurant.CONSULTAR_ID, restaurant);
@@ -99,7 +99,7 @@ namespace TestUnitReserva.BO.gestion_restaurantes
         /// Metodo para probar que ha sido creado en la base de datos 
         /// </summary>
         [Test]
-        public void ComandoCrear()
+        public void M10_ComandoCrear()
         {
             
             //Parametros para crear el nuevo registro en la base de datos
@@ -123,7 +123,7 @@ namespace TestUnitReserva.BO.gestion_restaurantes
         /// Metodo para modificar datos del restaurant
         /// </summary>
         [Test]
-        public void ComandoModificar()
+        public void M10_ComandoModificar()
         {
            
             //Parametros a modificar en la base de datos
@@ -150,7 +150,7 @@ namespace TestUnitReserva.BO.gestion_restaurantes
         /// Metodo para verificar que se listan los restauntes nombre y id
         /// </summary>
         [Test]
-        public void ComandoListarRestaurantes()
+        public void M10_ComandoListarRestaurantes()
         {
             Command<List<Entidad>> comandos = (Command<List<Entidad>>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, FabricaComando.comandoRestaurant.LISTAR_RESTAURANT, null);
             List<Entidad> ListaRestaurant = comandos.ejecutar();
@@ -168,7 +168,7 @@ namespace TestUnitReserva.BO.gestion_restaurantes
         /// Metodo para verificar que se elimina registro de restaurant de la Base de Datos
         /// </summary>
         [Test]
-        public void ComandoEliminar()
+        public void M10_ComandoEliminar()
         {
             restaurantDao = FabricaDAO.RestaurantBD();
 
