@@ -9,16 +9,17 @@ using System.Web;
 namespace BOReserva.Controllers.PatronComando.M14
 {
     /// <summary>
-    /// Clase del comando para consultar los cruceros de la BD
+    /// Clase del comando para consultar las cabinas de la BD
     /// </summary>
-    public class M14_COConsultarCrucero : Command<Entidad>
+    public class M14_COConsultarCabina : Command<Entidad>
     {
+
         int valor;
         /// <summary>
         /// Constructor de la clase
         /// </summary>
-        /// <param name="value">Identificador del Crucero a buscar</param>
-        public M14_COConsultarCrucero(int value)
+        /// <param name="value">Identificador del Cabina a buscar</param>
+        public M14_COConsultarCabina(int value)
         {
             this.valor = value;
         }
@@ -32,9 +33,10 @@ namespace BOReserva.Controllers.PatronComando.M14
         ///// </returns>
         public override Entidad ejecutar()
         {
-                IDAO daoCrucero = FabricaDAO.instanciarDaoCrucero();
-                Entidad crucero = daoCrucero.Consultar(valor);
-                return crucero;
+                IDAO daoCabina = FabricaDAO.instanciarDaoCabina();
+                Entidad cabina = daoCabina.Consultar(valor);
+                return cabina;
         }
+
     }
 }

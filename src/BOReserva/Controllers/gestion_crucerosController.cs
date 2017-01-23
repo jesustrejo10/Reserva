@@ -18,6 +18,8 @@ namespace BOReserva.Controllers
     {
 
         private static int idCrucero;
+        private static int idCabina;
+        private static int idFkCrucero;
 
         // GET: gestion_cruceros
         public ActionResult M24_GestionCruceros()
@@ -307,7 +309,7 @@ namespace BOReserva.Controllers
         public JsonResult guardarCabina(CGestion_cabina model)
         {
 
-            Entidad nuevaCabina = FabricaEntidad.InstanciarCabinaN(model);
+            Entidad nuevaCabina = FabricaEntidad.InstanciarCabina(model);
             Command<String> comando = FabricaComando.crearM14AgregarCabina(nuevaCabina);
             String result = comando.ejecutar();
             return (Json(result));            
@@ -388,9 +390,9 @@ namespace BOReserva.Controllers
 
 
         // <summary>
-        /// Método de la vista parcial M09_ModificarHotel
+        /// Método de la vista parcial M24_ModificarCrucero
         /// </summary>
-        /// <returns>Retorna la vista parcial M09_ModificarHotel en conjunto del Modelo de dicha vista</returns>
+        /// <returns>Retorna la vista parcial M24_ModificarCrucero en conjunto del Modelo de dicha vista</returns>
         public ActionResult M24_ModificarCrucero(int id)
         {
             try
@@ -413,9 +415,9 @@ namespace BOReserva.Controllers
         }
 
         /// <summary>
-        /// Método que se utiliza para modificar un hotel
+        /// Método que se utiliza para modificar un crucero
         /// </summary>
-        /// <param name="model">Datos que provienen de un formulario de la vista parcial M09_ModificarHotel</param>
+        /// <param name="model">Datos que provienen de un formulario de la vista parcial M24_ModificarCrucero</param>
         /// <returns>Retorna un JsonResult</returns>
         [HttpPost]
         public JsonResult modificarCrucero(CGestion_crucero model)
@@ -425,6 +427,54 @@ namespace BOReserva.Controllers
                 Entidad modificarCrucero = FabricaEntidad.InstanciarCrucero(model);
                 //con la fabrica instancie al Crucero.
                 Command<String> comando = FabricaComando.crearM14ModificarCrucero(modificarCrucero, idCrucero);
+                String agrego_si_no = comando.ejecutar();
+
+                return (Json(agrego_si_no));
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        // <summary>
+        /// Método de la vista parcial M24_ModificarCabina
+        /// </summary>
+        /// <returns>Retorna la vista parcial M24_ModificarCabina en conjunto del Modelo de dicha vista</returns>
+        public ActionResult M24_ModificarCabina(int id)
+        {
+            try
+            {
+                Command<Entidad> comando = FabricaComando.crearM14ConsultarCabina(id);
+                Entidad cabina = comando.ejecutar();
+                Cabina CabinaB = (Cabina)cabina;
+                idCabina = CabinaB._id;
+                idFkCrucero = CabinaB._id;
+                CGestion_cabina modelovista = new CGestion_cabina();
+                modelovista._nombreCabina = CabinaB._nombreCabina;
+                modelovista._precioCabina = CabinaB._precioCabina;
+                modelovista._estatus = CabinaB._estatus;
+                return PartialView(modelovista);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Método que se utiliza para modificar un crucero
+        /// </summary>
+        /// <param name="model">Datos que provienen de un formulario de la vista parcial M24_ModificarCabina</param>
+        /// <returns>Retorna un JsonResult</returns>
+        [HttpPost]
+        public JsonResult modificarCabina(CGestion_cabina model)
+        {
+            try
+            {
+                Entidad modificarCrucero = FabricaEntidad.InstanciarCabina(model);
+                //con la fabrica instancie la cabina.
+                Command<String> comando = FabricaComando.crearM14ModificarCabina(modificarCrucero, idCabina, idFkCrucero);
                 String agrego_si_no = comando.ejecutar();
 
                 return (Json(agrego_si_no));
