@@ -11,6 +11,9 @@ using System.Web;
 
 namespace BOReserva.DataAccess.DataAccessObject.M09
 {
+    /// <summary>
+    /// Clase Dao Habitacion
+    /// </summary>
     public class DAOHabitacion : DAO, IDAOHabitacion
     {
 
