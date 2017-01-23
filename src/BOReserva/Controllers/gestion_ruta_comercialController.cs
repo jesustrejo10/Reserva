@@ -120,23 +120,10 @@ namespace BOReserva.Controllers
             Route._estadoRuta = buscarRuta._status;
             Route._origenRuta = buscarRuta._origenRuta;
             Route._tipoRuta = buscarRuta._tipo;
-            List<String> lista = new List<string>();
-            Command<Dictionary<int, Entidad>> comando2 = FabricaComando.crearM03_ListarLugares();
-            Dictionary<int, Entidad> listaLugares = comando2.ejecutar();
+        
 
             try
             {
-                foreach (var origen in listaLugares)
-                {
-                    BOReserva.DataAccess.Domain.Ruta r = (BOReserva.DataAccess.Domain.Ruta)origen.Value;
-                    lista.Add(r._origenRuta);
-                }
-                //lista = sql.listarLugares();
-                Route._lorigenRuta = lista.Select(x => new SelectListItem
-                {
-                    Value = x,
-                    Text = x
-                });
                 return PartialView(Route);
             }
             catch (SqlException e)

@@ -113,7 +113,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M03
                 //Inicializo la conexion con el string de conexion
                 //INTENTO abrir la conexion
                 conexion.Open();
-                String query = "UPDATE Ruta SET rut_status_ruta='Activa' where rut_id='" + id + "'";
+                String query = "UPDATE Ruta SET rut_status_ruta='activa' where rut_id='" + id + "'";
                 SqlCommand cmd = new SqlCommand(query, conexion);
                 SqlDataReader lector = cmd.ExecuteReader();
                 conexion.Close();
@@ -136,7 +136,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M03
             {
                 //INTENTO abrir la conexion
                 conexion.Open();
-                String query = "UPDATE Ruta SET rut_status_ruta='Inactiva' where rut_id='" + id + "'";
+                String query = "UPDATE Ruta SET rut_status_ruta='inactiva' where rut_id='" + id + "'";
                 SqlCommand cmd = new SqlCommand(query, conexion);
                 SqlDataReader lector = cmd.ExecuteReader();
                 conexion.Close();
