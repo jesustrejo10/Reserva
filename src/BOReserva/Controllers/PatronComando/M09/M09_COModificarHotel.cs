@@ -32,6 +32,7 @@ namespace BOReserva.Controllers.PatronComando.M09
         public override String ejecutar(){
             try
             {
+<<<<<<< HEAD
                 IDAO daoHotel = FabricaDAO.instanciarDaoHotel();
                 Entidad test = daoHotel.Modificar(_hotel);
                 Hotel hotel = (Hotel)test;
@@ -39,6 +40,15 @@ namespace BOReserva.Controllers.PatronComando.M09
                 Cache.actualizarMapHoteles(hotel);
                 return "Se modifico el hotel exitosamente, sera redirigido al listado de hoteles";
             }
+=======
+            IDAO daoHotel = FabricaDAO.instanciarDaoHotel();
+            Entidad test = daoHotel.Modificar(_hotel);
+            Hotel hotel = (Hotel)test;
+            //Actualice un Hotel en BD. necesito refrescarlo en Cache
+            Cache.actualizarMapHoteles(hotel);
+            return ResourceM09Command.ModificoCorrectamente;
+        }
+>>>>>>> 05edc1d97746531a894babd5536930cec65c6478
             catch (ReservaExceptionM09 ex)
             {
                 return (ex.Codigo);

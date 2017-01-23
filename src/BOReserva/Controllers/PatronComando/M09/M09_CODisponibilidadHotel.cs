@@ -40,7 +40,7 @@ namespace BOReserva.Controllers.PatronComando.M09
                 Entidad ent = daoHotel.disponibilidadHotel(_hotel, _disponibilidad);
 
                 Cache.actualizarMapHotelesDisponibilidad(ent._id, _disponibilidad);
-                return "Se cambio exitosamente la disponibilidad del hotel";
+                return ResourceM09Command.DisponibilidadCorrectamente;
             }
             catch (ReservaExceptionM09 ex)
             {

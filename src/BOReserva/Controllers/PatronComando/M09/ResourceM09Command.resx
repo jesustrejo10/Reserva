@@ -118,9 +118,18 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AgregoCorrectamente" xml:space="preserve">
-    <value>Se ha agregado el Hotel exitosamente</value>
+    <value>Se registro el hotel exitosamente</value>
   </data>
   <data name="AgregoErroneamente" xml:space="preserve">
-    <value>Ha ocurrido un error registrando al hotel, Comuniquese con el administrador</value>
+    <value>Reserva-404: Ha ocurrido un error registrando al hotel, Comuniquese con el administrador</value>
+  </data>
+  <data name="DisponibilidadCorrectamente" xml:space="preserve">
+    <value>Se cambio exitosamente la disponibilidad del hotel</value>
+  </data>
+  <data name="EliminoCorrectamente" xml:space="preserve">
+    <value>Se elimino exitosamente el hotel</value>
+  </data>
+  <data name="ModificoCorrectamente" xml:space="preserve">
+    <value>Se modifico el hotel exitosamente, sera redirigido al listado de hoteles</value>
   </data>
 </root>
