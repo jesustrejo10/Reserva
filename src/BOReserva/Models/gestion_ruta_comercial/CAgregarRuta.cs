@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web;
+using BOReserva.DataAccess.Domain;
+
 namespace BOReserva.Models.gestion_ruta_comercial
 {
     public class CAgregarRuta

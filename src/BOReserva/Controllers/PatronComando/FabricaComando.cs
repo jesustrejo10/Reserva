@@ -711,10 +711,6 @@ namespace BOReserva.Controllers.PatronComando
         #endregion
 
 
- 
-
-
-
         #region M13_Roles
 
         public static Command<String> crearM13_AgregarRol(Entidad e)
@@ -1238,21 +1234,26 @@ namespace BOReserva.Controllers.PatronComando
                 default:
                     return new M06_COAgregarComida(_objeto);
             }
-
         }
         #endregion
 
         #region M03_Ruta
+        public static Command<Dictionary<int, Entidad>> crearM03_MListarRutasBD()
+        {
+
+            return new M03_COVisualizarRutas();
+
+        }
         public static Command<String> crearM03_AgregarRuta(Entidad e)
         {
 
             return new M03_COAgregarRuta((Ruta)e);
 
         }
-        public static Command<Dictionary<int, Entidad>> crearM03_ConsultarDestinos(String origen)
+        public static Command<Dictionary<int, Entidad>> crearM03_ConsultarDestinos()
         {
 
-            return new M03_COConsultarDestinos(origen);
+            return new M03_COConsultarDestinos();
 
         }
         public static Command<Boolean> crearM03_DeshabilitarRuta(int id)
@@ -1273,16 +1274,17 @@ namespace BOReserva.Controllers.PatronComando
             return new M03_COListarLugares();
 
         }
+
         public static Command<Boolean> crearM03_ModificarRuta(Entidad e, int id)
         {
 
             return new M03_COModificarRuta((Ruta)e, id);
 
         }
-        public static Command<Entidad> crearM03_MostrarRuta(Entidad e, int id)
+        public static Command<Entidad> crearM03_MostrarRuta(int id)
         {
 
-            return new M03_COMostrarRuta((Ruta)e, id);
+            return new M03_COMostrarRuta(id);
 
         }
 

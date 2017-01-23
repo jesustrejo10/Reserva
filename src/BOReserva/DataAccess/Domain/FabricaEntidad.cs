@@ -3,6 +3,7 @@ using BOReserva.Models.gestion_cruceros;
 using BOReserva.Models.gestion_hoteles;
 using BOReserva.Models.gestion_reclamos;
 using BOReserva.Models.gestion_restaurantes;
+using BOReserva.Models.gestion_ruta_comercial;
 using BOReserva.Models.gestion_roles;
 using BOReserva.DataAccess.Domain;
 using BOReserva.Models.gestion_aviones;
@@ -574,6 +575,19 @@ namespace BOReserva.DataAccess.Domain
                                           String _origenRuta, String _destinoRuta)
         {
             return new Ruta(_idRuta, _distancia, _status, _tipo, _origenRuta, _destinoRuta);
+        }
+        public static Entidad InstanciarRuta(CAgregarRuta model)
+        {
+            
+
+            String origen = model._origenRuta;
+            String destino = model._destinoRuta;
+            String tipo = model._tipoRuta;
+            String status = model._estadoRuta;
+            int distanciaRuta = model._distanciaRuta;
+          
+
+            return new Ruta(distanciaRuta, status, tipo, origen, destino);
         }
 
         #endregion
