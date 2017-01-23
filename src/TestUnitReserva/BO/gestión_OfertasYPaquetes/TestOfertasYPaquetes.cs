@@ -32,6 +32,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
         DAOOferta daoOferta;
         IDAO prueba;
         CModificarOferta mockCModificarOferta;
+        int idPruebas;
 
         /// <summary>
         /// Metodo que se ejecuta antes que se ejecute cada prueba
@@ -48,6 +49,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
             mockListaPaquetesP = new List<Paquete>();
             mockListaPaquetesCP = new List<CPaquete>();            
             daoOferta = new DAOOferta();
+            idPruebas = 25;
 
         }
         /// <summary>
@@ -60,6 +62,12 @@ namespace TestUnitReserva.BO.gestion_hoteles
 
             mockOfertaInt = null;
             mockOfertaString = null;
+            daoOferta = null;
+
+           
+            mockListaPaquetes = null;
+            mockListaPaquetesP = null;
+            mockListaPaquetesCP = null;
             daoOferta = null;
         }
 
@@ -77,6 +85,22 @@ namespace TestUnitReserva.BO.gestion_hoteles
             //Probando caso de fallo
             int resultadoAgregarIncorrecto = daoOferta.Agregar(null);
             Assert.AreEqual(resultadoAgregarIncorrecto, 0);
+        }
+
+        /// <summary>
+        /// Método para probar la inserción de la oferta en la
+        /// Base de Datos.
+        /// Prueba que no se haya pasado una entidad nula.
+        /// </summary>
+        [Test]
+        public void Modificar()
+        {
+             //Probando caso de exito de la prueba
+            Entidad resultadoModificar = daoOferta.Modificar(mockOfertaInt);
+            Assert.AreEqual(resultadoModificar, 1);
+            //Probando caso de fallo
+            int resultadoModificarIncorrecto = daoOferta.Agregar(null);
+            Assert.AreEqual(resultadoModificarIncorrecto, 0);
         }
 
         /// <summary>
