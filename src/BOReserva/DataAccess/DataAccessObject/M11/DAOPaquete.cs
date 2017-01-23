@@ -443,90 +443,132 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
                 SqlParameter ParFkAuto = new SqlParameter();
                 ParFkAuto.ParameterName = "@paq_fk_automovil";
                 ParFkAuto.SqlDbType = SqlDbType.VarChar;
-                ParFkAuto.Value = paquete._idAuto;
+                if (paquete._idAuto == null)
+                    cmd.Parameters.AddWithValue("@paq_fk_automovil", ParFkAuto.IsNullable);
+                else
+                    ParFkAuto.Value = paquete._idAuto;
                 cmd.Parameters.Add(ParFkAuto);
 
                 SqlParameter ParFkRest = new SqlParameter();
                 ParFkRest.ParameterName = "@paq_fk_restaurante";
                 ParFkRest.SqlDbType = SqlDbType.Int;
-                ParFkRest.Value = paquete._idAuto;
+                if (paquete._idRestaurante == null)
+                    cmd.Parameters.AddWithValue("@paq_fk_restaurante", ParFkRest.IsNullable);
+                else
+                    ParFkRest.Value = paquete._idAuto;
                 cmd.Parameters.Add(ParFkRest);
 
                 SqlParameter ParFkHot = new SqlParameter();
                 ParFkHot.ParameterName = "@paq_fk_hotel";
                 ParFkHot.SqlDbType = SqlDbType.Int;
-                ParFkHot.Value = paquete._idAuto;
+                if (paquete._idHotel == null)
+                    cmd.Parameters.AddWithValue("@paq_fk_hotel", ParFkHot.IsNullable);
+                else
+                    ParFkHot.Value = paquete._idHotel;
                 cmd.Parameters.Add(ParFkHot);
 
                 SqlParameter ParFkVuelo = new SqlParameter();
                 ParFkVuelo.ParameterName = "@paq_fk_vuelo";
                 ParFkVuelo.SqlDbType = SqlDbType.Int;
-                ParFkVuelo.Value = paquete._idAuto;
+                if (paquete._idVuelo == null)
+                    cmd.Parameters.AddWithValue("@paq_fk_vuelo", ParFkVuelo.IsNullable);
+                else
+                    ParFkVuelo.Value = paquete._idVuelo;
                 cmd.Parameters.Add(ParFkVuelo);
 
                 SqlParameter ParFechaIniAuto = new SqlParameter();
                 ParFechaIniAuto.ParameterName = "@paq_fechaInicio_automovil";
                 ParFechaIniAuto.SqlDbType = SqlDbType.Date;
-                ParFechaIniAuto.Value = ((DateTime) paquete._fechaIniAuto).ToString("yyyy-MM-dd");
+                if (paquete._fechaIniAuto == null)
+                    cmd.Parameters.AddWithValue("@paq_fechaInicio_automovil", ParFechaIniAuto.IsNullable);
+                else
+                    ParFechaIniAuto.Value = ((DateTime) paquete._fechaIniAuto).ToString("yyyy-MM-dd");
                 cmd.Parameters.Add(ParFechaIniAuto);
 
 
                 SqlParameter ParFechaFinAuto = new SqlParameter();
                 ParFechaFinAuto.ParameterName = "@paq_fechaFin_automovil";
                 ParFechaFinAuto.SqlDbType = SqlDbType.Date;
-                ParFechaFinAuto.Value = ((DateTime)paquete._fechaFinAuto).ToString("yyyy-MM-dd");
+                if (paquete._fechaFinAuto == null)
+                    cmd.Parameters.AddWithValue("@paq_fechaFin_automovil", ParFechaFinAuto.IsNullable);
+                else
+                    ParFechaFinAuto.Value = ((DateTime)paquete._fechaFinAuto).ToString("yyyy-MM-dd");
                 cmd.Parameters.Add(ParFechaFinAuto);
 
                 SqlParameter ParFechaIniRest = new SqlParameter();
                 ParFechaIniRest.ParameterName = "@paq_fechaInicio_restaurante";
                 ParFechaIniRest.SqlDbType = SqlDbType.Date;
-                ParFechaIniRest.Value = ((DateTime)paquete._fechaIniRest).ToString("yyyy-MM-dd");
+                if (paquete._fechaIniRest == null)
+                    cmd.Parameters.AddWithValue("@paq_fechaInicio_restaurante", ParFechaIniRest.IsNullable);
+                else
+                    ParFechaIniRest.Value = ((DateTime)paquete._fechaIniRest).ToString("yyyy-MM-dd");
                 cmd.Parameters.Add(ParFechaIniRest);
 
 
                 SqlParameter ParFechaFinRest = new SqlParameter();
                 ParFechaFinRest.ParameterName = "@paq_fechaFin_restaurante";
                 ParFechaFinRest.SqlDbType = SqlDbType.Date;
-                ParFechaFinRest.Value = ((DateTime)paquete._fechaFinRest).ToString("yyyy-MM-dd");
+                if (paquete._fechaFinRest == null)
+                    cmd.Parameters.AddWithValue("@paq_fechaFin_restaurante", ParFechaIniAuto.IsNullable);
+                else
+                    ParFechaFinRest.Value = ((DateTime)paquete._fechaFinRest).ToString("yyyy-MM-dd");
                 cmd.Parameters.Add(ParFechaFinRest);
 
                 SqlParameter ParFechaIniHot = new SqlParameter();
                 ParFechaIniHot.ParameterName = "@paq_fechaInicio_hotel";
                 ParFechaIniHot.SqlDbType = SqlDbType.Date;
-                ParFechaIniHot.Value = ((DateTime)paquete._fechaIniHotel).ToString("yyyy-MM-dd");
+                if (paquete._fechaIniHotel == null)
+                    cmd.Parameters.AddWithValue("@paq_fechaInicio_hotel", ParFechaIniHot.IsNullable);
+                else
+                    ParFechaIniHot.Value = ((DateTime)paquete._fechaIniHotel).ToString("yyyy-MM-dd");
                 cmd.Parameters.Add(ParFechaIniHot);
 
 
                 SqlParameter ParFechaFinHot = new SqlParameter();
                 ParFechaFinHot.ParameterName = "@paq_fechaFin_hotel";
                 ParFechaFinHot.SqlDbType = SqlDbType.Date;
-                ParFechaFinHot.Value = ((DateTime)paquete._fechaFinHotel).ToString("yyyy-MM-dd");
+                if (paquete._fechaFinHotel == null)
+                    cmd.Parameters.AddWithValue("@paq_fechafin_hotel", ParFechaFinHot.IsNullable);
+                else
+                    ParFechaFinHot.Value = ((DateTime)paquete._fechaFinHotel).ToString("yyyy-MM-dd");
                 cmd.Parameters.Add(ParFechaFinHot);
 
                 SqlParameter ParFechaIniCruc = new SqlParameter();
                 ParFechaIniCruc.ParameterName = "@paq_fechaInicio_crucero";
                 ParFechaIniCruc.SqlDbType = SqlDbType.Date;
-                ParFechaIniCruc.Value = ((DateTime)paquete._fechaIniCruc).ToString("yyyy-MM-dd");
+                if (paquete._fechaIniCruc == null)
+                    cmd.Parameters.AddWithValue("@paq_fechaInicio_crucero", ParFechaIniCruc.IsNullable);
+                else
+                    ParFechaIniCruc.Value = ((DateTime)paquete._fechaIniCruc).ToString("yyyy-MM-dd");
                 cmd.Parameters.Add(ParFechaIniCruc);
 
 
                 SqlParameter ParFechaFinCruc = new SqlParameter();
                 ParFechaFinCruc.ParameterName = "@paq_fechaFin_crucero";
                 ParFechaFinCruc.SqlDbType = SqlDbType.Date;
-                ParFechaFinCruc.Value = ((DateTime)paquete._fechaFinCruc).ToString("yyyy-MM-dd");
+                if (paquete._fechaFinCruc == null)
+                    cmd.Parameters.AddWithValue("@paq_fechaFin_crucero", ParFechaFinCruc.IsNullable);
+                else
+                    ParFechaFinCruc.Value = ((DateTime)paquete._fechaFinCruc).ToString("yyyy-MM-dd");
                 cmd.Parameters.Add(ParFechaFinCruc);
 
                 SqlParameter ParFechaIniBole = new SqlParameter();
                 ParFechaIniBole.ParameterName = "@paq_fechaInicio_boleto";
                 ParFechaIniBole.SqlDbType = SqlDbType.Date;
-                ParFechaIniBole.Value = ((DateTime)paquete._fechaIniVuelo).ToString("yyyy-MM-dd");
+                if (paquete._fechaIniVuelo == null)
+                    cmd.Parameters.AddWithValue("@paq_fechaInicio_boleto", ParFechaIniBole.IsNullable);
+                else
+                    ParFechaIniBole.Value = ((DateTime)paquete._fechaIniVuelo).ToString("yyyy-MM-dd");
                 cmd.Parameters.Add(ParFechaIniBole);
 
 
                 SqlParameter ParFechaFinBole = new SqlParameter();
                 ParFechaFinBole.ParameterName = "@paq_fechaFin_boleto";
                 ParFechaFinBole.SqlDbType = SqlDbType.Date;
-                ParFechaFinBole.Value = ((DateTime)paquete._fechaFinVuelo).ToString("yyyy-MM-dd");
+                if (paquete._fechaIniVuelo == null)
+                    cmd.Parameters.AddWithValue("@paq_fechaFin_boleto", ParFechaFinBole.IsNullable);
+                else
+                    ParFechaFinBole.Value = ((DateTime)paquete._fechaFinVuelo).ToString("yyyy-MM-dd");
                 cmd.Parameters.Add(ParFechaFinBole);
                 
                 SqlParameter ParEstado = new SqlParameter();
