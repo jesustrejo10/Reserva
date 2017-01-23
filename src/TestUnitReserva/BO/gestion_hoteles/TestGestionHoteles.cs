@@ -659,7 +659,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
         /// Metodo que prueba el constructor de la clase ReservaExceptionM09
         /// </summary>
         [Test]
-        public void M09_CachefallarActualizar()
+        public void M09_ReservaExceptionM09()
         {
             ReservaExceptionM09 constructorN1 = new ReservaExceptionM09("", new ArgumentNullException());
             ReservaExceptionM09 constructorN2 = new ReservaExceptionM09("", new BOReserva.Excepciones.LogException());
