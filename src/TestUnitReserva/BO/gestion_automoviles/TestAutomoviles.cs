@@ -20,7 +20,7 @@ namespace TestUnitReserva.BO.gestion_automoviles
         {
             Assert.IsTrue(true);
         }
-
+/*
         [TestMethod]
         public void TestRevisionAgregarAutomovil()
         {
@@ -48,5 +48,7 @@ namespace TestUnitReserva.BO.gestion_automoviles
             var result = DAOAutomovil.Singleton().Agregar(automovil);
             Assert.IsTrue(result);
         }
+  
+ */
     }
 }

@@ -83,7 +83,7 @@ namespace TestUnitReserva.FO.TestGestionReclamosFO
         [Test]
         public void M16_DaoReclamoConsultarPorIdFO()
         {
-            Assert.NotNull(daoReclamo.Consultar(11));
+            Assert.NotNull(daoReclamo.Consultar(53));
         }
 
         /// <summary>

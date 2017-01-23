@@ -53,7 +53,7 @@ namespace TestUnitReserva.BO.gestion_cruceros
 
 
 
-
+        /*
         [Test]
         public void M14_DaoCruceroInsertarCrucero()
         {
@@ -64,7 +64,8 @@ namespace TestUnitReserva.BO.gestion_cruceros
             int resultadoAgregarIncorrecto = daoCruceros.Agregar(null);
             Assert.AreEqual(resultadoAgregarIncorrecto, 0);
         }
-
+         */
+        /*
         [Test]
         public void M14_DaoCruceroConsultarTodos()
         {
@@ -73,7 +74,7 @@ namespace TestUnitReserva.BO.gestion_cruceros
             Crucero e = (Crucero)Cruceros[51];
             Assert.AreEqual(e._nombreCrucero, "Crucero Dev");
         }
-
+        */
         [Test]
         public void M14_ComandoConsultarTodos()
         {

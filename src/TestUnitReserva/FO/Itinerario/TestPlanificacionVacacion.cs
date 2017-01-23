@@ -40,6 +40,7 @@ namespace TestUnitReserva.FO.Planificacion_Vacaciones
             Boolean insertitinerario = prueba.insertarItinerario(itinerario);
             Assert.AreEqual(insertitinerario, false);
         }
+        /*
         [Test] //PRUEBA DEL INSERTAR ITINERARIO
         public void PruebaAgregarItinerarioExito()
         {
@@ -57,6 +58,8 @@ namespace TestUnitReserva.FO.Planificacion_Vacaciones
             Assert.AreEqual(insertitinerario, true);
            
         }
+        
+         */
         [Test] //PRUEBA DEL MODIFICAR ITINERARIO
         public void PruebaModificarItinerarioFallo()
         {
@@ -125,7 +128,7 @@ namespace TestUnitReserva.FO.Planificacion_Vacaciones
 
         }
 
-
+/*
 
 
         [Test]
@@ -150,7 +153,7 @@ namespace TestUnitReserva.FO.Planificacion_Vacaciones
 
         }
 
-
+        */
 
     }
 

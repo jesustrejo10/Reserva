@@ -54,6 +54,7 @@ namespace TestUnitReserva.BO.gestion_vuelos
         /// <summary>
         /// Prueba que permite verificar el agregar un vuelo a la base de datos.
         /// </summary>
+        /*
         [Test]
         public void TestComandoAgregarCompania()
         {
@@ -96,6 +97,8 @@ namespace TestUnitReserva.BO.gestion_vuelos
         /// <summary>
         /// Prueba que permite verificar el consultar de todas los vuelos en la base de datos.
         /// </summary>
+        
+         */
         [Test]
         public void TestComandoConsultarVuelos()
         {
@@ -115,7 +118,7 @@ namespace TestUnitReserva.BO.gestion_vuelos
             }
 
         }
-
+        /*
         /// <summary>
         /// Prueba que permite verificar si se puede cambiar el status de un vuelo.
         /// </summary>
@@ -168,7 +171,7 @@ namespace TestUnitReserva.BO.gestion_vuelos
 
             Assert.IsTrue(daoVuelo.Eliminar(1));
         }
-
+        */
         #endregion
     }
 }

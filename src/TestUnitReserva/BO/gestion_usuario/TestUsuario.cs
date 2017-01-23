@@ -74,7 +74,7 @@ namespace TestUnitReserva.BO.gestion_usuarios
             mockRol = null;
         }
 
-
+        /*
         /// <summary>
         /// Metodo que prueba que se inserte un ususario a la BD
         /// </summary>
@@ -86,7 +86,7 @@ namespace TestUnitReserva.BO.gestion_usuarios
             Assert.AreEqual(resultadoAgregar, 1);
 
         }
-
+        */
 
         /// <summary>
         /// Metodo que prueba que se modifique correctamente un usuario

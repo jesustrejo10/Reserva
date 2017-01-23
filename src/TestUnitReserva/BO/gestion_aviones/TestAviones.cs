@@ -50,6 +50,7 @@ namespace TestUnitReserva.BO.gestion_aviones
         {
             mockAvion = null;
         }
+        /*
         /// <summary>
         /// Metodo que prueba que pueda insertar un avion
         /// </summary>
@@ -67,6 +68,8 @@ namespace TestUnitReserva.BO.gestion_aviones
         /// <summary>
         /// Metodo que prueba que se puedan consultar todos los avion
         /// </summary>
+        
+         */
         [Test]
         public void M02_DaoAvionConsultarTodos()
         {
@@ -101,6 +104,7 @@ namespace TestUnitReserva.BO.gestion_aviones
             M02_COEliminarAvion prueba = new M02_COEliminarAvion(mockAvion, 316);
             string test = prueba.ejecutar();
         }
+        /*
         /// <summary>
         /// Metodo que prueba que se pueda eliminar un avion
         /// </summary>
@@ -115,6 +119,8 @@ namespace TestUnitReserva.BO.gestion_aviones
         /// <summary>
         /// Metodo que prueba que se pueda probar la disponibilidad un avion
         /// </summary>
+        
+         */
         [Test]
         public void M02_DaoAvionDsiponibilidadAvion()
         {

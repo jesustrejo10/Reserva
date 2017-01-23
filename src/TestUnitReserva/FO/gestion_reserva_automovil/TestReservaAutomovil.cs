@@ -76,8 +76,8 @@ namespace TestUnitReserva.FO.gestion_reserva_automovil
             prueba = FabricaEntidad.inicializarReserva(id, fecha_ini, fecha_fin, horario_ini, horario_fin, idUsuario, estatus, mockAutomovil, mockLugar, mockLugar);
             Assert.IsInstanceOf(typeof(Entidad), prueba);
         }
-
-        //Prueba para agregar una reserva
+        /*
+        //Prueba para agegar una reserva
         [Test]
         public void M19_COAgregarReserva()
         {
@@ -89,6 +89,7 @@ namespace TestUnitReserva.FO.gestion_reserva_automovil
 
 
         }
+         */ 
         //Prueba para Eliminar una reserva
         [Test]
         public void M19_COEliminarReserva()

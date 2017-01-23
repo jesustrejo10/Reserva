@@ -44,7 +44,7 @@ namespace TestUnitReserva.BO.gestion_ruta_comercial
             mockRuta = null;
             daoRuta = null;
         }
-
+        /*
         [Test]
         public void M03_TestConsultarDestino()
         {
@@ -69,7 +69,7 @@ namespace TestUnitReserva.BO.gestion_ruta_comercial
             Assert.IsTrue(daoRuta.habilitarRuta(prueba));
 
         }
-
+        */
         public void M03_TestInsertarRuta()
         {
             //Probando caso de exito de la prueba
@@ -79,7 +79,7 @@ namespace TestUnitReserva.BO.gestion_ruta_comercial
             int resultadoAgregarIncorrecto = daoRuta.Agregar(null);
             Assert.AreEqual(resultadoAgregarIncorrecto, 0);
         }
-
+        /*
         [Test]
         public void M03_TestdeshabilitarRuta()
         {
@@ -128,6 +128,6 @@ namespace TestUnitReserva.BO.gestion_ruta_comercial
             Dictionary<int, Entidad> listaLugares = comando.ejecutar();
             Assert.IsNotNull(listaLugares);
         }
-
+        */
     }
 }

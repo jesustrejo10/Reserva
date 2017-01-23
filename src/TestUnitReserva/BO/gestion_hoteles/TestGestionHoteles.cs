@@ -30,10 +30,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
         private Hotel mockHotel;
         private Hotel mockHotell;
         private Hotel mock;
-
         private Hotel mockHotel2;
-        // DAOHotel daoHotel;
-
         IDAOHotel daoHotel;
 
 
@@ -50,10 +47,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
             mockHotel = new Hotel("HOtel desde preuba unit3", "hotel", "hotel", "hotel", 1, 1, mockCiudad);
             mockHotell = new Hotel(999, "HOtel desde pr", "hotel", "hotel", "hotel", 1, 1, mockCiudad);
             daoHotel = new DAOHotel();
-
             mock = new Hotel(6, "HOtel", "hotel", "hotel", "prueba", 1, 1, mockCiudad, 0);
-
-
         }
         /// <summary>
         /// Método que se ejecuta cada vez que termina de correr una prueba;
@@ -172,7 +166,6 @@ namespace TestUnitReserva.BO.gestion_hoteles
             Assert.AreEqual(prueba2._nombre, "HOtel2");
             Assert.AreEqual(prueba3._nombre, "HOtel3");
         }
-        //model
 
         /// <summary>
         /// Metodo Agregar hotel
@@ -251,7 +244,6 @@ namespace TestUnitReserva.BO.gestion_hoteles
             Assert.AreEqual(prueba._pais, "Venezuela");
 
         }
-        //controller/patron comando/M09
 
         /// <summary>
         /// Metodo que prueba Agregar un hotel, instanciando  Patron comando
@@ -281,18 +273,6 @@ namespace TestUnitReserva.BO.gestion_hoteles
             Assert.IsInstanceOf(typeof(Entidad), hotel);
 
         }
-        /*/// <summary>
-        /// Metodo que verifica controller consulta de hotel
-        /// </summary>
-        [Test] //Falla pero no es porque este mala sino porque es imposible que falle
-        public void M09_COCOnsultarHotelerror()
-        {
-            M09_COConsultarHotel prueba = new M09_COConsultarHotel(87897987);
-            Assert.Throws<ReservaExceptionM09>(() => prueba.ejecutar());
-
-
-        }*/
-        //NO CORREO
 
         /// <summary>
         /// Metodo que prueba disponiblididad un hotel, instanciando  Patron comando
@@ -308,18 +288,6 @@ namespace TestUnitReserva.BO.gestion_hoteles
         }
 
         /// <summary>
-        /// Metodo que prueba disponiblididad un hotel, instanciando  Patron comando
-        /// </summary>
-        //[Test] //Falla pero no es porque este mala sino porque es imposible que falle
-        //public void M09_CODisponibilidadHotelerror()
-        //{
-        //    M09_CODisponibilidadHotel prueba = new M09_CODisponibilidadHotel(null, 7);
-        //    Assert.Throws<ReservaExceptionM09>(() => prueba.ejecutar());
-
-
-
-        //}//NO CORREO
-        /// <summary>
         /// Metodo que prueba Eliminar un hotel, instanciando  Patron comando
         /// </summary>
         [Test]
@@ -329,25 +297,26 @@ namespace TestUnitReserva.BO.gestion_hoteles
             M09_COEliminarHotel prueba = new M09_COEliminarHotel(mockHotell, 999);
             String test = prueba.ejecutar();
             Assert.AreEqual(test, "Se elimino exitosamente el hotel");
-            ///fallida
 
 
         }
 
+        /*
         /// <summary>
         /// Metodo que prueba Eliminar un hotel fallido, instanciando  Patron comando
         /// </summary>
-        //[Test] //Falla pero no es porque este mala sino porque es imposible que falle
-        //public void M09_COEliminarHotelerror()
-        //{
+        [Test] //Falla pero no es porque este mala sino porque es imposible que falle
+        public void M09_COEliminarHotelerror()
+        {
+            
+            M09_COEliminarHotel prueba = new M09_COEliminarHotel(null, 999);
+            Assert.Throws<NullReferenceException>(() => prueba.ejecutar());
 
-        //    M09_COEliminarHotel prueba = new M09_COEliminarHotel(null, 999);
-        //    Assert.Throws<ReservaExceptionM09>(() => prueba.ejecutar());
 
 
-
-        //}//NO CORREO
-        /// <summary>
+        }//NO CORREO
+        
+         */ /// <summary>
         /// Metodo que prueba Modificar un hotel, instanciando  Patron comando
         /// </summary>
         [Test]

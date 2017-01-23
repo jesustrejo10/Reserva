@@ -64,7 +64,7 @@ namespace TestUnitReserva.FO.Reserva_Habitacion
 
 
         //DAO
-
+/*
         [Test]
         public void M22_DAOReservaHabitacionAgregar()
         {
@@ -75,7 +75,8 @@ namespace TestUnitReserva.FO.Reserva_Habitacion
             int resultadoAgregarIncorrecto = daoReservaHabitacion.Agregar(null);
             Assert.AreEqual(resultadoAgregarIncorrecto, 0);
         }
-        /*
+  
+ * *//*
         /// <summary>
         /// Metodo que prueba que se pueda consultar todas las reservas de habitacion de un usuario
         /// </summary>

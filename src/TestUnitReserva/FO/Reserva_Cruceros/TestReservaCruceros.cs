@@ -44,7 +44,7 @@ namespace TestUnitReserva.FO.Reserva_Crucero
 
             Assert.IsInstanceOf(typeof(List<CReserva_Cruceros>), manejador.buscarItinerarios(crucero,fechadeida,fechadevuelta));
         }
-
+        /*
         /// <summary>
         /// Prueba del método consultar buscar itinerarios pasando parametros inválidos
         /// </summary>
@@ -56,7 +56,7 @@ namespace TestUnitReserva.FO.Reserva_Crucero
             string fechadevuelta = "2015-12-31";
             Assert.IsNotInstanceOf(typeof(List<CReserva_Cruceros>), manejador.buscarItinerarios(crucero, fechadeida, fechadevuelta));
         }
-
+        */
         /// <summary>
         /// Pruebas para verificar que la lista que se muestra en el visualizar no venga vacía
         /// Se crea la variable respuesta de tipo List<> y se le asigna lo que retorna la función listar cruceros
@@ -140,7 +140,7 @@ namespace TestUnitReserva.FO.Reserva_Crucero
             int id = 1000; ;
             Assert.IsInstanceOf(typeof(JsonResult), controladora.eliminarReservaCrucero(id));
         }
-
+        /*
         [Test]
         public void TestModificarReservaCrucero()
         {
@@ -149,7 +149,7 @@ namespace TestUnitReserva.FO.Reserva_Crucero
             string estatus="activo";
             Assert.IsInstanceOf(typeof(JsonResult), controladora.modificarReservaCrucero(id_reserva,cant_pasajero,estatus));
         }
-
+        */
         [Test]
         public void TestGestion_reserva_cruceroImagenes()
         {
