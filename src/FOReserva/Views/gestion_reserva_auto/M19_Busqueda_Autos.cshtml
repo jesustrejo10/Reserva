@@ -1,4 +1,4 @@
-﻿@model List<FOReserva.Models.Autos.CReserva_Autos_Perfil>
+﻿@model List<FOReserva.Models.gestion_reserva_automovil.CAutomovil>
 @{
     ViewBag.Title = "Resultados Automoviles";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -24,26 +24,25 @@
             { 
                 <li class="col-lg-12">
                     <div class="shop-item clearfix">
-                        <input type="hidden" name="fechaini" value="@item.FechaIni">
-                        <input type="hidden" name="fechafin" value="@item.FechaFin">
-                        <input type="hidden" name="horaini" value="@item.HoraIni">
-                        <input type="hidden" name="horafin" value="@item.HoraFin">
-                        <input type="hidden" name="ciudadori" value="@item.CiudadOri">
-                        <input type="hidden" name="ciudaddes" value="@item.CiudadDes">
-                        <input type="hidden" name="matricula" value="@item.Autos.Matricula">
-                        <input type="hidden" name="modelo" value="@item.Autos.Modelo">
-                        <input type="hidden" name="fabricante" value="@item.Autos.Fabricante">
-                        <input type="hidden" name="tipo" value="@item.Autos.Tipo">
-                        <input type="hidden" name="color" value="@item.Autos.Color">
-                        <input type="hidden" name="transmision" value="@item.Autos.Transmision">
-                        <input type="hidden" name="ciudad" value="@item.Autos.Ciudad">
-                        <input type="hidden" name="precio" value="@item.Autos.Precio">
-                        <input type="hidden" name="anio" value="@item.Autos.Anio">
-                        <input type="hidden" name="pasajero" value="@item.Autos.Pasajeros">
-                        <input type="hidden" name="disponibilidad" value="@item.Autos.Disponibilidad">
+                        <input type="hidden" name="matricula" value="@item._matricula">
+                        <input type="hidden" name="modelo" value="@item._modelo">
+                        <input type="hidden" name="fabricante" value="@item._fabricante">
+                        <input type="hidden" name="fechaini" value="@item._anio">
+                        <input type="hidden" name="fechafin" value="@item._kilometraje">
+                        <input type="hidden" name="horaini" value="@item._cantPasajeros">
+                        <input type="hidden" name="horafin" value="@item._tipo">
+                        <input type="hidden" name="ciudadori" value="@item._precioCompra">
+                        <input type="hidden" name="ciudaddes" value="@item._precioAlquiler">
+                        
+                        <input type="hidden" name="tipo" value="@item._penalidadDiaria">
+                        <input type="hidden" name="color" value="@item._fechaRegistro">
+                        <input type="hidden" name="transmision" value="@item._color">
+                        <input type="hidden" name="ciudad" value="@item._disponibilidad">
+                        <input type="hidden" name="precio" value="@item._transmision">
+                        <input type="hidden" name="anio" value="@item._idCiudad">
                         <div class="shop-item-summary ">
                             
-                            <h2>@item.Autos.Fabricante - @item.Autos.Modelo</h2>
+                            <h2>@item._fabricante - @item._modelo</h2>
                             
                             <a class="shop-item-image" href="shop-single-left.html">
                                 <img class="img-responsive" src="@Url.Content("~/Content/assets/images/demo/shop/home/nodisponible.jpg")" alt="shop first image" width="200" />
@@ -52,11 +51,11 @@
                             <div class="shop-item-summary">
                                 <div class="col-md-6">
                                     <p>
-                                        <span>Tipo:&nbsp;</span><strong>@item.Autos.Tipo</strong><br>
-                                        <span>Color:&nbsp;<strong>@item.Autos.Color</strong></span><br>
-                                        <span>Transmisión:&nbsp;<strong>@item.Autos.Transmision</strong></span><br>
-                                        <span>Año:&nbsp;<strong>@item.Autos.Anio</strong></span><br>
-                                        <span>Pasajeros:&nbsp;<strong>@item.Autos.Pasajeros</strong></span><br>
+                                        <span>Tipo:&nbsp;</span><strong>@item._tipo</strong><br>
+                                        <span>Color:&nbsp;<strong>@item._color</strong></span><br>
+                                        <span>Transmisión:&nbsp;<strong>@item._transmision</strong></span><br>
+                                        <span>Año:&nbsp;<strong>@item._anio</strong></span><br>
+                                        <span>Pasajeros:&nbsp;<strong>@item._cantPasajeros</strong></span><br>
                                     </p>
                                     </div>
                                 </div>
@@ -64,7 +63,7 @@
 
                             </div>
                         <div class="shop-item-buttons text-right">
-                            <span style="font-size: 20px; color: black"><strong>Bs. @item.Autos.Precio</strong></span><br>
+                            <span style="font-size: 20px; color: black"><strong>Bs. @item._precioAlquiler</strong></span><br>
                             <br><br>
                             <button type="submit" id="reservaAutos" class="btn btn-primary">Reserva</button>
                         </div>
