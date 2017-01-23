@@ -9,6 +9,9 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando
 {
+    /// <summary>
+    /// Comando para consultar reclamos
+    /// </summary>
     public class M16_COConsultarReclamo : Command<Dictionary<int, Entidad>>
     {
             /// <summary>

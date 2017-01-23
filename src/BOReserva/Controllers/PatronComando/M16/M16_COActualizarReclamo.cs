@@ -9,8 +9,15 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando.M16
 {
+    /// <summary>
+    /// Comando destinado a realizar las respectivas operaciones necesarias
+    /// para actualizar el estado de un reclamo
+    /// </summary>
     public class M16_COActualizarReclamo : Command<String>
     {
+        /// <summary>
+        /// Atributos de la clase
+        /// </summary>
         Reclamo _reclamo;
         int _idReclamo;
         int _estado;

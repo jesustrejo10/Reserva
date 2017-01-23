@@ -10,6 +10,9 @@ using BOReserva.Excepciones.M16;
 
 namespace BOReserva.Controllers.PatronComando
 {
+    /// <summary>
+    /// Comando para agregar un reclamo a la base de datos
+    /// </summary>
     public class M16_COAgregarReclamo: Command<String>
     {
         Reclamo _reclamo;
