@@ -128,6 +128,11 @@ namespace FOReserva.DataAccess.Domain
             return new CAutomovil(matricula, modelo, fabricante); 
         }
 
+        public static CAutomovil inicializarAutomovil(string matricula, string modelo, string fabricante, string tipo, string color, string transmision, int fk_ciudad, double precioAlquiler, int anio, int cantPasajeros, int disponibilidad, string fechaini, string fechafin, string horaini, string horafin, int ciudadorigen, int ciudaddestino)
+        {
+            return new CAutomovil(matricula, modelo, fabricante, tipo, color, transmision, fk_ciudad, precioAlquiler, anio, cantPasajeros, disponibilidad, fechaini, fechafin, horaini, horafin, ciudadorigen, ciudaddestino);
+        }
+
         public static CAutomovil inicializarAutomovil(string matricula, string modelo, string fabricante, string tipo, string color, string transmision, int fk_ciudad, double precioAlquiler, int anio, int cantPasajeros, int disponibilidad)
         {
             return new CAutomovil(matricula, modelo, fabricante, tipo, color, transmision, fk_ciudad, precioAlquiler, anio, cantPasajeros, disponibilidad);
