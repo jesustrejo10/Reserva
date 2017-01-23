@@ -63,6 +63,7 @@
     <Compile Include="BO\gestion_comida_vuelo\TestComida.cs" />
     <Compile Include="BO\gestion_comida_vuelo\TestComidaVuelo.cs" />
     <Compile Include="BO\gestion_cruceros\TestCruceros.cs" />
+    <Compile Include="BO\gestion_hoteles\Mocksdeayuda.cs" />
     <Compile Include="BO\gestion_hoteles\TestGestionHoteles.cs" />
     <Compile Include="BO\gestion_hoteles\TestLugar.cs" />
     <Compile Include="BO\gestion_reclamos_bo_fo\TestGestionReclamosBO.cs" />
@@ -89,7 +90,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
