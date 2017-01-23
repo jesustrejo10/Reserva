@@ -121,6 +121,23 @@
                         if (data === "1") {
                             alert("Se registro el reclamo exitosamente");
                             $('#AgregarReclamo')[0].reset();
+                            var url = '/gestion_reclamos/M16_AgregarReclamo';
+                            var method = 'GET';
+                            var data = '';
+
+                            $.ajax(
+                                {
+                                    url: url,
+                                    type: method,
+                                    data: data,
+                                    success: function (data, textStatus, jqXHR) {
+                                        $("#contenedorPerfil").empty();
+                                        $("#contenedorPerfil").append(data);
+                                    },
+                                    error: function (jqXHR, textStatus, errorThrown) {
+                                        alert(errorThrown);
+                                    }
+                                });
                         } else {
                             alert(data);
                         }

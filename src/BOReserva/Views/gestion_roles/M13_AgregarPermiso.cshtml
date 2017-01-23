@@ -1,6 +1,6 @@
 @model BOReserva.Models.gestion_roles.CModulo_detallado
 
-<!--Indico que, estoy abriendo un formulario que tendra como accion del submit, el controlador gestion_roles"Controller", 
+<!--Indico que, estoy abriendo un formulario que tendra como accion del submit, el controlador gestion_roles"Controller",
     utilizara el metodo agregarRol
     le pasara la informacion mediante un POST-->
 
@@ -19,20 +19,21 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-12" style="margin-top:10px;">
-                            <div class="col-xs-6"> 
-                                <!--se agrega el campo para insertar el nombre del nuevo rol-->                          
-                                <label for="nombreRol">Inserte nombre del permiso (*)
+                            <div class="col-xs-6">
+                                <!--se agrega el campo para insertar el nombre del nuevo rol-->
+                                <label for="nombreRol">
+                                    Inserte nombre del permiso (*)
                                 </label>
                                 @Html.TextBoxFor(m => m.Nombre, null, new { @class = "form-control", @placeholder = "Nombre del Permiso", id = "nombre_rol" })
-                                </div>
+                            </div>
                             <div class="col-xs-6">
                                 <label for="nombreRol">
-                                    Inserte nombre del permiso (*)                             
+                                    Inserte nombre del permiso (*)
                                 </label>
                                 @Html.TextBoxFor(m => m.Url, null, new { @class = "form-control", @placeholder = "Url", id = "url" })
                             </div>
                         </div>
-                        <div>&nbsp;</div>                       
+                        <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
                             <button type="submit" id="agregarpermiso" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
                         </div>
@@ -47,7 +48,7 @@
     </div>
 
     <script>
-    //Accion del boton agregarrol
+        //Accion del boton agregarrol
         $("#agregarpermiso").click(function (e) {
             e.preventDefault();
             var form = $("#formagreagarpermiso");
@@ -67,10 +68,20 @@
                     data: form.serialize(),
                     type: 'POST',
                     success: function (data) {
-                        alert("Se guardo");
                         $('#formagreagarpermiso')[0].reset();
                     }
+                });
 
+                $.ajax({
+                    url: '/gestion_roles/M13_VisualizarPermiso',
+                    type: 'GET',
+                    success: function (data, textStatus, jqXHR) {
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
                 });
             }
         });

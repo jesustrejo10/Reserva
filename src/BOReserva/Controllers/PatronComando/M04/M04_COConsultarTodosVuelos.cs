@@ -7,6 +7,7 @@ using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.DataAccessObject;
 using System.Data.SqlClient;
 using BOReserva.Excepciones;
+using BOReserva.DataAccess.DAO.InterfacesDAO;
 
 namespace BOReserva.Controllers.PatronComando.M04
 {

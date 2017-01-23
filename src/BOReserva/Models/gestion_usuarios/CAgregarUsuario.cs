@@ -8,6 +8,18 @@ using BOReserva.DataAccess.Domain;
 
 namespace BOReserva.Models.gestion_usuarios
 {
+    /// <summary>
+    /// Constructor de la clase
+    /// </summary>
+    /// <param name="_correo">Correo del usuario</param>
+    /// <param name="_nombre">Nombre del usuario</param>
+    /// <param name="_apellido">Apellido del usuario</param>
+    /// <param name="_contrasena">Contrasena del usuario</param>
+    /// <param name="_rol">Rol del usuario</param>
+    /// <param name="_activo">Activo del usuario</param>
+    /// <param name="_id">Id del usuario</param>
+    /// <param name="_fechaCreacion">fechaCreacion del usuario</param>
+    /// <param name="_rols">rols del usuario</param>
     public class CAgregarUsuario
     {
 
@@ -32,6 +44,10 @@ namespace BOReserva.Models.gestion_usuarios
             set { _contrasena = value; }
         }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="pass">password del usuario</param>
         private String HashPassword(String pass)
         {
             if (pass != null)

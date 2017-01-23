@@ -291,7 +291,8 @@ namespace TestUnitReserva.BO.gestion_hoteles
             Assert.Throws<ReservaExceptionM09>(() => prueba.ejecutar());
 
 
-        }*/ //NO CORREO
+        }*/
+        //NO CORREO
 
         /// <summary>
         /// Metodo que prueba disponiblididad un hotel, instanciando  Patron comando

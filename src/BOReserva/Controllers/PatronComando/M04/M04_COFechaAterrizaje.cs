@@ -1,4 +1,5 @@
-﻿using BOReserva.DataAccess.DataAccessObject;
+﻿using BOReserva.DataAccess.DAO.InterfacesDAO;
+using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.Domain;
 using BOReserva.Excepciones;
 using BOReserva.Excepciones.M04;
@@ -42,7 +43,7 @@ namespace BOReserva.Controllers.PatronComando.M04
         {
             try
             {
-                DAOVuelo exec = (DAOVuelo)FabricaDAO.instanciarDAOVuelo();
+                IDAOVuelo exec = (IDAOVuelo)FabricaDAO.instanciarDAOVuelo();
                 return (exec.ConsultarDatosAterrizaje(_idRuta, _fechaDespegue, _idAvion));
             }
             catch (ReservaExceptionM04 ex)

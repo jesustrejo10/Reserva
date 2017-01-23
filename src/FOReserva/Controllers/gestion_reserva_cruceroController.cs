@@ -5,6 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using FOReserva.Models.Cruceros;
 using FOReserva.Servicio;
+using FOReserva.Controllers.PatronComando;
+using FOReserva.Controllers;
+using FOReserva.DataAccess.Domain;
 
 
 namespace FOReserva.Controllers
@@ -66,12 +69,16 @@ namespace FOReserva.Controllers
         public ActionResult gestion_reserva_crucero_confirmar(string id_crucero, string id_origen, string id_destino, string id_inicio, string id_fin, string pasajeros_num, string fk_ruta, string fk_crucero)
         {
             CReserva_Cruceros reserva = new CReserva_Cruceros(id_crucero, id_origen, id_destino, fk_crucero, id_inicio, id_fin, pasajeros_num, fk_ruta);
-            manejadorSQLCrucero manejador = new manejadorSQLCrucero();
-            ///Se instancia un try para la consulta a la base de datos
+            DateTime fechaIni = DateTime.Parse(id_inicio);
+            int pasaj = Int32.Parse(pasajeros_num);
+            int cruc = Int32.Parse(fk_crucero);
+            int ruta = Int32.Parse(fk_ruta);
             try
             {
-
-                manejador.CrearReserva(reserva);
+                Entidad e = FabricaEntidad.InstanciarReservaCrucero(pasaj, 1, cruc, ruta, fechaIni, "activo");
+                Command<String> comando = FabricaComando.crearM22AgregarReserva(e);
+                String respuesta = comando.ejecutar();
+            
                 return View();
             }
             ///Se atrapa las Exception de Tipo NullReference
@@ -275,6 +282,7 @@ namespace FOReserva.Controllers
             ///Se instancia un try para la consulta a la base de datos
             try
             {
+                Response.Write("aqui ");
                 manejadorSQLCrucero manejador = new manejadorSQLCrucero();
                 manejador.modificarReserva(id_reserva, cant_pasajero, estatus);
             }
