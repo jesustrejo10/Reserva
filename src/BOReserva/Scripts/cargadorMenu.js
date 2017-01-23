@@ -651,7 +651,6 @@ jQuery(document).ready(function () {
     // INICIO DE M16_GESTON_RECLAMO
     $("#M16_AgregarReclamo").click(function (e) {
         e.preventDefault();
-        alert('entro aqui karli');
         var url = '/gestion_reclamos/M16_AgregarReclamo';
         var method = 'GET';
         var data = '';
