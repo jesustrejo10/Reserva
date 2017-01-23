@@ -6,8 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.Controllers.PatronComando
+namespace BOReserva.Controllers.PatronComando.M14
 {
+    /// <summary>
+    /// Comando destinado a Realizar las respectivas operaciones necesarias
+    /// para Listar las cabinas de los cruceros a la BD
+    /// </summary>
+
     public class M14_COListarCabinaCrucero : Command<Dictionary<int, Entidad>>
     {
         string valor;
