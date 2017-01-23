@@ -40,43 +40,50 @@ namespace BOReserva.Controllers
                 return PartialView(model);
             }
 
-            /// <summary>
-            /// Método que se utiliza para guardar un vehículo ingresado
-            /// </summary>
-            /// <param name="model">Datos que provienen de un formulario de la vista parcial M08_AgregarAutomovil</param>
-            /// <returns>Retorna un JsonResult</returns>
-            [HttpPost]
-            public JsonResult saveVehicle(CAgregarAutomovil model)
+        /// <summary>
+        /// Método que se utiliza para guardar un vehículo ingresado
+        /// </summary>
+        /// <param name="model">Datos que provienen de un formulario de la vista parcial M08_AgregarAutomovil</param>
+        /// <returns>Retorna un JsonResult</returns>
+        [HttpPost]
+        public JsonResult saveVehicle(CAgregarAutomovil model)
+        {   
+            String matricula = model._matricula.ToUpper();
+            String anio = model._anio.ToString();
+            String cantpasajeros = model._cantpasajeros.ToString();
+            String ciudad = gestion_automovilesController._ciudad;
+            String color = model._color;
+            String fabricante = model._fabricante;
+            String fecharegistro = model._fecharegistro.ToString();
+            String kilometraje = model._kilometraje.ToString();
+            String modelo = model._modelo;
+            String pais = gestion_automovilesController._pais;
+            String penalidaddiaria = model._penalidaddiaria.ToString();
+            String precioalquiler = model._precioalquiler.ToString();
+            String preciocompra = model._preciocompra.ToString();
+            String tipovehiculo = model._tipovehiculo;
+            String transmision = model._transmision;
+            String disponibilidad = "1";
+            Command<int> Comandofk_lugar = FabricaComando.consultarIDlugar(_ciudad);
+            String fk_ciudad = Convert.ToString( Comandofk_lugar.ejecutar() );
+
+            Entidad carronuevo = FabricaEntidad.CrearAutomovil(matricula, modelo, fabricante, anio, tipovehiculo, kilometraje,
+                                                                        cantpasajeros, preciocompra, precioalquiler, penalidaddiaria, fecharegistro,
+                                                                        color, disponibilidad, transmision, pais, ciudad, fk_ciudad);  //SE CREA EL VEHICULO
+            Command<bool> ComandoVerificaMatricula = FabricaComando.existeMatriculaAutomovil(FabricaEntidad.CrearAutomovil(matricula));
+            if (ComandoVerificaMatricula.ejecutar())
             {
-
-                String matricula = model._matricula.ToUpper();
-                String anio = model._anio.ToString();
-                String cantpasajeros = model._cantpasajeros.ToString();
-                String ciudad = gestion_automovilesController._ciudad;
-                String color = model._color;
-                //String disponibilidad = model._disponibilidad.ToString();
-                String fabricante = model._fabricante;
-                String fecharegistro = model._fecharegistro.ToString();
-                String kilometraje = model._kilometraje.ToString();
-                String modelo = model._modelo;
-                String pais = gestion_automovilesController._pais;
-                String penalidaddiaria = model._penalidaddiaria.ToString();
-                String precioalquiler = model._precioalquiler.ToString();
-                String preciocompra = model._preciocompra.ToString();
-                String tipovehiculo = model._tipovehiculo;
-                String transmision = model._transmision;
-                String disponibilidad = "1";
-                String fk_ciudad = "0";
-                Entidad carronuevo = FabricaEntidad.CrearAutomovil(matricula, modelo, fabricante, anio, tipovehiculo, kilometraje,
-                                                                         cantpasajeros, preciocompra, precioalquiler, penalidaddiaria, fecharegistro,
-                                                                         color, disponibilidad, transmision, pais, ciudad, fk_ciudad);  //SE CREA EL VEHICULO
-                                                                                                                                        //manejadorSQL buscarid = new manejadorSQL();
-                                                                                                                                        //int id_ciudad = buscarid.MBuscaridciudadBD(_ciudad, pais);
-                                                                                                                                        //String agrego_si_no = carronuevo.MAgregaraBD(carronuevo, id_ciudad); //SE AGREGA A LA BD RETORNA 1 SI SE AGREGA Y 0 SINO LO LOGRA
-
-                //return (Json(agrego_si_no));
-                return (Json("GUARDADO"));
+                Command<bool> ComandoGuardarAutomovil = FabricaComando.agregarAutomovil(carronuevo);
+                if (ComandoGuardarAutomovil.ejecutar())
+                {
+                    //return RedirectToAction("asddasd",this);
+                    //return nombremetodo(dsadas)
+                    return (Json("si"));
+                }
+                return (Json("no"));
             }
+            return (Json("no"));
+        }
 
             #endregion
 
@@ -385,12 +392,12 @@ namespace BOReserva.Controllers
         [HttpPost]
         public ActionResult checkplaca(String matricula)
         {    
-            Command<bool> Comando = FabricaComando.existeMatriculaAutomovil(FabricaEntidad.CrearAutomovil(matricula));
+            Command<bool> Comando = FabricaComando.existeMatriculaAutomovil(FabricaEntidad.CrearAutomovil(matricula.ToUpper()));
             if (Comando.ejecutar())
             {
-                return (Json("no"));
+                return (Json("si"));
             }
-            return (Json("si"));
+            return (Json("no"));
             
         }
 

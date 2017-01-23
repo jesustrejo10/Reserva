@@ -236,11 +236,11 @@
                     data: form.serialize(),
                     type: 'POST',
                     success: function (data) {
-                        if (data === "1") {
-                            alert("Se registro el vehiculo exitosamente");
+                        if (data === "si") {
+                            alert("Se registro el Automovil exitosamente");
                             $('#formSaveVehicle')[0].reset();
                         } else {
-                            alert(data);
+                            alert("no se pudo registrar el Automovil, Intentelo nuevalmente");
                         }
                     }
                 });

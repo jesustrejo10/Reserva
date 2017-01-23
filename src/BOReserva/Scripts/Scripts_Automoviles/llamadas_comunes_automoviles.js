@@ -26,9 +26,10 @@
                     cache: false,
                     type: "POST",
                     success: function (data) {
-                        if (data == "1") {
+                        if (data == "no") {
                             alert("Esa matricula ya esta registrada");
                             field.value = '';
+                           
                         }
                     },
                     error: function (reponse) {

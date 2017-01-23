@@ -22,13 +22,12 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class RecursoDAOM08 {
+    public class RecursoDAOM08 {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
-        internal static string procedimientoCambiarEstatus;
-
+        
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal RecursoDAOM08() {
         }
@@ -37,7 +36,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BOReserva.DataAccess.DataAccessObject.M08.RecursoDAOM08", typeof(RecursoDAOM08).Assembly);
@@ -52,7 +51,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -64,7 +63,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         /// <summary>
         ///   Looks up a localized string similar to aut_anio.
         /// </summary>
-        internal static string anio {
+        public static string anio {
             get {
                 return ResourceManager.GetString("anio", resourceCulture);
             }
@@ -73,25 +72,25 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         /// <summary>
         ///   Looks up a localized string similar to @aut_anio.
         /// </summary>
-        internal static string aut_anio {
+        public static string aut_anio {
             get {
                 return ResourceManager.GetString("aut_anio", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @aut_cantpasajero.
+        ///   Looks up a localized string similar to @aut_cantpasajeros.
         /// </summary>
-        internal static string aut_cantpasajero {
+        public static string aut_cantpasajeros {
             get {
-                return ResourceManager.GetString("aut_cantpasajero", resourceCulture);
+                return ResourceManager.GetString("aut_cantpasajeros", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to @aut_color.
         /// </summary>
-        internal static string aut_color {
+        public static string aut_color {
             get {
                 return ResourceManager.GetString("aut_color", resourceCulture);
             }
@@ -100,7 +99,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         /// <summary>
         ///   Looks up a localized string similar to @aut_disponibilida.
         /// </summary>
-        internal static string aut_disponibilida {
+        public static string aut_disponibilida {
             get {
                 return ResourceManager.GetString("aut_disponibilida", resourceCulture);
             }
@@ -109,7 +108,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         /// <summary>
         ///   Looks up a localized string similar to @aut_fabricante.
         /// </summary>
-        internal static string aut_fabricante {
+        public static string aut_fabricante {
             get {
                 return ResourceManager.GetString("aut_fabricante", resourceCulture);
             }
@@ -118,7 +117,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         /// <summary>
         ///   Looks up a localized string similar to @aut_fecharegistro.
         /// </summary>
-        internal static string aut_fecharegistro {
+        public static string aut_fecharegistro {
             get {
                 return ResourceManager.GetString("aut_fecharegistro", resourceCulture);
             }
@@ -127,7 +126,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         /// <summary>
         ///   Looks up a localized string similar to @aut_fk_ciudad.
         /// </summary>
-        internal static string aut_fk_ciudad {
+        public static string aut_fk_ciudad {
             get {
                 return ResourceManager.GetString("aut_fk_ciudad", resourceCulture);
             }
@@ -136,7 +135,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         /// <summary>
         ///   Looks up a localized string similar to @aut_kilometraje.
         /// </summary>
-        internal static string aut_kilometraje {
+        public static string aut_kilometraje {
             get {
                 return ResourceManager.GetString("aut_kilometraje", resourceCulture);
             }
@@ -145,7 +144,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         /// <summary>
         ///   Looks up a localized string similar to @aut_matricula.
         /// </summary>
-        internal static string aut_matricula {
+        public static string aut_matricula {
             get {
                 return ResourceManager.GetString("aut_matricula", resourceCulture);
             }
@@ -154,7 +153,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         /// <summary>
         ///   Looks up a localized string similar to @aut_modelo.
         /// </summary>
-        internal static string aut_modelo {
+        public static string aut_modelo {
             get {
                 return ResourceManager.GetString("aut_modelo", resourceCulture);
             }
@@ -163,7 +162,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         /// <summary>
         ///   Looks up a localized string similar to @aut_penalidaddiaria.
         /// </summary>
-        internal static string aut_penalidaddiaria {
+        public static string aut_penalidaddiaria {
             get {
                 return ResourceManager.GetString("aut_penalidaddiaria", resourceCulture);
             }
@@ -172,7 +171,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         /// <summary>
         ///   Looks up a localized string similar to @aut_precioalquiler.
         /// </summary>
-        internal static string aut_precioalquiler {
+        public static string aut_precioalquiler {
             get {
                 return ResourceManager.GetString("aut_precioalquiler", resourceCulture);
             }
@@ -181,7 +180,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         /// <summary>
         ///   Looks up a localized string similar to @aut_preciocompra.
         /// </summary>
-        internal static string aut_preciocompra {
+        public static string aut_preciocompra {
             get {
                 return ResourceManager.GetString("aut_preciocompra", resourceCulture);
             }
@@ -190,7 +189,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         /// <summary>
         ///   Looks up a localized string similar to @aut_tipovehiculo.
         /// </summary>
-        internal static string aut_tipovehiculo {
+        public static string aut_tipovehiculo {
             get {
                 return ResourceManager.GetString("aut_tipovehiculo", resourceCulture);
             }
@@ -199,7 +198,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         /// <summary>
         ///   Looks up a localized string similar to @aut_transmision.
         /// </summary>
-        internal static string aut_transmision {
+        public static string aut_transmision {
             get {
                 return ResourceManager.GetString("aut_transmision", resourceCulture);
             }
@@ -208,34 +207,43 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         /// <summary>
         ///   Looks up a localized string similar to aut_cantpasajero.
         /// </summary>
-        internal static string cantpasajero {
+        public static string cantpasajero {
             get {
                 return ResourceManager.GetString("cantpasajero", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to aut_ciudad.
+        /// </summary>
+        public static string ciudad {
+            get {
+                return ResourceManager.GetString("ciudad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to aut_color.
         /// </summary>
-        internal static string color {
+        public static string color {
             get {
                 return ResourceManager.GetString("color", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to aut_disponibilida.
+        ///   Looks up a localized string similar to aut_disponibilidad.
         /// </summary>
-        internal static string disponibilida {
+        public static string disponibilidad {
             get {
-                return ResourceManager.GetString("disponibilida", resourceCulture);
+                return ResourceManager.GetString("disponibilidad", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to aut_fabricante.
         /// </summary>
-        internal static string fabricante {
+        public static string fabricante {
             get {
                 return ResourceManager.GetString("fabricante", resourceCulture);
             }
@@ -244,7 +252,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         /// <summary>
         ///   Looks up a localized string similar to aut_fecharegistro.
         /// </summary>
-        internal static string fecharegistro {
+        public static string fecharegistro {
             get {
                 return ResourceManager.GetString("fecharegistro", resourceCulture);
             }
@@ -253,7 +261,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         /// <summary>
         ///   Looks up a localized string similar to aut_fk_ciudad.
         /// </summary>
-        internal static string fk_ciudad {
+        public static string fk_ciudad {
             get {
                 return ResourceManager.GetString("fk_ciudad", resourceCulture);
             }
@@ -262,7 +270,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         /// <summary>
         ///   Looks up a localized string similar to aut_kilometraje.
         /// </summary>
-        internal static string kilometraje {
+        public static string kilometraje {
             get {
                 return ResourceManager.GetString("kilometraje", resourceCulture);
             }
@@ -271,25 +279,61 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         /// <summary>
         ///   Looks up a localized string similar to aut_matricula.
         /// </summary>
-        internal static string matricula {
+        public static string matricula {
             get {
                 return ResourceManager.GetString("matricula", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error de Casteo.
+        /// </summary>
+        public static string MensajeErrorFormato {
+            get {
+                return ResourceManager.GetString("MensajeErrorFormato", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Salida del Método.
+        /// </summary>
+        public static string MensajeFinMetodoLogger {
+            get {
+                return ResourceManager.GetString("MensajeFinMetodoLogger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entrada en el Método.
+        /// </summary>
+        public static string MensajeInicioMetodoLogger {
+            get {
+                return ResourceManager.GetString("MensajeInicioMetodoLogger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to aut_modelo.
         /// </summary>
-        internal static string modelo {
+        public static string modelo {
             get {
                 return ResourceManager.GetString("modelo", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to aut_pais.
+        /// </summary>
+        public static string pais {
+            get {
+                return ResourceManager.GetString("pais", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to aut_penalidaddiaria.
         /// </summary>
-        internal static string penalidaddiaria {
+        public static string penalidaddiaria {
             get {
                 return ResourceManager.GetString("penalidaddiaria", resourceCulture);
             }
@@ -298,7 +342,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         /// <summary>
         ///   Looks up a localized string similar to aut_precioalquiler.
         /// </summary>
-        internal static string precioalquiler {
+        public static string precioalquiler {
             get {
                 return ResourceManager.GetString("precioalquiler", resourceCulture);
             }
@@ -307,7 +351,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         /// <summary>
         ///   Looks up a localized string similar to aut_preciocompra.
         /// </summary>
-        internal static string preciocompra {
+        public static string preciocompra {
             get {
                 return ResourceManager.GetString("preciocompra", resourceCulture);
             }
@@ -316,16 +360,25 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         /// <summary>
         ///   Looks up a localized string similar to M08_AgregarAutomovil.
         /// </summary>
-        internal static string procedimientoAgregarAutomovil {
+        public static string procedimientoAgregarAutomovil {
             get {
                 return ResourceManager.GetString("procedimientoAgregarAutomovil", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to M08_Consultar_Automovil.
+        ///   Looks up a localized string similar to M08_CambiarDisponibilidadAutomovil.
         /// </summary>
-        internal static string procedimientoConsultarAutomovil {
+        public static string procedimientoCambiarDisponibilidadAutomovil {
+            get {
+                return ResourceManager.GetString("procedimientoCambiarDisponibilidadAutomovil", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M08_ConsultarAutomovil.
+        /// </summary>
+        public static string procedimientoConsultarAutomovil {
             get {
                 return ResourceManager.GetString("procedimientoConsultarAutomovil", resourceCulture);
             }
@@ -334,7 +387,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         /// <summary>
         ///   Looks up a localized string similar to M08_ConsultarAutomovilMatricula.
         /// </summary>
-        internal static string procedimientoConsultarAutomovilMatricula {
+        public static string procedimientoConsultarAutomovilMatricula {
             get {
                 return ResourceManager.GetString("procedimientoConsultarAutomovilMatricula", resourceCulture);
             }
@@ -343,7 +396,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         /// <summary>
         ///   Looks up a localized string similar to M08_Consultar_Lugar.
         /// </summary>
-        internal static string procedimientoConsultarLugar {
+        public static string procedimientoConsultarLugar {
             get {
                 return ResourceManager.GetString("procedimientoConsultarLugar", resourceCulture);
             }
@@ -352,25 +405,34 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         /// <summary>
         ///   Looks up a localized string similar to M08_EliminarAutomovil.
         /// </summary>
-        internal static string procedimientoEliminarAutomovil {
+        public static string procedimientoEliminarAutomovil {
             get {
                 return ResourceManager.GetString("procedimientoEliminarAutomovil", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to M08_ConsulExisteMatriculaAutomovil.
+        /// </summary>
+        public static string procedimientoExisteMatriculaAutomovil {
+            get {
+                return ResourceManager.GetString("procedimientoExisteMatriculaAutomovil", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to M08_ModificarAutomovil.
         /// </summary>
-        internal static string procedimientoModificar {
+        public static string procedimientoModificarAutomovil {
             get {
-                return ResourceManager.GetString("procedimientoModificar", resourceCulture);
+                return ResourceManager.GetString("procedimientoModificarAutomovil", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to aut_tipovehiculo.
         /// </summary>
-        internal static string tipovehiculo {
+        public static string tipovehiculo {
             get {
                 return ResourceManager.GetString("tipovehiculo", resourceCulture);
             }
@@ -379,25 +441,10 @@ namespace BOReserva.DataAccess.DataAccessObject.M08 {
         /// <summary>
         ///   Looks up a localized string similar to aut_transmision.
         /// </summary>
-        internal static string transmision {
+        public static string transmision {
             get {
                 return ResourceManager.GetString("transmision", resourceCulture);
             }
         }
-
-        public static string procedimientoModificarAutomovil { get; internal set; }
-
-        public static System.Data.DataColumn pais { get; set; }
-
-        public static System.Data.DataColumn ciudad { get; set; }
-
-        public static string MensajeInicioMetodoLogger { get; set; }
-
-        public static string MensajeFinMetodoLogger { get; set; }
-
-        public static string MensajeErrorFormato { get; set; }
-        public static string disponibilidad { get; internal set; }
-
-        public static string procedimientoExisteMatriculaAutomovil { get; set; }
     }
 }

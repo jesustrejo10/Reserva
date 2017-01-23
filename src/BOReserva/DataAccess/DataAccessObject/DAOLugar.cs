@@ -3,7 +3,7 @@ using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
 using System.Data.SqlClient;
 using System;
-
+using BOReserva.Excepciones.M08;
 
 namespace BOReserva.DataAccess.DataAccessObject
 {
@@ -35,6 +35,32 @@ namespace BOReserva.DataAccess.DataAccessObject
             catch (SqlException ex)
             {
                 return _ciudad;
+            }
+        }
+
+        public int obtenerIDlugar(String lugar)
+        {
+            try
+            {
+                int id = 0;
+                SqlConnection conexion = Conectar();
+                conexion.Open();
+                String sql = "select lug_id FROM Lugar  where lug_nombre = '" + lugar + "';";
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        id = int.Parse(reader[0].ToString());
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return id;
+            }
+            catch (SqlException ex)
+            {
+                throw new ReservaExceptionM08(ex.Message, ex);
             }
         }
     }

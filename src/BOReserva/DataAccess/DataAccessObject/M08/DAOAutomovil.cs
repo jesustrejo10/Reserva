@@ -37,7 +37,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             {
                 parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.aut_matricula, SqlDbType.VarChar, automovil.matricula, false));
 
-                EjecutarStoredProcedure(RecursoDAOM08.procedimientoCambiarEstatus, parametro);
+                EjecutarStoredProcedure(RecursoDAOM08.procedimientoCambiarDisponibilidadAutomovil, parametro);
 
                 return true;
             }
@@ -84,17 +84,16 @@ namespace BOReserva.DataAccess.DataAccessObject
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.modelo,            SqlDbType.VarChar,  automovil.modelo,                       false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.fabricante,        SqlDbType.VarChar,  automovil.fabricante,                   false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.anio,              SqlDbType.Int,      automovil.anio.ToString(),              false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.kilometraje,       SqlDbType.VarChar,  automovil.kilometraje.ToString(),       false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.cantpasajero,      SqlDbType.Decimal,  automovil.cantpasajeros.ToString(),     false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.tipovehiculo,      SqlDbType.Int,      automovil.tipovehiculo,                 false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.kilometraje,       SqlDbType.Decimal,  automovil.kilometraje.ToString(),       false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.aut_cantpasajeros, SqlDbType.Int,      automovil.cantpasajeros.ToString(),     false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.tipovehiculo,      SqlDbType.VarChar,  automovil.tipovehiculo,                 false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.preciocompra,      SqlDbType.Decimal,  automovil.preciocompra.ToString(),      false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.precioalquiler,    SqlDbType.Decimal,  automovil.precioalquiler.ToString(),    false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.penalidaddiaria,   SqlDbType.Decimal,  automovil.penalidaddiaria.ToString(),   false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.fecharegistro,     SqlDbType.Date,     automovil.fecharegistro.ToString(),     false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.color,             SqlDbType.VarChar,  automovil.color,                        false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.disponibilidad,    SqlDbType.Int,     automovil.disponibilidad.ToString(),    false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.disponibilidad,    SqlDbType.Int,      automovil.disponibilidad.ToString(),     false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.transmision,       SqlDbType.VarChar,  automovil.transmision,                  false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.fk_ciudad,         SqlDbType.Int,      automovil.ciudad.ToString(),            false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.fk_ciudad,         SqlDbType.Int,      automovil.fk_ciudad.ToString(),         false));
 
                 EjecutarStoredProcedure(RecursoDAOM08.procedimientoAgregarAutomovil, listaParametro);
 
@@ -422,7 +421,6 @@ namespace BOReserva.DataAccess.DataAccessObject
 
             //Atributos tabla Automovil 
             String matricula;
-            String matriculaAux;
 
             try
             {
@@ -431,23 +429,20 @@ namespace BOReserva.DataAccess.DataAccessObject
                 //se coloca true en Input 
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.matricula, SqlDbType.VarChar, automovil.matricula, false));
 
-                matriculaAux = automovil.matricula;
-
                 //Se devuelve la fila del Automovil consultado segun el Id, para este caso solo se devuelve una fila
                 DataTable filaAutomovil = EjecutarStoredProcedureTuplas(RecursoDAOM08.procedimientoExisteMatriculaAutomovil, listaParametro);
 
-                //Se guarda la fila devuelta de la base de datos
-                DataRow Fila = filaAutomovil.Rows[0];
-
-                //Se preinicializan los atrubutos de la clase Automovil
-                matricula = Fila[RecursoDAOM08.matricula].ToString();
-
-                if (matriculaAux.Equals(matricula))
+                if (filaAutomovil != null)
                 {
-                    return true;
-                } else{
-                    return false;
+                    foreach (DataRow fila in filaAutomovil.Rows)
+                    {
+                        if (automovil.matricula == fila[RecursoDAOM08.matricula].ToString())
+                        {
+                            return false;
+                        }
+                    }     
                 }
+                return true;
             }
             catch (ArgumentNullException ex)
             {

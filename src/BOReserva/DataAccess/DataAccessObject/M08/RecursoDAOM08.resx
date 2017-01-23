@@ -125,8 +125,8 @@
     <value>@aut_anio</value>
     <comment>Procedimiento Atributo - año de lanzamiento del automovil</comment>
   </data>
-  <data name="aut_cantpasajero" xml:space="preserve">
-    <value>@aut_cantpasajero</value>
+  <data name="aut_cantpasajeros" xml:space="preserve">
+    <value>@aut_cantpasajeros</value>
     <comment>Procedimiento Atributo - cantidad de pasajeros del automovil</comment>
   </data>
   <data name="aut_color" xml:space="preserve">
@@ -189,8 +189,8 @@
     <value>aut_color</value>
     <comment>Atributo - colo de automovil</comment>
   </data>
-  <data name="disponibilida" xml:space="preserve">
-    <value>aut_disponibilida</value>
+  <data name="disponibilidad" xml:space="preserve">
+    <value>aut_disponibilidad</value>
     <comment>Atributo - disponibilidad del automovil</comment>
   </data>
   <data name="fabricante" xml:space="preserve">
@@ -287,5 +287,6 @@
   </data>
   <data name="procedimientoExisteMatriculaAutomovil" xml:space="preserve">
     <value>M08_ConsulExisteMatriculaAutomovil</value>
+    <comment>Nombre del Procedimiento verificar de la Base de Datos Tabla Automovil la matricula</comment>
   </data>
 </root>

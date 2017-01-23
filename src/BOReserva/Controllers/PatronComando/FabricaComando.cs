@@ -118,6 +118,11 @@ namespace BOReserva.Controllers.PatronComando
             return new GeneralLugar.COConsultarTodosCiudad(e,pais);
         }
 
+        public static Command<int> consultarIDlugar(String lugar)
+        {
+            return new GeneralLugar.COConsultarIdLugar(lugar);
+        }
+
         #endregion
 
         #region M09_Gestion_Hoteles_Por_Ciudad
