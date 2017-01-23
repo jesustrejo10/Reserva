@@ -1,282 +1,474 @@
 ﻿using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
+using BOReserva.Excepciones;
+using BOReserva.Excepciones.M09;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.DataAccess.DataAccessObject.M09
-{
-    public class DAOHotel:  DAO, IDAOHotel {
 
+namespace BOReserva.DataAccess.DataAccessObject.M09
+
+{
+    /// <summary>
+    /// Clase para el manejo de los hoteles en la BD
+    /// </summary>
+    public class DAOHotel:  DAO, IDAOHotel {
+        /// <summary>
+        /// Constructor del metodo
+        /// </summary>
         public DAOHotel() {}
 
-
+        /// <summary>
+        /// Metodo implementado de IDAO para agregar hoteles a la BD
+        /// </summary>
+        /// <param name="e">Hotel a agregar</param>
+        /// <returns>Retorna un valor entero</returns>
         int IDAO.Agregar(Entidad e)
         {
+            List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
             Hotel hotel = (Hotel)e;
-            SqlConnection conexion = Connection.getInstance(_connexionString);
+
             try
             {
-                conexion.Open();
-                String sql = "INSERT INTO Hotel " +
-                                     "(hot_id, hot_nombre, hot_url_pagina, hot_email, hot_cantidad_habitaciones , hot_direccion, hot_estrellas, hot_puntuacion, hot_disponibilidad, hot_fk_ciudad) " +
-                                     "VALUES (NEXT VALUE FOR hotel_sequence,'" + hotel._nombre + "','" + hotel._paginaWeb + "','" + hotel._email + "'," +
-                                                   hotel._capacidad + ",'" + hotel._direccion + "'," + hotel._clasificacion + ",0,1," + hotel._ciudad._id + ");";
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_nombre, SqlDbType.VarChar, hotel._nombre, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_pagina, SqlDbType.VarChar, hotel._paginaWeb, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_email, SqlDbType.VarChar, hotel._email, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_cantidad_habitaciones, SqlDbType.Int, hotel._capacidad.ToString(), false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_direccion, SqlDbType.VarChar, hotel._direccion, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_estrellas, SqlDbType.Int, hotel._clasificacion.ToString(), false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_fk_ciudad, SqlDbType.Int, hotel._ciudad._id.ToString(), false));
+                EjecutarStoredProcedure(RecursoDAOM09.ProcedimientoAgregarHotel, listaParametro);
 
-
-                Debug.WriteLine(sql);
-                SqlCommand cmd = new SqlCommand(sql, conexion);
-                cmd.ExecuteNonQuery();
-                cmd.Dispose();
-                conexion.Close();
                 return 1;
             }
             catch (SqlException ex)
             {
-                Debug.WriteLine("Ocurrio un SqlException");
-                Debug.WriteLine(ex.ToString());
-                conexion.Close();
-                return 2;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);               
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (NullReferenceException ex)
             {
-                Debug.WriteLine("Ocurrio una NullReferenceException");
-                Debug.WriteLine(ex.ToString());
-                conexion.Close();
-                return 3;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM09(ex.Message, ex); 
             }
             catch (ArgumentNullException ex)
             {
-                Debug.WriteLine("Ocurrio una ArgumentNullException");
-                Debug.WriteLine(ex.ToString());
-                conexion.Close();
-                return 4;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); 
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); 
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (LogException exi)
+            {
+                throw new ReservaExceptionM09(exi.Message, exi);
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Ocurrio una Exception");
-                Debug.WriteLine(ex.ToString());
-                conexion.Close();
-                return 5;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
+           
         }
 
+        /// <summary>
+        /// Metodo implementado de IDAO para modificar hoteles de la BD
+        /// </summary>
+        /// <param name="e">Hotel a modificar</param>
+        /// <returns>Retorna el hotel</returns>
         Entidad IDAO.Modificar(Entidad e)
         {
             Hotel hotel = (Hotel)e;
-            SqlConnection conexion = Connection.getInstance(_connexionString);
+            List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
+            
             try
             {
-                conexion.Open();
-                String sql = "UPDATE Hotel SET hot_nombre = '" + hotel._nombre + "', hot_url_pagina = '" + hotel._paginaWeb +
-                            "', hot_email = '" + hotel._email + "', hot_cantidad_habitaciones = '" + hotel._capacidad + "', hot_direccion = '" + hotel._direccion +
-                            "', hot_estrellas = " + hotel._clasificacion +
-                            " WHERE hot_id = " + hotel._id;
-                SqlCommand cmd = new SqlCommand(sql, conexion);
-                cmd.ExecuteNonQuery();
-                cmd.Dispose();
-                conexion.Close();
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_nombre, SqlDbType.VarChar, hotel._nombre, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_pagina, SqlDbType.VarChar, hotel._paginaWeb, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_email, SqlDbType.VarChar, hotel._email, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_direccion, SqlDbType.VarChar, hotel._direccion, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_estrellas, SqlDbType.Int, hotel._clasificacion.ToString(), false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_id, SqlDbType.Int, hotel._id.ToString(), false));
+
+                EjecutarStoredProcedure(RecursoDAOM09.ProcedimientoModificarHotel, listaParametro);
+
                 hotel._nombre = "1";
-                Entidad resultado = hotel;
-                return resultado;
-            }
-            catch (SqlException ex)
-            {
-                conexion.Close();
-                hotel._nombre = ex.Message;
-                Entidad resultado = hotel;
-                return resultado;
-            }
-        }
-
-        Entidad IDAO.Consultar(int id)
-        {
-            SqlConnection conexion = Connection.getInstance(_connexionString);
-            Hotel hotel = new Hotel();
-            try
-            {
-                conexion.Open();
-                String sql = "SELECT H.*, C.lug_id as id_ciudad, C.lug_nombre as nombre_ciudad, P.lug_id as id_pais, P.lug_nombre as nombre_pais " +
-                             "FROM HOTEL H, LUGAR C, LUGAR P " +
-                             "WHERE H.hot_fk_ciudad = C.lug_id and C.lug_fk_lugar_id = P.lug_id AND H.HOT_ID = " + id;
-
-                SqlCommand cmd = new SqlCommand(sql, conexion);
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    Pais pais;
-                    Ciudad ciudad;
-                    int idCiudad;
-                    String nombreCiudad;
-                    int idPais;
-                    String nombrePais;
-
-                    int idHotel;
-                    int capacidad;
-                    int clasificacion;
-                    String nombreHotel;
-                    String direccionHotel;
-                    String paginaWebHotel;
-                    String emailHotel;
-
-                    while (reader.Read())
-                    {
-                        //SE AGREGA CREA UN OBJECTO VEHICLE SE PASAN LOS ATRIBUTO ASI reader["<etiqueta de la columna en la tabla Automovil>"]
-                        //Y  SE AGREGA a listavehiculos
-                        //public Hotel(int id, String nombre, String direccion, String email, String paginaWeb, int clasificacion, int capacidad, Ciudad ciudad)
-                        idPais = Int32.Parse(reader["id_pais"].ToString());
-                        nombrePais = reader["nombre_pais"].ToString();
-                        pais = new Pais(idPais, nombrePais);
-
-                        idCiudad = Int32.Parse(reader["id_ciudad"].ToString());
-                        nombreCiudad = reader["nombre_ciudad"].ToString();
-                        ciudad = new Ciudad(idCiudad, nombreCiudad, pais);
-                        idHotel = Int32.Parse(reader["hot_id"].ToString());
-
-                        hotel = new Hotel(
-                            idHotel,
-                            reader["hot_nombre"].ToString(),
-                            reader["hot_direccion"].ToString(),
-                            reader["hot_email"].ToString(),
-                            reader["hot_url_pagina"].ToString(),
-                            Int32.Parse(reader["hot_estrellas"].ToString()),
-                            Int32.Parse(reader["hot_cantidad_habitaciones"].ToString()),
-                            ciudad
-                        );
-                    }
-                }
-                cmd.Dispose();
-                conexion.Close();
                 return hotel;
             }
             catch (SqlException ex)
             {
-                Debug.WriteLine(ex.ToString());
-                conexion.Close();
-                return null;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); 
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (NullReferenceException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (ArgumentNullException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (Exception ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
         }
 
-        Dictionary<int, Entidad> IDAO.ConsultarTodos()
+        /// <summary>
+        /// Metodo implementado de IDAO para consultar un hotel de la BD
+        /// </summary>
+        /// <param name="id">Id del hotel a buscar</param>
+        /// <returns>Retorna el hotel</returns>
+        Entidad IDAO.Consultar(int id)
         {
-            List<Hotel> listavehiculos = new List<Hotel>();
-            Dictionary<int, Entidad> listaHoteles = new Dictionary<int, Entidad>();
-            //puedo usar Singleton
-            SqlConnection conexion = Connection.getInstance(_connexionString);
+            DataTable tablaDeDatos;
+            List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
+
+            Pais pais;
+            Ciudad ciudad;
+            Hotel hotel = null;
+            int idCiudad;
+            String nombreCiudad;
+            int idPais;
+            String nombrePais;
+            int preciohab;
+            int idHotel;
 
             try
             {
-                conexion.Open();
-                String sql = "SELECT H.*, C.lug_id as id_ciudad, C.lug_nombre as nombre_ciudad, P.lug_id as id_pais, P.lug_nombre as nombre_pais " +
-                                "FROM HOTEL H, LUGAR C, LUGAR P " +
-                                "WHERE H.hot_fk_ciudad = C.lug_id and C.lug_fk_lugar_id = P.lug_id";
 
-                SqlCommand cmd = new SqlCommand(sql, conexion);
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_id, SqlDbType.Int, id.ToString(), false));
+                
+                tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM09.ProcedimientoConsultarHotel, parametro);
+
+                foreach (DataRow row in tablaDeDatos.Rows)
                 {
-                    Pais pais;
-                    Ciudad ciudad;
-                    Hotel hotel;
-                    int idCiudad;
-                    String nombreCiudad;
-                    int idPais;
-                    String nombrePais;
+                    idPais = Int32.Parse(row[RecursoDAOM09.id_pais].ToString());
+                    nombrePais = row[RecursoDAOM09.nombre_pais].ToString();
+                    pais = new Pais(idPais, nombrePais);
 
-                    int idHotel;
-                    int capacidad;
-                    int clasificacion;
-                    String nombreHotel;
-                    String direccionHotel;
-                    String paginaWebHotel;
-                    String emailHotel;
+                    idCiudad = Int32.Parse(row[RecursoDAOM09.id_ciudad].ToString());
+                    nombreCiudad = row[RecursoDAOM09.nombre_ciudad].ToString();
+                    ciudad = new Ciudad(idCiudad, nombreCiudad, pais);
 
-                    while (reader.Read())
-                    {
-                        //SE AGREGA CREA UN OBJECTO VEHICLE SE PASAN LOS ATRIBUTO ASI reader["<etiqueta de la columna en la tabla Automovil>"]
-                        //Y  SE AGREGA a listavehiculos
-                        //public Hotel(int id, String nombre, String direccion, String email, String paginaWeb, int clasificacion, int capacidad, Ciudad ciudad)
-                        idPais = Int32.Parse(reader["id_pais"].ToString());
-                        nombrePais = reader["nombre_pais"].ToString();
-                        pais = new Pais(idPais, nombrePais);
-
-                        idCiudad = Int32.Parse(reader["id_ciudad"].ToString());
-                        nombreCiudad = reader["nombre_ciudad"].ToString();
-                        ciudad = new Ciudad(idCiudad, nombreCiudad, pais);
-                        idHotel = Int32.Parse(reader["hot_id"].ToString());
-
-                        hotel = new Hotel(
+                    idHotel = Int32.Parse(row["hot_id"].ToString());
+                    hotel = new Hotel(
                             idHotel,
-                            reader["hot_nombre"].ToString(),
-                            reader["hot_direccion"].ToString(),
-                            reader["hot_email"].ToString(),
-                            reader["hot_url_pagina"].ToString(),
-                            Int32.Parse(reader["hot_estrellas"].ToString()),
-                            Int32.Parse(reader["hot_cantidad_habitaciones"].ToString()),
+                            row["hot_nombre"].ToString(),
+                            row["hot_direccion"].ToString(),
+                            row["hot_email"].ToString(),
+                            row["hot_url_pagina"].ToString(),
+                            Int32.Parse(row["hot_estrellas"].ToString()),
+                            Int32.Parse(row["hot_cantidad_habitaciones"].ToString()),
                             ciudad,
-                            Int32.Parse(reader["hot_disponibilidad"].ToString())
-                        );
-                        listaHoteles.Add(idHotel, hotel);
-                    }
+                            Int32.Parse(row["hot_disponibilidad"].ToString())
+                            );
+
+                    
                 }
-                cmd.Dispose();
-                conexion.Close();
+                parametro = FabricaDAO.asignarListaDeParametro();
+                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_id, SqlDbType.Int, id.ToString(), false));
+
+                tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM09.ProcedimientoConsultarHabitacion, parametro);
+
+                foreach (DataRow row in tablaDeDatos.Rows)
+                {
+                    preciohab = Int32.Parse(row[RecursoDAOM09.hab_precio].ToString());
+                    hotel._precio = preciohab;
+                }
+                return hotel;
+            }
+            catch (SqlException ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (NullReferenceException ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (ArgumentNullException ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (Exception ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+        }
+
+        /// <summary>
+        /// Metodo implementado de IDAO para consultar los hoteles de la BD
+        /// </summary>
+        /// <returns>Retorna el listado de hoteles</returns>
+        Dictionary<int, Entidad> IDAO.ConsultarTodos()
+        {
+            Dictionary<int, Entidad> listaHoteles = new Dictionary<int, Entidad>();
+            DataTable tablaDeDatos;
+            List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
+
+            Pais pais;
+            Ciudad ciudad;
+            Hotel hotel;
+            int idCiudad;
+            String nombreCiudad;
+            int idPais;
+            String nombrePais;
+
+            int idHotel;
+
+            try
+            {
+
+                tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM09.ProcedimientoConsultarTodos, parametro);
+
+                foreach (DataRow row in tablaDeDatos.Rows)
+                {
+                    idPais = Int32.Parse(row[RecursoDAOM09.id_pais].ToString());
+                    nombrePais = row[RecursoDAOM09.nombre_pais].ToString();
+                    pais = new Pais(idPais, nombrePais);
+
+                    idCiudad = Int32.Parse(row[RecursoDAOM09.id_ciudad].ToString());
+                    nombreCiudad = row[RecursoDAOM09.nombre_ciudad].ToString();
+                    ciudad = new Ciudad(idCiudad, nombreCiudad, pais);
+
+                    idHotel = Int32.Parse(row["hot_id"].ToString());
+                    hotel = new Hotel(
+                            idHotel,
+                            row["hot_nombre"].ToString(),
+                            row["hot_direccion"].ToString(),
+                            row["hot_email"].ToString(),
+                            row["hot_url_pagina"].ToString(),
+                            Int32.Parse(row["hot_estrellas"].ToString()),
+                            Int32.Parse(row["hot_cantidad_habitaciones"].ToString()),
+                            ciudad,
+                            Int32.Parse(row["hot_disponibilidad"].ToString())
+                            );
+                    listaHoteles.Add(idHotel, hotel);
+                    
+                }
                 return listaHoteles;
             }
             catch (SqlException ex)
             {
-                Debug.WriteLine(ex.ToString());
-                conexion.Close();
-                return null;
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (NullReferenceException ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (ArgumentNullException ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (Exception ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
         }
 
-        public String eliminarHotel(int id)
+        /// <summary>
+        /// Metodo implementado de IDAO para eliminar hoteles de la BD
+        /// </summary>
+        /// <param name="id">Id del hotel a eliminar</param>
+        /// <returns>Retorna un string</returns>
+        string IDAOHotel.eliminarHotel(int id)
         {
-            SqlConnection conexion = Connection.getInstance(_connexionString);
+            List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
+
             try
             {
-                conexion.Open();
-                String sql = "DELETE FROM Hotel WHERE hot_id = " + id;
-                SqlCommand cmd = new SqlCommand(sql, conexion);
-                cmd.ExecuteNonQuery();
-                cmd.Dispose();
-                conexion.Close();
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_id, SqlDbType.Int, id.ToString(), false));
+                EjecutarStoredProcedure(RecursoDAOM09.ProcedimientoEliminarHotel, listaParametro);
+
                 return "1";
             }
             catch (SqlException ex)
             {
-                conexion.Close();
-                return ex.Message;
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (NullReferenceException ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (ArgumentNullException ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (Exception ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
         }
 
-        public String disponibilidadHotel(Entidad e, int disponibilidad)
+        /// <summary>
+        /// Metodo implementado de IDAO para cambiar la disponibilidad de los hoteles de la BD
+        /// </summary>
+        /// <param name="e">Hotel a modificar</param>
+        /// <param name="disponibilidad">Estatus nuevo</param>
+        /// <returns></returns>
+        string IDAOHotel.disponibilidadHotel(Entidad e, int disponibilidad)
         {
             Hotel hotel = (Hotel)e;
-            SqlConnection conexion = Connection.getInstance(_connexionString);
+            List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
+
             try
             {
-                conexion.Open();
-                String sql = "UPDATE Hotel SET hot_disponibilidad = " + disponibilidad +
-                            " WHERE hot_id = " + hotel._id;
-                SqlCommand cmd = new SqlCommand(sql, conexion);
-                cmd.ExecuteNonQuery();
-                cmd.Dispose();
-                conexion.Close();
-                hotel._nombre = "1";
-                Entidad resultado = hotel;
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_id, SqlDbType.Int, hotel._id.ToString(), false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM09.hot_disponible, SqlDbType.Int, disponibilidad.ToString(), false));
+
+                EjecutarStoredProcedure(RecursoDAOM09.ProcedimientoCambiarDisponibilidad, listaParametro);
+
                 return "1";
             }
             catch (SqlException ex)
             {
-                conexion.Close();
-                hotel._nombre = ex.Message;
-                Entidad resultado = hotel;
-                return ex.Message;
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (NullReferenceException ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (ArgumentNullException ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
+            }
+            catch (Exception ex)
+            {
+                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
+
+                catch (LogException exi)
+                { throw new ReservaExceptionM09(ex.Message, exi); }
+
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
         }
+
     }
 }

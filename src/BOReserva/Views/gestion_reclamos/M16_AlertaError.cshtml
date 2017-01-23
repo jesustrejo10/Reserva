@@ -1,0 +1,19 @@
+﻿<script>
+    alert("Error, no puede editar los reclamos de otros usuarios.");
+    var url = '/gestion_reclamos/M16_VisualizarReclamo';
+    var method = 'GET';
+    var data = '';
+    $.ajax(
+        {
+            url: url,
+            type: method,
+            data: data,
+            success: function (data, textStatus, jqXHR) {
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+</script>

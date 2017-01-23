@@ -313,8 +313,20 @@
     <value>origen</value>
     <comment>Atributo en procedimiento</comment>
   </data>
+  <data name="MensajeErrorFormato" xml:space="preserve">
+    <value>Error de Casteo</value>
+    <comment>Ocurre en caso de error en casteo</comment>
+  </data>
+  <data name="MensajeFinMetodoLogger" xml:space="preserve">
+    <value>Salida del Método</value>
+    <comment>Ocurre a la salida del metodo</comment>
+  </data>
+  <data name="MensajeInicioMetodoLogger" xml:space="preserve">
+    <value>Entrada en el Método</value>
+    <comment>Ocurre a la entrada del metodo</comment>
+  </data>
   <data name="procedimientoConsultarACiudad" xml:space="preserve">
     <value>M19_ConsultarReservaAPorCiudad</value>
-    <comment>procedimiento para buscar autos por ciudad y mostrarlos</comment>
+    <comment>procedimiento para consultar autos</comment>
   </data>
 </root>

@@ -104,7 +104,7 @@ namespace FOReserva.Controllers
             CReservaAutomovil modelo_reserva = (CReservaAutomovil)reserva;
             return PartialView(modelo_reserva);
         }
-        
+
         /// <summary>
         /// Método para eliminar reserva, lo que se hace es actualizar el estado a cancelada
         /// </summary>
@@ -135,36 +135,16 @@ namespace FOReserva.Controllers
             }
         }
 
-        //public ActionResult M19_Busqueda_Autos_()
-        //{
 
-        //  //  System.Diagnostics.Debug.WriteLine("LLEGA AL CONTROLLER");
-        //    try { 
-        //    string res_entrega = Request.Form["SelectedCiudadIdOrigen"].ToString();
-        //    string res_destino = Request.Form["SelectedCiudadIdDestino"].ToString();
-        //    string fechaIni = Request.Form["fechaini"];
-        //    string fechaFin = Request.Form["fechafin"];
-        //    string horaIni = Request.Form["res_horaini"];
-        //    string horaFin = Request.Form["res_horafin"];
 
-        //   // System.Diagnostics.Debug.WriteLine(res_entrega + " " + res_destino + " " + fechaIni + " " + fechaFin + " " + horaIni + " " + horaFin);
 
-                
-                
-        //        List<CReserva_Autos_Perfil> lista = busqueda(res_entrega, res_destino, fechaIni, fechaFin, horaIni, horaFin);
-        //        return View(lista);
-        //    }
-        //    catch (Exception Error)
-        //    {
-        //        return View();
-        //    }
-        //}
+
 
         public ActionResult M19_Busqueda_Autos()
         {
 
             System.Diagnostics.Debug.WriteLine("LLEGA AL CONTROLLER BBUSQUEDA DE AUTOS");
-            
+
             try
             {
                 //obtengo los datos ingresados en el formulario
@@ -180,15 +160,15 @@ namespace FOReserva.Controllers
                 int idEntrega = Int32.Parse(res_entrega);
                 int idDestino = Int32.Parse(res_destino);
 
-                
+
                 //Creo _datos de tipo Entidad y lo inicializo como CVistaReservaAuto
                 Entidad _datos = FabricaEntidad.inicializarCVistaReservaAuto(fechaIni,fechaFin,horaIni,horaFin,idEntrega,idDestino);
-                
+
                 Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.comandosReservaAutomovil(FabricaComando.comandosGlobales.CONSULTAR, FabricaComando.comandoReservaAuto.CONSULTAR_AUTOS, _datos);
                 List<Entidad> autos = comando.ejecutar();//devuelve una lista de CAutomovil con autos de la ciudad
 
                 System.Diagnostics.Debug.WriteLine("PASA DEL COMANDO");
- 
+
              List<CAutomovil> lista = FabricaEntidad.inicializarListaAutomovil_();
 
              foreach (Entidad item in autos)
@@ -205,10 +185,10 @@ namespace FOReserva.Controllers
             } catch(Exception error)
             {
 
-                
+
             }
             return View();;
-            
+
         }
 
         public ActionResult M19_Accion_Reserva(string matricula, string modelo, string fabricante, string tipo, string color, string transmision, int ciudad, decimal precio, int anio, int pasajero, int disponibilidad, string owner, string date, string time, string fechaini, string fechafin, string horaini, string horafin, string ciudadori, string ciudaddes)
@@ -222,7 +202,7 @@ namespace FOReserva.Controllers
                 manejador.InsertarReservaAuto(reserva);
                 return View(reserva);
             }
-            catch (ManejadorSQLException AgregarError)
+            catch (ManejadorSQLException)
             {
                 return View();
             }
@@ -268,6 +248,6 @@ namespace FOReserva.Controllers
 
             return __pais;
         }
-       
+
     }
 }

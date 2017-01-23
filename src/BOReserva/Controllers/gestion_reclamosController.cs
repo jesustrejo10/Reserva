@@ -11,8 +11,12 @@ using BOReserva.Controllers.PatronComando;
 
 namespace BOReserva.Controllers
 {
+    /// <summary>
+    /// Clase controladora del módulo de Gestión de Reclamos
+    /// </summary>
     public class gestion_reclamosController : Controller
     {
+        private static int idReclamo;
         
         //
         // GET: /gestion_reclamos/
@@ -34,20 +38,79 @@ namespace BOReserva.Controllers
       [HttpPost]
       public JsonResult guardarReclamo(CAgregarReclamo model)
       {
-          //ESTO ES TEMPORAL MIENTRAS SIMON PASA LA FUNCION
-          model._usuario = 1;
-          //RECUERDA QUE LO ANTERIOR DEBES CAMBIARLO KARLIANA SUAREZ
+          model._usuario = gestion_seguridad_ingresoController.IDUsuarioActual();
           Entidad nuevoReclamo = FabricaEntidad.InstanciarReclamo(model);
           Command<String> comando = FabricaComando.crearM16AgregarReclamo(nuevoReclamo);
           String verificacion = comando.ejecutar();
-          return (Json(verificacion));
+          return (Json("Se guardó su reclamo exitosamente"));
       }
 
-      public ActionResult M16_ModificarReclamo()
+      [HttpPost]
+      public JsonResult modificarReclamo(CModificarReclamo model)
       {
-          CModificarReclamo model = new CModificarReclamo();
-          return PartialView(model);
+          int idUsuario = gestion_seguridad_ingresoController.IDUsuarioActual();
+          String[] formateadorFecha = model._fechaReclamo.Split('/');
+          model._fechaReclamo = formateadorFecha[2] + "-" + formateadorFecha[1] + "-" + formateadorFecha[0];
+          Entidad reclamo = FabricaEntidad.InstanciarReclamo(model);
+          Command<Entidad> comando = FabricaComando.crearM16ConsultarUsuario(idReclamo);
+          Reclamo verificacion = (Reclamo)comando.ejecutar();
+          //con la fabrica instancie el reclamo.
 
+          Command<String> comandoMod = FabricaComando.crearM16ModificarReclamo(reclamo, model._idReclamo);
+          String resultado = comandoMod.ejecutar();
+          return (Json("Se modificó el reclamo exitosamente"));
+          
+
+      }
+
+      [HttpPost]
+      public JsonResult eliminarReclamo(int idReclamo)
+      {
+          int idUsuario = gestion_seguridad_ingresoController.IDUsuarioActual();
+          Command<Entidad> comando = FabricaComando.crearM16ConsultarUsuario(idReclamo);
+          Reclamo verificacion = (Reclamo) comando.ejecutar();
+          if(idUsuario!=verificacion._usuario)
+          {
+            Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            return (Json("No está autorizado para eliminar este reclamo"));
+          }
+          else
+          {
+              Command<String> comando1 = FabricaComando.crearM16EliminarReclamo(idReclamo);
+              String borro_si_no = comando1.ejecutar();
+              Response.StatusCode = (int)HttpStatusCode.BadRequest;
+              return (Json("Se eliminó el reclamo exitosamente"));
+          }
+      }
+
+
+      [HttpPost]
+      public JsonResult actualizarReclamo(int idReclamo, int estado)
+      {
+          Command<String> comando = FabricaComando.crearM16ActualizarReclamo(idReclamo, estado);
+          String resultado = comando.ejecutar();
+          return (Json("Estado modificado"));
+      }
+
+      public ActionResult M16_ModificarReclamo(int idReclamo)
+      {
+          int idUsuario = gestion_seguridad_ingresoController.IDUsuarioActual();
+          Command<Entidad> comando = FabricaComando.crearM16ConsultarUsuario(idReclamo);
+          Reclamo reclamo = (Reclamo)comando.ejecutar();
+          if (idUsuario != reclamo._usuario)
+          {
+              return PartialView("M16_AlertaError",null);
+          }
+          else
+          {
+              CModificarReclamo model = new CModificarReclamo();
+              model._idReclamo = reclamo._id;
+              model._tituloReclamo = reclamo._tituloReclamo;
+              model._detalleReclamo = reclamo._detalleReclamo;
+              model._fechaReclamo = reclamo._fechaReclamo;
+              model._estadoReclamo = reclamo._estadoReclamo;
+              return PartialView(model);
+          }
       }
     }
 	

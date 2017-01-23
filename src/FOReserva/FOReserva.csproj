@@ -76,9 +76,12 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\lib\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -209,8 +212,11 @@
     <Compile Include="Controllers\gestion_vuelosController.cs" />
     <Compile Include="Controllers\PatronComando\Command.cs" />
     <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
+    <Compile Include="Controllers\PatronComando\M16\M16_COModificarReclamo.cs" />
     <Compile Include="Controllers\PatronComando\M16\M16_COAgregarReclamo.cs" />
-    <Compile Include="Controllers\PatronComando\M16\M16_COConsultarReclamo.cs" />
+    <Compile Include="Controllers\PatronComando\M16\M16_COConsultarReclamoDetalle.cs" />
+    <Compile Include="Controllers\PatronComando\M16\M16_COConsultarReclamos.cs" />
+    <Compile Include="Controllers\PatronComando\M16\M16_COEliminarReclamo.cs" />
     <Compile Include="Controllers\PatronComando\M19\M19_COActualizarReserva.cs" />
     <Compile Include="Controllers\PatronComando\M19\M19_COConsultarAutos.cs" />
     <Compile Include="Controllers\PatronComando\M19\M19_COConsultarLugar.cs" />
@@ -222,6 +228,13 @@
     <Compile Include="Controllers\PatronComando\M19\M19_COObtenerPaises.cs" />
     <Compile Include="DataAccess\Domain\Ciudad.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOPais.cs" />
+    <Compile Include="Controllers\PatronComando\M22\M22_COObtenerCiudad.cs" />
+    <Compile Include="Controllers\PatronComando\M22\M22_COConsultarIdCiudad.cs" />
+    <Compile Include="Controllers\PatronComando\M22\M22_COConsultarTodasReservas.cs" />
+    <Compile Include="Controllers\PatronComando\M22\M22_COConsultarReserva.cs" />
+    <Compile Include="Controllers\PatronComando\M22\M22_COEliminarReserva.cs" />
+    <Compile Include="Controllers\PatronComando\M22\M22_COModificarReserva.cs" />
+    <Compile Include="Controllers\PatronComando\M22\M22_COAgregarRerserva.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOReclamo.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\registro_autenticacionController.cs" />
@@ -229,38 +242,44 @@
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOCiudad.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOPais.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReservaAutomovil.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReservaHabitacion.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORevision.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M16\M16Reclamos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>M16Reclamos.resx</DependentUpon>
+    </Compile>
     <Compile Include="DataAccess\DataAccessObject\M19\DAOReservaAutomovil.cs" />
     <Compile Include="DataAccess\DataAccessObject\M19\RecursoDAOM19.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RecursoDAOM19.resx</DependentUpon>
     </Compile>
-    <Compile Include="DataAccess\DataAccessObject\Command\MSSQL\DAOMSSQLCommandCloseConnection.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Command\MSSQL\DAOMSSQLCommand.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Command\MSSQL\DAOMSSQLCommandExecuteStoreProcedureWithResult.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Command\MSSQL\DAOMSSQLCommandExecuteStoreProcedure.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Command\MSSQL\DAOMSSQLCommandExecuteNoQuery.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Command\MSSQL\DAOMSSQLCommandExecuteQuery.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Command\MSSQL\DAOMSSQLCommandOpenConnection.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Command\IDAOCommand.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Common\DAO.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Common\DAOMSSQL.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Common\DAOException.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Common\DAOResult.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Common\DAOUtils.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Common\FabricDAO.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Common\Interface\IDAO.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Common\Interface\IDAOReclamo.cs" />
-    <Compile Include="DataAccess\DataAccessObject\Common\Interface\IDAORevision.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAO.cs" />
-    <Compile Include="DataAccess\DataAccessObject\DAORevision.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M20\DAOM20Exception.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M20\DAORevision.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M20\RecursoDAOM20.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RecursoDAOM20.resx</DependentUpon>
+    </Compile>
     <Compile Include="DataAccess\DataAccessObject\FabricaDAO.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAO.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOReclamo.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M22\DAOReservaHabitacion.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M22\RecursoDAOM22.Designer.cs" />
+    <Compile Include="DataAccess\Domain\CiudadHab.cs" />
     <Compile Include="DataAccess\Domain\Entidad.cs" />
     <Compile Include="DataAccess\Domain\FabricaEntidad.cs" />
     <Compile Include="DataAccess\Domain\Pais.cs" />
+    <Compile Include="DataAccess\Domain\Habitacion.cs" />
+    <Compile Include="DataAccess\Domain\Hotel.cs" />
     <Compile Include="DataAccess\Domain\Reclamo.cs" />
+    <Compile Include="DataAccess\Domain\ReservaHabitacion.cs" />
+    <Compile Include="DataAccess\Domain\Restaurante.cs" />
+    <Compile Include="DataAccess\Domain\Revision.cs" />
+    <Compile Include="DataAccess\Domain\RevisionValoracion.cs" />
+    <Compile Include="DataAccess\Domain\Usuario.cs" />
     <Compile Include="DataAccess\Model\Connection.cs" />
     <Compile Include="DataAccess\Model\ExceptionBD.cs" />
     <Compile Include="DataAccess\Model\Parametro.cs" />
@@ -270,6 +289,15 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="DataAccess\Model\ResultadoBD.cs" />
+    <Compile Include="Excepciones\ExceptionReserva.cs" />
+    <Compile Include="Excepciones\Log.cs" />
+    <Compile Include="Excepciones\LogException.cs" />
+    <Compile Include="Excepciones\M19\ReservaExceptionM19.cs" />
+    <Compile Include="Excepciones\RecursoLog.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RecursoLog.resx</DependentUpon>
+    </Compile>
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -386,7 +414,6 @@
     <Compile Include="Servicio\manejadorSQLCrucero.cs" />
     <Compile Include="Servicio\ManejadorSQLDiarios.cs" />
     <Compile Include="Servicio\ManejadorSQLMuestraRevision.cs" />
-    <Compile Include="Servicio\ManejadorSQLRevision.cs" />
     <Compile Include="Servicio\ManejadorSQLException.cs" />
     <Compile Include="Servicio\ManejadorSQLItinerario.cs" />
     <Compile Include="Servicio\ManejadorSQLReservaAutomovil.cs" />
@@ -1635,6 +1662,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="DataAccess\DataAccessObject\M19\Scripts de Procedures M19.sql" />
+    <Content Include="DataAccess\DataAccessObject\M20\ProcedimientosDAOM20.sql" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\assets\fonts\et-line.eot" />
@@ -3253,11 +3281,11 @@
     <Content Include="Views\gestion_reserva_auto\M19_Busqueda_Autos.cshtml" />
     <Content Include="Views\gestion_reclamos\M16_AgregarReclamo.cshtml" />
     <Content Include="Views\gestion_reclamos\M16_VisualizarReclamo.cshtml" />
+    <Content Include="Views\gestion_reclamos\M16_ModificarReclamo.cshtml" />
     <Content Include="Views\gestion_reserva_auto\M19_Detalle_reserva.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="DataAccess\DataAccessObject\M16\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -3272,13 +3300,26 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="DataAccess\DataAccessObject\M16\M16Reclamos.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>M16Reclamos.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="DataAccess\DataAccessObject\M19\RecursoDAOM19.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoDAOM19.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Excepciones\RecursoLog.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecursoLog.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="DataAccess\DataAccessObject\M20\RecursoDAOM20.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecursoDAOM20.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataAccess\DataAccessObject\M22\RecursoDAOM22.resx" />
     <EmbeddedResource Include="DataAccess\Model\RecursoBD.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoBD.Designer.cs</LastGenOutput>

@@ -9,15 +9,27 @@ using System.Web;
 
 namespace BOReserva.DataAccess.DataAccessObject
 {
+    /// <summary>
+    /// Clase para el manejo de lo relacionado de los paises en la BD
+    /// </summary>
     public class DAOPais : DAO , IDAOPais
     {
-
+        /// <summary>
+        /// Metodo proveniente de IDAO (No aplica)
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns>Retorna NotImplementedException()</returns>
         int IDAO.Agregar(Domain.Entidad e)
         {
             //no aplica
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Metodo proveniente de IDAO (No aplica)
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns>Retorna NotImplementedException()</returns>
         Domain.Entidad IDAO.Modificar(Domain.Entidad e)
         {
             throw new NotImplementedException();
@@ -25,11 +37,21 @@ namespace BOReserva.DataAccess.DataAccessObject
 
         }
 
+
+        /// <summary>
+        /// Metodo proveniente de IDAO (No aplica)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Retorna NotImplementedException()</returns>
         Domain.Entidad IDAO.Consultar(int id)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Metodo para consultar todos los paises
+        /// </summary>
+        /// <returns>Retorna un listado de paises</returns>
         Dictionary<int, Entidad> IDAO.ConsultarTodos()
         {
             Dictionary<int, Entidad> listaPaises = new Dictionary<int, Entidad>();
@@ -53,5 +75,6 @@ namespace BOReserva.DataAccess.DataAccessObject
             conexion.Close();
             return listaPaises;
         }
+
     }
 }

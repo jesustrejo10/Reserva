@@ -1,5 +1,4 @@
 ﻿
-
 <div class="row">
     <link rel="stylesheet" href="~/Content/plugins/datatables/dataTables.bootstrap.css">
 
@@ -20,91 +19,42 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @try
-{
-    foreach (var item in Model)
-    {
-        <tr id="@item._id">
-            <td>@item._fechaReclamo</td>
-            <td>@item._tituloReclamo</td>
-            <td>@item._estadoReclamo</td>
-            <td>
-                @*<a href="#"> <i class="fa fa-eye clasedeprueba"></i></a>*@
-                <a href="#" title="Ver detalle"><i class="fa fa-eye detalle"></i></a>
-                @if (item._usuario == item._usuario) 
-                { 
-                <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>
-                <a href="#" title="Eliminar"><i class="fa fa-times eliminar"></i></a>
-                }
-
-            </td>
-
-            <script>
-                $(".activar").click(function (event) {
-                    console.log("hola");
-                    event.preventDefault();
-                    event.stopPropagation();
-                    event.stopImmediatePropagation();
-                    var identificador = $(this).parent().parent().parent().attr("id");
-                    jQuery.ajax({
-                        type: "POST",
-                        url: "/gestion_aviones/habilitarAvion",
-                        data: { id: identificador }
-                    }).done(function (data) {
-                        var url = '/gestion_aviones/M02_VisualizarAviones';
-                        var method = 'GET';
-                        var data = '';
-                        $.ajax(
+                        @try 
+                        {
+                            
+                            foreach (var item in Model) 
                             {
-                                url: url,
-                                type: method,
-                                data: data,
-                                success: function (data, textStatus, jqXHR) {
+                                <tr id="@item._id">
+                                    <td>@item._fechaReclamo</td>
+                                    <td>@item._tituloReclamo</td>
+                                    <td>
+                                        @if (@item._estadoReclamo == 1)
+                                                {
+                                        <span class="label label-success ">Iniciado</span>
+                                                }
+                                        @if (@item._estadoReclamo == 2)
+                                                {
+                                        <span class="label label-primary ">Procesado</span>
+                                                }
+                                        @if (@item._estadoReclamo == 3)
+                                                {
+                                        <span class="label label-warning ">Culminado</span>
+                                                }
+                                        @if (@item._estadoReclamo == 4)
+                                                {
+                                        <span class="label label-danger ">Cerrado</span>
+                                                }
+                                    </td>
+                                    <td>
+                                        <a href="#" title="Ver detalle"><i class="fa fa-eye detalle"></i></a>
+                                        @if (item._usuario == item._usuario)
+                                        {
+                                            <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>
+                                            <a href="#" title="Eliminar"><i class="fa fa-times eliminar"></i></a>
+                                        }
+                                    </td>
 
-                                    $("#contenido").empty();
-                                    $("#contenido").append(data);
-                                },
-                                error: function (jqXHR, textStatus, errorThrown) {
-                                    alert(errorThrown);
-                                }
-                            });
-                    }).fail(function () {
-                        alert("Error en la base de datos");
-                    });
-                });
-
-                $(".desactivar").click(function (event) {
-                    console.log("hola");
-                    event.preventDefault();
-                    event.stopPropagation();
-                    event.stopImmediatePropagation();
-                    var identificador = $(this).parent().parent().parent().attr("id");
-                    jQuery.ajax({
-                        type: "POST",
-                        url: "/gestion_aviones/deshabilitarAvion",
-                        data: { id: identificador }
-                    }).done(function (data) {
-                        var url = '/gestion_aviones/M02_VisualizarAviones';
-                        var method = 'GET';
-                        var data = '';
-                        $.ajax(
-                            {
-                                url: url,
-                                type: method,
-                                data: data,
-                                success: function (data, textStatus, jqXHR) {
-
-                                    $("#contenido").empty();
-                                    $("#contenido").append(data);
-                                },
-                                error: function (jqXHR, textStatus, errorThrown) {
-                                    alert(errorThrown);
-                                }
-                            });
-                    }).fail(function () {
-                        alert("Error en la base de datos");
-                    });
-                });
+         <script>
 
                 $(".modificar").click(function (event) {
                     event.preventDefault();
@@ -114,12 +64,13 @@
                     jQuery.ajax({
                         type: "GET",
                         url: "/gestion_reclamos/M16_ModificarReclamo",
-                        data: { id: identificador }
+                        data: { idReclamo: identificador }
                     }).done(function (data) {
                         $("#contenido").empty();
                         $("#contenido").append(data);
-                    }).fail(function () {
+                    }).fail(function (data) {
                         alert(data);
+                        console.log(data);
                     });
 
 
@@ -130,12 +81,13 @@
                     event.stopPropagation();
                     event.stopImmediatePropagation();
                     var identificador = $(this).parent().parent().parent().attr("id");
+                    console.log(identificador);
                     jQuery.ajax({
                         type: "POST",
-                        url: "/gestion_aviones/eliminarAvion",
-                        data: { id: identificador }
+                        url: "/gestion_reclamos/eliminarReclamo",
+                        data: { idReclamo: identificador }
                     }).done(function (data) {
-                        var url = '/gestion_aviones/M02_VisualizarAviones';
+                        var url = '/gestion_reclamos/M16_VisualizarReclamo';
                         var method = 'GET';
                         var data = '';
                         $.ajax(
@@ -153,31 +105,147 @@
                                 }
                             });
                     }).fail(function (data) {
-                        alert(data);
+                        console.log(data);
+                        alert(data.responseText);
                     });
 
 
                 });
-            </script>
 
-        </tr>
-    }
-}
-catch
-{
-                            <script>
-                                alert("Error en el listado, por favor intente acceder nuevamente");
-                            </script>
+                $(".label-success").click(function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    event.stopImmediatePropagation();
+                    var identificador = $(this).parent().parent().attr("id");
+                    var cambioEstado = 2;
+                    console.log(identificador);
+                    jQuery.ajax({
+                        type: "POST",
+                        url: "/gestion_reclamos/actualizarReclamo",
+                        data: { idReclamo: identificador, estado: cambioEstado}
+                    }).done(function (data) {
+                        var url = '/gestion_reclamos/M16_VisualizarReclamo';
+                        var method = 'GET';
+                        var data = '';
+                        $.ajax(
+                            {
+                                url: url,
+                                type: method,
+                                data: data,
+                                success: function (data, textStatus, jqXHR) {
+
+                                    $("#contenido").empty();
+                                    $("#contenido").append(data);
+                                },
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    alert(errorThrown);
+                                }
+                            });
+                    }).fail(function (data) {
+                        console.log(data);
+                        alert(data.responseText);
+                    });
+
+
+                });
+
+                $(".label-primary").click(function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    event.stopImmediatePropagation();
+                    var identificador = $(this).parent().parent().attr("id");
+                    var cambioEstado = 3;
+                    console.log(identificador);
+                    jQuery.ajax({
+                        type: "POST",
+                        url: "/gestion_reclamos/actualizarReclamo",
+                        data: { idReclamo: identificador, estado: cambioEstado }
+                    }).done(function (data) {
+                        var url = '/gestion_reclamos/M16_VisualizarReclamo';
+                        var method = 'GET';
+                        var data = '';
+                        $.ajax(
+                            {
+                                url: url,
+                                type: method,
+                                data: data,
+                                success: function (data, textStatus, jqXHR) {
+
+                                    $("#contenido").empty();
+                                    $("#contenido").append(data);
+                                },
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    alert(errorThrown);
+                                }
+                            });
+                    }).fail(function (data) {
+                        console.log(data);
+                        alert(data.responseText);
+                    });
+
+
+                });
+
+                $(".label-warning").click(function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    event.stopImmediatePropagation();
+                    var identificador = $(this).parent().parent().attr("id");
+                    var cambioEstado = 4;
+                    console.log(identificador);
+                    jQuery.ajax({
+                        type: "POST",
+                        url: "/gestion_reclamos/actualizarReclamo",
+                        data: { idReclamo: identificador, estado: cambioEstado }
+                    }).done(function (data) {
+                        var url = '/gestion_reclamos/M16_VisualizarReclamo';
+                        var method = 'GET';
+                        var data = '';
+                        $.ajax(
+                            {
+                                url: url,
+                                type: method,
+                                data: data,
+                                success: function (data, textStatus, jqXHR) {
+
+                                    $("#contenido").empty();
+                                    $("#contenido").append(data);
+
+                                },
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    alert(errorThrown);
+                                }
+                            }).done(function (data) {
+                                $('#' + id_fila).remove();
+                            });
+                    }).fail(function (data) {
+                        console.log(data);
+                        alert(data.responseText);
+                    });
+
+
+                });
+
+                                            </script>
+
+                                </tr>
+                            }
                         }
+                        catch
+                        {
+                             <script>
+                                   alert("Error en el listado, por favor intente nuevamente");
+                             </script>
+                        } 
 
-                    <tfoot>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>Título</th>
-                            <th>Estado</th>
-                            <th>Opciones</th>
-                        </tr>
-                    </tfoot>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Fecha</th>
+                                            <th>Título</th>
+                                            <th>Estado</th>
+                                            <th>Opciones</th>
+                                        </tr>
+                                    </tfoot>
                 </table>
             </div>
             <!-- /.box-body -->
@@ -187,6 +255,7 @@ catch
     <!-- /.col -->
 </div>
 <!-- /.row -->
+
 
 <script src="~/Content/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="~/Content/plugins/datatables/dataTables.bootstrap.min.js"></script>

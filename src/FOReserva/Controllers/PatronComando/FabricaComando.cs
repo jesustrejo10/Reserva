@@ -2,10 +2,12 @@
 using FOReserva.Controllers.PatronComando.M16;
 using FOReserva.DataAccess.Domain;
 using FOReserva.Controllers.PatronComando.M19;
+using FOReserva.Controllers.PatronComando.M22;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using BOReserva.Controllers.PatronComando;
 
 namespace FOReserva.Controllers.PatronComando
 {
@@ -26,6 +28,30 @@ namespace FOReserva.Controllers.PatronComando
         {
 
             return new M16_COAgregarReclamo((Reclamo)e);
+
+        }
+
+        public static Command<List<Reclamo>> consultarReclamosDeUsuario(int _idUsuario)
+        {
+
+            return new M16_COConsultarReclamos(_idUsuario);
+
+        }
+
+        public static Command<int> modificarReclamo(Reclamo reclamo)
+        {
+            return new M16_COModificarReclamo(reclamo);
+        }
+
+        public static Command<int> eliminarReclamo(int _idReclamo)
+        {
+            return new M16_COEliminarReclamo(_idReclamo);
+        }
+
+        public static Command<Entidad> consultarReclamo(int idReclamo)
+        {
+
+            return new M16_COConsultarReclamoDetalle(idReclamo);
 
         }
         #endregion
@@ -141,6 +167,32 @@ namespace FOReserva.Controllers.PatronComando
 
 
 
+        #endregion
+        #region M22 Reserva Habitacion
+        public static Command<List<CiudadHab>> obtenerCiudades()
+        {
+            return new M22_COObtenerCiudad();
+        }
+        public static Command<Dictionary<int,Entidad>> obtenerHotelCiudad(int id)
+        {
+            return new M22_COConsultarIdCiudad(id);
+        }
+        public static Command<String> agregarReservaHabitacion(Entidad e)
+        {
+            return new M22_COAgregarRerserva((ReservaHabitacion)e);
+        }
+        public static Command<Dictionary<int, Entidad>> mostrarReservaUsuario(int id)
+        {
+            return new M22_COConsultarTodasReservas(id);
+        }
+        public static Command<String> eliminarReservaUsuario(int id)
+        {
+            return new M22_COEliminarReserva(id);
+        }
+        public static Command<String> modificarReservaUsuario(int id, int cant_dias)
+        {
+            return new M22_COModificarReserva(id,cant_dias);
+        }
         #endregion
     }
 }

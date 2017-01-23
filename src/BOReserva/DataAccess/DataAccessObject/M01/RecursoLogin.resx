@@ -129,12 +129,42 @@
     <value>@correo</value>
     <comment>Variable asignada a la consulta o selección de usuario por correo</comment>
   </data>
-  <data name="DesactivarUsuario" xml:space="preserve">
+  <data name="BloquearUsuario" xml:space="preserve">
     <value>M01_DesactivarUsuario</value>
     <comment>Referencia al procedimiento almacenado para la desactivación de usuario en la BD</comment>
   </data>
   <data name="id" xml:space="preserve">
     <value>@id</value>
     <comment>Variable asignada a la consulta o selección de usuario por ID numérico</comment>
+  </data>
+  <data name="usuarioActivo" xml:space="preserve">
+    <value>activo</value>
+  </data>
+  <data name="usuarioApellido" xml:space="preserve">
+    <value>apellido</value>
+  </data>
+  <data name="usuarioClave" xml:space="preserve">
+    <value>contrasena</value>
+  </data>
+  <data name="usuarioCorreo" xml:space="preserve">
+    <value>correo</value>
+  </data>
+  <data name="usuarioFechaCreacion" xml:space="preserve">
+    <value>fecha</value>
+  </data>
+  <data name="usuarioID" xml:space="preserve">
+    <value>usuID</value>
+  </data>
+  <data name="usuarioIDRol" xml:space="preserve">
+    <value>rolID</value>
+  </data>
+  <data name="usuarioNombre" xml:space="preserve">
+    <value>nombre</value>
+  </data>
+  <data name="IncrementarIntentos" xml:space="preserve">
+    <value>M01_IncrementarIntentos</value>
+  </data>
+  <data name="ResetearIntentos" xml:space="preserve">
+    <value>M01_ResetearIntentos</value>
   </data>
 </root>

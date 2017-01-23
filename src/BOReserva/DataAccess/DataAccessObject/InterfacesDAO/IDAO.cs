@@ -7,12 +7,33 @@ using System.Threading.Tasks;
 
 namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
 {
+    /// <summary>
+    /// Interface IDAO, se encuentran los metodos generales del DAO
+    /// </summary>
     public interface IDAO
     {
+        /// <summary>
+        /// Agregar, Realiza una insercion en BD
+        /// </summary>
+        /// <param name="e"> recibe una Entidad</param>
+        /// <returns>retorna la Clave primaria de la entidad que agrego.</returns>
         int Agregar(Entidad e);
+        /// <summary>
+        /// Modificar, Reliza una actualizacion a un registro en BD
+        /// </summary>
+        /// <param name="e">Recibe la entidad que va a actualizar</param>
+        /// <returns>Retorna la entidad Actualizada</returns>
         Entidad Modificar(Entidad e);
+        /// <summary>
+        /// Consultar, devuelve un registro unico de la BD
+        /// </summary>
+        /// <param name="id">Recibe el Id de la entidad que va a retornar</param>
+        /// <returns>Retorna la entidad encontrada en Bd</returns>
         Entidad Consultar(int id);
-        int Eliminar(int id);
+        /// <summary>
+        /// Consultar todos los registros de una tabla en BD
+        /// </summary>
+        /// <returns>Devuelve un Map, indicando todos los registros de una tabla de BD</returns>
         Dictionary<int,Entidad> ConsultarTodos();
 
     }

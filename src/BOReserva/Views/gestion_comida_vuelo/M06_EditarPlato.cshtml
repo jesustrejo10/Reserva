@@ -1,0 +1,124 @@
+﻿<style>
+    .hidden {
+        display: none !important;
+    }
+</style>
+
+@model BOReserva.DataAccess.Domain.Comida
+@*<script src="~/Scripts/Scripts_ComidaVuelo/llamadas_generales.js"></script>*@
+@using (Html.BeginForm("editarPlatoComida", "gestion_comida_vuelo", null, FormMethod.Post, new { @id = "formGuardarPlato", @class = "form-horizontal" }))
+{
+    
+    @Html.TextBoxFor(m => m._id, null, new { @class = "form-control hidden", @id = "_id"})
+    @Html.TextBoxFor(m => m._estatus, null, new { @class = "form-control hidden", @id = "_estatus"})
+    <div class="row">
+        <!-- Agregar Comida  -->
+        <div class="col-xs-6">
+            <div class="box-header with-border">
+                <h1 class="box-title"> Editar Comida-Bebida</h1>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"></button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <label for="nombrePlato">Nombre del Plato (<span style="color:red">*</span>):</label>
+                            @Html.TextBoxFor(m => m._nombre, null, new { @class = "form-control",  @id = "_nombre" })
+                            <label for="descripcionPlato">Descripcion (<span style="color:red">*</span>):</label>
+                            @Html.TextBoxFor(m => m._descripcion, null, new { @class = "form-control", @id = "_descripcion" })
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-6">
+            <div class="box-header with-border">
+                <h1 class="box-title"></h1>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"></button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <label for="_tipo">Tipo (<span style="color:red">*</span>):</label>
+                            @{
+                                List<SelectListItem> _tipoPlato = new List<SelectListItem>();
+                                _tipoPlato.Add(new SelectListItem
+                                {
+                                    Text = "Comida",
+                                    Value = "Comida"
+                                });
+                                _tipoPlato.Add(new SelectListItem
+                                {
+                                    Text = "Bebida",
+                                    Value = "Bebida"
+                                });
+                            }
+                            @Html.DropDownListFor(m => m._tipo, _tipoPlato, new { @class = "form-control", @placeholder = "Tipo ", @id = "_tipo" })
+                           
+                            <label for="_tipo">Estatus: (<span style="color:red">*</span>):</label>
+                            @Html.TextBoxFor(m => m._estatus, null, new { @class = "form-control", @id = "_estatus", @readonly="true"})
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+        <!-- Fin Agregar Comida  -->
+        <!-- Botón Guardar -->
+        <div>&nbsp;</div>
+        <div class="col-md-12" style="margin-top:10px;">
+            <button type="button" id="aceptarPlato" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+        </div>
+        
+    </div>
+    <script>
+
+        $("#aceptarPlato").click(function () {
+            var model = @Html.Raw(Json.Encode(Model));
+            jQuery.ajax({
+                type: "POST",
+                url: "/gestion_comida_vuelo/editarPlatoComida",
+                data: {
+                    id: $("#_id").val(),
+                    nombre: $("#_nombre").val(),
+                    tipo: $("#_tipo").val(),
+                    estatus: $("#_estatus").val(),
+                    descripcion: $("#_descripcion").val()
+                }
+            }).done(function (data) {
+                alert("La comida se ha editado correctamente.");
+                var url = '/gestion_comida_vuelo/M06_EditarPlato';
+                var method = 'GET';
+                var data = {
+                    id:$("#_id").val()
+                };
+                $.ajax(
+                    {
+                        url: url,
+                        type: method,
+                        data: data,
+                        success: function (data, textStatus, jqXHR) {
+
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+            }).fail(function () {
+                alert("Error en la base de datos");
+            });
+        });
+    </script>
+
+}
