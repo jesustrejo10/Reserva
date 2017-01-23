@@ -25,7 +25,7 @@ namespace TestUnitReserva.BO.gestion_comida_vuelo
         [TestMethod]
         public void TestAgregarComdiaVuelo()
         {
-            Entidad comida_vuelo = FabricaEntidad.instanciarComidaVuelo(18,1, 20);
+            Entidad comida_vuelo = FabricaEntidad.instanciarComidaVuelo(18,"1", 20);
 
             bool resultado = DAOComida.Singleton().agregarComidaVuelo(comida_vuelo);
             Assert.IsTrue(resultado);
