@@ -297,6 +297,11 @@
     <Compile Include="Controllers\PatronComando\M09\M09_COEliminarHotel.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COModificarHotel.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COObtenerPaises.cs" />
+    <Compile Include="Controllers\PatronComando\M09\ResourceM09Command.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResourceM09Command.resx</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\PatronComando\M10\M10_COActualizarRestaurant.cs" />
     <Compile Include="Controllers\PatronComando\M10\M10_COCargarHorario.cs" />
     <Compile Include="Controllers\PatronComando\M10\M10_COConsultarLugar.cs" />
@@ -516,6 +521,7 @@
     <Compile Include="DataAccess\Domain\Transporte.cs" />
     <Compile Include="DataAccess\Domain\Usuario.cs" />
     <Compile Include="DataAccess\Domain\Vuelo.cs" />
+    <Compile Include="DataAccess\Model\Cache.cs" />
     <Compile Include="DataAccess\Model\Connection.cs" />
     <Compile Include="DataAccess\Model\ConexionUtil.cs" />
     <Compile Include="DataAccess\Model\ExceptionBD.cs" />
@@ -1944,6 +1950,10 @@
     <Content Include="Views\gestion_boletos\M05_DetalleBoletoReserva.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controllers\PatronComando\M09\ResourceM09Command.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourceM09Command.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="DataAccess\DataAccessObject\M01\RecursoLogin.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoLogin.Designer.cs</LastGenOutput>
