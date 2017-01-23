@@ -51,6 +51,10 @@ namespace BOReserva.DataAccess.DataAccessObject
         #endregion
 
         #region M01_Login
+        /// <summary>
+        /// Método para instanciar DAOLogin
+        /// </summary>
+        /// <returns>Objeto DAOLogin</returns>
         public static DAO instanciarDaoLogin()
         {
             return new DAOLogin();
@@ -213,6 +217,11 @@ namespace BOReserva.DataAccess.DataAccessObject
         public static DAO instanciarDAORol()
         {
             return new DAORol();
+        }
+
+        public static DAO instanciarDAOPermiso()
+        {
+            return new DAOPermiso();
         }
         #endregion
 

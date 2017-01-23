@@ -195,7 +195,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                 return null;
             }
         }
-           
+
         /// <summary>
         /// Método para eliminar reclamo 
         /// </summary>

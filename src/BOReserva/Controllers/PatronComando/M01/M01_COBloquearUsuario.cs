@@ -1,22 +1,28 @@
-﻿using System;
+﻿using BOReserva.DataAccess.DataAccessObject;
+using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+using BOReserva.DataAccess.DataAccessObject.M01;
+using BOReserva.DataAccess.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace BOReserva.Controllers.PatronComando.M01
 {
-    public class M01_COBloquearUsuario : Command<String>
+    public class M01_COBloquearUsuario : Command<Boolean>
     {
-        private string _correo;
+        private Entidad usuario;
 
-        public M01_COBloquearUsuario(string correo)
+        public M01_COBloquearUsuario(Entidad _usuario)
         {
-            this._correo = correo;
+            this.usuario = _usuario;
         }
 
-        public override String ejecutar()
+        public override Boolean ejecutar()
         {
-            throw new NotImplementedException();
+            IDAOLogin dao = (DAOLogin)FabricaDAO.instanciarDaoLogin();
+            var respuesta = dao.BloquearUsuario(usuario);
+            return respuesta;
         }
     }
 }

@@ -15,7 +15,7 @@ namespace BOReserva.Controllers.PatronComando.M14
         public M14_COAgregarCabina(Cabina cabina) { 
             this._cabina = cabina;
         }
-        
+
 
         public override String ejecutar(){
             IDAO daoCabina = FabricaDAO.instanciarDaoCabina();       
