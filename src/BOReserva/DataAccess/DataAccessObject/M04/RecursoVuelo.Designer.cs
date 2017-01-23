@@ -250,11 +250,38 @@ namespace BOReserva.DataAccess.DataAccessObject.M04 {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a capEje.
+        /// </summary>
+        internal static string ParametroCapacidadEjecutiva {
+            get {
+                return ResourceManager.GetString("ParametroCapacidadEjecutiva", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a aCapMax.
         /// </summary>
         internal static string ParametroCapacidadMaxima {
             get {
                 return ResourceManager.GetString("ParametroCapacidadMaxima", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a capTur.
+        /// </summary>
+        internal static string ParametroCapacidadTurista {
+            get {
+                return ResourceManager.GetString("ParametroCapacidadTurista", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a capVip.
+        /// </summary>
+        internal static string ParametroCapacidadVIP {
+            get {
+                return ResourceManager.GetString("ParametroCapacidadVIP", resourceCulture);
             }
         }
         

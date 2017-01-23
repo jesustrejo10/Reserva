@@ -121,11 +121,11 @@ namespace BOReserva.Models.gestion_vuelo
                     fechaDespegue = DateTime.ParseExact((_fechaDespegue + " " + _horaDespegue), "yyyy-MM-dd HH:mm",
                                               System.Globalization.CultureInfo.InvariantCulture);
                 else
-                    throw new ReservaExceptionM04(RecursoAvionCO.CodigoErrorFormulario, RecursoAvionCO.MensajeCampoVacio);
+                    throw new ReservaExceptionM04(RecursoAvionCO.MensajeCampoVacio, RecursoAvionCO.MensajeCampoVacio);
             }
             catch (Exception ex)
             {
-                throw new ReservaExceptionM04(RecursoAvionCO.CodigoErrorFormulario, RecursoAvionCO.MensajeErrorFomulario, ex);
+                throw new ReservaExceptionM04(RecursoAvionCO.MensajeCampoVacio, RecursoAvionCO.MensajeCampoVacio);
             }
         }
 
@@ -137,11 +137,11 @@ namespace BOReserva.Models.gestion_vuelo
                    return (DateTime.ParseExact((_fechaAterrizaje + " " + _horaAterrizaje), "dd/MM/yyyy HH:mm",
                                            System.Globalization.CultureInfo.InvariantCulture));
                 else
-                    throw new ReservaExceptionM04(RecursoAvionCO.CodigoErrorFormulario, RecursoAvionCO.MensajeCampoVacio);
+                    throw new ReservaExceptionM04(RecursoAvionCO.MensajeCampoVacio, RecursoAvionCO.MensajeCampoVacio);
             }
             catch (Exception ex)
             {
-                throw new ReservaExceptionM04(RecursoAvionCO.CodigoErrorFormulario, RecursoAvionCO.MensajeErrorFomulario, ex);
+                throw new ReservaExceptionM04(RecursoAvionCO.MensajeCampoVacio, RecursoAvionCO.MensajeCampoVacio);
             }
 
         }

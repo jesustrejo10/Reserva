@@ -245,6 +245,8 @@ namespace BOReserva.DataAccess.DataAccessObject
             DataTable resultado;
             Entidad objVuelo;
             List<Entidad> lista;
+            Entidad avion;
+            Entidad ruta;
             try
             {
                 resultado = EjecutarStoredProcedureTuplas(RecursoVuelo.ListarVuelos);
@@ -267,16 +269,19 @@ namespace BOReserva.DataAccess.DataAccessObject
                         String ciudadO = row[RecursoVuelo.ParametroCOrigen].ToString();
                         String matAvion = row[RecursoVuelo.ParametroaAMatricula].ToString();
                         String modAvion = row[RecursoVuelo.ParametroAModelo].ToString();
-                        /*int capTurista = int.Parse(row[RecursoVuelo.ParametroIdRuta].ToString());
-                        int capVip = int.Parse(row[RecursoVuelo.ParametroIdRuta].ToString());
-                        int capEjecutiva = int.Parse(row[RecursoVuelo.ParametroIdRuta].ToString());*/
-                        //ATENCIÓN, CAMBIAR POR FABRICA CUANDO MANDEN EL METODO///////////////////////////////
-                        Avion avion = new Avion(idAvion, matAvion, modAvion, 0, 0, 0,
-                                0, 0, 0, 0, 0);
-                        Ruta ruta = new Ruta(idRuta, 0, null, null, ciudadO, ciudadD);
-                        //////////////////////////////////////////////////////////////////////////////////////
-                        objVuelo = FabricaEntidad.InstanciarVuelo(id, codigoVuelo, ruta, fechaDespegue, status,
-                                                             fechaAterrizaje, avion);
+                        int capTurista = int.Parse(row[RecursoVuelo.ParametroCapacidadTurista].ToString());
+                        int capVip = int.Parse(row[RecursoVuelo.ParametroCapacidadVIP].ToString());
+                        int capEjecutiva = int.Parse(row[RecursoVuelo.ParametroCapacidadEjecutiva].ToString());
+                        avion = FabricaEntidad.InstanciarAvion(0,"","",0,0,0,0,0,0,0,0);
+                        ((Avion)avion)._id = idAvion;
+                        ((Avion)avion)._matricula = matAvion;
+                        ((Avion)avion)._modelo = modAvion;
+                        ((Avion)avion)._capacidadEjecutiva = capEjecutiva;
+                        ((Avion)avion)._capacidadTurista = capTurista;
+                        ((Avion)avion)._capacidadVIP = capVip;
+                        ruta = FabricaEntidad.InstanciarRuta(idRuta,0,"","",ciudadO,ciudadD);
+                        objVuelo = FabricaEntidad.InstanciarVuelo(id, codigoVuelo, (Ruta)ruta, fechaDespegue, status,
+                                                             fechaAterrizaje, ((Avion)avion));
                         lista.Add(objVuelo);
                     }
                     return lista;

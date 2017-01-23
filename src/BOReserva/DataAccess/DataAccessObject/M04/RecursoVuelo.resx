@@ -254,4 +254,16 @@
     <value>Error: Existen registros asociados a este vuelo</value>
     <comment>Error registros asociados</comment>
   </data>
+  <data name="ParametroCapacidadEjecutiva" xml:space="preserve">
+    <value>capEje</value>
+    <comment>Capacidad Ejecutiva</comment>
+  </data>
+  <data name="ParametroCapacidadTurista" xml:space="preserve">
+    <value>capTur</value>
+    <comment>Capacidad Turista</comment>
+  </data>
+  <data name="ParametroCapacidadVIP" xml:space="preserve">
+    <value>capVip</value>
+    <comment>Capacidad vip</comment>
+  </data>
 </root>

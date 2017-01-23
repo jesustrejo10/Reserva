@@ -97,6 +97,15 @@ namespace BOReserva.Models.gestion_vuelo {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Ocurrio un error de conexion, contante al Administrador.
+        /// </summary>
+        internal static string MensajeErrorBD {
+            get {
+                return ResourceManager.GetString("MensajeErrorBD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Existe un error en el formulario.
         /// </summary>
         internal static string MensajeErrorFomulario {

@@ -133,6 +133,9 @@
     <value>Hay Campos Obligatorios Vacios</value>
     <comment>Mensaje Campos Vacios</comment>
   </data>
+  <data name="MensajeErrorBD" xml:space="preserve">
+    <value>Ocurrio un error de conexion, contante al Administrador</value>
+  </data>
   <data name="MensajeErrorFomulario" xml:space="preserve">
     <value>Existe un error en el formulario</value>
     <comment>Error en el formulario</comment>
