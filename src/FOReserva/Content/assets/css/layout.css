@@ -3459,7 +3459,7 @@ section.dark.page-header ul.page-options a {
 
 /** Preloader
  **************************************************************** **/
-#preloader {
+#preloader, .preloader {
     position: fixed;
     z-index: 9999999;
     top: 0; bottom: 0;

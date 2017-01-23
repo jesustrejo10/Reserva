@@ -74,7 +74,10 @@
     <Compile Include="BO\gestion_seguridad_ingreso\TestLogin.cs" />
     <Compile Include="BO\gestion_usuarios\UnitTest1.cs" />
     <Compile Include="BO\gestion_usuario\TestUsuario.cs" />
+<<<<<<< HEAD
     <Compile Include="BO\gestión_OfertasYPaquetes\TestDaoOfertas.cs" />
+=======
+>>>>>>> M20_RevisionRestauranteHotel
     <Compile Include="BO\gestión_OfertasYPaquetes\TestOfertasYPaquetes.cs" />
     <Compile Include="BO\TestGestionAutomovil\TestGestionAutomovil.cs" />
     <Compile Include="FO\Diario\TestLugarDiario.cs" />
