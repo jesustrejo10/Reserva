@@ -1,25 +1,22 @@
 ﻿using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
-using BOReserva.DataAccess.Domain;
+using BOReserva.DataAccess.Domain.M14;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BOReserva.Controllers.PatronComando
-
-
-/// <summary>
-/// Comando destinado a Realizar las respectivas operaciones necesarias
-/// para agregar una cabina a la BD
-/// </summary>
+namespace BOReserva.Controllers.PatronComando.M14
 {
-    public class M14_COAgregarCabina : Command<String>
+    public class M14_COAgregarItinerario : Command<String>
     {
-        Cabina _cabina;
 
-        public M14_COAgregarCabina(Cabina cabina) { 
-            this._cabina = cabina;
+        Itinerario _itinerario;
+        
+        public M14_COAgregarItinerario(Itinerario itinerario) 
+        {
+            this._itinerario = itinerario;
+ 
         }
 
 
@@ -30,10 +27,12 @@ namespace BOReserva.Controllers.PatronComando
         ///// <returns>
         ///// Retorna un String 
         ///// </returns>
-        public override String ejecutar(){
-            IDAO daoCabina = FabricaDAO.instanciarDaoCabina();       
-            int test = daoCabina.Agregar(_cabina);
+        public override String ejecutar()
+        {
+            IDAO daoItinerario = FabricaDAO.instanciarDaoItinerario();
+            int test = daoItinerario.Agregar(_itinerario);
             return test.ToString();
         }
+
     }
 }

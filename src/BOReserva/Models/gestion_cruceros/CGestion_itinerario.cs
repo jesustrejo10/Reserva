@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace BOReserva.Models.gestion_cruceros
 {
@@ -19,20 +20,27 @@ namespace BOReserva.Models.gestion_cruceros
             this._fechaFin = _fechaFin;
             this._fkCrucero = _fkCrucero;
             this._fkRuta = _fkRuta;
+
+
+
         }
 
         public int _fkCrucero { get; set; }
-
+        public int _id { get; set; }
         public DateTime _fechaFin { get; set; }
         public DateTime _fechaInicio { get; set; }
         public int _fkRuta { get; set; }
 
-
+        public IEnumerable<SelectListItem> _listaCruceros { get; set; }
+        public IEnumerable<SelectListItem> _listaOrigen { get; set; }
+        public IEnumerable<SelectListItem> _listaDestino { get; set; }
+        public string _cruceroNombre { get; set; }
+        public string _cabinaNombre { get; set; }
         public string _ItinerarioCrucero { get; set; }
-
         public string _estatus { get; set; }
-
         public string _crucero { get; set; }
+        public string _origen { get; set; }
+        public string _destino { get; set; }
 
         public List<CGestion_itinerario> itinerarios { get; set; }
 
