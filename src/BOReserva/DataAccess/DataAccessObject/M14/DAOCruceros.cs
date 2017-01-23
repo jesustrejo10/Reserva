@@ -16,37 +16,34 @@ namespace BOReserva.DataAccess.DataAccessObject
     /// </summary>
     public class DAOCruceros : DAO, IDAOCruceros
     {
-        public DAOCruceros()
-        { }
-
-        bool IDAOCruceros.ValidarCrucero(String nombre) {
-
-            return true;        
-        }
-
+        
+        
         int IDAO.Agregar(Entidad e)
         {
             Crucero crucero = (Crucero)e;
             SqlConnection con = Connection.getInstance(_connexionString);
             try
             {
-                con.Open();
+                if(true){
 
-                SqlCommand query = new SqlCommand("M24_AgregarCrucero", con);
+                    con.Open();
 
-                query.CommandType = CommandType.StoredProcedure;
-                query.Parameters.AddWithValue("@nombrecrucero", crucero._nombreCrucero);
-                query.Parameters.AddWithValue("@compania", crucero._companiaCrucero);
-                query.Parameters.AddWithValue("@capacidad", crucero._capacidadCrucero);
-                query.Parameters.AddWithValue("@imagen", "");
+                    SqlCommand query = new SqlCommand("M24_AgregarCrucero", con);
+
+                    query.CommandType = CommandType.StoredProcedure;
+                    query.Parameters.AddWithValue("@nombrecrucero", crucero._nombreCrucero);
+                    query.Parameters.AddWithValue("@compania", crucero._companiaCrucero);
+                    query.Parameters.AddWithValue("@capacidad", crucero._capacidadCrucero);
+                    query.Parameters.AddWithValue("@imagen", "");
                 
-                query.ExecuteNonQuery();
+                    query.ExecuteNonQuery();
                 
-                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
-                SqlDataReader lector = query.ExecuteReader();
-                lector.Close();                
-                con.Close();
-                return 1;
+                    //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                    SqlDataReader lector = query.ExecuteReader();
+                    lector.Close();                
+                    con.Close();
+                    return 1;
+                }
             }
             catch (SqlException ex)
             {                
