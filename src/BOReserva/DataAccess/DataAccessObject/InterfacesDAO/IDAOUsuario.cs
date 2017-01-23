@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BOReserva.DataAccess.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,5 +10,7 @@ namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
     interface IDAOUsuario : IDAO
     {
         String eliminarUsuario(int id);
+
+        String statusUsuario(Entidad e, string status);
     }
 }
