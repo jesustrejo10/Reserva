@@ -77,7 +77,7 @@
                 data: form.serialize(),
                 type: 'POST',
                 success: function (data) {
-                    alert("Se modifico el camarote exitosamente, sera redirigido al listado de cruceros");
+                    alert("Se modifico el Camarote exitosamente, sera redirigido al listado de cruceros");
                     //$('#formmodifyVehicle')[0].reset();
                     var url1 = '/gestion_cruceros/M24_ListarCruceros';
                     var method = 'GET';
@@ -87,7 +87,7 @@
                         {
                             url: url1,
                             type: method,
-                            data: data1,
+                            data: data,
                             success: function (data, textStatus, jqXHR) {
 
                                 $("#contenido").empty();

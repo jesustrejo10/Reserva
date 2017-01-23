@@ -587,14 +587,14 @@ namespace BOReserva.Controllers
             {
                 Command<Entidad> comando = FabricaComando.crearM14ConsultarCamarote(id);
                 Entidad camarote = comando.ejecutar();
-                Camarote CabinaB = (Camarote)camarote;
-                idCabina = CabinaB._id;
-                idFkCabina = CabinaB._fkCabina;
+                Camarote CamaroteB = (Camarote)camarote;
+                idCamarote = camarote._id;
+                idFkCabina = CamaroteB._fkCabina;
                 CGestion_camarote modelovista = new CGestion_camarote();
-                modelovista._cabinaNombre = CabinaB._nombreCabina + "-" + CabinaB._id;
-                modelovista._cantidadCama = CabinaB._cantidadCama;
-                modelovista._tipoCama = CabinaB._tipoCama;
-                modelovista._estatus = CabinaB._estatus;
+                modelovista._cabinaNombre = CamaroteB._nombreCabina + "-" + CamaroteB._id;
+                modelovista._cantidadCama = CamaroteB._cantidadCama;
+                modelovista._tipoCama = CamaroteB._tipoCama;
+                modelovista._estatus = CamaroteB._estatus;
                 return PartialView(modelovista);
             }
             catch (Exception ex)
