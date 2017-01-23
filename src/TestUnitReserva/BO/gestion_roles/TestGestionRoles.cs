@@ -15,6 +15,8 @@ using BOReserva.Controllers.PatronComando;
 using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.DataAccessObject.M13;
+using BOReserva.Models.gestion_roles;
+using BOReserva.Controllers;
 
 namespace TestUnitReserva.BO.gestion_roles
 {
@@ -27,6 +29,7 @@ namespace TestUnitReserva.BO.gestion_roles
         private Permiso mockPermiso;
         private int idAdministrador;
         DAORol daoRol;
+        gestion_rolesController controller;
 
         /// <summary>
         /// Metodo que se ejecuta antes que se ejecute cada prueba
@@ -39,6 +42,7 @@ namespace TestUnitReserva.BO.gestion_roles
             mockIdRol = new Rol(1, "Administrador");
             idAdministrador = 1;
             daoRol = new DAORol();
+            controller = new gestion_rolesController();
 
         }
         /// <summary>
@@ -167,15 +171,29 @@ namespace TestUnitReserva.BO.gestion_roles
             Assert.AreNotEqual(daoRol.consultarPermisosUsuario(34), null);
         }
 
+        //[Test]
+        //public void M13_DAOQuitarPermisoRol()
+        //{
+        //    int idPermiso = 0;
+        //    foreach (var item in mockRolPermiso.listapermisos)
+        //    {
+        //        idPermiso = item._id;
+        //    }
+        //    Assert.AreEqual(daoRol.quitarPermiso(mockRolPermiso._idRol, idPermiso), "1");
+        //}
+
         [Test]
-        public void M13_DAOQuitarPermisoRol()
+        public void M13_DAOValidacionRol()
         {
-            int idPermiso = 0;
-            foreach (var item in mockRolPermiso.listapermisos)
-            {
-                idPermiso = item._id;
-            }
-            Assert.AreEqual(daoRol.quitarPermiso(mockRolPermiso._idRol, idPermiso), "1");
+            Assert.AreNotEqual(daoRol.validacionRol(mockRol._idRol), null);
         }
+
+        //[Test]
+        //public void M13_ControllerAgregarRol()
+        //{
+        //    CRoles rol = new CRoles();
+        //    rol.Nombre_rol = "Rol desde Prueba";
+        //    Assert.AreEqual(controller.agregarrol(rol), "1");
+        //}
     }
 }

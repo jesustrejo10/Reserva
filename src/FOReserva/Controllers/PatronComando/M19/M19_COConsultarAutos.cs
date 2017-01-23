@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using FOReserva.Models.gestion_reserva_automovil;
 
 namespace FOReserva.Controllers.PatronComando.M19
 {
@@ -17,6 +18,9 @@ namespace FOReserva.Controllers.PatronComando.M19
 
         public M19_COConsultarAutos(Entidad _objeto)
         {
+
+            System.Diagnostics.Debug.WriteLine("LLEGA A COCONSULTAR AUTOS");
+            
             this._objeto = _objeto;
         }
 
@@ -24,8 +28,14 @@ namespace FOReserva.Controllers.PatronComando.M19
         {
             try
             {
+
+                System.Diagnostics.Debug.WriteLine("LLEGA A EJECUTAR");
+                CVistaReservaAuto obj = (CVistaReservaAuto)_objeto;
+                System.Diagnostics.Debug.WriteLine("ATRIBUTOS DEL OBJETO ---- idorigen: " + obj._ciudadOrigen + ", iddestino: " + obj._ciudadDestino + ", fechaini: " + obj._fechaini + ", fechafin: " + obj._fechafin + ", horaini: " + obj._horaIni + ", horafin: " + obj._horaFin);
+            
+                
                 IDAOReservaAutomovil reservaAutomovilDao = FabricaDAO.ReservaAutomovilBD();
-                return reservaAutomovilDao.ConsultarAutosPorIdCiudad(this._objeto);
+                return reservaAutomovilDao.ConsultarAutosPorIdCiudades(this._objeto);
 
             }
             catch (NotImplementedException)
