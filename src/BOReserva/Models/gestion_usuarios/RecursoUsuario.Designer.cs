@@ -79,7 +79,7 @@ namespace BOReserva.Models.gestion_usuarios {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Se ha ingresado un argumento con un valor invalido.
+        ///   Busca una cadena traducida similar a Se ha ingresado un argumento con un _idHotel invalido.
         /// </summary>
         internal static string ArgumentoInvalido {
             get {

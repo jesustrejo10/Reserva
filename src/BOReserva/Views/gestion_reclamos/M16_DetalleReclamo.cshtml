@@ -30,12 +30,8 @@
                               <div class="col-md-12">
                                 <div class="col-xs-6">
                                     <label for="detalleReclamo">Descripci&oacuten </label>
-                                    @Html.TextAreaFor(m => m._detalleReclamo, 3, 3, new { @class = "form-control", @id = "detalleReclamo", @style="max-width: 447px ;max-height: 200px;" , @readonly = "readonly" })
+                                    @Html.TextAreaFor(m => m._detalleReclamo, 3, 3, new { @class = "form-control", @id = "detalleReclamo", @readonly = "readonly" })
                                 </div>
-                                <div class="col-xs-6">
-                                    <label for="estadoReclamo">Estado </label>
-                                       @Html.TextBoxFor(m => m._estadoReclamo, null, new { @class = "form-control", @id = "estadoReclamo", @readonly = "readonly" })
-                                 </div>
                               </div>
                             </div>
 
