@@ -751,6 +751,17 @@ namespace BOReserva.DataAccess.Domain
 
         }
 
+        public static Entidad InstanciarPaquete(CPaquete paquete, Boolean estadoPaquete, int id)
+        {
+            return new Paquete(id, paquete._nombrePaquete, paquete._precioPaquete, paquete._idAuto, 
+                               paquete._idRestaurante, paquete._idHabitacion, paquete._idCrucero, 
+                               paquete._idVuelo, paquete._fechaIniAuto, paquete._fechaIniRest, 
+                               paquete._fechaIniHabi, paquete._fechaIniCruc, paquete._fechaIniVuelo, 
+                               paquete._fechaFinAuto, paquete._fechaFinRest, paquete._fechaFinHabi, 
+                               paquete._fechaFinCruc, paquete._fechaFinVuelo, 
+                               estadoPaquete);
+        }
+
         #endregion
     }
 }

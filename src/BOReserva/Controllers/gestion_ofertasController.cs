@@ -174,23 +174,44 @@ namespace BOReserva.Controllers
         public ActionResult M11_ModificarPaquete(String paqueteIdStr)
         {
             int paqueteId = Int32.Parse(paqueteIdStr);
-            /*Command<Entidad> comando = FabricaComando.crearM11ConsultarPaquete(paqueteId);
-            Entidad paquete = comando.ejecutar();
-            Paquete paquetebuscado = (Paquete)paquete;
-            idpaquete = paquetebuscado._id;
-            CPaquete modelopaquete = new CPaquete();
-            modelopaquete._idAuto = paquetebuscado._idAuto;
-            modelopaquete._idCrucero = paquetebuscado._idCrucero;
-            modelopaquete._idHabitacion = paquetebuscado._idHotel;
-            modelopaquete._idRestaurante = paquetebuscado._idRestaurante;*/
+            Command<Entidad> comando = FabricaComando.crearM11ConsultarPaquete(paqueteId);
+            Entidad ePaquete = comando.ejecutar();
+            Paquete paquete = (Paquete)ePaquete;
+            String disponibilidad = "Inactivo";
+            if (paquete._estadoPaquete == true) { disponibilidad = "Activo"; } else { disponibilidad = "Inactivo"; }
+
+            idpaquete = paqueteId;
+
+            CPaquete visualPaquete = new CPaquete();
+
+            visualPaquete._idPaquete = paquete._idPaquete;
+            visualPaquete._nombrePaquete = paquete._nombrePaquete;
+            visualPaquete._precioPaquete = paquete._precioPaquete;
+            visualPaquete._idAuto = paquete._idAuto;
+            visualPaquete._idRestaurante = paquete._idRestaurante;
+            visualPaquete._idHabitacion = paquete._idHotel;
+            visualPaquete._idCrucero = paquete._idCrucero;
+            visualPaquete._idVuelo = paquete._idVuelo;
+
+            visualPaquete._fechaIniAuto = paquete._fechaIniAuto;
+            visualPaquete._fechaIniRest = paquete._fechaIniRest;
+            visualPaquete._fechaIniHabi = paquete._fechaIniHotel;
+            visualPaquete._fechaIniCruc = paquete._fechaIniCruc;
+            visualPaquete._idVuelo = paquete._idVuelo;
+
+
+            Debug.WriteLine("RELLENA");
+
+            CPaquete cpaquete = new CPaquete();
             //todavía falta
 
             //Comentar estas 4 líneas siguientes que funcionaban antes de esta entrega
             //Descimentándolas mientras se adapta a patrones
-            manejadorSQL sql = new manejadorSQL();
+            /*manejadorSQL sql = new manejadorSQL();
             CPaquete paquete;
             paquete = sql.detallePaquete(paqueteId);
-            return PartialView(paquete);
+            return PartialView(paquete);*/
+            return PartialView(visualPaquete); 
             //
         }
 
@@ -615,9 +636,9 @@ namespace BOReserva.Controllers
                                           String fiCrucero, String ffCrucero, String fiRestaurante, String ffRestaurante,
                                           String fiVuelo, String ffVuelo, String precio, int idPaquete)
         {
-            manejadorSQL sql = new manejadorSQL();
+            //manejadorSQL sql = new manejadorSQL();
             CPaquete paquete = new CPaquete();
-            paquete._idPaquete = idPaquete;
+            paquete._idPaquete = idpaquete;
             paquete._nombrePaquete = nombrePaq;
             if (idAuto == "00")
                 idAuto = null;
@@ -681,11 +702,21 @@ namespace BOReserva.Controllers
             else
                 paquete._fechaFinVuelo = DateTime.Parse(ffVuelo);
 
-            paquete._idAuto = idAuto;
+            //Así estaba antes de esta entrega
+            /*paquete._idAuto = idAuto;
             paquete._precioPaquete = float.Parse(precio);
             sql.modificarPaquete(paquete);
 
-            return Json(true);
+            return Json(true);*/
+
+            //Nuevo
+            Boolean disponibilidad = false;
+
+            Entidad modificarPaquete = FabricaEntidad.InstanciarPaquete(paquete, disponibilidad, idpaquete);
+            //con la fabrica instancie a la oferta.
+            Command<String> comando = FabricaComando.crearM11ModificarPaquetes(modificarPaquete, idpaquete);
+            String agrego_si_no = comando.ejecutar();
+            return (Json(agrego_si_no));
         }
 
         /// <summary>

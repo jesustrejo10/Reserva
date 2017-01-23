@@ -2,6 +2,7 @@ using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
 using BOReserva.Models.gestion_ofertas;
+using BOReserva.Models.gestion_restaurantes;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,6 +10,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
+using BOReserva.Models.gestion_automoviles;
 
 namespace BOReserva.DataAccess.DataAccessObject.M11
 {
@@ -36,8 +38,8 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
                                                                                 //base de datos
 
             SqlDataReader lector = null;  //La clase SqlDataReader ofrece una manera de leer un
-                                          //flujo de filas de solo avance desde una base de 
-                                          //datos de SQL Server.
+                                         //flujo de filas de solo avance desde una base de 
+                                        //datos de SQL Server.
             try
             {
                 conexion.Open();
@@ -46,11 +48,11 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
                                                              //a la conexión SqlConnection.
                                                              //Se usa SqlCommand para las instrucciones que se 
                                                              //ejecutan en una base de datos de SQL Server.
-                query.CommandText = "INSERT INTO Paquete (paq_nombre, paq_precio, paq_fk_automovil," +
-                " paq_fk_restaurante, paq_fk_hotel, paq_fk_crucero, paq_fk_vuelo, paq_fechaInicio_automovil," +
-                " paq_fechaInicio_restaurante, paq_fechaInicio_crucero, paq_fechaInicio_hotel," +
-                " paq_fechaInicio_boleto, paq_fechaFin_automovil, paq_fechaFin_restaurante, paq_fechaFin_hotel," +
-                " paq_fechaFin_crucero, paq_fechaFin_boleto, paq_estado) VALUES  (@pn, @pp, @pfa, @pfr, @pfh," +
+                query.CommandText = "INSERT INTO Paquete (paq_nombre, paq_precio, paq_fk_automovil,"+
+                " paq_fk_restaurante, paq_fk_hotel, paq_fk_crucero, paq_fk_vuelo, paq_fechaInicio_automovil,"+
+                " paq_fechaInicio_restaurante, paq_fechaInicio_crucero, paq_fechaInicio_hotel,"+
+                " paq_fechaInicio_boleto, paq_fechaFin_automovil, paq_fechaFin_restaurante, paq_fechaFin_hotel,"+
+                " paq_fechaFin_crucero, paq_fechaFin_boleto, paq_estado) VALUES  (@pn, @pp, @pfa, @pfr, @pfh,"+
                 " @pfc, @pfv, @fia, @fir, @fic, @fih, @fib, @ffa, @ffr, @ffh, @ffc, @ffb, @pe);";
 
                 query.Parameters.AddWithValue("@pn", paquete._nombrePaquete);
@@ -75,12 +77,12 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
                 lector = query.ExecuteReader();               //El método ExecuteReader() envía la propiedad 
                                                               //CommandText a Connection y crea un objeto 
                                                               //SqlDataReader.
-
+                                                              
                 lector.Close();   //Se cierra el lector
                 conexion.Close(); //Se cierra la conexión
                 return 1; //Este método retorna el valor 1 si se pudo agregar el paquete a la tabla Paquete de la 
                           //base de datos.
-
+                                                              
             }
             catch (SqlException ex)
             {
@@ -114,8 +116,8 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
                 conexion.Close();
                 return 5;
             }
-
-
+            
+            
         }
 
         /// <summary>
@@ -138,8 +140,8 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
                 Debug.WriteLine("CMD.READER");
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
+                { 
+                      while (reader.Read())
                     {
                         String estado = reader["estado"].ToString();
                         bool estadoPaquete;
@@ -149,12 +151,12 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
                             estadoPaquete = false;
                         /*var estadovar = reader["estado"];
                         Boolean disponibilidad = Convert.ToBoolean(estadovar);*/
-
-                        paquete = FabricaEntidad.InstanciarPaquete(Int32.Parse(reader["idPaquete"].ToString()),
-                                                                    reader["nombrePaquete"].ToString(),
+                      
+                        paquete =  FabricaEntidad.InstanciarPaquete(Int32.Parse(reader["idPaquete"].ToString()), 
+                                                                    reader["nombrePaquete"].ToString(), 
                                                                     float.Parse(reader["precio"].ToString()),
                                                                     estadoPaquete);
-
+                          
                         listaPaquetes.Add(paquete);
                     }
                 }
@@ -162,9 +164,9 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
                 conexion.Close();
                 Debug.WriteLine("RETORNANDO LA LISTA DE PAQUETES");
                 return listaPaquetes;
-
-            }
-
+                
+                }
+            
             catch (SqlException ex)
             {
                 Debug.WriteLine(ex.ToString());
@@ -172,8 +174,333 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
                 Debug.WriteLine("UNA EXCEPCIÓN");
                 return null;
             }
+            
+        }
+
+
+        //Método para consultar los cruceros para llevarlos al select list de la vista agregar paquete
+        public List<CConsultar> listarCrucerosM11()
+        {
+            List<CConsultar> listcruceros = new List<CConsultar>();
+            SqlConnection conexion = Connection.getInstance(_connexionString);  //Para obtener la conexión a la 
+                                                                                //base de datos
+            try
+            {
+                conexion.Open();
+                SqlCommand query = conexion.CreateCommand();
+                query.CommandText = "SELECT * FROM Crucero";
+                SqlDataReader lector = query.ExecuteReader();
+                while (lector.Read())
+                {
+                    CConsultar consulta = new CConsultar();
+                    consulta._id = Int32.Parse(lector["cru_id"].ToString());
+                    consulta._nombre = lector["cru_nombre"].ToString();
+                    listcruceros.Add(consulta);
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return listcruceros;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
 
         }
+
+        //Método modulo 11 para consultar todos los hoteles
+        public List<CConsultar> listarHotelesM11()
+        {
+            SqlConnection conexion = Connection.getInstance(_connexionString);  //Para obtener la conexión a la 
+                                                                                //base de datos
+            try
+            {
+                List<CConsultar> listHoteles = new List<CConsultar>();
+                conexion.Open();
+                SqlCommand query = conexion.CreateCommand();
+                query.CommandText = "SELECT * FROM Hotel";
+                SqlDataReader lector = query.ExecuteReader();
+                while (lector.Read())
+                {
+                    CConsultar consulta = new CConsultar();
+                    consulta._id = Int32.Parse(lector["hot_id"].ToString());
+                    consulta._nombre = lector["hot_nombre"].ToString();
+                    listHoteles.Add(consulta);
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return listHoteles;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+
+        }
+
+        //Método modulo 11 para consultar todos los vuelos
+        public List<CConsultar> listarVuelosM11()
+        {
+            SqlConnection conexion = Connection.getInstance(_connexionString);  //Para obtener la conexión a la 
+                                                                                //base de datos
+            try
+            {
+                List<CConsultar> listVuelos = new List<CConsultar>();
+                conexion.Open();
+                SqlCommand query = conexion.CreateCommand();
+                query.CommandText =
+                    "SELECT v.vue_id, v.vue_codigo, l1.lug_nombre, l2.lug_nombre " +
+                    "FROM vuelo v, ruta r, lugar l1, lugar l2 " +
+                    "WHERE v.vue_fk_ruta = r.rut_id and r.rut_fk_lugar_origen = l1.lug_id and r.rut_fk_lugar_destino = l2.lug_id";
+                SqlDataReader lector = query.ExecuteReader();
+                var columns = new List<string>();
+                for (int i = 0; i < lector.FieldCount; i++)
+                {
+                    columns.Add(lector.GetName(i));
+                }
+                while (lector.Read())
+                {
+                    CConsultar consulta = new CConsultar();
+                    consulta._id = Int32.Parse(lector["vue_id"].ToString());
+                    consulta._codigoVuelo = lector["vue_codigo"].ToString();
+                    consulta._nombreSalida = lector["lug_nombre"].ToString();
+                    consulta._nombreLlegada = lector.GetValue(3).ToString();
+                    listVuelos.Add(consulta);
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return listVuelos;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+
+        }
+
+        //Método para la consulta de todos los restaurantes, retornando una lista de modelos de restaurante.
+        public List<CConsultar> consultarRestaurante()
+        {
+            SqlConnection conexion = Connection.getInstance(_connexionString);  //Para obtener la conexión a la 
+                                                                               //base de datos
+            try
+            {
+                List<CConsultar> lista = new List<CConsultar>();
+                //Inicializo la conexion con el string de conexion
+                //INTENTO abrir la conexion
+                conexion.Open();
+                //uso el SqlCommand para realizar los querys
+                SqlCommand query = conexion.CreateCommand();
+                //ingreso la orden del query
+                query.CommandText = "SELECT * FROM Restaurante";
+                SqlDataReader lector = query.ExecuteReader(); //creo un lector sql para la respuesta de la 
+                                                              //ejecucion del comando anterior 
+                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un 
+                //procedimiento de la bd
+                while (lector.Read())
+                {
+                    CConsultar consulta = new CConsultar();
+                    consulta._id = Int32.Parse(lector["rst_id"].ToString());
+                    consulta._nombre = lector["rst_nombre"].ToString();
+                    lista.Add(consulta);   
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return lista;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+        }
+
+        public List<CVisualizarAutomovil> consultarAutos()
+        {
+            SqlConnection conexion = Connection.getInstance(_connexionString);  //Para obtener la conexión a la 
+            //base de datos
+            try
+            {
+                List<CVisualizarAutomovil> listAutos = new List<CVisualizarAutomovil>();
+                conexion.Open();
+                SqlCommand query = conexion.CreateCommand();
+                query.CommandText = "SELECT * FROM Automovil";
+                SqlDataReader lector = query.ExecuteReader();
+                while (lector.Read())
+                {
+                    CVisualizarAutomovil consulta = new CVisualizarAutomovil();
+                    consulta._matricula = lector["aut_matricula"].ToString();
+                    consulta._fabricante = lector["aut_fabricante"].ToString();
+                    consulta._modelo = lector["aut_modelo"].ToString();
+                    listAutos.Add(consulta);
+                }
+                //cierro el lector
+                lector.Close();
+                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
+                conexion.Close();
+                return listAutos;
+            }
+            catch (SqlException e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+            catch (Exception e)
+            {
+                conexion.Close();
+                Debug.WriteLine("Exception caught: {0}", e);
+                //throw e;
+                return null;
+            }
+
+        }
+        /*
+        int IDAOOferta.Modificar(Entidad e, int idPaquete)
+        {
+            Debug.WriteLine("LLEGÓ A MODIFICARPAQUETE");
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            Paquete paquete = (Paquete)e;
+
+            Debug.WriteLine("LLEGÓ A MODIFICARPAQUETE" + idPaquete);
+            Debug.WriteLine("LLEGÓ A MODIFICAROFERTA" + paquete._nombrePaquete);
+
+            try
+            {
+                conexion.Open();
+                SqlCommand cmd = new SqlCommand("[dbo].[M11_ModificarPaquete]", conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                Debug.WriteLine("HIZO CONEXIÓN EN VISUAL");
+
+                SqlParameter ParId = new SqlParameter();
+                ParId.ParameterName = "@paq_id";
+                ParId.SqlDbType = SqlDbType.Int;
+                ParId.Value = idPaquete;
+                cmd.Parameters.Add(ParId);
+
+
+                SqlParameter ParNombre = new SqlParameter();
+                ParNombre.ParameterName = "@paq_nombre";
+                ParNombre.SqlDbType = SqlDbType.VarChar;
+                ParNombre.Value = paquete._nombrePaquete;
+                cmd.Parameters.Add(ParNombre);
+
+                SqlParameter ParFechaIni = new SqlParameter();
+                ParFechaIni.ParameterName = "@ofe_fechaInicio";
+                ParFechaIni.SqlDbType = SqlDbType.Date;
+                ParFechaIni.Value = oferta._fechaIniOferta.ToString("yyyy-MM-dd");
+                cmd.Parameters.Add(ParFechaIni);
+
+                SqlParameter ParFechaFin = new SqlParameter();
+                ParFechaFin.ParameterName = "@ofe_fechaFin";
+                ParFechaFin.SqlDbType = SqlDbType.Date;
+                ParFechaFin.Value = oferta._fechaFinOferta.ToString("yyyy-MM-dd");
+                cmd.Parameters.Add(ParFechaFin);
+
+                SqlParameter ParPorcentaje = new SqlParameter();
+                ParPorcentaje.ParameterName = "@ofe_porcentaje";
+                ParPorcentaje.SqlDbType = SqlDbType.Float;
+                ParPorcentaje.Value = oferta._porcentajeOferta;
+                cmd.Parameters.Add(ParPorcentaje);
+
+                SqlParameter ParEstado = new SqlParameter();
+                ParEstado.ParameterName = "@ofe_estado";
+                ParEstado.SqlDbType = SqlDbType.Bit; 
+
+                if (oferta._estadoOferta == true)
+                    ParEstado.Value = 1;
+                else
+                    ParEstado.Value = 0;
+
+                cmd.Parameters.Add(ParEstado);
+
+                Debug.WriteLine("HIZO LA PARTED DE PARÁMETRO");
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    cmd.Dispose();
+                    conexion.Close();
+                    return 1;
+                }
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine("Ocurrio un SqlException");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return 0;
+            }
+            catch (NullReferenceException ex)
+            {
+                Debug.WriteLine("Ocurrio una NullReferenceException");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return 0;
+            }
+            catch (ArgumentNullException ex)
+            {
+                Debug.WriteLine("Ocurrio una ArgumentNullException");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Ocurrio una Exception");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return 0;
+            } 
+        }*/
 
         /// <summary>
         /// Cambia Dsiponibilidad de un Paquete en la Base de Datos.
@@ -326,4 +653,5 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
             }
         }
     }
+
 }
