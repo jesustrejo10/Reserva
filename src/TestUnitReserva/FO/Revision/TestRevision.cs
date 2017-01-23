@@ -15,8 +15,7 @@ namespace TestUnitReserva.FO.Revision
     using EntidadReferenciaValorada = FOReserva.DataAccess.Domain.ReferenciaValorada;
     using EntidadRestaurante = FOReserva.DataAccess.Domain.Restaurante;
     using EntidadHotel = FOReserva.DataAccess.Domain.Hotel;
-    using EntidadUsuario = FOReserva.DataAccess.Domain.Usuario;
-    using static RevisionValoracion;
+    using EntidadUsuario = FOReserva.DataAccess.Domain.Usuario;    
 
     [TestClass]
     public class TestRevision

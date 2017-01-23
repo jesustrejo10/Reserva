@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using static FOReserva.DataAccess.Domain.Revision;
 
 namespace FOReserva.DataAccess.Domain
 {

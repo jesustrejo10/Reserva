@@ -6,8 +6,7 @@ using FOReserva.DataAccess.Domain;
 using System.Data;
 
 namespace FOReserva.DataAccess.DataAccessObject.M20
-{
-    using static Revision;
+{    
     using Hotel = Domain.Hotel;
     using Restaurante = Domain.Restaurante;
     using Usuario = Domain.Usuario;
