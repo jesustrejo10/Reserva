@@ -16,7 +16,6 @@ namespace BOReserva.Controllers.PatronComando.M09
     public class M09_COModificarHotel : Command<String>
     {
         Hotel _hotel;
-        int _idmodificar;
         /// <summary>
         /// Constructor de la clase
         /// </summary>
@@ -33,16 +32,16 @@ namespace BOReserva.Controllers.PatronComando.M09
         public override String ejecutar(){
             try
             {
-            IDAO daoHotel = FabricaDAO.instanciarDaoHotel();
-            Entidad test = daoHotel.Modificar(_hotel);
-            Hotel hotel = (Hotel)test;
-            //Actualice un Hotel en BD. necesito refrescarlo en Cache
-            Cache.actualizarMapHoteles(hotel);
-            return "Se modifico el hotel exitosamente, sera redirigido al listado de hoteles";
-        }
+                IDAO daoHotel = FabricaDAO.instanciarDaoHotel();
+                Entidad test = daoHotel.Modificar(_hotel);
+                Hotel hotel = (Hotel)test;
+                //Actualice un Hotel en BD. necesito refrescarlo en Cache
+                Cache.actualizarMapHoteles(hotel);
+                return "Se modifico el hotel exitosamente, sera redirigido al listado de hoteles";
+            }
             catch (ReservaExceptionM09 ex)
             {
-                throw ex;
+                return (ex.Codigo);
             }
         }
 
