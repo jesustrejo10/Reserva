@@ -403,8 +403,8 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
             }
 
         }
-        /*
-        int IDAOOferta.Modificar(Entidad e, int idPaquete)
+        
+        int IDAOPaquete.Modificar(Entidad e, int idPaquete)
         {
             Debug.WriteLine("LLEGÓ A MODIFICARPAQUETE");
             SqlConnection conexion = Connection.getInstance(_connexionString);
@@ -434,29 +434,106 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
                 ParNombre.Value = paquete._nombrePaquete;
                 cmd.Parameters.Add(ParNombre);
 
-                SqlParameter ParFechaIni = new SqlParameter();
-                ParFechaIni.ParameterName = "@ofe_fechaInicio";
-                ParFechaIni.SqlDbType = SqlDbType.Date;
-                ParFechaIni.Value = oferta._fechaIniOferta.ToString("yyyy-MM-dd");
-                cmd.Parameters.Add(ParFechaIni);
+                SqlParameter ParPrecio = new SqlParameter();
+                ParPrecio.ParameterName = "@paq_precio";
+                ParPrecio.SqlDbType = SqlDbType.Float;
+                ParPrecio.Value = paquete._precioPaquete;
+                cmd.Parameters.Add(ParPrecio);
 
-                SqlParameter ParFechaFin = new SqlParameter();
-                ParFechaFin.ParameterName = "@ofe_fechaFin";
-                ParFechaFin.SqlDbType = SqlDbType.Date;
-                ParFechaFin.Value = oferta._fechaFinOferta.ToString("yyyy-MM-dd");
-                cmd.Parameters.Add(ParFechaFin);
+                SqlParameter ParFkAuto = new SqlParameter();
+                ParFkAuto.ParameterName = "@paq_fk_automovil";
+                ParFkAuto.SqlDbType = SqlDbType.VarChar;
+                ParFkAuto.Value = paquete._idAuto;
+                cmd.Parameters.Add(ParFkAuto);
 
-                SqlParameter ParPorcentaje = new SqlParameter();
-                ParPorcentaje.ParameterName = "@ofe_porcentaje";
-                ParPorcentaje.SqlDbType = SqlDbType.Float;
-                ParPorcentaje.Value = oferta._porcentajeOferta;
-                cmd.Parameters.Add(ParPorcentaje);
+                SqlParameter ParFkRest = new SqlParameter();
+                ParFkRest.ParameterName = "@paq_fk_restaurante";
+                ParFkRest.SqlDbType = SqlDbType.Int;
+                ParFkRest.Value = paquete._idAuto;
+                cmd.Parameters.Add(ParFkRest);
 
+                SqlParameter ParFkHot = new SqlParameter();
+                ParFkHot.ParameterName = "@paq_fk_hotel";
+                ParFkHot.SqlDbType = SqlDbType.Int;
+                ParFkHot.Value = paquete._idAuto;
+                cmd.Parameters.Add(ParFkHot);
+
+                SqlParameter ParFkVuelo = new SqlParameter();
+                ParFkVuelo.ParameterName = "@paq_fk_vuelo";
+                ParFkVuelo.SqlDbType = SqlDbType.Int;
+                ParFkVuelo.Value = paquete._idAuto;
+                cmd.Parameters.Add(ParFkVuelo);
+
+                SqlParameter ParFechaIniAuto = new SqlParameter();
+                ParFechaIniAuto.ParameterName = "@paq_fechaInicio_automovil";
+                ParFechaIniAuto.SqlDbType = SqlDbType.Date;
+                ParFechaIniAuto.Value = ((DateTime) paquete._fechaIniAuto).ToString("yyyy-MM-dd");
+                cmd.Parameters.Add(ParFechaIniAuto);
+
+
+                SqlParameter ParFechaFinAuto = new SqlParameter();
+                ParFechaFinAuto.ParameterName = "@paq_fechaFin_automovil";
+                ParFechaFinAuto.SqlDbType = SqlDbType.Date;
+                ParFechaFinAuto.Value = ((DateTime)paquete._fechaFinAuto).ToString("yyyy-MM-dd");
+                cmd.Parameters.Add(ParFechaFinAuto);
+
+                SqlParameter ParFechaIniRest = new SqlParameter();
+                ParFechaIniRest.ParameterName = "@paq_fechaInicio_restaurante";
+                ParFechaIniRest.SqlDbType = SqlDbType.Date;
+                ParFechaIniRest.Value = ((DateTime)paquete._fechaIniRest).ToString("yyyy-MM-dd");
+                cmd.Parameters.Add(ParFechaIniRest);
+
+
+                SqlParameter ParFechaFinRest = new SqlParameter();
+                ParFechaFinRest.ParameterName = "@paq_fechaFin_restaurante";
+                ParFechaFinRest.SqlDbType = SqlDbType.Date;
+                ParFechaFinRest.Value = ((DateTime)paquete._fechaFinRest).ToString("yyyy-MM-dd");
+                cmd.Parameters.Add(ParFechaFinRest);
+
+                SqlParameter ParFechaIniHot = new SqlParameter();
+                ParFechaIniHot.ParameterName = "@paq_fechaInicio_hotel";
+                ParFechaIniHot.SqlDbType = SqlDbType.Date;
+                ParFechaIniHot.Value = ((DateTime)paquete._fechaIniHotel).ToString("yyyy-MM-dd");
+                cmd.Parameters.Add(ParFechaIniHot);
+
+
+                SqlParameter ParFechaFinHot = new SqlParameter();
+                ParFechaFinHot.ParameterName = "@paq_fechaFin_hotel";
+                ParFechaFinHot.SqlDbType = SqlDbType.Date;
+                ParFechaFinHot.Value = ((DateTime)paquete._fechaFinHotel).ToString("yyyy-MM-dd");
+                cmd.Parameters.Add(ParFechaFinHot);
+
+                SqlParameter ParFechaIniCruc = new SqlParameter();
+                ParFechaIniCruc.ParameterName = "@paq_fechaInicio_crucero";
+                ParFechaIniCruc.SqlDbType = SqlDbType.Date;
+                ParFechaIniCruc.Value = ((DateTime)paquete._fechaIniCruc).ToString("yyyy-MM-dd");
+                cmd.Parameters.Add(ParFechaIniCruc);
+
+
+                SqlParameter ParFechaFinCruc = new SqlParameter();
+                ParFechaFinCruc.ParameterName = "@paq_fechaFin_crucero";
+                ParFechaFinCruc.SqlDbType = SqlDbType.Date;
+                ParFechaFinCruc.Value = ((DateTime)paquete._fechaFinCruc).ToString("yyyy-MM-dd");
+                cmd.Parameters.Add(ParFechaFinCruc);
+
+                SqlParameter ParFechaIniBole = new SqlParameter();
+                ParFechaIniBole.ParameterName = "@paq_fechaInicio_boleto";
+                ParFechaIniBole.SqlDbType = SqlDbType.Date;
+                ParFechaIniBole.Value = ((DateTime)paquete._fechaIniVuelo).ToString("yyyy-MM-dd");
+                cmd.Parameters.Add(ParFechaIniBole);
+
+
+                SqlParameter ParFechaFinBole = new SqlParameter();
+                ParFechaFinBole.ParameterName = "@paq_fechaFin_boleto";
+                ParFechaFinBole.SqlDbType = SqlDbType.Date;
+                ParFechaFinBole.Value = ((DateTime)paquete._fechaFinVuelo).ToString("yyyy-MM-dd");
+                cmd.Parameters.Add(ParFechaFinBole);
+                
                 SqlParameter ParEstado = new SqlParameter();
                 ParEstado.ParameterName = "@ofe_estado";
                 ParEstado.SqlDbType = SqlDbType.Bit; 
 
-                if (oferta._estadoOferta == true)
+                if (paquete._estadoPaquete == true)
                     ParEstado.Value = 1;
                 else
                     ParEstado.Value = 0;
@@ -500,7 +577,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
                 conexion.Close();
                 return 0;
             } 
-        }*/
+        }
 
         /// <summary>
         /// Cambia Dsiponibilidad de un Paquete en la Base de Datos.
@@ -614,7 +691,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
                     Debug.WriteLine("CMD.READER EN CONSULTAR");
                     while (reader.Read())
                     {
-                        /*
+                        
                         var fechaIniauto = reader["fechaIn_auto"];
                         var fechaFinauto = reader["fechaFin_auto"];
                         var fechaInirest = reader["fechaIn_rest"];
@@ -623,9 +700,9 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
                         var fechaFincrucero = reader["fechaFin_crucero"];
                         var fechaIniboleto = reader["fechaIn_boleto"];
                         var fechaFinboleto = reader["fechaFin_boleto"];
-                        var estadovar = reader["estado"];
+                        //var estadovar = reader["estado"];
 
-                        DateTime fechaIauto = Convert.ToDateTime(fechaIniauto).Date;
+                        /*DateTime fechaIauto = Convert.ToDateTime(fechaIniauto).Date;
                         DateTime fechaFauto = Convert.ToDateTime(fechaFinauto).Date;
                         DateTime fechaIrest = Convert.ToDateTime(fechaInirest).Date;
                         DateTime fechaFrest = Convert.ToDateTime(fechaFinrest).Date;

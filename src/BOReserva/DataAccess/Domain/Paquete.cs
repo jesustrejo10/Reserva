@@ -65,7 +65,9 @@ namespace BOReserva.DataAccess.Domain
 
         // Declara una propiedad _estadoPaquete de tipo bool 
         //_estadoPaquete nos indica si el paquete está activo o no
-        public bool _estadoPaquete { get; set; } 
+        public bool _estadoPaquete { get; set; }
+
+        public int _fkOferta { get; set; }
 
         //Constructor de Paquete
        public Paquete (int idpaquete, String nombrepaquete, float preciopaquete, String idauto, int? idrestaurante,
@@ -135,5 +137,7 @@ namespace BOReserva.DataAccess.Domain
            this._estadoPaquete = estadoPaquete;
 
        }
+
+       
     }
 }

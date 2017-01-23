@@ -14,5 +14,7 @@ namespace BOReserva.DataAccess.DataAccessObject.InterfacesDAO
         List<Entidad> ConsultarTodos();
 
         String disponibilidadPaquete(Entidad e, int disponibilidad);
+
+        int Modificar(Entidad e, int id);
     }
 }
