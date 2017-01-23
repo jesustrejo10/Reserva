@@ -746,7 +746,6 @@
     <Content Include="Content\dist\js\demo.js" />
     <Content Include="Content\dist\js\pages\dashboard.js" />
     <Content Include="Content\dist\js\pages\dashboard2.js" />
-    <Content Include="Content\Gif\loader.gif" />
     <Content Include="Content\M24_css\style_module.css" />
     <Content Include="Content\Preloader_2.gif" />
     <Content Include="Content\themes\base\accordion.css" />
