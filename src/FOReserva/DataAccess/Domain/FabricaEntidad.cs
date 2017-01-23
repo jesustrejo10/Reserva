@@ -1,3 +1,4 @@
+
 ﻿using FOReserva.Models;
 using FOReserva.Models.Reclamos;
 using System;
@@ -15,7 +16,7 @@ namespace FOReserva.DataAccess.Domain
     public class FabricaEntidad
     {
 
-        public static List<Entidad> asignarListaDeEntidades()
+         public static List<Entidad> asignarListaDeEntidades()
         {
             return new List<Entidad>();
         }
@@ -70,7 +71,7 @@ namespace FOReserva.DataAccess.Domain
             return new List<CReserva_Autos_Perfil>();
         }
 
-        
+
 
 
         public static CReservaAutomovil inicializarReserva(string fecha_ini, string fecha_fin, string horario_ini,
@@ -125,7 +126,7 @@ namespace FOReserva.DataAccess.Domain
 
         public static CAutomovil inicializarAutomovil(string matricula, string modelo, string fabricante)
         {
-            return new CAutomovil(matricula, modelo, fabricante); 
+            return new CAutomovil(matricula, modelo, fabricante);
         }
 
         public static CAutomovil inicializarAutomovil(string matricula, string modelo, string fabricante, string tipo, string color, string transmision, int fk_ciudad, double precioAlquiler, int anio, int cantPasajeros, int disponibilidad)
@@ -136,6 +137,11 @@ namespace FOReserva.DataAccess.Domain
         public static CAutomovil inicializarAutomovil(string matricula)
         {
             return new CAutomovil(matricula);
+        }
+
+        public static CAutomovil inicializarAutomovil(string matricula, string modelo, string fabricante, string tipo, string color, string transmision, int fk_ciudad, double precioAlquiler, int anio, int cantPasajeros, int disponibilidad, string fechaini, string fechafin, string horaini, string horafin, int ciudadorigen, int ciudaddestino)
+        {
+            return new CAutomovil(matricula, modelo, fabricante, tipo, color, transmision, fk_ciudad, precioAlquiler, anio, cantPasajeros, disponibilidad, fechaini, fechafin, horaini, horafin, ciudadorigen, ciudaddestino);
         }
 
         public static Entidad InstanciarPais(int id, String nombre)
@@ -167,5 +173,51 @@ namespace FOReserva.DataAccess.Domain
             return new ReservaCrucero(cantidadPasajeros, usuario, crucero, ruta, fechaInicio, status);
         }
         #endregion
+
+
+        #region M14_Registro Usuario
+        public static Entidad InstanciarUsuario(String nombre, String apellido, String correo, String clave,
+                                                int pregunta1, String respuesta1, int pregunta2, String respuesta2, int pregunta3, String respuesta3)
+        {
+
+            return new Usuario1(nombre, apellido, correo, clave, pregunta1, respuesta1, pregunta2, respuesta2, pregunta3, respuesta3);
+        }
+
+        public static Entidad InstanciarUsuario(String nombre, String apellido, String correo, String clave)
+        {
+
+            return new Usuario1(nombre, apellido, correo, clave);
+        }
+
+        public static Entidad InstanciarUsuario(String nombre, String apellido, String correo, String codigoArea, String telefono, String genero)
+        {
+
+            return new Usuario1(nombre, apellido, correo, codigoArea, telefono, genero);
+        }
+
+        public static Entidad InstanciarUsuario(String correo)
+        {
+
+            return new Usuario1(0, null, null, null, null, null, correo, null);
+        }
+
+        public static Entidad InstanciarUsuario(Usuario1 model)
+        {
+            int id = model.id;
+            String nombre = model.nombre;
+            String apellido = model.apellido;
+            String clave0 = model.clave0;
+            String clave1 = model.clave1;
+            String correo = model.correo;
+            String genero = model.genero;
+            String estado = model.estado;
+            String telefono = model.telefono;
+            String codigo_area = model.codigo_area;
+
+            return new Usuario1(id, nombre, apellido, codigo_area, telefono, genero, correo, clave0);
+        }
+
+        #endregion
     }
 }
+

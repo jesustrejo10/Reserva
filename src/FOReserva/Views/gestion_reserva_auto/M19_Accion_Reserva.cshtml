@@ -1,20 +1,20 @@
-﻿@model FOReserva.Models.Autos.CReserva_Autos_Perfil
+﻿@model FOReserva.Models.gestion_reserva_automovil.CAutomovil
 @{
     ViewBag.Title = "Confirma_Reserva";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@if (Model == null)
+@if (Model._matricula == null)
 {
     <div class="row">
-            <center><h1><i class="fa fa-exclamation-circle green" aria-hidden="true"></i> Fallo de Reserva</h1></center>
+        <center><h1><i class="fa fa-exclamation-circle green" aria-hidden="true"></i> Fallo de Reserva</h1></center>
     </div>
 }
 else
 {
-     <div class="row">
-            <center><h1><i class="fa fa-check-circle orange" aria-hidden="true"></i> Reserva Exitosa </h1></center>
-     </div>
+    <div class="row">
+        <center><h1><i class="fa fa-check-circle orange" aria-hidden="true"></i> Reserva Exitosa </h1></center>
+    </div>
 }
 
-        
+

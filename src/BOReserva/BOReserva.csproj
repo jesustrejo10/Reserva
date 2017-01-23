@@ -228,6 +228,7 @@
     <Compile Include="Controllers\PatronComando\M03\M03_COConsultarDestinos.cs" />
     <Compile Include="Controllers\PatronComando\M03\M03_CODeshabilitarRuta.cs" />
     <Compile Include="Controllers\PatronComando\M03\M03_COHabilitarRuta.cs" />
+    <Compile Include="Controllers\PatronComando\M03\M03_COVisualizarRutas.cs" />
     <Compile Include="Controllers\PatronComando\M03\M03_COListarLugares.cs" />
     <Compile Include="Controllers\PatronComando\M03\M03_COModificarRutacs.cs" />
     <Compile Include="Controllers\PatronComando\M03\M03_COMostrarRuta.cs" />
@@ -336,11 +337,13 @@
     <Compile Include="Controllers\PatronComando\M05\M05_COAgregarPasajero.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COAgregarCamarote.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COConsultarCabina.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COConsultarCamarote.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COModificarCabina.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COAgregarItinerario.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COConsultarCrucero.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COListarRutasCrucero.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COListarRutasRutas.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COModificarCamarote.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COModificarCrucero.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarCamarote.cs" />
     <Compile Include="Controllers\PatronComando\M12\M12_COAgregarUsuario.cs" />
@@ -1771,9 +1774,6 @@
     <Content Include="Views\gestion_cruceros\M24_ModificarCabina.cshtml" />
     <Content Include="Views\gestion_cruceros\M24_ModificarCrucero.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarComidaVuelo.cshtml" />
-    <Content Include="Views\gestion_restaurantes\gestion_reclamos\M16_AgregarReclamo.cshtml" />
-    <Content Include="Views\gestion_restaurantes\gestion_reclamos\M16_VisualizarReclamo.cshtml" />
-    <Content Include="Views\gestion_restaurantes\gestion_reclamos\M16_ModificarReclamo.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_AgregarHotel.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_VisualizarHoteles.cshtml" />
     <Content Include="Views\gestion_equipaje\M07_GestionEquipaje_Agregar.cshtml" />
@@ -1801,6 +1801,8 @@
     <Content Include="Views\gestion_roles\M13_AgregarPermiso.cshtml" />
     <Content Include="Views\gestion_roles\M13_ModificarPermiso.cshtml" />
     <Content Include="Views\gestion_roles\M13_VisualizarPermiso.cshtml" />
+    <Content Include="Views\gestion_reclamos\M16_ModificarReclamo.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_ModificarCamarote.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_boletos\M05_VisualizarBoletos.cshtml" />

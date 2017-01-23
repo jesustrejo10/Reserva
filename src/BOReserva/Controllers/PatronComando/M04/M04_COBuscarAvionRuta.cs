@@ -1,6 +1,6 @@
 ﻿using BOReserva.DataAccess.DAO;
-using BOReserva.DataAccess.DAO.InterfacesDAO;
 using BOReserva.DataAccess.DataAccessObject;
+using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using BOReserva.Excepciones;
 using BOReserva.Excepciones.M04;

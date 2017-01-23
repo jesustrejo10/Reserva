@@ -1,4 +1,3 @@
-
 <div class="row">
     <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
 
@@ -32,7 +31,7 @@
                                     <td>@c._estatus </td>
                                     <td>
                                         <a href="#"> <i class="fa fa-eye m03DetalleRutas"></i></a>
-                                        <a href="#"><i class="fa fa-pencil m03EditarRutas"></i></a>
+                                        <a href="#"><i class="fa fa-pencil M24_ModificarCamarote"></i></a>
                                     </td>
                                 </tr>
 
@@ -82,34 +81,56 @@
     });
 </script>
 
-<script>
-    $(".cambioCrucero").click(function (e) {
-        e.preventDefault();
-        var crucero_id = $(this).closest('tr').attr('id');
-        console.log(crucero_id);
-        $.ajax({
-            url: "gestion_cruceros/cambiarEstatusCrucero",
-            data: { "id_crucero": crucero_id },
-            type: 'POST',
-            success: function (data) {
-                $.ajax({
-                    url: '/gestion_cruceros/M24_ListarCruceros',
-                    type: 'GET',
-                    data: '',
-                    success: function (data, textStatus, jqXHR) {
-                        $("#contenido").empty();
-                        $("#contenido").append(data);
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        alert(errorThrown);
-                    }
-                });
-            },
-            error: function (data) {
-                console.log(data);
-            }
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        //e.preventDefault();
+        $(".M24_ModificarCamarote").click(function () {
+            alert("Se esta procesando tu solicitud, por favor espere");
+            var identificador = $(this).parent().parent().parent().attr("id");
+            jQuery.ajax({
+                type: "GET",
+                url: "/gestion_cruceros/M24_ModificarCamarote",
+                data: { id: identificador }//id = es el nombre q recibes en el método es decir public ActionResult M24_ModificarCrucero(int id)
+            }).done(function (data) {
+                //$("#sdssss").append(data);
+
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            }).fail(function () {
+                alert(data);
+            });
         });
     });
+    </script>
+
+    <script>
+        $(".cambioCrucero").click(function (e) {
+            e.preventDefault();
+            var crucero_id = $(this).closest('tr').attr('id');
+            console.log(crucero_id);
+            $.ajax({
+                url: "gestion_cruceros/cambiarEstatusCrucero",
+                data: { "id_crucero": crucero_id },
+                type: 'POST',
+                success: function (data) {
+                    $.ajax({
+                        url: '/gestion_cruceros/M24_ListarCruceros',
+                        type: 'GET',
+                        data: '',
+                        success: function (data, textStatus, jqXHR) {
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        });
 </script>
 
 <script src="~/Content/plugins/datatables/jquery.dataTables.min.js"></script>
@@ -141,4 +162,3 @@
             });
     });
 </script>
-

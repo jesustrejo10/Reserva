@@ -11,6 +11,8 @@ using System.Linq;
 using System.Web;
 using FOReserva.DataAccess.DataAccessObject.M20;
 using FOReserva.DataAccess.DataAccessObject.M22Cruceros;
+using FOReserva.DataAccess.DataAccessObject.M14;
+
 
 namespace FOReserva.DataAccess.DataAccessObject
 
@@ -136,6 +138,18 @@ namespace FOReserva.DataAccess.DataAccessObject
 
         #endregion
 
+
+
+        #region M14_RegistroUsuario
+
+
+
+        public static DAORegistroU instanciarDaoUsuario()
+        {
+            return new DAORegistroU();
+        }
+
+        #endregion
 
     }
 }

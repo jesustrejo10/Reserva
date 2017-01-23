@@ -212,6 +212,11 @@
     <Compile Include="Controllers\gestion_vuelosController.cs" />
     <Compile Include="Controllers\PatronComando\Command.cs" />
     <Compile Include="Controllers\PatronComando\FabricaComando.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COAgregarUsuario.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COConsultarUsuario.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COIniciarSesion.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COModificarPerfil.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COVerificarCorreo.cs" />
     <Compile Include="Controllers\PatronComando\M16\M16_COModificarReclamo.cs" />
     <Compile Include="Controllers\PatronComando\M16\M16_COAgregarReclamo.cs" />
     <Compile Include="Controllers\PatronComando\M16\M16_COConsultarReclamoDetalle.cs" />
@@ -227,6 +232,9 @@
     <Compile Include="Controllers\PatronComando\M22Cruceros\M22_COAgregarReservaCrucero.cs" />
     <Compile Include="Controllers\PatronComando\M19\IM19_COObtenerPaises.cs" />
     <Compile Include="Controllers\PatronComando\M19\M19_COObtenerPaises.cs" />
+    <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORegistroU.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M14\DAORegistroU.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M14\RecursoDAOM14.Designer.cs" />
     <Compile Include="DataAccess\Domain\Ciudad.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOPais.cs" />
     <Compile Include="Controllers\PatronComando\M22\M22_COObtenerCiudad.cs" />
@@ -236,6 +244,7 @@
     <Compile Include="Controllers\PatronComando\M22\M22_COEliminarReserva.cs" />
     <Compile Include="Controllers\PatronComando\M22\M22_COModificarReserva.cs" />
     <Compile Include="Controllers\PatronComando\M22\M22_COAgregarRerserva.cs" />
+    <Compile Include="Controllers\testController.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOReclamo.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\registro_autenticacionController.cs" />
@@ -284,11 +293,13 @@
     <Compile Include="DataAccess\Domain\Habitacion.cs" />
     <Compile Include="DataAccess\Domain\Hotel.cs" />
     <Compile Include="DataAccess\Domain\Reclamo.cs" />
+    <Compile Include="DataAccess\Domain\ReferenciaValorada.cs" />
     <Compile Include="DataAccess\Domain\ReservaHabitacion.cs" />
     <Compile Include="DataAccess\Domain\Restaurante.cs" />
     <Compile Include="DataAccess\Domain\Revision.cs" />
     <Compile Include="DataAccess\Domain\RevisionValoracion.cs" />
     <Compile Include="DataAccess\Domain\Usuario.cs" />
+    <Compile Include="DataAccess\Domain\Usuario1.cs" />
     <Compile Include="DataAccess\Model\Connection.cs" />
     <Compile Include="DataAccess\Model\ExceptionBD.cs" />
     <Compile Include="DataAccess\Model\Parametro.cs" />
@@ -389,6 +400,7 @@
     <Compile Include="Models\ReservaHabitacion\CProcesoResultado.cs" />
     <Compile Include="Models\ReservaHabitacion\CReservaHabitacion.cs" />
     <Compile Include="Models\Restaurantes\Cvista_restaurante.cs" />
+    <Compile Include="Models\Sesion\CAgregarUsuario.cs" />
     <Compile Include="Models\Sesion\Ccliente.cs" />
     <Compile Include="Models\Sesion\Ccodigo_Temporal.cs" />
     <Compile Include="Models\Sesion\Ccontrasena.cs" />
@@ -1741,7 +1753,6 @@
     <Content Include="Content\assets\plugins\jquery\jquery-2.1.4.min.map" />
     <Content Include="Content\assets\plugins\jqvmap\LICENSE" />
     <Content Include="Content\assets\plugins\jqvmap\README.md" />
-    <Content Include="Content\assets\plugins\slider.elastic\js\jquery.eislideshow.js.bak" />
     <Content Include="Content\assets\plugins\slider.flexslider\CONTRIBUTING.md" />
     <Content Include="Content\assets\plugins\slider.flexslider\css\base.less" />
     <Content Include="Content\assets\plugins\slider.flexslider\css\font.less" />
@@ -1839,6 +1850,7 @@
     <Content Include="Content\assets\plugins\bootstrap.daterangepicker\daterangepicker.scss" />
     <Content Include="Content\assets\plugins\bootstrap.daterangepicker\package.json" />
     <Content Include="Content\assets\plugins\bootstrap.daterangepicker\README.md" />
+    <None Include="Properties\PublishProfiles\OK.pubxml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Properties\PublishProfiles\Webdeploy SmarterASP.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
@@ -1881,6 +1893,8 @@
     <Content Include="Views\gestion_reserva_crucero\placeholder.html" />
     <Content Include="Views\gestion_reserva_hotel\placeholder.html" />
     <Content Include="Views\gestion_reserva_restaurante\placeholder.html" />
+    <Content Include="Scripts\gestion_revision\global.js" />
+    <Content Include="Scripts\gestion_revision\revisiones.js" />
     <Content Include="Views\Shared\assets\css\color_scheme\green.css" />
     <Content Include="Views\Shared\assets\css\essentials.css" />
     <Content Include="Views\Shared\assets\css\header-1.css" />
@@ -3167,7 +3181,6 @@
     <Content Include="Views\Shared\assets\plugins\jquery\jquery-2.1.4.min.map" />
     <Content Include="Views\Shared\assets\plugins\jqvmap\LICENSE" />
     <Content Include="Views\Shared\assets\plugins\jqvmap\README.md" />
-    <Content Include="Views\Shared\assets\plugins\slider.elastic\js\jquery.eislideshow.js.bak" />
     <Content Include="Views\Shared\assets\plugins\slider.flexslider\CONTRIBUTING.md" />
     <Content Include="Views\Shared\assets\plugins\slider.flexslider\css\base.less" />
     <Content Include="Views\Shared\assets\plugins\slider.flexslider\css\font.less" />
@@ -3238,19 +3251,11 @@
     <Content Include="Views\Shared\_MenuPerfil.cshtml" />
     <Content Include="Views\gestion_reserva_auto\M19_Reserva_Autos.cshtml" />
     <Content Include="Views\gestion_reserva_auto\M19_Reserva_AutosImagenes.cshtml" />
-    <Content Include="Views\Shared\_LayoutPerfil.cshtml" />
     <Content Include="Views\gestion_reserva_auto\M19_Reserva_Autos_Perfil.cshtml" />
     <Content Include="Views\Shared\Perfil.cshtml" />
     <Content Include="Views\gestion_planificacion_vacaciones\M17_gestion_itinerario_Perfil.cshtml" />
     <Content Include="Views\gestion_reserva_habitaciones\buscar_hoteles.cshtml" />
     <Content Include="Views\gestion_reserva_habitaciones\hoteles_con_habitaciones.cshtml" />
-    <Content Include="Views\gestion_revision\gestion_ListRevicion.cshtml" />
-    <Content Include="Views\gestion_revision\gestion_revision.cshtml" />
-    <Content Include="Views\gestion_revision\consultar_revision.cshtml" />
-    <Content Include="Views\gestion_revision\crear_revision.cshtml" />
-    <Content Include="Views\gestion_revision\eliminar_revision.cshtml" />
-    <Content Include="Views\gestion_revision\editar_revision.cshtml" />
-    <Content Include="Views\gestion_revision\Consultar_Revision.cshtml" />
     <Content Include="Views\gestion_diarios\gestion_diarios_resultados.cshtml" />
     <Content Include="Views\gestion_reserva_restaurante\lista_reserva_restaurantes.cshtml" />
     <Content Include="Views\gestion_reserva_restaurante\error_conexion.cshtml" />
@@ -3262,18 +3267,14 @@
     <Content Include="Views\Shared\assets\plugins\slider.swiper\dist\js\maps\swiper.min.js.map" />
     <Content Include="Views\gestion_reserva_restaurante\_EditarReserva.cshtml" />
     <Content Include="Views\gestion_diarios\gestion_diarios_ver.cshtml" />
-    <Content Include="Views\gestion_revision\lista_revisiones.cshtml" />
-    <Content Include="Views\gestion_revision\consultar_revision.cshtml" />
     <Content Include="Views\gestion_diarios\_CrearDiarioExito.cshtml" />
     <Content Include="Views\gestion_reserva_restaurante\_FailReservar.cshtml" />
-    <Content Include="Views\gestion_revision\crear_revision_form.cshtml" />
     <Content Include="Views\gestion_reserva_crucero\gestion_reserva_crucero_buscar_crucero.cshtml" />
     <Content Include="Views\gestion_reserva_crucero\gestion_reserva_crucero_confirmar.cshtml" />
     <Content Include="Views\gestion_reserva_crucero\gestion_reserva_crucero_error_conexion.cshtml" />
     <Content Include="Views\gestion_reserva_crucero\gestion_reserva_crucero_no_resultados.cshtml" />
     <Content Include="Views\gestion_reserva_crucero\gestion_reserva_crucero_perfil.cshtml" />
     <Content Include="Views\gestion_reserva_crucero\gestion_reserva_crucero_resultado_crucero.cshtml" />
-    <Content Include="Views\gestion_revision\Revision_usuario.cshtml" />
     <Content Include="Views\gestion_diarios\_CrearDiarioFallo.cshtml" />
     <Content Include="Views\gestion_diarios\gestion_diariosImagenes.cshtml" />
     <Content Include="Views\registro_autenticacion\CambiarClave.cshtml" />
@@ -3292,6 +3293,12 @@
     <Content Include="Views\gestion_reclamos\M16_VisualizarReclamo.cshtml" />
     <Content Include="Views\gestion_reclamos\M16_ModificarReclamo.cshtml" />
     <Content Include="Views\gestion_reserva_auto\M19_Detalle_reserva.cshtml" />
+    <Content Include="Views\gestion_revision\obtener_revisiones.cshtml" />
+    <Content Include="Views\gestion_revision\revisiones.cshtml" />
+    <Content Include="Views\gestion_revision\valoracion.cshtml" />
+    <Content Include="Views\gestion_revision\form_revision.cshtml" />
+    <Content Include="Views\gestion_revision\obtener_valoracion.cshtml" />
+    <Content Include="Views\test\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3309,6 +3316,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="DataAccess\DataAccessObject\M14\RecursoDAOM14.resx" />
     <EmbeddedResource Include="DataAccess\DataAccessObject\M16\M16Reclamos.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>M16Reclamos.Designer.cs</LastGenOutput>

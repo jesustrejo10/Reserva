@@ -13,6 +13,7 @@ namespace BOReserva.DataAccess.Domain
         public String _nombre { get; set; }
         public Pais _pais { get; set; }
         public int _fkPais { get; set; }
+       
 
         /// <summary>
         /// Constructor de la clase
@@ -24,6 +25,11 @@ namespace BOReserva.DataAccess.Domain
             this._id = id;
             this._nombre = nombre;
             this._pais = pais;
+        }
+        public Ciudad(String nombre, int id)
+        {
+            this._id = id;
+            this._nombre = nombre;
         }
 
         /// <summary>

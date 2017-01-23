@@ -16,17 +16,17 @@ namespace BOReserva.Controllers.PatronComando.M03
     public class M03_CODeshabilitarRuta : Command<Boolean>
     {
         Ruta _ruta;
-        int _idmodificar;
+        int _id;
 
         public M03_CODeshabilitarRuta(int id)
         {
-            this._ruta._id = id;
+            this._id = id;
         }
 
         public override Boolean ejecutar()
         {
             DAORuta daoRuta = (DAORuta)FabricaDAO.instanciarDAORuta();
-            Boolean test = daoRuta.deshabilitarRuta(_ruta._id);
+            Boolean test = daoRuta.deshabilitarRuta(_id);
             return test;
         }
 

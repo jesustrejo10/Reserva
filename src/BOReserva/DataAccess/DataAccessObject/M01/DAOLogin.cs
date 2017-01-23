@@ -65,9 +65,13 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
             {
                 throw ex;
             }
+            catch(NullReferenceException ex)
+            {
+                throw new ExceptionReserva("Reserva-404", "Usuario invalido", ex);
+            }
             catch (ArgumentNullException ex)
             {
-                throw new ExceptionReserva("Reserva-404", "Argumento con _idHotel invalido", ex);
+                throw new ExceptionReserva("Reserva-404", "Argumento con id invalido", ex);
             }
             catch (FormatException ex)
             {
@@ -256,11 +260,11 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoLogin.correo, SqlDbType.VarChar, usuario.correo.ToString(), false));
 
                 //Para luego ejecutar el procedimiento
-                var respuesta = EjecutarStoredProcedure(RecursoLogin.NumeroIntentos, listaParametro);
-                if (respuesta.Count > 0) //La lista puede retornar vacía, en caso de no existir logins previos, no tenemos nada que hacer en este caso
+                var respuesta = EjecutarStoredProcedureTuplas(RecursoLogin.NumeroIntentos, listaParametro);
+                if (respuesta.Rows.Count > 0) //La lista puede retornar vacía, en caso de no existir logins previos, no tenemos nada que hacer en este caso
                 {
-                    var valor = respuesta[0].valor;
-                    return Convert.ToInt32(respuesta[0].valor);
+                    var valor = respuesta.Rows[0].Field<int>(0);
+                    return valor;
                 }
                 else return 0;
             }

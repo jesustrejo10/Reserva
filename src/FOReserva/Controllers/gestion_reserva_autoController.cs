@@ -47,7 +47,10 @@ namespace FOReserva.Controllers
         }
         //
         // GET: /gestion_reserva_autos/
-
+        /// <summary>
+        /// Metodo que muestra la pantalla principal para buscar automoviles
+        /// </summary>
+        /// <returns></returns>
         public ActionResult M19_Reserva_Autos()
         {
             CVistaReservaAuto model = new CVistaReservaAuto();
@@ -58,6 +61,10 @@ namespace FOReserva.Controllers
             return PartialView(model);
         }
 
+        /// <summary>
+        /// Metodo para las imagenes de los autos
+        /// </summary>
+        /// <returns></returns>
         public ActionResult M19_Reserva_AutosImagenes()
         {
             return PartialView();
@@ -161,50 +168,80 @@ namespace FOReserva.Controllers
 
 
                 //Creo _datos de tipo Entidad y lo inicializo como CVistaReservaAuto
-                Entidad _datos = FabricaEntidad.inicializarCVistaReservaAuto(fechaIni,fechaFin,horaIni,horaFin,idEntrega,idDestino);
+                Entidad _datos = FabricaEntidad.inicializarCVistaReservaAuto(fechaIni, fechaFin, horaIni, horaFin, idEntrega, idDestino);
 
                 Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.comandosReservaAutomovil(FabricaComando.comandosGlobales.CONSULTAR, FabricaComando.comandoReservaAuto.CONSULTAR_AUTOS, _datos);
                 List<Entidad> autos = comando.ejecutar();//devuelve una lista de CAutomovil con autos de la ciudad
 
                 System.Diagnostics.Debug.WriteLine("PASA DEL COMANDO");
 
-             List<CAutomovil> lista = FabricaEntidad.inicializarListaAutomovil_();
+                List<CAutomovil> lista = FabricaEntidad.inicializarListaAutomovil_();
 
-             foreach (Entidad item in autos)
-             {
-                 lista.Add((CAutomovil)item);
+                foreach (Entidad item in autos)
+                {
+                    lista.Add((CAutomovil)item);
 
-             }
+                }
 
 
-             System.Diagnostics.Debug.WriteLine("DATOS DE LA LISTA LUEGO DEL COMANDO:  anio: " + lista[0]._anio + ", matricula: " + lista[0]._matricula + ", fabricante: " + lista[0]._fabricante);
+                System.Diagnostics.Debug.WriteLine("DATOS DE LA LISTA LUEGO DEL COMANDO:  fechaini: " + lista[0]._fechaini + ", fechafin: " + lista[0]._fechafin + ", horaini: " + lista[0]._horaini + ", horafin: " + lista[0]._horafin + ", ciudadorigen: " + lista[0]._ciudadorigen + ", ciudaddestino: " + lista[0]._ciudaddestino);
 
-             return PartialView(lista);
+                return PartialView(lista);
 
-            } catch(Exception error)
+            }
+            catch (Exception error)
             {
 
 
             }
-            return View();;
+            return View(); ;
 
         }
 
-        public ActionResult M19_Accion_Reserva(string matricula, string modelo, string fabricante, string tipo, string color, string transmision, int ciudad, decimal precio, int anio, int pasajero, int disponibilidad, string owner, string date, string time, string fechaini, string fechafin, string horaini, string horafin, string ciudadori, string ciudaddes)
+        /// <summary>
+        /// En este metodo se ejecuta el guardar la reserva en el sistema
+        /// </summary>
+        /// <param name="fechaini"></param>
+        /// <param name="fechafin"></param>
+        /// <param name="horaini"></param>
+        /// <param name="horafin"></param>
+        /// <param name="matricula"></param>
+        /// <param name="ciudadori"></param>
+        /// <param name="ciudaddes"></param>
+        /// <returns></returns>
+        public ActionResult M19_Accion_Reserva(string fechaini, string fechafin, string horaini, string horafin, string matricula, int ciudadori, int ciudaddes)
         {
-            CReserva_Autos_Perfil reserva = new CReserva_Autos_Perfil(owner, date, time, fechaini, fechafin, horaini, horafin, ciudaddes, ciudadori,1);
-            reserva.Autos = new CBusquedaModel(matricula, modelo, fabricante, tipo, color, transmision, ciudad, precio, anio, pasajero, disponibilidad);
+
+            System.Diagnostics.Debug.WriteLine("LLEGA AL CONTROLLER DE ACCION RESERVA");
+
+            System.Diagnostics.Debug.WriteLine("fechaini: " + fechaini + ", fechafin: " + fechafin + ", horaini: " + horaini + ", horafin: " + horafin + ", idusuario: 1, matricula: " + matricula + ", ciudadori: " + ciudadori + ", ciudaddes: " + ciudaddes);
 
             try
             {
-                ManejadorSQLReservaAutomovil manejador = new ManejadorSQLReservaAutomovil();
-                manejador.InsertarReservaAuto(reserva);
-                return View(reserva);
+                Entidad _reserva = FabricaEntidad.inicializarAutomovil(matricula, " ", " ", " ", " ", " ", 1, 8.0, 1, 1, 1, fechaini, fechafin, horaini, horafin, ciudadori, ciudaddes);
+                Command<Boolean> comando = (Command<Boolean>)FabricaComando.comandosReservaAutomovil(FabricaComando.comandosGlobales.CREAR, FabricaComando.comandoReservaAuto.NULO, _reserva);
+
+
+                if (comando.ejecutar())
+                {
+                    CAutomovil auto = (CAutomovil)_reserva;
+                    auto._matricula = "11111111";
+                    return View(auto);
+                }
+                else
+                {
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    string error = "Error agregando la reserva del automovil.";
+                    return Json(error);
+                }
             }
-            catch (ManejadorSQLException)
+            catch (Exception)
             {
-                return View();
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                string error = "Error agregando la reserva del automovil.";
+                return Json(error);
             }
+
         }
 
         /// <summary>

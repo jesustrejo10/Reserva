@@ -20,7 +20,7 @@ namespace BOReserva.Controllers.PatronComando.M03
 
         public M03_COHabilitarRuta(int id)
         {
-            this._ruta._id = id;
+            this._id = id;
         }
 
         public override Boolean ejecutar()

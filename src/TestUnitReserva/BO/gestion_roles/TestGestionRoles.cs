@@ -155,7 +155,7 @@ namespace TestUnitReserva.BO.gestion_roles
         [Test]
         public void M13_DAOConsultarPermisosAsociados()
         {
-            Assert.AreNotEqual(daoRol.consultarLosPermisosAsignados(mockRol._idRol),null);
+            Assert.AreNotEqual(daoRol.consultarLosPermisosAsignados(mockRol._idRol), null);
         }
 
         [Test]
@@ -170,29 +170,121 @@ namespace TestUnitReserva.BO.gestion_roles
             Assert.AreNotEqual(daoRol.consultarPermisosUsuario(34), null);
         }
 
-        //[Test]
-        //public void M13_DAOQuitarPermisoRol()
-        //{
-        //    int idPermiso = 0;
-        //    foreach (var item in mockRolPermiso.listapermisos)
-        //    {
-        //        idPermiso = item._id;
-        //    }
-        //    Assert.AreEqual(daoRol.quitarPermiso(mockRolPermiso._idRol, idPermiso), "1");
-        //}
-
         [Test]
         public void M13_DAOValidacionRol()
         {
             Assert.AreNotEqual(daoRol.validacionRol(mockRol._idRol), null);
         }
 
+        [Test]
+        public void M13_ControllerAgregarRol()
+        {
+            CRoles rol = new CRoles();
+            rol.Nombre_rol = "Rol desde Prueba";
+            Assert.AreNotEqual(controller.agregarrol(rol), null);
+        }
+
+        [Test]
+        public void M13_ControllerCargaAgregarRol()
+        {
+            Assert.AreNotEqual(controller.M13_AgregarRol(), null);
+        }
+
+        [Test]
+        public void M13_ControllerCargaModificarPermiso()
+        {
+            Assert.AreNotEqual(controller.M13_ModificarPermiso(32), null);
+        }
+
+        [Test]
+        public void M13_ControllerModificarPermiso()
+        {
+            int id = 1;
+            String nombre = "Permiso modificado";
+            String url = "url";
+            Assert.AreNotEqual(controller.ModificarPermiso(id, nombre, url), null);
+        }
+
+        [Test]
+        public void M13_ControllerCargaModificarRol()
+        {
+            Assert.AreNotEqual(controller.M13_ModificarRol(1), null);
+        }
+
+        [Test]
+        public void M13_ControllerCargaConsultarRol()
+        {
+            Assert.AreNotEqual(controller.M13_VisualizarRol(), null);
+        }
+
+        [Test]
+        public void M13_ControllerCargaConsultarPermiso()
+        {
+            Assert.AreNotEqual(controller.M13_VisualizarPermiso(), null);
+        }
+
+        [Test]
+        public void M13_ControllerPermisosNoAsignados()
+        {
+            Assert.AreNotEqual(controller.consultarLosPermisosNoAsignados(1), null);
+        }
+
         //[Test]
-        //public void M13_ControllerAgregarRol()
+        //public void M13_ControllerAsignarPermisos()
         //{
-        //    CRoles rol = new CRoles();
-        //    rol.Nombre_rol = "Rol desde Prueba";
-        //    Assert.AreEqual(controller.agregarrol(rol), "1");
+        //    Assert.AreNotEqual(controller.asignarpermisos("Gestion de aviones"), null);
         //}
+
+        [Test]
+        public void M13_ControllerAgregarPermiso()
+        {
+            CModulo_detallado md = new CModulo_detallado();
+            md.Nombre = "PermisoPrueba";
+            md.Url = "url/prueba";
+            Assert.AreNotEqual(controller.agregarpermiso(md), null);
+        }
+
+        [Test]
+        public void M13_ControllerEliminarPermisoRol()
+        {
+            Assert.AreNotEqual(controller.eliminarPermisoRol(1, 1), null);
+        }
+
+        [Test]
+        public void M13_ControllerModificarRol()
+        {
+            Assert.AreNotEqual(controller.modificarrol(1, "Administrador"), null);
+        }
+
+        [Test]
+        public void M13_ControllerQuitarPermiso()
+        {
+            Assert.AreNotEqual(controller.quitarPermisoRol(1), null);
+        }
+
+        [Test]
+        public void M13_ControllerEliminarRol()
+        {
+            Assert.AreNotEqual(controller.eliminarRol(1), null);
+        }
+
+        [Test]
+        public void M13_ControllerConsultarPermisos()
+        {
+            Assert.AreNotEqual(controller.Consultarpermisos(), null);
+        }
+
+        [Test]
+        public void M13_ControllerCargarAgregarPermiso()
+        {
+            Assert.AreNotEqual(controller.M13_AgregarPermiso(), null);
+        }
+
+        [Test]
+        public void M13_ControllerEliminarPermisoSeleccionado()
+        {
+            Assert.AreNotEqual(controller.eliminarPermisoSeleccionado(1), null);
+        }
+
     }
 }
