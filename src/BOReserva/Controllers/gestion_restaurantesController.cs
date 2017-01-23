@@ -25,7 +25,7 @@ namespace BOReserva.Controllers
         /// <returns>Retorna un objeto para renderizar la vista parcial.</returns>
         public ActionResult M10_GestionRestaurantes_Ver(int id = -1)
         {
-
+            //Carga Inicial de la vista ver se coloca por defecto un -1 debido a que no hay una ciudad seleccionada por defecto
             try
             {
                 ViewBag.Ciudad = FabricaVista.asignarItemsComboBox(cargarComboBoxLugar(), "Id", "Name");
@@ -114,17 +114,16 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult guardarRestaurante(String Nombre,String Direccion,String Telefono, String Descripcion, int idLugar,String HoraIni,String HoraFin)
         {
-          
+           //Las variables se reciben de esta forma para asemejar los mas posible a la Arquitectura MVC tradicional
 
             //Chequeo de campos obligatorios para el formulario
-            //if ((model.nombre == null) || (model.direccion == null) 
-            //    || (model.horarioApertura == null) || (model.horarioCierre == null) || (model.idLugar == -1))
-            //{
-            //    Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            //    string error = "Error, campo obligatorio vacío";
-            //    return Json(error);
-            //}
-           
+            if ((Nombre == "") || (Direccion == "")|| (HoraIni == "Horario Inicio") || (Telefono == "") || (HoraFin == "Horario Fin") || (idLugar == 0))
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                string error = "Error, existen campos vacios";
+                return Json(error);
+            }
+
             try
             {
                 Entidad _restaurant = FabricaEntidad.crearRestaurant(Nombre, Direccion, Telefono, Descripcion, HoraIni, HoraFin, idLugar);
@@ -145,7 +144,7 @@ namespace BOReserva.Controllers
             catch (Exception)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                string error = "Error agregando el restaurante.";
+                string error = "Error de Conexion BD";
                 return Json(error);
             }
             
@@ -161,14 +160,16 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult modificarRestaurante(int Id,String Nombre, String Direccion, String Telefono, String Descripcion, int idLugar, String HoraIni, String HoraFin)
         {
+            //Las variables se reciben de esta forma para asemejar los mas posible a la Arquitectura MVC tradicional
+
             //Chequeo de campos obligatorios para el formulario
-            //if ((model.id == -1) || (model.nombre == null) || (model.direccion == null)
-            //    || (model.horarioApertura == null) || (model.horarioCierre == null) || (model.idLugar == -1))
-            //{
-            //    Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            //    string error = "Error, campo obligatorio vacío";
-            //    return Json(error);
-            //}
+            if ((Nombre == "") || (Direccion == "") || (HoraIni == "Horario Inicio") || (Telefono == "") || (HoraFin == "Horario Fin") || (idLugar == 0))
+            {
+                
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                string error = "Error, campo obligatorio vacío";
+                return Json(error);
+            }
 
             try
             {
@@ -189,7 +190,7 @@ namespace BOReserva.Controllers
             catch (Exception)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                string error = "Error modificando el restaurante.";
+                string error = "Error de Conexion BD";
                 return Json(error);
 
             }
@@ -233,7 +234,7 @@ namespace BOReserva.Controllers
             {
 
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                string error = "Error eliminando el restaurante.";
+                string error = "Error de Conexion BD";
                 return Json(error);
             }
 
@@ -247,6 +248,8 @@ namespace BOReserva.Controllers
         /// <returns></returns>
         public List<Lugar> cargarComboBoxLugar()
         {
+            List<Lugar> lista2 = FabricaEntidad.crearListaLugar();
+            lista2.Add(FabricaEntidad.crearLugar(0,"Error en Carga BD"));
             try
             {
                 Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.comandosVistaRestaurant(FabricaComando.comandoVista.CARGAR_LUGAR);
@@ -264,7 +267,7 @@ namespace BOReserva.Controllers
             catch (Exception)
             {
 
-                return null;
+                return lista2;
             }
         }
         #endregion
