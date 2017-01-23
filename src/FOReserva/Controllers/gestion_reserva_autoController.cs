@@ -81,6 +81,9 @@ namespace FOReserva.Controllers
             if (Session["id_usuario"] != null && Session["id_usuario"] is int)
                 user_id = (int)Session["id_usuario"];
 
+            // Cableado por el módulo de login
+            user_id = 163;
+
             Entidad _usuario = FabricaEntidad.inicializarUsuario(user_id);
             Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.comandosReservaAutomovil(FabricaComando.comandosGlobales.CONSULTAR, FabricaComando.comandoReservaAuto.NULO, _usuario);
             List<Entidad> reservas = comando.ejecutar();
