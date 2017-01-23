@@ -141,6 +141,10 @@
     <value>M07_EditarReclamoEstado</value>
     <comment>Edita el status de un reclamo</comment>
   </data>
+  <data name="procedimientoEliminarReclamo" xml:space="preserve">
+    <value>M07_EliminarReclamo</value>
+    <comment>Elimina Reclamo de Equipaje</comment>
+  </data>
   <data name="recDescripcion" xml:space="preserve">
     <value>rec_descripcion</value>
     <comment>Descripcion del reclamo en la tabla</comment>

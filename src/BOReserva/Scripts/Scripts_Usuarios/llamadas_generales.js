@@ -44,6 +44,7 @@ function toIndex() {
 $("#aceptarUsuario").click(function (e) {
     console.log("hola!");
     e.preventDefault();
+   // $("#contenido").html('<div class="text-center">Cargando...</div>');
     var form = $(".agregarUsuario_form");
     $.ajax({
         url: "gestion_usuarios/guardarUsuario",
@@ -51,6 +52,7 @@ $("#aceptarUsuario").click(function (e) {
         type: 'POST',
         success: function (data) {
             alert("Se registro el Usuario exitosamente");
+            $("#contenido").html('<div class="text-center">Cargando...</div>');
             toIndexA();
         }
     , error: function (xhr, textStatus, exceptionThrown) {

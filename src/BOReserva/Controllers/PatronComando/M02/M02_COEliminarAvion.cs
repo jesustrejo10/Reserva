@@ -18,6 +18,11 @@ namespace BOReserva.Controllers.PatronComando.M02
         int _idmodificar;
         int _id;
 
+        /// <summary>
+        /// Constructor del comando Eliminar
+        /// </summary>
+        /// <param name="avion"></param>
+        /// <param name="id"></param>
         public M02_COEliminarAvion(Entidad avion,int id)
         { 
             this._avion = (Avion) avion;

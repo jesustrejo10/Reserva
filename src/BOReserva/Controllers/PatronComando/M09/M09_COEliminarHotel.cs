@@ -2,6 +2,8 @@
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.DataAccessObject.M09;
 using BOReserva.DataAccess.Domain;
+using BOReserva.DataAccess.Model;
+using BOReserva.Excepciones;
 using BOReserva.Excepciones.M09;
 using System;
 using System.Collections.Generic;
@@ -45,12 +47,14 @@ namespace BOReserva.Controllers.PatronComando.M09
             {
                 IDAOHotel daoHotel = (DAOHotel)FabricaDAO.instanciarDaoHotel();
                 String test = daoHotel.eliminarHotel(_hotel._id);
-                return test;
+                Cache.eliminarHotelMap(_hotel._id);
+                return ResourceM09Command.EliminoCorrectamente;
             }
+
             catch (ReservaExceptionM09 ex)
             {
-                //este throw esta incorrecto
-                throw ex;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);               
+                return ex.Codigo;
             }
         }
 

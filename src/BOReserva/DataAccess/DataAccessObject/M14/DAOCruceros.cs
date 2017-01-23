@@ -10,16 +10,13 @@ using System.Diagnostics;
 
 namespace BOReserva.DataAccess.DataAccessObject
 {
+
+    /// <summary>
+    /// Clase Dao crucceros para realizar los procedimientos de base de datos
+    /// </summary>
     public class DAOCruceros : DAO, IDAOCruceros
     {
-        public DAOCruceros()
-        { }
-
-        bool IDAOCruceros.ValidarCrucero(String nombre) {
-
-            return true;        
-        }
-
+        
         
         int IDAO.Agregar(Entidad e)
         {
@@ -27,23 +24,27 @@ namespace BOReserva.DataAccess.DataAccessObject
             SqlConnection con = Connection.getInstance(_connexionString);
             try
             {
-                con.Open();
+                if(true){
 
-                SqlCommand query = new SqlCommand("M24_AgregarCrucero", con);
+                    con.Open();
 
-                query.CommandType = CommandType.StoredProcedure;
-                query.Parameters.AddWithValue("@nombrecrucero", crucero._nombreCrucero);
-                query.Parameters.AddWithValue("@compania", crucero._companiaCrucero);
-                query.Parameters.AddWithValue("@capacidad", crucero._capacidadCrucero);
-                query.Parameters.AddWithValue("@imagen", "");
+                    SqlCommand query = new SqlCommand("M24_AgregarCrucero", con);
+
+                    query.CommandType = CommandType.StoredProcedure;
+                    query.Parameters.AddWithValue("@nombrecrucero", crucero._nombreCrucero);
+                    query.Parameters.AddWithValue("@compania", crucero._companiaCrucero);
+                    query.Parameters.AddWithValue("@capacidad", crucero._capacidadCrucero);
+                    query.Parameters.AddWithValue("@imagen", "");
                 
-                query.ExecuteNonQuery();
+                    query.ExecuteNonQuery();
+
                 
-                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
-                SqlDataReader lector = query.ExecuteReader();
-                lector.Close();                
-                con.Close();
-                return 1;
+                    //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                    SqlDataReader lector = query.ExecuteReader();
+                    lector.Close();                
+                    con.Close();
+                    return 1;
+                }
             }
             catch (SqlException ex)
             {                
@@ -55,29 +56,21 @@ namespace BOReserva.DataAccess.DataAccessObject
 
         Entidad IDAO.Consultar(int id)
         {
-            SqlConnection conexion = Connection.getInstance(_connexionString);
+            SqlConnection con = Connection.getInstance(_connexionString);
             Crucero crucero = new Crucero();
             try
             {
-                conexion.Open();
-                String sql = "SELECT C.* " +
-                             "FROM CRUCERO C " +
-                             "WHERE C.CRU_ID = " + id;
+                con.Open();
 
-                SqlCommand cmd = new SqlCommand(sql, conexion);
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
+                SqlCommand query = new SqlCommand("M24_ConsultarCruceroID", con);
 
-                    int idCrucero;
-                    
+                query.CommandType = CommandType.StoredProcedure;
+                query.Parameters.AddWithValue("@id", id);
+                query.ExecuteNonQuery();
+                SqlDataReader reader = query.ExecuteReader();
 
                     while (reader.Read())
                     {
-                        //SE AGREGA CREA UN OBJECTO VEHICLE SE PASAN LOS ATRIBUTO ASI reader["<etiqueta de la columna en la tabla Automovil>"]
-                        //Y  SE AGREGA a listavehiculos
-                        //public Hotel(int id, String nombre, String direccion, String email, String paginaWeb, int clasificacion, int capacidad, Ciudad ciudad)
-                        idCrucero = Int32.Parse(reader["cru_id"].ToString());
-
                         crucero = new Crucero(id,
                             reader["cru_nombre"].ToString(),
                             reader["cru_compania"].ToString(),
@@ -85,15 +78,51 @@ namespace BOReserva.DataAccess.DataAccessObject
                             reader["cru_estatus"].ToString()
                         );
                     }
-                }
-                cmd.Dispose();
-                conexion.Close();
+                    reader.Close();
+                con.Close();
                 return crucero;
             }
             catch (SqlException ex)
             {
                 Debug.WriteLine(ex.ToString());
-                conexion.Close();
+                con.Close();
+                return null;
+            }
+        }
+
+
+        /// <summary>
+        /// Metodo implementado de IDAO para modificar cruceros de la BD
+        /// </summary>
+        /// <param name="e">Crucero a modificar</param>
+        /// <returns>Retorna el Crucero</returns>
+        Entidad IDAO.Modificar(Entidad e)
+        {
+            SqlConnection con = Connection.getInstance(_connexionString);
+            Crucero crucero = (Crucero)e;
+
+            try
+            {
+                con.Open();
+
+                SqlCommand query = new SqlCommand("M24_ModificarCrucero", con);
+
+                query.CommandType = CommandType.StoredProcedure;
+                    query.Parameters.AddWithValue("@idCrucero", crucero._id);
+                query.Parameters.AddWithValue("@nombrecrucero", crucero._nombreCrucero);
+                query.Parameters.AddWithValue("@compania", crucero._companiaCrucero);
+                query.Parameters.AddWithValue("@capacidad", crucero._capacidadCrucero);
+
+                query.ExecuteNonQuery();
+
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                SqlDataReader lector = query.ExecuteReader();
+                lector.Close();
+                con.Close();
+                return crucero;
+            }
+            catch (Exception ex)
+            {
                 return null;
             }
         }
@@ -123,7 +152,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                             int.Parse(reader["capacidad"].ToString()),
                             reader["estatus"].ToString());
                         listaCruceros.Add(Int32.Parse(reader["id"].ToString()), crucero);
-                        //elemento++;
+                         //elemento++;
                     }
                     reader.Close();
                     con.Close();

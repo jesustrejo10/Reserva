@@ -624,7 +624,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
                         var fechaIniboleto = reader["fechaIn_boleto"];
                         var fechaFinboleto = reader["fechaFin_boleto"];
                         var estadovar = reader["estado"];
-
+            
                         DateTime fechaIauto = Convert.ToDateTime(fechaIniauto).Date;
                         DateTime fechaFauto = Convert.ToDateTime(fechaFinauto).Date;
                         DateTime fechaIrest = Convert.ToDateTime(fechaInirest).Date;

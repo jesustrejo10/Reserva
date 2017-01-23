@@ -7,19 +7,29 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando
 {
-    public class M13_COConsultarPermisosUsuario : Command<List<String>>
+    ///<summary>
+    ///Comando que consulta los permisos que posee un usuario
+    ///</summary>
+    public class M13_COConsultarPermisosUsuario : Command<List<int>>
     {
         int idUsuario;
 
+        ///<summary>
+        ///Constructor
+        ///</summary>
         public M13_COConsultarPermisosUsuario(int id)
         {
             this.idUsuario = id;
         }
 
-        public override List<String> ejecutar()
+        ///<summary>
+        ///Metodo que ejecuta el comando
+        ///</summary>
+        ///<returns>Lista de enteros</returns>
+        public override List<int> ejecutar()
         {
             DAORol daoRol = (DAORol)FabricaDAO.instanciarDAORol();
-            List<String> test = daoRol.consultarPermisosUsuario(idUsuario);
+            List<int> test = daoRol.consultarPermisosUsuario(idUsuario);
             return test;
         }
     }

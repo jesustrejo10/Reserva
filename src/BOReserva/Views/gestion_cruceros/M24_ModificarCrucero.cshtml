@@ -1,111 +1,106 @@
-﻿@model BOReserva.Models.gestion_cruceros.CGestion_crucero
+﻿<!-- Indico que para esta vista, M08_ModificarAutomovil, utilizare el modelo Models/gestion_automoviles/CModificarAutomovil-->
+@model BOReserva.Models.gestion_cruceros.CGestion_crucero
+<link href="~/Content/Canvas/Box.css" rel="stylesheet" />
+
 @using (Html.BeginForm("modificarCrucero", "gestion_cruceros", null, FormMethod.Post, new { @id = "formModificarCrucero", @class = "form-horizontal" }))
 {
-    <div class="box">
-        <div class="box-body">
-            <div class="box-header with-border">
-                <h1 class="box-title"> Modificar Crucero</h1>
-                <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse"></button>
-                </div>
-            </div>
-            @if (Model != null)
-            {
-                <div style="display:none">@Html.TextBoxFor(m => m._idCrucero, new { @class = "form-control campo required", @id = "idCrucero", @Value = Model._idCrucero })</div>
-                <div class="modal-body col-xs-6" id="bodyCruc" style="margin-left:10%">
-                    <div class="form-group">
-                        <label>Nombre del Crucero:</label>
-                        @Html.TextBoxFor(m => m._nombreCrucero, new { @class = "form-control campo required", @id = "nombrecrucero", @Value = Model._nombreCrucero })
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="Cajita">
+                <div class="box-header with-border">
+                    <h1 class="box-title" style="font-size:32px;">Modificar Crucero</h1>
+                    <div class="box-tools pull-right">
                     </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
                     <div class="row">
-                        <div class="col-xs-12">
-                            <div class="form-group">
-                                <label>Compañia:</label>
-                                @Html.TextBoxFor(m => m._companiaCrucero, null, new { @class = "form-control", @id = "compania", @Value = Model._companiaCrucero })
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="placa">Nombre(<span style="color:red">*</span>)</label>
+                                @Html.TextBoxFor(m => m._nombreCrucero, Model._nombreCrucero, new { @class = "form-control", @id = "cru_nombre" })
                             </div>
-                        </div>
-                        <div class="col-xs-12">
-                            <div class="form-group">
-                                <label>Capacidad:</label>
-                                @Html.TextBoxFor(m => m._capacidadCrucero, null, new { @type = "number", @class = "form-control", @Value = Model._capacidadCrucero })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12" style="margin-top:10px;">
-                        <button type="button" id="modificar_crucero" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
-                    </div>
-                </div>
-                @*<div class="modal-body col-xs-12" id="bodyCruc">
-                        <label>Cabinas</label>
-                        <table>
-                            <thead>
-                                <tr class="crucero crTitles" id="listaCruceros">
-                                    <th style="width:170px;height: 40px;text-align: center">Nombre</th>
-                                    <th style="width:170px;height: 40px;text-align: center"> <b>Precio</b></th>
-                                    <th style="width:170px;height: 40px;text-align: center"><b>Estado</b></th>
-                                    <th style="width:170px;height: 40px;text-align: center"><b>Acciones</b> </th>
-                                </tr>
-                            </thead>
-                            <tbody id="tablaCabinas" class="">
-                                @{
-                                    foreach (var cabina in Model.cabinas)
-                                    {
-                                        <tr id="@cabina._idCabina">
-                                            <td class="crNombre">@cabina._nombreCabina </td>
-                                            <td class="crCompania">@cabina._precioCabina</td>
-                                            @if (@cabina._estatus == "activo")
-                                            {
-                                                <td class="crStatus"><i class="fa fa-circle started"></i></td>
-                                                    <td class="crAcciones"><i class="fa fa-pencil modificaCabina"></i> <i class="fa fa-times cambioCabina"></i></td>
-                                            }
-                                            else {
-                                                <td class="crStatus"><i class="fa fa-circle paused"></i></td>
-                                                    <td class="crAcciones"><i class="fa fa-pencil modificaCabina"></i> <i class="fa fa-check cambioCabina"></i></td>
-                                            }
-                                        </tr>
-                                    }
-                                }
+                            <div class="col-xs-6">
+                                <label for="modelo">Compañia(<span style="color:red">*</span>)</label>
+                                @Html.TextBoxFor(m => m._companiaCrucero, Model._companiaCrucero, new { @class = "form-control", @id = "cru_compania" })
 
-                            </tbody>
-                        </table>
-                    </div>*@
-            }
-            else
-            {
-                <p>Ha ocurrido un error </p>
-            }
+
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="modelo">Capacidad(<span style="color:red">*</span>)</label>
+                                @Html.TextBoxFor(m => m._capacidadCrucero, Model._capacidadCrucero.ToString(), new { @class = "form-control", @id = "cru_capacidad" })
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="anio">Estado(<span style="color:red">*</span>)</label>
+                                @Html.TextBoxFor(m => m._estatus, Model._estatus, new { @class = "form-control", @id = "cru_estado" })
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-2">
+                                <button id="cancel_modification" type="button" class="btn btn-danger" style="display:block; margin-left:auto; margin-right:auto;">Cancelar</button>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" id="modificar_crucero" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
         </div>
+        <!-- /.box -->
     </div>
 
     <script>
         $("#modificar_crucero").click(function (e) {
             e.preventDefault();
             var form = $("#formModificarCrucero");
-            $.ajax({
-                url: "gestion_cruceros/modificarCrucero",
-                data: form.serialize(),
-                type: 'POST',
-                success: function (data) {
-                    console.log(data)
-                    $.ajax({
-                        url: '/gestion_cruceros/M24_ListarCruceros',
-                        type: 'GET',
-                        data: '',
-                        success: function (data, textStatus, jqXHR) {
-                            $("#contenido").empty();
-                            $("#contenido").append(data);
-                        },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            alert(errorThrown);
-                        }
-                    });
-                    $('#formGuardarCrucero')[0].reset();
-                },
-                error: function (data) {
-                    console.log(data);
-                    $('#formGuardarCrucero')[0].reset();
-                }
-            });
+            var nombre = $('#cru_nombre').val();
+            var compania = $('#cru_compania').val();
+            var capacidad = $('#cru_capacidad').val();
+            var estado = $('#cru_estado').val();
+            if (nombre && compania && capacidad && estado) {
+                $.ajax({
+                    url: "gestion_cruceros/modificarCrucero",
+                    data: form.serialize(),
+                    type: 'POST',
+                    success: function (data) {
+                            alert("Se modifico el crucero exitosamente, sera redirigido al listado de cruceros");
+                            //$('#formmodifyVehicle')[0].reset();
+                            var url1 = '/gestion_cruceros/M24_ListarCruceros';
+                            var method = 'GET';
+                            var data1 = '';
+
+                            $.ajax(
+                                {
+                                    url: url1,
+                                    type: method,
+                                    data: data,
+                                    success: function (data, textStatus, jqXHR) {
+
+                                        $("#contenido").empty();
+                                        $("#contenido").append(data);
+                                    },
+                                    error: function (jqXHR, textStatus, errorThrown) {
+                                        alert(errorThrown);
+                                    }
+                                });
+                    }
+                });
+            } else {
+                alert("Existen campos vacios, por favor revise todos los campos");
+            }
         });
     </script>
 

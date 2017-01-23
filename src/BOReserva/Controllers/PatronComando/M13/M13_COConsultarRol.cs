@@ -9,23 +9,29 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando
 {
+    ///<summary>
+    ///Comando que ejecuta la consulta de un rol
+    ///</summary>
     public class M13_COConsultarRol : Command<Entidad>
     {
         int valor;
 
+        ///<summary>
+        ///Constructor
+        ///</summary>
         public M13_COConsultarRol(int value)
         {
             this.valor = value;
         }
 
 
-        ///// <summary>
-        ///// Sobre escritura del metodo ejecutar de la clase Comando.
-        ///// Se encarga de llamar al DAO y devolver la respuesta al controlador.
-        ///// </summary>
-        ///// <returns>
-        ///// Retorna una Entidad
-        ///// </returns>
+        /// <summary>
+        /// Sobre escritura del metodo ejecutar de la clase Comando.
+        /// Se encarga de llamar al DAO y devolver la respuesta al controlador.
+        /// </summary>
+        /// <returns>
+        /// Retorna una Entidad
+        /// </returns>
         public override Entidad ejecutar()
         {
             IDAO daoRol = (IDAORol)FabricaDAO.instanciarDAORol();

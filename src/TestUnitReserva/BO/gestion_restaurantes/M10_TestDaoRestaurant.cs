@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace TestUnitReserva.BO.gestion_restaurantes
 {
+    /// <summary>
+    /// Clase para pruebas unitarias de Clase DaoRestaurant
+    /// </summary>
     [TestFixture]
     class M10_TestDaoRestaurant
     {
@@ -181,7 +184,7 @@ namespace TestUnitReserva.BO.gestion_restaurantes
 
             Entidad rest = FabricaEntidad.crearRestaurant();
             String StringConection = restaurantDao.ConectionString();
-            String sqlString = "SELECT TOP 1 rst_id FROM Restaurante ORDER BY rst_id DESC;";
+            String sqlString = "SELECT TOP 1 rst_id FROM Restaurante where fk_lugar = 12 ORDER BY rst_id DESC;";
             SqlConnection conexion = new SqlConnection(StringConection);
             conexion.Open();
             SqlCommand cmd = new SqlCommand(sqlString, conexion);

@@ -8,9 +8,8 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando.M07
 {
-    public class M07_COAgregarReclamoEquipaje 
+    public class M07_COAgregarReclamoEquipaje: Command<String> 
     {
-        /*
         ReclamoEquipaje _reclamoE;
 
         public M07_COAgregarReclamoEquipaje(ReclamoEquipaje reclamoe)
@@ -20,10 +19,10 @@ namespace BOReserva.Controllers.PatronComando.M07
 
         public override string ejecutar()
         {
-            IDAO reclamoEDAO = FabricaDAO.instanciarDAOReclamoEquipaje();
+            IDAO reclamoEDAO = FabricaDAO.instanciarDaoReclamoEquipaje();
             int result = reclamoEDAO.Agregar(_reclamoE);
             return result.ToString();
         }
-         */
+        
     }
 }

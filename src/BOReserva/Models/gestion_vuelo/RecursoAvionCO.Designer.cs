@@ -61,6 +61,15 @@ namespace BOReserva.Models.gestion_vuelo {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Reserva402.
+        /// </summary>
+        internal static string CodigoErrorFormulario {
+            get {
+                return ResourceManager.GetString("CodigoErrorFormulario", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a dd/MM/yyyy.
         /// </summary>
         internal static string FormatoFecha {
@@ -75,6 +84,42 @@ namespace BOReserva.Models.gestion_vuelo {
         internal static string FormatoHora {
             get {
                 return ResourceManager.GetString("FormatoHora", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hay Campos Obligatorios Vacios.
+        /// </summary>
+        internal static string MensajeCampoVacio {
+            get {
+                return ResourceManager.GetString("MensajeCampoVacio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ocurrio un error de conexion, contante al Administrador.
+        /// </summary>
+        internal static string MensajeErrorBD {
+            get {
+                return ResourceManager.GetString("MensajeErrorBD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Existe un error en el formulario.
+        /// </summary>
+        internal static string MensajeErrorFomulario {
+            get {
+                return ResourceManager.GetString("MensajeErrorFomulario", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ocurrio un error en el sistema, contacte al Administrador.
+        /// </summary>
+        internal static string MensajeErrorGeneral {
+            get {
+                return ResourceManager.GetString("MensajeErrorGeneral", resourceCulture);
             }
         }
         

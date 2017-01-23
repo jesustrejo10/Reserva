@@ -6,6 +6,10 @@ using System.Web.Mvc;
 
 namespace BOReserva.Models.gestion_cruceros
 {
+
+    /// <summary>
+    /// Clase constructura de Gestion de Cabinas
+    /// </summary>
     public class CGestion_cabina
     {
         public CGestion_cabina(string _nombreCabina, float _precioCabina)
@@ -33,12 +37,18 @@ namespace BOReserva.Models.gestion_cruceros
 
         public string _cruceroNombre { get; set; }
 
+        /// <summary>
+        /// Metodo para agregar cabinas
+        /// </summary>
         public void AgregarCabinas(CGestion_cabina cabina)
         {
             ConexionBD cbd = new ConexionBD();
             cbd.insertarCabinas(cabina);
         }
 
+        /// <summary>
+        /// Metodo para cambiar el status de la cabina
+        /// </summary>
         public void cambioEstatusCabina(int id_cabina)
         {
             ConexionBD cbd = new ConexionBD();

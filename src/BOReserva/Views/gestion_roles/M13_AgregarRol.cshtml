@@ -73,7 +73,8 @@
     </div>
 
     <script>
-    //Accion del boton agregarrol
+        consultarPermisos();
+
         $("#agreagarrol").click(function (e) {
             e.preventDefault();
             var form = $("#formagreagarrol");
@@ -94,32 +95,38 @@
                     url: "gestion_roles/agregarrol",
                     data: form.serialize(),
                     type: 'POST',
-                    success: function (data) {
-                        alert("Se guardo");
-                        $('#formagreagarrol')[0].reset();
+                    success: function (response) {
+                        if (typeof response.error === "undefined") {
+                           
+                        }
+                        else {
+                            alert(response.error);                           
+                        }                       
+                        $.ajax({
+                            type: 'post',
+                            dataType: 'json',
+                            url: 'gestion_roles/asignarpermisos',
+                            data: { json: JSON.stringify(permisos) },
+                            success: function (data) {                           
+
+                            },
+                            failure: function (response) {
+                                alert("No se pudo realizar la petición al servidor");
+                            }
+                        });
+                        $.ajax({
+                            url: '/gestion_roles/M13_VisualizarRol',
+                            type: 'GET',
+                            success: function (data, textStatus, jqXHR) {
+                                $("#contenido").empty();
+                                $("#contenido").append(data);
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert(errorThrown);
+                            }
+                        });
                     }
-
-                });
-                var data = {
-                    json: JSON.stringify(permisos),
-                };
-                console.log(data);
-                $.ajax({
-                    type: 'post',
-                    dataType: 'json',
-                    url: 'gestion_roles/asignarpermisos',
-                    data: data,
-                    success: function (data) {
-                        alert("Se asignaron los permisos");
-                        $('#listaPermisos').empty();
-
-                    },
-                    failure: function (response) {
-                        alert("No se pudo asignar permisos");
-
-                    }
-                    //envia al metodo en la url los parametros para ser almacenados en BD
-                });
+                });                            
             }
         });
 
@@ -130,7 +137,6 @@
                 url: 'gestion_roles/Consultarpermisos',
                 //data: data,
                 success: function (response) {
-                    console.log(response);
                     cargadorPermisos(response);
                 },
                 failure: function (response) {
@@ -149,9 +155,7 @@
                         $('<br>').appendTo(container);
                 });
             }
-        };
-        consultarPermisos();
+        };        
     </script>
-
 }
 

@@ -14,7 +14,7 @@ namespace BOReserva.DataAccess.Domain
         public int _estadoReclamo { get; set; }
         public int _usuario { get; set; }
         public int _editable { get; set; }
-        
+
 
         /// <summary>
         /// constructor de la clase sin parámetros

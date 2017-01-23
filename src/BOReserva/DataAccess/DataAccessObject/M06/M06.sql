@@ -25,6 +25,23 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 -- ----------------------------
+-- AGREGAR COMIDA A VUELO
+-- ----------------------------
+CREATE PROCEDURE [dbo].[M06_AgregarComidaVuelo]
+  @com_vue_id AS int,
+  @com_vue_fk_comida AS int,
+  @com_vue_cantidad AS int
+AS
+BEGIN
+	insert into Comida_Vuelo values (@com_vue_id, @com_vue_fk_comida , @com_vue_cantidad);
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- ----------------------------
 -- CONSULTAR COMIDAS
 -- ----------------------------
 CREATE PROCEDURE [dbo].[M06_ConsultarComidas]

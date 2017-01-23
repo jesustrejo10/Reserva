@@ -150,8 +150,8 @@
                     data: form.serialize(),
                     type: 'POST',
                     success: function (data) {
-                        if (data === "1") {
-                            alert("Se registro el hotel exitosamente");
+                        if (data === "Se registro el hotel exitosamente") {
+                            alert(data);
                             $('#formSaveHotel')[0].reset();
                         } else {
                             alert(data);

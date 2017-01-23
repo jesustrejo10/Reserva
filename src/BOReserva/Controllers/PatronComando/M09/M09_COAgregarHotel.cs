@@ -1,8 +1,11 @@
-﻿using BOReserva.DataAccess.DAO;
+﻿using BOReserva.Controllers.PatronComando.M09;
+using BOReserva.DataAccess.DAO;
 using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.DataAccessObject.M09;
 using BOReserva.DataAccess.Domain;
+using BOReserva.DataAccess.Model;
+using BOReserva.Excepciones;
 using BOReserva.Excepciones.M09;
 using System;
 using System.Collections.Generic;
@@ -31,20 +34,31 @@ namespace BOReserva.Controllers.PatronComando
         /// Metodo implementado proveniente de la clase abstracta Command
         /// </summary>
         /// <returns>Retorna un String</returns>
-        public override String ejecutar(){
+        public override String ejecutar()
+        {
             try
             {
-                IDAO daoHotel = FabricaDAO.instanciarDaoHotel();
+                IDAO daoHotel = FabricaDAO.instanciarDaoHotel();       
                 int resultadoAgregarHotel = daoHotel.Agregar(_hotel);
                 if (resultadoAgregarHotel == 1)
                 {
                     Command<int> add = FabricaComando.crearM09AgregarHabitaciones(_hotel, _hotel._precio);
                     int ad = add.ejecutar();
                 }
-                return resultadoAgregarHotel.ToString();
+                if (resultadoAgregarHotel == 1)
+                {
+                    //Como agrego correctamente mando a actualizar la lista de Hoteles
+                    Cache.mapHoteles = daoHotel.ConsultarTodos();
+                    return ResourceM09Command.AgregoCorrectamente;
+                }
+                else
+                {
+                    return ResourceM09Command.AgregoErroneamente;
+                }
             }
             catch (ReservaExceptionM09 ex)
             {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);               
                 return ex.Mensaje;
             }
         }

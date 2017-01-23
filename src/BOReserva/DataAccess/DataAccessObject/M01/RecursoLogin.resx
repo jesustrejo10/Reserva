@@ -167,4 +167,13 @@
   <data name="ResetearIntentos" xml:space="preserve">
     <value>M01_ResetearIntentos</value>
   </data>
+  <data name="EliminarLogin" xml:space="preserve">
+    <value>M01_EliminarLogin</value>
+  </data>
+  <data name="InsertarLogin" xml:space="preserve">
+    <value>M01_InsertarLogin</value>
+  </data>
+  <data name="NumeroIntentos" xml:space="preserve">
+    <value>M01_NumeroIntentos</value>
+  </data>
 </root>
