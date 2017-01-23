@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AgregarPermiso" xml:space="preserve">
+    <value>M13_AgregarPermiso</value>
+    <comment>Agrega un permiso nuevo a la base de datos</comment>
+  </data>
   <data name="AgregarPermisoRol" xml:space="preserve">
     <value>M13_AgregarPermisosRol</value>
     <comment>Agrega un permiso a un rol</comment>
@@ -125,6 +129,14 @@
     <value>M13_AgregarRol</value>
     <comment>Agrega un rol</comment>
   </data>
+  <data name="ConsultarListaPermisos" xml:space="preserve">
+    <value>M13_ConsultarListaPermisos</value>
+    <comment>Lista los permisos con su url</comment>
+  </data>
+  <data name="ConsultarPermiso" xml:space="preserve">
+    <value>M13_ConsultarPermiso</value>
+    <comment>Consulta los datos de un permiso</comment>
+  </data>
   <data name="ConsultarPermisos" xml:space="preserve">
     <value>M13_ConsultarPermisos</value>
     <comment>Lista de los permisos que posee un rol en especifico</comment>
@@ -132,6 +144,10 @@
   <data name="ConsultarPermisosAsociados" xml:space="preserve">
     <value>M13_ConsultarPermisosAsociados</value>
     <comment>Consulta permisos asignados a un rol</comment>
+  </data>
+  <data name="ConsultarPermisosNoAsociados" xml:space="preserve">
+    <value>M13_ConsultarPermisosNoAsociados</value>
+    <comment>Consulta los permisos que no estan asociados al rol</comment>
   </data>
   <data name="ConsultarPermisosUsuario" xml:space="preserve">
     <value>M13_ConsultarPermisosUsuario</value>
@@ -149,6 +165,10 @@
     <value>M13_EliminarPermisos</value>
     <comment>Elimina los permisos de un rol especifico</comment>
   </data>
+  <data name="EliminarPermisoSeleccionado" xml:space="preserve">
+    <value>M13_EliminarPermisoSeleccionado</value>
+    <comment>Elimina el permiso de la base de datos</comment>
+  </data>
   <data name="EliminarRol" xml:space="preserve">
     <value>M13_EliminarRol</value>
     <comment>Eliminar un rol por su id</comment>
@@ -156,5 +176,25 @@
   <data name="ListarPermisos" xml:space="preserve">
     <value>M13_ListarPermisos</value>
     <comment>Lista de los permisos en general</comment>
+  </data>
+  <data name="ModificarPermiso" xml:space="preserve">
+    <value>M13_ModificarPermiso</value>
+    <comment>Modifica un permiso</comment>
+  </data>
+  <data name="QuitarPermiso" xml:space="preserve">
+    <value>M13_QuitarPermiso</value>
+    <comment>Elimina un permiso de un rol</comment>
+  </data>
+  <data name="ValidacionPermiso" xml:space="preserve">
+    <value>M13_ValidacionPermiso</value>
+    <comment>Revisa si el permiso tiene roles asignados</comment>
+  </data>
+  <data name="ValidacionRol" xml:space="preserve">
+    <value>M13_ValidacionRol</value>
+    <comment>Revisa si el rol tiene usuarios asociados</comment>
+  </data>
+  <data name="ModificarRol" xml:space="preserve">
+    <value>M13_ModificarRol</value>
+    <comment>Modifica el nombre de un rol</comment>
   </data>
 </root>

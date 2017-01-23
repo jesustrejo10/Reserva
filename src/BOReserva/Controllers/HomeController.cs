@@ -18,7 +18,7 @@ namespace BOReserva.Controllers
         ///<summary>
         ///Nueva instancia a lista de permisos
         ///</summary>
-        public static List<string> permisos;
+        public static List<int> permisos;
         ///<summary>
         ///Metodo que carga los permisos para un usuario
         ///</summary>
@@ -29,7 +29,7 @@ namespace BOReserva.Controllers
                 return RedirectToAction("M01_Login", "gestion_seguridad_ingreso");
             }
             var usuario = Session["Cgestion_seguridad_ingreso"] as Cgestion_seguridad_ingreso;
-            Command<List<String>> comando_permisos = FabricaComando.crearM13_ConsultarPermisosUsuario(usuario.idUsuario);
+            Command<List<int>> comando_permisos = FabricaComando.crearM13_ConsultarPermisosUsuario(usuario.idUsuario);
             permisos = comando_permisos.ejecutar();
             Session["Permisos"] = permisos;
             return View();

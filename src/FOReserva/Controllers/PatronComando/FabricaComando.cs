@@ -2,6 +2,7 @@
 using FOReserva.Controllers.PatronComando.M16;
 using FOReserva.DataAccess.Domain;
 using FOReserva.Controllers.PatronComando.M19;
+using FOReserva.Controllers.PatronComando.M22;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -142,6 +143,63 @@ namespace FOReserva.Controllers.PatronComando
             List<Lugar> lista = new List<Lugar>();
             lista.Add(lugar);
             return lista;
+        }
+        #endregion
+
+        #region M22 Reserva Habitacion
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M22_COObtenerCiudad
+        /// </summary>
+        /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
+        public static Command<List<CiudadHab>> obtenerCiudades()
+        {
+            return new M22_COObtenerCiudad();
+        }
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M22_COConsultarIdCiudad
+        /// </summary>
+        /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
+        public static Command<Dictionary<int,Entidad>> obtenerHotelCiudad(int id)
+        {
+            return new M22_COConsultarIdCiudad(id);
+        }
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M22_COAgregarRerserva
+        /// </summary>
+        /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
+        public static Command<String> agregarReservaHabitacion(Entidad e)
+        {
+            return new M22_COAgregarRerserva((ReservaHabitacion)e);
+        }
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M22_COConsultarTodasReservas
+        /// </summary>
+        /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
+        public static Command<Dictionary<int, Entidad>> mostrarReservaUsuario(int id)
+        {
+            return new M22_COConsultarTodasReservas(id);
+        }
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M22_COEliminarReserva
+        /// </summary>
+        /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
+        public static Command<String> eliminarReservaUsuario(int id)
+        {
+            return new M22_COEliminarReserva(id);
+        }
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M22_COModificarReserva
+        /// </summary>
+        /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
+        public static Command<String> modificarReservaUsuario(int id, int cant_dias)
+        {
+            return new M22_COModificarReserva(id,cant_dias);
         }
         #endregion
     }

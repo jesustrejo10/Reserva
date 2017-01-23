@@ -82,7 +82,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M14
                 reader.Close();
                 con.Close();
                 return listaCabinas;
-
+                
             }
             catch (SqlException ex)
             {
@@ -91,11 +91,11 @@ namespace BOReserva.DataAccess.DataAccessObject.M14
                 return null;
             }
         }
-         
 
+                
         Dictionary<int, Entidad> IDAOCabina.ConsultarTodos(int id)
         {
-            
+
             Dictionary<int, Entidad> listaCabinas = new Dictionary<int, Entidad>();
             //puedo usar Singleton
             SqlConnection con = Connection.getInstance(_connexionString);

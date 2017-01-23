@@ -1,12 +1,23 @@
 ﻿@model BOReserva.Models.gestion_ofertas.CAgregarOferta
 
 <script src="~/Scripts/Scripts_Ofertas/llamadas_generales.js"></script>
+<link href="~/Content/Canvas/Box.css" rel="stylesheet" />
 <!-----------------SECCION AGREGAR OFERTA-------------------->
 @using (Html.BeginForm("guardarOferta", "gestion_ofertas", null, FormMethod.Post, new { @id = "formGuardarOferta", @class = "form-horizontal" }))
 {
+    <!--Agregando plugins para usar los datepickers-->
+    <head>
+        <title></title>
+        <script src="~/Content/bootstrap/css/bootstrap.min.css"></script>
+        <script src="~/Content/plugins/jQuery/jquery-2.2.3.min.js"></script>
+        <script src="~/Content/plugins/datepicker/datepicker3.css"></script>
+        <script src="~/Content/plugins/datepicker/bootstrap-datepicker.js"></script>
+        <script src="~/Content/plugins/datepicker/locales/bootstrap-datepicker.es.js"></script>
+    </head>
+    <!---->
 <div class="row">
-    <div class="col-md-12">
-        <div class="box box">
+    <div class="col-md-10">
+        <div class="Cajita">
             <div class="box-header with-border">
                 <h1 class="box-title"> Agregar Oferta</h1>
                 <div class="box-tools pull-right">
@@ -113,7 +124,7 @@
     //Valida que el nombre y precio no esten vacios
     function validarCamposVacios() {
         if (($("#nombreOferta").val() == "") || ($("#porcentajeOferta").val() == "")) {
-            alert('Debes llenar el nombre y porcentaje de la Oferta!');
+            alert('Debe rellenar el nombre y porcentaje de la oferta');
             return false;
         }
         return true;
@@ -121,7 +132,7 @@
     //Compara todas las fechas introducidas
     function compararFechas() {
         if (!validarFechas($("#fInicio").val(), $("#fFin").val())) {
-            alert('La fecha fin debe ser mayor que la fecha inicio!');
+            alert('La fecha fin debe ser mayor que la fecha de inicio');
             return false;
         }
         return true;
@@ -134,4 +145,24 @@
         }
         return true;
     }
+    //Código para usar los datepickers (calenadrios para los campos de fecha)
+    $(".fechaIniOferta").ready(function () {
+        $('#fInicio').datepicker({
+            format: 'dd/mm/yyyy',
+            pickTime: false,
+            autoclose: true,
+            language: 'es'
+        });
+    });
+    //Fin de código nuevo
+    //Inicio de código nuevo
+    $(".fechaFinOferta").ready(function () {
+        $('#fFin').datepicker({
+            format: 'dd/mm/yyyy',
+            pickTime: false,
+            autoclose: true,
+            language: 'es'
+        });
+    });
+    //Fin de código nuevo
 </script>

@@ -22,6 +22,7 @@ namespace BOReserva.Controllers.PatronComando
             this._cabina = cabina;
         }
 
+
         ///// <summary>
         ///// Sobre escritura del metodo ejecutar de la clase Comando.
         ///// Se encarga de llamar al DAO y devolver la respuesta al controlador.

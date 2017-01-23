@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,7 +32,7 @@ namespace TestUnitReserva.BO.gestion_cruceros
         public void Before()
         {
             mockCamarote = new Camarote(400, 2, "Individual", "activo", 15);
-            mockCabina = new Cabina(400,"Interior",99,"activo",2);
+            mockCabina = new Cabina(400, "Interior", 99, "activo", 2);
             mockCrucero = new Crucero();
             daoCruceros = new DAOCruceros();
 

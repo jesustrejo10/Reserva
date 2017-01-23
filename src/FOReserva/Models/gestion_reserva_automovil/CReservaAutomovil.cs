@@ -12,7 +12,6 @@ namespace FOReserva.Models.gestion_reserva_automovil
     public class CReservaAutomovil: Entidad
     {
         #region Atributos
-        public int _id { get; set; }
         public string _fecha_ini  { get; set; }
         public string _fecha_fin { get; set; }
         public string _hora_ini { get; set; }

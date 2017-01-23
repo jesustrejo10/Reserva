@@ -3,7 +3,6 @@
  <!---------------------- SECCION DE AGREGAR RECLAMO---------------->
 @using (Html.BeginForm("guardarReclamo", "gestion_reclamos", null, FormMethod.Post, new { @id = "formGuardarReclamo", @class = "form-horizontal" }))
 {
-
     <div class="row">
         <div class="col-md-12">
             <div class="box">
@@ -74,6 +73,7 @@
                     if (data === "1") {
                         alert("Se registró el reclamo exitosamente");
                         $('#formGuardarReclamo')[0].reset();
+                        alert("entró aquí y no se reseteo el formulario");
                     } else {
                         alert(data);
                     }

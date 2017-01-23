@@ -44,6 +44,7 @@ function toIndex() {
 $("#aceptarUsuario").click(function (e) {
     console.log("hola!");
     e.preventDefault();
+   // $("#contenido").html('<div class="text-center">Cargando...</div>');
     var form = $(".agregarUsuario_form");
     $.ajax({
         url: "gestion_usuarios/guardarUsuario",

@@ -37,6 +37,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                     query.Parameters.AddWithValue("@imagen", "");
                 
                     query.ExecuteNonQuery();
+
                 
                     //creo un lector sql para la respuesta de la ejecucion del comando anterior               
                     SqlDataReader lector = query.ExecuteReader();

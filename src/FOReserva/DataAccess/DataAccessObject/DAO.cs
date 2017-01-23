@@ -174,8 +174,7 @@ namespace FOReserva.DataAccess.DataAccessObject
         {
             foreach (Parametro parametro in parametros)
             {
-                if (parametro != null && parametro.etiqueta != null && parametro.tipoDato != null &&
-                    parametro.esOutput != null)
+                if (parametro != null && parametro.etiqueta != null)
                 {
                     if (parametro.esOutput)
                     {
@@ -274,7 +273,7 @@ namespace FOReserva.DataAccess.DataAccessObject
 
                     return dataTable;
                 }
-
+                
 
 
             }
