@@ -59,7 +59,7 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
             String clave = Encriptar.CrearHash(_claveCampoTexto);//metodo implementado por MOD 12 USUARIO
 
             var usuarioAConsultar = FabricaEntidad.crearUsuario(_correoCampoTexto);
-            var verificacion = (Usuario)bd.Consultar(usuarioAConsultar); //Asigna valor de retorno luego de consulta a BD
+            var verificacion = (Usuario)bd.Consultar(usuarioAConsultar); //Asigna _idHotel de retorno luego de consulta a BD
 
             Boolean Usuario = verificacion.correo.Equals(_correoCampoTexto.ToLower());
             Boolean Contraseña = verificacion.contrasena.Equals(clave);

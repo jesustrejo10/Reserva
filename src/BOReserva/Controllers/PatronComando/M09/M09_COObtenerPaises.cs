@@ -85,7 +85,7 @@ namespace BOReserva.Controllers.PatronComando
         /// Metodo ipara obtener el identificador de una ciudad
         /// </summary>
         /// <param name="ciudad">Ciudad a buscar</param>
-        /// <returns>Retorna un valor entero</returns>
+        /// <returns>Retorna un _idHotel entero</returns>
         public int obtenerIdentificadorCiudad(String ciudad)
         {
             try

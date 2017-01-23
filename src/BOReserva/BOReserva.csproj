@@ -468,6 +468,7 @@
     <Compile Include="DataAccess\Domain\Transporte.cs" />
     <Compile Include="DataAccess\Domain\Usuario.cs" />
     <Compile Include="DataAccess\Domain\Vuelo.cs" />
+    <Compile Include="DataAccess\Model\Cache.cs" />
     <Compile Include="DataAccess\Model\Connection.cs" />
     <Compile Include="DataAccess\Model\ConexionUtil.cs" />
     <Compile Include="DataAccess\Model\ExceptionBD.cs" />

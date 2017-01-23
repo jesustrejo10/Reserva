@@ -11,10 +11,10 @@ namespace BOReserva.Controllers.PatronComando.M07
     public class M07_COConsultarReclamoEquipajeID // : Command<Entidad>
     {
         /*
-        int valor;
+        int _idHotel;
         public M07_COConsultarReclamoEquipajeID(int id)
         {
-            this.valor = id;
+            this._idHotel = id;
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace BOReserva.Controllers.PatronComando.M07
         public override Entidad ejecutar()
         {
             IDAO daoReclamoEquipaje = FabricaDAO.instanciarDaoReclamoEquipaje();
-            Entidad reclamo = daoReclamoEquipaje.Consultar(valor);
+            Entidad reclamo = daoReclamoEquipaje.Consultar(_idHotel);
             return reclamo;
         }
          */

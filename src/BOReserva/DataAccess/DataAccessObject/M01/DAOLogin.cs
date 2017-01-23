@@ -67,7 +67,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
             }
             catch (ArgumentNullException ex)
             {
-                throw new ExceptionReserva("Reserva-404", "Argumento con valor invalido", ex);
+                throw new ExceptionReserva("Reserva-404", "Argumento con _idHotel invalido", ex);
             }
             catch (FormatException ex)
             {

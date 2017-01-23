@@ -28,7 +28,7 @@ namespace BOReserva.Controllers.PatronComando.M09
         /// <summary>
         /// Implementacion del metodo ejecutar de la clase abstracta Command para esta situacion
         /// </summary>
-        /// <returns>Retorna un valor entero</returns>
+        /// <returns>Retorna un _idHotel entero</returns>
         public override int ejecutar()
         {
             try

@@ -1,6 +1,7 @@
 ﻿using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
+using BOReserva.DataAccess.Model;
 using BOReserva.Excepciones.M09;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,8 @@ namespace BOReserva.Controllers.PatronComando.M09
             IDAO daoHotel = FabricaDAO.instanciarDaoHotel();
             Entidad test = daoHotel.Modificar(_hotel);
             Hotel hotel = (Hotel)test;
+            //Actualice un Hotel en BD. necesito refrescarlo en Cache
+            Cache.actualizarMapHoteles(hotel);
             return "Se modifico el hotel exitosamente, sera redirigido al listado de hoteles";
         }
             catch (ReservaExceptionM09 ex)
