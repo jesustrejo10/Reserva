@@ -74,28 +74,30 @@ $("#formGuardarVuelo3").submit(function (e) {
 //Formulario 1 Modificar Vuelo
 $("#formModificarVuelo").submit(function (e) {
     e.preventDefault();
-    var form = $("#formModificarVuelo");
-    var selectedCO = $("#ciudadO option:selected").text();
-    var selectedCD = $("#ciudadD option:selected").text();
-    $("#_ciudadOrigen").val(selectedCO);
-    $("#_ciudadDestino").val(selectedCD);
-    $.ajax({
-        url: "gestion_vuelo/M04_GestionVuelo_MW2",
-        data: form.serialize(),
-        type: 'POST',
-        success: function (data, textStatus, jqXHR) {
+    if (validateForm1() != false) {
+            var form = $("#formModificarVuelo");
+            var selectedCO = $("#ciudadO option:selected").text();
+            var selectedCD = $("#ciudadD option:selected").text();
+            $("#_ciudadOrigen").val(selectedCO);
+            $("#_ciudadDestino").val(selectedCD);
+            $.ajax({
+            url: "gestion_vuelo/M04_GestionVuelo_MW2",
+            data: form.serialize(),
+            type: 'POST',
+            success: function (data, textStatus, jqXHR) {
 
-            $("#contenido").empty();
-            $("#contenido").append(data);
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
         },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert(errorThrown);
+            error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
         }
-    , error: function (xhr, textStatus, exceptionThrown) {
-        //muestro el texto del error
-        alert(xhr.responseText);
+            , error: function (xhr, textStatus, exceptionThrown) {
+            //muestro el texto del error
+                alert(xhr.responseText);
+        }
+        });
     }
-    });
 });
 //Formulario 2 Modificar Vuelo
 $("#formModificarVuelo2").submit(function (e) {
@@ -550,8 +552,8 @@ $(".activar").click(function () {
 
  function validateForm1() {
      if ((document.getElementById("codigoVuelo").value) == ""
-         || document.getElementById("ciudadO").value == ""
-         || document.getElementById("ciudadD").value == ""
+         || document.getElementById("ciudadO").value == "0"
+         || document.getElementById("ciudadD").value == "0"
          || document.getElementById("fechaDespegue").value == ""
          || document.getElementById("horaDespegue").value == "") {
          alert("Campos Obligatorios Vacios");
