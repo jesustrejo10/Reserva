@@ -388,6 +388,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>M07ReclamoEquipaje.resx</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\DataAccessObject\M12\RecursoDAOM12.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RecursoDAOM12.resx</DependentUpon>
+    </Compile>
     <Compile Include="DataAccess\DataAccessObject\M13\DAOPermiso.cs" />
     <Compile Include="DataAccess\DataAccessObject\M02\RecursoDAOM02.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -553,6 +558,7 @@
     <Compile Include="Excepciones\M11\ReservaExceptionM11.cs" />
     <Compile Include="Excepciones\M16\ReservaExceptionM16.cs" />
     <Compile Include="Excepciones\M13\ReservaExceptionM13.cs" />
+    <Compile Include="Excepciones\M12\ReservaExceptionM12.cs" />
     <Compile Include="Excepciones\RecursoLog.Designer.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -1950,6 +1956,10 @@
     <EmbeddedResource Include="DataAccess\DataAccessObject\M04\RecursoVuelo.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoVuelo.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataAccess\DataAccessObject\M12\RecursoDAOM12.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecursoDAOM12.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="DataAccess\DataAccessObject\M13\M13_DAOResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
