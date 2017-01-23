@@ -121,6 +121,24 @@ namespace BOReserva.DataAccess.Domain
         }
 
         /// <summary>
+        /// Clase que instacia un hotel
+        /// </summary>
+        /// <param name="model">Modelo proveniente de la vista M09_ModificarHotel</param>
+        /// <param name="c">Ciudad donde esta el hotel</param>
+        /// <returns></returns>
+        public static Entidad InstanciarHotel(CModificarHotel model)
+        {
+            String nombre = model._nombre;
+            String direccion = model._direccion;
+            int clasificacion = model._clasificacion;
+            int capacidad = model._capacidadHabitacion;
+            String paginaWeb = model._paginaWeb;
+            String email = model._email;
+            int precio = model._precioHabitacion;
+            return new Hotel(nombre, direccion, email, paginaWeb, clasificacion, capacidad, null, precio);
+        }
+
+        /// <summary>
         /// Clase que instancia un pais
         /// </summary>
         /// <param name="nombre">Nombre del pais</param>
