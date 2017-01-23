@@ -40,34 +40,4 @@
         </div>
     </div>
 
-    <script>
-        $("#guardar_crucero").click(function (e) {
-            e.preventDefault();
-            var form = $("#formGuardarCrucero");
-            $.ajax({
-                url: "gestion_cruceros/guardarCrucero",
-                data: form.serialize(),
-                type: 'POST',
-                success: function (data) {
-                    $.ajax({
-                        url: '/gestion_cruceros/M24_ListarCruceros',
-                        type: 'GET',
-                        data: '',
-                        success: function (data, textStatus, jqXHR) {
-                            $("#contenido").empty();
-                            $("#contenido").append(data);
-                        },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            alert(errorThrown);
-                        }
-                    });
-                    $('#formGuardarCrucero')[0].reset();
-                },
-                error: function (data) {
-                    console.log(data);
-                    $('#formGuardarCrucero')[0].reset();
-                }
-            });
-        });
-    </script>
 }

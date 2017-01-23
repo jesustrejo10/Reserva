@@ -104,18 +104,71 @@ $("#guardar_camarote").click(function (e) {
             data: form.serialize(),
             type: 'POST',
             success: function (data) {
-                var statusHTML = "<td class='crStatus'><i class='fa fa-circle started'></i></td><td class='crAcciones'> <i class='fa fa-times' onclick='cambioCamarote(" + $("#idCamarote").val() + ")'></i></td>";
-                html = "<tr><td style='text-align:center'>" + $("#cantidadCama").val() + "</td><td style='text-align:center'>" + $("#tipoCama").val() + "</td>" + statusHTML + "</tr>";
-                console.log(html)
-                $("#tablaCamarote").append(html);
-                //$("#tablaCamarote").append("<tr><td>" + $("#cantidadCama").val() + "</td><td>" + $("#tipoCama").val() + "</td></tr>");
+                alert("Agregando camarote, por favor espere");
+                $('#formGuardarCamarote')[0].reset();
+            },
+            error: function (data) {
+                alert("Error agregando cabina, intente de nuevo");                
+            }
+        });
+    }
+});
+
+
+
+$("#guardar_cabina").click(function (e) {
+    e.preventDefault();
+    var form = $("#formGuardarCabina");
+    if (confirm("¿Esta conforme con la información suministrada?") == true) {
+        alert("Agregando cabina, por favor espere...");
+        $.ajax({
+            url: "gestion_cruceros/guardarCabina",
+            data: form.serialize(),
+            type: 'POST',
+            success: function (data) {
+                alert("Cabina agregada exitosamente");
+                $('#formGuardarCabina')[0].reset();
+            },
+            error: function (data) {
+                alert("Error agregando cabina, intente de nuevo");                
+            }
+        });
+}
+});
+
+
+$("#guardar_crucero").click(function (e) {
+    e.preventDefault();
+    var form = $("#formGuardarCrucero");
+    if (confirm("¿Esta conforme con la información suministrada?") == true) {
+        alert("Agregando crucero, por favor espere...");
+        $.ajax({
+            url: "gestion_cruceros/guardarCrucero",
+            data: form.serialize(),
+            type: 'POST',
+            success: function (data) {
+                $.ajax({
+                    url: '/gestion_cruceros/M24_ListarCruceros',
+                    type: 'GET',
+                    data: '',
+                    success: function (data, textStatus, jqXHR) {
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+                $('#formGuardarCrucero')[0].reset();
             },
             error: function (data) {
                 console.log(data);
-                $('#formGuardarCamarote')[0].reset();
+                $('#formGuardarCrucero')[0].reset();
             }
-    });
+        });
+    }
 });
+
 
 
 
