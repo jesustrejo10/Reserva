@@ -596,13 +596,12 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
             CReservaAutomovil resv = (CReservaAutomovil)_reserva;
             List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
 
-
             try
             {
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_id, SqlDbType.Int, resv._id.ToString(), false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_hora_fin, SqlDbType.VarChar, resv._hora_fin, false));
 
-
+                EjecutarStoredProcedure(RecursoDAOM19.procedimientoActualizar, listaParametro);
             }
             catch (ArgumentNullException ex)
             {
