@@ -138,6 +138,7 @@ namespace BOReserva.Controllers
                 {
                     Response.StatusCode = (int)HttpStatusCode.BadRequest;
                     string error = "Error agregando el restaurante.";
+                    TempData["ErrorServidor"] = "Error en Base de Datos";
                     return Json(error);
                 }
             }
@@ -246,6 +247,8 @@ namespace BOReserva.Controllers
         /// <returns></returns>
         public List<Lugar> cargarComboBoxLugar()
         {
+            List<Lugar> lista2 = FabricaEntidad.crearListaLugar();
+            lista2.Add(FabricaEntidad.crearLugar(0,"Error en Carga"));
             try
             {
                 Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.comandosVistaRestaurant(FabricaComando.comandoVista.CARGAR_LUGAR);
@@ -263,7 +266,7 @@ namespace BOReserva.Controllers
             catch (Exception)
             {
 
-                return null;
+                return lista2;
             }
         }
         #endregion
