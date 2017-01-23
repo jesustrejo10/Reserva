@@ -136,7 +136,7 @@
 
         var id_rol = $("#rol_id").val();
         var nuevo_rol = $("#nombre_rol").val();
-        
+
         if (nuevo_rol.length < 1) {
             alert("El nombre es obligatorio");
             return false;
@@ -187,8 +187,20 @@
                 console.log("done");
             }
         });
+        $.ajax({
+            url: '/gestion_roles/M13_VisualizarRol',
+            type: 'GET',
+            success: function (data, textStatus, jqXHR) {
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("error");
+                alert(errorThrown);
+            }
+        });
     }
-  
+
     function consultarNoPermisos() {
         var id_rol = $("#rol_id").val();
         $.ajax({
@@ -203,7 +215,7 @@
             }
         });
     }
-    
+
     function cargadorPermisos(response) {
         var permisos = response;
         var container = $('#listaNoPermisos');
@@ -219,6 +231,7 @@
     }
 
 </script>
+
 
 <style>
     .modificar {
