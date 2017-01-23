@@ -58,6 +58,11 @@ namespace FOReserva.Controllers.PatronComando
 
         #region M19 Reserva Automovil
 
+        public static Command<Dictionary<int, Entidad>> crearM19ObtenerPaises()
+        {
+            return new M19_COObtenerPaises();
+        }
+
         public enum comandoVista
         {
             CARGAR_LUGAR,
@@ -67,7 +72,8 @@ namespace FOReserva.Controllers.PatronComando
         public enum comandoReservaAuto
         {
             NULO,
-            CONSULTAR_ID
+            CONSULTAR_ID,
+            CONSULTAR_AUTOS
         }
 
         public enum comandosGlobales
@@ -88,6 +94,7 @@ namespace FOReserva.Controllers.PatronComando
         /// <returns>regresa un tipo Objecto que debe ser casteado segun sea el caso</returns>
         public static Object comandosReservaAutomovil(comandosGlobales comando, comandoReservaAuto comandoR, Entidad _objeto)
         {
+            System.Diagnostics.Debug.WriteLine("LLEGA A COMANDOS RESERVA AUTOMOVIL");
             switch (comando)
             {
                 case comandosGlobales.CREAR:
@@ -107,6 +114,9 @@ namespace FOReserva.Controllers.PatronComando
                             break;
                         case comandoReservaAuto.CONSULTAR_ID:
                             return new M19_COConsultarReservaId(_objeto);
+                        case comandoReservaAuto.CONSULTAR_AUTOS:
+                            return new M19_COConsultarAutos(_objeto);
+
                     }
                     return new M19_COConsultarReserva(_objeto);
 
@@ -144,6 +154,19 @@ namespace FOReserva.Controllers.PatronComando
             lista.Add(lugar);
             return lista;
         }
+
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M19_COObtenerPaises
+        /// </summary>
+        /// <returns>
+        /// Retorna la instancia del comando M19_COObtenerPaises.
+        /// </returns>
+        
+
+
+
         #endregion
 
         #region M22 Reserva Habitacion

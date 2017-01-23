@@ -551,6 +551,7 @@
     <Compile Include="Excepciones\M04\ReservaExceptionM04.cs" />
     <Compile Include="Excepciones\M10\ReservaExceptionM10.cs" />
     <Compile Include="Excepciones\M11\ReservaExceptionM11.cs" />
+    <Compile Include="Excepciones\M16\ReservaExceptionM16.cs" />
     <Compile Include="Excepciones\M13\ReservaExceptionM13.cs" />
     <Compile Include="Excepciones\RecursoLog.Designer.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -644,13 +645,11 @@
     <Compile Include="Models\gestion_usuarios\CVerUsuario.cs" />
     <Compile Include="Servicio\Servicio_Extravios\CManejadorSQL_Extravios.cs" />
     <Compile Include="Models\gestion_vuelo\CrearVueloMO.cs" />
-    <Compile Include="Models\gestion_vuelo\FabricaViewModelVuelo.cs" />
     <Compile Include="Models\gestion_vuelo\RecursoAvionCO.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RecursoAvionCO.resx</DependentUpon>
     </Compile>
-    <Compile Include="Models\gestion_vuelo\VueloViewModel.cs" />
     <Compile Include="Servicio\Servicio_Usuarios\ConexionBD.cs" />
     <Compile Include="Models\gestion_usuarios\CUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\Encriptar.cs" />
@@ -674,8 +673,6 @@
     <Compile Include="Models\Util.cs" />
     <Compile Include="Models\gestion_restaurantes\CRestauranteModelo.cs" />
     <Compile Include="MySQLException.cs" />
-    <Compile Include="Models\gestion_vuelo\CVuelo.cs" />
-    <Compile Include="Models\gestion_vuelo\CVueloModificar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicio\manejadorSQL.cs" />
     <Compile Include="Servicio\Servicio_Vuelos\manejadorSQL_Vuelos.cs" />
@@ -866,6 +863,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Scripts\Scripts_Boletos\DetalleVuelo.js" />
+    <None Include="Properties\PublishProfiles\asd.pubxml" />
     <None Include="Properties\PublishProfiles\Webdeploy Smarterasp.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -883,39 +881,8 @@
     <Content Include="Scripts\Scripts_Hoteles\llamadas_comunes_hoteles.js" />
     <Content Include="Scripts\Scripts_Hoteles\llamadas_generales_hoteles.js" />
     <Content Include="Scripts\Scripts_Restaurantes\ccs\M10.css" />
+    <Content Include="Scripts\Scripts_Restaurantes\ValidacionFormulario.js" />
     <Content Include="Scripts\Scripts_Vuelos\llamadas_generales_Vuelos.js" />
-    <Content Include="Views\dist\css\AdminLTE.css" />
-    <Content Include="Views\dist\css\AdminLTE.min.css" />
-    <Content Include="Views\dist\css\skins\skin-black-light.css" />
-    <Content Include="Views\dist\css\skins\skin-black-light.min.css" />
-    <Content Include="Views\dist\css\skins\skin-black.css" />
-    <Content Include="Views\dist\css\skins\skin-black.min.css" />
-    <Content Include="Views\dist\css\skins\skin-blue-light.css" />
-    <Content Include="Views\dist\css\skins\skin-blue-light.min.css" />
-    <Content Include="Views\dist\css\skins\skin-blue.css" />
-    <Content Include="Views\dist\css\skins\skin-blue.min.css" />
-    <Content Include="Views\dist\css\skins\skin-green-light.css" />
-    <Content Include="Views\dist\css\skins\skin-green-light.min.css" />
-    <Content Include="Views\dist\css\skins\skin-green.css" />
-    <Content Include="Views\dist\css\skins\skin-green.min.css" />
-    <Content Include="Views\dist\css\skins\skin-purple-light.css" />
-    <Content Include="Views\dist\css\skins\skin-purple-light.min.css" />
-    <Content Include="Views\dist\css\skins\skin-purple.css" />
-    <Content Include="Views\dist\css\skins\skin-purple.min.css" />
-    <Content Include="Views\dist\css\skins\skin-red-light.css" />
-    <Content Include="Views\dist\css\skins\skin-red-light.min.css" />
-    <Content Include="Views\dist\css\skins\skin-red.css" />
-    <Content Include="Views\dist\css\skins\skin-red.min.css" />
-    <Content Include="Views\dist\css\skins\skin-yellow-light.css" />
-    <Content Include="Views\dist\css\skins\skin-yellow-light.min.css" />
-    <Content Include="Views\dist\css\skins\skin-yellow.css" />
-    <Content Include="Views\dist\css\skins\skin-yellow.min.css" />
-    <Content Include="Views\dist\css\skins\_all-skins.css" />
-    <Content Include="Views\dist\css\skins\_all-skins.min.css" />
-    <Content Include="Views\dist\img\avatar.png" />
-    <Content Include="Views\dist\img\avatar04.png" />
-    <Content Include="Views\dist\img\avatar2.png" />
-    <Content Include="Views\dist\img\avatar3.png" />
     <Content Include="Scripts\Scripts_Ofertas\llamadas_generales.js" />
     <Content Include="Scripts\Scripts_Restaurantes\llamadas_generales.js" />
     <Content Include="Scripts\Scripts_Rutas\llamadas_generales_ruta.js" />
@@ -1490,8 +1457,6 @@
     <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.tr.js" />
     <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.ua.js" />
     <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.vi.js" />
-    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.zh-CN.js" />
-    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.zh-TW.js" />
     <Content Include="Content\plugins\daterangepicker\daterangepicker.css" />
     <Content Include="Content\plugins\daterangepicker\daterangepicker.js" />
     <Content Include="Content\plugins\daterangepicker\moment.js" />
@@ -1788,10 +1753,8 @@
     <Content Include="Views\gestion_seguridad_ingreso\M01_Login.cshtml" />
     <Content Include="Views\gestion_seguridad_ingreso\M01_RecuperarContrasenna.cshtml" />
     <Content Include="Views\gestion_usuarios\_Layout.cshtml" />
-    <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Crear.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Visualizar.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Mostrar.cshtml" />
-    <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Modificar.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -1809,9 +1772,9 @@
     <Content Include="Views\gestion_cruceros\M24_ModificarCabina.cshtml" />
     <Content Include="Views\gestion_cruceros\M24_ModificarCrucero.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarComidaVuelo.cshtml" />
-    <Content Include="Views\gestion_reclamos\M16_AgregarReclamo.cshtml" />
-    <Content Include="Views\gestion_reclamos\M16_VisualizarReclamo.cshtml" />
-    <Content Include="Views\gestion_reclamos\M16_ModificarReclamo.cshtml" />
+    <Content Include="Views\gestion_restaurantes\gestion_reclamos\M16_AgregarReclamo.cshtml" />
+    <Content Include="Views\gestion_restaurantes\gestion_reclamos\M16_VisualizarReclamo.cshtml" />
+    <Content Include="Views\gestion_restaurantes\gestion_reclamos\M16_ModificarReclamo.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_AgregarHotel.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_VisualizarHoteles.cshtml" />
     <Content Include="Views\gestion_equipaje\M07_GestionEquipaje_Agregar.cshtml" />

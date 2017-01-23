@@ -686,11 +686,21 @@ namespace BOReserva.Controllers.PatronComando
         /// <summary>
         /// Metodo para instanciar el comando M04_COBuscarCodigoVuelo
         /// </summary>
-        /// <param name="codigo"></param>
+        /// <param name="codigo">codigo del vuelo</param>
         /// <returns>M04_COBuscarCodigoVuelo</returns>
         public static Command<Boolean> ConsultarM04_CodigoVuelo(String codigo)
         {
             return new M04.M04_COBuscarCodigoVuelo(codigo);
+        }
+
+        /// <summary>
+        /// metodo para instanciar el comando eliminar vuelo
+        /// </summary>
+        /// <param name="idVuelo">id del vuelo</param>
+        /// <returns>comando eliminar vuelo</returns>
+        public static Command<Boolean> EliminarM04_Vuelo(int idVuelo)
+        {
+            return new M04.M04_COEliminarVuelo(idVuelo);
         }
 
         /// <summary>
@@ -701,7 +711,12 @@ namespace BOReserva.Controllers.PatronComando
         {
             return new M04.M04_COLugarOrigen();
         }
+
         #endregion
+
+       
+ 
+
 
 
         #region M13_Roles
