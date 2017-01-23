@@ -36,7 +36,7 @@
             <label>
                 Fecha del incidente
             </label>
-            @Html.TextBoxFor(m => m._fechaReclamo, null, new { @type = "date", @class = "form-control", @placeholder = "Fecha del Suceso", @id = "fechaReclamo", @name = "fechaReclamo", min = "Date", max = "2032-12-31", @Value = Model._fechaReclamo })
+            @Html.TextBoxFor(m => m._fechaReclamo, null, new { @type = "date", @class = "form-control", @placeholder = "Fecha del Suceso", @id = "fechaReclamo", @name = "fechaReclamo", min = "Date", max = "2032-12-31", @Value = Model._fechaReclamo, @readonly = "readonly" })
             @Html.HiddenFor(m => m._idReclamo, new {@id="idReclamo" ,@value=Model._idReclamo})
             <div class="text-right">
                 <form id="form1" name="form1">

@@ -1,6 +1,7 @@
 ﻿using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
+using BOReserva.Excepciones.M16;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,11 +20,16 @@ namespace BOReserva.Controllers.PatronComando
             /// </returns>
             public override Dictionary<int, Entidad> ejecutar()
             {
-                IDAO daoReclamo = FabricaDAO.instanciarDaoReclamo();
-                Dictionary<int, Entidad> mapReclamos = daoReclamo.ConsultarTodos();
-                return mapReclamos;
-            }
-
-        
+                try
+                {
+                    IDAO daoReclamo = FabricaDAO.instanciarDaoReclamo();
+                    Dictionary<int, Entidad> mapReclamos = daoReclamo.ConsultarTodos();
+                    return mapReclamos;
+                }
+                catch (ReservaExceptionM16 ex)
+                {
+                    throw ex;
+                }
+            }               
     }
 }
