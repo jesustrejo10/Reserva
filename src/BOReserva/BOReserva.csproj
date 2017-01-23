@@ -215,6 +215,9 @@
     <Compile Include="Controllers\PatronComando\M01\M01_COConsultarUsuario.cs" />
     <Compile Include="Controllers\PatronComando\M01\M01_COResetearIntentos.cs" />
     <Compile Include="Controllers\PatronComando\M01\M01_COIncrementarIntentos.cs" />
+    <Compile Include="Controllers\PatronComando\M01\M01_COInsertarLogin.cs" />
+    <Compile Include="Controllers\PatronComando\M01\M01_COEliminarLogin.cs" />
+    <Compile Include="Controllers\PatronComando\M01\M01_CONumeroIntentos.cs" />
     <Compile Include="Controllers\PatronComando\M02\M02_COAgregarAvion.cs" />
     <Compile Include="Controllers\PatronComando\M02\M02_COConsultarAvion.cs" />
     <Compile Include="Controllers\PatronComando\M02\M02_CODisponibilidadAvion.cs" />
@@ -541,6 +544,7 @@
     <Compile Include="Excepciones\M04\ReservaExceptionM04.cs" />
     <Compile Include="Excepciones\M10\ReservaExceptionM10.cs" />
     <Compile Include="Excepciones\M11\ReservaExceptionM11.cs" />
+    <Compile Include="Excepciones\M16\ReservaExceptionM16.cs" />
     <Compile Include="Excepciones\M13\ReservaExceptionM13.cs" />
     <Compile Include="Excepciones\RecursoLog.Designer.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />

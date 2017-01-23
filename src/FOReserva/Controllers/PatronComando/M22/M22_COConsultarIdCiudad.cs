@@ -9,12 +9,26 @@ using FOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 
 namespace FOReserva.Controllers.PatronComando.M22
 {
+    /// <summary>
+    /// Comando que se encarga de consultar las reservas de automovil a la BD
+    /// </summary>
     public class M22_COConsultarIdCiudad : Command<Dictionary<int, Entidad>>
     {
         int id;
+        /// <summary>
+        /// Metodo para setear la reserva para consultar
+        /// </summary>
+        /// <param name="value2">La rerserva que viene del controlador</param>
             public M22_COConsultarIdCiudad (int value){
                 this.id= value;
             }
+            ///// <summary>
+            ///// Sobreescritura del metodo ejecutar de la clase Comando.
+            ///// Se encarga de llamar al IDAOReservaHabitacion y devolver la respuesta al controlador.
+            ///// </summary>
+            ///// <returns>
+            ///// Retorna un Dictionary
+            ///// </returns>
         public override Dictionary<int, Entidad> ejecutar()
         {
             try
