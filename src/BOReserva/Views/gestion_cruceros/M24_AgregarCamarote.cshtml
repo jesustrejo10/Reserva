@@ -1,10 +1,9 @@
 ﻿@model BOReserva.Models.gestion_cruceros.CGestion_camarote
-<script src="~/Scripts\Scripts_Rutas\llamadas_generales_ruta.js"></script>
+<script src="~/Scripts\Scripts_Cruceros\scripts_cruceros.js"></script>
 
 @{
     
-    IEnumerable<SelectListItem> listCruceros = Model._listaCruceros;
-    IEnumerable<SelectListItem> listCabinas = Model._listaCabinas;
+    IEnumerable<SelectListItem> listCruceros = Model._listaCruceros; 
 
 
 }
@@ -19,15 +18,15 @@
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"></button>
                 </div>
             </div>
-            <div class="modal-body col-xs-12" id="bodyCruc" style="margin-left:24% ; height:300px">
+            <div class="modal-body col-xs-12" id="bodyCruc" style="margin-left:24% ; height:400px">
                 <section id="primeraParte">
                     <div class="form-group" style="margin-bottom:20px">
-                        <label>Cruceros:</label>
+                        <label>Cruceros:</label>                        
                         @Html.DropDownListFor(m => m._cruceroNombre, new SelectList(Model._listaCruceros as System.Collections.IEnumerable, "Value", "Text"),
-                        "Seleccione una crucero", new { @class = "form-control", @id = "crucero", @style = "width:50% ", @required = "true" })
+              "Seleccione un crucero", new { @class = "form-control", @id = "crucero", @style = "width: 50%;", @required = "true" })
                     </div>
                     <div class="form-group" style="margin-bottom:20px">
-                        <label>Cabinas:</label>
+                        <label>Cabinas:</label>                        
                         @Html.DropDownListFor(m => m._cabinaNombre, new SelectList(Enumerable.Empty<SelectListItem>(), "Value", "Text"),
                                 "Seleccione una cabina", new { @class = "form-control", @id = "cabina", @style = "width: 50%;", @required = "true" })
                     </div>
@@ -58,30 +57,7 @@
 
 
 
-    <script>
-        $("#guardar_camarote").click(function (e) {
-            e.preventDefault();
-            var form = $("#formGuardarCamarote");
-            $.ajax({
-                url: "gestion_cruceros/guardarCamarote",
-                data: form.serialize(),
-                type: 'POST',
-                success: function (data) {
-                    var statusHTML = "<td class='crStatus'><i class='fa fa-circle started'></i></td><td class='crAcciones'> <i class='fa fa-times' onclick='cambioCamarote(" + $("#idCamarote").val() + ")'></i></td>";
-                    html = "<tr><td style='text-align:center'>" + $("#cantidadCama").val() + "</td><td style='text-align:center'>" + $("#tipoCama").val() + "</td>" + statusHTML + "</tr>";
-                    console.log(html)
-                    $("#tablaCamarote").append(html);
-                    //$("#tablaCamarote").append("<tr><td>" + $("#cantidadCama").val() + "</td><td>" + $("#tipoCama").val() + "</td></tr>");
-                },
-                error: function (data) {
-                    console.log(data);
-                    $('#formGuardarCamarote')[0].reset();
-                }
-            });
-        });
-    </script>
-
-    <script>
+        <script>
 
         function cambioCamarote(camarote_id) {
             $.ajax({

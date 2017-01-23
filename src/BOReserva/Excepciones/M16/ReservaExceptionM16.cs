@@ -6,11 +6,12 @@ using System.Web;
 
 namespace BOReserva.Excepciones.M16
 {
+    /// <summary>
+    /// Clase que maneja las excepciones del módulo para la gestión de reclamos
+    /// </summary>
     public class ReservaExceptionM16 : Exception
     {
-        /// <summary>
-        /// Clase que maneja las excepciones del módulo para la gestión de reclamos
-        /// </summary>
+
         private Exception _excepcion;
         private string _codigoException;
         private string _mensajeException;
@@ -49,7 +50,7 @@ namespace BOReserva.Excepciones.M16
         /// <param name="inner">y la excepcion</param>        
         public ReservaExceptionM16(string mensaje, SqlException inner)
         {
-            _mensajeException = "Reserva-404: Ha ocurrido un problema con la base de datos.";
+            _mensajeException = "Reserva-404: Ha ocurrido un problema con la base de datos. Para mayor detalle revisar el Log de errores";
             _excepcion = inner;
         }
 
@@ -60,7 +61,7 @@ namespace BOReserva.Excepciones.M16
         /// <param name="inner">y la excepcion</param>
         public ReservaExceptionM16(string mensaje, NullReferenceException inner)
         {
-            _mensajeException = "Reserva-404: Ha ocurrido un problema con una referencia nula.";
+            _mensajeException = "Reserva-404: Ha ocurrido un problema con una referencia nula. Para mayor detalle revisar el Log de errores";
             _excepcion = inner;
         }
 
@@ -71,15 +72,20 @@ namespace BOReserva.Excepciones.M16
         /// <param name="inner">y la excepcion</param>
         public ReservaExceptionM16(string mensaje, ArgumentNullException inner)
         {
-            _mensajeException = "Reserva-404: Ha ocurrido un problema con un argumento nulo.";
+            _mensajeException = "Reserva-404: Ha ocurrido un problema con un argumento nulo. Para mayor detalle revisar el Log de errores";
             _excepcion = inner;
         }
 
-        //public ReservaExceptionM16(string mensaje, LogException inner)
-       // {
-         //   _mensajeException = "Reserva-404: Ha ocurrido un error al escribir el log";
-           // _excepcion = inner;
-        //}
+        /// <summary>
+        /// constructor para la excepcion LogException
+        /// </summary>
+        /// <param name="mensaje"> recibe el mensaje</param>
+        /// <param name="inner"> y la excepcion</param>
+        public ReservaExceptionM16(string mensaje, LogException inner)
+        {
+            _mensajeException = "Reserva-404: Ha ocurrido un error al escribir el log. Para mayor detalle revisar el Log de errores";
+           _excepcion = inner;
+        }
 
         /// <summary>
         /// constructor para la excepcion de tipo Exception
@@ -88,7 +94,7 @@ namespace BOReserva.Excepciones.M16
         /// <param name="inner">y la excepcion</param>
         public ReservaExceptionM16(string mensaje, Exception inner)
         {
-            _mensajeException = "Reserva-404: Ha ocurrido un error desconocido.";
+            _mensajeException = "Reserva-404: Ha ocurrido un error desconocido. Para mayor detalle revisar el Log de errores";
             _excepcion = inner;
         }
 

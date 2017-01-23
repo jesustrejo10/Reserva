@@ -3,6 +3,7 @@ using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
+using BOReserva.Excepciones;
 using BOReserva.Excepciones.M09;
 using System;
 using System.Collections.Generic;
@@ -34,10 +35,12 @@ namespace BOReserva.Controllers.PatronComando
                     Cache.mapHoteles = daoHotel.ConsultarTodos();
                 }
                 return Cache.mapHoteles;
-            }catch (ReservaExceptionM09 ex){
+            }
+            catch (ReservaExceptionM09 ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);               
                 throw ex;
             }
         }
-
     }
 }
