@@ -32,7 +32,7 @@ namespace BOReserva.Controllers.PatronComando
         /// </summary>
         public override Entidad ejecutar()
         {
-            Entidad modulo;
+            //Entidad modulo;
             try
             {
                 IDAORol daoRol = (IDAORol)FabricaDAO.instanciarDAORol();

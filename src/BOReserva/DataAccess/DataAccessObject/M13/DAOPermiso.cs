@@ -15,6 +15,9 @@ using System.Web;
 
 namespace BOReserva.DataAccess.DataAccessObject
 {
+    ///<summary>
+    ///Clase DAO permisos
+    ///</summary>
     public class DAOPermiso : DAO, IDAOPermiso
     {
         ///<summary>

@@ -18,7 +18,7 @@ namespace BOReserva.DataAccess.Domain
         ///<summary>
         ///id del modulo
         ///</summary>
-        public int _id { get; set; }
+        public int _idModulo { get; set; }
 
         ///<summary>
         ///Constructor
