@@ -71,46 +71,38 @@
     }
 
     table = $('#example').DataTable();
-    $(document).ready(function () {
-        //e.preventDefault();
-        //Método para consultar boletos
-        $(".consultar").click(function () {
-            loader();
-            var identificador = $(this).parent().parent().parent().attr("id");
-            jQuery.ajax({
-                type: "GET",
-                url: "/gestion_boletos/M05_VisualizarBoleto",
-                data: { id: identificador }
-            }).done(function (data) {
-                $("#contenido").empty();
-                $("#contenido").append(data);
-            }).fail(function () {
-                alert("Ocurrió un error")
-            });
+    //e.preventDefault();
+    //Método para consultar boletos
+    $(document).on("click", ".consultar", function () {
+        loader();
+        var identificador = $(this).parent().parent().parent().attr("id");
+      
+        jQuery.ajax({
+            type: "GET",
+            url: "/gestion_boletos/M05_VisualizarBoleto",
+            data: { id: identificador }
+        }).done(function (data) {
+            $("#contenido").empty();
+            $("#contenido").append(data);
+        }).fail(function () {
+            alert("Ocurrió un error")
         });
-    });
+    })
 
 
-    $(document).ready(function () {
-        //e.preventDefault();
-        $(".modificar").click(function () {
-            loader();
-            var identificador = $(this).parent().parent().parent().attr("id");
-            jQuery.ajax({
-                type: "GET",
-                url: "/gestion_boletos/M05_ModificarBoleto",
-                data: { id: identificador }
-            }).done(function (data) {
-                $("#contenido").empty();
-                $("#contenido").append(data);
-            }).fail(function () {
-                alert("Ocurrió un error")
-            });
-
-
+    $(document).on("click", ".modificar", function () {
+        loader();
+        var identificador = $(this).parent().parent().parent().attr("id");
+        jQuery.ajax({
+            type: "GET",
+            url: "/gestion_boletos/M05_ModificarBoleto",
+            data: { id: identificador }
+        }).done(function (data) {
+            $("#contenido").empty();
+            $("#contenido").append(data);
+        }).fail(function () {
+            alert("Ocurrió un error ")
         });
-
-
     });
 
     $(document).ready(function () {
