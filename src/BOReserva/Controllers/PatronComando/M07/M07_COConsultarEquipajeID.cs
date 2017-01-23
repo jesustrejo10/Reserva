@@ -1,4 +1,4 @@
-﻿using BOReserva.DataAccess.DataAccessObject;
+using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using System;
@@ -8,9 +8,8 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando.M07
 {
-    public class M07_COConsultarEquipajeID  //: Command<Entidad>
-    {
-        /*
+    public class M07_COConsultarEquipajeID: Command<Entidad>
+    {        
         int valor;
         public M07_COConsultarEquipajeID(int id)
         {
@@ -30,6 +29,5 @@ namespace BOReserva.Controllers.PatronComando.M07
             Entidad equipaje = daoEquipaje.Consultar(valor);
             return equipaje;
         }
-         * */
     }
 }

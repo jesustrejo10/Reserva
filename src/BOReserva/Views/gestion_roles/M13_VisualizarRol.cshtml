@@ -22,7 +22,7 @@
                         @foreach (BOReserva.DataAccess.Domain.Rol item in Model)
                         {
                             <tr id="@item._idRol">
-                                <td>@item._nombreRol</td>                               
+                                <td>@item._nombreRol</td>
                                 <td>
                                     <table>
                                         @foreach (BOReserva.DataAccess.Domain.Permiso permisos in item.listapermisos)
@@ -43,7 +43,7 @@
                                     }
                                 </td>
                             </tr>
-                        }                       
+                        }
                     </tbody>
                 </table>
             </div>
@@ -59,7 +59,9 @@
 <script src="~/Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
 
 <script language="javascript" type="text/javascript">
-    table = $('#VisualizarRol').DataTable();
+    table = $('#VisualizarRol').DataTable({
+        "pageLength": 100
+    });
 
     $(".eliminar").click(function () {
         var r = confirm("Esta función no podrá ser revertida, ¿Está seguro de que desea continuar?")
@@ -68,27 +70,26 @@
             jQuery.ajax({
                 type: "POST",
                 url: "/gestion_roles/eliminarRol",
-                data: { _idRol: identificador }
-            }).done(function (data) {
-                var url = '/gestion_roles/M13_VisualizarRol';
-                var method = 'GET';
-                var data = '';
-                $.ajax(
-                    {
-                        url: url,
-                        type: method,
-                        data: data,
+                data: { _idRol: identificador },
+                done: function (data) {
+                    $.ajax({
+                        url: '/gestion_roles/M13_VisualizarRol',
+                        type: 'GET',
                         success: function (data, textStatus, jqXHR) {
-
                             $("#contenido").empty();
                             $("#contenido").append(data);
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
-                            alert(errorThrown);
+                            alert(errorThrown.error);
                         }
                     });
-            }).fail(function (data) {
-                alert(data);
+                },
+                failure: function (data) {
+                    alert(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert("No se puede procesar la solicitud");
+                }
             });
         }
     });
@@ -97,13 +98,13 @@
         var identificador = $(this).closest("tr").attr("id");
 
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: "/gestion_roles/M13_ModificarRol",
             data: { _idRol: identificador },
-            success: function(data){
+            success: function (data) {
                 $("#contenido").empty();
                 $("#contenido").append(data);
-            },          
+            },
             failure: function () {
                 alert(data);
             }

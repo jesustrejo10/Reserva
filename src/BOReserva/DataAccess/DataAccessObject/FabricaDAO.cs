@@ -51,6 +51,10 @@ namespace BOReserva.DataAccess.DataAccessObject
         #endregion
 
         #region M01_Login
+        /// <summary>
+        /// Método para instanciar DAOLogin
+        /// </summary>
+        /// <returns>Objeto DAOLogin</returns>
         public static DAO instanciarDaoLogin()
         {
             return new DAOLogin();
@@ -214,6 +218,11 @@ namespace BOReserva.DataAccess.DataAccessObject
         {
             return new DAORol();
         }
+
+        public static DAO instanciarDAOPermiso()
+        {
+            return new DAOPermiso();
+        }
         #endregion
 
         #region M14_Cruceros
@@ -236,11 +245,6 @@ namespace BOReserva.DataAccess.DataAccessObject
         public static DAO instanciarDaoItinerario()
         {
             return new DAOItinerario();
-        }
-
-        public static DAO instanciarDaoCamarotes()
-        {
-            return new DAOCamarotes();
         }
 
         #endregion
@@ -282,6 +286,41 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAOUsuario();
     }
         
+        #endregion
+
+        #region M07_Gestion_ReclamosEquipaje
+
+        /// <summary>
+        /// Intancia Reclamo Equipaje
+        /// </summary>
+        /// <returns>DAO</returns>
+        public static DAO instanciarDaoReclamoEquipaje()
+        {
+            return new DAOReclamoEquipaje();
+        }
+
+        public static IDAOReclamoEquipaje instanciarDaoReclamoEquipajePersonalizado()
+        {
+            return new DAOReclamoEquipaje();
+        }
+
+        #endregion
+
+        #region M07_Gestion_Equipaje
+
+        /// <summary>
+        /// Intancia Equipaje
+        /// </summary>
+        /// <returns>DAO</returns>
+        public static DAO instanciarDaoEquipaje()
+        {
+            return new DAOEquipaje();
+        }
+
+        public static IDAOEquipaje instanciarDaoEquipajePersonalizado()
+        {
+            return new DAOEquipaje();
+        }
         #endregion
     }
 

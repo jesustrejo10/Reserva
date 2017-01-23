@@ -19,22 +19,6 @@
                     </div>
                 </div>
                 <div>&nbsp;</div>
-                <div class="stepwizard">
-                    <div class="stepwizard-row setup-panel">
-                        <div class="stepwizard-step">
-                            <a href="#" type="button" class="btn btn-default btn-circle" disabled="disabled" onclick="return false;">1</a>
-                            <p>Vuelo</p>
-                        </div>
-                        <div class="stepwizard-step">
-                            <a href="#" type="button" class="btn btn-default btn-circle" disabled="disabled" onclick="return false;">2</a>
-                            <p>Avión</p>
-                        </div>
-                        <div class="stepwizard-step">
-                            <a href="#" type="button" class="btn btn-primary btn-circle" onclick="return false;">3</a>
-                            <p>Detalles</p>
-                        </div>
-                    </div>
-                </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div class="row">
@@ -94,7 +78,7 @@
                                 <!-- TEXTBOXFOR MODELO AVION -->
                                 <label> Modelo avion:</label>
                                 <!--desabilitado por que lleno con script y pertenece a otra tabla-->
-                                @Html.TextBoxFor(m => m._modeloAvion, null, new { @id = "modeloAvion", @class = "form-control", @disabled = "disabled" })
+                                @Html.TextBoxFor(m => m._modeloAvion, null, new { @class = "form-control", @id = "modeloAvionsss", @disabled = "disabled" })
                             </div>
                             <!-- FIN MODELO AVION -->
                         </div>

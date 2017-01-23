@@ -1,13 +1,12 @@
-﻿
-@model BOReserva.Models.gestion_reclamos.CModificarReclamo
-
+﻿@model BOReserva.Models.gestion_reclamos.CModificarReclamo
+<link href="~/Content/Canvas/Box.css" rel="stylesheet" />
 <script src="~/Scripts/Scripts_Aviones/llamadas_generales.js"></script>
 
 @using (Html.BeginForm("detalleReclamo", "gestion_reclamos", null, FormMethod.Post, new { @id = "formDetalleReclamo", @class = "form-horizontal" }))
 {
     <div class="row">
-        <div class="col-md-12">
-            <div class="box">
+        <div class="col-md-10">
+            <div class="Cajita">
                 <div class="box-body">
                     <h2 class="box-title"> Consultar Reclamo</h2>
                     <div class="row">
@@ -30,12 +29,8 @@
                               <div class="col-md-12">
                                 <div class="col-xs-6">
                                     <label for="detalleReclamo">Descripci&oacuten </label>
-                                    @Html.TextAreaFor(m => m._detalleReclamo, 3, 3, new { @class = "form-control", @id = "detalleReclamo", @readonly = "readonly" })
+                                    @Html.TextAreaFor(m => m._detalleReclamo, 3, 3, new { @class = "form-control", @id = "detalleReclamo", @style = "max-width: 447px ;max-height: 200px;", @readonly = "readonly" })
                                 </div>
-                                <div class="col-xs-6">
-                                    <label for="estadoReclamo">Estado </label>
-                                       @Html.TextBoxFor(m => m._estadoReclamo, null, new { @class = "form-control", @id = "estadoReclamo", @readonly = "readonly" })
-                                 </div>
                               </div>
                             </div>
 

@@ -11,7 +11,7 @@ namespace BOReserva.DataAccess.DAO
     {
         List<Entidad> ConsultarTodos();
 
-        bool Eliminar(Entidad entidad);
+        bool Eliminar(int entidad);
 
         bool CambiarStatus(int vuelo);
 

@@ -96,7 +96,7 @@ namespace BOReserva.Controllers
           Entidad nuevoReclamo = FabricaEntidad.InstanciarReclamo(model);
           Command<String> comando = FabricaComando.crearM16AgregarReclamo(nuevoReclamo);
           String verificacion = comando.ejecutar();
-          return (Json("Se guardó su reclamo exitosamente"));
+          return (Json("1"));
       }
         /// <summary>
         /// Controlador para el boton de modificar un reclamo 
@@ -110,14 +110,9 @@ namespace BOReserva.Controllers
           String[] formateadorFecha = model._fechaReclamo.Split('/');
           model._fechaReclamo = formateadorFecha[2] + "-" + formateadorFecha[1] + "-" + formateadorFecha[0];
           Entidad reclamo = FabricaEntidad.InstanciarReclamo(model);
-          Command<Entidad> comando = FabricaComando.crearM16ConsultarUsuario(idReclamo);
-          Reclamo verificacion = (Reclamo)comando.ejecutar();
-          //con la fabrica instancie el reclamo.
-
           Command<String> comandoMod = FabricaComando.crearM16ModificarReclamo(reclamo, model._idReclamo);
           String resultado = comandoMod.ejecutar();
           return (Json("Se modificó el reclamo exitosamente"));
-          
 
       }
         /// <summary>
@@ -140,8 +135,7 @@ namespace BOReserva.Controllers
           {
               Command<String> comando1 = FabricaComando.crearM16EliminarReclamo(idReclamo);
               String borro_si_no = comando1.ejecutar();
-              Response.StatusCode = (int)HttpStatusCode.BadRequest;
-              return (Json("Se eliminó el reclamo exitosamente"));
+              return (Json("1"));
           }
       }
         /// <summary>
@@ -158,6 +152,6 @@ namespace BOReserva.Controllers
           return (Json("Estado modificado"));
       }
 
-    }
+      }
 	
 }
