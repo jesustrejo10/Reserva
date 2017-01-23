@@ -326,15 +326,16 @@ namespace BOReserva.Controllers
             Command<Entidad> comando;
             Entidad vuelo;
             Entidad avion;
-            Ruta ruta;
+            Entidad ruta;
             try
             {
                 model.setFechaDespegue();
-                avion = new Avion(model._idAvion, "", "", 0, 0, 0, 0, 0, 0, 0, 0);
-                ruta = new Ruta(model._idRuta, 0, "", "", "", "");
+                ruta = FabricaEntidad.InstanciarRuta(model._idRuta, 0, "", "", "", "");
+                avion = FabricaEntidad.InstanciarAvion(model._idAvion, "", "", 0, 0, 0, 0, 0, 0, 0, 0);
+                ((Avion)avion)._id = model._idAvion;
                 vuelo = FabricaEntidad.InstanciarVuelo(model._idVuelo,
                                                        model._codigoVuelo,
-                                                       ruta,
+                                                       (Ruta)ruta,
                                                        model.fechaDespegue,
                                                        model._statusVuelo,
                                                        model.getFechaAterrizaje(),
