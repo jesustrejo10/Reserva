@@ -9,30 +9,50 @@ using BOReserva.Servicio;
 using BOReserva.Models.gestion_automoviles;
 using BOReserva.Models.gestion_restaurantes;
 using System.Collections.Specialized;
+using BOReserva.DataAccess.Domain;
+using BOReserva.Controllers.PatronComando;
+using System.Diagnostics;
 
 namespace BOReserva.Controllers
 {
     public class gestion_ofertasController : Controller
     {
+
         //
         // GET: /gestion_ofertas/
+        private static int idpaquete;
+        private static int idOferta;
+        /// <summary>
+        /// Carga la vista de Agregar Paquete
+        /// </summary>
+        /// <returns></returns>
         public ActionResult M11_AgregarPaquete()
         {
             CAgregarPaquete model = new CAgregarPaquete();
             return PartialView();
         }
 
+        /// <summary>
+        /// Carga la Vista de Agegar Oferta.
+        /// </summary>
+        /// <returns>Vista parcial con formulario Agregar Oferta.</returns>
         public ActionResult M11_AgregarOferta()
         {
             return PartialView();
         }
-
+         /// <summary>
+        /// Método de la vista parcial M11_VisualizarPaquete
+         /// </summary>
+        /// <returns>Retorna la vista parcial M11_VisualizarPaquetes en conjunto del Modelo de dicha vista</returns>
         public ActionResult M11_VisualizarPaquete()
         {
-            manejadorSQL sql = new manejadorSQL();
+            Command<List<Entidad>> comando = FabricaComando.crearM11VisualizarPaquetes();
+            List<Entidad> listaPaquetes = comando.ejecutar();
+            return PartialView(listaPaquetes);
+            /*manejadorSQL sql = new manejadorSQL();
             List<CPaquete> paquetes = new List<CPaquete>();
             paquetes = sql.listarPaquetes();
-            return PartialView(paquetes);
+            return PartialView(paquetes);*/
         }
 
         public ActionResult M11_DetallePaquete(String paqueteIdStr)
@@ -53,13 +73,21 @@ namespace BOReserva.Controllers
             return Json(paquete);
         }
 
+        /// <summary>
+        /// Método para Visalizar la lista de Ofertas.
+        /// </summary>
+        /// <returns>Vista Parcial con la Lista de Ofertas disponibles</returns>
+
         public ActionResult M11_VisualizarOferta()
         {
-            manejadorSQL sql = new manejadorSQL();
-            List<COferta> ofertas = new List<COferta>();
-            ofertas = sql.listarOfertasEnBD();
-            return PartialView(ofertas);
+
+            Debug.WriteLine("BOTON VISUALIZAR OFERTA");
+
+            Command<List<Entidad>> comando = FabricaComando.crearM11VisualizarOfertas();
+            List<Entidad> listaOfertas = comando.ejecutar();
+            return PartialView(listaOfertas);
         }
+
 
         public List<COferta> M11_PaquetesPorOferta()
         {
@@ -80,30 +108,79 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult M11_ListarRestaurantes()
         {
-            manejadorSQL sql = new manejadorSQL();
-            var restauranteList = new List<CRestauranteModelo>();
+            //manejadorSQL sql = new manejadorSQL();
+            //var restauranteList = new List<CRestauranteModelo>();
            // restauranteList = sql.consultarRestaurante();
-            return Json(restauranteList);
+            //Metodos para M11 Probados 
+            Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.comandosRestaurant(FabricaComando.comandosGlobales.CONSULTAR, FabricaComando.comandoRestaurant.LISTAR_RESTAURANT, null);
+            List <Entidad> restaurantes = comando.ejecutar();
+            //return Json(restauranteList);
+            /*List<CRestauranteModelo> lista = FabricaEntidad.crearListaRestarant();
+            CRestauranteModelo rest;
+            foreach (Entidad re in restaurantes)
+            {
+                rest = (CRestauranteModelo)re;
+                lista.Add(rest);
+
+            }*/
+            CRestauranteModelo Restaurant = FabricaEntidad.crearRestaurant();
+            List<CRestauranteModelo> lista = FabricaEntidad.crearListaRestarant();
+
+            foreach (Entidad item in restaurantes)
+            {
+                lista.Add((CRestauranteModelo)item);
+            }
+
+            return Json(lista);
         }
 
         public ActionResult M11_ModificarPaquete(String paqueteIdStr)
         {
+            
+            
             int paqueteId = Int32.Parse(paqueteIdStr);
+            /*Command<Entidad> comando = FabricaComando.crearM11ConsultarPaquete(paqueteId);
+            Entidad paquete = comando.ejecutar();
+            Paquete paquetebuscado = (Paquete)paquete;
+            idpaquete = paquetebuscado._id;
+            CPaquete modelopaquete = new CPaquete();
+            modelopaquete._idAuto = paquetebuscado._idAuto;
+            modelopaquete._idCrucero = paquetebuscado._idCrucero;
+            modelopaquete._idHabitacion = paquetebuscado._idHotel;
+            modelopaquete._idRestaurante = paquetebuscado._idRestaurante;*/
+            //todavía falta
+
+            //Comentar estas 4 líneas siguientes que funcionaban antes de esta entrega
+            //Descimentándolas mientras se adapta a patrones
             manejadorSQL sql = new manejadorSQL();
             CPaquete paquete;
             paquete = sql.detallePaquete(paqueteId);
             return PartialView(paquete);
+            //
         }
 
+        /// <summary>
+        /// Método para Visualizar Oferta en Detalle.
+        /// </summary>
+        /// <param name="id">Id de la Oferta a Consultar.</param>
+        /// <returns>Oferta a Modificar.</returns>
         public ActionResult M11_ConsultarOferta(int id)
         {
-            manejadorSQL buscarOferta = new manejadorSQL();
-            COferta oferta = buscarOferta.MMostrarOfertaBD(id);
+            Debug.WriteLine("BOTON VISUALIZAR OFERTA");
+
+            Debug.WriteLine("ID EN LISTA" + id.ToString());
+
+            Command<Entidad> comando = FabricaComando.crearM11ConsultarOferta(id);
+            Entidad eOferta = comando.ejecutar();
+
+           //  METER EN UN TRY CATCH
+            Oferta oferta = (Oferta)eOferta;
 
             String disponibilidad = "Inactivo";
             if (oferta._estadoOferta == true) { disponibilidad = "Activo"; } else { disponibilidad = "Inactivo"; }
 
-            CVisualizarOferta visualOferta = new CVisualizarOferta();
+            CVisualizarOferta visualOferta = new CVisualizarOferta();           
+
             visualOferta._idOferta = oferta._idOfertaa;
             visualOferta._nombreOferta = oferta._nombreOferta;
             visualOferta._nombrePaquete = oferta._nombrePaquete;
@@ -114,41 +191,75 @@ namespace BOReserva.Controllers
             return PartialView(visualOferta);
         }
 
-
+        /// <summary>
+        /// Método para Modificar Oferta. Lee desde la Vista.
+        /// </summary>
+        /// <param name="id">id de la oferta seleccionada</param>
+        /// <returns></returns>
         public ActionResult M11_ModificarOferta(int id)
         {
-            manejadorSQL buscarOferta = new manejadorSQL();
-            COferta oferta = buscarOferta.MMostrarOfertaBD(id);
+            Debug.WriteLine("BOTON MODIFICAR OFERTA");
+            Debug.WriteLine("ID EN LISTA" + id.ToString());
 
+            Command<Entidad> comando = FabricaComando.crearM11ConsultarOferta(id);
+            Entidad eOferta = comando.ejecutar();
+            Oferta oferta = (Oferta)eOferta;
 
             String disponibilidad = "Inactivo";
             if (oferta._estadoOferta == true) { disponibilidad = "Activo"; } else { disponibilidad = "Inactivo"; }
 
-            CModificarOferta modificarOferta = new CModificarOferta();
-            modificarOferta._idOferta = oferta._idOfertaa;
-            modificarOferta._nombreOferta = oferta._nombreOferta;
-            modificarOferta._nombrePaquete = oferta._nombrePaquete;
-            modificarOferta._porcentajeOferta = oferta._porcentajeOferta;
-            //modificarOferta._fechaIniOferta = oferta._fechaIniOferta;
-            //modificarOferta._fechaFinOferta = oferta._fechaFinOferta;
-            modificarOferta._fechaIniOferta = oferta._fechaIniOferta;
-            modificarOferta._fechaFinOferta = oferta._fechaFinOferta;
-            modificarOferta._estadoOferta = disponibilidad;
+            idOferta = id;
 
+            CModificarOferta visualOferta = new CModificarOferta();
 
-            //llena la lista de los paquetes asociados a la oferta
+            visualOferta._idOferta = oferta._idOferta;
+            visualOferta._nombreOferta = oferta._nombreOferta;
+            visualOferta._nombrePaquete = oferta._nombrePaquete;
+            visualOferta._porcentajeOferta = oferta._porcentajeOferta;
+            visualOferta._fechaIniOferta = oferta._fechaIniOferta;
+            visualOferta._fechaFinOferta = oferta._fechaFinOferta;
+            visualOferta._estadoOferta = disponibilidad;
+            
+
+            Debug.WriteLine("RELLENA");
+
+            COferta coferta = new COferta();
+
+         /*   //llena la lista de los paquetes asociados a la oferta
             try
             {
-                modificarOferta._listaPaquetes = oferta.MBuscarPaquetesAsociadosBD(oferta._idOfertaa);
+                modificarOferta._listaPaquetes = coferta.MBuscarPaquetesAsociadosBD(idOferta.ToString());
             }
             catch (NullReferenceException e)
             {
                 return PartialView(modificarOferta);
-            }
+            }*/
 
-            return PartialView(modificarOferta);
+            return PartialView(visualOferta); //Es del tipo modificarOerta
         }
 
+        /// <summary>
+        /// Método post que realiza el cambio en la base de datos.
+        /// </summary>
+        /// <param name="model">Model Oferta a Modificar.</param>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult modifyOferta(CModificarOferta model)
+        {
+            Debug.WriteLine("ENTRÓ A MODIFY OFERTA");
+            Debug.WriteLine("NOMBRE OFERTA RECOGIDO" + model._nombreOferta);
+            Debug.WriteLine("ENTRÓ A MODIFY OFERTA " + idOferta);
+
+            int _id = idOferta;
+
+            Boolean disponibilidad = false;
+
+            Entidad modificarOferta = FabricaEntidad.InstanciarOferta(model, disponibilidad, _id);
+            //con la fabrica instancie a la oferta.
+            Command<String> comando = FabricaComando.crearM11ModificarOferta(modificarOferta, _id);
+            String agrego_si_no = comando.ejecutar();
+            return (Json(agrego_si_no));
+        }
 
         //Carga paquetes en el multiselect de agregar oferta
         public JsonResult M11_CargarPaquetesSelect()
@@ -251,6 +362,7 @@ namespace BOReserva.Controllers
             return Json(oferta);
         }
 
+        
 
         [HttpPost]
         public JsonResult desasociarPaquetesModificar(int[] idsPaquetes,int idOferta)
@@ -277,7 +389,7 @@ namespace BOReserva.Controllers
             return Json("");
         }
 
-        [HttpPost]
+      /*  [HttpPost]
         public JsonResult desactivarOferta(String ofertaIdStr)
         {
             int ofertaId = Int32.Parse(ofertaIdStr);
@@ -297,7 +409,7 @@ namespace BOReserva.Controllers
                 String error = "Error procesando la petición";
                 return Json(error);
             }
-        }
+        }*/
 
         [HttpPost]
         public JsonResult activarOferta(String ofertaIdStr)
@@ -388,24 +500,6 @@ namespace BOReserva.Controllers
             }
         }
 
-        [HttpPost]
-        public JsonResult modifyOferta(CModificarOferta model)
-        {
-            String _idOfertaa = model._idOferta;
-            String _nombreOferta = model._nombreOferta;
-            String _nombrePaquete = model._nombrePaquete;
-            float _porcentajeOferta = model._porcentajeOferta;
-
-            Boolean disponibilidad = false;
-
-            COferta oferta = new COferta(_idOfertaa, _nombreOferta, _porcentajeOferta, model._fechaIniOferta, model._fechaFinOferta,
-                                             disponibilidad);
-
-            int modifico_si_no = oferta.MModificarOfertaBD(oferta, _idOfertaa); //SE MODIFICA A LA BD RETORNA 1 SI SE  MODIFICO Y 0 SI NO LO LOGRA
-
-            return (Json(true, JsonRequestBehavior.AllowGet));
-        }
-
         public JsonResult deletePaquete(String idPaquete)
         {
             int _idPaquete = Int32.Parse(idPaquete.ToString());
@@ -422,9 +516,16 @@ namespace BOReserva.Controllers
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
 
+        /// <summary>
+        /// Método para Guardar Oferta.
+        /// </summary>
+        /// <param name="model">La Oferta</param>
+        /// <param name="estadoOferta">Dsponible 1, No disponible 0</param>
+        /// <returns>Resultado del Guardado n BD</returns>
         [HttpPost]
         public JsonResult guardarOferta(CAgregarOferta model, string estadoOferta)
         {
+            
 
             if (estadoOferta == "1")
                 model._estadoOferta = true;
@@ -447,26 +548,16 @@ namespace BOReserva.Controllers
             if (model._fechaFinOferta.Date < model._fechaIniOferta.Date)
             {
                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-             String Error = "Error: La fecha de Inicio no puede ser igual a la fecha Fin";
-            return Json(Error);
+               String Error = "Error: La fecha de Inicio no puede ser igual a la fecha Fin";
+               return Json(Error);
             }
 
-            //AGREGAR EL USING DEL MANEJADOR SQL ANTES (using BOReserva.Servicio; o using FOReserva.Servicio;)
-            //instancio el manejador de sql
-            manejadorSQL sql = new manejadorSQL();
-            //realizo el insert
-            bool resultado = sql.agregarOferta(model);
-            //envio una respuesta dependiendo del resultado del insert
-            if (resultado)
-            {
-                return (Json(true, JsonRequestBehavior.AllowGet));
-            }
-            else
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                String error = "Error insertando en la BD";
-                return Json(error);
-            }
+            Entidad nuevaOferta = FabricaEntidad.InstanciarOferta(model);
+            //con la fabrica instancie la oferta.
+            Command<String> comando = FabricaComando.crearM11AgregarOferta(nuevaOferta);
+            String agrego_si_no = comando.ejecutar();
+
+            return (Json(agrego_si_no));
         }
 
         [HttpPost]
@@ -475,7 +566,7 @@ namespace BOReserva.Controllers
                                           String fiCrucero, String ffCrucero,String fiRestaurante, String ffRestaurante,
                                           String fiVuelo, String ffVuelo, String precio, String estado)
         {
-            manejadorSQL sql = new manejadorSQL();
+           // manejadorSQL sql = new manejadorSQL();
             CPaquete paquete = new CPaquete();
             if (estado == "1")
                 paquete._estadoPaquete = true;
@@ -546,9 +637,14 @@ namespace BOReserva.Controllers
 
                 paquete._idAuto = idAuto;
                 paquete._precioPaquete = float.Parse(precio);
-                sql.agregarPaquete(paquete);
+                //sql.agregarPaquete(paquete);
 
-            return Json(true);
+            //return Json(true);
+                Entidad nuevoPaquete = FabricaEntidad.InstanciarPaquete(paquete);
+                //Con la fábrica se instancia el paquete.
+                Command<String> comando = FabricaComando.crearM11AgregarPaquete(nuevoPaquete);
+                String agrego_si_no = comando.ejecutar();
+               return (Json(agrego_si_no));
         }
 
         [HttpPost]
@@ -628,6 +724,18 @@ namespace BOReserva.Controllers
             sql.modificarPaquete(paquete);
 
             return Json(true);
+        }
+
+        [HttpPost]
+        public JsonResult desactivarOferta(int id)
+        {
+            Command<Entidad> comando = FabricaComando.crearM11ConsultarOferta(id);
+            Entidad oferta = comando.ejecutar();
+            Oferta ofertabuscada = (Oferta)oferta;
+            ofertabuscada._id = id;
+            Command<String> comando1 = FabricaComando.crearM11DisponibilidadOferta(ofertabuscada, 0);
+            String borro_si_no = comando1.ejecutar();
+            return (Json(borro_si_no));
         }
 	}
 }

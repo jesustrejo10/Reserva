@@ -470,7 +470,6 @@ jQuery(document).ready(function () {
                 }
             });
     });
-    //M13 ROLES
     $("#m13ModificarRol").click(function (e) {
         e.preventDefault();
         var url = '/gestion_roles/M13_ModificarRol';
@@ -495,6 +494,48 @@ jQuery(document).ready(function () {
     $("#m13AgregarRol").click(function (e) {
         e.preventDefault();
         var url = '/gestion_roles/M13_AgregarRol';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+    $("#m13AgregarPermiso").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_roles/M13_AgregarPermiso';
+        var method = 'GET';
+        var data = '';
+
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+    $("#m13VisualizarPermiso").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_roles/M13_VisualizarPermiso';
         var method = 'GET';
         var data = '';
 

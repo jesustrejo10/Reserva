@@ -1,4 +1,5 @@
 ﻿using BOReserva.DataAccess.DataAccessObject;
+using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,11 @@ namespace BOReserva.Controllers.PatronComando.M02
         Avion _avion;
         int _disponibilidad;
 
+        /// <summary>
+        /// Constructor del comando Disponibilidad
+        /// </summary>
+        /// <param name="avion"></param>
+        /// <param name="disponibilidad"></param>
         public M02_CODisponibilidadAvion(Entidad avion,int disponibilidad)
         { 
             this._avion = (Avion) avion;
@@ -30,7 +36,7 @@ namespace BOReserva.Controllers.PatronComando.M02
         ///// Retorna una Entidad
         ///// </returns>
         public override String ejecutar(){
-            DAOAvion daoAvion = (DAOAvion)FabricaDAO.instanciarDaoAvion();
+            IDAOAvion daoAvion = (DAOAvion)FabricaDAO.instanciarDaoAvion();
             String test = daoAvion.disponibilidadAvion(_avion, _disponibilidad);
             return test;
         }
