@@ -25,12 +25,10 @@ namespace BOReserva.Controllers
             try
             {
                 CAgregarUsuario model = new CAgregarUsuario();
-                //Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM12ObtenerRoles();
-                //model._rols = comando.ejecutar();
-
-                PersistenciaUsuario p = new PersistenciaUsuario();
-                List<ListaRoles> lista = p.ListarRoles();
-                ViewBag.Roles = new SelectList(lista, "rolID", "rolNombre");
+                
+                Command<List<Entidad>> comandrol = FabricaComando.crearM13_ConsultarRoles();
+                List<Entidad> roles = comandrol.ejecutar();
+                ViewBag.Roles = new SelectList(roles, "_idRol", "_nombreRol");
 
                 return PartialView(model);
             }
@@ -46,9 +44,7 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult guardarUsuario(CAgregarUsuario model)
         {
-            Entidad rol = FabricaEntidad.InstanciarRol(_rol);
-            rol._id = 1;
-            Entidad nuevoUsuario = FabricaEntidad.InstanciarUsuario(model, rol);
+            Entidad nuevoUsuario = FabricaEntidad.InstanciarUsuario(model, model._rol);
             Command<string> comando = FabricaComando.crearM12AgregarUsuario(nuevoUsuario);
             string agrego = comando.ejecutar();
 
@@ -88,9 +84,9 @@ namespace BOReserva.Controllers
 
         public ActionResult M12_ModificarUsuario2(int id)
         {
-            PersistenciaUsuario p = new PersistenciaUsuario();
-            List<ListaRoles> lista = p.ListarRoles();
-            ViewBag.Roles = new SelectList(lista, "rolID", "rolNombre");
+            Command<List<Entidad>> comandrol = FabricaComando.crearM13_ConsultarRoles();
+            List<Entidad> roles = comandrol.ejecutar();
+            ViewBag.Roles = new SelectList(roles, "_idRol", "_nombreRol");
 
             Command<Entidad> comando = FabricaComando.crearM12ConsultarUsuario(id);
             Entidad usuario = comando.ejecutar();
@@ -111,9 +107,7 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult modificarUsuario(CModificarUsuario model)
         {
-            Entidad rol = FabricaEntidad.InstanciarRol(_rol);
-            rol._id = 1;
-            Entidad modificarUsuario = FabricaEntidad.InstanciarUsuario(model, rol);
+            Entidad modificarUsuario = FabricaEntidad.InstanciarUsuario(model, model._rol);
             Command<string> comando = FabricaComando.crearM12ModificarUsuario(modificarUsuario, idUsuario);
             string agrego = comando.ejecutar();
 

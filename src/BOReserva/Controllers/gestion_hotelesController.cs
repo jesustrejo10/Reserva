@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BOReserva.Models.gestion_hoteles;
-using BOReserva.Servicio.Servicio_Hoteles;
 using System.Diagnostics;
 using System.Net;
 using BOReserva.Servicio;
@@ -20,11 +19,18 @@ namespace BOReserva.Controllers
     /// </summary>
     public class gestion_hotelesController : Controller
     {
-        public static String _ciudad;
+        /// <summary>
+        /// Variable Publica Estatica utilizada para guardar en algunos casos el Id del pais al que pertenece el hotel
+        /// </summary>
         public static String _pais;
-        public static String sciudad;
+        /// <summary>
+        /// Variable Publica Estatica utilizada para guardar en algunos casos el Id de la ciudad al que pertenece el hotel
+        /// </summary>
         public static String ciudad;
-        private static int idhotel;
+        /// <summary>
+        /// Variable Publica Estatica utilizada para guardar en algunos casos el Id del hotel
+        /// </summary>
+        private static int _idhotel;
 
         /// <summary>
         /// Método de la vista parcial M09_AgregarHotel
@@ -33,10 +39,8 @@ namespace BOReserva.Controllers
         public ActionResult M09_AgregarHotel()
         {
             CAgregarHotel model = new CAgregarHotel();
-            Command<Dictionary<int,Entidad>> comando = FabricaComando.crearM09ObtenerPaises();
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM09ObtenerPaises();
             model._paises = comando.ejecutar();
-
-            //Aca puedo devolver
             return PartialView(model);
         }
 
@@ -49,7 +53,6 @@ namespace BOReserva.Controllers
         [HttpPost]
         public void getCity(String _ciudad)
         {
-            //Aca se debe llamar a un comando
             ciudad = _ciudad;
         }
 
@@ -67,12 +70,12 @@ namespace BOReserva.Controllers
                 M09_COObtenerPaises command = (M09_COObtenerPaises)FabricaComando.crearM09ObtenerPaises();
                 ciudadDestino._id = command.obtenerIdentificadorCiudad(ciudad);
                 Entidad nuevoHotel = FabricaEntidad.InstanciarHotel(model, ciudadDestino);
-                //con la fabrica instancie al hotel.
                 Command<String> comando = FabricaComando.crearM09AgregarHotel(nuevoHotel, model._precioHabitacion);
-                String agrego_si_no = comando.ejecutar();
-                return (Json(agrego_si_no));
+                String respuestaComando = comando.ejecutar();
+                return (Json(respuestaComando));
             }
-            catch (ReservaExceptionM09 ex){
+            catch (ReservaExceptionM09 ex)
+            {
                 return (Json(ex.Mensaje));
             }
         }
@@ -107,8 +110,8 @@ namespace BOReserva.Controllers
                 Command<Entidad> comando = FabricaComando.crearM09ConsultarHotel(id);
                 Entidad hotel = comando.ejecutar();
                 Hotel hotelbuscado = (Hotel)hotel;
-                idhotel = hotelbuscado._id;
                 CVerHotel modelovista = new CVerHotel();
+                _idhotel = hotelbuscado._id;
                 modelovista._capacidadHabitacion = hotelbuscado._capacidad;
                 modelovista._ciudad = hotelbuscado._ciudad._nombre;
                 modelovista._clasificacion = hotelbuscado._clasificacion;
@@ -118,11 +121,12 @@ namespace BOReserva.Controllers
                 modelovista._paginaWeb = hotelbuscado._paginaWeb;
                 modelovista._pais = hotelbuscado._ciudad._pais._nombre;
                 modelovista._precioHabitacion = hotelbuscado._precio;
+                
                 return PartialView(modelovista);
             }
             catch (ReservaExceptionM09 ex)
             {
-                return (Content("<script>alert('" + ex.Mensaje + "');</script>"));
+                return (Content(ex.Mensaje));
             }
         }
 
@@ -139,7 +143,7 @@ namespace BOReserva.Controllers
                 Command<Entidad> comando = FabricaComando.crearM09ConsultarHotel(id);
                 Entidad hotel = comando.ejecutar();
                 Hotel hotelbuscado = (Hotel)hotel;
-                idhotel = hotelbuscado._id;
+                _idhotel = hotelbuscado._id;
                 CModificarHotel modelovista = new CModificarHotel();
                 modelovista._capacidadHabitacion = hotelbuscado._capacidad;
                 modelovista._ciudad = hotelbuscado._ciudad._nombre;
@@ -154,7 +158,7 @@ namespace BOReserva.Controllers
             }
             catch (ReservaExceptionM09 ex)
             {
-                return (Content("<script>alert('" + ex.Mensaje + "');</script>"));
+                return (Content(ex.Mensaje));
             }
         }
 
@@ -170,14 +174,11 @@ namespace BOReserva.Controllers
         {
             try
             {
-                Entidad ciudadDestino = FabricaEntidad.InstanciarCiudad("nombre");
-                ciudadDestino._id = 29;
-                Entidad modificarHotel = FabricaEntidad.InstanciarHotel(model, ciudadDestino);
-                //con la fabrica instancie al hotel.
-                Command<String> comando = FabricaComando.crearM09ModificarHotel(modificarHotel, idhotel);
-                String agrego_si_no = comando.ejecutar();
+                Entidad modificarHotel = FabricaEntidad.InstanciarHotel(model);
+                Command<String> comando = FabricaComando.crearM09ModificarHotel(modificarHotel, _idhotel);
+                String respuestaComando = comando.ejecutar();
 
-                return (Json(agrego_si_no));
+                return (Json(respuestaComando));
             }
             catch (ReservaExceptionM09 ex)
             {
@@ -197,11 +198,9 @@ namespace BOReserva.Controllers
             {
                 Command<Entidad> comando = FabricaComando.crearM09ConsultarHotel(id);
                 Entidad hotel = comando.ejecutar();
-                Hotel hotelbuscado = (Hotel)hotel;
-                hotelbuscado._id = id;
-                Command<String> comando1 = FabricaComando.crearM09EliminarHotel(hotelbuscado, id);
-                String borro_si_no = comando1.ejecutar();
-                return (Json(borro_si_no));
+                Command<String> comando1 = FabricaComando.crearM09EliminarHotel(hotel, hotel._id);
+                String RespuestaEliminar = comando1.ejecutar();
+                return (Json(RespuestaEliminar));
             }
             catch (ReservaExceptionM09 ex)
             {
@@ -221,11 +220,9 @@ namespace BOReserva.Controllers
             {
                 Command<Entidad> comando = FabricaComando.crearM09ConsultarHotel(id);
                 Entidad hotel = comando.ejecutar();
-                Hotel hotelbuscado = (Hotel)hotel;
-                hotelbuscado._id = id;
-                Command<String> comando1 = FabricaComando.crearM09DisponibilidadHotel(hotelbuscado, 1);
-                String borro_si_no = comando1.ejecutar();
-                return (Json(borro_si_no));
+                Command<String> comando1 = FabricaComando.crearM09DisponibilidadHotel(hotel, 1);
+                String respuestaActivacion = comando1.ejecutar();
+                return (Json(respuestaActivacion));
             }
             catch (ReservaExceptionM09 ex)
             {
@@ -245,11 +242,9 @@ namespace BOReserva.Controllers
             {
                 Command<Entidad> comando = FabricaComando.crearM09ConsultarHotel(id);
                 Entidad hotel = comando.ejecutar();
-                Hotel hotelbuscado = (Hotel)hotel;
-                hotelbuscado._id = id;
-                Command<String> comando1 = FabricaComando.crearM09DisponibilidadHotel(hotelbuscado, 0);
-                String borro_si_no = comando1.ejecutar();
-                return (Json(borro_si_no));
+                Command<String> comando1 = FabricaComando.crearM09DisponibilidadHotel(hotel, 0);
+                String respuestaDesativacion = comando1.ejecutar();
+                return (Json(respuestaDesativacion));
             }
             catch (ReservaExceptionM09 ex)
             {
@@ -267,8 +262,6 @@ namespace BOReserva.Controllers
             Command<Dictionary<int, Entidad>> commandpais = FabricaComando.crearM09ObtenerPaises();
             Dictionary<int, Entidad> _paises = commandpais.ejecutar();
             List<SelectListItem> __pais = new List<SelectListItem>();
-            int i = 0;
-            bool verdad = true;
             foreach (var item in _paises)
             {
                 Pais country = (Pais)item.Value;
@@ -278,7 +271,7 @@ namespace BOReserva.Controllers
                     Value = Convert.ToString(country._id)
                 });
             }
-            
+
             return __pais;
         }
 
@@ -311,5 +304,6 @@ namespace BOReserva.Controllers
             ciudad = objcity.First();
             return Json(objcity);
         }
+
     }
 }

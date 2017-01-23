@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -7,6 +6,8 @@ using BOReserva.Models.gestion_automoviles;
 using System.Diagnostics;
 using BOReserva.Servicio;
 using BOReserva.DataAccess.Domain;
+using BOReserva.Controllers.PatronComando;
+using System.Collections.Generic;
 
 namespace BOReserva.Controllers
 {
@@ -15,8 +16,13 @@ namespace BOReserva.Controllers
     /// </summary>
     public class gestion_automovilesController : Controller
     {
-
+        /// <summary>
+        /// Atributo ciudad.
+        /// </summary>
         public static String _ciudad;
+        /// <summary>
+        /// Atributo pais.
+        /// </summary>
         public static String _pais;
 
 
@@ -378,10 +384,14 @@ namespace BOReserva.Controllers
         /// <returns>Retorna si esta o no repetida</returns>
         [HttpPost]
         public ActionResult checkplaca(String matricula)
-        {
-            //manejadorSQL placa = new manejadorSQL();
-            //int existe = placa.MPlacarepetidaBD(matricula); 
-            return (Json("no"));
+        {    
+            Command<bool> Comando = FabricaComando.existeMatriculaAutomovil(FabricaEntidad.CrearAutomovil(matricula));
+            if (Comando.ejecutar())
+            {
+                return (Json("no"));
+            }
+            return (Json("si"));
+            
         }
 
 
@@ -391,14 +401,8 @@ namespace BOReserva.Controllers
         /// <returns>Retorna una lista de items que contine los años</returns>
         public static List<SelectListItem> listadeanios()
         {
-            List<SelectListItem> ls = new List<SelectListItem>();
-            ls.Add(new SelectListItem() { Text = "", Value = "" });
-            for (int i = 1930; i <= 2016; i++)
-            {
-                ls.Add(new SelectListItem() { Text = i.ToString(), Value = i.ToString() });
-            }
-
-            return ls;
+            Command<List<SelectListItem>> Comando = FabricaComando.listarAniosAutomovil(new Entidad());
+            return Comando.ejecutar();
         }
 
 
@@ -409,15 +413,8 @@ namespace BOReserva.Controllers
         /// <returns>Retorna una lista de items que contine los números listados</returns>
         public static List<SelectListItem> cantidad(int cant)
         {
-            List<SelectListItem> ls = new List<SelectListItem>();
-            ls.Add(new SelectListItem() { Text = "", Value = "" });
-
-            for (int i = 1; i <= cant; i++)
-            {
-                ls.Add(new SelectListItem() { Text = i.ToString(), Value = i.ToString() });
-            }
-
-            return ls;
+            Command<List<SelectListItem>> Comando = FabricaComando.listarCantidadAutomovil(new Entidad(), cant);
+            return Comando.ejecutar();
         }
 
 
@@ -427,38 +424,8 @@ namespace BOReserva.Controllers
         /// <returns>Retorna una lista de items que contine los colores</returns>
         public static List<SelectListItem> colores()
         {
-            List<SelectListItem> _color = new List<SelectListItem>();
-            _color.Add(new SelectListItem
-            {
-                Text = "Azul",
-                Value = "Azul"
-            });
-            _color.Add(new SelectListItem
-            {
-                Text = "Negro",
-                Value = "Negro"
-            });
-            _color.Add(new SelectListItem
-            {
-                Text = "Blanco",
-                Value = "Blanco"
-            });
-            _color.Add(new SelectListItem
-            {
-                Text = "Rojo",
-                Value = "Rojo"
-            });
-            _color.Add(new SelectListItem
-            {
-                Text = "Gris",
-                Value = "Gris"
-            });
-            _color.Add(new SelectListItem
-            {
-                Text = "Verde",
-                Value = "Verde"
-            });
-            return _color;
+            Command<List<SelectListItem>> Comando = FabricaComando.listarColoresAutomovil(new Entidad());
+            return Comando.ejecutar();
         }
 
 
@@ -474,50 +441,29 @@ namespace BOReserva.Controllers
 
 
         /// <summary>
-        /// Método que retorna la lista de países
+        /// 
         /// </summary>
-        /// <returns>Retorna una lista de Items que contiene los países disponibles</returns>
+        /// <returns></returns>
         public static List<SelectListItem> pais()
         {
-            manejadorSQL pais = new manejadorSQL();
-            List<SelectListItem> __pais = new List<SelectListItem>();
-            String[] paises = pais.MListarpaisesBD();
-            int i = 0;
-            bool verdad = true;
-            _pais = paises[0];
-            while (verdad == true)
-            {
-                try
-                {
-                    __pais.Add(new SelectListItem
-                    {
-                        Text = paises[i].ToString(),
-                        Value = i.ToString()
-                    });
-                    i++;
-                }
-                catch (Exception e) {
-                    verdad = false;
-                }
-            }
-            return __pais;
+            Command<List<SelectListItem>> Comando = FabricaComando.consultarTodosPais(new Entidad());
+            return Comando.ejecutar();
         }
 
         /// <summary>
         /// Método que retorna la lista de ciudades
         /// </summary>
-        /// <param name="pais">Nombre del país del cual se desea conocer las ciudades disponibles</param>
+        /// <param name="ciudad">Nombre del país del cual se desea conocer las ciudades disponibles</param>
         /// <returns>Retorna un ActionResult que contiene las ciudades disponibles para el país solicitado</returns>
         [HttpPost]
         public ActionResult listaciudades(String pais)
         {
-            List<String> objcity = new List<String>();
+            List<String> ciudades = new List<String>();
+            Command<List<String>> Comando = FabricaComando.consultarTodosCiudad(new Entidad(),pais);
+            ciudades = Comando.ejecutar();
             gestion_automovilesController._pais = pais;
-            manejadorSQL listaciudades = new manejadorSQL();
-            int fk = listaciudades.MIdpaisesBD(pais);
-            objcity = listaciudades.MListarciudadesBD(fk);
-            gestion_automovilesController._ciudad = objcity.First();
-            return Json(objcity);
+            gestion_automovilesController._ciudad = ciudades.First();
+            return Json(ciudades);
         }
 
         #endregion

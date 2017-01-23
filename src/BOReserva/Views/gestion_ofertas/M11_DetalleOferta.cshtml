@@ -3,12 +3,15 @@
 <!--Indico que, estoy abriendo un formulario que tendra como accion del submit, el controlador gestion_automoviles"Controller",
     utilizara el metodo guardarAutomovil
     le pasara la informacion mediante un POST-->
+<link href="~/Content/Canvas/Box.css" rel="stylesheet" />
+
 @using (Html.BeginForm("viewOferta", "gestion_ofertas", null, FormMethod.Post, new { @id = "viewOferta", @class = "form-horizontal" }))
 {
+    
 <!-----------------SECCION CONSULTAR OFERTA-------------------->
 <div class="row">
-    <div class="col-md-12">
-        <div class="box box">
+    <div class="col-md-10">
+        <div class="Cajita">
             <div class="box-header with-border">
                 <h1 class="box-title"> Consultar Oferta</h1>
                 <div class="box-tools pull-right">

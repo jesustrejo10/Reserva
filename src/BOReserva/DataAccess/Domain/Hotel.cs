@@ -10,14 +10,41 @@ namespace BOReserva.DataAccess.Domain
     /// </summary>
     public class Hotel : Entidad
     {
+        /// <summary>
+        /// Nombre del hotel
+        /// </summary>
         public String _nombre { get; set; }
+        /// <summary>
+        /// Direccion del hotel
+        /// </summary>
         public String _direccion { get; set; }
+        /// <summary>
+        /// Ciudad del hotel
+        /// </summary>
         public Ciudad _ciudad { get; set; }
+        /// <summary>
+        /// email del hotel
+        /// </summary>
         public String _email { get; set; }
+        /// <summary>
+        /// Pagina web del hotel
+        /// </summary>
         public String _paginaWeb { get; set; }
+        /// <summary>
+        /// clasificacion del hotel
+        /// </summary>
         public int _clasificacion { get; set; }
+        /// <summary>
+        /// Capacidad del hotel
+        /// </summary>
         public int _capacidad { get; set; }
+        /// <summary>
+        /// Disponibilidad del hotel
+        /// </summary>
         public Boolean _disponibilidad { get; set; }
+        /// <summary>
+        /// Precio de las habitaciones del hotel
+        /// </summary>
         public int _precio { get; set; }
 
 
@@ -99,7 +126,7 @@ namespace BOReserva.DataAccess.Domain
         /// <summary>
         /// Constructor de la clase
         /// </summary>
-        /// <param name="idhotel">Id del hotel</param>
+        /// <param name="_idhotel">Id del hotel</param>
         /// <param name="nombre">Nombre del hotel</param>
         /// <param name="direccion">Direccion del hotel</param>
         /// <param name="email">Email del hotel</param>

@@ -178,7 +178,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M19 {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a aut_tipo.
+        ///   Busca una cadena traducida similar a aut_tipovehiculo.
         /// </summary>
         internal static string autTipo {
             get {
@@ -250,6 +250,33 @@ namespace FOReserva.DataAccess.DataAccessObject.M19 {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Error de Casteo.
+        /// </summary>
+        internal static string MensajeErrorFormato {
+            get {
+                return ResourceManager.GetString("MensajeErrorFormato", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Salida del Método.
+        /// </summary>
+        internal static string MensajeFinMetodoLogger {
+            get {
+                return ResourceManager.GetString("MensajeFinMetodoLogger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Entrada en el Método.
+        /// </summary>
+        internal static string MensajeInicioMetodoLogger {
+            get {
+                return ResourceManager.GetString("MensajeInicioMetodoLogger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a origen.
         /// </summary>
         internal static string origen {
@@ -282,6 +309,15 @@ namespace FOReserva.DataAccess.DataAccessObject.M19 {
         internal static string procedimientoConsultar {
             get {
                 return ResourceManager.GetString("procedimientoConsultar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a M19_ConsultarReservaAPorCiudad.
+        /// </summary>
+        internal static string procedimientoConsultarACiudad {
+            get {
+                return ResourceManager.GetString("procedimientoConsultarACiudad", resourceCulture);
             }
         }
         

@@ -32,8 +32,8 @@
                               
                                 <tr id="@i._id">
                                     <td>@i.CodigoVuelo</td>
-                                    <td>@i.getRuta.origenRuta</td>
-                                    <td>@i.getRuta.destinoRuta</td> 
+                                    <td>@i.getRuta._origenRuta</td>
+                                    <td>@i.getRuta._destinoRuta</td> 
                                     <td>@i.FechaDespegue.ToString("g")</td>
                                     <td>@i.FechaAterrizaje.ToString("g")</td>
                                     <td>@i.StatusVuelo</td>
@@ -51,6 +51,7 @@
                                                 <a href="#" title="Activar/Desactivar vuelo"><i class="fa fa-toggle-off activar"></i></a>
                                             }
                                         }
+                                        <a href="#" title="Eliminar" id="Eliminar"><i class="fa fa-times eliminar"></i></a>
                                     </td>
                                 </tr>
                             }

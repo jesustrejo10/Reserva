@@ -19,43 +19,44 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @try 
-                        {
+                        @try
+{
                             
-                            foreach (var item in Model) 
-                            {
-                                <tr id="@item._id">
-                                    <td>@item._fechaReclamo</td>
-                                    <td>@item._tituloReclamo</td>
-                                    <td>
-                                        @if (@item._estadoReclamo == 1)
-                                                {
-                                        <span class="label label-success ">Iniciado</span>
-                                                }
-                                        @if (@item._estadoReclamo == 2)
-                                                {
-                                        <span class="label label-primary ">Procesado</span>
-                                                }
-                                        @if (@item._estadoReclamo == 3)
-                                                {
-                                        <span class="label label-warning ">Culminado</span>
-                                                }
-                                        @if (@item._estadoReclamo == 4)
-                                                {
-                                        <span class="label label-danger ">Cerrado</span>
-                                                }
-                                    </td>
-                                    <td>
-                                        <a href="#" title="Ver detalle"><i class="fa fa-eye detalle"></i></a>
-                                        @if (item._usuario == item._usuario)
-                                        {
-                                            <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>
-                                            <a href="#" title="Eliminar"><i class="fa fa-times eliminar"></i></a>
-                                        }
-                                    </td>
+    foreach (var item in Model)
+    {
+        <tr id="@item._id">
+            <td>@item._fechaReclamo</td>
+            <td>@item._tituloReclamo</td>
+            <td>
+                @if (@item._estadoReclamo == 1)
+                {
+                    <span class="label label-success ">Iniciado</span>
+                }
+                @if (@item._estadoReclamo == 2)
+                {
+                    <span class="label label-primary ">Procesado</span>
+                }
+                @if (@item._estadoReclamo == 3)
+                {
+                    <span class="label label-warning ">Culminado</span>
+                }
+                @if (@item._estadoReclamo == 4)
+                {
+                    <span class="label label-danger ">Cerrado</span>
+                }            
+            </td>
+            <td>
+                                        <a href="#" title="Consultar"><i class="fa fa-eye detalle"></i></a>
+                @if (item._usuario == item._usuario) 
+                { 
+                <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>
+                <a href="#" title="Eliminar"><i class="fa fa-times eliminar"></i></a>
+                }
+            </td>
 
-         <script>
+            <script>
 
+             
                 $(".modificar").click(function (event) {
                     event.preventDefault();
                     event.stopPropagation();
@@ -75,6 +76,26 @@
 
 
                 });
+
+                $(".detalle").click(function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    event.stopImmediatePropagation();
+                    var identificador = $(this).parent().parent().parent().attr("id");
+                    jQuery.ajax({
+                        type: "GET",
+                        url: "/gestion_reclamos/M16_DetalleReclamo",
+                        data: { idReclamo: identificador }
+                    }).done(function (data) {
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    }).fail(function (data) {
+                        alert(data);
+                        console.log(data);
+                    });
+                });
+
+
 
                 $(".eliminar").click(function (event) {
                     event.preventDefault();
@@ -226,26 +247,26 @@
 
                 });
 
-                                            </script>
+            </script>
 
-                                </tr>
-                            }
-                        }
-                        catch
-                        {
-                             <script>
+        </tr>
+    }
+}
+catch
+{
+                            <script>
                                    alert("Error en el listado, por favor intente nuevamente");
-                             </script>
-                        } 
+                            </script>
+                        }
 
-                                    <tfoot>
-                                        <tr>
-                                            <th>Fecha</th>
-                                            <th>Título</th>
-                                            <th>Estado</th>
-                                            <th>Opciones</th>
-                                        </tr>
-                                    </tfoot>
+                    <tfoot>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Título</th>
+                            <th>Estado</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
             <!-- /.box-body -->

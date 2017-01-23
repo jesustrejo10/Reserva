@@ -1,15 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using FOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using FOReserva.DataAccess.Domain;
 using FOReserva.DataAccess.Model;
-using FOReserva.DataAccess.DataAccessObject;
-
-using FOReserva.DataAccess.DataAccessObject.Common;
-
-using FOReserva.DataAccess.DataAccessObject;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Data;
@@ -200,7 +193,7 @@ namespace FOReserva.DataAccess.DataAccessObject
             throw new NotImplementedException();
         }
 
-        public Dictionary<int, Entidad> ConsultarTodos()
+        public new Dictionary<int, Entidad> ConsultarTodos()
         {
             throw new NotImplementedException();
         }
@@ -210,7 +203,7 @@ namespace FOReserva.DataAccess.DataAccessObject
         /// </summary>
         /// <param name="id">Id del comando a consultar</param>
         /// <returns>Entidad que podra ser casteada a Reclamo con los datos del mismo</returns>
-        public Entidad Consultar(int id)
+        public new Entidad Consultar(int id)
         {
             List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
             int rec_id, rec_estatus, rec_fk_usuario;

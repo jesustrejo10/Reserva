@@ -11,11 +11,19 @@ namespace BOReserva.DataAccess.DAO
     {
         List<Entidad> ConsultarTodos();
 
-        bool Eliminar(Entidad entidad);
+        bool Eliminar(int entidad);
 
         bool CambiarStatus(int vuelo);
 
         List<Entidad> ConsultarAvionRuta(int idRuta);
+
+        bool BuscarCodigo(String Codigo);
+
+        Entidad ConsultarDatosAterrizaje(int idRuta, DateTime fechaTiempo, int idAvion);
+        
+        List<Entidad> ConsultarLugarDestino(int lugarO);
+
+        List<Entidad> ConsultarLugarOrigen();
 
     }
 }

@@ -70,6 +70,24 @@ namespace BOReserva.DataAccess.DataAccessObject.M04 {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a M04_BuscarCodigo.
+        /// </summary>
+        internal static string BuscarCodigo {
+            get {
+                return ResourceManager.GetString("BuscarCodigo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a M04_BuscaVuelo.
+        /// </summary>
+        internal static string BuscaVueloID {
+            get {
+                return ResourceManager.GetString("BuscaVueloID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a M04_CambiarStatus.
         /// </summary>
         internal static string CambiarStatus {
@@ -79,11 +97,101 @@ namespace BOReserva.DataAccess.DataAccessObject.M04 {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a M04_CrearVuelo.
+        /// </summary>
+        internal static string CrearVuelo {
+            get {
+                return ResourceManager.GetString("CrearVuelo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a M04_EliminarVuelo.
         /// </summary>
         internal static string EliminarVuelo {
             get {
                 return ResourceManager.GetString("EliminarVuelo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No hay aviones disponibles para cubrir la ruta seleccionada.
+        /// </summary>
+        internal static string ErrorAvionRuta {
+            get {
+                return ResourceManager.GetString("ErrorAvionRuta", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Campos Obligatorios Vacios.
+        /// </summary>
+        internal static string ErrorCampoVacio {
+            get {
+                return ResourceManager.GetString("ErrorCampoVacio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El codigo de vuelo ya se encuentra registrado.
+        /// </summary>
+        internal static string ErrorCodigoDuplicado {
+            get {
+                return ResourceManager.GetString("ErrorCodigoDuplicado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Reserva-404.
+        /// </summary>
+        internal static string ErrorDaoVuelo {
+            get {
+                return ResourceManager.GetString("ErrorDaoVuelo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error en la conexión con la Base de Datos.
+        /// </summary>
+        internal static string ErrorGeneralBD {
+            get {
+                return ResourceManager.GetString("ErrorGeneralBD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Argumento nulo.
+        /// </summary>
+        internal static string ErrorMensajeArgumento {
+            get {
+                return ResourceManager.GetString("ErrorMensajeArgumento", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error: Existen registros asociados a este vuelo.
+        /// </summary>
+        internal static string ErrorMensajeDependencia {
+            get {
+                return ResourceManager.GetString("ErrorMensajeDependencia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Formato invalido.
+        /// </summary>
+        internal static string ErrorMensajeFormato {
+            get {
+                return ResourceManager.GetString("ErrorMensajeFormato", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a M04_CalcularFechaAterrizaje.
+        /// </summary>
+        internal static string FechaAterrizaje {
+            get {
+                return ResourceManager.GetString("FechaAterrizaje", resourceCulture);
             }
         }
         
@@ -115,6 +223,15 @@ namespace BOReserva.DataAccess.DataAccessObject.M04 {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a M04_ModificarVuelo.
+        /// </summary>
+        internal static string ModificarVuelo {
+            get {
+                return ResourceManager.GetString("ModificarVuelo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a aMatricula.
         /// </summary>
         internal static string ParametroaAMatricula {
@@ -133,11 +250,38 @@ namespace BOReserva.DataAccess.DataAccessObject.M04 {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a capEje.
+        /// </summary>
+        internal static string ParametroCapacidadEjecutiva {
+            get {
+                return ResourceManager.GetString("ParametroCapacidadEjecutiva", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a aCapMax.
         /// </summary>
         internal static string ParametroCapacidadMaxima {
             get {
                 return ResourceManager.GetString("ParametroCapacidadMaxima", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a capTur.
+        /// </summary>
+        internal static string ParametroCapacidadTurista {
+            get {
+                return ResourceManager.GetString("ParametroCapacidadTurista", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a capVip.
+        /// </summary>
+        internal static string ParametroCapacidadVIP {
+            get {
+                return ResourceManager.GetString("ParametroCapacidadVIP", resourceCulture);
             }
         }
         
