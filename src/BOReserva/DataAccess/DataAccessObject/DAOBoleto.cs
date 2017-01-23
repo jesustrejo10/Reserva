@@ -80,7 +80,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                 conexion.Close();
                 return 1;
             }
-            catch (SqlException ex)
+            catch (SqlException)
             {
                 return 0;
             }
@@ -123,7 +123,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                     return boleto;
                 }
             }
-            catch (SqlException ex)
+            catch (SqlException )
             {
                 return null;
             }
@@ -142,7 +142,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                 con.Close();
                 return boleto;
             }
-            catch (SqlException ex)
+            catch (SqlException )
             {
                 return null;
             }
@@ -167,7 +167,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                 con.Close();
                 return _conteo;
             }
-            catch (SqlException ex)
+            catch (SqlException )
             {
                 return _conteo;
             }
@@ -197,7 +197,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                 con.Close();
                 return _conteo;
             }
-            catch (SqlException ex)
+            catch (SqlException )
             {
                 return _conteo;
             }
@@ -245,7 +245,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                 con.Close();
                 return _conteo;
             }
-            catch (SqlException ex)
+            catch (SqlException )
             {
                 return _conteo;
             }
@@ -289,7 +289,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                 conexion.Close();
                 return listaboletos;
             }
-            catch (SqlException ex)
+            catch (SqlException )
             {
                 conexion.Close();
                 return null;
@@ -336,7 +336,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                 conexion.Close();
                 return listaboletos;
             }
-            catch (SqlException ex)
+            catch (SqlException )
             {
                 conexion.Close();
                 return null;
@@ -384,7 +384,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                     return boleto;
                 }
             }
-            catch (SqlException ex)
+            catch (SqlException )
             {
                 return null;
             }
@@ -461,12 +461,17 @@ namespace BOReserva.DataAccess.DataAccessObject
                 con.Close();
                 return listavuelos;
             }
-            catch (SqlException ex)
+            catch (SqlException )
             {
                 return null;
             }
         }
 
+        /// <summary>
+        /// Busca la cantidad de boletos en un vuelo
+        /// </summary>
+        /// <param name="id_vuelo"></param>
+        /// <returns></returns>
         public int BuscarCantBolVue(int id_vuelo)
         {
             int _conteo = 0;
@@ -487,12 +492,17 @@ namespace BOReserva.DataAccess.DataAccessObject
                 con.Close();
                 return _conteo;
             }
-            catch (SqlException ex)
+            catch (SqlException )
             {
                 return _conteo;
             }
         }
 
+        /// <summary>
+        /// Lista los vuelos de una reserva
+        /// </summary>
+        /// <param name="id_reserva"></param>
+        /// <returns></returns>
         public List<BoletoVuelo> M05ListarVuelosReserva(int id_reserva)
         {
             List<BoletoVuelo> listavuelos = new List<BoletoVuelo>();
@@ -517,12 +527,17 @@ namespace BOReserva.DataAccess.DataAccessObject
                 int inte = listavuelos.Count;
                 return listavuelos;
             }
-            catch (SqlException ex)
+            catch (SqlException )
             {
                 return null;
             }
         }
 
+        /// <summary>
+        /// Lista los vuelos de un boleto
+        /// </summary>
+        /// <param name="id_boleto"></param>
+        /// <returns></returns>
         public List<BoletoVuelo> M05ListarVuelosBoleto(int id_boleto)
         {
             List<BoletoVuelo> listavuelos = new List<BoletoVuelo>();
@@ -547,12 +562,17 @@ namespace BOReserva.DataAccess.DataAccessObject
                 int inte = listavuelos.Count;
                 return listavuelos;
             }
-            catch (SqlException ex)
+            catch (SqlException )
             {
                 return null;
             }
         }
 
+        /// <summary>
+        /// Busca los datos de la ruta del vuelo
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public RutaBoleto MBuscarDatosRuta(int id)
         {
             RutaBoleto ruta = null;
@@ -578,11 +598,17 @@ namespace BOReserva.DataAccess.DataAccessObject
                 con.Close();
                 return ruta;
             }
-            catch (SqlException ex)
+            catch (SqlException )
             {
                 return ruta;
             }
         }
+
+        /// <summary>
+        /// Busca los datos del vuelo
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public BoletoVuelo MBuscarDatosVuelo(int id)
         {
             BoletoVuelo vuelo = null;
@@ -610,12 +636,17 @@ namespace BOReserva.DataAccess.DataAccessObject
                 con.Close();
                 return vuelo;
             }
-            catch (SqlException ex)
+            catch (SqlException )
             {
                 return vuelo;
             }
         }
 
+        /// <summary>
+        /// Busca los datos del pasajero
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Pasajero MBuscarDatosPasajero(int id)
         {
             Pasajero pas = null;
@@ -642,12 +673,17 @@ namespace BOReserva.DataAccess.DataAccessObject
                 con.Close();
                 return pas;
             }
-            catch (SqlException ex)
+            catch (SqlException )
             {
                 return pas;
             }
         }
 
+        /// <summary>
+        /// Busca nombre del pasajero
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public String MBuscarnombrepasajero(int id)
         {
             String _nombre = "";
@@ -674,6 +710,11 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
         }
 
+        /// <summary>
+        /// Busca el apellido del pasajero
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public String MBuscarapellidopasajero(int id)
         {
             String _apellido = "";
@@ -700,6 +741,11 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
         }
 
+        /// <summary>
+        /// Busca el correo del pasajero
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public String MBuscarcorreopasajero(int id)
         {
             String _correo = "";
@@ -720,12 +766,17 @@ namespace BOReserva.DataAccess.DataAccessObject
                 con.Close();
                 return _correo;
             }
-            catch (SqlException ex)
+            catch (SqlException )
             {
                 return _correo;
             }
         }
 
+        /// <summary>
+        /// Busca el nombre de la ciudad
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public String MBuscarnombreciudad(int id)
         {
             String _ciudad = "No aplica";

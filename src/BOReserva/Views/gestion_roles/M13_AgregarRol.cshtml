@@ -96,20 +96,24 @@
                     data: form.serialize(),
                     type: 'POST',
                     success: function (response) {
+                        if (typeof response.error === "undefined") {
+                           
+                        }
+                        else {
+                            alert(response.error);                           
+                        }                       
                         $.ajax({
                             type: 'post',
                             dataType: 'json',
                             url: 'gestion_roles/asignarpermisos',
                             data: { json: JSON.stringify(permisos) },
-                            success: function (data) {
+                            success: function (data) {                           
 
                             },
                             failure: function (response) {
-                                alert("No se pudo asignar permisos");
-
+                                alert("No se pudo realizar la petición al servidor");
                             }
                         });
-
                         $.ajax({
                             url: '/gestion_roles/M13_VisualizarRol',
                             type: 'GET',
@@ -151,9 +155,7 @@
                         $('<br>').appendTo(container);
                 });
             }
-        };
-        
+        };        
     </script>
-
 }
 

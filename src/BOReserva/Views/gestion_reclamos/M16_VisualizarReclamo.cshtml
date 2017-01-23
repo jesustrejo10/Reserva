@@ -82,7 +82,6 @@
                     event.stopPropagation();
                     event.stopImmediatePropagation();
                     var identificador = $(this).parent().parent().parent().attr("id");
-                    alert("Entro aqui en el detalle");
                     jQuery.ajax({
                         type: "GET",
                         url: "/gestion_reclamos/M16_DetalleReclamo",
@@ -90,7 +89,6 @@
                     }).done(function (data) {
                         $("#contenido").empty();
                         $("#contenido").append(data);
-                        alert("ahora estoy aqui ");
                     }).fail(function (data) {
                         alert(data);
                         console.log(data);

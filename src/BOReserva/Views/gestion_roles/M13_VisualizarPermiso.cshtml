@@ -22,14 +22,14 @@
                         @foreach (BOReserva.DataAccess.Domain.Permiso item in Model)
                         {
                             <tr id="@item._idPermiso">
-                                <td>@item._nombre</td>                               
+                                <td>@item._nombre</td>
                                 <td>@item.url</td>
                                 <td>
-                                        <a href="#" title="Modificar Rol"><i class="fa fa-pencil modificar"></i></a>
-                                        <a href="#" title="Eliminar Rol"><i class="fa fa-times eliminar"></i></a>
+                                    <a href="#" title="Modificar Rol"><i class="fa fa-pencil modificar"></i></a>
+                                    <a href="#" title="Eliminar Rol"><i class="fa fa-times eliminar"></i></a>
                                 </td>
                             </tr>
-                        }                       
+                        }
                     </tbody>
                 </table>
             </div>
@@ -56,25 +56,31 @@
             jQuery.ajax({
                 type: "POST",
                 url: "/gestion_roles/eliminarPermisoSeleccionado",
-                data: { _idPermiso: identificador }
+                data: { _idPermiso: identificador },
+                success: function (response) {
+                    if (typeof response.error === "undefined") {
+
+                    }
+                    else {
+                        alert(response.error);
+                    }
+                }
             }).done(function (data) {
                 var url = '/gestion_roles/M13_VisualizarPermiso';
                 var method = 'GET';
                 var data = '';
-                $.ajax(
-                    {
-                        url: url,
-                        type: method,
-                        data: data,
-                        success: function (data, textStatus, jqXHR) {
-
-                            $("#contenido").empty();
-                            $("#contenido").append(data);
-                        },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            alert(errorThrown);
-                        }
-                    });
+                $.ajax({
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
             }).fail(function (data) {
                 alert(data);
             });
@@ -88,10 +94,10 @@
             type: "POST",
             url: "/gestion_roles/M13_ModificarPermiso",
             data: { idPermiso: identificador },
-            success: function(data){
+            success: function (data) {
                 $("#contenido").empty();
                 $("#contenido").append(data);
-            },          
+            },
             failure: function () {
                 alert(data);
             }

@@ -16,7 +16,9 @@ namespace BOReserva.Controllers.PatronComando
     /// </summary>
     public class M13_COConsultarListaPermisos : Command<List<Entidad>>
     {
-
+        ///<summary>
+        ///Constructor
+        ///</summary>
         public M13_COConsultarListaPermisos()
         {
         }

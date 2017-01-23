@@ -24,7 +24,7 @@
                     <div class="form-group" style="margin-bottom:20px">
                         <label>Cruceros:</label>
                         @Html.DropDownListFor(m => m._cruceroNombre, new SelectList(Model._listaCruceros as System.Collections.IEnumerable, "Value", "Text"), 
-                        "Seleccione una crucero", new { @class = "form-control", @id = "crucero", @style = "width:41% ; margin-left:2%", @required = "true" })
+                        "Seleccione una crucero", new { @class = "form-control", @id = "crucero", @style = "width:50%", @required = "true" })
                         
                     </div>
                     <div class="row">
@@ -47,40 +47,7 @@
                         <button type="button" id="guardar_cabina" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
                     </div>
                 </section>
-            </div>
-            <div class="modal-body col-xs-12" id="bodyCruc" style="margin-left: 14.5%">
-                <table>
-                    <thead>
-                        <tr class="crucero crTitles" id="listaCruceros">
-                            <th style="width:170px;height: 40px;text-align: center">Nombre</th>
-                            <th style="width:170px;height: 40px;text-align: center"> <b>Precio</b></th>
-                            <th style="width:170px;height: 40px;text-align: center"><b>Estado</b></th>
-                            <th style="width:170px;height: 40px;text-align: center"><b>Acciones</b> </th>
-                        </tr>
-                    </thead>
-                    <tbody id="tablaCabinas" class="">
-                        @*@{
-                                foreach (var cabina in Model.cabinas)
-                                {
-                                    <tr id="@cabina._idCabina ">
-                                        <td class="crNombre">@cabina._nombreCabina</td>
-                                        <td class="crCompania">@cabina._precioCabina</td>
-                                        @if (@cabina._estatus == "activo")
-                                        {
-                                            <td class="crStatus"><i class="fa fa-circle started"></i></td>
-                                            <td class="crAcciones"><i class="fa fa-eye"></i> <i class="fa fa-pencil"></i> <i class="fa fa-times"></i> <i class="fa fa-trash eliminar_crucero"></i></td>
-                                        }
-                                        else {
-                                            <td class="crStatus"><i class="fa fa-circle paused"></i></td>
-                                            <td class="crAcciones"><i class="fa fa-eye"></i> <i class="fa fa-pencil"></i> <i class="fa fa-check"></i> <i class="fa fa-trash"></i></td>
-                                        }
-                                    </tr>
-
-                                }
-                            }*@
-                    </tbody>
-                </table>
-            </div>
+            </div>            
         </div>
 
     </div>
