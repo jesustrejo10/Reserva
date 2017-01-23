@@ -7,7 +7,6 @@ using System.Net;
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;
 using BOReserva.Models.gestion_vuelo;
-using BOReserva.Servicio.Servicio_Vuelos;
 using BOReserva.Controllers.PatronComando;
 using BOReserva.DataAccess.Model;
 using BOReserva.DataAccess.Domain;
@@ -327,15 +326,16 @@ namespace BOReserva.Controllers
             Command<Entidad> comando;
             Entidad vuelo;
             Entidad avion;
-            Ruta ruta;
+            Entidad ruta;
             try
             {
                 model.setFechaDespegue();
-                avion = new Avion(model._idAvion, "", "", 0, 0, 0, 0, 0, 0, 0, 0);
-                ruta = new Ruta(model._idRuta, 0, "", "", "", "");
+                ruta = FabricaEntidad.InstanciarRuta(model._idRuta, 0, "", "", "", "");
+                avion = FabricaEntidad.InstanciarAvion(model._idAvion, "", "", 0, 0, 0, 0, 0, 0, 0, 0);
+                ((Avion)avion)._id = model._idAvion;
                 vuelo = FabricaEntidad.InstanciarVuelo(model._idVuelo,
                                                        model._codigoVuelo,
-                                                       ruta,
+                                                       (Ruta)ruta,
                                                        model.fechaDespegue,
                                                        model._statusVuelo,
                                                        model.getFechaAterrizaje(),
