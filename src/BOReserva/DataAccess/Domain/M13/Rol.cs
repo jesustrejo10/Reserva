@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using BOReserva.Models.gestion_roles;
 
 namespace BOReserva.DataAccess.Domain
 {
@@ -10,6 +11,8 @@ namespace BOReserva.DataAccess.Domain
     /// </summary>
     public class Rol: Entidad
     {
+        private CListaGenerica<CModulo_detallado> permisos;
+
         public int _idRol { get; set; }
         public String _nombreRol { get; set; }
         public Permiso _permiso { get; set; }
@@ -52,6 +55,13 @@ namespace BOReserva.DataAccess.Domain
         public Rol(int id)
         {
             this._idRol = id;
+        }
+
+        public Rol(int id, string nombre, CListaGenerica<CModulo_detallado> permisos)
+        {
+            this._idRol = id;
+            this._nombreRol = nombre;
+            this.permisos = permisos;
         }
     }
 

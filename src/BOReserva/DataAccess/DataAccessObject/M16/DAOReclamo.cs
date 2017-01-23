@@ -233,7 +233,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                 throw new ReservaExceptionM16(ex.Message, ex);
             }
         }
-           
+
         /// <summary>
         /// Método para eliminar reclamo 
         /// </summary>

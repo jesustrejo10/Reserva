@@ -110,11 +110,9 @@ namespace BOReserva.Controllers
           String[] formateadorFecha = model._fechaReclamo.Split('/');
           model._fechaReclamo = formateadorFecha[2] + "-" + formateadorFecha[1] + "-" + formateadorFecha[0];
           Entidad reclamo = FabricaEntidad.InstanciarReclamo(model);
-
           Command<String> comandoMod = FabricaComando.crearM16ModificarReclamo(reclamo, model._idReclamo);
           String resultado = comandoMod.ejecutar();
           return (Json("Se modificó el reclamo exitosamente"));
-          
 
       }
         /// <summary>
@@ -154,6 +152,6 @@ namespace BOReserva.Controllers
           return (Json("Estado modificado"));
       }
 
-    }
+      }
 	
 }
