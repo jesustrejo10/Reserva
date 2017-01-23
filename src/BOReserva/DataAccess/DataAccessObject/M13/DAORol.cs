@@ -420,7 +420,7 @@ namespace BOReserva.DataAccess.DataAccessObject
         ///Metodo para consultar un rol especifico
         ///</summary>
         ///<returns>Entidad</returns>
-        Entidad IDAO.Consultar(int id)
+        public new Entidad Consultar(int id)
         {
             SqlConnection conexion = Connection.getInstance(_connexionString);
             Rol rol = new Rol();
@@ -482,21 +482,25 @@ namespace BOReserva.DataAccess.DataAccessObject
         ///Metodo para modificar el nombre de un rol existente
         ///</summary>
         ///<returns>Entidad</returns>
-        Entidad IDAO.Modificar(Entidad e)
+        public new Entidad Modificar(Entidad e)
         {
             Rol rol = (Rol)e;
             SqlConnection conexion = Connection.getInstance(_connexionString);
             try
             {
                 conexion.Open();
-                String sql = "update Rol set rol_nombre = "+ "'"+ rol._nombreRol +"'" + "where rol_id = " + rol._idRol;
-                SqlCommand cmd = new SqlCommand(sql, conexion);
-                cmd.ExecuteNonQuery();
-                cmd.Dispose();
-                conexion.Close();
-                rol._nombreRol = "1";
-                Entidad resultado = rol;
-                return resultado;
+                using (SqlCommand cmd = new SqlCommand(M13_DAOResources.ModificarRol, conexion))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@id", rol._idRol);
+                    cmd.Parameters.AddWithValue("@nombre", rol._nombreRol);
+                    cmd.ExecuteNonQuery();
+                    cmd.Dispose();
+                    conexion.Close();
+                    rol._nombreRol = "1";
+                    Entidad resultado = rol;
+                    return resultado;
+                }
             }
             catch (ArgumentNullException ex)
             {

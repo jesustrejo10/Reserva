@@ -13,6 +13,9 @@ using System.Web;
 
 namespace BOReserva.Models.gestion_seguridad_ingreso
 {
+    /// <summary>
+    /// Modelo base para las operaciones de gestión de seguridad
+    /// </summary>
     public class Cgestion_seguridad_ingreso
     {
         private int _idUsuario;
@@ -24,7 +27,19 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
         private String _usuarioEstatus;
         private String _fechaCreacion;
 
+        /// <summary>
+        /// Constructor por defecto
+        /// </summary>
         public Cgestion_seguridad_ingreso() { }
+
+        /// <summary>
+        /// Constructor parcial (Sin considerar ID numéricos)
+        /// </summary>
+        /// <param name="correo">Correo del usuario</param>
+        /// <param name="clave">Clave del usuario</param>
+        /// <param name="nombre">Nombre del usuario</param>
+        /// <param name="apellido">Apellido del usuario</param>
+        /// <param name="status">Estatus de inicio de sesión</param>
         public Cgestion_seguridad_ingreso(String correo, String clave, String nombre, String apellido, String status)
         {
             this._correoCampoTexto = correo;
@@ -34,8 +49,18 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
             this._usuarioEstatus = status;
 
         }
-
-        public Cgestion_seguridad_ingreso(String correo, String clave, String nombre, String apellido, String status, int idUsuario, int rolUsuario)
+        /// <summary>
+        /// Constructor completo
+        /// </summary>
+        /// <param name="correo">Correo del usuario</param>
+        /// <param name="clave">Clave del usuario</param>
+        /// <param name="nombre">Nombre del usuario</param>
+        /// <param name="apellido">Apellido del usuario</param>
+        /// <param name="status">Estatus de inicio de sesión</param>
+        /// <param name="idUsuario">ID numérico del usuario</param>
+        /// <param name="rolUsuario">ID numérico del rol del usuario</param>
+        /// <param name="fechaCreacion">Fecha de creación del usuario en formato cadena de carácteres</param>
+        public Cgestion_seguridad_ingreso(String correo, String clave, String nombre, String apellido, String status, int idUsuario, int rolUsuario, String fechaCreacion)
         {
             this._correoCampoTexto = correo;
             this._claveCampoTexto = clave;
@@ -44,6 +69,7 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
             this._usuarioEstatus = status;
             this._idUsuario = idUsuario;
             this._rolUsuario = rolUsuario;
+            this._fechaCreacion = fechaCreacion;
         }
 
         #region verificarUsuario
@@ -56,9 +82,7 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
         /// <returns>Retorna true or false segun verificacion de credenciales</returns>
         public Cgestion_seguridad_ingreso verificarUsuario(String _correoCampoTexto, String _claveCampoTexto)
         {
-            //DAOLogin bd = (DAOLogin)FabricaDAO.instanciarDaoLogin();
             String clave = Encriptar.CrearHash(_claveCampoTexto);//metodo implementado por MOD 12 USUARIO
-
             var usuarioAConsultar = FabricaEntidad.crearUsuario(_correoCampoTexto);
 
             Command<Entidad> comando = FabricaComando.M01ConsultarUsuario(usuarioAConsultar);
@@ -66,11 +90,11 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
 
             Boolean Usuario = verificacion.correo.Equals(_correoCampoTexto.ToLower());
             Boolean Contraseña = verificacion.contrasena.Equals(clave);
-            System.Diagnostics.Debug.WriteLine("Correo " + Usuario + " contrasena " + Contraseña);
+            System.Diagnostics.Debug.WriteLine("Validación usuario: " + Usuario + " Validación Contraseña: " + Contraseña);
 
             if (Usuario && Contraseña)
             {
-                return new Cgestion_seguridad_ingreso()
+                return new Cgestion_seguridad_ingreso() //Usar el constructor nuevo
                 {
                     idUsuario = verificacion.id,
                     rolUsuario = verificacion.rol,
@@ -88,10 +112,7 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
                 {
                     FabricaComando.M01IncrementarIntentos(usuarioAConsultar).ejecutar();
                 }
-
-
                 throw new Cvalidar_usuario_Exception("Usuario o contraseña incorrecto");
-
             }
         }
         #endregion
@@ -104,8 +125,6 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
 
         public Boolean EstaActivo()
         {
-            // M01SQL bd = new M01SQL();
-            //  String estatus = bd.UsuarioEstatus(this._correoCampoTexto);
             if (this._usuarioEstatus.ToLower().Equals("activo"))
             {
                 return true;
@@ -124,14 +143,16 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
         /// <returns>Retorna true bloqueado false si no esta bloqueado</returns>
         public Boolean BloquearUsuario()
         {
-            DAOLogin bd = new DAOLogin();
-            if (bd.BloquearUsuario(this._correoCampoTexto))
+            var usuarioAConsultar = FabricaEntidad.crearUsuario(_correoCampoTexto);
+            Command<Boolean> comando = FabricaComando.M01BloquearUsuario(usuarioAConsultar);
+            var verificacion = (Boolean)comando.ejecutar(); //Asigna valor de retorno luego de consulta a BD
+            if (verificacion)
             {
                 return true;
             }
             else
             {
-                return false; // Creo que aqui deberia lanzar una excepcion
+                return false;
             }
         }
         #endregion
@@ -143,8 +164,10 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
         /// <returns>Retorna true si el ingreso de contraseña fue correcto false caso contrario</returns>
         public Boolean ResetearIntentos()
         {
-            DAOLogin bd = new DAOLogin();
-            if (bd.ResetearIntentos(this._correoCampoTexto))
+            var usuarioAConsultar = FabricaEntidad.crearUsuario(_correoCampoTexto);
+            Command<Boolean> comando = FabricaComando.M01ResetearIntentos(usuarioAConsultar);
+            var verificacion = (Boolean)comando.ejecutar(); //Asigna valor de retorno luego de consulta a BD
+            if (verificacion)
             {
                 return true;
             }
@@ -163,8 +186,9 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
         /// <returns>Retorna true fue bloqueado false caso contrario</returns>
         public Boolean VerificarIntentos()
         {
-            DAOLogin bd = new DAOLogin();
-            int intentos = bd.NumeroIntentos(this._correoCampoTexto);
+            var usuarioAConsultar = FabricaEntidad.crearUsuario(_correoCampoTexto);
+            Command<int> comando = FabricaComando.M01NumeroIntentos(usuarioAConsultar);
+            var intentos = (int)comando.ejecutar(); //Asigna valor de retorno luego de consulta a BD
             if (intentos < 3)
                 return true;
             else

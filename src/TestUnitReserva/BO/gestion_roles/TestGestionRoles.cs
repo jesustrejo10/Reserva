@@ -59,7 +59,7 @@ namespace TestUnitReserva.BO.gestion_roles
             //Caso de exito
             int resultadoAgregar = daoRol.Agregar(mockRol);
             Assert.AreEqual(resultadoAgregar, 1);
-            //Caso de fallo
+            ////Caso de fallo
             //int resultadoAgregarIncorrecto = daoRol.Agregar(null);
             //Assert.AreEqual(resultadoAgregarIncorrecto, 0);
         }
@@ -70,7 +70,7 @@ namespace TestUnitReserva.BO.gestion_roles
             //Caso de exito
             int resultadoAgregar = daoRol.AgregarRolPermiso(mockRolPermiso);
             Assert.AreEqual(resultadoAgregar, 1);
-            //Caso de fallo
+            ////Caso de fallo
             //int resultadoAgregarIncorrecto = daoRol.AgregarRolPermiso(null);
             //Assert.AreEqual(resultadoAgregarIncorrecto, 0);
         }
@@ -90,7 +90,7 @@ namespace TestUnitReserva.BO.gestion_roles
             //Caso de exito
             Assert.AreNotEqual(daoRol.ConsultarPermisos(1).Count, 0);
             //Caso de fallo
-            //Assert.AreNotEqual(daoRol.ConsultarPermisos(0), null);
+            Assert.AreNotEqual(daoRol.ConsultarPermisos(0), null);
         }
 
         [Test]
@@ -114,6 +114,27 @@ namespace TestUnitReserva.BO.gestion_roles
         {
             //Caso de exito
             Assert.AreEqual(daoRol.MBuscarid_Permiso("Gestion de aviones"), "6");
+        }
+
+        [Test]
+        public void M13_DAOConsultarRol()
+        {
+            //Caso de exito
+            Entidad rol = daoRol.Consultar(1);
+            Rol _rol = new Rol();
+            _rol = (Rol)rol;
+            Assert.AreEqual(_rol._nombreRol, "Administrador");
+            //Caso de exito
+            Assert.AreNotEqual(_rol, null);
+        }
+
+        [Test]
+        public void M13_DAOModificarRol()
+        {
+            Rol _rol = new Rol();
+            _rol._nombreRol = "SuperAdminModificado";
+            _rol._idRol = 288;
+            Assert.AreNotEqual(daoRol.Modificar(_rol), null);
         }
     }
 }
