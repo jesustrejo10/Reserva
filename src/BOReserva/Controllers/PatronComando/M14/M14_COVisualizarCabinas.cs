@@ -9,6 +9,11 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando.M14
 {
+    /// <summary>
+    /// Comando destinado a Realizar las respectivas operaciones necesarias
+    /// para Visualizar las Cabinas a la BD
+    /// </summary>
+
     public class M14_COVisualizarCabinas : Command<Dictionary<int, Entidad>>
     {
 
@@ -32,8 +37,8 @@ namespace BOReserva.Controllers.PatronComando.M14
         public override Dictionary<int, Entidad> ejecutar()
         {
             IDAOCabina daoCabina = (IDAOCabina) FabricaDAO.instanciarDaoCabina();
-            Dictionary<int, Entidad> mapCabinas = daoCabina.ConsultarTodos(valor);
-            return mapCabinas;
+            Dictionary<int, Entidad> mapCruceros = daoCabina.ConsultarTodos(valor);
+            return mapCruceros;
         }
 
     }

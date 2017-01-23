@@ -2,6 +2,7 @@
     console.log("hola!");
     e.preventDefault();
     var form = $("#formGuardarPlato");
+    validateForm1()
     $.ajax({
         url: "gestion_comida_vuelo/guardarPlato",
         data: form.serialize(),
@@ -72,3 +73,14 @@ $("#guardarPlatoVuelo").click(function (e) {
             }
     });
 });
+
+function validateForm1() {
+    if ((document.getElementById("codigoVuelo").value) == ""
+        || document.getElementById("ciudadO").value
+        || document.getElementById("ciudadD").value
+        || document.getElementById("fechaDespegue").value
+        || document.getElementById("horaDespegue").value) {
+        alert("Campos Obligatorios Vacios");
+        return false;
+    }
+}

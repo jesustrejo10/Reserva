@@ -39,18 +39,19 @@
                                     <td>@i.StatusVuelo</td>
                                     <td>@i.getAvion._modelo</td>
                                     <td>
-                                        <a href="#"> <i class="fa fa-eye mostrar"></i></a>
-                                        <a href="#"><i class="fa fa-gear modificar"></i></a>
+                                        <a href="#"> <i class="fa fa-eye mostrar wait"></i></a>
+                                        <a href="#"><i class="fa fa-gear modificar wait"></i></a>
                                         @{
                                             if (i.StatusVuelo == "activo")
                                             {
-                                                <a href="#" title="Activar/Desactivar vuelo"><i class="fa fa-toggle-on desactivar"></i></a>
+                                                <a href="#" title="Activar/Desactivar vuelo"><i class="fa fa-toggle-on desactivar wait"></i></a>
                                             }
                                             if (i.StatusVuelo == "inactivo")
                                             {
-                                                <a href="#" title="Activar/Desactivar vuelo"><i class="fa fa-toggle-off activar"></i></a>
+                                                <a href="#" title="Activar/Desactivar vuelo"><i class="fa fa-toggle-off activar wait"></i></a>
                                             }
                                         }
+                                        <a href="#" title="Eliminar" id="Eliminar"><i class="fa fa-times eliminar wait"></i></a>
                                     </td>
                                 </tr>
                             }

@@ -6,6 +6,7 @@ using System.Web;
 using BOReserva.DataAccess.DAO;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.DataAccessObject;
+using BOReserva.Excepciones;
 
 namespace BOReserva.Controllers.PatronComando.M04
 {
@@ -47,7 +48,8 @@ namespace BOReserva.Controllers.PatronComando.M04
             }
             catch (Exception ex)
             {
-                throw new NotImplementedException();
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw ex;
             }
             
         }

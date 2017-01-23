@@ -74,9 +74,11 @@
     <Compile Include="BO\gestion_seguridad_ingreso\TestLogin.cs" />
     <Compile Include="BO\gestion_usuarios\UnitTest1.cs" />
     <Compile Include="BO\gestion_usuario\TestUsuario.cs" />
+    <Compile Include="BO\gestión_OfertasYPaquetes\TestDaoOfertas.cs" />
     <Compile Include="BO\gestión_OfertasYPaquetes\TestOfertasYPaquetes.cs" />
     <Compile Include="BO\TestGestionAutomovil\TestGestionAutomovil.cs" />
     <Compile Include="FO\Diario\TestLugarDiario.cs" />
+    <Compile Include="FO\gestion_reserva_automovil\TestReservaAutomovil.cs" />
     <Compile Include="FO\Itinerario\TestPlanificacionVacacion.cs" />
     <Compile Include="FO\Reclamos\TestGestionReclamosFO.cs" />
     <Compile Include="FO\Reserva restaurante\TestInsertReserva.cs">

@@ -16,9 +16,9 @@ namespace TestUnitReserva.BO.gestion_seguridad_ingreso
     [TestFixture]
     class TestLogin
     {
-        //M01SQL bd;
-        //Cgestion_seguridad_ingreso modelo;
-        
+      /*  M01SQL bd;
+        Cgestion_seguridad_ingreso modelo;
+
 
         //[SetUp]
         //public void TestSetUp()
@@ -47,19 +47,19 @@ namespace TestUnitReserva.BO.gestion_seguridad_ingreso
         //    Assert.IsInstanceOf(typeof(Cgestion_seguridad_ingreso), usuario);
         //    Assert.IsNotNull(usuario.correoCampoTexto);
         //    Assert.That(usuario.correoCampoTexto, Is.EqualTo("drbr@reserva.com"));
-            
+
         //}
 
         //[Test]
         //public void PruebaResetearIntentos()
-        //{    
-        //    Assert.IsTrue(bd.ResetearIntentos("drbr@reserva.com"));    
+        //{
+        //    Assert.IsTrue(bd.ResetearIntentos("drbr@reserva.com"));
         //}
 
-        //[Test]       
+        //[Test]
         //public void PruebaIncrementarIntentos()
         //{
-        //    Assert.IsTrue(bd.IncrementarIntentos("drbr@reserva.com"));            
+        //    Assert.IsTrue(bd.IncrementarIntentos("drbr@reserva.com"));
         //}
 
         //[Test]
@@ -82,10 +82,10 @@ namespace TestUnitReserva.BO.gestion_seguridad_ingreso
         //    {
         //        Assert.IsTrue(insertar);
         //    }
-      
+
         //}
 
-        
+
 
         //[Test]
         //public void PruebaNumeroIntentos()
@@ -100,30 +100,30 @@ namespace TestUnitReserva.BO.gestion_seguridad_ingreso
         //[Test]
         //public void PruebaTipoModelo()
         //{
-            
+
         //    Assert.IsInstanceOf<Cgestion_seguridad_ingreso>(modelo);
         //    Assert.IsNotNull(modelo);
-            
+
         //}
 
         //[Test]
         //public void PruebaActivo()
         //{
-            
+
         //    Assert.IsTrue(modelo.EstaActivo());
         //    Assert.IsNotNull(modelo);
         //}
-        
+
 
         ////Fin de pruebas de modelo
 
-        //[TearDown]
-        //public void TestTearDown()
-        //{
-        //    bd = null;
-        //    modelo = null;
-        //}
-        
+        [TearDown]
+        public void TestTearDown()
+        {
+            bd = null;
+            modelo = null;
+        }
+       * */
+
     }
-*/
-}
+

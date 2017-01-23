@@ -170,7 +170,7 @@
     <comment>Atributo en la tabla automovil</comment>
   </data>
   <data name="autTipo" xml:space="preserve">
-    <value>aut_tipo</value>
+    <value>aut_tipovehiculo</value>
     <comment>Atributo en la tabla automovil</comment>
   </data>
   <data name="autTransmision" xml:space="preserve">
@@ -324,5 +324,9 @@
   <data name="MensajeInicioMetodoLogger" xml:space="preserve">
     <value>Entrada en el Método</value>
     <comment>Ocurre a la entrada del metodo</comment>
+  </data>
+  <data name="procedimientoConsultarACiudad" xml:space="preserve">
+    <value>M19_ConsultarReservaAPorCiudad</value>
+    <comment>procedimiento para consultar autos</comment>
   </data>
 </root>
