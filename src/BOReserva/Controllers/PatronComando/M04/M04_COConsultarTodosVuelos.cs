@@ -6,6 +6,7 @@ using BOReserva.DataAccess.DAO;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.DataAccessObject;
 using System.Data.SqlClient;
+using BOReserva.Excepciones;
 
 namespace BOReserva.Controllers.PatronComando.M04
 {
@@ -28,10 +29,12 @@ namespace BOReserva.Controllers.PatronComando.M04
             }
             catch (SqlException ex)
             {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw ex;
             }
             catch (Exception ex)
             {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw ex;
             }
             
