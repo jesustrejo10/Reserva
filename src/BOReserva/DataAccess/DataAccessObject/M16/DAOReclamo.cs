@@ -66,6 +66,10 @@ namespace BOReserva.DataAccess.DataAccessObject
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw new ReservaExceptionM16(ex.Message, ex);
             }
+            catch (LogException ex)
+            {
+                throw new ReservaExceptionM16(ex.Message, ex);
+            }
             catch (Exception ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
