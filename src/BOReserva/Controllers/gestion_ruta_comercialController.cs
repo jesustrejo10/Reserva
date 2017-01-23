@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BOReserva.Models.gestion_ruta_comercial;
-using BOReserva.Servicio.Servicio_Rutas;
 using System.Net;
 using System.Data.SqlClient;
 using BOReserva.DataAccess.Domain;

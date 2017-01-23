@@ -2,7 +2,7 @@
     console.log("hola!");
     e.preventDefault();
     var form = $("#formGuardarPlato");
-    validateForm1()
+    //validateForm1()
     $.ajax({
         url: "gestion_comida_vuelo/guardarPlato",
         data: form.serialize(),
