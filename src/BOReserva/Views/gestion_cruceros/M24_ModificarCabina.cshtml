@@ -71,7 +71,6 @@
                     data: form.serialize(),
                     type: 'POST',
                     success: function (data) {
-                        if (data === "1") {
                             alert("Se modifico la cabina exitosamente, sera redirigido al listado de cabinas");
                             //$('#formmodifyVehicle')[0].reset();
                             var url1 = '/gestion_cruceros/M24_ListarCabinas';
@@ -92,9 +91,6 @@
                                         alert(errorThrown);
                                     }
                                 });
-                        } else {
-                            alert(data);
-                        }
                     }
                 });
             } else {
