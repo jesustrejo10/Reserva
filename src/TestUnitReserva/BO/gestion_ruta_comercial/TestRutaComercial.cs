@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using System.Diagnostics;
 using System.Data.SqlClient;
-using BOReserva.Models.gestion_hoteles;
+using BOReserva.Models.gestion_ruta_comercial;
 using BOReserva.DataAccess.DAO;
 using BOReserva.DataAccess.Domain;
 using BOReserva.Controllers.PatronComando;
@@ -19,8 +19,6 @@ namespace TestUnitReserva.BO.gestion_ruta_comercial
     [TestFixture]
     class TestRutaComercial
     {
-        private Pais mockPais;
-        private Ciudad mockCiudad;
         private Ruta mockRuta;
         DAORuta daoRuta;
 
@@ -43,8 +41,6 @@ namespace TestUnitReserva.BO.gestion_ruta_comercial
         [TearDown]
         public void After()
         {
-            mockPais = null;
-            mockCiudad = null;
             mockRuta = null;
             daoRuta = null;
         }
@@ -52,10 +48,10 @@ namespace TestUnitReserva.BO.gestion_ruta_comercial
         [Test]
         public void TestConsultarDestino()
         {
-            Dictionary<int, Entidad> listaLugares = daoRuta.consultarDestinos();
-            Assert.NotNull(listaLugares);
-            Ruta e = (Ruta)listaLugares[99];
-            Assert.AreEqual(e._destinoRuta, "rutaDestinoDePruebasUnitarias");
+            Dictionary<int, Entidad> listaDestinos = daoRuta.consultarDestinos();
+            Assert.NotNull(listaDestinos);
+            Ruta e = (Ruta)listaDestinos[99];
+            Assert.AreEqual(e._destinoRuta, "Caracas - Venezuela");
 
         }
         
@@ -74,6 +70,16 @@ namespace TestUnitReserva.BO.gestion_ruta_comercial
 
         }
 
+        public void M03_DaoHotelInsertarHotel()
+        {
+            //Probando caso de exito de la prueba
+            int resultadoAgregar = daoRuta.Agregar(mockRuta);
+            Assert.AreEqual(resultadoAgregar, 1);
+            //Probando caso de fallo
+            int resultadoAgregarIncorrecto = daoRuta.Agregar(null);
+            Assert.AreEqual(resultadoAgregarIncorrecto, 0);
+        }
+
         [Test]
         public void TestdeshabilitarRuta()
         {
@@ -82,53 +88,37 @@ namespace TestUnitReserva.BO.gestion_ruta_comercial
 
         }
 
-        [Test]
-        public void TestModificarRuta()
-        {
 
-           /* CAgregarRuta prueba = new CAgregarRuta();
-            prueba._idRuta = 5;
-            prueba._estadoRuta = "Activa";
-            prueba._distanciaRuta = 765;
-            Assert.IsTrue(sql.MModificarRuta(prueba));
-        
-            */}
-
-        [Test]
-        public void TestListar()
-        {
-            List<String> prueba = new List<String>();
-            prueba = sql.listarLugares();
-            Assert.IsNotNull(prueba);
-        }
-
-        [Test]
-        public void TestConsultarDestinos()
-        {
-            List<String> prueba = new List<String>();
-            prueba = sql.consultarDestinos("Caracas - Venezuela");
-            Assert.IsNotNull(prueba);
-        }
+      
 
         [Test]
         public void TestMostrarRuta()
         {
-            CAgregarRuta prueba = new CAgregarRuta();
-            prueba = sql.MMostrarRutaBD(5);
-            Assert.AreEqual(765,prueba._distanciaRuta);
+            
+            Command<Entidad> comando = FabricaComando.crearM03_MostrarRuta(5);
+            Ruta prueba = (Ruta)comando.ejecutar();
+            Assert.AreEqual(765,prueba._distancia);
             Assert.AreEqual("Valencia - Venezuela", prueba._origenRuta);
             Assert.AreEqual("Valencia - España", prueba._destinoRuta);
-            Assert.AreEqual("Activa", prueba._estadoRuta);
-            Assert.AreEqual("Aerea", prueba._tipoRuta);
+            Assert.AreEqual("Activa", prueba._status);
+            Assert.AreEqual("Aerea", prueba._tipo);
         }
 
         [Test]
         public void TestInhabilitarRuta()
         {
             int prueba = 44;
-            Assert.IsTrue(sql.deshabilitarRuta(prueba));
+            Assert.IsTrue(daoRuta.deshabilitarRuta(prueba));
         }
 
-        
+        [Test]
+        public void TestM03_MListarRutasBD()
+        {
+            List<CRuta> listarutas = new List<CRuta>();
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM03_MListarRutasBD();
+            Dictionary<int, Entidad> listaRutas = comando.ejecutar();
+            Assert.IsNotNull(listarutas);
+        }
+       
     }
 }
