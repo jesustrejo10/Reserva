@@ -12,6 +12,7 @@ using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.DataAccessObject.M14;
 using NUnit.Framework;
 using BOReserva.Controllers.PatronComando;
+using BOReserva.Controllers.PatronComando.M14;
 
 namespace TestUnitReserva.BO.gestion_cruceros
 {

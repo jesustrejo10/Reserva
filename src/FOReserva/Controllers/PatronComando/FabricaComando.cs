@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using BOReserva.Controllers.PatronComando;
+using FOReserva.Controllers.PatronComando.M22Cruceros;
 
 namespace FOReserva.Controllers.PatronComando
 {
@@ -224,6 +225,15 @@ namespace FOReserva.Controllers.PatronComando
         {
             return new M22_COModificarReserva(id,cant_dias);
         }
+        #endregion
+
+        #region M22 ReservaCruceros
+
+        public static Command<String> crearM22AgregarReserva(Entidad e)
+        {
+            return new M22_COAgregarReservaCrucero((ReservaCrucero)e);
+        }
+
         #endregion
     }
 }
