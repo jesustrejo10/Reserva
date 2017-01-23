@@ -1,0 +1,155 @@
+<div class="row">
+    <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
+
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">
+                    Vuelos disponibles
+                </h3>
+
+
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="example" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Origen</th>
+                            <th>Destino</th>
+                            <th>Fecha salida</th>
+                            <th>Fecha llegada</th>
+                            <th>Monto</th>
+                            <th>Tipo</th>
+                            <th style="display:none;">Id origen</th>
+                            <th style="display:none;">Id destino</th>
+                            <th style="display:none;">Fecha vuelta</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @try
+                        {
+                            foreach (var item in Model)
+                            {
+
+
+                                <tr id="@item._id">
+                                    <td id="origen">@item._ruta._nomOrigen</td>
+                                    <td id="destino">@item._ruta._nomDestino</td>
+                                    <td id="fechapartida">@item._fechaPartida</td>
+                                    <td id="fechallegada">@item._fechaLlegada</td>
+                                    <td id="monto">@item._monto</td>
+                                    <td id="tipo">@item._tipo</td>
+                                    <td id="idorigen" style="display:none;">@item._ruta._origen</td>
+                                    <td id="iddestino" style="display:none;">@item._ruta._destino</td>
+                                    <td id="fechavuelta" style="display:none;">@item._fechaVuelta</td>
+                                    <td>
+                                        <a href="#" title="Crear boleto"> <i class="fa fa-eye consultar"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        catch
+                        {
+
+
+                        }
+                </table>
+                <div class="row">
+                    <div id="loading" class="col-lg-12" style=" display: none; text-align:center; margin-top: 15px;"><span class="fa fa-spinner refresh-animate "></span></div>
+                </div>
+
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<script src="~/Content/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+<script language="javascript" type="text/javascript">
+    table = $('#example').DataTable();
+    $(document).ready(function () {
+
+        $(".consultar").click(function (e) {
+            e.preventDefault();
+            $("#loading").show();
+            alert("Creando boleto sin reserva");
+
+            var id_vuelo = $(this).parent().parent().parent().attr("id");
+            //alert("ID ---- "+ identificador);
+
+            var nombre_origen = "";
+            var nombre_destino = "";
+            var fecha_salida = "";
+            var fecha_llegada = "";
+            var id_origen = "";
+            var id_destino = "";
+            var monto = "";
+            var tipo = "";
+            var fecha_vuelta = "";
+
+            // Obtenemos todos los valores contenidos en los <td> de la fila
+            // seleccionada
+            $(this).parents("tr").find("#origen").each(function () {
+                nombre_origen += $(this).html() + "\n";
+            });
+            $(this).parents("tr").find("#destino").each(function () {
+                nombre_destino += $(this).html() + "\n";
+            });
+            $(this).parents("tr").find("#fechapartida").each(function () {
+                fecha_salida += $(this).html() + "\n";
+            });
+            $(this).parents("tr").find("#fechallegada").each(function () {
+                fecha_llegada += $(this).html() + "\n";
+            });
+            $(this).parents("tr").find("#idorigen").each(function () {
+                id_origen += $(this).html() + "\n";
+            });
+            $(this).parents("tr").find("#iddestino").each(function () {
+                id_destino += $(this).html() + "\n";
+            });
+            $(this).parents("tr").find("#monto").each(function () {
+                monto += $(this).html() + "\n";
+            });
+            $(this).parents("tr").find("#tipo").each(function () {
+                tipo += $(this).html() + "\n";
+            });
+            $(this).parents("tr").find("#fechavuelta").each(function () {
+                fecha_vuelta += $(this).html() + "\n";
+            });
+
+
+
+
+
+            // alert(nombre_origen + " " + nombre_destino + " " + fecha_salida + " " + fecha_llegada+" "+id_origen+" "+id_destino+" "+tipo);
+
+            var url = '/gestion_boletos/M05_DetalleVuelo';
+            var method = 'GET';
+            var data = { origen: nombre_origen, destino: nombre_destino, fechasalida: fecha_salida, fechallegada: fecha_llegada, idorigen: id_origen, iddestino: id_destino, monto: monto, tipo: tipo, idvuelo: id_vuelo };
+
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+        });
+
+    });
+
+</script>

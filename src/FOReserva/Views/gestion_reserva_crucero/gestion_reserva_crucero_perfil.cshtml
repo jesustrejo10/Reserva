@@ -1,0 +1,314 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+@model List<FOReserva.Models.Cruceros.CReserva_Cruceros>
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+    <!-- FLIP BOX -->
+    <div class="box-light box-icon box-icon-center box-icon-round box-icon-large text-center nomargin">
+        <div class="front">
+            <div class="box1 noradius">
+                <div class="box-icon-title">
+                    <i class="fa fa-ship"></i>
+                    <h2>Mis Reservas</h2>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- /FLIP BOX -->
+    @{
+        if (Model == null)
+        {
+            <center>
+                <h1><i class="fa fa-exclamation-circle orange" aria-hidden="true"></i> Lo sentimos, ha habido un problema con la conexión!</h1>
+                <h2>Revise su conexión e intente de nuevo</h2>
+
+            </center>
+
+        }
+        else
+            if (Model.Count() == 0)
+            {
+                <div class="row">
+                    <center>
+                        <h4><i class="fa fa-exclamation-circle orange" aria-hidden="true"></i> No posee reservas</h4>
+
+                    </center>
+
+                </div>
+            }
+            else
+            {
+
+                <div class="box-light">
+                    <!-- .box-light OR .box-dark -->
+
+                    <div class="box-inner">
+
+                        <h4>Mis Reservas de Cruceros</h4>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover" id="sample_1">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha de Reserva</th>
+                                        <th>Cantidad Pasajeros</th>
+                                        <th>Crucero</th>
+                                        <th>Origen</th>
+                                        <th>Destino</th>
+                                        <th>Fecha Inicio</th>
+                                        <th>Fecha Fin</th>
+                                        <th>Status</th>
+                                        <th>Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                    <tr id="@item._id_reserva" value="@item._id_reserva">
+                                        <td class="text-center">@item._fecha</td>
+                                        <td class="pasajeros_table text-center" id="pasajeros_table">@item._cantidadPasajeros</td>
+                                        <td class="crucero_table text-center" id="crucero_table">@item._crucero</td>
+                                        <td class="origen_table text-center" id="origen_table">@item._origen</td>
+                                        <td class="destino_table text-center" id="destino_table">@item._destino</td>
+                                        <td class="inicio_table text-center" id="inicio_table">@item._fecha_inicio</td>
+                                        <td class="fin_table text-center" id="fin_table">@item._fecha_fin</td>
+                                        <td class="text-center">
+                                            @if (@item._status == "activo")
+                                                {
+                                            <span class="label label-success ">Activa</span>
+                                                }
+                                                else
+                                                {
+                                            <span class="label label-danger ">Inactiva</span>
+                                                }
+                                        </td>
+                                        <td>
+                                            @if (@item._status == "activo")
+                                                {
+                                            <a href="#ModalModificar" data-id="@item._id_reserva,@item._crucero,@item._cantidadPasajeros,@item._origen,@item._destino,@item._fecha_inicio,@item._fecha_fin,@item._status"
+                                               data-toggle="modal" class="open-AddBookDialog btn btn-info btn-xs"><i class="fa fa-edit white"></i>Modificar</a>
+                                            <a id="eliminar" href="#ModalEliminar" name="eliminar" data-id="@item._id_reserva,@item._crucero,@item._cantidadPasajeros,@item._origen,@item._destino,@item._fecha_inicio,@item._fecha_fin,@item._status" 
+                                               data-toggle="modal" class="open-AddBookDialog btn btn-danger btn-xs"><i class="fa fa-times white"></i> Eliminar </a>
+                                                }
+                                            @if (@item._status == "inactivo")
+                                                {
+                                            <a id="eliminar" href="#ModalEliminar" name="eliminar" data-id="@item._id_reserva" data-toggle="modal" class="open-AddBookDialog btn btn-danger btn-xs"><i class="fa fa-times white"></i> Eliminar </a>
+                                                }
+                                        </td>
+
+                                    </tr>}
+
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            }
+    }
+
+    <div id="ModalModificar" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modificar Reserva</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- NOMBRE  Y  VALIDACIONES-->
+                    <div class="form-group">
+                        <label>Crucero </label>
+                        <input type="text" name="crucero" id="crucero" value="" class="form-control" data-format="" data-lang="en" data-rtl="false" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Origen</label>
+                        <input type="text" name="origen" id="origen" value="" class="form-control" data-format="" data-lang="en" data-rtl="false" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Destino </label>
+                        <input type="text" name="destino" id="destino" value="" class="form-control" data-format="" data-lang="en" data-rtl="false" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha inicio </label>
+                        <input type="text" name="inicio" id="inicio" value="" class="form-control" data-format="" data-lang="en" data-rtl="false" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha fin </label>
+                        <input type="text" name="fin" id="fin" value="" class="form-control" data-format="" data-lang="en" data-rtl="false" readonly>
+                    </div>
+
+                    <!-- CANTIDAD DE PERSONAS  Y  VALIDACIONES-->
+                    <div class="form-group">
+                        <label>Numero de Pasajeros </label>
+                        <input type="number" name="pasajeros_num" id="pasajeros_num" value="" min="1" class="form-control" data-format="" data-lang="en" data-rtl="false" placeholder="Ingrese el numero de pasajeros">
+                    </div>
+                    <div id="pasajero_null" style="display: none;" class="has-error error">
+                        <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe ingresar la cantidad de pasajeros</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Estatus</label>
+                        <select name="status" id="status" class="form-control pointer">
+                            <option value="activo">Activa</option>
+                            <option value="inactivo">Inactiva</option>
+
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="aceptar_modificar" value="0" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div id="ModalEliminar" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Eliminar Reserva</h4>
+                </div>
+                <div class="modal-body">
+                    <p>¿Está seguro que desea eliminar esta reserva?</p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="aceptar_eliminar" value="0" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="ModalErrorEliminar" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header bg-danger modal-header-danger">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Eliminar Reserva</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Error al eliminar la reserva intente mas tarde</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="" value="0" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+
+        $(document).on("click", ".open-AddBookDialog", function () {
+            var myBookId = $(this).data('id');
+            $(".modal-footer #aceptar_eliminar").val(myBookId);
+            var cruce = $(this).data('crucero');
+            $(".error").hide();
+            console.log(myBookId);
+            var valores = myBookId.split(",");
+
+            $('.modal-footer #aceptar_modificar').val(valores[0]);
+            $('#crucero').val(valores[1]);
+            $('#origen').val(valores[3]);
+            $('#destino').val(valores[4]);
+            $('#inicio').val(valores[5]);
+            $('#fin').val(valores[6]);
+            $('#pasajeros_num').val(valores[2]);
+            $('#status').val(valores[7]);
+
+        });
+        $(document).on('click', '#aceptar_eliminar', function () {
+            var id_fila = $(this).val();
+            console.log(id_fila);
+            $.ajax({
+                url: "/gestion_reserva_crucero/eliminarReservaCrucero/",
+                type: 'POST',
+                dataType: "json",
+                data: { id: id_fila }
+
+            }).done(function (data) {
+                $('#' + id_fila).remove();
+            })
+            .fail(function (data) {
+                $('#ModalErrorEliminar').modal('show');
+                console.log("error");
+            })
+            .always(function (data) {
+                console.log("complete");
+            });
+        });
+
+        $("#aceptar_modificar").on("click", function () {
+            //clear errors
+            $(".error").hide();
+            $("#pasajero_null").removeClass("has-error");
+            var v1 = document.getElementById("status");
+            var valor1 = v1.options[v1.selectedIndex].value;
+            //find errors
+            var pasajeros = $("#pasajeros_num").val();
+
+            var win = true;
+            if (pasajeros == "") {
+                $("#pasajeros_num").addClass("has-error");
+                $("#pasajero_null").fadeIn();
+                win = false;
+            }
+
+            if (win) {
+                var id_reserva = $(this).val();
+                var pasajero = $("#pasajeros_num").val();
+                var status = valor1;
+                console.log(status);
+                console.log(pasajero);
+                console.log(id_reserva);
+                $.ajax({
+                    url: "/gestion_reserva_crucero/modificarReservaCrucero/",
+                    type: 'POST',
+                    data: {
+                        id_reserva: id_reserva,
+                        cant_pasajero: pasajero,
+                        estatus: status
+
+                    },
+
+                }).done(function () {
+                    javascript: location.reload();
+                })
+                .fail(function () {
+                    console.log("error");
+                })
+                .always(function () {
+                    console.log("complete");
+                });
+            }
+            else
+                return false;
+        });
+
+
+    </script>
+</body>
+</html>

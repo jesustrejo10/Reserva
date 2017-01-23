@@ -1,0 +1,85 @@
+<div class="row">
+    <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
+
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Lista de Vuelos</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Vuelo</th>
+                            <th>Ciudad Origen</th>
+                            <th>Ciudad Destino</th>
+                            <th>Capacidad Turista/Ejecutiva/VIP</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var item in ViewBag.listaVuelos)
+                            {
+                                <tr id="@item.IdVuelo">
+                                    <td>@item.CodigoVuelo</td>
+                                    <td>@item.getRuta._origenRuta</td>
+                                    <td>@item.getRuta._destinoRuta</td>
+                                    <td>@item.getAvion._capacidadTurista / @item.getAvion._capacidadEjecutiva / @item.getAvion._capacidadVIP</td>
+                                    <td>
+                                        <a href="#" title="Agregar comida"><i class="fa fa-plus agregarvuelo"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+                    <tfoot>
+                        <tr>
+                            <th>Vuelo</th>
+                            <th>Ciudad Origen</th>
+                            <th>Ciudad Destino</th>
+                            <th>Capacidad Turista/Ejecutiva/VIP</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+
+
+
+<!-- DataTables -->
+<script src="../../Content/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+
+
+<script language="javascript" type="text/javascript">
+
+    table = $('#example1').DataTable();
+
+    $(".agregarvuelo").click(function () {
+        console.log("hola");
+        var identificador = $(this).parent().parent().parent().attr("id");
+        jQuery.ajax({
+            type: "GET",
+            url: "/gestion_comida_vuelo/M06_AgregarComidaVuelo",
+            data: { id: identificador}
+        }).done(function (data) {
+            $("#contenido").empty();
+            $("#contenido").append(data);
+        }).fail(function () {
+
+        });
+
+
+    });
+
+</script>
+

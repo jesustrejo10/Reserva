@@ -1,0 +1,87 @@
+<div class="row">
+    <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
+
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header with-border">
+                <h3 class="box-title">Lista de Boletos</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="example" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>N° Boleto</th>
+                            <th>Fecha emisión</th>
+                            <th>Origen</th>
+                            <th>Destino</th>
+                            <th>Selección</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @try
+                        {
+                            foreach (var item in Model)
+                            {
+                                String fecha_emi = @item._fechaBoleto.Day + "/" + @item._fechaBoleto.Month + "/" + @item._fechaBoleto.Year;
+
+                                <tr id="@item._id">
+                                    <td>@item._id</td>
+                                    <td>@fecha_emi</td>
+                                    <td>@item._origen.Name</td>
+                                    <td>@item._destino.Name</td>
+                                    <td>
+                                        <a href="#" title="Seleccionar"><i class="fa fa-check modificar"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        catch
+                        {
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<script src="~/Content/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+<script language="javascript" type="text/javascript">
+    function loader() {
+        $("#loader").fadeIn("slow");
+        $(window).ajaxComplete(function () {
+            // Se oculta el loader animado
+            $("#loader").hide();
+        });
+    }
+    table = $('#example').DataTable();
+    $(document).ready(function () {
+        //e.preventDefault();
+        $(".modificar").click(function () {
+            loader();
+            var identificador = $(this).parent().parent().parent().attr("id");
+            jQuery.ajax({
+                type: "GET",
+                url: "/gestion_check_in/M05_VerDetalleBoleto",
+                data: { id: identificador }
+            }).done(function (data) {
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            }).fail(function () {
+                alert("Ocurrió un error")
+            });
+
+
+        });
+
+
+    });
+</script>

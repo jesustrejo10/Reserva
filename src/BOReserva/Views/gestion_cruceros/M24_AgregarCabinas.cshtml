@@ -1,0 +1,99 @@
+@model BOReserva.Models.gestion_cruceros.CGestion_cabina
+
+@{
+
+    List<SelectListItem> listTipo = new List<SelectListItem>();
+    List<SelectListItem> listEstado = new List<SelectListItem>();
+    IEnumerable<SelectListItem> listCruceros = Model._listaCruceros;
+    
+
+}
+<script src="~/Scripts/Scripts_Cruceros/scripts_cruceros.js"></script>
+@using (Html.BeginForm("guardarCabina", "gestion_cruceros", null, FormMethod.Post, new { @id = "formGuardarCabina", @class = "form-horizontal" }))
+{
+    <div class="box">
+        <div class="box-body">
+            <div class="box-header with-border">
+                <h1 class="box-title"> Agregar Cabina</h1>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"></button>
+                </div>
+            </div>
+            <div class="modal-body col-xs-12" id="bodyCruc" style="margin-left:24% ; height:300px">
+                <section id="primeraParte">
+                    <div class="form-group" style="margin-bottom:20px">
+                        <label>Cruceros:</label>
+                        @Html.DropDownListFor(m => m._cruceroNombre, new SelectList(Model._listaCruceros as System.Collections.IEnumerable, "Value", "Text"), 
+                        "Seleccione una crucero", new { @class = "form-control", @id = "crucero", @style = "width:50%", @required = "true" })
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label>Nombre de Cabina:</label>
+                                @Html.TextBoxFor(m => m._nombreCabina, null, new { @class = "form-control", @placeholder = "Introduce el nombre de la cabina", @id = "nombrecabina", @required = "true" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label>Precio:</label>
+                                @Html.TextBoxFor(m => m._precioCabina, null, new { @type = "number", @class = "form-control", @placeholder = "Introduce el precio de la cabina", @id = "precio", @required = "true" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-top:10px;">
+                        <button type="button" id="guardar_cabina" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                    </div>
+                </section>
+            </div>            
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+        function cambioCabina(cabina_id) {
+            $.ajax({
+                url: "gestion_cruceros/cambioEstatusCabina",
+                data: { "id_cabina": cabina_id },
+                type: 'POST',
+                success: function (data) {
+                    $.ajax({
+                        url: "gestion_cruceros/M24_ListarCabinas/" + $("#fk_id_crucero").val(),
+                        data: null,
+                        type: 'GET',
+                        success: function (data) {
+                            console.log(data)
+                            $("#tablaCabinas").empty();
+                            for (var index = 0; index < data.length; index++) {
+                                console.log(data[index])
+
+                                var statusHTML = data[index]._estatus == "activo" ? "<td class='crStatus'><i class='fa fa-circle started'></i></td>" +
+                                                        "<td class='crAcciones'> <i class='fa fa-times' onclick='cambioCabina(" + data[index]._idCabina + ")'></i></td>" : "<td class='crStatus'><i class='fa fa-circle paused'></i></td><td class='crAcciones'><i class='fa fa-check' onclick='cambioCabina(" + data[index]._idCabina + ")'></i></td>";
+
+
+                                console.log(statusHTML)
+                                html = "<tr id='" + data[index]._idCabina + "'><td style='text-align:center'>" + data[index]._nombreCabina + "</td><td style='text-align:center'>" + data[index]._precioCabina + '$' + "</td>" + statusHTML + "</tr>";
+                                console.log(html)
+                                $("#tablaCabinas").append(html);
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        }
+
+    </script>
+
+}
+

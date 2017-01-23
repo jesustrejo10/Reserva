@@ -1,0 +1,270 @@
+﻿<!-- Indico que para esta vista, M08_AgregarAutomovil, utilizare el modelo Models/gestion_automoviles/CAgregarAutomovil-->
+@model FOReserva.Models.gestion_reserva_automovil.CVistaReservaAuto
+
+
+<script src="/Scripts/BuscarCarro.js"></script>
+
+<div class="heading-title">
+    <h3><span>Autos</span></h3>
+</div>
+
+     
+
+@using (Html.BeginForm("M19_Busqueda_Autos", "gestion_reserva_auto", FormMethod.Post, new { @id = "formBuscarCarro", @class = "form-horizintal" }))
+{
+    <fieldset>
+        <div class="row">
+            <div class="form-group">
+
+                <div class="col-md-6 col-sm-6">
+                    <label for="">Recoger en:(<span style="color:red">*</span>)</label>
+                    @{
+                        List<SelectListItem> paises = FOReserva.Controllers.gestion_reserva_autoController.pais();
+
+                        if (paises.First().Text.Length > 15)
+                        {
+                            Response.Write("<script>alert('" + paises.First().Text + "');</script>");
+                            List<SelectListItem> error = new List<SelectListItem>();
+                                    @Html.DropDownListFor(m => m.SelectedCiudadIdOrigen, error, new { @class = "form-control", @placeholder = "Ciudad origen", @id = "res_entrega", @onblur = "listadeciudades(this.value);" });
+                        }
+                        else
+                        {
+                                    @Html.DropDownListFor(m => m.SelectedCiudadIdOrigen, paises, new { @class = "form-control", @placeholder = "Ciudad origen", @id = "res_entrega", @onblur = "listadeciudades(this.value);" });
+                        }
+                    }
+                    <div id="entrega" style="display: none;" class="has-error error">
+                        <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe seleccionar una ciudad de entrega</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-6">
+                    <label></label>
+                    <label for="">Devolver en:(<span style="color:red">*</span>)</label>
+                    @{
+                        List<SelectListItem> paises1 = FOReserva.Controllers.gestion_reserva_autoController.pais();
+
+                        if (paises.First().Text.Length > 15)
+                        {
+                            Response.Write("<script>alert('" + paises1.First().Text + "');</script>");
+                            List<SelectListItem> error = new List<SelectListItem>();
+                            @Html.DropDownListFor(m => m.SelectedCiudadIdDestino, error, new { @class = "form-control", @placeholder = "Ciudad destino", @id = "res_devolucion", @onblur = "listadeciudades(this.value);" });
+                        }
+                        else
+                        {
+                            @Html.DropDownListFor(m => m.SelectedCiudadIdDestino, paises, new { @class = "form-control", @placeholder = "Ciudad destino", @id = "res_devolucion", @onblur = "listadeciudades(this.value);" });
+                        }
+                    }
+                    <div id="devolucion" style="display: none;" class="has-error error">
+                        <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe seleccionar una ciudad de entrega</p>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+
+                <div class="col-md-6 col-sm-6">
+                    <label>Fecha de Recogida:</label>
+                    @Html.TextBoxFor(m => m._fechaini, null, new { @type = "date", @class = "form-control", @placeholder = "Fecha", @id = "res_fechaini", @name = "res_fechaini", min = "Date" , max = "2032-12-31"})
+
+                    <div id="fechavieja" style="display: none;" class="has-error error">
+                        <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe seleccionar una fecha correcta</p>
+                    </div>
+                    <br>
+                    <label>Hora de Recogida:</label>
+                    <select id="res_horaini" name="res_horaini" class="form-control pointer required">
+                        <option value="" selected>Selecciona la hora:</option>
+                        <option value="8:00">8:00</option>
+                        <option value="9:00">9:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="12:00">12:00</option>
+                        <option value="13:00">13:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                    </select>
+                    <div id="horaini_null" style="display: none;" class="has-error error">
+                        <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe seleccionar una hora para la entrega</p>
+                    </div>
+                    <br>
+
+                </div>
+
+                <div class="col-md-6 col-sm-6">
+                    <label>Fecha  de Devolución:</label>
+                    @Html.TextBoxFor(m => m._fechafin, null, new { @type = "date", @class = "form-control", @placeholder = "Fecha", @id = "res_fechafin",@name ="resfechafin" ,  max = "2032-12-31" })
+                    <div id="fechafin_null" style="display: none;" class="has-error error">
+                        <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe seleccionar una fecha correcta</p>
+                    </div>
+                    <br>
+                    <label>Hora de Devolucion:</label>
+                    <select id="res_horafin" name="res_horafin" class="form-control pointer required">
+                        <option value="" selected>Selecciona la hora:</option>
+                        <option value="8:00">8:00</option>
+                        <option value="9:00">9:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="12:00">12:00</option>
+                        <option value="13:00">13:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                    </select>
+                    <div id="horafin_null" style="display: none;" class="has-error error">
+                        <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe seleccionar una hora para la devolucion</p>
+                    </div>
+                    <div id="horafin_igual" style="display: none;" class="has-error error">
+                        <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe seleccionar una hora distinta a la hora de entrega</p>
+                    </div>
+                    <br>
+
+                </div>
+
+
+
+            </div>
+        </div>
+
+    </fieldset>
+    <div class="row text-center">
+        <div class="col-md-12">
+            <button type="button" id="buscar" class="btn btn-primary">BUSCAR</button>
+        </div>
+    </div>
+
+     
+
+<script>
+  //  $("#buscarCarro").click(function (e) {
+    //    e.preventDefault();
+      //  var form = $("#formBuscarCarro");
+       // $.ajax({
+        //    url: "gestion_reserva_auto/buscarCarro",
+         //   data: form.serialize(),
+          //  type: 'POST',
+           // success: function (data) {
+            //    alert("Buscando...");
+            //}
+       // });
+    //});
+
+    $("#buscar").click(function (e) {
+        e.preventDefault();
+
+        var form = $("#formBuscarCarro");
+        var entrega = $('#res_entrega').val();
+        var devolucion = $('#res_devolucion').val();
+        var fechainicio = $('#res_fechaini').val();
+        var horainicio = $('#res_horaini').val();
+        var fechafin = $('#res_fechafin').val();
+        var horafin = $('#res_horafin').val();
+
+
+
+
+        var horasistema = new Date();
+        console.log(horasistema);
+        var dia = horasistema.getDate();
+        var mes =horasistema.getMonth() + 1;        
+        console.log(mes);    
+        var anio = horasistema.getFullYear();
+        console.log(dia);
+        console.log(anio);
+        var union = anio + "-" + mes + "-" + dia;    
+        console.log(union);
+        var comparacion = fechainicio.localeCompare(union);
+        var comparacion2 = fechafin.localeCompare(union);
+        var comparacion3 = fechainicio.localeCompare(fechafin);
+        var horauno = parseInt(horainicio);
+        var horados = parseInt(horafin);
+        console.log(horauno);
+        console.log(horados);
+        var win = true;
+
+        //clear errors
+        $(".error").hide();
+        $("#res_entrega").removeClass("has-error");
+        $("#res_devolucion").removeClass("has-error");
+        $("#res_fechaini").removeClass("has-error");
+        $("#res_fechafin").removeClass("has-error");
+        $("#res_horaini").removeClass("has-error");
+        $("#res_horafin").removeClass("has-error");
+           
+       
+        //AQUI VAN TRY/CATCH FALTA VALIDAR ESO
+        if (entrega=="-1")  {
+            $("#res_entrega").addClass("has-error");
+            $("entrega").fadeIn();
+          }
+        if (devolucion=="-1") {
+            $("#res_devolucion").addClass("has-error");
+            $("devolucion").fadeIn();
+        }
+        //pregunto si la la fecha de entrega es menor a la fecha actual
+        if (comparacion == -1) {
+            $("#res_fechaini").addClass("has-error");
+            $("#fechavieja").fadeIn();
+            win = false;
+        }
+            if (comparacion2 == -1) {
+                $("#res_fechafin").addClass("has-error");
+                $("#fechafin_null").fadeIn();
+                win = false;
+            }       
+            if (fechainicio == null) {
+                $("#res_fechaini").addClass("has-error");
+                $("#fechavieja").fadeIn();
+                win = false;
+            } else {
+
+             if (fechafin == null) {
+                    $("#res_fechafin").addClass("has-error");
+                    $("#fechafin_null").fadeIn();
+                    win = false;
+                }
+            }
+            
+            if ((horafin == null) || (horafin == 0)) {
+                $("#res_horafin").addClass("has-error");
+                $("#horafin_null").fadeIn();
+                win = false;
+
+            }
+
+         if ((horainicio == null) || (horainicio == 0)) {
+                $("#res_horaini").addClass("has-error");
+                $("#horaini_null").fadeIn();
+                win = false;
+
+            } else {
+
+                if ((horafin == null) || (horafin == 0)) {
+                    $("#res_horafin").addClass("has-error");
+                    $("#horafin_null").fadeIn();
+                    win = false;
+                } else {
+                    if (comparacion3 == 0) {
+                        if ((horauno == horados) || (horados<=horauno)) {
+                            $("#res_horafin").addClass("has-error");
+                            $("#horafin_igual").fadeIn();
+                            win = false;
+                        }
+                    }
+                }
+         }
+         if (win) {
+             $('#formBuscarCarro').submit();
+
+         } else return false;
+    });
+
+</script>
+}

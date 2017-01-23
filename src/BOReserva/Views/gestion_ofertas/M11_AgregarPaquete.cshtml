@@ -1,0 +1,696 @@
+﻿@model BOReserva.Models.gestion_ofertas.CAgregarPaquete
+ 
+<link href="~/Content/Canvas/Box.css" rel="stylesheet" />          
+<!---------------------- SECCION DE AGREGAR PAQUETE ---------------->
+<!--Plugins para usar los datepickers-->
+<head>
+    <title></title>
+    <script src="~/Content/bootstrap/css/bootstrap.min.css"></script>
+    <script src="~/Content/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="~/Content/plugins/datepicker/datepicker3.css"></script>
+    <script src="~/Content/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src="~/Content/plugins/datepicker/locales/bootstrap-datepicker.es.js"></script>
+</head>
+<!---->
+<div class="row">
+    <div class="col-md-10">
+        <div class="Cajita">
+            <div class="box-header with-border">
+                <h1 class="box-title"> Agregar Paquete</h1>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-12" style="margin-top: 25px;">
+
+                    </div>
+
+
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="col-xs-4">
+                                <label>Nombre del Paquete (<span style="color:red">*</span>):</label>
+                                <input type="text" class="form-control" id="nombrePaq">
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-12">
+
+                            <div class="col-xs-4">
+                                <label>Seleccione Automóvil</label>
+                                <select class="form-control" id="cbAuto">
+                                    <option id="cbAuto-00" value="00">Cargando...</option>
+                                </select>
+                            </div>
+
+                            <div class="col-xs-4">
+                                <label>Fecha Inicio:</label>
+
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.TextBoxFor(m => m._fechaIniAuto, null, new { @class = "form-control datepicker required", @name = "fechaIniAuto", @id = "fechaIniAuto", @type = "date" })
+                                    @*<input type="text" name="fechaIniAuto" value="" class="form-control datepicker required">*@
+
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+
+                            <div class="col-xs-4">
+                                <label>Fecha fin:</label>
+
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.TextBoxFor(m => m._fechaFinAuto, null, new { @class = "form-control datepicker required", @name = "fechaFinAuto", @id = "fechaFinAuto", @type = "date" })
+                                    @*<input type="text" name="fechaFinAuto" value="" class="form-control datepicker required">*@
+
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+                        </div>
+                        <!-- FIN AUTO -->
+                        <!-- REST -->
+                        <div class="col-md-12" style="margin-top: 25px;">
+
+                        </div>
+
+
+                        <div class="col-md-12">
+
+                            <div class="col-xs-4">
+                                <label>Seleccione Restaurante</label>
+                                <select class="form-control" id="cbRest">
+                                    <option id="cbRest-00" value="00">Cargando...</option>
+                                </select>
+                            </div>
+
+                            <div class="col-xs-4">
+                                <label>Fecha Inicio:</label>
+
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.TextBoxFor(m => m._fechaIniRest, null, new { @class = "form-control datepicker required", @name = "fechaIniRest", @id = "fechaIniRest", @type = "date" })
+                                    @*<input type="text" name="fechaIniRest" value="" class="form-control datepicker required">*@
+
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+
+                            <div class="col-xs-4">
+                                <label>Fecha fin:</label>
+
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.TextBoxFor(m => m._fechaFinRest, null, new { @class = "form-control datepicker required", @name = "fechaFinRest", @id = "fechaFinRest", @type = "date" })
+                                    @*<input type="text" name="fechaFinRest" value="" class="form-control datepicker required">*@
+
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+                        </div>
+                        <!-- FIN REST -->
+                        <!-- HAB -->
+                        <div class="col-md-12" style="margin-top: 25px;">
+
+                        </div>
+
+
+                        <div class="col-md-12">
+
+                            <div class="col-xs-4">
+                                <label>Seleccione Habitación</label>
+                                <select class="form-control" id="cbHab">
+                                    <option id="cbHab-00" value="00">Cargando...</option>
+                                </select>
+                            </div>
+
+                            <div class="col-xs-4">
+                                <label>Fecha Inicio:</label>
+
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.TextBoxFor(m => m._fechaIniHabi, null, new { @class = "form-control datepicker required", @name = "fechaIniHabi", @id = "fechaIniHabi", @type = "date" })
+                                    @*<input type="text" name="fechaIniHabi" value="" class="form-control datepicker required">*@
+
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+
+                            <div class="col-xs-4">
+                                <label>Fecha fin:</label>
+
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.TextBoxFor(m => m._fechaFinHabi, null, new { @class = "form-control datepicker required", @name = "fechaFinHabi", @id = "fechaFinHabi", @type = "date" })
+                                    @*<input type="text" name="fechaFinHabi" value="" class="form-control datepicker required">*@
+
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+                        </div>
+                        <!-- FIN HAB -->
+                        <!-- CRUCERO -->
+                        <div class="col-md-12" style="margin-top: 25px;">
+
+                        </div>
+
+
+
+                        <div class="col-md-12">
+
+                            <div class="col-xs-4">
+                                <label>Seleccione Crucero</label>
+                                <select class="form-control" id="cbCrucero">
+                                    <option id="cbCrucero-00" value="00">Cargando...</option>
+                                </select>
+                            </div>
+
+                            <div class="col-xs-4">
+                                <label>Fecha Inicio:</label>
+
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.TextBoxFor(m => m._fechaIniCruc, null, new { @class = "form-control datepicker required", @name = "fechaIniCruc", @id = "fechaIniCruc", @type = "date" })
+                                    @*<input type="text" name="fechaIniCruc" value="" class="form-control datepicker required">*@
+
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+
+                            <div class="col-xs-4">
+                                <label>Fecha fin:</label>
+
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.TextBoxFor(m => m._fechaFinCruc, null, new { @class = "form-control datepicker required", @name = "fechaFinCruc", @id = "fechaFinCruc", @type = "date" })
+                                    @*<input type="text" name="fechaFinCruc" value="" class="form-control datepicker required">*@
+
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+                        </div>
+                        <!-- FIN CRUCERO -->
+                        <!-- VUELO -->
+                        <div class="col-md-12" style="margin-top: 25px;">
+
+                        </div>
+
+
+                        <div class="col-md-12">
+
+                            <div class="col-xs-4">
+                                <label>Seleccione Vuelo</label>
+                                <select class="form-control" id="cbVuelo">
+                                    <option id="cbVuelo-00" value="00">Cargando...</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-4">
+                                <label>Fecha Inicio:</label>
+
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.TextBoxFor(m => m._fechaIniVuelo, null, new { @class = "form-control datepicker required", @name = "fechaIniVuelo", @id = "fechaIniVuelo", @type = "date" })
+                                    @*<input type="text" name="fechaIniVuelo" value="" class="form-control datepicker required">*@
+
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+
+                            <div class="col-xs-4">
+                                <label>Fecha fin:</label>
+
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.TextBoxFor(m => m._fechaFinVuelo, null, new { @class = "form-control datepicker required", @name = "fechaFinVuelo", @id = "fechaFinVuelo", @type = "date" })
+                                    @*<input type="text" name="fechaFinVuelo" value="" class="form-control datepicker required">*@
+
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+                        </div>
+                        <!-- FIN CRUCERO -->
+
+                        <div class="col-md-12" style="margin-top: 25px;">
+
+                            <div class="col-xs-4">
+                                <label>Precio del paquete (<span style="color:red">*</span>):</label>
+                                <input type="number" class="form-control" id="precioPaq">
+                            </div>
+
+                            <div class="col-xs-4">
+                                <label>Estatus:</label>
+                                <select id="estadoPaquete" class="form-control">
+                                    <option value="0">Inactivo</option>
+                                    <option value="1">Activo</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-2">
+                                <button type="button" id="btnCrearPaquete" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                            </div>
+                            <div class="col-md-2">
+                                <button id="btnVolver" type="button" class="btn btn-danger" style="display:block; margin-left:auto; margin-right:auto;">Cancelar</button>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+    </div>
+</div> <!--Agregando el div de cierre que faltaba-->
+    <!-- /.row -->
+    <!------------------- FIN DE SECCION DE AGREGAR PAQUETE ---------------->
+    <script>
+        getAutomovilesFromDB();
+        getRestaurantesFromDB();
+        getHotelesFromDB();
+        getCrucerosFromDB();
+        getVuelosFromDB();
+
+        function getAutomovilesFromDB() {
+            $.ajax(
+               {
+                   url: '/gestion_ofertas/M11_ListarAutomoviles',
+                   type: 'POST',
+                   success: function (data) {
+                       cargarAutosCB(data);
+                   },
+                   error: function (jqXHR, textStatus, errorThrown) {
+                       alert(errorThrown);
+                   }
+               });
+        }
+
+        function cargarAutosCB(data) {
+            for (var i in data) {
+                var idAuto = data[i]._matricula;
+                var fabricante = data[i]._fabricante;
+                var modelo = data[i]._modelo;
+                $("#cbAuto").append('<option value="' + idAuto + '">' + fabricante + " " + modelo + '</option>');
+            }
+            $("#cbAuto-00").text("Seleccione Automóvil");
+        }
+
+        function getRestaurantesFromDB() {
+            $.ajax(
+               {
+                   url: '/gestion_ofertas/M11_ListarRestaurantes',
+                   type: 'POST',
+                   success: function (data) {
+                       cargarRestaurantesCB(data);
+                   },
+                   error: function (jqXHR, textStatus, errorThrown) {
+                       alert(errorThrown);
+                   }
+               });
+        }
+
+        function cargarRestaurantesCB(data) {
+            for (var i in data) {
+                var idRest = data[i]._id;
+                var nombreRest = data[i]._nombre;
+                $("#cbRest").append('<option value="' + idRest + '">' + nombreRest + '</option>');
+            }
+            $("#cbRest-00").text("Seleccione Restaurante");
+        }
+
+        function getHotelesFromDB() {
+            $.ajax(
+               {
+                   url: '/gestion_ofertas/M11_ListarHoteles',
+                   type: 'POST',
+                   success: function (data) {
+                       cargarHotelesCB(data);
+                   },
+                   error: function (jqXHR, textStatus, errorThrown) {
+                       alert(errorThrown);
+                   }
+               });
+        }
+
+        function cargarHotelesCB(data) {
+            for (var i in data) {
+                var idHotel = data[i]._id;
+                var nombreHotel = data[i]._nombre;
+                $("#cbHab").append('<option value="' + idHotel + '">' + nombreHotel + '</option>');
+            }
+            $("#cbHab-00").text("Seleccione Hotel");
+        }
+
+        function getCrucerosFromDB() {
+            $.ajax(
+               {
+                   url: '/gestion_ofertas/M11_ListarCruceros',
+                   type: 'POST',
+                   success: function (data) {
+                       cargarCrucerosCB(data);
+                   },
+                   error: function (jqXHR, textStatus, errorThrown) {
+                       alert(errorThrown);
+                   }
+               });
+        }
+
+        function cargarCrucerosCB(data) {
+            for (var i in data) {
+                var idCrucero = data[i]._id;
+                var nombreCrucero = data[i]._nombre;
+                $("#cbCrucero").append('<option value="' + idCrucero + '">' + nombreCrucero + '</option>');
+            }
+            $("#cbCrucero-00").text("Seleccione Crucero");
+        }
+
+        function getVuelosFromDB() {
+            $.ajax(
+               {
+                   url: '/gestion_ofertas/M11_ListarVuelos',
+                   type: 'POST',
+                   success: function (data) {
+                       cargarVuelosCB(data);
+                   },
+                   error: function (jqXHR, textStatus, errorThrown) {
+                       alert(errorThrown);
+                   }
+               });
+        }
+
+        function cargarVuelosCB(data) {
+            for (var i in data) {
+                var idVuelo = data[i]._id;
+                var codigoVuelo = data[i]._codigoVuelo;
+                var origen = data[i]._nombreSalida;
+                var destino = data[i]._nombreLlegada;
+                $("#cbVuelo").append('<option value="' + idVuelo + '">' + codigoVuelo + " - " + origen + " - " + destino + '</option>');
+            }
+            $("#cbVuelo-00").text("Seleccione Vuelo");
+        }
+
+        $("#btnCrearPaquete").click(function (e) {
+            e.preventDefault();
+            if (validarCamposVacios() && validarAlMenosUno() && validarEstarFechas() && compararFechas()) {
+                var form = $("#formGuardarOferta");
+                var idAuto = $("#cbAuto").val();
+                var idHotel = $("#cbHab").val();
+                var idCrucero = $("#cbCrucero").val();
+                var idRestaurante = $("#cbRest").val();
+                var idVuelo = $("#cbVuelo").val();
+                var fiAuto = $("#fechaIniAuto").val();
+                var ffAuto = $("#fechaFinAuto").val();
+                var fiHotel = $("#fechaIniHabi").val();
+                var ffHotel = $("#fechaFinHabi").val();
+                var fiCrucero = $("#fechaIniCruc").val();
+                var ffCrucero = $("#fechaFinCruc").val();
+                var fiRestaurante = $("#fechaIniRest").val();
+                var ffRestaurante = $("#fechaFinRest").val();
+                var fiVuelo = $("#fechaIniVuelo").val();
+                var ffVuelo = $("#fechaFinVuelo").val();
+                var precio = $("#precioPaq").val();
+                var nombrePaq = $("#nombrePaq").val();
+                var estadoPaq = $("#estadoPaquete").val();
+
+                $.ajax({
+                    url: "gestion_ofertas/guardarPaquete",
+                    data: {
+                        'nombrePaq': nombrePaq, 'idAuto': idAuto, 'idHotel': idHotel, 'idCrucero': idCrucero, 'idRestaurante': idRestaurante,
+                        'idVuelo': idVuelo, 'fiAuto': fiAuto, 'ffAuto': ffAuto, 'fiHotel': fiHotel, 'ffHotel': ffHotel, 'fiCrucero': fiCrucero, 'ffCrucero': ffCrucero,
+                        'fiRestaurante': fiRestaurante, 'ffRestaurante': ffRestaurante, 'fiVuelo': fiVuelo, 'ffVuelo': ffVuelo, 'precio': precio, 'estado': estadoPaq
+                    },
+                    //data: { 'nombreOferta': $("#nombreOferta").val(), 'fInicio': $("#fInicio").val(), 'fFin': $("#fFin").val(), 'porcentajeOferta': $("#porcentajeOferta").val() },
+                    type: 'POST',
+                    success: function (data) {
+                        alert("El paquete ha sido creado exitosamente");
+                        irVisualizar();
+                    }
+                    , error: function (xhr, textStatus, exceptionThrown) {
+                        //muestro el texto del error
+                        alert(xhr.responseText);
+                    }
+                });
+            }
+
+        });
+
+        //Valida que existan fecha inicio y fin del item seleccionado
+        function validarEstarFechas() {
+            if ($("#cbAuto").val() != "00") {
+                if (($("#fechaIniAuto").val() == "") || ($("#fechaFinAuto").val() == "")) {
+                    alert('Los elementos deben tener fecha inicio y fecha fin!');
+                    return false;
+                }
+            }
+            if ($("#cbRest").val() != "00") {
+                if (($("#fechaIniRest").val() == "") || ($("#fechaFinRest").val() == "")) {
+                    alert('Los elementos deben tener fecha inicio y fecha fin!');
+                    return false;
+                }
+            }
+            if ($("#cbHab").val() != "00") {
+                if (($("#fechaIniHabi").val() == "") || ($("#fechaFinHabi").val() == "")) {
+                    alert('Los elementos deben tener fecha inicio y fecha fin!');
+                    return false;
+                }
+            }
+            if ($("#cbCrucero").val() != "00") {
+                if (($("#fechaIniCruc").val() == "") || ($("#fechaFinCruc").val() == "")) {
+                    alert('Los elementos deben tener fecha inicio y fecha fin!');
+                    return false;
+                }
+            }
+            if ($("#cbVuelo").val() != "00") {
+                if (($("#fechaIniVuelo").val() == "") || ($("#fechaFinVuelo").val() == "")) {
+                    alert('Los elementos deben tener fecha inicio y fecha fin!');
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        //Valida que el usuario haya agregado al menos un item al paquete
+        function validarAlMenosUno() {
+            if ($("#cbAuto").val() != "00") {
+                    return true;
+            }
+            if ($("#cbRest").val() != "00") {
+                    return true;
+            }
+            if ($("#cbHab").val() != "00") {
+                    return true;
+            }
+            if ($("#cbCrucero").val() != "00") {
+                    return true;
+            }
+            if ($("#cbVuelo").val() != "00") {
+                    return true;
+            }
+            alert('Debe agregar al menos un elemento al paquete!');
+            return false;
+        }
+
+        //Valida que el nombre y precio no esten vacios
+        function validarCamposVacios() {
+            if (($("#nombrePaq").val() == "") || ($("#precioPaq").val() == "")) {
+                alert('Debes llenar el nombre y precio del paquete!');
+                return false;
+            }
+            return true;
+        }
+        //Compara todas las fechas introducidas
+        function compararFechas() {
+            if ($("#cbAuto").val() != "00") {
+                if (!validarFechas( $("#fechaIniAuto").val() , $("#fechaFinAuto").val() )) {
+                    alert('La fecha fin debe ser mayor que la fecha inicio!');
+                    return false;
+                }
+            }
+            if (!validarFechas($("#fechaIniRest").val(), $("#fechaFinRest").val())) {
+                alert('La fecha fin debe ser mayor que la fecha inicio!');
+                return false;
+            }
+            if (!validarFechas($("#fechaIniHabi").val(), $("#fechaFinHabi").val())) {
+                alert('La fecha fin debe ser mayor que la fecha inicio!');
+                return false;
+            }
+            if (!validarFechas($("#fechaIniCruc").val(), $("#fechaFinCruc").val())) {
+                alert('La fecha fin debe ser mayor que la fecha inicio!');
+                return false;
+            }
+            if (!validarFechas($("#fechaIniVuelo").val(), $("#fechaFinVuelo").val())) {
+                alert('La fecha fin debe ser mayor que la fecha inicio!');
+                return false;
+            }
+            return true;
+        }
+
+        //Valida que la fecha inicio sea mayor que la fecha fin
+        function validarFechas(fi, ff) {
+            if( (new Date(fi).getTime() > new Date(ff).getTime()))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        $("#btnVolver").click(function (e) {
+            e.preventDefault();
+            irVisualizar();
+        });
+
+        function irVisualizar(){
+            var url = '/gestion_ofertas/M11_VisualizarPaquete';
+            var method = 'GET';
+            var data = '';
+
+            $.ajax(
+                {
+                    url: url,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+        }
+
+        //Inicio de código nuevo
+        $(".fechaIniAuto").ready(function () {
+            $('#fechaIniAuto').datepicker({
+                format: 'dd/mm/yyyy',
+                pickTime: false,
+                autoclose: true,
+                language: 'es'
+            });
+        });
+        //Fin de código nuevo
+        //Inicio de código nuevo
+        $(".fechaFinAuto").ready(function () {
+            $('#fechaFinAuto').datepicker({
+                format: 'dd/mm/yyyy',
+                pickTime: false,
+                autoclose: true,
+                language: 'es'
+            });
+        });
+        //Fin de código nuevo
+
+        //Inicio de código nuevo
+        $(".fechaIniRest").ready(function () {
+            $('#fechaIniRest').datepicker({
+                format: 'dd/mm/yyyy',
+                pickTime: false,
+                autoclose: true,
+                language: 'es'
+            });
+        });
+        //Fin de código nuevo
+        //Inicio de código nuevo
+        $(".fechaFinRest").ready(function () {
+            $('#fechaFinRest').datepicker({
+                format: 'dd/mm/yyyy',
+                pickTime: false,
+                autoclose: true,
+                language: 'es'
+            });
+        });
+        //Fin de código nuevo
+
+        //Inicio de código nuevo
+        $(".fechaIniHabi").ready(function () {
+            $('#fechaIniHabi').datepicker({
+                format: 'dd/mm/yyyy',
+                pickTime: false,
+                autoclose: true,
+                language: 'es'
+            });
+        });
+        //Fin de código nuevo
+        //Inicio de código nuevo
+        $(".fechaFinHabi").ready(function () {
+            $('#fechaFinHabi').datepicker({
+                format: 'dd/mm/yyyy',
+                pickTime: false,
+                autoclose: true,
+                language: 'es'
+            });
+        });
+        //Fin de código nuevo
+
+        //Inicio de código nuevo
+        $(".fechaIniCruc").ready(function () {
+            $('#fechaIniCruc').datepicker({
+                format: 'dd/mm/yyyy',
+                pickTime: false,
+                autoclose: true,
+                language: 'es'
+            });
+        });
+        //Fin de código nuevo
+        //Inicio de código nuevo
+        $(".fechaFinCruc").ready(function () {
+            $('#fechaFinCruc').datepicker({
+                format: 'dd/mm/yyyy',
+                pickTime: false,
+                autoclose: true,
+                language: 'es'
+            });
+        });
+        //Fin de código nuevo
+
+        //Inicio de código nuevo
+        $(".fechaIniVuelo").ready(function () {
+            $('#fechaIniVuelo').datepicker({
+                format: 'dd/mm/yyyy',
+                pickTime: false,
+                autoclose: true,
+                language: 'es'
+            });
+        });
+        //Fin de código nuevo
+        //Inicio de código nuevo
+        $(".fechaFinVuelo").ready(function () {
+            $('#fechaFinVuelo').datepicker({
+                format: 'dd/mm/yyyy',
+                pickTime: false,
+                autoclose: true,
+                language: 'es'
+            });
+        });
+        //Fin de código nuevo
+    </script>

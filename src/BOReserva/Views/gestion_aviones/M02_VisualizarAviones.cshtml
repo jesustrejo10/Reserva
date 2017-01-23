@@ -1,0 +1,265 @@
+﻿
+
+<div class="row">
+    <link rel="stylesheet" href="~/Content/plugins/datatables/dataTables.bootstrap.css">
+
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Lista de Aviones</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Matrícula</th>
+                            <th>Modelo</th>
+                            <th>Capacidad Turista/Ejecutiva/VIP</th>
+                            <th>Equipaje (Kg)</th>
+                            <th>Dist. Max(Km)</th>
+                            <th>Vel. Max(Km/h)</th>
+                            <th>Combustible (L)</th>
+                            <th>Estado</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @try
+                        {
+                            foreach (var item in Model)
+                            {
+                                BOReserva.DataAccess.Domain.Avion c = (BOReserva.DataAccess.Domain.Avion)item.Value;
+                                String disponibilidad;
+                                if (c._disponibilidad == 1) { disponibilidad = "Disponible"; } else { disponibilidad = "No disponible"; }
+                                
+                                <tr id="@item.Key">
+                                    <td>@c._matricula</td>
+                                    <td>@c._modelo</td>
+                                    <td>@c._capacidadTurista / @c._capacidadEjecutiva / @c._capacidadVIP </td>
+                                    <td>@c._capacidadEquipaje</td>
+                                    <td>@c._distanciaMaximaVuelo</td>
+                                    <td>@c._velocidadMaxima</td>
+                                    <td>@c._capacidadCombustible</td>
+                                    <td>@disponibilidad</td>
+                                    <td>
+                                        <a href="#" title="Modificar" class="wait"><i class="fa fa-pencil modificar"></i></a>
+                                        <a href="#" title="Eliminar avión" class="wait"><i class="fa fa-times eliminar"></i></a>
+                                        @if (c._disponibilidad == 1)
+                                        {
+                                            <a href="#" title="Deshabilitar"><i class="fa fa-toggle-on desactivar"></i></a>
+                                        }
+                                        else
+                                        {
+                                            <a href="#" title="Habilitar"><i class="fa fa-toggle-off activar"></i></a>
+                                        }
+                                    </td>
+
+                                    <script>
+
+                                        /// <summary>
+                                        /// Evento para Activar un avion
+                                        /// </summary>
+                                        $(".activar").click(function (event) {
+                                            $("#contenido").html('<div class="text-center">Cargando...</div>');
+                                            console.log("hola");
+                                            event.preventDefault();
+                                            event.stopPropagation();
+                                            event.stopImmediatePropagation();
+                                            //alert("Avion Activado");
+                                            var identificador = $(this).parent().parent().parent().attr("id");
+                                            jQuery.ajax({
+                                                type: "POST",
+                                                url: "/gestion_aviones/activateAvion",
+                                                data: { id: identificador }
+                                            }).done(function (data) {
+                                                var url = '/gestion_aviones/M02_VisualizarAviones';
+                                                var method = 'GET';
+                                                var data = '';
+                                                $.ajax(
+                                                    {
+                                                        url: url,
+                                                        type: method,
+                                                        data: data,
+                                                        success: function (data, textStatus, jqXHR) {
+
+                                                            $("#contenido").empty();
+                                                            $("#contenido").append(data);
+                                                            alert("Avion Activado");
+
+                                                        },
+                                                        error: function (jqXHR, textStatus, errorThrown) {
+                                                            alert(errorThrown);
+                                                        }
+                                                    });
+                                            }).fail(function () {
+                                                alert("Error en la base de datos");
+                                            });
+                                        });
+
+                                        /// <summary>
+                                        /// Evento para desactivar un avion
+                                        /// </summary>
+                                        $(".desactivar").click(function (event) {
+                                            console.log("hola");
+                                            $("#contenido").html('<div class="text-center">Cargando...</div>');
+                                            event.preventDefault();
+                                            event.stopPropagation();
+                                            event.stopImmediatePropagation();
+                                            var identificador = $(this).parent().parent().parent().attr("id");
+                                            jQuery.ajax({
+                                                type: "POST",
+                                                url: "/gestion_aviones/deactivateAvion",
+                                                data: { id: identificador }
+                                            }).done(function (data) {
+                                                var url = '/gestion_aviones/M02_VisualizarAviones';
+                                                var method = 'GET';
+                                                var data = '';
+                                                $.ajax(
+                                                    {
+                                                        url: url,
+                                                        type: method,
+                                                        data: data,
+                                                        success: function (data, textStatus, jqXHR) {
+
+                                                            $("#contenido").empty();
+                                                            $("#contenido").append(data);
+                                                            alert("Avion Desactivado");
+                                                        },
+                                                        error: function (jqXHR, textStatus, errorThrown) {
+                                                            alert(errorThrown);
+                                                        }
+                                                    });
+                                            }).fail(function () {
+                                                alert("Error en la base de datos");
+                                            });
+                                        });
+
+                                        /// <summary>
+                                        /// Evento para modificar un avion
+                                        /// </summary>
+                                        $(".modificar").click(function (event) {
+                                            $("#contenido").html('<div class="text-center">Cargando...</div>');
+                                            event.preventDefault();
+                                            event.stopPropagation();
+                                            event.stopImmediatePropagation();
+                                            var identificador = $(this).parent().parent().parent().attr("id");
+                                            jQuery.ajax({
+                                                type: "GET",
+                                                url: "/gestion_aviones/M02_ModificarAvion",
+                                                data: { id: identificador }
+                                            }).done(function (data) {
+                                                console.log(identificador);
+                                                $("#contenido").empty();
+                                                $("#contenido").append(data);
+                                            }).fail(function () {
+                                                alert(data);
+                                            });
+                                        });
+
+                                        /// <summary>
+                                        /// Evento para eliminar un avion
+                                        /// </summary>
+                                        $(".eliminar").click(function (event) {
+                                            $("#contenido").html('<div class="text-center">Cargando...</div>');
+                                            event.preventDefault();
+                                            event.stopPropagation();
+                                            event.stopImmediatePropagation();
+                                            var identificador = $(this).parent().parent().parent().attr("id");
+                                            jQuery.ajax({
+                                                type: "POST",
+                                                url: "/gestion_aviones/deleteAvion",
+                                                data: { id: identificador }
+                                            }).done(function (data) {
+
+                                                if (data === "1") {
+                                                var url = '/gestion_aviones/M02_VisualizarAviones';
+                                                var method = 'GET';
+                                                var data = '';
+                                                $.ajax(
+                                                    {
+                                                        url: url,
+                                                        type: method,
+                                                        data: data,
+                                                        success: function (data, textStatus, jqXHR) {
+
+                                                            $("#contenido").empty();
+                                                            $("#contenido").append(data);
+                                                            alert("Se Elimino Exitosamente el Avion");
+                                                        },
+                                                        error: function (jqXHR, textStatus, errorThrown) {
+                                                            alert(errorThrown);
+                                                        }
+                                                    });
+                                                } else if (data.includes("Vuelo")) {
+                                                    alert("No se puede eliminar este avion porque tiene un vuelo asignado");
+                                                    var url = '/gestion_aviones/M02_VisualizarAviones';
+                                                    var method = 'GET';
+                                                    var data = '';
+                                                    $.ajax(
+                                                        {
+                                                            url: url,
+                                                            type: method,
+                                                            data: data,
+                                                            success: function (data, textStatus, jqXHR) {
+
+                                                                $("#contenido").empty();
+                                                                $("#contenido").append(data);
+                                                            },
+                                                            error: function (jqXHR, textStatus, errorThrown) {
+                                                                alert(errorThrown);
+                                                            }
+                                                        });
+                                                   
+                                                } else {
+                                                    alert(data);
+                                                }
+                                            }).fail(function (data) {
+                                                alert(data);
+                                            });
+                                        });
+                                    </script>
+
+                                </tr>
+                            }
+                        }
+                        catch
+                        {
+                            <script>
+                                alert("Error en el listado, por favor intente acceder nuevamente");
+                            </script>
+                        }
+
+                    <tfoot>
+                        <tr>
+                            <th>Matrícula</th>
+                            <th>Modelo</th>
+                            <th>Capacidad Turista/Ejecutiva/VIP</th>
+                            <th>Equipaje (Kg)</th>
+                            <th>Dist. Max(Km)</th>
+                            <th>Vel. Max(Km/h)</th>
+                            <th>Combustible (L)</th>
+                            <th>Estado</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<script src="~/Content/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+<script language="javascript" type="text/javascript">
+
+    table = $('#example1').DataTable();
+
+</script>
+
+

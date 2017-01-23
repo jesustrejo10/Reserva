@@ -1,0 +1,299 @@
+﻿<!-- Indico que para esta vista, M08_AgregarAutomovil, utilizare el modelo Models/gestion_automoviles/CAgregarAutomovil-->
+@model BOReserva.Models.gestion_automoviles.CAgregarAutomovil
+
+<!--Indico que, estoy abriendo un formulario que tendra como accion del submit, el controlador gestion_automoviles"Controller", 
+    utilizara el metodo guardarAutomovil
+    le pasara la informacion mediante un POST-->
+
+
+
+@using (Html.BeginForm("saveVehicle", "gestion_automoviles", null, FormMethod.Post, new { @id = "formSaveVehicle", @class = "form-horizontal" }))
+{
+    <head>
+<meta charset="UTF-8">
+</head>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h1 class="box-title" style = "font-size:32px;"> Agregar automovil</h1>
+                    <div class="box-tools pull-right">
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="placa">Placa del vehiculo(<span style="color:red">*</span>)</label>
+                                 @Html.TextBoxFor(m => m._matricula, null, new { @class = "form-control", @placeholder = "Placa", @id = "vehi_placa", @maxlength = 8, @onblur = "checkTextField(this);" })
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="modelo">Fabricante(<span style="color:red">*</span>)</label>
+                                @{
+                                        List<SelectListItem> _fabricante = new List<SelectListItem>();
+                                        
+                                        _fabricante.Add(new SelectListItem
+                                             {
+                                                 Text = "Mazda",
+                                                 Value = "Mazda"
+                                             });
+                                        _fabricante.Add(new SelectListItem
+                                             {
+                                                 Text = "Jeep",
+                                                 Value = "Jeep",
+                                             });
+                                        _fabricante.Add(new SelectListItem
+                                             {
+                                                 Text = "Ford",
+                                                 Value = "Ford"
+                                             });
+                                }
+                                @Html.DropDownListFor(m => m._fabricante, _fabricante, new { @class = "form-control", @placeholder = "Marca", @id = "vehi_fabricante" })
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="modelo">Modelo(<span style="color:red">*</span>)</label>
+                                @Html.TextBoxFor(m => m._modelo, null, new { @class = "form-control", @placeholder = "Modelo", @id = "vehi_modelo", @onblur = "checkTextModelo(this);", @maxlength = 12 })
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="anio">A&ntilde;o de fabricacion(<span style="color:red">*</span>)</label>
+                                @Html.DropDownListFor(m => m._anio, BOReserva.Controllers.gestion_automovilesController.listadeanios(), new { @class = "form-control", @placeholder = "Placa", @id = "vehi_anio"})
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="tipo">Tipo(<span style="color:red">*</span>)</label>
+                                @{
+                                        List<SelectListItem> _tipos = new List<SelectListItem>();
+                                        _tipos.Add(new SelectListItem
+                                             {
+                                                 Text = "Sedan",
+                                                 Value = "Sedan"
+                                             });
+                                        _tipos.Add(new SelectListItem
+                                        {
+                                            Text = "Familiar",
+                                            Value = "Familiar"
+                                        });
+                                        _tipos.Add(new SelectListItem
+                                        {
+                                            Text = "Deportivo",
+                                            Value = "Deportivo"
+                                        });
+                                        _tipos.Add(new SelectListItem
+                                        {
+                                            Text = "Minivan",
+                                            Value = "Minivan"
+                                        });
+                                        _tipos.Add(new SelectListItem
+                                        {
+                                            Text = "Todoterreno",
+                                            Value = "Todoterreno"
+                                        });
+                                        _tipos.Add(new SelectListItem
+                                        {
+                                            Text = "Camioneta",
+                                            Value = "Camioneta"
+                                        });
+                                }
+                                @Html.DropDownListFor(m => m._tipovehiculo, _tipos, new { @class = "form-control", @placeholder = "Tipo", @id = "vehi_tipo" })
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="capacidad">Capacidad(<span style="color:red">*</span>)</label>
+                                @Html.DropDownListFor(m => m._cantpasajeros, BOReserva.Controllers.gestion_automovilesController.cantidad(10), new { @class = "form-control", @placeholder = "Tipo", @id = "vehi_capacidad" })
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="color">Color(<span style="color:red">*</span>)</label>
+                                @Html.DropDownListFor(m => m._color, BOReserva.Controllers.gestion_automovilesController.colores(), new { @class = "form-control", @placeholder = "Color", @id = "vehi_color" })
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="kilometraje">Kilometraje(<span style="color:red">*</span>)</label>
+                                @Html.TextBoxFor(m => m._kilometraje, null, new { @type = "number", @class = "form-control", @placeholder = "Kilometraje", @id = "vehi_kilometraje", min = "0", @onblur = "checklargo(this);" })
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            @*<div class="col-xs-6">
+                                <label for="fecharegistro">Fecha de registro(<span style="color:red">*</span>)</label>
+                                @Html.TextBoxFor(m => m._fecharegistro, null, new { @type = "date", @class = "form-control", @placeholder = "Fecha", @id = "vehi_registro", min = "2001-01-01", max = "2016-12-31", @onblur = "checkanio(this);" })
+                            </div>*@
+                            <div class="col-xs-6">
+                                <label for="">Pa&is(<span style="color:red">*</span>)</label>
+                                @*@Html.DropDownListFor(m => m._pais, BOReserva.Controllers.gestion_automovilesController.pais(), new { @class = "form-control", @placeholder = "Pais", @id = "vehi_pais", @onblur = "listadeciudades(this.value);"})*@
+                                @{
+                                        List<SelectListItem> paises = BOReserva.Controllers.gestion_automovilesController.pais();
+                                        if (paises.First().Text.Length > 15)
+                                        {
+                                            Response.Write("<script>alert('" + paises.First().Text + "');</script>");
+                                            List<SelectListItem> error = new List<SelectListItem>();
+                                            @Html.DropDownListFor(m => m._pais, error, new { @class = "form-control", @placeholder = "Pais", @id = "vehi_pais", @onblur = "listadeciudades(this.value);" });
+                                        }
+                                        else
+                                        {
+                                            @Html.DropDownListFor(m => m._pais, paises, new { @class = "form-control", @placeholder = "Pais", @id = "vehi_pais", @onblur = "listadeciudades(this.value);" });
+                                        }
+                                }
+                            </div>
+
+                            <div class="col-xs-6">
+                                <label for="Ciudad">Ciudad(<span style="color:red">*</span>)</label>
+                                @*@Html.DropDownListFor(m => m._ciudad, BOReserva.Controllers.gestion_automovilesController.ciudades(), new { @class = "form-control", @placeholder = "Ciudad", @id = "vehi_ciudad" })*@
+                                <select class="form-control" id="ciudades" name="ciudad" onblur="getciudad();"></select>
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="transmision">Transmision(<span style="color:red">*</span>)</label>
+                                @{
+                                        List<SelectListItem> _transmision = new List<SelectListItem>();
+                                        
+                                        _transmision.Add(new SelectListItem
+                                        {
+                                            Text = "Automatica",
+                                            Value = "Automatica"
+                                        });
+                                        _transmision.Add(new SelectListItem
+                                        {
+                                            Text = "Secuencial",
+                                            Value = "Secuencial"
+                                        });
+                                        _transmision.Add(new SelectListItem
+                                        {
+                                            Text = "Sincronica",
+                                            Value = "Sincronica"
+                                        });
+                                }
+                                @Html.DropDownListFor(m => m._transmision, _transmision, new { @class = "form-control", @placeholder = "Ciudad", @id = "vehi_transmision" })
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="preciocompra">Precio de compra ($)(<span style="color:red">*</span>)</label>
+                                @Html.TextBoxFor(m => m._preciocompra, null, new { @type = "number", @class = "form-control", @placeholder = "Dolares", @id = "vehi_compra", min = "0", @onblur = "checkprecio(this);" })
+
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6">
+                                <label for="tarifa">Tarifa diaria ($)(<span style="color:red">*</span>)</label>
+                                @Html.TextBoxFor(m => m._precioalquiler, null, new { @type = "number", @class = "form-control", @placeholder = "Dolares", @id = "vehi_tarifa", min = "0", @onblur = "checktarifapenalidad(this);" })
+                            </div>
+
+                            <div class="col-xs-6">
+                                <label for="penalidad">Penalidad diaria ($)(<span style="color:red">*</span>)</label>
+                                @Html.TextBoxFor(m => m._penalidaddiaria, null, new { @type = "number", @class = "form-control", @placeholder = "Dolares", @id = "vehi_penalidad", min = "0", @onblur = "checktarifapenalidad(this);" })
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                           <button type="submit" id="save_vehicle" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                         </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+
+    <script src="~/Scripts/Scripts_Automoviles/llamadas_comunes_automoviles.js"></script>
+    
+    <script >
+
+        $("#save_vehicle").click(function (e) {
+            e.preventDefault();
+            var form = $("#formSaveVehicle");
+            var placa = $('#vehi_placa').val();
+            var fabricante = $('#vehi_fabricante').val();
+            var modelo = $('#vehi_modelo').val();
+            var anio = $('#vehi_anio').val();
+            var tipo = $('#vehi_tipo').val();
+            var capacidad = $('#vehi_capacidad').val();
+            var color = $('#vehi_color').val();
+            var kilometraje = $('#vehi_kilometraje').val();
+            var fecha = $('#vehi_registro').val();
+            var pais = $('#vehi_pais').val();
+            var ciudad = $('#ciudades').val();
+            var transmision = $('#vehi_transmision').val();
+            var preciocompra = $('#vehi_compra').val();
+            var tarifadiaria = $('#vehi_tarifa').val();
+            var penalidaddiaria = $('#vehi_penalidad').val();
+            if (placa && fabricante && modelo && anio && tipo && capacidad && color && kilometraje && pais && ciudad && transmision && preciocompra && tarifadiaria && penalidaddiaria) {
+                $.ajax({
+                    url: "gestion_automoviles/saveVehicle",
+                    data: form.serialize(),
+                    type: 'POST',
+                    success: function (data) {
+                        if (data === "1") {
+                            alert("Se registro el vehiculo exitosamente");
+                            $('#formSaveVehicle')[0].reset();
+                        } else {
+                            alert(data);
+                        }
+                    }
+                });
+            } else {
+                alert("Existen campos vacios, por favor revise todos los campos");
+            }
+        });
+
+
+
+    </script>
+
+    <script language="javascript" type="text/javascript">
+        function listadeciudades(_stateId) {
+            var procemessage = "<option value='0'> Espere un momento...</option>";
+            $("#ciudades").html(procemessage).show();
+            var url = "/gestion_automoviles/listaciudades";
+            var _pais = $('#vehi_pais option:selected').text();
+            $.ajax({
+                url: url,
+                data: { pais: _pais },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+                     markup = "";
+                     for (var x = 0; x < data.length; x++) {
+                         markup += "<option>" + data[x] + "</option>";
+                    }
+                    $("#ciudades").html(markup).show();
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+            });
+        }
+
+
+
+        function getciudad() {
+            var url = "/gestion_automoviles/getCity";
+            var ciudad = $('#ciudades option:selected').text();
+            $.ajax({
+                url: url,
+                data: { _ciudad: ciudad },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+
+                }
+            });
+
+        }
+
+    </script>
+
+}

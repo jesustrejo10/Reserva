@@ -1,0 +1,105 @@
+﻿@model BOReserva.Models.gestion_cruceros.CGestion_itinerario
+<script src="~/Scripts/Scripts_Cruceros/scripts_cruceros.js"></script>
+@{
+
+    IEnumerable<SelectListItem> listOrigen = Model._listaOrigen;
+    
+    
+
+
+}
+
+@using (Html.BeginForm("guardarItinerario", "gestion_cruceros", null, FormMethod.Post, new { @id = "formGuardarItinerario", @class = "form-horizontal" }))
+{
+    <div class="box">
+        <div class="box-body">
+            <div class="box-header with-border">
+                <h1 class="box-title"> Agregar Itinerario</h1>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"></button>
+                </div>
+            </div>
+            <div class="modal-body col-xs-12" id="bodyCruc" style="margin-left:24% ; height:300px">
+                <section id="primeraParte">
+                    <div class="form-group" style="margin-bottom:20px">
+                        <label>Cruceros:</label>                        
+                        @Html.DropDownListFor(m => m._cruceroNombre, new SelectList(Model._listaCruceros as System.Collections.IEnumerable, "Value", "Text"),
+                        "Seleccione una crucero", new { @class = "form-control", @id = "cruceroR", @style = "width:50% ", @required = "true" })
+
+                    </div>
+                    <div class="form-group" style="margin-bottom:20px">                        
+                        <label>Elegir Origen de la Ruta (<span style="color:red">*</span>):</label>
+                        @Html.DropDownListFor(m => m._origen, new SelectList(Model._listaOrigen as System.Collections.IEnumerable, "Value", "Text"),
+              "Seleccione una ruta origen", new { @class = "form-control", @id = "ciudadO", @style = "width: 50%;", @required = "true" })
+
+                        <br />
+                        <label>Elegir Destino de la Ruta (<span style="color:red">*</span>):</label>
+                        @Html.DropDownListFor(m => m._destino, new SelectList(Enumerable.Empty<SelectListItem>(), "Value", "Text"),
+                                "Seleccione una ruta destino", new { @class = "form-control", @id = "ciudadD", @style = "width: 50%;", @required = "true" })
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group" style="margin-bottom:20px">
+                                <label>Fecha Inicio:</label>
+                                @Html.TextBoxFor(m => m._fechaInicio, null, new { @type = "date", @id = "fecha_inicio", @style = "width:50%" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group" style="margin-bottom:20px">
+                                <label>Fecha Fin:</label>
+                                @Html.TextBoxFor(m => m._fechaFin, null, new { @type = "date", @id = "fecha_inicio", @style = "width:50%" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-top:10px;">
+                        <button type="button" id="guardar_itinerario" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                    </div>
+                </section>
+            </div>
+            <div class="modal-body col-xs-12" id="bodyCruc" style="margin-left: 14.5%">
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+    <script>
+        $("#guardar_itinerario").click(function (e) {
+            e.preventDefault();
+            var form = $("#formGuardarItinerario");
+            $.ajax({
+                url: "gestion_cruceros/guardarItinerario",
+                data: form.serialize(),
+                type: 'POST',
+                success: function (data) {
+                    $.ajax({
+                        url: '/gestion_cruceros/M24_ListarItinerario',
+                        type: 'GET',
+                        data: '',
+                        success: function (data, textStatus, jqXHR) {
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+                    $('#formGuardarItinerario')[0].reset();
+                },
+                error: function (data) {
+                    console.log(data);
+                    $('#formGuardarItinerario')[0].reset();
+                }
+            });
+        });
+    </script>
+                            }

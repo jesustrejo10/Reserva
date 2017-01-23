@@ -1,0 +1,143 @@
+<div class="row">
+    <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
+
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Lista de Boletos</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="example" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>N° Boleto</th>
+                            <th>Fecha</th>
+                            <th>Pasajero</th>
+                            <th>Origen</th>
+                            <th>Destino</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @try
+                        {
+                            foreach (var item in Model)
+                            {
+                                String nombre = @item._pasajero._primer_nombre + " " + @item._pasajero._primer_apellido;
+
+                                <tr id="@item._id">
+                                    <td>@item._id</td>
+                                    <td>@item._fechaBoleto.ToString()</td>
+                                    <td>@nombre</td>
+                                    <td>@item._origen.Name</td>
+                                    <td>@item._destino.Name</td>
+                                    <td>
+                                        <a href="#" title="Consultar"> <i class="fa fa-eye consultar"></i></a>
+                                        <a href="#" title="Modificar"><i class="fa fa-pencil modificar"></i></a>
+                                        <a href="#" title="Eliminar"><i class="fa fa-times eliminar"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        catch
+                        {
+
+                        }
+                </table>
+                <div class="row">
+                    <div id="loading" class="col-lg-12" style=" display: none; text-align:center; margin-top: 15px;"><span class="fa fa-spinner refresh-animate "></span></div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<script src="~/Content/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+<script language="javascript" type="text/javascript">
+
+    function loader() {
+        $("#loader").fadeIn("slow");
+        $(window).ajaxComplete(function () {
+            // Se oculta el loader animado
+            $("#loader").hide();
+        });
+    }
+
+    table = $('#example').DataTable();
+    //e.preventDefault();
+    //Método para consultar boletos
+    $(document).on("click", ".consultar", function () {
+        loader();
+        var identificador = $(this).parent().parent().parent().attr("id");
+      
+        jQuery.ajax({
+            type: "GET",
+            url: "/gestion_boletos/M05_VisualizarBoleto",
+            data: { id: identificador }
+        }).done(function (data) {
+            $("#contenido").empty();
+            $("#contenido").append(data);
+        }).fail(function () {
+            alert("Ocurrió un error")
+        });
+    })
+
+
+    $(document).on("click", ".modificar", function () {
+        loader();
+        var identificador = $(this).parent().parent().parent().attr("id");
+        jQuery.ajax({
+            type: "GET",
+            url: "/gestion_boletos/M05_ModificarBoleto",
+            data: { id: identificador }
+        }).done(function (data) {
+            $("#contenido").empty();
+            $("#contenido").append(data);
+        }).fail(function () {
+            alert("Ocurrió un error ")
+        });
+    });
+
+    $(document).ready(function () {
+        //e.preventDefault();
+        $(".eliminar").click(function () {
+            loader();
+            var identificador = $(this).parent().parent().parent().attr("id");
+            jQuery.ajax({
+                type: "POST",
+                url: "/gestion_boletos/eliminarBoleto",
+                data: { id: identificador }
+            }).done(function (data) {
+
+                alert("Se eliminó exitosamente el boleto")
+                var url1 = '/gestion_boletos/M05_VisualizarBoletos';
+                var method = 'GET';
+                var data1 = '';
+
+                $.ajax(
+                    {
+                        url: url1,
+                        type: method,
+                        data: data,
+                        success: function (data, textStatus, jqXHR) {
+
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+            }).fail(function () {
+                alert("No se pudo eliminar")
+            });
+        });
+    });
+</script>

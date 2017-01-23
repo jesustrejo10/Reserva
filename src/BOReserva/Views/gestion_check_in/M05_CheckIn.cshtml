@@ -1,0 +1,88 @@
+@model BOReserva.Models.gestion_check_in.CCheckIn
+
+@using (Html.BeginForm("buscarBoletos", "gestion_check_in", null, FormMethod.Post, new { @id = "formPasaporte", @class = "form-horizontal" }))
+{
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h1 class="box-title">Check In</h1>
+                    <div class="box-tools pull-right">
+                    </div>
+                </div>
+                <div class="box-body">
+
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <label>Número de pasaporte:</label>
+                            @Html.TextBoxFor(m => m._pasaporte, null, new { @class = "form-control", @placeholder = "Ej. 237654242", @id = "pasaporte" })
+                            <label id="pas_empty" class="control-label has-error none">
+                                <i class="fa fa-times-circle-o"></i> Este campo es requerido y solo debe contener caracteres numéricos
+                            </label>
+                        </div>
+                        <br>
+
+                        <div class="row">
+
+                            <div class="col-md-12" style="margin-top:10px;">
+                                <button type="button" id="siguiente" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Siguiente</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<script>
+
+    function loader() {
+        $("#loader").fadeIn("slow");
+        $(window).ajaxComplete(function () {
+            // Se oculta el loader animado
+            $("#loader").hide();
+        });
+    }
+    //Busca los boletos asignados a ese pasajero
+    $("#siguiente").click(function (e) {
+        e.preventDefault();
+        $(".none").hide();
+        $(".form-control").removeClass("has-error");
+        var pasaporte = document.getElementById("pasaporte").value;
+        var carnum = /^[0-9]+$/;
+        //Validaciones para el pasaporte no nulo o con letras
+        if (pasaporte == "" || pasaporte == undefined || !pasaporte.match(carnum)) {
+            $("#pasaporte").addClass("has-error");
+            $("#pas_empty").fadeIn();
+            win = false;
+        }
+            //Si pasa las validaciones busca los boletos asignados a ese pasajero
+        else {
+            loader();
+            var form = $("#formPasaporte");
+            $.ajax({
+                url: "gestion_check_in/buscarBoletos",
+                data: form.serialize(),
+                type: 'POST',
+                success: function (data) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                }
+                   , error: function (xhr, textStatus, exceptionThrown) {
+
+                       alert(xhr.responseText);
+                   }
+            });
+        }
+    });
+
+
+</script>

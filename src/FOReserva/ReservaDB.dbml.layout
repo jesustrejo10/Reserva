@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 20, 22.125" name="ReservaDB">
+  <DataContextMoniker Name="/ReservaDBDataContext" />
+  <nestedChildShapes>
+    <classShape Id="37052857-307e-47ab-a420-f268cd7a1eed" absoluteBounds="3.5, 7, 2, 3.6939111328124996">
+      <DataClassMoniker Name="/ReservaDBDataContext/Automovil" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d844509e-071a-417b-801c-16c32787b855" absoluteBounds="3.515, 7.46, 1.9700000000000002, 3.1339111328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="dfd0aeda-abdc-4bba-93e2-55a6fe11acf4" absoluteBounds="3.5, 0.75, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/ReservaDBDataContext/Avion" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e2f2e5df-b9aa-4cf9-a1ce-39cd9fbda783" absoluteBounds="3.515, 1.21, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5d8cde24-e80c-4f97-b917-a8d05c9dff24" absoluteBounds="0.75, 15.5, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/ReservaDBDataContext/Boleto" />
+      <nestedChildShapes>
+        <elementListCompartment Id="095cfa87-457b-45ec-a886-4954b4a6d3ad" absoluteBounds="0.765, 15.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f1cb6c66-ab05-4cfc-9cd5-9f0dac69a4b2" absoluteBounds="14.75, 6.5, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/ReservaDBDataContext/Boleto_Vuelo" />
+      <nestedChildShapes>
+        <elementListCompartment Id="16deca05-7621-4f72-a066-53e864434207" absoluteBounds="14.765, 6.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d754d6dd-d242-4109-95e6-c89d4ae74f0e" absoluteBounds="6.25, 14.375, 2, 1.7708968098958344">
+      <DataClassMoniker Name="/ReservaDBDataContext/Cabina" />
+      <nestedChildShapes>
+        <elementListCompartment Id="98f559cb-79df-4480-ae4e-a5dea67a102a" absoluteBounds="6.265, 14.835, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fc274182-b0d2-4e7b-a29b-d7864415b5eb" absoluteBounds="9, 14.375, 2, 1.7708968098958344">
+      <DataClassMoniker Name="/ReservaDBDataContext/Camarote" />
+      <nestedChildShapes>
+        <elementListCompartment Id="935e8f6d-1d57-4ca6-bdfd-f1856da71fdb" absoluteBounds="9.015, 14.835, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8e4081b5-1fe6-443c-b016-12d5e27de2b4" absoluteBounds="14.75, 9.5, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/ReservaDBDataContext/Comida" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ce0e9459-d8b5-4813-abd8-c60146aec147" absoluteBounds="14.765, 9.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="71688b5a-43bd-4370-8589-70120c92d367" absoluteBounds="3.75, 17.5, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ReservaDBDataContext/Comida_Vuelo" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1e57cf66-5e94-4fb0-aaef-09a156f02dfb" absoluteBounds="3.765, 17.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c8ca2646-10eb-4969-add1-b6c3345d8d2c" absoluteBounds="3.5, 12.375, 2, 1.7708968098958344">
+      <DataClassMoniker Name="/ReservaDBDataContext/Crucero" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0f365363-b8ac-4b74-befb-84109499f0ce" absoluteBounds="3.515, 12.835, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9e2d491f-c289-4636-86c5-14a6927411b7" absoluteBounds="15, 14.125, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ReservaDBDataContext/Diario_Puntuacion" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0fe4e69b-367d-4ac3-b435-6d950551c1bb" absoluteBounds="15.015, 14.585, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="178bf587-08b2-48c2-959a-8787e1e9f33a" absoluteBounds="12.25, 16.125, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/ReservaDBDataContext/Diario_Viaje" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2eff0958-ea1e-4a3a-a993-34e81617dba6" absoluteBounds="12.265, 16.585, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0052ca47-217c-4294-8ada-59553408a19d" absoluteBounds="11.5, 3.125, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ReservaDBDataContext/Equipaje" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8dc2f3e6-8dad-4a77-a1d9-3d6b2858ae9c" absoluteBounds="11.515, 3.585, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="946356a6-091f-49e1-afaa-a7a9b0327be4" absoluteBounds="15, 16.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ReservaDBDataContext/Foto" />
+      <nestedChildShapes>
+        <elementListCompartment Id="90347085-a4fe-480f-8462-9b89b8256902" absoluteBounds="15.015, 17.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9c4b5d85-bfac-4abf-b11e-96b77c43d5be" absoluteBounds="9.5, 8.125, 2, 1.7708968098958344">
+      <DataClassMoniker Name="/ReservaDBDataContext/Hotel" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8a6b8c9c-0dea-42a7-a12f-e659e7d8f647" absoluteBounds="9.515, 8.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="69c7bcd1-7194-4384-9e37-b409321e5787" absoluteBounds="6.25, 4.375, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/ReservaDBDataContext/Itinerario_Crucero" />
+      <nestedChildShapes>
+        <elementListCompartment Id="066c7151-a3c5-4f2b-8637-05b3c020e3bc" absoluteBounds="6.265, 4.835, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="505f0e2a-088e-4f90-b757-af9d1dccdb85" absoluteBounds="6.75, 17.5, 2, 1.7708968098958309">
+      <DataClassMoniker Name="/ReservaDBDataContext/Itinerario_Vac" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ca0022d5-d922-4a8f-908b-4f38b78a69d3" absoluteBounds="6.765, 17.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7ed78bb7-17dd-4435-be41-ad2bf10af039" absoluteBounds="0.75, 6.5, 2, 1.9631982421874996">
+      <DataClassMoniker Name="/ReservaDBDataContext/Lugar" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f07ad5ed-7df4-43ce-8f62-17c40b6b875e" absoluteBounds="0.765, 6.96, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="71b71657-45bf-4bb6-8e58-297bffc21e2d" absoluteBounds="11.5, 19.75, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/ReservaDBDataContext/Pasajero" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c728dd39-3d0a-43a3-9863-1fa97537777e" absoluteBounds="11.515, 20.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="104a27bc-5238-444f-bac6-4daa7c03469d" absoluteBounds="8.75, 2.75, 2, 2.347801106770834">
+      <DataClassMoniker Name="/ReservaDBDataContext/Pase_Abordaje" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d16dd341-fe04-4397-9028-0c042b757aa9" absoluteBounds="8.765, 3.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6727eccd-f212-4d8f-b33f-a160cebf5244" absoluteBounds="12.25, 8.25, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/ReservaDBDataContext/Puntuacion" />
+      <nestedChildShapes>
+        <elementListCompartment Id="65345880-c7f3-40c6-9c0b-737b48561ec7" absoluteBounds="12.265, 8.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e441fc63-a8ae-48f7-82f1-2839c97fb92d" absoluteBounds="14.25, 2.875, 2, 1.9631982421875005">
+      <DataClassMoniker Name="/ReservaDBDataContext/Reclamo_Equipaje" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d3b06edb-72af-4ff1-bd64-51f363f140e5" absoluteBounds="14.265, 3.335, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7523997c-bd81-4adf-bc13-535436bf6039" absoluteBounds="16.75, 2.5, 2, 2.5401025390625005">
+      <DataClassMoniker Name="/ReservaDBDataContext/Reserva" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2b44ad44-d218-41e0-9c64-d333b0de12c8" absoluteBounds="16.765, 2.96, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1b3c1939-f795-42b2-ab6b-53af7052ec3a" absoluteBounds="12.25, 10.875, 2, 2.3478011067708344">
+      <DataClassMoniker Name="/ReservaDBDataContext/Reserva_Habitacion" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e41d8b50-901f-4d3a-858c-bfd9ea1b5251" absoluteBounds="12.265, 11.335, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8258cc97-d054-422a-993e-c536cbf04e36" absoluteBounds="17.75, 6.5, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/ReservaDBDataContext/Restaurante" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f8d4eeb5-8850-425e-9fab-9737fb6c6325" absoluteBounds="17.765, 6.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f35e4350-f8d9-4f2f-9303-9923be497051" absoluteBounds="6.75, 11.5, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/ReservaDBDataContext/Rol" />
+      <nestedChildShapes>
+        <elementListCompartment Id="69e44215-7e73-4cfa-bd31-38e03b7b502b" absoluteBounds="6.765, 11.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a17a9264-212e-4231-bd86-5779a5c4cda1" absoluteBounds="3.5, 4.25, 2, 1.9631982421875005">
+      <DataClassMoniker Name="/ReservaDBDataContext/Ruta" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9e7b6ba8-2a71-4018-949e-217d208b0aa6" absoluteBounds="3.515, 4.71, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="af3ad731-c45d-4ea2-9819-23c2127e49f5" absoluteBounds="17.75, 9.5, 2, 1.3862939453124987">
+      <DataClassMoniker Name="/ReservaDBDataContext/Telefono" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8028591d-8bb1-4561-8e5e-bf8c150a8875" absoluteBounds="17.765, 9.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="68868150-7900-4b98-9d50-118bf0ce8334" absoluteBounds="9.5, 10.875, 2, 2.3478011067708344">
+      <DataClassMoniker Name="/ReservaDBDataContext/Usuario" />
+      <nestedChildShapes>
+        <elementListCompartment Id="daa39556-1c08-4405-97b6-988df4596129" absoluteBounds="9.515, 11.335, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="99c0e1fd-b56d-49fb-99ce-49865aaec444" absoluteBounds="6.25, 1.25, 2, 1.9631982421875003">
+      <DataClassMoniker Name="/ReservaDBDataContext/Vuelo" />
+      <nestedChildShapes>
+        <elementListCompartment Id="33c501c8-f2b1-4cdc-8665-7787a0e20c53" absoluteBounds="6.265, 1.71, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(8.25 : 15.2604484049479); (9 : 15.2604484049479)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ReservaDBDataContext/Cabina/Cabina_Camarote" />
+      <nodes>
+        <classShapeMoniker Id="d754d6dd-d242-4109-95e6-c89d4ae74f0e" />
+        <classShapeMoniker Id="fc274182-b0d2-4e7b-a29b-d7864415b5eb" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 13.4511946614583); (6.46875 : 13.4511946614583); (6.46875 : 14.375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ReservaDBDataContext/Crucero/Crucero_Cabina" />
+      <nodes>
+        <classShapeMoniker Id="c8ca2646-10eb-4969-add1-b6c3345d8d2c" />
+        <classShapeMoniker Id="d754d6dd-d242-4109-95e6-c89d4ae74f0e" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(13.25 : 16.125); (13.25 : 14.9142976888021); (14.4166666666667 : 14.9142976888021 : JumpStart); (14.5833333333333 : 14.9142976888021 : JumpEnd); (15 : 14.9142976888021)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ReservaDBDataContext/Diario_Viaje/Diario_Viaje_Diario_Puntuacion" />
+      <nodes>
+        <classShapeMoniker Id="178bf587-08b2-48c2-959a-8787e1e9f33a" />
+        <classShapeMoniker Id="9e2d491f-c289-4636-86c5-14a6927411b7" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(14.25 : 17.5392976888021); (14.4166666666667 : 17.5392976888021 : JumpStart); (14.5833333333333 : 17.5392976888021 : JumpEnd); (15 : 17.5392976888021)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ReservaDBDataContext/Diario_Viaje/Diario_Viaje_Foto" />
+      <nodes>
+        <classShapeMoniker Id="178bf587-08b2-48c2-959a-8787e1e9f33a" />
+        <classShapeMoniker Id="946356a6-091f-49e1-afaa-a7a9b0327be4" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 13.0725910872396); (6.359375 : 13.0725910872396); (6.359375 : 6.14589680989583)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ReservaDBDataContext/Crucero/Crucero_Itinerario_Crucero" />
+      <nodes>
+        <classShapeMoniker Id="c8ca2646-10eb-4969-add1-b6c3345d8d2c" />
+        <classShapeMoniker Id="69c7bcd1-7194-4384-9e37-b409321e5787" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 7.73159912109375); (3.5 : 7.73159912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ReservaDBDataContext/Lugar/Lugar_Automovil" />
+      <nodes>
+        <classShapeMoniker Id="7ed78bb7-17dd-4435-be41-ad2bf10af039" />
+        <classShapeMoniker Id="37052857-307e-47ab-a420-f268cd7a1eed" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.45863627929687 : 8.4631982421875); (1.45863627929687 : 8.7131982421875); (2.05523818359375 : 8.7131982421875); (2.05523818359375 : 8.4631982421875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ReservaDBDataContext/Lugar/Lugar_Lugar" />
+      <nodes>
+        <classShapeMoniker Id="7ed78bb7-17dd-4435-be41-ad2bf10af039" />
+        <classShapeMoniker Id="7ed78bb7-17dd-4435-be41-ad2bf10af039" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(10.75 : 3.91429768880208); (11.5 : 3.91429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ReservaDBDataContext/Pase_Abordaje/Pase_Abordaje_Equipaje" />
+      <nodes>
+        <classShapeMoniker Id="104a27bc-5238-444f-bac6-4daa7c03469d" />
+        <classShapeMoniker Id="0052ca47-217c-4294-8ada-59553408a19d" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(14.25 : 8.88869466145833); (14.4166666666667 : 8.88869466145833 : JumpStart); (14.5833333333333 : 8.88869466145833 : JumpEnd); (16.90625 : 8.88869466145833); (16.90625 : 14.125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ReservaDBDataContext/Puntuacion/Puntuacion_Diario_Puntuacion" />
+      <nodes>
+        <classShapeMoniker Id="6727eccd-f212-4d8f-b33f-a160cebf5244" />
+        <classShapeMoniker Id="9e2d491f-c289-4636-86c5-14a6927411b7" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(13.5 : 3.91429768880208); (14.25 : 3.91429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ReservaDBDataContext/Equipaje/Equipaje_Reclamo_Equipaje" />
+      <nodes>
+        <classShapeMoniker Id="0052ca47-217c-4294-8ada-59553408a19d" />
+        <classShapeMoniker Id="e441fc63-a8ae-48f7-82f1-2839c97fb92d" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(13.5 : 20.8277498372396); (14.5 : 20.8277498372396); (14.5 : 4.8381982421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ReservaDBDataContext/Pasajero/Pasajero_Reclamo_Equipaje" />
+      <nodes>
+        <classShapeMoniker Id="71b71657-45bf-4bb6-8e58-297bffc21e2d" />
+        <classShapeMoniker Id="e441fc63-a8ae-48f7-82f1-2839c97fb92d" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.5 : 9.89589680989583); (11.875 : 10.2708968098958); (11.875 : 12.0489005533854); (12.25 : 12.0489005533854)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ReservaDBDataContext/Hotel/Hotel_Reserva_Habitacion" />
+      <nodes>
+        <classShapeMoniker Id="9c4b5d85-bfac-4abf-b11e-96b77c43d5be" />
+        <classShapeMoniker Id="1b3c1939-f795-42b2-ab6b-53af7052ec3a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 5.26044840494792); (6.25 : 5.26044840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ReservaDBDataContext/Ruta/Ruta_Itinerario_Crucero" />
+      <nodes>
+        <classShapeMoniker Id="a17a9264-212e-4231-bd86-5779a5c4cda1" />
+        <classShapeMoniker Id="69c7bcd1-7194-4384-9e37-b409321e5787" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 6.5); (1.75 : 5.23159912109375); (3.5 : 5.23159912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ReservaDBDataContext/Lugar/Lugar_Ruta" />
+      <nodes>
+        <classShapeMoniker Id="7ed78bb7-17dd-4435-be41-ad2bf10af039" />
+        <classShapeMoniker Id="a17a9264-212e-4231-bd86-5779a5c4cda1" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.2812525 : 6.5); (2.2812525 : 5.75365118164063); (3.5 : 5.75365118164063)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ReservaDBDataContext/Lugar/Lugar_Ruta1" />
+      <nodes>
+        <classShapeMoniker Id="7ed78bb7-17dd-4435-be41-ad2bf10af039" />
+        <classShapeMoniker Id="a17a9264-212e-4231-bd86-5779a5c4cda1" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.28125 : 13.2228011067708); (11.28125 : 14.21875); (11.3385441666667 : 14.21875 : JumpStart); (11.5052108333333 : 14.21875 : JumpEnd); (14.4166666666667 : 14.21875 : JumpStart); (14.5833333333333 : 14.21875 : JumpEnd); (15 : 14.21875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ReservaDBDataContext/Usuario/Usuario_Diario_Puntuacion" />
+      <nodes>
+        <classShapeMoniker Id="68868150-7900-4b98-9d50-118bf0ce8334" />
+        <classShapeMoniker Id="9e2d491f-c289-4636-86c5-14a6927411b7" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.4218775 : 13.2228011067708); (11.4218775 : 17.532900390625); (12.25 : 17.532900390625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ReservaDBDataContext/Usuario/Usuario_Diario_Viaje" />
+      <nodes>
+        <classShapeMoniker Id="68868150-7900-4b98-9d50-118bf0ce8334" />
+        <classShapeMoniker Id="178bf587-08b2-48c2-959a-8787e1e9f33a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.5 : 11.3994502766927); (11.7916666666667 : 11.3994502766927 : JumpStart); (11.9583333333333 : 11.3994502766927 : JumpEnd); (12.25 : 11.3994502766927)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ReservaDBDataContext/Usuario/Usuario_Reserva_Habitacion" />
+      <nodes>
+        <classShapeMoniker Id="68868150-7900-4b98-9d50-118bf0ce8334" />
+        <classShapeMoniker Id="1b3c1939-f795-42b2-ab6b-53af7052ec3a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.75 : 12.0969962565104); (9.5 : 12.0969962565104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ReservaDBDataContext/Rol/Rol_Usuario" />
+      <nodes>
+        <classShapeMoniker Id="f35e4350-f8d9-4f2f-9303-9923be497051" />
+        <classShapeMoniker Id="68868150-7900-4b98-9d50-118bf0ce8334" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 2.23159912109375); (6.25 : 2.23159912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ReservaDBDataContext/Avion/Avion_Vuelo" />
+      <nodes>
+        <classShapeMoniker Id="dfd0aeda-abdc-4bba-93e2-55a6fe11acf4" />
+        <classShapeMoniker Id="99c0e1fd-b56d-49fb-99ce-49865aaec444" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 4.25); (5.875 : 3.875); (5.875 : 2.75365068164063); (6.25 : 2.75365068164063)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ReservaDBDataContext/Ruta/Ruta_Vuelo" />
+      <nodes>
+        <classShapeMoniker Id="a17a9264-212e-4231-bd86-5779a5c4cda1" />
+        <classShapeMoniker Id="99c0e1fd-b56d-49fb-99ce-49865aaec444" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

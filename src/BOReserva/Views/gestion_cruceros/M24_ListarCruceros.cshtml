@@ -1,0 +1,188 @@
+
+<div class="row">
+    <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
+
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title"><b>Lista de Cruceros</b></h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Compa&ntilde;&iacute;a</th>
+                            <th>Capacidad</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @try
+                        {
+                            foreach (var crucero in Model)
+                            {
+                                BOReserva.DataAccess.Domain.Crucero c = (BOReserva.DataAccess.Domain.Crucero)crucero.Value;
+                                <tr id="@crucero.Key">
+                                    <td>@c._nombreCrucero </td>
+                                    <td>@c._companiaCrucero </td>
+                                    <td>@c._capacidadCrucero <i class="fa fa-user"></i></td>
+                                    <td>@c._estatus </td>
+                                    <td>
+                                        <a href="#"> <i class="fa fa-eye m03DetalleRutas"></i></a>
+                                        <a href="#"><i class="fa fa-pencil M24_ModificarCrucero"></i></a>
+                                        <a href="#"><i class="glyphicon glyphicon-expand m24ListarCabinas"></i></a>
+                                    </td>
+                                </tr>
+
+                            }
+                        }
+                        catch
+                        {
+
+                        }
+
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+
+
+
+<script>
+    $(".eliminar_crucero").click(function (e) {
+        e.preventDefault();
+        var crucero_id = $(this).closest('tr').attr('id');
+        console.log(crucero_id);
+        $.ajax({
+            url: "gestion_cruceros/eliminarCrucero",
+            data: { "id_crucero": crucero_id },
+            type: 'POST',
+            success: function (data) {
+                $.ajax({
+                    url: '/gestion_cruceros/M24_ListarCruceros',
+                    type: 'GET',
+                    data: '',
+                    success: function (data, textStatus, jqXHR) {
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    });
+</script>
+
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        //e.preventDefault();
+        $(".m24ListarCabinas").on("click", (function () {
+            alert("Se esta procesando tu solicitud, por favor espere");
+            var identificador = $(this).parent().parent().parent().attr("id");
+            jQuery.ajax({
+                type: "GET",
+                url: "/gestion_cruceros/M24_ListarCabinas",
+                data: { id: identificador }//id = es el id q recibes en el método es decir public ActionResult M24_ListarCabinas(int id)
+            }).done(function (data) {
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            }).fail(function () {
+                alert("Error, por favor refresque la pagina")
+            });
+        }));
+    });
+
+    $(document).ready(function () {
+        //e.preventDefault();
+        $(".M24_ModificarCrucero").click(function () {
+            alert("Se esta procesando tu solicitud, por favor espere");
+            var identificador = $(this).parent().parent().parent().attr("id");
+            jQuery.ajax({
+                type: "GET",
+                url: "/gestion_cruceros/M24_ModificarCrucero",
+                data: { id: identificador }//id = es el nombre q recibes en el método es decir public ActionResult M24_ModificarCrucero(int id)
+            }).done(function (data) {
+                //$("#sdssss").append(data);
+
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            }).fail(function () {
+                alert(data);
+            });
+        });
+    });
+
+</script>
+
+<script>
+    $(".cambioCrucero").click(function (e) {
+        e.preventDefault();
+        var crucero_id = $(this).closest('tr').attr('id');
+        console.log(crucero_id);
+        $.ajax({
+            url: "gestion_cruceros/cambiarEstatusCrucero",
+            data: { "id_crucero": crucero_id },
+            type: 'POST',
+            success: function (data) {
+                $.ajax({
+                    url: '/gestion_cruceros/M24_ListarCruceros',
+                    type: 'GET',
+                    data: '',
+                    success: function (data, textStatus, jqXHR) {
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    });
+</script>
+
+<script src="~/Content/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+<script language="javascript" type="text/javascript">
+    table = $('#example1').DataTable();
+</script>
+
+<script>
+    $(".modificoCrucero").click(function (e) {
+        e.preventDefault();
+        var crucero_id = $(this).closest('tr').attr('id');
+        var url = "/gestion_cruceros/M24_ModificarCrucero/" + crucero_id;
+        var method = 'GET';
+        var data = ''
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+</script>
+

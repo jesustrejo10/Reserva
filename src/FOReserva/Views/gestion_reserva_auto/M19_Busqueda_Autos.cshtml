@@ -1,0 +1,81 @@
+﻿@model List<FOReserva.Models.gestion_reserva_automovil.CAutomovil>
+@{
+    ViewBag.Title = "Resultados Automoviles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@{
+    if (Model.Count() == 0)
+    {
+        <div class="row">
+            <center><h1><i class="fa fa-exclamation-circle orange" aria-hidden="true"></i> No hay autos disponibles </h1></center>
+        </div>
+    }
+    else
+    { 
+         <!-- FEATURED GRID -->
+<div class="row">
+    <ul class="shop-item-list row list-inline nomargin">
+
+        @foreach (var item in Model)
+        {
+            using (Html.BeginForm("M19_Accion_Reserva", "gestion_reserva_auto", FormMethod.Post))
+            { 
+                <li class="col-lg-12">
+                    <div class="shop-item clearfix">
+                        <input type="hidden" name="matricula" value="@item._matricula">
+                        <input type="hidden" name="modelo" value="@item._modelo">
+                        <input type="hidden" name="fabricante" value="@item._fabricante">
+                        <input type="hidden" name="fechaini" value="@item._anio">
+                        <input type="hidden" name="fechafin" value="@item._kilometraje">
+                        <input type="hidden" name="horaini" value="@item._cantPasajeros">
+                        <input type="hidden" name="horafin" value="@item._tipo">
+                        <input type="hidden" name="ciudadori" value="@item._precioCompra">
+                        <input type="hidden" name="ciudaddes" value="@item._precioAlquiler">
+                        
+                        <input type="hidden" name="tipo" value="@item._penalidadDiaria">
+                        <input type="hidden" name="color" value="@item._fechaRegistro">
+                        <input type="hidden" name="transmision" value="@item._color">
+                        <input type="hidden" name="ciudad" value="@item._disponibilidad">
+                        <input type="hidden" name="precio" value="@item._transmision">
+                        <input type="hidden" name="anio" value="@item._idCiudad">
+                        <div class="shop-item-summary ">
+                            
+                            <h2>@item._fabricante - @item._modelo</h2>
+                            
+                            <a class="shop-item-image" href="shop-single-left.html">
+                                <img class="img-responsive" src="@Url.Content("~/Content/assets/images/demo/shop/home/nodisponible.jpg")" alt="shop first image" width="200" />
+                            </a>
+                            
+                            <div class="shop-item-summary">
+                                <div class="col-md-6">
+                                    <p>
+                                        <span>Tipo:&nbsp;</span><strong>@item._tipo</strong><br>
+                                        <span>Color:&nbsp;<strong>@item._color</strong></span><br>
+                                        <span>Transmisión:&nbsp;<strong>@item._transmision</strong></span><br>
+                                        <span>Año:&nbsp;<strong>@item._anio</strong></span><br>
+                                        <span>Pasajeros:&nbsp;<strong>@item._cantPasajeros</strong></span><br>
+                                    </p>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        <div class="shop-item-buttons text-right">
+                            <span style="font-size: 20px; color: black"><strong>Bs. @item._precioAlquiler</strong></span><br>
+                            <br><br>
+                            <button type="submit" id="reservaAutos" class="btn btn-primary">Reserva</button>
+                        </div>
+                    </div>
+
+                </li>
+            }
+           
+        }
+        </ul>
+    </div>
+} 
+
+}
+

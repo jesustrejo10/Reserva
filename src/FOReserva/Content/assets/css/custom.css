@@ -1,0 +1,85 @@
+/*************************** START -  ANDREA CAMACHO ******************************************/
+
+@media (max-width: 768px) {
+    .rest_sel {
+        width: 100% !important;
+    }
+
+    .rest_inp {
+        width: 100% !important;
+    }
+}
+
+#rest_form .has-error, #reserva_form .has-error {
+    border-color: #f39c12 !important;
+}
+
+#rest_form .has-success, #reserva_form .has-success {
+    border-color: #18bc9c !important;
+}
+
+.has-error p {
+    color: #f39c12 !important;
+    margin-bottom: 15px;
+}
+
+.orange {
+    color: #f39c12 !important;
+}
+
+.list-icon {
+    font-size: 24px;
+}
+
+    .list-icon:hover {
+        font-size: 24px;
+        color: #f39c12 !important;
+    }
+
+.link-rest {
+      display:block;
+      font-size: 18px;
+
+}
+.link-rest:hover {
+     color: #f39c12 !important;
+   
+}
+.descript_bg {
+    height: 443.6px;
+    background-image: url('../../../Images/restaurant_generic.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.descript_conten {
+    position: absolute;
+    bottom: 0;
+    padding: 10px;
+    background-color: rgba(0,0,0,0.5);
+    width: 100%;
+    height: auto;
+}
+
+    .descript_conten h2 {
+        text-transform: uppercase;
+    }
+
+    .descript_conten p {
+               color: white !important;
+               margin-bottom: 15px;
+    }
+
+.clear {
+    clear: both;
+}
+
+.rest_form {
+    margin-bottom: 0 !important;
+}
+
+    .rest_form h3 {
+        color: white !important;
+    }
+
+/*************************** END - ANDREA CAMACHO ******************************************/
