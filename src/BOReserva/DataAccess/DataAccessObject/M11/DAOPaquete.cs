@@ -175,29 +175,155 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
             
         }
 
-        string IDAOPaquete.disponibilidadPaquete(Entidad e, int disponibilidad)
+        /// <summary>
+        /// Cambia Dsiponibilidad de un Paquete en la Base de Datos.
+        /// </summary>
+        /// <param name="e"></param>
+        /// <param name="disponibilidad"></param>
+        /// <returns></returns>
+        String IDAOPaquete.disponibilidadPaquete(Entidad e, int disponibilidad)
         {
             Paquete paquete = (Paquete)e;
-            int paqueteId = paquete._idPaquete;
+            int paqueteId = paquete._id;
+            Debug.WriteLine("Enró a DAO DISPON OFERTA");
+            Debug.WriteLine("Enró a DAO DISPON OFERTA " + disponibilidad);
+            Debug.WriteLine("Enró a DAO DISPON OFERTA " + paqueteId);
+
             SqlConnection conexion = new SqlConnection(_connexionString);
             try
             {
+
                 conexion.Open();
-                SqlCommand query = conexion.CreateCommand();
-                query.CommandText = "UPDATE Paquete SET paq_estado = disponibilidad WHERE paq_id=" + paqueteId;
-                SqlDataReader lector = query.ExecuteReader();
-                lector.Close();
-                conexion.Close();
-                return "1";
+                SqlCommand cmd = new SqlCommand("[dbo].[M11_ActualizarEstadoPaquete]", conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                Debug.WriteLine("HIZO CONEXIÓN EN VISUAL");
+
+                SqlParameter ParId = new SqlParameter();
+                ParId.ParameterName = "@paq_id";
+                ParId.SqlDbType = SqlDbType.Int;
+                ParId.Value = paqueteId;
+                cmd.Parameters.Add(ParId);
+
+                SqlParameter ParEstado = new SqlParameter();
+                ParEstado.ParameterName = "@paq_estado";
+                ParEstado.SqlDbType = SqlDbType.Int;
+                ParEstado.Value = disponibilidad;
+                cmd.Parameters.Add(ParEstado);
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    cmd.Dispose();
+                    conexion.Close();
+                    return "Realizado el Cambio. Actualice la página.";
+                }
             }
             catch (SqlException ex)
             {
-                Debug.WriteLine("Entre en excepcion sql de IDAOPaquete");
+                Debug.WriteLine("Ocurrio un SqlException");
+                Debug.WriteLine(ex.ToString());
                 conexion.Close();
-                return ex.Message;
-
+                return "SQL EXCEPTION";
             }
+            catch (NullReferenceException ex)
+            {
+                Debug.WriteLine("Ocurrio una NullReferenceException");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return "Ocurrio una NullReferenceException";
+            }
+            catch (ArgumentNullException ex)
+            {
+                Debug.WriteLine("Ocurrio una ArgumentNullException");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return "Ocurrio una ArgumentNullException";
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Ocurrio una Exception");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return "Ocurrio una Exception desconocida";
+            }
+        }
 
+        /// <summary>
+        /// Procedimiento que consulta el detalle de una oferta en la base de datos
+        /// </summary>
+        /// <param name="id">Id de la oferta</param>
+        /// <returns>Una entidad del tipo oferta</returns>
+        Entidad IDAO.Consultar(int id)
+        {
+            Debug.WriteLine("LLEGÓ A DAO CONSULTARpaquete");
+            SqlConnection conexion = Connection.getInstance(_connexionString);
+            Entidad paquete = null;
+            Int32 _id;
+            _id = id;
+
+            try
+            {
+                conexion.Open();
+                SqlCommand cmd = new SqlCommand("[dbo].[M11_ConsultarPaquete]", conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                Debug.WriteLine("HIZO CONEXIÓN EN VISUAL");
+
+                Debug.WriteLine(id);
+                Debug.WriteLine(_id);
+
+                SqlParameter ParId = new SqlParameter();
+                ParId.ParameterName = "@paq_id";
+                ParId.SqlDbType = SqlDbType.Int;
+                ParId.Value = id;
+
+                //SqlCmd.Parameters.Add(ParNombre);
+                cmd.Parameters.Add(ParId);
+
+                Debug.WriteLine("HIZO LA PARTED dE PARÁMETRO");
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    Debug.WriteLine("CMD.READER EN CONSULTAR");
+                    while (reader.Read())
+                    {
+                        /*
+                        var fechaIniauto = reader["fechaIn_auto"];
+                        var fechaFinauto = reader["fechaFin_auto"];
+                        var fechaInirest = reader["fechaIn_rest"];
+                        var fechaFinrest = reader["fechaFin_rest"];
+                        var fechaInicrucero = reader["fechaIn_crucero"];
+                        var fechaFincrucero = reader["fechaFin_crucero"];
+                        var fechaIniboleto = reader["fechaIn_boleto"];
+                        var fechaFinboleto = reader["fechaFin_boleto"];
+                        var estadovar = reader["estado"];
+
+                        DateTime fechaIauto = Convert.ToDateTime(fechaIniauto).Date;
+                        DateTime fechaFauto = Convert.ToDateTime(fechaFinauto).Date;
+                        DateTime fechaIrest = Convert.ToDateTime(fechaInirest).Date;
+                        DateTime fechaFrest = Convert.ToDateTime(fechaFinrest).Date;
+                        DateTime fechaIcrucero = Convert.ToDateTime(fechaInicrucero).Date;
+                        DateTime fechaFcrucero = Convert.ToDateTime(fechaFincrucero).Date;
+                        DateTime fechaIboleto = Convert.ToDateTime(fechaIniboleto).Date;
+                        DateTime fechaFboleto = Convert.ToDateTime(fechaFinboleto).Date;*/
+
+                        var estadovar = reader["estado"];
+                        Boolean disponibilidad = Convert.ToBoolean(estadovar);
+
+                       paquete = FabricaEntidad.InstanciarPaquete(Int32.Parse(reader["idPaquete"].ToString()), 
+                                                                  reader["nombrePaquete"].ToString(),
+                                                                  float.Parse(reader["precio"].ToString()), disponibilidad);
+                    }
+                    cmd.Dispose();
+                    conexion.Close();
+                    return paquete;
+                }
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return null;
+            }
         }
     }
 }
