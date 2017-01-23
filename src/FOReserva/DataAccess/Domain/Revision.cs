@@ -15,7 +15,7 @@ namespace FOReserva.DataAccess.Domain
         private DateTime _fecha;        
 
         private Entidad _referencia;
-        private Entidad _usuario;        
+        private Entidad _propietario;        
 
         /// <summary>
         /// Builder Revision
@@ -91,10 +91,10 @@ namespace FOReserva.DataAccess.Domain
         /// <summary>
         /// Permite obtener y indicar el Usuario de la instancia.
         /// </summary>
-        public Entidad Usuario
+        public Entidad Propietario
         {
-            get { return _usuario; }
-            set { _usuario = value; }
+            get { return _propietario; }
+            set { _propietario = value; }
         }
 
         /// <summary>

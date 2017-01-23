@@ -12,6 +12,7 @@ namespace FOReserva.Controllers
     /// Gestion Revision Controlador
     /// </summary>
 
+    using Usuario = DataAccess.Domain.Usuario;
     using Hotel = DataAccess.Domain.Hotel;
     using Restaurante = DataAccess.Domain.Restaurante;
     public class gestion_revisionController : Controller
@@ -57,7 +58,7 @@ namespace FOReserva.Controllers
         [HttpPost]
         public ActionResult obtener_valoracion(int id, EnumTipoRevision tipo)
         {
-            var revisiones = new ReferenciaValorada();
+            var valoracion = new ReferenciaValorada();
             Entidad referencia = null;
             if (tipo == EnumTipoRevision.Hotel)
             {
@@ -67,8 +68,8 @@ namespace FOReserva.Controllers
             {
                 referencia = new Restaurante() { _id = id };
             }
-            revisiones = DAORevision.Singleton().ObtenerValoracionPorReferencia(referencia);
-            return PartialView(revisiones);
+            valoracion = DAORevision.Singleton().ObtenerValoracionPorReferencia(referencia);
+            return PartialView(valoracion);
 
         }
 
@@ -77,9 +78,12 @@ namespace FOReserva.Controllers
         /// </summary>
         /// <returns>Retorna la vista que compone el formulario para crear una revision.</returns>
         [HttpPost]
-        public ActionResult form_revision(int id, EnumTipoRevision tipo)
+        public ActionResult form_revision(Revision revision)
         {
-            return PartialView();
+            Usuario propietario = new Usuario(revision.Propietario._id);
+            propietario.Id = Session["id_usuario"] == null ? 1 : (int)Session["id_usuario"];
+            revision.Propietario = propietario;
+            return PartialView(revision);
         }
 
         /// <summary>
@@ -89,7 +93,11 @@ namespace FOReserva.Controllers
         [HttpPost]
         public ActionResult guardar_revision(Revision revision)
         {
-            return Json(new { completa = true }, JsonRequestBehavior.AllowGet);
+            Usuario propietario = new Usuario(revision.Propietario._id);
+            propietario.Id = Session["id_usuario"] == null ? 1 : (int)Session["id_usuario"];
+            revision.Propietario = propietario;
+            var completa = DAORevision.Singleton().GuardarRevision(revision);
+            return Json(new { operacion = completa }, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -99,7 +107,11 @@ namespace FOReserva.Controllers
         [HttpPost]
         public ActionResult borrar_revision(Revision revision)
         {
-            return Json(new { completa = true }, JsonRequestBehavior.AllowGet);
+            Usuario propietario = new Usuario(revision.Propietario._id);
+            propietario.Id = Session["id_usuario"] == null ? 1 : (int)Session["id_usuario"];
+            revision.Propietario = propietario;
+            var completa = DAORevision.Singleton().BorrarRevision(revision);
+            return Json(new { operacion = completa }, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -107,8 +119,12 @@ namespace FOReserva.Controllers
         /// </summary>
         /// <returns>Retorna la respuesta de la solucitud.</returns>
         [HttpPost]
-        public ActionResult guardar_revision(RevisionValoracion revision)
+        public ActionResult guardar_valoracion(RevisionValoracion valoracion)
         {
+            Usuario propietario = new Usuario(valoracion.Propietario._id);
+            propietario.Id = Session["id_usuario"] == null ? 1 : (int)Session["id_usuario"];
+            valoracion.Propietario = propietario;
+            var completa = DAORevision.Singleton().GuardarValoracion(valoracion);
             return Json(new { completa = true }, JsonRequestBehavior.AllowGet);
         }
     }

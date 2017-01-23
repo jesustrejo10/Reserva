@@ -9,7 +9,7 @@
 }
 
 /* Cargador Generico */
-function cargarContenido(seccion, tipo, url, data, boton) {
+function cargarContenido(seccion, tipo, url, data, boton, callback) {
 
     // tipo CP : 1 columna, Todo el ancho de la pagina
     // tipo MD : 2 columnas, contenido derecha
@@ -44,11 +44,15 @@ function cargarContenido(seccion, tipo, url, data, boton) {
                 $(seccion)
                     .empty()
                     .append(data);
-
+                
                 if (boton != null)
                 {
                     $(boton).parent().parent().children().removeClass("active")
                     $(boton).parent().addClass("active")
+                }
+
+                if (callback != null) {
+                    callback()
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {

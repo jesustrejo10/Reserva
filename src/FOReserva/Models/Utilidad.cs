@@ -24,7 +24,9 @@ namespace FOReserva.Models
                     w.WriteLine("Message :{0}", exception.Message);
                     w.WriteLine("StackTrace:{0}", exception.StackTrace);
                     w.WriteLine("-------------------------------");
+                    w.Close();
                 }
+
             }
             catch(Exception ex)
             {

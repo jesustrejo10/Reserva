@@ -44,7 +44,9 @@
     <link href="@Url.Content("~/Content/assets/css/layout-shop.css")" rel=" stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/assets/css/color_scheme/green.css")" rel="stylesheet" type="text/css" id="color_scheme" />
 
+    <link href="~/Content/assets/plugins/jqrateyo/jquery.rateyo.min.css" rel="stylesheet" />    
     <link href="@Url.Content("~/Content/assets/css/global.css")" rel="stylesheet" />
+    @RenderSection("styles", false);
 </head>
 
 <body class="smoothscroll enable-animation">
@@ -212,6 +214,7 @@
     <script type="text/javascript" src="@Url.Content("~/Content/assets/js/view/demo.shop.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Scripts/uniqueId.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatable/js/jquery.dataTables.min.js")"></script>
-
+    <script src="~/Content/assets/plugins/jqrateyo/jquery.rateyo.min.js"></script>
+    @RenderSection("scripts", false);
 </body>
 </html>

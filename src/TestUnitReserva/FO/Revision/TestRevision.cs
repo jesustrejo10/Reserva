@@ -35,7 +35,7 @@ namespace TestUnitReserva.FO.Revision
                 Mensaje = "Test RHotel.",
                 Estrellas = 0,
                 Tipo = EnumTipoRevision.Hotel,
-                Usuario = new EntidadUsuario(1),
+                Propietario = new EntidadUsuario(1),
                 Referencia = new FOReserva.DataAccess.Domain.Entidad(37)
             };
 
@@ -88,7 +88,7 @@ namespace TestUnitReserva.FO.Revision
             var referencia = new EntidadRevision
             {
                 _id = 95,
-                Usuario = new EntidadUsuario(1)
+                Propietario = new EntidadUsuario(1)
             };
 
             var result = DAORevision.Singleton().BorrarRevision(referencia);

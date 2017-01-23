@@ -1165,6 +1165,10 @@
     <Content Include="Content\assets\plugins\jqgrid\plugins\ui.multiselect.css" />
     <Content Include="Content\assets\plugins\jqgrid\plugins\ui.multiselect.js" />
     <Content Include="Content\assets\plugins\jqgrid\update.txt" />
+    <Content Include="Content\assets\plugins\jqrateyo\jquery.rateyo.css" />
+    <Content Include="Content\assets\plugins\jqrateyo\jquery.rateyo.js" />
+    <Content Include="Content\assets\plugins\jqrateyo\jquery.rateyo.min.css" />
+    <Content Include="Content\assets\plugins\jqrateyo\jquery.rateyo.min.js" />
     <Content Include="Content\assets\plugins\jquery.backstretch.min.js" />
     <Content Include="Content\assets\plugins\jquery.mb.YTPlayer.min.js" />
     <Content Include="Content\assets\plugins\jquery.nav.min.js" />
@@ -1850,6 +1854,9 @@
     <Content Include="Content\assets\plugins\bootstrap.daterangepicker\daterangepicker.scss" />
     <Content Include="Content\assets\plugins\bootstrap.daterangepicker\package.json" />
     <Content Include="Content\assets\plugins\bootstrap.daterangepicker\README.md" />
+    <Content Include="Content\assets\plugins\jqrateyo\jquery.rateyo.less" />
+    <Content Include="Content\assets\plugins\jqrateyo\jquery.rateyo.min.css.map" />
+    <Content Include="Content\assets\plugins\jqrateyo\jquery.rateyo.min.js.map" />
     <None Include="Properties\PublishProfiles\OK.pubxml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Properties\PublishProfiles\Webdeploy SmarterASP.pubxml" />
@@ -1864,6 +1871,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\cargadorPestanas.js" />
     <Content Include="Scripts\customValidator.js" />
+    <Content Include="Scripts\gestion_revision\valoracion.js" />
     <Content Include="Scripts\global.js" />
     <Content Include="Scripts\indexReservaCrucero.js" />
     <Content Include="Scripts\llamadasItinerario.js" />
@@ -1893,7 +1901,7 @@
     <Content Include="Views\gestion_reserva_crucero\placeholder.html" />
     <Content Include="Views\gestion_reserva_hotel\placeholder.html" />
     <Content Include="Views\gestion_reserva_restaurante\placeholder.html" />
-    <Content Include="Scripts\gestion_revision\global.js" />
+    <Content Include="Scripts\gestion_revision\comun.js" />
     <Content Include="Scripts\gestion_revision\revisiones.js" />
     <Content Include="Views\Shared\assets\css\color_scheme\green.css" />
     <Content Include="Views\Shared\assets\css\essentials.css" />

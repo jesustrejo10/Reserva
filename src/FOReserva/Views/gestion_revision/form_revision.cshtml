@@ -1,5 +1,28 @@
-﻿@{
-    ViewBag.Title = "form_revision";
+﻿@model FOReserva.DataAccess.Domain.Revision
+@using (Html.BeginForm("guardar_revision", "gestion_revision", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.Id);
+    @Html.HiddenFor(model => model.Tipo);
+    @Html.HiddenFor(model => model.Propietario._id);
+    @Html.HiddenFor(model => model.Referencia._id);
+    @Html.HiddenFor(model => model.Estrellas);
+    <div class="form-group">
+        <label>Mensaje: </label>
+        @Html.TextAreaFor(model => model.Mensaje, new { @class = "form-control", @dataLang = "en", @dataRtl = "false", placeholder = "Ingrese su mensaje", required = "required" })        
+    </div>
+
+    <div id="rev_mensaje_empty" style="display: none;" class="has-error error">
+        <p><i class="fa fa-times-circle" aria-hidden="true"></i> Debe llenar este campo</p>
+    </div>
+    <!-- PUNTUACION  Y  VALIDACIONES-->
+    <div class="form-group">
+        <label>Puntuacion:</label>
+        <span class="rateyo" data-estrellas="0" data-only="false" data-setout="#Estrellas"></span>
+    </div>
+    <!-- BOTON QUE ACCIONA EL SUBMIT -->
+    <div class="text-center">
+        <button onclick="btnAgregarRevision(this)" type="button" class="btn btn-primary boton">Publicar</button>
+        <button onclick="btnResetRevision(this)" type="button" class="btn btn-primary boton">Reset</button>
+    </div>
 }
 
-<h2>form_revision</h2>

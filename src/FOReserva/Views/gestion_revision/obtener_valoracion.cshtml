@@ -1,1 +1,14 @@
-﻿
+﻿@{
+    FOReserva.DataAccess.Domain.ReferenciaValorada valoracion = Model;
+}
+
+@if (valoracion != null)
+{
+    <span class="rateyo" data-estrellas="@valoracion.Estrellas.ToString().Replace(",",".")" data-only="true"></span>
+}
+else
+{
+    <div class="row center">
+        <p>Hubo un problema cargando la valoracion.</p>
+    </div>
+}

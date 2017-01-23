@@ -53,7 +53,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M20
                 parametros.Add(FabricaDAO.asignarParametro(RecursoDAOM20.parametroRevisionMensaje, SqlDbType.VarChar, iRevision.Mensaje.ToString(), false));
                 parametros.Add(FabricaDAO.asignarParametro(RecursoDAOM20.parametroRevisionTipo, SqlDbType.Int, ((int)iRevision.Tipo).ToString(), false));
                 parametros.Add(FabricaDAO.asignarParametro(RecursoDAOM20.parametroRevisionEstrellas, SqlDbType.Int, iRevision.Estrellas.ToString(), false));
-                parametros.Add(FabricaDAO.asignarParametro(RecursoDAOM20.parametroRevisionPropietario, SqlDbType.Int, iRevision.Usuario._id.ToString(), false));
+                parametros.Add(FabricaDAO.asignarParametro(RecursoDAOM20.parametroRevisionPropietario, SqlDbType.Int, iRevision.Propietario._id.ToString(), false));
                 parametros.Add(FabricaDAO.asignarParametro(RecursoDAOM20.parametroRevisionReferencia, SqlDbType.Int, iRevision.Referencia._id.ToString(), false));                
                 
                 EjecutarStoredProcedure(RecursoDAOM20.procedimientoGuardarRevision, parametros);
@@ -116,9 +116,9 @@ namespace FOReserva.DataAccess.DataAccessObject.M20
 
                 parametros = FabricaDAO.asignarListaDeParametro();
                 parametros.Add(FabricaDAO.asignarParametro(RecursoDAOM20.parametroRevisionId, SqlDbType.Int, iRevision._id.ToString(), false));
-                if (iRevision.Usuario != null)
+                if (iRevision.Propietario != null)
                 {
-                    parametros.Add(FabricaDAO.asignarParametro(RecursoDAOM20.parametroRevisionPropietario, SqlDbType.Int, iRevision.Usuario._id.ToString(), false));
+                    parametros.Add(FabricaDAO.asignarParametro(RecursoDAOM20.parametroRevisionPropietario, SqlDbType.Int, iRevision.Propietario._id.ToString(), false));
                 }
                 else if (iRevision.Referencia != null)
                 {
@@ -170,7 +170,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M20
                         Mensaje = (string)revision[RecursoDAOM20.parametroRevisionMensaje],
                         Estrellas = (decimal)revision[RecursoDAOM20.parametroRevisionEstrellas],
                         Tipo = (EnumTipoRevision)revision[RecursoDAOM20.parametroRevisionTipo],
-                        Usuario = new Usuario {
+                        Propietario = new Usuario {
                             Id = (int)revision[RecursoDAOM20.parametroRevisionPropietario],
                             Nombre = (string)revision[RecursoDAOM20.parametroRevisionPropietarioNombre]
                         },
@@ -204,7 +204,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M20
                 else if (referencia is Restaurante)
                     tipo = 1;
                 else
-                    throw new DAOM20Exception("La entidad revision debe ser de tipo Revision.");
+                    throw new DAOM20Exception("La entidad referencia debe ser de tipo Hotel o Restaurante.");
 
                 parametros = FabricaDAO.asignarListaDeParametro();
                 parametros.Add(FabricaDAO.asignarParametro(RecursoDAOM20.parametroRevisionTipo, SqlDbType.Int, ((int)tipo).ToString(), false));

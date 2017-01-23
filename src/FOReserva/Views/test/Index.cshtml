@@ -2,9 +2,19 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-<div id="revisiones">
+@section styles {
+    <style></style>
+}
 
-</div>
-<script src="~/Scripts/gestion_revision/global.js"></script>
-<script src="~/Scripts/gestion_revision/revisiones.js"></script>
+<h2>Index</h2>
+
+<div class="valoracion" data-id="1" data-type="1"></div>
+<div class="form-revision" data-id="1" data-type="1"></div>
+<div class="revisiones" data-id="1" data-type="1"></div>
+
+
+@section scripts {
+    <script src="~/Scripts/gestion_revision/comun.js"></script>
+    <script src="~/Scripts/gestion_revision/revisiones.js"></script>
+    <script src="~/Scripts/gestion_revision/valoracion.js"></script>
+}
