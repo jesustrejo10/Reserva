@@ -310,6 +310,7 @@
     <Compile Include="Controllers\PatronComando\M14\M14_COConsultarCrucero.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COListarRutasCrucero.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COListarRutasRutas.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COModificarCamarote.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COModificarCrucero.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarCamarote.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COConsultarPermisosUsuario.cs" />

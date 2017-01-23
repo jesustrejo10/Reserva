@@ -489,7 +489,7 @@ namespace BOReserva.Controllers
         {
             try
             {
-                Command<Entidad> comando = FabricaComando.crearM14ConsultarCamarote(id);
+                Command<Entidad> comando = FabricaComando.crearM14ConsultarCabina(id);
                 Entidad cabina = comando.ejecutar();
                 Cabina CabinaB = (Cabina)cabina;
                 idCabina = CabinaB._id;
@@ -561,13 +561,13 @@ namespace BOReserva.Controllers
         /// <param name="model">Datos que provienen de un formulario de la vista parcial M24_ModificarCabina</param>
         /// <returns>Retorna un JsonResult</returns>
         [HttpPost]
-        public JsonResult modificarCamarote(CGestion_cabina model)
+        public JsonResult modificarCamarote(CGestion_camarote model)
         {
             try
             {
-                Entidad modificarCabina = FabricaEntidad.InstanciarCabina(model);
+                Entidad modificarCamarote = FabricaEntidad.InstanciarCamaroteN(model);
                 //con la fabrica instancie la cabina.
-                Command<String> comando = FabricaComando.crearM14ModificarCabina(modificarCabina, idCabina, idFkCrucero);
+                Command<String> comando = FabricaComando.crearM14ModificarCamarote(modificarCamarote, idCamarote, idFkCabina);
                 String agrego_si_no = comando.ejecutar();
 
                 return (Json(agrego_si_no));

@@ -318,17 +318,33 @@ namespace BOReserva.Controllers.PatronComando
 
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
-        /// M09_COModificarHoteles
+        /// M14_COModificarCabina
         /// </summary>
         /// <param name="hotel">Hotel a modificar</param>
         /// <param name="idmodificar">Identificador del hotel a modificar</param>
         /// <returns>
-        /// Retorna la instancia del comando M09_COModificarHoteles.
+        /// Retorna la instancia del comando M14_COModificarCabina.
         /// </returns>
-        public static Command<String> crearM14ModificarCabina(Entidad hotel, int idmodificar, int idfk)
+        public static Command<String> crearM14ModificarCabina(Entidad cabina, int idmodificar, int idfk)
         {
 
-            return new M14_COModificarCabina(hotel, idmodificar, idfk);
+            return new M14_COModificarCabina(cabina, idmodificar, idfk);
+
+        }
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M14_COModificarCamarote
+        /// </summary>
+        /// <param name="hotel">Hotel a modificar</param>
+        /// <param name="idmodificar">Identificador del hotel a modificar</param>
+        /// <returns>
+        /// Retorna la instancia del comando M14_COModificarCamarote.
+        /// </returns>
+        public static Command<String> crearM14ModificarCamarote(Entidad camarote, int idmodificar, int idfk)
+        {
+
+            return new M14_COModificarCamarote(camarote, idmodificar, idfk);
 
         }
 

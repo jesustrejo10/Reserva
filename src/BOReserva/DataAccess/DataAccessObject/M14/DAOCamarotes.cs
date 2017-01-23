@@ -124,6 +124,42 @@ namespace BOReserva.DataAccess.DataAccessObject.M14
                 return null;
             }
         }
+
+        /// <summary>
+        /// Metodo implementado de IDAO para modificar cruceros de la BD
+        /// </summary>
+        /// <param name="e">Cabina a modificar</param>
+        /// <returns>Retorna la Cabina</returns>
+        Entidad IDAO.Modificar(Entidad e)
+        {
+            SqlConnection con = Connection.getInstance(_connexionString);
+            Camarote camarote = (Camarote)e;
+
+            try
+            {
+                con.Open();
+
+                SqlCommand query = new SqlCommand("M24_ModificarCamarote", con);
+
+                query.CommandType = CommandType.StoredProcedure;
+                query.Parameters.AddWithValue("@idCamarote", camarote._id);
+                query.Parameters.AddWithValue("@CantidadCama", camarote._cantidadCama);
+                query.Parameters.AddWithValue("@TipoCama", camarote._tipoCama);
+                query.Parameters.AddWithValue("@EstadoCamarote", camarote._estatus);
+
+                query.ExecuteNonQuery();
+
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                SqlDataReader lector = query.ExecuteReader();
+                lector.Close();
+                con.Close();
+                return camarote;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
         
     }
 }
