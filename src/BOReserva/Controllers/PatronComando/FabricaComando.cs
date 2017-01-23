@@ -15,11 +15,10 @@ using BOReserva.Controllers.PatronComando.M16;
 using System.Web.Mvc;
 using BOReserva.Controllers.PatronComando.M12;
 using BOReserva.DataAccess.Domain.M14;
-using BOReserva.Controllers.PatronComando.M07;
 using BOReserva.Controllers.PatronComando.M09;
 using BOReserva.Controllers.PatronComando.M11;
-<<<<<<< HEAD
-
+using BOReserva.Controllers.PatronComando.M01;
+using BOReserva.Controllers.PatronComando.M13;
 
 namespace BOReserva.Controllers.PatronComando
 {
@@ -29,32 +28,75 @@ namespace BOReserva.Controllers.PatronComando
     /// </summary>
     public class FabricaComando
     {
-        #region M02_Gestion_Avion
-        #region crearM02AgregarAvion
+        #region M01_Login
         /// <summary>
-        /// Metodo creado con la finalidad de instanciar el comando
-        /// M09_COAgregarHotel
+        /// Método para la instanciación del comando "Consultar Usuario"
         /// </summary>
-        /// <param name="e">Recibe la una entidad de tipo Hotel</param>
-        /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
-        public static Command<String> crearM02AgregarAvion(Entidad e)
+        /// <param name="_usuario">Objeto Usuario incompleto con el correo del usuario a consultar</param>
+        /// <returns>Objeto Usuario con toda la información traída de la base de datos</returns>
+        public static Command<Entidad> M01ConsultarUsuario(Entidad _usuario)
         {
             return new M01_COConsultarUsuario(_usuario);
         }
 
+        /// <summary>
+        /// Método para la instanciación del comando "Bloquear Usuario"
+        /// </summary>
+        /// <param name="_usuario">Objeto Usuario incompleto con el correo del usuario a consultar</param>
+        /// <returns>Booleano con el estado de la ejecución del comando</returns>
         public static Command<Boolean> M01BloquearUsuario(Entidad _usuario)
         {
             return new M01_COBloquearUsuario(_usuario);
         }
 
+        /// <summary>
+        /// Método para la instanciación del comando "Resetear Intentos"
+        /// </summary>
+        /// <param name="_usuario">Objeto Usuario incompleto con el correo del usuario a consultar</param>
+        /// <returns>Booleano con el estado de la ejecución del comando</returns>
         public static Command<Boolean> M01ResetearIntentos(Entidad _usuario)
         {
             return new M01_COResetearIntentos(_usuario);
         }
 
+        /// <summary>
+        /// Método para la instanciación del comando "Incrementar Intentos"
+        /// </summary>
+        /// <param name="_usuario">Objeto Usuario incompleto con el correo del usuario a consultar</param>
+        /// <returns>Booleano con el estado de la ejecución del comando</returns>
         public static Command<Boolean> M01IncrementarIntentos(Entidad _usuario)
         {
             return new M01_COIncrementarIntentos(_usuario);
+        }
+
+        /// <summary>
+        /// Método para la instanciación del comando "Insertar Login"
+        /// </summary>
+        /// <param name="_usuario">Objeto Usuario incompleto con el correo del usuario a consultar</param>
+        /// <returns>Booleano con el estado de la ejecución del comando</returns>
+        public static Command<Boolean> M01InsertarLogin(Entidad _usuario)
+        {
+            return new M01_COInsertarLogin(_usuario);
+        }
+
+        /// <summary>
+        /// Método para la instanciación del comando "Eliminar Login"
+        /// </summary>
+        /// <param name="_usuario">Objeto Usuario incompleto con el correo del usuario a consultar</param>
+        /// <returns>Booleano con el estado de la ejecución del comando</returns>
+        public static Command<Boolean> M01EliminarLogin(Entidad _usuario)
+        {
+            return new M01_COEliminarLogin(_usuario);
+        }
+
+        /// <summary>
+        /// Método para la instanciación del comando "Número Intentos"
+        /// </summary>
+        /// <param name="_usuario">Objeto Usuario incompleto con el correo del usuario a consultar</param>
+        /// <returns>Entero con el número de intentos de inicio de sesión</returns>
+        public static Command<int> M01NumeroIntentos(Entidad _usuario)
+        {
+            return new M01_CONumeroIntentos(_usuario);
         }
         #endregion
 
@@ -119,9 +161,9 @@ namespace BOReserva.Controllers.PatronComando
         #endregion
 
         #region crearM02EliminarAvion
-        public static Command<string> crearM02EliminarAvion(Entidad avion,int ideliminar)
+        public static Command<string> crearM02EliminarAvion(Entidad avion, int ideliminar)
         {
-            return new M02_COEliminarAvion(avion,ideliminar);
+            return new M02_COEliminarAvion(avion, ideliminar);
         }
         #endregion
 
@@ -142,16 +184,16 @@ namespace BOReserva.Controllers.PatronComando
         #endregion
         #endregion
 
-        # region Lugar ( COLugar - COPais - COCiudad ) 
+        # region Lugar ( COLugar - COPais - COCiudad )
 
         public static Command<List<SelectListItem>> consultarTodosPais(Entidad e)
         {
             return new GeneralLugar.COConsultarTodosPais(e);
         }
 
-        public static Command<List<String>> consultarTodosCiudad(Entidad e,String pais)
+        public static Command<List<String>> consultarTodosCiudad(Entidad e, String pais)
         {
-            return new GeneralLugar.COConsultarTodosCiudad(e,pais);
+            return new GeneralLugar.COConsultarTodosCiudad(e, pais);
         }
 
         #endregion
@@ -165,12 +207,13 @@ namespace BOReserva.Controllers.PatronComando
         /// <param name="e">Recibe la una entidad de tipo Hotel</param>
         /// <param name="precio">Precio por habitacion/param>
         /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
-        public static Command<String> crearM09AgregarHotel(Entidad e, int precio) {
+        public static Command<String> crearM09AgregarHotel(Entidad e, int precio)
+        {
 
             return new M09_COAgregarHotel((Hotel)e, precio);
 
         }
-       
+
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
         /// M09_COVisualizarHoteles
@@ -283,13 +326,13 @@ namespace BOReserva.Controllers.PatronComando
         #endregion
 
         #region M16_GESTION_RECLAMOS
-       
+
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando M16_COAgregarReclamo
         /// </summary>
         /// <param name="e">Recibe la una entidad de tipo reclamo</param>
         /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
-        public static Command<String> crearM16_AgregarReclamo(Entidad e) 
+        public static Command<String> crearM16_AgregarReclamo(Entidad e)
         {
             return new M16_COAgregarReclamo((Reclamo)e);
         }
@@ -307,7 +350,7 @@ namespace BOReserva.Controllers.PatronComando
             return new M16_COConsultarReclamo();
         }
 
-         /// <summary>
+        /// <summary>
         /// Método para instanciar el comando Consultar un reclamo por ID con el que luego tomamos el usuario
         /// </summary>
         /// <param name="idReclamo"> recibe como parámetro el id de un reclamo</param>
@@ -324,7 +367,7 @@ namespace BOReserva.Controllers.PatronComando
         /// <returns>retorna el comando para eliminar un reclamo</returns>
         public static Command<String> crearM16EliminarReclamo(int id)
         {
-            return new M16_COEliminarReclamo(id); 
+            return new M16_COEliminarReclamo(id);
 
         }
 
@@ -334,9 +377,9 @@ namespace BOReserva.Controllers.PatronComando
         /// <param name="reclamo">recibe como parámetro una entidad reclamo</param>
         /// <param name="idReclamo">recibe el id del reclamo</param>
         /// <returns>retorna el comando</returns>
-        public static Command<String> crearM16ModificarReclamo (Entidad reclamo, int id)
+        public static Command<String> crearM16ModificarReclamo(Entidad reclamo, int id)
         {
-            return new M16_COModificarReclamo(reclamo,id);
+            return new M16_COModificarReclamo(reclamo, id);
         }
 
         /// <summary>
@@ -363,7 +406,7 @@ namespace BOReserva.Controllers.PatronComando
         /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
         public static Command<String> crearM14AgregarCrucero(Entidad e)
         {
-            return new M14_COAgregarCrucero((Crucero) e);
+            return new M14_COAgregarCrucero((Crucero)e);
         }
 
         /// <summary>
@@ -375,8 +418,8 @@ namespace BOReserva.Controllers.PatronComando
         public static Command<String> crearM14AgregarCabina(Entidad e)
         {
 
-            return new M14_COAgregarCabina((Cabina) e);
-            
+            return new M14_COAgregarCabina((Cabina)e);
+
         }
 
         #endregion
@@ -597,14 +640,13 @@ namespace BOReserva.Controllers.PatronComando
         }
 
         public static Command<Entidad> crearM13_ConsultarModulos(int id)
-
         {
             return new M13_COConsultarModulos(id);
         }
 
         public static Command<List<Entidad>> crearM13_ListarPermisos()
         {
-          return new M13_COListarPermisos();
+            return new M13_COListarPermisos();
         }
 
         public static Command<Entidad> crearM13_ConsultarRol(int id)
@@ -623,7 +665,6 @@ namespace BOReserva.Controllers.PatronComando
         }
 
         public static Command<String> crearM13_EliminarPermisos(int id)
-
         {
             return new M13_COEliminarPermisos(id);
         }
@@ -635,7 +676,7 @@ namespace BOReserva.Controllers.PatronComando
 
         public static Command<String> crearM13_ModificarRol(Entidad rol, int idmodificar)
         {
-         return new M13_COModificarRol(rol, idmodificar);
+            return new M13_COModificarRol(rol, idmodificar);
         }
         public static Command<List<Entidad>> crearM13_ConsultarPermisosNoAsociados(Entidad rol, int id)
         {
@@ -719,9 +760,9 @@ namespace BOReserva.Controllers.PatronComando
             return new M05_COVerificarDisponibilidadBoleto(codigo_vuelo, tipo);
         }
 
-         public static Command<int> modificarM05modificarBoleto(Entidad e)
+        public static Command<int> modificarM05modificarBoleto(Entidad e)
         {
-           return new M05_COModificarBoleto((Boleto)e);
+            return new M05_COModificarBoleto((Boleto)e);
         }
 
         public static Command<List<Entidad>> ConsultarBoletos()
@@ -730,7 +771,7 @@ namespace BOReserva.Controllers.PatronComando
         }
         public static Command<List<Entidad>> ConsultarBoletos(int id)
         {
-            return new M05_COConsultarBoletos( id );
+            return new M05_COConsultarBoletos(id);
         }
 
         public static Command<List<Entidad>> ConsultarBoletosPasajero(int id)
@@ -781,9 +822,9 @@ namespace BOReserva.Controllers.PatronComando
         {
             return new M05_COConsultarBoletosPasajeroChekin(id);
         }
-        public static Command<int> IdM05paseAbordaje(int id_1,int id_2)
+        public static Command<int> IdM05paseAbordaje(int id_1, int id_2)
         {
-            return new M05_COBusquedaIdBoarding(id_1,id_2);
+            return new M05_COBusquedaIdBoarding(id_1, id_2);
         }
 
         #endregion
@@ -844,11 +885,11 @@ namespace BOReserva.Controllers.PatronComando
         #endregion
 
         #endregion
-        
+
         #region Modulo 10 Gestion Restaurante
 
-        #region Comandos Generales 
-    
+        #region Comandos Generales
+
         /// <summary>
         /// Metodo que recibe un comando para Crear, Actualizar, Eliminar o Consultar
         /// la variable comando recibe comandosGlobales.CREAR, comandosGlobales.ELIMINAR
@@ -962,7 +1003,7 @@ namespace BOReserva.Controllers.PatronComando
         /// </summary>
         /// <param name="e">Recibe la una entidad de tipo Usuario</param>
         /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
-        public static Command<String> crearM12AgregarUsuario (Entidad e)
+        public static Command<String> crearM12AgregarUsuario(Entidad e)
         {
             return new M12_COAgregarUsuario((Usuario)e);
         }
@@ -1086,7 +1127,6 @@ namespace BOReserva.Controllers.PatronComando
 
         }
         #endregion
-		
         #region M03_Ruta
         public static Command<String> crearM03_AgregarRuta(Entidad e)
         {
@@ -1147,7 +1187,7 @@ namespace BOReserva.Controllers.PatronComando
         public static Command<String> crearM11AgregarOferta(Entidad e)
         {
 
-            return new M11_COAgregarOferta((Oferta) e);
+            return new M11_COAgregarOferta((Oferta)e);
 
         }
         /// <summary>
@@ -1159,10 +1199,11 @@ namespace BOReserva.Controllers.PatronComando
         {
 
             return new M11_COAgregarPaquete((Paquete)e);
+
         }
-        
+
         #endregion
-    
+
         /// <summary>
         /// Instancia el comando VisualizarOfertas
         /// </summary>
@@ -1173,7 +1214,8 @@ namespace BOReserva.Controllers.PatronComando
         {
 
             return new M11_COVisualizarOfertas();
-		}
+
+        }
 
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
@@ -1187,7 +1229,7 @@ namespace BOReserva.Controllers.PatronComando
 
             return new M11_COConsultarOferta(id);
 
-		}
+        }
 
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
@@ -1207,6 +1249,7 @@ namespace BOReserva.Controllers.PatronComando
         {
 
             return new M11_CODeshabilitarOferta(oferta, disponibilidad);
+
         }
 
         /// <summary>
@@ -1228,115 +1271,6 @@ namespace BOReserva.Controllers.PatronComando
         }
         #endregion
 
-        #region M07_Gestion_Equipaje
-
-        /// <summary>
-        /// Instanciar el comando M07_COAgregarEquipaje
-        /// </summary>
-        /// <param name="e">Recibe una entidad equipaje</param>
-        /// <returns>Retorna un comando con el parametro</returns>
-        public static Command<String> crearM07_AgregarEquipaje(Entidad e)
-        {
-            return new M07_COAgregarEquipaje((Equipaje)e);
-        }
-        public static Command<String> crearM07AgregarEquipaje(Entidad e)
-        {
-            return new M07_COAgregarEquipaje((Equipaje)e);
-        }
-
-        /// <summary>
-        /// Método para instanciar el comando para consultar equipaje
-        /// </summary>
-        /// <returns>retorna el comando para consultar todos equipaje</returns>
-        public static Command<Dictionary<int, Entidad>> crearM07VisualizarEquipajes()
-        {
-            return new M07_COConsultarEquipaje();
-        }
-
-        /// <summary>
-        /// Método para instanciar el comando Consultar un equipaje por ID
-        /// </summary>
-        /// <param name="idEquipaje"> recibe como parámetro el id de un equipaje</param>
-        /// <returns>retorna el comando para consultar un equipaje a detalle</returns>
-        public static Command<Entidad> crearM07ConsultarEquipaje(int idEquipaje)
-        {
-            return new M07_COConsultarEquipajeID(idEquipaje);
-        }
-
-        /// <summary>
-        /// Método para instanciar el comando M07_EliminarEquipaje
-        /// </summary>
-        /// <param name="id">recibe el id del equipaje</param>
-        /// <returns>retorna el comando para eliminar un equipaje</returns>
-        public static Command<String> crearM07EliminarEquipaje(int id)
-        {
-            return new M07_COEliminarEquipaje(id);
-        }
-
-        #endregion
-
-        #region M07_Reclamos_Equipaje
-
-        /// <summary>
-        /// Instancia el comando M07_COAgregarReclamoEquipaje
-        /// </summary>
-        /// <param name="e">Recibe la una entidad de tipo reclamo</param>
-        /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
-        public static Command<String> crearM07_AgregarReclamoEquipaje(Entidad e)
-        {
-            return new M07_COAgregarReclamoEquipaje((ReclamoEquipaje)e);
-        }
-        public static Command<String> crearM07AgregarReclamoEquipaje(Entidad e)
-        {
-            return new M07_COAgregarReclamoEquipaje((ReclamoEquipaje)e);
-        }
-
-        /// <summary>
-        /// Instancia el comando para consultar reclamos equipaje
-        /// </summary>
-        /// <returns>retorna el comando para consultar todos los reclamos de equipaje</returns>
-        public static Command<Dictionary<int, Entidad>> crearM07VisualizarReclamosEquipaje()
-        {
-            return new M07_COConsultarReclamoEquipaje();
-        }
-
-        /// <summary>
-        /// Instanciar el comando Consultar un reclamo de equipaje por ID 
-        /// </summary>
-        /// <param name="idReclamoE"> recibe como parámetro el id de un reclamo equipaje</param>
-        /// <returns>retorna el comando para consultar un reclamo a detalle</returns>
-        public static Command<Entidad> crearM07ConsultarReclamoEquipaje(int idReclamoE)
-        {
-            return new M07_COConsultarReclamoEquipajeID(idReclamoE);
-        }
-
-        /// <summary>
-        /// Instancia el comando M07_EliminarReclamoEquipaje
-        /// </summary>
-        /// <param name="id">recibe el id del reclamo equipaje a eliminar</param>
-        /// <returns>retorna el comando para eliminar un reclamo equipaje</returns>
-        public static Command<String> crearM07EliminarReclamoEquipaje(int id)
-        {
-            return new M07_COEliminarReclamoEquipaje(id);
-		}
-		
-		/// <summary>
-		/// Instancia comando Editar Reclamo Equipaje
-        /// </summary>
-        /// <param name="id">ID Reclamo a editar</param>
-        /// <param name="status">Status nuevo</param>
-        /// <returns>retorna el comando para editar</returns>
-        public static Command<String> crearM07EditarReclamoEquipaje(int id, string status)
-        {
-            return new M07_COEditarReclamoEquipaje(id, status);
-        }
-
-        #endregion
-		        
     }
-       
+
 }
-        
-
-
-   
