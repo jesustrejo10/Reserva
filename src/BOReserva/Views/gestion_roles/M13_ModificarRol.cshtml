@@ -161,14 +161,12 @@
     });
 
     function asignarPermisos() {
-        console.log("asignandopermisos");
         $.ajax({
             type: 'post',
             dataType: 'json',
             url: 'gestion_roles/asignarpermisos',
             data: { json: JSON.stringify(permisos) },
             success: function (data) {
-                console.log("primer success");
                 $.ajax({
                     url: '/gestion_roles/M13_VisualizarRol',
                     type: 'GET',

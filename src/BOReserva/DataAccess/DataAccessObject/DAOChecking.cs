@@ -8,6 +8,9 @@ using System.Diagnostics;
 
 namespace BOReserva.DataAccess.DataAccessObject
 {
+    /// <summary>
+    /// Clase de Acceso a datos para el chickin de un boleto
+    /// </summary>
     public class DAOChecking : DAO, IDAOCheckIn
     {
         int IDAO.Agregar(Entidad e) {
@@ -32,6 +35,11 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
         }
 
+        /// <summary>
+        /// Lista de pases de un pasajero
+        /// </summary>
+        /// <param name="pasaporte"></param>
+        /// <returns></returns>
         public List<Entidad> ListarPasesPasajero(int pasaporte)
         {
             List<Entidad> listaboletos = new List<Entidad>();
@@ -62,7 +70,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                 con.Close();
                 return listaboletos;
             }
-            catch (SqlException ex)
+            catch (SqlException )
             {
                 return null;
             }
@@ -92,7 +100,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                 int inte = listavuelos.Count;
                 return listavuelos;
             }
-            catch (SqlException ex)
+            catch (SqlException )
             {
                 return null;
             }
@@ -119,7 +127,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                con.Close();
                return _conteo;
            }
-           catch (SqlException ex)
+           catch (SqlException )
            {
                return _conteo;
            }
@@ -170,7 +178,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                 con.Close();
                 return _conteo;
             }
-            catch (SqlException ex)
+            catch (SqlException )
             {
                 return _conteo;
             }
@@ -199,12 +207,17 @@ namespace BOReserva.DataAccess.DataAccessObject
                 con.Close();
                 return _conteo;
             }
-            catch (SqlException ex)
+            catch (SqlException )
             {
                 return _conteo;
             }
         }
 
+        /// <summary>
+        /// Buscar datos del vuelo
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public BoletoVuelo MBuscarDatosVuelo(int id)
         {
             BoletoVuelo vuelo = null;
@@ -232,12 +245,17 @@ namespace BOReserva.DataAccess.DataAccessObject
                 con.Close();
                 return vuelo;
             }
-            catch (SqlException ex)
+            catch (SqlException )
             {
                 return vuelo;
             }
         }
 
+        /// <summary>
+        /// Buscar datos de la ruta
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public RutaBoleto MBuscarDatosRuta(int id)
         {
             RutaBoleto ruta = null;
@@ -263,12 +281,17 @@ namespace BOReserva.DataAccess.DataAccessObject
                 con.Close();
                 return ruta;
             }
-            catch (SqlException ex)
+            catch (SqlException )
             {
                 return ruta;
             }
         }
 
+        /// <summary>
+        /// Busca el nombre de la ciudad
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public String MBuscarnombreciudad(int id)
         {
             String _ciudad = "No aplica";
