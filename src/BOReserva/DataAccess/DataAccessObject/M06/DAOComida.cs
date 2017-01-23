@@ -16,6 +16,21 @@ namespace BOReserva.DataAccess.DataAccessObject
     public class DAOComida : DAO, IDAOComida 
     {
 
+
+        #region Patron Singleton DAORevision.
+        private static DAOComida instance = null;
+        /// <summary>
+        /// Permite obtener una instancia de la clase DAORevision.
+        /// </summary>
+        /// <returns>Instancia DAORevision.</returns>
+        public static DAOComida Singleton()
+        {
+            if (DAOComida.instance == null)
+                DAOComida.instance = (DAOComida)FabricaDAO.instanciarComida();
+            return DAOComida.instance;
+        }
+        #endregion
+
         /// <summary>
         /// Método que crea una comida
         /// </summary>
