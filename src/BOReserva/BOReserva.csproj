@@ -877,6 +877,7 @@
     <Content Include="Scripts\Scripts_Hoteles\llamadas_comunes_hoteles.js" />
     <Content Include="Scripts\Scripts_Hoteles\llamadas_generales_hoteles.js" />
     <Content Include="Scripts\Scripts_Restaurantes\ccs\M10.css" />
+    <Content Include="Scripts\Scripts_Restaurantes\ValidacionFormulario.js" />
     <Content Include="Scripts\Scripts_Vuelos\llamadas_generales_Vuelos.js" />
     <Content Include="Views\dist\css\AdminLTE.css" />
     <Content Include="Views\dist\css\AdminLTE.min.css" />
@@ -1803,9 +1804,9 @@
     <Content Include="Views\gestion_cruceros\M24_ModificarCabinas.cshtml" />
     <Content Include="Views\gestion_cruceros\M24_ModificarCrucero.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarComidaVuelo.cshtml" />
-    <Content Include="Views\gestion_reclamos\M16_AgregarReclamo.cshtml" />
-    <Content Include="Views\gestion_reclamos\M16_VisualizarReclamo.cshtml" />
-    <Content Include="Views\gestion_reclamos\M16_ModificarReclamo.cshtml" />
+    <Content Include="Views\gestion_restaurantes\gestion_reclamos\M16_AgregarReclamo.cshtml" />
+    <Content Include="Views\gestion_restaurantes\gestion_reclamos\M16_VisualizarReclamo.cshtml" />
+    <Content Include="Views\gestion_restaurantes\gestion_reclamos\M16_ModificarReclamo.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_AgregarHotel.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_VisualizarHoteles.cshtml" />
     <Content Include="Views\gestion_equipaje\M07_GestionEquipaje_Agregar.cshtml" />
