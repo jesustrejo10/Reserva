@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Web;
+using BOReserva.DataAccess.DataAccessObject;
 using System.Web.Mvc;
-using BOReserva.Servicio.Servicio_Boletos;
+using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 
 namespace BOReserva.Models.gestion_boletos
 {
@@ -22,7 +22,8 @@ namespace BOReserva.Models.gestion_boletos
         {
             get
             {
-                var sqlObj = new manejadorSQL_Boletos();
+                //var sqlObj = new manejadorSQL_Boletos();
+                var sqlObj = (IDAOLugar) FabricaDAO.instanciarDaoLugar();
                 var allCiudades = sqlObj.buscarCiudades();
 
                 return DefaultCiudadDestinoItem.Concat(new SelectList(allCiudades, "Id", "Name"));
@@ -37,7 +38,8 @@ namespace BOReserva.Models.gestion_boletos
         {
             get
             {
-                var sqlObj = new manejadorSQL_Boletos();
+                //var sqlObj = new manejadorSQL_Boletos();
+                var sqlObj = (IDAOLugar)FabricaDAO.instanciarDaoLugar();
                 var allCiudades = sqlObj.buscarCiudades();
 
                 return DefaultCiudadOrigenItem.Concat(new SelectList(allCiudades, "Id", "Name"));

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,26 +6,38 @@ using System.Web.Mvc;
 using BOReserva.DataAccess.Domain;
 using BOReserva.Controllers.PatronComando;
 using BOReserva.Models.gestion_check_in;
-using BOReserva.Servicio.Servicio_Boletos;
 using System.Net;
 
 namespace BOReserva.Controllers
 {
+
+    /// <summary>  
+    ///  Controlador para la gestión del checkin
+    /// </summary>  
     public class gestion_check_inController : Controller
     {
 
         // GET
+        /// <summary>  
+        ///  Vista parcial de CheckIn
+        /// </summary>  
         public ActionResult M05_CheckIn()
         {
             return PartialView();
         }
 
         // GET
+        /// <summary>  
+        ///  Vista parcial para resgistrar equipaje 
+        /// </summary>  
         public ActionResult M05_RegistroEquipaje()
         {
             return PartialView();
         }
 
+        /// <summary>  
+        ///  Buscar boletos de un pasajero en particular
+        /// </summary>  
         // POST
         [HttpPost]
         public ActionResult buscarBoletos(CCheckIn model)
@@ -42,6 +54,9 @@ namespace BOReserva.Controllers
             return PartialView("M05_VerBoletosCheckIn",listaboletos);
         }
 
+        /// <summary>  
+        ///  Buscar pases de abordar de un pasajero en particular
+        /// </summary> 
         // POST
         [HttpPost]
         public ActionResult buscarPasesAbordaje(CCheckIn model)
@@ -50,21 +65,24 @@ namespace BOReserva.Controllers
             //SE BUSCAN TODOS LOS BOLETOS QUE ESTAN EN LA BASE DE DATOS
             // DE ESE PASAJERO EN PARTICULAR PARA MOSTRARLOS EN LA VISTA
 
-            //manejadorSQL_Check buscarboletos = new manejadorSQL_Check();
-            //List<CBoardingPass> listaboletos = buscarboletos.M05ListarPasesPasajero(pasaporte);
 
-            List<Entidad> listaBoletos = (FabricaComando.ConsultarPasajeros(pasaporte)).ejecutar();
+            List<Entidad> listaBoletos = (FabricaComando.ConsultarPasajerosCheckin(pasaporte)).ejecutar();
 
             return PartialView("M05_VerPasesAbordaje", listaBoletos);
         }
 
+        /// <summary>  
+        ///  Vista parcial para listar boletos
+        /// </summary> 
         // GET
         public ActionResult M05_VerBoletosCheckIn()
         {
             return PartialView();
         }
 
-
+        /// <summary>  
+        ///  Método para visualizar un boleto
+        /// </summary> 
         // POST
         [HttpPost]
         public JsonResult verBoleto(CVisualizarBoleto model)
@@ -88,6 +106,9 @@ namespace BOReserva.Controllers
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
 
+        /// <summary>  
+        ///  Método para visualizar el detalle de un boleto
+        /// </summary> 
         public ActionResult M05_VerDetalleBoleto(int id)
         {
 
@@ -97,17 +118,24 @@ namespace BOReserva.Controllers
             Boleto boleto = (Boleto) co.ejecutar();
             BoletoDetalle bolView = (BoletoDetalle) FabricaEntidad.InstanciarDetalleBoleto(boleto);
 
-            return PartialView(boleto);
+            return PartialView(bolView);
 
         }
 
+        /// <summary>  
+        ///  Vista parcial con el equipaje asociado a un pasajero
+        /// </summary> 
         public ActionResult Equipaje(int id)
         {
             System.Diagnostics.Debug.WriteLine(id);
             CEquipaje equi = new CEquipaje(id);
             return PartialView("M05_Equipaje",equi);
         }
-        //faltapatrones
+
+
+        /// <summary>  
+        ///  Método para generar un boarding pass asociado a un pasajero
+        /// </summary> 
         [HttpPost]
         public ActionResult generarBoardingPass(CDetalleBoleto model)
         {
@@ -119,7 +147,7 @@ namespace BOReserva.Controllers
             {
                 int id_bol = model._bol_id;
 
-                manejadorSQL_Check modificar = new manejadorSQL_Check();
+                //manejadorSQL_Check modificar = new manejadorSQL_Check();
 
                 // OBTENGO EL /LOS VUELOS DEL BOLETO
                 Command<List<Entidad>> comando = FabricaComando.consultarM05listaVuelos(model._bol_id);
@@ -134,24 +162,18 @@ namespace BOReserva.Controllers
                 //int ida_vuelta = modificar.MBuscarIdaVuelta(model._bol_id);
                 Command<int> comando2 = FabricaComando.mostrarM05idaVuelta(model._bol_id);
                 int ida_vuelta = comando2.ejecutar();
+
                 // EL BOLETO ES IDA 1
                 // EL BOLETO ES IDA Y VUELTA 2
 
                 // DATOS PARA INSERTAR EN PASE DE ABORDAJE
+
                 CBoardingPass pase2 = new CBoardingPass();
                 BoardingPass pase;
-               
+
                 if (ida_vuelta == 1)
                 {
                     pase = (BoardingPass)FabricaEntidad.InstanciarBoardingPass(lista1._id, lista1._fechaPartida, lista1._fechaLlegada, lista1._fechaPartida.TimeOfDay.ToString(), lista1._ruta._origen, lista1._ruta._destino, lista1._ruta._nomOrigen, lista1._ruta._nomDestino, model._bol_id, "A12", model._primer_nombre, model._primer_apellido);
-                    /*pase._vuelo = lista1._id;
-                    pase._fechaPartida = lista1._fechaPartida;
-                    pase._fechaLlegada = lista1._fechaLlegada;
-                    pase._horaPartida = lista1._fechaPartida.TimeOfDay.ToString();
-                    pase._origen = lista1._ruta._origen;
-                    pase._destino = lista1._ruta._destino;
-                    pase._nombreOri = lista1._ruta._nomOrigen;
-                    pase._nombreDest = lista1._ruta._nomDestino;*/
 
                 }
                 else
@@ -160,7 +182,6 @@ namespace BOReserva.Controllers
                     if (compara == 0)
                     {
                         pase = (BoardingPass)FabricaEntidad.InstanciarBoardingPass(lista1._id, lista1._fechaPartida, lista1._fechaLlegada, lista1._fechaPartida.TimeOfDay.ToString(), lista1._ruta._origen, lista1._ruta._destino, lista1._ruta._nomOrigen, lista1._ruta._nomDestino, model._bol_id, "A12", model._primer_nombre, model._primer_apellido);
-
                     }
                     else
                     {
@@ -183,7 +204,10 @@ namespace BOReserva.Controllers
                 }
 
                 // TENGO QUE BUSCAR EL ID DEL PASE DE ABORDAJE CREADO
-                int num_boarding = modificar.IdBoardingPass(pase._boleto, pase._vuelo);
+                Command<int> comando5 = FabricaComando.IdM05paseAbordaje(pase._boleto, pase._vuelo);
+
+                //int num_boarding = modificar.IdBoardingPass(pase._boleto, pase._vuelo);
+                int num_boarding = comando5.ejecutar();
                 pase._id = num_boarding;
                 // TENGO QUE INSTANCIAR AL MODELO DE VER BOARDING PASS
                 return PartialView("M05_VerBoardingPass", pase);
@@ -197,7 +221,10 @@ namespace BOReserva.Controllers
                 return Json(error);
             }
         }
-       
+
+        /// <summary>  
+        ///  Método para insertar equipaje asociado a un pasajero
+        /// </summary>  
         [HttpPost]
         public ActionResult insertarEquipaje(CEquipaje model)
         {
@@ -215,6 +242,7 @@ namespace BOReserva.Controllers
                 return Json(error);
             }
 
+
             Command<int> comando = FabricaComando.conteoM05maletas(pase);
 
            
@@ -226,17 +254,15 @@ namespace BOReserva.Controllers
 
                 int resultado1 = -1;
                 int resultado2 = -1;
-                
+
                 if (peso1 != 0)
-                {
-                    
+                {                  
                      Command<int> comando2 = FabricaComando.crearM05maletas(pase, peso1);
                      resultado1 = comando2.ejecutar();
                 }
 
                 if (peso2 > 0)
-                {
-                   
+                { 
                     Command<int> comando3 = FabricaComando.crearM05maletas(pase, peso2);
                     resultado2 = comando3.ejecutar();
                 }
@@ -260,15 +286,19 @@ namespace BOReserva.Controllers
             }
         }
 
+        /// <summary>  
+        ///  Método para buscar el equipaje asociado a un pasajero
+        /// </summary> 
         public JsonResult registrarEquipaje(int pase_id)
         {
 
             int id_bol = pase_id;
-            // TENGO QUE INSTANCIAR AL MODELO DE VER BOARDING PASS
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
 
-
+        /// <summary>  
+        ///  Vista parcial con el equipaje asociado a un pasajero
+        /// </summary> 
         // GET
         public ActionResult M05_Equipaje()
         {

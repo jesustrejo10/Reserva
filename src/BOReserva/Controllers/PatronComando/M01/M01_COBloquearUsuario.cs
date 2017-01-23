@@ -3,9 +3,6 @@ using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.DataAccessObject.M01;
 using BOReserva.DataAccess.Domain;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace BOReserva.Controllers.PatronComando.M01
 {

@@ -3,11 +3,13 @@ using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.DataAccessObject.M13;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
+using BOReserva.Excepciones;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using BOReserva.Excepciones.M13;
 using System.Linq;
 using System.Web;
 
@@ -38,19 +40,30 @@ namespace BOReserva.DataAccess.DataAccessObject
                     return 1;
                 }
             }
+            catch (ArgumentNullException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM13("Reserva-404", "Argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM13("Reserva-404", "Datos con un formato invalido", ex);
+            }
             catch (SqlException ex)
             {
-                Debug.WriteLine("ENTRO EN EL CATCH");
-                Debug.WriteLine(ex.ToString());
-                conexion.Close();
-                return 0;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM13("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM13("Reserva-404", "Error Conexion Base de Datos", ex);
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("ENTRO EN EL CATCH");
-                Debug.WriteLine(ex.ToString());
-                conexion.Close();
-                return 0;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM13("Reserva-404", "Error al realizar operacion ", ex);
             }
         }
 
@@ -85,18 +98,30 @@ namespace BOReserva.DataAccess.DataAccessObject
                 conexion.Close();
                 return listapermisos;
             }
+            catch (ArgumentNullException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM13("Reserva-404", "Argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM13("Reserva-404", "Datos con un formato invalido", ex);
+            }
             catch (SqlException ex)
             {
-                Debug.WriteLine(ex.ToString());
-                conexion.Close();
-                return null;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM13("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM13("Reserva-404", "Error Conexion Base de Datos", ex);
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("ENTRO EN EL CATCH");
-                Debug.WriteLine(ex.ToString());
-                conexion.Close();
-                return null;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM13("Reserva-404", "Error al realizar operacion ", ex);
             }
         }
 
@@ -121,17 +146,30 @@ namespace BOReserva.DataAccess.DataAccessObject
                     return "1";
                 }
             }
+            catch (ArgumentNullException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM13("Reserva-404", "Argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM13("Reserva-404", "Datos con un formato invalido", ex);
+            }
             catch (SqlException ex)
             {
-                conexion.Close();
-                return ex.Message;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM13("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM13("Reserva-404", "Error Conexion Base de Datos", ex);
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("ENTRO EN EL CATCH");
-                Debug.WriteLine(ex.ToString());
-                conexion.Close();
-                return ex.Message;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM13("Reserva-404", "Error al realizar operacion ", ex);
             }
         }
 
@@ -162,17 +200,30 @@ namespace BOReserva.DataAccess.DataAccessObject
                     return listaroles;
                 }
             }
+            catch (ArgumentNullException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM13("Reserva-404", "Argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM13("Reserva-404", "Datos con un formato invalido", ex);
+            }
             catch (SqlException ex)
             {
-                conexion.Close();
-                return null;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM13("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM13("Reserva-404", "Error Conexion Base de Datos", ex);
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("ENTRO EN EL CATCH");
-                Debug.WriteLine(ex.ToString());
-                conexion.Close();
-                return null;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM13("Reserva-404", "Error al realizar operacion ", ex);
             }
         }
 
@@ -209,18 +260,30 @@ namespace BOReserva.DataAccess.DataAccessObject
                     return permiso;
                 }
             }
+            catch (ArgumentNullException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM13("Reserva-404", "Argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM13("Reserva-404", "Datos con un formato invalido", ex);
+            }
             catch (SqlException ex)
             {
-                Debug.WriteLine(ex.ToString());
-                conexion.Close();
-                return null;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM13("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM13("Reserva-404", "Error Conexion Base de Datos", ex);
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("ENTRO EN EL CATCH");
-                Debug.WriteLine(ex.ToString());
-                conexion.Close();
-                return null;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM13("Reserva-404", "Error al realizar operacion ", ex);
             }
         }
 
@@ -249,19 +312,30 @@ namespace BOReserva.DataAccess.DataAccessObject
                     return resultado;
                 }
             }
+            catch (ArgumentNullException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM13("Reserva-404", "Argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM13("Reserva-404", "Datos con un formato invalido", ex);
+            }
             catch (SqlException ex)
             {
-                Debug.WriteLine("ENTRO EN EL CATCH");
-                Debug.WriteLine(ex.ToString());
-                conexion.Close();
-                return null;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM13("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM13("Reserva-404", "Error Conexion Base de Datos", ex);
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("ENTRO EN EL CATCH");
-                Debug.WriteLine(ex.ToString());
-                conexion.Close();
-                return null;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM13("Reserva-404", "Error al realizar operacion ", ex);
             }
         }
     }

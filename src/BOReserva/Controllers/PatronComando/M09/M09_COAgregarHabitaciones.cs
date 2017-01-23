@@ -42,7 +42,7 @@ namespace BOReserva.Controllers.PatronComando.M09
             {
                 throw ex;
             }
-        }
 
+        }
     }
 }
