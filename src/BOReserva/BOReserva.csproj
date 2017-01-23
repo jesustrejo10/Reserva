@@ -746,6 +746,7 @@
     <Content Include="Content\dist\js\demo.js" />
     <Content Include="Content\dist\js\pages\dashboard.js" />
     <Content Include="Content\dist\js\pages\dashboard2.js" />
+    <Content Include="Content\Gif\loader.gif" />
     <Content Include="Content\M24_css\style_module.css" />
     <Content Include="Content\Preloader_2.gif" />
     <Content Include="Content\themes\base\accordion.css" />
@@ -930,8 +931,9 @@
     <Content Include="Views\gestion_equipaje_perdido\placeholder.html" />
     <Content Include="Views\gestion_ofertas\placeholder.html" />
     <Content Include="Views\gestion_restaurantes\ccs\M10.css" />
-    <Content Include="Views\gestion_roles\M13_Roles.html" />
-    <Content Include="Views\gestion_roles\placeholder.html" />
+    <Content Include="Views\gestion_restaurantes\gestion_roles\M13_Roles.html" />
+    <Content Include="Views\gestion_restaurantes\gestion_roles\placeholder.html" />
+    <Content Include="Views\gestion_restaurantes\Gif\loader.gif" />
     <Content Include="Views\gestion_ruta_comercial\placeholder.html" />
     <Content Include="Scripts\Scripts_Ingreso_Seguridad\Logout.js" />
     <Content Include="Views\gestion_usuarios\placeholder.html" />
@@ -1792,7 +1794,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_VisualizarVuelosComidas.cshtml" />
     <Content Include="Views\gestion_restaurantes\M10_GestionRestaurantes_Modificar.cshtml" />
-    <Content Include="Views\gestion_roles\M13_ModificarRol.cshtml" />
+    <Content Include="Views\gestion_restaurantes\gestion_roles\M13_ModificarRol.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarComida.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_VisualizarVuelos.cshtml" />
     <Content Include="Views\gestion_cruceros\M24_AgregarCabinas.cshtml" />
@@ -1831,9 +1833,9 @@
     <Content Include="Views\gestion_reclamos\M16_AlertaError.cshtml" />
     <Content Include="Views\gestion_reclamos\M16_ConsultarReclamo.cshtml" />
     <Content Include="Views\gestion_reclamos\M16_DetalleReclamo.cshtml" />
-    <Content Include="Views\gestion_roles\M13_AgregarPermiso.cshtml" />
-    <Content Include="Views\gestion_roles\M13_ModificarPermiso.cshtml" />
-    <Content Include="Views\gestion_roles\M13_VisualizarPermiso.cshtml" />
+    <Content Include="Views\gestion_restaurantes\gestion_roles\M13_AgregarPermiso.cshtml" />
+    <Content Include="Views\gestion_restaurantes\gestion_roles\M13_ModificarPermiso.cshtml" />
+    <Content Include="Views\gestion_restaurantes\gestion_roles\M13_VisualizarPermiso.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_boletos\M05_VisualizarBoletos.cshtml" />
@@ -1859,7 +1861,7 @@
     <Content Include="Views\gestion_ofertas\M11_GestionOfertas.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_ModificarOferta.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_ModificarPaquete.cshtml" />
-    <Content Include="Views\gestion_roles\M13_AgregarRol.cshtml" />
+    <Content Include="Views\gestion_restaurantes\gestion_roles\M13_AgregarRol.cshtml" />
     <Content Include="Views\gestion_boletos\M05_ModificarBoleto.cshtml" />
     <Content Include="Views\gestion_boletos\M05_VisualizarReservasPasajero.cshtml" />
     <Content Include="Views\gestion_boletos\M05_DetalleVueloReserva.cshtml" />
@@ -1871,7 +1873,7 @@
     <Content Include="Views\gestion_check_in\M05_RegistroEquipaje.cshtml" />
     <Content Include="Views\gestion_check_in\M05_VerPasesAbordaje.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_VisualizarComidas.cshtml" />
-    <Content Include="Views\gestion_roles\M13_VisualizarRol.cshtml" />
+    <Content Include="Views\gestion_restaurantes\gestion_roles\M13_VisualizarRol.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_DetallePaquete.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_DetalleOferta.cshtml" />
     <Content Include="Views\gestion_ofertas\M11_ConsultarOferta.cshtml" />
@@ -1883,8 +1885,8 @@
     <Folder Include="Servicio\Servicio_Boletos\" />
     <Folder Include="Views\dist\img\credit\" />
     <Folder Include="Views\dist\js\pages\" />
-    <Folder Include="Views\gestion_roles\css\" />
-    <Folder Include="Views\gestion_roles\js\" />
+    <Folder Include="Views\gestion_restaurantes\gestion_roles\css\" />
+    <Folder Include="Views\gestion_restaurantes\gestion_roles\js\" />
     <Folder Include="Views\Prueba\" />
   </ItemGroup>
   <ItemGroup>

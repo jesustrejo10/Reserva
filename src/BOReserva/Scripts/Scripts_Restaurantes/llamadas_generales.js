@@ -13,7 +13,7 @@ $("#aceptarRestaurante").click(function (e) {
     var idlugar = $('#ComboLugar :selected').val();
     var horaini = $('#ComboHoraIni :selected').text();
     var horafin = $('#ComboHoraFin :selected').text();
-
+    $("#divCargando").show();
     $.ajax({
         url: "gestion_restaurantes/guardarRestaurante",
         data: { Nombre: nombre, Descripcion: descripcion, Direccion: direccion, Telefono: telefono, idLugar: idlugar, HoraIni: horaini, HoraFin: horafin },
@@ -36,6 +36,7 @@ $("#aceptarRestaurante").click(function (e) {
 
                         $("#contenido").empty();
                         $("#contenido").append(data);
+                        $("#divCargando").hide();
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         alert(errorThrown);

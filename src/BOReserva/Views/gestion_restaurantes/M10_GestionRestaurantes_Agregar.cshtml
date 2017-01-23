@@ -18,8 +18,16 @@
 </script>
 
 <!---------------------- SECCION DE AGREGAR RESTAURANTE ---------------->
-@using (Html.BeginForm("M10_GestionRestaurantes_Agregar", "gestion_restaurantes", null, FormMethod.Post, new {@id = "formAgregarRestaurante", @class = "form-horizontal"}))
+@using (Html.BeginForm("M10_GestionRestaurantes_Agregar", "gestion_restaurantes", null, FormMethod.Post, new { @id = "formAgregarRestaurante", @class = "form-horizontal" }))
 {
+    <div id="divCargando" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+    top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+    opacity: .8; filter: alpha(opacity=70);display:none">
+        <p style="position: absolute; top: 30%; left: 45%; color: White;">
+            Cargando, por favor espere...
+            
+        </p>
+    </div>
 
     <div class="row">
         <div class="col-md-10">

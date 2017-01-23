@@ -1,0 +1,159 @@
+<!-- Indico que para esta vista, M13_AgregarRol, utilizare el modelo Models/gestion_roles/CRoles-->
+@model BOReserva.Models.gestion_roles.CRoles
+
+<!--Indico que, estoy abriendo un formulario que tendra como accion del submit, el controlador gestion_roles"Controller", 
+    utilizara el metodo agregarRol
+    le pasara la informacion mediante un POST-->
+
+@using (Html.BeginForm("Agregar_Rol", "gestion_roles", null, FormMethod.Post, new { @id = "formagreagarrol", @class = "form-horizontal" }))
+
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-success">
+                <div class="box-header ">
+                    <h1 class="box-title"> Agregar Rol</h1>
+                    <div class="box-tools pull-right">
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-6"> 
+                                <!--se agrega el campo para insertar el nombre del nuevo rol-->                          
+                                <label for="nombreRol">Inserte nombre del rol (*)
+<!--                                (<span style="color:red">*</span>):-->
+                                </label>
+                                <!-- nuevo rol-->  
+                                @Html.TextBoxFor(m => m.Nombre_rol, null, new { @class = "form-control", @placeholder = "Nombre del Rol", id = "nombre_rol" })
+                                </div>
+                            @*<div class="col-xs-6">
+                               <label for="modelo">Modulo</label><br>                                                           
+                                <select name="lista_modulos" id="listamodulos">
+                                    <option selected disabled hidden style='display: none' value=''></option>  
+                                     muestra todos los modulos existentes para crear asignarle permisos 
+                                @try
+                                {
+                                    foreach (var item in Model.Menu)
+                                    {
+                                        <option value="@item.Nombre">
+                                            @item.Nombre
+                                        </option>
+                                    }
+                                }catch
+                        {
+                            <script>
+                                alert("Error en el listado, por favor intente acceder nuevamente");
+                            </script>
+                        }
+                                </select>
+                            </div>*@                       
+                            <div class="col-xs-12" style="margin-top:10px;">
+                                <label for="Acceso">Tendra acceso a:</label>                                
+                                <!--se llena por javascript los permisos que del modulo cada vez que se cambia la seleccion de un elemento aqui --> 
+                                <div class="checkbox" id="listaPermisos">
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>                       
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <button type="submit" id="agreagarrol" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Guardar</button>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+
+    <script>
+        consultarPermisos();
+
+        $("#agreagarrol").click(function (e) {
+            e.preventDefault();
+            var form = $("#formagreagarrol");
+            var permisos = [$("#nombre_rol").val()];
+            if ($("#nombre_rol").val().length < 1) {
+                alert("El nombre es obligatorio");
+                return false;
+            }
+            else {
+                //agrega el nombre del rol
+                jQuery.each($("input[type='checkbox']"), function (i) {
+                    if (this.checked && this.value != "on") {
+                        permisos.push(this.value);
+                    }
+                    //agrega cada permiso en particular
+                });
+                $.ajax({
+                    url: "gestion_roles/agregarrol",
+                    data: form.serialize(),
+                    type: 'POST',
+                    success: function (response) {
+                        $.ajax({
+                            type: 'post',
+                            dataType: 'json',
+                            url: 'gestion_roles/asignarpermisos',
+                            data: { json: JSON.stringify(permisos) },
+                            success: function (data) {
+
+                            },
+                            failure: function (response) {
+                                alert("No se pudo asignar permisos");
+
+                            }
+                        });
+
+                        $.ajax({
+                            url: '/gestion_roles/M13_VisualizarRol',
+                            type: 'GET',
+                            success: function (data, textStatus, jqXHR) {
+                                $("#contenido").empty();
+                                $("#contenido").append(data);
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert(errorThrown);
+                            }
+                        });
+                    }
+                });                            
+            }
+        });
+
+        function consultarPermisos(){
+            $.ajax({
+                type: 'get',
+                dataType: '',
+                url: 'gestion_roles/Consultarpermisos',
+                //data: data,
+                success: function (response) {
+                    cargadorPermisos(response);
+                },
+                failure: function (response) {
+                    alert("Error buscando permisos");
+                }
+            });
+
+            function cargadorPermisos(response) {
+                var permisos = response;
+                var container = $('#listaPermisos');
+                //se vacia la lista de permisos para colocar los nuevos seleccionados
+                container.empty();
+                jQuery.each(permisos, function (k, v) {
+                        $('<input/>', { type: 'checkbox', id: 'permiso' + v._idPermiso, value: v._nombre }).appendTo(container);
+                        $('<label/>', { 'for': 'permiso' + v._idPermiso, text: v._nombre }).appendTo(container);
+                        $('<br>').appendTo(container);
+                });
+            }
+        };
+        
+    </script>
+
+}
+
