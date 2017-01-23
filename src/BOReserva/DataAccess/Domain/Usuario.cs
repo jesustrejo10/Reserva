@@ -23,7 +23,7 @@ namespace BOReserva.DataAccess.Domain
         public String activo { get; set; }
 
         public Usuario()
-        {
+        { }
 
         /// <summary>
         /// Constructor Vacio utilizado mientras se le da forma al proyecto
