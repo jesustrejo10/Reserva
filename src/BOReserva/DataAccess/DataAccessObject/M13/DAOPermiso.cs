@@ -126,7 +126,7 @@ namespace BOReserva.DataAccess.DataAccessObject
         }
 
         ///<summary>
-        ///Metodo para eliminar un rol 
+        ///Metodo para eliminar un permiso 
         ///</summary>
         ///<returns>String</returns>
         public String eliminarPermisoSeleccionado(int id)
@@ -174,7 +174,7 @@ namespace BOReserva.DataAccess.DataAccessObject
         }
 
         ///<summary>
-        ///Metodo para eliminar un rol 
+        ///Metodo para validar si un permiso esta asociado a un rol
         ///</summary>
         ///<returns>String</returns>
         public List<int> validacionPermiso(int id)
@@ -288,7 +288,7 @@ namespace BOReserva.DataAccess.DataAccessObject
         }
 
         ///<summary>
-        ///Metodo para modificar el nombre de un rol existente
+        ///Metodo para modificar el nombre y url de un permiso existente
         ///</summary>
         ///<returns>Entidad</returns>
         Entidad IDAO.Modificar(Entidad e)

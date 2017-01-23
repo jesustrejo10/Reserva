@@ -17,6 +17,11 @@ namespace BOReserva.DataAccess.DAO
         String eliminarRol(int id);
         String eliminarPermiso(int id);
         List<Entidad> consultarLosPermisosAsignados(int id);
-
+        String MBuscarid_IdRol(String rolBuscar);
+        String MBuscarid_Permiso(String permisoBucar);
+        List<Entidad> consultarPermisosNoAsignados(int id);
+        List<int> consultarPermisosUsuario(int idUsuario);
+        String quitarPermiso(int idRol, int idPermiso);
+        List<int> validacionRol(int id);
     }
 }

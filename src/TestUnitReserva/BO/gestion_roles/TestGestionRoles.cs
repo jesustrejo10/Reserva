@@ -16,6 +16,7 @@ using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.DataAccessObject.M13;
 using BOReserva.Models.gestion_roles;
 using BOReserva.Controllers;
+using BOReserva.Excepciones.M13;
 
 namespace TestUnitReserva.BO.gestion_roles
 {
@@ -26,8 +27,8 @@ namespace TestUnitReserva.BO.gestion_roles
         private Rol mockRolPermiso;
         private Rol mockIdRol;
         private Permiso mockPermiso;
-        private int idAdministrador;
         DAORol daoRol;
+        DAOPermiso daoPermiso;
         gestion_rolesController controller;
 
         /// <summary>
@@ -36,10 +37,10 @@ namespace TestUnitReserva.BO.gestion_roles
         [SetUp]
         public void Before()
         {
-            mockRol = new Rol("SuperAdmin");
-            mockRolPermiso = new Rol("SuperAdmin", "Gestion de aviones");
+            mockRol = new Rol("SuperAdminsss");
+            mockRolPermiso = new Rol("SuperAdminsss", "Gestion de aviones");
             mockIdRol = new Rol(1, "Administrador");
-            idAdministrador = 1;
+            mockPermiso = new Permiso("Permiso Prueba Unitaria", "url");
             daoRol = new DAORol();
             controller = new gestion_rolesController();
 
@@ -62,9 +63,10 @@ namespace TestUnitReserva.BO.gestion_roles
             //Caso de exito
             int resultadoAgregar = daoRol.Agregar(mockRol);
             Assert.AreEqual(resultadoAgregar, 1);
-            ////Caso de fallo
-            //int resultadoAgregarIncorrecto = daoRol.Agregar(null);
-            //Assert.AreEqual(resultadoAgregarIncorrecto, 0);
+            //Caso de fallo
+            Assert.Throws<ReservaExceptionM13>(() => daoRol.Agregar(null));
+            //Caso de fallo
+            Assert.Throws<ReservaExceptionM13>(() => daoRol.Agregar(mockRol));
         }
 
         [Test]
@@ -73,9 +75,10 @@ namespace TestUnitReserva.BO.gestion_roles
             //Caso de exito
             int resultadoAgregar = daoRol.AgregarRolPermiso(mockRolPermiso);
             Assert.AreEqual(resultadoAgregar, 1);
-            ////Caso de fallo
-            //int resultadoAgregarIncorrecto = daoRol.AgregarRolPermiso(null);
-            //Assert.AreEqual(resultadoAgregarIncorrecto, 0);
+            //Caso de fallo
+            Assert.Throws<ReservaExceptionM13>(() => daoRol.AgregarRolPermiso(null));
+            //Caso de fallo
+            Assert.Throws<ReservaExceptionM13>(() => daoRol.AgregarRolPermiso(mockRolPermiso));
         }
 
         [Test]

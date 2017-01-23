@@ -10,5 +10,7 @@ namespace BOReserva.DataAccess.DAO
     interface IDAOPermiso: IDAO
     {
         List<Entidad> ConsultarListaPermisos();
+        String eliminarPermisoSeleccionado(int id);
+        List<int> validacionPermiso(int id);
     }
 }
