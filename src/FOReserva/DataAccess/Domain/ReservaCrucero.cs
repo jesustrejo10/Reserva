@@ -48,5 +48,14 @@ namespace FOReserva.DataAccess.Domain
             this._status = status;
         }
 
+        public ReservaCrucero(int cantidadPasajeros, int usuario, int crucero, int ruta, DateTime fechaInicio, String status)
+        {
+            this._cantidadPasajeros = cantidadPasajeros;
+            this._usuario = usuario;
+            this._crucero = crucero;
+            this._ruta = ruta;
+            this._fechaInicio = fechaInicio;
+            this._status = status;
+        }
     }
 }

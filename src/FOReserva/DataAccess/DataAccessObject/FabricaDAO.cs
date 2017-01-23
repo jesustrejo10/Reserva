@@ -1,4 +1,4 @@
-﻿using FOReserva.DataAccess;
+﻿using FOReserva.DataAccess.DataAccessObject;
 using FOReserva.DataAccess.Model;
 using FOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using FOReserva.DataAccess.DataAccessObject.M19;
@@ -100,16 +100,17 @@ namespace FOReserva.DataAccess.DataAccessObject
         {
             return new DAOReservaCrucero();
         }
+
+
+        
+        public static Parametro asignar(string nombreAtributo, SqlDbType tipoDeDato, string valorAtributo, bool output)
+        {
+            return new Parametro(nombreAtributo, tipoDeDato, valorAtributo, output);
+        }
+
+        
         #endregion
 
-        internal static Parametro asignarParametro(string p1, SqlDbType sqlDbType, DateTime dateTime, bool p2)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static Parametro asignarParametro(string p1, SqlDbType sqlDbType, int p2, bool p3)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
