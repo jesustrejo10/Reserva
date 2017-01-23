@@ -29,24 +29,74 @@ namespace BOReserva.Controllers.PatronComando
     public class FabricaComando
     {
         #region M01_Login
+        /// <summary>
+        /// Método para la instanciación del comando "Consultar Usuario"
+        /// </summary>
+        /// <param name="_usuario">Objeto Usuario incompleto con el correo del usuario a consultar</param>
+        /// <returns>Objeto Usuario con toda la información traída de la base de datos</returns>
         public static Command<Entidad> M01ConsultarUsuario(Entidad _usuario)
         {
             return new M01_COConsultarUsuario(_usuario);
         }
 
+        /// <summary>
+        /// Método para la instanciación del comando "Bloquear Usuario"
+        /// </summary>
+        /// <param name="_usuario">Objeto Usuario incompleto con el correo del usuario a consultar</param>
+        /// <returns>Booleano con el estado de la ejecución del comando</returns>
         public static Command<Boolean> M01BloquearUsuario(Entidad _usuario)
         {
             return new M01_COBloquearUsuario(_usuario);
         }
 
+        /// <summary>
+        /// Método para la instanciación del comando "Resetear Intentos"
+        /// </summary>
+        /// <param name="_usuario">Objeto Usuario incompleto con el correo del usuario a consultar</param>
+        /// <returns>Booleano con el estado de la ejecución del comando</returns>
         public static Command<Boolean> M01ResetearIntentos(Entidad _usuario)
         {
             return new M01_COResetearIntentos(_usuario);
         }
 
+        /// <summary>
+        /// Método para la instanciación del comando "Incrementar Intentos"
+        /// </summary>
+        /// <param name="_usuario">Objeto Usuario incompleto con el correo del usuario a consultar</param>
+        /// <returns>Booleano con el estado de la ejecución del comando</returns>
         public static Command<Boolean> M01IncrementarIntentos(Entidad _usuario)
         {
             return new M01_COIncrementarIntentos(_usuario);
+        }
+
+        /// <summary>
+        /// Método para la instanciación del comando "Insertar Login"
+        /// </summary>
+        /// <param name="_usuario">Objeto Usuario incompleto con el correo del usuario a consultar</param>
+        /// <returns>Booleano con el estado de la ejecución del comando</returns>
+        public static Command<Boolean> M01InsertarLogin(Entidad _usuario)
+        {
+            return new M01_COInsertarLogin(_usuario);
+        }
+
+        /// <summary>
+        /// Método para la instanciación del comando "Eliminar Login"
+        /// </summary>
+        /// <param name="_usuario">Objeto Usuario incompleto con el correo del usuario a consultar</param>
+        /// <returns>Booleano con el estado de la ejecución del comando</returns>
+        public static Command<Boolean> M01EliminarLogin(Entidad _usuario)
+        {
+            return new M01_COEliminarLogin(_usuario);
+        }
+
+        /// <summary>
+        /// Método para la instanciación del comando "Número Intentos"
+        /// </summary>
+        /// <param name="_usuario">Objeto Usuario incompleto con el correo del usuario a consultar</param>
+        /// <returns>Entero con el número de intentos de inicio de sesión</returns>
+        public static Command<int> M01NumeroIntentos(Entidad _usuario)
+        {
+            return new M01_CONumeroIntentos(_usuario);
         }
         #endregion
 

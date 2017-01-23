@@ -215,6 +215,9 @@
     <Compile Include="Controllers\PatronComando\M01\M01_COConsultarUsuario.cs" />
     <Compile Include="Controllers\PatronComando\M01\M01_COResetearIntentos.cs" />
     <Compile Include="Controllers\PatronComando\M01\M01_COIncrementarIntentos.cs" />
+    <Compile Include="Controllers\PatronComando\M01\M01_COInsertarLogin.cs" />
+    <Compile Include="Controllers\PatronComando\M01\M01_COEliminarLogin.cs" />
+    <Compile Include="Controllers\PatronComando\M01\M01_CONumeroIntentos.cs" />
     <Compile Include="Controllers\PatronComando\M02\M02_COAgregarAvion.cs" />
     <Compile Include="Controllers\PatronComando\M02\M02_COConsultarAvion.cs" />
     <Compile Include="Controllers\PatronComando\M02\M02_CODisponibilidadAvion.cs" />
