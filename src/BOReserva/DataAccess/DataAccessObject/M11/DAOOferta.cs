@@ -376,35 +376,72 @@ namespace BOReserva.DataAccess.DataAccessObject.M11
             }
         }
 
-        string IDAOOferta.disponibilidadOferta(Entidad e, int disponibilidad) 
+        String IDAOOferta.disponibilidadOferta(Entidad e, int disponibilidad) 
         {
             Oferta oferta = (Oferta)e;
-            int  ofertaId = oferta._idOferta;
+            int ofertaId = oferta._idOferta;
+            Debug.WriteLine("Enró a DAO DISPON OFERTA");
+            Debug.WriteLine("Enró a DAO DISPON OFERTA " + disponibilidad);
+            Debug.WriteLine("Enró a DAO DISPON OFERTA "+ ofertaId);
+            
             SqlConnection conexion = new SqlConnection(_connexionString);
             try
-            {           
+            {
+
                 conexion.Open();
-                SqlCommand query = conexion.CreateCommand();
-                query.CommandText = "UPDATE Oferta SET ofe_estado = disponibilidad WHERE ofe_id=" + ofertaId;
-                SqlDataReader lector = query.ExecuteReader();
-                lector.Close();
-                SqlCommand query1 = conexion.CreateCommand();
-                query1.CommandText = "UPDATE Paquete SET paq_fk_oferta = null WHERE paq_fk_oferta=" + ofertaId;
-                SqlDataReader lector1 = query1.ExecuteReader();
-                lector1.Close();
-                conexion.Close();
-                return "1";
+                SqlCommand cmd = new SqlCommand("[dbo].[M11_ActualizarOferta]", conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                Debug.WriteLine("HIZO CONEXIÓN EN VISUAL");
+
+                SqlParameter ParId = new SqlParameter();
+                ParId.ParameterName = "@ofe_id";
+                ParId.SqlDbType = SqlDbType.Int;
+                ParId.Value = ofertaId;
+                cmd.Parameters.Add(ParId);
+
+                SqlParameter ParEstado = new SqlParameter();
+                ParEstado.ParameterName = "@ofe_estado";
+                ParEstado.SqlDbType = SqlDbType.Int;
+                ParEstado.Value = disponibilidad;
+                cmd.Parameters.Add(ParEstado);
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    cmd.Dispose();
+                    conexion.Close();
+                    return "Realizado el Cambio. Actualice la página.";
+                }
             }
             catch (SqlException ex)
             {
-                Debug.WriteLine("Entre en excepcion sql de IDAOOferta");
+                Debug.WriteLine("Ocurrio un SqlException");
+                Debug.WriteLine(ex.ToString());
                 conexion.Close();
-                return ex.Message;
-                
+                return "SQL EXCEPTION";
             }
-            
-        }
-        
+            catch (NullReferenceException ex)
+            {
+                Debug.WriteLine("Ocurrio una NullReferenceException");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return "Ocurrio una NullReferenceException";
+            }
+            catch (ArgumentNullException ex)
+            {
+                Debug.WriteLine("Ocurrio una ArgumentNullException");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return "Ocurrio una ArgumentNullException";
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Ocurrio una Exception");
+                Debug.WriteLine(ex.ToString());
+                conexion.Close();
+                return "Ocurrio una Exception desconocida";
+            }
+        }        
     }
         
 }

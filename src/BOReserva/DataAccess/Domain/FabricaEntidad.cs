@@ -14,7 +14,7 @@ using System.Linq;
 using System.Web;
 using BOReserva.Models.gestion_reclamo_equipaje;
 using BOReserva.DataAccess.Domain.M14;
-
+        
 
 namespace BOReserva.DataAccess.Domain
 {
@@ -23,7 +23,7 @@ namespace BOReserva.DataAccess.Domain
     /// </summary>D:\UCAB\Desarrollo\Reserva\src\BOReserva\DataAccess\Domain\FabricaEntidad.cs
     public class FabricaEntidad
     {
-        #region M01_Login
+        #region M01_Login 
         public static Usuario crearUsuario()
         {
             return new Usuario();
@@ -192,7 +192,7 @@ namespace BOReserva.DataAccess.Domain
             return new Habitacion(precio, fkHotel);
         }
 
-        #endregion
+        #endregion 
 
         #region M16_GestionReclamos
 
@@ -234,7 +234,7 @@ namespace BOReserva.DataAccess.Domain
             Reclamo r = new Reclamo(id, titulo, detalle, fecha, estado);
             return r;
         }
-        public static List<Reclamo> InstanciarListaReclamo(Dictionary<int, Entidad> listaEntidad)
+        public static List<Reclamo> InstanciarListaReclamo(Dictionary<int, Entidad> listaEntidad) 
         {
             List<Reclamo> lista = new List<Reclamo>();
             foreach (var e in listaEntidad)
@@ -254,7 +254,7 @@ namespace BOReserva.DataAccess.Domain
         {
             return new List<Reclamo>();
         }
-        #endregion
+#endregion
 
         #region M04_Vuelo
         /// <summary>
@@ -319,7 +319,7 @@ namespace BOReserva.DataAccess.Domain
         {
             DateTime fecha_nac = Convert.ToDateTime(fecha);
             return new Pasajero(id, nombre1, nombre2, apellido1, apellido2, sexo, fecha_nac, correo);
-        }
+		}
 
         public static Entidad InstanciarBoardingPass(int vuelo, DateTime fechaPartida, DateTime fechaLlegada, String horaPartida, int origen, int destino,
             String nombreOri, String nombreDest, int boleto, String asiento, String nombre, String apellido)
@@ -366,7 +366,7 @@ namespace BOReserva.DataAccess.Domain
         {
             return new CRestauranteModelo();
         }
-
+       
 
         public static Lugar crearLugar(int idLugar, string nombreLugar)
         {
@@ -418,7 +418,7 @@ namespace BOReserva.DataAccess.Domain
         {
             return new Rol(id, nombre);
         }
-
+        
         public static Entidad crearPermiso(int id, String nombre)
         {
             return new Permiso(id, nombre);
@@ -429,7 +429,7 @@ namespace BOReserva.DataAccess.Domain
             String nombreRol = model.Nombre_rol;
             return new Rol(idRol, nombreRol);
         }
-
+        
         public static Entidad crearPermiso(int id, String nombre, String url)
         {
             return new Permiso(id, nombre, url);
@@ -455,7 +455,7 @@ namespace BOReserva.DataAccess.Domain
         {
 
             return new Crucero(crucero._idCrucero, crucero._nombreCrucero, crucero._companiaCrucero, crucero._capacidadCrucero, crucero._estatus);
-        }
+        }    
 
         //instancia cabina con nombre de crucero, no con FK
         public static Entidad InstanciarCabina(CGestion_cabina cabina)
@@ -480,15 +480,15 @@ namespace BOReserva.DataAccess.Domain
         #region M02_Gestion_Avion
 
         public static Entidad InstanciarAvion(int id, string matricula, string modelo, int capacidadTurista, int capacidadEjecutiva, int capacidadVIP, float capacidadEquipaje, float distanciaMaximaVuelo, float velocidadMaxima, float capacidadCombustible, int disponibilidad)
-        {
-
+            {
+           
             return new Avion();
         }
 
         public static Entidad InstanciarAvion(CAgregarAvion model)
         {
 
-
+         
             string matricula = model._matriculaAvion;
             string modelo = model._modeloAvion;
             int capacidadturistica = model._capacidadPasajerosTurista;
@@ -521,7 +521,7 @@ namespace BOReserva.DataAccess.Domain
 
 
             return new Avion(matricula, modelo, capacidadturistica, capacidadEjecutiva, capacidadVIP, capacidadEquipaje, distanciaMaximaVuelo, velocidadMaxima, capacidadCombustible, disponibilidad);
-
+       
         }
         #endregion
 
@@ -578,7 +578,7 @@ namespace BOReserva.DataAccess.Domain
 
         #endregion
 
-        #region M12_Usuarios
+        #region M12_Usuarios 
         public static Entidad InstanciarUsuario(int id, string nombre, string apellido, string correo, string contrasena, int fkRol, DateTime fechaCreacion, string activo)
         {
             return new Usuario();
@@ -812,10 +812,10 @@ namespace BOReserva.DataAccess.Domain
         {
             List<Equipaje> lista = new List<Equipaje>();
             foreach (var e in listaEntidad)
-            {
+        {
                 Equipaje nuevoReclamo = (Equipaje)e.Value;
                 lista.Add(nuevoReclamo);
-            }
+        }
             return lista;
         }
 
@@ -824,8 +824,19 @@ namespace BOReserva.DataAccess.Domain
         /// </summary>
         /// <returns>Lista de reclamos de equipaje vacia</returns>
         public static List<Equipaje> InstanciarListaEquipaje()
-        {
+        {   
             return new List<Equipaje>();
+        }
+
+        public static Entidad InstanciarPaquete(CPaquete paquete, Boolean estadoPaquete, int id)
+        {
+            return new Paquete(id, paquete._nombrePaquete, paquete._precioPaquete, paquete._idAuto, 
+                               paquete._idRestaurante, paquete._idHabitacion, paquete._idCrucero, 
+                               paquete._idVuelo, paquete._fechaIniAuto, paquete._fechaIniRest, 
+                               paquete._fechaIniHabi, paquete._fechaIniCruc, paquete._fechaIniVuelo, 
+                               paquete._fechaFinAuto, paquete._fechaFinRest, paquete._fechaFinHabi, 
+                               paquete._fechaFinCruc, paquete._fechaFinVuelo, 
+                               estadoPaquete);
         }
 
         #endregion
