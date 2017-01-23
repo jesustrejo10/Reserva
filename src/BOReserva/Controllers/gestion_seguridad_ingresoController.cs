@@ -45,17 +45,13 @@ namespace BOReserva.Controllers
 
             try
             {
-                BasicConfigurator.Configure();
-                logger.Debug("Correo " + correo + " contrasena " + contraseña);
                 ingreso = ingreso.verificarUsuario(correo, contraseña);
-                System.Diagnostics.Debug.WriteLine(correo.Equals("reserva@reserva.com"));
                
 
                 if (ingreso.EstaActivo())
                 {
                     if (ingreso.VerificarIntentos())
                     {
-
                         ingreso.ResetearIntentos();
                         Session["Cgestion_seguridad_ingreso"] = ingreso;
                         System.Diagnostics.Debug.WriteLine("Logueado con ID: " + IDUsuarioActual());
@@ -100,6 +96,9 @@ namespace BOReserva.Controllers
 
         public ActionResult M01_Logout()
         {
+            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+                " Cierre de sesión del usuario: " + UsuarioActual().correo, 
+                System.Reflection.MethodBase.GetCurrentMethod().Name);
             Session.Clear();
             return RedirectToAction("Index", "Home");
         }
