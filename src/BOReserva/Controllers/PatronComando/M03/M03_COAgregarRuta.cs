@@ -48,7 +48,7 @@ namespace BOReserva.Controllers.PatronComando.M03
                 rutaAdd.Agregar(_ruta);
                 return "1";
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
                 throw new NotImplementedException();
             }

@@ -74,6 +74,7 @@
     <Compile Include="BO\gestion_seguridad_ingreso\TestLogin.cs" />
     <Compile Include="BO\gestion_usuarios\UnitTest1.cs" />
     <Compile Include="BO\gestion_usuario\TestUsuario.cs" />
+    <Compile Include="BO\gestion_vuelos\TestVuelo.cs" />
     <Compile Include="BO\gestión_OfertasYPaquetes\TestDaoOfertas.cs" />
     <Compile Include="BO\gestión_OfertasYPaquetes\TestOfertasYPaquetes.cs" />
     <Compile Include="BO\TestGestionAutomovil\TestGestionAutomovil.cs" />
@@ -106,9 +107,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BO\gestion_vuelos\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
