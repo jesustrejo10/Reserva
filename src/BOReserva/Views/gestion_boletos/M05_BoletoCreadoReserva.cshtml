@@ -1,48 +1,46 @@
-﻿
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box box-success">
-                <div class="box-header with-border">
-                    <div class="box-tools pull-right">
-                    </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <div class="box-tools pull-right">
                 </div>
-                <div class="box-body">
-                    <div class="row">
-                        <div class="col-md-12" style="margin-top:10px;">
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-12" style="margin-top:10px;">
 
-                            <div class="col-xs-12">
+                        <div class="col-xs-12">
 
-                                <h2>El boleto ha sido creado exitosamente</h2>
-                             
-                            </div>
+                            <h2>El boleto ha sido creado exitosamente</h2>
+
+                        </div>
 
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script>
-        $("#return").click(function (e) {
-            e.preventDefault();
-            var url = '/gestion_boletos/M05_VisualizarBoletos';
-            var method = 'GET';
-            var data = '';
+</div>
+<script>
+    $("#return").click(function (e) {
+        e.preventDefault();
+        var url = '/gestion_boletos/M05_VisualizarBoletos';
+        var method = 'GET';
+        var data = '';
 
-            $.ajax(
-                {
-                    url: url,
-                    type: method,
-                    data: data,
-                    success: function (data, textStatus, jqXHR) {
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
 
-                        $("#contenido").empty();
-                        $("#contenido").append(data);
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        alert(errorThrown);
-                    }
-                });
-        });
-    </script>
-
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+</script>

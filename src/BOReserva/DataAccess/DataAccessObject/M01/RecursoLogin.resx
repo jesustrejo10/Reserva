@@ -173,4 +173,7 @@
   <data name="InsertarLogin" xml:space="preserve">
     <value>M01_InsertarLogin</value>
   </data>
+  <data name="NumeroIntentos" xml:space="preserve">
+    <value>M01_NumeroIntentos</value>
+  </data>
 </root>

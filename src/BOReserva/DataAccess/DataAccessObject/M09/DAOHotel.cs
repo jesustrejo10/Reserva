@@ -28,7 +28,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
         /// Metodo implementado de IDAO para agregar hoteles a la BD
         /// </summary>
         /// <param name="e">Hotel a agregar</param>
-        /// <returns>Retorna un valor entero</returns>
+        /// <returns>Retorna un _idHotel entero</returns>
         int IDAO.Agregar(Entidad e)
         {
             List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
@@ -100,7 +100,6 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
 
                 EjecutarStoredProcedure(RecursoDAOM09.ProcedimientoModificarHotel, listaParametro);
 
-                hotel._nombre = "1";
                 return hotel;
             }
             catch (SqlException ex)
@@ -196,47 +195,27 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
             catch (SqlException ex)
             {
-                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
-
-                catch (LogException exi)
-                { throw new ReservaExceptionM09(ex.Message, exi); }
-
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); 
                 throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (NullReferenceException ex)
             {
-                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
-
-                catch (LogException exi)
-                { throw new ReservaExceptionM09(ex.Message, exi); }
-
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); 
                 throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (ArgumentNullException ex)
             {
-                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
-
-                catch (LogException exi)
-                { throw new ReservaExceptionM09(ex.Message, exi); }
-
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (ExceptionBD ex)
             {
-                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
-
-                catch (LogException exi)
-                { throw new ReservaExceptionM09(ex.Message, exi); }
-
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); 
                 throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (Exception ex)
             {
-                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
-
-                catch (LogException exi)
-                { throw new ReservaExceptionM09(ex.Message, exi); }
-
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); 
                 throw new ReservaExceptionM09(ex.Message, ex);
             }
         }
@@ -295,47 +274,27 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
             catch (SqlException ex)
             {
-                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
-
-                catch (LogException exi)
-                { throw new ReservaExceptionM09(ex.Message, exi); }
-
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (NullReferenceException ex)
             {
-                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
-
-                catch (LogException exi)
-                { throw new ReservaExceptionM09(ex.Message, exi); }
-
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (ArgumentNullException ex)
             {
-                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
-
-                catch (LogException exi)
-                { throw new ReservaExceptionM09(ex.Message, exi); }
-
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (ExceptionBD ex)
             {
-                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
-
-                catch (LogException exi)
-                { throw new ReservaExceptionM09(ex.Message, exi); }
-
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (Exception ex)
             {
-                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
-
-                catch (LogException exi)
-                { throw new ReservaExceptionM09(ex.Message, exi); }
-
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw new ReservaExceptionM09(ex.Message, ex);
             }
         }
@@ -358,47 +317,27 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
             catch (SqlException ex)
             {
-                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
-
-                catch (LogException exi)
-                { throw new ReservaExceptionM09(ex.Message, exi); }
-
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); 
                 throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (NullReferenceException ex)
             {
-                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
-
-                catch (LogException exi)
-                { throw new ReservaExceptionM09(ex.Message, exi); }
-
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (ArgumentNullException ex)
             {
-                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
-
-                catch (LogException exi)
-                { throw new ReservaExceptionM09(ex.Message, exi); }
-
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (ExceptionBD ex)
             {
-                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
-
-                catch (LogException exi)
-                { throw new ReservaExceptionM09(ex.Message, exi); }
-
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (Exception ex)
             {
-                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
-
-                catch (LogException exi)
-                { throw new ReservaExceptionM09(ex.Message, exi); }
-
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); 
                 throw new ReservaExceptionM09(ex.Message, ex);
             }
         }
@@ -409,7 +348,7 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
         /// <param name="e">Hotel a modificar</param>
         /// <param name="disponibilidad">Estatus nuevo</param>
         /// <returns></returns>
-        string IDAOHotel.disponibilidadHotel(Entidad e, int disponibilidad)
+        Entidad IDAOHotel.disponibilidadHotel(Entidad e, int disponibilidad)
         {
             Hotel hotel = (Hotel)e;
             List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
@@ -421,51 +360,31 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
 
                 EjecutarStoredProcedure(RecursoDAOM09.ProcedimientoCambiarDisponibilidad, listaParametro);
 
-                return "1";
+                return hotel;
             }
             catch (SqlException ex)
             {
-                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
-
-                catch (LogException exi)
-                { throw new ReservaExceptionM09(ex.Message, exi); }
-
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (NullReferenceException ex)
             {
-                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
-
-                catch (LogException exi)
-                { throw new ReservaExceptionM09(ex.Message, exi); }
-
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (ArgumentNullException ex)
             {
-                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
-
-                catch (LogException exi)
-                { throw new ReservaExceptionM09(ex.Message, exi); }
-
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); 
                 throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (ExceptionBD ex)
             {
-                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
-
-                catch (LogException exi)
-                { throw new ReservaExceptionM09(ex.Message, exi); }
-
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (Exception ex)
             {
-                try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
-
-                catch (LogException exi)
-                { throw new ReservaExceptionM09(ex.Message, exi); }
-
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); 
                 throw new ReservaExceptionM09(ex.Message, ex);
             }
         }

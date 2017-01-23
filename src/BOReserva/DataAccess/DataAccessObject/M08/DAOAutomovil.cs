@@ -44,7 +44,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             catch (ArgumentNullException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM08("Reserva-404", "Argumento con valor invalido", ex);
+                throw new ReservaExceptionM08("Reserva-404", "Argumento con _idHotel invalido", ex);
             }
             catch (FormatException ex)
             {
@@ -103,7 +103,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             catch (ArgumentNullException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM08("Reserva-404", "Argumento con valor invalido", ex);
+                throw new ReservaExceptionM08("Reserva-404", "Argumento con _idHotel invalido", ex);
             }
             catch (FormatException ex)
             {
@@ -199,7 +199,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             catch (ArgumentNullException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM08("Reserva-404", "Argumento con valor invalido", ex);
+                throw new ReservaExceptionM08("Reserva-404", "Argumento con _idHotel invalido", ex);
             }
             catch (FormatException ex)
             {
@@ -292,7 +292,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             catch (ArgumentNullException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM08("Reserva-404", "Argumento con valor invalido", ex);
+                throw new ReservaExceptionM08("Reserva-404", "Argumento con _idHotel invalido", ex);
             }
             catch (FormatException ex)
             {
@@ -332,7 +332,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             catch (ArgumentNullException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM08("Reserva-404", "Argumento con valor invalido", ex);
+                throw new ReservaExceptionM08("Reserva-404", "Argumento con _idHotel invalido", ex);
             }
             catch (FormatException ex)
             {
@@ -386,7 +386,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             catch (ArgumentNullException ex)
             {
                 Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM08("Reserva-404", "Argumento con valor invalido", ex);
+                throw new ReservaExceptionM08("Reserva-404", "Argumento con _idHotel invalido", ex);
             }
             catch (FormatException ex)
             {

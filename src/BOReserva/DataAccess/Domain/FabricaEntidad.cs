@@ -121,6 +121,24 @@ namespace BOReserva.DataAccess.Domain
         }
 
         /// <summary>
+        /// Clase que instacia un hotel
+        /// </summary>
+        /// <param name="model">Modelo proveniente de la vista M09_ModificarHotel</param>
+        /// <param name="c">Ciudad donde esta el hotel</param>
+        /// <returns></returns>
+        public static Entidad InstanciarHotel(CModificarHotel model)
+        {
+            String nombre = model._nombre;
+            String direccion = model._direccion;
+            int clasificacion = model._clasificacion;
+            int capacidad = model._capacidadHabitacion;
+            String paginaWeb = model._paginaWeb;
+            String email = model._email;
+            int precio = model._precioHabitacion;
+            return new Hotel(nombre, direccion, email, paginaWeb, clasificacion, capacidad, null, precio);
+        }
+
+        /// <summary>
         /// Clase que instancia un pais
         /// </summary>
         /// <param name="nombre">Nombre del pais</param>
@@ -400,7 +418,7 @@ namespace BOReserva.DataAccess.Domain
         {
             return new Rol(id, nombre);
         }
-
+        
         public static Entidad crearPermiso(int id, String nombre)
         {
             return new Permiso(id, nombre);
@@ -411,7 +429,7 @@ namespace BOReserva.DataAccess.Domain
             String nombreRol = model.Nombre_rol;
             return new Rol(idRol, nombreRol);
         }
-
+        
         public static Entidad crearPermiso(int id, String nombre, String url)
         {
             return new Permiso(id, nombre, url);
@@ -423,7 +441,7 @@ namespace BOReserva.DataAccess.Domain
         {
 
             return new Crucero(crucero._idCrucero, crucero._nombreCrucero, crucero._companiaCrucero, crucero._capacidadCrucero, crucero._estatus);
-        }
+        }    
 
         //instancia cabina con nombre de crucero, no con FK
 
@@ -547,10 +565,8 @@ namespace BOReserva.DataAccess.Domain
             return new Usuario();
         }
 
-        public static Entidad InstanciarUsuario(CAgregarUsuario model, Entidad r)
+        public static Entidad InstanciarUsuario(CAgregarUsuario model, int idRol)
         {
-            Rol rol = (Rol)r;
-
             string nombre = model._nombre;
             string apellido = model._apellido;
             string correo = model._correo;
@@ -558,13 +574,11 @@ namespace BOReserva.DataAccess.Domain
             DateTime fechaCreacion = model._fechaCreacion;
             string activo = model._activo;
 
-            return new Usuario(nombre, apellido, correo, contrasena, rol, fechaCreacion, activo);
+            return new Usuario(nombre, apellido, correo, contrasena, idRol, fechaCreacion, activo);
         }
 
-        public static Entidad InstanciarUsuario(CModificarUsuario model, Entidad r)
+        public static Entidad InstanciarUsuario(CModificarUsuario model, int idRol)
         {
-            Rol rol = (Rol)r;
-
             string nombre = model._nombre;
             string apellido = model._apellido;
             string correo = model._correo;
@@ -572,7 +586,7 @@ namespace BOReserva.DataAccess.Domain
             DateTime fechaCreacion = model._fechaCreacion;
             string activo = model._activo;
 
-            return new Usuario(nombre, apellido, correo, contrasena, rol, fechaCreacion, activo);
+            return new Usuario(nombre, apellido, correo, contrasena, idRol, fechaCreacion, activo);
         }
 
         public static Entidad InstanciarRol(int rol)

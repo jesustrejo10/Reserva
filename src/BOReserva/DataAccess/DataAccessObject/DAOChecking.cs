@@ -1,4 +1,4 @@
-﻿using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
 using System;
@@ -175,7 +175,35 @@ namespace BOReserva.DataAccess.DataAccessObject
                 return _conteo;
             }
         }
-        
+
+        int IDAOCheckIn.IdBoardingPass(int num_bol, int num_vue)
+        {
+            int _conteo = 0;
+            try
+            {
+                SqlConnection con = new SqlConnection(_connexionString);
+                con.Open();
+                String sql = "SELECT P.pas_id AS id_pase " +
+                             "FROM Pase_Abordaje P " +
+                             "WHERE P.pas_fk_vuelo = " + num_vue +
+                             " AND  P.pas_fk_boleto =" + num_bol + "";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        _conteo = reader.GetInt32(reader.GetOrdinal("id_pase")); ;
+                    }
+                }
+                cmd.Dispose();
+                con.Close();
+                return _conteo;
+            }
+            catch (SqlException ex)
+            {
+                return _conteo;
+            }
+        }
 
         public BoletoVuelo MBuscarDatosVuelo(int id)
         {

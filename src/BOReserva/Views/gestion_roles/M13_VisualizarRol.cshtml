@@ -59,7 +59,9 @@
 <script src="~/Content/plugins/datatables/dataTables.bootstrap.min.js"></script>
 
 <script language="javascript" type="text/javascript">
-    table = $('#VisualizarRol').DataTable();
+    table = $('#VisualizarRol').DataTable({
+        "pageLength": 100
+    });
 
     $(".eliminar").click(function () {
         var r = confirm("Esta función no podrá ser revertida, ¿Está seguro de que desea continuar?")
