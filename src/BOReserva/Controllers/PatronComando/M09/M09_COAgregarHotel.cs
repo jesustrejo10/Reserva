@@ -4,6 +4,7 @@ using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.DataAccessObject.M09;
 using BOReserva.DataAccess.Domain;
+using BOReserva.DataAccess.Model;
 using BOReserva.Excepciones.M09;
 using System;
 using System.Collections.Generic;
@@ -44,6 +45,8 @@ namespace BOReserva.Controllers.PatronComando
                 }
                 if (resultadoAgregarHotel == 1)
                 {
+                    //Como agrego correctamente mando a actualizar la lista de Hoteles
+                    Cache.mapHoteles = daoHotel.ConsultarTodos();
                     return ResourceM09Command.AgregoCorrectamente;
                 }
                 else
