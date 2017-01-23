@@ -1,4 +1,4 @@
-﻿using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
 using System;
@@ -6,13 +6,16 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Diagnostics;
 
-
-
 namespace BOReserva.DataAccess.DataAccessObject
 {
+    /// <summary>
+    /// Clase encargada del Acceso a DB para el objeto Boleto
+    /// </summary>
     public class DAOBoleto : DAO, IDAOBoleto
     {
-
+        /// <summary>
+        /// Constructor Vacio
+        /// </summary>
         public DAOBoleto() { }
 
         int IDAO.Agregar(Entidad e)
@@ -27,6 +30,10 @@ namespace BOReserva.DataAccess.DataAccessObject
                 SqlCommand cmd = new SqlCommand(sql, conexion);
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
+                    sql = "INSERT INTO Boleto_Vuelo (bol_fk_vuelo, bol_fk_boleto ) VALUES(" + boleto._idVuelo + "," + "(SELECT MAX(bol_id) AS id FROM Boleto ) )";
+                    cmd = new SqlCommand(sql, conexion);
+                    cmd.ExecuteNonQuery();
+                    cmd.Dispose();
                 conexion.Close();
                 return 1;
             }
@@ -303,8 +310,6 @@ namespace BOReserva.DataAccess.DataAccessObject
                 {
                     while (reader.Read())
                     {
-                       
-
                         var fecha = reader["reb_fecha_reservado"];
                         DateTime fechaboleto = Convert.ToDateTime(fecha).Date;
                         Boleto boleto = new Boleto(Int32.Parse(reader["reb_id"].ToString()), Int32.Parse(reader["reb_ida_vuelta"].ToString()),
@@ -487,13 +492,6 @@ namespace BOReserva.DataAccess.DataAccessObject
                 return _conteo;
             }
         }
-
-
-
-
-
-
-
 
         public List<BoletoVuelo> M05ListarVuelosReserva(int id_reserva)
         {

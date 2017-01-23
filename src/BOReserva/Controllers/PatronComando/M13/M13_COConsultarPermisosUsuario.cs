@@ -7,7 +7,7 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando
 {
-    public class M13_COConsultarPermisosUsuario : Command<List<String>>
+    public class M13_COConsultarPermisosUsuario : Command<List<int>>
     {
         int idUsuario;
 
@@ -16,10 +16,10 @@ namespace BOReserva.Controllers.PatronComando
             this.idUsuario = id;
         }
 
-        public override List<String> ejecutar()
+        public override List<int> ejecutar()
         {
             DAORol daoRol = (DAORol)FabricaDAO.instanciarDAORol();
-            List<String> test = daoRol.consultarPermisosUsuario(idUsuario);
+            List<int> test = daoRol.consultarPermisosUsuario(idUsuario);
             return test;
         }
     }

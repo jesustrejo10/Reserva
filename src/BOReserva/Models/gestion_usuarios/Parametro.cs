@@ -26,7 +26,7 @@ namespace BOReserva.Models.gestion_usuarios
         /// <param name="etiqueta">etiqueta del parametro ejemplo: @nombreDeUsuario</param>
         /// <param name="tipoDato">SqlDbType con el tipo de dato del parametro 
         /// ejemplo: SqlDbType.VarChar</param>
-        /// <param name="valor">valor: string con el valor que se le asigno al 
+        /// <param name="_idHotel">_idHotel: string con el _idHotel que se le asigno al 
         /// parametro ejemplo: Pepe</param>
         /// <param name="esOutput">esOutput: si es un parametro de output: true, si no: false</param>
         public Parametro(string etiqueta, SqlDbType tipoDato, string valor, bool esOutput)
@@ -38,7 +38,7 @@ namespace BOReserva.Models.gestion_usuarios
         }
 
         /// <summary>
-        /// Metodo constructor sin el valor asignado, constructor preferible para outputs
+        /// Metodo constructor sin el _idHotel asignado, constructor preferible para outputs
         /// </summary>
         /// <param name="etiqueta">etiqueta del parametro ejemplo: @nombreDeUsuario</param>
         /// <param name="tipoDato">SqlDbType con el tipo de dato del parametro 

@@ -12,10 +12,10 @@ namespace BOReserva.Controllers.PatronComando.M14
     public class M14_COVisualizarCabinas : Command<Dictionary<int, Entidad>>
     {
 
-        int valor;        
+        int valor;
         public M14_COVisualizarCabinas(int value){
             this.valor = value;
-        }       
+        }
 
         public M14_COVisualizarCabinas()
         {

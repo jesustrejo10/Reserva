@@ -78,7 +78,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M22
         }
         String IDAOReservaHabitacion.modificarReservaHabitacion(int idreserva,int cant_dias)
         {
-           
+
             List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
 
             try
@@ -246,7 +246,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M22
 
                 }
                 return listaHoteles;
-           
+
             }
             catch (Exception)
             {
@@ -323,7 +323,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M22
                  Debug.WriteLine(ex.ToString());
                  return null;
              }
-         }
+        }
 
         }
 

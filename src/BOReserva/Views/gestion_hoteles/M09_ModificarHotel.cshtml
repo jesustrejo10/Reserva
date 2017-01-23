@@ -147,8 +147,8 @@
                     data: form.serialize(),
                     type: 'POST',
                     success: function (data) {
-                        if (data === "1") {
-                            alert("Se modifico el hotel exitosamente, sera redirigido al listado de hoteles");
+                        if (data === "Se modifico el hotel exitosamente, sera redirigido al listado de hoteles") {
+                            alert(data);
                             //$('#formmodifyVehicle')[0].reset();
                             var url1 = '/gestion_hoteles/M09_VisualizarHoteles';
                             var method = 'GET';

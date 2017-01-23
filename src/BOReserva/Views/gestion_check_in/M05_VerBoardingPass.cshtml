@@ -1,4 +1,4 @@
-﻿@model BOReserva.Models.gestion_check_in.CBoardingPass
+@model BOReserva.DataAccess.Domain.BoardingPass
 
 @using (Html.BeginForm("mostrarPase", "gestion_check_in", null, FormMethod.Post, new { @id = "formPase", @class = "form-horizontal" }))
 {
@@ -119,7 +119,7 @@
         width: 74px;
         height: 51px;
         z-index: 1012;
-        left: 0px;
+        left: 0;
         top: 63px;
     }
 
@@ -165,7 +165,7 @@
         height: 30px;
         z-index: 1014;
         left: 89px;
-        top: 0px;
+        top: 0;
     }
 
     #apDiv10 {

@@ -126,5 +126,4 @@ namespace TestUnitReserva.BO.gestion_seguridad_ingreso
        * */
 
     }
-*/
-}
+

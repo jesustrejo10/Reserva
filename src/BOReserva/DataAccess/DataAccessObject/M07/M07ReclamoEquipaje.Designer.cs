@@ -115,6 +115,15 @@ namespace BOReserva.DataAccess.DataAccessObject.M07 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to M07_EliminarReclamo.
+        /// </summary>
+        internal static string procedimientoEliminarReclamo {
+            get {
+                return ResourceManager.GetString("procedimientoEliminarReclamo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @rec_descripcion.
         /// </summary>
         internal static string rec_descripcion {
