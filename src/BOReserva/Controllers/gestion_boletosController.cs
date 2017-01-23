@@ -481,18 +481,17 @@ namespace BOReserva.Controllers
             }
             else
             {
-                var time0 = vuelos[0]._fechaPartida.TimeOfDay.ToString();
+           
+                var time = vuelos[0]._fechaPartida.TimeOfDay.ToString();
                 var time1 = vuelos[0]._fechaLlegada.TimeOfDay.ToString();
-                var time2 = vuelos[1]._fechaPartida.TimeOfDay.ToString();
-                var time3 = vuelos[1]._fechaLlegada.TimeOfDay.ToString();
                 bol._fechaDespegueIda = vuelos[0]._fechaPartida.Day + "/" + vuelos[0]._fechaPartida.Month + "/" + vuelos[0]._fechaPartida.Year;
-                bol._fechaDespegueVuelta = vuelos[1]._fechaPartida.Day + "/" + vuelos[1]._fechaPartida.Month + "/" + vuelos[1]._fechaPartida.Year;
+                bol._fechaDespegueVuelta = "";
                 bol._fechaAterrizajeIda = vuelos[0]._fechaLlegada.Day + "/" + vuelos[0]._fechaLlegada.Month + "/" + vuelos[0]._fechaLlegada.Year;
-                bol._fechaAterrizajeVuelta = vuelos[1]._fechaLlegada.Day + "/" + vuelos[1]._fechaLlegada.Month + "/" + vuelos[1]._fechaLlegada.Year;
-                bol._horaDespegueIda = time0;
+                bol._fechaAterrizajeVuelta = "";
+                bol._horaDespegueIda = time;
+                bol._horaDespegueVuelta = "";
                 bol._horaAterrizajeIda = time1;
-                bol._horaDespegueVuelta = time2;
-                bol._horaAterrizajeVuelta = time3;
+                bol._horaAterrizajeVuelta = "";
             }
 
             bol._origen = boleto._origen.Name;
