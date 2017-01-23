@@ -1,6 +1,7 @@
 ﻿using BOReserva.DataAccess.DAO;
 using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.Domain;
+using BOReserva.Excepciones;
 using BOReserva.Excepciones.M04;
 using System;
 using System.Collections.Generic;
@@ -43,14 +44,17 @@ namespace BOReserva.Controllers.PatronComando.M04
             }
             catch (ReservaExceptionM04 ex)
             {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw ex;
             }
             catch (SqlException ex)
             {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw ex;
             }
             catch (Exception ex)
             {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 throw ex;
             }
             

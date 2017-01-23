@@ -504,37 +504,7 @@ namespace BOReserva.Servicio.Servicio_Vuelos
         //fin velocidadAvion
 
 
-        public List<CVuelo> MListarvuelosBD()
-        {
-            List<CVuelo> listavuelo = new List<CVuelo>();
-            try
-            {
-                conexion = new SqlConnection(stringDeConexion);
-                conexion.Open();
-                String sql = "SELECT * FROM Vuelo";
-                SqlCommand cmd = new SqlCommand(sql, conexion);
-                SqlDataReader reader = cmd.ExecuteReader();
-                {
-                    while (reader.Read())
-                    {
-                        //SE AGREGA CREA UN OBJECTO VUELO SE PASAN LOS ATRIBUTO ASI reader["<etiqueta de la columna en la tabla VUELO>"]
-                        //Y  SE AGREGA a listavehiculos
-                        CVuelo vuelo = new CVuelo(Int32.Parse(reader["vue_id"].ToString()),reader["vue_codigo"].ToString(),MBuscarciudadOrigen(Int32.Parse( reader["vue_fk_ruta"].ToString())), MBuscarciudadDestino(Int32.Parse(reader["vue_fk_ruta"].ToString())), reader["vue_fecha_despegue"].ToString(),
-                                               reader["vue_status"].ToString(), reader["vue_fecha_aterrizaje"].ToString(), MBuscaravion(Int32.Parse(reader["vue_fk_avion"].ToString()))
-                                               );
-                        listavuelo.Add(vuelo);
-                    }
-                }
-                cmd.Dispose();
-                conexion.Close();
-                return listavuelo;
-            }
-            catch (SqlException ex)
-            {
-                conexion.Close();
-                return null;
-            }
-        }
+        
 
         public String MBuscarciudadOrigen(int id)
         {
@@ -622,92 +592,9 @@ namespace BOReserva.Servicio.Servicio_Vuelos
             }
         }
 
-        public CVuelo MMostrarvueloBD(int id)
-        {
-            CVuelo vuelo = null;
-            try
-            {
-                conexion = new SqlConnection(stringDeConexion);
-                conexion.Open();
-                String sql = "SELECT * FROM Vuelo WHERE vue_id = '" + id + "'";
-                SqlCommand cmd = new SqlCommand(sql, conexion);
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    //SE CREA UN OBJECTO VUELO SE PASAN LOS ATRIBUTO ASI reader["<etiqueta de la columna en la tabla Automovil>"]
-                    //Y  SE AGREGA a vehiculo
-                    while (reader.Read())
-                    {
-                        //var fecha = reader["aut_fecharegistro"];
-                        //DateTime fecharegistro = Convert.ToDateTime(fecha).Date;
-                        vuelo = new CVuelo(
-                            Int32.Parse(reader["vue_id"].ToString()),
-                            reader["vue_codigo"].ToString(), 
-                            MBuscarciudadOrigen(Int32.Parse(reader["vue_fk_ruta"].ToString())), 
-                            MBuscarciudadDestino(Int32.Parse(reader["vue_fk_ruta"].ToString())), 
-                            reader["vue_fecha_despegue"].ToString(),
-                            reader["vue_status"].ToString(), 
-                            reader["vue_fecha_aterrizaje"].ToString(), 
-                            MBuscaravion(Int32.Parse(reader["vue_fk_avion"].ToString()))
-                            );
-                    }
-                    cmd.Dispose();
-                    conexion.Close();
-                    return vuelo;
-                }
-            }
-            catch (SqlException ex)
-            {
-                conexion.Close();
-                return null;
-            }
-        }
+        
 
-
-        public CVueloModificar MModificarBD(int id)
-        {
-            CVueloModificar vuelo = null;
-            try
-            {
-                conexion = new SqlConnection(stringDeConexion);
-                conexion.Open();
-                SqlCommand cmd = new SqlCommand("M04_BuscaModificar", conexion);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add("@id", System.Data.SqlDbType.Int);
-                cmd.Parameters["@id"].Value = id;
-                SqlDataReader dr = cmd.ExecuteReader();
-                    //SE CREA UN OBJECTO VUELO SE PASAN LOS ATRIBUTO ASI reader["<etiqueta de la columna en la tabla Automovil>"]
-                    //Y  SE AGREGA a vehiculo
-                    while (dr.Read())
-                    {
-                        //var fecha = reader["aut_fecharegistro"];
-                        //DateTime fecharegistro = Convert.ToDateTime(fecha).Date;
-                        vuelo = new CVueloModificar(
-                            Int32.Parse(dr["vue_id"].ToString()),
-                            dr["vue_codigo"].ToString(),
-                            dr["vue_fecha_aterrizaje"].ToString(),
-                            dr["vue_fecha_despegue"].ToString(),
-                            dr["avi_matricula"].ToString(),
-                            modeloAvion(dr["avi_matricula"].ToString()),
-                            pasajerosAvion(dr["avi_matricula"].ToString()),
-                            velocidadAvion(dr["avi_matricula"].ToString()),
-                            distanciaAvion(dr["avi_matricula"].ToString()),
-                            dr["vue_status"].ToString(),
-                            MBuscarciudadOrigen(Int32.Parse(dr["vue_fk_ruta"].ToString())), 
-                            MBuscarciudadDestino(Int32.Parse(dr["vue_fk_ruta"].ToString()))
-                            );
-
-                    }
-                    dr.Close();
-                    conexion.Close();
-                    return vuelo;
-                }
-            catch (SqlException ex)
-            {
-                conexion.Close();
-                return null;
-            }
-        }
-
+     
 
         public Boolean MDesactivarVuelo(int id)
         {
@@ -891,52 +778,7 @@ namespace BOReserva.Servicio.Servicio_Vuelos
             }
         }
 
-        public List<CVueloModificar> consultarDestinosModificar(String Origen)
-        {
-            try
-            {
-                var list = new List<CVueloModificar>();
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                //le indico que voy a executar un Stored Procedure en la Base de Datos
-                SqlCommand cmd = new SqlCommand("M04_BuscarDestinos", conexion);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                //le paso los parametros que espera el SP
-                cmd.Parameters.Add("@CiudadOrigen", System.Data.SqlDbType.VarChar, 100);
-                cmd.Parameters["@CiudadOrigen"].Value = Origen;
-
-
-                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
-                SqlDataReader dr = cmd.ExecuteReader();
-
-                while (dr.Read())
-                {
-                    var destinos = new CVueloModificar
-                    {
-                        //leo los diferentes valores que cargaran la lista ya que espero varios resultados
-                        _ciudadDestino = dr.GetSqlString(0).ToString(),
-                    };
-                    list.Add(destinos);
-                }
-                //cierro el lector
-                dr.Close();
-                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
-                conexion.Close();
-                return list;
-            }
-            catch (SqlException e)
-            {
-                throw e;
-                //return null;
-            }
-            catch (Exception e)
-            {
-                throw e;
-                //return null;
-            }
-        }
+        
         // fin consultarDestinos
         public String[] MListaravionesValidadosBD(String Origen,String Destino)
         {
@@ -981,55 +823,7 @@ namespace BOReserva.Servicio.Servicio_Vuelos
                 return null;
             }
         }
-        public List<CVueloModificar> buscarAvionesModificar(String Origen, String Destino)
-        {
-            try
-            {
-                var list = new List<CVueloModificar>();
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                //le indico que voy a executar un Stored Procedure en la Base de Datos
-                SqlCommand cmd = new SqlCommand("M04_ValidarAvionParaRuta", conexion);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                //le paso los parametros que espera el SP
-                cmd.Parameters.Add("@CiudadOrigen", System.Data.SqlDbType.VarChar, 100);
-                cmd.Parameters["@CiudadOrigen"].Value = Origen;
-                cmd.Parameters.Add("@CiudadDestino", System.Data.SqlDbType.VarChar, 100);
-                cmd.Parameters["@CiudadDestino"].Value = Destino;
-
-
-
-                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
-                SqlDataReader dr = cmd.ExecuteReader();
-
-                while (dr.Read())
-                {
-                    var matriculas = new CVueloModificar
-                    {
-                        //leo los diferentes valores que cargaran la lista ya que espero varios resultados
-                        _matriculaAvion = dr.GetSqlString(0).ToString(),
-                    };
-                    list.Add(matriculas);
-                }
-                //cierro el lector
-                dr.Close();
-                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
-                conexion.Close();
-                return list;
-            }
-            catch (SqlException e)
-            {
-                throw e;
-                //return null;
-            }
-            catch (Exception e)
-            {
-                throw e;
-                //return null;
-            }
-        }
+        
         //fin buscarAviones
     }
 }
