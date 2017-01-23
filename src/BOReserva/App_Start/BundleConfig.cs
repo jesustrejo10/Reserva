@@ -3,6 +3,9 @@ using System.Web.Optimization;
 
 namespace BOReserva
 {
+    /// <summary>
+    /// BundleConfig
+    /// </summary>
     public class BundleConfig
     {
         // Para obtener más información acerca de Bundling, consulte http://go.microsoft.com/fwlink/?LinkId=254725

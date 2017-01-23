@@ -90,6 +90,7 @@ namespace BOReserva.DataAccess.Domain
             this._tipoBoleto = tipo;
             this._idVuelo = idVuelo;
             this._fechaBoleto = Convert.ToDateTime(fec);
+            _vuelos = new List<BoletoVuelo>();
 
         }
 

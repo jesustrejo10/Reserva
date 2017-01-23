@@ -31,7 +31,7 @@ namespace FOReserva.Controllers.PatronComando.M19
             catch (NotImplementedException)
             {
 
-                throw;
+                //throw;
             }
          
             return true;

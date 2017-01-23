@@ -5,9 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Diagnostics;
-using System.Linq;
-using System.Web;
-using BOReserva.Models.gestion_ruta_comercial;
+
 
 
 namespace BOReserva.DataAccess.DataAccessObject
@@ -29,6 +27,10 @@ namespace BOReserva.DataAccess.DataAccessObject
                 SqlCommand cmd = new SqlCommand(sql, conexion);
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
+                    sql = "INSERT INTO Boleto_Vuelo (bol_fk_vuelo, bol_fk_boleto ) VALUES(" + boleto._idVuelo + "," + "(SELECT MAX(bol_id) AS id FROM Boleto ) )";
+                    cmd = new SqlCommand(sql, conexion);
+                    cmd.ExecuteNonQuery();
+                    cmd.Dispose();
                 conexion.Close();
                 return 1;
             }
@@ -287,6 +289,242 @@ namespace BOReserva.DataAccess.DataAccessObject
             catch (SqlException ex)
             {
                 conexion.Close();
+                return null;
+            }
+        }
+
+        List<Entidad> IDAOBoleto.ConsultarBoletosPasajero(int id)
+        {
+            List<Entidad> listaboletos = new List<Entidad>();
+            SqlConnection conexion = null;
+            try
+            {
+                conexion = Connection.getInstance(_connexionString);
+                conexion.Open();
+                String sql = "SELECT reb_id,reb_fecha_reservado,reb_ida_vuelta,reb_escala,reb_costo,fk_origen,fk_destino,fk_pas_id,reb_tipo,reb_codigo FROM Reserva_Boleto WHERE fk_pas_id=" + id;
+                SqlCommand cmd = new SqlCommand(sql, conexion);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                       
+
+                        var fecha = reader["reb_fecha_reservado"];
+                        DateTime fechaboleto = Convert.ToDateTime(fecha).Date;
+                        Boleto boleto = new Boleto(Int32.Parse(reader["reb_id"].ToString()), Int32.Parse(reader["reb_ida_vuelta"].ToString()),
+                                               Int32.Parse(reader["reb_escala"].ToString()), double.Parse(reader["reb_costo"].ToString()),
+                                               MBuscarnombreciudad(Int32.Parse(reader["fk_origen"].ToString())),
+                                               MBuscarnombreciudad(Int32.Parse(reader["fk_destino"].ToString())),
+                                               MBuscarnombrepasajero(Int32.Parse(reader["fk_pas_id"].ToString())),
+                                               MBuscarapellidopasajero(Int32.Parse(reader["fk_pas_id"].ToString())), fechaboleto,
+                                               Int32.Parse(reader["fk_pas_id"].ToString()), reader.GetInt32(reader.GetOrdinal("fk_origen")),
+                                               reader.GetInt32(reader.GetOrdinal("fk_destino")),
+                                               reader["reb_tipo"].ToString(),
+                                               MBuscarcorreopasajero(Int32.Parse(reader["fk_pas_id"].ToString())),
+                                               reader["reb_codigo"].ToString());
+                        List<BoletoVuelo> listavuelos = M05ListarVuelosReserva((int)reader["reb_id"]);
+
+
+                        boleto._vuelos = listavuelos;
+
+
+                        listaboletos.Add(boleto);
+                    }
+                }
+                cmd.Dispose();
+                conexion.Close();
+                return listaboletos;
+            }
+            catch (SqlException ex)
+            {
+                conexion.Close();
+                return null;
+            }
+        }
+
+        Entidad IDAOBoleto.M05MostrarReservaBD(int id_reserva)
+        {
+            //Es CBoleto ya que tiene los mismos atributos que la reserva
+            Boleto boleto = null;
+
+            try
+            {
+                SqlConnection con = new SqlConnection(_connexionString);
+                con.Open();
+                String sql = "SELECT reb_id,reb_fecha_reservado,reb_ida_vuelta,reb_escala,reb_costo,fk_origen,fk_destino,fk_pas_id,reb_tipo,reb_codigo FROM Reserva_Boleto WHERE reb_id = " + id_reserva;
+                System.Diagnostics.Debug.WriteLine(sql);
+                // FALTA OBTENER EL/LOS VUELOS DE ESA RESERVA
+                SqlCommand cmd = new SqlCommand(sql, con);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+
+                    while (reader.Read())
+                    {
+                        var fecha = reader["reb_fecha_reservado"];
+                        List<BoletoVuelo> lista = M05ListarVuelosReserva(id_reserva);
+                        Pasajero pasajero = MBuscarDatosPasajero(reader.GetInt32(reader.GetOrdinal("fk_pas_id")));
+                        DateTime fechaboleto = Convert.ToDateTime(fecha).Date;
+
+                        boleto = new Boleto(Int32.Parse(reader["reb_id"].ToString()), Int32.Parse(reader["reb_ida_vuelta"].ToString()),
+                                               Int32.Parse(reader["reb_escala"].ToString()), double.Parse(reader["reb_costo"].ToString()),
+                                               MBuscarnombreciudad(Int32.Parse(reader["fk_origen"].ToString())),
+                                               MBuscarnombreciudad(Int32.Parse(reader["fk_destino"].ToString())), fechaboleto,
+                                               reader.GetInt32(reader.GetOrdinal("fk_origen")),
+                                               reader.GetInt32(reader.GetOrdinal("fk_destino")),
+                                               reader["reb_tipo"].ToString());
+                        boleto._vuelos = lista;
+                        boleto._pasajero = pasajero;
+
+
+
+                    }
+                    cmd.Dispose();
+                    con.Close();
+                    return boleto;
+                }
+            }
+            catch (SqlException ex)
+            {
+                return null;
+            }
+        }
+
+        List<Entidad> IDAOBoleto.M05ListarVuelosIdaBD(string fecha_ida, string fecha_vuelta, int id_origen, int id_destino, string tipo)
+        {
+            List<Entidad> listavuelos = new List<Entidad>();
+            try
+            {
+                IDAOBoleto ver = (IDAOBoleto)FabricaDAO.instanciarDaoBoleto();
+                SqlConnection con = new SqlConnection(_connexionString);
+                con.Open();
+
+                //Busco la capacidad del avion del vuelo, segun el tipo de boleto
+
+
+                String sql = "SELECT v.vue_id as id,v.vue_fecha_despegue as despegue,v.vue_fecha_aterrizaje as aterrizaje,r.rut_id as id_ruta,r.rut_FK_lugar_origen as id_origen,r.rut_FK_lugar_destino as id_destino,lo.lug_nombre as nombre_origen,ld.lug_nombre as nombre_destino FROM Vuelo v, Ruta r, Lugar lo, Lugar ld WHERE v.vue_fk_ruta=r.rut_id AND r.rut_fk_lugar_origen = lo.lug_id AND r.rut_fk_lugar_destino = ld.lug_id AND r.rut_FK_lugar_origen=" + id_origen + "AND r.rut_FK_lugar_destino=" + id_destino + " AND v.vue_fecha_despegue >= '" + fecha_ida + "' AND v.vue_fecha_despegue <=  DATEADD(day, 1, '" + fecha_ida + "')";
+                System.Diagnostics.Debug.WriteLine(sql);
+                SqlCommand cmd = new SqlCommand(sql, con);
+
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Random rnd = new Random();
+
+                        //Tengo que ver en cada vuelo que la cantidad de fk_vuelo en Boleto_Vuelo sea menor que la capacidad del tipo de boleto en el avion
+                        int cant_bol_vue = 0;//Cantidad de fk_vuelo en Boleto_Vuelo
+                        int cap = 0;//capacidad del tipo de boleto en el avión
+                        //Si tipo de boleto = Turista entonces busco cap turista, si es ejecutivo cap ejecutivo y si es vip cap vip
+                        //Obtengo el id del vuelo
+                        System.Diagnostics.Debug.WriteLine("METODO DE LISTAR VUELOS IDA");
+
+                        int id_vuelo = Int32.Parse(reader["id"].ToString());
+                     
+
+                        //Obtengo cantidad de fk_vuelo en Boleto_vuelo
+                        cant_bol_vue = BuscarCantBolVue(id_vuelo);
+
+
+                        cap = ver.MConteoCapacidad(id_vuelo,tipo);
+
+                        System.Diagnostics.Debug.WriteLine("Capacidad en tipo " + tipo + " : " + cap);
+
+                        if (cant_bol_vue < cap)
+                        {
+
+                            BoletoVuelo vuelo = new BoletoVuelo(Int32.Parse(reader["id"].ToString()),
+                                              reader.GetDateTime(reader.GetOrdinal("despegue")),
+                                              reader.GetDateTime(reader.GetOrdinal("aterrizaje")),
+                                              Int32.Parse(reader["id_ruta"].ToString()),
+                                              Int32.Parse(reader["id_origen"].ToString()),
+                                              Int32.Parse(reader["id_destino"].ToString()),
+                                              reader.GetString(reader.GetOrdinal("nombre_origen")),
+                                              reader.GetString(reader.GetOrdinal("nombre_destino")),
+                                              rnd.Next(300, 1001), tipo, fecha_vuelta);
+
+                            listavuelos.Add(vuelo);
+
+                        }
+                        else
+                        {
+
+
+                            System.Diagnostics.Debug.WriteLine("CAPACIDAD MAXIMA ALCANZADA EN EL AVION PARA BOLETOS DEL TIPO: " + tipo);
+
+
+                        }
+                    }
+                }
+                cmd.Dispose();
+                con.Close();
+                return listavuelos;
+            }
+            catch (SqlException ex)
+            {
+                return null;
+            }
+        }
+
+        public int BuscarCantBolVue(int id_vuelo)
+        {
+            int _conteo = 0;
+            try
+            {
+                SqlConnection con = new SqlConnection(_connexionString);
+                con.Open();
+                String sql = "SELECT count(bol_fk_vuelo) as num FROM Boleto_Vuelo WHERE bol_fk_vuelo = " + id_vuelo;
+                SqlCommand cmd = new SqlCommand(sql, con);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        _conteo = reader.GetInt32(reader.GetOrdinal("num")); ;
+                    }
+                }
+                cmd.Dispose();
+                con.Close();
+                return _conteo;
+            }
+            catch (SqlException ex)
+            {
+                return _conteo;
+            }
+        }
+
+
+
+
+
+
+
+
+        public List<BoletoVuelo> M05ListarVuelosReserva(int id_reserva)
+        {
+            List<BoletoVuelo> listavuelos = new List<BoletoVuelo>();
+            try
+            {
+                SqlConnection con = new SqlConnection(_connexionString);
+                con.Open();
+                String sql = "SELECT fk_vue_id FROM Reserva_Vuelo WHERE fk_reb_id =" + id_reserva;
+                System.Diagnostics.Debug.WriteLine(sql);
+                SqlCommand cmd = new SqlCommand(sql, con);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                        BoletoVuelo datosVuelo = MBuscarDatosVuelo(Int32.Parse(reader["fk_vue_id"].ToString()));
+                        listavuelos.Add(datosVuelo);
+                    }
+                }
+                cmd.Dispose();
+                con.Close();
+                int inte = listavuelos.Count;
+                return listavuelos;
+            }
+            catch (SqlException ex)
+            {
                 return null;
             }
         }

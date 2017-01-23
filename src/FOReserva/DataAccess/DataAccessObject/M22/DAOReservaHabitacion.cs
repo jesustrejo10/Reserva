@@ -2,6 +2,7 @@
 using FOReserva.DataAccess.Domain;
 using FOReserva.DataAccess.Model;
 using FOReserva.Models;
+using FOReserva.Models.Hoteles;
 using FOReserva.Models.ReservaHabitacion;
 using System;
 using System.Collections.Generic;
@@ -25,12 +26,10 @@ namespace FOReserva.DataAccess.DataAccessObject.M22
 
             try
             {
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM22.rha_cantidad_dias, SqlDbType.Int, reserva._cant_dias.ToString(), false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM22.rha_fecha_reservacion, SqlDbType.VarChar, reserva._fecha_reserva, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM22.rha_estado, SqlDbType.Int, reserva._estado.ToString(), false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM22.rha_cantidad_dias, SqlDbType.Int, reserva._cantidad.ToString(), false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM22.rha_fecha_llegada, SqlDbType.VarChar, reserva._fecha_llegada, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM22.rha_fk_hab_id, SqlDbType.Int, reserva._fk_habitacion, false));
-                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM22.rha_fk_usu_id, SqlDbType.Int, reserva._fk_usuario, false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM22.rha_fk_hab_id, SqlDbType.Int, reserva._id_hotel.ToString(), false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM22.rha_fk_usu_id, SqlDbType.Int, reserva._id_usuario.ToString(), false));
                 EjecutarStoredProcedure(RecursoDAOM22.ProcedimientoAgregarReservaHabitacion, listaParametro);
 
                 return 1;
@@ -61,7 +60,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M22
             }
         }
 
-        string IDAOReservaHabitacion.eliminarReservaHabitacion(int id)
+        String IDAOReservaHabitacion.eliminarReservaHabitacion(int id)
         {
             List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
 
@@ -77,7 +76,25 @@ namespace FOReserva.DataAccess.DataAccessObject.M22
                 return ex.Message;
             }
         }
+        String IDAOReservaHabitacion.modificarReservaHabitacion(int idreserva,int cant_dias)
+        {
 
+            List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
+
+            try
+            {
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM22.rha_cantidad_dias, SqlDbType.Int, cant_dias.ToString(), false));
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM22.rha_id, SqlDbType.Int, idreserva.ToString(), false));
+                EjecutarStoredProcedure(RecursoDAOM22.ProcedimientoModificarReservaHabitacion, listaParametro);
+
+                return "1";
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                return "0";
+            }
+        }
         Entidad IDAO.Modificar(Entidad e)
         {
             ReservaHabitacion reserva = (ReservaHabitacion)e;
@@ -111,12 +128,8 @@ namespace FOReserva.DataAccess.DataAccessObject.M22
             DataTable tablaDeDatos;
             List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
 
-            //Usuario usuario;
-            Habitacion habitacion;
             ReservaHabitacion reserva;
-            //int id_usu;
-            //String nombre_usu;
-            int id_hab;
+
             int id_hotel;
             String nombre_hotel;
 
@@ -126,7 +139,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M22
             try
             {
 
-                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM22.rha_id, SqlDbType.Int, id.ToString(), false));
+                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM22.id_usuario, SqlDbType.Int, id.ToString(), false));
 
                 tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM22.ProcedimientoConsultarReservaHabitacion, parametro);
 
@@ -136,18 +149,17 @@ namespace FOReserva.DataAccess.DataAccessObject.M22
                     nombre_usu = row[RecursoDAOM22.nombre_usuario].ToString();
                     usuario = new Usuario(id_usu, nombre_usu);*/
 
-                    id_hab = Int32.Parse(row[RecursoDAOM22.id_habitacion].ToString());
-                    id_hotel = Int32.Parse(row[RecursoDAOM22.id_hotel].ToString());
+                    /*id_hotel = Int32.Parse(row[RecursoDAOM22.id_hotel].ToString());
                     nombre_hotel = row[RecursoDAOM22.nombre_hotel].ToString();
-                    habitacion = new Habitacion(id_hab, id_hotel, nombre_hotel);
+                    habitacion = new ReservaHabitacion(id_hotel, nombre_hotel);*/
 
                     idReservaHabitacion = Int32.Parse(row["rha_id"].ToString());
                     reserva = new ReservaHabitacion(
                             /*Int32.Parse*/(row["rha_cantidad_dias"].ToString()),
                             row["rha_fecha_reservacion"].ToString(),
-                            /*Int32.Parse*/(row["rha_estado"].ToString()),
                             row["rha_fecha_llegada"].ToString(),
-                            /*Int32.Parse*/(row["rha_fk_hab_id"].ToString()),
+                            /*Int32.Parse*/(row["rha_estado"].ToString()),           
+                            /*Int32.Parse*/(row["rha_fk_hot_id"].ToString()),
                             /*Int32.Parse*/(row["rha_fk_usu_id"].ToString()),
                             idReservaHabitacion
                             );
@@ -163,48 +175,31 @@ namespace FOReserva.DataAccess.DataAccessObject.M22
             }
         }
 
-        Dictionary<int, Entidad> IDAO.ConsultarTodos()
+        Dictionary<int, Entidad> IDAOReservaHabitacion.ConsultarTodosHabitacion(int id)
         {
-            Dictionary<int, Entidad> listaReservas = new Dictionary<int, Entidad>();
+            Dictionary<int,Entidad> listaReservas = new Dictionary<int,Entidad>();
             DataTable tablaDeDatos;
             List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
 
-            //Usuario usuario;
-            Habitacion habitacion;
             ReservaHabitacion reserva;
-            //int id_usu;
-            //String nombre_usu;
-            int id_hab;
-            int id_hotel;
-            String nombre_hotel;
 
             int idReserva;
 
             try
             {
-
+                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM22.rha_fk_usu_id, SqlDbType.Int, id.ToString(), false));
                 tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM22.ProcedimientoConsultarTodos, parametro);
 
                 foreach (DataRow row in tablaDeDatos.Rows)
                 {
-                    /*id_usu = Int32.Parse(row[RecursoDAOM22.id_usuario].ToString());
-                    nombre_usu = row[RecursoDAOM22.nombre_usuario].ToString();
-                    usuario = new Usuario(id_usu, nombre_usu);*/
-
-                    id_hab = Int32.Parse(row[RecursoDAOM22.id_habitacion].ToString());
-                    id_hotel = Int32.Parse(row[RecursoDAOM22.id_hotel].ToString());
-                    nombre_hotel = row[RecursoDAOM22.nombre_hotel].ToString();
-                    habitacion = new Habitacion(id_hab, id_hotel, nombre_hotel);
 
                     idReserva = Int32.Parse(row["rha_id"].ToString());
                     reserva = new ReservaHabitacion(
                         /*Int32.Parse*/(row["rha_cantidad_dias"].ToString()),
                             row["rha_fecha_reservacion"].ToString(),
-                        /*Int32.Parse*/(row["rha_estado"].ToString()),
                             row["rha_fecha_llegada"].ToString(),
-                        /*Int32.Parse*/(row["rha_fk_hab_id"].ToString()),
-                        /*Int32.Parse*/(row["rha_fk_usu_id"].ToString()),
-                            idReserva
+                        /*Int32.Parse*/(row["rha_estado"].ToString()),                            
+                        /*Int32.Parse*/(row["hot_nombre"].ToString())
                             );
                     listaReservas.Add(idReserva, reserva);
 
@@ -221,42 +216,37 @@ namespace FOReserva.DataAccess.DataAccessObject.M22
         /// <summary>
         /// Metodo para consultar hoteles segun el id de Lugar
         /// </summary>
-        /// <param name="_automovil">Variable tipo en entidad que luego debe ser casteada a su tipo para metodos get y set</param>
+        /// <param name="">Variable tipo en entidad que luego debe ser casteada a su tipo para metodos get y set</param>
         /// <returns>Lista de Entidades, ya que se devuelve mas de una fila de la BD, se debe castear a su respectiva clase en el Modelo</returns>
-         List<Entidad> IDAOReservaHabitacion.ConsultarHotelesPorIdCiudad(Entidad _lugar)
+         Dictionary<int,Entidad> IDAOReservaHabitacion.ConsultarHotelesPorIdCiudad(int _lugar)
         {
             List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
-            List<Entidad> listaHoteles = FabricaEntidad.asignarListaDeEntidades();
+            Dictionary<int,Entidad> listaHoteles = new Dictionary<int,Entidad>();
             DataTable tablaDeDatos;
 
-            CCiudad lugar = (CCiudad)_lugar; //Se castea a tipo Lugar para poder utilizar sus metodos
+            CHotel hotel;
 
-            //ReservaHabitacion reserva;
-            Entidad hotel;
-            //Usuario usuario;
+            int id_hotel;
 
-            String name_lugar;
-            String name_hotel;
-            int cant;
 
             try
             {
-                //Aqui se asignan los valores que recibe el procedimiento para realizar el select
-                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM22.hot_fk_ciudad, SqlDbType.Int, lugar.Codigo.ToString(), false));
-
-                //el metodo Ejecutar Store procedure recibe la lista de parametros como el query, este ultimo es el nombre del procedimietno en la BD
+                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM22.hot_fk_ciudad, SqlDbType.Int, _lugar.ToString(), false));
                 tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM22.ProcedimientoConsultarHotelesPorCiudad, parametro);
 
-                foreach (DataRow Fila in tablaDeDatos.Rows)
+                foreach (DataRow row in tablaDeDatos.Rows)
                 {
-                    name_lugar = Fila[RecursoDAOM22.nombre_lugar].ToString();
-                    name_hotel = Fila[RecursoDAOM22.nombre_hotel].ToString();
-                    cant = int.Parse(Fila[RecursoDAOM22.cant_habitaciones].ToString());
-                    hotel = new ReservaHabitacion(name_lugar,name_hotel,cant);
-                    listaHoteles.Add(hotel);
-                }
 
+                    id_hotel = Int32.Parse(row["hot_id"].ToString());
+                    hotel = new CHotel(
+                            row["hot_nombre"].ToString(),
+                            Int32.Parse(row["hot_cantidad_habitaciones"].ToString())
+                            );
+                    listaHoteles.Add(id_hotel, hotel);
+
+                }
                 return listaHoteles;
+
             }
             catch (Exception)
             {
@@ -264,43 +254,23 @@ namespace FOReserva.DataAccess.DataAccessObject.M22
                 throw;
             }
         }
-
-         List<Entidad> IDAOReservaHabitacion.ObtenerCiudades(Entidad _lugar)
+         /*
+         List<Entidad> IDAOReservaHabitacion.ObtenerCiudades()
         {
 
             DataTable tablaDeDatos;
             List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
             List<Entidad> listaDeLugares = FabricaEntidad.asignarListaDeEntidades();
-            CCiudad lugar = (CCiudad)_lugar;
-            //Entidad lugar;
+           
+            Entidad lugar;
 
             int idLugar;
             String nombreLugar;
 
-            /*
-              try
-            {
-                //Aqui se asignan los valores que recibe el procedimiento para realizar el select
-                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM22.id_lugar, SqlDbType.Int, lugar.Codigo.ToString(), false));
-
-                //el metodo Ejecutar Store procedure recibe la lista de parametros como el query, este ultimo es el nombre del procedimietno en la BD
-                tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM22.ProcedimientoListarCiudades, parametro);
-
-                foreach (DataRow Fila in tablaDeDatos.Rows)
-                {
-                    cod = int.Parse(Fila[RecursoDAOM22.id_lugar].ToString());
-                    name = Fila[RecursoDAOM22.nombre_lugar].ToString();
-
-                    lugar = new CCiudad(cod,name);
-                    listaCiudades.Add(lugar);
-                }
-                    return listaCiudades;
-            }
-             */
             try
             {
                 //Aqui se asignan los valores que recibe el procedimiento para realizar el select
-                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM22.id_lugar, SqlDbType.Int, lugar.Codigo.ToString(), false));
+                //parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM22.id_lugar, SqlDbType.Int,lugar._id.ToString(), false));
                 tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM22.ProcedimientoListarCiudades, parametro);
 
 
@@ -320,7 +290,42 @@ namespace FOReserva.DataAccess.DataAccessObject.M22
 
                 throw;
             }
+        }*/
+
+         List<CiudadHab> IDAOReservaHabitacion.ObtenerCiudades()
+         {
+             List<CiudadHab> listaCiudades = new List<CiudadHab>();
+             DataTable tablaDeDatos;
+             List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
+
+             CiudadHab reserva;
+             
+
+             try
+             {
+
+                 tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM22.ProcedimientoListarCiudades,parametro);
+
+                 foreach (DataRow row in tablaDeDatos.Rows)
+                 {
+
+
+                     reserva = new CiudadHab(
+                             Int32.Parse(row["lug_id"].ToString()),( row["lug_nombre"].ToString())
+                             );
+                     listaCiudades.Add(reserva);
+
+                 }
+                 return listaCiudades;
+             }
+             catch (SqlException ex)
+             {
+                 Debug.WriteLine(ex.ToString());
+                 return null;
+             }
         }
+
         }
+
 
     }

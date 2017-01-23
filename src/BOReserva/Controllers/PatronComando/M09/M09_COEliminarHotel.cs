@@ -2,6 +2,7 @@
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.DataAccessObject.M09;
 using BOReserva.DataAccess.Domain;
+using BOReserva.Excepciones.M09;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,9 +41,17 @@ namespace BOReserva.Controllers.PatronComando.M09
         /// Devuelve un String, en el cual se indica el mensaje que sera llevado a la vista
         /// </returns>
         public override String ejecutar(){
+            try
+            {
             IDAOHotel daoHotel = (DAOHotel)FabricaDAO.instanciarDaoHotel();
             String test = daoHotel.eliminarHotel(_hotel._id);
             return test;
+        }
+            catch (ReservaExceptionM09 ex)
+            {
+                //este throw esta incorrecto
+                throw ex;
+            }
         }
 
     }

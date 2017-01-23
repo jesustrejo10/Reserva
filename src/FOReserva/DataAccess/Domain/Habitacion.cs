@@ -7,7 +7,7 @@ namespace FOReserva.DataAccess.Domain
 {
     public class Habitacion : Entidad
     {
-        public int _id { get; set; }
+        public new int _id { get; set; }
 
         public int _precio { get; set; }
 

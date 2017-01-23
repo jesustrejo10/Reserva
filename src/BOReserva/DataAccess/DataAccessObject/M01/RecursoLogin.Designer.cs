@@ -70,6 +70,15 @@ namespace BOReserva.DataAccess.DataAccessObject.M01 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to M01_DesactivarUsuario.
+        /// </summary>
+        internal static string BloquearUsuario {
+            get {
+                return ResourceManager.GetString("BloquearUsuario", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to M01_ConsultarUsuario.
         /// </summary>
         internal static string ConsultarUsuario {
@@ -88,11 +97,11 @@ namespace BOReserva.DataAccess.DataAccessObject.M01 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to M01_DesactivarUsuario.
+        ///   Looks up a localized string similar to M01_EliminarLogin.
         /// </summary>
-        internal static string DesactivarUsuario {
+        internal static string EliminarLogin {
             get {
-                return ResourceManager.GetString("DesactivarUsuario", resourceCulture);
+                return ResourceManager.GetString("EliminarLogin", resourceCulture);
             }
         }
         
@@ -102,6 +111,33 @@ namespace BOReserva.DataAccess.DataAccessObject.M01 {
         internal static string id {
             get {
                 return ResourceManager.GetString("id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M01_IncrementarIntentos.
+        /// </summary>
+        internal static string IncrementarIntentos {
+            get {
+                return ResourceManager.GetString("IncrementarIntentos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M01_InsertarLogin.
+        /// </summary>
+        internal static string InsertarLogin {
+            get {
+                return ResourceManager.GetString("InsertarLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M01_ResetearIntentos.
+        /// </summary>
+        internal static string ResetearIntentos {
+            get {
+                return ResourceManager.GetString("ResetearIntentos", resourceCulture);
             }
         }
         

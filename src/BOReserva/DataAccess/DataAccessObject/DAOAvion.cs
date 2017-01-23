@@ -243,7 +243,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                 throw new ReservaExceptionM02(ex.Message, ex);
             }
             catch (NullReferenceException ex)
-            {
+                    {
                 try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
 
                 catch (LogException exi)
@@ -257,9 +257,9 @@ namespace BOReserva.DataAccess.DataAccessObject
 
                 catch (LogException exi)
                 { throw new ReservaExceptionM02(ex.Message, exi); }
-
+                        
                 throw new ReservaExceptionM02(ex.Message, ex);
-            }
+                }
             catch (ExceptionBD ex)
             {
                 try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
@@ -319,7 +319,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                 return listaAviones;
             }
             catch (SqlException ex)
-            {
+                {
                 try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
 
                 catch (LogException exi)
@@ -328,7 +328,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                 throw new ReservaExceptionM02(ex.Message, ex);
             }
             catch (NullReferenceException ex)
-            {
+                    {
                 try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
 
                 catch (LogException exi)
@@ -339,7 +339,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             catch (ArgumentNullException ex)
             {
                 try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
-
+                            
                 catch (LogException exi)
                 { throw new ReservaExceptionM02(ex.Message, exi); }
 
@@ -348,10 +348,10 @@ namespace BOReserva.DataAccess.DataAccessObject
             catch (ExceptionBD ex)
             {
                 try { Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex); }
-
+                     
                 catch (LogException exi)
                 { throw new ReservaExceptionM02(ex.Message, exi); }
-
+                        
                 throw new ReservaExceptionM02(ex.Message, ex);
             }
             catch (Exception ex)
@@ -370,21 +370,21 @@ namespace BOReserva.DataAccess.DataAccessObject
         /// </summary>
         string IDAOAvion.eliminarAvion(int id)
         {
-            {
+        {
                 List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
 
-                try
-                {
+            try
+            {
                     listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM02.avi_id, SqlDbType.Int, id.ToString(), false));
                     EjecutarStoredProcedure(RecursoDAOM02.ProcedimientoEliminarAvion, listaParametro);
 
-                    return "1";
-                }
-                catch (SqlException ex)
-                {
-                    return ex.Message;
-                }
+                return "1";
             }
+            catch (SqlException ex)
+            {
+                return ex.Message;
+            }
+        }
         }
 #endregion
 
@@ -402,7 +402,7 @@ namespace BOReserva.DataAccess.DataAccessObject
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM02.avi_id, SqlDbType.Int, avion._id.ToString(), false));
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM02.avi_disponibilidad, SqlDbType.Int, disponibilidad.ToString(), false));
                 EjecutarStoredProcedure(RecursoDAOM02.ProcedimientoDisponibilidad, listaParametro);
-
+                
                 return "1";
             }
             catch (SqlException ex)

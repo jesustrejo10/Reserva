@@ -1,5 +1,6 @@
 ﻿<!-- Indico que para esta vista, M08_ModificarAutomovil, utilizare el modelo Models/gestion_automoviles/CModificarAutomovil-->
 @model BOReserva.Models.gestion_hoteles.CVerHotel
+<link href="~/Content/Canvas/Box.css" rel="stylesheet" />
 
 <!--Indico que, estoy abriendo un formulario que tendra como accion del submit, el controlador gestion_automoviles"Controller",
     utilizara el metodo guardarAutomovil
@@ -10,13 +11,12 @@
         <meta charset="UTF-8">
     </head>
     <div class="row">
-        <div class="col-md-12">
-            <div class="box">
+        <div class="col-md-10">
+            <div class="Cajita">
                 <div class="box-header with-border">
                     <h1 class="box-title" style="font-size:32px;">Detalle Hotel</h1>
-                    <div class="box-tools pull-right">
+                    <div class="box-tools pull-right"></div>
                     </div>
-                </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div class="row">
@@ -36,7 +36,7 @@
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
                                 <label for="modelo">Pagina web</label>
-                                @Html.TextBoxFor(m => m._paginaWeb, null, new { @class = "form-control", @placeholder = "www.granmeliaccs.com", @id = "hot_web",  @maxlength = 20, @readonly = "readonly" })
+                                @Html.TextBoxFor(m => m._paginaWeb, null, new { @class = "form-control", @placeholder = "www.granmeliaccs.com", @id = "hot_web", @maxlength = 20, @readonly = "readonly" })
                             </div>
                             <div class="col-xs-6">
                                 <label for="anio">Correo electronico</label>                               
@@ -49,7 +49,6 @@
                                 <label for="transmision">Clasificacion</label>                      
                                 @Html.TextBoxFor(m => m._clasificacion, null, new { @class = "form-control", @placeholder = "3 estrellas", @id = "hot_clasificacion", @readonly = "readonly" })
 
-    
                             </div>
                             <div class="col-xs-6">
                                 <label for="capacidad">Capacidad</label>                                
@@ -60,19 +59,31 @@
                         <div>&nbsp;</div>
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-6">
+                                <label for="">Precio por habitacion($)</label>
+                                @Html.TextBoxFor(m => m._precioHabitacion, null, new { @class = "form-control", @placeholder = "28", @id = "hot_pais", @readonly = "readonly" })
+                            </div>
+                            <div class="col-xs-6">
                                 <label for="">Pais</label>
                                 @Html.TextBoxFor(m => m._pais, null, new { @class = "form-control", @placeholder = "28", @id = "hot_pais", @readonly = "readonly" })
                             </div>
+<<<<<<< HEAD
+=======
 
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12" style="margin-top:10px;">
+>>>>>>> f8b725c39707cc16098865f4332e749e9bd3a91b
                             <div class="col-xs-6">
                                 <label for="Ciudad">Ciudad</label>                               
                                 @Html.TextBoxFor(m => m._ciudad, null, new { @class = "form-control", @placeholder = "28", @id = "hot_pais", @readonly = "readonly" })
                             </div>
                         </div>
                         <div>&nbsp;</div>
-                        <div class="col-md-12" style="margin-top:10px;">
-                        </div>
+<<<<<<< HEAD
+                        <div class="col-md-12" style="margin-top:10px;"></div>
                         <div>&nbsp;</div>
+=======
+>>>>>>> f8b725c39707cc16098865f4332e749e9bd3a91b
                         <div class="col-md-12" style="margin-top:10px;">
                             <button type="submit" id="return" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Regresar</button>
                         </div>
