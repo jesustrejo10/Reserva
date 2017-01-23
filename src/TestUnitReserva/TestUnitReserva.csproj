@@ -76,7 +76,6 @@
     <Compile Include="BO\gestion_usuario\TestUsuario.cs" />
     <Compile Include="BO\gestión_OfertasYPaquetes\TestOfertasYPaquetes.cs" />
     <Compile Include="BO\TestGestionAutomovil\TestGestionAutomovil.cs" />
-    <Compile Include="BO\gestion_restaurantes\TestRestaurante.cs" />
     <Compile Include="FO\Diario\TestLugarDiario.cs" />
     <Compile Include="FO\gestion_reserva_automovil\TestReservaAutomovil.cs" />
     <Compile Include="FO\Itinerario\TestPlanificacionVacacion.cs" />
