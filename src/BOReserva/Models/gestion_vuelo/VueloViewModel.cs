@@ -86,5 +86,9 @@ namespace BOReserva.Models.gestion_vuelo
         /// 
         /// </summary>
         public int _idAvion { get; set; }
+
+        public DateTime fechaDespegue { get; set; }
+
+        public int _idVuelo { get; set;}
     }
 }

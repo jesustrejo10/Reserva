@@ -26,7 +26,30 @@
                                 BOReserva.DataAccess.Domain.Hotel c = (BOReserva.DataAccess.Domain.Hotel)item.Value;
                                 <tr id="@item.Key">
                                     <td>@c._nombre</td>
-                                    <td>@c._clasificacion</td>
+                                    <td>
+                                    @{
+                                        if (c._clasificacion >= 1)
+                                        {
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                        }
+                                        if (c._clasificacion >= 2)
+                                        {
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                        }
+                                        if (c._clasificacion >= 3)
+                                        {
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                        }
+                                        if (c._clasificacion >= 4)
+                                        {
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                        }
+                                        if (c._clasificacion >= 5)
+                                        {
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                        }
+                                    }
+                                    </td>
                                     <td>@c._ciudad._pais._nombre / @c._ciudad._nombre</td>
                                     <td>@c._direccion</td>
                                     <td>
@@ -171,43 +194,47 @@
     $(document).ready(function () {
         //e.preventDefault();
         $(".eliminar").click(function () {
-            alert("Se esta procesando tu solicitud, por favor espere");
-            var identificador = $(this).parent().parent().parent().attr("id");
-            jQuery.ajax({
-                type: "POST",
-                url: "/gestion_hoteles/deleteHotel",
-                data: { id: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
-            }).done(function (data) {
-                if (data === "1") {
+            if (confirm('¿Seguro que desea eliminar el hotel seleccionado?')) {
+                alert("Se esta procesando tu solicitud, por favor espere");
+                var identificador = $(this).parent().parent().parent().attr("id");
+                jQuery.ajax({
+                    type: "POST",
+                    url: "/gestion_hoteles/deleteHotel",
+                    data: { id: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
+                }).done(function (data) {
+                    if (data === "Se elimino exitosamente el hotel") {
+                        var resp = data;
+                        //$("#sdssss").append(data);
+                        var url1 = '/gestion_hoteles/M09_VisualizarHoteles';
+                        var method = 'GET';
+                        var data1 = '';
 
-                    //$("#sdssss").append(data);
-                    var url1 = '/gestion_hoteles/M09_VisualizarHoteles';
-                    var method = 'GET';
-                    var data1 = '';
+                        $.ajax(
+                            {
+                                url: url1,
+                                type: method,
+                                data: data,
+                                success: function (data, textStatus, jqXHR) {
 
-                    $.ajax(
-                        {
-                            url: url1,
-                            type: method,
-                            data: data,
-                            success: function (data, textStatus, jqXHR) {
-
-                                $("#contenido").empty();
-                                $("#contenido").append(data);
-                                alert("Se elimino exitosamente el hotel");
-                            },
-                            error: function (jqXHR, textStatus, errorThrown) {
-                                alert(errorThrown);
-                            }
-                        });
-                } else if (data.includes("Reserva_Habitacion")) {
-                    alert("No se puede eliminar este hotel porque tiene una reservacion");
-                } else {
-                    alert(data);
-                }
-            }).fail(function () {
-                alert("Error, por favor refresque la pagina")
-            });
+                                    $("#contenido").empty();
+                                    $("#contenido").append(data);
+                                    alert(resp);
+                                },
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    alert(errorThrown);
+                                }
+                            });
+                    } else if (data.includes("Reserva_Habitacion")) {
+                        alert("No se puede eliminar este hotel porque tiene una reservacion");
+                    } else {
+                        alert(data);
+                    }
+                }).fail(function () {
+                    alert("Error, por favor refresque la pagina")
+                });
+            } else {
+                // Do nothing!
+            }
         });
     });
 
@@ -223,8 +250,8 @@
 
 
             }).done(function (data) {
-                if (data === "1") {
-
+                if (data === "Se cambio exitosamente la disponibilidad del hotel") {
+                    var resp = data;
                     //$("#sdssss").append(data);
                     var url1 = '/gestion_hoteles/M09_VisualizarHoteles';
                     var method = 'GET';
@@ -239,7 +266,7 @@
 
                                 $("#contenido").empty();
                                 $("#contenido").append(data);
-                                alert("Se cambio exitosamente la disponibilidad del hotel");
+                                alert(resp);
                             },
                             error: function (jqXHR, textStatus, errorThrown) {
                                 alert(errorThrown);
@@ -265,8 +292,8 @@
                 url: "/gestion_hoteles/deactivateHotel",
                 data: { id: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
             }).done(function (data) {
-                if (data === "1") {
-
+                if (data === "Se cambio exitosamente la disponibilidad del hotel") {
+                    var resp = data;
                     //$("#sdssss").append(data);
                     var url1 = '/gestion_hoteles/M09_VisualizarHoteles';
                     var method = 'GET';
@@ -281,7 +308,7 @@
 
                                 $("#contenido").empty();
                                 $("#contenido").append(data);
-                                alert("Se cambio exitosamente la disponibilidad del hotel");
+                                alert(resp);
                             },
                             error: function (jqXHR, textStatus, errorThrown) {
                                 alert(errorThrown);

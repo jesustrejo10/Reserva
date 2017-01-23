@@ -333,7 +333,7 @@ namespace BOReserva.Servicio
 
                 while (dr.Read())
                 {
-                    //tomo un unico valor como esperado segun comportamiento del SP
+                    //tomo un unico _idHotel como esperado segun comportamiento del SP
                     pasajeros[0] = dr.GetSqlString(0).ToString();
                     pasajeros[1] = dr.GetSqlString(1).ToString();
                     pasajeros[2] = dr.GetSqlString(2).ToString();
@@ -929,7 +929,7 @@ namespace BOReserva.Servicio
                         _nombre = lector.GetSqlString(1).ToString(),
                         _tipoLugar = lector.GetSqlString(2).ToString(),
                         _zonaHoraria = (int)lector.GetSqlInt32(3),
-                        _idFKLugar = lector.IsDBNull(4) ? -1 : (int)lector.GetSqlInt32(4), //Pregunta si el campo es null, dando valor por defecto en caso que lo sea
+                        _idFKLugar = lector.IsDBNull(4) ? -1 : (int)lector.GetSqlInt32(4), //Pregunta si el campo es null, dando _idHotel por defecto en caso que lo sea
                         _abreviatura = lector.GetSqlString(5).ToString()
 
                     };
@@ -985,7 +985,7 @@ namespace BOReserva.Servicio
                         _nombre = lector.GetSqlString(1).ToString(),
                         _tipoLugar = lector.GetSqlString(2).ToString(),
                         _zonaHoraria = (int)lector.GetSqlInt32(3),
-                        _idFKLugar = lector.IsDBNull(4) ? -1 : (int)lector.GetSqlInt32(4), //Pregunta si el campo es null, dando valor por defecto en caso que lo sea
+                        _idFKLugar = lector.IsDBNull(4) ? -1 : (int)lector.GetSqlInt32(4), //Pregunta si el campo es null, dando _idHotel por defecto en caso que lo sea
                         _abreviatura = lector.GetSqlString(5).ToString()
 
                     };
@@ -2128,14 +2128,18 @@ namespace BOReserva.Servicio
         /* FIN MODULO 8 GESTION DE AUTOMOVILES*/
 
         //Procedimiento del Modulo 11 para agregar ofertas a la base de datos.
-        public Boolean agregarOferta(CAgregarOferta model)
+      /*  public Boolean agregarOferta(CAgregarOferta model)
         {
             try
             {
                 conexion = new SqlConnection(stringDeConexion);
                 conexion.Open();
                 SqlCommand query = conexion.CreateCommand();
-                query.CommandText = "INSERT INTO Oferta VALUES ('" + model._nombreOferta + "','" + model.formatDate(model._fechaIniOferta) + "', '" + model.formatDate(model._fechaFinOferta) + "'," + model._porcentajeOferta + ",'" + model._estadoOferta + "');";
+                query.CommandText = "INSERT INTO Oferta VALUES ('" + model._nombreOferta + "','" 
+                                                                   + model.formatDate(model._fechaIniOferta) + "', '" 
+                                                                   + model.formatDate(model._fechaFinOferta) + "'," 
+                                                                   + model._porcentajeOferta + ",'" 
+                                                                   + model._estadoOferta + "');";
                 SqlDataReader lector = query.ExecuteReader();
                 lector.Close();
                 conexion.Close();
@@ -2150,7 +2154,7 @@ namespace BOReserva.Servicio
                 return false;
             }
 
-        }
+        } */
 
         //Procedimiento del Modulo 11 para agregar paquetes a la base de datos.
         public Boolean agregarPaquete(CPaquete paquete)
@@ -2261,7 +2265,7 @@ namespace BOReserva.Servicio
         }
 
 
-        public List<COferta> MListarOfertasBD()
+       /* public List<COferta> MListarOfertasBD()
         {
             List<COferta> listaofertas = new List<COferta>();
             try
@@ -2302,10 +2306,10 @@ namespace BOReserva.Servicio
                 conexion.Close();
                 return null;
             }
-        }
+        }*/
 
 
-        public COferta MMostrarOfertaBD(int id)
+        /*public COferta MMostrarOfertaBD(int id)
         {
             COferta oferta = null;
             try
@@ -2343,7 +2347,7 @@ namespace BOReserva.Servicio
                 conexion.Close();
                 return null;
             }
-        }
+        }*/
 
 
         public List<String> MBuscarNombrePaquetesDeOferta(int idOferta)

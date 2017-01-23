@@ -76,6 +76,9 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\lib\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -291,6 +294,15 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="DataAccess\Model\ResultadoBD.cs" />
+    <Compile Include="Excepciones\ExceptionReserva.cs" />
+    <Compile Include="Excepciones\Log.cs" />
+    <Compile Include="Excepciones\LogException.cs" />
+    <Compile Include="Excepciones\M19\ReservaExceptionM19.cs" />
+    <Compile Include="Excepciones\RecursoLog.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RecursoLog.resx</DependentUpon>
+    </Compile>
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -3302,6 +3314,10 @@
     <EmbeddedResource Include="DataAccess\DataAccessObject\M19\RecursoDAOM19.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoDAOM19.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Excepciones\RecursoLog.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecursoLog.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

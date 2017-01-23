@@ -1,4 +1,4 @@
-﻿using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using BOReserva.Excepciones.M09;
 using System;
@@ -105,7 +105,29 @@ namespace BOReserva.DataAccess.DataAccessObject
                 throw new ReservaExceptionM09(ex.Message, ex);
             }
         }
+
+        public List<String> listarCiudades(String Pais)
+        {
+            List<String> lista = new List<String>();
+            String idpais = Convert.ToString(this.obtenerIDciudad(Pais));
+            int id;
+            String nombre;
+            SqlConnection conexion = Conectar();
+            conexion.Open();
+            String sql = "select p.lug_id as id, p.lug_nombre as name FROM Lugar p where p.lug_FK_lugar_id =" + idpais + ";";
+            SqlCommand cmd = new SqlCommand(sql, conexion);
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    id = int.Parse(reader[0].ToString());
+                    nombre = reader[1].ToString();
+                    lista.Add(nombre);
+                }
+            }
+            cmd.Dispose();
+            conexion.Close();
+            return lista;
+        }
     }
-
-
 }
