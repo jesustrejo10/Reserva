@@ -299,12 +299,6 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
                     System.Diagnostics.Debug.WriteLine("TOMA DISPONIBILIDAD: " + disponibilidad);
 
 
-
-
-
-
-
-
                     automovil = FabricaEntidad.inicializarAutomovil(matricula, modelo, fabricante, tipo, color, transmision, idCiudad, precioAquiler, anio, cantPasajeros, disponibilidad, datos._fechaini, datos._fechafin, datos._horaIni, datos._horaFin, datos._ciudadOrigen, datos._ciudadDestino);
 
                     System.Diagnostics.Debug.WriteLine("CREA OBJETO DE CAUTOMOVIL");
