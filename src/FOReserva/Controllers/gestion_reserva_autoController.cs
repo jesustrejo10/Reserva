@@ -135,11 +135,10 @@ namespace FOReserva.Controllers
             }
         }
 
-
-
-
-
-
+        /// <summary>
+        /// Busqueda de autos disponibles
+        /// </summary>
+        /// <returns></returns>
         public ActionResult M19_Busqueda_Autos()
         {
 
@@ -206,23 +205,6 @@ namespace FOReserva.Controllers
             {
                 return View();
             }
-        }
-/// <summary>
-/// Metodo para busqueda de autos
-/// </summary>
-/// <param name="res_entrega"></param>
-/// <param name="res_destino"></param>
-/// <param name="fechaini"></param>
-/// <param name="fechafin"></param>
-/// <param name="horaini"></param>
-/// <param name="horafin"></param>
-/// <returns></returns>
-        public List<CReserva_Autos_Perfil> busqueda(string res_entrega, string res_destino, string fechaini, string fechafin, string horaini, string horafin)
-        {
-            List<CReserva_Autos_Perfil> lista = null;
-            ManejadorSQLReservaAutomovil manejador = new ManejadorSQLReservaAutomovil();
-            lista = manejador.buscarAutosCiudad(res_entrega, res_destino, fechaini, fechafin, horaini, horafin);
-            return lista;
         }
 
         /// <summary>

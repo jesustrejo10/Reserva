@@ -207,98 +207,6 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
             }
 
         }
-        /// <summary>
-        /// MEtodo para consultar autos por ciudad
-        /// </summary>
-        /// <param name="_lugar"></param>
-        /// <returns></returns>
-        public List<Entidad> ConsultarAutosPorIdCiudad(Entidad _lugar)
-        {
-            //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
-            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
-            RecursoDAOM19.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
-
-            List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
-            List<Entidad> listaDeAutomovil = FabricaEntidad.asignarListaDeEntidades();
-            DataTable tablaDeDatos;
-            Entidad automovil;
-            CLugar lugar = (CLugar)_lugar; //Se castea a tipo Lugar para poder utilizar sus metodos
-
-            //Atributos tabla Automovil
-            String matricula;
-            String modelo;
-            String fabricante;
-            int anio;
-            double kilometraje;
-            int cantPasajeros;
-            String tipo;
-            double precioCompra;
-            double precioAlquiler;
-            double penalidadDiaria;
-            String fechaRegistro;
-            String color;
-            int disponibilidad;
-            String transmision;
-            int idCiudad;
-
-            try
-            {
-                //Aqui se asignan los valores que recibe el procedimiento para realizar el select
-                parametro.Add(FabricaDAO.asignarParametro(RecursoDAOM19.raut_fk_ciudad_entrega, SqlDbType.Int, lugar._id.ToString(), false));
-
-                //el metodo Ejecutar Store procedure recibe la lista de parametros como el query, este ultimo es el nombre del procedimietno en la BD
-                tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM19.procedimientoConsultarAutosCiudad, parametro);
-
-                foreach (DataRow Fila in tablaDeDatos.Rows)
-                {
-                    matricula = Fila[RecursoDAOM19.autMatricula].ToString();
-                    modelo = Fila[RecursoDAOM19.autModelo].ToString();
-                    fabricante = Fila[RecursoDAOM19.autFabricante].ToString();
-                    anio = int.Parse(Fila[RecursoDAOM19.autAnio].ToString());
-                    kilometraje = double.Parse(Fila[RecursoDAOM19.autKilometraje].ToString());
-                    cantPasajeros = int.Parse(Fila[RecursoDAOM19.autCantpasajeros].ToString());
-                    tipo = Fila[RecursoDAOM19.autTipo].ToString();
-                    precioCompra = double.Parse(Fila[RecursoDAOM19.autPreciocompra].ToString());
-                    precioAlquiler = double.Parse(Fila[RecursoDAOM19.autPrecioalquiler].ToString());
-                    penalidadDiaria = double.Parse(Fila[RecursoDAOM19.autPenalidaddiaria].ToString());
-                    fechaRegistro = Fila[RecursoDAOM19.autFecharegistro].ToString();
-                    color = Fila[RecursoDAOM19.autColor].ToString();
-                    disponibilidad = int.Parse(Fila[RecursoDAOM19.autDisponibilidad].ToString());
-                    transmision = Fila[RecursoDAOM19.autTransmision].ToString();
-                    idCiudad = int.Parse(Fila[RecursoDAOM19.autFk_ciudad].ToString());
-                    automovil = FabricaEntidad.inicializarAutomovil(matricula, modelo, fabricante, anio, kilometraje, cantPasajeros, tipo, precioCompra, precioAlquiler, penalidadDiaria, fechaRegistro, color, disponibilidad, transmision, idCiudad);
-                    listaDeAutomovil.Add(automovil);
-                }
-
-                return listaDeAutomovil;
-            }
-            catch (ArgumentNullException ex)
-            {
-                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM19("Reserva-404", "Argumento con valor invalido", ex);
-            }
-            catch (FormatException ex)
-            {
-                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM19("Reserva-404", "Datos con un formato invalido", ex);
-            }
-            catch (SqlException ex)
-            {
-                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM19("Reserva-404", "Error Conexion Base de Datos", ex);
-            }
-            catch (ExceptionBD ex)
-            {
-                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM19("Reserva-404", "Error Conexion Base de Datos", ex);
-            }
-            catch (Exception ex)
-            {
-
-                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
-                throw new ReservaExceptionM19("Reserva-404", "Error al realizar operacion ", ex);
-            }
-        }
 
         /// <summary>
         /// Metodo para consultar automoviles segun el id de Lugar
@@ -308,15 +216,17 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
         public List<Entidad> ConsultarAutosPorIdCiudades(Entidad _datos)
         {
 
-            System.Diagnostics.Debug.WriteLine("LLEGA AL DAO");
+            //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
+            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+            RecursoDAOM19.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             CVistaReservaAuto obj = (CVistaReservaAuto)_datos;
-            System.Diagnostics.Debug.WriteLine("ATRIBUTOS DEL OBJETO ---- idorigen: " + obj._ciudadOrigen + ", iddestino: " + obj._ciudadDestino + ", fechaini: " + obj._fechaini + ", fechafin: " + obj._fechafin + ", horaini: " + obj._horaIni + ", horafin: " + obj._horaFin);
 
             List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
             List<Entidad> listaDeAutomovil = FabricaEntidad.asignarListaDeEntidades();
             DataTable tablaDeDatos;
             Entidad automovil;
-            CVistaReservaAuto datos = (CVistaReservaAuto)_datos; //Se castea a tipo Lugar para poder utilizar sus metodos
+            CVistaReservaAuto datos = (CVistaReservaAuto)_datos; 
 
             //Atributos tabla Automovil
             String matricula;
@@ -338,18 +248,6 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
 
                 //el metodo Ejecutar Store procedure recibe la lista de parametros como el query, este ultimo es el nombre del procedimietno en la BD
                 tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM19.procedimientoConsultarACiudad, parametro);
-
-                System.Diagnostics.Debug.WriteLine("PASA EL STORED PROCEDURE TUPLAS");
-
-
-                // For each row, print the values of each column.
-                foreach (DataRow row in tablaDeDatos.Rows)
-                {
-                    foreach (DataColumn column in tablaDeDatos.Columns)
-                    {
-                        System.Diagnostics.Debug.WriteLine(row[column]);
-                    }
-                }
 
                 foreach (DataRow Fila in tablaDeDatos.Rows)
                 {
@@ -390,13 +288,6 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
                     disponibilidad = int.Parse(Fila[RecursoDAOM19.autDisponibilidad].ToString());
                     System.Diagnostics.Debug.WriteLine("TOMA DISPONIBILIDAD: " + disponibilidad);
 
-
-
-
-
-
-
-
                     automovil = FabricaEntidad.inicializarAutomovil(matricula, modelo, fabricante, tipo, color, transmision, idCiudad, precioAquiler, anio, cantPasajeros, disponibilidad);
 
                     System.Diagnostics.Debug.WriteLine("CREA OBJETO DE CAUTOMOVIL");
@@ -407,10 +298,30 @@ namespace FOReserva.DataAccess.DataAccessObject.M19
 
                 return listaDeAutomovil;
             }
-            catch (Exception)
+            catch (ArgumentNullException ex)
             {
-
-                throw;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM19("Reserva-404", "Error al realizar operacion ", ex);
             }
         }
 
