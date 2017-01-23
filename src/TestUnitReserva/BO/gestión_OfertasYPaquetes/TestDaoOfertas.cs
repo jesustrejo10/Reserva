@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FOReserva.DataAccess.DataAccessObject.InterfacesDAO
+namespace TestUnitReserva.BO.gestión_OfertasYPaquetes
 {
-    interface IDAOCiudad : IDAO
+    class TestDaoOfertas
     {
-        //metodods detallados
     }
 }

@@ -15,9 +15,10 @@ namespace BOReserva.Controllers.PatronComando.M11
     {
         int valor;
 
-        public M11_COConsultarPaquete(int value){
-        this.valor = value;
-    }
+        public M11_COConsultarPaquete(int value)
+        {
+            this.valor = value;
+        }
 
         ///// <summary>
         ///// Sobreescritura del método ejecutar de la clase Comando.
