@@ -103,6 +103,7 @@ namespace TestUnitReserva.BO.gestion_seguridad_ingreso
             comandoResetearIntentos.ejecutar();
             Boolean resultado = (Boolean)comandoIncrementarIntentos.ejecutar();
             int resultado2 = (int)comandoNumeroIntentos.ejecutar();
+            Assert.AreEqual(true, resultado);
             Assert.AreEqual(1, resultado2);
         }
 
