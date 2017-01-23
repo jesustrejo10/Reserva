@@ -7,6 +7,7 @@ using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.Excepciones.M16;
+using BOReserva.Excepciones;
 
 namespace BOReserva.Controllers.PatronComando
 {
@@ -39,6 +40,7 @@ namespace BOReserva.Controllers.PatronComando
             }
             catch(ReservaExceptionM16 ex)
             {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
                 return ex.Mensaje;
             }
         }

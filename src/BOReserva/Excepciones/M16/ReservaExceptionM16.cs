@@ -6,11 +6,12 @@ using System.Web;
 
 namespace BOReserva.Excepciones.M16
 {
+    /// <summary>
+    /// Clase que maneja las excepciones del módulo para la gestión de reclamos
+    /// </summary>
     public class ReservaExceptionM16 : Exception
     {
-        /// <summary>
-        /// Clase que maneja las excepciones del módulo para la gestión de reclamos
-        /// </summary>
+
         private Exception _excepcion;
         private string _codigoException;
         private string _mensajeException;
