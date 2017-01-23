@@ -1,24 +1,19 @@
-using BOReserva.Controllers.PatronComando;
-using BOReserva.Controllers.PatronComando.M09;
+using BOReserva.Controllers.PatronComando.M01;
 using BOReserva.Controllers.PatronComando.M02;
 using BOReserva.Controllers.PatronComando.M03;
+using BOReserva.Controllers.PatronComando.M09;
+using BOReserva.Controllers.PatronComando.M10;
+using BOReserva.Controllers.PatronComando.M11;
+using BOReserva.Controllers.PatronComando.M12;
+using BOReserva.Controllers.PatronComando.M13;
 using BOReserva.Controllers.PatronComando.M14;
+using BOReserva.Controllers.PatronComando.M16;
 using BOReserva.DataAccess.Domain;
+using BOReserva.DataAccess.Domain.M14;
 using BOReserva.M10.Comando.gestion_restaurantes;
-using BOReserva.Models.gestion_automoviles;
 using System;
 using System.Collections.Generic;
-using System.Web;
-using System.Linq;
-using BOReserva.Controllers.PatronComando.M10;
-using BOReserva.Controllers.PatronComando.M16;
 using System.Web.Mvc;
-using BOReserva.Controllers.PatronComando.M12;
-using BOReserva.DataAccess.Domain.M14;
-using BOReserva.Controllers.PatronComando.M09;
-using BOReserva.Controllers.PatronComando.M11;
-using BOReserva.Controllers.PatronComando.M01;
-using BOReserva.Controllers.PatronComando.M13;
 
 namespace BOReserva.Controllers.PatronComando
 {
@@ -156,7 +151,9 @@ namespace BOReserva.Controllers.PatronComando
         /// </summary>
         /// <param name="e">Recibe la una entidad de tipo Hotel</param>
         /// <param name="precio">Precio por habitacion/param>
-        /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
+        /// <returns>
+        /// Retorna un comando con el parametro adjuntado como atributo.
+        /// </returns>
         public static Command<String> crearM09AgregarHotel(Entidad e, int precio) {
 
             return new M09_COAgregarHotel((Hotel)e, precio);
@@ -563,8 +560,7 @@ namespace BOReserva.Controllers.PatronComando
             return new M04.M04_COLugarOrigen();
         }
         #endregion
-
-
+        
         #region M13_Roles
 
         public static Command<String> crearM13_AgregarRol(Entidad e)
@@ -1078,6 +1074,7 @@ namespace BOReserva.Controllers.PatronComando
 
         }
         #endregion
+
         #region M03_Ruta
         public static Command<String> crearM03_AgregarRuta(Entidad e)
         {

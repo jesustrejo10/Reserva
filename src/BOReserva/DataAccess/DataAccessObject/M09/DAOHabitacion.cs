@@ -1,6 +1,8 @@
 ﻿using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
+using BOReserva.Excepciones;
+using BOReserva.Excepciones.M09;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -66,7 +68,6 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
         /// <returns>Retorna un string</returns>
         string IDAOHabitacion.Agregarhab(Hotel hotel, int precio)
         {
-            SqlConnection conexion = Connection.getInstance(_connexionString);
             List<Parametro> listaParametro;
             try
             {
@@ -88,33 +89,24 @@ namespace BOReserva.DataAccess.DataAccessObject.M09
             }
             catch (SqlException ex)
             {
-                Debug.WriteLine("Ocurrio un SqlException");
-                Debug.WriteLine(ex.ToString());
-                conexion.Close();
-                return ex.Message;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (NullReferenceException ex)
             {
-                Debug.WriteLine("Ocurrio una NullReferenceException");
-                Debug.WriteLine(ex.ToString());
-                conexion.Close();
-                return ex.Message;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (ArgumentNullException ex)
             {
-                Debug.WriteLine("Ocurrio una ArgumentNullException");
-                Debug.WriteLine(ex.ToString());
-                conexion.Close();
-                return ex.Message;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Ocurrio una Exception");
-                Debug.WriteLine(ex.ToString());
-                conexion.Close();
-                return ex.Message;
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM09(ex.Message, ex);
             }
         }
-
     }
 }
