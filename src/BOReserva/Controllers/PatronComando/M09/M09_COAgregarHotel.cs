@@ -1,4 +1,5 @@
-﻿using BOReserva.DataAccess.DAO;
+﻿using BOReserva.Controllers.PatronComando.M09;
+using BOReserva.DataAccess.DAO;
 using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.DataAccessObject.M09;
@@ -43,11 +44,11 @@ namespace BOReserva.Controllers.PatronComando
                 }
                 if (resultadoAgregarHotel == 1)
                 {
-                    return "Se registro el hotel exitosamente";
+                    return ResourceM09Command.AgregoCorrectamente;
                 }
                 else
                 {
-                    return "Hubo un error";
+                    return ResourceM09Command.AgregoErroneamente;
                 }
             }
             catch (ReservaExceptionM09 ex)

@@ -35,18 +35,10 @@ namespace BOReserva.Controllers.PatronComando.M09
         {
             try
             {
-                Entidad hotelARetonar;
-                if (Cache.estaEnCache(_idHotel))
-                {
-                    hotelARetonar = Cache.retornarHotelPorId(_idHotel);
-                    return (hotelARetonar);
-                }
-                else
-                {
-                    IDAO daoHotel = FabricaDAO.instanciarDaoHotel();
-                    Entidad hotel = daoHotel.Consultar(_idHotel);
-                    return hotel;
-                }
+                IDAO daoHotel = FabricaDAO.instanciarDaoHotel();
+                Entidad hotel = daoHotel.Consultar(_idHotel);
+                return hotel;
+                
             }
             catch (ReservaExceptionM09 ex)
             {

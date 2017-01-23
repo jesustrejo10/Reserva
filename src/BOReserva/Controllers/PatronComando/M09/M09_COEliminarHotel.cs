@@ -2,6 +2,7 @@
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.DataAccessObject.M09;
 using BOReserva.DataAccess.Domain;
+using BOReserva.DataAccess.Model;
 using BOReserva.Excepciones.M09;
 using System;
 using System.Collections.Generic;
@@ -45,6 +46,7 @@ namespace BOReserva.Controllers.PatronComando.M09
             {
                 IDAOHotel daoHotel = (DAOHotel)FabricaDAO.instanciarDaoHotel();
                 String test = daoHotel.eliminarHotel(_hotel._id);
+                Cache.eliminarHotelMap(_hotel._id);
                 return "Se elimino exitosamente el hotel";
             }
             catch (ReservaExceptionM09 ex)
