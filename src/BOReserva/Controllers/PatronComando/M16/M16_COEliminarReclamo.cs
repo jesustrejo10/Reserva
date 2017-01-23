@@ -1,6 +1,8 @@
 ﻿using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
+using BOReserva.Excepciones;
+using BOReserva.Excepciones.M16;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,9 +38,17 @@ namespace BOReserva.Controllers.PatronComando.M16
         /// Retorna un Identity map, de tipo int, Entidad
         /// </returns>
         public override String ejecutar(){
-            IDAOReclamo daoReclamo =  FabricaDAO.instanciarDaoReclamoPersonalizado();
-            int respuesta = daoReclamo.Eliminar(_idReclamo);
-            return respuesta.ToString();
+            try
+            {
+                IDAOReclamo daoReclamo = FabricaDAO.instanciarDaoReclamoPersonalizado();
+                int respuesta = daoReclamo.Eliminar(_idReclamo);
+                return respuesta.ToString();
+            }
+            catch (ReservaExceptionM16 ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw ex;
+            }
         }
     }
 }
