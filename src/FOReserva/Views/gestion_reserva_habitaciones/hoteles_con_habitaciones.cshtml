@@ -7,11 +7,11 @@
     <link href="@Url.Content("~/Content/assets/css/layout-datatables.css")" rel="stylesheet" type="text/css" />
     <div>
         <div class="col-xs-12">
-            <button id="regresarBuscador" type="button" class="btn btn-default pull-right">Regresar</button>        
+            <button id="regresarBuscador" type="button" class="btn btn-default pull-right">Regresar</button>
         </div>
     </div>
 
-   
+
     <!-- HTML DATATABLES -->
         <table class="table table-striped table-bordered table-hover" id="sample_1">
             <thead>
@@ -23,7 +23,7 @@
             </thead>
             <tbody>
                 @try
-                { 
+                {
                 foreach (var item in Model)
                 {
                     FOReserva.Models.Hoteles.CHotel hotel = (FOReserva.Models.Hoteles.CHotel)item.Value;
@@ -48,11 +48,11 @@
                     catch{
                         <script>alert("Error en el Listado")</script>
                 }
-             
+
             </tbody>
-                     
+
         </table>
-                   
+
         <!-- JS DATATABLES -->
         <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/jquery.dataTables.min.js")"></script>
         <script type="text/javascript" src="@Url.Content("~/Content/assets/plugins/datatables/js/dataTables.tableTools.min.js")"></script>
@@ -136,7 +136,7 @@
                     // set the initial value
                     "pageLength": 10,
 
-                    "dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r><'table-scrollable't><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>", // horizobtal scrollable datatable
+                    "dom": "<'row'<'col-md-6 col-sm-12'l>r><'table-scrollable't><'row'<'col-md-5 col-sm-12'i>>", // horizobtal scrollable datatable
 
                     "tableTools": {
                         "sSwfPath": '@Url.Content("~/Content/assets/plugins/datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf")',
@@ -184,4 +184,4 @@ else
         <p>No se pudo cargar el contenido.</p>
     </div>
 }
-}
+
