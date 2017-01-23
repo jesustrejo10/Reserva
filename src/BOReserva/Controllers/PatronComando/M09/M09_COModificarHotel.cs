@@ -16,7 +16,6 @@ namespace BOReserva.Controllers.PatronComando.M09
     public class M09_COModificarHotel : Command<String>
     {
         Hotel _hotel;
-        int _idmodificar;
         /// <summary>
         /// Constructor de la clase
         /// </summary>
@@ -38,7 +37,7 @@ namespace BOReserva.Controllers.PatronComando.M09
                 Hotel hotel = (Hotel)test;
                 //Actualice un Hotel en BD. necesito refrescarlo en Cache
                 Cache.actualizarMapHoteles(hotel);
-                return "1";
+                return "Se modifico el hotel exitosamente, sera redirigido al listado de hoteles";
             }
             catch (ReservaExceptionM09 ex)
             {

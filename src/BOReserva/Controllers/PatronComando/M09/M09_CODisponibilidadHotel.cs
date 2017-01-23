@@ -39,7 +39,8 @@ namespace BOReserva.Controllers.PatronComando.M09
                 IDAOHotel daoHotel = (DAOHotel)FabricaDAO.instanciarDaoHotel();
                 Entidad ent = daoHotel.disponibilidadHotel(_hotel, _disponibilidad);
                 Cache.actualizarMapHotelesDisponibilidad(ent._id, _disponibilidad);
-                return "1";
+                return "Se cambio exitosamente la disponibilidad del hotel";
+
             }
             catch (ReservaExceptionM09 ex)
             {

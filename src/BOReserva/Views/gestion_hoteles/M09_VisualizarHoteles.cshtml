@@ -202,8 +202,8 @@
                     url: "/gestion_hoteles/deleteHotel",
                     data: { id: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
                 }).done(function (data) {
-                    if (data === "1") {
-
+                    if (data === "Se elimino exitosamente el hotel") {
+                        var resp = data;
                         //$("#sdssss").append(data);
                         var url1 = '/gestion_hoteles/M09_VisualizarHoteles';
                         var method = 'GET';
@@ -218,7 +218,7 @@
 
                                     $("#contenido").empty();
                                     $("#contenido").append(data);
-                                    alert("Se elimino exitosamente el hotel");
+                                    alert(resp);
                                 },
                                 error: function (jqXHR, textStatus, errorThrown) {
                                     alert(errorThrown);
@@ -250,8 +250,8 @@
 
 
             }).done(function (data) {
-                if (data === "1") {
-
+                if (data === "Se cambio exitosamente la disponibilidad del hotel") {
+                    var resp = data;
                     //$("#sdssss").append(data);
                     var url1 = '/gestion_hoteles/M09_VisualizarHoteles';
                     var method = 'GET';
@@ -266,7 +266,7 @@
 
                                 $("#contenido").empty();
                                 $("#contenido").append(data);
-                                alert("Se cambio exitosamente la disponibilidad del hotel");
+                                alert(resp);
                             },
                             error: function (jqXHR, textStatus, errorThrown) {
                                 alert(errorThrown);
@@ -292,8 +292,8 @@
                 url: "/gestion_hoteles/deactivateHotel",
                 data: { id: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
             }).done(function (data) {
-                if (data === "1") {
-
+                if (data === "Se cambio exitosamente la disponibilidad del hotel") {
+                    var resp = data;
                     //$("#sdssss").append(data);
                     var url1 = '/gestion_hoteles/M09_VisualizarHoteles';
                     var method = 'GET';
@@ -308,7 +308,7 @@
 
                                 $("#contenido").empty();
                                 $("#contenido").append(data);
-                                alert("Se cambio exitosamente la disponibilidad del hotel");
+                                alert(resp);
                             },
                             error: function (jqXHR, textStatus, errorThrown) {
                                 alert(errorThrown);
