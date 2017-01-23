@@ -27,6 +27,10 @@ namespace BOReserva.DataAccess.DataAccessObject
                 SqlCommand cmd = new SqlCommand(sql, conexion);
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
+                    sql = "INSERT INTO Boleto_Vuelo (bol_fk_vuelo, bol_fk_boleto ) VALUES(" + boleto._idVuelo + "," + "(SELECT MAX(bol_id) AS id FROM Boleto ) )";
+                    cmd = new SqlCommand(sql, conexion);
+                    cmd.ExecuteNonQuery();
+                    cmd.Dispose();
                 conexion.Close();
                 return 1;
             }

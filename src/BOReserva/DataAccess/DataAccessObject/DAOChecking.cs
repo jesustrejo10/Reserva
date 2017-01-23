@@ -10,6 +10,28 @@ namespace BOReserva.DataAccess.DataAccessObject
 {
     public class DAOChecking : DAO, IDAOCheckIn
     {
+        int IDAO.Agregar(Entidad e) {
+            BoardingPass pase = (BoardingPass)e;
+            try
+            {
+                SqlConnection con = new SqlConnection(_connexionString);
+                con.Open();
+                String sql = "INSERT INTO Pase_Abordaje (pas_fk_boleto,pas_fk_asiento, pas_fk_lugar_origen, pas_fk_lugar_destino,pas_fk_vuelo) " +
+                    " VALUES (" + pase._boleto + ",'" + pase._asiento + "'," + pase._origen + "," + pase._destino + "," + pase._vuelo + ")";
+
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                con.Close();
+                return 1;
+            }
+            catch (SqlException ex)
+            {
+                String hola = ex.ToString();
+                return 0;
+            }
+        }
+
         public List<Entidad> ListarPasesPasajero(int pasaporte)
         {
             List<Entidad> listaboletos = new List<Entidad>();
@@ -76,9 +98,84 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
         }
 
+        int IDAOCheckIn.MConteoMaletas(int pase) { 
+           int _conteo = -1;
+           try
+           {
+               SqlConnection con = new SqlConnection(_connexionString);
+               con.Open();
+               String sql = "SELECT COUNT(*) AS num " +
+                            " FROM Equipaje  " +
+                            " WHERE equ_fk_pase_abordaje = " + pase + "";
+               SqlCommand cmd = new SqlCommand(sql, con);
+               using (SqlDataReader reader = cmd.ExecuteReader())
+               {
+                   while (reader.Read())
+                   {
+                       _conteo = reader.GetInt32(reader.GetOrdinal("num")); ;
+                   }
+               }
+               cmd.Dispose();
+               con.Close();
+               return _conteo;
+           }
+           catch (SqlException ex)
+           {
+               return _conteo;
+           }
+       }
 
+        int IDAOCheckIn.CrearEquipaje(int id, int peso) {
+            try
+            {
+                SqlConnection con = new SqlConnection(_connexionString);
+                con.Open();
+                String sql = "INSERT INTO Equipaje (equ_peso,equ_fk_pase_abordaje) " +
+                    " VALUES (" + peso + "," + id + ")";
 
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                con.Close();
+                return 1;
+            }
+            catch (SqlException ex)
+            {
+                String hola = ex.ToString();
+                return 0;
+            }
 
+        }
+
+        int IDAOCheckIn.MConteoBoarding(int num_bol, int num_vue)
+        {
+            int _conteo = 0;
+            try
+            {
+                SqlConnection con = new SqlConnection(_connexionString);
+                con.Open();
+                String sql = "SELECT COUNT(*) AS num " +
+                             "FROM Pase_Abordaje B " +
+                             "WHERE B.pas_fk_vuelo = " + num_vue +
+                             " AND B.pas_fk_boleto =" + num_bol + "";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        _conteo = reader.GetInt32(reader.GetOrdinal("num")); ;
+                    }
+                }
+                cmd.Dispose();
+                con.Close();
+                return _conteo;
+            }
+            catch (SqlException ex)
+            {
+                return _conteo;
+            }
+        }
+        
 
         public BoletoVuelo MBuscarDatosVuelo(int id)
         {

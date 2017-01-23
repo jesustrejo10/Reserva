@@ -1,4 +1,5 @@
 
+using BOReserva.Controllers.PatronComando;
 using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.M01;
 using BOReserva.DataAccess.Domain;
@@ -55,11 +56,13 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
         /// <returns>Retorna true or false segun verificacion de credenciales</returns>
         public Cgestion_seguridad_ingreso verificarUsuario(String _correoCampoTexto, String _claveCampoTexto)
         {
-            DAOLogin bd = (DAOLogin)FabricaDAO.instanciarDaoLogin();
+            //DAOLogin bd = (DAOLogin)FabricaDAO.instanciarDaoLogin();
             String clave = Encriptar.CrearHash(_claveCampoTexto);//metodo implementado por MOD 12 USUARIO
 
             var usuarioAConsultar = FabricaEntidad.crearUsuario(_correoCampoTexto);
-            var verificacion = (Usuario)bd.Consultar(usuarioAConsultar); //Asigna _idHotel de retorno luego de consulta a BD
+
+            Command<Entidad> comando = FabricaComando.M01ConsultarUsuario(usuarioAConsultar);
+            var verificacion = (Usuario)comando.ejecutar(); //Asigna valor de retorno luego de consulta a BD
 
             Boolean Usuario = verificacion.correo.Equals(_correoCampoTexto.ToLower());
             Boolean Contraseña = verificacion.contrasena.Equals(clave);
@@ -82,7 +85,9 @@ namespace BOReserva.Models.gestion_seguridad_ingreso
             else
             {
                 if (verificacion != null && !verificacion.correo.Equals(""))
-                    bd.IncrementarIntentos(_correoCampoTexto);
+                {
+                    FabricaComando.M01IncrementarIntentos(usuarioAConsultar).ejecutar();
+                }
 
 
                 throw new Cvalidar_usuario_Exception("Usuario o contraseña incorrecto");

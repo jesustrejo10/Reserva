@@ -127,19 +127,13 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
         public Boolean IncrementarIntentos(Entidad _usuario)
         {
             Usuario usuario = (Usuario)_usuario; //Cast explicito
-            int filasAfectadas;
             List<Model.Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
             try
             {
                 listaParametro.Add(FabricaDAO.asignarParametro(RecursoLogin.correo, SqlDbType.VarChar, usuario.correo.ToString(), false));
 
-                filasAfectadas = EjecutarStoredProcedureTuplasFilasAfectadas(RecursoLogin.IncrementarIntentos, listaParametro);
-
-                if (filasAfectadas < 1)
-                {
-                    InsertarLogin(usuario.correo);
-                    EjecutarStoredProcedureTuplasFilasAfectadas(RecursoLogin.IncrementarIntentos, listaParametro);
-                }
+                InsertarLogin(usuario.correo); //Chequeo incondicional para intentar insertar login
+                EjecutarStoredProcedureTuplas(RecursoLogin.IncrementarIntentos, listaParametro); //Para luego ejecutar el procedimiento
                 return true;
             }
             catch (SqlException e)
@@ -184,55 +178,95 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
                 throw e;
             }
         }
-        #endregion
 
-        #region Métodos por convertir
-
-        public Cgestion_seguridad_ingreso UsuarioEnBD(String usuario)
+        /// <summary>
+        /// Método para inserción en tabla Login para usuarios que no lo tengan
+        /// </summary>
+        /// <param name="_usuario">Representa un objeto Usuario</param>
+        /// <returns>True cuando hubo éxito en la inserción, False en errores de BD y excepción en cualquier otro caso.</returns>
+        public Boolean InsertarLogin(Entidad _usuario)
         {
-            //Usar M01_ConsultarUsuario para reemplazar consulta directa
-            String usuarioBD = "", nombreBD = "", apellidoBD = "", claveBD = "", statusBD = "";
-            int idUsuario = 0, rolUsuario = 0;
+            Usuario usuario = (Usuario)_usuario; //Cast explicito
+            List<Model.Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
             try
-            {
-                Conectar();
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                //SqlCommand cmd = new SqlCommand("Select usu_correo, usu_nombre, usu_apellido ,usu_contraseña, usu_activo from Usuario where usu_correo like @usu_correo AND usu_fk_rol IS NOT NULL", conexion);
-                //cmd.CommandType = CommandType.StoredProcedure;
-                SqlCommand cmd = new SqlCommand("Select usu_correo, usu_nombre, usu_apellido ,usu_contraseña, usu_activo, usu_id, usu_fk_rol from Usuario where usu_correo like @usu_correo AND usu_fk_rol NOT BETWEEN 2 AND 3", conexion);
-                cmd.Parameters.AddWithValue("@usu_correo", usuario);
-                SqlDataReader lector = cmd.ExecuteReader();
-                while (lector.Read())
                 {
-                    usuarioBD = lector.GetString(0);
-                    nombreBD = lector.GetString(1);
-                    apellidoBD = lector.GetString(2);
-                    claveBD = lector.GetString(3);
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoLogin.correo, SqlDbType.VarChar, usuario.correo.ToString(), false));
 
-                    System.Diagnostics.Debug.WriteLine("Correo " + usuarioBD + " contrasena " + claveBD);
-
-                    statusBD = lector.GetString(4);
-                    idUsuario = lector.GetInt32(5);
-                    rolUsuario = lector.GetInt32(6);
-
-                }
-                lector.Close();
-                conexion.Close();
-                return new Cgestion_seguridad_ingreso(usuarioBD, claveBD, nombreBD, apellidoBD, statusBD, idUsuario, rolUsuario);
+                EjecutarStoredProcedureTuplas(RecursoLogin.InsertarLogin, listaParametro); //Para luego ejecutar el procedimiento
+                return true;
             }
             catch (SqlException e)
             {
-                throw e;
-                //  return null;
+                System.Diagnostics.Debug.WriteLine("Error al insertar login");
+                System.Diagnostics.Debug.WriteLine(e.ToString());
+                return false;
             }
             catch (Exception e)
             {
-                return null;
+                throw e;
             }
         }
+
+        /// <summary>
+        /// Método para la eliminación de entradas en tabla Login
+        /// </summary>
+        /// <param name="_usuario">Representa un objeto Usuario</param>
+        /// <returns>True cuando hubo éxito en la inserción, False en errores de BD y excepción en cualquier otro caso.</returns>
+        public Boolean EliminarLogin(Entidad _usuario)
+        {
+            Usuario usuario = (Usuario)_usuario; //Cast explicito
+            List<Model.Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
+            try
+            {
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoLogin.correo, SqlDbType.VarChar, usuario.correo.ToString(), false));
+
+                EjecutarStoredProcedureTuplas(RecursoLogin.EliminarLogin, listaParametro); //Para luego ejecutar el procedimiento
+                return true;
+            }
+            catch (SqlException e)
+            {
+                System.Diagnostics.Debug.WriteLine("Error al eliminar login");
+                System.Diagnostics.Debug.WriteLine(e.ToString());
+                return false;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+                }
+
+        /// <summary>
+        /// Método para la consulta de número de intentos de un Login al sistema
+        /// </summary>
+        /// <param name="_usuario">Representa un objeto Usuario</param>
+        /// <returns>Un entero con el número de intentos, 0 en caso de no haber entrada y lanza excepciones de cualquier otro tipo</returns>
+        public int NumeroIntentos(Entidad _usuario)
+        {
+            Usuario usuario = (Usuario)_usuario; //Cast explicito
+            List<Model.Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
+            try
+            {
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoLogin.correo, SqlDbType.VarChar, usuario.correo.ToString(), false));
+
+                var respuesta = EjecutarStoredProcedure(RecursoLogin.EliminarLogin, listaParametro); //Para luego ejecutar el procedimiento
+                if (respuesta[0].valor != null)
+                    return Convert.ToInt32(respuesta[0].valor);
+                else return 0;
+            }
+            catch (SqlException e)
+            {
+                System.Diagnostics.Debug.WriteLine("Error al consultar número de intentos");
+                System.Diagnostics.Debug.WriteLine(e.ToString());
+                throw e;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        #endregion
+
+        #region Métodos por reemplazar
 
         public Boolean BloquearUsuario(String usuario)
         {
@@ -260,60 +294,6 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
             }
         }
 
-        public Boolean InsertarLogin(String usuario)
-        {
-            try
-            {
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                SqlCommand cmd = new SqlCommand("Insert into Login(log_idusuario,log_sesion,log_intentos) values((Select usu_id from Usuario where usu_correo like @usu_correo),0,0);", conexion);
-                //cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@usu_correo", usuario);
-                cmd.ExecuteNonQuery();
-                conexion.Close();
-                return true;
-            }
-            catch (SqlException e)
-            {
-                return false;
-                throw e;
-
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
-
-        }
-
-        public Boolean EliminarLogin(String usuario)
-        {
-            try
-            {
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                SqlCommand cmd = new SqlCommand("DELETE from Login WHERE log_idusuario=1", conexion);
-                //cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@usu_correo", usuario);
-                cmd.ExecuteNonQuery();
-                conexion.Close();
-                return true;
-            }
-            catch (SqlException e)
-            {
-                throw e;
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
-
-        }
-
         public Boolean IncrementarIntentos(String usuario)
         {
             try
@@ -323,12 +303,12 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
                 //INTENTO abrir la conexion
                 conexion.Open();
                 SqlCommand cmd = new SqlCommand("Update Login set log_intentos=log_intentos+1 where log_idusuario=(Select usu_id from Usuario where usu_correo like @usu_correo)", conexion);
-                //cmd.CommandType = CommandType.StoredProcedure;              
+                //cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@usu_correo", usuario);
                 if (cmd.ExecuteNonQuery() < 1)
                 {
                     InsertarLogin(usuario);
-                    cmd.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
                 }
                 conexion.Close();
                 return true;
@@ -354,6 +334,60 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
                 //INTENTO abrir la conexion
                 conexion.Open();
                 SqlCommand cmd = new SqlCommand("Update Login set log_intentos=0 where log_idusuario=(Select usu_id from Usuario where usu_correo like @usu_correo)", conexion);
+                //cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@usu_correo", usuario);
+                cmd.ExecuteNonQuery();
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                return false;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public Boolean InsertarLogin(String usuario)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                SqlCommand cmd = new SqlCommand("Insert into Login(log_idusuario,log_sesion,log_intentos) values((Select usu_id from Usuario where usu_correo like @usu_correo),0,0);", conexion);
+                //cmd.CommandType = CommandType.StoredProcedure;              
+                cmd.Parameters.AddWithValue("@usu_correo", usuario);
+                    cmd.ExecuteNonQuery();
+                conexion.Close();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                System.Diagnostics.Debug.WriteLine("No se pudo insertar login para " + usuario + "(Login ya existente?) ");
+                return false;
+                //throw e;
+
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+        }
+
+        public Boolean EliminarLogin(String usuario)
+        {
+            try
+            {
+                //Inicializo la conexion con el string de conexion
+                conexion = new SqlConnection(stringDeConexion);
+                //INTENTO abrir la conexion
+                conexion.Open();
+                SqlCommand cmd = new SqlCommand("DELETE from Login WHERE log_idusuario=1", conexion);
                 //cmd.CommandType = CommandType.StoredProcedure;              
                 cmd.Parameters.AddWithValue("@usu_correo", usuario);
                 cmd.ExecuteNonQuery();
@@ -363,12 +397,12 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
             catch (SqlException e)
             {
                 throw e;
-
             }
             catch (Exception e)
             {
                 return false;
             }
+
         }
 
         public int NumeroIntentos(String usuario)
@@ -422,46 +456,6 @@ namespace BOReserva.DataAccess.DataAccessObject.M01
             throw new NotImplementedException();
         }
 
-        #endregion
-
-        #region Metodos Auxiliares
-
-        public int EjecutarStoredProcedureTuplasFilasAfectadas(string query, List<Parametro> parametros)
-        {
-            SqlCommand comando;
-            try
-            {
-                Conectar();
-                DataTable dataTable = new DataTable();
-                using (conexion)
-                {
-
-                    comando = new SqlCommand(query, conexion);
-                    comando.CommandType = CommandType.StoredProcedure;
-                    AsignarParametros(parametros);
-                    conexion.Open();
-                    using (SqlDataAdapter dataAdapter = new SqlDataAdapter(comando))
-                    {
-                        return dataAdapter.Fill(dataTable);
-                    }
-                }
-
-
-            }
-            catch (SqlException ex)
-            {
-                throw new ExceptionBD(RecursoBD.Cod_Error_General, RecursoBD.Error_General, ex);
-            }
-            catch (Exception ex)
-            {
-                throw new ExceptionBD(RecursoBD.Cod_Error_General, RecursoBD.Error_General, ex);
-            }
-            finally
-            {
-                Desconectar();
-            }
-
-        }
         #endregion
     }
 }

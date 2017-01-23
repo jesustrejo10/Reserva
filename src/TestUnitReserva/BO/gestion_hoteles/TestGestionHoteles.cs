@@ -141,23 +141,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
             Assert.Throws<ReservaExceptionM09>(() => daoHotel.eliminarHotel(656465));
 
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /* [Test]
-         public void M09_DaoContultaSimple()
-         {
-             int resultadoAgregar = daoHotel.Agregar(mockHotell);
-             Entidad consulta = daoHotel.Consultar(999);
-             Assert.AreEqual(consulta, mockHotell);
-             /*
-             daoHotel.Eliminar(999);
-             Assert.NotNull(daoHotel.Agregar(null));
- <<<<<<< HEAD
-
-         }*/
-
-
+        
 
 
         /// <summary>
@@ -169,8 +153,8 @@ namespace TestUnitReserva.BO.gestion_hoteles
 
 
 
-            String prueba = daoHotel.disponibilidadHotel(mock, 1);
-            Assert.AreEqual(prueba,"1");
+            Entidad prueba = daoHotel.disponibilidadHotel(mock, 1);
+            Assert.AreEqual(prueba, "1");
 
         }
         /// <summary>
@@ -425,7 +409,7 @@ namespace TestUnitReserva.BO.gestion_hoteles
         {
             M09_COConsultarHotel prueba = new M09_COConsultarHotel(10);
             Entidad hotel = prueba.ejecutar();
-            Assert.IsInstanceOf(typeof(Entidad),hotel);
+            Assert.IsInstanceOf(typeof(Entidad), hotel);
 
         }
         /// <summary>
@@ -766,7 +750,6 @@ namespace TestUnitReserva.BO.gestion_hoteles
 
         /* 
 controller
-
         IM09_COObtenerPaises
         M09_COAgregarHabitaciones
         M09_COAgregarHotel
@@ -776,7 +759,6 @@ controller
         M09_COModificarHotel
         M09_COObtenerCiudad
         M09_COObtenerPaises
-
 dataAccess
 	DataAccessObject
 		M09 
@@ -797,7 +779,6 @@ Model
 		CverHotel
 Servicio
 	CManejadorSQL_Hoteles
-
          * */
 
 

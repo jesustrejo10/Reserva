@@ -86,13 +86,13 @@ namespace BOReserva.Controllers
 
         }
 
-        //falta patrones
+      
         public ActionResult M05_VerVuelos(int idorigen, int iddestino, string idavuelta, string tipo, string fechaida, string fechavuelta)
         {
-
-            /*manejadorSQL_Boletos sqlboletos = new manejadorSQL_Boletos();
-            List<CVuelo> listavuelos = new List<CVuelo>();
-            listavuelos = sqlboletos.M05ListarVuelosIdaBD(fechaida, fechavuelta, idorigen, iddestino, tipo);*/
+            manejadorSQL_Boletos sqlboletos = new manejadorSQL_Boletos();
+            
+            //List<CVuelo> listavuelos = new List<CVuelo>();
+            //listavuelos = sqlboletos.M05ListarVuelosIdaBD(fechaida, fechavuelta, idorigen, iddestino, tipo);
             Command<List<Entidad>> comando = FabricaComando.consultarM05listaVuelosBD(fechaida, fechavuelta, idorigen, iddestino, tipo);
             List<Entidad> listavuelos = comando.ejecutar();
 
@@ -219,7 +219,7 @@ namespace BOReserva.Controllers
         public ActionResult M05_BoletoCreadoReserva(int id_reserva)
         {
 
-         
+
             //BUSCA LA RESERVA A MOSTRA
             //Uso Boleto ya que tiene los mismos atributos de reserva_bolet
             Command<Entidad> comando = FabricaComando.consultarM05BoletopasajeroBD(id_reserva);
@@ -276,13 +276,13 @@ namespace BOReserva.Controllers
             //Tomo todos los datos de bol para crear el boleto
             //Creo método para crear el boleto en el servicio y le paso por parámetro los atributos
             //(bol_id,bol_escala,bol_ida_vuelta,bol_costo,fk_origen,fk_destino,fk_pasajero,bol_fecha,tipo_boleto)
-           
+
 
             int id_vuelo = reserva._vuelos[0]._id;
             System.Diagnostics.Debug.WriteLine("EL ID DEL VUELO DE LA RESERVA ES: " + id_vuelo);
             String fecha_bol = DateTime.Today.ToString("yyyy/MM/dd");
-           
-         
+
+
             Boleto nuevoBoleto = (Boleto)FabricaEntidad.InstanciarBoleto(id_origen, id_destino, reserva._pasajero._id, costo, reserva._tipoBoleto, id_vuelo, fecha_bol);
             Command<String> comando2 = FabricaComando.crearM05CrearBoleto(nuevoBoleto);
             string flag = comando2.ejecutar();

@@ -19,8 +19,9 @@
                     <div class="row">
                         <div class="col-md-12" style="margin-top:10px;">
                             <div class="col-xs-12">
+                                <input type="hidden" id="rol_id" name="rol_id" value=@Model.Id_Rol>
                                 <!--se agrega el campo para Nombre del rol a modificar -->
-                                <label for="nombreRol" class="nombre_Rol" id="@Model.Id_Rol">
+                                <label for="nombreRol" class="nombre_Rol" id="">
                                     Nombre del rol
                                     <!--                                (<span style="color:red">*</span>):-->
                                 </label>
@@ -40,7 +41,7 @@
                                 @foreach (var item in Model.Permisos)
                                 {
                                     <a href="#" title="Eliminar Permiso" id="@item.Id" class="@Model.Nombre_rol"><i class=" fa fa-times eliminarpermiso"></i></a>
-                                    <option class="modificar" value="@item.Nombre">@item.Nombre </option> <br>
+                                    <option class="modificar" value="@item.Id">@item.Nombre </option> <br>
                                 }
                             </div>
                         </div>
@@ -69,22 +70,25 @@
 
 }
 <script>
+    consultarNoPermisos();
+    var permisos = [$("#nombre_rol").val()];
+
     //Metodo para eliminar permisos
     $(".eliminarpermiso").click(function () {
-        var r = confirm("Esta función no podrá ser revertida, ¿Está seguro de que desea continuar?")
+        var r = confirm("Esta función no podrá ser revertida, ¿Está seguro de que desea continuar?");
         if (r) {
             var nombreRol = $(".eliminarpermiso").parent().attr("class");
-            console.log(nombreRol);
-            var nombrePermiso = $(this).parent().attr("id");
-            console.log(nombreRol + nombrePermiso);
+            var id_rol = $("#rol_id").val();
+            var idPermiso = $(this).parent().attr("id");
+            console.log(id_rol + idPermiso);
             jQuery.ajax({
                 type: "POST",
-                url: "/gestion_roles/quitarPermisoRol",
-                data: { _nombrerol: nombreRol, _nombrepermiso: nombrePermiso }
+                url: "/gestion_roles/eliminarPermisoRol",
+                data: { idRol: id_rol, idPermiso: idPermiso }
             }).done(function (data) {
-                var url = '/gestion_roles/M13_VisualizarRol';
-                var method = 'GET';
-                var data = '';
+                var url = '/gestion_roles/M13_ModificarRol';
+                var method = 'POST';
+                var data = { _idRol: id_rol };
                 $.ajax(
                     {
                         url: url,
@@ -125,125 +129,97 @@
                 }
             });
     });
+
     //Accion del boton modicar rol
     $("#modificarrol").click(function (e) {
         e.preventDefault();
-        //nombre del rol
-        var form = $(".nombre_Rol").attr("id");
-        //nombre del nuevo rol
-        var nombrerol_nuevo = $("#nombre_rol").val();
-        var permisos = [$("#nombre_rol").val()];
-        console.log(form);
-        jQuery.each($("input[type='checkbox']"), function (i) {
-            if (this.checked && this.value != "on") {
-                permisos.push(this.value);
-            }
-            //agrega cada permiso en particular
-        });
-        $.ajax({
-            url: "gestion_roles/modificarrol",
-            data: { rol: form, nombrerolnuevo: nombrerol_nuevo },
-            type: 'POST',
-            success: function (data) {
-                alert("Se guardo");
-                $('#formagreagarrol')[0].reset();
-            }
-        });
-        var data = {
-            json: JSON.stringify(permisos),
-        };
-        console.log(data);
+
+        var id_rol = $("#rol_id").val();
+        var nuevo_rol = $("#nombre_rol").val();
+        
+        if (nuevo_rol.length < 1) {
+            alert("El nombre es obligatorio");
+            return false;
+        }
+        else {
+            jQuery.each($("input[type='checkbox']"), function (i) {
+                if (this.checked && this.value != "on") {
+                    permisos.push(this.value);
+                }
+                //agrega cada permiso en particular
+            });
+            $.ajax({
+                url: "gestion_roles/modificarrol",
+                data: { id_rol: id_rol, nuevo_rol: nuevo_rol },
+                type: 'POST',
+                success: function (response) {
+                    console.log(response);
+                    asignarPermisos();
+                }
+            });
+        }
+    });
+
+    function asignarPermisos() {
+        console.log("asignandopermisos");
         $.ajax({
             type: 'post',
             dataType: 'json',
             url: 'gestion_roles/asignarpermisos',
-            data: data,
+            data: { json: JSON.stringify(permisos) },
             success: function (data) {
-
-                var url = '/gestion_roles/M13_VisualizarRol';
-                var method = 'GET';
-                var data = '';
-                $.ajax(
-                    {
-                        url: url,
-                        type: method,
-                        data: data,
-                        success: function (data, textStatus, jqXHR) {
-
-                            $("#contenido").empty();
-                            $("#contenido").append(data);
-                        },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            alert(errorThrown);
-                        }
-                    });
+                console.log("primer success");
+                $.ajax({
+                    url: '/gestion_roles/M13_VisualizarRol',
+                    type: 'GET',
+                    success: function (data, textStatus, jqXHR) {
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log("error");
+                        alert(errorThrown);
+                    }
+                });
             },
             failure: function (response) {
                 alert("No se pudo asignar permisos");
-            }
-            //envia al metodo en la url los parametros para ser almacenados en BD
-        });
-    });
-
-    function consultarNoPermisos() {
-        var identificador = $(".nombre_Rol").attr("id");
-        $.ajax({
-            url: "gestion_roles/consultarLosPermisosNoAsignados",
-            data: { nombre_rol: identificador },
-            type: 'POST',
-            success: cargadorPermisos,
-            failure: function (response) {
-                alert("Error buscando permisos");
-
+            },
+            done: function () {
+                console.log("done");
             }
         });
     }
-    consultarNoPermisos();
+  
+    function consultarNoPermisos() {
+        var id_rol = $("#rol_id").val();
+        $.ajax({
+            url: "gestion_roles/consultarLosPermisosNoAsignados",
+            data: { _idRol: id_rol },
+            type: 'POST',
+            success: function (response) {
+                cargadorPermisos(response);
+            },
+            failure: function (response) {
+                alert("Error buscando permisos");
+            }
+        });
+    }
+    
     function cargadorPermisos(response) {
-
         var permisos = response;
         var container = $('#listaNoPermisos');
         container.empty();
-        //se vacia la lista de permisos para colocar los nuevos seleccionados
-        jQuery.each(permisos, function (i) {
-            var inputs = container.find('input');
-            var id = inputs.length + 1;
-            $('<input />', { type: 'checkbox', id: 'permiso' + id, value: permisos[i] }).appendTo(container);
-            $('<label />', { 'for': 'permiso' + id, text: permisos[i] }).appendTo(container);
-            $('<br>').appendTo(container)
-        });
-        //se agrega por cada elemento dentro de la lista un checkbox y un label con el valor del permiso
-    }
 
-    function consultarNoPermisos() {
-        var identificador = $(".nombre_Rol").attr("id");
-        $.ajax({
-            url: "gestion_roles/consultarLosPermisosNoAsignados",
-            data: { nombre_rol: identificador },
-            type: 'POST',
-            success: cargadorPermisos,
-            failure: function (response) {
-                alert("Error buscando permisos");
-
-            }
+        jQuery.each(permisos, function (k, v) {
+                var inputs = container.find('input');
+                var id = inputs.length + 1;
+                $('<input />', { type: 'checkbox', id: 'permiso' + v._idPermiso, value: v._nombre }).appendTo(container);
+                $('<label />', { 'for': 'permiso' + v._idPermiso, text: v._nombre }).appendTo(container);
+                $('<br>').appendTo(container)
         });
     }
-    consultarNoPermisos();
-    function cargadorPermisos(response) {
 
-        var permisos = response;
-        var container = $('#listaNoPermisos');
-        container.empty();
-        //se vacia la lista de permisos para colocar los nuevos seleccionados
-        jQuery.each(permisos, function (i) {
-            var inputs = container.find('input');
-            var id = inputs.length + 1;
-            $('<input />', { type: 'checkbox', id: 'permiso' + id, value: permisos[i] }).appendTo(container);
-            $('<label />', { 'for': 'permiso' + id, text: permisos[i] }).appendTo(container);
-            $('<br>').appendTo(container)
-        });
-        //se agrega por cada elemento dentro de la lista un checkbox y un label con el valor del permiso
-    }
 </script>
 
 <style>

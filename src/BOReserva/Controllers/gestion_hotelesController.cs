@@ -32,7 +32,7 @@ namespace BOReserva.Controllers
         public ActionResult M09_AgregarHotel()
         {
             CAgregarHotel model = new CAgregarHotel();
-            Command<Dictionary<int,Entidad>> comando = FabricaComando.crearM09ObtenerPaises();
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM09ObtenerPaises();
             model._paises = comando.ejecutar();
             return PartialView(model);
         }
@@ -67,7 +67,8 @@ namespace BOReserva.Controllers
                 String respuestaComando = comando.ejecutar();
                 return (Json(respuestaComando));
             }
-            catch (ReservaExceptionM09 ex){
+            catch (ReservaExceptionM09 ex)
+            {
                 return (Json(ex.Mensaje));
             }
         }
@@ -263,7 +264,7 @@ namespace BOReserva.Controllers
                     Value = Convert.ToString(country._id)
                 });
             }
-            
+
             return __pais;
         }
 
@@ -296,5 +297,6 @@ namespace BOReserva.Controllers
             ciudad = objcity.First();
             return Json(objcity);
         }
+
     }
 }

@@ -97,7 +97,7 @@ namespace BOReserva.Controllers
             Boleto boleto = (Boleto) co.ejecutar();
             BoletoDetalle bolView = (BoletoDetalle) FabricaEntidad.InstanciarDetalleBoleto(boleto);
 
-            return PartialView(bolView);
+            return PartialView(boleto);
 
         }
 
@@ -111,7 +111,8 @@ namespace BOReserva.Controllers
         [HttpPost]
         public ActionResult generarBoardingPass(CDetalleBoleto model)
         {
-
+            BoletoVuelo lista1 = null;
+            BoletoVuelo lista2 = null;
             String tipo = model._tipoBoardingPass;
             int compara1 = String.Compare(tipo,"Seleccione");
             if (compara1 != 0)
@@ -122,27 +123,35 @@ namespace BOReserva.Controllers
 
                 // OBTENGO EL /LOS VUELOS DEL BOLETO
                 Command<List<Entidad>> comando = FabricaComando.consultarM05listaVuelos(model._bol_id);
-                List<Entidad> lista2 = comando.ejecutar();
-                List<CVuelo> lista = modificar.M05ListarVuelosBoleto(model._bol_id);
+                List<Entidad> lista = comando.ejecutar();
+                //List<BoletoVuelo> lista = modificar.M05ListarVuelosBoleto(model._bol_id);
+                lista1 = (BoletoVuelo)lista[0];
+                if (lista.Count == 2) {
+                    lista2 = (BoletoVuelo)lista[1]; 
+                }
 
                 // PRIMERO VEO SI ES IDA O IDA Y VUELTA
-                int ida_vuelta = modificar.MBuscarIdaVuelta(model._bol_id);
+                //int ida_vuelta = modificar.MBuscarIdaVuelta(model._bol_id);
+                Command<int> comando2 = FabricaComando.mostrarM05idaVuelta(model._bol_id);
+                int ida_vuelta = comando2.ejecutar();
                 // EL BOLETO ES IDA 1
                 // EL BOLETO ES IDA Y VUELTA 2
 
                 // DATOS PARA INSERTAR EN PASE DE ABORDAJE
-                CBoardingPass pase = new CBoardingPass();
+                CBoardingPass pase2 = new CBoardingPass();
+                BoardingPass pase;
 
                 if (ida_vuelta == 1)
                 {
-                    pase._vuelo = lista[0]._id;
-                    pase._fechaPartida = lista[0]._fechaPartida;
-                    pase._fechaLlegada = lista[0]._fechaLlegada;
-                    pase._horaPartida = lista[0]._fechaPartida.TimeOfDay.ToString();
-                    pase._origen = lista[0]._ruta._origen;
-                    pase._destino = lista[0]._ruta._destino;
-                    pase._nombreOri = lista[0]._ruta._nomOrigen;
-                    pase._nombreDest = lista[0]._ruta._nomDestino;
+                    pase = (BoardingPass)FabricaEntidad.InstanciarBoardingPass(lista1._id, lista1._fechaPartida, lista1._fechaLlegada, lista1._fechaPartida.TimeOfDay.ToString(), lista1._ruta._origen, lista1._ruta._destino, lista1._ruta._nomOrigen, lista1._ruta._nomDestino, model._bol_id, "A12", model._primer_nombre, model._primer_apellido);
+                    /*pase._vuelo = lista1._id;
+                    pase._fechaPartida = lista1._fechaPartida;
+                    pase._fechaLlegada = lista1._fechaLlegada;
+                    pase._horaPartida = lista1._fechaPartida.TimeOfDay.ToString();
+                    pase._origen = lista1._ruta._origen;
+                    pase._destino = lista1._ruta._destino;
+                    pase._nombreOri = lista1._ruta._nomOrigen;
+                    pase._nombreDest = lista1._ruta._nomDestino;*/
 
                 }
                 else
@@ -150,40 +159,27 @@ namespace BOReserva.Controllers
                     int compara = String.Compare(tipo, "Ida");
                     if (compara == 0)
                     {
-                        pase._vuelo = lista[0]._id;
-                        pase._fechaPartida = lista[0]._fechaPartida;
-                        pase._fechaLlegada = lista[0]._fechaLlegada;
-                        pase._horaPartida = lista[0]._fechaPartida.TimeOfDay.ToString();
-                        pase._origen = lista[0]._ruta._origen;
-                        pase._destino = lista[0]._ruta._destino;
-                        pase._nombreOri = lista[0]._ruta._nomOrigen;
-                        pase._nombreDest = lista[0]._ruta._nomDestino;
+                        pase = (BoardingPass)FabricaEntidad.InstanciarBoardingPass(lista1._id, lista1._fechaPartida, lista1._fechaLlegada, lista1._fechaPartida.TimeOfDay.ToString(), lista1._ruta._origen, lista1._ruta._destino, lista1._ruta._nomOrigen, lista1._ruta._nomDestino, model._bol_id, "A12", model._primer_nombre, model._primer_apellido);
 
                     }
                     else
                     {
-                        pase._vuelo = lista[1]._id;
-                        pase._fechaPartida = lista[1]._fechaPartida;
-                        pase._fechaLlegada = lista[1]._fechaLlegada;
-                        pase._horaPartida = lista[1]._fechaPartida.TimeOfDay.ToString();
-                        pase._origen = lista[1]._ruta._origen;
-                        pase._destino = lista[1]._ruta._destino;
-                        pase._nombreOri = lista[1]._ruta._nomOrigen;
-                        pase._nombreDest = lista[1]._ruta._nomDestino;
+                        pase = (BoardingPass)FabricaEntidad.InstanciarBoardingPass(lista2._id, lista2._fechaPartida, lista2._fechaLlegada, lista2._fechaPartida.TimeOfDay.ToString(), lista2._ruta._origen, lista2._ruta._destino, lista2._ruta._nomOrigen, lista2._ruta._nomDestino, model._bol_id, "A12", model._primer_nombre, model._primer_apellido);
                     }
                 }
 
-                pase._boleto = model._bol_id;
-                pase._asiento = "A12";
-                pase._nombre = model._primer_nombre;
-                pase._apellido = model._primer_apellido;
+               
 
-                int resultado1 = modificar.MConteoBoarding(pase._boleto, pase._vuelo);
+                //int resultado1 = modificar.MConteoBoarding(pase._boleto, pase._vuelo);
+                Command<int> comando3 = FabricaComando.conteoM05Boarding(pase._boleto, pase._vuelo);
+                int resultado1 = comando3.ejecutar();
 
                 if (resultado1 == 0)
                 {
                     // HACER EL INSERT DE PASE DE ABORDAJE
-                    int resultado = modificar.CrearBoardingPass(pase);
+                    Command<int> comando4 = FabricaComando.crearM05CrearBoarding(pase);
+                    int resultado = comando4.ejecutar();
+                    //int resultado = modificar.CrearBoardingPass(pase2);
                 }
 
                 // TENGO QUE BUSCAR EL ID DEL PASE DE ABORDAJE CREADO
@@ -201,7 +197,7 @@ namespace BOReserva.Controllers
                 return Json(error);
             }
         }
-        //faltapatrones
+
         [HttpPost]
         public ActionResult insertarEquipaje(CEquipaje model)
         {
@@ -219,9 +215,12 @@ namespace BOReserva.Controllers
                 return Json(error);
             }
 
-            manejadorSQL_Check sql = new manejadorSQL_Check();
+            Command<int> comando = FabricaComando.conteoM05maletas(pase);
+
+           
             // VEO SI YA TIENE LA MAXIMA CANTIDAD DE MALETAS INSERTADAS
-            int num_maletas = sql.MConteoMaletas(pase);
+           
+            int num_maletas = comando.ejecutar();
             if (num_maletas !=2 )
             {
 
@@ -230,12 +229,16 @@ namespace BOReserva.Controllers
 
                 if (peso1 != 0)
                 {
-                    resultado1 = sql.CrearEquipaje(pase, peso1);
+                    
+                     Command<int> comando2 = FabricaComando.crearM05maletas(pase, peso1);
+                     resultado1 = comando2.ejecutar();
                 }
 
                 if (peso2 > 0)
                 {
-                    resultado2 = sql.CrearEquipaje(pase, peso2);
+                   
+                    Command<int> comando3 = FabricaComando.crearM05maletas(pase, peso2);
+                    resultado2 = comando3.ejecutar();
                 }
 
                 if (((peso1 != 0) && (resultado1 == 0)) || ((peso2 > 0) && (resultado2 == 0)))

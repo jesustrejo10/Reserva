@@ -9,11 +9,26 @@ using System.Data;
 using System.Data.SqlClient;
 using BOReserva.Excepciones.M08;
 using BOReserva.Excepciones;
+using System.Web.Mvc;
 
 namespace BOReserva.DataAccess.DataAccessObject
 {
     public class DAOAutomovil : DAO, IDAOAutomovil
     {
+
+        #region Patron Singleton DAOAutomovil.
+        private static DAOAutomovil instance = null;
+
+        public static DAOAutomovil Singleton()
+        {
+            if (DAOAutomovil.instance == null)
+                DAOAutomovil.instance = (DAOAutomovil)FabricaDAO.CrearDaoAutomovil();
+            return DAOAutomovil.instance;
+        }
+        #endregion
+
+        #region Generales de Automovil
+
         public bool ActivarDesactivar(Entidad e)
         {
             Automovil automovil = (Automovil)e;
@@ -56,6 +71,11 @@ namespace BOReserva.DataAccess.DataAccessObject
 
         public bool Agregar(Entidad e)
         {
+            //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
+            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+            RecursoDAOM08.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+            //Se castea de tipo Entidad a tipo Automovil
             Automovil automovil = (Automovil)e;
             List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
             try
@@ -111,9 +131,6 @@ namespace BOReserva.DataAccess.DataAccessObject
         public Entidad Consultar(Entidad e)
         {
             //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
-            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
-            RecursoDAOM08.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
-
             Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
             RecursoDAOM08.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
 
@@ -392,5 +409,139 @@ namespace BOReserva.DataAccess.DataAccessObject
                 throw new ReservaExceptionM08("Reserva-404", "Error al realizar operacion ", ex);
             }
         }
+
+        public bool existeMatricula(Entidad e)
+        {
+            //Metodo para escribir en el archivo log.xml que se ha ingresado en el metodo
+            Log.EscribirInfo(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name,
+            RecursoDAOM08.MensajeInicioMetodoLogger, System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+            //Se castea de tipo Entidad a tipo Automovil
+            Automovil automovil = (Automovil)e;
+            List<Parametro> listaParametro = FabricaDAO.asignarListaDeParametro();
+
+            //Atributos tabla Automovil 
+            String matricula;
+            String matriculaAux;
+
+            try
+            {
+                //Aqui se asignan los valores que recibe el procedimieto para realizar el select, se repite tantas veces como atributos
+                //se requiera en el where, para este caso solo el ID del Automovil @rst_id (parametro que recibe el store procedure)
+                //se coloca true en Input 
+                listaParametro.Add(FabricaDAO.asignarParametro(RecursoDAOM08.matricula, SqlDbType.VarChar, automovil.matricula, false));
+
+                matriculaAux = automovil.matricula;
+
+                //Se devuelve la fila del Automovil consultado segun el Id, para este caso solo se devuelve una fila
+                DataTable filaAutomovil = EjecutarStoredProcedureTuplas(RecursoDAOM08.procedimientoExisteMatriculaAutomovil, listaParametro);
+
+                //Se guarda la fila devuelta de la base de datos
+                DataRow Fila = filaAutomovil.Rows[0];
+
+                //Se preinicializan los atrubutos de la clase Automovil
+                matricula = Fila[RecursoDAOM08.matricula].ToString();
+
+                if (matriculaAux.Equals(matricula))
+                {
+                    return true;
+                } else{
+                    return false;
+                }
+            }
+            catch (ArgumentNullException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM08("Reserva-404", "Argumento con valor invalido", ex);
+            }
+            catch (FormatException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM08("Reserva-404", "Datos con un formato invalido", ex);
+            }
+            catch (SqlException ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM08("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (ExceptionBD ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM08("Reserva-404", "Error Conexion Base de Datos", ex);
+            }
+            catch (Exception ex)
+            {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);
+                throw new ReservaExceptionM08("Reserva-404", "Error al realizar operacion ", ex);
+            }
+        }
+
+        #endregion
+
+        #region Utilidades
+
+        public List<SelectListItem> listarAnios()
+        {
+            List<SelectListItem> ls = new List<SelectListItem>();
+            ls.Add(new SelectListItem() { Text = "", Value = "" });
+            for (int i = 1930; i <= 2016; i++)
+            {
+                ls.Add(new SelectListItem() { Text = i.ToString(), Value = i.ToString() });
+            }
+
+            return ls;
+        }
+
+        public List<SelectListItem> listarCantidad(int cant)
+        {
+            List<SelectListItem> ls = new List<SelectListItem>();
+            ls.Add(new SelectListItem() { Text = "", Value = "" });
+
+            for (int i = 1; i <= cant; i++)
+            {
+                ls.Add(new SelectListItem() { Text = i.ToString(), Value = i.ToString() });
+            }
+
+            return ls;
+        }
+
+        public List<SelectListItem> listarColores()
+        {
+            List<SelectListItem> _color = new List<SelectListItem>();
+            _color.Add(new SelectListItem
+            {
+                Text = "Azul",
+                Value = "Azul"
+            });
+            _color.Add(new SelectListItem
+            {
+                Text = "Negro",
+                Value = "Negro"
+            });
+            _color.Add(new SelectListItem
+            {
+                Text = "Blanco",
+                Value = "Blanco"
+            });
+            _color.Add(new SelectListItem
+            {
+                Text = "Rojo",
+                Value = "Rojo"
+            });
+            _color.Add(new SelectListItem
+            {
+                Text = "Gris",
+                Value = "Gris"
+            });
+            _color.Add(new SelectListItem
+            {
+                Text = "Verde",
+                Value = "Verde"
+            });
+            return _color;
+        }
+
+        #endregion
+
     }
 }

@@ -1,13 +1,14 @@
 ﻿@model BOReserva.Models.gestion_ofertas.CPaquete
-           
+
+ <link href="~/Content/Canvas/Box.css" rel="stylesheet" />          
 
 <style type="text/css">
 
 </style>
 <!---------------------- SECCION DE AGREGAR PAQUETE ---------------->
 <div class="row">
-    <div class="col-md-12">
-        <div class="box box-default">
+    <div class="col-md-10">
+        <div class="Cajita">
             <div class="box-header with-border">
                 <h1 class="box-title"> Detalle Paquete</h1>
                 @Html.TextBoxFor(m => m._idOferta, null, new { @style = "display:none;", @id = "idOferta"})

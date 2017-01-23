@@ -33,10 +33,11 @@ namespace BOReserva.Controllers.PatronComando
         /// Metodo implementado proveniente de la clase abstracta Command
         /// </summary>
         /// <returns>Retorna un String</returns>
-        public override String ejecutar(){
+        public override String ejecutar()
+        {
             try
             {
-                IDAO daoHotel = FabricaDAO.instanciarDaoHotel();
+                IDAO daoHotel = FabricaDAO.instanciarDaoHotel();       
                 int resultadoAgregarHotel = daoHotel.Agregar(_hotel);
                 if (resultadoAgregarHotel == 1)
                 {

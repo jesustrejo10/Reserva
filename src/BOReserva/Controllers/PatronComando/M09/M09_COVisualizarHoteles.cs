@@ -34,7 +34,6 @@ namespace BOReserva.Controllers.PatronComando
                     Cache.mapHoteles = daoHotel.ConsultarTodos();
                 }
                 return Cache.mapHoteles;
-
             }catch (ReservaExceptionM09 ex){
                 throw ex;
             }

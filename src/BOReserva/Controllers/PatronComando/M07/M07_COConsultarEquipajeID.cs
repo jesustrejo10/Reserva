@@ -1,4 +1,4 @@
-﻿using BOReserva.DataAccess.DataAccessObject;
+using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using System;
@@ -11,10 +11,10 @@ namespace BOReserva.Controllers.PatronComando.M07
     public class M07_COConsultarEquipajeID  //: Command<Entidad>
     {
         /*
-        int _idHotel;
+        int valor;
         public M07_COConsultarEquipajeID(int id)
         {
-            this._idHotel = id;
+            this.valor = id;
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace BOReserva.Controllers.PatronComando.M07
         public override Entidad ejecutar()
         {
             IDAO daoEquipaje = FabricaDAO.instanciarDaoEquipaje();
-            Entidad equipaje = daoEquipaje.Consultar(_idHotel);
+            Entidad equipaje = daoEquipaje.Consultar(valor);
             return equipaje;
         }
          * */

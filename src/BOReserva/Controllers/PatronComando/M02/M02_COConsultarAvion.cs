@@ -16,6 +16,10 @@ namespace BOReserva.Controllers.PatronComando.M02
     {
         int valor;
 
+        /// <summary>
+        /// Constructor del Comando Consultar
+        /// </summary>
+        /// <param name="value"></param>
         public M02_COConsultarAvion(int value){
             this.valor = value;
         }

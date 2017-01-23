@@ -49,9 +49,10 @@ namespace BOReserva.Controllers.PatronComando.M09
                 Cache.eliminarHotelMap(_hotel._id);
                 return ResourceM09Command.EliminoCorrectamente;
             }
+
             catch (ReservaExceptionM09 ex)
             {
-                throw ex;
+                return ex.Codigo;
             }
         }
 
