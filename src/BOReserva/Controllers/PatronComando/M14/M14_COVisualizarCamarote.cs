@@ -9,15 +9,15 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando.M14
 {
-    public class M14_COVisualizarCamarotes : Command<Dictionary<int, Entidad>>
+    public class M14_COVisualizarCamarote : Command<Dictionary<int, Entidad>>
     {
 
         int valor;        
-        public M14_COVisualizarCamarotes(int value){
+        public M14_COVisualizarCamarote(int value){
             this.valor = value;
         }       
 
-        public M14_COVisualizarCamarotes()
+        public M14_COVisualizarCamarote()
         {
             // TODO: Complete member initialization
         }
@@ -31,7 +31,7 @@ namespace BOReserva.Controllers.PatronComando.M14
         /// </returns>
         public override Dictionary<int, Entidad> ejecutar()
         {
-            IDAOCamarote daoCamarote = (IDAOCamarote) FabricaDAO.instanciarDaoCamarotes();
+            IDAOCamarote daoCamarote = (IDAOCamarote) FabricaDAO.instanciarDaoCamarote();
             Dictionary<int, Entidad> mapCamarotes = daoCamarote.ConsultarTodos(valor);
             return mapCamarotes;
         }

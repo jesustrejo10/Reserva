@@ -299,6 +299,23 @@ namespace BOReserva.Controllers.PatronComando
             return new M14_COAgregarCrucero((Crucero) e);
         }
 
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M09_COModificarHoteles
+        /// </summary>
+        /// <param name="hotel">Hotel a modificar</param>
+        /// <param name="idmodificar">Identificador del hotel a modificar</param>
+        /// <returns>
+        /// Retorna la instancia del comando M09_COModificarHoteles.
+        /// </returns>
+        public static Command<String> crearM14ModificarCrucero(Entidad hotel, int idmodificar)
+        {
+
+            return new M14_COModificarCrucero(hotel, idmodificar);
+
+        }
+
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
         /// M14_COAgregarCrucero
@@ -311,6 +328,21 @@ namespace BOReserva.Controllers.PatronComando
             return new M14_COAgregarCabina((Cabina) e);
             
         }
+
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M14_COAgregarCrucero
+        /// </summary>
+        /// <param name="e">Recibe la una entidad de tipo Crucero</param>
+        /// <returns>Retorna un comando con el parametro adjuntado como atributo.</returns>
+        public static Command<String> crearM14AgregaItinerario(Entidad e)
+        {
+
+            return new M14_COAgregarItinerario((Itinerario)e);
+
+        }
+
 
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
@@ -399,10 +431,23 @@ namespace BOReserva.Controllers.PatronComando
         /// <returns>
         /// Retorna la instancia del comando M14_COVisualizarCabinas.
         /// </returns>
-        public static Command<Dictionary<int, Entidad>> crearM14VisualizarCamarotes(int id)
+        public static Command<Dictionary<int, Entidad>> crearM14VisualizarCamarote(int id)
         {
 
-            return new M14_COVisualizarCamarotes(id);
+            return new M14_COVisualizarCamarote(id);
+
+        }
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M14_COConsultarCrucero
+        /// </summary>
+        /// <param name="id">Identificador del Crucero a consultar</param>
+        /// <returns>Retorna la instancia del comando M14_COConsultarCrucero.</returns>
+        public static Command<Entidad> crearM14ConsultarCrucero(int id)
+        {
+
+            return new M14_COConsultarCrucero(id);
 
         }
 

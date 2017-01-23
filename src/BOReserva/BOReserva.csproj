@@ -303,9 +303,12 @@
     <Compile Include="Controllers\PatronComando\M09\M09_COVisualizarHoteles.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COAgregarPasajero.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COAgregarCamarote.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COAgregarItinerario.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COConsultarCrucero.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COListarRutasCrucero.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COListarRutasRutas.cs" />
-    <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarCamarotes.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COModificarCrucero.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarCamarote.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COConsultarPermisosUsuario.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COListarCabinaCrucero.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarCabinas.cs" />

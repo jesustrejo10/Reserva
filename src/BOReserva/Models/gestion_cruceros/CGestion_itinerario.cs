@@ -26,7 +26,7 @@ namespace BOReserva.Models.gestion_cruceros
         }
 
         public int _fkCrucero { get; set; }
-
+        public int _id { get; set; }
         public DateTime _fechaFin { get; set; }
         public DateTime _fechaInicio { get; set; }
         public int _fkRuta { get; set; }

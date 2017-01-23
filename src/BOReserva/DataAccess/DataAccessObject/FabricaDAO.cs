@@ -217,11 +217,6 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAOItinerario();
         }
 
-        public static DAO instanciarDaoCamarotes()
-        {
-            return new DAOCamarotes();
-        }
-
         #endregion
 
         #region M06 GESTION DE COMIDA

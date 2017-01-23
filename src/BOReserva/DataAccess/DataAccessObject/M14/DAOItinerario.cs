@@ -15,6 +15,49 @@ namespace BOReserva.DataAccess.DataAccessObject.M14
     public class DAOItinerario : DAO, IDAOItinerario
     {
 
+
+        int IDAO.Agregar(Entidad e)
+        {
+            Itinerario itinerario = (Itinerario)e;
+            SqlConnection con = Connection.getInstance(_connexionString);
+            try
+            {
+                con.Open();
+
+                String[] strOri = itinerario._RutaOrigen.Split(new[] { " - " }, StringSplitOptions.None);
+                String[] strDes = itinerario._RutaDestino.Split(new[] { " - " }, StringSplitOptions.None);
+
+                SqlCommand query = new SqlCommand("M24_AgregarItinerario", con);
+
+                query.CommandType = CommandType.StoredProcedure;
+                query.Parameters.AddWithValue("@fecha_inicio", itinerario._FechaInicio);
+                query.Parameters.AddWithValue("@fecha_fin", itinerario._FechaFin);
+                query.Parameters.AddWithValue("@crucero", itinerario._Crucero);
+                query.Parameters.AddWithValue("@rutaPaisO", strOri[1]);
+                query.Parameters.AddWithValue("@rutaPaisD", strDes[1]);
+                query.Parameters.AddWithValue("@rutaCiudadO", strOri[0]);
+                query.Parameters.AddWithValue("@rutaCiudadD", strDes[0]);
+                
+                query.ExecuteNonQuery();
+                
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                SqlDataReader lector = query.ExecuteReader();
+                lector.Close();                
+                con.Close();
+                return 1;
+            }
+            catch (SqlException ex)
+            {                
+                Debug.WriteLine(ex.ToString());
+                con.Close();
+                return 0;
+            }
+        }
+
+
+
+
+
         /// <summary>
         /// Clase Dao itinerario para realizar los procedimientos de base de datos
         /// </summary>

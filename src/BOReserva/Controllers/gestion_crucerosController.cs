@@ -327,6 +327,11 @@ namespace BOReserva.Controllers
             return PartialView(listaCabinas);
         }
 
+
+
+
+
+
         [HttpPost]
         public JsonResult guardarCrucero(CGestion_crucero model)
         {
@@ -373,15 +378,10 @@ namespace BOReserva.Controllers
         [HttpPost]
         public JsonResult guardarItinerario(CGestion_itinerario model)
         {
-            DateTime _fechaInicio = model._fechaInicio;
-            DateTime _fechaFin = model._fechaFin;
-            int _fkCrucero = model._fkCrucero;
-            int _fkRuta = model._fkRuta;
-
-            CGestion_itinerario itinerario = new CGestion_itinerario(_fechaInicio, _fechaFin, _fkCrucero, _fkRuta);
-            itinerario.AgregarItinerario(itinerario);
-
-            return (Json(true, JsonRequestBehavior.AllowGet));
+            Entidad nuevoItinerario = FabricaEntidad.InstanciarItinerarioN(model);
+            Command<String> comando = FabricaComando.crearM14AgregaItinerario(nuevoItinerario);
+            String result = comando.ejecutar();
+            return (Json(result));
         }
 
         public JsonResult cambioEstatusCabina(int id_cabina)
