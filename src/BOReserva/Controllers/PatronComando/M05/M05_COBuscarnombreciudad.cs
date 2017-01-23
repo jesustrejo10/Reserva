@@ -14,7 +14,7 @@ namespace BOReserva.Controllers.PatronComando
         int idciudad;
 
         /// <summary>
-        /// Comando para la busqueda del nombre de una ciudad
+        /// Constructor para la busqueda del nombre de una ciudad
         /// </summary>
         /// <param name="e"></param>
         public M05_COBuscarnombreciudad(Entidad e)
@@ -22,6 +22,10 @@ namespace BOReserva.Controllers.PatronComando
             this.idciudad = e._id;
         }
 
+        /// <summary>
+        /// Ejecutar el comando 
+        /// </summary>
+        /// <returns></returns>
         public override String ejecutar()
         {
             IDAOLugar daoLugar = (IDAOLugar) FabricaDAO.instanciarDaoLugar();
