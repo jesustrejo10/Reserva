@@ -610,8 +610,6 @@ namespace BOReserva.Servicio
 
 
 
-
-      
         public List<CLugarModelo> consultarLugar()
         {
             try
