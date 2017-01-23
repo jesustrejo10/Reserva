@@ -332,11 +332,6 @@ namespace BOReserva.Controllers
             return PartialView(listaCabinas);
         }
 
-
-
-
-
-
         [HttpPost]
         public JsonResult guardarCrucero(CGestion_crucero model)
         {
@@ -345,27 +340,38 @@ namespace BOReserva.Controllers
             Command<String> comando = FabricaComando.crearM14AgregarCrucero(nuevoCrucero);
             String result = comando.ejecutar();
             return (Json(result));            
-        }
-   
-
-        [HttpPost]
-        public JsonResult eliminarCrucero(int id_crucero)
-        {
-            CGestion_crucero crucero = new CGestion_crucero();
-            crucero.EliminarCrucero(id_crucero);
-            Console.WriteLine(id_crucero);
-            return (Json(true, JsonRequestBehavior.AllowGet));
-        }
-
+        }        
         
         [HttpPost]
         public JsonResult guardarCabina(CGestion_cabina model)
         {
+            if (model._cruceroNombre == null || model._nombreCabina == null)
+                {
+                    //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    //Agrego mi error
+                    String error = "Error, no ha seleccionado un origen/destino valido";
+                    //Retorno el error
+                    return Json(error);
+                }
+            else if (model._precioCabina <= 0 || model._precioCabina >= 999999)
+            {
+                //Creo el codigo de error de respuesta (OJO: AGREGAR EL USING DE SYSTEM.NET)
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Agrego mi error
+                String error = "Error, precio de cabina invalido";
+                //Retorno el error
+                return Json(error);
+            }
+            else
+            {
 
-            Entidad nuevaCabina = FabricaEntidad.InstanciarCabina(model);
-            Command<String> comando = FabricaComando.crearM14AgregarCabina(nuevaCabina);
-            String result = comando.ejecutar();
-            return (Json(result));            
+                Entidad nuevaCabina = FabricaEntidad.InstanciarCabinaN(model);
+                Command<String> comando = FabricaComando.crearM14AgregarCabina(nuevaCabina);
+                String result = comando.ejecutar();
+                return (Json(result));
+            }           
+        
         }
         
         

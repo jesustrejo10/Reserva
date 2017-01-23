@@ -97,21 +97,23 @@ $("#ciudadO").change(function () {
 $("#guardar_camarote").click(function (e) {
     e.preventDefault();
     var form = $("#formGuardarCamarote");
-    $.ajax({
-        url: "gestion_cruceros/guardarCamarote",
-        data: form.serialize(),
-        type: 'POST',
-        success: function (data) {
-            var statusHTML = "<td class='crStatus'><i class='fa fa-circle started'></i></td><td class='crAcciones'> <i class='fa fa-times' onclick='cambioCamarote(" + $("#idCamarote").val() + ")'></i></td>";
-            html = "<tr><td style='text-align:center'>" + $("#cantidadCama").val() + "</td><td style='text-align:center'>" + $("#tipoCama").val() + "</td>" + statusHTML + "</tr>";
-            console.log(html)
-            $("#tablaCamarote").append(html);
-            //$("#tablaCamarote").append("<tr><td>" + $("#cantidadCama").val() + "</td><td>" + $("#tipoCama").val() + "</td></tr>");
-        },
-        error: function (data) {
-            console.log(data);
-            $('#formGuardarCamarote')[0].reset();
-        }
+    if (confirm("¿Esta conforme con la información suministrada?") == true) {
+        alert("Agregando camarote, por favor espere...");
+        $.ajax({
+            url: "gestion_cruceros/guardarCamarote",
+            data: form.serialize(),
+            type: 'POST',
+            success: function (data) {
+                var statusHTML = "<td class='crStatus'><i class='fa fa-circle started'></i></td><td class='crAcciones'> <i class='fa fa-times' onclick='cambioCamarote(" + $("#idCamarote").val() + ")'></i></td>";
+                html = "<tr><td style='text-align:center'>" + $("#cantidadCama").val() + "</td><td style='text-align:center'>" + $("#tipoCama").val() + "</td>" + statusHTML + "</tr>";
+                console.log(html)
+                $("#tablaCamarote").append(html);
+                //$("#tablaCamarote").append("<tr><td>" + $("#cantidadCama").val() + "</td><td>" + $("#tipoCama").val() + "</td></tr>");
+            },
+            error: function (data) {
+                console.log(data);
+                $('#formGuardarCamarote')[0].reset();
+            }
     });
 });
 
