@@ -155,7 +155,24 @@ namespace TestUnitReserva.BO.gestion_roles
             Assert.AreNotEqual(daoRol.consultarLosPermisosAsignados(mockRol._idRol),null);
         }
 
+        [Test]
+        public void M13_DAOConsultarPermisosNoAsociados()
+        {
+            Assert.AreNotEqual(daoRol.consultarPermisosNoAsignados(mockRol._idRol), null);
+        }
 
+        [Test]
+        public void M13_DAOConsultarPermisosUsuario()
+        {
+            Assert.AreNotEqual(daoRol.consultarPermisosUsuario(34), null);
+        }
 
+        //[Test]
+        //public void M13_DAOQuitarPermisoRol()
+        //{
+        //    mockRolPermiso._idRol;
+        //    mockRolPermiso.listapermisos
+        //    Assert.AreEqual(daoRol.eliminarPermiso(mockRol._idRol), "1");
+        //}
     }
 }
