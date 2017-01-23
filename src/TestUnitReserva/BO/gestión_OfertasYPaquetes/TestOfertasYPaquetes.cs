@@ -25,14 +25,17 @@ namespace TestUnitReserva.BO.gestion_hoteles
     {
         private Oferta mockOfertaInt;
         private Oferta mockOfertaString;
+        private Paquete mockPaquete;
         private List<String> mockListaPaquetes;
         private List<Paquete> mockListaPaquetesP;
-        private List<CPaquete> mockListaPaquetesCP;
-        private Paquete mockPaquete;
+        private List<CPaquete> mockListaPaquetesCP;        
         DAOOferta daoOferta;
+        DAOPaquete daoPaquete;
         IDAO prueba;
         CModificarOferta mockCModificarOferta;
         int idPruebas;
+
+
 
         /// <summary>
         /// Metodo que se ejecuta antes que se ejecute cada prueba
@@ -49,6 +52,8 @@ namespace TestUnitReserva.BO.gestion_hoteles
             mockListaPaquetesP = new List<Paquete>();
             mockListaPaquetesCP = new List<CPaquete>();            
             daoOferta = new DAOOferta();
+            daoPaquete = new DAOPaquete();
+            mockPaquete = new Paquete(24,"Paquete de Prueba",1384000, true);
             idPruebas = 25;
 
         }
@@ -93,14 +98,14 @@ namespace TestUnitReserva.BO.gestion_hoteles
         /// Prueba que no se haya pasado una entidad nula.
         /// </summary>
         [Test]
-        public void Modificar()
+        public void DaoPaqueteModificarPaquete()
         {
              //Probando caso de exito de la prueba
-            Entidad resultadoModificar = daoOferta.Modificar(mockOfertaInt);
-            Assert.AreEqual(resultadoModificar, 1);
+            Entidad resultadoModificar = daoPaquete.Modificar(mockPaquete);
+            Assert.AreEqual(resultadoModificar, mockPaquete);
             //Probando caso de fallo
-            int resultadoModificarIncorrecto = daoOferta.Agregar(null);
-            Assert.AreEqual(resultadoModificarIncorrecto, 0);
+            Entidad resultadoModificarIncorrecto = daoPaquete.Modificar(null);
+            Assert.AreEqual(resultadoModificarIncorrecto, null);
         }
 
         /// <summary>
