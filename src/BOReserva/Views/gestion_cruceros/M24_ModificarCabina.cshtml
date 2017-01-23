@@ -23,6 +23,8 @@
                                 <label for="placa">Nombre(<span style="color:red">*</span>)</label>
                                 @Html.TextBoxFor(m => m._nombreCabina, Model._nombreCabina, new { @class = "form-control", @id = "cab_nombre" })
                             </div>
+                            
+ 
                             <div class="col-xs-6">
                                 <label for="modelo">Precio(<span style="color:red">*</span>)</label>
                                 @Html.TextBoxFor(m => m._precioCabina, Model._precioCabina.ToString(), new { @class = "form-control", @id = "cab_precio" })
@@ -71,9 +73,9 @@
                     data: form.serialize(),
                     type: 'POST',
                     success: function (data) {
-                            alert("Se modifico la cabina exitosamente, sera redirigido al listado de cabinas");
+                            alert("Se modifico la cabina exitosamente, sera redirigido al listado de cruceros");
                             //$('#formmodifyVehicle')[0].reset();
-                            var url1 = '/gestion_cruceros/M24_ListarCabinas';
+                            var url1 = '/gestion_cruceros/M24_ListarCruceros';
                             var method = 'GET';
                             var data1 = '';
 
