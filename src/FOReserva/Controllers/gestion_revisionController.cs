@@ -1,107 +1,116 @@
-
-using FOReserva.Models.Revision;
-using FOReserva.Servicio;
-using System.Collections.Generic;
-using FOReserva.Models.Restaurantes;
-using System.Web.Mvc;
 using System;
+using System.Web.Mvc;
+using FOReserva.DataAccess.Domain;
+using FOReserva.DataAccess.DataAccessObject.M20;
+using System.Data;
 
 namespace FOReserva.Controllers
 {
+    using System.Collections.Generic;
+
     /// <summary>
     /// Gestion Revision Controlador
     /// </summary>
 
+    using Hotel = DataAccess.Domain.Hotel;
+    using Restaurante = DataAccess.Domain.Restaurante;
     public class gestion_revisionController : Controller
     {
-        /// <summary>
-        /// GET: GestionRevision
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult gestion_revision()
+        [HttpGet]
+        public ActionResult revisiones(int id, EnumTipoRevision tipo)
         {
-            /*
-            return PartialView(); */
-            return RedirectToAction(actionName: "Index", controllerName: "Home");
+            return PartialView();
         }
 
-        public ActionResult lista_revisiones(int revision)
+        [HttpGet]
+        public ActionResult valoracion(int id, EnumTipoRevision tipo)
         {
-            /*Console.WriteLine("Lista Rev " + revision);
-            ManejadorSQLRevision manejador = new ManejadorSQLRevision();
-            List<CRevision> lista = manejador.BuscarRevisiones(revision);
-            return PartialView(lista);*/
-            return RedirectToAction(actionName: "Index", controllerName: "Home");
-        }
-
-        public ActionResult crear_revision_form(string rev_mensaje, int rev_puntuacion)
-        {
-
-            /*ManejadorSQLRevision manejador = new ManejadorSQLRevision();
-            bool resp = manejador.Crear_Revision(rev_mensaje, rev_puntuacion);
-            return PartialView();*/
-            return RedirectToAction(actionName: "Index", controllerName: "Home");
-
-        }
-
-        public ActionResult consultar_revision()
-        {
-            //return PartialView();
-            return RedirectToAction(actionName: "Index", controllerName: "Home");
-        }
-
-        public ActionResult eliminar_revision(int Id)
-        {
-
-            /*ManejadorSQLRevision manejador = new ManejadorSQLRevision();
-            manejador.Eliminar_Revision(Id);
-            return PartialView();*/
-            return RedirectToAction(actionName: "Index", controllerName: "Home");
-        }
-
-        public ActionResult editar_revision()
-        {
-            //return PartialView();
-            return RedirectToAction(actionName: "Index", controllerName: "Home");
-        }
-
-        public ActionResult crear_revision(int revision1)
-        {
-
-            /*CRevision rev = new CRevision();
-            return PartialView(rev);*/
-            return RedirectToAction(actionName: "Index", controllerName: "Home");
+            return PartialView();
         }
 
         /// <summary>
-        /// Creacion Modelo Lista Revision
+        /// POST: obtener_revisiones, obtiene el conjunto de revisiones de una referencia segun su tipo.
         /// </summary>
-        /// <returns>Vista Modelo</returns>
-        public ActionResult Consultar_Revision_AR(string usuario)
+        /// <returns>Retorna la vista que compone el conjunto de revisiones de dicha referencia.</returns>
+        [HttpPost]
+        public ActionResult obtener_revisiones(int id, EnumTipoRevision tipo)
         {
-            /*
-            // int search_val = Int32.Parse(Request.QueryString["search_val"]);
-            // string Usuario = Request.QueryString["Usuario"];
-            List<CRevision> lista;
-            ManejadorSQLRevision manejador = new ManejadorSQLRevision();
-            lista = manejador.ConsultarRevision(usuario);
+            var revisiones = new List<Revision>();
+            Entidad referencia = null;
+            if (tipo == EnumTipoRevision.Hotel)
+            {
+                referencia = new Hotel() { _id = id };
+            }
+            else if (tipo == EnumTipoRevision.Restaurante)
+            {
+                referencia = new Restaurante() { _id = id };
+            }
+            revisiones = DAORevision.Singleton().ObtenerRevisionesPorReferencia(referencia);
+            return PartialView(revisiones);
 
-            return PartialView(lista);
-            */
-            return RedirectToAction(actionName: "Index", controllerName: "Home");
         }
 
-        public ActionResult Revision_usuario()
+        /// <summary>
+        /// POST: obtener_valoracion, obtiene la valoracion resultante de una referencia segun su tipo.
+        /// </summary>
+        /// <returns>Retorna la vista que compone la valoracion resultante de una referencia.</returns>
+        [HttpPost]
+        public ActionResult obtener_valoracion(int id, EnumTipoRevision tipo)
         {
-            /*//Console.WriteLine("Lista Rev " + usuario);
-            ManejadorSQLRevision manejador = new ManejadorSQLRevision();
-            List<CRevision> lista = manejador.BuscarRevisionesUsuario();
-            return PartialView(lista);*/
-            return RedirectToAction(actionName: "Index", controllerName: "Home");
+            var revisiones = new ReferenciaValorada();
+            Entidad referencia = null;
+            if (tipo == EnumTipoRevision.Hotel)
+            {
+                referencia = new Hotel() { _id = id };
+            }
+            else if (tipo == EnumTipoRevision.Restaurante)
+            {
+                referencia = new Restaurante() { _id = id };
+            }
+            revisiones = DAORevision.Singleton().ObtenerValoracionPorReferencia(referencia);
+            return PartialView(revisiones);
+
         }
 
+        /// <summary>
+        /// POST: form_revision, obtiene el formulario para crear una revision.
+        /// </summary>
+        /// <returns>Retorna la vista que compone el formulario para crear una revision.</returns>
+        [HttpPost]
+        public ActionResult form_revision(int id, EnumTipoRevision tipo)
+        {
+            return PartialView();
+        }
 
+        /// <summary>
+        /// POST: guardar_revision, procesa la solicitud para crear una revision.
+        /// </summary>
+        /// <returns>Retorna la respuesta de la solucitud.</returns>
+        [HttpPost]
+        public ActionResult guardar_revision(Revision revision)
+        {
+            return Json(new { completa = true }, JsonRequestBehavior.AllowGet);
+        }
 
+        /// <summary>
+        /// POST: borrar_revision, procesa la solicitud para borrar una revision.
+        /// </summary>
+        /// <returns>Retorna la respuesta de la solucitud.</returns>
+        [HttpPost]
+        public ActionResult borrar_revision(Revision revision)
+        {
+            return Json(new { completa = true }, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// POST: guardar_revision, procesa la solicitud para crear una revision.
+        /// </summary>
+        /// <returns>Retorna la respuesta de la solucitud.</returns>
+        [HttpPost]
+        public ActionResult guardar_revision(RevisionValoracion revision)
+        {
+            return Json(new { completa = true }, JsonRequestBehavior.AllowGet);
+        }
     }
 
 }
