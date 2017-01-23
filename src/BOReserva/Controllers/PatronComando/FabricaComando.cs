@@ -745,105 +745,178 @@ namespace BOReserva.Controllers.PatronComando
         #endregion
 
 
-
         #region M13_Roles
 
+        /// <summary>
+        /// Comando para agregar rol
+        /// </summary>
         public static Command<String> crearM13_AgregarRol(Entidad e)
         {
             return new M13_COAgregarRol((Rol)e);
         }
 
-
+        /// <summary>
+        /// Comando para agregar permiso a rol
+        /// </summary>
         public static Command<String> crearM13_AgregarRolPermiso(Entidad e)
         {
             return new M13_COAgregarRolPermiso((Rol)e);
         }
 
+        /// <summary>
+        /// Comando para consultar rol
+        /// </summary>
         public static Command<List<Entidad>> crearM13_ConsultarRoles()
         {
             return new M13_COConsultarRoles();
         }
 
+        /// <summary>
+        /// Comando para agregar permisos
+        /// </summary>
         public static Command<List<Entidad>> crearM13_ConsultarPermisos(int id)
         {
             return new M13_COConsultarPermisos(id);
         }
 
+        /// <summary>
+        /// Comando para consultar modulos
+        /// </summary>
         public static Command<Entidad> crearM13_ConsultarModulos(int id)
         {
             return new M13_COConsultarModulos(id);
         }
 
+        /// <summary>
+        /// Comando para listar permisos
+        /// </summary>
         public static Command<List<Entidad>> crearM13_ListarPermisos()
         {
           return new M13_COListarPermisos();
         }
 
+        /// <summary>
+        /// Comando para agregar consultar rol por id
+        /// </summary>
         public static Command<Entidad> crearM13_ConsultarRol(int id)
         {
             return new M13_COConsultarRol(id);
         }
 
+        /// <summary>
+        /// Comando para eliminar rol
+        /// </summary>
         public static Command<String> crearM13_EliminarRol(Entidad rol, int id)
         {
             return new M13_COEliminarRol(rol, id);
         }
 
+        /// <summary>
+        /// Comando para consultar lista de permisos de un rol
+        /// </summary>
         public static Command<List<Entidad>> crearM13_ConsultarPermiso(int id)
         {
             return new M13_COConsultarPermiso(id);
         }
 
+        /// <summary>
+        /// Comando para eliminar permisos de un rol
+        /// </summary>
         public static Command<String> crearM13_EliminarPermisos(int id)
         {
             return new M13_COEliminarPermisos(id);
         }
 
+        /// <summary>
+        /// Comando para consultar permisos asignados
+        /// </summary>
         public static Command<List<Entidad>> crearM13_ConsultarPermisosAsignados(Entidad rol, int id)
         {
             return new M13_COConsultarPermisosAsociados(rol, id);
         }
 
+        /// <summary>
+        /// Comando para modificar rol
+        /// </summary>
         public static Command<String> crearM13_ModificarRol(Entidad rol, int idmodificar)
         {
          return new M13_COModificarRol(rol, idmodificar);
         }
+
+        /// <summary>
+        /// Comando para consultar permisos no asociados
+        /// </summary>
         public static Command<List<Entidad>> crearM13_ConsultarPermisosNoAsociados(Entidad rol, int id)
         {
             return new M13_COConsultarPermisosNoAsociados(rol, id);
         }
+
+        /// <summary>
+        /// Comando para consultar permisos de un usuario
+        /// </summary>
         public static Command<List<int>> crearM13_ConsultarPermisosUsuario(int id)
         {
             return new M13_COConsultarPermisosUsuario(id);
         }
+
+        /// <summary>
+        /// Comando para quitar permisos
+        /// </summary>
         public static Command<String> crearM13_QuitarPermisos(int idRol, int idPermiso)
         {
             return new M13_COQuitarPermiso(idRol, idPermiso);
         }
+
+        /// <summary>
+        /// Comando para agregar permiso
+        /// </summary>
         public static Command<String> crearM13_AgregarPermiso(Entidad e)
         {
             return new M13_COAgregarPermiso((Permiso)e);
         }
+
+        /// <summary>
+        /// Comando para listar permisos
+        /// </summary>
         public static Command<List<Entidad>> crearM13_ConsultarListaPermisos()
         {
             return new M13_COConsultarListaPermisos();
         }
+
+        /// <summary>
+        /// Comando para eliminar permiso
+        /// </summary>
         public static Command<String> crearM13_EliminarPermiso(int id)
         {
             return new M13_COEliminarPermiso(id);
         }
+
+        /// <summary>
+        /// Comando para validar si el permiso esta asignado a un rol
+        /// </summary>
         public static Command<List<int>> crearM13_ValidacionPermiso(int id)
         {
             return new M13_COValidacionPermiso(id);
         }
+
+        /// <summary>
+        /// Comando para validar si el rol lo posee un usuario
+        /// </summary>
         public static Command<List<int>> crearM13_ValidacionRol(int id)
         {
             return new M13_COValidacionRol(id);
         }
+        /// <summary>
+        /// Comando para consultar un permiso
+        /// </summary>
         public static Command<Entidad> crearM13_ConsultarPermisoSeleccionado(int id)
         {
             return new M13_COConsultarPermisoSeleccionado(id);
         }
+
+        /// <summary>
+        /// Comando para modificar permiso
+        /// </summary>
         public static Command<String> crearM13_ModificarPermiso(Entidad permiso, int idmodificar)
         {
             return new M13_COModificarPermiso(permiso, idmodificar);
