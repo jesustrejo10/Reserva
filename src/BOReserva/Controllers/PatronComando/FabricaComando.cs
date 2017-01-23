@@ -1133,11 +1133,26 @@ namespace BOReserva.Controllers.PatronComando
 
         }
 
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M12_COConsultarUsuario
+        /// </summary>
+        /// <param name="id">Identificador del usuario a consultar</param>
+        /// <returns>Retorna la instancia del comando M12_COConsultarUsuario.</returns>
         public static Command<Entidad> crearM12ConsultarUsuario(int id)
         {
             return new M12_COConsultarUsuario(id);
         }
 
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M12_COModificarUsuario
+        /// </summary>
+        /// <param name="usuario">Usuario a modificar</param>
+        /// <param name="idModificar">Identificador del usuario a modificar</param>
+        /// <returns>
+        /// Retorna la instancia del comando M12_COModificarUsuario.
+        /// </returns>
         public static Command<string> crearM12ModificarUsuario(Entidad usuario, int idModificar)
         {
             return new M12_COModificarUsuario(usuario, idModificar);
