@@ -304,7 +304,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M22
              try
              {
 
-                 tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM22.ProcedimientoListarCiudades,parametro);
+                 tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOM22.ProcedimientoListarCiudades);
 
                  foreach (DataRow row in tablaDeDatos.Rows)
                  {
