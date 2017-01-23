@@ -76,7 +76,6 @@
                     data: form.serialize(),
                     type: 'POST',
                     success: function (data) {
-                        if (data === "1") {
                             alert("Se modifico el crucero exitosamente, sera redirigido al listado de cruceros");
                             //$('#formmodifyVehicle')[0].reset();
                             var url1 = '/gestion_cruceros/M24_ListarCruceros';
@@ -97,9 +96,6 @@
                                         alert(errorThrown);
                                     }
                                 });
-                        } else {
-                            alert(data);
-                        }
                     }
                 });
             } else {
