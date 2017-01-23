@@ -1,6 +1,7 @@
 ﻿using BOReserva.DataAccess.DataAccessObject;
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
+using BOReserva.DataAccess.Model;
 using BOReserva.Excepciones.M09;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,6 @@ namespace BOReserva.Controllers.PatronComando.M09
     public class M09_COModificarHotel : Command<String>
     {
         Hotel _hotel;
-        int _idmodificar;
         /// <summary>
         /// Constructor de la clase
         /// </summary>
@@ -32,14 +32,16 @@ namespace BOReserva.Controllers.PatronComando.M09
         public override String ejecutar(){
             try
             {
-            IDAO daoHotel = FabricaDAO.instanciarDaoHotel();
-            Entidad test = daoHotel.Modificar(_hotel);
-            Hotel hotel = (Hotel)test;
-            return hotel._nombre;
-        }
+                IDAO daoHotel = FabricaDAO.instanciarDaoHotel();
+                Entidad test = daoHotel.Modificar(_hotel);
+                Hotel hotel = (Hotel)test;
+                //Actualice un Hotel en BD. necesito refrescarlo en Cache
+                Cache.actualizarMapHoteles(hotel);
+                return ResourceM09Command.ModificoCorrectamente;
+            }
             catch (ReservaExceptionM09 ex)
             {
-                throw ex;
+                return (ex.Codigo);
             }
         }
 

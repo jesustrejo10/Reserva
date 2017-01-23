@@ -1,0 +1,117 @@
+﻿@model BOReserva.Models.gestion_roles.CModulo_detallado
+@using (Html.BeginForm("modificar_Permiso", "gestion_roles", null, FormMethod.Post, new { @id = "modificar_Permiso", @class = "form-horizontal" }))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-success">
+                <div class="box-header ">
+                    <h1 class="box-title"> Modificar Permiso</h1>
+                    <div class="box-tools pull-right">
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="col-xs-12">
+                                <input type="hidden" id="idPermiso" name="idPermiso" value=@Model.Id>
+                                <label for="nombrePermiso" class="nombre_permiso" id="">Nombre del Permiso
+                                </label>
+                                @Html.TextBoxFor(m => m.Nombre, null, new { @class = "form-control", @placeholder = "Nombre del Permiso", id = "nombre_permiso" })
+                            </div>
+                            <div class="col-xs-12">
+                                <label for="nombrePermiso" class="nombre_Permiso" id="">
+                                    Url del Permiso
+                                </label>
+                                @Html.TextBoxFor(m => m.Url, null, new { @class = "form-control", @placeholder = "Url del Permiso", id = "url" })
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="col-md-12 text-center " style=" margin-top:10px;">
+                            <button type="submit" id="modificarpermiso" class="btn btn-success" style="display: inline-block; margin-left: auto; margin-right: auto;">Modificar</button>
+                            <button id="cancelarModificacion" type="button" class="btn btn-danger" style="display:inline-block; margin-left:auto; margin-right:auto;">Cancelar</button>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+
+}
+<script>
+    var permisos = [$("#nombre_permiso").val()];
+
+    //boton cancelar
+    $("#cancelarModificacion").click(function (e) {
+
+        var url = '/gestion_roles/M13_VisualizarPermiso';
+        var method = 'GET';
+        var data = '';
+        $.ajax(
+            {
+                url: url,
+                type: method,
+                data: data,
+                success: function (data, textStatus, jqXHR) {
+
+                    $("#contenido").empty();
+                    $("#contenido").append(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+    });
+
+    //Accion del boton modicar rol
+    $("#modificarpermiso").click(function (e) {
+        e.preventDefault();
+
+        var idPermiso = $("#idPermiso").val();
+        var nombrePermiso = $("#nombre_permiso").val();
+        var urlPermiso = $("#url").val();
+
+        if (nombrePermiso.length < 1) {
+            alert("El nombre es obligatorio");
+            return false;
+        }
+        if (urlPermiso.length < 1) {
+            alert("El url es obligatorio");
+            return false;
+        }
+        else {
+            console.log("entre aqui");
+            $.ajax({
+                url: "gestion_roles/ModificarPermiso",
+                data: { idpermiso: idPermiso, nombrePermiso: nombrePermiso, urlPermiso: urlPermiso },
+                type: 'POST',
+                success: function () {
+                    $.ajax({
+                        url: '/gestion_roles/M13_VisualizarPermiso',
+                        type: 'GET',
+                        success: function (data, textStatus, jqXHR) {
+                            $("#contenido").empty();
+                            $("#contenido").append(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.log("error");
+                            alert(errorThrown);
+                        }
+                    });
+                }
+            });
+        }
+    });
+</script>
+
+<style>
+    .modificar {
+        display: inline-block;
+    }
+</style>
+
+

@@ -28,7 +28,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M20
         }
         #endregion
 
-        #region Implementacion DAORevision.
+        #region Implementacion DAORevision.        
         /// <summary>
         /// Permite almacear los cambios de una Revision (Exista o no).
         /// </summary>
@@ -184,7 +184,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M20
                 return result;
             }
             catch (Exception ex)
-            {
+        {
                 Models.Utilidad.RegistrarLog(new DAOM20Exception("Ocurrio un problema al intentar ejecutar DAORevision.ObtenerRevisionesPorReferencia.", ex));
             }
             return null;

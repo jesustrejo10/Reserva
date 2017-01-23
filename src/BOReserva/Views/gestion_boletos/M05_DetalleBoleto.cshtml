@@ -1,4 +1,4 @@
-﻿<!-- Indico que para esta vista, M05_VisualizarBoleto, utilizare el modelo Models/gestion_boletos/CVisualizarBoleto-->
+<!-- Indico que para esta vista, M05_VisualizarBoleto, utilizare el modelo Models/gestion_boletos/CVisualizarBoleto-->
 @model BOReserva.Models.gestion_boletos.CVisualizarBoleto
 
 @using (Html.BeginForm("verBoleto", "gestion_boletos", null, FormMethod.Post, new { @id = "verBoleto", @class = "form-horizontal" }))
@@ -110,7 +110,7 @@
 
                         </div>
 
-                        <div class="col-md-12" style="margin-top:0px;">
+                        <div class="col-md-12" style="margin-top:0;">
 
                             <div class="col-md-2">
                                 @Html.TextBoxFor(m => m._idVuelo, null, new { @class = "form-control", @placeholder = "", @id = "id_vuelo", @disabled = "disabled", @readonly = "readonly", style = "display: none;" })
@@ -131,6 +131,10 @@
                                 <button type="button" id="crearBoleto" class="btn btn-success" style="display:block; margin-left:auto; margin-right:auto;">Crear boleto</button>
                             </div>
                         </div>
+                    <div>&nbsp;</div>
+                    <div class="row">
+                        <div id="loading" class="col-lg-12" style=" display: none; text-align:center; margin-top: 15px;"><span class="fa fa-spinner refresh-animate "></span></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -138,7 +142,7 @@
     <script>
         $("#crearBoleto").click(function (e) {
             e.preventDefault();
-
+            $("#loading").show();
             var id_origen = document.getElementById("id_origen").value;
             // alert("Id origen: " + id_origen);
             var id_destino = document.getElementById("id_destino").value;
