@@ -133,8 +133,29 @@ namespace TestUnitReserva.BO.gestion_roles
         {
             Rol _rol = new Rol();
             _rol._nombreRol = "SuperAdminModificado";
-            _rol._idRol = 288;
+            _rol._idRol = mockRol._idRol;
             Assert.AreNotEqual(daoRol.Modificar(_rol), null);
         }
+
+        [Test]
+        public void M13_DAOEliminarRol()
+        {
+            Assert.AreEqual(daoRol.eliminarRol(mockRol._idRol), "1");
+        }
+
+        [Test]
+        public void M13_DAOEliminarPermisos()
+        {
+            Assert.AreEqual(daoRol.eliminarPermiso(mockRol._idRol), "1");
+        }
+
+        [Test]
+        public void M13_DAOConsultarPermisosAsociados()
+        {
+            Assert.AreNotEqual(daoRol.consultarLosPermisosAsignados(mockRol._idRol),null);
+        }
+
+
+
     }
 }
