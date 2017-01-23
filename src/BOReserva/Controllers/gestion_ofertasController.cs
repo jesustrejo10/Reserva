@@ -785,24 +785,37 @@ namespace BOReserva.Controllers
             Debug.WriteLine("DESACTIVAR OFERTA " + id);
             try
             {
-            Command<Entidad> comando = FabricaComando.crearM11ConsultarOferta(id);
-            Entidad oferta = comando.ejecutar();
+                Command<Entidad> comando = FabricaComando.crearM11ConsultarOferta(id);
+                Entidad oferta = comando.ejecutar();
                 Oferta ofertaBuscada = (Oferta)oferta;
                 ofertaBuscada._id = id;
                 Command<String> comando1 = FabricaComando.crearM11DisponibilidadOferta(ofertaBuscada, 0);
-            String borro_si_no = comando1.ejecutar();
-            return (Json(borro_si_no));
+                String borro_si_no = comando1.ejecutar();
+                return (Json(borro_si_no));
+            }
+            catch (ReservaExceptionM09 ex)
+            {
+                return (Json(ex.Mensaje));
+            }            
         }
 
         public JsonResult activarOferta(int id)
         {
+            Debug.WriteLine("ACTIVAR OFERTA " + id);
+            try
+            {
                 Command<Entidad> comando = FabricaComando.crearM11ConsultarOferta(id);
                 Entidad oferta = comando.ejecutar();
-                Oferta ofertabuscada = (Oferta)oferta;
-                ofertabuscada._id = id;
-                Command<String> comando1 = FabricaComando.crearM11DisponibilidadOferta(ofertabuscada, 1);
+                Oferta ofertaBuscada = (Oferta)oferta;
+                ofertaBuscada._id = id;
+                Command<String> comando1 = FabricaComando.crearM11DisponibilidadOferta(ofertaBuscada, 1);
                 String borro_si_no = comando1.ejecutar();
                 return (Json(borro_si_no));
+            }
+            catch (ReservaExceptionM09 ex)
+            {
+                return (Json(ex.Mensaje));
+            }
         }
 
         public JsonResult activarPaquete(int id)
@@ -825,11 +838,6 @@ namespace BOReserva.Controllers
                 Command<String> comando1 = FabricaComando.crearM11DisponibilidadPaquete(paquetebuscado, 0);
                 String borro_si_no = comando1.ejecutar();
                 return (Json(borro_si_no));     
-        }
-            catch (ReservaExceptionM09 ex)
-            {
-                return (Json(ex.Mensaje));
-            }
-        }
+        }            
 	}
 }
