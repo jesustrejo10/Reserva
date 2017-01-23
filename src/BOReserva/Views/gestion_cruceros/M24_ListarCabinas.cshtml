@@ -30,7 +30,7 @@
                                     <td>@c._estatus </td>
                                     <td>
                                         <a href="#"> <i class="fa fa-eye m03DetalleRutas"></i></a>
-                                        <a href="#"><i class="fa fa-pencil m03EditarRutas"></i></a>
+                                        <a href="#"><i class="fa fa-pencil M24_ModificarCabina"></i></a>
                                         <a href="#"><i class="fa fa-eye m24ListarCamarotes"></i></a>
                                     </td>
                                 </tr>
@@ -99,6 +99,27 @@
             });
         }));
     });
+
+    $(document).ready(function () {
+        //e.preventDefault();
+        $(".M24_ModificarCabina").click(function () {
+            alert("Se esta procesando tu solicitud, por favor espere");
+            var identificador = $(this).parent().parent().parent().attr("id");
+            jQuery.ajax({
+                type: "GET",
+                url: "/gestion_cruceros/M24_ModificarCabina",
+                data: { id: identificador }//id = es el nombre q recibes en el método es decir public ActionResult M24_ModificarCrucero(int id)
+            }).done(function (data) {
+                //$("#sdssss").append(data);
+
+                $("#contenido").empty();
+                $("#contenido").append(data);
+            }).fail(function () {
+                alert(data);
+            });
+        });
+    });
+
 </script>
 
 <script>

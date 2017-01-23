@@ -16,6 +16,11 @@ namespace BOReserva.Controllers
 {
     public class gestion_crucerosController : Controller
     {
+
+        private static int idCrucero;
+        private static int idCabina;
+        private static int idFkCrucero;
+
         // GET: gestion_cruceros
         public ActionResult M24_GestionCruceros()
         {
@@ -348,7 +353,6 @@ namespace BOReserva.Controllers
                     String error = "Error, no ha seleccionado un origen/destino valido";
                     //Retorno el error
                     return Json(error);
-
                 }
             else if (model._precioCabina <= 0 || model._precioCabina >= 999999)
             {
@@ -366,9 +370,8 @@ namespace BOReserva.Controllers
                 Command<String> comando = FabricaComando.crearM14AgregarCabina(nuevaCabina);
                 String result = comando.ejecutar();
                 return (Json(result));
-            }
-            
-            
+            }           
+        
         }
         
         
@@ -424,33 +427,102 @@ namespace BOReserva.Controllers
             return (Json(true, JsonRequestBehavior.AllowGet));
         }
 
-        [HttpPost]
-        public JsonResult modificarCrucero(CGestion_crucero model)
-        {
-            int _idCrucero = model._idCrucero;
-            String _nombreCrucero = model._nombreCrucero;
-            String _companiaCrucero = model._companiaCrucero;
-            int _capacidadCrucero = model._capacidadCrucero;
-            CGestion_crucero crucero = new CGestion_crucero(_idCrucero, _nombreCrucero, _companiaCrucero, _capacidadCrucero);
-            crucero.ModificarCrucero(crucero);
 
-            return (Json(crucero, JsonRequestBehavior.AllowGet));
-        }
-
+        // <summary>
+        /// Método de la vista parcial M24_ModificarCrucero
+        /// </summary>
+        /// <returns>Retorna la vista parcial M24_ModificarCrucero en conjunto del Modelo de dicha vista</returns>
         public ActionResult M24_ModificarCrucero(int id)
         {
             try
             {
-                ConexionBD cbd = new ConexionBD();
-                CGestion_crucero crucero = new CGestion_crucero();
-                crucero = cbd.consultarCruceroID(id);
-                //crucero.cabinas = cbd.listarCabinas(id);
-                return PartialView("M24_ModificarCrucero", crucero);
+                Command<Entidad> comando = FabricaComando.crearM14ConsultarCrucero(id);
+                Entidad Crucero = comando.ejecutar();
+                Crucero CruceroB = (Crucero)Crucero;
+                idCrucero = CruceroB._id;
+                CGestion_crucero modelovista = new CGestion_crucero();
+                modelovista._nombreCrucero = CruceroB._nombreCrucero;
+                modelovista._companiaCrucero = CruceroB._companiaCrucero;
+                modelovista._capacidadCrucero = CruceroB._capacidadCrucero;
+                modelovista._estatus = CruceroB._estatus;
+                return PartialView(modelovista);
             }
             catch (Exception ex)
             {
-                return PartialView("M24_ModificarCrucero");
+                return null;
             }
         }
+
+        /// <summary>
+        /// Método que se utiliza para modificar un crucero
+        /// </summary>
+        /// <param name="model">Datos que provienen de un formulario de la vista parcial M24_ModificarCrucero</param>
+        /// <returns>Retorna un JsonResult</returns>
+        [HttpPost]
+        public JsonResult modificarCrucero(CGestion_crucero model)
+        {
+            try
+            {
+                Entidad modificarCrucero = FabricaEntidad.InstanciarCrucero(model);
+                //con la fabrica instancie al Crucero.
+                Command<String> comando = FabricaComando.crearM14ModificarCrucero(modificarCrucero, idCrucero);
+                String agrego_si_no = comando.ejecutar();
+
+                return (Json(agrego_si_no));
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        // <summary>
+        /// Método de la vista parcial M24_ModificarCabina
+        /// </summary>
+        /// <returns>Retorna la vista parcial M24_ModificarCabina en conjunto del Modelo de dicha vista</returns>
+        public ActionResult M24_ModificarCabina(int id)
+        {
+            try
+            {
+                Command<Entidad> comando = FabricaComando.crearM14ConsultarCabina(id);
+                Entidad cabina = comando.ejecutar();
+                Cabina CabinaB = (Cabina)cabina;
+                idCabina = CabinaB._id;
+                idFkCrucero = CabinaB._id;
+                CGestion_cabina modelovista = new CGestion_cabina();
+                modelovista._nombreCabina = CabinaB._nombreCabina;
+                modelovista._precioCabina = CabinaB._precioCabina;
+                modelovista._estatus = CabinaB._estatus;
+                return PartialView(modelovista);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Método que se utiliza para modificar un crucero
+        /// </summary>
+        /// <param name="model">Datos que provienen de un formulario de la vista parcial M24_ModificarCabina</param>
+        /// <returns>Retorna un JsonResult</returns>
+        [HttpPost]
+        public JsonResult modificarCabina(CGestion_cabina model)
+        {
+            try
+            {
+                Entidad modificarCabina = FabricaEntidad.InstanciarCabina(model);
+                //con la fabrica instancie la cabina.
+                Command<String> comando = FabricaComando.crearM14ModificarCabina(modificarCabina, idCabina, idFkCrucero);
+                String agrego_si_no = comando.ejecutar();
+
+                return (Json(agrego_si_no));
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
     }
 }

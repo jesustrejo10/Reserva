@@ -302,6 +302,22 @@ namespace BOReserva.Controllers.PatronComando
 
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
+        /// M14_COModificarCrucero
+        /// </summary>
+        /// <param name="hotel">Hotel a modificar</param>
+        /// <param name="idmodificar">Identificador del crucero a modificar</param>
+        /// <returns>
+        /// Retorna la instancia del comando M14_COModificarCrucero.
+        /// </returns>
+        public static Command<String> crearM14ModificarCrucero(Entidad hotel, int idmodificar)
+        {
+
+            return new M14_COModificarCrucero(hotel, idmodificar);
+
+        }
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
         /// M09_COModificarHoteles
         /// </summary>
         /// <param name="hotel">Hotel a modificar</param>
@@ -309,10 +325,10 @@ namespace BOReserva.Controllers.PatronComando
         /// <returns>
         /// Retorna la instancia del comando M09_COModificarHoteles.
         /// </returns>
-        public static Command<String> crearM14ModificarCrucero(Entidad hotel, int idmodificar)
+        public static Command<String> crearM14ModificarCabina(Entidad hotel, int idmodificar, int idfk)
         {
 
-            return new M14_COModificarCrucero(hotel, idmodificar);
+            return new M14_COModificarCabina(hotel, idmodificar, idfk);
 
         }
 
@@ -448,6 +464,19 @@ namespace BOReserva.Controllers.PatronComando
         {
 
             return new M14_COConsultarCrucero(id);
+
+        }
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M14_COConsultarCrucero
+        /// </summary>
+        /// <param name="id">Identificador del Crucero a consultar</param>
+        /// <returns>Retorna la instancia del comando M14_COConsultarCrucero.</returns>
+        public static Command<Entidad> crearM14ConsultarCabina(int id)
+        {
+
+            return new M14_COConsultarCabina(id);
 
         }
 

@@ -133,5 +133,78 @@ namespace BOReserva.DataAccess.DataAccessObject.M14
                 return null;
             }
         }
+
+        Entidad IDAO.Consultar(int id)
+        {
+            SqlConnection con = Connection.getInstance(_connexionString);
+            Cabina cabina = new Cabina();
+            try
+            {
+                con.Open();
+
+                SqlCommand query = new SqlCommand("M24_ConsultarCabinaID", con);
+
+                query.CommandType = CommandType.StoredProcedure;
+                query.Parameters.AddWithValue("@id", id);
+                query.ExecuteNonQuery();
+                SqlDataReader reader = query.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    cabina = new Cabina(id,
+                        reader["cab_nombre"].ToString(),
+                        float.Parse(reader["cab_precio"].ToString()),
+                        reader["cab_estatus"].ToString(),
+                        int.Parse(reader["cab_fk_crucero"].ToString())
+                    );
+                }
+                reader.Close();
+                con.Close();
+                return cabina;
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                con.Close();
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Metodo implementado de IDAO para modificar cruceros de la BD
+        /// </summary>
+        /// <param name="e">Cabina a modificar</param>
+        /// <returns>Retorna la Cabina</returns>
+        Entidad IDAO.Modificar(Entidad e)
+        {
+            SqlConnection con = Connection.getInstance(_connexionString);
+            Cabina cabina = (Cabina)e;
+
+            try
+            {
+                con.Open();
+
+                SqlCommand query = new SqlCommand("M24_ModificarCabina", con);
+
+                query.CommandType = CommandType.StoredProcedure;
+                query.Parameters.AddWithValue("@idCabina", cabina._id);
+                query.Parameters.AddWithValue("@nombreCabina", cabina._nombreCabina);
+                query.Parameters.AddWithValue("@PrecioCabina", cabina._precioCabina);
+                query.Parameters.AddWithValue("@EstadoCabina", cabina._estatus);
+
+                query.ExecuteNonQuery();
+
+                //creo un lector sql para la respuesta de la ejecucion del comando anterior               
+                SqlDataReader lector = query.ExecuteReader();
+                lector.Close();
+                con.Close();
+                return cabina;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
      }
     }
