@@ -11,6 +11,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BOReserva.DataAccess.Domain.M14;
 
 namespace BOReserva.Controllers
 {
@@ -19,7 +20,9 @@ namespace BOReserva.Controllers
 
         private static int idCrucero;
         private static int idCabina;
+        private static int idCamarote;
         private static int idFkCrucero;
+        private static int idFkCabina;
 
         // GET: gestion_cruceros
         public ActionResult M24_GestionCruceros()
@@ -290,15 +293,6 @@ namespace BOReserva.Controllers
 
 
 
-
-
-        public JsonResult M24_ListarCamarotes(int id)
-        {
-            ConexionBD cbd = new ConexionBD();
-            var listaCamarotes = cbd.listarCamarotes(id);
-            return (Json(listaCamarotes, JsonRequestBehavior.AllowGet));
-        }
-
         /// <summary>
         /// Método de la vista parcial M24ListarCruceros
         /// </summary>
@@ -330,6 +324,17 @@ namespace BOReserva.Controllers
             Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14VisualizarCabinas(id);
             Dictionary<int, Entidad> listaCabinas = comando.ejecutar();
             return PartialView(listaCabinas);
+        }
+
+        /// <summary>
+        /// Método de la vista parcial M24_ListarCamarotes
+        /// </summary>
+        /// <returns>Retorna la vista parcial M24_ListarCamarotes en conjunto del Modelo de dicha vista</returns>
+        public ActionResult M24_ListarCamarotes(int id)
+        {
+            Command<Dictionary<int, Entidad>> comando = FabricaComando.crearM14VisualizarCamarote(id);
+            Dictionary<int, Entidad> listaCamarotes = comando.ejecutar();
+            return PartialView(listaCamarotes);
         }
 
         [HttpPost]
@@ -484,7 +489,7 @@ namespace BOReserva.Controllers
         {
             try
             {
-                Command<Entidad> comando = FabricaComando.crearM14ConsultarCabina(id);
+                Command<Entidad> comando = FabricaComando.crearM14ConsultarCamarote(id);
                 Entidad cabina = comando.ejecutar();
                 Cabina CabinaB = (Cabina)cabina;
                 idCabina = CabinaB._id;
@@ -502,12 +507,61 @@ namespace BOReserva.Controllers
         }
 
         /// <summary>
-        /// Método que se utiliza para modificar un crucero
+        /// Método que se utiliza para modificar una cabina
         /// </summary>
         /// <param name="model">Datos que provienen de un formulario de la vista parcial M24_ModificarCabina</param>
         /// <returns>Retorna un JsonResult</returns>
         [HttpPost]
         public JsonResult modificarCabina(CGestion_cabina model)
+        {
+            try
+            {
+                Entidad modificarCabina = FabricaEntidad.InstanciarCabina(model);
+                //con la fabrica instancie la cabina.
+                Command<String> comando = FabricaComando.crearM14ModificarCabina(modificarCabina, idCabina, idFkCrucero);
+                String agrego_si_no = comando.ejecutar();
+
+                return (Json(agrego_si_no));
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        // <summary>
+        /// Método de la vista parcial M24_ModificarCamarote
+        /// </summary>
+        /// <returns>Retorna la vista parcial M24_ModificarCamarote en conjunto del Modelo de dicha vista</returns>
+        public ActionResult M24_ModificarCamarote(int id)
+        {
+            try
+            {
+                Command<Entidad> comando = FabricaComando.crearM14ConsultarCamarote(id);
+                Entidad camarote = comando.ejecutar();
+                Camarote CabinaB = (Camarote)camarote;
+                idCabina = CabinaB._id;
+                idFkCabina = CabinaB._fkCabina;
+                CGestion_camarote modelovista = new CGestion_camarote();
+                modelovista._cabinaNombre = CabinaB._nombreCabina + "-" + CabinaB._id;
+                modelovista._cantidadCama = CabinaB._cantidadCama;
+                modelovista._tipoCama = CabinaB._tipoCama;
+                modelovista._estatus = CabinaB._estatus;
+                return PartialView(modelovista);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Método que se utiliza para modificar un crucero
+        /// </summary>
+        /// <param name="model">Datos que provienen de un formulario de la vista parcial M24_ModificarCabina</param>
+        /// <returns>Retorna un JsonResult</returns>
+        [HttpPost]
+        public JsonResult modificarCamarote(CGestion_cabina model)
         {
             try
             {

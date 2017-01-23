@@ -88,6 +88,42 @@ namespace BOReserva.DataAccess.DataAccessObject.M14
                 return null;
             }
         }
+
+        Entidad IDAO.Consultar(int id)
+        {
+            SqlConnection con = Connection.getInstance(_connexionString);
+            Camarote Camarote = new Camarote();
+            try
+            {
+                con.Open();
+
+                SqlCommand query = new SqlCommand("M24_ConsultarCamaroteID", con);
+
+                query.CommandType = CommandType.StoredProcedure;
+                query.Parameters.AddWithValue("@id", id);
+                query.ExecuteNonQuery();
+                SqlDataReader reader = query.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Camarote = new Camarote(id,
+                        int.Parse(reader["cam_cantidad_cama"].ToString()),
+                        reader["cam_tipo_cama"].ToString(),
+                        reader["cam_estatus"].ToString(),
+                        reader["cab_nombre"].ToString()
+                    );
+                }
+                reader.Close();
+                con.Close();
+                return Camarote;
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                con.Close();
+                return null;
+            }
+        }
         
     }
 }

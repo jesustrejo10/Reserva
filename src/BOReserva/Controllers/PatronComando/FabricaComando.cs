@@ -469,14 +469,27 @@ namespace BOReserva.Controllers.PatronComando
 
         /// <summary>
         /// Metodo creado con la finalidad de instanciar el comando
-        /// M14_COConsultarCrucero
+        /// M14_COConsultarCabina
         /// </summary>
-        /// <param name="id">Identificador del Crucero a consultar</param>
-        /// <returns>Retorna la instancia del comando M14_COConsultarCrucero.</returns>
+        /// <param name="id">Identificador de la Cabina a consultar</param>
+        /// <returns>Retorna la instancia del comando M14_COConsultarCabina.</returns>
         public static Command<Entidad> crearM14ConsultarCabina(int id)
         {
 
             return new M14_COConsultarCabina(id);
+
+        }
+
+        /// <summary>
+        /// Metodo creado con la finalidad de instanciar el comando
+        /// M14_COConsultarCamarote
+        /// </summary>
+        /// <param name="id">Identificador del Crucero a consultar</param>
+        /// <returns>Retorna la instancia del comando M14_COConsultarCamarote.</returns>
+        public static Command<Entidad> crearM14ConsultarCamarote(int id)
+        {
+
+            return new M14_COConsultarCamarote(id);
 
         }
 

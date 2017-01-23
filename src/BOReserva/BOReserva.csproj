@@ -304,6 +304,7 @@
     <Compile Include="Controllers\PatronComando\M05\M05_COAgregarPasajero.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COAgregarCamarote.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COConsultarCabina.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COConsultarCamarote.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COModificarCabina.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COAgregarItinerario.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COConsultarCrucero.cs" />
@@ -1740,6 +1741,7 @@
     <Content Include="Views\gestion_usuarios\M12_AgregarUsuario2.cshtml" />
     <Content Include="Views\gestion_usuarios\M12_VisualizarUsuarios.cshtml" />
     <Content Include="Views\gestion_usuarios\M12_ModificarUsuario2.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_ModificarCamarote.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_boletos\M05_VisualizarBoletos.cshtml" />
