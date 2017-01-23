@@ -5,6 +5,7 @@ using BOReserva.DataAccess.DataAccessObject;
 using System.Linq;
 using System.Web;
 using BOReserva.DataAccess.Domain;
+using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 
 namespace BOReserva.Controllers.PatronComando
 {

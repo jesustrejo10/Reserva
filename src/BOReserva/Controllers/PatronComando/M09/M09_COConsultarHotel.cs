@@ -2,6 +2,7 @@
 using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
+using BOReserva.Excepciones;
 using BOReserva.Excepciones.M09;
 using System;
 using System.Collections.Generic;
@@ -24,13 +25,16 @@ namespace BOReserva.Controllers.PatronComando.M09
             this._idHotel = value;
         }
 
-        ///// <summary>
-        ///// Sobre escritura del metodo ejecutar de la clase Comando.
-        ///// Se encarga de llamar al DAO y devolver la respuesta al controlador.
-        ///// </summary>
-        ///// <returns>
-        ///// Retorna una Entidad
-        ///// </returns>
+        /// <summary>
+        /// Sobre escritura del metodo ejecutar de la clase Comando.
+        /// Se encarga de llamar al DAO y devolver la respuesta al controlador.
+        /// </summary>
+        /// <returns>
+        /// Retorna una Entidad
+        /// </returns>
+        /// 
+
+        
         public override Entidad ejecutar()
         {
             try
@@ -42,6 +46,7 @@ namespace BOReserva.Controllers.PatronComando.M09
             }
             catch (ReservaExceptionM09 ex)
             {
+                Log.EscribirError(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name, ex);               
                 throw ex;
             }
         }

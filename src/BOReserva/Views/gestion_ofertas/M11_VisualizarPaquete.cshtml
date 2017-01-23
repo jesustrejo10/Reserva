@@ -111,69 +111,85 @@
     });
 
 
-    $(".desactivar").click(function () {
-        var idOferta = $(this).parent().parent().parent().attr("id");
-        var r = confirm("Está seguro que desea desactivar el paquete?");
-        if (r == true) {
+    $(document).ready(function () {
+        //e.preventDefault();
+        $(".desactivar").click(function () {
+            alert("Se esta procesando tu solicitud, por favor espere");
+            var identificador = $(this).parent().parent().parent().attr("id");
             jQuery.ajax({
                 type: "POST",
                 url: "/gestion_ofertas/desactivarPaquete",
-                data: { ofertaIdStr: idOferta }
+                data: { id: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
             }).done(function (data) {
-                var url = '/gestion_ofertas/M11_VisualizarPaquete';
-                var method = 'GET';
-                var data = '';
-                $.ajax(
-                    {
-                        url: url,
-                        type: method,
-                        data: data,
-                        success: function (data, textStatus, jqXHR) {
-                            $("#contenido").empty();
-                            $("#contenido").append(data);
-                        },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            alert(errorThrown);
-                        }
-                    });
-            }).fail(function () {
-                alert("Error en la base de datos");
-            });
-        }
-    });
+                if (data === "1") {
 
-    $(".activar").click(function () {
-        var idOferta = $(this).parent().parent().parent().attr("id");
-        var r = confirm("Esta seguro que desea activar el paquete?");
-        if (r == true) {
+                    //$("#sdssss").append(data);
+                    var url1 = '/gestion_ofertas/M11_VisualizarPaquete';
+                    var method = 'GET';
+                    var data1 = '';
+
+                    $.ajax(
+                        {
+                            url: url1,
+                            type: method,
+                            data: data,
+                            success: function (data, textStatus, jqXHR) {
+
+                                $("#contenido").empty();
+                                $("#contenido").append(data);
+                                alert("Se cambio exitosamente. Actualice la Página.");
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert(errorThrown);
+                            }
+                        });
+                } else {
+                    alert(data);
+                }
+            }).fail(function () {
+                alert("Error, por favor refresque la pagina")
+            });
+        });
+
+        $(".activar").click(function () {
+            alert("Se esta procesando tu solicitud, por favor espere");
+            var identificador = $(this).parent().parent().parent().attr("id");
             jQuery.ajax({
                 type: "POST",
                 url: "/gestion_ofertas/activarPaquete",
-                data: { ofertaIdStr: idOferta }
+                data: { id: identificador }//valor = es el nombre q recibes en el método es decir public ActionResult M08_VisualizarAutomoviles(string valor)
             }).done(function (data) {
-                var url = '/gestion_ofertas/M11_VisualizarPaquete';
-                var method = 'GET';
-                var data = '';
-                $.ajax(
-                    {
-                        url: url,
-                        type: method,
-                        data: data,
-                        success: function (data, textStatus, jqXHR) {
+                if (data === "1") {
 
-                            $("#contenido").empty();
-                            $("#contenido").append(data);
-                        },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            alert(errorThrown);
-                        }
-                    });
+                    //$("#sdssss").append(data);
+                    var url1 = '/gestion_ofertas/M11_VisualizarPaquete';
+                    var method = 'GET';
+                    var data1 = '';
+
+                    $.ajax(
+                        {
+                            url: url1,
+                            type: method,
+                            data: data,
+                            success: function (data, textStatus, jqXHR) {
+
+                                $("#contenido").empty();
+                                $("#contenido").append(data);
+                                alert("Se habilitó exitosamente. Actualice la Página.");
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert(errorThrown);
+                            }
+                        });
+                } else {
+                    alert(data);
+                }
             }).fail(function () {
-                alert("Error en la base de datos");
+                alert("Error, por favor refresque la pagina")
             });
-        }
-    });
+        });
 
+    });
 
 </script>
 

@@ -11,6 +11,11 @@ using BOReserva.Controllers.PatronComando;
 
 namespace BOReserva.Controllers
 {
+    /// <summary>
+    /// Clase Controladora del modulo 12, Gestion de Usuarios por rol
+    /// </summary>
+    /// <param name="_rol">Rol del usuario</param>
+    /// <param name="idUsuario">Id del usuario</param>
     public class gestion_usuariosController : Controller
     {
         public static int _rol;
@@ -41,6 +46,10 @@ namespace BOReserva.Controllers
 
         }
 
+        /// <summary>
+        /// Método que guarda en una variable el usuario seleccionada
+        /// </summary>
+        /// <param name="model">Nombre del usuario a guardar</param>
         [HttpPost]
         public JsonResult guardarUsuario(CAgregarUsuario model)
         {
@@ -63,7 +72,10 @@ namespace BOReserva.Controllers
             return PartialView(listaUsuarios);
         }
 
-
+        /// <summary>
+        /// Método de la vista parcial M12_DetalleUsuario
+        /// </summary>
+        /// <returns>Retorna la vista parcial M12_DetalleUsuario en conjunto del Modelo de dicha vista</returns>
         public ActionResult M12_DetalleUsuario(int id)
         {
             Command<Entidad> comando = FabricaComando.crearM12ConsultarUsuario(id);
@@ -82,6 +94,10 @@ namespace BOReserva.Controllers
             return PartialView(modelovista);
         }
 
+        /// <summary>
+        /// Método de la vista parcial M12_ModificarUsuario2
+        /// </summary>
+        /// <returns>Retorna la vista parcial M12_ModificarUsuario2 en conjunto del Modelo de dicha vista</returns>
         public ActionResult M12_ModificarUsuario2(int id)
         {
             Command<List<Entidad>> comandrol = FabricaComando.crearM13_ConsultarRoles();
@@ -98,12 +114,18 @@ namespace BOReserva.Controllers
             modelovista._nombre = usuarioBuscado.nombre;
             modelovista._apellido = usuarioBuscado.apellido;
             modelovista.contraseñaUsuario = usuarioBuscado.contrasena;
+            modelovista._confirmarContraseña = usuarioBuscado.contrasena;
             modelovista._rol = usuarioBuscado.rolr._idRol;
             modelovista._activo = usuarioBuscado.activo;
 
             return PartialView(modelovista);
         }
 
+        /// <summary>
+        /// Método que se utiliza para modificar un usuario
+        /// </summary>
+        /// <param name="model">Datos que provienen de un formulario de la vista parcial M12_ModificarUsuario</param>
+        /// <returns>Retorna un JsonResult</returns>
         [HttpPost]
         public JsonResult modificarUsuario(CModificarUsuario model)
         {
@@ -115,7 +137,11 @@ namespace BOReserva.Controllers
 
         }
 
-        public ActionResult M12_AgregarUsuario()
+        /// <summary>
+        /// Método de la vista parcial M12_AgregarUsuario
+        /// </summary>
+        /// <returns>Retorna la vista parcial M12_AgregarUsuario
+        /*public ActionResult M12_AgregarUsuario()
         {
             try { 
                 PersistenciaUsuario p = new PersistenciaUsuario();
@@ -130,45 +156,50 @@ namespace BOReserva.Controllers
                 return Json(ex.Message);
             }
             
-        }
+        }*/
 
 
 
+        /// <summary>
+        /// Método que se utiliza para agregar un Usuario
+        /// </summary>
+        /// <param name="usuario">Datos que provienen de un formulario de la vista parcial M12_AgregarUsuario</param>
+        /// <returns>Retorna un ActionResult</returns>
         [HttpPost]
-        public ActionResult M12_AgregarUsuario(AgregarUsuario usuario)
-        {
-            //Se resetea intentos en la Tabla Login MO1 Ingreso Seguridad
-            Cgestion_seguridad_ingreso ingreso = new Cgestion_seguridad_ingreso();
-            ingreso.correoCampoTexto = usuario.correoUsuario;
+        //public ActionResult M12_AgregarUsuario(AgregarUsuario usuario)
+        //{
+        //    //Se resetea intentos en la Tabla Login MO1 Ingreso Seguridad
+        //    Cgestion_seguridad_ingreso ingreso = new Cgestion_seguridad_ingreso();
+        //    ingreso.correoCampoTexto = usuario.correoUsuario;
             
-            if (ModelState.IsValid) 
-            {
-                PersistenciaUsuario p = new PersistenciaUsuario();
-                try
-                {
-                    p.AgregarUsuario(usuario.toClass());
-                    ingreso.ResetearIntentos();//Metodo M01_Ingreso_Seguridad
-                    TempData["message"] = RecursoUsuario.MensajeAgregado;
-                    //return RedirectToAction("M12_Index");
-                }
-                catch (ExceptionM12Reserva ex)
-                {
-                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                    return Json(ex.Message);
-                }
-                catch (Exception ex)
-                {
-                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                    return Json(ex.Message);
-                }
-            }
-            return Json("true");
-            //return RedirectToAction("M12_Index");
-            //return View("M12_AgregarUsuario", "_Layout");    
+        //    if (ModelState.IsValid) 
+        //    {
+        //        PersistenciaUsuario p = new PersistenciaUsuario();
+        //        try
+        //        {
+        //            p.AgregarUsuario(usuario.toClass());
+        //            ingreso.ResetearIntentos();//Metodo M01_Ingreso_Seguridad
+        //            TempData["message"] = RecursoUsuario.MensajeAgregado;
+        //            //return RedirectToAction("M12_Index");
+        //        }
+        //        catch (ExceptionM12Reserva ex)
+        //        {
+        //            Response.StatusCode = (int)HttpStatusCode.BadRequest;
+        //            return Json(ex.Message);
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            Response.StatusCode = (int)HttpStatusCode.BadRequest;
+        //            return Json(ex.Message);
+        //        }
+        //    }
+        //    return Json("true");
+        //    //return RedirectToAction("M12_Index");
+        //    //return View("M12_AgregarUsuario", "_Layout");    
             
  
             
-        }
+        //}
 
 
         /// <summary>

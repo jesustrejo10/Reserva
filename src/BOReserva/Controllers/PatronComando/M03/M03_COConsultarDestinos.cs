@@ -14,17 +14,12 @@ namespace BOReserva.Controllers.PatronComando.M03
     /// </summary>
     public class M03_COConsultarDestinos : Command<Dictionary<int, Entidad>>
     {
-        Ruta _ruta;
-        string _origenRuta;
+        Ruta _rutas = new Ruta();
 
-        public M03_COConsultarDestinos(string origen)
-        {
-            this._ruta._origenRuta = origen;
-        }
         public override Dictionary<int, Entidad> ejecutar()
         {
             DAORuta daoRuta = (DAORuta)FabricaDAO.instanciarDAORuta();
-            Dictionary<int, Entidad> test = daoRuta.consultarDestinos(_ruta._origenRuta);
+            Dictionary<int, Entidad> test = daoRuta.consultarDestinos();
             return test;
         }
 

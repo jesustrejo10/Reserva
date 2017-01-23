@@ -9,7 +9,7 @@
         <div class="box1 noradius">
             <div class="box-icon-title">
                 <i class="fa fa-automobile"></i>
-                <h2> Reserva de Automóvil</h2>
+                <h2> Reserva de Automovil</h2>
             </div>
             <p>Detalle de reserva</p>
         </div>
@@ -32,7 +32,7 @@
                     <button type="button" class="btn btn-danger pull-right" onclick="mostrarCuadroDialogo(this)">Cancelar</button>
                     <button type="button" class="btn btn-default pull-right" onclick="editar()">Modificar</button>
                 }
-                <button type="button" class="btn btn-default pull-right" onclick="cargarContenido('#CI', 'get', '/gestion_reserva_auto/M19_Reserva_Autos_Perfil', null, this)"> Ver Reservas de Automóviles</button>
+                <button type="button" class="btn btn-default pull-right" onclick="cargarContenido('#CI', 'get', '/gestion_reserva_auto/M19_Reserva_Autos_Perfil', null, this)"> Ver Reservas de Automoviles</button>
                 <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-sm">
                         <div class="modal-content">
@@ -40,7 +40,7 @@
                             <!-- header modal -->
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <span class="modal-title" id="mySmallModalLabel">&#191;Está seguro que desea cancelar la reserva&#63;</span>
+                                <span class="modal-title" id="mySmallModalLabel">&#191;Esta seguro que desea cancelar la reserva&#63;</span>
                             </div>
 
                             <!-- body modal -->
@@ -58,7 +58,7 @@
                 
                 <div>
                     <div class="col-xs-10 col-xs-offset-1">
-                        <h3 class="color-gris-oscuro">Datos del Automóvil</h3>
+                        <h3 class="color-gris-oscuro">Datos del Automovil</h3>
                         <div class="row">
                             <div class="form-group">
                                 <div class="col-md-4 col-sm-4">
@@ -103,11 +103,11 @@
                                     <p>@reserva._hora_ini </p>
                                 </div>
                                 <div class="col-md-4 col-sm-4">
-                                    <label>Fecha Devolución</label>
+                                    <label>Fecha Devolucion</label>
                                     <p>@reserva._fecha_fin</p>
                                 </div>
                                 <div class="col-md-4 col-sm-4">
-                                    <label>Hora Devolución</label>
+                                    <label>Hora Devolucion</label>
                                     @{
                                     List<SelectListItem> _tipos = new List<SelectListItem>();
                                     _tipos.Add(new SelectListItem
@@ -172,7 +172,7 @@
                                     <p>@reserva._LugarOri._nombre</p>
                                 </div>
                                 <div class="col-md-4 col-sm-4">
-                                    <label>Lugar Devolución</label>
+                                    <label>Lugar Devolucion</label>
                                     <p>@reserva._LugarDest._nombre</p>
                                 </div>
                                 <div class="col-md-4 col-sm-4">
@@ -213,8 +213,8 @@
                                 data: reserva_auto,
                                 type: 'POST',
                                 success: function (data) {
-                                        alert("Se canceló la reserva");
-                                        cargarContenido('#CI', 'get', '/gestion_reserva_auto/M19_Reserva_Autos_Perfil', null, this)
+                                    alert("Se cancelo la reserva");
+                                    cargarContenido('#CI', 'get', '/gestion_reserva_auto/M19_Reserva_Autos_Perfil', null, this)
                                 },
                                 fail: function (data) {
                                     alert("No se pudo cancelar la reserva");
@@ -235,15 +235,15 @@
                             data: reserva,
                             type: 'POST',
                             success: function (data) {
-                                alert("Se modificó la hora de devolución del auto");
+                                alert("Se modifico la hora de devolucion del auto");
                                 cargarContenido('#CI', 'get', '/gestion_reserva_auto/M19_Reserva_Autos_Perfil', null, this)
                             },
                             fail: function (data) {
-                                alert("No se pudo modificar la hora de devolución");
+                                alert("No se pudo modificar la hora de devolucion");
                             }
                         });
                     }
-                </script>
+</script>
             }
             else
             {
@@ -254,3 +254,4 @@
     </div>
 
 </div>
+<!-- /FLIP BOX -->

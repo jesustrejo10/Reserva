@@ -8,17 +8,26 @@ using System.Web;
 
 namespace BOReserva.Controllers.PatronComando
 {
+    ///<summary>
+    ///Comando que elimina un rol
+    ///</summary>
     public class M13_COEliminarRol : Command<String>
     {
         Rol _rol;
-        int _idRol;
 
+        ///<summary>
+        ///Metodo que ejecuta el comando
+        ///</summary>
         public M13_COEliminarRol(Entidad rol, int id)
         {
             this._rol = (Rol)rol;
             this._rol._idRol = id;
         }
 
+        ///<summary>
+        ///Metodo que ejecuta el comando
+        ///</summary>
+        ///<returns>String</returns>
         public override String ejecutar()
         {
             DAORol daoRol = (DAORol)FabricaDAO.instanciarDAORol();

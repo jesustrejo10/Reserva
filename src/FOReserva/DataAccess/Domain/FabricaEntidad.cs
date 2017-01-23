@@ -70,7 +70,7 @@ namespace FOReserva.DataAccess.Domain
             return new List<CReserva_Autos_Perfil>();
         }
 
-        
+
 
 
         public static CReservaAutomovil inicializarReserva(string fecha_ini, string fecha_fin, string horario_ini,
@@ -125,12 +125,7 @@ namespace FOReserva.DataAccess.Domain
 
         public static CAutomovil inicializarAutomovil(string matricula, string modelo, string fabricante)
         {
-            return new CAutomovil(matricula, modelo, fabricante); 
-        }
-
-        public static CAutomovil inicializarAutomovil(string matricula, string modelo, string fabricante, string tipo, string color, string transmision, int fk_ciudad, double precioAlquiler, int anio, int cantPasajeros, int disponibilidad, string fechaini, string fechafin, string horaini, string horafin, int ciudadorigen, int ciudaddestino)
-        {
-            return new CAutomovil(matricula, modelo, fabricante, tipo, color, transmision, fk_ciudad, precioAlquiler, anio, cantPasajeros, disponibilidad, fechaini, fechafin, horaini, horafin, ciudadorigen, ciudaddestino);
+            return new CAutomovil(matricula, modelo, fabricante);
         }
 
         public static CAutomovil inicializarAutomovil(string matricula, string modelo, string fabricante, string tipo, string color, string transmision, int fk_ciudad, double precioAlquiler, int anio, int cantPasajeros, int disponibilidad)
@@ -141,6 +136,11 @@ namespace FOReserva.DataAccess.Domain
         public static CAutomovil inicializarAutomovil(string matricula)
         {
             return new CAutomovil(matricula);
+        }
+
+        public static CAutomovil inicializarAutomovil(string matricula, string modelo, string fabricante, string tipo, string color, string transmision, int fk_ciudad, double precioAlquiler, int anio, int cantPasajeros, int disponibilidad, string fechaini, string fechafin, string horaini, string horafin, int ciudadorigen, int ciudaddestino)
+        {
+            return new CAutomovil(matricula, modelo, fabricante, tipo, color, transmision, fk_ciudad, precioAlquiler, anio, cantPasajeros, disponibilidad, fechaini, fechafin, horaini, horafin, ciudadorigen, ciudaddestino);
         }
 
         public static Entidad InstanciarPais(int id, String nombre)
@@ -155,5 +155,22 @@ namespace FOReserva.DataAccess.Domain
 
         #endregion
 
+
+        #region Modulo 22 ReservaCrucero
+        public static Entidad InstanciarReservaCrucero(DateTime fechaReserva, int cantidadPasajeros, int usuario, int crucero, int ruta, DateTime fechaInicio, String status)
+        {
+            return new ReservaCrucero(fechaReserva,cantidadPasajeros,usuario,crucero,ruta,fechaInicio,status);
+        }
+
+        public static Entidad InstanciarReservaCrucero(int id, DateTime fechaReserva, int cantidadPasajeros, int usuario, int crucero, int ruta, DateTime fechaInicio, String status)
+        {
+            return new ReservaCrucero(id, fechaReserva, cantidadPasajeros, usuario, crucero, ruta, fechaInicio, status);
+        }
+
+        public static Entidad InstanciarReservaCrucero(int cantidadPasajeros, int usuario, int crucero, int ruta, DateTime fechaInicio, String status)
+        {
+            return new ReservaCrucero(cantidadPasajeros, usuario, crucero, ruta, fechaInicio, status);
+        }
+        #endregion
     }
 }
