@@ -1,11 +1,11 @@
 ﻿@model BOReserva.Models.gestion_reclamos.CAgregarReclamo
-
+<link href="~/Content/Canvas/Box.css" rel="stylesheet" />
  <!---------------------- SECCION DE AGREGAR RECLAMO---------------->
 @using (Html.BeginForm("guardarReclamo", "gestion_reclamos", null, FormMethod.Post, new { @id = "formGuardarReclamo", @class = "form-horizontal" }))
 {
     <div class="row">
-        <div class="col-md-12">
-            <div class="box">
+        <div class="col-md-10">
+            <div class="Cajita">
 
                 <div class="box-body">
                     <h2 class="box-title"> Agregar Reclamo</h2>
