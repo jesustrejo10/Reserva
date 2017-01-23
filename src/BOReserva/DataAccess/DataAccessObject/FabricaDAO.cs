@@ -214,11 +214,16 @@ namespace BOReserva.DataAccess.DataAccessObject
         #endregion
 
         #region M13_Roles
+        ///<summary>
+        ///Instancia DAORol
+        ///</summary>
         public static DAO instanciarDAORol()
         {
             return new DAORol();
         }
-
+        ///<summary>
+        ///Instancia DAOPermiso
+        ///</summary>
         public static DAO instanciarDAOPermiso()
         {
             return new DAOPermiso();

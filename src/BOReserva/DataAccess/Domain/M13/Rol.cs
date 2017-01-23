@@ -12,11 +12,25 @@ namespace BOReserva.DataAccess.Domain
     public class Rol: Entidad
     {
         private CListaGenerica<CModulo_detallado> permisos;
-
+        ///<summary>
+        ///id del rol
+        ///</summary>
         public int _idRol { get; set; }
+        ///<summary>
+        ///Nombre del rol
+        ///</summary>
         public String _nombreRol { get; set; }
+        ///<summary>
+        ///Permiso del rol
+        ///</summary>
         public Permiso _permiso { get; set; }
+        ///<summary>
+        ///Nombre del permiso
+        ///</summary>
         public String _nombrePermiso { get; set; }
+        ///<summary>
+        ///lista de permisos
+        ///</summary>
         public List<Entidad> listapermisos { get; set; }
 
         /// <summary>
@@ -52,11 +66,17 @@ namespace BOReserva.DataAccess.Domain
             this._nombrePermiso = permiso;
         }
 
+        ///<summary>
+        ///Constructor
+        ///</summary>
         public Rol(int id)
         {
             this._idRol = id;
         }
 
+        ///<summary>
+        ///Constructor
+        ///</summary>
         public Rol(int id, string nombre, CListaGenerica<CModulo_detallado> permisos)
         {
             this._idRol = id;
