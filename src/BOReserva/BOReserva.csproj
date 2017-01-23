@@ -1799,6 +1799,7 @@
     <Content Include="Views\gestion_roles\M13_AgregarPermiso.cshtml" />
     <Content Include="Views\gestion_roles\M13_ModificarPermiso.cshtml" />
     <Content Include="Views\gestion_roles\M13_VisualizarPermiso.cshtml" />
+    <Content Include="Views\gestion_reclamos\M16_ModificarReclamo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\gestion_boletos\M05_VisualizarBoletos.cshtml" />
