@@ -22,6 +22,11 @@ namespace BOReserva.Servicio
 {
     public class manejadorSQL
     {
+        //                                      I M P O R T A N T E
+        // ESTA CLASE SE MANTIENE EN EL PROYECTO DEBIDO A QUE EL MODULO 11 AUN REFERENCIA ESTA CLASE.
+        // SON LOS UNICOS QUE ACCEDEN A ELLA.
+        
+        
         /// <summary>
         /// ATENCIÓN: Esta clase no debería usarse más, se deja por motivos de compatibilidad para los grupos que aún no han migrado a DAO.
         /// </summary>
@@ -37,140 +42,6 @@ namespace BOReserva.Servicio
 
 
 
-
-        //Procedimiento del Modulo 6 para agregar platos a la base de datos.
-        public Boolean insertarPlato(CAgregarComida model)
-        {
-            try
-            {
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                //uso el SqlCommand para realizar los querys
-                SqlCommand query = conexion.CreateCommand();
-                //ingreso la orden del query
-                query.CommandText = "INSERT INTO Comida VALUES ('" + model._nombrePlato + "','" + model._tipoPlato + "',1,' " + model._descripcionPlato + "');";
-                //creo un lector sql para la respuesta de la ejecucion del comando anterior
-                SqlDataReader lector = query.ExecuteReader();
-                //ciclo while en donde leere los datos en dado caso que sea un select o la respuesta de un procedimiento de la bd
-                /*while(lector.Read())
-                {
-                      //COMENTADO PORQUE ESTE METODO NO LO APLICA, SERÁ BORRADO DESPUES
-                }*/
-                //cierro el lector
-                lector.Close();
-                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
-                conexion.Close();
-                return true;
-            }
-            catch (SqlException e)
-            {
-                return false;
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
-
-        }
-        //Procedimiento del Modulo 6 para retornar una lista con los platos en la bd
-        public List<CComida> listarPlatosEnBD()
-        {
-            List<CComida> platos = new List<CComida>();
-            try
-            {
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                String query = "SELECT * FROM Comida";
-                SqlCommand cmd = new SqlCommand(query, conexion);
-                SqlDataReader lector = cmd.ExecuteReader();
-                while (lector.Read())
-                {
-                    CComida plato = new CComida(Int32.Parse(lector["com_id"].ToString()), lector["com_nombre"].ToString(),
-                    lector["com_tipo"].ToString(), Convert.ToInt32(lector["com_estatus"]), lector["com_referencia"].ToString());
-                    platos.Add(plato);
-                }
-                //cierro el lector
-                lector.Close();
-                //IMPORTANTE SIEMPRE CERRAR LA CONEXION O DARA ERROR LA PROXIMA VEZ QUE SE INTENTE UNA CONSULTA
-                conexion.Close();
-                return platos;
-
-            }
-            catch (SqlException e)
-            {
-                throw e;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
-
-        /// <summary>
-        /// Procedimiento del Modulo 6 para deshabilitar un plato
-        /// </summary>
-        /// <param name="id"> int </param>
-        /// <returns>Boolean true si se deshabilito bien, false si dio un error </returns>
-        public Boolean deshabilitarPlato(int id)
-        {
-            try
-            {
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                String query = "UPDATE Comida SET com_estatus=0 where com_id=" + id;
-                SqlCommand cmd = new SqlCommand(query, conexion);
-                SqlDataReader lector = cmd.ExecuteReader();
-                conexion.Close();
-                return true;
-
-            }
-            catch (SqlException e)
-            {
-                throw e;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
-        /// <summary>
-        /// Procedimiento del Modulo 6 para habilitar un plato
-        /// </summary>
-        /// <param name="id">int</param>
-        /// <returns>Boolean true si se habilito bien, false si dio un error </returns>
-        public Boolean habilitarPlato(int id)
-        {
-            try
-            {
-                //Inicializo la conexion con el string de conexion
-                conexion = new SqlConnection(stringDeConexion);
-                //INTENTO abrir la conexion
-                conexion.Open();
-                String query = "UPDATE Comida SET com_estatus=1 where com_id=" + id;
-                SqlCommand cmd = new SqlCommand(query, conexion);
-                SqlDataReader lector = cmd.ExecuteReader();
-                conexion.Close();
-                return true;
-
-            }
-            catch (SqlException e)
-            {
-                throw e;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
-
- 
-        
 
         public Boolean agregarPaquete(CPaquete paquete)
         {
