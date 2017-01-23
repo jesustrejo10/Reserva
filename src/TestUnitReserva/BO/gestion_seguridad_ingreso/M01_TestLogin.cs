@@ -61,7 +61,7 @@ namespace TestUnitReserva.BO.gestion_seguridad_ingreso
         {
             Command<Entidad> comandoConsultarUsuario = FabricaComando.M01ConsultarUsuario(usuarioAConsultar);
             Command<Boolean> comandoBloquearUsuario = FabricaComando.M01BloquearUsuario(usuarioAConsultar);
-            Command<Boolean> comandoRestearIntentos = FabricaComando.M01ResetearIntentos(usuarioAConsultar);
+            Command<Boolean> comandoResetearIntentos = FabricaComando.M01ResetearIntentos(usuarioAConsultar);
             Command<Boolean> comandoIncrementarIntentos = FabricaComando.M01IncrementarIntentos(usuarioAConsultar);
             Command<Boolean> comandoInsertarLogin = FabricaComando.M01InsertarLogin(usuarioAConsultar);
             Command<Boolean> comandoEliminarLogin = FabricaComando.M01EliminarLogin(usuarioAConsultar);
@@ -69,7 +69,7 @@ namespace TestUnitReserva.BO.gestion_seguridad_ingreso
 
             Assert.IsInstanceOf<Command<Entidad>>(comandoConsultarUsuario);
             Assert.IsInstanceOf<Command<Boolean>>(comandoBloquearUsuario);
-            Assert.IsInstanceOf<Command<Boolean>>(comandoRestearIntentos);
+            Assert.IsInstanceOf<Command<Boolean>>(comandoResetearIntentos);
             Assert.IsInstanceOf<Command<Boolean>>(comandoIncrementarIntentos);
             Assert.IsInstanceOf<Command<Boolean>>(comandoInsertarLogin);
             Assert.IsInstanceOf<Command<Boolean>>(comandoEliminarLogin);
@@ -87,9 +87,34 @@ namespace TestUnitReserva.BO.gestion_seguridad_ingreso
         #region Pruebas Comandos
 
         [Test]
-        public void PruebaConsultarUsuario()
+        public void M01_PruebaConsultarUsuario()
         {
+            Command<Entidad> comandoConsultarUsuario = FabricaComando.M01ConsultarUsuario(usuarioAConsultar);
+            Usuario resultado = (Usuario)comandoConsultarUsuario.ejecutar();
+            Assert.AreEqual("the.wise.mage@gmail.com", resultado.correo);
+        }
 
+        [Test]
+        public void M01_PruebaIncrementarIntentos()
+        {
+            Command<Boolean> comandoResetearIntentos = FabricaComando.M01ResetearIntentos(usuarioAConsultar);
+            Command<Boolean> comandoIncrementarIntentos = FabricaComando.M01IncrementarIntentos(usuarioAConsultar);
+            Command<int> comandoNumeroIntentos = FabricaComando.M01NumeroIntentos(usuarioAConsultar);
+            comandoResetearIntentos.ejecutar();
+            Boolean resultado = (Boolean)comandoIncrementarIntentos.ejecutar();
+            int resultado2 = (int)comandoNumeroIntentos.ejecutar();
+            Assert.AreEqual(1, resultado2);
+        }
+
+        [Test]
+        public void M01_PruebaResetearIntentos()
+        {
+            Command<Boolean> comandoResetearIntentos = FabricaComando.M01ResetearIntentos(usuarioAConsultar);
+            Command<int> comandoNumeroIntentos = FabricaComando.M01NumeroIntentos(usuarioAConsultar);
+            Boolean resultado = (Boolean)comandoResetearIntentos.ejecutar();
+            int resultado2 = (int)comandoNumeroIntentos.ejecutar();
+            Assert.AreEqual(true, resultado);
+            Assert.AreEqual(0, resultado2);
         }
 
         #endregion
