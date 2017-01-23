@@ -177,4 +177,24 @@
     <value>M20_ObtenerValoracionPorReferencia</value>
     <comment>Procedimiento para obtener la valoracion de una referencia.</comment>
   </data>
+  <data name="parametroRevisionFecha" xml:space="preserve">
+    <value>rev_fecha</value>
+    <comment>Parametro usado en los procedimientos almacenados.</comment>
+  </data>
+  <data name="parametroRevisionNegativos" xml:space="preserve">
+    <value>rev_negativos</value>
+    <comment>Parametro usado en los procedimientos almacenados.</comment>
+  </data>
+  <data name="parametroRevisionPositivos" xml:space="preserve">
+    <value>rev_positivos</value>
+    <comment>Parametro usado en los procedimientos almacenados.</comment>
+  </data>
+  <data name="parametroRevisionPropietarioNombre" xml:space="preserve">
+    <value>rev_propietario_nombre</value>
+    <comment>Parametro usado en los procedimientos almacenados.</comment>
+  </data>
+  <data name="parametroReferenciaEstrellas" xml:space="preserve">
+    <value>ref_estrellas</value>
+    <comment>Parametro usado en los procedimientos almacenados.</comment>
+  </data>
 </root>

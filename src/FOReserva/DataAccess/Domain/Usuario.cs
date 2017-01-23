@@ -7,14 +7,42 @@ namespace FOReserva.DataAccess.Domain
 {
     public class Usuario : Entidad
     {
-        public int Codigo { get; set; }
-                
-        public string Nombre { get; set; }
-
-        public Usuario(int id, String name)
-        {
-            this.Codigo = id;
-            this.Nombre = name;
+        /// <summary>
+        /// Constructor Base.
+        /// </summary>
+        public Usuario() {
+            this.Id = 0;
         }
+
+        /// <summary>
+        /// Constructur Usuario, requiere ID.
+        /// </summary>
+        public Usuario(int id)
+        {
+            this.Id = id;
+        }
+
+        /// <summary>
+        /// Constructur Usuario, requiere ID y Nombre.
+        /// </summary>
+        public Usuario(int id, String nombre)
+        {
+            this.Id = id;
+            this.Nombre = nombre;
+        }
+
+        /// <summary>
+        /// Permite obtener y indicar el Id de la instancia.
+        /// </summary>
+        public int Id
+        {
+            get { return this._id;  }
+            set { _id = value; }
+        }
+
+        /// <summary>
+        /// Permite obtener y indicar el Nombre de la instancia.
+        /// </summary>
+        public string Nombre { get; set; }        
     }
 }

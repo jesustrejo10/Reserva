@@ -228,6 +228,7 @@
     <Compile Include="Controllers\PatronComando\M22\M22_COEliminarReserva.cs" />
     <Compile Include="Controllers\PatronComando\M22\M22_COModificarReserva.cs" />
     <Compile Include="Controllers\PatronComando\M22\M22_COAgregarRerserva.cs" />
+    <Compile Include="Controllers\testController.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOReclamo.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\registro_autenticacionController.cs" />
@@ -264,6 +265,7 @@
     <Compile Include="DataAccess\Domain\Habitacion.cs" />
     <Compile Include="DataAccess\Domain\Hotel.cs" />
     <Compile Include="DataAccess\Domain\Reclamo.cs" />
+    <Compile Include="DataAccess\Domain\ReferenciaValorada.cs" />
     <Compile Include="DataAccess\Domain\ReservaHabitacion.cs" />
     <Compile Include="DataAccess\Domain\Restaurante.cs" />
     <Compile Include="DataAccess\Domain\Revision.cs" />
@@ -1849,6 +1851,8 @@
     <Content Include="Views\gestion_reserva_crucero\placeholder.html" />
     <Content Include="Views\gestion_reserva_hotel\placeholder.html" />
     <Content Include="Views\gestion_reserva_restaurante\placeholder.html" />
+    <Content Include="Scripts\gestion_revision\global.js" />
+    <Content Include="Scripts\gestion_revision\revisiones.js" />
     <Content Include="Views\Shared\assets\css\color_scheme\green.css" />
     <Content Include="Views\Shared\assets\css\essentials.css" />
     <Content Include="Views\Shared\assets\css\header-1.css" />
@@ -3212,13 +3216,6 @@
     <Content Include="Views\gestion_planificacion_vacaciones\M17_gestion_itinerario_Perfil.cshtml" />
     <Content Include="Views\gestion_reserva_habitaciones\buscar_hoteles.cshtml" />
     <Content Include="Views\gestion_reserva_habitaciones\hoteles_con_habitaciones.cshtml" />
-    <Content Include="Views\gestion_revision\gestion_ListRevicion.cshtml" />
-    <Content Include="Views\gestion_revision\gestion_revision.cshtml" />
-    <Content Include="Views\gestion_revision\consultar_revision.cshtml" />
-    <Content Include="Views\gestion_revision\crear_revision.cshtml" />
-    <Content Include="Views\gestion_revision\eliminar_revision.cshtml" />
-    <Content Include="Views\gestion_revision\editar_revision.cshtml" />
-    <Content Include="Views\gestion_revision\Consultar_Revision.cshtml" />
     <Content Include="Views\gestion_diarios\gestion_diarios_resultados.cshtml" />
     <Content Include="Views\gestion_reserva_restaurante\lista_reserva_restaurantes.cshtml" />
     <Content Include="Views\gestion_reserva_restaurante\error_conexion.cshtml" />
@@ -3230,18 +3227,14 @@
     <Content Include="Views\Shared\assets\plugins\slider.swiper\dist\js\maps\swiper.min.js.map" />
     <Content Include="Views\gestion_reserva_restaurante\_EditarReserva.cshtml" />
     <Content Include="Views\gestion_diarios\gestion_diarios_ver.cshtml" />
-    <Content Include="Views\gestion_revision\lista_revisiones.cshtml" />
-    <Content Include="Views\gestion_revision\consultar_revision.cshtml" />
     <Content Include="Views\gestion_diarios\_CrearDiarioExito.cshtml" />
     <Content Include="Views\gestion_reserva_restaurante\_FailReservar.cshtml" />
-    <Content Include="Views\gestion_revision\crear_revision_form.cshtml" />
     <Content Include="Views\gestion_reserva_crucero\gestion_reserva_crucero_buscar_crucero.cshtml" />
     <Content Include="Views\gestion_reserva_crucero\gestion_reserva_crucero_confirmar.cshtml" />
     <Content Include="Views\gestion_reserva_crucero\gestion_reserva_crucero_error_conexion.cshtml" />
     <Content Include="Views\gestion_reserva_crucero\gestion_reserva_crucero_no_resultados.cshtml" />
     <Content Include="Views\gestion_reserva_crucero\gestion_reserva_crucero_perfil.cshtml" />
     <Content Include="Views\gestion_reserva_crucero\gestion_reserva_crucero_resultado_crucero.cshtml" />
-    <Content Include="Views\gestion_revision\Revision_usuario.cshtml" />
     <Content Include="Views\gestion_diarios\_CrearDiarioFallo.cshtml" />
     <Content Include="Views\gestion_diarios\gestion_diariosImagenes.cshtml" />
     <Content Include="Views\registro_autenticacion\CambiarClave.cshtml" />
@@ -3260,6 +3253,12 @@
     <Content Include="Views\gestion_reclamos\M16_VisualizarReclamo.cshtml" />
     <Content Include="Views\gestion_reclamos\M16_ModificarReclamo.cshtml" />
     <Content Include="Views\gestion_reserva_auto\M19_Detalle_reserva.cshtml" />
+    <Content Include="Views\gestion_revision\obtener_revisiones.cshtml" />
+    <Content Include="Views\gestion_revision\revisiones.cshtml" />
+    <Content Include="Views\gestion_revision\valoracion.cshtml" />
+    <Content Include="Views\gestion_revision\form_revision.cshtml" />
+    <Content Include="Views\gestion_revision\obtener_valoracion.cshtml" />
+    <Content Include="Views\test\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

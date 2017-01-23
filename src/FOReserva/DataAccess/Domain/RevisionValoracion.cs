@@ -10,17 +10,28 @@ namespace FOReserva.DataAccess.Domain
     /// </summary>
     public class RevisionValoracion : Entidad
     {
+        public enum Calificacion { Positiva = 1, Negativa = -1 }
+
         private Entidad _revision;
-        private int _punto;
+        private Calificacion _punto;
         private Entidad _propietario;
 
         /// <summary>
         /// Constructor Base.
         /// </summary>
         public RevisionValoracion() {
-            this.Punto = 0;
+            this.Punto = Calificacion.Positiva;
             this.Propietario = new Entidad(0);
             this.Revision = new Entidad(0);
+        }
+
+        /// <summary>
+        /// Permite obtener y indicar el Id de la instancia.
+        /// </summary>
+        public int Id
+        {
+            get { return this._id; }
+            set { _id = value; }
         }
 
         /// <summary>
@@ -35,7 +46,7 @@ namespace FOReserva.DataAccess.Domain
         /// <summary>
         /// Propiedad que facilita el acceso a atributo Punto.
         /// </summary>
-        public int Punto
+        public Calificacion Punto
         {
             get { return _punto; }
             set { _punto = value; }
