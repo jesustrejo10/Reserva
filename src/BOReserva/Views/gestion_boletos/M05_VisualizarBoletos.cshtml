@@ -105,39 +105,50 @@
         });
     });
 
+    $(document).on("click", ".eliminar", function () {
+        var identificador = $(this).parent().parent().parent().attr("id");
+        jQuery.ajax({
+            type: "POST",
+            url: "/gestion_boletos/eliminarBoleto",
+            data: { id: identificador }
+        }).done(function (data) {
+
+            alert("Se eliminó exitosamente el boleto")
+            var url1 = '/gestion_boletos/M05_VisualizarBoletos';
+            var method = 'GET';
+            var data1 = '';
+
+            $.ajax(
+                {
+                    url: url1,
+                    type: method,
+                    data: data,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $("#contenido").empty();
+                        $("#contenido").append(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+        }).fail(function () {
+            alert("No se pudo eliminar")
+        });
+    });
+       
+
+
+
+
+
+
+
     $(document).ready(function () {
         //e.preventDefault();
         $(".eliminar").click(function () {
             loader();
-            var identificador = $(this).parent().parent().parent().attr("id");
-            jQuery.ajax({
-                type: "POST",
-                url: "/gestion_boletos/eliminarBoleto",
-                data: { id: identificador }
-            }).done(function (data) {
-
-                alert("Se eliminó exitosamente el boleto")
-                var url1 = '/gestion_boletos/M05_VisualizarBoletos';
-                var method = 'GET';
-                var data1 = '';
-
-                $.ajax(
-                    {
-                        url: url1,
-                        type: method,
-                        data: data,
-                        success: function (data, textStatus, jqXHR) {
-
-                            $("#contenido").empty();
-                            $("#contenido").append(data);
-                        },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            alert(errorThrown);
-                        }
-                    });
-            }).fail(function () {
-                alert("No se pudo eliminar")
-            });
+            
         });
     });
 </script>

@@ -33,7 +33,7 @@ namespace BOReserva.Servicio
         //Inicializo el string de conexion en el constructor
         public manejadorSQL()
         {
-            stringDeConexion = ConfigurationManager.ConnectionStrings["StringRemoto"].ConnectionString;
+            stringDeConexion = ConfigurationManager.ConnectionStrings["Conector"].ConnectionString;
         }
         //Atributo que ejecutara la conexion a la bd
         private SqlConnection conexion = null;

@@ -1,4 +1,4 @@
-﻿using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
+using BOReserva.DataAccess.DataAccessObject.InterfacesDAO;
 using BOReserva.DataAccess.Domain;
 using BOReserva.DataAccess.Model;
 using System;
@@ -23,7 +23,7 @@ namespace BOReserva.DataAccess.DataAccessObject
             try
             {
                 conexion.Open();
-                String sql = "INSERT INTO Pasajero (pas_id,pas_primer_nombre,pas_segundo_nombre,pas_primer_apellido,pas_segundo_apellido,pas_fecha_nacimiento,pas_sexo,pas_correo) VALUES(" + pasajero._id + ",'" + pasajero._primer_nombre + "','" + pasajero._segundo_nombre + "','" + pasajero._primer_apellido + "','" + pasajero._segundo_apellido + "','" + pasajero._fecha_nac + "','" + pasajero._sexo + "','" + pasajero._correo + "')";
+                String sql = "INSERT INTO Pasajero (pas_id,pas_primer_nombre,pas_segundo_nombre,pas_primer_apellido,pas_segundo_apellido,pas_fecha_nacimiento,pas_sexo,pas_correo) VALUES(" + pasajero._id + ",'" + pasajero._primer_nombre + "','" + pasajero._segundo_nombre + "','" + pasajero._primer_apellido + "','" + pasajero._segundo_apellido + "','" + pasajero._fecha_nac.ToString("yyyy/MM/dd") + "','" + pasajero._sexo + "','" + pasajero._correo + "')";
 
                 Debug.WriteLine(sql);
                 SqlCommand cmd = new SqlCommand(sql, conexion);

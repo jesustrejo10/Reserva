@@ -17,7 +17,7 @@ namespace BOReserva.DataAccess.DataAccessObject
     /// </summary>
     abstract public class DAO : IDAO
     {
-        protected String _connexionString = ConfigurationManager.ConnectionStrings["StringRemoto"].ConnectionString;
+        protected String _connexionString = ConfigurationManager.ConnectionStrings["Conector"].ConnectionString;
         protected SqlConnection conexion { set;  get; }
         // El String de conexion se encuentra en el archivo Web.config
         protected SqlCommand comando { set;  get; }
