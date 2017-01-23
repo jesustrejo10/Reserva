@@ -687,6 +687,10 @@ namespace BOReserva.DataAccess.DataAccessObject
             }
         }
 
+        ///<summary>
+        ///Metodo para consultar los permisos no asignados a un rol
+        ///</summary>
+        ///<returns>Lista de entidad</returns>
         public List<Entidad> consultarPermisosNoAsignados(int id)
         {
             List<Entidad> listapermisos;

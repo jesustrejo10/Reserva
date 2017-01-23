@@ -53,6 +53,7 @@ namespace BOReserva.Controllers
         /// <summary>
         /// Metodo para llamar la vista parcial M13_VisualizarRol
         /// <returns>retorna la lista de roles</returns>
+        /// </summary>
         public ActionResult M13_VisualizarRol()
         {
             List<Entidad> listaroles;
@@ -354,6 +355,7 @@ namespace BOReserva.Controllers
         /// <summary>
         /// Metodo para aregar un permiso nuevo
         /// <returns>retorna JsonResult</returns>
+        /// </summary>
         public JsonResult agregarpermiso(CModulo_detallado model)
         {
             //Verifico que todos los campos no sean nulos
@@ -382,6 +384,7 @@ namespace BOReserva.Controllers
         /// <summary>
         /// Metodo para llamar la vista parcial M13_VisualizarPermiso
         /// <returns>retorna la lista de roles</returns>
+        /// </summary>
         public ActionResult M13_VisualizarPermiso()
         {
             List<Entidad> listapermisos;
