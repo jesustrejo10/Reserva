@@ -114,6 +114,7 @@ namespace BOReserva.Controllers
             modelovista._nombre = usuarioBuscado.nombre;
             modelovista._apellido = usuarioBuscado.apellido;
             modelovista.contraseñaUsuario = usuarioBuscado.contrasena;
+            modelovista._confirmarContraseña = usuarioBuscado.contrasena;
             modelovista._rol = usuarioBuscado.rolr._idRol;
             modelovista._activo = usuarioBuscado.activo;
 

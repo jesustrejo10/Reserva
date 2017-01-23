@@ -559,11 +559,10 @@ jQuery(document).ready(function () {
     // Comienzo M12 Usuarios
     $("#indexUsuarios").click(function (e) {
         e.preventDefault();
+        $("#contenido").html('<div class="text-center">Cargando...</div>');
         var url = '/gestion_usuarios/M12_VisualizarUsuarios';
         var method = 'GET';
         var data = '';
-        console.log("HOLA CHAMA");
-        console.log ("HABLAAA");
         $.ajax(
             {
                 url: url,
@@ -581,6 +580,7 @@ jQuery(document).ready(function () {
 
     $("#agregarUsuarios").click(function (e) {
         e.preventDefault();
+        $("#contenido").html('<div class="text-center">Cargando...</div>');
         var url = '/gestion_usuarios/M12_AgregarUsuario2';
         var method = 'GET';
         var data = '';

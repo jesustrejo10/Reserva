@@ -22,9 +22,6 @@ namespace BOReserva.DataAccess.Domain
         public DateTime fechaCreacionf { get; set; }
         public String activo { get; set; }
 
-        public Usuario()
-        { }
-
         /// <summary>
         /// Constructor Vacio utilizado mientras se le da forma al proyecto
         /// </summary>
