@@ -8,7 +8,6 @@ using BOReserva.Servicio;
 using System.Diagnostics;
 using System.Data.SqlClient;
 using BOReserva.Models.gestion_hoteles;
-using BOReserva.Servicio.Servicio_Hoteles;
 using BOReserva.DataAccess.DAO;
 using BOReserva.DataAccess.Domain;
 using BOReserva.Controllers.PatronComando.M09;

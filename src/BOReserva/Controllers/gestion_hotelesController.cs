@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BOReserva.Models.gestion_hoteles;
-using BOReserva.Servicio.Servicio_Hoteles;
 using System.Diagnostics;
 using System.Net;
 using BOReserva.Servicio;

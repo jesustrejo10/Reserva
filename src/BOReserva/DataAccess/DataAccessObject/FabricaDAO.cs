@@ -247,11 +247,6 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAOItinerario();
         }
 
-        public static DAO instanciarDaoCamarotes()
-        {
-            return new DAOCamarotes();
-        }
-
         #endregion
 
         #region M06 GESTION DE COMIDA
@@ -291,6 +286,41 @@ namespace BOReserva.DataAccess.DataAccessObject
             return new DAOUsuario();
     }
         
+        #endregion
+
+        #region M07_Gestion_ReclamosEquipaje
+
+        /// <summary>
+        /// Intancia Reclamo Equipaje
+        /// </summary>
+        /// <returns>DAO</returns>
+        public static DAO instanciarDaoReclamoEquipaje()
+        {
+            return new DAOReclamoEquipaje();
+        }
+
+        public static IDAOReclamoEquipaje instanciarDaoReclamoEquipajePersonalizado()
+        {
+            return new DAOReclamoEquipaje();
+        }
+
+        #endregion
+
+        #region M07_Gestion_Equipaje
+
+        /// <summary>
+        /// Intancia Equipaje
+        /// </summary>
+        /// <returns>DAO</returns>
+        public static DAO instanciarDaoEquipaje()
+        {
+            return new DAOEquipaje();
+        }
+
+        public static IDAOEquipaje instanciarDaoEquipajePersonalizado()
+        {
+            return new DAOEquipaje();
+        }
         #endregion
     }
 

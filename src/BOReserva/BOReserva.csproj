@@ -215,6 +215,9 @@
     <Compile Include="Controllers\PatronComando\M01\M01_COConsultarUsuario.cs" />
     <Compile Include="Controllers\PatronComando\M01\M01_COResetearIntentos.cs" />
     <Compile Include="Controllers\PatronComando\M01\M01_COIncrementarIntentos.cs" />
+    <Compile Include="Controllers\PatronComando\M01\M01_COInsertarLogin.cs" />
+    <Compile Include="Controllers\PatronComando\M01\M01_COEliminarLogin.cs" />
+    <Compile Include="Controllers\PatronComando\M01\M01_CONumeroIntentos.cs" />
     <Compile Include="Controllers\PatronComando\M02\M02_COAgregarAvion.cs" />
     <Compile Include="Controllers\PatronComando\M02\M02_COConsultarAvion.cs" />
     <Compile Include="Controllers\PatronComando\M02\M02_CODisponibilidadAvion.cs" />
@@ -246,7 +249,6 @@
     <Compile Include="Controllers\PatronComando\M05\M05_COBuscarnombreciudad.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COEliminarBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COModificarPasajero.cs" />
-    <Compile Include="Controllers\PatronComando\M05\M05_COAgregarPasajero.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COConsultarBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COCrearBoleto.cs" />
     <Compile Include="Controllers\PatronComando\M05\M05_COListarPasajeros.cs" />
@@ -276,7 +278,6 @@
     <Compile Include="Controllers\PatronComando\M07\M07_COConsultarReclamoEquipaje.cs" />
     <Compile Include="Controllers\PatronComando\M07\M07_COEliminarReclamoEquipaje.cs" />
     <Compile Include="Controllers\PatronComando\M07\M07_COAgregarEquipaje.cs" />
-    <Compile Include="Controllers\PatronComando\M07\M07_COEditarEquipaje.cs" />
     <Compile Include="Controllers\PatronComando\M07\M07_COEliminarEquipaje.cs" />
     <Compile Include="Controllers\PatronComando\M07\M07_COConsultarEquipaje.cs" />
     <Compile Include="Controllers\PatronComando\M07\M07_COEditarReclamoEquipaje.cs" />
@@ -332,6 +333,16 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\List.cs" />
     <Compile Include="Controllers\PatronComando\M09\M09_COVisualizarHoteles.cs" />
+    <Compile Include="Controllers\PatronComando\M05\M05_COAgregarPasajero.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COAgregarCamarote.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COConsultarCabina.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COModificarCabina.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COAgregarItinerario.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COConsultarCrucero.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COListarRutasCrucero.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COListarRutasRutas.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COModificarCrucero.cs" />
+    <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarCamarote.cs" />
     <Compile Include="Controllers\PatronComando\M12\M12_COAgregarUsuario.cs" />
     <Compile Include="Controllers\PatronComando\M12\M12_COConsultarUsuario.cs" />
     <Compile Include="Controllers\PatronComando\M12\M12_COEliminarUsuario.cs" />
@@ -349,9 +360,7 @@
     <Compile Include="Controllers\PatronComando\M13\M13_COQuitarPermiso.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COValidacionPermiso.cs" />
     <Compile Include="Controllers\PatronComando\M13\M13_COValidacionRol.cs" />
-    <Compile Include="Controllers\PatronComando\M14\M14_CoAgregarCamarote.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COListarCabinaCrucero.cs" />
-    <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarCamarotes.cs" />
     <Compile Include="Controllers\PatronComando\M14\M14_COVisualizarItinerario.cs" />
     <Compile Include="Controllers\PatronComando\M16\M16_COModificarReclamo.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOChecking.cs" />
@@ -367,7 +376,13 @@
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAORuta.cs" />
     <Compile Include="DataAccess\DataAccessObject\InterfacesDAO\IDAOUsuario.cs" />
     <Compile Include="DataAccess\DataAccessObject\M03\DAORuta.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M07\DAOEquipaje.cs" />
     <Compile Include="DataAccess\DataAccessObject\M07\DAOReclamoEquipaje.cs" />
+    <Compile Include="DataAccess\DataAccessObject\M07\M07Equipaje.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>M07Equipaje.resx</DependentUpon>
+    </Compile>
     <Compile Include="DataAccess\DataAccessObject\M07\M07ReclamoEquipaje.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -536,6 +551,7 @@
     <Compile Include="Excepciones\M04\ReservaExceptionM04.cs" />
     <Compile Include="Excepciones\M10\ReservaExceptionM10.cs" />
     <Compile Include="Excepciones\M11\ReservaExceptionM11.cs" />
+    <Compile Include="Excepciones\M16\ReservaExceptionM16.cs" />
     <Compile Include="Excepciones\M13\ReservaExceptionM13.cs" />
     <Compile Include="Excepciones\RecursoLog.Designer.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -623,13 +639,11 @@
     <Compile Include="Models\gestion_usuarios\CVerUsuario.cs" />
     <Compile Include="Servicio\Servicio_Extravios\CManejadorSQL_Extravios.cs" />
     <Compile Include="Models\gestion_vuelo\CrearVueloMO.cs" />
-    <Compile Include="Models\gestion_vuelo\FabricaViewModelVuelo.cs" />
     <Compile Include="Models\gestion_vuelo\RecursoAvionCO.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RecursoAvionCO.resx</DependentUpon>
     </Compile>
-    <Compile Include="Models\gestion_vuelo\VueloViewModel.cs" />
     <Compile Include="Servicio\Servicio_Usuarios\ConexionBD.cs" />
     <Compile Include="Models\gestion_usuarios\CUsuario.cs" />
     <Compile Include="Models\gestion_usuarios\Encriptar.cs" />
@@ -653,12 +667,9 @@
     <Compile Include="Models\Util.cs" />
     <Compile Include="Models\gestion_restaurantes\CRestauranteModelo.cs" />
     <Compile Include="MySQLException.cs" />
-    <Compile Include="Models\gestion_vuelo\CVuelo.cs" />
-    <Compile Include="Models\gestion_vuelo\CVueloModificar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicio\manejadorSQL.cs" />
     <Compile Include="Servicio\Servicio_Vuelos\manejadorSQL_Vuelos.cs" />
-    <Compile Include="Servicio\Servicio_Hoteles\CManejadorSQL_Hoteles.cs" />
     <Compile Include="Servicio\Servicio_Rutas\CManejadorSQL_Rutas.cs" />
     <Compile Include="Views\gestion_restaurantes\Fabrica\FabricaVista.cs" />
   </ItemGroup>
@@ -845,6 +856,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Scripts\Scripts_Boletos\DetalleVuelo.js" />
+    <None Include="Properties\PublishProfiles\asd.pubxml" />
     <None Include="Properties\PublishProfiles\Webdeploy Smarterasp.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -862,39 +874,8 @@
     <Content Include="Scripts\Scripts_Hoteles\llamadas_comunes_hoteles.js" />
     <Content Include="Scripts\Scripts_Hoteles\llamadas_generales_hoteles.js" />
     <Content Include="Scripts\Scripts_Restaurantes\ccs\M10.css" />
+    <Content Include="Scripts\Scripts_Restaurantes\ValidacionFormulario.js" />
     <Content Include="Scripts\Scripts_Vuelos\llamadas_generales_Vuelos.js" />
-    <Content Include="Views\dist\css\AdminLTE.css" />
-    <Content Include="Views\dist\css\AdminLTE.min.css" />
-    <Content Include="Views\dist\css\skins\skin-black-light.css" />
-    <Content Include="Views\dist\css\skins\skin-black-light.min.css" />
-    <Content Include="Views\dist\css\skins\skin-black.css" />
-    <Content Include="Views\dist\css\skins\skin-black.min.css" />
-    <Content Include="Views\dist\css\skins\skin-blue-light.css" />
-    <Content Include="Views\dist\css\skins\skin-blue-light.min.css" />
-    <Content Include="Views\dist\css\skins\skin-blue.css" />
-    <Content Include="Views\dist\css\skins\skin-blue.min.css" />
-    <Content Include="Views\dist\css\skins\skin-green-light.css" />
-    <Content Include="Views\dist\css\skins\skin-green-light.min.css" />
-    <Content Include="Views\dist\css\skins\skin-green.css" />
-    <Content Include="Views\dist\css\skins\skin-green.min.css" />
-    <Content Include="Views\dist\css\skins\skin-purple-light.css" />
-    <Content Include="Views\dist\css\skins\skin-purple-light.min.css" />
-    <Content Include="Views\dist\css\skins\skin-purple.css" />
-    <Content Include="Views\dist\css\skins\skin-purple.min.css" />
-    <Content Include="Views\dist\css\skins\skin-red-light.css" />
-    <Content Include="Views\dist\css\skins\skin-red-light.min.css" />
-    <Content Include="Views\dist\css\skins\skin-red.css" />
-    <Content Include="Views\dist\css\skins\skin-red.min.css" />
-    <Content Include="Views\dist\css\skins\skin-yellow-light.css" />
-    <Content Include="Views\dist\css\skins\skin-yellow-light.min.css" />
-    <Content Include="Views\dist\css\skins\skin-yellow.css" />
-    <Content Include="Views\dist\css\skins\skin-yellow.min.css" />
-    <Content Include="Views\dist\css\skins\_all-skins.css" />
-    <Content Include="Views\dist\css\skins\_all-skins.min.css" />
-    <Content Include="Views\dist\img\avatar.png" />
-    <Content Include="Views\dist\img\avatar04.png" />
-    <Content Include="Views\dist\img\avatar2.png" />
-    <Content Include="Views\dist\img\avatar3.png" />
     <Content Include="Scripts\Scripts_Ofertas\llamadas_generales.js" />
     <Content Include="Scripts\Scripts_Restaurantes\llamadas_generales.js" />
     <Content Include="Scripts\Scripts_Rutas\llamadas_generales_ruta.js" />
@@ -1469,8 +1450,6 @@
     <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.tr.js" />
     <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.ua.js" />
     <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.vi.js" />
-    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.zh-CN.js" />
-    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.zh-TW.js" />
     <Content Include="Content\plugins\daterangepicker\daterangepicker.css" />
     <Content Include="Content\plugins\daterangepicker\daterangepicker.js" />
     <Content Include="Content\plugins\daterangepicker\moment.js" />
@@ -1767,10 +1746,8 @@
     <Content Include="Views\gestion_seguridad_ingreso\M01_Login.cshtml" />
     <Content Include="Views\gestion_seguridad_ingreso\M01_RecuperarContrasenna.cshtml" />
     <Content Include="Views\gestion_usuarios\_Layout.cshtml" />
-    <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Crear.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Visualizar.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Mostrar.cshtml" />
-    <Content Include="Views\gestion_vuelo\M04_GestionVuelo_Modificar.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -1785,16 +1762,16 @@
     <Content Include="Views\gestion_cruceros\M24_GestionCruceros.cshtml" />
     <Content Include="Views\gestion_cruceros\M24_ListarCruceros.cshtml" />
     <Content Include="Views\gestion_cruceros\M24_ListarItinerario.cshtml" />
-    <Content Include="Views\gestion_cruceros\M24_ModificarCabinas.cshtml" />
+    <Content Include="Views\gestion_cruceros\M24_ModificarCabina.cshtml" />
     <Content Include="Views\gestion_cruceros\M24_ModificarCrucero.cshtml" />
     <Content Include="Views\gestion_comida_vuelo\M06_AgregarComidaVuelo.cshtml" />
-    <Content Include="Views\gestion_reclamos\M16_AgregarReclamo.cshtml" />
-    <Content Include="Views\gestion_reclamos\M16_VisualizarReclamo.cshtml" />
-    <Content Include="Views\gestion_reclamos\M16_ModificarReclamo.cshtml" />
+    <Content Include="Views\gestion_restaurantes\gestion_reclamos\M16_AgregarReclamo.cshtml" />
+    <Content Include="Views\gestion_restaurantes\gestion_reclamos\M16_VisualizarReclamo.cshtml" />
+    <Content Include="Views\gestion_restaurantes\gestion_reclamos\M16_ModificarReclamo.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_AgregarHotel.cshtml" />
     <Content Include="Views\gestion_hoteles\M09_VisualizarHoteles.cshtml" />
-    <Content Include="Views\gestion_extravio\M07_GestionExtravio_Agregar.cshtml" />
-    <Content Include="Views\gestion_extravio\M07_GestionExtravio_Visualizar.cshtml" />
+    <Content Include="Views\gestion_equipaje\M07_GestionEquipaje_Agregar.cshtml" />
+    <Content Include="Views\gestion_equipaje\M07_GestionEquipaje_Visualizar.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_CW1.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_CW2.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_CW3.cshtml" />
@@ -1805,6 +1782,9 @@
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_MW1.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_MW2.cshtml" />
     <Content Include="Views\gestion_vuelo\M04_GestionVuelo_MW3.cshtml" />
+    <Content Include="Views\gestion_reclamos_equipaje\M07_GestionReclamoEquipaje_Agregar.cshtml" />
+    <Content Include="Views\gestion_reclamos_equipaje\M07_GestionReclamoEquipaje_Visualizar.cshtml" />
+    <Content Include="Views\gestion_reclamos_equipaje\M07_GestionReclamoEquipaje_Modificar.cshtml" />
     <Content Include="Views\gestion_cruceros\M24_ListarCamarotes.cshtml" />
     <Content Include="Views\gestion_usuarios\M12_AgregarUsuario2.cshtml" />
     <Content Include="Views\gestion_usuarios\M12_VisualizarUsuarios.cshtml" />
@@ -1943,6 +1923,10 @@
     <EmbeddedResource Include="DataAccess\DataAccessObject\M01\RecursoLogin.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RecursoLogin.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataAccess\DataAccessObject\M07\M07Equipaje.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>M07Equipaje.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="DataAccess\DataAccessObject\M07\M07ReclamoEquipaje.resx">
       <Generator>ResXFileCodeGenerator</Generator>
