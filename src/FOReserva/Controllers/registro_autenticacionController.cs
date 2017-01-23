@@ -130,13 +130,15 @@ namespace FOReserva.Controllers
 
                     Command<Entidad> comando2 = (Command<Entidad>)FabricaComando.comandosAutenticacion(FabricaComando.comandosGeneralesAutenticacion.BUSCARUSUARIO, _cliente);
 
-                    Entidad usu = comando2.ejecutar();
-
-                    Session["nombre"] = ((Usuario1)usu).nombre;
-                    Session["apellido"] = ((Usuario1)usu).apellido;
-
+                   
                     if (comando.ejecutar())
                     {
+
+                        Entidad usu = comando2.ejecutar();
+
+                        Session["nombre"] = ((Usuario1)usu).nombre;
+                        Session["apellido"] = ((Usuario1)usu).apellido;
+
                         //return (Json(true, JsonRequestBehavior.AllowGet));
                         return RedirectToAction("Perfil", "registro_autenticacion");
                         //return RedirectToAction("Perfil", this);
