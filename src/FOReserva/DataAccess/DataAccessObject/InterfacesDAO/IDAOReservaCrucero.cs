@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FOReserva.DataAccess.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,7 +9,7 @@ namespace FOReserva.DataAccess.DataAccessObject.InterfacesDAO
 {
     interface IDAOReservaCrucero : IDAO
     {
-        
+        List<Entidad> consultarCruceros();
 
     }
 }

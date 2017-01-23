@@ -144,4 +144,13 @@
   <data name="usuario" xml:space="preserve">
     <value>@usuario</value>
   </data>
+  <data name="cru_id" xml:space="preserve">
+    <value>cru_id</value>
+  </data>
+  <data name="cru_nombre" xml:space="preserve">
+    <value>cru_nombre</value>
+  </data>
+  <data name="ProcedimientoBuscarCruceros" xml:space="preserve">
+    <value>M22_BuscarCruceros</value>
+  </data>
 </root>

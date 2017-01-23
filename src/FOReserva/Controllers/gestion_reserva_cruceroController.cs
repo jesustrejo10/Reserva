@@ -80,6 +80,10 @@ namespace FOReserva.Controllers
                 String respuesta = comando.ejecutar();
             
                 return View();
+
+                
+
+
             }
             ///Se atrapa las Exception de Tipo NullReference
             catch (NullReferenceException )

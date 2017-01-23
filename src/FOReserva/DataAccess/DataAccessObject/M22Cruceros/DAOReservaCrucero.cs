@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data;
 
 
 namespace FOReserva.DataAccess.DataAccessObject.M22Cruceros
@@ -51,6 +52,27 @@ namespace FOReserva.DataAccess.DataAccessObject.M22Cruceros
             return 0;
         }
 
+        List<Entidad> IDAOReservaCrucero.consultarCruceros()
+        {
+            List<Entidad> listaCruceros = new List<Entidad>();
+            DataTable tablaDeDatos;
+            List<Parametro> parametro = FabricaDAO.asignarListaDeParametro();
+            String nombre;
+            int id;
+            Cruceros crucero;
+            
+
+            tablaDeDatos = EjecutarStoredProcedureTuplas(RecursoDAOReservaCrucero.ProcedimientoBuscarCruceros);
+
+            foreach (DataRow row in tablaDeDatos.Rows)
+            {
+                id = Int32.Parse(row["cru_id"].ToString());
+                nombre = row[RecursoDAOReservaCrucero.cru_nombre].ToString();
+                crucero = new Cruceros(id, nombre);
+                listaCruceros.Add(crucero);
+            }
+            return listaCruceros;
+        }
 
     }
 }

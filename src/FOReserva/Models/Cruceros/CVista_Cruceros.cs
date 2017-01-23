@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FOReserva.Servicio;
+using FOReserva.DataAccess.Domain;
+using FOReserva.Controllers.PatronComando;
 
 namespace FOReserva.Models.Cruceros
 {
@@ -22,10 +24,12 @@ namespace FOReserva.Models.Cruceros
         {
             get
             {
-                var sqlObj = new manejadorSQLCrucero();
-                var allCrucero = sqlObj.buscarCruceros();
+                
+                Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.crearM22ReservaCruceroTodos();
+                List<Entidad> cruceros = comando.ejecutar();
 
-                return DefaultCruceroItem.Concat(new SelectList(allCrucero, "Id", "Name"));
+                return DefaultCruceroItem.Concat(new SelectList(cruceros, "Id", "Name"));
+               
 
             }
         }

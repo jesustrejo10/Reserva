@@ -234,6 +234,13 @@ namespace FOReserva.Controllers.PatronComando
             return new M22_COAgregarReservaCrucero((ReservaCrucero)e);
         }
 
+        public static object crearM22ReservaCruceroTodos()
+        {
+
+            return new M22_COReservaCruceroTodos();
+
+        }
+
         #endregion
     }
 }

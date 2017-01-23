@@ -70,6 +70,24 @@ namespace FOReserva.DataAccess.DataAccessObject.M22Cruceros {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a cru_id.
+        /// </summary>
+        internal static string cru_id {
+            get {
+                return ResourceManager.GetString("cru_id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a cru_nombre.
+        /// </summary>
+        internal static string cru_nombre {
+            get {
+                return ResourceManager.GetString("cru_nombre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a @crucero.
         /// </summary>
         internal static string crucero {
@@ -111,6 +129,15 @@ namespace FOReserva.DataAccess.DataAccessObject.M22Cruceros {
         internal static string ProcedimientoAgregarReserva {
             get {
                 return ResourceManager.GetString("ProcedimientoAgregarReserva", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a M22_BuscarCruceros.
+        /// </summary>
+        internal static string ProcedimientoBuscarCruceros {
+            get {
+                return ResourceManager.GetString("ProcedimientoBuscarCruceros", resourceCulture);
             }
         }
         

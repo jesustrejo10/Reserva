@@ -166,6 +166,16 @@ namespace FOReserva.DataAccess.Domain
         {
             return new ReservaCrucero(cantidadPasajeros, usuario, crucero, ruta, fechaInicio, status);
         }
+
+        public static Entidad InstanciarCrucero(int id, String nombre)
+        {
+            return new Cruceros(id, nombre);
+        }
+
+        public static Entidad InstanciarCrucero()
+        {
+            return new Cruceros();
+        }
         #endregion
     }
 }
