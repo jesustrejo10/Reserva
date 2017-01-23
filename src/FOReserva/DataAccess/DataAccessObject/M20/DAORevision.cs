@@ -170,7 +170,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M20
                         Fecha = (DateTime)revision[RecursoDAOM20.parametroRevisionFecha],
                         Mensaje = (string)revision[RecursoDAOM20.parametroRevisionMensaje],
                         Estrellas = (decimal)revision[RecursoDAOM20.parametroRevisionEstrellas],
-                        Tipo = (Revision.TipoRevision)revision[RecursoDAOM20.parametroRevisionTipo],
+                        Tipo = (EnumTipoRevision)revision[RecursoDAOM20.parametroRevisionTipo],
                         Usuario = new Usuario {
                             Id = (int)revision[RecursoDAOM20.parametroRevisionPropietario],
                             Nombre = (string)revision[RecursoDAOM20.parametroRevisionPropietarioNombre]
@@ -216,7 +216,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M20
                 {
                     Id = (int)respuesta.Rows[0][RecursoDAOM20.parametroRevisionReferencia],
                     Estrellas = (decimal)respuesta.Rows[0][RecursoDAOM20.parametroReferenciaEstrellas],
-                    Tipo = (TipoRevision)tipo
+                    Tipo = (EnumTipoRevision)tipo
                 };
             }
             catch (Exception ex)

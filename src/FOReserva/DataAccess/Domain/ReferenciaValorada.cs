@@ -17,7 +17,7 @@ namespace FOReserva.DataAccess.Domain
         public ReferenciaValorada() {
             this.Id = 0;
             this.Estrellas = 0;
-            this.Tipo = TipoRevision.Hotel;
+            this.Tipo = EnumTipoRevision.Hotel;
         }
 
         /// <summary>
@@ -37,6 +37,6 @@ namespace FOReserva.DataAccess.Domain
         /// <summary>
         /// Permite obtener y indicar el Tipo de la instancia.
         /// </summary>
-        public TipoRevision Tipo { get; set; }
+        public EnumTipoRevision Tipo { get; set; }
     }
 }

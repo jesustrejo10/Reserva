@@ -36,7 +36,7 @@ namespace TestUnitReserva.FO.Revision
                 Id = 0,
                 Mensaje = "Test RHotel.",
                 Estrellas = 0,
-                Tipo = EntidadRevision.TipoRevision.Hotel,
+                Tipo = EnumTipoRevision.Hotel,
                 Usuario = new EntidadUsuario(1),
                 Referencia = new FOReserva.DataAccess.Domain.Entidad(37)
             };
@@ -51,7 +51,7 @@ namespace TestUnitReserva.FO.Revision
             var valoracion = new EntidadValoracion
             {
                 Id = 0,
-                Punto = Calificacion.Positiva,
+                Punto = EnumCalificacion.Positiva,
                 Propietario = new EntidadUsuario(id: 1),
                 Revision = new EntidadRevision(95)
             };

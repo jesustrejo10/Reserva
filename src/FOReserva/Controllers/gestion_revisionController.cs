@@ -17,13 +17,13 @@ namespace FOReserva.Controllers
     public class gestion_revisionController : Controller
     {
         [HttpGet]
-        public ActionResult revisiones(int id, Revision.TipoRevision tipo)
+        public ActionResult revisiones(int id, EnumTipoRevision tipo)
         {
             return PartialView();
         }
 
         [HttpGet]
-        public ActionResult valoracion(int id, Revision.TipoRevision tipo)
+        public ActionResult valoracion(int id, EnumTipoRevision tipo)
         {
             return PartialView();
         }
@@ -33,15 +33,15 @@ namespace FOReserva.Controllers
         /// </summary>
         /// <returns>Retorna la vista que compone el conjunto de revisiones de dicha referencia.</returns>
         [HttpPost]
-        public ActionResult obtener_revisiones(int id, Revision.TipoRevision tipo)
+        public ActionResult obtener_revisiones(int id, EnumTipoRevision tipo)
         {
             var revisiones = new List<Revision>();
             Entidad referencia = null;
-            if (tipo == Revision.TipoRevision.Hotel)
+            if (tipo == EnumTipoRevision.Hotel)
             {
                 referencia = new Hotel() { _id = id };
             }
-            else if (tipo == Revision.TipoRevision.Restaurante)
+            else if (tipo == EnumTipoRevision.Restaurante)
             {
                 referencia = new Restaurante() { _id = id };
             }
@@ -55,15 +55,15 @@ namespace FOReserva.Controllers
         /// </summary>
         /// <returns>Retorna la vista que compone la valoracion resultante de una referencia.</returns>
         [HttpPost]
-        public ActionResult obtener_valoracion(int id, Revision.TipoRevision tipo)
+        public ActionResult obtener_valoracion(int id, EnumTipoRevision tipo)
         {
             var revisiones = new ReferenciaValorada();
             Entidad referencia = null;
-            if (tipo == Revision.TipoRevision.Hotel)
+            if (tipo == EnumTipoRevision.Hotel)
             {
                 referencia = new Hotel() { _id = id };
             }
-            else if (tipo == Revision.TipoRevision.Restaurante)
+            else if (tipo == EnumTipoRevision.Restaurante)
             {
                 referencia = new Restaurante() { _id = id };
             }
@@ -77,7 +77,7 @@ namespace FOReserva.Controllers
         /// </summary>
         /// <returns>Retorna la vista que compone el formulario para crear una revision.</returns>
         [HttpPost]
-        public ActionResult form_revision(int id, Revision.TipoRevision tipo)
+        public ActionResult form_revision(int id, EnumTipoRevision tipo)
         {
             return PartialView();
         }

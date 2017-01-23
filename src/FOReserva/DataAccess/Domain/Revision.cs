@@ -5,6 +5,8 @@ using System.Web;
 
 namespace FOReserva.DataAccess.Domain
 {
+    public enum EnumTipoRevision { Restaurante = 1, Hotel = 2 };
+
     public class Revision : Entidad
     {
         private decimal _estrellas;
@@ -13,9 +15,7 @@ namespace FOReserva.DataAccess.Domain
         private DateTime _fecha;        
 
         private Entidad _referencia;
-        private Entidad _usuario;
-
-        public enum TipoRevision { Restaurante = 1, Hotel = 2 };
+        private Entidad _usuario;        
 
         /// <summary>
         /// Builder Revision
@@ -109,9 +109,9 @@ namespace FOReserva.DataAccess.Domain
         /// <summary>
         /// Permite obtener y indicar el Tipo de la instancia.
         /// </summary>
-        public TipoRevision Tipo
+        public EnumTipoRevision Tipo
         {
-            get { return (TipoRevision)_tipo; }
+            get { return (EnumTipoRevision)_tipo; }
             set { _tipo = (int)value; }
         }
     }
