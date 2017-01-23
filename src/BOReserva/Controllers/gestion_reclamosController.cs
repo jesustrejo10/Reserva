@@ -110,9 +110,6 @@ namespace BOReserva.Controllers
           String[] formateadorFecha = model._fechaReclamo.Split('/');
           model._fechaReclamo = formateadorFecha[2] + "-" + formateadorFecha[1] + "-" + formateadorFecha[0];
           Entidad reclamo = FabricaEntidad.InstanciarReclamo(model);
-          Command<Entidad> comando = FabricaComando.crearM16ConsultarUsuario(idReclamo);
-          Reclamo verificacion = (Reclamo)comando.ejecutar();
-          //con la fabrica instancie el reclamo.
 
           Command<String> comandoMod = FabricaComando.crearM16ModificarReclamo(reclamo, model._idReclamo);
           String resultado = comandoMod.ejecutar();
