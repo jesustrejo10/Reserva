@@ -13,6 +13,7 @@ namespace BOReserva.DataAccess.Model
     public class Cache
     {
 
+
         /// <summary>
         /// Variable publica estatica, en la que se guardan los hoteles una vez son consultados
         /// en la bd
