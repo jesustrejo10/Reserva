@@ -52,7 +52,7 @@ namespace FOReserva.DataAccess.DataAccessObject.M20
                 parametros.Add(FabricaDAO.asignarParametro(RecursoDAOM20.parametroRevisionId, SqlDbType.Int, iRevision._id.ToString(), false));
                 parametros.Add(FabricaDAO.asignarParametro(RecursoDAOM20.parametroRevisionMensaje, SqlDbType.VarChar, iRevision.Mensaje.ToString(), false));
                 parametros.Add(FabricaDAO.asignarParametro(RecursoDAOM20.parametroRevisionTipo, SqlDbType.Int, ((int)iRevision.Tipo).ToString(), false));
-                parametros.Add(FabricaDAO.asignarParametro(RecursoDAOM20.parametroRevisionEstrellas, SqlDbType.Int, iRevision.Estrellas.ToString(), false));
+                parametros.Add(FabricaDAO.asignarParametro(RecursoDAOM20.parametroRevisionEstrellas, SqlDbType.Int, ((int)iRevision.Estrellas).ToString(), false));
                 parametros.Add(FabricaDAO.asignarParametro(RecursoDAOM20.parametroRevisionPropietario, SqlDbType.Int, iRevision.Propietario._id.ToString(), false));
                 parametros.Add(FabricaDAO.asignarParametro(RecursoDAOM20.parametroRevisionReferencia, SqlDbType.Int, iRevision.Referencia._id.ToString(), false));                
                 
@@ -176,7 +176,9 @@ namespace FOReserva.DataAccess.DataAccessObject.M20
                         },
                         Referencia = new Entidad {
                             _id = (int)revision[RecursoDAOM20.parametroRevisionReferencia]
-                        }
+                        },
+                        Positivos = (int)revision[RecursoDAOM20.parametroRevisionPositivos],
+                        Negativos = (int)revision[RecursoDAOM20.parametroRevisionNegativos]
                     });
                 }
             }

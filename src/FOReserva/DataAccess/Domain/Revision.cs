@@ -12,6 +12,8 @@ namespace FOReserva.DataAccess.Domain
         private decimal _estrellas;
         private string _mensaje;
         private int _tipo;
+        private int _positivos;
+        private int _negativos;
         private DateTime _fecha;        
 
         private Entidad _referencia;
@@ -56,9 +58,28 @@ namespace FOReserva.DataAccess.Domain
         /// <summary>
         /// Permite obtener y indicar el Id de la instancia.
         /// </summary>
-        public int Id {
+        public int Id
+        {
             get { return this._id; }
             set { _id = value; }
+        }
+
+        /// <summary>
+        /// Permite obtener y indicar el Positivos de la instancia.
+        /// </summary>
+        public int Positivos
+        {
+            get { return this._positivos; }
+            set { _positivos = value; }
+        }
+
+        /// <summary>
+        /// Permite obtener y indicar el Negativos de la instancia.
+        /// </summary>
+        public int Negativos
+        {
+            get { return this._negativos; }
+            set { _negativos = value; }
         }
 
         /// <summary>

@@ -1,5 +1,5 @@
 ﻿@model FOReserva.DataAccess.Domain.Revision
-@using (Html.BeginForm("guardar_revision", "gestion_revision", FormMethod.Post))
+@using (Html.BeginForm("guardar_revision", "gestion_revision", FormMethod.Post, new { id = "form-revision"}))
 {
     @Html.HiddenFor(model => model.Id);
     @Html.HiddenFor(model => model.Tipo);

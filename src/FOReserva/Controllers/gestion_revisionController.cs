@@ -17,18 +17,6 @@ namespace FOReserva.Controllers
     using Restaurante = DataAccess.Domain.Restaurante;
     public class gestion_revisionController : Controller
     {
-        [HttpGet]
-        public ActionResult revisiones(int id, EnumTipoRevision tipo)
-        {
-            return PartialView();
-        }
-
-        [HttpGet]
-        public ActionResult valoracion(int id, EnumTipoRevision tipo)
-        {
-            return PartialView();
-        }
-
         /// <summary>
         /// POST: obtener_revisiones, obtiene el conjunto de revisiones de una referencia segun su tipo.
         /// </summary>

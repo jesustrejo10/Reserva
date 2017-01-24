@@ -70,8 +70,8 @@ function mostrarFormularioRevicion() {
 function btnAgregarRevision(boton) {
     if (!$(boton).hasClass("disabled")) {
         $(boton).addClass("disabled")
-        var form = $(boton).parent().parent()    
-        console.log(form.serialize())        
+        var form = $(boton).parent().parent()
+        console.log(form.serialize())
         $.ajax({
             url: '/gestion_revision/guardar_revision',
             data: form.serialize(),
@@ -80,7 +80,78 @@ function btnAgregarRevision(boton) {
                 form.find("input[type=text], textarea").val("");
                 $(boton).removeClass("disabled")
             }
-            , error: function (xhr, textStatus, exceptionThrown) {                
+            , error: function (xhr, textStatus, exceptionThrown) {
+                alert(xhr.responseText);
+                $(boton).removeClass("disabled")
+            }
+        });
+    }
+}
+
+function btnEditarRevision(boton) {
+    var revision = $(boton).parent().parent()
+    if (!$(boton).hasClass("editing")) {
+        $(boton).addClass("editing")
+
+        var valor = $(revision.find(".rev_mensaje")).html()
+        $(revision.find(".rev_mensaje")).html($("<textarea />", { id: "valor", html: "va", style: "width:100%" }))
+        $(revision.find(".rev_puntuacion > span")).rateYo("option", "readOnly", false)
+    }
+    else
+        $(boton).removeClass("editing")
+
+    if (!$(boton).hasClass("disabled") && !$(boton).hasClass("editing")) {
+        $(boton).addClass("disabled")        
+        var revisionId = revision.data("id")
+        var revisionPropietario = revision.data("propietario")
+        var revisionReferencia = revision.data("referencia")
+        var revisionTipo = revision.data("tipo")
+        var revisionMensaje = $(revision.find(".rev_mensaje #valor")).val()
+        var revisionPuntuacion = $(revision.find(".rev_puntuacion > span")).rateYo("option", "rating")
+        $.ajax({
+            url: '/gestion_revision/guardar_revision',
+            data: {
+                "Id": revisionId,
+                "Tipo": revisionTipo,
+                "Mensaje": revisionMensaje,
+                "Estrellas": revisionPuntuacion,
+                "Referencia._id": revisionReferencia,
+                "Propietario._id": revisionPropietario
+            },
+            type: 'POST',
+            success: function (data) {                
+                $(revision.find(".rev_puntuacion > span")).rateYo("option", "readOnly", true)
+                $(revision.find(".rev_mensaje")).html(revisionMensaje)
+                $(boton).removeClass("disabled")
+            }
+            , error: function (xhr, textStatus, exceptionThrown) {
+                alert(xhr.responseText);
+                $(boton).removeClass("disabled")
+            }
+        });
+    }
+}
+
+
+function btnBorrarRevision(boton) {
+    if (!$(boton).hasClass("disabled")) {
+        $(boton).addClass("disabled")
+        var revision = $(boton).parent().parent()
+        var revisionId = revision.data("id")
+        var revisionPropietario = revision.data("propietario")
+
+        $.ajax({
+            url: '/gestion_revision/borrar_revision',
+            data: {
+                "Id": revisionId,
+                "Propietario._id": revisionPropietario
+            },
+            type: 'POST',
+            success: function (data) {
+                $(boton).parent().parent().remove()
+                $(boton).removeClass("disabled")
+            }
+            , error: function (xhr, textStatus, exceptionThrown) {
                 alert(xhr.responseText);
                 $(boton).removeClass("disabled")
             }
@@ -89,7 +160,7 @@ function btnAgregarRevision(boton) {
 }
 
 function btnResetRevision(boton) {
-    console.log("btnResetRevision")
+    $("#form-revision").find("input[type=text], textarea").val("");
 }
 
 (function () {

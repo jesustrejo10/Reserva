@@ -3302,8 +3302,6 @@
     <Content Include="Views\gestion_reclamos\M16_ModificarReclamo.cshtml" />
     <Content Include="Views\gestion_reserva_auto\M19_Detalle_reserva.cshtml" />
     <Content Include="Views\gestion_revision\obtener_revisiones.cshtml" />
-    <Content Include="Views\gestion_revision\revisiones.cshtml" />
-    <Content Include="Views\gestion_revision\valoracion.cshtml" />
     <Content Include="Views\gestion_revision\form_revision.cshtml" />
     <Content Include="Views\gestion_revision\obtener_valoracion.cshtml" />
     <Content Include="Views\test\Index.cshtml" />

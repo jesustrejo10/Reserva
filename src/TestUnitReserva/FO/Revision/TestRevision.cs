@@ -33,7 +33,7 @@ namespace TestUnitReserva.FO.Revision
             {
                 Id = 0,
                 Mensaje = "Test RHotel.",
-                Estrellas = 0,
+                Estrellas = Decimal.Parse("3"),
                 Tipo = EnumTipoRevision.Hotel,
                 Propietario = new EntidadUsuario(1),
                 Referencia = new FOReserva.DataAccess.Domain.Entidad(37)

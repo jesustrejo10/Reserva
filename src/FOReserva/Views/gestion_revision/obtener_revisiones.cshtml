@@ -1,5 +1,5 @@
 ﻿@{
-    FOReserva.DataAccess.Domain.Usuario usuario_actual = new FOReserva.DataAccess.Domain.Usuario(1);
+    FOReserva.DataAccess.Domain.Usuario usuario_actual = new FOReserva.DataAccess.Domain.Usuario(Session["id_usuario"] == null ? 1 : (int)Session["id_usuario"]);
     List<FOReserva.DataAccess.Domain.Revision> revisiones = Model;
 }
 
@@ -25,15 +25,20 @@
                         <tbody>
                             @foreach (var revision in revisiones)
                             {
-                                <tr id="@revision.Id" value="@revision.Id">
+                                <tr data-id="@revision.Id" data-propietario="@revision.Propietario._id" data-tipo="@((int)revision.Tipo)" data-referencia="@revision.Referencia._id">
                                     <td class="rev_fecha" value="@revision.Fecha">@revision.Fecha</td>
                                     <td class="rev_mensaje" value="@revision.Mensaje">@revision.Mensaje</td>
                                     <td class="rev_puntuacion center" value="@revision.Estrellas">
                                         <span class="rateyo" data-estrellas="@revision.Estrellas.ToString().Replace(",",".")" data-only="true"></span>
+                                        @*<span class="pull-right btn btn-success">@revision.Positivos</span>
+                                        <span class="pull-right btn btn-danger">@revision.Negativos</span>*@
                                     </td>
                                     <td style="text-align: center;">
-                                        <a href="#" id="icon_edit" data-action="@Url.Action("_EditarReserva", "gestion_reserva_restaurante", new { id = revision.Id })" class="update list-icon" value="@revision.Id" style=" margin-right 10px;"><i class="fa fa fa-pencil-square"></i></a>
-                                        <a href="#" title="Eliminar revision"><i class="fa fa-times-circle eliminar"></i></a>
+                                        @if (usuario_actual.Id == revision.Propietario._id)
+                                        {
+                                            <button type="button" onclick="btnEditarRevision(this)" style="margin-right 10px;"><i class="fa fa fa-pencil-square" style="font-size: 22pt;"></i></button>
+                                            <button type="button" onclick="btnBorrarRevision(this)"><i class="fa fa-times-circle eliminar" style="font-size: 22pt;"></i></button>
+                                        }                                        
                                 </tr>
                             }
                         </tbody>
