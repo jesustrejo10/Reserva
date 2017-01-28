@@ -11,5 +11,11 @@ namespace FOReserva.DataAccess.DataAccessObject.InterfacesDAO
     {
         List<Entidad> consultarCruceros();
 
+        Entidad CambiarReserva(String id, String pasajeros, String status);
+
+        List<Entidad> buscarCrucerosItinerario(string id, string fecha_ida, string fecha_vuelta);
+        //List<Entidad> consultarCrucerosPerfil();
+
+        int Eliminar(int id);
     }
 }

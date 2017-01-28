@@ -153,4 +153,25 @@
   <data name="ProcedimientoBuscarCruceros" xml:space="preserve">
     <value>M22_BuscarCruceros</value>
   </data>
+  <data name="ProcedimientoModificarReserva" xml:space="preserve">
+    <value>M22_ModificarReserva</value>
+  </data>
+  <data name="ProcedimientoCrucerosPerfil" xml:space="preserve">
+    <value>M22_BuscarCrucerosPerfil</value>
+  </data>
+  <data name="fechaVuelta" xml:space="preserve">
+    <value>@fechaVuelta</value>
+  </data>
+  <data name="id_crucero" xml:space="preserve">
+    <value>@cru_id</value>
+  </data>
+  <data name="ProcedimientoBuscarItinerarios" xml:space="preserve">
+    <value>M22_BuscarItinerarios</value>
+  </data>
+  <data name="id_reserva" xml:space="preserve">
+    <value>@id_reserva</value>
+  </data>
+  <data name="ProcedimientoEliminarReserva" xml:space="preserve">
+    <value>M22_EliminarReserva</value>
+  </data>
 </root>

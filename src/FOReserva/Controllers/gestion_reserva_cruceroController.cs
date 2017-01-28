@@ -68,7 +68,8 @@ namespace FOReserva.Controllers
  * **/
         public ActionResult gestion_reserva_crucero_confirmar(string id_crucero, string id_origen, string id_destino, string id_inicio, string id_fin, string pasajeros_num, string fk_ruta, string fk_crucero)
         {
-            CReserva_Cruceros reserva = new CReserva_Cruceros(id_crucero, id_origen, id_destino, fk_crucero, id_inicio, id_fin, pasajeros_num, fk_ruta);
+            //CReserva_Cruceros reserva = new CReserva_Cruceros(id_crucero, id_origen, id_destino, fk_crucero, id_inicio, id_fin, pasajeros_num, fk_ruta);
+            System.Diagnostics.Debug.WriteLine("Se recibio "+id_crucero,id_origen,id_destino, id_inicio,id_fin,pasajeros_num,fk_ruta,fk_crucero);
             DateTime fechaIni = DateTime.Parse(id_inicio);
             int pasaj = Int32.Parse(pasajeros_num);
             int cruc = Int32.Parse(fk_crucero);
@@ -80,7 +81,6 @@ namespace FOReserva.Controllers
                 String respuesta = comando.ejecutar();
             
                 return View();
-
                 
 
 
@@ -111,11 +111,14 @@ namespace FOReserva.Controllers
 * **/
         public ActionResult gestion_reserva_crucero_perfil()
         {
-            List<CReserva_Cruceros> lista = null;
-            manejadorSQLCrucero manejador = new manejadorSQLCrucero();
+            Command<Dictionary<int, Entidad>> comando = (Command<Dictionary<int, Entidad>>)FabricaComando.crearM22BuscarCrucerosPerfil();
+            Dictionary<int, Entidad> listaReserva = comando.ejecutar();
+            // CReserva_Cruceros reserva;
+            //System.Diagnostics.Debug.WriteLine("holaa");
+            //manejadorSQLCrucero manejador = new manejadorSQLCrucero();
          
-            lista = manejador.buscarReservasCruceros();
-            return PartialView(lista);
+            //lista = manejador.buscarReservasCruceros();
+            return PartialView(listaReserva);
            
         }
         /**
@@ -126,19 +129,23 @@ namespace FOReserva.Controllers
         public ActionResult gestion_reserva_crucero_buscar_crucero()
         {
 
-
+            CruceroPerfil cru=null;
             string crucero = Request.Form["SelectedCrucero"].ToString();
             string fechaida = Request.Form["_ida"].ToString();
             string fechavuelta = Request.Form["_vuelta"].ToString();
             ///Se instancia un try para la consulta a la base de datos
             try {
-                List<CReserva_Cruceros> Model = busqueda(crucero, fechaida, fechavuelta);
-                 return View(Model);
+                List<Entidad> Model = busqueda(crucero, fechaida, fechavuelta);
+                /*foreach (var item in Model)
+                {
+                    cru = (CruceroPerfil)item;
+                }*/
+                return View(Model);
             }
             ///Se atrapa las Exception de Tipo NullReference
               catch (NullReferenceException )
             {
-                List<CReserva_Cruceros> Model = null;
+                List<Entidad> Model = null;
                 return View(Model);
             }
             ///Se atrapa las Exception de Tipo ManejadorSQL Exception
@@ -149,7 +156,7 @@ namespace FOReserva.Controllers
             ///Se atrapa las Exception de Tipo Exception
             catch (Exception )
             {
-                List<CReserva_Cruceros> Model = null;
+                List<Entidad> Model = null;
                 return View(Model);
             }
         }
@@ -161,12 +168,14 @@ namespace FOReserva.Controllers
 * 
 * **/
 
-        public List<CReserva_Cruceros> busqueda(string numcrucero, string fechaIda, string fechaVuelta)
+        public List<Entidad> busqueda(string numcrucero, string fechaIda, string fechaVuelta)
         {
-            List<CReserva_Cruceros> lista = null;
-            var manejador = new manejadorSQLCrucero();
+            List<Entidad> lista = null;
+            Command<List<Entidad>> comando = (Command<List<Entidad>>)FabricaComando.crearM22BuscarItinerarios(numcrucero, fechaIda, fechaVuelta);
+            lista = comando.ejecutar();
+            //var manejador = new manejadorSQLCrucero();
      
-            lista = manejador.buscarItinerarios(numcrucero, fechaIda, fechaVuelta);
+            //lista = manejador.buscarItinerarios(numcrucero, fechaIda, fechaVuelta);
             Console.WriteLine("Hola Mundo");
             return lista;
           
@@ -178,17 +187,18 @@ namespace FOReserva.Controllers
 * 
 * **/
 
-        public ActionResult gestion_reserva_crucero_resultado_crucero(string id_crucero, string id_origen, string id_destino, string id_inicio, string id_fin, string fk_ruta, string fk_crucero)
+        public ActionResult gestion_reserva_crucero_resultado_crucero(string id_crucero, string id_origen, string id_destino, string id_inicio, string id_fin, string fk_ruta, int fk_crucero)
         {
             ///Se instancia un try para la consulta a la base de datos
              try{
-            CReserva_Cruceros reserva = new CReserva_Cruceros(fk_crucero, id_origen, id_destino, id_crucero, id_inicio, id_fin, fk_ruta);
+                 System.Diagnostics.Debug.WriteLine("en resultado con "+fk_crucero+id_origen+id_destino+id_inicio+id_fin+fk_ruta+fk_crucero);
+            CruceroPerfil reserva = new CruceroPerfil(fk_crucero, id_crucero, id_inicio, id_fin, id_origen, id_destino, fk_ruta);
             return View(reserva);
              }
              ///Se atrapa las Exception de Tipo NullReference
               catch (NullReferenceException )
             {
-                CReserva_Cruceros reserva = null;
+                CruceroPerfil reserva = null;
                 return View(reserva);
             }
              ///Se atrapa las Exception de Tipo ManejadorSQL Exception
@@ -221,12 +231,19 @@ namespace FOReserva.Controllers
 
         public ActionResult crearReservaCrucero( string fecha, int cantidadPasajeros, int usuario, int crucero, int ruta, string fkfecha, string estatus)
         {
-            CReserva_Cruceros reserva = new CReserva_Cruceros(fecha, cantidadPasajeros, usuario, crucero, ruta, fkfecha, estatus);
+
+            DateTime fechaIni = DateTime.Parse(fecha);
+            CruceroPerfil reserva = new CruceroPerfil(fecha, cantidadPasajeros, usuario, crucero, ruta, fkfecha, estatus);
+            System.Diagnostics.Debug.WriteLine("");
             ///Se instancia un try para la consulta a la base de datos
             try
             {
-                manejadorSQLCrucero manejador = new manejadorSQLCrucero();
-                manejador.CrearReserva(reserva);
+                Entidad e = FabricaEntidad.InstanciarReservaCrucero(cantidadPasajeros, 1, crucero, ruta, fechaIni, "activo");
+                Command<String> comando = FabricaComando.crearM22AgregarReserva(e);
+                String respuesta = comando.ejecutar();
+
+                //manejadorSQLCrucero manejador = new manejadorSQLCrucero();
+                //manejador.CrearReserva(reserva);
                 return View(reserva);
             }
             ///Se atrapa las Exception de Tipo NullReference
@@ -251,25 +268,17 @@ namespace FOReserva.Controllers
         /*
          * Metodo para la eliminacion de la reserva de Crucero
          */
-        [System.Web.Services.WebMethod]
-        public JsonResult eliminarReservaCrucero(int id)
+        public JsonResult eliminarReserva(int id_reserva)
         {///Se instancia un try para la consulta a la base de datos
             try
             {
-                manejadorSQLCrucero manejador = new manejadorSQLCrucero();
-                manejador.eliminarReserva(id);
+                Command<String> comando = FabricaComando.crearM22EliminarReservaCruceros(id_reserva);
+                String respuesta = comando.ejecutar();
+                System.Diagnostics.Debug.WriteLine("en controller con id " + id_reserva);
+                //manejadorSQLCrucero manejador = new manejadorSQLCrucero();
+                //manejador.eliminarReservaCrucero(id_reserva);
             }
-            ///Se atrapa las Exception de Tipo ManejadorSQL Exception
-            catch (ManejadorSQLException) 
-            {
-
-                return null;
-            }
-            ///Se atrapa las Exception de Tipo Invalid ManejadorSQL Exception
-            catch (InvalidManejadorSQLException )
-            {
-                return null;
-            }
+          
             ///Se atrapa las Exception de Tipo Exception
             catch (Exception )
             {
@@ -286,21 +295,13 @@ namespace FOReserva.Controllers
             ///Se instancia un try para la consulta a la base de datos
             try
             {
-                Response.Write("aqui ");
-                manejadorSQLCrucero manejador = new manejadorSQLCrucero();
-                manejador.modificarReserva(id_reserva, cant_pasajero, estatus);
+                //manejadorSQLCrucero manejador = new manejadorSQLCrucero();
+                //manejador.modificarReserva(id_reserva, cant_pasajero, estatus);
+                
+                Command<Entidad> comando = FabricaComando.crearM22ModificarReservaCrucero(id_reserva, cant_pasajero, estatus);
+                Entidad respuesta = comando.ejecutar();
             }
-            ///Se atrapa las Exception de Tipo Invalid ManejadorSQL Exception
-            catch (ManejadorSQLException )
-            {
-               
-                return null;
-            }
-            ///Se atrapa las Exception de Tipo Invalid ManejadorSQL Exception
-            catch (InvalidManejadorSQLException )
-            {
-               
-            }
+            
             ///Se atrapa las Exception de Tipo Exception
             catch (Exception )
             {
@@ -312,6 +313,6 @@ namespace FOReserva.Controllers
 
         }
 
-}
+       }
     }
 

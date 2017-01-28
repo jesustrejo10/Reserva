@@ -227,6 +227,10 @@
     <Compile Include="Controllers\PatronComando\M22Cruceros\M22_COAgregarReservaCrucero.cs" />
     <Compile Include="Controllers\PatronComando\M19\IM19_COObtenerPaises.cs" />
     <Compile Include="Controllers\PatronComando\M19\M19_COObtenerPaises.cs" />
+    <Compile Include="Controllers\PatronComando\M22Cruceros\M22_COBuscarCrucerosPerfil.cs" />
+    <Compile Include="Controllers\PatronComando\M22Cruceros\M22_COBuscarItinerarios.cs" />
+    <Compile Include="Controllers\PatronComando\M22Cruceros\M22_COEliminarReservaCrucero.cs" />
+    <Compile Include="Controllers\PatronComando\M22Cruceros\M22_COModificarReservaCrucero.cs" />
     <Compile Include="Controllers\PatronComando\M22Cruceros\M22_COReservaCruceroTodos.cs" />
     <Compile Include="DataAccess\Domain\Ciudad.cs" />
     <Compile Include="DataAccess\DataAccessObject\DAOPais.cs" />
@@ -277,6 +281,7 @@
     </Compile>
     <Compile Include="DataAccess\DataAccessObject\M22\DAOReservaHabitacion.cs" />
     <Compile Include="DataAccess\DataAccessObject\M22\RecursoDAOM22.Designer.cs" />
+    <Compile Include="DataAccess\Domain\CruceroPerfil.cs" />
     <Compile Include="DataAccess\Domain\Cruceros.cs" />
     <Compile Include="DataAccess\Domain\ReservaCrucero.cs" />
     <Compile Include="DataAccess\Domain\CiudadHab.cs" />

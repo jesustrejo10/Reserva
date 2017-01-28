@@ -1,4 +1,4 @@
-﻿@model  List<FOReserva.Models.Cruceros.CReserva_Cruceros>
+﻿@model  List<FOReserva.DataAccess.Domain.Entidad>
 
     @{
         ViewBag.Title = "Buscar Crucero";
@@ -37,6 +37,7 @@ else
 {
       foreach (var item in Model) {
         <!-- FEATURED GRID -->
+          FOReserva.DataAccess.Domain.CruceroPerfil c = (FOReserva.DataAccess.Domain.CruceroPerfil)item;
            using (Html.BeginForm("gestion_reserva_crucero_resultado_crucero", "gestion_reserva_crucero", null, FormMethod.Post, new { @id = "formBuscarCruceros", @class = "form-horizontal" }))
 {
 
@@ -51,13 +52,13 @@ else
 
 
                                 <div class="shop-item-summary ">
-                                    <h2>@item._crucero - De @item._origen a @item._destino</h2>
+                                    <h2>@c._crucero - De @c._origen a @c._destino</h2>
 
                                     <p text-justify>
 
                                         <span><strong>Salidas:</strong></span> <br>
                                         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                                        <span><strong>Fecha Salida:</strong> @item._fecha_inicio    > <strong>Fecha Llegada:</strong> @item._fecha_fin</span>
+                                        <span><strong>Fecha Salida:</strong> @c._fecha_inicio    > <strong>Fecha Llegada:</strong> @c._fecha_fin</span>
                                         <br>
                                         <br>
                                     </p>
@@ -65,13 +66,13 @@ else
                                     <!-- /price -->
                                     <!-- buttons -->
                                     <!-- /buttons -->
-                                    <input type="hidden" name="id_crucero" id="id_crucero" value="@item._crucero" />
-                                    <input type="hidden" name="id_origen" id="id_origen" value="@item._origen" />
-                                    <input type="hidden" name="id_destino" id="id_destino" value="@item._destino" />
-                                    <input type="hidden" name="id_inicio" id="id_inicio" value="@item._fecha_inicio" />
-                                    <input type="hidden" name="id_fin" id="id_fin" value="@item._fecha_fin" />
-                                     <input type="hidden" name="fk_ruta" id="fk_ruta" value="@item._fk_ruta" />
-                                     <input type="hidden" name="fk_crucero" id="fk_crucero" value="@item._fk_crucero" />
+                                    <input type="hidden" name="id_crucero" id="id_crucero" value="@c._crucero" />
+                                    <input type="hidden" name="id_origen" id="id_origen" value="@c._origen" />
+                                    <input type="hidden" name="id_destino" id="id_destino" value="@c._destino" />
+                                    <input type="hidden" name="id_inicio" id="id_inicio" value="@c._fecha_inicio" />
+                                    <input type="hidden" name="id_fin" id="id_fin" value="@c._fecha_fin" />
+                                     <input type="hidden" name="fk_ruta" id="fk_ruta" value="@c._fk_ruta" />
+                                     <input type="hidden" name="fk_crucero" id="fk_crucero" value="@c._id" />
 
                                 </div>
                                 <div class="shop-item-buttons text-right">

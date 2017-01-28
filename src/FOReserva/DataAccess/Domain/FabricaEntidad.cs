@@ -176,6 +176,16 @@ namespace FOReserva.DataAccess.Domain
         {
             return new Cruceros();
         }
+
+        public static Entidad InstanciarCruceroPerfil(string fechaReserva, int pasajeros, string nombreCrucero, string fecha_inicio, string fecha_fin, string origen, string destino, string status)
+        {
+            return new CruceroPerfil(fechaReserva, pasajeros, nombreCrucero, fecha_inicio, fecha_fin, origen, destino , status);
+        }
+
+        public static Entidad InstanciarItinerarioCrucero(int id, string nombreCrucero, string fecha_inicio, string fecha_fin, string origen, string destino, string id_ruta)
+        {
+            return new CruceroPerfil(id, nombreCrucero, fecha_inicio, fecha_fin, origen, destino, id_ruta);
+        }
         #endregion
     }
 }

@@ -1,4 +1,4 @@
-﻿@model FOReserva.Models.Cruceros.CReserva_Cruceros
+﻿@model FOReserva.DataAccess.Domain.CruceroPerfil
 
 @{
     ViewBag.Title = "Resultado de Busqueda Crucero";
@@ -49,7 +49,7 @@ using (Html.BeginForm("gestion_reserva_crucero_confirmar", "gestion_reserva_cruc
                                         <input type="hidden" name="id_inicio" id="id_inicio" value="@Model._fecha_inicio" />
                                         <input type="hidden" name="id_fin" id="id_fin" value="@Model._fecha_fin" />
                                         <input type="hidden" name="fk_ruta" id="fk_ruta" value="@Model._fk_ruta" />
-                                        <input type="hidden" name="fk_crucero" id="fk_crucero" value="@Model._fk_crucero" />
+                                        <input type="hidden" name="fk_crucero" id="fk_crucero" value="@Model._id" />
                                     </p>
                           <div class="form-group">
 

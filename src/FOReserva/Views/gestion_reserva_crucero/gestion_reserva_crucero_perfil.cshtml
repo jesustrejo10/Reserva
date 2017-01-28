@@ -1,8 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 
-@model List<FOReserva.Models.Cruceros.CReserva_Cruceros>
-
+@model Dictionary<int,FOReserva.DataAccess.Domain.Entidad>
 <head>
     <title>Bootstrap Example</title>
     <meta charset="utf-8">
@@ -28,6 +27,7 @@
     </div>
     <!-- /FLIP BOX -->
     @{
+        
         if (Model == null)
         {
             <center>
@@ -38,8 +38,8 @@
 
         }
         else
-            if (Model.Count() == 0)
-            {
+          if(Model.Values.Count == 0)
+              {
                 <div class="row">
                     <center>
                         <h4><i class="fa fa-exclamation-circle orange" aria-hidden="true"></i> No posee reservas</h4>
@@ -75,16 +75,19 @@
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-                                    <tr id="@item._id_reserva" value="@item._id_reserva">
-                                        <td class="text-center">@item._fecha</td>
-                                        <td class="pasajeros_table text-center" id="pasajeros_table">@item._cantidadPasajeros</td>
-                                        <td class="crucero_table text-center" id="crucero_table">@item._crucero</td>
-                                        <td class="origen_table text-center" id="origen_table">@item._origen</td>
-                                        <td class="destino_table text-center" id="destino_table">@item._destino</td>
-                                        <td class="inicio_table text-center" id="inicio_table">@item._fecha_inicio</td>
-                                        <td class="fin_table text-center" id="fin_table">@item._fecha_fin</td>
+                                    
+                                        FOReserva.DataAccess.Domain.CruceroPerfil c = (FOReserva.DataAccess.Domain.CruceroPerfil)item.Value;
+                                        
+                                    <tr id="@item.Key" >
+                                        <td class="text-center">@c._fechaReserva</td>
+                                        <td class="pasajeros_table text-center" id="pasajeros_table">@c._cantidadPasajeros</td>
+                                        <td class="crucero_table text-center" id="crucero_table">@c._crucero</td>
+                                        <td class="origen_table text-center" id="origen_table">@c._origen</td>
+                                        <td class="destino_table text-center" id="destino_table">@c._destino</td>
+                                        <td class="inicio_table text-center" id="inicio_table">@c._fecha_inicio</td>
+                                        <td class="fin_table text-center" id="fin_table">@c._fecha_fin</td>
                                         <td class="text-center">
-                                            @if (@item._status == "activo")
+                                            @if (@c._status == "activo")
                                                 {
                                             <span class="label label-success ">Activa</span>
                                                 }
@@ -94,16 +97,16 @@
                                                 }
                                         </td>
                                         <td>
-                                            @if (@item._status == "activo")
+                                            @if (@c._status == "activo")
                                                 {
-                                            <a href="#ModalModificar" data-id="@item._id_reserva,@item._crucero,@item._cantidadPasajeros,@item._origen,@item._destino,@item._fecha_inicio,@item._fecha_fin,@item._status"
+                                            <a href="#ModalModificar" data-id="@item.Key,@c._crucero,@c._cantidadPasajeros,@c._origen,@c._destino,@c._fecha_inicio,@c._fecha_fin,@c._status"
                                                data-toggle="modal" class="open-AddBookDialog btn btn-info btn-xs"><i class="fa fa-edit white"></i>Modificar</a>
-                                            <a id="eliminar" href="#ModalEliminar" name="eliminar" data-id="@item._id_reserva,@item._crucero,@item._cantidadPasajeros,@item._origen,@item._destino,@item._fecha_inicio,@item._fecha_fin,@item._status" 
+                                            <a id="eliminar" href="#ModalEliminar" name="eliminar" data-id="@item.Key" 
                                                data-toggle="modal" class="open-AddBookDialog btn btn-danger btn-xs"><i class="fa fa-times white"></i> Eliminar </a>
                                                 }
-                                            @if (@item._status == "inactivo")
+                                            @if (@c._status == "inactivo")
                                                 {
-                                            <a id="eliminar" href="#ModalEliminar" name="eliminar" data-id="@item._id_reserva" data-toggle="modal" class="open-AddBookDialog btn btn-danger btn-xs"><i class="fa fa-times white"></i> Eliminar </a>
+                                            <a id="eliminar" href="#ModalEliminar" name="eliminar" data-id="@item.Key" data-toggle="modal" class="open-AddBookDialog btn btn-danger btn-xs"><i class="fa fa-times white"></i> Eliminar </a>
                                                 }
                                         </td>
 
@@ -224,6 +227,7 @@
 
         $(document).on("click", ".open-AddBookDialog", function () {
             var myBookId = $(this).data('id');
+            
             $(".modal-footer #aceptar_eliminar").val(myBookId);
             var cruce = $(this).data('crucero');
             $(".error").hide();
@@ -240,14 +244,15 @@
             $('#status').val(valores[7]);
 
         });
-        $(document).on('click', '#aceptar_eliminar', function () {
+        $(document).on("click", "#aceptar_eliminar", function () {
             var id_fila = $(this).val();
             console.log(id_fila);
             $.ajax({
-                url: "/gestion_reserva_crucero/eliminarReservaCrucero/",
+                url: "/gestion_reserva_crucero/eliminarReserva/",
                 type: 'POST',
                 dataType: "json",
-                data: { id: id_fila }
+                
+                data: { id_reserva: id_fila }
 
             }).done(function (data) {
                 $('#' + id_fila).remove();

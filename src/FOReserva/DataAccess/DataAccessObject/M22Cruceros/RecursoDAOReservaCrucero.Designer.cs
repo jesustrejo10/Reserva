@@ -115,11 +115,38 @@ namespace FOReserva.DataAccess.DataAccessObject.M22Cruceros {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a @fechaVuelta.
+        /// </summary>
+        internal static string fechaVuelta {
+            get {
+                return ResourceManager.GetString("fechaVuelta", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a @id.
         /// </summary>
         internal static string id {
             get {
                 return ResourceManager.GetString("id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a @cru_id.
+        /// </summary>
+        internal static string id_crucero {
+            get {
+                return ResourceManager.GetString("id_crucero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a @id_reserva.
+        /// </summary>
+        internal static string id_reserva {
+            get {
+                return ResourceManager.GetString("id_reserva", resourceCulture);
             }
         }
         
@@ -138,6 +165,42 @@ namespace FOReserva.DataAccess.DataAccessObject.M22Cruceros {
         internal static string ProcedimientoBuscarCruceros {
             get {
                 return ResourceManager.GetString("ProcedimientoBuscarCruceros", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a M22_BuscarItinerarios.
+        /// </summary>
+        internal static string ProcedimientoBuscarItinerarios {
+            get {
+                return ResourceManager.GetString("ProcedimientoBuscarItinerarios", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a M22_BuscarCrucerosPerfil.
+        /// </summary>
+        internal static string ProcedimientoCrucerosPerfil {
+            get {
+                return ResourceManager.GetString("ProcedimientoCrucerosPerfil", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a M22_EliminarReserva.
+        /// </summary>
+        internal static string ProcedimientoEliminarReserva {
+            get {
+                return ResourceManager.GetString("ProcedimientoEliminarReserva", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a M22_ModificarReserva.
+        /// </summary>
+        internal static string ProcedimientoModificarReserva {
+            get {
+                return ResourceManager.GetString("ProcedimientoModificarReserva", resourceCulture);
             }
         }
         

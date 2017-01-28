@@ -241,6 +241,26 @@ namespace FOReserva.Controllers.PatronComando
 
         }
 
+        public static Command<Entidad> crearM22ModificarReservaCrucero(string id, string pasajeros, string status)
+        {
+            return new M22_COModificarReservaCrucero(id, pasajeros, status);
+        }
+
+        public static object crearM22BuscarCrucerosPerfil()
+        {
+            return new M22_COBuscarCrucerosPerfil();
+        }
+
+        public static object crearM22BuscarItinerarios(string id, string fechaIda, string fechaVuelta)
+        {
+            return new M22_COBuscarItinerarios(id, fechaIda, fechaVuelta);
+        }
+
+        public static Command<String> crearM22EliminarReservaCruceros(int id)
+        {
+            return new M22_COEliminarReservaCrucero(id);
+        }
+
         #endregion
     }
 }

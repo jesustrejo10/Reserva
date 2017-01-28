@@ -96,9 +96,10 @@ namespace FOReserva.Servicio
         /*Metodo para eliminar una reserva
          *  idReserva: ID de la reserva a eliminar
          */
-        public void eliminarReserva(int idReserva)
+        public void eliminarReservaCrucero(int idReserva)
         {
             // Se crea el Query que se mandara a la base de datos.
+            System.Diagnostics.Debug.WriteLine("id de la reserva es " + idReserva);
             string query = "DELETE FROM Reserva_Crucero WHERE rc_id = " + idReserva;
             this.Executer(query);
             CloseConnection();
