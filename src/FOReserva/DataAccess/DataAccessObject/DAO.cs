@@ -273,6 +273,7 @@ namespace FOReserva.DataAccess.DataAccessObject
                         dataAdapter.Fill(dataTable);
                         System.Diagnostics.Debug.WriteLine(dataAdapter);
                         System.Diagnostics.Debug.WriteLine(dataTable);
+                        System.Diagnostics.Debug.WriteLine(conexion);
                     }
 
                     return dataTable;
